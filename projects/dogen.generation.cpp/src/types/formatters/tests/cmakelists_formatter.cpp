@@ -51,7 +51,7 @@ archetype_location() const {
     return r;
 }
 
-const coding::meta_model::name& cmakelists_formatter::meta_name() const {
+const assets::meta_model::name& cmakelists_formatter::meta_name() const {
     static auto r(fabric::meta_name_factory::make_cmakelists_name());
     return r;
 }
@@ -66,7 +66,7 @@ inclusion_support_type() const {
 }
 
 boost::filesystem::path cmakelists_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const coding::meta_model::name& n) const {
+    const formattables::locator& /*l*/, const assets::meta_model::name& n) const {
 
     using namespace dogen::utility::log;
     using namespace dogen::generation::cpp::formatters;
@@ -79,19 +79,19 @@ boost::filesystem::path cmakelists_formatter::inclusion_path(
 }
 
 boost::filesystem::path cmakelists_formatter::full_path(
-    const formattables::locator& l, const coding::meta_model::name& n) const {
+    const formattables::locator& l, const assets::meta_model::name& n) const {
     return l.make_full_path_for_tests_cmakelists(n, static_id());
 }
 
 std::list<std::string> cmakelists_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
-    const coding::meta_model::element& /*e*/) const {
+    const assets::meta_model::element& /*e*/) const {
     static std::list<std::string> r;
     return r;
 }
 
 extraction::meta_model::artefact cmakelists_formatter::
-format(const context& ctx, const coding::meta_model::element& e) const {
+format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& c(a.as<fabric::cmakelists>(e));
 

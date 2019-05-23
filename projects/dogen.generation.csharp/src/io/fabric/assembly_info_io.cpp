@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen.coding/io/meta_model/element_io.hpp"
+#include "dogen.assets/io/meta_model/element_io.hpp"
 #include "dogen.generation.csharp/io/fabric/assembly_info_io.hpp"
 
 namespace dogen::generation::csharp::fabric {

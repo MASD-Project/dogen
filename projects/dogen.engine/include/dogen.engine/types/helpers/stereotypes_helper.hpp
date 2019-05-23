@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <utility>
-#include "dogen.coding/types/meta_model/static_stereotypes.hpp"
+#include "dogen.assets/types/meta_model/static_stereotypes.hpp"
 #include "dogen.engine/types/helpers/stereotypes_conversion_result.hpp"
 
 namespace dogen::engine::helpers {
@@ -44,9 +44,9 @@ public:
      *
      * @note The string must not have any leading or trailing spaces
      * or other artefacts and must match exactly the definition of a
-     * well-known coding stereotype, e.g. 'coding::object', etc.
+     * well-known assets stereotype, e.g. 'assets::object', etc.
      */
-    coding::meta_model::static_stereotypes
+    assets::meta_model::static_stereotypes
     from_string(const std::string& s) const;
 
 public:
@@ -67,30 +67,30 @@ public:
      * @brief Converts a well-known stereotype to its string representation.
      */
     std::string
-    to_string(const coding::meta_model::static_stereotypes ss) const;
+    to_string(const assets::meta_model::static_stereotypes ss) const;
 
 public:
     /**
-     * @brief Returns true if the well-known stereotype denotes a coding
+     * @brief Returns true if the well-known stereotype denotes a assets
      * element type, false otherwise.
      */
     bool
-    is_element_type(const coding::meta_model::static_stereotypes ss) const;
+    is_element_type(const assets::meta_model::static_stereotypes ss) const;
 
     /**
      * @brief Given a list of well-known stereotypes, extracts those
      * which are element types.
      */
-    std::list<coding::meta_model::static_stereotypes> extract_element_types(
-        const std::list<coding::meta_model::static_stereotypes>& ss) const;
+    std::list<assets::meta_model::static_stereotypes> extract_element_types(
+        const std::list<assets::meta_model::static_stereotypes>& ss) const;
 
     /**
      * @brief Given a list of well-known stereotypes, extracts those
      * which are not element types.
      */
-    std::list<coding::meta_model::static_stereotypes>
+    std::list<assets::meta_model::static_stereotypes>
     extract_non_element_types(
-        const std::list<coding::meta_model::static_stereotypes>& ss) const;
+        const std::list<assets::meta_model::static_stereotypes>& ss) const;
 };
 
 }

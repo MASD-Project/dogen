@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.coding/io/meta_model/name_io.hpp"
-#include "dogen.coding/io/meta_model/element_io.hpp"
+#include "dogen.assets/io/meta_model/name_io.hpp"
+#include "dogen.assets/io/meta_model/element_io.hpp"
 #include "dogen.generation.cpp/io/fabric/master_header_io.hpp"
 
 namespace dogen::generation::cpp::fabric {

@@ -20,13 +20,13 @@
  */
 #include <set>
 #include <algorithm>
-#include "dogen.coding/types/helpers/meta_name_factory.hpp"
-#include "dogen.coding/types/meta_model/structural/object.hpp"
-#include "dogen.coding/types/meta_model/structural/visitor.hpp"
-#include "dogen.coding/types/meta_model/structural/builtin.hpp"
-#include "dogen.coding/types/meta_model/structural/exception.hpp"
-#include "dogen.coding/types/meta_model/structural/enumeration.hpp"
-#include "dogen.coding/types/meta_model/structural/primitive.hpp"
+#include "dogen.assets/types/helpers/meta_name_factory.hpp"
+#include "dogen.assets/types/meta_model/structural/object.hpp"
+#include "dogen.assets/types/meta_model/structural/visitor.hpp"
+#include "dogen.assets/types/meta_model/structural/builtin.hpp"
+#include "dogen.assets/types/meta_model/structural/exception.hpp"
+#include "dogen.assets/types/meta_model/structural/enumeration.hpp"
+#include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include "dogen.generation.csharp/types/fabric/assistant.hpp"
 #include "dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
 #include "dogen.generation.csharp/types/formattables/project_items_expander.hpp"
@@ -37,7 +37,7 @@ std::unordered_set<std::string>
 project_items_expander::meta_names_for_project_items() {
     std::unordered_set<std::string> r;
 
-    using ymnf = coding::helpers::meta_name_factory;
+    using ymnf = assets::helpers::meta_name_factory;
     r.insert(ymnf::make_enumeration_name().qualified().dot());
     r.insert(ymnf::make_primitive_name().qualified().dot());
     r.insert(ymnf::make_exception_name().qualified().dot());

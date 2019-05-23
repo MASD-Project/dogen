@@ -22,7 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.coding/types/meta_model/structural/module.hpp"
+#include "dogen.assets/types/meta_model/structural/module.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/workflow.hpp"
 #include "dogen.generation.cpp/types/formattables/workflow.hpp"
@@ -131,9 +131,9 @@ archetype_location_repository_parts() const {
     return rg.archetype_location_repository_parts();
 }
 
-coding::meta_model::technical_space
+assets::meta_model::technical_space
 model_to_extraction_model_transform::technical_space() const {
-    return coding::meta_model::technical_space::cpp;
+    return assets::meta_model::technical_space::cpp;
 }
 
 std::unordered_map<std::string,

@@ -48,7 +48,7 @@ visual_studio_project_formatter::archetype_location() const {
     return r;
 }
 
-const coding::meta_model::name&
+const assets::meta_model::name&
 visual_studio_project_formatter::meta_name() const {
     static auto r(fabric::meta_name_factory::make_visual_studio_project_name());
     return r;
@@ -59,18 +59,18 @@ std::string visual_studio_project_formatter::family() const {
 }
 
 boost::filesystem::path visual_studio_project_formatter::
-full_path(const formattables::locator& l, const coding::meta_model::name& n) const {
+full_path(const formattables::locator& l, const assets::meta_model::name& n) const {
     return l.make_full_path_for_project(n, static_id());
 }
 
 std::list<std::string> visual_studio_project_formatter::
-inclusion_dependencies(const coding::meta_model::element& /*e*/) const {
+inclusion_dependencies(const assets::meta_model::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
 extraction::meta_model::artefact visual_studio_project_formatter::
-format(const context& ctx, const coding::meta_model::element& e) const {
+format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location());
     const auto& vsp(a.as<fabric::visual_studio_project>(static_id(), e));
 

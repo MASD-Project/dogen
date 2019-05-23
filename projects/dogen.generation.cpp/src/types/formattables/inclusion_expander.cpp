@@ -110,7 +110,7 @@ inclusion_expander::element_inclusion_dependencies_type
 inclusion_expander::compute_inclusion_dependencies(
     const formatters::repository& frp,
     const dependencies_builder_factory& df,
-    const coding::meta_model::element& e) const {
+    const assets::meta_model::element& e) const {
 
     const auto id(e.name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Creating inclusion dependencies for: " << id;
@@ -202,7 +202,7 @@ void inclusion_expander::populate_inclusion_dependencies(
              * model. However, we do need them around for inclusion
              * directives, so we can't rely on reduction.
              */
-            if (e.origin_type() != coding::meta_model::origin_types::target)
+            if (e.origin_type() != assets::meta_model::origin_types::target)
                 continue;
 
             /*

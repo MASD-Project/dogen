@@ -23,8 +23,8 @@
 #include "dogen.generation.csharp/types/formatters/types/traits.hpp"
 #include "dogen.generation.csharp/types/traits.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
-#include "dogen.coding/types/helpers/meta_name_factory.hpp"
-#include "dogen.coding/types/meta_model/structural/primitive.hpp"
+#include "dogen.assets/types/helpers/meta_name_factory.hpp"
+#include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include <iostream>
 
 namespace dogen::generation::csharp::formatters::types {
@@ -45,8 +45,8 @@ archetypes::location primitive_formatter::archetype_location() const {
     return r;
 }
 
-const coding::meta_model::name& primitive_formatter::meta_name() const {
-    using coding::helpers::meta_name_factory;
+const assets::meta_model::name& primitive_formatter::meta_name() const {
+    using assets::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_primitive_name());
     return r;
 }
@@ -56,21 +56,21 @@ std::string primitive_formatter::family() const {
 }
 
 boost::filesystem::path primitive_formatter::full_path(
-    const formattables::locator& l, const coding::meta_model::name& n) const {
+    const formattables::locator& l, const assets::meta_model::name& n) const {
     return l.make_full_path(n, static_id());
 }
 
 std::list<std::string> primitive_formatter::
-inclusion_dependencies(const coding::meta_model::element& /*e*/) const {
+inclusion_dependencies(const assets::meta_model::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
 extraction::meta_model::artefact primitive_formatter::
-format(const context& ctx, const coding::meta_model::element& e) const {
+format(const context& ctx, const assets::meta_model::element& e) const {
     const auto id(e.name().qualified().dot());
     assistant a(ctx, e, archetype_location());
-    const auto& p(a.as<coding::meta_model::structural::primitive>(static_id(), e));
+    const auto& p(a.as<assets::meta_model::structural::primitive>(static_id(), e));
     {
         const auto sn(e.name().simple());
         auto sbf(a.make_scoped_boilerplate_formatter(e));

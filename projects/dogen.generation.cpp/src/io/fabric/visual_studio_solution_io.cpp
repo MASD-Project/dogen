@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.coding/io/meta_model/element_io.hpp"
+#include "dogen.assets/io/meta_model/element_io.hpp"
 #include "dogen.generation.cpp/io/fabric/visual_studio_solution_io.hpp"
 
 namespace dogen::generation::cpp::fabric {

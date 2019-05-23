@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.coding/test_data/meta_model/element_td.hpp"
+#include "dogen.assets/test_data/meta_model/element_td.hpp"
 #include "dogen.generation.cpp/test_data/fabric/odb_targets_td.hpp"
 #include "dogen.generation.cpp/test_data/fabric/msbuild_targets_td.hpp"
 
@@ -37,7 +37,7 @@ msbuild_targets_generator::msbuild_targets_generator() : position_(0) { }
 
 void msbuild_targets_generator::
 populate(const unsigned int position, result_type& v) {
-    dogen::coding::meta_model::element_generator::populate(position, v);
+    dogen::assets::meta_model::element_generator::populate(position, v);
     v.odb_targets(create_dogen_generation_cpp_fabric_odb_targets(position + 0));
 }
 

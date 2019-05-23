@@ -23,17 +23,17 @@
 #include <boost/make_shared.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.coding/types/helpers/building_error.hpp"
-#include "dogen.coding/io/meta_model/name_io.hpp"
-#include "dogen.coding/types/meta_model/structural/object.hpp"
-#include "dogen.coding/types/meta_model/structural/module.hpp"
-#include "dogen.coding/types/meta_model/structural/visitor.hpp"
-#include "dogen.coding/types/meta_model/structural/exception.hpp"
-#include "dogen.coding/types/meta_model/structural/enumeration.hpp"
-#include "dogen.coding/types/meta_model/structural/object_template.hpp"
-#include "dogen.coding/types/meta_model/element_visitor.hpp"
-#include "dogen.coding/types/helpers/name_factory.hpp"
-#include "dogen.coding/types/meta_model/elements_traversal.hpp"
+#include "dogen.assets/types/helpers/building_error.hpp"
+#include "dogen.assets/io/meta_model/name_io.hpp"
+#include "dogen.assets/types/meta_model/structural/object.hpp"
+#include "dogen.assets/types/meta_model/structural/module.hpp"
+#include "dogen.assets/types/meta_model/structural/visitor.hpp"
+#include "dogen.assets/types/meta_model/structural/exception.hpp"
+#include "dogen.assets/types/meta_model/structural/enumeration.hpp"
+#include "dogen.assets/types/meta_model/structural/object_template.hpp"
+#include "dogen.assets/types/meta_model/element_visitor.hpp"
+#include "dogen.assets/types/helpers/name_factory.hpp"
+#include "dogen.assets/types/meta_model/elements_traversal.hpp"
 #include "dogen.generation.cpp/types/fabric/master_header.hpp"
 #include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
@@ -52,14 +52,14 @@ const std::string formatter_not_found_for_type(
 
 namespace dogen::generation::cpp::fabric {
 
-using coding::meta_model::origin_types;
-using coding::meta_model::technical_space;
+using assets::meta_model::origin_types;
+using assets::meta_model::technical_space;
 
 namespace {
 
-class generator final : public coding::meta_model::element_visitor {
+class generator final : public assets::meta_model::element_visitor {
 public:
-    generator(const coding::meta_model::name& model_name,
+    generator(const assets::meta_model::name& model_name,
         const formatters::repository& rp)
         : result_(create_master_header(model_name)),
           file_formatters_by_meta_name_(
@@ -67,7 +67,7 @@ public:
 
 private:
     boost::shared_ptr<master_header>
-    create_master_header(const coding::meta_model::name& model_name);
+    create_master_header(const assets::meta_model::name& model_name);
 
     std::forward_list<std::shared_ptr<formatters::artefact_formatter_interface>>
     filter_formatters(const std::forward_list<
@@ -80,22 +80,22 @@ private:
             std::shared_ptr<formatters::artefact_formatter_interface>>>
     filter_file_formatters_by_meta_name(const formatters::repository& rp) const;
 
-    void process_element(const coding::meta_model::element& e);
+    void process_element(const assets::meta_model::element& e);
 
 public:
-    using coding::meta_model::element_visitor::visit;
-    void visit(const coding::meta_model::structural::visitor& v) { process_element(v); }
-    void visit(const coding::meta_model::structural::enumeration& e) {
+    using assets::meta_model::element_visitor::visit;
+    void visit(const assets::meta_model::structural::visitor& v) { process_element(v); }
+    void visit(const assets::meta_model::structural::enumeration& e) {
         process_element(e);
     }
-    void visit(const coding::meta_model::structural::primitive& p) {
+    void visit(const assets::meta_model::structural::primitive& p) {
         process_element(p);
     }
-    void visit(const coding::meta_model::structural::object& o) { process_element(o); }
-    void visit(const coding::meta_model::structural::exception& e) {
+    void visit(const assets::meta_model::structural::object& o) { process_element(o); }
+    void visit(const assets::meta_model::structural::exception& e) {
         process_element(e);
     }
-    void visit(const coding::meta_model::structural::module& m) { process_element(m); }
+    void visit(const assets::meta_model::structural::module& m) { process_element(m); }
 
 public:
     boost::shared_ptr<master_header> result() { return result_; }
@@ -111,9 +111,9 @@ private:
 };
 
 boost::shared_ptr<master_header>
-generator::create_master_header(const coding::meta_model::name& model_name) {
+generator::create_master_header(const assets::meta_model::name& model_name) {
     auto r(boost::make_shared<master_header>());
-    coding::helpers::name_factory f;
+    assets::helpers::name_factory f;
     r->name(f.build_element_in_model(model_name, master_header_name));
     r->meta_name(meta_name_factory::make_master_header_name());
     r->origin_type(origin_types::target);
@@ -163,7 +163,7 @@ generator::filter_file_formatters_by_meta_name(
     return r;
 }
 
-void generator::process_element(const coding::meta_model::element& e) {
+void generator::process_element(const assets::meta_model::element& e) {
     if (e.origin_type() != origin_types::target)
         return;
 
@@ -175,7 +175,7 @@ void generator::process_element(const coding::meta_model::element& e) {
         const auto id(e.name().qualified().dot());
         BOOST_LOG_SEV(lg, error) << formatter_not_found_for_type << id;
         BOOST_THROW_EXCEPTION(
-            coding::helpers::building_error(formatter_not_found_for_type + id));
+            assets::helpers::building_error(formatter_not_found_for_type + id));
     }
 
     for (const auto& fmt : i->second) {
@@ -189,7 +189,7 @@ void generator::process_element(const coding::meta_model::element& e) {
 
 }
 
-boost::shared_ptr<coding::meta_model::element>
+boost::shared_ptr<assets::meta_model::element>
 master_header_factory::make(const formatters::repository& frp,
     const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating the master header.";

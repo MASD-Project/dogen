@@ -23,8 +23,8 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/pair_io.hpp"
-#include "dogen.coding/types/meta_model/structural/object.hpp"
-#include "dogen.coding/types/meta_model/structural/primitive.hpp"
+#include "dogen.assets/types/meta_model/structural/object.hpp"
+#include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include "dogen.generation.cpp/types/fabric/odb_target.hpp"
 #include "dogen.generation.cpp/types/fabric/cmakelists.hpp"
 #include "dogen.generation.cpp/types/fabric/msbuild_targets.hpp"
@@ -60,16 +60,16 @@ bool odb_target_comparer(
 class odb_targets_factory : public element_visitor {
 public:
     odb_targets_factory(const model& fm,
-        const locator& l, const coding::meta_model::name& model_name);
+        const locator& l, const assets::meta_model::name& model_name);
 
 private:
-    void generate_targets(const coding::meta_model::name& n);
+    void generate_targets(const assets::meta_model::name& n);
 
 public:
     using element_visitor::visit;
     void visit(const fabric::common_odb_options& coo);
-    void visit(const coding::meta_model::structural::object& o);
-    void visit(const coding::meta_model::structural::primitive& p);
+    void visit(const assets::meta_model::structural::object& o);
+    void visit(const assets::meta_model::structural::primitive& p);
 
 public:
     const fabric::odb_targets& result() const;
@@ -82,7 +82,7 @@ private:
 };
 
 odb_targets_factory::odb_targets_factory(const model& fm, const locator& l,
-    const coding::meta_model::name& model_name)
+    const assets::meta_model::name& model_name)
     : model_(fm), locator_(l),
       target_name_("odb_" + boost::join(model_name.location().model_modules(),
               separator)) {
@@ -98,7 +98,7 @@ void odb_targets_factory::visit(const fabric::common_odb_options& coo) {
 }
 
 void odb_targets_factory::
-generate_targets(const coding::meta_model::name& n) {
+generate_targets(const assets::meta_model::name& n) {
     fabric::odb_target t;
     t.name(target_name_ + separator + n.simple());
     t.comment("ODB " + n.simple());
@@ -146,7 +146,7 @@ generate_targets(const coding::meta_model::name& n) {
     result_.targets().push_back(t);
 }
 
-void odb_targets_factory::visit(const coding::meta_model::structural::object& o) {
+void odb_targets_factory::visit(const assets::meta_model::structural::object& o) {
     /*
      * We only care about objects which have ORM enabled.
      */
@@ -157,7 +157,7 @@ void odb_targets_factory::visit(const coding::meta_model::structural::object& o)
     generate_targets(n);
 }
 
-void odb_targets_factory::visit(const coding::meta_model::structural::primitive& p) {
+void odb_targets_factory::visit(const assets::meta_model::structural::primitive& p) {
     /*
      * We only care about objects which have ORM enabled.
      */
@@ -204,7 +204,7 @@ void build_files_updater::visit(fabric::msbuild_targets& mt) {
 
 void build_files_expander::expand(const locator& l, model& fm) const {
     odb_targets_factory f(fm, l, fm.name());
-    const auto ott(coding::meta_model::origin_types::target);
+    const auto ott(assets::meta_model::origin_types::target);
     for (auto& pair : fm.formattables()) {
         auto& formattable(pair.second);
 

@@ -20,7 +20,7 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.coding/types/helpers/name_factory.hpp"
+#include "dogen.assets/types/helpers/name_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/entry_point.hpp"
 #include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/entry_point_factory.hpp"
@@ -36,12 +36,12 @@ const std::string simple_name("entry_point");
 
 namespace dogen::generation::cpp::fabric {
 
-using coding::meta_model::origin_types;
-using coding::meta_model::technical_space;
+using assets::meta_model::origin_types;
+using assets::meta_model::technical_space;
 
 boost::shared_ptr<fabric::entry_point> entry_point_factory::
-make(const coding::meta_model::name& model_name) const {
-    coding::helpers::name_factory nf;
+make(const assets::meta_model::name& model_name) const {
+    assets::helpers::name_factory nf;
     const auto n(nf.build_element_in_model(model_name, simple_name));
     auto r(boost::make_shared<entry_point>());
     r->name(n);
@@ -56,7 +56,7 @@ make(const coding::meta_model::name& model_name) const {
     return r;
 }
 
-boost::shared_ptr<coding::meta_model::element> entry_point_factory::
+boost::shared_ptr<assets::meta_model::element> entry_point_factory::
 make(const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating entry point.";
 

@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen.coding/test_data/meta_model/element_td.hpp"
+#include "dogen.assets/test_data/meta_model/element_td.hpp"
 #include "dogen.generation.cpp/test_data/fabric/cmakelists_td.hpp"
 #include "dogen.generation.cpp/test_data/fabric/odb_targets_td.hpp"
 
@@ -44,7 +44,7 @@ cmakelists_generator::cmakelists_generator() : position_(0) { }
 
 void cmakelists_generator::
 populate(const unsigned int position, result_type& v) {
-    dogen::coding::meta_model::element_generator::populate(position, v);
+    dogen::assets::meta_model::element_generator::populate(position, v);
     v.include_directory_path(create_std_string(position + 0));
     v.source_directory_name(create_std_string(position + 1));
     v.header_file_extension(create_std_string(position + 2));

@@ -21,10 +21,10 @@
 #include <unordered_map>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.coding/types/meta_model/element.hpp"
-#include "dogen.coding/types/meta_model/technical_space.hpp"
-#include "dogen.coding/hash/meta_model/technical_space_hash.hpp"
-#include "dogen.coding/io/meta_model/technical_space_io.hpp"
+#include "dogen.assets/types/meta_model/element.hpp"
+#include "dogen.assets/types/meta_model/technical_space.hpp"
+#include "dogen.assets/hash/meta_model/technical_space_hash.hpp"
+#include "dogen.assets/io/meta_model/technical_space_io.hpp"
 #include "dogen.generation/io/meta_model/model_io.hpp"
 #include "dogen.generation/types/transforms/technical_space_transform.hpp"
 
@@ -61,7 +61,7 @@ apply(const context& ctx, meta_model::model& m) {
         /*
          * Skip agnostic as it is an abstract technical space.
          */
-        if (ts == coding::meta_model::technical_space::agnostic)
+        if (ts == assets::meta_model::technical_space::agnostic)
             continue;
 
         const auto i(ats.insert(ts));

@@ -32,7 +32,7 @@
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.coding/types/meta_model/decoration/element_properties.hpp"
+#include "dogen.assets/types/meta_model/decoration/element_properties.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
 #include "dogen.generation/types/helpers/decoration_repository.hpp"
 #include "dogen.generation/types/transforms/decoration_configuration.hpp"
@@ -82,15 +82,15 @@ private:
      * @brief Retrieves the modeline for the supplied technical space
      * and modeline group.
      */
-    static boost::shared_ptr<coding::meta_model::decoration::modeline>
+    static boost::shared_ptr<assets::meta_model::decoration::modeline>
     get_modeline(const helpers::decoration_repository drp,
         const std::string& modeline_group_name,
-        const coding::meta_model::technical_space ts);
+        const assets::meta_model::technical_space ts);
 
     /**
      * @brief Retrieves the generation marker for the supplied name.
      */
-    static boost::shared_ptr<coding::meta_model::decoration::generation_marker>
+    static boost::shared_ptr<assets::meta_model::decoration::generation_marker>
     get_generation_marker(const helpers::decoration_repository drp,
         const std::string& generation_marker_name);
 
@@ -99,36 +99,36 @@ private:
      * @brief Returns true if the meta-model element can be generated,
      * false otherwise.
      */
-    static bool is_generatable(const coding::meta_model::name& meta_name);
+    static bool is_generatable(const assets::meta_model::name& meta_name);
 
 private:
-    static boost::optional<coding::meta_model::decoration::element_properties>
+    static boost::optional<assets::meta_model::decoration::element_properties>
     make_decoration(const std::string& licence_text,
-        const boost::shared_ptr<coding::meta_model::decoration::modeline> ml,
+        const boost::shared_ptr<assets::meta_model::decoration::modeline> ml,
         const boost::shared_ptr<
-        coding::meta_model::decoration::generation_marker> gm,
+        assets::meta_model::decoration::generation_marker> gm,
         const std::list<std::string>& copyright_notices,
-        const coding::meta_model::technical_space ts);
+        const assets::meta_model::technical_space ts);
 
 private:
     /**
      * @brief Creates the global decoration.
      */
-    static boost::optional<coding::meta_model::decoration::element_properties>
+    static boost::optional<assets::meta_model::decoration::element_properties>
     make_global_decoration(const helpers::decoration_repository drp,
         const boost::optional<decoration_configuration> root_dc,
-        const coding::meta_model::technical_space ts);
+        const assets::meta_model::technical_space ts);
 
     /**
      * @brief Creates a local decoration.
      */
-    static boost::optional<coding::meta_model::decoration::element_properties>
+    static boost::optional<assets::meta_model::decoration::element_properties>
     make_local_decoration(const helpers::decoration_repository drp,
         const boost::optional<decoration_configuration> root_dc,
         const boost::optional<
-        coding::meta_model::decoration::element_properties> global_decoration,
+        assets::meta_model::decoration::element_properties> global_decoration,
         const boost::optional<decoration_configuration> element_dc,
-        const coding::meta_model::technical_space ts);
+        const assets::meta_model::technical_space ts);
 
 public:
     static void apply(const context& ctx, meta_model::model& m);

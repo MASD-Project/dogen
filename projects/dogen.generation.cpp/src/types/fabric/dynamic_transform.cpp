@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.coding/io/meta_model/technical_space_io.hpp"
+#include "dogen.assets/io/meta_model/technical_space_io.hpp"
 #include "dogen.generation/types/transforms/transformation_error.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
 #include "dogen.generation.cpp/types/fabric/injector.hpp"
@@ -40,7 +40,7 @@ namespace dogen::generation::cpp::fabric {
 bool dynamic_transform::
 requires_expansion(const generation::meta_model::model& m) const {
     const auto l(m.output_technical_space());
-    const auto r(l == coding::meta_model::technical_space::cpp);
+    const auto r(l == assets::meta_model::technical_space::cpp);
     if (!r) {
         BOOST_LOG_SEV(lg, debug) << "Expansion not required: "
                                  << m.name().qualified().dot()

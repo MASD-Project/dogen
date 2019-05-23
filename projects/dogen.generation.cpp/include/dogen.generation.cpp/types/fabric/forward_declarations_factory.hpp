@@ -28,13 +28,13 @@
 #include <list>
 #include <boost/shared_ptr.hpp>
 #include "dogen.generation/types/meta_model/model.hpp"
-#include "dogen.coding/types/meta_model/element.hpp"
+#include "dogen.assets/types/meta_model/element.hpp"
 
 namespace dogen::generation::cpp::fabric {
 
 class forward_declarations_factory final {
 public:
-    std::list<boost::shared_ptr<coding::meta_model::element>>
+    std::list<boost::shared_ptr<assets::meta_model::element>>
     make(const generation::meta_model::model& m) const;
 };
 

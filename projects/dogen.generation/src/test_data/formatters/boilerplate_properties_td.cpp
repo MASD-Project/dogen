@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen.coding/test_data/meta_model/technical_space_td.hpp"
+#include "dogen.assets/test_data/meta_model/technical_space_td.hpp"
 #include "dogen.generation/test_data/formatters/boilerplate_properties_td.hpp"
 
 namespace {
@@ -38,9 +38,9 @@ std::list<std::string> create_std_list_std_string(unsigned int position) {
     return r;
 }
 
-dogen::coding::meta_model::technical_space
-create_dogen_coding_meta_model_technical_space(const unsigned int position) {
-    return dogen::coding::meta_model::technical_space_generator::create(position);
+dogen::assets::meta_model::technical_space
+create_dogen_assets_meta_model_technical_space(const unsigned int position) {
+    return dogen::assets::meta_model::technical_space_generator::create(position);
 }
 
 bool create_bool(const unsigned int position) {
@@ -59,7 +59,7 @@ populate(const unsigned int position, result_type& v) {
     v.postamble(create_std_string(position + 1));
     v.dependencies(create_std_list_std_string(position + 2));
     v.header_guard(create_std_string(position + 3));
-    v.technical_space(create_dogen_coding_meta_model_technical_space(position + 4));
+    v.technical_space(create_dogen_assets_meta_model_technical_space(position + 4));
     v.generate_preamble(create_bool(position + 5));
     v.generate_header_guards(create_bool(position + 6));
 }

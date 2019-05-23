@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.coding/types/helpers/name_builder.hpp"
+#include "dogen.assets/types/helpers/name_builder.hpp"
 #include "dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
 
 namespace dogen::generation::csharp::fabric {
 
-coding::meta_model::location meta_name_factory::make_location() {
-    coding::meta_model::location r;
+assets::meta_model::location meta_name_factory::make_location() {
+    assets::meta_model::location r;
     r.external_modules().push_back("dogen");
     r.model_modules().push_back("generation");
     r.model_modules().push_back("csharp");
@@ -32,27 +32,27 @@ coding::meta_model::location meta_name_factory::make_location() {
     return r;
 }
 
-coding::meta_model::name meta_name_factory::make_name(const std::string& sn) {
+assets::meta_model::name meta_name_factory::make_name(const std::string& sn) {
     static const auto l(make_location());
-    coding::helpers::name_builder b;
+    assets::helpers::name_builder b;
     b.location(l);
     b.simple_name(sn);
     return b.build();
 }
 
-coding::meta_model::name meta_name_factory::make_assembly_info_name() {
+assets::meta_model::name meta_name_factory::make_assembly_info_name() {
     return make_name("assembly_info");
 }
 
-coding::meta_model::name meta_name_factory::make_assistant_name() {
+assets::meta_model::name meta_name_factory::make_assistant_name() {
     return make_name("assistant");
 }
 
-coding::meta_model::name meta_name_factory::make_visual_studio_project_name() {
+assets::meta_model::name meta_name_factory::make_visual_studio_project_name() {
     return make_name("visual_studio_project");
 }
 
-coding::meta_model::name meta_name_factory::make_visual_studio_solution_name() {
+assets::meta_model::name meta_name_factory::make_visual_studio_solution_name() {
     return make_name("visual_studio_solution");
 }
 

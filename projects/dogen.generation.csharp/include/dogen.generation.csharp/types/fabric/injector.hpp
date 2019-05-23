@@ -28,7 +28,7 @@
 #include <list>
 #include <boost/shared_ptr.hpp>
 #include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.coding/types/meta_model/element.hpp"
+#include "dogen.assets/types/meta_model/element.hpp"
 #include "dogen.generation/types/meta_model/model.hpp"
 
 namespace dogen::generation::csharp::fabric {
@@ -38,12 +38,12 @@ public:
     virtual ~injector() noexcept;
 
 private:
-    void add_element(const boost::shared_ptr<coding::meta_model::element>& e,
+    void add_element(const boost::shared_ptr<assets::meta_model::element>& e,
         generation::meta_model::model& m) const;
 
     void add_elements(
         const std::list<
-        boost::shared_ptr<coding::meta_model::element>>& elements,
+        boost::shared_ptr<assets::meta_model::element>>& elements,
         generation::meta_model::model& m) const;
 
 private:

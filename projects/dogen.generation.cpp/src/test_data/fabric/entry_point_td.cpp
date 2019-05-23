@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.coding/test_data/meta_model/element_td.hpp"
+#include "dogen.assets/test_data/meta_model/element_td.hpp"
 #include "dogen.generation.cpp/test_data/fabric/entry_point_td.hpp"
 
 namespace dogen::generation::cpp::fabric {
@@ -27,7 +27,7 @@ entry_point_generator::entry_point_generator() : position_(0) { }
 
 void entry_point_generator::
 populate(const unsigned int position, result_type& v) {
-    dogen::coding::meta_model::element_generator::populate(position, v);
+    dogen::assets::meta_model::element_generator::populate(position, v);
 }
 
 entry_point_generator::result_type

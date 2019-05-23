@@ -29,7 +29,7 @@
 #include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/object_odb_options.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
-#include "dogen.coding/types/meta_model/structural/object.hpp"
+#include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/throw_exception.hpp>
@@ -54,7 +54,7 @@ object_odb_options_formatter::archetype_location() const {
     return r;
 }
 
-const coding::meta_model::name& object_odb_options_formatter::meta_name() const {
+const assets::meta_model::name& object_odb_options_formatter::meta_name() const {
     static auto r(fabric::meta_name_factory::make_object_odb_options_name());
     return r;
 }
@@ -69,7 +69,7 @@ object_odb_options_formatter::inclusion_support_type() const {
 }
 
 boost::filesystem::path object_odb_options_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const coding::meta_model::name& n) const {
+    const formattables::locator& /*l*/, const assets::meta_model::name& n) const {
     using namespace dogen::utility::log;
     static logger lg(logger_factory(
             "generation.cpp.formatters.odb.object_odb_options_formatter"));
@@ -81,19 +81,19 @@ boost::filesystem::path object_odb_options_formatter::inclusion_path(
 }
 
 boost::filesystem::path object_odb_options_formatter::full_path(
-    const formattables::locator& l, const coding::meta_model::name& n) const {
+    const formattables::locator& l, const assets::meta_model::name& n) const {
     return l.make_full_path_for_odb_options(n, static_id());
 }
 
 std::list<std::string> object_odb_options_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
-    const coding::meta_model::element& /*e*/) const {
+    const assets::meta_model::element& /*e*/) const {
     static std::list<std::string> r;
     return r;
 }
 
 extraction::meta_model::artefact object_odb_options_formatter::
-format(const context& ctx, const coding::meta_model::element& e) const {
+format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& ooo(a.as<fabric::object_odb_options>(e));
 

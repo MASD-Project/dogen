@@ -19,13 +19,13 @@
 
 std::list<std::string> registrar_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
-    const coding::meta_model::element& /*e*/) const {
+    const assets::meta_model::element& /*e*/) const {
     static std::list<std::string> r;
     return r;
 }
 
 extraction::meta_model::artefact registrar_header_formatter::
-format(const context& ctx, const coding::meta_model::element& e) const {
+format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& rg(a.as<fabric::registrar>(e));
 

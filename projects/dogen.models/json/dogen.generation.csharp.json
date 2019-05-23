@@ -9,7 +9,7 @@
     "masd.injection.reference": "dogen",
     "masd.injection.reference": "dogen.variability",
     "masd.injection.reference": "dogen.tracing",
-    "masd.injection.reference": "dogen.coding",
+    "masd.injection.reference": "dogen.assets",
     "masd.injection.reference": "dogen.extraction",
     "masd.injection.reference": "masd",
     "masd.injection.reference": "dogen.profiles",
@@ -281,7 +281,7 @@
       "attributes": [
         {
           "name": "name",
-          "type": "coding::meta_model::name"
+          "type": "assets::meta_model::name"
         },
         {
           "name": "formattables",
@@ -311,7 +311,7 @@
         },
         {
           "name": "element",
-          "type": "boost::shared_ptr<coding::meta_model::element>"
+          "type": "boost::shared_ptr<assets::meta_model::element>"
         }
       ]
     },
@@ -460,7 +460,7 @@
     {
       "name": "fabric::visual_studio_project",
       "tagged_values": {
-        "masd.generalization.parent": "coding::meta_model::element"
+        "masd.generalization.parent": "assets::meta_model::element"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -517,7 +517,7 @@
     {
       "name": "fabric::visual_studio_solution",
       "tagged_values": {
-        "masd.generalization.parent": "coding::meta_model::element"
+        "masd.generalization.parent": "assets::meta_model::element"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -556,7 +556,7 @@
     {
       "name": "fabric::assembly_info",
       "tagged_values": {
-        "masd.generalization.parent": "coding::meta_model::element"
+        "masd.generalization.parent": "assets::meta_model::element"
       },
       "fallback_element_type": "masd::object"
     },
@@ -784,7 +784,7 @@
     {
       "name": "fabric::assistant",
       "tagged_values": {
-        "masd.generalization.parent": "coding::meta_model::element"
+        "masd.generalization.parent": "assets::meta_model::element"
       },
       "fallback_element_type": "masd::object"
     },

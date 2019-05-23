@@ -28,12 +28,12 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include "dogen.coding/types/meta_model/element.hpp"
+#include "dogen.assets/types/meta_model/element.hpp"
 #include "dogen.generation.cpp/types/fabric/odb_targets.hpp"
 
 namespace dogen::generation::cpp::fabric {
 
-class cmakelists final : public dogen::coding::meta_model::element {
+class cmakelists final : public dogen::assets::meta_model::element {
 public:
     cmakelists() = default;
     cmakelists(const cmakelists&) = default;
@@ -43,20 +43,20 @@ public:
 
 public:
     cmakelists(
-        const dogen::coding::meta_model::name& name,
+        const dogen::assets::meta_model::name& name,
         const std::string& documentation,
-        const dogen::coding::meta_model::origin_types origin_type,
+        const dogen::assets::meta_model::origin_types origin_type,
         const std::string& contained_by,
         const bool in_global_module,
-        const std::list<dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<dogen::assets::meta_model::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes,
-        const dogen::coding::meta_model::name& meta_name,
-        const dogen::coding::meta_model::technical_space intrinsic_technical_space,
+        const dogen::assets::meta_model::name& meta_name,
+        const dogen::assets::meta_model::technical_space intrinsic_technical_space,
         const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
         const bool is_element_extension,
-        const std::unordered_map<std::string, dogen::coding::meta_model::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
-        const boost::optional<dogen::coding::meta_model::decoration::element_properties>& decoration,
+        const std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties>& artefact_properties,
+        const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
+        const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
         const std::string& include_directory_path,
         const std::string& source_directory_name,
         const std::string& header_file_extension,
@@ -65,12 +65,12 @@ public:
         const std::string& tests_directory_name);
 
 public:
-    using dogen::coding::meta_model::element::accept;
+    using dogen::assets::meta_model::element::accept;
 
-    virtual void accept(const dogen::coding::meta_model::element_visitor& v) const override;
-    virtual void accept(dogen::coding::meta_model::element_visitor& v) const override;
-    virtual void accept(const dogen::coding::meta_model::element_visitor& v) override;
-    virtual void accept(dogen::coding::meta_model::element_visitor& v) override;
+    virtual void accept(const dogen::assets::meta_model::element_visitor& v) const override;
+    virtual void accept(dogen::assets::meta_model::element_visitor& v) const override;
+    virtual void accept(const dogen::assets::meta_model::element_visitor& v) override;
+    virtual void accept(dogen::assets::meta_model::element_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
 
@@ -112,7 +112,7 @@ public:
     }
 
 public:
-    bool equals(const dogen::coding::meta_model::element& other) const override;
+    bool equals(const dogen::assets::meta_model::element& other) const override;
 
 public:
     void swap(cmakelists& other) noexcept;

@@ -27,8 +27,8 @@
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/io/meta_model/profile_template_io.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
-#include "dogen.coding/io/meta_model/model_set_io.hpp"
-#include "dogen.coding/io/meta_model/variability/profile_template_io.hpp"
+#include "dogen.assets/io/meta_model/model_set_io.hpp"
+#include "dogen.assets/io/meta_model/variability/profile_template_io.hpp"
 #include "dogen.engine/types/traits.hpp"
 #include "dogen.engine/types/transforms/context.hpp"
 #include "dogen.engine/types/transforms/transform_exception.hpp"
@@ -189,7 +189,7 @@ make_untyped_value(const feature_group& fg,
 
 variability::meta_model::profile_template profile_template_adaption_transform::
 adapt(const feature_group& fg,
-    const coding::meta_model::variability::profile_template& vpt) {
+    const assets::meta_model::variability::profile_template& vpt) {
     variability::meta_model::profile_template r;
 
     const auto sn(vpt.name().simple());
@@ -250,7 +250,7 @@ adapt(const feature_group& fg,
 
 std::list<variability::meta_model::profile_template>
 profile_template_adaption_transform::
-apply(const context& ctx, const coding::meta_model::model_set& ms) {
+apply(const context& ctx, const assets::meta_model::model_set& ms) {
     tracing::scoped_transform_tracer stp(lg,
         "profile template adaption transform",
         transform_id, *ctx.variability_context().tracer(), ms);

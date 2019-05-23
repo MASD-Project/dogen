@@ -26,28 +26,28 @@
 #endif
 
 #include <string>
-#include "dogen.coding/types/meta_model/name.hpp"
+#include "dogen.assets/types/meta_model/name.hpp"
 
 namespace dogen::generation::cpp::fabric {
 
 class meta_name_factory final {
 private:
-    static coding::meta_model::location make_location();
+    static assets::meta_model::location make_location();
 
 private:
-    static coding::meta_model::name make_name(const std::string& sn);
+    static assets::meta_model::name make_name(const std::string& sn);
 
 public:
-    static coding::meta_model::name make_cmakelists_name();
-    static coding::meta_model::name make_master_header_name();
-    static coding::meta_model::name make_msbuild_targets_name();
-    static coding::meta_model::name make_visual_studio_project_name();
-    static coding::meta_model::name make_visual_studio_solution_name();
-    static coding::meta_model::name make_common_odb_options_name();
-    static coding::meta_model::name make_object_odb_options_name();
-    static coding::meta_model::name make_registrar_name();
-    static coding::meta_model::name make_forward_declarations_name();
-    static coding::meta_model::name make_entry_point_name();
+    static assets::meta_model::name make_cmakelists_name();
+    static assets::meta_model::name make_master_header_name();
+    static assets::meta_model::name make_msbuild_targets_name();
+    static assets::meta_model::name make_visual_studio_project_name();
+    static assets::meta_model::name make_visual_studio_solution_name();
+    static assets::meta_model::name make_common_odb_options_name();
+    static assets::meta_model::name make_object_odb_options_name();
+    static assets::meta_model::name make_registrar_name();
+    static assets::meta_model::name make_forward_declarations_name();
+    static assets::meta_model::name make_entry_point_name();
 };
 
 }

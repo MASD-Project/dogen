@@ -28,10 +28,10 @@
 #include <string>
 #include <unordered_map>
 #include "dogen.archetypes/types/locations_group.hpp"
-#include "dogen.coding/types/meta_model/element.hpp"
+#include "dogen.assets/types/meta_model/element.hpp"
 #include "dogen.generation/types/meta_model/element_archetype.hpp"
-#include "dogen.coding/types/meta_model/artefact_properties.hpp"
-#include "dogen.coding/types/meta_model/local_archetype_location_properties.hpp"
+#include "dogen.assets/types/meta_model/artefact_properties.hpp"
+#include "dogen.assets/types/meta_model/local_archetype_location_properties.hpp"
 #include "dogen.generation/types/meta_model/denormalised_archetype_properties.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
 #include "dogen.generation/types/meta_model/model.hpp"
@@ -41,17 +41,17 @@ namespace dogen::generation::transforms {
 class enablement_transform final {
 private:
     static bool is_element_disabled(
-        const coding::meta_model::element& e);
+        const assets::meta_model::element& e);
 
     static void compute_enablement_for_artefact_properties(
         const std::unordered_map<std::string,
         meta_model::denormalised_archetype_properties>&
         global_archetype_location_properties,
         const std::unordered_map<std::string,
-        coding::meta_model::local_archetype_location_properties>&
+        assets::meta_model::local_archetype_location_properties>&
         local_archetype_location_properties,
         const std::string& archetype,
-        coding::meta_model::artefact_properties& ap);
+        assets::meta_model::artefact_properties& ap);
 
     static void compute_enablement_for_element(
         const std::unordered_map<std::string,
@@ -61,7 +61,7 @@ private:
         meta_model::denormalised_archetype_properties>&
         global_archetype_location_properties,
         std::unordered_set<meta_model::element_archetype>&
-        enabled_archetype_for_element, coding::meta_model::element& e);
+        enabled_archetype_for_element, assets::meta_model::element& e);
 
 public:
     static void apply(const context& ctx, meta_model::model& m);

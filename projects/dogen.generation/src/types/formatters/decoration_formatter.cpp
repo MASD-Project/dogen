@@ -22,7 +22,7 @@
 #include <ostream>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
-#include "dogen.coding/io/meta_model/decoration/modeline_io.hpp"
+#include "dogen.assets/io/meta_model/decoration/modeline_io.hpp"
 #include "dogen.generation/io/formatters/comment_style_io.hpp"
 #include "dogen.generation/types/formatters/comment_formatter.hpp"
 #include "dogen.generation/types/formatters/modeline_formatter.hpp"
@@ -48,7 +48,7 @@ namespace dogen::generation::formatters {
 
 void decoration_formatter::
 add_modeline(std::list<std::string>& content,
-    const boost::shared_ptr<coding::meta_model::decoration::modeline> ml
+    const boost::shared_ptr<assets::meta_model::decoration::modeline> ml
     ) const {
     if (!ml) {
         BOOST_LOG_SEV(lg, trace) << "Modeline is empty.";
@@ -63,7 +63,7 @@ add_modeline(std::list<std::string>& content,
 
 void decoration_formatter::
 add_marker(std::list<std::string>& content, const boost::shared_ptr<
-    coding::meta_model::decoration::generation_marker> gm) const {
+    assets::meta_model::decoration::generation_marker> gm) const {
     if (!gm) {
         BOOST_LOG_SEV(lg, trace) << "Generation marker is empty.";
         return;
@@ -100,9 +100,9 @@ void decoration_formatter::format_preamble(
     std::ostream& s, const comment_style& single_line_cs,
     const comment_style& multi_line_cs, const std::string& licence_text,
     const std::list<std::string>& copyright_notices,
-    const boost::shared_ptr<coding::meta_model::decoration::modeline> ml,
+    const boost::shared_ptr<assets::meta_model::decoration::modeline> ml,
     const boost::shared_ptr<
-    coding::meta_model::decoration::generation_marker> gm) const {
+    assets::meta_model::decoration::generation_marker> gm) const {
 
     if (single_line_cs == comment_style::xml_style) {
         /*
@@ -111,7 +111,7 @@ void decoration_formatter::format_preamble(
         s << xml_declaration << std::endl;
     }
 
-    const auto top(coding::meta_model::decoration::modeline_location::top);
+    const auto top(assets::meta_model::decoration::modeline_location::top);
     const bool has_modeline((bool)ml);
     const bool is_top(has_modeline && ml->location() == top);
     std::list<std::string> content;
@@ -150,9 +150,9 @@ void decoration_formatter::
 format_preamble(std::ostream& s, const comment_style& cs,
     const std::string& licence_text,
     const std::list<std::string>& copyright_notices,
-    const boost::shared_ptr<coding::meta_model::decoration::modeline> ml,
+    const boost::shared_ptr<assets::meta_model::decoration::modeline> ml,
     const boost::shared_ptr<
-    coding::meta_model::decoration::generation_marker> gm) const {
+    assets::meta_model::decoration::generation_marker> gm) const {
 
     BOOST_LOG_SEV(lg, trace) << "Comment style: " << cs;
     format_preamble(s, cs, cs, licence_text, copyright_notices, ml, gm);
@@ -160,14 +160,14 @@ format_preamble(std::ostream& s, const comment_style& cs,
 
 void decoration_formatter::
 format_postamble(std::ostream& s, const comment_style& cs,
-    const boost::shared_ptr<coding::meta_model::decoration::modeline> ml) const {
+    const boost::shared_ptr<assets::meta_model::decoration::modeline> ml) const {
 
     if (!ml) {
         BOOST_LOG_SEV(lg, trace) << "Modeline is empty.";
         return;
     }
 
-    using coding::meta_model::decoration::modeline_location;
+    using assets::meta_model::decoration::modeline_location;
     if (ml->location() == modeline_location::bottom) {
         std::list<std::string> content;
         add_modeline(content, ml);

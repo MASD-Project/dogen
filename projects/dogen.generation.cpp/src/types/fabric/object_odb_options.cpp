@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.coding/io/meta_model/element_io.hpp"
+#include "dogen.assets/io/meta_model/element_io.hpp"
 #include "dogen.generation.cpp/types/element_visitor.hpp"
 #include "dogen.generation.cpp/types/fabric/object_odb_options.hpp"
 
@@ -49,24 +49,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 namespace dogen::generation::cpp::fabric {
 
 object_odb_options::object_odb_options(
-    const dogen::coding::meta_model::name& name,
+    const dogen::assets::meta_model::name& name,
     const std::string& documentation,
-    const dogen::coding::meta_model::origin_types origin_type,
+    const dogen::assets::meta_model::origin_types origin_type,
     const std::string& contained_by,
     const bool in_global_module,
-    const std::list<dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
+    const std::list<dogen::assets::meta_model::static_stereotypes>& static_stereotypes,
     const std::list<std::string>& dynamic_stereotypes,
-    const dogen::coding::meta_model::name& meta_name,
-    const dogen::coding::meta_model::technical_space intrinsic_technical_space,
+    const dogen::assets::meta_model::name& meta_name,
+    const dogen::assets::meta_model::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
     const bool is_element_extension,
-    const std::unordered_map<std::string, dogen::coding::meta_model::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
-    const boost::optional<dogen::coding::meta_model::decoration::element_properties>& decoration,
+    const std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties>& artefact_properties,
+    const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
+    const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
     const std::string& epilogue,
     const std::list<std::string>& include_regexes,
     const std::string& header_guard_prefix)
-    : dogen::coding::meta_model::element(
+    : dogen::assets::meta_model::element(
       name,
       documentation,
       origin_type,
@@ -85,28 +85,28 @@ object_odb_options::object_odb_options(
       include_regexes_(include_regexes),
       header_guard_prefix_(header_guard_prefix) { }
 
-void object_odb_options::accept(const dogen::coding::meta_model::element_visitor& v) const {
+void object_odb_options::accept(const dogen::assets::meta_model::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void object_odb_options::accept(dogen::coding::meta_model::element_visitor& v) const {
+void object_odb_options::accept(dogen::assets::meta_model::element_visitor& v) const {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
     }
 
-void object_odb_options::accept(const dogen::coding::meta_model::element_visitor& v) {
+void object_odb_options::accept(const dogen::assets::meta_model::element_visitor& v) {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void object_odb_options::accept(dogen::coding::meta_model::element_visitor& v) {
+void object_odb_options::accept(dogen::assets::meta_model::element_visitor& v) {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
@@ -117,7 +117,7 @@ void object_odb_options::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::generation::cpp::fabric::object_odb_options\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::coding::meta_model::element::to_stream(s);
+    dogen::assets::meta_model::element::to_stream(s);
     s << ", "
       << "\"epilogue\": " << "\"" << tidy_up_string(epilogue_) << "\"" << ", "
       << "\"include_regexes\": " << include_regexes_ << ", "
@@ -126,7 +126,7 @@ void object_odb_options::to_stream(std::ostream& s) const {
 }
 
 void object_odb_options::swap(object_odb_options& other) noexcept {
-    dogen::coding::meta_model::element::swap(other);
+    dogen::assets::meta_model::element::swap(other);
 
     using std::swap;
     swap(epilogue_, other.epilogue_);
@@ -134,14 +134,14 @@ void object_odb_options::swap(object_odb_options& other) noexcept {
     swap(header_guard_prefix_, other.header_guard_prefix_);
 }
 
-bool object_odb_options::equals(const dogen::coding::meta_model::element& other) const {
+bool object_odb_options::equals(const dogen::assets::meta_model::element& other) const {
     const object_odb_options* const p(dynamic_cast<const object_odb_options* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool object_odb_options::operator==(const object_odb_options& rhs) const {
-    return dogen::coding::meta_model::element::compare(rhs) &&
+    return dogen::assets::meta_model::element::compare(rhs) &&
         epilogue_ == rhs.epilogue_ &&
         include_regexes_ == rhs.include_regexes_ &&
         header_guard_prefix_ == rhs.header_guard_prefix_;

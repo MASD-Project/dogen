@@ -47,7 +47,7 @@ public:
 public:
     /**
      * Transforms the supplied command line arguments into the
-     * coding options, if valid.
+     * assets options, if valid.
      *
      * @param arguments Command line arguments supplied by the user.
      * @param info stream in which to place informative text.

@@ -27,7 +27,7 @@
 
 #include <list>
 #include <boost/shared_ptr.hpp>
-#include "dogen.coding/types/meta_model/element.hpp"
+#include "dogen.assets/types/meta_model/element.hpp"
 #include "dogen.generation/types/meta_model/model.hpp"
 #include "dogen.generation.cpp/types/fabric/registrar_fwd.hpp"
 
@@ -36,10 +36,10 @@ namespace dogen::generation::cpp::fabric {
 class registrar_factory final {
 private:
     boost::shared_ptr<fabric::registrar>
-    make(const coding::meta_model::name& model_name) const;
+    make(const assets::meta_model::name& model_name) const;
 
 public:
-    std::list<boost::shared_ptr<coding::meta_model::element>>
+    std::list<boost::shared_ptr<assets::meta_model::element>>
     make(const generation::meta_model::model& m) const;
 };
 

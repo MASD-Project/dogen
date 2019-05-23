@@ -1,6 +1,6 @@
 <#@ masd.stitch.stream_variable_name=a.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::generation::cpp::formatters::serialization #>
-<#@ masd.stitch.inclusion_dependency="dogen.coding/types/meta_model/structural/object.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.assets/types/meta_model/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/forward_declarations.hpp" #>
@@ -23,7 +23,7 @@
 
 std::list<std::string> forward_declarations_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const coding::meta_model::element& e) const {
+    const assets::meta_model::element& e) const {
     auto builder(f.make());
 
     using tp = formatters::types::traits;
@@ -34,7 +34,7 @@ std::list<std::string> forward_declarations_formatter::inclusion_dependencies(
 }
 
 extraction::meta_model::artefact forward_declarations_formatter::
-format(const context& ctx, const coding::meta_model::element& e) const {
+format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
 
     const auto& fd(a.as<fabric::forward_declarations>(e));

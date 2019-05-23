@@ -23,9 +23,9 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.coding/types/meta_model/structural/object.hpp"
-#include "dogen.coding/types/meta_model/structural/primitive.hpp"
-#include "dogen.coding/types/helpers/name_factory.hpp"
+#include "dogen.assets/types/meta_model/structural/object.hpp"
+#include "dogen.assets/types/meta_model/structural/primitive.hpp"
+#include "dogen.assets/types/helpers/name_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/building_error.hpp"
 #include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/common_odb_options.hpp"
@@ -43,12 +43,12 @@ const std::string common_odb_options_name("common");
 
 namespace dogen::generation::cpp::fabric {
 
-using coding::meta_model::origin_types;
-using coding::meta_model::technical_space;
+using assets::meta_model::origin_types;
+using assets::meta_model::technical_space;
 
-boost::shared_ptr<coding::meta_model::element> odb_options_factory::
-make(const coding::meta_model::name& n,
-    const coding::meta_model::origin_types& ot,
+boost::shared_ptr<assets::meta_model::element> odb_options_factory::
+make(const assets::meta_model::name& n,
+    const assets::meta_model::origin_types& ot,
     const variability::meta_model::configuration cfg) const {
     const auto id(n.qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
@@ -67,11 +67,11 @@ make(const coding::meta_model::name& n,
     return r;
 }
 
-std::list<boost::shared_ptr<coding::meta_model::element>>
+std::list<boost::shared_ptr<assets::meta_model::element>>
 odb_options_factory::make(const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating ODB Options.";
 
-    std::list<boost::shared_ptr<coding::meta_model::element>> r;
+    std::list<boost::shared_ptr<assets::meta_model::element>> r;
     for (const auto& ptr : m.elements()) {
         /*
          * If we do not belong to the target model, there is nothing
@@ -84,7 +84,7 @@ odb_options_factory::make(const generation::meta_model::model& m) const {
          * If we're an object with ORM properties, we need to be
          * processed.
          */
-        using coding::meta_model::structural::object;
+        using assets::meta_model::structural::object;
         const auto optr(boost::dynamic_pointer_cast<object>(ptr));
         if (optr && optr->orm_properties()) {
             const auto& o(*optr);
@@ -95,7 +95,7 @@ odb_options_factory::make(const generation::meta_model::model& m) const {
          * If we're a primitive with ORM properties, we need to be
          * processed.
          */
-        using coding::meta_model::structural::primitive;
+        using assets::meta_model::structural::primitive;
         const auto pptr(boost::dynamic_pointer_cast<primitive>(ptr));
         if (pptr && pptr->orm_properties()) {
             const auto& p(*pptr);
@@ -110,7 +110,7 @@ odb_options_factory::make(const generation::meta_model::model& m) const {
     if (r.empty())
         return r;
 
-    coding::helpers::name_factory nf;
+    assets::helpers::name_factory nf;
     const auto n(nf.build_element_in_model(m.name(), common_odb_options_name));
 
     auto coo(boost::make_shared<common_odb_options>());

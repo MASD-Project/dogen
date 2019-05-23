@@ -13,21 +13,22 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-21 Tue 14:59]
+#+CAPTION: Clock summary at [2019-05-22 Wed 11:37]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *14:10* |       |      | 100.0 |
+| *Total time*                                           | *15:06* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 14:10   |       |      | 100.0 |
-| Active                                                 |         | 14:10 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 3:37 |  25.5 |
-| Create a video demo for the previous sprint's features |         |       | 3:46 |  26.6 |
-| Sprint and product backlog grooming                    |         |       | 0:22 |   2.6 |
-| Make wale templates meta-model elements                |         |       | 2:45 |  19.4 |
-| Flatten the data directory                             |         |       | 1:11 |   8.4 |
-| Rename =dogen::cpp::header_only= stereotypes           |         |       | 0:15 |   1.8 |
-| Add code generation support to static configurations   |         |       | 2:14 |  15.8 |
+| Stories                                                | 15:06   |       |      | 100.0 |
+| Active                                                 |         | 15:06 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 3:37 |  24.0 |
+| Create a video demo for the previous sprint's features |         |       | 3:46 |  24.9 |
+| Sprint and product backlog grooming                    |         |       | 0:22 |   2.4 |
+| Make wale templates meta-model elements                |         |       | 2:45 |  18.2 |
+| Flatten the data directory                             |         |       | 1:11 |   7.8 |
+| Rename =dogen::cpp::header_only= stereotypes           |         |       | 0:15 |   1.7 |
+| Read variability papers                                |         |       | 0:56 |   6.2 |
+| Add code generation support to static configurations   |         |       | 2:14 |  14.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -324,6 +325,24 @@ Tasks:
 - update all models
 - update the colour palette.
 - remove these profiles from the reference model.
+
+*** COMPLETED Rename coding model                                     :story:
+    CLOSED: [2019-05-23 Thu 10:27]
+    :LOGBOOK:
+    CLOCK: [2019-05-23 Thu 08:10]--[2019-05-23 Thu 10:27] =>  2:17
+    :END:
+
+After reading the variability paper review, it seems a more
+appropriate name for coding is the assets meta-model. It will have all
+assets including product and component. Rename the model.
+
+*** STARTED Read variability papers                                   :story:
+    :LOGBOOK:
+    CLOCK: [2019-05-21 Tue 17:35]--[2019-05-21 Tue 17:45] =>  0:10
+    CLOCK: [2019-05-21 Tue 15:33]--[2019-05-21 Tue 16:19] =>  0:46
+    :END:
+
+Time spent reading the literature on variability.
 
 *** STARTED Add code generation support to static configurations      :story:
     :LOGBOOK:
@@ -701,9 +720,5 @@ Tasks:
 - replace calling code with new static features.
 - add io support for the static configuration if the io facet is
   enabled.
-
-*** Read variability papers                                           :story:
-
-Time spent reading the literature on variability.
 
 ** Deprecated

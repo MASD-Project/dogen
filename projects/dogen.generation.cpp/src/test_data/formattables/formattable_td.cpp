@@ -18,28 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.coding/test_data/meta_model/element_td.hpp"
+#include "dogen.assets/test_data/meta_model/element_td.hpp"
 #include "dogen.generation.cpp/test_data/formattables/formattable_td.hpp"
 #include "dogen.generation.cpp/test_data/formattables/element_properties_td.hpp"
 
 namespace {
 
-dogen::coding::meta_model::element*
-create_dogen_coding_meta_model_element_ptr(const unsigned int position) {
-    return dogen::coding::meta_model::element_generator::create_ptr(position);
+dogen::assets::meta_model::element*
+create_dogen_assets_meta_model_element_ptr(const unsigned int position) {
+    return dogen::assets::meta_model::element_generator::create_ptr(position);
 }
 
-boost::shared_ptr<dogen::coding::meta_model::element>
-create_boost_shared_ptr_dogen_coding_meta_model_element(unsigned int position) {
-    boost::shared_ptr<dogen::coding::meta_model::element> r(
-        create_dogen_coding_meta_model_element_ptr(position));
+boost::shared_ptr<dogen::assets::meta_model::element>
+create_boost_shared_ptr_dogen_assets_meta_model_element(unsigned int position) {
+    boost::shared_ptr<dogen::assets::meta_model::element> r(
+        create_dogen_assets_meta_model_element_ptr(position));
     return r;
 }
 
-std::list<boost::shared_ptr<dogen::coding::meta_model::element> > create_std_list_boost_shared_ptr_dogen_coding_meta_model_element(unsigned int position) {
-    std::list<boost::shared_ptr<dogen::coding::meta_model::element> > r;
+std::list<boost::shared_ptr<dogen::assets::meta_model::element> > create_std_list_boost_shared_ptr_dogen_assets_meta_model_element(unsigned int position) {
+    std::list<boost::shared_ptr<dogen::assets::meta_model::element> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_boost_shared_ptr_dogen_coding_meta_model_element(position + i));
+        r.push_back(create_boost_shared_ptr_dogen_assets_meta_model_element(position + i));
     }
     return r;
 }
@@ -57,8 +57,8 @@ formattable_generator::formattable_generator() : position_(0) { }
 
 void formattable_generator::
 populate(const unsigned int position, result_type& v) {
-    v.master_segment(create_boost_shared_ptr_dogen_coding_meta_model_element(position + 0));
-    v.all_segments(create_std_list_boost_shared_ptr_dogen_coding_meta_model_element(position + 1));
+    v.master_segment(create_boost_shared_ptr_dogen_assets_meta_model_element(position + 0));
+    v.all_segments(create_std_list_boost_shared_ptr_dogen_assets_meta_model_element(position + 1));
     v.element_properties(create_dogen_generation_cpp_formattables_element_properties(position + 2));
 }
 

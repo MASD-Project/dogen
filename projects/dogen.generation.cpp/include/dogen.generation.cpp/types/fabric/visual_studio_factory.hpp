@@ -30,7 +30,7 @@
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.coding/types/meta_model/element.hpp"
+#include "dogen.assets/types/meta_model/element.hpp"
 #include "dogen.generation/types/meta_model/model.hpp"
 #include "dogen.generation.cpp/types/fabric/visual_studio_configuration.hpp"
 
@@ -58,18 +58,18 @@ private:
         const generation::meta_model::model& m) const;
 
 private:
-    boost::shared_ptr<coding::meta_model::element>
+    boost::shared_ptr<assets::meta_model::element>
     make_solution(const visual_studio_configuration cfg,
         const std::string& project_name,
         const generation::meta_model::model& m) const;
 
-    boost::shared_ptr<coding::meta_model::element>
+    boost::shared_ptr<assets::meta_model::element>
     make_project(const visual_studio_configuration cfg,
         const std::string& project_name,
         const generation::meta_model::model& m) const;
 
 public:
-    std::list<boost::shared_ptr<coding::meta_model::element>>
+    std::list<boost::shared_ptr<assets::meta_model::element>>
     make(const variability::meta_model::feature_model& fm,
         const generation::meta_model::model& m) const;
 };

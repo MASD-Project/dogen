@@ -142,7 +142,7 @@
 #DOGEN masd.injection.reference=dogen
 #DOGEN masd.injection.reference=dogen.variability
 #DOGEN masd.injection.reference=dogen.tracing
-#DOGEN masd.injection.reference=dogen.coding
+#DOGEN masd.injection.reference=dogen.assets
 #DOGEN masd.injection.reference=dogen.extraction
 #DOGEN masd.injection.reference=dogen.generation
 #DOGEN masd.injection.reference=masd
@@ -673,7 +673,7 @@
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::name&amp;#</dia:string>
+                <dia:string>#const assets::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -738,7 +738,7 @@
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::name&amp;#</dia:string>
+                <dia:string>#const assets::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -803,7 +803,7 @@
                 <dia:string>#e#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::element&amp;#</dia:string>
+                <dia:string>#const assets::meta_model::element&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -868,7 +868,7 @@
                 <dia:string>#e#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::element&amp;#</dia:string>
+                <dia:string>#const assets::meta_model::element&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -1062,7 +1062,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#coding::meta_model::technical_space#</dia:string>
+            <dia:string>#assets::meta_model::technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1118,7 +1118,7 @@
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::transforms::context#</dia:string>
+                <dia:string>#assets::transforms::context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -1152,7 +1152,7 @@
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::model#</dia:string>
+                <dia:string>#assets::meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6617,7 +6617,7 @@ for a given C++ entity.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::model&amp;#</dia:string>
+                <dia:string>#const assets::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8409,7 +8409,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#model_name#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::name&amp;#</dia:string>
+                <dia:string>#const assets::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8491,7 +8491,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::name&amp;#</dia:string>
+                <dia:string>#const assets::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8556,7 +8556,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::name&amp;#</dia:string>
+                <dia:string>#const assets::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8621,7 +8621,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::name&amp;#</dia:string>
+                <dia:string>#const assets::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8686,7 +8686,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::name&amp;#</dia:string>
+                <dia:string>#const assets::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8751,7 +8751,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::name&amp;#</dia:string>
+                <dia:string>#const assets::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8816,7 +8816,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::name&amp;#</dia:string>
+                <dia:string>#const assets::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9328,7 +9328,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::name&amp;#</dia:string>
+                <dia:string>#const assets::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9393,7 +9393,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::list&lt;coding::meta_model::name&gt;&amp;#</dia:string>
+                <dia:string>#const std::list&lt;assets::meta_model::name&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9458,7 +9458,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#names#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::list&lt;coding::meta_model::name&gt;&amp;#</dia:string>
+                <dia:string>#const std::list&lt;assets::meta_model::name&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13147,7 +13147,7 @@ main, or from another initialiser.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generalization.parent=coding::meta_model::element#</dia:string>
+        <dia:string>##DOGEN masd.generalization.parent=assets::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -13233,7 +13233,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#leaves#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;coding::meta_model::name&gt;#</dia:string>
+            <dia:string>#std::list&lt;assets::meta_model::name&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -13256,7 +13256,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#model_dependencies#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;coding::meta_model::name&gt;#</dia:string>
+            <dia:string>#std::list&lt;assets::meta_model::name&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -13279,7 +13279,7 @@ main, or from another initialiser.#</dia:string>
             <dia:string>#registrar_dependencies#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;coding::meta_model::name&gt;#</dia:string>
+            <dia:string>#std::list&lt;assets::meta_model::name&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -13328,7 +13328,7 @@ main, or from another initialiser.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generalization.parent=coding::meta_model::element#</dia:string>
+        <dia:string>##DOGEN masd.generalization.parent=assets::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -13438,7 +13438,7 @@ an enumeration, false otherwise.#</dia:string>
             <dia:string>#underlying_element#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#coding::meta_model::name#</dia:string>
+            <dia:string>#assets::meta_model::name#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -13643,7 +13643,7 @@ an enumeration, false otherwise.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::model&amp;#</dia:string>
+                <dia:string>#assets::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14044,7 +14044,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generalization.parent=coding::meta_model::element#</dia:string>
+        <dia:string>##DOGEN masd.generalization.parent=assets::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14130,7 +14130,7 @@ an enumeration, false otherwise.#</dia:string>
             <dia:string>#inclusion_by_facet#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;std::string, std::list&lt;coding::meta_model::name&gt;&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;std::string, std::list&lt;assets::meta_model::name&gt;&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -14341,7 +14341,7 @@ an enumeration, false otherwise.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;coding::meta_model::element&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;assets::meta_model::element&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14384,7 +14384,7 @@ an enumeration, false otherwise.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::model&amp;#</dia:string>
+                <dia:string>#assets::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14589,7 +14589,7 @@ an enumeration, false otherwise.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;boost::shared_ptr&lt;coding::meta_model::element&gt;&gt;#</dia:string>
+            <dia:string>#std::list&lt;boost::shared_ptr&lt;assets::meta_model::element&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14821,7 +14821,7 @@ an enumeration, false otherwise.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;boost::shared_ptr&lt;coding::meta_model::element&gt;&gt;#</dia:string>
+            <dia:string>#std::list&lt;boost::shared_ptr&lt;assets::meta_model::element&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14963,7 +14963,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generalization.parent=coding::meta_model::element#</dia:string>
+        <dia:string>##DOGEN masd.generalization.parent=assets::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -15339,7 +15339,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generalization.parent=coding::meta_model::element#</dia:string>
+        <dia:string>##DOGEN masd.generalization.parent=assets::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16575,7 +16575,7 @@ and element.#</dia:string>
             <dia:string>#master_segment#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;coding::meta_model::element&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;assets::meta_model::element&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -16598,7 +16598,7 @@ and element.#</dia:string>
             <dia:string>#all_segments#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;boost::shared_ptr&lt;coding::meta_model::element&gt;&gt;#</dia:string>
+            <dia:string>#std::list&lt;boost::shared_ptr&lt;assets::meta_model::element&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -17163,7 +17163,7 @@ and element.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::model&amp;#</dia:string>
+                <dia:string>#const assets::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -19723,7 +19723,7 @@ and element.#</dia:string>
             <dia:string>#name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#coding::meta_model::name#</dia:string>
+            <dia:string>#assets::meta_model::name#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -23340,7 +23340,7 @@ and element.#</dia:string>
                 <dia:string>#e#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::element&amp;#</dia:string>
+                <dia:string>#const assets::meta_model::element&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -23534,7 +23534,7 @@ and element.#</dia:string>
                 <dia:string>#e#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::element&amp;#</dia:string>
+                <dia:string>#const assets::meta_model::element&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -30677,7 +30677,7 @@ an "odd" formatter.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::model&amp;#</dia:string>
+                <dia:string>#const assets::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -32759,7 +32759,7 @@ an "odd" formatter.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::name&amp;#</dia:string>
+                <dia:string>#const assets::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -32841,7 +32841,7 @@ an "odd" formatter.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::name&amp;#</dia:string>
+                <dia:string>#const assets::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -32957,7 +32957,7 @@ an "odd" formatter.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generalization.parent=coding::meta_model::element#</dia:string>
+        <dia:string>##DOGEN masd.generalization.parent=assets::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -33781,7 +33781,7 @@ an "odd" formatter.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generalization.parent=coding::meta_model::element#</dia:string>
+        <dia:string>##DOGEN masd.generalization.parent=assets::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -34287,7 +34287,7 @@ an "odd" formatter.#</dia:string>
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::meta_model::model&amp;#</dia:string>
+                <dia:string>#const assets::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -34331,7 +34331,7 @@ an "odd" formatter.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generalization.parent=coding::meta_model::element#</dia:string>
+        <dia:string>##DOGEN masd.generalization.parent=assets::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -34512,7 +34512,7 @@ an "odd" formatter.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generalization.parent=coding::meta_model::element#</dia:string>
+        <dia:string>##DOGEN masd.generalization.parent=assets::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -36140,7 +36140,7 @@ from JSON,using the RapidJson library.
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const coding::transforms::context&amp;#</dia:string>
+                <dia:string>#const assets::transforms::context&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -36157,7 +36157,7 @@ from JSON,using the RapidJson library.
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::model&amp;#</dia:string>
+                <dia:string>#assets::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -37284,7 +37284,7 @@ code.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generalization.parent=dogen::coding::meta_model::element#</dia:string>
+        <dia:string>##DOGEN masd.generalization.parent=dogen::assets::meta_model::element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -37511,7 +37511,7 @@ code.
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::model#</dia:string>
+                <dia:string>#assets::meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

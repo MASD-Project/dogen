@@ -21,7 +21,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.coding/types/meta_model/structural/module.hpp"
+#include "dogen.assets/types/meta_model/structural/module.hpp"
 #include "dogen.generation.csharp/types/traits.hpp"
 #include "dogen.generation.csharp/types/formattables/workflow.hpp"
 #include "dogen.generation.csharp/types/formatters/workflow.hpp"
@@ -93,15 +93,15 @@ archetype_location_repository_parts() const {
     return rg.archetype_location_repository_parts();
 }
 
-coding::meta_model::technical_space
+assets::meta_model::technical_space
 model_to_extraction_model_transform::technical_space() const {
-    return coding::meta_model::technical_space::csharp;
+    return assets::meta_model::technical_space::csharp;
 }
 
 std::unordered_map<std::string,
                    generation::meta_model::intra_backend_segment_properties>
 model_to_extraction_model_transform::intra_backend_segment_properties() const {
-    using namespace coding::meta_model;
+    using namespace assets::meta_model;
     generation::meta_model::intra_backend_segment_properties project;
 
     using generation::meta_model::path_contribution_types;

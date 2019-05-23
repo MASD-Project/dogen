@@ -9,7 +9,7 @@
     "masd.injection.reference": "dogen",
     "masd.injection.reference": "dogen.variability",
     "masd.injection.reference": "dogen.tracing",
-    "masd.injection.reference": "dogen.coding",
+    "masd.injection.reference": "dogen.assets",
     "masd.injection.reference": "dogen.extraction",
     "masd.injection.reference": "dogen.generation",
     "masd.injection.reference": "masd",
@@ -753,23 +753,23 @@
     {
       "name": "fabric::registrar",
       "tagged_values": {
-        "masd.generalization.parent": "coding::meta_model::element"
+        "masd.generalization.parent": "assets::meta_model::element"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "leaves",
-          "type": "std::list<coding::meta_model::name>",
+          "type": "std::list<assets::meta_model::name>",
           "documentation": "List of all concrete classes which are part of an inheritance tree.\n"
         },
         {
           "name": "model_dependencies",
-          "type": "std::list<coding::meta_model::name>",
+          "type": "std::list<assets::meta_model::name>",
           "documentation": "List of all models which the model depends on.\n"
         },
         {
           "name": "registrar_dependencies",
-          "type": "std::list<coding::meta_model::name>",
+          "type": "std::list<assets::meta_model::name>",
           "documentation": "Registrars on other models this registrar depends on.\n"
         }
       ]
@@ -777,7 +777,7 @@
     {
       "name": "fabric::forward_declarations",
       "tagged_values": {
-        "masd.generalization.parent": "coding::meta_model::element"
+        "masd.generalization.parent": "assets::meta_model::element"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -788,7 +788,7 @@
         },
         {
           "name": "underlying_element",
-          "type": "coding::meta_model::name",
+          "type": "assets::meta_model::name",
           "documentation": "The underlying type of the enumeration, if we are an enum forward declaration.\n"
         },
         {
@@ -814,13 +814,13 @@
     {
       "name": "fabric::master_header",
       "tagged_values": {
-        "masd.generalization.parent": "coding::meta_model::element"
+        "masd.generalization.parent": "assets::meta_model::element"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "inclusion_by_facet",
-          "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<coding::meta_model::name>>>"
+          "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<assets::meta_model::name>>>"
         }
       ]
     },
@@ -848,7 +848,7 @@
     {
       "name": "fabric::cmakelists",
       "tagged_values": {
-        "masd.generalization.parent": "coding::meta_model::element"
+        "masd.generalization.parent": "assets::meta_model::element"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -881,7 +881,7 @@
     {
       "name": "fabric::common_odb_options",
       "tagged_values": {
-        "masd.generalization.parent": "coding::meta_model::element"
+        "masd.generalization.parent": "assets::meta_model::element"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -967,11 +967,11 @@
       "attributes": [
         {
           "name": "master_segment",
-          "type": "boost::shared_ptr<coding::meta_model::element>"
+          "type": "boost::shared_ptr<assets::meta_model::element>"
         },
         {
           "name": "all_segments",
-          "type": "std::list<boost::shared_ptr<coding::meta_model::element>>"
+          "type": "std::list<boost::shared_ptr<assets::meta_model::element>>"
         },
         {
           "name": "element_properties",
@@ -1074,7 +1074,7 @@
       "attributes": [
         {
           "name": "name",
-          "type": "coding::meta_model::name"
+          "type": "assets::meta_model::name"
         },
         {
           "name": "streaming_properties",
@@ -1797,7 +1797,7 @@
     {
       "name": "fabric::object_odb_options",
       "tagged_values": {
-        "masd.generalization.parent": "coding::meta_model::element"
+        "masd.generalization.parent": "assets::meta_model::element"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1846,7 +1846,7 @@
     {
       "name": "fabric::msbuild_targets",
       "tagged_values": {
-        "masd.generalization.parent": "coding::meta_model::element"
+        "masd.generalization.parent": "assets::meta_model::element"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1873,7 +1873,7 @@
     {
       "name": "fabric::visual_studio_project",
       "tagged_values": {
-        "masd.generalization.parent": "coding::meta_model::element"
+        "masd.generalization.parent": "assets::meta_model::element"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1894,7 +1894,7 @@
     {
       "name": "fabric::visual_studio_solution",
       "tagged_values": {
-        "masd.generalization.parent": "coding::meta_model::element"
+        "masd.generalization.parent": "assets::meta_model::element"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2033,7 +2033,7 @@
     {
       "name": "fabric::entry_point",
       "tagged_values": {
-        "masd.generalization.parent": "dogen::coding::meta_model::element"
+        "masd.generalization.parent": "dogen::assets::meta_model::element"
       },
       "fallback_element_type": "masd::object"
     },

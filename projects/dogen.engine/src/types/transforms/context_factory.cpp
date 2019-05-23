@@ -33,7 +33,7 @@
 #include "dogen.templating/types/initializer.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
 #include "dogen.injection/types/features/registrar.hpp"
-#include "dogen.coding/types/features/initializer.hpp"
+#include "dogen.assets/types/features/initializer.hpp"
 #include "dogen.generation/types/features/initializer.hpp"
 #include "dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 #include "dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
@@ -193,7 +193,7 @@ context context_factory::make_context(const configuration& cfg,
     using variability::transforms::feature_model_production_chain;
     variability::helpers::feature_template_registrar ftrg;
     injection::features::registrar::register_templates(ftrg);
-    coding::features::initializer::register_templates(ftrg);
+    assets::features::initializer::register_templates(ftrg);
     generation::features::initializer::register_templates(ftrg);
     templating::initializer::register_templates(ftrg);
     variability::features::initializer::register_templates(ftrg);
@@ -204,7 +204,7 @@ context context_factory::make_context(const configuration& cfg,
     const auto ftrp(ftrg.repository());
     const auto fm(feature_model_production_chain::apply(vctx, ftrp));
     r.injection_context().feature_model(fm);
-    r.coding_context().feature_model(fm);
+    r.assets_context().feature_model(fm);
     r.generation_context().feature_model(fm);
     r.extraction_context().feature_model(fm);
 
@@ -227,7 +227,7 @@ context context_factory::make_context(const configuration& cfg,
      * Setup the archetype location repository.
      */
     r.injection_context().archetype_location_repository(alrp);
-    r.coding_context().archetype_location_repository(alrp);
+    r.assets_context().archetype_location_repository(alrp);
     r.generation_context().archetype_location_repository(alrp);
 
     /*
@@ -240,7 +240,7 @@ context context_factory::make_context(const configuration& cfg,
      * Setup the tracer.
      */
     r.injection_context().tracer(tracer);
-    r.coding_context().tracer(tracer);
+    r.assets_context().tracer(tracer);
     r.generation_context().tracer(tracer);
     r.extraction_context().tracer(tracer);
 

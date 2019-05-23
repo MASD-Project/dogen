@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.coding/test_data/meta_model/name_td.hpp"
-#include "dogen.coding/test_data/meta_model/element_td.hpp"
+#include "dogen.assets/test_data/meta_model/name_td.hpp"
+#include "dogen.assets/test_data/meta_model/element_td.hpp"
 #include "dogen.generation.cpp/test_data/fabric/forward_declarations_td.hpp"
 
 namespace {
@@ -28,9 +28,9 @@ bool create_bool(const unsigned int position) {
     return (position % 2) != 0;
 }
 
-dogen::coding::meta_model::name
-create_dogen_coding_meta_model_name(const unsigned int position) {
-    return dogen::coding::meta_model::name_generator::create(position);
+dogen::assets::meta_model::name
+create_dogen_assets_meta_model_name(const unsigned int position) {
+    return dogen::assets::meta_model::name_generator::create(position);
 }
 
 }
@@ -41,9 +41,9 @@ forward_declarations_generator::forward_declarations_generator() : position_(0) 
 
 void forward_declarations_generator::
 populate(const unsigned int position, result_type& v) {
-    dogen::coding::meta_model::element_generator::populate(position, v);
+    dogen::assets::meta_model::element_generator::populate(position, v);
     v.is_enum(create_bool(position + 0));
-    v.underlying_element(create_dogen_coding_meta_model_name(position + 1));
+    v.underlying_element(create_dogen_assets_meta_model_name(position + 1));
     v.is_exception(create_bool(position + 2));
 }
 

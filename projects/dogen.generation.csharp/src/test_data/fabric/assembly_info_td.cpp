@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.coding/test_data/meta_model/element_td.hpp"
+#include "dogen.assets/test_data/meta_model/element_td.hpp"
 #include "dogen.generation.csharp/test_data/fabric/assembly_info_td.hpp"
 
 namespace dogen::generation::csharp::fabric {
@@ -27,7 +27,7 @@ assembly_info_generator::assembly_info_generator() : position_(0) { }
 
 void assembly_info_generator::
 populate(const unsigned int position, result_type& v) {
-    dogen::coding::meta_model::element_generator::populate(position, v);
+    dogen::assets::meta_model::element_generator::populate(position, v);
 }
 
 assembly_info_generator::result_type

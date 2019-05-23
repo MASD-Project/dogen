@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.coding/types/helpers/name_factory.hpp"
+#include "dogen.assets/types/helpers/name_factory.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
 #include "dogen.generation.cpp/types/fabric/cmakelists.hpp"
 #include "dogen.generation.cpp/types/fabric/msbuild_targets.hpp"
@@ -41,14 +41,14 @@ const std::string msbuild_targets_name("msbuild_targets");
 
 namespace dogen::generation::cpp::fabric {
 
-using coding::meta_model::origin_types;
-using coding::meta_model::technical_space;
+using assets::meta_model::origin_types;
+using assets::meta_model::technical_space;
 
-boost::shared_ptr<coding::meta_model::element> build_files_factory::
+boost::shared_ptr<assets::meta_model::element> build_files_factory::
 make_cmakelists(const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating CMakeLists.";
 
-    coding::helpers::name_factory nf;
+    assets::helpers::name_factory nf;
     const auto n(nf.build_element_in_model(m.name(), cmakelists_name));
     auto r(boost::make_shared<cmakelists>());
     r->name(n);
@@ -64,11 +64,11 @@ make_cmakelists(const generation::meta_model::model& m) const {
     return r;
 }
 
-boost::shared_ptr<coding::meta_model::element> build_files_factory::
+boost::shared_ptr<assets::meta_model::element> build_files_factory::
 make_msbuild_targets(const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating MSBuild Targets.";
 
-    coding::helpers::name_factory nf;
+    assets::helpers::name_factory nf;
     const auto n(nf.build_element_in_model(m.name(), msbuild_targets_name));
     auto r(boost::make_shared<msbuild_targets>());
     r->name(n);
@@ -84,11 +84,11 @@ make_msbuild_targets(const generation::meta_model::model& m) const {
     return r;
 }
 
-std::list<boost::shared_ptr<coding::meta_model::element>> build_files_factory::
+std::list<boost::shared_ptr<assets::meta_model::element>> build_files_factory::
 make(const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Build Files.";
 
-    std::list<boost::shared_ptr<coding::meta_model::element>> r;
+    std::list<boost::shared_ptr<assets::meta_model::element>> r;
     r.push_back(make_cmakelists(m));
     r.push_back(make_msbuild_targets(m));
 

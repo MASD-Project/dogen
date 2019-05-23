@@ -22,7 +22,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/io/meta_model/profile_repository_io.hpp"
 #include "dogen.variability/types/transforms/profile_repository_production_chain.hpp"
-#include "dogen.coding/io/meta_model/model_set_io.hpp"
+#include "dogen.assets/io/meta_model/model_set_io.hpp"
 #include "dogen.engine/types/transforms/context.hpp"
 #include "dogen.engine/types/transforms/profile_repository_transform.hpp"
 
@@ -42,12 +42,12 @@ variability::meta_model::profile_repository
 profile_repository_transform::apply(const context& ctx,
     const std::list<variability::meta_model::profile_template>& pts,
 
-    const coding::meta_model::model_set& ms) {
+    const assets::meta_model::model_set& ms) {
     const auto& vctx(ctx.variability_context());
     tracing::scoped_transform_tracer stp(lg, "profile repository transform",
         transform_id, *vctx.tracer(), ms);
 
-    const auto& fm(*ctx.coding_context().feature_model());
+    const auto& fm(*ctx.assets_context().feature_model());
     using variability::transforms::profile_repository_production_chain;
     const auto r(profile_repository_production_chain::apply(vctx, pts, fm));
     stp.end_transform(r);

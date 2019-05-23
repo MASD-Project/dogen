@@ -17,7 +17,7 @@
 <#+
 
 extraction::meta_model::artefact assistant_formatter::format(
-    const context& ctx, const coding::meta_model::element& e) const {
+    const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location());
     {
         const auto sn(e.name().simple());

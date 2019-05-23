@@ -40,13 +40,13 @@ namespace dogen::generation::csharp::fabric {
 injector::~injector() noexcept {}
 
 void injector::
-add_element(const boost::shared_ptr<coding::meta_model::element>& e,
+add_element(const boost::shared_ptr<assets::meta_model::element>& e,
     generation::meta_model::model& m) const {
     m.elements().push_back(e);
 }
 
 void injector::add_elements(
-    const std::list<boost::shared_ptr<coding::meta_model::element>>& elements,
+    const std::list<boost::shared_ptr<assets::meta_model::element>>& elements,
     generation::meta_model::model& m) const {
     for (auto& e : elements)
         add_element(e, m);

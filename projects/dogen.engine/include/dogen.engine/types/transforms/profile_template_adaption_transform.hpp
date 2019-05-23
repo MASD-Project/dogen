@@ -33,8 +33,8 @@
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.variability/types/meta_model/profile_template.hpp"
-#include "dogen.coding/types/meta_model/model_set.hpp"
-#include "dogen.coding/types/meta_model/variability/profile_template.hpp"
+#include "dogen.assets/types/meta_model/model_set.hpp"
+#include "dogen.assets/types/meta_model/variability/profile_template.hpp"
 #include "dogen.engine/types/transforms/context_fwd.hpp"
 
 namespace dogen::engine::transforms {
@@ -90,11 +90,11 @@ private:
 private:
     static variability::meta_model::profile_template
     adapt(const feature_group& fg,
-        const coding::meta_model::variability::profile_template& vpt);
+        const assets::meta_model::variability::profile_template& vpt);
 
 public:
     static std::list<variability::meta_model::profile_template>
-    apply(const context& ctx, const coding::meta_model::model_set& ms);
+    apply(const context& ctx, const assets::meta_model::model_set& ms);
 };
 
 }

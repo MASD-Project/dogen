@@ -28,8 +28,8 @@
 #include "dogen.generation.cpp/types/formatters/traits.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
-#include "dogen.coding/types/helpers/meta_name_factory.hpp"
-#include "dogen.coding/types/meta_model/variability/feature_template_initializer.hpp"
+#include "dogen.assets/types/helpers/meta_name_factory.hpp"
+#include "dogen.assets/types/meta_model/variability/feature_template_initializer.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include <boost/throw_exception.hpp>
 
@@ -52,8 +52,8 @@ feature_template_initializer_implementation_formatter::archetype_location() cons
     return r;
 }
 
-const coding::meta_model::name& feature_template_initializer_implementation_formatter::meta_name() const {
-    using coding::helpers::meta_name_factory;
+const assets::meta_model::name& feature_template_initializer_implementation_formatter::meta_name() const {
+    using assets::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_variability_feature_template_initializer_name());
     return r;
 }
@@ -67,7 +67,7 @@ inclusion_support_types feature_template_initializer_implementation_formatter::i
 }
 
 boost::filesystem::path feature_template_initializer_implementation_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const coding::meta_model::name& n) const {
+    const formattables::locator& /*l*/, const assets::meta_model::name& n) const {
 
     using namespace dogen::utility::log;
     static logger lg(
@@ -79,14 +79,14 @@ boost::filesystem::path feature_template_initializer_implementation_formatter::i
 }
 
 boost::filesystem::path feature_template_initializer_implementation_formatter::full_path(
-    const formattables::locator& l, const coding::meta_model::name& n) const {
+    const formattables::locator& l, const assets::meta_model::name& n) const {
     return l.make_full_path_for_cpp_implementation(n, static_id());
 }
 
 std::list<std::string> feature_template_initializer_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const coding::meta_model::element& e) const {
-    using coding::meta_model::variability::feature_template_initializer;
+    const assets::meta_model::element& e) const {
+    using assets::meta_model::variability::feature_template_initializer;
     const auto& o(assistant::as<feature_template_initializer>(e));
     auto builder(f.make());
 
@@ -100,9 +100,9 @@ std::list<std::string> feature_template_initializer_implementation_formatter::in
 }
 
 extraction::meta_model::artefact feature_template_initializer_implementation_formatter::
-format(const context& ctx, const coding::meta_model::element& e) const {
+format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& o(a.as<coding::meta_model::variability::feature_template_initializer>(e));
+    const auto& o(a.as<assets::meta_model::variability::feature_template_initializer>(e));
 
     {
         const auto sn(o.name().simple());

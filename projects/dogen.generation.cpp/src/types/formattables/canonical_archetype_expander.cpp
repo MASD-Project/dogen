@@ -20,7 +20,7 @@
  */
 #include <typeindex>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.coding/types/meta_model/element.hpp"
+#include "dogen.assets/types/meta_model/element.hpp"
 #include "dogen.generation.cpp/types/formatters/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/inclusion_support_types.hpp"
 #include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
@@ -38,7 +38,7 @@ namespace dogen::generation::cpp::formattables {
 
 void canonical_archetype_expander::expand(const formatters::repository& frp,
     formattables::element_properties& eprops,
-    const coding::meta_model::element& e) const {
+    const assets::meta_model::element& e) const {
     BOOST_LOG_SEV(lg, debug) << "Procesing element: " << e.name().qualified().dot();
     const auto cs(formatters::inclusion_support_types::canonical_support);
     const auto& safmt(frp.stock_artefact_formatters_by_meta_name());

@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.coding/types/transforms/context_fwd.hpp"
+#include "dogen.assets/types/transforms/context_fwd.hpp"
 #include "dogen.generation/types/transforms/dynamic_transform_interface.hpp"
 
 namespace dogen::generation::csharp::fabric {

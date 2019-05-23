@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen.coding/test_data/meta_model/name_td.hpp"
+#include "dogen.assets/test_data/meta_model/name_td.hpp"
 #include "dogen.generation.csharp/test_data/formattables/model_td.hpp"
 #include "dogen.generation.csharp/test_data/formattables/formattable_td.hpp"
 #include "dogen.generation.csharp/test_data/formattables/aspect_properties_td.hpp"
@@ -27,9 +27,9 @@
 
 namespace {
 
-dogen::coding::meta_model::name
-create_dogen_coding_meta_model_name(const unsigned int position) {
-    return dogen::coding::meta_model::name_generator::create(position);
+dogen::assets::meta_model::name
+create_dogen_assets_meta_model_name(const unsigned int position) {
+    return dogen::assets::meta_model::name_generator::create(position);
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -93,7 +93,7 @@ model_generator::model_generator() : position_(0) { }
 
 void model_generator::
 populate(const unsigned int position, result_type& v) {
-    v.name(create_dogen_coding_meta_model_name(position + 0));
+    v.name(create_dogen_assets_meta_model_name(position + 0));
     v.formattables(create_std_unordered_map_std_string_dogen_generation_csharp_formattables_formattable(position + 1));
     v.project_items(create_std_list_std_string(position + 2));
     v.aspect_properties(create_std_unordered_map_std_string_dogen_generation_csharp_formattables_aspect_properties(position + 3));

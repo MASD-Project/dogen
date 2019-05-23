@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.coding/io/meta_model/element_io.hpp"
+#include "dogen.assets/io/meta_model/element_io.hpp"
 #include "dogen.generation.cpp/types/element_visitor.hpp"
 #include "dogen.generation.cpp/types/fabric/cmakelists.hpp"
 #include "dogen.generation.cpp/io/fabric/odb_targets_io.hpp"
@@ -36,27 +36,27 @@ inline std::string tidy_up_string(std::string s) {
 namespace dogen::generation::cpp::fabric {
 
 cmakelists::cmakelists(
-    const dogen::coding::meta_model::name& name,
+    const dogen::assets::meta_model::name& name,
     const std::string& documentation,
-    const dogen::coding::meta_model::origin_types origin_type,
+    const dogen::assets::meta_model::origin_types origin_type,
     const std::string& contained_by,
     const bool in_global_module,
-    const std::list<dogen::coding::meta_model::static_stereotypes>& static_stereotypes,
+    const std::list<dogen::assets::meta_model::static_stereotypes>& static_stereotypes,
     const std::list<std::string>& dynamic_stereotypes,
-    const dogen::coding::meta_model::name& meta_name,
-    const dogen::coding::meta_model::technical_space intrinsic_technical_space,
+    const dogen::assets::meta_model::name& meta_name,
+    const dogen::assets::meta_model::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
     const bool is_element_extension,
-    const std::unordered_map<std::string, dogen::coding::meta_model::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, dogen::coding::meta_model::local_archetype_location_properties>& archetype_location_properties,
-    const boost::optional<dogen::coding::meta_model::decoration::element_properties>& decoration,
+    const std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties>& artefact_properties,
+    const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
+    const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
     const std::string& include_directory_path,
     const std::string& source_directory_name,
     const std::string& header_file_extension,
     const std::string& implementation_file_extension,
     const dogen::generation::cpp::fabric::odb_targets& odb_targets,
     const std::string& tests_directory_name)
-    : dogen::coding::meta_model::element(
+    : dogen::assets::meta_model::element(
       name,
       documentation,
       origin_type,
@@ -78,28 +78,28 @@ cmakelists::cmakelists(
       odb_targets_(odb_targets),
       tests_directory_name_(tests_directory_name) { }
 
-void cmakelists::accept(const dogen::coding::meta_model::element_visitor& v) const {
+void cmakelists::accept(const dogen::assets::meta_model::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void cmakelists::accept(dogen::coding::meta_model::element_visitor& v) const {
+void cmakelists::accept(dogen::assets::meta_model::element_visitor& v) const {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
     }
 
-void cmakelists::accept(const dogen::coding::meta_model::element_visitor& v) {
+void cmakelists::accept(const dogen::assets::meta_model::element_visitor& v) {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void cmakelists::accept(dogen::coding::meta_model::element_visitor& v) {
+void cmakelists::accept(dogen::assets::meta_model::element_visitor& v) {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
@@ -110,7 +110,7 @@ void cmakelists::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::generation::cpp::fabric::cmakelists\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::coding::meta_model::element::to_stream(s);
+    dogen::assets::meta_model::element::to_stream(s);
     s << ", "
       << "\"include_directory_path\": " << "\"" << tidy_up_string(include_directory_path_) << "\"" << ", "
       << "\"source_directory_name\": " << "\"" << tidy_up_string(source_directory_name_) << "\"" << ", "
@@ -122,7 +122,7 @@ void cmakelists::to_stream(std::ostream& s) const {
 }
 
 void cmakelists::swap(cmakelists& other) noexcept {
-    dogen::coding::meta_model::element::swap(other);
+    dogen::assets::meta_model::element::swap(other);
 
     using std::swap;
     swap(include_directory_path_, other.include_directory_path_);
@@ -133,14 +133,14 @@ void cmakelists::swap(cmakelists& other) noexcept {
     swap(tests_directory_name_, other.tests_directory_name_);
 }
 
-bool cmakelists::equals(const dogen::coding::meta_model::element& other) const {
+bool cmakelists::equals(const dogen::assets::meta_model::element& other) const {
     const cmakelists* const p(dynamic_cast<const cmakelists* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool cmakelists::operator==(const cmakelists& rhs) const {
-    return dogen::coding::meta_model::element::compare(rhs) &&
+    return dogen::assets::meta_model::element::compare(rhs) &&
         include_directory_path_ == rhs.include_directory_path_ &&
         source_directory_name_ == rhs.source_directory_name_ &&
         header_file_extension_ == rhs.header_file_extension_ &&

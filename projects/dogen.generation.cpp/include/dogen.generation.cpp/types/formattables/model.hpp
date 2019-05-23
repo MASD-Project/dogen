@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.coding/types/meta_model/name.hpp"
+#include "dogen.assets/types/meta_model/name.hpp"
 #include "dogen.generation.cpp/types/formattables/formattable.hpp"
 #include "dogen.generation.cpp/types/formattables/cpp_standards.hpp"
 #include "dogen.generation.cpp/types/formattables/facet_properties.hpp"
@@ -48,7 +48,7 @@ public:
 
 public:
     model(
-        const dogen::coding::meta_model::name& name,
+        const dogen::assets::meta_model::name& name,
         const std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& streaming_properties,
         const std::unordered_map<std::string, dogen::generation::cpp::formattables::formattable>& formattables,
         const std::unordered_map<std::string, dogen::generation::cpp::formattables::facet_properties>& facet_properties,
@@ -58,10 +58,10 @@ public:
         const std::list<std::string>& project_items);
 
 public:
-    const dogen::coding::meta_model::name& name() const;
-    dogen::coding::meta_model::name& name();
-    void name(const dogen::coding::meta_model::name& v);
-    void name(const dogen::coding::meta_model::name&& v);
+    const dogen::assets::meta_model::name& name() const;
+    dogen::assets::meta_model::name& name();
+    void name(const dogen::assets::meta_model::name& v);
+    void name(const dogen::assets::meta_model::name&& v);
 
     const std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& streaming_properties() const;
     std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& streaming_properties();
@@ -107,7 +107,7 @@ public:
     model& operator=(model other);
 
 private:
-    dogen::coding::meta_model::name name_;
+    dogen::assets::meta_model::name name_;
     std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties> streaming_properties_;
     std::unordered_map<std::string, dogen::generation::cpp::formattables::formattable> formattables_;
     std::unordered_map<std::string, dogen::generation::cpp::formattables::facet_properties> facet_properties_;

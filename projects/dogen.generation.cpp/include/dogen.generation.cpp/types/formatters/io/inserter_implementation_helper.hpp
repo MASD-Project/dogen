@@ -25,13 +25,13 @@
 #pragma once
 #endif
 
-#include "dogen.coding/types/meta_model/structural/object.hpp"
+#include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 
 namespace dogen::generation::cpp::formatters::io {
 
 void inserter_implementation_helper(
-    assistant& a, const coding::meta_model::structural::object& o, const bool inside_class);
+    assistant& a, const assets::meta_model::structural::object& o, const bool inside_class);
 
 }
 

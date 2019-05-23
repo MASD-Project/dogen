@@ -59,7 +59,7 @@ locator::locator(
     const variability::meta_model::feature_model& fm,
     const formatters::repository& frp,
     const variability::meta_model::configuration& rcfg,
-    const coding::meta_model::name& model_name,
+    const assets::meta_model::name& model_name,
     const std::unordered_set<std::string>& module_ids,
     const bool enable_backend_directories)
     : model_name_(model_name),
@@ -286,7 +286,7 @@ std::string locator::postfix_for_facet(const std::string& facet) const {
 
 boost::filesystem::path locator::make_project_path(
     const boost::filesystem::path& output_directory_path,
-    const coding::meta_model::name& model_name, const locator_configuration& lc,
+    const assets::meta_model::name& model_name, const locator_configuration& lc,
     const bool enable_backend_directories) const {
 
     boost::filesystem::path r(output_directory_path);
@@ -306,7 +306,7 @@ boost::filesystem::path locator::make_project_path(
 
 boost::filesystem::path locator::make_facet_path(
     const std::string& archetype, const std::string& extension,
-    const coding::meta_model::name& n) const {
+    const assets::meta_model::name& n) const {
     BOOST_LOG_SEV(lg, trace) << "Making facet path for: "
                              << n.qualified().dot();
 
@@ -360,7 +360,7 @@ boost::filesystem::path locator::make_facet_path(
 
 boost::filesystem::path locator::make_facet_path_temp(
     const std::string& archetype, const std::string& file_name,
-    const coding::meta_model::name& n) const {
+    const assets::meta_model::name& n) const {
     BOOST_LOG_SEV(lg, trace) << "Making facet path for: "
                              << n.qualified().dot();
 
@@ -404,7 +404,7 @@ boost::filesystem::path locator::make_facet_path_temp(
 }
 
 boost::filesystem::path locator::make_inclusion_path_prefix(
-    const coding::meta_model::name& n) const {
+    const assets::meta_model::name& n) const {
     /*
      * Header files require both the external module path and the
      * model module path in the file name path.
@@ -420,7 +420,7 @@ boost::filesystem::path locator::make_inclusion_path_prefix(
 
 boost::filesystem::path locator::make_inclusion_path(
     const std::string& archetype, const std::string& extension,
-    const coding::meta_model::name& n) const {
+    const assets::meta_model::name& n) const {
 
     boost::filesystem::path r(make_inclusion_path_prefix(n));
     r /= make_facet_path(archetype, extension, n);
@@ -490,7 +490,7 @@ boost::filesystem::path locator::make_relative_include_path_for_facet(
 }
 
 boost::filesystem::path locator::make_inclusion_path_for_cpp_header(
-    const coding::meta_model::name& n, const std::string& archetype) const {
+    const assets::meta_model::name& n, const std::string& archetype) const {
     const auto extension(configuration_.header_file_extension());
     return make_inclusion_path(archetype, extension, n);
 }
@@ -527,7 +527,7 @@ boost::filesystem::path locator::make_full_path_to_include_facet_directory(
 }
 
 boost::filesystem::path locator::make_full_path_for_cpp_header(
-    const coding::meta_model::name& n, const std::string& archetype) const {
+    const assets::meta_model::name& n, const std::string& archetype) const {
     auto r(make_full_path_to_include_directory());
     r /= make_inclusion_path_for_cpp_header(n, archetype);
     return r;
@@ -547,7 +547,7 @@ boost::filesystem::path locator::make_relative_implementation_path_for_facet(
 }
 
 boost::filesystem::path locator::make_full_path_for_templates(
-    const coding::meta_model::name& n, const std::string& archetype) const {
+    const assets::meta_model::name& n, const std::string& archetype) const {
     auto r(project_path_);
 
     const auto& cfg(configuration_);
@@ -559,7 +559,7 @@ boost::filesystem::path locator::make_full_path_for_templates(
 }
 
 boost::filesystem::path locator::make_full_path_for_tests_cpp_implementation(
-    const coding::meta_model::name& n, const std::string& archetype) const {
+    const assets::meta_model::name& n, const std::string& archetype) const {
     auto r(project_path_);
 
     const auto& cfg(configuration_);
@@ -571,7 +571,7 @@ boost::filesystem::path locator::make_full_path_for_tests_cpp_implementation(
 }
 
 boost::filesystem::path locator::make_full_path_for_tests_cpp_main(
-    const coding::meta_model::name& n, const std::string& archetype) const {
+    const assets::meta_model::name& n, const std::string& archetype) const {
 
     auto r(project_path_);
 
@@ -586,7 +586,7 @@ boost::filesystem::path locator::make_full_path_for_tests_cpp_main(
 }
 
 boost::filesystem::path locator::make_full_path_for_cpp_implementation(
-    const coding::meta_model::name& n, const std::string& archetype) const {
+    const assets::meta_model::name& n, const std::string& archetype) const {
 
     auto r(make_full_path_to_implementation_directory());
 
@@ -599,7 +599,7 @@ boost::filesystem::path locator::make_full_path_for_cpp_implementation(
 }
 
 boost::filesystem::path locator::make_full_path_for_include_cmakelists(
-    const coding::meta_model::name& n, const std::string& /*archetype*/) const {
+    const assets::meta_model::name& n, const std::string& /*archetype*/) const {
     /*
      * Note that we are placing the "include" CMake file with the
      * project directory rather than the project headers directory.
@@ -610,14 +610,14 @@ boost::filesystem::path locator::make_full_path_for_include_cmakelists(
 }
 
 boost::filesystem::path locator::make_full_path_for_source_cmakelists(
-    const coding::meta_model::name& n, const std::string& /*archetype*/) const {
+    const assets::meta_model::name& n, const std::string& /*archetype*/) const {
     auto r(make_full_path_to_implementation_directory());
     r /= n.simple() + ".txt"; // FIXME: hack for extension
     return r;
 }
 
 boost::filesystem::path locator::make_full_path_for_tests_cmakelists(
-    const coding::meta_model::name& n, const std::string& archetype) const {
+    const assets::meta_model::name& n, const std::string& archetype) const {
     auto r(project_path_);
     const auto facet_path(make_facet_path_temp(archetype, "CMakeLists.txt", n)); // FIXME: hack
     r /= facet_path;
@@ -625,7 +625,7 @@ boost::filesystem::path locator::make_full_path_for_tests_cmakelists(
 }
 
 boost::filesystem::path locator::
-make_full_path_for_msbuild_targets(const coding::meta_model::name& /*n*/,
+make_full_path_for_msbuild_targets(const assets::meta_model::name& /*n*/,
     const std::string& /*archetype*/) const {
     auto r(make_full_path_to_implementation_directory());
     r /= "msbuild.targets"; // FIXME: hack
@@ -633,7 +633,7 @@ make_full_path_for_msbuild_targets(const coding::meta_model::name& /*n*/,
 }
 
 boost::filesystem::path locator::make_relative_path_for_odb_options(
-    const coding::meta_model::name& n, const std::string& archetype,
+    const assets::meta_model::name& n, const std::string& archetype,
     const bool include_source_directory) const {
 
     boost::filesystem::path r;
@@ -672,14 +672,14 @@ boost::filesystem::path locator::make_relative_path_for_odb_options(
 }
 
 boost::filesystem::path locator::make_full_path_for_odb_options(
-    const coding::meta_model::name& n, const std::string& archetype) const {
+    const assets::meta_model::name& n, const std::string& archetype) const {
     auto r(project_path_);
     r /= make_relative_path_for_odb_options(n, archetype);
     return r;
 }
 
 boost::filesystem::path locator::make_full_path_for_project(
-    const coding::meta_model::name& n, const std::string& archetype) const {
+    const assets::meta_model::name& n, const std::string& archetype) const {
     auto r(project_path_);
     const auto facet_path(make_facet_path(archetype, empty, n));
     r /= facet_path;
@@ -687,7 +687,7 @@ boost::filesystem::path locator::make_full_path_for_project(
 }
 
 boost::filesystem::path locator::make_full_path_for_solution(
-    const coding::meta_model::name& n, const std::string& archetype) const {
+    const assets::meta_model::name& n, const std::string& archetype) const {
     auto r(project_path_);
     const auto facet_path(make_facet_path(archetype, empty, n));
     r /= facet_path;

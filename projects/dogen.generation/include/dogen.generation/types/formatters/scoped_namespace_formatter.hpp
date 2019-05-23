@@ -28,7 +28,7 @@
 #include <list>
 #include <iosfwd>
 #include <string>
-#include "dogen.coding/types/meta_model/technical_space.hpp"
+#include "dogen.assets/types/meta_model/technical_space.hpp"
 #include "dogen.generation/types/formatters/namespace_formatter.hpp"
 
 namespace dogen::generation::formatters {
@@ -40,7 +40,7 @@ class scoped_namespace_formatter final {
 public:
     scoped_namespace_formatter(
         std::ostream& s,
-        const coding::meta_model::technical_space ts,
+        const assets::meta_model::technical_space ts,
         const std::list<std::string>& ns,
         const bool add_new_line = false,
         const bool use_nesting = false);

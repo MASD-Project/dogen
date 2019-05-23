@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/make_shared.hpp>
-#include "dogen.coding/types/meta_model/element.hpp"
+#include "dogen.assets/types/meta_model/element.hpp"
 #include "dogen.generation.cpp/types/fabric/entry_point_fwd.hpp"
 #include "dogen.generation/types/meta_model/model.hpp"
 
@@ -35,10 +35,10 @@ namespace dogen::generation::cpp::fabric {
 class entry_point_factory final {
 private:
     boost::shared_ptr<fabric::entry_point>
-    make(const coding::meta_model::name& model_name) const;
+    make(const assets::meta_model::name& model_name) const;
 
 public:
-    boost::shared_ptr<coding::meta_model::element>
+    boost::shared_ptr<assets::meta_model::element>
     make(const generation::meta_model::model& m) const;
 };
 

@@ -25,18 +25,18 @@
 #pragma once
 #endif
 
-#include "dogen.coding/types/meta_model/model_set.hpp"
-#include "dogen.coding/types/transforms/context_fwd.hpp"
+#include "dogen.assets/types/meta_model/model_set.hpp"
+#include "dogen.assets/types/transforms/context_fwd.hpp"
 
 namespace dogen::engine::transforms {
 
 /**
- * @brief Populates the dynamic stereotypes of the coding model.
+ * @brief Populates the dynamic stereotypes of the assets model.
  */
 class dynamic_stereotypes_transform final {
 public:
-    static void apply(const coding::transforms::context& ctx,
-        coding::meta_model::model_set& ms);
+    static void apply(const assets::transforms::context& ctx,
+        assets::meta_model::model_set& ms);
 };
 
 }

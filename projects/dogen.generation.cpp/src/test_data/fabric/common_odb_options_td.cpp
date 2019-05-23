@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen.coding/test_data/meta_model/element_td.hpp"
+#include "dogen.assets/test_data/meta_model/element_td.hpp"
 #include "dogen.generation.cpp/test_data/fabric/common_odb_options_td.hpp"
 
 namespace {
@@ -46,7 +46,7 @@ common_odb_options_generator::common_odb_options_generator() : position_(0) { }
 
 void common_odb_options_generator::
 populate(const unsigned int position, result_type& v) {
-    dogen::coding::meta_model::element_generator::populate(position, v);
+    dogen::assets::meta_model::element_generator::populate(position, v);
     v.sql_name_case(create_std_string(position + 0));
     v.databases(create_std_list_std_string(position + 1));
 }

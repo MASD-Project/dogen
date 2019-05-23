@@ -21,13 +21,13 @@
 #include <boost/make_shared.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.coding/types/meta_model/element.hpp"
-#include "dogen.coding/types/meta_model/structural/object.hpp"
-#include "dogen.coding/types/meta_model/structural/enumeration.hpp"
-#include "dogen.coding/types/meta_model/structural/exception.hpp"
-#include "dogen.coding/types/meta_model/structural/primitive.hpp"
-#include "dogen.coding/types/meta_model/structural/visitor.hpp"
-#include "dogen.coding/types/meta_model/element_visitor.hpp"
+#include "dogen.assets/types/meta_model/element.hpp"
+#include "dogen.assets/types/meta_model/structural/object.hpp"
+#include "dogen.assets/types/meta_model/structural/enumeration.hpp"
+#include "dogen.assets/types/meta_model/structural/exception.hpp"
+#include "dogen.assets/types/meta_model/structural/primitive.hpp"
+#include "dogen.assets/types/meta_model/structural/visitor.hpp"
+#include "dogen.assets/types/meta_model/element_visitor.hpp"
 #include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/forward_declarations.hpp"
 #include "dogen.generation.cpp/types/fabric/forward_declarations_factory.hpp"
@@ -42,9 +42,9 @@ lg(logger_factory("generation.cpp.fabric.forward_declarations_factory"));
 
 namespace dogen::generation::cpp::fabric {
 
-using coding::meta_model::technical_space;
+using assets::meta_model::technical_space;
 
-class generator final : public coding::meta_model::element_visitor {
+class generator final : public assets::meta_model::element_visitor {
 private:
     template<typename Element>
     boost::shared_ptr<forward_declarations> create(const Element& e) const {
@@ -71,16 +71,16 @@ private:
     }
 
 public:
-    std::list<boost::shared_ptr<coding::meta_model::element>>
+    std::list<boost::shared_ptr<assets::meta_model::element>>
     result() { return result_; }
 
 public:
-    using coding::meta_model::element_visitor::visit;
-    void visit(coding::meta_model::structural::visitor& v) {
+    using assets::meta_model::element_visitor::visit;
+    void visit(assets::meta_model::structural::visitor& v) {
         result_.push_back(create(v));
     }
 
-    void visit(coding::meta_model::structural::enumeration& e) {
+    void visit(assets::meta_model::structural::enumeration& e) {
         const auto fd(create(e));
         fd->is_enum(true);
         fd->underlying_element(e.underlying_element());
@@ -88,15 +88,15 @@ public:
         result_.push_back(fd);
     }
 
-    void visit(coding::meta_model::structural::primitive& p) {
+    void visit(assets::meta_model::structural::primitive& p) {
         result_.push_back(create(p));
     }
 
-    void visit(coding::meta_model::structural::object& o) {
+    void visit(assets::meta_model::structural::object& o) {
         result_.push_back(create(o));
     }
 
-    void visit(coding::meta_model::structural::exception& e) {
+    void visit(assets::meta_model::structural::exception& e) {
         const auto fd(create(e));
         fd->is_exception(true);
         fd->intrinsic_technical_space(technical_space::cpp);
@@ -104,10 +104,10 @@ public:
     }
 
 private:
-    std::list<boost::shared_ptr<coding::meta_model::element>> result_;
+    std::list<boost::shared_ptr<assets::meta_model::element>> result_;
 };
 
-std::list<boost::shared_ptr<coding::meta_model::element>>
+std::list<boost::shared_ptr<assets::meta_model::element>>
 forward_declarations_factory::
 make(const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating forward declarations.";

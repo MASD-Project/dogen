@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen.coding/test_data/meta_model/name_td.hpp"
-#include "dogen.coding/test_data/meta_model/element_td.hpp"
+#include "dogen.assets/test_data/meta_model/name_td.hpp"
+#include "dogen.assets/test_data/meta_model/element_td.hpp"
 #include "dogen.generation.cpp/test_data/fabric/master_header_td.hpp"
 
 namespace {
@@ -31,31 +31,31 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::coding::meta_model::name
-create_dogen_coding_meta_model_name(const unsigned int position) {
-    return dogen::coding::meta_model::name_generator::create(position);
+dogen::assets::meta_model::name
+create_dogen_assets_meta_model_name(const unsigned int position) {
+    return dogen::assets::meta_model::name_generator::create(position);
 }
 
-std::list<dogen::coding::meta_model::name> create_std_list_dogen_coding_meta_model_name(unsigned int position) {
-    std::list<dogen::coding::meta_model::name> r;
+std::list<dogen::assets::meta_model::name> create_std_list_dogen_assets_meta_model_name(unsigned int position) {
+    std::list<dogen::assets::meta_model::name> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_coding_meta_model_name(position + i));
+        r.push_back(create_dogen_assets_meta_model_name(position + i));
     }
     return r;
 }
 
-std::unordered_map<std::string, std::list<dogen::coding::meta_model::name> > create_std_unordered_map_std_string_std_list_dogen_coding_meta_model_name(unsigned int position) {
-    std::unordered_map<std::string, std::list<dogen::coding::meta_model::name> > r;
+std::unordered_map<std::string, std::list<dogen::assets::meta_model::name> > create_std_unordered_map_std_string_std_list_dogen_assets_meta_model_name(unsigned int position) {
+    std::unordered_map<std::string, std::list<dogen::assets::meta_model::name> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_std_list_dogen_coding_meta_model_name(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_std_list_dogen_assets_meta_model_name(position + i)));
     }
     return r;
 }
 
-std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::coding::meta_model::name> > > create_std_unordered_map_std_string_std_unordered_map_std_string_std_list_dogen_coding_meta_model_name(unsigned int position) {
-    std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::coding::meta_model::name> > > r;
+std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::assets::meta_model::name> > > create_std_unordered_map_std_string_std_unordered_map_std_string_std_list_dogen_assets_meta_model_name(unsigned int position) {
+    std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::assets::meta_model::name> > > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_std_unordered_map_std_string_std_list_dogen_coding_meta_model_name(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_std_unordered_map_std_string_std_list_dogen_assets_meta_model_name(position + i)));
     }
     return r;
 }
@@ -68,8 +68,8 @@ master_header_generator::master_header_generator() : position_(0) { }
 
 void master_header_generator::
 populate(const unsigned int position, result_type& v) {
-    dogen::coding::meta_model::element_generator::populate(position, v);
-    v.inclusion_by_facet(create_std_unordered_map_std_string_std_unordered_map_std_string_std_list_dogen_coding_meta_model_name(position + 0));
+    dogen::assets::meta_model::element_generator::populate(position, v);
+    v.inclusion_by_facet(create_std_unordered_map_std_string_std_unordered_map_std_string_std_list_dogen_assets_meta_model_name(position + 0));
 }
 
 master_header_generator::result_type

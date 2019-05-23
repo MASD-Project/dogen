@@ -23,7 +23,7 @@
 #include "dogen.generation/types/formatters/indent_filter.hpp"
 #include "dogen.generation/types/formatters/comment_formatter.hpp"
 #include "dogen.generation/types/formatters/boilerplate_properties.hpp"
-#include "dogen.coding/types/helpers/name_flattener.hpp"
+#include "dogen.assets/types/helpers/name_flattener.hpp"
 #include "dogen.generation.csharp/io/formattables/helper_properties_io.hpp"
 #include "dogen.generation.csharp/types/formatters/formatting_error.hpp"
 #include "dogen.generation.csharp/types/formatters/assistant.hpp"
@@ -55,7 +55,7 @@ const std::string attribute_with_no_simple_name(
 namespace dogen::generation::csharp::formatters {
 
 assistant::
-assistant(const context& ctx, const coding::meta_model::element& e,
+assistant(const context& ctx, const assets::meta_model::element& e,
     const archetypes::location& al) :
     element_id_(e.name().qualified().dot()), element_(e), context_(ctx),
     artefact_properties_(obtain_artefact_properties(al.archetype())),
@@ -69,17 +69,17 @@ assistant(const context& ctx, const coding::meta_model::element& e,
 }
 
 std::string
-assistant::get_qualified_name(const coding::meta_model::name& n) const {
+assistant::get_qualified_name(const assets::meta_model::name& n) const {
     return n.qualified().dot();
 }
 
 std::string
-assistant::get_qualified_name(const coding::meta_model::name_tree& nt) const {
+assistant::get_qualified_name(const assets::meta_model::name_tree& nt) const {
     return nt.qualified().dot();
 }
 
 std::string
-assistant::make_inheritance_keyword_text(const coding::meta_model::structural::object& o) {
+assistant::make_inheritance_keyword_text(const assets::meta_model::structural::object& o) {
     if (o.is_parent())
         return abstract_keyword_text;
 
@@ -100,12 +100,12 @@ obtain_artefact_properties(const std::string& archetype) const {
 }
 
 generation::formatters::scoped_boilerplate_formatter assistant::
-make_scoped_boilerplate_formatter(const coding::meta_model::element& e) {
+make_scoped_boilerplate_formatter(const assets::meta_model::element& e) {
     generation::formatters::boilerplate_properties bp;
 
     const auto& art_props(artefact_properties_);
     bp.dependencies(art_props.using_dependencies());
-    bp.technical_space(coding::meta_model::technical_space::cpp);
+    bp.technical_space(assets::meta_model::technical_space::cpp);
     bp.preamble(e.decoration() ? e.decoration()->preamble() : empty);
     bp.postamble(e.decoration() ? e.decoration()->postamble() : empty);
     bp.generate_preamble(true);
@@ -118,18 +118,18 @@ make_scoped_boilerplate_formatter(const coding::meta_model::element& e) {
 generation::formatters::scoped_namespace_formatter
 assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
     return generation::formatters::scoped_namespace_formatter(
-        stream(), coding::meta_model::technical_space::csharp, ns,
+        stream(), assets::meta_model::technical_space::csharp, ns,
         true/*add_new_line*/);
 }
 
 std::list<std::string>
-assistant::make_namespaces(const coding::meta_model::name& n) const {
-    coding::helpers::name_flattener nf;
+assistant::make_namespaces(const assets::meta_model::name& n) const {
+    assets::helpers::name_flattener nf;
     return nf.flatten(n);
 }
 
 std::string
-assistant::reference_equals(const coding::meta_model::attribute& attr) const {
+assistant::reference_equals(const assets::meta_model::attribute& attr) const {
     const auto& c(context_.model().aspect_properties());
     const auto n(attr.parsed_type().current());
     const auto i(c.find(n.qualified().dot()));
@@ -181,7 +181,7 @@ std::string assistant::comment_inline(const std::string& c) const {
 }
 
 std::string assistant::
-make_argument_name(const coding::meta_model::attribute& attr) const {
+make_argument_name(const assets::meta_model::attribute& attr) const {
     auto r(attr.name().simple());
     if (r.empty()) {
         BOOST_LOG_SEV(lg, error) << attribute_with_no_simple_name;
@@ -232,7 +232,7 @@ assistant::get_helpers(const formattables::helper_properties& hp) const {
 }
 
 boost::optional<formattables::assistant_properties> assistant::
-get_assistant_properties(const coding::meta_model::attribute& attr) const {
+get_assistant_properties(const assets::meta_model::attribute& attr) const {
 
     const auto& ap(context_.model().assistant_properties());
     const auto i(ap.find(attr.parsed_type().current().qualified().dot()));

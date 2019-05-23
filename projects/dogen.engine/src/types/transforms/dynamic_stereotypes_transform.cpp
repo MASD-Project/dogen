@@ -21,9 +21,9 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.coding/types/transforms/context.hpp"
-#include "dogen.coding/io/meta_model/model_set_io.hpp"
-#include "dogen.coding/types/meta_model/elements_traversal.hpp"
+#include "dogen.assets/types/transforms/context.hpp"
+#include "dogen.assets/io/meta_model/model_set_io.hpp"
+#include "dogen.assets/types/meta_model/elements_traversal.hpp"
 #include "dogen.engine/types/transforms/dynamic_stereotypes_transform.hpp"
 
 namespace {
@@ -59,52 +59,52 @@ private:
         return r;
     }
 
-    void update(coding::meta_model::element& e) {
+    void update(assets::meta_model::element& e) {
         e.dynamic_stereotypes(extract(e));
     }
 
 public:
-    void operator()(coding::meta_model::element&) { }
-    void operator()(coding::meta_model::structural::module& m) { update(m); }
-    void operator()(coding::meta_model::structural::object_template &ot) {
+    void operator()(assets::meta_model::element&) { }
+    void operator()(assets::meta_model::structural::module& m) { update(m); }
+    void operator()(assets::meta_model::structural::object_template &ot) {
         update(ot);
         for (auto& attr : ot.local_attributes())
             attr.dynamic_stereotypes(extract(attr));
     }
-    void operator()(coding::meta_model::structural::builtin& b) {  update(b); }
-    void operator()(coding::meta_model::structural::enumeration& e) {
+    void operator()(assets::meta_model::structural::builtin& b) {  update(b); }
+    void operator()(assets::meta_model::structural::enumeration& e) {
         update(e);
         for (auto& enm : e.enumerators())
             enm.dynamic_stereotypes(extract(enm));
     }
-    void operator()(coding::meta_model::structural::primitive& p) { update(p); }
-    void operator()(coding::meta_model::structural::object& o) {
+    void operator()(assets::meta_model::structural::primitive& p) { update(p); }
+    void operator()(assets::meta_model::structural::object& o) {
         update(o);
         for (auto& attr : o.local_attributes())
             attr.dynamic_stereotypes(extract(attr));
     }
-    void operator()(coding::meta_model::structural::exception& e) { update(e); }
-    void operator()(coding::meta_model::structural::visitor& v) { update(v); }
-    void operator()(coding::meta_model::decoration::licence& l) { update(l); }
-    void operator()(coding::meta_model::decoration::modeline& ml) {
+    void operator()(assets::meta_model::structural::exception& e) { update(e); }
+    void operator()(assets::meta_model::structural::visitor& v) { update(v); }
+    void operator()(assets::meta_model::decoration::licence& l) { update(l); }
+    void operator()(assets::meta_model::decoration::modeline& ml) {
         update(ml);
     }
-    void operator()(coding::meta_model::decoration::modeline_group& mg) {
+    void operator()(assets::meta_model::decoration::modeline_group& mg) {
         update(mg);
     }
-    void operator()(coding::meta_model::decoration::generation_marker& gm) { update(gm); }
+    void operator()(assets::meta_model::decoration::generation_marker& gm) { update(gm); }
 };
 
 }
 
 void
-dynamic_stereotypes_transform::apply(const coding::transforms::context& ctx,
-    coding::meta_model::model_set& ms) {
+dynamic_stereotypes_transform::apply(const assets::transforms::context& ctx,
+    assets::meta_model::model_set& ms) {
     tracing::scoped_transform_tracer stp(lg, "dynamic stereotypes transform",
         transform_id, *ctx.tracer(), ms);
 
     updater u;
-    using coding::meta_model::elements_traversal;
+    using assets::meta_model::elements_traversal;
     elements_traversal(ms.target(), u);
     for (auto& m : ms.references())
         elements_traversal(m, u);

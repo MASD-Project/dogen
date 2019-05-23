@@ -21,13 +21,13 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.injection/types/transforms/model_set_production_chain.hpp"
-#include "dogen.coding/types/transforms/model_production_chain.hpp"
+#include "dogen.assets/types/transforms/model_production_chain.hpp"
 #include "dogen.generation/types/transforms/model_generation_chain.hpp"
 #include "dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 #include "dogen.extraction/io/meta_model/model_io.hpp"
 #include "dogen.extraction/types/transforms/model_production_chain.hpp"
-#include "dogen.engine/types/transforms/injection_model_set_to_coding_model_set_chain.hpp"
-#include "dogen.engine/types/transforms/coding_model_to_generation_model_transform.hpp"
+#include "dogen.engine/types/transforms/injection_model_set_to_assets_model_set_chain.hpp"
+#include "dogen.engine/types/transforms/assets_model_to_generation_model_transform.hpp"
 #include "dogen.engine/types/transforms/context.hpp"
 #include "dogen.engine/types/transforms/extraction_model_production_chain.hpp"
 
@@ -62,21 +62,21 @@ extraction_model_production_chain::apply(const context& ctx,
             ctx.injection_context(), target));
 
     /*
-     * Convert the injection model set into a coding model set.
+     * Convert the injection model set into a assets model set.
      */
-    const auto cmset(injection_model_set_to_coding_model_set_chain::
+    const auto cmset(injection_model_set_to_assets_model_set_chain::
         apply(ctx, ims));
 
     /*
-     * Run all the coding transforms against the model set.
+     * Run all the assets transforms against the model set.
      */
-    const auto cms(coding::transforms::model_production_chain::
-        apply(ctx.coding_context(), cmset));
+    const auto cms(assets::transforms::model_production_chain::
+        apply(ctx.assets_context(), cmset));
 
     /*
      * Obtain the generation model set.
      */
-    auto gms(transforms::coding_model_to_generation_model_transform::
+    auto gms(transforms::assets_model_to_generation_model_transform::
         apply(ctx.generation_context(), cms));
 
     /*

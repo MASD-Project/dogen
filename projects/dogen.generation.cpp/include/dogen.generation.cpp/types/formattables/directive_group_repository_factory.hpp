@@ -87,7 +87,7 @@ private:
         directive_group_repository& dgrp) const;
 
     void compute_directives(const feature_group& fg,
-        const coding::meta_model::element& e,
+        const assets::meta_model::element& e,
         const artefact_formatters_type& formatters,
         const locator& l, directive_group_repository& dgrp) const;
 

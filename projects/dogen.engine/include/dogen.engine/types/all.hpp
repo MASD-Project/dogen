@@ -46,9 +46,9 @@
 #include "dogen.engine/types/transforms/dynamic_stereotypes_transform.hpp"
 #include "dogen.engine/types/transforms/extraction_model_production_chain.hpp"
 #include "dogen.engine/types/transforms/profile_template_adaption_transform.hpp"
-#include "dogen.engine/types/transforms/injection_model_to_coding_model_transform.hpp"
-#include "dogen.engine/types/transforms/coding_model_to_generation_model_transform.hpp"
-#include "dogen.engine/types/transforms/injection_model_set_to_coding_model_set_chain.hpp"
-#include "dogen.engine/types/transforms/coding_model_set_to_configuration_model_set_transform.hpp"
+#include "dogen.engine/types/transforms/injection_model_to_assets_model_transform.hpp"
+#include "dogen.engine/types/transforms/assets_model_to_generation_model_transform.hpp"
+#include "dogen.engine/types/transforms/injection_model_set_to_assets_model_set_chain.hpp"
+#include "dogen.engine/types/transforms/assets_model_set_to_configuration_model_set_transform.hpp"
 
 #endif

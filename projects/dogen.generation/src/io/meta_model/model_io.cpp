@@ -21,21 +21,21 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.coding/io/meta_model/name_io.hpp"
-#include "dogen.coding/io/meta_model/element_io.hpp"
+#include "dogen.assets/io/meta_model/name_io.hpp"
+#include "dogen.assets/io/meta_model/element_io.hpp"
 #include "dogen.generation/io/meta_model/model_io.hpp"
-#include "dogen.coding/io/meta_model/origin_types_io.hpp"
-#include "dogen.coding/io/meta_model/technical_space_io.hpp"
-#include "dogen.coding/io/meta_model/structural/module_io.hpp"
-#include "dogen.coding/io/meta_model/orm/model_properties_io.hpp"
-#include "dogen.coding/io/meta_model/extraction_properties_io.hpp"
+#include "dogen.assets/io/meta_model/origin_types_io.hpp"
+#include "dogen.assets/io/meta_model/technical_space_io.hpp"
+#include "dogen.assets/io/meta_model/structural/module_io.hpp"
+#include "dogen.assets/io/meta_model/orm/model_properties_io.hpp"
+#include "dogen.assets/io/meta_model/extraction_properties_io.hpp"
 #include "dogen.generation/io/meta_model/element_archetype_io.hpp"
 #include "dogen.generation/io/meta_model/locator_properties_io.hpp"
 #include "dogen.generation/io/meta_model/global_archetype_location_properties_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::coding::meta_model::name, dogen::coding::meta_model::origin_types>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::assets::meta_model::name, dogen::assets::meta_model::origin_types>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -53,7 +53,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::coding::meta_model::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::assets::meta_model::name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -67,7 +67,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen:
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::coding::meta_model::element>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::assets::meta_model::element>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -83,7 +83,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::shared_ptr<dogen::coding::meta_model::element> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::shared_ptr<dogen::assets::meta_model::element> >& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -97,7 +97,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::shared
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::coding::meta_model::structural::module>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::assets::meta_model::structural::module>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -135,7 +135,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::coding::meta_model::technical_space>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen::assets::meta_model::technical_space>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -149,7 +149,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<dogen:
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::coding::meta_model::orm::model_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::assets::meta_model::orm::model_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)

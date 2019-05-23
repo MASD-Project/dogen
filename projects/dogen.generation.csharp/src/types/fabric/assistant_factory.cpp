@@ -19,7 +19,7 @@
  *
  */
 #include <boost/make_shared.hpp>
-#include "dogen.coding/types/helpers/name_factory.hpp"
+#include "dogen.assets/types/helpers/name_factory.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.generation.csharp/types/fabric/assistant.hpp"
 #include "dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
@@ -33,12 +33,12 @@ const std::string assistant_name("Assistant");
 
 namespace dogen::generation::csharp::fabric {
 
-using coding::meta_model::origin_types;
-using coding::meta_model::technical_space;
+using assets::meta_model::origin_types;
+using assets::meta_model::technical_space;
 
-boost::shared_ptr<coding::meta_model::element>
+boost::shared_ptr<assets::meta_model::element>
 assistant_factory::make(const generation::meta_model::model& m) const {
-    coding::helpers::name_factory nf;
+    assets::helpers::name_factory nf;
     const auto n(nf.build_element_in_model(m.name(), assistant_name));
 
     auto r(boost::make_shared<assistant>());

@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.coding/test_data/meta_model/element_td.hpp"
+#include "dogen.assets/test_data/meta_model/element_td.hpp"
 #include "dogen.generation.csharp/test_data/formattables/formattable_td.hpp"
 #include "dogen.generation.csharp/test_data/formattables/element_properties_td.hpp"
 
@@ -29,15 +29,15 @@ create_dogen_generation_csharp_formattables_element_properties(const unsigned in
     return dogen::generation::csharp::formattables::element_properties_generator::create(position);
 }
 
-dogen::coding::meta_model::element*
-create_dogen_coding_meta_model_element_ptr(const unsigned int position) {
-    return dogen::coding::meta_model::element_generator::create_ptr(position);
+dogen::assets::meta_model::element*
+create_dogen_assets_meta_model_element_ptr(const unsigned int position) {
+    return dogen::assets::meta_model::element_generator::create_ptr(position);
 }
 
-boost::shared_ptr<dogen::coding::meta_model::element>
-create_boost_shared_ptr_dogen_coding_meta_model_element(unsigned int position) {
-    boost::shared_ptr<dogen::coding::meta_model::element> r(
-        create_dogen_coding_meta_model_element_ptr(position));
+boost::shared_ptr<dogen::assets::meta_model::element>
+create_boost_shared_ptr_dogen_assets_meta_model_element(unsigned int position) {
+    boost::shared_ptr<dogen::assets::meta_model::element> r(
+        create_dogen_assets_meta_model_element_ptr(position));
     return r;
 }
 
@@ -50,7 +50,7 @@ formattable_generator::formattable_generator() : position_(0) { }
 void formattable_generator::
 populate(const unsigned int position, result_type& v) {
     v.element_properties(create_dogen_generation_csharp_formattables_element_properties(position + 0));
-    v.element(create_boost_shared_ptr_dogen_coding_meta_model_element(position + 1));
+    v.element(create_boost_shared_ptr_dogen_assets_meta_model_element(position + 1));
 }
 
 formattable_generator::result_type

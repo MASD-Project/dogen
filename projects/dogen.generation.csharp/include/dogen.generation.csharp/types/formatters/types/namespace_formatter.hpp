@@ -37,19 +37,19 @@ public:
 public:
     std::string id() const override;
     archetypes::location archetype_location() const override;
-    const coding::meta_model::name& meta_name() const override;
+    const assets::meta_model::name& meta_name() const override;
     std::string family() const override;
 
 public:
     std::list<std::string> inclusion_dependencies(
-        const coding::meta_model::element& e) const override;
+        const assets::meta_model::element& e) const override;
 
     boost::filesystem::path full_path(
-        const formattables::locator& l, const coding::meta_model::name& n) const override;
+        const formattables::locator& l, const assets::meta_model::name& n) const override;
 
 public:
     extraction::meta_model::artefact format(const context& ctx,
-        const coding::meta_model::element& e) const override;
+        const assets::meta_model::element& e) const override;
 };
 
 }

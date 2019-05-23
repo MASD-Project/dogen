@@ -26,22 +26,22 @@
 #endif
 
 #include <string>
-#include "dogen.coding/types/meta_model/name.hpp"
+#include "dogen.assets/types/meta_model/name.hpp"
 
 namespace dogen::generation::csharp::fabric {
 
 class meta_name_factory final {
 private:
-    static coding::meta_model::location make_location();
+    static assets::meta_model::location make_location();
 
 private:
-    static coding::meta_model::name make_name(const std::string& sn);
+    static assets::meta_model::name make_name(const std::string& sn);
 
 public:
-    static coding::meta_model::name make_assembly_info_name();
-    static coding::meta_model::name make_assistant_name();
-    static coding::meta_model::name make_visual_studio_project_name();
-    static coding::meta_model::name make_visual_studio_solution_name();
+    static assets::meta_model::name make_assembly_info_name();
+    static assets::meta_model::name make_assistant_name();
+    static assets::meta_model::name make_visual_studio_project_name();
+    static assets::meta_model::name make_visual_studio_solution_name();
 };
 
 }

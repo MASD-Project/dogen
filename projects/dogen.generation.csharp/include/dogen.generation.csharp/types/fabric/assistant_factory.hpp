@@ -27,14 +27,14 @@
 
 #include <list>
 #include <boost/shared_ptr.hpp>
-#include "dogen.coding/types/meta_model/element.hpp"
+#include "dogen.assets/types/meta_model/element.hpp"
 #include "dogen.generation/types/meta_model/model.hpp"
 
 namespace dogen::generation::csharp::fabric {
 
 class assistant_factory final {
 public:
-    boost::shared_ptr<coding::meta_model::element>
+    boost::shared_ptr<assets::meta_model::element>
     make(const generation::meta_model::model& m) const;
 };
 

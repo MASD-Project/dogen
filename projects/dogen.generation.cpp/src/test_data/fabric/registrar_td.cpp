@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.coding/test_data/meta_model/name_td.hpp"
-#include "dogen.coding/test_data/meta_model/element_td.hpp"
+#include "dogen.assets/test_data/meta_model/name_td.hpp"
+#include "dogen.assets/test_data/meta_model/element_td.hpp"
 #include "dogen.generation.cpp/test_data/fabric/registrar_td.hpp"
 
 namespace {
 
-dogen::coding::meta_model::name
-create_dogen_coding_meta_model_name(const unsigned int position) {
-    return dogen::coding::meta_model::name_generator::create(position);
+dogen::assets::meta_model::name
+create_dogen_assets_meta_model_name(const unsigned int position) {
+    return dogen::assets::meta_model::name_generator::create(position);
 }
 
-std::list<dogen::coding::meta_model::name> create_std_list_dogen_coding_meta_model_name(unsigned int position) {
-    std::list<dogen::coding::meta_model::name> r;
+std::list<dogen::assets::meta_model::name> create_std_list_dogen_assets_meta_model_name(unsigned int position) {
+    std::list<dogen::assets::meta_model::name> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_coding_meta_model_name(position + i));
+        r.push_back(create_dogen_assets_meta_model_name(position + i));
     }
     return r;
 }
@@ -45,10 +45,10 @@ registrar_generator::registrar_generator() : position_(0) { }
 
 void registrar_generator::
 populate(const unsigned int position, result_type& v) {
-    dogen::coding::meta_model::element_generator::populate(position, v);
-    v.leaves(create_std_list_dogen_coding_meta_model_name(position + 0));
-    v.model_dependencies(create_std_list_dogen_coding_meta_model_name(position + 1));
-    v.registrar_dependencies(create_std_list_dogen_coding_meta_model_name(position + 2));
+    dogen::assets::meta_model::element_generator::populate(position, v);
+    v.leaves(create_std_list_dogen_assets_meta_model_name(position + 0));
+    v.model_dependencies(create_std_list_dogen_assets_meta_model_name(position + 1));
+    v.registrar_dependencies(create_std_list_dogen_assets_meta_model_name(position + 2));
 }
 
 registrar_generator::result_type

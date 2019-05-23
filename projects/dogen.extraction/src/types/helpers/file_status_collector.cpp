@@ -37,7 +37,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("coding.helpers.file_status_collector"));
+auto lg(logger_factory("extraction.helpers.file_status_collector"));
 
 }
 

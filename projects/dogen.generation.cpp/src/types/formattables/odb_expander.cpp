@@ -24,8 +24,8 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
-#include "dogen.coding/types/meta_model/structural/object.hpp"
-#include "dogen.coding/types/meta_model/structural/primitive.hpp"
+#include "dogen.assets/types/meta_model/structural/object.hpp"
+#include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include "dogen.generation.cpp/types/formattables/adapter.hpp"
 #include "dogen.generation.cpp/types/fabric/common_odb_options.hpp"
 #include "dogen.generation.cpp/types/fabric/object_odb_options.hpp"
@@ -67,8 +67,8 @@ public:
     using element_visitor::visit;
     void visit(fabric::common_odb_options& coo);
     void visit(fabric::object_odb_options& ooo);
-    void visit(coding::meta_model::structural::object& o);
-    void visit(coding::meta_model::structural::primitive& p);
+    void visit(assets::meta_model::structural::object& o);
+    void visit(assets::meta_model::structural::primitive& p);
 
 public:
     const boost::optional<odb_properties>& result() const;
@@ -128,7 +128,7 @@ void updator::visit(fabric::object_odb_options& ooo) {
     ooo.header_guard_prefix(header_guard_factory::make(odb_rp.parent_path()));
 }
 
-void updator::visit(coding::meta_model::structural::object& o) {
+void updator::visit(assets::meta_model::structural::object& o) {
     odb_properties op;
 
     auto top_level_pragmas(make_odb_pragmas(*o.configuration()));
@@ -144,7 +144,7 @@ void updator::visit(coding::meta_model::structural::object& o) {
         if (cfg.generate_mapping() && !op.is_value() && !cfg.has_primary_key())
             top_level_pragmas.push_back(no_id_pragma);
 
-        using coding::meta_model::orm::letter_case;
+        using assets::meta_model::orm::letter_case;
         const auto& sn(cfg.schema_name());
         if (!sn.empty() && (op.is_value() || cfg.generate_mapping())) {
             std::ostringstream s;
@@ -219,7 +219,7 @@ void updator::visit(coding::meta_model::structural::object& o) {
         result_ = op;
 }
 
-void updator::visit(coding::meta_model::structural::primitive& p) {
+void updator::visit(assets::meta_model::structural::primitive& p) {
     odb_properties op;
     op.is_value(true);
     op.top_level_odb_pragmas(make_odb_pragmas(*p.configuration()));
@@ -232,7 +232,7 @@ void updator::visit(coding::meta_model::structural::primitive& p) {
             std::ostringstream s;
             s << "schema(\"";
 
-            using coding::meta_model::orm::letter_case;
+            using assets::meta_model::orm::letter_case;
             if (!cfg.letter_case())
                 s << cfg.schema_name();
             else if (*cfg.letter_case() == letter_case::upper_case)
@@ -306,7 +306,7 @@ void odb_expander::expand(
          * for referenced models.
          */
         auto segment(formattable.master_segment());
-        if (segment->origin_type() != coding::meta_model::origin_types::target)
+        if (segment->origin_type() != assets::meta_model::origin_types::target)
             continue;
 
         for (const auto& ptr : formattable.all_segments()) {

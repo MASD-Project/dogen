@@ -10,7 +10,7 @@
     "masd.injection.reference": "dogen.variability",
     "masd.injection.reference": "dogen.tracing",
     "masd.injection.reference": "dogen.injection",
-    "masd.injection.reference": "dogen.coding",
+    "masd.injection.reference": "dogen.assets",
     "masd.injection.reference": "dogen.generation",
     "masd.injection.reference": "dogen.extraction",
     "masd.injection.reference": "masd",
@@ -87,8 +87,8 @@
           "type": "injection::transforms::context"
         },
         {
-          "name": "coding_context",
-          "type": "coding::transforms::context"
+          "name": "assets_context",
+          "type": "assets::transforms::context"
         },
         {
           "name": "generation_context",
@@ -116,14 +116,14 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::injection_model_to_coding_model_transform",
+      "name": "transforms::injection_model_to_assets_model_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::injection_model_set_to_coding_model_set_chain",
+      "name": "transforms::injection_model_set_to_assets_model_set_chain",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -175,7 +175,7 @@
       "attributes": [
         {
           "name": "static_stereotypes",
-          "type": "std::list<coding::meta_model::static_stereotypes>"
+          "type": "std::list<assets::meta_model::static_stereotypes>"
         },
         {
           "name": "dynamic_stereotypes",
@@ -191,7 +191,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::coding_model_to_generation_model_transform",
+      "name": "transforms::assets_model_to_generation_model_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -226,7 +226,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::coding_model_set_to_configuration_model_set_transform",
+      "name": "transforms::assets_model_set_to_configuration_model_set_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

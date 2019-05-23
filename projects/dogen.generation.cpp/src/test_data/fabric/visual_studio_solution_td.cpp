@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen.coding/test_data/meta_model/element_td.hpp"
+#include "dogen.assets/test_data/meta_model/element_td.hpp"
 #include "dogen.generation.cpp/test_data/fabric/visual_studio_solution_td.hpp"
 
 namespace {
@@ -38,7 +38,7 @@ visual_studio_solution_generator::visual_studio_solution_generator() : position_
 
 void visual_studio_solution_generator::
 populate(const unsigned int position, result_type& v) {
-    dogen::coding::meta_model::element_generator::populate(position, v);
+    dogen::assets::meta_model::element_generator::populate(position, v);
     v.project_guid(create_std_string(position + 0));
     v.project_solution_guid(create_std_string(position + 1));
     v.version(create_std_string(position + 2));

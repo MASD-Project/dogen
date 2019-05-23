@@ -21,7 +21,7 @@
 #include <boost/make_shared.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.coding/types/helpers/name_factory.hpp"
+#include "dogen.assets/types/helpers/name_factory.hpp"
 #include "dogen.generation.csharp/types/fabric/assembly_info.hpp"
 #include "dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
 #include "dogen.generation.csharp/types/fabric/assembly_info_factory.hpp"
@@ -38,14 +38,14 @@ const std::string module_name("Properties");
 
 namespace dogen::generation::csharp::fabric {
 
-using coding::meta_model::origin_types;
-using coding::meta_model::technical_space;
+using assets::meta_model::origin_types;
+using assets::meta_model::technical_space;
 
-boost::shared_ptr<coding::meta_model::element> assembly_info_factory::
+boost::shared_ptr<assets::meta_model::element> assembly_info_factory::
 make(const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Assembly Info.";
 
-    coding::helpers::name_factory nf;
+    assets::helpers::name_factory nf;
     auto n(nf.build_element_in_model(m.name(), simple_name));
     n.location().internal_modules().push_back(module_name);
 

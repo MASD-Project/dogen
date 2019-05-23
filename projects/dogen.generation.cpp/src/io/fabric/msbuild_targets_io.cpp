@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen.coding/io/meta_model/element_io.hpp"
+#include "dogen.assets/io/meta_model/element_io.hpp"
 #include "dogen.generation.cpp/io/fabric/odb_targets_io.hpp"
 #include "dogen.generation.cpp/io/fabric/msbuild_targets_io.hpp"
 

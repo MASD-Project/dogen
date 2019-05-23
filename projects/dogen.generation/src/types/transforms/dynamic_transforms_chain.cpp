@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.coding/types/meta_model/structural/module.hpp"
+#include "dogen.assets/types/meta_model/structural/module.hpp"
 #include "dogen.generation/io/meta_model/model_io.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
 #include "dogen.generation/types/transforms/dynamic_transforms_chain.hpp"

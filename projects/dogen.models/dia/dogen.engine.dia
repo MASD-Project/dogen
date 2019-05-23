@@ -105,7 +105,7 @@
 #DOGEN masd.injection.reference=dogen.variability
 #DOGEN masd.injection.reference=dogen.tracing
 #DOGEN masd.injection.reference=dogen.injection
-#DOGEN masd.injection.reference=dogen.coding
+#DOGEN masd.injection.reference=dogen.assets
 #DOGEN masd.injection.reference=dogen.generation
 #DOGEN masd.injection.reference=dogen.extraction
 #DOGEN masd.injection.reference=masd
@@ -1019,10 +1019,10 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#coding_context#</dia:string>
+            <dia:string>#assets_context#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#coding::transforms::context#</dia:string>
+            <dia:string>#assets::transforms::context#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -1536,7 +1536,7 @@
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#injection_model_to_coding_model_transform#</dia:string>
+        <dia:string>#injection_model_to_assets_model_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -1632,7 +1632,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#coding::meta_model::model#</dia:string>
+            <dia:string>#assets::meta_model::model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1658,7 +1658,7 @@
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::transforms::context#</dia:string>
+                <dia:string>#assets::transforms::context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -1713,7 +1713,7 @@
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#injection_model_set_to_coding_model_set_chain#</dia:string>
+        <dia:string>#injection_model_set_to_assets_model_set_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -1809,7 +1809,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#coding::meta_model::model_set#</dia:string>
+            <dia:string>#assets::meta_model::model_set#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1835,7 +1835,7 @@
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::transforms::context#</dia:string>
+                <dia:string>#assets::transforms::context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -2546,7 +2546,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#coding::meta_model::static_stereotypes#</dia:string>
+            <dia:string>#assets::meta_model::static_stereotypes#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2668,7 +2668,7 @@
                 <dia:string>#st#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::static_stereotypes#</dia:string>
+                <dia:string>#assets::meta_model::static_stereotypes#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -2690,7 +2690,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;coding::meta_model::static_stereotypes&gt;#</dia:string>
+            <dia:string>#std::list&lt;assets::meta_model::static_stereotypes&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2716,7 +2716,7 @@
                 <dia:string>#ss#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::static_stereotypes#</dia:string>
+                <dia:string>#assets::meta_model::static_stereotypes#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -2738,7 +2738,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;coding::meta_model::static_stereotypes&gt;#</dia:string>
+            <dia:string>#std::list&lt;assets::meta_model::static_stereotypes&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2764,7 +2764,7 @@
                 <dia:string>#ss#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::static_stereotypes#</dia:string>
+                <dia:string>#assets::meta_model::static_stereotypes#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -2895,7 +2895,7 @@ user defined stereotypes.#</dia:string>
             <dia:string>#static_stereotypes#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;coding::meta_model::static_stereotypes&gt;#</dia:string>
+            <dia:string>#std::list&lt;assets::meta_model::static_stereotypes&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -3214,7 +3214,7 @@ user defined stereotypes.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#coding_model_to_generation_model_transform#</dia:string>
+        <dia:string>#assets_model_to_generation_model_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -3353,7 +3353,7 @@ user defined stereotypes.#</dia:string>
                 <dia:string>#cm#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::model#</dia:string>
+                <dia:string>#assets::meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -4573,7 +4573,7 @@ user defined stereotypes.#</dia:string>
                 <dia:string>#ms#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::model_set#</dia:string>
+                <dia:string>#assets::meta_model::model_set#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -4784,7 +4784,7 @@ user defined stereotypes.#</dia:string>
                 <dia:string>#ms#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::model_set#</dia:string>
+                <dia:string>#assets::meta_model::model_set#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -4966,7 +4966,7 @@ user defined stereotypes.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#coding_model_set_to_configuration_model_set_transform#</dia:string>
+        <dia:string>#assets_model_set_to_configuration_model_set_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -5105,7 +5105,7 @@ user defined stereotypes.#</dia:string>
                 <dia:string>#ms#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::model_set#</dia:string>
+                <dia:string>#assets::meta_model::model_set#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -5158,7 +5158,7 @@ user defined stereotypes.#</dia:string>
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>#Adapts injection types into
-coding types.#</dia:string>
+assets types.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -5370,7 +5370,7 @@ coding types.#</dia:string>
                 <dia:string>#ms#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::model_set#</dia:string>
+                <dia:string>#assets::meta_model::model_set#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -5856,7 +5856,7 @@ coding types.#</dia:string>
                 <dia:string>#ms#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::transforms::context#</dia:string>
+                <dia:string>#assets::transforms::context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -5873,7 +5873,7 @@ coding types.#</dia:string>
                 <dia:string>#ms#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#coding::meta_model::model_set#</dia:string>
+                <dia:string>#assets::meta_model::model_set#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

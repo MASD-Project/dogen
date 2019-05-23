@@ -23,9 +23,9 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
-#include "dogen.coding/types/meta_model/structural/module.hpp"
-#include "dogen.coding/types/helpers/name_factory.hpp"
-#include "dogen.coding/types/helpers/name_flattener.hpp"
+#include "dogen.assets/types/meta_model/structural/module.hpp"
+#include "dogen.assets/types/helpers/name_factory.hpp"
+#include "dogen.assets/types/helpers/name_flattener.hpp"
 #include "dogen.generation.csharp/types/fabric/traits.hpp"
 #include "dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
 #include "dogen.generation.csharp/types/fabric/visual_studio_project.hpp"
@@ -46,8 +46,8 @@ const std::string sln_extension(".sln");
 
 namespace dogen::generation::csharp::fabric {
 
-using coding::meta_model::origin_types;
-using coding::meta_model::technical_space;
+using assets::meta_model::origin_types;
+using assets::meta_model::technical_space;
 
 visual_studio_factory::feature_group
 visual_studio_factory::make_feature_group(
@@ -92,7 +92,7 @@ make_configuration(const variability::meta_model::feature_model& fm,
 
 std::string visual_studio_factory::
 obtain_project_name(const generation::meta_model::model& m) const {
-    coding::helpers::name_flattener nfl(false/*detect_model_name*/);
+    assets::helpers::name_flattener nfl(false/*detect_model_name*/);
     const auto ns(nfl.flatten(m.name()));
 
     using boost::algorithm::join;
@@ -100,13 +100,13 @@ obtain_project_name(const generation::meta_model::model& m) const {
     return r;
 }
 
-boost::shared_ptr<coding::meta_model::element> visual_studio_factory::
+boost::shared_ptr<assets::meta_model::element> visual_studio_factory::
 make_solution(const visual_studio_configuration cfg,
     const std::string& project_name,
     const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Visual Studio Solution.";
 
-    coding::helpers::name_factory nf;
+    assets::helpers::name_factory nf;
     const auto sn(project_name + sln_extension);
     const auto n(nf.build_element_in_model(m.name(), sn));
 
@@ -128,13 +128,13 @@ make_solution(const visual_studio_configuration cfg,
     return r;
 }
 
-boost::shared_ptr<coding::meta_model::element> visual_studio_factory::
+boost::shared_ptr<assets::meta_model::element> visual_studio_factory::
 make_project(const visual_studio_configuration cfg,
     const std::string& project_name,
     const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Visual Studio Project.";
 
-    coding::helpers::name_factory nf;
+    assets::helpers::name_factory nf;
     const auto sn(project_name + proj_extension);
     const auto n(nf.build_element_in_model(m.name(), sn));
 
@@ -155,7 +155,7 @@ make_project(const visual_studio_configuration cfg,
     return r;
 }
 
-std::list<boost::shared_ptr<coding::meta_model::element>>
+std::list<boost::shared_ptr<assets::meta_model::element>>
 visual_studio_factory::make(const variability::meta_model::feature_model& fm,
     const generation::meta_model::model& m) const {
 
@@ -163,7 +163,7 @@ visual_studio_factory::make(const variability::meta_model::feature_model& fm,
     const auto rcfg(*m.root_module()->configuration());
     const auto cfg(make_configuration(fm, rcfg));
 
-    std::list<boost::shared_ptr<coding::meta_model::element>> r;
+    std::list<boost::shared_ptr<assets::meta_model::element>> r;
     r.push_back(make_solution(cfg, pn, m));
     r.push_back(make_project(cfg, pn, m));
 

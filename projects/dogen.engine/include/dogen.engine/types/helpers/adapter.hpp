@@ -32,34 +32,34 @@
 #include "dogen.variability/types/meta_model/potential_binding.hpp"
 #include "dogen.injection/types/meta_model/attribute.hpp"
 #include "dogen.injection/types/meta_model/element.hpp"
-#include "dogen.coding/types/meta_model/location.hpp"
-#include "dogen.coding/types/meta_model/element.hpp"
-#include "dogen.coding/types/meta_model/structural/enumerator.hpp"
-#include "dogen.coding/types/meta_model/attribute.hpp"
-#include "dogen.coding/types/meta_model/structural/enumeration.hpp"
-#include "dogen.coding/types/meta_model/structural/primitive.hpp"
-#include "dogen.coding/types/meta_model/structural/exception.hpp"
-#include "dogen.coding/types/meta_model/element.hpp"
-#include "dogen.coding/types/meta_model/structural/object.hpp"
-#include "dogen.coding/types/meta_model/structural/module.hpp"
-#include "dogen.coding/types/meta_model/structural/builtin.hpp"
-#include "dogen.coding/types/meta_model/structural/object_template.hpp"
-#include "dogen.coding/types/meta_model/decoration/licence.hpp"
-#include "dogen.coding/types/meta_model/decoration/modeline.hpp"
-#include "dogen.coding/types/meta_model/decoration/modeline_group.hpp"
-#include "dogen.coding/types/meta_model/decoration/generation_marker.hpp"
-#include "dogen.coding/types/meta_model/variability/profile_template.hpp"
-#include "dogen.coding/types/meta_model/variability/feature_bundle.hpp"
-#include "dogen.coding/types/meta_model/variability/feature_template_initializer.hpp"
-#include "dogen.coding/types/meta_model/mapping/fixed_mappable.hpp"
-#include "dogen.coding/types/meta_model/mapping/extensible_mappable.hpp"
-#include "dogen.coding/types/meta_model/templating/logic_less_template.hpp"
+#include "dogen.assets/types/meta_model/location.hpp"
+#include "dogen.assets/types/meta_model/element.hpp"
+#include "dogen.assets/types/meta_model/structural/enumerator.hpp"
+#include "dogen.assets/types/meta_model/attribute.hpp"
+#include "dogen.assets/types/meta_model/structural/enumeration.hpp"
+#include "dogen.assets/types/meta_model/structural/primitive.hpp"
+#include "dogen.assets/types/meta_model/structural/exception.hpp"
+#include "dogen.assets/types/meta_model/element.hpp"
+#include "dogen.assets/types/meta_model/structural/object.hpp"
+#include "dogen.assets/types/meta_model/structural/module.hpp"
+#include "dogen.assets/types/meta_model/structural/builtin.hpp"
+#include "dogen.assets/types/meta_model/structural/object_template.hpp"
+#include "dogen.assets/types/meta_model/decoration/licence.hpp"
+#include "dogen.assets/types/meta_model/decoration/modeline.hpp"
+#include "dogen.assets/types/meta_model/decoration/modeline_group.hpp"
+#include "dogen.assets/types/meta_model/decoration/generation_marker.hpp"
+#include "dogen.assets/types/meta_model/variability/profile_template.hpp"
+#include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
+#include "dogen.assets/types/meta_model/variability/feature_template_initializer.hpp"
+#include "dogen.assets/types/meta_model/mapping/fixed_mappable.hpp"
+#include "dogen.assets/types/meta_model/mapping/extensible_mappable.hpp"
+#include "dogen.assets/types/meta_model/templating/logic_less_template.hpp"
 #include "dogen.engine/types/helpers/stereotypes_conversion_result.hpp"
 
 namespace dogen::engine::helpers {
 
 /**
- * @brief Adapts types from the injection model into the coding model.
+ * @brief Adapts types from the injection model into the assets model.
  */
 class adapter final {
 private:
@@ -82,7 +82,7 @@ private:
 
 private:
     /**
-     * @brief Creates a coding name using the element name provided, and
+     * @brief Creates a assets name using the element name provided, and
      * places it in the location provided.
      *
      * @param l location for the name.
@@ -91,7 +91,7 @@ private:
      *
      * @pre n must not be empty.
      */
-    coding::meta_model::name to_name(const coding::meta_model::location& l,
+    assets::meta_model::name to_name(const assets::meta_model::location& l,
         const std::string& n) const;
 
     /**
@@ -100,26 +100,26 @@ private:
      * @pre name and value of the injector attribute must not be empty.
      * @pre value of the injector attribute must be empty.
      */
-    coding::meta_model::decoration::modeline_field
+    assets::meta_model::decoration::modeline_field
     to_modeline_field(const injection::meta_model::attribute& ia) const;
 
     /**
-     * @brief Converts an injection attribute to an coding attribute.
+     * @brief Converts an injection attribute to an assets attribute.
      *
      * @pre name of the injector attribute must not be empty.
      */
-    coding::meta_model::attribute
-    to_attribute(const coding::meta_model::name& owner,
+    assets::meta_model::attribute
+    to_attribute(const assets::meta_model::name& owner,
         const injection::meta_model::attribute& ia) const;
 
     /**
-     * @brief Converts an injector attribute to an coding enumerator.
+     * @brief Converts an injector attribute to an assets enumerator.
      *
      * @pre name of the injector attribute must not be empty.
      * @pre type and value of the injector attribute must be empty.
      */
-    coding::meta_model::structural::enumerator
-    to_enumerator(const coding::meta_model::name& owner,
+    assets::meta_model::structural::enumerator
+    to_enumerator(const assets::meta_model::name& owner,
         const injection::meta_model::attribute& ia) const;
 
 private:
@@ -127,108 +127,108 @@ private:
      * @brief Populates the meta-model element attributes using the
      * injection element.
      */
-    void populate_element(const coding::meta_model::location& l,
+    void populate_element(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie,
-        coding::meta_model::element& e) const;
+        assets::meta_model::element& e) const;
 
 public:
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::object to a coding object.
+     * masd::object to a assets object.
      */
-    boost::shared_ptr<coding::meta_model::structural::object>
-    to_object(const coding::meta_model::location& l,
+    boost::shared_ptr<assets::meta_model::structural::object>
+    to_object(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::object_template to a coding object template.
+     * masd::object_template to a assets object template.
      */
-    boost::shared_ptr<coding::meta_model::structural::object_template>
-    to_object_template(const coding::meta_model::location& l,
+    boost::shared_ptr<assets::meta_model::structural::object_template>
+    to_object_template(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::exception to a coding exception.
+     * masd::exception to a assets exception.
      */
-    boost::shared_ptr<coding::meta_model::structural::exception>
-    to_exception(const coding::meta_model::location& l,
+    boost::shared_ptr<assets::meta_model::structural::exception>
+    to_exception(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::primitive to a coding primitive.
+     * masd::primitive to a assets primitive.
      */
-    boost::shared_ptr<coding::meta_model::structural::primitive>
-    to_primitive(const coding::meta_model::location& l,
+    boost::shared_ptr<assets::meta_model::structural::primitive>
+    to_primitive(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::enumeration to a coding enumeration.
+     * masd::enumeration to a assets enumeration.
      */
-    boost::shared_ptr<coding::meta_model::structural::enumeration>
-    to_enumeration(const coding::meta_model::location& l,
+    boost::shared_ptr<assets::meta_model::structural::enumeration>
+    to_enumeration(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::module to a coding module.
+     * masd::module to a assets module.
      */
-    boost::shared_ptr<coding::meta_model::structural::module>
-    to_module(const coding::meta_model::location& l,
+    boost::shared_ptr<assets::meta_model::structural::module>
+    to_module(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::builtin to a coding builtin.
+     * masd::builtin to a assets builtin.
      */
-    boost::shared_ptr<coding::meta_model::structural::builtin>
-    to_builtin(const coding::meta_model::location& l,
+    boost::shared_ptr<assets::meta_model::structural::builtin>
+    to_builtin(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::modeline_group to a coding modeline group.
+     * masd::modeline_group to a assets modeline group.
      */
-    boost::shared_ptr<coding::meta_model::decoration::modeline_group>
-    to_modeline_group(const coding::meta_model::location& l,
+    boost::shared_ptr<assets::meta_model::decoration::modeline_group>
+    to_modeline_group(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::modeline to a coding modeline.
+     * masd::modeline to a assets modeline.
      */
-    boost::shared_ptr<coding::meta_model::decoration::modeline>
-    to_modeline(const coding::meta_model::location& l,
+    boost::shared_ptr<assets::meta_model::decoration::modeline>
+    to_modeline(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::generation_marker to a coding generation marker.
+     * masd::generation_marker to a assets generation marker.
      */
-    boost::shared_ptr<coding::meta_model::decoration::generation_marker>
-    to_generation_marker(const coding::meta_model::location& l,
+    boost::shared_ptr<assets::meta_model::decoration::generation_marker>
+    to_generation_marker(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::licence to a coding licence.
+     * masd::licence to a assets licence.
      */
-    boost::shared_ptr<coding::meta_model::decoration::licence>
-    to_licence(const coding::meta_model::location& l,
+    boost::shared_ptr<assets::meta_model::decoration::licence>
+    to_licence(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
@@ -237,31 +237,31 @@ public:
      * masd::to_variability::profile_template to a variability feature
      * template group.
      */
-    boost::shared_ptr<coding::meta_model::variability::profile_template>
-    to_variability_profile_template(const coding::meta_model::location& l,
+    boost::shared_ptr<assets::meta_model::variability::profile_template>
+    to_variability_profile_template(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::variability::feature_bundle to a coding
+     * masd::variability::feature_bundle to a assets
      * variability feature template group
      */
-    boost::shared_ptr<coding::meta_model::variability::feature_bundle>
-    to_variability_feature_bundle(const coding::meta_model::location& l,
+    boost::shared_ptr<assets::meta_model::variability::feature_bundle>
+    to_variability_feature_bundle(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::variability::feature_template_initializer to a coding
+     * masd::variability::feature_template_initializer to a assets
      * variability feature template group registrar.
      */
     boost::shared_ptr<
-        coding::meta_model::variability::feature_template_initializer
+        assets::meta_model::variability::feature_template_initializer
         >
     to_variability_feature_template_initializer(
-        const coding::meta_model::location& l,
+        const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
@@ -269,8 +269,8 @@ public:
      * @brief Converts an injection element with a stereotype of
      * masd::mapping::fixed_mappable to a fixed mappable element.
      */
-    boost::shared_ptr<coding::meta_model::mapping::fixed_mappable>
-    to_fixed_mappable(const coding::meta_model::location& l,
+    boost::shared_ptr<assets::meta_model::mapping::fixed_mappable>
+    to_fixed_mappable(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
@@ -279,8 +279,8 @@ public:
      * masd::mapping::extensible_mappable to a extensible mappable
      * element.
      */
-    boost::shared_ptr<coding::meta_model::mapping::extensible_mappable>
-    to_extensible_mappable(const coding::meta_model::location& l,
+    boost::shared_ptr<assets::meta_model::mapping::extensible_mappable>
+    to_extensible_mappable(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
@@ -288,8 +288,8 @@ public:
      * @brief Converts an injection element with a stereotype of
      * masd::templating::logic_less_template to a logic-less template.
      */
-    boost::shared_ptr<coding::meta_model::templating::logic_less_template>
-    to_logic_less_template(const coding::meta_model::location& l,
+    boost::shared_ptr<assets::meta_model::templating::logic_less_template>
+    to_logic_less_template(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 };
