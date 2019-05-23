@@ -383,7 +383,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.injection.input_technical_space"
           }
         }
       ]
@@ -398,11 +399,12 @@
         {
           "name": "masd.injection.reference",
           "type": "masd::variability::text_collection",
-          "documentation": "test\n",
+          "documentation": "Imports an external model.\n",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.injection.reference"
           }
         }
       ]
@@ -429,7 +431,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "any"
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.injection.dia.comment"
           }
         }
       ]

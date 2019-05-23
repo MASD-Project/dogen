@@ -996,7 +996,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "any"
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.generation.decoration.enabled"
           }
         },
         {
@@ -1006,7 +1007,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "any"
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.generation.decoration.copyright_notice"
           }
         },
         {
@@ -1016,7 +1018,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "any"
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.generation.decoration.licence_name"
           }
         },
         {
@@ -1026,7 +1029,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "any"
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.generation.decoration.modeline_group_name"
           }
         },
         {
@@ -1036,7 +1040,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "any"
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.generation.decoration.marker_name"
           }
         }
       ]

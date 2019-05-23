@@ -434,7 +434,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.extraction.force_write"
           }
         },
         {
@@ -445,7 +446,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.extraction.delete_extra_files"
           }
         },
         {
@@ -455,7 +457,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.extraction.ignore_files_matching_regex"
           }
         },
         {
@@ -466,7 +469,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.extraction.delete_empty_directories"
           }
         },
         {
@@ -477,7 +481,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.extraction.enable_backend_directories"
           }
         }
       ]

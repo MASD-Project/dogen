@@ -33846,7 +33846,8 @@ name.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global#</dia:string>
+#DOGEN masd.variability.binding_point=global
+#DOGEN masd.variability.qualified_name=masd.injection.external_modules#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -33875,7 +33876,8 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global#</dia:string>
+#DOGEN masd.variability.binding_point=global
+#DOGEN masd.variability.qualified_name=masd.injection.model_modules#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -34012,7 +34014,8 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=element#</dia:string>
+#DOGEN masd.variability.binding_point=element
+#DOGEN masd.variability.qualified_name=masd.type_parameters.variable_number_of_parameters#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -34037,7 +34040,8 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=element#</dia:string>
+#DOGEN masd.variability.binding_point=element
+#DOGEN masd.variability.qualified_name=masd.type_parameters.count#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -34062,7 +34066,8 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=element#</dia:string>
+#DOGEN masd.variability.binding_point=element
+#DOGEN masd.variability.qualified_name=masd.type_parameters.always_in_heap#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -34560,7 +34565,8 @@ technical space targeted.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=element#</dia:string>
+#DOGEN masd.variability.binding_point=element
+masd.variability.qualified_name=masd.enumeration.add_invalid_enumerator#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -34587,7 +34593,8 @@ technical space targeted.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=property#</dia:string>
+#DOGEN masd.variability.binding_point=property
+#DOGEN masd.variability.qualified_name=masd.enumerator.value#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -34609,13 +34616,13 @@ technical space targeted.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O250">
       <dia:attribute name="obj_pos">
-        <dia:point val="85,45"/>
+        <dia:point val="85,44.9286"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="84.95,44.95;107.495,49.45"/>
+        <dia:rectangle val="84.95,44.8786;107.495,49.3786"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="85,45"/>
+        <dia:point val="85,44.9286"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="22.445"/>
@@ -34726,7 +34733,8 @@ technical space targeted.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=element#</dia:string>
+#DOGEN masd.variability.binding_point=element
+#DOGEN masd.variability.qualified_name=masd.generalization.is_final#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -34753,7 +34761,8 @@ technical space targeted.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=element#</dia:string>
+#DOGEN masd.variability.binding_point=element
+#DOGEN masd.variability.qualified_name=masd.generalization.parent#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -34775,13 +34784,13 @@ technical space targeted.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O251">
       <dia:attribute name="obj_pos">
-        <dia:point val="52,52"/>
+        <dia:point val="52,51.9286"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,51.95;78.73,55.65"/>
+        <dia:rectangle val="51.95,51.8786;78.73,55.5786"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="52,52"/>
+        <dia:point val="52,51.9286"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="26.68"/>
@@ -34892,7 +34901,8 @@ technical space targeted.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global#</dia:string>
+#DOGEN masd.variability.binding_point=global
+#DOGEN masd.variability.qualified_name=masd.injection.is_proxy_model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35031,7 +35041,8 @@ technical space targeted.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global#</dia:string>
+#DOGEN masd.variability.binding_point=global
+#DOGEN masd.variability.qualified_name=masd.extraction.output_technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35170,7 +35181,8 @@ technical space targeted.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=element#</dia:string>
+#DOGEN masd.variability.binding_point=element
+#DOGEN masd.variability.qualified_name=masd.primitive.underlying_element#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35197,7 +35209,8 @@ technical space targeted.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=element#</dia:string>
+#DOGEN masd.variability.binding_point=element
+#DOGEN masd.variability.qualified_name=masd.primitive.is_nullable#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35225,7 +35238,8 @@ it.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=element#</dia:string>
+#DOGEN masd.variability.binding_point=element
+#DOGEN masd.variability.qualified_name=masd.primitive.use_type_aliasing#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35364,7 +35378,8 @@ it.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global#</dia:string>
+#DOGEN masd.variability.binding_point=global
+#DOGEN masd.variability.qualified_name=masd.orm.database_system#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35391,7 +35406,8 @@ it.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=element#</dia:string>
+#DOGEN masd.variability.binding_point=element
+#DOGEN masd.variability.qualified_name=masd.orm.database_system#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35418,7 +35434,8 @@ it.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=any#</dia:string>
+#DOGEN masd.variability.binding_point=any
+#DOGEN masd.variability.qualified_name=masd.orm.schema_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35445,7 +35462,8 @@ it.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=property#</dia:string>
+#DOGEN masd.variability.binding_point=property
+#DOGEN masd.variability.qualified_name=masd.orm.is_primary_key#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35472,7 +35490,8 @@ it.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=property#</dia:string>
+#DOGEN masd.variability.binding_point=property
+#DOGEN masd.variability.qualified_name=masd.orm.column_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35499,7 +35518,8 @@ it.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=property#</dia:string>
+#DOGEN masd.variability.binding_point=property
+#DOGEN masd.variability.qualified_name=masd.orm.is_nullable#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35526,7 +35546,8 @@ it.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=property#</dia:string>
+#DOGEN masd.variability.binding_point=property
+#DOGEN masd.variability.qualified_name=masd.orm.is_composite#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35553,7 +35574,8 @@ it.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global#</dia:string>
+#DOGEN masd.variability.binding_point=global
+#DOGEN masd.variability.qualified_name=masd.orm.letter_case#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35580,7 +35602,8 @@ it.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=property#</dia:string>
+#DOGEN masd.variability.binding_point=property
+#DOGEN masd.variability.qualified_name=masd.orm.type_override#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35719,7 +35742,8 @@ it.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=any#</dia:string>
+#DOGEN masd.variability.binding_point=any
+#DOGEN masd.variability.qualified_name=masd.decoration.modeline.editor#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35746,7 +35770,8 @@ it.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=any#</dia:string>
+#DOGEN masd.variability.binding_point=any
+#DOGEN masd.variability.qualified_name=masd.decoration.modeline.location#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35773,7 +35798,8 @@ it.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=any#</dia:string>
+#DOGEN masd.variability.binding_point=any
+#DOGEN masd.variability.qualified_name=masd.decoration.modeline.technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35912,7 +35938,8 @@ it.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=any#</dia:string>
+#DOGEN masd.variability.binding_point=any
+#DOGEN masd.variability.qualified_name=masd.variability.binding_point#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35939,7 +35966,8 @@ it.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=element#</dia:string>
+#DOGEN masd.variability.binding_point=element
+#DOGEN masd.variability.qualified_name=masd.variability.labels#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35966,7 +35994,8 @@ it.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=property#</dia:string>
+#DOGEN masd.variability.binding_point=property
+#DOGEN masd.variability.qualified_name=masd.variability.archetype_location.kernel#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35993,7 +36022,8 @@ it.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=property#</dia:string>
+#DOGEN masd.variability.binding_point=property
+#DOGEN masd.variability.qualified_name=masd.variability.archetype_location.backend#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -36020,7 +36050,8 @@ it.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=property#</dia:string>
+#DOGEN masd.variability.binding_point=property
+#DOGEN masd.variability.qualified_name=masd.variability.archetype_location.facet#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -36047,7 +36078,8 @@ it.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=property#</dia:string>
+#DOGEN masd.variability.binding_point=property
+#DOGEN masd.variability.qualified_name=masd.variability.archetype_location.archetype#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -36074,7 +36106,8 @@ it.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=property#</dia:string>
+#DOGEN masd.variability.binding_point=property
+#DOGEN masd.variability.qualified_name=masd.variability.template_kind#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -36104,7 +36137,8 @@ the default value field if available.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=property#</dia:string>
+#DOGEN masd.variability.binding_point=property
+#DOGEN masd.variability.qualified_name=masd.variability.value#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -36133,7 +36167,8 @@ Should only be supplied for instance templates.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=property#</dia:string>
+#DOGEN masd.variability.binding_point=property
+#DOGEN masd.variability.qualified_name=masd.variability.qualified_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -38114,7 +38149,8 @@ extend the mappings as required.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=any#</dia:string>
+#DOGEN masd.variability.binding_point=any
+#DOGEN masd.variability.qualified_name=masd.mapping.target#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -38139,7 +38175,8 @@ extend the mappings as required.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=any#</dia:string>
+#DOGEN masd.variability.binding_point=any
+#DOGEN masd.variability.qualified_name=masd.mapping.destination#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

@@ -68,7 +68,7 @@
         <dia:point val="-85,-79"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-85.05,-79.05;-57.87,-55.65"/>
+        <dia:rectangle val="-85.05,-79.05;-57.87,-54.85"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="23.300000000000004"/>
+        <dia:real val="24.100000000000005"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -6128,7 +6128,8 @@ diff. If no changes are detected, no writting is performed.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global#</dia:string>
+#DOGEN masd.variability.binding_point=global
+#DOGEN masd.variability.qualified_name=masd.extraction.force_write#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6157,7 +6158,8 @@ If you'd like to skip the deletion of certain files, set  "ignore_files_matching
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global#</dia:string>
+#DOGEN masd.variability.binding_point=global
+#DOGEN masd.variability.qualified_name=masd.extraction.delete_extra_files#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6186,7 +6188,8 @@ Only applicable if "delete_extra_files" is enabled.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global#</dia:string>
+#DOGEN masd.variability.binding_point=global
+#DOGEN masd.variability.qualified_name=masd.extraction.ignore_files_matching_regex#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6216,7 +6219,8 @@ are themselves empty, the entire directory tree is deleted.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global#</dia:string>
+#DOGEN masd.variability.binding_point=global
+#DOGEN masd.variability.qualified_name=masd.extraction.delete_empty_directories#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6246,7 +6250,8 @@ space. If you are targetting more than one, it will automatically be set to true
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global#</dia:string>
+#DOGEN masd.variability.binding_point=global
+#DOGEN masd.variability.qualified_name=masd.extraction.enable_backend_directories#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

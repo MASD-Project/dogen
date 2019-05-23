@@ -4477,7 +4477,7 @@ model directory.#</dia:string>
         <dia:point val="1,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="0.95,21.95;29.67,42.95"/>
+        <dia:rectangle val="0.95,21.95;28.13,43.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4486,10 +4486,10 @@ model directory.#</dia:string>
         <dia:point val="1,22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="28.620000000000001"/>
+        <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="20.900000000000002"/>
+        <dia:real val="21.700000000000003"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -9606,13 +9606,13 @@ model directory.#</dia:string>
         <dia:point val="3,45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,44.95;15.485,48.05"/>
+        <dia:rectangle val="2.95,44.95;15.87,48.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="3,45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.434999999999999"/>
+        <dia:real val="12.82"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -13788,13 +13788,13 @@ than one element.#</dia:string>
         <dia:point val="209,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="208.95,29.95;219.56,33.05"/>
+        <dia:rectangle val="208.95,29.95;226.875,33.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="209,30"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.51"/>
+        <dia:real val="17.824999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -16252,7 +16252,8 @@ code: identation and dividers.#</dia:string>
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=any#</dia:string>
+#DOGEN masd.variability.binding_point=any
+#DOGEN masd.variability.qualified_name=masd.generation.decoration.enabled#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16279,7 +16280,8 @@ code: identation and dividers.#</dia:string>
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=any#</dia:string>
+#DOGEN masd.variability.binding_point=any
+#DOGEN masd.variability.qualified_name=masd.generation.decoration.copyright_notice#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16306,7 +16308,8 @@ code: identation and dividers.#</dia:string>
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=any#</dia:string>
+#DOGEN masd.variability.binding_point=any
+#DOGEN masd.variability.qualified_name=masd.generation.decoration.licence_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16333,7 +16336,8 @@ code: identation and dividers.#</dia:string>
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=any#</dia:string>
+#DOGEN masd.variability.binding_point=any
+#DOGEN masd.variability.qualified_name=masd.generation.decoration.modeline_group_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16360,7 +16364,8 @@ code: identation and dividers.#</dia:string>
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=any#</dia:string>
+#DOGEN masd.variability.binding_point=any
+#DOGEN masd.variability.qualified_name=masd.generation.decoration.marker_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

@@ -6404,7 +6404,8 @@ and, if so, ignore it.#</dia:string>
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global#</dia:string>
+#DOGEN masd.variability.binding_point=global
+#DOGEN masd.variability.qualified_name=masd.injection.input_technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6594,11 +6595,12 @@ the injection model.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#test
+            <dia:string>#Imports an external model.
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global#</dia:string>
+#DOGEN masd.variability.binding_point=global
+#DOGEN masd.variability.qualified_name=masd.injection.reference#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6850,7 +6852,8 @@ If the containing package is the model itself, it is linked to the model's modul
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=any#</dia:string>
+#DOGEN masd.variability.binding_point=any
+#DOGEN masd.variability.qualified_name=masd.injection.dia.comment#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

@@ -2469,7 +2469,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.injection.external_modules"
           }
         },
         {
@@ -2479,7 +2480,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.injection.model_modules"
           }
         }
       ]
@@ -2499,7 +2501,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element"
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.type_parameters.variable_number_of_parameters"
           }
         },
         {
@@ -2509,7 +2512,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element"
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.type_parameters.count"
           }
         },
         {
@@ -2519,7 +2523,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element"
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.type_parameters.always_in_heap"
           }
         }
       ]
@@ -2585,7 +2590,7 @@
           "name": "masd.enumeration.add_invalid_enumerator",
           "type": "masd::variability::boolean",
           "value": "\"true\"",
-          "documentation": "If true, adds an enumerator to represent an invalid choice.\n",
+          "documentation": "If true, adds an enumerator to represent an invalid choice.\n\nmasd.variability.qualified_name=masd.enumeration.add_invalid_enumerator\n",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
@@ -2599,7 +2604,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "property"
+            "masd.variability.binding_point": "property",
+            "masd.variability.qualified_name": "masd.enumerator.value"
           }
         }
       ]
@@ -2619,7 +2625,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element"
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.generalization.is_final"
           }
         },
         {
@@ -2629,7 +2636,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element"
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.generalization.parent"
           }
         }
       ]
@@ -2650,7 +2658,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.injection.is_proxy_model"
           }
         }
       ]
@@ -2670,7 +2679,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.extraction.output_technical_space"
           }
         }
       ]
@@ -2690,7 +2700,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element"
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.primitive.underlying_element"
           }
         },
         {
@@ -2701,7 +2712,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element"
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.primitive.is_nullable"
           }
         },
         {
@@ -2712,7 +2724,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element"
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.primitive.use_type_aliasing"
           }
         }
       ]
@@ -2732,7 +2745,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.orm.database_system"
           }
         },
         {
@@ -2742,7 +2756,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element"
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.orm.database_system"
           }
         },
         {
@@ -2752,7 +2767,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "any"
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.orm.schema_name"
           }
         },
         {
@@ -2762,7 +2778,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "property"
+            "masd.variability.binding_point": "property",
+            "masd.variability.qualified_name": "masd.orm.is_primary_key"
           }
         },
         {
@@ -2772,7 +2789,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "property"
+            "masd.variability.binding_point": "property",
+            "masd.variability.qualified_name": "masd.orm.column_name"
           }
         },
         {
@@ -2782,7 +2800,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "property"
+            "masd.variability.binding_point": "property",
+            "masd.variability.qualified_name": "masd.orm.is_nullable"
           }
         },
         {
@@ -2792,7 +2811,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "property"
+            "masd.variability.binding_point": "property",
+            "masd.variability.qualified_name": "masd.orm.is_composite"
           }
         },
         {
@@ -2802,7 +2822,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.orm.letter_case"
           }
         },
         {
@@ -2812,7 +2833,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "property"
+            "masd.variability.binding_point": "property",
+            "masd.variability.qualified_name": "masd.orm.type_override"
           }
         }
       ]
@@ -2831,7 +2853,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "any"
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.decoration.modeline.editor"
           }
         },
         {
@@ -2841,7 +2864,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "any"
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.decoration.modeline.location"
           }
         },
         {
@@ -2851,7 +2875,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "any"
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.decoration.modeline.technical_space"
           }
         }
       ]
@@ -2871,7 +2896,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "any"
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.variability.binding_point"
           }
         },
         {
@@ -2881,7 +2907,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element"
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.variability.labels"
           }
         },
         {
@@ -2891,7 +2918,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "property"
+            "masd.variability.binding_point": "property",
+            "masd.variability.qualified_name": "masd.variability.archetype_location.kernel"
           }
         },
         {
@@ -2901,7 +2929,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "property"
+            "masd.variability.binding_point": "property",
+            "masd.variability.qualified_name": "masd.variability.archetype_location.backend"
           }
         },
         {
@@ -2911,7 +2940,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "property"
+            "masd.variability.binding_point": "property",
+            "masd.variability.qualified_name": "masd.variability.archetype_location.facet"
           }
         },
         {
@@ -2921,7 +2951,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "property"
+            "masd.variability.binding_point": "property",
+            "masd.variability.qualified_name": "masd.variability.archetype_location.archetype"
           }
         },
         {
@@ -2931,7 +2962,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "property"
+            "masd.variability.binding_point": "property",
+            "masd.variability.qualified_name": "masd.variability.template_kind"
           }
         },
         {
@@ -2941,7 +2973,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "property"
+            "masd.variability.binding_point": "property",
+            "masd.variability.qualified_name": "masd.variability.value"
           }
         },
         {
@@ -2951,7 +2984,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "property"
+            "masd.variability.binding_point": "property",
+            "masd.variability.qualified_name": "masd.variability.qualified_name"
           }
         }
       ]
@@ -3021,7 +3055,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "any"
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.mapping.target"
           }
         },
         {
@@ -3030,7 +3065,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "any"
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.mapping.destination"
           }
         }
       ]

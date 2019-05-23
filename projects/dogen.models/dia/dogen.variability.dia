@@ -68,7 +68,7 @@
         <dia:point val="-119,-42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-119.05,-42.05;-91.1,-18.65"/>
+        <dia:rectangle val="-119.05,-42.05;-91.1,-17.85"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="27.850000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="23.300000000000004"/>
+        <dia:real val="24.100000000000005"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -16127,7 +16127,8 @@ alias.#</dia:string>
 
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=any#</dia:string>
+#DOGEN masd.variability.binding_point=any
+#DOGEN masd.variability.qualified_name=masd.variability.profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

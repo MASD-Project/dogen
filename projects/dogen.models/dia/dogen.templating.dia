@@ -106,7 +106,7 @@
         <dia:point val="-24,1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-24.05,0.95;4.67,19.55"/>
+        <dia:rectangle val="-24.05,0.95;3.9,20.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -115,10 +115,10 @@
         <dia:point val="-24,1"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="28.620000000000001"/>
+        <dia:real val="27.850000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="18.500000000000004"/>
+        <dia:real val="19.300000000000004"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -6524,7 +6524,8 @@
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global#</dia:string>
+#DOGEN masd.variability.binding_point=global
+#DOGEN masd.variability.qualified_name=masd.stitch.stream_variable_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6549,7 +6550,8 @@
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global#</dia:string>
+#DOGEN masd.variability.binding_point=global
+#DOGEN masd.variability.qualified_name=masd.stitch.relative_output_directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6574,7 +6576,8 @@
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global#</dia:string>
+#DOGEN masd.variability.binding_point=global
+#DOGEN masd.variability.qualified_name=masd.stitch.inclusion_dependency#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6599,7 +6602,8 @@
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global#</dia:string>
+#DOGEN masd.variability.binding_point=global
+#DOGEN masd.variability.qualified_name=masd.stitch.containing_namespaces#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6624,7 +6628,8 @@
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global#</dia:string>
+#DOGEN masd.variability.binding_point=global
+#DOGEN masd.variability.qualified_name=masd.stitch.wale.template#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6649,7 +6654,8 @@
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global#</dia:string>
+#DOGEN masd.variability.binding_point=global
+#DOGEN masd.variability.qualified_name=masd.stitch.wale.kvp#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

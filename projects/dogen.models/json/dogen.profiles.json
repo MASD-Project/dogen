@@ -1,5 +1,5 @@
 {
-  "documentation": "Top-level model in Dogen that contains all of the shared \ntypes at the meta-model level.\n\nThis model is not intended to be generated. If generated,\nshould not produce any output.\n\nYou should be able to reference this model from any technical\nspace; keep it technical space agnostic.\n",
+  "documentation": "Top-level model in Dogen that contains all of the shared\ntypes at the meta-model level.\n\nThis model is not intended to be generated. If generated,\nshould not produce any output.\n\nYou should be able to reference this model from any technical\nspace; keep it technical space agnostic.\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "dogen.profiles",
@@ -159,6 +159,16 @@
         },
         {
           "name": "masd.generation.cpp.test_data.enabled",
+          "type": "",
+          "value": "true",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "instance"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.templates.enabled",
           "type": "",
           "value": "true",
           "tagged_values": {

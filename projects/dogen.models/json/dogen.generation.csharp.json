@@ -925,7 +925,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.types.directory"
           }
         },
         {
@@ -935,7 +936,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.types.postfix"
           }
         },
         {
@@ -945,7 +947,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.types.class.postfix"
           }
         },
         {
@@ -955,7 +958,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.types.enum.postfix"
           }
         },
         {
@@ -965,7 +969,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.types.primitive.postfix"
           }
         },
         {
@@ -975,7 +980,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.types.builtin.postfix"
           }
         },
         {
@@ -985,7 +991,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.types.exception.postfix"
           }
         }
       ]
@@ -1011,7 +1018,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.io.directory"
           }
         },
         {
@@ -1021,7 +1029,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.io.postfix"
           }
         },
         {
@@ -1031,7 +1040,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.io.class.postfix"
           }
         },
         {
@@ -1041,7 +1051,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.io.builtin.postfix"
           }
         },
         {
@@ -1051,7 +1062,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.io.assistant.postfix"
           }
         },
         {
@@ -1061,7 +1073,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.io.enum.postfix"
           }
         },
         {
@@ -1071,7 +1084,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.io.primitive.postfix"
           }
         }
       ]
@@ -1090,7 +1104,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.test_data.directory"
           }
         },
         {
@@ -1100,7 +1115,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.test_data.postfix"
           }
         },
         {
@@ -1110,7 +1126,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.test_data.class.postfix"
           }
         },
         {
@@ -1120,7 +1137,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.test_data.assistant.postfix"
           }
         },
         {
@@ -1130,7 +1148,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.test_data.enum.postfix"
           }
         },
         {
@@ -1140,7 +1159,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.test_data.primitive.postfix"
           }
         }
       ]
@@ -1159,7 +1179,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.directory"
           }
         },
         {
@@ -1169,7 +1190,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element"
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.generation.csharp.aspect.requires_static_reference_equals"
           }
         },
         {
@@ -1179,7 +1201,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.visual_studio.project_solution_guid"
           }
         },
         {
@@ -1189,7 +1212,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.visual_studio.project_guid"
           }
         },
         {
@@ -1199,7 +1223,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.visual_studio.solution.postfix"
           }
         },
         {
@@ -1209,7 +1234,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global"
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.generation.csharp.visual_studio.project.postfix"
           }
         },
         {
@@ -1219,7 +1245,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element"
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.generation.csharp.helper.family"
           }
         },
         {
@@ -1229,7 +1256,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element"
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.generation.csharp.assistant.requires_assistance"
           }
         },
         {
@@ -1238,7 +1266,8 @@
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element"
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.generation.csharp.assistant.method_postfix"
           }
         }
       ]
