@@ -2943,6 +2943,16 @@
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "property"
           }
+        },
+        {
+          "name": "masd.variability.qualified_name",
+          "type": "masd::variability::text",
+          "documentation": "Qualified name for this feature template.\n\nShould only be supplied for instance templates.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "property"
+          }
         }
       ]
     },
