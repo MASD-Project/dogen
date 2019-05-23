@@ -53,6 +53,20 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::meta_model::name>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen::assets::meta_model::variability {
 
 std::ostream& operator<<(std::ostream& s, const feature_template& v) {
@@ -61,6 +75,8 @@ std::ostream& operator<<(std::ostream& s, const feature_template& v) {
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"configuration\": " << v.configuration() << ", "
       << "\"name\": " << v.name() << ", "
+      << "\"transparent_associations\": " << v.transparent_associations() << ", "
+      << "\"opaque_associations\": " << v.opaque_associations() << ", "
       << "\"key\": " << "\"" << tidy_up_string(v.key()) << "\"" << ", "
       << "\"identifiable_key\": " << "\"" << tidy_up_string(v.identifiable_key()) << "\"" << ", "
       << "\"unparsed_type\": " << "\"" << tidy_up_string(v.unparsed_type()) << "\"" << ", "
