@@ -23,10 +23,7 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.variability/types/helpers/feature_selector.hpp"
-#include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.injection/io/meta_model/model_io.hpp"
-#include "dogen.injection/types/traits.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
 #include "dogen.injection/types/features/reference.hpp"
 #include "dogen.injection/types/transforms/references_transform.hpp"
@@ -42,28 +39,6 @@ static logger lg(logger_factory(transform_id));
 
 namespace dogen::injection::transforms {
 
-references_transform::feature_group references_transform::
-make_feature_group(const variability::meta_model::feature_model& fm) {
-    BOOST_LOG_SEV(lg, debug) << "Creating feature group.";
-
-    feature_group r;
-    const variability::helpers::feature_selector s(fm);
-    r.reference = s.get_by_name(traits::reference());
-
-    BOOST_LOG_SEV(lg, debug) << "Created feature group.";
-    return r;
-}
-
-std::list<std::string>
-references_transform::make_references(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
-    const variability::helpers::configuration_selector s(cfg);
-    if (s.has_configuration_point(fg.reference))
-        return s.get_text_collection_content(fg.reference);
-
-    return std::list<std::string>{};
-}
-
 void references_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "references transform",
         transform_id, m.name(), *ctx.tracer(), m);
@@ -73,10 +48,6 @@ void references_transform::apply(const context& ctx, meta_model::model& m) {
     const auto cfg(*m.configuration());
     const auto scfg(features::reference::make_static_configuration(fg, cfg));
     m.references(scfg.reference);
-
-    // const auto &fg(make_feature_group(*ctx.feature_model()));
-    // const auto refs(make_references(fg, gcfg));
-    // m.references(refs);
 
     stp.end_transform(m);
 }

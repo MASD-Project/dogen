@@ -25,8 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.injection/types/meta_model/model.hpp"
 #include "dogen.injection/types/transforms/context_fwd.hpp"
@@ -37,17 +35,6 @@ namespace dogen::injection::transforms {
  * @brief Reads the model references from the annotation.
  */
 class references_transform final {
-private:
-    struct feature_group {
-        variability::meta_model::feature reference;
-    };
-
-    static feature_group
-    make_feature_group(const variability::meta_model::feature_model& fm);
-
-    static std::list<std::string> make_references(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
 public:
     static void apply(const context& ctx, meta_model::model& m);
 };
