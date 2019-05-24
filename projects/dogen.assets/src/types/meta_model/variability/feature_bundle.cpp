@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include "dogen.assets/io/meta_model/name_io.hpp"
 #include "dogen.assets/io/meta_model/element_io.hpp"
 #include "dogen.assets/types/meta_model/element_visitor.hpp"
@@ -55,6 +56,9 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::
 
 namespace dogen::assets::meta_model::variability {
 
+feature_bundle::feature_bundle()
+    : generate_static_configuration_(static_cast<bool>(0)) { }
+
 feature_bundle::feature_bundle(
     const dogen::assets::meta_model::name& name,
     const std::string& documentation,
@@ -73,7 +77,8 @@ feature_bundle::feature_bundle(
     const std::list<dogen::assets::meta_model::name>& transparent_associations,
     const std::list<dogen::assets::meta_model::name>& opaque_associations,
     const std::list<dogen::assets::meta_model::name>& associative_container_keys,
-    const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates)
+    const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates,
+    const bool generate_static_configuration)
     : dogen::assets::meta_model::element(
       name,
       documentation,
@@ -92,7 +97,8 @@ feature_bundle::feature_bundle(
       transparent_associations_(transparent_associations),
       opaque_associations_(opaque_associations),
       associative_container_keys_(associative_container_keys),
-      feature_templates_(feature_templates) { }
+      feature_templates_(feature_templates),
+      generate_static_configuration_(generate_static_configuration) { }
 
 void feature_bundle::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -111,6 +117,12 @@ void feature_bundle::accept(element_visitor& v) {
 }
 
 void feature_bundle::to_stream(std::ostream& s) const {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::assets::meta_model::variability::feature_bundle\"" << ", "
       << "\"__parent_0__\": ";
@@ -119,7 +131,8 @@ void feature_bundle::to_stream(std::ostream& s) const {
       << "\"transparent_associations\": " << transparent_associations_ << ", "
       << "\"opaque_associations\": " << opaque_associations_ << ", "
       << "\"associative_container_keys\": " << associative_container_keys_ << ", "
-      << "\"feature_templates\": " << feature_templates_
+      << "\"feature_templates\": " << feature_templates_ << ", "
+      << "\"generate_static_configuration\": " << generate_static_configuration_
       << " }";
 }
 
@@ -131,6 +144,7 @@ void feature_bundle::swap(feature_bundle& other) noexcept {
     swap(opaque_associations_, other.opaque_associations_);
     swap(associative_container_keys_, other.associative_container_keys_);
     swap(feature_templates_, other.feature_templates_);
+    swap(generate_static_configuration_, other.generate_static_configuration_);
 }
 
 bool feature_bundle::equals(const dogen::assets::meta_model::element& other) const {
@@ -144,7 +158,8 @@ bool feature_bundle::operator==(const feature_bundle& rhs) const {
         transparent_associations_ == rhs.transparent_associations_ &&
         opaque_associations_ == rhs.opaque_associations_ &&
         associative_container_keys_ == rhs.associative_container_keys_ &&
-        feature_templates_ == rhs.feature_templates_;
+        feature_templates_ == rhs.feature_templates_ &&
+        generate_static_configuration_ == rhs.generate_static_configuration_;
 }
 
 feature_bundle& feature_bundle::operator=(feature_bundle other) {
@@ -215,6 +230,14 @@ void feature_bundle::feature_templates(const std::list<dogen::assets::meta_model
 
 void feature_bundle::feature_templates(const std::list<dogen::assets::meta_model::variability::feature_template>&& v) {
     feature_templates_ = std::move(v);
+}
+
+bool feature_bundle::generate_static_configuration() const {
+    return generate_static_configuration_;
+}
+
+void feature_bundle::generate_static_configuration(const bool v) {
+    generate_static_configuration_ = v;
 }
 
 }

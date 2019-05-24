@@ -36,9 +36,11 @@ namespace dogen::assets::meta_model::variability {
 
 class feature_bundle final : public dogen::assets::meta_model::element {
 public:
-    feature_bundle() = default;
     feature_bundle(const feature_bundle&) = default;
     feature_bundle(feature_bundle&&) = default;
+
+public:
+    feature_bundle();
 
     virtual ~feature_bundle() noexcept { }
 
@@ -61,7 +63,8 @@ public:
         const std::list<dogen::assets::meta_model::name>& transparent_associations,
         const std::list<dogen::assets::meta_model::name>& opaque_associations,
         const std::list<dogen::assets::meta_model::name>& associative_container_keys,
-        const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates);
+        const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates,
+        const bool generate_static_configuration);
 
 public:
     using element::accept;
@@ -112,6 +115,14 @@ public:
     void feature_templates(const std::list<dogen::assets::meta_model::variability::feature_template>& v);
     void feature_templates(const std::list<dogen::assets::meta_model::variability::feature_template>&& v);
 
+    /**
+     * @brief If true, the code generator will output a class to represent the static configuration.
+     */
+    /**@{*/
+    bool generate_static_configuration() const;
+    void generate_static_configuration(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const feature_bundle& rhs) const;
     bool operator!=(const feature_bundle& rhs) const {
@@ -130,6 +141,7 @@ private:
     std::list<dogen::assets::meta_model::name> opaque_associations_;
     std::list<dogen::assets::meta_model::name> associative_container_keys_;
     std::list<dogen::assets::meta_model::variability::feature_template> feature_templates_;
+    bool generate_static_configuration_;
 };
 
 }

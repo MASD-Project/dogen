@@ -51,6 +51,10 @@ std::list<dogen::assets::meta_model::variability::feature_template> create_std_l
     return r;
 }
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) != 0;
+}
+
 }
 
 namespace dogen::assets::meta_model::variability {
@@ -64,6 +68,7 @@ populate(const unsigned int position, result_type& v) {
     v.opaque_associations(create_std_list_dogen_assets_meta_model_name(position + 1));
     v.associative_container_keys(create_std_list_dogen_assets_meta_model_name(position + 2));
     v.feature_templates(create_std_list_dogen_assets_meta_model_variability_feature_template(position + 3));
+    v.generate_static_configuration(create_bool(position + 4));
 }
 
 feature_bundle_generator::result_type
