@@ -187,6 +187,26 @@ make_masd_variability_qualified_name() {
      return r;
 }
 
+dogen::variability::meta_model::feature_template
+make_masd_variability_generate_static_configuration() {
+    using namespace dogen::variability::meta_model;
+    feature_template r;
+    r.name().simple("generate_static_configuration");
+    r.name().qualified("masd.variability.generate_static_configuration");
+    const auto vt(value_type::boolean);
+    r.value_type(vt);
+    r.binding_point(binding_point::property);
+    r.kind(template_kind::instance);
+    dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ "true" }));
+
+    archetypes::location al;
+    al.kernel("masd");
+
+     r.location(al);
+     return r;
+}
+
 }
 
 std::list<dogen::variability::meta_model::feature_template>
@@ -202,6 +222,7 @@ variability_templates::make_templates() {
     r.push_back(make_masd_variability_template_kind());
     r.push_back(make_masd_variability_value());
     r.push_back(make_masd_variability_qualified_name());
+    r.push_back(make_masd_variability_generate_static_configuration());
     return r;
 }
 

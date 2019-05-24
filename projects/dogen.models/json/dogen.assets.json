@@ -2996,6 +2996,17 @@
             "masd.variability.binding_point": "property",
             "masd.variability.qualified_name": "masd.variability.qualified_name"
           }
+        },
+        {
+          "name": "masd.variability.generate_static_configuration",
+          "type": "masd::variability::boolean",
+          "value": "\"true\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "property",
+            "masd.variability.qualified_name": "masd.variability.generate_static_configuration"
+          }
         }
       ]
     },
