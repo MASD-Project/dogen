@@ -27,6 +27,7 @@
 
 #include <string>
 #include <utility>
+#include <boost/exception/info.hpp>
 #include "dogen.templating/types/stitch/line.hpp"
 #include "dogen.templating/types/stitch/block.hpp"
 #include "dogen.templating/types/stitch/text_template_body.hpp"

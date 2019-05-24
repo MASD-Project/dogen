@@ -21,6 +21,7 @@
 #ifndef DOGEN_TEMPLATING_TYPES_STITCH_INSTANTIATOR_HPP
 #define DOGEN_TEMPLATING_TYPES_STITCH_INSTANTIATOR_HPP
 
+#include "dogen.variability/types/meta_model/configuration.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -84,6 +85,12 @@ private:
     void validate_kvps(text_template& tt) const;
 
     /**
+     * @brief Creates the properties.
+     */
+    properties create_properties(
+        const variability::meta_model::configuration& cfg) const;
+
+    /**
      * @brief Creates the text template.
      */
     text_template create_text_template(
@@ -106,6 +113,7 @@ private:
     const boost::filesystem::path wale_templates_directory_;
     const variability::helpers::configuration_factory& configuration_factory_;
     const properties_factory properties_factory_;
+    const variability::meta_model::feature_model& feature_model_;
 };
 
 }

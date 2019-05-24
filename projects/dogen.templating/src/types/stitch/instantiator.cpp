@@ -24,12 +24,14 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
+#include "dogen.utility/types/string/splitter.hpp"
 #include "dogen.templating/types/wale/workflow.hpp"
 #include "dogen.templating/types/helpers/kvp_validator.hpp"
 #include "dogen.templating/types/stitch/instantiation_error.hpp"
 #include "dogen.templating/types/stitch/parser.hpp"
 #include "dogen.templating/types/stitch/properties.hpp"
 #include "dogen.templating/types/stitch/formatter.hpp"
+#include "dogen.templating/types/stitch/features.hpp"
 #include "dogen.templating/types/stitch/instantiator.hpp"
 
 namespace {
@@ -53,7 +55,8 @@ instantiator(const boost::filesystem::path& wale_templates_directory,
     const variability::meta_model::feature_model& fm,
     const variability::helpers::configuration_factory& cf)
     : wale_templates_directory_(wale_templates_directory),
-      configuration_factory_(cf), properties_factory_(fm) {}
+      configuration_factory_(cf), properties_factory_(fm),
+      feature_model_(fm) {}
 
 boost::filesystem::path
 instantiator::compute_output_path(const boost::filesystem::path& input_path,
@@ -153,6 +156,25 @@ void instantiator::validate_kvps(text_template& tt) const {
     v.validate(tt.expected_keys(), tt.supplied_kvps());
 }
 
+properties instantiator::create_properties(
+    const variability::meta_model::configuration& cfg) const {
+    const auto fg(features::make_feature_group(feature_model_));
+    const auto scfg(features::make_static_configuration(fg, cfg));
+
+    properties r;
+    r.stream_variable_name(scfg.stream_variable_name);
+    r.relative_output_directory(scfg.relative_output_directory);
+    r.inclusion_dependencies(scfg.inclusion_dependency);
+
+    using utility::string::splitter;
+    const auto cns(splitter::split_scoped(scfg.containing_namespaces));
+    r.containing_namespaces(cns);
+
+    r.wale_template(scfg.text_template);
+    r.wale_kvps(scfg.kvp);
+    return r;
+}
+
 text_template
 instantiator::create_text_template(const boost::filesystem::path& input_path,
     const std::string& text_template_as_string,
@@ -195,7 +217,8 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
         const auto& tv(r.body().tagged_values());
         const auto bp(variability::meta_model::binding_point::global);
         const auto cfg(configuration_factory_.make(tv, bp));
-        r.properties(properties_factory_.make(cfg));
+        // r.properties(properties_factory_.make(cfg));
+        r.properties(create_properties(cfg));
 
         /*
          * Perform the required processing for wale templates.
