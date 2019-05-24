@@ -53,7 +53,8 @@ public:
     /**
      * @brief Converts a value type to a string.
      */
-    static std::string from_value_type(const meta_model::value_type v);
+    static std::string from_value_type(const meta_model::value_type v,
+        const bool qualified = true);
 
     /**
      * @brief Converts a template kind to a string.

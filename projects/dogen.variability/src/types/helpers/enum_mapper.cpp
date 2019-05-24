@@ -46,6 +46,13 @@ const std::string output_value_type_number("value_type::number");
 const std::string output_value_type_boolean("value_type::boolean");
 const std::string output_value_type_kvp("value_type::key_value_pair");
 
+const std::string output_value_type_text_simple("text");
+const std::string output_value_type_text_collection_simple(
+    "text_collection");
+const std::string output_value_type_number_simple("number");
+const std::string output_value_type_boolean_simple("boolean");
+const std::string output_value_type_kvp_simple("key_value_pair");
+
 const std::string input_binding_point_any("any");
 const std::string input_binding_point_global("global");
 const std::string input_binding_point_element("element");
@@ -135,14 +142,26 @@ meta_model::binding_point enum_mapper::to_binding_point(const std::string& s) {
     BOOST_THROW_EXCEPTION(enum_mapping_exception(invalid_scope + s));
 }
 
-std::string enum_mapper::from_value_type(const meta_model::value_type v) {
+std::string enum_mapper::from_value_type(const meta_model::value_type v,
+    const bool qualified) {
     using meta_model::value_type;
     switch(v) {
-    case value_type::text: return output_value_type_text;
-    case value_type::text_collection: return output_value_type_text_collection;
-    case value_type::number: return output_value_type_number;
-    case value_type::boolean: return output_value_type_boolean;
-    case value_type::key_value_pair: return output_value_type_kvp;
+    case value_type::text:
+        return qualified ?
+            output_value_type_text : output_value_type_text_simple;
+    case value_type::text_collection:
+        return qualified ?
+            output_value_type_text_collection :
+        output_value_type_text_collection_simple;
+    case value_type::number:
+        return qualified ? output_value_type_number :
+        output_value_type_number_simple;
+    case value_type::boolean:
+        return qualified ? output_value_type_boolean :
+        output_value_type_boolean_simple;
+    case value_type::key_value_pair:
+        return qualified ? output_value_type_kvp :
+        output_value_type_kvp_simple;
     default: {
         const auto s(boost::lexical_cast<std::string>(v));
         BOOST_LOG_SEV(lg, error) << invalid_value_type << "'" << s << "'";
