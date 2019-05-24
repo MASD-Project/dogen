@@ -100,11 +100,11 @@ make_masd_stitch_containing_namespaces() {
 }
 
 dogen::variability::meta_model::feature_template
-make_masd_stitch_wale_template() {
+make_masd_stitch_wale_text_template() {
     using namespace dogen::variability::meta_model;
     feature_template r;
-    r.name().simple("template");
-    r.name().qualified("masd.stitch.wale.template");
+    r.name().simple("text_template");
+    r.name().qualified("masd.stitch.wale.text_template");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -145,7 +145,7 @@ features::make_templates() {
     r.push_back(make_masd_stitch_relative_output_directory());
     r.push_back(make_masd_stitch_inclusion_dependency());
     r.push_back(make_masd_stitch_containing_namespaces());
-    r.push_back(make_masd_stitch_wale_template());
+    r.push_back(make_masd_stitch_wale_text_template());
     r.push_back(make_masd_stitch_wale_kvp());
     return r;
 }

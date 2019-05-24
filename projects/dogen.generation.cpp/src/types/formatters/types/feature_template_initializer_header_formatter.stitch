@@ -12,7 +12,7 @@
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/hash/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/types/feature_template_initializer_header_formatter.hpp" #>
-<#@ masd.stitch.wale.template=cpp_artefact_formatter_implementation_header.wale #>
+<#@ masd.stitch.wale.text_template=cpp_artefact_formatter_implementation_header.wale #>
 <#@ masd.stitch.wale.kvp.class.simple_name=feature_template_initializer_header_formatter #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=feature_template_initializer_header #>
 <#@ masd.stitch.wale.kvp.class.inclusion_support_type=canonical_support #>

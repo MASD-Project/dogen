@@ -6,7 +6,7 @@
 <#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/types/builtin_formatter.hpp" #>
-<#@ masd.stitch.wale.template=csharp_formatter_implementation.wale #>
+<#@ masd.stitch.wale.text_template=csharp_formatter_implementation.wale #>
 <#@ masd.stitch.wale.kvp.class.simple_name=builtin_formatter #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=builtin #>
 <#@ masd.stitch.wale.kvp.yarn_element=assets::meta_model::structural::builtin #>

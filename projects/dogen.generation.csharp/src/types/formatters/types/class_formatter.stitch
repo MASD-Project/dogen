@@ -7,7 +7,7 @@
 <#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/types/class_formatter.hpp" #>
-<#@ masd.stitch.wale.template=csharp_formatter_implementation.wale #>
+<#@ masd.stitch.wale.text_template=csharp_formatter_implementation.wale #>
 <#@ masd.stitch.wale.kvp.class.simple_name=class_formatter #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=class #>
 <#@ masd.stitch.wale.kvp.yarn_element=assets::meta_model::structural::object #>

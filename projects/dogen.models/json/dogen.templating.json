@@ -396,13 +396,13 @@
           }
         },
         {
-          "name": "masd.stitch.wale.template",
+          "name": "masd.stitch.wale.text_template",
           "type": "masd::variability::text",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.stitch.wale.template"
+            "masd.variability.qualified_name": "masd.stitch.wale.text_template"
           }
         },
         {
