@@ -13,24 +13,24 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-24 Fri 09:31]
+#+CAPTION: Clock summary at [2019-05-24 Fri 14:16]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *21:07* |       |      | 100.0 |
+| *Total time*                                           | *22:53* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 21:07   |       |      | 100.0 |
-| Active                                                 |         | 21:07 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 3:37 |  17.1 |
-| Create a video demo for the previous sprint's features |         |       | 3:46 |  17.8 |
-| Sprint and product backlog grooming                    |         |       | 1:08 |   5.4 |
-| Make wale templates meta-model elements                |         |       | 2:45 |  13.0 |
-| Flatten the data directory                             |         |       | 1:11 |   5.6 |
-| Rename =dogen::cpp::header_only= stereotypes           |         |       | 0:15 |   1.2 |
-| Rename coding model                                    |         |       | 2:17 |  10.8 |
-| Windows build is failing on a number of tests          |         |       | 0:30 |   2.4 |
-| Read variability papers                                |         |       | 0:56 |   4.4 |
-| Add code generation support to static configurations   |         |       | 4:42 |  22.3 |
+| Stories                                                | 22:53   |       |      | 100.0 |
+| Active                                                 |         | 22:53 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 3:37 |  15.8 |
+| Create a video demo for the previous sprint's features |         |       | 3:46 |  16.5 |
+| Sprint and product backlog grooming                    |         |       | 1:08 |   5.0 |
+| Make wale templates meta-model elements                |         |       | 2:45 |  12.0 |
+| Flatten the data directory                             |         |       | 1:11 |   5.2 |
+| Rename =dogen::cpp::header_only= stereotypes           |         |       | 0:15 |   1.1 |
+| Rename coding model                                    |         |       | 2:17 |  10.0 |
+| Windows build is failing on a number of tests          |         |       | 0:30 |   2.2 |
+| Read variability papers                                |         |       | 0:56 |   4.1 |
+| Add code generation support to static configurations   |         |       | 6:28 |  28.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -392,6 +392,8 @@ Time spent reading the literature on variability.
 
 *** STARTED Add code generation support to static configurations      :story:
     :LOGBOOK:
+    CLOCK: [2019-05-24 Fri 13:12]--[2019-05-24 Fri 14:16] =>  1:04
+    CLOCK: [2019-05-24 Fri 10:15]--[2019-05-24 Fri 10:57] =>  0:42
     CLOCK: [2019-05-23 Thu 14:19]--[2019-05-23 Thu 14:21] =>  0:02
     CLOCK: [2019-05-23 Thu 14:13]--[2019-05-23 Thu 14:18] =>  0:05
     CLOCK: [2019-05-23 Thu 14:02]--[2019-05-23 Thu 14:12] =>  0:10
@@ -436,6 +438,39 @@ Notes:
 - we need to know what kind of template expansion was made on the
   feature template in order to implement the configuration. We'll
   leave this for a second pass.
+- there is a bit of confusion with regards to how instance of meta
+  feature templates relate to actual feature templates. The system
+  allows users to define feature templates as a modeling
+  element. These feature templates are then used to define actual
+  feature templates. They are two distinct concepts. The feature
+  templates that belong to models will have a location in asset space
+  which is based on the model and feature bundle name; for example
+  =dogen.assets.features.type_parameters.= followed by the feature
+  name. At this point in time, feature names are qualified names:
+  =masd.type_parameters.always_in_heap=. We then use the feature
+  template (as a model element) name to create the key which is in
+  effect the qualified name of the feature template (as a variability
+  model concept). Normally we don't have a naming problem because the
+  elements that get generated ocupy the same position in asset space
+  as the elements that model them (modulus the expansion into
+  archetype space, and even then we mostly preserve the
+  location). This is the first time where we need some kind of
+  mapping. We cannot make the two names match (we'd have to define
+  models that match the existing feature names, which would be even
+  more confusing), so the second best alternative is to model the two
+  concepts separately. In order to do so:
+  - the feature template (in modeling) simple name should always match
+    the feature template (in variability) simple name if the template
+    is an actual template (e.g. not instance).
+  - if the template is an instance template, we may need to add some
+    additional context to distinguish it from other templates in the
+    bundle (e.g. x_postfix). This is done for: a) the modeling space
+    b) the code generation space, in terms of the static
+    configuration. Interestingly, we won't be directly using the
+    static configuration in these cases. This abnormality needs to be
+    mopped up by resolving the templating + defaults story. One quick
+    hack we can make to address this issue is to have some features
+    which do not get expressed into the static configuration.
 
 Approach:
 
