@@ -202,28 +202,6 @@
       ]
     },
     {
-      "name": "stitch::building_error",
-      "documentation": "An error occurred whilst building.\n",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "stitch::properties_factory",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "stitch::traits",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "stitch::line",
       "fallback_element_type": "masd::object",
       "attributes": [
