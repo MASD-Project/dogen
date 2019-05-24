@@ -38475,7 +38475,7 @@ code.
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.variability.generate_static_configuration=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -39165,7 +39165,7 @@ code.
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.variability.generate_static_configuration=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -39537,7 +39537,7 @@ code.
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.variability.generate_static_configuration=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -39909,7 +39909,7 @@ code.
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.variability.generate_static_configuration=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -40281,7 +40281,7 @@ code.
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.variability.generate_static_configuration=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -40653,7 +40653,7 @@ code.
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.variability.generate_static_configuration=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -41077,7 +41077,7 @@ code.
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.variability.generate_static_configuration=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -41371,7 +41371,7 @@ code.
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.variability.generate_static_configuration=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -42966,7 +42966,7 @@ string.
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.variability.generate_static_configuration=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -44242,7 +44242,7 @@ string.
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.variability.generate_static_configuration=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

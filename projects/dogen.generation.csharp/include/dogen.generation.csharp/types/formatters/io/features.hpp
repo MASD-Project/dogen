@@ -31,6 +31,7 @@
 namespace dogen::generation::csharp::formatters::io {
 
 class features final {
+
 public:
     static std::list<dogen::variability::meta_model::feature_template>
     make_templates();

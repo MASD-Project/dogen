@@ -26,6 +26,10 @@
 #endif
 
 #include <list>
+#include <string>
+#include "dogen.variability/types/meta_model/feature.hpp"
+#include "dogen.variability/types/meta_model/configuration.hpp"
+#include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.variability/types/meta_model/feature_template.hpp"
 
 namespace dogen::assets::features {
@@ -34,6 +38,42 @@ namespace dogen::assets::features {
  * @brief Features related to the processing of variability for feature and profile templates.
  */
 class variability_templates final {
+public:
+    struct feature_group {
+        variability::meta_model::feature binding_point;
+        variability::meta_model::feature labels;
+        variability::meta_model::feature kernel;
+        variability::meta_model::feature backend;
+        variability::meta_model::feature facet;
+        variability::meta_model::feature archetype;
+        variability::meta_model::feature template_kind;
+        variability::meta_model::feature value;
+        variability::meta_model::feature qualified_name;
+        variability::meta_model::feature generate_static_configuration;
+    };
+
+    static feature_group
+    make_feature_group(const variability::meta_model::feature_model& fm);
+
+public:
+    struct static_configuration {
+        std::string binding_point;
+        std::list<std::string> labels;
+        std::string kernel;
+        std::string backend;
+        std::string facet;
+        std::string archetype;
+        std::string template_kind;
+        std::list<std::string> value;
+        std::string qualified_name;
+        bool generate_static_configuration;
+    };
+
+    static static_configuration make_static_configuration(
+        const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+
 public:
     static std::list<dogen::variability::meta_model::feature_template>
     make_templates();

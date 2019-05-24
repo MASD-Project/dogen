@@ -26,11 +26,41 @@
 #endif
 
 #include <list>
+#include <string>
+#include "dogen.variability/types/meta_model/feature.hpp"
+#include "dogen.variability/types/meta_model/configuration.hpp"
+#include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.variability/types/meta_model/feature_template.hpp"
 
 namespace dogen::generation::features {
 
 class decoration final {
+public:
+    struct feature_group {
+        variability::meta_model::feature enabled;
+        variability::meta_model::feature copyright_notice;
+        variability::meta_model::feature licence_name;
+        variability::meta_model::feature modeline_group_name;
+        variability::meta_model::feature marker_name;
+    };
+
+    static feature_group
+    make_feature_group(const variability::meta_model::feature_model& fm);
+
+public:
+    struct static_configuration {
+        bool enabled;
+        std::list<std::string> copyright_notice;
+        std::string licence_name;
+        std::string modeline_group_name;
+        std::string marker_name;
+    };
+
+    static static_configuration make_static_configuration(
+        const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+
 public:
     static std::list<dogen::variability::meta_model::feature_template>
     make_templates();

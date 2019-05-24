@@ -19,7 +19,9 @@
  *
  */
 #include "dogen.variability/types/helpers/value_factory.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.assets/types/features/variability_templates.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
 
 namespace dogen::assets::features {
 
@@ -209,10 +211,66 @@ make_masd_variability_generate_static_configuration() {
 
 }
 
+variability_templates::feature_group
+variability_templates::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const dogen::variability::helpers::feature_selector s(fm);
+
+    r.binding_point = s.get_by_name("masd.variability.binding_point");
+    r.labels = s.get_by_name("masd.variability.labels");
+    r.kernel = s.get_by_name("masd.variability.archetype_location.kernel");
+    r.backend = s.get_by_name("masd.variability.archetype_location.backend");
+    r.facet = s.get_by_name("masd.variability.archetype_location.facet");
+    r.archetype = s.get_by_name("masd.variability.archetype_location.archetype");
+    r.template_kind = s.get_by_name("masd.variability.template_kind");
+    r.value = s.get_by_name("masd.variability.value");
+    r.qualified_name = s.get_by_name("masd.variability.qualified_name");
+    r.generate_static_configuration = s.get_by_name("masd.variability.generate_static_configuration");
+
+    return r;
+}
+
+variability_templates::static_configuration variability_templates::make_static_configuration(
+    const feature_group& fg,
+   const dogen::variability::meta_model::configuration& cfg) {
+
+    static_configuration r;
+    const dogen::variability::helpers::configuration_selector s(cfg);
+    if (s.has_configuration_point(fg.binding_point))
+        r.binding_point = s.get_text_content(fg.binding_point);
+
+    if (s.has_configuration_point(fg.labels))
+        r.labels = s.get_text_collection_content(fg.labels);
+
+    if (s.has_configuration_point(fg.kernel))
+        r.kernel = s.get_text_content(fg.kernel);
+
+    if (s.has_configuration_point(fg.backend))
+        r.backend = s.get_text_content(fg.backend);
+
+    if (s.has_configuration_point(fg.facet))
+        r.facet = s.get_text_content(fg.facet);
+
+    if (s.has_configuration_point(fg.archetype))
+        r.archetype = s.get_text_content(fg.archetype);
+
+    if (s.has_configuration_point(fg.template_kind))
+        r.template_kind = s.get_text_content(fg.template_kind);
+
+    if (s.has_configuration_point(fg.value))
+        r.value = s.get_text_collection_content(fg.value);
+
+    if (s.has_configuration_point(fg.qualified_name))
+        r.qualified_name = s.get_text_content(fg.qualified_name);
+
+        r.generate_static_configuration = s.get_boolean_content(fg.generate_static_configuration);
+    return r;
+}
+
 std::list<dogen::variability::meta_model::feature_template>
 variability_templates::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_variability_binding_point());
     r.push_back(make_masd_variability_labels());
     r.push_back(make_masd_variability_archetype_location_kernel());

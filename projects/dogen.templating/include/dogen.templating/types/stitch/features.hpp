@@ -26,11 +26,44 @@
 #endif
 
 #include <list>
+#include <string>
+#include <unordered_map>
+#include "dogen.variability/types/meta_model/feature.hpp"
+#include "dogen.variability/types/meta_model/configuration.hpp"
+#include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.variability/types/meta_model/feature_template.hpp"
 
 namespace dogen::templating::stitch {
 
 class features final {
+public:
+    struct feature_group {
+        variability::meta_model::feature stream_variable_name;
+        variability::meta_model::feature relative_output_directory;
+        variability::meta_model::feature inclusion_dependency;
+        variability::meta_model::feature containing_namespaces;
+        variability::meta_model::feature text_template;
+        variability::meta_model::feature kvp;
+    };
+
+    static feature_group
+    make_feature_group(const variability::meta_model::feature_model& fm);
+
+public:
+    struct static_configuration {
+        std::string stream_variable_name;
+        std::string relative_output_directory;
+        std::list<std::string> inclusion_dependency;
+        std::string containing_namespaces;
+        std::string text_template;
+        std::unordered_map<std::string, std::string> kvp;
+    };
+
+    static static_configuration make_static_configuration(
+        const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+
 public:
     static std::list<dogen::variability::meta_model::feature_template>
     make_templates();

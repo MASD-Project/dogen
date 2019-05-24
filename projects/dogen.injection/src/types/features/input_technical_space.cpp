@@ -19,7 +19,9 @@
  *
  */
 #include "dogen.variability/types/helpers/value_factory.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.injection/types/features/input_technical_space.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
 
 namespace dogen::injection::features {
 
@@ -47,10 +49,30 @@ make_masd_injection_input_technical_space() {
 
 }
 
+input_technical_space::feature_group
+input_technical_space::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const dogen::variability::helpers::feature_selector s(fm);
+
+    r.input_technical_space = s.get_by_name("masd.injection.input_technical_space");
+
+    return r;
+}
+
+input_technical_space::static_configuration input_technical_space::make_static_configuration(
+    const feature_group& fg,
+   const dogen::variability::meta_model::configuration& cfg) {
+
+    static_configuration r;
+    const dogen::variability::helpers::configuration_selector s(cfg);
+        r.input_technical_space = s.get_text_content(fg.input_technical_space);
+    return r;
+}
+
 std::list<dogen::variability::meta_model::feature_template>
 input_technical_space::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_injection_input_technical_space());
     return r;
 }

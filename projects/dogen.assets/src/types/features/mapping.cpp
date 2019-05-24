@@ -20,6 +20,8 @@
  */
 #include "dogen.assets/types/features/mapping.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
 
 namespace dogen::assets::features {
 
@@ -63,10 +65,36 @@ make_masd_mapping_destination() {
 
 }
 
+mapping::feature_group
+mapping::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const dogen::variability::helpers::feature_selector s(fm);
+
+    r.target = s.get_by_name("masd.mapping.target");
+    r.destination = s.get_by_name("masd.mapping.destination");
+
+    return r;
+}
+
+mapping::static_configuration mapping::make_static_configuration(
+    const feature_group& fg,
+   const dogen::variability::meta_model::configuration& cfg) {
+
+    static_configuration r;
+    const dogen::variability::helpers::configuration_selector s(cfg);
+    if (s.has_configuration_point(fg.target))
+        r.target = s.get_text_content(fg.target);
+
+    if (s.has_configuration_point(fg.destination))
+        r.destination = s.get_text_content(fg.destination);
+
+    return r;
+}
+
 std::list<dogen::variability::meta_model::feature_template>
 mapping::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_mapping_target());
     r.push_back(make_masd_mapping_destination());
     return r;

@@ -20,6 +20,8 @@
  */
 #include "dogen.assets/types/features/enumeration.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
 
 namespace dogen::assets::features {
 
@@ -85,10 +87,36 @@ make_masd_enumeration_use_implementation_defined_enumerator_values() {
 
 }
 
+enumeration::feature_group
+enumeration::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const dogen::variability::helpers::feature_selector s(fm);
+
+    r.use_implementation_defined_underlying_element = s.get_by_name("masd.enumeration.use_implementation_defined_underlying_element");
+    r.underlying_element = s.get_by_name("masd.enumeration.underlying_element");
+    r.use_implementation_defined_enumerator_values = s.get_by_name("masd.enumeration.use_implementation_defined_enumerator_values");
+
+    return r;
+}
+
+enumeration::static_configuration enumeration::make_static_configuration(
+    const feature_group& fg,
+   const dogen::variability::meta_model::configuration& cfg) {
+
+    static_configuration r;
+    const dogen::variability::helpers::configuration_selector s(cfg);
+        r.use_implementation_defined_underlying_element = s.get_boolean_content(fg.use_implementation_defined_underlying_element);
+    if (s.has_configuration_point(fg.underlying_element))
+        r.underlying_element = s.get_text_content(fg.underlying_element);
+
+        r.use_implementation_defined_enumerator_values = s.get_boolean_content(fg.use_implementation_defined_enumerator_values);
+    return r;
+}
+
 std::list<dogen::variability::meta_model::feature_template>
 enumeration::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_enumeration_use_implementation_defined_underlying_element());
     r.push_back(make_masd_enumeration_underlying_element());
     r.push_back(make_masd_enumeration_use_implementation_defined_enumerator_values());

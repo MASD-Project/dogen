@@ -20,6 +20,8 @@
  */
 #include "dogen.assets/types/features/primitive.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
 
 namespace dogen::assets::features {
 
@@ -85,10 +87,36 @@ make_masd_primitive_use_type_aliasing() {
 
 }
 
+primitive::feature_group
+primitive::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const dogen::variability::helpers::feature_selector s(fm);
+
+    r.underlying_element = s.get_by_name("masd.primitive.underlying_element");
+    r.is_nullable = s.get_by_name("masd.primitive.is_nullable");
+    r.use_type_aliasing = s.get_by_name("masd.primitive.use_type_aliasing");
+
+    return r;
+}
+
+primitive::static_configuration primitive::make_static_configuration(
+    const feature_group& fg,
+   const dogen::variability::meta_model::configuration& cfg) {
+
+    static_configuration r;
+    const dogen::variability::helpers::configuration_selector s(cfg);
+    if (s.has_configuration_point(fg.underlying_element))
+        r.underlying_element = s.get_text_content(fg.underlying_element);
+
+        r.is_nullable = s.get_boolean_content(fg.is_nullable);
+        r.use_type_aliasing = s.get_boolean_content(fg.use_type_aliasing);
+    return r;
+}
+
 std::list<dogen::variability::meta_model::feature_template>
 primitive::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_primitive_underlying_element());
     r.push_back(make_masd_primitive_is_nullable());
     r.push_back(make_masd_primitive_use_type_aliasing());

@@ -26,6 +26,10 @@
 #endif
 
 #include <list>
+#include <string>
+#include "dogen.variability/types/meta_model/feature.hpp"
+#include "dogen.variability/types/meta_model/configuration.hpp"
+#include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.variability/types/meta_model/feature_template.hpp"
 
 namespace dogen::assets::features {
@@ -34,6 +38,40 @@ namespace dogen::assets::features {
  * @brief Features related to ORM support.
  */
 class orm final {
+public:
+    struct feature_group {
+        variability::meta_model::feature database_system;
+        variability::meta_model::feature table_name;
+        variability::meta_model::feature schema_name;
+        variability::meta_model::feature is_primary_key;
+        variability::meta_model::feature column_name;
+        variability::meta_model::feature is_nullable;
+        variability::meta_model::feature is_composite;
+        variability::meta_model::feature letter_case;
+        variability::meta_model::feature type_override;
+    };
+
+    static feature_group
+    make_feature_group(const variability::meta_model::feature_model& fm);
+
+public:
+    struct static_configuration {
+        std::list<std::string> database_system;
+        std::string table_name;
+        std::string schema_name;
+        bool is_primary_key;
+        std::string column_name;
+        bool is_nullable;
+        bool is_composite;
+        std::string letter_case;
+        std::list<std::string> type_override;
+    };
+
+    static static_configuration make_static_configuration(
+        const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+
 public:
     static std::list<dogen::variability::meta_model::feature_template>
     make_templates();

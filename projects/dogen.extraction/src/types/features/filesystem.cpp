@@ -20,6 +20,8 @@
  */
 #include "dogen.extraction/types/features/filesystem.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
 
 namespace dogen::extraction::features {
 
@@ -125,10 +127,40 @@ make_masd_extraction_enable_backend_directories() {
 
 }
 
+filesystem::feature_group
+filesystem::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const dogen::variability::helpers::feature_selector s(fm);
+
+    r.force_write = s.get_by_name("masd.extraction.force_write");
+    r.delete_extra_files = s.get_by_name("masd.extraction.delete_extra_files");
+    r.ignore_files_matching_regex = s.get_by_name("masd.extraction.ignore_files_matching_regex");
+    r.delete_empty_directories = s.get_by_name("masd.extraction.delete_empty_directories");
+    r.enable_backend_directories = s.get_by_name("masd.extraction.enable_backend_directories");
+
+    return r;
+}
+
+filesystem::static_configuration filesystem::make_static_configuration(
+    const feature_group& fg,
+   const dogen::variability::meta_model::configuration& cfg) {
+
+    static_configuration r;
+    const dogen::variability::helpers::configuration_selector s(cfg);
+        r.force_write = s.get_boolean_content(fg.force_write);
+        r.delete_extra_files = s.get_boolean_content(fg.delete_extra_files);
+    if (s.has_configuration_point(fg.ignore_files_matching_regex))
+        r.ignore_files_matching_regex = s.get_text_collection_content(fg.ignore_files_matching_regex);
+
+        r.delete_empty_directories = s.get_boolean_content(fg.delete_empty_directories);
+        r.enable_backend_directories = s.get_boolean_content(fg.enable_backend_directories);
+    return r;
+}
+
 std::list<dogen::variability::meta_model::feature_template>
 filesystem::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_extraction_force_write());
     r.push_back(make_masd_extraction_delete_extra_files());
     r.push_back(make_masd_extraction_ignore_files_matching_regex());

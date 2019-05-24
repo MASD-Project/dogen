@@ -20,6 +20,8 @@
  */
 #include "dogen.assets/types/features/naming.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
 
 namespace dogen::assets::features {
 
@@ -63,10 +65,36 @@ make_masd_injection_model_modules() {
 
 }
 
+naming::feature_group
+naming::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const dogen::variability::helpers::feature_selector s(fm);
+
+    r.external_modules = s.get_by_name("masd.injection.external_modules");
+    r.model_modules = s.get_by_name("masd.injection.model_modules");
+
+    return r;
+}
+
+naming::static_configuration naming::make_static_configuration(
+    const feature_group& fg,
+   const dogen::variability::meta_model::configuration& cfg) {
+
+    static_configuration r;
+    const dogen::variability::helpers::configuration_selector s(cfg);
+    if (s.has_configuration_point(fg.external_modules))
+        r.external_modules = s.get_text_content(fg.external_modules);
+
+    if (s.has_configuration_point(fg.model_modules))
+        r.model_modules = s.get_text_content(fg.model_modules);
+
+    return r;
+}
+
 std::list<dogen::variability::meta_model::feature_template>
 naming::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_injection_external_modules());
     r.push_back(make_masd_injection_model_modules());
     return r;

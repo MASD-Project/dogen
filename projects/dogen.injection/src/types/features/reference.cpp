@@ -20,6 +20,8 @@
  */
 #include "dogen.injection/types/features/reference.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
 
 namespace dogen::injection::features {
 
@@ -45,10 +47,32 @@ make_masd_injection_reference() {
 
 }
 
+reference::feature_group
+reference::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const dogen::variability::helpers::feature_selector s(fm);
+
+    r.reference = s.get_by_name("masd.injection.reference");
+
+    return r;
+}
+
+reference::static_configuration reference::make_static_configuration(
+    const feature_group& fg,
+   const dogen::variability::meta_model::configuration& cfg) {
+
+    static_configuration r;
+    const dogen::variability::helpers::configuration_selector s(cfg);
+    if (s.has_configuration_point(fg.reference))
+        r.reference = s.get_text_collection_content(fg.reference);
+
+    return r;
+}
+
 std::list<dogen::variability::meta_model::feature_template>
 reference::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_injection_reference());
     return r;
 }

@@ -19,7 +19,9 @@
  *
  */
 #include "dogen.variability/types/helpers/value_factory.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.assets/types/features/output_technical_space.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
 
 namespace dogen::assets::features {
 
@@ -45,10 +47,32 @@ make_masd_extraction_output_technical_space() {
 
 }
 
+output_technical_space::feature_group
+output_technical_space::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const dogen::variability::helpers::feature_selector s(fm);
+
+    r.output_technical_space = s.get_by_name("masd.extraction.output_technical_space");
+
+    return r;
+}
+
+output_technical_space::static_configuration output_technical_space::make_static_configuration(
+    const feature_group& fg,
+   const dogen::variability::meta_model::configuration& cfg) {
+
+    static_configuration r;
+    const dogen::variability::helpers::configuration_selector s(cfg);
+    if (s.has_configuration_point(fg.output_technical_space))
+        r.output_technical_space = s.get_text_collection_content(fg.output_technical_space);
+
+    return r;
+}
+
 std::list<dogen::variability::meta_model::feature_template>
 output_technical_space::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_extraction_output_technical_space());
     return r;
 }

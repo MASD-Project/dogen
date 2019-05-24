@@ -20,6 +20,8 @@
  */
 #include "dogen.variability/types/helpers/value_factory.hpp"
 #include "dogen.assets/types/features/decoration_modeline.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
 
 namespace dogen::assets::features {
 
@@ -81,10 +83,40 @@ make_masd_decoration_modeline_technical_space() {
 
 }
 
+decoration_modeline::feature_group
+decoration_modeline::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const dogen::variability::helpers::feature_selector s(fm);
+
+    r.editor = s.get_by_name("masd.decoration.modeline.editor");
+    r.location = s.get_by_name("masd.decoration.modeline.location");
+    r.technical_space = s.get_by_name("masd.decoration.modeline.technical_space");
+
+    return r;
+}
+
+decoration_modeline::static_configuration decoration_modeline::make_static_configuration(
+    const feature_group& fg,
+   const dogen::variability::meta_model::configuration& cfg) {
+
+    static_configuration r;
+    const dogen::variability::helpers::configuration_selector s(cfg);
+    if (s.has_configuration_point(fg.editor))
+        r.editor = s.get_text_content(fg.editor);
+
+    if (s.has_configuration_point(fg.location))
+        r.location = s.get_text_content(fg.location);
+
+    if (s.has_configuration_point(fg.technical_space))
+        r.technical_space = s.get_text_content(fg.technical_space);
+
+    return r;
+}
+
 std::list<dogen::variability::meta_model::feature_template>
 decoration_modeline::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_decoration_modeline_editor());
     r.push_back(make_masd_decoration_modeline_location());
     r.push_back(make_masd_decoration_modeline_technical_space());

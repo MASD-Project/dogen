@@ -147,10 +147,11 @@ make_masd_generation_csharp_test_data_primitive_postfix() {
 
 }
 
+
 std::list<dogen::variability::meta_model::feature_template>
 features::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_generation_csharp_test_data_directory());
     r.push_back(make_masd_generation_csharp_test_data_postfix());
     r.push_back(make_masd_generation_csharp_test_data_class_postfix());

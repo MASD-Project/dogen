@@ -20,6 +20,8 @@
  */
 #include "dogen.variability/types/features/profile.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
 
 namespace dogen::variability::features {
 
@@ -45,10 +47,32 @@ make_masd_variability_profile() {
 
 }
 
+profile::feature_group
+profile::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const dogen::variability::helpers::feature_selector s(fm);
+
+    r.profile = s.get_by_name("masd.variability.profile");
+
+    return r;
+}
+
+profile::static_configuration profile::make_static_configuration(
+    const feature_group& fg,
+   const dogen::variability::meta_model::configuration& cfg) {
+
+    static_configuration r;
+    const dogen::variability::helpers::configuration_selector s(cfg);
+    if (s.has_configuration_point(fg.profile))
+        r.profile = s.get_text_content(fg.profile);
+
+    return r;
+}
+
 std::list<dogen::variability::meta_model::feature_template>
 profile::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_variability_profile());
     return r;
 }

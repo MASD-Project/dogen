@@ -205,10 +205,11 @@ make_masd_generation_csharp_assistant_method_postfix() {
 
 }
 
+
 std::list<dogen::variability::meta_model::feature_template>
 global_features::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_generation_csharp_directory());
     r.push_back(make_masd_generation_csharp_aspect_requires_static_reference_equals());
     r.push_back(make_masd_generation_csharp_visual_studio_project_solution_guid());

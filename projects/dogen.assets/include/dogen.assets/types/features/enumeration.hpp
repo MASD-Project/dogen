@@ -26,6 +26,10 @@
 #endif
 
 #include <list>
+#include <string>
+#include "dogen.variability/types/meta_model/feature.hpp"
+#include "dogen.variability/types/meta_model/configuration.hpp"
+#include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.variability/types/meta_model/feature_template.hpp"
 
 namespace dogen::assets::features {
@@ -34,6 +38,28 @@ namespace dogen::assets::features {
  * @brief Parameters related to enumerations.
  */
 class enumeration final {
+public:
+    struct feature_group {
+        variability::meta_model::feature use_implementation_defined_underlying_element;
+        variability::meta_model::feature underlying_element;
+        variability::meta_model::feature use_implementation_defined_enumerator_values;
+    };
+
+    static feature_group
+    make_feature_group(const variability::meta_model::feature_model& fm);
+
+public:
+    struct static_configuration {
+        bool use_implementation_defined_underlying_element;
+        std::string underlying_element;
+        bool use_implementation_defined_enumerator_values;
+    };
+
+    static static_configuration make_static_configuration(
+        const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+
 public:
     static std::list<dogen::variability::meta_model::feature_template>
     make_templates();

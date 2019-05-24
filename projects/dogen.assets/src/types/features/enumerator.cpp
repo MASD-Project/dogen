@@ -20,6 +20,8 @@
  */
 #include "dogen.assets/types/features/enumerator.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
 
 namespace dogen::assets::features {
 
@@ -65,10 +67,34 @@ make_masd_enumerator_value() {
 
 }
 
+enumerator::feature_group
+enumerator::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const dogen::variability::helpers::feature_selector s(fm);
+
+    r.add_invalid_enumerator = s.get_by_name("masd.enumeration.add_invalid_enumerator");
+    r.value = s.get_by_name("masd.enumerator.value");
+
+    return r;
+}
+
+enumerator::static_configuration enumerator::make_static_configuration(
+    const feature_group& fg,
+   const dogen::variability::meta_model::configuration& cfg) {
+
+    static_configuration r;
+    const dogen::variability::helpers::configuration_selector s(cfg);
+        r.add_invalid_enumerator = s.get_boolean_content(fg.add_invalid_enumerator);
+    if (s.has_configuration_point(fg.value))
+        r.value = s.get_text_content(fg.value);
+
+    return r;
+}
+
 std::list<dogen::variability::meta_model::feature_template>
 enumerator::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_enumeration_add_invalid_enumerator());
     r.push_back(make_masd_enumerator_value());
     return r;

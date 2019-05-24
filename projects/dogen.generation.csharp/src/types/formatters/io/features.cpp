@@ -167,10 +167,11 @@ make_masd_generation_csharp_io_primitive_postfix() {
 
 }
 
+
 std::list<dogen::variability::meta_model::feature_template>
 features::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_generation_csharp_io_directory());
     r.push_back(make_masd_generation_csharp_io_postfix());
     r.push_back(make_masd_generation_csharp_io_class_postfix());

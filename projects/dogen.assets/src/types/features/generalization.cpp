@@ -20,6 +20,8 @@
  */
 #include "dogen.assets/types/features/generalization.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
 
 namespace dogen::assets::features {
 
@@ -63,10 +65,36 @@ make_masd_generalization_parent() {
 
 }
 
+generalization::feature_group
+generalization::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const dogen::variability::helpers::feature_selector s(fm);
+
+    r.is_final = s.get_by_name("masd.generalization.is_final");
+    r.parent = s.get_by_name("masd.generalization.parent");
+
+    return r;
+}
+
+generalization::static_configuration generalization::make_static_configuration(
+    const feature_group& fg,
+   const dogen::variability::meta_model::configuration& cfg) {
+
+    static_configuration r;
+    const dogen::variability::helpers::configuration_selector s(cfg);
+    if (s.has_configuration_point(fg.is_final))
+        r.is_final = s.get_boolean_content(fg.is_final);
+
+    if (s.has_configuration_point(fg.parent))
+        r.parent = s.get_text_content(fg.parent);
+
+    return r;
+}
+
 std::list<dogen::variability::meta_model::feature_template>
 generalization::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_generalization_is_final());
     r.push_back(make_masd_generalization_parent());
     return r;

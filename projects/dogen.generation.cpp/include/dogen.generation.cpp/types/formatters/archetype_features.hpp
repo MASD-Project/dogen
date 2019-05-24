@@ -26,11 +26,37 @@
 #endif
 
 #include <list>
+#include <string>
+#include "dogen.variability/types/meta_model/feature.hpp"
+#include "dogen.variability/types/meta_model/configuration.hpp"
+#include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.variability/types/meta_model/feature_template.hpp"
 
 namespace dogen::generation::cpp::formatters {
 
 class archetype_features final {
+public:
+    struct feature_group {
+        variability::meta_model::feature overwrite;
+        variability::meta_model::feature primary_inclusion_directive;
+        variability::meta_model::feature secondary_inclusion_directive;
+    };
+
+    static feature_group
+    make_feature_group(const variability::meta_model::feature_model& fm);
+
+public:
+    struct static_configuration {
+        bool overwrite;
+        std::string primary_inclusion_directive;
+        std::list<std::string> secondary_inclusion_directive;
+    };
+
+    static static_configuration make_static_configuration(
+        const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+
 public:
     static std::list<dogen::variability::meta_model::feature_template>
     make_templates();

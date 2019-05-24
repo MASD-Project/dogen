@@ -19,6 +19,8 @@
  *
  */
 #include "dogen.variability/types/helpers/value_factory.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.generation.csharp/types/formatters/facet_features.hpp"
 
 namespace dogen::generation::csharp::formatters {
@@ -67,10 +69,32 @@ make_overwrite() {
 
 }
 
+facet_features::feature_group
+facet_features::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const dogen::variability::helpers::feature_selector s(fm);
+
+    r.supported = s.get_by_name("supported");
+    r.overwrite = s.get_by_name("overwrite");
+
+    return r;
+}
+
+facet_features::static_configuration facet_features::make_static_configuration(
+    const feature_group& fg,
+   const dogen::variability::meta_model::configuration& cfg) {
+
+    static_configuration r;
+    const dogen::variability::helpers::configuration_selector s(cfg);
+        r.supported = s.get_boolean_content(fg.supported);
+        r.overwrite = s.get_boolean_content(fg.overwrite);
+    return r;
+}
+
 std::list<dogen::variability::meta_model::feature_template>
 facet_features::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_supported());
     r.push_back(make_overwrite());
     return r;

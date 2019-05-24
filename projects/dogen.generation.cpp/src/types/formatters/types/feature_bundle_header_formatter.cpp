@@ -30,6 +30,7 @@
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.assets/types/helpers/meta_name_factory.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
+#include "dogen.utility/types/string/splitter.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include <boost/throw_exception.hpp>
 
@@ -78,13 +79,26 @@ boost::filesystem::path feature_bundle_header_formatter::full_path(
 
 std::list<std::string> feature_bundle_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const assets::meta_model::element& /*e*/) const {
+    const assets::meta_model::element& e) const {
     using assets::meta_model::variability::feature_bundle;
 
+    const auto& fb(assistant::as<feature_bundle>(e));
     auto builder(f.make());
 
     builder.add(inclusion_constants::std::list());
     builder.add("\"dogen.variability/types/meta_model/feature_template.hpp\"");
+
+    if (fb.generate_static_configuration()) {
+        builder.add("\"dogen.variability/types/meta_model/feature_model.hpp\"");
+        builder.add("\"dogen.variability/types/meta_model/configuration.hpp\"");
+        builder.add("\"dogen.variability/types/meta_model/feature.hpp\"");
+
+        const auto ch_arch(traits::class_header_archetype());
+        builder.add(fb.transparent_associations(), ch_arch);
+
+        const auto fwd_arch(traits::forward_declarations_archetype());
+        builder.add(fb.opaque_associations(), fwd_arch);
+    }
 
     return builder.build();
 }
@@ -103,9 +117,36 @@ format(const context& ctx, const assets::meta_model::element& e) const {
         {
             const auto ns(a.make_namespaces(fb.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
+            using utility::string::splitter;
 a.stream() << std::endl;
-           a.comment(fb.documentation());
+            a.comment(fb.documentation());
 a.stream() << "class " << sn << " final {" << std::endl;
+            if (fb.generate_static_configuration()) {
+a.stream() << "public:" << std::endl;
+a.stream() << "    struct feature_group {" << std::endl;
+                for (const auto& fb_ft : fb.feature_templates()) {
+                    const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
+a.stream() << "        variability::meta_model::feature " << simple_key << ";" << std::endl;
+                }
+a.stream() << "    };" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    static feature_group" << std::endl;
+a.stream() << "    make_feature_group(const variability::meta_model::feature_model& fm);" << std::endl;
+a.stream() << std::endl;
+a.stream() << "public:" << std::endl;
+a.stream() << "    struct static_configuration {" << std::endl;
+                for (const auto& fb_ft : fb.feature_templates()) {
+                    const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
+a.stream() << "        " << a.get_qualified_name(fb_ft.parsed_type()) << " " << simple_key << ";" << std::endl;
+                }
+a.stream() << "    };" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    static static_configuration make_static_configuration(" << std::endl;
+a.stream() << "        const feature_group& fg," << std::endl;
+a.stream() << "        const variability::meta_model::configuration& cfg);" << std::endl;
+a.stream() << std::endl;
+            }
+a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
 a.stream() << "    static std::list<dogen::variability::meta_model::feature_template>" << std::endl;
 a.stream() << "    make_templates();" << std::endl;

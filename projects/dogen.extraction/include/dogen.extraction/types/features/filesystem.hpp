@@ -26,11 +26,41 @@
 #endif
 
 #include <list>
+#include <string>
+#include "dogen.variability/types/meta_model/feature.hpp"
+#include "dogen.variability/types/meta_model/configuration.hpp"
+#include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.variability/types/meta_model/feature_template.hpp"
 
 namespace dogen::extraction::features {
 
 class filesystem final {
+public:
+    struct feature_group {
+        variability::meta_model::feature force_write;
+        variability::meta_model::feature delete_extra_files;
+        variability::meta_model::feature ignore_files_matching_regex;
+        variability::meta_model::feature delete_empty_directories;
+        variability::meta_model::feature enable_backend_directories;
+    };
+
+    static feature_group
+    make_feature_group(const variability::meta_model::feature_model& fm);
+
+public:
+    struct static_configuration {
+        bool force_write;
+        bool delete_extra_files;
+        std::list<std::string> ignore_files_matching_regex;
+        bool delete_empty_directories;
+        bool enable_backend_directories;
+    };
+
+    static static_configuration make_static_configuration(
+        const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+
 public:
     static std::list<dogen::variability::meta_model::feature_template>
     make_templates();

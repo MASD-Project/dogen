@@ -26,6 +26,10 @@
 #endif
 
 #include <list>
+#include <string>
+#include "dogen.variability/types/meta_model/feature.hpp"
+#include "dogen.variability/types/meta_model/configuration.hpp"
+#include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.variability/types/meta_model/feature_template.hpp"
 
 namespace dogen::generation::features {
@@ -34,6 +38,26 @@ namespace dogen::generation::features {
  * @brief Features related to formatting.
  */
 class formatting final {
+public:
+    struct feature_group {
+        variability::meta_model::feature formatting_style;
+        variability::meta_model::feature formatting_input;
+    };
+
+    static feature_group
+    make_feature_group(const variability::meta_model::feature_model& fm);
+
+public:
+    struct static_configuration {
+        std::string formatting_style;
+        std::string formatting_input;
+    };
+
+    static static_configuration make_static_configuration(
+        const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+
 public:
     static std::list<dogen::variability::meta_model::feature_template>
     make_templates();

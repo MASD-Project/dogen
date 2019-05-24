@@ -26,6 +26,9 @@
 #endif
 
 #include <list>
+#include "dogen.variability/types/meta_model/feature.hpp"
+#include "dogen.variability/types/meta_model/configuration.hpp"
+#include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.variability/types/meta_model/feature_template.hpp"
 
 namespace dogen::assets::features {
@@ -34,6 +37,28 @@ namespace dogen::assets::features {
  * @brief Parameters to configure generic types.
  */
 class type_parameters final {
+public:
+    struct feature_group {
+        variability::meta_model::feature variable_number_of_parameters;
+        variability::meta_model::feature count;
+        variability::meta_model::feature always_in_heap;
+    };
+
+    static feature_group
+    make_feature_group(const variability::meta_model::feature_model& fm);
+
+public:
+    struct static_configuration {
+        bool variable_number_of_parameters;
+        int count;
+        bool always_in_heap;
+    };
+
+    static static_configuration make_static_configuration(
+        const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+
 public:
     static std::list<dogen::variability::meta_model::feature_template>
     make_templates();

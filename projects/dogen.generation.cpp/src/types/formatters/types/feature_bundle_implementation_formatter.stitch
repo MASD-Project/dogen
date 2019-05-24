@@ -29,12 +29,17 @@ std::list<std::string> feature_bundle_implementation_formatter::inclusion_depend
     const formattables::dependencies_builder_factory& f,
     const assets::meta_model::element& e) const {
     using assets::meta_model::variability::feature_bundle;
-    const auto& o(assistant::as<feature_bundle>(e));
+    const auto& fb(assistant::as<feature_bundle>(e));
     auto builder(f.make());
 
     const auto ch_arch(traits::feature_bundle_header_archetype());
-    builder.add(o.name(), ch_arch);
+    builder.add(fb.name(), ch_arch);
     builder.add("\"dogen.variability/types/helpers/value_factory.hpp\"");
+
+    if (fb.generate_static_configuration()) {
+        builder.add("\"dogen.variability/types/helpers/feature_selector.hpp\"");
+        builder.add("\"dogen.variability/types/helpers/configuration_selector.hpp\"");
+    }
 
     return builder.build();
 }
@@ -116,10 +121,60 @@ make_<#= fb_ft.identifiable_key() #>() {
 
 }
 
+<#+
+            if (fb.generate_static_configuration()) {
+#>
+<#= sn #>::feature_group
+<#= sn #>::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const dogen::variability::helpers::feature_selector s(fm);
+
+<#+
+                for (const auto& fb_ft : fb.feature_templates()) {
+                    const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
+#>
+    r.<#= simple_key #> = s.get_by_name("<#= fb_ft.key() #>");
+<#+
+                }
+#>
+
+    return r;
+}
+
+<#= sn #>::static_configuration <#= sn #>::make_static_configuration(
+    const feature_group& fg,
+   const dogen::variability::meta_model::configuration& cfg) {
+
+    static_configuration r;
+    const dogen::variability::helpers::configuration_selector s(cfg);
+<#+
+                for (const auto& fb_ft : fb.feature_templates()) {
+                    const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
+
+                    const bool has_default_value(fb_ft.value().empty());
+                    if (has_default_value) {
+#>
+    if (s.has_configuration_point(fg.<#= simple_key #>))
+        r.<#= simple_key #> = s.get_<#= enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) #>_content(fg.<#= simple_key #>);
+
+<#+
+                    } else {
+#>
+        r.<#= simple_key #> = s.get_<#= enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) #>_content(fg.<#= simple_key #>);
+<#+
+                    }
+                }
+#>
+    return r;
+}
+<#+
+            }
+#>
+
 std::list<dogen::variability::meta_model::feature_template>
 <#= sn #>::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
 <#+
 
             for (const auto& fb_ft : fb.feature_templates()) {

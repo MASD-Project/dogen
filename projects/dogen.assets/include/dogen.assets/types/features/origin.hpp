@@ -26,6 +26,9 @@
 #endif
 
 #include <list>
+#include "dogen.variability/types/meta_model/feature.hpp"
+#include "dogen.variability/types/meta_model/configuration.hpp"
+#include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.variability/types/meta_model/feature_template.hpp"
 
 namespace dogen::assets::features {
@@ -34,6 +37,24 @@ namespace dogen::assets::features {
  * @brief Features related to the origin of the model.
  */
 class origin final {
+public:
+    struct feature_group {
+        variability::meta_model::feature is_proxy_model;
+    };
+
+    static feature_group
+    make_feature_group(const variability::meta_model::feature_model& fm);
+
+public:
+    struct static_configuration {
+        bool is_proxy_model;
+    };
+
+    static static_configuration make_static_configuration(
+        const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+
 public:
     static std::list<dogen::variability::meta_model::feature_template>
     make_templates();

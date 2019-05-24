@@ -565,10 +565,11 @@ make_masd_generation_cpp_visual_studio_project_postfix() {
 
 }
 
+
 std::list<dogen::variability::meta_model::feature_template>
 global_features::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_generation_cpp_headers_output_directory());
     r.push_back(make_masd_generation_cpp_directory());
     r.push_back(make_masd_generation_cpp_inclusion_required());

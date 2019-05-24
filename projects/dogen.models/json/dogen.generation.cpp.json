@@ -2099,6 +2099,9 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.generate_static_configuration": "false"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2313,6 +2316,9 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.generate_static_configuration": "false"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2432,6 +2438,9 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.generate_static_configuration": "false"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2551,6 +2560,9 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.generate_static_configuration": "false"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2670,6 +2682,9 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.generate_static_configuration": "false"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2789,6 +2804,9 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.generate_static_configuration": "false"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2930,6 +2948,9 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.generate_static_configuration": "false"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -3016,6 +3037,9 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.generate_static_configuration": "false"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -3419,6 +3443,9 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.generate_static_configuration": "false"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -3550,6 +3577,9 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.generate_static_configuration": "false"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {

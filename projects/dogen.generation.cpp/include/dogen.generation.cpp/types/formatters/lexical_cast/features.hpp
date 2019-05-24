@@ -31,6 +31,7 @@
 namespace dogen::generation::cpp::formatters::lexical_cast {
 
 class features final {
+
 public:
     static std::list<dogen::variability::meta_model::feature_template>
     make_templates();

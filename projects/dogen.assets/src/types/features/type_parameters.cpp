@@ -20,6 +20,8 @@
  */
 #include "dogen.assets/types/features/type_parameters.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
 
 namespace dogen::assets::features {
 
@@ -87,10 +89,34 @@ make_masd_type_parameters_always_in_heap() {
 
 }
 
+type_parameters::feature_group
+type_parameters::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const dogen::variability::helpers::feature_selector s(fm);
+
+    r.variable_number_of_parameters = s.get_by_name("masd.type_parameters.variable_number_of_parameters");
+    r.count = s.get_by_name("masd.type_parameters.count");
+    r.always_in_heap = s.get_by_name("masd.type_parameters.always_in_heap");
+
+    return r;
+}
+
+type_parameters::static_configuration type_parameters::make_static_configuration(
+    const feature_group& fg,
+   const dogen::variability::meta_model::configuration& cfg) {
+
+    static_configuration r;
+    const dogen::variability::helpers::configuration_selector s(cfg);
+        r.variable_number_of_parameters = s.get_boolean_content(fg.variable_number_of_parameters);
+        r.count = s.get_number_content(fg.count);
+        r.always_in_heap = s.get_boolean_content(fg.always_in_heap);
+    return r;
+}
+
 std::list<dogen::variability::meta_model::feature_template>
 type_parameters::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_type_parameters_variable_number_of_parameters());
     r.push_back(make_masd_type_parameters_count());
     r.push_back(make_masd_type_parameters_always_in_heap());

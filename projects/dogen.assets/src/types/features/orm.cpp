@@ -20,6 +20,8 @@
  */
 #include "dogen.assets/types/features/orm.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
 
 namespace dogen::assets::features {
 
@@ -189,10 +191,64 @@ make_masd_orm_type_override() {
 
 }
 
+orm::feature_group
+orm::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const dogen::variability::helpers::feature_selector s(fm);
+
+    r.database_system = s.get_by_name("masd.orm.database_system");
+    r.table_name = s.get_by_name("masd.orm.table_name");
+    r.schema_name = s.get_by_name("masd.orm.schema_name");
+    r.is_primary_key = s.get_by_name("masd.orm.is_primary_key");
+    r.column_name = s.get_by_name("masd.orm.column_name");
+    r.is_nullable = s.get_by_name("masd.orm.is_nullable");
+    r.is_composite = s.get_by_name("masd.orm.is_composite");
+    r.letter_case = s.get_by_name("masd.orm.letter_case");
+    r.type_override = s.get_by_name("masd.orm.type_override");
+
+    return r;
+}
+
+orm::static_configuration orm::make_static_configuration(
+    const feature_group& fg,
+   const dogen::variability::meta_model::configuration& cfg) {
+
+    static_configuration r;
+    const dogen::variability::helpers::configuration_selector s(cfg);
+    if (s.has_configuration_point(fg.database_system))
+        r.database_system = s.get_text_collection_content(fg.database_system);
+
+    if (s.has_configuration_point(fg.table_name))
+        r.table_name = s.get_text_content(fg.table_name);
+
+    if (s.has_configuration_point(fg.schema_name))
+        r.schema_name = s.get_text_content(fg.schema_name);
+
+    if (s.has_configuration_point(fg.is_primary_key))
+        r.is_primary_key = s.get_boolean_content(fg.is_primary_key);
+
+    if (s.has_configuration_point(fg.column_name))
+        r.column_name = s.get_text_content(fg.column_name);
+
+    if (s.has_configuration_point(fg.is_nullable))
+        r.is_nullable = s.get_boolean_content(fg.is_nullable);
+
+    if (s.has_configuration_point(fg.is_composite))
+        r.is_composite = s.get_boolean_content(fg.is_composite);
+
+    if (s.has_configuration_point(fg.letter_case))
+        r.letter_case = s.get_text_content(fg.letter_case);
+
+    if (s.has_configuration_point(fg.type_override))
+        r.type_override = s.get_text_collection_content(fg.type_override);
+
+    return r;
+}
+
 std::list<dogen::variability::meta_model::feature_template>
 orm::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_orm_database_system());
     r.push_back(make_masd_orm_table_name());
     r.push_back(make_masd_orm_schema_name());

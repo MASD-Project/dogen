@@ -167,10 +167,11 @@ make_masd_generation_csharp_types_exception_postfix() {
 
 }
 
+
 std::list<dogen::variability::meta_model::feature_template>
 features::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_generation_csharp_types_directory());
     r.push_back(make_masd_generation_csharp_types_postfix());
     r.push_back(make_masd_generation_csharp_types_class_postfix());

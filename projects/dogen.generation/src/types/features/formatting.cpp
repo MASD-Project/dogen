@@ -20,6 +20,8 @@
  */
 #include "dogen.generation/types/features/formatting.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
 
 namespace dogen::generation::features {
 
@@ -61,10 +63,36 @@ make_formatting_input() {
 
 }
 
+formatting::feature_group
+formatting::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const dogen::variability::helpers::feature_selector s(fm);
+
+    r.formatting_style = s.get_by_name("formatting_style");
+    r.formatting_input = s.get_by_name("formatting_input");
+
+    return r;
+}
+
+formatting::static_configuration formatting::make_static_configuration(
+    const feature_group& fg,
+   const dogen::variability::meta_model::configuration& cfg) {
+
+    static_configuration r;
+    const dogen::variability::helpers::configuration_selector s(cfg);
+    if (s.has_configuration_point(fg.formatting_style))
+        r.formatting_style = s.get_text_content(fg.formatting_style);
+
+    if (s.has_configuration_point(fg.formatting_input))
+        r.formatting_input = s.get_text_content(fg.formatting_input);
+
+    return r;
+}
+
 std::list<dogen::variability::meta_model::feature_template>
 formatting::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_formatting_style());
     r.push_back(make_formatting_input());
     return r;

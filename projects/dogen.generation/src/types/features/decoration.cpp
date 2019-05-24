@@ -20,6 +20,8 @@
  */
 #include "dogen.generation/types/features/decoration.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
+#include "dogen.variability/types/helpers/feature_selector.hpp"
+#include "dogen.variability/types/helpers/configuration_selector.hpp"
 
 namespace dogen::generation::features {
 
@@ -117,10 +119,48 @@ make_masd_generation_decoration_marker_name() {
 
 }
 
+decoration::feature_group
+decoration::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+    feature_group r;
+    const dogen::variability::helpers::feature_selector s(fm);
+
+    r.enabled = s.get_by_name("masd.generation.decoration.enabled");
+    r.copyright_notice = s.get_by_name("masd.generation.decoration.copyright_notice");
+    r.licence_name = s.get_by_name("masd.generation.decoration.licence_name");
+    r.modeline_group_name = s.get_by_name("masd.generation.decoration.modeline_group_name");
+    r.marker_name = s.get_by_name("masd.generation.decoration.marker_name");
+
+    return r;
+}
+
+decoration::static_configuration decoration::make_static_configuration(
+    const feature_group& fg,
+   const dogen::variability::meta_model::configuration& cfg) {
+
+    static_configuration r;
+    const dogen::variability::helpers::configuration_selector s(cfg);
+    if (s.has_configuration_point(fg.enabled))
+        r.enabled = s.get_boolean_content(fg.enabled);
+
+    if (s.has_configuration_point(fg.copyright_notice))
+        r.copyright_notice = s.get_text_collection_content(fg.copyright_notice);
+
+    if (s.has_configuration_point(fg.licence_name))
+        r.licence_name = s.get_text_content(fg.licence_name);
+
+    if (s.has_configuration_point(fg.modeline_group_name))
+        r.modeline_group_name = s.get_text_content(fg.modeline_group_name);
+
+    if (s.has_configuration_point(fg.marker_name))
+        r.marker_name = s.get_text_content(fg.marker_name);
+
+    return r;
+}
+
 std::list<dogen::variability::meta_model::feature_template>
 decoration::make_templates() {
     using namespace dogen::variability::meta_model;
-    std::list<feature_template> r;
+    std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_generation_decoration_enabled());
     r.push_back(make_masd_generation_decoration_copyright_notice());
     r.push_back(make_masd_generation_decoration_licence_name());
