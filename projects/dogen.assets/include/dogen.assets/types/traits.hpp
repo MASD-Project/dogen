@@ -107,6 +107,7 @@ struct traits {
         static std::string template_kind();
         static std::string untyped_value();
         static std::string qualified_name();
+        static std::string generate_static_configuration();
     };
 
     struct mapping {

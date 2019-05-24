@@ -265,6 +265,11 @@ std::string traits::variability::qualified_name() {
     return r;
 }
 
+std::string traits::variability::generate_static_configuration() {
+    static std::string r("masd.variability.generate_static_configuration");
+    return r;
+}
+
 std::string traits::variability::untyped_value() {
     static std::string r("masd.variability.value");
     return r;

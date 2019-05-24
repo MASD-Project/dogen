@@ -47,6 +47,7 @@ private:
         variability::meta_model::feature archetype_location_archetype;
         variability::meta_model::feature template_kind;
         variability::meta_model::feature qualified_name;
+        variability::meta_model::feature generate_static_configuration;
     };
 
     static feature_group make_feature_group(
@@ -77,6 +78,9 @@ private:
         const variability::meta_model::configuration& cfg);
 
     static std::string make_qualified_name(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+    static bool make_generate_static_configuration(const feature_group& fg,
         const variability::meta_model::configuration& cfg);
 
 private:

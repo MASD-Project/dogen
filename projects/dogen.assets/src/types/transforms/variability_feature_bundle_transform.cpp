@@ -72,6 +72,8 @@ variability_feature_bundle_transform::make_feature_group(
         traits::variability::archetype_location_archetype());
     r.template_kind = s.get_by_name(traits::variability::template_kind());
     r.qualified_name = s.get_by_name(traits::variability::qualified_name());
+    r.generate_static_configuration =
+        s.get_by_name(traits::variability::generate_static_configuration());
 
     return r;
 }
@@ -168,6 +170,18 @@ make_template_kind(const feature_group& fg,
     return r;
 }
 
+bool variability_feature_bundle_transform::
+make_generate_static_configuration(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) {
+
+    const variability::helpers::configuration_selector s(cfg);
+    const auto& gsc(fg.generate_static_configuration);
+    const auto r(s.get_boolean_content_or_default(gsc));
+    BOOST_LOG_SEV(lg, trace) << "Read generate static configuration: " << r;
+
+    return r;
+}
+
 void variability_feature_bundle_transform::update(const feature_group& fg,
     meta_model::variability::feature_template& ft) {
     const auto& cfg(*ft.configuration());
@@ -203,6 +217,10 @@ apply(const context& ctx,
     const auto fg(make_feature_group(fm));
     for (auto& pair : bundles) {
         auto& fb(*pair.second);
+
+        const auto& cfg(*fb.configuration());
+        const auto gsc(make_generate_static_configuration(fg, cfg));
+        fb.generate_static_configuration(gsc);
 
         for (auto& ft : fb.feature_templates()) {
             update(fg, ft);
