@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen.injection/types/traits.hpp"
 #include "dogen.injection/types/injection.hpp"
 #include "dogen.injection/types/meta_model/model.hpp"
 #include "dogen.injection/types/features/features.hpp"
