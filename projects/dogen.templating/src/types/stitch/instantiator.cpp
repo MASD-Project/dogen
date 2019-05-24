@@ -55,8 +55,7 @@ instantiator(const boost::filesystem::path& wale_templates_directory,
     const variability::meta_model::feature_model& fm,
     const variability::helpers::configuration_factory& cf)
     : wale_templates_directory_(wale_templates_directory),
-      configuration_factory_(cf), properties_factory_(fm),
-      feature_model_(fm) {}
+      configuration_factory_(cf), feature_model_(fm) {}
 
 boost::filesystem::path
 instantiator::compute_output_path(const boost::filesystem::path& input_path,
@@ -217,7 +216,6 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
         const auto& tv(r.body().tagged_values());
         const auto bp(variability::meta_model::binding_point::global);
         const auto cfg(configuration_factory_.make(tv, bp));
-        // r.properties(properties_factory_.make(cfg));
         r.properties(create_properties(cfg));
 
         /*

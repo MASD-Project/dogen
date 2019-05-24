@@ -32,7 +32,6 @@
 #include "dogen.variability/types/helpers/configuration_factory.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.extraction/types/meta_model/artefact.hpp"
-#include "dogen.templating/types/stitch/properties_factory.hpp"
 #include "dogen.templating/types/stitch/text_template.hpp"
 
 namespace dogen::templating::stitch {
@@ -112,7 +111,6 @@ public:
 private:
     const boost::filesystem::path wale_templates_directory_;
     const variability::helpers::configuration_factory& configuration_factory_;
-    const properties_factory properties_factory_;
     const variability::meta_model::feature_model& feature_model_;
 };
 
