@@ -302,7 +302,7 @@ get_number_content_or_default(const meta_model::feature& f) const {
 }
 
 std::unordered_map<std::string, std::string>
-configuration_selector::get_kvp_content(const meta_model::value& v) {
+configuration_selector::get_key_value_pair_content(const meta_model::value& v) {
     try {
         const auto& b(dynamic_cast<const meta_model::key_value_pair&>(v));
         return b.content();
@@ -313,11 +313,11 @@ configuration_selector::get_kvp_content(const meta_model::value& v) {
 }
 
 std::unordered_map<std::string, std::string>
-configuration_selector::get_kvp_content(const std::string& qn) const {
+configuration_selector::get_key_value_pair_content(const std::string& qn) const {
     const auto& v(get_configuration_point_value(qn));
 
     try {
-        return get_kvp_content(v);
+        return get_key_value_pair_content(v);
     } catch(boost::exception& e) {
         BOOST_LOG_SEV(lg, error) << not_kvp << qn;
         e << extension_error_info(configuration_point_name + qn);
@@ -326,8 +326,8 @@ configuration_selector::get_kvp_content(const std::string& qn) const {
 }
 
 std::unordered_map<std::string, std::string> configuration_selector::
-get_kvp_content(const meta_model::feature& f) const {
-    return get_kvp_content(f.name().qualified());
+get_key_value_pair_content(const meta_model::feature& f) const {
+    return get_key_value_pair_content(f.name().qualified());
 }
 
 }

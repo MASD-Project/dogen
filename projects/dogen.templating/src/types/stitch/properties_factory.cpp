@@ -136,7 +136,7 @@ extract_wale_kvps(const variability::meta_model::configuration& cfg) const {
     if (!s.has_configuration_point(f))
         return r;
 
-    return s.get_kvp_content(f);
+    return s.get_key_value_pair_content(f);
 }
 
 properties properties_factory::

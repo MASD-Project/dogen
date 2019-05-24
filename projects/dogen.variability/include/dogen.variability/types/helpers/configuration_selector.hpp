@@ -228,7 +228,7 @@ public:
      * @pre @v must have a type of key/value pair.
      */
     static std::unordered_map<std::string, std::string>
-    get_kvp_content(const meta_model::value& v);
+    get_key_value_pair_content(const meta_model::value& v);
 
     /**
      * @brief Retrieves the configuration point associated with the
@@ -242,9 +242,9 @@ public:
      */
     /**@{*/
     std::unordered_map<std::string, std::string>
-    get_kvp_content(const std::string& qn) const;
+    get_key_value_pair_content(const std::string& qn) const;
     std::unordered_map<std::string, std::string>
-    get_kvp_content(const meta_model::feature& f) const;
+    get_key_value_pair_content(const meta_model::feature& f) const;
     /**@}*/
 
 private:

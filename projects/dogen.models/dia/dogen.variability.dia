@@ -11166,7 +11166,7 @@ with Masd.
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#get_kvp_content#</dia:string>
+            <dia:string>#get_key_value_pair_content#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -11214,7 +11214,7 @@ with Masd.
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#get_kvp_content#</dia:string>
+            <dia:string>#get_key_value_pair_content#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -11262,7 +11262,7 @@ with Masd.
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#get_kvp_content#</dia:string>
+            <dia:string>#get_key_value_pair_content#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
