@@ -725,9 +725,9 @@ try_resolve_object_template_name(meta_model::name ctx, const std::string& s,
 
     BOOST_LOG_SEV(lg, trace) << "Internal modules climb: " << r;
 
-    const auto ots(m.structural_elements().object_templates());
+    const auto& ots(m.structural_elements().object_templates());
     auto i(ots.find(r.qualified().dot()));
-    if (i != m.structural_elements().object_templates().end()) {
+    if (i != ots.end()) {
         BOOST_LOG_SEV(lg, trace) << "Found object template.";
         return r;
     }
@@ -749,7 +749,7 @@ try_resolve_object_template_name(meta_model::name ctx, const std::string& s,
             BOOST_LOG_SEV(lg, trace) << "Internal modules climb: " << r;
 
             i = ots.find(r.qualified().dot());
-            if (i != m.structural_elements().object_templates().end()) {
+            if (i != ots.end()) {
                 BOOST_LOG_SEV(lg, trace) << "Found object templates.";
                 return r;
             }
@@ -760,8 +760,7 @@ try_resolve_object_template_name(meta_model::name ctx, const std::string& s,
      * There are no object templates in this model which match the
      * stereotype name.
      */
-    BOOST_LOG_SEV(lg, warn) << "Could not find object template with name: "
-                             << s;
+    BOOST_LOG_SEV(lg, warn) << "Could not find object template: " << s;
     return boost::optional<meta_model::name>();
 }
 
