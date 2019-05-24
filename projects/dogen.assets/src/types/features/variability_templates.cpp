@@ -195,7 +195,7 @@ make_masd_variability_generate_static_configuration() {
     r.name().qualified("masd.variability.generate_static_configuration");
     const auto vt(value_type::boolean);
     r.value_type(vt);
-    r.binding_point(binding_point::property);
+    r.binding_point(binding_point::element);
     r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "true" }));
