@@ -403,7 +403,7 @@
       ]
     },
     {
-      "name": "features::registrar",
+      "name": "features::initializer",
       "stereotypes": [
         "masd::variability::feature_template_initializer"
       ],

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_INJECTION_TYPES_FEATURES_REGISTRAR_HPP
-#define DOGEN_INJECTION_TYPES_FEATURES_REGISTRAR_HPP
+#ifndef DOGEN_INJECTION_TYPES_FEATURES_INITIALIZER_HPP
+#define DOGEN_INJECTION_TYPES_FEATURES_INITIALIZER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,7 +33,7 @@ namespace dogen::injection::features {
 /**
  * @brief Registers all of the available feature templates with registrar.
  */
-class registrar final {
+class initializer final {
 public:
     static void register_templates(
         variability::helpers::feature_template_registrar& rg);

@@ -32,7 +32,7 @@
 #include "dogen.variability/types/transforms/feature_model_production_chain.hpp"
 #include "dogen.templating/types/initializer.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
-#include "dogen.injection/types/features/registrar.hpp"
+#include "dogen.injection/types/features/initializer.hpp"
 #include "dogen.assets/types/features/initializer.hpp"
 #include "dogen.generation/types/features/initializer.hpp"
 #include "dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
@@ -192,7 +192,7 @@ context context_factory::make_context(const configuration& cfg,
      */
     using variability::transforms::feature_model_production_chain;
     variability::helpers::feature_template_registrar ftrg;
-    injection::features::registrar::register_templates(ftrg);
+    injection::features::initializer::register_templates(ftrg);
     assets::features::initializer::register_templates(ftrg);
     generation::features::initializer::register_templates(ftrg);
     templating::initializer::register_templates(ftrg);

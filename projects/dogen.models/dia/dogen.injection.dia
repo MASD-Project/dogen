@@ -6527,7 +6527,7 @@ the injection model.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#registrar#</dia:string>
+        <dia:string>#initializer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::variability::feature_template_initializer#</dia:string>
