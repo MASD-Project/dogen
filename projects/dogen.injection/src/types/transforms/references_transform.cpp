@@ -28,6 +28,7 @@
 #include "dogen.injection/io/meta_model/model_io.hpp"
 #include "dogen.injection/types/traits.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
+#include "dogen.injection/types/features/reference.hpp"
 #include "dogen.injection/types/transforms/references_transform.hpp"
 
 namespace {
@@ -67,10 +68,15 @@ void references_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "references transform",
         transform_id, m.name(), *ctx.tracer(), m);
 
-    const auto &fg(make_feature_group(*ctx.feature_model()));
-    const auto gcfg(*m.configuration());
-    const auto refs(make_references(fg, gcfg));
-    m.references(refs);
+    const auto& fm(*ctx.feature_model());
+    const auto fg(features::reference::make_feature_group(fm));
+    const auto cfg(*m.configuration());
+    const auto scfg(features::reference::make_static_configuration(fg, cfg));
+    m.references(scfg.reference);
+
+    // const auto &fg(make_feature_group(*ctx.feature_model()));
+    // const auto refs(make_references(fg, gcfg));
+    // m.references(refs);
 
     stp.end_transform(m);
 }
