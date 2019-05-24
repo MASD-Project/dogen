@@ -1,7 +1,7 @@
 #+title: Sprint Backlog 18
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: STARTED | COMPLETED CANCELLED POSTPONED
-#+tags: { story(s) epic(e) }
+#+tags: { story(s) epic(e) spike(p) }
 
 * Mission Statement
 
@@ -13,23 +13,24 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-23 Thu 14:22]
+#+CAPTION: Clock summary at [2019-05-24 Fri 09:31]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *20:23* |       |      | 100.0 |
+| *Total time*                                           | *21:07* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 20:23   |       |      | 100.0 |
-| Active                                                 |         | 20:23 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 3:37 |  17.7 |
-| Create a video demo for the previous sprint's features |         |       | 3:46 |  18.5 |
-| Sprint and product backlog grooming                    |         |       | 0:54 |   4.4 |
-| Make wale templates meta-model elements                |         |       | 2:45 |  13.5 |
-| Flatten the data directory                             |         |       | 1:11 |   5.8 |
+| Stories                                                | 21:07   |       |      | 100.0 |
+| Active                                                 |         | 21:07 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 3:37 |  17.1 |
+| Create a video demo for the previous sprint's features |         |       | 3:46 |  17.8 |
+| Sprint and product backlog grooming                    |         |       | 1:08 |   5.4 |
+| Make wale templates meta-model elements                |         |       | 2:45 |  13.0 |
+| Flatten the data directory                             |         |       | 1:11 |   5.6 |
 | Rename =dogen::cpp::header_only= stereotypes           |         |       | 0:15 |   1.2 |
-| Rename coding model                                    |         |       | 2:17 |  11.2 |
-| Read variability papers                                |         |       | 0:56 |   4.6 |
-| Add code generation support to static configurations   |         |       | 4:42 |  23.1 |
+| Rename coding model                                    |         |       | 2:17 |  10.8 |
+| Windows build is failing on a number of tests          |         |       | 0:30 |   2.4 |
+| Read variability papers                                |         |       | 0:56 |   4.4 |
+| Add code generation support to static configurations   |         |       | 4:42 |  22.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -200,6 +201,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-05-24 Fri 08:45]--[2019-05-24 Fri 08:59] =>  0:24
     CLOCK: [2019-05-23 Thu 10:45]--[2019-05-23 Thu 11:01] =>  0:16
     CLOCK: [2019-05-23 Thu 10:28]--[2019-05-23 Thu 10:44] =>  0:16
     CLOCK: [2019-05-21 Tue 10:20]--[2019-05-21 Tue 10:26] =>  0:06
@@ -338,6 +340,47 @@ Tasks:
 After reading the variability paper review, it seems a more
 appropriate name for coding is the assets meta-model. It will have all
 assets including product and component. Rename the model.
+
+*** COMPLETED Consider renaming =coding= model                        :story:
+    CLOSED: [2019-05-24 Fri 08:30]
+
+The real name of this model is something like "component". This will
+make sense once we add the product model. In addition we need to
+somehow share the "generation" model across coding and product
+models. In reality, much of what is in generation more properly
+belongs to =archetypes= because is functionality related to
+projections into archetype space.
+
+=coding= is the meta-model for modeling elements that exist inside a
+component of a product. "component" is not a particularly brilliant
+name, and it is somewhat confusing because it is used in UML with a
+somewhat different meaning, but the more correct name - chosen by
+Voelter - would be "building block", which is too long. We just need
+to make it clear that "component" and "product" are terms from the
+MASD domain. Library and executable are the types of components.
+
+Another point to consider before this rename is that we may not
+necessarily need a product model. Maybe we can add the elements for
+product directly into coding. We need to identify all of these
+elements and see if they are sufficient to exist as a stand alone
+model. If we do create a single model, then "coding" is actually not
+the worse possible name (e.g. component + product = coding, the
+activity for creating products).
+
+*** COMPLETED Windows build is failing on a number of tests           :spike:
+    CLOSED: [2019-05-24 Fri 09:30]
+    :LOGBOOK:
+    CLOCK: [2019-05-24 Fri 09:00]--[2019-05-24 Fri 09:30] =>  0:30
+    :END:
+
+For some strange reason, we seem to be failing to resolve object
+templates on a number of tests:
+
+: ..\..\..\..\projects\dogen.assets\src\types\transforms\object_templates_transform.cpp(99): Throw in function resolve_object_template
+: Dynamic exception type: struct boost::wrapexcept<class dogen::assets::transforms::transformation_error>
+: std::exception::what: Object template not found in object templates container: dogen.assets.meta_model.decoration.Container
+
+The problem started with the commits done in the PM yesterday.
 
 *** STARTED Read variability papers                                   :story:
     :LOGBOOK:

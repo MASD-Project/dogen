@@ -94,7 +94,7 @@ If we change this to
 
 We get a parsing error.
 
-*** Conside renaming LAM                                              :story:
+*** Consider renaming LAM                                             :story:
 
 We originally created the Language Agnostic Model (LAM). This may not
 be the best of names, especially now we moved over to technical
@@ -499,31 +499,6 @@ Snippet of results after =sort | uniq -c=
 
 We need to investigate the generation pipeline to understand where
 this is coming from.
-
-*** Consider renaming =coding= model                                  :story:
-
-The real name of this model is something like "component". This will
-make sense once we add the product model. In addition we need to
-somehow share the "generation" model across coding and product
-models. In reality, much of what is in generation more properly
-belongs to =archetypes= because is functionality related to
-projections into archetype space.
-
-=coding= is the meta-model for modeling elements that exist inside a
-component of a product. "component" is not a particularly brilliant
-name, and it is somewhat confusing because it is used in UML with a
-somewhat different meaning, but the more correct name - chosen by
-Voelter - would be "building block", which is too long. We just need
-to make it clear that "component" and "product" are terms from the
-MASD domain. Library and executable are the types of components.
-
-Another point to consider before this rename is that we may not
-necessarily need a product model. Maybe we can add the elements for
-product directly into coding. We need to identify all of these
-elements and see if they are sufficient to exist as a stand alone
-model. If we do create a single model, then "coding" is actually not
-the worse possible name (e.g. component + product = coding, the
-activity for creating products).
 
 *** Move fabric types into coding                                     :story:
 
@@ -5811,6 +5786,14 @@ Notes:
   parsing into lists can happen in injection and then we just need to
   map these into model types in coding (resolution). The creation of
   the name tree structure is resolution.
+- if we do go for the lists approach, perhaps we should also have two
+  types of name trees: a list based name tree (call these parsed
+  types) and a names based name tree (resolved types?). List trees are
+  not really name trees I guess, but they are in the right format for
+  the resolver to use. This would mean the parser could be simplified,
+  and the whole "lets guess what this scope is" could be removed. The
+  job of the parser is just to produce these lists. The resovler then
+  resolves them into actual names.
 
 *** Add a new annotation type of "pair"                               :story:
 
