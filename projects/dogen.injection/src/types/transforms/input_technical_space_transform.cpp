@@ -21,10 +21,6 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.variability/types/helpers/feature_selector.hpp"
-#include "dogen.variability/types/helpers/configuration_selector.hpp"
-#include "dogen.injection/io/meta_model/model_io.hpp"
-#include "dogen.injection/types/traits.hpp"
 #include "dogen.injection/io/meta_model/model_io.hpp"
 #include "dogen.injection/types/features/input_technical_space.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
@@ -42,21 +38,6 @@ auto lg(logger_factory(transform_id));
 }
 
 namespace dogen::injection::transforms {
-
-input_technical_space_transform::feature_group input_technical_space_transform::
-make_feature_group(const variability::meta_model::feature_model& fm) {
-    feature_group r;
-    const variability::helpers::feature_selector s(fm);
-    r.input_technical_space = s.get_by_name(traits::input_technical_space());
-    return r;
-}
-
-std::string input_technical_space_transform::
-make_input_technical_space(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
-    const variability::helpers::configuration_selector s(cfg);
-    return s.get_text_content_or_default(fg.input_technical_space);
-}
 
 void input_technical_space_transform::
 apply(const context& ctx, meta_model::model& m) {

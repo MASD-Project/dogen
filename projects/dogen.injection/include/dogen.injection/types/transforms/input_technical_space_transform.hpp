@@ -25,8 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.injection/types/meta_model/model.hpp"
 #include "dogen.injection/types/transforms/context_fwd.hpp"
@@ -39,17 +37,6 @@ namespace dogen::injection::transforms {
  * @pre Annotations transform must have been applied.
  */
 class input_technical_space_transform final {
-public:
-    struct feature_group {
-        variability::meta_model::feature input_technical_space;
-    };
-
-    static feature_group make_feature_group(
-        const variability::meta_model::feature_model& fm);
-
-    static std::string make_input_technical_space(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
 public:
     static void apply(const context& ctx, meta_model::model& m);
 };
