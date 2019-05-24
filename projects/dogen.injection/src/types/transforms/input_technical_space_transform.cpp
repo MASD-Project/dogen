@@ -26,6 +26,7 @@
 #include "dogen.injection/io/meta_model/model_io.hpp"
 #include "dogen.injection/types/traits.hpp"
 #include "dogen.injection/io/meta_model/model_io.hpp"
+#include "dogen.injection/types/features/input_technical_space.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
 #include "dogen.injection/types/transforms/transformation_error.hpp"
 #include "dogen.injection/types/transforms/input_technical_space_transform.hpp"
@@ -62,9 +63,13 @@ apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "technical space transform",
         transform_id, m.name(), *ctx.tracer(), m);
 
-    const auto& fg(make_feature_group(*ctx.feature_model()));
-    const auto& gcfg(*m.configuration());
-    m.input_technical_space(make_input_technical_space(fg, gcfg));
+
+    const auto& fm(*ctx.feature_model());
+    using features::input_technical_space;
+    const auto fg(input_technical_space::make_feature_group(fm));
+    const auto& cfg(*m.configuration());
+    const auto scfg(input_technical_space::make_static_configuration(fg, cfg));
+    m.input_technical_space(scfg.input_technical_space);
 
     stp.end_transform(m);
 }
