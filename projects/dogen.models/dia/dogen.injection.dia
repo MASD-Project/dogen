@@ -6754,7 +6754,9 @@ the injection model.
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Features related to all UML injectors.#</dia:string>
+        <dia:string>#Features related to all UML injectors.
+
+#DOGEN masd.variability.generate_static_configuration=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
