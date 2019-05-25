@@ -149,20 +149,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::naming_configuration",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "external_modules",
-          "type": "std::string"
-        },
-        {
-          "name": "model_modules",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
       "name": "helpers::stereotypes_helper",
       "stereotypes": [
         "dogen::handcrafted::typeable"

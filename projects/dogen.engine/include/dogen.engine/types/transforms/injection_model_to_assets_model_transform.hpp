@@ -37,7 +37,6 @@
 #include "dogen.assets/types/meta_model/model.hpp"
 #include "dogen.engine/types/transforms/context_fwd.hpp"
 #include "dogen.engine/types/helpers/adapter.hpp"
-#include "dogen.engine/types/transforms/naming_configuration.hpp"
 
 namespace dogen::engine::transforms {
 

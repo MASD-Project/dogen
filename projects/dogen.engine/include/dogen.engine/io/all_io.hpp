@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen.engine/io/transforms/naming_configuration_io.hpp"
 #include "dogen.engine/io/helpers/stereotypes_conversion_result_io.hpp"
 
 #endif

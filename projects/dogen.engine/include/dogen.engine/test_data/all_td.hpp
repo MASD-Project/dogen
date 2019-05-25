@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen.engine/test_data/transforms/naming_configuration_td.hpp"
 #include "dogen.engine/test_data/helpers/stereotypes_conversion_result_td.hpp"
 
 #endif
