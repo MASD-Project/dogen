@@ -29,8 +29,6 @@
 #include <iosfwd>
 #include <vector>
 #include <unordered_map>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.injection/types/meta_model/model.hpp"
 #include "dogen.assets/types/meta_model/element.hpp"
@@ -45,21 +43,9 @@ namespace dogen::engine::transforms {
 
 class injection_model_to_assets_model_transform final {
 private:
-    struct feature_group {
-        variability::meta_model::feature external_modules;
-        variability::meta_model::feature model_modules;
-    };
-
-    static feature_group
-    make_feature_group(const variability::meta_model::feature_model& fm);
-
-    static naming_configuration
-    make_naming_configuration(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-private:
     static assets::meta_model::location
-    create_location(const naming_configuration& nc);
+    create_location(const std::string& external_modules,
+        const std::string& model_modules);
 
     static assets::meta_model::static_stereotypes compute_element_type(
         const std::list<assets::meta_model::static_stereotypes>& st,

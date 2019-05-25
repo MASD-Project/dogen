@@ -23,8 +23,6 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/helpers/feature_selector.hpp"
-#include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.injection/io/meta_model/model_io.hpp"
 #include "dogen.assets/types/traits.hpp"
@@ -104,47 +102,12 @@ assets::meta_model::technical_space to_technical_space(const std::string& s) {
     BOOST_THROW_EXCEPTION(transform_exception(unsupported_technical_space + s));
 }
 
-injection_model_to_assets_model_transform::feature_group
-injection_model_to_assets_model_transform::
-make_feature_group(const variability::meta_model::feature_model& fm) {
-    feature_group r;
-
-    const variability::helpers::feature_selector s(fm);
-
-    const auto& em(assets::traits::external_modules());
-    r.external_modules = s.get_by_name(em);
-
-    const auto& mm(assets::traits::model_modules());
-    r.model_modules = s.get_by_name(mm);
-
-    return r;
-}
-
-naming_configuration
-injection_model_to_assets_model_transform::
-make_naming_configuration(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
-
-    const variability::helpers::configuration_selector s(cfg);
-    if (!s.has_configuration_point(fg.model_modules)) {
-        BOOST_LOG_SEV(lg, error) << missing_model_modules;
-        BOOST_THROW_EXCEPTION(transform_exception(missing_model_modules));
-    }
-
-    naming_configuration r;
-    r.model_modules(s.get_text_content(fg.model_modules));
-
-    if (s.has_configuration_point(fg.external_modules))
-        r.external_modules(s.get_text_content(fg.external_modules));
-
-    return r;
-}
-
-assets::meta_model::location injection_model_to_assets_model_transform::
-create_location(const naming_configuration& nc) {
+assets::meta_model::location
+injection_model_to_assets_model_transform::create_location(
+    const std::string& external_modules, const std::string& model_modules) {
     assets::helpers::location_builder b;
-    b.external_modules(nc.external_modules());
-    b.model_modules(nc.model_modules());
+    b.external_modules(external_modules);
+    b.model_modules(model_modules);
 
     const auto r(b.build());
     BOOST_LOG_SEV(lg, debug) << "Computed location: " << r;
@@ -287,14 +250,10 @@ apply(const context& ctx, const injection::meta_model::model& m) {
     const auto& cfg(*m.configuration());
     auto& gcfg(m.configuration());
     const auto& fm(*ctx.assets_context().feature_model());
-    // const auto fg(make_feature_group(fm));
-    // const auto nc(make_naming_configuration(fg, cfg));
     const auto fg(features::naming::make_feature_group(fm));
-    const auto nc2(features::naming::make_static_configuration(fg, cfg));
-    naming_configuration nc;
-    nc.external_modules(nc2.external_modules);
-    nc.model_modules(nc2.model_modules);
-    const auto model_location(create_location(nc));
+    const auto scfg(features::naming::make_static_configuration(fg, cfg));
+    const auto model_location(
+        create_location(scfg.external_modules, scfg.model_modules));
 
     assets::meta_model::model r;
     assets::helpers::name_builder b(true/*model_name_mode*/);
