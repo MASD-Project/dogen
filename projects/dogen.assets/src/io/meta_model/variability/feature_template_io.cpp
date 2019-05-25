@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.archetypes/io/location_io.hpp"
 #include "dogen.assets/io/meta_model/name_io.hpp"
@@ -56,6 +57,12 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 namespace dogen::assets::meta_model::variability {
 
 std::ostream& operator<<(std::ostream& s, const feature_template& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::assets::meta_model::variability::feature_template\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
@@ -70,7 +77,8 @@ std::ostream& operator<<(std::ostream& s, const feature_template& v) {
       << "\"binding_point\": " << v.binding_point() << ", "
       << "\"template_kind\": " << v.template_kind() << ", "
       << "\"mapped_type\": " << "\"" << tidy_up_string(v.mapped_type()) << "\"" << ", "
-      << "\"parsed_type\": " << v.parsed_type()
+      << "\"parsed_type\": " << v.parsed_type() << ", "
+      << "\"is_optional\": " << v.is_optional()
       << " }";
     return(s);
 }

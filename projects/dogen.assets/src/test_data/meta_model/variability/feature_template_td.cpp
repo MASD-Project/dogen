@@ -78,6 +78,10 @@ create_dogen_assets_meta_model_name_tree(const unsigned int position) {
     return dogen::assets::meta_model::name_tree_generator::create(position);
 }
 
+bool create_bool(const unsigned int position) {
+    return (position % 2) != 0;
+}
+
 }
 
 namespace dogen::assets::meta_model::variability {
@@ -99,6 +103,7 @@ populate(const unsigned int position, result_type& v) {
     v.template_kind(create_dogen_variability_meta_model_template_kind(position + 10));
     v.mapped_type(create_std_string(position + 11));
     v.parsed_type(create_dogen_assets_meta_model_name_tree(position + 12));
+    v.is_optional(create_bool(position + 13));
 }
 
 feature_template_generator::result_type

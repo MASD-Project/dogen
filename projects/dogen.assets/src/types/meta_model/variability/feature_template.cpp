@@ -35,7 +35,8 @@ namespace dogen::assets::meta_model::variability {
 feature_template::feature_template()
     : value_type_(static_cast<dogen::variability::meta_model::value_type>(0)),
       binding_point_(static_cast<dogen::variability::meta_model::binding_point>(0)),
-      template_kind_(static_cast<dogen::variability::meta_model::template_kind>(0)) { }
+      template_kind_(static_cast<dogen::variability::meta_model::template_kind>(0)),
+      is_optional_(static_cast<bool>(0)) { }
 
 feature_template::feature_template(
     const std::string& documentation,
@@ -50,7 +51,8 @@ feature_template::feature_template(
     const dogen::variability::meta_model::binding_point binding_point,
     const dogen::variability::meta_model::template_kind template_kind,
     const std::string& mapped_type,
-    const dogen::assets::meta_model::name_tree& parsed_type)
+    const dogen::assets::meta_model::name_tree& parsed_type,
+    const bool is_optional)
     : documentation_(documentation),
       configuration_(configuration),
       name_(name),
@@ -63,7 +65,8 @@ feature_template::feature_template(
       binding_point_(binding_point),
       template_kind_(template_kind),
       mapped_type_(mapped_type),
-      parsed_type_(parsed_type) { }
+      parsed_type_(parsed_type),
+      is_optional_(is_optional) { }
 
 void feature_template::swap(feature_template& other) noexcept {
     using std::swap;
@@ -80,6 +83,7 @@ void feature_template::swap(feature_template& other) noexcept {
     swap(template_kind_, other.template_kind_);
     swap(mapped_type_, other.mapped_type_);
     swap(parsed_type_, other.parsed_type_);
+    swap(is_optional_, other.is_optional_);
 }
 
 bool feature_template::operator==(const feature_template& rhs) const {
@@ -95,7 +99,8 @@ bool feature_template::operator==(const feature_template& rhs) const {
         binding_point_ == rhs.binding_point_ &&
         template_kind_ == rhs.template_kind_ &&
         mapped_type_ == rhs.mapped_type_ &&
-        parsed_type_ == rhs.parsed_type_;
+        parsed_type_ == rhs.parsed_type_ &&
+        is_optional_ == rhs.is_optional_;
 }
 
 feature_template& feature_template::operator=(feature_template other) {
@@ -286,6 +291,14 @@ void feature_template::parsed_type(const dogen::assets::meta_model::name_tree& v
 
 void feature_template::parsed_type(const dogen::assets::meta_model::name_tree&& v) {
     parsed_type_ = std::move(v);
+}
+
+bool feature_template::is_optional() const {
+    return is_optional_;
+}
+
+void feature_template::is_optional(const bool v) {
+    is_optional_ = v;
 }
 
 }
