@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.assets/types/features/type_parameters.hpp"
@@ -37,21 +36,7 @@ namespace dogen::assets::transforms {
 
 class type_params_transform final {
 private:
-    struct feature_group {
-        variability::meta_model::feature variable_number_of_parameters;
-        variability::meta_model::feature type_parameters_count;
-        variability::meta_model::feature type_parameters_always_in_heap;
-    };
-
-    static feature_group make_feature_group(
-        const variability::meta_model::feature_model& fm);
-
-    static meta_model::type_parameters
-    make_type_parameters(const features::type_parameters::feature_group& fg,
-        const variability::meta_model::configuration& a);
-
-private:
-    static void expand_type_parameters(
+    static void populate_type_parameters(
         const features::type_parameters::feature_group& fg,
         meta_model::structural::object& o);
 

@@ -39,40 +39,17 @@ static logger lg(logger_factory(transform_id));
 
 namespace dogen::assets::transforms {
 
-type_params_transform::feature_group type_params_transform::
-make_feature_group(const variability::meta_model::feature_model& fm) {
-    feature_group r;
-    const variability::helpers::feature_selector s(fm);
-    const auto& vnp(traits::type_parameters::variable_number_of_parameters());
-    r.variable_number_of_parameters = s.get_by_name(vnp);
-
-    const auto& tpc(traits::type_parameters::type_parameters_count());
-    r.type_parameters_count = s.get_by_name(tpc);
-
-    const auto& aih(traits::type_parameters::type_parameters_always_in_heap());
-    r.type_parameters_always_in_heap = s.get_by_name(aih);
-
-    return r;
-}
-
-meta_model::type_parameters type_params_transform::
-make_type_parameters(const features::type_parameters::feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
-    meta_model::type_parameters r;
-    const auto scfg(
-        features::type_parameters::make_static_configuration(fg, cfg));
-    r.variable_number_of_parameters(scfg.variable_number_of_parameters);
-    r.count(static_cast<unsigned int>(scfg.count));
-    r.always_in_heap(scfg.always_in_heap);
-
-    return r;
-}
-
-void type_params_transform::expand_type_parameters(
+void type_params_transform::populate_type_parameters(
     const features::type_parameters::feature_group& fg,
     meta_model::structural::object& o) {
-    const auto tp(make_type_parameters(fg, *o.configuration()));
-    o.type_parameters(tp);
+    using features::type_parameters;
+
+    const auto& cfg(*o.configuration());
+    const auto scfg(type_parameters::make_static_configuration(fg, cfg));
+    auto& tp(o.type_parameters());
+    tp.variable_number_of_parameters(scfg.variable_number_of_parameters);
+    tp.count(static_cast<unsigned int>(scfg.count));
+    tp.always_in_heap(scfg.always_in_heap);
 }
 
 void type_params_transform::apply(const context& ctx, meta_model::model& m) {
@@ -83,7 +60,7 @@ void type_params_transform::apply(const context& ctx, meta_model::model& m) {
     const auto fg(features::type_parameters::make_feature_group(fm));
     for (auto& pair : m.structural_elements().objects()) {
         auto& o(*pair.second);
-        expand_type_parameters(fg, o);
+        populate_type_parameters(fg, o);
     }
     stp.end_transform(m);
 }
