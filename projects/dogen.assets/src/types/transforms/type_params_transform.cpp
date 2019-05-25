@@ -55,25 +55,21 @@ make_feature_group(const variability::meta_model::feature_model& fm) {
     return r;
 }
 
-meta_model::type_parameters
-type_params_transform::make_type_parameters(const feature_group& fg,
+meta_model::type_parameters type_params_transform::
+make_type_parameters(const features::type_parameters::feature_group& fg,
     const variability::meta_model::configuration& cfg) {
     meta_model::type_parameters r;
-    const variability::helpers::configuration_selector s(cfg);
-
-    const auto& vnp(fg.variable_number_of_parameters);
-    r.variable_number_of_parameters(s.get_boolean_content_or_default(vnp));
-
-    const auto& tpc(fg.type_parameters_count);
-    r.count(static_cast<unsigned int>(s.get_number_content_or_default(tpc)));
-
-    const auto& aih(fg.type_parameters_always_in_heap);
-    r.always_in_heap(s.get_boolean_content_or_default(aih));
+    const auto scfg(
+        features::type_parameters::make_static_configuration(fg, cfg));
+    r.variable_number_of_parameters(scfg.variable_number_of_parameters);
+    r.count(static_cast<unsigned int>(scfg.count));
+    r.always_in_heap(scfg.always_in_heap);
 
     return r;
 }
 
-void type_params_transform::expand_type_parameters(const feature_group& fg,
+void type_params_transform::expand_type_parameters(
+    const features::type_parameters::feature_group& fg,
     meta_model::structural::object& o) {
     const auto tp(make_type_parameters(fg, *o.configuration()));
     o.type_parameters(tp);
@@ -83,7 +79,8 @@ void type_params_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "type params transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    const auto fg(make_feature_group(*ctx.feature_model()));
+    const auto& fm(*ctx.feature_model());
+    const auto fg(features::type_parameters::make_feature_group(fm));
     for (auto& pair : m.structural_elements().objects()) {
         auto& o(*pair.second);
         expand_type_parameters(fg, o);

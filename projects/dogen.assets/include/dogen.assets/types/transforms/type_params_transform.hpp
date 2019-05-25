@@ -28,6 +28,7 @@
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.assets/types/features/type_parameters.hpp"
 #include "dogen.assets/types/meta_model/type_parameters.hpp"
 #include "dogen.assets/types/meta_model/model.hpp"
 #include "dogen.assets/types/transforms/context_fwd.hpp"
@@ -46,11 +47,12 @@ private:
         const variability::meta_model::feature_model& fm);
 
     static meta_model::type_parameters
-    make_type_parameters(const feature_group& fg,
+    make_type_parameters(const features::type_parameters::feature_group& fg,
         const variability::meta_model::configuration& a);
 
 private:
-    static void expand_type_parameters(const feature_group& fg,
+    static void expand_type_parameters(
+        const features::type_parameters::feature_group& fg,
         meta_model::structural::object& o);
 
 public:
