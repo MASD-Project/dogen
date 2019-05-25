@@ -103,11 +103,16 @@ assets::meta_model::technical_space to_technical_space(const std::string& s) {
 }
 
 assets::meta_model::location
-injection_model_to_assets_model_transform::create_location(
-    const std::string& external_modules, const std::string& model_modules) {
+injection_model_to_assets_model_transform::
+create_location(const context& ctx, const injection::meta_model::model& m) {
+    const auto& cfg(*m.configuration());
+    const auto& fm(*ctx.assets_context().feature_model());
+    const auto fg(features::naming::make_feature_group(fm));
+    const auto scfg(features::naming::make_static_configuration(fg, cfg));
+
     assets::helpers::location_builder b;
-    b.external_modules(external_modules);
-    b.model_modules(model_modules);
+    b.external_modules(scfg.external_modules);
+    b.model_modules(scfg.model_modules);
 
     const auto r(b.build());
     BOOST_LOG_SEV(lg, debug) << "Computed location: " << r;
@@ -247,16 +252,9 @@ apply(const context& ctx, const injection::meta_model::model& m) {
      * First we compute the model name and technical space by reading
      * data from configuration.
      */
-    const auto& cfg(*m.configuration());
-    auto& gcfg(m.configuration());
-    const auto& fm(*ctx.assets_context().feature_model());
-    const auto fg(features::naming::make_feature_group(fm));
-    const auto scfg(features::naming::make_static_configuration(fg, cfg));
-    const auto model_location(
-        create_location(scfg.external_modules, scfg.model_modules));
-
     assets::meta_model::model r;
     assets::helpers::name_builder b(true/*model_name_mode*/);
+    const auto model_location(create_location(ctx, m));
     b.external_modules(model_location.external_modules());
     b.model_modules(model_location.model_modules());
     r.name(b.build());
@@ -282,7 +280,7 @@ apply(const context& ctx, const injection::meta_model::model& m) {
     r.root_module(boost::make_shared<assets::meta_model::structural::module>());
     auto& rm(*r.root_module());
     rm.name(r.name());
-    rm.configuration(gcfg);
+    rm.configuration(m.configuration());
     rm.configuration()->name().qualified(rm.name().qualified().dot());
     rm.is_root(true);
 

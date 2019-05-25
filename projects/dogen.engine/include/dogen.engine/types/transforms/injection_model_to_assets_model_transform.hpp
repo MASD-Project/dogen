@@ -43,8 +43,7 @@ namespace dogen::engine::transforms {
 class injection_model_to_assets_model_transform final {
 private:
     static assets::meta_model::location
-    create_location(const std::string& external_modules,
-        const std::string& model_modules);
+    create_location(const context& ctx, const injection::meta_model::model& m);
 
     static assets::meta_model::static_stereotypes compute_element_type(
         const std::list<assets::meta_model::static_stereotypes>& st,
