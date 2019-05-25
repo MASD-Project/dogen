@@ -21,12 +21,14 @@
 #include "dogen.injection/types/features/uml.hpp"
 #include "dogen.injection/types/features/reference.hpp"
 #include "dogen.injection/types/features/initializer.hpp"
+#include "dogen.injection/types/features/generalization.hpp"
 #include "dogen.injection/types/features/input_technical_space.hpp"
 
 namespace dogen::injection::features {
 
 void initializer::
 register_templates(variability::helpers::feature_template_registrar& rg) {
+    rg.register_templates(dogen::injection::features::generalization::make_templates());
     rg.register_templates(dogen::injection::features::input_technical_space::make_templates());
     rg.register_templates(dogen::injection::features::reference::make_templates());
     rg.register_templates(dogen::injection::features::uml::make_templates());

@@ -18,20 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_FEATURES_GENERALIZATION_HPP
-#define DOGEN_ASSETS_TYPES_FEATURES_GENERALIZATION_HPP
+#ifndef DOGEN_INJECTION_TYPES_FEATURES_GENERALIZATION_HPP
+#define DOGEN_INJECTION_TYPES_FEATURES_GENERALIZATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <list>
+#include <string>
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.variability/types/meta_model/feature_template.hpp"
 
-namespace dogen::assets::features {
+namespace dogen::injection::features {
 
 /**
  * @brief Features related to the generalization relationship.
@@ -39,7 +40,7 @@ namespace dogen::assets::features {
 class generalization final {
 public:
     struct feature_group {
-        variability::meta_model::feature is_final;
+        variability::meta_model::feature parent;
     };
 
     static feature_group
@@ -47,7 +48,7 @@ public:
 
 public:
     struct static_configuration {
-        bool is_final;
+        std::string parent;
     };
 
     static static_configuration make_static_configuration(

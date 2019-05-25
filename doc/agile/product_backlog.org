@@ -226,14 +226,6 @@ However, this is specific to attributes. It would be really nice to
 have this at the primitive level as well so that we can map once and
 reuse the mapping.
 
-*** Move parent processing to injection                               :story:
-
-At present we are reading the parent field from meta-data in coding's
-parsing transform. If we create a transform for this in injection,
-this would mean that all meta-model elements would have access to
-parenting via meta-data. We could also name the transform a bit
-better.
-
 *** Merging of profiles and configurations is non-intuitive           :story:
 
 As per comments in profile binding:

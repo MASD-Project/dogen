@@ -18,22 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.assets/types/features/generalization.hpp"
+#include "dogen.injection/types/features/generalization.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 
-namespace dogen::assets::features {
+namespace dogen::injection::features {
 
 namespace {
 
 dogen::variability::meta_model::feature_template
-make_masd_generalization_is_final() {
+make_masd_generalization_parent() {
     using namespace dogen::variability::meta_model;
     feature_template r;
-    r.name().simple("is_final");
-    r.name().qualified("masd.generalization.is_final");
-    const auto vt(value_type::boolean);
+    r.name().simple("parent");
+    r.name().qualified("masd.generalization.parent");
+    const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);
     r.kind(template_kind::instance);
@@ -52,7 +52,7 @@ generalization::make_feature_group(const dogen::variability::meta_model::feature
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
-    r.is_final = s.get_by_name("masd.generalization.is_final");
+    r.parent = s.get_by_name("masd.generalization.parent");
 
     return r;
 }
@@ -63,7 +63,7 @@ generalization::static_configuration generalization::make_static_configuration(
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    r.is_final = s.get_boolean_content(fg.is_final);
+    r.parent = s.get_text_content(fg.parent);
     return r;
 }
 
@@ -71,7 +71,7 @@ std::list<dogen::variability::meta_model::feature_template>
 generalization::make_templates() {
     using namespace dogen::variability::meta_model;
     std::list<dogen::variability::meta_model::feature_template> r;
-    r.push_back(make_masd_generalization_is_final());
+    r.push_back(make_masd_generalization_parent());
     return r;
 }
 

@@ -433,6 +433,27 @@
           }
         }
       ]
+    },
+    {
+      "name": "features::generalization",
+      "documentation": "Features related to the generalization relationship.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generalization.parent",
+          "type": "masd::variability::text",
+          "documentation": "Name of the parent of the current element.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.generalization.parent"
+          }
+        }
+      ]
     }
   ]
 }
