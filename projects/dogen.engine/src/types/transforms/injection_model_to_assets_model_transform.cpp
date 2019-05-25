@@ -44,6 +44,7 @@
 #include "dogen.assets/types/helpers/name_builder.hpp"
 #include "dogen.assets/types/helpers/location_builder.hpp"
 #include "dogen.engine/io/helpers/stereotypes_conversion_result_io.hpp"
+#include "dogen.engine/types/features/naming.hpp"
 #include "dogen.engine/types/helpers/stereotypes_helper.hpp"
 #include "dogen.engine/types/transforms/context.hpp"
 #include "dogen.engine/types/transforms/transform_exception.hpp"
@@ -286,8 +287,13 @@ apply(const context& ctx, const injection::meta_model::model& m) {
     const auto& cfg(*m.configuration());
     auto& gcfg(m.configuration());
     const auto& fm(*ctx.assets_context().feature_model());
-    const auto fg(make_feature_group(fm));
-    const auto nc(make_naming_configuration(fg, cfg));
+    // const auto fg(make_feature_group(fm));
+    // const auto nc(make_naming_configuration(fg, cfg));
+    const auto fg(features::naming::make_feature_group(fm));
+    const auto nc2(features::naming::make_static_configuration(fg, cfg));
+    naming_configuration nc;
+    nc.external_modules(nc2.external_modules);
+    nc.model_modules(nc2.model_modules);
     const auto model_location(create_location(nc));
 
     assets::meta_model::model r;
