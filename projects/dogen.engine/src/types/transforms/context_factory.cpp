@@ -26,9 +26,10 @@
 #include "dogen.archetypes/types/features/initializer.hpp"
 #include "dogen.archetypes/io/location_repository_io.hpp"
 #include "dogen.archetypes/types/location_repository_builder.hpp"
-#include "dogen.variability/types/features/initializer.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
+#include "dogen.variability/types/features/initializer.hpp"
 #include "dogen.variability/types/helpers/feature_template_registrar.hpp"
+#include "dogen.variability/types/meta_model/feature_template_repository.hpp"
 #include "dogen.variability/types/transforms/feature_model_production_chain.hpp"
 #include "dogen.templating/types/initializer.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
@@ -100,6 +101,23 @@ create_archetype_location_repository(
         b.add(t.archetype_location_repository_parts());
     }
     return boost::make_shared<archetypes::location_repository>(b.build());
+}
+
+variability::meta_model::feature_template_repository
+make_feature_template_repository() {
+    variability::helpers::feature_template_registrar rg;
+    injection::features::initializer::register_templates(rg);
+    assets::features::initializer::register_templates(rg);
+    generation::features::initializer::register_templates(rg);
+    templating::initializer::register_templates(rg);
+    variability::features::initializer::register_templates(rg);
+    archetypes::features::initializer::register_templates(rg);
+    extraction::features::initializer::register_templates(rg);
+    generation::cpp::feature_initializer::register_templates(rg);
+    generation::csharp::feature_initializer::register_templates(rg);
+    features::initializer::register_templates(rg);
+    const auto r(rg.repository());
+    return r;
 }
 
 injection::transforms::context context_factory::
@@ -191,19 +209,8 @@ context context_factory::make_context(const configuration& cfg,
     /*
      * Now we can create the feature model.
      */
+    const auto ftrp(make_feature_template_repository());
     using variability::transforms::feature_model_production_chain;
-    variability::helpers::feature_template_registrar ftrg;
-    injection::features::initializer::register_templates(ftrg);
-    assets::features::initializer::register_templates(ftrg);
-    generation::features::initializer::register_templates(ftrg);
-    templating::initializer::register_templates(ftrg);
-    variability::features::initializer::register_templates(ftrg);
-    archetypes::features::initializer::register_templates(ftrg);
-    extraction::features::initializer::register_templates(ftrg);
-    generation::cpp::feature_initializer::register_templates(ftrg);
-    generation::csharp::feature_initializer::register_templates(ftrg);
-    features::initializer::register_templates(ftrg);
-    const auto ftrp(ftrg.repository());
     const auto fm(feature_model_production_chain::apply(vctx, ftrp));
     r.injection_context().feature_model(fm);
     r.assets_context().feature_model(fm);
