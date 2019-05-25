@@ -31,7 +31,7 @@ namespace {
  * for the happy path. Set on when investigating test breaks.
  * WARNING: remember to set it back afterwards.
  */
-bool logging_enabled(false);
+bool logging_enabled_globally(false);
 using dogen::utility::log::severity_level;
 const std::string severity("trace");
 
@@ -51,10 +51,11 @@ void log_if_test_has_failed() {
 
 dogen::utility::log::scoped_lifecycle_manager
 scoped_lifecycle_manager_factory(std::string test_module,
-    std::string test_suite, std::string function_name) {
+    std::string test_suite, std::string function_name,
+    const bool logging_enabled_locally, const bool log_to_console) {
 
     using namespace dogen::utility::log;
-    if (!logging_enabled) {
+    if (!logging_enabled_globally && !logging_enabled_locally) {
         boost::optional<logging_configuration> cfg;
         return scoped_lifecycle_manager(cfg);
     }
@@ -65,6 +66,7 @@ scoped_lifecycle_manager_factory(std::string test_module,
     logging_configuration cfg;
     cfg.filename(s.str());
     cfg.severity(severity);
+    cfg.output_to_console(log_to_console);
 
     return scoped_lifecycle_manager(cfg);
 }

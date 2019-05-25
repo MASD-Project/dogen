@@ -35,7 +35,9 @@ void log_if_test_has_failed();
 dogen::utility::log::scoped_lifecycle_manager
 scoped_lifecycle_manager_factory(std::string test_module,
     std::string test_suite,
-    std::string function_name);
+    std::string function_name,
+    const bool logging_enabled_locally = false,
+    const bool log_to_console = false);
 
 boost::filesystem::path tracing_directory_path(std::string test_module,
     std::string test_suite, std::string function_name);
@@ -45,22 +47,33 @@ boost::filesystem::path tracing_directory_path(std::string test_module,
 #ifdef SETUP_TEST_LOG
 #undef SETUP_TEST_LOG
 #endif
-#define SETUP_TEST_LOG(function_name)                                      \
-    BOOST_TEST_CHECKPOINT(function_name);                                  \
-    auto sl(dogen::utility::test::scoped_lifecycle_manager_factory(  \
-            test_module, test_suite, function_name));                      \
-    const auto pd(dogen::utility::test::tracing_directory_path(      \
+#define SETUP_TEST_LOG(function_name)                                    \
+    BOOST_TEST_CHECKPOINT(function_name);                               \
+    auto sl(dogen::utility::test::scoped_lifecycle_manager_factory(     \
+            test_module, test_suite, function_name));                  \
+    const auto pd(dogen::utility::test::tracing_directory_path(         \
             test_module, test_suite, function_name));
 
 #ifdef SETUP_TEST_LOG_SOURCE
 #undef SETUP_TEST_LOG_SOURCE
 #endif
-#define SETUP_TEST_LOG_SOURCE(function_name)                                \
-    BOOST_TEST_CHECKPOINT(function_name);                                   \
-    dogen::utility::log::logger lg(                                   \
+#define SETUP_TEST_LOG_SOURCE(function_name)                            \
+    BOOST_TEST_CHECKPOINT(function_name);                              \
+    dogen::utility::log::logger lg(                                    \
         dogen::utility::log::logger_factory(test_suite));             \
-    using namespace dogen::utility::log;                              \
-    auto sl(dogen::utility::test::scoped_lifecycle_manager_factory(   \
+    using namespace dogen::utility::log;                               \
+    auto sl(dogen::utility::test::scoped_lifecycle_manager_factory(    \
             test_module, test_suite, function_name));
+
+#ifdef SETUP_TEST_LOG_SOURCE_DEBUG
+#undef SETUP_TEST_LOG_SOURCE_DEBUG
+#endif
+#define SETUP_TEST_LOG_SOURCE_DEBUG(function_name)                    \
+    BOOST_TEST_CHECKPOINT(function_name);                            \
+    dogen::utility::log::logger lg(                                  \
+        dogen::utility::log::logger_factory(test_suite));           \
+    using namespace dogen::utility::log;                             \
+    auto sl(dogen::utility::test::scoped_lifecycle_manager_factory(  \
+            test_module, test_suite, function_name, true, true));
 
 #endif

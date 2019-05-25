@@ -421,14 +421,6 @@ Instead of using strings we should use primitives for:
 - simple and qualified names.
 - etc.
 
-*** Consider a test suite level logging flag                          :story:
-
-At present we can either enable logging for all test suites in dogen
-or disable it. This means that all tests run a lot slower. Maybe we
-should allow enabling logging at the test suite level. However, we
-only use this to troubleshoot in which case the cost of a few seconds
-is not a big problem.
-
 *** Add support for decoration configuration overrides                :story:
 
 At present we have hard-coded the decoration configuration to be read

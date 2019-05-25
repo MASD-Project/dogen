@@ -97,7 +97,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {
 }
 
 BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
-    SETUP_TEST_LOG_SOURCE("visitable_object_has_visitor_injected");
+    SETUP_TEST_LOG_SOURCE_DEBUG("visitable_object_has_visitor_injected");
 
     auto m(factory.object_with_parent_in_the_same_model());
     BOOST_REQUIRE(m.structural_elements().objects().size() == 2);

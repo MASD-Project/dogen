@@ -13,25 +13,26 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-25 Sat 15:45]
+#+CAPTION: Clock summary at [2019-05-25 Sat 17:54]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *30:08* |       |       | 100.0 |
+| *Total time*                                           | *32:03* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 30:08   |       |       | 100.0 |
-| Active                                                 |         | 30:08 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  3:37 |  12.0 |
-| Create a video demo for the previous sprint's features |         |       |  3:46 |  12.5 |
-| Sprint and product backlog grooming                    |         |       |  1:18 |   4.3 |
-| Make wale templates meta-model elements                |         |       |  2:45 |   9.1 |
-| Flatten the data directory                             |         |       |  1:11 |   3.9 |
+| Stories                                                | 32:03   |       |       | 100.0 |
+| Active                                                 |         | 32:03 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  3:37 |  11.3 |
+| Create a video demo for the previous sprint's features |         |       |  3:46 |  11.8 |
+| Sprint and product backlog grooming                    |         |       |  1:18 |   4.1 |
+| Make wale templates meta-model elements                |         |       |  2:45 |   8.6 |
+| Flatten the data directory                             |         |       |  1:11 |   3.7 |
 | Rename =dogen::cpp::header_only= stereotypes           |         |       |  0:15 |   0.8 |
-| Rename coding model                                    |         |       |  2:17 |   7.6 |
-| Windows build is failing on a number of tests          |         |       |  0:30 |   1.7 |
-| Read variability papers                                |         |       |  0:56 |   3.1 |
-| Add code generation support to static configurations   |         |       | 13:09 |  43.6 |
-| Move parent processing to injection                    |         |       |  0:24 |   1.3 |
+| Rename coding model                                    |         |       |  2:17 |   7.1 |
+| Windows build is failing on a number of tests          |         |       |  0:30 |   1.6 |
+| Read variability papers                                |         |       |  0:56 |   2.9 |
+| Add code generation support to static configurations   |         |       | 13:09 |  41.0 |
+| Move parent processing to injection                    |         |       |  0:24 |   1.2 |
+| Windows clang-cl release build is failing 4 tests      |         |       |  1:55 |   6.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -390,6 +391,17 @@ The problem started with the commits done in the PM yesterday.
 This field name results in invalid c++ code. We should also check that
 all feature names are validated.
 
+*** COMPLETED Consider a test suite level logging flag                :story:
+    CLOSED: [2019-05-25 Sat 17:53]
+
+*Rationale*: implemented as part of the windows build investigation.
+
+At present we can either enable logging for all test suites in dogen
+or disable it. This means that all tests run a lot slower. Maybe we
+should allow enabling logging at the test suite level. However, we
+only use this to troubleshoot in which case the cost of a few seconds
+is not a big problem.
+
 *** STARTED Read variability papers                                   :story:
     :LOGBOOK:
     CLOCK: [2019-05-21 Tue 17:35]--[2019-05-21 Tue 17:45] =>  0:10
@@ -518,6 +530,44 @@ parsing transform. If we create a transform for this in injection,
 this would mean that all meta-model elements would have access to
 parenting via meta-data. We could also name the transform a bit
 better.
+
+*** STARTED Windows clang-cl release build is failing 4 tests         :spike:
+    :LOGBOOK:
+    CLOCK: [2019-05-25 Sat 17:17]--[2019-05-25 Sat 17:54] =>  0:37
+    CLOCK: [2019-05-25 Sat 15:58]--[2019-05-25 Sat 17:16] =>  1:18
+    :END:
+
+This has been going on for a fair bit, and we've ignored it so far but
+its a bit annoying. It also makes it likely that we break something
+without noticing because we are getting used to seeing red.
+
+The problem started at build [[https://ci.appveyor.com/project/mcraveiro/dogen/builds/23959333/job/r34e67jyjk6s8x66][1771]]. It happened with commit
+[[https://github.com/MASD-Project/dogen/commit/2eca4e92de08cd3a84944abc9cf26e7e117e7144][2eca4e92de08cd3a84944abc9cf26e7e117e7144]]. Everything was fine up to
+commit [[https://github.com/MASD-Project/dogen/commit/655b56cd32b94b7091e79c4cc76f6a2db5458416][655b56cd32b94b7091e79c4cc76f6a2db5458416]]. However, manually
+checking the commits in this interval did not reveal anything obvious.
+
+Failing tests:
+
+- masd.dogen.coding.tests/object_templates_transform_tests/model_with_object_template_that_parents_missing_object_template_throws (Failed)
+- masd.dogen.coding.tests/object_templates_transform_tests/model_with_object_that_models_missing_object_template_throws (Failed)
+- masd.dogen.coding.tests/object_templates_transform_tests/model_with_object_with_missing_parent_throws (Failed)
+- masd.dogen.coding.tests/stereotypes_transform_tests/visitable_object_with_no_leaves_throws (Failed)
+
+All failing tests are related to exceptions that should be thrown. All
+work on all other builds (debug and release) except this one,
+including MSVC release. However, they were previously working fine on
+this build (over 10 successful runs).
+
+Interestingly, on failure we do not seem to get any output at all.
+
+Notes:
+
+- History of builds available [[https://my.cdash.org/index.php?project=MASD+Project+-+Dogen&filtercount=4&showfilters=1&filtercombine=and&field1=site&compare1=61&value1=appveyor&field2=buildname&compare2=61&value2=clang-cl-Windows-AMD64-Release&field3=buildtype&compare3=61&value3=Continuous&field4=buildstarttime&compare4=0&value4=][here]].
+- it would be nice to be able to enable debug logging for these tests
+  test and have the CI dump the log files into the main build
+  log. That is, what we really need is to dump the log to the console
+  for a specific set of tests. We could create a different macro that
+  does this and manually replace it just for these tests.
 
 *** Validate feature template names                                   :story:
 
