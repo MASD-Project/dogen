@@ -253,6 +253,53 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features",
+      "documentation": "Features for the engine model.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "features::naming",
+      "documentation": "Feature group for name related features.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.injection.external_modules",
+          "type": "masd::variability::text",
+          "documentation": "External modules containing this model.\n\nExternal modules contribute to the namespace of the model but not the model\nname.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.injection.external_modules"
+          }
+        },
+        {
+          "name": "masd.injection.model_modules",
+          "type": "masd::variability::text",
+          "documentation": "Model modules containing this model.\n\nThe model modules result in a top-level name separated by dots, e.g. a.b.c.\n",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "global",
+            "masd.variability.qualified_name": "masd.injection.model_modules"
+          }
+        }
+      ]
+    },
+    {
+      "name": "features::initializer",
+      "stereotypes": [
+        "masd::variability::feature_template_initializer"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

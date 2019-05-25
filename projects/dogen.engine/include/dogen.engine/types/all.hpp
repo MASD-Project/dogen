@@ -31,6 +31,7 @@
 #include "dogen.engine/types/generator.hpp"
 #include "dogen.engine/types/helpers/adapter.hpp"
 #include "dogen.engine/types/injector_factory.hpp"
+#include "dogen.engine/types/features/features.hpp"
 #include "dogen.engine/types/transforms/context.hpp"
 #include "dogen.engine/types/helpers/stereotypes_helper.hpp"
 #include "dogen.engine/types/transforms/context_factory.hpp"

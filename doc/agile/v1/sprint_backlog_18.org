@@ -13,15 +13,15 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-25 Sat 11:25]
+#+CAPTION: Clock summary at [2019-05-25 Sat 11:35]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *26:50* |       |       | 100.0 |
+| *Total time*                                           | *26:59* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 26:50   |       |       | 100.0 |
-| Active                                                 |         | 26:50 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  3:37 |  13.5 |
+| Stories                                                | 26:59   |       |       | 100.0 |
+| Active                                                 |         | 26:59 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  3:37 |  13.4 |
 | Create a video demo for the previous sprint's features |         |       |  3:46 |  14.0 |
 | Sprint and product backlog grooming                    |         |       |  1:18 |   4.8 |
 | Make wale templates meta-model elements                |         |       |  2:45 |  10.2 |
@@ -30,7 +30,7 @@
 | Rename coding model                                    |         |       |  2:17 |   8.5 |
 | Windows build is failing on a number of tests          |         |       |  0:30 |   1.9 |
 | Read variability papers                                |         |       |  0:56 |   3.5 |
-| Add code generation support to static configurations   |         |       | 10:15 |  38.2 |
+| Add code generation support to static configurations   |         |       | 10:24 |  38.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -399,6 +399,7 @@ Time spent reading the literature on variability.
 
 *** STARTED Add code generation support to static configurations      :story:
     :LOGBOOK:
+    CLOCK: [2019-05-25 Sat 11:25]--[2019-05-25 Sat 11:34] =>  0:09
     CLOCK: [2019-05-24 Fri 16:52]--[2019-05-24 Fri 16:58] =>  0:06
     CLOCK: [2019-05-24 Fri 16:29]--[2019-05-24 Fri 16:51] =>  0:22
     CLOCK: [2019-05-24 Fri 16:21]--[2019-05-24 Fri 16:28] =>  0:07
