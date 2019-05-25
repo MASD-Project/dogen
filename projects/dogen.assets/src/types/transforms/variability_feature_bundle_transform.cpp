@@ -74,6 +74,7 @@ variability_feature_bundle_transform::make_feature_group(
     r.qualified_name = s.get_by_name(traits::variability::qualified_name());
     r.generate_static_configuration =
         s.get_by_name(traits::variability::generate_static_configuration());
+    r.is_optional = s.get_by_name(traits::variability::is_optional());
 
     return r;
 }
@@ -182,12 +183,25 @@ make_generate_static_configuration(const feature_group& fg,
     return r;
 }
 
+bool variability_feature_bundle_transform::
+make_is_optional(const feature_group& fg,
+    const variability::meta_model::configuration& cfg) {
+
+    const variability::helpers::configuration_selector s(cfg);
+    const auto& io(fg.is_optional);
+    const auto r(s.get_boolean_content_or_default(io));
+    BOOST_LOG_SEV(lg, trace) << "Read is optional: " << r;
+
+    return r;
+}
+
 void variability_feature_bundle_transform::update(const feature_group& fg,
     meta_model::variability::feature_template& ft) {
     const auto& cfg(*ft.configuration());
 
     ft.template_kind(make_template_kind(fg, cfg));
     ft.binding_point(make_binding_point(fg, cfg));
+    ft.is_optional(make_is_optional(fg, cfg));
 
     archetypes::location al;
     al.kernel(make_archetype_location_kernel(fg, cfg));

@@ -48,6 +48,7 @@ private:
         variability::meta_model::feature template_kind;
         variability::meta_model::feature qualified_name;
         variability::meta_model::feature generate_static_configuration;
+        variability::meta_model::feature is_optional;
     };
 
     static feature_group make_feature_group(
@@ -81,6 +82,9 @@ private:
         const variability::meta_model::configuration& cfg);
 
     static bool make_generate_static_configuration(const feature_group& fg,
+        const variability::meta_model::configuration& cfg);
+
+    static bool make_is_optional(const feature_group& fg,
         const variability::meta_model::configuration& cfg);
 
 private:
