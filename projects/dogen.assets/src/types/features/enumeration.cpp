@@ -43,8 +43,8 @@ make_masd_enumeration_use_implementation_defined_underlying_element() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -61,8 +61,8 @@ make_masd_enumeration_underlying_element() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -81,8 +81,8 @@ make_masd_enumeration_use_implementation_defined_enumerator_values() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }
@@ -101,15 +101,13 @@ enumeration::make_feature_group(const dogen::variability::meta_model::feature_mo
 
 enumeration::static_configuration enumeration::make_static_configuration(
     const feature_group& fg,
-   const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::meta_model::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-        r.use_implementation_defined_underlying_element = s.get_boolean_content(fg.use_implementation_defined_underlying_element);
-    if (s.has_configuration_point(fg.underlying_element))
-        r.underlying_element = s.get_text_content(fg.underlying_element);
-
-        r.use_implementation_defined_enumerator_values = s.get_boolean_content(fg.use_implementation_defined_enumerator_values);
+    r.use_implementation_defined_underlying_element = s.get_boolean_content_or_default(fg.use_implementation_defined_underlying_element);
+    r.underlying_element = s.get_text_content(fg.underlying_element);
+    r.use_implementation_defined_enumerator_values = s.get_boolean_content_or_default(fg.use_implementation_defined_enumerator_values);
     return r;
 }
 

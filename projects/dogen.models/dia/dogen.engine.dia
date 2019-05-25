@@ -5898,7 +5898,8 @@ name.
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.injection.external_modules#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.injection.external_modules
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

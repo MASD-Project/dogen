@@ -41,8 +41,8 @@ make_overwrite() {
     al.kernel("masd");
     al.backend("masd.generation.csharp");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }
@@ -59,13 +59,11 @@ archetype_features::make_feature_group(const dogen::variability::meta_model::fea
 
 archetype_features::static_configuration archetype_features::make_static_configuration(
     const feature_group& fg,
-   const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::meta_model::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    if (s.has_configuration_point(fg.overwrite))
-        r.overwrite = s.get_boolean_content(fg.overwrite);
-
+    r.overwrite = s.get_boolean_content(fg.overwrite);
     return r;
 }
 

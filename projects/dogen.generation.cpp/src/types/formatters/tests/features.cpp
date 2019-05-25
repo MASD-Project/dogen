@@ -41,8 +41,8 @@ make_masd_generation_cpp_tests_directory() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -61,8 +61,8 @@ make_masd_generation_cpp_tests_postfix() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -81,8 +81,8 @@ make_masd_generation_cpp_tests_class_implementation_postfix() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -101,8 +101,8 @@ make_masd_generation_cpp_tests_enum_implementation_postfix() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -121,8 +121,8 @@ make_masd_generation_cpp_tests_master_header_postfix() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -141,8 +141,8 @@ make_masd_generation_cpp_tests_main_postfix() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -161,8 +161,8 @@ make_masd_generation_cpp_tests_cmakelists_postfix() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }

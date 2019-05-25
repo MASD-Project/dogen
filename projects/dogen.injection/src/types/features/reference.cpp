@@ -41,8 +41,8 @@ make_masd_injection_reference() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }
@@ -59,13 +59,12 @@ reference::make_feature_group(const dogen::variability::meta_model::feature_mode
 
 reference::static_configuration reference::make_static_configuration(
     const feature_group& fg,
-   const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::meta_model::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
     if (s.has_configuration_point(fg.reference))
         r.reference = s.get_text_collection_content(fg.reference);
-
     return r;
 }
 

@@ -43,8 +43,8 @@ make_masd_injection_input_technical_space() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }
@@ -61,11 +61,11 @@ input_technical_space::make_feature_group(const dogen::variability::meta_model::
 
 input_technical_space::static_configuration input_technical_space::make_static_configuration(
     const feature_group& fg,
-   const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::meta_model::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-        r.input_technical_space = s.get_text_content(fg.input_technical_space);
+    r.input_technical_space = s.get_text_content_or_default(fg.input_technical_space);
     return r;
 }
 

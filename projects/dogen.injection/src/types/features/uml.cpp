@@ -39,8 +39,8 @@ make_masd_injection_dia_comment() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }

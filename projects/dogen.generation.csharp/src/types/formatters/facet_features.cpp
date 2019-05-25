@@ -43,8 +43,8 @@ make_supported() {
     al.kernel("masd");
     al.backend("masd.generation.csharp");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -63,8 +63,8 @@ make_overwrite() {
     al.kernel("masd");
     al.backend("masd.generation.csharp");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }
@@ -82,12 +82,12 @@ facet_features::make_feature_group(const dogen::variability::meta_model::feature
 
 facet_features::static_configuration facet_features::make_static_configuration(
     const feature_group& fg,
-   const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::meta_model::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-        r.supported = s.get_boolean_content(fg.supported);
-        r.overwrite = s.get_boolean_content(fg.overwrite);
+    r.supported = s.get_boolean_content_or_default(fg.supported);
+    r.overwrite = s.get_boolean_content_or_default(fg.overwrite);
     return r;
 }
 

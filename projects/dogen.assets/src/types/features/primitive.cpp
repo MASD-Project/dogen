@@ -41,8 +41,8 @@ make_masd_primitive_underlying_element() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -61,8 +61,8 @@ make_masd_primitive_is_nullable() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -81,8 +81,8 @@ make_masd_primitive_use_type_aliasing() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }
@@ -101,15 +101,13 @@ primitive::make_feature_group(const dogen::variability::meta_model::feature_mode
 
 primitive::static_configuration primitive::make_static_configuration(
     const feature_group& fg,
-   const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::meta_model::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    if (s.has_configuration_point(fg.underlying_element))
-        r.underlying_element = s.get_text_content(fg.underlying_element);
-
-        r.is_nullable = s.get_boolean_content(fg.is_nullable);
-        r.use_type_aliasing = s.get_boolean_content(fg.use_type_aliasing);
+    r.underlying_element = s.get_text_content(fg.underlying_element);
+    r.is_nullable = s.get_boolean_content_or_default(fg.is_nullable);
+    r.use_type_aliasing = s.get_boolean_content_or_default(fg.use_type_aliasing);
     return r;
 }
 

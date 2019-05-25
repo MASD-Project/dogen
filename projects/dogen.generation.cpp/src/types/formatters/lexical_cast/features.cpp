@@ -41,8 +41,8 @@ make_masd_generation_cpp_lexical_cast_directory() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -61,8 +61,8 @@ make_masd_generation_cpp_lexical_cast_postfix() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -81,8 +81,8 @@ make_masd_generation_cpp_lexical_cast_enum_header_postfix() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }

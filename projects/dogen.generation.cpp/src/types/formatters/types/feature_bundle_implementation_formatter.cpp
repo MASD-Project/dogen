@@ -153,8 +153,8 @@ a.stream() << "    al.facet(\"" << fb_ft.location().facet() << "\");" << std::en
                 if (!fb_ft.location().archetype().empty())
 a.stream() << "    al.archetype(\"" << fb_ft.location().archetype() << "\");" << std::endl;
 a.stream() << std::endl;
-a.stream() << "     r.location(al);" << std::endl;
-a.stream() << "     return r;" << std::endl;
+a.stream() << "    r.location(al);" << std::endl;
+a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;
             }
 a.stream() << std::endl;
@@ -176,24 +176,21 @@ a.stream() << "}" << std::endl;
 a.stream() << std::endl;
 a.stream() << sn << "::static_configuration " << sn << "::make_static_configuration(" << std::endl;
 a.stream() << "    const feature_group& fg," << std::endl;
-a.stream() << "   const dogen::variability::meta_model::configuration& cfg) {" << std::endl;
+a.stream() << "    const dogen::variability::meta_model::configuration& cfg) {" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    static_configuration r;" << std::endl;
 a.stream() << "    const dogen::variability::helpers::configuration_selector s(cfg);" << std::endl;
                 for (const auto& fb_ft : fb.feature_templates()) {
                     const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
 
-                    const bool has_default_value(fb_ft.value().empty());
+                    const bool has_default_value(!fb_ft.value().empty());
                     if (has_default_value) {
-a.stream() << "    if (s.has_configuration_point(fg." << simple_key << "))" << std::endl;
-a.stream() << "        r." << simple_key << " = s.get_" << enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) << "_content(fg." << simple_key << ");" << std::endl;
-a.stream() << std::endl;
+a.stream() << "    r." << simple_key << " = s.get_" << enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) << "_content_or_default(fg." << simple_key << ");" << std::endl;
                     } else if (fb_ft.is_optional()) {
 a.stream() << "    if (s.has_configuration_point(fg." << simple_key << "))" << std::endl;
 a.stream() << "        r." << simple_key << " = s.get_" << enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) << "_content(fg." << simple_key << ");" << std::endl;
-a.stream() << std::endl;
                     } else {
-a.stream() << "        r." << simple_key << " = s.get_" << enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) << "_content(fg." << simple_key << ");" << std::endl;
+a.stream() << "    r." << simple_key << " = s.get_" << enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) << "_content(fg." << simple_key << ");" << std::endl;
                     }
                 }
 a.stream() << "    return r;" << std::endl;

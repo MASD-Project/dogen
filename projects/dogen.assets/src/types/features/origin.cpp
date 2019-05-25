@@ -43,8 +43,8 @@ make_masd_injection_is_proxy_model() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }
@@ -61,11 +61,11 @@ origin::make_feature_group(const dogen::variability::meta_model::feature_model& 
 
 origin::static_configuration origin::make_static_configuration(
     const feature_group& fg,
-   const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::meta_model::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-        r.is_proxy_model = s.get_boolean_content(fg.is_proxy_model);
+    r.is_proxy_model = s.get_boolean_content_or_default(fg.is_proxy_model);
     return r;
 }
 

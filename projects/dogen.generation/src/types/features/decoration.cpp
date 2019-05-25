@@ -41,8 +41,8 @@ make_masd_generation_decoration_enabled() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -59,8 +59,8 @@ make_masd_generation_decoration_copyright_notice() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -77,8 +77,8 @@ make_masd_generation_decoration_licence_name() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -95,8 +95,8 @@ make_masd_generation_decoration_modeline_group_name() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -113,8 +113,8 @@ make_masd_generation_decoration_marker_name() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }
@@ -135,25 +135,15 @@ decoration::make_feature_group(const dogen::variability::meta_model::feature_mod
 
 decoration::static_configuration decoration::make_static_configuration(
     const feature_group& fg,
-   const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::meta_model::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    if (s.has_configuration_point(fg.enabled))
-        r.enabled = s.get_boolean_content(fg.enabled);
-
-    if (s.has_configuration_point(fg.copyright_notice))
-        r.copyright_notice = s.get_text_collection_content(fg.copyright_notice);
-
-    if (s.has_configuration_point(fg.licence_name))
-        r.licence_name = s.get_text_content(fg.licence_name);
-
-    if (s.has_configuration_point(fg.modeline_group_name))
-        r.modeline_group_name = s.get_text_content(fg.modeline_group_name);
-
-    if (s.has_configuration_point(fg.marker_name))
-        r.marker_name = s.get_text_content(fg.marker_name);
-
+    r.enabled = s.get_boolean_content(fg.enabled);
+    r.copyright_notice = s.get_text_collection_content(fg.copyright_notice);
+    r.licence_name = s.get_text_content(fg.licence_name);
+    r.modeline_group_name = s.get_text_content(fg.modeline_group_name);
+    r.marker_name = s.get_text_content(fg.marker_name);
     return r;
 }
 

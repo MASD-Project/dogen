@@ -41,8 +41,8 @@ make_masd_extraction_output_technical_space() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }
@@ -59,13 +59,11 @@ output_technical_space::make_feature_group(const dogen::variability::meta_model:
 
 output_technical_space::static_configuration output_technical_space::make_static_configuration(
     const feature_group& fg,
-   const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::meta_model::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    if (s.has_configuration_point(fg.output_technical_space))
-        r.output_technical_space = s.get_text_collection_content(fg.output_technical_space);
-
+    r.output_technical_space = s.get_text_collection_content(fg.output_technical_space);
     return r;
 }
 

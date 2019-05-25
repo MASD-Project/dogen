@@ -41,8 +41,8 @@ make_overwrite() {
     al.kernel("masd");
     al.backend("masd.generation.cpp");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -58,8 +58,8 @@ make_primary_inclusion_directive() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -75,8 +75,8 @@ make_secondary_inclusion_directive() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }
@@ -95,19 +95,13 @@ archetype_features::make_feature_group(const dogen::variability::meta_model::fea
 
 archetype_features::static_configuration archetype_features::make_static_configuration(
     const feature_group& fg,
-   const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::meta_model::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    if (s.has_configuration_point(fg.overwrite))
-        r.overwrite = s.get_boolean_content(fg.overwrite);
-
-    if (s.has_configuration_point(fg.primary_inclusion_directive))
-        r.primary_inclusion_directive = s.get_text_content(fg.primary_inclusion_directive);
-
-    if (s.has_configuration_point(fg.secondary_inclusion_directive))
-        r.secondary_inclusion_directive = s.get_text_collection_content(fg.secondary_inclusion_directive);
-
+    r.overwrite = s.get_boolean_content(fg.overwrite);
+    r.primary_inclusion_directive = s.get_text_content(fg.primary_inclusion_directive);
+    r.secondary_inclusion_directive = s.get_text_collection_content(fg.secondary_inclusion_directive);
     return r;
 }
 

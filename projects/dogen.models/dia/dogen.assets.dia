@@ -34470,7 +34470,8 @@ technical space targeted.
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=property
-#DOGEN masd.variability.qualified_name=masd.enumerator.value#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.enumerator.value
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35501,13 +35502,13 @@ it.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O254">
       <dia:attribute name="obj_pos">
-        <dia:point val="52,73"/>
+        <dia:point val="51.3571,72.7143"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,72.95;77.96,78.25"/>
+        <dia:rectangle val="51.3071,72.6643;77.3171,77.9643"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="52,73"/>
+        <dia:point val="51.3571,72.7143"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>
@@ -35619,7 +35620,8 @@ it.
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.decoration.modeline.editor#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.decoration.modeline.editor
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35647,7 +35649,8 @@ it.
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.decoration.modeline.location#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.decoration.modeline.location
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35675,7 +35678,8 @@ it.
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.decoration.modeline.technical_space#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.decoration.modeline.technical_space
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

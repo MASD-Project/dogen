@@ -41,8 +41,8 @@ make_masd_variability_profile() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }
@@ -59,13 +59,11 @@ profile::make_feature_group(const dogen::variability::meta_model::feature_model&
 
 profile::static_configuration profile::make_static_configuration(
     const feature_group& fg,
-   const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::meta_model::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    if (s.has_configuration_point(fg.profile))
-        r.profile = s.get_text_content(fg.profile);
-
+    r.profile = s.get_text_content(fg.profile);
     return r;
 }
 

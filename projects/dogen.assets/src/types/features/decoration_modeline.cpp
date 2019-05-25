@@ -41,8 +41,8 @@ make_masd_decoration_modeline_editor() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -59,8 +59,8 @@ make_masd_decoration_modeline_location() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -77,8 +77,8 @@ make_masd_decoration_modeline_technical_space() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }
@@ -97,19 +97,16 @@ decoration_modeline::make_feature_group(const dogen::variability::meta_model::fe
 
 decoration_modeline::static_configuration decoration_modeline::make_static_configuration(
     const feature_group& fg,
-   const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::meta_model::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
     if (s.has_configuration_point(fg.editor))
         r.editor = s.get_text_content(fg.editor);
-
     if (s.has_configuration_point(fg.location))
         r.location = s.get_text_content(fg.location);
-
     if (s.has_configuration_point(fg.technical_space))
         r.technical_space = s.get_text_content(fg.technical_space);
-
     return r;
 }
 

@@ -43,8 +43,8 @@ make_masd_type_parameters_variable_number_of_parameters() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -63,8 +63,8 @@ make_masd_type_parameters_count() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -83,8 +83,8 @@ make_masd_type_parameters_always_in_heap() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }
@@ -103,13 +103,13 @@ type_parameters::make_feature_group(const dogen::variability::meta_model::featur
 
 type_parameters::static_configuration type_parameters::make_static_configuration(
     const feature_group& fg,
-   const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::meta_model::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-        r.variable_number_of_parameters = s.get_boolean_content(fg.variable_number_of_parameters);
-        r.count = s.get_number_content(fg.count);
-        r.always_in_heap = s.get_boolean_content(fg.always_in_heap);
+    r.variable_number_of_parameters = s.get_boolean_content_or_default(fg.variable_number_of_parameters);
+    r.count = s.get_number_content_or_default(fg.count);
+    r.always_in_heap = s.get_boolean_content_or_default(fg.always_in_heap);
     return r;
 }
 

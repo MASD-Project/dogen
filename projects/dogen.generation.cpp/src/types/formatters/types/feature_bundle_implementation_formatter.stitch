@@ -112,8 +112,8 @@ make_<#= fb_ft.identifiable_key() #>() {
 #>
     al.archetype("<#= fb_ft.location().archetype() #>");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 <#+
             }
@@ -143,7 +143,7 @@ make_<#= fb_ft.identifiable_key() #>() {
 
 <#= sn #>::static_configuration <#= sn #>::make_static_configuration(
     const feature_group& fg,
-   const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::meta_model::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
@@ -151,22 +151,19 @@ make_<#= fb_ft.identifiable_key() #>() {
                 for (const auto& fb_ft : fb.feature_templates()) {
                     const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
 
-                    const bool has_default_value(fb_ft.value().empty());
+                    const bool has_default_value(!fb_ft.value().empty());
                     if (has_default_value) {
 #>
-    if (s.has_configuration_point(fg.<#= simple_key #>))
-        r.<#= simple_key #> = s.get_<#= enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) #>_content(fg.<#= simple_key #>);
-
+    r.<#= simple_key #> = s.get_<#= enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) #>_content_or_default(fg.<#= simple_key #>);
 <#+
                     } else if (fb_ft.is_optional()) {
 #>
     if (s.has_configuration_point(fg.<#= simple_key #>))
         r.<#= simple_key #> = s.get_<#= enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) #>_content(fg.<#= simple_key #>);
-
 <#+
                     } else {
 #>
-        r.<#= simple_key #> = s.get_<#= enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) #>_content(fg.<#= simple_key #>);
+    r.<#= simple_key #> = s.get_<#= enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) #>_content(fg.<#= simple_key #>);
 <#+
                     }
                 }

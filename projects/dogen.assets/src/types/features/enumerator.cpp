@@ -43,8 +43,8 @@ make_masd_enumeration_add_invalid_enumerator() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -61,8 +61,8 @@ make_masd_enumerator_value() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }
@@ -80,14 +80,13 @@ enumerator::make_feature_group(const dogen::variability::meta_model::feature_mod
 
 enumerator::static_configuration enumerator::make_static_configuration(
     const feature_group& fg,
-   const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::meta_model::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-        r.add_invalid_enumerator = s.get_boolean_content(fg.add_invalid_enumerator);
+    r.add_invalid_enumerator = s.get_boolean_content_or_default(fg.add_invalid_enumerator);
     if (s.has_configuration_point(fg.value))
         r.value = s.get_text_content(fg.value);
-
     return r;
 }
 

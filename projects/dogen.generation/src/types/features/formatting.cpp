@@ -40,8 +40,8 @@ make_formatting_style() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -57,8 +57,8 @@ make_formatting_input() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }
@@ -76,16 +76,12 @@ formatting::make_feature_group(const dogen::variability::meta_model::feature_mod
 
 formatting::static_configuration formatting::make_static_configuration(
     const feature_group& fg,
-   const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::meta_model::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    if (s.has_configuration_point(fg.formatting_style))
-        r.formatting_style = s.get_text_content(fg.formatting_style);
-
-    if (s.has_configuration_point(fg.formatting_input))
-        r.formatting_input = s.get_text_content(fg.formatting_input);
-
+    r.formatting_style = s.get_text_content(fg.formatting_style);
+    r.formatting_input = s.get_text_content(fg.formatting_input);
     return r;
 }
 

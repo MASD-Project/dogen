@@ -350,7 +350,8 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.stitch.relative_output_directory"
+            "masd.variability.qualified_name": "masd.stitch.relative_output_directory",
+            "masd.variability.is_optional": "true"
           }
         },
         {
@@ -360,7 +361,8 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.stitch.inclusion_dependency"
+            "masd.variability.qualified_name": "masd.stitch.inclusion_dependency",
+            "masd.variability.is_optional": "true"
           }
         },
         {
@@ -380,7 +382,8 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.stitch.wale.text_template"
+            "masd.variability.qualified_name": "masd.stitch.wale.text_template",
+            "masd.variability.is_optional": "true"
           }
         },
         {
@@ -390,7 +393,8 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.stitch.wale.kvp"
+            "masd.variability.qualified_name": "masd.stitch.wale.kvp",
+            "masd.variability.is_optional": "true"
           }
         }
       ]

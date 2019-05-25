@@ -43,8 +43,8 @@ make_masd_stitch_stream_variable_name() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -61,8 +61,8 @@ make_masd_stitch_relative_output_directory() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -79,8 +79,8 @@ make_masd_stitch_inclusion_dependency() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -97,8 +97,8 @@ make_masd_stitch_containing_namespaces() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -115,8 +115,8 @@ make_masd_stitch_wale_text_template() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -133,8 +133,8 @@ make_masd_stitch_wale_kvp() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }
@@ -156,26 +156,20 @@ features::make_feature_group(const dogen::variability::meta_model::feature_model
 
 features::static_configuration features::make_static_configuration(
     const feature_group& fg,
-   const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::meta_model::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-        r.stream_variable_name = s.get_text_content(fg.stream_variable_name);
+    r.stream_variable_name = s.get_text_content_or_default(fg.stream_variable_name);
     if (s.has_configuration_point(fg.relative_output_directory))
         r.relative_output_directory = s.get_text_content(fg.relative_output_directory);
-
     if (s.has_configuration_point(fg.inclusion_dependency))
         r.inclusion_dependency = s.get_text_collection_content(fg.inclusion_dependency);
-
-    if (s.has_configuration_point(fg.containing_namespaces))
-        r.containing_namespaces = s.get_text_content(fg.containing_namespaces);
-
+    r.containing_namespaces = s.get_text_content(fg.containing_namespaces);
     if (s.has_configuration_point(fg.text_template))
         r.text_template = s.get_text_content(fg.text_template);
-
     if (s.has_configuration_point(fg.kvp))
         r.kvp = s.get_key_value_pair_content(fg.kvp);
-
     return r;
 }
 

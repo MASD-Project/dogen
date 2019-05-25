@@ -41,8 +41,8 @@ make_masd_variability_binding_point() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -59,8 +59,8 @@ make_masd_variability_labels() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -77,8 +77,8 @@ make_masd_variability_archetype_location_kernel() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -95,8 +95,8 @@ make_masd_variability_archetype_location_backend() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -113,8 +113,8 @@ make_masd_variability_archetype_location_facet() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -131,8 +131,8 @@ make_masd_variability_archetype_location_archetype() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -149,8 +149,8 @@ make_masd_variability_template_kind() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -167,8 +167,8 @@ make_masd_variability_value() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -185,8 +185,8 @@ make_masd_variability_qualified_name() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -205,8 +205,8 @@ make_masd_variability_generate_static_configuration() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -225,8 +225,8 @@ make_masd_variability_is_optional() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }
@@ -253,39 +253,21 @@ variability_templates::make_feature_group(const dogen::variability::meta_model::
 
 variability_templates::static_configuration variability_templates::make_static_configuration(
     const feature_group& fg,
-   const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::meta_model::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    if (s.has_configuration_point(fg.binding_point))
-        r.binding_point = s.get_text_content(fg.binding_point);
-
-    if (s.has_configuration_point(fg.labels))
-        r.labels = s.get_text_collection_content(fg.labels);
-
-    if (s.has_configuration_point(fg.kernel))
-        r.kernel = s.get_text_content(fg.kernel);
-
-    if (s.has_configuration_point(fg.backend))
-        r.backend = s.get_text_content(fg.backend);
-
-    if (s.has_configuration_point(fg.facet))
-        r.facet = s.get_text_content(fg.facet);
-
-    if (s.has_configuration_point(fg.archetype))
-        r.archetype = s.get_text_content(fg.archetype);
-
-    if (s.has_configuration_point(fg.template_kind))
-        r.template_kind = s.get_text_content(fg.template_kind);
-
-    if (s.has_configuration_point(fg.value))
-        r.value = s.get_text_collection_content(fg.value);
-
-    if (s.has_configuration_point(fg.qualified_name))
-        r.qualified_name = s.get_text_content(fg.qualified_name);
-
-        r.generate_static_configuration = s.get_boolean_content(fg.generate_static_configuration);
-        r.is_optional = s.get_boolean_content(fg.is_optional);
+    r.binding_point = s.get_text_content(fg.binding_point);
+    r.labels = s.get_text_collection_content(fg.labels);
+    r.kernel = s.get_text_content(fg.kernel);
+    r.backend = s.get_text_content(fg.backend);
+    r.facet = s.get_text_content(fg.facet);
+    r.archetype = s.get_text_content(fg.archetype);
+    r.template_kind = s.get_text_content(fg.template_kind);
+    r.value = s.get_text_collection_content(fg.value);
+    r.qualified_name = s.get_text_content(fg.qualified_name);
+    r.generate_static_configuration = s.get_boolean_content_or_default(fg.generate_static_configuration);
+    r.is_optional = s.get_boolean_content_or_default(fg.is_optional);
     return r;
 }
 

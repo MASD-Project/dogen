@@ -13,24 +13,24 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-25 Sat 13:47]
+#+CAPTION: Clock summary at [2019-05-25 Sat 15:07]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *28:15* |       |       | 100.0 |
+| *Total time*                                           | *29:34* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 28:15   |       |       | 100.0 |
-| Active                                                 |         | 28:15 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  3:37 |  12.8 |
-| Create a video demo for the previous sprint's features |         |       |  3:46 |  13.3 |
-| Sprint and product backlog grooming                    |         |       |  1:18 |   4.6 |
-| Make wale templates meta-model elements                |         |       |  2:45 |   9.7 |
-| Flatten the data directory                             |         |       |  1:11 |   4.2 |
-| Rename =dogen::cpp::header_only= stereotypes           |         |       |  0:15 |   0.9 |
-| Rename coding model                                    |         |       |  2:17 |   8.1 |
-| Windows build is failing on a number of tests          |         |       |  0:30 |   1.8 |
-| Read variability papers                                |         |       |  0:56 |   3.3 |
-| Add code generation support to static configurations   |         |       | 11:40 |  41.3 |
+| Stories                                                | 29:34   |       |       | 100.0 |
+| Active                                                 |         | 29:34 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  3:37 |  12.2 |
+| Create a video demo for the previous sprint's features |         |       |  3:46 |  12.7 |
+| Sprint and product backlog grooming                    |         |       |  1:18 |   4.4 |
+| Make wale templates meta-model elements                |         |       |  2:45 |   9.3 |
+| Flatten the data directory                             |         |       |  1:11 |   4.0 |
+| Rename =dogen::cpp::header_only= stereotypes           |         |       |  0:15 |   0.8 |
+| Rename coding model                                    |         |       |  2:17 |   7.7 |
+| Windows build is failing on a number of tests          |         |       |  0:30 |   1.7 |
+| Read variability papers                                |         |       |  0:56 |   3.2 |
+| Add code generation support to static configurations   |         |       | 12:59 |  43.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -399,6 +399,7 @@ Time spent reading the literature on variability.
 
 *** STARTED Add code generation support to static configurations      :story:
     :LOGBOOK:
+    CLOCK: [2019-05-25 Sat 13:48]--[2019-05-25 Sat 15:07] =>  1:19
     CLOCK: [2019-05-25 Sat 13:39]--[2019-05-25 Sat 13:47] =>  0:08
     CLOCK: [2019-05-25 Sat 13:01]--[2019-05-25 Sat 13:38] =>  0:37
     CLOCK: [2019-05-25 Sat 12:03]--[2019-05-25 Sat 12:08] =>  0:05

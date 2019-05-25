@@ -43,8 +43,8 @@ make_masd_extraction_force_write() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -63,8 +63,8 @@ make_masd_extraction_delete_extra_files() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -81,8 +81,8 @@ make_masd_extraction_ignore_files_matching_regex() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -101,8 +101,8 @@ make_masd_extraction_delete_empty_directories() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -121,8 +121,8 @@ make_masd_extraction_enable_backend_directories() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }
@@ -143,17 +143,15 @@ filesystem::make_feature_group(const dogen::variability::meta_model::feature_mod
 
 filesystem::static_configuration filesystem::make_static_configuration(
     const feature_group& fg,
-   const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::meta_model::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-        r.force_write = s.get_boolean_content(fg.force_write);
-        r.delete_extra_files = s.get_boolean_content(fg.delete_extra_files);
-    if (s.has_configuration_point(fg.ignore_files_matching_regex))
-        r.ignore_files_matching_regex = s.get_text_collection_content(fg.ignore_files_matching_regex);
-
-        r.delete_empty_directories = s.get_boolean_content(fg.delete_empty_directories);
-        r.enable_backend_directories = s.get_boolean_content(fg.enable_backend_directories);
+    r.force_write = s.get_boolean_content_or_default(fg.force_write);
+    r.delete_extra_files = s.get_boolean_content_or_default(fg.delete_extra_files);
+    r.ignore_files_matching_regex = s.get_text_collection_content(fg.ignore_files_matching_regex);
+    r.delete_empty_directories = s.get_boolean_content_or_default(fg.delete_empty_directories);
+    r.enable_backend_directories = s.get_boolean_content_or_default(fg.enable_backend_directories);
     return r;
 }
 

@@ -41,8 +41,8 @@ make_masd_injection_external_modules() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 dogen::variability::meta_model::feature_template
@@ -59,8 +59,8 @@ make_masd_injection_model_modules() {
     archetypes::location al;
     al.kernel("masd");
 
-     r.location(al);
-     return r;
+    r.location(al);
+    return r;
 }
 
 }
@@ -78,16 +78,13 @@ naming::make_feature_group(const dogen::variability::meta_model::feature_model& 
 
 naming::static_configuration naming::make_static_configuration(
     const feature_group& fg,
-   const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::meta_model::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
     if (s.has_configuration_point(fg.external_modules))
         r.external_modules = s.get_text_content(fg.external_modules);
-
-    if (s.has_configuration_point(fg.model_modules))
-        r.model_modules = s.get_text_content(fg.model_modules);
-
+    r.model_modules = s.get_text_content(fg.model_modules);
     return r;
 }
 

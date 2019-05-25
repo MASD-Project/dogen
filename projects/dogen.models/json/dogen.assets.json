@@ -2587,7 +2587,8 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "property",
-            "masd.variability.qualified_name": "masd.enumerator.value"
+            "masd.variability.qualified_name": "masd.enumerator.value",
+            "masd.variability.is_optional": "true"
           }
         }
       ]
@@ -2836,7 +2837,8 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.decoration.modeline.editor"
+            "masd.variability.qualified_name": "masd.decoration.modeline.editor",
+            "masd.variability.is_optional": "true"
           }
         },
         {
@@ -2847,7 +2849,8 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.decoration.modeline.location"
+            "masd.variability.qualified_name": "masd.decoration.modeline.location",
+            "masd.variability.is_optional": "true"
           }
         },
         {
@@ -2858,7 +2861,8 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.decoration.modeline.technical_space"
+            "masd.variability.qualified_name": "masd.decoration.modeline.technical_space",
+            "masd.variability.is_optional": "true"
           }
         }
       ]
