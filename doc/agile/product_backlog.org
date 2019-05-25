@@ -11919,6 +11919,10 @@ Emacs support:
 
 https://llvm.org/svn/llvm-project/cfe/trunk/tools/clang-format/clang-format.el
 
+Links:
+
+- [[https://github.com/STEllAR-GROUP/hpx/blob/master/.clang-format][HPX clang format]]
+
 *** Consider adding an emblem for clang's analysis checks             :story:
 
 NeoVim appears to have emblems for waffle as well as clang's analysis
@@ -11972,6 +11976,7 @@ See also:
 
 - [[https://github.com/polysquare/clang-tidy-target-cmake][clang-tidy-target-cmake]]
 - [[https://www.kdab.com/clang-tidy-part-1-modernize-source-code-using-c11c14/?utm_source%3DMaster%2520List%252006-16&utm_campaign%3Dd11fea20e3-EMAIL_CAMPAIGN_2017_03_23&utm_medium%3Demail&utm_term%3D0_bdde4cdc11-d11fea20e3-101553725&goal%3D0_bdde4cdc11-d11fea20e3-101553725][Clang-Tidy, part 1: Modernize your source code using C++11/C++14]]
+- [[https://github.com/STEllAR-GROUP/hpx/blob/master/.clang-tidy][hpx clang tidy file]]
 
 *** Add support for the =scan-build= static analyser                  :story:
 
