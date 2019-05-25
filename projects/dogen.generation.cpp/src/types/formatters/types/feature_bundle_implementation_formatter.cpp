@@ -188,6 +188,10 @@ a.stream() << "    const dogen::variability::helpers::configuration_selector s(c
 a.stream() << "    if (s.has_configuration_point(fg." << simple_key << "))" << std::endl;
 a.stream() << "        r." << simple_key << " = s.get_" << enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) << "_content(fg." << simple_key << ");" << std::endl;
 a.stream() << std::endl;
+                    } else if (fb_ft.is_optional()) {
+a.stream() << "    if (s.has_configuration_point(fg." << simple_key << "))" << std::endl;
+a.stream() << "        r." << simple_key << " = s.get_" << enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) << "_content(fg." << simple_key << ");" << std::endl;
+a.stream() << std::endl;
                     } else {
 a.stream() << "        r." << simple_key << " = s.get_" << enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) << "_content(fg." << simple_key << ");" << std::endl;
                     }

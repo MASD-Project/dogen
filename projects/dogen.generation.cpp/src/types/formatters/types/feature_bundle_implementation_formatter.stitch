@@ -158,6 +158,12 @@ make_<#= fb_ft.identifiable_key() #>() {
         r.<#= simple_key #> = s.get_<#= enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) #>_content(fg.<#= simple_key #>);
 
 <#+
+                    } else if (fb_ft.is_optional()) {
+#>
+    if (s.has_configuration_point(fg.<#= simple_key #>))
+        r.<#= simple_key #> = s.get_<#= enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) #>_content(fg.<#= simple_key #>);
+
+<#+
                     } else {
 #>
         r.<#= simple_key #> = s.get_<#= enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) #>_content(fg.<#= simple_key #>);
