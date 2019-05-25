@@ -217,7 +217,7 @@ make_masd_variability_is_optional() {
     r.name().qualified("masd.variability.is_optional");
     const auto vt(value_type::boolean);
     r.value_type(vt);
-    r.binding_point(binding_point::element);
+    r.binding_point(binding_point::property);
     r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));

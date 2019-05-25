@@ -36095,7 +36095,7 @@ Should only be supplied for instance templates.
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=element
+#DOGEN masd.variability.binding_point=property
 #DOGEN masd.variability.qualified_name=masd.variability.is_optional#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
