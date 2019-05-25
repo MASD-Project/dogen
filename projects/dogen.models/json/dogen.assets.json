@@ -2975,6 +2975,17 @@
             "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.variability.generate_static_configuration"
           }
+        },
+        {
+          "name": "masd.variability.is_optional",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.variability.is_optional"
+          }
         }
       ]
     },

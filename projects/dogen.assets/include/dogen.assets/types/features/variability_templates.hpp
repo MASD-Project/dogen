@@ -50,6 +50,7 @@ public:
         variability::meta_model::feature value;
         variability::meta_model::feature qualified_name;
         variability::meta_model::feature generate_static_configuration;
+        variability::meta_model::feature is_optional;
     };
 
     static feature_group
@@ -67,6 +68,7 @@ public:
         std::list<std::string> value;
         std::string qualified_name;
         bool generate_static_configuration;
+        bool is_optional;
     };
 
     static static_configuration make_static_configuration(
