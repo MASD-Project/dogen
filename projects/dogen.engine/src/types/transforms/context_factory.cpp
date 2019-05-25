@@ -40,6 +40,7 @@
 #include "dogen.generation.cpp/types/feature_initializer.hpp"
 #include "dogen.generation.csharp/types/feature_initializer.hpp"
 #include "dogen.extraction/types/features/initializer.hpp"
+#include "dogen.engine/types/features/initializer.hpp"
 #include "dogen.engine/types/transforms/factory_exception.hpp"
 #include "dogen.engine/types/transforms/context_factory.hpp"
 
@@ -201,6 +202,7 @@ context context_factory::make_context(const configuration& cfg,
     extraction::features::initializer::register_templates(ftrg);
     generation::cpp::feature_initializer::register_templates(ftrg);
     generation::csharp::feature_initializer::register_templates(ftrg);
+    features::initializer::register_templates(ftrg);
     const auto ftrp(ftrg.repository());
     const auto fm(feature_model_production_chain::apply(vctx, ftrp));
     r.injection_context().feature_model(fm);

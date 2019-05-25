@@ -19,7 +19,6 @@
  *
  */
 #include "dogen.assets/types/features/orm.hpp"
-#include "dogen.assets/types/features/naming.hpp"
 #include "dogen.assets/types/features/origin.hpp"
 #include "dogen.assets/types/features/mapping.hpp"
 #include "dogen.assets/types/features/primitive.hpp"
@@ -41,7 +40,6 @@ register_templates(variability::helpers::feature_template_registrar& rg) {
     rg.register_templates(dogen::assets::features::enumerator::make_templates());
     rg.register_templates(dogen::assets::features::generalization::make_templates());
     rg.register_templates(dogen::assets::features::mapping::make_templates());
-    rg.register_templates(dogen::assets::features::naming::make_templates());
     rg.register_templates(dogen::assets::features::origin::make_templates());
     rg.register_templates(dogen::assets::features::orm::make_templates());
     rg.register_templates(dogen::assets::features::output_technical_space::make_templates());
