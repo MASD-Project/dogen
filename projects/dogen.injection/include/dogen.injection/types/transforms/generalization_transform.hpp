@@ -25,24 +25,17 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.injection/types/meta_model/model.hpp"
+#include "dogen.injection/types/transforms/context_fwd.hpp"
 
 namespace dogen::injection::transforms {
 
+/**
+ * @brief Read generalization-related properties.
+ */
 class generalization_transform final {
 public:
-    generalization_transform() = default;
-    generalization_transform(const generalization_transform&) = default;
-    generalization_transform(generalization_transform&&) = default;
-    ~generalization_transform() = default;
-    generalization_transform& operator=(const generalization_transform&) = default;
-
-public:
-    bool operator==(const generalization_transform& rhs) const;
-    bool operator!=(const generalization_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const transforms::context& ctx, meta_model::model& m);
 };
 
 }

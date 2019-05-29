@@ -40,8 +40,7 @@ namespace dogen::injection::transforms {
  */
 class configuration_transform final {
 public:
-    static void apply(const transforms::context& ctx,
-        meta_model::model& m);
+    static void apply(const transforms::context& ctx, meta_model::model& m);
 };
 
 }
