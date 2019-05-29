@@ -63,7 +63,8 @@ generalization::static_configuration generalization::make_static_configuration(
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    r.parent = s.get_text_content(fg.parent);
+    if (s.has_configuration_point(fg.parent))
+        r.parent = s.get_text_content(fg.parent);
     return r;
 }
 

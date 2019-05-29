@@ -6886,7 +6886,8 @@ If the containing package is the model itself, it is linked to the model's modul
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.generalization.parent#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.generalization.parent
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
