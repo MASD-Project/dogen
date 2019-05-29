@@ -106,7 +106,7 @@
         <dia:point val="0,-23"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-0.05,-23.05;27.13,-4.45"/>
+        <dia:rectangle val="-0.05,-23.05;27.13,-3.65"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -118,7 +118,7 @@
         <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="18.500000000000004"/>
+        <dia:real val="19.300000000000004"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -2881,13 +2881,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O29">
       <dia:attribute name="obj_pos">
-        <dia:point val="13,52"/>
+        <dia:point val="14,52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="12.95,51.95;29.335,56.45"/>
+        <dia:rectangle val="13.95,51.95;30.335,56.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="13,52"/>
+        <dia:point val="14,52"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.285"/>
@@ -6995,17 +6995,17 @@ If empty, file logging is disabled.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="21.1425,56.4"/>
+        <dia:point val="22.1425,56.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="20.3925,55.65;28.535,62.8"/>
+        <dia:rectangle val="21.3925,55.65;28.535,62.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="21.1425,56.4"/>
-        <dia:point val="21.1425,60"/>
+        <dia:point val="22.1425,56.4"/>
+        <dia:point val="22.1425,60"/>
         <dia:point val="28.335,60"/>
         <dia:point val="28.335,62"/>
       </dia:attribute>
@@ -7070,7 +7070,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:point val="45.03,52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="21.0925,48.2;45.78,52.8"/>
+        <dia:rectangle val="22.0925,48.2;45.78,52.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7078,8 +7078,8 @@ If empty, file logging is disabled.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="45.03,52"/>
         <dia:point val="45.03,49"/>
-        <dia:point val="21.1425,49"/>
-        <dia:point val="21.1425,52"/>
+        <dia:point val="22.1425,49"/>
+        <dia:point val="22.1425,52"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7103,13 +7103,13 @@ If empty, file logging is disabled.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O69">
       <dia:attribute name="obj_pos">
-        <dia:point val="38,73"/>
+        <dia:point val="41,73"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="37.95,72.95;51.81,76.05"/>
+        <dia:rectangle val="40.95,72.95;54.81,76.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="38,73"/>
+        <dia:point val="41,73"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.76"/>
@@ -7415,7 +7415,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:point val="55.515,65.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="44.83,64.85;56.265,73.8"/>
+        <dia:rectangle val="47.83,64.85;56.265,73.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7423,8 +7423,8 @@ If empty, file logging is disabled.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="55.515,65.6"/>
         <dia:point val="55.515,70"/>
-        <dia:point val="44.88,70"/>
-        <dia:point val="44.88,73"/>
+        <dia:point val="47.88,70"/>
+        <dia:point val="47.88,73"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7555,17 +7555,17 @@ If empty, file logging is disabled.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="29.285,56.4"/>
+        <dia:point val="30.285,56.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.535,55.65;47.9575,62.8"/>
+        <dia:rectangle val="29.535,55.65;47.9575,62.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="29.285,56.4"/>
-        <dia:point val="29.285,60"/>
+        <dia:point val="30.285,56.4"/>
+        <dia:point val="30.285,60"/>
         <dia:point val="47.7575,60"/>
         <dia:point val="47.7575,62"/>
       </dia:attribute>
@@ -8572,17 +8572,17 @@ If empty, file logging is disabled.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="13,56.4"/>
+        <dia:point val="14,56.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="10.36,55.65;13.75,62.8"/>
+        <dia:rectangle val="10.36,55.65;14.75,62.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="13,56.4"/>
-        <dia:point val="13,60"/>
+        <dia:point val="14,56.4"/>
+        <dia:point val="14,60"/>
         <dia:point val="10.41,60"/>
         <dia:point val="10.41,62"/>
       </dia:attribute>
