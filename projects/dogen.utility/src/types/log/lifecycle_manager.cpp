@@ -103,9 +103,9 @@ initialise(const boost::optional<logging_configuration>& ocfg) {
     /*
      * If no configuration is supplied, logging is to be disabled.
      */
+    auto& core(*boost::log::core::get());
     if (!ocfg) {
-        auto core(boost::log::core::get());
-        core->set_logging_enabled(false);
+        core.set_logging_enabled(false);
         return;
     }
 
@@ -114,9 +114,13 @@ initialise(const boost::optional<logging_configuration>& ocfg) {
      */
     const auto& cfg(*ocfg);
     logging_configuration_validator::validate(cfg);
+    core.set_logging_enabled(true);
 
     /*
-     * Use the configuration to setup the logging infrastructure.
+     * Use the configuration to setup the logging infrastructure for
+     * both console and file, if enabled. We don't have to worry about
+     * making sure that at least one is enabled - that is the
+     * validator's job.
      */
     const auto sl(to_severity_level(cfg.severity()));
     if (cfg.output_to_console())
@@ -127,7 +131,10 @@ initialise(const boost::optional<logging_configuration>& ocfg) {
         create_file_backend(path, sl);
     }
 
-    boost::log::core::get()->add_global_attribute(time_stamp_attr,
+    /*
+     * Finally, add the timestamp attributes.
+     */
+    core.add_global_attribute(time_stamp_attr,
         boost::log::attributes::local_clock());
 }
 

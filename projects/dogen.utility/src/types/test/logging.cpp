@@ -31,7 +31,7 @@ namespace {
  * for the happy path. Set on when investigating test breaks.
  * WARNING: remember to set it back afterwards.
  */
-bool logging_enabled_globally(false);
+const bool logging_enabled_globally(false);
 using dogen::utility::log::severity_level;
 const std::string severity("trace");
 
@@ -62,21 +62,12 @@ scoped_lifecycle_manager_factory(std::string test_module,
 
     std::ostringstream s;
     s << "log/" << test_module << "/" << test_suite << "/" << function_name;
-
     logging_configuration cfg;
     cfg.filename(s.str());
     cfg.severity(severity);
     cfg.output_to_console(log_to_console);
 
     return scoped_lifecycle_manager(cfg);
-}
-
-boost::filesystem::path tracing_directory_path(std::string test_module,
-    std::string test_suite, std::string function_name){
-    std::ostringstream s;
-    s << "probe/" << test_module << "/" << test_suite
-      << "/" << function_name;
-    return s.str();
 }
 
 }
