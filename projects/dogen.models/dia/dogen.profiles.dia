@@ -878,13 +878,13 @@ other layers can then configure features.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O7">
       <dia:attribute name="obj_pos">
-        <dia:point val="52,-20"/>
+        <dia:point val="52,-19"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,-20.05;67.565,-16.95"/>
+        <dia:rectangle val="51.95,-19.05;67.565,-15.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="52,-20"/>
+        <dia:point val="52,-19"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -994,16 +994,16 @@ other layers can then configure features.
         <dia:point val="67.4525,-23.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="59.7075,-23.25;68.3025,-19.95"/>
+        <dia:rectangle val="59.7075,-23.25;68.3025,-18.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="67.4525,-23.2"/>
-        <dia:point val="67.4525,-22"/>
-        <dia:point val="59.7575,-22"/>
-        <dia:point val="59.7575,-20"/>
+        <dia:point val="67.4525,-21"/>
+        <dia:point val="59.7575,-21"/>
+        <dia:point val="59.7575,-19"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
