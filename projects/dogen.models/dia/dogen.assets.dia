@@ -34496,7 +34496,7 @@ technical space targeted.
         <dia:point val="94,29"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="93.95,28.95;116.495,32.65"/>
+        <dia:rectangle val="93.95,28.95;116.495,33.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="94,29"/>
@@ -34505,7 +34505,7 @@ technical space targeted.
         <dia:real val="22.445"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#generalization#</dia:string>
@@ -34612,6 +34612,35 @@ technical space targeted.
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=element
 #DOGEN masd.variability.qualified_name=masd.generalization.is_final#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#masd.generalization.parent#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#masd::variability::text#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Name of the parent of the current element.
+
+#DOGEN masd.variability.archetype_location.kernel=masd
+#DOGEN masd.variability.template_kind=instance
+#DOGEN masd.variability.binding_point=element
+#DOGEN masd.variability.qualified_name=masd.generalization.parent
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

@@ -26,6 +26,7 @@
 #endif
 
 #include <list>
+#include <string>
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
@@ -40,6 +41,7 @@ class generalization final {
 public:
     struct feature_group {
         variability::meta_model::feature is_final;
+        variability::meta_model::feature parent;
     };
 
     static feature_group
@@ -48,6 +50,7 @@ public:
 public:
     struct static_configuration {
         bool is_final;
+        std::string parent;
     };
 
     static static_configuration make_static_configuration(

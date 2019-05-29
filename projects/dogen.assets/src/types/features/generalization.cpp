@@ -45,6 +45,24 @@ make_masd_generalization_is_final() {
     return r;
 }
 
+dogen::variability::meta_model::feature_template
+make_masd_generalization_parent() {
+    using namespace dogen::variability::meta_model;
+    feature_template r;
+    r.name().simple("parent");
+    r.name().qualified("masd.generalization.parent");
+    const auto vt(value_type::text);
+    r.value_type(vt);
+    r.binding_point(binding_point::element);
+    r.kind(template_kind::instance);
+
+    archetypes::location al;
+    al.kernel("masd");
+
+    r.location(al);
+    return r;
+}
+
 }
 
 generalization::feature_group
@@ -53,6 +71,7 @@ generalization::make_feature_group(const dogen::variability::meta_model::feature
     const dogen::variability::helpers::feature_selector s(fm);
 
     r.is_final = s.get_by_name("masd.generalization.is_final");
+    r.parent = s.get_by_name("masd.generalization.parent");
 
     return r;
 }
@@ -64,6 +83,8 @@ generalization::static_configuration generalization::make_static_configuration(
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
     r.is_final = s.get_boolean_content(fg.is_final);
+    if (s.has_configuration_point(fg.parent))
+        r.parent = s.get_text_content(fg.parent);
     return r;
 }
 
@@ -72,6 +93,7 @@ generalization::make_templates() {
     using namespace dogen::variability::meta_model;
     std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_generalization_is_final());
+    r.push_back(make_masd_generalization_parent());
     return r;
 }
 
