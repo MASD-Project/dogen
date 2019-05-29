@@ -13,27 +13,27 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-29 Wed 15:47]
+#+CAPTION: Clock summary at [2019-05-29 Wed 16:21]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *35:26* |       |       | 100.0 |
+| *Total time*                                           | *36:00* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 35:26   |       |       | 100.0 |
-| Active                                                 |         | 35:26 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  3:37 |  10.2 |
-| Create a video demo for the previous sprint's features |         |       |  3:46 |  10.6 |
-| Sprint and product backlog grooming                    |         |       |  2:07 |   6.0 |
-| Make wale templates meta-model elements                |         |       |  2:45 |   7.8 |
+| Stories                                                | 36:00   |       |       | 100.0 |
+| Active                                                 |         | 36:00 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  3:37 |  10.0 |
+| Create a video demo for the previous sprint's features |         |       |  3:46 |  10.5 |
+| Sprint and product backlog grooming                    |         |       |  2:07 |   5.9 |
+| Make wale templates meta-model elements                |         |       |  2:45 |   7.6 |
 | Flatten the data directory                             |         |       |  1:11 |   3.3 |
 | Rename =dogen::cpp::header_only= stereotypes           |         |       |  0:15 |   0.7 |
-| Rename coding model                                    |         |       |  2:17 |   6.4 |
+| Rename coding model                                    |         |       |  2:17 |   6.3 |
 | Windows build is failing on a number of tests          |         |       |  0:30 |   1.4 |
-| Consider a test suite level logging flag               |         |       |  1:40 |   4.7 |
+| Consider a test suite level logging flag               |         |       |  1:40 |   4.6 |
+| Move parent processing to injection                    |         |       |  1:52 |   5.2 |
 | Read variability papers                                |         |       |  0:56 |   2.6 |
-| Add code generation support to static configurations   |         |       | 13:09 |  37.1 |
-| Move parent processing to injection                    |         |       |  1:18 |   3.7 |
-| Windows clang-cl release build is failing 4 tests      |         |       |  1:55 |   5.4 |
+| Add code generation support to static configurations   |         |       | 13:09 |  36.5 |
+| Windows clang-cl release build is failing 4 tests      |         |       |  1:55 |   5.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -407,6 +407,40 @@ should allow enabling logging at the test suite level. However, we
 only use this to troubleshoot in which case the cost of a few seconds
 is not a big problem.
 
+*** CANCELLED Move parent processing to injection                     :story:
+    CLOSED: [2019-05-29 Wed 16:21]
+    :LOGBOOK:
+    CLOCK: [2019-05-29 Wed 15:47]--[2019-05-29 Wed 16:21] =>  0:34
+    CLOCK: [2019-05-29 Wed 11:47]--[2019-05-29 Wed 11:56] =>  0:09
+    CLOCK: [2019-05-29 Wed 11:18]--[2019-05-29 Wed 11:46] =>  0:28
+    CLOCK: [2019-05-29 Wed 11:00]--[2019-05-29 Wed 11:17] =>  0:17
+    CLOCK: [2019-05-25 Sat 15:40]--[2019-05-25 Sat 15:44] =>  0:04
+    CLOCK: [2019-05-25 Sat 15:19]--[2019-05-25 Sat 15:39] =>  0:20
+    :END:
+
+At present we are reading the parent field from meta-data in coding's
+parsing transform. If we create a transform for this in injection,
+this would mean that all meta-model elements would have access to
+parenting via meta-data. We could also name the transform a bit
+better.
+
+Actually, whilst this would work fine in theoretical terms, in
+practice it cannot be done. This is because we make use of profiles
+quite extensively in order to make inheritance easier - the
+alternative being to have to add the same keys so every single
+meta-model element in assets:
+
+: masd.generalization.parent=dogen::assets::meta_model::element
+
+Similarly, we take the exact same approach in generation.cpp/csharp
+for the formatters. This means that we need to have profile expansion
+prior to reading the parents; however, we cannot move profile
+expansion into injection because it would require meta-modeling
+concepts - i.e. we need the asset-level concept of "profile". At this
+point we reached the limitation on how much abstraction we can push
+down into injection. Therefore it is not possible to do this, given
+the current conceptual model.
+
 *** STARTED Read variability papers                                   :story:
     :LOGBOOK:
     CLOCK: [2019-05-21 Tue 17:35]--[2019-05-21 Tue 17:45] =>  0:10
@@ -523,21 +557,6 @@ Approach:
 - update resolver to resolve static configurations.
 - generate the struct for the static configuration.
 - generate a method to read the struct from a dynamic configuration.
-
-*** STARTED Move parent processing to injection                       :story:
-    :LOGBOOK:
-    CLOCK: [2019-05-29 Wed 11:47]--[2019-05-29 Wed 11:56] =>  0:09
-    CLOCK: [2019-05-29 Wed 11:18]--[2019-05-29 Wed 11:46] =>  0:28
-    CLOCK: [2019-05-29 Wed 11:00]--[2019-05-29 Wed 11:17] =>  0:17
-    CLOCK: [2019-05-25 Sat 15:40]--[2019-05-25 Sat 15:44] =>  0:04
-    CLOCK: [2019-05-25 Sat 15:19]--[2019-05-25 Sat 15:39] =>  0:20
-    :END:
-
-At present we are reading the parent field from meta-data in coding's
-parsing transform. If we create a transform for this in injection,
-this would mean that all meta-model elements would have access to
-parenting via meta-data. We could also name the transform a bit
-better.
 
 *** STARTED Windows clang-cl release build is failing 4 tests         :spike:
     :LOGBOOK:

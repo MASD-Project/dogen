@@ -727,6 +727,19 @@ contain fields with this value set to false.
 Its not quite "supporting configuration", more like " supporting
 unbound configurations". All features are by definition configurable.
 
+A related problem is the converse: some fields _can_ be placed on a
+configuration. In this case, we should not read the fields prior to
+performing configuration expansion. This can probably be detected
+quite easily: say we can have a flag that tells us if we have expanded
+the configuration. If the flag is false, we should throw when we
+attempt to read fields that can be placed in profiles. In effect we
+are saying configurations exist in one of two states:
+
+- pre-expansion, in which only fields that are "pre-expansion" can be
+  read;
+- post-expansion, in which only fields that are "post-expansion" can
+  be read.
+
 *** Consider inheriting annotations and stereotypes                   :story:
 
 At present we need to define the stereotype
