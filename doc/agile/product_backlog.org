@@ -5777,7 +5777,35 @@ Notes:
   the resolver to use. This would mean the parser could be simplified,
   and the whole "lets guess what this scope is" could be removed. The
   job of the parser is just to produce these lists. The resovler then
-  resolves them into actual names.
+  resolves them into actual names. If we go for this approach, this
+  should be part of injection: we'd have "value trees" in injection
+  and "name trees" in assets. Resolution is in effect the conversion
+  of these two tree types. However, the only slight problem is that,
+  at present, resolution is done in the middle of the assets pipeline,
+  after merging. For this to work, we'd need to, somehow, move it to
+  the injection to assets adaption phase. This is not entirely
+  inconceivable: we already have all elements with their correct names
+  at this stage. If we could view the entirety of the model set rather
+  than just the model when resolving, it would work. In other words,
+  if we built a single map with all of the element IDs across the
+  model set and used it to resolve, according to a well-defined set of
+  rules, it should work. However, the set of rules themselves would
+  involve some processing: we need to know about module containment
+  (external, model module and internal). Nonetheless, this is probably
+  already available at this stage - i.e. the owning element should
+  have this information as part of the adaption process. And in truth,
+  this is the only thing we should be using in resolution. That is,
+  the original lists as obtained from injection, plus the owning name;
+  we then perform a traversal/climb using the well-defined rules
+  above, and for each point in the climb, do a look-up in the map. If
+  found, use the name pointed to by the element. If not found, keep
+  climbing. The only slight problem we now have is we created a
+  circular dependency: in order to perform resolution we need access
+  to all the names in the model set, but these are only generated as
+  part of the adaption of the injection model to the asset model. We
+  need to somehow have a two pass approach: first build all the names,
+  then adapt the elements. This could be done in engine, as part of
+  the injection to assets chain.
 
 *** Add a new annotation type of "pair"                               :story:
 
