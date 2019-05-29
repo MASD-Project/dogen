@@ -46,8 +46,7 @@ private:
     std::list<std::string> extract(Configurable& c) {
         const auto& n(c.configuration()->name());
         const auto& qn(n.qualified());
-        BOOST_LOG_SEV(lg, trace) << "Extracting: "
-                                 << n.simple()
+        BOOST_LOG_SEV(lg, trace) << "Extracting: " << n.simple()
                                  << " (" << qn << ") ";
 
         std::list<std::string> r;
@@ -92,7 +91,9 @@ public:
     void operator()(assets::meta_model::decoration::modeline_group& mg) {
         update(mg);
     }
-    void operator()(assets::meta_model::decoration::generation_marker& gm) { update(gm); }
+    void operator()(assets::meta_model::decoration::generation_marker& gm) {
+        update(gm);
+    }
 };
 
 }
