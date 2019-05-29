@@ -454,6 +454,13 @@
           }
         }
       ]
+    },
+    {
+      "name": "transforms::generalization_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
