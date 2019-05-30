@@ -127,7 +127,8 @@ enumeration::static_configuration enumeration::make_static_configuration(
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
     r.use_implementation_defined_underlying_element = s.get_boolean_content_or_default(fg.use_implementation_defined_underlying_element);
-    r.underlying_element = s.get_text_content(fg.underlying_element);
+    if (s.has_configuration_point(fg.underlying_element))
+        r.underlying_element = s.get_text_content(fg.underlying_element);
     r.use_implementation_defined_enumerator_values = s.get_boolean_content_or_default(fg.use_implementation_defined_enumerator_values);
     r.add_invalid_enumerator = s.get_boolean_content_or_default(fg.add_invalid_enumerator);
     return r;
