@@ -259,7 +259,7 @@ void parsing_transform::apply(const context& ctx, meta_model::model& m) {
 
         try {
             parse_attributes(ts, o.local_attributes());
-            parse_parent(fg, o);
+            // parse_parent(fg, o);
         } catch (boost::exception& e) {
             e << errmsg_parsing_owner(id);
             throw;

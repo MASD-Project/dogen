@@ -19,6 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/unordered_set_io.hpp"
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
@@ -31,6 +32,8 @@
 #include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/types/helpers/resolver.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
+#include "dogen.assets/types/helpers/name_builder.hpp"
+#include "dogen.assets/types/features/generalization.hpp"
 #include "dogen.assets/types/transforms/transformation_error.hpp"
 #include "dogen.assets/types/transforms/generalization_transform.hpp"
 
@@ -44,6 +47,8 @@ auto lg(logger_factory(transform_id));
 const std::string parent_not_found("Could not find parent: ");
 const std::string incompatible_is_final(
     "Attempt to force is final on a type with children: ");
+const std::string parent_name_conflict(
+    "Parent name is defined in both meta-data and structure of model: ");
 
 }
 
@@ -78,18 +83,63 @@ generalization_transform::make_is_final(const feature_group& fg,
     return boost::optional<bool>();
 }
 
-std::unordered_set<std::string>
-generalization_transform::update_and_collect_parent_ids(
-    const helpers::indices& idx, meta_model::model& m) {
+std::unordered_set<std::string> generalization_transform::
+update_and_collect_parent_ids(const helpers::indices& idx,
+    const variability::meta_model::feature_model& fm, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Updating and collecting parent ids.";
 
     using helpers::resolver;
     std::unordered_set<std::string> r;
+    using features::generalization;
+    const auto fg(generalization::make_feature_group(fm));
     for (auto& pair : m.structural_elements().objects()) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, trace) << "Processing type: " << id;
 
+        /*
+         * Obtain the static configuration from the meta-data.
+         */
         auto& o(*pair.second);
+        const auto& cfg(*o.configuration());
+        const auto scfg(generalization::make_static_configuration(fg, cfg));
+
+        /*
+         * Populate is final requested directly. Note that we cannot
+         * actually compute the flag's ultimate state at this point -
+         * hence why two fields are needed.
+         */
+        o.is_final_requested(scfg.is_final);
+
+        /*
+         * Now handle parenting information in meta-data. If no parent
+         * was set in the meta-data then there is nothing to do.
+         */
+        if (!scfg.parent.empty()) {
+            BOOST_LOG_SEV(lg, trace) << "Parent: " << scfg.parent;
+
+            /*
+             * If we've already have a parent name, this means there are now
+             * two conflicting sources of parenting information so bomb out.
+             */
+            BOOST_LOG_SEV(lg, trace) << "Parents: " << o.parents();
+            if (!o.parents().empty()) {
+                const auto& n(o.name().qualified().dot());
+                BOOST_LOG_SEV(lg, error) << parent_name_conflict << n;
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(parent_name_conflict + n));
+            }
+
+            /*
+             * Convert the string obtained via meta-data into a assets
+             * name and set it as our parent name.
+             */
+            const auto pn(helpers::name_builder::build(scfg.parent));
+            o.parents().push_back(pn);
+        }
+
+        /*
+         * If we still have no parents, then there is nothing to do.
+         */
         if (o.parents().empty()) {
             BOOST_LOG_SEV(lg, trace) << "Type has no parents.";
             continue;
@@ -97,20 +147,25 @@ generalization_transform::update_and_collect_parent_ids(
 
         /*
          * Resolve the parent names. This is required because they may
-         * have been supplied via meta-data, and as such, be
+         * have been supplied via meta-data, and as such, may be
          * incomplete. We can't wait for the resolution step proper
          * because there is a circular dependency: resolution needs
          * streotype expansion and streotype expansion needs
-         * generalization, which needs resolution. So we must resolve
-         * here.
+         * generalization (as it handles visitors, which need leaves,
+         * etc), which in turn needs resolution. So, in order to break
+         * the cycle, we resolve here.
+         *
+         * Note that we are also gathering the parent names after
+         * resolution.
          */
         std::list<meta_model::name> resolved_parents;
         for (const auto& pn : o.parents()) {
             const auto resolved_pn(resolver::resolve(m, idx, o.name(), pn));
-            const auto& pid(resolved_pn.qualified().dot());
-            r.insert(pid);
-            BOOST_LOG_SEV(lg, trace) << "Resolved parent: " << pid;
             resolved_parents.push_back(resolved_pn);
+
+            const auto& pid(resolved_pn.qualified().dot());
+            BOOST_LOG_SEV(lg, trace) << "Resolved parent: " << pid;
+            r.insert(pid);
         }
 
         o.parents(resolved_parents);
@@ -121,7 +176,7 @@ generalization_transform::update_and_collect_parent_ids(
 }
 
 void generalization_transform::walk_up_generalization_tree(
-    const feature_group& fg, const meta_model::name& leaf,
+    /*const feature_group& fg,*/ const meta_model::name& leaf,
     meta_model::model& em, meta_model::structural::object& o) {
 
     BOOST_LOG_SEV(lg, trace) << "Updating leaves for: "
@@ -173,7 +228,7 @@ void generalization_transform::walk_up_generalization_tree(
         }
 
         auto& parent(*i->second);
-        walk_up_generalization_tree(fg, leaf, em, parent);
+        walk_up_generalization_tree(/*fg,*/ leaf, em, parent);
 
         if (parent.parents().empty()) {
             /*
@@ -199,7 +254,7 @@ void generalization_transform::walk_up_generalization_tree(
 }
 
 void generalization_transform::
-populate_generalizable_properties(const feature_group& fg,
+populate_generalizable_properties(/*const feature_group& fg,*/
     const std::unordered_set<std::string>& parent_ids, meta_model::model& m) {
 
     for (auto& pair : m.structural_elements().objects()) {
@@ -227,14 +282,13 @@ populate_generalizable_properties(const feature_group& fg,
          /*
           * Handle the case where the user decided to override final.
           */
-         const auto is_final(make_is_final(fg, *o.configuration()));
-         if (is_final) {
-             if (*is_final && o.is_parent()) {
+         if (o.is_final_requested()) {
+             if (*o.is_final_requested() && o.is_parent()) {
                  BOOST_LOG_SEV(lg, error) << incompatible_is_final << id;
                  BOOST_THROW_EXCEPTION(
                      transformation_error(incompatible_is_final + id));
              }
-             o.is_final(*is_final);
+             o.is_final(*o.is_final_requested());
          } else {
              /*
               * By default we setup all childless types and leaf types
@@ -259,7 +313,7 @@ populate_generalizable_properties(const feature_group& fg,
              continue;
          }
 
-         walk_up_generalization_tree(fg, o.name(), m, o);
+         walk_up_generalization_tree(/*fg,*/ o.name(), m, o);
     }
 }
 
@@ -275,9 +329,10 @@ void generalization_transform::apply(const context& ctx,
     tracing::scoped_transform_tracer stp(lg, "generalization transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    const auto parent_ids(update_and_collect_parent_ids(idx, m));
-    const auto fg(make_feature_group(*ctx.feature_model()));
-    populate_generalizable_properties(fg, parent_ids, m);
+    const auto& fm(*ctx.feature_model());
+    const auto parent_ids(update_and_collect_parent_ids(idx, fm, m));
+    // const auto fg(make_feature_group(*ctx.feature_model()));
+    populate_generalizable_properties(/*fg,*/ parent_ids, m);
     sort_leaves(m);
 
     stp.end_transform(m);

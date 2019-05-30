@@ -56,14 +56,15 @@ private:
 private:
     static std::unordered_set<std::string>
     update_and_collect_parent_ids(const helpers::indices& idx,
+        const variability::meta_model::feature_model& fm,
         meta_model::model& m);
 
     static void walk_up_generalization_tree(
-        const feature_group& fg, const meta_model::name& leaf,
+        /*const feature_group& fg,*/ const meta_model::name& leaf,
         meta_model::model& m, meta_model::structural::object& o);
 
     static void populate_generalizable_properties(
-        const feature_group& fg,
+        /*const feature_group& fg,*/
         const std::unordered_set<std::string>& parent_ids,
         meta_model::model& m);
 
