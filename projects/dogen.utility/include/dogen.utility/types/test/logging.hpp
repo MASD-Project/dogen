@@ -75,7 +75,7 @@ scoped_lifecycle_manager_factory(std::string test_module,
 #define SETUP_TEST_LOG_SOURCE_DEBUG(function_name)                    \
     BOOST_TEST_CHECKPOINT(function_name);                            \
     auto sl(dogen::utility::test::scoped_lifecycle_manager_factory(  \
-            test_module, test_suite, function_name, true, true));   \
+            test_module, test_suite, function_name, true));         \
     using namespace dogen::utility::log;                             \
     dogen::utility::log::logger lg(                                  \
         dogen::utility::log::logger_factory(test_suite));
