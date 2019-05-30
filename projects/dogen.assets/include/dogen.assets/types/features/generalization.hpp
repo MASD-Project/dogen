@@ -27,6 +27,7 @@
 
 #include <list>
 #include <string>
+#include <boost/optional.hpp>
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
@@ -49,11 +50,8 @@ public:
 
 public:
     struct static_configuration {
-        bool is_final;
+        boost::optional<bool> is_final;
         std::string parent;
-
-        static_configuration() :
-            is_final() {}
     };
 
     static static_configuration make_static_configuration(

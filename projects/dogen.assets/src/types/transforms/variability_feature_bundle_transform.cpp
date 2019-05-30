@@ -239,6 +239,31 @@ apply(const context& ctx,
         for (auto& ft : fb.feature_templates()) {
             update(fg, ft);
 
+            /*
+             * A feature template will require optionality on the
+             * generated static configuration if it is optional and
+             * its underlying type does not have a natural way of
+             * representing absence (e.g. .empty()) and it has no
+             * default value. In this case, the property in the static
+             * configuration must be of an optional type, in order to
+             * handle the tri-bool logic: a) not supplied b) supplied
+             * but set to default (of the type, not of the template
+             * since it has not default) c) supplied and set to a
+             * value.
+             */
+            const bool has_default(!ft.value().empty());
+            using variability::meta_model::value_type;
+            const bool type_without_empty(
+                ft.value_type() == value_type::boolean ||
+                ft.value_type() == value_type::number);
+            ft.requires_optionality(ft.is_optional() && type_without_empty &&
+                !has_default);
+
+            /*
+             * Now we need to first map the unparsed type, using the
+             * fixed mappings. These will return expressions that will
+             * require parsing.
+             */
             const auto& ut(ft.unparsed_type());
             const auto i(fixed_mappings.find(ut));
             if (i == fixed_mappings.end()) {
@@ -246,27 +271,17 @@ apply(const context& ctx,
                 BOOST_THROW_EXCEPTION(
                     transformation_error(fixed_mapping_not_found + ut));
             }
-            ft.mapped_type(i->second);
 
             /*
-             * A feature template will require optionality on the
-             * generated static configuration if it is optional _and_
-             * it has no default value. In this case, the property in
-             * the static configuration must be of an optional type,
-             * in order to handle the tri-bool logic: a) not supplied
-             * b) supplied but set to default (of the type, not of the
-             * template since it has not default) c) supplied and set
-             * to a value.
+             * If optionality is needed, we need to inject it here,
+             * before any parsing takes place.
              */
-            const bool has_default(!ft.value().empty());
-            ft.requires_optionality(!has_default && ft.is_optional());
-
-            /*
-             * If any feature template in a bundle requires
-             * optionality, then the bundle also does.
-             */
-            if (ft.requires_optionality())
-                fb.requires_optionality(true);
+            if (ft.requires_optionality()) {
+                std::ostringstream s;
+                s << "boost::optional<" << i->second << ">";
+                ft.mapped_type(s.str());
+            } else
+                ft.mapped_type(i->second);
         }
     }
 
