@@ -24,10 +24,7 @@
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.variability/types/helpers/feature_selector.hpp"
-#include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.assets/io/meta_model/name_io.hpp"
-#include "dogen.assets/types/traits.hpp"
 #include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/types/helpers/resolver.hpp"
@@ -61,27 +58,6 @@ inline bool operator<(const name& lhs, const name& rhs) {
 }
 
 namespace dogen::assets::transforms {
-
-generalization_transform::feature_group
-generalization_transform::make_feature_group(
-    const variability::meta_model::feature_model& fm) {
-
-    feature_group r;
-    const variability::helpers::feature_selector s(fm);
-    r.is_final = s.get_by_name(traits::generalization::is_final());
-    return r;
-}
-
-boost::optional<bool>
-generalization_transform::make_is_final(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
-    const variability::helpers::configuration_selector s(cfg);
-
-    if (s.has_configuration_point(fg.is_final))
-        return s.get_boolean_content(fg.is_final);
-
-    return boost::optional<bool>();
-}
 
 std::unordered_set<std::string> generalization_transform::
 update_and_collect_parent_ids(const helpers::indices& idx,
@@ -176,8 +152,8 @@ update_and_collect_parent_ids(const helpers::indices& idx,
 }
 
 void generalization_transform::walk_up_generalization_tree(
-    /*const feature_group& fg,*/ const meta_model::name& leaf,
-    meta_model::model& em, meta_model::structural::object& o) {
+    const meta_model::name& leaf, meta_model::model& em,
+    meta_model::structural::object& o) {
 
     BOOST_LOG_SEV(lg, trace) << "Updating leaves for: "
                              << o.name().qualified().dot()
@@ -228,7 +204,7 @@ void generalization_transform::walk_up_generalization_tree(
         }
 
         auto& parent(*i->second);
-        walk_up_generalization_tree(/*fg,*/ leaf, em, parent);
+        walk_up_generalization_tree(leaf, em, parent);
 
         if (parent.parents().empty()) {
             /*
@@ -253,8 +229,7 @@ void generalization_transform::walk_up_generalization_tree(
     }
 }
 
-void generalization_transform::
-populate_generalizable_properties(/*const feature_group& fg,*/
+void generalization_transform::populate_generalizable_properties(
     const std::unordered_set<std::string>& parent_ids, meta_model::model& m) {
 
     for (auto& pair : m.structural_elements().objects()) {
@@ -313,7 +288,7 @@ populate_generalizable_properties(/*const feature_group& fg,*/
              continue;
          }
 
-         walk_up_generalization_tree(/*fg,*/ o.name(), m, o);
+         walk_up_generalization_tree(o.name(), m, o);
     }
 }
 
@@ -331,8 +306,7 @@ void generalization_transform::apply(const context& ctx,
 
     const auto& fm(*ctx.feature_model());
     const auto parent_ids(update_and_collect_parent_ids(idx, fm, m));
-    // const auto fg(make_feature_group(*ctx.feature_model()));
-    populate_generalizable_properties(/*fg,*/ parent_ids, m);
+    populate_generalizable_properties(parent_ids, m);
     sort_leaves(m);
 
     stp.end_transform(m);

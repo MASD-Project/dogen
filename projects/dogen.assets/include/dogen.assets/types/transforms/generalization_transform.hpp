@@ -27,14 +27,12 @@
 
 #include <unordered_set>
 #include <boost/optional.hpp>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.assets/types/meta_model/name.hpp"
-#include "dogen.assets/types/meta_model/structural/object.hpp"
-#include "dogen.assets/types/meta_model/model.hpp"
-#include "dogen.assets/types/transforms/context_fwd.hpp"
 #include "dogen.assets/types/helpers/indices.hpp"
+#include "dogen.assets/types/meta_model/name.hpp"
+#include "dogen.assets/types/meta_model/model.hpp"
+#include "dogen.assets/types/meta_model/structural/object.hpp"
+#include "dogen.assets/types/transforms/context_fwd.hpp"
 
 namespace dogen::assets::transforms {
 
@@ -43,28 +41,15 @@ namespace dogen::assets::transforms {
  */
 class generalization_transform final {
 private:
-    struct feature_group {
-        variability::meta_model::feature is_final;
-    };
-
-    static feature_group make_feature_group(
-        const variability::meta_model::feature_model& fm);
-
-    static boost::optional<bool> make_is_final(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-private:
     static std::unordered_set<std::string>
     update_and_collect_parent_ids(const helpers::indices& idx,
         const variability::meta_model::feature_model& fm,
         meta_model::model& m);
 
-    static void walk_up_generalization_tree(
-        /*const feature_group& fg,*/ const meta_model::name& leaf,
+    static void walk_up_generalization_tree(const meta_model::name& leaf,
         meta_model::model& m, meta_model::structural::object& o);
 
     static void populate_generalizable_properties(
-        /*const feature_group& fg,*/
         const std::unordered_set<std::string>& parent_ids,
         meta_model::model& m);
 
