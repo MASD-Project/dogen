@@ -4942,6 +4942,11 @@ ideas into stories and add them as we go along.
 - exceptions and enumerations can't inherit
 - exceptions shouldn't have properties.
 
+*Injection level checks*
+
+- ensure all attributes are unique, all element names are unique
+  (qualified with the package).
+
 *Intermediate model checks*:
 
 - For C# models: attribute that start with lower case will cause

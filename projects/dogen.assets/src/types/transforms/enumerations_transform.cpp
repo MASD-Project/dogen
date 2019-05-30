@@ -29,6 +29,7 @@
 #include "dogen.assets/lexical_cast/meta_model/technical_space_lc.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/types/traits.hpp"
+#include "dogen.assets/types/features/enumeration.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
 #include "dogen.assets/types/meta_model/structural/builtin.hpp"
 #include "dogen.assets/types/meta_model/structural/enumeration.hpp"
@@ -47,7 +48,6 @@ static logger lg(logger_factory(transform_id));
 const std::string csharp_invalid("Invalid");
 const std::string cpp_invalid("invalid");
 
-const std::string duplicate_enumerator("Duplicate enumerator name: ");
 const std::string unsupported_technical_space(
     "Invalid or unsupported technical space: ");
 const std::string too_many_defaults(
@@ -232,15 +232,8 @@ expand_enumerators(const enumerator_feature_group& fg,
      * names are unique.
      */
     unsigned int pos(e.add_invalid_enumerator() ? 1 : 0);
-    std::set<std::string> enumerator_names;
     for (const auto& en : e.enumerators()) {
         const auto sn(en.name().simple());
-        const auto i(enumerator_names.find(sn));
-        if (i != enumerator_names.end()) {
-            BOOST_LOG_SEV(lg, error) << duplicate_enumerator << sn;
-            BOOST_THROW_EXCEPTION(
-                transformation_error(duplicate_enumerator + sn));
-        }
 
         /*
          * We try to read the value from variability's
@@ -274,7 +267,7 @@ void enumerations_transform::apply(const context& ctx, meta_model::model& m) {
     if (m.structural_elements().enumerations().empty())
         return;
 
-    const auto l(m.input_technical_space());
+    const auto its(m.input_technical_space());
     const auto fg(make_feature_group(*ctx.feature_model()));
     const auto duen(obtain_enumeration_default_underlying_element_name(m));
 
@@ -285,7 +278,7 @@ void enumerations_transform::apply(const context& ctx, meta_model::model& m) {
         auto& e(*pair.second);
         populate_from_configuration(fg.enumeration, e);
         expand_default_underlying_element(duen, e);
-        expand_enumerators(fg.enumerator, l, e);
+        expand_enumerators(fg.enumerator, its, e);
     }
 
     stp.end_transform(m);
