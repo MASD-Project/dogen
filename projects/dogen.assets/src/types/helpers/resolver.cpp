@@ -689,8 +689,11 @@ void resolver::resolve_feature_bundles(const indices& idx,
     meta_model::model& m) {
     for (auto& pair : m.variability_elements().feature_bundles()) {
         auto& fb(*pair.second);
-        for (auto& ft : fb.feature_templates())
+        for (auto& ft : fb.feature_templates()) {
             resolve_name_tree(m, idx, fb.name(), ft.parsed_type());
+            if (ft.parsed_type().is_current_simple_type())
+                fb.requires_manual_default_constructor(true);
+        }
     }
 }
 
