@@ -170,40 +170,38 @@ void parsing_transform::parse_underlying_element(const feature_group& fg,
     e.underlying_element(ue);
 }
 
-void parsing_transform::parse_underlying_element(const feature_group& fg,
+void parsing_transform::parse_underlying_element(const feature_group& /*fg*/,
     const meta_model::technical_space ts,
     meta_model::structural::primitive& p) {
 
-    const auto id(p.name().qualified().dot());
+    // const auto id(p.name().qualified().dot());
 
-    /*
-     * Obtain the underlying element name from the meta-data. If there
-     * isn't one, bomb out as primitives require it.
-     */
-    auto ut(make_primitive_underlying_element(fg, *p.configuration()));
-    boost::algorithm::trim(ut);
-    if (ut.empty()) {
-        BOOST_LOG_SEV(lg, error) << missing_underlier << id;
-        BOOST_THROW_EXCEPTION(transformation_error(missing_underlier + id));
-    }
+    // /*
+    //  * Obtain the underlying element name from the meta-data. If there
+    //  * isn't one, bomb out as primitives require it.
+    //  */
+    // auto ut(make_primitive_underlying_element(fg, *p.configuration()));
+    // boost::algorithm::trim(ut);
+    // if (ut.empty()) {
+    //     BOOST_LOG_SEV(lg, error) << missing_underlier << id;
+    //     BOOST_THROW_EXCEPTION(transformation_error(missing_underlier + id));
+    // }
 
-    /*
-     * Create the value attribute.
-     */
-    helpers::name_factory nf;
-    const auto& n(p.name());
-    const auto sn(obtain_value_attribute_simple_name(ts));
+    // /*
+    //  * Create the value attribute.
+    //  */
+    // helpers::name_factory nf;
+    // const auto& n(p.name());
+    // const auto sn(obtain_value_attribute_simple_name(ts));
 
-    meta_model::attribute attr;
-    attr.name(nf.build_attribute_name(n, sn));
-    attr.unparsed_type(ut);
-    attr.documentation(documentation);
+    // meta_model::attribute attr;
+    // attr.name(nf.build_attribute_name(n, sn));
+    // attr.unparsed_type(ut);
+    // attr.documentation(documentation);
 
     const helpers::legacy_name_tree_parser ntp(ts);
-    auto nt(ntp.parse(ut));
-    attr.parsed_type(nt);
-
-    p.value_attribute(attr);
+    const auto nt(ntp.parse(p.value_attribute().unparsed_type()));
+    p.value_attribute().parsed_type(nt);
 }
 
 void parsing_transform::apply(const context& ctx, meta_model::model& m) {

@@ -76,16 +76,16 @@ void pre_assembly_chain::apply(const context& ctx,
     variability_feature_bundle_transform::apply(ctx, fixed_mappings, m);
 
     /*
+     * Primitive transform must happen before parsing transform, as it
+     * parses the attribute for the underlying element.
+     */
+    primitives_transform::apply(ctx, m);
+
+    /*
      * Parsing must happen after variability feature bundles have been
      * transformed because we rely on the mapped type being populated.
      */
     parsing_transform::apply(ctx, m);
-
-    /*
-     * Primitive transform requires parsing transform to populate the
-     * underlying elements.
-     */
-    primitives_transform::apply(ctx, m);
 
     /*
      * Ensure the model is valid.

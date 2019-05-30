@@ -41,6 +41,10 @@ namespace dogen::assets::transforms {
  */
 class primitives_transform final {
 private:
+    static std::string obtain_value_attribute_simple_name(
+        const meta_model::technical_space ts);
+
+private:
     struct feature_group {
         variability::meta_model::feature is_nullable;
         variability::meta_model::feature use_type_aliasing;
