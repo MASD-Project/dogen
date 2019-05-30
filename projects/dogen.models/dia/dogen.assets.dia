@@ -27729,7 +27729,7 @@ to variability.
         <dia:point val="8,-75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="7.95,-75.05;26.645,-70.55"/>
+        <dia:rectangle val="7.95,-75.05;26.645,-69.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="8,-75"/>
@@ -27738,7 +27738,7 @@ to variability.
         <dia:real val="18.594999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#feature_bundle#</dia:string>
@@ -27863,6 +27863,30 @@ to variability.
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, the code generator will output a class to represent the static configuration.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#requires_manual_default_constructor#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, the code generated for this feature bundle needs a manually generated 
+default constructor.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -28492,16 +28516,16 @@ to variability.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="17.2975,-70.5497"/>
+        <dia:point val="17.2975,-69.7504"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="16.5475,-71.2997;27.845,-65.2"/>
+        <dia:rectangle val="16.5475,-70.5004;27.845,-65.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="17.2975,-70.5497"/>
+        <dia:point val="17.2975,-69.7504"/>
         <dia:point val="17.2975,-68"/>
         <dia:point val="27.645,-68"/>
         <dia:point val="27.645,-66"/>
@@ -28521,7 +28545,7 @@ to variability.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O197" connection="12"/>
+        <dia:connection handle="0" to="O197" connection="14"/>
         <dia:connection handle="1" to="O198" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O193"/>

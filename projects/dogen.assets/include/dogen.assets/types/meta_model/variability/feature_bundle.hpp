@@ -64,7 +64,8 @@ public:
         const std::list<dogen::assets::meta_model::name>& opaque_associations,
         const std::list<dogen::assets::meta_model::name>& associative_container_keys,
         const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates,
-        const bool generate_static_configuration);
+        const bool generate_static_configuration,
+        const bool requires_manual_default_constructor);
 
 public:
     using element::accept;
@@ -123,6 +124,15 @@ public:
     void generate_static_configuration(const bool v);
     /**@}*/
 
+    /**
+     * @brief If true, the code generated for this feature bundle needs a manually generated
+     * default constructor.
+     */
+    /**@{*/
+    bool requires_manual_default_constructor() const;
+    void requires_manual_default_constructor(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const feature_bundle& rhs) const;
     bool operator!=(const feature_bundle& rhs) const {
@@ -142,6 +152,7 @@ private:
     std::list<dogen::assets::meta_model::name> associative_container_keys_;
     std::list<dogen::assets::meta_model::variability::feature_template> feature_templates_;
     bool generate_static_configuration_;
+    bool requires_manual_default_constructor_;
 };
 
 }

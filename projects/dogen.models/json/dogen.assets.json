@@ -1868,6 +1868,11 @@
           "name": "generate_static_configuration",
           "type": "bool",
           "documentation": "If true, the code generator will output a class to represent the static configuration.\n"
+        },
+        {
+          "name": "requires_manual_default_constructor",
+          "type": "bool",
+          "documentation": "If true, the code generated for this feature bundle needs a manually generated \ndefault constructor.\n"
         }
       ]
     },
