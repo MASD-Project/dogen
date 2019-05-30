@@ -3111,13 +3111,6 @@
       ]
     },
     {
-      "name": "transforms::mapping_source_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "meta_model::mapping::fixed_mappable",
       "documentation": "A mappable meta-model element for a special purpose.\n\nAt present, the only fixed mappables used by Dogen are related to the mapping of\nvariability types.\n",
       "stereotypes": [

@@ -128,7 +128,6 @@
 #include "dogen.assets/types/meta_model/orm/attribute_properties.hpp"
 #include "dogen.assets/types/meta_model/orm/primitive_properties.hpp"
 #include "dogen.assets/types/transforms/generalization_transform.hpp"
-#include "dogen.assets/types/transforms/mapping_source_transform.hpp"
 #include "dogen.assets/types/meta_model/decoration/modeline_field.hpp"
 #include "dogen.assets/types/meta_model/decoration/modeline_group.hpp"
 #include "dogen.assets/types/transforms/technical_space_transform.hpp"
