@@ -49,23 +49,6 @@ struct traits {
     };
     static std::string enable_backend_directories();
 
-    struct enumeration {
-        static std::string use_implementation_defined_underlying_element();
-        static std::string underlying_element();
-        static std::string use_implementation_defined_enumerator_values();
-        static std::string add_invalid_enumerator();
-    };
-
-    struct enumerator {
-        static std::string value();
-    };
-
-    struct primitive {
-        static std::string underlying_element();
-        static std::string is_nullable();
-        static std::string use_type_aliasing();
-    };
-
     struct orm {
         static std::string database_system();
         static std::string table_name();

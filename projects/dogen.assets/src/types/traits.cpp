@@ -97,50 +97,6 @@ std::string traits::enable_backend_directories() {
     return r;
 }
 
-std::string traits::enumeration::
-use_implementation_defined_underlying_element() {
-    static std::string r(
-        "masd.enumeration.use_implementation_defined_underlying_element");
-    return r;
-}
-
-std::string traits::enumeration::underlying_element() {
-    static std::string r("masd.enumeration.underlying_element");
-    return r;
-}
-
-std::string traits::enumeration::
-use_implementation_defined_enumerator_values() {
-    static std::string r(
-        "masd.enumeration.use_implementation_defined_enumerator_values");
-    return r;
-}
-
-std::string traits::enumeration::add_invalid_enumerator() {
-    static std::string r("masd.enumeration.add_invalid_enumerator");
-    return r;
-}
-
-std::string traits::enumerator::value() {
-    static std::string r("masd.enumerator.value");
-    return r;
-}
-
-std::string traits::primitive::underlying_element() {
-    static std::string r("masd.primitive.underlying_element");
-    return r;
-}
-
-std::string traits::primitive::is_nullable() {
-    static std::string r("masd.primitive.is_nullable");
-    return r;
-}
-
-std::string traits::primitive::use_type_aliasing() {
-    static std::string r("masd.primitive.use_type_aliasing");
-    return r;
-}
-
 std::string traits::orm::database_system() {
     static std::string r("masd.orm.database_system");
     return r;
