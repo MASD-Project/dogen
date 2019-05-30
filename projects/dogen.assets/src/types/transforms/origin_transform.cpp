@@ -25,6 +25,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/types/traits.hpp"
+#include "dogen.assets/types/features/origin.hpp"
 #include "dogen.assets/types/meta_model/element.hpp"
 #include "dogen.assets/types/meta_model/structural/module.hpp"
 #include "dogen.assets/types/meta_model/structural/object.hpp"
@@ -101,24 +102,6 @@ private:
 
 }
 
-origin_transform::feature_group origin_transform::
-make_feature_group(const variability::meta_model::feature_model& fm) {
-    feature_group r;
-    const variability::helpers::feature_selector s(fm);
-    r.is_proxy_model = s.get_by_name(traits::is_proxy_model());
-    return r;
-}
-
-bool origin_transform::
-is_proxy_model(const feature_group& fg, const meta_model::model& m) {
-    const auto& cfg(*m.root_module()->configuration());
-    const variability::helpers::configuration_selector s(cfg);
-    const bool r(s.get_boolean_content_or_default(fg.is_proxy_model));
-    BOOST_LOG_SEV(lg, debug) << "Read is proxy model: " << r
-                             << " for model: " << m.name().qualified().dot();
-    return r;
-}
-
 meta_model::origin_types origin_transform::
 compute_origin_types(const meta_model::model& m, const bool is_proxy_model) {
     using meta_model::origin_types;
@@ -143,12 +126,31 @@ apply(const context& ctx, meta_model::model& m) {
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
 
-    bool ipm(false);
-    const auto fg(make_feature_group(*ctx.feature_model()));
-    ipm = is_proxy_model(fg, m);
-    const auto ot(compute_origin_types(m, ipm));
+    /*
+     * First we obtain the is proxy model flag from the model's static
+     * configuration.
+     */
+    const auto& fm(*ctx.feature_model());
+    const auto fg(features::origin::make_feature_group(fm));
+    const auto& cfg(*m.root_module()->configuration());
+    const auto scfg(features::origin::make_static_configuration(fg, cfg));
+
+    BOOST_LOG_SEV(lg, debug) << "Read is proxy model: " << scfg.is_proxy_model
+                             << " for model: " << m.name().qualified().dot();
+
+    /*
+     * We then use the proxy model flag to compute the appropriate
+     * origin type for this model.
+     */
+    const auto ot(compute_origin_types(m, scfg.is_proxy_model));
     m.origin_type(ot);
 
+    /*
+     * Finally, we update all model elements with the computed origin
+     * type. Note that if you do not add the correct origin type to a
+     * model element, it will not be code generated as we ignore all
+     * non-target elements.
+     */
     updater g(ot);
     meta_model::elements_traversal(m, g);
 

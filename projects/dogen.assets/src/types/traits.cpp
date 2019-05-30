@@ -52,21 +52,6 @@ std::string traits::output_technical_space() {
     return r;
 }
 
-std::string traits::is_proxy_model() {
-    static std::string r("masd.injection.is_proxy_model");
-    return r;
-}
-
-std::string traits::external_modules() {
-    static std::string r("masd.injection.external_modules");
-    return r;
-}
-
-std::string traits::model_modules() {
-    static std::string r("masd.injection.model_modules");
-    return r;
-}
-
 std::string traits::extraction::force_write() {
     static std::string r("masd.extraction.force_write");
     return r;

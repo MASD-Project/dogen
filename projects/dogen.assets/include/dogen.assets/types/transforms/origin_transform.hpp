@@ -25,9 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.assets/types/meta_model/model.hpp"
 #include "dogen.assets/types/transforms/context_fwd.hpp"
 
@@ -37,17 +34,6 @@ class origin_transform final {
 private:
     static meta_model::origin_types compute_origin_types(
         const meta_model::model& m, const bool is_proxy_model);
-
-private:
-    struct feature_group {
-        variability::meta_model::feature is_proxy_model;
-    };
-
-    static feature_group make_feature_group(
-        const variability::meta_model::feature_model& fm);
-
-    static bool is_proxy_model(const feature_group& fg,
-        const meta_model::model& m);
 
 public:
     static void apply(const context& ctx, meta_model::model& m);
