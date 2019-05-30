@@ -56,16 +56,12 @@ namespace dogen::assets::transforms {
 class parsing_transform final {
 private:
     struct feature_group {
-        variability::meta_model::feature parent;
         variability::meta_model::feature enumeration_underlying_element;
         variability::meta_model::feature primitive_underlying_element;
     };
 
     static feature_group make_feature_group(
         const variability::meta_model::feature_model& fm);
-
-    static std::string make_parent(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
 
     static std::string make_enumeration_underlying_element(
         const feature_group& fg,
@@ -85,12 +81,6 @@ private:
      */
     static void parse_attributes(const meta_model::technical_space ts,
         std::list<meta_model::attribute>& attrs);
-
-    /**
-     * @brief Parses parent name in the supplied object.
-     */
-    static void parse_parent(const feature_group& fg,
-        meta_model::structural::object& o);
 
     /**
      * @brief Parses the underlying element in the supplied

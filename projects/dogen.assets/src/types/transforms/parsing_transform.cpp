@@ -62,8 +62,6 @@ const std::string cpp_value("value");
 const std::string documentation("Obtain the underlying value.");
 
 const std::string empty_type("Attribute type is empty: ");
-const std::string parent_name_conflict(
-    "Parent name is defined in both meta-data and structure of model: ");
 const std::string missing_underlier(
     "Primitive does not have an underlying element name: ");
 const std::string unsupported_technical_space(
@@ -79,8 +77,6 @@ parsing_transform::feature_group parsing_transform::make_feature_group(
     const variability::meta_model::feature_model& fm) {
     feature_group r;
     const variability::helpers::feature_selector s(fm);
-    const auto gp(traits::generalization::parent());
-    r.parent = s.get_by_name(gp);
 
     const auto eue(traits::enumeration::underlying_element());
     r.enumeration_underlying_element = s.get_by_name(eue);
@@ -89,15 +85,6 @@ parsing_transform::feature_group parsing_transform::make_feature_group(
     r.primitive_underlying_element = s.get_by_name(pue);
 
     return r;
-}
-
-std::string parsing_transform::make_parent(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
-    const variability::helpers::configuration_selector s(cfg);
-    if (s.has_configuration_point(fg.parent))
-        return s.get_text_content(fg.parent);
-
-    return std::string();
 }
 
 std::string parsing_transform::
@@ -152,34 +139,6 @@ void parsing_transform::parse_attributes(const meta_model::technical_space ts,
         auto nt(ntp.parse(ut));
         attr.parsed_type(nt);
     }
-}
-
-void parsing_transform::parse_parent(const feature_group& fg,
-    meta_model::structural::object& o) {
-    /*
-     * Obtain the parent name from the meta-data. If there is no
-     * parent name there is nothing to do.
-     */
-    const auto parent(make_parent(fg, *o.configuration()));
-    if (parent.empty())
-        return;
-
-    /*
-     * If we've already have a parent name, this means there are now
-     * two conflicting sources of parenting information so bomb out.
-     */
-    if (!o.parents().empty()) {
-        const auto& id(o.name().qualified().dot());
-        BOOST_LOG_SEV(lg, error) << parent_name_conflict << id;
-        BOOST_THROW_EXCEPTION(transformation_error(parent_name_conflict + id));
-    }
-
-    /*
-     * Convert the string obtained via meta-data into a assets name and
-     * set it as our parent name.
-     */
-    const auto pn(helpers::name_builder::build(parent));
-    o.parents().push_back(pn);
 }
 
 void parsing_transform::parse_underlying_element(const feature_group& fg,
@@ -259,7 +218,6 @@ void parsing_transform::apply(const context& ctx, meta_model::model& m) {
 
         try {
             parse_attributes(ts, o.local_attributes());
-            // parse_parent(fg, o);
         } catch (boost::exception& e) {
             e << errmsg_parsing_owner(id);
             throw;
