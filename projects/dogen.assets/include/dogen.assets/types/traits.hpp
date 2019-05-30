@@ -49,11 +49,6 @@ struct traits {
     };
     static std::string enable_backend_directories();
 
-    struct generalization {
-        static std::string is_final();
-        static std::string parent();
-    };
-
     struct enumeration {
         static std::string use_implementation_defined_underlying_element();
         static std::string underlying_element();

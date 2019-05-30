@@ -97,16 +97,6 @@ std::string traits::enable_backend_directories() {
     return r;
 }
 
-std::string traits::generalization::is_final() {
-    static std::string r("masd.generalization.is_final");
-    return r;
-}
-
-std::string traits::generalization::parent() {
-    static std::string r("masd.generalization.parent");
-    return r;
-}
-
 std::string traits::enumeration::
 use_implementation_defined_underlying_element() {
     static std::string r(
