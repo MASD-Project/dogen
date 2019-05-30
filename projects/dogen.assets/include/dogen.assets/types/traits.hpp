@@ -35,7 +35,6 @@ struct traits {
     static std::string postfix();
     static std::string supported();
     static std::string overwrite();
-    static std::string output_technical_space();
 
     struct extraction {
         static std::string force_write();

@@ -13,27 +13,27 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-30 Thu 22:05]
+#+CAPTION: Clock summary at [2019-05-30 Thu 22:26]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *45:01* |       |       | 100.0 |
+| *Total time*                                           | *45:21* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 45:01   |       |       | 100.0 |
-| Active                                                 |         | 45:01 |       | 100.0 |
+| Stories                                                | 45:21   |       |       | 100.0 |
+| Active                                                 |         | 45:21 |       | 100.0 |
 | Edit release notes for previous sprint                 |         |       |  3:37 |   8.0 |
-| Create a video demo for the previous sprint's features |         |       |  3:46 |   8.4 |
+| Create a video demo for the previous sprint's features |         |       |  3:46 |   8.3 |
 | Sprint and product backlog grooming                    |         |       |  2:07 |   4.7 |
 | Make wale templates meta-model elements                |         |       |  2:45 |   6.1 |
 | Flatten the data directory                             |         |       |  1:11 |   2.6 |
 | Rename =dogen::cpp::header_only= stereotypes           |         |       |  0:15 |   0.6 |
-| Rename coding model                                    |         |       |  2:17 |   5.1 |
+| Rename coding model                                    |         |       |  2:17 |   5.0 |
 | Windows build is failing on a number of tests          |         |       |  0:30 |   1.1 |
 | Consider a test suite level logging flag               |         |       |  1:40 |   3.7 |
-| Move parent processing to injection                    |         |       |  2:06 |   4.7 |
+| Move parent processing to injection                    |         |       |  2:06 |   4.6 |
 | Read variability papers                                |         |       |  0:56 |   2.1 |
-| Add code generation support to static configurations   |         |       | 21:56 |  48.7 |
-| Windows clang-cl release build is failing 4 tests      |         |       |  1:55 |   4.3 |
+| Add code generation support to static configurations   |         |       | 22:16 |  49.1 |
+| Windows clang-cl release build is failing 4 tests      |         |       |  1:55 |   4.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -452,6 +452,7 @@ Time spent reading the literature on variability.
 
 *** STARTED Add code generation support to static configurations      :story:
     :LOGBOOK:
+    CLOCK: [2019-05-30 Thu 22:06]--[2019-05-30 Thu 22:26] =>  0:20
     CLOCK: [2019-05-30 Thu 22:00]--[2019-05-30 Thu 22:05] =>  0:05
     CLOCK: [2019-05-30 Thu 21:49]--[2019-05-30 Thu 21:59] =>  0:10
     CLOCK: [2019-05-30 Thu 21:31]--[2019-05-30 Thu 21:48] =>  0:17

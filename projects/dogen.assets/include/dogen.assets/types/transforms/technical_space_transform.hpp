@@ -26,9 +26,6 @@
 #endif
 
 #include <list>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.assets/types/meta_model/technical_space.hpp"
 #include "dogen.assets/types/meta_model/model.hpp"
 #include "dogen.assets/types/transforms/context_fwd.hpp"
@@ -40,28 +37,6 @@ namespace dogen::assets::transforms {
  * elements.
  */
 class technical_space_transform final {
-private:
-    static meta_model::technical_space to_technical_space(const std::string& s);
-
-private:
-    struct feature_group {
-        variability::meta_model::feature output_technical_space;
-    };
-
-    static feature_group make_feature_group(
-        const variability::meta_model::feature_model& fm);
-
-    static std::list<meta_model::technical_space>
-    make_output_technical_space(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-private:
-    /**
-     * @brief Sets up the intrinsic technical space for all model
-     * elements.
-     */
-    static void setup_intrinsic_technical_space(meta_model::model& m);
-
 public:
     static void apply(const context& ctx, meta_model::model& m);
 };

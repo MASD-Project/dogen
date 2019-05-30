@@ -18,15 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
+#include "dogen.assets/types/meta_model/technical_space.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
-#include "dogen.variability/types/helpers/feature_selector.hpp"
-#include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.assets/io/meta_model/technical_space_io.hpp"
+#include "dogen.assets/lexical_cast/meta_model/technical_space_lc.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/types/traits.hpp"
+#include "dogen.assets/types/features/output_technical_space.hpp"
 #include "dogen.assets/types/meta_model/structural/module.hpp"
 #include "dogen.assets/types/meta_model/elements_traversal.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
@@ -40,66 +42,13 @@ const std::string transform_id("assets.transforms.technical_space_transform");
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
-const std::string cpp_technical_space("cpp");
-const std::string csharp_technical_space("csharp");
-const std::string agnostic_technical_space("agnostic");
-
 const std::string technical_space_not_set("Input technical space must be set.");
-const std::string unsupported_technical_space(
-    "Technical space is not supported: ");
 
 }
 
 namespace dogen::assets::transforms {
 
 using meta_model::technical_space;
-
-meta_model::technical_space
-technical_space_transform::to_technical_space(const std::string& s) {
-    if (s == cpp_technical_space)
-        return technical_space::cpp;
-    else if (s == csharp_technical_space)
-        return technical_space::csharp;
-    else if (s == agnostic_technical_space)
-        return technical_space::agnostic;
-
-    BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;
-    BOOST_THROW_EXCEPTION(
-        transformation_error(unsupported_technical_space + s));
-}
-
-technical_space_transform::feature_group technical_space_transform::
-make_feature_group(const variability::meta_model::feature_model& fm) {
-    feature_group r;
-    const variability::helpers::feature_selector s(fm);
-    r.output_technical_space =
-        s.get_by_name(traits::output_technical_space());
-    return r;
-}
-
-std::list<meta_model::technical_space>
-technical_space_transform::make_output_technical_space(const feature_group& tg,
-    const variability::meta_model::configuration& cfg) {
-    const variability::helpers::configuration_selector s(cfg);
-
-    std::list<meta_model::technical_space> r;
-    if (!s.has_configuration_point(tg.output_technical_space))
-        return r;
-
-    const auto ots(s.get_text_collection_content(tg.output_technical_space));
-    for (const auto ts : ots)
-        r.push_back(to_technical_space(ts));
-
-    return r;
-}
-
-void technical_space_transform::
-setup_intrinsic_technical_space(meta_model::model& m) {
-    meta_model::elements_traversal(m,
-        [](meta_model::element& e) {
-            e.intrinsic_technical_space(technical_space::agnostic);
-        });
-}
 
 void technical_space_transform::
 apply(const context& ctx, meta_model::model& m) {
@@ -110,7 +59,10 @@ apply(const context& ctx, meta_model::model& m) {
      * Update the intrinsic technical space on all modeling elements
      * available thus far.
      */
-    setup_intrinsic_technical_space(m);
+    meta_model::elements_traversal(m,
+        [](meta_model::element& e) {
+            e.intrinsic_technical_space(technical_space::agnostic);
+        });
 
     /*
      * Ensure the input technical space has been set by now.
@@ -136,8 +88,10 @@ apply(const context& ctx, meta_model::model& m) {
      * Read the output technical_space requested by the user.
      */
     const auto& cfg(*m.root_module()->configuration());
-    const auto fg(make_feature_group(*ctx.feature_model()));
-    const auto ol(make_output_technical_space(fg, cfg));
+    const auto& fm(*ctx.feature_model());
+    const auto fg(features::output_technical_space::make_feature_group(fm));
+    const auto scfg(features::output_technical_space::
+        make_static_configuration(fg, cfg));
 
     /*
      * If the user did not set an output technical space, assume the
@@ -145,13 +99,17 @@ apply(const context& ctx, meta_model::model& m) {
      * legal - e.g. the output technical space is not abstract but can
      * be extracted into a concrete technical space.
      */
-    if (ol.empty()) {
+    if (scfg.output_technical_space.empty()) {
         m.output_technical_spaces().push_back(m.input_technical_space());
         BOOST_LOG_SEV(lg, debug) << "No overrides for output technical space "
                                  << "  found. Defaulting to input: "
                                  << m.output_technical_spaces();
     } else {
-        m.output_technical_spaces(ol);
+        std::list<meta_model::technical_space> ots;
+        for (const auto s : scfg.output_technical_space)
+            ots.push_back(boost::lexical_cast<meta_model::technical_space>(s));
+
+        m.output_technical_spaces(ots);
         BOOST_LOG_SEV(lg, debug) << "Expanded output technical spaces to: "
                                  << m.output_technical_spaces();
     }

@@ -47,11 +47,6 @@ std::string traits::overwrite() {
     return r;
 }
 
-std::string traits::output_technical_space() {
-    static std::string r("masd.extraction.output_technical_space");
-    return r;
-}
-
 std::string traits::extraction::force_write() {
     static std::string r("masd.extraction.force_write");
     return r;
