@@ -68,75 +68,75 @@ obtain_value_attribute_simple_name(const meta_model::technical_space ts) {
     } }
 }
 
-primitives_transform::feature_group primitives_transform::
-make_feature_group(const variability::meta_model::feature_model& fm) {
-    BOOST_LOG_SEV(lg, debug) << "Creating feature group.";
+meta_model::attribute
+primitives_transform::create_attribute_for_underlying_element(
+    const meta_model::name& owner, const meta_model::technical_space ts,
+    std::string underlying_element) {
 
-    feature_group r;
+    /*
+     * Obtain the underlying element name from the meta-data. If there
+     * isn't one, bomb out as primitives require it.
+     */
+    const auto ue(boost::algorithm::trim_copy(underlying_element));
+    if (ue.empty()) {
+        const auto id(owner.qualified().dot());
+        BOOST_LOG_SEV(lg, error) << missing_underlier << id;
+        BOOST_THROW_EXCEPTION(transformation_error(missing_underlier + id));
+    }
 
-    const variability::helpers::feature_selector s(fm);
+    /*
+     * Create the name for the value attribute.
+     */
+    helpers::name_factory nf;
+    const auto& n(owner);
+    const auto sn(obtain_value_attribute_simple_name(ts));
 
-    const auto in(traits::primitive::is_nullable());
-    r.is_nullable = s.get_by_name(in);
+    /*
+     * Create the name value attribute.
+     */
+    meta_model::attribute r;
+    r.name(nf.build_attribute_name(n, sn));
+    r.unparsed_type(ue);
+    r.documentation(documentation);
 
-    const auto uta(traits::primitive::use_type_aliasing());
-    r.use_type_aliasing = s.get_by_name(uta);
-
-    BOOST_LOG_SEV(lg, debug) << "Created feature group.";
     return r;
-}
-
-void primitives_transform::
-populate_from_configuration(const feature_group& fg,
-    meta_model::structural::primitive& p) {
-    const auto& cfg(*p.configuration());
-    const variability::helpers::configuration_selector s(cfg);
-    p.is_nullable(s.get_boolean_content_or_default(fg.is_nullable));
-    p.use_type_aliasing(s.get_boolean_content_or_default(fg.use_type_aliasing));
 }
 
 void primitives_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "primitives transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    // const auto fg(make_feature_group(*ctx.feature_model()));
+    /*
+     * Obtain the feature groups.
+     */
     const auto& fm(*ctx.feature_model());
     const auto fg(features::primitive::make_feature_group(fm));
+
+    /*
+     * Update each primitive, using data read from its dynamic
+     * configuration.
+     */
     const auto its(m.input_technical_space());
     for (auto& pair : m.structural_elements().primitives()) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Transforming: " << id;
 
+        /*
+         * Convert the dynamic configuration into the static
+         * configuration.
+         */
         auto& p(*pair.second);
         const auto& cfg(*p.configuration());
-        const auto scfg(features::primitive::make_static_configuration(fg, cfg));
+        const auto scfg(
+            features::primitive::make_static_configuration(fg, cfg));
 
+        /*
+         * Update all properties.
+         */
         p.is_nullable(scfg.is_nullable);
         p.use_type_aliasing(scfg.use_type_aliasing);
-
-        /*
-         * Obtain the underlying element name from the meta-data. If there
-         * isn't one, bomb out as primitives require it.
-         */
-        const auto ue(boost::algorithm::trim_copy(scfg.underlying_element));
-        if (ue.empty()) {
-            BOOST_LOG_SEV(lg, error) << missing_underlier << id;
-            BOOST_THROW_EXCEPTION(transformation_error(missing_underlier + id));
-        }
-
-        /*
-         * Create the value attribute.
-         */
-        helpers::name_factory nf;
-        const auto& n(p.name());
-        const auto sn(obtain_value_attribute_simple_name(its));
-
-        meta_model::attribute attr;
-        attr.name(nf.build_attribute_name(n, sn));
-        attr.unparsed_type(ue);
-        attr.documentation(documentation);
-
-        p.value_attribute(attr);
+        p.value_attribute(create_attribute_for_underlying_element(p.name(), its,
+                scfg.underlying_element));
     }
 
     stp.end_transform(m);

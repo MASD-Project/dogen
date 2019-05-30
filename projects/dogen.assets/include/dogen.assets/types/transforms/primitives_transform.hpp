@@ -27,11 +27,10 @@
 
 #include <string>
 #include <iosfwd>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include "dogen.assets/types/meta_model/model.hpp"
+#include "dogen.assets/types/meta_model/attribute.hpp"
+#include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include "dogen.assets/types/transforms/context_fwd.hpp"
 
 namespace dogen::assets::transforms {
@@ -44,16 +43,9 @@ private:
     static std::string obtain_value_attribute_simple_name(
         const meta_model::technical_space ts);
 
-private:
-    struct feature_group {
-        variability::meta_model::feature is_nullable;
-        variability::meta_model::feature use_type_aliasing;
-    };
-
-    static feature_group make_feature_group(
-        const variability::meta_model::feature_model& fm);
-    static void populate_from_configuration(const feature_group& fg,
-        meta_model::structural::primitive& p);
+    static meta_model::attribute create_attribute_for_underlying_element(
+        const meta_model::name& owner, const meta_model::technical_space ts,
+        std::string underlying_element);
 
 public:
     static void apply(const context& ctx, meta_model::model& m);
