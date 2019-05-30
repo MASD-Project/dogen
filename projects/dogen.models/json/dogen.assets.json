@@ -2713,7 +2713,8 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.primitive.underlying_element"
+            "masd.variability.qualified_name": "masd.primitive.underlying_element",
+            "masd.variability.is_optional": "true"
           }
         },
         {

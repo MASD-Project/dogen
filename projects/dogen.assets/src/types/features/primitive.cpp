@@ -105,7 +105,8 @@ primitive::static_configuration primitive::make_static_configuration(
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    r.underlying_element = s.get_text_content(fg.underlying_element);
+    if (s.has_configuration_point(fg.underlying_element))
+        r.underlying_element = s.get_text_content(fg.underlying_element);
     r.is_nullable = s.get_boolean_content_or_default(fg.is_nullable);
     r.use_type_aliasing = s.get_boolean_content_or_default(fg.use_type_aliasing);
     return r;
