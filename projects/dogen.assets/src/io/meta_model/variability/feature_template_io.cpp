@@ -71,14 +71,15 @@ std::ostream& operator<<(std::ostream& s, const feature_template& v) {
       << "\"key\": " << "\"" << tidy_up_string(v.key()) << "\"" << ", "
       << "\"identifiable_key\": " << "\"" << tidy_up_string(v.identifiable_key()) << "\"" << ", "
       << "\"unparsed_type\": " << "\"" << tidy_up_string(v.unparsed_type()) << "\"" << ", "
-      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\"" << ", "
-      << "\"location\": " << v.location() << ", "
-      << "\"value_type\": " << v.value_type() << ", "
-      << "\"binding_point\": " << v.binding_point() << ", "
-      << "\"template_kind\": " << v.template_kind() << ", "
       << "\"mapped_type\": " << "\"" << tidy_up_string(v.mapped_type()) << "\"" << ", "
       << "\"parsed_type\": " << v.parsed_type() << ", "
-      << "\"is_optional\": " << v.is_optional()
+      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\"" << ", "
+      << "\"value_type\": " << v.value_type() << ", "
+      << "\"location\": " << v.location() << ", "
+      << "\"binding_point\": " << v.binding_point() << ", "
+      << "\"template_kind\": " << v.template_kind() << ", "
+      << "\"is_optional\": " << v.is_optional() << ", "
+      << "\"requires_optionality\": " << v.requires_optionality()
       << " }";
     return(s);
 }

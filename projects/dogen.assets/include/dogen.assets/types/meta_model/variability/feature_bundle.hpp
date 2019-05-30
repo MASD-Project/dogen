@@ -34,6 +34,16 @@
 
 namespace dogen::assets::meta_model::variability {
 
+/**
+ * @brief A feature bundle represents an aggregation of feature templates in a model.
+ *
+ * The feature templates should be "semantically related", that is, belong to a related
+ * topic. A feature bundle is used by code generation to generate infrastructural code
+ * to ease the creation and subsequent processing of features. Generated code
+ * comprises of two aspects: the registration of the feature for the dynamic part of the
+ * processing and the generation of a static configuration class to represent the
+ * feature once read out from the dynamic configuration.
+ */
 class feature_bundle final : public dogen::assets::meta_model::element {
 public:
     feature_bundle(const feature_bundle&) = default;
@@ -65,7 +75,8 @@ public:
         const std::list<dogen::assets::meta_model::name>& associative_container_keys,
         const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates,
         const bool generate_static_configuration,
-        const bool requires_manual_default_constructor);
+        const bool requires_manual_default_constructor,
+        const bool requires_optionality);
 
 public:
     using element::accept;
@@ -111,10 +122,15 @@ public:
     void associative_container_keys(const std::list<dogen::assets::meta_model::name>&& v);
     /**@}*/
 
+    /**
+     * @brief Set of feature templates associated with this feature bundle.
+     */
+    /**@{*/
     const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates() const;
     std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates();
     void feature_templates(const std::list<dogen::assets::meta_model::variability::feature_template>& v);
     void feature_templates(const std::list<dogen::assets::meta_model::variability::feature_template>&& v);
+    /**@}*/
 
     /**
      * @brief If true, the code generator will output a class to represent the static configuration.
@@ -131,6 +147,14 @@ public:
     /**@{*/
     bool requires_manual_default_constructor() const;
     void requires_manual_default_constructor(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, at least one feature in this bundle requires optionality.
+     */
+    /**@{*/
+    bool requires_optionality() const;
+    void requires_optionality(const bool v);
     /**@}*/
 
 public:
@@ -153,6 +177,7 @@ private:
     std::list<dogen::assets::meta_model::variability::feature_template> feature_templates_;
     bool generate_static_configuration_;
     bool requires_manual_default_constructor_;
+    bool requires_optionality_;
 };
 
 }
