@@ -91,6 +91,7 @@ public:
         const bool is_child,
         const bool is_leaf,
         const bool is_final,
+        const boost::optional<bool>& is_final_requested,
         const bool is_abstract,
         const bool in_inheritance_relationship,
         const std::list<dogen::assets::meta_model::name>& root_parents,
@@ -265,6 +266,18 @@ public:
     /**@}*/
 
     /**
+     * @brief If present and true/false, user has requested is_final to be true/false.
+     *
+     * If not present, user did not make any statements with regards to finality.
+     */
+    /**@{*/
+    const boost::optional<bool>& is_final_requested() const;
+    boost::optional<bool>& is_final_requested();
+    void is_final_requested(const boost::optional<bool>& v);
+    void is_final_requested(const boost::optional<bool>&& v);
+    /**@}*/
+
+    /**
      * @brief If true, the type is an abstract type.
      */
     /**@{*/
@@ -384,6 +397,7 @@ private:
     bool is_child_;
     bool is_leaf_;
     bool is_final_;
+    boost::optional<bool> is_final_requested_;
     bool is_abstract_;
     bool in_inheritance_relationship_;
     std::list<dogen::assets::meta_model::name> root_parents_;

@@ -563,6 +563,11 @@
           "documentation": "If true, the element cannot be inherited from.\n"
         },
         {
+          "name": "is_final_requested",
+          "type": "boost::optional<bool>",
+          "documentation": "If present and true/false, user has requested is_final to be true/false.\n\nIf not present, user did not make any statements with regards to finality.\n"
+        },
+        {
           "name": "is_abstract",
           "type": "bool",
           "documentation": "If true, the type is an abstract type.\n"

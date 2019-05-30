@@ -72,6 +72,13 @@ std::list<dogen::assets::meta_model::name> create_std_list_dogen_assets_meta_mod
     return r;
 }
 
+boost::optional<bool>
+create_boost_optional_bool(unsigned int position) {
+    boost::optional<bool> r(
+        create_bool(position));
+    return r;
+}
+
 dogen::assets::meta_model::type_parameters
 create_dogen_assets_meta_model_type_parameters(const unsigned int position) {
     return dogen::assets::meta_model::type_parameters_generator::create(position);
@@ -114,17 +121,18 @@ populate(const unsigned int position, result_type& v) {
     v.is_child(create_bool(position + 13));
     v.is_leaf(create_bool(position + 14));
     v.is_final(create_bool(position + 15));
-    v.is_abstract(create_bool(position + 16));
-    v.in_inheritance_relationship(create_bool(position + 17));
-    v.root_parents(create_std_list_dogen_assets_meta_model_name(position + 18));
-    v.parents(create_std_list_dogen_assets_meta_model_name(position + 19));
-    v.leaves(create_std_list_dogen_assets_meta_model_name(position + 20));
-    v.type_parameters(create_dogen_assets_meta_model_type_parameters(position + 21));
-    v.is_associative_container(create_bool(position + 22));
-    v.object_templates(create_std_list_dogen_assets_meta_model_name(position + 23));
-    v.provides_opaqueness(create_bool(position + 24));
-    v.can_be_primitive_underlier(create_bool(position + 25));
-    v.orm_properties(create_boost_optional_dogen_assets_meta_model_orm_object_properties(position + 26));
+    v.is_final_requested(create_boost_optional_bool(position + 16));
+    v.is_abstract(create_bool(position + 17));
+    v.in_inheritance_relationship(create_bool(position + 18));
+    v.root_parents(create_std_list_dogen_assets_meta_model_name(position + 19));
+    v.parents(create_std_list_dogen_assets_meta_model_name(position + 20));
+    v.leaves(create_std_list_dogen_assets_meta_model_name(position + 21));
+    v.type_parameters(create_dogen_assets_meta_model_type_parameters(position + 22));
+    v.is_associative_container(create_bool(position + 23));
+    v.object_templates(create_std_list_dogen_assets_meta_model_name(position + 24));
+    v.provides_opaqueness(create_bool(position + 25));
+    v.can_be_primitive_underlier(create_bool(position + 26));
+    v.orm_properties(create_boost_optional_dogen_assets_meta_model_orm_object_properties(position + 27));
 }
 
 object_generator::result_type

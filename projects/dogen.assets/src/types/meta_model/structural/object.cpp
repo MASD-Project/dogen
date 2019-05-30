@@ -91,6 +91,21 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::
 
 namespace boost {
 
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<bool>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace boost {
+
 inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::assets::meta_model::orm::object_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
@@ -140,6 +155,7 @@ object::object(object&& rhs)
       is_child_(std::move(rhs.is_child_)),
       is_leaf_(std::move(rhs.is_leaf_)),
       is_final_(std::move(rhs.is_final_)),
+      is_final_requested_(std::move(rhs.is_final_requested_)),
       is_abstract_(std::move(rhs.is_abstract_)),
       in_inheritance_relationship_(std::move(rhs.in_inheritance_relationship_)),
       root_parents_(std::move(rhs.root_parents_)),
@@ -183,6 +199,7 @@ object::object(
     const bool is_child,
     const bool is_leaf,
     const bool is_final,
+    const boost::optional<bool>& is_final_requested,
     const bool is_abstract,
     const bool in_inheritance_relationship,
     const std::list<dogen::assets::meta_model::name>& root_parents,
@@ -225,6 +242,7 @@ object::object(
       is_child_(is_child),
       is_leaf_(is_leaf),
       is_final_(is_final),
+      is_final_requested_(is_final_requested),
       is_abstract_(is_abstract),
       in_inheritance_relationship_(in_inheritance_relationship),
       root_parents_(root_parents),
@@ -281,6 +299,7 @@ void object::to_stream(std::ostream& s) const {
       << "\"is_child\": " << is_child_ << ", "
       << "\"is_leaf\": " << is_leaf_ << ", "
       << "\"is_final\": " << is_final_ << ", "
+      << "\"is_final_requested\": " << is_final_requested_ << ", "
       << "\"is_abstract\": " << is_abstract_ << ", "
       << "\"in_inheritance_relationship\": " << in_inheritance_relationship_ << ", "
       << "\"root_parents\": " << root_parents_ << ", "
@@ -315,6 +334,7 @@ void object::swap(object& other) noexcept {
     swap(is_child_, other.is_child_);
     swap(is_leaf_, other.is_leaf_);
     swap(is_final_, other.is_final_);
+    swap(is_final_requested_, other.is_final_requested_);
     swap(is_abstract_, other.is_abstract_);
     swap(in_inheritance_relationship_, other.in_inheritance_relationship_);
     swap(root_parents_, other.root_parents_);
@@ -352,6 +372,7 @@ bool object::operator==(const object& rhs) const {
         is_child_ == rhs.is_child_ &&
         is_leaf_ == rhs.is_leaf_ &&
         is_final_ == rhs.is_final_ &&
+        is_final_requested_ == rhs.is_final_requested_ &&
         is_abstract_ == rhs.is_abstract_ &&
         in_inheritance_relationship_ == rhs.in_inheritance_relationship_ &&
         root_parents_ == rhs.root_parents_ &&
@@ -561,6 +582,22 @@ bool object::is_final() const {
 
 void object::is_final(const bool v) {
     is_final_ = v;
+}
+
+const boost::optional<bool>& object::is_final_requested() const {
+    return is_final_requested_;
+}
+
+boost::optional<bool>& object::is_final_requested() {
+    return is_final_requested_;
+}
+
+void object::is_final_requested(const boost::optional<bool>& v) {
+    is_final_requested_ = v;
+}
+
+void object::is_final_requested(const boost::optional<bool>&& v) {
+    is_final_requested_ = std::move(v);
 }
 
 bool object::is_abstract() const {
