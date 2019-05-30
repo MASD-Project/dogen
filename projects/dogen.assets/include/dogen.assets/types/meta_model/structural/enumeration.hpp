@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
-#include <vector>
 #include <algorithm>
 #include "dogen.assets/types/meta_model/name.hpp"
 #include "dogen.assets/types/meta_model/element.hpp"
@@ -65,7 +65,7 @@ public:
         const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
         const dogen::assets::meta_model::name& underlying_element,
-        const std::vector<dogen::assets::meta_model::structural::enumerator>& enumerators,
+        const std::list<dogen::assets::meta_model::structural::enumerator>& enumerators,
         const bool use_implementation_defined_underlying_element,
         const bool use_implementation_defined_enumerator_values,
         const bool add_invalid_enumerator);
@@ -95,10 +95,10 @@ public:
      * @brief Enumerators for this enumeration.
      */
     /**@{*/
-    const std::vector<dogen::assets::meta_model::structural::enumerator>& enumerators() const;
-    std::vector<dogen::assets::meta_model::structural::enumerator>& enumerators();
-    void enumerators(const std::vector<dogen::assets::meta_model::structural::enumerator>& v);
-    void enumerators(const std::vector<dogen::assets::meta_model::structural::enumerator>&& v);
+    const std::list<dogen::assets::meta_model::structural::enumerator>& enumerators() const;
+    std::list<dogen::assets::meta_model::structural::enumerator>& enumerators();
+    void enumerators(const std::list<dogen::assets::meta_model::structural::enumerator>& v);
+    void enumerators(const std::list<dogen::assets::meta_model::structural::enumerator>&& v);
     /**@}*/
 
     /**
@@ -140,7 +140,7 @@ public:
 
 private:
     dogen::assets::meta_model::name underlying_element_;
-    std::vector<dogen::assets::meta_model::structural::enumerator> enumerators_;
+    std::list<dogen::assets::meta_model::structural::enumerator> enumerators_;
     bool use_implementation_defined_underlying_element_;
     bool use_implementation_defined_enumerator_values_;
     bool add_invalid_enumerator_;

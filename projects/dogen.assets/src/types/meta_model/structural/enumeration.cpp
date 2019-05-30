@@ -28,7 +28,7 @@
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::assets::meta_model::structural::enumerator>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::meta_model::structural::enumerator>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -63,7 +63,7 @@ enumeration::enumeration(
     const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
     const dogen::assets::meta_model::name& underlying_element,
-    const std::vector<dogen::assets::meta_model::structural::enumerator>& enumerators,
+    const std::list<dogen::assets::meta_model::structural::enumerator>& enumerators,
     const bool use_implementation_defined_underlying_element,
     const bool use_implementation_defined_enumerator_values,
     const bool add_invalid_enumerator)
@@ -172,19 +172,19 @@ void enumeration::underlying_element(const dogen::assets::meta_model::name&& v) 
     underlying_element_ = std::move(v);
 }
 
-const std::vector<dogen::assets::meta_model::structural::enumerator>& enumeration::enumerators() const {
+const std::list<dogen::assets::meta_model::structural::enumerator>& enumeration::enumerators() const {
     return enumerators_;
 }
 
-std::vector<dogen::assets::meta_model::structural::enumerator>& enumeration::enumerators() {
+std::list<dogen::assets::meta_model::structural::enumerator>& enumeration::enumerators() {
     return enumerators_;
 }
 
-void enumeration::enumerators(const std::vector<dogen::assets::meta_model::structural::enumerator>& v) {
+void enumeration::enumerators(const std::list<dogen::assets::meta_model::structural::enumerator>& v) {
     enumerators_ = v;
 }
 
-void enumeration::enumerators(const std::vector<dogen::assets::meta_model::structural::enumerator>&& v) {
+void enumeration::enumerators(const std::list<dogen::assets::meta_model::structural::enumerator>&& v) {
     enumerators_ = std::move(v);
 }
 

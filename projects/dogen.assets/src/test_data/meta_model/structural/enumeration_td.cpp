@@ -35,8 +35,8 @@ create_dogen_assets_meta_model_structural_enumerator(const unsigned int position
     return dogen::assets::meta_model::structural::enumerator_generator::create(position);
 }
 
-std::vector<dogen::assets::meta_model::structural::enumerator> create_std_vector_dogen_assets_meta_model_structural_enumerator(unsigned int position) {
-    std::vector<dogen::assets::meta_model::structural::enumerator> r;
+std::list<dogen::assets::meta_model::structural::enumerator> create_std_list_dogen_assets_meta_model_structural_enumerator(unsigned int position) {
+    std::list<dogen::assets::meta_model::structural::enumerator> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_assets_meta_model_structural_enumerator(position + i));
     }
@@ -57,7 +57,7 @@ void enumeration_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::assets::meta_model::element_generator::populate(position, v);
     v.underlying_element(create_dogen_assets_meta_model_name(position + 0));
-    v.enumerators(create_std_vector_dogen_assets_meta_model_structural_enumerator(position + 1));
+    v.enumerators(create_std_list_dogen_assets_meta_model_structural_enumerator(position + 1));
     v.use_implementation_defined_underlying_element(create_bool(position + 2));
     v.use_implementation_defined_enumerator_values(create_bool(position + 3));
     v.add_invalid_enumerator(create_bool(position + 4));

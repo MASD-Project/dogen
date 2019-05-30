@@ -269,13 +269,10 @@ void enumerations_transform::
 expand_enumerators(const enumerator_feature_group& fg,
     const meta_model::technical_space ts,
     meta_model::structural::enumeration& e) {
-    std::vector<meta_model::structural::enumerator> enumerators;
+    std::list<meta_model::structural::enumerator> enumerators;
 
-    if (e.add_invalid_enumerator()) {
-        enumerators.reserve(e.enumerators().size() + 1/*invalid*/);
+    if (e.add_invalid_enumerator())
         enumerators.push_back(make_invalid_enumerator(e.name(), ts));
-    } else
-        enumerators.reserve(e.enumerators().size());
 
     /*
      * Update the value of each enumerator, and ensure the enumerator

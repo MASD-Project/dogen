@@ -2366,7 +2366,7 @@
         },
         {
           "name": "enumerators",
-          "type": "std::vector<enumerator>",
+          "type": "std::list<enumerator>",
           "documentation": "Enumerators for this enumeration.\n"
         },
         {
