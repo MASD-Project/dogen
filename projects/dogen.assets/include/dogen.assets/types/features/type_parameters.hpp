@@ -52,6 +52,11 @@ public:
         bool variable_number_of_parameters;
         int count;
         bool always_in_heap;
+
+        static_configuration() :
+            variable_number_of_parameters(),
+            count(),
+            always_in_heap() {}
     };
 
     static static_configuration make_static_configuration(

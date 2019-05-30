@@ -139,6 +139,23 @@ a.stream() << "    struct static_configuration {" << std::endl;
                     const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
 a.stream() << "        " << a.get_qualified_name(fb_ft.parsed_type()) << " " << simple_key << ";" << std::endl;
                 }
+
+                if (fb.requires_manual_default_constructor()) {
+                    bool is_first(true);
+                    std::ostringstream ss;
+                    for (const auto& fb_ft : fb.feature_templates()) {
+                        const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
+
+                        if (!is_first)
+                            ss << "," << std::endl << "            ";
+
+                        ss << simple_key << "()";
+                        is_first = false;
+                    }
+a.stream() << std::endl;
+a.stream() << "        static_configuration() :" << std::endl;
+a.stream() << "            " << ss.str() << " {}" << std::endl;
+                }
 a.stream() << "    };" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    static static_configuration make_static_configuration(" << std::endl;

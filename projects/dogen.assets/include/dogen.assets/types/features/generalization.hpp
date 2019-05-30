@@ -51,6 +51,10 @@ public:
     struct static_configuration {
         bool is_final;
         std::string parent;
+
+        static_configuration() :
+            is_final(),
+            parent() {}
     };
 
     static static_configuration make_static_configuration(

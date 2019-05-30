@@ -48,6 +48,9 @@ public:
 public:
     struct static_configuration {
         bool is_proxy_model;
+
+        static_configuration() :
+            is_proxy_model() {}
     };
 
     static static_configuration make_static_configuration(

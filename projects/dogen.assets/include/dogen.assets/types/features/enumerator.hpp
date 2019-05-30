@@ -51,6 +51,10 @@ public:
     struct static_configuration {
         bool add_invalid_enumerator;
         std::string value;
+
+        static_configuration() :
+            add_invalid_enumerator(),
+            value() {}
     };
 
     static static_configuration make_static_configuration(

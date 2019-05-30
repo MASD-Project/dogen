@@ -54,6 +54,13 @@ public:
         std::list<std::string> ignore_files_matching_regex;
         bool delete_empty_directories;
         bool enable_backend_directories;
+
+        static_configuration() :
+            force_write(),
+            delete_extra_files(),
+            ignore_files_matching_regex(),
+            delete_empty_directories(),
+            enable_backend_directories() {}
     };
 
     static static_configuration make_static_configuration(

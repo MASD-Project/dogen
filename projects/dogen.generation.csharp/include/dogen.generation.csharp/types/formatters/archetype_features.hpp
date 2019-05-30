@@ -45,6 +45,9 @@ public:
 public:
     struct static_configuration {
         bool overwrite;
+
+        static_configuration() :
+            overwrite() {}
     };
 
     static static_configuration make_static_configuration(

@@ -53,6 +53,11 @@ public:
         std::string underlying_element;
         bool is_nullable;
         bool use_type_aliasing;
+
+        static_configuration() :
+            underlying_element(),
+            is_nullable(),
+            use_type_aliasing() {}
     };
 
     static static_configuration make_static_configuration(

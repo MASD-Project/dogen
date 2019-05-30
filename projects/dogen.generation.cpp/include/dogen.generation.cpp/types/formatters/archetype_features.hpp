@@ -50,6 +50,11 @@ public:
         bool overwrite;
         std::string primary_inclusion_directive;
         std::list<std::string> secondary_inclusion_directive;
+
+        static_configuration() :
+            overwrite(),
+            primary_inclusion_directive(),
+            secondary_inclusion_directive() {}
     };
 
     static static_configuration make_static_configuration(

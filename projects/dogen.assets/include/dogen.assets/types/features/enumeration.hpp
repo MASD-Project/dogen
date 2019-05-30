@@ -53,6 +53,11 @@ public:
         bool use_implementation_defined_underlying_element;
         std::string underlying_element;
         bool use_implementation_defined_enumerator_values;
+
+        static_configuration() :
+            use_implementation_defined_underlying_element(),
+            underlying_element(),
+            use_implementation_defined_enumerator_values() {}
     };
 
     static static_configuration make_static_configuration(
