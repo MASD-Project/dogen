@@ -1875,11 +1875,6 @@
           "name": "requires_manual_default_constructor",
           "type": "bool",
           "documentation": "If true, the code generated for this feature bundle needs a manually generated \ndefault constructor.\n"
-        },
-        {
-          "name": "requires_optionality",
-          "type": "bool",
-          "documentation": "If true, at least one feature in this bundle requires optionality.\n"
         }
       ]
     },

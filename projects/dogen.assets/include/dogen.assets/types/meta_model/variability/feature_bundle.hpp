@@ -75,8 +75,7 @@ public:
         const std::list<dogen::assets::meta_model::name>& associative_container_keys,
         const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates,
         const bool generate_static_configuration,
-        const bool requires_manual_default_constructor,
-        const bool requires_optionality);
+        const bool requires_manual_default_constructor);
 
 public:
     using element::accept;
@@ -149,14 +148,6 @@ public:
     void requires_manual_default_constructor(const bool v);
     /**@}*/
 
-    /**
-     * @brief If true, at least one feature in this bundle requires optionality.
-     */
-    /**@{*/
-    bool requires_optionality() const;
-    void requires_optionality(const bool v);
-    /**@}*/
-
 public:
     bool operator==(const feature_bundle& rhs) const;
     bool operator!=(const feature_bundle& rhs) const {
@@ -177,7 +168,6 @@ private:
     std::list<dogen::assets::meta_model::variability::feature_template> feature_templates_;
     bool generate_static_configuration_;
     bool requires_manual_default_constructor_;
-    bool requires_optionality_;
 };
 
 }

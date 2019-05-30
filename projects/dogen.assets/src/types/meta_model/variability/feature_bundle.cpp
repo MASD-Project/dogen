@@ -58,8 +58,7 @@ namespace dogen::assets::meta_model::variability {
 
 feature_bundle::feature_bundle()
     : generate_static_configuration_(static_cast<bool>(0)),
-      requires_manual_default_constructor_(static_cast<bool>(0)),
-      requires_optionality_(static_cast<bool>(0)) { }
+      requires_manual_default_constructor_(static_cast<bool>(0)) { }
 
 feature_bundle::feature_bundle(
     const dogen::assets::meta_model::name& name,
@@ -81,8 +80,7 @@ feature_bundle::feature_bundle(
     const std::list<dogen::assets::meta_model::name>& associative_container_keys,
     const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates,
     const bool generate_static_configuration,
-    const bool requires_manual_default_constructor,
-    const bool requires_optionality)
+    const bool requires_manual_default_constructor)
     : dogen::assets::meta_model::element(
       name,
       documentation,
@@ -103,8 +101,7 @@ feature_bundle::feature_bundle(
       associative_container_keys_(associative_container_keys),
       feature_templates_(feature_templates),
       generate_static_configuration_(generate_static_configuration),
-      requires_manual_default_constructor_(requires_manual_default_constructor),
-      requires_optionality_(requires_optionality) { }
+      requires_manual_default_constructor_(requires_manual_default_constructor) { }
 
 void feature_bundle::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -139,8 +136,7 @@ void feature_bundle::to_stream(std::ostream& s) const {
       << "\"associative_container_keys\": " << associative_container_keys_ << ", "
       << "\"feature_templates\": " << feature_templates_ << ", "
       << "\"generate_static_configuration\": " << generate_static_configuration_ << ", "
-      << "\"requires_manual_default_constructor\": " << requires_manual_default_constructor_ << ", "
-      << "\"requires_optionality\": " << requires_optionality_
+      << "\"requires_manual_default_constructor\": " << requires_manual_default_constructor_
       << " }";
 }
 
@@ -154,7 +150,6 @@ void feature_bundle::swap(feature_bundle& other) noexcept {
     swap(feature_templates_, other.feature_templates_);
     swap(generate_static_configuration_, other.generate_static_configuration_);
     swap(requires_manual_default_constructor_, other.requires_manual_default_constructor_);
-    swap(requires_optionality_, other.requires_optionality_);
 }
 
 bool feature_bundle::equals(const dogen::assets::meta_model::element& other) const {
@@ -170,8 +165,7 @@ bool feature_bundle::operator==(const feature_bundle& rhs) const {
         associative_container_keys_ == rhs.associative_container_keys_ &&
         feature_templates_ == rhs.feature_templates_ &&
         generate_static_configuration_ == rhs.generate_static_configuration_ &&
-        requires_manual_default_constructor_ == rhs.requires_manual_default_constructor_ &&
-        requires_optionality_ == rhs.requires_optionality_;
+        requires_manual_default_constructor_ == rhs.requires_manual_default_constructor_;
 }
 
 feature_bundle& feature_bundle::operator=(feature_bundle other) {
@@ -258,14 +252,6 @@ bool feature_bundle::requires_manual_default_constructor() const {
 
 void feature_bundle::requires_manual_default_constructor(const bool v) {
     requires_manual_default_constructor_ = v;
-}
-
-bool feature_bundle::requires_optionality() const {
-    return requires_optionality_;
-}
-
-void feature_bundle::requires_optionality(const bool v) {
-    requires_optionality_ = v;
 }
 
 }

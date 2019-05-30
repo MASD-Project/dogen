@@ -27729,7 +27729,7 @@ to variability.
         <dia:point val="8,-75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="7.95,-75.05;26.645,-68.95"/>
+        <dia:rectangle val="7.95,-75.05;26.645,-69.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="8,-75"/>
@@ -27738,7 +27738,7 @@ to variability.
         <dia:real val="18.594999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#feature_bundle#</dia:string>
@@ -27894,29 +27894,6 @@ feature once read out from the dynamic configuration.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#If true, the code generated for this feature bundle needs a manually generated 
 default constructor.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#requires_optionality#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, at least one feature in this bundle requires optionality.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -28573,16 +28550,16 @@ This is only required if the feature template is optional and has no default val
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="17.2975,-68.9501"/>
+        <dia:point val="17.2975,-69.7498"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="16.5475,-69.7001;27.845,-64.2"/>
+        <dia:rectangle val="16.5475,-70.4998;27.845,-64.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="17.2975,-68.9501"/>
+        <dia:point val="17.2975,-69.7498"/>
         <dia:point val="17.2975,-67"/>
         <dia:point val="27.645,-67"/>
         <dia:point val="27.645,-65"/>
@@ -28602,7 +28579,7 @@ This is only required if the feature template is optional and has no default val
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O197" connection="16"/>
+        <dia:connection handle="0" to="O197" connection="14"/>
         <dia:connection handle="1" to="O198" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O193"/>

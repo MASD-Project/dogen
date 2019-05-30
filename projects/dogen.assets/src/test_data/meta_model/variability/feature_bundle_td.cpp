@@ -70,7 +70,6 @@ populate(const unsigned int position, result_type& v) {
     v.feature_templates(create_std_list_dogen_assets_meta_model_variability_feature_template(position + 3));
     v.generate_static_configuration(create_bool(position + 4));
     v.requires_manual_default_constructor(create_bool(position + 5));
-    v.requires_optionality(create_bool(position + 6));
 }
 
 feature_bundle_generator::result_type
