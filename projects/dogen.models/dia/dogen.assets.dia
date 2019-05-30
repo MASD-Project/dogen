@@ -34210,19 +34210,19 @@ to structural modeling.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O247">
       <dia:attribute name="obj_pos">
-        <dia:point val="52,37"/>
+        <dia:point val="52,36"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,36.95;91.435,42.25"/>
+        <dia:rectangle val="51.95,35.95;91.435,42.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="52,37"/>
+        <dia:point val="52,36"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="39.385000000000005"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#enumeration#</dia:string>
@@ -34397,6 +34397,34 @@ technical space targeted.
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#masd.enumeration.add_invalid_enumerator#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#masd::variability::boolean#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#"true"#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, adds an enumerator to represent an invalid choice.
+
+#DOGEN masd.variability.archetype_location.kernel=masd
+#DOGEN masd.variability.template_kind=instance
+#DOGEN masd.variability.binding_point=element
+#DOGEN masd.variability.qualified_name=masd.enumeration.add_invalid_enumerator#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -34407,19 +34435,19 @@ technical space targeted.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O248">
       <dia:attribute name="obj_pos">
-        <dia:point val="52,45"/>
+        <dia:point val="52,44"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,44.95;82.195,49.45"/>
+        <dia:rectangle val="51.95,43.95;70.645,47.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="52,45"/>
+        <dia:point val="52,44"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="30.145"/>
+        <dia:real val="18.594999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#enumerator#</dia:string>
@@ -34509,34 +34537,6 @@ technical space targeted.
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.enumeration.add_invalid_enumerator#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::boolean#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#"true"#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, adds an enumerator to represent an invalid choice.
-
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.enumeration.add_invalid_enumerator#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#masd.enumerator.value#</dia:string>
@@ -34746,13 +34746,13 @@ technical space targeted.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O250">
       <dia:attribute name="obj_pos">
-        <dia:point val="94,37"/>
+        <dia:point val="94,36"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="93.95,36.95;120.73,40.65"/>
+        <dia:rectangle val="93.95,35.95;120.73,39.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="94,37"/>
+        <dia:point val="94,36"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="26.68"/>
@@ -34886,13 +34886,13 @@ technical space targeted.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O251">
       <dia:attribute name="obj_pos">
-        <dia:point val="94,45"/>
+        <dia:point val="94,44"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="93.95,44.95;123.425,48.65"/>
+        <dia:rectangle val="93.95,43.95;123.425,47.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="94,45"/>
+        <dia:point val="94,44"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="29.375"/>
@@ -35026,13 +35026,13 @@ technical space targeted.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O252">
       <dia:attribute name="obj_pos">
-        <dia:point val="52,52"/>
+        <dia:point val="52,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,51.95;79.885,57.25"/>
+        <dia:rectangle val="51.95,49.95;79.885,55.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="52,52"/>
+        <dia:point val="52,50"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
@@ -35223,13 +35223,13 @@ it.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O253">
       <dia:attribute name="obj_pos">
-        <dia:point val="52,60"/>
+        <dia:point val="52,57"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,59.95;76.035,70.05"/>
+        <dia:rectangle val="51.95,56.95;76.035,67.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="52,60"/>
+        <dia:point val="52,57"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="23.984999999999999"/>
@@ -35587,13 +35587,13 @@ it.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O254">
       <dia:attribute name="obj_pos">
-        <dia:point val="51.3571,72.7143"/>
+        <dia:point val="52,70"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.3071,72.6643;77.3171,77.9643"/>
+        <dia:rectangle val="51.95,69.95;77.96,75.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="51.3571,72.7143"/>
+        <dia:point val="52,70"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>
@@ -35786,13 +35786,13 @@ it.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O255">
       <dia:attribute name="obj_pos">
-        <dia:point val="94,60"/>
+        <dia:point val="94,57"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="93.95,59.95;126.89,71.65"/>
+        <dia:rectangle val="93.95,56.95;126.89,68.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="94,60"/>
+        <dia:point val="94,57"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="32.839999999999996"/>
@@ -38051,13 +38051,13 @@ extend the mappings as required.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O279">
       <dia:attribute name="obj_pos">
-        <dia:point val="94,52"/>
+        <dia:point val="94,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="93.95,51.95;113.8,56.45"/>
+        <dia:rectangle val="93.95,49.95;113.8,54.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="94,52"/>
+        <dia:point val="94,50"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="19.75"/>

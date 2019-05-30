@@ -40,7 +40,6 @@ namespace dogen::assets::features {
 class enumerator final {
 public:
     struct feature_group {
-        variability::meta_model::feature add_invalid_enumerator;
         variability::meta_model::feature value;
     };
 
@@ -49,11 +48,7 @@ public:
 
 public:
     struct static_configuration {
-        bool add_invalid_enumerator;
         std::string value;
-
-        static_configuration() :
-            add_invalid_enumerator() {}
     };
 
     static static_configuration make_static_configuration(

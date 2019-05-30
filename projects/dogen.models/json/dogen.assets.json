@@ -2582,17 +2582,7 @@
             "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.enumeration.use_implementation_defined_enumerator_values"
           }
-        }
-      ]
-    },
-    {
-      "name": "features::enumerator",
-      "documentation": "Parameters related to enumerators.\n",
-      "stereotypes": [
-        "masd::variability::feature_bundle"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
+        },
         {
           "name": "masd.enumeration.add_invalid_enumerator",
           "type": "masd::variability::boolean",
@@ -2604,7 +2594,17 @@
             "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.enumeration.add_invalid_enumerator"
           }
-        },
+        }
+      ]
+    },
+    {
+      "name": "features::enumerator",
+      "documentation": "Parameters related to enumerators.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
         {
           "name": "masd.enumerator.value",
           "type": "masd::variability::text",

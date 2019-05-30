@@ -85,6 +85,26 @@ make_masd_enumeration_use_implementation_defined_enumerator_values() {
     return r;
 }
 
+dogen::variability::meta_model::feature_template
+make_masd_enumeration_add_invalid_enumerator() {
+    using namespace dogen::variability::meta_model;
+    feature_template r;
+    r.name().simple("add_invalid_enumerator");
+    r.name().qualified("masd.enumeration.add_invalid_enumerator");
+    const auto vt(value_type::boolean);
+    r.value_type(vt);
+    r.binding_point(binding_point::element);
+    r.kind(template_kind::instance);
+    dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ "true" }));
+
+    archetypes::location al;
+    al.kernel("masd");
+
+    r.location(al);
+    return r;
+}
+
 }
 
 enumeration::feature_group
@@ -95,6 +115,7 @@ enumeration::make_feature_group(const dogen::variability::meta_model::feature_mo
     r.use_implementation_defined_underlying_element = s.get_by_name("masd.enumeration.use_implementation_defined_underlying_element");
     r.underlying_element = s.get_by_name("masd.enumeration.underlying_element");
     r.use_implementation_defined_enumerator_values = s.get_by_name("masd.enumeration.use_implementation_defined_enumerator_values");
+    r.add_invalid_enumerator = s.get_by_name("masd.enumeration.add_invalid_enumerator");
 
     return r;
 }
@@ -108,6 +129,7 @@ enumeration::static_configuration enumeration::make_static_configuration(
     r.use_implementation_defined_underlying_element = s.get_boolean_content_or_default(fg.use_implementation_defined_underlying_element);
     r.underlying_element = s.get_text_content(fg.underlying_element);
     r.use_implementation_defined_enumerator_values = s.get_boolean_content_or_default(fg.use_implementation_defined_enumerator_values);
+    r.add_invalid_enumerator = s.get_boolean_content_or_default(fg.add_invalid_enumerator);
     return r;
 }
 
@@ -118,6 +140,7 @@ enumeration::make_templates() {
     r.push_back(make_masd_enumeration_use_implementation_defined_underlying_element());
     r.push_back(make_masd_enumeration_underlying_element());
     r.push_back(make_masd_enumeration_use_implementation_defined_enumerator_values());
+    r.push_back(make_masd_enumeration_add_invalid_enumerator());
     return r;
 }
 

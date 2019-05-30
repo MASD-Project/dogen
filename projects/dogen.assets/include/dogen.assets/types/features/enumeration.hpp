@@ -43,6 +43,7 @@ public:
         variability::meta_model::feature use_implementation_defined_underlying_element;
         variability::meta_model::feature underlying_element;
         variability::meta_model::feature use_implementation_defined_enumerator_values;
+        variability::meta_model::feature add_invalid_enumerator;
     };
 
     static feature_group
@@ -53,10 +54,12 @@ public:
         bool use_implementation_defined_underlying_element;
         std::string underlying_element;
         bool use_implementation_defined_enumerator_values;
+        bool add_invalid_enumerator;
 
         static_configuration() :
             use_implementation_defined_underlying_element(),
-            use_implementation_defined_enumerator_values() {}
+            use_implementation_defined_enumerator_values(),
+            add_invalid_enumerator() {}
     };
 
     static static_configuration make_static_configuration(
