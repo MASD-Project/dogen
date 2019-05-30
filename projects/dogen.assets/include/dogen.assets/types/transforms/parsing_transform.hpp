@@ -26,9 +26,6 @@
 #endif
 
 #include <string>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.assets/types/meta_model/technical_space.hpp"
 #include "dogen.assets/types/meta_model/attribute.hpp"
@@ -55,27 +52,6 @@ namespace dogen::assets::transforms {
  */
 class parsing_transform final {
 private:
-    struct feature_group {
-        variability::meta_model::feature enumeration_underlying_element;
-        variability::meta_model::feature primitive_underlying_element;
-    };
-
-    static feature_group make_feature_group(
-        const variability::meta_model::feature_model& fm);
-
-    static std::string make_enumeration_underlying_element(
-        const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-    static std::string make_primitive_underlying_element(
-        const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-private:
-    static std::string
-    obtain_value_attribute_simple_name(const meta_model::technical_space ts);
-
-private:
     /**
      * @brief Parses all attributes in the supplied attribute list..
      */
@@ -83,17 +59,9 @@ private:
         std::list<meta_model::attribute>& attrs);
 
     /**
-     * @brief Parses the underlying element in the supplied
-     * enumeration.
-     */
-    static void parse_underlying_element(const feature_group& fg,
-        meta_model::structural::enumeration& e);
-
-    /**
      * @brief Parses underlying element in the supplied primitive.
      */
-    static void parse_underlying_element(
-        const feature_group& fg, const meta_model::technical_space ts,
+    static void parse_underlying_element(const meta_model::technical_space ts,
         meta_model::structural::primitive& p);
 
 public:
