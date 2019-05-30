@@ -130,94 +130,22 @@ void populate_enumerator(const features::enumerator::feature_group &fg,
 
 }
 
-enumerations_transform::enumeration_feature_group
-enumerations_transform::make_enumeration_feature_group(
-    const variability::meta_model::feature_model& fm) {
-    BOOST_LOG_SEV(lg, debug) << "Creating enumeration feature group.";
-
-    enumeration_feature_group r;
-    const variability::helpers::feature_selector s(fm);
-
-    using en = traits::enumeration;
-    const auto uidue(en::use_implementation_defined_underlying_element());
-    r.use_implementation_defined_underlying_element =
-        s.get_by_name(uidue);
-
-    const auto uidev(en::use_implementation_defined_enumerator_values());
-    r.use_implementation_defined_enumerator_values =
-        s.get_by_name(uidev);
-
-    const auto aie(en::add_invalid_enumerator());
-    r.add_invalid_enumerator = s.get_by_name(aie);
-
-    BOOST_LOG_SEV(lg, debug) << "Created enumeration feature group.";
-    return r;
-}
-
-enumerations_transform::enumerator_feature_group
-enumerations_transform::make_enumerator_feature_group(
-    const variability::meta_model::feature_model& fm) {
-    BOOST_LOG_SEV(lg, debug) << "Creating enumerator feature group.";
-
-    enumerator_feature_group r;
-    const variability::helpers::feature_selector s(fm);
-    r.value = s.get_by_name(traits::enumerator::value());
-
-    BOOST_LOG_SEV(lg, debug) << "Created enumerator feature group.";
-    return r;
-}
-
-enumerations_transform::feature_group enumerations_transform::
-make_feature_group(const variability::meta_model::feature_model& fm) {
-    BOOST_LOG_SEV(lg, debug) << "Creating feature group.";
-
-    feature_group r;
-    r.enumeration = make_enumeration_feature_group(fm);
-    r.enumerator = make_enumerator_feature_group(fm);
-
-    BOOST_LOG_SEV(lg, debug) << "Created feature group.";
-    return r;
-}
-
-void enumerations_transform::
-populate_from_configuration(const enumeration_feature_group& fg,
-    meta_model::structural::enumeration& e) {
-
-    const auto& cfg(*e.configuration());
-    const variability::helpers::configuration_selector s(cfg);
-    const auto uidue(fg.use_implementation_defined_underlying_element);
-    e.use_implementation_defined_underlying_element(
-        s.get_boolean_content_or_default(uidue));
-
-    const auto uidev(fg.use_implementation_defined_enumerator_values);
-    e.use_implementation_defined_enumerator_values(
-        s.get_boolean_content_or_default(uidev));
-
-    const auto aie(fg.add_invalid_enumerator);
-    e.add_invalid_enumerator(s.get_boolean_content_or_default(aie));
-}
-
-void enumerations_transform::populate_from_configuration(
-    const enumerator_feature_group& fg, meta_model::structural::enumerator& e) {
-    const auto& cfg(*e.configuration());
-    const variability::helpers::configuration_selector s(cfg);
-    if (s.has_configuration_point(fg.value)) {
-        e.value(s.get_text_content(fg.value));
-        BOOST_LOG_SEV(lg, debug) << "Read enumerator value: " << e.value();
-    }
-}
-
 meta_model::name enumerations_transform::
 obtain_enumeration_default_underlying_element_name(const meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Obtaining default enumeration underlying "
                              << "element name for model: "
                              << m.name().qualified().dot();
 
+    /*
+     * Go through all the built-ins and find out which one was set to
+     * be the default type to use for enumerations. We expect one and
+     * only type to have been assigned this role.
+     */
     meta_model::name r;
     bool found(false);
     for (const auto& pair : m.structural_elements().builtins()) {
-        const auto b(*pair.second);
-        const auto id(b.name().qualified().dot());
+        const auto& b(*pair.second);
+        const auto& id(b.name().qualified().dot());
         if (b.is_default_enumeration_type()) {
             BOOST_LOG_SEV(lg, debug) << "Found default enumeration underlying "
                                      << " element name:" << id;
@@ -258,71 +186,19 @@ obtain_invalid_enumerator_simple_name(const meta_model::technical_space ts) {
 
 meta_model::structural::enumerator
 enumerations_transform::make_invalid_enumerator(const meta_model::name& n,
-    const meta_model::technical_space l) {
+    const meta_model::technical_space ts) {
     meta_model::structural::enumerator r;
     r.documentation("Represents an uninitialised enum");
     r.value("0");
 
     helpers::name_factory nf;
-    const auto sn(obtain_invalid_enumerator_simple_name(l));
+    const auto sn(obtain_invalid_enumerator_simple_name(ts));
     r.name(nf.build_attribute_name(n, sn));
 
     using variability::meta_model::configuration;
     r.configuration(boost::make_shared<configuration>());
 
     return r;
-}
-
-void enumerations_transform::expand_default_underlying_element(
-    const meta_model::name& default_underlying_element_name,
-    meta_model::structural::enumeration& e) {
-    const auto ue(e.underlying_element());
-    BOOST_LOG_SEV(lg, debug) << "Underlying type: '"
-                             << ue.qualified().dot() << "'";
-
-    if (!ue.simple().empty())
-        return;
-
-    BOOST_LOG_SEV(lg, debug) << "Defaulting enumeration to type: "
-                             << default_underlying_element_name.
-        qualified().dot();
-    e.underlying_element(default_underlying_element_name);
-}
-
-void enumerations_transform::
-expand_enumerators(const enumerator_feature_group& fg,
-    const meta_model::technical_space ts,
-    meta_model::structural::enumeration& e) {
-    std::list<meta_model::structural::enumerator> enumerators;
-
-    if (e.add_invalid_enumerator())
-        enumerators.push_back(make_invalid_enumerator(e.name(), ts));
-
-    /*
-     * Update the value of each enumerator, and ensure the enumerator
-     * names are unique.
-     */
-    unsigned int pos(e.add_invalid_enumerator() ? 1 : 0);
-    for (const auto& en : e.enumerators()) {
-        const auto sn(en.name().simple());
-
-        /*
-         * We try to read the value from variability's
-         * configuration. If its not populated we set it
-         * ourselves. Note that it is validation's job to ensure the
-         * user doesn't start mixing and matching, populating the
-         * value for some enumerators but not others.
-         */
-        auto copy(en);
-        populate_from_configuration(fg, copy);
-
-        if (copy.value().empty())
-            copy.value(boost::lexical_cast<std::string>(pos));
-
-        enumerators.push_back(copy);
-        ++pos;
-    }
-    e.enumerators(enumerators);
 }
 
 void enumerations_transform::apply(const context& ctx, meta_model::model& m) {
@@ -338,28 +214,52 @@ void enumerations_transform::apply(const context& ctx, meta_model::model& m) {
     if (m.structural_elements().enumerations().empty())
         return;
 
-    const auto its(m.input_technical_space());
-    // const auto fg(make_feature_group(*ctx.feature_model()));
+    /*
+     * Start by creating the feature groups with all features needed
+     * by both enumerations and enumerators.
+     */
     const auto& fm(*ctx.feature_model());
-    const auto fg2(features::enumeration::make_feature_group(fm));
-    const auto fg3(features::enumerator::make_feature_group(fm));
+    const auto fg1(features::enumeration::make_feature_group(fm));
+    const auto fg2(features::enumerator::make_feature_group(fm));
+
+    /*
+     * Now we obtain the default underlying element for all
+     * enumerations in this model. This will be used, unless the
+     * enumeration has decided to override it.
+     */
     const auto duen(obtain_enumeration_default_underlying_element_name(m));
 
+    /*
+     * Process each enumeration and their enumerators.
+     */
+    const auto its(m.input_technical_space());
     for (auto& pair : m.structural_elements().enumerations()) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
 
+        /*
+         * Read all properties for this enumeration that are stored in
+         * the dynamic configuration.
+         */
         auto& e(*pair.second);
-        populate_enumeration(fg2, duen, e);
+        populate_enumeration(fg1, duen, e);
 
+        /*
+         * If the enumeration requested it, create a special
+         * enumerator to represent the "invalid" state.
+         */
         if (e.add_invalid_enumerator())
             e.enumerators().push_front(make_invalid_enumerator(e.name(), its));
 
+        /*
+         * Now process all enumerators. This is mainly concerned with
+         * either reading the enumerator value from its dynamic
+         * configuration, or, if not supplied, populating it from our
+         * position counter.
+         */
         unsigned int position(0);
-        for (auto& en : e.enumerators()) {
-            populate_enumerator(fg3, position, en);
-            ++position;
-        }
+        for (auto& en : e.enumerators())
+            populate_enumerator(fg2, position++, en);
     }
 
     stp.end_transform(m);
