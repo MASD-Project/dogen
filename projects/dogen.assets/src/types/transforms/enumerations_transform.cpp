@@ -20,6 +20,7 @@
  */
 #include <set>
 #include <ostream>
+#include <boost/make_shared.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
@@ -32,6 +33,7 @@
 #include "dogen.assets/types/helpers/name_factory.hpp"
 #include "dogen.assets/types/helpers/name_builder.hpp"
 #include "dogen.assets/types/features/enumeration.hpp"
+#include "dogen.assets/types/features/enumerator.hpp"
 #include "dogen.assets/types/meta_model/structural/builtin.hpp"
 #include "dogen.assets/types/meta_model/structural/enumeration.hpp"
 #include "dogen.assets/types/meta_model/structural/enumeration.hpp"
@@ -105,6 +107,25 @@ void populate_enumeration(const features::enumeration::feature_group& fg,
                              << duen.qualified().dot() << "'";
 
     e.underlying_element(duen);
+}
+
+void populate_enumerator(const features::enumerator::feature_group &fg,
+                         const unsigned int position,
+                         meta_model::structural::enumerator &e) {
+
+  /*
+   * We try to read the value from variability's configuration. If
+   * its not populated we set it ourselves. Note that it is
+   * validation's job to ensure the user doesn't start mixing and
+   * matching, populating the value for some enumerators but not
+   * others.
+   */
+  const auto &cfg(*e.configuration());
+  const auto scfg(features::enumerator::make_static_configuration(fg, cfg));
+  if (scfg.value.empty())
+    e.value(boost::lexical_cast<std::string>(position));
+  else
+    e.value(scfg.value);
 }
 
 }
@@ -246,6 +267,9 @@ enumerations_transform::make_invalid_enumerator(const meta_model::name& n,
     const auto sn(obtain_invalid_enumerator_simple_name(l));
     r.name(nf.build_attribute_name(n, sn));
 
+    using variability::meta_model::configuration;
+    r.configuration(boost::make_shared<configuration>());
+
     return r;
 }
 
@@ -315,21 +339,27 @@ void enumerations_transform::apply(const context& ctx, meta_model::model& m) {
         return;
 
     const auto its(m.input_technical_space());
-    const auto fg(make_feature_group(*ctx.feature_model()));
+    // const auto fg(make_feature_group(*ctx.feature_model()));
     const auto& fm(*ctx.feature_model());
     const auto fg2(features::enumeration::make_feature_group(fm));
+    const auto fg3(features::enumerator::make_feature_group(fm));
     const auto duen(obtain_enumeration_default_underlying_element_name(m));
 
     for (auto& pair : m.structural_elements().enumerations()) {
         const auto& id(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Expanding: " << id;
+        BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
 
         auto& e(*pair.second);
         populate_enumeration(fg2, duen, e);
 
-        // populate_from_configuration(fg.enumeration, e);
-        // expand_default_underlying_element(duen, e);
-        expand_enumerators(fg.enumerator, its, e);
+        if (e.add_invalid_enumerator())
+            e.enumerators().push_front(make_invalid_enumerator(e.name(), its));
+
+        unsigned int position(0);
+        for (auto& en : e.enumerators()) {
+            populate_enumerator(fg3, position, en);
+            ++position;
+        }
     }
 
     stp.end_transform(m);
