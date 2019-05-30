@@ -214,7 +214,21 @@ then have it enable:
 - ODB
 - the appropriate ORM stereotype, e.g. =orm::object=, etc.
 
-However, at present there is no way to associate a stereotype with a profile.
+However, at present there is no way to associate a stereotype with a
+profile. In addition, for this to work correctly we probably need to
+be able to at least validate that the element to which we applied the
+profile is of the expected type. Our binding at present is just
+"element" so it cannot distinguish between enumerations, etc.
+
+As far as just associating stereotypes with profiles, this could
+actually be done fairly easily: we could have a dynamic field called
+stereotypes and just apply these when expanding profiles. However, we
+probably need to think about this very carefully as it could introduce
+all sorts of weird and wonderful problems such as cycles in stereotype
+resolution (what happens when we apply a stereotype which is actually
+a profile name? is that just invalid or should we redo profile
+expansion?). Unless we have a very important use case, we probably
+should not allow this.
 
 *** Add ORM type mapping support to primitives                        :story:
 
@@ -225,6 +239,27 @@ At present we can setup a type map in ORM as follows:
 However, this is specific to attributes. It would be really nice to
 have this at the primitive level as well so that we can map once and
 reuse the mapping.
+
+More generally, we now have three mechanisms for mapping, which cannot
+possibly be a good thing:
+
+- extensible mapping: for LAM. Extensible, but not really, as users
+  need to physically change PDMs.
+- fixed mapping: extremely limited use, just for the variability
+  types. Similar in logic to the ORM mapping, but not as flexible (end
+  users need not be aware of its existence at all).
+- ORM mapping: at present we are using the default mapping on the
+  underlying technology (e.g. ODB). In truth though, some LAM like
+  mapping is happening, we just don't see it. That is, there exists a
+  SQL model with types, on a per relational database level, and we are
+  mapping C++ types to these types. The overrides are there for the
+  case where the user is not happy with this mapping.
+
+We need to create a general mapping mechanism that can handle all
+three use cases, including the overrides/extensibility. It could
+signal when a mapping cannot be overriden (e.g. "final" mapping) or
+when it is extensible. Users should then somehow be able to declare
+overrides in their own models.
 
 *** Merging of profiles and configurations is non-intuitive           :story:
 
@@ -391,7 +426,10 @@ adding "referenced" models to each model. This means that when we are
 building m we have visibility of how m is used in the product and we
 can take those uses into account when building the DAG.
 
-*** Add annotation types description                                  :story:
+We should really read up on OMG's CVL and associated technologies, as
+it seems they have done much of the analysis required here.
+
+*** Add annotation types description                        :reviewing:story:
 
 It would be useful to have a description of the purpose of the field
 so that we could print it to the command line. We could simply add a
@@ -400,6 +438,17 @@ ideally we need a command line argument to dump all fields and their
 descriptions so that users know what's available.
 
 This should be sorted by qualified name.
+
+Notes:
+
+- we already added comments to many features. This seems to be the
+  right place in the model to record this information. We just need to
+  propagate it into the feature template and then into the feature.
+- context is already doing all of the hard work for feature
+  instantiation. We just need to create a transform that calls the
+  context factory, retrieves all of the descriptions as strings
+  somehow, and then get the command line to print them out. This can
+  then be extended in the future to include backends, etc.
 
 *** Reactivate injection.dia tests                                    :story:
 

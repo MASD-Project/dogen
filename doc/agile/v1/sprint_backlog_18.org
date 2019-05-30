@@ -13,27 +13,27 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-30 Thu 12:53]
+#+CAPTION: Clock summary at [2019-05-30 Thu 18:31]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *38:44* |       |       | 100.0 |
+| *Total time*                                           | *42:08* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 38:44   |       |       | 100.0 |
-| Active                                                 |         | 38:44 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  3:37 |   9.3 |
-| Create a video demo for the previous sprint's features |         |       |  3:46 |   9.7 |
-| Sprint and product backlog grooming                    |         |       |  2:07 |   5.5 |
-| Make wale templates meta-model elements                |         |       |  2:45 |   7.1 |
-| Flatten the data directory                             |         |       |  1:11 |   3.1 |
+| Stories                                                | 42:08   |       |       | 100.0 |
+| Active                                                 |         | 42:08 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  3:37 |   8.6 |
+| Create a video demo for the previous sprint's features |         |       |  3:46 |   8.9 |
+| Sprint and product backlog grooming                    |         |       |  2:07 |   5.0 |
+| Make wale templates meta-model elements                |         |       |  2:45 |   6.5 |
+| Flatten the data directory                             |         |       |  1:11 |   2.8 |
 | Rename =dogen::cpp::header_only= stereotypes           |         |       |  0:15 |   0.6 |
-| Rename coding model                                    |         |       |  2:17 |   5.9 |
-| Windows build is failing on a number of tests          |         |       |  0:30 |   1.3 |
-| Consider a test suite level logging flag               |         |       |  1:40 |   4.3 |
-| Move parent processing to injection                    |         |       |  2:06 |   5.4 |
-| Read variability papers                                |         |       |  0:56 |   2.4 |
-| Add code generation support to static configurations   |         |       | 15:39 |  40.4 |
-| Windows clang-cl release build is failing 4 tests      |         |       |  1:55 |   4.9 |
+| Rename coding model                                    |         |       |  2:17 |   5.4 |
+| Windows build is failing on a number of tests          |         |       |  0:30 |   1.2 |
+| Consider a test suite level logging flag               |         |       |  1:40 |   4.0 |
+| Move parent processing to injection                    |         |       |  2:06 |   5.0 |
+| Read variability papers                                |         |       |  0:56 |   2.2 |
+| Add code generation support to static configurations   |         |       | 19:03 |  45.2 |
+| Windows clang-cl release build is failing 4 tests      |         |       |  1:55 |   4.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -452,6 +452,9 @@ Time spent reading the literature on variability.
 
 *** STARTED Add code generation support to static configurations      :story:
     :LOGBOOK:
+    CLOCK: [2019-05-30 Thu 16:51]--[2019-05-30 Thu 18:31] =>  1:40
+    CLOCK: [2019-05-30 Thu 15:35]--[2019-05-30 Thu 16:50] =>  1:15
+    CLOCK: [2019-05-30 Thu 15:05]--[2019-05-30 Thu 15:34] =>  0:29
     CLOCK: [2019-05-30 Thu 12:39]--[2019-05-30 Thu 12:53] =>  0:14
     CLOCK: [2019-05-30 Thu 12:07]--[2019-05-30 Thu 12:38] =>  0:31
     CLOCK: [2019-05-30 Thu 11:31]--[2019-05-30 Thu 12:06] =>  0:35
