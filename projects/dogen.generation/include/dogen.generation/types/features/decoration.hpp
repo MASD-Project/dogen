@@ -56,11 +56,7 @@ public:
         std::string marker_name;
 
         static_configuration() :
-            enabled(),
-            copyright_notice(),
-            licence_name(),
-            modeline_group_name(),
-            marker_name() {}
+            enabled() {}
     };
 
     static static_configuration make_static_configuration(

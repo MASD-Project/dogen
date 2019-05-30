@@ -56,7 +56,6 @@ public:
 
         static_configuration() :
             use_implementation_defined_underlying_element(),
-            underlying_element(),
             use_implementation_defined_enumerator_values() {}
     };
 

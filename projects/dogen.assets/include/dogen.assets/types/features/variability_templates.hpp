@@ -71,15 +71,6 @@ public:
         bool is_optional;
 
         static_configuration() :
-            binding_point(),
-            labels(),
-            kernel(),
-            backend(),
-            facet(),
-            archetype(),
-            template_kind(),
-            value(),
-            qualified_name(),
             generate_static_configuration(),
             is_optional() {}
     };

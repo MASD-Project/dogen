@@ -144,6 +144,9 @@ a.stream() << "        " << a.get_qualified_name(fb_ft.parsed_type()) << " " << 
                     bool is_first(true);
                     std::ostringstream ss;
                     for (const auto& fb_ft : fb.feature_templates()) {
+                        if (!fb_ft.parsed_type().is_current_simple_type())
+                            continue;
+
                         const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
 
                         if (!is_first)

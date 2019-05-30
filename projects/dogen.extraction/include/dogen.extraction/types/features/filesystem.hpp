@@ -58,7 +58,6 @@ public:
         static_configuration() :
             force_write(),
             delete_extra_files(),
-            ignore_files_matching_regex(),
             delete_empty_directories(),
             enable_backend_directories() {}
     };

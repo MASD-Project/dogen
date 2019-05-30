@@ -53,8 +53,7 @@ public:
         std::string value;
 
         static_configuration() :
-            add_invalid_enumerator(),
-            value() {}
+            add_invalid_enumerator() {}
     };
 
     static static_configuration make_static_configuration(

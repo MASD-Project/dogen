@@ -67,15 +67,9 @@ public:
         std::list<std::string> type_override;
 
         static_configuration() :
-            database_system(),
-            table_name(),
-            schema_name(),
             is_primary_key(),
-            column_name(),
             is_nullable(),
-            is_composite(),
-            letter_case(),
-            type_override() {}
+            is_composite() {}
     };
 
     static static_configuration make_static_configuration(

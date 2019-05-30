@@ -52,9 +52,7 @@ public:
         std::list<std::string> secondary_inclusion_directive;
 
         static_configuration() :
-            overwrite(),
-            primary_inclusion_directive(),
-            secondary_inclusion_directive() {}
+            overwrite() {}
     };
 
     static static_configuration make_static_configuration(

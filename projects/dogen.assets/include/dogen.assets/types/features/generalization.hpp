@@ -53,8 +53,7 @@ public:
         std::string parent;
 
         static_configuration() :
-            is_final(),
-            parent() {}
+            is_final() {}
     };
 
     static static_configuration make_static_configuration(
