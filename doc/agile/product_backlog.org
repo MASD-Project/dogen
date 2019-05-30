@@ -4962,6 +4962,8 @@ ideas into stories and add them as we go along.
 - if =use_implementation_defined_enumerator_values= is true then
   enumerator's value must be empty.
 - enumeration must have at least one enumerator. warning?
+- enumerations cannot sometimes define values and sometimes leave them
+  empty. They must all be either provided or all left blank.
 - external module path of the model matches all objects, etc in
   current model.
 - documentation does not have non-printable characters.
