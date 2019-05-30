@@ -29,13 +29,14 @@
 #include "dogen.assets/lexical_cast/meta_model/technical_space_lc.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/types/traits.hpp"
+#include "dogen.assets/types/helpers/name_factory.hpp"
+#include "dogen.assets/types/helpers/name_builder.hpp"
 #include "dogen.assets/types/features/enumeration.hpp"
-#include "dogen.assets/types/transforms/context.hpp"
 #include "dogen.assets/types/meta_model/structural/builtin.hpp"
 #include "dogen.assets/types/meta_model/structural/enumeration.hpp"
 #include "dogen.assets/types/meta_model/structural/enumeration.hpp"
-#include "dogen.assets/types/helpers/name_factory.hpp"
 #include "dogen.assets/types/transforms/transformation_error.hpp"
+#include "dogen.assets/types/transforms/context.hpp"
 #include "dogen.assets/types/transforms/enumerations_transform.hpp"
 
 namespace {
@@ -58,6 +59,55 @@ const std::string missing_default(
 }
 
 namespace dogen::assets::transforms {
+
+namespace {
+
+void populate_enumeration(const features::enumeration::feature_group& fg,
+    const meta_model::name& default_underlying_element_name,
+    meta_model::structural::enumeration& e) {
+
+    /*
+     * Create the static configuration from its dynamic counterpart.
+     */
+    const auto& cfg(*e.configuration());
+    const auto scfg(features::enumeration::make_static_configuration(fg, cfg));
+
+    /*
+     * Start by populating the trivial top-level flags.
+     */
+    e.use_implementation_defined_underlying_element(
+        scfg.use_implementation_defined_underlying_element);
+
+    e.use_implementation_defined_enumerator_values(
+        scfg.use_implementation_defined_enumerator_values);
+
+    e.add_invalid_enumerator(scfg.add_invalid_enumerator);
+
+    /*
+     * Now handle the underlying element. Use the name read from the
+     * meta-data, if any.
+     */
+    if (!scfg.underlying_element.empty()) {
+        /*
+         * Convert the string obtained via meta-data into a assets name and
+         * set it as our underlying element name.
+         */
+        const auto ue(helpers::name_builder::build(scfg.underlying_element));
+        e.underlying_element(ue);
+        return;
+    }
+
+    /*
+     * Use the default element name supplied by the caller.
+     */
+    const auto& duen(default_underlying_element_name);
+    BOOST_LOG_SEV(lg, debug) << "Using default underlying element '"
+                             << duen.qualified().dot() << "'";
+
+    e.underlying_element(duen);
+}
+
+}
 
 enumerations_transform::enumeration_feature_group
 enumerations_transform::make_enumeration_feature_group(
@@ -269,6 +319,8 @@ void enumerations_transform::apply(const context& ctx, meta_model::model& m) {
 
     const auto its(m.input_technical_space());
     const auto fg(make_feature_group(*ctx.feature_model()));
+    const auto& fm(*ctx.feature_model());
+    const auto fg2(features::enumeration::make_feature_group(fm));
     const auto duen(obtain_enumeration_default_underlying_element_name(m));
 
     for (auto& pair : m.structural_elements().enumerations()) {
@@ -276,8 +328,10 @@ void enumerations_transform::apply(const context& ctx, meta_model::model& m) {
         BOOST_LOG_SEV(lg, debug) << "Expanding: " << id;
 
         auto& e(*pair.second);
-        populate_from_configuration(fg.enumeration, e);
-        expand_default_underlying_element(duen, e);
+        populate_enumeration(fg2, duen, e);
+
+        // populate_from_configuration(fg.enumeration, e);
+        // expand_default_underlying_element(duen, e);
         expand_enumerators(fg.enumerator, its, e);
     }
 

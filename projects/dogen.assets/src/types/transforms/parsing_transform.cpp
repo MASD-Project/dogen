@@ -236,6 +236,7 @@ void parsing_transform::apply(const context& ctx, meta_model::model& m) {
         }
     }
 
+    /*
     for (auto& pair : m.structural_elements().enumerations()) {
         auto& e(*pair.second);
         const auto id(e.name().qualified().dot());
@@ -246,7 +247,7 @@ void parsing_transform::apply(const context& ctx, meta_model::model& m) {
             e << errmsg_parsing_owner(id);
             throw;
         }
-    }
+        }*/
 
     for (auto& pair : m.structural_elements().primitives()) {
         auto& p(*pair.second);
