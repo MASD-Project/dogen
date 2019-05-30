@@ -63,7 +63,8 @@ output_technical_space::static_configuration output_technical_space::make_static
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    r.output_technical_space = s.get_text_collection_content(fg.output_technical_space);
+    if (s.has_configuration_point(fg.output_technical_space))
+        r.output_technical_space = s.get_text_collection_content(fg.output_technical_space);
     return r;
 }
 
