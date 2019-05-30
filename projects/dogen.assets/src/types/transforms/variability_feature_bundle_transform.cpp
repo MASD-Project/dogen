@@ -223,7 +223,7 @@ apply(const context& ctx,
         "variability feature bundle transform", transform_id,
         m.name().qualified().dot(), *ctx.tracer(), m);
 
-    const auto& bundles(m.variability_elements().feature_bundles());
+    auto& bundles(m.variability_elements().feature_bundles());
     if (bundles.empty())
         return;
 
@@ -247,6 +247,26 @@ apply(const context& ctx,
                     transformation_error(fixed_mapping_not_found + ut));
             }
             ft.mapped_type(i->second);
+
+            /*
+             * A feature template will require optionality on the
+             * generated static configuration if it is optional _and_
+             * it has no default value. In this case, the property in
+             * the static configuration must be of an optional type,
+             * in order to handle the tri-bool logic: a) not supplied
+             * b) supplied but set to default (of the type, not of the
+             * template since it has not default) c) supplied and set
+             * to a value.
+             */
+            const bool has_default(!ft.value().empty());
+            ft.requires_optionality(!has_default && ft.is_optional());
+
+            /*
+             * If any feature template in a bundle requires
+             * optionality, then the bundle also does.
+             */
+            if (ft.requires_optionality())
+                fb.requires_optionality(true);
         }
     }
 
