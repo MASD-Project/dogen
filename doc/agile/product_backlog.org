@@ -12226,6 +12226,80 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+
+*** LSP daemon for MOP                                                :story:
+
+One of the problems we have when creating models is that there is no
+assistance from the editor. At present, because we are using either
+JSON or Dia, this is more or less expected - though conceivably, one
+can imagine some python extensions into Dia to make the modelers' life
+easier. In the future, when we finally settle on a MOP frontend such
+as text UML, what would be ideal is a full blown LSP mode (we already
+have a story for MOP).
+
+LSP use cases:
+
+- completion:
+  - when adding attributes, we need completion based on the models
+    referenced.
+  - when setting stereotypes, we need completion based on the profiles
+    and object templates that have been defined.
+  - when typing meta-data keys, we need completion based on the
+    feature model, and taking into account the binding types of each
+    feature. In addition, if the feature is linked to an enumeration,
+    we also need a way to see what the valid values are.
+  - when adding a reference, a list of all of the referenceable
+    models, given the current include paths.
+- find usages:
+  - given a model element, find all of its uses in the models.
+  - given a model element, find all of its uses in the generated and
+    handcrafted code, with the ability to choose (both, handcrafted,
+    generated).
+- find definition:
+  - given a model element usage, take me to its definition.
+  - given a model reference, take me to its definition.
+- hierarchies (treemacs support):
+  - list all of the model elements in a model as a tree, with their
+    attributes.
+  - follow current position in the tree.
+- syntax checker:
+  - for models, highlight lines where there are errors and warnings.
+  - needs the ability to parse invalid models.
+  - diagnostics and code actions (clang FixIts). This is useful for
+    levenshtein-like errors in spelling.
+  - for stitch templates, highlight lines where there are errors and
+    warnings at the stitch level; map errors from C++ code back into
+    the stitch location by calling out to clang somehow. There is
+    already a story for this.
+- symbol rename:
+  - given a symbol, rename all of its uses across all referenced
+    models. For extra bonus points, also rename them in the generated
+    language.
+- documentation:
+  - bring up documentation for symbol at point.
+
+Notes:
+
+- we probably will need a separate git repo for the language server,
+  as we are running out of resources on our travis builds. We will
+  need a lot of extra code to implement the language server because
+  the data structures are completely different from how we are
+  querying the data at present - though we can probably reuse a large
+  number of the transforms.
+- we should look at existing c++ language servers to see if we can
+  reuse or steal some of their ideas. In particular, the protocol
+  implementation part should be common to all servers (messages,
+  etc). We should be able to create a simple library with model types
+  that implement the messages and the request/response interactions
+  without binding it to the dogen specific logic.
+
+Links:
+
+- [[https://microsoft.github.io/language-server-protocol/][Language Server Protocol]]
+- [[http://llvm.org/viewvc/llvm-project/clang-tools-extra/trunk/clangd/][clangd]]
+- [[https://github.com/cquery-project/cquery][cquery]]
+- [[https://github.com/MaskRay/ccls][ccls]]
+
 *** Add design by contract to code-base
 
 We should really declare pre/post conditions, etc in Dogen. This can
