@@ -149,7 +149,8 @@ filesystem::static_configuration filesystem::make_static_configuration(
     const dogen::variability::helpers::configuration_selector s(cfg);
     r.force_write = s.get_boolean_content_or_default(fg.force_write);
     r.delete_extra_files = s.get_boolean_content_or_default(fg.delete_extra_files);
-    r.ignore_files_matching_regex = s.get_text_collection_content(fg.ignore_files_matching_regex);
+    if (s.has_configuration_point(fg.ignore_files_matching_regex))
+        r.ignore_files_matching_regex = s.get_text_collection_content(fg.ignore_files_matching_regex);
     r.delete_empty_directories = s.get_boolean_content_or_default(fg.delete_empty_directories);
     r.enable_backend_directories = s.get_boolean_content_or_default(fg.enable_backend_directories);
     return r;

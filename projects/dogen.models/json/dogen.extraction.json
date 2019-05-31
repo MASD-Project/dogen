@@ -458,7 +458,8 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.extraction.ignore_files_matching_regex"
+            "masd.variability.qualified_name": "masd.extraction.ignore_files_matching_regex",
+            "masd.variability.is_optional": "true"
           }
         },
         {

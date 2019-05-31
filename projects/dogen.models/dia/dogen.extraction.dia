@@ -6189,7 +6189,8 @@ Only applicable if "delete_extra_files" is enabled.
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.extraction.ignore_files_matching_regex#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.extraction.ignore_files_matching_regex
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
