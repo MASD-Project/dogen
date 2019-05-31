@@ -247,7 +247,8 @@ variability_templates::static_configuration variability_templates::make_static_c
     if (s.has_configuration_point(fg.archetype))
         r.archetype = s.get_text_content(fg.archetype);
     r.template_kind = s.get_text_content(fg.template_kind);
-    r.value = s.get_text_collection_content(fg.value);
+    if (s.has_configuration_point(fg.value))
+        r.value = s.get_text_collection_content(fg.value);
     if (s.has_configuration_point(fg.qualified_name))
         r.qualified_name = s.get_text_content(fg.qualified_name);
     r.is_optional = s.get_boolean_content_or_default(fg.is_optional);
