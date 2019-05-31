@@ -21,12 +21,9 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/helpers/feature_selector.hpp"
-#include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.assets/types/traits.hpp"
 #include "dogen.assets/io/meta_model/model_set_io.hpp"
+#include "dogen.assets/types/features/mapping.hpp"
 #include "dogen.assets/types/meta_model/technical_space.hpp"
 #include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.assets/types/meta_model/structural/builtin.hpp"
@@ -57,27 +54,12 @@ namespace dogen::assets::transforms {
 
 namespace {
 
-struct feature_group {
-    variability::meta_model::feature target;
-    variability::meta_model::feature destination;
-};
-
-inline feature_group
-make_feature_group(const variability::meta_model::feature_model& fm) {
-    const variability::helpers::feature_selector s(fm);
-
-    feature_group r;
-    r.target = s.get_by_name(assets::traits::mapping::target());
-    r.destination  = s.get_by_name(assets::traits::mapping::destination());
-    return r;
-}
-
 /**
  * @brief Updates containment relationships in model.
  */
 class destination_gatherer {
 public:
-    explicit destination_gatherer(const feature_group& fg)
+    explicit destination_gatherer(const features::mapping::feature_group& fg)
         : feature_group_(fg), technical_space_() {}
 
 public:
@@ -108,7 +90,7 @@ public:
     }
 
 public:
-    const feature_group& feature_group_;
+    const features::mapping::feature_group& feature_group_;
     assets::meta_model::technical_space technical_space_;
     std::unordered_map<std::string,
                        std::list<
@@ -118,23 +100,16 @@ public:
 };
 
 void destination_gatherer::gather(assets::meta_model::element &e) {
-    BOOST_LOG_SEV(lg, trace) << "Processing element: "
-                             << e.name().qualified().dot();
+    const auto id(e.name().qualified().dot());
+    BOOST_LOG_SEV(lg, trace) << "Processing element: " << id;
 
-    const auto& cfg(*e.configuration());
-    const variability::helpers::configuration_selector s(cfg);
+    using features::mapping;
+    const auto scfg(mapping::make_static_configuration(feature_group_, e));
+    BOOST_LOG_SEV(lg, trace) << "Read target: " << scfg.target;
 
-    if (!s.has_configuration_point(feature_group_.target))
-        return;
-
-    assets::meta_model::mapping::destination d;
-    d.name(e.name());
-    d.technical_space(technical_space_);
-
-    const auto target(s.get_text_content(feature_group_.target));
-    BOOST_LOG_SEV(lg, trace) << "Read target: " << target;
-
-    result_[target].push_back(d);
+    using assets::meta_model::mapping::destination;
+    const destination dst(e.name(), technical_space_);
+    result_[scfg.target].push_back(dst);
 }
 
 }
@@ -143,15 +118,14 @@ std::unordered_map<std::string,
                    std::list<
                        assets::meta_model::mapping::destination>
                    >
-mapping_elements_transform::make_destinations(
-    const variability::meta_model::feature_model &fm,
+mapping_elements_transform::
+make_destinations(const variability::meta_model::feature_model &fm,
     const assets::meta_model::model_set &ms) {
-
-    const auto fg(make_feature_group(fm));
+    const auto fg(features::mapping::make_feature_group(fm));
     destination_gatherer dg(fg);
-    using assets::meta_model::elements_traversal;
-
     dg.technical_space(ms.target().input_technical_space());
+
+    using  assets::meta_model::elements_traversal;
     elements_traversal(ms.target(), dg);
 
     for (const auto &m : ms.references()) {
@@ -167,9 +141,9 @@ void mapping_elements_transform::populate_extensible_mappables(
     std::list<assets::meta_model::mapping::destination>>&
     destinations_for_target, assets::meta_model::model_set& ms) {
 
+    using assets::meta_model::mapping::destination;
     const auto lambda(
-        [&](const std::string& target,
-            const std::list<assets::meta_model::mapping::destination>& dests,
+        [&](const std::string& target, const std::list<destination>& dsts,
             assets::meta_model::model& m) {
             auto& em(m.mapping_elements().extensible_mappables());
             const auto i(em.find(target));
@@ -177,36 +151,34 @@ void mapping_elements_transform::populate_extensible_mappables(
                 return;
 
             auto& mappable(*i->second);
-            for (const auto& dest : dests)
-                mappable.destinations().push_back(dest);
+            for (const auto& dst : dsts)
+                mappable.destinations().push_back(dst);
         });
 
     for (const auto& pair : destinations_for_target) {
         const auto target(pair.first);
-        const auto& dests(pair.second);
-        lambda(target, dests, ms.target());
+        const auto& dsts(pair.second);
+        lambda(target, dsts, ms.target());
         for (auto& ref : ms.references())
-            lambda(target, dests, ref);
+            lambda(target, dsts, ref);
     }
 }
 
-void mapping_elements_transform::populate_fixed_mappables(
-    const variability::meta_model::feature_model& fm,
+void mapping_elements_transform::
+populate_fixed_mappables(const variability::meta_model::feature_model& fm,
     assets::meta_model::model_set& ms) {
-
-    const auto fg(make_feature_group(fm));
+    const auto fg(features::mapping::make_feature_group(fm));
     const auto lambda(
         [&](assets::meta_model::model& m) {
             auto& maps(m.mapping_elements().fixed_mappables());
             for (auto& pair : maps) {
-                auto& mm(*pair.second);
-                const auto& cfg(*mm.configuration());
-                const variability::helpers::configuration_selector s(cfg);
-                const auto dst(s.get_text_content(fg.destination));
-                mm.destination(dst);
+                auto& fm(*pair.second);
+                using features::mapping;
+                const auto scfg(mapping::make_static_configuration(fg, fm));
+                fm.destination(scfg.destination);
 
-                const auto fm_id(mm.name().qualified().colon());
-                const auto fm_pair(std::make_pair(fm_id, dst));
+                const auto fm_id(fm.name().qualified().colon());
+                const auto fm_pair(std::make_pair(fm_id, scfg.destination));
                 const auto inserted(ms.fixed_mappings().insert(fm_pair).second);
                 if (!inserted) {
                     BOOST_LOG_SEV(lg, error) << duplicate_fm_id << fm_id;
@@ -238,13 +210,13 @@ apply(const context& ctx, assets::meta_model::model_set& ms) {
      * there are any missing mappings.
      */
     const auto& fm(*ctx.feature_model());
-    const auto dests(make_destinations(fm, ms));
+    const auto dsts(make_destinations(fm, ms));
 
     /*
      * Now we locate all of the targets of the mappings and add the
      * destinations.
      */
-    populate_extensible_mappables(dests, ms);
+    populate_extensible_mappables(dsts, ms);
 
     /*
      * Finally we populate all of the fixed mappables.
