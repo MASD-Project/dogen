@@ -21,10 +21,10 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.variability/types/helpers/feature_selector.hpp"
-#include "dogen.variability/types/helpers/configuration_selector.hpp"
-#include "dogen.variability/types/helpers/enum_mapper.hpp"
+#include "dogen.variability/lexical_cast/meta_model/binding_point_lc.hpp"
+#include "dogen.variability/lexical_cast/meta_model/template_kind_lc.hpp"
 #include "dogen.assets/types/traits.hpp"
+#include "dogen.assets/types/features/variability_bundle.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/types/meta_model/attribute.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_template_initializer.hpp"
@@ -55,164 +55,32 @@ inline bool operator<(const name& lhs, const name& rhs) {
 
 namespace dogen::assets::transforms {
 
-variability_feature_bundle_transform::feature_group
-variability_feature_bundle_transform::make_feature_group(
-    const variability::meta_model::feature_model& fm) {
-
-    feature_group r;
-    const variability::helpers::feature_selector s(fm);
-    r.binding_point = s.get_by_name(traits::variability::binding_point());
-    r.archetype_location_kernel = s.get_by_name(
-        traits::variability::archetype_location_kernel());
-    r.archetype_location_backend = s.get_by_name(
-        traits::variability::archetype_location_backend());
-    r.archetype_location_facet = s.get_by_name(
-        traits::variability::archetype_location_facet());
-    r.archetype_location_archetype = s.get_by_name(
-        traits::variability::archetype_location_archetype());
-    r.template_kind = s.get_by_name(traits::variability::template_kind());
-    r.qualified_name = s.get_by_name(traits::variability::qualified_name());
-    r.generate_static_configuration =
-        s.get_by_name(traits::variability::generate_static_configuration());
-    r.is_optional = s.get_by_name(traits::variability::is_optional());
-
-    return r;
-}
-
-variability::meta_model::binding_point variability_feature_bundle_transform::
-make_binding_point(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
-
-    const variability::helpers::configuration_selector s(cfg);
-    const auto tc(s.get_text_content(fg.binding_point));
-    BOOST_LOG_SEV(lg, trace) << "Read binding point: " << tc;
-
-    using variability::helpers::enum_mapper;
-    const auto r(enum_mapper::to_binding_point(tc));
-    return r;
-}
-
-std::string variability_feature_bundle_transform::
-make_archetype_location_kernel(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
-
-    const variability::helpers::configuration_selector s(cfg);
-    const auto r(s.get_text_content(fg.archetype_location_kernel));
-    BOOST_LOG_SEV(lg, trace) << "Read kernel: " << r;
-    return r;
-}
-
-std::string variability_feature_bundle_transform::
-make_archetype_location_backend(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
-
-    const variability::helpers::configuration_selector s(cfg);
-    if (s.has_configuration_point(fg.archetype_location_backend)) {
-        const auto r(s.get_text_content(fg.archetype_location_backend));
-        BOOST_LOG_SEV(lg, trace) << "Read backend: " << r;
-        return r;
-    }
-
-    return empty;
-}
-
-std::string variability_feature_bundle_transform::
-make_archetype_location_facet(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
-
-    const variability::helpers::configuration_selector s(cfg);
-    if (s.has_configuration_point(fg.archetype_location_facet)) {
-        const auto r(s.get_text_content(fg.archetype_location_facet));
-        BOOST_LOG_SEV(lg, trace) << "Read facet: " << r;
-        return r;
-    }
-
-    return empty;
-}
-
-std::string variability_feature_bundle_transform::
-make_archetype_location_archetype(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
-
-    const variability::helpers::configuration_selector s(cfg);
-    if (s.has_configuration_point(fg.archetype_location_archetype)) {
-        const auto r(s.get_text_content(fg.archetype_location_archetype));
-        BOOST_LOG_SEV(lg, trace) << "Read archetype: " << r;
-        return r;
-    }
-
-    return empty;
-}
-
-std::string variability_feature_bundle_transform::
-make_qualified_name(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
-
-    const variability::helpers::configuration_selector s(cfg);
-    if (s.has_configuration_point(fg.qualified_name)) {
-        const auto r(s.get_text_content(fg.qualified_name));
-        BOOST_LOG_SEV(lg, trace) << "Read qualified name: " << r;
-        return r;
-    }
-
-    return empty;
-}
-
-variability::meta_model::template_kind variability_feature_bundle_transform::
-make_template_kind(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
-
-    const variability::helpers::configuration_selector s(cfg);
-    const auto tc(s.get_text_content(fg.template_kind));
-    BOOST_LOG_SEV(lg, trace) << "Read template kind: " << tc;
-
-    using variability::helpers::enum_mapper;
-    const auto r(enum_mapper::to_template_kind(tc));
-    return r;
-}
-
-bool variability_feature_bundle_transform::
-make_generate_static_configuration(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
-
-    const variability::helpers::configuration_selector s(cfg);
-    const auto& gsc(fg.generate_static_configuration);
-    const auto r(s.get_boolean_content_or_default(gsc));
-    BOOST_LOG_SEV(lg, trace) << "Read generate static configuration: " << r;
-
-    return r;
-}
-
-bool variability_feature_bundle_transform::
-make_is_optional(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
-
-    const variability::helpers::configuration_selector s(cfg);
-    const auto& io(fg.is_optional);
-    const auto r(s.get_boolean_content_or_default(io));
-    BOOST_LOG_SEV(lg, trace) << "Read is optional: " << r;
-
-    return r;
-}
-
-void variability_feature_bundle_transform::update(const feature_group& fg,
+void variability_feature_bundle_transform::update(
+    const features::variability_templates::feature_group& fg,
     meta_model::variability::feature_template& ft) {
-    const auto& cfg(*ft.configuration());
 
-    ft.template_kind(make_template_kind(fg, cfg));
-    ft.binding_point(make_binding_point(fg, cfg));
-    ft.is_optional(make_is_optional(fg, cfg));
+    using features::variability_templates;
+    const auto scfg(variability_templates::make_static_configuration(fg, ft));
+
+    using boost::lexical_cast;
+    using variability::meta_model::template_kind;
+    ft.template_kind(lexical_cast<template_kind>(scfg.template_kind));
+
+    using variability::meta_model::binding_point;
+    ft.binding_point(lexical_cast<binding_point>(scfg.binding_point));
+
+    ft.is_optional(scfg.is_optional);
 
     archetypes::location al;
-    al.kernel(make_archetype_location_kernel(fg, cfg));
-    al.backend(make_archetype_location_backend(fg, cfg));
-    al.facet(make_archetype_location_facet(fg, cfg));
-    al.archetype(make_archetype_location_archetype(fg, cfg));
+    al.kernel(scfg.kernel);
+    al.backend(scfg.backend);
+    al.facet(scfg.facet);
+    al.archetype(scfg.archetype);
     ft.location(al);
 
     using variability::meta_model::template_kind;
     if (ft.template_kind() == template_kind::instance)
-        ft.key(make_qualified_name(fg, cfg));
+        ft.key(scfg.qualified_name);
 }
 
 void variability_feature_bundle_transform::
@@ -228,16 +96,17 @@ apply(const context& ctx,
         return;
 
     const auto& fm(*ctx.feature_model());
-    const auto fg(make_feature_group(fm));
+    const auto fg1(features::variability_templates::make_feature_group(fm));
     for (auto& pair : bundles) {
         auto& fb(*pair.second);
 
-        const auto& cfg(*fb.configuration());
-        const auto gsc(make_generate_static_configuration(fg, cfg));
-        fb.generate_static_configuration(gsc);
+        using features::variability_bundle;
+        const auto fg2(variability_bundle::make_feature_group(fm));
+        const auto scfg(variability_bundle::make_static_configuration(fg2, fb));
+        fb.generate_static_configuration(scfg.generate_static_configuration);
 
         for (auto& ft : fb.feature_templates()) {
-            update(fg, ft);
+            update(fg1, ft);
 
             /*
              * A feature template will require optionality on the

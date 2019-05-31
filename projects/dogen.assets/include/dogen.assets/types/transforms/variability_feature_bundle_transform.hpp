@@ -27,11 +27,8 @@
 
 #include <string>
 #include <unordered_map>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.variability/types/meta_model/template_kind.hpp"
 #include "dogen.assets/types/meta_model/model.hpp"
+#include "dogen.assets/types/features/variability_templates.hpp"
 #include "dogen.assets/types/transforms/context_fwd.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
 
@@ -39,56 +36,7 @@ namespace dogen::assets::transforms {
 
 class variability_feature_bundle_transform final {
 private:
-    struct feature_group {
-        variability::meta_model::feature binding_point;
-        variability::meta_model::feature archetype_location_kernel;
-        variability::meta_model::feature archetype_location_backend;
-        variability::meta_model::feature archetype_location_facet;
-        variability::meta_model::feature archetype_location_archetype;
-        variability::meta_model::feature template_kind;
-        variability::meta_model::feature qualified_name;
-        variability::meta_model::feature generate_static_configuration;
-        variability::meta_model::feature is_optional;
-    };
-
-    static feature_group make_feature_group(
-        const variability::meta_model::feature_model& fm);
-
-    static variability::meta_model::binding_point
-    make_binding_point(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-    static std::string
-    make_archetype_location_kernel(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-    static std::string
-    make_archetype_location_backend(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-    static std::string
-    make_archetype_location_facet(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-    static std::string
-    make_archetype_location_archetype(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-    static variability::meta_model::template_kind
-    make_template_kind(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-    static std::string make_qualified_name(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-    static bool make_generate_static_configuration(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-    static bool make_is_optional(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-private:
-    static void update(const feature_group& fg,
+    static void update(const features::variability_templates::feature_group& fg,
         meta_model::variability::feature_template& ft);
 
 public:
