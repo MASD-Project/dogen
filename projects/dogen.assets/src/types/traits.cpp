@@ -47,21 +47,6 @@ std::string traits::overwrite() {
     return r;
 }
 
-std::string traits::extraction::force_write() {
-    static std::string r("masd.extraction.force_write");
-    return r;
-}
-
-std::string traits::extraction::delete_extra_files() {
-    static std::string r("masd.extraction.delete_extra_files");
-    return r;
-}
-
-std::string traits::extraction::ignore_files_matching_regex() {
-    static std::string r("masd.extraction.ignore_files_matching_regex");
-    return r;
-}
-
 std::string traits::extraction::cpp_headers_output_directory() {
     static std::string r("masd.generation.cpp_headers_output_directory");
     return r;

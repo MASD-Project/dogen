@@ -37,9 +37,6 @@ struct traits {
     static std::string overwrite();
 
     struct extraction {
-        static std::string force_write();
-        static std::string delete_extra_files();
-        static std::string ignore_files_matching_regex();
         static std::string cpp_headers_output_directory();
         static std::string enable_backend_directories();
     };
