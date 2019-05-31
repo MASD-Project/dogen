@@ -237,7 +237,8 @@ variability_templates::static_configuration variability_templates::make_static_c
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
     r.binding_point = s.get_text_content(fg.binding_point);
-    r.labels = s.get_text_collection_content(fg.labels);
+    if (s.has_configuration_point(fg.labels))
+        r.labels = s.get_text_collection_content(fg.labels);
     r.kernel = s.get_text_content(fg.kernel);
     if (s.has_configuration_point(fg.backend))
         r.backend = s.get_text_content(fg.backend);
