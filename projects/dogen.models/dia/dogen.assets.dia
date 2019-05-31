@@ -38170,7 +38170,8 @@ extend the mappings as required.#</dia:string>
             <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.mapping.target#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.mapping.target
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -38196,7 +38197,8 @@ extend the mappings as required.#</dia:string>
             <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.mapping.destination#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.mapping.destination
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

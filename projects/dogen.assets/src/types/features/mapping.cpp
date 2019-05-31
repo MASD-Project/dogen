@@ -82,8 +82,10 @@ mapping::static_configuration mapping::make_static_configuration(
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    r.target = s.get_text_content(fg.target);
-    r.destination = s.get_text_content(fg.destination);
+    if (s.has_configuration_point(fg.target))
+        r.target = s.get_text_content(fg.target);
+    if (s.has_configuration_point(fg.destination))
+        r.destination = s.get_text_content(fg.destination);
     return r;
 }
 
