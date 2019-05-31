@@ -18,15 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_FEATURES_VARIABILITY_TEMPLATES_HPP
-#define DOGEN_ASSETS_TYPES_FEATURES_VARIABILITY_TEMPLATES_HPP
+#ifndef DOGEN_ASSETS_TYPES_FEATURES_VARIABILITY_BUNDLE_HPP
+#define DOGEN_ASSETS_TYPES_FEATURES_VARIABILITY_BUNDLE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <list>
-#include <string>
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
@@ -35,21 +34,12 @@
 namespace dogen::assets::features {
 
 /**
- * @brief Features related to the processing of variability for feature and profile templates.
+ * @brief Features related to the processing of variability for feature bundles.
  */
-class variability_templates final {
+class variability_bundle final {
 public:
     struct feature_group {
-        variability::meta_model::feature binding_point;
-        variability::meta_model::feature labels;
-        variability::meta_model::feature kernel;
-        variability::meta_model::feature backend;
-        variability::meta_model::feature facet;
-        variability::meta_model::feature archetype;
-        variability::meta_model::feature template_kind;
-        variability::meta_model::feature value;
-        variability::meta_model::feature qualified_name;
-        variability::meta_model::feature is_optional;
+        variability::meta_model::feature generate_static_configuration;
     };
 
     static feature_group
@@ -57,19 +47,10 @@ public:
 
 public:
     struct static_configuration {
-        std::string binding_point;
-        std::list<std::string> labels;
-        std::string kernel;
-        std::string backend;
-        std::string facet;
-        std::string archetype;
-        std::string template_kind;
-        std::list<std::string> value;
-        std::string qualified_name;
-        bool is_optional;
+        bool generate_static_configuration;
 
         static_configuration() :
-            is_optional() {}
+            generate_static_configuration() {}
     };
 
     static static_configuration make_static_configuration(

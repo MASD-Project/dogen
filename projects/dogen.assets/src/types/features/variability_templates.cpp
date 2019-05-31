@@ -190,26 +190,6 @@ make_masd_variability_qualified_name() {
 }
 
 dogen::variability::meta_model::feature_template
-make_masd_variability_generate_static_configuration() {
-    using namespace dogen::variability::meta_model;
-    feature_template r;
-    r.name().simple("generate_static_configuration");
-    r.name().qualified("masd.variability.generate_static_configuration");
-    const auto vt(value_type::boolean);
-    r.value_type(vt);
-    r.binding_point(binding_point::element);
-    r.kind(template_kind::instance);
-    dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "true" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
-    return r;
-}
-
-dogen::variability::meta_model::feature_template
 make_masd_variability_is_optional() {
     using namespace dogen::variability::meta_model;
     feature_template r;
@@ -245,7 +225,6 @@ variability_templates::make_feature_group(const dogen::variability::meta_model::
     r.template_kind = s.get_by_name("masd.variability.template_kind");
     r.value = s.get_by_name("masd.variability.value");
     r.qualified_name = s.get_by_name("masd.variability.qualified_name");
-    r.generate_static_configuration = s.get_by_name("masd.variability.generate_static_configuration");
     r.is_optional = s.get_by_name("masd.variability.is_optional");
 
     return r;
@@ -270,7 +249,6 @@ variability_templates::static_configuration variability_templates::make_static_c
     r.value = s.get_text_collection_content(fg.value);
     if (s.has_configuration_point(fg.qualified_name))
         r.qualified_name = s.get_text_content(fg.qualified_name);
-    r.generate_static_configuration = s.get_boolean_content_or_default(fg.generate_static_configuration);
     r.is_optional = s.get_boolean_content_or_default(fg.is_optional);
     return r;
 }
@@ -288,7 +266,6 @@ variability_templates::make_templates() {
     r.push_back(make_masd_variability_template_kind());
     r.push_back(make_masd_variability_value());
     r.push_back(make_masd_variability_qualified_name());
-    r.push_back(make_masd_variability_generate_static_configuration());
     r.push_back(make_masd_variability_is_optional());
     return r;
 }

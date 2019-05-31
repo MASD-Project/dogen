@@ -27,6 +27,7 @@
 #include "dogen.assets/types/features/initializer.hpp"
 #include "dogen.assets/types/features/generalization.hpp"
 #include "dogen.assets/types/features/type_parameters.hpp"
+#include "dogen.assets/types/features/variability_bundle.hpp"
 #include "dogen.assets/types/features/decoration_modeline.hpp"
 #include "dogen.assets/types/features/variability_templates.hpp"
 #include "dogen.assets/types/features/output_technical_space.hpp"
@@ -45,6 +46,7 @@ register_templates(variability::helpers::feature_template_registrar& rg) {
     rg.register_templates(dogen::assets::features::output_technical_space::make_templates());
     rg.register_templates(dogen::assets::features::primitive::make_templates());
     rg.register_templates(dogen::assets::features::type_parameters::make_templates());
+    rg.register_templates(dogen::assets::features::variability_bundle::make_templates());
     rg.register_templates(dogen::assets::features::variability_templates::make_templates());
 
 }

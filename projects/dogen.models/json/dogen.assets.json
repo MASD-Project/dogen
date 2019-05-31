@@ -3019,17 +3019,6 @@
           }
         },
         {
-          "name": "masd.variability.generate_static_configuration",
-          "type": "masd::variability::boolean",
-          "value": "\"true\"",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.variability.generate_static_configuration"
-          }
-        },
-        {
           "name": "masd.variability.is_optional",
           "type": "masd::variability::boolean",
           "value": "\"false\"",
@@ -3171,6 +3160,27 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::variability_bundle",
+      "documentation": "Features related to the processing of variability for feature bundles.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.variability.generate_static_configuration",
+          "type": "masd::variability::boolean",
+          "value": "\"true\"",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance",
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.variability.generate_static_configuration"
+          }
+        }
+      ]
     }
   ]
 }
