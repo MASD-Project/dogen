@@ -260,12 +260,16 @@ variability_templates::static_configuration variability_templates::make_static_c
     r.binding_point = s.get_text_content(fg.binding_point);
     r.labels = s.get_text_collection_content(fg.labels);
     r.kernel = s.get_text_content(fg.kernel);
-    r.backend = s.get_text_content(fg.backend);
-    r.facet = s.get_text_content(fg.facet);
-    r.archetype = s.get_text_content(fg.archetype);
+    if (s.has_configuration_point(fg.backend))
+        r.backend = s.get_text_content(fg.backend);
+    if (s.has_configuration_point(fg.facet))
+        r.facet = s.get_text_content(fg.facet);
+    if (s.has_configuration_point(fg.archetype))
+        r.archetype = s.get_text_content(fg.archetype);
     r.template_kind = s.get_text_content(fg.template_kind);
     r.value = s.get_text_collection_content(fg.value);
-    r.qualified_name = s.get_text_content(fg.qualified_name);
+    if (s.has_configuration_point(fg.qualified_name))
+        r.qualified_name = s.get_text_content(fg.qualified_name);
     r.generate_static_configuration = s.get_boolean_content_or_default(fg.generate_static_configuration);
     r.is_optional = s.get_boolean_content_or_default(fg.is_optional);
     return r;

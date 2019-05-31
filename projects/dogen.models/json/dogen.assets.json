@@ -2956,7 +2956,8 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "property",
-            "masd.variability.qualified_name": "masd.variability.archetype_location.backend"
+            "masd.variability.qualified_name": "masd.variability.archetype_location.backend",
+            "masd.variability.is_optional": "true"
           }
         },
         {
@@ -2967,7 +2968,8 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "property",
-            "masd.variability.qualified_name": "masd.variability.archetype_location.facet"
+            "masd.variability.qualified_name": "masd.variability.archetype_location.facet",
+            "masd.variability.is_optional": "true"
           }
         },
         {
@@ -2978,7 +2980,8 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "property",
-            "masd.variability.qualified_name": "masd.variability.archetype_location.archetype"
+            "masd.variability.qualified_name": "masd.variability.archetype_location.archetype",
+            "masd.variability.is_optional": "true"
           }
         },
         {
@@ -3011,7 +3014,8 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "property",
-            "masd.variability.qualified_name": "masd.variability.qualified_name"
+            "masd.variability.qualified_name": "masd.variability.qualified_name",
+            "masd.variability.is_optional": "true"
           }
         },
         {

@@ -36000,7 +36000,8 @@ it.
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=property
-#DOGEN masd.variability.qualified_name=masd.variability.archetype_location.backend#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.variability.archetype_location.backend
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -36028,7 +36029,8 @@ it.
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=property
-#DOGEN masd.variability.qualified_name=masd.variability.archetype_location.facet#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.variability.archetype_location.facet
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -36056,7 +36058,8 @@ it.
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=property
-#DOGEN masd.variability.qualified_name=masd.variability.archetype_location.archetype#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.variability.archetype_location.archetype
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -36145,7 +36148,8 @@ Should only be supplied for instance templates.
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=property
-#DOGEN masd.variability.qualified_name=masd.variability.qualified_name#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.variability.qualified_name
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
