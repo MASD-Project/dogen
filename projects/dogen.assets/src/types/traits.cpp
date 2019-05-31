@@ -122,20 +122,6 @@ std::string traits::orm::is_composite() {
     return r;
 }
 
-std::string traits::decoration::modeline::editor() {
-    static std::string r("masd.decoration.modeline.editor");
-    return r;
-}
-
-std::string traits::decoration::modeline::location() {
-    static std::string r("masd.decoration.modeline.location");
-    return r;
-}
-std::string traits::decoration::modeline::technical_space() {
-    static std::string r("masd.decoration.modeline.technical_space");
-    return r;
-}
-
 std::string traits::variability::binding_point() {
     static std::string r("masd.variability.binding_point");
     return r;

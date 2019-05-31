@@ -57,14 +57,6 @@ struct traits {
         static std::string is_composite();
     };
 
-    struct decoration {
-        struct modeline {
-            static std::string editor();
-            static std::string location();
-            static std::string technical_space();
-        };
-    };
-
     struct variability {
         static std::string binding_point();
         static std::string labels();
