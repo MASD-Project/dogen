@@ -45,18 +45,6 @@ struct traits {
     };
     static std::string enable_backend_directories();
 
-    struct orm {
-        static std::string database_system();
-        static std::string table_name();
-        static std::string schema_name();
-        static std::string is_primary_key();
-        static std::string column_name();
-        static std::string is_nullable();
-        static std::string letter_case();
-        static std::string type_override();
-        static std::string is_composite();
-    };
-
     struct variability {
         static std::string binding_point();
         static std::string labels();

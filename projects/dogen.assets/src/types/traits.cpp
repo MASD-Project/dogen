@@ -77,51 +77,6 @@ std::string traits::enable_backend_directories() {
     return r;
 }
 
-std::string traits::orm::database_system() {
-    static std::string r("masd.orm.database_system");
-    return r;
-}
-
-std::string traits::orm::table_name() {
-    static std::string r("masd.orm.table_name");
-    return r;
-}
-
-std::string traits::orm::schema_name() {
-    static std::string r("masd.orm.schema_name");
-    return r;
-}
-
-std::string traits::orm::is_primary_key() {
-    static std::string r("masd.orm.is_primary_key");
-    return r;
-}
-
-std::string traits::orm::column_name() {
-    static std::string r("masd.orm.column_name");
-    return r;
-}
-
-std::string traits::orm::is_nullable() {
-    static std::string r("masd.orm.is_nullable");
-    return r;
-}
-
-std::string traits::orm::letter_case() {
-    static std::string r("masd.orm.letter_case");
-    return r;
-}
-
-std::string traits::orm::type_override() {
-    static std::string r("masd.orm.type_override");
-    return r;
-}
-
-std::string traits::orm::is_composite() {
-    static std::string r("masd.orm.is_composite");
-    return r;
-}
-
 std::string traits::variability::binding_point() {
     static std::string r("masd.variability.binding_point");
     return r;

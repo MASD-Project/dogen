@@ -20,12 +20,14 @@
  */
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
+#include "dogen.assets/types/meta_model/orm/letter_case.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
-#include "dogen.variability/types/helpers/feature_selector.hpp"
-#include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.assets/types/traits.hpp"
+#include "dogen.assets/types/features/orm.hpp"
+#include "dogen.assets/lexical_cast/meta_model/orm/letter_case_lc.hpp"
+#include "dogen.assets/lexical_cast/meta_model/orm/database_system_lc.hpp"
 #include "dogen.assets/types/meta_model/structural/module.hpp"
 #include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.assets/types/meta_model/structural/builtin.hpp"
@@ -50,19 +52,6 @@ const std::string transform_id("assets.transforms.orm_transform");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
-const std::string mysql("mysql");
-const std::string postgresql("postgresql");
-const std::string oracle("oracle");
-const std::string sql_server("sqlserver");
-const std::string sqlite("sqlite");
-
-const std::string upper_case("upper_case");
-const std::string lower_case("lower_case");
-
-const std::string invalid_database_system(
-    "Database system is invalid or unsupported: ");
-const std::string invalid_letter_case(
-    "Letter case is invalid or unsupported: ");
 const std::string invalid_type_override("Invalid type override expression: ");
 const std::string duplicate_database_system(
     "Found more than one type override for database system: ");
@@ -71,48 +60,16 @@ const std::string duplicate_database_system(
 
 namespace dogen::assets::transforms {
 
-meta_model::orm::database_system orm_transform::
-to_orm_database_system(const std::string& s) {
-    using meta_model::orm::database_system;
-    const auto ls(boost::to_lower_copy(s));
-    if (ls == mysql) {
-        return database_system::mysql;
-    } else if (ls == postgresql) {
-        return database_system::postgresql;
-    } else if (ls == oracle) {
-        return database_system::oracle;
-    } else if (ls == sql_server) {
-        return database_system::sql_server;
-    } else if (ls == sqlite) {
-        return database_system::sqlite;
-    }
-
-    BOOST_LOG_SEV(lg, error) << invalid_database_system << s;
-    BOOST_THROW_EXCEPTION(transformation_error(invalid_database_system + s));
-}
-
 std::vector<meta_model::orm::database_system> orm_transform::
 to_orm_database_system(const std::list<std::string>& vs) {
-    std::vector<meta_model::orm::database_system> r;
+    using meta_model::orm::database_system;
+    std::vector<database_system> r;
     r.reserve(vs.size());
-    for (const auto& s : vs) {
-        r.push_back(to_orm_database_system(s));
-    }
+
+    for (const auto& s : vs)
+        r.push_back(boost::lexical_cast<database_system>(s));
+
     return r;
-}
-
-meta_model::orm::letter_case
-orm_transform::to_letter_case(const std::string& s) {
-    using meta_model::orm::letter_case;
-    const auto ls(boost::to_lower_copy(s));
-    if (ls == upper_case) {
-        return letter_case::upper_case;
-    } else if (ls == lower_case) {
-        return letter_case::lower_case;
-    }
-
-    BOOST_LOG_SEV(lg, error) << invalid_letter_case << s;
-    BOOST_THROW_EXCEPTION(transformation_error(invalid_letter_case + s));
 }
 
 std::unordered_map<meta_model::orm::database_system, std::string>
@@ -130,7 +87,8 @@ make_type_overrides(const std::list<std::string> ls) {
         }
 
         const auto ds(tokens.front());
-        const auto first(to_orm_database_system(ds));
+        using meta_model::orm::database_system;
+        const auto first(boost::lexical_cast<database_system>(ds));
         const auto second(tokens.back());
         const auto pair(std::make_pair(first, second));
         const auto inserted(r.insert(pair).second);
@@ -144,65 +102,29 @@ make_type_overrides(const std::list<std::string> ls) {
     return r;
 }
 
-orm_transform::feature_group orm_transform::
-make_feature_group(const variability::meta_model::feature_model& fm) {
-    feature_group r;
-    const variability::helpers::feature_selector s(fm);
-
-    const auto& ds(traits::orm::database_system());
-    r.database_system = s.get_by_name(ds);
-
-    const auto& tn(traits::orm::table_name());
-    r.table_name = s.get_by_name(tn);
-
-    const auto& sn(traits::orm::schema_name());
-    r.schema_name = s.get_by_name(sn);
-
-    const auto& ipk(traits::orm::is_primary_key());
-    r.is_primary_key = s.get_by_name(ipk);
-
-    const auto& cn(traits::orm::column_name());
-    r.column_name = s.get_by_name(cn);
-
-    const auto& in(traits::orm::is_nullable());
-    r.is_nullable = s.get_by_name(in);
-
-    const auto& lc(traits::orm::letter_case());
-    r.letter_case = s.get_by_name(lc);
-
-    const auto& to(traits::orm::type_override());
-    r.type_override = s.get_by_name(to);
-
-    const auto& ic(traits::orm::is_composite());
-    r.is_composite = s.get_by_name(ic);
-
-    return r;
-}
-
 boost::optional<meta_model::orm::model_properties>
-orm_transform::make_model_properties(const feature_group& fg,
+orm_transform::make_model_properties(const features::orm::feature_group& fg,
     const variability::meta_model::configuration& cfg) {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating model configuration.";
-    const variability::helpers::configuration_selector s(cfg);
+    const auto scfg(features::orm::make_static_configuration(fg, cfg));
     bool found_any(false);
 
     meta_model::orm::model_properties r;
-    if (s.has_configuration_point(fg.database_system)) {
+    if (!scfg.database_system.empty()) {
         found_any = true;
-        const auto ds(s.get_text_collection_content(fg.database_system));
-        r.database_systems(to_orm_database_system(ds));
+        r.database_systems(to_orm_database_system(scfg.database_system));
     }
 
-    if (s.has_configuration_point(fg.schema_name)) {
+    if (!scfg.schema_name.empty()) {
         found_any = true;
-        r.schema_name(s.get_text_content(fg.schema_name));
+        r.schema_name(scfg.schema_name);
     }
 
-    if (s.has_configuration_point(fg.letter_case)) {
+    if (!scfg.letter_case.empty()) {
         found_any = true;
-        const auto lc(s.get_text_content(fg.letter_case));
-        r.letter_case(to_letter_case(lc));
+        using meta_model::orm::letter_case;
+        r.letter_case(boost::lexical_cast<letter_case>(scfg.letter_case));
     }
 
     if (found_any) {
@@ -215,83 +137,78 @@ orm_transform::make_model_properties(const feature_group& fg,
 }
 
 void orm_transform::update_object_properties(
-    const feature_group& fg,
+    const features::orm::feature_group& fg,
     const variability::meta_model::configuration& cfg,
     meta_model::orm::object_properties& oop) {
 
-    const variability::helpers::configuration_selector s(cfg);
-    if (s.has_configuration_point(fg.schema_name))
-        oop.schema_name(s.get_text_content(fg.schema_name));
-
-    if (s.has_configuration_point(fg.table_name))
-        oop.table_name(s.get_text_content(fg.table_name));
+    const auto scfg(features::orm::make_static_configuration(fg, cfg));
+    oop.schema_name(scfg.schema_name);
+    oop.table_name(scfg.table_name);
 }
 
 boost::optional<meta_model::orm::attribute_properties>
-orm_transform::make_attribute_properties(const feature_group& fg,
+orm_transform::make_attribute_properties(const features::orm::feature_group& fg,
     const variability::meta_model::configuration& cfg) {
 
-    const variability::helpers::configuration_selector s(cfg);
     bool found_any(false);
-
-    meta_model::orm::attribute_properties r;
-    if (s.has_configuration_point(fg.column_name)) {
+    const auto scfg(features::orm::make_static_configuration(fg, cfg));
+    using meta_model::orm::attribute_properties;
+    attribute_properties r;
+    if (!scfg.column_name.empty()) {
         found_any = true;
-        r.column_name(s.get_text_content(fg.column_name));
+        r.column_name(scfg.column_name);
     }
 
-    if (s.has_configuration_point(fg.is_primary_key)) {
+    if (scfg.is_primary_key) {
         found_any = true;
-        r.is_primary_key(s.get_boolean_content(fg.is_primary_key));
+        r.is_primary_key(*scfg.is_primary_key);
     }
 
-    if (s.has_configuration_point(fg.is_nullable)) {
+    if (scfg.is_nullable) {
         found_any = true;
-        r.is_nullable(s.get_boolean_content(fg.is_nullable));
+        r.is_nullable(*scfg.is_nullable);
     }
 
-    if (s.has_configuration_point(fg.type_override)) {
+    if (!scfg.type_override.empty()) {
         found_any = true;
-        const auto to(s.get_text_collection_content(fg.type_override));
-        r.type_overrides(make_type_overrides(to));
+        r.type_overrides(make_type_overrides(scfg.type_override));
     }
 
-    if (s.has_configuration_point(fg.is_composite)) {
+    if (scfg.is_composite) {
         found_any = true;
-        r.is_composite(s.get_boolean_content(fg.is_composite));
+        r.is_composite(*scfg.is_composite);
     }
 
     if (found_any)
         return r;
 
-    return boost::optional<meta_model::orm::attribute_properties>();
+    return boost::optional<attribute_properties>();
 }
 
-void orm_transform::update_primitive_properties(const feature_group& fg,
+void orm_transform::update_primitive_properties(
+    const features::orm::feature_group& fg,
     const variability::meta_model::configuration& cfg,
     meta_model::orm::primitive_properties& opp) {
-
-    const variability::helpers::configuration_selector s(cfg);
-    if (s.has_configuration_point(fg.schema_name))
-        opp.schema_name(s.get_text_content(fg.schema_name));
+    const auto scfg(features::orm::make_static_configuration(fg, cfg));
+    opp.schema_name(scfg.schema_name);
 }
 
 boost::optional<meta_model::orm::module_properties>
-orm_transform::make_module_properties(const feature_group& fg,
+orm_transform::make_module_properties(const features::orm::feature_group& fg,
     const variability::meta_model::configuration& cfg) {
-    meta_model::orm::module_properties r;
-    const variability::helpers::configuration_selector s(cfg);
+    using meta_model::orm::module_properties;
 
-    if (s.has_configuration_point(fg.schema_name)) {
-        r.schema_name(s.get_text_content(fg.schema_name));
-        return r;
-    }
+    const auto scfg(features::orm::make_static_configuration(fg, cfg));
+    if (scfg.schema_name.empty())
+        return boost::optional<module_properties>();
 
-    return boost::optional<meta_model::orm::module_properties>();
+    module_properties r;
+    r.schema_name(scfg.schema_name);
+    return r;
 }
 
-void orm_transform::
-transform_objects(const feature_group& fg, meta_model::model& em) {
+void orm_transform::transform_objects(
+    const features::orm::feature_group& fg, meta_model::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Started transforming objects.";
 
     boost::optional<meta_model::orm::letter_case> lc;
@@ -344,8 +261,8 @@ transform_objects(const feature_group& fg, meta_model::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Finished transforming objects.";
 }
 
-void orm_transform::
-transform_object_templates(const feature_group& fg, meta_model::model& m) {
+void orm_transform::transform_object_templates(
+    const features::orm::feature_group& fg, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Started transforming object templates.";
 
     for (auto& pair : m.structural_elements().object_templates()) {
@@ -359,8 +276,8 @@ transform_object_templates(const feature_group& fg, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Finished transforming object templates.";
 }
 
-void orm_transform::
-transform_primitives(const feature_group& fg, meta_model::model& m) {
+void orm_transform::transform_primitives(
+    const features::orm::feature_group& fg, meta_model::model& m) {
 
     BOOST_LOG_SEV(lg, debug) << "Started transforming primitives.";
 
@@ -399,8 +316,8 @@ transform_primitives(const feature_group& fg, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Finished transforming primitives.";
 }
 
-void orm_transform::
-transform_modules(const feature_group& fg, meta_model::model& m) {
+void orm_transform::transform_modules(
+    const features::orm::feature_group& fg, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Started transforming modules.";
 
     for (auto& pair : m.structural_elements().modules()) {
@@ -473,7 +390,8 @@ void orm_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "orm transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    const auto fg(make_feature_group(*ctx.feature_model()));
+    const auto fm(*ctx.feature_model());
+    const auto fg(features::orm::make_feature_group(fm));
     const auto& rm(*m.root_module());
     m.orm_properties(make_model_properties(fg, *rm.configuration()));
 
