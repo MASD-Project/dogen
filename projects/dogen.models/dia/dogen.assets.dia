@@ -735,22 +735,22 @@ C++ pointers, references and so on.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O5">
       <dia:attribute name="obj_pos">
-        <dia:point val="-279,-94"/>
+        <dia:point val="-279,-95"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-279.05,-94.05;-249.945,-50.65"/>
+        <dia:rectangle val="-279.05,-95.05;-249.945,-50.85"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-279,-94"/>
+        <dia:point val="-279,-95"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="29.005000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="43.300000000000004"/>
+        <dia:real val="44.100000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -764,19 +764,20 @@ C++ pointers, references and so on.#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Coding is the core Dogen meta-model representing software entities.
+            <dia:string>#Assets is the core Dogen meta-model representing software entities.
 
 @section assets_0 Overview
 
 Assets is a meta-model that strives to provide a technical-space agnostic
 type representation, designed for code generation. Injection models
-are obtained via frontends and processed until they form a cohesive
-whole. They are then suitable to be sent down the pipeline for further
-processing.
+are obtained via frontends and transformed into "bare" asset models, at
+which point they can enter its pipeline. Within it, they are processed
+until they form a cohesive whole. They are then in a suitable state for
+code generation.
 
 @section asset_1 Mission
 
-Assets objectives are:
+The objectives of the assets model are:
 
 @li to represent all high-level entities that exist across a number
 of technical spaces used in software engineering. These entities
@@ -785,8 +786,8 @@ these form the core set of elements we're interested in. Additional
 entities such as build sytems and high-level patterns such as GoF
 and others are also captured.
 
-@li to provide the tooling required to combine multiple assets
-models together into a bigger model - called the @e merged model.
+@li to provide the tooling required to combine multiple models 
+together into a bigger model - called the @e merged model.
 
 @li to ensure the consistency of the merged model via validation
 rules (such as verifying that all types have a definitions,
@@ -825,7 +826,7 @@ etc.).
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-278.65,-92.755"/>
+            <dia:point val="-278.65,-93.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -5512,13 +5513,13 @@ names in assets element
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O39">
       <dia:attribute name="obj_pos">
-        <dia:point val="-278,-49"/>
+        <dia:point val="-279,-48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-278.05,-49.05;-259.74,-42.15"/>
+        <dia:rectangle val="-279.05,-48.05;-260.74,-41.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-278,-49"/>
+        <dia:point val="-279,-48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.210000000000001"/>
@@ -6695,13 +6696,13 @@ model.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O46">
       <dia:attribute name="obj_pos">
-        <dia:point val="-244,28"/>
+        <dia:point val="-244,23"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-244.05,27.95;-211.88,34.05"/>
+        <dia:rectangle val="-244.05,22.95;-211.88,29.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-244,28"/>
+        <dia:point val="-244,23"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="32.07"/>
@@ -9142,16 +9143,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O62">
       <dia:attribute name="obj_pos">
-        <dia:point val="-245,20"/>
+        <dia:point val="-245,16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-245.05,19.95;-223.26,23.35"/>
+        <dia:rectangle val="-245.05,15.95;-223.26,19.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-245,20"/>
+        <dia:point val="-245,16"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="21.690000000000001"/>
@@ -9182,7 +9183,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-244.65,21.245"/>
+            <dia:point val="-244.65,17.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -10828,13 +10829,13 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O74">
       <dia:attribute name="obj_pos">
-        <dia:point val="-244,36"/>
+        <dia:point val="-220,16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-244.05,35.95;-233.968,39.05"/>
+        <dia:rectangle val="-220.05,15.95;-209.968,19.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-244,36"/>
+        <dia:point val="-220,16"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="9.9824999999999999"/>

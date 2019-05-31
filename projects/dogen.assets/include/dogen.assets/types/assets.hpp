@@ -26,19 +26,20 @@
 #endif
 
 /**
- * @brief Coding is the core Dogen meta-model representing software entities.
+ * @brief Assets is the core Dogen meta-model representing software entities.
  *
  * @section assets_0 Overview
  *
  * Assets is a meta-model that strives to provide a technical-space agnostic
  * type representation, designed for code generation. Injection models
- * are obtained via frontends and processed until they form a cohesive
- * whole. They are then suitable to be sent down the pipeline for further
- * processing.
+ * are obtained via frontends and transformed into "bare" asset models, at
+ * which point they can enter its pipeline. Within it, they are processed
+ * until they form a cohesive whole. They are then in a suitable state for
+ * code generation.
  *
  * @section asset_1 Mission
  *
- * Assets objectives are:
+ * The objectives of the assets model are:
  *
  * @li to represent all high-level entities that exist across a number
  * of technical spaces used in software engineering. These entities
@@ -47,8 +48,8 @@
  * entities such as build sytems and high-level patterns such as GoF
  * and others are also captured.
  *
- * @li to provide the tooling required to combine multiple assets
- * models together into a bigger model - called the @e merged model.
+ * @li to provide the tooling required to combine multiple models
+ * together into a bigger model - called the @e merged model.
  *
  * @li to ensure the consistency of the merged model via validation
  * rules (such as verifying that all types have a definitions,
