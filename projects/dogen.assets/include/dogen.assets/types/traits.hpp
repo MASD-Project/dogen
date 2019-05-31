@@ -78,11 +78,6 @@ struct traits {
         static std::string generate_static_configuration();
         static std::string is_optional();
     };
-
-    struct mapping {
-        static std::string target();
-        static std::string destination();
-    };
 };
 
 }
