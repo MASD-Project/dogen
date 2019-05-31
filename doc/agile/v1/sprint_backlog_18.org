@@ -13,18 +13,18 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-31 Fri 12:03]
+#+CAPTION: Clock summary at [2019-05-31 Fri 13:22]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *47:49* |       |       | 100.0 |
+| *Total time*                                           | *48:00* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 47:49   |       |       | 100.0 |
-| Active                                                 |         | 47:49 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  3:37 |   7.6 |
-| Create a video demo for the previous sprint's features |         |       |  3:46 |   7.9 |
+| Stories                                                | 48:00   |       |       | 100.0 |
+| Active                                                 |         | 48:00 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  3:37 |   7.5 |
+| Create a video demo for the previous sprint's features |         |       |  3:46 |   7.8 |
 | Sprint and product backlog grooming                    |         |       |  3:02 |   6.3 |
-| Make wale templates meta-model elements                |         |       |  2:45 |   5.8 |
+| Make wale templates meta-model elements                |         |       |  2:45 |   5.7 |
 | Flatten the data directory                             |         |       |  1:11 |   2.5 |
 | Rename =dogen::cpp::header_only= stereotypes           |         |       |  0:15 |   0.5 |
 | Rename coding model                                    |         |       |  2:17 |   4.8 |
@@ -33,8 +33,8 @@
 | Move parent processing to injection                    |         |       |  2:06 |   4.4 |
 | Windows clang-cl release build is failing 4 tests      |         |       |  2:16 |   4.7 |
 | Fix issues with nightly build and CI                   |         |       |  0:04 |   0.1 |
-| Read variability papers                                |         |       |  0:56 |   2.0 |
-| Add code generation support to static configurations   |         |       | 23:24 |  48.9 |
+| Read variability papers                                |         |       |  0:56 |   1.9 |
+| Add code generation support to static configurations   |         |       | 23:35 |  49.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -445,17 +445,13 @@ point we reached the limitation on how much abstraction we can push
 down into injection. Therefore it is not possible to do this, given
 the current conceptual model.
 
-*** COMPLETED Windows clang-cl release build is failing 4 tests       :spike:
-    CLOSED: [2019-05-31 Fri 10:49]
+*** STARTED Windows clang-cl release build is failing 4 tests         :spike:
     :LOGBOOK:
     CLOCK: [2019-05-31 Fri 10:48]--[2019-05-31 Fri 10:53] =>  0:05
     CLOCK: [2019-05-31 Fri 08:46]--[2019-05-31 Fri 09:02] =>  0:16
     CLOCK: [2019-05-25 Sat 17:17]--[2019-05-25 Sat 17:54] =>  0:37
     CLOCK: [2019-05-25 Sat 15:58]--[2019-05-25 Sat 17:16] =>  1:18
     :END:
-
-*Rationale*: the errors appear to have gone away for now. We have
-noted down the likely changes.
 
 This has been going on for a fair bit, and we've ignored it so far but
 its a bit annoying. It also makes it likely that we break something
@@ -493,6 +489,8 @@ Notes:
   enumerations, primitives and parsing. Changes are between commits:
   - end: [[https://github.com/MASD-Project/dogen/commit/c629048f0c873f76f576200073ee647acbfbfcea][c629048f0c873f76f576200073ee647acbfbfcea]]
   - start: [[https://github.com/MASD-Project/dogen/commit/166110a944587b0dfb2a53794fd71b504da89065][166110a944587b0dfb2a53794fd71b504da89065]]
+- started again with next build. Its traffic lighting, but the pattern
+  is not yet obvious.
 
 *** STARTED Fix issues with nightly build and CI                      :story:
     :LOGBOOK:
@@ -513,6 +511,7 @@ Time spent reading the literature on variability.
 
 *** STARTED Add code generation support to static configurations      :story:
     :LOGBOOK:
+    CLOCK: [2019-05-31 Fri 13:11]--[2019-05-31 Fri 13:22] =>  0:11
     CLOCK: [2019-05-31 Fri 11:44]--[2019-05-31 Fri 12:03] =>  0:19
     CLOCK: [2019-05-31 Fri 11:35]--[2019-05-31 Fri 11:43] =>  0:08
     CLOCK: [2019-05-31 Fri 10:53]--[2019-05-31 Fri 11:34] =>  0:41

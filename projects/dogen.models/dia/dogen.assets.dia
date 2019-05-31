@@ -35344,7 +35344,8 @@ it.
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.orm.database_system#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.orm.database_system
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35372,7 +35373,8 @@ it.
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.orm.table_name#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.orm.table_name
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35400,7 +35402,8 @@ it.
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.orm.schema_name#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.orm.schema_name
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35428,7 +35431,8 @@ it.
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=property
-#DOGEN masd.variability.qualified_name=masd.orm.is_primary_key#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.orm.is_primary_key
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35456,7 +35460,8 @@ it.
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=property
-#DOGEN masd.variability.qualified_name=masd.orm.column_name#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.orm.column_name
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35484,7 +35489,8 @@ it.
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=property
-#DOGEN masd.variability.qualified_name=masd.orm.is_nullable#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.orm.is_nullable
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35512,7 +35518,8 @@ it.
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=property
-#DOGEN masd.variability.qualified_name=masd.orm.is_composite#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.orm.is_composite
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35540,7 +35547,8 @@ it.
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.orm.letter_case#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.orm.letter_case
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35568,7 +35576,8 @@ it.
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=property
-#DOGEN masd.variability.qualified_name=masd.orm.type_override#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.orm.type_override
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

@@ -27,6 +27,7 @@
 
 #include <list>
 #include <string>
+#include <boost/optional.hpp>
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
@@ -59,17 +60,12 @@ public:
         std::list<std::string> database_system;
         std::string table_name;
         std::string schema_name;
-        bool is_primary_key;
+        boost::optional<bool> is_primary_key;
         std::string column_name;
-        bool is_nullable;
-        bool is_composite;
+        boost::optional<bool> is_nullable;
+        boost::optional<bool> is_composite;
         std::string letter_case;
         std::list<std::string> type_override;
-
-        static_configuration() :
-            is_primary_key(),
-            is_nullable(),
-            is_composite() {}
     };
 
     static static_configuration make_static_configuration(
