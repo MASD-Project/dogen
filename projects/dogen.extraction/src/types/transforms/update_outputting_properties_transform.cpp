@@ -19,14 +19,9 @@
  *
  */
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.utility/types/filesystem/path.hpp"
-#include "dogen.utility/types/filesystem/file.hpp"
-#include "dogen.variability/types/helpers/feature_selector.hpp"
-#include "dogen.variability/types/helpers/configuration_selector.hpp"
-#include "dogen.archetypes/types/location_repository.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.extraction/types/traits.hpp"
 #include "dogen.extraction/io/meta_model/model_io.hpp"
+#include "dogen.extraction/types/features/filesystem.hpp"
 #include "dogen.extraction/types/transforms/update_outputting_properties_transform.hpp"
 
 namespace {
@@ -41,88 +36,29 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::extraction::transforms {
 
-update_outputting_properties_transform::feature_group
-update_outputting_properties_transform::make_feature_group(
-    const variability::meta_model::feature_model& fm) {
-
-    feature_group r;
-    const variability::helpers::feature_selector s(fm);
-
-    const auto fw(traits::extraction::force_write());
-    r.force_write = s.get_by_name(fw);
-
-    const auto def(traits::extraction::delete_extra_files());
-    r.delete_extra_files = s.get_by_name(def);
-
-    const auto ifmr(traits::extraction::ignore_files_matching_regex());
-    r.ignore_files_matching_regex = s.get_by_name(ifmr);
-
-    const auto ded(traits::extraction::delete_empty_directories());
-    r.delete_empty_directories = s.get_by_name(ded);
-
-    return r;
-}
-
-bool update_outputting_properties_transform::
-obtain_force_write(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
-    const variability::helpers::configuration_selector s(cfg);
-    return s.get_boolean_content_or_default(fg.force_write);
-}
-
-bool update_outputting_properties_transform::
-obtain_delete_extra_files(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
-    const variability::helpers::configuration_selector s(cfg);
-    return s.get_boolean_content_or_default(fg.delete_extra_files);
-}
-
-std::vector<std::string> update_outputting_properties_transform::
-obtain_ignore_files_matching_regex(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
-    const variability::helpers::configuration_selector s(cfg);
-
-    if (!s.has_configuration_point(fg.ignore_files_matching_regex))
-        return std::vector<std::string>();
-
-    const auto c(s.get_text_collection_content(fg.ignore_files_matching_regex));
-    std::vector<std::string> r;
-    r.reserve(c.size());
-    for (const auto& e : c)
-        r.push_back(e);
-    return r;
-}
-
-bool update_outputting_properties_transform::
-obtain_delete_empty_directories(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
-    const variability::helpers::configuration_selector s(cfg);
-    return s.get_boolean_content_or_default(fg.delete_empty_directories);
-}
-
-meta_model::outputting_properties
-update_outputting_properties_transform::make_outputting_properties(
-    const context& ctx, const variability::meta_model::configuration& cfg) {
-
-    const auto fg(make_feature_group(*ctx.feature_model()));
-    meta_model::outputting_properties r;
-    r.force_write(obtain_force_write(fg, cfg));
-    r.delete_extra_files(obtain_delete_extra_files(fg, cfg));
-    r.ignore_files_matching_regex(obtain_ignore_files_matching_regex(fg, cfg));
-    r.delete_empty_directories(obtain_delete_empty_directories(fg, cfg));
-
-    return r;
-}
-
 void update_outputting_properties_transform::
 apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "gather external artefacts transform", transform_id, m.name(),
         *ctx.tracer(), m);
 
-    const auto& cfg(*m.configuration());
-    const auto ep(make_outputting_properties(ctx, cfg));
-    m.outputting_properties(ep);
+    const auto fm(*ctx.feature_model());
+    const auto fg(features::filesystem::make_feature_group(fm));
+    const auto scfg(features::filesystem::make_static_configuration(fg, m));
+
+    auto& op(m.outputting_properties());
+    op.force_write(scfg.force_write);
+    op.delete_extra_files(scfg.delete_extra_files);
+    op.delete_empty_directories(scfg.delete_empty_directories);
+
+    if (!scfg.ignore_files_matching_regex.empty()) {
+        auto& ifmr(op.ignore_files_matching_regex());
+        const auto& c(scfg.ignore_files_matching_regex);
+
+        ifmr.reserve(c.size());
+        for (const auto& e : c)
+            ifmr.push_back(e);
+    }
 
     stp.end_transform(m);
 }
