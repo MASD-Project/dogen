@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen.extraction/types/traits.hpp"
 #include "dogen.extraction/types/extraction.hpp"
 #include "dogen.extraction/types/meta_model/model.hpp"
 #include "dogen.extraction/types/features/features.hpp"

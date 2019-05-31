@@ -28,13 +28,6 @@
   },
   "elements": [
     {
-      "name": "traits",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "meta_model",
       "documentation": "The extraction meta-model captures the entities required\nto transport information from the MASD technical space to\nexternal technical spaces.\n",
       "tagged_values": {
