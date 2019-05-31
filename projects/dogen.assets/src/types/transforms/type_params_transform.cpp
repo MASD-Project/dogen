@@ -43,9 +43,7 @@ void type_params_transform::populate_type_parameters(
     const features::type_parameters::feature_group& fg,
     meta_model::structural::object& o) {
     using features::type_parameters;
-
-    const auto& cfg(*o.configuration());
-    const auto scfg(type_parameters::make_static_configuration(fg, cfg));
+    const auto scfg(type_parameters::make_static_configuration(fg, o));
     auto& tp(o.type_parameters());
     tp.variable_number_of_parameters(scfg.variable_number_of_parameters);
     tp.count(static_cast<unsigned int>(scfg.count));

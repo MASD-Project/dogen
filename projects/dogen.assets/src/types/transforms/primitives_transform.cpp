@@ -126,9 +126,7 @@ void primitives_transform::apply(const context& ctx, meta_model::model& m) {
          * configuration.
          */
         auto& p(*pair.second);
-        const auto& cfg(*p.configuration());
-        const auto scfg(
-            features::primitive::make_static_configuration(fg, cfg));
+        const auto scfg(features::primitive::make_static_configuration(fg, p));
 
         /*
          * Update all properties.

@@ -45,8 +45,7 @@ void references_transform::apply(const context& ctx, meta_model::model& m) {
 
     const auto& fm(*ctx.feature_model());
     const auto fg(features::reference::make_feature_group(fm));
-    const auto cfg(*m.configuration());
-    const auto scfg(features::reference::make_static_configuration(fg, cfg));
+    const auto scfg(features::reference::make_static_configuration(fg, m));
     m.references(scfg.reference);
 
     stp.end_transform(m);

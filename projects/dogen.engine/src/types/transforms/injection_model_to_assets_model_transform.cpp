@@ -105,10 +105,9 @@ assets::meta_model::technical_space to_technical_space(const std::string& s) {
 assets::meta_model::location
 injection_model_to_assets_model_transform::
 create_location(const context& ctx, const injection::meta_model::model& m) {
-    const auto& cfg(*m.configuration());
     const auto& fm(*ctx.assets_context().feature_model());
     const auto fg(features::naming::make_feature_group(fm));
-    const auto scfg(features::naming::make_static_configuration(fg, cfg));
+    const auto scfg(features::naming::make_static_configuration(fg, m));
 
     assets::helpers::location_builder b;
     b.external_modules(scfg.external_modules);

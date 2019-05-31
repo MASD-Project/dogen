@@ -76,8 +76,7 @@ update_and_collect_parent_ids(const helpers::indices& idx,
          * Obtain the static configuration from the meta-data.
          */
         auto& o(*pair.second);
-        const auto& cfg(*o.configuration());
-        const auto scfg(generalization::make_static_configuration(fg, cfg));
+        const auto scfg(generalization::make_static_configuration(fg, o));
 
         /*
          * Populate is final requested directly. Note that we cannot

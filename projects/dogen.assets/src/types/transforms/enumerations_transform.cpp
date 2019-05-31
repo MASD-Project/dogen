@@ -69,14 +69,10 @@ void populate_enumeration(const features::enumeration::feature_group& fg,
     meta_model::structural::enumeration& e) {
 
     /*
-     * Create the static configuration from its dynamic counterpart.
+     * Create the static configuration from its dynamic counterpart
+     * and populate the trivial top-level flags.
      */
-    const auto& cfg(*e.configuration());
-    const auto scfg(features::enumeration::make_static_configuration(fg, cfg));
-
-    /*
-     * Start by populating the trivial top-level flags.
-     */
+    const auto scfg(features::enumeration::make_static_configuration(fg, e));
     e.use_implementation_defined_underlying_element(
         scfg.use_implementation_defined_underlying_element);
 
@@ -120,8 +116,7 @@ void populate_enumerator(const features::enumerator::feature_group &fg,
    * matching, populating the value for some enumerators but not
    * others.
    */
-  const auto &cfg(*e.configuration());
-  const auto scfg(features::enumerator::make_static_configuration(fg, cfg));
+  const auto scfg(features::enumerator::make_static_configuration(fg, e));
   if (scfg.value.empty())
     e.value(boost::lexical_cast<std::string>(position));
   else

@@ -44,12 +44,10 @@ apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "technical space transform",
         transform_id, m.name(), *ctx.tracer(), m);
 
-
     const auto& fm(*ctx.feature_model());
     using features::input_technical_space;
     const auto fg(input_technical_space::make_feature_group(fm));
-    const auto& cfg(*m.configuration());
-    const auto scfg(input_technical_space::make_static_configuration(fg, cfg));
+    const auto scfg(input_technical_space::make_static_configuration(fg, m));
     m.input_technical_space(scfg.input_technical_space);
 
     stp.end_transform(m);
