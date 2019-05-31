@@ -54,6 +54,11 @@ public:
         const feature_group& fg,
         const variability::meta_model::configuration& cfg);
 
+    template<typename Configurable>
+    static static_configuration make_static_configuration(
+        const feature_group& fg, const Configurable& c) {
+        return make_static_configuration(fg, *c.configuration());
+    }
 
 public:
     static std::list<dogen::variability::meta_model::feature_template>

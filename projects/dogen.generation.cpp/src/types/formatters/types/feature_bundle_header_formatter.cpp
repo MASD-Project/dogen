@@ -165,6 +165,11 @@ a.stream() << "    static static_configuration make_static_configuration(" << st
 a.stream() << "        const feature_group& fg," << std::endl;
 a.stream() << "        const variability::meta_model::configuration& cfg);" << std::endl;
 a.stream() << std::endl;
+a.stream() << "    template<typename Configurable>" << std::endl;
+a.stream() << "    static static_configuration make_static_configuration(" << std::endl;
+a.stream() << "        const feature_group& fg, const Configurable& c) {" << std::endl;
+a.stream() << "        return make_static_configuration(fg, *c.configuration());" << std::endl;
+a.stream() << "    }" << std::endl;
             }
 a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
