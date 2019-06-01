@@ -57,6 +57,7 @@ make_primary_inclusion_directive() {
 
     archetypes::location al;
     al.kernel("masd");
+    al.backend("masd.generation.cpp");
 
     r.location(al);
     return r;
@@ -74,6 +75,7 @@ make_secondary_inclusion_directive() {
 
     archetypes::location al;
     al.kernel("masd");
+    al.backend("masd.generation.cpp");
 
     r.location(al);
     return r;

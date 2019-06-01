@@ -5798,7 +5798,11 @@ assets types.#</dia:string>
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Feature group for name related features.#</dia:string>
+        <dia:string>#Feature group for name related features.
+
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.archetype_location.kernel=masd
+#DOGEN masd.variability.template_kind=instance#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5895,9 +5899,6 @@ assets types.#</dia:string>
 External modules contribute to the namespace of the model but not the model
 name.
 
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.qualified_name=masd.injection.external_modules
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
@@ -5926,9 +5927,6 @@ name.
 
 The model modules result in a top-level name separated by dots, e.g. a.b.c.
 
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.qualified_name=masd.injection.model_modules#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">

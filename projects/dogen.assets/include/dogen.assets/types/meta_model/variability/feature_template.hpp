@@ -27,13 +27,12 @@
 
 #include <string>
 #include <algorithm>
+#include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
-#include "dogen.archetypes/types/location.hpp"
 #include "dogen.assets/types/meta_model/name.hpp"
 #include "dogen.assets/types/meta_model/name_tree.hpp"
 #include "dogen.variability/types/meta_model/value_type.hpp"
 #include "dogen.variability/types/meta_model/binding_point.hpp"
-#include "dogen.variability/types/meta_model/template_kind.hpp"
 #include "dogen.variability/types/meta_model/configuration_fwd.hpp"
 
 namespace dogen::assets::meta_model::variability {
@@ -41,11 +40,13 @@ namespace dogen::assets::meta_model::variability {
 class feature_template final {
 public:
     feature_template(const feature_template&) = default;
-    feature_template(feature_template&&) = default;
     ~feature_template() = default;
 
 public:
     feature_template();
+
+public:
+    feature_template(feature_template&& rhs);
 
 public:
     feature_template(
@@ -59,9 +60,7 @@ public:
         const dogen::assets::meta_model::name_tree& parsed_type,
         const std::string& value,
         const dogen::variability::meta_model::value_type value_type,
-        const dogen::archetypes::location& location,
-        const dogen::variability::meta_model::binding_point binding_point,
-        const dogen::variability::meta_model::template_kind template_kind,
+        const boost::optional<dogen::variability::meta_model::binding_point>& binding_point,
         const bool is_optional,
         const bool requires_optionality);
 
@@ -171,29 +170,17 @@ public:
     /**@}*/
 
     /**
-     * @brief Archetype location coordinates for the feature template to expand into.
+     * @brief Override binding point for this feature template.
+     *
+     * If the default binding point is supplied for a bundle, the templates cannot
+     * supply individual binding points. Conversely, if not supplied, they must supply
+     * their individual binding points.
      */
     /**@{*/
-    const dogen::archetypes::location& location() const;
-    dogen::archetypes::location& location();
-    void location(const dogen::archetypes::location& v);
-    void location(const dogen::archetypes::location&& v);
-    /**@}*/
-
-    /**
-     * @brief Where the feature will bind when instantiated in a model.
-     */
-    /**@{*/
-    dogen::variability::meta_model::binding_point binding_point() const;
-    void binding_point(const dogen::variability::meta_model::binding_point v);
-    /**@}*/
-
-    /**
-     * @brief Kind of template expansion to perform for this feature template.
-     */
-    /**@{*/
-    dogen::variability::meta_model::template_kind template_kind() const;
-    void template_kind(const dogen::variability::meta_model::template_kind v);
+    const boost::optional<dogen::variability::meta_model::binding_point>& binding_point() const;
+    boost::optional<dogen::variability::meta_model::binding_point>& binding_point();
+    void binding_point(const boost::optional<dogen::variability::meta_model::binding_point>& v);
+    void binding_point(const boost::optional<dogen::variability::meta_model::binding_point>&& v);
     /**@}*/
 
     /**
@@ -235,9 +222,7 @@ private:
     dogen::assets::meta_model::name_tree parsed_type_;
     std::string value_;
     dogen::variability::meta_model::value_type value_type_;
-    dogen::archetypes::location location_;
-    dogen::variability::meta_model::binding_point binding_point_;
-    dogen::variability::meta_model::template_kind template_kind_;
+    boost::optional<dogen::variability::meta_model::binding_point> binding_point_;
     bool is_optional_;
     bool requires_optionality_;
 };

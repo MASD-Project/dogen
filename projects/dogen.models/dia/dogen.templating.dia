@@ -5609,7 +5609,11 @@
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Stitch templating features.
+
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.archetype_location.kernel=masd
+#DOGEN masd.variability.template_kind=instance#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5701,9 +5705,8 @@
             <dia:string>#"stream_"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global
+            <dia:string>#Which name to use for the variable with the stream.
+
 #DOGEN masd.variability.qualified_name=masd.stitch.stream_variable_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -5727,9 +5730,8 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global
+            <dia:string>#Relative path to the output directory.
+
 #DOGEN masd.variability.qualified_name=masd.stitch.relative_output_directory
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
@@ -5754,9 +5756,8 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global
+            <dia:string>#C++ Include header.
+
 #DOGEN masd.variability.qualified_name=masd.stitch.inclusion_dependency
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
@@ -5781,9 +5782,8 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global
+            <dia:string>#Namespaces that contain the class represented by the template.
+
 #DOGEN masd.variability.qualified_name=masd.stitch.containing_namespaces#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -5807,9 +5807,8 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global
+            <dia:string>#Name of the wale text template to instantiate, if any.
+
 #DOGEN masd.variability.qualified_name=masd.stitch.wale.text_template
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
@@ -5834,9 +5833,8 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global
+            <dia:string>#Array of wale KVPs to use in template instantiation.
+
 #DOGEN masd.variability.qualified_name=masd.stitch.wale.kvp
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>

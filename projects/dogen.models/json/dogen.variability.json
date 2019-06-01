@@ -919,6 +919,11 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "any",
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -926,9 +931,6 @@
           "type": "masd::variability::text",
           "documentation": "Profile associated with this configuration.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "any",
             "masd.variability.qualified_name": "masd.variability.profile"
           }
         }

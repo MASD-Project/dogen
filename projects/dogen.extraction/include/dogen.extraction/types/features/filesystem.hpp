@@ -34,6 +34,9 @@
 
 namespace dogen::extraction::features {
 
+/**
+ * @brief Features related to filesystem operations.
+ */
 class filesystem final {
 public:
     struct feature_group {

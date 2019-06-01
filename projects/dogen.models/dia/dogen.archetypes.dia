@@ -2246,7 +2246,12 @@ associated properties.#</dia:string>
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.variability.generate_static_configuration=false#</dia:string>
+        <dia:string>#Enablement related properties.
+
+#DOGEN masd.variability.default_binding_point=any
+#DOGEN masd.variability.generate_static_configuration=false
+#DOGEN masd.variability.archetype_location.kernel=masd
+#DOGEN masd.variability.template_kind=recursive_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2338,11 +2343,7 @@ associated properties.#</dia:string>
             <dia:string>#"true"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If true, decorations are enabled on this modeling element.
-
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=recursive_template
-#DOGEN masd.variability.binding_point=any#</dia:string>
+            <dia:string>#If true, decorations are enabled on this modeling element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

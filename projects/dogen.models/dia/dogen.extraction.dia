@@ -5919,7 +5919,11 @@ external technical spaces.
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Features related to filesystem operations.
+
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.archetype_location.kernel=masd
+#DOGEN masd.variability.template_kind=instance#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -6016,9 +6020,6 @@ external technical spaces.
 If false, the system will check to see if writing is needed by performing a binary
 diff. If no changes are detected, no writting is performed.
 
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.qualified_name=masd.extraction.force_write#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -6046,9 +6047,6 @@ diff. If no changes are detected, no writting is performed.
 
 If you'd like to skip the deletion of certain files, set  "ignore_files_matching_regex" accordingly.
 
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.qualified_name=masd.extraction.delete_extra_files#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -6076,9 +6074,6 @@ If you'd like to skip the deletion of certain files, set  "ignore_files_matching
 
 Only applicable if "delete_extra_files" is enabled.
 
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.qualified_name=masd.extraction.ignore_files_matching_regex
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
@@ -6108,9 +6103,6 @@ Only applicable if "delete_extra_files" is enabled.
 This setting is recursive: if a directory is composed of one or more directories that
 are themselves empty, the entire directory tree is deleted.
 
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.qualified_name=masd.extraction.delete_empty_directories#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -6139,9 +6131,6 @@ are themselves empty, the entire directory tree is deleted.
 Note that this setting is only relevant if you are targetting a single output technical
 space. If you are targetting more than one, it will automatically be set to true.
 
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.qualified_name=masd.extraction.enable_backend_directories#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">

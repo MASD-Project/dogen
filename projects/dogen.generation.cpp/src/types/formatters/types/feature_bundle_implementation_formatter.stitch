@@ -83,8 +83,8 @@ make_<#= fb_ft.identifiable_key() #>() {
 #>
     const auto vt(<#= enum_mapper::from_value_type(fb_ft.value_type()) #>);
     r.value_type(vt);
-    r.binding_point(<#= enum_mapper::from_binding_point(fb_ft.binding_point()) #>);
-    r.kind(<#= enum_mapper::from_template_kind(fb_ft.template_kind()) #>);
+    r.binding_point(<#= enum_mapper::from_binding_point(*fb_ft.binding_point()) #>);
+    r.kind(<#= enum_mapper::from_template_kind(fb.template_kind()) #>);
 <#+
     if (!fb_ft.value().empty()) {
 #>
@@ -96,21 +96,21 @@ make_<#= fb_ft.identifiable_key() #>() {
 
     archetypes::location al;
 <#+
-                if (!fb_ft.location().kernel().empty())
+                if (!fb.location().kernel().empty())
 #>
-    al.kernel("<#= fb_ft.location().kernel() #>");
+    al.kernel("<#= fb.location().kernel() #>");
 <#+
-                if (!fb_ft.location().backend().empty())
+                if (!fb.location().backend().empty())
 #>
-    al.backend("<#= fb_ft.location().backend() #>");
+    al.backend("<#= fb.location().backend() #>");
 <#+
-                if (!fb_ft.location().facet().empty())
+                if (!fb.location().facet().empty())
 #>
-    al.facet("<#= fb_ft.location().facet() #>");
+    al.facet("<#= fb.location().facet() #>");
 <#+
-                if (!fb_ft.location().archetype().empty())
+                if (!fb.location().archetype().empty())
 #>
-    al.archetype("<#= fb_ft.location().archetype() #>");
+    al.archetype("<#= fb.location().archetype() #>");
 
     r.location(al);
     return r;

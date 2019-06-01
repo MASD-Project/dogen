@@ -35,6 +35,9 @@
 
 namespace dogen::templating::stitch {
 
+/**
+ * @brief Stitch templating features.
+ */
 class features final {
 public:
     struct feature_group {

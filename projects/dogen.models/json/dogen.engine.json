@@ -254,6 +254,11 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "global",
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -261,9 +266,6 @@
           "type": "masd::variability::text",
           "documentation": "External modules containing this model.\n\nExternal modules contribute to the namespace of the model but not the model\nname.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global",
             "masd.variability.qualified_name": "masd.injection.external_modules",
             "masd.variability.is_optional": "true"
           }
@@ -273,9 +275,6 @@
           "type": "masd::variability::text",
           "documentation": "Model modules containing this model.\n\nThe model modules result in a top-level name separated by dots, e.g. a.b.c.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global",
             "masd.variability.qualified_name": "masd.injection.model_modules"
           }
         }

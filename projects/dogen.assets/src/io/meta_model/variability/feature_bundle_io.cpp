@@ -20,8 +20,11 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
+#include "dogen.archetypes/io/location_io.hpp"
 #include "dogen.assets/io/meta_model/name_io.hpp"
 #include "dogen.assets/io/meta_model/element_io.hpp"
+#include "dogen.variability/io/meta_model/binding_point_io.hpp"
+#include "dogen.variability/io/meta_model/template_kind_io.hpp"
 #include "dogen.assets/io/meta_model/variability/feature_bundle_io.hpp"
 #include "dogen.assets/io/meta_model/variability/feature_template_io.hpp"
 

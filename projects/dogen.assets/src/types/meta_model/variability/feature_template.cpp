@@ -34,10 +34,23 @@ namespace dogen::assets::meta_model::variability {
 
 feature_template::feature_template()
     : value_type_(static_cast<dogen::variability::meta_model::value_type>(0)),
-      binding_point_(static_cast<dogen::variability::meta_model::binding_point>(0)),
-      template_kind_(static_cast<dogen::variability::meta_model::template_kind>(0)),
       is_optional_(static_cast<bool>(0)),
       requires_optionality_(static_cast<bool>(0)) { }
+
+feature_template::feature_template(feature_template&& rhs)
+    : documentation_(std::move(rhs.documentation_)),
+      configuration_(std::move(rhs.configuration_)),
+      name_(std::move(rhs.name_)),
+      key_(std::move(rhs.key_)),
+      identifiable_key_(std::move(rhs.identifiable_key_)),
+      unparsed_type_(std::move(rhs.unparsed_type_)),
+      mapped_type_(std::move(rhs.mapped_type_)),
+      parsed_type_(std::move(rhs.parsed_type_)),
+      value_(std::move(rhs.value_)),
+      value_type_(std::move(rhs.value_type_)),
+      binding_point_(std::move(rhs.binding_point_)),
+      is_optional_(std::move(rhs.is_optional_)),
+      requires_optionality_(std::move(rhs.requires_optionality_)) { }
 
 feature_template::feature_template(
     const std::string& documentation,
@@ -50,9 +63,7 @@ feature_template::feature_template(
     const dogen::assets::meta_model::name_tree& parsed_type,
     const std::string& value,
     const dogen::variability::meta_model::value_type value_type,
-    const dogen::archetypes::location& location,
-    const dogen::variability::meta_model::binding_point binding_point,
-    const dogen::variability::meta_model::template_kind template_kind,
+    const boost::optional<dogen::variability::meta_model::binding_point>& binding_point,
     const bool is_optional,
     const bool requires_optionality)
     : documentation_(documentation),
@@ -65,9 +76,7 @@ feature_template::feature_template(
       parsed_type_(parsed_type),
       value_(value),
       value_type_(value_type),
-      location_(location),
       binding_point_(binding_point),
-      template_kind_(template_kind),
       is_optional_(is_optional),
       requires_optionality_(requires_optionality) { }
 
@@ -83,9 +92,7 @@ void feature_template::swap(feature_template& other) noexcept {
     swap(parsed_type_, other.parsed_type_);
     swap(value_, other.value_);
     swap(value_type_, other.value_type_);
-    swap(location_, other.location_);
     swap(binding_point_, other.binding_point_);
-    swap(template_kind_, other.template_kind_);
     swap(is_optional_, other.is_optional_);
     swap(requires_optionality_, other.requires_optionality_);
 }
@@ -101,9 +108,7 @@ bool feature_template::operator==(const feature_template& rhs) const {
         parsed_type_ == rhs.parsed_type_ &&
         value_ == rhs.value_ &&
         value_type_ == rhs.value_type_ &&
-        location_ == rhs.location_ &&
         binding_point_ == rhs.binding_point_ &&
-        template_kind_ == rhs.template_kind_ &&
         is_optional_ == rhs.is_optional_ &&
         requires_optionality_ == rhs.requires_optionality_;
 }
@@ -266,36 +271,20 @@ void feature_template::value_type(const dogen::variability::meta_model::value_ty
     value_type_ = v;
 }
 
-const dogen::archetypes::location& feature_template::location() const {
-    return location_;
-}
-
-dogen::archetypes::location& feature_template::location() {
-    return location_;
-}
-
-void feature_template::location(const dogen::archetypes::location& v) {
-    location_ = v;
-}
-
-void feature_template::location(const dogen::archetypes::location&& v) {
-    location_ = std::move(v);
-}
-
-dogen::variability::meta_model::binding_point feature_template::binding_point() const {
+const boost::optional<dogen::variability::meta_model::binding_point>& feature_template::binding_point() const {
     return binding_point_;
 }
 
-void feature_template::binding_point(const dogen::variability::meta_model::binding_point v) {
+boost::optional<dogen::variability::meta_model::binding_point>& feature_template::binding_point() {
+    return binding_point_;
+}
+
+void feature_template::binding_point(const boost::optional<dogen::variability::meta_model::binding_point>& v) {
     binding_point_ = v;
 }
 
-dogen::variability::meta_model::template_kind feature_template::template_kind() const {
-    return template_kind_;
-}
-
-void feature_template::template_kind(const dogen::variability::meta_model::template_kind v) {
-    template_kind_ = v;
+void feature_template::binding_point(const boost::optional<dogen::variability::meta_model::binding_point>&& v) {
+    binding_point_ = std::move(v);
 }
 
 bool feature_template::is_optional() const {

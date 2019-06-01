@@ -30,6 +30,9 @@
 
 namespace dogen::archetypes::features {
 
+/**
+ * @brief Enablement related properties.
+ */
 class enablement final {
 
 public:

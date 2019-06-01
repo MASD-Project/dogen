@@ -26,6 +26,7 @@
 #endif
 
 #include <list>
+#include <string>
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
@@ -40,6 +41,12 @@ class variability_bundle final {
 public:
     struct feature_group {
         variability::meta_model::feature generate_static_configuration;
+        variability::meta_model::feature kernel;
+        variability::meta_model::feature backend;
+        variability::meta_model::feature facet;
+        variability::meta_model::feature archetype;
+        variability::meta_model::feature template_kind;
+        variability::meta_model::feature default_binding_point;
     };
 
     static feature_group
@@ -48,6 +55,12 @@ public:
 public:
     struct static_configuration {
         bool generate_static_configuration;
+        std::string kernel;
+        std::string backend;
+        std::string facet;
+        std::string archetype;
+        std::string template_kind;
+        std::string default_binding_point;
 
         static_configuration() :
             generate_static_configuration() {}

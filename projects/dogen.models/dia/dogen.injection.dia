@@ -6198,7 +6198,11 @@ and, if so, ignore it.#</dia:string>
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Feature bundle for the input technical space.#</dia:string>
+        <dia:string>#Feature bundle for the input technical space.
+
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.archetype_location.kernel=masd
+#DOGEN masd.variability.template_kind=instance#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -6292,9 +6296,6 @@ and, if so, ignore it.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#Input technical space for this model.
 
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.qualified_name=masd.injection.input_technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -6393,7 +6394,11 @@ the injection model.
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Features related to model referencing.
+
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.archetype_location.kernel=masd
+#DOGEN masd.variability.template_kind=instance#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -6487,9 +6492,6 @@ the injection model.
           <dia:attribute name="comment">
             <dia:string>#Imports an external model.
 
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.qualified_name=masd.injection.reference
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
@@ -6647,7 +6649,10 @@ the injection model.
       <dia:attribute name="comment">
         <dia:string>#Features related to all UML injectors.
 
-#DOGEN masd.variability.generate_static_configuration=false#</dia:string>
+#DOGEN masd.variability.default_binding_point=any
+#DOGEN masd.variability.generate_static_configuration=false
+#DOGEN masd.variability.archetype_location.kernel=masd
+#DOGEN masd.variability.template_kind=instance#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -6743,9 +6748,6 @@ the injection model.
 
 If the containing package is the model itself, it is linked to the model's module.
 
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=any
 #DOGEN masd.variability.qualified_name=masd.injection.dia.comment#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">

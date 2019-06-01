@@ -31,6 +31,7 @@
 #include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
 #include "dogen.generation/types/meta_model/model.hpp"
+#include "dogen.generation/types/features/formatting.hpp"
 #include "dogen.assets/types/meta_model/formatting_styles.hpp"
 #include "dogen.generation/types/transforms/formatting_configuration.hpp"
 

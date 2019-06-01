@@ -136,22 +136,22 @@ a.stream() << "    r.name().qualified(\"" << fb_ft.key() << "\");" << std::endl;
                }
 a.stream() << "    const auto vt(" << enum_mapper::from_value_type(fb_ft.value_type()) << ");" << std::endl;
 a.stream() << "    r.value_type(vt);" << std::endl;
-a.stream() << "    r.binding_point(" << enum_mapper::from_binding_point(fb_ft.binding_point()) << ");" << std::endl;
-a.stream() << "    r.kind(" << enum_mapper::from_template_kind(fb_ft.template_kind()) << ");" << std::endl;
+a.stream() << "    r.binding_point(" << enum_mapper::from_binding_point(*fb_ft.binding_point()) << ");" << std::endl;
+a.stream() << "    r.kind(" << enum_mapper::from_template_kind(fb.template_kind()) << ");" << std::endl;
     if (!fb_ft.value().empty()) {
 a.stream() << "    dogen::variability::helpers::value_factory f;" << std::endl;
 a.stream() << "    r.default_value(f.make(vt, std::list<std::string>{ " << fb_ft.value() << " }));" << std::endl;
     }
 a.stream() << std::endl;
 a.stream() << "    archetypes::location al;" << std::endl;
-                if (!fb_ft.location().kernel().empty())
-a.stream() << "    al.kernel(\"" << fb_ft.location().kernel() << "\");" << std::endl;
-                if (!fb_ft.location().backend().empty())
-a.stream() << "    al.backend(\"" << fb_ft.location().backend() << "\");" << std::endl;
-                if (!fb_ft.location().facet().empty())
-a.stream() << "    al.facet(\"" << fb_ft.location().facet() << "\");" << std::endl;
-                if (!fb_ft.location().archetype().empty())
-a.stream() << "    al.archetype(\"" << fb_ft.location().archetype() << "\");" << std::endl;
+                if (!fb.location().kernel().empty())
+a.stream() << "    al.kernel(\"" << fb.location().kernel() << "\");" << std::endl;
+                if (!fb.location().backend().empty())
+a.stream() << "    al.backend(\"" << fb.location().backend() << "\");" << std::endl;
+                if (!fb.location().facet().empty())
+a.stream() << "    al.facet(\"" << fb.location().facet() << "\");" << std::endl;
+                if (!fb.location().archetype().empty())
+a.stream() << "    al.archetype(\"" << fb.location().archetype() << "\");" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    r.location(al);" << std::endl;
 a.stream() << "    return r;" << std::endl;

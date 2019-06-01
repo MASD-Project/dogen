@@ -16156,7 +16156,9 @@ code: identation and dividers.#</dia:string>
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN masd.variability.default_binding_point=any
+#DOGEN masd.variability.archetype_location.kernel=masd
+#DOGEN masd.variability.template_kind=instance#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16250,9 +16252,6 @@ code: identation and dividers.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#If true, decorations are enabled on this modeling element.
 
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=any
 #DOGEN masd.variability.qualified_name=masd.generation.decoration.enabled
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
@@ -16279,9 +16278,6 @@ code: identation and dividers.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#Copyright notices for this modeling element.
 
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=any
 #DOGEN masd.variability.qualified_name=masd.generation.decoration.copyright_notice
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
@@ -16308,9 +16304,6 @@ code: identation and dividers.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#Name of the licence to use for this modeling element.
 
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=any
 #DOGEN masd.variability.qualified_name=masd.generation.decoration.licence_name
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
@@ -16337,9 +16330,6 @@ code: identation and dividers.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#Name of the modeline group for this modeling element.
 
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=any
 #DOGEN masd.variability.qualified_name=masd.generation.decoration.modeline_group_name
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
@@ -16366,9 +16356,6 @@ code: identation and dividers.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#Name of the decoration marker to use for this modeling element.
 
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=any
 #DOGEN masd.variability.qualified_name=masd.generation.decoration.marker_name
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
@@ -16503,13 +16490,13 @@ code: identation and dividers.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O117">
       <dia:attribute name="obj_pos">
-        <dia:point val="243,145"/>
+        <dia:point val="243.071,145"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="242.95,144.95;259.72,149.45"/>
+        <dia:rectangle val="243.021,144.95;259.791,149.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="243,145"/>
+        <dia:point val="243.071,145"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.669999999999998"/>
@@ -16524,7 +16511,11 @@ code: identation and dividers.#</dia:string>
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Features related to formatting.#</dia:string>
+        <dia:string>#Features related to formatting.
+
+#DOGEN masd.variability.default_binding_point=any
+#DOGEN masd.variability.archetype_location.kernel=masd
+#DOGEN masd.variability.template_kind=archetype_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16616,11 +16607,7 @@ code: identation and dividers.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Style of formatting to use for this archetype.
-
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=archetype_template
-#DOGEN masd.variability.binding_point=any#</dia:string>
+            <dia:string>#Style of formatting to use for this archetype.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16643,11 +16630,7 @@ code: identation and dividers.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If the formatting style requires a template, the name of the template to use.
-
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=archetype_template
-#DOGEN masd.variability.binding_point=any#</dia:string>
+            <dia:string>#If the formatting style requires a template, the name of the template to use.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

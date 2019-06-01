@@ -21,13 +21,11 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.archetypes/io/location_io.hpp"
 #include "dogen.assets/io/meta_model/name_io.hpp"
 #include "dogen.assets/io/meta_model/name_tree_io.hpp"
 #include "dogen.variability/io/meta_model/value_type_io.hpp"
 #include "dogen.variability/io/meta_model/binding_point_io.hpp"
 #include "dogen.variability/io/meta_model/configuration_io.hpp"
-#include "dogen.variability/io/meta_model/template_kind_io.hpp"
 #include "dogen.assets/io/meta_model/variability/feature_template_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -43,6 +41,21 @@ namespace boost {
 inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::variability::meta_model::configuration>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::variability::meta_model::binding_point>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
         s << "\"data\": " << *v;
@@ -75,9 +88,7 @@ std::ostream& operator<<(std::ostream& s, const feature_template& v) {
       << "\"parsed_type\": " << v.parsed_type() << ", "
       << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\"" << ", "
       << "\"value_type\": " << v.value_type() << ", "
-      << "\"location\": " << v.location() << ", "
       << "\"binding_point\": " << v.binding_point() << ", "
-      << "\"template_kind\": " << v.template_kind() << ", "
       << "\"is_optional\": " << v.is_optional() << ", "
       << "\"requires_optionality\": " << v.requires_optionality()
       << " }";

@@ -16031,7 +16031,11 @@ alias.#</dia:string>
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Features related to profile processing.#</dia:string>
+        <dia:string>#Features related to profile processing.
+
+#DOGEN masd.variability.default_binding_point=any
+#DOGEN masd.variability.archetype_location.kernel=masd
+#DOGEN masd.variability.template_kind=instance#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -16125,9 +16129,6 @@ alias.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#Profile associated with this configuration.
 
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance
-#DOGEN masd.variability.binding_point=any
 #DOGEN masd.variability.qualified_name=masd.variability.profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">

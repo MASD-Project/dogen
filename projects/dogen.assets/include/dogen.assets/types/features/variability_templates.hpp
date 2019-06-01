@@ -42,11 +42,6 @@ public:
     struct feature_group {
         variability::meta_model::feature binding_point;
         variability::meta_model::feature labels;
-        variability::meta_model::feature kernel;
-        variability::meta_model::feature backend;
-        variability::meta_model::feature facet;
-        variability::meta_model::feature archetype;
-        variability::meta_model::feature template_kind;
         variability::meta_model::feature value;
         variability::meta_model::feature qualified_name;
         variability::meta_model::feature is_optional;
@@ -59,11 +54,6 @@ public:
     struct static_configuration {
         std::string binding_point;
         std::list<std::string> labels;
-        std::string kernel;
-        std::string backend;
-        std::string facet;
-        std::string archetype;
-        std::string template_kind;
         std::list<std::string> value;
         std::string qualified_name;
         bool is_optional;

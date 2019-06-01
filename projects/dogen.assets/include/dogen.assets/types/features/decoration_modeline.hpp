@@ -34,6 +34,9 @@
 
 namespace dogen::assets::features {
 
+/**
+ * @brief Modeline properties.
+ */
 class decoration_modeline final {
 public:
     struct feature_group {

@@ -28,8 +28,12 @@
 #include <list>
 #include <iosfwd>
 #include <algorithm>
+#include <boost/optional.hpp>
+#include "dogen.archetypes/types/location.hpp"
 #include "dogen.assets/types/meta_model/name.hpp"
 #include "dogen.assets/types/meta_model/element.hpp"
+#include "dogen.variability/types/meta_model/binding_point.hpp"
+#include "dogen.variability/types/meta_model/template_kind.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_template.hpp"
 
 namespace dogen::assets::meta_model::variability {
@@ -47,12 +51,14 @@ namespace dogen::assets::meta_model::variability {
 class feature_bundle final : public dogen::assets::meta_model::element {
 public:
     feature_bundle(const feature_bundle&) = default;
-    feature_bundle(feature_bundle&&) = default;
 
 public:
     feature_bundle();
 
     virtual ~feature_bundle() noexcept { }
+
+public:
+    feature_bundle(feature_bundle&& rhs);
 
 public:
     feature_bundle(
@@ -75,7 +81,10 @@ public:
         const std::list<dogen::assets::meta_model::name>& associative_container_keys,
         const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates,
         const bool generate_static_configuration,
-        const bool requires_manual_default_constructor);
+        const bool requires_manual_default_constructor,
+        const dogen::variability::meta_model::template_kind template_kind,
+        const dogen::archetypes::location& location,
+        const boost::optional<dogen::variability::meta_model::binding_point>& default_binding_point);
 
 public:
     using element::accept;
@@ -148,6 +157,39 @@ public:
     void requires_manual_default_constructor(const bool v);
     /**@}*/
 
+    /**
+     * @brief Kind of template expansion to perform for this feature template.
+     */
+    /**@{*/
+    dogen::variability::meta_model::template_kind template_kind() const;
+    void template_kind(const dogen::variability::meta_model::template_kind v);
+    /**@}*/
+
+    /**
+     * @brief Archetype location coordinates for the feature template to expand into.
+     */
+    /**@{*/
+    const dogen::archetypes::location& location() const;
+    dogen::archetypes::location& location();
+    void location(const dogen::archetypes::location& v);
+    void location(const dogen::archetypes::location&& v);
+    /**@}*/
+
+    /**
+     * @brief Default binding point for all feature templates in this bundle.
+     *
+     * The binding point indicates where the feature will bind when instantiated in a
+     * model. If the default binding point is supplied for a bundle, the templates cannot
+     * supply individual binding points. Conversely, if not supplied, they must supply
+     * their individual binding points.
+     */
+    /**@{*/
+    const boost::optional<dogen::variability::meta_model::binding_point>& default_binding_point() const;
+    boost::optional<dogen::variability::meta_model::binding_point>& default_binding_point();
+    void default_binding_point(const boost::optional<dogen::variability::meta_model::binding_point>& v);
+    void default_binding_point(const boost::optional<dogen::variability::meta_model::binding_point>&& v);
+    /**@}*/
+
 public:
     bool operator==(const feature_bundle& rhs) const;
     bool operator!=(const feature_bundle& rhs) const {
@@ -168,6 +210,9 @@ private:
     std::list<dogen::assets::meta_model::variability::feature_template> feature_templates_;
     bool generate_static_configuration_;
     bool requires_manual_default_constructor_;
+    dogen::variability::meta_model::template_kind template_kind_;
+    dogen::archetypes::location location_;
+    boost::optional<dogen::variability::meta_model::binding_point> default_binding_point_;
 };
 
 }

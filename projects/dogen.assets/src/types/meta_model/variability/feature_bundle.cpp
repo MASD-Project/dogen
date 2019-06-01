@@ -20,9 +20,12 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
+#include "dogen.archetypes/io/location_io.hpp"
 #include "dogen.assets/io/meta_model/name_io.hpp"
 #include "dogen.assets/io/meta_model/element_io.hpp"
 #include "dogen.assets/types/meta_model/element_visitor.hpp"
+#include "dogen.variability/io/meta_model/binding_point_io.hpp"
+#include "dogen.variability/io/meta_model/template_kind_io.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
 #include "dogen.assets/io/meta_model/variability/feature_template_io.hpp"
 
@@ -54,11 +57,40 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::variability::meta_model::binding_point>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace dogen::assets::meta_model::variability {
 
 feature_bundle::feature_bundle()
     : generate_static_configuration_(static_cast<bool>(0)),
-      requires_manual_default_constructor_(static_cast<bool>(0)) { }
+      requires_manual_default_constructor_(static_cast<bool>(0)),
+      template_kind_(static_cast<dogen::variability::meta_model::template_kind>(0)) { }
+
+feature_bundle::feature_bundle(feature_bundle&& rhs)
+    : dogen::assets::meta_model::element(
+        std::forward<dogen::assets::meta_model::element>(rhs)),
+      transparent_associations_(std::move(rhs.transparent_associations_)),
+      opaque_associations_(std::move(rhs.opaque_associations_)),
+      associative_container_keys_(std::move(rhs.associative_container_keys_)),
+      feature_templates_(std::move(rhs.feature_templates_)),
+      generate_static_configuration_(std::move(rhs.generate_static_configuration_)),
+      requires_manual_default_constructor_(std::move(rhs.requires_manual_default_constructor_)),
+      template_kind_(std::move(rhs.template_kind_)),
+      location_(std::move(rhs.location_)),
+      default_binding_point_(std::move(rhs.default_binding_point_)) { }
 
 feature_bundle::feature_bundle(
     const dogen::assets::meta_model::name& name,
@@ -80,7 +112,10 @@ feature_bundle::feature_bundle(
     const std::list<dogen::assets::meta_model::name>& associative_container_keys,
     const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates,
     const bool generate_static_configuration,
-    const bool requires_manual_default_constructor)
+    const bool requires_manual_default_constructor,
+    const dogen::variability::meta_model::template_kind template_kind,
+    const dogen::archetypes::location& location,
+    const boost::optional<dogen::variability::meta_model::binding_point>& default_binding_point)
     : dogen::assets::meta_model::element(
       name,
       documentation,
@@ -101,7 +136,10 @@ feature_bundle::feature_bundle(
       associative_container_keys_(associative_container_keys),
       feature_templates_(feature_templates),
       generate_static_configuration_(generate_static_configuration),
-      requires_manual_default_constructor_(requires_manual_default_constructor) { }
+      requires_manual_default_constructor_(requires_manual_default_constructor),
+      template_kind_(template_kind),
+      location_(location),
+      default_binding_point_(default_binding_point) { }
 
 void feature_bundle::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -136,7 +174,10 @@ void feature_bundle::to_stream(std::ostream& s) const {
       << "\"associative_container_keys\": " << associative_container_keys_ << ", "
       << "\"feature_templates\": " << feature_templates_ << ", "
       << "\"generate_static_configuration\": " << generate_static_configuration_ << ", "
-      << "\"requires_manual_default_constructor\": " << requires_manual_default_constructor_
+      << "\"requires_manual_default_constructor\": " << requires_manual_default_constructor_ << ", "
+      << "\"template_kind\": " << template_kind_ << ", "
+      << "\"location\": " << location_ << ", "
+      << "\"default_binding_point\": " << default_binding_point_
       << " }";
 }
 
@@ -150,6 +191,9 @@ void feature_bundle::swap(feature_bundle& other) noexcept {
     swap(feature_templates_, other.feature_templates_);
     swap(generate_static_configuration_, other.generate_static_configuration_);
     swap(requires_manual_default_constructor_, other.requires_manual_default_constructor_);
+    swap(template_kind_, other.template_kind_);
+    swap(location_, other.location_);
+    swap(default_binding_point_, other.default_binding_point_);
 }
 
 bool feature_bundle::equals(const dogen::assets::meta_model::element& other) const {
@@ -165,7 +209,10 @@ bool feature_bundle::operator==(const feature_bundle& rhs) const {
         associative_container_keys_ == rhs.associative_container_keys_ &&
         feature_templates_ == rhs.feature_templates_ &&
         generate_static_configuration_ == rhs.generate_static_configuration_ &&
-        requires_manual_default_constructor_ == rhs.requires_manual_default_constructor_;
+        requires_manual_default_constructor_ == rhs.requires_manual_default_constructor_ &&
+        template_kind_ == rhs.template_kind_ &&
+        location_ == rhs.location_ &&
+        default_binding_point_ == rhs.default_binding_point_;
 }
 
 feature_bundle& feature_bundle::operator=(feature_bundle other) {
@@ -252,6 +299,46 @@ bool feature_bundle::requires_manual_default_constructor() const {
 
 void feature_bundle::requires_manual_default_constructor(const bool v) {
     requires_manual_default_constructor_ = v;
+}
+
+dogen::variability::meta_model::template_kind feature_bundle::template_kind() const {
+    return template_kind_;
+}
+
+void feature_bundle::template_kind(const dogen::variability::meta_model::template_kind v) {
+    template_kind_ = v;
+}
+
+const dogen::archetypes::location& feature_bundle::location() const {
+    return location_;
+}
+
+dogen::archetypes::location& feature_bundle::location() {
+    return location_;
+}
+
+void feature_bundle::location(const dogen::archetypes::location& v) {
+    location_ = v;
+}
+
+void feature_bundle::location(const dogen::archetypes::location&& v) {
+    location_ = std::move(v);
+}
+
+const boost::optional<dogen::variability::meta_model::binding_point>& feature_bundle::default_binding_point() const {
+    return default_binding_point_;
+}
+
+boost::optional<dogen::variability::meta_model::binding_point>& feature_bundle::default_binding_point() {
+    return default_binding_point_;
+}
+
+void feature_bundle::default_binding_point(const boost::optional<dogen::variability::meta_model::binding_point>& v) {
+    default_binding_point_ = v;
+}
+
+void feature_bundle::default_binding_point(const boost::optional<dogen::variability::meta_model::binding_point>&& v) {
+    default_binding_point_ = std::move(v);
 }
 
 }

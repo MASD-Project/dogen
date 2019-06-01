@@ -366,6 +366,11 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "global",
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -374,9 +379,6 @@
           "value": "\"agnostic\"",
           "documentation": "Input technical space for this model.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global",
             "masd.variability.qualified_name": "masd.injection.input_technical_space"
           }
         }
@@ -384,9 +386,15 @@
     },
     {
       "name": "features::reference",
+      "documentation": "Features related to model referencing.\n",
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "global",
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -394,9 +402,6 @@
           "type": "masd::variability::text_collection",
           "documentation": "Imports an external model.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global",
             "masd.variability.qualified_name": "masd.injection.reference",
             "masd.variability.is_optional": "true"
           }
@@ -417,7 +422,10 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.generate_static_configuration": "false"
+        "masd.variability.default_binding_point": "any",
+        "masd.variability.generate_static_configuration": "false",
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -426,9 +434,6 @@
           "type": "masd::variability::boolean",
           "documentation": "If true, the UML comment is linked to the containing package.\n\nIf the containing package is the model itself, it is linked to the model's module.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "any",
             "masd.variability.qualified_name": "masd.injection.dia.comment"
           }
         }

@@ -18,8 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.archetypes/test_data/location_td.hpp"
 #include "dogen.assets/test_data/meta_model/name_td.hpp"
 #include "dogen.assets/test_data/meta_model/element_td.hpp"
+#include "dogen.variability/test_data/meta_model/binding_point_td.hpp"
+#include "dogen.variability/test_data/meta_model/template_kind_td.hpp"
 #include "dogen.assets/test_data/meta_model/variability/feature_bundle_td.hpp"
 #include "dogen.assets/test_data/meta_model/variability/feature_template_td.hpp"
 
@@ -55,6 +58,28 @@ bool create_bool(const unsigned int position) {
     return (position % 2) != 0;
 }
 
+dogen::variability::meta_model::template_kind
+create_dogen_variability_meta_model_template_kind(const unsigned int position) {
+    return dogen::variability::meta_model::template_kind_generator::create(position);
+}
+
+dogen::archetypes::location
+create_dogen_archetypes_location(const unsigned int position) {
+    return dogen::archetypes::location_generator::create(position);
+}
+
+dogen::variability::meta_model::binding_point
+create_dogen_variability_meta_model_binding_point(const unsigned int position) {
+    return dogen::variability::meta_model::binding_point_generator::create(position);
+}
+
+boost::optional<dogen::variability::meta_model::binding_point>
+create_boost_optional_dogen_variability_meta_model_binding_point(unsigned int position) {
+    boost::optional<dogen::variability::meta_model::binding_point> r(
+        create_dogen_variability_meta_model_binding_point(position));
+    return r;
+}
+
 }
 
 namespace dogen::assets::meta_model::variability {
@@ -70,6 +95,9 @@ populate(const unsigned int position, result_type& v) {
     v.feature_templates(create_std_list_dogen_assets_meta_model_variability_feature_template(position + 3));
     v.generate_static_configuration(create_bool(position + 4));
     v.requires_manual_default_constructor(create_bool(position + 5));
+    v.template_kind(create_dogen_variability_meta_model_template_kind(position + 6));
+    v.location(create_dogen_archetypes_location(position + 7));
+    v.default_binding_point(create_boost_optional_dogen_variability_meta_model_binding_point(position + 8));
 }
 
 feature_bundle_generator::result_type

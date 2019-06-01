@@ -19,13 +19,11 @@
  *
  */
 #include <sstream>
-#include "dogen.archetypes/test_data/location_td.hpp"
 #include "dogen.assets/test_data/meta_model/name_td.hpp"
 #include "dogen.assets/test_data/meta_model/name_tree_td.hpp"
 #include "dogen.variability/test_data/meta_model/value_type_td.hpp"
 #include "dogen.variability/test_data/meta_model/binding_point_td.hpp"
 #include "dogen.variability/test_data/meta_model/configuration_td.hpp"
-#include "dogen.variability/test_data/meta_model/template_kind_td.hpp"
 #include "dogen.assets/test_data/meta_model/variability/feature_template_td.hpp"
 
 namespace {
@@ -63,19 +61,16 @@ create_dogen_variability_meta_model_value_type(const unsigned int position) {
     return dogen::variability::meta_model::value_type_generator::create(position);
 }
 
-dogen::archetypes::location
-create_dogen_archetypes_location(const unsigned int position) {
-    return dogen::archetypes::location_generator::create(position);
-}
-
 dogen::variability::meta_model::binding_point
 create_dogen_variability_meta_model_binding_point(const unsigned int position) {
     return dogen::variability::meta_model::binding_point_generator::create(position);
 }
 
-dogen::variability::meta_model::template_kind
-create_dogen_variability_meta_model_template_kind(const unsigned int position) {
-    return dogen::variability::meta_model::template_kind_generator::create(position);
+boost::optional<dogen::variability::meta_model::binding_point>
+create_boost_optional_dogen_variability_meta_model_binding_point(unsigned int position) {
+    boost::optional<dogen::variability::meta_model::binding_point> r(
+        create_dogen_variability_meta_model_binding_point(position));
+    return r;
 }
 
 bool create_bool(const unsigned int position) {
@@ -100,11 +95,9 @@ populate(const unsigned int position, result_type& v) {
     v.parsed_type(create_dogen_assets_meta_model_name_tree(position + 7));
     v.value(create_std_string(position + 8));
     v.value_type(create_dogen_variability_meta_model_value_type(position + 9));
-    v.location(create_dogen_archetypes_location(position + 10));
-    v.binding_point(create_dogen_variability_meta_model_binding_point(position + 11));
-    v.template_kind(create_dogen_variability_meta_model_template_kind(position + 12));
-    v.is_optional(create_bool(position + 13));
-    v.requires_optionality(create_bool(position + 14));
+    v.binding_point(create_boost_optional_dogen_variability_meta_model_binding_point(position + 10));
+    v.is_optional(create_bool(position + 11));
+    v.requires_optionality(create_bool(position + 12));
 }
 
 feature_template_generator::result_type

@@ -24,7 +24,6 @@
 #include "dogen.variability/lexical_cast/meta_model/binding_point_lc.hpp"
 #include "dogen.variability/lexical_cast/meta_model/template_kind_lc.hpp"
 #include "dogen.assets/types/traits.hpp"
-#include "dogen.assets/types/features/variability_bundle.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/types/meta_model/attribute.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_template_initializer.hpp"
@@ -42,6 +41,10 @@ static logger lg(logger_factory(transform_id));
 
 const std::string empty;
 const std::string fixed_mapping_not_found("Fixed mapping not found: ");
+const std::string too_many_bindings(
+    "Binding point supplied at bundle and template level: ");
+const std::string missing_bindings(
+    "Binding point must be supplied at either bundle or template level: ");
 
 }
 
@@ -62,25 +65,40 @@ void variability_feature_bundle_transform::update(
     using features::variability_templates;
     const auto scfg(variability_templates::make_static_configuration(fg, ft));
 
-    using boost::lexical_cast;
-    using variability::meta_model::template_kind;
-    ft.template_kind(lexical_cast<template_kind>(scfg.template_kind));
-
-    using variability::meta_model::binding_point;
-    ft.binding_point(lexical_cast<binding_point>(scfg.binding_point));
-
     ft.is_optional(scfg.is_optional);
+
+    using boost::lexical_cast;
+    using variability::meta_model::binding_point;
+    if (!scfg.binding_point.empty())
+        ft.binding_point(lexical_cast<binding_point>(scfg.binding_point));
+}
+
+void variability_feature_bundle_transform::
+update(const features::variability_bundle::feature_group& fg,
+    meta_model::variability::feature_bundle& fb) {
+
+    using features::variability_bundle;
+    const auto scfg(variability_bundle::make_static_configuration(fg, fb));
+    fb.generate_static_configuration(scfg.generate_static_configuration);
 
     archetypes::location al;
     al.kernel(scfg.kernel);
     al.backend(scfg.backend);
     al.facet(scfg.facet);
     al.archetype(scfg.archetype);
-    ft.location(al);
+    fb.location(al);
 
+    using boost::lexical_cast;
     using variability::meta_model::template_kind;
-    if (ft.template_kind() == template_kind::instance)
-        ft.key(scfg.qualified_name);
+    fb.template_kind(lexical_cast<template_kind>(scfg.template_kind));
+
+    using boost::lexical_cast;
+    using variability::meta_model::binding_point;
+    if (!scfg.default_binding_point.empty()) {
+        fb.default_binding_point(lexical_cast<binding_point>(
+                scfg.default_binding_point));
+    }
+
 }
 
 void variability_feature_bundle_transform::
@@ -102,11 +120,41 @@ apply(const context& ctx,
 
         using features::variability_bundle;
         const auto fg2(variability_bundle::make_feature_group(fm));
-        const auto scfg(variability_bundle::make_static_configuration(fg2, fb));
-        fb.generate_static_configuration(scfg.generate_static_configuration);
+        update(fg2, fb);
+        const bool is_bound(fb.default_binding_point().is_initialized());
 
         for (auto& ft : fb.feature_templates()) {
             update(fg1, ft);
+
+            if (is_bound) {
+                /*
+                 * Cannot supply binding points at both the bundle and
+                 * template level.
+                 */
+                if (ft.binding_point().is_initialized()) {
+                    const auto k(ft.key());
+                    BOOST_LOG_SEV(lg, error) << too_many_bindings << k;
+                    BOOST_THROW_EXCEPTION(
+                        transformation_error(too_many_bindings + k));
+                }
+
+                /*
+                 * If a default binding point was supplied at the bundle
+                 * level, copy it across.
+                 */
+                ft.binding_point(fb.default_binding_point());
+            }
+
+            /*
+             * Must supply binding points at either the bundle or
+             * template level.
+             */
+            if (!is_bound && !ft.binding_point().is_initialized()) {
+                const auto k(ft.key());
+                BOOST_LOG_SEV(lg, error) << missing_bindings << k;
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(missing_bindings + k));
+            }
 
             /*
              * A feature template will require optionality on the

@@ -1880,6 +1880,21 @@
           "name": "requires_manual_default_constructor",
           "type": "bool",
           "documentation": "If true, the code generated for this feature bundle needs a manually generated \ndefault constructor.\n"
+        },
+        {
+          "name": "template_kind",
+          "type": "variability::meta_model::template_kind",
+          "documentation": "Kind of template expansion to perform for this feature template.\n"
+        },
+        {
+          "name": "location",
+          "type": "archetypes::location",
+          "documentation": "Archetype location coordinates for the feature template to expand into.\n"
+        },
+        {
+          "name": "default_binding_point",
+          "type": "boost::optional<variability::meta_model::binding_point>",
+          "documentation": "Default binding point for all feature templates in this bundle.\n\nThe binding point indicates where the feature will bind when instantiated in a\nmodel. If the default binding point is supplied for a bundle, the templates cannot\nsupply individual binding points. Conversely, if not supplied, they must supply\ntheir individual binding points.\n"
         }
       ]
     },
@@ -1928,19 +1943,9 @@
           "documentation": "Type of the value pointed to by the feature.\n"
         },
         {
-          "name": "location",
-          "type": "archetypes::location",
-          "documentation": "Archetype location coordinates for the feature template to expand into.\n"
-        },
-        {
           "name": "binding_point",
-          "type": "variability::meta_model::binding_point",
-          "documentation": "Where the feature will bind when instantiated in a model.\n"
-        },
-        {
-          "name": "template_kind",
-          "type": "variability::meta_model::template_kind",
-          "documentation": "Kind of template expansion to perform for this feature template.\n"
+          "type": "boost::optional<variability::meta_model::binding_point>",
+          "documentation": "Override binding point for this feature template.\n\nIf the default binding point is supplied for a bundle, the templates cannot\nsupply individual binding points. Conversely, if not supplied, they must supply\ntheir individual binding points.\n"
         },
         {
           "name": "is_optional",
@@ -2496,6 +2501,11 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "element",
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2503,9 +2513,6 @@
           "type": "masd::variability::boolean",
           "value": "\"false\"",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.type_parameters.variable_number_of_parameters"
           }
         },
@@ -2514,9 +2521,6 @@
           "type": "masd::variability::number",
           "value": "\"0\"",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.type_parameters.count"
           }
         },
@@ -2525,9 +2529,6 @@
           "type": "masd::variability::boolean",
           "value": "\"false\"",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.type_parameters.always_in_heap"
           }
         }
@@ -2546,6 +2547,11 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "element",
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2554,9 +2560,6 @@
           "value": "\"false\"",
           "documentation": "If true, it uses the default implementation defined underlying element for the\ntechnical space targeted.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.enumeration.use_implementation_defined_underlying_element"
           }
         },
@@ -2565,9 +2568,6 @@
           "type": "masd::variability::text",
           "documentation": "Name of the underlying element to use for the enumeration.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.enumeration.underlying_element",
             "masd.variability.is_optional": "true"
           }
@@ -2578,9 +2578,6 @@
           "value": "\"false\"",
           "documentation": "If true, uses the enumeration values supplied by the underlying technical space.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.enumeration.use_implementation_defined_enumerator_values"
           }
         },
@@ -2590,9 +2587,6 @@
           "value": "\"true\"",
           "documentation": "If true, adds an enumerator to represent an invalid choice.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.enumeration.add_invalid_enumerator"
           }
         }
@@ -2604,6 +2598,11 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "property",
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2611,9 +2610,6 @@
           "type": "masd::variability::text",
           "documentation": "Value to use for this enumerator. Must be unique for an enumeration.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "property",
             "masd.variability.qualified_name": "masd.enumerator.value",
             "masd.variability.is_optional": "true"
           }
@@ -2626,6 +2622,11 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "element",
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2633,9 +2634,6 @@
           "type": "masd::variability::boolean",
           "documentation": "Whether to mark a type as final or not.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.generalization.is_final",
             "masd.variability.is_optional": "true"
           }
@@ -2645,9 +2643,6 @@
           "type": "masd::variability::text",
           "documentation": "Name of the parent of the current element.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.generalization.parent",
             "masd.variability.is_optional": "true"
           }
@@ -2660,6 +2655,11 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "global",
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2668,9 +2668,6 @@
           "value": "\"false\"",
           "documentation": "If true, sets the origin of the model to \"proxy model\".\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global",
             "masd.variability.qualified_name": "masd.injection.is_proxy_model"
           }
         }
@@ -2682,6 +2679,11 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "global",
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2689,9 +2691,6 @@
           "type": "masd::variability::text_collection",
           "documentation": "Set of output technical spaces that this model targets.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "global",
             "masd.variability.qualified_name": "masd.extraction.output_technical_space",
             "masd.variability.is_optional": "true"
           }
@@ -2704,6 +2703,11 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "element",
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2711,9 +2715,6 @@
           "type": "masd::variability::text",
           "documentation": "Name of the underlying element to use for the primitive.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.primitive.underlying_element",
             "masd.variability.is_optional": "true"
           }
@@ -2724,9 +2725,6 @@
           "value": "\"false\"",
           "documentation": "If true, the primitive can be null.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.primitive.is_nullable"
           }
         },
@@ -2736,9 +2734,6 @@
           "value": "\"false\"",
           "documentation": "If true, use type aliasing to implement the primitive if the technical space supports\nit.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.primitive.use_type_aliasing"
           }
         }
@@ -2750,6 +2745,10 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2757,8 +2756,6 @@
           "type": "masd::variability::text_collection",
           "documentation": "Database system to target for ORM support.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "global",
             "masd.variability.qualified_name": "masd.orm.database_system",
             "masd.variability.is_optional": "true"
@@ -2769,8 +2766,6 @@
           "type": "masd::variability::text",
           "documentation": "Name of the database table for this element.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.orm.table_name",
             "masd.variability.is_optional": "true"
@@ -2781,8 +2776,6 @@
           "type": "masd::variability::text",
           "documentation": "Name of the database schema for this modeling element.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "any",
             "masd.variability.qualified_name": "masd.orm.schema_name",
             "masd.variability.is_optional": "true"
@@ -2793,8 +2786,6 @@
           "type": "masd::variability::boolean",
           "documentation": "If true, this property will be used for the primary key.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "property",
             "masd.variability.qualified_name": "masd.orm.is_primary_key",
             "masd.variability.is_optional": "true"
@@ -2805,8 +2796,6 @@
           "type": "masd::variability::text",
           "documentation": "Overrides the name of the column name for the database table.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "property",
             "masd.variability.qualified_name": "masd.orm.column_name",
             "masd.variability.is_optional": "true"
@@ -2817,8 +2806,6 @@
           "type": "masd::variability::boolean",
           "documentation": "If true, the column can be null.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "property",
             "masd.variability.qualified_name": "masd.orm.is_nullable",
             "masd.variability.is_optional": "true"
@@ -2829,8 +2816,6 @@
           "type": "masd::variability::boolean",
           "documentation": "If true, the primary key is a composite key.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "property",
             "masd.variability.qualified_name": "masd.orm.is_composite",
             "masd.variability.is_optional": "true"
@@ -2841,8 +2826,6 @@
           "type": "masd::variability::text",
           "documentation": "Determines the casing to use for identifiers.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "global",
             "masd.variability.qualified_name": "masd.orm.letter_case",
             "masd.variability.is_optional": "true"
@@ -2853,8 +2836,6 @@
           "type": "masd::variability::text_collection",
           "documentation": "Overrides to use for the relational type, for a given database system.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "property",
             "masd.variability.qualified_name": "masd.orm.type_override",
             "masd.variability.is_optional": "true"
@@ -2864,9 +2845,15 @@
     },
     {
       "name": "features::decoration_modeline",
+      "documentation": "Modeline properties.\n",
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "any",
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2874,9 +2861,6 @@
           "type": "masd::variability::text",
           "documentation": "Editor to use in this modeline.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "any",
             "masd.variability.qualified_name": "masd.decoration.modeline.editor",
             "masd.variability.is_optional": "true"
           }
@@ -2886,9 +2870,6 @@
           "type": "masd::variability::text",
           "documentation": "Where to place the modeline.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "any",
             "masd.variability.qualified_name": "masd.decoration.modeline.location",
             "masd.variability.is_optional": "true"
           }
@@ -2898,9 +2879,6 @@
           "type": "masd::variability::text",
           "documentation": "Technical space targeted by the modeline.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "any",
             "masd.variability.qualified_name": "masd.decoration.modeline.technical_space",
             "masd.variability.is_optional": "true"
           }
@@ -2913,17 +2891,20 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "masd.variability.binding_point",
           "type": "masd::variability::text",
-          "documentation": "Where does this configuration bind.\n",
+          "documentation": "Where does this feature bind into.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.variability.binding_point"
+            "masd.variability.qualified_name": "masd.variability.binding_point",
+            "masd.variability.is_optional": "true"
           }
         },
         {
@@ -2931,69 +2912,9 @@
           "type": "masd::variability::text_collection",
           "documentation": "Labels to apply to this profile. These are used for binding, via stereotypes.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.variability.labels",
             "masd.variability.is_optional": "true"
-          }
-        },
-        {
-          "name": "masd.variability.archetype_location.kernel",
-          "type": "masd::variability::text",
-          "documentation": "Kernel for a facet or profile template.\n",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "property",
-            "masd.variability.qualified_name": "masd.variability.archetype_location.kernel"
-          }
-        },
-        {
-          "name": "masd.variability.archetype_location.backend",
-          "type": "masd::variability::text",
-          "documentation": "Kernel for a facet or profile template.\n",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "property",
-            "masd.variability.qualified_name": "masd.variability.archetype_location.backend",
-            "masd.variability.is_optional": "true"
-          }
-        },
-        {
-          "name": "masd.variability.archetype_location.facet",
-          "type": "masd::variability::text",
-          "documentation": "Facet for a facet or profile template.\n",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "property",
-            "masd.variability.qualified_name": "masd.variability.archetype_location.facet",
-            "masd.variability.is_optional": "true"
-          }
-        },
-        {
-          "name": "masd.variability.archetype_location.archetype",
-          "type": "masd::variability::text",
-          "documentation": "Archetype for a facet or profile template.\n",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "property",
-            "masd.variability.qualified_name": "masd.variability.archetype_location.archetype",
-            "masd.variability.is_optional": "true"
-          }
-        },
-        {
-          "name": "masd.variability.template_kind",
-          "type": "masd::variability::text",
-          "documentation": "Template kind for a facet or profile template.\n",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "property",
-            "masd.variability.qualified_name": "masd.variability.template_kind"
           }
         },
         {
@@ -3001,8 +2922,6 @@
           "type": "masd::variability::text_collection",
           "documentation": "Value for a facet or profile template.\n\nValue as meta-data should be used only for collections, for single values prefer\nthe default value field if available.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "property",
             "masd.variability.qualified_name": "masd.variability.value",
             "masd.variability.is_optional": "true"
@@ -3013,8 +2932,6 @@
           "type": "masd::variability::text",
           "documentation": "Qualified name for this feature template.\n\nShould only be supplied for instance templates.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "property",
             "masd.variability.qualified_name": "masd.variability.qualified_name",
             "masd.variability.is_optional": "true"
@@ -3024,9 +2941,8 @@
           "name": "masd.variability.is_optional",
           "type": "masd::variability::boolean",
           "value": "\"false\"",
+          "documentation": "If true, the feature template provides an optional feature.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "property",
             "masd.variability.qualified_name": "masd.variability.is_optional"
           }
@@ -3090,15 +3006,18 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "any",
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "masd.mapping.target",
           "type": "masd::variability::text",
+          "documentation": "Type that is the source of the mapping.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "any",
             "masd.variability.qualified_name": "masd.mapping.target",
             "masd.variability.is_optional": "true"
           }
@@ -3106,10 +3025,8 @@
         {
           "name": "masd.mapping.destination",
           "type": "masd::variability::text",
+          "documentation": "Type that is the destination of the mapping.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
-            "masd.variability.binding_point": "any",
             "masd.variability.qualified_name": "masd.mapping.destination",
             "masd.variability.is_optional": "true"
           }
@@ -3169,17 +3086,78 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
+      "tagged_values": {
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "masd.variability.generate_static_configuration",
           "type": "masd::variability::boolean",
           "value": "\"true\"",
+          "documentation": "If true, generates a c++ class to contain the configuration at compile time.\n",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.variability.generate_static_configuration"
+          }
+        },
+        {
+          "name": "masd.variability.archetype_location.kernel",
+          "type": "masd::variability::text",
+          "documentation": "Kernel for a facet or profile template.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.variability.archetype_location.kernel"
+          }
+        },
+        {
+          "name": "masd.variability.archetype_location.backend",
+          "type": "masd::variability::text",
+          "documentation": "Backend for a facet or profile template.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.variability.archetype_location.backend",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "masd.variability.archetype_location.facet",
+          "type": "masd::variability::text",
+          "documentation": "Facet for a facet or profile template.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.variability.archetype_location.facet",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "masd.variability.archetype_location.archetype",
+          "type": "masd::variability::text",
+          "documentation": "Archetype for a facet or profile template.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.variability.archetype_location.archetype",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "masd.variability.template_kind",
+          "type": "masd::variability::text",
+          "documentation": "Template kind for a facet or profile template.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.variability.template_kind"
+          }
+        },
+        {
+          "name": "masd.variability.default_binding_point",
+          "type": "masd::variability::text",
+          "documentation": "Where does this bundle bind to.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.variability.default_binding_point",
+            "masd.variability.is_optional": "true"
           }
         }
       ]

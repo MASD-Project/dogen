@@ -34,6 +34,9 @@
 
 namespace dogen::injection::features {
 
+/**
+ * @brief Features related to model referencing.
+ */
 class reference final {
 public:
     struct feature_group {

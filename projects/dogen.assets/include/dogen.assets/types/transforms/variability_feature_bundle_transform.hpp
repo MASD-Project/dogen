@@ -29,6 +29,7 @@
 #include <unordered_map>
 #include "dogen.assets/types/meta_model/model.hpp"
 #include "dogen.assets/types/features/variability_templates.hpp"
+#include "dogen.assets/types/features/variability_bundle.hpp"
 #include "dogen.assets/types/transforms/context_fwd.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
 
@@ -38,6 +39,9 @@ class variability_feature_bundle_transform final {
 private:
     static void update(const features::variability_templates::feature_group& fg,
         meta_model::variability::feature_template& ft);
+
+    static void update(const features::variability_bundle::feature_group& fg,
+        meta_model::variability::feature_bundle& fb);
 
 public:
     static void apply(const context& ctx,
