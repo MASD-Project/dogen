@@ -16,6 +16,64 @@ such as profiles, licences etc.
 
 Stories that we haven't quite classified yet, but are needed.
 
+*** Model "types" and element binding                                 :story:
+
+It seems clear that we will have different "types" of models:
+
+- product models, describing entire products.
+- component models, which at present we call "models". These describe
+  a given component type such as a library or an executable. Thus,
+  they themselves have sub-types.
+- profile models: useful to keep the configuration separate. However,
+  it may make more sense to place them in the product model, since its
+  shared across components?
+- PDMs: these describe platforms.
+
+At present there is no concept of model types, so any meta-model
+element can be placed in any model. This is convenient, but in the
+future it may make things too complicated: users may end up placing
+types in PDMs when they didn't meant to do so, etc. What seems to
+emerge from here is that, just as with variability, there is a concept
+of a binding point at the model level too. That is, meta-model
+elements are associated with specific model types.
+
+In an ideal world, we should have a class in the meta-model that
+represents each model type. We then instantiate this class within one
+of the dogen models to register the different model types. Its
+code-generation representation is the registration. It also binds to
+all the meta-model elements it binds to. This can be done simply by
+creating a feature that lists the stereotypes of the elements
+(remember that these are then registered too, because we will generate
+the meta-class information as we generate the assets model). Then, we
+can ask the model type if a given element is valid (check a set of
+stereotypes).
+
+Formatters are themselves meta-model elements, and they bind to other
+meta-model elements (which raises the question: which meta-model
+elements are bindable? we can't allow a formatter to bind to a
+formatter...). Perhaps we need another type of model, which is a
+"generation model". This is where we can either declare new technical
+spaces or add to existing technical spaces; and declare new facets and
+formatters. We should be able to add to existing facets and TSs by
+allowing users to specify the TS/facet when declaring the
+formatter. If not specified, then the user must declare a facet in the
+package containing the formatter. Similarly with TSs.
+
+Note also that the formatter binding code is "inserted" directly
+during generation into the CPP file. Its not possible to change
+it. Same with the includes. This ensures the user cannot bypass the
+model type system by mistake. Also, by having a formatter meta-model
+type, we can now declare the header file as we please, and ensure the
+shape of the implementation. Now, the stitch template can be
+restricted to only the formatting function itself; the rest is
+code-generated. We no longer need wale templates. This will of course
+require the move to PDMs and the removal of the helper code. This also
+means that anyone can declare new meta-model elements; they will
+register themselves, and correctly expand across archetype
+space. However, we do not have the adaption code nor do we have
+containers for these modeling elements. We need a separate story for
+this use case.
+
 *** Correct implementation of templates in meta-model                 :story:
 
 At present we have a number of hacks to get stitch and wale to
@@ -12226,7 +12284,6 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
-
 *** LSP daemon for MOP                                                :story:
 
 One of the problems we have when creating models is that there is no
@@ -12300,7 +12357,7 @@ Links:
 - [[https://github.com/cquery-project/cquery][cquery]]
 - [[https://github.com/MaskRay/ccls][ccls]]
 
-*** Add design by contract to code-base
+*** Add design by contract to code-base                               :story:
 
 We should really declare pre/post conditions, etc in Dogen. This can
 either be done using C++ 20 when we upgrade or an already existing
