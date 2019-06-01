@@ -64,7 +64,8 @@ is_element_disabled(const assets::meta_model::element& e) {
      * We're only interested in modules as these are the only elements
      * that can be enabled/disabled based on their state.
      */
-    const auto ptr(dynamic_cast<const assets::meta_model::structural::module*>(&e));
+    using assets::meta_model::structural::module;
+    const auto ptr(dynamic_cast<const module*>(&e));
     if (!ptr)
         return false;
 
