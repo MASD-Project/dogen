@@ -74,6 +74,22 @@ space. However, we do not have the adaption code nor do we have
 containers for these modeling elements. We need a separate story for
 this use case.
 
+Destinations are meta-model elements too. In the generation.cpp model
+we will declare all the available destinations:
+
+- global
+- src
+- include
+- tests
+
+etc. The formaters bind into destinations. Formatters belong to facets
+in the archetype space, which express themselves as directories in the
+artefact path when we project from archetype space into artefact
+space. More generally: assets in asset space are projected into the
+multidimensional archetype space. Archetypes are projected into
+artefact space, but the dimensions of archetype space are flattened
+into the hierarchy of the filesystem.
+
 *** Correct implementation of templates in meta-model                 :story:
 
 At present we have a number of hacks to get stitch and wale to
