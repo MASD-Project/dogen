@@ -13,28 +13,28 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-06-01 Sat 12:34]
+#+CAPTION: Clock summary at [2019-06-01 Sat 17:57]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *51:59* |       |       | 100.0 |
+| *Total time*                                           | *55:11* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 51:59   |       |       | 100.0 |
-| Active                                                 |         | 51:59 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  3:37 |   7.0 |
-| Create a video demo for the previous sprint's features |         |       |  3:46 |   7.2 |
-| Sprint and product backlog grooming                    |         |       |  3:32 |   6.8 |
-| Make wale templates meta-model elements                |         |       |  2:45 |   5.3 |
-| Flatten the data directory                             |         |       |  1:11 |   2.3 |
+| Stories                                                | 55:11   |       |       | 100.0 |
+| Active                                                 |         | 55:11 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  3:37 |   6.6 |
+| Create a video demo for the previous sprint's features |         |       |  3:46 |   6.8 |
+| Sprint and product backlog grooming                    |         |       |  3:32 |   6.4 |
+| Make wale templates meta-model elements                |         |       |  2:45 |   5.0 |
+| Flatten the data directory                             |         |       |  1:11 |   2.1 |
 | Rename =dogen::cpp::header_only= stereotypes           |         |       |  0:15 |   0.5 |
-| Rename coding model                                    |         |       |  2:17 |   4.4 |
-| Windows build is failing on a number of tests          |         |       |  0:30 |   1.0 |
-| Consider a test suite level logging flag               |         |       |  1:40 |   3.2 |
-| Move parent processing to injection                    |         |       |  2:06 |   4.0 |
-| Windows clang-cl release build is failing 4 tests      |         |       |  2:16 |   4.4 |
+| Rename coding model                                    |         |       |  2:17 |   4.1 |
+| Windows build is failing on a number of tests          |         |       |  0:30 |   0.9 |
+| Consider a test suite level logging flag               |         |       |  1:40 |   3.0 |
+| Move parent processing to injection                    |         |       |  2:06 |   3.8 |
+| Use generated static configurations in transforms      |         |       | 30:16 |  54.8 |
+| Windows clang-cl release build is failing 4 tests      |         |       |  2:16 |   4.1 |
 | Fix issues with nightly build and CI                   |         |       |  0:04 |   0.1 |
-| Read variability papers                                |         |       |  0:56 |   1.8 |
-| Use generated static configurations in transforms      |         |       | 27:04 |  52.1 |
+| Read variability papers                                |         |       |  0:56 |   1.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -448,72 +448,11 @@ point we reached the limitation on how much abstraction we can push
 down into injection. Therefore it is not possible to do this, given
 the current conceptual model.
 
-*** STARTED Windows clang-cl release build is failing 4 tests         :spike:
+*** COMPLETED Use generated static configurations in transforms       :story:
+    CLOSED: [2019-06-01 Sat 17:57]
     :LOGBOOK:
-    CLOCK: [2019-05-31 Fri 10:48]--[2019-05-31 Fri 10:53] =>  0:05
-    CLOCK: [2019-05-31 Fri 08:46]--[2019-05-31 Fri 09:02] =>  0:16
-    CLOCK: [2019-05-25 Sat 17:17]--[2019-05-25 Sat 17:54] =>  0:37
-    CLOCK: [2019-05-25 Sat 15:58]--[2019-05-25 Sat 17:16] =>  1:18
-    :END:
-
-This has been going on for a fair bit, and we've ignored it so far but
-its a bit annoying. It also makes it likely that we break something
-without noticing because we are getting used to seeing red.
-
-The problem started at build [[https://ci.appveyor.com/project/mcraveiro/dogen/builds/23959333/job/r34e67jyjk6s8x66][1771]]. It happened with commit
-[[https://github.com/MASD-Project/dogen/commit/2eca4e92de08cd3a84944abc9cf26e7e117e7144][2eca4e92de08cd3a84944abc9cf26e7e117e7144]]. Everything was fine up to
-commit [[https://github.com/MASD-Project/dogen/commit/655b56cd32b94b7091e79c4cc76f6a2db5458416][655b56cd32b94b7091e79c4cc76f6a2db5458416]]. However, manually
-checking the commits in this interval did not reveal anything obvious.
-
-Failing tests:
-
-- masd.dogen.coding.tests/object_templates_transform_tests/model_with_object_template_that_parents_missing_object_template_throws (Failed)
-- masd.dogen.coding.tests/object_templates_transform_tests/model_with_object_that_models_missing_object_template_throws (Failed)
-- masd.dogen.coding.tests/object_templates_transform_tests/model_with_object_with_missing_parent_throws (Failed)
-- masd.dogen.coding.tests/stereotypes_transform_tests/visitable_object_with_no_leaves_throws (Failed)
-
-All failing tests are related to exceptions that should be thrown. All
-work on all other builds (debug and release) except this one,
-including MSVC release. However, they were previously working fine on
-this build (over 10 successful runs).
-
-Interestingly, on failure we do not seem to get any output at all.
-
-Notes:
-
-- History of builds available [[https://my.cdash.org/index.php?project=MASD+Project+-+Dogen&filtercount=4&showfilters=1&filtercombine=and&field1=site&compare1=61&value1=appveyor&field2=buildname&compare2=61&value2=clang-cl-Windows-AMD64-Release&field3=buildtype&compare3=61&value3=Continuous&field4=buildstarttime&compare4=0&value4=][here]].
-- it would be nice to be able to enable debug logging for these tests
-  test and have the CI dump the log files into the main build
-  log. That is, what we really need is to dump the log to the console
-  for a specific set of tests. We could create a different macro that
-  does this and manually replace it just for these tests.
-- seems like we've managed to fix the clang-cl errors that have been
-  traffic-lighting of late. This was a result of the assets changes on
-  enumerations, primitives and parsing. Changes are between commits:
-  - end: [[https://github.com/MASD-Project/dogen/commit/c629048f0c873f76f576200073ee647acbfbfcea][c629048f0c873f76f576200073ee647acbfbfcea]]
-  - start: [[https://github.com/MASD-Project/dogen/commit/166110a944587b0dfb2a53794fd71b504da89065][166110a944587b0dfb2a53794fd71b504da89065]]
-- started again with next build. Its traffic lighting, but the pattern
-  is not yet obvious.
-
-*** STARTED Fix issues with nightly build and CI                      :story:
-    :LOGBOOK:
-    CLOCK: [2019-05-30 Thu 22:39]--[2019-05-30 Thu 22:43] =>  0:04
-    :END:
-
-Time spent fixing build issues with either nightlies and/or CI.
-
-- make space for builds in CDash.
-
-*** STARTED Read variability papers                                   :story:
-    :LOGBOOK:
-    CLOCK: [2019-05-21 Tue 17:35]--[2019-05-21 Tue 17:45] =>  0:10
-    CLOCK: [2019-05-21 Tue 15:33]--[2019-05-21 Tue 16:19] =>  0:46
-    :END:
-
-Time spent reading the literature on variability.
-
-*** STARTED Use generated static configurations in transforms         :story:
-    :LOGBOOK:
+    CLOCK: [2019-06-01 Sat 17:55]--[2019-06-01 Sat 17:57] =>  0:02
+    CLOCK: [2019-06-01 Sat 14:44]--[2019-06-01 Sat 17:54] =>  3:10
     CLOCK: [2019-06-01 Sat 11:39]--[2019-06-01 Sat 12:34] =>  0:55
     CLOCK: [2019-06-01 Sat 10:45]--[2019-06-01 Sat 11:11] =>  0:26
     CLOCK: [2019-05-31 Fri 20:29]--[2019-05-31 Fri 20:30] =>  0:01
@@ -656,8 +595,6 @@ Notes:
   if we only have the backend, we can ask for all features that match
   the backend.
 
-
-
 Approach:
 
 - generate the static configuration in the bundle.
@@ -669,6 +606,70 @@ Approach:
 - update resolver to resolve static configurations.
 - generate the struct for the static configuration.
 - generate a method to read the struct from a dynamic configuration.
+
+*** STARTED Windows clang-cl release build is failing 4 tests         :spike:
+    :LOGBOOK:
+    CLOCK: [2019-05-31 Fri 10:48]--[2019-05-31 Fri 10:53] =>  0:05
+    CLOCK: [2019-05-31 Fri 08:46]--[2019-05-31 Fri 09:02] =>  0:16
+    CLOCK: [2019-05-25 Sat 17:17]--[2019-05-25 Sat 17:54] =>  0:37
+    CLOCK: [2019-05-25 Sat 15:58]--[2019-05-25 Sat 17:16] =>  1:18
+    :END:
+
+This has been going on for a fair bit, and we've ignored it so far but
+its a bit annoying. It also makes it likely that we break something
+without noticing because we are getting used to seeing red.
+
+The problem started at build [[https://ci.appveyor.com/project/mcraveiro/dogen/builds/23959333/job/r34e67jyjk6s8x66][1771]]. It happened with commit
+[[https://github.com/MASD-Project/dogen/commit/2eca4e92de08cd3a84944abc9cf26e7e117e7144][2eca4e92de08cd3a84944abc9cf26e7e117e7144]]. Everything was fine up to
+commit [[https://github.com/MASD-Project/dogen/commit/655b56cd32b94b7091e79c4cc76f6a2db5458416][655b56cd32b94b7091e79c4cc76f6a2db5458416]]. However, manually
+checking the commits in this interval did not reveal anything obvious.
+
+Failing tests:
+
+- masd.dogen.coding.tests/object_templates_transform_tests/model_with_object_template_that_parents_missing_object_template_throws (Failed)
+- masd.dogen.coding.tests/object_templates_transform_tests/model_with_object_that_models_missing_object_template_throws (Failed)
+- masd.dogen.coding.tests/object_templates_transform_tests/model_with_object_with_missing_parent_throws (Failed)
+- masd.dogen.coding.tests/stereotypes_transform_tests/visitable_object_with_no_leaves_throws (Failed)
+
+All failing tests are related to exceptions that should be thrown. All
+work on all other builds (debug and release) except this one,
+including MSVC release. However, they were previously working fine on
+this build (over 10 successful runs).
+
+Interestingly, on failure we do not seem to get any output at all.
+
+Notes:
+
+- History of builds available [[https://my.cdash.org/index.php?project=MASD+Project+-+Dogen&filtercount=4&showfilters=1&filtercombine=and&field1=site&compare1=61&value1=appveyor&field2=buildname&compare2=61&value2=clang-cl-Windows-AMD64-Release&field3=buildtype&compare3=61&value3=Continuous&field4=buildstarttime&compare4=0&value4=][here]].
+- it would be nice to be able to enable debug logging for these tests
+  test and have the CI dump the log files into the main build
+  log. That is, what we really need is to dump the log to the console
+  for a specific set of tests. We could create a different macro that
+  does this and manually replace it just for these tests.
+- seems like we've managed to fix the clang-cl errors that have been
+  traffic-lighting of late. This was a result of the assets changes on
+  enumerations, primitives and parsing. Changes are between commits:
+  - end: [[https://github.com/MASD-Project/dogen/commit/c629048f0c873f76f576200073ee647acbfbfcea][c629048f0c873f76f576200073ee647acbfbfcea]]
+  - start: [[https://github.com/MASD-Project/dogen/commit/166110a944587b0dfb2a53794fd71b504da89065][166110a944587b0dfb2a53794fd71b504da89065]]
+- started again with next build. Its traffic lighting, but the pattern
+  is not yet obvious.
+
+*** STARTED Fix issues with nightly build and CI                      :story:
+    :LOGBOOK:
+    CLOCK: [2019-05-30 Thu 22:39]--[2019-05-30 Thu 22:43] =>  0:04
+    :END:
+
+Time spent fixing build issues with either nightlies and/or CI.
+
+- make space for builds in CDash.
+
+*** STARTED Read variability papers                                   :story:
+    :LOGBOOK:
+    CLOCK: [2019-05-21 Tue 17:35]--[2019-05-21 Tue 17:45] =>  0:10
+    CLOCK: [2019-05-21 Tue 15:33]--[2019-05-21 Tue 16:19] =>  0:46
+    :END:
+
+Time spent reading the literature on variability.
 
 *** Validate feature template names                                   :story:
 

@@ -16,6 +16,20 @@ such as profiles, licences etc.
 
 Stories that we haven't quite classified yet, but are needed.
 
+*** Generate a single type                                            :story:
+
+Sometimes, when a model is in a bit of a state, it would be really
+useful to be able to generate a single type (or maybe set of
+types). We could easily do this by forcing the overwrite flag to false
+to all artefacts other than those that belong to this set of
+types. This could be a transform performed just before we generate the
+extraction model: loop through all elements and those that are not
+in this set, set their overwrite flags to false - or maybe even remove
+them from the model?
+
+Of course, we still need for the model to be in a state good enough to
+build.
+
 *** Model "types" and element binding                                 :story:
 
 It seems clear that we will have different "types" of models:
@@ -35,7 +49,7 @@ future it may make things too complicated: users may end up placing
 types in PDMs when they didn't meant to do so, etc. What seems to
 emerge from here is that, just as with variability, there is a concept
 of a binding point at the model level too. That is, meta-model
-elements are associated with specific model types.
+elements are associated with specific model types (binding element?).
 
 In an ideal world, we should have a class in the meta-model that
 represents each model type. We then instantiate this class within one
@@ -89,6 +103,10 @@ space. More generally: assets in asset space are projected into the
 multidimensional archetype space. Archetypes are projected into
 artefact space, but the dimensions of archetype space are flattened
 into the hierarchy of the filesystem.
+
+We also need a concept of artefact types. These mainly are needed for
+file extensions, but conceivably could also be used for other
+purposes.
 
 *** Correct implementation of templates in meta-model                 :story:
 
@@ -8348,6 +8366,12 @@ MASD). Interestingly, there is some kind of weird correlation between
   is to allow for arbitrary composition of these data streams (a-la Rx
   event streams, in a way).
 
+*Fuzzing*
+
+Interestingly, the same principles could be used for fuzzing. We could
+somehow have a fuzz fountain for each type which generates values from
+a corpus. These could be sensitive to the type.
+
 Links:
 
 - https://mockaroo.com/
@@ -8371,6 +8395,8 @@ Links:
 - [[https://picsum.photos/][Lorem picsum]]: Lorem Ipsum but for photos. Could be used for pictures
   for profiles, etc. Also: [[http://lorempixel.com/][lorempixel]]. For splash screens:
   [[https://source.unsplash.com/][unsplash]]. [[https://placeimg.com/][placeimg]] for images of places.
+- [[https://llvm.org/docs/LibFuzzer.html][LibFuzzer]]
+- [[https://blog.trailofbits.com/2019/05/31/fuzzing-unit-tests-with-deepstate-and-eclipser/][Fuzzing Unit Tests with DeepState and Eclipser]]
 
 **** Example Types
 
