@@ -16253,7 +16253,8 @@ code: identation and dividers.#</dia:string>
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.generation.decoration.enabled#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.generation.decoration.enabled
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16281,7 +16282,8 @@ code: identation and dividers.#</dia:string>
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.generation.decoration.copyright_notice#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.generation.decoration.copyright_notice
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16309,7 +16311,8 @@ code: identation and dividers.#</dia:string>
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.generation.decoration.licence_name#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.generation.decoration.licence_name
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16337,7 +16340,8 @@ code: identation and dividers.#</dia:string>
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.generation.decoration.modeline_group_name#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.generation.decoration.modeline_group_name
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16365,7 +16369,8 @@ code: identation and dividers.#</dia:string>
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.template_kind=instance
 #DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.generation.decoration.marker_name#</dia:string>
+#DOGEN masd.variability.qualified_name=masd.generation.decoration.marker_name
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

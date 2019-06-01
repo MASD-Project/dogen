@@ -997,7 +997,8 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.generation.decoration.enabled"
+            "masd.variability.qualified_name": "masd.generation.decoration.enabled",
+            "masd.variability.is_optional": "true"
           }
         },
         {
@@ -1008,7 +1009,8 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.generation.decoration.copyright_notice"
+            "masd.variability.qualified_name": "masd.generation.decoration.copyright_notice",
+            "masd.variability.is_optional": "true"
           }
         },
         {
@@ -1019,7 +1021,8 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.generation.decoration.licence_name"
+            "masd.variability.qualified_name": "masd.generation.decoration.licence_name",
+            "masd.variability.is_optional": "true"
           }
         },
         {
@@ -1030,7 +1033,8 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.generation.decoration.modeline_group_name"
+            "masd.variability.qualified_name": "masd.generation.decoration.modeline_group_name",
+            "masd.variability.is_optional": "true"
           }
         },
         {
@@ -1041,7 +1045,8 @@
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.template_kind": "instance",
             "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.generation.decoration.marker_name"
+            "masd.variability.qualified_name": "masd.generation.decoration.marker_name",
+            "masd.variability.is_optional": "true"
           }
         }
       ]

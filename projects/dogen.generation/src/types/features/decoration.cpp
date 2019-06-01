@@ -139,11 +139,16 @@ decoration::static_configuration decoration::make_static_configuration(
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    r.enabled = s.get_boolean_content(fg.enabled);
-    r.copyright_notice = s.get_text_collection_content(fg.copyright_notice);
-    r.licence_name = s.get_text_content(fg.licence_name);
-    r.modeline_group_name = s.get_text_content(fg.modeline_group_name);
-    r.marker_name = s.get_text_content(fg.marker_name);
+    if (s.has_configuration_point(fg.enabled))
+        r.enabled = s.get_boolean_content(fg.enabled);
+    if (s.has_configuration_point(fg.copyright_notice))
+        r.copyright_notice = s.get_text_collection_content(fg.copyright_notice);
+    if (s.has_configuration_point(fg.licence_name))
+        r.licence_name = s.get_text_content(fg.licence_name);
+    if (s.has_configuration_point(fg.modeline_group_name))
+        r.modeline_group_name = s.get_text_content(fg.modeline_group_name);
+    if (s.has_configuration_point(fg.marker_name))
+        r.marker_name = s.get_text_content(fg.marker_name);
     return r;
 }
 

@@ -27,6 +27,7 @@
 
 #include <list>
 #include <string>
+#include <boost/optional.hpp>
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
@@ -49,14 +50,11 @@ public:
 
 public:
     struct static_configuration {
-        bool enabled;
+        boost::optional<bool> enabled;
         std::list<std::string> copyright_notice;
         std::string licence_name;
         std::string modeline_group_name;
         std::string marker_name;
-
-        static_configuration() :
-            enabled() {}
     };
 
     static static_configuration make_static_configuration(
