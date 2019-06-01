@@ -29,11 +29,10 @@
 #include <list>
 #include <string>
 #include <boost/optional.hpp>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.assets/types/meta_model/decoration/element_properties.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
+#include "dogen.generation/types/features/decoration.hpp"
 #include "dogen.generation/types/helpers/decoration_repository.hpp"
 #include "dogen.generation/types/transforms/decoration_configuration.hpp"
 #include "dogen.generation/types/meta_model/model.hpp"
@@ -45,25 +44,11 @@ namespace dogen::generation::transforms {
  */
 class decoration_transform final {
 private:
-    struct feature_group {
-        variability::meta_model::feature enabled;
-        variability::meta_model::feature copyright_notice;
-        variability::meta_model::feature licence_name;
-        variability::meta_model::feature modeline_group_name;
-        variability::meta_model::feature marker_name;
-    };
-
-    /**
-     * @brief Creates the feature group for decoration.
-     */
-    static feature_group make_feature_group(
-        const variability::meta_model::feature_model& fm);
-
-    /**
+    /*
      * @brief Reads the decoration configuration from the supplied annotation.
      */
     static boost::optional<decoration_configuration>
-    read_decoration_configuration(const feature_group& fg,
+    read_decoration_configuration(const features::decoration::feature_group& fg,
         const variability::meta_model::configuration& cfg);
 
 private:

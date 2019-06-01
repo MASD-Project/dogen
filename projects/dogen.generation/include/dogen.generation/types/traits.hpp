@@ -36,15 +36,6 @@ struct traits {
     static std::string supported();
     static std::string overwrite();
     static std::string enable_backend_directories();
-    static std::string force_backend_directory();
-
-    struct decoration {
-        static std::string enabled();
-        static std::string copyright_notice();
-        static std::string licence_name();
-        static std::string  modeline_group_name();
-        static std::string marker_name();
-    };
 };
 
 }

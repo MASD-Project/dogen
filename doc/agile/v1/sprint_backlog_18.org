@@ -13,28 +13,28 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-05-31 Fri 15:33]
+#+CAPTION: Clock summary at [2019-06-01 Sat 11:11]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *50:07* |       |       | 100.0 |
+| *Total time*                                           | *50:39* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 50:07   |       |       | 100.0 |
-| Active                                                 |         | 50:07 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  3:37 |   7.2 |
-| Create a video demo for the previous sprint's features |         |       |  3:46 |   7.5 |
-| Sprint and product backlog grooming                    |         |       |  3:02 |   6.1 |
-| Make wale templates meta-model elements                |         |       |  2:45 |   5.5 |
-| Flatten the data directory                             |         |       |  1:11 |   2.4 |
+| Stories                                                | 50:39   |       |       | 100.0 |
+| Active                                                 |         | 50:39 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  3:37 |   7.1 |
+| Create a video demo for the previous sprint's features |         |       |  3:46 |   7.4 |
+| Sprint and product backlog grooming                    |         |       |  3:07 |   6.2 |
+| Make wale templates meta-model elements                |         |       |  2:45 |   5.4 |
+| Flatten the data directory                             |         |       |  1:11 |   2.3 |
 | Rename =dogen::cpp::header_only= stereotypes           |         |       |  0:15 |   0.5 |
-| Rename coding model                                    |         |       |  2:17 |   4.6 |
+| Rename coding model                                    |         |       |  2:17 |   4.5 |
 | Windows build is failing on a number of tests          |         |       |  0:30 |   1.0 |
 | Consider a test suite level logging flag               |         |       |  1:40 |   3.3 |
-| Move parent processing to injection                    |         |       |  2:06 |   4.2 |
+| Move parent processing to injection                    |         |       |  2:06 |   4.1 |
 | Windows clang-cl release build is failing 4 tests      |         |       |  2:16 |   4.5 |
 | Fix issues with nightly build and CI                   |         |       |  0:04 |   0.1 |
-| Read variability papers                                |         |       |  0:56 |   1.9 |
-| Add code generation support to static configurations   |         |       | 25:42 |  51.3 |
+| Read variability papers                                |         |       |  0:56 |   1.8 |
+| Use generated static configurations in transforms      |         |       | 26:09 |  51.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -205,6 +205,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-05-31 Fri 15:34]--[2019-05-31 Fri 15:39] =>  0:05
     CLOCK: [2019-05-31 Fri 10:01]--[2019-05-31 Fri 10:45] =>  0:44
     CLOCK: [2019-05-30 Thu 22:27]--[2019-05-30 Thu 22:38] =>  0:11
     CLOCK: [2019-05-29 Wed 10:11]--[2019-05-29 Wed 11:00] =>  0:49
@@ -509,8 +510,10 @@ Time spent fixing build issues with either nightlies and/or CI.
 
 Time spent reading the literature on variability.
 
-*** STARTED Add code generation support to static configurations      :story:
+*** STARTED Use generated static configurations in transforms         :story:
     :LOGBOOK:
+    CLOCK: [2019-06-01 Sat 10:45]--[2019-06-01 Sat 11:11] =>  0:26
+    CLOCK: [2019-05-31 Fri 20:29]--[2019-05-31 Fri 20:30] =>  0:01
     CLOCK: [2019-05-31 Fri 15:26]--[2019-05-31 Fri 15:34] =>  0:08
     CLOCK: [2019-05-31 Fri 14:50]--[2019-05-31 Fri 15:25] =>  0:35
     CLOCK: [2019-05-31 Fri 14:25]--[2019-05-31 Fri 14:49] =>  0:24
@@ -649,8 +652,6 @@ Approach:
 - update resolver to resolve static configurations.
 - generate the struct for the static configuration.
 - generate a method to read the struct from a dynamic configuration.
-
-
 
 *** Validate feature template names                                   :story:
 

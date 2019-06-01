@@ -52,34 +52,4 @@ std::string traits::enable_backend_directories() {
     return r;
 }
 
-std::string traits::force_backend_directory() {
-    static std::string r("yarn.force_backend_directory");
-    return r;
-}
-
-std::string traits::decoration::enabled() {
-    static std::string r("masd.generation.decoration.enabled");
-    return r;
-}
-
-std::string traits::decoration::copyright_notice() {
-    static std::string r("masd.generation.decoration.copyright_notice");
-    return r;
-}
-
-std::string traits::decoration::licence_name() {
-    static std::string r("masd.generation.decoration.licence_name");
-    return r;
-}
-
-std::string traits::decoration::modeline_group_name() {
-    static std::string r("masd.generation.decoration.modeline_group_name");
-    return r;
-}
-
-std::string traits::decoration::marker_name() {
-    static std::string r("masd.generation.decoration.marker_name");
-    return r;
-}
-
 }

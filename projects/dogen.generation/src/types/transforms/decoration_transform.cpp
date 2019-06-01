@@ -24,8 +24,6 @@
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.variability/types/helpers/feature_selector.hpp"
-#include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.assets/types/meta_model/structural/module.hpp"
 #include "dogen.assets/types/meta_model/decoration/licence.hpp"
 #include "dogen.assets/types/meta_model/decoration/modeline_group.hpp"
@@ -33,7 +31,6 @@
 #include "dogen.assets/io/meta_model/decoration/element_properties_io.hpp"
 #include "dogen.assets/io/meta_model/technical_space_io.hpp"
 #include "dogen.assets/hash/meta_model/technical_space_hash.hpp"
-#include "dogen.generation/types/traits.hpp"
 #include "dogen.generation/io/meta_model/model_io.hpp"
 #include "dogen.generation/types/transforms/transformation_error.hpp"
 #include "dogen.generation/types/helpers/decoration_repository_factory.hpp"
@@ -63,51 +60,36 @@ namespace dogen::generation::transforms {
 using assets::meta_model::decoration::generation_marker;
 using assets::meta_model::decoration::modeline;
 
-
-decoration_transform::feature_group decoration_transform::
-make_feature_group(const variability::meta_model::feature_model& fm) {
-    feature_group r;
-    const variability::helpers::feature_selector s(fm);
-
-    r.enabled = s.get_by_name(traits::decoration::enabled());
-    r.copyright_notice =s.get_by_name(traits::decoration::copyright_notice());
-    r.licence_name = s.get_by_name(traits::decoration::licence_name());;
-    r.modeline_group_name =
-        s.get_by_name(traits::decoration::modeline_group_name());;
-    r.marker_name = s.get_by_name(traits::decoration::marker_name());;
-
-    return r;
-}
-
 boost::optional<decoration_configuration>
-decoration_transform::read_decoration_configuration(const feature_group& fg,
+decoration_transform::read_decoration_configuration(
+    const features::decoration::feature_group& fg,
     const variability::meta_model::configuration& cfg) {
 
     bool has_configuration(false);
-    const variability::helpers::configuration_selector s(cfg);
+    const auto scfg(features::decoration::make_static_configuration(fg, cfg));
     decoration_configuration r;
-    if (s.has_configuration_point(fg.enabled)) {
-        r.enabled(s.get_boolean_content(fg.enabled));
+    if (scfg.enabled) {
+        r.enabled(scfg.enabled);
         has_configuration = true;
     }
 
-    if (s.has_configuration_point(fg.copyright_notice)) {
-        r.copyright_notices(s.get_text_collection_content(fg.copyright_notice));
+    if (!scfg.copyright_notice.empty()) {
+        r.copyright_notices(scfg.copyright_notice);
         has_configuration = true;
     }
 
-    if (s.has_configuration_point(fg.licence_name)) {
-        r.licence_name(s.get_text_content(fg.licence_name));
+    if (!scfg.licence_name.empty()) {
+        r.licence_name(scfg.licence_name);
         has_configuration = true;
     }
 
-    if (s.has_configuration_point(fg.modeline_group_name)) {
-        r.modeline_group_name(s.get_text_content(fg.modeline_group_name));
+    if (!scfg.modeline_group_name.empty()) {
+        r.modeline_group_name(scfg.modeline_group_name);
         has_configuration = true;
     }
 
-    if (s.has_configuration_point(fg.marker_name)) {
-        r.marker_name(s.get_text_content(fg.marker_name));
+    if (!scfg.marker_name.empty()) {
+        r.marker_name(scfg.marker_name);
         has_configuration = true;
     }
 
@@ -399,10 +381,10 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
      * module, which is the default decoration configuration for all
      * model elements.
      */
-    const auto fg(make_feature_group(*ctx.feature_model()));
+    const auto& fm(*ctx.feature_model());
+    const auto fg(features::decoration::make_feature_group(fm));
     auto& rm(*m.root_module());
-    const auto& rcfg(*rm.configuration());
-    const auto root_dc(read_decoration_configuration(fg, rcfg));
+    const auto root_dc(read_decoration_configuration(fg, *rm.configuration()));
 
     /*
      * With the default configuration, we can create the global
