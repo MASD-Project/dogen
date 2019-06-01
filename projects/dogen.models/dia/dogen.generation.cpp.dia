@@ -41350,13 +41350,13 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O331">
       <dia:attribute name="obj_pos">
-        <dia:point val="21,174"/>
+        <dia:point val="19.1429,174.357"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="20.95,173.95;68.52,198.45"/>
+        <dia:rectangle val="19.0929,174.307;66.6629,198.807"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="21,174"/>
+        <dia:point val="19.1429,174.357"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="47.469999999999999"/>
