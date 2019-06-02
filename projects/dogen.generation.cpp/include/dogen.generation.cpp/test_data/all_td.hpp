@@ -37,7 +37,6 @@
 #include "dogen.generation.cpp/test_data/fabric/common_odb_options_td.hpp"
 #include "dogen.generation.cpp/test_data/fabric/object_odb_options_td.hpp"
 #include "dogen.generation.cpp/test_data/formattables/cpp_standards_td.hpp"
-#include "dogen.generation.cpp/test_data/fabric/forward_declarations_td.hpp"
 #include "dogen.generation.cpp/test_data/formattables/odb_properties_td.hpp"
 #include "dogen.generation.cpp/test_data/fabric/visual_studio_project_td.hpp"
 #include "dogen.generation.cpp/test_data/formattables/directive_group_td.hpp"

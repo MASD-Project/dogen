@@ -38,7 +38,6 @@
 #include "dogen.generation.cpp/io/fabric/common_odb_options_io.hpp"
 #include "dogen.generation.cpp/io/fabric/object_odb_options_io.hpp"
 #include "dogen.generation.cpp/io/formattables/cpp_standards_io.hpp"
-#include "dogen.generation.cpp/io/fabric/forward_declarations_io.hpp"
 #include "dogen.generation.cpp/io/formattables/odb_properties_io.hpp"
 #include "dogen.generation.cpp/io/fabric/visual_studio_project_io.hpp"
 #include "dogen.generation.cpp/io/formattables/directive_group_io.hpp"

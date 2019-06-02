@@ -33,7 +33,6 @@
 #include "dogen.generation.cpp/types/fabric/msbuild_targets_fwd.hpp"
 #include "dogen.generation.cpp/types/fabric/common_odb_options_fwd.hpp"
 #include "dogen.generation.cpp/types/fabric/object_odb_options_fwd.hpp"
-#include "dogen.generation.cpp/types/fabric/forward_declarations_fwd.hpp"
 #include "dogen.generation.cpp/types/fabric/visual_studio_project_fwd.hpp"
 #include "dogen.generation.cpp/types/fabric/visual_studio_solution_fwd.hpp"
 
@@ -77,16 +76,6 @@ public:
     virtual void visit(const dogen::generation::cpp::fabric::entry_point&) { }
     virtual void visit(dogen::generation::cpp::fabric::entry_point&) const { }
     virtual void visit(dogen::generation::cpp::fabric::entry_point&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::generation::cpp::fabric::forward_declarations
-     */
-    /**@{*/
-    virtual void visit(const dogen::generation::cpp::fabric::forward_declarations&) const { }
-    virtual void visit(const dogen::generation::cpp::fabric::forward_declarations&) { }
-    virtual void visit(dogen::generation::cpp::fabric::forward_declarations&) const { }
-    virtual void visit(dogen::generation::cpp::fabric::forward_declarations&) { }
     /**@}*/
 
     /**

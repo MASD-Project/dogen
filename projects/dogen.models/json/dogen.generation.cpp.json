@@ -762,29 +762,6 @@
       ]
     },
     {
-      "name": "fabric::forward_declarations",
-      "tagged_values": {
-        "masd.generalization.parent": "assets::meta_model::element"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "is_enum",
-          "type": "bool",
-          "documentation": "Returns true if the type for which we are creating a forward declaration is\nan enumeration, false otherwise.\n"
-        },
-        {
-          "name": "underlying_element",
-          "type": "assets::meta_model::name",
-          "documentation": "The underlying type of the enumeration, if we are an enum forward declaration.\n"
-        },
-        {
-          "name": "is_exception",
-          "type": "bool"
-        }
-      ]
-    },
-    {
       "name": "fabric::injector",
       "stereotypes": [
         "dogen::handcrafted::typeable"
@@ -820,13 +797,6 @@
     },
     {
       "name": "fabric::registrar_factory",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "fabric::forward_declarations_factory",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

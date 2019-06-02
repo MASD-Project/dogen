@@ -27,7 +27,6 @@
 #include "dogen.generation.cpp/types/fabric/odb_options_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/master_header_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/visual_studio_factory.hpp"
-#include "dogen.generation.cpp/types/fabric/forward_declarations_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/entry_point_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/injector.hpp"
 
@@ -95,13 +94,6 @@ void injector::inject_visual_studio(
     add_elements(e, m);
 }
 
-void injector::
-inject_forward_declarations(generation::meta_model::model& m) const {
-    forward_declarations_factory f;
-    const auto e(f.make(m));
-    add_elements(e, m);
-}
-
 void injector::inject_entry_point(generation::meta_model::model& m) const {
     entry_point_factory f;
     const auto e(f.make(m));
@@ -115,7 +107,6 @@ void injector::inject(const variability::meta_model::feature_model& fm,
     inject_odb_options(m);
     inject_master_headers(m);
     inject_visual_studio(fm, m);
-    inject_forward_declarations(m);
     inject_entry_point(m);
 }
 

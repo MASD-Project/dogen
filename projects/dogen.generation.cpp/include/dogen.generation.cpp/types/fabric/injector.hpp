@@ -53,8 +53,6 @@ private:
     void inject_master_headers(generation::meta_model::model& m) const;
     void inject_visual_studio(const variability::meta_model::feature_model& fm,
         generation::meta_model::model& m) const;
-    void inject_forward_declarations(
-        generation::meta_model::model& m) const;
     void inject_entry_point(
         generation::meta_model::model& m) const;
 
