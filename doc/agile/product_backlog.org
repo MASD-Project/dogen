@@ -5282,15 +5282,6 @@ elements which can have children, and if not issue good error
 messages - perhaps even talking about the possible cause for the
 error.
 
-*** Add comments to test model sanitizer                              :story:
-
-We should explain why we decided to create a test model sanitizer
-instead of just adding specs to the test models themselves. The
-rationale behind it was that it would break the current diffing and
-rebaselining logic; we would either have to ignore specs on the diff
-or find a way to copy them after code generation. Both options are a
-bit of a hack. So instead we created a model with all the specs.
-
 *** Ensure an error info tag is not set already before we set it      :story:
 
 Now that we will start making use of error info tags in anger, one

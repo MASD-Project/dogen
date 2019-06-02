@@ -13,15 +13,15 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-06-02 Sun 17:14]
+#+CAPTION: Clock summary at [2019-06-02 Sun 19:11]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *59:27* |       |       | 100.0 |
+| *Total time*                                           | *60:01* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 59:27   |       |       | 100.0 |
-| Active                                                 |         | 59:27 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  3:37 |   6.1 |
+| Stories                                                | 60:01   |       |       | 100.0 |
+| Active                                                 |         | 60:01 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  3:37 |   6.0 |
 | Create a video demo for the previous sprint's features |         |       |  3:46 |   6.3 |
 | Sprint and product backlog grooming                    |         |       |  3:32 |   5.9 |
 | Make wale templates meta-model elements                |         |       |  2:45 |   4.6 |
@@ -31,12 +31,13 @@
 | Windows build is failing on a number of tests          |         |       |  0:30 |   0.8 |
 | Consider a test suite level logging flag               |         |       |  1:40 |   2.8 |
 | Move parent processing to injection                    |         |       |  2:06 |   3.5 |
-| Use generated static configurations in transforms      |         |       | 30:16 |  50.9 |
+| Use generated static configurations in transforms      |         |       | 30:16 |  50.4 |
 | Remove serialisation support in dia model              |         |       |  0:28 |   0.8 |
 | Windows clang-cl release build is failing 4 tests      |         |       |  2:16 |   3.8 |
 | Fix issues with nightly build and CI                   |         |       |  0:04 |   0.1 |
 | Read variability papers                                |         |       |  0:56 |   1.6 |
-| Element extensions considered harmful                  |         |       |  3:48 |   6.4 |
+| Element extensions considered harmful                  |         |       |  4:04 |   6.8 |
+| Remove master headers                                  |         |       |  0:18 |   0.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -712,6 +713,7 @@ Time spent reading the literature on variability.
 
 *** STARTED Element extensions considered harmful                     :story:
     :LOGBOOK:
+    CLOCK: [2019-06-02 Sun 17:15]--[2019-06-02 Sun 17:31] =>  0:16
     CLOCK: [2019-06-02 Sun 17:02]--[2019-06-02 Sun 17:14] =>  0:12
     CLOCK: [2019-06-02 Sun 13:25]--[2019-06-02 Sun 17:01] =>  3:36
     :END:
@@ -736,8 +738,10 @@ Notes:
 
 - add forward declaration formatters for each type. Create common
   formatting function.
-- remove element extensions across the code base.
 - remove forward declaration element in fabric.
+- remove element extensions across the code base. Actually this is not
+  possible at present as it is used by ODB options. We need to first
+  move them into assets before this can be done.
 
 Merged stories:
 
@@ -782,6 +786,22 @@ Tasks:
 - populate it with the extensions.
 - change enablement to merge all element properties of extensible
   elements.
+
+*** STARTED Remove master headers                                     :story:
+    :LOGBOOK:
+    CLOCK: [2019-06-02 Sun 17:32]--[2019-06-02 Sun 17:50] =>  0:18
+    :END:
+
+At present we are not making use of this feature, and it could even be
+argued that it is not a feature that should be used; by having a
+single header that includes all files we encourage unnecessary
+inclusion, increasing build times. We had a use for this, which was
+related to testing model types, but since we replace that with
+generated tests, we no longer required it. Remove this feature.
+
+Notes:
+
+- actually, we left the test model sanitizer. Not clear why.
 
 *** Validate feature template names                                   :story:
 
@@ -1163,3 +1183,15 @@ Tasks:
   enabled.
 
 ** Deprecated
+*** CANCELLED Add comments to test model sanitizer                    :story:
+    CLOSED: [2019-06-02 Sun 17:42]
+
+*Rationale*: we will remove the sanitizer now that we are generating
+tests.
+
+We should explain why we decided to create a test model sanitizer
+instead of just adding specs to the test models themselves. The
+rationale behind it was that it would break the current diffing and
+rebaselining logic; we would either have to ignore specs on the diff
+or find a way to copy them after code generation. Both options are a
+bit of a hack. So instead we created a model with all the specs.
