@@ -21,8 +21,7 @@
     "masd.generation.cpp.visual_studio.project.enabled": "false",
     "masd.generation.cpp.visual_studio.solution.enabled": "false",
     "masd.generation.csharp.enabled": "false",
-    "masd.variability.profile": "dogen.profiles.base.default_profile",
-    "masd.generation.cpp.serialization.enabled": "true"
+    "masd.variability.profile": "dogen.profiles.base.default_profile"
   },
   "elements": [
     {
@@ -317,21 +316,6 @@
     {
       "name": "hydration_error",
       "documentation": "An error occurred while reading a diagram.\n",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "persister",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "persister_error",
-      "documentation": "An error occurred whilst tryng to persist a Dia diagram.\n",
       "stereotypes": [
         "masd::exception"
       ],

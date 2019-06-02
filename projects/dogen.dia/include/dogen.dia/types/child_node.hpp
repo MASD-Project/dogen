@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.dia/serialization/child_node_fwd_ser.hpp"
 
 namespace dogen::dia {
 
@@ -48,13 +47,6 @@ public:
 
 public:
     explicit child_node(const std::string& parent);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::child_node& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::child_node& v, unsigned int version);
 
 public:
     /**

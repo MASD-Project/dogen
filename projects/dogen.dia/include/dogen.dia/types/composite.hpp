@@ -31,7 +31,6 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.dia/types/attribute_fwd.hpp"
 #include "dogen.dia/types/composite_fwd.hpp"
-#include "dogen.dia/serialization/composite_fwd_ser.hpp"
 
 namespace dogen::dia {
 
@@ -50,13 +49,6 @@ public:
         const std::string& type,
         const std::vector<boost::shared_ptr<dogen::dia::attribute> >& value,
         const boost::shared_ptr<dogen::dia::composite>& inner_composite);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::composite& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::composite& v, unsigned int version);
 
 public:
     /**

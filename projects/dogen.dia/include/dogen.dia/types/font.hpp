@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.dia/serialization/font_fwd_ser.hpp"
 
 namespace dogen::dia {
 
@@ -46,13 +45,6 @@ public:
         const std::string& family,
         const std::string& style,
         const std::string& name);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::font& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::font& v, unsigned int version);
 
 public:
     const std::string& family() const;

@@ -38,13 +38,11 @@
 #include "dogen.dia/types/hydrator.hpp"
 #include "dogen.dia/types/attribute.hpp"
 #include "dogen.dia/types/composite.hpp"
-#include "dogen.dia/types/persister.hpp"
 #include "dogen.dia/types/rectangle.hpp"
 #include "dogen.dia/types/child_node.hpp"
 #include "dogen.dia/types/connection.hpp"
 #include "dogen.dia/types/enumeration.hpp"
 #include "dogen.dia/types/diagram_data.hpp"
 #include "dogen.dia/types/hydration_error.hpp"
-#include "dogen.dia/types/persister_error.hpp"
 
 #endif

@@ -25,7 +25,6 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.dia/types/hydrator.hpp"
-#include "dogen.dia/types/persister.hpp"
 #include "dogen.dia/io/diagram_io.hpp"
 #include "dogen.dia/types/diagram.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"

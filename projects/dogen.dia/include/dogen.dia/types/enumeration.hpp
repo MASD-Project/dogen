@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.dia/serialization/enumeration_fwd_ser.hpp"
 
 namespace dogen::dia {
 
@@ -43,13 +42,6 @@ public:
 
 public:
     explicit enumeration(const std::string& value);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::enumeration& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::enumeration& v, unsigned int version);
 
 public:
     /**

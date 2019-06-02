@@ -29,7 +29,6 @@
 #include <vector>
 #include <algorithm>
 #include "dogen.dia/types/object.hpp"
-#include "dogen.dia/serialization/layer_fwd_ser.hpp"
 
 namespace dogen::dia {
 
@@ -51,13 +50,6 @@ public:
         const bool visible,
         const bool active,
         const std::vector<dogen::dia::object>& objects);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::layer& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::layer& v, unsigned int version);
 
 public:
     /**

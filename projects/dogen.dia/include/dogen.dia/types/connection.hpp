@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.dia/serialization/connection_fwd_ser.hpp"
 
 namespace dogen::dia {
 
@@ -46,13 +45,6 @@ public:
         const std::string& handle,
         const std::string& to,
         const std::string& connection_slot);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::connection& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::connection& v, unsigned int version);
 
 public:
     /**

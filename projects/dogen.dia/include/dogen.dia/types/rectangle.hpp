@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.dia/serialization/rectangle_fwd_ser.hpp"
 
 namespace dogen::dia {
 
@@ -43,13 +42,6 @@ public:
 
 public:
     explicit rectangle(const std::string& value);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::rectangle& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::rectangle& v, unsigned int version);
 
 public:
     /**

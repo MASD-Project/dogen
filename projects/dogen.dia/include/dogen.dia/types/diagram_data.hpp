@@ -28,7 +28,6 @@
 #include <vector>
 #include <algorithm>
 #include "dogen.dia/types/attribute.hpp"
-#include "dogen.dia/serialization/diagram_data_fwd_ser.hpp"
 
 namespace dogen::dia {
 
@@ -44,13 +43,6 @@ public:
 
 public:
     explicit diagram_data(const std::vector<dogen::dia::attribute>& attributes);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::diagram_data& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::diagram_data& v, unsigned int version);
 
 public:
     /**

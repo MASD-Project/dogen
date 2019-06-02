@@ -39,7 +39,6 @@
 #include "dogen.dia/types/composite.hpp"
 #include "dogen.dia/types/rectangle.hpp"
 #include "dogen.dia/types/enumeration.hpp"
-#include "dogen.dia/serialization/attribute_fwd_ser.hpp"
 
 namespace dogen::dia {
 
@@ -57,13 +56,6 @@ public:
     attribute(
         const std::string& name,
         const std::vector<boost::variant<dogen::dia::color, dogen::dia::real, dogen::dia::integer, dogen::dia::font, dogen::dia::boolean, dogen::dia::point, dogen::dia::string, dogen::dia::enumeration, dogen::dia::rectangle, dogen::dia::composite> >& values);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::attribute& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::attribute& v, unsigned int version);
 
 public:
     /**

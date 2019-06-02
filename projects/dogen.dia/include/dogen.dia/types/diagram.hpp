@@ -29,7 +29,6 @@
 #include <algorithm>
 #include "dogen.dia/types/layer.hpp"
 #include "dogen.dia/types/diagram_data.hpp"
-#include "dogen.dia/serialization/diagram_fwd_ser.hpp"
 
 namespace dogen::dia {
 
@@ -47,13 +46,6 @@ public:
     diagram(
         const dogen::dia::diagram_data& diagram_data,
         const std::vector<dogen::dia::layer>& layers);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::diagram& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::diagram& v, unsigned int version);
 
 public:
     /**

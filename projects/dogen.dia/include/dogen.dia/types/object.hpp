@@ -32,7 +32,6 @@
 #include "dogen.dia/types/attribute.hpp"
 #include "dogen.dia/types/child_node.hpp"
 #include "dogen.dia/types/connection.hpp"
-#include "dogen.dia/serialization/object_fwd_ser.hpp"
 
 namespace dogen::dia {
 
@@ -58,13 +57,6 @@ public:
         const std::vector<dogen::dia::connection>& connections,
         const boost::optional<dogen::dia::child_node>& child_node,
         const std::vector<dogen::dia::attribute>& attributes);
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::dia::object& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::dia::object& v, unsigned int version);
 
 public:
     /**

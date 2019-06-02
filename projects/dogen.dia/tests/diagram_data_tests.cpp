@@ -21,22 +21,11 @@
 #include <string>
 #include <sstream>
 #include <boost/test/unit_test.hpp>
-#include <boost/serialization/nvp.hpp>
 #include <boost/property_tree/ptree.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/binary_iarchive.hpp>
-#include <boost/archive/binary_oarchive.hpp>
 #include <boost/property_tree/json_parser.hpp>
-#include <boost/archive/polymorphic_iarchive.hpp>
-#include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen.dia/io/diagram_data_io.hpp"
 #include "dogen.dia/types/diagram_data.hpp"
 #include "dogen.dia/test_data/diagram_data_td.hpp"
-#include "dogen.dia/serialization/registrar_ser.hpp"
-#include "dogen.dia/serialization/diagram_data_ser.hpp"
 
 BOOST_AUTO_TEST_SUITE(diagram_data_tests)
 
@@ -146,72 +135,4 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
     BOOST_REQUIRE_NO_THROW(read_json(s, pt));
 }
 
-BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {
-    dogen::dia::diagram_data_generator g;
-    const auto a(g());
-
-    using namespace boost::archive;
-    std::ostringstream os;
-    {
-        xml_oarchive oa(os);
-        dogen::dia::register_types<xml_oarchive>(oa);
-        oa << BOOST_SERIALIZATION_NVP(a);
-    }
-
-    dogen::dia::diagram_data b = dogen::dia::diagram_data();
-    std::istringstream is(os.str());
-    {
-        xml_iarchive ia(is);
-        dogen::dia::register_types<xml_iarchive>(ia);
-        ia >> BOOST_SERIALIZATION_NVP(b);
-    }
-
-    BOOST_CHECK(a == b);
-}
-
-BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {
-    dogen::dia::diagram_data_generator g;
-    const auto a(g());
-
-    using namespace boost::archive;
-    std::ostringstream os;
-    {
-        text_oarchive oa(os);
-        dogen::dia::register_types<text_oarchive>(oa);
-        oa << a;
-    }
-
-    dogen::dia::diagram_data b = dogen::dia::diagram_data();
-    std::istringstream is(os.str());
-    {
-        text_iarchive ia(is);
-        dogen::dia::register_types<text_iarchive>(ia);
-        ia >> b;
-    }
-
-    BOOST_CHECK(a == b);
-}
-
-BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {
-    dogen::dia::diagram_data_generator g;
-    const auto a(g());
-
-    using namespace boost::archive;
-    std::ostringstream os;
-    {
-        binary_oarchive oa(os);
-        dogen::dia::register_types<binary_oarchive>(oa);
-        oa << a;
-    }
-
-    dogen::dia::diagram_data b = dogen::dia::diagram_data();
-    std::istringstream is(os.str());
-    {
-        binary_iarchive ia(is);
-        dogen::dia::register_types<binary_iarchive>(ia);
-        ia >> b;
-    }
-
-    BOOST_CHECK(a == b);
-}
 BOOST_AUTO_TEST_SUITE_END()
