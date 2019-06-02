@@ -2496,75 +2496,6 @@ Links:
 - [[https://www.bfilipek.com/2018/10/strings17talk.html][Let's Talk About String Operations in C++17]]
 - [[https://developercommunity.visualstudio.com/content/problem/24487/constexpr-stdstring-view-from-string-literal.html][constexpr std::string_view from string literal]]
 
-*** Element extensions considered harmful                             :story:
-
-When we implemented forward declarations we created them as "element
-extensions"; that is, some kind of hack where we'd have two model
-elements stuck together (the main model element and its "extension",
-the forward declaration). In reality, they are just projections of the
-same model element. We need to handle them just as we handle class
-header / implementation. We just need to use the formatter specific
-postfix to distinguish between files.
-
-The problem with this approach, of course, is that we now need to
-create many formatters (per element type). A possible solution is to
-factor them out into a formatting helper function that they call. We
-still need all of the common machinery to formatters
-though. Nevertheless, this is a price worth paying in order to keep
-the meta-model simple (e.g. none of the hacks we introduced for
-element extensions).
-
-Notes:
-
-- add forward declaration formatters for each type. Create common
-  formatting function.
-- remove element extensions across the code base.
-- remove forward declaration element in fabric.
-
-Merged stories:
-
-*Remove element segmentation*
-
-We need to remove the idea of forward declarations being handled as
-"element segmentation". They should just be different facets of the
-same elements. There is another story for this which should be merged
-with this one.
-
-*Move element segmentation into yarn*
-
-We've added the notion that an element can be composed of other
-elements in quilt, in order to handle forward declarations. However,
-with a little bit of effort we can generalise it into yarn. It would
-be useful for other things such as inner classes. We don't need to
-actually implement inner classes right now but we should make sure the
-moving of this feature into yarn is compatible with it.
-
-Notes:
-
-- seems like we have two use cases: a) we need all elements, master
-  and extensions and we don't really care about which is which. b) we
-  only want masters. However, we must be able to access the same
-  element properties from either the master or the extension. Having
-  said all that, it seems we don't really need all of the element
-  properties for both - forward declarations probably only need:
-  decoration and artefact properties.
-- we don't seem to use the map in formattables model anywhere, other
-  than to find master/extension elements.
-- Yarn model could have two simple list containers (masters and
-  all). Or maybe we don't even need this to start off with, we can
-  just iterate and skip extensions where required.
-- so in conclusion, we to move decoration, enablement and dependencies
-  into yarn (basically decoration and artefact properties) first and
-  then see where segmentation ends.
-
-Tasks:
-
-- add a concept for element extensions: =Extensible=. Contains a list
-  of element pointers.
-- populate it with the extensions.
-- change enablement to merge all element properties of extensible
-  elements.
-
 *** Create a archetypes locator                                       :story:
 
 We need to move all functionality which is not kernel specific into
@@ -4133,29 +4064,6 @@ source directories to empty. This probably just requires annotations
 to understand empty values, e.g.
 
 : a.b.c=
-
-*** Incorrect generation of forward declarations for all facets       :story:
-
-Up to know we generated forward declarations for all facets for all
-types that needed a =types= forward declaration. This was not a
-problem for enumerations, objects, exceptions and so forth because
-they were all serialisable. However with the introduction of visitor
-forward declarations, we are now generating an invalid serialisation
-forward declaration (because visitors are not serialisable). We need
-to find a way to determine when to generate a forward declaration for
-a facet. This could be done via enablement, but we don't want to do
-too much hard-coding (e.g. if visitor then disable serialisation
-facet, etc).
-
-Ideally we should support some kind of "on-demand" generation: if
-anyone references a forward declaration we generate it, if no one does
-we don't. Users are still free to force a forward declaration to be
-generated via meta-data.
-
-This could be achieved by keeping track of usage in include
-builder. Formatters would have an additional knob: generate always,
-generate if referenced. If "generate if referenced", we would wait for
-at least one reference in include builder.
 
 *** Character member variables are not tidied up on io                :story:
 

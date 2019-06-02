@@ -31,7 +31,7 @@ std::list<std::string> primitive_header_formatter::inclusion_dependencies(
     builder.add(inclusion_constants::std::algorithm());
 
     using ser = formatters::serialization::traits;
-    const auto ser_fwd_arch(ser::forward_declarations_archetype());
+    const auto ser_fwd_arch(ser::primitive_forward_declarations_archetype());
     builder.add(p.name(), ser_fwd_arch);
 
     const auto carch(traits::canonical_archetype());

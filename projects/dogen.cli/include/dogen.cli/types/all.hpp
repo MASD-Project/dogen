@@ -32,11 +32,15 @@
 #include "dogen.cli/types/injector_factory.hpp"
 #include "dogen.cli/types/parser_exception.hpp"
 #include "dogen.cli/types/cli_configuration.hpp"
+#include "dogen.cli/types/configuration_fwd.hpp"
 #include "dogen.cli/types/command_line_parser.hpp"
 #include "dogen.cli/types/application_exception.hpp"
+#include "dogen.cli/types/cli_configuration_fwd.hpp"
 #include "dogen.cli/types/program_options_parser.hpp"
 #include "dogen.cli/types/configuration_validator.hpp"
 #include "dogen.cli/types/conversion_configuration.hpp"
 #include "dogen.cli/types/generation_configuration.hpp"
+#include "dogen.cli/types/conversion_configuration_fwd.hpp"
+#include "dogen.cli/types/generation_configuration_fwd.hpp"
 
 #endif

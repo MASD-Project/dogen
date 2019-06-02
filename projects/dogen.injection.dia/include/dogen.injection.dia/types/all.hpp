@@ -42,6 +42,9 @@
 #include "dogen.injection.dia/types/processed_comment.hpp"
 #include "dogen.injection.dia/types/decoding_transform.hpp"
 #include "dogen.injection.dia/types/processed_attribute.hpp"
+#include "dogen.injection.dia/types/processed_object_fwd.hpp"
+#include "dogen.injection.dia/types/processed_comment_fwd.hpp"
+#include "dogen.injection.dia/types/processed_attribute_fwd.hpp"
 #include "dogen.injection.dia/types/processed_object_factory.hpp"
 #include "dogen.injection.dia/types/processed_comment_factory.hpp"
 

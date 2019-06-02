@@ -95,13 +95,13 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
         builder.add(ios);
 
     using ser = formatters::serialization::traits;
-    const auto ser_fwd_arch(ser::forward_declarations_archetype());
+    const auto ser_fwd_arch(ser::class_forward_declarations_archetype());
     builder.add(o.name(), ser_fwd_arch);
 
     const auto carch(traits::canonical_archetype());
     builder.add(o.transparent_associations(), carch);
 
-    const auto fwd_arch(traits::forward_declarations_archetype());
+    const auto fwd_arch(traits::class_forward_declarations_archetype());
     builder.add(o.opaque_associations(), fwd_arch);
 
     const auto self_arch(class_header_formatter::static_id());
@@ -119,7 +119,10 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
          * must include the parent we do not need any additional
          * includes.
          */
-        builder.add(*o.base_visitor(), fwd_arch);
+        builder.add(o.opaque_associations(), fwd_arch);
+
+        const auto visitor_fwd_arch(traits::visitor_forward_declarations_archetype());
+        builder.add(*o.base_visitor(), visitor_fwd_arch);
     }
     return builder.build();
 }

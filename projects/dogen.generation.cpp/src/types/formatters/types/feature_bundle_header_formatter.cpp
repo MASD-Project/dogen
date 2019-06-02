@@ -96,7 +96,7 @@ std::list<std::string> feature_bundle_header_formatter::inclusion_dependencies(
         const auto ch_arch(traits::class_header_archetype());
         builder.add(fb.transparent_associations(), ch_arch);
 
-        const auto fwd_arch(traits::forward_declarations_archetype());
+        const auto fwd_arch(traits::class_forward_declarations_archetype());
         builder.add(fb.opaque_associations(), fwd_arch);
     }
 

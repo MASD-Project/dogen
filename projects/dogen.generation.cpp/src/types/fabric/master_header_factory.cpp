@@ -84,18 +84,24 @@ private:
 
 public:
     using assets::meta_model::element_visitor::visit;
-    void visit(const assets::meta_model::structural::visitor& v) { process_element(v); }
+    void visit(const assets::meta_model::structural::visitor& v) {
+        process_element(v);
+    }
     void visit(const assets::meta_model::structural::enumeration& e) {
         process_element(e);
     }
     void visit(const assets::meta_model::structural::primitive& p) {
         process_element(p);
     }
-    void visit(const assets::meta_model::structural::object& o) { process_element(o); }
+    void visit(const assets::meta_model::structural::object& o) {
+        process_element(o);
+    }
     void visit(const assets::meta_model::structural::exception& e) {
         process_element(e);
     }
-    void visit(const assets::meta_model::structural::module& m) { process_element(m); }
+    void visit(const assets::meta_model::structural::module& m) {
+        process_element(m);
+    }
 
 public:
     boost::shared_ptr<master_header> result() { return result_; }
@@ -136,7 +142,7 @@ generator::filter_formatters(const std::forward_list<std::shared_ptr<
      * header files.
      */
     using formatters::inclusion_support_types;
-    static const auto ns(inclusion_support_types::not_supported);
+    const auto ns(inclusion_support_types::not_supported);
     for (const auto& fmt : formatters) {
         if (fmt->inclusion_support_type() != ns)
             r.push_front(fmt);

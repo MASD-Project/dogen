@@ -1,12 +1,15 @@
 <#@ masd.stitch.stream_variable_name=a.stream() #>
-<#@ masd.stitch.containing_namespaces=dogen::generation::cpp::formatters::types #>
+<#@ masd.stitch.containing_namespaces=dogen::generation::cpp::formatters::serialization #>
 <#@ masd.stitch.inclusion_dependency="dogen.assets/types/meta_model/structural/object.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.assets/types/helpers/meta_name_factory.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
-<#@ masd.stitch.wale.text_template=cpp_artefact_formatter_implementation_header.wale #>
-<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/types/class_forward_declarations_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.assets/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/formatting_error.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/serialization/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/serialization/class_forward_declarations_formatter.hpp" #>
+<#@ masd.stitch.wale.text_template=cpp_artefact_formatter_implementation_header.wale #>
 <#@ masd.stitch.wale.kvp.class.simple_name=class_forward_declarations_formatter #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=class_forward_declarations #>
 <#@ masd.stitch.wale.kvp.class.inclusion_support_type=regular_support #>
@@ -17,10 +20,15 @@
 <#+
 
 std::list<std::string> class_forward_declarations_formatter::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const assets::meta_model::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
+    const formattables::dependencies_builder_factory& f,
+    const assets::meta_model::element& e) const {
+    auto builder(f.make());
+
+    using tp = formatters::types::traits;
+    const auto tp_fn(tp::class_forward_declarations_archetype());
+    builder.add(e.name(), tp_fn);
+
+    return builder.build();
 }
 
 extraction::meta_model::artefact class_forward_declarations_formatter::
@@ -30,16 +38,19 @@ format(const context& ctx, const assets::meta_model::element& e) const {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(o));
-        {
-            const auto ns(a.make_namespaces(o.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+        const auto qn(a.get_qualified_name(o.name()));
 #>
 
-class <#= o.name().simple() #>;
+namespace boost {
+namespace serialization {
 
-<#+
-        } // snf
-#>
+template<class Archive>
+void save(Archive& ar, const <#= qn #>& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, <#= qn #>& v, unsigned int version);
+
+} }
 
 <#+
     } // sbf

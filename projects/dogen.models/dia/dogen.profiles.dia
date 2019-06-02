@@ -1957,7 +1957,7 @@ so we disable all facets.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.forward_declarations.enabled#</dia:string>
+            <dia:string>#masd.generation.cpp.types.class_forward_declarations.enabled#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -2828,7 +2828,7 @@ so we disable all facets.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.forward_declarations.enabled#</dia:string>
+            <dia:string>#masd.generation.cpp.types.class_forward_declarations.enabled#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>

@@ -58,7 +58,12 @@ struct traits {
     /**
      * @brief Name of the forward declaration's archetype.
      */
-    static std::string forward_declarations_archetype();
+    static std::string class_forward_declarations_archetype();
+
+    /**
+     * @brief Name of the forward declaration's archetype.
+     */
+    static std::string primitive_forward_declarations_archetype();
 
     /**
      * @brief Name of the registrar header archetype.

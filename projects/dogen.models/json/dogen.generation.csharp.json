@@ -86,7 +86,7 @@
         "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
-        "masd.generation.cpp.types.forward_declarations.enabled": "true"
+        "masd.generation.cpp.types.class_forward_declarations.enabled": "true"
       },
       "fallback_element_type": "masd::object"
     },
@@ -98,7 +98,7 @@
       "tagged_values": {
         "masd.generation.cpp.io.enabled": "true",
         "masd.generation.cpp.io.overwrite": "false",
-        "masd.generation.cpp.types.forward_declarations.enabled": "true"
+        "masd.generation.cpp.types.class_forward_declarations.enabled": "true"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -261,7 +261,7 @@
         "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
-        "masd.generation.cpp.types.forward_declarations.enabled": "true"
+        "masd.generation.cpp.types.class_forward_declarations.enabled": "true"
       },
       "fallback_element_type": "masd::object"
     },
@@ -733,7 +733,7 @@
         "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
-        "masd.generation.cpp.types.forward_declarations.enabled": "true"
+        "masd.generation.cpp.types.class_forward_declarations.enabled": "true"
       },
       "fallback_element_type": "masd::object"
     },

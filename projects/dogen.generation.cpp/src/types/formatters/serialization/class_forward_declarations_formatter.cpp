@@ -18,14 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.generation.cpp/types/formatters/serialization/class_forward_declarations_formatter.hpp"
+#include "dogen.generation.cpp/types/formatters/serialization/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/types/traits.hpp"
-#include "dogen.generation.cpp/types/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/types/class_forward_declarations_formatter.hpp"
+#include "dogen.generation.cpp/types/formatters/formatting_error.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
+#include "dogen.generation.cpp/types/formatters/traits.hpp"
 #include "dogen.assets/types/helpers/meta_name_factory.hpp"
+#include "dogen.generation.cpp/types/traits.hpp"
 #include "dogen.assets/types/meta_model/structural/object.hpp"
 
-namespace dogen::generation::cpp::formatters::types {
+namespace dogen::generation::cpp::formatters::serialization {
 
 std::string class_forward_declarations_formatter::static_id() {
     return traits::class_forward_declarations_archetype();
@@ -69,10 +72,15 @@ boost::filesystem::path class_forward_declarations_formatter::full_path(
 }
 
 std::list<std::string> class_forward_declarations_formatter::inclusion_dependencies(
-    const formattables::dependencies_builder_factory& /*f*/,
-    const assets::meta_model::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
+    const formattables::dependencies_builder_factory& f,
+    const assets::meta_model::element& e) const {
+    auto builder(f.make());
+
+    using tp = formatters::types::traits;
+    const auto tp_fn(tp::class_forward_declarations_archetype());
+    builder.add(e.name(), tp_fn);
+
+    return builder.build();
 }
 
 extraction::meta_model::artefact class_forward_declarations_formatter::
@@ -82,13 +90,18 @@ format(const context& ctx, const assets::meta_model::element& e) const {
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(o));
-        {
-            const auto ns(a.make_namespaces(o.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
+        const auto qn(a.get_qualified_name(o.name()));
 a.stream() << std::endl;
-a.stream() << "class " << o.name().simple() << ";" << std::endl;
+a.stream() << "namespace boost {" << std::endl;
+a.stream() << "namespace serialization {" << std::endl;
 a.stream() << std::endl;
-        } // snf
+a.stream() << "template<class Archive>" << std::endl;
+a.stream() << "void save(Archive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
+a.stream() << std::endl;
+a.stream() << "template<class Archive>" << std::endl;
+a.stream() << "void load(Archive& ar, " << qn << "& v, unsigned int version);" << std::endl;
+a.stream() << std::endl;
+a.stream() << "} }" << std::endl;
 a.stream() << std::endl;
     } // sbf
     return a.make_artefact();

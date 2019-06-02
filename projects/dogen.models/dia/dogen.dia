@@ -1951,7 +1951,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
       <dia:attribute name="comment">
         <dia:string>#The values supplied for the configuration are not valid.
 
-#DOGEN masd.generation.cpp.types.forward_declarations.enabled=false#</dia:string>
+#DOGEN masd.generation.cpp.types.class_forward_declarations.enabled=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

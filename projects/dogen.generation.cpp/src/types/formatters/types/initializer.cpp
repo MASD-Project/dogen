@@ -29,7 +29,9 @@
 #include "dogen.generation.cpp/types/formatters/types/exception_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/types/namespace_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/types/visitor_header_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/types/forward_declarations_formatter.hpp"
+#include "dogen.generation.cpp/types/formatters/types/class_forward_declarations_formatter.hpp"
+#include "dogen.generation.cpp/types/formatters/types/visitor_forward_declarations_formatter.hpp"
+#include "dogen.generation.cpp/types/formatters/types/primitive_forward_declarations_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/types/smart_pointer_helper.hpp"
 #include "dogen.generation.cpp/types/formatters/types/feature_bundle_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/types/feature_bundle_implementation_formatter.hpp"
@@ -50,7 +52,9 @@ void initializer::initialize(registrar& rg) {
     register_formatter<exception_header_formatter>(rg);
     register_formatter<namespace_header_formatter>(rg);
     register_formatter<visitor_header_formatter>(rg);
-    register_formatter<forward_declarations_formatter>(rg);
+    register_formatter<class_forward_declarations_formatter>(rg);
+    register_formatter<visitor_forward_declarations_formatter>(rg);
+    register_formatter<primitive_forward_declarations_formatter>(rg);
     register_formatter<feature_bundle_header_formatter>(rg);
     register_formatter<feature_bundle_implementation_formatter>(rg);
     register_formatter<feature_template_initializer_header_formatter>(rg);

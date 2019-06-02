@@ -1205,7 +1205,7 @@
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generation.cpp.types.forward_declarations.enabled=true#</dia:string>
+        <dia:string>##DOGEN masd.generation.cpp.types.class_forward_declarations.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="true"/>
@@ -1582,7 +1582,7 @@
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.generation.cpp.io.enabled=true
 #DOGEN masd.generation.cpp.io.overwrite=false
-#DOGEN masd.generation.cpp.types.forward_declarations.enabled=true#</dia:string>
+#DOGEN masd.generation.cpp.types.class_forward_declarations.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4343,7 +4343,7 @@
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generation.cpp.types.forward_declarations.enabled=true#</dia:string>
+        <dia:string>##DOGEN masd.generation.cpp.types.class_forward_declarations.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -13064,7 +13064,7 @@
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generation.cpp.types.forward_declarations.enabled=true#</dia:string>
+        <dia:string>##DOGEN masd.generation.cpp.types.class_forward_declarations.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="true"/>

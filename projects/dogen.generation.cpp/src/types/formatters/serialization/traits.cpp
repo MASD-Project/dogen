@@ -49,8 +49,13 @@ std::string traits::enum_header_archetype() {
     return r;
 }
 
-std::string traits::forward_declarations_archetype() {
-    static std::string r(traits::facet() + ".forward_declarations");
+std::string traits::class_forward_declarations_archetype() {
+    static std::string r(traits::facet() + ".class_forward_declarations");
+    return r;
+}
+
+std::string traits::primitive_forward_declarations_archetype() {
+    static std::string r(traits::facet() + ".primitive_forward_declarations");
     return r;
 }
 

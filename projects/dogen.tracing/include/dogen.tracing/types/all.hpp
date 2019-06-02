@@ -28,6 +28,8 @@
 #include "dogen.tracing/types/tracer.hpp"
 #include "dogen.tracing/types/metrics.hpp"
 #include "dogen.tracing/types/tracing.hpp"
+#include "dogen.tracing/types/tracer_fwd.hpp"
+#include "dogen.tracing/types/metrics_fwd.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.tracing/types/tracing_error.hpp"
 #include "dogen.tracing/types/metrics_builder.hpp"

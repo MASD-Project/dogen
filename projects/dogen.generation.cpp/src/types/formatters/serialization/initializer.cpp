@@ -28,7 +28,8 @@
 #include "dogen.generation.cpp/types/formatters/serialization/enum_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/serialization/registrar_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/serialization/registrar_implementation_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/serialization/forward_declarations_formatter.hpp"
+#include "dogen.generation.cpp/types/formatters/serialization/class_forward_declarations_formatter.hpp"
+#include "dogen.generation.cpp/types/formatters/serialization/primitive_forward_declarations_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/serialization/path_helper.hpp"
 #include "dogen.generation.cpp/types/formatters/serialization/initializer.hpp"
 
@@ -44,7 +45,8 @@ void initializer::initialize(registrar& rg) {
     register_formatter<enum_header_formatter>(rg);
     register_formatter<registrar_header_formatter>(rg);
     register_formatter<registrar_implementation_formatter>(rg);
-    register_formatter<forward_declarations_formatter>(rg);
+    register_formatter<class_forward_declarations_formatter>(rg);
+    register_formatter<primitive_forward_declarations_formatter>(rg);
     register_helper_formatter<path_helper>(rg);
 }
 

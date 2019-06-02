@@ -27,7 +27,7 @@ std::list<std::string> visitor_header_formatter::inclusion_dependencies(
     using assets::meta_model::structural::visitor;
     const auto& v(assistant::as<visitor>(e));
     auto builder(f.make());
-    builder.add(v.visits(), traits::forward_declarations_archetype());
+    builder.add(v.visits(), traits::class_forward_declarations_archetype());
 
     if (v.parent())
         builder.add(*v.parent(), traits::visitor_header_archetype());

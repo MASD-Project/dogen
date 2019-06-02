@@ -32,6 +32,7 @@
 #include "dogen/types/tracing_level.hpp"
 #include "dogen/types/tracing_format.hpp"
 #include "dogen/types/reporting_style.hpp"
+#include "dogen/types/configuration_fwd.hpp"
 #include "dogen/types/diffing_destination.hpp"
 #include "dogen/types/conversion_exception.hpp"
 #include "dogen/types/generation_exception.hpp"
@@ -40,8 +41,12 @@
 #include "dogen/types/tracing_configuration.hpp"
 #include "dogen/types/configuration_validator.hpp"
 #include "dogen/types/reporting_configuration.hpp"
+#include "dogen/types/diffing_configuration_fwd.hpp"
+#include "dogen/types/tracing_configuration_fwd.hpp"
 #include "dogen/types/mock_configuration_factory.hpp"
+#include "dogen/types/reporting_configuration_fwd.hpp"
 #include "dogen/types/model_processing_configuration.hpp"
 #include "dogen/types/invalid_configuration_exception.hpp"
+#include "dogen/types/model_processing_configuration_fwd.hpp"
 
 #endif

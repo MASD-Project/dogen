@@ -27,12 +27,16 @@
 
 #include "dogen.archetypes/types/location.hpp"
 #include "dogen.archetypes/types/archetypes.hpp"
+#include "dogen.archetypes/types/location_fwd.hpp"
 #include "dogen.archetypes/types/building_error.hpp"
 #include "dogen.archetypes/types/locations_group.hpp"
 #include "dogen.archetypes/types/features/features.hpp"
 #include "dogen.archetypes/types/location_repository.hpp"
+#include "dogen.archetypes/types/locations_group_fwd.hpp"
+#include "dogen.archetypes/types/location_repository_fwd.hpp"
 #include "dogen.archetypes/types/location_repository_parts.hpp"
 #include "dogen.archetypes/types/location_repository_builder.hpp"
+#include "dogen.archetypes/types/location_repository_parts_fwd.hpp"
 #include "dogen.archetypes/types/location_repository_parts_builder.hpp"
 
 #endif

@@ -20,73 +20,73 @@
  */
 #include "dogen.generation.cpp/types/formatters/types/traits.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/types/class_forward_declarations_formatter.hpp"
+#include "dogen.generation.cpp/types/formatters/types/primitive_forward_declarations_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.assets/types/helpers/meta_name_factory.hpp"
-#include "dogen.assets/types/meta_model/structural/object.hpp"
+#include "dogen.assets/types/meta_model/structural/primitive.hpp"
 
 namespace dogen::generation::cpp::formatters::types {
 
-std::string class_forward_declarations_formatter::static_id() {
-    return traits::class_forward_declarations_archetype();
+std::string primitive_forward_declarations_formatter::static_id() {
+    return traits::primitive_forward_declarations_archetype();
 }
 
-std::string class_forward_declarations_formatter::id() const {
+std::string primitive_forward_declarations_formatter::id() const {
     return static_id();
 }
 
 archetypes::location
-class_forward_declarations_formatter::archetype_location() const {
+primitive_forward_declarations_formatter::archetype_location() const {
     static archetypes::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(),
-          class_forward_declarations_formatter::static_id());
+          primitive_forward_declarations_formatter::static_id());
     return r;
 }
 
-const assets::meta_model::name& class_forward_declarations_formatter::meta_name() const {
+const assets::meta_model::name& primitive_forward_declarations_formatter::meta_name() const {
     using assets::helpers::meta_name_factory;
-    static auto r(meta_name_factory::make_object_name());
+    static auto r(meta_name_factory::make_primitive_name());
     return r;
 }
 
-std::string class_forward_declarations_formatter::family() const {
+std::string primitive_forward_declarations_formatter::family() const {
     return cpp::traits::header_family();
 }
 
-inclusion_support_types class_forward_declarations_formatter::inclusion_support_type() const {
+inclusion_support_types primitive_forward_declarations_formatter::inclusion_support_type() const {
     return inclusion_support_types::regular_support;
 }
 
-boost::filesystem::path class_forward_declarations_formatter::inclusion_path(
+boost::filesystem::path primitive_forward_declarations_formatter::inclusion_path(
     const formattables::locator& l, const assets::meta_model::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_id());
 }
 
-boost::filesystem::path class_forward_declarations_formatter::full_path(
+boost::filesystem::path primitive_forward_declarations_formatter::full_path(
     const formattables::locator& l, const assets::meta_model::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_id());
 }
 
-std::list<std::string> class_forward_declarations_formatter::inclusion_dependencies(
+std::list<std::string> primitive_forward_declarations_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
     const assets::meta_model::element& /*e*/) const {
     static std::list<std::string> r;
     return r;
 }
 
-extraction::meta_model::artefact class_forward_declarations_formatter::
+extraction::meta_model::artefact primitive_forward_declarations_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& o(a.as<assets::meta_model::structural::object>(e));
+    const auto& p(a.as<assets::meta_model::structural::primitive>(e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(o));
+        auto sbf(a.make_scoped_boilerplate_formatter(p));
         {
-            const auto ns(a.make_namespaces(o.name()));
+            const auto ns(a.make_namespaces(p.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
-a.stream() << "class " << o.name().simple() << ";" << std::endl;
+a.stream() << "class " << p.name().simple() << ";" << std::endl;
 a.stream() << std::endl;
         } // snf
 a.stream() << std::endl;

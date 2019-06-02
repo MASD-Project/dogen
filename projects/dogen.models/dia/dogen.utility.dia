@@ -6552,7 +6552,7 @@
       <dia:attribute name="comment">
         <dia:string>#Options related to logging.
 
-#DOGEN masd.generation.cpp.types.forward_declarations.enabled=false#</dia:string>
+#DOGEN masd.generation.cpp.types.class_forward_declarations.enabled=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -6904,7 +6904,7 @@ If empty, file logging is disabled.#</dia:string>
       <dia:attribute name="comment">
         <dia:string>#The values supplied for the logging configuration are not valid.
 
-#DOGEN masd.generation.cpp.types.forward_declarations.enabled=false#</dia:string>
+#DOGEN masd.generation.cpp.types.class_forward_declarations.enabled=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

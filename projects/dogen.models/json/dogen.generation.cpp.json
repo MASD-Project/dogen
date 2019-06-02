@@ -59,7 +59,7 @@
         "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
-        "masd.generation.cpp.types.forward_declarations.enabled": "true"
+        "masd.generation.cpp.types.class_forward_declarations.enabled": "true"
       },
       "fallback_element_type": "masd::object"
     },
@@ -475,20 +475,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::forward_declarations_formatter",
-      "stereotypes": [
-        "dogen::cpp::artefact_formatter"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formatters::serialization::forward_declarations_formatter",
-      "stereotypes": [
-        "dogen::cpp::artefact_formatter"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formattables::dependencies_builder",
       "stereotypes": [
         "dogen::handcrafted::typeable"
@@ -548,7 +534,7 @@
         "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
-        "masd.generation.cpp.types.forward_declarations.enabled": "true"
+        "masd.generation.cpp.types.class_forward_declarations.enabled": "true"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -614,7 +600,7 @@
         "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
-        "masd.generation.cpp.types.forward_declarations.enabled": "true"
+        "masd.generation.cpp.types.class_forward_declarations.enabled": "true"
       },
       "fallback_element_type": "masd::object"
     },
@@ -2196,19 +2182,27 @@
           }
         },
         {
-          "name": "masd.generation.cpp.types.forward_declarations.postfix",
+          "name": "masd.generation.cpp.types.class_forward_declarations.postfix",
           "type": "masd::variability::text",
           "value": "\"fwd\"",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.forward_declarations.postfix"
+            "masd.variability.qualified_name": "masd.generation.cpp.types.class_forward_declarations.postfix"
           }
         },
         {
-          "name": "masd.generation.cpp.types.class_forward_declarations.postfix",
+          "name": "masd.generation.cpp.types.visitor_forward_declarations.postfix",
           "type": "masd::variability::text",
-          "value": "\"fwd2\"",
+          "value": "\"fwd\"",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.class_forward_declarations.postfix"
+            "masd.variability.qualified_name": "masd.generation.cpp.types.visitor_forward_declarations.postfix"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.types.primitive_forward_declarations.postfix",
+          "type": "masd::variability::text",
+          "value": "\"fwd\"",
+          "tagged_values": {
+            "masd.variability.qualified_name": "masd.generation.cpp.types.primitive_forward_declarations.postfix"
           }
         },
         {
@@ -2743,11 +2737,19 @@
           }
         },
         {
-          "name": "masd.generation.cpp.serialization.forward_declarations.postfix",
+          "name": "masd.generation.cpp.serialization.class_forward_declarations.postfix",
           "type": "masd::variability::text",
           "value": "\"fwd\"",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.serialization.forward_declarations.postfix"
+            "masd.variability.qualified_name": "masd.generation.cpp.serialization.class_forward_declarations.postfix"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.serialization.primitive_forward_declarations.postfix",
+          "type": "masd::variability::text",
+          "value": "\"fwd\"",
+          "tagged_values": {
+            "masd.variability.qualified_name": "masd.generation.cpp.serialization.primitive_forward_declarations.postfix"
           }
         },
         {
@@ -3372,6 +3374,34 @@
     },
     {
       "name": "formatters::types::class_forward_declarations_formatter",
+      "stereotypes": [
+        "dogen::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::types::visitor_forward_declarations_formatter",
+      "stereotypes": [
+        "dogen::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::serialization::class_forward_declarations_formatter",
+      "stereotypes": [
+        "dogen::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::types::primitive_forward_declarations_formatter",
+      "stereotypes": [
+        "dogen::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::serialization::primitive_forward_declarations_formatter",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
