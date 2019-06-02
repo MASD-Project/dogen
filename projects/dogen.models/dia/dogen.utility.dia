@@ -103,16 +103,16 @@
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O1">
       <dia:attribute name="obj_pos">
-        <dia:point val="0,-23"/>
+        <dia:point val="2,-24"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-0.05,-23.05;27.13,-3.65"/>
+        <dia:rectangle val="1.95,-24.05;29.13,-4.65"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="0,-23"/>
+        <dia:point val="2,-24"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.080000000000002"/>
@@ -163,7 +163,7 @@
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="0.35,-21.755"/>
+            <dia:point val="2.35,-22.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -4937,13 +4937,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O49">
       <dia:attribute name="obj_pos">
-        <dia:point val="155,0"/>
+        <dia:point val="135,35"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="154.95,-0.05;172.875,3.05"/>
+        <dia:rectangle val="134.95,34.95;152.875,38.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="155,0"/>
+        <dia:point val="135,35"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.824999999999999"/>
@@ -5159,13 +5159,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O51">
       <dia:attribute name="obj_pos">
-        <dia:point val="155,5"/>
+        <dia:point val="158,5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="154.95,4.95;167.87,8.05"/>
+        <dia:rectangle val="157.95,4.95;170.87,8.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="155,5"/>
+        <dia:point val="158,5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -5174,7 +5174,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#injection_dia#</dia:string>
+        <dia:string>#northwind#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -5285,7 +5285,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#injection_json#</dia:string>
+        <dia:string>#resolver#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -5381,235 +5381,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O53">
       <dia:attribute name="obj_pos">
-        <dia:point val="155,10"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="154.95,9.95;167.87,13.05"/>
-      </dia:attribute>
-      <dia:attribute name="elem_corner">
-        <dia:point val="155,10"/>
-      </dia:attribute>
-      <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
-      </dia:attribute>
-      <dia:attribute name="elem_height">
-        <dia:real val="3"/>
-      </dia:attribute>
-      <dia:attribute name="name">
-        <dia:string>#northwind#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="stereotype">
-        <dia:string>#dogen::handcrafted::typeable#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="comment">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="abstract">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_attributes">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_operations">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="visible_attributes">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_comments">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_after_char">
-        <dia:int val="40"/>
-      </dia:attribute>
-      <dia:attribute name="comment_line_length">
-        <dia:int val="17"/>
-      </dia:attribute>
-      <dia:attribute name="comment_tagging">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="line_width">
-        <dia:real val="0.10000000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="line_color">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="fill_color">
-        <dia:color val="#fffacd"/>
-      </dia:attribute>
-      <dia:attribute name="text_color">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font">
-        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font">
-        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font">
-        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font">
-        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font">
-        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font_height">
-        <dia:real val="0.69999999999999996"/>
-      </dia:attribute>
-      <dia:attribute name="attributes"/>
-      <dia:attribute name="operations"/>
-      <dia:attribute name="template">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="templates"/>
-      <dia:childnode parent="O47"/>
-    </dia:object>
-    <dia:object type="UML - Class" version="0" id="O54">
-      <dia:attribute name="obj_pos">
         <dia:point val="135,15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="134.95,14.95;147.87,18.05"/>
+        <dia:rectangle val="134.95,14.95;152.875,18.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="135,15"/>
-      </dia:attribute>
-      <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
-      </dia:attribute>
-      <dia:attribute name="elem_height">
-        <dia:real val="3"/>
-      </dia:attribute>
-      <dia:attribute name="name">
-        <dia:string>#resolver#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="stereotype">
-        <dia:string>#dogen::handcrafted::typeable#</dia:string>
-      </dia:attribute>
-      <dia:attribute name="comment">
-        <dia:string>##</dia:string>
-      </dia:attribute>
-      <dia:attribute name="abstract">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_attributes">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="suppress_operations">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="visible_attributes">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="visible_comments">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_operations">
-        <dia:boolean val="true"/>
-      </dia:attribute>
-      <dia:attribute name="wrap_after_char">
-        <dia:int val="40"/>
-      </dia:attribute>
-      <dia:attribute name="comment_line_length">
-        <dia:int val="17"/>
-      </dia:attribute>
-      <dia:attribute name="comment_tagging">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="line_width">
-        <dia:real val="0.10000000000000001"/>
-      </dia:attribute>
-      <dia:attribute name="line_color">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="fill_color">
-        <dia:color val="#fffacd"/>
-      </dia:attribute>
-      <dia:attribute name="text_color">
-        <dia:color val="#000000"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font">
-        <dia:font family="monospace" style="0" name="Courier"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font">
-        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font">
-        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font">
-        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font">
-        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font">
-        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
-      </dia:attribute>
-      <dia:attribute name="normal_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="polymorphic_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_font_height">
-        <dia:real val="0.80000000000000004"/>
-      </dia:attribute>
-      <dia:attribute name="classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="abstract_classname_font_height">
-        <dia:real val="1"/>
-      </dia:attribute>
-      <dia:attribute name="comment_font_height">
-        <dia:real val="0.69999999999999996"/>
-      </dia:attribute>
-      <dia:attribute name="attributes"/>
-      <dia:attribute name="operations"/>
-      <dia:attribute name="template">
-        <dia:boolean val="false"/>
-      </dia:attribute>
-      <dia:attribute name="templates"/>
-      <dia:childnode parent="O47"/>
-    </dia:object>
-    <dia:object type="UML - Class" version="0" id="O55">
-      <dia:attribute name="obj_pos">
-        <dia:point val="135,20"/>
-      </dia:attribute>
-      <dia:attribute name="obj_bb">
-        <dia:rectangle val="134.95,19.95;152.875,23.05"/>
-      </dia:attribute>
-      <dia:attribute name="elem_corner">
-        <dia:point val="135,20"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.824999999999999"/>
@@ -5712,15 +5490,15 @@
       <dia:attribute name="templates"/>
       <dia:childnode parent="O47"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O56">
+    <dia:object type="UML - Class" version="0" id="O54">
       <dia:attribute name="obj_pos">
-        <dia:point val="135,25"/>
+        <dia:point val="135,20"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="134.95,24.95;147.87,28.05"/>
+        <dia:rectangle val="134.95,19.95;147.87,23.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="135,25"/>
+        <dia:point val="135,20"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -5823,15 +5601,15 @@
       <dia:attribute name="templates"/>
       <dia:childnode parent="O47"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O57">
+    <dia:object type="UML - Class" version="0" id="O55">
       <dia:attribute name="obj_pos">
-        <dia:point val="135,30"/>
+        <dia:point val="135,25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="134.95,29.95;152.875,33.05"/>
+        <dia:rectangle val="134.95,24.95;152.875,28.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="135,30"/>
+        <dia:point val="135,25"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.824999999999999"/>
@@ -5934,15 +5712,15 @@
       <dia:attribute name="templates"/>
       <dia:childnode parent="O47"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O58">
+    <dia:object type="UML - Class" version="0" id="O56">
       <dia:attribute name="obj_pos">
-        <dia:point val="155,20"/>
+        <dia:point val="158,15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="154.95,19.95;167.87,23.05"/>
+        <dia:rectangle val="157.95,14.95;170.87,18.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="155,20"/>
+        <dia:point val="158,15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -6045,15 +5823,15 @@
       <dia:attribute name="templates"/>
       <dia:childnode parent="O47"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O59">
+    <dia:object type="UML - Class" version="0" id="O57">
       <dia:attribute name="obj_pos">
-        <dia:point val="135,35"/>
+        <dia:point val="135,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="134.95,34.95;147.87,38.05"/>
+        <dia:rectangle val="134.95,29.95;147.87,33.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="135,35"/>
+        <dia:point val="135,30"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -6156,7 +5934,7 @@
       <dia:attribute name="templates"/>
       <dia:childnode parent="O47"/>
     </dia:object>
-    <dia:object type="UML - LargePackage" version="0" id="O60">
+    <dia:object type="UML - LargePackage" version="0" id="O58">
       <dia:attribute name="obj_pos">
         <dia:point val="86,47"/>
       </dia:attribute>
@@ -6194,7 +5972,7 @@
         <dia:string>#xml#</dia:string>
       </dia:attribute>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O61">
+    <dia:object type="UML - Class" version="0" id="O59">
       <dia:attribute name="obj_pos">
         <dia:point val="88,49"/>
       </dia:attribute>
@@ -6303,9 +6081,9 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O60"/>
+      <dia:childnode parent="O58"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O62">
+    <dia:object type="UML - Class" version="0" id="O60">
       <dia:attribute name="obj_pos">
         <dia:point val="109,49"/>
       </dia:attribute>
@@ -6414,9 +6192,9 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O60"/>
+      <dia:childnode parent="O58"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O63">
+    <dia:object type="UML - Class" version="0" id="O61">
       <dia:attribute name="obj_pos">
         <dia:point val="88,54"/>
       </dia:attribute>
@@ -6525,9 +6303,9 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O60"/>
+      <dia:childnode parent="O58"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O64">
+    <dia:object type="UML - Class" version="0" id="O62">
       <dia:attribute name="obj_pos">
         <dia:point val="109,54"/>
       </dia:attribute>
@@ -6636,9 +6414,9 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O60"/>
+      <dia:childnode parent="O58"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O65">
+    <dia:object type="UML - Class" version="0" id="O63">
       <dia:attribute name="obj_pos">
         <dia:point val="88,59"/>
       </dia:attribute>
@@ -6747,9 +6525,9 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O60"/>
+      <dia:childnode parent="O58"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O66">
+    <dia:object type="UML - Class" version="0" id="O64">
       <dia:attribute name="obj_pos">
         <dia:point val="20,62"/>
       </dia:attribute>
@@ -6957,7 +6735,7 @@ If empty, file logging is disabled.#</dia:string>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O27"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O67">
+    <dia:object type="UML - Association" version="2" id="O65">
       <dia:attribute name="name">
         <dia:string>#configured by &gt;#</dia:string>
       </dia:attribute>
@@ -7025,11 +6803,11 @@ If empty, file logging is disabled.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O29" connection="6"/>
-        <dia:connection handle="1" to="O66" connection="1"/>
+        <dia:connection handle="1" to="O64" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O27"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O68">
+    <dia:object type="UML - Association" version="2" id="O66">
       <dia:attribute name="name">
         <dia:string>#&lt; provides RAII support for#</dia:string>
       </dia:attribute>
@@ -7101,7 +6879,7 @@ If empty, file logging is disabled.#</dia:string>
       </dia:connections>
       <dia:childnode parent="O27"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O69">
+    <dia:object type="UML - Class" version="0" id="O67">
       <dia:attribute name="obj_pos">
         <dia:point val="41,73"/>
       </dia:attribute>
@@ -7214,7 +6992,7 @@ If empty, file logging is disabled.#</dia:string>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O27"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O70">
+    <dia:object type="UML - Class" version="0" id="O68">
       <dia:attribute name="obj_pos">
         <dia:point val="40,62"/>
       </dia:attribute>
@@ -7374,7 +7152,7 @@ If empty, file logging is disabled.#</dia:string>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O27"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O71">
+    <dia:object type="UML - Association" version="2" id="O69">
       <dia:attribute name="name">
         <dia:string>#&lt; throws#</dia:string>
       </dia:attribute>
@@ -7441,12 +7219,12 @@ If empty, file logging is disabled.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O70" connection="7"/>
-        <dia:connection handle="1" to="O69" connection="1"/>
+        <dia:connection handle="0" to="O68" connection="7"/>
+        <dia:connection handle="1" to="O67" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O27"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O72">
+    <dia:object type="UML - Association" version="2" id="O70">
       <dia:attribute name="name">
         <dia:string>#&lt; validates#</dia:string>
       </dia:attribute>
@@ -7513,11 +7291,11 @@ If empty, file logging is disabled.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O70" connection="5"/>
-        <dia:connection handle="1" to="O66" connection="16"/>
+        <dia:connection handle="0" to="O68" connection="5"/>
+        <dia:connection handle="1" to="O64" connection="16"/>
       </dia:connections>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O73">
+    <dia:object type="UML - Association" version="2" id="O71">
       <dia:attribute name="name">
         <dia:string>#validates config using &gt;#</dia:string>
       </dia:attribute>
@@ -7585,11 +7363,11 @@ If empty, file logging is disabled.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O29" connection="7"/>
-        <dia:connection handle="1" to="O70" connection="1"/>
+        <dia:connection handle="1" to="O68" connection="1"/>
       </dia:connections>
       <dia:childnode parent="O27"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O74">
+    <dia:object type="UML - Association" version="2" id="O72">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -7661,15 +7439,15 @@ If empty, file logging is disabled.#</dia:string>
       </dia:connections>
       <dia:childnode parent="O27"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O75">
+    <dia:object type="UML - Class" version="0" id="O73">
       <dia:attribute name="obj_pos">
-        <dia:point val="155,25"/>
+        <dia:point val="158,20"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="154.95,24.95;167.87,28.05"/>
+        <dia:rectangle val="157.95,19.95;170.87,23.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="155,25"/>
+        <dia:point val="158,20"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -7772,15 +7550,15 @@ If empty, file logging is disabled.#</dia:string>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O47"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O76">
+    <dia:object type="UML - Class" version="0" id="O74">
       <dia:attribute name="obj_pos">
-        <dia:point val="155,30"/>
+        <dia:point val="158,25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="154.95,29.95;167.87,33.05"/>
+        <dia:rectangle val="157.95,24.95;170.87,28.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="155,30"/>
+        <dia:point val="158,25"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -7883,15 +7661,15 @@ If empty, file logging is disabled.#</dia:string>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O47"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O77">
+    <dia:object type="UML - Class" version="0" id="O75">
       <dia:attribute name="obj_pos">
-        <dia:point val="135,40"/>
+        <dia:point val="158,0"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="134.95,39.95;147.958,43.05"/>
+        <dia:rectangle val="157.95,-0.05;170.958,3.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="135,40"/>
+        <dia:point val="158,0"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.907500000000001"/>
@@ -7994,15 +7772,15 @@ If empty, file logging is disabled.#</dia:string>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O47"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O78">
+    <dia:object type="UML - Class" version="0" id="O76">
       <dia:attribute name="obj_pos">
-        <dia:point val="155,15"/>
+        <dia:point val="158,10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="154.95,14.95;164.593,18.05"/>
+        <dia:rectangle val="157.95,9.95;167.593,13.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="155,15"/>
+        <dia:point val="158,10"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="9.5425000000000004"/>
@@ -8105,7 +7883,7 @@ If empty, file logging is disabled.#</dia:string>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O47"/>
     </dia:object>
-    <dia:object type="UML - LargePackage" version="0" id="O79">
+    <dia:object type="UML - LargePackage" version="0" id="O77">
       <dia:attribute name="obj_pos">
         <dia:point val="133,47"/>
       </dia:attribute>
@@ -8143,7 +7921,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:string>#environment#</dia:string>
       </dia:attribute>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O80">
+    <dia:object type="UML - Class" version="0" id="O78">
       <dia:attribute name="obj_pos">
         <dia:point val="151,52"/>
       </dia:attribute>
@@ -8252,9 +8030,9 @@ If empty, file logging is disabled.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O79"/>
+      <dia:childnode parent="O77"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O81">
+    <dia:object type="UML - Class" version="0" id="O79">
       <dia:attribute name="obj_pos">
         <dia:point val="136,62"/>
       </dia:attribute>
@@ -8460,9 +8238,9 @@ If empty, file logging is disabled.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O79"/>
+      <dia:childnode parent="O77"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O82">
+    <dia:object type="UML - Association" version="2" id="O80">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -8529,12 +8307,12 @@ If empty, file logging is disabled.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O81" connection="1"/>
-        <dia:connection handle="1" to="O80" connection="6"/>
+        <dia:connection handle="0" to="O79" connection="1"/>
+        <dia:connection handle="1" to="O78" connection="6"/>
       </dia:connections>
-      <dia:childnode parent="O79"/>
+      <dia:childnode parent="O77"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O83">
+    <dia:object type="UML - Association" version="2" id="O81">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -8606,7 +8384,7 @@ If empty, file logging is disabled.#</dia:string>
       </dia:connections>
       <dia:childnode parent="O27"/>
     </dia:object>
-    <dia:object type="UML - LargePackage" version="0" id="O84">
+    <dia:object type="UML - LargePackage" version="0" id="O82">
       <dia:attribute name="obj_pos">
         <dia:point val="2,82"/>
       </dia:attribute>
@@ -8644,7 +8422,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:string>#formatters#</dia:string>
       </dia:attribute>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O85">
+    <dia:object type="UML - Class" version="0" id="O83">
       <dia:attribute name="obj_pos">
         <dia:point val="4,86"/>
       </dia:attribute>
@@ -8753,9 +8531,9 @@ If empty, file logging is disabled.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O84"/>
+      <dia:childnode parent="O82"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O86">
+    <dia:object type="UML - Class" version="0" id="O84">
       <dia:attribute name="obj_pos">
         <dia:point val="16,86"/>
       </dia:attribute>
@@ -8911,9 +8689,9 @@ If empty, file logging is disabled.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O84"/>
+      <dia:childnode parent="O82"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O87">
+    <dia:object type="UML - Class" version="0" id="O85">
       <dia:attribute name="obj_pos">
         <dia:point val="29,86"/>
       </dia:attribute>
@@ -9115,9 +8893,9 @@ If empty, file logging is disabled.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O84"/>
+      <dia:childnode parent="O82"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O88">
+    <dia:object type="UML - Class" version="0" id="O86">
       <dia:attribute name="obj_pos">
         <dia:point val="14,95"/>
       </dia:attribute>
@@ -9357,9 +9135,9 @@ If empty, file logging is disabled.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
-      <dia:childnode parent="O84"/>
+      <dia:childnode parent="O82"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O89">
+    <dia:object type="UML - Association" version="2" id="O87">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -9426,12 +9204,12 @@ If empty, file logging is disabled.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O88" connection="0"/>
-        <dia:connection handle="1" to="O86" connection="6"/>
+        <dia:connection handle="0" to="O86" connection="0"/>
+        <dia:connection handle="1" to="O84" connection="6"/>
       </dia:connections>
-      <dia:childnode parent="O84"/>
+      <dia:childnode parent="O82"/>
     </dia:object>
-    <dia:object type="UML - Association" version="2" id="O90">
+    <dia:object type="UML - Association" version="2" id="O88">
       <dia:attribute name="name">
         <dia:string>##</dia:string>
       </dia:attribute>
@@ -9498,12 +9276,12 @@ If empty, file logging is disabled.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O88" connection="2"/>
-        <dia:connection handle="1" to="O87" connection="6"/>
+        <dia:connection handle="0" to="O86" connection="2"/>
+        <dia:connection handle="1" to="O85" connection="6"/>
       </dia:connections>
-      <dia:childnode parent="O84"/>
+      <dia:childnode parent="O82"/>
     </dia:object>
-    <dia:object type="UML - Class" version="0" id="O91">
+    <dia:object type="UML - Class" version="0" id="O89">
       <dia:attribute name="obj_pos">
         <dia:point val="49,22"/>
       </dia:attribute>

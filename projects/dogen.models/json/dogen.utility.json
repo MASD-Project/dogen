@@ -350,20 +350,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "test_data::injection_dia",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "test_data::injection_json",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "test_data::northwind",
       "stereotypes": [
         "dogen::handcrafted::typeable"
