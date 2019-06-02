@@ -266,6 +266,26 @@ make_masd_generation_cpp_types_forward_declarations_postfix() {
 }
 
 dogen::variability::meta_model::feature_template
+make_masd_generation_cpp_types_class_forward_declarations_postfix() {
+    using namespace dogen::variability::meta_model;
+    feature_template r;
+    r.name().simple("postfix");
+    r.name().qualified("masd.generation.cpp.types.class_forward_declarations.postfix");
+    const auto vt(value_type::text);
+    r.value_type(vt);
+    r.binding_point(binding_point::global);
+    r.kind(template_kind::instance);
+    dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ "fwd2" }));
+
+    archetypes::location al;
+    al.kernel("masd");
+
+    r.location(al);
+    return r;
+}
+
+dogen::variability::meta_model::feature_template
 make_masd_generation_cpp_types_master_header_postfix() {
     using namespace dogen::variability::meta_model;
     feature_template r;
@@ -404,6 +424,7 @@ features::make_templates() {
     r.push_back(make_masd_generation_cpp_types_namespace_header_postfix());
     r.push_back(make_masd_generation_cpp_types_visitor_header_postfix());
     r.push_back(make_masd_generation_cpp_types_forward_declarations_postfix());
+    r.push_back(make_masd_generation_cpp_types_class_forward_declarations_postfix());
     r.push_back(make_masd_generation_cpp_types_master_header_postfix());
     r.push_back(make_masd_generation_cpp_types_builtin_header_postfix());
     r.push_back(make_masd_generation_cpp_types_feature_bundle_header_postfix());

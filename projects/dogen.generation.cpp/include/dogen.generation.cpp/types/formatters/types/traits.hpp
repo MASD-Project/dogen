@@ -51,6 +51,11 @@ struct traits {
     static std::string forward_declarations_archetype();
 
     /**
+     * @brief Name of the forward declaration's archetype.
+     */
+    static std::string class_forward_declarations_archetype();
+
+    /**
      * @brief Name of the class implementation archetype.
      */
     static std::string class_implementation_archetype();

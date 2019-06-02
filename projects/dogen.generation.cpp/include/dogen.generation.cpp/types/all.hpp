@@ -244,6 +244,7 @@
 #include "dogen.generation.cpp/types/formatters/serialization/registrar_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/test_data/class_implementation_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/types/primitive_implementation_formatter.hpp"
+#include "dogen.generation.cpp/types/formatters/types/class_forward_declarations_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/serialization/class_implementation_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/serialization/forward_declarations_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/test_data/primitive_implementation_formatter.hpp"

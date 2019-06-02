@@ -44,6 +44,11 @@ std::string traits::forward_declarations_archetype() {
     return r;
 }
 
+std::string traits::class_forward_declarations_archetype() {
+    static std::string r(traits::facet() + ".class_forward_declarations");
+    return r;
+}
+
 std::string traits::class_implementation_archetype() {
     static std::string r(traits::facet() + ".class_implementation");
     return r;

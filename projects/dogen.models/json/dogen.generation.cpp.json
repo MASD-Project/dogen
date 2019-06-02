@@ -2204,6 +2204,14 @@
           }
         },
         {
+          "name": "masd.generation.cpp.types.class_forward_declarations.postfix",
+          "type": "masd::variability::text",
+          "value": "\"fwd2\"",
+          "tagged_values": {
+            "masd.variability.qualified_name": "masd.generation.cpp.types.class_forward_declarations.postfix"
+          }
+        },
+        {
           "name": "masd.generation.cpp.types.master_header.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
@@ -3361,6 +3369,13 @@
           }
         }
       ]
+    },
+    {
+      "name": "formatters::types::class_forward_declarations_formatter",
+      "stereotypes": [
+        "dogen::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
