@@ -13,25 +13,26 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-06-01 Sat 17:57]
+#+CAPTION: Clock summary at [2019-06-02 Sun 10:18]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *55:11* |       |       | 100.0 |
+| *Total time*                                           | *55:39* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 55:11   |       |       | 100.0 |
-| Active                                                 |         | 55:11 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  3:37 |   6.6 |
+| Stories                                                | 55:39   |       |       | 100.0 |
+| Active                                                 |         | 55:39 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  3:37 |   6.5 |
 | Create a video demo for the previous sprint's features |         |       |  3:46 |   6.8 |
-| Sprint and product backlog grooming                    |         |       |  3:32 |   6.4 |
-| Make wale templates meta-model elements                |         |       |  2:45 |   5.0 |
+| Sprint and product backlog grooming                    |         |       |  3:32 |   6.3 |
+| Make wale templates meta-model elements                |         |       |  2:45 |   4.9 |
 | Flatten the data directory                             |         |       |  1:11 |   2.1 |
-| Rename =dogen::cpp::header_only= stereotypes           |         |       |  0:15 |   0.5 |
+| Rename =dogen::cpp::header_only= stereotypes           |         |       |  0:15 |   0.4 |
 | Rename coding model                                    |         |       |  2:17 |   4.1 |
 | Windows build is failing on a number of tests          |         |       |  0:30 |   0.9 |
 | Consider a test suite level logging flag               |         |       |  1:40 |   3.0 |
 | Move parent processing to injection                    |         |       |  2:06 |   3.8 |
-| Use generated static configurations in transforms      |         |       | 30:16 |  54.8 |
+| Use generated static configurations in transforms      |         |       | 30:16 |  54.4 |
+| Remove serialisation support in dia model              |         |       |  0:28 |   0.8 |
 | Windows clang-cl release build is failing 4 tests      |         |       |  2:16 |   4.1 |
 | Fix issues with nightly build and CI                   |         |       |  0:04 |   0.1 |
 | Read variability papers                                |         |       |  0:56 |   1.7 |
@@ -606,6 +607,16 @@ Approach:
 - update resolver to resolve static configurations.
 - generate the struct for the static configuration.
 - generate a method to read the struct from a dynamic configuration.
+
+*** COMPLETED Remove serialisation support in dia model               :story:
+    CLOSED: [2019-06-02 Sun 10:18]
+    :LOGBOOK:
+    CLOCK: [2019-06-02 Sun 09:50]--[2019-06-02 Sun 10:18] =>  0:28
+    :END:
+
+We don't really need this, since the tests are all commented out and
+our end to end tests already validate all of the dia processing. We
+may get a few valuable minutes in build time by removing it.
 
 *** STARTED Windows clang-cl release build is failing 4 tests         :spike:
     :LOGBOOK:
