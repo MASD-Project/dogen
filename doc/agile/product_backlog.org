@@ -111,40 +111,26 @@ down time waiting for builds to sync it.
 
 *** Do logic-less templates belong in =generation.cpp=?               :story:
 
-For purely expediency purposes, we placed the logic-less templates in
-the =generation.cpp= model. However, this means you cannot create
-logic-less templates in C# models. For now its fine as Dogen is the
-only user of these meta-model elements, but in the future when we
-create a JSON schema for model data, we will want to use these from
-any technical space. We need to either implement formatters on every
-technical space or find a way to create TS-neutral formatters.
+For purely expediency purposes, we placed the logic-less templates
+formatter in the =generation.cpp= model. However, this means you
+cannot create logic-less templates in C# models. For now its fine as
+Dogen is the only user of these meta-model elements, but in the future
+when we create a JSON schema for model data, we will want to use these
+from any technical space. We need to either implement formatters on
+every technical space or find a way to create TS-neutral formatters.
 
 That is to say, we create a formatter for logic-less templates in the
 C++ generation model. This means that you can only use these in the
 C++ technical space. The easy solution is just to copy across the
 formatters into the C# technical space. However, this is not scalable
-as we add more backends.
+as we add more backends. However, this may be the correct approach
+given our conceptual model - as we found out with forward
+declarations.
 
 *** Colouring script should be included as part of package            :story:
 
 Users should be able to make use of script as well. We need a tools
 folder in share.
-
-*** Add aliases to enumeration string conversions                     :story:
-
-We often need to cast a enum from a string but the name is not exactly
-like the original enumeration. For example, we use enums for
-stereotypes but we cannot have the same namespacing structure on the
-enum. For these cases it would be nice to be able to supply an alias.
-
-The only slight problem is that if we use this approach, the cast will
-still work when you supply the simple or qualified enumeration.
-
-Perhaps we can have two concepts:
-
-- alias. Everything else will still work.
-- overrides. Only the override is considered valid. Conversions will
-  now always use the override.
 
 *** Allow user supplied enumerator values                             :story:
 
@@ -184,17 +170,6 @@ field instead.
       ]
     },
 #+end_example
-
-*** Consider adding a =to_string= facet                               :story:
-
-We originally added the boost lexical cast facet, but that requires
-boost. The new  C++ approach seems to be to use the conversion methods
-=to_string=. However, there is no equivalent "from string". We could
-add it though.
-
-Links:
-
-- [[http://www.cplusplus.com/reference/string/to_string/][to_string]]
 
 *** Remove empty types in injection.json models                       :story:
 
@@ -250,6 +225,8 @@ flag to generate tests with logging.
 The other problem is we need to move utility into its own library as a
 PDM before we can do this because otherwise the logging will be in
 different locations (i.e. dogen vs reference model).
+
+We should add some meta-data flag to suppress/enable logging.
 
 *** Postfix and directory fields should be templates                  :story:
 
@@ -333,25 +310,16 @@ At present we have a number of default values in feature bundles set
 to the empty string =""=. It makes more sense not to have a default
 value and have the client code handle its absence.
 
+Once we do this, we can then remove the spurious quotes we added to
+all feature templates and do that directly in code-generation. It was
+added only because we needed to distinguish between the empty case and
+the "empty" string.
+
 *** Make labels a plain text field not a collection                   :story:
 
 At present it is possible to label a profile with multiple
 labels. This is not a good idea. Make it a plain text field so we can
 only apply a single label.
-
-*** Generate a single type                                            :story:
-
-Sometimes, when a model is in a bit of a state, it would be really
-useful to be able to generate a single type (or maybe set of
-types). We could easily do this by forcing the overwrite flag to false
-to all artefacts other than those that belong to this set of
-types. This could be a transform performed just before we generate the
-extraction model: loop through all elements and those that are not
-in this set, set their overwrite flags to false - or maybe even remove
-them from the model?
-
-Of course, we still need for the model to be in a state good enough to
-build.
 
 *** Model "types" and element binding                                 :story:
 
@@ -462,40 +430,6 @@ generation model, the hope is that coding will take over the archetype
 expansion (via a collaboration with the archetypes model). Then we
 could do name resolution inside of coding.
 
-*** Syntax checking support for stitch templates                      :story:
-
-It would be really nice to have syntax checking for stitch
-templates. This may be simpler than expected. We have two types of
-errors:
-
-- stitch errors: these are invalid stitch templates. We already detect
-  these. We just need to output a GCC-style error message.
-- c++ errors: these occur after we've weaved, by compiling the c++
-  code. These are slightly trickier: we need to map the c++ lines to
-  the stitch lines; this can be done during the generation of the
-  stitch template, where as we output the code, we also keep track of
-  the lines. For example, in a loop, one stitch template line will map
-  to many c++ lines. We also need access to the compilation
-  database. We then shell out using Boost.Process, run the compiler
-  against the c++ code, retrieve the GCC/Clang errors, and map the
-  line and columns from the compiler back into the stitch line and
-  columns. We then output the errors, but using the stitch line and
-  column numbers (presumably the column remains unchanged, or perhaps
-  we should just remove it).
-
-Ideally we want to preserve the original compiler output as much as
-possible, only interfering with the mapping. We should also make sure
-we only map lines in the template file, ignoring everything else.
-
-We will also have to reactivate the weaving mode, so this will require
-a bit of thinking:
-
-- we only want to weave a single template; however, in the new world,
-  that is actually equivalent to weaving the entire model because we
-  need to go through all of the transforms.
-- this also means we may end up with lots of errors from other
-  templates. We need to avoid this.
-
 *** Use C# notation in JSON C# models                                 :story:
 
 At present we are generating C++ style types in JSON models (at least
@@ -507,7 +441,9 @@ If we change this to
 
 :   "type": "masd.lam.text.character"
 
-We get a parsing error.
+We get a parsing error. We need to detect the output technical space,
+use the correct convention for module separation and ensure it is
+valid from a parsing perspective.
 
 *** Consider renaming LAM                                             :story:
 
@@ -844,7 +780,285 @@ can take those uses into account when building the DAG.
 We should really read up on OMG's CVL and associated technologies, as
 it seems they have done much of the analysis required here.
 
-*** Add annotation types description                        :reviewing:story:
+Merged stories:
+
+*Computation of enablement values*
+
+Note: this story is still *very* sketchy.
+
+At present we have a very simple way of determining what formatters
+are enabled: if a facet has been enabled by the user then all
+formatters on that facet are enabled. This is a good starting point
+but results in a lot of manual work:
+
+- if we add a type which does not support all facets, we will generate
+  invalid code. Users should be able to mark which facets are
+  supported and then the graph of dependencies should do the right
+  thing, propagating the disabled status.
+- we are enabling all formatters in a facet. For hashing and forward
+  declarations, it would make more sense to have a "dependency based
+  enablement": if we determine that someone in the model needs that
+  feature, we enable it, if not its disabled. Users can always
+  override this and force it to be globally enabled.
+- if a user creates a "service", all facets other than types are
+  disabled. Ideally we should be able to define "enablement profiles"
+  and then set an element's enablement profile. Each enablement
+  profile is made up of a set of enabled facets. They could be
+  supplied as a KVP. In fairness we probably just need "types and io"
+  or "default".
+
+One way to think of this problem is to imagine a matrix for each
+element in element space. Each matrix is two-dimensional: one
+dimension is the facets and the other are "dependent elements". These
+are effectively made up of all attributes for each element, with a
+name tree expansion. Each value of the matrix can either be 0
+(disabled), 1 (enabled) or 2 (not computable). Not computable is a
+hack to cope with cycles in the graph of dependencies.
+
+Each value is computed by looking up an element's matrix and looking
+for zeros. If there is one or more zero against a facet, the element's
+value for that facet is zero. If there is a two we need to do a
+two-pass whereby we first compute the matrix ignoring all the two's;
+then, for each cycle we create a list of all the elements on that path
+and the pair of elements that causes the cycle. We then compute the
+enablement for this pair with a simple table (OR the computed
+enablement values). We then traverse the cycle in reverse, updating
+the twos to real values.
+
+We could start with one large matrix with rows by element and columns
+by feature. All values on this matrix are set to 1. We would then
+multiply it against the global enablement matrix. We would then
+multiply it by the local enablement matrix, for each element. We would
+then compute the dependency matrices for all elements only taking into
+account facets that are still enabled. We need to find the linear
+algebra operation that takes a column with zeros and ones and returns
+one if all rows are one and zero otherwise.
+
+This produces the enabled facets. We then need to worry about the
+formatters. There are a few sources of information:
+
+- the facet enablement.
+- the user local or global decision for that formatter.
+- some kind of default formatter property (e.g. disabled by default).
+- dependencies.
+
+For these we need to create a "get dependencies" method in
+each formatter which returns dependent formatters. For example, the
+visitor formatter depends on the forward declarations formatter. This
+is a static dependency. The more complex case is where there are
+dynamic dependencies. For example, if hashing is detected for a given
+type, we then need to enable the hashing facet for the containee. We
+should probably hard-code this scenario for now.
+
+We may want to make these computations disableable. For example: a)
+all: no computation, everything is enabled b) all supported: all that
+is supported is enabled c) by dependencies.
+
+Requested help from FB. Core of the email:
+
+#+begin_quote
+Lets start with the simple case. Let G be a DAG. For each vertex of G
+there is an associated vector over a field F. Now I would say F is
+GF(2), which suits my needs (as you will see below). The objective is
+to compute, for each vertex, the value of its associated vector, as
+follows:
+
+- first we go through the vertices in any order and setup its initial
+  values according to a predetermined heuristic. Different nodes will
+  have different values, and the heuristic has no dependency on G.
+- then we iterate through G using DFS. If a vertex has no children
+  then the final value of its vertex is the initial value. If a vertex
+  has children, the value of its vector is obtained by multiplying the
+  initial value against the values of the vectors of its child
+  vertices. Multiplication under GF(2) is just a logical AND which is
+  great for my purposes.
+
+Just to make sure I'm explaining my self correctly, lets look at it in
+layperson's terms: if a vertex has a 1 at position zero of its vector,
+and all of its children also have a 1 at position zero, then the final
+value for position zero will be 1. If there is a 0 anywhere at
+position zero then the value is 0. So far so good, this works as
+expected.
+
+However! The problem is, G is actually not always a DAG. Sometimes
+there may be cycles, which are detectable during DFS. My question is:
+is there anything I can do to still perform this heuristic (or some
+approximation of it) with a graph that has cycles? For example:
+
+- record the path to the cycle and perform several passes. This seems
+  to breakdown when there are several cycles because I seem to hit
+  some kind of recursive problem.
+- ignore the cycle. Of course, the problem with this approach is that
+  if there was a zero at either side of the cycle, I would be
+  incorrectly computing the node, but maybe that's the best one can
+  do?
+#+end_quote
+
+Actually maybe we are looking at this the wrong way. Lets imagine that
+for each element there is a vector v in GF(2) called the initial
+vector. The objective is to compute u, the output vector. The output
+vector is made up of the initial vector of the element, times the
+output vectors of all the elements the element depends on. However,
+these can be formulated in terms of initial vectors too (e.g. the
+initial vector of the depended element times the initial vectors of
+the elements it depends on times the initial vectors of the elements
+they depend on and so forth). Thus for each element there is an
+expansion that just relies on initial vectors. For the cases where
+there are cycles: its not a problem since multiplying n times by
+the same vector (in GF(2)) produces the same result as multiplying
+just once.
+
+It would still be useful to have a graph though, to find all of the
+initial vectors for a given element. We just need to stop DFS'ing when
+we find a cycle. We can also cache the initial vectors for each
+element.
+
+Notes:
+
+- we can greatly simplify this story if we do not allow for cycles. We
+  can simply create a graph of all dependencies and then iterate the
+  graph from the leaves. Call Ev the enablement vector for each
+  element; we can descend the graph and perform an OR of Ev at each
+  level. Consider element e0, which is a child of a set of elements E;
+  for each entry in the set, we'd OR the element vector of e0 (and of
+  all of its descendants). As a result, its values would be the
+  superset of all of the enabled values on each leaf element.
+- since we do not allow cycles, we should detect them and break with
+  an error. We should provide the cycle path to the user and then
+  allow users to remove certain types from this computation via
+  meta-data. If a type is set not to contribute to the graph, we can
+  simply skip it. The user is then responsible for manually setting
+  that type.
+- since we can only alter generatable types, we should detect when we
+  reach an element which is not generatable. If the OR'ing of that
+  element does not produce its current enablement vector we should
+  simply error and tell the user the current enablement requirements
+  are not satisfiable. The user is then responsible for addressing the
+  issue by either changing enablement requirements, ignoring types,
+  updating reference models manually or providing helper types. To
+  make life easier we could state what are the enablement requirements
+  that have not been met so that users can quickly decide what to do.
+- once we compute the dependency graph we can also check to see what
+  types are on it. Any type which is absent can be removed from the
+  model. We could also compute the models that are on the graph and
+  compare them to the list of references. If the list of references at
+  present only includes references of the target model, we can figure
+  out any unnecessary references. Sadly we cannot do the opposite:
+  (lost the train of thought).
+- it would be nice to have "enablement requirements". For example, if
+  the user used =std::unordered_map= against a dogen type, it should
+  trigger the generation of hash for that type (and all dependent
+  types). Similarly, for =std::map= it should trigger the creation of
+  =operator<=. If we could declare upfront that a type's types facet
+  depends on another facet, this could be computed.
+
+*Formatters need different =enabled= defaults*
+
+We should be able to disable some formatters such as forward
+declarations. Some users may not require them. We can do this using
+dynamic extensions. We can either implement it in the backend or make
+all the formatters return an =std::optional<dogen::formatters::file>=
+and internally look for a =enabled= trait.
+
+We need to be able to distinguish "optional" formatters - those that
+can be disabled - and "mandatory" formatters - those that cannot. If a
+user requests the disabling of a mandatory formatter, we must
+throw. This must be handled in enabler.
+
+This story was merged with a previous one: Parameter to disable cpp
+file.
+
+#+begin_quote
+*Story*: As a dogen user, I want to disable cpp files so that I don't
+generate files with dummy content when I'm not using them.
+#+end_quote
+
+It would be really useful to define a implementation specific
+parameter which disables the generation of a cpp file for a
+service. This would stop us from having to create noddy translation
+units with dummy functions just to avoid having to define exclusion
+regexes.
+
+In some cases we may need a "enable by usage". For example,
+it would be great to be able to enable forward declarations only for
+those types for which we required them. Same with hash. We can detect
+this by looking at the generated include dependencies. However,
+because the include dependency only has a directive, we cannot tell
+which formatter it belonged to. This would require some augmenting of
+the directive to record the "origination" formatter.
+
+*Disable facets on element state*
+
+In certain cases it may not make sense to enable a facet. The main use
+case is for testing: we should not bother testing an object if there
+are no attributes. This can be achieved with a small hack: add a
+container in archetype repository of all archetypes that require
+objects to have properties. Then, augment =is_element_disabled= to
+perform this check. We just need formatters to supply this information
+when building the repository.
+
+A much more robust version would be to have formatters return a
+function that takes in the element and returns true or false. We could
+default all formatters to just return true. However, we do not have
+support for boost/std function so this would mean manually coding the
+repository. We'd have a similar problem if we add an interface.
+
+*Add support for facet dependencies*
+
+At present we left it as an exercise to the user to ensure facets are
+enabled to meet dependencies. In reality we need a solver for
+this. Look for other solver story in backlog. In addition, we also
+need to have a way to declare facet dependencies:
+
+- all facets other than types depend on types.
+- tests depends on at least types and test data.
+
+Actually what we really need is a model to declare all entities in the
+archetype space and their relationships:
+
+- archetypes
+- facets
+- formatters
+- kernels
+
+The annotations model can then depend on this model. It should have
+facilities for registration of kerneles, etc. However, note that this
+has nothing to do with model to text transforms - its just declaring
+the lay of the land for the archetype space. We called this generation
+space up to know but generation is concerned with the mapping of
+coding entities into archetype space, not with defining the geometry
+of that space. We need a good name for this model:
+
+- =masd.dogen.archetypes=
+
+This also makes it clear why annotations had a need for locations in
+archetype space: its because the configuration is the configuration of
+formatting functions which are responsible for mapping coding elements
+into archetypes. Of course we have configuration that is not related
+to archetypes as well. We need some kind of way of stating this at the
+archetype model level so that we don't have to associate all features
+with a location on archetype space when none exists.
+
+*Add support for formatter and facet dependencies*
+
+Once we are finished with the refactoring of the C++ model, we should
+add a way of declaring dependencies between facets and between
+formatters. We may not need dependencies between facets as these are
+actually a manifestation of the formatter dependencies.
+
+These are required to ensure users have not chosen some invalid
+combination of formatters (for example disable serialisation when a
+formatter requires it). It is also required when a given
+facet/formatter is not supported (for example when an STL type does
+not support serialisation out of the box).
+
+Note that the dependencies are not just static. For example, the types
+facet depends on the hash facet if the user decides to add a
+=std::unordered_map= of a user defined type to another user defined
+type. We need to make sure we take these run-time dependencies into
+account too.
+
+*** Add annotation types description                                  :story:
 
 It would be useful to have a description of the purpose of the field
 so that we could print it to the command line. We could simply add a
@@ -864,11 +1078,6 @@ Notes:
   context factory, retrieves all of the descriptions as strings
   somehow, and then get the command line to print them out. This can
   then be extended in the future to include backends, etc.
-
-*** Reactivate injection.dia tests                                    :story:
-
-We seem to have a number of tests commented out in
-injection.dia. Investigate why and if possible, reactivate them.
 
 *** Location of =--byproduct-directory= not respected                 :story:
 
@@ -947,40 +1156,6 @@ Snippet of results after =sort | uniq -c=
 
 We need to investigate the generation pipeline to understand where
 this is coming from.
-
-*** Move fabric types into coding                                     :story:
-
-Fabric types need to be tidied up and moved into coding as regular
-meta-model elements. We need to try to make them as technical space
-agnostic as possible.
-
-*Previous understanding*
-
-Move fabric types into generation.
-
-- copy across the fabric types from cpp and csharp into generation.
-- update formatters to use the types from generation.
-- delete them from original models.
-
-At present we are always generating the fabric types via the injctor
-and then asking the user to disable them as required via the
-enablement settings. This is very silly. The approach should now be
-that we look for elements with the correct stereotypes,
-e.g. =masd::cmakelists= and so forth and use those to generate these
-elements. This must be done as part of the work to move fabric types
-into the metamodel. We should also take this opportunity to merge
-common types between C# and C++, if any exist.
-
-Notes:
-
-- this will also address the naming of types such as registrar.
-- we need to remove all top-level knobs that are controlling the
-  enablement of meta-types such as visual studio, etc. In addition, at
-  present when we enable say ODB we automatically get ODB options,
-  etc. In this world, we would need to create the element in the
-  model. This is a bit confusing because users won't know this is a
-  requirement. Perhaps we need to have a combination of implicit and
-  explicit types?
 
 *** Make extraction model name a qualified name                       :story:
 
@@ -1224,11 +1399,6 @@ this:
 Or perhaps "propagate across inheritance". This is in effect, a variation
 of IPC (implicit presence conditions).
 
-*** Create metamodel elements for =entry_point= and =interface=       :story:
-
-These have been incorrectly added as configurations and/or fabric
-types. This should be looked at after merging the fabric types.
-
 *** Add additional checks in generation formatters                    :story:
 
 We are not validating very much in the formatters. Checks we could be
@@ -1241,14 +1411,6 @@ doing for boilerplate formatter:
 - c++ dependencies are expected to be enclosed in quotes or angle
   brackets.
 - c# dependencies are expected to be valid identifiers.
-
-*** Handling of =invalid= in enumeration is incorrect                 :story:
-
-At present we are injecting the invalid enumerator transparently via
-meta-data switches. This is not a good idea. Users should instead have
-some kind of "enumeration template" from which they can inherit which
-will give them the required enumerators. We should not do anything
-special for invalid.
 
 *** Generating a meta-model for dogen                                 :story:
 
@@ -1448,84 +1610,6 @@ much as possible because this makes troubleshooting much easier.
 
 Merged stories:
 
-*Rename =fallback_element_type=*
-
-Our JSON uses a very strangely named attribute to carry the meta-type:
-
-:       "fallback_element_type": "masd::object",
-
-Its not at all obvious what this is meant to do. It should just be the
-=element_type=.
-
-We introduced this because users can set the stereotype,
-e.g. =masd::object= - but don't always have to (e.g. when converting a
-model from Dia). In this case, the fallback element type is
-used. Perhaps we can keep the "fallback" logic internally, but just
-call it element type?
-
-One possible solution is to simply populate the stereotypes with the
-inferred metamodel type. For this we need to check against a list of
-metamodel types ("has the user already defined a stereotype?") and if
-not, use the default one. This means our conversion will not roundtrip
-without differences, but at least it produces more sensible models.
-
-
-We directly mapped KVPs in UML to JSON, e.g.:
-
-: #DOGEN masd.injection.model_modules=Masd.CSharpRefImpl.CSharpModel
-: #DOGEN masd.injection.input_language=csharp
-: #DOGEN masd.injection.reference=csharp.builtins
-: #DOGEN masd.injection.reference=csharp.system.collections.generic
-: #DOGEN masd.injection.reference=csharp.system.collections
-: #DOGEN masd.injection.reference=csharp.system
-: ...
-
-maps to:
-
-: {
-:  "tagged_values": {
-:    "masd.injection.dia.comment": "true",
-:    "masd.injection.model_modules": "Masd.CSharpRefImpl.CSharpModel",
-:    "masd.injection.input_language": "csharp",
-:    "masd.injection.reference": "csharp.builtins",
-:    "masd.injection.reference": "csharp.system.collections.generic",
-:    "masd.injection.reference": "csharp.system.collections",
-:    "masd.injection.reference": "csharp.system",
-: ...
-
-However, we cannot have duplicate keys in JSON, resulting in problems
-when we indent models: the indenter removes all duplicate keys but
-one. This means we have to massage models post indentation every
-time. Solutions:
-
-- use a JSON container for container keys. The problem with this is
-  that our internal representation does not have a container but a
-  list of KVPs. We need to somehow convert to and from this container
-  representation. We also need to be able to dynamically determine if
-  the value is a container or just a plain value when deserialising
-  from JSON. If it's a container, we need to flatten it.
-- actually, now that we added annotations to the injection model, we
-  can first perform the annotations transform; this would convert the
-  keys to the right types. We can then convert to JSON using the
-  annotations. However, the one downside of this approach is that the
-  JSON representation of injection would be at a higher level of
-  abstraction.
-- the final solution for this is to make the map a container of
-  pairs. In effect that is what the container is in the first place,
-  we just mapped it incorrectly into JSON. So instead of
-
-:  "tagged_values": {
-:    "masd.injection.reference": "cpp.builtins",
-:    "masd.injection.reference": "cpp.std",
-:    "masd.injection.reference": "cpp.boost",
-
-  we'd have:
-
-:  "tagged_values": [
-:    { "masd.injection.reference": "cpp.builtins" },
-:    { "masd.injection.reference": "cpp.std" },
-:    { "masd.injection.reference": "cpp.boost" },
-
 *Support containers correctly in annotations*
 
 At present we are allowing users to enter the same key multiple times
@@ -1588,11 +1672,13 @@ This error has been picked up by codacy too:
 
 *** Make use of association relationships                             :story:
 
-When we start having to create element such as visitor etc. it would
+When we start having to create elements such as visitor etc., it would
 be nice to rely on the association between visitor and visitable to
 figure out what the visitor is visiting. This and other simple cases
 can be inferred simply by looking at the end points of the
-association.
+association. However, we should still allow supplying this
+meta-parameter as meta-data because it may not be practical to have
+the association. And we need a way to express this in JSON as well.
 
 *** Clean up injection element properties                             :story:
 
@@ -1616,7 +1702,7 @@ them from Dia. The right solution for this is as follows:
 
 *** Split library into JSON and dia                                   :story:
 
-We should supply the core models as both. This is a good test for PDMs
+We should supply the PDMs models as both. This is a good test for PDMs
 to make sure that all functionality is available on both. Actually
 this story may be superseded by the work on the core library.
 
@@ -1625,87 +1711,6 @@ this story may be superseded by the work on the core library.
 We should probably generate this model; at the moment, we have many
 missing elements/meta-data, causing dogen to choke. However we need a way
 to make the model generate nothing.
-
-*** Pre-includes defines                                              :story:
-
-For boost test, we need the ability to define a macro before any of
-the includes: =BOOST_TEST_MODULE=. At present, the decorations have
-both the licence and the includes, and its not possible to place
-something in between the two. So we are doing the easy thing and
-adding the define before the preamble. In an ideal world we should be
-able to inject pre and post includes defines. These can be done by the
-formatter or even by the user.
-
-Links:
-
-- [[https://www.boost.org/doc/libs/1_69_0/libs/test/doc/html/boost_test/utf_reference/link_references/link_boost_test_module_macro.html][BOOST_TEST_MODULE]]
-
-*** Line endings could cause rewrites                                 :story:
-
-At present if we git clone a repo with UNIX line endings and then
-re-run dogen on Windows, even though nothing has changed in the model,
-all generated files should get rewritten with windows line endings. We
-should have a setting that enforces one set of line endings at the
-model level. Interestingly, at present almost all extraction and
-generation tests are green, implying we do not see any diffs. This is
-very puzzling.
-
-*** Add support for facet dependencies                                :story:
-
-At present we left it as an exercise to the user to ensure facets are
-enabled to meet dependencies. In reality we need a solver for
-this. Look for other solver story in backlog. In addition, we also
-need to have a way to declare facet dependencies:
-
-- all facets other than types depend on types.
-- tests depends on at least types and test data.
-
-Actually what we really need is a model to declare all entities in the
-archetype space and their relationships:
-
-- archetypes
-- facets
-- formatters
-- kernels
-
-The annotations model can then depend on this model. It should have
-facilities for registration of kerneles, etc. However, note that this
-has nothing to do with model to text transforms - its just declaring
-the lay of the land for the archetype space. We called this generation
-space up to know but generation is concerned with the mapping of
-coding entities into archetype space, not with defining the geometry
-of that space. We need a good name for this model:
-
-- =masd.dogen.archetypes=
-
-This also makes it clear why annotations had a need for locations in
-archetype space: its because the configuration is the configuration of
-formatting functions which are responsible for mapping coding elements
-into archetypes. Of course we have configuration that is not related
-to archetypes as well. We need some kind of way of stating this at the
-archetype model level so that we don't have to associate all features
-with a location on archetype space when none exists.
-
-Merged stories:
-
-*Add support for formatter and facet dependencies*
-
-Once we are finished with the refactoring of the C++ model, we should
-add a way of declaring dependencies between facets and between
-formatters. We may not need dependencies between facets as these are
-actually a manifestation of the formatter dependencies.
-
-These are required to ensure users have not chosen some invalid
-combination of formatters (for example disable serialisation when a
-formatter requires it). It is also required when a given
-facet/formatter is not supported (for example when an STL type does
-not support serialisation out of the box).
-
-Note that the dependencies are not just static. For example, the types
-facet depends on the hash facet if the user decides to add a
-=std::unordered_map= of a user defined type to another user defined
-type. We need to make sure we take these run-time dependencies into
-account too.
 
 *** Formatters can only belong to one facet                           :story:
 
@@ -1718,22 +1723,6 @@ the CMake file. This means that we need to somehow map one formatter
 to multiple facets. For now we just hacked it and used one of the
 facets. It means that if you disable CMake but enable testing you'll
 still end up with the testing CMake file.
-
-*** Disable facets on element state                                   :story:
-
-In certain cases it may not make sense to enable a facet. The main use
-case is for testing: we should not bother testing an object if there
-are no attributes. This can be achieved with a small hack: add a
-container in archetype repository of all archetypes that require
-objects to have properties. Then, augment =is_element_disabled= to
-perform this check. We just need formatters to supply this information
-when building the repository.
-
-A much more robust version would be to have formatters return a
-function that takes in the element and returns true or false. We could
-default all formatters to just return true. However, we do not have
-support for boost/std function so this would mean manually coding the
-repository. We'd have a similar problem if we add an interface.
 
 *** Create the notion of project destinations                         :story:
 
@@ -1924,15 +1913,91 @@ on the fly.
 
 *** Conversion does not output static stereotypes                     :story:
 
-At present we only output static stereotypes. However, there is no
-point on fixing this until we move to the new JSON format.
+At present we only output dynamic stereotypes. However, there is no
+point on fixing this until we move to the new JSON format. This could
+also resolve the elment fall back issue in JSON: check to see if any
+static stereotypes with element definitions have been supplied, and if
+not, use the fallback element type.
 
-*** Using =std::set<std::string>= causes compilation errors           :story:
+Merged stories:
 
- In theory sets of strings (and any other type that has =operator<=
- should work out of the box, even though we do not support sets of
- dogen types. However, when we tried to use a set of strings we got a
- whole load of compilation errors in serialisation, etc.
+*Rename =fallback_element_type=*
+
+Our JSON uses a very strangely named attribute to carry the meta-type:
+
+:       "fallback_element_type": "masd::object",
+
+Its not at all obvious what this is meant to do. It should just be the
+=element_type=.
+
+We introduced this because users can set the stereotype,
+e.g. =masd::object= - but don't always have to (e.g. when converting a
+model from Dia). In this case, the fallback element type is
+used. Perhaps we can keep the "fallback" logic internally, but just
+call it element type?
+
+One possible solution is to simply populate the stereotypes with the
+inferred metamodel type. For this we need to check against a list of
+metamodel types ("has the user already defined a stereotype?") and if
+not, use the default one. This means our conversion will not roundtrip
+without differences, but at least it produces more sensible models.
+
+
+We directly mapped KVPs in UML to JSON, e.g.:
+
+: #DOGEN masd.injection.model_modules=Masd.CSharpRefImpl.CSharpModel
+: #DOGEN masd.injection.input_language=csharp
+: #DOGEN masd.injection.reference=csharp.builtins
+: #DOGEN masd.injection.reference=csharp.system.collections.generic
+: #DOGEN masd.injection.reference=csharp.system.collections
+: #DOGEN masd.injection.reference=csharp.system
+: ...
+
+maps to:
+
+: {
+:  "tagged_values": {
+:    "masd.injection.dia.comment": "true",
+:    "masd.injection.model_modules": "Masd.CSharpRefImpl.CSharpModel",
+:    "masd.injection.input_language": "csharp",
+:    "masd.injection.reference": "csharp.builtins",
+:    "masd.injection.reference": "csharp.system.collections.generic",
+:    "masd.injection.reference": "csharp.system.collections",
+:    "masd.injection.reference": "csharp.system",
+: ...
+
+However, we cannot have duplicate keys in JSON, resulting in problems
+when we indent models: the indenter removes all duplicate keys but
+one. This means we have to massage models post indentation every
+time. Solutions:
+
+- use a JSON container for container keys. The problem with this is
+  that our internal representation does not have a container but a
+  list of KVPs. We need to somehow convert to and from this container
+  representation. We also need to be able to dynamically determine if
+  the value is a container or just a plain value when deserialising
+  from JSON. If it's a container, we need to flatten it.
+- actually, now that we added annotations to the injection model, we
+  can first perform the annotations transform; this would convert the
+  keys to the right types. We can then convert to JSON using the
+  annotations. However, the one downside of this approach is that the
+  JSON representation of injection would be at a higher level of
+  abstraction.
+- the final solution for this is to make the map a container of
+  pairs. In effect that is what the container is in the first place,
+  we just mapped it incorrectly into JSON. So instead of
+
+:  "tagged_values": {
+:    "masd.injection.reference": "cpp.builtins",
+:    "masd.injection.reference": "cpp.std",
+:    "masd.injection.reference": "cpp.boost",
+
+  we'd have:
+
+:  "tagged_values": [
+:    { "masd.injection.reference": "cpp.builtins" },
+:    { "masd.injection.reference": "cpp.std" },
+:    { "masd.injection.reference": "cpp.boost" },
 
 *** Handling of unsupported dia objects                               :story:
 
@@ -1959,11 +2024,6 @@ could relax the code in processor (object_types):
 We should also consider having a =strict= command line option to
 enable/disable this behaviour.
 
-*** Generate model dependency graph                                   :story:
-
-It would be nice to generate a tracing of the model dependencies. This
-may not necessarily be part of tracing.
-
 *** Default model modules from filename                               :story:
 
 It would be nice to be able to not have to supply model modules when
@@ -1972,112 +2032,6 @@ its obvious from the filename.
 Update hello world to demonstrate this. We basically want to make the
 entry use case as simple as possible, requiring little to no
 meta-data.
-
-*** Code-generate variability feature templates                       :story:
-
-Type templates are in effect features from a feature model. We need to
-add UML support for features (e.g. add meta-model elements for them),
-with code generation, and link them back to annotations.
-
-In fact, we made a mistake by binding annotations so closely to
-dogen. There are two distinct concerns here:
-
-- the annotations library. This provides "typed support" on top of KVP
-  infrastructure. The idea here is that users can define "fields" with
-  "types" and retrieve information from those KVPs in a structured
-  way. Instead of having to create their own validation
-  infrastructure, they can rely on annotations to do all the hard work
-  for them. As part of the field creation, ideas such as "scopes" and
-  "archetype locations" emerge. However, these do not really belong to
-  the domain of annotations; these are concepts that end users create
-  and give them semantics. What annotations needs to be able to do is
-  to allow the creation of arbitrary notions of "scopes" and
-  "hierarchy". Basically, annotations could be a completely
-  self-contained project with no dependencies and usable outside of
-  dogen.
-- the linkage between the annotations library and dogen. Here we can
-  create metamodel elements to convey the input parameters needed to
-  code generate the elements for the annotations library. In this
-  sense, annotations is nothing more than a platform that the
-  transforms leverage; it has nothing particularly special to do with
-  dogen. It just so happens that dogen itself then makes use of
-  annotations to supply metadata internally, but this is a mere
-  coincidence.
-- the linkage between stitch and annotations. In this view, stitch is
-  yet another client of annotations, via dogen. Again, there is no
-  reason why stitch needs to have any dependency on dogen, other than
-  annotations. In this sense, features such as licences and other
-  boilerplate must be supplied as KVP parameters into stitch, without
-  it directly depending in formattables. In addition, the fact that
-  stitch generates c++ is also a coincidence. We could have a
-  parameter that configures stitch and generate say C#.
-
-Interestingly, in this sense we could then say that both stitch and
-annotations are stand alone libraries generated using dogen, and then
-in turn consumed by dogen. This could be done as packages by means of
-vcpkg. And of course, stitch could then use a proper templating engine
-instead of wale (another vcpkg dependency).
-
-Finally, the logical conclusion is that dogen can use *any* of a
-number of templating engines. The parameters to the engine are
-supplied using KVPs (by means of annotation). There is a generic
-metamodel element representing the binding to templating, and one of
-its parameters is the templating engine. These are bound to the dogen
-binary at compile time. End users can also make use of this mechanism,
-for any of the available facets. This means that where we supply
-=formatting_style=, we should really reflect the templating
-engine. And then, all parameters with a known prefix, say:
-
-: masd.templating.ENGINE.X=Y
-
-Are supplied as parameters to the engine. These may need to take into
-account facets as well, so that we can bind each facet to a different
-template and supply different parameters.
-
-Notes:
-
-- one really useful feature would be to bind an enumeration to a
-  string field, such that we'd automatically convert the string into a
-  valid value of the enumeration (or throw).
-
-*Previous Understanding*
-
-Tasks:
-
-- create a meta-model element for type templates. Add container in
-  exomodel for it. Name: =yarn::annotation_type_template=?
-- add frontend support for the type template element.
-- add a transform that reads all the meta-data from type templates and
-  populates the yarn element of the type template. Add this transform
-  to the exomodel transforms, at the end of the chain (e.g. after
-  annotations).
-- create a meta-model element for the initialiser of type templates,
-  made up of all type templates in the model. Add a container of
-  initialiser in endomodel.
-- add a transform that moves all of the type templates into the
-  initialiser. This can be done as part of the exomodel to endomodel
-  transform. Or maybe we should have a stand alone transform, and the
-  final transform simply ignores type templates.
-- create a registrar in annotations that registers type templates.
-- create a stitch template for the initialiser, taking the registrar
-  as an argument, and registering all type templates.
-- add all type templates to all models, and generate the type
-  initialisers.
-- hook the type initialisers to the initialisers.
-- change type group repository to initialise from the registrar.
-- delete all type groups JSON and hydrator and related code.
-
-Merged stories:
-
-*Initialisation of meta-data*
-
-At present we are reading meta-data files for every transformation. In
-reality, it makes no sense to allow the meta-data files to change
-dynamically, because the consumers of the meta-data are hard-coded. So
-it would make more sense to treat them as a initialisation step. This
-will make even more sense when we code-generate the types instead of
-using JSON. Then we can hook up the generated code to the
-initialisers.
 
 *** Improve handling of stereotypes                                   :story:
 
@@ -2102,254 +2056,11 @@ Ideally we should have:
 - a check that a stereotype has not yet been registered so only one
   consumer can bind to it.
 
-*** Consider making fully generated files read-only                   :story:
-
-We could add emacs/vi tags to make fully generated files read-only -
-as opposed to partially generated files such as services, which are
-expected to be modified by the user. Example:
-
-: /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 buffer-read-only: t -*-
-
-There must be a vi equivalent. There is =view= but its not clear how
-to set it into a modeline. The alternative is to write the files as
-read only.
-
-: /* vim: tw=60: ts=2: view=t: set ro: */
-
-Requires changes  to =.vimrc=:
-
-: set modeline
-
-It would be even better if we could make parts of a file read only, so
-that only the protected regions could be written on.
-
-Links:
-
-- [[https://stackoverflow.com/questions/20023363/emacs-remove-region-read-only][emacs remove region read-only]]
-- [[https://www.emacswiki.org/emacs/FoldingMode][Folding mode]]
-
 *** Replace boost property tree with real JSON support                :story:
 
 Once we support JSON fully we should go through all of the uses of
 JSON we have at present and replace them with the JSON serialised
 version of the types.
-
-*** Computation of enablement values                                   :epic:
-
-Note: this story is still *very* sketchy.
-
-At present we have a very simple way of determining what formatters
-are enabled: if a facet has been enabled by the user then all
-formatters on that facet are enabled. This is a good starting point
-but results in a lot of manual work:
-
-- if we add a type which does not support all facets, we will generate
-  invalid code. Users should be able to mark which facets are
-  supported and then the graph of dependencies should do the right
-  thing, propagating the disabled status.
-- we are enabling all formatters in a facet. For hashing and forward
-  declarations, it would make more sense to have a "dependency based
-  enablement": if we determine that someone in the model needs that
-  feature, we enable it, if not its disabled. Users can always
-  override this and force it to be globally enabled.
-- if a user creates a "service", all facets other than types are
-  disabled. Ideally we should be able to define "enablement profiles"
-  and then set an element's enablement profile. Each enablement
-  profile is made up of a set of enabled facets. They could be
-  supplied as a KVP. In fairness we probably just need "types and io"
-  or "default".
-
-One way to think of this problem is to imagine a matrix for each
-element in element space. Each matrix is two-dimensional: one
-dimension is the facets and the other are "dependent elements". These
-are effectively made up of all attributes for each element, with a
-name tree expansion. Each value of the matrix can either be 0
-(disabled), 1 (enabled) or 2 (not computable). Not computable is a
-hack to cope with cycles in the graph of dependencies.
-
-Each value is computed by looking up an element's matrix and looking
-for zeros. If there is one or more zero against a facet, the element's
-value for that facet is zero. If there is a two we need to do a
-two-pass whereby we first compute the matrix ignoring all the two's;
-then, for each cycle we create a list of all the elements on that path
-and the pair of elements that causes the cycle. We then compute the
-enablement for this pair with a simple table (OR the computed
-enablement values). We then traverse the cycle in reverse, updating
-the twos to real values.
-
-We could start with one large matrix with rows by element and columns
-by feature. All values on this matrix are set to 1. We would then
-multiply it against the global enablement matrix. We would then
-multiply it by the local enablement matrix, for each element. We would
-then compute the dependency matrices for all elements only taking into
-account facets that are still enabled. We need to find the linear
-algebra operation that takes a column with zeros and ones and returns
-one if all rows are one and zero otherwise.
-
-This produces the enabled facets. We then need to worry about the
-formatters. There are a few sources of information:
-
-- the facet enablement.
-- the user local or global decision for that formatter.
-- some kind of default formatter property (e.g. disabled by default).
-- dependencies.
-
-For these we need to create a "get dependencies" method in
-each formatter which returns dependent formatters. For example, the
-visitor formatter depends on the forward declarations formatter. This
-is a static dependency. The more complex case is where there are
-dynamic dependencies. For example, if hashing is detected for a given
-type, we then need to enable the hashing facet for the containee. We
-should probably hard-code this scenario for now.
-
-We may want to make these computations disableable. For example: a)
-all: no computation, everything is enabled b) all supported: all that
-is supported is enabled c) by dependencies.
-
-Requested help from FB. Core of the email:
-
-#+begin_quote
-Lets start with the simple case. Let G be a DAG. For each vertex of G
-there is an associated vector over a field F. Now I would say F is
-GF(2), which suits my needs (as you will see below). The objective is
-to compute, for each vertex, the value of its associated vector, as
-follows:
-
-- first we go through the vertices in any order and setup its initial
-  values according to a predetermined heuristic. Different nodes will
-  have different values, and the heuristic has no dependency on G.
-- then we iterate through G using DFS. If a vertex has no children
-  then the final value of its vertex is the initial value. If a vertex
-  has children, the value of its vector is obtained by multiplying the
-  initial value against the values of the vectors of its child
-  vertices. Multiplication under GF(2) is just a logical AND which is
-  great for my purposes.
-
-Just to make sure I'm explaining my self correctly, lets look at it in
-layperson's terms: if a vertex has a 1 at position zero of its vector,
-and all of its children also have a 1 at position zero, then the final
-value for position zero will be 1. If there is a 0 anywhere at
-position zero then the value is 0. So far so good, this works as
-expected.
-
-However! The problem is, G is actually not always a DAG. Sometimes
-there may be cycles, which are detectable during DFS. My question is:
-is there anything I can do to still perform this heuristic (or some
-approximation of it) with a graph that has cycles? For example:
-
-- record the path to the cycle and perform several passes. This seems
-  to breakdown when there are several cycles because I seem to hit
-  some kind of recursive problem.
-- ignore the cycle. Of course, the problem with this approach is that
-  if there was a zero at either side of the cycle, I would be
-  incorrectly computing the node, but maybe that's the best one can
-  do?
-#+end_quote
-
-Actually maybe we are looking at this the wrong way. Lets imagine that
-for each element there is a vector v in GF(2) called the initial
-vector. The objective is to compute u, the output vector. The output
-vector is made up of the initial vector of the element, times the
-output vectors of all the elements the element depends on. However,
-these can be formulated in terms of initial vectors too (e.g. the
-initial vector of the depended element times the initial vectors of
-the elements it depends on times the initial vectors of the elements
-they depend on and so forth). Thus for each element there is an
-expansion that just relies on initial vectors. For the cases where
-there are cycles: its not a problem since multiplying n times by
-the same vector (in GF(2)) produces the same result as multiplying
-just once.
-
-It would still be useful to have a graph though, to find all of the
-initial vectors for a given element. We just need to stop DFS'ing when
-we find a cycle. We can also cache the initial vectors for each
-element.
-
-Notes:
-
-- we can greatly simplify this story if we do not allow for cycles. We
-  can simply create a graph of all dependencies and then iterate the
-  graph from the leaves. Call Ev the enablement vector for each
-  element; we can descend the graph and perform an OR of Ev at each
-  level. Consider element e0, which is a child of a set of elements E;
-  for each entry in the set, we'd OR the element vector of e0 (and of
-  all of its descendants). As a result, its values would be the
-  superset of all of the enabled values on each leaf element.
-- since we do not allow cycles, we should detect them and break with
-  an error. We should provide the cycle path to the user and then
-  allow users to remove certain types from this computation via
-  meta-data. If a type is set not to contribute to the graph, we can
-  simply skip it. The user is then responsible for manually setting
-  that type.
-- since we can only alter generatable types, we should detect when we
-  reach an element which is not generatable. If the OR'ing of that
-  element does not produce its current enablement vector we should
-  simply error and tell the user the current enablement requirements
-  are not satisfiable. The user is then responsible for addressing the
-  issue by either changing enablement requirements, ignoring types,
-  updating reference models manually or providing helper types. To
-  make life easier we could state what are the enablement requirements
-  that have not been met so that users can quickly decide what to do.
-- once we compute the dependency graph we can also check to see what
-  types are on it. Any type which is absent can be removed from the
-  model. We could also compute the models that are on the graph and
-  compare them to the list of references. If the list of references at
-  present only includes references of the target model, we can figure
-  out any unnecessary references. Sadly we cannot do the opposite:
-  (lost the train of thought).
-- it would be nice to have "enablement requirements". For example, if
-  the user used =std::unordered_map= against a dogen type, it should
-  trigger the generation of hash for that type (and all dependent
-  types). Similarly, for =std::map= it should trigger the creation of
-  =operator<=. If we could declare upfront that a type's types facet
-  depends on another facet, this could be computed.
-
-Merged stories:
-
-*Formatters need different =enabled= defaults*
-
-We should be able to disable some formatters such as forward
-declarations. Some users may not require them. We can do this using
-dynamic extensions. We can either implement it in the backend or make
-all the formatters return an =std::optional<dogen::formatters::file>=
-and internally look for a =enabled= trait.
-
-We need to be able to distinguish "optional" formatters - those that
-can be disabled - and "mandatory" formatters - those that cannot. If a
-user requests the disabling of a mandatory formatter, we must
-throw. This must be handled in enabler.
-
-This story was merged with a previous one: Parameter to disable cpp
-file.
-
-#+begin_quote
-*Story*: As a dogen user, I want to disable cpp files so that I don't
-generate files with dummy content when I'm not using them.
-#+end_quote
-
-It would be really useful to define a implementation specific
-parameter which disables the generation of a cpp file for a
-service. This would stop us from having to create noddy translation
-units with dummy functions just to avoid having to define exclusion
-regexes.
-
-In some cases we may need a "enable by usage". For example,
-it would be great to be able to enable forward declarations only for
-those types for which we required them. Same with hash. We can detect
-this by looking at the generated include dependencies. However,
-because the include dependency only has a directive, we cannot tell
-which formatter it belonged to. This would require some augmenting of
-the directive to record the "origination" formatter.
-
-*** Add "is abstract" to coding                                       :story:
-
-With C# we have started deciding if a class is abstract or not on the
-basis of whether its a parent, etc. The right thing to do is to have a
-"is abstract" property which is populated on the guts of yarn (using
-the current logic of parents are abstract).
-
-We then need to review the C++ templates and figure out where we were
-also inferring "abstractness", and use the new flag.
 
 *** Allow generating executables from dogen                           :story:
 
@@ -2357,46 +2068,15 @@ At present dogen always assumes we want to generate a static
 library. It would be nice to be able to generate an executable too,
 with all of the cmake infrastructure generated.
 
-*** Consider allowing renaming of "internal" types                    :story:
+*** Add "is abstract" to assets                                       :story:
 
-Users may want to change the =_visitor= postfix for visitors or the
-boost serialisation registrar name. This could be achieved via
-meta-data.
+With C# we have started deciding if a class is abstract or not on the
+basis of whether its a parent, etc. The right thing to do is to have a
+"is abstract" property which is populated on the guts of assets (using
+the current logic of parents are abstract).
 
-Merged stories:
-
-*Consider renaming registrar in boost serialisation*
-
-At present we have a registrar formatter that does the boost
-serialisation work. However, the name =registrar= is a bit too
-generic; we may for example add formatters for static registrars. We
-should rename this formatter to something more meaningful. Also the
-name registrar is already well understood to mean static registrar.
-
-This is a big problem now that we cannot add a type with the name
-registrar to the main model as it clashes with the serialisation
-registrar.
-
-We could simply name it serialisation registrar or some such name that
-is very unlikely to clash. We should then have a validation rule that
-stops users from defining types with that name.
-
-We need to go through all of the renamed registrars and fix them.
-
-Another option is to allow users to supply a name via meta-data to
-avoid name clashes. We could error when the user has defined a type.
-
-Actually, since the clash is only internal - the names we are
-generating on the fly are clashing with the user defined names - we
-should probably have a "postfix" that can be added in case of
-clashes. The generated code will not cause problems, its just the
-formattables pipeline.
-
-*Allow renaming of visitor*                                         :story:*
-
-At present the visitor is named by dogen. There is nothing stopping us
-from allowing users to rename it via meta-data. We don't have a use
-case yet.
+We then need to review the C++ templates and figure out where we were
+also inferring "abstractness", and use the new flag.
 
 *** Report validation errors like compilers do                        :story:
 
@@ -2408,49 +2088,9 @@ GCC. Finally, we should support validation warnings, using the same
 conventions as compilers (-Wall, etc). Though perhaps these are better
 defined as part of the metamodel rather than command-line arguments.
 
-*** Add support for ignoring types and models                         :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to ignore certain types I am working
-on so that I can evolve my diagram over time, whilst still being able
-to commit it.
-#+end_quote
-
-Sometimes when changing a diagram it may be useful to set some types
-to "ignore", i.e. make dogen pretend they don't exist at all. For
-instance one may want to introduce new types one at a time. It would
-be nice to have a dynamic extension flag for ignoring.
-
-We should probably have some kind of warning to ensure users are aware
-of the types being ignored.
-
-Isn't this just using "enable=false" for all formatters?
-
-In a world where we can define bundles of meta-types, and import them
-from system models, we could possibly just define a bundle called
-=Ignored= with all formatters set to false.
-
-This should be a stereotype to make it really visible. Also, the type
-should have a colour that is easy to spot like light gray. Actually
-this is ok, we can just add a profile.
-
-This is also useful at the model level so that the model is not used
-either for tests or for generation. This is more than just formatting:
-its basically "act as if this type was not defined in the input" or
-"this model did not exist". It should result in resolution failures if
-anyone is referring to the model/type.
-
 *** Update all exception names to match framework guiidelines         :story:
 
 Exceptions should end with "exception".
-
-*** Use DI in injection model                                         :story:
-
-We need to use the boost.di injector in the injector model to register
-the encoding and decoding transforms. This means we need to receive
-lists of codecs in the main transform and then setup the reigstrar
-internally. It also means we need state, which means we need to
-propagate the DI pattern all the way to the top.
 
 *** Log file per transform                                            :story:
 
@@ -2471,13 +2111,7 @@ In theory all we'd have to do is to get the tracer to do the hooking
 and unhooking for each transform. It should already know about chains
 vs transforms.
 
-*** Logging at info is very messy                                     :story:
-
-Ideally when logging at info we want to see the spine of the program,
-showing all transforms with their start and finishes and some
-information about what they are processing (e.g. model).
-
-*** Rename =transformation_error= to =transform_exception=            :story:
+*** Rename =transformation_error= to =transform_exception=  :reviewing:story:
 
 In keeping with the framework guidelines for naming exceptions. We need to
 also look at all other exceptions.
@@ -3407,7 +3041,57 @@ Note: not all meta-model elements will be available on all technical
 spaces. We need a way to make sure they are compatible. Perhaps the
 element could have a list of compatible TSs.
 
+This approach follows the unwritten rule of "no black box injection of
+modeling elements". We should formalise this rule somewhat and explain
+the rationale for it.
+
+Note that the handling of =invalid= in enumeration also falls under
+this remit. At present we are injecting the invalid enumerator
+transparently via meta-data switches. This is not a good idea. Users
+should instead have some kind of "enumeration template" from which
+they can inherit which will give them the required enumerators. We
+should not do anything special for invalid.
+
 Merged Stories:
+
+*Consider allowing renaming of "internal" types*
+
+Users may want to change the =_visitor= postfix for visitors or the
+boost serialisation registrar name. This could be achieved via
+meta-data.
+
+*Consider renaming registrar in boost serialisation*
+
+At present we have a registrar formatter that does the boost
+serialisation work. However, the name =registrar= is a bit too
+generic; we may for example add formatters for static registrars. We
+should rename this formatter to something more meaningful. Also the
+name registrar is already well understood to mean static registrar.
+
+This is a big problem now that we cannot add a type with the name
+registrar to the main model as it clashes with the serialisation
+registrar.
+
+We could simply name it serialisation registrar or some such name that
+is very unlikely to clash. We should then have a validation rule that
+stops users from defining types with that name.
+
+We need to go through all of the renamed registrars and fix them.
+
+Another option is to allow users to supply a name via meta-data to
+avoid name clashes. We could error when the user has defined a type.
+
+Actually, since the clash is only internal - the names we are
+generating on the fly are clashing with the user defined names - we
+should probably have a "postfix" that can be added in case of
+clashes. The generated code will not cause problems, its just the
+formattables pipeline.
+
+*Allow renaming of visitor*                                         :story:*
+
+At present the visitor is named by dogen. There is nothing stopping us
+from allowing users to rename it via meta-data. We don't have a use
+case yet.
 
 *Handcrafted support for fabric types*
 
@@ -3960,6 +3644,158 @@ disable setter etc).
 
 New features for this release.
 
+*** Generate a single type                                            :story:
+
+Sometimes, when a model is in a bit of a state, it would be really
+useful to be able to generate a single type (or maybe set of
+types). We could easily do this by forcing the overwrite flag to false
+to all artefacts other than those that belong to this set of
+types. This could be a transform performed just before we generate the
+extraction model: loop through all elements and those that are not
+in this set, set their overwrite flags to false - or maybe even remove
+them from the model?
+
+Of course, we still need for the model to be in a state good enough to
+build.
+
+*** Syntax checking support for stitch templates                      :story:
+
+It would be really nice to have syntax checking for stitch
+templates. This may be simpler than expected. We have two types of
+errors:
+
+- stitch errors: these are invalid stitch templates. We already detect
+  these. We just need to output a GCC-style error message.
+- c++ errors: these occur after we've weaved, by compiling the c++
+  code. These are slightly trickier: we need to map the c++ lines to
+  the stitch lines; this can be done during the generation of the
+  stitch template, where as we output the code, we also keep track of
+  the lines. For example, in a loop, one stitch template line will map
+  to many c++ lines. We also need access to the compilation
+  database. We then shell out using Boost.Process, run the compiler
+  against the c++ code, retrieve the GCC/Clang errors, and map the
+  line and columns from the compiler back into the stitch line and
+  columns. We then output the errors, but using the stitch line and
+  column numbers (presumably the column remains unchanged, or perhaps
+  we should just remove it).
+
+Ideally we want to preserve the original compiler output as much as
+possible, only interfering with the mapping. We should also make sure
+we only map lines in the template file, ignoring everything else.
+
+We will also have to reactivate the weaving mode, so this will require
+a bit of thinking:
+
+- we only want to weave a single template; however, in the new world,
+  that is actually equivalent to weaving the entire model because we
+  need to go through all of the transforms.
+- this also means we may end up with lots of errors from other
+  templates. We need to avoid this.
+
+*** Add aliases to enumeration string conversions                     :story:
+
+We often need to cast a enum from a string but the name is not exactly
+like the original enumeration. For example, we use enums for
+stereotypes but we cannot have the same namespacing structure on the
+enum. For these cases it would be nice to be able to supply an alias.
+
+The only slight problem is that if we use this approach, the cast will
+still work when you supply the simple or qualified enumeration.
+
+Perhaps we can have two concepts:
+
+- alias. Everything else will still work.
+- overrides. Only the override is considered valid. Conversions will
+  now always use the override.
+
+*** Consider adding a =to_string= facet                               :story:
+
+We originally added the boost lexical cast facet, but that requires
+boost. The new  C++ approach seems to be to use the conversion methods
+=to_string=. However, there is no equivalent "from string". We could
+add it though.
+
+Links:
+
+- [[http://www.cplusplus.com/reference/string/to_string/][to_string]]
+
+*** Add support for ignoring types and models                         :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to ignore certain types I am working
+on so that I can evolve my diagram over time, whilst still being able
+to commit it.
+#+end_quote
+
+Sometimes when changing a diagram it may be useful to set some types
+to "ignore", i.e. make dogen pretend they don't exist at all. For
+instance one may want to introduce new types one at a time. It would
+be nice to have a dynamic extension flag for ignoring.
+
+We should probably have some kind of warning to ensure users are aware
+of the types being ignored.
+
+Isn't this just using "enable=false" for all formatters?
+
+In a world where we can define bundles of meta-types, and import them
+from system models, we could possibly just define a bundle called
+=Ignored= with all formatters set to false.
+
+This should be a stereotype to make it really visible. Also, the type
+should have a colour that is easy to spot like light gray. Actually
+this is ok, we can just add a profile.
+
+This is also useful at the model level so that the model is not used
+either for tests or for generation. This is more than just formatting:
+its basically "act as if this type was not defined in the input" or
+"this model did not exist". It should result in resolution failures if
+anyone is referring to the model/type.
+
+*** Consider making fully generated files read-only                   :story:
+
+We could add emacs/vi tags to make fully generated files read-only -
+as opposed to partially generated files such as services, which are
+expected to be modified by the user. Example:
+
+: /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 buffer-read-only: t -*-
+
+There must be a vi equivalent. There is =view= but its not clear how
+to set it into a modeline. The alternative is to write the files as
+read only.
+
+: /* vim: tw=60: ts=2: view=t: set ro: */
+
+Requires changes  to =.vimrc=:
+
+: set modeline
+
+It would be even better if we could make parts of a file read only, so
+that only the protected regions could be written on.
+
+Links:
+
+- [[https://stackoverflow.com/questions/20023363/emacs-remove-region-read-only][emacs remove region read-only]]
+- [[https://www.emacswiki.org/emacs/FoldingMode][Folding mode]]
+
+*** Generate model dependency graph                                   :story:
+
+It would be nice to generate a tracing of the model dependencies. This
+may not necessarily be part of tracing.
+
+*** Pre-includes defines                                              :story:
+
+For boost test, we need the ability to define a macro before any of
+the includes: =BOOST_TEST_MODULE=. At present, the decorations have
+both the licence and the includes, and its not possible to place
+something in between the two. So we are doing the easy thing and
+adding the define before the preamble. In an ideal world we should be
+able to inject pre and post includes defines. These can be done by the
+formatter or even by the user.
+
+Links:
+
+- [[https://www.boost.org/doc/libs/1_69_0/libs/test/doc/html/boost_test/utf_reference/link_references/link_boost_test_module_macro.html][BOOST_TEST_MODULE]]
+
 *** Add support for inlining                                          :story:
 
 We should be able to set a model-wide property that tells dogen to
@@ -4342,22 +4178,28 @@ useful for languages like C# and Java, to control serialisation, etc.
 Things we should address as soon as possible because they impact dogen
 usage. Urgent things that are going to annoy users.
 
-*** Fabric generates forward decls with no path                       :story:
+*** Logging at info is very messy                                     :story:
 
-The following looks strange:
+Ideally when logging at info we want to see the spine of the program,
+showing all transforms with their start and finishes and some
+information about what they are processing (e.g. model).
 
-: 2019-03-06 17:30:20.074618 [DEBUG] [quit.cpp.formatters.workflow] Procesing element: <dogen><hello_world><transformation_error>
-: 2019-03-06 17:30:20.074627 [DEBUG] [quit.cpp.formatters.workflow] Meta name: <dogen><generation><cpp><fabric><forward_declarations>
-: 2019-03-06 17:30:20.074636 [DEBUG] [quit.cpp.formatters.workflow] Using the stock formatter: masd.extraction.cpp.serialization.forward_declarations
-: 2019-03-06 17:30:20.074647 [DEBUG] [generation.cpp.formatters.assistant] Processing element: <dogen><hello_world><transformation_error> for archetype: masd.extraction.cpp.serialization.forward_declarations
-: 2019-03-06 17:30:20.074659 [DEBUG] [quit.cpp.formatters.workflow] Formatted artefact. Path: ""
+*** Using =std::set<std::string>= causes compilation errors           :story:
 
-This could help explain the problems we're having with empty
-artefacts. This should be fixed with the new approach to forward
-declarations.
+ In theory sets of strings (and any other type that has =operator<=
+ should work out of the box, even though we do not support sets of
+ dogen types. However, when we tried to use a set of strings we got a
+ whole load of compilation errors in serialisation, etc.
 
-Another related problem is that we are not setting the path when
-creating stitch templates for the first time in the stitch formatter.
+*** Line endings could cause rewrites                                 :story:
+
+At present if we git clone a repo with UNIX line endings and then
+re-run dogen on Windows, even though nothing has changed in the model,
+all generated files should get rewritten with windows line endings. We
+should have a setting that enforces one set of line endings at the
+model level. Interestingly, at present almost all extraction and
+generation tests are green, implying we do not see any diffs. This is
+very puzzling.
 
 *** Disabling facet after regeneration does not delete file           :story:
 
@@ -5880,6 +5722,14 @@ Stories that will not be handled on the current major release.
 ** Technical debt
 
 Ideas to improve the code base.
+
+*** Use DI in injection model                                         :story:
+
+We need to use the boost.di injector in the injector model to register
+the encoding and decoding transforms. This means we need to receive
+lists of codecs in the main transform and then setup the reigstrar
+internally. It also means we need state, which means we need to
+propagate the DI pattern all the way to the top.
 
 *** Use =std::filesystem= instead of =boost::filesystem=              :story:
 

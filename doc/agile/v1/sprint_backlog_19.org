@@ -11,20 +11,20 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-06-03 Mon 19:45]
+#+CAPTION: Clock summary at [2019-06-03 Mon 20:30]
 | <75>                                               |        |      |      |       |
 | Headline                                           | Time   |      |      |     % |
 |----------------------------------------------------+--------+------+------+-------|
-| *Total time*                                       | *7:43* |      |      | 100.0 |
+| *Total time*                                       | *8:27* |      |      | 100.0 |
 |----------------------------------------------------+--------+------+------+-------|
-| Stories                                            | 7:43   |      |      | 100.0 |
-| Active                                             |        | 7:43 |      | 100.0 |
-| Edit release notes for previous sprint             |        |      | 3:36 |  46.7 |
-| Create a demo and presentation for previous sprint |        |      | 1:39 |  21.4 |
-| Sprint and product backlog grooming                |        |      | 0:24 |   5.2 |
-| Remove test model sanitizer                        |        |      | 0:20 |   4.3 |
-| Remove master headers                              |        |      | 1:02 |  13.4 |
-| Move registrar into assets                         |        |      | 0:42 |   9.1 |
+| Stories                                            | 8:27   |      |      | 100.0 |
+| Active                                             |        | 8:27 |      | 100.0 |
+| Edit release notes for previous sprint             |        |      | 3:36 |  42.6 |
+| Create a demo and presentation for previous sprint |        |      | 1:39 |  19.5 |
+| Sprint and product backlog grooming                |        |      | 1:08 |  13.4 |
+| Remove test model sanitizer                        |        |      | 0:20 |   3.9 |
+| Remove master headers                              |        |      | 1:02 |  12.2 |
+| Move registrar into assets                         |        |      | 0:42 |   8.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -202,6 +202,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-06-03 Mon 19:46]--[2019-06-03 Mon 20:30] =>  0:44
     CLOCK: [2019-06-03 Mon 06:31]--[2019-06-03 Mon 06:46] =>  0:15
     CLOCK: [2019-06-03 Mon 06:21]--[2019-06-03 Mon 06:30] =>  0:09
     :END:
@@ -237,6 +238,115 @@ generated tests, we no longer required it. Remove this feature.
 Notes:
 
 - actually, we left the test model sanitizer. Not clear why.
+
+*** COMPLETED Code-generate variability feature templates             :story:
+    CLOSED: [2019-06-03 Mon 20:23]
+
+*Rationale*: implemented in the previous sprint.
+
+Type templates are in effect features from a feature model. We need to
+add UML support for features (e.g. add meta-model elements for them),
+with code generation, and link them back to annotations.
+
+In fact, we made a mistake by binding annotations so closely to
+dogen. There are two distinct concerns here:
+
+- the annotations library. This provides "typed support" on top of KVP
+  infrastructure. The idea here is that users can define "fields" with
+  "types" and retrieve information from those KVPs in a structured
+  way. Instead of having to create their own validation
+  infrastructure, they can rely on annotations to do all the hard work
+  for them. As part of the field creation, ideas such as "scopes" and
+  "archetype locations" emerge. However, these do not really belong to
+  the domain of annotations; these are concepts that end users create
+  and give them semantics. What annotations needs to be able to do is
+  to allow the creation of arbitrary notions of "scopes" and
+  "hierarchy". Basically, annotations could be a completely
+  self-contained project with no dependencies and usable outside of
+  dogen.
+- the linkage between the annotations library and dogen. Here we can
+  create metamodel elements to convey the input parameters needed to
+  code generate the elements for the annotations library. In this
+  sense, annotations is nothing more than a platform that the
+  transforms leverage; it has nothing particularly special to do with
+  dogen. It just so happens that dogen itself then makes use of
+  annotations to supply metadata internally, but this is a mere
+  coincidence.
+- the linkage between stitch and annotations. In this view, stitch is
+  yet another client of annotations, via dogen. Again, there is no
+  reason why stitch needs to have any dependency on dogen, other than
+  annotations. In this sense, features such as licences and other
+  boilerplate must be supplied as KVP parameters into stitch, without
+  it directly depending in formattables. In addition, the fact that
+  stitch generates c++ is also a coincidence. We could have a
+  parameter that configures stitch and generate say C#.
+
+Interestingly, in this sense we could then say that both stitch and
+annotations are stand alone libraries generated using dogen, and then
+in turn consumed by dogen. This could be done as packages by means of
+vcpkg. And of course, stitch could then use a proper templating engine
+instead of wale (another vcpkg dependency).
+
+Finally, the logical conclusion is that dogen can use *any* of a
+number of templating engines. The parameters to the engine are
+supplied using KVPs (by means of annotation). There is a generic
+metamodel element representing the binding to templating, and one of
+its parameters is the templating engine. These are bound to the dogen
+binary at compile time. End users can also make use of this mechanism,
+for any of the available facets. This means that where we supply
+=formatting_style=, we should really reflect the templating
+engine. And then, all parameters with a known prefix, say:
+
+: masd.templating.ENGINE.X=Y
+
+Are supplied as parameters to the engine. These may need to take into
+account facets as well, so that we can bind each facet to a different
+template and supply different parameters.
+
+Notes:
+
+- one really useful feature would be to bind an enumeration to a
+  string field, such that we'd automatically convert the string into a
+  valid value of the enumeration (or throw).
+
+*Previous Understanding*
+
+Tasks:
+
+- create a meta-model element for type templates. Add container in
+  exomodel for it. Name: =yarn::annotation_type_template=?
+- add frontend support for the type template element.
+- add a transform that reads all the meta-data from type templates and
+  populates the yarn element of the type template. Add this transform
+  to the exomodel transforms, at the end of the chain (e.g. after
+  annotations).
+- create a meta-model element for the initialiser of type templates,
+  made up of all type templates in the model. Add a container of
+  initialiser in endomodel.
+- add a transform that moves all of the type templates into the
+  initialiser. This can be done as part of the exomodel to endomodel
+  transform. Or maybe we should have a stand alone transform, and the
+  final transform simply ignores type templates.
+- create a registrar in annotations that registers type templates.
+- create a stitch template for the initialiser, taking the registrar
+  as an argument, and registering all type templates.
+- add all type templates to all models, and generate the type
+  initialisers.
+- hook the type initialisers to the initialisers.
+- change type group repository to initialise from the registrar.
+- delete all type groups JSON and hydrator and related code.
+
+Merged stories:
+
+*Initialisation of meta-data*
+
+At present we are reading meta-data files for every transformation. In
+reality, it makes no sense to allow the meta-data files to change
+dynamically, because the consumers of the meta-data are hard-coded. So
+it would make more sense to treat them as a initialisation step. This
+will make even more sense when we code-generate the types instead of
+using JSON. Then we can hook up the generated code to the
+initialisers.
 
 *** STARTED Move registrar into assets                                :story:
     :LOGBOOK:
@@ -293,6 +403,70 @@ Notes:
   archive. We need to look into the boost serialisation documentation
   and see if there is a way to make the code look a bit more like the
   other instances of this pattern.
+
+*** Move fabric types into coding                                     :story:
+
+Fabric types need to be tidied up and moved into coding as regular
+meta-model elements. We need to try to make them as technical space
+agnostic as possible.
+
+*Previous understanding*
+
+Move fabric types into generation.
+
+- copy across the fabric types from cpp and csharp into generation.
+- update formatters to use the types from generation.
+- delete them from original models.
+
+At present we are always generating the fabric types via the injctor
+and then asking the user to disable them as required via the
+enablement settings. This is very silly. The approach should now be
+that we look for elements with the correct stereotypes,
+e.g. =masd::cmakelists= and so forth and use those to generate these
+elements. This must be done as part of the work to move fabric types
+into the metamodel. We should also take this opportunity to merge
+common types between C# and C++, if any exist.
+
+Notes:
+
+- this will also address the naming of types such as registrar.
+- we need to remove all top-level knobs that are controlling the
+  enablement of meta-types such as visual studio, etc. In addition, at
+  present when we enable say ODB we automatically get ODB options,
+  etc. In this world, we would need to create the element in the
+  model. This is a bit confusing because users won't know this is a
+  requirement. Perhaps we need to have a combination of implicit and
+  explicit types?
+
+*** Fabric generates forward decls with no path                       :story:
+
+The following looks strange:
+
+: 2019-03-06 17:30:20.074618 [DEBUG] [quit.cpp.formatters.workflow] Procesing element: <dogen><hello_world><transformation_error>
+: 2019-03-06 17:30:20.074627 [DEBUG] [quit.cpp.formatters.workflow] Meta name: <dogen><generation><cpp><fabric><forward_declarations>
+: 2019-03-06 17:30:20.074636 [DEBUG] [quit.cpp.formatters.workflow] Using the stock formatter: masd.extraction.cpp.serialization.forward_declarations
+: 2019-03-06 17:30:20.074647 [DEBUG] [generation.cpp.formatters.assistant] Processing element: <dogen><hello_world><transformation_error> for archetype: masd.extraction.cpp.serialization.forward_declarations
+: 2019-03-06 17:30:20.074659 [DEBUG] [quit.cpp.formatters.workflow] Formatted artefact. Path: ""
+
+This could help explain the problems we're having with empty
+artefacts. This should be fixed with the new approach to forward
+declarations.
+
+Another related problem is that we are not setting the path when
+creating stitch templates for the first time in the stitch formatter.
+
+*** Create metamodel elements for =entry_point= and =interface=       :story:
+
+These have been incorrectly added as configurations and/or fabric
+types. This should be looked at after merging the fabric types.
+
+*** Consider renaming logic-less templates                            :story:
+
+Originally we though this was a good name because it was used by some
+domain experts, but it seems it generates more confusion than
+anything. It may just be a term used by mustache and other niche
+template groups. We should probably rename it to text templates given
+most domain experts know what that means,
 
 *** Windows clang-cl release build is failing 4 tests                 :spike:
 
@@ -482,3 +656,11 @@ etc.
   to update on save only.
 
 ** Deprecated
+*** CANCELLED Reactivate injection.dia tests                          :story:
+    CLOSED: [2019-06-03 Mon 20:01]
+
+*Rationale*: these tests have now been removed when serialisation
+support was removed.
+
+We seem to have a number of tests commented out in
+injection.dia. Investigate why and if possible, reactivate them.
