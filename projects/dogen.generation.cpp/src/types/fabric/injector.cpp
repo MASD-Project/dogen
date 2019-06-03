@@ -25,7 +25,6 @@
 #include "dogen.generation.cpp/types/fabric/registrar_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/build_files_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/odb_options_factory.hpp"
-#include "dogen.generation.cpp/types/fabric/master_header_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/visual_studio_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/entry_point_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/injector.hpp"
@@ -77,15 +76,6 @@ inject_odb_options(generation::meta_model::model& m) const {
     add_elements(elements, m);
 }
 
-void injector::
-inject_master_headers(generation::meta_model::model& m) const {
-    const auto& rg(formatters::workflow::registrar());
-    const auto& frp(rg.formatter_repository());
-    master_header_factory f;
-    const auto e(f.make(frp, m));
-    add_element(e, m);
-}
-
 void injector::inject_visual_studio(
     const variability::meta_model::feature_model& fm,
     generation::meta_model::model& m) const {
@@ -105,7 +95,6 @@ void injector::inject(const variability::meta_model::feature_model& fm,
     inject_registrar(m);
     inject_build_files(m);
     inject_odb_options(m);
-    inject_master_headers(m);
     inject_visual_studio(fm, m);
     inject_entry_point(m);
 }

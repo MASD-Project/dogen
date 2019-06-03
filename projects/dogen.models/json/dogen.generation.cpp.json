@@ -765,26 +765,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "fabric::master_header",
-      "tagged_values": {
-        "masd.generalization.parent": "assets::meta_model::element"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "inclusion_by_facet",
-          "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<assets::meta_model::name>>>"
-        }
-      ]
-    },
-    {
-      "name": "fabric::master_header_factory",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "fabric::registrar_factory",
       "stereotypes": [
         "dogen::handcrafted::typeable"

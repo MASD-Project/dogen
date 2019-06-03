@@ -38,6 +38,7 @@ public:
     virtual ~injector() noexcept;
 
 private:
+
     void add_element(const boost::shared_ptr<assets::meta_model::element>& e,
         generation::meta_model::model& m) const;
 
@@ -50,7 +51,6 @@ private:
     void inject_registrar(generation::meta_model::model& m) const;
     void inject_build_files(generation::meta_model::model& m) const;
     void inject_odb_options(generation::meta_model::model& m) const;
-    void inject_master_headers(generation::meta_model::model& m) const;
     void inject_visual_studio(const variability::meta_model::feature_model& fm,
         generation::meta_model::model& m) const;
     void inject_entry_point(
