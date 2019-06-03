@@ -159,6 +159,32 @@ Actually we have implemented this but using meta-data for some
 reason. We need to remove the meta-data support and use the value
 field instead.
 
+#+begin_example
+    {
+      "name": "features::enumerator",
+      "documentation": "Parameters related to enumerators.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "property",
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
+      "attributes": [
+        {
+          "name": "masd.enumerator.value",
+          "type": "masd::variability::text",
+          "documentation": "Value to use for this enumerator. Must be unique for an enumeration.\n",
+          "tagged_values": {
+            "masd.variability.qualified_name": "masd.enumerator.value",
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
+    },
+#+end_example
+
 *** Consider adding a =to_string= facet                               :story:
 
 We originally added the boost lexical cast facet, but that requires

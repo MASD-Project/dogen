@@ -11,21 +11,26 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-06-03 Mon 06:31]
-| <75>                                |        |      |      |       |
-| Headline                            | Time   |      |      |     % |
-|-------------------------------------+--------+------+------+-------|
-| *Total time*                        | *0:09* |      |      | 100.0 |
-|-------------------------------------+--------+------+------+-------|
-| Stories                             | 0:09   |      |      | 100.0 |
-| Active                              |        | 0:09 |      | 100.0 |
-| Sprint and product backlog grooming |        |      | 0:09 | 100.0 |
+#+CAPTION: Clock summary at [2019-06-03 Mon 12:59]
+| <75>                                               |        |      |      |       |
+| Headline                                           | Time   |      |      |     % |
+|----------------------------------------------------+--------+------+------+-------|
+| *Total time*                                       | *5:10* |      |      | 100.0 |
+|----------------------------------------------------+--------+------+------+-------|
+| Stories                                            | 5:10   |      |      | 100.0 |
+| Active                                             |        | 5:10 |      | 100.0 |
+| Edit release notes for previous sprint             |        |      | 3:07 |  60.3 |
+| Create a demo and presentation for previous sprint |        |      | 1:39 |  31.9 |
+| Sprint and product backlog grooming                |        |      | 0:24 |   7.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
-*** STARTED Edit release notes for previous sprint                    :story:
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2019-06-03 Mon 12:59]
     :LOGBOOK:
-    CLOCK: [2019-06-03 Mon 06:47]
+    CLOCK: [2019-06-03 Mon 12:51]--[2019-06-03 Mon 12:59] =>  0:08
+    CLOCK: [2019-06-03 Mon 09:51]--[2019-06-03 Mon 10:45] =>  0:54
+    CLOCK: [2019-06-03 Mon 06:47]--[2019-06-03 Mon 08:52] =>  2:05
     :END:
 
 Add github release notes for previous sprint.
@@ -37,130 +42,142 @@ Title: Dogen v1.0.18, "Estação de Comboio"
 
 _The new CFM train station, next to the old. Moçamedes, Namibe, Angola. (C) 2018 [Armando Chicoa (VOA)](https://www.voaportugues.com/a/autoridades-falam-em-neglig%C3%AAncia-no-acidente-de-comboios-no-namibe/4559078.html)._
 
+**DRAFT: Release notes under construction**
+
 # Introduction
 
-This was yet another key sprint on our long march towards "meta-modeling all things". With this sprint we have now moved all remaining JSON files in the data directory into regular models. We've also started to move the wale templates - which, we have learned, are called [logic-less templates](https://en.wikipedia.org/wiki/Mustache_(template_system)) - but ran out of time.
-
-Our meta-model has grown considerably as the initiative progresses, so part of this sprint was spent organising it into some kind of hierarchical structure. Though by no means final, the present classification has already brought home some benefits. Unfortunately, one of the main objectives of this sprint was not achieved: the code generation of all feature related code. Predictably, it was harder than expected, and will have to be tackled over the next sprint. But all and all, it was a very successful sprint.
+At about three quarters of the planned commitment, this sprint was slightly shorter than usual. Nevertheless, it is still packed with intense work and exciting progress. The "meta-model all things" theme continues in full flow, and we just about reached the next great refactoring battlefront: the ```fabric``` namespaces in the C# and C++ generation models. Predictably, there are not many user facing stories, as the refactoring continues to gather steam.
 
 # User visible changes
 
-This section covers stories that affect end users. The sprint demo provides a quick demonstration of the user visible changes, whereas the below sections provide more detail.
+This section normally covers stories that affect end users, with the video providing a quick demonstration of the new features. As this sprint had only a very trivial user visible change (discussed below), we took the opportunity to demo a couple of existing features instead.
 
-[![Sprint 1.0.17 Demo](https://img.youtube.com/vi/3XrHSFkdVps/0.jpg)](https://youtu.be/3XrHSFkdVps)
+[![Sprint 1.0.18 Demo](https://img.youtube.com/vi/TkYQTW_jAGk/0.jpg)](https://youtu.be/TkYQTW_jAGk)
 
-# Feature Templates as Meta-Model Elements
+## Data directory clean up
 
-With this sprint, it is now quite straightforward to declare new features: we've introduced the new stereotype ```masd::variability::feature_bundle```, which is made up of feature templates. To recap, feature templates are projected over the archetype space, and can be thought of as toggles that control variability within the code generator. Whilst this story is user facing - in the sense that any user model can make use of this functionality - it is mainly of interest in the development of the code generator itself.
+For the last few sprints we have been chasing an elusive target: the removal of the assortment of non-model JSON files that have long lived in our ```data``` directory. If nothing else, anything with a name like "data" triggers immediately the "code smells" part of any developer's brain. With this sprint, we have finally achieved this milestone: the text templates that we use in the C++ and C# models have now been moved into the models themselves, with the addition of the text templates meta-modeling elements.
 
-![Feature templates](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/dogen_coding_features.png)
-
-With the approach implemented by this sprint, we can now declare each feature within the model that makes use of it - instead of lumping all features together globally as we did in the JSON days - and the code generator now generates all the necessary code to integrate the feature with the code generator itself. However, this sprint we only had time to focus on the "declaration" of the feature templates; next sprint we will look at the "consumption" end and code-generate the infrastructure needed to "read" or "deserialise" the feature from a configuration.
-
-In addition, we've also introduced the ```masd.variability``` model, where all of the types used by features are declared. With this, we take one more step to "normalise" these types, making them less special. This is covered in more detail in the next section.
-
-# Mappings as Meta-Model Elements
-
-In the past we had a JSON file with mappings between the abstract LAM (Language Agnostic Model) elements and the concrete elements (e.g. c++ and c# model types). These mappings were completely removed from the meta-model. With this sprint, we created the new type of ```masd::mapping::extensible_mappable```, which provides a flexible (and extensible) mapping mechanism. We also created the LAM model as a regular Dogen model, using ```masd::mapping::extensible_mappable``` and (mostly) mapping to the same types as the JSON file did.
-
-![LAM Model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/masd_lam_model.png)
-
-In order to map a type, you now need to declare the mapping:
-
-```json
-    {
-      "name": "char",
-      "stereotypes": [
-        "masd::builtin"
-      ],
-      "in_global_module": true,
-      "can_be_primitive_underlier": true,
-      "tagged_values": {
-        "masd.mapping.target": "masd.lam.text.character",
-```
-
-Ideally, we'd like users to create their own mapping models instead of having to rely on LAM. However, the problem we have at present is that this would require having to modify the Dogen-supplied PDMs (Platform Definition Models), which is not ideal. More thinking is required in order to implement this use case, but a number of steps were taken in the right direction.
-
-In addition, we also created the ```masd::mapping::fixed_mappable```, for the special case of variability types. This model is internal to Dogen and is not expected to be used by end users - unless, of course, they are extending Dogen.
-
-![Variability Model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/masd_variability_model.png)
-
-Unlike the extensible mappables, fixed mappables map to one and only one target and the target can be a name or a name tree. For example, ```masd::variability::text``` maps to ```std::string``` whereas ```masd::variability::text_collection``` maps to ```std::list<std::string>```. These named trees will then be used to make up the properties of the static configuration types which we will code generate next sprint.
-
-# New Facet: Lexical Cast
-
-C++ has gained a new facet: ```lexical_cast```. This facet specialises the ```boost::lexical_cast``` template function, at present only for Dogen enumerations. This enables the conversion of an enumeration from and to a string. The input string can be fully qualified (e.g. ```my_enum::my_enumerator```) or simple (e.g. ```my_enumerator```). The output string is always fully qualified (e.g. ```my_enum::my_enumerator```). Contrived example usage for an imaginary model ```my_model```:
-
-```c++
-#include <iostream>
-#include "my_model/lexical_cast/my_enum.hpp"
-
-void test() {
-    // Conversion from enum to string.
-    using namespace my_model;
-    my_enum a(my_enum::my_enumerator);
-    const auto str(boost::lexical_cast<std::string>(my_enum));
-    std::cout << str << std::endl;  // prints my_enum::my_enumerator
-
-    // Conversion from string to enum
-    const auto e(boost::lexical_cast<my_enum>(str));
-    // e is now my_enum::my_enumerator
-}
-```
-
-See also the [generated tests](https://github.com/MASD-Project/dogen/blob/a7992a17560cd21376e9d2fa74cfc41094fc1b42/projects/dogen.coding/tests/meta_model/origin_types_tests.cpp#L44) for more examples.
-
-As with all other facets, you can use lexical cast globally or locally. To use the new facet globally, set the feature ```masd.generation.cpp.lexical_cast.enabled``` to true on your model configuration or profile. To use it locally, set it on the configuration of the specific enumeration that requires lexical cast support - or, better yet: create a local profile such as ```castable```, set it there and update the stereotype of the enumeration in question. This is the way all Dogen code is moving now.
-
-## Bug-fix: Allow Profiles at the Model Level
-
-An important story was a fix to a [brown-paper bag bug](http://www.catb.org/jargon/html/B/brown-paper-bag-bug.html): profiles could not be declared directly on the model namespace of a user model. That is, in sprint 16 you needed to create a reference model to declare profiles. With this release you can now have a single model with both your user types and the profile. At some point we'll update the test models to contain all of the new meta-model elements on the target model, to make sure they all work.
-
-![Dogen's Profiles Model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/profiles_model.png)
+The change gave us the opportunity to rethink the approach from first principles. As a result, the ```data``` directory is no longer, and instead we now have only the ```library``` directory under the Dogen ```shared``` folder. It too will one day cease to exist, when we implement proper support for the PDMs (Platform Description Models) - but for the next three or four sprints it will continue to house the simplified version of the PDMs as they are currently implemented.
 
 # Development Matters
 
-In this section we cover topics that are mainly of interest if you follow Dogen development, such as details on internal stories that consumed significant resources, important events, etc. As usual, for all the gory details of the work carried out this sprint, see the [sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_17.org).
+In this section we cover topics that are mainly of interest if you follow Dogen development, such as details on internal stories that consumed significant resources, important events, etc. As usual, for all the gory details of the work carried out this sprint, see the [sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_18.org).
 
 ## Significant Internal Stories
 
-A very important story implemented this sprint was the clarification of the separation between Dogen and MASD. Up to now we've been loosely using the ```masd::``` prefix, even for elements that are really not part of MASD. With this sprint we have made an effort to become more accurate, and we now have a very simple test to determine where to place things: MASD is the public API for a code generator that follows its specifications, whereas Dogen is one (of possibly many) implementations of those specifications.
+There were four very significant stories this sprint, which we cover briefly below.
 
-Applying this filtering function to the code base had a cross-cutting impact:
+### Use generated static configurations in transforms
 
-- **Profiles**: items such as Dogen's profiles have now been moved over to the ```dogen``` namespace (or conversely, to the C++/C# models reference implementation namespace). That is, where in the past we had ```masd::handcrafted::typeable```, it is now ```dogen::handcrafted::typeable```. Users are of course free to define their own profiles (under their own user defined namespaces), but it is important to make clear that the Dogen-defined profiles are **not** part of MASD, and are only available to end users if they are extending Dogen itself.
-- **Palettes**: As part of this separation, we also moved the colour palettes from the C++ Reference Model, where it was incorrectly placed, into MASD. The colouring scheme will be part of the MASD public API.
-- **LAM and variability models**: LAM and the variability models are also part of the MASD public API, rather than just a Dogen-level concept.
+ First and foremost, consuming the majority of the sprint's resourcing, was the move towards using code generated static configurations. We started this work when we moved feature templates into the meta-model; it seemed only logical to start code-generating the C++ types to represent the dynamic configurations, as well as the "deserialisation" code that converted dynamic configurations to static configurations.
+
+With this release we removed the majority of the hand-crafted uses of static configurations, making the code more readable. As an added bonus, It also means it's much easier to add new features to the code generator now: simply create a new instance of a ```masd::variability::feature_bundle``` modeling element, and add the required feature templates. While we were at it, we also cleaned up the way bundles were modeled, meaning we now have less boilerplate to add features and bundles are now more logically consistent.
+
+ As an example of how feature bundles are used, here's how we declare the generalisation feature bundle:
+
+```json
+    {
+      "name": "features::generalization",
+      "documentation": "Features related to the generalization relationship.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "element",
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
+      "attributes": [
+        {
+          "name": "masd.generalization.is_final",
+          "type": "masd::variability::boolean",
+          "documentation": "Whether to mark a type as final or not.\n",
+          "tagged_values": {
+            "masd.variability.qualified_name": "masd.generalization.is_final",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "masd.generalization.parent",
+          "type": "masd::variability::text",
+          "documentation": "Name of the parent of the current element.\n",
+          "tagged_values": {
+            "masd.variability.qualified_name": "masd.generalization.parent",
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
+    },
+
+```
+
+Users then make use of these features in their diagrams:
+
+```
+#DOGEN masd.generalization.is_final=true
+#DOGEN masd.generalization.parent=some_package::some_type
+```
+
+We've already noticed how much quicker the development of new features has been since this new functionality has been added, so this is a great win.
+
+### Make wale templates meta-model elements
+
+As explained above, we have been chasing the "meta-modelisation" of all configuration files that lived in the data directory for a long time. Wale text templates were one of the most annoying cases, because they **really** did not belong in the data directory; after all, text templates are internal to the model that uses them, rather than visible to all users of the code generator.
+
+With this release, we've finished adding support for a logic-less text template meta-modeling element, which represents the text template. We then moved the templates into their respective models, under the new ```templates``` directory. The name logic-less was chosen [to be close to the domain terminology](https://en.wikipedia.org/wiki/Mustache_(template_system)) but it perhaps yet another example of "domain overfitting": it seems it's more a source of confusion rather than enlightenment, as many users (and even domain experts!) are not familiar with the term. We will probably rename it to just "text templates".
+
+![Logic-less templates](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/logic_less_templates_modeling_elements.png)
+
+Interestingly, _in theory_, this change should have made possible for users to create their own text templates. However, _in practice_, it is of extremely limited value because:
+
+- we do not yet have a stable API for the meta-modeling elements;
+- nor do we expose these properly to the templates;
+- nor do we have a proper logic-less templating engine such as one of the mustache-like clones that exist in C++.
+
+However, it lays an important foundation for the work to come in this space and, though long in coming, the end goal in the area is now very well defined.
+
+### Rename the ```coding``` model
+
+Ever since we renamed our core model to ```coding``` we've been wondering if this was the right name. We've spent a fair bit of time wading through the literature in search of a fitting name, which would simultaneously reflect the domain terminology of [MDE](https://en.wikipedia.org/wiki/Model-driven_engineering), as well as clarifying our intent. We've finally settled on ```assets```, after reading the most enlightening review article by JM Jézéquel: ["Model-driven engineering for software product lines"](http://downloads.hindawi.com/journals/isrn.software.engineering/2012/670803.pdf).
+
+The new name is also consistent with the fact that we intend to model both products and components within this meta-model, so hopefully the rename is future-proof, and - gasp - final. We have gone through some four or five names since Dogen's inception, so take that with a grain of salt.
+
+### Start of Fabric clean-up
+
+One of the most anticipated tasks has been moving the fabric meta-model elements from the C++ and C# generation models into the assets model (as it is now known). This sprint fired the starting shot in this race: we have addressed the modeling of forward declarations in C++'s fabric. These have now been made consistent with the modeling ideas in Fabric. Sadly, many more items remain: some 15 or so elements need to be re-thought and re-modeled, moved into assets and then all of the associated formatting code needs to be updated.
 
 ## Resourcing
 
-A smidge over 80% of this sprint's total ask was dedicated to stories aligned with the sprint mission. Of this, four stories dominated: feature templates in the meta-model (~20%); mappings in the meta-model (~17%); the creation of namespaces for the zoo of meta-modeling elements we now have, and which is only set to continue growing (~11%); and, finally, the lexical cast work (~10%).
+As explained on the introduction, we've had around three quarters of the usual resourcing for this sprint, which was not ideal. On the plus side, over 77% of the sprint's total ask was spent on stories directly related to the sprint's mission, and just shy of 18% on process related work - with the release notes and demo consuming over 12% of that. Finally, we spent the remaining ~4% on spikes, mainly related to investigating the (many) test failures we're experiencing on Windows. Sadly no easy answers were to be found, so the investigation continues.
 
-![Story Pie Chart](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_17_pie_chart.jpg)
-
-Our non-core stories cost us around 14%, somewhat more expensive than usual. Of these we had the usual suspects: backlog grooming and previous sprint work (release notes, video, etc) cost us 9.4%, followed by a smattering of minor stories. We also spent ~2.5% in bug fixes.  Finally, we spent around 3.6% on a epic, which we desperately need to see implemented, but sadly its just too peripheral to the mission: the implementation of a relational model for tracing. Once this is implemented we shall be able to write SQL queries to interrogate the state of Dogen at any point in the pipeline. At present we are doing this via the tracing dumps, but these produce large JSON files and JQ is struggling to cope with the queries. However, its a large and complex task, so we shall try to do a little bit of work every sprint to bring it to life.
+![Story Pie Chart](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_18_pie_chart.jpg)
 
 ## Planning
 
-We clearly underestimated the complexity of fully implementing feature templates; we had originally only planned to take a single sprint on it, but we still have all of the code generation aspect (e.g. generate static configurations, plus the respective serialisation code) as well as going through the code base and replacing the manually crafted code with the new and shinny code-generated version. This will take a large portion of the next sprint. As such, we had to bump the project plan by one sprint.
+The project plan has suffered a couple of major setbacks this sprint. First, predictably, the fabric clean up was not completed this sprint. In addition, it is now clear it will be much harder than what we had estimated, so its now set to cost us the entirety of the next sprint. In addition, the PDM work is significant and it had not yet been added to the project plan.
 
-![Project Plan](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_17_project_plan.png)
+The updated plan is now as follows.
 
-![Resource Allocation Graph](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_17_resource_allocation_graph.png)
+![Project Plan](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_18_project_plan.png)
+
+![Resource Allocation Graph](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_18_resource_allocation_graph.png)
 
 # Next Sprint
 
-Next sprint's mission is to complete the two outstanding tasks from this sprint: moving wale templates into the meta-model and the code generation of feature templates. Once that's out of the way, hopefully we'll look into moving fabric meta-model elements into the coding meta-model.
+We shall focus on the Fabric clean-up for the entirety of the next sprint. It is likely that there will be some overrun, but we remain optimistic.
 
 # Binaries
 
-Note: we are now desperately close to our 50 minutes allocation on Travis, and as such we're getting many red builds. As a consequence, not every commit resulted on binaries being uploaded to Bintray this sprint. This is not ideal, so next sprint we will probably need to start disabling some of the generated tests to lower the build times.
-
 You can download binaries from [Bintray](https://bintray.com/masd-project/main/dogen) for OSX, Linux and Windows (all 64-bit):
 
-- [dogen_1.0.17_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.17/dogen_1.0.17_amd64-applications.deb)
-- [dogen-1.0.17-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.17/DOGEN-1.0.17-Darwin-x86_64.dmg)
-- [dogen-1.0.17-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/DOGEN-1.0.17-Windows-AMD64.msi)
+- [dogen_1.0.18_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.18/dogen_1.0.18_amd64-applications.deb)
+- [dogen-1.0.18-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.18/DOGEN-1.0.18-Darwin-x86_64.dmg)
+- [dogen-1.0.18-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/DOGEN-1.0.18-Windows-AMD64.msi)
+
+**Note 1**: we've made some slight improvements to the build duration, but in truth we're still desperately close to our 50 minutes allocation on Travis, and as such we're getting many red builds. This is not ideal, so next sprint we will probably need to start disabling some of the generated tests to lower the build times.
+
+**Note 2:** The OSX and Linux binaries are not stripped at present and so are larger than they should be. We have [an outstanding story](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org#linux-and-osx-binaries-are-not-stripped) to address this issue, but sadly CMake does not make this trivial.
 
 For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
 
@@ -171,7 +188,11 @@ Happy Modeling!
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6536266244029505536][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
-*** Create a video demo for the previous sprint's features            :story:
+*** COMPLETED Create a demo and presentation for previous sprint      :story:
+    CLOSED: [2019-06-03 Mon 12:59]
+    :LOGBOOK:
+    CLOCK: [2019-06-03 Mon 10:46]--[2019-06-03 Mon 12:25] =>  1:39
+    :END:
 
 Time spent creating the demo and presentation.
 
@@ -304,6 +325,12 @@ Tasks:
 - populate it with the extensions.
 - change enablement to merge all element properties of extensible
   elements.
+
+*** Remove test model sanitizer                                       :story:
+
+We seem to have introduced testing to the reference implementation but
+left the canned tests still there. There shouldn't be any reason to
+keep these so remove them.
 
 *** Remove master headers                                             :story:
 
