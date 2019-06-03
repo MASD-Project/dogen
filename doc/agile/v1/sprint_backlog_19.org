@@ -1,0 +1,696 @@
+#+title: Sprint Backlog 19
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) spike(p) }
+
+* Mission Statement
+
+- Move fabric into coding meta-model.
+
+* Stories
+
+** Active
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2019-06-03 Mon 06:31]
+| <75>                                |        |      |      |       |
+| Headline                            | Time   |      |      |     % |
+|-------------------------------------+--------+------+------+-------|
+| *Total time*                        | *0:09* |      |      | 100.0 |
+|-------------------------------------+--------+------+------+-------|
+| Stories                             | 0:09   |      |      | 100.0 |
+| Active                              |        | 0:09 |      | 100.0 |
+| Sprint and product backlog grooming |        |      | 0:09 | 100.0 |
+#+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
+#+end:
+
+*** Edit release notes for previous sprint                            :story:
+
+Add github release notes for previous sprint.
+
+Title: Dogen v1.0.17, "Porto do Namibe"
+
+#+begin_src markdown
+![Instalação do Porto do Namibe, Angola](http://agriculturaemar.com/wp-content/uploads/2018/10/Porto-do-Namibe.jpg)
+
+_Instalações do Porto do Namibe, Moçamedes, Angola. (C) 2018, [Agricultura e Mar](http://agriculturaemar.com/porto-do-namibe-pode-vir-a-ser-um-polo-de-desenvolvimento-logistico-no-sul-de-angola)._
+
+# Introduction
+
+This was yet another key sprint on our long march towards "meta-modeling all things". With this sprint we have now moved all remaining JSON files in the data directory into regular models. We've also started to move the wale templates - which, we have learned, are called [logic-less templates](https://en.wikipedia.org/wiki/Mustache_(template_system)) - but ran out of time.
+
+Our meta-model has grown considerably as the initiative progresses, so part of this sprint was spent organising it into some kind of hierarchical structure. Though by no means final, the present classification has already brought home some benefits. Unfortunately, one of the main objectives of this sprint was not achieved: the code generation of all feature related code. Predictably, it was harder than expected, and will have to be tackled over the next sprint. But all and all, it was a very successful sprint.
+
+# User visible changes
+
+This section covers stories that affect end users. The sprint demo provides a quick demonstration of the user visible changes, whereas the below sections provide more detail.
+
+[![Sprint 1.0.17 Demo](https://img.youtube.com/vi/3XrHSFkdVps/0.jpg)](https://youtu.be/3XrHSFkdVps)
+
+# Feature Templates as Meta-Model Elements
+
+With this sprint, it is now quite straightforward to declare new features: we've introduced the new stereotype ```masd::variability::feature_bundle```, which is made up of feature templates. To recap, feature templates are projected over the archetype space, and can be thought of as toggles that control variability within the code generator. Whilst this story is user facing - in the sense that any user model can make use of this functionality - it is mainly of interest in the development of the code generator itself.
+
+![Feature templates](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/dogen_coding_features.png)
+
+With the approach implemented by this sprint, we can now declare each feature within the model that makes use of it - instead of lumping all features together globally as we did in the JSON days - and the code generator now generates all the necessary code to integrate the feature with the code generator itself. However, this sprint we only had time to focus on the "declaration" of the feature templates; next sprint we will look at the "consumption" end and code-generate the infrastructure needed to "read" or "deserialise" the feature from a configuration.
+
+In addition, we've also introduced the ```masd.variability``` model, where all of the types used by features are declared. With this, we take one more step to "normalise" these types, making them less special. This is covered in more detail in the next section.
+
+# Mappings as Meta-Model Elements
+
+In the past we had a JSON file with mappings between the abstract LAM (Language Agnostic Model) elements and the concrete elements (e.g. c++ and c# model types). These mappings were completely removed from the meta-model. With this sprint, we created the new type of ```masd::mapping::extensible_mappable```, which provides a flexible (and extensible) mapping mechanism. We also created the LAM model as a regular Dogen model, using ```masd::mapping::extensible_mappable``` and (mostly) mapping to the same types as the JSON file did.
+
+![LAM Model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/masd_lam_model.png)
+
+In order to map a type, you now need to declare the mapping:
+
+```json
+    {
+      "name": "char",
+      "stereotypes": [
+        "masd::builtin"
+      ],
+      "in_global_module": true,
+      "can_be_primitive_underlier": true,
+      "tagged_values": {
+        "masd.mapping.target": "masd.lam.text.character",
+```
+
+Ideally, we'd like users to create their own mapping models instead of having to rely on LAM. However, the problem we have at present is that this would require having to modify the Dogen-supplied PDMs (Platform Definition Models), which is not ideal. More thinking is required in order to implement this use case, but a number of steps were taken in the right direction.
+
+In addition, we also created the ```masd::mapping::fixed_mappable```, for the special case of variability types. This model is internal to Dogen and is not expected to be used by end users - unless, of course, they are extending Dogen.
+
+![Variability Model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/masd_variability_model.png)
+
+Unlike the extensible mappables, fixed mappables map to one and only one target and the target can be a name or a name tree. For example, ```masd::variability::text``` maps to ```std::string``` whereas ```masd::variability::text_collection``` maps to ```std::list<std::string>```. These named trees will then be used to make up the properties of the static configuration types which we will code generate next sprint.
+
+# New Facet: Lexical Cast
+
+C++ has gained a new facet: ```lexical_cast```. This facet specialises the ```boost::lexical_cast``` template function, at present only for Dogen enumerations. This enables the conversion of an enumeration from and to a string. The input string can be fully qualified (e.g. ```my_enum::my_enumerator```) or simple (e.g. ```my_enumerator```). The output string is always fully qualified (e.g. ```my_enum::my_enumerator```). Contrived example usage for an imaginary model ```my_model```:
+
+```c++
+#include <iostream>
+#include "my_model/lexical_cast/my_enum.hpp"
+
+void test() {
+    // Conversion from enum to string.
+    using namespace my_model;
+    my_enum a(my_enum::my_enumerator);
+    const auto str(boost::lexical_cast<std::string>(my_enum));
+    std::cout << str << std::endl;  // prints my_enum::my_enumerator
+
+    // Conversion from string to enum
+    const auto e(boost::lexical_cast<my_enum>(str));
+    // e is now my_enum::my_enumerator
+}
+```
+
+See also the [generated tests](https://github.com/MASD-Project/dogen/blob/a7992a17560cd21376e9d2fa74cfc41094fc1b42/projects/dogen.coding/tests/meta_model/origin_types_tests.cpp#L44) for more examples.
+
+As with all other facets, you can use lexical cast globally or locally. To use the new facet globally, set the feature ```masd.generation.cpp.lexical_cast.enabled``` to true on your model configuration or profile. To use it locally, set it on the configuration of the specific enumeration that requires lexical cast support - or, better yet: create a local profile such as ```castable```, set it there and update the stereotype of the enumeration in question. This is the way all Dogen code is moving now.
+
+## Bug-fix: Allow Profiles at the Model Level
+
+An important story was a fix to a [brown-paper bag bug](http://www.catb.org/jargon/html/B/brown-paper-bag-bug.html): profiles could not be declared directly on the model namespace of a user model. That is, in sprint 16 you needed to create a reference model to declare profiles. With this release you can now have a single model with both your user types and the profile. At some point we'll update the test models to contain all of the new meta-model elements on the target model, to make sure they all work.
+
+![Dogen's Profiles Model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/profiles_model.png)
+
+# Development Matters
+
+In this section we cover topics that are mainly of interest if you follow Dogen development, such as details on internal stories that consumed significant resources, important events, etc. As usual, for all the gory details of the work carried out this sprint, see the [sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_17.org).
+
+## Significant Internal Stories
+
+A very important story implemented this sprint was the clarification of the separation between Dogen and MASD. Up to now we've been loosely using the ```masd::``` prefix, even for elements that are really not part of MASD. With this sprint we have made an effort to become more accurate, and we now have a very simple test to determine where to place things: MASD is the public API for a code generator that follows its specifications, whereas Dogen is one (of possibly many) implementations of those specifications.
+
+Applying this filtering function to the code base had a cross-cutting impact:
+
+- **Profiles**: items such as Dogen's profiles have now been moved over to the ```dogen``` namespace (or conversely, to the C++/C# models reference implementation namespace). That is, where in the past we had ```masd::handcrafted::typeable```, it is now ```dogen::handcrafted::typeable```. Users are of course free to define their own profiles (under their own user defined namespaces), but it is important to make clear that the Dogen-defined profiles are **not** part of MASD, and are only available to end users if they are extending Dogen itself.
+- **Palettes**: As part of this separation, we also moved the colour palettes from the C++ Reference Model, where it was incorrectly placed, into MASD. The colouring scheme will be part of the MASD public API.
+- **LAM and variability models**: LAM and the variability models are also part of the MASD public API, rather than just a Dogen-level concept.
+
+## Resourcing
+
+A smidge over 80% of this sprint's total ask was dedicated to stories aligned with the sprint mission. Of this, four stories dominated: feature templates in the meta-model (~20%); mappings in the meta-model (~17%); the creation of namespaces for the zoo of meta-modeling elements we now have, and which is only set to continue growing (~11%); and, finally, the lexical cast work (~10%).
+
+![Story Pie Chart](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_17_pie_chart.jpg)
+
+Our non-core stories cost us around 14%, somewhat more expensive than usual. Of these we had the usual suspects: backlog grooming and previous sprint work (release notes, video, etc) cost us 9.4%, followed by a smattering of minor stories. We also spent ~2.5% in bug fixes.  Finally, we spent around 3.6% on a epic, which we desperately need to see implemented, but sadly its just too peripheral to the mission: the implementation of a relational model for tracing. Once this is implemented we shall be able to write SQL queries to interrogate the state of Dogen at any point in the pipeline. At present we are doing this via the tracing dumps, but these produce large JSON files and JQ is struggling to cope with the queries. However, its a large and complex task, so we shall try to do a little bit of work every sprint to bring it to life.
+
+## Planning
+
+We clearly underestimated the complexity of fully implementing feature templates; we had originally only planned to take a single sprint on it, but we still have all of the code generation aspect (e.g. generate static configurations, plus the respective serialisation code) as well as going through the code base and replacing the manually crafted code with the new and shinny code-generated version. This will take a large portion of the next sprint. As such, we had to bump the project plan by one sprint.
+
+![Project Plan](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_17_project_plan.png)
+
+![Resource Allocation Graph](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_17_resource_allocation_graph.png)
+
+# Next Sprint
+
+Next sprint's mission is to complete the two outstanding tasks from this sprint: moving wale templates into the meta-model and the code generation of feature templates. Once that's out of the way, hopefully we'll look into moving fabric meta-model elements into the coding meta-model.
+
+# Binaries
+
+Note: we are now desperately close to our 50 minutes allocation on Travis, and as such we're getting many red builds. As a consequence, not every commit resulted on binaries being uploaded to Bintray this sprint. This is not ideal, so next sprint we will probably need to start disabling some of the generated tests to lower the build times.
+
+You can download binaries from [Bintray](https://bintray.com/masd-project/main/dogen) for OSX, Linux and Windows (all 64-bit):
+
+- [dogen_1.0.17_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.17/dogen_1.0.17_amd64-applications.deb)
+- [dogen-1.0.17-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.17/DOGEN-1.0.17-Darwin-x86_64.dmg)
+- [dogen-1.0.17-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/DOGEN-1.0.17-Windows-AMD64.msi)
+
+For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
+
+Happy Modeling!
+#+end_src markdown
+
+- [[https://twitter.com/MarcoCraveiro/status/1130500239620825088][twitter]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6536266244029505536][linkedin]]
+- [[https://gitter.im/MASD-Project/Lobby][Gitter]]
+
+*** Create a video demo for the previous sprint's features            :story:
+
+Time spent creating the demo and presentation.
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    :LOGBOOK:
+    CLOCK: [2019-06-03 Mon 06:21]--[2019-06-03 Mon 06:30] =>  0:09
+    :END:
+
+Updates to sprint and product backlog.
+
+*** Windows clang-cl release build is failing 4 tests                 :spike:
+
+This has been going on for a fair bit, and we've ignored it so far but
+its a bit annoying. It also makes it likely that we break something
+without noticing because we are getting used to seeing red.
+
+The problem started at build [[https://ci.appveyor.com/project/mcraveiro/dogen/builds/23959333/job/r34e67jyjk6s8x66][1771]]. It happened with commit
+[[https://github.com/MASD-Project/dogen/commit/2eca4e92de08cd3a84944abc9cf26e7e117e7144][2eca4e92de08cd3a84944abc9cf26e7e117e7144]]. Everything was fine up to
+commit [[https://github.com/MASD-Project/dogen/commit/655b56cd32b94b7091e79c4cc76f6a2db5458416][655b56cd32b94b7091e79c4cc76f6a2db5458416]]. However, manually
+checking the commits in this interval did not reveal anything obvious.
+
+Failing tests:
+
+- masd.dogen.coding.tests/object_templates_transform_tests/model_with_object_template_that_parents_missing_object_template_throws (Failed)
+- masd.dogen.coding.tests/object_templates_transform_tests/model_with_object_that_models_missing_object_template_throws (Failed)
+- masd.dogen.coding.tests/object_templates_transform_tests/model_with_object_with_missing_parent_throws (Failed)
+- masd.dogen.coding.tests/stereotypes_transform_tests/visitable_object_with_no_leaves_throws (Failed)
+
+All failing tests are related to exceptions that should be thrown. All
+work on all other builds (debug and release) except this one,
+including MSVC release. However, they were previously working fine on
+this build (over 10 successful runs).
+
+Interestingly, on failure we do not seem to get any output at all.
+
+Notes:
+
+- History of builds available [[https://my.cdash.org/index.php?project=MASD+Project+-+Dogen&filtercount=4&showfilters=1&filtercombine=and&field1=site&compare1=61&value1=appveyor&field2=buildname&compare2=61&value2=clang-cl-Windows-AMD64-Release&field3=buildtype&compare3=61&value3=Continuous&field4=buildstarttime&compare4=0&value4=][here]].
+- it would be nice to be able to enable debug logging for these tests
+  test and have the CI dump the log files into the main build
+  log. That is, what we really need is to dump the log to the console
+  for a specific set of tests. We could create a different macro that
+  does this and manually replace it just for these tests.
+- seems like we've managed to fix the clang-cl errors that have been
+  traffic-lighting of late. This was a result of the assets changes on
+  enumerations, primitives and parsing. Changes are between commits:
+  - end: [[https://github.com/MASD-Project/dogen/commit/c629048f0c873f76f576200073ee647acbfbfcea][c629048f0c873f76f576200073ee647acbfbfcea]]
+  - start: [[https://github.com/MASD-Project/dogen/commit/166110a944587b0dfb2a53794fd71b504da89065][166110a944587b0dfb2a53794fd71b504da89065]]
+- started again with next build. Its traffic lighting, but the pattern
+  is not yet obvious.
+
+*** Fix issues with nightly build and CI                              :story:
+
+Time spent fixing build issues with either nightlies and/or CI.
+
+- make space for builds in CDash.
+
+*** Read variability papers                                           :story:
+
+Time spent reading the literature on variability.
+
+*** Element extensions considered harmful                             :story:
+
+When we implemented forward declarations we created them as "element
+extensions"; that is, some kind of hack where we'd have two model
+elements stuck together (the main model element and its "extension",
+the forward declaration). In reality, they are just projections of the
+same model element. We need to handle them just as we handle class
+header / implementation. We just need to use the formatter specific
+postfix to distinguish between files.
+
+The problem with this approach, of course, is that we now need to
+create many formatters (per element type). A possible solution is to
+factor them out into a formatting helper function that they call. We
+still need all of the common machinery to formatters
+though. Nevertheless, this is a price worth paying in order to keep
+the meta-model simple (e.g. none of the hacks we introduced for
+element extensions).
+
+Notes:
+
+- add forward declaration formatters for each type. Create common
+  formatting function.
+- remove forward declaration element in fabric.
+- remove element extensions across the code base. Actually this is not
+  possible at present as it is used by ODB options. We need to first
+  move them into assets before this can be done.
+
+Merged stories:
+
+*Remove element segmentation*
+
+We need to remove the idea of forward declarations being handled as
+"element segmentation". They should just be different facets of the
+same elements. There is another story for this which should be merged
+with this one.
+
+*Move element segmentation into yarn*
+
+We've added the notion that an element can be composed of other
+elements in quilt, in order to handle forward declarations. However,
+with a little bit of effort we can generalise it into yarn. It would
+be useful for other things such as inner classes. We don't need to
+actually implement inner classes right now but we should make sure the
+moving of this feature into yarn is compatible with it.
+
+Notes:
+
+- seems like we have two use cases: a) we need all elements, master
+  and extensions and we don't really care about which is which. b) we
+  only want masters. However, we must be able to access the same
+  element properties from either the master or the extension. Having
+  said all that, it seems we don't really need all of the element
+  properties for both - forward declarations probably only need:
+  decoration and artefact properties.
+- we don't seem to use the map in formattables model anywhere, other
+  than to find master/extension elements.
+- Yarn model could have two simple list containers (masters and
+  all). Or maybe we don't even need this to start off with, we can
+  just iterate and skip extensions where required.
+- so in conclusion, we to move decoration, enablement and dependencies
+  into yarn (basically decoration and artefact properties) first and
+  then see where segmentation ends.
+
+Tasks:
+
+- add a concept for element extensions: =Extensible=. Contains a list
+  of element pointers.
+- populate it with the extensions.
+- change enablement to merge all element properties of extensible
+  elements.
+
+*** Remove master headers                                             :story:
+
+At present we are not making use of this feature, and it could even be
+argued that it is not a feature that should be used; by having a
+single header that includes all files we encourage unnecessary
+inclusion, increasing build times. We had a use for this, which was
+related to testing model types, but since we replace that with
+generated tests, we no longer required it. Remove this feature.
+
+Notes:
+
+- actually, we left the test model sanitizer. Not clear why.
+
+*** Validate feature template names                                   :story:
+
+We need to ensure the template names are valid identifiers in C++.
+
+*** Move models into the project directory                            :story:
+
+At present we have a models directory in each component of a
+product. However, perhaps it makes more sense to have it as a
+subdirectory of the component itself. This is because in an ideal
+world, we should create a package for the component with the model and
+the header files as well as the SO, allowing users to consume it. In
+the Dogen case, it means users can create plugins for Dogen. In the
+PDM case, it means users can make use of the PDM in their own models.
+
+However, one downside of this approach is that we then need to have
+many directories in the include path for models. If we take the
+include headers as an example, there are a small number of directories
+in the path:
+
+- compiler specific directories
+- =/usr/include=
+- ...
+
+Maybe we have two separate issues here:
+
+- when creating a product, where should the models be placed? If we
+  keep in mind that models are themselves an asset like any other and
+  as such require a meta-model representation, it would be logical to
+  keep the model with the component it generates (just like we keep
+  the product model within the product it generates). This means for
+  instance that we could easily initialise a component via the command
+  line and create a "template" blank model (in dia or JSON) with a
+  number of things already set. We probably also need a way to avoid
+  deleting multiple files (e.g. if we have both a dia and a JSON
+  model, we need to know to ignore both of them). This means that when
+  building a product we need multiple include directories for models,
+  just as we do for headers. This work should be done as part of
+  adding products to the asset model because models will be in the
+  same namespace. The dia and JSON directories are then the facets for
+  the model. This also means that we can now add the targets for
+  generation, conversion etc directly into each component. So,
+  somewhat paradoxically, when we create a model, we need to have a
+  model of the model in it (or maybe two models of the model, Dia and
+  JSON). Interestingly, now that we have a model of the model, we can
+  suddenly move all of the keys that we have placed at the top-level
+  into this modeling element. We can aslo associate it with a profile
+  via stereotypes, removing the need for
+  =masd.variability.profile=. And if we take it to the next leve, then
+  perhaps references are themselves also modeling elements. Its not
+  clear if this is an advantage though.
+- from a "consumption" perspective, perhaps we could have a single
+  =shared/dogen/models= directory, just like we will also place all of
+  the PDM's includes under =/usr/include= and the SO's under
+  =/usr/lib=. We could split it into Dia and JSON if need be.
+
+*** Meta-names do not have namespaces                                 :story:
+
+At present the meta-name factory is placing all meta-names in a
+top-level namespace. It should really respect the hierarchical
+namespaces we have. However, given we want to code-generate this, we
+may just leave it as is for now until we fix it properly.
+
+*** Try to add relational tracing support                             :story:
+
+Whenever we bump into a problem we seem to spend a lot of time going
+through the log files and trace files trying to figure out where the
+problem is happening. Have a quick go in trying to implement a
+relational model for tracing to see if we can transfer the bulk of the
+data into a relational format which we can query via SQL.
+
+We've created a basic relational model for tracing. The relational
+part of it seems straightforward (ish); the problem is the integration
+of the tracer with the relational model. At present we rely on the
+fact that all traceable objects have IO enabled; this works because
+the code generator creates the IO facet, which is then used by the
+write method in utility to convert any model type into a
+string. However, we now need to change the approach: we need multiple
+tracing backends:
+
+- file tracer
+- database tracer.
+
+The file tracer is more or less the current tracer. The database
+tracer needs to decompose the objects in existing models into a
+relational representation. In an ideal world, the user would configure
+the tracer to use one of the two backends and the remaining usage
+would be transparent. However, we cannot have an interface for the
+tracer backend that uses template methods because then we'd need
+virtual template functions, it seems.
+
+Another alternative is to make the tracer aware of the model objects
+it is tracing. This is also not ideal because we would create cycles
+int he design.
+
+In effect we need to somehow implement a similar approach to the existing
+tracer: rely on global template functions a-la =operator<<= to
+decompose objects into their relational representations and then
+supply those to the backend. It is not very clear how this would
+work. For now we've postponed this approach as it seems its not going
+to be a quick win.
+
+We should approach this incrementally. Next time we have a bit of
+spare time, we need to generate the model and then create the adapters
+from existing models. Finally we can look at how it will be integrated
+with tracing.
+
+*** Linux and OSX binaries are not stripped                           :story:
+
+At present our Linux and OSX build is much bigger than our windows
+builds (3.8 MB on Windows vs 31 MB OSX and 15 MB on Linux). The
+problem appears to be that we are not stripping the binaries on Linux.
+
+We tried manually stripping:
+
+:     # strip the binaries in release
+:    set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -s")
+:    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -s")
+
+However clang does not support this.
+
+This may be related to the CMake build type of MinRelSize. Try doing a
+build with this and see if the binaries are smaller. Actually this
+does not work. We also tried:
+
+: CMAKE_INSTALL_DO_STRIP
+
+Which seems to have some effect but not exactly the same as a command
+line =strip=. Supposedly this is a install level strip.
+
+The only solution that appears to work is to add a custom command to
+all targets in the build to strip:
+
+: add_custom_command(TARGET ${target} POST_BUILD
+:        COMMAND ${EMBREE_SIGN_FILE} $<TARGET_FILE:${target}>)
+
+However we need to be careful because stripping shared libraries may
+cause problems. Also this is done for every build.
+
+Links:
+
+- [[https://www.technovelty.org/linux/stripping-shared-libraries.html][Stripping shared libraries]]
+- [[https://cmake.org/pipermail/cmake/2012-March/049741.html][make install/strip does not strip static libraries]]
+
+*** Emacs maintenance and exploration work                            :story:
+
+Any time spent improving emacs, exploring new modes, fixing snags,
+etc.
+
+- add support for indent guides. [[https://github.com/DarthFennec/highlight-indent-guides][highlight-indent-guides]], [[https://stackoverflow.com/questions/1587972/how-to-display-indentation-guides-in-emacs/56144459#56144459][SO question]].
+- treemacs issues: when blank type g to refresh.
+- lsp seems to update with every character we type. It would be nice
+  to update on save only.
+
+*** Update the MASD UML profile to reflect the latest changes         :story:
+
+The UML profile is now a fair bit out of date. Take advantage of the
+down time waiting for builds to sync it.
+
+*** Do logic-less templates belong in =generation.cpp=?               :story:
+
+For purely expediency purposes, we placed the logic-less templates in
+the =generation.cpp= model. However, this means you cannot create
+logic-less templates in C# models. For now its fine as Dogen is the
+only user of these meta-model elements, but in the future when we
+create a JSON schema for model data, we will want to use these from
+any technical space. We need to either implement formatters on every
+technical space or find a way to create TS-neutral formatters.
+
+That is to say, we create a formatter for logic-less templates in the
+C++ generation model. This means that you can only use these in the
+C++ technical space. The easy solution is just to copy across the
+formatters into the C# technical space. However, this is not scalable
+as we add more backends.
+
+*** Colouring script should be included as part of package            :story:
+
+Users should be able to make use of script as well. We need a tools
+folder in share.
+
+*** Add aliases to enumeration string conversions                     :story:
+
+We often need to cast a enum from a string but the name is not exactly
+like the original enumeration. For example, we use enums for
+stereotypes but we cannot have the same namespacing structure on the
+enum. For these cases it would be nice to be able to supply an alias.
+
+The only slight problem is that if we use this approach, the cast will
+still work when you supply the simple or qualified enumeration.
+
+Perhaps we can have two concepts:
+
+- alias. Everything else will still work.
+- overrides. Only the override is considered valid. Conversions will
+  now always use the override.
+
+*** Allow user supplied enumerator values                             :story:
+
+Now that we have value support in injection, it should be fairly
+straightforward to allow users to supply their own enumeration
+values. When this happens we need to check that:
+
+- they are unique and valid according to enumeration type;
+- they do not class with invalid value.
+
+Actually we have implemented this but using meta-data for some
+reason. We need to remove the meta-data support and use the value
+field instead.
+
+*** Consider adding a =to_string= facet                               :story:
+
+We originally added the boost lexical cast facet, but that requires
+boost. The new  C++ approach seems to be to use the conversion methods
+=to_string=. However, there is no equivalent "from string". We could
+add it though.
+
+Links:
+
+- [[http://www.cplusplus.com/reference/string/to_string/][to_string]]
+
+*** Remove empty types in injection.json models                       :story:
+
+At present we are adding type to the converted model, even when its
+empty. For cases such as enumerations this is just confusing:
+
+:     {
+:       "name": "meta_model::static_stereotypes",
+:       "documentation": "Lists all stereotypes defined in the masd UML profile.\n",
+:       "stereotypes": [
+:         "masd::enumeration"
+:       ],
+:       "fallback_element_type": "masd::object",
+:       "attributes": [
+:         {
+:           "name": "object",
+:           "type": ""
+:         },
+:         {
+:           "name": "object_template",
+:           "type": ""
+:         },
+:         {
+:           "name": "exception",
+:           "type": ""
+:         },
+
+It would be much easier to read this if we ignored empty types. We
+need to check that the hydrator is not expecting this field.
+
+*** Create or update samples folder                                   :story:
+
+We should add samples to the package. These could be organsided by
+injector (dia, json), then by language type (lam, cpp, csharp) or vice
+versa.
+
+We could also try to generate all of these models when testing the
+package.
+
+On the other hand, once we create a proper package for dogen headers,
+with SOs etc, we should really include the dogen models there. In
+effect, it will be symmetric with PDM packages.
+
+*** Add logging support to generated tests                            :story:
+
+At present generated tests are not writing to the log file. This is
+because we wanted to keep them clean so that users could generate
+tests for their models without having to pull in dogen
+headers. However, for dogen tests this is a bit painful; if a test
+fails we can't just look at the log file to see why. We could have a
+flag to generate tests with logging.
+
+The other problem is we need to move utility into its own library as a
+PDM before we can do this because otherwise the logging will be in
+different locations (i.e. dogen vs reference model).
+
+*** Postfix and directory fields should be templates                  :story:
+
+We need to understand why we didn't templatise these fields. It is
+very painful to have to add these manually for each facet and
+formatter.
+
+Most likely it is because each formatter/facet needs to "override" a
+base value with its own value. For example, we almost always want a
+blank postfix, but occasionally need to set it (=fwd= for forward
+declarations and so forth). Our variability implementation does not
+cope with this type of overrides. We would have to have some kind of
+way of allowing instance templates even though a facet/archetype
+template already exists, and then use the instance template as the
+override. Alternatively, we could simply check for postfix/directory;
+if not present default to empty string.
+
+For extra bonus points, we could allow variables: =${facet.name}=
+could expand to the current facet name on the facet template.
+
+Merged stories:
+
+*Postfix and directory fields in annotations look weird*
+
+Why are we manually instantiating postfix and directory for each
+formatter/facet instead of using templates? This is one of the main
+reasons for breaks/errors when adding a new formatter.
+
+*** Formatter dependencies and model processing                       :story:
+
+At present we are manually adding the includes required by a formatter
+as part of the "inclusion_dependencies" building. There are several
+disadvantages to this approach:
+
+- we are quite far down the pipeline. We've already passed all the
+  model building checks, etc. Thus, there is no way of knowing what
+  the formatter dependencies are. At present this is not a huge
+  problem because we have so few formatters and their dependencies are
+  mainly on the standard library and a few core boost models. However,
+  as we add more formatters this will become a bigger problem. For
+  example, we've added formatters now that require access to
+  variability headers; in an ideal world, we should now need to have a
+  reference to this model (for example, so that when we integrate
+  package management we get the right dependencies, etc).
+- we are hard-coding the header files. At present this is not a big
+  problem. To be honest, we can't see when this would be a big
+  problem, short of models changing their file names and/or
+  locations. Nonetheless, it seems "unclean" to depend on the header
+  file directly.
+- the dependency is on c++ code rather than expressed via a model.
+
+In an ideal world, we would have some kind of way of declaring a
+formatter meta-model element, with a set of dependencies declared via
+meta-data. These are on the model itself. They must be declared
+against a specific archetype. We then would process these as part of
+resolution. We would then map the header files as part of the existing
+machinery for header files.
+
+However one problem with this approach is that we are generating the
+formatter code using stitch at present. For this to work we would need
+to inject a fragment of code into the stitch template somehow with the
+dependencies. Whilst this is not exactly ideal, the advantage is that
+we could piggy-back on this mechanism to inject the postfix fields as
+well, so that we don't need to define these manually in each
+model. However, this needs some thinking because the complexity of
+defining a formatter will increase yet again. When there are problems,
+it will be hard to troubleshoot.
+
+*** Add =structural= namespace to core elements                       :story:
+
+We've created a namespace inside the coding meta-model for the core
+entities but we did not update the MASD profile.
+
+Actually structural is not a very good name - all of the meta-model
+elements are structural elements, really. We need to find a good name
+before we update the stereotypes.
+
+*** Remove empty default values                                       :story:
+
+At present we have a number of default values in feature bundles set
+to the empty string =""=. It makes more sense not to have a default
+value and have the client code handle its absence.
+
+*** Make labels a plain text field not a collection                   :story:
+
+At present it is possible to label a profile with multiple
+labels. This is not a good idea. Make it a plain text field so we can
+only apply a single label.
+
+*** Create a code-generated static configuration reader               :story:
+
+Tasks:
+
+- add a configuration class to the feature bundle. Investigate how we
+  handle the archetype and facet expansion.
+- add a feature group class to the feature bundle. On construction get
+  the feature group to find all of its fields.
+- add a =read= method that uses the feature group to create the static
+  configuration.
+- add support in enumerations to convert a string to the enumeration
+  (simple and qualified name). Calling code can use this method when
+  reading an enumeration.
+- replace calling code with new static features.
+- add io support for the static configuration if the io facet is
+  enabled.
+
+** Deprecated
