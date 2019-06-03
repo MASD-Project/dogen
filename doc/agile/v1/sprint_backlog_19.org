@@ -11,19 +11,20 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-06-03 Mon 19:05]
+#+CAPTION: Clock summary at [2019-06-03 Mon 19:45]
 | <75>                                               |        |      |      |       |
 | Headline                                           | Time   |      |      |     % |
 |----------------------------------------------------+--------+------+------+-------|
-| *Total time*                                       | *7:01* |      |      | 100.0 |
+| *Total time*                                       | *7:43* |      |      | 100.0 |
 |----------------------------------------------------+--------+------+------+-------|
-| Stories                                            | 7:01   |      |      | 100.0 |
-| Active                                             |        | 7:01 |      | 100.0 |
-| Edit release notes for previous sprint             |        |      | 3:36 |  51.3 |
-| Create a demo and presentation for previous sprint |        |      | 1:39 |  23.5 |
-| Sprint and product backlog grooming                |        |      | 0:24 |   5.7 |
-| Remove test model sanitizer                        |        |      | 0:20 |   4.8 |
-| Remove master headers                              |        |      | 1:02 |  14.7 |
+| Stories                                            | 7:43   |      |      | 100.0 |
+| Active                                             |        | 7:43 |      | 100.0 |
+| Edit release notes for previous sprint             |        |      | 3:36 |  46.7 |
+| Create a demo and presentation for previous sprint |        |      | 1:39 |  21.4 |
+| Sprint and product backlog grooming                |        |      | 0:24 |   5.2 |
+| Remove test model sanitizer                        |        |      | 0:20 |   4.3 |
+| Remove master headers                              |        |      | 1:02 |  13.4 |
+| Move registrar into assets                         |        |      | 0:42 |   9.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -236,6 +237,62 @@ generated tests, we no longer required it. Remove this feature.
 Notes:
 
 - actually, we left the test model sanitizer. Not clear why.
+
+*** STARTED Move registrar into assets                                :story:
+    :LOGBOOK:
+    CLOCK: [2019-06-03 Mon 19:34]--[2019-06-03 Mon 19:45] =>  0:11
+    CLOCK: [2019-06-03 Mon 19:27]--[2019-06-03 Mon 19:34] =>  0:07
+    CLOCK: [2019-06-03 Mon 19:02]--[2019-06-03 Mon 19:26] =>  0:24
+    :END:
+
+At present we have a registrar in C++ generation model which is used
+to generate the code to register types for boost serialisation. This
+principle is fairly universal, and probably all serialisation
+technologies will require something of this kind in presence of
+inheritance. In addition to this, we have the related notion of
+"initialisers". These are used to register types such as:
+
+- formatters
+- feature templates
+
+The notion here is that we need to know of a set of related
+types. Whilst registration happens at run time, in reality all is
+known at compile time and we generate all of the required code up
+front. If we attempt to generalise this idea, it seems we have:
+
+- a set of types that need to be registered, according to some
+  condition. Examples: the meta-type (feature template, etc), the fact
+  that the type is a base class/derived class, etc.
+- a class responsible for registration.
+- a container of some kind that remembers what was registered. The
+  type of the data stored is a parameter. It could be that we want
+  pointers to an interface (e.g. formatters) or just remember some
+  strings.
+- a set of initialisers that talk to the registrar to register the
+- there is a top-level class that creates the repository and then
+  passes it through to the initialisers to get it populated. Further
+  transforms may then be made to the repository.
+
+We should look into registrar terminology to see if all of these
+actors have names.
+
+Notes:
+
+- the construction of the type may be non-trivial. We may need to
+  supply some arguments, etc. We need to catalogue all of the
+  initialisers and see the comonalities.
+- bundle initialisers introduced the notion of "scope" whereby an
+  initialiser will look for types in the same package and worry only
+  about those. Then, a higher level initialiser would call all of the
+  lower level initialisers.
+- we need to somehow create different initialisers per type or else
+  these are going to become too complicated.
+- the problem of the serialisation registrar is that, instead of using
+  actual data stored in a repository, it works at the template
+  level/compule time, with each type being registered against an
+  archive. We need to look into the boost serialisation documentation
+  and see if there is a way to make the code look a bit more like the
+  other instances of this pattern.
 
 *** Windows clang-cl release build is failing 4 tests                 :spike:
 
