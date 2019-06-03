@@ -7,13 +7,13 @@
 
 - Finish feature template code generation.
 - Finish moving wale templates into meta-model.
-- Move fabric into coding meta-model.
+- Start moving fabric into coding meta-model.
 
 * Stories
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-06-02 Sun 19:11]
+#+CAPTION: Clock summary at [2019-06-03 Mon 06:32]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
@@ -33,9 +33,9 @@
 | Move parent processing to injection                    |         |       |  2:06 |   3.5 |
 | Use generated static configurations in transforms      |         |       | 30:16 |  50.4 |
 | Remove serialisation support in dia model              |         |       |  0:28 |   0.8 |
+| Read variability papers                                |         |       |  0:56 |   1.6 |
 | Windows clang-cl release build is failing 4 tests      |         |       |  2:16 |   3.8 |
 | Fix issues with nightly build and CI                   |         |       |  0:04 |   0.1 |
-| Read variability papers                                |         |       |  0:56 |   1.6 |
 | Element extensions considered harmful                  |         |       |  4:04 |   6.8 |
 | Remove master headers                                  |         |       |  0:18 |   0.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
@@ -206,7 +206,8 @@ Happy Modeling!
 
 Time spent creating the demo and presentation.
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2019-06-03 Mon 06:31]
     :LOGBOOK:
     CLOCK: [2019-06-01 Sat 11:34]--[2019-06-01 Sat 11:38] =>  0:04
     CLOCK: [2019-06-01 Sat 11:12]--[2019-06-01 Sat 11:33] =>  0:21
@@ -620,7 +621,7 @@ We don't really need this, since the tests are all commented out and
 our end to end tests already validate all of the dia processing. We
 may get a few valuable minutes in build time by removing it.
 
-*** COMPLETED Incorrect generation of forward declarations for all facets :story:
+*** COMPLETED Incorrect generation of forward declarations            :story:
     CLOSED: [2019-06-02 Sun 13:47]
 
 *Rationale*: this problem will be addressed with the new forward
@@ -647,7 +648,17 @@ builder. Formatters would have an additional knob: generate always,
 generate if referenced. If "generate if referenced", we would wait for
 at least one reference in include builder.
 
-*** STARTED Windows clang-cl release build is failing 4 tests         :spike:
+*** COMPLETED Read variability papers                                 :story:
+    CLOSED: [2019-06-03 Mon 06:31]
+    :LOGBOOK:
+    CLOCK: [2019-05-21 Tue 17:35]--[2019-05-21 Tue 17:45] =>  0:10
+    CLOCK: [2019-05-21 Tue 15:33]--[2019-05-21 Tue 16:19] =>  0:46
+    :END:
+
+Time spent reading the literature on variability.
+
+*** POSTPONED Windows clang-cl release build is failing 4 tests       :spike:
+    CLOSED: [2019-06-03 Mon 06:31]
     :LOGBOOK:
     CLOCK: [2019-05-31 Fri 10:48]--[2019-05-31 Fri 10:53] =>  0:05
     CLOCK: [2019-05-31 Fri 08:46]--[2019-05-31 Fri 09:02] =>  0:16
@@ -694,7 +705,8 @@ Notes:
 - started again with next build. Its traffic lighting, but the pattern
   is not yet obvious.
 
-*** STARTED Fix issues with nightly build and CI                      :story:
+*** POSTPONED Fix issues with nightly build and CI                    :story:
+    CLOSED: [2019-06-03 Mon 06:31]
     :LOGBOOK:
     CLOCK: [2019-05-30 Thu 22:39]--[2019-05-30 Thu 22:43] =>  0:04
     :END:
@@ -703,15 +715,8 @@ Time spent fixing build issues with either nightlies and/or CI.
 
 - make space for builds in CDash.
 
-*** STARTED Read variability papers                                   :story:
-    :LOGBOOK:
-    CLOCK: [2019-05-21 Tue 17:35]--[2019-05-21 Tue 17:45] =>  0:10
-    CLOCK: [2019-05-21 Tue 15:33]--[2019-05-21 Tue 16:19] =>  0:46
-    :END:
-
-Time spent reading the literature on variability.
-
-*** STARTED Element extensions considered harmful                     :story:
+*** POSTPONED Element extensions considered harmful                   :story:
+    CLOSED: [2019-06-03 Mon 06:31]
     :LOGBOOK:
     CLOCK: [2019-06-02 Sun 17:15]--[2019-06-02 Sun 17:31] =>  0:16
     CLOCK: [2019-06-02 Sun 17:02]--[2019-06-02 Sun 17:14] =>  0:12
@@ -787,7 +792,8 @@ Tasks:
 - change enablement to merge all element properties of extensible
   elements.
 
-*** STARTED Remove master headers                                     :story:
+*** POSTPONED Remove master headers                                   :story:
+    CLOSED: [2019-06-03 Mon 06:31]
     :LOGBOOK:
     CLOCK: [2019-06-02 Sun 17:32]--[2019-06-02 Sun 17:50] =>  0:18
     :END:
@@ -802,385 +808,6 @@ generated tests, we no longer required it. Remove this feature.
 Notes:
 
 - actually, we left the test model sanitizer. Not clear why.
-
-*** Validate feature template names                                   :story:
-
-We need to ensure the template names are valid identifiers in C++.
-
-*** Move models into the project directory                            :story:
-
-At present we have a models directory in each component of a
-product. However, perhaps it makes more sense to have it as a
-subdirectory of the component itself. This is because in an ideal
-world, we should create a package for the component with the model and
-the header files as well as the SO, allowing users to consume it. In
-the Dogen case, it means users can create plugins for Dogen. In the
-PDM case, it means users can make use of the PDM in their own models.
-
-However, one downside of this approach is that we then need to have
-many directories in the include path for models. If we take the
-include headers as an example, there are a small number of directories
-in the path:
-
-- compiler specific directories
-- =/usr/include=
-- ...
-
-Maybe we have two separate issues here:
-
-- when creating a product, where should the models be placed? If we
-  keep in mind that models are themselves an asset like any other and
-  as such require a meta-model representation, it would be logical to
-  keep the model with the component it generates (just like we keep
-  the product model within the product it generates). This means for
-  instance that we could easily initialise a component via the command
-  line and create a "template" blank model (in dia or JSON) with a
-  number of things already set. We probably also need a way to avoid
-  deleting multiple files (e.g. if we have both a dia and a JSON
-  model, we need to know to ignore both of them). This means that when
-  building a product we need multiple include directories for models,
-  just as we do for headers. This work should be done as part of
-  adding products to the asset model because models will be in the
-  same namespace. The dia and JSON directories are then the facets for
-  the model. This also means that we can now add the targets for
-  generation, conversion etc directly into each component. So,
-  somewhat paradoxically, when we create a model, we need to have a
-  model of the model in it (or maybe two models of the model, Dia and
-  JSON). Interestingly, now that we have a model of the model, we can
-  suddenly move all of the keys that we have placed at the top-level
-  into this modeling element. We can aslo associate it with a profile
-  via stereotypes, removing the need for
-  =masd.variability.profile=. And if we take it to the next leve, then
-  perhaps references are themselves also modeling elements. Its not
-  clear if this is an advantage though.
-- from a "consumption" perspective, perhaps we could have a single
-  =shared/dogen/models= directory, just like we will also place all of
-  the PDM's includes under =/usr/include= and the SO's under
-  =/usr/lib=. We could split it into Dia and JSON if need be.
-
-*** Meta-names do not have namespaces                                 :story:
-
-At present the meta-name factory is placing all meta-names in a
-top-level namespace. It should really respect the hierarchical
-namespaces we have. However, given we want to code-generate this, we
-may just leave it as is for now until we fix it properly.
-
-*** Try to add relational tracing support                             :story:
-
-Whenever we bump into a problem we seem to spend a lot of time going
-through the log files and trace files trying to figure out where the
-problem is happening. Have a quick go in trying to implement a
-relational model for tracing to see if we can transfer the bulk of the
-data into a relational format which we can query via SQL.
-
-We've created a basic relational model for tracing. The relational
-part of it seems straightforward (ish); the problem is the integration
-of the tracer with the relational model. At present we rely on the
-fact that all traceable objects have IO enabled; this works because
-the code generator creates the IO facet, which is then used by the
-write method in utility to convert any model type into a
-string. However, we now need to change the approach: we need multiple
-tracing backends:
-
-- file tracer
-- database tracer.
-
-The file tracer is more or less the current tracer. The database
-tracer needs to decompose the objects in existing models into a
-relational representation. In an ideal world, the user would configure
-the tracer to use one of the two backends and the remaining usage
-would be transparent. However, we cannot have an interface for the
-tracer backend that uses template methods because then we'd need
-virtual template functions, it seems.
-
-Another alternative is to make the tracer aware of the model objects
-it is tracing. This is also not ideal because we would create cycles
-int he design.
-
-In effect we need to somehow implement a similar approach to the existing
-tracer: rely on global template functions a-la =operator<<= to
-decompose objects into their relational representations and then
-supply those to the backend. It is not very clear how this would
-work. For now we've postponed this approach as it seems its not going
-to be a quick win.
-
-We should approach this incrementally. Next time we have a bit of
-spare time, we need to generate the model and then create the adapters
-from existing models. Finally we can look at how it will be integrated
-with tracing.
-
-*** Linux and OSX binaries are not stripped                           :story:
-
-At present our Linux and OSX build is much bigger than our windows
-builds (3.8 MB on Windows vs 31 MB OSX and 15 MB on Linux). The
-problem appears to be that we are not stripping the binaries on Linux.
-
-We tried manually stripping:
-
-:     # strip the binaries in release
-:    set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -s")
-:    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -s")
-
-However clang does not support this.
-
-This may be related to the CMake build type of MinRelSize. Try doing a
-build with this and see if the binaries are smaller. Actually this
-does not work. We also tried:
-
-: CMAKE_INSTALL_DO_STRIP
-
-Which seems to have some effect but not exactly the same as a command
-line =strip=. Supposedly this is a install level strip.
-
-The only solution that appears to work is to add a custom command to
-all targets in the build to strip:
-
-: add_custom_command(TARGET ${target} POST_BUILD
-:        COMMAND ${EMBREE_SIGN_FILE} $<TARGET_FILE:${target}>)
-
-However we need to be careful because stripping shared libraries may
-cause problems. Also this is done for every build.
-
-Links:
-
-- [[https://www.technovelty.org/linux/stripping-shared-libraries.html][Stripping shared libraries]]
-- [[https://cmake.org/pipermail/cmake/2012-March/049741.html][make install/strip does not strip static libraries]]
-
-*** Emacs maintenance and exploration work                            :story:
-
-Any time spent improving emacs, exploring new modes, fixing snags,
-etc.
-
-- add support for indent guides. [[https://github.com/DarthFennec/highlight-indent-guides][highlight-indent-guides]], [[https://stackoverflow.com/questions/1587972/how-to-display-indentation-guides-in-emacs/56144459#56144459][SO question]].
-- treemacs issues: when blank type g to refresh.
-- lsp seems to update with every character we type. It would be nice
-  to update on save only.
-
-*** Update the MASD UML profile to reflect the latest changes         :story:
-
-The UML profile is now a fair bit out of date. Take advantage of the
-down time waiting for builds to sync it.
-
-*** Do logic-less templates belong in =generation.cpp=?               :story:
-
-For purely expediency purposes, we placed the logic-less templates in
-the =generation.cpp= model. However, this means you cannot create
-logic-less templates in C# models. For now its fine as Dogen is the
-only user of these meta-model elements, but in the future when we
-create a JSON schema for model data, we will want to use these from
-any technical space. We need to either implement formatters on every
-technical space or find a way to create TS-neutral formatters.
-
-That is to say, we create a formatter for logic-less templates in the
-C++ generation model. This means that you can only use these in the
-C++ technical space. The easy solution is just to copy across the
-formatters into the C# technical space. However, this is not scalable
-as we add more backends.
-
-*** Colouring script should be included as part of package            :story:
-
-Users should be able to make use of script as well. We need a tools
-folder in share.
-
-*** Add aliases to enumeration string conversions                     :story:
-
-We often need to cast a enum from a string but the name is not exactly
-like the original enumeration. For example, we use enums for
-stereotypes but we cannot have the same namespacing structure on the
-enum. For these cases it would be nice to be able to supply an alias.
-
-The only slight problem is that if we use this approach, the cast will
-still work when you supply the simple or qualified enumeration.
-
-Perhaps we can have two concepts:
-
-- alias. Everything else will still work.
-- overrides. Only the override is considered valid. Conversions will
-  now always use the override.
-
-*** Allow user supplied enumerator values                             :story:
-
-Now that we have value support in injection, it should be fairly
-straightforward to allow users to supply their own enumeration
-values. When this happens we need to check that:
-
-- they are unique and valid according to enumeration type;
-- they do not class with invalid value.
-
-Actually we have implemented this but using meta-data for some
-reason. We need to remove the meta-data support and use the value
-field instead.
-
-*** Consider adding a =to_string= facet                               :story:
-
-We originally added the boost lexical cast facet, but that requires
-boost. The new  C++ approach seems to be to use the conversion methods
-=to_string=. However, there is no equivalent "from string". We could
-add it though.
-
-Links:
-
-- [[http://www.cplusplus.com/reference/string/to_string/][to_string]]
-
-*** Remove empty types in injection.json models                       :story:
-
-At present we are adding type to the converted model, even when its
-empty. For cases such as enumerations this is just confusing:
-
-:     {
-:       "name": "meta_model::static_stereotypes",
-:       "documentation": "Lists all stereotypes defined in the masd UML profile.\n",
-:       "stereotypes": [
-:         "masd::enumeration"
-:       ],
-:       "fallback_element_type": "masd::object",
-:       "attributes": [
-:         {
-:           "name": "object",
-:           "type": ""
-:         },
-:         {
-:           "name": "object_template",
-:           "type": ""
-:         },
-:         {
-:           "name": "exception",
-:           "type": ""
-:         },
-
-It would be much easier to read this if we ignored empty types. We
-need to check that the hydrator is not expecting this field.
-
-*** Create or update samples folder                                   :story:
-
-We should add samples to the package. These could be organsided by
-injector (dia, json), then by language type (lam, cpp, csharp) or vice
-versa.
-
-We could also try to generate all of these models when testing the
-package.
-
-On the other hand, once we create a proper package for dogen headers,
-with SOs etc, we should really include the dogen models there. In
-effect, it will be symmetric with PDM packages.
-
-*** Add logging support to generated tests                            :story:
-
-At present generated tests are not writing to the log file. This is
-because we wanted to keep them clean so that users could generate
-tests for their models without having to pull in dogen
-headers. However, for dogen tests this is a bit painful; if a test
-fails we can't just look at the log file to see why. We could have a
-flag to generate tests with logging.
-
-The other problem is we need to move utility into its own library as a
-PDM before we can do this because otherwise the logging will be in
-different locations (i.e. dogen vs reference model).
-
-*** Postfix and directory fields should be templates                  :story:
-
-We need to understand why we didn't templatise these fields. It is
-very painful to have to add these manually for each facet and
-formatter.
-
-Most likely it is because each formatter/facet needs to "override" a
-base value with its own value. For example, we almost always want a
-blank postfix, but occasionally need to set it (=fwd= for forward
-declarations and so forth). Our variability implementation does not
-cope with this type of overrides. We would have to have some kind of
-way of allowing instance templates even though a facet/archetype
-template already exists, and then use the instance template as the
-override. Alternatively, we could simply check for postfix/directory;
-if not present default to empty string.
-
-For extra bonus points, we could allow variables: =${facet.name}=
-could expand to the current facet name on the facet template.
-
-Merged stories:
-
-*Postfix and directory fields in annotations look weird*
-
-Why are we manually instantiating postfix and directory for each
-formatter/facet instead of using templates? This is one of the main
-reasons for breaks/errors when adding a new formatter.
-
-*** Formatter dependencies and model processing                       :story:
-
-At present we are manually adding the includes required by a formatter
-as part of the "inclusion_dependencies" building. There are several
-disadvantages to this approach:
-
-- we are quite far down the pipeline. We've already passed all the
-  model building checks, etc. Thus, there is no way of knowing what
-  the formatter dependencies are. At present this is not a huge
-  problem because we have so few formatters and their dependencies are
-  mainly on the standard library and a few core boost models. However,
-  as we add more formatters this will become a bigger problem. For
-  example, we've added formatters now that require access to
-  variability headers; in an ideal world, we should now need to have a
-  reference to this model (for example, so that when we integrate
-  package management we get the right dependencies, etc).
-- we are hard-coding the header files. At present this is not a big
-  problem. To be honest, we can't see when this would be a big
-  problem, short of models changing their file names and/or
-  locations. Nonetheless, it seems "unclean" to depend on the header
-  file directly.
-- the dependency is on c++ code rather than expressed via a model.
-
-In an ideal world, we would have some kind of way of declaring a
-formatter meta-model element, with a set of dependencies declared via
-meta-data. These are on the model itself. They must be declared
-against a specific archetype. We then would process these as part of
-resolution. We would then map the header files as part of the existing
-machinery for header files.
-
-However one problem with this approach is that we are generating the
-formatter code using stitch at present. For this to work we would need
-to inject a fragment of code into the stitch template somehow with the
-dependencies. Whilst this is not exactly ideal, the advantage is that
-we could piggy-back on this mechanism to inject the postfix fields as
-well, so that we don't need to define these manually in each
-model. However, this needs some thinking because the complexity of
-defining a formatter will increase yet again. When there are problems,
-it will be hard to troubleshoot.
-
-*** Add =structural= namespace to core elements                       :story:
-
-We've created a namespace inside the coding meta-model for the core
-entities but we did not update the MASD profile.
-
-Actually structural is not a very good name - all of the meta-model
-elements are structural elements, really. We need to find a good name
-before we update the stereotypes.
-
-*** Remove empty default values                                       :story:
-
-At present we have a number of default values in feature bundles set
-to the empty string =""=. It makes more sense not to have a default
-value and have the client code handle its absence.
-
-*** Make labels a plain text field not a collection                   :story:
-
-At present it is possible to label a profile with multiple
-labels. This is not a good idea. Make it a plain text field so we can
-only apply a single label.
-
-*** Create a code-generated static configuration reader               :story:
-
-Tasks:
-
-- add a configuration class to the feature bundle. Investigate how we
-  handle the archetype and facet expansion.
-- add a feature group class to the feature bundle. On construction get
-  the feature group to find all of its fields.
-- add a =read= method that uses the feature group to create the static
-  configuration.
-- add support in enumerations to convert a string to the enumeration
-  (simple and qualified name). Calling code can use this method when
-  reading an enumeration.
-- replace calling code with new static features.
-- add io support for the static configuration if the io facet is
-  enabled.
 
 ** Deprecated
 *** CANCELLED Add comments to test model sanitizer                    :story:
