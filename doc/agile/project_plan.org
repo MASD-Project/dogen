@@ -14,23 +14,11 @@ using C-c C-e J p. File is under Reports directory.
 
 ** Software Development
 
-*** Variability feature clean-up
-   :PROPERTIES:
-   :EFFORT:   2d
-   :BLOCKER:  start
-   :allocate: s18
-   :END:
-
-- create templates to generate types and associated annotation type
-  infrastructure (e.g. fields, etc), as well as methods to read these
-  from annotations.
-- replace existing code with generated code.
-
 *** Fabric clean-up
    :PROPERTIES:
-   :EFFORT:   2d
-   :BLOCKER:  previous-sibling
-   :allocate: s18
+   :EFFORT:   3d
+   :BLOCKER:  start
+   :allocate: s19
    :END:
 
 - move all C++ fabric types into coding.
@@ -38,9 +26,9 @@ using C-c C-e J p. File is under Reports directory.
 
 *** Generation meta-model clean-up
    :PROPERTIES:
-   :EFFORT:   4d
+   :EFFORT:   3d
    :BLOCKER:  previous-sibling
-   :allocate: s19
+   :allocate: s20
    :END:
 
 - remove all types that are in coding but are related to generation
@@ -48,9 +36,9 @@ using C-c C-e J p. File is under Reports directory.
 
 *** Formattables clean-up
    :PROPERTIES:
-   :EFFORT:   2d
+   :EFFORT:   3d
    :BLOCKER:  previous-sibling
-   :allocate: s20
+   :allocate: s21
    :END:
 
 - move formattables concepts into generation, generalising them. This
@@ -60,7 +48,7 @@ using C-c C-e J p. File is under Reports directory.
    :PROPERTIES:
    :EFFORT:   2d
    :BLOCKER:  previous-sibling
-   :allocate: s20
+   :allocate: s21
    :END:
 
 - when C++ and C# models only have formatters, merge them into one
@@ -70,7 +58,7 @@ using C-c C-e J p. File is under Reports directory.
    :PROPERTIES:
    :EFFORT:   1d
    :BLOCKER:  previous-sibling
-   :allocate: s21
+   :allocate: s22
    :END:
 
 - update all CMake templates with latest layout from hand-crafted
@@ -80,26 +68,31 @@ using C-c C-e J p. File is under Reports directory.
    :PROPERTIES:
    :EFFORT:   3d
    :BLOCKER:  previous-sibling
-   :allocate: s21
+   :allocate: s22
    :END:
 
 - add proudct and product family level entities to coding.
+
+*** PDMs generation
+   :PROPERTIES:
+   :EFFORT:   3d
+   :BLOCKER:  previous-sibling
+   :allocate: s23
+   :END:
+
+- create PDMs
+- remove all of the helper code.
 
 ** Milestones
 *** Project start
     :PROPERTIES:
     :task_id: start
-    :start: 2019-05-20
+    :start: 2019-06-03
     :END:
 
 * Sprints                                              :taskjuggler_resource:
 
 Sprints for the project plan.
-
-** Sprint 18
-   :PROPERTIES:
-   :resource_id: s18
-   :END:
 
 ** Sprint 19
    :PROPERTIES:
@@ -112,4 +105,13 @@ Sprints for the project plan.
 ** Sprint 21
    :PROPERTIES:
    :resource_id: s21
+   :END:
+** Sprint 22
+   :PROPERTIES:
+   :resource_id: s22
+   :END:
+
+** Sprint 23
+   :PROPERTIES:
+   :resource_id: s23
    :END:

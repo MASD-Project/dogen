@@ -356,8 +356,9 @@ After reading the variability paper review, it seems a more
 appropriate name for coding is the assets meta-model. It will have all
 assets including product and component. Rename the model.
 
-*** COMPLETED Consider renaming =coding= model                        :story:
-    CLOSED: [2019-05-24 Fri 08:30]
+Merged stories:
+
+*Consider renaming =coding= model*
 
 The real name of this model is something like "component". This will
 make sense once we add the product model. In addition we need to
@@ -656,6 +657,26 @@ at least one reference in include builder.
     :END:
 
 Time spent reading the literature on variability.
+
+*** COMPLETED Create a code-generated static configuration reader     :story:
+    CLOSED: [2019-06-03 Mon 07:18]
+
+*Rationale*: addressed with the static configurations story.
+
+Tasks:
+
+- add a configuration class to the feature bundle. Investigate how we
+  handle the archetype and facet expansion.
+- add a feature group class to the feature bundle. On construction get
+  the feature group to find all of its fields.
+- add a =read= method that uses the feature group to create the static
+  configuration.
+- add support in enumerations to convert a string to the enumeration
+  (simple and qualified name). Calling code can use this method when
+  reading an enumeration.
+- replace calling code with new static features.
+- add io support for the static configuration if the io facet is
+  enabled.
 
 *** POSTPONED Windows clang-cl release build is failing 4 tests       :spike:
     CLOSED: [2019-06-03 Mon 06:31]
