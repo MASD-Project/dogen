@@ -19,7 +19,6 @@
  *
  */
 #include "dogen.generation.cpp/types/formatters/types/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/master_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/types/builtin_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/types/primitive_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/types/primitive_implementation_formatter.hpp"
@@ -42,7 +41,6 @@
 namespace dogen::generation::cpp::formatters::types {
 
 void initializer::initialize(registrar& rg) {
-    register_formatter<master_header_formatter>(rg, traits::facet());
     register_formatter<builtin_header_formatter>(rg);
     register_formatter<primitive_header_formatter>(rg);
     register_formatter<primitive_implementation_formatter>(rg);

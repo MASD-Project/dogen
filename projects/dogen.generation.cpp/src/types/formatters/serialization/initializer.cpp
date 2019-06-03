@@ -19,7 +19,6 @@
  *
  */
 #include "dogen.generation.cpp/types/formatters/serialization/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/master_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/serialization/builtin_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/serialization/primitive_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/serialization/primitive_implementation_formatter.hpp"
@@ -36,7 +35,6 @@
 namespace dogen::generation::cpp::formatters::serialization {
 
 void initializer::initialize(registrar& rg) {
-    register_formatter<master_header_formatter>(rg, traits::facet());
     register_formatter<builtin_header_formatter>(rg);
     register_formatter<primitive_header_formatter>(rg);
     register_formatter<primitive_implementation_formatter>(rg);

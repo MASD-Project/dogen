@@ -11,23 +11,26 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-06-03 Mon 12:59]
+#+CAPTION: Clock summary at [2019-06-03 Mon 18:48]
 | <75>                                               |        |      |      |       |
 | Headline                                           | Time   |      |      |     % |
 |----------------------------------------------------+--------+------+------+-------|
-| *Total time*                                       | *5:10* |      |      | 100.0 |
+| *Total time*                                       | *6:49* |      |      | 100.0 |
 |----------------------------------------------------+--------+------+------+-------|
-| Stories                                            | 5:10   |      |      | 100.0 |
-| Active                                             |        | 5:10 |      | 100.0 |
-| Edit release notes for previous sprint             |        |      | 3:07 |  60.3 |
-| Create a demo and presentation for previous sprint |        |      | 1:39 |  31.9 |
-| Sprint and product backlog grooming                |        |      | 0:24 |   7.7 |
+| Stories                                            | 6:49   |      |      | 100.0 |
+| Active                                             |        | 6:49 |      | 100.0 |
+| Edit release notes for previous sprint             |        |      | 3:36 |  52.8 |
+| Create a demo and presentation for previous sprint |        |      | 1:39 |  24.2 |
+| Sprint and product backlog grooming                |        |      | 0:24 |   5.9 |
+| Remove test model sanitizer                        |        |      | 0:20 |   4.9 |
+| Remove master headers                              |        |      | 0:50 |  12.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2019-06-03 Mon 12:59]
     :LOGBOOK:
+    CLOCK: [2019-06-03 Mon 16:01]--[2019-06-03 Mon 16:30] =>  0:29
     CLOCK: [2019-06-03 Mon 12:51]--[2019-06-03 Mon 12:59] =>  0:08
     CLOCK: [2019-06-03 Mon 09:51]--[2019-06-03 Mon 10:45] =>  0:54
     CLOCK: [2019-06-03 Mon 06:47]--[2019-06-03 Mon 08:52] =>  2:05
@@ -184,8 +187,8 @@ For all other architectures and/or operative systems, you will need to build Dog
 Happy Modeling!
 #+end_src markdown
 
-- [[https://twitter.com/MarcoCraveiro/status/1130500239620825088][twitter]]
-- [[https://www.linkedin.com/feed/update/urn:li:activity:6536266244029505536][linkedin]]
+- [[https://twitter.com/MarcoCraveiro/status/1135567734010523648][twitter]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6541333935140458497][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
 *** COMPLETED Create a demo and presentation for previous sprint      :story:
@@ -203,6 +206,34 @@ Time spent creating the demo and presentation.
     :END:
 
 Updates to sprint and product backlog.
+
+*** COMPLETED Remove test model sanitizer                             :story:
+    CLOSED: [2019-06-03 Mon 16:51]
+    :LOGBOOK:
+    CLOCK: [2019-06-03 Mon 16:31]--[2019-06-03 Mon 16:51] =>  0:20
+    :END:
+
+We seem to have introduced testing to the reference implementation but
+left the canned tests still there. There shouldn't be any reason to
+keep these so remove them.
+
+*** STARTED Remove master headers                                     :story:
+    :LOGBOOK:
+    CLOCK: [2019-06-03 Mon 18:28]--[2019-06-03 Mon 18:48] =>  0:20
+    CLOCK: [2019-06-03 Mon 17:56]--[2019-06-03 Mon 18:12] =>  0:16
+    CLOCK: [2019-06-03 Mon 16:52]--[2019-06-03 Mon 17:06] =>  0:14
+    :END:
+
+At present we are not making use of this feature, and it could even be
+argued that it is not a feature that should be used; by having a
+single header that includes all files we encourage unnecessary
+inclusion, increasing build times. We had a use for this, which was
+related to testing model types, but since we replace that with
+generated tests, we no longer required it. Remove this feature.
+
+Notes:
+
+- actually, we left the test model sanitizer. Not clear why.
 
 *** Windows clang-cl release build is failing 4 tests                 :spike:
 
@@ -325,25 +356,6 @@ Tasks:
 - populate it with the extensions.
 - change enablement to merge all element properties of extensible
   elements.
-
-*** Remove test model sanitizer                                       :story:
-
-We seem to have introduced testing to the reference implementation but
-left the canned tests still there. There shouldn't be any reason to
-keep these so remove them.
-
-*** Remove master headers                                             :story:
-
-At present we are not making use of this feature, and it could even be
-argued that it is not a feature that should be used; by having a
-single header that includes all files we encourage unnecessary
-inclusion, increasing build times. We had a use for this, which was
-related to testing model types, but since we replace that with
-generated tests, we no longer required it. Remove this feature.
-
-Notes:
-
-- actually, we left the test model sanitizer. Not clear why.
 
 *** Validate feature template names                                   :story:
 

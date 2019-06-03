@@ -179,14 +179,14 @@ BOOST_AUTO_TEST_CASE(empty_folders_are_deleted_when_delete_empty_folders_flag_is
 }
 
 BOOST_AUTO_TEST_CASE(empty_folders_are_not_deleted_when_delete_empty_folders_flag_is_off) {
-    SETUP_TEST_LOG("empty_folders_are_not_when_delete_empty_folders_flag_is_off");
+    SETUP_TEST_LOG_DEBUG("empty_folders_are_not_when_delete_empty_folders_flag_is_off");
 
     using dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::
         input_cpp_ref_impl_do_not_delete_empty_dirs_json());
     const auto od(cpp_ref_impl_generation::output_directory());
     execute_code_generation_transform(t, od);
-    BOOST_REQUIRE(are_generated_files_healthy(od, t, 20/*minimum_number*/));
+    BOOST_REQUIRE(are_generated_files_healthy(od, t, 15/*minimum_number*/));
 
     auto n(t.filename().stem());
     const auto model_dir(od / n);

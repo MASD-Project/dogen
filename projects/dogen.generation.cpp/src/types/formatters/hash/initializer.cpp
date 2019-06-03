@@ -19,7 +19,6 @@
  *
  */
 #include "dogen.generation.cpp/types/formatters/hash/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/master_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/hash/builtin_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/hash/primitive_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/hash/primitive_implementation_formatter.hpp"
@@ -42,7 +41,6 @@
 namespace dogen::generation::cpp::formatters::hash {
 
 void initializer::initialize(registrar& rg) {
-    register_formatter<master_header_formatter>(rg, traits::facet());
     register_formatter<builtin_header_formatter>(rg);
     register_formatter<primitive_header_formatter>(rg);
     register_formatter<primitive_implementation_formatter>(rg);

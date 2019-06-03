@@ -19,7 +19,6 @@
  *
  */
 #include "dogen.generation.cpp/types/formatters/odb/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/master_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/odb/builtin_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/odb/primitive_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/odb/class_header_formatter.hpp"
@@ -31,7 +30,6 @@
 namespace dogen::generation::cpp::formatters::odb {
 
 void initializer::initialize(registrar& rg) {
-    register_formatter<master_header_formatter>(rg, traits::facet());
     register_formatter<builtin_header_formatter>(rg);
     register_formatter<primitive_header_formatter>(rg);
     register_formatter<class_header_formatter>(rg);
