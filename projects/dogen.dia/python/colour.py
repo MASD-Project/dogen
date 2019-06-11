@@ -124,6 +124,12 @@ for layer in dia.active_display().diagram.data.layers:
             object.properties["fill_colour"] = "#5EB55E"
 
         #
+        # Theme: Serialization
+        #
+        elif "masd::serialization::type_registrar" in stereotype:
+            object.properties["fill_colour"] = "#00FF00"
+
+        #
         # Theme: Core meta-elements
         #
         elif "masd::enumeration" in stereotype:
