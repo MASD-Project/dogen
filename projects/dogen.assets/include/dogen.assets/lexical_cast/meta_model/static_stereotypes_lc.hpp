@@ -81,6 +81,8 @@ inline std::string lexical_cast(const dogen::assets::meta_model::static_stereoty
         return "static_stereotypes::mapping_extensible_mappable";
     case static_stereotypes::templating_logic_less_template:
         return "static_stereotypes::templating_logic_less_template";
+    case static_stereotypes::serialization_type_registrar:
+        return "static_stereotypes::serialization_type_registrar";
     default:
         throw boost::bad_lexical_cast();
     }
@@ -136,6 +138,8 @@ inline dogen::assets::meta_model::static_stereotypes lexical_cast(const std::str
         return static_stereotypes::mapping_extensible_mappable;
     if (s == "templating_logic_less_template" || s == "static_stereotypes::templating_logic_less_template")
         return static_stereotypes::templating_logic_less_template;
+    if (s == "serialization_type_registrar" || s == "static_stereotypes::serialization_type_registrar")
+        return static_stereotypes::serialization_type_registrar;
     throw boost::bad_lexical_cast();
 }
 

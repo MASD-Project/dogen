@@ -99,6 +99,9 @@ std::ostream& operator<<(std::ostream& s, const static_stereotypes& v) {
     case static_stereotypes::templating_logic_less_template:
         attr = "\"templating_logic_less_template\"";
         break;
+    case static_stereotypes::serialization_type_registrar:
+        attr = "\"serialization_type_registrar\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for static_stereotypes");
     }

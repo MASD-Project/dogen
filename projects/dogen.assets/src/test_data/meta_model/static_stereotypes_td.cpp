@@ -25,7 +25,7 @@ namespace dogen::assets::meta_model {
 static_stereotypes_generator::static_stereotypes_generator() : position_(0) { }
 void static_stereotypes_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<static_stereotypes>(position % 23);
+    v = static_cast<static_stereotypes>(position % 24);
 }
 
 static_stereotypes_generator::result_type

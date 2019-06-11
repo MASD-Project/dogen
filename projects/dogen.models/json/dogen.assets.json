@@ -1494,6 +1494,10 @@
         {
           "name": "templating_logic_less_template",
           "type": ""
+        },
+        {
+          "name": "serialization_type_registrar",
+          "type": ""
         }
       ]
     },

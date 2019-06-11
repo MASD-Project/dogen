@@ -159,6 +159,11 @@ BOOST_AUTO_TEST_CASE(casting_valid_strings_produces_expected_enumeration) {
     BOOST_CHECK(r == static_stereotypes::templating_logic_less_template);
     r = boost::lexical_cast<static_stereotypes>(std::string("static_stereotypes::templating_logic_less_template"));
     BOOST_CHECK(r == static_stereotypes::templating_logic_less_template);
+
+    r = boost::lexical_cast<static_stereotypes>(std::string("serialization_type_registrar"));
+    BOOST_CHECK(r == static_stereotypes::serialization_type_registrar);
+    r = boost::lexical_cast<static_stereotypes>(std::string("static_stereotypes::serialization_type_registrar"));
+    BOOST_CHECK(r == static_stereotypes::serialization_type_registrar);
 }
 
 BOOST_AUTO_TEST_CASE(casting_invalid_string_throws) {
@@ -239,6 +244,9 @@ BOOST_AUTO_TEST_CASE(casting_valid_enumerations_produces_expected_strings) {
 
     r = boost::lexical_cast<std::string>(static_stereotypes::templating_logic_less_template);
     BOOST_CHECK(r == "static_stereotypes::templating_logic_less_template");
+
+    r = boost::lexical_cast<std::string>(static_stereotypes::serialization_type_registrar);
+    BOOST_CHECK(r == "static_stereotypes::serialization_type_registrar");
 }
 
 BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
@@ -247,7 +255,7 @@ BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
 #pragma GCC diagnostic ignored "-Wconversion"
 #endif
     using dogen::assets::meta_model::static_stereotypes;
-    const static_stereotypes r(static_cast<static_stereotypes>(33));
+    const static_stereotypes r(static_cast<static_stereotypes>(34));
 #if BOOST_COMP_GNUC
 #pragma GCC diagnostic pop
 #endif
