@@ -11,20 +11,21 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-06-03 Mon 20:30]
-| <75>                                               |        |      |      |       |
-| Headline                                           | Time   |      |      |     % |
-|----------------------------------------------------+--------+------+------+-------|
-| *Total time*                                       | *8:27* |      |      | 100.0 |
-|----------------------------------------------------+--------+------+------+-------|
-| Stories                                            | 8:27   |      |      | 100.0 |
-| Active                                             |        | 8:27 |      | 100.0 |
-| Edit release notes for previous sprint             |        |      | 3:36 |  42.6 |
-| Create a demo and presentation for previous sprint |        |      | 1:39 |  19.5 |
-| Sprint and product backlog grooming                |        |      | 1:08 |  13.4 |
-| Remove test model sanitizer                        |        |      | 0:20 |   3.9 |
-| Remove master headers                              |        |      | 1:02 |  12.2 |
-| Move registrar into assets                         |        |      | 0:42 |   8.3 |
+#+CAPTION: Clock summary at [2019-06-11 Tue 12:20]
+| <75>                                               |         |       |      |       |
+| Headline                                           | Time    |       |      |     % |
+|----------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                       | *16:38* |       |      | 100.0 |
+|----------------------------------------------------+---------+-------+------+-------|
+| Stories                                            | 16:38   |       |      | 100.0 |
+| Active                                             |         | 16:38 |      | 100.0 |
+| Edit release notes for previous sprint             |         |       | 3:36 |  21.6 |
+| Create a demo and presentation for previous sprint |         |       | 1:39 |   9.9 |
+| Sprint and product backlog grooming                |         |       | 2:30 |  15.0 |
+| Remove test model sanitizer                        |         |       | 0:20 |   2.0 |
+| Remove master headers                              |         |       | 1:12 |   7.2 |
+| Move registrar into assets                         |         |       | 1:44 |  10.4 |
+| Org-mode as a carrier format for modeling          |         |       | 5:37 |  33.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -202,6 +203,9 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-06-11 Tue 10:55]--[2019-06-11 Tue 11:15] =>  0:20
+    CLOCK: [2019-06-04 Tue 09:36]--[2019-06-04 Tue 10:35] =>  0:59
+    CLOCK: [2019-06-04 Tue 09:32]--[2019-06-04 Tue 09:35] =>  0:03
     CLOCK: [2019-06-03 Mon 19:46]--[2019-06-03 Mon 20:30] =>  0:44
     CLOCK: [2019-06-03 Mon 06:31]--[2019-06-03 Mon 06:46] =>  0:15
     CLOCK: [2019-06-03 Mon 06:21]--[2019-06-03 Mon 06:30] =>  0:09
@@ -222,6 +226,7 @@ keep these so remove them.
 *** COMPLETED Remove master headers                                   :story:
     CLOSED: [2019-06-03 Mon 19:05]
     :LOGBOOK:
+    CLOCK: [2019-06-04 Tue 09:21]--[2019-06-04 Tue 09:31] =>  0:10
     CLOCK: [2019-06-03 Mon 18:49]--[2019-06-03 Mon 19:01] =>  0:12
     CLOCK: [2019-06-03 Mon 18:28]--[2019-06-03 Mon 18:48] =>  0:20
     CLOCK: [2019-06-03 Mon 17:56]--[2019-06-03 Mon 18:12] =>  0:16
@@ -350,59 +355,68 @@ initialisers.
 
 *** STARTED Move registrar into assets                                :story:
     :LOGBOOK:
+    CLOCK: [2019-06-11 Tue 11:57]--[2019-06-11 Tue 12:20] =>  0:23
+    CLOCK: [2019-06-11 Tue 11:52]--[2019-06-11 Tue 11:56] =>  0:04
+    CLOCK: [2019-06-11 Tue 11:16]--[2019-06-11 Tue 11:51] =>  0:35
     CLOCK: [2019-06-03 Mon 19:34]--[2019-06-03 Mon 19:45] =>  0:11
     CLOCK: [2019-06-03 Mon 19:27]--[2019-06-03 Mon 19:34] =>  0:07
     CLOCK: [2019-06-03 Mon 19:02]--[2019-06-03 Mon 19:26] =>  0:24
     :END:
 
-At present we have a registrar in C++ generation model which is used
-to generate the code to register types for boost serialisation. This
-principle is fairly universal, and probably all serialisation
-technologies will require something of this kind in presence of
-inheritance. In addition to this, we have the related notion of
-"initialisers". These are used to register types such as:
-
-- formatters
-- feature templates
-
-The notion here is that we need to know of a set of related
-types. Whilst registration happens at run time, in reality all is
-known at compile time and we generate all of the required code up
-front. If we attempt to generalise this idea, it seems we have:
-
-- a set of types that need to be registered, according to some
-  condition. Examples: the meta-type (feature template, etc), the fact
-  that the type is a base class/derived class, etc.
-- a class responsible for registration.
-- a container of some kind that remembers what was registered. The
-  type of the data stored is a parameter. It could be that we want
-  pointers to an interface (e.g. formatters) or just remember some
-  strings.
-- a set of initialisers that talk to the registrar to register the
-- there is a top-level class that creates the repository and then
-  passes it through to the initialisers to get it populated. Further
-  transforms may then be made to the repository.
-
-We should look into registrar terminology to see if all of these
-actors have names.
+Move the registrar type into assets, in the quickest way possible.
 
 Notes:
 
-- the construction of the type may be non-trivial. We may need to
-  supply some arguments, etc. We need to catalogue all of the
-  initialisers and see the comonalities.
-- bundle initialisers introduced the notion of "scope" whereby an
-  initialiser will look for types in the same package and worry only
-  about those. Then, a higher level initialiser would call all of the
-  lower level initialisers.
-- we need to somehow create different initialisers per type or else
-  these are going to become too complicated.
-- the problem of the serialisation registrar is that, instead of using
-  actual data stored in a repository, it works at the template
-  level/compule time, with each type being registered against an
-  archive. We need to look into the boost serialisation documentation
-  and see if there is a way to make the code look a bit more like the
-  other instances of this pattern.
+- In order to avoid blocking due to lots of analysis, we need
+  to split this story into three:
+  - first, we need to just move the registrar as is into assets.
+  - a second story is to clean up the existing registrar code to have
+    less templates and possibly address the existing registration
+    bugs. We could also look into calling the registrars for
+    referenced models automatically as part of this work (at present
+    we are doing this manually).
+  - finally, we need some meta-level refactoring to figure out if the
+    pattern can be generalised to include initialisers, etc.
+  In general that should be our approach: try to split out the
+  capturing of patterns into as many steps as possible, to make sure
+  we don't get overwhelmed as we implement things.
+- we need to keep track of all type registrars on referenced models,
+  not on the referenced models themselves.
+
+*** STARTED Org-mode as a carrier format for modeling                 :story:
+    :LOGBOOK:
+    CLOCK: [2019-06-05 Wed 14:17]--[2019-06-05 Wed 18:02] =>  3:45
+    CLOCK: [2019-06-05 Wed 12:17]--[2019-06-05 Wed 12:42] =>  0:25
+    CLOCK: [2019-06-05 Wed 10:50]--[2019-06-05 Wed 12:17] =>  1:27
+    :END:
+
+This is a bit of a weird idea, but may just work; this story is a
+placeholder to capture ideas in this space. Consider a org-mode
+file as a model. Ideas:
+
+- the top-level properties are all model properties. For example, if
+  you add text at the top, that is a model comment.
+- we can also make use of the exact same format for Dogen comments as
+  we do in Dia, with =#DOGEN= markers.
+- stereotypes and other meta-data can be conveyed using org-mode
+  properties. In addition, due to org-babel, we can include code
+  snippets on any programming language, with some (minimal) IDE-like
+  integration.
+- we could also include the GUIDs for merging as org-mode properties.
+- once we create a C++ stand-alone product to represent org-mode
+  documents, we can just create an adapter for it as an injector.
+- there already is some support for creating state-machines in
+  org-mode: [[https://orgmode.org/worg/org-tutorials/org-dot-diagrams.html][Org tutorial on generating simple process diagrams using
+  dot and tables]]
+
+Links:
+
+- [[https://github.com/mirkoboehm/OrgModeParser][OrgModeParser]]: requires QT.
+- [[https://www.reddit.com/r/emacs/comments/bciwiz/does_orgmode_have_a_formal_grammar_or_some_subset/][Does orgmode have a formal grammar, or some subset of it?]]
+- [[https://orgmode.org/worg/dev/org-syntax.html][Org Syntax (draft)]]
+- [[https://orgmode.org/worg/dev/org-element-api.html][Org Element API]]
+- [[https://github.com/ngortheone/org-rs][org-rs]]: rust library for org-mode.
+- [[https://github.com/felipealmeida/orgmode-parsers][orgmode-parsers]]
 
 *** Move fabric types into coding                                     :story:
 
@@ -455,10 +469,21 @@ declarations.
 Another related problem is that we are not setting the path when
 creating stitch templates for the first time in the stitch formatter.
 
+We should add checks for empty path and see what breaks, now that we
+are using the new implementation of forward declarations.
+
 *** Create metamodel elements for =entry_point= and =interface=       :story:
 
 These have been incorrectly added as configurations and/or fabric
 types. This should be looked at after merging the fabric types.
+
+*** Move ORM camel-case and databases into yarn                       :story:
+
+We should handle this property at the ORM level, rather than at the
+ODB level.
+
+Similarly, we should move the ODB databases into yarn and make that a
+ORM-level concept.
 
 *** Consider renaming logic-less templates                            :story:
 
@@ -508,6 +533,117 @@ Notes:
   - start: [[https://github.com/MASD-Project/dogen/commit/166110a944587b0dfb2a53794fd71b504da89065][166110a944587b0dfb2a53794fd71b504da89065]]
 - started again with next build. Its traffic lighting, but the pattern
   is not yet obvious.
+
+*** Make explicit all implicit modeling elements                      :story:
+
+At present we have a number of modeling elements that can be
+configured (enabled/disabled) but do not have a representation within
+a model. Example:
+
+- cmake
+- visual studio
+- odb
+- etc.
+
+This means we cannot associate any configuration with these elements
+such as licences, modelines etc. This is one reason why there are
+hacks to hard-code the modeline of CMake files. A better way is to
+force users to create a modeling element (with the appropriate
+meta-model stereotype, e.g. =masd::visual_studio::project=) and then
+have them configured via named configurations. This means that for
+each archetype we must have a distinct modeling element. It also means
+that some modeling elements are language specific, but the metamodel
+will merge them all into one space. We should also have them inherit
+from common base classes where possible.
+
+Note: not all meta-model elements will be available on all technical
+spaces. We need a way to make sure they are compatible. Perhaps the
+element could have a list of compatible TSs.
+
+This approach follows the unwritten rule of "no black box injection of
+modeling elements". We should formalise this rule somewhat and explain
+the rationale for it.
+
+Note that the handling of =invalid= in enumeration also falls under
+this remit. At present we are injecting the invalid enumerator
+transparently via meta-data switches. This is not a good idea. Users
+should instead have some kind of "enumeration template" from which
+they can inherit which will give them the required enumerators. We
+should not do anything special for invalid.
+
+Merged Stories:
+
+*Consider allowing renaming of "internal" types*
+
+Users may want to change the =_visitor= postfix for visitors or the
+boost serialisation registrar name. This could be achieved via
+meta-data.
+
+*Consider renaming registrar in boost serialisation*
+
+At present we have a registrar formatter that does the boost
+serialisation work. However, the name =registrar= is a bit too
+generic; we may for example add formatters for static registrars. We
+should rename this formatter to something more meaningful. Also the
+name registrar is already well understood to mean static registrar.
+
+This is a big problem now that we cannot add a type with the name
+registrar to the main model as it clashes with the serialisation
+registrar.
+
+We could simply name it serialisation registrar or some such name that
+is very unlikely to clash. We should then have a validation rule that
+stops users from defining types with that name.
+
+We need to go through all of the renamed registrars and fix them.
+
+Another option is to allow users to supply a name via meta-data to
+avoid name clashes. We could error when the user has defined a type.
+
+Actually, since the clash is only internal - the names we are
+generating on the fly are clashing with the user defined names - we
+should probably have a "postfix" that can be added in case of
+clashes. The generated code will not cause problems, its just the
+formattables pipeline.
+
+*Allow renaming of visitor*                                         :story:*
+
+At present the visitor is named by dogen. There is nothing stopping us
+from allowing users to rename it via meta-data. We don't have a use
+case yet.
+
+*Handcrafted support for fabric types*
+
+At present we can either disable fabric types or enable them
+(CMakeLists, etc). However, there is a third common use case: to
+handcraft them. To do this we normally disable them and then add the
+file to the ignore list:
+
+:  --ignore-files-matching-regex .*/CMakeLists.txt)
+
+One could conceive of some meta-data support that would make this
+process a tad easier and more generic:
+
+: quilt.cpp.cmakelists.stereotypes=handcrafted
+
+Then hopefully the existing pipeline would take over and we'd generate
+the files for the first time but then let the user overwrite it. This
+would also be applicable to all fabric types (registrar, etc) but we'd
+have to manually read each stereotype on each factory.
+
+Merged stories:
+
+*Make visitor an explicit type*
+
+Instead of automatically generating visitors via the visitable
+stereotype, we should:
+
+- create a new stereotype =masd::visitor=. It triggers the creation of
+  the visitor meta-model element.
+- visitor must have a target via meta-data. This points to the element
+  to visit.
+
+We need to make sure we don't break cross model visitation with this change.
 
 *** Fix issues with nightly build and CI                              :story:
 
