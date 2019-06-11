@@ -1,0 +1,100 @@
+#+title: dogen.assets
+:dogen:
+:masd.injection.dia.comment: true
+:masd.injection.model_modules: dogen.assets
+:masd.injection.reference: cpp.builtins
+:masd.injection.reference: cpp.std
+:masd.injection.reference: cpp.boost
+:masd.injection.reference: dogen
+:masd.injection.reference: dogen.variability
+:masd.injection.reference: dogen.tracing
+:masd.injection.reference: dogen.extraction
+:masd.injection.reference: masd
+:masd.injection.reference: masd.variability
+:masd.injection.reference: dogen.profiles
+:masd.injection.input_technical_space: cpp
+:masd.extraction.ignore_files_matching_regex: .*/CMakeLists.txt
+:masd.extraction.ignore_files_matching_regex: .*/test/.*
+:masd.extraction.ignore_files_matching_regex: .*/tests/.*
+:masd.extraction.delete_extra_files: true
+:masd.extraction.delete_empty_directories: true
+:masd.generation.cpp.enabled: true
+:masd.generation.cpp.standard: c++-17
+:masd.generation.cpp.msbuild.enabled: false
+:masd.generation.cpp.visual_studio.project.enabled: false
+:masd.generation.cpp.visual_studio.solution.enabled: false
+:masd.generation.csharp.enabled: false
+:masd.variability.profile: dogen.profiles.base.default_profile
+:end:
+
+Assets is the core Dogen meta-model representing software entities.
+
+@section assets_0 Overview
+
+Assets is a meta-model that strives to provide a technical-space
+agnostic type representation, designed for code generation. Injection
+models are obtained via frontends and transformed into "bare" asset
+models, at which point they can enter its pipeline. Within it, they
+are processed until they form a cohesive whole. They are then in a
+suitable state for code generation.
+
+@section asset_1 Mission
+
+The objectives of the assets model are:
+
+- to represent all high-level entities that exist across a number of
+  technical spaces used in software engineering. These entities are
+  not necessarily limited to programming entities, though, of course,
+  these form the core set of elements we're interested in. Additional
+  entities such as build systems and high-level patterns such as GoF
+  and others are also captured.
+- to provide the tooling required to combine multiple models together
+  into a bigger model - called the /merged/ model.
+- to ensure the consistency of the merged model via validation rules
+  (such as verifying that all types have a definitions, etc.).
+
+** meta_model                                                        :module:
+    :dogen:
+    :masd.injection.stereotypes: masd::module
+    :end:
+
+Contains the core meta-model entities that make up the assets mode.
+
+*** attribute                                                        :object:
+    :dogen:
+    :masd.injection.stereotypes: Documentable, Configurable, Nameable, Stereotypable
+    :end:
+
+Represents an attribute in an object.
+
+**** id                                                           :operation:
+
+Returns the identity of this object.
+
+***** masd.generation.cpp.types.class_header                  :code_fragment:
+
+#+begin_src cpp
+int id();
+#+end_src
+
+***** masd.generation.cpp.types.class_implementation
+
+#+begin_src cpp
+int id() {
+    return qualified().test();
+}
+#+end_src
+
+**** unparsed_type                                                 :property:
+    :dogen:
+    :masd.injection.type: std::string
+    :end:
+
+Original type name as it appeared in the source, without any parsing.
+
+Name must be in one of the supported notations.
+
+**** is_immutable                                                  :property:
+    :dogen:
+    :masd.injection.type: bool
+    :end:
