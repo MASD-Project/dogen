@@ -4930,6 +4930,13 @@ if there is a shared pointer to built-in; if there is, put in:
 Things we are not testing at present but should, validation that could
 provide helpful errors to end users but is not being performed yet.
 
+*** Improve registrar testing                                         :story:
+
+We need a proper registrar test, with three models and types that
+require registration on all. We need to create a type with a base
+pointer in each model and ensure the generated tests are executing the
+registration code.
+
 *** Handling of unsupported dia objects                               :story:
 
 #+begin_quote
