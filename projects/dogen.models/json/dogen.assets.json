@@ -463,7 +463,13 @@
         },
         {
           "name": "templating_elements",
-          "type": "templating::element_repository"
+          "type": "templating::element_repository",
+          "documentation": "Elements related to text templates.\n"
+        },
+        {
+          "name": "serialization_elements",
+          "type": "serialization::element_repository",
+          "documentation": "Elements related to serialization.\n"
         }
       ]
     },
@@ -3159,6 +3165,56 @@
             "masd.variability.qualified_name": "masd.variability.default_binding_point",
             "masd.variability.is_optional": "true"
           }
+        }
+      ]
+    },
+    {
+      "name": "meta_model::serialization",
+      "documentation": "Houses all of the meta-modeling elements related\nto serialisation.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "meta_model::serialization::type_registrar",
+      "documentation": "Responsible for registering types for serialisation purposes.\n\nCertain libraries in certain technical spaces - such as Boost Serialisation, in C++ -\nrequire types that are in an inheritance relationship to be made known to the \nserialisation infrastructure in order for the deserialisation of base and derived \ntypes to work. The type registrar is aware of all types with such requirements and\ngenerates the registration code as needed.\n",
+      "stereotypes": [
+        "assets::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "leaves",
+          "type": "std::list<assets::meta_model::name>",
+          "documentation": "List of all concrete classes which are part of an inheritance tree.\n"
+        },
+        {
+          "name": "model_dependencies",
+          "type": "std::list<assets::meta_model::name>",
+          "documentation": "List of all models which the model depends on.\n"
+        },
+        {
+          "name": "registrar_dependencies",
+          "type": "std::list<assets::meta_model::name>",
+          "documentation": "Registrars on other models this registrar depends on.\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::type_registrar_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::serialization::element_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "type_registrars",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<type_registrar>>"
         }
       ]
     }

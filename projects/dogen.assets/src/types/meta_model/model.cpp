@@ -51,7 +51,8 @@ model::model(model&& rhs)
       decoration_elements_(std::move(rhs.decoration_elements_)),
       variability_elements_(std::move(rhs.variability_elements_)),
       mapping_elements_(std::move(rhs.mapping_elements_)),
-      templating_elements_(std::move(rhs.templating_elements_)) { }
+      templating_elements_(std::move(rhs.templating_elements_)),
+      serialization_elements_(std::move(rhs.serialization_elements_)) { }
 
 model::model(
     const dogen::assets::meta_model::name& name,
@@ -68,7 +69,8 @@ model::model(
     const dogen::assets::meta_model::decoration::element_repository& decoration_elements,
     const dogen::assets::meta_model::variability::element_repository& variability_elements,
     const dogen::assets::meta_model::mapping::element_repository& mapping_elements,
-    const dogen::assets::meta_model::templating::element_repository& templating_elements)
+    const dogen::assets::meta_model::templating::element_repository& templating_elements,
+    const dogen::assets::meta_model::serialization::element_repository& serialization_elements)
     : name_(name),
       meta_name_(meta_name),
       origin_type_(origin_type),
@@ -83,7 +85,8 @@ model::model(
       decoration_elements_(decoration_elements),
       variability_elements_(variability_elements),
       mapping_elements_(mapping_elements),
-      templating_elements_(templating_elements) { }
+      templating_elements_(templating_elements),
+      serialization_elements_(serialization_elements) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -102,6 +105,7 @@ void model::swap(model& other) noexcept {
     swap(variability_elements_, other.variability_elements_);
     swap(mapping_elements_, other.mapping_elements_);
     swap(templating_elements_, other.templating_elements_);
+    swap(serialization_elements_, other.serialization_elements_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -119,7 +123,8 @@ bool model::operator==(const model& rhs) const {
         decoration_elements_ == rhs.decoration_elements_ &&
         variability_elements_ == rhs.variability_elements_ &&
         mapping_elements_ == rhs.mapping_elements_ &&
-        templating_elements_ == rhs.templating_elements_;
+        templating_elements_ == rhs.templating_elements_ &&
+        serialization_elements_ == rhs.serialization_elements_;
 }
 
 model& model::operator=(model other) {
@@ -350,6 +355,22 @@ void model::templating_elements(const dogen::assets::meta_model::templating::ele
 
 void model::templating_elements(const dogen::assets::meta_model::templating::element_repository&& v) {
     templating_elements_ = std::move(v);
+}
+
+const dogen::assets::meta_model::serialization::element_repository& model::serialization_elements() const {
+    return serialization_elements_;
+}
+
+dogen::assets::meta_model::serialization::element_repository& model::serialization_elements() {
+    return serialization_elements_;
+}
+
+void model::serialization_elements(const dogen::assets::meta_model::serialization::element_repository& v) {
+    serialization_elements_ = v;
+}
+
+void model::serialization_elements(const dogen::assets::meta_model::serialization::element_repository&& v) {
+    serialization_elements_ = std::move(v);
 }
 
 }

@@ -41,6 +41,7 @@
 #include "dogen.assets/test_data/meta_model/variability/feature_bundle_td.hpp"
 #include "dogen.assets/test_data/meta_model/mapping/extensible_mappable_td.hpp"
 #include "dogen.assets/test_data/meta_model/decoration/generation_marker_td.hpp"
+#include "dogen.assets/test_data/meta_model/serialization/type_registrar_td.hpp"
 #include "dogen.assets/test_data/meta_model/variability/profile_template_td.hpp"
 #include "dogen.assets/test_data/meta_model/decoration/element_properties_td.hpp"
 #include "dogen.assets/test_data/meta_model/templating/logic_less_template_td.hpp"
@@ -169,39 +170,41 @@ populate(const unsigned int position, result_type& v) {
 
 element_generator::result_type*
 element_generator::create_ptr(const unsigned int position) {
-    if ((position % 17) == 0)
+    if ((position % 18) == 0)
         return dogen::assets::meta_model::decoration::licence_generator::create_ptr(position);
-    if ((position % 17) == 1)
+    if ((position % 18) == 1)
         return dogen::assets::meta_model::decoration::modeline_generator::create_ptr(position);
-    if ((position % 17) == 2)
+    if ((position % 18) == 2)
         return dogen::assets::meta_model::decoration::modeline_group_generator::create_ptr(position);
-    if ((position % 17) == 3)
+    if ((position % 18) == 3)
         return dogen::assets::meta_model::mapping::extensible_mappable_generator::create_ptr(position);
-    if ((position % 17) == 4)
+    if ((position % 18) == 4)
         return dogen::assets::meta_model::mapping::fixed_mappable_generator::create_ptr(position);
-    if ((position % 17) == 5)
+    if ((position % 18) == 5)
+        return dogen::assets::meta_model::serialization::type_registrar_generator::create_ptr(position);
+    if ((position % 18) == 6)
         return dogen::assets::meta_model::structural::builtin_generator::create_ptr(position);
-    if ((position % 17) == 6)
+    if ((position % 18) == 7)
         return dogen::assets::meta_model::structural::enumeration_generator::create_ptr(position);
-    if ((position % 17) == 7)
+    if ((position % 18) == 8)
         return dogen::assets::meta_model::structural::exception_generator::create_ptr(position);
-    if ((position % 17) == 8)
+    if ((position % 18) == 9)
         return dogen::assets::meta_model::structural::module_generator::create_ptr(position);
-    if ((position % 17) == 9)
+    if ((position % 18) == 10)
         return dogen::assets::meta_model::structural::object_generator::create_ptr(position);
-    if ((position % 17) == 10)
+    if ((position % 18) == 11)
         return dogen::assets::meta_model::structural::object_template_generator::create_ptr(position);
-    if ((position % 17) == 11)
+    if ((position % 18) == 12)
         return dogen::assets::meta_model::structural::primitive_generator::create_ptr(position);
-    if ((position % 17) == 12)
+    if ((position % 18) == 13)
         return dogen::assets::meta_model::structural::visitor_generator::create_ptr(position);
-    if ((position % 17) == 13)
+    if ((position % 18) == 14)
         return dogen::assets::meta_model::templating::logic_less_template_generator::create_ptr(position);
-    if ((position % 17) == 14)
+    if ((position % 18) == 15)
         return dogen::assets::meta_model::variability::feature_bundle_generator::create_ptr(position);
-    if ((position % 17) == 15)
+    if ((position % 18) == 16)
         return dogen::assets::meta_model::variability::feature_template_initializer_generator::create_ptr(position);
-    if ((position % 17) == 16)
+    if ((position % 18) == 17)
         return dogen::assets::meta_model::variability::profile_template_generator::create_ptr(position);
     return dogen::assets::meta_model::decoration::generation_marker_generator::create_ptr(position);
 }

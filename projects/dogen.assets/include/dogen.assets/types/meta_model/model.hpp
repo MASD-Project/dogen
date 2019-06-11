@@ -43,6 +43,7 @@
 #include "dogen.assets/types/meta_model/structural/element_repository.hpp"
 #include "dogen.assets/types/meta_model/templating/element_repository.hpp"
 #include "dogen.assets/types/meta_model/variability/element_repository.hpp"
+#include "dogen.assets/types/meta_model/serialization/element_repository.hpp"
 
 namespace dogen::assets::meta_model {
 
@@ -76,7 +77,8 @@ public:
         const dogen::assets::meta_model::decoration::element_repository& decoration_elements,
         const dogen::assets::meta_model::variability::element_repository& variability_elements,
         const dogen::assets::meta_model::mapping::element_repository& mapping_elements,
-        const dogen::assets::meta_model::templating::element_repository& templating_elements);
+        const dogen::assets::meta_model::templating::element_repository& templating_elements,
+        const dogen::assets::meta_model::serialization::element_repository& serialization_elements);
 
 public:
     /**
@@ -203,10 +205,25 @@ public:
     void mapping_elements(const dogen::assets::meta_model::mapping::element_repository&& v);
     /**@}*/
 
+    /**
+     * @brief Elements related to text templates.
+     */
+    /**@{*/
     const dogen::assets::meta_model::templating::element_repository& templating_elements() const;
     dogen::assets::meta_model::templating::element_repository& templating_elements();
     void templating_elements(const dogen::assets::meta_model::templating::element_repository& v);
     void templating_elements(const dogen::assets::meta_model::templating::element_repository&& v);
+    /**@}*/
+
+    /**
+     * @brief Elements related to serialization.
+     */
+    /**@{*/
+    const dogen::assets::meta_model::serialization::element_repository& serialization_elements() const;
+    dogen::assets::meta_model::serialization::element_repository& serialization_elements();
+    void serialization_elements(const dogen::assets::meta_model::serialization::element_repository& v);
+    void serialization_elements(const dogen::assets::meta_model::serialization::element_repository&& v);
+    /**@}*/
 
 public:
     bool operator==(const model& rhs) const;
@@ -234,6 +251,7 @@ private:
     dogen::assets::meta_model::variability::element_repository variability_elements_;
     dogen::assets::meta_model::mapping::element_repository mapping_elements_;
     dogen::assets::meta_model::templating::element_repository templating_elements_;
+    dogen::assets::meta_model::serialization::element_repository serialization_elements_;
 };
 
 }

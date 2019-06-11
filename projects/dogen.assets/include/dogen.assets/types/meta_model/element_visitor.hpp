@@ -40,6 +40,7 @@
 #include "dogen.assets/types/meta_model/variability/feature_bundle_fwd.hpp"
 #include "dogen.assets/types/meta_model/mapping/extensible_mappable_fwd.hpp"
 #include "dogen.assets/types/meta_model/decoration/generation_marker_fwd.hpp"
+#include "dogen.assets/types/meta_model/serialization/type_registrar_fwd.hpp"
 #include "dogen.assets/types/meta_model/variability/profile_template_fwd.hpp"
 #include "dogen.assets/types/meta_model/templating/logic_less_template_fwd.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_template_initializer_fwd.hpp"
@@ -112,6 +113,16 @@ public:
     virtual void visit(const dogen::assets::meta_model::mapping::fixed_mappable&) { }
     virtual void visit(dogen::assets::meta_model::mapping::fixed_mappable&) const { }
     virtual void visit(dogen::assets::meta_model::mapping::fixed_mappable&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::assets::meta_model::serialization::type_registrar
+     */
+    /**@{*/
+    virtual void visit(const dogen::assets::meta_model::serialization::type_registrar&) const { }
+    virtual void visit(const dogen::assets::meta_model::serialization::type_registrar&) { }
+    virtual void visit(dogen::assets::meta_model::serialization::type_registrar&) const { }
+    virtual void visit(dogen::assets::meta_model::serialization::type_registrar&) { }
     /**@}*/
 
     /**

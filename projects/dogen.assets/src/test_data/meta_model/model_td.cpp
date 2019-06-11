@@ -30,6 +30,7 @@
 #include "dogen.assets/test_data/meta_model/structural/element_repository_td.hpp"
 #include "dogen.assets/test_data/meta_model/templating/element_repository_td.hpp"
 #include "dogen.assets/test_data/meta_model/variability/element_repository_td.hpp"
+#include "dogen.assets/test_data/meta_model/serialization/element_repository_td.hpp"
 
 namespace {
 
@@ -126,6 +127,11 @@ create_dogen_assets_meta_model_templating_element_repository(const unsigned int 
     return dogen::assets::meta_model::templating::element_repository_generator::create(position);
 }
 
+dogen::assets::meta_model::serialization::element_repository
+create_dogen_assets_meta_model_serialization_element_repository(const unsigned int position) {
+    return dogen::assets::meta_model::serialization::element_repository_generator::create(position);
+}
+
 }
 
 namespace dogen::assets::meta_model {
@@ -149,6 +155,7 @@ populate(const unsigned int position, result_type& v) {
     v.variability_elements(create_dogen_assets_meta_model_variability_element_repository(position + 12));
     v.mapping_elements(create_dogen_assets_meta_model_mapping_element_repository(position + 13));
     v.templating_elements(create_dogen_assets_meta_model_templating_element_repository(position + 14));
+    v.serialization_elements(create_dogen_assets_meta_model_serialization_element_repository(position + 15));
 }
 
 model_generator::result_type

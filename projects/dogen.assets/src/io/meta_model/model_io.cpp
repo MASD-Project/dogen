@@ -31,6 +31,7 @@
 #include "dogen.assets/io/meta_model/structural/element_repository_io.hpp"
 #include "dogen.assets/io/meta_model/templating/element_repository_io.hpp"
 #include "dogen.assets/io/meta_model/variability/element_repository_io.hpp"
+#include "dogen.assets/io/meta_model/serialization/element_repository_io.hpp"
 
 namespace std {
 
@@ -128,7 +129,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"decoration_elements\": " << v.decoration_elements() << ", "
       << "\"variability_elements\": " << v.variability_elements() << ", "
       << "\"mapping_elements\": " << v.mapping_elements() << ", "
-      << "\"templating_elements\": " << v.templating_elements()
+      << "\"templating_elements\": " << v.templating_elements() << ", "
+      << "\"serialization_elements\": " << v.serialization_elements()
       << " }";
     return(s);
 }
