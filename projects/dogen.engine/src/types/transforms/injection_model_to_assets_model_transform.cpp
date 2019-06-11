@@ -234,6 +234,11 @@ process_element(const helpers::adapter& ad,
         insert(ad.to_logic_less_template(l, scr, e),
             m.templating_elements().logic_less_templates());
         break;
+    case static_stereotypes::serialization_type_registrar:
+        insert(ad.to_type_registrar(l, scr, e),
+            m.serialization_elements().type_registrars());
+        break;
+
     default: {
         const auto s(boost::lexical_cast<std::string>(et));
         BOOST_LOG_SEV(lg, error) << invalid_element_type << s;

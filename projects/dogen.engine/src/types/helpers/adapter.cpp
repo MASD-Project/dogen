@@ -514,4 +514,14 @@ adapter::to_logic_less_template(const assets::meta_model::location& l,
     return r;
 }
 
+boost::shared_ptr<assets::meta_model::serialization::type_registrar>
+adapter::to_type_registrar(const assets::meta_model::location& l,
+    const stereotypes_conversion_result& scr,
+    const injection::meta_model::element& ie) const {
+    using assets::meta_model::serialization::type_registrar;
+    auto r(boost::make_shared<type_registrar>());
+    populate_element(l, scr, ie, *r);
+    return r;
+}
+
 }

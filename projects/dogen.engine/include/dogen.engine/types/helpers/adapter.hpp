@@ -54,6 +54,7 @@
 #include "dogen.assets/types/meta_model/mapping/fixed_mappable.hpp"
 #include "dogen.assets/types/meta_model/mapping/extensible_mappable.hpp"
 #include "dogen.assets/types/meta_model/templating/logic_less_template.hpp"
+#include "dogen.assets/types/meta_model/serialization/type_registrar.hpp"
 #include "dogen.engine/types/helpers/stereotypes_conversion_result.hpp"
 
 namespace dogen::engine::helpers {
@@ -290,6 +291,15 @@ public:
      */
     boost::shared_ptr<assets::meta_model::templating::logic_less_template>
     to_logic_less_template(const assets::meta_model::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::meta_model::element& ie) const;
+
+    /**
+     * @brief Converts an injection element with a stereotype of
+     * masd::serialization::type_registrar to a logic-less template.
+     */
+    boost::shared_ptr<assets::meta_model::serialization::type_registrar>
+    to_type_registrar(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 };

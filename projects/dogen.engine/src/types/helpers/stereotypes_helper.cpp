@@ -67,6 +67,8 @@ const std::string stereotype_mapping_extensible_mappable(
     "masd::mapping::extensible_mappable");
 const std::string stereotype_templating_logic_less_templates(
     "masd::templating::logic_less_templates");
+const std::string stereotype_serialization_type_registrar(
+    "masd::serialization::type_registrar");
 
 const std::string unsupported_stereotype("Invalid or unsupported stereotype: ");
 
@@ -123,6 +125,8 @@ static_stereotypes stereotypes_helper::from_string(const std::string& s) const {
         return static_stereotypes::mapping_extensible_mappable;
     else if (s == stereotype_templating_logic_less_templates)
         return static_stereotypes::templating_logic_less_template;
+    else if (s == stereotype_serialization_type_registrar)
+        return static_stereotypes::serialization_type_registrar;
 
     BOOST_LOG_SEV(lg, debug) << "Could not convert stereotype."
                              << " Assuming dynamic.";
@@ -189,6 +193,8 @@ to_string(const static_stereotypes ss) const {
         return stereotype_mapping_extensible_mappable;
     case static_stereotypes::templating_logic_less_template:
         return stereotype_templating_logic_less_templates;
+    case static_stereotypes::serialization_type_registrar:
+        return stereotype_serialization_type_registrar;
 
     default: {
         const std::string s(boost::lexical_cast<std::string>(ss));
@@ -217,7 +223,8 @@ is_element_type(const static_stereotypes ss) const {
         ss == static_stereotypes::variability_feature_template_initializer ||
         ss == static_stereotypes::mapping_fixed_mappable ||
         ss == static_stereotypes::mapping_extensible_mappable ||
-        ss == static_stereotypes::templating_logic_less_template;
+        ss == static_stereotypes::templating_logic_less_template ||
+        ss == static_stereotypes::serialization_type_registrar;
 }
 
 std::list<static_stereotypes> stereotypes_helper::extract_element_types(
