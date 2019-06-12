@@ -89,6 +89,16 @@ struct traits {
      * @brief Name of the primitive implementation archetype.
      */
     static std::string primitive_implementation_archetype();
+
+    /**
+     * @brief Name of the type registrar header archetype.
+     */
+    static std::string type_registrar_header_archetype();
+
+    /**
+     * @brief Name of the type registrar implementation archetype.
+     */
+    static std::string type_registrar_implementation_archetype();
 };
 
 }

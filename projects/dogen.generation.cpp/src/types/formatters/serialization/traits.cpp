@@ -84,4 +84,14 @@ std::string traits::primitive_implementation_archetype() {
     return r;
 }
 
+std::string traits::type_registrar_header_archetype() {
+    static std::string r(traits::facet() + ".type_registrar_header");
+    return r;
+}
+
+std::string traits::type_registrar_implementation_archetype() {
+    static std::string r(traits::facet() + ".type_registrar_implementation");
+    return r;
+}
+
 }
