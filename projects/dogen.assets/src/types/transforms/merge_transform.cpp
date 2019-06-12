@@ -80,7 +80,10 @@ merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
                              << " modeline: " << src.decoration_elements().modelines().size()
                              << " generation markers: "
                              << src.decoration_elements().generation_markers().size()
-                             << " licences: " << src.decoration_elements().licences().size();
+                             << " licences: "
+                             << src.decoration_elements().licences().size()
+                             << " type registrars: "
+                             << src.serialization_elements().type_registrars().size();
 
     copy(src.structural_elements().modules(), dst.structural_elements().modules());
     copy(src.structural_elements().object_templates(), dst.structural_elements().object_templates());
@@ -96,6 +99,7 @@ merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
     copy(src.decoration_elements().licences(), dst.decoration_elements().licences());
     copy(src.mapping_elements().fixed_mappables(), dst.mapping_elements().fixed_mappables());
     copy(src.mapping_elements().extensible_mappables(), dst.mapping_elements().extensible_mappables());
+    copy(src.serialization_elements().type_registrars(), dst.serialization_elements().type_registrars());
 
     /*
      * Update the references of the merged model.
