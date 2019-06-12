@@ -25,24 +25,19 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.assets/types/features/type_parameters.hpp"
+#include "dogen.assets/types/meta_model/model.hpp"
+#include "dogen.assets/types/transforms/context_fwd.hpp"
 
 namespace dogen::assets::transforms {
 
+/**
+ * @brief Populates the type registrars with information from the
+ * model.
+ */
 class type_registrar_transform final {
 public:
-    type_registrar_transform() = default;
-    type_registrar_transform(const type_registrar_transform&) = default;
-    type_registrar_transform(type_registrar_transform&&) = default;
-    ~type_registrar_transform() = default;
-    type_registrar_transform& operator=(const type_registrar_transform&) = default;
-
-public:
-    bool operator==(const type_registrar_transform& rhs) const;
-    bool operator!=(const type_registrar_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }
