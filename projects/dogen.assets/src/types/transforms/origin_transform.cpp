@@ -44,6 +44,7 @@
 #include "dogen.assets/types/meta_model/variability/feature_template_initializer.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
 #include "dogen.assets/types/meta_model/templating/logic_less_template.hpp"
+#include "dogen.assets/types/meta_model/serialization/type_registrar.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
 #include "dogen.assets/types/transforms/transformation_error.hpp"
 #include "dogen.assets/types/transforms/origin_transform.hpp"
@@ -68,6 +69,7 @@ using namespace meta_model::structural;
 using namespace meta_model::decoration;
 using namespace meta_model::variability;
 using namespace meta_model::templating;
+using namespace meta_model::serialization;
 
 class updater {
 public:
@@ -79,22 +81,23 @@ public:
 
 public:
     void operator()(meta_model::element&) { }
-    void operator()(module& m) { update(m); }
-    void operator()(object_template& ot) { update(ot); }
-    void operator()(builtin& b) { update(b); }
-    void operator()(enumeration& e) { update(e); }
-    void operator()(primitive& p) { update(p); }
-    void operator()(object& o) { update(o); }
-    void operator()(exception& e) { update(e); }
+    void operator()(module& v) { update(v); }
+    void operator()(object_template& v) { update(v); }
+    void operator()(builtin& v) { update(v); }
+    void operator()(enumeration& v) { update(v); }
+    void operator()(primitive& v) { update(v); }
+    void operator()(object& v) { update(v); }
+    void operator()(exception& v) { update(v); }
     void operator()(visitor& v) { update(v); }
-    void operator()(modeline_group& mg) { update(mg); }
-    void operator()(modeline& m) { update(m); }
-    void operator()(generation_marker& gm) { update(gm); }
-    void operator()(licence& l) { update(l); }
-    void operator()(feature_template_initializer& fti) { update(fti); }
-    void operator()(feature_bundle& ftg) { update(ftg); }
-    void operator()(profile_template& pt) { update(pt); }
-    void operator()(logic_less_template& llt) { update(llt); }
+    void operator()(modeline_group& v) { update(v); }
+    void operator()(modeline& v) { update(v); }
+    void operator()(generation_marker& v) { update(v); }
+    void operator()(licence& v) { update(v); }
+    void operator()(feature_template_initializer& v) { update(v); }
+    void operator()(feature_bundle& v) { update(v); }
+    void operator()(profile_template& v) { update(v); }
+    void operator()(logic_less_template& v) { update(v); }
+    void operator()(type_registrar& v) { update(v); }
 
 private:
     const meta_model::origin_types origin_types_;
