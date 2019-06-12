@@ -3345,6 +3345,20 @@
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::serialization::type_registrar_header_formatter",
+      "stereotypes": [
+        "dogen::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::serialization::type_registrar_implementation_formatter",
+      "stereotypes": [
+        "dogen::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
