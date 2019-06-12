@@ -3077,7 +3077,7 @@ meta-types (object templates) and non-types (modules and backend specific entiti
             <dia:string>#references#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;name,origin_types&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;name, origin_types&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -39322,13 +39322,13 @@ At present the system only supports wale templates.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O291">
       <dia:attribute name="obj_pos">
-        <dia:point val="71,-67"/>
+        <dia:point val="70,-69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="70.95,-67.05;94.65,-61.75"/>
+        <dia:rectangle val="69.95,-69.05;93.65,-63.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="71,-67"/>
+        <dia:point val="70,-69"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="23.600000000000001"/>
@@ -39691,13 +39691,13 @@ generates the registration code as needed.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O294">
       <dia:attribute name="obj_pos">
-        <dia:point val="63,-77"/>
+        <dia:point val="71,-77"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="62.95,-77.05;95.89,-74.15"/>
+        <dia:rectangle val="70.95,-77.05;103.89,-74.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="63,-77"/>
+        <dia:point val="71,-77"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="32.839999999999996"/>
@@ -39862,19 +39862,19 @@ generates the registration code as needed.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="79.42,-74.2"/>
+        <dia:point val="87.42,-74.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="78.67,-74.95;83,-66.2503"/>
+        <dia:rectangle val="81.75,-74.95;88.17,-68.2459"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="79.42,-74.2"/>
-        <dia:point val="79.42,-70"/>
-        <dia:point val="82.8,-70"/>
-        <dia:point val="82.8,-67.0503"/>
+        <dia:point val="87.42,-74.2"/>
+        <dia:point val="87.42,-71"/>
+        <dia:point val="81.8,-71"/>
+        <dia:point val="81.8,-69.0459"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
