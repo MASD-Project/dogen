@@ -23,14 +23,14 @@
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.assets/types/traits.hpp"
-#include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
+#include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
 #include "dogen.assets/types/transforms/type_params_transform.hpp"
 
 namespace {
 
-const std::string transform_id("assets.type_params_transform");
+const std::string transform_id("assets.transforms.type_params_transform");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));

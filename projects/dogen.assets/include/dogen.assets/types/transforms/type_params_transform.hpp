@@ -25,15 +25,15 @@
 #pragma once
 #endif
 
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.assets/types/features/type_parameters.hpp"
-#include "dogen.assets/types/meta_model/type_parameters.hpp"
 #include "dogen.assets/types/meta_model/model.hpp"
 #include "dogen.assets/types/transforms/context_fwd.hpp"
 
 namespace dogen::assets::transforms {
 
+/**
+ * @brief Populates all type parameters across all objects.
+ */
 class type_params_transform final {
 private:
     static void populate_type_parameters(
