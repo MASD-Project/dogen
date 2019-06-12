@@ -39167,7 +39167,7 @@ code.
         <dia:point val="199,304"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="198.95,303.95;240.36,317.25"/>
+        <dia:rectangle val="198.95,303.95;240.36,318.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="199,304"/>
@@ -39176,7 +39176,7 @@ code.
         <dia:real val="41.310000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13.200000000000001"/>
+        <dia:real val="14.800000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#features#</dia:string>
@@ -39557,6 +39557,52 @@ code.
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.serialization.builtin_header.postfix#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#masd.generation.cpp.serialization.type_registrar_header.postfix#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#masd::variability::text#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#"tst"#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.serialization.type_registrar_header.postfix#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#masd.generation.cpp.serialization.type_registrar_implementation.postfix#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#masd::variability::text#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#"tst"#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.serialization.type_registrar_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

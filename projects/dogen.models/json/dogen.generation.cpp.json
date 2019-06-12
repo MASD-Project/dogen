@@ -2706,6 +2706,22 @@
           "tagged_values": {
             "masd.variability.qualified_name": "masd.generation.cpp.serialization.builtin_header.postfix"
           }
+        },
+        {
+          "name": "masd.generation.cpp.serialization.type_registrar_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"tst\"",
+          "tagged_values": {
+            "masd.variability.qualified_name": "masd.generation.cpp.serialization.type_registrar_header.postfix"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.serialization.type_registrar_implementation.postfix",
+          "type": "masd::variability::text",
+          "value": "\"tst\"",
+          "tagged_values": {
+            "masd.variability.qualified_name": "masd.generation.cpp.serialization.type_registrar_implementation.postfix"
+          }
         }
       ]
     },
