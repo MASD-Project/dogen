@@ -7189,6 +7189,16 @@ Features for which there is no urgency but we'd like to see them
 implemented at some point. They may require some alterations to the
 core, but not fundamental rethinking.
 
+
+*** Add support for the "badge" pattern                               :story:
+
+We should be able to implement this pattern in Dogen.
+
+Links:
+
+- [[https://awesomekling.github.io/Serenity-C++-patterns-The-Badge/][Serenity C++ patterns: The Badge]]
+- [[https://www.reddit.com/r/cpp/comments/bzjbu1/serenity_c_patterns_the_badge/][reddit discussion]]
+
 *** Consider adding a GIR/GObject injector                            :story:
 
 GIR seems to be yet another format that could be suitable for a dogen
