@@ -56,6 +56,8 @@ public:
     make_variability_feature_template_initializer_name();
     static meta_model::name
     make_templating_logic_less_templates_name();
+    static meta_model::name
+    make_serialization_type_registrar_name();
 };
 
 }

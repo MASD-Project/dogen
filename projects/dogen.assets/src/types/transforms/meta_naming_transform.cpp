@@ -28,6 +28,7 @@
 #include "dogen.assets/types/meta_model/variability/profile_template.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_template_initializer.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
+#include "dogen.assets/types/meta_model/serialization/type_registrar.hpp"
 #include "dogen.assets/types/meta_model/elements_traversal.hpp"
 #include "dogen.assets/types/meta_model/model.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
@@ -57,39 +58,39 @@ public:
          */
     }
 
-    void operator()(meta_model::structural::module& m) {
+    void operator()(meta_model::structural::module& v) {
         static const auto n(mnf::make_module_name());
-        m.meta_name(n);
+        v.meta_name(n);
     }
 
-    void operator()(meta_model::structural::object_template& ot) {
+    void operator()(meta_model::structural::object_template& v) {
         static const auto n(mnf::make_object_template_name());
-        ot.meta_name(n);
+        v.meta_name(n);
     }
 
-    void operator()(meta_model::structural::builtin& b) {
+    void operator()(meta_model::structural::builtin& v) {
         static const auto n(mnf::make_builtin_name());
-        b.meta_name(n);
+        v.meta_name(n);
     }
 
-    void operator()(meta_model::structural::enumeration& e) {
+    void operator()(meta_model::structural::enumeration& v) {
         static const auto n(mnf::make_enumeration_name());
-        e.meta_name(n);
+        v.meta_name(n);
     }
 
-    void operator()(meta_model::structural::primitive& p) {
+    void operator()(meta_model::structural::primitive& v) {
         static const auto n(mnf::make_primitive_name());
-        p.meta_name(n);
+        v.meta_name(n);
     }
 
-    void operator()(meta_model::structural::object& o) {
+    void operator()(meta_model::structural::object& v) {
         static const auto n(mnf::make_object_name());
-        o.meta_name(n);
+        v.meta_name(n);
     }
 
-    void operator()(meta_model::structural::exception& e) {
+    void operator()(meta_model::structural::exception& v) {
         static const auto n(mnf::make_exception_name());
-        e.meta_name(n);
+        v.meta_name(n);
     }
 
     void operator()(meta_model::structural::visitor& v) {
@@ -97,48 +98,51 @@ public:
         v.meta_name(n);
     }
 
-    void operator()(meta_model::decoration::licence& l) {
+    void operator()(meta_model::decoration::licence& v) {
         static const auto n(mnf::make_licence_name());
-        l.meta_name(n);
+        v.meta_name(n);
     }
 
-    void operator()(meta_model::decoration::modeline& ml) {
+    void operator()(meta_model::decoration::modeline& v) {
         static const auto n(mnf::make_modeline_name());
-        ml.meta_name(n);
+        v.meta_name(n);
     }
 
-    void operator()(meta_model::decoration::modeline_group& mg) {
+    void operator()(meta_model::decoration::modeline_group& v) {
         static const auto n(mnf::make_modeline_group_name());
-        mg.meta_name(n);
+        v.meta_name(n);
     }
 
-    void operator()(meta_model::decoration::generation_marker& gm) {
+    void operator()(meta_model::decoration::generation_marker& v) {
         static const auto n(mnf::make_generation_marker_name());
-        gm.meta_name(n);
+        v.meta_name(n);
     }
 
-    void operator()(meta_model::variability::profile_template& vpt) {
+    void operator()(meta_model::variability::profile_template& v) {
         static const auto n(mnf::make_variability_profile_template_name());
-        vpt.meta_name(n);
+        v.meta_name(n);
     }
 
-    void operator()(meta_model::variability::feature_bundle& vftg) {
+    void operator()(meta_model::variability::feature_bundle& v) {
         static const auto
             n(mnf::make_variability_feature_bundle_name());
-        vftg.meta_name(n);
+        v.meta_name(n);
     }
 
-    void operator()(meta_model::variability::
-        feature_template_initializer& vftgr) {
+    void operator()(meta_model::variability::feature_template_initializer& v) {
         static const auto
             n(mnf::make_variability_feature_template_initializer_name());
-        vftgr.meta_name(n);
+        v.meta_name(n);
     }
 
-    void operator()(assets::meta_model::templating::logic_less_template& llt) {
-        static const auto
-            n(mnf::make_templating_logic_less_templates_name());
-        llt.meta_name(n);
+    void operator()(assets::meta_model::templating::logic_less_template& v) {
+        static const auto n(mnf::make_templating_logic_less_templates_name());
+        v.meta_name(n);
+    }
+
+    void operator()(assets::meta_model::serialization::type_registrar& v) {
+        static const auto n(mnf::make_serialization_type_registrar_name());
+        v.meta_name(n);
     }
 };
 

@@ -125,7 +125,14 @@ make_variability_feature_template_initializer_name() {
 meta_model::name meta_name_factory::
 make_templating_logic_less_templates_name() {
     static const auto r(
-        make_name("templating_logic_less_templates_name"));
+        make_name("templating_logic_less_templates"));
+    return r;
+}
+
+meta_model::name meta_name_factory::
+make_serialization_type_registrar_name() {
+    static const auto r(
+        make_name("serialization_type_registrar"));
     return r;
 }
 
