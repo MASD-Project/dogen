@@ -34,6 +34,7 @@
 #include "dogen.assets/types/transforms/attributes_transform.hpp"
 #include "dogen.assets/types/transforms/associations_transform.hpp"
 #include "dogen.assets/types/transforms/meta_naming_transform.hpp"
+#include "dogen.assets/types/transforms/type_registrar_transform.hpp"
 #include "dogen.assets/types/transforms/post_assembly_chain.hpp"
 
 namespace {
@@ -129,6 +130,13 @@ void post_assembly_chain::apply(const context& ctx, meta_model::model& m) {
      * populated.
      */
     associations_transform::apply(ctx, m);
+
+    /*
+     * We leave the type registrar transform for last, but in reality
+     * we could probably do it earlier. It only needs leaves
+     * (generalisation) and origin (from the pre-assembly chain).
+     */
+    type_registrar_transform::apply(ctx, m);
 
     /*
      * Ensure the model is valid.
