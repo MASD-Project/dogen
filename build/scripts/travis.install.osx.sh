@@ -49,3 +49,9 @@ csharp_ref_impl_output_location="/tmp/csharp_ref_impl.zip"
 csharp_ref_impl_extract_dir="/tmp"
 curl -L -o ${csharp_ref_impl_output_location} ${csharp_ref_impl_input_location}
 unzip -q ${csharp_ref_impl_output_location} -d ${csharp_ref_impl_extract_dir}
+
+#
+# Upgrade CMake
+#
+brew update
+brew upgrade cmake
