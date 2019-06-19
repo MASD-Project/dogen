@@ -11,21 +11,22 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-06-11 Tue 22:52]
+#+CAPTION: Clock summary at [2019-06-19 Wed 16:48]
 | <75>                                               |         |       |      |       |
 | Headline                                           | Time    |       |      |     % |
 |----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                       | *17:59* |       |      | 100.0 |
+| *Total time*                                       | *23:53* |       |      | 100.0 |
 |----------------------------------------------------+---------+-------+------+-------|
-| Stories                                            | 17:59   |       |      | 100.0 |
-| Active                                             |         | 17:59 |      | 100.0 |
-| Edit release notes for previous sprint             |         |       | 3:36 |  20.0 |
-| Create a demo and presentation for previous sprint |         |       | 1:39 |   9.2 |
-| Sprint and product backlog grooming                |         |       | 2:30 |  13.9 |
-| Remove test model sanitizer                        |         |       | 0:20 |   1.9 |
-| Remove master headers                              |         |       | 1:12 |   6.7 |
-| Move registrar into assets                         |         |       | 3:05 |  17.1 |
-| Org-mode as a carrier format for modeling          |         |       | 5:37 |  31.2 |
+| Stories                                            | 23:53   |       |      | 100.0 |
+| Active                                             |         | 23:53 |      | 100.0 |
+| Edit release notes for previous sprint             |         |       | 3:36 |  15.1 |
+| Create a demo and presentation for previous sprint |         |       | 1:39 |   6.9 |
+| Sprint and product backlog grooming                |         |       | 2:30 |  10.5 |
+| Remove test model sanitizer                        |         |       | 0:20 |   1.4 |
+| Remove master headers                              |         |       | 1:12 |   5.0 |
+| Fix the issues with tests in reference model       |         |       | 3:53 |  16.3 |
+| Move registrar into assets                         |         |       | 5:06 |  21.4 |
+| Org-mode as a carrier format for modeling          |         |       | 5:37 |  23.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -353,8 +354,27 @@ will make even more sense when we code-generate the types instead of
 using JSON. Then we can hook up the generated code to the
 initialisers.
 
+*** COMPLETED Fix the issues with tests in reference model            :story:
+    CLOSED: [2019-06-19 Wed 16:48]
+    :LOGBOOK:
+    CLOCK: [2019-06-18 Tue 20:02]--[2019-06-18 Tue 23:55] =>  3:53
+    :END:
+
+It seems when we added the tests in the test model, we did not enable
+them for all models: we skipped a few, probably because we started
+seeing lots of compilation errors. However, now that we need to test
+serialisation with the new registrar, we need those tests. We need to
+go back and figure out why the tests where failing and fix them.
+
+Notes:
+
+- immutability issues: some tests cannot run if a type is immutable
+  (e.g. assignment, etc).
+- issues with the new tests facet directory and destination.
+
 *** STARTED Move registrar into assets                                :story:
     :LOGBOOK:
+    CLOCK: [2019-06-12 Wed 15:08]--[2019-06-12 Wed 17:09] =>  2:01
     CLOCK: [2019-06-11 Tue 21:31]--[2019-06-11 Tue 22:52] =>  1:21
     CLOCK: [2019-06-11 Tue 11:57]--[2019-06-11 Tue 12:20] =>  0:23
     CLOCK: [2019-06-11 Tue 11:52]--[2019-06-11 Tue 11:56] =>  0:04
@@ -385,6 +405,9 @@ Notes:
   not on the referenced models themselves. We need to know which
   models we referenced directly, and then find the registrars for
   those models.
+- leaves need to know of the registrar. This is so that we can call it
+  in their generated tests. We could use the registrar transform to go
+  and find all leaves and populate their registrar name.
 
 *** Replace =operator<= for sorting with lambdas                      :story:
 
@@ -425,6 +448,12 @@ Links:
 - [[https://orgmode.org/worg/dev/org-element-api.html][Org Element API]]
 - [[https://github.com/ngortheone/org-rs][org-rs]]: rust library for org-mode.
 - [[https://github.com/felipealmeida/orgmode-parsers][orgmode-parsers]]
+
+*** CMakeFiles do not reference dogen models                          :story:
+
+At present we cannot test cross-model referencing because our
+CMakeFiles are not adding the linking references to these models. This
+needs to be fixed before we can test cross model serialisation.
 
 *** Move fabric types into coding                                     :story:
 
