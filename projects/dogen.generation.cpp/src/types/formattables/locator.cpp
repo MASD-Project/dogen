@@ -27,6 +27,7 @@
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
+#include "dogen.generation.cpp/io/formattables/locator_configuration_io.hpp"
 #include "dogen.generation.cpp/types/formattables/location_error.hpp"
 #include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
@@ -70,7 +71,10 @@ locator::locator(
       headers_project_path_(compute_headers_path(output_directory_path,
               project_path_, cpp_headers_output_directory_path)),
       templates_project_path_(compute_templates_path(project_path_)),
-      split_mode_(!cpp_headers_output_directory_path.empty()) {}
+      split_mode_(!cpp_headers_output_directory_path.empty()) {
+
+    BOOST_LOG_SEV(lg, debug) << "Configuration: " << configuration_;
+}
 
 locator::feature_group
 locator::make_feature_group(const variability::meta_model::feature_model& fm,
