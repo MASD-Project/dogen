@@ -201,6 +201,9 @@ BOOST_AUTO_TEST_CASE(distinct_objects_are_unequal) {
     BOOST_CHECK(a != b);
 }
 
+<#+
+                if (!o.is_immutable()) {
+#>
 BOOST_AUTO_TEST_CASE(assigning_an_object_to_itself_results_in_the_same_object) {
 #if defined(__clang__) && !defined(__apple_build_version__)  && (__clang_major__ >= 7)
 #pragma clang diagnostic push
@@ -220,8 +223,10 @@ BOOST_AUTO_TEST_CASE(assigning_an_object_to_itself_results_in_the_same_object) {
 }
 
 <#+
-        // FIXME: should be 11 or greater.
-        if (!a.is_cpp_standard_98()) {
+                }
+
+                // FIXME: should be 11 or greater.
+                if (!a.is_cpp_standard_98()) {
 #>
 BOOST_AUTO_TEST_CASE(moved_objects_are_equal) {
     <#= qn #>_generator g;
@@ -236,10 +241,12 @@ BOOST_AUTO_TEST_CASE(moved_objects_are_equal) {
     BOOST_CHECK(d == c);
     BOOST_CHECK(d != b);
 }
-<#+
-        }
-#>
 
+<#+
+                }
+
+                if (!o.is_immutable()) {
+#>
 BOOST_AUTO_TEST_CASE(assigned_objects_are_equal) {
     <#= qn #>_generator g;
     g();
@@ -278,6 +285,7 @@ BOOST_AUTO_TEST_CASE(swapping_objects_results_in_the_expected_state) {
 }
 
 <#+
+                }
             }
 
             if (a.is_io_enabled()) {

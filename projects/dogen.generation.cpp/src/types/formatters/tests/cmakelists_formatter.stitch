@@ -89,7 +89,7 @@ set(tests_target_name ${name}.tests)
 set(files "")
 file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
-    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.<#= c.implementation_file_extension() #>")
 
 add_executable(${tests_target_name} ${files})
 

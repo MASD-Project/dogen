@@ -579,7 +579,8 @@ boost::filesystem::path locator::make_full_path_for_tests_cpp_main(
     const auto extension(cfg.implementation_file_extension());
 
     // FIXME: hack
-    const auto facet_path(make_facet_path_temp(archetype, "main.cpp", n));
+    const auto facet_path(make_facet_path_temp(archetype,
+            "main." + extension, n));
     r /= facet_path;
 
     return r;

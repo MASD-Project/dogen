@@ -215,6 +215,7 @@ a.stream() << "    BOOST_CHECK(!(a == b));" << std::endl;
 a.stream() << "    BOOST_CHECK(a != b);" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
+                if (!o.is_immutable()) {
 a.stream() << "BOOST_AUTO_TEST_CASE(assigning_an_object_to_itself_results_in_the_same_object) {" << std::endl;
 a.stream() << "#if defined(__clang__) && !defined(__apple_build_version__)  && (__clang_major__ >= 7)" << std::endl;
 a.stream() << "#pragma clang diagnostic push" << std::endl;
@@ -233,8 +234,10 @@ a.stream() << "#pragma clang diagnostic pop" << std::endl;
 a.stream() << "#endif" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
-        // FIXME: should be 11 or greater.
-        if (!a.is_cpp_standard_98()) {
+                }
+
+                // FIXME: should be 11 or greater.
+                if (!a.is_cpp_standard_98()) {
 a.stream() << "BOOST_AUTO_TEST_CASE(moved_objects_are_equal) {" << std::endl;
 a.stream() << "    " << qn << "_generator g;" << std::endl;
 a.stream() << "    g();" << std::endl;
@@ -248,8 +251,10 @@ a.stream() << "    const " << type_name << " d = std::move(a);" << std::endl;
 a.stream() << "    BOOST_CHECK(d == c);" << std::endl;
 a.stream() << "    BOOST_CHECK(d != b);" << std::endl;
 a.stream() << "}" << std::endl;
-        }
 a.stream() << std::endl;
+                }
+
+                if (!o.is_immutable()) {
 a.stream() << "BOOST_AUTO_TEST_CASE(assigned_objects_are_equal) {" << std::endl;
 a.stream() << "    " << qn << "_generator g;" << std::endl;
 a.stream() << "    g();" << std::endl;
@@ -287,6 +292,7 @@ a.stream() << "    BOOST_CHECK(c == b);" << std::endl;
 a.stream() << "    BOOST_CHECK(d == a);" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
+                }
             }
 
             if (a.is_io_enabled()) {
