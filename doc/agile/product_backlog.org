@@ -4493,7 +4493,7 @@ Registrar coming out even when there is no inheritance.
 At present we are assuming that all references that are nom-proxy
 references have serialisation enabled. This is a problem because:
 
-- we re now disabling serialisation where possible unless we need it
+- we are now disabling serialisation where possible unless we need it
 - as we move from the data directory into real models we will have a
   number of models that will not require generation and so will not
   have a registrar.
@@ -12473,6 +12473,14 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Consider adding support for BERT                                  :story:
+
+It seems this is yet another RPC framework.
+
+Links:
+
+- [[http://bert-rpc.org/][specification]]
 
 *** LSP daemon for MOP                                                :story:
 

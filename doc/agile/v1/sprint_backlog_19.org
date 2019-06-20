@@ -449,11 +449,33 @@ Links:
 - [[https://github.com/ngortheone/org-rs][org-rs]]: rust library for org-mode.
 - [[https://github.com/felipealmeida/orgmode-parsers][orgmode-parsers]]
 
-*** CMakeFiles do not reference dogen models                          :story:
+*** =CMakeFiles= do not reference dogen models                        :story:
 
 At present we cannot test cross-model referencing because our
 CMakeFiles are not adding the linking references to these models. This
 needs to be fixed before we can test cross model serialisation.
+
+Notes:
+
+- in order to map references to models, we need to create a modeling
+  element for a reference. For this we have two cases: for proxy
+  models/PDMs, we need to read from the meta-data the name of the lib
+  the model generates. For dogen models we can create it from the
+  model name.
+- this is a variation of the "exports and imports" pattern: we import
+  a set of libraries (these can either be macros or actual library
+  names) and we export (for now) a single library. When we support
+  facets in libraries, we may need to export more than one, so we
+  should cope with this scenario now. We need to keep track of the
+  exports for a reference, and then use those as the imports for the
+  model.
+- in an ideal world, all imports come via this mechanism. However,
+  this means we now have to create PDMs/proxies just to setup the
+  imports. For example, for LibXML we will not need to define any of
+  the types, but we need the import. However, If we do force the
+  definition of the PDM, the advantage is that we now have the right
+  place to put the definition, and is done only once and shared by all
+  models.
 
 *** Move fabric types into coding                                     :story:
 
