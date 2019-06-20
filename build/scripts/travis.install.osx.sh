@@ -53,5 +53,4 @@ unzip -q ${csharp_ref_impl_output_location} -d ${csharp_ref_impl_extract_dir}
 #
 # Upgrade CMake
 #
-brew update
 brew upgrade cmake
