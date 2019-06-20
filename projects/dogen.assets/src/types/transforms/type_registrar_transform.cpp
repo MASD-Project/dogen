@@ -22,6 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
+#include "dogen.assets/io/meta_model/origin_types_io.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
 #include "dogen.assets/types/transforms/transformation_error.hpp"
 #include "dogen.assets/types/meta_model/serialization/type_registrar.hpp"
@@ -59,14 +60,16 @@ void type_registrar_transform::apply(const context& ctx, meta_model::model& m) {
     boost::shared_ptr<type_registrar> target_registrar;
     for (auto& pair : m.serialization_elements().type_registrars()) {
         auto& rg(*pair.second);
+        const auto id(rg.name().qualified().dot());
+        BOOST_LOG_SEV(lg, debug) << "Processing registrar: " << id;
+
         /*
          * If we are in the presence of the registrar for the target
          * model, we want to populate all of its data fields.
          */
         const auto ot(rg.origin_type());
-        const auto id(rg.name().qualified().dot());
         if (ot == origin_types::target) {
-            BOOST_LOG_SEV(lg, debug) << "Processing target registrar: " << id;
+            BOOST_LOG_SEV(lg, debug) << "Target model registrar.";
 
             /*
              * There can only be one target registrar.
@@ -94,8 +97,7 @@ void type_registrar_transform::apply(const context& ctx, meta_model::model& m) {
                     return a.qualified().dot() < b.qualified().dot();
                 });
         } else if (ot == origin_types::non_proxy_reference) {
-            BOOST_LOG_SEV(lg, debug) << "Processing reference registrar: "
-                                     << rg.name().qualified().dot();
+            BOOST_LOG_SEV(lg, debug) << "Non-proxy reference registrar.";
 
             /*
              * Figure out if this registrar belongs to a model that
@@ -113,12 +115,15 @@ void type_registrar_transform::apply(const context& ctx, meta_model::model& m) {
                     referenced_registrars.push_back(p);
                 }
             }
+        } else {
+            /*
+             * No work to do for proxy models (Platform Definition Models)
+             * as they do not have registration requirements for now.
+             */
+            BOOST_LOG_SEV(lg, debug) << "Ignoring registrar with other origin: "
+                                     << ot;
         }
 
-        /*
-         * No work to do for proxy models (Platform Definition Models)
-         * as they do not have registration requirements for now.
-         */
     }
 
     /*
