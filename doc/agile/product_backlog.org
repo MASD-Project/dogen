@@ -637,6 +637,72 @@ Other problems:
   parameterisation of mapping targets, but we are yet to have a use
   case for such a complex scenario so its probably not worth worrying
   about it.
+- mappings and overrides is a complex issue. Some of the problems we
+  have are:
+  - assume you can define mapping overrides; how do you determine
+    their scope? Do the overrides work only for one of the loaded
+    models or all the loaded models? Can you apply overrides to a
+    single package? What happens when you have a model set with
+    multiple overrides?
+
+The fundamental problem appears to be that we need a good use case for
+model mapping. At present we haven't got one so there are too many
+possibilities for the implementation. If we do decide to go forward
+with the clean up, we should first read up on the literature and then
+settle on a subset of functionality that we can reasonably "make up" a
+use case for. For example, its useful not to have to define test
+models for all languages we support. It would be much nicer if we
+could have the "core" test model, testing inheritance, association,
+composition and the like, defined in LAM and reused across all
+supported output technical spaces.
+
+Notes:
+
+- perhaps the correct solution is to have two different kinds of
+  modeling elements related to mapping:
+  - the "abstract" element which is in effect a place holder and must
+    belong to an abstract technical space such as LAM;
+  - the "mapping" element, which is defined against a concrete
+    technical space such as C++. Each attribute of the mapping element
+    is a mapping between an abstract element and a concrete element.
+
+Merged stories:
+
+*Allow users to override mapping sets at the element level*
+
+Sometimes we may want to use a different mapping just for a particular
+element. For example, by default =lam::linked_list= binds to
+=std::list= for C++; once Dogen supports =std::forward_list=, one may
+want to override this for a partial number of elements. It would be
+nice if one could have a meta-data tag at the attribute level that
+would override the mapping. The one slight wrinkle is that we would
+not be able to supply a breakdown of:
+
+- simple name
+- model name
+- internal modules
+
+and so forth. So this may cause issues for resolution. We'd have to
+test it and see what breaks. Actually this may just work, The current
+mappings in LAM take the form of:
+
+: "masd.mapping.target": "masd.lam.numeric.integer8",
+
+This is placed in the source of the mapping. We could allow mapping
+overrides locally by letting users define both the source and the
+target of a mapping in the context of the attribute. Then, during
+mapping, we could use these overrides only in the function that maps
+the attribute: e.g. read the local attribute override, override a
+local copy of the map, then apply the mapping. The changes are only
+local to the override. The problem of global overrides must be tackled
+elsewhere.
+
+If this fails, the alternative is that the mapping is by id, and we'd
+resolve it internally using the mapping container, e.g.:
+
+- create a map of names for each language by id
+- user supplies the id for a given language, we look it up and
+  retrieve the name.
 
 *** Improve resolution errors when user fails to reference model      :story:
 
@@ -3140,30 +3206,20 @@ Notes:
   facet directory so that we can place types above the facet
   directories such as SLNs, CMakeLists, etc.
 
-*** Allow users to override mapping sets at the element level :review:story:
+*** Create the concept of a technical space version                   :story:
 
-Sometimes we may want to use a different mapping just for a particular
-element. For example, by default =lam::linked_list= binds to
-=std::list= for C++; once Dogen supports =std::forward_list=, one may
-want to override this for a partial number of elements. It would be
-nice if one could have a meta-data tag at the attribute level that
-would override the mapping. The one slight wrinkle is that we would
-not be able to supply a breakdown of:
+We need a simple way to compare versions of technical spaces and have
+them mapped into "identifiers" that users can relate to. For example,
+C++ versions such as C++ 98 etc are the identifier; we should also
+have a simple natural number mapping for each of these. We also need
+to take into account the TRs - e.g. a type may be defined on a TR but
+not be available on a version.
 
-- simple name
-- model name
-- internal modules
+This should be done when we add technical spaces to the meta-model.
 
-and so forth. So this may cause issues for resolution. We'd have to
-test it and see what breaks. If this fails, the alternative is that
-the mapping is by id, and we'd resolve it internally using the mapping
-container, e.g.:
+Merged stories:
 
-- create a map of names for each language by id
-- user supplies the id for a given language, we look it up and
-  retrieve the name.
-
-*** Drop the "c++-" prefix in meta-data for standard                  :story:
+*Drop the "c++-" prefix in meta-data for standard*
 
 At present we do:
 
@@ -3171,7 +3227,7 @@ At present we do:
 
 The "c++-" seems a bit redundant.
 
-*** Add a C++ version to types                                        :story:
+*** Add a C++ version to types                              :reviewing:story:
 
 Not all system model types are available for all versions. This
 applies to the C++ standard (e.g. 98, 11, 14 etc) but also to
