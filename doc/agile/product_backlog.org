@@ -9100,7 +9100,11 @@ Links:
 
 - https://brandur.org/graphql
 - https://github.com/graphql/libgraphqlparser
+- https://github.com/microsoft/cppgraphqlgen
 - http://graphql.github.io/learn/queries/
+- https://github.com/DavidUser/GraphQL-Cpp
+- https://github.com/caffeinetv/CaffQL
+- https://github.com/chentsulin/awesome-graphql
 
 *** Consider adding support for compile time mocking                  :story:
 
