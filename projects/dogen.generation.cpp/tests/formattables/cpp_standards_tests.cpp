@@ -20,6 +20,7 @@
  */
 #include <string>
 #include <sstream>
+#include <boost/predef.h>
 #include <boost/lexical_cast.hpp>
 #include <boost/test/unit_test.hpp>
 #include <boost/property_tree/ptree.hpp>

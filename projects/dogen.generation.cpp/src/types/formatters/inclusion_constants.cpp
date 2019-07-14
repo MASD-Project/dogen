@@ -77,6 +77,11 @@ std::string inclusion_constants::boost::lexical_cast() {
     return r;
 }
 
+std::string inclusion_constants::boost::predef() {
+    static ::std::string r("<boost/predef.h>");
+    return r;
+}
+
 std::string inclusion_constants::boost::property_tree::ptree() {
     static ::std::string r("<boost/property_tree/ptree.hpp>");
     return r;

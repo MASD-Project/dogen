@@ -80,6 +80,7 @@ std::list<std::string> enum_implementation_formatter::inclusion_dependencies(
     using ic = inclusion_constants;
     builder.add(ic::std::string());
     builder.add(ic::boost::test::unit_test());
+    builder.add(ic::boost::predef());
 
     const auto io_arch(io::traits::enum_header_archetype());
     const bool io_enabled(builder.is_enabled(e.name(), io_arch));
