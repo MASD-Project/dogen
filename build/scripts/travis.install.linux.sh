@@ -62,8 +62,11 @@ if [ "$CXX" == "clang++" ]; then
     sudo apt-get install --allow-unauthenticated -qq clang-${version}
     which clang-${version}
     export CXX="clang++-${version}" CC="clang-${version}"
-fi
 
+    # Need to update GCC in order to get headers for clang.
+    version="8"
+    sudo apt-get install -qq g++-${version}
+fi
 
 #
 # Boost
