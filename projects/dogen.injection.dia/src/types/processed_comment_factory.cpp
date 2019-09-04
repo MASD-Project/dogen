@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include <string_view>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
@@ -33,9 +34,10 @@ namespace {
 
 auto lg(logger_factory("injection.dia.processed_comment_factory"));
 
-const std::string empty;
-const std::string instruction_marker("#DOGEN ");
-const std::string equals("=");
+constexpr std::string_view empty;
+constexpr std::string_view instruction_marker("#DOGEN ");
+constexpr std::string_view equals("=");
+
 const std::string separator_not_found("Expected separator on KVP.");
 
 }

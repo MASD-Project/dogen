@@ -20,6 +20,7 @@
  */
 #include <memory>
 #include <sstream>
+#include <string_view>
 #include <functional>
 #include <boost/optional.hpp>
 #include <boost/lexical_cast.hpp>
@@ -40,13 +41,13 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("templating.stitch.parser"));
 
-const std::string empty;
-const std::string equals("=");
-const std::string start_expression_block_marker("<#=");
-const std::string start_standard_control_block_marker("<#+");
-const std::string start_directive_marker("<#@");
-const std::string start_variable_marker("<#$");
-const std::string end_block_marker("#>");
+constexpr std::string_view empty;
+constexpr std::string_view equals("=");
+constexpr std::string_view start_expression_block_marker("<#=");
+constexpr std::string_view start_standard_control_block_marker("<#+");
+constexpr std::string_view start_directive_marker("<#@");
+constexpr std::string_view start_variable_marker("<#$");
+constexpr std::string_view end_block_marker("#>");
 
 const std::string error_msg("Failed to parse string: ");
 const std::string cannot_start_expression_block(

@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <string_view>
 #include <boost/algorithm/string.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.assets/types/helpers/string_processor.hpp"
@@ -27,14 +28,14 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("assets.helpers.string_processor"));
 
-const std::string empty;
-const std::string comma(",");
-const std::string dot(".");
-const std::string space(" ");
-const std::string less_than("<");
-const std::string more_than(">");
-const std::string separator("_");
-const std::string scope_operator("::");
+constexpr std::string_view empty;
+constexpr std::string_view comma(",");
+constexpr std::string_view dot(".");
+constexpr std::string_view space(" ");
+constexpr std::string_view less_than("<");
+constexpr std::string_view more_than(">");
+constexpr std::string_view separator("_");
+constexpr std::string_view scope_operator("::");
 
 }
 

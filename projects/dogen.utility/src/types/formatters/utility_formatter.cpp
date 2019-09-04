@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <string_view>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
@@ -31,14 +32,15 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("utility.formatters.utility_formatter"));
 
-const std::string space(" ");
-const std::string inserter("<<");
-const std::string single_quote("'");
-const std::string double_quote("\"");
-const std::string single_quote_escaped("\\\'");
-const std::string double_quote_escaped("\\\"");
-const std::string escape("\\");
-const std::string escape_escaped("\\\\");
+constexpr std::string_view space(" ");
+constexpr std::string_view inserter("<<");
+constexpr std::string_view single_quote("'");
+constexpr std::string_view double_quote("\"");
+constexpr std::string_view single_quote_escaped("\\\'");
+constexpr std::string_view double_quote_escaped("\\\"");
+constexpr std::string_view escape("\\");
+constexpr std::string_view escape_escaped("\\\\");
+
 const std::string unsupported_quote_type("Invalid or unsupported quote type: ");
 
 }
