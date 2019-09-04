@@ -541,6 +541,11 @@ Notes:
   place to put the definition, and is done only once and shared by all
   models.
 
+*** Add string view to dogen exception constructor
+
+At present we cannot build an exception if the string passed in is a
+string view.
+
 *** Move fabric types into coding                                     :story:
 
 Fabric types need to be tidied up and moved into coding as regular

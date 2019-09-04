@@ -2524,6 +2524,7 @@ Links:
 
 - [[https://www.bfilipek.com/2018/10/strings17talk.html][Let's Talk About String Operations in C++17]]
 - [[https://developercommunity.visualstudio.com/content/problem/24487/constexpr-stdstring-view-from-string-literal.html][constexpr std::string_view from string literal]]
+- [[https://www.reddit.com/r/cpp/comments/cw35kk/best_practices_for_efficient_string_constants/][Best practices for efficient string constants]]
 
 *** Create a archetypes locator                                       :story:
 
@@ -7759,6 +7760,10 @@ available:
   layout. In particular, see [[https://build2.org/build2-toolchain/doc/build2-toolchain-intro.xhtml#proj-struct][Canonical Project Structure]].
 - GNU: gnu projects seem to have a well-defined structure, if not the
   most sensible.
+- [[https://www.reddit.com/r/cpp/comments/cvuywh/structuring_your_code_in_directories/][Structuring your code in directories]]
+- [[https://api.csswg.org/bikeshed/?force=1&url=https://raw.githubusercontent.com/vector-of-bool/pitchfork/develop/data/spec.bs#src.layout][The Pitchfork Layout (PFL)]]
+- [[https://www.boost.org/development/requirements.html#Organization][Boost: Organization]]
+- [[https://hiltmon.com/blog/2013/07/03/a-simple-c-plus-plus-project-structure/][A Simple C++ Project Structure]]
 
 *Product Model*
 
