@@ -27,6 +27,7 @@
 
 #include <string>
 #include <sstream>
+#include <string_view>
 #include "dogen.assets/types/meta_model/name.hpp"
 #include "dogen.assets/types/helpers/separators.hpp"
 
@@ -42,7 +43,7 @@ private:
         const bool model_name_mode) const;
 
 private:
-    void print_scoped(const std::string& separator,
+    void print_scoped(std::string_view separator,
         const std::list<std::string>& l);
     void print_enclosed(const std::list<std::string>& l);
 

@@ -15,9 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
+ * MA 02110-1301, USA#include <string_view>.
  *
  */
+#include <string_view>
 #include <boost/filesystem/operations.hpp>
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen/io/configuration_io.hpp"
@@ -28,9 +29,12 @@ namespace  {
 using namespace dogen::utility::log;
 auto lg(logger_factory("mock_configuration_factory"));
 
+constexpr std::string_view dot(".");
+constexpr std::string_view run_identifier_prefix("tests.");
+
 const std::string byproduct_directory("dogen.byproducts/");
 const std::string tracing_directory("tracing");
-const std::string run_identifier_prefix("tests.");
+
 
 }
 
@@ -62,7 +66,7 @@ make(const boost::filesystem::path& target, const std::string& activity) const {
 
     const auto fn(target.filename().string());
     if (!fn.empty())
-        s << "." << fn;
+        s << dot << fn;
 
     const auto run_id(s.str());
     using boost::filesystem::absolute;

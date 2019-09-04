@@ -20,6 +20,7 @@
  */
 #include <iomanip>
 #include <iostream>
+#include <string_view>
 #include <boost/program_options.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/operations.hpp>

@@ -28,12 +28,13 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("assets.helpers.pretty_printer"));
 
-const char space(' ');
-const std::string comma_space(", ");
-const std::string double_colon("::");
-const std::string dot(".");
-const char less_than('<');
-const char greater_than('>');
+constexpr char space(' ');
+constexpr std::string_view comma_space(", ");
+constexpr std::string_view double_colon("::");
+constexpr std::string_view dot(".");
+constexpr char less_than('<');
+constexpr char greater_than('>');
+
 const std::string unsupported_separator("Unsupported separator");
 const std::string empty_child("Attempt to add an empty child.");
 
@@ -86,7 +87,7 @@ void pretty_printer::print_enclosed(const std::list<std::string>& l) {
 }
 
 void pretty_printer::
-print_scoped(const std::string& separator, const std::list<std::string>& l) {
+print_scoped(std::string_view separator, const std::list<std::string>& l) {
     bool is_first(true);
 
     for (const auto& c : l) {

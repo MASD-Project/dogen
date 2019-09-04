@@ -19,6 +19,7 @@
  *
  */
 #include <array>
+#include <string_view>
 #include <algorithm>
 #include <unordered_set>
 #include <boost/throw_exception.hpp>
@@ -46,7 +47,7 @@ const std::regex loose_name_regex("^[a-zA-Z_][\\-\\.a-zA-Z0-9_]*$");
  * FIXME: we've removed the following keywords for now because masd
  * uses these terms: "module"
  */
-std::array<std::string, 81> cpp_reserved = { {
+constexpr std::array<std::string_view, 81> cpp_reserved = { {
         "alignas", "alignof", "and", "and_eq", "asm", "atomic_cancel",
         "atomic_commit", "atomic_noexcept", "auto", "bitand", "bitor",
         "break", "case", "catch", "class", "compl", "const",
@@ -63,7 +64,7 @@ std::array<std::string, 81> cpp_reserved = { {
         "concept"
     } };
 
-std::array<std::string, 11> cpp_builtins = { {
+constexpr std::array<std::string_view, 11> cpp_builtins = { {
     "char16_t", "char32_t", "unsigned", "bool", "char", "double", "float",
     "int", "long", "short", "signed"
     }
@@ -73,7 +74,7 @@ std::array<std::string, 11> cpp_builtins = { {
  * FIXME: we've removed the following keywords for now because test
  * models use these terms: "base".
  */
-std::array<std::string, 64> csharp_reserved = { {
+constexpr std::array<std::string_view, 64> csharp_reserved = { {
         "abstract", "as", "break",
         "case", "catch", "checked", "class",
         "const", "continue", "default", "delegate",
@@ -99,7 +100,7 @@ std::array<std::string, 64> csharp_reserved = { {
  * - "object": masd
  * - "string": std
  */
-std::array<std::string, 12> csharp_builtins = { {
+constexpr std::array<std::string_view, 12> csharp_builtins = { {
         "byte", "bool", "char", "double", "float", "int", "long",
         "sbyte", "short",  "uint", "ulong", "ushort"
     }
