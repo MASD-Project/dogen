@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
+ * MA 02110-1301, USA#include <string_view>.
  *
  */
 #include <boost/algorithm/string/replace.hpp>
@@ -39,7 +39,13 @@ std::string formatter::format(const text_template& tt) const {
     for (const auto& pair : tt.properties().supplied_kvps()) {
         const auto key(wrap_key(pair.first));
         const auto& value(pair.second);
-        boost::replace_all(r, key, value);
+
+        // For some reason replace_all does not seem to work correctly
+        // on clang debug, _sometimes_, when we use strings rather
+        // than literals. This rather puzzling behaviour started when
+        // we upgraded to kernel 5.2 with all dependencies otherwise
+        // unchanged.
+        boost::replace_all(r, key.c_str(), value.c_str());
     }
     return r;
 }
