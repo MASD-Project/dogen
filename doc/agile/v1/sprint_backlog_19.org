@@ -541,7 +541,28 @@ Notes:
   place to put the definition, and is done only once and shared by all
   models.
 
-*** Add string view to dogen exception constructor
+*** STARTED Update static strings to string views                     :story:
+    :LOGBOOK:
+    CLOCK: [2019-09-04 Wed 19:20]--[2019-09-04 Wed 19:47] =>  0:27
+    CLOCK: [2019-09-04 Wed 18:45]--[2019-09-04 Wed 19:19] =>  0:34
+    :END:
+
+Now we're on C++17 we can start making use of its new features. One
+low hanging fruit is string view. We use static strings quite a lot
+for logging etc. We can just replace these with string views.
+
+Example:
+
+: #include <string_view>
+: constexpr std::string_view foo("abc");
+
+Links:
+
+- [[https://www.bfilipek.com/2018/10/strings17talk.html][Let's Talk About String Operations in C++17]]
+- [[https://developercommunity.visualstudio.com/content/problem/24487/constexpr-stdstring-view-from-string-literal.html][constexpr std::string_view from string literal]]
+- [[https://www.reddit.com/r/cpp/comments/cw35kk/best_practices_for_efficient_string_constants/][Best practices for efficient string constants]]
+
+*** Add string view to dogen exception constructor                    :story:
 
 At present we cannot build an exception if the string passed in is a
 string view.

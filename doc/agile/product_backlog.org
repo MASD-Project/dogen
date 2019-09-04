@@ -2509,23 +2509,6 @@ model C, it should reference it directly rather than via B. If B
 changes, A will break. It would be nice to have a warning for these
 types of referencing.
 
-*** Update static strings to string views                             :story:
-
-Now we're on C++17 we can start making use of its new features. One
-low hanging fruit is string view. We use static strings quite a lot
-for logging etc. We can just replace these with string views.
-
-Example:
-
-: #include <string_view>
-: constexpr std::string_view foo("abc");
-
-Links:
-
-- [[https://www.bfilipek.com/2018/10/strings17talk.html][Let's Talk About String Operations in C++17]]
-- [[https://developercommunity.visualstudio.com/content/problem/24487/constexpr-stdstring-view-from-string-literal.html][constexpr std::string_view from string literal]]
-- [[https://www.reddit.com/r/cpp/comments/cw35kk/best_practices_for_efficient_string_constants/][Best practices for efficient string constants]]
-
 *** Create a archetypes locator                                       :story:
 
 We need to move all functionality which is not kernel specific into
