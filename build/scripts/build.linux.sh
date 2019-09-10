@@ -57,14 +57,18 @@ projects_dir="${product_dir}/projects/"
 compiler="$1"
 shift
 if [[ "x${compiler}" = "x" ]]; then
-    compiler="gcc8";
+    compiler="gcc9";
     echo "* Compiler: ${compiler} (default)"
-    export CC=gcc-8
-    export CXX=g++-8
+    export CC=gcc-9
+    export CXX=g++-9
 elif [ "${compiler}" = "gcc8" ]; then
     echo "* Compiler: ${compiler}"
     export CC=gcc-8
     export CXX=g++-8
+elif [ "${compiler}" = "gcc9" ]; then
+    echo "* Compiler: ${compiler}"
+    export CC=gcc-9
+    export CXX=g++-9
 elif [ "${compiler}" = "clang8" ]; then
     echo "* Compiler: ${compiler}"
     export CC=clang-8
