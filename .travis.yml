@@ -18,7 +18,7 @@
 # MA 02110-1301, USA.
 #
 sudo: required
-dist: trusty
+dist: xenial
 language: cpp
 cache: ccache
 
@@ -30,10 +30,10 @@ matrix:
     # GCC  it timing out
     - os: linux
       compiler: gcc
-      env: configuration=Release compiler="gcc8" generator="Ninja" build_group="Continuous" report_name="Linux Gcc Releases"
+      env: configuration=Release compiler="gcc9" generator="Ninja" build_group="Continuous" report_name="Linux Gcc Releases"
     - os: linux
       compiler: gcc
-      env: configuration=Debug compiler="gcc8" generator="Ninja" build_group="Continuous"  report_name="Linux Gcc Debug"
+      env: configuration=Debug compiler="gcc9" generator="Ninja" build_group="Continuous"  report_name="Linux Gcc Debug"
   include:
     #
     # OSX Clang
@@ -51,10 +51,10 @@ matrix:
     #
     - os: linux
       compiler: gcc
-      env: configuration=Release compiler="gcc8" generator="Ninja" build_group="Continuous" report_name="Linux Gcc Releases"
+      env: configuration=Release compiler="gcc9" generator="Ninja" build_group="Continuous" report_name="Linux Gcc Releases"
     - os: linux
       compiler: gcc
-      env: configuration=Debug compiler="gcc8" generator="Ninja" build_group="Continuous"  report_name="Linux Gcc Debug"
+      env: configuration=Debug compiler="gcc9" generator="Ninja" build_group="Continuous"  report_name="Linux Gcc Debug"
     #
     # Linux Clang
     #
