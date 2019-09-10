@@ -7301,6 +7301,36 @@ Features for which there is no urgency but we'd like to see them
 implemented at some point. They may require some alterations to the
 core, but not fundamental rethinking.
 
+*** Update static strings to string views                             :story:
+
+Now we're on C++17 we can start making use of its new features. One
+low hanging fruit is string view. We use static strings quite a lot
+for logging etc. We can just replace these with string views.
+
+Example:
+
+: #include <string_view>
+: constexpr std::string_view foo("abc");
+
+We started implementing this story but it will take a while to
+complete it across the entire codebase.
+
+Problems:
+
+- cannot do XML text reader because we do not have a good way to
+  convert string_view to cstr. See [[https://stackoverflow.com/questions/48081436/how-you-convert-a-stdstring-view-to-a-const-char][How you convert a std::string_view
+  to a const char*?]]
+
+Links:
+
+- [[https://www.bfilipek.com/2018/10/strings17talk.html][Let's Talk About String Operations in C++17]]
+- [[https://developercommunity.visualstudio.com/content/problem/24487/constexpr-stdstring-view-from-string-literal.html][constexpr std::string_view from string literal]]
+- [[https://www.reddit.com/r/cpp/comments/cw35kk/best_practices_for_efficient_string_constants/][Best practices for efficient string constants]]
+
+*** Add string view to dogen exception constructor                    :story:
+
+At present we cannot build an exception if the string passed in is a
+string view.
 
 *** Add support for the "badge" pattern                               :story:
 
