@@ -133,7 +133,7 @@ documentation](https://github.com/Microsoft/vcpkg/blob/master/README.md),
 and then install packages by running:
 
 ```
-./vcpkg install libxml2 boost-system boost-serialization boost-date-time boost-log boost-filesystem boost-program-options boost-test boost-scope-exit boost-graph boost-uuid boost-di boost-spirit
+./vcpkg install libxml2 boost-system boost-serialization boost-date-time boost-log boost-filesystem boost-program-options boost-test boost-scope-exit boost-graph boost-uuid boost-di boost-spirit dtl
 ```
 
 ---
@@ -155,6 +155,16 @@ errors](https://github.com/Microsoft/vcpkg/issues/4476) related to
   not
   default](https://github.com/Microsoft/vcpkg/issues/4476#issuecomment-430175834)
   to C++ 14. You'll need to add ```cxxstd=14```. Our vcpkg repo has fixes for this.
+- Setting up ODB is not quite as simple as we would like. If you are using a
+  stable version of ODB such as 2.4 you can just install the compiler and libraries
+  from your distribution packages or download the compiler and libraries
+  form the [ODB downloads page](https://www.codesynthesis.com/products/odb/download.xhtml)
+  or even install it from vcpkg (i.e., add ```libodb libodb-boost libodb-pgsql```
+  to the vcpkg line above). However, as ODB 2.4 has limited support for C++ 17,
+  you will likely end up needing the beta version 2.5. This is not as trivial. If
+  you definitely want to do this, follow the instructions in the ODB documentation
+  and then ensure you place the installed files in the path (e.g. setup ```PATH```,
+  ```CMAKE_INCLUDE_PATH``` and ```CMAKE_LIBRARY_PATH``` accordingly).
 
 ---
 
