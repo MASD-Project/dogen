@@ -39,3 +39,6 @@ compile_commands.json
 # Task Juggler
 doc/agile/reports
 *.tjp
+
+# emacs
+.dir-locals.el
