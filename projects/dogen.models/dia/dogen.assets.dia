@@ -2286,7 +2286,7 @@ formatting.#</dia:string>
         <dia:point val="-197.745,-64.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-198.595,-64.45;-178.887,-45.95"/>
+        <dia:rectangle val="-198.595,-64.45;-178.888,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2486,7 +2486,7 @@ formatting.#</dia:string>
         <dia:point val="-200.49,-51.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-201.34,-51.65;-178.887,-45.95"/>
+        <dia:rectangle val="-201.34,-51.65;-178.888,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4936,7 +4936,7 @@ If not present, user did not make any statements with regards to finality.#</dia
         <dia:point val="-235.665,-59.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-236.515,-59.25;-214.887,-45.95"/>
+        <dia:rectangle val="-236.515,-59.25;-214.888,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4978,7 +4978,7 @@ If not present, user did not make any statements with regards to finality.#</dia
         <dia:point val="-224.28,-50.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-225.13,-50.85;-214.887,-45.95"/>
+        <dia:rectangle val="-225.13,-50.85;-214.888,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5116,7 +5116,7 @@ names in assets element
         <dia:point val="-133.123,-61"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-133.183,-62.4009;-128.718,-60.8"/>
+        <dia:rectangle val="-133.183,-62.4009;-128.717,-60.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11653,7 +11653,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:point val="-114.317,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-125.517,22.15;-113.567,26.8"/>
+        <dia:rectangle val="-125.518,22.15;-113.567,26.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12942,7 +12942,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:point val="-95.59,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-102.142,20.0002;-94.84,26.8"/>
+        <dia:rectangle val="-102.143,20.0002;-94.84,26.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -16563,7 +16563,7 @@ space.#</dia:string>
         <dia:point val="-100,45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-107.142,42.2;-99.25,45.8"/>
+        <dia:rectangle val="-107.143,42.2;-99.25,45.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23681,7 +23681,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-206.5,-34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-207.25,-40.85;-197.273,-33.2"/>
+        <dia:rectangle val="-207.25,-40.85;-197.272,-33.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24638,7 +24638,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:point val="-187.472,-52.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-188.322,-52.45;-178.887,-45.95"/>
+        <dia:rectangle val="-188.322,-52.45;-178.888,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -25100,7 +25100,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:point val="-218.97,59"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-230.058,55.55;-218.22,59.8"/>
+        <dia:rectangle val="-230.057,55.55;-218.22,59.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27104,7 +27104,7 @@ separator is @e ;.#</dia:string>
         <dia:point val="-57.41,-61"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-58.16,-61.75;-54.4612,-55.2502"/>
+        <dia:rectangle val="-58.16,-61.75;-54.4613,-55.2502"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -37477,7 +37477,7 @@ extend the mappings as required.#</dia:string>
         <dia:point val="-117.39,-30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-118.14,-35.05;-102.812,-29.2"/>
+        <dia:rectangle val="-118.14,-35.05;-102.813,-29.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
