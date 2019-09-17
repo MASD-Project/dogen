@@ -282,6 +282,9 @@ if(MSVC)
     endforeach()
 endif()
 
+#
+# Handle build information
+#
 set(WITH_BUILD_INFO ON)
 set(DOGEN_BUILD_INFO "")
 
@@ -395,6 +398,8 @@ endif()
 #
 # Dogen
 #
+
+# FIXME: this looks strange!
 find_package(Dogen REQUIRED)
 
 #
@@ -414,16 +419,6 @@ if (DOGEN_CLI_EXECUTABLE)
     add_dependencies(gad generate_all_dia)
     add_custom_target(gaj)
     add_dependencies(gaj generate_all_json)
-
-    add_custom_target(weave_all)
-    add_custom_target(wa)
-    add_dependencies(wa weave_all)
-
-    add_custom_target(generate_and_weave)
-    add_dependencies(generate_and_weave generate_all_dia)
-    add_dependencies(generate_and_weave weave_all)
-    add_custom_target(gaw)
-    add_dependencies(gaw generate_and_weave)
 
     add_custom_target(convert_all)
     add_custom_target(ca)
