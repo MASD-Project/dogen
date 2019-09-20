@@ -576,6 +576,16 @@ Notes:
   place to put the definition, and is done only once and shared by all
   models.
 
+*** Add meta-data to "force" parent                                   :story:
+
+At present we can force a class not to be final:
+
+: #DOGEN masd.generalization.is_final=false
+
+However, this still does not create the methods for a parent such as
+virtual destructor, equals etc. We need something to trigger those
+methods as well.
+
 *** Add string view to dogen exception constructor                    :story:
 
 At present we cannot build an exception if the string passed in is a

@@ -10084,6 +10084,7 @@ Notes:
   clang-format the existing files. We then write the file down if the
   formatting changes its content. If we don't do this we still need to
   run clang-format manually again for the handcrafted code.
+- clang-format [[http://releases.llvm.org/9.0.0/tools/clang/docs/ReleaseNotes.html][now supports C#]].
 
 Merged Stories:
 
