@@ -292,8 +292,13 @@ void orm_transform::transform_primitives(
          * stereofeatures transform, if the ORM stereofeatures were present.
          */
         auto& p(*pair.second);
-        if (!p.orm_properties())
+        BOOST_LOG_SEV(lg, trace) << "Processing: "
+                                 << p.name().qualified().dot();
+
+        if (!p.orm_properties()) {
+            BOOST_LOG_SEV(lg, trace) << "No ORM properties found.";
             continue;
+        }
 
         auto& op(*p.orm_properties());
 
@@ -394,6 +399,10 @@ void orm_transform::apply(const context& ctx, meta_model::model& m) {
     const auto fg(features::orm::make_feature_group(fm));
     const auto& rm(*m.root_module());
     m.orm_properties(make_model_properties(fg, *rm.configuration()));
+    if (!m.orm_properties()) {
+        BOOST_LOG_SEV(lg, debug) << "Model does not have an ORM configuration.";
+        return;
+    }
 
     transform_objects(fg, m);
     transform_object_templates(fg, m);
