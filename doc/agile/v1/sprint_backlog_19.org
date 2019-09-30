@@ -576,6 +576,46 @@ Notes:
   place to put the definition, and is done only once and shared by all
   models.
 
+*** Mask sensitive fields in io                                       :story:
+
+Certain types contain fields that should not be logged by default. For
+example, passwords, salt/seeds, etc. It should be possible to mark
+these fields as "sensitive" such that when one dumps an object to the
+logger the fields are masked out with say =****=. It should also be
+possible to set an environment variable such as
+=MASD_DO_NOT_MASK_SENTIVE= and get the actual values printed.
+
+To implement this we need:
+
+- a feature for marking fields as sensitive. Add a sensitive default
+  for each primitive type, e.g. =****= for strings, =1234= for
+  numbers, etc.
+- a new manipulator in the shared library: =masd::unmask_sensitive=.
+- update io for fields marked as sensitive; by default output the
+  sensitive default unless =masd::unmask_sensitive= - in which case
+  output the real value.
+
+Notes:
+
+- consider adding a warning for fields with certain names such as
+  "password": mark this field as sensitive?
+
+Merged stories:
+
+*Consider adding a global configuration for io*
+
+It would be nice to have some kind of configuration for IO that could
+be accessed globally for the current process. There we could set
+things such as floating point display, etc.
+
+Actually maybe the right thing to do is to have masd specific
+manipulators that you can check for in the streaming functions. We
+need to read up on manipulators.
+
+Links:
+
+- [[http://www.two-sdg.demon.co.uk/curbralan/papers/WritingStreamManipulators.html][Writing your own stream manipulators]]
+
 *** Add meta-data to "force" parent                                   :story:
 
 At present we can force a class not to be final:
