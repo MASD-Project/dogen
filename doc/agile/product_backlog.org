@@ -2377,6 +2377,7 @@ It seems we are not using proper CMake idioms to pick up compiler
 features, as explained here:
 
 - [[http://unclejimbo.github.io/2018/06/08/Modern-CMake-for-Library-Developers/][Modern CMake for Library Developers]]
+- [[https://cliutils.gitlab.io/modern-cmake/][An Introduction to Modern CMake]]
 - [[http://www.slideshare.net/DanielPfeifer1/cmake-48475415][CMake - Introduction and best practices]]
 - [[https://datascience.lanl.gov/data/151208-LANL-Hoffman-Science.pdf][Building Science with CMake]]
 - [[http://voices.canonical.com/jussi.pakkanen/2013/03/26/a-list-of-common-cmake-antipatterns/][A list of common CMake antipatterns]]
@@ -7749,7 +7750,9 @@ Notes:
   package. We probably should install dogen now and have dogen rely on
   installed dogen first, with an option to switch to "built" dogen.
 - generate git ignore files with common regexes. See [[https://github.com/github/gitignore][A collection of
-  useful .gitignore templates]]
+  useful .gitignore templates]]. We could also model it as a meta-model
+  object with associated options so that the user does not have to
+  manually edit the file.
 - generate top-level CMake, allowing user to enter dependencies and
   their versions (e.g. Boost 1.62 etc) and CMake version.
 - inject dogen support automatically to CMake (on a feature switch).
@@ -8619,6 +8622,8 @@ Links:
   [[https://source.unsplash.com/][unsplash]]. [[https://placeimg.com/][placeimg]] for images of places.
 - [[https://llvm.org/docs/LibFuzzer.html][LibFuzzer]]
 - [[https://blog.trailofbits.com/2019/05/31/fuzzing-unit-tests-with-deepstate-and-eclipser/][Fuzzing Unit Tests with DeepState and Eclipser]]
+- [[https://generated.photos][Generated Photos]]: AI generated realistic pictures of people. We
+  could download a fixed set or use the API.
 
 **** Example Types
 
@@ -10115,12 +10120,13 @@ folders as required.
 We need to indent the output coming out of stitch as it is not
 suitable for reading as-is.
 
-This article has a good example of how to consume clang, but
-unfortunately its not about indenting:
+Links:
 
 - [[https://bbannier.github.io/blog/2015/05/02/Writing-a-basic-clang-static-analysis-check.html][Writing a basic clang static analysis check]]
 - [[http://zed0.co.uk/clang-format-configurator/][clang-format configurator]]
 - [[http://clangformat.com/][online clang format]] - older site
+- [[https://github.com/llvm-mirror/clang/blob/master/tools/clang-format/ClangFormat.cpp][ClangFormat.cpp]]: clang format tool. We can use this as an example of
+  how to use LibFormat.
 
 *** Add an injector for visual studio models                          :story:
 

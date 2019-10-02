@@ -11,25 +11,26 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-09-10 Tue 12:39]
-| <75>                                               |         |       |      |       |
-| Headline                                           | Time    |       |      |     % |
-|----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                       | *31:44* |       |      | 100.0 |
-|----------------------------------------------------+---------+-------+------+-------|
-| Stories                                            | 31:44   |       |      | 100.0 |
-| Active                                             |         | 31:44 |      | 100.0 |
-| Edit release notes for previous sprint             |         |       | 3:36 |  11.3 |
-| Create a demo and presentation for previous sprint |         |       | 1:39 |   5.2 |
-| Sprint and product backlog grooming                |         |       | 2:30 |   7.9 |
-| Remove test model sanitizer                        |         |       | 0:20 |   1.1 |
-| Remove master headers                              |         |       | 1:12 |   3.8 |
-| Fix the issues with tests in reference model       |         |       | 3:53 |  12.2 |
-| Update static strings to string views              |         |       | 1:15 |   3.9 |
-| Move registrar into assets                         |         |       | 5:06 |  16.1 |
-| Fix compilation errors in nightly                  |         |       | 0:24 |   1.3 |
-| Upgrade to boost 1.70                              |         |       | 6:12 |  19.5 |
-| Org-mode as a carrier format for modeling          |         |       | 5:37 |  17.7 |
+#+CAPTION: Clock summary at [2019-10-02 Wed 16:54]
+| <75>                                               |         |       |       |       |
+| Headline                                           | Time    |       |       |     % |
+|----------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                       | *37:15* |       |       | 100.0 |
+|----------------------------------------------------+---------+-------+-------+-------|
+| Stories                                            | 37:15   |       |       | 100.0 |
+| Active                                             |         | 37:15 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       |  3:36 |   9.7 |
+| Create a demo and presentation for previous sprint |         |       |  1:39 |   4.4 |
+| Sprint and product backlog grooming                |         |       |  2:30 |   6.7 |
+| Remove test model sanitizer                        |         |       |  0:20 |   0.9 |
+| Remove master headers                              |         |       |  1:12 |   3.2 |
+| Fix the issues with tests in reference model       |         |       |  3:53 |  10.4 |
+| Update static strings to string views              |         |       |  1:15 |   3.4 |
+| ODB include directories is incorrect               |         |       |  1:43 |   4.6 |
+| Move registrar into assets                         |         |       |  5:06 |  13.7 |
+| Fix compilation errors in nightly                  |         |       |  0:24 |   1.1 |
+| Upgrade to boost 1.70                              |         |       | 10:00 |  26.8 |
+| Org-mode as a carrier format for modeling          |         |       |  5:37 |  15.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -403,6 +404,28 @@ Notes:
  - [[https://www.bfilipek.com/2018/10/strings17talk.html][Let's Talk About String Operations in C++17]]
  - [[https://developercommunity.visualstudio.com/content/problem/24487/constexpr-stdstring-view-from-string-literal.html][constexpr std::string_view from string literal]]
  - [[https://www.reddit.com/r/cpp/comments/cw35kk/best_practices_for_efficient_string_constants/][Best practices for efficient string constants]]
+
+*** COMPLETED ODB include directories is incorrect                    :story:
+    CLOSED: [2019-10-02 Wed 16:53]
+    :LOGBOOK:
+    CLOCK: [2019-10-02 Wed 15:46]--[2019-10-02 Wed 16:53] =>  1:07
+    CLOCK: [2019-10-02 Wed 13:20]--[2019-10-02 Wed 13:56] =>  0:36
+    :END:
+
+With the upgrade to vcpkg ODB, we have broken ODB generation. The
+problem is that we rely on the export of =ODB_INCLUDE_DIRS=, but this
+no longer happens as the include directories are set by vcpkg. The
+right solution is to rely only on the global includes.
+
+In fact the right solution is to set globally a
+=ODB_EXECUTABLE_GLOBAL_ARGS= and reuse that in each generated file. We
+should also ensure this variable is defined and issue a message
+explaining the problem.
+
+Links:
+
+- [[https://stackoverflow.com/questions/47475731/cmake-include-directories-for-custom-target-type/58200691#58200691][CMake include_directories for custom target type]]
+- [[https://cmake.org/cmake/help/v3.3/command/target_include_directories.html][CMake manual: target_include_directories]]
 
 *** STARTED Move registrar into assets                                :story:
     :LOGBOOK:
