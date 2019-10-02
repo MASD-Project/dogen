@@ -129,12 +129,10 @@ if (ODB_EXECUTABLE)
     add_custom_target(<#= targets.main_target_name() #>)
     add_dependencies(odb_all <#= targets.main_target_name() #>)
 
-    # Individual targets
-    get_directory_property(dirs INCLUDE_DIRECTORIES)
-    set(global_includes "")
-    foreach(dir in ${dirs})
-        set(global_includes ${global_includes} -I ${dir})
-    endforeach()
+    if (NOT ODB_EXECUTABLE_GLOBAL_ARGS)
+        message(WARNING "ODB_EXECUTABLE_GLOBAL_ARGS not defined. Inclusion errors likely when running ODB targets.")
+    endif()
+
 <#+
             for (const auto& target : targets.targets()) {
 #>
@@ -146,7 +144,7 @@ if (ODB_EXECUTABLE)
             --options-file ${CMAKE_CURRENT_SOURCE_DIR}/<#= targets.common_odb_options() #>
             --options-file ${CMAKE_CURRENT_SOURCE_DIR}/<#= target.object_odb_options() #>
             --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/<#= target.output_directory() #>
-            -I ${ODB_INCLUDE_DIRS} ${global_includes}
+            ${ODB_EXECUTABLE_GLOBAL_ARGS}
             ${CMAKE_CURRENT_SOURCE_DIR}/<#= target.types_file() #>
 <#+
                 for (const auto& pair : target.move_parameters())

@@ -137,12 +137,10 @@ a.stream() << "    # Top-level targets" << std::endl;
 a.stream() << "    add_custom_target(" << targets.main_target_name() << ")" << std::endl;
 a.stream() << "    add_dependencies(odb_all " << targets.main_target_name() << ")" << std::endl;
 a.stream() << std::endl;
-a.stream() << "    # Individual targets" << std::endl;
-a.stream() << "    get_directory_property(dirs INCLUDE_DIRECTORIES)" << std::endl;
-a.stream() << "    set(global_includes \"\")" << std::endl;
-a.stream() << "    foreach(dir in ${dirs})" << std::endl;
-a.stream() << "        set(global_includes ${global_includes} -I ${dir})" << std::endl;
-a.stream() << "    endforeach()" << std::endl;
+a.stream() << "    if (NOT ODB_EXECUTABLE_GLOBAL_ARGS)" << std::endl;
+a.stream() << "        message(WARNING \"ODB_EXECUTABLE_GLOBAL_ARGS not defined. Inclusion errors likely when running ODB targets.\")" << std::endl;
+a.stream() << "    endif()" << std::endl;
+a.stream() << std::endl;
             for (const auto& target : targets.targets()) {
 a.stream() << std::endl;
 a.stream() << "    add_custom_target(" << target.name() << std::endl;
@@ -152,7 +150,7 @@ a.stream() << "        COMMAND ${ODB_EXECUTABLE}" << std::endl;
 a.stream() << "            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/" << targets.common_odb_options() << std::endl;
 a.stream() << "            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/" << target.object_odb_options() << std::endl;
 a.stream() << "            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/" << target.output_directory() << std::endl;
-a.stream() << "            -I ${ODB_INCLUDE_DIRS} ${global_includes}" << std::endl;
+a.stream() << "            ${ODB_EXECUTABLE_GLOBAL_ARGS}" << std::endl;
 a.stream() << "            ${CMAKE_CURRENT_SOURCE_DIR}/" << target.types_file() << std::endl;
                 for (const auto& pair : target.move_parameters())
 a.stream() << "        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/" << pair.first << " ${CMAKE_CURRENT_SOURCE_DIR}/" << pair.second << std::endl;
