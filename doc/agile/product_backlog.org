@@ -10152,6 +10152,7 @@ Notes:
   extraction. This is more efficient but will require a dependency on
   [[https://clang.llvm.org/docs/LibFormat.html][libFormat]]. We can use [[https://github.com/llvm-mirror/clang/blob/master/tools/clang-format/ClangFormat.cpp][clang format's code]] to see how to use
   libformat.
+- [[https://github.com/TheLartians/Format.cmake][Format.cmake]]: clang-format for CMake
 - when we integrate clang format, we will have to change how we
   process overwrite. At present we are just not writing if overwrite
   is on; in the future, we need to physically load the contents from
