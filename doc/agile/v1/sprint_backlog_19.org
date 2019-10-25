@@ -11,28 +11,28 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-10-24 Thu 18:13]
+#+CAPTION: Clock summary at [2019-10-25 Fri 13:13]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *38:36* |       |       | 100.0 |
+| *Total time*                                       | *39:07* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 38:36   |       |       | 100.0 |
-| Active                                             |         | 38:36 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       |  3:36 |   9.3 |
-| Create a demo and presentation for previous sprint |         |       |  1:39 |   4.3 |
-| Sprint and product backlog grooming                |         |       |  2:35 |   6.7 |
+| Stories                                            | 39:07   |       |       | 100.0 |
+| Active                                             |         | 39:07 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       |  3:36 |   9.2 |
+| Create a demo and presentation for previous sprint |         |       |  1:39 |   4.2 |
+| Sprint and product backlog grooming                |         |       |  3:06 |   7.9 |
 | Remove test model sanitizer                        |         |       |  0:20 |   0.9 |
 | Remove master headers                              |         |       |  1:12 |   3.1 |
-| Fix the issues with tests in reference model       |         |       |  3:53 |  10.1 |
+| Fix the issues with tests in reference model       |         |       |  3:53 |   9.9 |
 | Update static strings to string views              |         |       |  1:15 |   3.2 |
 | ODB include directories is incorrect               |         |       |  1:43 |   4.4 |
-| Move registrar into assets                         |         |       |  5:29 |  14.2 |
+| Move registrar into assets                         |         |       |  5:29 |  14.0 |
 | Fix compilation errors in nightly                  |         |       |  0:24 |   1.0 |
-| Upgrade to boost 1.70                              |         |       | 10:00 |  25.9 |
+| Upgrade to boost 1.70                              |         |       | 10:00 |  25.6 |
 | Setup laptop to work on dogen                      |         |       |  0:17 |   0.7 |
-| Org-mode as a carrier format for modeling          |         |       |  5:37 |  14.6 |
-| Create a "modeling" report                         |         |       |  0:36 |   1.6 |
+| Org-mode as a carrier format for modeling          |         |       |  5:37 |  14.4 |
+| Create a "modeling" report                         |         |       |  0:36 |   1.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -210,6 +210,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-10-25 Fri 12:41]--[2019-10-25 Fri 13:12] =>  0:31
     CLOCK: [2019-10-24 Thu 17:30]--[2019-10-24 Thu 17:35] =>  0:05
     CLOCK: [2019-06-11 Tue 10:55]--[2019-06-11 Tue 11:15] =>  0:20
     CLOCK: [2019-06-04 Tue 09:36]--[2019-06-04 Tue 10:35] =>  0:59
@@ -649,11 +650,9 @@ Notes:
 Example:
 
 #+begin_src org
-* run
+run
 
 #+end_src
-
-
 
 Tasks:
 

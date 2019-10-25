@@ -7372,6 +7372,43 @@ Features for which there is no urgency but we'd like to see them
 implemented at some point. They may require some alterations to the
 core, but not fundamental rethinking.
 
+*** Consider adding support for JWT                                   :story:
+
+JWT are used in web apps.
+
+Links:
+
+- [[https://github.com/Thalhammer/jwt-cpp][jwt-cpp]]
+
+*** Investigate the uses of =nameOf= in Dogen                         :story:
+
+Seems like someone ported =nameOf= from C# into C++. This is a useful
+idea: instead of using a string to copy across a name, it enforces
+that the string and the name are in sync. For example:
+
+: const std::string book = "book";
+
+The problem is that you can rename the variable =book= to a different
+name and this would then result in silly errors. With =nameOf=:
+
+: const std::string book = nameOf(book);
+
+Now if you change =book= then this will not compile.
+
+Links:
+
+- [[https://github.com/Neargye/nameof][nameof]]
+
+*** Consider adding support for secure string                         :story:
+
+Interesting project to port the secure string ideas from C# to C++:
+"SecureString is a C++ class that does not save data as plain-text in
+memory."
+
+Links:
+
+- [[https://github.com/alex-caelus/SecureString][SecureString]]
+
 *** Update static strings to string views                             :story:
 
 Now we're on C++17 we can start making use of its new features. One
@@ -10247,8 +10284,9 @@ could translate to:
 
 Links:
 
-- https://pocoproject.org/docs/package-Foundation.Cache.html
-- https://pocoproject.org/slides/140-Cache.pdf
+- [[https://pocoproject.org/docs/package-Foundation.Cache.html][POCO: Cache namespace]]
+- [[https://pocoproject.org/slides/140-Cache.pdf][POCO: Cache namespace docs]]
+- [[https://github.com/cachelot/cachelot][cachelot]]: LRU cache
 
 *** Generate Redis get/set code                                       :story:
 
@@ -12629,6 +12667,47 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Investigate if Seamless template can be used instead of stitch    :story:
+
+According to their project:
+
+#+begin_quote
+Seamless (CMLS) is a brand-spanking new experimental web framework. It
+includes:
+
+  • A C++20 template engine that allows you to write C++ and markup in the same file, just
+    like you would with Laravel's blade engine for PHP, or ASP.NET Razor. The file
+    extension for these files is .cmls.
+...
+#+end_quote
+
+Links:
+
+- [[https://github.com/haikarainen/cmls][cmls]]
+
+*** Consider adding support for OData                                 :story:
+
+Dogen could generate the schema, the entities in the expected formats
+and the end-points. It could also be used to generate the client code
+as per examples.
+
+Note that there are a lot of similarities between GraphQL and OData so
+we should look at these two stories at the same time to make sure we
+capture the commonalities.
+
+Links:
+
+- [[https://www.odata.org/][OData]]
+- [[https://www.odata.org/documentation/][OData documentation]]
+- [[https://stackoverflow.com/questions/32858371/what-is-swagger-and-does-it-relate-to-odata][What is Swagger and does it relate to OData?]]
+- [[https://github.com/OData/odatacpp-server][odatacpp-server]]: github project for an OData server.
+- [[https://github.com/OData/odatacpp-client][odatacpp-client]]: github project for an OData client.
+- [[https://www.odata.org/getting-started/basic-tutorial/][OData: Basic Tutorial]]
+- [[https://jeffhandley.com/2018-09-13/graphql-is-not-odata][GraphQL is not OData]]
+- [[https://github.com/microsoft/cppgraphqlgen][cppgraphqlgen]]
+- [[https://taocpp.github.io/][A collection of high-quality C++ libraries]]
+- [[https://github.com/taocpp/PEGTL][PEGTL]]: library used to generate a parser for GraphQL.
 
 *** Consider adding support for BERT                                  :story:
 
