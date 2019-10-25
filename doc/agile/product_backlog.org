@@ -195,6 +195,68 @@ spare time, we need to generate the model and then create the adapters
 from existing models. Finally we can look at how it will be integrated
 with tracing.
 
+Merged stories:
+
+*Scripts for loading traces into postgres*
+
+- rationale: this story is superseded by having a relational model.
+
+It would be really nice if as part of the tracing generation we also
+generated a set of SQL scripts that:
+
+- created a number of tables
+- copied all of the generated data into the database
+- added a number of utility functions such as get elements in model, etc.
+
+Over time we could build up functionality but to start off with we
+just want something really simple that copies all of the
+files. Interestingly this "looks" like a job for dogen. It would be
+nice to have a meta-model element for this etc.
+
+In the future it would be nice to have a think about the schema so
+that we could do joins etc. For example:
+
+- show me all transforms with element of type X (the state of the
+  element at each transform).
+
+We should also take into account multiple runs. Perhaps a more
+adequate solution is to create a dogen library that has the ORM
+support for this. Once we have proper JSON serialisation we can store
+the objects as JSON serialisable, allowing us to re-run transforms,
+etc.
+
+Notes:
+
+- ensure we upload the file name or at least the coordinates to the
+  transform graph with the data so that we know what it refers to.
+
+*Improved understanding*
+
+Better than uploading a whole load of JSON blobs and then having to do
+a number of really complex queries, is to have a ORM schema that is
+designed to capture the data in the format we're interested in. Then
+we could do very simple queries. What we really care about is
+capturing all attributes of the model as it changes across the
+transformations. We also care about the relationships between
+transformations. We also need a way to uniquely identify elements
+across their entire lifecycle. A simple way would be to create a hash
+of the file name of the model, column and line number. We can then
+associate other IDs to this one such as dia ID, etc.
+
+We need to create a set of adaptors that convert an existing model
+(injection, coding, etc) into the ORM model and then write the ORM
+model into the database. The ORM model does not need as much detail
+and structure as a regular model; for example, names can be flattened
+or linked into IDs (e.g. name table), etc. Whatever makes sense from a
+relational perspective.
+
+It would also be nice to dump the log into the database so that we
+could do simple correlations such as "what was logged between the
+start and end of this transform?"
+
+Interestingly, this would also allow us to compare things between
+runs. The schema should be designed with this in mind.
+
 *** Linux and OSX binaries are not stripped                           :story:
 
 At present our Linux and OSX build is much bigger than our windows
@@ -5262,12 +5324,20 @@ Existing validation code:
 - modelines must be defined inside of modeline groups.
 - licences and generation markers must be defined at the top-level.
 
+*Serialisation*
+
+- if using boost serialisation with a model that has inheritance, the
+  registrar should be present.
+
 *Other*
 
 - Check that all header guards generated for a given model are
   unique. We've had cases where a class with a prefix (say
   =variability_x=) and a class in a namespace (say =variability::x=)
-  resolve to exactly the same header guard (say =VARIABILITY_X_HPP=).
+  resolve to exactly the same header guard (say
+  =VARIABILITY_X_HPP=). We could easily obtain all headers in a model,
+  sort them and unique them. If there are duplicates, we should error
+  or warn.
 
 Merged stories:
 
@@ -15684,63 +15754,7 @@ Links:
 - [[https://medium.com/@far3ns/kong-the-microservice-api-gateway-526c4ca0cfa6][KONG - The Microservice API Gateway]]
 - [[https://docs.konghq.com/hub/kong-inc/oauth2/][kong oauth2 plugin]]
 - [[https://docs.konghq.com/hub/kong-inc/jwt/][kong jwt plugin]]
-*** Scripts for loading traces into postgres                          :story:
 
-It would be really nice if as part of the tracing generation we also
-generated a set of SQL scripts that:
-
-- created a number of tables
-- copied all of the generated data into the database
-- added a number of utility functions such as get elements in model, etc.
-
-Over time we could build up functionality but to start off with we
-just want something really simple that copies all of the
-files. Interestingly this "looks" like a job for dogen. It would be
-nice to have a meta-model element for this etc.
-
-In the future it would be nice to have a think about the schema so
-that we could do joins etc. For example:
-
-- show me all transforms with element of type X (the state of the
-  element at each transform).
-
-We should also take into account multiple runs. Perhaps a more
-adequate solution is to create a dogen library that has the ORM
-support for this. Once we have proper JSON serialisation we can store
-the objects as JSON serialisable, allowing us to re-run transforms,
-etc.
-
-Notes:
-
-- ensure we upload the file name or at least the coordinates to the
-  transform graph with the data so that we know what it refers to.
-
-*Improved understanding*
-
-Better than uploading a whole load of JSON blobs and then having to do
-a number of really complex queries, is to have a ORM schema that is
-designed to capture the data in the format we're interested in. Then
-we could do very simple queries. What we really care about is
-capturing all attributes of the model as it changes across the
-transformations. We also care about the relationships between
-transformations. We also need a way to uniquely identify elements
-across their entire lifecycle. A simple way would be to create a hash
-of the file name of the model, column and line number. We can then
-associate other IDs to this one such as dia ID, etc.
-
-We need to create a set of adaptors that convert an existing model
-(injection, coding, etc) into the ORM model and then write the ORM
-model into the database. The ORM model does not need as much detail
-and structure as a regular model; for example, names can be flattened
-or linked into IDs (e.g. name table), etc. Whatever makes sense from a
-relational perspective.
-
-It would also be nice to dump the log into the database so that we
-could do simple correlations such as "what was logged between the
-start and end of this transform?"
-
-Interestingly, this would also allow us to compare things between
-runs. The schema should be designed with this in mind.
 *** Consider generating code for RAII wrapper                         :story:
 
 It would be nice to be able to automatically generate a RAII wrapper

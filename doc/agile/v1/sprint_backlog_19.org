@@ -11,26 +11,28 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-10-02 Wed 16:54]
+#+CAPTION: Clock summary at [2019-10-24 Thu 18:13]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *37:15* |       |       | 100.0 |
+| *Total time*                                       | *38:36* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 37:15   |       |       | 100.0 |
-| Active                                             |         | 37:15 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       |  3:36 |   9.7 |
-| Create a demo and presentation for previous sprint |         |       |  1:39 |   4.4 |
-| Sprint and product backlog grooming                |         |       |  2:30 |   6.7 |
+| Stories                                            | 38:36   |       |       | 100.0 |
+| Active                                             |         | 38:36 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       |  3:36 |   9.3 |
+| Create a demo and presentation for previous sprint |         |       |  1:39 |   4.3 |
+| Sprint and product backlog grooming                |         |       |  2:35 |   6.7 |
 | Remove test model sanitizer                        |         |       |  0:20 |   0.9 |
-| Remove master headers                              |         |       |  1:12 |   3.2 |
-| Fix the issues with tests in reference model       |         |       |  3:53 |  10.4 |
-| Update static strings to string views              |         |       |  1:15 |   3.4 |
-| ODB include directories is incorrect               |         |       |  1:43 |   4.6 |
-| Move registrar into assets                         |         |       |  5:06 |  13.7 |
-| Fix compilation errors in nightly                  |         |       |  0:24 |   1.1 |
-| Upgrade to boost 1.70                              |         |       | 10:00 |  26.8 |
-| Org-mode as a carrier format for modeling          |         |       |  5:37 |  15.1 |
+| Remove master headers                              |         |       |  1:12 |   3.1 |
+| Fix the issues with tests in reference model       |         |       |  3:53 |  10.1 |
+| Update static strings to string views              |         |       |  1:15 |   3.2 |
+| ODB include directories is incorrect               |         |       |  1:43 |   4.4 |
+| Move registrar into assets                         |         |       |  5:29 |  14.2 |
+| Fix compilation errors in nightly                  |         |       |  0:24 |   1.0 |
+| Upgrade to boost 1.70                              |         |       | 10:00 |  25.9 |
+| Setup laptop to work on dogen                      |         |       |  0:17 |   0.7 |
+| Org-mode as a carrier format for modeling          |         |       |  5:37 |  14.6 |
+| Create a "modeling" report                         |         |       |  0:36 |   1.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -208,6 +210,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-10-24 Thu 17:30]--[2019-10-24 Thu 17:35] =>  0:05
     CLOCK: [2019-06-11 Tue 10:55]--[2019-06-11 Tue 11:15] =>  0:20
     CLOCK: [2019-06-04 Tue 09:36]--[2019-06-04 Tue 10:35] =>  0:59
     CLOCK: [2019-06-04 Tue 09:32]--[2019-06-04 Tue 09:35] =>  0:03
@@ -429,6 +432,7 @@ Links:
 
 *** STARTED Move registrar into assets                                :story:
     :LOGBOOK:
+    CLOCK: [2019-10-24 Thu 08:20]--[2019-10-24 Thu 08:43] =>  0:23
     CLOCK: [2019-06-12 Wed 15:08]--[2019-06-12 Wed 17:09] =>  2:01
     CLOCK: [2019-06-11 Tue 21:31]--[2019-06-11 Tue 22:52] =>  1:21
     CLOCK: [2019-06-11 Tue 11:57]--[2019-06-11 Tue 12:20] =>  0:23
@@ -463,6 +467,14 @@ Notes:
 - leaves need to know of the registrar. This is so that we can call it
   in their generated tests. We could use the registrar transform to go
   and find all leaves and populate their registrar name.
+- current state is that we cannot generate the registrar for some
+  reason.
+- test model with registrar is C++ model. Type is called
+  registrar. Its probably not a good idea to also call it registrar -
+  wouldn't that clash with the existing type?
+- we should have a warning/error: if using boost serialisation with a
+  model that has inheritance, the registrar should be present. Added
+  to warnings story.
 
 *** STARTED Fix compilation errors in nightly                         :story:
     :LOGBOOK:
@@ -531,10 +543,19 @@ Notes:
   have c++ 17 support.
 - nightlies are now failing with a missing reference to SQL lite.
 
-*** Replace =operator<= for sorting with lambdas                      :story:
+*** STARTED Setup laptop to work on dogen                             :story:
+    :LOGBOOK:
+    CLOCK: [2019-10-24 Thu 08:03]--[2019-10-24 Thu 08:20] =>  0:17
+    :END:
 
-We have used =operator<= a lot for sorting lists. We don't really need
-this since c++ 11, we can just create a simple inline lambda.
+We haven't used the laptop for dogen for quite a bit so its behind the
+main machine. Get it in a shape to do development again.
+
+Items missing:
+
+- consolas font
+- dir locals for projects
+- polymode
 
 *** STARTED Org-mode as a carrier format for modeling                 :story:
     :LOGBOOK:
@@ -570,6 +591,86 @@ Links:
 - [[https://orgmode.org/worg/dev/org-element-api.html][Org Element API]]
 - [[https://github.com/ngortheone/org-rs][org-rs]]: rust library for org-mode.
 - [[https://github.com/felipealmeida/orgmode-parsers][orgmode-parsers]]
+
+*** STARTED Create a "modeling" report                                :story:
+    :LOGBOOK:
+    CLOCK: [2019-10-24 Thu 17:50]--[2019-10-24 Thu 18:13] =>  0:23
+    CLOCK: [2019-10-24 Thu 17:36]--[2019-10-24 Thu 17:49] =>  0:13
+    :END:
+
+At present when we introduce a new modeling element and things stop
+working, its very difficult to understand why. The problem could be
+any where in the pipeline, and looking through the logs and the
+transform reports doesn't make the task easier. The information is
+there but the problem is knowing where to look. The ideal scenario is
+to have a relational model describing all working within dogen, but
+that is a lot of work. One quicker way of getting some of this
+information is to create a "modeling report". This would be in
+org-mode format and have a hierarchical structure like so:
+
+- run:
+  - start time
+  - command line options
+- models:
+  - name of the model
+  - input language, output languages.
+  - path to the model
+  - global enablement properties
+  - type: target or reference.
+- dia elements:
+  - dia object name
+  - dia object type as tag.
+  - stereotypes
+  - transforms: processed and skipped. These are groups of transforms
+    that processed or skipped the element.
+  - assets: asset meta-model elements for this object.
+    - transforms: processed and skipped.
+    - artefacts
+      - flag of enabled or disabled
+      - path
+      - transforms: processed and skipped.
+
+Notes:
+
+- we already have start and end transform/chain in tracer. We just
+  need a way to mark a type as processed at the end of a transform,
+  else it should be marked as ignored/skipped. We can use the
+  qualified name for this; e.g. default the state to ignored and only
+  set it to processed if called. Or maybe we can only state the
+  transforms that touched it and not worry at all about
+  ignored/skipped.
+- we can only tell if an element was processed on a leaf transform,
+  not on a chain.
+- we should add the transform's GUID to the report if they are
+  enabled.
+- because the transforms are in order, we can see who was the last
+  transform that saw a given model element.
+
+Example:
+
+#+begin_src org
+* run
+
+#+end_src
+
+
+
+Tasks:
+
+- add injector id property to asset elements. Populate this property
+  during transforms. Actually we probably should just call it "source
+  element id" and use the same name in the extraction model.
+- add reporting elements to tracing for the modeling report.
+
+*** Make =scoped_tracer= header only                                  :story:
+
+At present we are generating the cpp for this file for no reason, use
+the correct profile for header only.
+
+*** Replace =operator<= for sorting with lambdas                      :story:
+
+We have used =operator<= a lot for sorting lists. We don't really need
+this since c++ 11, we can just create a simple inline lambda.
 
 *** =CMakeFiles= do not reference dogen models                        :story:
 
