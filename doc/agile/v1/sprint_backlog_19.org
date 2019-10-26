@@ -11,28 +11,29 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-10-25 Fri 13:13]
+#+CAPTION: Clock summary at [2019-10-26 Sat 16:41]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *39:07* |       |       | 100.0 |
+| *Total time*                                       | *44:07* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 39:07   |       |       | 100.0 |
-| Active                                             |         | 39:07 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       |  3:36 |   9.2 |
-| Create a demo and presentation for previous sprint |         |       |  1:39 |   4.2 |
-| Sprint and product backlog grooming                |         |       |  3:06 |   7.9 |
-| Remove test model sanitizer                        |         |       |  0:20 |   0.9 |
-| Remove master headers                              |         |       |  1:12 |   3.1 |
-| Fix the issues with tests in reference model       |         |       |  3:53 |   9.9 |
-| Update static strings to string views              |         |       |  1:15 |   3.2 |
-| ODB include directories is incorrect               |         |       |  1:43 |   4.4 |
-| Move registrar into assets                         |         |       |  5:29 |  14.0 |
-| Fix compilation errors in nightly                  |         |       |  0:24 |   1.0 |
-| Upgrade to boost 1.70                              |         |       | 10:00 |  25.6 |
-| Setup laptop to work on dogen                      |         |       |  0:17 |   0.7 |
-| Org-mode as a carrier format for modeling          |         |       |  5:37 |  14.4 |
-| Create a "modeling" report                         |         |       |  0:36 |   1.5 |
+| Stories                                            | 44:07   |       |       | 100.0 |
+| Active                                             |         | 44:07 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       |  3:36 |   8.2 |
+| Create a demo and presentation for previous sprint |         |       |  1:39 |   3.7 |
+| Sprint and product backlog grooming                |         |       |  3:06 |   7.0 |
+| Remove test model sanitizer                        |         |       |  0:20 |   0.8 |
+| Remove master headers                              |         |       |  1:12 |   2.7 |
+| Fix the issues with tests in reference model       |         |       |  3:53 |   8.8 |
+| Update static strings to string views              |         |       |  1:15 |   2.8 |
+| ODB include directories is incorrect               |         |       |  1:43 |   3.9 |
+| Create a "modeling" report                         |         |       |  4:56 |  11.2 |
+| Move registrar into assets                         |         |       |  5:29 |  12.4 |
+| Fix compilation errors in nightly                  |         |       |  0:24 |   0.9 |
+| Upgrade to boost 1.70                              |         |       | 10:00 |  22.7 |
+| Setup laptop to work on dogen                      |         |       |  0:17 |   0.6 |
+| Org-mode as a carrier format for modeling          |         |       |  5:37 |  12.7 |
+| Try to add relational tracing support              |         |       |  0:40 |   1.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -431,6 +432,84 @@ Links:
 - [[https://stackoverflow.com/questions/47475731/cmake-include-directories-for-custom-target-type/58200691#58200691][CMake include_directories for custom target type]]
 - [[https://cmake.org/cmake/help/v3.3/command/target_include_directories.html][CMake manual: target_include_directories]]
 
+*** CANCELLED Create a "modeling" report                              :story:
+    CLOSED: [2019-10-26 Sat 16:02]
+    :LOGBOOK:
+    CLOCK: [2019-10-25 Fri 22:22]--[2019-10-25 Fri 23:40] =>  1:18
+    CLOCK: [2019-10-25 Fri 15:21]--[2019-10-25 Fri 16:41] =>  1:20
+    CLOCK: [2019-10-25 Fri 13:13]--[2019-10-25 Fri 14:55] =>  1:42
+    CLOCK: [2019-10-24 Thu 17:50]--[2019-10-24 Thu 18:13] =>  0:23
+    CLOCK: [2019-10-24 Thu 17:36]--[2019-10-24 Thu 17:49] =>  0:13
+    :END:
+
+*Rationale*: we will address this via the relational model instead.
+
+At present when we introduce a new modeling element and things stop
+working, its very difficult to understand why. The problem could be
+any where in the pipeline, and looking through the logs and the
+transform reports doesn't make the task easier. The information is
+there but the problem is knowing where to look. The ideal scenario is
+to have a relational model describing all working within dogen, but
+that is a lot of work. One quicker way of getting some of this
+information is to create a "modeling report". This would be in
+org-mode format and have a hierarchical structure like so:
+
+- run:
+  - start time
+  - command line options
+- models:
+  - name of the model
+  - input language, output languages.
+  - path to the model
+  - global enablement properties
+  - type: target or reference.
+- dia elements:
+  - dia object name
+  - dia object type as tag.
+  - stereotypes
+  - transforms: processed and skipped. These are groups of transforms
+    that processed or skipped the element.
+  - assets: asset meta-model elements for this object.
+    - transforms: processed and skipped.
+    - artefacts
+      - flag of enabled or disabled
+      - path
+      - transforms: processed and skipped.
+
+Notes:
+
+- we already have start and end transform/chain in tracer. We just
+  need a way to mark a type as processed at the end of a transform,
+  else it should be marked as ignored/skipped. We can use the
+  qualified name for this; e.g. default the state to ignored and only
+  set it to processed if called. Or maybe we can only state the
+  transforms that touched it and not worry at all about
+  ignored/skipped.
+- we can only tell if an element was processed on a leaf transform,
+  not on a chain.
+- we should add the transform's GUID to the report if they are
+  enabled.
+- because the transforms are in order, we can see who was the last
+  transform that saw a given model element.
+
+Tasks:
+
+- add injector id property to asset elements. Populate this property
+  during transforms. Actually we probably should just call it "source
+  element id" and use the same name in the extraction model.
+- add reporting elements to tracing for the modeling report.
+
+Conclusions:
+
+- the general conclusion, after some work in modeling the data types
+  required for this, is that this is a subset of the use cases of the
+  relational model. It will be yet another special case for reporting,
+  which will answer some questions but not all. And in the future we
+  will have to create yet another set of reports to answer different
+  kinds of questions. The relational model is a more general solution
+  to the problem. If we need to extend it we can write stored
+  procedures in postgres.
+
 *** STARTED Move registrar into assets                                :story:
     :LOGBOOK:
     CLOCK: [2019-10-24 Thu 08:20]--[2019-10-24 Thu 08:43] =>  0:23
@@ -593,73 +672,128 @@ Links:
 - [[https://github.com/ngortheone/org-rs][org-rs]]: rust library for org-mode.
 - [[https://github.com/felipealmeida/orgmode-parsers][orgmode-parsers]]
 
-*** STARTED Create a "modeling" report                                :story:
+*** STARTED Try to add relational tracing support                     :story:
     :LOGBOOK:
-    CLOCK: [2019-10-24 Thu 17:50]--[2019-10-24 Thu 18:13] =>  0:23
-    CLOCK: [2019-10-24 Thu 17:36]--[2019-10-24 Thu 17:49] =>  0:13
+    CLOCK: [2019-10-26 Sat 16:01]--[2019-10-26 Sat 16:41] =>  0:40
     :END:
 
-At present when we introduce a new modeling element and things stop
-working, its very difficult to understand why. The problem could be
-any where in the pipeline, and looking through the logs and the
-transform reports doesn't make the task easier. The information is
-there but the problem is knowing where to look. The ideal scenario is
-to have a relational model describing all working within dogen, but
-that is a lot of work. One quicker way of getting some of this
-information is to create a "modeling report". This would be in
-org-mode format and have a hierarchical structure like so:
+Whenever we bump into a problem we seem to spend a lot of time going
+through the log files and trace files trying to figure out where the
+problem is happening. Have a quick go in trying to implement a
+relational model for tracing to see if we can transfer the bulk of the
+data into a relational format which we can query via SQL.
 
-- run:
-  - start time
-  - command line options
-- models:
-  - name of the model
-  - input language, output languages.
-  - path to the model
-  - global enablement properties
-  - type: target or reference.
-- dia elements:
-  - dia object name
-  - dia object type as tag.
-  - stereotypes
-  - transforms: processed and skipped. These are groups of transforms
-    that processed or skipped the element.
-  - assets: asset meta-model elements for this object.
-    - transforms: processed and skipped.
-    - artefacts
-      - flag of enabled or disabled
-      - path
-      - transforms: processed and skipped.
+We've created a basic relational model for tracing. The relational
+part of it seems straightforward (ish); the problem is the integration
+of the tracer with the relational model. At present we rely on the
+fact that all traceable objects have IO enabled; this works because
+the code generator creates the IO facet, which is then used by the
+write method in utility to convert any model type into a
+string. However, we now need to change the approach: we need multiple
+tracing backends:
+
+- file tracer
+- database tracer.
+
+The file tracer is more or less the current tracer. The database
+tracer needs to decompose the objects in existing models into a
+relational representation. In an ideal world, the user would configure
+the tracer to use one of the two backends and the remaining usage
+would be transparent. However, we cannot have an interface for the
+tracer backend that uses template methods because then we'd need
+virtual template functions, it seems.
+
+Another alternative is to make the tracer aware of the model objects
+it is tracing. This is also not ideal because we would create cycles
+int he design.
+
+In effect we need to somehow implement a similar approach to the existing
+tracer: rely on global template functions a-la =operator<<= to
+decompose objects into their relational representations and then
+supply those to the backend. It is not very clear how this would
+work. For now we've postponed this approach as it seems its not going
+to be a quick win.
+
+We should approach this incrementally. Next time we have a bit of
+spare time, we need to generate the model and then create the adapters
+from existing models. Finally we can look at how it will be integrated
+with tracing.
+
+Merged stories:
+
+*Scripts for loading traces into postgres*
+
+- rationale: this story is superseded by having a relational model.
+
+It would be really nice if as part of the tracing generation we also
+generated a set of SQL scripts that:
+
+- created a number of tables
+- copied all of the generated data into the database
+- added a number of utility functions such as get elements in model, etc.
+
+Over time we could build up functionality but to start off with we
+just want something really simple that copies all of the
+files. Interestingly this "looks" like a job for dogen. It would be
+nice to have a meta-model element for this etc.
+
+In the future it would be nice to have a think about the schema so
+that we could do joins etc. For example:
+
+- show me all transforms with element of type X (the state of the
+  element at each transform).
+
+We should also take into account multiple runs. Perhaps a more
+adequate solution is to create a dogen library that has the ORM
+support for this. Once we have proper JSON serialisation we can store
+the objects as JSON serialisable, allowing us to re-run transforms,
+etc.
 
 Notes:
 
-- we already have start and end transform/chain in tracer. We just
-  need a way to mark a type as processed at the end of a transform,
-  else it should be marked as ignored/skipped. We can use the
-  qualified name for this; e.g. default the state to ignored and only
-  set it to processed if called. Or maybe we can only state the
-  transforms that touched it and not worry at all about
-  ignored/skipped.
-- we can only tell if an element was processed on a leaf transform,
-  not on a chain.
-- we should add the transform's GUID to the report if they are
-  enabled.
-- because the transforms are in order, we can see who was the last
-  transform that saw a given model element.
+- ensure we upload the file name or at least the coordinates to the
+  transform graph with the data so that we know what it refers to.
 
-Example:
+*Improved understanding*
 
-#+begin_src org
-run
+Better than uploading a whole load of JSON blobs and then having to do
+a number of really complex queries, is to have a ORM schema that is
+designed to capture the data in the format we're interested in. Then
+we could do very simple queries. What we really care about is
+capturing all attributes of the model as it changes across the
+transformations. We also care about the relationships between
+transformations. We also need a way to uniquely identify elements
+across their entire lifecycle. A simple way would be to create a hash
+of the file name of the model, column and line number. We can then
+associate other IDs to this one such as dia ID, etc.
 
-#+end_src
+We need to create a set of adaptors that convert an existing model
+(injection, coding, etc) into the ORM model and then write the ORM
+model into the database. The ORM model does not need as much detail
+and structure as a regular model; for example, names can be flattened
+or linked into IDs (e.g. name table), etc. Whatever makes sense from a
+relational perspective.
 
-Tasks:
+It would also be nice to dump the log into the database so that we
+could do simple correlations such as "what was logged between the
+start and end of this transform?"
 
-- add injector id property to asset elements. Populate this property
-  during transforms. Actually we probably should just call it "source
-  element id" and use the same name in the extraction model.
-- add reporting elements to tracing for the modeling report.
+Interestingly, this would also allow us to compare things between
+runs. The schema should be designed with this in mind.
+
+*** Consider renaming =origin_types=                                  :story:
+
+We created an enumeration called =origin_types= to distinguish between
+models of different types:
+
+- target model
+- reference model:
+  - proxy reference: a PDM really.
+  - non-proxy reference: a regular dogen model we reference.
+
+However, this is not really the model's "origin". It is more like "the
+model's purpose in this context". We need to think more about the
+meaning of this enumeration.
 
 *** Make =scoped_tracer= header only                                  :story:
 
