@@ -268,6 +268,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/dogen.generation/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.generation.cpp/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.generation.csharp/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.relational/include
     )
 
 #
@@ -291,3 +292,4 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.templating)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.generation)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.generation.cpp)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.generation.csharp)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.relational)
