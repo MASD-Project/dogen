@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  -*- mode: nxml; tab-width: 4; indent-tabs-mode: nil -*-
+   -
+   - Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
+   -
+   - This program is free software; you can redistribute it and/or modify
+   - it under the terms of the GNU General Public License as published by
+   - the Free Software Foundation; either version 3 of the License, or
+   - (at your option) any later version.
+   -
+   - This program is distributed in the hope that it will be useful,
+   - but WITHOUT ANY WARRANTY; without even the implied warranty of
+   - MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+   - GNU General Public License for more details.
+   -
+   - You should have received a copy of the GNU General Public License
+   - along with this program; if not, write to the Free Software
+   - Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   - MA 02110-1301, USA.
+   -
+-->
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+
+    <!--[
+        .NAME: odb.targets
+
+        .SYNOPSIS:
+            Generates all of the ODB files for this project.
+
+        .DESCRIPTION:
+            Calls the ODB compiler against each of the files in this Dogen model that require
+            ODB compilation. Also moves the generated files to their correct location.
+
+        .INPUTS:
+
+        .OUTPUTS:
+    ]-->
+    <Target Name="odb_dogen_relational"
+          DependsOnTargets="odb_dogen_relational_attribute;
+                            odb_dogen_relational_attribute_id;
+                            odb_dogen_relational_element;
+                            odb_dogen_relational_element_id;
+                            odb_dogen_relational_json;
+                            odb_dogen_relational_log;
+                            odb_dogen_relational_model;
+                            odb_dogen_relational_model_id;
+                            odb_dogen_relational_model_set;
+                            odb_dogen_relational_model_set_id;
+                            odb_dogen_relational_run;
+                            odb_dogen_relational_run_id;
+                            odb_dogen_relational_transform;
+                            odb_dogen_relational_transform_components;
+                            odb_dogen_relational_transform_components_key;
+                            odb_dogen_relational_transform_id;
+                            odb_dogen_relational_transform_model;
+                            odb_dogen_relational_transform_model_set;
+                            odb_dogen_relational_xml">
+        <Message Importance="high" Text="ODB dogen_relational "/>
+    </Target>
+
+    <Target Name="odb_dogen_relational_attribute">
+        <Message Importance="high" Text="ODB attribute"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/tracing/attribute_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing $(MSBuildThisFileDirectory)../include/dogen.relational/types/tracing/attribute.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing/attribute-odb.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/tracing/" />
+    </Target>
+    <Target Name="odb_dogen_relational_attribute_id">
+        <Message Importance="high" Text="ODB attribute_id"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/tracing/attribute_id_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing $(MSBuildThisFileDirectory)../include/dogen.relational/types/tracing/attribute_id.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing/attribute_id-odb.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/tracing/" />
+    </Target>
+    <Target Name="odb_dogen_relational_element">
+        <Message Importance="high" Text="ODB element"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/tracing/element_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing $(MSBuildThisFileDirectory)../include/dogen.relational/types/tracing/element.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing/element-odb.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/tracing/" />
+    </Target>
+    <Target Name="odb_dogen_relational_element_id">
+        <Message Importance="high" Text="ODB element_id"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/tracing/element_id_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing $(MSBuildThisFileDirectory)../include/dogen.relational/types/tracing/element_id.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing/element_id-odb.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/tracing/" />
+    </Target>
+    <Target Name="odb_dogen_relational_json">
+        <Message Importance="high" Text="ODB json"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/tracing/json_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing $(MSBuildThisFileDirectory)../include/dogen.relational/types/tracing/json.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing/json-odb.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/tracing/" />
+    </Target>
+    <Target Name="odb_dogen_relational_log">
+        <Message Importance="high" Text="ODB log"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/tracing/log_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing $(MSBuildThisFileDirectory)../include/dogen.relational/types/tracing/log.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing/log-odb.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/tracing/" />
+    </Target>
+    <Target Name="odb_dogen_relational_model">
+        <Message Importance="high" Text="ODB model"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/tracing/model_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing $(MSBuildThisFileDirectory)../include/dogen.relational/types/tracing/model.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing/model-odb.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/tracing/" />
+    </Target>
+    <Target Name="odb_dogen_relational_model_id">
+        <Message Importance="high" Text="ODB model_id"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/tracing/model_id_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing $(MSBuildThisFileDirectory)../include/dogen.relational/types/tracing/model_id.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing/model_id-odb.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/tracing/" />
+    </Target>
+    <Target Name="odb_dogen_relational_model_set">
+        <Message Importance="high" Text="ODB model_set"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/tracing/model_set_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing $(MSBuildThisFileDirectory)../include/dogen.relational/types/tracing/model_set.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing/model_set-odb.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/tracing/" />
+    </Target>
+    <Target Name="odb_dogen_relational_model_set_id">
+        <Message Importance="high" Text="ODB model_set_id"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/tracing/model_set_id_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing $(MSBuildThisFileDirectory)../include/dogen.relational/types/tracing/model_set_id.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing/model_set_id-odb.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/tracing/" />
+    </Target>
+    <Target Name="odb_dogen_relational_run">
+        <Message Importance="high" Text="ODB run"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/tracing/run_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing $(MSBuildThisFileDirectory)../include/dogen.relational/types/tracing/run.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing/run-odb.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/tracing/" />
+    </Target>
+    <Target Name="odb_dogen_relational_run_id">
+        <Message Importance="high" Text="ODB run_id"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/tracing/run_id_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing $(MSBuildThisFileDirectory)../include/dogen.relational/types/tracing/run_id.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing/run_id-odb.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/tracing/" />
+    </Target>
+    <Target Name="odb_dogen_relational_transform">
+        <Message Importance="high" Text="ODB transform"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/tracing/transform_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing $(MSBuildThisFileDirectory)../include/dogen.relational/types/tracing/transform.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing/transform-odb.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/tracing/" />
+    </Target>
+    <Target Name="odb_dogen_relational_transform_components">
+        <Message Importance="high" Text="ODB transform_components"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/tracing/transform_components_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing $(MSBuildThisFileDirectory)../include/dogen.relational/types/tracing/transform_components.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing/transform_components-odb.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/tracing/" />
+    </Target>
+    <Target Name="odb_dogen_relational_transform_components_key">
+        <Message Importance="high" Text="ODB transform_components_key"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/tracing/transform_components_key_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing $(MSBuildThisFileDirectory)../include/dogen.relational/types/tracing/transform_components_key.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing/transform_components_key-odb.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/tracing/" />
+    </Target>
+    <Target Name="odb_dogen_relational_transform_id">
+        <Message Importance="high" Text="ODB transform_id"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/tracing/transform_id_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing $(MSBuildThisFileDirectory)../include/dogen.relational/types/tracing/transform_id.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing/transform_id-odb.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/tracing/" />
+    </Target>
+    <Target Name="odb_dogen_relational_transform_model">
+        <Message Importance="high" Text="ODB transform_model"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/tracing/transform_model_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing $(MSBuildThisFileDirectory)../include/dogen.relational/types/tracing/transform_model.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing/transform_model-odb.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/tracing/" />
+    </Target>
+    <Target Name="odb_dogen_relational_transform_model_set">
+        <Message Importance="high" Text="ODB transform_model_set"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/tracing/transform_model_set_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing $(MSBuildThisFileDirectory)../include/dogen.relational/types/tracing/transform_model_set.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing/transform_model_set-odb.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/tracing/" />
+    </Target>
+    <Target Name="odb_dogen_relational_xml">
+        <Message Importance="high" Text="ODB xml"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)odb/common_options.odb --options-file $(MSBuildThisFileDirectory)odb/tracing/xml_options.odb --output-dir $(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing $(MSBuildThisFileDirectory)../include/dogen.relational/types/tracing/xml.hpp" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)../include/dogen.relational/odb/tracing/xml-odb.cxx"
+            DestinationFolder="$(MSBuildThisFileDirectory)odb/tracing/" />
+    </Target>
+</Project>
