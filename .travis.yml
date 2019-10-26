@@ -26,6 +26,15 @@ git:
   depth: 2
 
 matrix:
+  allow_failures:
+    # Linux GCC is taking too long.
+    - os: linux
+      compiler: gcc
+      env: configuration=Release compiler="gcc9" generator="Ninja" build_group="Continuous" report_name="Linux Gcc Releases"
+    - os: linux
+      compiler: gcc
+      env: configuration=Debug compiler="gcc9" generator="Ninja" build_group="Continuous"  report_name="Linux Gcc Debug"
+
   include:
     #
     # OSX Clang
