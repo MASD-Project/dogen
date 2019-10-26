@@ -396,6 +396,28 @@ else()
 endif()
 
 #
+# ODB
+#
+find_package(odb COMPONENTS libodb boost pgsql REQUIRED)
+if (odb_FOUND)
+    message(STATUS "Found ODB Libraries...")
+    set(ODB_LIBODB_FOUND ${odb_FOUND})
+else()
+    message(FATAL_ERROR "ODB Libraries NOT Found.")
+endif()
+
+find_program(ODB_EXECUTABLE NAMES odb)
+
+if (ODB_EXECUTABLE)
+    message(STATUS "Found ODB Compiler...")
+    add_custom_target(odb_all)
+    add_custom_target(oa)
+    add_dependencies(oa odb_all)
+else()
+    message(STATUS "ODB Compiler NOT Found.")
+endif()
+
+#
 # Dogen
 #
 

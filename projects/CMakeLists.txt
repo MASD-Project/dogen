@@ -271,6 +271,12 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/dogen.relational/include
     )
 
+get_directory_property(dirs INCLUDE_DIRECTORIES)
+set(global_includes "")
+foreach(dir IN LISTS dirs)
+    set(ODB_EXECUTABLE_GLOBAL_ARGS ${ODB_EXECUTABLE_GLOBAL_ARGS} -I ${dir})
+endforeach()
+
 #
 # add all other projects
 #

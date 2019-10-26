@@ -11,30 +11,31 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-10-26 Sat 18:00]
-| <75>                                               |         |       |       |       |
-| Headline                                           | Time    |       |       |     % |
-|----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *44:42* |       |       | 100.0 |
-|----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 44:42   |       |       | 100.0 |
-| Active                                             |         | 44:42 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       |  3:36 |   8.1 |
-| Create a demo and presentation for previous sprint |         |       |  1:39 |   3.7 |
-| Sprint and product backlog grooming                |         |       |  3:06 |   6.9 |
-| Remove test model sanitizer                        |         |       |  0:20 |   0.7 |
-| Remove master headers                              |         |       |  1:12 |   2.7 |
-| Fix the issues with tests in reference model       |         |       |  3:53 |   8.7 |
-| Update static strings to string views              |         |       |  1:15 |   2.8 |
-| ODB include directories is incorrect               |         |       |  1:43 |   3.8 |
-| Create a "modeling" report                         |         |       |  4:56 |  11.0 |
-| Move visual studio related options to top profile  |         |       |  0:17 |   0.6 |
-| Move registrar into assets                         |         |       |  5:29 |  12.3 |
-| Fix compilation errors in nightly                  |         |       |  0:24 |   0.9 |
-| Upgrade to boost 1.70                              |         |       | 10:00 |  22.4 |
-| Setup laptop to work on dogen                      |         |       |  0:17 |   0.6 |
-| Org-mode as a carrier format for modeling          |         |       |  5:37 |  12.6 |
-| Try to add relational tracing support              |         |       |  0:58 |   2.2 |
+#+CAPTION: Clock summary at [2019-10-26 Sat 18:24]
+| <75>                                                      |         |       |       |       |
+| Headline                                                  | Time    |       |       |     % |
+|-----------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                              | *45:05* |       |       | 100.0 |
+|-----------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                   | 45:05   |       |       | 100.0 |
+| Active                                                    |         | 45:05 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  3:36 |   8.0 |
+| Create a demo and presentation for previous sprint        |         |       |  1:39 |   3.7 |
+| Sprint and product backlog grooming                       |         |       |  3:06 |   6.9 |
+| Remove test model sanitizer                               |         |       |  0:20 |   0.7 |
+| Remove master headers                                     |         |       |  1:12 |   2.7 |
+| Fix the issues with tests in reference model              |         |       |  3:53 |   8.6 |
+| Update static strings to string views                     |         |       |  1:15 |   2.8 |
+| ODB include directories is incorrect                      |         |       |  1:43 |   3.8 |
+| Create a "modeling" report                                |         |       |  4:56 |  10.9 |
+| Move visual studio related options to top profile         |         |       |  0:17 |   0.6 |
+| Move registrar into assets                                |         |       |  5:29 |  12.2 |
+| Fix compilation errors in nightly                         |         |       |  0:24 |   0.9 |
+| Upgrade to boost 1.70                                     |         |       | 10:00 |  22.2 |
+| Setup laptop to work on dogen                             |         |       |  0:17 |   0.6 |
+| Org-mode as a carrier format for modeling                 |         |       |  5:37 |  12.5 |
+| Try to add relational tracing support                     |         |       |  0:58 |   2.1 |
+| Fix incorrect message keyword when detecting ODB includes |         |       |  0:23 |   0.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -799,6 +800,19 @@ start and end of this transform?"
 
 Interestingly, this would also allow us to compare things between
 runs. The schema should be designed with this in mind.
+
+*** STARTED Fix incorrect message keyword when detecting ODB includes :story:
+    :LOGBOOK:
+    CLOCK: [2019-10-26 Sat 18:01]--[2019-10-26 Sat 18:24] =>  0:23
+    :END:
+
+We are using the non-existent keyword =FATAL= in the ODB portion of
+the CMakeLists. We need update it to =FATAL_ERROR= as per the
+documentation.
+
+Links:
+
+- [[https://cmake.org/cmake/help/v3.0/command/message.html][message]]
 
 *** Consider renaming =origin_types=                                  :story:
 

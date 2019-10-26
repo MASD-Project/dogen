@@ -105,7 +105,7 @@ a.stream() << "    \"${CMAKE_CURRENT_SOURCE_DIR}/*." << c.implementation_file_ex
 a.stream() << std::endl;
         if (a.is_odb_facet_enabled() && !c.odb_targets().targets().empty()) {
 a.stream() << "if(NOT ODB_LIBODB_FOUND)" << std::endl;
-a.stream() << "    message(FATAL \"ODB include directories not defined.\")" << std::endl;
+a.stream() << "    message(FATAL_ERROR \"ODB include directories not defined.\")" << std::endl;
 a.stream() << "endif()" << std::endl;
 a.stream() << std::endl;
 a.stream() << "set(odb_files \"\")" << std::endl;

@@ -89,7 +89,7 @@ file(GLOB_RECURSE files RELATIVE
         if (a.is_odb_facet_enabled() && !c.odb_targets().targets().empty()) {
 #>
 if(NOT ODB_LIBODB_FOUND)
-    message(FATAL "ODB include directories not defined.")
+    message(FATAL_ERROR "ODB include directories not defined.")
 endif()
 
 set(odb_files "")
