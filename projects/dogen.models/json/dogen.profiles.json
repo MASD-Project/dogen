@@ -176,6 +176,46 @@
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
             "masd.variability.template_kind": "instance"
           }
+        },
+        {
+          "name": "masd.generation.cpp.msbuild.enabled",
+          "type": "",
+          "value": "false",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "instance"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.visual_studio.project.enabled",
+          "type": "",
+          "value": "false",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "instance"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.visual_studio.solution.enabled",
+          "type": "",
+          "value": "false",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "instance"
+          }
+        },
+        {
+          "name": "masd.generation.csharp.enabled",
+          "type": "",
+          "value": "false",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "instance"
+          }
         }
       ]
     },
@@ -885,6 +925,38 @@
       "attributes": [
         {
           "name": "masd.generation.cpp.lexical_cast.enabled",
+          "type": "",
+          "value": "true",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "instance"
+          }
+        }
+      ]
+    },
+    {
+      "name": "base::relational_profile",
+      "parents": [
+        "base::basic_facet_selection"
+      ],
+      "stereotypes": [
+        "masd::variability::profile_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.cpp.cmake.enabled",
+          "type": "",
+          "value": "true",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "instance"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.odb.enabled",
           "type": "",
           "value": "true",
           "tagged_values": {
