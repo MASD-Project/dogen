@@ -11,31 +11,31 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-10-26 Sat 18:24]
+#+CAPTION: Clock summary at [2019-10-27 Sun 12:56]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *45:05* |       |       | 100.0 |
+| *Total time*                                              | *46:29* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 45:05   |       |       | 100.0 |
-| Active                                                    |         | 45:05 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       |  3:36 |   8.0 |
-| Create a demo and presentation for previous sprint        |         |       |  1:39 |   3.7 |
-| Sprint and product backlog grooming                       |         |       |  3:06 |   6.9 |
+| Stories                                                   | 46:29   |       |       | 100.0 |
+| Active                                                    |         | 46:29 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  3:36 |   7.7 |
+| Create a demo and presentation for previous sprint        |         |       |  1:39 |   3.5 |
+| Sprint and product backlog grooming                       |         |       |  3:21 |   7.2 |
 | Remove test model sanitizer                               |         |       |  0:20 |   0.7 |
-| Remove master headers                                     |         |       |  1:12 |   2.7 |
-| Fix the issues with tests in reference model              |         |       |  3:53 |   8.6 |
-| Update static strings to string views                     |         |       |  1:15 |   2.8 |
-| ODB include directories is incorrect                      |         |       |  1:43 |   3.8 |
-| Create a "modeling" report                                |         |       |  4:56 |  10.9 |
+| Remove master headers                                     |         |       |  1:12 |   2.6 |
+| Fix the issues with tests in reference model              |         |       |  3:53 |   8.4 |
+| Update static strings to string views                     |         |       |  1:15 |   2.7 |
+| ODB include directories is incorrect                      |         |       |  1:43 |   3.7 |
+| Create a "modeling" report                                |         |       |  4:56 |  10.6 |
 | Move visual studio related options to top profile         |         |       |  0:17 |   0.6 |
-| Move registrar into assets                                |         |       |  5:29 |  12.2 |
+| Move registrar into assets                                |         |       |  5:29 |  11.8 |
 | Fix compilation errors in nightly                         |         |       |  0:24 |   0.9 |
-| Upgrade to boost 1.70                                     |         |       | 10:00 |  22.2 |
+| Upgrade to boost 1.70                                     |         |       | 10:00 |  21.5 |
 | Setup laptop to work on dogen                             |         |       |  0:17 |   0.6 |
-| Org-mode as a carrier format for modeling                 |         |       |  5:37 |  12.5 |
-| Try to add relational tracing support                     |         |       |  0:58 |   2.1 |
-| Fix incorrect message keyword when detecting ODB includes |         |       |  0:23 |   0.9 |
+| Org-mode as a carrier format for modeling                 |         |       |  5:37 |  12.1 |
+| Try to add relational tracing support                     |         |       |  2:07 |   4.6 |
+| Fix incorrect message keyword when detecting ODB includes |         |       |  0:23 |   0.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -213,6 +213,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-10-27 Sun 12:41]--[2019-10-27 Sun 12:56] =>  0:15
     CLOCK: [2019-10-25 Fri 12:41]--[2019-10-25 Fri 13:12] =>  0:31
     CLOCK: [2019-10-24 Thu 17:30]--[2019-10-24 Thu 17:35] =>  0:05
     CLOCK: [2019-06-11 Tue 10:55]--[2019-06-11 Tue 11:15] =>  0:20
@@ -647,6 +648,8 @@ Items missing:
 - consolas font
 - dir locals for projects
 - polymode
+- build2
+- odb
 
 *** STARTED Org-mode as a carrier format for modeling                 :story:
     :LOGBOOK:
@@ -685,6 +688,9 @@ Links:
 
 *** STARTED Try to add relational tracing support                     :story:
     :LOGBOOK:
+    CLOCK: [2019-10-27 Sun 12:05]--[2019-10-27 Sun 12:40] =>  0:48
+    CLOCK: [2019-10-27 Sun 08:57]--[2019-10-27 Sun 09:04] =>  0:07
+    CLOCK: [2019-10-27 Sun 08:29]--[2019-10-27 Sun 08:56] =>  0:27
     CLOCK: [2019-10-26 Sat 17:54]--[2019-10-26 Sat 18:00] =>  0:06
     CLOCK: [2019-10-26 Sat 17:47]--[2019-10-26 Sat 17:53] =>  0:06
     CLOCK: [2019-10-26 Sat 17:40]--[2019-10-26 Sat 17:46] =>  0:06
@@ -738,6 +744,30 @@ Notes:
 - compilation generates an ODB error:
 
 : FATALODB include directories not defined.
+
+- the key difference between northwind and tracing is that we have a
+  namespace. The application of the schema pragma is probably not
+  working due to this. We need to look into the transform to see how
+  that pragma propagates.
+- the problem arises because we are only populating the primitive's
+  properties if there is a top-level pragma. As the schema is not
+  populated for the namespace, there isn't one. It is not clear why
+  one would want to skip properties such as DB member if there isn't a
+  schema, but perhaps this is due to some ODB error. We should
+  probably issue an error or warning if we cannot generate code
+  without a schema name.
+- with regards to the relational model, the problem is that we can't
+  really create a schema for each namespace in a model because schemas
+  are not really like namespaces. The entities in a schema should
+  really be self-contained and not refer to other schemas or else the
+  database will be confusing to use. For example in postgres we will
+  need to set the schema path, etc in order to see the different
+  tables. One possible solution is to set the schema name to the same
+  value for all namespaces (e.g. =dogen=). This would then allow us to
+  have namespaces in C++ but not in the database.
+- it seems foreign keys are not supported at present. We probably need
+  support for this in order to query quickly or else we will have to
+  manually setup indices for each of these joining fields.
 
 Merged stories:
 
@@ -809,6 +839,12 @@ runs. The schema should be designed with this in mind.
 We are using the non-existent keyword =FATAL= in the ODB portion of
 the CMakeLists. We need update it to =FATAL_ERROR= as per the
 documentation.
+
+Actually the right solution for this is to remove this check
+altogether. We don't really know how the user is finding ODB and the
+more checks we do the larger the interface between our generated cmake
+file and the regular cmake files. By removing the check we pass the
+work to the user.
 
 Links:
 

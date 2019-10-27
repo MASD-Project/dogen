@@ -12562,6 +12562,26 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider adding a wt frontend                                     :story:
+
+Once we have the relational model hooked in, the next step is to make
+use of the available information in the database. We will start with
+simple PL/SQL scripts etc but this is a cumbersome way of
+understanding the data. It would be really nice to have a wt interface
+to visualise all the information in the database such as the transform
+graph.
+
+Ideas:
+
+- we could create a baobab like graph, if it is available in wt, to
+  show the cost of each transform.
+- we could also display the associated log lines with each transform
+  and have a "filtering function" that uses postgres' text search.
+- we could also add the transform graph. The ideal scenario would be
+  to have an interactive graph with weighted sizes for each transform
+  and chain, and allow users to click on a chain to see its
+  components.
+
 *** Investigate if Seamless template can be used instead of stitch    :story:
 
 According to their project:
