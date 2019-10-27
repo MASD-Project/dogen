@@ -409,7 +409,7 @@ endif()
 find_program(ODB_EXECUTABLE NAMES odb)
 
 if (ODB_EXECUTABLE)
-    message(STATUS "Found ODB Compiler...")
+    message(STATUS "Found ODB Compiler... (${ODB_EXECUTABLE})")
     add_custom_target(odb_all)
     add_custom_target(oa)
     add_dependencies(oa odb_all)
