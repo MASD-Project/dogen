@@ -219,7 +219,7 @@ void orm_transform::transform_objects(
         /*
          * If we do not have a configuration, there is nothing to be
          * done for this object. Configurations are setup during
-         * stereofeatures transform, if the ORM stereofeatures were present.
+         * stereotypes transform, if the ORM stereotypes were present.
          */
         auto& o(*pair.second);
         if (!o.orm_properties())
@@ -289,7 +289,7 @@ void orm_transform::transform_primitives(
         /*
          * If we do not have a configuration, there is nothing to be
          * done for this primitive. Configurations are setup during
-         * stereofeatures transform, if the ORM stereofeatures were present.
+         * stereotypes transform, if the ORM stereotypes were present.
          */
         auto& p(*pair.second);
         BOOST_LOG_SEV(lg, trace) << "Processing: "
