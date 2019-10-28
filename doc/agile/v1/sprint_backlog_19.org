@@ -10,32 +10,33 @@
 * Stories
 
 ** Active
+
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-10-28 Mon 08:47]
+#+CAPTION: Clock summary at [2019-10-28 Mon 19:10]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *47:03* |       |       | 100.0 |
+| *Total time*                                              | *48:16* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 47:03   |       |       | 100.0 |
-| Active                                                    |         | 47:03 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       |  3:36 |   7.7 |
-| Create a demo and presentation for previous sprint        |         |       |  1:39 |   3.5 |
-| Sprint and product backlog grooming                       |         |       |  3:21 |   7.1 |
+| Stories                                                   | 48:16   |       |       | 100.0 |
+| Active                                                    |         | 48:16 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  3:36 |   7.5 |
+| Create a demo and presentation for previous sprint        |         |       |  1:39 |   3.4 |
+| Sprint and product backlog grooming                       |         |       |  3:30 |   7.3 |
 | Remove test model sanitizer                               |         |       |  0:20 |   0.7 |
-| Remove master headers                                     |         |       |  1:12 |   2.6 |
-| Fix the issues with tests in reference model              |         |       |  3:53 |   8.3 |
-| Update static strings to string views                     |         |       |  1:15 |   2.7 |
+| Remove master headers                                     |         |       |  1:12 |   2.5 |
+| Fix the issues with tests in reference model              |         |       |  3:53 |   8.0 |
+| Update static strings to string views                     |         |       |  1:15 |   2.6 |
 | ODB include directories is incorrect                      |         |       |  1:43 |   3.6 |
-| Create a "modeling" report                                |         |       |  4:56 |  10.5 |
+| Create a "modeling" report                                |         |       |  4:56 |  10.2 |
 | Move visual studio related options to top profile         |         |       |  0:17 |   0.6 |
 | Fix incorrect message keyword when detecting ODB includes |         |       |  0:29 |   1.0 |
-| Move registrar into assets                                |         |       |  5:29 |  11.7 |
-| Fix compilation errors in nightly                         |         |       |  0:24 |   0.9 |
-| Upgrade to boost 1.70                                     |         |       | 10:00 |  21.3 |
+| Move registrar into assets                                |         |       |  5:29 |  11.4 |
+| Fix compilation errors in nightly                         |         |       |  0:24 |   0.8 |
+| Upgrade to boost 1.70                                     |         |       | 10:00 |  20.7 |
 | Setup laptop to work on dogen                             |         |       |  0:45 |   1.6 |
-| Org-mode as a carrier format for modeling                 |         |       |  5:37 |  11.9 |
-| Try to add relational tracing support                     |         |       |  2:07 |   4.5 |
+| Org-mode as a carrier format for modeling                 |         |       |  5:37 |  11.6 |
+| Add relational tracing support                            |         |       |  3:11 |   6.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -213,6 +214,8 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-10-28 Mon 17:40]--[2019-10-28 Mon 17:44] =>  0:04
+    CLOCK: [2019-10-28 Mon 08:53]--[2019-10-28 Mon 08:58] =>  0:05
     CLOCK: [2019-10-27 Sun 12:41]--[2019-10-27 Sun 12:56] =>  0:15
     CLOCK: [2019-10-25 Fri 12:41]--[2019-10-25 Fri 13:12] =>  0:31
     CLOCK: [2019-10-24 Thu 17:30]--[2019-10-24 Thu 17:35] =>  0:05
@@ -710,8 +713,11 @@ Links:
 - [[https://github.com/ngortheone/org-rs][org-rs]]: rust library for org-mode.
 - [[https://github.com/felipealmeida/orgmode-parsers][orgmode-parsers]]
 
-*** STARTED Try to add relational tracing support                     :story:
+*** STARTED Add relational tracing support                            :story:
     :LOGBOOK:
+    CLOCK: [2019-10-28 Mon 18:55]--[2019-10-28 Mon 19:10] =>  0:15
+    CLOCK: [2019-10-28 Mon 17:45]--[2019-10-28 Mon 18:20] =>  0:35
+    CLOCK: [2019-10-28 Mon 17:29]--[2019-10-28 Mon 17:39] =>  0:10
     CLOCK: [2019-10-28 Mon 08:48]--[2019-10-28 Mon 08:52] =>  0:04
     CLOCK: [2019-10-27 Sun 12:05]--[2019-10-27 Sun 12:40] =>  0:48
     CLOCK: [2019-10-27 Sun 08:57]--[2019-10-27 Sun 09:04] =>  0:07
@@ -793,6 +799,9 @@ Notes:
 - it seems foreign keys are not supported at present. We probably need
   support for this in order to query quickly or else we will have to
   manually setup indices for each of these joining fields.
+- we need a command line option to choose the tracing backend
+  (e.g. file or database). We also need the database configuration
+  parameters: hostname, port, database, user.
 
 Merged stories:
 
@@ -855,6 +864,38 @@ start and end of this transform?"
 
 Interestingly, this would also allow us to compare things between
 runs. The schema should be designed with this in mind.
+
+*** Generate ORM tests                                                :story:
+
+We do not seem to be testing the generated ODB code. We don't need to
+test ODB per se, but we should at least have some sanity checks that
+test CRUD functionality.
+
+Notes:
+
+- for this we need a "masd database".
+- tests should only trigger if postgres or some other relational
+  database is detected.
+- if foreign keys are used we need to detect them and ensure we
+  populate the data accordingly.
+
+*** Schema name in ORM should be transitive                           :story:
+
+At present when we define the schema name on a top-level namespace, we
+don't "inherit" it from child namespaces. The problem is compounded by
+the fact that we need the schema name in order to output ODB pragmas
+(separate bug). It seems more logical to propagate the schema name to
+child namespaces.
+
+*** ODB pragmas not populated when schema name is not set             :story:
+
+At present we have a bug whereby not setting the schema name results
+in not having most ODB pragmas set. We should always populate them
+even if the schema name is not set. To be precise, the problem is not
+directly related to the schema name - we just require some ORM
+property to be set. AS it happens, it normally tends to be the schema
+name, because it makes sense to set it when defining a relational
+model. This is why we never bumped into this problem before.
 
 *** Consider renaming =origin_types=                                  :story:
 
