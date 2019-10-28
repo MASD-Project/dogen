@@ -19,12 +19,9 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/io/tracing_level_io.hpp"
-#include "dogen/io/tracing_format_io.hpp"
-#include "dogen/io/tracing_backend_io.hpp"
-#include "dogen/io/tracing_configuration_io.hpp"
+#include "dogen/io/relational_database_io.hpp"
+#include "dogen/io/database_configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -36,22 +33,15 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace dogen {
 
-std::ostream& operator<<(std::ostream& s, const tracing_configuration& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
+std::ostream& operator<<(std::ostream& s, const database_configuration& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::tracing_configuration\"" << ", "
-      << "\"level\": " << v.level() << ", "
-      << "\"format\": " << v.format() << ", "
-      << "\"guids_enabled\": " << v.guids_enabled() << ", "
-      << "\"logging_impact\": " << "\"" << tidy_up_string(v.logging_impact()) << "\"" << ", "
-      << "\"use_short_names\": " << v.use_short_names() << ", "
-      << "\"output_directory\": " << "\"" << v.output_directory().generic_string() << "\"" << ", "
-      << "\"backend\": " << v.backend()
+      << "\"__type__\": " << "\"dogen::database_configuration\"" << ", "
+      << "\"host\": " << "\"" << tidy_up_string(v.host()) << "\"" << ", "
+      << "\"port\": " << v.port() << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"user\": " << "\"" << tidy_up_string(v.user()) << "\"" << ", "
+      << "\"password\": " << "\"" << tidy_up_string(v.password()) << "\"" << ", "
+      << "\"relational_database\": " << v.relational_database()
       << " }";
     return(s);
 }

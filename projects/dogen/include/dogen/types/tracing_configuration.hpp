@@ -30,6 +30,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/types/tracing_level.hpp"
 #include "dogen/types/tracing_format.hpp"
+#include "dogen/types/tracing_backend.hpp"
 
 namespace dogen {
 
@@ -54,7 +55,8 @@ public:
         const bool guids_enabled,
         const std::string& logging_impact,
         const bool use_short_names,
-        const boost::filesystem::path& output_directory);
+        const boost::filesystem::path& output_directory,
+        const dogen::tracing_backend backend);
 
 public:
     /**
@@ -67,6 +69,8 @@ public:
 
     /**
      * @brief Format to use when writting trace files.
+     *
+     * Only valid for the file backend.
      */
     /**@{*/
     dogen::tracing_format format() const;
@@ -110,6 +114,14 @@ public:
     tracing_configuration& output_directory(const boost::filesystem::path& v);
     tracing_configuration& output_directory(const boost::filesystem::path&& v);
 
+    /**
+     * @brief Which backend to use for tracing.
+     */
+    /**@{*/
+    dogen::tracing_backend backend() const;
+    tracing_configuration& backend(const dogen::tracing_backend v);
+    /**@}*/
+
 public:
     bool operator==(const tracing_configuration& rhs) const;
     bool operator!=(const tracing_configuration& rhs) const {
@@ -127,6 +139,7 @@ private:
     std::string logging_impact_;
     bool use_short_names_;
     boost::filesystem::path output_directory_;
+    dogen::tracing_backend backend_;
 };
 
 }

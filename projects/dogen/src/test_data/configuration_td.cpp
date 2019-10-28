@@ -22,6 +22,7 @@
 #include "dogen/test_data/configuration_td.hpp"
 #include "dogen/test_data/diffing_configuration_td.hpp"
 #include "dogen/test_data/tracing_configuration_td.hpp"
+#include "dogen/test_data/database_configuration_td.hpp"
 #include "dogen/test_data/reporting_configuration_td.hpp"
 #include "dogen/test_data/model_processing_configuration_td.hpp"
 
@@ -75,6 +76,18 @@ create_boost_filesystem_path(const unsigned int position) {
     return boost::filesystem::path(s.str());
 }
 
+dogen::database_configuration
+create_dogen_database_configuration(const unsigned int position) {
+    return dogen::database_configuration_generator::create(position);
+}
+
+boost::optional<dogen::database_configuration>
+create_boost_optional_dogen_database_configuration(unsigned int position) {
+    boost::optional<dogen::database_configuration> r(
+        create_dogen_database_configuration(position));
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -88,6 +101,7 @@ populate(const unsigned int position, result_type& v) {
     v.diffing(create_boost_optional_dogen_diffing_configuration(position + 2));
     v.reporting(create_boost_optional_dogen_reporting_configuration(position + 3));
     v.byproduct_directory(create_boost_filesystem_path(position + 4));
+    v.database(create_boost_optional_dogen_database_configuration(position + 5));
 }
 
 configuration_generator::result_type

@@ -26,7 +26,8 @@ tracing_configuration::tracing_configuration()
     : level_(static_cast<dogen::tracing_level>(0)),
       format_(static_cast<dogen::tracing_format>(0)),
       guids_enabled_(static_cast<bool>(0)),
-      use_short_names_(static_cast<bool>(0)) { }
+      use_short_names_(static_cast<bool>(0)),
+      backend_(static_cast<dogen::tracing_backend>(0)) { }
 
 tracing_configuration::tracing_configuration(tracing_configuration&& rhs)
     : level_(std::move(rhs.level_)),
@@ -34,7 +35,8 @@ tracing_configuration::tracing_configuration(tracing_configuration&& rhs)
       guids_enabled_(std::move(rhs.guids_enabled_)),
       logging_impact_(std::move(rhs.logging_impact_)),
       use_short_names_(std::move(rhs.use_short_names_)),
-      output_directory_(std::move(rhs.output_directory_)) { }
+      output_directory_(std::move(rhs.output_directory_)),
+      backend_(std::move(rhs.backend_)) { }
 
 tracing_configuration::tracing_configuration(
     const dogen::tracing_level level,
@@ -42,13 +44,15 @@ tracing_configuration::tracing_configuration(
     const bool guids_enabled,
     const std::string& logging_impact,
     const bool use_short_names,
-    const boost::filesystem::path& output_directory)
+    const boost::filesystem::path& output_directory,
+    const dogen::tracing_backend backend)
     : level_(level),
       format_(format),
       guids_enabled_(guids_enabled),
       logging_impact_(logging_impact),
       use_short_names_(use_short_names),
-      output_directory_(output_directory) { }
+      output_directory_(output_directory),
+      backend_(backend) { }
 
 void tracing_configuration::swap(tracing_configuration& other) noexcept {
     using std::swap;
@@ -58,6 +62,7 @@ void tracing_configuration::swap(tracing_configuration& other) noexcept {
     swap(logging_impact_, other.logging_impact_);
     swap(use_short_names_, other.use_short_names_);
     swap(output_directory_, other.output_directory_);
+    swap(backend_, other.backend_);
 }
 
 bool tracing_configuration::operator==(const tracing_configuration& rhs) const {
@@ -66,7 +71,8 @@ bool tracing_configuration::operator==(const tracing_configuration& rhs) const {
         guids_enabled_ == rhs.guids_enabled_ &&
         logging_impact_ == rhs.logging_impact_ &&
         use_short_names_ == rhs.use_short_names_ &&
-        output_directory_ == rhs.output_directory_;
+        output_directory_ == rhs.output_directory_ &&
+        backend_ == rhs.backend_;
 }
 
 tracing_configuration& tracing_configuration::operator=(tracing_configuration other) {
@@ -144,6 +150,15 @@ tracing_configuration& tracing_configuration::output_directory(const boost::file
 
 tracing_configuration& tracing_configuration::output_directory(const boost::filesystem::path&& v) {
     output_directory_ = std::move(v);
+    return *this;
+}
+
+dogen::tracing_backend tracing_configuration::backend() const {
+    return backend_;
+}
+
+tracing_configuration& tracing_configuration::backend(const dogen::tracing_backend v) {
+    backend_ = v;
     return *this;
 }
 

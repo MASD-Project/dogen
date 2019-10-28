@@ -21,6 +21,7 @@
 #include <sstream>
 #include "dogen/test_data/tracing_level_td.hpp"
 #include "dogen/test_data/tracing_format_td.hpp"
+#include "dogen/test_data/tracing_backend_td.hpp"
 #include "dogen/test_data/tracing_configuration_td.hpp"
 
 namespace {
@@ -52,6 +53,11 @@ create_boost_filesystem_path(const unsigned int position) {
     return boost::filesystem::path(s.str());
 }
 
+dogen::tracing_backend
+create_dogen_tracing_backend(const unsigned int position) {
+    return dogen::tracing_backend_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -66,6 +72,7 @@ populate(const unsigned int position, result_type& v) {
     v.logging_impact(create_std_string(position + 3));
     v.use_short_names(create_bool(position + 4));
     v.output_directory(create_boost_filesystem_path(position + 5));
+    v.backend(create_dogen_tracing_backend(position + 6));
 }
 
 tracing_configuration_generator::result_type
