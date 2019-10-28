@@ -11,31 +11,31 @@
 
 ** Active
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-10-27 Sun 12:56]
+#+CAPTION: Clock summary at [2019-10-28 Mon 08:47]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *46:29* |       |       | 100.0 |
+| *Total time*                                              | *47:03* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 46:29   |       |       | 100.0 |
-| Active                                                    |         | 46:29 |       | 100.0 |
+| Stories                                                   | 47:03   |       |       | 100.0 |
+| Active                                                    |         | 47:03 |       | 100.0 |
 | Edit release notes for previous sprint                    |         |       |  3:36 |   7.7 |
 | Create a demo and presentation for previous sprint        |         |       |  1:39 |   3.5 |
-| Sprint and product backlog grooming                       |         |       |  3:21 |   7.2 |
+| Sprint and product backlog grooming                       |         |       |  3:21 |   7.1 |
 | Remove test model sanitizer                               |         |       |  0:20 |   0.7 |
 | Remove master headers                                     |         |       |  1:12 |   2.6 |
-| Fix the issues with tests in reference model              |         |       |  3:53 |   8.4 |
+| Fix the issues with tests in reference model              |         |       |  3:53 |   8.3 |
 | Update static strings to string views                     |         |       |  1:15 |   2.7 |
-| ODB include directories is incorrect                      |         |       |  1:43 |   3.7 |
-| Create a "modeling" report                                |         |       |  4:56 |  10.6 |
+| ODB include directories is incorrect                      |         |       |  1:43 |   3.6 |
+| Create a "modeling" report                                |         |       |  4:56 |  10.5 |
 | Move visual studio related options to top profile         |         |       |  0:17 |   0.6 |
-| Move registrar into assets                                |         |       |  5:29 |  11.8 |
+| Fix incorrect message keyword when detecting ODB includes |         |       |  0:29 |   1.0 |
+| Move registrar into assets                                |         |       |  5:29 |  11.7 |
 | Fix compilation errors in nightly                         |         |       |  0:24 |   0.9 |
-| Upgrade to boost 1.70                                     |         |       | 10:00 |  21.5 |
-| Setup laptop to work on dogen                             |         |       |  0:17 |   0.6 |
-| Org-mode as a carrier format for modeling                 |         |       |  5:37 |  12.1 |
-| Try to add relational tracing support                     |         |       |  2:07 |   4.6 |
-| Fix incorrect message keyword when detecting ODB includes |         |       |  0:23 |   0.8 |
+| Upgrade to boost 1.70                                     |         |       | 10:00 |  21.3 |
+| Setup laptop to work on dogen                             |         |       |  0:45 |   1.6 |
+| Org-mode as a carrier format for modeling                 |         |       |  5:37 |  11.9 |
+| Try to add relational tracing support                     |         |       |  2:07 |   4.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -522,6 +522,27 @@ Conclusions:
 At present we are duplicating all of the visual studio related options
 across a number of models. We should use a profile instead.
 
+*** COMPLETED Fix incorrect message keyword when detecting ODB includes :story:
+    CLOSED: [2019-10-28 Mon 08:47]
+    :LOGBOOK:
+    CLOCK: [2019-10-28 Mon 08:41]--[2019-10-28 Mon 08:47] =>  0:06
+    CLOCK: [2019-10-26 Sat 18:01]--[2019-10-26 Sat 18:24] =>  0:23
+    :END:
+
+We are using the non-existent keyword =FATAL= in the ODB portion of
+the CMakeLists. We need update it to =FATAL_ERROR= as per the
+documentation.
+
+Actually the right solution for this is to remove this check
+altogether. We don't really know how the user is finding ODB and the
+more checks we do the larger the interface between our generated cmake
+file and the regular cmake files. By removing the check we pass the
+work to the user.
+
+Links:
+
+- [[https://cmake.org/cmake/help/v3.0/command/message.html][message]]
+
 *** STARTED Move registrar into assets                                :story:
     :LOGBOOK:
     CLOCK: [2019-10-24 Thu 08:20]--[2019-10-24 Thu 08:43] =>  0:23
@@ -637,6 +658,9 @@ Notes:
 
 *** STARTED Setup laptop to work on dogen                             :story:
     :LOGBOOK:
+    CLOCK: [2019-10-28 Mon 08:25]--[2019-10-28 Mon 08:41] =>  0:16
+    CLOCK: [2019-10-28 Mon 08:19]--[2019-10-28 Mon 08:25] =>  0:06
+    CLOCK: [2019-10-28 Mon 08:13]--[2019-10-28 Mon 08:19] =>  0:06
     CLOCK: [2019-10-24 Thu 08:03]--[2019-10-24 Thu 08:20] =>  0:17
     :END:
 
@@ -645,7 +669,7 @@ main machine. Get it in a shape to do development again.
 
 Items missing:
 
-- consolas font
+- consolas font. done.
 - dir locals for projects
 - polymode
 - build2
@@ -830,25 +854,6 @@ start and end of this transform?"
 
 Interestingly, this would also allow us to compare things between
 runs. The schema should be designed with this in mind.
-
-*** STARTED Fix incorrect message keyword when detecting ODB includes :story:
-    :LOGBOOK:
-    CLOCK: [2019-10-26 Sat 18:01]--[2019-10-26 Sat 18:24] =>  0:23
-    :END:
-
-We are using the non-existent keyword =FATAL= in the ODB portion of
-the CMakeLists. We need update it to =FATAL_ERROR= as per the
-documentation.
-
-Actually the right solution for this is to remove this check
-altogether. We don't really know how the user is finding ODB and the
-more checks we do the larger the interface between our generated cmake
-file and the regular cmake files. By removing the check we pass the
-work to the user.
-
-Links:
-
-- [[https://cmake.org/cmake/help/v3.0/command/message.html][message]]
 
 *** Consider renaming =origin_types=                                  :story:
 

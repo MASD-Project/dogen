@@ -22,10 +22,6 @@ file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-if(NOT ODB_LIBODB_FOUND)
-    message(FATAL_ERROR "ODB include directories not defined.")
-endif()
-
 set(odb_files "")
 file(GLOB_RECURSE odb_files RELATIVE
    "${CMAKE_CURRENT_SOURCE_DIR}/"
