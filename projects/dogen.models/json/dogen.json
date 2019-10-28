@@ -48,6 +48,11 @@
           "name": "byproduct_directory",
           "type": "boost::filesystem::path",
           "documentation": "Directory in which to place all files not directly related to generated code.\n"
+        },
+        {
+          "name": "database",
+          "type": "boost::optional<database_configuration>",
+          "documentation": "Configuration related to database connectivity, if any.\n"
         }
       ]
     },
@@ -85,7 +90,7 @@
         {
           "name": "format",
           "type": "tracing_format",
-          "documentation": "Format to use when writting trace files.\n"
+          "documentation": "Format to use when writting trace files.\n\nOnly valid for the file backend.\n"
         },
         {
           "name": "guids_enabled",
@@ -105,6 +110,11 @@
         {
           "name": "output_directory",
           "type": "boost::filesystem::path"
+        },
+        {
+          "name": "backend",
+          "type": "tracing_backend",
+          "documentation": "Which backend to use for tracing.\n"
         }
       ]
     },
@@ -283,6 +293,82 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "database_configuration",
+      "documentation": "Contains the config\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "host",
+          "type": "std::string",
+          "documentation": "Database host to connect to.\n"
+        },
+        {
+          "name": "port",
+          "type": "unsigned int",
+          "documentation": "Database port to connect to.\n"
+        },
+        {
+          "name": "name",
+          "type": "std::string",
+          "documentation": "Name of the database to connect to.\n"
+        },
+        {
+          "name": "user",
+          "type": "std::string",
+          "documentation": "User to use in thedatabase connection.\n"
+        },
+        {
+          "name": "password",
+          "type": "std::string"
+        },
+        {
+          "name": "relational_database",
+          "type": "relational_database",
+          "documentation": "Which type of relational database to connect to.\n"
+        }
+      ]
+    },
+    {
+      "name": "tracing_backend",
+      "documentation": "Available backends to manage tracing information.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "file",
+          "type": "",
+          "documentation": "Write tracing information to files.\n"
+        },
+        {
+          "name": "relational_database",
+          "type": "",
+          "documentation": "Write tracing information to a relational database.\n"
+        }
+      ]
+    },
+    {
+      "name": "relational_database",
+      "documentation": "Supported relational databases.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "postgres",
+          "type": "",
+          "documentation": "Connect to a PostgreSQL database.\n"
+        },
+        {
+          "name": "sqlite",
+          "type": "",
+          "documentation": "Connect to a SQLite database.\n"
+        }
+      ]
     }
   ]
 }

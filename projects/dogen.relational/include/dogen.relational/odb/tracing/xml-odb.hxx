@@ -18,10 +18,7 @@
 #include <odb/boost/smart-ptr/wrapper-traits.hxx>
 #include <odb/boost/optional/wrapper-traits.hxx>
 #include <odb/boost/unordered/container-traits.hxx>
-#include <odb/boost/date-time/pgsql/gregorian-traits.hxx>
-#include <odb/boost/date-time/pgsql/posix-time-traits.hxx>
 #include <odb/boost/multi-index/container-traits.hxx>
-#include <odb/boost/uuid/pgsql/uuid-traits.hxx>
 //
 // End prologue.
 
@@ -53,63 +50,6 @@
 
 namespace odb
 {
-}
-
-#include <odb/details/buffer.hxx>
-
-#include <odb/pgsql/version.hxx>
-#include <odb/pgsql/forward.hxx>
-#include <odb/pgsql/binding.hxx>
-#include <odb/pgsql/pgsql-types.hxx>
-#include <odb/pgsql/query.hxx>
-
-namespace odb
-{
-  // xml
-  //
-  template <>
-  class access::composite_value_traits< ::dogen::relational::tracing::xml, id_pgsql >
-  {
-    public:
-    typedef ::dogen::relational::tracing::xml value_type;
-
-    struct image_type
-    {
-      // value_
-      //
-      details::buffer value_value;
-      std::size_t value_size;
-      bool value_null;
-    };
-
-    static bool
-    grow (image_type&,
-          bool*);
-
-    static void
-    bind (pgsql::bind*,
-          image_type&,
-          pgsql::statement_kind);
-
-    static bool
-    init (image_type&,
-          const value_type&,
-          pgsql::statement_kind);
-
-    static void
-    init (value_type&,
-          const image_type&,
-          database*);
-
-    static bool
-    get_null (const image_type&);
-
-    static void
-    set_null (image_type&,
-              pgsql::statement_kind);
-
-    static const std::size_t column_count = 1UL;
-  };
 }
 
 #include "dogen.relational/odb/tracing/xml-odb.ixx"

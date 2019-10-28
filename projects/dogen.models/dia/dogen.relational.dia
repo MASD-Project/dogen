@@ -68,7 +68,7 @@
         <dia:point val="5,-18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="4.95,-18.05;32.9,-1.05"/>
+        <dia:rectangle val="4.95,-18.05;32.9,-0.25"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="27.850000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="16.900000000000002"/>
+        <dia:real val="17.700000000000003"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -112,6 +112,7 @@
 #DOGEN masd.generation.cpp.standard=c++-17
 #DOGEN masd.variability.profile=dogen.profiles.base.relational_profile
 #DOGEN masd.orm.database_system=postgresql
+#DOGEN masd.orm.database_system=sqlite
 #DOGEN masd.orm.letter_case=upper_case
 #DOGEN masd.orm.schema_name=dogen#</dia:string>
           </dia:attribute>

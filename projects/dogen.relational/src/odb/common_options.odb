@@ -23,7 +23,12 @@
 # casing
 --sql-name-case upper
 
+# enable multi-database support
+--multi-database static
+
 # target databases
+--database common
+--database sqlite
 --database pgsql
 
 # use the boost profile

@@ -35,9 +35,3 @@ namespace odb
   }
 }
 
-namespace odb
-{
-  // transform_model
-  //
-}
-
