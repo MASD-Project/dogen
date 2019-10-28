@@ -27,7 +27,6 @@
 
 #include <string>
 #include <algorithm>
-#include <boost/filesystem/path.hpp>
 #include "dogen.relational/types/tracing/xml.hpp"
 #include "dogen.relational/types/tracing/json.hpp"
 #include "dogen.relational/types/tracing/model_id.hpp"
@@ -39,13 +38,11 @@ namespace dogen::relational::tracing {
 class model final {
 public:
     model(const model&) = default;
+    model(model&&) = default;
     ~model() = default;
 
 public:
     model();
-
-public:
-    model(model&& rhs);
 
 public:
     model(
@@ -56,7 +53,7 @@ public:
         const std::string& qualified_name,
         const std::string& qualified_meta_name,
         const dogen::relational::tracing::model_type type,
-        const boost::filesystem::path& source_file);
+        const std::string& source_file);
 
 public:
     const dogen::relational::tracing::json& json_content() const;
@@ -92,10 +89,10 @@ public:
     dogen::relational::tracing::model_type type() const;
     void type(const dogen::relational::tracing::model_type v);
 
-    const boost::filesystem::path& source_file() const;
-    boost::filesystem::path& source_file();
-    void source_file(const boost::filesystem::path& v);
-    void source_file(const boost::filesystem::path&& v);
+    const std::string& source_file() const;
+    std::string& source_file();
+    void source_file(const std::string& v);
+    void source_file(const std::string&& v);
 
 public:
     bool operator==(const model& rhs) const;
@@ -115,7 +112,7 @@ private:
     std::string qualified_name_;
     std::string qualified_meta_name_;
     dogen::relational::tracing::model_type type_;
-    boost::filesystem::path source_file_;
+    std::string source_file_;
 };
 
 }

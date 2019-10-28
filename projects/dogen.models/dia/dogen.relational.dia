@@ -916,7 +916,7 @@
             <dia:string>#source_file#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::filesystem::path#</dia:string>
+            <dia:string>#std::string#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

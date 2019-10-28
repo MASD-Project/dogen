@@ -47,7 +47,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"qualified_name\": " << "\"" << tidy_up_string(v.qualified_name()) << "\"" << ", "
       << "\"qualified_meta_name\": " << "\"" << tidy_up_string(v.qualified_meta_name()) << "\"" << ", "
       << "\"type\": " << v.type() << ", "
-      << "\"source_file\": " << "\"" << v.source_file().generic_string() << "\""
+      << "\"source_file\": " << "\"" << tidy_up_string(v.source_file()) << "\""
       << " }";
     return(s);
 }

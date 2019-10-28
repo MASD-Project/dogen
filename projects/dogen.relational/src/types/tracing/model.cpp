@@ -25,16 +25,6 @@ namespace dogen::relational::tracing {
 model::model()
     : type_(static_cast<dogen::relational::tracing::model_type>(0)) { }
 
-model::model(model&& rhs)
-    : json_content_(std::move(rhs.json_content_)),
-      xml_content_(std::move(rhs.xml_content_)),
-      id_(std::move(rhs.id_)),
-      model_set_id_(std::move(rhs.model_set_id_)),
-      qualified_name_(std::move(rhs.qualified_name_)),
-      qualified_meta_name_(std::move(rhs.qualified_meta_name_)),
-      type_(std::move(rhs.type_)),
-      source_file_(std::move(rhs.source_file_)) { }
-
 model::model(
     const dogen::relational::tracing::json& json_content,
     const dogen::relational::tracing::xml& xml_content,
@@ -43,7 +33,7 @@ model::model(
     const std::string& qualified_name,
     const std::string& qualified_meta_name,
     const dogen::relational::tracing::model_type type,
-    const boost::filesystem::path& source_file)
+    const std::string& source_file)
     : json_content_(json_content),
       xml_content_(xml_content),
       id_(id),
@@ -186,19 +176,19 @@ void model::type(const dogen::relational::tracing::model_type v) {
     type_ = v;
 }
 
-const boost::filesystem::path& model::source_file() const {
+const std::string& model::source_file() const {
     return source_file_;
 }
 
-boost::filesystem::path& model::source_file() {
+std::string& model::source_file() {
     return source_file_;
 }
 
-void model::source_file(const boost::filesystem::path& v) {
+void model::source_file(const std::string& v) {
     source_file_ = v;
 }
 
-void model::source_file(const boost::filesystem::path&& v) {
+void model::source_file(const std::string&& v) {
     source_file_ = std::move(v);
 }
 

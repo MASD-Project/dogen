@@ -59,13 +59,6 @@ create_dogen_relational_tracing_model_type(const unsigned int position) {
     return dogen::relational::tracing::model_type_generator::create(position);
 }
 
-boost::filesystem::path
-create_boost_filesystem_path(const unsigned int position) {
-    std::ostringstream s;
-    s << "/a/path/number_" << position;
-    return boost::filesystem::path(s.str());
-}
-
 }
 
 namespace dogen::relational::tracing {
@@ -81,7 +74,7 @@ populate(const unsigned int position, result_type& v) {
     v.qualified_name(create_std_string(position + 4));
     v.qualified_meta_name(create_std_string(position + 5));
     v.type(create_dogen_relational_tracing_model_type(position + 6));
-    v.source_file(create_boost_filesystem_path(position + 7));
+    v.source_file(create_std_string(position + 7));
 }
 
 model_generator::result_type
