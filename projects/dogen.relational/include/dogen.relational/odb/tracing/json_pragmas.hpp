@@ -27,6 +27,16 @@
 
 #include "dogen.relational/types/tracing/json.hpp"
 
-// class has no ODB pragmas defined.
+namespace dogen::relational::tracing {
+
+#ifdef ODB_COMPILER
+
+#pragma db value(json) schema("DOGEN")
+
+#pragma db member(json::value_) column("")
+
+#endif
+
+}
 
 #endif

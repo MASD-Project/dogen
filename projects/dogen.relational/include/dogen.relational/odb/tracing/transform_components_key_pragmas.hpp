@@ -28,6 +28,14 @@
 #include "dogen.relational/odb/tracing/transform_id_pragmas.hpp"
 #include "dogen.relational/types/tracing/transform_components_key.hpp"
 
-// class has no ODB pragmas defined.
+namespace dogen::relational::tracing {
+
+#ifdef ODB_COMPILER
+
+#pragma db value(transform_components_key) schema("DOGEN")
+
+#endif
+
+}
 
 #endif

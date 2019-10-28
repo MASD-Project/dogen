@@ -31,6 +31,17 @@
 #include "dogen.relational/odb/tracing/activity_pragmas.hpp"
 #include "dogen.relational/odb/tracing/transform_id_pragmas.hpp"
 
-// class has no ODB pragmas defined.
+namespace dogen::relational::tracing {
+
+#ifdef ODB_COMPILER
+
+#pragma db object(run) schema("DOGEN")
+
+#pragma db member(run::id_) id
+#pragma db member(run::configuration_) pgsql:type("JSONB")
+
+#endif
+
+}
 
 #endif

@@ -27,6 +27,16 @@
 
 #include "dogen.relational/types/tracing/xml.hpp"
 
-// class has no ODB pragmas defined.
+namespace dogen::relational::tracing {
+
+#ifdef ODB_COMPILER
+
+#pragma db value(xml) schema("DOGEN")
+
+#pragma db member(xml::value_) column("")
+
+#endif
+
+}
 
 #endif

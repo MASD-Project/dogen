@@ -27,6 +27,16 @@
 
 #include "dogen.relational/types/tracing/run_id.hpp"
 
-// class has no ODB pragmas defined.
+namespace dogen::relational::tracing {
+
+#ifdef ODB_COMPILER
+
+#pragma db value(run_id) schema("DOGEN")
+
+#pragma db member(run_id::value_) column("")
+
+#endif
+
+}
 
 #endif

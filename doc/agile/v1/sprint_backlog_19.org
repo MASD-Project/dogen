@@ -712,6 +712,7 @@ Links:
 
 *** STARTED Try to add relational tracing support                     :story:
     :LOGBOOK:
+    CLOCK: [2019-10-28 Mon 08:48]--[2019-10-28 Mon 08:52] =>  0:04
     CLOCK: [2019-10-27 Sun 12:05]--[2019-10-27 Sun 12:40] =>  0:48
     CLOCK: [2019-10-27 Sun 08:57]--[2019-10-27 Sun 09:04] =>  0:07
     CLOCK: [2019-10-27 Sun 08:29]--[2019-10-27 Sun 08:56] =>  0:27
