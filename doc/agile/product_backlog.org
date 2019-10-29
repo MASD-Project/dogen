@@ -5522,12 +5522,54 @@ Tests:
 
 *** Consider creating a test build for all facets                     :story:
 
+We can't afford to generate test code in Dogen for the continuous
+builds because we don't have enough build time to compile all of the
+generated code. This is true even when we are just generating a few
+facets (=test_data=, =types=, =tests=). However we definitely want to
+test the generated code in real models. The solution for this is to
+allow "variability overrides".
+
+Notes:
+
+- create a new command line flag: =variabulity-override=
+- it takes a triplet in the form of
+
+: ELEMENT_ID:KEY=VALUE
+
+- we parse these triplets into a container and then use it in the
+  variability transforms.
+- for scalar value types we merely override the value.
+- for collections we push back.
+- if we cannot find the target element ID we throw.
+- if we find the element more than once we throw.
+- note that the ELEMENT_ID must be a fully qualified path to the
+  element.
+- we must try to find the element on all models.
+- the remainder of variability processing will work as at present. We
+  just must ensure we override prior to any profile merging/expansion.
+
+Once we have this functionality in place, we can then update our
+nightly builds:
+
+- create a test profile that enables all facets.
+- in CMake, add an override to this profile for nightlies. This could
+  be a parameter passed in from CTest.
+- run the =gad= target in CTest first, then build then run all tests.
+- because the nightly is running under our control, we can easily
+  check CDash for errors and look at the generated source to
+  investigate the problem.
+- we should setup nightlies for Windows and OSX as well.
+- remove all of the test facets from the main repo (e.g. =test_data=,
+  =tests=).
+
+*Previous understanding*
+
 In the past we had enabled a lot of facets on the dogen models to
 serve as part of the testing infrastructure. However, its no longer
-feasible to do this because the build is taking too long. However, the
-reference models just can't capture all of the complexity of a
-codebase like dogen's so we lost some testability with this move. What
-would be really nice is if we could create "test builds":
+feasible to do this because the build is taking too long. This is not
+ideal as the reference models just can't capture all of the complexity
+of a codebase like dogen's so we lost some testability with this
+move. What would be really nice is if we could create "test builds":
 
 - given a set of test models, copy them somewhere, generate a product
   configuration with some kind of override that enables all facets
@@ -11920,6 +11962,22 @@ sanity. This means we need the same diagrams packaged twice.
 : /home/marco/Development/DomainDrivenConsulting/dogen/build/scripts/build.linux.sh
 : Release 4 gcc /home/marco/local
 
+Merged stories:
+
+*Build dogen docker images from travis*
+
+We should build docker images with each commit into master.
+
+Links:
+
+- [[https://sebest.github.io/post/using-travis-ci-to-build-docker-images/][Using Travis.ci to build Docker images]]
+- [[https://github.com/OpenSourceRisk/Engine/tree/master/tools/docker][ORE docker script]]
+- [[https://giorgos.sealabs.net/build-and-test-against-docker-images-in-travis.html][Build and Test against Docker Images in Travis]]
+- [[https://medium.com/travis-on-docker/triple-stage-docker-builds-with-go-and-angular-1b7d2006cb88][Triple-Stage Docker Builds with Go and Angular]]
+- [[https://medium.com/travis-on-docker/multi-stage-docker-builds-for-creating-tiny-go-images-e0e1867efe5a][Multi-Stage Docker Builds for Creating Tiny Go Images]]
+- [[https://github.com/gliderlabs/docker-alpine/issues/24][What is the alpine equivalent to build-essential?]]
+- [[https://caveofcode.com/2017/03/continuous-delivery-to-kubernetes-with-travis-ci/][Continuous delivery to Kubernetes with Travis CI]]
+
 *** Rename debian package                                             :story:
 
 At present our package is called =dogen-applcations=. Since there will
@@ -13422,20 +13480,6 @@ still work.
 
 Allow users to supply coordinates to transforms in some form so that
 we only dump a subset of the transform data.
-
-*** Build dogen docker images from travis                             :story:
-
-We should build docker images with each commit into master.
-
-Links:
-
-- [[https://sebest.github.io/post/using-travis-ci-to-build-docker-images/][Using Travis.ci to build Docker images]]
-- [[https://github.com/OpenSourceRisk/Engine/tree/master/tools/docker][ORE docker script]]
-- [[https://giorgos.sealabs.net/build-and-test-against-docker-images-in-travis.html][Build and Test against Docker Images in Travis]]
-- [[https://medium.com/travis-on-docker/triple-stage-docker-builds-with-go-and-angular-1b7d2006cb88][Triple-Stage Docker Builds with Go and Angular]]
-- [[https://medium.com/travis-on-docker/multi-stage-docker-builds-for-creating-tiny-go-images-e0e1867efe5a][Multi-Stage Docker Builds for Creating Tiny Go Images]]
-- [[https://github.com/gliderlabs/docker-alpine/issues/24][What is the alpine equivalent to build-essential?]]
-- [[https://caveofcode.com/2017/03/continuous-delivery-to-kubernetes-with-travis-ci/][Continuous delivery to Kubernetes with Travis CI]]
 
 *** Charts in site                                                    :story:
 
