@@ -12,31 +12,31 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-10-29 Tue 08:37]
+#+CAPTION: Clock summary at [2019-10-29 Tue 18:07]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *48:52* |       |       | 100.0 |
+| *Total time*                                              | *49:30* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 48:52   |       |       | 100.0 |
-| Active                                                    |         | 48:52 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       |  3:36 |   7.4 |
-| Create a demo and presentation for previous sprint        |         |       |  1:39 |   3.4 |
-| Sprint and product backlog grooming                       |         |       |  4:06 |   8.4 |
+| Stories                                                   | 49:30   |       |       | 100.0 |
+| Active                                                    |         | 49:30 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  3:36 |   7.3 |
+| Create a demo and presentation for previous sprint        |         |       |  1:39 |   3.3 |
+| Sprint and product backlog grooming                       |         |       |  4:06 |   8.3 |
 | Remove test model sanitizer                               |         |       |  0:20 |   0.7 |
-| Remove master headers                                     |         |       |  1:12 |   2.5 |
-| Fix the issues with tests in reference model              |         |       |  3:53 |   7.9 |
-| Update static strings to string views                     |         |       |  1:15 |   2.6 |
+| Remove master headers                                     |         |       |  1:12 |   2.4 |
+| Fix the issues with tests in reference model              |         |       |  3:53 |   7.8 |
+| Update static strings to string views                     |         |       |  1:15 |   2.5 |
 | ODB include directories is incorrect                      |         |       |  1:43 |   3.5 |
-| Create a "modeling" report                                |         |       |  4:56 |  10.1 |
+| Create a "modeling" report                                |         |       |  4:56 |  10.0 |
 | Move visual studio related options to top profile         |         |       |  0:17 |   0.6 |
 | Fix incorrect message keyword when detecting ODB includes |         |       |  0:29 |   1.0 |
-| Move registrar into assets                                |         |       |  5:29 |  11.2 |
+| Move registrar into assets                                |         |       |  5:29 |  11.1 |
 | Fix compilation errors in nightly                         |         |       |  0:24 |   0.8 |
-| Upgrade to boost 1.70                                     |         |       | 10:00 |  20.5 |
+| Upgrade to boost 1.70                                     |         |       | 10:00 |  20.2 |
 | Setup laptop to work on dogen                             |         |       |  0:45 |   1.5 |
-| Org-mode as a carrier format for modeling                 |         |       |  5:37 |  11.5 |
-| Add relational tracing support                            |         |       |  3:11 |   6.5 |
+| Org-mode as a carrier format for modeling                 |         |       |  5:37 |  11.3 |
+| Add relational tracing support                            |         |       |  3:49 |   7.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -716,6 +716,7 @@ Links:
 
 *** STARTED Add relational tracing support                            :story:
     :LOGBOOK:
+    CLOCK: [2019-10-29 Tue 17:46]--[2019-10-29 Tue 18:06] =>  0:20
     CLOCK: [2019-10-29 Tue 08:55]--[2019-10-29 Tue 09:03] =>  0:08
     CLOCK: [2019-10-29 Tue 08:38]--[2019-10-29 Tue 08:48] =>  0:10
     CLOCK: [2019-10-28 Mon 18:55]--[2019-10-28 Mon 19:10] =>  0:15

@@ -164,7 +164,9 @@ options_description make_top_level_visible_options_description() {
             "  recommended when making comparisons between runs.")
         ("tracing-format", value<std::string>(), "Format to use for tracing"
             " metrics. Valid values: plain, org-mode, graphviz. "
-            "Defaults to org-mode.");
+            "Defaults to org-mode.")
+        ("tracing-backend", value<std::string>(),
+            "Backend to use for tracing. Valid values: file, relational.");
     r.add(tod);
 
     options_description orod("Reporting");
@@ -189,7 +191,22 @@ options_description make_top_level_visible_options_description() {
         ("dry-run-mode-enabled",
             "Executes all transforms but does not emit generated code.");
 
-    r.add(ehod);
+    options_description db("Database");
+    db.add_options()
+        ("database-host", value<std::string>(),
+            "Name of the machine hosting the database.")
+        ("database-port", value<unsigned int>(),
+            "Port to connect to access the database.")
+        ("database-name", value<std::string>(),
+            "Name of the database.")
+        ("database-user", value<std::string>(),
+            "User to connect as in the database.")
+        ("database-password", value<std::string>(),
+            "Password for the user.")
+        ("database-engine", value<std::string>(),
+            "Database engine. Valid values: postgresql, sqlite.");
+
+    r.add(db);
 
     return r;
 }
@@ -282,7 +299,7 @@ void print_help_header(std::ostream& s) {
 void print_help(const boost::program_options::options_description& od,
     std::ostream& s) {
     print_help_header(s);
-    s << "Dogen uses a command-based interface: <command> <options>. "
+    s << "dogen.cli uses a command-based interface: <command> <options>. "
       << std::endl << "See below for a list of valid commands. " << std::endl
       << std::endl << "Global options: " << std::endl << od << std::endl
       <<  "Commands: "<< std::endl << std::endl;
