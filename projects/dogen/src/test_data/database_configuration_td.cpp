@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/test_data/relational_database_td.hpp"
+#include "dogen/test_data/database_engine_td.hpp"
 #include "dogen/test_data/database_configuration_td.hpp"
 
 namespace {
@@ -34,9 +34,9 @@ unsigned int create_unsigned_int(const unsigned int position) {
     return static_cast<unsigned int>(position);
 }
 
-dogen::relational_database
-create_dogen_relational_database(const unsigned int position) {
-    return dogen::relational_database_generator::create(position);
+dogen::database_engine
+create_dogen_database_engine(const unsigned int position) {
+    return dogen::database_engine_generator::create(position);
 }
 
 }
@@ -52,7 +52,7 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 2));
     v.user(create_std_string(position + 3));
     v.password(create_std_string(position + 4));
-    v.relational_database(create_dogen_relational_database(position + 5));
+    v.engine(create_dogen_database_engine(position + 5));
 }
 
 database_configuration_generator::result_type

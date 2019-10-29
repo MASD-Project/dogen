@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TYPES_RELATIONAL_DATABASE_HPP
-#define DOGEN_TYPES_RELATIONAL_DATABASE_HPP
+#ifndef DOGEN_TYPES_DATABASE_ENGINE_HPP
+#define DOGEN_TYPES_DATABASE_ENGINE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,9 +28,9 @@
 namespace dogen {
 
 /**
- * @brief Supported relational databases.
+ * @brief Supported relational databases engines.
  */
-enum class relational_database : unsigned int {
+enum class database_engine : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
     postgres = 1, ///< Connect to a PostgreSQL database.
     sqlite = 2 ///< Connect to a SQLite database.

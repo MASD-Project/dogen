@@ -18,32 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#include <string>
-#include <ostream>
-#include <stdexcept>
-#include "dogen/io/relational_database_io.hpp"
+#ifndef DOGEN_TEST_DATA_DATABASE_ENGINE_TD_HPP
+#define DOGEN_TEST_DATA_DATABASE_ENGINE_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/types/database_engine.hpp"
 
 namespace dogen {
 
-std::ostream& operator<<(std::ostream& s, const relational_database& v) {
-    s << "{ " << "\"__type__\": " << "\"relational_database\", " << "\"value\": ";
+class database_engine_generator {
+public:
+    database_engine_generator();
 
-    std::string attr;
-    switch (v) {
-    case relational_database::invalid:
-        attr = "\"invalid\"";
-        break;
-    case relational_database::postgres:
-        attr = "\"postgres\"";
-        break;
-    case relational_database::sqlite:
-        attr = "\"sqlite\"";
-        break;
-    default:
-        throw std::invalid_argument("Invalid value for relational_database");
-    }
-    s << attr << " }";
-    return s;
-}
+public:
+    typedef dogen::database_engine result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+};
 
 }
+
+#endif

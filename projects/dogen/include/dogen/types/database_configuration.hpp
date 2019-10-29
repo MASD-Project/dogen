@@ -27,7 +27,7 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen/types/relational_database.hpp"
+#include "dogen/types/database_engine.hpp"
 
 namespace dogen {
 
@@ -50,7 +50,7 @@ public:
         const std::string& name,
         const std::string& user,
         const std::string& password,
-        const dogen::relational_database relational_database);
+        const dogen::database_engine engine);
 
 public:
     /**
@@ -97,11 +97,11 @@ public:
     void password(const std::string&& v);
 
     /**
-     * @brief Which type of relational database to connect to.
+     * @brief Which relational database engine to connect to.
      */
     /**@{*/
-    dogen::relational_database relational_database() const;
-    void relational_database(const dogen::relational_database v);
+    dogen::database_engine engine() const;
+    void engine(const dogen::database_engine v);
     /**@}*/
 
 public:
@@ -120,7 +120,7 @@ private:
     std::string name_;
     std::string user_;
     std::string password_;
-    dogen::relational_database relational_database_;
+    dogen::database_engine engine_;
 };
 
 }

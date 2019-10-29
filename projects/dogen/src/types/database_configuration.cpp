@@ -24,7 +24,7 @@ namespace dogen {
 
 database_configuration::database_configuration()
     : port_(static_cast<unsigned int>(0)),
-      relational_database_(static_cast<dogen::relational_database>(0)) { }
+      engine_(static_cast<dogen::database_engine>(0)) { }
 
 database_configuration::database_configuration(
     const std::string& host,
@@ -32,13 +32,13 @@ database_configuration::database_configuration(
     const std::string& name,
     const std::string& user,
     const std::string& password,
-    const dogen::relational_database relational_database)
+    const dogen::database_engine engine)
     : host_(host),
       port_(port),
       name_(name),
       user_(user),
       password_(password),
-      relational_database_(relational_database) { }
+      engine_(engine) { }
 
 void database_configuration::swap(database_configuration& other) noexcept {
     using std::swap;
@@ -47,7 +47,7 @@ void database_configuration::swap(database_configuration& other) noexcept {
     swap(name_, other.name_);
     swap(user_, other.user_);
     swap(password_, other.password_);
-    swap(relational_database_, other.relational_database_);
+    swap(engine_, other.engine_);
 }
 
 bool database_configuration::operator==(const database_configuration& rhs) const {
@@ -56,7 +56,7 @@ bool database_configuration::operator==(const database_configuration& rhs) const
         name_ == rhs.name_ &&
         user_ == rhs.user_ &&
         password_ == rhs.password_ &&
-        relational_database_ == rhs.relational_database_;
+        engine_ == rhs.engine_;
 }
 
 database_configuration& database_configuration::operator=(database_configuration other) {
@@ -137,12 +137,12 @@ void database_configuration::password(const std::string&& v) {
     password_ = std::move(v);
 }
 
-dogen::relational_database database_configuration::relational_database() const {
-    return relational_database_;
+dogen::database_engine database_configuration::engine() const {
+    return engine_;
 }
 
-void database_configuration::relational_database(const dogen::relational_database v) {
-    relational_database_ = v;
+void database_configuration::engine(const dogen::database_engine v) {
+    engine_ = v;
 }
 
 }

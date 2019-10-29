@@ -324,9 +324,9 @@
           "type": "std::string"
         },
         {
-          "name": "relational_database",
-          "type": "relational_database",
-          "documentation": "Which type of relational database to connect to.\n"
+          "name": "engine",
+          "type": "database_engine",
+          "documentation": "Which relational database engine to connect to.\n"
         }
       ]
     },
@@ -351,8 +351,8 @@
       ]
     },
     {
-      "name": "relational_database",
-      "documentation": "Supported relational databases.\n",
+      "name": "database_engine",
+      "documentation": "Supported relational databases engines.\n",
       "stereotypes": [
         "masd::enumeration"
       ],

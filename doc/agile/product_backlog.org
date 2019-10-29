@@ -1697,6 +1697,13 @@ solution is to create model elements for each handcrafted test marked
 as "masd::handcrafted_test". This disables all facets except for
 tests. We can then remove the regex.
 
+Whilst variability overrides will address the underlying issue in a
+more maintainable way (e.g. the deletion of generated tests), we
+should still create a profile and model all tests as proper entities
+instead of bypassing the modeling system. We want to move to a world
+were *all* files in the system can be attributable to modeling
+entities.
+
 *** Associate includes with model elements                            :story:
 
 The right solution for the formatter includes is to supply them as
@@ -5561,6 +5568,15 @@ nightly builds:
 - we should setup nightlies for Windows and OSX as well.
 - remove all of the test facets from the main repo (e.g. =test_data=,
   =tests=).
+- note that this approach will also resolve the problem with ignoring
+  tests because we don't need to have them in the version control
+  system any longer. We should remove all of the regexes ignoring
+  tests as part of this work.
+- this approach could be extended to conversion: once we fix all of
+  the issues with JSON conversion, we don't need to have the JSON
+  models in version control. We can generate them on the fly for
+  nightlies only. It will require a bit of thinking because the tests
+  are hard coded.
 
 *Previous understanding*
 

@@ -18,44 +18,44 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_LEXICAL_CAST_RELATIONAL_DATABASE_LC_HPP
-#define DOGEN_LEXICAL_CAST_RELATIONAL_DATABASE_LC_HPP
+#ifndef DOGEN_LEXICAL_CAST_DATABASE_ENGINE_LC_HPP
+#define DOGEN_LEXICAL_CAST_DATABASE_ENGINE_LC_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/lexical_cast.hpp>
-#include "dogen/types/relational_database.hpp"
+#include "dogen/types/database_engine.hpp"
 
 namespace boost {
 
 template<>
-inline std::string lexical_cast(const dogen::relational_database& v) {
-    using dogen::relational_database;
+inline std::string lexical_cast(const dogen::database_engine& v) {
+    using dogen::database_engine;
 
     switch (v) {
-    case relational_database::invalid:
-        return "relational_database::invalid";
-    case relational_database::postgres:
-        return "relational_database::postgres";
-    case relational_database::sqlite:
-        return "relational_database::sqlite";
+    case database_engine::invalid:
+        return "database_engine::invalid";
+    case database_engine::postgres:
+        return "database_engine::postgres";
+    case database_engine::sqlite:
+        return "database_engine::sqlite";
     default:
         throw boost::bad_lexical_cast();
     }
 }
 
 template<>
-inline dogen::relational_database lexical_cast(const std::string & s) {
-    using dogen::relational_database;
+inline dogen::database_engine lexical_cast(const std::string & s) {
+    using dogen::database_engine;
 
-    if (s == "invalid" || s == "relational_database::invalid")
-        return relational_database::invalid;
-    if (s == "postgres" || s == "relational_database::postgres")
-        return relational_database::postgres;
-    if (s == "sqlite" || s == "relational_database::sqlite")
-        return relational_database::sqlite;
+    if (s == "invalid" || s == "database_engine::invalid")
+        return database_engine::invalid;
+    if (s == "postgres" || s == "database_engine::postgres")
+        return database_engine::postgres;
+    if (s == "sqlite" || s == "database_engine::sqlite")
+        return database_engine::sqlite;
     throw boost::bad_lexical_cast();
 }
 

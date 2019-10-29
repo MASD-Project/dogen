@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/io/relational_database_io.hpp"
+#include "dogen/io/database_engine_io.hpp"
 #include "dogen/io/database_configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -41,7 +41,7 @@ std::ostream& operator<<(std::ostream& s, const database_configuration& v) {
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"user\": " << "\"" << tidy_up_string(v.user()) << "\"" << ", "
       << "\"password\": " << "\"" << tidy_up_string(v.password()) << "\"" << ", "
-      << "\"relational_database\": " << v.relational_database()
+      << "\"engine\": " << v.engine()
       << " }";
     return(s);
 }

@@ -18,25 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_data/relational_database_td.hpp"
+#include "dogen/test_data/database_engine_td.hpp"
 
 namespace dogen {
 
-relational_database_generator::relational_database_generator() : position_(0) { }
-void relational_database_generator::
+database_engine_generator::database_engine_generator() : position_(0) { }
+void database_engine_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<relational_database>(position % 3);
+    v = static_cast<database_engine>(position % 3);
 }
 
-relational_database_generator::result_type
-relational_database_generator::create(const unsigned int  position) {
+database_engine_generator::result_type
+database_engine_generator::create(const unsigned int  position) {
     result_type r;
-    relational_database_generator::populate(position, r);
+    database_engine_generator::populate(position, r);
     return r;
 }
 
-relational_database_generator::result_type
-relational_database_generator::operator()() {
+database_engine_generator::result_type
+database_engine_generator::operator()() {
     return create(position_++);
 }
 
