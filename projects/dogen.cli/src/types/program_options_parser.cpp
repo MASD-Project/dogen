@@ -24,6 +24,7 @@
 #include <boost/program_options.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/operations.hpp>
+#include "dogen/types/database_engine.hpp"
 #include "dogen/version.hpp"
 #include "dogen.utility/types/log/severity_level.hpp"
 #include "dogen.utility/types/log/logging_configuration.hpp"
@@ -75,6 +76,9 @@ const std::string tracing_format_plain("plain");
 const std::string tracing_format_org_mode("org-mode");
 const std::string tracing_format_graphviz("graphviz");
 const std::string tracing_default_directory("tracing");
+const std::string tracing_backend_arg("tracing-backend");
+const std::string tracing_backend_file("file");
+const std::string tracing_backend_database("database");
 
 const std::string reporting_enabled_arg("reporting-enabled");
 const std::string reporting_style_arg("reporting-style");
@@ -86,6 +90,15 @@ const std::string diffing_destination_arg("diffing-destination");
 const std::string diffing_report_unchanged_arg("diffing-report-unchanged");
 const std::string diffing_destination_file("file");
 const std::string diffing_destination_console("console");
+
+const std::string database_hostname_arg("database-hostname");
+const std::string database_port_arg("database-port");
+const std::string database_name_arg("database-name");
+const std::string database_user_arg("database-user");
+const std::string database_password_arg("database-password");
+const std::string database_engine_arg("database-engine");
+const std::string database_engine_postgres("database-postgres");
+const std::string database_engine_sqlite("database-sqlite");
 
 const std::string model_processing_compatibility_mode_arg(
     "compatibility-mode-enabled");
@@ -101,6 +114,8 @@ const std::string generate_output_dir_arg("output-directory");
 const std::string convert_source_arg("source");
 const std::string convert_destination_arg("destination");
 
+const std::string invalid_engine("Database engine is not valid: ");
+const std::string invalid_backend("Tracing backend is not valid: ");
 const std::string invalid_option("Option is not valid for command: ");
 const std::string invalid_command("Command is invalid or unsupported: ");
 const std::string missing_target("Mandatory parameter target is missing. ");
@@ -439,6 +454,17 @@ read_tracing_configuration(const variables_map& vm,
     } else if (enabled)
         r.format(tracing_format::org_mode);
 
+    using dogen::tracing_backend;
+    if (vm.count(tracing_backend_arg)) {
+        const auto s(vm[tracing_format_arg].as<std::string>());
+        if (s == tracing_backend_file)
+            r.backend(tracing_backend::file);
+        else if (s == tracing_backend_database)
+            r.backend(tracing_backend::relational_database);
+        else
+            BOOST_THROW_EXCEPTION(parser_exception(invalid_backend + s));
+    }
+
     const auto tracing_dir(byproduct_dir / tracing_default_directory);
     r.output_directory(tracing_dir);
 
@@ -515,6 +541,50 @@ read_reporting_configuration(const variables_map& vm,
 
     return r;
 }
+
+boost::optional<dogen::database_configuration>
+read_database_configuration(const variables_map& vm) {
+    using dogen::database_configuration;
+    bool found(false);
+
+    database_configuration r;
+    found = vm.count(database_hostname_arg);
+    if (found)
+        r.host(vm[database_hostname_arg].as<std::string>());
+
+    found &= vm.count(database_port_arg);
+    if (found)
+        r.port(vm[database_port_arg].as<unsigned int>());
+
+    found &= vm.count(database_name_arg);
+    if (found)
+        r.name(vm[database_name_arg].as<std::string>());
+
+    found &= vm.count(database_user_arg);
+    if (found)
+        r.name(vm[database_user_arg].as<std::string>());
+
+    found &= vm.count(database_password_arg);
+    if (found)
+        r.name(vm[database_password_arg].as<std::string>());
+
+    found &= vm.count(database_engine_arg);
+    if (found) {
+        const auto s(vm[database_engine_arg].as<std::string>());
+        using dogen::database_engine;
+        if (s == database_engine_postgres)
+            r.engine(database_engine::postgres);
+        else if (s == database_engine_sqlite)
+            r.engine(database_engine::sqlite);
+        else
+            BOOST_THROW_EXCEPTION(parser_exception(invalid_engine + s));
+    }
+
+    if (!found)
+        return boost::optional<database_configuration>();
+    return r;
+}
+
 
 /**
  * @brief Constructs an identifier sufficiently unique for this
@@ -705,6 +775,7 @@ handle_command(const std::string& command_name, const bool has_help,
     a.reporting(read_reporting_configuration(vm, bp));
     a.diffing(read_diffing_configuration(vm, bp));
     a.model_processing(read_model_processing_configuration(vm));
+    a.database(read_database_configuration(vm));
 
     return r;
 }
