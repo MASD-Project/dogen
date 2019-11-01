@@ -26,7 +26,7 @@
 namespace {
 
 const std::string
-transform_id("injection.transforms.model_set_production_chain");
+transform_id("injection.helpers.circular_references_validator");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
