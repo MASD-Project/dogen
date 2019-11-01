@@ -434,6 +434,21 @@
           }
         }
       ]
+    },
+    {
+      "name": "helpers::circular_references_validator",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::circular_references_exception",
+      "documentation": "A cycle was detected in the references graph.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
