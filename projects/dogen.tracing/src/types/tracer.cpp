@@ -332,5 +332,4 @@ bool tracer::operator==(const tracer& /*rhs*/) const {
     return false;
 }
 
-
 }

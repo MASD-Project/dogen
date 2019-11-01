@@ -43,6 +43,8 @@ const std::string found_cycle_in_graph("Graph has a cycle: ");
 
 namespace dogen::injection::dia {
 
+namespace {
+
 /**
  * @brief Detects cycles in the graph.
  */
@@ -81,6 +83,8 @@ public:
 private:
     std::shared_ptr<state> state_;
 };
+
+}
 
 grapher::grapher()
     : generated_(false), root_vertex_(boost::add_vertex(graph_)) {
@@ -127,7 +131,7 @@ void grapher::
 process_child_node(const vertex_descriptor_type& v, const processed_object& o) {
     if (!o.child_node_id().empty()) {
         const std::string id(o.child_node_id());
-        const vertex_descriptor_type cv(vertex_for_id(id));
+        const auto cv(vertex_for_id(id));
         boost::add_edge(v, cv, graph_);
         BOOST_LOG_SEV(lg, debug) << "Creating edge between '"
                                  << o.id() << "' and '" << id << "'";
@@ -212,9 +216,9 @@ void grapher::generate() {
         boost::add_edge(root_vertex_, pair.second, graph_);
     }
 
-    cycle_detector v;
-    boost::depth_first_search(graph_, boost::visitor(v));
-    BOOST_LOG_SEV(lg, debug) << "Graph has no cycles. Sexp: " << v.sexp();
+    cycle_detector cd;
+    boost::depth_first_search(graph_, boost::visitor(cd));
+    BOOST_LOG_SEV(lg, debug) << "Graph has no cycles. Sexp: " << cd.sexp();
     generated_ = true;
 
     BOOST_LOG_SEV(lg, debug) << "Generated graph.";
