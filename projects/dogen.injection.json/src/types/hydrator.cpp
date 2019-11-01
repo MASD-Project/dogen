@@ -218,7 +218,7 @@ hydrator::hydrate(const boost::filesystem::path& p) const {
     }
 
     auto r(hydrate(s));
-    r.name(p.filename().generic_string());
+    r.name(p.stem().generic_string());
 
     BOOST_LOG_SEV(lg, debug) << "Parsed JSON file successfully.";
     return r;

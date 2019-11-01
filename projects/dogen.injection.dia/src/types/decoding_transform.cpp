@@ -129,7 +129,7 @@ decoding_transform::apply(const injection::transforms::context& ctx,
     const auto diagram(h.hydrate(p));
     BOOST_LOG_SEV(lg, debug) << "Read Dia diagram.";
 
-    const auto model_name(p.filename().generic_string());
+    const auto model_name(p.stem().generic_string());
     tracing::scoped_transform_tracer stp(lg, "dia model transform",
         transform_id, model_name, *ctx.tracer(), diagram);
 

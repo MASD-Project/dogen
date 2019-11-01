@@ -59,7 +59,7 @@ transforms::registrar& model_production_chain::registrar() {
 
 meta_model::model model_production_chain::
 apply(const context& ctx, const boost::filesystem::path& p) {
-    const auto model_name(p.filename().generic_string());
+    const auto model_name(p.stem().generic_string());
     tracing::scoped_chain_tracer stp(lg, "injection model production chain",
         transform_id, model_name, *ctx.tracer());
     /*
