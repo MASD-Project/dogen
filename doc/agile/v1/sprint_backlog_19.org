@@ -12,31 +12,32 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-10-29 Tue 19:02]
+#+CAPTION: Clock summary at [2019-11-01 Fri 16:35]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *49:53* |       |       | 100.0 |
+| *Total time*                                              | *53:01* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 49:53   |       |       | 100.0 |
-| Active                                                    |         | 49:53 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       |  3:36 |   7.2 |
-| Create a demo and presentation for previous sprint        |         |       |  1:39 |   3.3 |
-| Sprint and product backlog grooming                       |         |       |  4:06 |   8.2 |
-| Remove test model sanitizer                               |         |       |  0:20 |   0.7 |
-| Remove master headers                                     |         |       |  1:12 |   2.4 |
-| Fix the issues with tests in reference model              |         |       |  3:53 |   7.8 |
-| Update static strings to string views                     |         |       |  1:15 |   2.5 |
-| ODB include directories is incorrect                      |         |       |  1:43 |   3.4 |
-| Create a "modeling" report                                |         |       |  4:56 |   9.9 |
-| Move visual studio related options to top profile         |         |       |  0:17 |   0.6 |
-| Fix incorrect message keyword when detecting ODB includes |         |       |  0:29 |   1.0 |
-| Move registrar into assets                                |         |       |  5:29 |  11.0 |
+| Stories                                                   | 53:01   |       |       | 100.0 |
+| Active                                                    |         | 53:01 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  3:36 |   6.8 |
+| Create a demo and presentation for previous sprint        |         |       |  1:39 |   3.1 |
+| Sprint and product backlog grooming                       |         |       |  4:23 |   8.3 |
+| Remove test model sanitizer                               |         |       |  0:20 |   0.6 |
+| Remove master headers                                     |         |       |  1:12 |   2.3 |
+| Fix the issues with tests in reference model              |         |       |  3:53 |   7.3 |
+| Update static strings to string views                     |         |       |  1:15 |   2.4 |
+| ODB include directories is incorrect                      |         |       |  1:43 |   3.2 |
+| Create a "modeling" report                                |         |       |  4:56 |   9.3 |
+| Move visual studio related options to top profile         |         |       |  0:17 |   0.5 |
+| Fix incorrect message keyword when detecting ODB includes |         |       |  0:29 |   0.9 |
+| Move registrar into assets                                |         |       |  5:29 |  10.3 |
 | Fix compilation errors in nightly                         |         |       |  0:24 |   0.8 |
-| Upgrade to boost 1.70                                     |         |       | 10:00 |  20.0 |
-| Setup laptop to work on dogen                             |         |       |  0:45 |   1.5 |
-| Org-mode as a carrier format for modeling                 |         |       |  5:37 |  11.3 |
-| Add relational tracing support                            |         |       |  4:12 |   8.4 |
+| Upgrade to boost 1.70                                     |         |       | 10:00 |  18.9 |
+| Setup laptop to work on dogen                             |         |       |  0:45 |   1.4 |
+| Org-mode as a carrier format for modeling                 |         |       |  5:37 |  10.6 |
+| Add relational tracing support                            |         |       |  4:48 |   9.1 |
+| Creating reference cycles produces strange errors         |         |       |  2:15 |   4.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -214,6 +215,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-11-01 Fri 11:01]--[2019-11-01 Fri 11:18] =>  0:17
     CLOCK: [2019-10-29 Tue 08:01]--[2019-10-29 Tue 08:37] =>  0:36
     CLOCK: [2019-10-28 Mon 17:40]--[2019-10-28 Mon 17:44] =>  0:04
     CLOCK: [2019-10-28 Mon 08:53]--[2019-10-28 Mon 08:58] =>  0:05
@@ -716,6 +718,7 @@ Links:
 
 *** STARTED Add relational tracing support                            :story:
     :LOGBOOK:
+    CLOCK: [2019-11-01 Fri 11:18]--[2019-11-01 Fri 11:54] =>  0:36
     CLOCK: [2019-10-29 Tue 18:07]--[2019-10-29 Tue 18:30] =>  0:23
     CLOCK: [2019-10-29 Tue 17:46]--[2019-10-29 Tue 18:06] =>  0:20
     CLOCK: [2019-10-29 Tue 08:55]--[2019-10-29 Tue 09:03] =>  0:08
@@ -807,6 +810,15 @@ Notes:
 - we need a command line option to choose the tracing backend
   (e.g. file or database). We also need the database configuration
   parameters: hostname, port, database, user.
+- we need to refactor tracer as follows:
+  - update the tracer interface to take actual types rather than
+    templates.
+  - create a top-level interface for the notion of a backend.
+  - create two implementations of the backend: file and relational.
+  - move all the file related code to the file backend.
+  - implement adapters for each model to convert them into relational
+    model types.
+  - implement the relational backend.
 
 Merged stories:
 
@@ -871,6 +883,32 @@ start and end of this transform?"
 
 Interestingly, this would also allow us to compare things between
 runs. The schema should be designed with this in mind.
+
+*** STARTED Creating reference cycles produces strange errors         :story:
+    :LOGBOOK:
+    CLOCK: [2019-11-01 Fri 16:36]--[2019-11-01 Fri 16:52] =>  0:16
+    CLOCK: [2019-11-01 Fri 14:20]--[2019-11-01 Fri 16:35] =>  2:15
+    :END:
+
+If a model A references another model B and model B also references
+model A, dogen does not detect the cycle. This results in the not very
+obvious error of having duplicate types:
+
+: std::exception::what: More than one master segment found. Last: dogen.variability.registrar
+
+What we should do instead is to detect the cycle when loading the
+models and provide a sensible error message to the user.
+
+*** Make the building of the relational model conditional             :story:
+
+We should only build the relational model if ODB support is
+present. Otherwise we should ignore this model. Dogen should still
+function, but all code related to the relational model should be
+excluded. This includes the command line options related to database
+configuration.
+
+We should also tell the users that dogen was built without relational
+support.
 
 *** Generate ORM tests                                                :story:
 
