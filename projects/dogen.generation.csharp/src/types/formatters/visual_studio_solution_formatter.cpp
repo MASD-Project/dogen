@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/formatters/visual_studio_solution_formatter.hpp"
-#include "dogen.generation.csharp/types/formatters/assistant.hpp"
-#include "dogen.generation.csharp/types/formatters/types/traits.hpp"
-#include "dogen.generation.csharp/types/formatters/traits.hpp"
-#include "dogen.generation.csharp/types/fabric/visual_studio_solution.hpp"
-#include "dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
-#include "dogen.generation.csharp/types/traits.hpp"
-#include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include <boost/make_shared.hpp>
+#include "dogen.generation/types/formatters/sequence_formatter.hpp"
+#include "dogen.generation.csharp/types/traits.hpp"
+#include "dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
+#include "dogen.generation.csharp/types/fabric/visual_studio_solution.hpp"
+#include "dogen.generation.csharp/types/formatters/traits.hpp"
+#include "dogen.generation.csharp/types/formatters/types/traits.hpp"
+#include "dogen.generation.csharp/types/formatters/assistant.hpp"
+#include "dogen.generation.csharp/types/formatters/visual_studio_solution_formatter.hpp"
 
 namespace dogen::generation::csharp::formatters {
 

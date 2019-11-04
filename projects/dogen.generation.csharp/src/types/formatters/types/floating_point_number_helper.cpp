@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/formatters/types/floating_point_number_helper.hpp"
-#include "dogen.generation.csharp/types/formattables/helper_properties.hpp"
-#include "dogen.generation.csharp/types/formatters/types/traits.hpp"
 #include "dogen.generation.csharp/types/formatters/assistant.hpp"
+#include "dogen.generation.csharp/types/formatters/types/traits.hpp"
+#include "dogen.generation.csharp/types/formattables/helper_properties.hpp"
+#include "dogen.generation.csharp/types/formatters/types/floating_point_number_helper.hpp"
 
 namespace dogen::generation::csharp::formatters::types {
 

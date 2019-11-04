@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formatters/templates/logic_less_template_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/templates/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/formatting_error.hpp"
-#include "dogen.generation.cpp/types/formatters/traits.hpp"
-#include "dogen.generation.cpp/types/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/assistant.hpp"
-#include "dogen.assets/types/helpers/name_factory.hpp"
-#include "dogen.assets/types/helpers/meta_name_factory.hpp"
-#include "dogen.assets/types/meta_model/templating/logic_less_template.hpp"
-#include "dogen.utility/types/log/logger.hpp"
-#include <boost/algorithm/string/join.hpp>
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string/join.hpp>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.assets/types/meta_model/templating/logic_less_template.hpp"
+#include "dogen.assets/types/helpers/meta_name_factory.hpp"
+#include "dogen.assets/types/helpers/name_factory.hpp"
+#include "dogen.generation.cpp/types/formatters/assistant.hpp"
+#include "dogen.generation.cpp/types/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/formatting_error.hpp"
+#include "dogen.generation.cpp/types/formatters/templates/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/templates/logic_less_template_formatter.hpp"
 
 namespace dogen::generation::cpp::formatters::templates {
 

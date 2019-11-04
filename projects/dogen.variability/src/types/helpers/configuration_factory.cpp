@@ -100,7 +100,7 @@ configuration_factory::aggregate_entries(
     std::unordered_map<std::string, std::list<std::string> > r;
 
     for (const auto& entry : entries)
-        r[entry.first].push_front(entry.second);
+        r[entry.first].push_back(entry.second);
 
     return r;
 }

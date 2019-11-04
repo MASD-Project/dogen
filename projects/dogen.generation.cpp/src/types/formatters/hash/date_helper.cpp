@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formatters/hash/date_helper.hpp"
-#include "dogen.generation.cpp/types/formattables/helper_properties.hpp"
-#include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/formatters/hash/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/assistant.hpp"
+#include "dogen.generation.cpp/types/formattables/helper_properties.hpp"
+#include "dogen.generation.cpp/types/formatters/hash/date_helper.hpp"
 
 namespace dogen::generation::cpp::formatters::hash {
 

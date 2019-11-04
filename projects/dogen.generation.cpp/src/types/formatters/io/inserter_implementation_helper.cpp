@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/io/inserter_implementation_helper.hpp"
+#include "dogen.generation/types/formatters/sequence_formatter.hpp"
 
 namespace dogen::generation::cpp::formatters::io {
 

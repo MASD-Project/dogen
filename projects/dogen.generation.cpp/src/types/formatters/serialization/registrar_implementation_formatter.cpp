@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formatters/serialization/registrar_implementation_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/inclusion_constants.hpp"
-#include "dogen.generation.cpp/types/formatters/serialization/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/types/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/formatting_error.hpp"
-#include "dogen.generation.cpp/types/formatters/serialization/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/assistant.hpp"
-#include "dogen.generation.cpp/types/formatters/traits.hpp"
-#include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
-#include "dogen.generation.cpp/types/fabric/registrar.hpp"
-#include "dogen.generation.cpp/types/traits.hpp"
-#include "dogen.utility/types/log/logger.hpp"
 #include <boost/throw_exception.hpp>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.generation.cpp/types/traits.hpp"
+#include "dogen.generation.cpp/types/fabric/registrar.hpp"
+#include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
+#include "dogen.generation.cpp/types/formatters/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/assistant.hpp"
+#include "dogen.generation.cpp/types/formatters/serialization/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/formatting_error.hpp"
+#include "dogen.generation.cpp/types/formatters/types/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/serialization/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/inclusion_constants.hpp"
+#include "dogen.generation.cpp/types/formatters/serialization/registrar_implementation_formatter.hpp"
 
 namespace dogen::generation::cpp::formatters::serialization {
 

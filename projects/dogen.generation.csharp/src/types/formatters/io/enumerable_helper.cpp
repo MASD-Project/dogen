@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/formatters/io/enumerable_helper.hpp"
-#include "dogen.generation.csharp/types/formattables/helper_properties.hpp"
-#include "dogen.generation.csharp/types/formatters/io/traits.hpp"
 #include "dogen.generation.csharp/types/formatters/assistant.hpp"
+#include "dogen.generation.csharp/types/formatters/io/traits.hpp"
+#include "dogen.generation.csharp/types/formattables/helper_properties.hpp"
+#include "dogen.generation.csharp/types/formatters/io/enumerable_helper.hpp"
 
 namespace dogen::generation::csharp::formatters::io {
 

@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formatters/test_data/enum_implementation_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/test_data/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/types/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/formatting_error.hpp"
-#include "dogen.generation.cpp/types/formatters/inclusion_constants.hpp"
-#include "dogen.generation.cpp/types/formatters/assistant.hpp"
-#include "dogen.generation.cpp/types/formatters/traits.hpp"
-#include "dogen.generation.cpp/types/traits.hpp"
-#include "dogen.assets/types/helpers/meta_name_factory.hpp"
-#include "dogen.assets/types/meta_model/structural/enumeration.hpp"
-#include "dogen.generation/types/formatters/sequence_formatter.hpp"
-#include "dogen.utility/types/log/logger.hpp"
 #include <boost/throw_exception.hpp>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.generation/types/formatters/sequence_formatter.hpp"
+#include "dogen.assets/types/meta_model/structural/enumeration.hpp"
+#include "dogen.assets/types/helpers/meta_name_factory.hpp"
+#include "dogen.generation.cpp/types/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/assistant.hpp"
+#include "dogen.generation.cpp/types/formatters/inclusion_constants.hpp"
+#include "dogen.generation.cpp/types/formatters/formatting_error.hpp"
+#include "dogen.generation.cpp/types/formatters/types/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/test_data/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/test_data/enum_implementation_formatter.hpp"
 
 namespace dogen::generation::cpp::formatters::test_data {
 

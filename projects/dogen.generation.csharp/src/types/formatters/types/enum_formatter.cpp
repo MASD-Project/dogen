@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.csharp/types/formatters/types/enum_formatter.hpp"
-#include "dogen.generation.csharp/types/formatters/assistant.hpp"
-#include "dogen.generation.csharp/types/formatters/types/traits.hpp"
-#include "dogen.generation.csharp/types/traits.hpp"
-#include "dogen.generation/types/formatters/sequence_formatter.hpp"
-#include "dogen.assets/types/helpers/meta_name_factory.hpp"
 #include "dogen.assets/types/meta_model/structural/enumeration.hpp"
+#include "dogen.assets/types/helpers/meta_name_factory.hpp"
+#include "dogen.generation/types/formatters/sequence_formatter.hpp"
+#include "dogen.generation.csharp/types/traits.hpp"
+#include "dogen.generation.csharp/types/formatters/types/traits.hpp"
+#include "dogen.generation.csharp/types/formatters/assistant.hpp"
+#include "dogen.generation.csharp/types/formatters/types/enum_formatter.hpp"
 
 namespace dogen::generation::csharp::formatters::types {
 

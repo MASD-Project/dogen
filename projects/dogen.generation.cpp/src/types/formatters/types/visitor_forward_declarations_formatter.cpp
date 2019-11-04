@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formatters/types/traits.hpp"
-#include "dogen.generation.cpp/types/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/types/visitor_forward_declarations_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/assistant.hpp"
-#include "dogen.assets/types/helpers/meta_name_factory.hpp"
 #include "dogen.assets/types/meta_model/structural/visitor.hpp"
+#include "dogen.assets/types/helpers/meta_name_factory.hpp"
+#include "dogen.generation.cpp/types/formatters/assistant.hpp"
+#include "dogen.generation.cpp/types/formatters/types/visitor_forward_declarations_formatter.hpp"
+#include "dogen.generation.cpp/types/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/types/traits.hpp"
 
 namespace dogen::generation::cpp::formatters::types {
 

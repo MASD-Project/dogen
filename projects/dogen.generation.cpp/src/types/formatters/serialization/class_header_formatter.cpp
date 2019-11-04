@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation.cpp/types/formatters/serialization/class_header_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/assistant.hpp"
-#include "dogen.generation.cpp/types/formatters/serialization/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/inclusion_constants.hpp"
-#include "dogen.generation.cpp/types/formatters/types/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/traits.hpp"
-#include "dogen.generation.cpp/types/traits.hpp"
-#include "dogen.assets/types/helpers/meta_name_factory.hpp"
-#include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
+#include "dogen.assets/types/meta_model/structural/object.hpp"
+#include "dogen.assets/types/helpers/meta_name_factory.hpp"
+#include "dogen.generation.cpp/types/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/types/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/inclusion_constants.hpp"
+#include "dogen.generation.cpp/types/formatters/serialization/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/assistant.hpp"
+#include "dogen.generation.cpp/types/formatters/serialization/class_header_formatter.hpp"
 
 namespace dogen::generation::cpp::formatters::serialization {
 
