@@ -3655,11 +3655,6 @@ Links:
 - [[https://stackoverflow.com/questions/20023363/emacs-remove-region-read-only][emacs remove region read-only]]
 - [[https://www.emacswiki.org/emacs/FoldingMode][Folding mode]]
 
-*** Generate model dependency graph                                   :story:
-
-It would be nice to generate a tracing of the model dependencies. This
-may not necessarily be part of tracing.
-
 *** Pre-includes defines                                              :story:
 
 For boost test, we need the ability to define a macro before any of
@@ -5117,8 +5112,8 @@ ideas into stories and add them as we go along.
 - ensure all models part of a model set have compatible versions. For
   example, referencing a C++ 98 model from a C++ 11 model (or
   vice-versa) should result in an error.
-- detect cycles in references
-- detect references to self
+- detect cycles in references. Done, just needs warnings/errors framework.
+- detect references to self. Done, just needs warnings/errors framework.
 - if a model is making use of boost serialisation and it has leaves, a
   warning should come up stating that a type registrar is needed.
 - For C# models: attribute that start with lower case will cause

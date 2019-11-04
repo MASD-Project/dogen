@@ -35,6 +35,7 @@ static logger lg(logger_factory(transform_id));
 
 const std::string found_cycle("References graph has a cycle: ");
 const std::string found_duplicate("Duplicate reference: ");
+const std::string found_self_reference("Model references itself: ");
 
 inline std::string print_path(std::list<std::string> list) {
     std::ostringstream s;
@@ -90,6 +91,19 @@ void references_validator::dfs_visit(const std::string& vertex,
         std::unordered_set<std::string> references;
         for(const auto& child_vertex : i->second) {
             BOOST_LOG_SEV(lg, trace) << "Reference: " << child_vertex;
+
+            /*
+             * Check for references to "self". This happens sometimes
+             * by mistake, and if allowed to continue, could cause
+             * really bizarre errors further down the pipeline.
+             */
+            if (child_vertex == vertex) {
+                const auto s(print_path(dd.list));
+                BOOST_LOG_SEV(lg, error) << found_self_reference << s;
+                BOOST_THROW_EXCEPTION(
+                    reference_validation_error(found_self_reference + s));
+            }
+
             const auto inserted(references.insert(child_vertex).second);
             if (!inserted) {
                 /*
