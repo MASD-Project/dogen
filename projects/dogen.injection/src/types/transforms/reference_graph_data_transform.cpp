@@ -18,12 +18,45 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.injection/types/transforms/context.hpp"
+#include "dogen.injection/io/meta_model/model_set_io.hpp"
 #include "dogen.injection/types/transforms/reference_graph_data_transform.hpp"
+
+namespace {
+
+const std::string
+transform_id("injection.transforms.reference_graph_data_transform");
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::injection::transforms {
 
-bool reference_graph_data_transform::operator==(const reference_graph_data_transform& /*rhs*/) const {
-    return true;
+meta_model::reference_graph_data reference_graph_data_transform::
+obtain_references_for_model(const meta_model::model_set& ms) {
+    meta_model::reference_graph_data r;
+    r.root(ms.target().name());
+    r.edges_per_model()[ms.target().name()] = ms.target().references();
+    for (const auto& m : ms.references())
+        r.edges_per_model()[m.name()] = m.references();
+
+    return r;
+}
+
+void reference_graph_data_transform::
+apply(const context& ctx, meta_model::model_set& ms) {
+    const auto mn(ms.target().name());
+    tracing::scoped_chain_tracer stp(lg, "reference graph data transform",
+        transform_id, mn, *ctx.tracer());
+
+    const auto rfm(obtain_references_for_model(ms));
+    ms.reference_graph_data(rfm);
+
+    stp.end_chain(ms);
 }
 
 }

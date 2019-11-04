@@ -25,24 +25,22 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include <unordered_set>
+#include "dogen.injection/types/meta_model/model_set.hpp"
+#include "dogen.injection/types/meta_model/reference_graph_data.hpp"
+#include "dogen.injection/types/transforms/context_fwd.hpp"
 
 namespace dogen::injection::transforms {
 
 class reference_graph_data_transform final {
-public:
-    reference_graph_data_transform() = default;
-    reference_graph_data_transform(const reference_graph_data_transform&) = default;
-    reference_graph_data_transform(reference_graph_data_transform&&) = default;
-    ~reference_graph_data_transform() = default;
-    reference_graph_data_transform& operator=(const reference_graph_data_transform&) = default;
+private:
+    static meta_model::reference_graph_data
+    obtain_references_for_model(const meta_model::model_set& ms);
 
 public:
-    bool operator==(const reference_graph_data_transform& rhs) const;
-    bool operator!=(const reference_graph_data_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, meta_model::model_set& ms);
 };
 
 }
