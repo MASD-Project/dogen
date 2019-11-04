@@ -22,13 +22,13 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.injection/io/meta_model/reference_graph_data_io.hpp"
-#include "dogen.injection/types/helpers/circular_references_exception.hpp"
-#include "dogen.injection/types/helpers/circular_references_validator.hpp"
+#include "dogen.injection/types/helpers/reference_validation_error.hpp"
+#include "dogen.injection/types/helpers/references_validator.hpp"
 
 namespace {
 
 const std::string
-transform_id("injection.helpers.circular_references_validator");
+transform_id("injection.helpers.references_validator");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -53,7 +53,7 @@ inline std::string print_path(std::list<std::string> list) {
 
 namespace dogen::injection::helpers {
 
-void circular_references_validator::dfs_visit(const std::string& vertex,
+void references_validator::dfs_visit(const std::string& vertex,
     const std::unordered_map<std::string, std::list<std::string>>&
     edges_per_model, dfs_data dd) {
     /*
@@ -77,7 +77,7 @@ void circular_references_validator::dfs_visit(const std::string& vertex,
     if (!inserted) {
         const auto p(print_path(dd.list));
         BOOST_LOG_SEV(lg, error) << found_cycle << p;
-        BOOST_THROW_EXCEPTION(circular_references_exception(found_cycle + p));
+        BOOST_THROW_EXCEPTION(reference_validation_error(found_cycle + p));
     }
 
     /*
@@ -102,7 +102,7 @@ void circular_references_validator::dfs_visit(const std::string& vertex,
                 const auto s(print_path(dd.list));
                 BOOST_LOG_SEV(lg, error) << found_duplicate << s;
                 BOOST_THROW_EXCEPTION(
-                    circular_references_exception(found_duplicate + s));
+                    reference_validation_error(found_duplicate + s));
             }
 
             dfs_visit(child_vertex, edges_per_model, dd);
@@ -114,7 +114,7 @@ void circular_references_validator::dfs_visit(const std::string& vertex,
                              << "'. Stack depth: " << dd.list.size();
 }
 
-void circular_references_validator::
+void references_validator::
     validate(const meta_model::reference_graph_data& rgd) {
     BOOST_LOG_SEV(lg, debug) << "Checking reference cycles for " << rgd.root();
     BOOST_LOG_SEV(lg, trace) << "Graph data: " << rgd;

@@ -6806,7 +6806,7 @@ If the containing package is the model itself, it is linked to the model's modul
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#circular_references_validator#</dia:string>
+        <dia:string>#references_validator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -6954,19 +6954,19 @@ If the containing package is the model itself, it is linked to the model's modul
         <dia:point val="115,12"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="114.95,11.95;129.002,15.05"/>
+        <dia:rectangle val="114.95,11.95;127.483,15.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="115,12"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.952500000000001"/>
+        <dia:real val="12.432500000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#circular_references_exception#</dia:string>
+        <dia:string>#reference_validation_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::exception#</dia:string>
@@ -7101,7 +7101,7 @@ If the containing package is the model itself, it is linked to the model's modul
         <dia:point val="114.987,3.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="114.237,2.85;122.176,12.7504"/>
+        <dia:rectangle val="114.237,2.85;121.416,12.7504"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7109,8 +7109,8 @@ If the containing package is the model itself, it is linked to the model's modul
       <dia:attribute name="orth_points">
         <dia:point val="114.987,3.6"/>
         <dia:point val="114.987,9"/>
-        <dia:point val="121.976,9"/>
-        <dia:point val="121.976,11.9504"/>
+        <dia:point val="121.216,9"/>
+        <dia:point val="121.216,11.9504"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

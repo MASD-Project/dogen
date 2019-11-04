@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_INJECTION_TYPES_HELPERS_CIRCULAR_REFERENCES_EXCEPTION_HPP
-#define DOGEN_INJECTION_TYPES_HELPERS_CIRCULAR_REFERENCES_EXCEPTION_HPP
+#ifndef DOGEN_INJECTION_TYPES_HELPERS_REFERENCE_VALIDATION_ERROR_HPP
+#define DOGEN_INJECTION_TYPES_HELPERS_REFERENCE_VALIDATION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,13 +33,13 @@ namespace dogen::injection::helpers {
 /**
  * @brief A cycle was detected in the references graph.
  */
-class circular_references_exception : public virtual std::exception, public virtual boost::exception {
+class reference_validation_error : public virtual std::exception, public virtual boost::exception {
 public:
-    circular_references_exception() = default;
-    ~circular_references_exception() noexcept = default;
+    reference_validation_error() = default;
+    ~reference_validation_error() noexcept = default;
 
 public:
-    explicit circular_references_exception(const std::string& message) : message_(message) { }
+    explicit reference_validation_error(const std::string& message) : message_(message) { }
 
 public:
     const char* what() const noexcept { return(message_.c_str()); }

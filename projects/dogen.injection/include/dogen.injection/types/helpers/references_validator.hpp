@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_INJECTION_TYPES_HELPERS_CIRCULAR_REFERENCES_VALIDATOR_HPP
-#define DOGEN_INJECTION_TYPES_HELPERS_CIRCULAR_REFERENCES_VALIDATOR_HPP
+#ifndef DOGEN_INJECTION_TYPES_HELPERS_REFERENCES_VALIDATOR_HPP
+#define DOGEN_INJECTION_TYPES_HELPERS_REFERENCES_VALIDATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,7 +36,7 @@ namespace dogen::injection::helpers {
 /**
  * @brief Checks that there are no cycles in the references graph.
  */
-class circular_references_validator final {
+class references_validator final {
 private:
     /**
      * @brief Trivial struct that records all the data we need for our

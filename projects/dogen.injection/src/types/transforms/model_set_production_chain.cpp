@@ -24,7 +24,7 @@
 #include "dogen.injection/io/meta_model/model_set_io.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
 #include "dogen.injection/types/transforms/model_production_chain.hpp"
-#include "dogen.injection/types/helpers/circular_references_validator.hpp"
+#include "dogen.injection/types/helpers/references_validator.hpp"
 #include "dogen.injection/types/transforms/reference_graph_data_transform.hpp"
 #include "dogen.injection/types/transforms/model_set_production_chain.hpp"
 
@@ -126,8 +126,8 @@ model_set_production_chain::apply(const context& ctx,
     /*
      * Validate the reference graph.
      */
-    using dogen::injection::helpers::circular_references_validator;
-    circular_references_validator::validate(r.reference_graph_data());
+    using dogen::injection::helpers::references_validator;
+    references_validator::validate(r.reference_graph_data());
 
     stp.end_chain(r);
 
