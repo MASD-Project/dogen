@@ -24,6 +24,7 @@
 #include "dogen.injection/io/meta_model/model_set_io.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
 #include "dogen.injection/types/transforms/model_production_chain.hpp"
+#include "dogen.injection/types/transforms/reference_graph_data_transform.hpp"
 #include "dogen.injection/types/transforms/model_set_production_chain.hpp"
 
 namespace {
@@ -90,22 +91,36 @@ model_set_production_chain::apply(const context& ctx,
     tracing::scoped_chain_tracer stp(lg, "injection model set production chain",
         transform_id, mn, *ctx.tracer());
 
-    std::unordered_set<std::string> processed_models;
+    /*
+     * Create the references resolver.
+     */
     const auto& rg(model_production_chain::registrar());
     const auto exts(rg.registered_decoding_extensions());
     const auto dirs(obtain_directory_list(ctx, p));
     helpers::references_resolver res(exts, dirs);
 
+    /*
+     * Obtain the injection models.
+     */
+    std::unordered_set<std::string> processed_models;
     meta_model::model_set r;
     auto models(transform(ctx, res, p, processed_models));
     BOOST_LOG_SEV(lg, debug) << "Read injection model graph. Total: "
                              << models.size();
 
+    /*
+     * Create the model set.
+     */
     r.target(models.front());
     BOOST_LOG_SEV(lg, trace) << "Target: " << r.target().name();
 
     models.pop_front();
     r.references(models);
+
+    /*
+     * Build the data for the reference graph.
+     */
+    reference_graph_data_transform::apply(ctx, r);
 
     stp.end_chain(r);
 
