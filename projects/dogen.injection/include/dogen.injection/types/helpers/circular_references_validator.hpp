@@ -37,13 +37,13 @@ namespace dogen::injection::helpers {
  */
 class circular_references_validator final {
 private:
-    void dfs_visit(const std::string& id,
+    static void dfs_visit(const std::string& id,
         const std::unordered_map<std::string, std::list<std::string>>&
         edges_per_model,
         const std::unordered_set<std::string>& visited);
 
 public:
-    void validate(const meta_model::reference_graph_data& rgd);
+    static void validate(const meta_model::reference_graph_data& rgd);
 };
 
 }

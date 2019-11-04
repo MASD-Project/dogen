@@ -886,6 +886,9 @@ runs. The schema should be designed with this in mind.
 
 *** STARTED Creating reference cycles produces strange errors         :story:
     :LOGBOOK:
+    CLOCK: [2019-11-04 Mon 20:01]--[2019-11-04 Mon 20:09] =>  0:08
+    CLOCK: [2019-11-04 Mon 17:46]--[2019-11-04 Mon 18:30] =>  0:44
+    CLOCK: [2019-11-04 Mon 08:00]--[2019-11-04 Mon 08:40] =>  0:40
     CLOCK: [2019-11-01 Fri 16:36]--[2019-11-01 Fri 16:52] =>  0:16
     CLOCK: [2019-11-01 Fri 14:20]--[2019-11-01 Fri 16:35] =>  2:15
     :END:
@@ -898,6 +901,15 @@ obvious error of having duplicate types:
 
 What we should do instead is to detect the cycle when loading the
 models and provide a sensible error message to the user.
+
+Notes:
+
+- add a data structure in the injection model set to capture reference
+  information.
+- add a validator as part of the IMS chain to validate that there are
+  no cycles.
+- add a stack to the validator to provide context when cycles occur.
+- create a tracing report that takes in the data structures.
 
 *** Make the building of the relational model conditional             :story:
 

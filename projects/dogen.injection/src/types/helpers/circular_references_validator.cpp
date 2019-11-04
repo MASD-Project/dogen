@@ -37,7 +37,7 @@ const std::string found_cycle_in_graph("Graph has a cycle: ");
 
 namespace dogen::injection::helpers {
 
-void dfs_visit(const std::string& id,
+void circular_references_validator::dfs_visit(const std::string& id,
     const std::unordered_map<std::string, std::list<std::string>>&
     edges_per_model,
     const std::unordered_set<std::string>& visited) {
