@@ -29,7 +29,6 @@
 #include "dogen.engine/types/transforms/injection_model_set_to_assets_model_set_chain.hpp"
 #include "dogen.engine/types/transforms/assets_model_to_generation_model_transform.hpp"
 #include "dogen.engine/types/transforms/context.hpp"
-#include "dogen.injection/types/helpers/circular_references_validator.hpp"
 #include "dogen.engine/types/transforms/extraction_model_production_chain.hpp"
 
 namespace {
@@ -61,9 +60,6 @@ extraction_model_production_chain::apply(const context& ctx,
     using injection::transforms::model_set_production_chain;
     const auto ims(model_set_production_chain::apply(
             ctx.injection_context(), target));
-    using dogen::injection::helpers::circular_references_validator;
-    circular_references_validator crv;
-    crv.validate(ims);
 
     /*
      * Convert the injection model set into a assets model set.

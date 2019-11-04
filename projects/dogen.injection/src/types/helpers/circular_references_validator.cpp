@@ -37,23 +37,12 @@ const std::string found_cycle_in_graph("Graph has a cycle: ");
 
 namespace dogen::injection::helpers {
 
-std::unordered_map<std::string, std::list<std::string>>
-circular_references_validator::
-obtain_references_for_model(const meta_model::model_set& ms) const {
-    std::unordered_map<std::string, std::list<std::string>> r;
-    r[ms.target().name()] = ms.target().references();
-    for (const auto& m : ms.references())
-        r[m.name()] = m.references();
-
-    return r;
-}
-
-void circular_references_validator::
-add_to_graph(const std::string& id,
+void dfs_visit(const std::string& id,
     const std::unordered_map<std::string, std::list<std::string>>&
-    references_for_model, const std::unordered_set<std::string>& visited) {
-    const auto i(references_for_model.find(id));
-    if (i == references_for_model.end())
+    edges_per_model,
+    const std::unordered_set<std::string>& visited) {
+    const auto i(edges_per_model.find(id));
+    if (i == edges_per_model.end())
         return;
 
     for(const auto& child_id : i->second) {
@@ -65,23 +54,15 @@ add_to_graph(const std::string& id,
                 circular_references_exception(found_cycle_in_graph + child_id));
         }
 
-        add_to_graph(child_id, references_for_model, child_visited);
+        dfs_visit(child_id, edges_per_model, child_visited);
     }
 }
 
-void circular_references_validator::validate(const meta_model::model_set& ms) {
-    /*
-     * Collate all references by model name in this model set.
-     */
-    const auto rfm(obtain_references_for_model(ms));
-
-    /*
-     * Check for cycles.
-     */
-    const auto id(ms.target().name());
-    BOOST_LOG_SEV(lg, error) << "Checking reference cycles for " << id;
-    const std::unordered_set<std::string> visited({id});
-    add_to_graph(id, rfm, visited);
+void circular_references_validator::
+    validate(const meta_model::reference_graph_data& rgd) {
+    BOOST_LOG_SEV(lg, error) << "Checking reference cycles for " << rgd.root();
+    const std::unordered_set<std::string> visited({rgd.root()});
+    dfs_visit(rgd.root(), rgd.edges_per_model(), visited);
     BOOST_LOG_SEV(lg, error) << "No cycles found.";
 }
 

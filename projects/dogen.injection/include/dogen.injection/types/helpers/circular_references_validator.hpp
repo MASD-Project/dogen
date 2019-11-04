@@ -28,7 +28,7 @@
 #include <string>
 #include <unordered_set>
 #include <unordered_map>
-#include "dogen.injection/types/meta_model/model_set.hpp"
+#include "dogen.injection/types/meta_model/reference_graph_data.hpp"
 
 namespace dogen::injection::helpers {
 
@@ -37,16 +37,13 @@ namespace dogen::injection::helpers {
  */
 class circular_references_validator final {
 private:
-    std::unordered_map<std::string, std::list<std::string>>
-    obtain_references_for_model(const meta_model::model_set& ms) const;
-
-private:
-    void add_to_graph(const std::string& id,
+    void dfs_visit(const std::string& id,
         const std::unordered_map<std::string, std::list<std::string>>&
-        references_for_model, const std::unordered_set<std::string>& visited);
+        edges_per_model,
+        const std::unordered_set<std::string>& visited);
 
 public:
-    void validate(const meta_model::model_set& ms);
+    void validate(const meta_model::reference_graph_data& rgd);
 };
 
 }
