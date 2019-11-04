@@ -18,12 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.injection/types/transforms/references_graph_data_transform.hpp"
+#ifndef DOGEN_INJECTION_TYPES_TRANSFORMS_REFERENCE_GRAPH_DATA_TRANSFORM_HPP
+#define DOGEN_INJECTION_TYPES_TRANSFORMS_REFERENCE_GRAPH_DATA_TRANSFORM_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <algorithm>
 
 namespace dogen::injection::transforms {
 
-bool references_graph_data_transform::operator==(const references_graph_data_transform& /*rhs*/) const {
-    return true;
-}
+class reference_graph_data_transform final {
+public:
+    reference_graph_data_transform() = default;
+    reference_graph_data_transform(const reference_graph_data_transform&) = default;
+    reference_graph_data_transform(reference_graph_data_transform&&) = default;
+    ~reference_graph_data_transform() = default;
+    reference_graph_data_transform& operator=(const reference_graph_data_transform&) = default;
+
+public:
+    bool operator==(const reference_graph_data_transform& rhs) const;
+    bool operator!=(const reference_graph_data_transform& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
 
 }
+
+#endif

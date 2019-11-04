@@ -473,7 +473,7 @@
       ]
     },
     {
-      "name": "transforms::references_graph_data_transform",
+      "name": "transforms::reference_graph_data_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
