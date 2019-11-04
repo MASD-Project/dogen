@@ -441,14 +441,14 @@
       ]
     },
     {
-      "name": "helpers::circular_references_validator",
+      "name": "helpers::references_validator",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "helpers::circular_references_exception",
+      "name": "helpers::reference_validation_error",
       "documentation": "A cycle was detected in the references graph.\n",
       "stereotypes": [
         "masd::exception"
