@@ -24,19 +24,23 @@ namespace dogen::injection::meta_model {
 
 model_set::model_set(
     const dogen::injection::meta_model::model& target,
-    const std::list<dogen::injection::meta_model::model>& references)
+    const std::list<dogen::injection::meta_model::model>& references,
+    const dogen::injection::meta_model::reference_graph_data& reference_graph_data)
     : target_(target),
-      references_(references) { }
+      references_(references),
+      reference_graph_data_(reference_graph_data) { }
 
 void model_set::swap(model_set& other) noexcept {
     using std::swap;
     swap(target_, other.target_);
     swap(references_, other.references_);
+    swap(reference_graph_data_, other.reference_graph_data_);
 }
 
 bool model_set::operator==(const model_set& rhs) const {
     return target_ == rhs.target_ &&
-        references_ == rhs.references_;
+        references_ == rhs.references_ &&
+        reference_graph_data_ == rhs.reference_graph_data_;
 }
 
 model_set& model_set::operator=(model_set other) {
@@ -75,6 +79,22 @@ void model_set::references(const std::list<dogen::injection::meta_model::model>&
 
 void model_set::references(const std::list<dogen::injection::meta_model::model>&& v) {
     references_ = std::move(v);
+}
+
+const dogen::injection::meta_model::reference_graph_data& model_set::reference_graph_data() const {
+    return reference_graph_data_;
+}
+
+dogen::injection::meta_model::reference_graph_data& model_set::reference_graph_data() {
+    return reference_graph_data_;
+}
+
+void model_set::reference_graph_data(const dogen::injection::meta_model::reference_graph_data& v) {
+    reference_graph_data_ = v;
+}
+
+void model_set::reference_graph_data(const dogen::injection::meta_model::reference_graph_data&& v) {
+    reference_graph_data_ = std::move(v);
 }
 
 }

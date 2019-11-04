@@ -28,6 +28,7 @@
 #include <list>
 #include <algorithm>
 #include "dogen.injection/types/meta_model/model.hpp"
+#include "dogen.injection/types/meta_model/reference_graph_data.hpp"
 
 namespace dogen::injection::meta_model {
 
@@ -41,7 +42,8 @@ public:
 public:
     model_set(
         const dogen::injection::meta_model::model& target,
-        const std::list<dogen::injection::meta_model::model>& references);
+        const std::list<dogen::injection::meta_model::model>& references,
+        const dogen::injection::meta_model::reference_graph_data& reference_graph_data);
 
 public:
     const dogen::injection::meta_model::model& target() const;
@@ -53,6 +55,16 @@ public:
     std::list<dogen::injection::meta_model::model>& references();
     void references(const std::list<dogen::injection::meta_model::model>& v);
     void references(const std::list<dogen::injection::meta_model::model>&& v);
+
+    /**
+     * @brief Stores the data required to build a graph of references for a model set.
+     */
+    /**@{*/
+    const dogen::injection::meta_model::reference_graph_data& reference_graph_data() const;
+    dogen::injection::meta_model::reference_graph_data& reference_graph_data();
+    void reference_graph_data(const dogen::injection::meta_model::reference_graph_data& v);
+    void reference_graph_data(const dogen::injection::meta_model::reference_graph_data&& v);
+    /**@}*/
 
 public:
     bool operator==(const model_set& rhs) const;
@@ -67,6 +79,7 @@ public:
 private:
     dogen::injection::meta_model::model target_;
     std::list<dogen::injection::meta_model::model> references_;
+    dogen::injection::meta_model::reference_graph_data reference_graph_data_;
 };
 
 }

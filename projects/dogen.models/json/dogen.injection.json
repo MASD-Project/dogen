@@ -212,6 +212,11 @@
         {
           "name": "references",
           "type": "std::list<model>"
+        },
+        {
+          "name": "reference_graph_data",
+          "type": "reference_graph_data",
+          "documentation": "Stores the data required to build a graph of references for a model set.\n"
         }
       ]
     },
@@ -447,6 +452,30 @@
       "documentation": "A cycle was detected in the references graph.\n",
       "stereotypes": [
         "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::reference_graph_data",
+      "documentation": "Contains all the data required to build the graph of references.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "root",
+          "type": "std::string",
+          "documentation": "Has the name of the target model, which is the entry point to the references\ngraph.\n"
+        },
+        {
+          "name": "edges_per_model",
+          "type": "std::unordered_map<std::string, std::list<std::string>>",
+          "documentation": "Contains the list of referenced models for a particular model name.\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms::references_graph_data_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     }

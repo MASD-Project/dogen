@@ -18,35 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen.injection/io/meta_model/model_io.hpp"
-#include "dogen.injection/io/meta_model/model_set_io.hpp"
-#include "dogen.injection/io/meta_model/reference_graph_data_io.hpp"
+#include "dogen.injection/types/transforms/references_graph_data_transform.hpp"
 
-namespace std {
+namespace dogen::injection::transforms {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::injection::meta_model::model>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace dogen::injection::meta_model {
-
-std::ostream& operator<<(std::ostream& s, const model_set& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::injection::meta_model::model_set\"" << ", "
-      << "\"target\": " << v.target() << ", "
-      << "\"references\": " << v.references() << ", "
-      << "\"reference_graph_data\": " << v.reference_graph_data()
-      << " }";
-    return(s);
+bool references_graph_data_transform::operator==(const references_graph_data_transform& /*rhs*/) const {
+    return true;
 }
 
 }

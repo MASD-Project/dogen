@@ -18,35 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen.injection/io/meta_model/model_io.hpp"
-#include "dogen.injection/io/meta_model/model_set_io.hpp"
-#include "dogen.injection/io/meta_model/reference_graph_data_io.hpp"
+#ifndef DOGEN_INJECTION_TEST_DATA_META_MODEL_REFERENCE_GRAPH_DATA_TD_HPP
+#define DOGEN_INJECTION_TEST_DATA_META_MODEL_REFERENCE_GRAPH_DATA_TD_HPP
 
-namespace std {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::injection::meta_model::model>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
+#include "dogen.injection/types/meta_model/reference_graph_data.hpp"
 
 namespace dogen::injection::meta_model {
 
-std::ostream& operator<<(std::ostream& s, const model_set& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::injection::meta_model::model_set\"" << ", "
-      << "\"target\": " << v.target() << ", "
-      << "\"references\": " << v.references() << ", "
-      << "\"reference_graph_data\": " << v.reference_graph_data()
-      << " }";
-    return(s);
-}
+class reference_graph_data_generator {
+public:
+    reference_graph_data_generator();
+
+public:
+    typedef dogen::injection::meta_model::reference_graph_data result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 }
+
+#endif

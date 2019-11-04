@@ -20,6 +20,7 @@
  */
 #include "dogen.injection/test_data/meta_model/model_td.hpp"
 #include "dogen.injection/test_data/meta_model/model_set_td.hpp"
+#include "dogen.injection/test_data/meta_model/reference_graph_data_td.hpp"
 
 namespace {
 
@@ -36,6 +37,11 @@ std::list<dogen::injection::meta_model::model> create_std_list_dogen_injection_m
     return r;
 }
 
+dogen::injection::meta_model::reference_graph_data
+create_dogen_injection_meta_model_reference_graph_data(const unsigned int position) {
+    return dogen::injection::meta_model::reference_graph_data_generator::create(position);
+}
+
 }
 
 namespace dogen::injection::meta_model {
@@ -46,6 +52,7 @@ void model_set_generator::
 populate(const unsigned int position, result_type& v) {
     v.target(create_dogen_injection_meta_model_model(position + 0));
     v.references(create_std_list_dogen_injection_meta_model_model(position + 1));
+    v.reference_graph_data(create_dogen_injection_meta_model_reference_graph_data(position + 2));
 }
 
 model_set_generator::result_type
