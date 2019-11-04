@@ -18,8 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
+#include <iostream>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.injection/io/meta_model/reference_graph_data_io.hpp"
 #include "dogen.injection/types/helpers/circular_references_exception.hpp"
 #include "dogen.injection/types/helpers/circular_references_validator.hpp"
 
@@ -40,30 +43,52 @@ namespace dogen::injection::helpers {
 void circular_references_validator::dfs_visit(const std::string& id,
     const std::unordered_map<std::string, std::list<std::string>>&
     edges_per_model,
-    const std::unordered_set<std::string>& visited) {
+    const std::unordered_set<std::string>& visited_map,
+    const std::stack<std::string>& visited_stack) {
+    BOOST_LOG_SEV(lg, trace) << "Model: " << id;
     const auto i(edges_per_model.find(id));
-    if (i == edges_per_model.end())
+    if (i == edges_per_model.end()) {
+        BOOST_LOG_SEV(lg, trace) << "No references found.";
         return;
+    }
 
     for(const auto& child_id : i->second) {
-        std::unordered_set<std::string> child_visited(visited);
-        const auto inserted(child_visited.insert(child_id).second);
+        BOOST_LOG_SEV(lg, trace) << "Reference: " << child_id;
+        std::stack<std::string> child_visited_stack(visited_stack);
+        child_visited_stack.push(child_id);
+        BOOST_LOG_SEV(lg, trace) << "Stack depth: "
+                                 << child_visited_stack.size();
+        std::unordered_set<std::string> child_visited_map(visited_map);
+        const auto inserted(child_visited_map.insert(child_id).second);
         if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << "Detected a cycle with:" << child_id;
+            std::ostringstream s;
+            while(!child_visited_stack.empty()) {
+                s << child_visited_stack.top();
+                child_visited_stack.pop();
+                if (!child_visited_stack.empty())
+                    s << " -> ";
+            }
+
+            const auto msg(s.str());
+            BOOST_LOG_SEV(lg, error) << "Detected a references cycle: " << msg;
             BOOST_THROW_EXCEPTION(
-                circular_references_exception(found_cycle_in_graph + child_id));
+                circular_references_exception(found_cycle_in_graph + msg));
         }
 
-        dfs_visit(child_id, edges_per_model, child_visited);
+        dfs_visit(child_id, edges_per_model, child_visited_map, child_visited_stack);
     }
 }
 
 void circular_references_validator::
     validate(const meta_model::reference_graph_data& rgd) {
-    BOOST_LOG_SEV(lg, error) << "Checking reference cycles for " << rgd.root();
-    const std::unordered_set<std::string> visited({rgd.root()});
-    dfs_visit(rgd.root(), rgd.edges_per_model(), visited);
-    BOOST_LOG_SEV(lg, error) << "No cycles found.";
+    BOOST_LOG_SEV(lg, debug) << "Checking reference cycles for " << rgd.root();
+    BOOST_LOG_SEV(lg, trace) << "Graph data: " << rgd;
+
+    const std::unordered_set<std::string> visited_map({rgd.root()});
+    std::stack<std::string> visited_stack;
+    visited_stack.push(rgd.root());
+    dfs_visit(rgd.root(), rgd.edges_per_model(), visited_map, visited_stack);
+    BOOST_LOG_SEV(lg, debug) << "No cycles found.";
 }
 
 }

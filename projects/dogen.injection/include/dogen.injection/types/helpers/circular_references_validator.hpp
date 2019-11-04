@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <stack>
 #include <string>
 #include <unordered_set>
 #include <unordered_map>
@@ -40,7 +41,8 @@ private:
     static void dfs_visit(const std::string& id,
         const std::unordered_map<std::string, std::list<std::string>>&
         edges_per_model,
-        const std::unordered_set<std::string>& visited);
+        const std::unordered_set<std::string>& visited_map,
+        const std::stack<std::string>& visited_stack);
 
 public:
     static void validate(const meta_model::reference_graph_data& rgd);

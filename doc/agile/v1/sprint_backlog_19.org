@@ -12,32 +12,32 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-01 Fri 16:35]
+#+CAPTION: Clock summary at [2019-11-04 Mon 21:34]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *53:01* |       |       | 100.0 |
+| *Total time*                                              | *55:33* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 53:01   |       |       | 100.0 |
-| Active                                                    |         | 53:01 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       |  3:36 |   6.8 |
-| Create a demo and presentation for previous sprint        |         |       |  1:39 |   3.1 |
-| Sprint and product backlog grooming                       |         |       |  4:23 |   8.3 |
+| Stories                                                   | 55:33   |       |       | 100.0 |
+| Active                                                    |         | 55:33 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  3:36 |   6.5 |
+| Create a demo and presentation for previous sprint        |         |       |  1:39 |   3.0 |
+| Sprint and product backlog grooming                       |         |       |  4:23 |   7.9 |
 | Remove test model sanitizer                               |         |       |  0:20 |   0.6 |
-| Remove master headers                                     |         |       |  1:12 |   2.3 |
-| Fix the issues with tests in reference model              |         |       |  3:53 |   7.3 |
-| Update static strings to string views                     |         |       |  1:15 |   2.4 |
-| ODB include directories is incorrect                      |         |       |  1:43 |   3.2 |
-| Create a "modeling" report                                |         |       |  4:56 |   9.3 |
+| Remove master headers                                     |         |       |  1:12 |   2.2 |
+| Fix the issues with tests in reference model              |         |       |  3:53 |   7.0 |
+| Update static strings to string views                     |         |       |  1:15 |   2.3 |
+| ODB include directories is incorrect                      |         |       |  1:43 |   3.1 |
+| Create a "modeling" report                                |         |       |  4:56 |   8.9 |
 | Move visual studio related options to top profile         |         |       |  0:17 |   0.5 |
 | Fix incorrect message keyword when detecting ODB includes |         |       |  0:29 |   0.9 |
-| Move registrar into assets                                |         |       |  5:29 |  10.3 |
-| Fix compilation errors in nightly                         |         |       |  0:24 |   0.8 |
-| Upgrade to boost 1.70                                     |         |       | 10:00 |  18.9 |
+| Move registrar into assets                                |         |       |  5:29 |   9.9 |
+| Fix compilation errors in nightly                         |         |       |  0:24 |   0.7 |
+| Upgrade to boost 1.70                                     |         |       | 10:00 |  18.0 |
 | Setup laptop to work on dogen                             |         |       |  0:45 |   1.4 |
-| Org-mode as a carrier format for modeling                 |         |       |  5:37 |  10.6 |
-| Add relational tracing support                            |         |       |  4:48 |   9.1 |
-| Creating reference cycles produces strange errors         |         |       |  2:15 |   4.2 |
+| Org-mode as a carrier format for modeling                 |         |       |  5:37 |  10.1 |
+| Add relational tracing support                            |         |       |  4:48 |   8.6 |
+| Creating reference cycles produces strange errors         |         |       |  4:47 |   8.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -886,6 +886,7 @@ runs. The schema should be designed with this in mind.
 
 *** STARTED Creating reference cycles produces strange errors         :story:
     :LOGBOOK:
+    CLOCK: [2019-11-04 Mon 20:50]--[2019-11-04 Mon 21:34] =>  0:44
     CLOCK: [2019-11-04 Mon 20:01]--[2019-11-04 Mon 20:09] =>  0:08
     CLOCK: [2019-11-04 Mon 17:46]--[2019-11-04 Mon 18:30] =>  0:44
     CLOCK: [2019-11-04 Mon 08:00]--[2019-11-04 Mon 08:40] =>  0:40
