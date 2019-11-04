@@ -19,7 +19,6 @@
  *
  */
 #include <sstream>
-#include <iostream>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.injection/io/meta_model/reference_graph_data_io.hpp"
@@ -34,49 +33,76 @@ transform_id("injection.helpers.circular_references_validator");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
-const std::string found_cycle_in_graph("Graph has a cycle: ");
+const std::string found_cycle("References graph has a cycle: ");
+
+inline std::string print_cycle(std::stack<std::string> stack) {
+    /*
+     * Stack contains the cycle but its in reverse order of
+     * dependencies. We need to revert it first in order to print it
+     * in a way users can understand.
+     */
+    std::list<std::string> reverse;
+    while(!stack.empty()) {
+        reverse.push_front(stack.top());
+        stack.pop();
+    }
+
+    std::ostringstream s;
+    bool is_first(true);
+    for (const auto& v : reverse) {
+        if (!is_first)
+            s << " -> ";
+        else
+            is_first = false;
+        s << v;
+    }
+
+    return s.str();
+}
 
 }
 
 namespace dogen::injection::helpers {
 
-void circular_references_validator::dfs_visit(const std::string& id,
+void circular_references_validator::dfs_visit(const std::string& vertex,
     const std::unordered_map<std::string, std::list<std::string>>&
-    edges_per_model,
-    const std::unordered_set<std::string>& visited_map,
-    const std::stack<std::string>& visited_stack) {
-    BOOST_LOG_SEV(lg, trace) << "Model: " << id;
-    const auto i(edges_per_model.find(id));
-    if (i == edges_per_model.end()) {
-        BOOST_LOG_SEV(lg, trace) << "No references found.";
-        return;
+    edges_per_model, dfs_data dd) {
+    /*
+     * Every time we enter this method we are making a copy of the DFS
+     * data. This is just so that we keep track of our descent, but
+     * once we start back-tracking, we let the multiple copies at each
+     * stack level do the back-tracking for us.
+     */
+    dd.stack.push(vertex);
+    BOOST_LOG_SEV(lg, trace) << "Entering model: " << vertex
+                             << ". Stack depth: " << dd.stack.size();
+
+    /*
+     * We do not expect to see a model name repeated on a given DFS
+     * descent.
+     */
+    const auto inserted(dd.set.insert(vertex).second);
+    if (!inserted) {
+        const auto s(print_cycle(dd.stack));
+        BOOST_LOG_SEV(lg, error) << "Detected a references cycle: " << s;
+        BOOST_THROW_EXCEPTION(circular_references_exception(found_cycle + s));
     }
 
-    for(const auto& child_id : i->second) {
-        BOOST_LOG_SEV(lg, trace) << "Reference: " << child_id;
-        std::stack<std::string> child_visited_stack(visited_stack);
-        child_visited_stack.push(child_id);
-        BOOST_LOG_SEV(lg, trace) << "Stack depth: "
-                                 << child_visited_stack.size();
-        std::unordered_set<std::string> child_visited_map(visited_map);
-        const auto inserted(child_visited_map.insert(child_id).second);
-        if (!inserted) {
-            std::ostringstream s;
-            while(!child_visited_stack.empty()) {
-                s << child_visited_stack.top();
-                child_visited_stack.pop();
-                if (!child_visited_stack.empty())
-                    s << " -> ";
-            }
-
-            const auto msg(s.str());
-            BOOST_LOG_SEV(lg, error) << "Detected a references cycle: " << msg;
-            BOOST_THROW_EXCEPTION(
-                circular_references_exception(found_cycle_in_graph + msg));
+    /*
+     * Now, if there are any edges for this model, visit each one of
+     * them.
+     */
+    const auto i(edges_per_model.find(vertex));
+    if (i != edges_per_model.end()) {
+        for(const auto& child_id : i->second) {
+            BOOST_LOG_SEV(lg, trace) << "Reference: " << child_id;
+            dfs_visit(child_id, edges_per_model, dd);
         }
+    } else
+        BOOST_LOG_SEV(lg, trace) << "No references found.";
 
-        dfs_visit(child_id, edges_per_model, child_visited_map, child_visited_stack);
-    }
+    BOOST_LOG_SEV(lg, trace) << "Exiting model: " << vertex << " Stack depth: "
+                             << dd.stack.size();
 }
 
 void circular_references_validator::
@@ -84,10 +110,7 @@ void circular_references_validator::
     BOOST_LOG_SEV(lg, debug) << "Checking reference cycles for " << rgd.root();
     BOOST_LOG_SEV(lg, trace) << "Graph data: " << rgd;
 
-    const std::unordered_set<std::string> visited_map({rgd.root()});
-    std::stack<std::string> visited_stack;
-    visited_stack.push(rgd.root());
-    dfs_visit(rgd.root(), rgd.edges_per_model(), visited_map, visited_stack);
+    dfs_visit(rgd.root(), rgd.edges_per_model());
     BOOST_LOG_SEV(lg, debug) << "No cycles found.";
 }
 

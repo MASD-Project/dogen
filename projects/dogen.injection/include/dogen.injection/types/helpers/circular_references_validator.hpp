@@ -38,11 +38,24 @@ namespace dogen::injection::helpers {
  */
 class circular_references_validator final {
 private:
-    static void dfs_visit(const std::string& id,
+    /**
+     * @brief Trivial struct that records all the data we need for our
+     * little DFS excursion.
+     *
+     * We need the set because we want to know if we've been somewhere
+     * before, and we need the stack just so we can print a useful
+     * error message for the user with the complete path that contains
+     * the cycle.
+     */
+    struct dfs_data {
+        std::unordered_set<std::string> set;
+        std::stack<std::string> stack;
+    };
+
+private:
+    static void dfs_visit(const std::string& vertex,
         const std::unordered_map<std::string, std::list<std::string>>&
-        edges_per_model,
-        const std::unordered_set<std::string>& visited_map,
-        const std::stack<std::string>& visited_stack);
+        edges_per_model, dfs_data dd = dfs_data());
 
 public:
     static void validate(const meta_model::reference_graph_data& rgd);
