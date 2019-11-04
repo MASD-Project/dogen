@@ -12,33 +12,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-04 Mon 22:12]
+#+CAPTION: Clock summary at [2019-11-04 Mon 23:00]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *56:09* |       |       | 100.0 |
+| *Total time*                                              | *56:57* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 56:09   |       |       | 100.0 |
-| Active                                                    |         | 56:09 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       |  3:36 |   6.4 |
+| Stories                                                   | 56:57   |       |       | 100.0 |
+| Active                                                    |         | 56:57 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  3:36 |   6.3 |
 | Create a demo and presentation for previous sprint        |         |       |  1:39 |   2.9 |
-| Sprint and product backlog grooming                       |         |       |  4:23 |   7.8 |
+| Sprint and product backlog grooming                       |         |       |  4:23 |   7.7 |
 | Remove test model sanitizer                               |         |       |  0:20 |   0.6 |
 | Remove master headers                                     |         |       |  1:12 |   2.1 |
-| Fix the issues with tests in reference model              |         |       |  3:53 |   6.9 |
+| Fix the issues with tests in reference model              |         |       |  3:53 |   6.8 |
 | Update static strings to string views                     |         |       |  1:15 |   2.2 |
-| ODB include directories is incorrect                      |         |       |  1:43 |   3.1 |
-| Create a "modeling" report                                |         |       |  4:56 |   8.8 |
+| ODB include directories is incorrect                      |         |       |  1:43 |   3.0 |
+| Create a "modeling" report                                |         |       |  4:56 |   8.7 |
 | Move visual studio related options to top profile         |         |       |  0:17 |   0.5 |
-| Fix incorrect message keyword when detecting ODB includes |         |       |  0:29 |   0.9 |
-| Move registrar into assets                                |         |       |  5:29 |   9.8 |
+| Fix incorrect message keyword when detecting ODB includes |         |       |  0:29 |   0.8 |
+| Meta-data keys are in the inverse order                   |         |       |  0:39 |   1.1 |
+| Creating reference cycles produces strange errors         |         |       |  5:32 |   9.7 |
+| Move registrar into assets                                |         |       |  5:29 |   9.6 |
 | Fix compilation errors in nightly                         |         |       |  0:24 |   0.7 |
-| Upgrade to boost 1.70                                     |         |       | 10:00 |  17.8 |
+| Upgrade to boost 1.70                                     |         |       | 10:00 |  17.6 |
 | Setup laptop to work on dogen                             |         |       |  0:45 |   1.3 |
-| Org-mode as a carrier format for modeling                 |         |       |  5:37 |  10.0 |
-| Add relational tracing support                            |         |       |  4:48 |   8.5 |
-| Creating reference cycles produces strange errors         |         |       |  4:47 |   8.5 |
-| Meta-data keys are in the inverse order                   |         |       |  0:36 |   1.1 |
+| Org-mode as a carrier format for modeling                 |         |       |  5:37 |   9.9 |
+| Add relational tracing support                            |         |       |  4:48 |   8.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -550,6 +550,52 @@ Links:
 
 - [[https://cmake.org/cmake/help/v3.0/command/message.html][message]]
 
+*** COMPLETED Meta-data keys are in the inverse order                 :story:
+    CLOSED: [2019-11-04 Mon 22:14]
+    :LOGBOOK:
+    CLOCK: [2019-11-04 Mon 22:11]--[2019-11-04 Mon 22:14] =>  0:03
+    CLOCK: [2019-11-04 Mon 21:35]--[2019-11-04 Mon 22:11] =>  0:36
+    :END:
+
+Whilst investigation an issue with cycles, we noticed that all lists
+within meta-data appear to be in inverse order. Fix this and
+regenerate all models accordingly.
+
+*** COMPLETED Creating reference cycles produces strange errors       :story:
+    CLOSED: [2019-11-04 Mon 22:51]
+    :LOGBOOK:
+    CLOCK: [2019-11-04 Mon 22:52]--[2019-11-04 Mon 23:00] =>  0:08
+    CLOCK: [2019-11-04 Mon 22:14]--[2019-11-04 Mon 22:51] =>  0:37
+    CLOCK: [2019-11-04 Mon 20:50]--[2019-11-04 Mon 21:34] =>  0:44
+    CLOCK: [2019-11-04 Mon 20:01]--[2019-11-04 Mon 20:09] =>  0:08
+    CLOCK: [2019-11-04 Mon 17:46]--[2019-11-04 Mon 18:30] =>  0:44
+    CLOCK: [2019-11-04 Mon 08:00]--[2019-11-04 Mon 08:40] =>  0:40
+    CLOCK: [2019-11-01 Fri 16:36]--[2019-11-01 Fri 16:52] =>  0:16
+    CLOCK: [2019-11-01 Fri 14:20]--[2019-11-01 Fri 16:35] =>  2:15
+    :END:
+
+If a model A references another model B and model B also references
+model A, dogen does not detect the cycle. This results in the not very
+obvious error of having duplicate types:
+
+: std::exception::what: More than one master segment found. Last: dogen.variability.registrar
+
+What we should do instead is to detect the cycle when loading the
+models and provide a sensible error message to the user.
+
+Notes:
+
+- add a data structure in the injection model set to capture reference
+  information.
+- add a validator as part of the IMS chain to validate that there are
+  no cycles.
+- add a stack to the validator to provide context when cycles occur.
+- create a tracing report that takes in the data structures.
+
+Problems:
+
+- references seem to have been processed in reverse order.
+
 *** STARTED Move registrar into assets                                :story:
     :LOGBOOK:
     CLOCK: [2019-10-24 Thu 08:20]--[2019-10-24 Thu 08:43] =>  0:23
@@ -884,48 +930,6 @@ start and end of this transform?"
 
 Interestingly, this would also allow us to compare things between
 runs. The schema should be designed with this in mind.
-
-*** STARTED Creating reference cycles produces strange errors         :story:
-    :LOGBOOK:
-    CLOCK: [2019-11-04 Mon 20:50]--[2019-11-04 Mon 21:34] =>  0:44
-    CLOCK: [2019-11-04 Mon 20:01]--[2019-11-04 Mon 20:09] =>  0:08
-    CLOCK: [2019-11-04 Mon 17:46]--[2019-11-04 Mon 18:30] =>  0:44
-    CLOCK: [2019-11-04 Mon 08:00]--[2019-11-04 Mon 08:40] =>  0:40
-    CLOCK: [2019-11-01 Fri 16:36]--[2019-11-01 Fri 16:52] =>  0:16
-    CLOCK: [2019-11-01 Fri 14:20]--[2019-11-01 Fri 16:35] =>  2:15
-    :END:
-
-If a model A references another model B and model B also references
-model A, dogen does not detect the cycle. This results in the not very
-obvious error of having duplicate types:
-
-: std::exception::what: More than one master segment found. Last: dogen.variability.registrar
-
-What we should do instead is to detect the cycle when loading the
-models and provide a sensible error message to the user.
-
-Notes:
-
-- add a data structure in the injection model set to capture reference
-  information.
-- add a validator as part of the IMS chain to validate that there are
-  no cycles.
-- add a stack to the validator to provide context when cycles occur.
-- create a tracing report that takes in the data structures.
-
-Problems:
-
-- references seem to have been processed in reverse order.
-
-*** STARTED Meta-data keys are in the inverse order                   :story:
-    :LOGBOOK:
-    CLOCK: [2019-11-04 Mon 22:11]
-    CLOCK: [2019-11-04 Mon 21:35]--[2019-11-04 Mon 22:11] =>  0:36
-    :END:
-
-Whilst investigation an issue with cycles, we noticed that all lists
-within meta-data appear to be in inverse order. Fix this and
-regenerate all models accordingly.
 
 *** Make the building of the relational model conditional             :story:
 

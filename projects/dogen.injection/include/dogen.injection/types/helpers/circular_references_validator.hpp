@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include <stack>
+#include <list>
 #include <string>
 #include <unordered_set>
 #include <unordered_map>
@@ -43,13 +43,13 @@ private:
      * little DFS excursion.
      *
      * We need the set because we want to know if we've been somewhere
-     * before, and we need the stack just so we can print a useful
+     * before, and we need the list just so we can print a useful
      * error message for the user with the complete path that contains
      * the cycle.
      */
     struct dfs_data {
         std::unordered_set<std::string> set;
-        std::stack<std::string> stack;
+        std::list<std::string> list;
     };
 
 private:
