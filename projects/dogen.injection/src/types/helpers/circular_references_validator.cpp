@@ -34,8 +34,9 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 const std::string found_cycle("References graph has a cycle: ");
+const std::string found_duplicate("Duplicate reference: ");
 
-inline std::string print_cycle(std::list<std::string> list) {
+inline std::string print_path(std::list<std::string> list) {
     std::ostringstream s;
     bool is_first(true);
     for (const auto& v : list) {
@@ -74,19 +75,37 @@ void circular_references_validator::dfs_visit(const std::string& vertex,
      */
     const auto inserted(dd.set.insert(vertex).second);
     if (!inserted) {
-        const auto s(print_cycle(dd.list));
-        BOOST_LOG_SEV(lg, error) << "Detected a references cycle: " << s;
-        BOOST_THROW_EXCEPTION(circular_references_exception(found_cycle + s));
+        const auto p(print_path(dd.list));
+        BOOST_LOG_SEV(lg, error) << found_cycle << p;
+        BOOST_THROW_EXCEPTION(circular_references_exception(found_cycle + p));
     }
 
     /*
-     * If there are any edges for this model, visit each one of them.
+     * If there are any edges for this model, visit each one of
+     * them. While we're at it, check to see if there are any
+     * duplicate references.
      */
     const auto i(edges_per_model.find(vertex));
     if (i != edges_per_model.end()) {
-        for(const auto& child_id : i->second) {
-            BOOST_LOG_SEV(lg, trace) << "Reference: " << child_id;
-            dfs_visit(child_id, edges_per_model, dd);
+        std::unordered_set<std::string> references;
+        for(const auto& child_vertex : i->second) {
+            BOOST_LOG_SEV(lg, trace) << "Reference: " << child_vertex;
+            const auto inserted(references.insert(child_vertex).second);
+            if (!inserted) {
+                /*
+                 * If we find a duplicate reference, we "force"-push
+                 * it into the path, just so we have a nice way to
+                 * explain to the user where the duplicate is. This is
+                 * useful if it is nested far down in the DFS visit.
+                 */
+                dd.list.push_back(child_vertex);
+                const auto s(print_path(dd.list));
+                BOOST_LOG_SEV(lg, error) << found_duplicate << s;
+                BOOST_THROW_EXCEPTION(
+                    circular_references_exception(found_duplicate + s));
+            }
+
+            dfs_visit(child_vertex, edges_per_model, dd);
         }
     } else
         BOOST_LOG_SEV(lg, trace) << "No references found.";

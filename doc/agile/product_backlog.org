@@ -4950,11 +4950,6 @@ reference must be correct. However, somehow we seem to be looking at
 the element on the target model when deciding to include the hash file
 from reference model.
 
-*** Error on duplicate references                                     :story:
-
-We need to check to see what happens if you enter the same reference
-multiple times. We should error.
-
 *** Stitch does not handle directories very well                      :story:
 
 At present we seem to generate log files called =.= when we use stitch
