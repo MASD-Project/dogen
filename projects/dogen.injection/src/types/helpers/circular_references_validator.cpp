@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/graph/depth_first_search.hpp>
+#include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.injection/types/helpers/circular_references_exception.hpp"
 #include "dogen.injection/types/helpers/circular_references_validator.hpp"
@@ -37,50 +37,6 @@ const std::string found_cycle_in_graph("Graph has a cycle: ");
 
 namespace dogen::injection::helpers {
 
-namespace {
-
-/**
- * @brief Detects cycles in the graph.
- */
-class cycle_detector : public boost::default_dfs_visitor {
-private:
-    struct state {
-        std::ostringstream stream_;
-    };
-
-public:
-    cycle_detector() : state_(new state()) { }
-
-public:
-    template<typename Vertex, typename Graph>
-    void finish_vertex(const Vertex&, const Graph&) {
-        state_->stream_ << ")";
-    }
-
-    template<typename Vertex, typename Graph>
-    void discover_vertex(const Vertex& u, const Graph& g) {
-        state_->stream_ << "(" << g[u];
-    }
-
-    void back_edge(graph_type::edge_descriptor e, const graph_type& g) {
-        const auto id(g[target(e, g)]);
-        state_->stream_ << "(" << id;
-        BOOST_LOG_SEV(lg, error) << found_cycle_in_graph
-                                 << id << ". Graph as sexp: "
-                                 << state_->stream_.str();
-
-        BOOST_THROW_EXCEPTION(
-            circular_references_exception(found_cycle_in_graph + id));
-    }
-
-    const std::string sexp() { return state_->stream_.str(); }
-
-private:
-    std::shared_ptr<state> state_;
-};
-
-}
-
 std::unordered_map<std::string, std::list<std::string>>
 circular_references_validator::
 obtain_references_for_model(const meta_model::model_set& ms) const {
@@ -92,37 +48,24 @@ obtain_references_for_model(const meta_model::model_set& ms) const {
     return r;
 }
 
-circular_references_validator::vertex_descriptor_type
-circular_references_validator::vertex_for_id(const std::string& id) {
-    const auto i(id_to_vertex_.find(id));
-    if (i != id_to_vertex_.end()) {
-        BOOST_LOG_SEV(lg, debug) << "Vertex already exists: " << id;
-        return i->second;
-    }
-
-    const auto r(boost::add_vertex(graph_));
-    id_to_vertex_.insert(std::make_pair(id, r));
-    BOOST_LOG_SEV(lg, debug) << "Created vertex: " << id;
-
-    return r;
-}
-
-
 void circular_references_validator::
 add_to_graph(const std::string& id,
     const std::unordered_map<std::string, std::list<std::string>>&
-    references_for_model) {
-    const auto v(vertex_for_id(id));
+    references_for_model, const std::unordered_set<std::string>& visited) {
     const auto i(references_for_model.find(id));
     if (i == references_for_model.end())
         return;
 
     for(const auto& child_id : i->second) {
-        const auto cv(vertex_for_id(child_id));
-        boost::add_edge(v, cv, graph_);
-        BOOST_LOG_SEV(lg, debug) << "Creating edge between '"
-                                 << id << "' and '" << child_id << "'";
-        add_to_graph(child_id, references_for_model);
+        std::unordered_set<std::string> child_visited(visited);
+        const auto inserted(child_visited.insert(child_id).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << "Detected a cycle with:" << child_id;
+            BOOST_THROW_EXCEPTION(
+                circular_references_exception(found_cycle_in_graph + child_id));
+        }
+
+        add_to_graph(child_id, references_for_model, child_visited);
     }
 }
 
@@ -133,17 +76,13 @@ void circular_references_validator::validate(const meta_model::model_set& ms) {
     const auto rfm(obtain_references_for_model(ms));
 
     /*
-     * Build the graph
-     */
-    const auto id(ms.target().name());
-    add_to_graph(id, rfm);
-
-    /*
      * Check for cycles.
      */
-    cycle_detector cd;
-    boost::depth_first_search(graph_, boost::visitor(cd));
-    BOOST_LOG_SEV(lg, debug) << "Graph has no cycles. Sexp: " << cd.sexp();
+    const auto id(ms.target().name());
+    BOOST_LOG_SEV(lg, error) << "Checking reference cycles for " << id;
+    const std::unordered_set<std::string> visited({id});
+    add_to_graph(id, rfm, visited);
+    BOOST_LOG_SEV(lg, error) << "No cycles found.";
 }
 
 }
