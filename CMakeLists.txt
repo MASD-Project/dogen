@@ -98,12 +98,13 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/build/cmake)
 #
 # options
 #
-option(WITH_DOXYGEN "Build the project documentation" off)
+option(WITH_DOXYGEN "Build the project documentation." off)
 option(WITH_LATEX "Build LaTeX documents. Requires pdflatex and beamer." off)
 option(WITH_MINIMAL_PACKAGING "Package just the main application" off)
 option(WITH_JSON_VALIDATION "Adds JSON validation targets. Requires jq." on)
-option(WITH_BENCHMARKS "Adds targets for running benchmarks" on)
-option(WITH_BOOST_TEST_REPORTING "Create boost test reports" off)
+option(WITH_BENCHMARKS "Adds targets for running benchmarks." on)
+option(WITH_BOOST_TEST_REPORTING "Create boost test reports." off)
+option(WITH_RELATIONAL_SUPPORT "Add support for relational data." off)
 
 #
 # check for dependencies
@@ -398,23 +399,26 @@ endif()
 #
 # ODB
 #
-find_package(odb COMPONENTS libodb boost pgsql REQUIRED)
-if (odb_FOUND)
-    message(STATUS "Found ODB Libraries...")
-    set(ODB_LIBODB_FOUND ${odb_FOUND})
-else()
-    message(FATAL_ERROR "ODB Libraries NOT Found.")
-endif()
+if (WITH_RELATIONAL_SUPPORT)
+    set(DOGEN_HAVE_RELATIONAL_MODEL "1")
+    find_package(odb COMPONENTS libodb boost pgsql REQUIRED)
+    if (odb_FOUND)
+        message(STATUS "Found ODB Libraries...")
+        set(ODB_LIBODB_FOUND ${odb_FOUND})
+    else()
+        message(FATAL_ERROR "ODB Libraries NOT Found.")
+    endif()
 
-find_program(ODB_EXECUTABLE NAMES odb)
+    find_program(ODB_EXECUTABLE NAMES odb)
 
-if (ODB_EXECUTABLE)
-    message(STATUS "Found ODB Compiler... (${ODB_EXECUTABLE})")
-    add_custom_target(odb_all)
-    add_custom_target(oa)
-    add_dependencies(oa odb_all)
-else()
-    message(STATUS "ODB Compiler NOT Found.")
+    if (ODB_EXECUTABLE)
+        message(STATUS "Found ODB Compiler... (${ODB_EXECUTABLE})")
+        add_custom_target(odb_all)
+        add_custom_target(oa)
+        add_dependencies(oa odb_all)
+    else()
+        message(STATUS "ODB Compiler NOT Found.")
+    endif()
 endif()
 
 #
