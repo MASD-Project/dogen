@@ -2279,16 +2279,16 @@
         <dia:point val="41,7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="40.95,6.95;71.58,11.45"/>
+        <dia:rectangle val="40.95,6.95;62.34,12.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="41,7"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="30.530000000000001"/>
+        <dia:real val="21.289999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#references_printer#</dia:string>
@@ -2410,6 +2410,23 @@
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
+                <dia:string>#tf#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#tracing_format#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="1"/>
+              </dia:attribute>
+            </dia:composite>
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
                 <dia:string>#root_vertex#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
@@ -2491,7 +2508,7 @@
         <dia:point val="53.185,17"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.435,11.35;56.465,18.6"/>
+        <dia:rectangle val="51.595,12.15;53.935,17.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2499,8 +2516,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="53.185,17"/>
         <dia:point val="53.185,14"/>
-        <dia:point val="56.265,14"/>
-        <dia:point val="56.265,11.4"/>
+        <dia:point val="51.645,14"/>
+        <dia:point val="51.645,12.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

@@ -21,28 +21,46 @@
 #ifndef DOGEN_TRACING_TYPES_REFERENCES_PRINTER_HPP
 #define DOGEN_TRACING_TYPES_REFERENCES_PRINTER_HPP
 
+#include <libxml/tree.h>
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include <unordered_map>
+#include "dogen/types/tracing_format.hpp"
 
 namespace dogen::tracing {
 
+/**
+ * @brief Prints a graph of references according to the settings.
+ */
+
 class references_printer final {
-public:
-    references_printer() = default;
-    references_printer(const references_printer&) = default;
-    references_printer(references_printer&&) = default;
-    ~references_printer() = default;
-    references_printer& operator=(const references_printer&) = default;
+private:
+    typedef std::unordered_map<std::string, std::list<std::string>>
+    edges_per_model_type;
+
+private:
+    static void print_plain(std::ostream& o, unsigned int fill_level,
+        const std::string& vertex, const edges_per_model_type& edges_per_model);
+
+    static void print_org_mode(std::ostream& o, unsigned int fill_level,
+        const std::string& vertex, const edges_per_model_type& edges_per_model);
+
+    static void print_graphviz(std::ostream& o,
+        const std::string& vertex, const edges_per_model_type& edges_per_model);
 
 public:
-    bool operator==(const references_printer& rhs) const;
-    bool operator!=(const references_printer& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+  /**
+   * @brief Print the graph into a string.
+   *
+   * @pre The graph must be acyclic.
+   */
+    static std::string print(const tracing_format tf,
+        const std::string& root_vertex,
+        const edges_per_model_type& edges_per_model);
 };
 
 }
