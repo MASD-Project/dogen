@@ -12,23 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-05 Tue 22:24]
+#+CAPTION: Clock summary at [2019-11-05 Tue 22:42]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *60:11* |       |       | 100.0 |
+| *Total time*                                              | *60:28* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 60:11   |       |       | 100.0 |
-| Active                                                    |         | 60:11 |       | 100.0 |
+| Stories                                                   | 60:28   |       |       | 100.0 |
+| Active                                                    |         | 60:28 |       | 100.0 |
 | Edit release notes for previous sprint                    |         |       |  3:36 |   6.0 |
 | Create a demo and presentation for previous sprint        |         |       |  1:39 |   2.7 |
 | Time spent producing coding videos                        |         |       |  0:30 |   0.8 |
-| Sprint and product backlog grooming                       |         |       |  4:23 |   7.3 |
+| Sprint and product backlog grooming                       |         |       |  4:40 |   7.7 |
 | Remove test model sanitizer                               |         |       |  0:20 |   0.6 |
 | Remove master headers                                     |         |       |  1:12 |   2.0 |
-| Fix the issues with tests in reference model              |         |       |  3:53 |   6.5 |
+| Fix the issues with tests in reference model              |         |       |  3:53 |   6.4 |
 | Update static strings to string views                     |         |       |  1:15 |   2.1 |
-| ODB include directories is incorrect                      |         |       |  1:43 |   2.9 |
+| ODB include directories is incorrect                      |         |       |  1:43 |   2.8 |
 | Create a "modeling" report                                |         |       |  4:56 |   8.2 |
 | Move visual studio related options to top profile         |         |       |  0:17 |   0.5 |
 | Fix incorrect message keyword when detecting ODB includes |         |       |  0:29 |   0.8 |
@@ -39,10 +39,10 @@
 | Make the building of the relational model conditional     |         |       |  0:23 |   0.6 |
 | Move registrar into assets                                |         |       |  5:29 |   9.1 |
 | Fix compilation errors in nightly                         |         |       |  0:24 |   0.7 |
-| Upgrade to boost 1.70                                     |         |       | 10:00 |  16.6 |
+| Upgrade to boost 1.70                                     |         |       | 10:00 |  16.5 |
 | Setup laptop to work on dogen                             |         |       |  0:45 |   1.2 |
 | Org-mode as a carrier format for modeling                 |         |       |  5:37 |   9.3 |
-| Add relational tracing support                            |         |       |  4:48 |   8.0 |
+| Add relational tracing support                            |         |       |  4:48 |   7.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -228,6 +228,7 @@ actually doing any development related activities.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-11-05 Tue 22:25]--[2019-11-05 Tue 22:42] =>  0:17
     CLOCK: [2019-11-01 Fri 11:01]--[2019-11-01 Fri 11:18] =>  0:17
     CLOCK: [2019-10-29 Tue 08:01]--[2019-10-29 Tue 08:37] =>  0:36
     CLOCK: [2019-10-28 Mon 17:40]--[2019-10-28 Mon 17:44] =>  0:04
@@ -987,6 +988,142 @@ start and end of this transform?"
 
 Interestingly, this would also allow us to compare things between
 runs. The schema should be designed with this in mind.
+
+***
+
+*** Consider creating a test build for all facets                     :story:
+
+We can't afford to generate test code in Dogen for the continuous
+builds because we don't have enough build time to compile all of the
+generated code. This is true even when we are just generating a few
+facets (=test_data=, =types=, =tests=). However we definitely want to
+test the generated code in real models. The solution for this is to
+allow "variability overrides".
+
+Notes:
+
+- create a new command line flag: =variabulity-override=
+- it takes a triplet in the form of
+
+: ELEMENT_ID:KEY=VALUE
+
+- we parse these triplets into a container and then use it in the
+  variability transforms.
+- for scalar value types we merely override the value.
+- for collections we push back.
+- if we cannot find the target element ID we throw.
+- if we find the element more than once we throw.
+- note that the ELEMENT_ID must be a fully qualified path to the
+  element.
+- we must try to find the element on all models.
+- the remainder of variability processing will work as at present. We
+  just must ensure we override prior to any profile merging/expansion.
+
+Once we have this functionality in place, we can then update our
+nightly builds:
+
+- create a test profile that enables all facets.
+- in CMake, add an override to this profile for nightlies. This could
+  be a parameter passed in from CTest.
+- run the =gad= target in CTest first, then build then run all tests.
+- because the nightly is running under our control, we can easily
+  check CDash for errors and look at the generated source to
+  investigate the problem.
+- we should setup nightlies for Windows and OSX as well.
+- remove all of the test facets from the main repo (e.g. =test_data=,
+  =tests=).
+- note that this approach will also resolve the problem with ignoring
+  tests because we don't need to have them in the version control
+  system any longer. We should remove all of the regexes ignoring
+  tests as part of this work.
+- this approach could be extended to conversion: once we fix all of
+  the issues with JSON conversion, we don't need to have the JSON
+  models in version control. We can generate them on the fly for
+  nightlies only. It will require a bit of thinking because the tests
+  are hard coded.
+
+*Previous understanding*
+
+In the past we had enabled a lot of facets on the dogen models to
+serve as part of the testing infrastructure. However, its no longer
+feasible to do this because the build is taking too long. This is not
+ideal as the reference models just can't capture all of the complexity
+of a codebase like dogen's so we lost some testability with this
+move. What would be really nice is if we could create "test builds":
+
+- given a set of test models, copy them somewhere, generate a product
+  configuration with some kind of override that enables all facets
+  everywhere. some will just not come through like ORM.
+- build the product. all handcrafted code is now blank but all facets
+  are coming though.
+- this could be part of the ctest script, as a "mode" - product
+  generation test. Every time there is a commit to a product the build
+  kicks in.
+
+Notes:
+
+- one way to achieve this would be to force the profile of the
+  model. However, we are moving away from profiles, and in the future
+  there will be a list of stereotypes associated with the model. Then
+  it will be much harder to figure out what stereotypes do what and to
+  overwrite them.
+- an alternative would be to have some kind of "test mode"; when
+  handling enablement, we'd check the "mode". If we're in test mode,
+  we simply enable all and ignore any other settings. We could have a
+  "force enable" flag or some such like we do for
+  overwriting. However, we may then hit another problem: enabling all
+  facets may result in non-buildable models:
+  - facets may be incompatible. This is not a problem at present.
+  - handcrafted classes may result in code that does not
+    compile. Shouldn't though because we are still checking the status
+    of the attributes.
+- the key thing though is the overall build time must be below the
+  threshold. Maybe we can have this on a nightly, running on our own
+  hardware.
+
+Conclusions:
+
+- create a new flag: =force-enablement=. When set to true, we ignore
+  all enablement settings and generate all facets. We do not generate
+  all kernels though (e.g. the kernel must be on in the model).
+- create a script that copies the models to a new product and
+  generates them with fore-enablement. This will only work when we can
+  generate products.
+- as facets are enabled, tests are automatically generated for them.
+- build the result and run all tests.
+
+Merged stories:
+
+*New approach to model testing*                                    :story:*
+
+In the beginning we generated all models with all facets, even the
+dogen core models. The idea was to test the generator even though
+these facets were not useful for the product. This was really useful
+because the dogen models are much more realistic than the test models
+and due to this we picked up a number of bugs. However, we have now
+hit the maximum build times on travis and we need to start removing
+all ballast. This will mean we lose these valuable tests. The
+alternative is to create these tests on the fly:
+
+- create a new override flag that forces all facets to be emitted.
+- create a new test facet with templates that are dependent on the
+  enabled facets; each test tests the dependent facet.
+- create a ctest nightly build that generates code using these new
+  facets, compiles it and runs all tests.
+- we need some meta-data to "ignore" some modeling elements for
+  certain facets such as composition which are known to be broken. Or
+  maybe we should just leave the tests as red so we know.
+- the tests should be designed not to use templates etc to make the
+  debug dumps really obvious (unlike the existing tests). It may even
+  make more sense to test each type individually so that when the test
+  fails its really obvious:
+
+: MY_TYPE_serialisation_roundtrips_correctly
+
+  this way when we look at CDash we know exactly which types failed to
+  serialise.
+
+During the transition phase, we will remove all of the existing tests.
 
 *** Generate ORM tests                                                :story:
 
