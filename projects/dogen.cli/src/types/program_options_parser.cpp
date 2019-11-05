@@ -25,7 +25,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/operations.hpp>
 #include "dogen/types/database_engine.hpp"
-#include "dogen/version.hpp"
+#include "dogen/config.hpp"
 #include "dogen.utility/types/log/severity_level.hpp"
 #include "dogen.utility/types/log/logging_configuration.hpp"
 #include "dogen.cli/types/parser_exception.hpp"

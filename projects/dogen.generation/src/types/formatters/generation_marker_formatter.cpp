@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/throw_exception.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
-#include "dogen/version.hpp"
+#include "dogen/config.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.assets/io/meta_model/decoration/generation_marker_io.hpp"
 #include "dogen.generation/types/formatters/formatting_error.hpp"

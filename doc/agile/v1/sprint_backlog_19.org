@@ -12,14 +12,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-05 Tue 22:17]
+#+CAPTION: Clock summary at [2019-11-05 Tue 22:24]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *60:05* |       |       | 100.0 |
+| *Total time*                                              | *60:11* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 60:05   |       |       | 100.0 |
-| Active                                                    |         | 60:05 |       | 100.0 |
+| Stories                                                   | 60:11   |       |       | 100.0 |
+| Active                                                    |         | 60:11 |       | 100.0 |
 | Edit release notes for previous sprint                    |         |       |  3:36 |   6.0 |
 | Create a demo and presentation for previous sprint        |         |       |  1:39 |   2.7 |
 | Time spent producing coding videos                        |         |       |  0:30 |   0.8 |
@@ -36,13 +36,13 @@
 | Creating reference cycles produces strange errors         |         |       |  5:32 |   9.2 |
 | Error on duplicate references                             |         |       |  0:26 |   0.7 |
 | Generate model dependency graph                           |         |       |  1:55 |   3.2 |
+| Make the building of the relational model conditional     |         |       |  0:23 |   0.6 |
 | Move registrar into assets                                |         |       |  5:29 |   9.1 |
 | Fix compilation errors in nightly                         |         |       |  0:24 |   0.7 |
 | Upgrade to boost 1.70                                     |         |       | 10:00 |  16.6 |
 | Setup laptop to work on dogen                             |         |       |  0:45 |   1.2 |
 | Org-mode as a carrier format for modeling                 |         |       |  5:37 |   9.3 |
 | Add relational tracing support                            |         |       |  4:48 |   8.0 |
-| Make the building of the relational model conditional     |         |       |  0:17 |   0.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -636,6 +636,23 @@ We should also detect references to "self".
 It would be nice to generate a tracing of the model dependencies. This
 may not necessarily be part of tracing.
 
+*** COMPLETED Make the building of the relational model conditional   :story:
+    CLOSED: [2019-11-05 Tue 22:24]
+    :LOGBOOK:
+    CLOCK: [2019-11-05 Tue 22:18]--[2019-11-05 Tue 22:24] =>  0:06
+    CLOCK: [2019-11-05 Tue 22:01]--[2019-11-05 Tue 22:17] =>  0:16
+    CLOCK: [2019-11-05 Tue 21:59]--[2019-11-05 Tue 22:00] =>  0:01
+    :END:
+
+We should only build the relational model if ODB support is
+present. Otherwise we should ignore this model. Dogen should still
+function, but all code related to the relational model should be
+excluded. This includes the command line options related to database
+configuration.
+
+We should also tell the users that dogen was built without relational
+support.
+
 *** STARTED Move registrar into assets                                :story:
     :LOGBOOK:
     CLOCK: [2019-10-24 Thu 08:20]--[2019-10-24 Thu 08:43] =>  0:23
@@ -970,21 +987,6 @@ start and end of this transform?"
 
 Interestingly, this would also allow us to compare things between
 runs. The schema should be designed with this in mind.
-
-*** STARTED Make the building of the relational model conditional     :story:
-    :LOGBOOK:
-    CLOCK: [2019-11-05 Tue 22:01]--[2019-11-05 Tue 22:17] =>  0:16
-    CLOCK: [2019-11-05 Tue 21:59]--[2019-11-05 Tue 22:00] =>  0:01
-    :END:
-
-We should only build the relational model if ODB support is
-present. Otherwise we should ignore this model. Dogen should still
-function, but all code related to the relational model should be
-excluded. This includes the command line options related to database
-configuration.
-
-We should also tell the users that dogen was built without relational
-support.
 
 *** Generate ORM tests                                                :story:
 
