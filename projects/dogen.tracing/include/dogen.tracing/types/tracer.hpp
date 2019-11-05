@@ -26,7 +26,9 @@
 #endif
 
 #include <stack>
-#include <algorithm>
+#include <list>
+#include <string>
+#include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/types/tracing_configuration.hpp"
@@ -66,7 +68,10 @@ private:
     boost::filesystem::path
     full_path_for_writing(const std::string& filename) const;
 
-public:
+    boost::filesystem::path make_path(const boost::filesystem::path& dir,
+        const std::string& fn, const tracing_format tf) const;
+
+    public:
     /**
      * @brief Writes an initial input to the filesystem.
      */
@@ -82,6 +87,10 @@ public:
         ++transform_position_.top();
         utility::filesystem::write(p, input);
     }
+
+    void add_references_graph(const std::string& root_vertex,
+        const std::unordered_map<std::string, std::list<std::string>>&
+        edges_per_model) const;
 
     void start_chain(const std::string& transform_id) const;
     void start_chain(const std::string& transform_id,
@@ -159,6 +168,9 @@ private:
     mutable metrics_builder builder_;
     mutable std::stack<unsigned int> transform_position_;
     mutable boost::filesystem::path current_directory_;
+    mutable std::string root_vertex_;
+    mutable std::unordered_map<std::string, std::list<std::string>>
+    edges_per_model_;
 };
 
 }

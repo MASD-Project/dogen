@@ -22,6 +22,9 @@ const std::string run_activity("byproduct_generation");
 const std::string transform_stats_org_fn("transform_stats.org");
 const std::string transform_stats_text_fn("transform_stats.txt");
 const std::string transform_stats_graphviz_fn("transform_stats.dot");
+const std::string references_graph_org_fn("references_graph.org");
+const std::string references_graph_text_fn("references_graph.txt");
+const std::string references_graph_graphviz_fn("references_graph.dot");
 const std::string archetype_location_prefix(
     "000-archetype_location_repository-");
 const std::string archetype_location_postfix(
@@ -165,6 +168,7 @@ bool are_tracing_files_healthy(const configuration& cfg,
      * couple of expected files.
      */
     bool found_transform_stats(false);
+    bool found_references_graph(false);
     bool found_archetype_location(false);
     bool found_injection_dia_transform(false);
     for (const auto& f : files) {
@@ -201,6 +205,8 @@ bool are_tracing_files_healthy(const configuration& cfg,
         if (cfg.tracing()->use_short_names()) {
             if (fn == transform_stats_org_fn)
                 found_transform_stats = true;
+            else if (fn == references_graph_org_fn)
+                found_references_graph = true;
             else if (fn == first_short_name)
                 found_archetype_location = true;
             else if (fn == second_short_name)
@@ -208,6 +214,8 @@ bool are_tracing_files_healthy(const configuration& cfg,
         } else {
             if (fn == transform_stats_org_fn)
                 found_transform_stats = true;
+            else if (fn == references_graph_org_fn)
+                found_references_graph = true;
             else if (boost::starts_with(fn, archetype_location_prefix) &&
                 boost::ends_with(fn, archetype_location_postfix)) {
                 found_archetype_location = true;
@@ -245,14 +253,16 @@ bool are_tracing_files_healthy(const configuration& cfg,
 
     BOOST_LOG_SEV(lg, debug) << "found_transform_stats: "
                              << found_transform_stats
+                             << "found_references_graph: "
+                             << found_references_graph
                              << " found_archetype_location: "
                              << found_archetype_location
                              << " found_injection_dia_transform: "
                              << found_injection_dia_transform;
 
     return
-        found_transform_stats && found_archetype_location &&
-        found_injection_dia_transform;
+        found_transform_stats && found_references_graph &&
+        found_archetype_location && found_injection_dia_transform;
 }
 
 }
@@ -307,11 +317,17 @@ BOOST_AUTO_TEST_CASE(enabling_summary_tracing_with_plain_text_results_in_expecte
 
     using dogen::utility::filesystem::find_files;
     const auto files(find_files(cfg.byproduct_directory()));
-    BOOST_REQUIRE(files.size() == 1);
+    BOOST_REQUIRE(files.size() == 2);
 
-    const auto f(*files.begin());
-    const auto fn(f.filename().string());
-    BOOST_REQUIRE(fn == transform_stats_text_fn);
+    const auto f_beg(*files.begin());
+    const auto fn_beg(f_beg.filename().string());
+    BOOST_REQUIRE(fn_beg == transform_stats_text_fn ||
+        fn_beg == references_graph_text_fn);
+
+    const auto f_end(*files.rbegin());
+    const auto fn_end(f_end.filename().string());
+    BOOST_REQUIRE(fn_end == transform_stats_text_fn ||
+        fn_end == references_graph_text_fn);
 }
 
 BOOST_AUTO_TEST_CASE(enabling_summary_tracing_with_graphviz_results_in_expected_trace_files) {
@@ -331,11 +347,17 @@ BOOST_AUTO_TEST_CASE(enabling_summary_tracing_with_graphviz_results_in_expected_
 
     using dogen::utility::filesystem::find_files;
     const auto files(find_files(cfg.byproduct_directory()));
-    BOOST_REQUIRE(files.size() == 1);
+    BOOST_REQUIRE(files.size() == 2);
 
-    const auto f(*files.begin());
-    const auto fn(f.filename().string());
-    BOOST_REQUIRE(fn == transform_stats_graphviz_fn);
+    const auto f_beg(*files.begin());
+    const auto fn_beg(f_beg.filename().string());
+    BOOST_REQUIRE(fn_beg == transform_stats_graphviz_fn ||
+        fn_beg == references_graph_graphviz_fn);
+
+    const auto f_end(*files.rbegin());
+    const auto fn_end(f_end.filename().string());
+    BOOST_REQUIRE(fn_end == transform_stats_graphviz_fn ||
+        fn_end == references_graph_graphviz_fn);
 }
 
 BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_short_names_results_in_expected_trace_files) {

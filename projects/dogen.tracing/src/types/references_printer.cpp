@@ -77,16 +77,33 @@ void references_printer::
         print_org_mode(o, fill_level, child_vertex, edges_per_model);
 }
 
-void references_printer::print_graphviz(std::ostream& o,
+void references_printer::create_graphviz_edge_set(
+    std::unordered_set<std::string>& edge_set,
     const std::string& vertex, const edges_per_model_type& edges_per_model) {
     const auto i(edges_per_model.find(vertex));
     if (i == edges_per_model.end())
         return;
 
+    std::ostringstream s;
     for(auto child_vertex : i->second) {
-        o << "  " << vertex << " -> " << child_vertex << std::endl;
-        print_graphviz(o, child_vertex, edges_per_model);
+        s << "  \"" << vertex << "\" -> \"" << child_vertex << "\";";
+        edge_set.insert(s.str());
+        s.str("");
+        create_graphviz_edge_set(edge_set, child_vertex, edges_per_model);
     }
+}
+
+void references_printer::print_graphviz(std::ostream& o,
+    const std::unordered_set<std::string>& edge_set) {
+
+    o << "digraph D {" << std::endl
+      << "  node [shape=oval fontname=\"Sans serif\" fontsize=\"8\"];"
+      << std::endl<< std::endl;
+
+    for (const auto& e : edge_set)
+        o << e << std::endl;
+
+    o << "}" << std::endl;
 }
 
 std::string references_printer::print(const tracing_format tf,
@@ -104,15 +121,13 @@ std::string references_printer::print(const tracing_format tf,
         BOOST_LOG_SEV(lg, debug) << "Using org-mode format.";
         print_org_mode(s, 1, root_vertex, edges_per_model);
         break;
-    case tracing_format::graphviz:
+    case tracing_format::graphviz: {
         BOOST_LOG_SEV(lg, debug) << "Using graphviz format.";
-        s << "digraph D {" << std::endl
-          << "  node [shape=plaintext fontname=\"Sans serif\" fontsize=\"8\"];"
-          << std::endl<< std::endl;
-        print_graphviz(s, root_vertex, edges_per_model);
-        s << "}" << std::endl;
+        std::unordered_set<std::string> edge_set;
+        create_graphviz_edge_set(edge_set, root_vertex, edges_per_model);
+        print_graphviz(s, edge_set);
         break;
-    default: {
+    } default: {
         BOOST_LOG_SEV(lg, error) << invalid_tracing_format << tf;
         BOOST_THROW_EXCEPTION(tracing_error(invalid_tracing_format +
                 boost::lexical_cast<std::string>(tf)));

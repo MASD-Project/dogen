@@ -118,7 +118,7 @@ void metrics_printer::print_graphviz(std::ostream& table_stream,
     table_stream << "  " << guid << " [ label=<" << std::endl
                  << "  <table border=\"1\" cellborder=\"0\" cellspacing=\"1\">"
                  << std::endl
-                 << "    <tr><td align=\"left\"><b>" << tm->transform_id()
+                 << "    <tr><td align=\"left\"><b>" << tid
                  << " [" << mid << "]"
                  << "</b></td></tr>"
                  << std::endl

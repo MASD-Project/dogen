@@ -31,6 +31,7 @@
 #include "dogen.archetypes/io/location_repository_io.hpp"
 #include "dogen.tracing/types/tracing_error.hpp"
 #include "dogen.tracing/types/metrics.hpp"
+#include "dogen.tracing/types/references_printer.hpp"
 #include "dogen.tracing/types/metrics_printer.hpp"
 #include "dogen.tracing/types/tracer.hpp"
 
@@ -226,11 +227,33 @@ boost::filesystem::path tracer::full_path_for_writing(
     return current_directory_ / s.str();
 }
 
-void tracer::start_transform(const std::string& transform_id) const {
-    if (!tracing_enabled())
-        return;
+boost::filesystem::path tracer::make_path(const boost::filesystem::path& dir,
+    const std::string& fn, const tracing_format tf) const {
 
-    start_transform(transform_id, empty);
+    boost::filesystem::path r(dir);
+    switch(tf) {
+    case tracing_format::plain:
+        r /= fn + ".txt";
+        break;
+    case tracing_format::org_mode:
+        r /= fn + ".org";
+        break;
+    case tracing_format::graphviz:
+        r /= fn + ".dot";
+        break;
+    default: {
+        BOOST_LOG_SEV(lg, error) << invalid_tracing_format << tf;
+        BOOST_THROW_EXCEPTION(tracing_error(invalid_tracing_format +
+                boost::lexical_cast<std::string>(tf)));
+    } }
+    return r;
+}
+
+void tracer::add_references_graph(const std::string& root_vertex,
+    const std::unordered_map<std::string, std::list<std::string>>&
+    edges_per_model) const {
+    root_vertex_ = root_vertex;
+    edges_per_model_ = edges_per_model;
 }
 
 void tracer::start_chain(const std::string& transform_id) const {
@@ -255,6 +278,13 @@ void tracer::start_chain(const std::string& transform_id,
     handle_current_directory();
     ++transform_position_.top();
     transform_position_.push(0);
+}
+
+void tracer::start_transform(const std::string& transform_id) const {
+    if (!tracing_enabled())
+        return;
+
+    start_transform(transform_id, empty);
 }
 
 void tracer::start_transform(const std::string& transform_id,
@@ -300,6 +330,9 @@ void tracer::end_tracing() const {
     if (!tracing_enabled())
         return;
 
+    /*
+     * Write the metrics.
+     */
     const auto tm(builder_.build());
     const auto tf(configuration_->format());
     const bool dg(!configuration_->guids_enabled());
@@ -307,25 +340,17 @@ void tracer::end_tracing() const {
     const auto& od(configuration_->output_directory());
     BOOST_LOG_SEV(lg, debug) << "Writing to output directory: '"
                              << od.generic_string() << "'";
-
-    boost::filesystem::path p(od);
     const std::string fn("transform_stats");
-    switch(tf) {
-    case tracing_format::plain:
-        p /= fn + ".txt";
-        break;
-    case tracing_format::org_mode:
-        p /= fn + ".org";
-        break;
-    case tracing_format::graphviz:
-        p /= fn + ".dot";
-        break;
-    default: {
-        BOOST_LOG_SEV(lg, error) << invalid_tracing_format << tf;
-        BOOST_THROW_EXCEPTION(tracing_error(invalid_tracing_format +
-                boost::lexical_cast<std::string>(tf)));
-    } }
+    const auto p(make_path(od, fn, tf));
     utility::filesystem::write(p, s);
+
+    /*
+     * Write the references.
+     */
+    const std::string fn2("references_graph");
+    const auto p2(make_path(od, fn2, tf));
+    const auto s2(references_printer::print(tf, root_vertex_, edges_per_model_));
+    utility::filesystem::write(p2, s2);
 }
 
 bool tracer::operator==(const tracer& /*rhs*/) const {

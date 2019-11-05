@@ -126,8 +126,10 @@ model_set_production_chain::apply(const context& ctx,
     /*
      * Validate the reference graph.
      */
+    const auto& rgd(r.reference_graph_data());
     using dogen::injection::helpers::references_validator;
-    references_validator::validate(r.reference_graph_data());
+    references_validator::validate(rgd);
+    ctx.tracer()->add_references_graph(rgd.root(), rgd.edges_per_model());
 
     stp.end_chain(r);
 

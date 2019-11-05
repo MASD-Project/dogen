@@ -28,6 +28,7 @@
 
 #include <list>
 #include <string>
+#include <unordered_set>
 #include <unordered_map>
 #include "dogen/types/tracing_format.hpp"
 
@@ -49,8 +50,13 @@ private:
     static void print_org_mode(std::ostream& o, unsigned int fill_level,
         const std::string& vertex, const edges_per_model_type& edges_per_model);
 
+    static void create_graphviz_edge_set(
+        std::unordered_set<std::string>& edge_set,
+        const std::string& vertex,
+        const edges_per_model_type& edges_per_model);
+
     static void print_graphviz(std::ostream& o,
-        const std::string& vertex, const edges_per_model_type& edges_per_model);
+        const std::unordered_set<std::string>& edge_set);
 
 public:
   /**
