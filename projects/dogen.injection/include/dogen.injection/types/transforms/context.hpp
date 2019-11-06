@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <string>
 #include <vector>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
@@ -50,7 +51,8 @@ public:
         const boost::shared_ptr<dogen::variability::meta_model::feature_model>& feature_model,
         const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository,
         const boost::shared_ptr<dogen::tracing::tracer>& tracer,
-        const bool compatibility_mode);
+        const bool compatibility_mode,
+        const std::vector<std::string>& variability_overrides);
 
 public:
     const std::vector<boost::filesystem::path>& data_directories() const;
@@ -76,6 +78,16 @@ public:
     bool compatibility_mode() const;
     void compatibility_mode(const bool v);
 
+    /**
+     * @brief Raw set of variability overrides.
+     */
+    /**@{*/
+    const std::vector<std::string>& variability_overrides() const;
+    std::vector<std::string>& variability_overrides();
+    void variability_overrides(const std::vector<std::string>& v);
+    void variability_overrides(const std::vector<std::string>&& v);
+    /**@}*/
+
 public:
     bool operator==(const context& rhs) const;
     bool operator!=(const context& rhs) const {
@@ -92,6 +104,7 @@ private:
     boost::shared_ptr<dogen::archetypes::location_repository> archetype_location_repository_;
     boost::shared_ptr<dogen::tracing::tracer> tracer_;
     bool compatibility_mode_;
+    std::vector<std::string> variability_overrides_;
 };
 
 }

@@ -2748,7 +2748,7 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
         <dia:point val="14,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.95,47.95;46.12,54.85"/>
+        <dia:rectangle val="13.95,47.95;46.12,55.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="14,48"/>
@@ -2757,7 +2757,7 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
         <dia:real val="32.07"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="7.6000000000000005"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#context#</dia:string>
@@ -2951,6 +2951,29 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#variability_overrides#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::vector&lt;std::string&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Raw set of variability overrides.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

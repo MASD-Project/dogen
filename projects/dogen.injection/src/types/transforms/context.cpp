@@ -60,12 +60,14 @@ context::context(
     const boost::shared_ptr<dogen::variability::meta_model::feature_model>& feature_model,
     const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository,
     const boost::shared_ptr<dogen::tracing::tracer>& tracer,
-    const bool compatibility_mode)
+    const bool compatibility_mode,
+    const std::vector<std::string>& variability_overrides)
     : data_directories_(data_directories),
       feature_model_(feature_model),
       archetype_location_repository_(archetype_location_repository),
       tracer_(tracer),
-      compatibility_mode_(compatibility_mode) { }
+      compatibility_mode_(compatibility_mode),
+      variability_overrides_(variability_overrides) { }
 
 void context::swap(context& other) noexcept {
     using std::swap;
@@ -74,6 +76,7 @@ void context::swap(context& other) noexcept {
     swap(archetype_location_repository_, other.archetype_location_repository_);
     swap(tracer_, other.tracer_);
     swap(compatibility_mode_, other.compatibility_mode_);
+    swap(variability_overrides_, other.variability_overrides_);
 }
 
 bool context::operator==(const context& rhs) const {
@@ -81,7 +84,8 @@ bool context::operator==(const context& rhs) const {
         feature_model_ == rhs.feature_model_ &&
         archetype_location_repository_ == rhs.archetype_location_repository_ &&
         tracer_ == rhs.tracer_ &&
-        compatibility_mode_ == rhs.compatibility_mode_;
+        compatibility_mode_ == rhs.compatibility_mode_ &&
+        variability_overrides_ == rhs.variability_overrides_;
 }
 
 context& context::operator=(context other) {
@@ -160,6 +164,22 @@ bool context::compatibility_mode() const {
 
 void context::compatibility_mode(const bool v) {
     compatibility_mode_ = v;
+}
+
+const std::vector<std::string>& context::variability_overrides() const {
+    return variability_overrides_;
+}
+
+std::vector<std::string>& context::variability_overrides() {
+    return variability_overrides_;
+}
+
+void context::variability_overrides(const std::vector<std::string>& v) {
+    variability_overrides_ = v;
+}
+
+void context::variability_overrides(const std::vector<std::string>&& v) {
+    variability_overrides_ = std::move(v);
 }
 
 }

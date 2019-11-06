@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen.tracing/io/tracer_io.hpp"
 #include "dogen.injection/io/transforms/context_io.hpp"
 #include "dogen.archetypes/io/location_repository_io.hpp"
@@ -87,6 +88,28 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 }
 
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen::injection::transforms {
 
 std::ostream& operator<<(std::ostream& s, const context& v) {
@@ -102,7 +125,8 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"feature_model\": " << v.feature_model() << ", "
       << "\"archetype_location_repository\": " << v.archetype_location_repository() << ", "
       << "\"tracer\": " << v.tracer() << ", "
-      << "\"compatibility_mode\": " << v.compatibility_mode()
+      << "\"compatibility_mode\": " << v.compatibility_mode() << ", "
+      << "\"variability_overrides\": " << v.variability_overrides()
       << " }";
     return(s);
 }
