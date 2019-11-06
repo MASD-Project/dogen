@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include <list>
+#include <string>
 #include <algorithm>
 
 namespace dogen {
@@ -44,7 +46,8 @@ public:
 public:
     model_processing_configuration(
         const bool compatibility_mode_enabled,
-        const bool dry_run_mode_enabled);
+        const bool dry_run_mode_enabled,
+        const std::list<std::string>& variability_overrides);
 
 public:
     /**
@@ -66,6 +69,22 @@ public:
     void dry_run_mode_enabled(const bool v);
     /**@}*/
 
+    /**
+     * @brief Raw set of variability overrides.
+     *
+     * Overrides are CSV strings in the following format:
+     *
+     * MODEL_NAME,ELEMENT_NAME,ATTRIBUTE_NAME,KEY,VALUE
+     *
+     * ELEMENT_NAME and ATTRIBUTE_NAME can be left blank.
+     */
+    /**@{*/
+    const std::list<std::string>& variability_overrides() const;
+    std::list<std::string>& variability_overrides();
+    void variability_overrides(const std::list<std::string>& v);
+    void variability_overrides(const std::list<std::string>&& v);
+    /**@}*/
+
 public:
     bool operator==(const model_processing_configuration& rhs) const;
     bool operator!=(const model_processing_configuration& rhs) const {
@@ -79,6 +98,7 @@ public:
 private:
     bool compatibility_mode_enabled_;
     bool dry_run_mode_enabled_;
+    std::list<std::string> variability_overrides_;
 };
 
 }

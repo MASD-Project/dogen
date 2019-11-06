@@ -18,12 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/test_data/model_processing_configuration_td.hpp"
 
 namespace {
 
 bool create_bool(const unsigned int position) {
     return (position % 2) != 0;
+}
+
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
+
+std::list<std::string> create_std_list_std_string(unsigned int position) {
+    std::list<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_std_string(position + i));
+    }
+    return r;
 }
 
 }
@@ -36,6 +51,7 @@ void model_processing_configuration_generator::
 populate(const unsigned int position, result_type& v) {
     v.compatibility_mode_enabled(create_bool(position + 0));
     v.dry_run_mode_enabled(create_bool(position + 1));
+    v.variability_overrides(create_std_list_std_string(position + 2));
 }
 
 model_processing_configuration_generator::result_type

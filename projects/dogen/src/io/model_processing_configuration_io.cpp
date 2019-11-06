@@ -20,7 +20,30 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen/io/model_processing_configuration_io.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 
@@ -34,7 +57,8 @@ std::ostream& operator<<(std::ostream& s, const model_processing_configuration& 
     s << " { "
       << "\"__type__\": " << "\"dogen::model_processing_configuration\"" << ", "
       << "\"compatibility_mode_enabled\": " << v.compatibility_mode_enabled() << ", "
-      << "\"dry_run_mode_enabled\": " << v.dry_run_mode_enabled()
+      << "\"dry_run_mode_enabled\": " << v.dry_run_mode_enabled() << ", "
+      << "\"variability_overrides\": " << v.variability_overrides()
       << " }";
     return(s);
 }

@@ -190,6 +190,11 @@
           "name": "dry_run_mode_enabled",
           "type": "bool",
           "documentation": "If true, all transforms wil be executed but no code will be emitted.\n"
+        },
+        {
+          "name": "variability_overrides",
+          "type": "std::list<std::string>",
+          "documentation": "Raw set of variability overrides.\n\nOverrides are CSV strings in the following format:\n\nMODEL_NAME,ELEMENT_NAME,ATTRIBUTE_NAME,KEY,VALUE\n\nELEMENT_NAME and ATTRIBUTE_NAME can be left blank.\n"
         }
       ]
     },
