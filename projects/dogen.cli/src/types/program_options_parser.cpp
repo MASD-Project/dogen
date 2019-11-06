@@ -209,6 +209,7 @@ options_description make_top_level_visible_options_description() {
         ("variability-override", value<std::vector<std::string>>(),
             "CSV string with a variability override. Must have the form of"
             "MODEL_NAME,[ELEMENT_NAME],[ATTRIBUTE_NAME],KEY,VALUE");
+    r.add(ehod);
 
     options_description db("Database");
     db.add_options()
