@@ -18,12 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/string/splitter.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.injection/types/transforms/context.hpp"
+#include "dogen.injection/io/meta_model/model_io.hpp"
 #include "dogen.injection/types/transforms/tagged_values_overrides_transform.hpp"
+
+namespace {
+
+const std::string
+transform_id("injector.transforms.tagged_values_overrides_transform");
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::injection::transforms {
 
-bool tagged_values_overrides_transform::operator==(const tagged_values_overrides_transform& /*rhs*/) const {
-    return true;
+void tagged_values_overrides_transform::
+apply(const transforms::context& ctx, meta_model::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "configuration transform",
+        transform_id, m.name(), *ctx.tracer(), m);
+
+    // dogen::utility::string::splitter::split_csv
+
+    stp.end_transform(m);
+    BOOST_LOG_SEV(lg, debug) << "Transformed model.";
 }
 
 }

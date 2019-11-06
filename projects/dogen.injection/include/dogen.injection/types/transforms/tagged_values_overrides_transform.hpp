@@ -25,24 +25,18 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.injection/types/meta_model/model.hpp"
+#include "dogen.injection/types/transforms/context_fwd.hpp"
 
 namespace dogen::injection::transforms {
 
+/**
+ * @brief Uses the variability overrides to generate the tagged values
+ * overrides for the appropriate modeling elements.
+ */
 class tagged_values_overrides_transform final {
 public:
-    tagged_values_overrides_transform() = default;
-    tagged_values_overrides_transform(const tagged_values_overrides_transform&) = default;
-    tagged_values_overrides_transform(tagged_values_overrides_transform&&) = default;
-    ~tagged_values_overrides_transform() = default;
-    tagged_values_overrides_transform& operator=(const tagged_values_overrides_transform&) = default;
-
-public:
-    bool operator==(const tagged_values_overrides_transform& rhs) const;
-    bool operator!=(const tagged_values_overrides_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const transforms::context& ctx, meta_model::model& m);
 };
 
 }
