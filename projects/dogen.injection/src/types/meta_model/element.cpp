@@ -42,6 +42,7 @@ element::element()
 
 element::element(
     const std::list<std::pair<std::string, std::string> >& tagged_values,
+    const std::list<std::pair<std::string, std::string> >& tagged_values_overrides,
     const std::list<std::string>& stereotypes,
     const std::string& documentation,
     const std::string& name,
@@ -56,6 +57,7 @@ element::element(
     const bool is_associative_container,
     const bool is_floating_point)
     : tagged_values_(tagged_values),
+      tagged_values_overrides_(tagged_values_overrides),
       stereotypes_(stereotypes),
       documentation_(documentation),
       name_(name),
@@ -73,6 +75,7 @@ element::element(
 void element::swap(element& other) noexcept {
     using std::swap;
     swap(tagged_values_, other.tagged_values_);
+    swap(tagged_values_overrides_, other.tagged_values_overrides_);
     swap(stereotypes_, other.stereotypes_);
     swap(documentation_, other.documentation_);
     swap(name_, other.name_);
@@ -90,6 +93,7 @@ void element::swap(element& other) noexcept {
 
 bool element::operator==(const element& rhs) const {
     return tagged_values_ == rhs.tagged_values_ &&
+        tagged_values_overrides_ == rhs.tagged_values_overrides_ &&
         stereotypes_ == rhs.stereotypes_ &&
         documentation_ == rhs.documentation_ &&
         name_ == rhs.name_ &&
@@ -125,6 +129,22 @@ void element::tagged_values(const std::list<std::pair<std::string, std::string> 
 
 void element::tagged_values(const std::list<std::pair<std::string, std::string> >&& v) {
     tagged_values_ = std::move(v);
+}
+
+const std::list<std::pair<std::string, std::string> >& element::tagged_values_overrides() const {
+    return tagged_values_overrides_;
+}
+
+std::list<std::pair<std::string, std::string> >& element::tagged_values_overrides() {
+    return tagged_values_overrides_;
+}
+
+void element::tagged_values_overrides(const std::list<std::pair<std::string, std::string> >& v) {
+    tagged_values_overrides_ = v;
+}
+
+void element::tagged_values_overrides(const std::list<std::pair<std::string, std::string> >&& v) {
+    tagged_values_overrides_ = std::move(v);
 }
 
 const std::list<std::string>& element::stereotypes() const {

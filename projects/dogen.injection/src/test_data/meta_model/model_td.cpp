@@ -89,13 +89,14 @@ model_generator::model_generator() : position_(0) { }
 void model_generator::
 populate(const unsigned int position, result_type& v) {
     v.tagged_values(create_std_list_std_pair_std_string_std_string(position + 0));
-    v.stereotypes(create_std_list_std_string(position + 1));
-    v.documentation(create_std_string(position + 2));
-    v.name(create_std_string(position + 3));
-    v.configuration(create_boost_shared_ptr_dogen_variability_meta_model_configuration(position + 4));
-    v.elements(create_std_list_dogen_injection_meta_model_element(position + 5));
-    v.input_technical_space(create_std_string(position + 6));
-    v.references(create_std_list_std_string(position + 7));
+    v.tagged_values_overrides(create_std_list_std_pair_std_string_std_string(position + 1));
+    v.stereotypes(create_std_list_std_string(position + 2));
+    v.documentation(create_std_string(position + 3));
+    v.name(create_std_string(position + 4));
+    v.configuration(create_boost_shared_ptr_dogen_variability_meta_model_configuration(position + 5));
+    v.elements(create_std_list_dogen_injection_meta_model_element(position + 6));
+    v.input_technical_space(create_std_string(position + 7));
+    v.references(create_std_list_std_string(position + 8));
 }
 
 model_generator::result_type

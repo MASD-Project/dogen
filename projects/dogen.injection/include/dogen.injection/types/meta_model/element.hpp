@@ -50,6 +50,7 @@ public:
 public:
     element(
         const std::list<std::pair<std::string, std::string> >& tagged_values,
+        const std::list<std::pair<std::string, std::string> >& tagged_values_overrides,
         const std::list<std::string>& stereotypes,
         const std::string& documentation,
         const std::string& name,
@@ -69,6 +70,16 @@ public:
     std::list<std::pair<std::string, std::string> >& tagged_values();
     void tagged_values(const std::list<std::pair<std::string, std::string> >& v);
     void tagged_values(const std::list<std::pair<std::string, std::string> >&& v);
+
+    /**
+     * @brief Meta-data sourced externally that can be used to override meta-data in model.
+     */
+    /**@{*/
+    const std::list<std::pair<std::string, std::string> >& tagged_values_overrides() const;
+    std::list<std::pair<std::string, std::string> >& tagged_values_overrides();
+    void tagged_values_overrides(const std::list<std::pair<std::string, std::string> >& v);
+    void tagged_values_overrides(const std::list<std::pair<std::string, std::string> >&& v);
+    /**@}*/
 
     const std::list<std::string>& stereotypes() const;
     std::list<std::string>& stereotypes();
@@ -154,6 +165,7 @@ public:
 
 private:
     std::list<std::pair<std::string, std::string> > tagged_values_;
+    std::list<std::pair<std::string, std::string> > tagged_values_overrides_;
     std::list<std::string> stereotypes_;
     std::string documentation_;
     std::string name_;

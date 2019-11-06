@@ -34,6 +34,7 @@ namespace dogen::injection::meta_model {
 
 attribute::attribute(
     const std::list<std::pair<std::string, std::string> >& tagged_values,
+    const std::list<std::pair<std::string, std::string> >& tagged_values_overrides,
     const std::list<std::string>& stereotypes,
     const std::string& documentation,
     const std::string& name,
@@ -41,6 +42,7 @@ attribute::attribute(
     const std::string& type,
     const std::string& value)
     : tagged_values_(tagged_values),
+      tagged_values_overrides_(tagged_values_overrides),
       stereotypes_(stereotypes),
       documentation_(documentation),
       name_(name),
@@ -51,6 +53,7 @@ attribute::attribute(
 void attribute::swap(attribute& other) noexcept {
     using std::swap;
     swap(tagged_values_, other.tagged_values_);
+    swap(tagged_values_overrides_, other.tagged_values_overrides_);
     swap(stereotypes_, other.stereotypes_);
     swap(documentation_, other.documentation_);
     swap(name_, other.name_);
@@ -61,6 +64,7 @@ void attribute::swap(attribute& other) noexcept {
 
 bool attribute::operator==(const attribute& rhs) const {
     return tagged_values_ == rhs.tagged_values_ &&
+        tagged_values_overrides_ == rhs.tagged_values_overrides_ &&
         stereotypes_ == rhs.stereotypes_ &&
         documentation_ == rhs.documentation_ &&
         name_ == rhs.name_ &&
@@ -89,6 +93,22 @@ void attribute::tagged_values(const std::list<std::pair<std::string, std::string
 
 void attribute::tagged_values(const std::list<std::pair<std::string, std::string> >&& v) {
     tagged_values_ = std::move(v);
+}
+
+const std::list<std::pair<std::string, std::string> >& attribute::tagged_values_overrides() const {
+    return tagged_values_overrides_;
+}
+
+std::list<std::pair<std::string, std::string> >& attribute::tagged_values_overrides() {
+    return tagged_values_overrides_;
+}
+
+void attribute::tagged_values_overrides(const std::list<std::pair<std::string, std::string> >& v) {
+    tagged_values_overrides_ = v;
+}
+
+void attribute::tagged_values_overrides(const std::list<std::pair<std::string, std::string> >&& v) {
+    tagged_values_overrides_ = std::move(v);
 }
 
 const std::list<std::string>& attribute::stereotypes() const {

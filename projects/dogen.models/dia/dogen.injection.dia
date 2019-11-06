@@ -2058,19 +2058,19 @@ main stereotypes.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="16,8"/>
+        <dia:point val="13,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="15.95,7.95;40.42,11.65"/>
+        <dia:rectangle val="12.95,7.95;41.27,12.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="16,8"/>
+        <dia:point val="13,8"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.369999999999997"/>
+        <dia:real val="28.219999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#Taggable#</dia:string>
@@ -2172,6 +2172,29 @@ main stereotypes.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#tagged_values_overrides#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::list&lt;std::pair&lt;std::string, std::string&gt;&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Meta-data sourced externally that can be used to override meta-data in model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5312,17 +5335,17 @@ and, if so, ignore it.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O42">
       <dia:attribute name="obj_pos">
-        <dia:point val="28.185,11.6"/>
+        <dia:point val="27.11,12.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="27.335,11.55;38.1125,16.05"/>
+        <dia:rectangle val="26.26,12.35;38.1125,16.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="28.185,11.6"/>
-        <dia:point val="28.185,14"/>
+        <dia:point val="27.11,12.4"/>
+        <dia:point val="27.11,14"/>
         <dia:point val="38.0625,14"/>
         <dia:point val="38.0625,16"/>
       </dia:attribute>

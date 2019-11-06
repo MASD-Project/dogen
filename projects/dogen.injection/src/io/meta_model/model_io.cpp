@@ -109,6 +109,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::injection::meta_model::model\"" << ", "
       << "\"tagged_values\": " << v.tagged_values() << ", "
+      << "\"tagged_values_overrides\": " << v.tagged_values_overrides() << ", "
       << "\"stereotypes\": " << v.stereotypes() << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "

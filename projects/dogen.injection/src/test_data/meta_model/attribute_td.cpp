@@ -75,12 +75,13 @@ attribute_generator::attribute_generator() : position_(0) { }
 void attribute_generator::
 populate(const unsigned int position, result_type& v) {
     v.tagged_values(create_std_list_std_pair_std_string_std_string(position + 0));
-    v.stereotypes(create_std_list_std_string(position + 1));
-    v.documentation(create_std_string(position + 2));
-    v.name(create_std_string(position + 3));
-    v.configuration(create_boost_shared_ptr_dogen_variability_meta_model_configuration(position + 4));
-    v.type(create_std_string(position + 5));
-    v.value(create_std_string(position + 6));
+    v.tagged_values_overrides(create_std_list_std_pair_std_string_std_string(position + 1));
+    v.stereotypes(create_std_list_std_string(position + 2));
+    v.documentation(create_std_string(position + 3));
+    v.name(create_std_string(position + 4));
+    v.configuration(create_boost_shared_ptr_dogen_variability_meta_model_configuration(position + 5));
+    v.type(create_std_string(position + 6));
+    v.value(create_std_string(position + 7));
 }
 
 attribute_generator::result_type

@@ -93,19 +93,20 @@ element_generator::element_generator() : position_(0) { }
 void element_generator::
 populate(const unsigned int position, result_type& v) {
     v.tagged_values(create_std_list_std_pair_std_string_std_string(position + 0));
-    v.stereotypes(create_std_list_std_string(position + 1));
-    v.documentation(create_std_string(position + 2));
-    v.name(create_std_string(position + 3));
-    v.configuration(create_boost_shared_ptr_dogen_variability_meta_model_configuration(position + 4));
-    v.parents(create_std_list_std_string(position + 5));
-    v.attributes(create_std_list_dogen_injection_meta_model_attribute(position + 6));
-    v.fallback_element_type(create_std_string(position + 7));
-    v.can_be_primitive_underlier(create_bool(position + 8));
-    v.in_global_module(create_bool(position + 9));
-    v.can_be_enumeration_underlier(create_bool(position + 10));
-    v.is_default_enumeration_type(create_bool(position + 11));
-    v.is_associative_container(create_bool(position + 12));
-    v.is_floating_point(create_bool(position + 13));
+    v.tagged_values_overrides(create_std_list_std_pair_std_string_std_string(position + 1));
+    v.stereotypes(create_std_list_std_string(position + 2));
+    v.documentation(create_std_string(position + 3));
+    v.name(create_std_string(position + 4));
+    v.configuration(create_boost_shared_ptr_dogen_variability_meta_model_configuration(position + 5));
+    v.parents(create_std_list_std_string(position + 6));
+    v.attributes(create_std_list_dogen_injection_meta_model_attribute(position + 7));
+    v.fallback_element_type(create_std_string(position + 8));
+    v.can_be_primitive_underlier(create_bool(position + 9));
+    v.in_global_module(create_bool(position + 10));
+    v.can_be_enumeration_underlier(create_bool(position + 11));
+    v.is_default_enumeration_type(create_bool(position + 12));
+    v.is_associative_container(create_bool(position + 13));
+    v.is_floating_point(create_bool(position + 14));
 }
 
 element_generator::result_type
