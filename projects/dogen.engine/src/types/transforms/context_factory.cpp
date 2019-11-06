@@ -265,6 +265,12 @@ context context_factory::make_context(const configuration& cfg,
     const auto drm(cfg.model_processing().dry_run_mode_enabled());
     r.extraction_context().dry_run_mode_enabled(drm);
 
+    /*
+     * Populate the variability overrides.
+     */
+    const auto& vo(cfg.model_processing().variability_overrides());
+    r.injection_context().variability_overrides(vo);
+
     return r;
 }
 
