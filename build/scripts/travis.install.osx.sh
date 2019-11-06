@@ -51,6 +51,8 @@ curl -L -o ${csharp_ref_impl_output_location} ${csharp_ref_impl_input_location}
 unzip -q ${csharp_ref_impl_output_location} -d ${csharp_ref_impl_extract_dir}
 
 #
-# Upgrade CMake
+# Upgrade CMake. Note that brew gives an error if the package is
+# already up-to-date, which is not very nice. See:
+# https://github.com/Homebrew/legacy-homebrew/issues/27897
 #
-brew upgrade cmake
+brew upgrade cmake || true
