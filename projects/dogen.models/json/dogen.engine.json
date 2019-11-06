@@ -68,7 +68,8 @@
     {
       "name": "transforms::context",
       "stereotypes": [
-        "dogen::handcrafted::typeable"
+        "dogen::typeable",
+        "dogen::pretty_printable"
       ],
       "tagged_values": {
         "masd.generation.cpp.types.class_forward_declarations.enabled": "true"

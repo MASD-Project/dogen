@@ -34,6 +34,29 @@ context::context(
       generation_context_(generation_context),
       extraction_context_(extraction_context) { }
 
+void context::swap(context& other) noexcept {
+    using std::swap;
+    swap(variability_context_, other.variability_context_);
+    swap(injection_context_, other.injection_context_);
+    swap(assets_context_, other.assets_context_);
+    swap(generation_context_, other.generation_context_);
+    swap(extraction_context_, other.extraction_context_);
+}
+
+bool context::operator==(const context& rhs) const {
+    return variability_context_ == rhs.variability_context_ &&
+        injection_context_ == rhs.injection_context_ &&
+        assets_context_ == rhs.assets_context_ &&
+        generation_context_ == rhs.generation_context_ &&
+        extraction_context_ == rhs.extraction_context_;
+}
+
+context& context::operator=(context other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
 const dogen::variability::transforms::context& context::variability_context() const {
     return variability_context_;
 }

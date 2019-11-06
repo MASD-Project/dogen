@@ -26,11 +26,11 @@
 #endif
 
 #include <algorithm>
-#include "dogen.variability/types/transforms/context.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
-#include "dogen.generation/types/transforms/context.hpp"
 #include "dogen.extraction/types/transforms/context.hpp"
+#include "dogen.generation/types/transforms/context.hpp"
+#include "dogen.variability/types/transforms/context.hpp"
 
 namespace dogen::engine::transforms {
 
@@ -75,6 +75,16 @@ public:
     void extraction_context(const dogen::extraction::transforms::context& v);
     void extraction_context(const dogen::extraction::transforms::context&& v);
 
+public:
+    bool operator==(const context& rhs) const;
+    bool operator!=(const context& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+public:
+    void swap(context& other) noexcept;
+    context& operator=(context other);
+
 private:
     dogen::variability::transforms::context variability_context_;
     dogen::injection::transforms::context injection_context_;
@@ -82,6 +92,17 @@ private:
     dogen::generation::transforms::context generation_context_;
     dogen::extraction::transforms::context extraction_context_;
 };
+
+}
+
+namespace std {
+
+template<>
+inline void swap(
+    dogen::engine::transforms::context& lhs,
+    dogen::engine::transforms::context& rhs) {
+    lhs.swap(rhs);
+}
 
 }
 
