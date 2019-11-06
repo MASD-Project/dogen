@@ -6965,39 +6965,6 @@ We need to ignore empty expressions.
 The =sequence_formatter= is actually not a formatter, but a helper or
 assistant.
 
-*** Improvements to dia model                                         :story:
-
-Assorted notes on cleaning-up the dia model:
-
-- create a base class such as =value= and make all values inherit from
-  it instead of using boost variant.
-- according to DTD, a composite can be made up of either composites or
-  attributes. We incorrectly modeled it as having just one inner
-  composite.
-- perhaps this is better thought of slightly differently: an attribute
-  has child nodes. The child nodes can either be leaf nodes, in which
-  case they are values, or non-leaf nodes in which case they are
-  composite nodes. Composite nodes themselves can have child nodes. If
-  they are leaf nodes they are values; if they are non-leaf nodes they
-  are either attributes or composites.
-- note that we do not need to use shared pointers in composite: we
-  could simply have an attribute by value. However, we still need to
-  handle the case where the children are either composite or
-  attributes. So if we somehow could get composite and attribute to
-  have a common base class, we could have a container of that base
-  class in composite. For this we would need a shared pointer.
-- consider adding the postfix =node= to class names and make it a real
-  tree, as per dia's implementation.
-- covert all vectors to lists since we do not know their sizes on
-  construction.
-- one thing to bear in mind is that if we fix the tree structure, we
-  will break the XML parsing code in hydrator, which took quite a
-  while to get right (and has hacks such as "inner composite").
-- its not obvious why we need to treat =dia::string= in a different
-  way from all other attribute values (except for =dia::font=).
-- alternative: create an XML schema from the DTD and use it with the
-  XSD tool to create the model.
-
 *** Create more "utility" members for formatters                       :epic:
 
 One way of making the templates a bit more manageable is to avoid
@@ -7761,17 +7728,6 @@ Links:
   C++ project with boiler-plate CMake files and source code, and the
   generated project can be downloaded as a zip file."
 - [[https://awfulcode.io/2019/04/13/professional-zero-cost-setup-for-c-projects-part-1-of-n/][Professional, zero-cost setup for C++ projects (Part 1 of N)]]:
-
-*** Add conversion (encoding) support for Dia                         :story:
-
-It would be nice if one could take a JSON model and generate a dia
-diagram for it. This is non-trivial because it would require computing
-all of the sizes and locations for all UML elements. But if we did
-manage to do this, we could then allow users to submit models in say
-JSON, eCore etc and produce a PNG of the model so they could visualise
-it. We could also try to consume dia as a shared library instead of
-running the full program - e.g. create a service that takes in a dia
-diagram and returns the PNG.
 
 *** Add support for selectively disabling helpers on a family         :story:
 
@@ -11818,7 +11774,7 @@ suitable in documentation:
 - *End Marker*: #>. Can also be specialised to "end X marker",
   e.g. end directive marker is #>.
 
-*** Diagrams used in manual should be in sanity and in docs           :story:
+*** Diagrams used in manual should be in docs                         :story:
 
 Users should be able to follow the examples in the manual by using a
 set of diagrams supplied in the dogen package. However, to ensure
@@ -15160,6 +15116,68 @@ that I can create "bridge" APIs.
 Once we have proper C support, it should be doable to have a C++ facet
 that automatically exposes a C interface.
 
+*** Add conversion (encoding) support for Dia                         :story:
+
+Approach:
+
+- create an XML schema from the DTD and use the XSD tool to generate
+  serialisation code. See how many differences we get by doing trivial
+  document updates (in particular, updating colours of elements). If
+  this works, we can replace the existing dia model with the XSD
+  generated code.
+
+Use cases:
+
+- update the colours of the diagram according to the dogen palette.
+- it would be nice if one could take a JSON model and generate a dia
+  diagram for it. This is non-trivial because it would require
+  computing all of the sizes and locations for all UML elements.
+- we could then allow users to submit models in say JSON, eCore etc
+  and produce a PNG of the model so they could visualise it. We could
+  also try to consume dia as a shared library instead of running the
+  full program - e.g. create a service that takes in a dia diagram and
+  returns the PNG.
+- automatic diagram updates (see story below).
+
+Related stories:
+
+- [[*Add support for XSD tool][Add support for XSD tool]]
+- [[*Improvements to dia model][Improvements to dia model]]
+- [[*Investigate support for automatic diagram updates][Investigate support for automatic diagram updates]]
+
+*** Improvements to dia model                                         :story:
+
+Assorted notes on cleaning-up the dia model:
+
+- create a base class such as =value= and make all values inherit from
+  it instead of using boost variant.
+- according to DTD, a composite can be made up of either composites or
+  attributes. We incorrectly modeled it as having just one inner
+  composite.
+- perhaps this is better thought of slightly differently: an attribute
+  has child nodes. The child nodes can either be leaf nodes, in which
+  case they are values, or non-leaf nodes in which case they are
+  composite nodes. Composite nodes themselves can have child nodes. If
+  they are leaf nodes they are values; if they are non-leaf nodes they
+  are either attributes or composites.
+- note that we do not need to use shared pointers in composite: we
+  could simply have an attribute by value. However, we still need to
+  handle the case where the children are either composite or
+  attributes. So if we somehow could get composite and attribute to
+  have a common base class, we could have a container of that base
+  class in composite. For this we would need a shared pointer.
+- consider adding the postfix =node= to class names and make it a real
+  tree, as per dia's implementation.
+- covert all vectors to lists since we do not know their sizes on
+  construction.
+- one thing to bear in mind is that if we fix the tree structure, we
+  will break the XML parsing code in hydrator, which took quite a
+  while to get right (and has hacks such as "inner composite").
+- its not obvious why we need to treat =dia::string= in a different
+  way from all other attribute values (except for =dia::font=).
+- alternative: create an XML schema from the DTD and use it with the
+  XSD tool to create the model.
+
 *** Investigate support for automatic diagram updates                  :epic:
 
 For classes that are manually generated, it would be really nice if we
@@ -15190,6 +15208,16 @@ code. Implementation-wise we'd have to:
 - integrate clang libraries with dogen;
 - create tool - or perhaps we should just have an "update diagram"
   mode in dogen?
+
+*** Add support for XSD tool                                          :story:
+
+Similar to what we've done with ODB, it would be nice to be able to
+integrate the XSD tool with dogen:
+
+- have a meta-model element for XSD schemas, perhaps using an =xsd=
+  facet.
+- generate CMake targets that execute the XSD tool and place the
+  output in appropriate locations.
 
 *** Add POF serialisation support                                      :epic:
 
