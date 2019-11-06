@@ -1744,13 +1744,13 @@ size limitations.#</dia:string>
         <dia:point val="-60,-70"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-60.05,-70.05;-41.74,-65.55"/>
+        <dia:rectangle val="-60.05,-70.05;-40.97,-65.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-60,-70"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.210000000000001"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -1897,7 +1897,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
             <dia:string>#variability_overrides#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
+            <dia:string>#std::vector&lt;std::string&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -1969,7 +1969,7 @@ ELEMENT_NAME and ATTRIBUTE_NAME can be left blank.#</dia:string>
         <dia:point val="-39,-58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-50.945,-65.601;-38.25,-57.2"/>
+        <dia:rectangle val="-50.56,-65.601;-38.25,-57.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1977,8 +1977,8 @@ ELEMENT_NAME and ATTRIBUTE_NAME can be left blank.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-39,-58"/>
         <dia:point val="-39,-60"/>
-        <dia:point val="-50.895,-60"/>
-        <dia:point val="-50.895,-65.551"/>
+        <dia:point val="-50.51,-60"/>
+        <dia:point val="-50.51,-65.551"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

@@ -49,7 +49,7 @@ apply(const context& ctx, const injection::meta_model::model_set& ms) {
         *ctx.assets_context().tracer());
 
     /*
-     * First we convert the target injection model into a assets
+     * First we convert the target injection model into an assets
      * model. We must set the origin of the target model to target so
      * that further transforms can be applied such as the origin
      * transform.

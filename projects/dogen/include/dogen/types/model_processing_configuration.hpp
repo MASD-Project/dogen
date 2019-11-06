@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
+#include <vector>
 #include <algorithm>
 
 namespace dogen {
@@ -47,7 +47,7 @@ public:
     model_processing_configuration(
         const bool compatibility_mode_enabled,
         const bool dry_run_mode_enabled,
-        const std::list<std::string>& variability_overrides);
+        const std::vector<std::string>& variability_overrides);
 
 public:
     /**
@@ -79,10 +79,10 @@ public:
      * ELEMENT_NAME and ATTRIBUTE_NAME can be left blank.
      */
     /**@{*/
-    const std::list<std::string>& variability_overrides() const;
-    std::list<std::string>& variability_overrides();
-    void variability_overrides(const std::list<std::string>& v);
-    void variability_overrides(const std::list<std::string>&& v);
+    const std::vector<std::string>& variability_overrides() const;
+    std::vector<std::string>& variability_overrides();
+    void variability_overrides(const std::vector<std::string>& v);
+    void variability_overrides(const std::vector<std::string>&& v);
     /**@}*/
 
 public:
@@ -98,7 +98,7 @@ public:
 private:
     bool compatibility_mode_enabled_;
     bool dry_run_mode_enabled_;
-    std::list<std::string> variability_overrides_;
+    std::vector<std::string> variability_overrides_;
 };
 
 }

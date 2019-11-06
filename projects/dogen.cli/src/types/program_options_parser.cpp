@@ -104,6 +104,7 @@ const std::string model_processing_compatibility_mode_arg(
     "compatibility-mode-enabled");
 const std::string model_processing_dry_run_mode_enabled_arg(
     "dry-run-mode-enabled");
+const std::string variability_override_arg("variability_override");
 
 const std::string output_byproduct_directory_arg(
     "byproduct-directory");
@@ -204,7 +205,10 @@ options_description make_top_level_visible_options_description() {
         ("compatibility-mode-enabled",
             "Try to process models even if there are errors.")
         ("dry-run-mode-enabled",
-            "Executes all transforms but does not emit generated code.");
+            "Executes all transforms but does not emit generated code.")
+        ("variability-override", value<std::vector<std::string>>(),
+            "CSV string with a variability override. Must have the form of"
+            "MODEL_NAME,[ELEMENT_NAME],[ATTRIBUTE_NAME],KEY,VALUE");
 
     options_description db("Database");
     db.add_options()
@@ -482,6 +486,12 @@ read_model_processing_configuration(const variables_map& vm) {
     const bool dry_run(
         vm.count(model_processing_dry_run_mode_enabled_arg) != 0);
     r.dry_run_mode_enabled(dry_run);
+
+    if (vm.count(variability_override_arg)) {
+        const auto vo(vm[variability_override_arg]
+            .as<std::vector<std::string>>());
+        r.variability_overrides(vo);
+    }
 
     return r;
 }
