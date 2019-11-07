@@ -86,6 +86,11 @@
         {
           "name": "references",
           "type": "std::list<std::string>"
+        },
+        {
+          "name": "processed_variability_overrides",
+          "type": "std::list<std::string>",
+          "documentation": "All the variability overrides that were processed by this model.\n"
         }
       ]
     },

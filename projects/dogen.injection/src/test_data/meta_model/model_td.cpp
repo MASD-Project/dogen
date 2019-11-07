@@ -97,6 +97,7 @@ populate(const unsigned int position, result_type& v) {
     v.elements(create_std_list_dogen_injection_meta_model_element(position + 6));
     v.input_technical_space(create_std_string(position + 7));
     v.references(create_std_list_std_string(position + 8));
+    v.processed_variability_overrides(create_std_list_std_string(position + 9));
 }
 
 model_generator::result_type

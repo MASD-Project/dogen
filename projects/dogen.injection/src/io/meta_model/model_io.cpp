@@ -116,7 +116,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"configuration\": " << v.configuration() << ", "
       << "\"elements\": " << v.elements() << ", "
       << "\"input_technical_space\": " << "\"" << tidy_up_string(v.input_technical_space()) << "\"" << ", "
-      << "\"references\": " << v.references()
+      << "\"references\": " << v.references() << ", "
+      << "\"processed_variability_overrides\": " << v.processed_variability_overrides()
       << " }";
     return(s);
 }

@@ -55,7 +55,8 @@ public:
         const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
         const std::list<dogen::injection::meta_model::element>& elements,
         const std::string& input_technical_space,
-        const std::list<std::string>& references);
+        const std::list<std::string>& references,
+        const std::list<std::string>& processed_variability_overrides);
 
 public:
     const std::list<std::pair<std::string, std::string> >& tagged_values() const;
@@ -126,6 +127,16 @@ public:
     void references(const std::list<std::string>& v);
     void references(const std::list<std::string>&& v);
 
+    /**
+     * @brief All the variability overrides that were processed by this model.
+     */
+    /**@{*/
+    const std::list<std::string>& processed_variability_overrides() const;
+    std::list<std::string>& processed_variability_overrides();
+    void processed_variability_overrides(const std::list<std::string>& v);
+    void processed_variability_overrides(const std::list<std::string>&& v);
+    /**@}*/
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -146,6 +157,7 @@ private:
     std::list<dogen::injection::meta_model::element> elements_;
     std::string input_technical_space_;
     std::list<std::string> references_;
+    std::list<std::string> processed_variability_overrides_;
 };
 
 }

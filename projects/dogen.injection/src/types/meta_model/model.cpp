@@ -41,7 +41,8 @@ model::model(
     const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
     const std::list<dogen::injection::meta_model::element>& elements,
     const std::string& input_technical_space,
-    const std::list<std::string>& references)
+    const std::list<std::string>& references,
+    const std::list<std::string>& processed_variability_overrides)
     : tagged_values_(tagged_values),
       tagged_values_overrides_(tagged_values_overrides),
       stereotypes_(stereotypes),
@@ -50,7 +51,8 @@ model::model(
       configuration_(configuration),
       elements_(elements),
       input_technical_space_(input_technical_space),
-      references_(references) { }
+      references_(references),
+      processed_variability_overrides_(processed_variability_overrides) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -63,6 +65,7 @@ void model::swap(model& other) noexcept {
     swap(elements_, other.elements_);
     swap(input_technical_space_, other.input_technical_space_);
     swap(references_, other.references_);
+    swap(processed_variability_overrides_, other.processed_variability_overrides_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -74,7 +77,8 @@ bool model::operator==(const model& rhs) const {
         configuration_ == rhs.configuration_ &&
         elements_ == rhs.elements_ &&
         input_technical_space_ == rhs.input_technical_space_ &&
-        references_ == rhs.references_;
+        references_ == rhs.references_ &&
+        processed_variability_overrides_ == rhs.processed_variability_overrides_;
 }
 
 model& model::operator=(model other) {
@@ -225,6 +229,22 @@ void model::references(const std::list<std::string>& v) {
 
 void model::references(const std::list<std::string>&& v) {
     references_ = std::move(v);
+}
+
+const std::list<std::string>& model::processed_variability_overrides() const {
+    return processed_variability_overrides_;
+}
+
+std::list<std::string>& model::processed_variability_overrides() {
+    return processed_variability_overrides_;
+}
+
+void model::processed_variability_overrides(const std::list<std::string>& v) {
+    processed_variability_overrides_ = v;
+}
+
+void model::processed_variability_overrides(const std::list<std::string>&& v) {
+    processed_variability_overrides_ = std::move(v);
 }
 
 }
