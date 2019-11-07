@@ -71,15 +71,15 @@ apply(const transforms::context& ctx, meta_model::model& m) {
      * Convert the CSV string into a set of tokens, and match those
      * tokens to modeling elements.
      */
-    std::unordered_set<std::string> processed;
+    auto& pvo(m.processed_variability_overrides());
     using dogen::utility::string::splitter;
     for (const auto& vo : vos) {
       /*
        * A duplicate override probably implies the user is doing
        * something wrong (typo, etc.).
        */
-        const auto inserted(processed.insert(vo).second);
-        if (inserted) {
+        const auto already_inserted(pvo.find(vo) == pvo.end());
+        if (already_inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_override << vo;
             BOOST_THROW_EXCEPTION(
                 transformation_error(duplicate_override + vo));
