@@ -104,7 +104,7 @@ const std::string model_processing_compatibility_mode_arg(
     "compatibility-mode-enabled");
 const std::string model_processing_dry_run_mode_enabled_arg(
     "dry-run-mode-enabled");
-const std::string variability_override_arg("variability_override");
+const std::string variability_override_arg("variability-override");
 
 const std::string output_byproduct_directory_arg(
     "byproduct-directory");
