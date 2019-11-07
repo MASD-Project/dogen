@@ -25,6 +25,7 @@
 #include "dogen.injection/types/transforms/input_technical_space_transform.hpp"
 #include "dogen.injection/types/transforms/references_transform.hpp"
 #include "dogen.injection/types/transforms/configuration_transform.hpp"
+#include "dogen.injection/types/transforms/tagged_values_overrides_transform.hpp"
 #include "dogen.injection/types/transforms/model_production_chain.hpp"
 
 namespace {
@@ -69,6 +70,11 @@ apply(const context& ctx, const boost::filesystem::path& p) {
      */
     auto& t(transform_for_model(p));
     auto r(t.apply(ctx, p));
+
+    /*
+     * Process thevariability overrides.
+     */
+    tagged_values_overrides_transform::apply(ctx, r);
 
     /*
      * Process the configuration
