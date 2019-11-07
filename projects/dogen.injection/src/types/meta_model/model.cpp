@@ -42,7 +42,7 @@ model::model(
     const std::list<dogen::injection::meta_model::element>& elements,
     const std::string& input_technical_space,
     const std::list<std::string>& references,
-    const std::list<std::string>& processed_variability_overrides)
+    const std::unordered_set<std::string>& processed_variability_overrides)
     : tagged_values_(tagged_values),
       tagged_values_overrides_(tagged_values_overrides),
       stereotypes_(stereotypes),
@@ -231,19 +231,19 @@ void model::references(const std::list<std::string>&& v) {
     references_ = std::move(v);
 }
 
-const std::list<std::string>& model::processed_variability_overrides() const {
+const std::unordered_set<std::string>& model::processed_variability_overrides() const {
     return processed_variability_overrides_;
 }
 
-std::list<std::string>& model::processed_variability_overrides() {
+std::unordered_set<std::string>& model::processed_variability_overrides() {
     return processed_variability_overrides_;
 }
 
-void model::processed_variability_overrides(const std::list<std::string>& v) {
+void model::processed_variability_overrides(const std::unordered_set<std::string>& v) {
     processed_variability_overrides_ = v;
 }
 
-void model::processed_variability_overrides(const std::list<std::string>&& v) {
+void model::processed_variability_overrides(const std::unordered_set<std::string>&& v) {
     processed_variability_overrides_ = std::move(v);
 }
 

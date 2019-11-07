@@ -1402,13 +1402,13 @@ manage it.
         <dia:point val="46,24"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.95,23.95;68.11,30.05"/>
+        <dia:rectangle val="45.95,23.95;71.575,30.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="46,24"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.059999999999999"/>
+        <dia:real val="25.524999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
@@ -1575,7 +1575,7 @@ manage it.
             <dia:string>#processed_variability_overrides#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
+            <dia:string>#std::unordered_set&lt;std::string&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -2683,17 +2683,17 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="57.03,30"/>
+        <dia:point val="58.7625,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="21.9375,29.25;57.78,36.05"/>
+        <dia:rectangle val="21.9375,29.25;59.5125,36.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="57.03,30"/>
-        <dia:point val="57.03,36"/>
+        <dia:point val="58.7625,30"/>
+        <dia:point val="58.7625,36"/>
         <dia:point val="21.9875,36"/>
         <dia:point val="21.9875,34"/>
       </dia:attribute>
@@ -3575,13 +3575,13 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O25">
       <dia:attribute name="obj_pos">
-        <dia:point val="73,24"/>
+        <dia:point val="78,24"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.95,23.95;90.105,28.45"/>
+        <dia:rectangle val="77.95,23.95;95.105,28.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="73,24"/>
+        <dia:point val="78,24"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.055"/>
@@ -3792,19 +3792,19 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="81.5275,24"/>
+        <dia:point val="86.5275,24"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="68.01,20.2;82.2775,24.8"/>
+        <dia:rectangle val="71.475,20.2;87.2775,24.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="81.5275,24"/>
-        <dia:point val="81.5275,21"/>
-        <dia:point val="68.06,21"/>
-        <dia:point val="68.06,24"/>
+        <dia:point val="86.5275,24"/>
+        <dia:point val="86.5275,21"/>
+        <dia:point val="71.525,21"/>
+        <dia:point val="71.525,24"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7398,17 +7398,17 @@ graph.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="81.5275,28.4"/>
+        <dia:point val="86.5275,28.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="78.2525,27.65;82.2775,34.8"/>
+        <dia:rectangle val="78.2525,27.65;87.2775,34.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="81.5275,28.4"/>
-        <dia:point val="81.5275,32"/>
+        <dia:point val="86.5275,28.4"/>
+        <dia:point val="86.5275,32"/>
         <dia:point val="78.3025,32"/>
         <dia:point val="78.3025,34"/>
       </dia:attribute>

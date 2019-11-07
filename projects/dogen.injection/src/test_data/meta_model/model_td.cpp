@@ -80,6 +80,14 @@ std::list<dogen::injection::meta_model::element> create_std_list_dogen_injection
     return r;
 }
 
+std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int position) {
+    std::unordered_set<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(create_std_string(position + i));
+    }
+    return r;
+}
+
 }
 
 namespace dogen::injection::meta_model {
@@ -97,7 +105,7 @@ populate(const unsigned int position, result_type& v) {
     v.elements(create_std_list_dogen_injection_meta_model_element(position + 6));
     v.input_technical_space(create_std_string(position + 7));
     v.references(create_std_list_std_string(position + 8));
-    v.processed_variability_overrides(create_std_list_std_string(position + 9));
+    v.processed_variability_overrides(create_std_unordered_set_std_string(position + 9));
 }
 
 model_generator::result_type

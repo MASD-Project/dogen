@@ -29,6 +29,7 @@
 #include <string>
 #include <utility>
 #include <algorithm>
+#include <unordered_set>
 #include <boost/shared_ptr.hpp>
 #include "dogen.injection/types/meta_model/element.hpp"
 #include "dogen.variability/types/meta_model/configuration_fwd.hpp"
@@ -56,7 +57,7 @@ public:
         const std::list<dogen::injection::meta_model::element>& elements,
         const std::string& input_technical_space,
         const std::list<std::string>& references,
-        const std::list<std::string>& processed_variability_overrides);
+        const std::unordered_set<std::string>& processed_variability_overrides);
 
 public:
     const std::list<std::pair<std::string, std::string> >& tagged_values() const;
@@ -131,10 +132,10 @@ public:
      * @brief All the variability overrides that were processed by this model.
      */
     /**@{*/
-    const std::list<std::string>& processed_variability_overrides() const;
-    std::list<std::string>& processed_variability_overrides();
-    void processed_variability_overrides(const std::list<std::string>& v);
-    void processed_variability_overrides(const std::list<std::string>&& v);
+    const std::unordered_set<std::string>& processed_variability_overrides() const;
+    std::unordered_set<std::string>& processed_variability_overrides();
+    void processed_variability_overrides(const std::unordered_set<std::string>& v);
+    void processed_variability_overrides(const std::unordered_set<std::string>&& v);
     /**@}*/
 
 public:
@@ -157,7 +158,7 @@ private:
     std::list<dogen::injection::meta_model::element> elements_;
     std::string input_technical_space_;
     std::list<std::string> references_;
-    std::list<std::string> processed_variability_overrides_;
+    std::unordered_set<std::string> processed_variability_overrides_;
 };
 
 }

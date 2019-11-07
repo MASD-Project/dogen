@@ -103,6 +103,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::injectio
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen::injection::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const model& v) {
