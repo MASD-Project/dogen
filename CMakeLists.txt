@@ -454,6 +454,10 @@ if (DOGEN_CLI_EXECUTABLE)
     # Options to use for all Dogen invocations
     #
 
+    # model processing options
+    set(DOGEN_PROCESSING_OPTIONS "")
+    # set(DOGEN_PROCESSING_OPTIONS --variability-override a)
+
     # uncomment to enable logging.
     set(DOGEN_LOGGING_OPTIONS "")
     # set(DOGEN_LOG_LEVEL "trace")
@@ -479,8 +483,10 @@ if (DOGEN_CLI_EXECUTABLE)
     set(DOGEN_REPORTING_OPTIONS ${DOGEN_REPORTING_OPTIONS}
         --reporting-style org-mode )
 
-    set(DOGEN_COMMON_OPTIONS ${DOGEN_LOGGING_OPTIONS} ${DOGEN_TRACING_OPTIONS}
-        ${DOGEN_DIFFING_OPTIONS} ${DOGEN_REPORTING_OPTIONS})
+    set(DOGEN_COMMON_OPTIONS ${DOGEN_PROCESSING_OPTIONS}
+        ${DOGEN_LOGGING_OPTIONS} ${DOGEN_TRACING_OPTIONS}
+        ${DOGEN_DIFFING_OPTIONS} ${DOGEN_REPORTING_OPTIONS}
+        )
 
     # uncomment the next line if you require compatibility support
     # set(DOGEN_COMMON_OPTIONS ${DOGEN_COMMON_OPTIONS} --compatibility-mode)
