@@ -18,13 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.injection/io/meta_model/model_io.hpp"
 #include "dogen.injection/types/features/input_technical_space.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
-#include "dogen.injection/types/transforms/transformation_error.hpp"
 #include "dogen.injection/types/transforms/input_technical_space_transform.hpp"
 
 namespace {

@@ -12,39 +12,39 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-07 Thu 08:19]
+#+CAPTION: Clock summary at [2019-11-07 Thu 18:30]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *63:48* |       |       | 100.0 |
+| *Total time*                                              | *65:01* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 63:48   |       |       | 100.0 |
-| Active                                                    |         | 63:48 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       |  3:36 |   5.6 |
-| Create a demo and presentation for previous sprint        |         |       |  1:39 |   2.6 |
+| Stories                                                   | 65:01   |       |       | 100.0 |
+| Active                                                    |         | 65:01 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  3:36 |   5.5 |
+| Create a demo and presentation for previous sprint        |         |       |  1:39 |   2.5 |
 | Time spent producing coding videos                        |         |       |  0:53 |   1.4 |
-| Sprint and product backlog grooming                       |         |       |  5:06 |   8.0 |
+| Sprint and product backlog grooming                       |         |       |  5:06 |   7.8 |
 | Remove test model sanitizer                               |         |       |  0:20 |   0.5 |
-| Remove master headers                                     |         |       |  1:12 |   1.9 |
-| Fix the issues with tests in reference model              |         |       |  3:53 |   6.1 |
-| Update static strings to string views                     |         |       |  1:15 |   2.0 |
-| ODB include directories is incorrect                      |         |       |  1:43 |   2.7 |
-| Create a "modeling" report                                |         |       |  4:56 |   7.7 |
+| Remove master headers                                     |         |       |  1:12 |   1.8 |
+| Fix the issues with tests in reference model              |         |       |  3:53 |   6.0 |
+| Update static strings to string views                     |         |       |  1:15 |   1.9 |
+| ODB include directories is incorrect                      |         |       |  1:43 |   2.6 |
+| Create a "modeling" report                                |         |       |  4:56 |   7.6 |
 | Move visual studio related options to top profile         |         |       |  0:17 |   0.4 |
-| Fix incorrect message keyword when detecting ODB includes |         |       |  0:29 |   0.8 |
+| Fix incorrect message keyword when detecting ODB includes |         |       |  0:29 |   0.7 |
 | Meta-data keys are in the inverse order                   |         |       |  0:39 |   1.0 |
-| Creating reference cycles produces strange errors         |         |       |  5:32 |   8.7 |
+| Creating reference cycles produces strange errors         |         |       |  5:32 |   8.5 |
 | Error on duplicate references                             |         |       |  0:26 |   0.7 |
-| Generate model dependency graph                           |         |       |  1:55 |   3.0 |
+| Generate model dependency graph                           |         |       |  1:55 |   2.9 |
 | Make the building of the relational model conditional     |         |       |  0:23 |   0.6 |
 | Make all transform contexts code-generated                |         |       |  0:08 |   0.2 |
-| Move registrar into assets                                |         |       |  5:29 |   8.6 |
+| Move registrar into assets                                |         |       |  5:29 |   8.4 |
 | Fix compilation errors in nightly                         |         |       |  0:24 |   0.6 |
-| Upgrade to boost 1.70                                     |         |       | 10:00 |  15.7 |
+| Upgrade to boost 1.70                                     |         |       | 10:00 |  15.4 |
 | Setup laptop to work on dogen                             |         |       |  0:45 |   1.2 |
-| Org-mode as a carrier format for modeling                 |         |       |  5:37 |   8.8 |
-| Add relational tracing support                            |         |       |  4:53 |   7.7 |
-| Consider creating a test build for all facets             |         |       |  2:18 |   3.6 |
+| Org-mode as a carrier format for modeling                 |         |       |  5:37 |   8.6 |
+| Add relational tracing support                            |         |       |  6:06 |   9.4 |
+| Consider creating a test build for all facets             |         |       |  2:18 |   3.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -836,6 +836,8 @@ Links:
 
 *** STARTED Add relational tracing support                            :story:
     :LOGBOOK:
+    CLOCK: [2019-11-07 Thu 17:41]--[2019-11-07 Thu 18:30] =>  0:49
+    CLOCK: [2019-11-07 Thu 08:31]--[2019-11-07 Thu 08:55] =>  0:24
     CLOCK: [2019-11-07 Thu 08:14]--[2019-11-07 Thu 08:19] =>  0:05
     CLOCK: [2019-11-01 Fri 11:18]--[2019-11-01 Fri 11:54] =>  0:36
     CLOCK: [2019-10-29 Tue 18:07]--[2019-10-29 Tue 18:30] =>  0:23
@@ -1003,7 +1005,16 @@ start and end of this transform?"
 Interestingly, this would also allow us to compare things between
 runs. The schema should be designed with this in mind.
 
-***
+*** Consider creating top level exceptions                            :story:
+
+There are a number of exceptions that have been repeated across
+projects. For example:
+
+-  transform error
+- building error
+
+We should consider having these in the dogen API and removing them
+from each project.
 
 *** STARTED Consider creating a test build for all facets             :story:
     :LOGBOOK:
