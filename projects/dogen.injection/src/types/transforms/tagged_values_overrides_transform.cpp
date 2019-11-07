@@ -78,7 +78,7 @@ apply(const transforms::context& ctx, meta_model::model& m) {
        * A duplicate override probably implies the user is doing
        * something wrong (typo, etc.).
        */
-        const auto already_inserted(pvo.find(vo) == pvo.end());
+        const auto already_inserted(pvo.find(vo) != pvo.end());
         if (already_inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_override << vo;
             BOOST_THROW_EXCEPTION(
