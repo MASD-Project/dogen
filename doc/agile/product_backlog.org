@@ -16,64 +16,6 @@ such as profiles, licences etc.
 
 Stories that we haven't quite classified yet, but are needed.
 
-*** Modeling error in tests facet                                     :story:
-
-When we created the tests facet, we did not exactly follow the
-existing framework. Normally we have the concept of a project
-(e.g. say "directory settings"), which contains what is now understood
-as "destinations". In C++ these can be:
-
-- include
-- source (=src= folder)
-
-Destinations are just folders in the filesystem. These can be mapped
-to any name defined by the user. Normally, we then place facets inside
-of destinations. For example, the facet "types" can be projected into
-the include and source destinations:
-
-- =include/types=
-- =src/types=
-
-Some facets do not have a facet folder, and as such are projected
-directly onto the project directory (CMakeLists, etc).
-
- When we added tests, we created a destination called =tests= but we
- also created a facet called =tests=. If all had gone according to the
- existing logic, we would have ended up with:
-
-- =tests/tests=
-
-However, we glossed over all of the above and when setting the file
-paths we used the facet directory, but when setting other things (such
-as say the CMakeLists directories), we used the destination. The net
-result is that, for all intents and purposes, it looked as if we were
-following the above setup, but somehow had ended up with:
-
-- =tests=
-
-When we recently updated the directory settings model, it all came
-undone. As a hack, we did:
-
-: #DOGEN masd.generation.cpp.tests.directory=tests_dir
-: #DOGEN masd.generation.cpp.tests_directory_name=tests_dir
-
-To maintain the existing logic, but in truth we need a proper fix. The
-right solution is to give a name to the facet which is not =tests=. It
-should really be something evocative of its functionality:
-
-- generated tests? but then we don't partition generated code anywhere
-  else. It would be useful though, so that we can easily locate
-  handcrafted tests - and even exclude them too. If we also had
-  separate CMakeFiles we could have a top-level variable that excludes
-  generated tests for compilation.
-- tests for code generated code?
-- structural tests?
-
-Basically we need a fitting name for this facet. Once found, we need
-to move all tests into this directory.
-
-Note that we cannot do the locator clean up until we sort out this mess.
-
 *** Simplify implementation of boost serialisation registrar          :story:
 
 - at present we are using templates on the cpp file, and it is not
@@ -1688,21 +1630,6 @@ few properties such as start of modeline, etc.
 
 When we moved the kernel logic into yarn from quilt, we did not rename
 the traits.
-
-*** Create a "tests" stereotype with profiles                         :story:
-
-At present we are ignoring all of the contents of =tests=. This means
-whenever we delete a type we are left behind with its tests. A better
-solution is to create model elements for each handcrafted test marked
-as "masd::handcrafted_test". This disables all facets except for
-tests. We can then remove the regex.
-
-Whilst variability overrides will address the underlying issue in a
-more maintainable way (e.g. the deletion of generated tests), we
-should still create a profile and model all tests as proper entities
-instead of bypassing the modeling system. We want to move to a world
-were *all* files in the system can be attributable to modeling
-entities.
 
 *** Associate includes with model elements                            :story:
 
