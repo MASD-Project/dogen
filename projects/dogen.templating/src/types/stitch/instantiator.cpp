@@ -212,10 +212,15 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
          * Convert the tagged values into an annotation, which
          * performs a profile expansion as required. We then take that
          * annotation object and use it to generate the properties.
+         *
+         * Note that we do not support configuration overrides on
+         * stitch templates at present, so we just default them to
+         * empty.
          */
         const auto& tv(r.body().tagged_values());
+        const std::list<std::pair<std::string, std::string>> otv;
         const auto bp(variability::meta_model::binding_point::global);
-        const auto cfg(configuration_factory_.make(tv, bp));
+        const auto cfg(configuration_factory_.make(tv, otv, bp));
         r.properties(create_properties(cfg));
 
         /*

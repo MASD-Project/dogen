@@ -37,6 +37,18 @@ static logger lg(logger_factory(transform_id));
 
 namespace dogen::injection::transforms {
 
+template<typename NameableAndTaggable>
+inline void create_configuration(
+    const variability::helpers::configuration_factory& f,
+    const variability::meta_model::binding_point bp,
+    NameableAndTaggable& nat) {
+
+    const auto& tv(nat.tagged_values());
+    const auto& otv(nat.tagged_values_overrides());
+    nat.configuration(f.make_shared_ptr(tv, otv, bp));
+    nat.configuration()->name().simple(nat.name());
+}
+
 void configuration_transform::
 apply(const transforms::context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "configuration transform",
@@ -45,22 +57,17 @@ apply(const transforms::context& ctx, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Transforming model: " << m.name()
                              << "Total elements: " << m.elements().size();
 
+    const auto& alrp(*ctx.archetype_location_repository());
+    const auto& fm(*ctx.feature_model());
+    const auto& cm(ctx.compatibility_mode());
+    variability::helpers::configuration_factory f(alrp, fm, cm);
+
     using bp = variability::meta_model::binding_point;
-    variability::helpers::configuration_factory f(
-        *ctx.archetype_location_repository(),
-        *ctx.feature_model(),
-        ctx.compatibility_mode());
-
-    m.configuration(f.make_shared_ptr(m.tagged_values(), bp::global));
-    m.configuration()->name().simple(m.name());
+    create_configuration(f, bp::global, m);
     for (auto& e : m.elements()) {
-        e.configuration(f.make_shared_ptr(e.tagged_values(), bp::element));
-        e.configuration()->name().simple(e.name());
-
-        for (auto& a : e.attributes()) {
-            a.configuration(f.make_shared_ptr(a.tagged_values(), bp::property));
-            a.configuration()->name().simple(a.name());
-        }
+        create_configuration(f, bp::element, e);
+        for (auto& a : e.attributes())
+            create_configuration(f, bp::property, a);
     }
 
     stp.end_transform(m);

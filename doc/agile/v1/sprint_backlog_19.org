@@ -12,41 +12,41 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-08 Fri 11:10]
+#+CAPTION: Clock summary at [2019-11-08 Fri 12:22]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *69:51* |       |       | 100.0 |
+| *Total time*                                              | *70:56* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 69:51   |       |       | 100.0 |
-| Active                                                    |         | 69:51 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       |  3:36 |   5.2 |
-| Create a demo and presentation for previous sprint        |         |       |  1:39 |   2.4 |
+| Stories                                                   | 70:56   |       |       | 100.0 |
+| Active                                                    |         | 70:56 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  3:36 |   5.1 |
+| Create a demo and presentation for previous sprint        |         |       |  1:39 |   2.3 |
 | Time spent producing coding videos                        |         |       |  1:20 |   1.9 |
-| Sprint and product backlog grooming                       |         |       |  5:06 |   7.3 |
+| Sprint and product backlog grooming                       |         |       |  5:18 |   7.5 |
 | Remove test model sanitizer                               |         |       |  0:20 |   0.5 |
 | Remove master headers                                     |         |       |  1:12 |   1.7 |
-| Fix the issues with tests in reference model              |         |       |  3:53 |   5.6 |
+| Fix the issues with tests in reference model              |         |       |  3:53 |   5.5 |
 | Update static strings to string views                     |         |       |  1:15 |   1.8 |
-| ODB include directories is incorrect                      |         |       |  1:43 |   2.5 |
-| Create a "modeling" report                                |         |       |  4:56 |   7.1 |
+| ODB include directories is incorrect                      |         |       |  1:43 |   2.4 |
+| Create a "modeling" report                                |         |       |  4:56 |   7.0 |
 | Move visual studio related options to top profile         |         |       |  0:17 |   0.4 |
 | Fix incorrect message keyword when detecting ODB includes |         |       |  0:29 |   0.7 |
 | Meta-data keys are in the inverse order                   |         |       |  0:39 |   0.9 |
-| Creating reference cycles produces strange errors         |         |       |  5:32 |   7.9 |
+| Creating reference cycles produces strange errors         |         |       |  5:32 |   7.8 |
 | Error on duplicate references                             |         |       |  0:26 |   0.6 |
 | Generate model dependency graph                           |         |       |  1:55 |   2.7 |
 | Make the building of the relational model conditional     |         |       |  0:23 |   0.5 |
 | Make all transform contexts code-generated                |         |       |  0:08 |   0.2 |
 | Tracer numbering of dumped models is incorrect            |         |       |  0:26 |   0.6 |
-| Time spent fixing emacs issues                            |         |       |  1:44 |   2.5 |
-| Move registrar into assets                                |         |       |  5:29 |   7.9 |
-| Fix compilation errors in nightly                         |         |       |  0:24 |   0.6 |
-| Upgrade to boost 1.70                                     |         |       | 10:00 |  14.3 |
+| Fix compilation errors in c++ impl nightly                |         |       |  0:24 |   0.6 |
+| Time spent fixing emacs issues                            |         |       |  1:44 |   2.4 |
+| Move registrar into assets                                |         |       |  5:29 |   7.7 |
+| Upgrade to boost 1.70                                     |         |       | 10:00 |  14.1 |
 | Setup laptop to work on dogen                             |         |       |  0:45 |   1.1 |
-| Org-mode as a carrier format for modeling                 |         |       |  5:37 |   8.0 |
-| Add relational tracing support                            |         |       |  6:52 |   9.8 |
-| Consider creating a test build for all facets             |         |       |  3:45 |   5.4 |
+| Org-mode as a carrier format for modeling                 |         |       |  5:37 |   7.9 |
+| Add relational tracing support                            |         |       |  6:52 |   9.7 |
+| Consider creating a test build for all facets             |         |       |  4:38 |   6.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -234,6 +234,7 @@ actually doing any development related activities.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-11-08 Fri 11:20]--[2019-11-08 Fri 11:32] =>  0:12
     CLOCK: [2019-11-06 Wed 07:40]--[2019-11-06 Wed 08:06] =>  0:26
     CLOCK: [2019-11-05 Tue 22:25]--[2019-11-05 Tue 22:42] =>  0:17
     CLOCK: [2019-11-01 Fri 11:01]--[2019-11-01 Fri 11:18] =>  0:17
@@ -695,6 +696,35 @@ trying to have the same entry number for the input and output of a
 transform, we now give them distinct numbers. This makes the logic
 easier to follow.
 
+*** COMPLETED Fix compilation errors in c++ impl nightly              :story:
+    CLOSED: [2019-11-08 Fri 11:14]
+    :LOGBOOK:
+    CLOCK: [2019-07-14 Sun 14:03]--[2019-07-14 Sun 14:27] =>  0:24
+    :END:
+
+Ever since we moved to the new PC, we are now getting weird
+compilation errors:
+
+: ../../../../projects/cpp_ref_impl.cpp_98/tests/an_enumeration_tests.cpp:100:58: error: the result of the conversion is unspecified because ‘13’ is outside the range of type ‘cpp_ref_impl::cpp_98::an_enumeration’ [-Werror=conversion]
+
+The problem appears to be that our push for the warning is no longer working:
+
+: BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
+: #if BOOST_COMP_GNUC
+: #pragma GCC diagnostic push
+: #pragma GCC diagnostic ignored "-Wconversion"
+: #endif
+:    using cpp_ref_impl::cpp_98::an_enumeration;
+:   const an_enumeration r(static_cast<an_enumeration>(13));
+: #if BOOST_COMP_GNUC
+: #pragma GCC diagnostic pop
+: #endif
+
+This may be related to our use of boost macros without including
+=predef.h=.
+
+This problem seems to have gone away by itself.
+
 *** STARTED Time spent fixing emacs issues                            :story:
     :LOGBOOK:
     CLOCK: [2019-11-08 Fri 10:18]--[2019-11-08 Fri 10:43] =>  0:25
@@ -756,31 +786,6 @@ Notes:
 - we should have a warning/error: if using boost serialisation with a
   model that has inheritance, the registrar should be present. Added
   to warnings story.
-
-*** STARTED Fix compilation errors in nightly                         :story:
-    :LOGBOOK:
-    CLOCK: [2019-07-14 Sun 14:03]--[2019-07-14 Sun 14:27] =>  0:24
-    :END:
-
-Ever since we moved to the new PC, we are now getting weird
-compilation errors:
-
-: ../../../../projects/cpp_ref_impl.cpp_98/tests/an_enumeration_tests.cpp:100:58: error: the result of the conversion is unspecified because ‘13’ is outside the range of type ‘cpp_ref_impl::cpp_98::an_enumeration’ [-Werror=conversion]
-
-The problem appears to be that our push for the warning is no longer working:
-
-: BOOST_AUTO_TEST_CASE(casting_invalid_enumeration_throws) {
-: #if BOOST_COMP_GNUC
-: #pragma GCC diagnostic push
-: #pragma GCC diagnostic ignored "-Wconversion"
-: #endif
-:    using cpp_ref_impl::cpp_98::an_enumeration;
-:   const an_enumeration r(static_cast<an_enumeration>(13));
-: #if BOOST_COMP_GNUC
-: #pragma GCC diagnostic pop
-: #endif
-
-This may be related to our use of boost macros without including =predef.h=.
 
 *** STARTED Upgrade to boost 1.70                                     :story:
     :LOGBOOK:
@@ -1054,6 +1059,8 @@ runs. The schema should be designed with this in mind.
 
 *** STARTED Consider creating a test build for all facets             :story:
     :LOGBOOK:
+    CLOCK: [2019-11-08 Fri 11:33]--[2019-11-08 Fri 12:21] =>  0:48
+    CLOCK: [2019-11-08 Fri 11:27]--[2019-11-08 Fri 11:32] =>  0:05
     CLOCK: [2019-11-07 Thu 23:15]--[2019-11-08 Fri 00:02] =>  0:47
     CLOCK: [2019-11-07 Thu 22:35]--[2019-11-07 Thu 23:15] =>  0:40
     CLOCK: [2019-11-06 Wed 23:46]--[2019-11-06 Wed 23:58] =>  0:12
@@ -1203,6 +1210,11 @@ alternative is to create these tests on the fly:
   serialise.
 
 During the transition phase, we will remove all of the existing tests.
+
+*** Use clang9 and GCC 9 in nightly and CI                            :story:
+
+We seem to still be in clang 8 and gcc 8 in some places. Update the
+compilers.
 
 *** Consider creating top level exceptions                            :story:
 

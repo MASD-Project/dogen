@@ -23,6 +23,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/erase.hpp>
+#include <unordered_set>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.variability/io/meta_model/configuration_io.hpp"
@@ -108,7 +109,10 @@ configuration_factory::aggregate_entries(
 void configuration_factory::populate_configuration(
     const meta_model::binding_point bp,
     const std::unordered_map<std::string, std::list<std::string>>&
-    aggregated_entries, meta_model::configuration& cfg) const {
+    aggregated_entries,
+    const std::unordered_map<std::string, std::list<std::string>>&
+    aggregated_override_entries,
+    meta_model::configuration& cfg) const {
 
     cfg.source_binding_point(bp);
 
@@ -117,6 +121,7 @@ void configuration_factory::populate_configuration(
                        boost::shared_ptr<meta_model::value>> entries;
     std::unordered_map<std::string,
                        std::unordered_map<std::string, std::string>> all_kvps;
+    std::unordered_set<std::string> applied_overrides;
     for (auto kvp : aggregated_entries) {
         const auto& k(kvp.first);
         const auto of(try_obtain_feature(k));
@@ -151,8 +156,41 @@ void configuration_factory::populate_configuration(
         const auto& f(*of);
         validate_binding(f, bp);
 
+        /*
+         * Check to see if we have any overrides for this entry, and
+         * if so, mark the override as processed.
+         */
+        const auto ovs(
+            [&]() {
+                const auto i(aggregated_override_entries.find(k));
+                if (i != aggregated_override_entries.end()) {
+                    applied_overrides.insert(k);
+                    return i->second;
+                }
+                return std::list<std::string>();
+            }());
+        const bool has_overrides(!ovs.empty());
+
         const auto& v(kvp.second);
-        if (f.value_type() == meta_model::value_type::key_value_pair) {
+        using meta_model::value_type;
+        const auto vt(f.value_type());
+        if (vt == value_type::key_value_pair) {
+            /*
+             * KVP processing is done as a two step process. If we
+             * take a walke KVP as an example:
+             *
+             * masd.stitch.wale.kvp.helper.family=Pair
+             *
+             * The "masd.stitch.wale.kvp" part of the key is the
+             * feature name; anything following it is the real key
+             * (e.g. "helper.family"). The value is as per normal
+             * entries (e.g. "Pair"). So, the first step is to remove
+             * the feature name portion of the original key and to
+             * store it in a new collection of entries. Afterwards, we
+             * process these just like we would process regular
+             * entries.
+             */
+
             BOOST_LOG_SEV(lg, debug) << "Adding kvp for key: " << k;
             if (v.size() != 1) {
                 BOOST_LOG_SEV(lg, debug) << too_many_values << k;
@@ -163,7 +201,12 @@ void configuration_factory::populate_configuration(
             const auto new_key(boost::erase_first_copy(k, qn + "."));
             BOOST_LOG_SEV(lg, debug) << "Actual key: " << new_key;
 
-            const auto pair(std::make_pair(new_key, v.front()));
+            /*
+             * Handle the override scenario, where the override value
+             * takes over the value supplied in model.
+             */
+            const auto value(has_overrides ? ovs.front() : v.front());
+            const auto pair(std::make_pair(new_key, value));
             const auto inserted(all_kvps[qn].insert(pair).second);
             if (!inserted) {
                 BOOST_LOG_SEV(lg, debug) << duplicate_key << new_key;
@@ -173,11 +216,21 @@ void configuration_factory::populate_configuration(
         } else {
             meta_model::configuration_point cp;
             cp.name().qualified(k);
-            cp.value(factory.make(f, v));
+
+            /*
+             * Handle the override scenario, where the override value
+             * takes over the value supplied in model. Note that the
+             * factory handles both the collection and the scalar use
+             * case (v is then expected to contain a single value).
+             */
+            cp.value(factory.make(f, has_overrides ? ovs : v));
             cfg.configuration_points()[k] = cp;
         }
     }
 
+    /*
+     * Now process all of the KVPs that we gathered on the first step.
+     */
     for (const auto& pair : all_kvps) {
         BOOST_LOG_SEV(lg, debug) << "Processing kvp:: " << pair;
 
@@ -193,20 +246,24 @@ void configuration_factory::populate_configuration(
 
 meta_model::configuration configuration_factory::make(
     const std::list<std::pair<std::string, std::string>>& entries,
+    const std::list<std::pair<std::string, std::string>>& override_entries,
     const meta_model::binding_point bp) const {
-    auto aggregated_entries(aggregate_entries(entries));
+    const auto ae(aggregate_entries(entries));
+    const auto aoe(aggregate_entries(override_entries));
     meta_model::configuration r;
-    populate_configuration(bp, aggregated_entries, r);
+    populate_configuration(bp, ae, aoe, r);
     return r;
 }
 
 boost::shared_ptr<meta_model::configuration>
 configuration_factory::make_shared_ptr(
     const std::list<std::pair<std::string, std::string>>& entries,
+    const std::list<std::pair<std::string, std::string>>& override_entries,
     const meta_model::binding_point bp) const {
-    auto aggregated_entries(aggregate_entries(entries));
+    const auto ae(aggregate_entries(entries));
+    const auto aoe(aggregate_entries(override_entries));
     auto r(boost::make_shared<meta_model::configuration>());
-    populate_configuration(bp, aggregated_entries, *r);
+    populate_configuration(bp, ae, aoe, *r);
     return r;
 }
 
