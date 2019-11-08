@@ -563,23 +563,23 @@ read_database_configuration(const variables_map& vm) {
     if (found)
         r.host(vm[database_hostname_arg].as<std::string>());
 
-    found &= vm.count(database_port_arg);
+    found &= vm.count(database_port_arg) != 0;
     if (found)
         r.port(vm[database_port_arg].as<unsigned int>());
 
-    found &= vm.count(database_name_arg);
+    found &= vm.count(database_name_arg) != 0;
     if (found)
         r.name(vm[database_name_arg].as<std::string>());
 
-    found &= vm.count(database_user_arg);
+    found &= vm.count(database_user_arg) != 0;
     if (found)
         r.name(vm[database_user_arg].as<std::string>());
 
-    found &= vm.count(database_password_arg);
+    found &= vm.count(database_password_arg) != 0;
     if (found)
         r.name(vm[database_password_arg].as<std::string>());
 
-    found &= vm.count(database_engine_arg);
+    found &= vm.count(database_engine_arg) != 0;
     if (found) {
         const auto s(vm[database_engine_arg].as<std::string>());
         using dogen::database_engine;
