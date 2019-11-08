@@ -52,8 +52,9 @@ namespace dogen::injection::transforms {
 
 void tagged_values_overrides_transform::
 apply(const transforms::context& ctx, meta_model::model& m) {
-    tracing::scoped_transform_tracer stp(lg, "configuration transform",
-        transform_id, m.name(), *ctx.tracer(), m);
+    tracing::scoped_transform_tracer stp(lg,
+        "tagged values overrides transform", transform_id, m.name(),
+        *ctx.tracer(), m);
 
     /*
      * If there are no variability overrides, there is nothing to do.
@@ -74,10 +75,11 @@ apply(const transforms::context& ctx, meta_model::model& m) {
     auto& pvo(m.processed_variability_overrides());
     using dogen::utility::string::splitter;
     for (const auto& vo : vos) {
-      /*
-       * A duplicate override probably implies the user is doing
-       * something wrong (typo, etc.).
-       */
+        /*
+         * A duplicate override probably implies the user is doing
+         * something wrong (typo, etc.).
+         */
+        BOOST_LOG_SEV(lg, trace) << "Processing override: " << vo;
         const auto already_inserted(pvo.find(vo) != pvo.end());
         if (already_inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_override << vo;
@@ -86,31 +88,29 @@ apply(const transforms::context& ctx, meta_model::model& m) {
         }
 
         /*
-         * Split the override into tokens. We expect precisely 5
-         * tokens. Some of these may or may not be empty.
+         * Split the override into tokens. We expect between 2 to 5
+         * tokens.
          */
         auto tokens(splitter::split_csv(vo));
-
-        if (tokens.size() != 5) {
+        const auto tokens_size(tokens.size());
+        if (tokens_size < 2 || tokens_size > 5) {
             BOOST_LOG_SEV(lg, error) << invalid_override << vo;
             BOOST_THROW_EXCEPTION(transformation_error(invalid_override + vo));
         }
 
-        const auto model_name(tokens.front());
-        tokens.pop_front();
-
-        /*
-         * Model name must not be empty.
-         */
-        if (model_name.empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_model_name << vo;
-            BOOST_THROW_EXCEPTION(transformation_error(empty_model_name + vo));
+        std::string model_name;
+        if (tokens_size > 2) {
+            model_name = tokens.front();
+            tokens.pop_front();
         }
 
         /*
-         * If the model name does not match, we can ignore the override.
+         * If the model name does not match, we can ignore the
+         * override. Empty model names match any model.
          */
-        if (m.name() != model_name) {
+        BOOST_LOG_SEV(lg, trace) << "Override model name: '"
+                                 << model_name << "'";
+        if (!model_name.empty() && m.name() != model_name) {
             BOOST_LOG_SEV(lg, trace) << "Override does not apply to model."
                                      << " Model: " << m.name()
                                      << " Variability override model: "
@@ -118,10 +118,21 @@ apply(const transforms::context& ctx, meta_model::model& m) {
             continue;
         }
 
-        const auto element_name(tokens.front());
-        tokens.pop_front();
-        const auto attribute_name(tokens.front());
-        tokens.pop_front();
+        std::string element_name;
+        if (tokens_size > 3) {
+            element_name = tokens.front();
+            tokens.pop_front();
+            BOOST_LOG_SEV(lg, trace) << "Override element name: '"
+                                     << element_name << "'";
+        }
+
+        std::string attribute_name;
+        if (tokens_size == 5) {
+            attribute_name = tokens.front();
+            tokens.pop_front();
+            BOOST_LOG_SEV(lg, trace) << "Override attribute name: '"
+                                     << attribute_name << "'";
+        }
 
         if (element_name.empty()) {
             /*
@@ -139,7 +150,8 @@ apply(const transforms::context& ctx, meta_model::model& m) {
              */
             const std::pair<std::string, std::string>
                 pair({ tokens.front(), tokens.back() });
-            m.tagged_values().push_back(pair);
+            m.tagged_values_overrides().push_back(pair);
+            BOOST_LOG_SEV(lg, trace) << "Applied override to model.";
             continue;
         }
 
@@ -157,7 +169,10 @@ apply(const transforms::context& ctx, meta_model::model& m) {
                     BOOST_THROW_EXCEPTION(
                         transformation_error(multiple_elements + vo));
                 }
-            }
+                BOOST_LOG_SEV(lg, trace) << "Override matches element: "
+                                         << e.name();
+            } else
+                continue;
 
             /*
              * If we have no attribute name, the override is for the
@@ -167,7 +182,9 @@ apply(const transforms::context& ctx, meta_model::model& m) {
                 found = true;
                 const std::pair<std::string, std::string>
                     pair({ tokens.front(), tokens.back() });
-                e.tagged_values().push_back(pair);
+                e.tagged_values_overrides().push_back(pair);
+                BOOST_LOG_SEV(lg, trace) << "Applied override to element: "
+                                         << e.name();
                 continue;
             }
 
@@ -184,17 +201,21 @@ apply(const transforms::context& ctx, meta_model::model& m) {
                         BOOST_THROW_EXCEPTION(
                             transformation_error(multiple_attributes + vo));
                     }
-                }
+                    BOOST_LOG_SEV(lg, trace) << "Override matches attribute: "
+                                             << a.name();
 
-                /*
-                 * If we have no attribute name, the override is for the
-                 * element itself.
-                 */
-                found = true;
-                const std::pair<std::string, std::string>
-                    pair({ tokens.front(), tokens.back() });
-                a.tagged_values().push_back(pair);
-                continue;
+                    /*
+                     * If we have no attribute name, the override is for the
+                     * element itself.
+                     */
+                    found = true;
+                    const std::pair<std::string, std::string>
+                        pair({ tokens.front(), tokens.back() });
+                    a.tagged_values_overrides().push_back(pair);
+                    BOOST_LOG_SEV(lg, trace) << "Applied override to element: "
+                                             << a.name();
+                    continue;
+                }
             }
         }
 

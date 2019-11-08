@@ -12,39 +12,40 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-07 Thu 20:40]
+#+CAPTION: Clock summary at [2019-11-08 Fri 00:02]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *65:47* |       |       | 100.0 |
+| *Total time*                                              | *68:33* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 65:47   |       |       | 100.0 |
-| Active                                                    |         | 65:47 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       |  3:36 |   5.5 |
-| Create a demo and presentation for previous sprint        |         |       |  1:39 |   2.5 |
+| Stories                                                   | 68:33   |       |       | 100.0 |
+| Active                                                    |         | 68:33 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  3:36 |   5.3 |
+| Create a demo and presentation for previous sprint        |         |       |  1:39 |   2.4 |
 | Time spent producing coding videos                        |         |       |  0:53 |   1.3 |
-| Sprint and product backlog grooming                       |         |       |  5:06 |   7.8 |
+| Sprint and product backlog grooming                       |         |       |  5:06 |   7.4 |
 | Remove test model sanitizer                               |         |       |  0:20 |   0.5 |
 | Remove master headers                                     |         |       |  1:12 |   1.8 |
-| Fix the issues with tests in reference model              |         |       |  3:53 |   5.9 |
-| Update static strings to string views                     |         |       |  1:15 |   1.9 |
-| ODB include directories is incorrect                      |         |       |  1:43 |   2.6 |
-| Create a "modeling" report                                |         |       |  4:56 |   7.5 |
+| Fix the issues with tests in reference model              |         |       |  3:53 |   5.7 |
+| Update static strings to string views                     |         |       |  1:15 |   1.8 |
+| ODB include directories is incorrect                      |         |       |  1:43 |   2.5 |
+| Create a "modeling" report                                |         |       |  4:56 |   7.2 |
 | Move visual studio related options to top profile         |         |       |  0:17 |   0.4 |
 | Fix incorrect message keyword when detecting ODB includes |         |       |  0:29 |   0.7 |
-| Meta-data keys are in the inverse order                   |         |       |  0:39 |   1.0 |
-| Creating reference cycles produces strange errors         |         |       |  5:32 |   8.4 |
-| Error on duplicate references                             |         |       |  0:26 |   0.7 |
-| Generate model dependency graph                           |         |       |  1:55 |   2.9 |
+| Meta-data keys are in the inverse order                   |         |       |  0:39 |   0.9 |
+| Creating reference cycles produces strange errors         |         |       |  5:32 |   8.1 |
+| Error on duplicate references                             |         |       |  0:26 |   0.6 |
+| Generate model dependency graph                           |         |       |  1:55 |   2.8 |
 | Make the building of the relational model conditional     |         |       |  0:23 |   0.6 |
 | Make all transform contexts code-generated                |         |       |  0:08 |   0.2 |
-| Move registrar into assets                                |         |       |  5:29 |   8.3 |
+| Fix issue with smartparens                                |         |       |  1:19 |   1.9 |
+| Move registrar into assets                                |         |       |  5:29 |   8.0 |
 | Fix compilation errors in nightly                         |         |       |  0:24 |   0.6 |
-| Upgrade to boost 1.70                                     |         |       | 10:00 |  15.2 |
+| Upgrade to boost 1.70                                     |         |       | 10:00 |  14.6 |
 | Setup laptop to work on dogen                             |         |       |  0:45 |   1.1 |
-| Org-mode as a carrier format for modeling                 |         |       |  5:37 |   8.5 |
-| Add relational tracing support                            |         |       |  6:52 |  10.4 |
-| Consider creating a test build for all facets             |         |       |  2:18 |   3.5 |
+| Org-mode as a carrier format for modeling                 |         |       |  5:37 |   8.2 |
+| Add relational tracing support                            |         |       |  6:52 |  10.0 |
+| Consider creating a test build for all facets             |         |       |  3:45 |   5.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -667,6 +668,16 @@ support.
 Try generating the engine context, it seems there is no obvious reason
 for it not to work.
 
+*** COMPLETED Fix issue with smartparens                              :story:
+    CLOSED: [2019-11-07 Thu 22:34]
+    :LOGBOOK:
+    CLOCK: [2019-11-07 Thu 21:15]--[2019-11-07 Thu 22:34] =>  1:19
+    :END:
+
+For some random reason emacs on our desktop PC is behaving very
+strangely. It seems that the problems stem from smartparens. Try to
+disable this in prelude.
+
 *** STARTED Move registrar into assets                                :story:
     :LOGBOOK:
     CLOCK: [2019-10-24 Thu 08:20]--[2019-10-24 Thu 08:43] =>  0:23
@@ -1008,19 +1019,10 @@ start and end of this transform?"
 Interestingly, this would also allow us to compare things between
 runs. The schema should be designed with this in mind.
 
-*** Consider creating top level exceptions                            :story:
-
-There are a number of exceptions that have been repeated across
-projects. For example:
-
--  transform error
-- building error
-
-We should consider having these in the dogen API and removing them
-from each project.
-
 *** STARTED Consider creating a test build for all facets             :story:
     :LOGBOOK:
+    CLOCK: [2019-11-07 Thu 23:15]--[2019-11-08 Fri 00:02] =>  0:47
+    CLOCK: [2019-11-07 Thu 22:35]--[2019-11-07 Thu 23:15] =>  0:40
     CLOCK: [2019-11-06 Wed 23:46]--[2019-11-06 Wed 23:58] =>  0:12
     CLOCK: [2019-11-06 Wed 23:42]--[2019-11-06 Wed 23:45] =>  0:03
     CLOCK: [2019-11-06 Wed 23:15]--[2019-11-06 Wed 23:41] =>  0:26
@@ -1168,6 +1170,33 @@ alternative is to create these tests on the fly:
   serialise.
 
 During the transition phase, we will remove all of the existing tests.
+
+*** Tracer numbering of dumped models is incorrect                    :story:
+
+We seem to be skipping numbers when dumping trace models:
+
+: 000-injection.dia.decoding_transform-71058be5-3e36-4ca7-9e7b-10cee985a07d-input.json
+: 002-injection.dia.decoding_transform-71058be5-3e36-4ca7-9e7b-10cee985a07d-output.json
+: 002-injector.transforms.tagged_values_overrides_transform-d92cdc73-e5b3-4e15-9559-b430ab40040f-input.json
+: 004-injector.transforms.configuration_transform-57a397a6-843a-4b4b-943c-aa66a31bd34a-input.json
+: 004-injector.transforms.tagged_values_overrides_transform-d92cdc73-e5b3-4e15-9559-b430ab40040f-output.json
+: 006-injection.transforms.input_technical_space_transform-dea341a4-9406-4213-b252-d88fecf2f1a2-input.json
+: 006-injector.transforms.configuration_transform-57a397a6-843a-4b4b-943c-aa66a31bd34a-output.json
+: 008-injection.transforms.input_technical_space_transform-dea341a4-9406-4213-b252-d88fecf2f1a2-output.json
+: 008-injection.transforms.references_transform-eaf2422c-9dd2-4da0-aaf0-908688e2721d-input.json
+: 010-injection.transforms.references_transform-eaf2422c-9dd2-4da0-aaf0-908688e2721d-output.json
+: 011-injection.transforms.model_production_chain-2560043d-867e-43be-bd2d-2fec62d05bcc-output.json
+
+*** Consider creating top level exceptions                            :story:
+
+There are a number of exceptions that have been repeated across
+projects. For example:
+
+-  transform error
+- building error
+
+We should consider having these in the dogen API and removing them
+from each project.
 
 *** Create a chain to encapsulate variability transforms              :story:
 
