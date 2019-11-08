@@ -50,13 +50,13 @@ obtain_references_for_model(const meta_model::model_set& ms) {
 void reference_graph_data_transform::
 apply(const context& ctx, meta_model::model_set& ms) {
     const auto mn(ms.target().name());
-    tracing::scoped_chain_tracer stp(lg, "reference graph data transform",
+    tracing::scoped_transform_tracer stp(lg, "reference graph data transform",
         transform_id, mn, *ctx.tracer());
 
     const auto rfm(obtain_references_for_model(ms));
     ms.reference_graph_data(rfm);
 
-    stp.end_chain(ms);
+    stp.end_transform(ms);
 }
 
 }
