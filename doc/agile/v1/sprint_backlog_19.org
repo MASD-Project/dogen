@@ -12,40 +12,41 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-08 Fri 00:02]
+#+CAPTION: Clock summary at [2019-11-08 Fri 11:10]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *68:33* |       |       | 100.0 |
+| *Total time*                                              | *69:51* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 68:33   |       |       | 100.0 |
-| Active                                                    |         | 68:33 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       |  3:36 |   5.3 |
+| Stories                                                   | 69:51   |       |       | 100.0 |
+| Active                                                    |         | 69:51 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  3:36 |   5.2 |
 | Create a demo and presentation for previous sprint        |         |       |  1:39 |   2.4 |
-| Time spent producing coding videos                        |         |       |  0:53 |   1.3 |
-| Sprint and product backlog grooming                       |         |       |  5:06 |   7.4 |
+| Time spent producing coding videos                        |         |       |  1:20 |   1.9 |
+| Sprint and product backlog grooming                       |         |       |  5:06 |   7.3 |
 | Remove test model sanitizer                               |         |       |  0:20 |   0.5 |
-| Remove master headers                                     |         |       |  1:12 |   1.8 |
-| Fix the issues with tests in reference model              |         |       |  3:53 |   5.7 |
+| Remove master headers                                     |         |       |  1:12 |   1.7 |
+| Fix the issues with tests in reference model              |         |       |  3:53 |   5.6 |
 | Update static strings to string views                     |         |       |  1:15 |   1.8 |
 | ODB include directories is incorrect                      |         |       |  1:43 |   2.5 |
-| Create a "modeling" report                                |         |       |  4:56 |   7.2 |
+| Create a "modeling" report                                |         |       |  4:56 |   7.1 |
 | Move visual studio related options to top profile         |         |       |  0:17 |   0.4 |
 | Fix incorrect message keyword when detecting ODB includes |         |       |  0:29 |   0.7 |
 | Meta-data keys are in the inverse order                   |         |       |  0:39 |   0.9 |
-| Creating reference cycles produces strange errors         |         |       |  5:32 |   8.1 |
+| Creating reference cycles produces strange errors         |         |       |  5:32 |   7.9 |
 | Error on duplicate references                             |         |       |  0:26 |   0.6 |
-| Generate model dependency graph                           |         |       |  1:55 |   2.8 |
-| Make the building of the relational model conditional     |         |       |  0:23 |   0.6 |
+| Generate model dependency graph                           |         |       |  1:55 |   2.7 |
+| Make the building of the relational model conditional     |         |       |  0:23 |   0.5 |
 | Make all transform contexts code-generated                |         |       |  0:08 |   0.2 |
-| Fix issue with smartparens                                |         |       |  1:19 |   1.9 |
-| Move registrar into assets                                |         |       |  5:29 |   8.0 |
+| Tracer numbering of dumped models is incorrect            |         |       |  0:26 |   0.6 |
+| Time spent fixing emacs issues                            |         |       |  1:44 |   2.5 |
+| Move registrar into assets                                |         |       |  5:29 |   7.9 |
 | Fix compilation errors in nightly                         |         |       |  0:24 |   0.6 |
-| Upgrade to boost 1.70                                     |         |       | 10:00 |  14.6 |
+| Upgrade to boost 1.70                                     |         |       | 10:00 |  14.3 |
 | Setup laptop to work on dogen                             |         |       |  0:45 |   1.1 |
-| Org-mode as a carrier format for modeling                 |         |       |  5:37 |   8.2 |
-| Add relational tracing support                            |         |       |  6:52 |  10.0 |
-| Consider creating a test build for all facets             |         |       |  3:45 |   5.5 |
+| Org-mode as a carrier format for modeling                 |         |       |  5:37 |   8.0 |
+| Add relational tracing support                            |         |       |  6:52 |   9.8 |
+| Consider creating a test build for all facets             |         |       |  3:45 |   5.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -223,6 +224,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Time spent producing coding videos                        :story:
     :LOGBOOK:
+    CLOCK: [2019-11-08 Fri 09:50]--[2019-11-08 Fri 10:17] =>  0:27
     CLOCK: [2019-11-05 Tue 22:43]--[2019-11-05 Tue 23:06] =>  0:23
     CLOCK: [2019-11-05 Tue 21:30]--[2019-11-05 Tue 22:00] =>  0:30
     :END:
@@ -668,15 +670,46 @@ support.
 Try generating the engine context, it seems there is no obvious reason
 for it not to work.
 
-*** COMPLETED Fix issue with smartparens                              :story:
-    CLOSED: [2019-11-07 Thu 22:34]
+*** COMPLETED Tracer numbering of dumped models is incorrect          :story:
+    CLOSED: [2019-11-08 Fri 11:09]
     :LOGBOOK:
+    CLOCK: [2019-11-08 Fri 10:43]--[2019-11-08 Fri 11:09] =>  0:26
+    :END:
+
+We seem to be skipping numbers when dumping trace models:
+
+: 000-injection.dia.decoding_transform-71058be5-3e36-4ca7-9e7b-10cee985a07d-input.json
+: 002-injection.dia.decoding_transform-71058be5-3e36-4ca7-9e7b-10cee985a07d-output.json
+: 002-injector.transforms.tagged_values_overrides_transform-d92cdc73-e5b3-4e15-9559-b430ab40040f-input.json
+: 004-injector.transforms.configuration_transform-57a397a6-843a-4b4b-943c-aa66a31bd34a-input.json
+: 004-injector.transforms.tagged_values_overrides_transform-d92cdc73-e5b3-4e15-9559-b430ab40040f-output.json
+: 006-injection.transforms.input_technical_space_transform-dea341a4-9406-4213-b252-d88fecf2f1a2-input.json
+: 006-injector.transforms.configuration_transform-57a397a6-843a-4b4b-943c-aa66a31bd34a-output.json
+: 008-injection.transforms.input_technical_space_transform-dea341a4-9406-4213-b252-d88fecf2f1a2-output.json
+: 008-injection.transforms.references_transform-eaf2422c-9dd2-4da0-aaf0-908688e2721d-input.json
+: 010-injection.transforms.references_transform-eaf2422c-9dd2-4da0-aaf0-908688e2721d-output.json
+: 011-injection.transforms.model_production_chain-2560043d-867e-43be-bd2d-2fec62d05bcc-output.json
+
+We have rejiged the tracing numbering and it now seems ok. Instead of
+trying to have the same entry number for the input and output of a
+transform, we now give them distinct numbers. This makes the logic
+easier to follow.
+
+*** STARTED Time spent fixing emacs issues                            :story:
+    :LOGBOOK:
+    CLOCK: [2019-11-08 Fri 10:18]--[2019-11-08 Fri 10:43] =>  0:25
     CLOCK: [2019-11-07 Thu 21:15]--[2019-11-07 Thu 22:34] =>  1:19
     :END:
 
-For some random reason emacs on our desktop PC is behaving very
-strangely. It seems that the problems stem from smartparens. Try to
-disable this in prelude.
+- fix issue with smartparens: For some random reason emacs on our
+  desktop PC is behaving very strangely. It seems that the problems
+  stem from smartparens. Try to disable this in prelude.
+- fix issue with treemacs: we are getting a lot of weird errors in
+  treemacs since the last update, which happened because we were
+  trying to fix smartparens. See issue: [[https://github.com/Alexander-Miller/treemacs/issues/562][When tag follow mode is
+  enabled, the message buffer is flooded with: {Treemacs} Encountered
+  error while following tag at point: (wrong-type-argument listp
+  DimCounter) #562]]
 
 *** STARTED Move registrar into assets                                :story:
     :LOGBOOK:
@@ -1170,22 +1203,6 @@ alternative is to create these tests on the fly:
   serialise.
 
 During the transition phase, we will remove all of the existing tests.
-
-*** Tracer numbering of dumped models is incorrect                    :story:
-
-We seem to be skipping numbers when dumping trace models:
-
-: 000-injection.dia.decoding_transform-71058be5-3e36-4ca7-9e7b-10cee985a07d-input.json
-: 002-injection.dia.decoding_transform-71058be5-3e36-4ca7-9e7b-10cee985a07d-output.json
-: 002-injector.transforms.tagged_values_overrides_transform-d92cdc73-e5b3-4e15-9559-b430ab40040f-input.json
-: 004-injector.transforms.configuration_transform-57a397a6-843a-4b4b-943c-aa66a31bd34a-input.json
-: 004-injector.transforms.tagged_values_overrides_transform-d92cdc73-e5b3-4e15-9559-b430ab40040f-output.json
-: 006-injection.transforms.input_technical_space_transform-dea341a4-9406-4213-b252-d88fecf2f1a2-input.json
-: 006-injector.transforms.configuration_transform-57a397a6-843a-4b4b-943c-aa66a31bd34a-output.json
-: 008-injection.transforms.input_technical_space_transform-dea341a4-9406-4213-b252-d88fecf2f1a2-output.json
-: 008-injection.transforms.references_transform-eaf2422c-9dd2-4da0-aaf0-908688e2721d-input.json
-: 010-injection.transforms.references_transform-eaf2422c-9dd2-4da0-aaf0-908688e2721d-output.json
-: 011-injection.transforms.model_production_chain-2560043d-867e-43be-bd2d-2fec62d05bcc-output.json
 
 *** Consider creating top level exceptions                            :story:
 

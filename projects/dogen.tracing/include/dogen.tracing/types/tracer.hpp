@@ -84,8 +84,8 @@ private:
 
         ensure_transform_position_not_empty();
         const auto p(full_path_for_writing(input_id, "initial_input"));
-        ++transform_position_.top();
         utility::filesystem::write(p, input);
+        ++transform_position_.top();
     }
 
     void add_references_graph(const std::string& root_vertex,
@@ -107,8 +107,8 @@ private:
 
         ensure_transform_position_not_empty();
         const auto p(full_path_for_writing(transform_id, "input"));
-        ++transform_position_.top();
         utility::filesystem::write(p, input);
+        ++transform_position_.top();
     }
 
     void start_transform(const std::string& transform_id) const;
@@ -125,8 +125,8 @@ private:
         if (detailed_tracing_enabled()) {
             ensure_transform_position_not_empty();
             const auto p(full_path_for_writing(transform_id, "input"));
-            ++transform_position_.top();
             utility::filesystem::write(p, input);
+            ++transform_position_.top();
         }
     }
 
@@ -136,7 +136,6 @@ private:
     void end_chain(const Ioable& output) const {
         if (detailed_tracing_enabled()) {
             ensure_transform_position_not_empty();
-            ++transform_position_.top();
             const auto id(builder_.current()->transform_id());
             const auto p(full_path_for_writing(id, "output"));
             utility::filesystem::write(p, output);
@@ -150,10 +149,10 @@ private:
     void end_transform(const Ioable& output) const {
         if (detailed_tracing_enabled()) {
             ensure_transform_position_not_empty();
-            ++transform_position_.top();
             const auto id(builder_.current()->transform_id());
             const auto p(full_path_for_writing(id, "output"));
             utility::filesystem::write(p, output);
+            ++transform_position_.top();
         }
         end_transform();
     }
