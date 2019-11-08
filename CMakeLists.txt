@@ -456,7 +456,7 @@ if (DOGEN_CLI_EXECUTABLE)
 
     # model processing options
     set(DOGEN_PROCESSING_OPTIONS "")
-    # set(DOGEN_PROCESSING_OPTIONS "--varibility-override xxx")
+    # set(DOGEN_PROCESSING_OPTIONS --variability-override dogen,masd.variability.profile,dogen.profiles.base.test_all_facets)
 
     # uncomment to enable logging.
     set(DOGEN_LOGGING_OPTIONS "")
