@@ -12,42 +12,42 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-12 Tue 19:55]
+#+CAPTION: Clock summary at [2019-11-12 Tue 22:39]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *73:23* |       |       | 100.0 |
+| *Total time*                                              | *74:58* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 73:23   |       |       | 100.0 |
-| Active                                                    |         | 73:23 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       |  3:36 |   4.9 |
+| Stories                                                   | 74:58   |       |       | 100.0 |
+| Active                                                    |         | 74:58 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  3:36 |   4.8 |
 | Create a demo and presentation for previous sprint        |         |       |  1:39 |   2.2 |
 | Time spent producing coding videos                        |         |       |  1:52 |   2.5 |
-| Sprint and product backlog grooming                       |         |       |  5:40 |   7.7 |
-| Remove test model sanitizer                               |         |       |  0:20 |   0.5 |
+| Sprint and product backlog grooming                       |         |       |  5:59 |   8.0 |
+| Remove test model sanitizer                               |         |       |  0:20 |   0.4 |
 | Remove master headers                                     |         |       |  1:12 |   1.6 |
-| Fix the issues with tests in reference model              |         |       |  3:53 |   5.3 |
+| Fix the issues with tests in reference model              |         |       |  3:53 |   5.2 |
 | Update static strings to string views                     |         |       |  1:15 |   1.7 |
 | ODB include directories is incorrect                      |         |       |  1:43 |   2.3 |
-| Create a "modeling" report                                |         |       |  4:56 |   6.7 |
+| Create a "modeling" report                                |         |       |  4:56 |   6.6 |
 | Move visual studio related options to top profile         |         |       |  0:17 |   0.4 |
-| Fix incorrect message keyword when detecting ODB includes |         |       |  0:29 |   0.7 |
+| Fix incorrect message keyword when detecting ODB includes |         |       |  0:29 |   0.6 |
 | Meta-data keys are in the inverse order                   |         |       |  0:39 |   0.9 |
-| Creating reference cycles produces strange errors         |         |       |  5:32 |   7.5 |
+| Creating reference cycles produces strange errors         |         |       |  5:32 |   7.4 |
 | Error on duplicate references                             |         |       |  0:26 |   0.6 |
 | Generate model dependency graph                           |         |       |  1:55 |   2.6 |
 | Make the building of the relational model conditional     |         |       |  0:23 |   0.5 |
 | Make all transform contexts code-generated                |         |       |  0:08 |   0.2 |
 | Tracer numbering of dumped models is incorrect            |         |       |  0:26 |   0.6 |
 | Fix compilation errors in c++ impl nightly                |         |       |  0:24 |   0.5 |
-| Add support for meta-data overrides in Dogen              |         |       |  5:16 |   7.2 |
-| Time spent fixing emacs issues                            |         |       |  1:44 |   2.4 |
-| Move registrar into assets                                |         |       |  5:29 |   7.5 |
-| Upgrade to boost 1.70                                     |         |       | 10:00 |  13.6 |
+| Add support for meta-data overrides in Dogen              |         |       |  5:16 |   7.0 |
+| Time spent fixing emacs issues                            |         |       |  1:44 |   2.3 |
+| Move registrar into assets                                |         |       |  5:29 |   7.3 |
+| Upgrade to boost 1.70                                     |         |       | 10:00 |  13.3 |
 | Setup laptop to work on dogen                             |         |       |  0:45 |   1.0 |
-| Org-mode as a carrier format for modeling                 |         |       |  5:37 |   7.7 |
-| Add relational tracing support                            |         |       |  6:52 |   9.4 |
-| Split generated tests from manual tests                   |         |       |  0:55 |   1.2 |
+| Org-mode as a carrier format for modeling                 |         |       |  5:37 |   7.5 |
+| Add relational tracing support                            |         |       |  6:52 |   9.2 |
+| Split generated tests from manual tests                   |         |       |  2:11 |   2.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -236,6 +236,7 @@ actually doing any development related activities.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-11-12 Tue 21:03]--[2019-11-12 Tue 21:22] =>  0:19
     CLOCK: [2019-11-08 Fri 15:39]--[2019-11-08 Fri 16:01] =>  0:22
     CLOCK: [2019-11-08 Fri 11:20]--[2019-11-08 Fri 11:32] =>  0:12
     CLOCK: [2019-11-06 Wed 07:40]--[2019-11-06 Wed 08:06] =>  0:26
@@ -1191,6 +1192,7 @@ runs. The schema should be designed with this in mind.
 
 *** STARTED Split generated tests from manual tests                   :story:
     :LOGBOOK:
+    CLOCK: [2019-11-12 Tue 21:23]--[2019-11-12 Tue 22:39] =>  1:16
     CLOCK: [2019-11-12 Tue 19:25]--[2019-11-12 Tue 19:55] =>  0:30
     CLOCK: [2019-11-08 Fri 16:35]--[2019-11-08 Fri 17:00] =>  0:25
     :END:
@@ -1263,6 +1265,79 @@ Basically we need a fitting name for this facet. Once found, we need
 to move all tests into this directory.
 
 Note that we cannot do the locator clean up until we sort out this mess.
+
+*** Create a "manual tests" stereotype with profiles                  :story:
+
+At present we have a =tests= facet that contains only the generated
+tests, and writes to the =generated_tests= directory. We also have
+created folders for manual tests under the =tests= directory. However,
+the problem is that we still have no way to tell dogen about the
+manual tests. This means we must use a regex to ignore the contents of
+the folder. A better approach is:
+
+- create two distinct test facets:
+  - manual tests
+  - generated tests
+- create a profile that enables manual tests. When enabled, we simply
+  create a skeleton boost test file. We must set it to override so
+  that we update the contents of the file manually with real tests.
+
+*Previous understanding*
+
+*Rationale*: the right solution for this is to split generated tests
+from manual tests such that we do not have to mix and match the two
+types of code.
+
+At present we are ignoring all of the contents of =tests=. This means
+whenever we delete a type we are left behind with its tests. A better
+solution is to create model elements for each handcrafted test marked
+as "masd::handcrafted_test". This disables all facets except for
+tests. We can then remove the regex.
+
+Whilst variability overrides will address the underlying issue in a
+more maintainable way (e.g. the deletion of generated tests), we
+should still create a profile and model all tests as proper entities
+instead of bypassing the modeling system. We want to move to a world
+were *all* files in the system can be attributable to modeling
+entities.
+
+
+*** Generated tests fail when model has nothing to test               :story:
+
+In cases where we are generating tests for a model which has nothing
+to test - from a dogen generated code perspective - the tests will
+fail with an error. This is because boost test expects to have at
+least one test registered. In the past we have solved this by adding
+"fake tests" which kept the test suite green until we added real
+tests. However, for generated code, we need to somehow determine when
+the fake tests should be injected.
+
+This is not a trivial thing to do because we need to ensure that the
+test template did not emit a single test for a given entity, and then
+look at all entities and see if there is at least one test or not.
+
+Example fake tests:
+
+#+begin_src c++
+#include <boost/test/unit_test.hpp>
+#include "dogen.utility/types/test/logging.hpp"
+
+namespace {
+
+const std::string empty;
+const std::string test_module("dogen.tests");
+const std::string test_suite("fake_tests");
+
+}
+
+BOOST_AUTO_TEST_SUITE(fake_tests)
+
+BOOST_AUTO_TEST_CASE(test) {
+    SETUP_TEST_LOG("test");
+}
+
+BOOST_AUTO_TEST_SUITE_END()
+#+end_src
 
 *** Consider creating a test build for all facets                     :story:
 
@@ -1872,22 +1947,3 @@ support was removed.
 
 We seem to have a number of tests commented out in
 injection.dia. Investigate why and if possible, reactivate them.
-*** CANCELLED Create a "tests" stereotype with profiles               :story:
-    CLOSED: [2019-11-08 Fri 15:37]
-
-*Rationale*: the right solution for this is to split generated tests
-from manual tests such that we do not have to mix and match the two
-types of code.
-
-At present we are ignoring all of the contents of =tests=. This means
-whenever we delete a type we are left behind with its tests. A better
-solution is to create model elements for each handcrafted test marked
-as "masd::handcrafted_test". This disables all facets except for
-tests. We can then remove the regex.
-
-Whilst variability overrides will address the underlying issue in a
-more maintainable way (e.g. the deletion of generated tests), we
-should still create a profile and model all tests as proper entities
-instead of bypassing the modeling system. We want to move to a world
-were *all* files in the system can be attributable to modeling
-entities.
