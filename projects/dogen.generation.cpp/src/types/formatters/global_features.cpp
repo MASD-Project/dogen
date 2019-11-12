@@ -134,7 +134,7 @@ make_masd_generation_cpp_tests_directory_name() {
     r.binding_point(binding_point::global);
     r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "tests" }));
+    r.default_value(f.make(vt, std::list<std::string>{ "generated_tests" }));
 
     archetypes::location al;
     al.kernel("masd");

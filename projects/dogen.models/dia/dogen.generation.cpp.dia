@@ -106,7 +106,7 @@
         <dia:point val="-48,4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,3.95;-20.87,28.15"/>
+        <dia:rectangle val="-48.05,3.95;-20.87,24.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -118,7 +118,7 @@
         <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="24.100000000000005"/>
+        <dia:real val="20.900000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -29372,7 +29372,7 @@ not a regular" helper.#</dia:string>
         <dia:point val="325.198,74.0833"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="324.448,64.4835;335.87,74.8833"/>
+        <dia:rectangle val="324.448,64.4835;335.871,74.8833"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -39733,7 +39733,7 @@ code.
             <dia:string>#masd::variability::text#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#"tests"#</dia:string>
+            <dia:string>#"generated_tests"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.tests.directory#</dia:string>
@@ -40138,7 +40138,7 @@ code.
             <dia:string>#masd::variability::text#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#"tests"#</dia:string>
+            <dia:string>#"generated_tests"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Directory in which to place c++ tests.

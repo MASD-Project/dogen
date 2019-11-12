@@ -2737,7 +2737,7 @@
         {
           "name": "masd.generation.cpp.tests.directory",
           "type": "masd::variability::text",
-          "value": "\"tests\"",
+          "value": "\"generated_tests\"",
           "tagged_values": {
             "masd.variability.qualified_name": "masd.generation.cpp.tests.directory"
           }
@@ -2856,7 +2856,7 @@
         {
           "name": "masd.generation.cpp.tests_directory_name",
           "type": "masd::variability::text",
-          "value": "\"tests\"",
+          "value": "\"generated_tests\"",
           "documentation": "Directory in which to place c++ tests.\n",
           "tagged_values": {
             "masd.variability.binding_point": "global",

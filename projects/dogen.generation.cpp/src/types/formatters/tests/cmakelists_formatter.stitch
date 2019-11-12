@@ -83,8 +83,8 @@ format(const context& ctx, const assets::meta_model::element& e) const {
 #>
 set(name "<#= model_name #>")
 set(lib_target_name ${name}) # .lib
-set(tests_binary_name ${name}.tests)
-set(tests_target_name ${name}.tests)
+set(tests_binary_name ${name}.<#= c.tests_directory_name() #>)
+set(tests_target_name ${name}.<#= c.tests_directory_name() #>)
 
 set(files "")
 file(GLOB_RECURSE files RELATIVE

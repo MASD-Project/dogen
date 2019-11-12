@@ -101,8 +101,8 @@ format(const context& ctx, const assets::meta_model::element& e) const {
         const auto product_name(a.get_product_name(c.name()));
 a.stream() << "set(name \"" << model_name << "\")" << std::endl;
 a.stream() << "set(lib_target_name ${name}) # .lib" << std::endl;
-a.stream() << "set(tests_binary_name ${name}.tests)" << std::endl;
-a.stream() << "set(tests_target_name ${name}.tests)" << std::endl;
+a.stream() << "set(tests_binary_name ${name}." << c.tests_directory_name() << ")" << std::endl;
+a.stream() << "set(tests_target_name ${name}." << c.tests_directory_name() << ")" << std::endl;
 a.stream() << std::endl;
 a.stream() << "set(files \"\")" << std::endl;
 a.stream() << "file(GLOB_RECURSE files RELATIVE" << std::endl;
