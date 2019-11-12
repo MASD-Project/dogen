@@ -77,9 +77,13 @@ format(const context& ctx, const assets::meta_model::element& e) const {
 
     {
         a.make_decoration_preamble(e);
-        const auto model_name(a.get_identifiable_model_name(c.name()));
+        const auto model_name(a.get_dot_separated_model_name(c.name()));
         const auto product_name(a.get_product_name(c.name()));
 #>
+set(name "<#= model_name #>")
+set(lib_binary_name ${name})
+set(lib_target_name ${name}.lib)
+
 set(files "")
 file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
@@ -97,8 +101,9 @@ set(files ${files} ${odb_files})
 <#+
         }
 #>
-add_library(<#= model_name #> ${files})
-set_target_properties(<#= model_name #> PROPERTIES
+set(lib_files ${files})
+add_library(${lib_target_name} ${lib_files})
+set_target_properties(${lib_target_name} PROPERTIES
 <#+
         if (a.is_cpp_standard_98()) {
 #>
@@ -106,9 +111,9 @@ set_target_properties(<#= model_name #> PROPERTIES
 <#+
         }
 #>
-    OUTPUT_NAME <#= product_name #><#= (product_name.empty() ? "" : ".") #><#= model_name #>)
+    OUTPUT_NAME ${lib_binary_name})
 
-install(TARGETS <#= model_name #>
+install(TARGETS ${lib_target_name}
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
     COMPONENT libraries)

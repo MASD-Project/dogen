@@ -57,6 +57,7 @@ const std::string noexcept_keyword_text(" noexcept");
 const std::string namespace_separator("::");
 const std::string member_variable_postfix("_");
 const std::string underscore("_");
+const std::string dot(".");
 const std::string odb_value_type("value");
 const std::string odb_object_type("object");
 
@@ -193,6 +194,12 @@ get_identifiable_model_name(const assets::meta_model::name& n) const {
     // FIXME: why not use helper?
     using boost::algorithm::join;
     return join(n.location().model_modules(), underscore);
+}
+
+std::string assistant::
+get_dot_separated_model_name(const assets::meta_model::name& n) const {
+    using boost::algorithm::join;
+    return join(n.location().model_modules(), dot);
 }
 
 std::string

@@ -17,6 +17,10 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
+set(name "dogen.relational")
+set(lib_binary_name ${name})
+set(lib_target_name ${name}.lib)
+
 set(files "")
 file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
@@ -28,11 +32,12 @@ file(GLOB_RECURSE odb_files RELATIVE
    "${CMAKE_CURRENT_SOURCE_DIR}/*.cxx")
 set(files ${files} ${odb_files})
 
-add_library(dogen_relational ${files})
-set_target_properties(dogen_relational PROPERTIES
-    OUTPUT_NAME dogen_relational)
+set(lib_files ${files})
+add_library(${lib_target_name} ${lib_files})
+set_target_properties(${lib_target_name} PROPERTIES
+    OUTPUT_NAME ${lib_binary_name})
 
-install(TARGETS dogen_relational
+install(TARGETS ${lib_target_name}
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
     COMPONENT libraries)

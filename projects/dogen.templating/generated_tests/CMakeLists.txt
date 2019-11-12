@@ -17,8 +17,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(name "dogen_templating")
-set(lib_target_name ${name}) # .lib
+set(name "dogen.templating")
+set(lib_target_name ${name}.lib)
 set(tests_binary_name ${name}.generated_tests)
 set(tests_target_name ${name}.generated_tests)
 

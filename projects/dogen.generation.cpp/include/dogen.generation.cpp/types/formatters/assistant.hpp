@@ -124,6 +124,13 @@ public:
     get_identifiable_model_name(const assets::meta_model::name& n) const;
 
     /**
+     * @brief Obtains the model name as a set of strings separated by
+     * dots.
+     */
+    std::string
+    get_dot_separated_model_name(const assets::meta_model::name& n) const;
+
+    /**
      * @brief Obtains the product name. This is defined to be the
      * first external module, if any exists.
      */

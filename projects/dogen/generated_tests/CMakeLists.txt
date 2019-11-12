@@ -18,7 +18,7 @@
 # MA 02110-1301, USA.
 #
 set(name "dogen")
-set(lib_target_name ${name}) # .lib
+set(lib_target_name ${name}.lib)
 set(tests_binary_name ${name}.generated_tests)
 set(tests_target_name ${name}.generated_tests)
 

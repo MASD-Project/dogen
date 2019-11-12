@@ -97,10 +97,10 @@ format(const context& ctx, const assets::meta_model::element& e) const {
 
     {
         a.make_decoration_preamble(e);
-        const auto model_name(a.get_identifiable_model_name(c.name()));
+        const auto model_name(a.get_dot_separated_model_name(c.name()));
         const auto product_name(a.get_product_name(c.name()));
 a.stream() << "set(name \"" << model_name << "\")" << std::endl;
-a.stream() << "set(lib_target_name ${name}) # .lib" << std::endl;
+a.stream() << "set(lib_target_name ${name}.lib)" << std::endl;
 a.stream() << "set(tests_binary_name ${name}." << c.tests_directory_name() << ")" << std::endl;
 a.stream() << "set(tests_target_name ${name}." << c.tests_directory_name() << ")" << std::endl;
 a.stream() << std::endl;

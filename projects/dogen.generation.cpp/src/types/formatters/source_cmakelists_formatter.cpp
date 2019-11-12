@@ -96,8 +96,12 @@ format(const context& ctx, const assets::meta_model::element& e) const {
 
     {
         a.make_decoration_preamble(e);
-        const auto model_name(a.get_identifiable_model_name(c.name()));
+        const auto model_name(a.get_dot_separated_model_name(c.name()));
         const auto product_name(a.get_product_name(c.name()));
+a.stream() << "set(name \"" << model_name << "\")" << std::endl;
+a.stream() << "set(lib_binary_name ${name})" << std::endl;
+a.stream() << "set(lib_target_name ${name}.lib)" << std::endl;
+a.stream() << std::endl;
 a.stream() << "set(files \"\")" << std::endl;
 a.stream() << "file(GLOB_RECURSE files RELATIVE" << std::endl;
 a.stream() << "    \"${CMAKE_CURRENT_SOURCE_DIR}/\"" << std::endl;
@@ -111,14 +115,15 @@ a.stream() << "   \"${CMAKE_CURRENT_SOURCE_DIR}/*.cxx\")" << std::endl;
 a.stream() << "set(files ${files} ${odb_files})" << std::endl;
 a.stream() << std::endl;
         }
-a.stream() << "add_library(" << model_name << " ${files})" << std::endl;
-a.stream() << "set_target_properties(" << model_name << " PROPERTIES" << std::endl;
+a.stream() << "set(lib_files ${files})" << std::endl;
+a.stream() << "add_library(${lib_target_name} ${lib_files})" << std::endl;
+a.stream() << "set_target_properties(${lib_target_name} PROPERTIES" << std::endl;
         if (a.is_cpp_standard_98()) {
 a.stream() << "    CXX_STANDARD 98" << std::endl;
         }
-a.stream() << "    OUTPUT_NAME " << product_name << (product_name.empty() ? "" : ".") << model_name << ")" << std::endl;
+a.stream() << "    OUTPUT_NAME ${lib_binary_name})" << std::endl;
 a.stream() << std::endl;
-a.stream() << "install(TARGETS " << model_name << std::endl;
+a.stream() << "install(TARGETS ${lib_target_name}" << std::endl;
 a.stream() << "    ARCHIVE DESTINATION lib" << std::endl;
 a.stream() << "    LIBRARY DESTINATION lib" << std::endl;
 a.stream() << "    COMPONENT libraries)" << std::endl;
