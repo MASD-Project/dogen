@@ -120,7 +120,7 @@
         {
           "name": "masd.generation.cpp.tests.cmakelists.enabled",
           "type": "",
-          "value": "false",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -130,7 +130,7 @@
         {
           "name": "masd.generation.cpp.tests.main.enabled",
           "type": "",
-          "value": "false",
+          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -984,6 +984,96 @@
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
             "masd.variability.template_kind": "instance"
           }
+        }
+      ]
+    },
+    {
+      "name": "base::test_all_facets",
+      "parents": [
+        "base::decoration"
+      ],
+      "stereotypes": [
+        "masd::variability::profile_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.decoration.marker_name",
+          "type": "",
+          "value": "dogen.profiles.test_marker",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "formatters",
+            "masd.variability.template_kind": "instance"
+          }
+        },
+        {
+          "name": "masd.generation.csharp.enabled",
+          "type": "",
+          "value": "false",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "instance"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.cmake.enabled",
+          "type": "",
+          "value": "false",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "instance"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.tests.cmakelists.enabled",
+          "type": "",
+          "value": "false",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "instance"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.tests.main.enabled",
+          "type": "",
+          "value": "false",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "instance"
+          }
+        }
+      ]
+    },
+    {
+      "name": "test_marker",
+      "stereotypes": [
+        "masd::decoration::generation_marker"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "add_date_time",
+          "type": "",
+          "value": "true"
+        },
+        {
+          "name": "add_warning",
+          "type": "",
+          "value": "true"
+        },
+        {
+          "name": "add_dogen_version",
+          "type": "",
+          "value": "true"
+        },
+        {
+          "name": "message",
+          "type": "",
+          "documentation": "These files are code-generated via overrides to test dogen. Do not commit them.\n"
         }
       ]
     }

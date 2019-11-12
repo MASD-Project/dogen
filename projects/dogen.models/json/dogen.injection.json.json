@@ -65,6 +65,10 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "fake_test",
+      "fallback_element_type": "masd::object"
     }
   ]
 }
