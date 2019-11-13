@@ -16,6 +16,43 @@ such as profiles, licences etc.
 
 Stories that we haven't quite classified yet, but are needed.
 
+*** Modeling of dogen models themselves                               :story:
+
+*Note*: we probably already have this story in the backlog, or at
+least some of its ideas. Do a grep and merge as required.
+
+At present we have placed the dogen models in a top-level =models=
+directory. However, if we think about it, it makes more sense to
+consider the model itself a file that belongs to the component. For
+this we need:
+
+- a models facet;
+- an assets type of model. The model type can be Dia or JSON; actually
+  we should not name this "model", it is a component model. We can
+  also have "product models".
+- an associated CMakeLists in the facet, responsible for generating
+  the model.
+
+We are no longer worried about Dia and JSON directories because we
+expect that JSON models are automatically generated from Dia models in
+the nightly build for testing purposes.
+
+As we did with generated tests, when the model facet is enabled (which
+should be by default, lest we confuse everyone), we generate the
+model.
+
+Notes:
+
+- this could enable a bootstrapping scenario: supply a model name and
+  a directory to dogen and it will first generate the model itself and
+  then generate it. Actually this may not be a good idea as we did not
+  choose a profile. We probably would also need to supply the
+  profile. We should look at build2 to see how the bootstrapping
+  works. We should also keep in mind that there are two bootstrapping
+  cases: the product case and the component case. Since the product
+  itself will have a model, we need to make sure these are
+  consistent. See [[*Add support for product skeleton generation][Add support for product skeleton generation]].
+
 *** Simplify implementation of boost serialisation registrar          :story:
 
 - at present we are using templates on the cpp file, and it is not

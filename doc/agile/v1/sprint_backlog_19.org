@@ -12,42 +12,42 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-12 Tue 22:39]
+#+CAPTION: Clock summary at [2019-11-13 Wed 08:46]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *74:58* |       |       | 100.0 |
+| *Total time*                                              | *75:43* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 74:58   |       |       | 100.0 |
-| Active                                                    |         | 74:58 |       | 100.0 |
+| Stories                                                   | 75:43   |       |       | 100.0 |
+| Active                                                    |         | 75:43 |       | 100.0 |
 | Edit release notes for previous sprint                    |         |       |  3:36 |   4.8 |
 | Create a demo and presentation for previous sprint        |         |       |  1:39 |   2.2 |
-| Time spent producing coding videos                        |         |       |  1:52 |   2.5 |
-| Sprint and product backlog grooming                       |         |       |  5:59 |   8.0 |
+| Time spent producing coding videos                        |         |       |  1:56 |   2.6 |
+| Sprint and product backlog grooming                       |         |       |  6:09 |   8.1 |
 | Remove test model sanitizer                               |         |       |  0:20 |   0.4 |
 | Remove master headers                                     |         |       |  1:12 |   1.6 |
-| Fix the issues with tests in reference model              |         |       |  3:53 |   5.2 |
+| Fix the issues with tests in reference model              |         |       |  3:53 |   5.1 |
 | Update static strings to string views                     |         |       |  1:15 |   1.7 |
 | ODB include directories is incorrect                      |         |       |  1:43 |   2.3 |
-| Create a "modeling" report                                |         |       |  4:56 |   6.6 |
+| Create a "modeling" report                                |         |       |  4:56 |   6.5 |
 | Move visual studio related options to top profile         |         |       |  0:17 |   0.4 |
 | Fix incorrect message keyword when detecting ODB includes |         |       |  0:29 |   0.6 |
 | Meta-data keys are in the inverse order                   |         |       |  0:39 |   0.9 |
-| Creating reference cycles produces strange errors         |         |       |  5:32 |   7.4 |
+| Creating reference cycles produces strange errors         |         |       |  5:32 |   7.3 |
 | Error on duplicate references                             |         |       |  0:26 |   0.6 |
-| Generate model dependency graph                           |         |       |  1:55 |   2.6 |
+| Generate model dependency graph                           |         |       |  1:55 |   2.5 |
 | Make the building of the relational model conditional     |         |       |  0:23 |   0.5 |
 | Make all transform contexts code-generated                |         |       |  0:08 |   0.2 |
 | Tracer numbering of dumped models is incorrect            |         |       |  0:26 |   0.6 |
 | Fix compilation errors in c++ impl nightly                |         |       |  0:24 |   0.5 |
 | Add support for meta-data overrides in Dogen              |         |       |  5:16 |   7.0 |
 | Time spent fixing emacs issues                            |         |       |  1:44 |   2.3 |
-| Move registrar into assets                                |         |       |  5:29 |   7.3 |
-| Upgrade to boost 1.70                                     |         |       | 10:00 |  13.3 |
+| Move registrar into assets                                |         |       |  5:29 |   7.2 |
+| Upgrade to boost 1.70                                     |         |       | 10:00 |  13.2 |
 | Setup laptop to work on dogen                             |         |       |  0:45 |   1.0 |
-| Org-mode as a carrier format for modeling                 |         |       |  5:37 |   7.5 |
-| Add relational tracing support                            |         |       |  6:52 |   9.2 |
-| Split generated tests from manual tests                   |         |       |  2:11 |   2.9 |
+| Org-mode as a carrier format for modeling                 |         |       |  5:37 |   7.4 |
+| Add relational tracing support                            |         |       |  6:52 |   9.1 |
+| Split generated tests from manual tests                   |         |       |  2:42 |   3.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -225,6 +225,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Time spent producing coding videos                        :story:
     :LOGBOOK:
+    CLOCK: [2019-11-13 Wed 08:18]--[2019-11-13 Wed 08:22] =>  0:04
     CLOCK: [2019-11-08 Fri 14:28]--[2019-11-08 Fri 15:00] =>  0:32
     CLOCK: [2019-11-08 Fri 09:50]--[2019-11-08 Fri 10:17] =>  0:27
     CLOCK: [2019-11-05 Tue 22:43]--[2019-11-05 Tue 23:06] =>  0:23
@@ -236,6 +237,7 @@ actually doing any development related activities.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-11-13 Wed 08:36]--[2019-11-13 Wed 08:46] =>  0:10
     CLOCK: [2019-11-12 Tue 21:03]--[2019-11-12 Tue 21:22] =>  0:19
     CLOCK: [2019-11-08 Fri 15:39]--[2019-11-08 Fri 16:01] =>  0:22
     CLOCK: [2019-11-08 Fri 11:20]--[2019-11-08 Fri 11:32] =>  0:12
@@ -1192,6 +1194,8 @@ runs. The schema should be designed with this in mind.
 
 *** STARTED Split generated tests from manual tests                   :story:
     :LOGBOOK:
+    CLOCK: [2019-11-13 Wed 08:22]--[2019-11-13 Wed 08:36] =>  0:14
+    CLOCK: [2019-11-13 Wed 08:00]--[2019-11-13 Wed 08:17] =>  0:17
     CLOCK: [2019-11-12 Tue 21:23]--[2019-11-12 Tue 22:39] =>  1:16
     CLOCK: [2019-11-12 Tue 19:25]--[2019-11-12 Tue 19:55] =>  0:30
     CLOCK: [2019-11-08 Fri 16:35]--[2019-11-08 Fri 17:00] =>  0:25
@@ -1207,6 +1211,18 @@ Notes:
 - add CMake options to enable the different types of tests:
   - =WITH_MANUAL_TESTS=
   - =WITH_GENERATED_TESTS=
+- create different top-level targets:
+  - run all manual tests
+  - run all generated tests
+- make run all tests depend on both targets. With this it should now
+  be possible to run only the generated or the manual tests.
+- nightly:
+  - create two clones of dogen, one just for the purposes of running
+    the tests. Set the env var to point to this clone. Give it a
+    meaningful name (e.g. "clean_dogen"?)
+  - at present we only have =ctest_build=. However, we need a two step
+    build process. First we enable overrides, then we run =gad= then
+    we build all.
 
 *Previous understanding*
 
@@ -1282,6 +1298,18 @@ the folder. A better approach is:
   create a skeleton boost test file. We must set it to override so
   that we update the contents of the file manually with real tests.
 
+Tasks:
+
+- rename tests facet to =generated_tests=
+- create a new facet =manual_tests=. Copy most of the contents of the
+  existing facet (main, cmake). Make the directory name =tests=.
+- create a template for tests with associated meta-model entity
+  (e.g. =masd::test=). It probably will also need its own namespace
+  (=test=).
+- create a stereotype that enables manual tests in the dogen model.
+- update all models, adding =masd::test= for each manual test, with
+  the new stereotype.
+
 *Previous understanding*
 
 *Rationale*: the right solution for this is to split generated tests
@@ -1300,7 +1328,6 @@ should still create a profile and model all tests as proper entities
 instead of bypassing the modeling system. We want to move to a world
 were *all* files in the system can be attributable to modeling
 entities.
-
 
 *** Generated tests fail when model has nothing to test               :story:
 
