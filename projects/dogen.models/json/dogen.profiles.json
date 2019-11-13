@@ -120,7 +120,7 @@
         {
           "name": "masd.generation.cpp.tests.cmakelists.enabled",
           "type": "",
-          "value": "true",
+          "value": "false",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -130,7 +130,7 @@
         {
           "name": "masd.generation.cpp.tests.main.enabled",
           "type": "",
-          "value": "true",
+          "value": "false",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
@@ -150,7 +150,7 @@
         {
           "name": "masd.generation.cpp.tests.enabled",
           "type": "",
-          "value": "true",
+          "value": "false",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
