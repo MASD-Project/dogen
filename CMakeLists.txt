@@ -105,6 +105,7 @@ option(WITH_JSON_VALIDATION "Adds JSON validation targets. Requires jq." on)
 option(WITH_BENCHMARKS "Adds targets for running benchmarks." on)
 option(WITH_BOOST_TEST_REPORTING "Create boost test reports." off)
 option(WITH_RELATIONAL_SUPPORT "Add support for relational data." off)
+option(WITH_FULL_GENERATION "Generate all facets for all models.." off)
 
 #
 # check for dependencies
@@ -456,7 +457,9 @@ if (DOGEN_CLI_EXECUTABLE)
 
     # model processing options
     set(DOGEN_PROCESSING_OPTIONS "")
-    # set(DOGEN_PROCESSING_OPTIONS --variability-override dogen,masd.variability.profile,dogen.profiles.base.test_all_facets)
+    if (WITH_FULL_GENERATION)
+        set(DOGEN_PROCESSING_OPTIONS --variability-override masd.variability.profile,dogen.profiles.base.test_all_facets)
+    endif()
 
     # uncomment to enable logging.
     set(DOGEN_LOGGING_OPTIONS "")

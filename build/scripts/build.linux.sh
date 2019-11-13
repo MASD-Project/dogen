@@ -128,6 +128,10 @@ if [[ ! -z "${CMAKE_PROGRAM_PATH}" ]]; then
     cmake_defines="${cmake_defines} -DCMAKE_PROGRAM_PATH='${CMAKE_PROGRAM_PATH}'"
 fi
 
+if [[ ! -z "${DOGEN_FULL_GENERATION}" ]]; then
+    cmake_defines="${cmake_defines} -DWITH_FULL_GENERATION=ON"
+fi
+
 #
 # Use minimal packaging in debug to preserve disk space.
 #
