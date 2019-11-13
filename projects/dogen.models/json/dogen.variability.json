@@ -77,7 +77,8 @@
       "name": "meta_model::binding_point",
       "documentation": "Determines how a feature can be bound to a modeling element.\n",
       "stereotypes": [
-        "masd::enumeration"
+        "masd::enumeration",
+        "dogen::convertible"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -190,7 +191,8 @@
       "name": "meta_model::template_kind",
       "documentation": "Determines the operations to perform when expanding the template.\n",
       "stereotypes": [
-        "masd::enumeration"
+        "masd::enumeration",
+        "dogen::convertible"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [

@@ -1194,6 +1194,7 @@ runs. The schema should be designed with this in mind.
 
 *** STARTED Split generated tests from manual tests                   :story:
     :LOGBOOK:
+    CLOCK: [2019-11-13 Wed 18:10]--[2019-11-13 Wed 18:23] =>  0:13
     CLOCK: [2019-11-13 Wed 17:44]--[2019-11-13 Wed 18:09] =>  0:25
     CLOCK: [2019-11-13 Wed 08:22]--[2019-11-13 Wed 08:36] =>  0:14
     CLOCK: [2019-11-13 Wed 08:00]--[2019-11-13 Wed 08:17] =>  0:17

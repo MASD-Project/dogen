@@ -407,7 +407,7 @@
       "attributes": [
         {
           "name": "references",
-          "type": "std::unordered_map<name,origin_types>",
+          "type": "std::unordered_map<name, origin_types>",
           "documentation": "All other intermediate models that this model depends on, mapped to their\norigin.\n"
         },
         {
@@ -652,7 +652,8 @@
       "name": "meta_model::technical_space",
       "documentation": "Models need to declare upfront the technical space they will target.\n",
       "stereotypes": [
-        "masd::enumeration"
+        "masd::enumeration",
+        "dogen::convertible"
       ],
       "tagged_values": {
         "masd.generation.cpp.hash.enabled": "true"
@@ -1717,7 +1718,8 @@
       "name": "meta_model::decoration::editor",
       "documentation": "Supported editors for modelines.\n",
       "stereotypes": [
-        "masd::enumeration"
+        "masd::enumeration",
+        "dogen::convertible"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1763,7 +1765,8 @@
       "name": "meta_model::decoration::modeline_location",
       "documentation": "Location in the file to place the modeline.\n",
       "stereotypes": [
-        "masd::enumeration"
+        "masd::enumeration",
+        "dogen::convertible"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2004,7 +2007,8 @@
       "name": "meta_model::orm::database_system",
       "stereotypes": [
         "masd::enumeration",
-        "dogen::hashable"
+        "dogen::hashable",
+        "dogen::convertible"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2033,7 +2037,8 @@
     {
       "name": "meta_model::orm::letter_case",
       "stereotypes": [
-        "masd::enumeration"
+        "masd::enumeration",
+        "dogen::convertible"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
