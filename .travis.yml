@@ -26,24 +26,6 @@ git:
   depth: 2
 
 matrix:
-  allow_failures:
-    # Linux GCC is taking too long.
-    - os: linux
-      compiler: gcc
-      env: configuration=Release compiler="gcc9" generator="Ninja" build_group="Continuous" report_name="Linux Gcc Releases"
-    - os: linux
-      compiler: gcc
-      env: configuration=Debug compiler="gcc9" generator="Ninja" build_group="Continuous"  report_name="Linux Gcc Debug"
-    # OSX builds are failing due to the wrong version of ODB
-    - os: osx
-      compiler: clang
-      osx_image: xcode10
-      env: deploy="1" configuration=Release compiler="clang" generator="Unix Makefiles" build_group="Continuous" report_name="OSX Clang Release"
-    - os: osx
-      compiler: clang
-      osx_image: xcode10
-      env: configuration=Debug compiler="clang" generator="Unix Makefiles" build_group="Continuous" report_name="OSX Clang Debug"
-
   include:
     #
     # OSX Clang
