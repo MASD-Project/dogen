@@ -11,9 +11,11 @@ export CMAKE_TOOLCHAIN_FILE=${MASD_DIR}/vcpkg/masd/scripts/buildsystems/vcpkg.cm
 workspace="${HOME}/nightly"
 configuration=Debug
 generator=Ninja
-number_of_jobs=4
+number_of_jobs=6
 build_group=Nightly
 logs_dir=../logs
+clang_compiler=clang9
+gcc_compiler=gcc9
 
 #
 # C# Ref Impl
@@ -42,10 +44,10 @@ if [ ! -d "${git_dir}" ]; then
 fi
 cd ${git_dir}
 
-compiler=clang8
+compiler=${clang_compiler}
 ctest --extra-verbose --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group}"  > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
 
-compiler=gcc8
+compiler=${gcc_compiler}
 ctest --extra-verbose --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group}"  > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
 
 #
@@ -54,14 +56,26 @@ ctest --extra-verbose --script ".ctest.cmake,configuration_type=${configuration}
 product="dogen"
 git_url="https://github.com/MASD-Project/${product}.git"
 git_dir="${workspace}/${product}"
-export DOGEN_PROJECTS_DIRECTORY="${git_dir}/projects"
-if [ ! -d "${git_dir}" ]; then
-    git clone ${git_url} ${git_dir}
+if [ -d "${git_dir}" ]; then
+    rm -rf ${git_dir}
 fi
-cd ${git_dir}
 
-compiler=clang8
+pristine_dir="${workspace}/${product}_pristine"
+if [ -d "${pristine_dir}" ]; then
+    rm -rf ${git_dir}
+fi
+
+git clone --depth=3 ${git_url} ${git_dir}
+cp -r ${git_dir} ${projects_dir}
+export DOGEN_PROJECTS_DIRECTORY="${pristine_dir}/projects"
+
+cd ${git_dir}
+build/scripts/build.linux.sh Release ${number_of_jobs} ${clang_compiler} dogen.cli
+export DOGEN_FULL_GENERATION="1"
+build/scripts/build.linux.sh Release ${number_of_jobs} ${clang_compiler} gad
+
+compiler=${clang_compiler}
 ctest --extra-verbose --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${number_of_jobs},build_group=${build_group},minimal_packaging=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
 
-compiler=gcc8
+compiler=${gcc_compiler}
 ctest --extra-verbose --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${number_of_jobs},build_group=${build_group},minimal_packaging=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
