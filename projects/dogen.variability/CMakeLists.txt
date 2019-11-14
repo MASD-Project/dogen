@@ -1,4 +1,4 @@
-# -*- mode: cmake; tab-width: 4; indent-tabs-mode: nil -*-
+# -*- mode: cmake; cmake-tab-width: 4; indent-tabs-mode: nil -*-
 #
 # Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
 #
@@ -19,6 +19,9 @@
 #
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests)
+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
+endif()
 
 install(
     DIRECTORY include/
