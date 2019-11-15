@@ -12,49 +12,49 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-15 Fri 16:26]
+#+CAPTION: Clock summary at [2019-11-15 Fri 17:59]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *82:51* |       |       | 100.0 |
+| *Total time*                                               | *83:42* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 82:51   |       |       | 100.0 |
-| Active                                                     |         | 82:51 |       | 100.0 |
+| Stories                                                    | 83:42   |       |       | 100.0 |
+| Active                                                     |         | 83:42 |       | 100.0 |
 | Edit release notes for previous sprint                     |         |       |  3:36 |   4.3 |
 | Create a demo and presentation for previous sprint         |         |       |  1:39 |   2.0 |
-| Time spent producing coding videos                         |         |       |  2:27 |   3.0 |
-| Sprint and product backlog grooming                        |         |       |  6:09 |   7.4 |
+| Time spent producing coding videos                         |         |       |  2:27 |   2.9 |
+| Sprint and product backlog grooming                        |         |       |  6:09 |   7.3 |
 | Remove test model sanitizer                                |         |       |  0:20 |   0.4 |
 | Remove master headers                                      |         |       |  1:12 |   1.4 |
-| Fix the issues with tests in reference model               |         |       |  3:53 |   4.7 |
+| Fix the issues with tests in reference model               |         |       |  3:53 |   4.6 |
 | Update static strings to string views                      |         |       |  1:15 |   1.5 |
 | ODB include directories is incorrect                       |         |       |  1:43 |   2.1 |
-| Create a "modeling" report                                 |         |       |  4:56 |   6.0 |
+| Create a "modeling" report                                 |         |       |  4:56 |   5.9 |
 | Move visual studio related options to top profile          |         |       |  0:17 |   0.3 |
 | Fix incorrect message keyword when detecting ODB includes  |         |       |  0:29 |   0.6 |
 | Meta-data keys are in the inverse order                    |         |       |  0:39 |   0.8 |
-| Creating reference cycles produces strange errors          |         |       |  5:32 |   6.7 |
+| Creating reference cycles produces strange errors          |         |       |  5:32 |   6.6 |
 | Error on duplicate references                              |         |       |  0:26 |   0.5 |
 | Generate model dependency graph                            |         |       |  1:55 |   2.3 |
 | Make the building of the relational model conditional      |         |       |  0:23 |   0.5 |
 | Make all transform contexts code-generated                 |         |       |  0:08 |   0.2 |
 | Tracer numbering of dumped models is incorrect             |         |       |  0:26 |   0.5 |
 | Fix compilation errors in c++ impl nightly                 |         |       |  0:24 |   0.5 |
-| Add support for meta-data overrides in Dogen               |         |       |  5:16 |   6.4 |
+| Add support for meta-data overrides in Dogen               |         |       |  5:16 |   6.3 |
 | Some model names are too long for windows                  |         |       |  0:28 |   0.6 |
 | Fake type in injection.json model                          |         |       |  0:18 |   0.4 |
 | Add conditional logic for the inclusion of generated tests |         |       |  0:07 |   0.1 |
-| Split generated tests from manual tests                    |         |       |  5:51 |   7.1 |
+| Split generated tests from manual tests                    |         |       |  5:51 |   7.0 |
 | Use clang9 and GCC 9 in nightly and CI                     |         |       |  0:01 |   0.0 |
 | Full generation produces invalid code                      |         |       |  0:38 |   0.8 |
+| Code coverage has not been updated since September         |         |       |  1:19 |   1.6 |
 | Time spent fixing emacs issues                             |         |       |  1:44 |   2.1 |
 | Move registrar into assets                                 |         |       |  5:29 |   6.6 |
-| Upgrade to boost 1.70                                      |         |       | 10:00 |  12.1 |
+| Upgrade to boost 1.70                                      |         |       | 10:00 |  11.9 |
 | Setup laptop to work on dogen                              |         |       |  0:45 |   0.9 |
-| Org-mode as a carrier format for modeling                  |         |       |  5:37 |   6.8 |
-| Add relational tracing support                             |         |       |  6:52 |   8.3 |
-| Consider creating a test build for all facets              |         |       |  0:52 |   1.0 |
-| Code coverage has not been updated since September         |         |       |  1:04 |   1.3 |
+| Org-mode as a carrier format for modeling                  |         |       |  5:37 |   6.7 |
+| Add relational tracing support                             |         |       |  6:52 |   8.2 |
+| Consider creating a test build for all facets              |         |       |  1:28 |   1.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1069,6 +1069,19 @@ includes. We need to understand what causes this and fix it.
 The problem was that we disabled forward declarations on this
 type. Enabling it fixes the issue.
 
+*** COMPLETED Code coverage has not been updated since September      :story:
+    CLOSED: [2019-11-15 Fri 16:40]
+    :LOGBOOK:
+    CLOCK: [2019-11-15 Fri 16:27]--[2019-11-15 Fri 16:42] =>  0:15
+    CLOCK: [2019-11-15 Fri 15:10]--[2019-11-15 Fri 15:41] =>  0:31
+    CLOCK: [2019-11-15 Fri 15:03]--[2019-11-15 Fri 15:09] =>  0:06
+    CLOCK: [2019-11-15 Fri 14:35]--[2019-11-15 Fri 15:02] =>  0:27
+    :END:
+
+For some reason we have not been generating coverage reports for a
+couple of months. In addition, don't submit CI to both coveralls and
+codecov. We want CI to go to coveralls and nightlies to go to codecov.
+
 *** STARTED Time spent fixing emacs issues                            :story:
     :LOGBOOK:
     CLOCK: [2019-11-08 Fri 10:18]--[2019-11-08 Fri 10:43] =>  0:25
@@ -1404,6 +1417,8 @@ runs. The schema should be designed with this in mind.
 
 *** STARTED Consider creating a test build for all facets             :story:
     :LOGBOOK:
+    CLOCK: [2019-11-15 Fri 17:56]--[2019-11-15 Fri 17:59] =>  0:03
+    CLOCK: [2019-11-15 Fri 16:42]--[2019-11-15 Fri 17:15] =>  0:33
     CLOCK: [2019-11-15 Fri 12:10]--[2019-11-15 Fri 12:38] =>  0:28
     CLOCK: [2019-11-15 Fri 11:56]--[2019-11-15 Fri 12:09] =>  0:13
     CLOCK: [2019-11-15 Fri 11:42]--[2019-11-15 Fri 11:53] =>  0:11
@@ -1456,16 +1471,26 @@ Notes:
   - "generated" build: only runs the generated tests. Must not run the
     manully generated tests.
 
-*** STARTED Code coverage has not been updated since September        :story:
-    :LOGBOOK:
-    CLOCK: [2019-11-15 Fri 15:10]--[2019-11-15 Fri 15:41] =>  0:31
-    CLOCK: [2019-11-15 Fri 15:03]--[2019-11-15 Fri 15:09] =>  0:06
-    CLOCK: [2019-11-15 Fri 14:35]--[2019-11-15 Fri 15:02] =>  0:27
-    :END:
+*** Code coverage does not show file lever results                    :story:
 
-For some reason we have not been generating coverage reports for a
-couple of months. In addition, don't submit CI to both coveralls and
-codecov. We want CI to go to coveralls and nightlies to go to codecov.
+We seem to be pointing to a incorrect location on github to find the
+source code. Example:
+
+- [[https://coveralls.io/builds/27018488/source?filename=dogen/include/dogen/types/configuration.hpp][configuration.hpp]]
+
+For coveralls, we do seem to be able to see the file itself, but not
+the lines covered:
+
+- [[https://codecov.io/gh/MASD-Project/dogen/src/master/projects/dogen/src/types/configuration.cpp][configuration.cpp]]
+
+*** Code coverage does not include odb files                          :story:
+
+The latest code coverage reports are excluding ODB files. We need to
+understand why kcov is ignoring those.
+
+Links:
+
+- [[https://codecov.io/gh/MASD-Project/cpp_ref_impl/tree/master/projects/cpp_ref_impl.northwind][cpp_ref_impl.northwind in codecov]]
 
 *** Generated tests fail when model has nothing to test               :story:
 
