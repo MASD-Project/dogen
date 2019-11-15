@@ -439,9 +439,6 @@
       "stereotypes": [
         "masd::fluent"
       ],
-      "tagged_values": {
-        "masd.generation.cpp.types.class_forward_declarations.enabled": "false"
-      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
