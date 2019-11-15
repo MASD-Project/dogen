@@ -5057,7 +5057,7 @@ for the element.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#false#</dia:string>
+            <dia:string>#true#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
