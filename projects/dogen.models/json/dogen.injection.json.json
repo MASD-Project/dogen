@@ -1,5 +1,5 @@
 {
-  "documentation": "Provides file importing support for JSON.\n",
+  "documentation": "Provides file importing support for JSON.\n\nNote: generated tests have been disabled for this model because\nthere are no generated types to test. This causes the generated\ntests to fail. Once generated types have been added (or the bug\nis fixed) remove this configuration.\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "dogen.injection.json",
@@ -21,6 +21,7 @@
     "masd.extraction.delete_empty_directories": "true",
     "masd.generation.cpp.enabled": "true",
     "masd.generation.cpp.standard": "c++-17",
+    "masd.generation.cpp.tests.enabled": "false",
     "masd.variability.profile": "dogen.profiles.base.default_profile"
   },
   "elements": [
@@ -64,10 +65,6 @@
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "fake_test",
       "fallback_element_type": "masd::object"
     }
   ]
