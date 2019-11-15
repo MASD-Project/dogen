@@ -5,49 +5,51 @@
 
 * Mission Statement
 
-- Move fabric into coding meta-model.
+- Incorporate the relational model into Dogen.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-14 Thu 08:57]
+#+CAPTION: Clock summary at [2019-11-15 Fri 11:24]
 | <75>                                                      |         |       |       |       |
 | Headline                                                  | Time    |       |       |     % |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                              | *79:07* |       |       | 100.0 |
+| *Total time*                                              | *79:55* |       |       | 100.0 |
 |-----------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                   | 79:07   |       |       | 100.0 |
-| Active                                                    |         | 79:07 |       | 100.0 |
-| Edit release notes for previous sprint                    |         |       |  3:36 |   4.6 |
+| Stories                                                   | 79:55   |       |       | 100.0 |
+| Active                                                    |         | 79:55 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  3:36 |   4.5 |
 | Create a demo and presentation for previous sprint        |         |       |  1:39 |   2.1 |
-| Time spent producing coding videos                        |         |       |  2:11 |   2.8 |
-| Sprint and product backlog grooming                       |         |       |  6:09 |   7.8 |
+| Time spent producing coding videos                        |         |       |  2:22 |   3.0 |
+| Sprint and product backlog grooming                       |         |       |  6:09 |   7.7 |
 | Remove test model sanitizer                               |         |       |  0:20 |   0.4 |
 | Remove master headers                                     |         |       |  1:12 |   1.5 |
 | Fix the issues with tests in reference model              |         |       |  3:53 |   4.9 |
 | Update static strings to string views                     |         |       |  1:15 |   1.6 |
-| ODB include directories is incorrect                      |         |       |  1:43 |   2.2 |
+| ODB include directories is incorrect                      |         |       |  1:43 |   2.1 |
 | Create a "modeling" report                                |         |       |  4:56 |   6.2 |
 | Move visual studio related options to top profile         |         |       |  0:17 |   0.4 |
 | Fix incorrect message keyword when detecting ODB includes |         |       |  0:29 |   0.6 |
 | Meta-data keys are in the inverse order                   |         |       |  0:39 |   0.8 |
-| Creating reference cycles produces strange errors         |         |       |  5:32 |   7.0 |
+| Creating reference cycles produces strange errors         |         |       |  5:32 |   6.9 |
 | Error on duplicate references                             |         |       |  0:26 |   0.5 |
 | Generate model dependency graph                           |         |       |  1:55 |   2.4 |
 | Make the building of the relational model conditional     |         |       |  0:23 |   0.5 |
 | Make all transform contexts code-generated                |         |       |  0:08 |   0.2 |
 | Tracer numbering of dumped models is incorrect            |         |       |  0:26 |   0.5 |
 | Fix compilation errors in c++ impl nightly                |         |       |  0:24 |   0.5 |
-| Add support for meta-data overrides in Dogen              |         |       |  5:16 |   6.7 |
+| Add support for meta-data overrides in Dogen              |         |       |  5:16 |   6.6 |
+| Some model names are too long for windows                 |         |       |  0:28 |   0.6 |
+| Fake type in injection.json model                         |         |       |  0:09 |   0.2 |
 | Time spent fixing emacs issues                            |         |       |  1:44 |   2.2 |
 | Move registrar into assets                                |         |       |  5:29 |   6.9 |
-| Upgrade to boost 1.70                                     |         |       | 10:00 |  12.6 |
+| Upgrade to boost 1.70                                     |         |       | 10:00 |  12.5 |
 | Setup laptop to work on dogen                             |         |       |  0:45 |   0.9 |
-| Org-mode as a carrier format for modeling                 |         |       |  5:37 |   7.1 |
-| Add relational tracing support                            |         |       |  6:52 |   8.7 |
-| Split generated tests from manual tests                   |         |       |  5:51 |   7.4 |
+| Org-mode as a carrier format for modeling                 |         |       |  5:37 |   7.0 |
+| Add relational tracing support                            |         |       |  6:52 |   8.6 |
+| Split generated tests from manual tests                   |         |       |  5:51 |   7.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -225,6 +227,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Time spent producing coding videos                        :story:
     :LOGBOOK:
+    CLOCK: [2019-11-15 Fri 10:35]--[2019-11-15 Fri 10:46] =>  0:11
     CLOCK: [2019-11-13 Wed 21:05]--[2019-11-13 Wed 21:20] =>  0:15
     CLOCK: [2019-11-13 Wed 08:18]--[2019-11-13 Wed 08:22] =>  0:04
     CLOCK: [2019-11-08 Fri 14:28]--[2019-11-08 Fri 15:00] =>  0:32
@@ -861,6 +864,38 @@ alternative is to create these tests on the fly:
 
 During the transition phase, we will remove all of the existing tests.
 
+*** COMPLETED Some model names are too long for windows               :story:
+    CLOSED: [2019-11-15 Fri 11:15]
+    :LOGBOOK:
+    CLOCK: [2019-11-15 Fri 10:47]--[2019-11-15 Fri 11:15] =>  0:28
+    :END:
+
+We are hitting a familiar error on windows builds:
+
+: [00:15:17] C:\Program Files (x86)\Microsoft Visual
+: Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(321,5):
+: error MSB3491: Could not write lines to file
+: "cpp_ref_impl.do_not_delete_empty_dirs.generated_tests.dir\Release\cpp_ref_.590618F1.tlog\cpp_ref_impl.do_not_delete_empty_dirs.generated_tests.lastbuildstate". The
+: specified path, file name, or both are too long. The fully qualified
+: file name must be less than 260 characters, and the directory name
+: must be less than 248 characters.
+: [C:\projects\cpp-ref-impl\build\output\msvc\Release\projects\cpp_ref_impl.do_not_delete_empty_dirs\generated_tests\cpp_ref_impl.do_not_delete_empty_dirs.generated_tests.vcxproj]
+
+We need to rename the following models:
+
+- two layers with objects: two layers.
+- do not delete empty folders: skip empty folders
+
+*** COMPLETED Fake type in injection.json model                       :story:
+    CLOSED: [2019-11-15 Fri 11:24]
+    :LOGBOOK:
+    CLOCK: [2019-11-15 Fri 11:15]--[2019-11-15 Fri 11:24] =>  0:09
+    :END:
+
+We added a fake type to the injection.json model (see [[*Generated tests fail when model has nothing to test][Generated tests
+fail when model has nothing to test]]). There is a better solution to
+this: just disable generated tests in this model for now.
+
 *** STARTED Time spent fixing emacs issues                            :story:
     :LOGBOOK:
     CLOCK: [2019-11-08 Fri 10:18]--[2019-11-08 Fri 10:43] =>  0:25
@@ -1128,6 +1163,7 @@ Notes:
   - implement adapters for each model to convert them into relational
     model types.
   - implement the relational backend.
+- Add relational model to the dogen model tests.
 
 Merged stories:
 
@@ -1319,6 +1355,52 @@ to move all tests into this directory.
 
 Note that we cannot do the locator clean up until we sort out this mess.
 
+*** Add conditional logic for the inclusion of generated tests        :story:
+
+At present the generated CMake files do not take into account the
+generated test folder:
+
+: if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
+:    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
+: endif()
+
+*** Generated tests fail when model has nothing to test               :story:
+
+In cases where we are generating tests for a model which has nothing
+to test - from a dogen generated code perspective - the tests will
+fail with an error. This is because boost test expects to have at
+least one test registered. In the past we have solved this by adding
+"fake tests" which kept the test suite green until we added real
+tests. However, for generated code, we need to somehow determine when
+the fake tests should be injected.
+
+This is not a trivial thing to do because we need to ensure that the
+test template did not emit a single test for a given entity, and then
+look at all entities and see if there is at least one test or not.
+
+Example fake tests:
+
+#+begin_src c++
+#include <boost/test/unit_test.hpp>
+#include "dogen.utility/types/test/logging.hpp"
+
+namespace {
+
+const std::string empty;
+const std::string test_module("dogen.tests");
+const std::string test_suite("fake_tests");
+
+}
+
+BOOST_AUTO_TEST_SUITE(fake_tests)
+
+BOOST_AUTO_TEST_CASE(test) {
+    SETUP_TEST_LOG("test");
+}
+
+BOOST_AUTO_TEST_SUITE_END()
+#+end_src
+
 *** Code coverage has not been updated since September                :story:
 
 For some reason we have not been generating coverage reports for a
@@ -1370,43 +1452,6 @@ should still create a profile and model all tests as proper entities
 instead of bypassing the modeling system. We want to move to a world
 were *all* files in the system can be attributable to modeling
 entities.
-
-*** Generated tests fail when model has nothing to test               :story:
-
-In cases where we are generating tests for a model which has nothing
-to test - from a dogen generated code perspective - the tests will
-fail with an error. This is because boost test expects to have at
-least one test registered. In the past we have solved this by adding
-"fake tests" which kept the test suite green until we added real
-tests. However, for generated code, we need to somehow determine when
-the fake tests should be injected.
-
-This is not a trivial thing to do because we need to ensure that the
-test template did not emit a single test for a given entity, and then
-look at all entities and see if there is at least one test or not.
-
-Example fake tests:
-
-#+begin_src c++
-#include <boost/test/unit_test.hpp>
-#include "dogen.utility/types/test/logging.hpp"
-
-namespace {
-
-const std::string empty;
-const std::string test_module("dogen.tests");
-const std::string test_suite("fake_tests");
-
-}
-
-BOOST_AUTO_TEST_SUITE(fake_tests)
-
-BOOST_AUTO_TEST_CASE(test) {
-    SETUP_TEST_LOG("test");
-}
-
-BOOST_AUTO_TEST_SUITE_END()
-#+end_src
 
 *** Consider creating a test build for all facets                     :story:
 
@@ -2016,3 +2061,17 @@ support was removed.
 
 We seem to have a number of tests commented out in
 injection.dia. Investigate why and if possible, reactivate them.
+*** CANCELLED Create a test for "not deleting empty directories"      :story:
+    CLOSED: [2019-11-15 Fri 11:23]
+
+*Rationale*: test existed but name of test did not match the model
+name.
+
+At present we have created a model to test that setting to false the
+flag =masd.extraction.delete_empty_directories= results in not
+deleting empty directories. We were probably testing this correctly
+during the test model sanitizer days but when moving the tests into
+dogen we seem to have lost this one.
+
+The test should create one or more empty folders inside the model, run
+code generation and ensure the folders are still there afterwards.
