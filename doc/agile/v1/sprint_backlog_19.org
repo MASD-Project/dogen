@@ -12,28 +12,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-15 Fri 12:09]
+#+CAPTION: Clock summary at [2019-11-15 Fri 12:38]
 | <75>                                                       |         |       |       |       |
 | Headline                                                   | Time    |       |       |     % |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                               | *80:36* |       |       | 100.0 |
+| *Total time*                                               | *81:04* |       |       | 100.0 |
 |------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                    | 80:36   |       |       | 100.0 |
-| Active                                                     |         | 80:36 |       | 100.0 |
-| Edit release notes for previous sprint                     |         |       |  3:36 |   4.5 |
+| Stories                                                    | 81:04   |       |       | 100.0 |
+| Active                                                     |         | 81:04 |       | 100.0 |
+| Edit release notes for previous sprint                     |         |       |  3:36 |   4.4 |
 | Create a demo and presentation for previous sprint         |         |       |  1:39 |   2.0 |
 | Time spent producing coding videos                         |         |       |  2:22 |   2.9 |
 | Sprint and product backlog grooming                        |         |       |  6:09 |   7.6 |
 | Remove test model sanitizer                                |         |       |  0:20 |   0.4 |
 | Remove master headers                                      |         |       |  1:12 |   1.5 |
 | Fix the issues with tests in reference model               |         |       |  3:53 |   4.8 |
-| Update static strings to string views                      |         |       |  1:15 |   1.6 |
+| Update static strings to string views                      |         |       |  1:15 |   1.5 |
 | ODB include directories is incorrect                       |         |       |  1:43 |   2.1 |
 | Create a "modeling" report                                 |         |       |  4:56 |   6.1 |
-| Move visual studio related options to top profile          |         |       |  0:17 |   0.4 |
+| Move visual studio related options to top profile          |         |       |  0:17 |   0.3 |
 | Fix incorrect message keyword when detecting ODB includes  |         |       |  0:29 |   0.6 |
 | Meta-data keys are in the inverse order                    |         |       |  0:39 |   0.8 |
-| Creating reference cycles produces strange errors          |         |       |  5:32 |   6.9 |
+| Creating reference cycles produces strange errors          |         |       |  5:32 |   6.8 |
 | Error on duplicate references                              |         |       |  0:26 |   0.5 |
 | Generate model dependency graph                            |         |       |  1:55 |   2.4 |
 | Make the building of the relational model conditional      |         |       |  0:23 |   0.5 |
@@ -44,15 +44,15 @@
 | Some model names are too long for windows                  |         |       |  0:28 |   0.6 |
 | Fake type in injection.json model                          |         |       |  0:18 |   0.4 |
 | Add conditional logic for the inclusion of generated tests |         |       |  0:07 |   0.1 |
-| Split generated tests from manual tests                    |         |       |  5:51 |   7.3 |
+| Split generated tests from manual tests                    |         |       |  5:51 |   7.2 |
 | Use clang9 and GCC 9 in nightly and CI                     |         |       |  0:01 |   0.0 |
-| Time spent fixing emacs issues                             |         |       |  1:44 |   2.2 |
+| Time spent fixing emacs issues                             |         |       |  1:44 |   2.1 |
 | Move registrar into assets                                 |         |       |  5:29 |   6.8 |
-| Upgrade to boost 1.70                                      |         |       | 10:00 |  12.4 |
+| Upgrade to boost 1.70                                      |         |       | 10:00 |  12.3 |
 | Setup laptop to work on dogen                              |         |       |  0:45 |   0.9 |
-| Org-mode as a carrier format for modeling                  |         |       |  5:37 |   7.0 |
+| Org-mode as a carrier format for modeling                  |         |       |  5:37 |   6.9 |
 | Add relational tracing support                             |         |       |  6:52 |   8.5 |
-| Consider creating a test build for all facets              |         |       |  0:24 |   0.5 |
+| Consider creating a test build for all facets              |         |       |  0:52 |   1.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1388,6 +1388,7 @@ runs. The schema should be designed with this in mind.
 
 *** STARTED Consider creating a test build for all facets             :story:
     :LOGBOOK:
+    CLOCK: [2019-11-15 Fri 12:10]--[2019-11-15 Fri 12:38] =>  0:28
     CLOCK: [2019-11-15 Fri 11:56]--[2019-11-15 Fri 12:09] =>  0:13
     CLOCK: [2019-11-15 Fri 11:42]--[2019-11-15 Fri 11:53] =>  0:11
     :END:
@@ -1438,6 +1439,13 @@ Notes:
     in git.
   - "generated" build: only runs the generated tests. Must not run the
     manully generated tests.
+
+*** Serialisation forward declarations are cyclical                   :story:
+
+At present we are including the serialisation forward declaration from
+the types header, and also including the types header from the
+serialisation forward declaration. We should probably include the
+types forward declaration.
 
 *** Generated tests fail when model has nothing to test               :story:
 
