@@ -36,6 +36,9 @@ set_target_properties(${lib_target_name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
 target_link_libraries(${lib_target_name}
+    dogen.archetypes.lib
+    dogen.variability.lib
+    dogen.tracing.lib
     dogen.lib
     dogen.utility.lib
     dogen.dia.lib
