@@ -82,7 +82,7 @@ const std::string path_cpp_ref_impl_split_project_dia(
 const std::string path_cpp_ref_impl_std_model_dia(
     "cpp_ref_impl.std_model.dia");
 const std::string path_cpp_ref_impl_two_layers_with_objects_dia(
-    "cpp_ref_impl.two_layers_with_objects.dia");
+    "cpp_ref_impl.two_layers.dia");
 const std::string path_cpp_ref_impl_delete_extra_dia(
     "cpp_ref_impl.delete_extra.dia");
 const std::string path_cpp_ref_impl_ignore_extra_dia(
@@ -92,7 +92,7 @@ const std::string path_cpp_ref_impl_force_write_dia(
 const std::string path_cpp_ref_impl_out_of_sync_dia(
     "cpp_ref_impl.out_of_sync.dia");
 const std::string path_cpp_ref_impl_do_not_delete_empty_dirs_dia(
-    "cpp_ref_impl.do_not_delete_empty_dirs.dia");
+    "cpp_ref_impl.skip_empty_dirs.dia");
 
 /*
  * JSON
@@ -132,7 +132,7 @@ const std::string path_cpp_ref_impl_split_project_json(
 const std::string path_cpp_ref_impl_std_model_json(
     "cpp_ref_impl.std_model.json");
 const std::string path_cpp_ref_impl_two_layers_with_objects_json(
-    "cpp_ref_impl.two_layers_with_objects.json");
+    "cpp_ref_impl.two_layers.json");
 const std::string path_cpp_ref_impl_delete_extra_json(
     "cpp_ref_impl.delete_extra.json");
 const std::string path_cpp_ref_impl_ignore_extra_json(
@@ -142,7 +142,7 @@ const std::string path_cpp_ref_impl_force_write_json(
 const std::string path_cpp_ref_impl_out_of_sync_json(
     "cpp_ref_impl.out_of_sync.json");
 const std::string path_cpp_ref_impl_do_not_delete_empty_dirs_json(
-    "cpp_ref_impl.do_not_delete_empty_dirs.json");
+    "cpp_ref_impl.skip_empty_dirs.json");
 
 }
 

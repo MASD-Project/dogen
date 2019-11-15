@@ -151,6 +151,11 @@ BOOST_AUTO_TEST_CASE(dogen_assets_json_produces_expected_model) {
 BOOST_AUTO_TEST_CASE(empty_folders_are_deleted_when_delete_empty_folders_flag_is_on) {
     SETUP_TEST_LOG("empty_folders_are_deleted_when_delete_empty_folders_flag_is_on");
 
+    /*
+     * Note: this test is for model cpp_ref_impl.two_layers. The model
+     * names must be small due to windows limitations so that is why
+     * the test names do not match the model names.
+     */
     using dogen::utility::test_data::dogen_generation;
     const auto t(dogen_generation::input_dogen_dia());
     const auto od(dogen_generation::output_directory());
@@ -181,6 +186,11 @@ BOOST_AUTO_TEST_CASE(empty_folders_are_deleted_when_delete_empty_folders_flag_is
 BOOST_AUTO_TEST_CASE(empty_folders_are_not_deleted_when_delete_empty_folders_flag_is_off) {
     SETUP_TEST_LOG_DEBUG("empty_folders_are_not_when_delete_empty_folders_flag_is_off");
 
+    /*
+     * Note: this test is for model cpp_ref_impl.skip_empty_dirs. The
+     * model names must be small due to windows limitations so that is
+     * why the test names do not match the model names.
+     */
     using dogen::utility::test_data::cpp_ref_impl_generation;
     const auto t(cpp_ref_impl_generation::
         input_cpp_ref_impl_do_not_delete_empty_dirs_json());

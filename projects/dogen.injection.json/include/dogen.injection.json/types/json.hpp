@@ -27,6 +27,11 @@
 
 /**
  * @brief Provides file importing support for JSON.
+ *
+ * Note: generated tests have been disabled for this model because
+ * there are no generated types to test. This causes the generated
+ * tests to fail. Once generated types have been added (or the bug
+ * is fixed) remove this configuration.
  */
 namespace dogen::injection::json {
 }
