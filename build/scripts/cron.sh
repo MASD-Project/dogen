@@ -12,7 +12,7 @@ workspace="${HOME}/nightly"
 configuration=Debug
 generator=Ninja
 number_of_jobs=6
-build_group=Nightly
+build_group=Experimental
 logs_dir=../logs
 clang_compiler=clang9
 gcc_compiler=gcc9
@@ -44,11 +44,11 @@ if [ ! -d "${git_dir}" ]; then
 fi
 cd ${git_dir}
 
-compiler=${clang_compiler}
-ctest --extra-verbose --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group}"  > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
+# compiler=${clang_compiler}
+# ctest --extra-verbose --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group}"  > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
 
-compiler=${gcc_compiler}
-ctest --extra-verbose --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group}"  > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
+# compiler=${gcc_compiler}
+# ctest --extra-verbose --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group}"  > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
 
 #
 # Dogen
@@ -66,7 +66,7 @@ if [ -d "${pristine_dir}" ]; then
 fi
 
 git clone --depth=3 ${git_url} ${git_dir}
-cp -r ${git_dir} ${projects_dir}
+cp -r ${git_dir} ${pristine_dir}
 export DOGEN_PROJECTS_DIRECTORY="${pristine_dir}/projects"
 
 cd ${git_dir}
