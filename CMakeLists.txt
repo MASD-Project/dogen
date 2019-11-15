@@ -457,8 +457,14 @@ if (DOGEN_CLI_EXECUTABLE)
 
     # model processing options
     set(DOGEN_PROCESSING_OPTIONS "")
+    # uncomment the next line if you need dry runs.
+    # set(DOGEN_PROCESSING_OPTIONS ${DOGEN_PROCESSING_OPTIONS}
+    #    --dry-run-mode-enabled)
+
+    message(STATUS "Full generation: ${WITH_FULL_GENERATION}")
     if (WITH_FULL_GENERATION)
-        set(DOGEN_PROCESSING_OPTIONS --variability-override masd.variability.profile,dogen.profiles.base.test_all_facets)
+        set(DOGEN_PROCESSING_OPTIONS ${DOGEN_DIFFING_OPTIONS}
+            --variability-override masd.variability.profile,dogen.profiles.base.test_all_facets)
     endif()
 
     # uncomment to enable logging.
@@ -478,7 +484,6 @@ if (DOGEN_CLI_EXECUTABLE)
     # set(DOGEN_DIFFING_OPTIONS ${DOGEN_DIFFING_OPTIONS} --diffing-enabled)
     # set(DOGEN_DIFFING_OPTIONS ${DOGEN_DIFFING_OPTIONS}
     #    --diffing-destination console)
-    # set(DOGEN_DIFFING_OPTIONS ${DOGEN_DIFFING_OPTIONS} --dry-run-mode-enabled)
 
     set(DOGEN_REPORTING_OPTIONS "")
     # uncomment to enable reporting
