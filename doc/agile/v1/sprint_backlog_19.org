@@ -896,6 +896,23 @@ We added a fake type to the injection.json model (see [[*Generated tests fail wh
 fail when model has nothing to test]]). There is a better solution to
 this: just disable generated tests in this model for now.
 
+*** COMPLETED Add conditional logic for the inclusion of generated tests :story:
+    CLOSED: [2019-11-15 Fri 11:33]
+    :LOGBOOK:
+    CLOCK: [2019-11-15 Fri 11:25]--[2019-11-15 Fri 11:32] =>  0:07
+    :END:
+
+At present the generated CMake files do not take into account the
+generated test folder:
+
+: if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
+:    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
+: endif()
+
+Actually the right solution is to remove this hand crafted code from
+generated files. The generated code will insert the =add_subdirectory=
+if the facet is enabled as required.
+
 *** STARTED Time spent fixing emacs issues                            :story:
     :LOGBOOK:
     CLOCK: [2019-11-08 Fri 10:18]--[2019-11-08 Fri 10:43] =>  0:25
@@ -1354,15 +1371,6 @@ Basically we need a fitting name for this facet. Once found, we need
 to move all tests into this directory.
 
 Note that we cannot do the locator clean up until we sort out this mess.
-
-*** Add conditional logic for the inclusion of generated tests        :story:
-
-At present the generated CMake files do not take into account the
-generated test folder:
-
-: if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
-:    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/generated_tests)
-: endif()
 
 *** Generated tests fail when model has nothing to test               :story:
 
