@@ -37,7 +37,7 @@ else
 fi
 
 patterns="--exclude-pattern=/tests/ --include-pattern=/projects/"
-tests="`'ls' ${stage_dir}/bin/*_tests`";
+tests="`'ls' ${stage_dir}/bin/*tests`";
 for t in ${tests}; do
     ${kcov_path} ${patterns} ${coveralls_args} ${stage_dir}/coverage ${t};
     if [ $? -eq 0 ]
