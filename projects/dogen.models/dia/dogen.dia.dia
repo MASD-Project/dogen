@@ -448,7 +448,9 @@
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Attribute value which is made up of other attributes.#</dia:string>
+        <dia:string>#Attribute value which is made up of other attributes.
+
+#DOGEN masd.generation.cpp.tests.enabled=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4086,7 +4088,7 @@ between the class and the slot concepts, we renamed it.#</dia:string>
         <dia:point val="-10,-60"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-10.05,-60.05;17.13,-41.45"/>
+        <dia:rectangle val="-10.05,-60.05;17.13,-44.65"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4098,7 +4100,7 @@ between the class and the slot concepts, we renamed it.#</dia:string>
         <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="18.500000000000004"/>
+        <dia:real val="15.300000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
