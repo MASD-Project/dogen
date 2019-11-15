@@ -19,13 +19,40 @@
 #
 stage_dir="$1";
 kcov_path="$2";
-coveralls_id="$3";
-coveralls_args="--coveralls-id=${coveralls_id}"
-patterns="--exclude-pattern=/tests/ --include-pattern=/projects/"
 
+#
+# Note that this script has a bit of a weird logic: we want to submit
+# to coveralls or to codecov, but not to both at the same time. This
+# is because our nightly builds include generated tests and thus
+# provide a different "kind" of coverage. The regular CI builds only
+# have manually crafted tests, checking for the domain. Both of these
+# numbers are useful but must be interpreted in isolation.
+#
+coveralls_id="$3";
+if [ -z "$coveralls_id" ]
+then
+    coveralls_args=""
+else
+    coveralls_args="--coveralls-id=${coveralls_id}"
+fi
+
+patterns="--exclude-pattern=/tests/ --include-pattern=/projects/"
 tests="`'ls' ${stage_dir}/bin/*.tests`";
 for t in ${tests}; do
     ${kcov_path} ${patterns} ${coveralls_args} ${stage_dir}/coverage ${t};
+    if [ $? -eq 0 ]
+    then
+        echo "Created coverage for: $t"
+    else
+        echo "Failed to create coverage for: $t" >&2
+        exit 1
+    fi
 done;
 
-bash <(curl -s https://codecov.io/bash) -s ${stage_dir}/coverage;
+#
+# Submit to codecov if we didn't already submit to coveralls.
+#
+if [ -z "$coveralls_id" ]
+then
+    bash <(curl -s https://codecov.io/bash) -s ${stage_dir}/coverage;
+fi
