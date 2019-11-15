@@ -161,7 +161,7 @@ if(${build_group} MATCHES Nightly)
     # setup valgrind
     find_program(CTEST_MEMORYCHECK_COMMAND NAMES valgrind)
     if(NOT CTEST_MEMORYCHECK_COMMAND)
-        message("valgrind not found, disabling coverage.")
+        message("valgrind not found, disabling it.")
         set(WITH_MEMCHECK false)
     else()
         message("Found valgrind (${CTEST_MEMORYCHECK_COMMAND})...")
