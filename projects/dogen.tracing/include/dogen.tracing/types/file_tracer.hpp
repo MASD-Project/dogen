@@ -72,8 +72,9 @@ private:
     /**
      * @brief Writes an initial input to the filesystem.
      */
+    template<typename Ioable>
     void add_initial_input(const std::string& input_id,
-        const std::string& input) const {
+        const Ioable& input) const {
         if (!detailed_tracing_enabled())
             return;
 
@@ -91,9 +92,10 @@ private:
     void start_chain(const std::string& transform_id,
         const std::string& model_id) const;
 
+    template<typename Ioable>
     void start_chain(const std::string& transform_id,
         const std::string& model_id,
-        const std::string& input) const {
+        const Ioable& input) const {
         start_chain(transform_id, model_id);
 
         if (!detailed_tracing_enabled())
@@ -110,9 +112,10 @@ private:
     void start_transform(const std::string& transform_id,
         const std::string& model_id) const;
 
+    template<typename Ioable>
     void start_transform(const std::string& transform_id,
         const std::string& model_id,
-        const std::string& input) const {
+        const Ioable& input) const {
         start_transform(transform_id, model_id);
 
         if (detailed_tracing_enabled()) {
@@ -125,7 +128,8 @@ private:
 
     void end_chain() const;
 
-    void end_chain(const std::string& output) const {
+    template<typename Ioable>
+    void end_chain(const Ioable& output) const {
         if (detailed_tracing_enabled()) {
             ensure_transform_position_not_empty();
             const auto id(builder_.current()->transform_id());
@@ -137,7 +141,8 @@ private:
 
     void end_transform() const;
 
-    void end_transform(const std::string& output) const {
+    template<typename Ioable>
+    void end_transform(const Ioable& output) const {
         if (detailed_tracing_enabled()) {
             ensure_transform_position_not_empty();
             const auto id(builder_.current()->transform_id());
