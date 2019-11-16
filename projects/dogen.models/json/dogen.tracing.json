@@ -11,6 +11,7 @@
     "masd.injection.reference": "masd.variability",
     "masd.injection.reference": "dogen",
     "masd.injection.reference": "dogen.profiles",
+    "masd.injection.reference": "dogen.relational",
     "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
     "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
     "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
@@ -105,6 +106,22 @@
       "name": "references_printer",
       "stereotypes": [
         "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "file_tracer",
+      "stereotypes": [
+        "dogen::handcrafted::typeable",
+        "dogen::pretty_printable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "relational_tracer",
+      "stereotypes": [
+        "dogen::handcrafted::typeable",
+        "dogen::pretty_printable"
       ],
       "fallback_element_type": "masd::object"
     }
