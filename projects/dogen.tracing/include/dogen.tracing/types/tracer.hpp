@@ -25,16 +25,12 @@
 #pragma once
 #endif
 
-#include <stack>
 #include <list>
 #include <string>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include <boost/filesystem/path.hpp>
+#include "dogen.tracing/types/file_tracer.hpp"
 #include "dogen/types/tracing_configuration.hpp"
-#include "dogen.utility/types/filesystem/file.hpp"
-#include "dogen.tracing/types/metrics.hpp"
-#include "dogen.tracing/types/metrics_builder.hpp"
 
 namespace dogen::tracing {
 
@@ -57,35 +53,15 @@ private:
     void validate() const;
     bool tracing_enabled() const;
     bool detailed_tracing_enabled() const;
-    void handle_output_directory() const;
-    void handle_current_directory() const;
-    void ensure_transform_position_not_empty() const;
 
-    boost::filesystem::path
-    full_path_for_writing(const std::string& transform_id,
-        const std::string& type) const;
-
-    boost::filesystem::path
-    full_path_for_writing(const std::string& filename) const;
-
-    boost::filesystem::path make_path(const boost::filesystem::path& dir,
-        const std::string& fn, const tracing_format tf) const;
-
-    public:
+public:
     /**
      * @brief Writes an initial input to the filesystem.
      */
     template<typename Ioable>
     void add_initial_input(const std::string& input_id,
         const Ioable& input) const {
-
-        if (!detailed_tracing_enabled())
-            return;
-
-        ensure_transform_position_not_empty();
-        const auto p(full_path_for_writing(input_id, "initial_input"));
-        utility::filesystem::write(p, input);
-        ++transform_position_.top();
+        file_tracer_.add_initial_input(input_id, input);
     }
 
     void add_references_graph(const std::string& root_vertex,
@@ -100,15 +76,7 @@ private:
     void start_chain(const std::string& transform_id,
         const std::string& model_id,
         const Ioable& input) const {
-        start_chain(transform_id, model_id);
-
-        if (!detailed_tracing_enabled())
-            return;
-
-        ensure_transform_position_not_empty();
-        const auto p(full_path_for_writing(transform_id, "input"));
-        utility::filesystem::write(p, input);
-        ++transform_position_.top();
+        file_tracer_.start_chain(transform_id, model_id, input);
     }
 
     void start_transform(const std::string& transform_id) const;
@@ -120,41 +88,21 @@ private:
     void start_transform(const std::string& transform_id,
         const std::string& model_id,
         const Ioable& input) const {
-        start_transform(transform_id, model_id);
-
-        if (detailed_tracing_enabled()) {
-            ensure_transform_position_not_empty();
-            const auto p(full_path_for_writing(transform_id, "input"));
-            utility::filesystem::write(p, input);
-            ++transform_position_.top();
-        }
+        file_tracer_.start_transform(transform_id, model_id, input);
     }
 
     void end_chain() const;
 
     template<typename Ioable>
     void end_chain(const Ioable& output) const {
-        if (detailed_tracing_enabled()) {
-            ensure_transform_position_not_empty();
-            const auto id(builder_.current()->transform_id());
-            const auto p(full_path_for_writing(id, "output"));
-            utility::filesystem::write(p, output);
-        }
-        end_chain();
+        file_tracer_.end_chain(output);
     }
 
     void end_transform() const;
 
     template<typename Ioable>
     void end_transform(const Ioable& output) const {
-        if (detailed_tracing_enabled()) {
-            ensure_transform_position_not_empty();
-            const auto id(builder_.current()->transform_id());
-            const auto p(full_path_for_writing(id, "output"));
-            utility::filesystem::write(p, output);
-            ++transform_position_.top();
-        }
-        end_transform();
+        file_tracer_.end_transform(output);
     }
 
     void end_tracing() const;
@@ -163,13 +111,8 @@ public:
     bool operator==(const tracer& rhs) const;
 
 private:
+    file_tracer file_tracer_;
     const boost::optional<tracing_configuration> configuration_;
-    mutable metrics_builder builder_;
-    mutable std::stack<unsigned int> transform_position_;
-    mutable boost::filesystem::path current_directory_;
-    mutable std::string root_vertex_;
-    mutable std::unordered_map<std::string, std::list<std::string>>
-    edges_per_model_;
 };
 
 }
