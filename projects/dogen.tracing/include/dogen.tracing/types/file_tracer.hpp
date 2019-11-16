@@ -25,24 +25,142 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <stack>
+#include <list>
+#include <string>
+#include <unordered_map>
+#include <boost/optional.hpp>
+#include <boost/filesystem/path.hpp>
+#include "dogen/types/tracing_configuration.hpp"
+#include "dogen.utility/types/filesystem/file.hpp"
+#include "dogen.tracing/types/metrics.hpp"
+#include "dogen.tracing/types/metrics_builder.hpp"
 
 namespace dogen::tracing {
 
 class file_tracer final {
 public:
-    file_tracer() = default;
     file_tracer(const file_tracer&) = default;
-    file_tracer(file_tracer&&) = default;
-    ~file_tracer() = default;
-    file_tracer& operator=(const file_tracer&) = default;
+
+public:
+    explicit file_tracer(const boost::optional<tracing_configuration>& cfg);
+
+public:
+    const boost::optional<tracing_configuration> configuration() const {
+        return configuration_;
+    }
+
+private:
+    void validate() const;
+    bool tracing_enabled() const;
+    bool detailed_tracing_enabled() const;
+    void handle_output_directory() const;
+    void handle_current_directory() const;
+    void ensure_transform_position_not_empty() const;
+
+    boost::filesystem::path
+    full_path_for_writing(const std::string& transform_id,
+        const std::string& type) const;
+
+    boost::filesystem::path
+    full_path_for_writing(const std::string& filename) const;
+
+    boost::filesystem::path make_path(const boost::filesystem::path& dir,
+        const std::string& fn, const tracing_format tf) const;
+
+    public:
+    /**
+     * @brief Writes an initial input to the filesystem.
+     */
+    void add_initial_input(const std::string& input_id,
+        const std::string& input) const {
+        if (!detailed_tracing_enabled())
+            return;
+
+        ensure_transform_position_not_empty();
+        const auto p(full_path_for_writing(input_id, "initial_input"));
+        utility::filesystem::write(p, input);
+        ++transform_position_.top();
+    }
+
+    void add_references_graph(const std::string& root_vertex,
+        const std::unordered_map<std::string, std::list<std::string>>&
+        edges_per_model) const;
+
+    void start_chain(const std::string& transform_id) const;
+    void start_chain(const std::string& transform_id,
+        const std::string& model_id) const;
+
+    void start_chain(const std::string& transform_id,
+        const std::string& model_id,
+        const std::string& input) const {
+        start_chain(transform_id, model_id);
+
+        if (!detailed_tracing_enabled())
+            return;
+
+        ensure_transform_position_not_empty();
+        const auto p(full_path_for_writing(transform_id, "input"));
+        utility::filesystem::write(p, input);
+        ++transform_position_.top();
+    }
+
+    void start_transform(const std::string& transform_id) const;
+
+    void start_transform(const std::string& transform_id,
+        const std::string& model_id) const;
+
+    void start_transform(const std::string& transform_id,
+        const std::string& model_id,
+        const std::string& input) const {
+        start_transform(transform_id, model_id);
+
+        if (detailed_tracing_enabled()) {
+            ensure_transform_position_not_empty();
+            const auto p(full_path_for_writing(transform_id, "input"));
+            utility::filesystem::write(p, input);
+            ++transform_position_.top();
+        }
+    }
+
+    void end_chain() const;
+
+    void end_chain(const std::string& output) const {
+        if (detailed_tracing_enabled()) {
+            ensure_transform_position_not_empty();
+            const auto id(builder_.current()->transform_id());
+            const auto p(full_path_for_writing(id, "output"));
+            utility::filesystem::write(p, output);
+        }
+        end_chain();
+    }
+
+    void end_transform() const;
+
+    void end_transform(const std::string& output) const {
+        if (detailed_tracing_enabled()) {
+            ensure_transform_position_not_empty();
+            const auto id(builder_.current()->transform_id());
+            const auto p(full_path_for_writing(id, "output"));
+            utility::filesystem::write(p, output);
+            ++transform_position_.top();
+        }
+        end_transform();
+    }
+
+    void end_tracing() const;
 
 public:
     bool operator==(const file_tracer& rhs) const;
-    bool operator!=(const file_tracer& rhs) const {
-        return !this->operator==(rhs);
-    }
 
+private:
+    const boost::optional<tracing_configuration> configuration_;
+    mutable metrics_builder builder_;
+    mutable std::stack<unsigned int> transform_position_;
+    mutable boost::filesystem::path current_directory_;
+    mutable std::string root_vertex_;
+    mutable std::unordered_map<std::string, std::list<std::string>>
+    edges_per_model_;
 };
 
 }
