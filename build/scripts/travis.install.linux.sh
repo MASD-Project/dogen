@@ -51,11 +51,12 @@ sudo apt-get install -qq libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev
 #
 if [ "$CXX" == "clang++" ]; then
     version="9"
-    server="http://apt.llvm.org/trusty/"
+    release="xenial"
+    server="http://apt.llvm.org/${release}/"
     sources="/etc/apt/sources.list"
-    trusty="llvm-toolchain-trusty"
-    sudo sh -c "echo 'deb ${server} ${trusty}-${version} main' >> ${sources}"
-    sudo sh -c "echo 'deb ${server} ${trusty}-${version} main' >> ${sources}"
+    toolchain="llvm-toolchain-xenial"
+    sudo sh -c "echo 'deb ${server} ${toolchain}-${version} main' >> ${sources}"
+    sudo sh -c "echo 'deb ${server} ${toolchain}-${version} main' >> ${sources}"
     wget -O - http://llvm.org/apt/llvm-snapshot.gpg.key | sudo apt-key add -
     sudo apt-get update -qq
 
