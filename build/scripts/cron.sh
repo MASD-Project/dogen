@@ -73,6 +73,8 @@ cd ${git_dir}
 build/scripts/build.linux.sh Release ${number_of_jobs} ${clang_compiler} dogen.cli
 export DOGEN_FULL_GENERATION="1"
 build/scripts/build.linux.sh Release ${number_of_jobs} ${clang_compiler} gad
+git add -A
+git commit -m "Generated code."
 
 compiler=${clang_compiler}
 ctest --extra-verbose --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${number_of_jobs},build_group=${build_group},minimal_packaging=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
