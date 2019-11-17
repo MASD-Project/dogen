@@ -45,6 +45,7 @@ endif ()
 target_link_libraries(${lib_target_name}
     dogen.lib
     dogen.utility.lib
+    dogen.relational.lib
     $<$<BOOL:${use_msvc_libs}>:bcrypt>
     ${Boost_LIBRARIES})
 

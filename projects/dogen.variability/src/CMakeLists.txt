@@ -38,6 +38,7 @@ target_link_libraries(${lib_target_name}
     dogen.tracing.lib
     dogen.archetypes.lib
     dogen.utility.lib
+    dogen.relational.lib
     ${Boost_LIBRARIES})
 
 install(TARGETS ${lib_target_name}
