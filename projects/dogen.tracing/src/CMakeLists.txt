@@ -42,10 +42,15 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
     set(use_msvc_libs ON)
 endif ()
 
+set(relational_lib "")
+if (WITH_RELATIONAL_SUPPORT)
+    set(relational_lib "dogen.relational.lib")
+endif()
+
 target_link_libraries(${lib_target_name}
     dogen.lib
     dogen.utility.lib
-    dogen.relational.lib
+    ${relational_lib}
     $<$<BOOL:${use_msvc_libs}>:bcrypt>
     ${Boost_LIBRARIES})
 

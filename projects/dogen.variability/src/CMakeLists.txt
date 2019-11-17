@@ -33,12 +33,17 @@ set_target_properties(${lib_target_name}
 set_target_properties(${lib_target_name}
   PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
+set(relational_lib "")
+if (WITH_RELATIONAL_SUPPORT)
+    set(relational_lib "dogen.relational.lib")
+endif()
+
 target_link_libraries(${lib_target_name}
     dogen.lib
     dogen.tracing.lib
     dogen.archetypes.lib
     dogen.utility.lib
-    dogen.relational.lib
+    ${relational_lib}
     ${Boost_LIBRARIES})
 
 install(TARGETS ${lib_target_name}
