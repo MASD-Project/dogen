@@ -24,13 +24,177 @@
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
-*** Edit release notes for previous sprint                            :story:
+*** STARTED Edit release notes for previous sprint                    :story:
+    :LOGBOOK:
+    CLOCK: [2019-11-19 Tue 17:41]--[2019-11-19 Tue 18:28] =>  0:47
+    CLOCK: [2019-11-19 Tue 07:45]--[2019-11-19 Tue 08:28] =>  0:43
+    CLOCK: [2019-11-18 Mon 17:30]--[2019-11-18 Mon 18:13] =>  0:43
+    :END:
 
 Add github release notes for previous sprint.
 
 Title: Dogen v1.0.19, "TBD"
 
 #+begin_src markdown
+**DRAFT: Release notes under construction**
+
+# Introduction
+
+This sprint was marked by the return to "part-time" work on
+Dogen. After a cadence of successful 2-week sprints, it was quite
+difficult to adjust to the long, drawn-out process of cobbling
+together a release from whatever free time one could find. To recap,
+the target for a "part-time" sprint is to clock around 80 hours worth
+of work over a rather unpredictable period of time. Most of Dogen has
+been developed in this fashion but, clearly, it is not ideal fodder
+for programming. These types of sprints lend themselves to more
+fragmented work, given the nature of the time slots available, and it
+is much harder to focus on complex tasks that require loading a lot of
+state into the brain. The diverse number of small tasks clearly
+attests to this.
+
+Having said that, not all was gloom and doom with Sprint 19, and much
+was achieved - both invisible and visible to end-users. And efficiency
+went markedly up after adding a new tool to our arsenal of
+"motivational tools": the recording coding sessions. So brace
+yourselves to review yet another excting Dogen sprint.
+
+# User visible changes
+
+This section covers stories that affect end users, with the video
+providing a quick demonstration of the new features, and the sections
+below describing the features in more detail.
+
+[![Sprint 1.0.19 Demo](https://img.youtube.com/vi/TkYQTW_jAGk/0.jpg)](https://youtu.be/TkYQTW_jAGk)
+
+## Add support for variability overrides in Dogen
+
+The sprint's key feature is /variability overrides/. It was
+specifically designed to allow the overriding of model profiles, so
+that the same diagram can produce different "kinds" of outputs. In
+order to understand how the feature came about, we need to revist a
+bit of Dogen history. As you may recall, amongst many other things,
+profiles control which facets are to be expressed for a given model
+(.e.g Boost serilaisation, hashing, and so forth). In the MDE domain,
+these ideas have been generalised into "variability modeling", because
+they gives you a dimension in which you can "vary" how any given
+modeling element is expressed - i.e. the same entity can configured in
+different ways.
+
+Of course, models are associated to profiles by using nothing but
+meta-data, which ultimately is how all variability information is
+transported. A typical Dogen model looks like so:
+
+```
+#DOGEN masd.variability.profile=dogen.profiles.base.default_profile
+```
+
+This then results in reusing the configuration defined by
+```default_profile``` - an entitty in the referenced model
+```dogen.profiles```.
+
+Profiles have evolved from the observation that the meta-data used for
+configuration is, in many cases, common to several models and
+therefore should be shared. This approach has served us well thus far,
+but one implicit assumption it carried is that there would always only
+be a need for /one profile per model/. In truth, we have two
+distinct - and incompatible - needs when generating Dogen's own
+models:
+
+- from a production perspective, we want to generate the smallest
+  amount of code required so that we avoid bloating our binaries with
+  unecessary code. Thus we want our profiles to be lean and mean.
+- from a development and Q&A perspective, we want to test all possible
+  facets with realistic use cases so that we can validate empirically
+  the quality of the generated code. Dogen's own models are a great
+  sample point for this validation, and should therefore make use of
+  as many facets as possible.
+
+This problem was not obvious initially because we could afford to
+generate all facets for all models and ignore the bloat. However, as
+the number of facets increased and as the number of elements in each
+model grew, we eventually ran out of build time to compile all of the
+generated code. Since then, we have resorted to "clever" hacks to
+allow these two conflicting requirements to coexist, such as enabling
+only a few facets in certain models. In truth, the low hanging fruit
+had been exhausted a few sprints ago, and we consistently started to
+have build failures due to time outs.
+
+Not being able to trust your CI is a showstopper, of course, so this
+sprint we sat down to solve this problem in a somewhat general
+manner. Variability overrides was the chosen solution, and it was
+implemented as follows.
+
+A new command line option was added to the Processing section for this
+feature, called ```--variability-override ```. The option expects a
+tuple of up to five elements:
+```[MODEL_ID,][ELEMENT_ID,][ATTRIBUTE_ID,]KEY,VALUE```
+
+The first three optional elements are used to bind to the target of
+the override. The binding logic is somewhat contrived:
+
+1. if no model is supplied, the override applies to any model, else it
+   applies to the requested model;
+2. if no element is supplied, the override is applicable only to the
+   model itself;
+3. if an element is supplied, the binding applies to that specific
+   element;
+4. an attribute can only be supplied if an element is supplied. The
+   binding will only activate if it finds a matching element and a
+   matching attribute.
+
+To be fair, we only really needed the first type of binding.
+
+
+masd.variability.profile,dogen.profiles.base.test_all_facets)
+
+
+
+
+It was added to address a specific use case, and we're not
+entirely sure it has any other use, but it was certainly interesting
+to see how the core architecture
+
+The two k
+
+
+
+Generate model dependency graph
+
+Tracer numbering of dumped models is incorrect
+
+
+Creating reference cycles produces strange errors
+Error on duplicate references
+
+
+Remove master headers
+Meta-data keys are in the inverse order
+
+
+# Development Matters
+
+## Significant Internal Stories
+
+## Resourcing
+
+## Planning
+
+# Next Sprint
+
+# Binaries
+
+You can download binaries from [Bintray](https://bintray.com/masd-project/main/dogen) for OSX, Linux and Windows (all 64-bit):
+
+- [dogen_1.0.19_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.19/dogen_1.0.19_amd64-applications.deb)
+- [dogen-1.0.19-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.19/DOGEN-1.0.19-Darwin-x86_64.dmg)
+- [dogen-1.0.19-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/DOGEN-1.0.19-Windows-AMD64.msi)
+
+**Note:** The OSX and Linux binaries are not stripped at present and so are larger than they should be. We have [an outstanding story](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org#linux-and-osx-binaries-are-not-stripped) to address this issue, but sadly CMake does not make this trivial.
+
+For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
+
+Happy Modeling!
 #+end_src markdown
 
 - [[https://twitter.com/MarcoCraveiro/status/1135567734010523648][twitter]]
@@ -43,6 +207,7 @@ Time spent creating the demo and presentation.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-11-18 Mon 08:51]--[2019-11-18 Mon 08:58] =>  0:07
     CLOCK: [2019-11-18 Mon 08:41]--[2019-11-18 Mon 08:50] =>  0:09
     CLOCK: [2019-11-18 Mon 08:38]--[2019-11-18 Mon 08:40] =>  0:02
     CLOCK: [2019-11-18 Mon 08:24]--[2019-11-18 Mon 08:37] =>  0:13
