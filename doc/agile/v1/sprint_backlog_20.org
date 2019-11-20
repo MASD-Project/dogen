@@ -12,20 +12,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-18 Mon 08:50]
-| <75>                                |        |      |      |       |
-| Headline                            | Time   |      |      |     % |
-|-------------------------------------+--------+------+------+-------|
-| *Total time*                        | *0:24* |      |      | 100.0 |
-|-------------------------------------+--------+------+------+-------|
-| Stories                             | 0:24   |      |      | 100.0 |
-| Active                              |        | 0:24 |      | 100.0 |
-| Sprint and product backlog grooming |        |      | 0:24 | 100.0 |
+#+CAPTION: Clock summary at [2019-11-20 Wed 19:47]
+| <75>                                   |        |      |      |       |
+| Headline                               | Time   |      |      |     % |
+|----------------------------------------+--------+------+------+-------|
+| *Total time*                           | *3:42* |      |      | 100.0 |
+|----------------------------------------+--------+------+------+-------|
+| Stories                                | 3:42   |      |      | 100.0 |
+| Active                                 |        | 3:42 |      | 100.0 |
+| Edit release notes for previous sprint |        |      | 3:11 |  86.0 |
+| Sprint and product backlog grooming    |        |      | 0:31 |  14.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Edit release notes for previous sprint                    :story:
     :LOGBOOK:
+    CLOCK: [2019-11-20 Wed 18:49]--[2019-11-20 Wed 19:47] =>  0:58
     CLOCK: [2019-11-19 Tue 17:41]--[2019-11-19 Tue 18:28] =>  0:47
     CLOCK: [2019-11-19 Tue 07:45]--[2019-11-19 Tue 08:28] =>  0:43
     CLOCK: [2019-11-18 Mon 17:30]--[2019-11-18 Mon 18:13] =>  0:43
@@ -33,115 +35,62 @@
 
 Add github release notes for previous sprint.
 
-Title: Dogen v1.0.19, "TBD"
+Title: Dogen v1.0.19, "Impala Cine"
 
 #+begin_src markdown
-**DRAFT: Release notes under construction**
+**DRAFT: Release notes under construction. please ignore them for now**
+
+![Imapala Cine](https://cdn.record.pt/images/2019-02/img_920x519$2019_02_11_02_32_57_1503852.jpg)
+
+_The Impala Cine, Moçâmedes, Namibe, Angola. (C) 2019 [Jornal O Record](https://www.record.pt/modalidades/aventura/detalhe/mocamedes---a-terra-do-faria)_
 
 # Introduction
 
-This sprint was marked by the return to "part-time" work on
-Dogen. After a cadence of successful 2-week sprints, it was quite
-difficult to adjust to the long, drawn-out process of cobbling
-together a release from whatever free time one could find. To recap,
-the target for a "part-time" sprint is to clock around 80 hours worth
-of work over a rather unpredictable period of time. Most of Dogen has
-been developed in this fashion but, clearly, it is not ideal fodder
-for programming. These types of sprints lend themselves to more
-fragmented work, given the nature of the time slots available, and it
-is much harder to focus on complex tasks that require loading a lot of
-state into the brain. The diverse number of small tasks clearly
-attests to this.
+This sprint was marked by the return to "part-time" development on  Dogen. After a cadence of successful 2-week sprints, it was rather difficult to adjust to the long, drawn-out process of cobbling together a release from whatever spare time one can find. To recap, the target for a "part-time" sprint is to clock around 80 hours worth of work over a rather unpredictable period of time. Most of Dogen has been developed in this fashion but, clearly, it is not ideal fodder for programming.
 
-Having said that, not all was gloom and doom with Sprint 19, and much
-was achieved - both invisible and visible to end-users. And efficiency
-went markedly up after adding a new tool to our arsenal of
-"motivational tools": the recording coding sessions. So brace
-yourselves to review yet another excting Dogen sprint.
+Part-time sprints naturally lend themselves to more fragmentary work, given the typically short duration of the time slots available, and make it much harder to focus on complex tasks that require loading a lot of state into the brain - a process we've described in [Nerd Food: Dogen: Lessons in Incremental Coding](https://mcraveiro.blogspot.com/2014/09/nerd-food-dogen-lessons-in-incremental.html). Having said that, not all was gloom and doom with Sprint 19, and much was achieved - both invisible and visible to end-users. Furthermore, efficiency went markedly up after adding a new tool to our arsenal of "motivational tools": the recording coding sessions. So, brace yourselves to review yet another exciting Dogen sprint.
 
 # User visible changes
 
-This section covers stories that affect end users, with the video
-providing a quick demonstration of the new features, and the sections
-below describing the features in more detail.
+This section covers stories that affect end users, with the video providing a quick demonstration of the new features, and the sections below describing the features in more detail.
 
 [![Sprint 1.0.19 Demo](https://img.youtube.com/vi/TkYQTW_jAGk/0.jpg)](https://youtu.be/TkYQTW_jAGk)
 
 ## Add support for variability overrides in Dogen
 
-The sprint's key feature is /variability overrides/. It was
-specifically designed to allow the overriding of model profiles, so
-that the same diagram can produce different "kinds" of outputs. In
-order to understand how the feature came about, we need to revist a
-bit of Dogen history. As you may recall, amongst many other things,
-profiles control which facets are to be expressed for a given model
-(.e.g Boost serilaisation, hashing, and so forth). In the MDE domain,
-these ideas have been generalised into "variability modeling", because
-they gives you a dimension in which you can "vary" how any given
-modeling element is expressed - i.e. the same entity can configured in
-different ways.
+The sprint's key feature is _variability overrides_. It was specifically designed to allow the overriding of model profiles, so that the same diagram can produce different "kinds" of outputs. In order to understand how the feature came about, we need to revisit a bit of Dogen history. As you may recall, amongst many other things, profiles control which facets are to be expressed for a given modeling element (e.g. Boost serialisation, hashing, and so forth). In the MDE domain, these ideas have been generalised into "variability modeling", because, taken as a whole, they give you a dimension in which you can "vary" how any given modeling element is expressed - i.e. entities can output different source code depending on their "configuration". Dogen has long made use of this feature, enabling certain model elements to support say hashing whereas others can support say lexical casting.
 
-Of course, models are associated to profiles by using nothing but
-meta-data, which ultimately is how all variability information is
-transported. A typical Dogen model looks like so:
+![Dogen's profile model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/profiles_model.png)
+
+Of course, models are associated to profiles by using nothing but meta-data, which ultimately is how all variability information is transported. A typical Dogen model looks like so:
 
 ```
 #DOGEN masd.variability.profile=dogen.profiles.base.default_profile
 ```
 
-This then results in reusing the configuration defined by
-```default_profile``` - an entitty in the referenced model
+This then results in reusing the configuration defined by ```default_profile``` - an entitty in the referenced model
 ```dogen.profiles```.
 
-Profiles have evolved from the observation that the meta-data used for
-configuration is, in many cases, common to several models and
-therefore should be shared. This approach has served us well thus far,
-but one implicit assumption it carried is that there would always only
-be a need for /one profile per model/. In truth, we have two
-distinct - and incompatible - needs when generating Dogen's own
-models:
+Profiles have evolved from the observation that the meta-data used for configuration is, in many cases, common to several models and therefore should be shared. This approach has served us well thus far, but one implicit assumption it carried is that there would always only be a need for /one profile per model/. In truth, we have two
+distinct - and incompatible - needs when generating Dogen's own models:
 
-- from a production perspective, we want to generate the smallest
-  amount of code required so that we avoid bloating our binaries with
-  unecessary code. Thus we want our profiles to be lean and mean.
-- from a development and Q&A perspective, we want to test all possible
-  facets with realistic use cases so that we can validate empirically
-  the quality of the generated code. Dogen's own models are a great
-  sample point for this validation, and should therefore make use of
-  as many facets as possible.
+- from a production perspective, we want to generate the smallest amount of code required so that we avoid bloating our binaries with unecessary code. Thus we want our profiles to be lean and mean.
+- from a development and Q&A perspective, we want to test all possible facets with realistic use cases so that we can validate empirically the quality of the generated code. Dogen's own models are a great sample point for this validation, and should therefore make use of as many facets as possible.
 
-This problem was not obvious initially because we could afford to
-generate all facets for all models and ignore the bloat. However, as
-the number of facets increased and as the number of elements in each
-model grew, we eventually ran out of build time to compile all of the
-generated code. Since then, we have resorted to "clever" hacks to
-allow these two conflicting requirements to coexist, such as enabling
-only a few facets in certain models. In truth, the low hanging fruit
-had been exhausted a few sprints ago, and we consistently started to
-have build failures due to time outs.
+This problem was not obvious initially because we could afford to generate all facets for all models and ignore the bloat. However, as the number of facets increased and as the number of elements in each model grew, we eventually ran out of build time to compile all of the generated code. Since then, we have resorted to "clever" hacks to allow these two conflicting requirements to coexist, such as enabling only a few facets in certain models. In truth, the low hanging fruit had been exhausted a few sprints ago, and we consistently started to have build failures due to time outs.
 
-Not being able to trust your CI is a showstopper, of course, so this
-sprint we sat down to solve this problem in a somewhat general
-manner. Variability overrides was the chosen solution, and it was
-implemented as follows.
+Not being able to trust your CI is a showstopper, of course, so this sprint we sat down to solve this problem in a somewhat general manner. Variability overrides was the chosen solution, and it was implemented as follows.
 
-A new command line option was added to the Processing section for this
-feature, called ```--variability-override ```. The option expects a
-tuple of up to five elements:
+A new command line option was added to the Processing section for this feature, called ```--variability-override ```. The option expects a tuple of up to five elements:
+
 ```[MODEL_ID,][ELEMENT_ID,][ATTRIBUTE_ID,]KEY,VALUE```
 
-The first three optional elements are used to bind to the target of
-the override. The binding logic is somewhat contrived:
+The first three optional elements are used to bind to the target of the override. The binding logic is somewhat contrived:
 
-1. if no model is supplied, the override applies to any model, else it
-   applies to the requested model;
-2. if no element is supplied, the override is applicable only to the
-   model itself;
-3. if an element is supplied, the binding applies to that specific
-   element;
-4. an attribute can only be supplied if an element is supplied. The
-   binding will only activate if it finds a matching element and a
-   matching attribute.
+1. if no model is supplied, the override applies to any model, else it applies to the requested model;
+2. if no element is supplied, the override is applicable only to the model itself;
+3. if an element is supplied, the binding applies to that specific element;
+4. an attribute can only be supplied if an element is supplied. The binding will only activate if it finds a matching element and a matching attribute.
 
 To be fair, we only really needed the first type of binding.
 
