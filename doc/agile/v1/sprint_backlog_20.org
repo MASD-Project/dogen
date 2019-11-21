@@ -27,6 +27,7 @@
 
 *** STARTED Edit release notes for previous sprint                    :story:
     :LOGBOOK:
+    CLOCK: [2019-11-21 Thu 00:16]--[2019-11-21 Thu 00:30] =>  0:14
     CLOCK: [2019-11-20 Wed 23:00]--[2019-11-21 Thu 00:15] =>  1:15
     CLOCK: [2019-11-20 Wed 18:49]--[2019-11-20 Wed 19:47] =>  0:58
     CLOCK: [2019-11-19 Tue 17:41]--[2019-11-19 Tue 18:28] =>  0:47
@@ -39,8 +40,6 @@ Add github release notes for previous sprint.
 Title: Dogen v1.0.19, "Impala Cine"
 
 #+begin_src markdown
-**DRAFT: Release notes under construction. please ignore them for now**
-
 ![Imapala Cine](https://cdn.record.pt/images/2019-02/img_920x519$2019_02_11_02_32_57_1503852.jpg)
 
 _The Impala Cine, Moçâmedes, Namibe, Angola. (C) 2019 [Jornal O Record](https://www.record.pt/modalidades/aventura/detalhe/mocamedes---a-terra-do-faria)_
@@ -81,9 +80,9 @@ This approach has served us well thus far, but it carried an implicit assumption
 - **parsimony**: from a production perspective, we want to generate the smallest amount of code required so that we avoid bloating our binaries with unnecessary kruft. Thus we want our profiles to be lean and mean and our builds to be fast.
 - **coverage**: from a development and Q&A perspective, we want to test all possible facets with realistic use cases so that we can validate empirically the quality of the generated code. Dogen's own models are a great sample point for this validation, and should therefore make use of as many facets as possible. In this scenario, we don't mind slow builds and big binaries if it means a higher probability of generating correct code.
 
-This problem was not entirely obvious at the start because we could afford to generate _all_ facets for _all_ models and just ignore the bloat. However, as the number of facets increased and as the number of elements in each model grew, we eventually started to ran out of build time to compile all of the generated code. Note that this is actually a feature - not a bug - of free CI systems: the limited build time forces you to consider if you really need to have that many lines of code.
+This problem was not entirely obvious at the start because we could afford to generate _all_ facets for _all_ models and just ignore the bloat. However, as the number of facets increased and as the number of elements in each model grew, we eventually started to ran out of build time to compile all of the generated code. We had experienced this problem in the past, leading us to separate the reference models for [C#](https://github.com/MASD-Project/csharp_ref_impl) and [C++](https://github.com/MASD-Project/cpp_ref_impl) from the core Dogen product. But now the problem was happening to Dogen _itself_, and there is nothing left to offload. Interestingly, I do not blame the "short" build times offered by the CI systems; instead, I see it as a feature, and not a bug, because the limited build time has forced us to consider very carefully the impact of growth in our code base.
 
-So it was that we've limped along for a number of sprints, resorting to "clever" hacks to allow these two conflicting requirements to coexist, such as enabling only a few facets in certain models. As a result, the CI was becoming less and less useful because you started to increasingly ignore build statuses. Not being able to trust your CI is a showstopper, of course, so this sprint we finally sat down to solve this problem in a somewhat general manner. We decided to have two separate builds, one for each use case: Nightlies for the coverage, since it runs over night and no one is waiting for them, and CI for the regular production case. And as you probably guessed by now, we needed a way to have a comprehensive profile for Nightlies that generates [everything but the kitchen sink](https://knowyourphrase.com/everything-but-the-kitchen-sink) whereas for regular CI we wanted to create the aforementioned lean and mean profiles.
+At any rate, as in the past with the reference models, we limped along yet again for a number of sprints, and resorted to "clever" hacks to allow these two conflicting requirements to coexist, such as enabling only a few facets in certain models. As a result, the CI was becoming less and less useful because you started to increasingly ignore build statuses. Not being able to trust your CI is a showstopper, of course, so this sprint we finally sat down to solve this problem in a somewhat general manner. We decided to have two separate builds, one for each use case: Nightlies for the coverage, since it runs over night and no one is waiting for them, and CI for the regular production case. And as you probably guessed by now, we needed a way to have a comprehensive profile for Nightlies that generates [everything but the kitchen sink](https://knowyourphrase.com/everything-but-the-kitchen-sink) whereas for regular CI we wanted to create the aforementioned lean and mean profiles.
 
 Variability overrides was the chosen solution, and it was implemented as follows. A new command line option was added to the Processing section, named ```--variability-override ```. The option expects a tuple of up to five elements:
 
