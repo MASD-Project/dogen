@@ -207,8 +207,8 @@ options_description make_top_level_visible_options_description() {
         ("dry-run-mode-enabled",
             "Executes all transforms but does not emit generated code.")
         ("variability-override", value<std::vector<std::string>>(),
-            "CSV string with a variability override. Must have the form of"
-            "MODEL_NAME,[ELEMENT_NAME],[ATTRIBUTE_NAME],KEY,VALUE");
+            "CSV string with a variability override. Must have the form of "
+            "[MODEL_NAME,][ELEMENT_NAME,][ATTRIBUTE_NAME,]KEY,VALUE");
     r.add(ehod);
 
     options_description db("Database");
