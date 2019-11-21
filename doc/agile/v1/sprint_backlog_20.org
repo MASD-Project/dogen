@@ -12,21 +12,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-21 Thu 19:51]
+#+CAPTION: Clock summary at [2019-11-21 Thu 21:03]
 | <75>                                   |        |      |      |       |
 | Headline                               | Time   |      |      |     % |
 |----------------------------------------+--------+------+------+-------|
-| *Total time*                           | *6:32* |      |      | 100.0 |
+| *Total time*                           | *7:37* |      |      | 100.0 |
 |----------------------------------------+--------+------+------+-------|
-| Stories                                | 6:32   |      |      | 100.0 |
-| Active                                 |        | 6:32 |      | 100.0 |
-| Edit release notes for previous sprint |        |      | 6:01 |  92.1 |
-| Sprint and product backlog grooming    |        |      | 0:31 |   7.9 |
+| Stories                                | 7:37   |      |      | 100.0 |
+| Active                                 |        | 7:37 |      | 100.0 |
+| Edit release notes for previous sprint |        |      | 7:06 |  93.2 |
+| Sprint and product backlog grooming    |        |      | 0:31 |   6.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Edit release notes for previous sprint                    :story:
     :LOGBOOK:
+    CLOCK: [2019-11-21 Thu 19:52]--[2019-11-21 Thu 20:57] =>  1:05
     CLOCK: [2019-11-21 Thu 18:30]--[2019-11-21 Thu 19:51] =>  1:21
     CLOCK: [2019-11-21 Thu 00:16]--[2019-11-21 Thu 00:30] =>  0:14
     CLOCK: [2019-11-20 Wed 23:00]--[2019-11-21 Thu 00:15] =>  1:15
@@ -115,38 +116,38 @@ By supplying ```WITH_FULL_GENERATION``` to the nightlies CMake, we then generate
 ![CDash](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/cdash_builds.png)
 _Figure 2: Continuous and nightly builds in CDash after the change._
 
-## Trace model dependencies
+## Tracing of model dependencies
 
-The second feature that was implemented this sprint is the addition of tracing information pertaining to model references. This work was done in the same vein as the transforms tracing (See [Sprint 12](https://github.com/MASD-Project/dogen/releases/tag/v1.0.12) for details) and reused much of the same technologies. You'll get them for free when you enable tracing via the existing flags. Dogen uses the following tracing configuration:
+The second feature implemented this sprint is the addition of model references tracing. This work was done in the same vein as the transforms tracing (See [Sprint 12](https://github.com/MASD-Project/dogen/releases/tag/v1.0.12) for details) and reused much of the same infrastructure; you'll get the new tracing reports for free when you enable tracing via the existing flags. As an example, Dogen uses the following configuration when we require tracing:
 
  ```
 --tracing-enabled --tracing-level detail --tracing-format org-mode --tracing-guids-enabled
 ```
-as with transforms, we can generate three different types of tracing reports, depending on ```--tracing-format```:  plain, org-mode, graphviz. Plain is just a text mode representation of the references graph:
+Like with transforms, we can generate three different types of tracing reports depending on the choice of ```--tracing-format```:  ```plain```, ```org-mode``` and ```graphviz```. ```plain``` is just a text mode representation of the references graph:
 
 ![Dogen's profile model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/plain_references_graph.png)
 _Figure 3: References graph in ```plain``` format._
 
-The org-mode version offers the usual interactivity available to org-mode diagrams in emacs such as folding, unfolding, querying and so on:
+The ```org-mode``` version offers the usual interactivity available to org-mode diagrams in Emacs such as folding, unfolding, querying and so on:
 
 ![Dogen's profile model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/org_mode_references_graph.png)
 _Figure 4: References graph in ```org-mode``` format._
 
-Finally, as before, the graphviz output requires processing with the dot tool before it can be visualised:
+Finally, [as before](https://github.com/MASD-Project/dogen/releases/tag/v1.0.12), the ```graphviz``` output requires further processing with the dot tool before it can be visualised:
 
 ```
 dot -Tpdf references_graph.dot -O
 ```
-The resulting PDF can be opened with any PDF viewer. It is very useful because it gives a clear indication of the "complexity" of your model. At some point in the future, we will convert these visual "complexity" indicators into metrics that can be used to determine the "health" of a model.
+The resulting PDF can be opened with any PDF viewer. We find it very useful because it gives a clear indication of the "complexity" of a given model. Of course, at some point in the future, we will want to convert these visual "complexity" indicators into metrics that can be used to determine the "health" of a model, but, as always, there are just not enough hours in the day to implement all these cool features.
 
 ![Dogen's profile model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/graphviz_references_graph.png)
-_Figure 4: References graph in ```graphviz``` format, after processing with ```dot``` tool_
+_Figure 4: References graph in ```graphviz``` format, after processing with ```dot``` tool._
 
 ## Small bug fixes
 
 Several small but important bug fixes went in with this release:
 
-- **Meta-data keys are in the inverse order**: A very old but still annoying bug we had in Dogen is that meta-data keys were being processed in reverse order of entry. For example, if a model _A_ referenced models _B_ and _C_, for some unfathomable reason, would process it as _C_ and _B_. This resulted in a great deal of confusion because we assumed all references in log files, etc would first start with _B_, not _C_. This release fixes the bug, but as a result, a lot of the generated code will move places. It should be semantically equivalent, just with a different order.
+- **Meta-data keys are processed in the inverse order**: A very old but rather annoying bug we had in Dogen is that meta-data keys were being processed in _reverse_ order of entry. For example, if a model _A_ referenced models _B_ and _C_, for some unfathomable reason, would process it as _C_ and _B_. This resulted in a great deal of confusion when troubleshooting because we assumed all references in log files _etc._ would first start with _B_, not _C_. This release fixes the bug, but as a result, a lot of the generated code will move places. It should be semantically equivalent, just with a different order.
 - **Tracer numbering of dumped models is incorrect**: Our traces for some reason were skipping numbers (e.g. ```000``` then ```002```, and so forth. This was very distracting when trying to analyse a problem. In addition, the previous logic of numbering the traces after a transform was abandoned; instead of having ```000``` for both the input and output of a transform, we now have ```000``` and ```001```. It was a nice thought but required a lot of complexity to implement.
 - **Creating reference cycles produces strange errors**: In the past, adding a reference cycle in a model resulted in very puzzling errors, entirely unconnected to the problem at hand. With this release we now correctly detect cycles and refuse to generate code. We do not yet have use cases for models with cycles, so for now we just took the brute force approach. Note that we also check for references to the model itself - a typo that in the past resulted in long investigations. It is now correctly detected and reported to the user.
 - **Error on duplicate references**: Similarly to cycles, adding the same reference more than once is now considered a bug and it is detected and reported to the user. The main reason why is because it normally happens as a result of copy and paste bugs, and so its best to inform users immediately.
@@ -159,25 +160,62 @@ Several small but important bug fixes went in with this release:
 
 In this section we cover topics that are mainly of interest if you follow Dogen development, such as details on internal stories that consumed significant resources, important events, etc. As usual, for all the gory details of the work carried out this sprint, see the [sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_19.org).
 
+## Milestones
+
+This is the 100th release of Dogen made from GitHub. Overall, its the 120th release, but had a private repo for those first 20 releases and the tags were lost in translation somewhere.
+
+![100th release](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/milestones_100_releases.png)
+_Figure 5: 100th release of Dogen from GitHub._
+
 ## Significant Internal Stories
 
 Given that most stories had a user-facing impact, this sprint is short on user facing stories. There are a couple that are worth a mention though.
 
-## Recording of coding sessions
+### Updating to Boost 1.70
 
-Furthermore, efficiency went markedly up after adding a new tool to our arsenal of "motivational tools": the recording of coding sessions.
+We've started yet another of those mammoth efforts of trying to update all of our dependencies to use the latest version of Boost. It would be fairer to call this story "updating of toolchains across the estate" since it more or less involves that kind of effort. Now that we are on vcpkg, this should be a straightforward task, but in practice it never is. The main problems are OSX and Windows, two operative systems that somehow seem to always cause weird and wonderful problems. Predictably, we completed the work for Linux, did some of it for Windows and pretty much none of it for OSX. At present, our local setup on OSX is, well and truly borked and we just do not have enough cycles to work on fixing it so the story will remain parked for the foreseeable future.
 
+### Implementing the relational model
 
+We had great ambitions this sprint of implementing a relational model for tracing that would enable us to write complex queries to diagnose problems across the Dogen pipeline. We did do quite a lot of work on this, but it was entirely overshadowed by the other problems we had to solve. We won't spend too much time talking about this feature this sprint, waiting instead for its completion.
+
+### Split generated tests from manual tests
+
+Originally, we thought it would be a good idea to mix-and-match generated tests with manual tests, as we do with all other facets. However, given the requirements discussed above in the profiles story, it was rather inconvenient to have this mixture because it meant we could not rely on the presence of the required build files. This sprint we took the decision to split generated tests from manual tests, and it must be said, it has improved the project design a fair bit. After all, the purpose of generated tests is just to make sure Dogen generated code is working as expected, and that is largely an internal concern of Dogen developers. More work is required in this area to polish up the support for manual tests though.
+
+### Recording of coding sessions
+
+Since we've started Dogen all those years ago, we've been searching for "motivational tools" that enable us to continue working on such a long term endeavour without losing the initial hunger. A few successful tools have been incorporated in this way:
+
+- agile management of sprints using org-mode, giving us a fine grained view of the activity on a sprint - _e.g._ [Sprint Backlog](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_19.org).
+- blog posts narrating particular aspects of Dogen development - _e.g._ [Nerd Food: The Refactoring Quagmire](https://mcraveiro.blogspot.com/2018/01/nerd-food-refactoring-quagmire.html].
+- creation of release notes at the end of every sprint as a way to reflect on what was achieved - the document you are reading.
+- creation of demos to visualise the features implemented.
+
+This sprint we found yet another "motivational tool": the recording of coding sessions as YouTube videos. We created a playlist with 13 episodes narrating much of the coding that happened this sprint: [MASD - Dogen Coding: Relational Model for Tracing](https://www.youtube.com/playlist?list=PLwfrwe216gF3EzrrvwNFivnLSZ2l8X9k6). At over 10h of video, the playlist is for the true die-hard fan of Dogen, to be sure. But the most important aspect from our perspective was that the recording of videos had a positive impact:
+
+- it impeled us to work on days were perhaps we wouldn't have. This may be the novelty factory of seeing oneself on YouTube, of course, but it certainly worked for this sprint.
+- it forces  you to think about what you're doing, just as when you are pair programming.
+
+The one downside is that it is very difficult to focus on complex tasks whilst talking and recording. It is thus not a silver bullet, but certainly a useful weapon in the arsenal. We shall continue recording videos next sprint.
+
+[![MASD - Dogen Coding: Relational Model for Tracing - Part 1](https://img.youtube.com/vi/re36Sr1u0Iw/0.jpg)](https://www.youtube.com/watch?v=re36Sr1u0Iw&list=PLwfrwe216gF3EzrrvwNFivnLSZ2l8X9k6&index=2)
 
 ## Resourcing
 
-This sprint was marked by the return to "part-time" development on  Dogen. After a cadence of eight successful 2-week sprints, it was rather difficult to adjust back to the long, drawn-out process of cobbling together a release from whatever spare time one can find. As you may recall, the target for a "part-time" sprint is to clock around 80 hours worth of work over a rather unpredictable period of time. To be fair, most of Dogen has been developed in this fashion, but it is just not ideal fodder for programming. This is because part-time sprints naturally lend themselves to more fragmented work, given both the typically short-duration time slots available, and the fact that most of these are of rather dubious quality. The 22:00 slot comes particularly to mind - also fondly known known as the graveyard shift. Whilst there are advantages to _some_ resource starvation - described at length in [Nerd Food: Dogen: Lessons in Incremental Coding](https://mcraveiro.blogspot.com/2014/09/nerd-food-dogen-lessons-in-incremental.html) - it is also undoubtedly true that it is much harder to focus on complex tasks that require loading a lot of state into the brain.
+This sprint was marked by the return to "part-time" development on  Dogen. After a cadence of eight successful 2-week sprints, it was rather difficult to adjust back to the long, drawn-out process of cobbling together a release from whatever spare time one can find. As you may recall, the target for a "part-time" sprint is to clock around 80 hours worth of work over a rather unpredictable period of time. To be fair, most of Dogen has been developed in this fashion, but it is just not ideal fodder for programming. This is because part-time sprints naturally lend themselves to more fragmented work, given both the typically short-duration time slots available, and the fact that most of these are of rather dubious quality. The 22:00 slot comes particularly to mind - also fondly known known as the graveyard shift. Whilst there are advantages to _some_ resource starvation - described at length in [Nerd Food: Dogen: Lessons in Incremental Coding](https://mcraveiro.blogspot.com/2014/09/nerd-food-dogen-lessons-in-incremental.html) - it is also undoubtedly true that it is much harder to focus on complex tasks that require loading a lot of state into the brain. Nonetheless, “you go to war with the army you have, not the army you might want or wish to have at a later time”, and excuses do not write code, so one must make the most of the prevailing conditions.
 
-Nonetheless, “you go to war with the army you have, not the army you might want or wish to have at a later time”, and excuses do not write code, so one must make the most of the prevailing conditions. And, to be fair, not all was gloom and doom with Sprint 19, and much was achieved - both invisible and visible to end-users.
+To be fair, not all was gloom and doom with Sprint 19, and much was achieved. Let's review how the resourcing was distributed across stories. At 11.5% of the ask, upgrading to Boost 1.70 was the biggest story this sprint, closely followed by the work on the relational model (11%).   Several stories hovered around the 6-7% mark, in particular the splitting of generated tests from manual tests (6.7%), the far-out thought experiments on org-mode as a carrier format for modeling (6.5% - we clearly got carried away here), and the improvements around check for reference cycles (6.4%). Very much hidden in the list of stories is what we'd consider the "target" story - moving registrar into assets (6.3%) - but it was blocked because we are having some hard-to-debug issues with it, and require the support of the relational model to proceed. At 6% we have the meta-data overrides support, followed by a long tail of smaller stories - all the way from 5.7% creating the modeling reports in tracing to a minuscule 0.1% for upgrading to Clang 9 and GCC 9. The sprint is clearly demonstrating the impact of moving to part-time work, as expected. Finally, an important mention goes to the almost 16% spent in process related activities (backlog grooming, release notes, video editing for demo and coding sessions), down from 19% from the previous sprint. This is rather unexpected given that we've spent a lot of time recording the coding sessions this sprint, and implies they are very low overhead.
 
-## Planning
+![Story Pie Chart](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_19_pie_chart.jpg)
+
+## Roadmap
+
+We've renamed the "Planning" section to roadmap because it more adequately reflects its role: we are not actually forecasting, merely keeping track of outstanding activities and making some very weak correlations between them and a potential end date. The roadmap was clearly affected by the move to part-time, and looks more or less as was last sprint - just projected forwards in time.
 
 # Next Sprint
+
+The main focus next sprint is going to be to wrap things up with the relational model and to use it to diagnose problems when moving elements from generation to assets.
 
 # Binaries
 
