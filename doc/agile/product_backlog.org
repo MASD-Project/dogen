@@ -9516,6 +9516,14 @@ Links:
 Yet another enum library: https://github.com/Neargye/magic_enum. C++
 17 only.
 
+*** Consider adding support for the =enum.hpp= library                :story:
+
+See the github repo.
+
+Links:
+
+- https://github.com/BlackMATov/enum.hpp
+
 *** Consider adding support for Meta Enum library                     :story:
 
 Meta Enum provides a number of features for enumerations. We could
