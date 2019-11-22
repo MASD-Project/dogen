@@ -12,22 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-22 Fri 09:51]
-| <75>                                   |         |       |      |       |
-| Headline                               | Time    |       |      |     % |
-|----------------------------------------+---------+-------+------+-------|
-| *Total time*                           | *10:14* |       |      | 100.0 |
-|----------------------------------------+---------+-------+------+-------|
-| Stories                                | 10:14   |       |      | 100.0 |
-| Active                                 |         | 10:14 |      | 100.0 |
-| Edit release notes for previous sprint |         |       | 9:43 |  95.0 |
-| Sprint and product backlog grooming    |         |       | 0:31 |   5.0 |
+#+CAPTION: Clock summary at [2019-11-22 Fri 10:36]
+| <75>                                   |         |       |       |       |
+| Headline                               | Time    |       |       |     % |
+|----------------------------------------+---------+-------+-------+-------|
+| *Total time*                           | *10:59* |       |       | 100.0 |
+|----------------------------------------+---------+-------+-------+-------|
+| Stories                                | 10:59   |       |       | 100.0 |
+| Active                                 |         | 10:59 |       | 100.0 |
+| Edit release notes for previous sprint |         |       | 10:28 |  95.3 |
+| Sprint and product backlog grooming    |         |       |  0:31 |   4.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2019-11-22 Fri 09:50]
     :LOGBOOK:
+    CLOCK: [2019-11-22 Fri 09:51]--[2019-11-22 Fri 10:36] =>  0:45
     CLOCK: [2019-11-22 Fri 08:16]--[2019-11-22 Fri 09:50] =>  1:34
     CLOCK: [2019-11-21 Thu 20:58]--[2019-11-21 Thu 22:01] =>  1:03
     CLOCK: [2019-11-21 Thu 19:52]--[2019-11-21 Thu 20:57] =>  1:05
@@ -67,7 +68,7 @@ This section covers stories that affect end users, with the video providing a qu
 
 The sprint's key feature is _variability overrides_. It was specifically designed to allow for the overriding of model profiles. In order to understand how the feature came about, we need to revisit a fair bit of Dogen history. As you may recall, since early on, Dogen has enabled users to supply meta-data to determine  what source code gets generated for each modeling element. By toggling different meta-data switches, we can express quite differently two otherwise identical model elements: say, one can generate hashing support whereas the other can generate serialisation.
 
-Observing its usage, we soon realised that the toggle switches provided more value when organised into "configuration sets" that modeling elements could _bind_ against, and this idea eventually morphed into the present concept of _profiles_. Profiles are named configurations which provide a defaulting mechanism for individual configurations, so that they could be reused across modeling elements and, eventually, across models. That is to say, profiles stem from the very simple observation that the meta-data used for configuration is, in many cases, common to several models and therefore should be shared. In the [MDE](https://en.wikipedia.org/wiki/Model-driven_engineering) domain, these ideas have been generalised into the field of _Variability Modeling_, because, taken as a whole, they give you a dimension in which you can "vary" how any given modeling element is expressed; hence why they are also known in Dogen as "variability modeling", as we intend to be as close as possible to domain terminology.
+Observing its usage, we soon realised that the toggle switches added more value when organised into "configuration sets" that modeling elements could _bind_ against, and this idea eventually morphed into the present concept of _profiles_. Profiles are named configurations which provide a defaulting mechanism for individual configurations, so that they could be reused across modeling elements and, eventually, across models. That is to say, profiles stem from the very simple observation that the meta-data used for configuration is, in many cases, common to several models and therefore should be shared. In the [MDE](https://en.wikipedia.org/wiki/Model-driven_engineering) domain, these ideas have been generalised into the field of _Variability Modeling_, because, taken as a whole, they give you a dimension in which you can "vary" how any given modeling element is expressed; hence why they are also known in Dogen as "variability modeling", as we intend to be as close as possible to domain terminology.
 
 ![Dogen's profile model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/profiles_model.png)
 _Figure 1: Snippet from ```dogen.profiles.dia``` model._
@@ -87,7 +88,7 @@ This approach has served us well thus far, but it carried an implicit assumption
 
 This dilemma was not entirely obvious at the start because we could afford to generate _all_ facets for _all_ models and just ignore the bloat. However, as the number of facets increased and as the number of elements in each model grew, we eventually started to ran out of build time to compile all of the generated code. If, at this juncture, you are getting a strange sense of _déjà vu_, you are not alone. Indeed, we had experienced this very issue in the past, leading us to separate the reference models for [C#](https://github.com/MASD-Project/csharp_ref_impl) and [C++](https://github.com/MASD-Project/cpp_ref_impl) from the core Dogen product in Sprint [8](https://github.com/MASD-Project/dogen/releases/tag/v1.0.08). But this time round the trouble is with Dogen _itself_, and there is nothing left to offload because there are no other obvious product boundaries like before. Interestingly, I do not blame the "short" build times offered by the free CI systems; instead, I see it as a feature, not a bug, because the limited build time has forced us to consider very carefully the impact of growth in our code base.
 
-At any rate, as in the past with the reference models, we limped along yet again for a number of sprints, and resorted to "clever" hacks to allow these two conflicting requirements to coexist for as long as possible, such as enabling only a few facets in certain models. As a result, the CI was becoming less and less useful because you started to increasingly ignore build statuses. Not being able to trust your CI is a showstopper, of course, so this sprint we finally sat down to solve this problem in a somewhat general manner. We decided to have two separate builds, one for each use case: nightlies for the coverage, since it runs overnight and no one is waiting for them, and CI for the regular production case. And as you probably guessed by now, we needed a way to have a comprehensive profile for nightlies that generates [everything but the kitchen sink](https://knowyourphrase.com/everything-but-the-kitchen-sink) whereas for regular CI we wanted to create the aforementioned lean and mean profiles. Variability overrides was the chosen solution. From a technical perspective, we found this approach very satisfying because it makes _variability itself variable_ - something any geek would appreciate.
+At any rate, as in the past with the reference models, we limped along yet again for a number of sprints, and resorted to "clever" hacks to allow these two conflicting requirements to coexist for as long as possible, such as enabling only a few facets in certain models. However, we kept increasing the generated code _a lot_, first with the addition of generated tests ([Sprint 13](https://github.com/MASD-Project/dogen/releases/tag/v1.0.13)) and this sprint with the relational model. The CI just took too many hits and there were no quick hacks that could fix it. As a result, CI become less and less useful because you started to increasingly ignore build statuses. Not being able to trust your CI is a showstopper, of course, so this sprint we finally sat down to solve this problem in a somewhat general manner. We decided to have two separate builds, one for each use case: nightlies for the coverage, since it runs overnight and no one is waiting for them, and CI for the regular production case. And as you probably guessed by now, we needed a way to have a comprehensive profile for nightlies that generates [everything but the kitchen sink](https://knowyourphrase.com/everything-but-the-kitchen-sink) whereas for regular CI we wanted to create the aforementioned lean and mean profiles. Variability overrides was the chosen solution. From a technical standpoint, we found this approach very satisfying because it makes _variability itself variable_ - something any geek would appreciate.
 
 The implementation is as follows. A new command line option was added to the Processing section, named ```--variability-override```:
 
@@ -112,14 +113,17 @@ Dogen uses this new command line option like so:
 
 ```
     if (WITH_FULL_GENERATION)
-        set(DOGEN_PROCESSING_OPTIONS ${DOGEN_DIFFING_OPTIONS}
-            --variability-override masd.variability.profile,dogen.profiles.base.test_all_facets)
+        set(profile "dogen.profiles.base.test_all_facets")
+        set(DOGEN_PROCESSING_OPTIONS ${DOGEN_PROCESSING_OPTIONS}
+            --variability-override masd.variability.profile,${profile})
     endif()
 ```
-By supplying ```WITH_FULL_GENERATION``` to the nightlies CMake, we then generate all facets and tests for all facets. We then build and run all of the generated code, including generated tests. Surprisingly, we did not have many issues with most generated code - with a few exceptions, which we had to ignore for now. There are also two failures which require investigation and shall be looked into next sprint.
+By supplying ```WITH_FULL_GENERATION``` to the nightlies CMake, we then generate all facets and tests for all facets. We then build and run all of the generated code, including generated tests. Surprisingly, we did not have many issues with most generated code - with a few exceptions, which we had to ignore for now. There are also two failures which require investigation and shall be looked into next sprint. Once the change went in, the CI build times decreased dramatically and are now consistently always below the time out threshold.
 
 ![CDash](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/cdash_builds.png)
 _Figure 2: Continuous and nightly builds in CDash after the change._
+
+One last mention goes to code coverage. We hummed and harred a lot about the _right_ approach for code coverage. On one side, generated tests gave us _a lot_ of code coverage, which was very satisfying - we went from 30-40% to 80%! On the other hand, these "tests" were just validating basic functionality for Dogen types, not actual domain functionality. So, in some ways, it is misleading to use generated tests to determine overall product coverage, because it is covering different "kinds" of aspects about the code. At the same time, it is very important to know the generated tests coverage because  it is indicative of missing sanity checks in Dogen. We finally settled on having two different coverage reports, fed by the two different builds. This vision has not yet been fully materialised as the nightlies are not updating [codecov](https://codecov.io/gh/MASD-Project/dogen) for some reason, but will hopefully happen in the near future.
 
 ## Tracing of model dependencies
 
@@ -150,14 +154,16 @@ _Figure 5: References graph in ```graphviz``` format, after processing with ```d
 
 ### Split generated tests from manual tests
 
-Originally, we thought it would be a good idea to mix-and-match generated tests with manual tests, as we do with all other facets. However, given the requirements discussed above in the variability overrides story, it was rather inconvenient to have this mixture because it meant we could not rely on the presence of the required build files. This sprint we took the decision to split generated tests from manual tests, and it must be said, it has improved the project design a fair bit. After all, the purpose of generated tests is just to make sure Dogen generated code is working as expected, and that is largely an internal concern of Dogen developers. More work is required in this area to polish up the support for manual tests though.
+As we've already mentioned, generated tests were added to Dogen in [Sprint 13](https://github.com/MASD-Project/dogen/releases/tag/v1.0.13) as a way to sanity check all generated code. Though we did test generated code prior to this, we did so manually - _read_ haphazardly, as we kept forgetting to add manual tests to new types. When we implemented it originally, we thought it would be a good idea to mix-and-match generated tests with manual tests, as we do with all other facets. However, given the requirements discussed above in the variability overrides story, it was rather inconvenient to have this mixture because it meant we could not rely on the presence of the required build files.
+
+This sprint we took the decision to split generated tests from manual tests, and it must be said, it has improved the project design a fair bit. After all, the purpose of generated tests is just to make sure Dogen generated code is working as expected, and that is largely an internal concern of Dogen developers. More work is required in this area to polish up the support for manual tests though.
 
 ## Small bug fixes
 
 Several small but important bug fixes went in with this release:
 
 - **Meta-data keys are processed in the inverse order**: A very old but rather annoying bug we had in Dogen is that meta-data keys were being processed in _reverse_ order of entry. For example, if a model _A_ referenced models _B_ and _C_, for some unfathomable reason, Dogen would process it as _C_ and _B_. This resulted in a great deal of confusion when troubleshooting because we assumed all references in log files _etc._ would first start with _B_, not _C_. This release fixes the bug, but as a result, a lot of the generated code will move places. It should be semantically equivalent, just with a different order. :warning:
-- **Tracer numbering of dumped models is incorrect**: Our traces for some reason were skipping numbers (e.g. ```000``` then ```002```, and so forth. This was very distracting when trying to analyse a problem. In addition, the previous logic of numbering the traces after a transform was abandoned; instead of having ```000``` for both the input and output of a transform, we now have ```000``` and ```001```. It was a nice thought but required a lot of complexity to implement.
+- **Tracer numbering of dumped models is incorrect**: for some reason our trace files were skipping numbers (e.g. ```000``` then ```002```, and so forth). This was very distracting when trying to analyse a problem. In addition, the previous logic of numbering the traces after a transform was abandoned; instead of having ```000``` for both the input and output of a transform, we now have ```000``` and ```001```. It was a nice thought but required a lot of complexity to implement.
 - **Creating reference cycles produces strange errors**: In the past, adding a reference cycle in a model resulted in very puzzling errors, entirely unconnected to the problem at hand. With this release we now correctly detect cycles and refuse to generate code. We do not yet have use cases for models with cycles, so for now we just took the brute force approach. Note that we also check for references to the model itself - a typo that in the past resulted in long investigations. It is now correctly detected and reported to the user.
 - **Error on duplicate references**: Similarly to cycles, adding the same reference more than once is now considered a bug and it is detected and reported to the user. In the past, we used to silently ignore these. The main reason why is because it normally happens as a result of copy and paste bugs, and so its best to inform users immediately. :warning:
 
@@ -192,12 +198,12 @@ We had great ambitions this sprint of implementing a relational model for tracin
 
 Since we've started Dogen all those years ago, we've been searching for "motivational tools" that enable us to continue working on such a long term endeavour without losing the initial hunger. A few successful tools have been incorporated in this way:
 
-- agile management of sprints using org-mode, giving us a fine grained view of the activity on a sprint - _e.g._ [sprint backlog](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_19.org) and a highly curated [product backlog](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org). For the importance of curation, see [Nerd Food: On Product Backlog](https://mcraveiro.blogspot.com/2016/01/nerd-food-on-product-backlogs.html).
 - blog posts narrating particular aspects of Dogen development - _e.g._ [Nerd Food: The Refactoring Quagmire](https://mcraveiro.blogspot.com/2018/01/nerd-food-refactoring-quagmire.html).
+- agile management of sprints using org-mode, giving us a fine grained view of the activity on a sprint - _e.g._ [sprint backlog](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_19.org) and a highly curated [product backlog](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org). For the importance of curation, see [Nerd Food: On Product Backlog](https://mcraveiro.blogspot.com/2016/01/nerd-food-on-product-backlogs.html).
 - creation of release notes at the end of every sprint as a way to reflect on what was achieved - the document you are reading.
 - creation of demos to visualise the features implemented.
 
-This sprint we found yet another "motivational tool": the recording of coding sessions as YouTube videos. This idea was _completely_ inspired on watching [Andreas Kling](https://www.youtube.com/channel/UC3ts8coMP645hZw9JSD3pqQ)'s channel, which we highly recommend.  We created a playlist with 13 episodes narrating much of the coding that happened this sprint: [MASD - Dogen Coding: Relational Model for Tracing](https://www.youtube.com/playlist?list=PLwfrwe216gF3EzrrvwNFivnLSZ2l8X9k6). At over 10h of video, the playlist is for the true die-hard fan of Dogen, to be sure. But the most important aspect from our perspective was that the recording of videos had a positive impact:
+This sprint we found yet another "motivational tool": the recording of coding sessions as YouTube videos. This idea was _completely_ inspired on [Andreas Kling](https://www.youtube.com/channel/UC3ts8coMP645hZw9JSD3pqQ)'s channel, which we _highly_ recommend to anyone who likes programming and C++ in particular.  For our "channel", we decided to create a playlist with 13 episodes narrating much of the coding that happened this sprint: [MASD - Dogen Coding: Relational Model for Tracing](https://www.youtube.com/playlist?list=PLwfrwe216gF3EzrrvwNFivnLSZ2l8X9k6). At over 10 hours of video, the playlist is for the true die-hard fan of Dogen, to be sure. But the most important aspect from our perspective was that the recording of videos had a positive impact:
 
 - it forces  you to think about what you're doing, just as when you are pair programming;
 - it impeled us to work on days were perhaps we wouldn't have. This may be the novelty factory of seeing oneself on YouTube, of course, but it certainly worked for this sprint. We even managed to get one subscriber and one comment, which was rather surprising.
@@ -216,7 +222,7 @@ To be fair, not all was gloom and doom with Sprint 19, and much was achieved. Le
 
 ## Roadmap
 
-We've renamed the "Planning" section to roadmap because it more adequately reflects its role: we are not actually forecasting, merely keeping track of outstanding activities and making some very weak correlations between them and a potential end date. The roadmap was clearly affected by the move to part-time, and looks more or less as was last sprint - just projected forwards in time.
+We've renamed the "Planning" section to roadmap because it more adequately reflects its role: we are not actually forecasting, merely keeping track of outstanding activities and making some very weak correlations between them and a potential end date. The roadmap was clearly affected by the move to part-time, and looks more or less as was last sprint - just projected forwards in time. We also haven't quite figured out how to take into account "part-time" in Task Juggler, so the "estimates" are extremely optimistic. This is something to fix next sprint, hopefully.
 
 ![Project Plan](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_19_project_plan.png)
 
