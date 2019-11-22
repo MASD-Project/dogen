@@ -13099,6 +13099,15 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider using ditaa                                              :story:
+
+Ditaa is a diagramming tool that takes ascii art and creates diagrams.
+
+Links:
+
+- http://ditaa.sourceforge.net/
+- http://plantuml.com/ditaa: integration with Plant UML.
+
 *** Consider adding a wt frontend                                     :story:
 
 Once we have the relational model hooked in, the next step is to make
