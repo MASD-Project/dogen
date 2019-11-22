@@ -12,18 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-22 Fri 11:05]
+#+CAPTION: Clock summary at [2019-11-22 Fri 13:59]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *11:26* |       |       | 100.0 |
+| *Total time*                                       | *13:55* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 11:26   |       |       | 100.0 |
-| Active                                             |         | 11:26 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       | 10:28 |  91.5 |
-| Create a demo and presentation for previous sprint |         |       |  0:15 |   2.2 |
-| Sprint and product backlog grooming                |         |       |  0:31 |   4.5 |
-| Fix OSX build errors                               |         |       |  0:12 |   1.7 |
+| Stories                                            | 13:55   |       |       | 100.0 |
+| Active                                             |         | 13:55 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       | 10:28 |  75.2 |
+| Create a demo and presentation for previous sprint |         |       |  2:31 |  18.1 |
+| Sprint and product backlog grooming                |         |       |  0:31 |   3.7 |
+| Fix OSX build errors                               |         |       |  0:25 |   3.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -253,12 +253,21 @@ Happy Modeling!
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6541333935140458497][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
-*** STARTED Create a demo and presentation for previous sprint        :story:
+*** COMPLETED Create a demo and presentation for previous sprint      :story:
+    CLOSED: [2019-11-22 Fri 13:59]
     :LOGBOOK:
+    CLOCK: [2019-11-22 Fri 12:31]--[2019-11-22 Fri 13:59] =>  1:28
+    CLOCK: [2019-11-22 Fri 11:20]--[2019-11-22 Fri 12:08] =>  0:48
     CLOCK: [2019-11-22 Fri 10:50]--[2019-11-22 Fri 11:05] =>  0:15
     :END:
 
 Time spent creating the demo and presentation.
+
+Notes:
+
+- it seems we did not copy the previous demo project to the new
+  machine. Create a demo project and put it in GitHub so that we can
+  demo from anywhere. Project: https://github.com/MASD-Project/demo
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
@@ -272,6 +281,7 @@ Updates to sprint and product backlog.
 
 *** STARTED Fix OSX build errors                                      :story:
     :LOGBOOK:
+    CLOCK: [2019-11-22 Fri 11:06]--[2019-11-22 Fri 11:19] =>  0:13
     CLOCK: [2019-11-22 Fri 10:37]--[2019-11-22 Fri 10:49] =>  0:12
     :END:
 
@@ -291,19 +301,39 @@ We are seeing yet again some strange OSX build errors:
 :   /tmp/vcpkg-export/scripts/buildsystems/vcpkg.cmake:196 (_find_package)
 :   CMakeLists.txt:125 (find_package)
 
-And:
+For this, we can try to remove the brew version of boost:
+
+: brew uninstall boost --force
+
+
+A second error is:
 
 : FATALcould not find C++ runtime
 
-We can try to remove the brew version of boost:
+For this the problem appears to be that we are trying to add the C++
+run time and not finding it. We need to test the OSX packages and see
+if Dogen still works. If it does, remove this.
 
-: brew uninstall boost --force
+:   if(EXISTS "/usr/local/lib/i386/libstdc++.6.dylib")
+:       set (cpp_runtime_libs
+:           ${cpp_runtime_libs} "/usr/local/lib/i386/libstdc++.6.dylib")
+:       set (cpp_runtime_libs
+:           ${cpp_runtime_libs} "/usr/local/lib/i386/libgcc_s.1.dylib")
+:   else()
+:       message(FATAL "could not find C++ runtime")
+:   endif()
 
 Links:
 
 - [[https://formulae.brew.sh/formula/boost][Boost formula]]
 - [[https://superuser.com/questions/1100711/remove-package-installed-by-brew][SO: remove package installed by brew]]
 - [[https://github.com/boostorg/boost_install/issues/13][Support for Boost_USE_MULTITHREADED missing]]
+
+*** Modeling elements can have =profile= setup                        :story:
+
+We expected =masd.variability.profile= to be only applicable at the
+global scope, but when overriding it manually no error occurs but no
+override happens either. Check the binding properties of this field.
 
 *** Fix pictures in old release notes                                 :story:
 
