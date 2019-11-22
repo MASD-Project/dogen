@@ -463,8 +463,9 @@ if (DOGEN_CLI_EXECUTABLE)
 
     message(STATUS "Full generation: ${WITH_FULL_GENERATION}")
     if (WITH_FULL_GENERATION)
-        set(DOGEN_PROCESSING_OPTIONS ${DOGEN_DIFFING_OPTIONS}
-            --variability-override masd.variability.profile,dogen.profiles.base.test_all_facets)
+        set(profile "dogen.profiles.base.test_all_facets")
+        set(DOGEN_PROCESSING_OPTIONS ${DOGEN_PROCESSING_OPTIONS}
+            --variability-override masd.variability.profile,${profile})
     endif()
 
     # uncomment to enable logging.
