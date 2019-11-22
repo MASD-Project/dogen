@@ -60,4 +60,4 @@ brew upgrade cmake || true
 #
 # Remove the brew packages for boost
 #
-brew uninstall boost --force  || true
+brew uninstall --force --ignore-dependencies boost || true
