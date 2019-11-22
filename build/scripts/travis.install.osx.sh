@@ -56,3 +56,8 @@ unzip -q ${csharp_ref_impl_output_location} -d ${csharp_ref_impl_extract_dir}
 # https://github.com/Homebrew/legacy-homebrew/issues/27897
 #
 brew upgrade cmake || true
+
+#
+# Remove the brew packages for boost
+#
+brew uninstall boost --force  || true

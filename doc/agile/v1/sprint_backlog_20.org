@@ -12,16 +12,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-22 Fri 10:36]
+#+CAPTION: Clock summary at [2019-11-22 Fri 10:49]
 | <75>                                   |         |       |       |       |
 | Headline                               | Time    |       |       |     % |
 |----------------------------------------+---------+-------+-------+-------|
-| *Total time*                           | *10:59* |       |       | 100.0 |
+| *Total time*                           | *11:11* |       |       | 100.0 |
 |----------------------------------------+---------+-------+-------+-------|
-| Stories                                | 10:59   |       |       | 100.0 |
-| Active                                 |         | 10:59 |       | 100.0 |
-| Edit release notes for previous sprint |         |       | 10:28 |  95.3 |
-| Sprint and product backlog grooming    |         |       |  0:31 |   4.7 |
+| Stories                                | 11:11   |       |       | 100.0 |
+| Active                                 |         | 11:11 |       | 100.0 |
+| Edit release notes for previous sprint |         |       | 10:28 |  93.6 |
+| Sprint and product backlog grooming    |         |       |  0:31 |   4.6 |
+| Fix OSX build errors                   |         |       |  0:12 |   1.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -264,6 +265,40 @@ Time spent creating the demo and presentation.
     :END:
 
 Updates to sprint and product backlog.
+
+*** STARTED Fix OSX build errors                                      :story:
+    :LOGBOOK:
+    CLOCK: [2019-11-22 Fri 10:37]--[2019-11-22 Fri 10:49] =>  0:12
+    :END:
+
+We are seeing yet again some strange OSX build errors:
+
+: CMake Warning at /usr/local/lib/cmake/boost_system-1.71.0/libboost_system-variant-shared.cmake:59 (message):
+:   Target Boost::system already has an imported location
+:   '/usr/local/lib/libboost_system-mt.dylib', which will be overwritten with
+:   '/usr/local/lib/libboost_system.dylib'
+: Call Stack (most recent call first):
+:   /usr/local/lib/cmake/boost_system-1.71.0/boost_system-config.cmake:43 (include)
+:   /tmp/vcpkg-export/scripts/buildsystems/vcpkg.cmake:254 (_find_package)
+:   /usr/local/lib/cmake/Boost-1.71.0/BoostConfig.cmake:117 (find_package)
+:   /usr/local/lib/cmake/Boost-1.71.0/BoostConfig.cmake:182 (boost_find_component)
+:   /tmp/vcpkg-export/scripts/buildsystems/vcpkg.cmake:196 (_find_package)
+:   /usr/local/Cellar/cmake/3.15.5/share/cmake/Modules/FindBoost.cmake:443 (find_package)
+:   /tmp/vcpkg-export/scripts/buildsystems/vcpkg.cmake:196 (_find_package)
+:   CMakeLists.txt:125 (find_package)
+
+And:
+
+: FATALcould not find C++ runtime
+
+We can try to remove the brew version of boost:
+
+: brew uninstall boost --force
+
+Links:
+
+- https://formulae.brew.sh/formula/boost
+- https://superuser.com/questions/1100711/remove-package-installed-by-brew
 
 *** Fix pictures in old release notes                                 :story:
 
