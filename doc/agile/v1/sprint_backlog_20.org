@@ -12,17 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-22 Fri 10:49]
-| <75>                                   |         |       |       |       |
-| Headline                               | Time    |       |       |     % |
-|----------------------------------------+---------+-------+-------+-------|
-| *Total time*                           | *11:11* |       |       | 100.0 |
-|----------------------------------------+---------+-------+-------+-------|
-| Stories                                | 11:11   |       |       | 100.0 |
-| Active                                 |         | 11:11 |       | 100.0 |
-| Edit release notes for previous sprint |         |       | 10:28 |  93.6 |
-| Sprint and product backlog grooming    |         |       |  0:31 |   4.6 |
-| Fix OSX build errors                   |         |       |  0:12 |   1.8 |
+#+CAPTION: Clock summary at [2019-11-22 Fri 11:05]
+| <75>                                               |         |       |       |       |
+| Headline                                           | Time    |       |       |     % |
+|----------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                       | *11:26* |       |       | 100.0 |
+|----------------------------------------------------+---------+-------+-------+-------|
+| Stories                                            | 11:26   |       |       | 100.0 |
+| Active                                             |         | 11:26 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       | 10:28 |  91.5 |
+| Create a demo and presentation for previous sprint |         |       |  0:15 |   2.2 |
+| Sprint and product backlog grooming                |         |       |  0:31 |   4.5 |
+| Fix OSX build errors                               |         |       |  0:12 |   1.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -252,7 +253,10 @@ Happy Modeling!
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6541333935140458497][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
-*** Create a demo and presentation for previous sprint                :story:
+*** STARTED Create a demo and presentation for previous sprint        :story:
+    :LOGBOOK:
+    CLOCK: [2019-11-22 Fri 10:50]--[2019-11-22 Fri 11:05] =>  0:15
+    :END:
 
 Time spent creating the demo and presentation.
 
@@ -297,8 +301,9 @@ We can try to remove the brew version of boost:
 
 Links:
 
-- https://formulae.brew.sh/formula/boost
-- https://superuser.com/questions/1100711/remove-package-installed-by-brew
+- [[https://formulae.brew.sh/formula/boost][Boost formula]]
+- [[https://superuser.com/questions/1100711/remove-package-installed-by-brew][SO: remove package installed by brew]]
+- [[https://github.com/boostorg/boost_install/issues/13][Support for Boost_USE_MULTITHREADED missing]]
 
 *** Fix pictures in old release notes                                 :story:
 

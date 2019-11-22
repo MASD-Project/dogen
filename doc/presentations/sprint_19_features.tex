@@ -1,0 +1,60 @@
+\documentclass{beamer}
+\mode<presentation>
+{ \usetheme{boxes} }
+
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{csquotes}
+\usepackage[backend=bibtex]{biblatex}
+
+\title{Dogen v1.0.19, \enquote{Impala Cine}}
+
+\author{Marco Craveiro \\
+  Domain Driven Development
+}
+\date{\today}
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\bibliography{sprint_19_features}
+\begin{document}
+
+\begin{frame}
+\titlepage{}
+\end{frame}
+
+\begin{frame}
+\frametitle{User Visible Changes}
+
+\begin{itemize}
+  \pause{}
+\item Add support for variability overrides in Dogen
+  \pause{}
+\item Tracing of model dependencies
+  \pause{}
+\item Split generated tests from manual tests
+  \pause{}
+\item Meta-data keys are processed in the inverse order
+  \pause{}
+\item Tracer numbering of dumped models is incorrect
+  \pause{}
+\item Creating reference cycles produces strange errors
+  \pause{}
+\item Error on duplicate references
+  \pause{}
+\item Removal of ``Master Headers''
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Fin}
+\end{frame}
+
+\end{document}
