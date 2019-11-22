@@ -10,15 +10,18 @@ Contains all the major tasks required to finish the V2 release. These
 are not stories per se, but more like epics.
 
 Sourced from [[https://orgmode.org/worg/org-tutorials/org-taskjuggler.html][Creating Gantt charts by Exporting to TaskJuggler]]. Export
-using C-c C-e J p. File is under Reports directory.
+using C-c C-e J p. File is under Reports directory. Ensure you have
+task juggler installed:
+
+: apt install tj3
 
 ** Software Development
 
 *** Fabric clean-up
    :PROPERTIES:
-   :EFFORT:   3d
+   :EFFORT:   6d
    :BLOCKER:  start
-   :allocate: s19
+   :allocate: s20
    :END:
 
 - move all C++ fabric types into coding.
@@ -26,9 +29,9 @@ using C-c C-e J p. File is under Reports directory.
 
 *** Generation meta-model clean-up
    :PROPERTIES:
-   :EFFORT:   3d
+   :EFFORT:   6d
    :BLOCKER:  previous-sibling
-   :allocate: s20
+   :allocate: s21
    :END:
 
 - remove all types that are in coding but are related to generation
@@ -36,9 +39,9 @@ using C-c C-e J p. File is under Reports directory.
 
 *** Formattables clean-up
    :PROPERTIES:
-   :EFFORT:   3d
+   :EFFORT:   6d
    :BLOCKER:  previous-sibling
-   :allocate: s21
+   :allocate: s22
    :END:
 
 - move formattables concepts into generation, generalising them. This
@@ -46,9 +49,9 @@ using C-c C-e J p. File is under Reports directory.
 
 *** Generation extraction model
    :PROPERTIES:
-   :EFFORT:   2d
+   :EFFORT:   4d
    :BLOCKER:  previous-sibling
-   :allocate: s21
+   :allocate: s23
    :END:
 
 - when C++ and C# models only have formatters, merge them into one
@@ -56,9 +59,9 @@ using C-c C-e J p. File is under Reports directory.
 
 *** Makefiles clean up
    :PROPERTIES:
-   :EFFORT:   1d
+   :EFFORT:   2d
    :BLOCKER:  previous-sibling
-   :allocate: s22
+   :allocate: s23
    :END:
 
 - update all CMake templates with latest layout from hand-crafted
@@ -66,18 +69,18 @@ using C-c C-e J p. File is under Reports directory.
 
 *** Product generation
    :PROPERTIES:
-   :EFFORT:   3d
+   :EFFORT:   6d
    :BLOCKER:  previous-sibling
-   :allocate: s22
+   :allocate: s23
    :END:
 
 - add proudct and product family level entities to coding.
 
 *** PDMs generation
    :PROPERTIES:
-   :EFFORT:   3d
+   :EFFORT:   6d
    :BLOCKER:  previous-sibling
-   :allocate: s23
+   :allocate: s24
    :END:
 
 - create PDMs
@@ -87,17 +90,13 @@ using C-c C-e J p. File is under Reports directory.
 *** Project start
     :PROPERTIES:
     :task_id: start
-    :start: 2019-06-03
+    :start: 2019-11-22
     :END:
 
 * Sprints                                              :taskjuggler_resource:
 
 Sprints for the project plan.
 
-** Sprint 19
-   :PROPERTIES:
-   :resource_id: s19
-   :END:
 ** Sprint 20
    :PROPERTIES:
    :resource_id: s20
@@ -110,8 +109,11 @@ Sprints for the project plan.
    :PROPERTIES:
    :resource_id: s22
    :END:
-
 ** Sprint 23
    :PROPERTIES:
    :resource_id: s23
+   :END:
+** Sprint 24
+   :PROPERTIES:
+   :resource_id: s24
    :END:
