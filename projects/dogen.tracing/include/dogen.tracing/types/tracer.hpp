@@ -27,10 +27,14 @@
 
 #include <list>
 #include <string>
+#include <sstream>
 #include <unordered_map>
 #include <boost/optional.hpp>
+#include <boost/shared_ptr.hpp>
 #include "dogen.tracing/types/file_tracer.hpp"
+#include "dogen.tracing/types/relational_tracer.hpp"
 #include "dogen/types/tracing_configuration.hpp"
+#include "dogen/types/database_configuration.hpp"
 
 namespace dogen::tracing {
 
@@ -42,7 +46,8 @@ public:
     tracer(const tracer&) = default;
 
 public:
-    explicit tracer(const boost::optional<tracing_configuration>& cfg);
+    tracer(const boost::optional<tracing_configuration>& tcfg,
+        const boost::optional<database_configuration>& dbcfg);
 
 public:
     const boost::optional<tracing_configuration> configuration() const {
@@ -61,7 +66,12 @@ public:
     template<typename Ioable>
     void add_initial_input(const std::string& input_id,
         const Ioable& input) const {
-        file_tracer_.add_initial_input(input_id, input);
+        if (relational_tracer_) {
+            std::ostringstream s;
+            s << input;
+            relational_tracer_->add_initial_input(input_id, s.str());
+        } else
+            file_tracer_.add_initial_input(input_id, input);
     }
 
     void add_references_graph(const std::string& root_vertex,
@@ -112,6 +122,7 @@ public:
 
 private:
     file_tracer file_tracer_;
+    boost::shared_ptr<relational_tracer> relational_tracer_;
     const boost::optional<tracing_configuration> configuration_;
 };
 

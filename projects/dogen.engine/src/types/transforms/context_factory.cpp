@@ -149,7 +149,8 @@ make_injection_context(const configuration& cfg) {
      * Setup the tracer. Note that we do it regardless of whether
      * tracing is enabled or not - its the tracer job to handle that.
      */
-    const auto tracer(boost::make_shared<tracing::tracer>(cfg.tracing()));
+    const auto tracer(boost::make_shared<tracing::tracer>(
+            cfg.tracing(), cfg.database()));
     r.tracer(tracer);
 
     return r;
@@ -196,7 +197,8 @@ context context_factory::make_context(const configuration& cfg,
      * Setup the tracer. Note that we do it regardless of whether
      * tracing is enabled or not - its the tracer job to handle that.
      */
-    const auto tracer(boost::make_shared<tracing::tracer>(cfg.tracing()));
+    const auto tracer(boost::make_shared<tracing::tracer>(
+            cfg.tracing(), cfg.database()));
     vctx.tracer(tracer);
     tracer->add_initial_input(alrp_input_id, *alrp);
 

@@ -12,19 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-23 Sat 16:38]
+#+CAPTION: Clock summary at [2019-11-23 Sat 18:28]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *15:49* |       |       | 100.0 |
+| *Total time*                                       | *17:21* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 15:49   |       |       | 100.0 |
-| Active                                             |         | 15:49 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       | 11:24 |  72.1 |
-| Create a demo and presentation for previous sprint |         |       |  2:31 |  15.9 |
-| Sprint and product backlog grooming                |         |       |  1:16 |   8.0 |
-| Fix OSX build errors                               |         |       |  0:25 |   2.6 |
-| Nightly code coverage is not being reported        |         |       |  0:13 |   1.4 |
+| Stories                                            | 17:21   |       |       | 100.0 |
+| Active                                             |         | 17:21 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       | 11:24 |  65.7 |
+| Create a demo and presentation for previous sprint |         |       |  2:31 |  14.5 |
+| Sprint and product backlog grooming                |         |       |  1:16 |   7.3 |
+| Fix OSX build errors                               |         |       |  0:25 |   2.4 |
+| Nightly code coverage is not being reported        |         |       |  0:23 |   2.2 |
+| Add relational tracing support                     |         |       |  1:22 |   7.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -317,81 +318,17 @@ Links:
 
 *** STARTED Nightly code coverage is not being reported               :story:
     :LOGBOOK:
+    CLOCK: [2019-11-23 Sat 16:39]--[2019-11-23 Sat 16:49] =>  0:10
     CLOCK: [2019-11-23 Sat 16:25]--[2019-11-23 Sat 16:38] =>  0:13
     :END:
 
 We are running kcov in the nightlies, but we cannot see the results in
 the coverage tool.
 
-*** Check OSX packages                                                :story:
-
-We need to ensure OSX packages are still working. At present, the
-build says:
-
-: FATALcould not find C++ runtime
-
-For this the problem appears to be that we are trying to add the C++
-run time and not finding it. We need to test the OSX packages and see
-if Dogen still works. If it does, remove this.
-
-:   if(EXISTS "/usr/local/lib/i386/libstdc++.6.dylib")
-:       set (cpp_runtime_libs
-:           ${cpp_runtime_libs} "/usr/local/lib/i386/libstdc++.6.dylib")
-:       set (cpp_runtime_libs
-:           ${cpp_runtime_libs} "/usr/local/lib/i386/libgcc_s.1.dylib")
-:   else()
-:       message(FATAL "could not find C++ runtime")
-:   endif()
-
-*** Move registrar into assets                                        :story:
-
-Move the registrar type into assets, in the quickest way possible.
-
-Notes:
-
-- In order to avoid blocking due to lots of analysis, we need
-  to split this story into three:
-  - first, we need to just move the registrar as is into assets.
-  - a second story is to clean up the existing registrar code to have
-    less templates and possibly address the existing registration
-    bugs. We could also look into calling the registrars for
-    referenced models automatically as part of this work (at present
-    we are doing this manually).
-  - finally, we need some meta-level refactoring to figure out if the
-    pattern can be generalised to include initialisers, etc.
-  In general that should be our approach: try to split out the
-  capturing of patterns into as many steps as possible, to make sure
-  we don't get overwhelmed as we implement things.
-- we need to keep track of all type registrars on referenced models,
-  not on the referenced models themselves. We need to know which
-  models we referenced directly, and then find the registrars for
-  those models.
-- leaves need to know of the registrar. This is so that we can call it
-  in their generated tests. We could use the registrar transform to go
-  and find all leaves and populate their registrar name.
-- current state is that we cannot generate the registrar for some
-  reason.
-- test model with registrar is C++ model. Type is called
-  registrar. Its probably not a good idea to also call it registrar -
-  wouldn't that clash with the existing type?
-- we should have a warning/error: if using boost serialisation with a
-  model that has inheritance, the registrar should be present. Added
-  to warnings story.
-
-*** Setup laptop to work on dogen                                     :story:
-
-We haven't used the laptop for dogen for quite a bit so its behind the
-main machine. Get it in a shape to do development again.
-
-Items missing:
-
-- consolas font. done.
-- dir locals for projects
-- polymode
-- build2
-- odb
-
-*** Add relational tracing support                                    :story:
+*** STARTED Add relational tracing support                            :story:
+    :LOGBOOK:
+    CLOCK: [2019-11-23 Sat 17:06]--[2019-11-23 Sat 18:28] =>  1:22
+    :END:
 
 Whenever we bump into a problem we seem to spend a lot of time going
 through the log files and trace files trying to figure out where the
@@ -541,6 +478,74 @@ start and end of this transform?"
 
 Interestingly, this would also allow us to compare things between
 runs. The schema should be designed with this in mind.
+
+*** Check OSX packages                                                :story:
+
+We need to ensure OSX packages are still working. At present, the
+build says:
+
+: FATALcould not find C++ runtime
+
+For this the problem appears to be that we are trying to add the C++
+run time and not finding it. We need to test the OSX packages and see
+if Dogen still works. If it does, remove this.
+
+:   if(EXISTS "/usr/local/lib/i386/libstdc++.6.dylib")
+:       set (cpp_runtime_libs
+:           ${cpp_runtime_libs} "/usr/local/lib/i386/libstdc++.6.dylib")
+:       set (cpp_runtime_libs
+:           ${cpp_runtime_libs} "/usr/local/lib/i386/libgcc_s.1.dylib")
+:   else()
+:       message(FATAL "could not find C++ runtime")
+:   endif()
+
+*** Move registrar into assets                                        :story:
+
+Move the registrar type into assets, in the quickest way possible.
+
+Notes:
+
+- In order to avoid blocking due to lots of analysis, we need
+  to split this story into three:
+  - first, we need to just move the registrar as is into assets.
+  - a second story is to clean up the existing registrar code to have
+    less templates and possibly address the existing registration
+    bugs. We could also look into calling the registrars for
+    referenced models automatically as part of this work (at present
+    we are doing this manually).
+  - finally, we need some meta-level refactoring to figure out if the
+    pattern can be generalised to include initialisers, etc.
+  In general that should be our approach: try to split out the
+  capturing of patterns into as many steps as possible, to make sure
+  we don't get overwhelmed as we implement things.
+- we need to keep track of all type registrars on referenced models,
+  not on the referenced models themselves. We need to know which
+  models we referenced directly, and then find the registrars for
+  those models.
+- leaves need to know of the registrar. This is so that we can call it
+  in their generated tests. We could use the registrar transform to go
+  and find all leaves and populate their registrar name.
+- current state is that we cannot generate the registrar for some
+  reason.
+- test model with registrar is C++ model. Type is called
+  registrar. Its probably not a good idea to also call it registrar -
+  wouldn't that clash with the existing type?
+- we should have a warning/error: if using boost serialisation with a
+  model that has inheritance, the registrar should be present. Added
+  to warnings story.
+
+*** Setup laptop to work on dogen                                     :story:
+
+We haven't used the laptop for dogen for quite a bit so its behind the
+main machine. Get it in a shape to do development again.
+
+Items missing:
+
+- consolas font. done.
+- dir locals for projects
+- polymode
+- build2
+- odb
 
 *** Modeling elements can have =profile= setup                        :story:
 

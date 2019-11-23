@@ -24,6 +24,8 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.archetypes/types/location_repository_builder.hpp"
 #include "dogen.tracing/types/tracer.hpp"
+#include "dogen/types/tracing_configuration.hpp"
+#include "dogen/types/database_configuration.hpp"
 #include "dogen.assets/test/mock_context_factory.hpp"
 
 namespace {
@@ -43,7 +45,8 @@ transforms::context mock_context_factory::make() {
     r.archetype_location_repository(alrp);
 
     boost::optional<tracing_configuration> tcfg;
-    auto tracer(boost::make_shared<tracing::tracer>(tcfg));
+    boost::optional<database_configuration> dbcfg;
+    auto tracer(boost::make_shared<tracing::tracer>(tcfg, dbcfg));
     r.tracer(tracer);
 
     BOOST_LOG_SEV(lg, debug) << "Created the context.";

@@ -25,25 +25,27 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <boost/optional.hpp>
+#include "dogen/types/tracing_configuration.hpp"
+#include "dogen/types/database_configuration.hpp"
 
 namespace dogen::tracing {
 
-class relational_tracer final {
+class relational_tracer {
 public:
-    relational_tracer() = default;
-    relational_tracer(const relational_tracer&) = default;
-    relational_tracer(relational_tracer&&) = default;
-    ~relational_tracer() = default;
-    relational_tracer& operator=(const relational_tracer&) = default;
+    virtual ~relational_tracer() = 0;
 
 public:
-    bool operator==(const relational_tracer& rhs) const;
-    bool operator!=(const relational_tracer& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    virtual void add_initial_input(const std::string& input_id,
+        const std::string& input) const = 0;
 };
+
+inline relational_tracer::~relational_tracer() {}
+
+relational_tracer* make_relational_tracer(
+    const boost::optional<tracing_configuration>& tcfg,
+    const boost::optional<database_configuration>& dbcfg);
 
 }
 

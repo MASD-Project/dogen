@@ -18,12 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/io/tracing_configuration_io.hpp"
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/tracing_error.hpp"
 #include "dogen.tracing/types/tracer.hpp"
+#include "dogen/types/tracing_backend.hpp"
 
 namespace {
 
@@ -37,8 +39,13 @@ const std::string directory_missing("Tracing data directory must be supplied.");
 
 namespace dogen::tracing {
 
-tracer::tracer(const boost::optional<tracing_configuration>& cfg) :
-    file_tracer_(cfg), configuration_(cfg) {}
+tracer::tracer(const boost::optional<tracing_configuration>& tcfg,
+    const boost::optional<database_configuration>& dbcfg) :
+    file_tracer_(tcfg), configuration_(tcfg) {
+
+    relational_tracer_ = boost::shared_ptr<relational_tracer>(
+        make_relational_tracer(tcfg, dbcfg));
+}
 
 void tracer::validate() const {
     /*
