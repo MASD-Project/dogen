@@ -80,7 +80,9 @@ compiler=${clang_compiler}
 ctest --extra-verbose --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${number_of_jobs},build_group=${build_group},minimal_packaging=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
 
 STAGE_DIR=build/output/${compiler}/${configuration}/stage
-coverage.linux.sh ${STAGE_DIR} /tmp/kcov
+
+export PATH=/home/marco/nightly/bin:$PATH
+build/scripts/coverage.linux.sh ${STAGE_DIR} /tmp/kcov > ${logs_dir}/coverage.log
 
 compiler=${gcc_compiler}
 ctest --extra-verbose --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${number_of_jobs},build_group=${build_group},minimal_packaging=1" > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
