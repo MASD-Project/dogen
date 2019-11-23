@@ -555,11 +555,6 @@ Links:
 - [[https://github.com/ngortheone/org-rs][org-rs]]: rust library for org-mode.
 - [[https://github.com/felipealmeida/orgmode-parsers][orgmode-parsers]]
 
-*** Nightly code coverage is not being reported                       :story:
-
-We are running kcov in the nightlies, but we cannot see the results in
-the coverage tool.
-
 *** Code coverage does not show file level results                    :story:
 
 We seem to be pointing to a incorrect location on github to find the
@@ -7066,20 +7061,23 @@ should check the family and the streaming settings; if both of these
 are empty then there should not be a need for a helper. But maybe
 there is more to it.
 
-*** Remove unused elements from yarn's final model                    :story:
+*** Remove unused elements from assets' final model                   :story:
 
 We could mark all used elements during resolution and then during the
 transformation into the final model, we could drop all unused
-elements.
+elements. This could be done by a "reducer" transform.
 
 This makes even more sense once we move all of the dependency
-generation code from the kernels into yarn, because then only
+generation code from the kernels into assets, because then only
 generated types are required. This means we have two levels of
 removal:
 
 - types which are not referenced during resolution: slightly more
-  complicated now that we resolve in multiple places.
-- types which are not generatable.
+  complicated now that we resolve in multiple places. However the key
+  is to be able to mark a type as "used" during any part of the
+  transform pipeline.
+- types which are not generatable. This can be removed as we finish
+  the parts of the pipeline that require them (e.g. variability, etc).
 
 We could create transforms for each of these.
 
@@ -13107,6 +13105,36 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Org-mode as a carrier format for modeling                         :story:
+
+This is a bit of a weird idea, but may just work; this story is a
+placeholder to capture ideas in this space. Consider a org-mode
+file as a model. Ideas:
+
+- the top-level properties are all model properties. For example, if
+  you add text at the top, that is a model comment.
+- we can also make use of the exact same format for Dogen comments as
+  we do in Dia, with =#DOGEN= markers.
+- stereotypes and other meta-data can be conveyed using org-mode
+  properties. In addition, due to org-babel, we can include code
+  snippets on any programming language, with some (minimal) IDE-like
+  integration.
+- we could also include the GUIDs for merging as org-mode properties.
+- once we create a C++ stand-alone product to represent org-mode
+  documents, we can just create an adapter for it as an injector.
+- there already is some support for creating state-machines in
+  org-mode: [[https://orgmode.org/worg/org-tutorials/org-dot-diagrams.html][Org tutorial on generating simple process diagrams using
+  dot and tables]]
+
+Links:
+
+- [[https://github.com/mirkoboehm/OrgModeParser][OrgModeParser]]: requires QT.
+- [[https://www.reddit.com/r/emacs/comments/bciwiz/does_orgmode_have_a_formal_grammar_or_some_subset/][Does orgmode have a formal grammar, or some subset of it?]]
+- [[https://orgmode.org/worg/dev/org-syntax.html][Org Syntax (draft)]]
+- [[https://orgmode.org/worg/dev/org-element-api.html][Org Element API]]
+- [[https://github.com/ngortheone/org-rs][org-rs]]: rust library for org-mode.
+- [[https://github.com/felipealmeida/orgmode-parsers][orgmode-parsers]]
+
 *** Consider using ditaa                                              :story:
 
 Ditaa is a diagramming tool that takes ascii art and creates diagrams.
@@ -13135,6 +13163,54 @@ Ideas:
   to have an interactive graph with weighted sizes for each transform
   and chain, and allow users to click on a chain to see its
   components.
+- we can start making comparisons of run duration per target model,
+  per operation. We can even make sure we are comparing like with like
+  because we can see what the initial options were - though it is a bit
+  harder to tell if the model configuration is comparable. This could
+  be achieved by diffing the variability models...
+- we need a screen that captures the "element lifecycle" across all
+  stages of the pipeline, and can be drilled down to individual
+  transforms. Even better would be to be able to see the "before" and
+  "after" state of the element. In an ideal world, the JSON in the
+  database would be formatted so that we can run a quick diff (DTL
+  would do) on the before and after. This way we can quickly validate
+  that a given model element was processed correctly all the way until
+  generation.
+- it would be nice to have a graph that shows how a given injection
+  element was converted to a number of assets elements and these into
+  a number of artefacts. Perhaps a tree is better to display this?
+  Maybe there are several "tree views": the assets view, the injection
+  view, the "extraction view" and the tree represents the model for
+  that view?
+- we should have a log viewer that enables us to see the log
+  entries. This could be just a flat log viewer, or a transform graph
+  based log viewer. In this case it would have the transform tree on
+  the left and as the user selects nodes the log lines would narrow to
+  the current transform or transform chain. The log view should have
+  filters and be searchable. It should make errors and warnings very
+  easy to spot and allow filtering on those as well (e.g. log level
+  filter). For log lines with JSON, it would be nice to be able to
+  detect the JSON by looking at object markers (e.g. ={}=, =[]=, etc)
+  and extract the JSON out of the log line and format it. An
+  interactive JSON widget would be even better.
+- it would be nice to have a "validation checks view", where we could
+  see all of the checks that were performed and their result. These
+  are the checks that one day will be converted to errors and warnings
+  to output to end users by the command line.
+- use injection elements as a filter: it may be nice to have a list of
+  all injection elements and then only display those which are
+  selected. The idea would be that the user would have a "complete
+  view" on the right with all transforms, etc - but only the assets
+  and extraction elements that are associated with selected injection
+  elements are displayed. This would make troubleshooting much easier.
+
+*** Consider using typedefs for variants                              :story:
+
+When we create types that have variants, the generated code is really
+awkward. It would be nice if users could create typedefs that are used
+internally in the class using the variant (and possibly
+everywhere?). We need support for typedefs as a meta-model element
+first.
 
 *** Investigate if Seamless template can be used instead of stitch    :story:
 

@@ -12,24 +12,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-22 Fri 13:59]
+#+CAPTION: Clock summary at [2019-11-23 Sat 16:38]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *13:55* |       |       | 100.0 |
+| *Total time*                                       | *15:49* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 13:55   |       |       | 100.0 |
-| Active                                             |         | 13:55 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       | 10:28 |  75.2 |
-| Create a demo and presentation for previous sprint |         |       |  2:31 |  18.1 |
-| Sprint and product backlog grooming                |         |       |  0:31 |   3.7 |
-| Fix OSX build errors                               |         |       |  0:25 |   3.0 |
+| Stories                                            | 15:49   |       |       | 100.0 |
+| Active                                             |         | 15:49 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       | 11:24 |  72.1 |
+| Create a demo and presentation for previous sprint |         |       |  2:31 |  15.9 |
+| Sprint and product backlog grooming                |         |       |  1:16 |   8.0 |
+| Fix OSX build errors                               |         |       |  0:25 |   2.6 |
+| Nightly code coverage is not being reported        |         |       |  0:13 |   1.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2019-11-22 Fri 09:50]
     :LOGBOOK:
+    CLOCK: [2019-11-22 Fri 20:41]--[2019-11-22 Fri 21:37] =>  0:56
     CLOCK: [2019-11-22 Fri 09:51]--[2019-11-22 Fri 10:36] =>  0:45
     CLOCK: [2019-11-22 Fri 08:16]--[2019-11-22 Fri 09:50] =>  1:34
     CLOCK: [2019-11-21 Thu 20:58]--[2019-11-21 Thu 22:01] =>  1:03
@@ -249,7 +251,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 Happy Modeling!
 #+END_SRC markdown
 
-- [[https://twitter.com/MarcoCraveiro/status/1135567734010523648][twitter]]
+- [[https://twitter.com/MarcoCraveiro/status/1197975747614400517][twitter]]
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6541333935140458497][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
@@ -271,6 +273,7 @@ Notes:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-11-22 Fri 14:00]--[2019-11-22 Fri 14:45] =>  0:45
     CLOCK: [2019-11-18 Mon 08:51]--[2019-11-18 Mon 08:58] =>  0:07
     CLOCK: [2019-11-18 Mon 08:41]--[2019-11-18 Mon 08:50] =>  0:09
     CLOCK: [2019-11-18 Mon 08:38]--[2019-11-18 Mon 08:40] =>  0:02
@@ -279,7 +282,8 @@ Notes:
 
 Updates to sprint and product backlog.
 
-*** STARTED Fix OSX build errors                                      :story:
+*** COMPLETED Fix OSX build errors                                    :story:
+    CLOSED: [2019-11-23 Sat 16:11]
     :LOGBOOK:
     CLOCK: [2019-11-22 Fri 11:06]--[2019-11-22 Fri 11:19] =>  0:13
     CLOCK: [2019-11-22 Fri 10:37]--[2019-11-22 Fri 10:49] =>  0:12
@@ -305,8 +309,24 @@ For this, we can try to remove the brew version of boost:
 
 : brew uninstall boost --force
 
+Links:
 
-A second error is:
+- [[https://formulae.brew.sh/formula/boost][Boost formula]]
+- [[https://superuser.com/questions/1100711/remove-package-installed-by-brew][SO: remove package installed by brew]]
+- [[https://github.com/boostorg/boost_install/issues/13][Support for Boost_USE_MULTITHREADED missing]]
+
+*** STARTED Nightly code coverage is not being reported               :story:
+    :LOGBOOK:
+    CLOCK: [2019-11-23 Sat 16:25]--[2019-11-23 Sat 16:38] =>  0:13
+    :END:
+
+We are running kcov in the nightlies, but we cannot see the results in
+the coverage tool.
+
+*** Check OSX packages                                                :story:
+
+We need to ensure OSX packages are still working. At present, the
+build says:
 
 : FATALcould not find C++ runtime
 
@@ -323,11 +343,204 @@ if Dogen still works. If it does, remove this.
 :       message(FATAL "could not find C++ runtime")
 :   endif()
 
-Links:
+*** Move registrar into assets                                        :story:
 
-- [[https://formulae.brew.sh/formula/boost][Boost formula]]
-- [[https://superuser.com/questions/1100711/remove-package-installed-by-brew][SO: remove package installed by brew]]
-- [[https://github.com/boostorg/boost_install/issues/13][Support for Boost_USE_MULTITHREADED missing]]
+Move the registrar type into assets, in the quickest way possible.
+
+Notes:
+
+- In order to avoid blocking due to lots of analysis, we need
+  to split this story into three:
+  - first, we need to just move the registrar as is into assets.
+  - a second story is to clean up the existing registrar code to have
+    less templates and possibly address the existing registration
+    bugs. We could also look into calling the registrars for
+    referenced models automatically as part of this work (at present
+    we are doing this manually).
+  - finally, we need some meta-level refactoring to figure out if the
+    pattern can be generalised to include initialisers, etc.
+  In general that should be our approach: try to split out the
+  capturing of patterns into as many steps as possible, to make sure
+  we don't get overwhelmed as we implement things.
+- we need to keep track of all type registrars on referenced models,
+  not on the referenced models themselves. We need to know which
+  models we referenced directly, and then find the registrars for
+  those models.
+- leaves need to know of the registrar. This is so that we can call it
+  in their generated tests. We could use the registrar transform to go
+  and find all leaves and populate their registrar name.
+- current state is that we cannot generate the registrar for some
+  reason.
+- test model with registrar is C++ model. Type is called
+  registrar. Its probably not a good idea to also call it registrar -
+  wouldn't that clash with the existing type?
+- we should have a warning/error: if using boost serialisation with a
+  model that has inheritance, the registrar should be present. Added
+  to warnings story.
+
+*** Setup laptop to work on dogen                                     :story:
+
+We haven't used the laptop for dogen for quite a bit so its behind the
+main machine. Get it in a shape to do development again.
+
+Items missing:
+
+- consolas font. done.
+- dir locals for projects
+- polymode
+- build2
+- odb
+
+*** Add relational tracing support                                    :story:
+
+Whenever we bump into a problem we seem to spend a lot of time going
+through the log files and trace files trying to figure out where the
+problem is happening. Have a quick go in trying to implement a
+relational model for tracing to see if we can transfer the bulk of the
+data into a relational format which we can query via SQL.
+
+We've created a basic relational model for tracing. The relational
+part of it seems straightforward (ish); the problem is the integration
+of the tracer with the relational model. At present we rely on the
+fact that all traceable objects have IO enabled; this works because
+the code generator creates the IO facet, which is then used by the
+write method in utility to convert any model type into a
+string. However, we now need to change the approach: we need multiple
+tracing backends:
+
+- file tracer
+- database tracer.
+
+The file tracer is more or less the current tracer. The database
+tracer needs to decompose the objects in existing models into a
+relational representation. In an ideal world, the user would configure
+the tracer to use one of the two backends and the remaining usage
+would be transparent. However, we cannot have an interface for the
+tracer backend that uses template methods because then we'd need
+virtual template functions, it seems.
+
+Another alternative is to make the tracer aware of the model objects
+it is tracing. This is also not ideal because we would create cycles
+in the design.
+
+In effect we need to somehow implement a similar approach to the existing
+tracer: rely on global template functions a-la =operator<<= to
+decompose objects into their relational representations and then
+supply those to the backend. It is not very clear how this would
+work. For now we've postponed this approach as it seems its not going
+to be a quick win.
+
+We should approach this incrementally. Next time we have a bit of
+spare time, we need to generate the model and then create the adapters
+from existing models. Finally we can look at how it will be integrated
+with tracing.
+
+Notes:
+
+- compilation generates an ODB error:
+
+: FATALODB include directories not defined.
+
+- the key difference between northwind and tracing is that we have a
+  namespace. The application of the schema pragma is probably not
+  working due to this. We need to look into the transform to see how
+  that pragma propagates.
+- the problem arises because we are only populating the primitive's
+  properties if there is a top-level pragma. As the schema is not
+  populated for the namespace, there isn't one. It is not clear why
+  one would want to skip properties such as DB member if there isn't a
+  schema, but perhaps this is due to some ODB error. We should
+  probably issue an error or warning if we cannot generate code
+  without a schema name.
+- with regards to the relational model, the problem is that we can't
+  really create a schema for each namespace in a model because schemas
+  are not really like namespaces. The entities in a schema should
+  really be self-contained and not refer to other schemas or else the
+  database will be confusing to use. For example in postgres we will
+  need to set the schema path, etc in order to see the different
+  tables. One possible solution is to set the schema name to the same
+  value for all namespaces (e.g. =dogen=). This would then allow us to
+  have namespaces in C++ but not in the database.
+- it seems foreign keys are not supported at present. We probably need
+  support for this in order to query quickly or else we will have to
+  manually setup indices for each of these joining fields.
+- we need a command line option to choose the tracing backend
+  (e.g. file or database). We also need the database configuration
+  parameters: hostname, port, database, user.
+- we need to refactor tracer as follows:
+  - update the tracer interface to take actual types rather than
+    templates.
+  - create a top-level interface for the notion of a backend.
+  - create two implementations of the backend: file and relational.
+  - move all the file related code to the file backend.
+  - implement adapters for each model to convert them into relational
+    model types.
+  - implement the relational backend.
+- Add relational model to the dogen model tests.
+
+Merged stories:
+
+*Scripts for loading traces into postgres*
+
+- rationale: this story is superseded by having a relational model.
+
+It would be really nice if as part of the tracing generation we also
+generated a set of SQL scripts that:
+
+- created a number of tables
+- copied all of the generated data into the database
+- added a number of utility functions such as get elements in model, etc.
+
+Over time we could build up functionality but to start off with we
+just want something really simple that copies all of the
+files. Interestingly this "looks" like a job for dogen. It would be
+nice to have a meta-model element for this etc.
+
+In the future it would be nice to have a think about the schema so
+that we could do joins etc. For example:
+
+- show me all transforms with element of type X (the state of the
+  element at each transform).
+
+We should also take into account multiple runs. Perhaps a more
+adequate solution is to create a dogen library that has the ORM
+support for this. Once we have proper JSON serialisation we can store
+the objects as JSON serialisable, allowing us to re-run transforms,
+etc.
+
+Notes:
+
+- ensure we upload the file name or at least the coordinates to the
+  transform graph with the data so that we know what it refers to.
+- rename relational database enum to just database
+- rename hostname to just host
+
+*Improved understanding*
+
+Better than uploading a whole load of JSON blobs and then having to do
+a number of really complex queries, is to have a ORM schema that is
+designed to capture the data in the format we're interested in. Then
+we could do very simple queries. What we really care about is
+capturing all attributes of the model as it changes across the
+transformations. We also care about the relationships between
+transformations. We also need a way to uniquely identify elements
+across their entire lifecycle. A simple way would be to create a hash
+of the file name of the model, column and line number. We can then
+associate other IDs to this one such as dia ID, etc.
+
+We need to create a set of adaptors that convert an existing model
+(injection, coding, etc) into the ORM model and then write the ORM
+model into the database. The ORM model does not need as much detail
+and structure as a regular model; for example, names can be flattened
+or linked into IDs (e.g. name table), etc. Whatever makes sense from a
+relational perspective.
+
+It would also be nice to dump the log into the database so that we
+could do simple correlations such as "what was logged between the
+start and end of this transform?"
+
+Interestingly, this would also allow us to compare things between
+runs. The schema should be designed with this in mind.
 
 *** Modeling elements can have =profile= setup                        :story:
 
@@ -580,5 +793,39 @@ model. This is why we never bumped into this problem before.
 
 At present we are generating the cpp for this file for no reason, use
 the correct profile for header only.
+
+*** Upgrade to boost 1.70                                             :story:
+
+We should try to upgrade to latest boost.
+
+Notes:
+
+- the problem appears to be that with OSX we do not have a compiler
+  installed that can compile vcpkg. It is not clear how we did it
+  before. The installed XCode compiler is too old and we do not have
+  homebrew for gcc.
+- installed LLVM 7. Ninja then went on a strange loop, regenerating
+  CMake files. This was because NTP had not been working on OSX for
+  some reason, and the clock was in the past.
+- compiling with clang 7 causes the =-lc++fs= linking error. Tried
+  compiling with clang 8.
+- Compilation required setting LDFLAGS -L to point to the lib
+  directory of the download, else the static library for filesystem
+  could not be location.
+- We may have linking problems now that we are using XCode 10 in
+  travis and clang 8 to build vcpkg dependencies.
+- ODB 2.5 no longer works due to a git ref mismatch. Not clear why
+  that would be but the object we were referencing no longer exists in
+  code synthesis git repo.
+- the ref for ODB SQL lite 2.5.0-b.9 does not seem to exist in their
+  repo any longer. Due to this, the OSX build is failing. For now we
+  shall try to update excluding that dependency, given we are not even
+  using it.
+- boost regex fails to build. The problem is that we are picking up
+  the system compiler instead of CXX. It is not clear why that
+  is. Maybe we got lucky in the past because we were using c++14 but
+  now with c++17 system clang fails to compile because it does not
+  have c++ 17 support.
+- nightlies are now failing with a missing reference to SQL lite.
 
 ** Deprecated
