@@ -68,7 +68,7 @@
         <dia:point val="5,-18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="4.95,-18.05;32.9,0.55"/>
+        <dia:rectangle val="4.95,-18.05;32.9,1.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="27.850000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="18.500000000000004"/>
+        <dia:real val="19.300000000000004"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -107,6 +107,7 @@
 #DOGEN masd.extraction.ignore_files_matching_regex=.*-odb.*
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
+#DOGEN masd.extraction.ignore_files_matching_regex=.*/sql/.*
 #DOGEN masd.extraction.delete_extra_files=true
 #DOGEN masd.extraction.delete_empty_directories=true
 #DOGEN masd.generation.cpp.enabled=true
