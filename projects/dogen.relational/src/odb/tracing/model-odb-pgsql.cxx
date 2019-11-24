@@ -459,11 +459,11 @@ namespace odb
   "\"TYPE\", "
   "\"SOURCE_FILE\") "
   "VALUES "
-  "($1, $2, $3, $4, $5, $6, $7, $8)";
+  "(to_jsonb($1::jsonb), $2, $3, $4, $5, $6, $7, $8)";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::model, id_pgsql >::query_statement[] =
   "SELECT "
-  "\"DOGEN\".\"MODEL\".\"JSON_CONTENT\", "
+  "from_jsonb(\"DOGEN\".\"MODEL\".\"JSON_CONTENT\"), "
   "\"DOGEN\".\"MODEL\".\"XML_CONTENT\", "
   "\"DOGEN\".\"MODEL\".\"ID\", "
   "\"DOGEN\".\"MODEL\".\"MODEL_SET_ID\", "
@@ -632,7 +632,7 @@ namespace odb
         case 1:
         {
           db.execute ("CREATE TABLE \"DOGEN\".\"MODEL\" (\n"
-                      "  \"JSON_CONTENT\" TEXT NOT NULL,\n"
+                      "  \"JSON_CONTENT\" JSONB NOT NULL,\n"
                       "  \"XML_CONTENT\" TEXT NOT NULL,\n"
                       "  \"ID\" TEXT NOT NULL,\n"
                       "  \"MODEL_SET_ID\" TEXT NULL,\n"

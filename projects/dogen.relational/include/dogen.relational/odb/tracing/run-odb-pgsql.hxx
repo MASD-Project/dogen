@@ -206,7 +206,7 @@ namespace odb
   template <typename A>
   const typename query_columns< ::dogen::relational::tracing::run, id_pgsql, A >::configuration_class_::value_type_
   query_columns< ::dogen::relational::tracing::run, id_pgsql, A >::configuration_class_::
-  value (A::table_name, "\"CONFIGURATION\"", 0);
+  value (A::table_name, "\"CONFIGURATION\"", "to_jsonb((?)::jsonb)");
 
   template <typename A>
   const typename query_columns< ::dogen::relational::tracing::run, id_pgsql, A >::configuration_class_

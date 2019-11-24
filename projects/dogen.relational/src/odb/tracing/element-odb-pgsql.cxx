@@ -323,11 +323,11 @@ namespace odb
   "\"QUALIFIED_NAME\", "
   "\"QUALIFIED_META_NAME\") "
   "VALUES "
-  "($1, $2, $3, $4, $5)";
+  "(to_jsonb($1::jsonb), $2, $3, $4, $5)";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::element, id_pgsql >::query_statement[] =
   "SELECT "
-  "\"DOGEN\".\"ELEMENT\".\"JSON_CONTENT\", "
+  "from_jsonb(\"DOGEN\".\"ELEMENT\".\"JSON_CONTENT\"), "
   "\"DOGEN\".\"ELEMENT\".\"ID\", "
   "\"DOGEN\".\"ELEMENT\".\"MODEL_ID\", "
   "\"DOGEN\".\"ELEMENT\".\"QUALIFIED_NAME\", "
@@ -493,7 +493,7 @@ namespace odb
         case 1:
         {
           db.execute ("CREATE TABLE \"DOGEN\".\"ELEMENT\" (\n"
-                      "  \"JSON_CONTENT\" TEXT NOT NULL,\n"
+                      "  \"JSON_CONTENT\" JSONB NOT NULL,\n"
                       "  \"ID\" TEXT NOT NULL,\n"
                       "  \"MODEL_ID\" TEXT NOT NULL,\n"
                       "  \"QUALIFIED_NAME\" TEXT NOT NULL,\n"

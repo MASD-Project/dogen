@@ -481,7 +481,7 @@ namespace odb
   "\"CONFIGURATION\", "
   "\"TOP_LEVEL_TRANSFORM_ID\") "
   "VALUES "
-  "($1, $2, $3, $4, $5, $6, $7)";
+  "($1, $2, $3, $4, $5, to_jsonb($6::jsonb), $7)";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::run, id_pgsql >::find_statement[] =
   "SELECT "
@@ -490,7 +490,7 @@ namespace odb
   "\"DOGEN\".\"RUN\".\"ID\", "
   "\"DOGEN\".\"RUN\".\"ACTIVITY\", "
   "\"DOGEN\".\"RUN\".\"VERSION\", "
-  "\"DOGEN\".\"RUN\".\"CONFIGURATION\", "
+  "from_jsonb(\"DOGEN\".\"RUN\".\"CONFIGURATION\"), "
   "\"DOGEN\".\"RUN\".\"TOP_LEVEL_TRANSFORM_ID\" "
   "FROM \"DOGEN\".\"RUN\" "
   "WHERE \"DOGEN\".\"RUN\".\"ID\"=$1";
@@ -502,7 +502,7 @@ namespace odb
   "\"END\"=$2, "
   "\"ACTIVITY\"=$3, "
   "\"VERSION\"=$4, "
-  "\"CONFIGURATION\"=$5, "
+  "\"CONFIGURATION\"=to_jsonb($5::jsonb), "
   "\"TOP_LEVEL_TRANSFORM_ID\"=$6 "
   "WHERE \"ID\"=$7";
 
@@ -517,7 +517,7 @@ namespace odb
   "\"DOGEN\".\"RUN\".\"ID\", "
   "\"DOGEN\".\"RUN\".\"ACTIVITY\", "
   "\"DOGEN\".\"RUN\".\"VERSION\", "
-  "\"DOGEN\".\"RUN\".\"CONFIGURATION\", "
+  "from_jsonb(\"DOGEN\".\"RUN\".\"CONFIGURATION\"), "
   "\"DOGEN\".\"RUN\".\"TOP_LEVEL_TRANSFORM_ID\" "
   "FROM \"DOGEN\".\"RUN\"";
 
@@ -943,7 +943,7 @@ namespace odb
                       "  \"ID\" TEXT NOT NULL PRIMARY KEY,\n"
                       "  \"ACTIVITY\" INTEGER NOT NULL,\n"
                       "  \"VERSION\" TEXT NOT NULL,\n"
-                      "  \"CONFIGURATION\" TEXT NOT NULL,\n"
+                      "  \"CONFIGURATION\" JSONB NOT NULL,\n"
                       "  \"TOP_LEVEL_TRANSFORM_ID\" TEXT NOT NULL)");
           return false;
         }
