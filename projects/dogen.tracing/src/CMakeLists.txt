@@ -42,17 +42,26 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
     set(use_msvc_libs ON)
 endif ()
 
-set(relational_lib "")
+#set(relational_lib "")
 if (WITH_RELATIONAL_SUPPORT)
-    set(relational_lib "dogen.relational.lib")
+    list(APPEND relational_lib
+        -Wl,--whole-archive dogen.relational.lib  -Wl,--no-whole-archive)
+    list(APPEND relational_lib odb::libodb)
+    list(APPEND relational_lib odb::libodb-boost)
+    list(APPEND relational_lib odb::libodb-pgsql)
+    list(APPEND relational_lib odb::libodb-sqlite)
+    list(APPEND relational_lib OpenSSL::SSL)
+    list(APPEND relational_lib OpenSSL::Crypto)
+    # # ${relational_lib}
+    # $<$<BOOL:${use_msvc_libs}>:bcrypt>
+    # Boost::log
 endif()
 
 target_link_libraries(${lib_target_name}
     dogen.lib
     dogen.utility.lib
     ${relational_lib}
-    $<$<BOOL:${use_msvc_libs}>:bcrypt>
-    ${Boost_LIBRARIES})
+    )
 
 install(TARGETS ${lib_target_name}
     ARCHIVE DESTINATION lib

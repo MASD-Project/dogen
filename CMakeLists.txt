@@ -402,7 +402,7 @@ endif()
 #
 if (WITH_RELATIONAL_SUPPORT)
     set(DOGEN_HAVE_RELATIONAL_MODEL "1")
-    find_package(odb COMPONENTS libodb boost pgsql REQUIRED)
+    find_package(odb COMPONENTS libodb boost pgsql sqlite REQUIRED)
     if (odb_FOUND)
         message(STATUS "Found ODB Libraries...")
         set(ODB_LIBODB_FOUND ${odb_FOUND})
@@ -411,6 +411,18 @@ if (WITH_RELATIONAL_SUPPORT)
     endif()
 
     find_program(ODB_EXECUTABLE NAMES odb)
+
+    # sqlite
+    find_package(sqlite3 REQUIRED)
+    if (sqlite3_FOUND)
+        include_directories(SYSTEM ${sqlite3_INCLUDE_DIR})
+        set(LIBS ${LIBS} ${sqlite3_LIBRARY_DIR})
+    endif()
+
+    #
+    # OpenSSL
+    #
+    find_package(OpenSSL REQUIRED)
 
     if (ODB_EXECUTABLE)
         message(STATUS "Found ODB Compiler... (${ODB_EXECUTABLE})")
@@ -479,6 +491,15 @@ if (DOGEN_CLI_EXECUTABLE)
     # set(DOGEN_TRACING_OPTIONS ${DOGEN_TRACING_OPTIONS} --tracing-level detail)
     # set(DOGEN_TRACING_OPTIONS ${DOGEN_TRACING_OPTIONS} --tracing-format org-mode)
     # set(DOGEN_TRACING_OPTIONS ${DOGEN_TRACING_OPTIONS} --tracing-guids-enabled)
+    # set(DOGEN_TRACING_OPTIONS ${DOGEN_TRACING_OPTIONS} --tracing-backend relational)
+
+    set(DOGEN_DATABASE_OPTIONS "")
+    # uncomment to enable database tracing.
+    # set(DOGEN_DATABASE_OPTIONS ${DOGEN_DATABASE_OPTIONS} --database-host localhost)
+    # set(DOGEN_DATABASE_OPTIONS ${DOGEN_DATABASE_OPTIONS} --database-port 5432)
+    # set(DOGEN_DATABASE_OPTIONS ${DOGEN_DATABASE_OPTIONS} --database-name musseque)
+    # set(DOGEN_DATABASE_OPTIONS ${DOGEN_DATABASE_OPTIONS} --database-user build)
+    # set(DOGEN_DATABASE_OPTIONS ${DOGEN_DATABASE_OPTIONS} --database-password build)
 
     set(DOGEN_DIFFING_OPTIONS "")
     # uncomment to enable diffing
@@ -494,8 +515,8 @@ if (DOGEN_CLI_EXECUTABLE)
 
     set(DOGEN_COMMON_OPTIONS ${DOGEN_PROCESSING_OPTIONS}
         ${DOGEN_LOGGING_OPTIONS} ${DOGEN_TRACING_OPTIONS}
-        ${DOGEN_DIFFING_OPTIONS} ${DOGEN_REPORTING_OPTIONS}
-        )
+        ${DOGEN_DATABASE_OPTIONS} ${DOGEN_DIFFING_OPTIONS}
+        ${DOGEN_REPORTING_OPTIONS})
 
     # uncomment the next line if you require compatibility support
     # set(DOGEN_COMMON_OPTIONS ${DOGEN_COMMON_OPTIONS} --compatibility-mode)
