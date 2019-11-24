@@ -18,12 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
+#include <odb/database.hxx>
+#include <odb/transaction.hxx>
+#include <odb/pgsql/database.hxx>
+#include <odb/schema-catalog.hxx>
+#include <boost/make_shared.hpp>
+#include <boost/shared_ptr.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/config.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/tracing_error.hpp"
 #include "dogen.tracing/types/relational_tracer.hpp"
 #ifdef DOGEN_HAVE_RELATIONAL_MODEL
+#include "dogen.relational/types/tracing/run.hpp"
+#include "dogen.relational/odb/tracing/run-odb.hxx"
+#include "dogen.relational/odb/tracing/run-odb-pgsql.hxx"
 #endif
 
 namespace {
@@ -33,6 +42,10 @@ auto lg(logger_factory("tracing.relational_tracer"));
 
 const std::string empty;
 const std::string directory_missing("Tracing data directory must be supplied.");
+const std::string no_tracing_configuration(
+    "Tracing configuration not supplied.");
+const std::string no_database_configuration(
+    "Database configuration not supplied.");
 
 }
 
@@ -51,17 +64,48 @@ public:
 public:
     virtual void add_initial_input(const std::string& input_id,
         const std::string& input) const override;
+
+private:
+    boost::shared_ptr<odb::pgsql::database> database_;
+
 };
 
 relational_impl::relational_impl(
-    const boost::optional<tracing_configuration>& /*tcfg*/,
-    const boost::optional<database_configuration>& /*dbcfg*/) {
+    const boost::optional<tracing_configuration>& tcfg,
+    const boost::optional<database_configuration>& dbcfg) {
 
+    if (!tcfg) {
+        BOOST_LOG_SEV(lg, error) << no_tracing_configuration;
+        BOOST_THROW_EXCEPTION(tracing_error(no_tracing_configuration));
+    }
+
+    if (!dbcfg) {
+        BOOST_LOG_SEV(lg, error) << no_database_configuration;
+        BOOST_THROW_EXCEPTION(tracing_error(no_database_configuration));
+    }
+
+    database_ = boost::make_shared<odb::pgsql::database>(dbcfg->user(),
+        dbcfg->password(), dbcfg->name(), dbcfg->host(), dbcfg->port());
+
+    odb::transaction t(database_->begin());
+    odb::schema_catalog::create_schema(*database_);
+    t.commit();
 }
 
 void relational_impl::add_initial_input(const std::string& input_id,
-    const std::string& /*input*/) const {
+    const std::string& input) const {
     BOOST_LOG_SEV(lg, debug) << "Adding initial input: " << input_id;
+
+    dogen::relational::tracing::run_id id("ABC");
+    dogen::relational::tracing::json json(input);
+
+    dogen::relational::tracing::run run;
+    run.id(id);
+    run.configuration(json);
+
+    odb::transaction t(database_->begin());
+    database_->persist(run);
+    t.commit();
 }
 
 #else
