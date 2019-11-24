@@ -78,7 +78,7 @@ const std::string tracing_format_graphviz("graphviz");
 const std::string tracing_default_directory("tracing");
 const std::string tracing_backend_arg("tracing-backend");
 const std::string tracing_backend_file("file");
-const std::string tracing_backend_database("database");
+const std::string tracing_backend_database("relational");
 
 const std::string reporting_enabled_arg("reporting-enabled");
 const std::string reporting_style_arg("reporting-style");
@@ -91,14 +91,14 @@ const std::string diffing_report_unchanged_arg("diffing-report-unchanged");
 const std::string diffing_destination_file("file");
 const std::string diffing_destination_console("console");
 
-const std::string database_hostname_arg("database-hostname");
+const std::string database_hostname_arg("database-host");
 const std::string database_port_arg("database-port");
 const std::string database_name_arg("database-name");
 const std::string database_user_arg("database-user");
 const std::string database_password_arg("database-password");
 const std::string database_engine_arg("database-engine");
-const std::string database_engine_postgres("database-postgres");
-const std::string database_engine_sqlite("database-sqlite");
+const std::string database_engine_postgres("postgres");
+const std::string database_engine_sqlite("sqlite");
 
 const std::string model_processing_compatibility_mode_arg(
     "compatibility-mode-enabled");
@@ -461,7 +461,7 @@ read_tracing_configuration(const variables_map& vm,
 
     using dogen::tracing_backend;
     if (vm.count(tracing_backend_arg)) {
-        const auto s(vm[tracing_format_arg].as<std::string>());
+        const auto s(vm[tracing_backend_arg].as<std::string>());
         if (s == tracing_backend_file)
             r.backend(tracing_backend::file);
         else if (s == tracing_backend_database)
@@ -559,36 +559,41 @@ read_database_configuration(const variables_map& vm) {
     bool found(false);
 
     database_configuration r;
-    found = vm.count(database_hostname_arg);
-    if (found)
+    if (vm.count(database_hostname_arg)) {
+        found = true;
         r.host(vm[database_hostname_arg].as<std::string>());
+    }
 
-    found &= vm.count(database_port_arg) != 0;
-    if (found)
+    if (vm.count(database_port_arg) != 0) {
+        found = true;
         r.port(vm[database_port_arg].as<unsigned int>());
+    }
 
-    found &= vm.count(database_name_arg) != 0;
-    if (found)
+    if (vm.count(database_name_arg) != 0) {
+        found = true;
         r.name(vm[database_name_arg].as<std::string>());
+    }
 
-    found &= vm.count(database_user_arg) != 0;
-    if (found)
-        r.name(vm[database_user_arg].as<std::string>());
+    if (vm.count(database_user_arg) != 0) {
+        found = true;
+        r.user(vm[database_user_arg].as<std::string>());
+    }
 
-    found &= vm.count(database_password_arg) != 0;
-    if (found)
-        r.name(vm[database_password_arg].as<std::string>());
+    if (vm.count(database_password_arg) != 0) {
+        found = true;
+        r.password(vm[database_password_arg].as<std::string>());
+    }
 
-    found &= vm.count(database_engine_arg) != 0;
-    if (found) {
-        const auto s(vm[database_engine_arg].as<std::string>());
-        using dogen::database_engine;
-        if (s == database_engine_postgres)
-            r.engine(database_engine::postgres);
-        else if (s == database_engine_sqlite)
-            r.engine(database_engine::sqlite);
-        else
-            BOOST_THROW_EXCEPTION(parser_exception(invalid_engine + s));
+    if (vm.count(database_engine_arg) != 0) {
+        found = true;
+         const auto s(vm[database_engine_arg].as<std::string>());
+         using dogen::database_engine;
+         if (s == database_engine_postgres)
+             r.engine(database_engine::postgres);
+         else if (s == database_engine_sqlite)
+             r.engine(database_engine::sqlite);
+         else
+             BOOST_THROW_EXCEPTION(parser_exception(invalid_engine + s));
     }
 
     if (!found)
