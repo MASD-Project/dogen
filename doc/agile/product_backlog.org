@@ -4456,7 +4456,6 @@ anything. It may just be a term used by mustache and other niche
 template groups. We should probably rename it to text templates given
 most domain experts know what that means,
 
-
 ** Bugs and limitations
 
 Things we should address as soon as possible because they impact dogen
@@ -6222,7 +6221,6 @@ Notes:
   now with c++17 system clang fails to compile because it does not
   have c++ 17 support.
 - nightlies are now failing with a missing reference to SQL lite.
-
 
 
 * Future Releases

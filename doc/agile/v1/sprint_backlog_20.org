@@ -12,21 +12,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-25 Mon 18:27]
+#+CAPTION: Clock summary at [2019-11-25 Mon 23:40]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *23:44* |       |       | 100.0 |
+| *Total time*                                       | *24:36* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 23:44   |       |       | 100.0 |
-| Active                                             |         | 23:44 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       | 11:24 |  48.0 |
-| Create a demo and presentation for previous sprint |         |       |  2:31 |  10.6 |
-| Sprint and product backlog grooming                |         |       |  2:01 |   8.5 |
-| Fix OSX build errors                               |         |       |  0:25 |   1.8 |
+| Stories                                            | 24:36   |       |       | 100.0 |
+| Active                                             |         | 24:36 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       | 11:24 |  46.3 |
+| Create a demo and presentation for previous sprint |         |       |  2:31 |  10.2 |
+| Sprint and product backlog grooming                |         |       |  2:01 |   8.2 |
+| Fix OSX build errors                               |         |       |  0:25 |   1.7 |
 | Nightly code coverage is not being reported        |         |       |  0:23 |   1.6 |
-| Add relational tracing support                     |         |       |  6:39 |  28.0 |
-| Add type overrides to primitives                   |         |       |  0:21 |   1.5 |
+| Add relational tracing support                     |         |       |  6:39 |  27.0 |
+| Add type overrides to primitives                   |         |       |  0:21 |   1.4 |
+| Fix broken build due to incorrect postgres library |         |       |  0:52 |   3.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -513,6 +514,61 @@ The mapping must appear before the type overrides.
 
 : #DOGEN masd.orm.type_override=postgresql,JSONB
 : #DOGEN masd.orm.type_override=sqlite,JSON_TEXT
+
+*** STARTED Fix broken build due to incorrect postgres library        :story:
+    :LOGBOOK:
+    CLOCK: [2019-11-25 Mon 22:48]--[2019-11-25 Mon 23:40] =>  0:52
+    :END:
+
+We have several problems with CI at present.
+
+1. We seem to be picking up a stray path to =libpq=:
+
+: Run command: "/usr/bin/cmake" "--build" "." "--config" "Release" "--target" "package" "--" "-j2"
+: ninja: error: '/home/marco/Development/vcpkg/installed/x64-linux/lib/libpq.a', needed by 'stage/bin/dogen.cli', missing and no known rule to make it
+
+It seems we've faced this problem before:
+
+- [[https://github.com/microsoft/vcpkg/issues/8351][Build directory is encoded in exported artefacts potentially causing
+  build failures #8351]]
+
+Perhaps the only solution is to rebuild vcpkg in exactly the same
+location as the export is placed in both AppVyor and travis. For now
+we can maybe disable the relational model in CI.
+
+2. In addition, there are compilation errors for non-relational setups:
+
+: /Users/travis/build/MASD-Project/dogen/projects/dogen.tracing/src/types/relational_tracer.cpp:119:5: error: C++ requires a type specifier for all declarations
+:     impl(const boost::optional<tracing_configuration>& tcfg,
+:     ^
+: /Users/travis/build/MASD-Project/dogen/projects/dogen.tracing/src/types/relational_tracer.cpp:125:14: error: expected the class name after '~' to name a destructor
+:     virtual ~relational_impl() {}
+:              ^~~~~~~~~~~~~~~
+:              null_impl
+: /Users/travis/build/MASD-Project/dogen/projects/dogen.tracing/src/types/relational_tracer.cpp:149:16: error: allocating an object of abstract class type 'dogen::tracing::(anonymous namespace)::null_impl'
+:     return new null_impl(tcfg, dbcfg);
+:                ^
+: /Users/travis/build/MASD-Project/dogen/projects/dogen.tracing/include/dogen.tracing/types/relational_tracer.hpp:40:18: note: unimplemented pure virtual method 'add_initial_input' in 'null_impl'
+:     virtual void add_initial_input(const std::string& input_id,
+
+3. Similarly, on Windows, we have:
+
+: C:\projects\dogen\projects\dogen.tracing\src\types\relational_tracer.cpp(23): fatal error C1083: Cannot open include file: 'odb/pgsql/database.hxx': No such file or directory [C:\projects\dogen\build\output\msvc\Debug\projects\dogen.tracing\src\dogen.tracing.lib.vcxproj]
+
+*** Profile overriding may cause link errors                          :story:
+
+In the previous sprint we've addressed the issue of generating all
+facets by using profile overriding. This worked, but relied on
+something we didn't notice: the code must always link against all
+libraries required by the full code generation. We subsequently
+removed boost serialisation from our list of libraries and now the
+nightly is failing to link with lots of errors like these:
+
+: /work/DomainDrivenConsulting/masd/vcpkg/masd/installed/x64-linux/include/boost/archive/basic_xml_oarchive.hpp:99: error: undefined reference to 'boost::archive::basic_xml_oarchive<boost::archive::xml_oarchive>::save_start(char const*)'
+
+The right solution is to have "facet specific" link libraries, that
+kick in when the facet is enabled. This will not happen for a long
+time.
 
 *** Remove =odb_properties= in element properties                     :story:
 
