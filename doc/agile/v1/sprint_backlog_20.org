@@ -12,20 +12,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-24 Sun 22:32]
+#+CAPTION: Clock summary at [2019-11-25 Mon 18:27]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *22:20* |       |       | 100.0 |
+| *Total time*                                       | *23:44* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 22:20   |       |       | 100.0 |
-| Active                                             |         | 22:20 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       | 11:24 |  51.0 |
-| Create a demo and presentation for previous sprint |         |       |  2:31 |  11.3 |
-| Sprint and product backlog grooming                |         |       |  1:16 |   5.7 |
-| Fix OSX build errors                               |         |       |  0:25 |   1.9 |
-| Nightly code coverage is not being reported        |         |       |  0:23 |   1.7 |
-| Add relational tracing support                     |         |       |  6:21 |  28.4 |
+| Stories                                            | 23:44   |       |       | 100.0 |
+| Active                                             |         | 23:44 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       | 11:24 |  48.0 |
+| Create a demo and presentation for previous sprint |         |       |  2:31 |  10.6 |
+| Sprint and product backlog grooming                |         |       |  2:01 |   8.5 |
+| Fix OSX build errors                               |         |       |  0:25 |   1.8 |
+| Nightly code coverage is not being reported        |         |       |  0:23 |   1.6 |
+| Add relational tracing support                     |         |       |  6:39 |  28.0 |
+| Add type overrides to primitives                   |         |       |  0:21 |   1.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -274,6 +275,8 @@ Notes:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-11-25 Mon 18:22]--[2019-11-25 Mon 18:27] =>  0:05
+    CLOCK: [2019-11-25 Mon 17:41]--[2019-11-25 Mon 18:21] =>  0:40
     CLOCK: [2019-11-22 Fri 14:00]--[2019-11-22 Fri 14:45] =>  0:45
     CLOCK: [2019-11-18 Mon 08:51]--[2019-11-18 Mon 08:58] =>  0:07
     CLOCK: [2019-11-18 Mon 08:41]--[2019-11-18 Mon 08:50] =>  0:09
@@ -327,6 +330,7 @@ the coverage tool.
 
 *** STARTED Add relational tracing support                            :story:
     :LOGBOOK:
+    CLOCK: [2019-11-25 Mon 08:03]--[2019-11-25 Mon 08:21] =>  0:18
     CLOCK: [2019-11-24 Sun 21:01]--[2019-11-24 Sun 22:32] =>  1:31
     CLOCK: [2019-11-24 Sun 16:35]--[2019-11-24 Sun 19:30] =>  2:55
     CLOCK: [2019-11-23 Sat 18:29]--[2019-11-23 Sat 19:02] =>  0:33
@@ -420,6 +424,10 @@ Notes:
 - add validation to database configuration in configuration validator.
 - consider renaming =add_initial_input= to "start run" or some such
   name to align with relational model.
+- add option to create the schema: at present we are always creating a
+  new database schema. We should only do it when the user requests
+  it. For extra bonus points, we should look for the exception of
+  "table does not exist" and recommend the user to create the schema.
 
 Merged stories:
 
@@ -484,6 +492,106 @@ start and end of this transform?"
 
 Interestingly, this would also allow us to compare things between
 runs. The schema should be designed with this in mind.
+
+*** STARTED Add type overrides to primitives                          :story:
+    :LOGBOOK:
+    CLOCK: [2019-11-25 Mon 08:22]--[2019-11-25 Mon 08:43] =>  0:21
+    :END:
+
+It seems ODB expects the type overrides to be declared with the
+primitive itself, not the containing type. In addition, they also
+require mapping when using non-core types. Example:
+
+: #pragma db map sqlite:type("JSON_TEXT") as("TEXT") to("json((?))")
+: #pragma db map pgsql:type("JSONB") as("TEXT") to("to_jsonb((?)::jsonb)") from("from_jsonb((?))")
+:
+: #pragma db value(json) schema("DOGEN")
+:
+: #pragma db member(json::value_) column("") pgsql:type("JSONB")
+
+The mapping must appear before the type overrides.
+
+: #DOGEN masd.orm.type_override=postgresql,JSONB
+: #DOGEN masd.orm.type_override=sqlite,JSON_TEXT
+
+*** Remove =odb_properties= in element properties                     :story:
+
+We moved the ORM support from fabric into assets, but we seem to have
+left behind the processing of ODB properties. This is taking on
+several tasks:
+
+- odb options file: we are generating the "model" for this file,
+  though our modeling of this is not ideal. We have
+  =object_odb_options= still in fabric, when it should really be in
+  assets. Note that the =*_options.odb= files should really be a
+  formatter for the underlying object projected into the facet ODB. We
+  just need to make sure the object ORM contains all of the required
+  details for this. Note that some of the content of this file can
+  only be generated in the =generation= model, because we need access
+  to paths. This means we may have to leave this work to after we have
+  moved locators into =generation=.
+- similarly, we have to deal with =common_odb_options=. This actually
+  requires a new meta-type.
+- we need to find a way to model ORM implementation specific details
+  in assets. These should be made obvious that they are ODB specific
+  (.e.g pragmas, etc).
+
+*** Move the build-file entities from fabric into assets              :story:
+
+We have a number of entities in fabric that are related to build files
+and should be moved together. The only problem is that we will need
+locator in generation in order to move these entities - or we need to
+update the existing expanders in =generation.cpp= to point to these
+new meta-elements. This may be the best bet so that we can break this
+work into discrete parts.
+
+*** Keep track of which transforms touch which elements               :story:
+
+It would be nice to be able to know, for a given modeling element,
+which transforms modified it. We can add a property to element in
+assets that is a list of transforms and guids, so that we can
+distinguish invocations. This way we can then easily ask the database
+for details.
+
+Notes:
+
+- add a "modified by" container to element. Its a pair of transform ID
+  and GUID. Add it to models as well.
+- update every transform to record this information.
+
+*** Create a meta-model mapping type for ORM                          :story:
+
+At present we are hacking the mapping of types in ODB by adding them
+next to the class using it. Ideally we should create a separate header
+file with all the mappings in a model and include it as required. The
+inclusion logic probably requires a fair bit of cleverness (.e.g is
+type in map?).
+
+Notes:
+
+- create a modeling element called =orm::type_map=. It has entries
+  with the fields of an ODB type map:
+  - database: optional
+  - source type
+  - destination type
+  - to: optional
+  - from: optional
+- we can use the attributes to represent entries, and name for source
+  type and value for destination type. The rest is supplied as
+  meta-data.
+- the name of the element will give raise to the name of the
+  file. There can be more than one map per model.
+- for each type with type overrides, check to see if the type name is
+  in any of the maps. If so, add an include. At the meta-model level
+  this can be captured as a dependency.
+- we should add a database of "any" or "all" - this would allow us to
+  add references that are not specific to a database engine.
+- we should obtain a list of the core types in ODB and check if a type
+  is n the list. If not, we should tell the user a type map needs to
+  be created.
+
+: #pragma db map sqlite:type("JSON_TEXT") as("TEXT") to("json((?))")
+: #pragma db map pgsql:type("JSONB") as("TEXT") to("to_jsonb((?)::jsonb)") from("from_jsonb((?))")
 
 *** Check OSX packages                                                :story:
 
