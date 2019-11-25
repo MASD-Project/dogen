@@ -1710,13 +1710,6 @@
       ]
     },
     {
-      "name": "formattables::odb_file_path_generator",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "fabric::object_odb_options",
       "tagged_values": {
         "masd.generalization.parent": "assets::meta_model::element"
