@@ -18,10 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
+#ifdef DOGEN_HAVE_RELATIONAL_MODEL
 #include <odb/database.hxx>
 #include <odb/transaction.hxx>
 #include <odb/pgsql/database.hxx>
 #include <odb/schema-catalog.hxx>
+#endif
 #include <boost/make_shared.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/throw_exception.hpp>
