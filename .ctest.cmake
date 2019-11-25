@@ -151,9 +151,10 @@ endif()
 #
 # We only want to enable the relational model for Linux.
 #
-if(UNIX AND NOT APPLE)
-    set(cmake_defines ${cmake_defines} "-DWITH_RELATIONAL_SUPPORT=On")
-endif()
+# FIXME: disabled for now due to problems with linking.
+# if(UNIX AND NOT APPLE)
+# set(cmake_defines ${cmake_defines} "-DWITH_RELATIONAL_SUPPORT=On")
+# endif()
 
 # only run these for Nightly.
 set(WITH_MEMCHECK false)
