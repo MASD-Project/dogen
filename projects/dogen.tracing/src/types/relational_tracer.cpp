@@ -18,12 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#ifdef DOGEN_HAVE_RELATIONAL_MODEL
-#include <odb/database.hxx>
-#include <odb/transaction.hxx>
-#include <odb/pgsql/database.hxx>
-#include <odb/schema-catalog.hxx>
-#endif
 #include <boost/make_shared.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/throw_exception.hpp>
@@ -32,6 +26,10 @@
 #include "dogen.tracing/types/tracing_error.hpp"
 #include "dogen.tracing/types/relational_tracer.hpp"
 #ifdef DOGEN_HAVE_RELATIONAL_MODEL
+#include <odb/database.hxx>
+#include <odb/transaction.hxx>
+#include <odb/pgsql/database.hxx>
+#include <odb/schema-catalog.hxx>
 #include "dogen.relational/types/tracing/run.hpp"
 #include "dogen.relational/odb/tracing/run-odb.hxx"
 #include "dogen.relational/odb/tracing/run-odb-pgsql.hxx"
@@ -118,17 +116,17 @@ const std::string no_relational_support(
 
 class null_impl: public relational_tracer {
 public:
-    impl(const boost::optional<tracing_configuration>& tcfg,
-        const boost::optional<database_configuration>& dbcfg) {
+    null_impl(const boost::optional<tracing_configuration>& /*tcfg*/,
+        const boost::optional<database_configuration>& /*dbcfg*/) {
         BOOST_LOG_SEV(lg, error) << no_relational_support;
         BOOST_THROW_EXCEPTION(tracing_error(no_relational_support));
     }
 
-    virtual ~relational_impl() {}
+    virtual ~null_impl() {}
 
 public:
-    virtual void add_initial_input(const std::string& input_id,
-        const std::string& input) const overide {
+    virtual void add_initial_input(const std::string& /*input_id*/,
+        const std::string& /*input*/) const {
         BOOST_LOG_SEV(lg, error) << no_relational_support;
         BOOST_THROW_EXCEPTION(tracing_error(no_relational_support));
     }
