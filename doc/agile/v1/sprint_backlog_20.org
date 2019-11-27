@@ -320,15 +320,6 @@ Links:
 - [[https://superuser.com/questions/1100711/remove-package-installed-by-brew][SO: remove package installed by brew]]
 - [[https://github.com/boostorg/boost_install/issues/13][Support for Boost_USE_MULTITHREADED missing]]
 
-*** STARTED Nightly code coverage is not being reported               :story:
-    :LOGBOOK:
-    CLOCK: [2019-11-23 Sat 16:39]--[2019-11-23 Sat 16:49] =>  0:10
-    CLOCK: [2019-11-23 Sat 16:25]--[2019-11-23 Sat 16:38] =>  0:13
-    :END:
-
-We are running kcov in the nightlies, but we cannot see the results in
-the coverage tool.
-
 *** STARTED Add relational tracing support                            :story:
     :LOGBOOK:
     CLOCK: [2019-11-25 Mon 08:03]--[2019-11-25 Mon 08:21] =>  0:18
@@ -496,6 +487,7 @@ runs. The schema should be designed with this in mind.
 
 *** STARTED Add type overrides to primitives                          :story:
     :LOGBOOK:
+    CLOCK: [2019-11-26 Tue 08:01]--[2019-11-26 Tue 08:45] =>  0:44
     CLOCK: [2019-11-25 Mon 08:22]--[2019-11-25 Mon 08:43] =>  0:21
     :END:
 
@@ -515,8 +507,32 @@ The mapping must appear before the type overrides.
 : #DOGEN masd.orm.type_override=postgresql,JSONB
 : #DOGEN masd.orm.type_override=sqlite,JSON_TEXT
 
+The problem we have at present is that we have hard-coded the pragma
+types to always be of type =db type= and then the type of the
+meta-model element. This worked ok thus far but does not allow for the
+creation of =db map= pragmas. Nothing stops us from copying the type
+override logic from objects, however.
+
+Notes:
+
+- since we are trying to debug the reason why registrar is not coming
+  out, it does not seem to be sensible to create yet more meta-model
+  elements that get expressed as artefacts due to the somewhat
+  circular logic. Instead, we need a tactical hack that allows to
+  progress with the implementation of the relational model and we can
+  then do a strategic fix when we resume moving meta-model elements
+  from fabric. The approach is then to allow mappings as an ORM
+  concept built on top of existing ORM infrastructure.
+
+: #DOGEN masd.orm.type_map=FROM,TO,A,B
+
+- in fact the choice of solution is not entirely tactical, as this
+  will still be useful going forward.
+- we need to ensure type maps are outputted first.
+
 *** STARTED Fix broken build due to incorrect postgres library        :story:
     :LOGBOOK:
+    CLOCK: [2019-11-25 Mon 23:47]--[2019-11-25 Mon 23:54] =>  0:07
     CLOCK: [2019-11-25 Mon 23:41]--[2019-11-25 Mon 23:46] =>  0:05
     CLOCK: [2019-11-25 Mon 22:48]--[2019-11-25 Mon 23:40] =>  0:52
     :END:
@@ -555,6 +571,15 @@ we can maybe disable the relational model in CI.
 3. Similarly, on Windows, we have:
 
 : C:\projects\dogen\projects\dogen.tracing\src\types\relational_tracer.cpp(23): fatal error C1083: Cannot open include file: 'odb/pgsql/database.hxx': No such file or directory [C:\projects\dogen\build\output\msvc\Debug\projects\dogen.tracing\src\dogen.tracing.lib.vcxproj]
+
+*** STARTED Nightly code coverage is not being reported               :story:
+    :LOGBOOK:
+    CLOCK: [2019-11-23 Sat 16:39]--[2019-11-23 Sat 16:49] =>  0:10
+    CLOCK: [2019-11-23 Sat 16:25]--[2019-11-23 Sat 16:38] =>  0:13
+    :END:
+
+We are running kcov in the nightlies, but we cannot see the results in
+the coverage tool.
 
 *** Profile overriding may cause link errors                          :story:
 
