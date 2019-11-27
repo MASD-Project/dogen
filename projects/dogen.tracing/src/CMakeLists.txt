@@ -53,15 +53,15 @@ if (WITH_RELATIONAL_SUPPORT)
     list(APPEND relational_lib OpenSSL::SSL)
     list(APPEND relational_lib OpenSSL::Crypto)
     # # ${relational_lib}
-    # $<$<BOOL:${use_msvc_libs}>:bcrypt>
-    # Boost::log
+    #
 endif()
 
 target_link_libraries(${lib_target_name}
     dogen.lib
     dogen.utility.lib
+    $<$<BOOL:${use_msvc_libs}>:bcrypt>
     ${relational_lib}
-    )
+    ${Boost_LIBRARIES})
 
 install(TARGETS ${lib_target_name}
     ARCHIVE DESTINATION lib
