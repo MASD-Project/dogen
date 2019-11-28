@@ -2860,6 +2860,12 @@ association. However, we should still allow supplying this
 meta-parameter as meta-data because it may not be practical to have
 the association. And we need a way to express this in JSON as well.
 
+*** Consider allowing inheritance of object templates                 :story:
+
+It would be nice if we could infer that an object inherits an
+interface from an object template via the "implements" generalisation,
+and so does not require the stereotype.
+
 *** Consider inheriting annotations and stereotypes                   :story:
 
 At present we need to define the stereotype
