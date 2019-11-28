@@ -24,26 +24,31 @@ namespace dogen::assets::meta_model::orm {
 
 model_properties::model_properties(model_properties&& rhs)
     : schema_name_(std::move(rhs.schema_name_)),
+      capitalised_schema_name_(std::move(rhs.capitalised_schema_name_)),
       letter_case_(std::move(rhs.letter_case_)),
       database_systems_(std::move(rhs.database_systems_)) { }
 
 model_properties::model_properties(
     const std::string& schema_name,
+    const std::string& capitalised_schema_name,
     const boost::optional<dogen::assets::meta_model::orm::letter_case>& letter_case,
     const std::vector<dogen::assets::meta_model::orm::database_system>& database_systems)
     : schema_name_(schema_name),
+      capitalised_schema_name_(capitalised_schema_name),
       letter_case_(letter_case),
       database_systems_(database_systems) { }
 
 void model_properties::swap(model_properties& other) noexcept {
     using std::swap;
     swap(schema_name_, other.schema_name_);
+    swap(capitalised_schema_name_, other.capitalised_schema_name_);
     swap(letter_case_, other.letter_case_);
     swap(database_systems_, other.database_systems_);
 }
 
 bool model_properties::operator==(const model_properties& rhs) const {
     return schema_name_ == rhs.schema_name_ &&
+        capitalised_schema_name_ == rhs.capitalised_schema_name_ &&
         letter_case_ == rhs.letter_case_ &&
         database_systems_ == rhs.database_systems_;
 }
@@ -68,6 +73,22 @@ void model_properties::schema_name(const std::string& v) {
 
 void model_properties::schema_name(const std::string&& v) {
     schema_name_ = std::move(v);
+}
+
+const std::string& model_properties::capitalised_schema_name() const {
+    return capitalised_schema_name_;
+}
+
+std::string& model_properties::capitalised_schema_name() {
+    return capitalised_schema_name_;
+}
+
+void model_properties::capitalised_schema_name(const std::string& v) {
+    capitalised_schema_name_ = v;
+}
+
+void model_properties::capitalised_schema_name(const std::string&& v) {
+    capitalised_schema_name_ = std::move(v);
 }
 
 const boost::optional<dogen::assets::meta_model::orm::letter_case>& model_properties::letter_case() const {

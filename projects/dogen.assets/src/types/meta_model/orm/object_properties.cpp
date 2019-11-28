@@ -29,22 +29,28 @@ object_properties::object_properties()
 
 object_properties::object_properties(object_properties&& rhs)
     : schema_name_(std::move(rhs.schema_name_)),
+      capitalised_schema_name_(std::move(rhs.capitalised_schema_name_)),
       letter_case_(std::move(rhs.letter_case_)),
       generate_mapping_(std::move(rhs.generate_mapping_)),
+      type_mappings_(std::move(rhs.type_mappings_)),
       table_name_(std::move(rhs.table_name_)),
       is_value_(std::move(rhs.is_value_)),
       has_primary_key_(std::move(rhs.has_primary_key_)) { }
 
 object_properties::object_properties(
     const std::string& schema_name,
+    const std::string& capitalised_schema_name,
     const boost::optional<dogen::assets::meta_model::orm::letter_case>& letter_case,
     const bool generate_mapping,
+    const std::list<dogen::assets::meta_model::orm::type_mapping>& type_mappings,
     const std::string& table_name,
     const bool is_value,
     const bool has_primary_key)
     : schema_name_(schema_name),
+      capitalised_schema_name_(capitalised_schema_name),
       letter_case_(letter_case),
       generate_mapping_(generate_mapping),
+      type_mappings_(type_mappings),
       table_name_(table_name),
       is_value_(is_value),
       has_primary_key_(has_primary_key) { }
@@ -52,8 +58,10 @@ object_properties::object_properties(
 void object_properties::swap(object_properties& other) noexcept {
     using std::swap;
     swap(schema_name_, other.schema_name_);
+    swap(capitalised_schema_name_, other.capitalised_schema_name_);
     swap(letter_case_, other.letter_case_);
     swap(generate_mapping_, other.generate_mapping_);
+    swap(type_mappings_, other.type_mappings_);
     swap(table_name_, other.table_name_);
     swap(is_value_, other.is_value_);
     swap(has_primary_key_, other.has_primary_key_);
@@ -61,8 +69,10 @@ void object_properties::swap(object_properties& other) noexcept {
 
 bool object_properties::operator==(const object_properties& rhs) const {
     return schema_name_ == rhs.schema_name_ &&
+        capitalised_schema_name_ == rhs.capitalised_schema_name_ &&
         letter_case_ == rhs.letter_case_ &&
         generate_mapping_ == rhs.generate_mapping_ &&
+        type_mappings_ == rhs.type_mappings_ &&
         table_name_ == rhs.table_name_ &&
         is_value_ == rhs.is_value_ &&
         has_primary_key_ == rhs.has_primary_key_;
@@ -90,6 +100,22 @@ void object_properties::schema_name(const std::string&& v) {
     schema_name_ = std::move(v);
 }
 
+const std::string& object_properties::capitalised_schema_name() const {
+    return capitalised_schema_name_;
+}
+
+std::string& object_properties::capitalised_schema_name() {
+    return capitalised_schema_name_;
+}
+
+void object_properties::capitalised_schema_name(const std::string& v) {
+    capitalised_schema_name_ = v;
+}
+
+void object_properties::capitalised_schema_name(const std::string&& v) {
+    capitalised_schema_name_ = std::move(v);
+}
+
 const boost::optional<dogen::assets::meta_model::orm::letter_case>& object_properties::letter_case() const {
     return letter_case_;
 }
@@ -112,6 +138,22 @@ bool object_properties::generate_mapping() const {
 
 void object_properties::generate_mapping(const bool v) {
     generate_mapping_ = v;
+}
+
+const std::list<dogen::assets::meta_model::orm::type_mapping>& object_properties::type_mappings() const {
+    return type_mappings_;
+}
+
+std::list<dogen::assets::meta_model::orm::type_mapping>& object_properties::type_mappings() {
+    return type_mappings_;
+}
+
+void object_properties::type_mappings(const std::list<dogen::assets::meta_model::orm::type_mapping>& v) {
+    type_mappings_ = v;
+}
+
+void object_properties::type_mappings(const std::list<dogen::assets::meta_model::orm::type_mapping>&& v) {
+    type_mappings_ = std::move(v);
 }
 
 const std::string& object_properties::table_name() const {

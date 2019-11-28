@@ -22,16 +22,30 @@
 
 namespace dogen::assets::meta_model::orm {
 
-module_properties::module_properties(const std::string& schema_name)
-    : schema_name_(schema_name) { }
+module_properties::module_properties(module_properties&& rhs)
+    : schema_name_(std::move(rhs.schema_name_)),
+      capitalised_schema_name_(std::move(rhs.capitalised_schema_name_)),
+      letter_case_(std::move(rhs.letter_case_)) { }
+
+module_properties::module_properties(
+    const std::string& schema_name,
+    const std::string& capitalised_schema_name,
+    const boost::optional<dogen::assets::meta_model::orm::letter_case>& letter_case)
+    : schema_name_(schema_name),
+      capitalised_schema_name_(capitalised_schema_name),
+      letter_case_(letter_case) { }
 
 void module_properties::swap(module_properties& other) noexcept {
     using std::swap;
     swap(schema_name_, other.schema_name_);
+    swap(capitalised_schema_name_, other.capitalised_schema_name_);
+    swap(letter_case_, other.letter_case_);
 }
 
 bool module_properties::operator==(const module_properties& rhs) const {
-    return schema_name_ == rhs.schema_name_;
+    return schema_name_ == rhs.schema_name_ &&
+        capitalised_schema_name_ == rhs.capitalised_schema_name_ &&
+        letter_case_ == rhs.letter_case_;
 }
 
 module_properties& module_properties::operator=(module_properties other) {
@@ -54,6 +68,38 @@ void module_properties::schema_name(const std::string& v) {
 
 void module_properties::schema_name(const std::string&& v) {
     schema_name_ = std::move(v);
+}
+
+const std::string& module_properties::capitalised_schema_name() const {
+    return capitalised_schema_name_;
+}
+
+std::string& module_properties::capitalised_schema_name() {
+    return capitalised_schema_name_;
+}
+
+void module_properties::capitalised_schema_name(const std::string& v) {
+    capitalised_schema_name_ = v;
+}
+
+void module_properties::capitalised_schema_name(const std::string&& v) {
+    capitalised_schema_name_ = std::move(v);
+}
+
+const boost::optional<dogen::assets::meta_model::orm::letter_case>& module_properties::letter_case() const {
+    return letter_case_;
+}
+
+boost::optional<dogen::assets::meta_model::orm::letter_case>& module_properties::letter_case() {
+    return letter_case_;
+}
+
+void module_properties::letter_case(const boost::optional<dogen::assets::meta_model::orm::letter_case>& v) {
+    letter_case_ = v;
+}
+
+void module_properties::letter_case(const boost::optional<dogen::assets::meta_model::orm::letter_case>&& v) {
+    letter_case_ = std::move(v);
 }
 
 }

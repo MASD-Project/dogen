@@ -27,6 +27,8 @@
 
 #include <string>
 #include <algorithm>
+#include <boost/optional.hpp>
+#include "dogen.assets/types/meta_model/orm/letter_case.hpp"
 
 namespace dogen::assets::meta_model::orm {
 
@@ -34,11 +36,16 @@ class module_properties final {
 public:
     module_properties() = default;
     module_properties(const module_properties&) = default;
-    module_properties(module_properties&&) = default;
     ~module_properties() = default;
 
 public:
-    explicit module_properties(const std::string& schema_name);
+    module_properties(module_properties&& rhs);
+
+public:
+    module_properties(
+        const std::string& schema_name,
+        const std::string& capitalised_schema_name,
+        const boost::optional<dogen::assets::meta_model::orm::letter_case>& letter_case);
 
 public:
     /**
@@ -49,6 +56,26 @@ public:
     std::string& schema_name();
     void schema_name(const std::string& v);
     void schema_name(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Schema name with the correct capitalisation.
+     */
+    /**@{*/
+    const std::string& capitalised_schema_name() const;
+    std::string& capitalised_schema_name();
+    void capitalised_schema_name(const std::string& v);
+    void capitalised_schema_name(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief What case to use for the database identifiers.
+     */
+    /**@{*/
+    const boost::optional<dogen::assets::meta_model::orm::letter_case>& letter_case() const;
+    boost::optional<dogen::assets::meta_model::orm::letter_case>& letter_case();
+    void letter_case(const boost::optional<dogen::assets::meta_model::orm::letter_case>& v);
+    void letter_case(const boost::optional<dogen::assets::meta_model::orm::letter_case>&& v);
     /**@}*/
 
 public:
@@ -63,6 +90,8 @@ public:
 
 private:
     std::string schema_name_;
+    std::string capitalised_schema_name_;
+    boost::optional<dogen::assets::meta_model::orm::letter_case> letter_case_;
 };
 
 }

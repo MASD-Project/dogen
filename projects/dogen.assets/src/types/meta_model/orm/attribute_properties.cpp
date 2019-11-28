@@ -27,38 +27,38 @@ attribute_properties::attribute_properties()
       is_composite_(static_cast<bool>(0)) { }
 
 attribute_properties::attribute_properties(attribute_properties&& rhs)
-    : column_name_(std::move(rhs.column_name_)),
+    : type_overrides_(std::move(rhs.type_overrides_)),
+      column_name_(std::move(rhs.column_name_)),
       is_primary_key_(std::move(rhs.is_primary_key_)),
       is_nullable_(std::move(rhs.is_nullable_)),
-      type_overrides_(std::move(rhs.type_overrides_)),
       is_composite_(std::move(rhs.is_composite_)) { }
 
 attribute_properties::attribute_properties(
+    const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides,
     const std::string& column_name,
     const bool is_primary_key,
     const boost::optional<bool>& is_nullable,
-    const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides,
     const bool is_composite)
-    : column_name_(column_name),
+    : type_overrides_(type_overrides),
+      column_name_(column_name),
       is_primary_key_(is_primary_key),
       is_nullable_(is_nullable),
-      type_overrides_(type_overrides),
       is_composite_(is_composite) { }
 
 void attribute_properties::swap(attribute_properties& other) noexcept {
     using std::swap;
+    swap(type_overrides_, other.type_overrides_);
     swap(column_name_, other.column_name_);
     swap(is_primary_key_, other.is_primary_key_);
     swap(is_nullable_, other.is_nullable_);
-    swap(type_overrides_, other.type_overrides_);
     swap(is_composite_, other.is_composite_);
 }
 
 bool attribute_properties::operator==(const attribute_properties& rhs) const {
-    return column_name_ == rhs.column_name_ &&
+    return type_overrides_ == rhs.type_overrides_ &&
+        column_name_ == rhs.column_name_ &&
         is_primary_key_ == rhs.is_primary_key_ &&
         is_nullable_ == rhs.is_nullable_ &&
-        type_overrides_ == rhs.type_overrides_ &&
         is_composite_ == rhs.is_composite_;
 }
 
@@ -66,6 +66,22 @@ attribute_properties& attribute_properties::operator=(attribute_properties other
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& attribute_properties::type_overrides() const {
+    return type_overrides_;
+}
+
+std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& attribute_properties::type_overrides() {
+    return type_overrides_;
+}
+
+void attribute_properties::type_overrides(const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& v) {
+    type_overrides_ = v;
+}
+
+void attribute_properties::type_overrides(const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>&& v) {
+    type_overrides_ = std::move(v);
 }
 
 const std::string& attribute_properties::column_name() const {
@@ -106,22 +122,6 @@ void attribute_properties::is_nullable(const boost::optional<bool>& v) {
 
 void attribute_properties::is_nullable(const boost::optional<bool>&& v) {
     is_nullable_ = std::move(v);
-}
-
-const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& attribute_properties::type_overrides() const {
-    return type_overrides_;
-}
-
-std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& attribute_properties::type_overrides() {
-    return type_overrides_;
-}
-
-void attribute_properties::type_overrides(const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& v) {
-    type_overrides_ = v;
-}
-
-void attribute_properties::type_overrides(const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>&& v) {
-    type_overrides_ = std::move(v);
 }
 
 bool attribute_properties::is_composite() const {

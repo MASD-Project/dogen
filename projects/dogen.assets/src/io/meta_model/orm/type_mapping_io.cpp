@@ -19,10 +19,9 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
+#include "dogen.assets/io/meta_model/orm/type_mapping_io.hpp"
 #include "dogen.assets/io/meta_model/orm/database_system_io.hpp"
-#include "dogen.assets/io/meta_model/orm/attribute_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -32,27 +31,9 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->second) << "\"";
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<bool>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::assets::meta_model::orm::database_system>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -67,20 +48,14 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<bool>& v)
 
 namespace dogen::assets::meta_model::orm {
 
-std::ostream& operator<<(std::ostream& s, const attribute_properties& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
+std::ostream& operator<<(std::ostream& s, const type_mapping& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::assets::meta_model::orm::attribute_properties\"" << ", "
-      << "\"type_overrides\": " << v.type_overrides() << ", "
-      << "\"column_name\": " << "\"" << tidy_up_string(v.column_name()) << "\"" << ", "
-      << "\"is_primary_key\": " << v.is_primary_key() << ", "
-      << "\"is_nullable\": " << v.is_nullable() << ", "
-      << "\"is_composite\": " << v.is_composite()
+      << "\"__type__\": " << "\"dogen::assets::meta_model::orm::type_mapping\"" << ", "
+      << "\"source_type\": " << "\"" << tidy_up_string(v.source_type()) << "\"" << ", "
+      << "\"destination_type\": " << "\"" << tidy_up_string(v.destination_type()) << "\"" << ", "
+      << "\"to_source_type\": " << "\"" << tidy_up_string(v.to_source_type()) << "\"" << ", "
+      << "\"to_destination_type\": " << "\"" << tidy_up_string(v.to_destination_type()) << "\"" << ", "
+      << "\"database\": " << v.database()
       << " }";
     return(s);
 }

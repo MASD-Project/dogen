@@ -25,10 +25,15 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <algorithm>
+#include <unordered_map>
 #include <boost/optional.hpp>
 #include "dogen.assets/types/meta_model/orm/letter_case.hpp"
+#include "dogen.assets/types/meta_model/orm/type_mapping.hpp"
+#include "dogen.assets/types/meta_model/orm/database_system.hpp"
+#include "dogen.assets/hash/meta_model/orm/database_system_hash.hpp"
 
 namespace dogen::assets::meta_model::orm {
 
@@ -46,8 +51,11 @@ public:
 public:
     primitive_properties(
         const std::string& schema_name,
+        const std::string& capitalised_schema_name,
         const boost::optional<dogen::assets::meta_model::orm::letter_case>& letter_case,
-        const bool generate_mapping);
+        const bool generate_mapping,
+        const std::list<dogen::assets::meta_model::orm::type_mapping>& type_mappings,
+        const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides);
 
 public:
     /**
@@ -58,6 +66,16 @@ public:
     std::string& schema_name();
     void schema_name(const std::string& v);
     void schema_name(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Schema name with the correct capitalisation.
+     */
+    /**@{*/
+    const std::string& capitalised_schema_name() const;
+    std::string& capitalised_schema_name();
+    void capitalised_schema_name(const std::string& v);
+    void capitalised_schema_name(const std::string&& v);
     /**@}*/
 
     /**
@@ -78,6 +96,26 @@ public:
     void generate_mapping(const bool v);
     /**@}*/
 
+    /**
+     * @brief List of mappings of relational database types.
+     */
+    /**@{*/
+    const std::list<dogen::assets::meta_model::orm::type_mapping>& type_mappings() const;
+    std::list<dogen::assets::meta_model::orm::type_mapping>& type_mappings();
+    void type_mappings(const std::list<dogen::assets::meta_model::orm::type_mapping>& v);
+    void type_mappings(const std::list<dogen::assets::meta_model::orm::type_mapping>&& v);
+    /**@}*/
+
+    /**
+     * @brief Override the default type for this attribute for a given database system.
+     */
+    /**@{*/
+    const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides() const;
+    std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides();
+    void type_overrides(const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& v);
+    void type_overrides(const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>&& v);
+    /**@}*/
+
 public:
     bool operator==(const primitive_properties& rhs) const;
     bool operator!=(const primitive_properties& rhs) const {
@@ -90,8 +128,11 @@ public:
 
 private:
     std::string schema_name_;
+    std::string capitalised_schema_name_;
     boost::optional<dogen::assets::meta_model::orm::letter_case> letter_case_;
     bool generate_mapping_;
+    std::list<dogen::assets::meta_model::orm::type_mapping> type_mappings_;
+    std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string> type_overrides_;
 };
 
 }

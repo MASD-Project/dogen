@@ -2055,9 +2055,7 @@
     {
       "name": "meta_model::orm::object_properties",
       "stereotypes": [
-        "Schemable",
-        "Caseable",
-        "Mappeable"
+        "OrmElement"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2081,21 +2079,24 @@
     {
       "name": "meta_model::orm::primitive_properties",
       "stereotypes": [
-        "Schemable",
-        "Caseable",
-        "Mappeable"
+        "OrmElement",
+        "Overridable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "meta_model::orm::module_properties",
       "stereotypes": [
-        "Schemable"
+        "Schemable",
+        "Caseable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "meta_model::orm::attribute_properties",
+      "stereotypes": [
+        "Overridable"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2114,58 +2115,9 @@
           "documentation": "If true, the attribute can be NULL.\n"
         },
         {
-          "name": "type_overrides",
-          "type": "std::unordered_map<database_system, std::string>",
-          "documentation": "Override the default type for this attribute for a given database system.\n"
-        },
-        {
           "name": "is_composite",
           "type": "bool",
           "documentation": "If true, the value of this attribute is a composite value.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::orm::Schemable",
-      "documentation": "Model element can belong to a relational database schema.\n",
-      "stereotypes": [
-        "masd::object_template"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "schema_name",
-          "type": "std::string",
-          "documentation": "Name of the database schema in which to place this element.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::orm::Caseable",
-      "documentation": "The model element supports configuration related to casing.\n",
-      "stereotypes": [
-        "masd::object_template"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "letter_case",
-          "type": "boost::optional<letter_case>",
-          "documentation": "What case to use for the database identifiers.\n"
-        }
-      ]
-    },
-    {
-      "name": "meta_model::orm::Mappeable",
-      "stereotypes": [
-        "masd::object_template"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "generate_mapping",
-          "type": "bool",
-          "documentation": "If true, object-relational mapping will be generated for this element.\n"
         }
       ]
     },
@@ -3220,6 +3172,127 @@
         {
           "name": "type_registrars",
           "type": "std::unordered_map<std::string, boost::shared_ptr<type_registrar>>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::orm::Schemable",
+      "documentation": "Model element can belong to a relational database schema.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "schema_name",
+          "type": "std::string",
+          "documentation": "Name of the database schema in which to place this element.\n"
+        },
+        {
+          "name": "capitalised_schema_name",
+          "type": "std::string",
+          "documentation": "Schema name with the correct capitalisation.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::orm::Caseable",
+      "documentation": "The model element supports configuration related to casing.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "letter_case",
+          "type": "boost::optional<letter_case>",
+          "documentation": "What case to use for the database identifiers.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::orm::Mappeable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "generate_mapping",
+          "type": "bool",
+          "documentation": "If true, object-relational mapping will be generated for this element.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::orm::TypeMappable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "type_mappings",
+          "type": "std::list<type_mapping>",
+          "documentation": "List of mappings of relational database types.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::orm::OrmElement",
+      "parents": [
+        "meta_model::orm::Schemable",
+        "meta_model::orm::Caseable",
+        "meta_model::orm::Mappeable",
+        "meta_model::orm::TypeMappable"
+      ],
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::orm::Overridable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "type_overrides",
+          "type": "std::unordered_map<database_system, std::string>",
+          "documentation": "Override the default type for this attribute for a given database system.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::orm::type_mapping",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "source_type",
+          "type": "std::string",
+          "documentation": "Type which we intend to map from. Example: TEXT.\n"
+        },
+        {
+          "name": "destination_type",
+          "type": "std::string",
+          "documentation": "Type we intend to map to. Example: JSONB.\n"
+        },
+        {
+          "name": "to_source_type",
+          "type": "std::string",
+          "documentation": "Function that converts into the source type.\n"
+        },
+        {
+          "name": "to_destination_type",
+          "type": "std::string",
+          "documentation": "Function that converts into the destination type.\n"
+        },
+        {
+          "name": "database",
+          "type": "boost::optional<database_system>",
+          "documentation": "Database to which the mapping applies. If none is supplied, it will apply to all.\n"
         }
       ]
     }

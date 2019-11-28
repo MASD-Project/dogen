@@ -47,13 +47,23 @@ public:
 
 public:
     attribute_properties(
+        const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides,
         const std::string& column_name,
         const bool is_primary_key,
         const boost::optional<bool>& is_nullable,
-        const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides,
         const bool is_composite);
 
 public:
+    /**
+     * @brief Override the default type for this attribute for a given database system.
+     */
+    /**@{*/
+    const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides() const;
+    std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides();
+    void type_overrides(const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& v);
+    void type_overrides(const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>&& v);
+    /**@}*/
+
     /**
      * @brief Name of the column to use for this attribute. If populated, will override the attribute name.
      */
@@ -83,16 +93,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Override the default type for this attribute for a given database system.
-     */
-    /**@{*/
-    const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides() const;
-    std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides();
-    void type_overrides(const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& v);
-    void type_overrides(const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>&& v);
-    /**@}*/
-
-    /**
      * @brief If true, the value of this attribute is a composite value.
      */
     /**@{*/
@@ -111,10 +111,10 @@ public:
     attribute_properties& operator=(attribute_properties other);
 
 private:
+    std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string> type_overrides_;
     std::string column_name_;
     bool is_primary_key_;
     boost::optional<bool> is_nullable_;
-    std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string> type_overrides_;
     bool is_composite_;
 };
 

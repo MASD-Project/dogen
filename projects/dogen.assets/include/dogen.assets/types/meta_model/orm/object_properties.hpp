@@ -25,10 +25,12 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
 #include "dogen.assets/types/meta_model/orm/letter_case.hpp"
+#include "dogen.assets/types/meta_model/orm/type_mapping.hpp"
 
 namespace dogen::assets::meta_model::orm {
 
@@ -46,8 +48,10 @@ public:
 public:
     object_properties(
         const std::string& schema_name,
+        const std::string& capitalised_schema_name,
         const boost::optional<dogen::assets::meta_model::orm::letter_case>& letter_case,
         const bool generate_mapping,
+        const std::list<dogen::assets::meta_model::orm::type_mapping>& type_mappings,
         const std::string& table_name,
         const bool is_value,
         const bool has_primary_key);
@@ -61,6 +65,16 @@ public:
     std::string& schema_name();
     void schema_name(const std::string& v);
     void schema_name(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Schema name with the correct capitalisation.
+     */
+    /**@{*/
+    const std::string& capitalised_schema_name() const;
+    std::string& capitalised_schema_name();
+    void capitalised_schema_name(const std::string& v);
+    void capitalised_schema_name(const std::string&& v);
     /**@}*/
 
     /**
@@ -79,6 +93,16 @@ public:
     /**@{*/
     bool generate_mapping() const;
     void generate_mapping(const bool v);
+    /**@}*/
+
+    /**
+     * @brief List of mappings of relational database types.
+     */
+    /**@{*/
+    const std::list<dogen::assets::meta_model::orm::type_mapping>& type_mappings() const;
+    std::list<dogen::assets::meta_model::orm::type_mapping>& type_mappings();
+    void type_mappings(const std::list<dogen::assets::meta_model::orm::type_mapping>& v);
+    void type_mappings(const std::list<dogen::assets::meta_model::orm::type_mapping>&& v);
     /**@}*/
 
     /**
@@ -119,8 +143,10 @@ public:
 
 private:
     std::string schema_name_;
+    std::string capitalised_schema_name_;
     boost::optional<dogen::assets::meta_model::orm::letter_case> letter_case_;
     bool generate_mapping_;
+    std::list<dogen::assets::meta_model::orm::type_mapping> type_mappings_;
     std::string table_name_;
     bool is_value_;
     bool has_primary_key_;

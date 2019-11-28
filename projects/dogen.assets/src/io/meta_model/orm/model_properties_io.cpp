@@ -67,6 +67,7 @@ std::ostream& operator<<(std::ostream& s, const model_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::assets::meta_model::orm::model_properties\"" << ", "
       << "\"schema_name\": " << "\"" << tidy_up_string(v.schema_name()) << "\"" << ", "
+      << "\"capitalised_schema_name\": " << "\"" << tidy_up_string(v.capitalised_schema_name()) << "\"" << ", "
       << "\"letter_case\": " << v.letter_case() << ", "
       << "\"database_systems\": " << v.database_systems()
       << " }";
