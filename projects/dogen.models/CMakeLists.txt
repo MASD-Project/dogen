@@ -94,9 +94,7 @@ if (DOGEN_CLI_EXECUTABLE)
     set(models ${models} ${prefix}.engine)
     set(models ${models} ${prefix}.utility)
     set(models ${models} ${prefix}.variability)
-    # FIXME: commented out for now so we don't override manual type
-    # FIXME: maps
-    # set(models ${models} ${prefix}.relational)
+    set(models ${models} ${prefix}.relational)
 endif()
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia)
