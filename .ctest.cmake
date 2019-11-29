@@ -192,25 +192,49 @@ ctest_empty_binary_directory(${CTEST_BINARY_DIRECTORY})
 ctest_start(${build_group})
 
 #
-# Do not perform a git update when running from CI. This is because
-# AppVeyor/Travis are already managing the git checkout.
+# Step: Version control.
 #
+find_program(CTEST_GIT_COMMAND NAMES git)
+if(NOT CTEST_GIT_COMMAND)
+    message(FATAL_ERROR "git not found.")
+endif()
+set(CTEST_UPDATE_COMMAND "${CTEST_GIT_COMMAND}")
+
+# Handle the differences of nightlies versus CI with regards to git.
 if (NOT DEFINED ENV{BUILD_PROVIDER})
-    find_program(CTEST_GIT_COMMAND NAMES git)
-    if(NOT CTEST_GIT_COMMAND)
-        message(FATAL_ERROR "git not found.")
-    endif()
-    set(CTEST_UPDATE_COMMAND "${CTEST_GIT_COMMAND}")
+    # For nighlties we just want to pull all that has happened since
+    # the previous build.
     set(CTEST_GIT_UPDATE_CUSTOM "${CTEST_GIT_COMMAND}" pull origin master)
-    ctest_update(BUILD ${CTEST_SOURCE_DIRECTORY} RETURN_VALUE git_result)
-    if (git_result LESS 0)
-        message(FATAL_ERROR "Failed to update source code from git.")
+else()
+    if (NOT DEFINED ENV{BUILD_COMMIT})
+        message(FATAL_ERROR "Expected environment variable BUILD_COMMIT.")
     endif()
+
+    # For CI, we reset the build to the current commit. We already
+    # know that the CI provider has done the clone and we are at the
+    # right commit, but we want to link the CDash view to the commit
+    # as well so that we can refer back to github.
+    set(CTEST_GIT_UPDATE_CUSTOM
+        "${CTEST_GIT_COMMAND}" reset --hard ENV{BUILD_COMMIT})
 endif()
 
+ctest_update(BUILD ${CTEST_SOURCE_DIRECTORY} RETURN_VALUE git_result)
+if (git_result LESS 0)
+    message(FATAL_ERROR "Failed to update source code from git.")
+endif()
+
+#
+# Step: configure.
+#
 ctest_configure(BUILD ${CTEST_BINARY_DIRECTORY} OPTIONS "${cmake_defines}")
+
+#
+# Step: build.
+#
 ctest_build()
 
+#
+# Step: test.
 #
 # Note: because we are doing nothing with the return value, the build
 # will be green even when tests fail. This is OK because we rely on
@@ -219,6 +243,9 @@ ctest_build()
 #
 ctest_test(RETURN_VALUE retval)
 
+#
+# Step: memcheck.
+#
 if(WITH_MEMCHECK AND CTEST_MEMORYCHECK_COMMAND)
     ctest_memcheck(PARALLEL_LEVEL ${number_of_jobs})
 endif()
