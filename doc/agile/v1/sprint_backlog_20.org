@@ -12,20 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-29 Fri 10:53]
+#+CAPTION: Clock summary at [2019-11-29 Fri 11:00]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *28:11* |       |       | 100.0 |
+| *Total time*                                       | *28:17* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 28:11   |       |       | 100.0 |
-| Active                                             |         | 28:11 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       | 11:24 |  40.4 |
+| Stories                                            | 28:17   |       |       | 100.0 |
+| Active                                             |         | 28:17 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       | 11:24 |  40.3 |
 | Create a demo and presentation for previous sprint |         |       |  2:31 |   8.9 |
 | Sprint and product backlog grooming                |         |       |  2:12 |   7.8 |
 | Fix OSX build errors                               |         |       |  0:25 |   1.5 |
-| Fix broken build due to incorrect postgres library |         |       |  2:25 |   8.6 |
-| Add relational tracing support                     |         |       |  6:57 |  24.7 |
+| Fix broken build due to incorrect postgres library |         |       |  2:31 |   8.9 |
+| Add relational tracing support                     |         |       |  6:57 |  24.6 |
 | Add type overrides to primitives                   |         |       |  1:54 |   6.7 |
 | Nightly code coverage is not being reported        |         |       |  0:23 |   1.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
@@ -324,6 +324,7 @@ Links:
 *** COMPLETED Fix broken build due to incorrect postgres library      :story:
     CLOSED: [2019-11-29 Fri 10:31]
     :LOGBOOK:
+    CLOCK: [2019-11-29 Fri 10:54]--[2019-11-29 Fri 11:00] =>  0:06
     CLOCK: [2019-11-29 Fri 10:32]--[2019-11-29 Fri 10:53] =>  0:21
     CLOCK: [2019-11-29 Fri 10:24]--[2019-11-29 Fri 10:31] =>  0:07
     CLOCK: [2019-11-29 Fri 09:02]--[2019-11-29 Fri 09:50] =>  1:16

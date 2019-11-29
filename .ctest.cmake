@@ -215,7 +215,7 @@ else()
     # right commit, but we want to link the CDash view to the commit
     # as well so that we can refer back to github.
     set(CTEST_GIT_UPDATE_CUSTOM
-        "${CTEST_GIT_COMMAND}" reset --hard ENV{BUILD_COMMIT})
+        "${CTEST_GIT_COMMAND}" reset --hard $ENV{BUILD_COMMIT})
 endif()
 
 ctest_update(BUILD ${CTEST_SOURCE_DIRECTORY} RETURN_VALUE git_result)
