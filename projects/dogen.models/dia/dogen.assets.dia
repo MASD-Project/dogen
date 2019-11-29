@@ -29599,13 +29599,13 @@ support in Dogen.
         <dia:point val="-56,-5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-56.05,-5.05;-46.595,-1.95"/>
+        <dia:rectangle val="-56.05,-5.05;-41.205,-1.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-56,-5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.3550000000000004"/>
+        <dia:real val="14.744999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -29614,7 +29614,7 @@ support in Dogen.
         <dia:string>#module_properties#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Schemable, Caseable#</dia:string>
+        <dia:string>#Schemable, Caseable, TypeMappable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -40833,7 +40833,7 @@ to serialisation.
         <dia:point val="-67,-31.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-76.5225,-32.15;-66.25,-25.4"/>
+        <dia:rectangle val="-76.5225,-32.15;-66.25,-26.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -40905,7 +40905,7 @@ to serialisation.
         <dia:point val="-76.4725,-21"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-84.05,-21.75;-75.7225,-15.4"/>
+        <dia:rectangle val="-84.05,-21.75;-75.7225,-16.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -41061,7 +41061,7 @@ to serialisation.
         <dia:point val="-62,-23.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-62.75,-24.15;-60.585,-15.4"/>
+        <dia:rectangle val="-62.75,-24.15;-60.585,-16.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

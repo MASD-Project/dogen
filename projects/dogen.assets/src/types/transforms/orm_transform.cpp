@@ -18,13 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/lexical_cast/bad_lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.assets/types/meta_model/orm/letter_case.hpp"
+#include "dogen.utility/types/io/list_io.hpp"
+#include "dogen.utility/types/io/pair_io.hpp"
+#include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.assets/types/traits.hpp"
+#include "dogen.assets/types/meta_model/orm/letter_case.hpp"
 #include "dogen.assets/types/features/orm.hpp"
 #include "dogen.assets/lexical_cast/meta_model/orm/letter_case_lc.hpp"
 #include "dogen.assets/lexical_cast/meta_model/orm/database_system_lc.hpp"
@@ -37,9 +41,11 @@
 #include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include "dogen.assets/types/meta_model/structural/enumeration.hpp"
 #include "dogen.assets/types/meta_model/structural/object_template.hpp"
+#include "dogen.assets/io/meta_model/orm/database_system_io.hpp"
 #include "dogen.assets/io/meta_model/orm/model_properties_io.hpp"
 #include "dogen.assets/io/meta_model/orm/object_properties_io.hpp"
 #include "dogen.assets/io/meta_model/orm/primitive_properties_io.hpp"
+#include "dogen.assets/io/meta_model/orm/type_mapping_io.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/types/transforms/transformation_error.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
@@ -74,7 +80,12 @@ to_orm_database_system(const std::list<std::string>& vs) {
 
 std::unordered_map<meta_model::orm::database_system, std::string>
 orm_transform::make_type_overrides(const std::list<std::string> ls) {
+    BOOST_LOG_SEV(lg, debug) << "Reading type overrides.";
     std::unordered_map<meta_model::orm::database_system, std::string> r;
+    if (ls.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "No type overrides found.";
+        return r;
+    }
 
     using utility::string::splitter;
     for (const auto& s : ls) {
@@ -98,13 +109,20 @@ orm_transform::make_type_overrides(const std::list<std::string> ls) {
         }
     }
 
+    BOOST_LOG_SEV(lg, debug) << "Finished reading type overrides. Read: " << r;
     return r;
 }
 
 std::list<meta_model::orm::type_mapping>
 orm_transform::make_type_mappings(const std::list<std::string> ls) {
+    BOOST_LOG_SEV(lg, debug) << "Reading type mappings.";
     using meta_model::orm::type_mapping;
     std::list<type_mapping> r;
+
+    if (ls.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "No type mappings found.";
+        return r;
+    }
 
     using utility::string::splitter;
     for (const auto& s : ls) {
@@ -117,16 +135,72 @@ orm_transform::make_type_mappings(const std::list<std::string> ls) {
         }
 
         /*
-         * First token must always be the database system.
+         * If there are only two tokens, then we know who they are:
+         * source and destination.
          */
         type_mapping tm;
+        if (sz == 2) {
+            tm.source_type(ls.front());
+            tm.destination_type(ls.back());
+            r.push_back(tm);
+            continue;
+        }
+
+        /*
+         * For all other cases - i.e. 3 to 5 fields - we need to
+         * determine what was supplied. We do this by detecting the
+         * presence of the database system. Note that we've got this
+         * dodgy throwing logic because we do not yet have proper
+         * support for non-throwing lexical casts.
+         */
         auto i(tokens.begin());
         using meta_model::orm::database_system;
-        tm.database(boost::lexical_cast<database_system>(*i));
+        try {
+            /*
+             * If the first field is a valid database system, then the
+             * next field must be the source type.
+             */
+            tm.database(boost::lexical_cast<database_system>(*i));
+            tm.source_type(*(++i));
+        } catch (const boost::bad_lexical_cast& e) {
+            /*
+             * If we have 5 fields then the first field must be a
+             * valid database system.
+             */
+            if (sz == 5)
+                throw;
+
+            /*
+             * Otherwise, the field must be a source type.
+             */
+            BOOST_LOG_SEV(lg, debug) << "Processing first field as source: "
+                                     << *i;
+            tm.source_type(*i);
+        }
+
+        /*
+         * We must have a destination type.
+         */
+        tm.destination_type(*(++i));
+
+        /*
+         * We may or may not have a "to source type" function.
+         */
+        if (i != tokens.end()) {
+            tm.to_source_type(*i);
+            ++i;
+        }
+
+        /*
+         * We may or may not have a "from source type" function.
+         */
+        if (i != tokens.end())
+            tm.to_destination_type(*i);
 
         r.push_back(tm);
     }
 
+    BOOST_LOG_SEV(lg, debug) << "Finished reading type mappings. Read: " << r;
     return r;
 }
 
