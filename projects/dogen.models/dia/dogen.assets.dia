@@ -30019,17 +30019,17 @@ support in Dogen.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-42.665,-35"/>
+        <dia:point val="-41.665,-35"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-76.9075,-37.8;-41.915,-34.2"/>
+        <dia:rectangle val="-76.9075,-37.8;-40.915,-34.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-42.665,-35"/>
-        <dia:point val="-42.665,-37"/>
+        <dia:point val="-41.665,-35"/>
+        <dia:point val="-41.665,-37"/>
         <dia:point val="-76.8575,-37"/>
         <dia:point val="-76.8575,-35"/>
       </dia:attribute>
@@ -30055,13 +30055,13 @@ support in Dogen.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O213">
       <dia:attribute name="obj_pos">
-        <dia:point val="-40,-43"/>
+        <dia:point val="-39,-43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-40.05,-43.05;-25.205,-38.55"/>
+        <dia:rectangle val="-39.05,-43.05;-24.205,-38.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-40,-43"/>
+        <dia:point val="-39,-43"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -30213,13 +30213,13 @@ support in Dogen.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O214">
       <dia:attribute name="obj_pos">
-        <dia:point val="-51,-35"/>
+        <dia:point val="-50,-35"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-51.05,-35.05;-34.28,-31.35"/>
+        <dia:rectangle val="-50.05,-35.05;-33.28,-31.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-51,-35"/>
+        <dia:point val="-50,-35"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.669999999999998"/>
@@ -30348,13 +30348,13 @@ support in Dogen.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O215">
       <dia:attribute name="obj_pos">
-        <dia:point val="-31,-35"/>
+        <dia:point val="-30,-35"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-31.05,-35.05;-20.825,-31.35"/>
+        <dia:rectangle val="-30.05,-35.05;-19.825,-31.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-31,-35"/>
+        <dia:point val="-30,-35"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.125"/>
@@ -40060,17 +40060,17 @@ to serialisation.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O298">
       <dia:attribute name="obj_pos">
-        <dia:point val="-32.6275,-38.6"/>
+        <dia:point val="-31.6275,-38.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-33.4775,-38.65;-28.8875,-26.9992"/>
+        <dia:rectangle val="-32.4775,-38.65;-28.8875,-26.9992"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-32.6275,-38.6"/>
-        <dia:point val="-32.6275,-29"/>
+        <dia:point val="-31.6275,-38.6"/>
+        <dia:point val="-31.6275,-29"/>
         <dia:point val="-28.9375,-29"/>
         <dia:point val="-28.9375,-27.0492"/>
       </dia:attribute>
@@ -40102,17 +40102,17 @@ to serialisation.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O299">
       <dia:attribute name="obj_pos">
-        <dia:point val="-42.665,-31.4"/>
+        <dia:point val="-41.665,-31.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-43.515,-31.45;-28.8875,-26.95"/>
+        <dia:rectangle val="-42.515,-31.45;-28.8875,-26.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-42.665,-31.4"/>
-        <dia:point val="-42.665,-29"/>
+        <dia:point val="-41.665,-31.4"/>
+        <dia:point val="-41.665,-29"/>
         <dia:point val="-28.9375,-29"/>
         <dia:point val="-28.9375,-27"/>
       </dia:attribute>
@@ -40144,17 +40144,17 @@ to serialisation.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O300">
       <dia:attribute name="obj_pos">
-        <dia:point val="-25.9375,-31.4"/>
+        <dia:point val="-24.9375,-31.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-28.9875,-31.45;-25.0875,-26.9992"/>
+        <dia:rectangle val="-28.9875,-31.45;-24.0875,-26.9992"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-25.9375,-31.4"/>
-        <dia:point val="-25.9375,-29"/>
+        <dia:point val="-24.9375,-31.4"/>
+        <dia:point val="-24.9375,-29"/>
         <dia:point val="-28.9375,-29"/>
         <dia:point val="-28.9375,-27.0492"/>
       </dia:attribute>
