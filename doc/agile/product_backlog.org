@@ -13075,6 +13075,41 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** dogen as a github integration                                     :story:
+
+Perhaps there are some useful services dogen could provide to users in
+terms of dogen integration. If, with every commit, we could regenerate
+the model and read the current state in github, we could then provide
+a status report:
+
+- the model does not build; red emblem. Some changes were made to the
+  model (or to dogen) that make the model invalid. User should take
+  action.
+- the model builds but generates files that are different from what's
+  checked in on github. yellow emblem. Provide a report with the
+  diffs. This can either be because the code generator has changed or
+  the user changed the model.
+- the model builds and generates exactly the same code; green emblem.
+
+With this approach we have two advantages:
+
+- we do not need to add projects as part of the dogen tests; the
+  service takes its place. We can still add a few as the core tests,
+  but we don't need to expand it much beyond reference implementation
+  and dogen itself.
+- we exercise dogen itself as well as the rest endpoint generation
+  code in a way that is actually useful to end users; it would be nice
+  to know immediately when something breaks.
+
+Notes:
+
+- we'll need some kind of way of dealing with tokens and secrets in
+  order to support private GH projects.
+- with the addition of overrides, we can also have another check:
+  build with overrides. When setting up the project, the user can
+  define the override profile to use. The report will also provide
+  details on what fails with overrides.
+
 *** Org-mode as a carrier format for modeling                         :story:
 
 This is a bit of a weird idea, but may just work; this story is a
@@ -13753,37 +13788,6 @@ Notes:
 Links:
 
 - [[https://cruise.eecs.uottawa.ca/umple/][UMPLE Home]]
-
-*** dogen as a github integration                                     :story:
-
-Perhaps there are some useful services dogen could provide to users in
-terms of dogen integration. If, with every commit, we could regenerate
-the model and read the current state in github, we could then provide
-a status report:
-
-- the model does not build; red emblem. Some changes were made to the
-  model (or to dogen) that make the model invalid. User should take
-  action.
-- the model builds but generates files that are different from what's
-  checked in on github. yellow emblem. Provide a report with the
-  diffs. This can either be because the code generator has changed or
-  the user changed the model.
-- the model builds and generates exactly the same code; green emblem.
-
-With this approach we have two advantages:
-
-- we do not need to add projects as part of the dogen tests; the
-  service takes its place. We can still add a few as the core tests,
-  but we don't need to expand it much beyond reference implementation
-  and dogen itself.
-- we exercise dogen itself as well as the rest endpoint generation
-  code in a way that is actually useful to end users; it would be nice
-  to know immediately when something breaks.
-
-Notes:
-
-- we'll need some kind of way of dealing with tokens and secrets in
-  order to support private GH projects.
 
 *** Interactive interface to models                                    :epic:
 
