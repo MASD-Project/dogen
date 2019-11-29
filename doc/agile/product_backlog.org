@@ -3295,6 +3295,15 @@ Links:
 
 - [[http://www.cplusplus.com/reference/string/to_string/][to_string]]
 
+*** Consider extending lexical casts, =to_string= to any type         :story:
+
+Perhaps it is a useful thing to dump an object into a string (via
+possibly JSON). We could simply have a default behaviour of if lexical
+cast is enabled for an object, dump JSON. This could possibly be
+overridable - e.g. supply a parameter that determines the type of
+conversion to apply. This is also useful for enums because we could
+have several variations: qualified, unqualified.
+
 *** Add support for ignoring types and models                         :story:
 
 #+begin_quote
@@ -11158,6 +11167,41 @@ Value zero should always be assigned to the most used enumeration
 value because it is very efficient to compare against zero. We should
 use a different value for invalid such as =0xFF...= etc.
 
+*** Allow renaming =invalid= enumerator                               :story:
+
+At present we issue the =invalid= enumerator to signal no
+choice. However, in certain cases there are domain specific options
+that are better suited (such as =none=, etc). Users should be able to
+change the name of the enumerator.
+
+*** Allow non-throwing casts for enums                                :story:
+
+In some cases we want to do a lexical cast of an enum but not actually
+throw if the enum is invalid; instead, we just want the enum mapped to
+invalid (if that is enabled). This should just be a case of adding a
+boolean to the cast templates.
+
+It seems boost now supports this via =try_lexical_convert=. However,
+it seems its non-trivial to convert our use of lexical cast into this
+new approach. The problem is that we did not simply provide an
+=operator<<= for each enum, we overloaded =lexical_cast=. We did this
+because we are already using =operator<<= for the purposes of =io=,
+and that requires a JSON based output which is not suitable for
+casting. Its not clear what the right approach is here.
+
+Notes:
+
+- we could make use of manipulators; perhaps a =masd::json=
+  manipulator could be used to coerce =operator<<= to format into
+  JSON, otherwise we'd get a default string representation.
+
+- [[https://www.boost.org/doc/libs/1_71_0/boost/lexical_cast/try_lexical_convert.hpp][try_lexical_convert.hpp]]
+- [[https://www.boost.org/doc/libs/1_58_0/doc/html/boost_lexical_cast/synopsis.html#boost_lexical_cast.synopsis.try_lexical_convert][try_lexical_convert docs]]
+- [[https://stackoverflow.com/questions/2249711/how-to-use-the-boost-lexical-cast-library-for-just-for-checking-input][How to use the boost lexical_cast library for just for checking
+  input]]
+- [[http://boost.2283326.n4.nabble.com/lexical-cast-A-non-throwing-lexical-cast-Was-5-Observations-My-experience-with-the-boost-libraries-td2671153.html][A non-throwing lexical cast?]]
+- [[https://stackoverflow.com/questions/3157098/whats-the-right-approach-to-return-error-codes-in-c][Whats the right approach to return error codes in C++]]
+
 *** Consider adding a better enum representation                      :story:
 
 Useful functionality:
@@ -11297,13 +11341,6 @@ Links:
 - [[https://stackoverflow.com/questions/36937912/specializing-boostlexical-cast-for-enums-in-boostproperty-maps][specializing boost::lexical_cast for enums in boost::property_maps]]
 - [[https://stackoverflow.com/questions/28828957/enum-to-string-in-modern-c11-c14-c17-and-future-c20][enum to string in modern C++11 / C++14 / C++17 and future C++20]]
 - [[https://stackoverflow.com/questions/21295935/can-a-c-enum-class-have-methods][Can a C++ enum class have methods?]]
-
-*** Allow renaming =invalid= enumerator                               :story:
-
-At present we issue the =invalid= enumerator to signal no
-choice. However, in certain cases there are domain specific options
-that are better suited (such as =none=, etc). Users should be able to
-change the name of the enumerator.
 
 *** Bitmask enumeration                                               :story:
 
