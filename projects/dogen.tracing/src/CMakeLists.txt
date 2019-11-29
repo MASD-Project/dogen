@@ -52,8 +52,6 @@ if (WITH_RELATIONAL_SUPPORT)
     list(APPEND relational_lib odb::libodb-sqlite)
     list(APPEND relational_lib OpenSSL::SSL)
     list(APPEND relational_lib OpenSSL::Crypto)
-    # # ${relational_lib}
-    #
 endif()
 
 target_link_libraries(${lib_target_name}
