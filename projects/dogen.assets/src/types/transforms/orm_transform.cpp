@@ -73,8 +73,7 @@ to_orm_database_system(const std::list<std::string>& vs) {
 }
 
 std::unordered_map<meta_model::orm::database_system, std::string>
-orm_transform::
-make_type_overrides(const std::list<std::string> ls) {
+orm_transform::make_type_overrides(const std::list<std::string> ls) {
     std::unordered_map<meta_model::orm::database_system, std::string> r;
 
     using utility::string::splitter;
@@ -97,6 +96,35 @@ make_type_overrides(const std::list<std::string> ls) {
             BOOST_THROW_EXCEPTION(
                 transformation_error(duplicate_database_system + ds));
         }
+    }
+
+    return r;
+}
+
+std::list<meta_model::orm::type_mapping>
+orm_transform::make_type_mappings(const std::list<std::string> ls) {
+    using meta_model::orm::type_mapping;
+    std::list<type_mapping> r;
+
+    using utility::string::splitter;
+    for (const auto& s : ls) {
+        const auto tokens(splitter::split_csv(s));
+        const auto sz(tokens.size());
+        if (sz < 2 || sz > 5) {
+            BOOST_LOG_SEV(lg, error) << invalid_type_override << s;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(invalid_type_override + s));
+        }
+
+        /*
+         * First token must always be the database system.
+         */
+        type_mapping tm;
+        auto i(tokens.begin());
+        using meta_model::orm::database_system;
+        tm.database(boost::lexical_cast<database_system>(*i));
+
+        r.push_back(tm);
     }
 
     return r;
@@ -191,6 +219,9 @@ void orm_transform::update_primitive_properties(
     meta_model::orm::primitive_properties& opp) {
     const auto scfg(features::orm::make_static_configuration(fg, cfg));
     opp.schema_name(scfg.schema_name);
+
+    if (!scfg.type_override.empty())
+        opp.type_overrides(make_type_overrides(scfg.type_override));
 }
 
 boost::optional<meta_model::orm::module_properties>

@@ -38,6 +38,7 @@
 #include "dogen.assets/types/meta_model/orm/module_properties.hpp"
 #include "dogen.assets/types/meta_model/orm/attribute_properties.hpp"
 #include "dogen.assets/types/meta_model/orm/primitive_properties.hpp"
+#include "dogen.assets/types/meta_model/orm/type_mapping.hpp"
 #include "dogen.assets/types/transforms/context_fwd.hpp"
 
 namespace dogen::assets::transforms {
@@ -49,6 +50,9 @@ private:
 
     std::unordered_map<meta_model::orm::database_system, std::string>
     static make_type_overrides(const std::list<std::string> ls);
+
+    std::list<meta_model::orm::type_mapping>
+    static make_type_mappings(const std::list<std::string> ls);
 
 private:
     static boost::optional<meta_model::orm::model_properties>
