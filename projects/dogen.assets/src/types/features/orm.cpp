@@ -189,6 +189,24 @@ make_masd_orm_type_override() {
     return r;
 }
 
+dogen::variability::meta_model::feature_template
+make_masd_orm_type_mapping() {
+    using namespace dogen::variability::meta_model;
+    feature_template r;
+    r.name().simple("type_mapping");
+    r.name().qualified("masd.orm.type_mapping");
+    const auto vt(value_type::text_collection);
+    r.value_type(vt);
+    r.binding_point(binding_point::property);
+    r.kind(template_kind::instance);
+
+    archetypes::location al;
+    al.kernel("masd");
+
+    r.location(al);
+    return r;
+}
+
 }
 
 orm::feature_group
@@ -205,6 +223,7 @@ orm::make_feature_group(const dogen::variability::meta_model::feature_model& fm)
     r.is_composite = s.get_by_name("masd.orm.is_composite");
     r.letter_case = s.get_by_name("masd.orm.letter_case");
     r.type_override = s.get_by_name("masd.orm.type_override");
+    r.type_mapping = s.get_by_name("masd.orm.type_mapping");
 
     return r;
 }
@@ -233,6 +252,8 @@ orm::static_configuration orm::make_static_configuration(
         r.letter_case = s.get_text_content(fg.letter_case);
     if (s.has_configuration_point(fg.type_override))
         r.type_override = s.get_text_collection_content(fg.type_override);
+    if (s.has_configuration_point(fg.type_mapping))
+        r.type_mapping = s.get_text_collection_content(fg.type_mapping);
     return r;
 }
 
@@ -249,6 +270,7 @@ orm::make_templates() {
     r.push_back(make_masd_orm_is_composite());
     r.push_back(make_masd_orm_letter_case());
     r.push_back(make_masd_orm_type_override());
+    r.push_back(make_masd_orm_type_mapping());
     return r;
 }
 

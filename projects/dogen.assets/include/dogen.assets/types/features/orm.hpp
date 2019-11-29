@@ -50,6 +50,7 @@ public:
         variability::meta_model::feature is_composite;
         variability::meta_model::feature letter_case;
         variability::meta_model::feature type_override;
+        variability::meta_model::feature type_mapping;
     };
 
     static feature_group
@@ -66,6 +67,7 @@ public:
         boost::optional<bool> is_composite;
         std::string letter_case;
         std::list<std::string> type_override;
+        std::list<std::string> type_mapping;
     };
 
     static static_configuration make_static_configuration(
