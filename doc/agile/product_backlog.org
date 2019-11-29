@@ -6190,7 +6190,6 @@ Notes:
   have c++ 17 support.
 - nightlies are now failing with a missing reference to SQL lite.
 
-
 * Future Releases
 
 Stories that will not be handled on the current major release.
@@ -7698,6 +7697,25 @@ Links:
 Features for which there is no urgency but we'd like to see them
 implemented at some point. They may require some alterations to the
 core, but not fundamental rethinking.
+
+*** Message replay                                                    :story:
+
+This is a very speculative story. Once we are able to generate
+services with messages, etc., it would make sense to have a "replay"
+mode. This basically recalls a session with requests and responses so
+that users can replay a session. The messages should be stored on a
+database. We should also have an interface with an history of requests
+and responses and allow users to re-submit a request, switching on
+logging for that particular request. Logging is also written to a
+database table, allowing one to correlate the request processing with
+the logging. Even better would be if any request made to downstream
+systems would also enable those flags so that we could follow through
+with the logging.
+
+Links:
+
+- [[https://firefox-replay.com/][Firefox WebReplay]]: main site. Should give us some ideas for the UI.
+- [[https://developer.mozilla.org/en-US/docs/Mozilla/Projects/WebReplay][Firefox WebReplay]]: documentation.
 
 *** Allow user supplied enumerator values                             :story:
 

@@ -12,21 +12,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-11-28 Thu 00:13]
+#+CAPTION: Clock summary at [2019-11-29 Fri 10:31]
 | <75>                                               |         |       |       |       |
 | Headline                                           | Time    |       |       |     % |
 |----------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                       | *26:44* |       |       | 100.0 |
+| *Total time*                                       | *27:50* |       |       | 100.0 |
 |----------------------------------------------------+---------+-------+-------+-------|
-| Stories                                            | 26:44   |       |       | 100.0 |
-| Active                                             |         | 26:44 |       | 100.0 |
-| Edit release notes for previous sprint             |         |       | 11:24 |  42.6 |
-| Create a demo and presentation for previous sprint |         |       |  2:31 |   9.4 |
-| Sprint and product backlog grooming                |         |       |  2:01 |   7.5 |
-| Fix OSX build errors                               |         |       |  0:25 |   1.6 |
-| Add relational tracing support                     |         |       |  6:57 |  26.0 |
-| Add type overrides to primitives                   |         |       |  1:54 |   7.1 |
-| Fix broken build due to incorrect postgres library |         |       |  1:09 |   4.3 |
+| Stories                                            | 27:50   |       |       | 100.0 |
+| Active                                             |         | 27:50 |       | 100.0 |
+| Edit release notes for previous sprint             |         |       | 11:24 |  41.0 |
+| Create a demo and presentation for previous sprint |         |       |  2:31 |   9.0 |
+| Sprint and product backlog grooming                |         |       |  2:12 |   7.9 |
+| Fix OSX build errors                               |         |       |  0:25 |   1.5 |
+| Fix broken build due to incorrect postgres library |         |       |  2:04 |   7.4 |
+| Add relational tracing support                     |         |       |  6:57 |  25.0 |
+| Add type overrides to primitives                   |         |       |  1:54 |   6.8 |
 | Nightly code coverage is not being reported        |         |       |  0:23 |   1.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -276,6 +276,7 @@ Notes:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-11-29 Fri 10:12]--[2019-11-29 Fri 10:23] =>  0:11
     CLOCK: [2019-11-25 Mon 18:22]--[2019-11-25 Mon 18:27] =>  0:05
     CLOCK: [2019-11-25 Mon 17:41]--[2019-11-25 Mon 18:21] =>  0:40
     CLOCK: [2019-11-22 Fri 14:00]--[2019-11-22 Fri 14:45] =>  0:45
@@ -319,6 +320,61 @@ Links:
 - [[https://formulae.brew.sh/formula/boost][Boost formula]]
 - [[https://superuser.com/questions/1100711/remove-package-installed-by-brew][SO: remove package installed by brew]]
 - [[https://github.com/boostorg/boost_install/issues/13][Support for Boost_USE_MULTITHREADED missing]]
+
+*** COMPLETED Fix broken build due to incorrect postgres library      :story:
+    CLOSED: [2019-11-29 Fri 10:31]
+    :LOGBOOK:
+    CLOCK: [2019-11-29 Fri 10:24]--[2019-11-29 Fri 10:31] =>  0:07
+    CLOCK: [2019-11-29 Fri 09:02]--[2019-11-29 Fri 09:50] =>  1:16
+    CLOCK: [2019-11-27 Wed 23:19]--[2019-11-27 Wed 23:24] =>  0:05
+    CLOCK: [2019-11-25 Mon 23:47]--[2019-11-25 Mon 23:54] =>  0:07
+    CLOCK: [2019-11-25 Mon 23:41]--[2019-11-25 Mon 23:46] =>  0:05
+    CLOCK: [2019-11-25 Mon 22:48]--[2019-11-25 Mon 23:40] =>  0:52
+    :END:
+
+We have several problems with CI at present.
+
+1. We seem to be picking up a stray path to =libpq=:
+
+: Run command: "/usr/bin/cmake" "--build" "." "--config" "Release" "--target" "package" "--" "-j2"
+: ninja: error: '/home/marco/Development/vcpkg/installed/x64-linux/lib/libpq.a', needed by 'stage/bin/dogen.cli', missing and no known rule to make it
+
+It seems we've faced this problem before:
+
+- [[https://github.com/microsoft/vcpkg/issues/8351][Build directory is encoded in exported artefacts potentially causing
+  build failures 8351]]
+
+Perhaps the only solution is to rebuild vcpkg in exactly the same
+location as the export is placed in both AppVyor and travis. For now
+we can maybe disable the relational model in CI. Actually the right
+solution for this is to build using docker. This will be done in a
+separate story. For now we will just disable relational.
+
+2. In addition, there are compilation errors for non-relational setups:
+
+: /Users/travis/build/MASD-Project/dogen/projects/dogen.tracing/src/types/relational_tracer.cpp:119:5: error: C++ requires a type specifier for all declarations
+:     impl(const boost::optional<tracing_configuration>& tcfg,
+:     ^
+: /Users/travis/build/MASD-Project/dogen/projects/dogen.tracing/src/types/relational_tracer.cpp:125:14: error: expected the class name after '~' to name a destructor
+:     virtual ~relational_impl() {}
+:              ^~~~~~~~~~~~~~~
+:              null_impl
+: /Users/travis/build/MASD-Project/dogen/projects/dogen.tracing/src/types/relational_tracer.cpp:149:16: error: allocating an object of abstract class type 'dogen::tracing::(anonymous namespace)::null_impl'
+:     return new null_impl(tcfg, dbcfg);
+:                ^
+: /Users/travis/build/MASD-Project/dogen/projects/dogen.tracing/include/dogen.tracing/types/relational_tracer.hpp:40:18: note: unimplemented pure virtual method 'add_initial_input' in 'null_impl'
+:     virtual void add_initial_input(const std::string& input_id,
+
+3. Similarly, on Windows, we have:
+
+: C:\projects\dogen\projects\dogen.tracing\src\types\relational_tracer.cpp(23): fatal error C1083: Cannot open include file: 'odb/pgsql/database.hxx': No such file or directory [C:\projects\dogen\build\output\msvc\Debug\projects\dogen.tracing\src\dogen.tracing.lib.vcxproj]
+
+4. We now also have:
+
+: ./../../../projects/dogen.variability/src/serialization/registrar_ser.cpp:38:10: fatal error: dogen.relational/serialization/registrar_ser.hpp: No such file or directory
+
+This is because we disabled relational in CTest to fix the problems
+above (point 1). We need to enable it just for nightlies.
 
 *** STARTED Add relational tracing support                            :story:
     :LOGBOOK:
@@ -538,49 +594,6 @@ Notes:
   will still be useful going forward.
 - we need to ensure type maps are outputted first.
 
-*** STARTED Fix broken build due to incorrect postgres library        :story:
-    :LOGBOOK:
-    CLOCK: [2019-11-27 Wed 23:19]--[2019-11-27 Wed 23:24] =>  0:05
-    CLOCK: [2019-11-25 Mon 23:47]--[2019-11-25 Mon 23:54] =>  0:07
-    CLOCK: [2019-11-25 Mon 23:41]--[2019-11-25 Mon 23:46] =>  0:05
-    CLOCK: [2019-11-25 Mon 22:48]--[2019-11-25 Mon 23:40] =>  0:52
-    :END:
-
-We have several problems with CI at present.
-
-1. We seem to be picking up a stray path to =libpq=:
-
-: Run command: "/usr/bin/cmake" "--build" "." "--config" "Release" "--target" "package" "--" "-j2"
-: ninja: error: '/home/marco/Development/vcpkg/installed/x64-linux/lib/libpq.a', needed by 'stage/bin/dogen.cli', missing and no known rule to make it
-
-It seems we've faced this problem before:
-
-- [[https://github.com/microsoft/vcpkg/issues/8351][Build directory is encoded in exported artefacts potentially causing
-  build failures #8351]]
-
-Perhaps the only solution is to rebuild vcpkg in exactly the same
-location as the export is placed in both AppVyor and travis. For now
-we can maybe disable the relational model in CI.
-
-2. In addition, there are compilation errors for non-relational setups:
-
-: /Users/travis/build/MASD-Project/dogen/projects/dogen.tracing/src/types/relational_tracer.cpp:119:5: error: C++ requires a type specifier for all declarations
-:     impl(const boost::optional<tracing_configuration>& tcfg,
-:     ^
-: /Users/travis/build/MASD-Project/dogen/projects/dogen.tracing/src/types/relational_tracer.cpp:125:14: error: expected the class name after '~' to name a destructor
-:     virtual ~relational_impl() {}
-:              ^~~~~~~~~~~~~~~
-:              null_impl
-: /Users/travis/build/MASD-Project/dogen/projects/dogen.tracing/src/types/relational_tracer.cpp:149:16: error: allocating an object of abstract class type 'dogen::tracing::(anonymous namespace)::null_impl'
-:     return new null_impl(tcfg, dbcfg);
-:                ^
-: /Users/travis/build/MASD-Project/dogen/projects/dogen.tracing/include/dogen.tracing/types/relational_tracer.hpp:40:18: note: unimplemented pure virtual method 'add_initial_input' in 'null_impl'
-:     virtual void add_initial_input(const std::string& input_id,
-
-3. Similarly, on Windows, we have:
-
-: C:\projects\dogen\projects\dogen.tracing\src\types\relational_tracer.cpp(23): fatal error C1083: Cannot open include file: 'odb/pgsql/database.hxx': No such file or directory [C:\projects\dogen\build\output\msvc\Debug\projects\dogen.tracing\src\dogen.tracing.lib.vcxproj]
-
 *** STARTED Nightly code coverage is not being reported               :story:
     :LOGBOOK:
     CLOCK: [2019-11-23 Sat 16:39]--[2019-11-23 Sat 16:49] =>  0:10
@@ -589,6 +602,29 @@ we can maybe disable the relational model in CI.
 
 We are running kcov in the nightlies, but we cannot see the results in
 the coverage tool.
+
+*** Create a docker image for builds                                  :story:
+
+GCP's cloud builde uses the idea of cloud-builder images. These
+contain all of the basics required to build for a given language. Now,
+we can't use their images directly as they do not have CMake, but it
+does give us an interesting approach: we can create a MASD base build
+image with:
+
+- clang, gcc
+- cmake
+
+And then with it build vcpkg and build and install all of the deps. We
+need to be careful not to push the build files (over 13 GB!). We can
+then use this image for both Travis and the nightlies, as well as, one
+day, cloud build.
+
+While we're at it, we should also consider the points in the article below.
+
+Links:
+
+- [[https://github.com/GoogleCloudPlatform/cloud-builders/blob/master/bazel/Dockerfile][Bazel's cloud builder]]
+- [[https://www.toptal.com/devops/better-google-cloud-continuous-deployment][A Better Approach to Google Cloud Continuous Deployment]]
 
 *** Profile overriding may cause link errors                          :story:
 
