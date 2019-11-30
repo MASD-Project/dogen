@@ -25,12 +25,10 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
 #include "dogen.assets/types/meta_model/orm/letter_case.hpp"
-#include "dogen.assets/types/meta_model/orm/type_mapping.hpp"
 
 namespace dogen::assets::meta_model::orm {
 
@@ -47,8 +45,7 @@ public:
     module_properties(
         const std::string& schema_name,
         const std::string& capitalised_schema_name,
-        const boost::optional<dogen::assets::meta_model::orm::letter_case>& letter_case,
-        const std::list<dogen::assets::meta_model::orm::type_mapping>& type_mappings);
+        const boost::optional<dogen::assets::meta_model::orm::letter_case>& letter_case);
 
 public:
     /**
@@ -81,16 +78,6 @@ public:
     void letter_case(const boost::optional<dogen::assets::meta_model::orm::letter_case>&& v);
     /**@}*/
 
-    /**
-     * @brief List of mappings of relational database types.
-     */
-    /**@{*/
-    const std::list<dogen::assets::meta_model::orm::type_mapping>& type_mappings() const;
-    std::list<dogen::assets::meta_model::orm::type_mapping>& type_mappings();
-    void type_mappings(const std::list<dogen::assets::meta_model::orm::type_mapping>& v);
-    void type_mappings(const std::list<dogen::assets::meta_model::orm::type_mapping>&& v);
-    /**@}*/
-
 public:
     bool operator==(const module_properties& rhs) const;
     bool operator!=(const module_properties& rhs) const {
@@ -105,7 +92,6 @@ private:
     std::string schema_name_;
     std::string capitalised_schema_name_;
     boost::optional<dogen::assets::meta_model::orm::letter_case> letter_case_;
-    std::list<dogen::assets::meta_model::orm::type_mapping> type_mappings_;
 };
 
 }

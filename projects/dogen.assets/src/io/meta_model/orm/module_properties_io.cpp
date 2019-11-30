@@ -21,7 +21,6 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.assets/io/meta_model/orm/letter_case_io.hpp"
-#include "dogen.assets/io/meta_model/orm/type_mapping_io.hpp"
 #include "dogen.assets/io/meta_model/orm/module_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -47,20 +46,6 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::as
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::meta_model::orm::type_mapping>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace dogen::assets::meta_model::orm {
 
 std::ostream& operator<<(std::ostream& s, const module_properties& v) {
@@ -68,8 +53,7 @@ std::ostream& operator<<(std::ostream& s, const module_properties& v) {
       << "\"__type__\": " << "\"dogen::assets::meta_model::orm::module_properties\"" << ", "
       << "\"schema_name\": " << "\"" << tidy_up_string(v.schema_name()) << "\"" << ", "
       << "\"capitalised_schema_name\": " << "\"" << tidy_up_string(v.capitalised_schema_name()) << "\"" << ", "
-      << "\"letter_case\": " << v.letter_case() << ", "
-      << "\"type_mappings\": " << v.type_mappings()
+      << "\"letter_case\": " << v.letter_case()
       << " }";
     return(s);
 }

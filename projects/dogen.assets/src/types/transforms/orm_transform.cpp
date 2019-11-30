@@ -162,7 +162,7 @@ orm_transform::make_type_mappings(const std::list<std::string> ls) {
              */
             tm.database(boost::lexical_cast<database_system>(*i));
             tm.source_type(*(++i));
-        } catch (const boost::bad_lexical_cast& e) {
+        } catch (const boost::bad_lexical_cast& /*e*/) {
             /*
              * If we have 5 fields then the first field must be a
              * valid database system.

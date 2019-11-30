@@ -25,32 +25,27 @@ namespace dogen::assets::meta_model::orm {
 module_properties::module_properties(module_properties&& rhs)
     : schema_name_(std::move(rhs.schema_name_)),
       capitalised_schema_name_(std::move(rhs.capitalised_schema_name_)),
-      letter_case_(std::move(rhs.letter_case_)),
-      type_mappings_(std::move(rhs.type_mappings_)) { }
+      letter_case_(std::move(rhs.letter_case_)) { }
 
 module_properties::module_properties(
     const std::string& schema_name,
     const std::string& capitalised_schema_name,
-    const boost::optional<dogen::assets::meta_model::orm::letter_case>& letter_case,
-    const std::list<dogen::assets::meta_model::orm::type_mapping>& type_mappings)
+    const boost::optional<dogen::assets::meta_model::orm::letter_case>& letter_case)
     : schema_name_(schema_name),
       capitalised_schema_name_(capitalised_schema_name),
-      letter_case_(letter_case),
-      type_mappings_(type_mappings) { }
+      letter_case_(letter_case) { }
 
 void module_properties::swap(module_properties& other) noexcept {
     using std::swap;
     swap(schema_name_, other.schema_name_);
     swap(capitalised_schema_name_, other.capitalised_schema_name_);
     swap(letter_case_, other.letter_case_);
-    swap(type_mappings_, other.type_mappings_);
 }
 
 bool module_properties::operator==(const module_properties& rhs) const {
     return schema_name_ == rhs.schema_name_ &&
         capitalised_schema_name_ == rhs.capitalised_schema_name_ &&
-        letter_case_ == rhs.letter_case_ &&
-        type_mappings_ == rhs.type_mappings_;
+        letter_case_ == rhs.letter_case_;
 }
 
 module_properties& module_properties::operator=(module_properties other) {
@@ -105,22 +100,6 @@ void module_properties::letter_case(const boost::optional<dogen::assets::meta_mo
 
 void module_properties::letter_case(const boost::optional<dogen::assets::meta_model::orm::letter_case>&& v) {
     letter_case_ = std::move(v);
-}
-
-const std::list<dogen::assets::meta_model::orm::type_mapping>& module_properties::type_mappings() const {
-    return type_mappings_;
-}
-
-std::list<dogen::assets::meta_model::orm::type_mapping>& module_properties::type_mappings() {
-    return type_mappings_;
-}
-
-void module_properties::type_mappings(const std::list<dogen::assets::meta_model::orm::type_mapping>& v) {
-    type_mappings_ = v;
-}
-
-void module_properties::type_mappings(const std::list<dogen::assets::meta_model::orm::type_mapping>&& v) {
-    type_mappings_ = std::move(v);
 }
 
 }

@@ -2088,8 +2088,7 @@
       "name": "meta_model::orm::module_properties",
       "stereotypes": [
         "Schemable",
-        "Caseable",
-        "TypeMappable"
+        "Caseable"
       ],
       "fallback_element_type": "masd::object"
     },
