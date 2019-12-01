@@ -88,8 +88,6 @@ private:
 private:
     static void transform_objects(const features::orm::feature_group& fg,
         meta_model::model& m);
-    static void transform_object_templates(
-        const features::orm::feature_group& fg, meta_model::model& m);
     static void transform_primitives(const features::orm::feature_group& fg,
         meta_model::model& m);
     static void transform_modules(const features::orm::feature_group& fg,

@@ -410,21 +410,6 @@ void orm_transform::transform_objects(
     BOOST_LOG_SEV(lg, debug) << "Finished transforming objects.";
 }
 
-void orm_transform::transform_object_templates(
-    const features::orm::feature_group& fg, meta_model::model& m) {
-    BOOST_LOG_SEV(lg, debug) << "Started transforming object templates.";
-
-    for (auto& pair : m.structural_elements().object_templates()) {
-        auto& c(*pair.second);
-        for (auto& attr : c.local_attributes()) {
-            const auto& cfg(*attr.configuration());
-            attr.orm_properties(make_attribute_properties(fg, cfg));
-        }
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Finished transforming object templates.";
-}
-
 void orm_transform::transform_primitives(
     const features::orm::feature_group& fg, meta_model::model& m) {
 
@@ -561,7 +546,6 @@ void orm_transform::apply(const context& ctx, meta_model::model& m) {
     }
 
     transform_objects(fg, m);
-    transform_object_templates(fg, m);
     transform_primitives(fg, m);
     transform_modules(fg, m);
 
