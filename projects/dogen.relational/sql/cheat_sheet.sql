@@ -74,3 +74,18 @@ select current_user(), current_database();
 
 -- running stored procs from psql
 select kitanda.test_currency_complete_generator();
+
+-- extract element from array
+select jsonb_pretty(jsonb_array_elements("CONFIGURATION"->'all')->'facet') from "RUN";
+
+--
+select jsonb_pretty(jsonb_array_elements("CONFIGURATION"->'all')) from "RUN";
+
+--
+select jsonb_pretty("CONFIGURATION"->'all'->0->'facet') from "RUN";
+
+--
+select jsonb_pretty("CONFIGURATION") from "RUN";
+
+--
+with test as (select distinct (jsonb_array_elements("CONFIGURATION"->'all')->'archetype')::text as archetype from "RUN") select * from test where archetype like '%cpp%'
