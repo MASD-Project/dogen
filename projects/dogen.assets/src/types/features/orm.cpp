@@ -179,7 +179,7 @@ make_masd_orm_type_override() {
     r.name().qualified("masd.orm.type_override");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
-    r.binding_point(binding_point::property);
+    r.binding_point(binding_point::any);
     r.kind(template_kind::instance);
 
     archetypes::location al;
@@ -197,7 +197,7 @@ make_masd_orm_type_mapping() {
     r.name().qualified("masd.orm.type_mapping");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
-    r.binding_point(binding_point::property);
+    r.binding_point(binding_point::any);
     r.kind(template_kind::instance);
 
     archetypes::location al;

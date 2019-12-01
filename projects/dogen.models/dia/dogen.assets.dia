@@ -35622,7 +35622,10 @@ it.
           <dia:attribute name="comment">
             <dia:string>#Overrides to use for the relational type, for a given database system.
 
-#DOGEN masd.variability.binding_point=property
+Note: we've set the binding point to "any" as a hack to allow for primitive support.
+Should really be "property".
+
+#DOGEN masd.variability.binding_point=any
 #DOGEN masd.variability.qualified_name=masd.orm.type_override
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
@@ -35649,7 +35652,10 @@ it.
           <dia:attribute name="comment">
             <dia:string>#Type maps to create for the relational type, possibly for a given database system.
 
-#DOGEN masd.variability.binding_point=property
+Note: we've set the binding point to "any" as a hack to allow for primitive support.
+Should really be "property".
+
+#DOGEN masd.variability.binding_point=any
 #DOGEN masd.variability.qualified_name=masd.orm.type_map
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>

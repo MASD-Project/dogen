@@ -2797,9 +2797,9 @@
         {
           "name": "masd.orm.type_override",
           "type": "masd::variability::text_collection",
-          "documentation": "Overrides to use for the relational type, for a given database system.\n",
+          "documentation": "Overrides to use for the relational type, for a given database system.\n\nNote: we've set the binding point to \"any\" as a hack to allow for primitive support.\nShould really be \"property\".\n",
           "tagged_values": {
-            "masd.variability.binding_point": "property",
+            "masd.variability.binding_point": "any",
             "masd.variability.qualified_name": "masd.orm.type_override",
             "masd.variability.is_optional": "true"
           }
@@ -2807,9 +2807,9 @@
         {
           "name": "masd.orm.type_mapping",
           "type": "masd::variability::text_collection",
-          "documentation": "Type maps to create for the relational type, possibly for a given database system.\n",
+          "documentation": "Type maps to create for the relational type, possibly for a given database system.\n\nNote: we've set the binding point to \"any\" as a hack to allow for primitive support.\nShould really be \"property\".\n",
           "tagged_values": {
-            "masd.variability.binding_point": "property",
+            "masd.variability.binding_point": "any",
             "masd.variability.qualified_name": "masd.orm.type_map",
             "masd.variability.is_optional": "true"
           }
