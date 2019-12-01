@@ -2055,7 +2055,8 @@
     {
       "name": "meta_model::orm::object_properties",
       "stereotypes": [
-        "OrmElement"
+        "OrmElement",
+        "OdbPragmable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2080,7 +2081,8 @@
       "name": "meta_model::orm::primitive_properties",
       "stereotypes": [
         "OrmElement",
-        "Overridable"
+        "Overridable",
+        "OdbPragmable"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -2095,7 +2097,8 @@
     {
       "name": "meta_model::orm::attribute_properties",
       "stereotypes": [
-        "Overridable"
+        "Overridable",
+        "OdbPragmable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3303,6 +3306,20 @@
           "name": "database",
           "type": "boost::optional<database_system>",
           "documentation": "Database to which the mapping applies. If none is supplied, it will apply to all.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::orm::OdbPragmable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "odb_pragmas",
+          "type": "std::list<std::string>",
+          "documentation": "Pragmas for the ODB ORM backend.\n"
         }
       ]
     }

@@ -28,6 +28,7 @@ attribute_properties::attribute_properties()
 
 attribute_properties::attribute_properties(attribute_properties&& rhs)
     : type_overrides_(std::move(rhs.type_overrides_)),
+      odb_pragmas_(std::move(rhs.odb_pragmas_)),
       column_name_(std::move(rhs.column_name_)),
       is_primary_key_(std::move(rhs.is_primary_key_)),
       is_nullable_(std::move(rhs.is_nullable_)),
@@ -35,11 +36,13 @@ attribute_properties::attribute_properties(attribute_properties&& rhs)
 
 attribute_properties::attribute_properties(
     const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides,
+    const std::list<std::string>& odb_pragmas,
     const std::string& column_name,
     const bool is_primary_key,
     const boost::optional<bool>& is_nullable,
     const bool is_composite)
     : type_overrides_(type_overrides),
+      odb_pragmas_(odb_pragmas),
       column_name_(column_name),
       is_primary_key_(is_primary_key),
       is_nullable_(is_nullable),
@@ -48,6 +51,7 @@ attribute_properties::attribute_properties(
 void attribute_properties::swap(attribute_properties& other) noexcept {
     using std::swap;
     swap(type_overrides_, other.type_overrides_);
+    swap(odb_pragmas_, other.odb_pragmas_);
     swap(column_name_, other.column_name_);
     swap(is_primary_key_, other.is_primary_key_);
     swap(is_nullable_, other.is_nullable_);
@@ -56,6 +60,7 @@ void attribute_properties::swap(attribute_properties& other) noexcept {
 
 bool attribute_properties::operator==(const attribute_properties& rhs) const {
     return type_overrides_ == rhs.type_overrides_ &&
+        odb_pragmas_ == rhs.odb_pragmas_ &&
         column_name_ == rhs.column_name_ &&
         is_primary_key_ == rhs.is_primary_key_ &&
         is_nullable_ == rhs.is_nullable_ &&
@@ -82,6 +87,22 @@ void attribute_properties::type_overrides(const std::unordered_map<dogen::assets
 
 void attribute_properties::type_overrides(const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>&& v) {
     type_overrides_ = std::move(v);
+}
+
+const std::list<std::string>& attribute_properties::odb_pragmas() const {
+    return odb_pragmas_;
+}
+
+std::list<std::string>& attribute_properties::odb_pragmas() {
+    return odb_pragmas_;
+}
+
+void attribute_properties::odb_pragmas(const std::list<std::string>& v) {
+    odb_pragmas_ = v;
+}
+
+void attribute_properties::odb_pragmas(const std::list<std::string>&& v) {
+    odb_pragmas_ = std::move(v);
 }
 
 const std::string& attribute_properties::column_name() const {

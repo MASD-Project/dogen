@@ -55,7 +55,8 @@ public:
         const boost::optional<dogen::assets::meta_model::orm::letter_case>& letter_case,
         const bool generate_mapping,
         const std::list<dogen::assets::meta_model::orm::type_mapping>& type_mappings,
-        const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides);
+        const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides,
+        const std::list<std::string>& odb_pragmas);
 
 public:
     /**
@@ -116,6 +117,16 @@ public:
     void type_overrides(const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>&& v);
     /**@}*/
 
+    /**
+     * @brief Pragmas for the ODB ORM backend.
+     */
+    /**@{*/
+    const std::list<std::string>& odb_pragmas() const;
+    std::list<std::string>& odb_pragmas();
+    void odb_pragmas(const std::list<std::string>& v);
+    void odb_pragmas(const std::list<std::string>&& v);
+    /**@}*/
+
 public:
     bool operator==(const primitive_properties& rhs) const;
     bool operator!=(const primitive_properties& rhs) const {
@@ -133,6 +144,7 @@ private:
     bool generate_mapping_;
     std::list<dogen::assets::meta_model::orm::type_mapping> type_mappings_;
     std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string> type_overrides_;
+    std::list<std::string> odb_pragmas_;
 };
 
 }

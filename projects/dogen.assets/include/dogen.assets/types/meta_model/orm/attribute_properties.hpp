@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <algorithm>
 #include <unordered_map>
@@ -48,6 +49,7 @@ public:
 public:
     attribute_properties(
         const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides,
+        const std::list<std::string>& odb_pragmas,
         const std::string& column_name,
         const bool is_primary_key,
         const boost::optional<bool>& is_nullable,
@@ -62,6 +64,16 @@ public:
     std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides();
     void type_overrides(const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& v);
     void type_overrides(const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>&& v);
+    /**@}*/
+
+    /**
+     * @brief Pragmas for the ODB ORM backend.
+     */
+    /**@{*/
+    const std::list<std::string>& odb_pragmas() const;
+    std::list<std::string>& odb_pragmas();
+    void odb_pragmas(const std::list<std::string>& v);
+    void odb_pragmas(const std::list<std::string>&& v);
     /**@}*/
 
     /**
@@ -112,6 +124,7 @@ public:
 
 private:
     std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string> type_overrides_;
+    std::list<std::string> odb_pragmas_;
     std::string column_name_;
     bool is_primary_key_;
     boost::optional<bool> is_nullable_;

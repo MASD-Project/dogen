@@ -50,6 +50,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace boost {
 
 inline std::ostream& operator<<(std::ostream& s, const boost::optional<bool>& v) {
@@ -77,6 +91,7 @@ std::ostream& operator<<(std::ostream& s, const attribute_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::assets::meta_model::orm::attribute_properties\"" << ", "
       << "\"type_overrides\": " << v.type_overrides() << ", "
+      << "\"odb_pragmas\": " << v.odb_pragmas() << ", "
       << "\"column_name\": " << "\"" << tidy_up_string(v.column_name()) << "\"" << ", "
       << "\"is_primary_key\": " << v.is_primary_key() << ", "
       << "\"is_nullable\": " << v.is_nullable() << ", "

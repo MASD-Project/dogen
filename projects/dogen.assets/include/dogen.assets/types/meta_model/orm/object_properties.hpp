@@ -52,6 +52,7 @@ public:
         const boost::optional<dogen::assets::meta_model::orm::letter_case>& letter_case,
         const bool generate_mapping,
         const std::list<dogen::assets::meta_model::orm::type_mapping>& type_mappings,
+        const std::list<std::string>& odb_pragmas,
         const std::string& table_name,
         const bool is_value,
         const bool has_primary_key);
@@ -106,6 +107,16 @@ public:
     /**@}*/
 
     /**
+     * @brief Pragmas for the ODB ORM backend.
+     */
+    /**@{*/
+    const std::list<std::string>& odb_pragmas() const;
+    std::list<std::string>& odb_pragmas();
+    void odb_pragmas(const std::list<std::string>& v);
+    void odb_pragmas(const std::list<std::string>&& v);
+    /**@}*/
+
+    /**
      * @brief Name of the table to map this element to.
      */
     /**@{*/
@@ -147,6 +158,7 @@ private:
     boost::optional<dogen::assets::meta_model::orm::letter_case> letter_case_;
     bool generate_mapping_;
     std::list<dogen::assets::meta_model::orm::type_mapping> type_mappings_;
+    std::list<std::string> odb_pragmas_;
     std::string table_name_;
     bool is_value_;
     bool has_primary_key_;

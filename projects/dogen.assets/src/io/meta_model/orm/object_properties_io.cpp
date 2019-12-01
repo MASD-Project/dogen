@@ -62,6 +62,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen::assets::meta_model::orm {
 
 std::ostream& operator<<(std::ostream& s, const object_properties& v) {
@@ -78,6 +92,7 @@ std::ostream& operator<<(std::ostream& s, const object_properties& v) {
       << "\"letter_case\": " << v.letter_case() << ", "
       << "\"generate_mapping\": " << v.generate_mapping() << ", "
       << "\"type_mappings\": " << v.type_mappings() << ", "
+      << "\"odb_pragmas\": " << v.odb_pragmas() << ", "
       << "\"table_name\": " << "\"" << tidy_up_string(v.table_name()) << "\"" << ", "
       << "\"is_value\": " << v.is_value() << ", "
       << "\"has_primary_key\": " << v.has_primary_key()
