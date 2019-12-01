@@ -12,25 +12,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-12-01 Sun 19:03]
+#+CAPTION: Clock summary at [2019-12-01 Sun 21:43]
 | <75>                                                 |         |       |       |       |
 | Headline                                             | Time    |       |       |     % |
 |------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                         | *37:25* |       |       | 100.0 |
+| *Total time*                                         | *38:33* |       |       | 100.0 |
 |------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                              | 37:25   |       |       | 100.0 |
-| Active                                               |         | 37:25 |       | 100.0 |
-| Edit release notes for previous sprint               |         |       | 11:24 |  30.5 |
-| Create a demo and presentation for previous sprint   |         |       |  2:31 |   6.7 |
-| Sprint and product backlog grooming                  |         |       |  2:24 |   6.4 |
+| Stories                                              | 38:33   |       |       | 100.0 |
+| Active                                               |         | 38:33 |       | 100.0 |
+| Edit release notes for previous sprint               |         |       | 11:24 |  29.6 |
+| Create a demo and presentation for previous sprint   |         |       |  2:31 |   6.5 |
+| Sprint and product backlog grooming                  |         |       |  2:24 |   6.2 |
 | Fix OSX build errors                                 |         |       |  0:25 |   1.1 |
-| Fix broken build due to incorrect postgres library   |         |       |  2:31 |   6.7 |
-| Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   3.5 |
-| Add relational tracing support                       |         |       |  9:08 |  24.4 |
-| Add type overrides to primitives                     |         |       |  5:44 |  15.3 |
+| Fix broken build due to incorrect postgres library   |         |       |  2:31 |   6.5 |
+| Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   3.4 |
+| Add relational tracing support                       |         |       |  9:08 |  23.7 |
+| Add type overrides to primitives                     |         |       |  5:44 |  14.9 |
 | Nightly code coverage is not being reported          |         |       |  0:23 |   1.0 |
 | Allow non-throwing casts for enums                   |         |       |  0:41 |   1.8 |
-| Remove =odb_properties= in element properties        |         |       |  0:56 |   2.5 |
+| Remove =odb_properties= in element properties        |         |       |  2:04 |   5.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -672,6 +672,7 @@ Notes:
 
 *** STARTED Remove =odb_properties= in element properties             :story:
     :LOGBOOK:
+    CLOCK: [2019-12-01 Sun 20:35]--[2019-12-01 Sun 21:43] =>  1:08
     CLOCK: [2019-12-01 Sun 18:53]--[2019-12-01 Sun 19:03] =>  0:10
     CLOCK: [2019-12-01 Sun 18:40]--[2019-12-01 Sun 18:52] =>  0:12
     CLOCK: [2019-12-01 Sun 18:01]--[2019-12-01 Sun 18:35] =>  0:34

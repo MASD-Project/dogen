@@ -46,6 +46,10 @@ namespace dogen::assets::transforms {
 class orm_transform final {
 private:
     static std::string
+    to_odb_database(const assets::meta_model::orm::database_system ds);
+
+private:
+    static std::string
     capitalise_schema_name(const std::string& schema_name,
         const boost::optional<meta_model::orm::letter_case>& lc);
 
@@ -55,8 +59,16 @@ private:
     static std::unordered_map<meta_model::orm::database_system, std::string>
     make_type_overrides(const std::list<std::string> ls);
 
+    static std::string
+    make_odb_pragmas_for_type_overrides(const std::unordered_map<
+        assets::meta_model::orm::database_system, std::string>& type_overrides);
+
     static std::list<meta_model::orm::type_mapping>
     make_type_mappings(const std::list<std::string> ls);
+
+    static std::list<std::string>
+    make_odb_pragmas_for_type_mappings(const
+        std::list<meta_model::orm::type_mapping>& tms);
 
 private:
     static boost::optional<meta_model::orm::model_properties>

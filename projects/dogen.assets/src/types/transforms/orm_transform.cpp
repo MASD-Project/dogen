@@ -58,14 +58,48 @@ const std::string transform_id("assets.transforms.orm_transform");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
+const std::string empty_column_attribute("column(\"\")");
+const std::string id_pragma("id");
+const std::string no_id_pragma("no_id");
+
+const std::string null_pragma("null");
+const std::string not_null_pragma("not_null");
+const std::string value_pragma("value");
+
+const std::string mysql("mysql");
+const std::string postgresql("pgsql");
+const std::string oracle("oracle");
+const std::string sql_server("sqlserver");
+const std::string sqlite("sqlite");
+
 const std::string invalid_case("Letter case is invalid or unsupported: ");
 const std::string invalid_type_override("Invalid type override expression: ");
 const std::string duplicate_database_system(
     "Found more than one type override for database system: ");
+const std::string invalid_daatabase_system(
+    "Database system is invalid or unsupported: ");
 
 }
 
 namespace dogen::assets::transforms {
+
+std::string orm_transform::
+to_odb_database(const assets::meta_model::orm::database_system ds) {
+    using assets::meta_model::orm::database_system;
+
+    switch (ds) {
+    case database_system::mysql: return mysql;
+    case database_system::postgresql: return postgresql;
+    case database_system::oracle: return oracle;
+    case database_system::sql_server: return sql_server;
+    case database_system::sqlite: return sqlite;
+    default: {
+        const auto s(boost::lexical_cast<std::string>(ds));
+        BOOST_LOG_SEV(lg, error) << invalid_daatabase_system << s;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(invalid_daatabase_system + s));
+    } }
+}
 
 std::string
 orm_transform::capitalise_schema_name(const std::string& schema_name,
@@ -138,6 +172,27 @@ orm_transform::make_type_overrides(const std::list<std::string> ls) {
 
     BOOST_LOG_SEV(lg, debug) << "Finished reading type overrides. Read: " << r;
     return r;
+}
+
+std::string orm_transform::
+make_odb_pragmas_for_type_overrides(const std::unordered_map<
+    assets::meta_model::orm::database_system, std::string>& type_overrides) {
+    if (!type_overrides.empty())
+        return std::string();
+
+    std::ostringstream s;
+    bool is_first(true);
+    for (const auto pair : type_overrides) {
+        if (!is_first)
+            s << " ";
+
+        const auto ds(pair.first);
+        const auto type(pair.second);
+        s << to_odb_database(ds) << ":type(\"" << type << "\")";
+        is_first = false;
+    }
+
+    return s.str();
 }
 
 std::list<meta_model::orm::type_mapping>
@@ -231,6 +286,31 @@ orm_transform::make_type_mappings(const std::list<std::string> ls) {
     return r;
 }
 
+std::list<std::string>
+orm_transform::make_odb_pragmas_for_type_mappings(const
+    std::list<meta_model::orm::type_mapping>& tms) {
+
+    std::list<std::string> r;
+    for (const auto& tm: tms) {
+        std::ostringstream s;
+        s << "map ";
+        if (tm.database())
+            s << to_odb_database(*tm.database()) << ":";
+
+        s << "type(\"" << tm.source_type() << "\") as (\""
+          << tm.destination_type() << "\")";
+
+        if (!tm.to_source_type().empty())
+            s << "to(\"" << tm.to_source_type() << "\")";
+
+        if (!tm.to_destination_type().empty())
+            s << "to(\"" << tm.to_destination_type() << "\")";
+
+        r.push_back(s.str());
+    }
+    return r;
+}
+
 boost::optional<meta_model::orm::model_properties>
 orm_transform::make_model_properties(const features::orm::feature_group& fg,
     const variability::meta_model::configuration& cfg) {
@@ -278,6 +358,22 @@ void orm_transform::update_object_properties(
     oop.schema_name(scfg.schema_name);
     oop.capitalised_schema_name(capitalise_schema_name(oop.schema_name(), lc));
     oop.table_name(scfg.table_name);
+    oop.odb_pragmas(scfg.odb_pragma);
+
+    /*
+     * If the user has supplied an ORM properties and this
+     * object does not have a primary key, we need to inject ODB's
+     * pragma for it.
+     */
+    if (oop.generate_mapping() && !oop.is_value() && !oop.has_primary_key())
+        oop.odb_pragmas().push_back(no_id_pragma);
+
+    if (!oop.schema_name().empty() &&
+        (oop.is_value() || oop.generate_mapping())) {
+        std::ostringstream s;
+        s << "schema(\"" << oop.capitalised_schema_name() << "\")";
+        oop.odb_pragmas().push_back(s.str());
+    }
 }
 
 boost::optional<meta_model::orm::attribute_properties>
@@ -288,6 +384,8 @@ orm_transform::make_attribute_properties(const features::orm::feature_group& fg,
     const auto scfg(features::orm::make_static_configuration(fg, cfg));
     using meta_model::orm::attribute_properties;
     attribute_properties r;
+
+    r.odb_pragmas(scfg.odb_pragma);
     if (!scfg.column_name.empty()) {
         found = true;
         r.column_name(scfg.column_name);
@@ -296,21 +394,35 @@ orm_transform::make_attribute_properties(const features::orm::feature_group& fg,
     if (scfg.is_primary_key) {
         found = true;
         r.is_primary_key(*scfg.is_primary_key);
+        r.odb_pragmas().push_back(id_pragma);
     }
 
     if (scfg.is_nullable) {
         found = true;
         r.is_nullable(*scfg.is_nullable);
+
+        if (*r.is_nullable())
+            r.odb_pragmas().push_back(null_pragma);
+        else
+            r.odb_pragmas().push_back(not_null_pragma);
     }
 
     if (!scfg.type_override.empty()) {
         found = true;
         r.type_overrides(make_type_overrides(scfg.type_override));
+        const auto to(make_odb_pragmas_for_type_overrides(r.type_overrides()));
+        r.odb_pragmas().push_back(to);
     }
 
     if (scfg.is_composite) {
         found = true;
         r.is_composite(*scfg.is_composite);
+
+        /*
+         * For composite keys, we do not want to use the column name as a
+         * prefix.
+         */
+        r.odb_pragmas().push_back(empty_column_attribute);
     }
 
     if (found)
@@ -326,17 +438,31 @@ void orm_transform::update_primitive_properties(
     meta_model::orm::primitive_properties& opp) {
     const auto scfg(features::orm::make_static_configuration(fg, cfg));
 
+    opp.odb_pragmas(scfg.odb_pragma);
     opp.schema_name(scfg.schema_name);
     opp.capitalised_schema_name(capitalise_schema_name(opp.schema_name(), lc));
+
+    if (!opp.schema_name().empty() && opp.generate_mapping()) {
+        std::ostringstream s;
+        s << "schema(\"" << opp.capitalised_schema_name() << "\")";
+        opp.odb_pragmas().push_back(s.str());
+    }
+
     if (!scfg.type_override.empty())
         opp.type_overrides(make_type_overrides(scfg.type_override));
     else
         BOOST_LOG_SEV(lg, debug) << "Primitive has no type overrides.";
 
-    if (!scfg.type_mapping.empty())
+    if (!scfg.type_mapping.empty()) {
         opp.type_mappings(make_type_mappings(scfg.type_mapping));
-    else
+        auto tms(make_odb_pragmas_for_type_mappings(opp.type_mappings()));
+        opp.odb_pragmas().splice(opp.odb_pragmas().end(), tms);
+    } else
         BOOST_LOG_SEV(lg, debug) << "Primitive has no type mappings.";
+
+    const bool has_top_level_pragmas(!opp.odb_pragmas().empty());
+    if (!has_top_level_pragmas)
+        return;
 }
 
 boost::optional<meta_model::orm::module_properties>
@@ -450,6 +576,33 @@ void orm_transform::transform_primitives(
         update_primitive_properties(fg, cfg, lc, op);
         BOOST_LOG_SEV(lg, debug) << "ORM configuration for primitive: "
                                  << pair.first << ": " << op;
+
+        /*
+         * For primitives, we need to inject manually the attribute
+         * level pragmas, if there was a top-level pragma. This is
+         * because users cannot see the internal attribute.
+         *
+         * We add this pragma so as to name the primitive's internal
+         * value attribute correctly. Primitives do not have column
+         * names; they are set by the type that owns them. This avoids
+         * names such as "primitive_id_primitive_id", which become
+         * "primitive_id" instead.
+         *
+         * In addition, we also need to obtain all of the type
+         * overrides.
+         */
+        std::ostringstream s;
+        s << empty_column_attribute;
+
+        using meta_model::orm::attribute_properties;
+        attribute_properties ap;
+
+        if (op.type_overrides().empty()) {
+            const auto& to(op.type_overrides());
+            s << make_odb_pragmas_for_type_overrides(to);
+        }
+        ap.odb_pragmas().push_back(s.str());
+        p.value_attribute().orm_properties(ap);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished transforming primitives.";
