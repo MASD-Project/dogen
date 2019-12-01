@@ -148,16 +148,7 @@ void updator::visit(assets::meta_model::structural::object& o) {
         const auto& sn(cfg.schema_name());
         if (!sn.empty() && (op.is_value() || cfg.generate_mapping())) {
             std::ostringstream s;
-            s << "schema(\"";
-
-            if (!cfg.letter_case())
-                s << cfg.schema_name();
-            else if (*cfg.letter_case() == letter_case::upper_case)
-                s << boost::to_upper_copy(cfg.schema_name());
-            else if (*cfg.letter_case() == letter_case::lower_case)
-                s << boost::to_lower_copy(cfg.schema_name());
-
-            s <<"\")";
+            s << "schema(\"" << cfg.capitalised_schema_name() << "\")";
             top_level_pragmas.push_back(s.str());
         }
     }
@@ -230,17 +221,7 @@ void updator::visit(assets::meta_model::structural::primitive& p) {
         const auto& sn(cfg.schema_name());
         if (!sn.empty() && cfg.generate_mapping()) {
             std::ostringstream s;
-            s << "schema(\"";
-
-            using assets::meta_model::orm::letter_case;
-            if (!cfg.letter_case())
-                s << cfg.schema_name();
-            else if (*cfg.letter_case() == letter_case::upper_case)
-                s << boost::to_upper_copy(cfg.schema_name());
-            else if (*cfg.letter_case() == letter_case::lower_case)
-                s << boost::to_lower_copy(cfg.schema_name());
-
-            s <<"\")";
+            s << "schema(\"" << cfg.capitalised_schema_name() << "\")";
             op.top_level_odb_pragmas().push_back(s.str());
         }
     }

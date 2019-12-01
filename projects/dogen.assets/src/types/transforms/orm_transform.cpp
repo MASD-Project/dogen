@@ -67,6 +67,32 @@ const std::string duplicate_database_system(
 
 namespace dogen::assets::transforms {
 
+std::string
+orm_transform::capitalise_schema_name(const std::string& schema_name,
+    const boost::optional<meta_model::orm::letter_case>& lc) {
+    /*
+     * If we do not have a schema name, there is nothing to be
+     * done. Similarly, If the user did not supply a letter case
+     * configuration, we take the current schema name as is.
+     */
+    if (schema_name.empty() || !lc)
+        return schema_name;
+
+    /*
+     * Populate the capitalised schema name according to the
+     * configuration requested by the user.
+     */
+    using meta_model::orm::letter_case;
+    if (*lc == letter_case::upper_case)
+        return boost::to_upper_copy(schema_name);
+    else if (*lc == letter_case::lower_case)
+        return boost::to_lower_copy(schema_name);
+
+    const auto s(boost::lexical_cast<std::string>(*lc));
+    BOOST_LOG_SEV(lg, error) << invalid_case << s;
+    BOOST_THROW_EXCEPTION(transformation_error(invalid_case + s));
+}
+
 std::vector<meta_model::orm::database_system> orm_transform::
 to_orm_database_system(const std::list<std::string>& vs) {
     using meta_model::orm::database_system;
@@ -219,26 +245,18 @@ orm_transform::make_model_properties(const features::orm::feature_group& fg,
         r.database_systems(to_orm_database_system(scfg.database_system));
     }
 
-    if (!scfg.schema_name.empty()) {
-        found = true;
-        r.schema_name(scfg.schema_name);
-    }
-
     if (!scfg.letter_case.empty()) {
         found = true;
         using assets::meta_model::orm::letter_case;
         const auto lc(boost::lexical_cast<letter_case>(scfg.letter_case));
         r.letter_case(lc);
+    }
 
-        if (lc == letter_case::upper_case)
-            r.capitalised_schema_name(boost::to_upper_copy(r.schema_name()));
-        else if (lc == letter_case::lower_case)
-            r.capitalised_schema_name(boost::to_lower_copy(r.schema_name()));
-        else {
-            const auto s(scfg.letter_case);
-            BOOST_LOG_SEV(lg, error) << invalid_case << s;
-            BOOST_THROW_EXCEPTION(transformation_error(invalid_case + s));
-        }
+    if (!scfg.schema_name.empty()) {
+        found = true;
+        r.schema_name(scfg.schema_name);
+        r.capitalised_schema_name(
+            capitalise_schema_name(r.schema_name(), r.letter_case()));
     }
 
     if (found) {
@@ -253,10 +271,12 @@ orm_transform::make_model_properties(const features::orm::feature_group& fg,
 void orm_transform::update_object_properties(
     const features::orm::feature_group& fg,
     const variability::meta_model::configuration& cfg,
+    const boost::optional<meta_model::orm::letter_case>& lc,
     meta_model::orm::object_properties& oop) {
 
     const auto scfg(features::orm::make_static_configuration(fg, cfg));
     oop.schema_name(scfg.schema_name);
+    oop.capitalised_schema_name(capitalise_schema_name(oop.schema_name(), lc));
     oop.table_name(scfg.table_name);
 }
 
@@ -264,36 +284,36 @@ boost::optional<meta_model::orm::attribute_properties>
 orm_transform::make_attribute_properties(const features::orm::feature_group& fg,
     const variability::meta_model::configuration& cfg) {
 
-    bool found_any(false);
+    bool found(false);
     const auto scfg(features::orm::make_static_configuration(fg, cfg));
     using meta_model::orm::attribute_properties;
     attribute_properties r;
     if (!scfg.column_name.empty()) {
-        found_any = true;
+        found = true;
         r.column_name(scfg.column_name);
     }
 
     if (scfg.is_primary_key) {
-        found_any = true;
+        found = true;
         r.is_primary_key(*scfg.is_primary_key);
     }
 
     if (scfg.is_nullable) {
-        found_any = true;
+        found = true;
         r.is_nullable(*scfg.is_nullable);
     }
 
     if (!scfg.type_override.empty()) {
-        found_any = true;
+        found = true;
         r.type_overrides(make_type_overrides(scfg.type_override));
     }
 
     if (scfg.is_composite) {
-        found_any = true;
+        found = true;
         r.is_composite(*scfg.is_composite);
     }
 
-    if (found_any)
+    if (found)
         return r;
 
     return boost::optional<attribute_properties>();
@@ -302,17 +322,21 @@ orm_transform::make_attribute_properties(const features::orm::feature_group& fg,
 void orm_transform::update_primitive_properties(
     const features::orm::feature_group& fg,
     const variability::meta_model::configuration& cfg,
+    const boost::optional<meta_model::orm::letter_case>& lc,
     meta_model::orm::primitive_properties& opp) {
     const auto scfg(features::orm::make_static_configuration(fg, cfg));
-    opp.schema_name(scfg.schema_name);
 
+    opp.schema_name(scfg.schema_name);
+    opp.capitalised_schema_name(capitalise_schema_name(opp.schema_name(), lc));
     if (!scfg.type_override.empty())
         opp.type_overrides(make_type_overrides(scfg.type_override));
 }
 
 boost::optional<meta_model::orm::module_properties>
 orm_transform::make_module_properties(const features::orm::feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
+    const variability::meta_model::configuration& cfg,
+    const boost::optional<meta_model::orm::letter_case>& lc) {
+
     using meta_model::orm::module_properties;
 
     const auto scfg(features::orm::make_static_configuration(fg, cfg));
@@ -321,18 +345,19 @@ orm_transform::make_module_properties(const features::orm::feature_group& fg,
 
     module_properties r;
     r.schema_name(scfg.schema_name);
+    r.capitalised_schema_name(capitalise_schema_name(r.schema_name(), lc));
     return r;
 }
 
 void orm_transform::transform_objects(
-    const features::orm::feature_group& fg, meta_model::model& em) {
+    const features::orm::feature_group& fg, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Started transforming objects.";
 
     boost::optional<meta_model::orm::letter_case> lc;
-    if (em.orm_properties())
-        lc = em.orm_properties()->letter_case();
+    if (m.orm_properties())
+        lc = m.orm_properties()->letter_case();
 
-    for (auto& pair : em.structural_elements().objects()) {
+    for (auto& pair : m.structural_elements().objects()) {
         /*
          * If we do not have a configuration, there is nothing to be
          * done for this object. Configurations are setup during
@@ -368,7 +393,7 @@ void orm_transform::transform_objects(
          * meta-data the user may have supplied.
          */
         const auto& cfg(*o.configuration());
-        update_object_properties(fg, cfg, op);
+        update_object_properties(fg, cfg, lc, op);
         op.has_primary_key(has_primary_key);
 
         BOOST_LOG_SEV(lg, debug) << "ORM configuration for object: "
@@ -430,7 +455,7 @@ void orm_transform::transform_primitives(
          * for the configuration.
          */
         const auto& cfg(*p.configuration());
-        update_primitive_properties(fg, cfg, op);
+        update_primitive_properties(fg, cfg, lc, op);
         BOOST_LOG_SEV(lg, debug) << "ORM configuration for primitive: "
                                  << pair.first << ": " << op;
     }
@@ -442,13 +467,17 @@ void orm_transform::transform_modules(
     const features::orm::feature_group& fg, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Started transforming modules.";
 
+    boost::optional<meta_model::orm::letter_case> lc;
+    if (m.orm_properties())
+        lc = m.orm_properties()->letter_case();
+
     for (auto& pair : m.structural_elements().modules()) {
         auto& mod(*pair.second);
         BOOST_LOG_SEV(lg, trace) << "Processing: "
                                  << mod.name().qualified().dot();
 
         const auto& cfg(*mod.configuration());
-        auto omp(make_module_properties(fg, cfg));
+        const auto omp(make_module_properties(fg, cfg, lc));
         if (!omp)
             continue;
 
@@ -460,7 +489,8 @@ void orm_transform::transform_modules(
          * name either, or it has been overridden - but either way,
          * its not our problem.
          */
-        const auto& sn(m.orm_properties()->schema_name());
+        const auto sn(m.orm_properties()->schema_name());
+        const auto csn(m.orm_properties()->capitalised_schema_name());
         if (sn.empty())
             continue;
 
@@ -485,6 +515,7 @@ void orm_transform::transform_modules(
                 BOOST_LOG_SEV(lg, debug) << "Updating schema name for: " << id
                                          << " to: " << sn;
                 op->schema_name(sn);
+                op->capitalised_schema_name(csn);
             } else {
                 const auto j(m.structural_elements().primitives().find(id));
                 if (j == m.structural_elements().primitives().end())
@@ -501,6 +532,7 @@ void orm_transform::transform_modules(
                 BOOST_LOG_SEV(lg, debug) << "Updating schema name for: " << id
                                          << " to: " << sn;
                 op->schema_name(sn);
+                op->capitalised_schema_name(csn);
             }
         }
     }

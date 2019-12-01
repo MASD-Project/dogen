@@ -45,14 +45,18 @@ namespace dogen::assets::transforms {
 
 class orm_transform final {
 private:
-    std::vector<meta_model::orm::database_system>
-    static to_orm_database_system(const std::list<std::string>& vs);
+    static std::string
+    capitalise_schema_name(const std::string& schema_name,
+        const boost::optional<meta_model::orm::letter_case>& lc);
 
-    std::unordered_map<meta_model::orm::database_system, std::string>
-    static make_type_overrides(const std::list<std::string> ls);
+    static std::vector<meta_model::orm::database_system>
+    to_orm_database_system(const std::list<std::string>& vs);
 
-    std::list<meta_model::orm::type_mapping>
-    static make_type_mappings(const std::list<std::string> ls);
+    static std::unordered_map<meta_model::orm::database_system, std::string>
+    make_type_overrides(const std::list<std::string> ls);
+
+    static std::list<meta_model::orm::type_mapping>
+    make_type_mappings(const std::list<std::string> ls);
 
 private:
     static boost::optional<meta_model::orm::model_properties>
@@ -62,6 +66,7 @@ private:
     static void update_object_properties(
         const features::orm::feature_group& fg,
         const variability::meta_model::configuration& cfg,
+        const boost::optional<meta_model::orm::letter_case>& lc,
         meta_model::orm::object_properties& oop);
 
     static boost::optional<meta_model::orm::attribute_properties>
@@ -72,11 +77,13 @@ private:
     static void update_primitive_properties(
         const features::orm::feature_group& fg,
         const variability::meta_model::configuration& cfg,
+        const boost::optional<meta_model::orm::letter_case>& lc,
         meta_model::orm::primitive_properties& opp);
 
     static boost::optional<meta_model::orm::module_properties>
     make_module_properties(const features::orm::feature_group& fg,
-        const variability::meta_model::configuration& cfg);
+        const variability::meta_model::configuration& cfg,
+        const boost::optional<meta_model::orm::letter_case>& lc);
 
 private:
     static void transform_objects(const features::orm::feature_group& fg,
