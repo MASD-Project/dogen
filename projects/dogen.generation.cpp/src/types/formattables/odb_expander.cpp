@@ -60,6 +60,10 @@ public:
         const odb_expander::feature_group& fg);
 
 private:
+    std::string make_type_overrides(const std::unordered_map<
+        assets::meta_model::orm::database_system, std::string>& type_overrides)
+    const;
+
     std::list<std::string> make_odb_pragmas(
         const variability::meta_model::configuration& cfg) const;
 
@@ -83,6 +87,29 @@ private:
 updator::
 updator(model& fm, const locator& l, const odb_expander::feature_group& fg)
     : model_(fm), locator_(l), feature_group_(fg) {}
+
+std::string
+updator::make_type_overrides(const std::unordered_map<
+    assets::meta_model::orm::database_system, std::string>& type_overrides)
+    const {
+    if (!type_overrides.empty())
+        return std::string();
+
+    std::ostringstream s;
+    bool is_first(true);
+    for (const auto pair : type_overrides) {
+        if (!is_first)
+            s << " ";
+
+        const auto ds(pair.first);
+        const auto type(pair.second);
+        s << adapter::to_odb_database(ds)
+          << ":type(\"" << type << "\")";
+        is_first = false;
+    }
+
+    return s.str();
+}
 
 std::list<std::string> updator::make_odb_pragmas(
     const variability::meta_model::configuration& cfg) const {
@@ -179,20 +206,8 @@ void updator::visit(assets::meta_model::structural::object& o) {
             }
 
             if (!cfg.type_overrides().empty()) {
-                std::ostringstream s;
-                bool is_first(true);
-                for (const auto pair : cfg.type_overrides()) {
-                    if (!is_first)
-                        s << " ";
-
-                    const auto ds(pair.first);
-                    const auto type(pair.second);
-                    s << adapter::to_odb_database(ds)
-                      << ":type(\"" << type << "\")";
-
-                    is_first = false;
-                }
-                attr_pragmas.push_back(s.str());
+                const auto to(make_type_overrides(cfg.type_overrides()));
+                attr_pragmas.push_back(to);
             }
         }
 
@@ -240,10 +255,17 @@ void updator::visit(assets::meta_model::structural::primitive& p) {
      * are set by the type that owns them. This avoids names such as
      * "primitive_id_primitive_id", which become "primitive_id"
      * instead.
+     *
+     * In addition, we also need to obtain all of the type mapping
+     * overrides.
      */
-    const auto& attr(p.value_attribute());
-    const auto pragmas(std::list<std::string> { empty_column_attribute });
+    std::ostringstream s;
+    s << empty_column_attribute;
+    if (p.orm_properties() && !p.orm_properties()->type_overrides().empty())
+        s << make_type_overrides(p.orm_properties()->type_overrides());
+    const auto pragmas = std::list<std::string> { s.str() };
 
+    const auto& attr(p.value_attribute());
     const auto id(attr.name().qualified().dot());
     op.attribute_level_odb_pragmas()[id] = pragmas;
     result_ = op;
