@@ -250,4 +250,7 @@ if(WITH_MEMCHECK AND CTEST_MEMORYCHECK_COMMAND)
     ctest_memcheck(PARALLEL_LEVEL ${number_of_jobs})
 endif()
 
+#
+# Step: submit build results
+#
 ctest_submit()
