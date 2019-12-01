@@ -207,6 +207,24 @@ make_masd_orm_type_mapping() {
     return r;
 }
 
+dogen::variability::meta_model::feature_template
+make_masd_orm_odb_pragma() {
+    using namespace dogen::variability::meta_model;
+    feature_template r;
+    r.name().simple("odb_pragma");
+    r.name().qualified("masd.orm.odb_pragma");
+    const auto vt(value_type::text_collection);
+    r.value_type(vt);
+    r.binding_point(binding_point::any);
+    r.kind(template_kind::instance);
+
+    archetypes::location al;
+    al.kernel("masd");
+
+    r.location(al);
+    return r;
+}
+
 }
 
 orm::feature_group
@@ -224,6 +242,7 @@ orm::make_feature_group(const dogen::variability::meta_model::feature_model& fm)
     r.letter_case = s.get_by_name("masd.orm.letter_case");
     r.type_override = s.get_by_name("masd.orm.type_override");
     r.type_mapping = s.get_by_name("masd.orm.type_mapping");
+    r.odb_pragma = s.get_by_name("masd.orm.odb_pragma");
 
     return r;
 }
@@ -254,6 +273,8 @@ orm::static_configuration orm::make_static_configuration(
         r.type_override = s.get_text_collection_content(fg.type_override);
     if (s.has_configuration_point(fg.type_mapping))
         r.type_mapping = s.get_text_collection_content(fg.type_mapping);
+    if (s.has_configuration_point(fg.odb_pragma))
+        r.odb_pragma = s.get_text_collection_content(fg.odb_pragma);
     return r;
 }
 
@@ -271,6 +292,7 @@ orm::make_templates() {
     r.push_back(make_masd_orm_letter_case());
     r.push_back(make_masd_orm_type_override());
     r.push_back(make_masd_orm_type_mapping());
+    r.push_back(make_masd_orm_odb_pragma());
     return r;
 }
 

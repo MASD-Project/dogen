@@ -2813,7 +2813,17 @@
           "documentation": "Type maps to create for the relational type, possibly for a given database system.\n\nNote: we've set the binding point to \"any\" as a hack to allow for primitive support.\nShould really be \"property\".\n",
           "tagged_values": {
             "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.orm.type_map",
+            "masd.variability.qualified_name": "masd.orm.type_mapping",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "masd.orm.odb_pragma",
+          "type": "masd::variability::text_collection",
+          "documentation": "Raw ODB pragmas that are applied as-is by the system.\n\nUse these when you need some functionality which is not natively supported by\nORM in Dogen.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.orm.odb_pragma",
             "masd.variability.is_optional": "true"
           }
         }

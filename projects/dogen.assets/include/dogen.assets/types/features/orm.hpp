@@ -51,6 +51,7 @@ public:
         variability::meta_model::feature letter_case;
         variability::meta_model::feature type_override;
         variability::meta_model::feature type_mapping;
+        variability::meta_model::feature odb_pragma;
     };
 
     static feature_group
@@ -68,6 +69,7 @@ public:
         std::string letter_case;
         std::list<std::string> type_override;
         std::list<std::string> type_mapping;
+        std::list<std::string> odb_pragma;
     };
 
     static static_configuration make_static_configuration(

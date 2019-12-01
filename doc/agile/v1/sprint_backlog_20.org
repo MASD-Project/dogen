@@ -12,24 +12,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-12-01 Sun 13:53]
+#+CAPTION: Clock summary at [2019-12-01 Sun 18:52]
 | <75>                                                 |         |       |       |       |
 | Headline                                             | Time    |       |       |     % |
 |------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                         | *36:08* |       |       | 100.0 |
+| *Total time*                                         | *37:15* |       |       | 100.0 |
 |------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                              | 36:08   |       |       | 100.0 |
-| Active                                               |         | 36:08 |       | 100.0 |
-| Edit release notes for previous sprint               |         |       | 11:24 |  31.5 |
-| Create a demo and presentation for previous sprint   |         |       |  2:31 |   7.0 |
-| Sprint and product backlog grooming                  |         |       |  2:24 |   6.6 |
-| Fix OSX build errors                                 |         |       |  0:25 |   1.2 |
-| Fix broken build due to incorrect postgres library   |         |       |  2:31 |   7.0 |
-| Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   3.6 |
-| Add relational tracing support                       |         |       |  9:08 |  25.3 |
-| Add type overrides to primitives                     |         |       |  5:23 |  14.9 |
-| Nightly code coverage is not being reported          |         |       |  0:23 |   1.1 |
-| Allow non-throwing casts for enums                   |         |       |  0:41 |   1.9 |
+| Stories                                              | 37:15   |       |       | 100.0 |
+| Active                                               |         | 37:15 |       | 100.0 |
+| Edit release notes for previous sprint               |         |       | 11:24 |  30.6 |
+| Create a demo and presentation for previous sprint   |         |       |  2:31 |   6.8 |
+| Sprint and product backlog grooming                  |         |       |  2:24 |   6.4 |
+| Fix OSX build errors                                 |         |       |  0:25 |   1.1 |
+| Fix broken build due to incorrect postgres library   |         |       |  2:31 |   6.8 |
+| Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   3.5 |
+| Add relational tracing support                       |         |       |  9:08 |  24.5 |
+| Add type overrides to primitives                     |         |       |  5:44 |  15.4 |
+| Nightly code coverage is not being reported          |         |       |  0:23 |   1.0 |
+| Allow non-throwing casts for enums                   |         |       |  0:41 |   1.8 |
+| Remove =odb_properties= in element properties        |         |       |  0:46 |   2.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -574,6 +575,8 @@ runs. The schema should be designed with this in mind.
 
 *** STARTED Add type overrides to primitives                          :story:
     :LOGBOOK:
+    CLOCK: [2019-12-01 Sun 14:05]--[2019-12-01 Sun 14:15] =>  0:10
+    CLOCK: [2019-12-01 Sun 13:53]--[2019-12-01 Sun 14:04] =>  0:11
     CLOCK: [2019-12-01 Sun 13:30]--[2019-12-01 Sun 13:52] =>  0:22
     CLOCK: [2019-12-01 Sun 13:15]--[2019-12-01 Sun 13:29] =>  0:14
     CLOCK: [2019-12-01 Sun 12:21]--[2019-12-01 Sun 13:14] =>  0:53
@@ -667,6 +670,53 @@ Notes:
 - [[http://boost.2283326.n4.nabble.com/lexical-cast-A-non-throwing-lexical-cast-Was-5-Observations-My-experience-with-the-boost-libraries-td2671153.html][A non-throwing lexical cast?]]
 - [[https://stackoverflow.com/questions/3157098/whats-the-right-approach-to-return-error-codes-in-c][Whats the right approach to return error codes in C++]]
 
+*** STARTED Remove =odb_properties= in element properties             :story:
+    :LOGBOOK:
+    CLOCK: [2019-12-01 Sun 18:40]--[2019-12-01 Sun 18:52] =>  0:12
+    CLOCK: [2019-12-01 Sun 18:01]--[2019-12-01 Sun 18:35] =>  0:34
+    :END:
+
+We moved the ORM support from fabric into assets, but we seem to have
+left behind the processing of ODB properties. This is taking on
+several tasks:
+
+- odb options file: we are generating the "model" for this file,
+  though our modeling of this is not ideal. We have
+  =object_odb_options= still in fabric, when it should really be in
+  assets. Note that the =*_options.odb= files should really be a
+  formatter for the underlying object projected into the facet ODB. We
+  just need to make sure the object ORM contains all of the required
+  details for this. Note that some of the content of this file can
+  only be generated in the =generation= model, because we need access
+  to paths. This means we may have to leave this work to after we have
+  moved locators into =generation=.
+- similarly, we have to deal with =common_odb_options=. This actually
+  requires a new meta-type.
+- we need to find a way to model ORM implementation specific details
+  in assets. These should be made obvious that they are ODB specific
+  (.e.g pragmas, etc).
+
+*** Allow property level bindings to primitives                       :story:
+
+We should map any variability bindings that happen at the
+property/attribute level to the anonymous attribute that all
+primitives have. This is because its not possible to address the
+anonymous attribute in a diagram. At present we are hacking these
+features to the =any= scope just so that we can move on. Affected
+features:
+
+: masd.orm.type_override
+: masd.orm.type_mapping
+
+In order for this to work, when we are building configurations from
+the original meta-model element, we need to "override" the
+type. However, this raises the question: what if we do want to bind
+something at the primitive level? What if something binds both to the
+property and the primitive?
+
+The alternative is to make the attribute explicit. We need to think
+about the consequences of this as well.
+
 *** Create a docker image for builds                                  :story:
 
 GCP's cloud builde uses the idea of cloud-builder images. These
@@ -709,28 +759,6 @@ nightly is failing to link with lots of errors like these:
 The right solution is to have "facet specific" link libraries, that
 kick in when the facet is enabled. This will not happen for a long
 time.
-
-*** Remove =odb_properties= in element properties                     :story:
-
-We moved the ORM support from fabric into assets, but we seem to have
-left behind the processing of ODB properties. This is taking on
-several tasks:
-
-- odb options file: we are generating the "model" for this file,
-  though our modeling of this is not ideal. We have
-  =object_odb_options= still in fabric, when it should really be in
-  assets. Note that the =*_options.odb= files should really be a
-  formatter for the underlying object projected into the facet ODB. We
-  just need to make sure the object ORM contains all of the required
-  details for this. Note that some of the content of this file can
-  only be generated in the =generation= model, because we need access
-  to paths. This means we may have to leave this work to after we have
-  moved locators into =generation=.
-- similarly, we have to deal with =common_odb_options=. This actually
-  requires a new meta-type.
-- we need to find a way to model ORM implementation specific details
-  in assets. These should be made obvious that they are ODB specific
-  (.e.g pragmas, etc).
 
 *** Move the build-file entities from fabric into assets              :story:
 
