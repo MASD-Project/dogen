@@ -239,6 +239,24 @@ void updator::visit(assets::meta_model::structural::primitive& p) {
             s << "schema(\"" << cfg.capitalised_schema_name() << "\")";
             op.top_level_odb_pragmas().push_back(s.str());
         }
+
+        for (const auto& tm: cfg.type_mappings()) {
+            std::ostringstream s;
+            s << "map ";
+            if (tm.database())
+                s << adapter::to_odb_database(*tm.database()) << ":";
+
+            s << "type(\"" << tm.source_type() << "\") as (\""
+              << tm.destination_type() << "\")";
+
+            if (!tm.to_source_type().empty())
+                s << "to(\"" << tm.to_source_type() << "\")";
+
+            if (!tm.to_destination_type().empty())
+                s << "to(\"" << tm.to_destination_type() << "\")";
+
+            op.top_level_odb_pragmas().push_back(s.str());
+        }
     }
 
     const bool has_top_level_pragmas(!op.top_level_odb_pragmas().empty());
@@ -256,8 +274,7 @@ void updator::visit(assets::meta_model::structural::primitive& p) {
      * "primitive_id_primitive_id", which become "primitive_id"
      * instead.
      *
-     * In addition, we also need to obtain all of the type mapping
-     * overrides.
+     * In addition, we also need to obtain all of the type overrides.
      */
     std::ostringstream s;
     s << empty_column_attribute;
