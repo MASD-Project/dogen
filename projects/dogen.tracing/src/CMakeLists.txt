@@ -42,7 +42,6 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
     set(use_msvc_libs ON)
 endif ()
 
-#set(relational_lib "")
 if (WITH_RELATIONAL_SUPPORT)
     list(APPEND relational_lib
         -Wl,--whole-archive dogen.relational.lib  -Wl,--no-whole-archive)
