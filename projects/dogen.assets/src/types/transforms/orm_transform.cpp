@@ -330,6 +330,13 @@ void orm_transform::update_primitive_properties(
     opp.capitalised_schema_name(capitalise_schema_name(opp.schema_name(), lc));
     if (!scfg.type_override.empty())
         opp.type_overrides(make_type_overrides(scfg.type_override));
+    else
+        BOOST_LOG_SEV(lg, debug) << "Primitive has no type overrides.";
+
+    if (!scfg.type_mapping.empty())
+        opp.type_mappings(make_type_mappings(scfg.type_mapping));
+    else
+        BOOST_LOG_SEV(lg, debug) << "Primitive has no type mappings.";
 }
 
 boost::optional<meta_model::orm::module_properties>
