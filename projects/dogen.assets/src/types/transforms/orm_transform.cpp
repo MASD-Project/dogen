@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/lexical_cast/bad_lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
+#include <boost/lexical_cast/bad_lexical_cast.hpp>
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/pair_io.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
@@ -58,6 +58,7 @@ const std::string transform_id("assets.transforms.orm_transform");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
+const std::string invalid_case("Letter case is invalid or unsupported: ");
 const std::string invalid_type_override("Invalid type override expression: ");
 const std::string duplicate_database_system(
     "Found more than one type override for database system: ");
@@ -210,26 +211,37 @@ orm_transform::make_model_properties(const features::orm::feature_group& fg,
 
     BOOST_LOG_SEV(lg, debug) << "Started creating model configuration.";
     const auto scfg(features::orm::make_static_configuration(fg, cfg));
-    bool found_any(false);
+    bool found(false);
 
     meta_model::orm::model_properties r;
     if (!scfg.database_system.empty()) {
-        found_any = true;
+        found = true;
         r.database_systems(to_orm_database_system(scfg.database_system));
     }
 
     if (!scfg.schema_name.empty()) {
-        found_any = true;
+        found = true;
         r.schema_name(scfg.schema_name);
     }
 
     if (!scfg.letter_case.empty()) {
-        found_any = true;
-        using meta_model::orm::letter_case;
-        r.letter_case(boost::lexical_cast<letter_case>(scfg.letter_case));
+        found = true;
+        using assets::meta_model::orm::letter_case;
+        const auto lc(boost::lexical_cast<letter_case>(scfg.letter_case));
+        r.letter_case(lc);
+
+        if (lc == letter_case::upper_case)
+            r.capitalised_schema_name(boost::to_upper_copy(r.schema_name()));
+        else if (lc == letter_case::lower_case)
+            r.capitalised_schema_name(boost::to_lower_copy(r.schema_name()));
+        else {
+            const auto s(scfg.letter_case);
+            BOOST_LOG_SEV(lg, error) << invalid_case << s;
+            BOOST_THROW_EXCEPTION(transformation_error(invalid_case + s));
+        }
     }
 
-    if (found_any) {
+    if (found) {
         BOOST_LOG_SEV(lg, debug) << "Created model configuration: " << r;
         return r;
     }
