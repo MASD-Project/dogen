@@ -61,6 +61,12 @@ for layer in dia.active_display().diagram.data.layers:
             object.properties["fill_colour"] = "#EEFACD"
 
         #
+        # Theme: Testing
+        #
+        elif "dogen::untestable" in stereotype:
+            object.properties["fill_colour"] = "#FBA5A5"
+
+        #
         # C++ Reference Implementation specific stereorypes.
         # -------------------------------------------------
         #
