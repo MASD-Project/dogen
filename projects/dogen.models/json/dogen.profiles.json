@@ -3,6 +3,7 @@
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "dogen.profiles",
+    "masd.injection.reference": "masd",
     "masd.injection.input_technical_space": "agnostic",
     "masd.injection.is_proxy_model": "true",
     "masd.generation.cpp.enabled": "false",
@@ -1074,6 +1075,30 @@
           "name": "message",
           "type": "",
           "documentation": "These files are code-generated via overrides to test dogen. Do not commit them.\n"
+        }
+      ]
+    },
+    {
+      "name": "composable::untestable",
+      "documentation": "Model element will not be tested via generated tests.\n",
+      "stereotypes": [
+        "masd::variability::profile_template"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.labels": "dogen::untestable"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.cpp.tests.enabled",
+          "type": "",
+          "value": "false",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "instance"
+          }
         }
       ]
     }

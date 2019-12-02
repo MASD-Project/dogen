@@ -52,9 +52,9 @@
     {
       "name": "composite",
       "documentation": "Attribute value which is made up of other attributes.\n",
-      "tagged_values": {
-        "masd.generation.cpp.tests.enabled": "false"
-      },
+      "stereotypes": [
+        "dogen::untestable"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {

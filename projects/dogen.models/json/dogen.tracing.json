@@ -43,9 +43,9 @@
     },
     {
       "name": "metrics",
-      "tagged_values": {
-        "masd.generation.cpp.tests.enabled": "false"
-      },
+      "stereotypes": [
+        "dogen::untestable"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
