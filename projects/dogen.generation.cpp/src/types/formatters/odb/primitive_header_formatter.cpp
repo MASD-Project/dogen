@@ -92,10 +92,9 @@ format(const context& ctx, const assets::meta_model::element& e) const {
         const auto sn(p.name().simple());
         const auto qn(a.get_qualified_name(p.name()));
         auto sbf(a.make_scoped_boilerplate_formatter(e));
-        const auto top_level_pragmas(a.get_odb_pragmas());
         const auto attr(p.value_attribute());
 
-        if (top_level_pragmas.empty()) {
+        if (!p.orm_properties() || p.orm_properties()->odb_pragmas().empty()) {
 a.stream() << "// class has no ODB pragmas defined." << std::endl;
 a.stream() << std::endl;
         } else {
@@ -105,20 +104,22 @@ a.stream() << std::endl;
 a.stream() << std::endl;
 a.stream() << "#ifdef ODB_COMPILER" << std::endl;
 a.stream() << std::endl;
-                for (const auto& pg : top_level_pragmas)
+                for (const auto& pg : p.orm_properties()->odb_pragmas())
 a.stream() << "#pragma db " << a.get_odb_type() << "(" << sn << ") " << pg << std::endl;
 
                 bool is_first(true);
-                const auto attr_level_pragmas(a.get_odb_pragmas(attr.name().qualified().dot()));
-                for (const auto pg : attr_level_pragmas) {
+                if (p.value_attribute().orm_properties() &&
+                    !p.value_attribute().orm_properties()->odb_pragmas().empty()) {
+                    for (const auto pg : p.value_attribute().orm_properties()->odb_pragmas()) {
                         if (is_first)
 a.stream() << std::endl;
-                        is_first = false;
+                            is_first = false;
 a.stream() << "#pragma db member(" << sn << "::" << a.make_member_variable_name(attr) << ") " << pg << std::endl;
-                }
+                    }
 a.stream() << std::endl;
 a.stream() << "#endif" << std::endl;
 a.stream() << std::endl;
+                }
             }
 a.stream() << std::endl;
         }

@@ -355,25 +355,38 @@ void orm_transform::update_object_properties(
     meta_model::orm::object_properties& oop) {
 
     const auto scfg(features::orm::make_static_configuration(fg, cfg));
-    oop.schema_name(scfg.schema_name);
-    oop.capitalised_schema_name(capitalise_schema_name(oop.schema_name(), lc));
     oop.table_name(scfg.table_name);
     oop.odb_pragmas(scfg.odb_pragma);
 
     /*
-     * If the user has supplied an ORM properties and this
-     * object does not have a primary key, we need to inject ODB's
-     * pragma for it.
+     * If we have overridden the schema name in the configuration,
+     * then that takes precedence.
      */
-    if (oop.generate_mapping() && !oop.is_value() && !oop.has_primary_key())
-        oop.odb_pragmas().push_back(no_id_pragma);
+    if (!scfg.schema_name.empty()) {
+        oop.schema_name(scfg.schema_name);
+        const auto csn(capitalise_schema_name(oop.schema_name(), lc));
+        oop.capitalised_schema_name(csn);
+    }
 
-    if (!oop.schema_name().empty() &&
-        (oop.is_value() || oop.generate_mapping())) {
+    /*
+     * If we have a schema name - either because it was defaulted from
+     * a module, or because it was supplied in the configuration, and
+     * we're "active", generate the appropriate ODB pragma.
+     */
+    const bool is_active((oop.is_value() || oop.generate_mapping()));
+    if (!oop.schema_name().empty() && is_active) {
         std::ostringstream s;
         s << "schema(\"" << oop.capitalised_schema_name() << "\")";
         oop.odb_pragmas().push_back(s.str());
     }
+
+    /*
+     * If the user has requested ORM support and this object does not
+     * have a primary key, then we need to inject ODB's pragma for "no
+     * primary key".
+     */
+    if (oop.generate_mapping() && !oop.is_value() && !oop.has_primary_key())
+        oop.odb_pragmas().push_back(no_id_pragma);
 }
 
 boost::optional<meta_model::orm::attribute_properties>
@@ -384,7 +397,6 @@ orm_transform::make_attribute_properties(const features::orm::feature_group& fg,
     const auto scfg(features::orm::make_static_configuration(fg, cfg));
     using meta_model::orm::attribute_properties;
     attribute_properties r;
-
     r.odb_pragmas(scfg.odb_pragma);
     if (!scfg.column_name.empty()) {
         found = true;
@@ -439,30 +451,47 @@ void orm_transform::update_primitive_properties(
     const auto scfg(features::orm::make_static_configuration(fg, cfg));
 
     opp.odb_pragmas(scfg.odb_pragma);
-    opp.schema_name(scfg.schema_name);
-    opp.capitalised_schema_name(capitalise_schema_name(opp.schema_name(), lc));
 
+    /*
+     * If we have overridden the schema name in the configuration,
+     * then that takes precedence.
+     */
+    if (!scfg.schema_name.empty()) {
+        opp.schema_name(scfg.schema_name);
+        const auto csn(capitalise_schema_name(opp.schema_name(), lc));
+        opp.capitalised_schema_name(csn);
+    }
+
+    /*
+     * If we have a schema name - either because it was defaulted from
+     * a module, or because it was supplied in the configuration, and
+     * we're "active", generate the appropriate ODB pragma.
+     */
     if (!opp.schema_name().empty() && opp.generate_mapping()) {
         std::ostringstream s;
         s << "schema(\"" << opp.capitalised_schema_name() << "\")";
         opp.odb_pragmas().push_back(s.str());
     }
 
+    /*
+     * Note that we handle the processing of type overrides here, but
+     * these are expressed into ODB pragmas at the (anonymous)
+     * attribute level.
+     */
     if (!scfg.type_override.empty())
         opp.type_overrides(make_type_overrides(scfg.type_override));
     else
         BOOST_LOG_SEV(lg, debug) << "Primitive has no type overrides.";
 
+    /*
+     * Handle type mappings for this primitive.
+     */
     if (!scfg.type_mapping.empty()) {
         opp.type_mappings(make_type_mappings(scfg.type_mapping));
         auto tms(make_odb_pragmas_for_type_mappings(opp.type_mappings()));
         opp.odb_pragmas().splice(opp.odb_pragmas().end(), tms);
     } else
         BOOST_LOG_SEV(lg, debug) << "Primitive has no type mappings.";
-
-    const bool has_top_level_pragmas(!opp.odb_pragmas().empty());
-    if (!has_top_level_pragmas)
-        return;
 }
 
 boost::optional<meta_model::orm::module_properties>
@@ -520,6 +549,7 @@ void orm_transform::transform_objects(
             has_primary_key |= (attr_op && attr_op->is_primary_key());
             attr.orm_properties(attr_op);
         }
+        op.has_primary_key(has_primary_key);
 
         /*
          * Update the object's configuration with any additional
@@ -527,7 +557,6 @@ void orm_transform::transform_objects(
          */
         const auto& cfg(*o.configuration());
         update_object_properties(fg, cfg, lc, op);
-        op.has_primary_key(has_primary_key);
 
         BOOST_LOG_SEV(lg, debug) << "ORM configuration for object: "
                                  << pair.first << ": " << op;
@@ -560,12 +589,11 @@ void orm_transform::transform_primitives(
             continue;
         }
 
-        auto& op(*p.orm_properties());
-
         /*
          * Letter case is always setup to match the model
          * configuration.
          */
+        auto& op(*p.orm_properties());
         op.letter_case(lc);
 
         /*
@@ -642,7 +670,9 @@ void orm_transform::transform_modules(
         /*
          * If we do have a schema name at the module level, we need to
          * update all objects that do not have a schema name to use
-         * it's containing module's schema name.
+         * it's containing module's schema name. Note that this is not
+         * done correctly at present, as we do not take into account
+         * modules that contain modules.
          */
         for (const auto& id : mod.contains()) {
             BOOST_LOG_SEV(lg, debug) << "Processing contained element: " << id;
@@ -689,7 +719,11 @@ void orm_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "orm transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    const auto fm(*ctx.feature_model());
+    /*
+     * First we must transform the model. If the model has no ORM
+     * configuration, there is no need to continue.
+     */
+    const auto& fm(*ctx.feature_model());
     const auto fg(features::orm::make_feature_group(fm));
     const auto& rm(*m.root_module());
     m.orm_properties(make_model_properties(fg, *rm.configuration()));
@@ -698,9 +732,18 @@ void orm_transform::apply(const context& ctx, meta_model::model& m) {
         return;
     }
 
+    /*
+     * Then we must transform modules next, in order to ensure the
+     * schema name is populated accordingly.
+     */
+    transform_modules(fg, m);
+
+    /*
+     * Finally we can transform objects and primitives, in no
+     * particular order.
+     */
     transform_objects(fg, m);
     transform_primitives(fg, m);
-    transform_modules(fg, m);
 
     stp.end_transform(m);
 }
