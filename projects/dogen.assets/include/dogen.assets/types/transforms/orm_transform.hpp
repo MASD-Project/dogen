@@ -32,6 +32,7 @@
 #include <boost/optional.hpp>
 #include "dogen.assets/types/meta_model/model.hpp"
 #include "dogen.assets/types/features/orm.hpp"
+#include "dogen.assets/types/meta_model/attribute.hpp"
 #include "dogen.assets/types/meta_model/orm/database_system.hpp"
 #include "dogen.assets/types/meta_model/orm/model_properties.hpp"
 #include "dogen.assets/types/meta_model/orm/object_properties.hpp"
@@ -79,12 +80,15 @@ private:
         const features::orm::feature_group& fg,
         const variability::meta_model::configuration& cfg,
         const boost::optional<meta_model::orm::letter_case>& lc,
+        const std::string& simple_name,
         meta_model::orm::object_properties& oop);
 
     static boost::optional<meta_model::orm::attribute_properties>
     make_attribute_properties(
         const features::orm::feature_group& fg,
-        const variability::meta_model::configuration& cfg);
+        const variability::meta_model::configuration& cfg,
+        const std::string& simple_name,
+        const meta_model::attribute& attr);
 
     static void update_primitive_properties(
         const features::orm::feature_group& fg,

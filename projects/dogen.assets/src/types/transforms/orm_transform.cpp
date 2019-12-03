@@ -58,13 +58,15 @@ const std::string transform_id("assets.transforms.orm_transform");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
-const std::string empty_column_attribute("column(\"\")");
-const std::string id_pragma("id");
-const std::string no_id_pragma("no_id");
-
-const std::string null_pragma("null");
-const std::string not_null_pragma("not_null");
-const std::string value_pragma("value");
+const std::string odb_pragma_prefix("#pragma db ");
+const std::string odb_value_type("value");
+const std::string odb_object_type("object");
+const std::string odb_member_type("member");
+const std::string odb_empty_column_attribute("column(\"\")");
+const std::string odb_id("id");
+const std::string odb_no_id("no_id");
+const std::string odb_null("null");
+const std::string odb_not_null("not_null");
 
 const std::string mysql("mysql");
 const std::string postgresql("pgsql");
@@ -352,11 +354,22 @@ void orm_transform::update_object_properties(
     const features::orm::feature_group& fg,
     const variability::meta_model::configuration& cfg,
     const boost::optional<meta_model::orm::letter_case>& lc,
+    const std::string& simple_name,
     meta_model::orm::object_properties& oop) {
+
+    const auto pragma_prefix(
+        [&]() {
+            std::ostringstream s;
+            s << odb_pragma_prefix
+              << (oop.is_value() ? odb_value_type : odb_object_type)
+              << "(" << simple_name << ") ";
+            return s.str();
+        }());
 
     const auto scfg(features::orm::make_static_configuration(fg, cfg));
     oop.table_name(scfg.table_name);
-    oop.odb_pragmas(scfg.odb_pragma);
+    for (const auto& pg : scfg.odb_pragma)
+        oop.odb_pragmas().push_back(pragma_prefix + pg);
 
     /*
      * If we have overridden the schema name in the configuration,
@@ -376,7 +389,8 @@ void orm_transform::update_object_properties(
     const bool is_active((oop.is_value() || oop.generate_mapping()));
     if (!oop.schema_name().empty() && is_active) {
         std::ostringstream s;
-        s << "schema(\"" << oop.capitalised_schema_name() << "\")";
+        s << pragma_prefix << "schema(\""
+          << oop.capitalised_schema_name() << "\")";
         oop.odb_pragmas().push_back(s.str());
     }
 
@@ -386,18 +400,31 @@ void orm_transform::update_object_properties(
      * primary key".
      */
     if (oop.generate_mapping() && !oop.is_value() && !oop.has_primary_key())
-        oop.odb_pragmas().push_back(no_id_pragma);
+        oop.odb_pragmas().push_back(pragma_prefix + odb_no_id);
 }
 
 boost::optional<meta_model::orm::attribute_properties>
 orm_transform::make_attribute_properties(const features::orm::feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
+    const variability::meta_model::configuration& cfg,
+    const std::string& simple_name, const meta_model::attribute& attr) {
+
+    const auto pragma_prefix(
+        [&]() {
+            std::ostringstream s;
+            s << odb_pragma_prefix << odb_member_type
+              << "(" << simple_name << "::" << attr.member_variable_name()
+              << ") ";
+            return s.str();
+        }());
+
 
     bool found(false);
     const auto scfg(features::orm::make_static_configuration(fg, cfg));
     using meta_model::orm::attribute_properties;
     attribute_properties r;
-    r.odb_pragmas(scfg.odb_pragma);
+    for (const auto& pg : scfg.odb_pragma)
+        r.odb_pragmas().push_back(pragma_prefix + pg);
+
     if (!scfg.column_name.empty()) {
         found = true;
         r.column_name(scfg.column_name);
@@ -406,7 +433,7 @@ orm_transform::make_attribute_properties(const features::orm::feature_group& fg,
     if (scfg.is_primary_key) {
         found = true;
         r.is_primary_key(*scfg.is_primary_key);
-        r.odb_pragmas().push_back(id_pragma);
+        r.odb_pragmas().push_back(pragma_prefix + odb_id);
     }
 
     if (scfg.is_nullable) {
@@ -414,9 +441,9 @@ orm_transform::make_attribute_properties(const features::orm::feature_group& fg,
         r.is_nullable(*scfg.is_nullable);
 
         if (*r.is_nullable())
-            r.odb_pragmas().push_back(null_pragma);
+            r.odb_pragmas().push_back(pragma_prefix + odb_null);
         else
-            r.odb_pragmas().push_back(not_null_pragma);
+            r.odb_pragmas().push_back(pragma_prefix + odb_not_null);
     }
 
     if (!scfg.type_override.empty()) {
@@ -434,7 +461,7 @@ orm_transform::make_attribute_properties(const features::orm::feature_group& fg,
          * For composite keys, we do not want to use the column name as a
          * prefix.
          */
-        r.odb_pragmas().push_back(empty_column_attribute);
+        r.odb_pragmas().push_back(pragma_prefix + odb_empty_column_attribute);
     }
 
     if (found)
@@ -542,10 +569,11 @@ void orm_transform::transform_objects(
          * detect the presence of primary keys.
          */
         bool has_primary_key(false);
+        const auto& sn(o.name().simple());
         const auto id(pair.first);
         for (auto& attr : o.local_attributes()) {
             const auto& cfg(*attr.configuration());
-            const auto attr_op(make_attribute_properties(fg, cfg));
+            const auto attr_op(make_attribute_properties(fg, cfg, sn, attr));
             has_primary_key |= (attr_op && attr_op->is_primary_key());
             attr.orm_properties(attr_op);
         }
@@ -556,7 +584,7 @@ void orm_transform::transform_objects(
          * meta-data the user may have supplied.
          */
         const auto& cfg(*o.configuration());
-        update_object_properties(fg, cfg, lc, op);
+        update_object_properties(fg, cfg, lc, sn, op);
 
         BOOST_LOG_SEV(lg, debug) << "ORM configuration for object: "
                                  << pair.first << ": " << op;
@@ -620,7 +648,7 @@ void orm_transform::transform_primitives(
          * overrides.
          */
         std::ostringstream s;
-        s << empty_column_attribute;
+        s << odb_empty_column_attribute;
 
         using meta_model::orm::attribute_properties;
         attribute_properties ap;

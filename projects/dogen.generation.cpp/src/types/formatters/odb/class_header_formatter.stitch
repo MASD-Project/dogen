@@ -65,7 +65,7 @@ format(const context& ctx, const assets::meta_model::element& e) const {
 <#+
                 for (const auto& pg : o.orm_properties()->odb_pragmas())
 #>
-#pragma db <#= a.get_odb_type() #>(<#= sn #>) <#= pg #>
+<#= pg #>
 <#+
 
                 bool is_first(true);
@@ -82,7 +82,7 @@ format(const context& ctx, const assets::meta_model::element& e) const {
 <#+
                         is_first = false;
 #>
-#pragma db member(<#= sn #>::<#= attr.member_variable_name() #>) <#= pg #>
+<#= pg #>
 <#+
                     }
                 }
