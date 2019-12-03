@@ -12,26 +12,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-12-03 Tue 21:21]
+#+CAPTION: Clock summary at [2019-12-03 Tue 23:22]
 | <75>                                                 |         |       |       |       |
 | Headline                                             | Time    |       |       |     % |
 |------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                         | *42:11* |       |       | 100.0 |
+| *Total time*                                         | *43:36* |       |       | 100.0 |
 |------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                              | 42:11   |       |       | 100.0 |
-| Active                                               |         | 42:11 |       | 100.0 |
-| Edit release notes for previous sprint               |         |       | 11:24 |  27.0 |
-| Create a demo and presentation for previous sprint   |         |       |  2:31 |   6.0 |
-| Sprint and product backlog grooming                  |         |       |  3:29 |   8.3 |
+| Stories                                              | 43:36   |       |       | 100.0 |
+| Active                                               |         | 43:36 |       | 100.0 |
+| Edit release notes for previous sprint               |         |       | 11:24 |  26.1 |
+| Create a demo and presentation for previous sprint   |         |       |  2:31 |   5.8 |
+| Sprint and product backlog grooming                  |         |       |  3:29 |   8.0 |
 | Fix OSX build errors                                 |         |       |  0:25 |   1.0 |
-| Fix broken build due to incorrect postgres library   |         |       |  2:31 |   6.0 |
-| Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   3.1 |
-| Create a profile called =untested=                   |         |       |  0:17 |   0.7 |
-| Remove =odb_properties= in element properties        |         |       |  2:25 |   5.7 |
-| Add relational tracing support                       |         |       |  9:08 |  21.7 |
-| Add type overrides to primitives                     |         |       |  7:39 |  18.1 |
-| Nightly code coverage is not being reported          |         |       |  0:23 |   0.9 |
+| Fix broken build due to incorrect postgres library   |         |       |  2:31 |   5.8 |
+| Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   3.0 |
+| Create a profile called =untested=                   |         |       |  0:17 |   0.6 |
+| Remove =odb_properties= in element properties        |         |       |  2:25 |   5.5 |
 | Allow non-throwing casts for enums                   |         |       |  0:41 |   1.6 |
+| Add type overrides to primitives                     |         |       |  8:55 |  20.5 |
+| Add relational tracing support                       |         |       |  9:08 |  20.9 |
+| Nightly code coverage is not being reported          |         |       |  0:23 |   0.9 |
+| Move member variable name to assets                  |         |       |  0:09 |   0.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -515,6 +516,69 @@ Notes:
 - [[http://boost.2283326.n4.nabble.com/lexical-cast-A-non-throwing-lexical-cast-Was-5-Observations-My-experience-with-the-boost-libraries-td2671153.html][A non-throwing lexical cast?]]
 - [[https://stackoverflow.com/questions/3157098/whats-the-right-approach-to-return-error-codes-in-c][Whats the right approach to return error codes in C++]]
 
+*** COMPLETED Add type overrides to primitives                        :story:
+    CLOSED: [2019-12-03 Tue 23:22]
+    :LOGBOOK:
+    CLOCK: [2019-12-03 Tue 22:06]--[2019-12-03 Tue 23:22] =>  1:16
+    CLOCK: [2019-12-03 Tue 20:49]--[2019-12-03 Tue 20:52] =>  0:03
+    CLOCK: [2019-12-03 Tue 00:01]--[2019-12-03 Tue 00:19] =>  0:18
+    CLOCK: [2019-12-02 Mon 23:37]--[2019-12-03 Tue 00:00] =>  0:23
+    CLOCK: [2019-12-02 Mon 22:45]--[2019-12-02 Mon 23:36] =>  0:51
+    CLOCK: [2019-12-02 Mon 19:58]--[2019-12-02 Mon 20:18] =>  0:20
+    CLOCK: [2019-12-01 Sun 14:05]--[2019-12-01 Sun 14:15] =>  0:10
+    CLOCK: [2019-12-01 Sun 13:53]--[2019-12-01 Sun 14:04] =>  0:11
+    CLOCK: [2019-12-01 Sun 13:30]--[2019-12-01 Sun 13:52] =>  0:22
+    CLOCK: [2019-12-01 Sun 13:15]--[2019-12-01 Sun 13:29] =>  0:14
+    CLOCK: [2019-12-01 Sun 12:21]--[2019-12-01 Sun 13:14] =>  0:53
+    CLOCK: [2019-11-30 Sat 00:02]--[2019-11-30 Sat 00:27] =>  0:25
+    CLOCK: [2019-11-29 Fri 14:14]--[2019-11-29 Fri 14:54] =>  0:40
+    CLOCK: [2019-11-29 Fri 12:31]--[2019-11-29 Fri 12:55] =>  0:24
+    CLOCK: [2019-11-29 Fri 11:26]--[2019-11-29 Fri 11:48] =>  0:22
+    CLOCK: [2019-11-29 Fri 11:16]--[2019-11-29 Fri 11:25] =>  0:09
+    CLOCK: [2019-11-27 Wed 23:24]--[2019-11-28 Thu 00:13] =>  0:49
+    CLOCK: [2019-11-26 Tue 08:01]--[2019-11-26 Tue 08:45] =>  0:44
+    CLOCK: [2019-11-25 Mon 08:22]--[2019-11-25 Mon 08:43] =>  0:21
+    :END:
+
+It seems ODB expects the type overrides to be declared with the
+primitive itself, not the containing type. In addition, they also
+require mapping when using non-core types. Example:
+
+: #pragma db map sqlite:type("JSON_TEXT") as("TEXT") to("json((?))")
+: #pragma db map pgsql:type("JSONB") as("TEXT") to("to_jsonb((?)::jsonb)") from("from_jsonb((?))")
+:
+: #pragma db value(json) schema("DOGEN")
+:
+: #pragma db member(json::value_) column("") pgsql:type("JSONB")
+
+The mapping must appear before the type overrides.
+
+: #DOGEN masd.orm.type_override=postgresql,JSONB
+: #DOGEN masd.orm.type_override=sqlite,JSON_TEXT
+
+The problem we have at present is that we have hard-coded the pragma
+types to always be of type =db type= and then the type of the
+meta-model element. This worked ok thus far but does not allow for the
+creation of =db map= pragmas. Nothing stops us from copying the type
+override logic from objects, however.
+
+Notes:
+
+- since we are trying to debug the reason why registrar is not coming
+  out, it does not seem to be sensible to create yet more meta-model
+  elements that get expressed as artefacts due to the somewhat
+  circular logic. Instead, we need a tactical hack that allows to
+  progress with the implementation of the relational model and we can
+  then do a strategic fix when we resume moving meta-model elements
+  from fabric. The approach is then to allow mappings as an ORM
+  concept built on top of existing ORM infrastructure.
+
+: #DOGEN masd.orm.type_map=FROM,TO,A,B
+
+- in fact the choice of solution is not entirely tactical, as this
+  will still be useful going forward.
+- we need to ensure type maps are outputted first.
+
 *** STARTED Add relational tracing support                            :story:
     :LOGBOOK:
     CLOCK: [2019-11-30 Sat 18:02]--[2019-11-30 Sat 20:13] =>  2:11
@@ -690,67 +754,6 @@ start and end of this transform?"
 
 Interestingly, this would also allow us to compare things between
 runs. The schema should be designed with this in mind.
-
-*** STARTED Add type overrides to primitives                          :story:
-    :LOGBOOK:
-    CLOCK: [2019-12-03 Tue 20:49]--[2019-12-03 Tue 20:52] =>  0:03
-    CLOCK: [2019-12-03 Tue 00:01]--[2019-12-03 Tue 00:19] =>  0:18
-    CLOCK: [2019-12-02 Mon 23:37]--[2019-12-03 Tue 00:00] =>  0:23
-    CLOCK: [2019-12-02 Mon 22:45]--[2019-12-02 Mon 23:36] =>  0:51
-    CLOCK: [2019-12-02 Mon 19:58]--[2019-12-02 Mon 20:18] =>  0:20
-    CLOCK: [2019-12-01 Sun 14:05]--[2019-12-01 Sun 14:15] =>  0:10
-    CLOCK: [2019-12-01 Sun 13:53]--[2019-12-01 Sun 14:04] =>  0:11
-    CLOCK: [2019-12-01 Sun 13:30]--[2019-12-01 Sun 13:52] =>  0:22
-    CLOCK: [2019-12-01 Sun 13:15]--[2019-12-01 Sun 13:29] =>  0:14
-    CLOCK: [2019-12-01 Sun 12:21]--[2019-12-01 Sun 13:14] =>  0:53
-    CLOCK: [2019-11-30 Sat 00:02]--[2019-11-30 Sat 00:27] =>  0:25
-    CLOCK: [2019-11-29 Fri 14:14]--[2019-11-29 Fri 14:54] =>  0:40
-    CLOCK: [2019-11-29 Fri 12:31]--[2019-11-29 Fri 12:55] =>  0:24
-    CLOCK: [2019-11-29 Fri 11:26]--[2019-11-29 Fri 11:48] =>  0:22
-    CLOCK: [2019-11-29 Fri 11:16]--[2019-11-29 Fri 11:25] =>  0:09
-    CLOCK: [2019-11-27 Wed 23:24]--[2019-11-28 Thu 00:13] =>  0:49
-    CLOCK: [2019-11-26 Tue 08:01]--[2019-11-26 Tue 08:45] =>  0:44
-    CLOCK: [2019-11-25 Mon 08:22]--[2019-11-25 Mon 08:43] =>  0:21
-    :END:
-
-It seems ODB expects the type overrides to be declared with the
-primitive itself, not the containing type. In addition, they also
-require mapping when using non-core types. Example:
-
-: #pragma db map sqlite:type("JSON_TEXT") as("TEXT") to("json((?))")
-: #pragma db map pgsql:type("JSONB") as("TEXT") to("to_jsonb((?)::jsonb)") from("from_jsonb((?))")
-:
-: #pragma db value(json) schema("DOGEN")
-:
-: #pragma db member(json::value_) column("") pgsql:type("JSONB")
-
-The mapping must appear before the type overrides.
-
-: #DOGEN masd.orm.type_override=postgresql,JSONB
-: #DOGEN masd.orm.type_override=sqlite,JSON_TEXT
-
-The problem we have at present is that we have hard-coded the pragma
-types to always be of type =db type= and then the type of the
-meta-model element. This worked ok thus far but does not allow for the
-creation of =db map= pragmas. Nothing stops us from copying the type
-override logic from objects, however.
-
-Notes:
-
-- since we are trying to debug the reason why registrar is not coming
-  out, it does not seem to be sensible to create yet more meta-model
-  elements that get expressed as artefacts due to the somewhat
-  circular logic. Instead, we need a tactical hack that allows to
-  progress with the implementation of the relational model and we can
-  then do a strategic fix when we resume moving meta-model elements
-  from fabric. The approach is then to allow mappings as an ORM
-  concept built on top of existing ORM infrastructure.
-
-: #DOGEN masd.orm.type_map=FROM,TO,A,B
-
-- in fact the choice of solution is not entirely tactical, as this
-  will still be useful going forward.
-- we need to ensure type maps are outputted first.
 
 *** STARTED Nightly code coverage is not being reported               :story:
     :LOGBOOK:
