@@ -115,7 +115,8 @@ std::ostream& operator<<(std::ostream& s, const attribute& v) {
       << "\"parsed_type\": " << v.parsed_type() << ", "
       << "\"is_immutable\": " << v.is_immutable() << ", "
       << "\"is_fluent\": " << v.is_fluent() << ", "
-      << "\"orm_properties\": " << v.orm_properties()
+      << "\"orm_properties\": " << v.orm_properties() << ", "
+      << "\"member_variable_name\": " << "\"" << tidy_up_string(v.member_variable_name()) << "\""
       << " }";
     return(s);
 }

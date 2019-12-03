@@ -63,7 +63,8 @@ public:
         const dogen::assets::meta_model::name_tree& parsed_type,
         const bool is_immutable,
         const bool is_fluent,
-        const boost::optional<dogen::assets::meta_model::orm::attribute_properties>& orm_properties);
+        const boost::optional<dogen::assets::meta_model::orm::attribute_properties>& orm_properties,
+        const std::string& member_variable_name);
 
 public:
     /**
@@ -164,6 +165,19 @@ public:
     void orm_properties(const boost::optional<dogen::assets::meta_model::orm::attribute_properties>& v);
     void orm_properties(const boost::optional<dogen::assets::meta_model::orm::attribute_properties>&& v);
 
+    /**
+     * @brief Representation of the attribute name as a member variable.
+     *
+     * Note that at present we only support a single style for naming member variables,
+     * across all languages. This will have to be revisited in the future.
+     */
+    /**@{*/
+    const std::string& member_variable_name() const;
+    std::string& member_variable_name();
+    void member_variable_name(const std::string& v);
+    void member_variable_name(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const attribute& rhs) const;
     bool operator!=(const attribute& rhs) const {
@@ -185,6 +199,7 @@ private:
     bool is_immutable_;
     bool is_fluent_;
     boost::optional<dogen::assets::meta_model::orm::attribute_properties> orm_properties_;
+    std::string member_variable_name_;
 };
 
 }

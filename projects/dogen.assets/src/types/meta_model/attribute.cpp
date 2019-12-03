@@ -46,7 +46,8 @@ attribute::attribute(attribute&& rhs)
       parsed_type_(std::move(rhs.parsed_type_)),
       is_immutable_(std::move(rhs.is_immutable_)),
       is_fluent_(std::move(rhs.is_fluent_)),
-      orm_properties_(std::move(rhs.orm_properties_)) { }
+      orm_properties_(std::move(rhs.orm_properties_)),
+      member_variable_name_(std::move(rhs.member_variable_name_)) { }
 
 attribute::attribute(
     const std::string& documentation,
@@ -58,7 +59,8 @@ attribute::attribute(
     const dogen::assets::meta_model::name_tree& parsed_type,
     const bool is_immutable,
     const bool is_fluent,
-    const boost::optional<dogen::assets::meta_model::orm::attribute_properties>& orm_properties)
+    const boost::optional<dogen::assets::meta_model::orm::attribute_properties>& orm_properties,
+    const std::string& member_variable_name)
     : documentation_(documentation),
       configuration_(configuration),
       name_(name),
@@ -68,7 +70,8 @@ attribute::attribute(
       parsed_type_(parsed_type),
       is_immutable_(is_immutable),
       is_fluent_(is_fluent),
-      orm_properties_(orm_properties) { }
+      orm_properties_(orm_properties),
+      member_variable_name_(member_variable_name) { }
 
 void attribute::swap(attribute& other) noexcept {
     using std::swap;
@@ -82,6 +85,7 @@ void attribute::swap(attribute& other) noexcept {
     swap(is_immutable_, other.is_immutable_);
     swap(is_fluent_, other.is_fluent_);
     swap(orm_properties_, other.orm_properties_);
+    swap(member_variable_name_, other.member_variable_name_);
 }
 
 bool attribute::operator==(const attribute& rhs) const {
@@ -94,7 +98,8 @@ bool attribute::operator==(const attribute& rhs) const {
         parsed_type_ == rhs.parsed_type_ &&
         is_immutable_ == rhs.is_immutable_ &&
         is_fluent_ == rhs.is_fluent_ &&
-        orm_properties_ == rhs.orm_properties_;
+        orm_properties_ == rhs.orm_properties_ &&
+        member_variable_name_ == rhs.member_variable_name_;
 }
 
 attribute& attribute::operator=(attribute other) {
@@ -245,6 +250,22 @@ void attribute::orm_properties(const boost::optional<dogen::assets::meta_model::
 
 void attribute::orm_properties(const boost::optional<dogen::assets::meta_model::orm::attribute_properties>&& v) {
     orm_properties_ = std::move(v);
+}
+
+const std::string& attribute::member_variable_name() const {
+    return member_variable_name_;
+}
+
+std::string& attribute::member_variable_name() {
+    return member_variable_name_;
+}
+
+void attribute::member_variable_name(const std::string& v) {
+    member_variable_name_ = v;
+}
+
+void attribute::member_variable_name(const std::string&& v) {
+    member_variable_name_ = std::move(v);
 }
 
 }
