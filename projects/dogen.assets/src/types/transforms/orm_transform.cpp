@@ -179,7 +179,7 @@ orm_transform::make_type_overrides(const std::list<std::string> ls) {
 std::string orm_transform::
 make_odb_pragmas_for_type_overrides(const std::unordered_map<
     assets::meta_model::orm::database_system, std::string>& type_overrides) {
-    if (!type_overrides.empty())
+    if (type_overrides.empty())
         return std::string();
 
     std::ostringstream s;
@@ -265,19 +265,20 @@ orm_transform::make_type_mappings(const std::list<std::string> ls) {
         /*
          * We must have a destination type.
          */
-        tm.destination_type(*(++i));
+        ++i;
+        tm.destination_type(*i);
 
         /*
          * We may or may not have a "to source type" function.
          */
-        if (i != tokens.end()) {
+        ++i;
+        if (i != tokens.end())
             tm.to_source_type(*i);
-            ++i;
-        }
 
         /*
          * We may or may not have a "from source type" function.
          */
+        ++i;
         if (i != tokens.end())
             tm.to_destination_type(*i);
 
@@ -299,14 +300,14 @@ orm_transform::make_odb_pragmas_for_type_mappings(const
         if (tm.database())
             s << to_odb_database(*tm.database()) << ":";
 
-        s << "type(\"" << tm.source_type() << "\") as (\""
+        s << "type(\"" << tm.source_type() << "\") as(\""
           << tm.destination_type() << "\")";
 
         if (!tm.to_source_type().empty())
-            s << "to(\"" << tm.to_source_type() << "\")";
+            s << " to(\"" << tm.to_source_type() << "\")";
 
         if (!tm.to_destination_type().empty())
-            s << "to(\"" << tm.to_destination_type() << "\")";
+            s << " from(\"" << tm.to_destination_type() << "\")";
 
         r.push_back(s.str());
     }
@@ -448,8 +449,8 @@ orm_transform::make_attribute_properties(const features::orm::feature_group& fg,
     if (!scfg.type_override.empty()) {
         found = true;
         r.type_overrides(make_type_overrides(scfg.type_override));
-        const auto to(make_odb_pragmas_for_type_overrides(r.type_overrides()));
-        r.odb_pragmas().push_back(to);
+        const auto tos(make_odb_pragmas_for_type_overrides(r.type_overrides()));
+        r.odb_pragmas().push_back(pragma_prefix + tos);
     }
 
     if (scfg.is_composite) {
@@ -526,7 +527,8 @@ void orm_transform::update_primitive_properties(
     if (!scfg.type_mapping.empty()) {
         opp.type_mappings(make_type_mappings(scfg.type_mapping));
         auto tms(make_odb_pragmas_for_type_mappings(opp.type_mappings()));
-        opp.odb_pragmas().splice(opp.odb_pragmas().end(), tms);
+        for (const auto& tm : tms)
+            opp.odb_pragmas().push_back(odb_pragma_prefix + tm);
     } else
         BOOST_LOG_SEV(lg, debug) << "Primitive has no type mappings.";
 }
@@ -668,14 +670,12 @@ void orm_transform::transform_primitives(
         std::ostringstream s;
         s << pragma_prefix << odb_empty_column_attribute;
 
-        using meta_model::orm::attribute_properties;
-        attribute_properties ap;
-
-        if (op.type_overrides().empty()) {
-            const auto& to(op.type_overrides());
-            s << make_odb_pragmas_for_type_overrides(to);
-        }
+        meta_model::orm::attribute_properties ap;
+        const auto& to(op.type_overrides());
+        if (!to.empty())
+            s << " " << make_odb_pragmas_for_type_overrides(to);
         ap.odb_pragmas().push_back(s.str());
+
         attr.orm_properties(ap);
     }
 
