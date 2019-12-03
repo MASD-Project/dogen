@@ -37,6 +37,7 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("engine.helpers.adapter"));
 
+const std::string member_variable_postfix("_");
 const std::string short_form_attr_name("short_form");
 const std::string long_form_attr_name("long_form");
 const std::string add_date_time_attr_name("add_date_time");
@@ -131,6 +132,9 @@ adapter::to_attribute(const assets::meta_model::name& owner,
     assets::helpers::name_factory f;
     assets::meta_model::attribute r;
     r.name(f.build_attribute_name(owner, ia.name()));
+    r.member_variable_name(r.name().simple() + member_variable_postfix);
+    r.getter_setter_name(r.name().simple());
+
     r.unparsed_type(ia.type());
     r.documentation(ia.documentation());
 

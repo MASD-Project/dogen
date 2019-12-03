@@ -41,6 +41,7 @@ const std::string transform_id("assets.transforms.primitives_transform");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
+const std::string member_variable_postfix("_");
 const std::string csharp_value("Value");
 const std::string cpp_value("value");
 const std::string documentation("Obtain the underlying value.");
@@ -96,6 +97,8 @@ primitives_transform::create_attribute_for_underlying_element(
      */
     meta_model::attribute r;
     r.name(nf.build_attribute_name(n, sn));
+    r.member_variable_name(r.name().simple() + member_variable_postfix);
+    r.getter_setter_name(r.name().simple());
     r.unparsed_type(ue);
     r.documentation(documentation);
 
