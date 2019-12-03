@@ -12,26 +12,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-12-02 Mon 23:36]
+#+CAPTION: Clock summary at [2019-12-03 Tue 00:00]
 | <75>                                                 |         |       |       |       |
 | Headline                                             | Time    |       |       |     % |
 |------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                         | *40:22* |       |       | 100.0 |
+| *Total time*                                         | *40:45* |       |       | 100.0 |
 |------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                              | 40:22   |       |       | 100.0 |
-| Active                                               |         | 40:22 |       | 100.0 |
-| Edit release notes for previous sprint               |         |       | 11:24 |  28.2 |
+| Stories                                              | 40:45   |       |       | 100.0 |
+| Active                                               |         | 40:45 |       | 100.0 |
+| Edit release notes for previous sprint               |         |       | 11:24 |  28.0 |
 | Create a demo and presentation for previous sprint   |         |       |  2:31 |   6.2 |
 | Sprint and product backlog grooming                  |         |       |  2:24 |   5.9 |
 | Fix OSX build errors                                 |         |       |  0:25 |   1.0 |
 | Fix broken build due to incorrect postgres library   |         |       |  2:31 |   6.2 |
 | Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   3.2 |
 | Create a profile called =untested=                   |         |       |  0:17 |   0.7 |
-| Add relational tracing support                       |         |       |  9:08 |  22.6 |
-| Add type overrides to primitives                     |         |       |  6:55 |  17.1 |
+| Add relational tracing support                       |         |       |  9:08 |  22.4 |
+| Add type overrides to primitives                     |         |       |  7:18 |  17.9 |
 | Nightly code coverage is not being reported          |         |       |  0:23 |   0.9 |
 | Allow non-throwing casts for enums                   |         |       |  0:41 |   1.7 |
-| Remove =odb_properties= in element properties        |         |       |  2:25 |   6.0 |
+| Remove =odb_properties= in element properties        |         |       |  2:25 |   5.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -586,6 +586,7 @@ runs. The schema should be designed with this in mind.
 
 *** STARTED Add type overrides to primitives                          :story:
     :LOGBOOK:
+    CLOCK: [2019-12-02 Mon 23:37]--[2019-12-03 Tue 00:00] =>  0:23
     CLOCK: [2019-12-02 Mon 22:45]--[2019-12-02 Mon 23:36] =>  0:51
     CLOCK: [2019-12-02 Mon 19:58]--[2019-12-02 Mon 20:18] =>  0:20
     CLOCK: [2019-12-01 Sun 14:05]--[2019-12-01 Sun 14:15] =>  0:10

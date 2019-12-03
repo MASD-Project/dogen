@@ -28,6 +28,7 @@
 #include "dogen.generation/types/formatters/comment_formatter.hpp"
 #include "dogen.utility/types/formatters/utility_formatter.hpp"
 #include "dogen.assets/types/helpers/name_flattener.hpp"
+#include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include "dogen.generation/hash/meta_model/element_archetype_hash.hpp"
 #include "dogen.generation/types/formatters/boilerplate_properties.hpp"
 #include "dogen.generation.cpp/io/formattables/streaming_properties_io.hpp"
@@ -675,13 +676,25 @@ assistant::get_odb_pragmas(const std::string& attr_id) const {
 }
 
 std::string assistant::get_odb_type() const {
-    const auto& eprops(context_.element_properties());
-    const auto& odb_props(eprops.odb_properties());
-    if (!odb_props)
+    using namespace assets::meta_model::structural;
+    auto obj = dynamic_cast<const object*>(&element_);
+    if (obj) {
+        if (!obj->orm_properties())
+            return std::string();
+
+        if (obj->orm_properties()->is_value())
+            return odb_value_type;
+
+        return odb_object_type;
+    }
+
+    auto prim = dynamic_cast<const primitive*>(&element_);
+    if (!prim || !prim->orm_properties())
         return std::string();
 
-    if (odb_props->is_value())
+    if (prim->orm_properties())
         return odb_value_type;
+
     return odb_object_type;
 }
 
