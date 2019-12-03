@@ -31,7 +31,6 @@
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
-#include "dogen.generation.cpp/types/formattables/odb_properties.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 
 namespace dogen::generation::cpp::formattables {

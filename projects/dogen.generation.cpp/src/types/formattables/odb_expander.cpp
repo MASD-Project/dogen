@@ -29,7 +29,6 @@
 #include "dogen.generation.cpp/types/fabric/object_odb_options.hpp"
 #include "dogen.generation.cpp/types/element_visitor.hpp"
 #include "dogen.generation.cpp/types/fabric/odb_options_factory.hpp"
-#include "dogen.generation.cpp/io/formattables/odb_properties_io.hpp"
 #include "dogen.generation.cpp/types/formattables/header_guard_factory.hpp"
 #include "dogen.generation.cpp/types/formatters/odb/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/types/traits.hpp"
