@@ -12,23 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-12-03 Tue 00:00]
+#+CAPTION: Clock summary at [2019-12-03 Tue 00:26]
 | <75>                                                 |         |       |       |       |
 | Headline                                             | Time    |       |       |     % |
 |------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                         | *40:45* |       |       | 100.0 |
+| *Total time*                                         | *41:09* |       |       | 100.0 |
 |------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                              | 40:45   |       |       | 100.0 |
-| Active                                               |         | 40:45 |       | 100.0 |
-| Edit release notes for previous sprint               |         |       | 11:24 |  28.0 |
-| Create a demo and presentation for previous sprint   |         |       |  2:31 |   6.2 |
-| Sprint and product backlog grooming                  |         |       |  2:24 |   5.9 |
+| Stories                                              | 41:09   |       |       | 100.0 |
+| Active                                               |         | 41:09 |       | 100.0 |
+| Edit release notes for previous sprint               |         |       | 11:24 |  27.7 |
+| Create a demo and presentation for previous sprint   |         |       |  2:31 |   6.1 |
+| Sprint and product backlog grooming                  |         |       |  2:30 |   6.1 |
 | Fix OSX build errors                                 |         |       |  0:25 |   1.0 |
-| Fix broken build due to incorrect postgres library   |         |       |  2:31 |   6.2 |
+| Fix broken build due to incorrect postgres library   |         |       |  2:31 |   6.1 |
 | Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   3.2 |
 | Create a profile called =untested=                   |         |       |  0:17 |   0.7 |
-| Add relational tracing support                       |         |       |  9:08 |  22.4 |
-| Add type overrides to primitives                     |         |       |  7:18 |  17.9 |
+| Add relational tracing support                       |         |       |  9:08 |  22.2 |
+| Add type overrides to primitives                     |         |       |  7:36 |  18.5 |
 | Nightly code coverage is not being reported          |         |       |  0:23 |   0.9 |
 | Allow non-throwing casts for enums                   |         |       |  0:41 |   1.7 |
 | Remove =odb_properties= in element properties        |         |       |  2:25 |   5.9 |
@@ -280,6 +280,7 @@ Notes:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-12-03 Tue 00:20]--[2019-12-03 Tue 00:26] =>  0:06
     CLOCK: [2019-11-29 Fri 11:12]--[2019-11-29 Fri 11:15] =>  0:03
     CLOCK: [2019-11-29 Fri 11:02]--[2019-11-29 Fri 11:11] =>  0:09
     CLOCK: [2019-11-29 Fri 10:12]--[2019-11-29 Fri 10:23] =>  0:11
@@ -586,6 +587,7 @@ runs. The schema should be designed with this in mind.
 
 *** STARTED Add type overrides to primitives                          :story:
     :LOGBOOK:
+    CLOCK: [2019-12-03 Tue 00:01]--[2019-12-03 Tue 00:19] =>  0:18
     CLOCK: [2019-12-02 Mon 23:37]--[2019-12-03 Tue 00:00] =>  0:23
     CLOCK: [2019-12-02 Mon 22:45]--[2019-12-02 Mon 23:36] =>  0:51
     CLOCK: [2019-12-02 Mon 19:58]--[2019-12-02 Mon 20:18] =>  0:20
@@ -723,11 +725,38 @@ several tasks:
 FIXME: We detect containment for modules, but not recursive
 containment.
 
+*** Move member variable name to assets                               :story:
+
+At present we are obtaining the member variable name deep in the guts
+of the templates, via the assistant's
+=make_member_variable_name=. This means we cannot assemble an ODB
+pragma because we don't have this information. The right solution is
+to generate these in a variety of shapes during assets
+construction. The styles are:
+
+- underscore at the end, or at the start.
+- prefix =m_=.
+- ...
+
+This could get quite complex because these styles are driven in part
+by the language. We need to put a story in the backlog that details
+the "right" solution, and do a quick hack for now that just gives us
+what we have, but at assets level - similar to what we did with names
+and the "dot" and "colon" notations.
+
 *** Test ORM support for table name and column name                   :story:
 
 At present it seems we can supply a table name, but no corresponding
 ODB pragmas are generated for it. The same seems to be the case with
 column name.
+
+Actually column name seems to work because we are using "raw" odb
+pragmas:
+
+: #DOGEN masd.orm.odb_pragma=column("LASTNAME")
+
+We should really have an ORM level concept of column name and table
+name.
 
 *** Allow property level bindings to primitives                       :story:
 
