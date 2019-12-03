@@ -31,10 +31,9 @@ namespace dogen::relational::tracing {
 
 #ifdef ODB_COMPILER
 
-#pragma db map sqlite:type("JSON_TEXT") as("TEXT") to("json((?))")
-#pragma db map pgsql:type("JSONB") as("TEXT") to("to_jsonb((?)::jsonb)") from("from_jsonb((?))")
-
 #pragma db value(json) schema("DOGEN")
+#pragma db map pgsql:type("JSONB") as("TEXT") to("to_jsonb((?)::jsonb)") from("from_jsonb((?))")
+#pragma db map sqlite:type("JSON_TEXT") as("TEXT") to("json((?))")
 
 #pragma db member(json::value_) column("") pgsql:type("JSONB")
 
