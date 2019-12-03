@@ -268,12 +268,12 @@ obtain_facet_properties(const std::string& facet_name) const {
 
 std::string assistant::
 make_member_variable_name(const assets::meta_model::attribute& attr) const {
-    return attr.name().simple() + member_variable_postfix;
+    return attr.member_variable_name();
 }
 
 std::string assistant::
 make_getter_setter_name(const assets::meta_model::attribute& attr) const {
-    return attr.name().simple();
+    return attr.getter_setter_name();
 }
 
 std::list<std::string>
