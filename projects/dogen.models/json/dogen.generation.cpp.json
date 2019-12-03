@@ -962,24 +962,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formattables::odb_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "is_value",
-          "type": "bool"
-        },
-        {
-          "name": "top_level_odb_pragmas",
-          "type": "std::list<std::string>"
-        },
-        {
-          "name": "attribute_level_odb_pragmas",
-          "type": "std::unordered_map<std::string, std::list<std::string>>"
-        }
-      ]
-    },
-    {
       "name": "formattables::odb_expander",
       "stereotypes": [
         "dogen::handcrafted::typeable"
