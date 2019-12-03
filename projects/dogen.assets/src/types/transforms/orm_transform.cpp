@@ -417,7 +417,6 @@ orm_transform::make_attribute_properties(const features::orm::feature_group& fg,
             return s.str();
         }());
 
-
     bool found(false);
     const auto scfg(features::orm::make_static_configuration(fg, cfg));
     using meta_model::orm::attribute_properties;
@@ -474,10 +473,20 @@ void orm_transform::update_primitive_properties(
     const features::orm::feature_group& fg,
     const variability::meta_model::configuration& cfg,
     const boost::optional<meta_model::orm::letter_case>& lc,
+    const std::string& simple_name,
     meta_model::orm::primitive_properties& opp) {
     const auto scfg(features::orm::make_static_configuration(fg, cfg));
 
-    opp.odb_pragmas(scfg.odb_pragma);
+    /*
+     * Compute the ODB pragma prefix for this primitive.
+     */
+    const auto pragma_prefix(
+        [&]() {
+            std::ostringstream s;
+            s << odb_pragma_prefix << odb_value_type
+              << "(" << simple_name << ") ";
+            return s.str();
+        }());
 
     /*
      * If we have overridden the schema name in the configuration,
@@ -496,7 +505,8 @@ void orm_transform::update_primitive_properties(
      */
     if (!opp.schema_name().empty() && opp.generate_mapping()) {
         std::ostringstream s;
-        s << "schema(\"" << opp.capitalised_schema_name() << "\")";
+        s << pragma_prefix << "schema(\""
+          << opp.capitalised_schema_name() << "\")";
         opp.odb_pragmas().push_back(s.str());
     }
 
@@ -625,11 +635,11 @@ void orm_transform::transform_primitives(
         op.letter_case(lc);
 
         /*
-         * Read any additional meta-data the user may have supplied
-         * for the configuration.
+         * Compute the ODB pragma prefix for this primitive.
          */
+        const auto sn(p.name().simple());
         const auto& cfg(*p.configuration());
-        update_primitive_properties(fg, cfg, lc, op);
+        update_primitive_properties(fg, cfg, lc, sn, op);
         BOOST_LOG_SEV(lg, debug) << "ORM configuration for primitive: "
                                  << pair.first << ": " << op;
 
@@ -647,8 +657,16 @@ void orm_transform::transform_primitives(
          * In addition, we also need to obtain all of the type
          * overrides.
          */
+        auto& attr(p.value_attribute());
+        const auto pragma_prefix(
+            [&]() {
+                std::ostringstream s;
+                s << odb_pragma_prefix << odb_member_type << "(" << sn
+                  << "::" << attr.member_variable_name() << ") ";
+                return s.str();
+            }());
         std::ostringstream s;
-        s << odb_empty_column_attribute;
+        s << pragma_prefix << odb_empty_column_attribute;
 
         using meta_model::orm::attribute_properties;
         attribute_properties ap;
@@ -658,7 +676,7 @@ void orm_transform::transform_primitives(
             s << make_odb_pragmas_for_type_overrides(to);
         }
         ap.odb_pragmas().push_back(s.str());
-        p.value_attribute().orm_properties(ap);
+        attr.orm_properties(ap);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished transforming primitives.";

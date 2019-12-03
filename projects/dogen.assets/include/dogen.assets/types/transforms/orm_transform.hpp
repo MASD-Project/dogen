@@ -94,6 +94,7 @@ private:
         const features::orm::feature_group& fg,
         const variability::meta_model::configuration& cfg,
         const boost::optional<meta_model::orm::letter_case>& lc,
+        const std::string& simple_name,
         meta_model::orm::primitive_properties& opp);
 
     static boost::optional<meta_model::orm::module_properties>

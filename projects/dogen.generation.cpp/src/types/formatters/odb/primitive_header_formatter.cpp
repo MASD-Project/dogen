@@ -105,7 +105,7 @@ a.stream() << std::endl;
 a.stream() << "#ifdef ODB_COMPILER" << std::endl;
 a.stream() << std::endl;
                 for (const auto& pg : p.orm_properties()->odb_pragmas())
-a.stream() << "#pragma db " << a.get_odb_type() << "(" << sn << ") " << pg << std::endl;
+a.stream() << pg << std::endl;
 
                 bool is_first(true);
                 if (p.value_attribute().orm_properties() &&
@@ -114,7 +114,7 @@ a.stream() << "#pragma db " << a.get_odb_type() << "(" << sn << ") " << pg << st
                         if (is_first)
 a.stream() << std::endl;
                             is_first = false;
-a.stream() << "#pragma db member(" << sn << "::" << attr.member_variable_name() << ") " << pg << std::endl;
+a.stream() << pg << std::endl;
                     }
 a.stream() << std::endl;
 a.stream() << "#endif" << std::endl;
