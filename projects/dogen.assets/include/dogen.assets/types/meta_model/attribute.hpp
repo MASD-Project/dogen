@@ -64,7 +64,8 @@ public:
         const bool is_immutable,
         const bool is_fluent,
         const boost::optional<dogen::assets::meta_model::orm::attribute_properties>& orm_properties,
-        const std::string& member_variable_name);
+        const std::string& member_variable_name,
+        const std::string& getter_setter_name);
 
 public:
     /**
@@ -178,6 +179,16 @@ public:
     void member_variable_name(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Name to use for getter and setter.
+     */
+    /**@{*/
+    const std::string& getter_setter_name() const;
+    std::string& getter_setter_name();
+    void getter_setter_name(const std::string& v);
+    void getter_setter_name(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const attribute& rhs) const;
     bool operator!=(const attribute& rhs) const {
@@ -200,6 +211,7 @@ private:
     bool is_fluent_;
     boost::optional<dogen::assets::meta_model::orm::attribute_properties> orm_properties_;
     std::string member_variable_name_;
+    std::string getter_setter_name_;
 };
 
 }

@@ -67,6 +67,11 @@
           "name": "member_variable_name",
           "type": "std::string",
           "documentation": "Representation of the attribute name as a member variable.\n\nNote that at present we only support a single style for naming member variables,\nacross all languages. This will have to be revisited in the future.\n"
+        },
+        {
+          "name": "getter_setter_name",
+          "type": "std::string",
+          "documentation": "Name to use for getter and setter.\n"
         }
       ]
     },

@@ -106,7 +106,7 @@
         <dia:point val="-117,-69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-117.05,-69.05;-93.735,-61.35"/>
+        <dia:rectangle val="-117.05,-69.05;-93.735,-60.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-117,-69"/>
@@ -115,7 +115,7 @@
         <dia:real val="23.215"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.6000000000000005"/>
+        <dia:real val="8.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#attribute#</dia:string>
@@ -337,6 +337,29 @@ Name must be in one of the supported notations.#</dia:string>
 
 Note that at present we only support a single style for naming member variables,
 across all languages. This will have to be revisited in the future.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#getter_setter_name#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Name to use for getter and setter.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1445,7 +1468,7 @@ purpose.#</dia:string>
         <dia:point val="-116.468,-56"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-117.218,-61.45;-105.192,-55.2"/>
+        <dia:rectangle val="-117.218,-60.65;-105.192,-55.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1454,7 +1477,7 @@ purpose.#</dia:string>
         <dia:point val="-116.468,-56"/>
         <dia:point val="-116.468,-59"/>
         <dia:point val="-105.392,-59"/>
-        <dia:point val="-105.392,-61.4"/>
+        <dia:point val="-105.392,-60.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
