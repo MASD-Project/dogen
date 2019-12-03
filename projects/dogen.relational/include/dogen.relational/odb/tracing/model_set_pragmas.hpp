@@ -32,8 +32,8 @@ namespace dogen::relational::tracing {
 
 #ifdef ODB_COMPILER
 
-#pragma db object(model_set) no_id
 #pragma db object(model_set) schema("DOGEN")
+#pragma db object(model_set) no_id
 
 #endif
 
