@@ -61,11 +61,6 @@ struct traits {
     static std::string object_odb_options_archetype();
 
     /**
-     * @brief The pragma used by the ODB compiler.
-     */
-    static std::string odb_pragma();
-
-    /**
      * @brief Name of the built-in header archetype.
      */
     static std::string builtin_header_archetype();

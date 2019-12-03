@@ -102,22 +102,7 @@ void updator::visit(fabric::object_odb_options& ooo) {
     ooo.header_guard_prefix(header_guard_factory::make(odb_rp.parent_path()));
 }
 
-odb_expander::feature_group odb_expander::
-make_feature_group(const variability::meta_model::feature_model& fm) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating feature groups.";
-
-    feature_group r;
-    const variability::helpers::feature_selector s(fm);
-    const auto& op(formatters::odb::traits::odb_pragma());
-    r.odb_pragma = s.get_by_name(op);
-
-    BOOST_LOG_SEV(lg, debug) << "Created feature groups.";
-    return r;
-}
-
-void odb_expander::expand(
-    const variability::meta_model::feature_model& /*feature_model*/,
-    const locator& l, model& fm) const {
+void odb_expander::expand(const locator& l, model& fm) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started expanding odb properties.";
 

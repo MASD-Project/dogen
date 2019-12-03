@@ -27,9 +27,6 @@
 
 #include <list>
 #include <boost/optional.hpp>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 
@@ -39,16 +36,8 @@ class odb_expander {
 private:
     friend class updator;
 
-    struct feature_group {
-        variability::meta_model::feature odb_pragma;
-    };
-
-    feature_group make_feature_group(
-        const variability::meta_model::feature_model& fm) const;
-
 public:
-    void expand(const variability::meta_model::feature_model& feature_model,
-        const locator& l, model& fm) const;
+    void expand(const locator& l, model& fm) const;
 };
 
 }
