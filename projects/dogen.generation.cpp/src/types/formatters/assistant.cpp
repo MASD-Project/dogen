@@ -59,8 +59,6 @@ const std::string namespace_separator("::");
 const std::string member_variable_postfix("_");
 const std::string underscore("_");
 const std::string dot(".");
-const std::string odb_value_type("value");
-const std::string odb_object_type("object");
 
 const bool start_on_first_line(true);
 const bool use_documentation_tool_markup(true);
@@ -296,11 +294,6 @@ get_facet_directory_for_facet(const std::string& facet_name) const {
             formatting_error(facet_directory_missing + facet_name));
     }
     return fct_props.directory();
-}
-
-std::string assistant::get_odb_facet_directory() const {
-    using formatters::odb::traits;
-    return get_facet_directory_for_facet(traits::facet());
 }
 
 bool assistant::is_cpp_standard_98() const {
@@ -639,29 +632,6 @@ bool assistant::requires_hashing_helper_method(
             return true;
     }
     return false;
-}
-
-std::string assistant::get_odb_type() const {
-    using namespace assets::meta_model::structural;
-    auto obj = dynamic_cast<const object*>(&element_);
-    if (obj) {
-        if (!obj->orm_properties())
-            return std::string();
-
-        if (obj->orm_properties()->is_value())
-            return odb_value_type;
-
-        return odb_object_type;
-    }
-
-    auto prim = dynamic_cast<const primitive*>(&element_);
-    if (!prim || !prim->orm_properties())
-        return std::string();
-
-    if (prim->orm_properties())
-        return odb_value_type;
-
-    return odb_object_type;
 }
 
 std::list<assets::meta_model::name> assistant::

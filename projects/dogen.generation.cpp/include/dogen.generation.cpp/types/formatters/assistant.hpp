@@ -364,12 +364,6 @@ public:
 
 public:
     /**
-     * @brief Returns the ODB type for the current element.
-     */
-    std::string get_odb_type() const;
-
-public:
-    /**
      * @brief Returns the subset of names for which the supplied
      * archetype is enabled.
      */
