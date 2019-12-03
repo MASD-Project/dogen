@@ -12,26 +12,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-12-03 Tue 00:26]
+#+CAPTION: Clock summary at [2019-12-03 Tue 21:21]
 | <75>                                                 |         |       |       |       |
 | Headline                                             | Time    |       |       |     % |
 |------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                         | *41:09* |       |       | 100.0 |
+| *Total time*                                         | *42:11* |       |       | 100.0 |
 |------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                              | 41:09   |       |       | 100.0 |
-| Active                                               |         | 41:09 |       | 100.0 |
-| Edit release notes for previous sprint               |         |       | 11:24 |  27.7 |
-| Create a demo and presentation for previous sprint   |         |       |  2:31 |   6.1 |
-| Sprint and product backlog grooming                  |         |       |  2:30 |   6.1 |
+| Stories                                              | 42:11   |       |       | 100.0 |
+| Active                                               |         | 42:11 |       | 100.0 |
+| Edit release notes for previous sprint               |         |       | 11:24 |  27.0 |
+| Create a demo and presentation for previous sprint   |         |       |  2:31 |   6.0 |
+| Sprint and product backlog grooming                  |         |       |  3:29 |   8.3 |
 | Fix OSX build errors                                 |         |       |  0:25 |   1.0 |
-| Fix broken build due to incorrect postgres library   |         |       |  2:31 |   6.1 |
-| Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   3.2 |
+| Fix broken build due to incorrect postgres library   |         |       |  2:31 |   6.0 |
+| Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   3.1 |
 | Create a profile called =untested=                   |         |       |  0:17 |   0.7 |
-| Add relational tracing support                       |         |       |  9:08 |  22.2 |
-| Add type overrides to primitives                     |         |       |  7:36 |  18.5 |
+| Remove =odb_properties= in element properties        |         |       |  2:25 |   5.7 |
+| Add relational tracing support                       |         |       |  9:08 |  21.7 |
+| Add type overrides to primitives                     |         |       |  7:39 |  18.1 |
 | Nightly code coverage is not being reported          |         |       |  0:23 |   0.9 |
-| Allow non-throwing casts for enums                   |         |       |  0:41 |   1.7 |
-| Remove =odb_properties= in element properties        |         |       |  2:25 |   5.9 |
+| Allow non-throwing casts for enums                   |         |       |  0:41 |   1.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -280,6 +280,8 @@ Notes:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-12-03 Tue 20:52]--[2019-12-03 Tue 21:21] =>  0:29
+    CLOCK: [2019-12-03 Tue 20:18]--[2019-12-03 Tue 20:48] =>  0:30
     CLOCK: [2019-12-03 Tue 00:20]--[2019-12-03 Tue 00:26] =>  0:06
     CLOCK: [2019-11-29 Fri 11:12]--[2019-11-29 Fri 11:15] =>  0:03
     CLOCK: [2019-11-29 Fri 11:02]--[2019-11-29 Fri 11:11] =>  0:09
@@ -408,6 +410,110 @@ library.
 We should make it really easy to spot which models have modeling
 elements that we are not testing. We should also add some comments as
 well.
+
+*** COMPLETED Register types for multiple models is misbehaving       :story:
+    CLOSED: [2019-12-03 Tue 20:47]
+
+*Rationale*: this test is now green.
+
+It seems that somehow we're clobbering the type registration of one
+model with another in register types. This is probably because we are
+reusing type id's somehow. This wasn't a problem until now because we
+were not using inheritance in anger but with the sml changes, it is a
+problem as one cannot load dia and sml types off the same registration
+(e.g. as in XML serialisation helper).
+
+One solution for this problem would be to create serialisers which
+hide the machinery of serialisation internally; one should be able to
+just pass in a stream in and get a type out.
+
+Could this be related to the clang-cl failures?
+
+: Running 1 test case...
+: unknown location(0): fatal error: in "boost_model_tests/validate_serialisation": class boost::archive::archive_exception: unregistered void cast class masd::cpp_ref_impl::boost_model::class_derived<-class masd::cpp_ref_impl::boost_model::class_base
+: ..\..\..\..\projects\masd.cpp_ref_impl.test_model_sanitizer\tests\boost_model_tests.cpp(56): last checkpoint: validate_serialisation
+
+*** COMPLETED Setup laptop to work on dogen                           :story:
+    CLOSED: [2019-12-03 Tue 20:49]
+
+We haven't used the laptop for dogen for quite a bit so its behind the
+main machine. Get it in a shape to do development again.
+
+Items missing:
+
+- consolas font. done.
+- dir locals for projects. we've got the build history so we don't
+  need this for now
+- polymode. won't work.
+- build2. done.
+- odb. done
+
+*** COMPLETED Remove =odb_properties= in element properties           :story:
+    CLOSED: [2019-12-03 Tue 20:49]
+    :LOGBOOK:
+    CLOCK: [2019-12-01 Sun 21:44]--[2019-12-01 Sun 22:05] =>  0:21
+    CLOCK: [2019-12-01 Sun 20:35]--[2019-12-01 Sun 21:43] =>  1:08
+    CLOCK: [2019-12-01 Sun 18:53]--[2019-12-01 Sun 19:03] =>  0:10
+    CLOCK: [2019-12-01 Sun 18:40]--[2019-12-01 Sun 18:52] =>  0:12
+    CLOCK: [2019-12-01 Sun 18:01]--[2019-12-01 Sun 18:35] =>  0:34
+    :END:
+
+We moved the ORM support from fabric into assets, but we seem to have
+left behind the processing of ODB properties. This is taking on
+several tasks:
+
+- odb options file: we are generating the "model" for this file,
+  though our modeling of this is not ideal. We have
+  =object_odb_options= still in fabric, when it should really be in
+  assets. Note that the =*_options.odb= files should really be a
+  formatter for the underlying object projected into the facet ODB. We
+  just need to make sure the object ORM contains all of the required
+  details for this. Note that some of the content of this file can
+  only be generated in the =generation= model, because we need access
+  to paths. This means we may have to leave this work to after we have
+  moved locators into =generation=.
+- similarly, we have to deal with =common_odb_options=. This actually
+  requires a new meta-type.
+- we need to find a way to model ORM implementation specific details
+  in assets. These should be made obvious that they are ODB specific
+  (.e.g pragmas, etc).
+- we are processing object templates in ORM transform. This is very
+  strange. The ORM transform executes after the object templates
+  transform. Once that is done, object templates play no further part
+  in object construction. We should just remove this code and see what
+  happens.
+
+*** POSTPONED Allow non-throwing casts for enums                      :story:
+    CLOSED: [2019-11-29 Fri 12:39]
+    :LOGBOOK:
+    CLOCK: [2019-11-29 Fri 11:49]--[2019-11-29 Fri 12:30] =>  0:41
+    :END:
+
+In some cases we want to do a lexical cast of an enum but not actually
+throw if the enum is invalid; instead, we just want the enum mapped to
+invalid (if that is enabled). This should just be a case of adding a
+boolean to the cast templates.
+
+It seems boost now supports this via =try_lexical_convert=. However,
+it seems its non-trivial to convert our use of lexical cast into this
+new approach. The problem is that we did not simply provide an
+=operator<<= for each enum, we overloaded =lexical_cast=. We did this
+because we are already using =operator<<= for the purposes of =io=,
+and that requires a JSON based output which is not suitable for
+casting. Its not clear what the right approach is here.
+
+Notes:
+
+- we could make use of manipulators; perhaps a =masd::json=
+  manipulator could be used to coerce =operator<<= to format into
+  JSON, otherwise we'd get a default string representation.
+
+- [[https://www.boost.org/doc/libs/1_71_0/boost/lexical_cast/try_lexical_convert.hpp][try_lexical_convert.hpp]]
+- [[https://www.boost.org/doc/libs/1_58_0/doc/html/boost_lexical_cast/synopsis.html#boost_lexical_cast.synopsis.try_lexical_convert][try_lexical_convert docs]]
+- [[https://stackoverflow.com/questions/2249711/how-to-use-the-boost-lexical-cast-library-for-just-for-checking-input][How to use the boost lexical_cast library for just for checking
+  input]]
+- [[http://boost.2283326.n4.nabble.com/lexical-cast-A-non-throwing-lexical-cast-Was-5-Observations-My-experience-with-the-boost-libraries-td2671153.html][A non-throwing lexical cast?]]
+- [[https://stackoverflow.com/questions/3157098/whats-the-right-approach-to-return-error-codes-in-c][Whats the right approach to return error codes in C++]]
 
 *** STARTED Add relational tracing support                            :story:
     :LOGBOOK:
@@ -587,6 +693,7 @@ runs. The schema should be designed with this in mind.
 
 *** STARTED Add type overrides to primitives                          :story:
     :LOGBOOK:
+    CLOCK: [2019-12-03 Tue 20:49]--[2019-12-03 Tue 20:52] =>  0:03
     CLOCK: [2019-12-03 Tue 00:01]--[2019-12-03 Tue 00:19] =>  0:18
     CLOCK: [2019-12-02 Mon 23:37]--[2019-12-03 Tue 00:00] =>  0:23
     CLOCK: [2019-12-02 Mon 22:45]--[2019-12-02 Mon 23:36] =>  0:51
@@ -654,78 +761,10 @@ Notes:
 We are running kcov in the nightlies, but we cannot see the results in
 the coverage tool.
 
-*** POSTPONED Allow non-throwing casts for enums                      :story:
-    CLOSED: [2019-11-29 Fri 12:39]
+*** STARTED Move member variable name to assets                       :story:
     :LOGBOOK:
-    CLOCK: [2019-11-29 Fri 11:49]--[2019-11-29 Fri 12:30] =>  0:41
+    CLOCK: [2019-12-03 Tue 21:22]--[2019-12-03 Tue 21:31] =>  0:09
     :END:
-
-In some cases we want to do a lexical cast of an enum but not actually
-throw if the enum is invalid; instead, we just want the enum mapped to
-invalid (if that is enabled). This should just be a case of adding a
-boolean to the cast templates.
-
-It seems boost now supports this via =try_lexical_convert=. However,
-it seems its non-trivial to convert our use of lexical cast into this
-new approach. The problem is that we did not simply provide an
-=operator<<= for each enum, we overloaded =lexical_cast=. We did this
-because we are already using =operator<<= for the purposes of =io=,
-and that requires a JSON based output which is not suitable for
-casting. Its not clear what the right approach is here.
-
-Notes:
-
-- we could make use of manipulators; perhaps a =masd::json=
-  manipulator could be used to coerce =operator<<= to format into
-  JSON, otherwise we'd get a default string representation.
-
-- [[https://www.boost.org/doc/libs/1_71_0/boost/lexical_cast/try_lexical_convert.hpp][try_lexical_convert.hpp]]
-- [[https://www.boost.org/doc/libs/1_58_0/doc/html/boost_lexical_cast/synopsis.html#boost_lexical_cast.synopsis.try_lexical_convert][try_lexical_convert docs]]
-- [[https://stackoverflow.com/questions/2249711/how-to-use-the-boost-lexical-cast-library-for-just-for-checking-input][How to use the boost lexical_cast library for just for checking
-  input]]
-- [[http://boost.2283326.n4.nabble.com/lexical-cast-A-non-throwing-lexical-cast-Was-5-Observations-My-experience-with-the-boost-libraries-td2671153.html][A non-throwing lexical cast?]]
-- [[https://stackoverflow.com/questions/3157098/whats-the-right-approach-to-return-error-codes-in-c][Whats the right approach to return error codes in C++]]
-
-*** STARTED Remove =odb_properties= in element properties             :story:
-    :LOGBOOK:
-    CLOCK: [2019-12-01 Sun 21:44]--[2019-12-01 Sun 22:05] =>  0:21
-    CLOCK: [2019-12-01 Sun 20:35]--[2019-12-01 Sun 21:43] =>  1:08
-    CLOCK: [2019-12-01 Sun 18:53]--[2019-12-01 Sun 19:03] =>  0:10
-    CLOCK: [2019-12-01 Sun 18:40]--[2019-12-01 Sun 18:52] =>  0:12
-    CLOCK: [2019-12-01 Sun 18:01]--[2019-12-01 Sun 18:35] =>  0:34
-    :END:
-
-We moved the ORM support from fabric into assets, but we seem to have
-left behind the processing of ODB properties. This is taking on
-several tasks:
-
-- odb options file: we are generating the "model" for this file,
-  though our modeling of this is not ideal. We have
-  =object_odb_options= still in fabric, when it should really be in
-  assets. Note that the =*_options.odb= files should really be a
-  formatter for the underlying object projected into the facet ODB. We
-  just need to make sure the object ORM contains all of the required
-  details for this. Note that some of the content of this file can
-  only be generated in the =generation= model, because we need access
-  to paths. This means we may have to leave this work to after we have
-  moved locators into =generation=.
-- similarly, we have to deal with =common_odb_options=. This actually
-  requires a new meta-type.
-- we need to find a way to model ORM implementation specific details
-  in assets. These should be made obvious that they are ODB specific
-  (.e.g pragmas, etc).
-- we are processing object templates in ORM transform. This is very
-  strange. The ORM transform executes after the object templates
-  transform. Once that is done, object templates play no further part
-  in object construction. We should just remove this code and see what
-  happens.
-
-*** Schema name propagation is not handled correctly                  :story:
-
-FIXME: We detect containment for modules, but not recursive
-containment.
-
-*** Move member variable name to assets                               :story:
 
 At present we are obtaining the member variable name deep in the guts
 of the templates, via the assistant's
@@ -743,6 +782,93 @@ by the language. We need to put a story in the backlog that details
 the "right" solution, and do a quick hack for now that just gives us
 what we have, but at assets level - similar to what we did with names
 and the "dot" and "colon" notations.
+
+*** Schema name propagation is not handled correctly                  :story:
+
+The logic around the propagation of schema names is very dodgy. Not
+only do we rely on overwriting the schema name (e.g. first we take the
+containing module schema name, then we check to see if its overridden
+at the element level) but we also do not take into account recursive
+composition. We need to revisit this.
+
+*** Fix broken tests for clang-cl on release                          :story:
+
+We have a number of failing tests, without any output:
+
+- dogen.assets.tests:
+  - attributes_transform_tests/model_with_object_template_that_inhertis_missing_object_template_throws
+  - attributes_transform_tests/model_with_object_that_instantiates_missing_object_template_throws
+  - attributes_transform_tests/model_with_object_that_instantiates_object_template_with_missing_parent_throws
+  - object_templates_transform_tests/model_with_object_template_that_parents_missing_object_template_throws
+  - object_templates_transform_tests/model_with_object_that_models_missing_object_template_throws
+  - object_templates_transform_tests/model_with_object_with_missing_parent_throws
+  - pre_assembly_validator_tests/type_with_inconsistent_key_value_pair_throws
+  - pre_assembly_validator_tests/type_with_incorrect_model_name_throws
+  - resolver_tests/object_with_missing_attribute_type_throws
+  - resolver_tests/object_with_missing_third_degree_parent_in_different_models_throws
+  - resolver_tests/object_with_third_degree_parent_missing_within_single_model_throws
+  - stereotypes_transform_tests/visitable_object_with_no_leaves_throws
+- dogen.injection.dia.tests
+  - grapher_tests/adding_object_after_graph_has_been_generated_throws
+  - grapher_tests/generating_after_graph_has_been_generated_throws
+  - grapher_tests/generating_graph_with_first_degree_cycle_throws
+  - grapher_tests/querying_state_before_generating_throws
+  - hydrator_tests/missing_elements_model_throws
+- dogen.templating.tests
+  - stitch_formatter_tests/line_with_unmapped_variable_throws
+  - stitch_parser_tests/end_control_block_with_additional_characters_throws
+  - stitch_parser_tests/expression_in_expression_throws
+  - stitch_parser_tests/invalid_directive_throws
+  - stitch_parser_tests/invalid_inline_control_blocks_throw
+  - stitch_parser_tests/multiline_expression_block_throws
+  - stitch_parser_tests/standard_control_block_with_text_block_in_the_same_line_throws
+  - stitch_parser_tests/start_standard_control_block_marker_prefixed_by_additional_characters_throws
+  - stitch_parser_tests/stray_end_expression_block_throws
+  - stitch_parser_tests/text_block_with_standard_control_block_in_the_same_line_throws
+  - stitch_parser_tests/two_end_control_block_markers_in_a_row_throws
+  - stitch_parser_tests/two_start_standard_control_blocks_in_a_row_throws
+  - stitch_parser_tests/untermined_expression_block_throws
+- dogen.utility.tests:
+  - asserter_tests/assert_file_throws_for_non_existent_files
+  - file_tests/find_files_throws_when_argument_is_a_file
+  - file_tests/find_files_throws_when_directory_does_not_exist
+  - file_tests/read_file_content_throws_when_reading_non_existent_file
+  - resolver_tests/validating_resolver_throws_for_non_existent_paths
+  - splitter_tests/parsing_string_with_mixed_scope_operators_throws
+  - utility_tests/exception_shall_be_usable_as_a_boost_exception
+  - utility_tests/exception_shall_be_usable_as_a_standard_exception
+  - utility_tests/exericise_exception_derived_classes
+  - xml_tests/text_reader_reads_boolean_values_correctly
+
+Notes:
+
+- try disabling XML logs to see if we can get any additional output on
+  the console.
+
+*** Build dogen from docker                                           :story:
+
+- fix references to gcc6 etc
+- run:
+
+: docker exec -it zen_euclid env TERM=dumb
+: /home/marco/Development/DomainDrivenConsulting/dogen/build/scripts/build.linux.sh
+: Release 4 gcc /home/marco/local
+
+Merged stories:
+
+*Build dogen docker images from travis*
+
+We should build docker images with each commit into master.
+
+Links:
+
+- [[https://sebest.github.io/post/using-travis-ci-to-build-docker-images/][Using Travis.ci to build Docker images]]
+- [[https://github.com/OpenSourceRisk/Engine/tree/master/tools/docker][ORE docker script]]
+- [[https://giorgos.sealabs.net/build-and-test-against-docker-images-in-travis.html][Build and Test against Docker Images in Travis]]
+- [[https://medium.com/travis-on-docker/triple-stage-docker-builds-with-go-and-angular-1b7d2006cb88][Triple-Stage Docker Builds with Go and Angular]]
+- [[https://medium.com/travis-on-docker/multi-stage-docker-builds-for-creating-tiny-go-images-e0e1867efe5a][Multi-Stage Docker Builds for Creating Tiny Go Images]]
+- [[https://github.com/gliderlabs/docker-alpine/issues/24][What is the alpine equivalent to build-essential?]]
+- [[https://caveofcode.com/2017/03/continuous-delivery-to-kubernetes-with-travis-ci/][Continuous delivery to Kubernetes with Travis CI]]
 
 *** Test ORM support for table name and column name                   :story:
 
@@ -933,19 +1059,6 @@ Notes:
 - we should have a warning/error: if using boost serialisation with a
   model that has inheritance, the registrar should be present. Added
   to warnings story.
-
-*** Setup laptop to work on dogen                                     :story:
-
-We haven't used the laptop for dogen for quite a bit so its behind the
-main machine. Get it in a shape to do development again.
-
-Items missing:
-
-- consolas font. done.
-- dir locals for projects
-- polymode
-- build2
-- odb
 
 *** Modeling elements can have =profile= setup                        :story:
 
@@ -1228,3 +1341,27 @@ Notes:
 - nightlies are now failing with a missing reference to SQL lite.
 
 ** Deprecated
+*** CANCELLED Fix issues with nightly build and CI                    :story:
+    CLOSED: [2019-12-03 Tue 20:45]
+
+*Rationale*: story too vague for product backlog.
+
+Time spent fixing build issues with either nightlies and/or CI.
+
+- make space for builds in CDash.
+*** CANCELLED Fix clang-cl broken test                                :story:
+    CLOSED: [2019-12-03 Tue 20:46]
+
+*Rationale*: we do not have model sanitzer any longer.
+
+We have one test failing on clang-cl, ref impl:
+
+: Running 1 test case...
+: unknown location(0): fatal error: in "boost_model_tests/validate_serialisation": class boost::archive::archive_exception: unregistered void cast class masd::cpp_ref_impl::boost_model::class_derived<-class masd::cpp_ref_impl::boost_model::class_base
+: ..\..\..\..\projects\masd.cpp_ref_impl.test_model_sanitizer\tests\boost_model_tests.cpp(56): last checkpoint: validate_serialisation
+:
+: *** 1 failure is detected in the test module "test_model_sanitizer_tests"
+
+It seems that the boost registration is failing on debug. This is very
+strange as it works on MSVC and Linux, release and debug but fails on
+clang-cl release.

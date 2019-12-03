@@ -1076,8 +1076,8 @@ class level that defaults all attributes to properties (or to member
 variables). This could be the default for objects but not for
 services.
 
-We would have to extend yarn to understand member variables as well as
-properties.
+We would have to extend assets to understand member variables as well
+as properties.
 
 Actually we should just have a meta-model concept for a masd property,
 which knows about getters and setters; these are associated with masd
@@ -1085,6 +1085,9 @@ object's and object templates. Attributes, if required, need their own
 meta-model representation. This also means that we should determine
 the getter/setter settings within coding (for example, if immutable
 disable setter etc).
+
+We can then create the notion of a "pojo", where all attributes are
+automatically mapped to properties.
 
 ** Core work
 
@@ -4814,25 +4817,6 @@ We are using the full constructor for immutability, but its not clear
 how that would work on a inheritance tree. Ensure we have test cases
 for this.
 
-*** Register types for multiple models is misbehaving                 :story:
-
-It seems that somehow we're clobbering the type registration of one
-model with another in register types. This is probably because we are
-reusing type id's somehow. This wasn't a problem until now because we
-were not using inheritance in anger but with the sml changes, it is a
-problem as one cannot load dia and sml types off the same registration
-(e.g. as in XML serialisation helper).
-
-One solution for this problem would be to create serialisers which
-hide the machinery of serialisation internally; one should be able to
-just pass in a stream in and get a type out.
-
-Could this be related to the clang-cl failures?
-
-: Running 1 test case...
-: unknown location(0): fatal error: in "boost_model_tests/validate_serialisation": class boost::archive::archive_exception: unregistered void cast class masd::cpp_ref_impl::boost_model::class_derived<-class masd::cpp_ref_impl::boost_model::class_base
-: ..\..\..\..\projects\masd.cpp_ref_impl.test_model_sanitizer\tests\boost_model_tests.cpp(56): last checkpoint: validate_serialisation
-
 *** Equality in floating point numbers is incorrect                   :story:
 
 At present we are blindly comparing floating point numbers. In
@@ -5502,9 +5486,11 @@ Notes:
   reported by cdash,
 - Updated issue on CDash parsing problems for clang-cl: [[https://github.com/Kitware/CDash/issues/733][Parsing of
   errors and warnings from clang-cl]]
-- Sent email to clang mailinglist: [[http://lists.llvm.org/pipermail/cfe-dev/2019-February/061326.html][Clang-cl - errors and warning
-  messages slightly different from MSVC]]. Clang [[http://lists.llvm.org/pipermail/cfe-dev/2019-February/061339.html][have patched]] the diffs
-  now.
+- sent email to clang mailinglist:
+  [[http://lists.llvm.org/pipermail/cfe-dev/2019-February/061326.html][Clang-cl -
+  errors and warning messages slightly different from MSVC]]. Clang
+  [[http://lists.llvm.org/pipermail/cfe-dev/2019-February/061339.html][have patched]] the diffs now.
+- we are now seeing all the warnings.
 
 *** LAM name resolution should be PIM only                            :story:
 
@@ -5702,20 +5688,6 @@ quilt that returns all enabled kernels; we could then look at all
 models we are going to build and if there is a mismatch we can
 throw. But extracting the =configuration_factory= out of quilt
 workflow is not going to be easy without screwing up the API.
-
-*** Fix clang-cl broken test                                          :story:
-
-We have one test failing on clang-cl, ref impl:
-
-: Running 1 test case...
-: unknown location(0): fatal error: in "boost_model_tests/validate_serialisation": class boost::archive::archive_exception: unregistered void cast class masd::cpp_ref_impl::boost_model::class_derived<-class masd::cpp_ref_impl::boost_model::class_base
-: ..\..\..\..\projects\masd.cpp_ref_impl.test_model_sanitizer\tests\boost_model_tests.cpp(56): last checkpoint: validate_serialisation
-:
-: *** 1 failure is detected in the test module "test_model_sanitizer_tests"
-
-It seems that the boost registration is failing on debug. This is very
-strange as it works on MSVC and Linux, release and debug but fails on
-clang-cl release.
 
 *** Improve comments on reference implementation                      :story:
 
@@ -6158,46 +6130,6 @@ understand why kcov is ignoring those.
 Links:
 
 - [[https://codecov.io/gh/MASD-Project/cpp_ref_impl/tree/master/projects/cpp_ref_impl.northwind][cpp_ref_impl.northwind in codecov]]
-
-*** Fix issues with nightly build and CI                              :story:
-
-Time spent fixing build issues with either nightlies and/or CI.
-
-- make space for builds in CDash.
-
-*** Upgrade to boost 1.70                                             :story:
-
-We should try to upgrade to latest boost.
-
-Notes:
-
-- the problem appears to be that with OSX we do not have a compiler
-  installed that can compile vcpkg. It is not clear how we did it
-  before. The installed XCode compiler is too old and we do not have
-  homebrew for gcc.
-- installed LLVM 7. Ninja then went on a strange loop, regenerating
-  CMake files. This was because NTP had not been working on OSX for
-  some reason, and the clock was in the past.
-- compiling with clang 7 causes the =-lc++fs= linking error. Tried
-  compiling with clang 8.
-- Compilation required setting LDFLAGS -L to point to the lib
-  directory of the download, else the static library for filesystem
-  could not be location.
-- We may have linking problems now that we are using XCode 10 in
-  travis and clang 8 to build vcpkg dependencies.
-- ODB 2.5 no longer works due to a git ref mismatch. Not clear why
-  that would be but the object we were referencing no longer exists in
-  code synthesis git repo.
-- the ref for ODB SQL lite 2.5.0-b.9 does not seem to exist in their
-  repo any longer. Due to this, the OSX build is failing. For now we
-  shall try to update excluding that dependency, given we are not even
-  using it.
-- boost regex fails to build. The problem is that we are picking up
-  the system compiler instead of CXX. It is not clear why that
-  is. Maybe we got lucky in the past because we were using c++14 but
-  now with c++17 system clang fails to compile because it does not
-  have c++ 17 support.
-- nightlies are now failing with a missing reference to SQL lite.
 
 * Future Releases
 
@@ -10598,6 +10530,9 @@ Notes:
   formatting changes its content. If we don't do this we still need to
   run clang-format manually again for the handcrafted code.
 - clang-format [[http://releases.llvm.org/9.0.0/tools/clang/docs/ReleaseNotes.html][now supports C#]].
+- when we support the generation of clang format styles, we will have
+  to write the style file first before we use it for formatting. See
+  the story on this.
 
 Merged Stories:
 
@@ -10659,13 +10594,91 @@ Links:
 - http://argouml.tigris.org/
 - https://github.com/cscorley/argouml-mirror
 
-*** Add support for "project capitalisation"                          :story:
+*** Add support for "capitalisation theming"                          :story:
 
 It would be nice if facets, classes etc which are at present in lower
 case could be camel cased if the user chooses.
 
 At present we need to override all facet directories, include
 directories, etc.
+
+In fact, we could copy the clang format approach and create the notion
+of a "style". The style would then be applied to "targets", e.g.:
+
+- classes, interfaces
+- methods
+- variables, member variables, constants
+- enumerations
+
+Each of these can then have a case style. We could create a meta-model
+element to capture all of the aspects of the theme. A technical space
+can have a default theme associated with it; we need to find out what
+are considered the "standard" cases.
+
+Notes:
+
+- apparently there is =lowerCamelCase= and =UpperCamelCase=.
+- according to wikipedia, 'The combination of "upper camel case" and
+  "snake case" is known as "Darwin case"'
+- we need to support both the "apply a theme" (in which case all model
+  elements must be in snake case, else there is an error) and the "use
+  the names as-is", in which case we will not touch the supplied
+  elements.
+- note that we do not care about the indent style. Or better, we do,
+  but this is just an argument supplied to clang format. We will
+  handle this separately. The clang format configuration should just
+  be a parameter in the theme. We should allow for the out-of-the box
+  styles: LLVM, Google, Chromium, Mozilla, WebKit, Microsoft.
+- we need to merge the capitalisation theming with decoration. We
+  don't want to have several dimensions across which we have separate
+  themes. We need to ensure related concepts are modeled only once.
+- we need to take into account artefact concepts such as file and
+  directory names. See story on directory themes.
+
+Links:
+
+- [[https://medium.com/better-programming/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841][Case Styles: Camel, Pascal, Snake, and Kebab Case]]
+- [[https://en.wikipedia.org/wiki/Naming_convention_(programming)][Naming convention (programming)]]
+- [[https://en.wikipedia.org/wiki/Camel_case][Camel Case]]
+- [[https://en.wikipedia.org/wiki/Indentation_style][Indentation style]]
+- [[https://llvm.org/docs/Proposals/VariableNames.html][LLVM: Variable Names Plan]]
+
+*** Add support for clang format configurations                       :story:
+
+It would be nice if we could generate a clang format configuration. We
+could have a meta-model element that represents a style and then use
+it to generate the style file. We can generate multiple languages on a
+given style file:
+
+: ---
+: # We'll use defaults from the LLVM style, but with 4 columns indentation.
+: BasedOnStyle: LLVM
+: IndentWidth: 4
+: ---
+: Language: Cpp
+: # Force pointers to the type for C++.
+: DerivePointerAlignment: false
+: PointerAlignment: Left
+: ---
+: Language: JavaScript
+: # Use 100 columns for JS.
+: ColumnLimit: 100
+: ---
+: Language: Proto
+: # Don't format .proto files.
+: DisableFormat: true
+: ---
+: Language: CSharp
+: # Use 100 columns for C#.
+: ColumnLimit: 100
+: ...
+
+Links:
+
+- [[https://zed0.co.uk/clang-format-configurator/][Clang format configurator]]
+- [[https://clang.llvm.org/docs/ClangFormatStyleOptions.html][Clang-Format Style Options]]
+- [[https://gist.github.com/andrewseidl/8066c18e97c40086c183][Clang-format style comparison]]
+- [[https://leimao.github.io/blog/Clang-Format-Quick-Tutorial/][Format C/C++ Code Using Clang-Format]]
 
 *** Add support for object caches                                      :epic:
 
@@ -12444,31 +12457,6 @@ Users should be able to follow the examples in the manual by using a
 set of diagrams supplied in the dogen package. However, to ensure
 these samples are actually working we need to test them as part of
 sanity. This means we need the same diagrams packaged twice.
-
-*** Build dogen from docker                                           :story:
-
-- fix references to gcc6 etc
-- run:
-
-: docker exec -it zen_euclid env TERM=dumb
-: /home/marco/Development/DomainDrivenConsulting/dogen/build/scripts/build.linux.sh
-: Release 4 gcc /home/marco/local
-
-Merged stories:
-
-*Build dogen docker images from travis*
-
-We should build docker images with each commit into master.
-
-Links:
-
-- [[https://sebest.github.io/post/using-travis-ci-to-build-docker-images/][Using Travis.ci to build Docker images]]
-- [[https://github.com/OpenSourceRisk/Engine/tree/master/tools/docker][ORE docker script]]
-- [[https://giorgos.sealabs.net/build-and-test-against-docker-images-in-travis.html][Build and Test against Docker Images in Travis]]
-- [[https://medium.com/travis-on-docker/triple-stage-docker-builds-with-go-and-angular-1b7d2006cb88][Triple-Stage Docker Builds with Go and Angular]]
-- [[https://medium.com/travis-on-docker/multi-stage-docker-builds-for-creating-tiny-go-images-e0e1867efe5a][Multi-Stage Docker Builds for Creating Tiny Go Images]]
-- [[https://github.com/gliderlabs/docker-alpine/issues/24][What is the alpine equivalent to build-essential?]]
-- [[https://caveofcode.com/2017/03/continuous-delivery-to-kubernetes-with-travis-ci/][Continuous delivery to Kubernetes with Travis CI]]
 
 *** Rename debian package                                             :story:
 
