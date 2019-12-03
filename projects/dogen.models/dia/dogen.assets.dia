@@ -16667,7 +16667,7 @@ space.#</dia:string>
         <dia:point val="-43,62"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-43.05,61.95;-24.74,66.45"/>
+        <dia:rectangle val="-43.05,61.95;-24.74,67.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-43,62"/>
@@ -16676,13 +16676,13 @@ space.#</dia:string>
         <dia:real val="18.210000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#node#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>##</dia:string>
+        <dia:string>#dogen::untestable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Node in a tree of names.
@@ -16726,7 +16726,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f5fffa"/>
+        <dia:color val="#fba5a5"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -17761,7 +17761,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-52.24,73"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-52.99,66.3999;-33.695,73.8"/>
+        <dia:rectangle val="-52.99,67.2004;-33.695,73.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17770,7 +17770,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-52.24,73"/>
         <dia:point val="-52.24,71"/>
         <dia:point val="-33.895,71"/>
-        <dia:point val="-33.895,66.4499"/>
+        <dia:point val="-33.895,67.2504"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

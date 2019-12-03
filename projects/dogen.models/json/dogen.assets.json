@@ -1214,6 +1214,9 @@
     {
       "name": "helpers::node",
       "documentation": "Node in a tree of names.\n\nTemporary data structure used to build trees of names.\n",
+      "stereotypes": [
+        "dogen::untestable"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
