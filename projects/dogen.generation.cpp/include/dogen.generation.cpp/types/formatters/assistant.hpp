@@ -376,16 +376,6 @@ public:
 
 public:
     /**
-     * @brief Retrieves the ODB pragmas for the element.
-     */
-    std::list<std::string> get_odb_pragmas() const;
-
-    /**
-     * @brief Retrieves the ODB pragmas for a given attribute.
-     */
-    std::list<std::string> get_odb_pragmas(const std::string& attr_id) const;
-
-    /**
      * @brief Returns the ODB type for the current element.
      */
     std::string get_odb_type() const;

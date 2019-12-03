@@ -651,30 +651,6 @@ bool assistant::requires_hashing_helper_method(
     return false;
 }
 
-std::list<std::string> assistant::get_odb_pragmas() const {
-    const auto& eprops(context_.element_properties());
-    const auto& odb_props(eprops.odb_properties());
-    if (!odb_props)
-        return std::list<std::string>();
-
-    return odb_props->top_level_odb_pragmas();
-}
-
-std::list<std::string>
-assistant::get_odb_pragmas(const std::string& attr_id) const {
-    const auto& eprops(context_.element_properties());
-    const auto& odb_props(eprops.odb_properties());
-    if (!odb_props)
-        return std::list<std::string>();
-
-    const auto& attr_pragmas(odb_props->attribute_level_odb_pragmas());
-    const auto i(attr_pragmas.find(attr_id));
-    if (i == attr_pragmas.end())
-        return std::list<std::string>();
-
-    return i->second;
-}
-
 std::string assistant::get_odb_type() const {
     using namespace assets::meta_model::structural;
     auto obj = dynamic_cast<const object*>(&element_);
