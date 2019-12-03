@@ -57,7 +57,7 @@ format(const context& ctx, const assets::meta_model::element& e) const {
 #>
 
 <#= sn #>::<#= sn #>()
-    : <#= a.make_member_variable_name(attr) #>(static_cast<<#= a.get_qualified_name(attr.parsed_type()) #>>(0)) { }
+    : <#= attr.member_variable_name() #>(static_cast<<#= a.get_qualified_name(attr.parsed_type()) #>>(0)) { }
 <#+
             }
 
@@ -68,7 +68,7 @@ format(const context& ctx, const assets::meta_model::element& e) const {
 #>
 
 <#= sn #>::<#= sn #>(<#= sn #>&& rhs)
-    : <#= a.make_member_variable_name(attr) #>(std::move(rhs.<#= a.make_member_variable_name(attr) #>)) { }
+    : <#= attr.member_variable_name() #>(std::move(rhs.<#= attr.member_variable_name() #>)) { }
 <#+
             }
 
@@ -78,7 +78,7 @@ format(const context& ctx, const assets::meta_model::element& e) const {
 #>
 
 <#= sn #>::<#= sn #>(const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #>)
-    : <#= a.make_member_variable_name(attr) #>(<#= attr.name().simple() #>) { }
+    : <#= attr.member_variable_name() #>(<#= attr.name().simple() #>) { }
 
 <#+
             /*
@@ -87,14 +87,14 @@ format(const context& ctx, const assets::meta_model::element& e) const {
              if (attr.parsed_type().is_current_simple_type()) {
 #>
 <#= a.get_qualified_name(attr.parsed_type()) #> <#= sn #>::<#= attr.name().simple() #>() const {
-    return <#= a.make_member_variable_name(attr) #>;
+    return <#= attr.member_variable_name() #>;
 }
 
 <#+
                 if (!p.is_immutable()) {
 #>
 void <#= sn #>::<#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #> v) {
-    <#= a.make_member_variable_name(attr) #> = v;
+    <#= attr.member_variable_name() #> = v;
 }
 
 <#+
@@ -102,22 +102,22 @@ void <#= sn #>::<#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.
             } else {
 #>
 const <#= a.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.name().simple() #>() const {
-    return <#= a.make_member_variable_name(attr) #>;
+    return <#= attr.member_variable_name() #>;
 }
 <#+
                 if (!p.is_immutable()) {
 #>
 
 <#= a.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.name().simple() #>() {
-    return <#= a.make_member_variable_name(attr) #>;
+    return <#= attr.member_variable_name() #>;
 }
 
 void <#= sn #>::<#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #>& v) {
-    <#= a.make_member_variable_name(attr) #> = v;
+    <#= attr.member_variable_name() #> = v;
 }
 
 void <#= sn #>::<#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #>&& v) {
-    <#= a.make_member_variable_name(attr) #> = std::move(v);
+    <#= attr.member_variable_name() #> = std::move(v);
 }
 
 <#+
@@ -129,7 +129,7 @@ void <#= sn #>::<#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.
              */
 #>
 bool <#= sn #>::operator==(const <#= sn #>& rhs) const {
-    return <#= a.make_member_variable_name(attr) #> == rhs.<#= a.make_member_variable_name(attr) #>;
+    return <#= attr.member_variable_name() #> == rhs.<#= attr.member_variable_name() #>;
 }
 
 <#+
@@ -140,7 +140,7 @@ bool <#= sn #>::operator==(const <#= sn #>& rhs) const {
 #>
 void <#= sn #>::swap(<#= sn #>& other)<#= a.make_noexcept_keyword_text() #> {
     using std::swap;
-    swap(<#= a.make_member_variable_name(attr) #>, other.<#= a.make_member_variable_name(attr) #>);
+    swap(<#= attr.member_variable_name() #>, other.<#= attr.member_variable_name() #>);
 }
 
 <#= sn #>& <#= sn #>::operator=(<#= sn #> other) {

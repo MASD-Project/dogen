@@ -370,7 +370,7 @@ a.stream() << std::endl;
             if (!o.local_attributes().empty()) {
 a.stream() << "private:" << std::endl;
                 for (const auto& attr : o.local_attributes()) {
-a.stream() << "    " << a.get_qualified_name(attr.parsed_type()) << " " << a.make_member_variable_name(attr) << ";" << std::endl;
+a.stream() << "    " << a.get_qualified_name(attr.parsed_type()) << " " << attr.member_variable_name() << ";" << std::endl;
                 }
             }
 a.stream() << "};" << std::endl;

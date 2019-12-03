@@ -409,7 +409,7 @@ private:
 <#+
                 for (const auto& attr : o.local_attributes()) {
 #>
-    <#= a.get_qualified_name(attr.parsed_type()) #> <#= a.make_member_variable_name(attr) #>;
+    <#= a.get_qualified_name(attr.parsed_type()) #> <#= attr.member_variable_name() #>;
 <#+
                 }
             }

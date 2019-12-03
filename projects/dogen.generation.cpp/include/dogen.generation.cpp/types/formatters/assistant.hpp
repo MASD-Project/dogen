@@ -233,18 +233,6 @@ public:
 
 public:
     /**
-     * @brief Returns the property as a member variable.
-     */
-    std::string
-    make_member_variable_name(const assets::meta_model::attribute& attr) const;
-
-    /**
-     * @brief Returns the property as a getter.
-     */
-    std::string
-    make_getter_setter_name(const assets::meta_model::attribute& attr) const;
-
-    /**
      * @brief returns the c++ namespaces for the name.
      */
     std::list<std::string>

@@ -135,7 +135,7 @@ a.stream() << "    s.precision(6);" << std::endl;
 a.stream() << "    s.setf(std::ios::showpoint);" << std::endl;
             }
 
-            const std::string variable_name = "v." + a.make_getter_setter_name(attr) + "()";
+            const std::string variable_name = "v." + attr.getter_setter_name() + "()";
 a.stream() << std::endl;
 a.stream() << "    s << \" { \"" << std::endl;
 a.stream() << "      << \"\\\"__type__\\\": \" << \"\\\"" << qn << "\\\"\" << \", \"" << std::endl;

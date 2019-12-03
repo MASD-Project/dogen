@@ -266,16 +266,6 @@ obtain_facet_properties(const std::string& facet_name) const {
     return i->second;
 }
 
-std::string assistant::
-make_member_variable_name(const assets::meta_model::attribute& attr) const {
-    return attr.member_variable_name();
-}
-
-std::string assistant::
-make_getter_setter_name(const assets::meta_model::attribute& attr) const {
-    return attr.getter_setter_name();
-}
-
 std::list<std::string>
 assistant::make_namespaces(const assets::meta_model::name& n,
     const bool detect_model_name) const {

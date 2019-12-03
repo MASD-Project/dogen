@@ -102,7 +102,7 @@ format(const context& ctx, const assets::meta_model::element& e) const {
                     if (!is_first)
                         ss << "," << std::endl << "      ";
 
-                    ss << a.make_member_variable_name(attr)
+                    ss << attr.member_variable_name()
                        << "(static_cast<" << a.get_qualified_name(attr.parsed_type())
                        << ">(0))";
 
@@ -140,7 +140,7 @@ format(const context& ctx, const assets::meta_model::element& e) const {
 
                 for (const auto attr : o.local_attributes()) {
 #>
-    <#= sf.prefix() #><#= a.make_member_variable_name(attr) #>(std::move(rhs.<#= a.make_member_variable_name(attr) #>))<#= sf.postfix() #>
+    <#= sf.prefix() #><#= attr.member_variable_name() #>(std::move(rhs.<#= attr.member_variable_name() #>))<#= sf.postfix() #>
 <#+
                     sf.next();
                 }
@@ -212,7 +212,7 @@ format(const context& ctx, const assets::meta_model::element& e) const {
 
                 for (const auto attr : o.local_attributes()) {
 #>
-    <#= sf.prefix() #><#= a.make_member_variable_name(attr) #>(<#= attr.name().simple() #>)<#= sf.postfix() #>
+    <#= sf.prefix() #><#= attr.member_variable_name() #>(<#= attr.name().simple() #>)<#= sf.postfix() #>
 <#+
                     sf.next();
                 }
@@ -346,7 +346,7 @@ void <#= sn #>::swap(<#= sn #>&<#= (empty ? "" : " other") #>)<#= a.make_noexcep
 <#+
                    for (const auto attr : o.local_attributes())
 #>
-    swap(<#= a.make_member_variable_name(attr) #>, other.<#= a.make_member_variable_name(attr) #>);
+    swap(<#= attr.member_variable_name() #>, other.<#= attr.member_variable_name() #>);
 <#+
                }
 #>
@@ -416,7 +416,7 @@ bool <#= sn #>::<#= method_name #>(const <#= sn #>& <#= (o.all_attributes().empt
                 sf.postfix_configuration().last(";").not_last(" &&");
                 for (const auto attr : o.local_attributes()) {
 #>
-    <#= sf.prefix() #><#= a.make_member_variable_name(attr) #> == rhs.<#= a.make_member_variable_name(attr) #><#= sf.postfix() #>
+    <#= sf.prefix() #><#= attr.member_variable_name() #> == rhs.<#= attr.member_variable_name() #><#= sf.postfix() #>
 <#+
                     sf.next();
                 }
@@ -447,14 +447,14 @@ bool <#= sn #>::<#= method_name #>(const <#= sn #>& <#= (o.all_attributes().empt
 #>
 
 <#= a.get_qualified_name(attr.parsed_type()) #> <#= sn #>::<#= attr.name().simple() #>() const {
-    return <#= a.make_member_variable_name(attr) #>;
+    return <#= attr.member_variable_name() #>;
 }
 <#+
                     if (!o.is_immutable()) {
 #>
 
 <#= (attr.is_fluent() ? sn + "&" : "void") #> <#= sn #>::<#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #> v) {
-    <#= a.make_member_variable_name(attr) #> = v;
+    <#= attr.member_variable_name() #> = v;
 <#+
                         if (attr.is_fluent()) {
 #>
@@ -469,18 +469,18 @@ bool <#= sn #>::<#= method_name #>(const <#= sn #>& <#= (o.all_attributes().empt
 #>
 
 const <#= a.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.name().simple() #>() const {
-    return <#= a.make_member_variable_name(attr) #>;
+    return <#= attr.member_variable_name() #>;
 }
 <#+
                     if (!o.is_immutable()) {
 #>
 
 <#= a.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.name().simple() #>() {
-    return <#= a.make_member_variable_name(attr) #>;
+    return <#= attr.member_variable_name() #>;
 }
 
 <#= (o.is_fluent() ? sn + "&" : "void") #> <#= sn #>::<#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #>& v) {
-    <#= a.make_member_variable_name(attr) #> = v;
+    <#= attr.member_variable_name() #> = v;
 <#+
                         if (o.is_fluent()) {
 #>
@@ -494,7 +494,7 @@ const <#= a.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.name(
 #>
 
 <#= (o.is_fluent() ? sn + "&" : "void") #> <#= sn #>::<#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #>&& v) {
-    <#= a.make_member_variable_name(attr) #> = std::move(v);
+    <#= attr.member_variable_name() #> = std::move(v);
 <#+
                             if (o.is_fluent()) {
 #>

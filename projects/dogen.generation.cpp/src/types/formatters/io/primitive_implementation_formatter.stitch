@@ -79,7 +79,7 @@ std::ostream& operator<<(std::ostream& s, const <#= sn #>& v) {
 <#+
             }
 
-            const std::string variable_name = "v." + a.make_getter_setter_name(attr) + "()";
+            const std::string variable_name = "v." + attr.getter_setter_name() + "()";
 #>
 
     s << " { "

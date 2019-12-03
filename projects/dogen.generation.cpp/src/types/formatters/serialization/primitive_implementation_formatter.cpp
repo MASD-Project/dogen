@@ -131,7 +131,7 @@ a.stream() << "namespace serialization {" << std::endl;
 a.stream() << std::endl;
 a.stream() << "template<typename Archive>" << std::endl;
 a.stream() << "void save(Archive& ar, const " << qn << "& v, const unsigned int /*version*/) {" << std::endl;
-a.stream() << "    ar << make_nvp(\"" << attr.name().simple() << "\", v." << a.make_member_variable_name(attr) << ");" << std::endl;
+a.stream() << "    ar << make_nvp(\"" << attr.name().simple() << "\", v." << attr.member_variable_name() << ");" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
         /*
@@ -139,7 +139,7 @@ a.stream() << std::endl;
          */
 a.stream() << "template<typename Archive>" << std::endl;
 a.stream() << "void load(Archive& ar, " << qn << "& v, const unsigned int /*version*/) {" << std::endl;
-a.stream() << "    ar >> make_nvp(\"" << attr.name().simple() << "\", v." << a.make_member_variable_name(attr) << ");" << std::endl;
+a.stream() << "    ar >> make_nvp(\"" << attr.name().simple() << "\", v." << attr.member_variable_name() << ");" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
 a.stream() << "} }" << std::endl;

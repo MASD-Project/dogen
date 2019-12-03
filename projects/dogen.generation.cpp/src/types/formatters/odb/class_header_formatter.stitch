@@ -82,7 +82,7 @@ format(const context& ctx, const assets::meta_model::element& e) const {
 <#+
                         is_first = false;
 #>
-#pragma db member(<#= sn #>::<#= a.make_member_variable_name(attr) #>) <#= pg #>
+#pragma db member(<#= sn #>::<#= attr.member_variable_name() #>) <#= pg #>
 <#+
                     }
                 }

@@ -153,7 +153,7 @@ a.stream() << "    ar << make_nvp(\"" << pn.simple() << "\", base_object<" << pq
         if (has_attributes && has_parent)
 a.stream() << std::endl;
         for (const auto attr : o.local_attributes()) {
-a.stream() << "    ar << make_nvp(\"" << attr.name().simple() << "\", v." << a.make_member_variable_name(attr) << ");" << std::endl;
+a.stream() << "    ar << make_nvp(\"" << attr.name().simple() << "\", v." << attr.member_variable_name() << ");" << std::endl;
         }
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
@@ -173,7 +173,7 @@ a.stream() << std::endl;
         }
 
         for (const auto attr : o.local_attributes()) {
-a.stream() << "    ar >> make_nvp(\"" << attr.name().simple() << "\", v." << a.make_member_variable_name(attr) << ");" << std::endl;
+a.stream() << "    ar >> make_nvp(\"" << attr.name().simple() << "\", v." << attr.member_variable_name() << ");" << std::endl;
         }
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;

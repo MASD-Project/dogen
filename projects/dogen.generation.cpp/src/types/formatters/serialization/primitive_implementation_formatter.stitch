@@ -74,7 +74,7 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar, const <#= qn #>& v, const unsigned int /*version*/) {
-    ar << make_nvp("<#= attr.name().simple() #>", v.<#= a.make_member_variable_name(attr) #>);
+    ar << make_nvp("<#= attr.name().simple() #>", v.<#= attr.member_variable_name() #>);
 }
 
 <#+
@@ -84,7 +84,7 @@ void save(Archive& ar, const <#= qn #>& v, const unsigned int /*version*/) {
 #>
 template<typename Archive>
 void load(Archive& ar, <#= qn #>& v, const unsigned int /*version*/) {
-    ar >> make_nvp("<#= attr.name().simple() #>", v.<#= a.make_member_variable_name(attr) #>);
+    ar >> make_nvp("<#= attr.name().simple() #>", v.<#= attr.member_variable_name() #>);
 }
 
 } }

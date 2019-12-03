@@ -66,9 +66,9 @@ a.stream() << "    " << pqn << "::to_stream(s);" << std::endl;
     for (const auto attr : o.local_attributes()) {
         std::string variable_name;
         if (inside_class)
-            variable_name = a.make_member_variable_name(attr);
+            variable_name = attr.member_variable_name();
         else
-            variable_name = "v." + a.make_getter_setter_name(attr) + "()";
+            variable_name = "v." + attr.getter_setter_name() + "()";
 
 a.stream() << "    " << sf.prefix() << "<< \"\\\"" << attr.name().simple() << "\\\": \" << " << a.streaming_for_type(attr.parsed_type().current(), variable_name) << sf.postfix() << std::endl;
         sf.next();

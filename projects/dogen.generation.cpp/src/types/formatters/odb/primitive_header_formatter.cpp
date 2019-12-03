@@ -114,7 +114,7 @@ a.stream() << "#pragma db " << a.get_odb_type() << "(" << sn << ") " << pg << st
                         if (is_first)
 a.stream() << std::endl;
                             is_first = false;
-a.stream() << "#pragma db member(" << sn << "::" << a.make_member_variable_name(attr) << ") " << pg << std::endl;
+a.stream() << "#pragma db member(" << sn << "::" << attr.member_variable_name() << ") " << pg << std::endl;
                     }
 a.stream() << std::endl;
 a.stream() << "#endif" << std::endl;
