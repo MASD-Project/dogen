@@ -29,8 +29,6 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include <boost/optional.hpp>
-#include "dogen.generation.cpp/types/formattables/odb_properties.hpp"
 #include "dogen.generation.cpp/types/formattables/aspect_properties.hpp"
 #include "dogen.generation.cpp/types/formattables/helper_properties.hpp"
 #include "dogen.generation.cpp/types/formattables/artefact_properties.hpp"
@@ -45,10 +43,8 @@ class element_properties final {
 public:
     element_properties() = default;
     element_properties(const element_properties&) = default;
+    element_properties(element_properties&&) = default;
     ~element_properties() = default;
-
-public:
-    element_properties(element_properties&& rhs);
 
 public:
     element_properties(
@@ -56,7 +52,6 @@ public:
         const std::unordered_map<std::string, dogen::generation::cpp::formattables::artefact_properties>& artefact_properties,
         const std::list<dogen::generation::cpp::formattables::helper_properties>& helper_properties,
         const std::unordered_map<std::string, std::string>& canonical_archetype_to_archetype,
-        const boost::optional<dogen::generation::cpp::formattables::odb_properties>& odb_properties,
         const std::unordered_map<std::string, dogen::generation::cpp::formattables::test_data_properties>& attribute_level_test_data_properties);
 
 public:
@@ -80,11 +75,6 @@ public:
     void canonical_archetype_to_archetype(const std::unordered_map<std::string, std::string>& v);
     void canonical_archetype_to_archetype(const std::unordered_map<std::string, std::string>&& v);
 
-    const boost::optional<dogen::generation::cpp::formattables::odb_properties>& odb_properties() const;
-    boost::optional<dogen::generation::cpp::formattables::odb_properties>& odb_properties();
-    void odb_properties(const boost::optional<dogen::generation::cpp::formattables::odb_properties>& v);
-    void odb_properties(const boost::optional<dogen::generation::cpp::formattables::odb_properties>&& v);
-
     const std::unordered_map<std::string, dogen::generation::cpp::formattables::test_data_properties>& attribute_level_test_data_properties() const;
     std::unordered_map<std::string, dogen::generation::cpp::formattables::test_data_properties>& attribute_level_test_data_properties();
     void attribute_level_test_data_properties(const std::unordered_map<std::string, dogen::generation::cpp::formattables::test_data_properties>& v);
@@ -105,7 +95,6 @@ private:
     std::unordered_map<std::string, dogen::generation::cpp::formattables::artefact_properties> artefact_properties_;
     std::list<dogen::generation::cpp::formattables::helper_properties> helper_properties_;
     std::unordered_map<std::string, std::string> canonical_archetype_to_archetype_;
-    boost::optional<dogen::generation::cpp::formattables::odb_properties> odb_properties_;
     std::unordered_map<std::string, dogen::generation::cpp::formattables::test_data_properties> attribute_level_test_data_properties_;
 };
 

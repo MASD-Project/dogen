@@ -687,10 +687,6 @@
           "type": "std::unordered_map<std::string, std::string>"
         },
         {
-          "name": "odb_properties",
-          "type": "boost::optional<formattables::odb_properties>"
-        },
-        {
           "name": "attribute_level_test_data_properties",
           "type": "std::unordered_map<std::string, test_data_properties>"
         }

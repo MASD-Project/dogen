@@ -22,26 +22,16 @@
 
 namespace dogen::generation::cpp::formattables {
 
-element_properties::element_properties(element_properties&& rhs)
-    : aspect_properties_(std::move(rhs.aspect_properties_)),
-      artefact_properties_(std::move(rhs.artefact_properties_)),
-      helper_properties_(std::move(rhs.helper_properties_)),
-      canonical_archetype_to_archetype_(std::move(rhs.canonical_archetype_to_archetype_)),
-      odb_properties_(std::move(rhs.odb_properties_)),
-      attribute_level_test_data_properties_(std::move(rhs.attribute_level_test_data_properties_)) { }
-
 element_properties::element_properties(
     const dogen::generation::cpp::formattables::aspect_properties& aspect_properties,
     const std::unordered_map<std::string, dogen::generation::cpp::formattables::artefact_properties>& artefact_properties,
     const std::list<dogen::generation::cpp::formattables::helper_properties>& helper_properties,
     const std::unordered_map<std::string, std::string>& canonical_archetype_to_archetype,
-    const boost::optional<dogen::generation::cpp::formattables::odb_properties>& odb_properties,
     const std::unordered_map<std::string, dogen::generation::cpp::formattables::test_data_properties>& attribute_level_test_data_properties)
     : aspect_properties_(aspect_properties),
       artefact_properties_(artefact_properties),
       helper_properties_(helper_properties),
       canonical_archetype_to_archetype_(canonical_archetype_to_archetype),
-      odb_properties_(odb_properties),
       attribute_level_test_data_properties_(attribute_level_test_data_properties) { }
 
 void element_properties::swap(element_properties& other) noexcept {
@@ -50,7 +40,6 @@ void element_properties::swap(element_properties& other) noexcept {
     swap(artefact_properties_, other.artefact_properties_);
     swap(helper_properties_, other.helper_properties_);
     swap(canonical_archetype_to_archetype_, other.canonical_archetype_to_archetype_);
-    swap(odb_properties_, other.odb_properties_);
     swap(attribute_level_test_data_properties_, other.attribute_level_test_data_properties_);
 }
 
@@ -59,7 +48,6 @@ bool element_properties::operator==(const element_properties& rhs) const {
         artefact_properties_ == rhs.artefact_properties_ &&
         helper_properties_ == rhs.helper_properties_ &&
         canonical_archetype_to_archetype_ == rhs.canonical_archetype_to_archetype_ &&
-        odb_properties_ == rhs.odb_properties_ &&
         attribute_level_test_data_properties_ == rhs.attribute_level_test_data_properties_;
 }
 
@@ -131,22 +119,6 @@ void element_properties::canonical_archetype_to_archetype(const std::unordered_m
 
 void element_properties::canonical_archetype_to_archetype(const std::unordered_map<std::string, std::string>&& v) {
     canonical_archetype_to_archetype_ = std::move(v);
-}
-
-const boost::optional<dogen::generation::cpp::formattables::odb_properties>& element_properties::odb_properties() const {
-    return odb_properties_;
-}
-
-boost::optional<dogen::generation::cpp::formattables::odb_properties>& element_properties::odb_properties() {
-    return odb_properties_;
-}
-
-void element_properties::odb_properties(const boost::optional<dogen::generation::cpp::formattables::odb_properties>& v) {
-    odb_properties_ = v;
-}
-
-void element_properties::odb_properties(const boost::optional<dogen::generation::cpp::formattables::odb_properties>&& v) {
-    odb_properties_ = std::move(v);
 }
 
 const std::unordered_map<std::string, dogen::generation::cpp::formattables::test_data_properties>& element_properties::attribute_level_test_data_properties() const {

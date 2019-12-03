@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.generation.cpp/io/formattables/odb_properties_io.hpp"
 #include "dogen.generation.cpp/io/formattables/aspect_properties_io.hpp"
 #include "dogen.generation.cpp/io/formattables/helper_properties_io.hpp"
 #include "dogen.generation.cpp/io/formattables/element_properties_io.hpp"
@@ -85,21 +84,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::generation::cpp::formattables::odb_properties>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
-    return s;
-}
-
-}
-
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::generation::cpp::formattables::test_data_properties>& v) {
@@ -127,7 +111,6 @@ std::ostream& operator<<(std::ostream& s, const element_properties& v) {
       << "\"artefact_properties\": " << v.artefact_properties() << ", "
       << "\"helper_properties\": " << v.helper_properties() << ", "
       << "\"canonical_archetype_to_archetype\": " << v.canonical_archetype_to_archetype() << ", "
-      << "\"odb_properties\": " << v.odb_properties() << ", "
       << "\"attribute_level_test_data_properties\": " << v.attribute_level_test_data_properties()
       << " }";
     return(s);
