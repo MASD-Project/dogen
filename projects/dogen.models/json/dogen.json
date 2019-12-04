@@ -332,6 +332,11 @@
           "name": "engine",
           "type": "database_engine",
           "documentation": "Which relational database engine to connect to.\n"
+        },
+        {
+          "name": "generate_schema",
+          "type": "bool",
+          "documentation": "If true, deletes all tables and recreates them. Otherwise, assumes their presence.\n"
         }
       ]
     },

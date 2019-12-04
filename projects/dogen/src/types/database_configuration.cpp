@@ -24,7 +24,8 @@ namespace dogen {
 
 database_configuration::database_configuration()
     : port_(static_cast<unsigned int>(0)),
-      engine_(static_cast<dogen::database_engine>(0)) { }
+      engine_(static_cast<dogen::database_engine>(0)),
+      generate_schema_(static_cast<bool>(0)) { }
 
 database_configuration::database_configuration(
     const std::string& host,
@@ -32,13 +33,15 @@ database_configuration::database_configuration(
     const std::string& name,
     const std::string& user,
     const std::string& password,
-    const dogen::database_engine engine)
+    const dogen::database_engine engine,
+    const bool generate_schema)
     : host_(host),
       port_(port),
       name_(name),
       user_(user),
       password_(password),
-      engine_(engine) { }
+      engine_(engine),
+      generate_schema_(generate_schema) { }
 
 void database_configuration::swap(database_configuration& other) noexcept {
     using std::swap;
@@ -48,6 +51,7 @@ void database_configuration::swap(database_configuration& other) noexcept {
     swap(user_, other.user_);
     swap(password_, other.password_);
     swap(engine_, other.engine_);
+    swap(generate_schema_, other.generate_schema_);
 }
 
 bool database_configuration::operator==(const database_configuration& rhs) const {
@@ -56,7 +60,8 @@ bool database_configuration::operator==(const database_configuration& rhs) const
         name_ == rhs.name_ &&
         user_ == rhs.user_ &&
         password_ == rhs.password_ &&
-        engine_ == rhs.engine_;
+        engine_ == rhs.engine_ &&
+        generate_schema_ == rhs.generate_schema_;
 }
 
 database_configuration& database_configuration::operator=(database_configuration other) {
@@ -143,6 +148,14 @@ dogen::database_engine database_configuration::engine() const {
 
 void database_configuration::engine(const dogen::database_engine v) {
     engine_ = v;
+}
+
+bool database_configuration::generate_schema() const {
+    return generate_schema_;
+}
+
+void database_configuration::generate_schema(const bool v) {
+    generate_schema_ = v;
 }
 
 }

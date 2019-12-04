@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/io/database_engine_io.hpp"
 #include "dogen/io/database_configuration_io.hpp"
@@ -34,6 +35,12 @@ inline std::string tidy_up_string(std::string s) {
 namespace dogen {
 
 std::ostream& operator<<(std::ostream& s, const database_configuration& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::database_configuration\"" << ", "
       << "\"host\": " << "\"" << tidy_up_string(v.host()) << "\"" << ", "
@@ -41,7 +48,8 @@ std::ostream& operator<<(std::ostream& s, const database_configuration& v) {
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"user\": " << "\"" << tidy_up_string(v.user()) << "\"" << ", "
       << "\"password\": " << "\"" << tidy_up_string(v.password()) << "\"" << ", "
-      << "\"engine\": " << v.engine()
+      << "\"engine\": " << v.engine() << ", "
+      << "\"generate_schema\": " << v.generate_schema()
       << " }";
     return(s);
 }

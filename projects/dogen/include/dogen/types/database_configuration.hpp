@@ -50,7 +50,8 @@ public:
         const std::string& name,
         const std::string& user,
         const std::string& password,
-        const dogen::database_engine engine);
+        const dogen::database_engine engine,
+        const bool generate_schema);
 
 public:
     /**
@@ -104,6 +105,14 @@ public:
     void engine(const dogen::database_engine v);
     /**@}*/
 
+    /**
+     * @brief If true, deletes all tables and recreates them. Otherwise, assumes their presence.
+     */
+    /**@{*/
+    bool generate_schema() const;
+    void generate_schema(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const database_configuration& rhs) const;
     bool operator!=(const database_configuration& rhs) const {
@@ -121,6 +130,7 @@ private:
     std::string user_;
     std::string password_;
     dogen::database_engine engine_;
+    bool generate_schema_;
 };
 
 }
