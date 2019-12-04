@@ -32,7 +32,7 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "dogen.tracing/types/backend.hpp"
-#include "dogen.tracing/types/file_tracer.hpp"
+#include "dogen.tracing/types/file_backend.hpp"
 #include "dogen.tracing/types/relational_backend.hpp"
 #include "dogen/types/tracing_configuration.hpp"
 #include "dogen/types/database_configuration.hpp"
@@ -76,7 +76,7 @@ public:
             s << input;
             relational_backend_->add_initial_input(input_id, s.str());
         } else
-            file_tracer_.add_initial_input(input_id, input);
+            file_backend_.add_initial_input(input_id, input);
     }
 
     void add_references_graph(const std::string& root_vertex,
@@ -91,7 +91,7 @@ public:
     void start_chain(const std::string& transform_id,
         const std::string& model_id,
         const Ioable& input) const {
-        file_tracer_.start_chain(transform_id, model_id, input);
+        file_backend_.start_chain(transform_id, model_id, input);
     }
 
     void start_transform(const std::string& transform_id) const;
@@ -103,21 +103,21 @@ public:
     void start_transform(const std::string& transform_id,
         const std::string& model_id,
         const Ioable& input) const {
-        file_tracer_.start_transform(transform_id, model_id, input);
+        file_backend_.start_transform(transform_id, model_id, input);
     }
 
     void end_chain() const;
 
     template<typename Ioable>
     void end_chain(const Ioable& output) const {
-        file_tracer_.end_chain(output);
+        file_backend_.end_chain(output);
     }
 
     void end_transform() const;
 
     template<typename Ioable>
     void end_transform(const Ioable& output) const {
-        file_tracer_.end_transform(output);
+        file_backend_.end_transform(output);
     }
 
     void end_tracing() const;
@@ -126,7 +126,7 @@ public:
     bool operator==(const tracer& rhs) const;
 
 private:
-    file_tracer file_tracer_;
+    file_backend file_backend_;
     boost::shared_ptr<relational_backend> relational_backend_;
     boost::shared_ptr<tracing::backend> backend_;
     const boost::optional<tracing_configuration> configuration_;

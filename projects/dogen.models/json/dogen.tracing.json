@@ -126,7 +126,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "file_tracer",
+      "name": "file_backend",
       "parents": [
         "backend"
       ],

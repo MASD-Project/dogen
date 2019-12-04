@@ -18,22 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TRACING_IO_FILE_TRACER_IO_HPP
-#define DOGEN_TRACING_IO_FILE_TRACER_IO_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <iosfwd>
-#include "dogen.tracing/types/file_tracer.hpp"
+#include <ostream>
+#include "dogen.tracing/io/backend_io.hpp"
+#include "dogen.tracing/io/file_backend_io.hpp"
 
 namespace dogen::tracing {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::tracing::file_tracer& v);
-
+std::ostream& operator<<(std::ostream& s, const file_backend& v) {
+    v.to_stream(s);
+    return(s);
 }
 
-#endif
+}

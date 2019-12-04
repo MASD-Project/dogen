@@ -31,7 +31,6 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
-#include "dogen.tracing/types/file_tracer.hpp"
 #include "dogen/types/tracing_configuration.hpp"
 #include "dogen/types/database_configuration.hpp"
 

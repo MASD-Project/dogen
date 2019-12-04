@@ -33,12 +33,12 @@
 #include "dogen.tracing/types/metrics.hpp"
 #include "dogen.tracing/types/references_printer.hpp"
 #include "dogen.tracing/types/metrics_printer.hpp"
-#include "dogen.tracing/types/file_tracer.hpp"
+#include "dogen.tracing/types/file_backend.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("tracing.file_tracer"));
+auto lg(logger_factory("tracing.file_backend"));
 
 const char zero('0');
 const std::string empty;
@@ -88,7 +88,7 @@ boost::filesystem::path get_current_directory(
 
 namespace dogen::tracing {
 
-file_tracer::file_tracer(const boost::optional<tracing_configuration>& cfg) :
+file_backend::file_backend(const boost::optional<tracing_configuration>& cfg) :
     configuration_(cfg),
     builder_(get_logging_impact(cfg), get_tracing_impact(cfg)),
     current_directory_(get_current_directory(cfg)) {
@@ -106,7 +106,7 @@ file_tracer::file_tracer(const boost::optional<tracing_configuration>& cfg) :
     transform_position_.push(0);
 }
 
-void file_tracer::validate() const {
+void file_backend::validate() const {
     /*
      * If data tracing was requested, we must have a directory in
      * which to place the data.
@@ -120,17 +120,17 @@ void file_tracer::validate() const {
                              << configuration_;
 }
 
-bool file_tracer::tracing_enabled() const {
+bool file_backend::tracing_enabled() const {
     // double-bang by design.
     return !!configuration_;
 }
 
-bool file_tracer::detailed_tracing_enabled() const {
+bool file_backend::detailed_tracing_enabled() const {
     return tracing_enabled() &&
         configuration_->level() == tracing_level::detail;
 }
 
-void file_tracer::handle_output_directory() const {
+void file_backend::handle_output_directory() const {
     BOOST_LOG_SEV(lg, debug) << "Handling output directory.";
 
     const auto& od(configuration_->output_directory());
@@ -157,7 +157,7 @@ void file_tracer::handle_output_directory() const {
                              << od.generic_string();
 }
 
-void file_tracer::handle_current_directory() const {
+void file_backend::handle_current_directory() const {
     BOOST_LOG_SEV(lg, debug) << "Handling current directory change.";
 
     ensure_transform_position_not_empty();
@@ -188,7 +188,7 @@ void file_tracer::handle_current_directory() const {
                              << current_directory_.generic_string();
 }
 
-void file_tracer::ensure_transform_position_not_empty() const {
+void file_backend::ensure_transform_position_not_empty() const {
     if (transform_position_.empty()) {
         BOOST_LOG_SEV(lg, error) << unexpected_empty;
         BOOST_THROW_EXCEPTION(tracing_error(unexpected_empty));
@@ -196,7 +196,7 @@ void file_tracer::ensure_transform_position_not_empty() const {
 }
 
 boost::filesystem::path
-file_tracer::full_path_for_writing(const std::string& filename) const {
+file_backend::full_path_for_writing(const std::string& filename) const {
     std::ostringstream s;
     s << std::setfill(zero) << std::setw(leading_zeros)
       << transform_position_.top();
@@ -209,7 +209,7 @@ file_tracer::full_path_for_writing(const std::string& filename) const {
     return current_directory_ / s.str();
 }
 
-boost::filesystem::path file_tracer::full_path_for_writing(
+boost::filesystem::path file_backend::full_path_for_writing(
     const std::string& transform_id, const std::string& type) const {
     ensure_transform_position_not_empty();
 
@@ -227,7 +227,7 @@ boost::filesystem::path file_tracer::full_path_for_writing(
     return current_directory_ / s.str();
 }
 
-boost::filesystem::path file_tracer::make_path(const boost::filesystem::path& dir,
+boost::filesystem::path file_backend::make_path(const boost::filesystem::path& dir,
     const std::string& fn, const tracing_format tf) const {
 
     boost::filesystem::path r(dir);
@@ -249,26 +249,26 @@ boost::filesystem::path file_tracer::make_path(const boost::filesystem::path& di
     return r;
 }
 
-void file_tracer::to_stream(std::ostream& s) const {
+void file_backend::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"dogen::tracing::file_tracer\"" << " }";
+      << "\"__type__\": " << "\"dogen::tracing::file_backend\"" << " }";
 }
 
-void file_tracer::add_references_graph(const std::string& root_vertex,
+void file_backend::add_references_graph(const std::string& root_vertex,
     const std::unordered_map<std::string, std::list<std::string>>&
     edges_per_model) const {
     root_vertex_ = root_vertex;
     edges_per_model_ = edges_per_model;
 }
 
-void file_tracer::start_chain(const std::string& transform_id) const {
+void file_backend::start_chain(const std::string& transform_id) const {
     if (!tracing_enabled())
         return;
 
     start_chain(transform_id, empty);
 }
 
-void file_tracer::start_chain(const std::string& transform_id,
+void file_backend::start_chain(const std::string& transform_id,
     const std::string& model_id) const {
     if (!tracing_enabled())
         return;
@@ -285,14 +285,14 @@ void file_tracer::start_chain(const std::string& transform_id,
     transform_position_.push(0);
 }
 
-void file_tracer::start_transform(const std::string& transform_id) const {
+void file_backend::start_transform(const std::string& transform_id) const {
     if (!tracing_enabled())
         return;
 
     start_transform(transform_id, empty);
 }
 
-void file_tracer::start_transform(const std::string& transform_id,
+void file_backend::start_transform(const std::string& transform_id,
     const std::string& model_id) const {
     if (!tracing_enabled())
         return;
@@ -302,7 +302,7 @@ void file_tracer::start_transform(const std::string& transform_id,
                              << " (" << builder_.current()->guid() << ")";
 }
 
-void file_tracer::end_chain() const {
+void file_backend::end_chain() const {
     if (!tracing_enabled())
         return;
 
@@ -320,7 +320,7 @@ void file_tracer::end_chain() const {
                              << current_directory_.generic_string();
 }
 
-void file_tracer::end_transform() const {
+void file_backend::end_transform() const {
     if (!tracing_enabled())
         return;
 
@@ -329,7 +329,7 @@ void file_tracer::end_transform() const {
     builder_.end();
 }
 
-void file_tracer::end_tracing() const {
+void file_backend::end_tracing() const {
     BOOST_LOG_SEV(lg, debug) << "Finished tracing.";
 
     if (!tracing_enabled())
@@ -358,7 +358,7 @@ void file_tracer::end_tracing() const {
     utility::filesystem::write(p2, s2);
 }
 
-bool file_tracer::operator==(const file_tracer& /*rhs*/) const {
+bool file_backend::operator==(const file_backend& /*rhs*/) const {
     return false;
 }
 

@@ -41,7 +41,7 @@ namespace dogen::tracing {
 
 tracer::tracer(const boost::optional<tracing_configuration>& tcfg,
     const boost::optional<database_configuration>& dbcfg) :
-    file_tracer_(tcfg), configuration_(tcfg) {
+    file_backend_(tcfg), configuration_(tcfg) {
 
     relational_backend_ = boost::shared_ptr<relational_backend>(
         make_relational_backend(tcfg, dbcfg));
@@ -74,38 +74,38 @@ bool tracer::detailed_tracing_enabled() const {
 void tracer::add_references_graph(const std::string& root_vertex,
     const std::unordered_map<std::string, std::list<std::string>>&
     edges_per_model) const {
-    file_tracer_.add_references_graph(root_vertex, edges_per_model);
+    file_backend_.add_references_graph(root_vertex, edges_per_model);
 }
 
 void tracer::start_chain(const std::string& transform_id) const {
-    file_tracer_.start_chain(transform_id);
+    file_backend_.start_chain(transform_id);
 }
 
 void tracer::start_chain(const std::string& transform_id,
     const std::string& model_id) const {
-    file_tracer_.start_chain(transform_id, model_id);
+    file_backend_.start_chain(transform_id, model_id);
 }
 
 void tracer::start_transform(const std::string& transform_id) const {
-    file_tracer_.start_transform(transform_id);
+    file_backend_.start_transform(transform_id);
 }
 
 void tracer::start_transform(const std::string& transform_id,
     const std::string& model_id) const {
-    file_tracer_.start_transform(transform_id, model_id);
+    file_backend_.start_transform(transform_id, model_id);
 }
 
 void tracer::end_chain() const {
-    file_tracer_.end_chain();
+    file_backend_.end_chain();
 }
 
 void tracer::end_transform() const {
-    file_tracer_.end_transform();
+    file_backend_.end_transform();
 }
 
 void tracer::end_tracing() const {
     BOOST_LOG_SEV(lg, debug) << "Finished tracing.";
-    file_tracer_.end_tracing();
+    file_backend_.end_tracing();
 }
 
 bool tracer::operator==(const tracer& /*rhs*/) const {

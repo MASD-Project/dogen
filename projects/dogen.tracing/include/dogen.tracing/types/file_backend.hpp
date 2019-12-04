@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TRACING_TYPES_FILE_TRACER_HPP
-#define DOGEN_TRACING_TYPES_FILE_TRACER_HPP
+#ifndef DOGEN_TRACING_TYPES_FILE_BACKEND_HPP
+#define DOGEN_TRACING_TYPES_FILE_BACKEND_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -38,12 +38,12 @@
 
 namespace dogen::tracing {
 
-class file_tracer final {
+class file_backend final {
 public:
-    file_tracer(const file_tracer&) = default;
+    file_backend(const file_backend&) = default;
 
 public:
-    explicit file_tracer(const boost::optional<tracing_configuration>& cfg);
+    explicit file_backend(const boost::optional<tracing_configuration>& cfg);
 
 public:
     const boost::optional<tracing_configuration> configuration() const {
@@ -159,7 +159,7 @@ public:
     void end_tracing() const;
 
 public:
-    bool operator==(const file_tracer& rhs) const;
+    bool operator==(const file_backend& rhs) const;
 
 private:
     const boost::optional<tracing_configuration> configuration_;

@@ -2313,7 +2313,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#file_tracer#</dia:string>
+        <dia:string>#file_backend#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable, dogen::pretty_printable#</dia:string>
