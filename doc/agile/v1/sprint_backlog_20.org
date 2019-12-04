@@ -12,27 +12,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-12-03 Tue 23:22]
+#+CAPTION: Clock summary at [2019-12-04 Wed 18:21]
 | <75>                                                 |         |       |       |       |
 | Headline                                             | Time    |       |       |     % |
 |------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                         | *43:36* |       |       | 100.0 |
+| *Total time*                                         | *44:50* |       |       | 100.0 |
 |------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                              | 43:36   |       |       | 100.0 |
-| Active                                               |         | 43:36 |       | 100.0 |
-| Edit release notes for previous sprint               |         |       | 11:24 |  26.1 |
-| Create a demo and presentation for previous sprint   |         |       |  2:31 |   5.8 |
-| Sprint and product backlog grooming                  |         |       |  3:29 |   8.0 |
-| Fix OSX build errors                                 |         |       |  0:25 |   1.0 |
-| Fix broken build due to incorrect postgres library   |         |       |  2:31 |   5.8 |
-| Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   3.0 |
+| Stories                                              | 44:50   |       |       | 100.0 |
+| Active                                               |         | 44:50 |       | 100.0 |
+| Edit release notes for previous sprint               |         |       | 11:24 |  25.4 |
+| Create a demo and presentation for previous sprint   |         |       |  2:31 |   5.6 |
+| Sprint and product backlog grooming                  |         |       |  3:32 |   7.9 |
+| Fix OSX build errors                                 |         |       |  0:25 |   0.9 |
+| Fix broken build due to incorrect postgres library   |         |       |  2:31 |   5.6 |
+| Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   2.9 |
 | Create a profile called =untested=                   |         |       |  0:17 |   0.6 |
-| Remove =odb_properties= in element properties        |         |       |  2:25 |   5.5 |
-| Allow non-throwing casts for enums                   |         |       |  0:41 |   1.6 |
-| Add type overrides to primitives                     |         |       |  8:55 |  20.5 |
-| Add relational tracing support                       |         |       |  9:08 |  20.9 |
+| Remove =odb_properties= in element properties        |         |       |  2:36 |   5.8 |
+| Allow non-throwing casts for enums                   |         |       |  0:41 |   1.5 |
+| Add type overrides to primitives                     |         |       |  8:55 |  19.9 |
+| Add relational tracing support                       |         |       |  9:28 |  21.1 |
 | Nightly code coverage is not being reported          |         |       |  0:23 |   0.9 |
 | Move member variable name to assets                  |         |       |  0:09 |   0.3 |
+| Create a string-based tracing backend interface      |         |       |  0:40 |   1.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -281,6 +282,7 @@ Notes:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2019-12-04 Wed 08:41]--[2019-12-04 Wed 08:44] =>  0:03
     CLOCK: [2019-12-03 Tue 20:52]--[2019-12-03 Tue 21:21] =>  0:29
     CLOCK: [2019-12-03 Tue 20:18]--[2019-12-03 Tue 20:48] =>  0:30
     CLOCK: [2019-12-03 Tue 00:20]--[2019-12-03 Tue 00:26] =>  0:06
@@ -452,6 +454,7 @@ Items missing:
 *** COMPLETED Remove =odb_properties= in element properties           :story:
     CLOSED: [2019-12-03 Tue 20:49]
     :LOGBOOK:
+    CLOCK: [2019-12-01 Sun 22:06]--[2019-12-01 Sun 22:17] =>  0:11
     CLOCK: [2019-12-01 Sun 21:44]--[2019-12-01 Sun 22:05] =>  0:21
     CLOCK: [2019-12-01 Sun 20:35]--[2019-12-01 Sun 21:43] =>  1:08
     CLOCK: [2019-12-01 Sun 18:53]--[2019-12-01 Sun 19:03] =>  0:10
@@ -581,6 +584,7 @@ Notes:
 
 *** STARTED Add relational tracing support                            :story:
     :LOGBOOK:
+    CLOCK: [2019-12-04 Wed 18:01]--[2019-12-04 Wed 18:21] =>  0:20
     CLOCK: [2019-11-30 Sat 18:02]--[2019-11-30 Sat 20:13] =>  2:11
     CLOCK: [2019-11-27 Wed 23:01]--[2019-11-27 Wed 23:19] =>  0:18
     CLOCK: [2019-11-25 Mon 08:03]--[2019-11-25 Mon 08:21] =>  0:18
@@ -785,6 +789,43 @@ by the language. We need to put a story in the backlog that details
 the "right" solution, and do a quick hack for now that just gives us
 what we have, but at assets level - similar to what we did with names
 and the "dot" and "colon" notations.
+
+*** STARTED Create a string-based tracing backend interface           :story:
+    :LOGBOOK:
+    CLOCK: [2019-12-04 Wed 08:01]--[2019-12-04 Wed 08:41] =>  0:40
+    :END:
+
+Tasks:
+
+- create the interface
+- change tracer to convert =ioable= to strings.
+- change file tracer, relational tracer to implement the interface.
+
+*** Create a transform instance ID property                           :story:
+
+At present we are generating the transform GUIDs inside the metrics
+builder. However, these are more fundamental: they tell us about the
+identity of each transform. As such, transforms should generate the
+GUIDs themselves when they start, and supply them to the tracer.
+
+We should also change the "add initial input" method to a start run
+method and create a matching end run method. The code generator is
+then responsible for supplying the GUID for the run.
+
+*** Add dependency checks to transforms                               :story:
+
+Check the backlog as we may already have this story. At present we do
+not have a way to determine if a given transform dependency has been
+met. Say for example transform A depends on transform B; we are aware
+of this only because the comments on the transform chains tell us
+so. It would be nicer if we could declare transform dependencies (and
+reasons) as part of the transform "interface" and then check that a
+given transform has indeed been applied to a model. This also fits in
+with the idea that we keep track of which transforms have affected a
+given model. In this sense we need to capture:
+
+- what transforms have been applied;
+- whether the transform has modified anything or not.
 
 *** Schema name propagation is not handled correctly                  :story:
 

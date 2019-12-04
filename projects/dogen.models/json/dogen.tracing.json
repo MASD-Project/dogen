@@ -38,6 +38,10 @@
         {
           "name": "configuration",
           "type": "boost::optional<tracing_configuration>"
+        },
+        {
+          "name": "backend",
+          "type": "boost::shared_ptr<backend>"
         }
       ]
     },
@@ -111,7 +115,21 @@
       "fallback_element_type": "masd::object"
     },
     {
+      "name": "backend",
+      "stereotypes": [
+        "dogen::handcrafted::typeable",
+        "dogen::pretty_printable"
+      ],
+      "tagged_values": {
+        "masd.generation.cpp.types.class_forward_declarations.enabled": "true"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
       "name": "file_tracer",
+      "parents": [
+        "backend"
+      ],
       "stereotypes": [
         "dogen::handcrafted::typeable",
         "dogen::pretty_printable"
@@ -120,6 +138,9 @@
     },
     {
       "name": "relational_tracer",
+      "parents": [
+        "backend"
+      ],
       "stereotypes": [
         "dogen::handcrafted::typeable",
         "dogen::pretty_printable"

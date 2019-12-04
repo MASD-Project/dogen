@@ -31,6 +31,7 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
+#include "dogen.tracing/types/backend.hpp"
 #include "dogen.tracing/types/file_tracer.hpp"
 #include "dogen.tracing/types/relational_tracer.hpp"
 #include "dogen/types/tracing_configuration.hpp"
@@ -52,6 +53,10 @@ public:
 public:
     const boost::optional<tracing_configuration> configuration() const {
         return configuration_;
+    }
+
+    const boost::shared_ptr<tracing::backend> backend() const {
+        return backend_;
     }
 
 private:
@@ -123,6 +128,7 @@ public:
 private:
     file_tracer file_tracer_;
     boost::shared_ptr<relational_tracer> relational_tracer_;
+    boost::shared_ptr<tracing::backend> backend_;
     const boost::optional<tracing_configuration> configuration_;
 };
 

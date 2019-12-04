@@ -68,7 +68,10 @@ private:
     boost::filesystem::path make_path(const boost::filesystem::path& dir,
         const std::string& fn, const tracing_format tf) const;
 
-    public:
+public:
+    /*virtual*/ void to_stream(std::ostream& s) const /*override*/;
+
+public:
     /**
      * @brief Writes an initial input to the filesystem.
      */

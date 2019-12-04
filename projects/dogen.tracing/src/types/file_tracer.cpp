@@ -249,6 +249,11 @@ boost::filesystem::path file_tracer::make_path(const boost::filesystem::path& di
     return r;
 }
 
+void file_tracer::to_stream(std::ostream& s) const {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::tracing::file_tracer\"" << " }";
+}
+
 void file_tracer::add_references_graph(const std::string& root_vertex,
     const std::unordered_map<std::string, std::list<std::string>>&
     edges_per_model) const {

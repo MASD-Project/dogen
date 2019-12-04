@@ -136,6 +136,11 @@ public:
 
 }
 
+void relational_tracer::to_stream(std::ostream& s) const {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::tracing::file_tracer\"" << " }";
+}
+
 relational_tracer* make_relational_tracer(
     const boost::optional<tracing_configuration>& tcfg,
     const boost::optional<database_configuration>& dbcfg) {

@@ -19,13 +19,13 @@
  *
  */
 #include <ostream>
+#include "dogen.tracing/io/backend_io.hpp"
 #include "dogen.tracing/io/file_tracer_io.hpp"
 
 namespace dogen::tracing {
 
-std::ostream& operator<<(std::ostream& s, const file_tracer&) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::tracing::file_tracer\"" << " }";
+std::ostream& operator<<(std::ostream& s, const file_tracer& v) {
+    v.to_stream(s);
     return(s);
 }
 
