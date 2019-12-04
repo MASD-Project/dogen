@@ -31,27 +31,51 @@
 
 namespace dogen::tracing {
 
-class null_backend final /*: public dogen::tracing::backend*/ {
+class null_backend final : public dogen::tracing::backend {
 public:
-    null_backend() = default;
-    null_backend(const null_backend&) = default;
-    null_backend(null_backend&&) = default;
-    null_backend& operator=(const null_backend&) = default;
-
     virtual ~null_backend() noexcept { }
 
 public:
-    void to_stream(std::ostream& s) const /*override*/;
+    void to_stream(std::ostream& s) const override;
 
 public:
-    bool operator==(const null_backend& rhs) const;
-    bool operator!=(const null_backend& rhs) const {
-        return !this->operator==(rhs);
-    }
+    void start_tracing(const std::string& /*run_id*/,
+        const std::string& /*input_id*/,
+        const std::string& /*input*/) const override {}
+    void end_tracing() const override {}
 
 public:
-    // bool equals(const dogen::tracing::backend& other) const override;
+    void add_references_graph(const std::string& /*root_vertex*/,
+        const std::unordered_map<std::string, std::list<std::string>>&
+        /*edges_per_model*/) const override {}
 
+public:
+    void start_chain(const std::string& /*transform_id*/,
+        const std::string& /*transform_instance_id*/) const override {}
+    void start_chain(const std::string& /*transform_id*/,
+        const std::string& /*transform_instance_id*/,
+        const std::string& /*model_id*/) const override {}
+    void start_chain(const std::string& /*transform_id*/,
+        const std::string& /*transform_instance_id*/,
+        const std::string& /*model_id*/,
+        const std::string& /*input*/) const override {}
+
+    void end_chain() const override {}
+    void end_chain(const std::string& /*output*/) const override {}
+
+public:
+    void start_transform(const std::string& /*transform_id*/,
+        const std::string& /*transform_instance_id*/) const override {}
+    void start_transform(const std::string& /*transform_id*/,
+        const std::string& /*transform_instance_id*/,
+        const std::string& /*model_id*/) const override {}
+    void start_transform(const std::string& /*transform_id*/,
+        const std::string& /*transform_instance_id*/,
+        const std::string& /*model_id*/,
+        const std::string& /*input*/) const override {}
+
+    void end_transform() const override {}
+    void end_transform(const std::string& /*output*/) const override {}
 };
 
 }

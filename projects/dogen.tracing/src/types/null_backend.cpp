@@ -24,22 +24,12 @@
 
 namespace dogen::tracing {
 
-// void null_backend::to_stream(std::ostream& s) const {
-//     s << " { "
-//       << "\"__type__\": " << "\"dogen::tracing::null_backend\"" << ", "
-//       << "\"__parent_0__\": ";
-//     dogen::tracing::backend::to_stream(s);
-//     s << " }";
-// }
-
-// bool null_backend::equals(const dogen::tracing::backend& other) const {
-//     const null_backend* const p(dynamic_cast<const null_backend* const>(&other));
-//     if (!p) return false;
-//     return *this == *p;
-// }
-
-bool null_backend::operator==(const null_backend& /*rhs*/) const {
-    return true;
+void null_backend::to_stream(std::ostream& s) const {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::tracing::null_backend\"" << ", "
+      << "\"__parent_0__\": ";
+    dogen::tracing::backend::to_stream(s);
+    s << " }";
 }
 
 }
