@@ -33,7 +33,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.tracing/types/backend.hpp"
 #include "dogen.tracing/types/file_tracer.hpp"
-#include "dogen.tracing/types/relational_tracer.hpp"
+#include "dogen.tracing/types/relational_backend.hpp"
 #include "dogen/types/tracing_configuration.hpp"
 #include "dogen/types/database_configuration.hpp"
 
@@ -71,10 +71,10 @@ public:
     template<typename Ioable>
     void add_initial_input(const std::string& input_id,
         const Ioable& input) const {
-        if (relational_tracer_) {
+        if (relational_backend_) {
             std::ostringstream s;
             s << input;
-            relational_tracer_->add_initial_input(input_id, s.str());
+            relational_backend_->add_initial_input(input_id, s.str());
         } else
             file_tracer_.add_initial_input(input_id, input);
     }
@@ -127,7 +127,7 @@ public:
 
 private:
     file_tracer file_tracer_;
-    boost::shared_ptr<relational_tracer> relational_tracer_;
+    boost::shared_ptr<relational_backend> relational_backend_;
     boost::shared_ptr<tracing::backend> backend_;
     const boost::optional<tracing_configuration> configuration_;
 };

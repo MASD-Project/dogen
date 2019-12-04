@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TRACING_IO_RELATIONAL_TRACER_IO_HPP
-#define DOGEN_TRACING_IO_RELATIONAL_TRACER_IO_HPP
+#ifndef DOGEN_TRACING_IO_RELATIONAL_BACKEND_IO_HPP
+#define DOGEN_TRACING_IO_RELATIONAL_BACKEND_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.tracing/types/relational_tracer.hpp"
+#include "dogen.tracing/types/relational_backend.hpp"
 
 namespace dogen::tracing {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::tracing::relational_tracer& v);
+     const dogen::tracing::relational_backend& v);
 
 }
 

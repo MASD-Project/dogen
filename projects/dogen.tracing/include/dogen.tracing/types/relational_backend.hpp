@@ -18,15 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen.tracing/io/backend_io.hpp"
-#include "dogen.tracing/io/relational_tracer_io.hpp"
+#ifndef DOGEN_TRACING_TYPES_RELATIONAL_BACKEND_HPP
+#define DOGEN_TRACING_TYPES_RELATIONAL_BACKEND_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <string>
+#include <boost/optional.hpp>
+#include "dogen/types/tracing_configuration.hpp"
+#include "dogen/types/database_configuration.hpp"
 
 namespace dogen::tracing {
 
-std::ostream& operator<<(std::ostream& s, const relational_tracer& v) {
-    v.to_stream(s);
-    return(s);
-}
+class relational_backend {
+public:
+    virtual ~relational_backend() = 0;
+
+public:
+    /*virtual*/ void to_stream(std::ostream& s) const /*override*/;
+
+    virtual void add_initial_input(const std::string& input_id,
+        const std::string& input) const = 0;
+};
+
+inline relational_backend::~relational_backend() {}
+
+relational_backend* make_relational_backend(
+    const boost::optional<tracing_configuration>& tcfg,
+    const boost::optional<database_configuration>& dbcfg);
 
 }
+
+#endif

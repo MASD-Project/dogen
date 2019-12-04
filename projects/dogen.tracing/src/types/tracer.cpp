@@ -43,8 +43,8 @@ tracer::tracer(const boost::optional<tracing_configuration>& tcfg,
     const boost::optional<database_configuration>& dbcfg) :
     file_tracer_(tcfg), configuration_(tcfg) {
 
-    relational_tracer_ = boost::shared_ptr<relational_tracer>(
-        make_relational_tracer(tcfg, dbcfg));
+    relational_backend_ = boost::shared_ptr<relational_backend>(
+        make_relational_backend(tcfg, dbcfg));
 }
 
 void tracer::validate() const {

@@ -137,7 +137,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "relational_tracer",
+      "name": "relational_backend",
       "parents": [
         "backend"
       ],

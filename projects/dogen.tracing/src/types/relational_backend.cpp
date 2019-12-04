@@ -24,7 +24,7 @@
 #include "dogen/config.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/tracing_error.hpp"
-#include "dogen.tracing/types/relational_tracer.hpp"
+#include "dogen.tracing/types/relational_backend.hpp"
 #ifdef DOGEN_HAVE_RELATIONAL_MODEL
 #include <odb/database.hxx>
 #include <odb/transaction.hxx>
@@ -38,7 +38,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("tracing.relational_tracer"));
+auto lg(logger_factory("tracing.relational_backend"));
 
 const std::string empty;
 const std::string directory_missing("Tracing data directory must be supplied.");
@@ -55,7 +55,7 @@ namespace {
 
 #ifdef DOGEN_HAVE_RELATIONAL_MODEL
 
-class relational_impl: public relational_tracer{
+class relational_impl: public relational_backend{
 public:
     relational_impl(const boost::optional<tracing_configuration>& tcfg,
         const boost::optional<database_configuration>& dbcfg);
@@ -114,7 +114,7 @@ const std::string no_relational_support(
     "Dogen compiled without relational support.");
 
 
-class null_impl: public relational_tracer {
+class null_impl: public relational_backend {
 public:
     null_impl(const boost::optional<tracing_configuration>& /*tcfg*/,
         const boost::optional<database_configuration>& /*dbcfg*/) {
@@ -136,12 +136,12 @@ public:
 
 }
 
-void relational_tracer::to_stream(std::ostream& s) const {
+void relational_backend::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::tracing::file_tracer\"" << " }";
 }
 
-relational_tracer* make_relational_tracer(
+relational_backend* make_relational_backend(
     const boost::optional<tracing_configuration>& tcfg,
     const boost::optional<database_configuration>& dbcfg) {
 
