@@ -22,8 +22,8 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
-#include "dogen.assets/types/transforms/extensible_mapping_transform.hpp"
 #include "dogen.assets/types/transforms/merge_transform.hpp"
+#include "dogen.assets/types/transforms/extensible_mapping_transform.hpp"
 #include "dogen.assets/types/transforms/assembly_chain.hpp"
 
 namespace {
@@ -39,9 +39,9 @@ namespace dogen::assets::transforms {
 
 meta_model::model assembly_chain::apply(const context& ctx,
     const meta_model::technical_space ts, assets::meta_model::model_set ms) {
-    const auto id (ms.target().name().qualified().dot());
+    const auto ms_id(ms.target().name().qualified().dot());
     tracing::scoped_chain_tracer stp(lg, "model assembly chain", transform_id,
-        id, *ctx.tracer());
+        ms_id, *ctx.tracer());
 
     /*
      * First map the model set, if required.
