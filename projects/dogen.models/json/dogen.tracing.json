@@ -157,6 +157,17 @@
         "dogen::pretty_printable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "throw_backend",
+      "parents": [
+        "backend"
+      ],
+      "stereotypes": [
+        "dogen::handcrafted::typeable",
+        "dogen::pretty_printable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
