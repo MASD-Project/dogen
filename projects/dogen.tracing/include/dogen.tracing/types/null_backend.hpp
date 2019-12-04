@@ -39,8 +39,7 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    void start_tracing(const std::string& /*run_id*/,
-        const std::string& /*input_id*/,
+    void start_tracing(const std::string& /*input_id*/,
         const std::string& /*input*/) const override {}
     void end_tracing() const override {}
 

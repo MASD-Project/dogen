@@ -44,7 +44,8 @@ namespace dogen::tracing {
 class relational_backend : public dogen::tracing::backend {
 public:
     relational_backend(const tracing_configuration& tcfg,
-        const database_configuration& dbcfg);
+        const database_configuration& dbcfg,
+        const std::string& run_id);
 
 public:
     virtual ~relational_backend() noexcept { }
@@ -53,8 +54,7 @@ public:
     virtual void to_stream(std::ostream& s) const override;
 
 public:
-    void start_tracing(const std::string& run_id,
-        const std::string& input_id,
+    void start_tracing(const std::string& input_id,
         const std::string& input) const override;
     void end_tracing() const override;
 
@@ -94,6 +94,7 @@ public:
 private:
     const tracing_configuration tracing_configuration_;
     const database_configuration database_configuration_;
+    const std::string run_id_;
     boost::shared_ptr<odb::pgsql::database> database_;
 
 };

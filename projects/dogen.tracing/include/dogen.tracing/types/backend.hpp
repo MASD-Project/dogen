@@ -50,8 +50,8 @@ public:
     /**
      * @brief Starts a tracing session.
      */
-    virtual void start_tracing(const std::string& run_id,
-        const std::string& input_id, const std::string& input) const = 0;
+    virtual void start_tracing(const std::string& input_id,
+        const std::string& input) const = 0;
 
     /**
      * @brief Ends the current tracing session.

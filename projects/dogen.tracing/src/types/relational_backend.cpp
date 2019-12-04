@@ -51,8 +51,9 @@ void relational_backend::to_stream(std::ostream& s) const {
 }
 
 relational_backend::relational_backend(const tracing_configuration& tcfg,
-    const database_configuration& dbcfg)
-    : tracing_configuration_(tcfg), database_configuration_(dbcfg) {
+    const database_configuration& dbcfg, const std::string& run_id)
+    : tracing_configuration_(tcfg), database_configuration_(dbcfg),
+      run_id_(run_id) {
 
     using odb::pgsql::database;
     database_ = boost::make_shared<database>(dbcfg.user(),
@@ -63,11 +64,11 @@ relational_backend::relational_backend(const tracing_configuration& tcfg,
     t.commit();
 }
 
-void relational_backend::start_tracing(const std::string& run_id,
-    const std::string& input_id, const std::string& input) const {
+void relational_backend::start_tracing(const std::string& input_id,
+    const std::string& input) const {
     BOOST_LOG_SEV(lg, debug) << "Adding initial input: " << input_id;
 
-    dogen::relational::tracing::run_id id(run_id);
+    dogen::relational::tracing::run_id id(run_id_);
     dogen::relational::tracing::json json(input);
 
     dogen::relational::tracing::run run;

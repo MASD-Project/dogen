@@ -20,11 +20,8 @@
  */
 #include <chrono>
 #include <sstream>
-#include <boost/uuid/uuid.hpp>
 #include <boost/make_shared.hpp>
-#include <boost/uuid/uuid_io.hpp>
 #include <boost/throw_exception.hpp>
-#include <boost/uuid/uuid_generators.hpp>
 #include "dogen/config.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/metrics.hpp"
@@ -46,7 +43,8 @@ const std::string unmatch_start_end(
 
 namespace dogen::tracing {
 
-metrics_builder::metrics_builder(const std::string& logging_impact,
+metrics_builder::metrics_builder(const std::string& run_id,
+    const std::string& logging_impact,
     const std::string& tracing_impact) {
     BOOST_LOG_SEV(lg, debug) << "Initialising.";
     std::ostringstream s;
@@ -54,7 +52,7 @@ metrics_builder::metrics_builder(const std::string& logging_impact,
       << "logging impact: " << logging_impact << ", "
       << "tracing impact: " << tracing_impact;
 
-    stack_.push(create_metrics(root_id, s.str()));
+    stack_.push(create_metrics(root_id, run_id, s.str()));
     BOOST_LOG_SEV(lg, debug) << "Stack size: " << stack_.size();
 }
 
@@ -67,12 +65,12 @@ void metrics_builder::ensure_stack_not_empty() const {
 
 boost::shared_ptr<metrics>
 metrics_builder::create_metrics(const std::string& transform_id,
+    const std::string& transform_instance_id,
     const std::string& model_id) const {
     BOOST_LOG_SEV(lg, debug) << "Creating metrics for: " << transform_id;
 
-    auto uuid = boost::uuids::random_generator()();
     auto r(boost::make_shared<metrics>());
-    r->guid(boost::uuids::to_string(uuid));
+    r->guid(transform_instance_id);
     r->transform_id(transform_id);
     r->model_id(model_id);
 
@@ -92,11 +90,12 @@ void metrics_builder::update_end() {
 }
 
 void metrics_builder::start(const std::string& transform_id,
+    const std::string& transform_instance_id,
     const std::string& model_id) {
     BOOST_LOG_SEV(lg, debug) << "Starting: " << transform_id;
 
     ensure_stack_not_empty();
-    auto next(create_metrics(transform_id, model_id));
+    auto next(create_metrics(transform_id, transform_instance_id, model_id));
     stack_.top()->children().push_back(next);
     stack_.push(next);
     BOOST_LOG_SEV(lg, debug) << "Stack size: " << stack_.size();

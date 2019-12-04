@@ -42,7 +42,8 @@ public:
     virtual ~file_backend() noexcept { }
 
 public:
-    explicit file_backend(const tracing_configuration& cfg);
+    file_backend(const tracing_configuration& cfg,
+        const std::string& run_id);
 
 public:
     const boost::optional<tracing_configuration> configuration() const {
@@ -73,8 +74,8 @@ public:
         edges_per_model) const override;
 
 public:
-    void start_tracing(const std::string& run_id,
-        const std::string& input_id, const std::string& input) const override;
+    void start_tracing(const std::string& input_id,
+        const std::string& input) const override;
     void end_tracing() const override;
 
 public:

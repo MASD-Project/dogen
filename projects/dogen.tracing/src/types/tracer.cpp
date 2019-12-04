@@ -18,9 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/uuid/uuid.hpp>
 #include <boost/make_shared.hpp>
+#include <boost/uuid/uuid_io.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
+#include <boost/uuid/uuid_generators.hpp>
 #include "dogen/config.hpp"
 #include "dogen/io/tracing_backend_io.hpp"
 #include "dogen/io/tracing_configuration_io.hpp"
@@ -67,8 +70,9 @@ tracer::make_backend(const boost::optional<tracing_configuration>& tcfg,
      * If the user requested the file tracing backend, create it.
      */
     const auto be(tcfg->backend());
+    const auto run_id(generate_guid());
     if (be != tracing_backend::file)
-        return boost::make_shared<file_backend>(*tcfg);
+        return boost::make_shared<file_backend>(*tcfg, run_id);
 
     /*
      * If the user requested a relational backend, create it if this
@@ -76,7 +80,7 @@ tracer::make_backend(const boost::optional<tracing_configuration>& tcfg,
      */
     if (be != tracing_backend::relational_database) {
 #ifdef DOGEN_HAVE_RELATIONAL_MODEL
-        return boost::make_shared<relational_backend>(*tcfg, *dbcfg);
+        return boost::make_shared<relational_backend>(*tcfg, *dbcfg, run_id);
 #else
         BOOST_LOG_SEV(lg, error) << no_relational_support;
         BOOST_THROW_EXCEPTION(tracing_error(no_relational_support));
@@ -95,6 +99,11 @@ tracer::tracer(const boost::optional<tracing_configuration>& tcfg,
     const boost::optional<database_configuration>& dbcfg)
     : tracing_enabled_(!!tcfg/*double bang by design*/),
       backend_(make_backend(tcfg, dbcfg)) {}
+
+std::string tracer::generate_guid() {
+    auto uuid = boost::uuids::random_generator()();
+    return boost::uuids::to_string(uuid);
+}
 
 void tracer::add_references_graph(const std::string& root_vertex,
     const std::unordered_map<std::string, std::list<std::string>>&
