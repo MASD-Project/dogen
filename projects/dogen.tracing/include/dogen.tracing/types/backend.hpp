@@ -25,38 +25,103 @@
 #pragma once
 #endif
 
-#include <iosfwd>
-#include <algorithm>
+#include <list>
+#include <string>
+#include <sstream>
+#include <unordered_map>
+#include <boost/optional.hpp>
+#include <boost/shared_ptr.hpp>
+#include "dogen.tracing/types/file_tracer.hpp"
+#include "dogen.tracing/types/relational_tracer.hpp"
+#include "dogen/types/tracing_configuration.hpp"
+#include "dogen/types/database_configuration.hpp"
 
 namespace dogen::tracing {
 
+/**
+ * @brief Interface for tracing backends.
+ */
 class backend {
 public:
-    backend() = default;
-    backend(const backend&) = default;
-    backend(backend&&) = default;
-    backend& operator=(const backend&) = default;
-
     virtual ~backend() noexcept = 0;
 
 public:
     virtual void to_stream(std::ostream& s) const;
 
-protected:
-    bool compare(const backend& rhs) const;
 public:
-    virtual bool equals(const backend& other) const = 0;
+    /**
+     * @brief Starts a tracing session.
+     */
+    virtual void start_tracing(const std::string& run_id,
+        const std::string& input_id, const std::string& input) const = 0;
 
-protected:
-    void swap(backend& other) noexcept;
+    /**
+     * @brief Ends the current tracing session.
+     *
+     * @pre A tracing session must have been started.
+     */
+    virtual void end_tracing() const = 0;
 
+public:
+    /**
+     * @brief Creates a references graph.
+     */
+    virtual void add_references_graph(const std::string& root_vertex,
+        const std::unordered_map<std::string, std::list<std::string>>&
+        edges_per_model) const = 0;
+
+public:
+    /**
+     * @brief Starts a new transform chain.
+     */
+    /**@{*/
+    virtual void start_chain(const std::string& transform_id,
+        const std::string& transform_instance_id) const = 0;
+    virtual void start_chain(const std::string& transform_id,
+        const std::string& transform_instance_id,
+        const std::string& model_id) const = 0;
+    virtual void start_chain(const std::string& transform_id,
+        const std::string& transform_instance_id,
+        const std::string& model_id, const std::string& input) const = 0;
+    /**@}*/
+
+    /**
+     * @brief Ends a transform chain.
+     *
+     * @pre A transform chain must have been staerted.
+     */
+    /**@{*/
+    virtual void end_chain() const = 0;
+    virtual void end_chain(const std::string& output) const = 0;
+    /**@}*/
+
+public:
+    /**
+     * @brief Starts a new transform.
+     */
+    /**@{*/
+    virtual void start_transform(const std::string& transform_id,
+        const std::string& transform_instance_id) const = 0;
+    virtual void start_transform(const std::string& transform_id,
+        const std::string& transform_instance_id,
+        const std::string& model_id) const = 0;
+    virtual void start_transform(const std::string& transform_id,
+        const std::string& transform_instance_id,
+        const std::string& model_id, const std::string& input) const = 0;
+    /**@}*/
+
+    /**
+     * @brief Ends a transform.
+     *
+     * @pre A transform must have been staerted.
+     */
+    /**@{*/
+    virtual void end_transform() const = 0;
+    virtual void end_transform(const std::string& output) const = 0;
+    /**@}*/
 };
 
 inline backend::~backend() noexcept { }
-
-inline bool operator==(const backend& lhs, const backend& rhs) {
-    return lhs.equals(rhs);
-}
 
 }
 

@@ -28,11 +28,4 @@ void backend::to_stream(std::ostream& s) const {
       << "\"__type__\": " << "\"dogen::tracing::backend\"" << " }";
 }
 
-void backend::swap(backend&) noexcept {
-}
-
-bool backend::compare(const backend& /*rhs*/) const {
-    return true;
-}
-
 }
