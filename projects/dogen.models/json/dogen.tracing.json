@@ -36,10 +36,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "configuration",
-          "type": "boost::optional<tracing_configuration>"
-        },
-        {
           "name": "backend",
           "type": "boost::shared_ptr<backend>"
         }

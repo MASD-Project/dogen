@@ -19,13 +19,19 @@
  *
  */
 #include <boost/make_shared.hpp>
+#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
+#include "dogen/config.hpp"
+#include "dogen/io/tracing_backend_io.hpp"
 #include "dogen/io/tracing_configuration_io.hpp"
+#include "dogen/io/database_configuration_io.hpp"
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/tracing_error.hpp"
+#include "dogen.tracing/types/file_backend.hpp"
+#include "dogen.tracing/types/null_backend.hpp"
+#include "dogen.tracing/types/relational_backend.hpp"
 #include "dogen.tracing/types/tracer.hpp"
-#include "dogen/types/tracing_backend.hpp"
 
 namespace {
 
@@ -35,77 +41,96 @@ auto lg(logger_factory("tracing.tracer"));
 const std::string empty;
 const std::string directory_missing("Tracing data directory must be supplied.");
 
+const std::string invalid_backend("Tracing backend is invalid or unsupported: ");
+const std::string no_relational_support("Relational tracing requested but "
+    " Dogen was compiled without relational support.");
+
 }
 
 namespace dogen::tracing {
 
-tracer::tracer(const boost::optional<tracing_configuration>& tcfg,
-    const boost::optional<database_configuration>& dbcfg) :
-    file_backend_(tcfg), configuration_(tcfg) {
+boost::shared_ptr<tracing::backend>
+tracer::make_backend(const boost::optional<tracing_configuration>& tcfg,
+    const boost::optional<database_configuration>& dbcfg) {
+    BOOST_LOG_SEV(lg, debug) << "Tracing configuration: " << tcfg;
+    BOOST_LOG_SEV(lg, debug) << "Database configuration: " << dbcfg;
 
-    relational_backend_ = boost::shared_ptr<relational_backend>(
-        make_relational_backend(tcfg, dbcfg));
-}
-
-void tracer::validate() const {
     /*
-     * If data tracing was requested, we must have a directory in
-     * which to place the data.
+     * If the user did not request any tracing, just use the null
+     * tracer. It has very little cost.
      */
-    if (tracing_enabled() && configuration_->output_directory().empty()) {
-        BOOST_LOG_SEV(lg, error) << directory_missing;
-        BOOST_THROW_EXCEPTION(tracing_error(directory_missing));
+    const bool tracing_enabled(!!tcfg);
+    if (!tracing_enabled)
+        return boost::make_shared<null_backend>();
+
+    /*
+     * If the user requested the file tracing backend, create it.
+     */
+    const auto be(tcfg->backend());
+    if (be != tracing_backend::file)
+        return boost::make_shared<file_backend>(*tcfg);
+
+    /*
+     * If the user requested a relational backend, create it if this
+     * dogen build supports it. Otherwise, throw.
+     */
+    if (be != tracing_backend::relational_database) {
+#ifdef DOGEN_HAVE_RELATIONAL_MODEL
+        return boost::make_shared<relational_backend>(*tcfg, *dbcfg);
+#else
+        BOOST_LOG_SEV(lg, error) << no_relational_support;
+        BOOST_THROW_EXCEPTION(tracing_error(no_relational_support));
+#endif
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Tracer initialised. Configuration: "
-                             << configuration_;
+    /*
+     * Any other backend is not supported, so throw.
+     */
+    const auto s(boost::lexical_cast<std::string>(be));
+    BOOST_LOG_SEV(lg, error) << invalid_backend << s;
+    BOOST_THROW_EXCEPTION(tracing_error(invalid_backend + s));
 }
 
-bool tracer::tracing_enabled() const {
-    // double-bang by design.
-    return !!configuration_;
-}
-
-bool tracer::detailed_tracing_enabled() const {
-    return tracing_enabled() &&
-        configuration_->level() == tracing_level::detail;
-}
+tracer::tracer(const boost::optional<tracing_configuration>& tcfg,
+    const boost::optional<database_configuration>& dbcfg)
+    : tracing_enabled_(!!tcfg/*double bang by design*/),
+      backend_(make_backend(tcfg, dbcfg)) {}
 
 void tracer::add_references_graph(const std::string& root_vertex,
     const std::unordered_map<std::string, std::list<std::string>>&
     edges_per_model) const {
-    file_backend_.add_references_graph(root_vertex, edges_per_model);
-}
-
-void tracer::start_chain(const std::string& transform_id) const {
-    file_backend_.start_chain(transform_id);
-}
-
-void tracer::start_chain(const std::string& transform_id,
-    const std::string& model_id) const {
-    file_backend_.start_chain(transform_id, model_id);
-}
-
-void tracer::start_transform(const std::string& transform_id) const {
-    file_backend_.start_transform(transform_id);
-}
-
-void tracer::start_transform(const std::string& transform_id,
-    const std::string& model_id) const {
-    file_backend_.start_transform(transform_id, model_id);
-}
-
-void tracer::end_chain() const {
-    file_backend_.end_chain();
-}
-
-void tracer::end_transform() const {
-    file_backend_.end_transform();
+    backend_->add_references_graph(root_vertex, edges_per_model);
 }
 
 void tracer::end_tracing() const {
     BOOST_LOG_SEV(lg, debug) << "Finished tracing.";
-    file_backend_.end_tracing();
+    backend_->end_tracing();
+}
+
+void tracer::start_chain(const std::string& transform_id) const {
+    backend_->start_chain(transform_id, "FIXME");
+}
+
+void tracer::start_chain(const std::string& transform_id,
+    const std::string& model_id) const {
+    backend_->start_chain(transform_id, "FIXME", model_id);
+}
+
+void tracer::start_transform(const std::string& transform_id) const {
+    backend_->start_transform(transform_id, "FIXME");
+}
+
+void tracer::start_transform(const std::string& transform_id,
+    const std::string& model_id) const {
+    backend_->start_transform(transform_id, "FIXME", model_id);
+}
+
+void tracer::end_chain() const {
+    backend_->end_chain();
+}
+
+void tracer::end_transform() const {
+    backend_->end_transform();
 }
 
 bool tracer::operator==(const tracer& /*rhs*/) const {

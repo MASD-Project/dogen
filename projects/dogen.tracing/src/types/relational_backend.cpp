@@ -25,15 +25,9 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/tracing_error.hpp"
 #include "dogen.tracing/types/relational_backend.hpp"
-#ifdef DOGEN_HAVE_RELATIONAL_MODEL
-#include <odb/database.hxx>
-#include <odb/transaction.hxx>
-#include <odb/pgsql/database.hxx>
-#include <odb/schema-catalog.hxx>
 #include "dogen.relational/types/tracing/run.hpp"
 #include "dogen.relational/odb/tracing/run-odb.hxx"
 #include "dogen.relational/odb/tracing/run-odb-pgsql.hxx"
-#endif
 
 namespace {
 
@@ -51,52 +45,29 @@ const std::string no_database_configuration(
 
 namespace dogen::tracing {
 
-namespace {
+void relational_backend::to_stream(std::ostream& s) const {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::tracing::file_tracer\"" << " }";
+}
 
-#ifdef DOGEN_HAVE_RELATIONAL_MODEL
+relational_backend::relational_backend(const tracing_configuration& tcfg,
+    const database_configuration& dbcfg)
+    : tracing_configuration_(tcfg), database_configuration_(dbcfg) {
 
-class relational_impl: public relational_backend{
-public:
-    relational_impl(const boost::optional<tracing_configuration>& tcfg,
-        const boost::optional<database_configuration>& dbcfg);
-    virtual ~relational_impl() {}
-
-public:
-    virtual void add_initial_input(const std::string& input_id,
-        const std::string& input) const override;
-
-private:
-    boost::shared_ptr<odb::pgsql::database> database_;
-
-};
-
-relational_impl::relational_impl(
-    const boost::optional<tracing_configuration>& tcfg,
-    const boost::optional<database_configuration>& dbcfg) {
-
-    if (!tcfg) {
-        BOOST_LOG_SEV(lg, error) << no_tracing_configuration;
-        BOOST_THROW_EXCEPTION(tracing_error(no_tracing_configuration));
-    }
-
-    if (!dbcfg) {
-        BOOST_LOG_SEV(lg, error) << no_database_configuration;
-        BOOST_THROW_EXCEPTION(tracing_error(no_database_configuration));
-    }
-
-    database_ = boost::make_shared<odb::pgsql::database>(dbcfg->user(),
-        dbcfg->password(), dbcfg->name(), dbcfg->host(), dbcfg->port());
+    using odb::pgsql::database;
+    database_ = boost::make_shared<database>(dbcfg.user(),
+        dbcfg.password(), dbcfg.name(), dbcfg.host(), dbcfg.port());
 
     odb::transaction t(database_->begin());
     odb::schema_catalog::create_schema(*database_);
     t.commit();
 }
 
-void relational_impl::add_initial_input(const std::string& input_id,
-    const std::string& input) const {
+void relational_backend::start_tracing(const std::string& run_id,
+    const std::string& input_id, const std::string& input) const {
     BOOST_LOG_SEV(lg, debug) << "Adding initial input: " << input_id;
 
-    dogen::relational::tracing::run_id id("ABC");
+    dogen::relational::tracing::run_id id(run_id);
     dogen::relational::tracing::json json(input);
 
     dogen::relational::tracing::run run;
@@ -108,51 +79,54 @@ void relational_impl::add_initial_input(const std::string& input_id,
     t.commit();
 }
 
-#else
-
-const std::string no_relational_support(
-    "Dogen compiled without relational support.");
-
-
-class null_impl: public relational_backend {
-public:
-    null_impl(const boost::optional<tracing_configuration>& /*tcfg*/,
-        const boost::optional<database_configuration>& /*dbcfg*/) {
-        BOOST_LOG_SEV(lg, error) << no_relational_support;
-        BOOST_THROW_EXCEPTION(tracing_error(no_relational_support));
-    }
-
-    virtual ~null_impl() {}
-
-public:
-    virtual void add_initial_input(const std::string& /*input_id*/,
-        const std::string& /*input*/) const {
-        BOOST_LOG_SEV(lg, error) << no_relational_support;
-        BOOST_THROW_EXCEPTION(tracing_error(no_relational_support));
-    }
-};
-
-#endif
-
+void relational_backend::end_tracing() const {
 }
 
-void relational_backend::to_stream(std::ostream& s) const {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::tracing::file_tracer\"" << " }";
+void relational_backend::add_references_graph(const std::string& /*root_vertex*/,
+    const std::unordered_map<std::string, std::list<std::string>>&
+    /*edges_per_model*/) const {
 }
 
-relational_backend* make_relational_backend(
-    const boost::optional<tracing_configuration>& tcfg,
-    const boost::optional<database_configuration>& dbcfg) {
+void relational_backend::start_chain(const std::string& /*transform_id*/,
+    const std::string& /*transform_instance_id*/) const {
+}
 
-    if (!tcfg || tcfg->backend() != tracing_backend::relational_database)
-        return nullptr;
+void relational_backend::start_chain(const std::string& /*transform_id*/,
+    const std::string& /*transform_instance_id*/,
+    const std::string& /*model_id*/) const {
+}
 
-#ifdef DOGEN_HAVE_RELATIONAL_MODEL
-    return new relational_impl(tcfg, dbcfg);
-#else
-    return new null_impl(tcfg, dbcfg);
-#endif
+void relational_backend::start_chain(const std::string& /*transform_id*/,
+    const std::string& /*transform_instance_id*/,
+    const std::string& /*model_id*/,
+    const std::string& /*input*/) const {
+}
+
+void relational_backend::end_chain() const {
+}
+
+void relational_backend::end_chain(const std::string& /*output*/) const {
+}
+
+void relational_backend::start_transform(const std::string& /*transform_id*/,
+    const std::string& /*transform_instance_id*/) const {
+}
+
+void relational_backend::start_transform(const std::string& /*transform_id*/,
+    const std::string& /*transform_instance_id*/,
+    const std::string& /*model_id*/) const {
+}
+
+void relational_backend::start_transform(const std::string& /*transform_id*/,
+    const std::string& /*transform_instance_id*/,
+    const std::string& /*model_id*/,
+    const std::string& /*input*/) const {
+}
+
+void relational_backend::end_transform() const {
+}
+
+void relational_backend::end_transform(const std::string& /*output*/) const {
 }
 
 }

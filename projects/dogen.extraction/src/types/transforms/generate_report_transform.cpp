@@ -24,6 +24,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/io/reporting_style_io.hpp"
+#include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.extraction/io/meta_model/model_io.hpp"

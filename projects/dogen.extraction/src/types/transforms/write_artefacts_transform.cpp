@@ -20,6 +20,7 @@
  */
 #include <boost/filesystem.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.extraction/io/meta_model/model_io.hpp"
 #include "dogen.extraction/io/meta_model/operation_type_io.hpp"

@@ -253,7 +253,7 @@ bool are_tracing_files_healthy(const configuration& cfg,
 
     BOOST_LOG_SEV(lg, debug) << "found_transform_stats: "
                              << found_transform_stats
-                             << "found_references_graph: "
+                             << " found_references_graph: "
                              << found_references_graph
                              << " found_archetype_location: "
                              << found_archetype_location
@@ -283,7 +283,7 @@ BOOST_AUTO_TEST_SUITE(byproduct_generation_tests)
  */
 #ifndef _WIN32
 BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_org_mode_results_in_expected_trace_files) {
-    SETUP_TEST_LOG_SOURCE("enabling_detailed_tracing_with_org_mode_results_in_expected_trace_files");
+    SETUP_TEST_LOG_SOURCE_DEBUG("enabling_detailed_tracing_with_org_mode_results_in_expected_trace_files");
 
     const auto t(dogen_generation::input_dogen_dia());
     const std::string id("detailed_tracing_org_mode");

@@ -21,22 +21,6 @@
 #include <ostream>
 #include "dogen.tracing/io/tracer_io.hpp"
 #include "dogen.tracing/io/backend_io.hpp"
-#include "dogen/io/tracing_configuration_io.hpp"
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::tracing_configuration>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
-    return s;
-}
-
-}
 
 namespace boost {
 
@@ -59,7 +43,6 @@ namespace dogen::tracing {
 std::ostream& operator<<(std::ostream& s, const tracer& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::tracing::tracer\"" << ", "
-      << "\"configuration\": " << v.configuration() << ", "
       << "\"backend\": " << v.backend()
       << " }";
     return(s);

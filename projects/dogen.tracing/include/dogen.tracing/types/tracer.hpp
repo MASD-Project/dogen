@@ -32,8 +32,6 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "dogen.tracing/types/backend.hpp"
-#include "dogen.tracing/types/file_backend.hpp"
-#include "dogen.tracing/types/relational_backend.hpp"
 #include "dogen/types/tracing_configuration.hpp"
 #include "dogen/types/database_configuration.hpp"
 
@@ -43,6 +41,11 @@ namespace dogen::tracing {
  * @brief Handles all of the tracing-related work.
  */
 class tracer final {
+private:
+    static boost::shared_ptr<tracing::backend>
+    make_backend(const boost::optional<tracing_configuration>& tcfg,
+        const boost::optional<database_configuration>& dbcfg);
+
 public:
     tracer(const tracer&) = default;
 
@@ -51,18 +54,20 @@ public:
         const boost::optional<database_configuration>& dbcfg);
 
 public:
-    const boost::optional<tracing_configuration> configuration() const {
-        return configuration_;
-    }
-
     const boost::shared_ptr<tracing::backend> backend() const {
         return backend_;
     }
 
 private:
-    void validate() const;
-    bool tracing_enabled() const;
-    bool detailed_tracing_enabled() const;
+    template<typename Ioable>
+    std::string to_string(const Ioable& ioable) const {
+        if (!tracing_enabled_)
+            return "";
+
+        std::ostringstream s;
+        s << ioable;
+        return s.str();
+    }
 
 public:
     /**
@@ -71,12 +76,7 @@ public:
     template<typename Ioable>
     void add_initial_input(const std::string& input_id,
         const Ioable& input) const {
-        if (relational_backend_) {
-            std::ostringstream s;
-            s << input;
-            relational_backend_->add_initial_input(input_id, s.str());
-        } else
-            file_backend_.add_initial_input(input_id, input);
+        backend_->start_tracing("FIXME", input_id, to_string(input));
     }
 
     void add_references_graph(const std::string& root_vertex,
@@ -91,7 +91,8 @@ public:
     void start_chain(const std::string& transform_id,
         const std::string& model_id,
         const Ioable& input) const {
-        file_backend_.start_chain(transform_id, model_id, input);
+        backend_->start_chain(transform_id,
+            "FIXME", model_id, to_string(input));
     }
 
     void start_transform(const std::string& transform_id) const;
@@ -103,21 +104,22 @@ public:
     void start_transform(const std::string& transform_id,
         const std::string& model_id,
         const Ioable& input) const {
-        file_backend_.start_transform(transform_id, model_id, input);
+        backend_->start_transform(transform_id, "FIXME",
+            model_id, to_string(input));
     }
 
     void end_chain() const;
 
     template<typename Ioable>
     void end_chain(const Ioable& output) const {
-        file_backend_.end_chain(output);
+        backend_->end_chain(to_string(output));
     }
 
     void end_transform() const;
 
     template<typename Ioable>
     void end_transform(const Ioable& output) const {
-        file_backend_.end_transform(output);
+        backend_->end_transform(to_string(output));
     }
 
     void end_tracing() const;
@@ -126,10 +128,8 @@ public:
     bool operator==(const tracer& rhs) const;
 
 private:
-    file_backend file_backend_;
-    boost::shared_ptr<relational_backend> relational_backend_;
+    const bool tracing_enabled_;
     boost::shared_ptr<tracing::backend> backend_;
-    const boost::optional<tracing_configuration> configuration_;
 };
 
 }

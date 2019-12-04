@@ -88,52 +88,37 @@ boost::filesystem::path get_current_directory(
 
 namespace dogen::tracing {
 
-file_backend::file_backend(const boost::optional<tracing_configuration>& cfg) :
+file_backend::file_backend(const tracing_configuration& cfg) :
+    detailed_tracing_enabled_(cfg.level() == tracing_level::detail),
     configuration_(cfg),
     builder_(get_logging_impact(cfg), get_tracing_impact(cfg)),
     current_directory_(get_current_directory(cfg)) {
 
-    validate();
-
-    if (!tracing_enabled())
-        return;
-
-    handle_output_directory();
-
-    if (!detailed_tracing_enabled())
-        return;
-
-    transform_position_.push(0);
-}
-
-void file_backend::validate() const {
     /*
      * If data tracing was requested, we must have a directory in
      * which to place the data.
      */
-    if (tracing_enabled() && configuration_->output_directory().empty()) {
+    if (cfg.output_directory().empty()) {
         BOOST_LOG_SEV(lg, error) << directory_missing;
         BOOST_THROW_EXCEPTION(tracing_error(directory_missing));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Tracer initialised. Configuration: "
                              << configuration_;
-}
 
-bool file_backend::tracing_enabled() const {
-    // double-bang by design.
-    return !!configuration_;
-}
 
-bool file_backend::detailed_tracing_enabled() const {
-    return tracing_enabled() &&
-        configuration_->level() == tracing_level::detail;
+    handle_output_directory();
+
+    if (!detailed_tracing_enabled_)
+        return;
+
+    transform_position_.push(0);
 }
 
 void file_backend::handle_output_directory() const {
     BOOST_LOG_SEV(lg, debug) << "Handling output directory.";
 
-    const auto& od(configuration_->output_directory());
+    const auto& od(configuration_.output_directory());
     if (boost::filesystem::exists(od)) {
         BOOST_LOG_SEV(lg, debug) << "Output directory already exists: "
                                  << od.generic_string();
@@ -167,7 +152,7 @@ void file_backend::handle_current_directory() const {
     s << std::setfill(zero) << std::setw(leading_zeros)
       << transform_position_.top();
 
-    if (configuration_ && !configuration_->use_short_names())
+    if (!configuration_.use_short_names())
         s << delimiter << id;
 
     current_directory_ /= s.str();
@@ -201,7 +186,7 @@ file_backend::full_path_for_writing(const std::string& filename) const {
     s << std::setfill(zero) << std::setw(leading_zeros)
       << transform_position_.top();
 
-    if (configuration_ && !configuration_->use_short_names())
+    if (!configuration_.use_short_names())
         s << delimiter << filename;
 
     s << extension;
@@ -217,7 +202,7 @@ boost::filesystem::path file_backend::full_path_for_writing(
     s << std::setfill(zero) << std::setw(leading_zeros)
       << transform_position_.top();
 
-    if (configuration_ && !configuration_->use_short_names()) {
+    if (!configuration_.use_short_names()) {
         s << delimiter << transform_id << delimiter
           << builder_.current()->guid();
     }
@@ -227,7 +212,8 @@ boost::filesystem::path file_backend::full_path_for_writing(
     return current_directory_ / s.str();
 }
 
-boost::filesystem::path file_backend::make_path(const boost::filesystem::path& dir,
+boost::filesystem::path
+file_backend::make_path(const boost::filesystem::path& dir,
     const std::string& fn, const tracing_format tf) const {
 
     boost::filesystem::path r(dir);
@@ -261,88 +247,28 @@ void file_backend::add_references_graph(const std::string& root_vertex,
     edges_per_model_ = edges_per_model;
 }
 
-void file_backend::start_chain(const std::string& transform_id) const {
-    if (!tracing_enabled())
-        return;
 
-    start_chain(transform_id, empty);
-}
-
-void file_backend::start_chain(const std::string& transform_id,
-    const std::string& model_id) const {
-    if (!tracing_enabled())
-        return;
-
-    BOOST_LOG_SEV(lg, debug) << "Starting: " << transform_id
-                             << " (" << builder_.current()->guid() << ")";
-    builder_.start(transform_id, model_id);
-
-    if (!detailed_tracing_enabled())
-        return;
-
-    handle_current_directory();
-    ++transform_position_.top();
-    transform_position_.push(0);
-}
-
-void file_backend::start_transform(const std::string& transform_id) const {
-    if (!tracing_enabled())
-        return;
-
-    start_transform(transform_id, empty);
-}
-
-void file_backend::start_transform(const std::string& transform_id,
-    const std::string& model_id) const {
-    if (!tracing_enabled())
-        return;
-
-    builder_.start(transform_id, model_id);
-    BOOST_LOG_SEV(lg, debug) << "Starting: " << transform_id
-                             << " (" << builder_.current()->guid() << ")";
-}
-
-void file_backend::end_chain() const {
-    if (!tracing_enabled())
-        return;
-
-    BOOST_LOG_SEV(lg, debug) << "Ending: " << builder_.current()->transform_id()
-                             << " (" << builder_.current()->guid() << ")";
-    builder_.end();
-
-    if (!detailed_tracing_enabled())
+void file_backend::start_tracing(const std::string& /*run_id*/,
+    const std::string& input_id, const std::string& input) const {
+    if (!detailed_tracing_enabled_)
         return;
 
     ensure_transform_position_not_empty();
-    transform_position_.pop();
-    current_directory_ = current_directory_.parent_path();
-    BOOST_LOG_SEV(lg, debug) << "Current directory is now: "
-                             << current_directory_.generic_string();
-}
-
-void file_backend::end_transform() const {
-    if (!tracing_enabled())
-        return;
-
-    BOOST_LOG_SEV(lg, debug) << "Ending: " << builder_.current()->transform_id()
-                             << " (" << builder_.current()->guid() << ")";
-    builder_.end();
+    const auto p(full_path_for_writing(input_id, "initial_input"));
+    utility::filesystem::write(p, input);
+    ++transform_position_.top();
 }
 
 void file_backend::end_tracing() const {
     BOOST_LOG_SEV(lg, debug) << "Finished tracing.";
-
-    if (!tracing_enabled())
-        return;
-
     /*
      * Write the metrics.
      */
     const auto tm(builder_.build());
-    const auto tf(configuration_->format());
-    const bool dg(!configuration_->guids_enabled());
+    const auto tf(configuration_.format());
+    const bool dg(!configuration_.guids_enabled());
     const auto s(metrics_printer::print(dg, tf, tm));
-    const auto& od(configuration_->output_directory());
+    const auto& od(configuration_.output_directory());
     BOOST_LOG_SEV(lg, debug) << "Writing to output directory: '"
                              << od.generic_string() << "'";
     const std::string fn("transform_stats");
@@ -356,6 +282,110 @@ void file_backend::end_tracing() const {
     const auto p2(make_path(od, fn2, tf));
     const auto s2(references_printer::print(tf, root_vertex_, edges_per_model_));
     utility::filesystem::write(p2, s2);
+}
+
+void file_backend::start_chain(const std::string& transform_id,
+    const std::string& transform_instance_id) const {
+    start_chain(transform_id, transform_instance_id, empty);
+}
+
+void file_backend::start_chain(const std::string& transform_id,
+    const std::string& /*transform_instance_id*/,
+    const std::string& model_id) const {
+    BOOST_LOG_SEV(lg, debug) << "Starting: " << transform_id
+                             << " (" << builder_.current()->guid() << ")";
+    builder_.start(transform_id, model_id);
+
+    if (!detailed_tracing_enabled_)
+        return;
+
+    handle_current_directory();
+    ++transform_position_.top();
+    transform_position_.push(0);
+}
+
+void file_backend::start_chain(const std::string& transform_id,
+    const std::string& transform_instance_id,
+    const std::string& model_id,
+    const std::string& input) const {
+    start_chain(transform_id, transform_instance_id, model_id);
+
+    if (!detailed_tracing_enabled_)
+        return;
+
+    ensure_transform_position_not_empty();
+    const auto p(full_path_for_writing(transform_id, "input"));
+    utility::filesystem::write(p, input);
+    ++transform_position_.top();
+}
+
+void file_backend::end_chain() const {
+    BOOST_LOG_SEV(lg, debug) << "Ending: " << builder_.current()->transform_id()
+                             << " (" << builder_.current()->guid() << ")";
+    builder_.end();
+
+    if (!detailed_tracing_enabled_)
+        return;
+
+    ensure_transform_position_not_empty();
+    transform_position_.pop();
+    current_directory_ = current_directory_.parent_path();
+    BOOST_LOG_SEV(lg, debug) << "Current directory is now: "
+                             << current_directory_.generic_string();
+}
+
+void file_backend::end_chain(const std::string& output) const {
+    if (detailed_tracing_enabled_) {
+        ensure_transform_position_not_empty();
+        const auto id(builder_.current()->transform_id());
+        const auto p(full_path_for_writing(id, "output"));
+        utility::filesystem::write(p, output);
+    }
+    end_chain();
+}
+
+void file_backend::start_transform(const std::string& transform_id,
+    const std::string& transform_instance_id) const {
+    start_transform(transform_id, transform_instance_id,empty);
+}
+
+void file_backend::start_transform(const std::string& transform_id,
+    const std::string& /*transform_instance_id*/,
+    const std::string& model_id) const {
+    builder_.start(transform_id, model_id);
+    BOOST_LOG_SEV(lg, debug) << "Starting: " << transform_id
+                             << " (" << builder_.current()->guid() << ")";
+}
+
+void file_backend::start_transform(const std::string& transform_id,
+    const std::string& transform_instance_id,
+    const std::string& model_id,
+    const std::string& input) const {
+    start_transform(transform_id, transform_instance_id, model_id);
+
+    if (detailed_tracing_enabled_) {
+        ensure_transform_position_not_empty();
+        const auto p(full_path_for_writing(transform_id, "input"));
+        utility::filesystem::write(p, input);
+        ++transform_position_.top();
+    }
+}
+
+void file_backend::end_transform() const {
+    BOOST_LOG_SEV(lg, debug) << "Ending: " << builder_.current()->transform_id()
+                             << " (" << builder_.current()->guid() << ")";
+    builder_.end();
+}
+
+void file_backend::end_transform(const std::string& output) const {
+    if (detailed_tracing_enabled_) {
+        ensure_transform_position_not_empty();
+        const auto id(builder_.current()->transform_id());
+        const auto p(full_path_for_writing(id, "output"));
+        utility::filesystem::write(p, output);
+        ++transform_position_.top();
+    }
+    end_transform();
 }
 
 bool file_backend::operator==(const file_backend& /*rhs*/) const {

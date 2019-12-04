@@ -29,21 +29,20 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/types/tracing_configuration.hpp"
-#include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/metrics.hpp"
 #include "dogen.tracing/types/metrics_builder.hpp"
+#include "dogen.tracing/types/backend.hpp"
 
 namespace dogen::tracing {
 
-class file_backend final {
+class file_backend final : public dogen::tracing::backend {
 public:
-    file_backend(const file_backend&) = default;
+    virtual ~file_backend() noexcept { }
 
 public:
-    explicit file_backend(const boost::optional<tracing_configuration>& cfg);
+    explicit file_backend(const tracing_configuration& cfg);
 
 public:
     const boost::optional<tracing_configuration> configuration() const {
@@ -51,9 +50,6 @@ public:
     }
 
 private:
-    void validate() const;
-    bool tracing_enabled() const;
-    bool detailed_tracing_enabled() const;
     void handle_output_directory() const;
     void handle_current_directory() const;
     void ensure_transform_position_not_empty() const;
@@ -69,100 +65,54 @@ private:
         const std::string& fn, const tracing_format tf) const;
 
 public:
-    /*virtual*/ void to_stream(std::ostream& s) const /*override*/;
+    virtual void to_stream(std::ostream& s) const override;
 
 public:
-    /**
-     * @brief Writes an initial input to the filesystem.
-     */
-    template<typename Ioable>
-    void add_initial_input(const std::string& input_id,
-        const Ioable& input) const {
-        if (!detailed_tracing_enabled())
-            return;
-
-        ensure_transform_position_not_empty();
-        const auto p(full_path_for_writing(input_id, "initial_input"));
-        utility::filesystem::write(p, input);
-        ++transform_position_.top();
-    }
-
     void add_references_graph(const std::string& root_vertex,
         const std::unordered_map<std::string, std::list<std::string>>&
-        edges_per_model) const;
+        edges_per_model) const override;
 
-    void start_chain(const std::string& transform_id) const;
-    void start_chain(const std::string& transform_id,
-        const std::string& model_id) const;
+public:
+    void start_tracing(const std::string& run_id,
+        const std::string& input_id, const std::string& input) const override;
+    void end_tracing() const override;
 
-    template<typename Ioable>
+public:
     void start_chain(const std::string& transform_id,
+        const std::string& transform_instance_id) const override;
+    void start_chain(const std::string& transform_id,
+        const std::string& transform_instance_id,
+        const std::string& model_id) const override;
+    void start_chain(const std::string& transform_id,
+        const std::string& transform_instance_id,
         const std::string& model_id,
-        const Ioable& input) const {
-        start_chain(transform_id, model_id);
+        const std::string& input) const override;
 
-        if (!detailed_tracing_enabled())
-            return;
+    void end_chain() const override;
+    void end_chain(const std::string& output) const override;
 
-        ensure_transform_position_not_empty();
-        const auto p(full_path_for_writing(transform_id, "input"));
-        utility::filesystem::write(p, input);
-        ++transform_position_.top();
-    }
-
-    void start_transform(const std::string& transform_id) const;
+public:
 
     void start_transform(const std::string& transform_id,
-        const std::string& model_id) const;
-
-    template<typename Ioable>
+        const std::string& transform_instance_id) const override;
     void start_transform(const std::string& transform_id,
+        const std::string& transform_instance_id,
+        const std::string& model_id) const override;
+
+    void start_transform(const std::string& transform_id,
+        const std::string& transform_instance_id,
         const std::string& model_id,
-        const Ioable& input) const {
-        start_transform(transform_id, model_id);
+        const std::string& input) const override;
 
-        if (detailed_tracing_enabled()) {
-            ensure_transform_position_not_empty();
-            const auto p(full_path_for_writing(transform_id, "input"));
-            utility::filesystem::write(p, input);
-            ++transform_position_.top();
-        }
-    }
-
-    void end_chain() const;
-
-    template<typename Ioable>
-    void end_chain(const Ioable& output) const {
-        if (detailed_tracing_enabled()) {
-            ensure_transform_position_not_empty();
-            const auto id(builder_.current()->transform_id());
-            const auto p(full_path_for_writing(id, "output"));
-            utility::filesystem::write(p, output);
-        }
-        end_chain();
-    }
-
-    void end_transform() const;
-
-    template<typename Ioable>
-    void end_transform(const Ioable& output) const {
-        if (detailed_tracing_enabled()) {
-            ensure_transform_position_not_empty();
-            const auto id(builder_.current()->transform_id());
-            const auto p(full_path_for_writing(id, "output"));
-            utility::filesystem::write(p, output);
-            ++transform_position_.top();
-        }
-        end_transform();
-    }
-
-    void end_tracing() const;
+    void end_transform() const override;
+    void end_transform(const std::string& output) const override;
 
 public:
     bool operator==(const file_backend& rhs) const;
 
 private:
-    const boost::optional<tracing_configuration> configuration_;
+    const bool detailed_tracing_enabled_;
+    const tracing_configuration configuration_;
     mutable metrics_builder builder_;
     mutable std::stack<unsigned int> transform_position_;
     mutable boost::filesystem::path current_directory_;

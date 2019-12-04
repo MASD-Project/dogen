@@ -19,8 +19,21 @@
  *
  */
 #include <ostream>
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/io/backend_io.hpp"
+#include "dogen.tracing/types/tracing_error.hpp"
 #include "dogen.tracing/types/throw_backend.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("tracing.relational_backend"));
+
+const std::string no_relational_support(
+    "Dogen compiled without relational support.");
+
+}
 
 namespace dogen::tracing {
 
@@ -35,56 +48,82 @@ void throw_backend::to_stream(std::ostream& s) const {
 void throw_backend::start_tracing(const std::string& /*run_id*/,
     const std::string& /*input_id*/,
     const std::string& /*input*/) const {
+    BOOST_LOG_SEV(lg, error) << no_relational_support;
+    BOOST_THROW_EXCEPTION(tracing_error(no_relational_support));
 }
 
 void throw_backend::end_tracing() const {
+    BOOST_LOG_SEV(lg, error) << no_relational_support;
+    BOOST_THROW_EXCEPTION(tracing_error(no_relational_support));
 }
 
 void throw_backend::add_references_graph(const std::string& /*root_vertex*/,
     const std::unordered_map<std::string, std::list<std::string>>&
     /*edges_per_model*/) const {
+    BOOST_LOG_SEV(lg, error) << no_relational_support;
+    BOOST_THROW_EXCEPTION(tracing_error(no_relational_support));
 }
 
 void throw_backend::start_chain(const std::string& /*transform_id*/,
     const std::string& /*transform_instance_id*/) const {
+    BOOST_LOG_SEV(lg, error) << no_relational_support;
+    BOOST_THROW_EXCEPTION(tracing_error(no_relational_support));
 }
 
 void throw_backend::start_chain(const std::string& /*transform_id*/,
     const std::string& /*transform_instance_id*/,
     const std::string& /*model_id*/) const {
+    BOOST_LOG_SEV(lg, error) << no_relational_support;
+    BOOST_THROW_EXCEPTION(tracing_error(no_relational_support));
 }
 
 void throw_backend::start_chain(const std::string& /*transform_id*/,
     const std::string& /*transform_instance_id*/,
     const std::string& /*model_id*/,
     const std::string& /*input*/) const {
+    BOOST_LOG_SEV(lg, error) << no_relational_support;
+    BOOST_THROW_EXCEPTION(tracing_error(no_relational_support));
 }
 
 void throw_backend::end_chain() const {
+    BOOST_LOG_SEV(lg, error) << no_relational_support;
+    BOOST_THROW_EXCEPTION(tracing_error(no_relational_support));
 }
 
 void throw_backend::end_chain(const std::string& /*output*/) const {
+    BOOST_LOG_SEV(lg, error) << no_relational_support;
+    BOOST_THROW_EXCEPTION(tracing_error(no_relational_support));
 }
 
 void throw_backend::start_transform(const std::string& /*transform_id*/,
     const std::string& /*transform_instance_id*/) const {
+    BOOST_LOG_SEV(lg, error) << no_relational_support;
+    BOOST_THROW_EXCEPTION(tracing_error(no_relational_support));
 }
 
 void throw_backend::start_transform(const std::string& /*transform_id*/,
     const std::string& /*transform_instance_id*/,
     const std::string& /*model_id*/) const {
+    BOOST_LOG_SEV(lg, error) << no_relational_support;
+    BOOST_THROW_EXCEPTION(tracing_error(no_relational_support));
 }
 
 void throw_backend::start_transform(const std::string& /*transform_id*/,
     const std::string& /*transform_instance_id*/,
     const std::string& /*model_id*/,
     const std::string& /*input*/) const {
+    BOOST_LOG_SEV(lg, error) << no_relational_support;
+    BOOST_THROW_EXCEPTION(tracing_error(no_relational_support));
 }
 
 void throw_backend::end_transform() const {
+    BOOST_LOG_SEV(lg, error) << no_relational_support;
+    BOOST_THROW_EXCEPTION(tracing_error(no_relational_support));
 }
 
 void throw_backend::end_transform(const std::string& /*output*/) const {
+    BOOST_LOG_SEV(lg, error) << no_relational_support;
+    BOOST_THROW_EXCEPTION(tracing_error(no_relational_support));
 }
 
 }

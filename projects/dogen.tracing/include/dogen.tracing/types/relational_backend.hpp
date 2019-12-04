@@ -25,30 +25,81 @@
 #pragma once
 #endif
 
+#include "dogen/config.hpp"
+#ifdef DOGEN_HAVE_RELATIONAL_MODEL
 #include <string>
-#include <boost/optional.hpp>
+#include <odb/database.hxx>
+#include <odb/transaction.hxx>
+#include <odb/pgsql/database.hxx>
+#include <odb/schema-catalog.hxx>
+#include "dogen.tracing/types/backend.hpp"
 #include "dogen/types/tracing_configuration.hpp"
 #include "dogen/types/database_configuration.hpp"
 
 namespace dogen::tracing {
 
-class relational_backend {
+/**
+ * @brief Writes tracing information to a relational database.
+ */
+class relational_backend : public dogen::tracing::backend {
 public:
-    virtual ~relational_backend() = 0;
+    relational_backend(const tracing_configuration& tcfg,
+        const database_configuration& dbcfg);
 
 public:
-    /*virtual*/ void to_stream(std::ostream& s) const /*override*/;
+    virtual ~relational_backend() noexcept { }
 
-    virtual void add_initial_input(const std::string& input_id,
-        const std::string& input) const = 0;
+public:
+    virtual void to_stream(std::ostream& s) const override;
+
+public:
+    void start_tracing(const std::string& run_id,
+        const std::string& input_id,
+        const std::string& input) const override;
+    void end_tracing() const override;
+
+public:
+    void add_references_graph(const std::string& root_vertex,
+        const std::unordered_map<std::string, std::list<std::string>>&
+        edges_per_model) const override;
+
+public:
+    void start_chain(const std::string& transform_id,
+        const std::string& transform_instance_id) const override;
+    void start_chain(const std::string& transform_id,
+        const std::string& transform_instance_id,
+        const std::string& model_id) const override;
+    void start_chain(const std::string& transform_id,
+        const std::string& transform_instance_id,
+        const std::string& model_id,
+        const std::string& input) const override;
+
+    void end_chain() const override;
+    void end_chain(const std::string& output) const override;
+
+public:
+    void start_transform(const std::string& transform_id,
+        const std::string& transform_instance_id) const override;
+    void start_transform(const std::string& transform_id,
+        const std::string& transform_instance_id,
+        const std::string& model_id) const override;
+    void start_transform(const std::string& transform_id,
+        const std::string& transform_instance_id,
+        const std::string& model_id,
+        const std::string& input) const override;
+
+    void end_transform() const override;
+    void end_transform(const std::string& output) const override;
+
+private:
+    const tracing_configuration tracing_configuration_;
+    const database_configuration database_configuration_;
+    boost::shared_ptr<odb::pgsql::database> database_;
+
 };
 
-inline relational_backend::~relational_backend() {}
-
-relational_backend* make_relational_backend(
-    const boost::optional<tracing_configuration>& tcfg,
-    const boost::optional<database_configuration>& dbcfg);
-
 }
+
+#endif // DOGEN_HAVE_RELATIONAL_MODEL
 
 #endif
