@@ -63,22 +63,27 @@ tracer::make_backend(const boost::optional<tracing_configuration>& tcfg,
      * tracer. It has very little cost.
      */
     const bool tracing_enabled(!!tcfg);
-    if (!tracing_enabled)
+    if (!tracing_enabled) {
+        BOOST_LOG_SEV(lg, debug) << "Tracing not enabled, using null backend.";
         return boost::make_shared<null_backend>();
+    }
 
     /*
      * If the user requested the file tracing backend, create it.
      */
     const auto be(tcfg->backend());
     const auto run_id(generate_guid());
-    if (be != tracing_backend::file)
+    if (be == tracing_backend::file) {
+        BOOST_LOG_SEV(lg, debug) << "File tracing backend enabled.";
         return boost::make_shared<file_backend>(*tcfg, run_id);
+    }
 
     /*
      * If the user requested a relational backend, create it if this
      * dogen build supports it. Otherwise, throw.
      */
-    if (be != tracing_backend::relational_database) {
+    if (be == tracing_backend::relational_database) {
+        BOOST_LOG_SEV(lg, debug) << "Relational tracing backend enabled.";
 #ifdef DOGEN_HAVE_RELATIONAL_MODEL
         return boost::make_shared<relational_backend>(*tcfg, *dbcfg, run_id);
 #else

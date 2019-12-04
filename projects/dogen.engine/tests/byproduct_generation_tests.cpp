@@ -12,6 +12,7 @@
 #include "dogen.extraction/io/meta_model/operation_io.hpp"
 #include "dogen.engine/types/transforms/scoped_context_manager.hpp"
 #include "dogen.engine/types/transforms/extraction_model_production_chain.hpp"
+#include "dogen/types/tracing_backend.hpp"
 
 namespace  {
 
@@ -45,6 +46,7 @@ using boost::filesystem::path;
 using dogen::configuration;
 using dogen::tracing_level;
 using dogen::tracing_format;
+using dogen::tracing_backend;
 using dogen::reporting_style;
 using dogen::mock_configuration_factory;
 using dogen::utility::test_data::dogen_generation;
@@ -80,6 +82,7 @@ configuration setup_tracing_configuration(const path& target,
     r.tracing()->format(tf);
     r.tracing()->guids_enabled(enable_guids);
     r.tracing()->use_short_names(use_short_names);
+    r.tracing()->backend(tracing_backend::file);
 
     return r;
 }
