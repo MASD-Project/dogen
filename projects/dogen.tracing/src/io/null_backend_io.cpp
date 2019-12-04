@@ -20,11 +20,11 @@
  */
 #include <ostream>
 #include "dogen.tracing/io/backend_io.hpp"
-#include "dogen.tracing/io/null_tracer_io.hpp"
+#include "dogen.tracing/io/null_backend_io.hpp"
 
 namespace dogen::tracing {
 
-std::ostream& operator<<(std::ostream& s, const null_tracer& v) {
+std::ostream& operator<<(std::ostream& s, const null_backend& v) {
     v.to_stream(s);
     return(s);
 }

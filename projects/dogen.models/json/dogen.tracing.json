@@ -148,7 +148,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "null_tracer",
+      "name": "null_backend",
       "parents": [
         "backend"
       ],

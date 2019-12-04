@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TRACING_TYPES_NULL_TRACER_HPP
-#define DOGEN_TRACING_TYPES_NULL_TRACER_HPP
+#ifndef DOGEN_TRACING_TYPES_NULL_BACKEND_HPP
+#define DOGEN_TRACING_TYPES_NULL_BACKEND_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,21 +31,21 @@
 
 namespace dogen::tracing {
 
-class null_tracer final /*: public dogen::tracing::backend*/ {
+class null_backend final /*: public dogen::tracing::backend*/ {
 public:
-    null_tracer() = default;
-    null_tracer(const null_tracer&) = default;
-    null_tracer(null_tracer&&) = default;
-    null_tracer& operator=(const null_tracer&) = default;
+    null_backend() = default;
+    null_backend(const null_backend&) = default;
+    null_backend(null_backend&&) = default;
+    null_backend& operator=(const null_backend&) = default;
 
-    virtual ~null_tracer() noexcept { }
+    virtual ~null_backend() noexcept { }
 
 public:
     void to_stream(std::ostream& s) const /*override*/;
 
 public:
-    bool operator==(const null_tracer& rhs) const;
-    bool operator!=(const null_tracer& rhs) const {
+    bool operator==(const null_backend& rhs) const;
+    bool operator!=(const null_backend& rhs) const {
         return !this->operator==(rhs);
     }
 

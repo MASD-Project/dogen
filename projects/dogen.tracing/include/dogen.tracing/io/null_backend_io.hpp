@@ -18,28 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen.tracing/io/backend_io.hpp"
-#include "dogen.tracing/types/null_tracer.hpp"
+#ifndef DOGEN_TRACING_IO_NULL_BACKEND_IO_HPP
+#define DOGEN_TRACING_IO_NULL_BACKEND_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen.tracing/types/null_backend.hpp"
 
 namespace dogen::tracing {
 
-// void null_tracer::to_stream(std::ostream& s) const {
-//     s << " { "
-//       << "\"__type__\": " << "\"dogen::tracing::null_tracer\"" << ", "
-//       << "\"__parent_0__\": ";
-//     dogen::tracing::backend::to_stream(s);
-//     s << " }";
-// }
-
-// bool null_tracer::equals(const dogen::tracing::backend& other) const {
-//     const null_tracer* const p(dynamic_cast<const null_tracer* const>(&other));
-//     if (!p) return false;
-//     return *this == *p;
-// }
-
-bool null_tracer::operator==(const null_tracer& /*rhs*/) const {
-    return true;
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::tracing::null_backend& v);
 
 }
+
+#endif
