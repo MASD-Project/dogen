@@ -134,3 +134,6 @@ set SEARCH_PATH to "DOGEN", "$user", "public";
 \pset null '(null)'
 
 \unset QUIET
+
+\t on
+\pset format unaligned
