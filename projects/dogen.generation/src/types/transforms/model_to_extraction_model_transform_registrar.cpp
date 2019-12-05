@@ -32,7 +32,7 @@ static logger lg(logger_factory(
         "generation.meta_model.model_to_extraction_model_transform_registrar"));
 
 const std::string no_transforms("No model to text transforms provided.");
-const std::string null_transform("Transform supplied is null");
+const std::string null_transform("Transform supplied is null.");
 const std::string technical_space_taken(
     "Transform already registered for technical space: ");
 
@@ -59,7 +59,7 @@ register_transform(
         BOOST_THROW_EXCEPTION(registrar_error(msg));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Registrered transform: " << t->id();
+    BOOST_LOG_SEV(lg, debug) << "Registered transform: " << t->id();
 }
 
 void model_to_extraction_model_transform_registrar::validate() const {

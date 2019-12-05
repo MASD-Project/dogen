@@ -66,6 +66,10 @@ public:
     virtual ~relational_backend() noexcept { }
 
 public:
+    virtual std::string id() const override;
+    virtual dogen::tracing_backend tracing_backend() const override;
+
+public:
     virtual void to_stream(std::ostream& s) const override;
 
 public:

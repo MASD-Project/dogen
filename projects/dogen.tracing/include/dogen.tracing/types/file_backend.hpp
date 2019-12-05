@@ -46,6 +46,10 @@ public:
         const std::string& run_id);
 
 public:
+    virtual std::string id() const override;
+    virtual dogen::tracing_backend tracing_backend() const override;
+
+public:
     const boost::optional<tracing_configuration> configuration() const {
         return configuration_;
     }

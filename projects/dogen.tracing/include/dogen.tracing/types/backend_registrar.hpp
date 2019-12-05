@@ -18,32 +18,44 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen.tracing/io/backend_io.hpp"
-#include "dogen.tracing/types/null_backend.hpp"
+#ifndef DOGEN_TRACING_TYPES_BACKEND_REGISTRAR_HPP
+#define DOGEN_TRACING_TYPES_BACKEND_REGISTRAR_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-const std::string id("tracing.file_backend");
-
-}
+#include <unordered_map>
+#include <boost/shared_ptr.hpp>
+#include "dogen/types/tracing_backend.hpp"
+#include "dogen.tracing/types/backend_fwd.hpp"
 
 namespace dogen::tracing {
 
-void null_backend::to_stream(std::ostream& s) const {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::tracing::null_backend\"" << ", "
-      << "\"__parent_0__\": ";
-    dogen::tracing::backend::to_stream(s);
-    s << " }";
+
+class backend_registrar final {
+public:
+    /**
+     * @brief Registers a backend.
+     */
+    void register_backend(const boost::shared_ptr<backend> b);
+
+    /**
+     * @brief Ensures the registrar is ready to be used.
+     */
+    void validate() const;
+
+    /**
+     * @brief Returns the requested backend, if one exists. Otherwise
+     * throws.
+     */
+    const boost::shared_ptr<backend> obtain_backend(const tracing_backend tb);
+
+private:
+    std::unordered_map<dogen::tracing_backend,
+                       boost::shared_ptr<backend>> backends_;
+};
+
 }
 
-std::string null_backend::id() const {
-    return ::id;
-}
-
-dogen::tracing_backend null_backend::tracing_backend() const {
-    return dogen::tracing_backend::dev_null;
-}
-
-}
+#endif

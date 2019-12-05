@@ -18,32 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen.tracing/io/backend_io.hpp"
-#include "dogen.tracing/types/null_backend.hpp"
+#ifndef DOGEN_TRACING_TYPES_REGISTRAR_ERROR_HPP
+#define DOGEN_TRACING_TYPES_REGISTRAR_ERROR_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-const std::string id("tracing.file_backend");
-
-}
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace dogen::tracing {
 
-void null_backend::to_stream(std::ostream& s) const {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::tracing::null_backend\"" << ", "
-      << "\"__parent_0__\": ";
-    dogen::tracing::backend::to_stream(s);
-    s << " }";
+class registrar_error : public virtual std::exception, public virtual boost::exception {
+public:
+    registrar_error() = default;
+    ~registrar_error() noexcept = default;
+
+public:
+    explicit registrar_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
 }
 
-std::string null_backend::id() const {
-    return ::id;
-}
-
-dogen::tracing_backend null_backend::tracing_backend() const {
-    return dogen::tracing_backend::dev_null;
-}
-
-}
+#endif

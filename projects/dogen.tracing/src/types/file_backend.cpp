@@ -37,8 +37,10 @@
 
 namespace {
 
+const std::string id("tracing.file_backend");
+
 using namespace dogen::utility::log;
-auto lg(logger_factory("tracing.file_backend"));
+auto lg(logger_factory(id));
 
 const char zero('0');
 const std::string empty;
@@ -114,6 +116,14 @@ file_backend::file_backend(const tracing_configuration& cfg,
         return;
 
     transform_position_.push(0);
+}
+
+std::string file_backend::id() const {
+    return ::id;
+}
+
+dogen::tracing_backend file_backend::tracing_backend() const {
+    return dogen::tracing_backend::file;
 }
 
 void file_backend::handle_output_directory() const {

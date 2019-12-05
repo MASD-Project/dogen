@@ -39,8 +39,10 @@ void dumm_contents() { }
 
 namespace {
 
+const std::string id("tracing.relational_backend");
+
 using namespace dogen::utility::log;
-auto lg(logger_factory("tracing.relational_backend"));
+auto lg(logger_factory(id));
 
 const std::string empty;
 const std::string directory_missing("Tracing data directory must be supplied.");
@@ -52,6 +54,14 @@ const std::string no_database_configuration(
 }
 
 namespace dogen::tracing {
+
+std::string relational_backend::id() const {
+    return ::id;
+}
+
+dogen::tracing_backend relational_backend::tracing_backend() const {
+    return dogen::tracing_backend::file;
+}
 
 void relational_backend::to_stream(std::ostream& s) const {
     s << " { "
@@ -68,8 +78,6 @@ relational_backend::relational_backend(const tracing_configuration& tcfg,
                              << tracing_configuration_;
     BOOST_LOG_SEV(lg, trace) << "Database configuration: "
                              << database_configuration_;
-
-
 
     using odb::pgsql::database;
     database_ = boost::make_shared<database>(dbcfg.user(),

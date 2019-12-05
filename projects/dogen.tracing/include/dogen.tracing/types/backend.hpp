@@ -31,6 +31,7 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
+#include "dogen/types/tracing_backend.hpp"
 #include "dogen/types/tracing_configuration.hpp"
 #include "dogen/types/database_configuration.hpp"
 
@@ -45,6 +46,17 @@ public:
 
 public:
     virtual void to_stream(std::ostream& s) const;
+
+public:
+    /**
+     * @brief Returns the identity of this backend.
+     */
+    virtual std::string id() const = 0;
+
+    /**
+     * @brief Tracing backend supported by this backend.
+     */
+    virtual dogen::tracing_backend tracing_backend() const = 0;
 
 public:
     /**

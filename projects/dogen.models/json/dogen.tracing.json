@@ -153,6 +153,26 @@
         "dogen::pretty_printable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "backend_registrar",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "backends_",
+          "type": "std::unordered_map<tracing_backend, boost::shared_ptr<backend>>"
+        }
+      ]
+    },
+    {
+      "name": "registrar_error",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
