@@ -18,6 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.tracing/types/relational_backend.hpp"
+#ifdef DOGEN_HAVE_RELATIONAL_MODEL
 #include <boost/make_shared.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/throw_exception.hpp>
@@ -26,10 +28,10 @@
 #include "dogen/io/database_configuration_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/tracing_error.hpp"
-#include "dogen.tracing/types/relational_backend.hpp"
 #include "dogen.relational/types/tracing/run.hpp"
 #include "dogen.relational/odb/tracing/run-odb.hxx"
 #include "dogen.relational/odb/tracing/run-odb-pgsql.hxx"
+#include "dogen.tracing/types/relational_backend.hpp"
 
 namespace {
 
@@ -147,3 +149,4 @@ void relational_backend::end_transform(const std::string& /*output*/) const {
 }
 
 }
+#endif
