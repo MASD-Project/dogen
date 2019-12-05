@@ -27,7 +27,7 @@
 
 #include "dogen/config.hpp"
 #ifndef DOGEN_HAVE_RELATIONAL_MODEL
-
+#include <sstream>
 namespace dogen::tracing {
 
 class relational_backend {
