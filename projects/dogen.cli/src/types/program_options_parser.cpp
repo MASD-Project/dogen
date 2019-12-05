@@ -99,6 +99,7 @@ const std::string database_password_arg("database-password");
 const std::string database_engine_arg("database-engine");
 const std::string database_engine_postgres("postgres");
 const std::string database_engine_sqlite("sqlite");
+const std::string database_schema_gen_arg("database-generate-schema");
 
 const std::string model_processing_compatibility_mode_arg(
     "compatibility-mode-enabled");
@@ -224,7 +225,10 @@ options_description make_top_level_visible_options_description() {
         ("database-password", value<std::string>(),
             "Password for the user.")
         ("database-engine", value<std::string>(),
-            "Database engine. Valid values: postgresql, sqlite.");
+            "Database engine. Valid values: postgresql, sqlite.")
+        ("database-generate-schema",
+            "If true, deletes all tables and regenerates them. Otherwise, "
+            "assumes their presence.");
 
     r.add(db);
 
@@ -594,6 +598,11 @@ read_database_configuration(const variables_map& vm) {
              r.engine(database_engine::sqlite);
          else
              BOOST_THROW_EXCEPTION(parser_exception(invalid_engine + s));
+    }
+
+    if (vm.count(database_schema_gen_arg) != 0) {
+        found = true;
+        r.generate_schema(true);
     }
 
     if (!found)

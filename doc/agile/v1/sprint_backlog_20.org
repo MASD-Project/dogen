@@ -12,25 +12,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-12-04 Wed 23:42]
+#+CAPTION: Clock summary at [2019-12-05 Thu 00:10]
 | <75>                                                 |         |       |       |       |
 | Headline                                             | Time    |       |       |     % |
 |------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                         | *47:49* |       |       | 100.0 |
+| *Total time*                                         | *48:15* |       |       | 100.0 |
 |------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                              | 47:49   |       |       | 100.0 |
-| Active                                               |         | 47:49 |       | 100.0 |
-| Edit release notes for previous sprint               |         |       | 11:24 |  23.8 |
-| Create a demo and presentation for previous sprint   |         |       |  2:31 |   5.3 |
-| Sprint and product backlog grooming                  |         |       |  3:32 |   7.4 |
+| Stories                                              | 48:15   |       |       | 100.0 |
+| Active                                               |         | 48:15 |       | 100.0 |
+| Edit release notes for previous sprint               |         |       | 11:24 |  23.6 |
+| Create a demo and presentation for previous sprint   |         |       |  2:31 |   5.2 |
+| Sprint and product backlog grooming                  |         |       |  3:32 |   7.3 |
 | Fix OSX build errors                                 |         |       |  0:25 |   0.9 |
-| Fix broken build due to incorrect postgres library   |         |       |  2:31 |   5.3 |
+| Fix broken build due to incorrect postgres library   |         |       |  2:31 |   5.2 |
 | Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   2.7 |
 | Create a profile called =untested=                   |         |       |  0:17 |   0.6 |
 | Remove =odb_properties= in element properties        |         |       |  2:36 |   5.4 |
 | Allow non-throwing casts for enums                   |         |       |  0:41 |   1.4 |
-| Add type overrides to primitives                     |         |       |  8:55 |  18.6 |
-| Add relational tracing support                       |         |       | 12:27 |  26.0 |
+| Add type overrides to primitives                     |         |       |  8:55 |  18.5 |
+| Add relational tracing support                       |         |       | 12:53 |  26.7 |
 | Nightly code coverage is not being reported          |         |       |  0:23 |   0.8 |
 | Move member variable name to assets                  |         |       |  0:09 |   0.3 |
 | Create a string-based tracing backend interface      |         |       |  0:40 |   1.4 |
@@ -584,6 +584,8 @@ Notes:
 
 *** STARTED Add relational tracing support                            :story:
     :LOGBOOK:
+    CLOCK: [2019-12-05 Thu 00:00]--[2019-12-05 Thu 00:10] =>  0:10
+    CLOCK: [2019-12-04 Wed 23:43]--[2019-12-04 Wed 23:59] =>  0:16
     CLOCK: [2019-12-04 Wed 23:21]--[2019-12-04 Wed 23:42] =>  0:21
     CLOCK: [2019-12-04 Wed 21:54]--[2019-12-04 Wed 23:20] =>  1:26
     CLOCK: [2019-12-04 Wed 21:01]--[2019-12-04 Wed 21:53] =>  0:52

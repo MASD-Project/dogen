@@ -22,6 +22,8 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/config.hpp"
+#include "dogen/io/tracing_configuration_io.hpp"
+#include "dogen/io/database_configuration_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/tracing_error.hpp"
 #include "dogen.tracing/types/relational_backend.hpp"
@@ -55,13 +57,27 @@ relational_backend::relational_backend(const tracing_configuration& tcfg,
     : tracing_configuration_(tcfg), database_configuration_(dbcfg),
       run_id_(run_id) {
 
+    BOOST_LOG_SEV(lg, debug) << "Tracer initialised.";
+    BOOST_LOG_SEV(lg, trace) << "Tracing configuration: "
+                             << tracing_configuration_;
+    BOOST_LOG_SEV(lg, trace) << "Database configuration: "
+                             << database_configuration_;
+
+
+
     using odb::pgsql::database;
     database_ = boost::make_shared<database>(dbcfg.user(),
         dbcfg.password(), dbcfg.name(), dbcfg.host(), dbcfg.port());
 
-    odb::transaction t(database_->begin());
-    odb::schema_catalog::create_schema(*database_);
-    t.commit();
+
+    if (database_configuration_.generate_schema()) {
+        BOOST_LOG_SEV(lg, info) << "Generating database schema.";
+        odb::transaction t(database_->begin());
+        odb::schema_catalog::create_schema(*database_);
+        t.commit();
+        BOOST_LOG_SEV(lg, info) << "Finished generating database schema.";
+    } else
+        BOOST_LOG_SEV(lg, info) << "Not generating database schema.";
 }
 
 void relational_backend::start_tracing(const std::string& input_id,
