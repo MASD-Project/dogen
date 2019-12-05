@@ -19,7 +19,11 @@
  *
  */
 #include "dogen.tracing/types/relational_backend.hpp"
-#ifdef DOGEN_HAVE_RELATIONAL_MODEL
+#ifndef DOGEN_HAVE_RELATIONAL_MODEL
+// dummy function to suppress ranlib warnings
+void dumm_contents() { }
+#else
+
 #include <boost/make_shared.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/throw_exception.hpp>

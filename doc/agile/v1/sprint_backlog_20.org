@@ -12,15 +12,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-12-05 Thu 00:10]
+#+CAPTION: Clock summary at [2019-12-05 Thu 08:18]
 | <75>                                                 |         |       |       |       |
 | Headline                                             | Time    |       |       |     % |
 |------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                         | *48:15* |       |       | 100.0 |
+| *Total time*                                         | *48:33* |       |       | 100.0 |
 |------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                              | 48:15   |       |       | 100.0 |
-| Active                                               |         | 48:15 |       | 100.0 |
-| Edit release notes for previous sprint               |         |       | 11:24 |  23.6 |
+| Stories                                              | 48:33   |       |       | 100.0 |
+| Active                                               |         | 48:33 |       | 100.0 |
+| Edit release notes for previous sprint               |         |       | 11:24 |  23.5 |
 | Create a demo and presentation for previous sprint   |         |       |  2:31 |   5.2 |
 | Sprint and product backlog grooming                  |         |       |  3:32 |   7.3 |
 | Fix OSX build errors                                 |         |       |  0:25 |   0.9 |
@@ -29,8 +29,8 @@
 | Create a profile called =untested=                   |         |       |  0:17 |   0.6 |
 | Remove =odb_properties= in element properties        |         |       |  2:36 |   5.4 |
 | Allow non-throwing casts for enums                   |         |       |  0:41 |   1.4 |
-| Add type overrides to primitives                     |         |       |  8:55 |  18.5 |
-| Add relational tracing support                       |         |       | 12:53 |  26.7 |
+| Add type overrides to primitives                     |         |       |  8:55 |  18.4 |
+| Add relational tracing support                       |         |       | 13:11 |  27.2 |
 | Nightly code coverage is not being reported          |         |       |  0:23 |   0.8 |
 | Move member variable name to assets                  |         |       |  0:09 |   0.3 |
 | Create a string-based tracing backend interface      |         |       |  0:40 |   1.4 |
@@ -581,6 +581,13 @@ Notes:
 - in fact the choice of solution is not entirely tactical, as this
   will still be useful going forward.
 - we need to ensure type maps are outputted first.
+
+*** STARTED Laptop issues                                             :story:
+    :LOGBOOK:
+    CLOCK: [2019-12-05 Thu 08:00]--[2019-12-05 Thu 08:18] =>  0:18
+    :END:
+
+Time spent sorting out laptop.
 
 *** STARTED Add relational tracing support                            :story:
     :LOGBOOK:
