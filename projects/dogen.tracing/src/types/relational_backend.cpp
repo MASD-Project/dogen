@@ -49,7 +49,7 @@ namespace dogen::tracing {
 
 void relational_backend::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"dogen::tracing::file_tracer\"" << " }";
+      << "\"__type__\": " << "\"dogen::tracing::relational_backend\"" << " }";
 }
 
 relational_backend::relational_backend(const tracing_configuration& tcfg,

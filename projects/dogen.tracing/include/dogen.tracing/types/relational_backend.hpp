@@ -26,7 +26,22 @@
 #endif
 
 #include "dogen/config.hpp"
-#ifdef DOGEN_HAVE_RELATIONAL_MODEL
+#ifndef DOGEN_HAVE_RELATIONAL_MODEL
+
+namespace dogen::tracing {
+
+class relational_backend {
+public:
+    void to_stream(std::ostream& s) const {
+        s << " { "
+          << "\"__type__\": " << "\"dogen::tracing::relational_backend\"" << " }";
+    }
+};
+
+}
+
+#else
+
 #include <string>
 #include <odb/database.hxx>
 #include <odb/transaction.hxx>
