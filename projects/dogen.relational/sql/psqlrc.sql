@@ -57,3 +57,80 @@ set SEARCH_PATH to "DOGEN", "$user", "public";
 -- \set AUTOCOMMIT OFF
 
 \unset QUIET
+
+-- Official docs: http://www.postgresql.org/docs/9.3/static/app-psql.html
+-- Unofficial docs: http://robots.thoughtbot.com/improving-the-command-line-postgres-experience
+
+-- Don't display the "helpful" message on startup.
+\set QUIET 1
+\pset null '[NULL]'
+
+-- http://www.postgresql.org/docs/9.3/static/app-psql.html#APP-PSQL-PROMPTING
+\set PROMPT1 '%[%033[1m%]%M %n@%/%R%[%033[0m%]%# '
+-- PROMPT2 is printed when the prompt expects more input, like when you type
+-- SELECT * FROM<enter>. %R shows what type of input it expects.
+\set PROMPT2 '[more] %R > '
+
+-- Show how long each query takes to execute
+\timing
+
+-- Use best available output format
+\x auto
+\set VERBOSITY verbose
+\set HISTFILE ~/.psql_history- :DBNAME
+\set HISTCONTROL ignoredups
+\set COMP_KEYWORD_CASE upper
+\unset QUIET
+
+-- psql can't check for a file's existence, so we'll provide an empty local
+-- file that users can override with their custom dotfiles. To set your own
+-- personal settings, place your own file in ~/.psqlrc.local
+\i ~/.psqlrc.local
+
+\set PROMPT1 '(%n@%M:%>) [%/] > '
+\set PROMPT2 ''
+
+-- Put this alias in .bashrc to turn on session logging
+-- alias psql='psql -eL /tmp/psql.log'
+\timing on
+\setenv LESS -imx4F
+\x auto
+
+-- Put a space in front of queries you don't want to save
+\set HISTCONTROL ignorespace
+\set HISTFILE ~/.psql_history- :DBNAME
+\set HISTSIZE 20000
+-- Huge history file -- ctrl-r is useful
+\pset null '[NULL]'
+-- Don't exit with ctrl-d unless you press it 5 times
+\set IGNOREEOF 5
+
+\set QUIET 1
+
+-- Errors are ignored in interactive sessions,
+-- and not when reading script files.
+\set ON_ERROR_ROLLBACK interactive
+
+-- To have all queries display query times.
+\timing
+
+-- Verbose error reports.
+\set VERBOSITY verbose
+
+-- Use table format (with headers across the top) by default,
+-- but switch to expanded table format when there's a lot of data,
+-- which makes it much easier to read.
+\x auto
+
+-- Use a separate history file per-database.
+\set HISTFILE ~/.psql_history- :DBNAME
+
+-- If a command is run more than once in a row,
+-- only store it once in the history.
+\set HISTCONTROL ignoredups
+
+-- By default, NULL displays as an empty space. Is it actually an empty
+-- string, or is it null? This makes that distinction visible.
+\pset null '(null)'
+
+\unset QUIET
