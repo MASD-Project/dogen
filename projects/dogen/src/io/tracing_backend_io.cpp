@@ -33,6 +33,9 @@ std::ostream& operator<<(std::ostream& s, const tracing_backend& v) {
     case tracing_backend::invalid:
         attr = "\"invalid\"";
         break;
+    case tracing_backend::dev_null:
+        attr = "\"dev_null\"";
+        break;
     case tracing_backend::file:
         attr = "\"file\"";
         break;

@@ -32,8 +32,9 @@ namespace dogen {
  */
 enum class tracing_backend : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
-    file = 1, ///< Write tracing information to files.
-    relational_database = 2 ///< Write tracing information to a relational database.
+    dev_null = 1, ///< Write tracing information to /dev/null.
+    file = 2, ///< Write tracing information to files.
+    relational_database = 3 ///< Write tracing information to a relational database.
 };
 
 }
