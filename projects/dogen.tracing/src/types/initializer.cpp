@@ -18,12 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.tracing/types/tracer.hpp"
+#include "dogen.tracing/types/file_backend_factory.hpp"
+#include "dogen.tracing/types/relational_backend_factory.hpp"
 #include "dogen.tracing/types/initializer.hpp"
 
 namespace dogen::tracing {
 
-bool initializer::operator==(const initializer& /*rhs*/) const {
-    return true;
+void initializer::initialize() {
+    register_backend_factory<file_backend_factory>();
+    register_backend_factory<relational_backend_factory>();
 }
 
 }

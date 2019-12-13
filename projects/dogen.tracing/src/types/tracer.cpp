@@ -30,9 +30,9 @@
 #include "dogen/io/database_configuration_io.hpp"
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.tracing/types/tracing_error.hpp"
 #include "dogen.tracing/types/file_backend.hpp"
 #include "dogen.tracing/types/null_backend.hpp"
+#include "dogen.tracing/types/tracing_error.hpp"
 #include "dogen.tracing/types/relational_backend.hpp"
 #include "dogen.tracing/types/tracer.hpp"
 
@@ -51,6 +51,12 @@ const std::string no_relational_support("Relational tracing requested but "
 }
 
 namespace dogen::tracing {
+
+backend_factory_registrar tracer::registrar_;
+
+backend_factory_registrar& tracer::registrar() {
+    return registrar_;
+}
 
 boost::shared_ptr<tracing::backend>
 tracer::make_backend(const boost::optional<tracing_configuration>& tcfg,

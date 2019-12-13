@@ -31,9 +31,11 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
 #include "dogen.tracing/types/backend.hpp"
 #include "dogen/types/tracing_configuration.hpp"
 #include "dogen/types/database_configuration.hpp"
+#include "dogen.tracing/types/backend_factory_registrar.hpp"
 
 namespace dogen::tracing {
 
@@ -41,6 +43,12 @@ namespace dogen::tracing {
  * @brief Handles all of the tracing-related work.
  */
 class tracer final {
+public:
+    /**
+     * @brief Registrar that keeps track of the available transforms.
+     */
+    static backend_factory_registrar& registrar();
+
 private:
     static boost::shared_ptr<tracing::backend>
     make_backend(const boost::optional<tracing_configuration>& tcfg,
@@ -139,7 +147,18 @@ public:
 private:
     const bool tracing_enabled_;
     boost::shared_ptr<tracing::backend> backend_;
+    static backend_factory_registrar registrar_;
 };
+
+/*
+ * Helper method to register transforms.
+ */
+template<typename Transform>
+inline void register_backend_factory() {
+    auto t(boost::make_shared<Transform>());
+    auto& rg(tracer::registrar());
+    rg.register_backend_factory(t);
+}
 
 }
 
