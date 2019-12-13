@@ -101,8 +101,9 @@ public:
      * @pre A transform chain must have been staerted.
      */
     /**@{*/
-    virtual void end_chain() const = 0;
-    virtual void end_chain(const std::string& output) const = 0;
+    virtual void end_chain(const std::string& transform_instance_id) const = 0;
+    virtual void end_chain(const std::string& transform_instance_id,
+        const std::string& output) const = 0;
     /**@}*/
 
 public:
@@ -126,8 +127,10 @@ public:
      * @pre A transform must have been staerted.
      */
     /**@{*/
-    virtual void end_transform() const = 0;
-    virtual void end_transform(const std::string& output) const = 0;
+    virtual void end_transform(
+        const std::string& transform_instance_id) const = 0;
+    virtual void end_transform(const std::string& transform_instance_id,
+        const std::string& output) const = 0;
     /**@}*/
 };
 

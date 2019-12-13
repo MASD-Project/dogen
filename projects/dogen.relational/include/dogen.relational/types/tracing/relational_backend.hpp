@@ -76,8 +76,9 @@ public:
         const std::string& model_id,
         const std::string& input) const override;
 
-    void end_chain() const override;
-    void end_chain(const std::string& output) const override;
+    void end_chain(const std::string& transform_instance_id) const override;
+    void end_chain(const std::string& transform_instance_id,
+        const std::string& output) const override;
 
 public:
     void start_transform(const std::string& transform_id,
@@ -90,8 +91,9 @@ public:
         const std::string& model_id,
         const std::string& input) const override;
 
-    void end_transform() const override;
-    void end_transform(const std::string& output) const override;
+    void end_transform(const std::string& transform_instance_id) const override;
+    void end_transform(const std::string& transform_instance_id,
+        const std::string& output) const override;
 
 private:
     const tracing_configuration tracing_configuration_;

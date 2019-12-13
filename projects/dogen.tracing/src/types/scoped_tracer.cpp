@@ -18,11 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/uuid/uuid.hpp>
+#include <boost/uuid/uuid_io.hpp>
+#include <boost/uuid/uuid_generators.hpp>
 #include "dogen.tracing/types/scoped_tracer.hpp"
+
+namespace {
+
+std::string generate_guid() {
+    const auto uuid = boost::uuids::random_generator()();
+    return boost::uuids::to_string(uuid);
+}
+
+}
 
 namespace dogen::tracing {
 
-// dummy function to suppress ranlib warnings
-void scoped_tracer() { }
+std::string scoped_chain_tracer::generate_guid() {
+    return ::generate_guid();
+}
+
+std::string scoped_transform_tracer::generate_guid() {
+    return ::generate_guid();
+}
 
 }

@@ -70,36 +70,41 @@ void tracer::end_tracing() const {
         backend_->end_tracing();
 }
 
-void tracer::start_chain(const std::string& transform_id) const {
+void tracer::start_chain(const std::string& transform_id,
+    const std::string& transform_instance_id) const {
     if (backend_)
-        backend_->start_chain(transform_id, "FIXME");
+        backend_->start_chain(transform_id, transform_instance_id);
 }
 
 void tracer::start_chain(const std::string& transform_id,
+    const std::string& transform_instance_id,
     const std::string& model_id) const {
     if (backend_)
-        backend_->start_chain(transform_id, "FIXME", model_id);
-}
-
-void tracer::start_transform(const std::string& transform_id) const {
-    if (backend_)
-        backend_->start_transform(transform_id, "FIXME");
+        backend_->start_chain(transform_id, transform_instance_id, model_id);
 }
 
 void tracer::start_transform(const std::string& transform_id,
+    const std::string& transform_instance_id) const {
+    if (backend_)
+        backend_->start_transform(transform_id, transform_instance_id);
+}
+
+void tracer::start_transform(const std::string& transform_id,
+    const std::string& transform_instance_id,
     const std::string& model_id) const {
     if (backend_)
-        backend_->start_transform(transform_id, "FIXME", model_id);
+        backend_->start_transform(transform_id,
+            transform_instance_id, model_id);
 }
 
-void tracer::end_chain() const {
+void tracer::end_chain(const std::string& transform_instance_id) const {
     if (backend_)
-        backend_->end_chain();
+        backend_->end_chain(transform_instance_id);
 }
 
-void tracer::end_transform() const {
+void tracer::end_transform(const std::string& transform_instance_id) const {
     if (backend_)
-        backend_->end_transform();
+        backend_->end_transform(transform_instance_id);
 }
 
 bool tracer::operator==(const tracer& /*rhs*/) const {

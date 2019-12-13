@@ -107,7 +107,8 @@ void relational_backend::start_tracing(const std::string& input_id,
 void relational_backend::end_tracing() const {
 }
 
-void relational_backend::add_references_graph(const std::string& /*root_vertex*/,
+void relational_backend::add_references_graph(
+    const std::string& /*root_vertex*/,
     const std::unordered_map<std::string, std::list<std::string>>&
     /*edges_per_model*/) const {
 }
@@ -127,10 +128,12 @@ void relational_backend::start_chain(const std::string& /*transform_id*/,
     const std::string& /*input*/) const {
 }
 
-void relational_backend::end_chain() const {
+void relational_backend::
+end_chain(const std::string& /*transform_instance_id*/) const {
 }
 
-void relational_backend::end_chain(const std::string& /*output*/) const {
+void relational_backend::end_chain(const std::string& /*transform_instance_id*/,
+    const std::string& /*output*/) const {
 }
 
 void relational_backend::start_transform(const std::string& /*transform_id*/,
@@ -148,10 +151,13 @@ void relational_backend::start_transform(const std::string& /*transform_id*/,
     const std::string& /*input*/) const {
 }
 
-void relational_backend::end_transform() const {
+void relational_backend::
+end_transform(const std::string& /*transform_instance_id*/) const {
 }
 
-void relational_backend::end_transform(const std::string& /*output*/) const {
+void relational_backend::end_transform(
+    const std::string& /*transform_instance_id*/,
+    const std::string& /*output*/) const {
 }
 
 }

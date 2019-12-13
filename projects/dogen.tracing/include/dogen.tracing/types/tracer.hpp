@@ -84,49 +84,57 @@ public:
         const std::unordered_map<std::string, std::list<std::string>>&
         edges_per_model) const;
 
-    void start_chain(const std::string& transform_id) const;
     void start_chain(const std::string& transform_id,
+        const std::string& transform_instance_id) const;
+    void start_chain(const std::string& transform_id,
+        const std::string& transform_instance_id,
         const std::string& model_id) const;
 
     template<typename Ioable>
     void start_chain(const std::string& transform_id,
+        const std::string& transform_instance_id,
         const std::string& model_id,
         const Ioable& input) const {
         if (backend_) {
-            backend_->start_chain(transform_id, generate_guid(),
+            backend_->start_chain(transform_id, transform_instance_id,
                 model_id, to_string(input));
         }
     }
 
-    void start_transform(const std::string& transform_id) const;
+    void start_transform(const std::string& transform_id,
+        const std::string& transform_instance_id) const;
 
     void start_transform(const std::string& transform_id,
+        const std::string& transform_instance_id,
         const std::string& model_id) const;
 
     template<typename Ioable>
     void start_transform(const std::string& transform_id,
+        const std::string& transform_instance_id,
         const std::string& model_id,
         const Ioable& input) const {
         if (backend_) {
-            backend_->start_transform(transform_id, generate_guid(),
+            backend_->start_transform(transform_id, transform_instance_id,
                 model_id, to_string(input));
         }
     }
 
-    void end_chain() const;
+    void end_chain(const std::string& transform_instance_id) const;
 
     template<typename Ioable>
-    void end_chain(const Ioable& output) const {
+    void end_chain(const std::string& transform_instance_id,
+        const Ioable& output) const {
         if (backend_)
-            backend_->end_chain(to_string(output));
+            backend_->end_chain(transform_instance_id, to_string(output));
     }
 
-    void end_transform() const;
+    void end_transform(const std::string& transform_instance_id) const;
 
     template<typename Ioable>
-    void end_transform(const Ioable& output) const {
+    void end_transform(const std::string& transform_instance_id,
+        const Ioable& output) const {
         if (backend_)
-            backend_->end_transform(to_string(output));
+            backend_->end_transform(transform_instance_id, to_string(output));
     }
 
     void end_tracing() const;

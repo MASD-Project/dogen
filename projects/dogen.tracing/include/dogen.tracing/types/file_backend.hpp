@@ -93,8 +93,9 @@ public:
         const std::string& model_id,
         const std::string& input) const override;
 
-    void end_chain() const override;
-    void end_chain(const std::string& output) const override;
+    void end_chain(const std::string& transform_instance_id) const override;
+    void end_chain(const std::string& transform_instance_id,
+        const std::string& output) const override;
 
 public:
 
@@ -109,8 +110,9 @@ public:
         const std::string& model_id,
         const std::string& input) const override;
 
-    void end_transform() const override;
-    void end_transform(const std::string& output) const override;
+    void end_transform(const std::string& transform_instance_id) const override;
+    void end_transform(const std::string& transform_instance_id,
+        const std::string& output) const override;
 
 public:
     bool operator==(const file_backend& rhs) const;
