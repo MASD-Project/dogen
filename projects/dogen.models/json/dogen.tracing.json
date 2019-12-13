@@ -144,17 +144,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "null_backend",
-      "parents": [
-        "backend"
-      ],
-      "stereotypes": [
-        "dogen::handcrafted::typeable",
-        "dogen::pretty_printable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "backend_factory_registrar",
       "stereotypes": [
         "dogen::handcrafted::typeable"

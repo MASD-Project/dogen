@@ -31,7 +31,6 @@
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/file_backend.hpp"
-#include "dogen.tracing/types/null_backend.hpp"
 #include "dogen.tracing/types/tracing_error.hpp"
 #include "dogen.tracing/types/relational_backend.hpp"
 #include "dogen.tracing/types/tracer.hpp"
