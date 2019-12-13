@@ -30,7 +30,9 @@
 #include "dogen.generation.cpp/types/initializer.hpp"
 #include "dogen.injection.json/types/initializer.hpp"
 #include "dogen.injection.dia/types/initializer.hpp"
+#ifdef DOGEN_HAVE_RELATIONAL_MODEL
 #include "dogen.relational/types/initializer.hpp"
+#endif // DOGEN_HAVE_RELATIONAL_MODEL
 #include "dogen.tracing/types/initializer.hpp"
 
 namespace  {

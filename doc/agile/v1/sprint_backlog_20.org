@@ -809,6 +809,9 @@ Notes:
 - actually the right solution is to create a really simple relational
   model with JSON content and then create stored procs to extract data
   from JSON.
+- consider creating transform and run details classes as POCOs. These
+  can be supplied to the transforms. The scoped tracers can be used as
+  helpers to build them.
 
 Merged stories:
 
