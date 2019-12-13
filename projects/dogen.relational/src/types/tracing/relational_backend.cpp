@@ -18,12 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.tracing/types/relational_backend.hpp"
-#ifndef DOGEN_HAVE_RELATIONAL_MODEL
-// dummy function to suppress ranlib warnings
-void dumm_contents() { }
-#else
-
 #include <boost/make_shared.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/throw_exception.hpp>
@@ -35,7 +29,7 @@ void dumm_contents() { }
 #include "dogen.relational/types/tracing/run.hpp"
 #include "dogen.relational/odb/tracing/run-odb.hxx"
 #include "dogen.relational/odb/tracing/run-odb-pgsql.hxx"
-#include "dogen.tracing/types/relational_backend.hpp"
+#include "dogen.relational/types/tracing/relational_backend.hpp"
 
 namespace {
 
@@ -53,7 +47,7 @@ const std::string no_database_configuration(
 
 }
 
-namespace dogen::tracing {
+namespace dogen::relational::tracing {
 
 std::string relational_backend::id() const {
     return ::id;
@@ -161,4 +155,3 @@ void relational_backend::end_transform(const std::string& /*output*/) const {
 }
 
 }
-#endif

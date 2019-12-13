@@ -18,21 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TRACING_IO_RELATIONAL_BACKEND_IO_HPP
-#define DOGEN_TRACING_IO_RELATIONAL_BACKEND_IO_HPP
+#ifndef DOGEN_RELATIONAL_TYPES_INITIALIZER_HPP
+#define DOGEN_RELATIONAL_TYPES_INITIALIZER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen.tracing/types/relational_backend.hpp"
+namespace dogen::relational {
 
-namespace dogen::tracing {
+/**
+ * @brief Initialises all of the static state in this model.
+ */
+class initializer final {
+public:
+    static void initialize();
+};
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::tracing::relational_backend& v);
 
 }
 

@@ -12,6 +12,7 @@
     "masd.extraction.ignore_files_matching_regex": ".*-odb.*",
     "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
     "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
+    "masd.extraction.ignore_files_matching_regex": ".*/sql/.*",
     "masd.extraction.delete_extra_files": "true",
     "masd.extraction.delete_empty_directories": "true",
     "masd.generation.cpp.enabled": "true",
@@ -87,7 +88,9 @@
         "masd::primitive"
       ],
       "tagged_values": {
-        "masd.primitive.underlying_element": "std::string"
+        "masd.primitive.underlying_element": "std::string",
+        "masd.orm.type_override": "postgresql,JSONB",
+        "masd.orm.type_mapping": "sqlite,JSON_TEXT,TEXT,json((?))"
       },
       "fallback_element_type": "masd::object"
     },
@@ -517,6 +520,28 @@
           "type": ""
         }
       ]
+    },
+    {
+      "name": "initializer",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "tracing::relational_backend",
+      "stereotypes": [
+        "dogen::handcrafted::typeable",
+        "dogen::pretty_printable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "tracing::relational_backend_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

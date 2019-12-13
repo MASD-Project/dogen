@@ -18,29 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TRACING_TYPES_RELATIONAL_BACKEND_HPP
-#define DOGEN_TRACING_TYPES_RELATIONAL_BACKEND_HPP
+#ifndef DOGEN_RELATIONAL_TYPES_TRACING_RELATIONAL_BACKEND_HPP
+#define DOGEN_RELATIONAL_TYPES_TRACING_RELATIONAL_BACKEND_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
-
-#include "dogen/config.hpp"
-#ifndef DOGEN_HAVE_RELATIONAL_MODEL
-#include <sstream>
-namespace dogen::tracing {
-
-class relational_backend {
-public:
-    void to_stream(std::ostream& s) const {
-        s << " { "
-          << "\"__type__\": " << "\"dogen::tracing::relational_backend\"" << " }";
-    }
-};
-
-}
-
-#else
 
 #include <string>
 #include <odb/database.hxx>
@@ -51,7 +34,7 @@ public:
 #include "dogen/types/tracing_configuration.hpp"
 #include "dogen/types/database_configuration.hpp"
 
-namespace dogen::tracing {
+namespace dogen::relational::tracing {
 
 /**
  * @brief Writes tracing information to a relational database.
@@ -119,7 +102,5 @@ private:
 };
 
 }
-
-#endif // DOGEN_HAVE_RELATIONAL_MODEL
 
 #endif

@@ -18,14 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.tracing/types/tracer.hpp"
-#include "dogen.tracing/types/file_backend_factory.hpp"
-#include "dogen.tracing/types/initializer.hpp"
+#ifndef DOGEN_RELATIONAL_TYPES_TRACING_RELATIONAL_BACKEND_FACTORY_HPP
+#define DOGEN_RELATIONAL_TYPES_TRACING_RELATIONAL_BACKEND_FACTORY_HPP
 
-namespace dogen::tracing {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-void initializer::initialize() {
-    register_backend_factory<file_backend_factory>();
+#include "dogen.tracing/types/backend_factory.hpp"
+
+namespace dogen::relational::tracing {
+
+class relational_backend_factory final :
+        public dogen::tracing::backend_factory {
+public:
+    std::string id() const override;
+    dogen::tracing_backend tracing_backend() const override;
+    boost::shared_ptr<dogen::tracing::backend>
+    make(const configuration& cfg, const std::string& run_id) const override;
+};
+
 }
 
-}
+#endif

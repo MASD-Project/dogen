@@ -25,8 +25,6 @@
 #pragma once
 #endif
 
-#include <algorithm>
-
 namespace dogen::tracing {
 
 /**

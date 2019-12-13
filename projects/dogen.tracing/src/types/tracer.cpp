@@ -32,20 +32,12 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/file_backend.hpp"
 #include "dogen.tracing/types/tracing_error.hpp"
-#include "dogen.tracing/types/relational_backend.hpp"
 #include "dogen.tracing/types/tracer.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 auto lg(logger_factory("tracing.tracer"));
-
-const std::string empty;
-const std::string directory_missing("Tracing data directory must be supplied.");
-
-const std::string invalid_backend("Tracing backend is invalid or unsupported: ");
-const std::string no_relational_support("Relational tracing requested but "
-    " Dogen was compiled without relational support.");
 
 }
 

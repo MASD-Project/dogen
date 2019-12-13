@@ -35,6 +35,18 @@ set_target_properties(${lib_target_name} PROPERTIES
 set_target_properties(${lib_target_name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
+if (WITH_RELATIONAL_SUPPORT)
+    list(APPEND relational_lib
+        -Wl,--whole-archive dogen.relational.lib  -Wl,--no-whole-archive)
+    list(APPEND relational_lib Boost::date_time)
+    list(APPEND relational_lib odb::libodb)
+    list(APPEND relational_lib odb::libodb-boost)
+    list(APPEND relational_lib odb::libodb-pgsql)
+    list(APPEND relational_lib odb::libodb-sqlite)
+    list(APPEND relational_lib OpenSSL::SSL)
+    list(APPEND relational_lib OpenSSL::Crypto)
+endif()
+
 target_link_libraries(${lib_target_name}
     dogen.archetypes.lib
     dogen.variability.lib
@@ -50,8 +62,9 @@ target_link_libraries(${lib_target_name}
     dogen.generation.cpp.lib
     dogen.generation.csharp.lib
     dogen.generation.lib
-    ${LIBXML2_LIBRARIES}
+    ${relational_lib}
     ${Boost_LIBRARIES}
+    ${LIBXML2_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES})
 
 install(TARGETS ${lib_target_name}

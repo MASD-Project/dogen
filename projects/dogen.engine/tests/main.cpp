@@ -20,6 +20,7 @@
  */
 #define BOOST_TEST_MODULE dogen.engine.tests
 #include <boost/test/unit_test.hpp>
+#include "dogen/config.hpp"
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/test/fixture.hpp"
 #include "dogen.utility/types/test_data/dogen_generation.hpp"
@@ -29,6 +30,7 @@
 #include "dogen.generation.cpp/types/initializer.hpp"
 #include "dogen.injection.json/types/initializer.hpp"
 #include "dogen.injection.dia/types/initializer.hpp"
+#include "dogen.relational/types/initializer.hpp"
 #include "dogen.tracing/types/initializer.hpp"
 
 namespace  {
@@ -66,6 +68,9 @@ struct initializer {
 #ifdef ENABLE_CSHARP_REF_IMPL_TESTS
         dogen::utility::test_data::csharp_ref_impl_generation::initialize();
 #endif // ENABLE_CSHARP_REF_IMPL_TESTS
+#ifdef DOGEN_HAVE_RELATIONAL_MODEL
+        dogen::relational::initializer::initialize();
+#endif // DOGEN_HAVE_RELATIONAL_MODEL
     }
 };
 

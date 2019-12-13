@@ -19,13 +19,13 @@
  *
  */
 #include <ostream>
-#include "dogen.tracing/io/backend_io.hpp"
-#include "dogen.tracing/io/relational_backend_io.hpp"
+#include "dogen.relational/io/tracing/relational_backend_io.hpp"
 
-namespace dogen::tracing {
+namespace dogen::relational::tracing {
 
-std::ostream& operator<<(std::ostream& s, const relational_backend& v) {
-    v.to_stream(s);
+std::ostream& operator<<(std::ostream& s, const relational_backend&) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::relational::tracing::relational_backend\"" << " }";
     return(s);
 }
 
