@@ -42,6 +42,7 @@ namespace odb
   persist_statement_types[] =
   {
     pgsql::text_oid,
+    pgsql::timestamp_oid,
     pgsql::text_oid,
     pgsql::text_oid
   };
@@ -55,15 +56,19 @@ namespace odb
 
     bool grew (false);
 
-    // transform_id_
+    // run_id_
     //
-    if (composite_value_traits< ::dogen::relational::tracing::transform_id, id_pgsql >::grow (
-          i.transform_id_value, t + 0UL))
+    if (composite_value_traits< ::dogen::relational::tracing::run_id, id_pgsql >::grow (
+          i.run_id_value, t + 0UL))
       grew = true;
+
+    // timestamp_
+    //
+    t[1UL] = 0;
 
     // component_
     //
-    if (t[1UL])
+    if (t[2UL])
     {
       i.component_value.capacity (i.component_size);
       grew = true;
@@ -71,7 +76,7 @@ namespace odb
 
     // message_
     //
-    if (t[2UL])
+    if (t[3UL])
     {
       i.message_value.capacity (i.message_size);
       grew = true;
@@ -91,11 +96,18 @@ namespace odb
 
     std::size_t n (0);
 
-    // transform_id_
+    // run_id_
     //
-    composite_value_traits< ::dogen::relational::tracing::transform_id, id_pgsql >::bind (
-      b + n, i.transform_id_value, sk);
+    composite_value_traits< ::dogen::relational::tracing::run_id, id_pgsql >::bind (
+      b + n, i.run_id_value, sk);
     n += 1UL;
+
+    // timestamp_
+    //
+    b[n].type = pgsql::bind::timestamp;
+    b[n].buffer = &i.timestamp_value;
+    b[n].is_null = &i.timestamp_null;
+    n++;
 
     // component_
     //
@@ -129,17 +141,31 @@ namespace odb
 
     bool grew (false);
 
-    // transform_id_
+    // run_id_
     //
     {
-      ::dogen::relational::tracing::transform_id const& v =
-        o.transform_id ();
+      ::dogen::relational::tracing::run_id const& v =
+        o.run_id ();
 
-      if (composite_value_traits< ::dogen::relational::tracing::transform_id, id_pgsql >::init (
-            i.transform_id_value,
+      if (composite_value_traits< ::dogen::relational::tracing::run_id, id_pgsql >::init (
+            i.run_id_value,
             v,
             sk))
         grew = true;
+    }
+
+    // timestamp_
+    //
+    {
+      ::boost::posix_time::ptime const& v =
+        o.timestamp ();
+
+      bool is_null (true);
+      pgsql::value_traits<
+          ::boost::posix_time::ptime,
+          pgsql::id_timestamp >::set_image (
+        i.timestamp_value, is_null, v);
+      i.timestamp_null = is_null;
     }
 
     // component_
@@ -196,16 +222,30 @@ namespace odb
     ODB_POTENTIALLY_UNUSED (i);
     ODB_POTENTIALLY_UNUSED (db);
 
-    // transform_id_
+    // run_id_
     //
     {
-      ::dogen::relational::tracing::transform_id& v =
-        o.transform_id ();
+      ::dogen::relational::tracing::run_id& v =
+        o.run_id ();
 
-      composite_value_traits< ::dogen::relational::tracing::transform_id, id_pgsql >::init (
+      composite_value_traits< ::dogen::relational::tracing::run_id, id_pgsql >::init (
         v,
-        i.transform_id_value,
+        i.run_id_value,
         db);
+    }
+
+    // timestamp_
+    //
+    {
+      ::boost::posix_time::ptime& v =
+        o.timestamp ();
+
+      pgsql::value_traits<
+          ::boost::posix_time::ptime,
+          pgsql::id_timestamp >::set_value (
+        v,
+        i.timestamp_value,
+        i.timestamp_null);
     }
 
     // component_
@@ -241,15 +281,17 @@ namespace odb
 
   const char access::object_traits_impl< ::dogen::relational::tracing::log, id_pgsql >::persist_statement[] =
   "INSERT INTO \"DOGEN\".\"LOG\" "
-  "(\"TRANSFORM_ID\", "
+  "(\"RUN_ID\", "
+  "\"TIMESTAMP\", "
   "\"COMPONENT\", "
   "\"MESSAGE\") "
   "VALUES "
-  "($1, $2, $3)";
+  "($1, $2, $3, $4)";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::log, id_pgsql >::query_statement[] =
   "SELECT "
-  "\"DOGEN\".\"LOG\".\"TRANSFORM_ID\", "
+  "\"DOGEN\".\"LOG\".\"RUN_ID\", "
+  "\"DOGEN\".\"LOG\".\"TIMESTAMP\", "
   "\"DOGEN\".\"LOG\".\"COMPONENT\", "
   "\"DOGEN\".\"LOG\".\"MESSAGE\" "
   "FROM \"DOGEN\".\"LOG\"";
@@ -413,7 +455,8 @@ namespace odb
         case 1:
         {
           db.execute ("CREATE TABLE \"DOGEN\".\"LOG\" (\n"
-                      "  \"TRANSFORM_ID\" TEXT NOT NULL,\n"
+                      "  \"RUN_ID\" TEXT NOT NULL,\n"
+                      "  \"TIMESTAMP\" TIMESTAMP NULL,\n"
                       "  \"COMPONENT\" TEXT NOT NULL,\n"
                       "  \"MESSAGE\" TEXT NOT NULL)");
           return false;

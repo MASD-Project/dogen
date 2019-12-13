@@ -35,8 +35,10 @@
 
 #include "dogen.relational/types/tracing/transform.hpp"
 
+#include "dogen.relational/odb/tracing/json-odb-pgsql.hxx"
 #include "dogen.relational/odb/tracing/run_id-odb-pgsql.hxx"
 #include "dogen.relational/odb/tracing/transform_id-odb-pgsql.hxx"
+#include "dogen.relational/odb/tracing/transform_instance_id-odb-pgsql.hxx"
 
 #include "dogen.relational/odb/tracing/transform-odb.hxx"
 
@@ -102,29 +104,28 @@ namespace odb
 
     static const id_class_ id;
 
-    // name
+    // instance_id
     //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        ::std::string,
-        pgsql::id_string >::query_type,
-      pgsql::id_string >
-    name_type_;
+    struct instance_id_class_
+    {
+      instance_id_class_ ()
+      {
+      }
 
-    static const name_type_ name;
+      // value
+      //
+      typedef
+      pgsql::query_column<
+        pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::query_type,
+        pgsql::id_string >
+      value_type_;
 
-    // description
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        ::std::string,
-        pgsql::id_string >::query_type,
-      pgsql::id_string >
-    description_type_;
+      static const value_type_ value;
+    };
 
-    static const description_type_ description;
+    static const instance_id_class_ instance_id;
 
     // run_id
     //
@@ -160,6 +161,52 @@ namespace odb
     type_type_;
 
     static const type_type_ type;
+
+    // input
+    //
+    struct input_class_
+    {
+      input_class_ ()
+      {
+      }
+
+      // value
+      //
+      typedef
+      pgsql::query_column<
+        pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::query_type,
+        pgsql::id_string >
+      value_type_;
+
+      static const value_type_ value;
+    };
+
+    static const input_class_ input;
+
+    // output
+    //
+    struct output_class_
+    {
+      output_class_ ()
+      {
+      }
+
+      // value
+      //
+      typedef
+      pgsql::query_column<
+        pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::query_type,
+        pgsql::id_string >
+      value_type_;
+
+      static const value_type_ value;
+    };
+
+    static const output_class_ output;
   };
 
   template <typename A>
@@ -182,14 +229,13 @@ namespace odb
   query_columns< ::dogen::relational::tracing::transform, id_pgsql, A >::id;
 
   template <typename A>
-  const typename query_columns< ::dogen::relational::tracing::transform, id_pgsql, A >::name_type_
-  query_columns< ::dogen::relational::tracing::transform, id_pgsql, A >::
-  name (A::table_name, "\"NAME\"", 0);
+  const typename query_columns< ::dogen::relational::tracing::transform, id_pgsql, A >::instance_id_class_::value_type_
+  query_columns< ::dogen::relational::tracing::transform, id_pgsql, A >::instance_id_class_::
+  value (A::table_name, "\"INSTANCE_ID\"", 0);
 
   template <typename A>
-  const typename query_columns< ::dogen::relational::tracing::transform, id_pgsql, A >::description_type_
-  query_columns< ::dogen::relational::tracing::transform, id_pgsql, A >::
-  description (A::table_name, "\"DESCRIPTION\"", 0);
+  const typename query_columns< ::dogen::relational::tracing::transform, id_pgsql, A >::instance_id_class_
+  query_columns< ::dogen::relational::tracing::transform, id_pgsql, A >::instance_id;
 
   template <typename A>
   const typename query_columns< ::dogen::relational::tracing::transform, id_pgsql, A >::run_id_class_::value_type_
@@ -204,6 +250,24 @@ namespace odb
   const typename query_columns< ::dogen::relational::tracing::transform, id_pgsql, A >::type_type_
   query_columns< ::dogen::relational::tracing::transform, id_pgsql, A >::
   type (A::table_name, "\"TYPE\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::dogen::relational::tracing::transform, id_pgsql, A >::input_class_::value_type_
+  query_columns< ::dogen::relational::tracing::transform, id_pgsql, A >::input_class_::
+  value (A::table_name, "\"INPUT\"", "to_jsonb((?)::jsonb)");
+
+  template <typename A>
+  const typename query_columns< ::dogen::relational::tracing::transform, id_pgsql, A >::input_class_
+  query_columns< ::dogen::relational::tracing::transform, id_pgsql, A >::input;
+
+  template <typename A>
+  const typename query_columns< ::dogen::relational::tracing::transform, id_pgsql, A >::output_class_::value_type_
+  query_columns< ::dogen::relational::tracing::transform, id_pgsql, A >::output_class_::
+  value (A::table_name, "\"OUTPUT\"", "to_jsonb((?)::jsonb)");
+
+  template <typename A>
+  const typename query_columns< ::dogen::relational::tracing::transform, id_pgsql, A >::output_class_
+  query_columns< ::dogen::relational::tracing::transform, id_pgsql, A >::output;
 
   template <typename A>
   struct pointer_query_columns< ::dogen::relational::tracing::transform, id_pgsql, A >:
@@ -232,17 +296,9 @@ namespace odb
       //
       composite_value_traits< ::dogen::relational::tracing::transform_id, id_pgsql >::image_type id_value;
 
-      // name_
+      // instance_id_
       //
-      details::buffer name_value;
-      std::size_t name_size;
-      bool name_null;
-
-      // description_
-      //
-      details::buffer description_value;
-      std::size_t description_size;
-      bool description_null;
+      composite_value_traits< ::dogen::relational::tracing::transform_instance_id, id_pgsql >::image_type instance_id_value;
 
       // run_id_
       //
@@ -252,6 +308,14 @@ namespace odb
       //
       int type_value;
       bool type_null;
+
+      // input_
+      //
+      composite_value_traits< ::dogen::relational::tracing::json, id_pgsql >::image_type input_value;
+
+      // output_
+      //
+      composite_value_traits< ::dogen::relational::tracing::json, id_pgsql >::image_type output_value;
 
       std::size_t version;
     };
@@ -281,7 +345,7 @@ namespace odb
 
     typedef pgsql::query_base query_base_type;
 
-    static const std::size_t column_count = 7UL;
+    static const std::size_t column_count = 8UL;
     static const std::size_t id_column_count = 0UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;

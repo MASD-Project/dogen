@@ -19,20 +19,13 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
+#include "dogen.relational/io/tracing/json_io.hpp"
 #include "dogen.relational/io/tracing/run_id_io.hpp"
 #include "dogen.relational/io/tracing/transform_io.hpp"
 #include "dogen.relational/io/tracing/transform_id_io.hpp"
 #include "dogen.relational/io/tracing/transform_type_io.hpp"
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
+#include "dogen.relational/io/tracing/transform_instance_id_io.hpp"
 
 namespace dogen::relational::tracing {
 
@@ -42,10 +35,11 @@ std::ostream& operator<<(std::ostream& s, const transform& v) {
       << "\"start\": " << "\"" << v.start() << "\"" << ", "
       << "\"end\": " << "\"" << v.end() << "\"" << ", "
       << "\"id\": " << v.id() << ", "
-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
+      << "\"instance_id\": " << v.instance_id() << ", "
       << "\"run_id\": " << v.run_id() << ", "
-      << "\"type\": " << v.type()
+      << "\"type\": " << v.type() << ", "
+      << "\"input\": " << v.input() << ", "
+      << "\"output\": " << v.output()
       << " }";
     return(s);
 }

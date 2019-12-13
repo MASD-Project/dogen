@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen.relational/types/tracing/log.hpp"
-#include "dogen.relational/odb/tracing/transform_id_pragmas.hpp"
+#include "dogen.relational/odb/tracing/run_id_pragmas.hpp"
 
 namespace dogen::relational::tracing {
 

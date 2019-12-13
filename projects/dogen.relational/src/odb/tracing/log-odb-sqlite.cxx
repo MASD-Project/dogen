@@ -38,15 +38,23 @@ namespace odb
 
     bool grew (false);
 
-    // transform_id_
+    // run_id_
     //
-    if (composite_value_traits< ::dogen::relational::tracing::transform_id, id_sqlite >::grow (
-          i.transform_id_value, t + 0UL))
+    if (composite_value_traits< ::dogen::relational::tracing::run_id, id_sqlite >::grow (
+          i.run_id_value, t + 0UL))
       grew = true;
+
+    // timestamp_
+    //
+    if (t[1UL])
+    {
+      i.timestamp_value.capacity (i.timestamp_size);
+      grew = true;
+    }
 
     // component_
     //
-    if (t[1UL])
+    if (t[2UL])
     {
       i.component_value.capacity (i.component_size);
       grew = true;
@@ -54,7 +62,7 @@ namespace odb
 
     // message_
     //
-    if (t[2UL])
+    if (t[3UL])
     {
       i.message_value.capacity (i.message_size);
       grew = true;
@@ -74,11 +82,22 @@ namespace odb
 
     std::size_t n (0);
 
-    // transform_id_
+    // run_id_
     //
-    composite_value_traits< ::dogen::relational::tracing::transform_id, id_sqlite >::bind (
-      b + n, i.transform_id_value, sk);
+    composite_value_traits< ::dogen::relational::tracing::run_id, id_sqlite >::bind (
+      b + n, i.run_id_value, sk);
     n += 1UL;
+
+    // timestamp_
+    //
+    b[n].type = sqlite::image_traits<
+      ::boost::posix_time::ptime,
+      sqlite::id_text>::bind_value;
+    b[n].buffer = i.timestamp_value.data ();
+    b[n].size = &i.timestamp_size;
+    b[n].capacity = i.timestamp_value.capacity ();
+    b[n].is_null = &i.timestamp_null;
+    n++;
 
     // component_
     //
@@ -116,17 +135,36 @@ namespace odb
 
     bool grew (false);
 
-    // transform_id_
+    // run_id_
     //
     {
-      ::dogen::relational::tracing::transform_id const& v =
-        o.transform_id ();
+      ::dogen::relational::tracing::run_id const& v =
+        o.run_id ();
 
-      if (composite_value_traits< ::dogen::relational::tracing::transform_id, id_sqlite >::init (
-            i.transform_id_value,
+      if (composite_value_traits< ::dogen::relational::tracing::run_id, id_sqlite >::init (
+            i.run_id_value,
             v,
             sk))
         grew = true;
+    }
+
+    // timestamp_
+    //
+    {
+      ::boost::posix_time::ptime const& v =
+        o.timestamp ();
+
+      bool is_null (true);
+      std::size_t cap (i.timestamp_value.capacity ());
+      sqlite::value_traits<
+          ::boost::posix_time::ptime,
+          sqlite::id_text >::set_image (
+        i.timestamp_value,
+        i.timestamp_size,
+        is_null,
+        v);
+      i.timestamp_null = is_null;
+      grew = grew || (cap != i.timestamp_value.capacity ());
     }
 
     // component_
@@ -179,16 +217,31 @@ namespace odb
     ODB_POTENTIALLY_UNUSED (i);
     ODB_POTENTIALLY_UNUSED (db);
 
-    // transform_id_
+    // run_id_
     //
     {
-      ::dogen::relational::tracing::transform_id& v =
-        o.transform_id ();
+      ::dogen::relational::tracing::run_id& v =
+        o.run_id ();
 
-      composite_value_traits< ::dogen::relational::tracing::transform_id, id_sqlite >::init (
+      composite_value_traits< ::dogen::relational::tracing::run_id, id_sqlite >::init (
         v,
-        i.transform_id_value,
+        i.run_id_value,
         db);
+    }
+
+    // timestamp_
+    //
+    {
+      ::boost::posix_time::ptime& v =
+        o.timestamp ();
+
+      sqlite::value_traits<
+          ::boost::posix_time::ptime,
+          sqlite::id_text >::set_value (
+        v,
+        i.timestamp_value,
+        i.timestamp_size,
+        i.timestamp_null);
     }
 
     // component_
@@ -224,15 +277,17 @@ namespace odb
 
   const char access::object_traits_impl< ::dogen::relational::tracing::log, id_sqlite >::persist_statement[] =
   "INSERT INTO \"DOGEN\".\"LOG\" "
-  "(\"TRANSFORM_ID\", "
+  "(\"RUN_ID\", "
+  "\"TIMESTAMP\", "
   "\"COMPONENT\", "
   "\"MESSAGE\") "
   "VALUES "
-  "(?, ?, ?)";
+  "(?, ?, ?, ?)";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::log, id_sqlite >::query_statement[] =
   "SELECT "
-  "\"DOGEN\".\"LOG\".\"TRANSFORM_ID\", "
+  "\"DOGEN\".\"LOG\".\"RUN_ID\", "
+  "\"DOGEN\".\"LOG\".\"TIMESTAMP\", "
   "\"DOGEN\".\"LOG\".\"COMPONENT\", "
   "\"DOGEN\".\"LOG\".\"MESSAGE\" "
   "FROM \"DOGEN\".\"LOG\"";
@@ -389,7 +444,8 @@ namespace odb
         case 1:
         {
           db.execute ("CREATE TABLE \"DOGEN\".\"LOG\" (\n"
-                      "  \"TRANSFORM_ID\" TEXT NOT NULL,\n"
+                      "  \"RUN_ID\" TEXT NOT NULL,\n"
+                      "  \"TIMESTAMP\" TEXT NULL,\n"
                       "  \"COMPONENT\" TEXT NOT NULL,\n"
                       "  \"MESSAGE\" TEXT NOT NULL)");
           return false;

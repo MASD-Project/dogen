@@ -55,7 +55,6 @@ namespace odb
     pgsql::text_oid,
     pgsql::int4_oid,
     pgsql::text_oid,
-    pgsql::text_oid,
     pgsql::text_oid
   };
 
@@ -71,7 +70,6 @@ namespace odb
     pgsql::timestamp_oid,
     pgsql::timestamp_oid,
     pgsql::int4_oid,
-    pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid
@@ -150,12 +148,6 @@ namespace odb
           i.configuration_value, t + 5UL))
       grew = true;
 
-    // top_level_transform_id_
-    //
-    if (composite_value_traits< ::dogen::relational::tracing::transform_id, id_pgsql >::grow (
-          i.top_level_transform_id_value, t + 6UL))
-      grew = true;
-
     return grew;
   }
 
@@ -213,12 +205,6 @@ namespace odb
     //
     composite_value_traits< ::dogen::relational::tracing::json, id_pgsql >::bind (
       b + n, i.configuration_value, sk);
-    n += 1UL;
-
-    // top_level_transform_id_
-    //
-    composite_value_traits< ::dogen::relational::tracing::transform_id, id_pgsql >::bind (
-      b + n, i.top_level_transform_id_value, sk);
     n += 1UL;
   }
 
@@ -334,19 +320,6 @@ namespace odb
         grew = true;
     }
 
-    // top_level_transform_id_
-    //
-    {
-      ::dogen::relational::tracing::transform_id const& v =
-        o.top_level_transform_id ();
-
-      if (composite_value_traits< ::dogen::relational::tracing::transform_id, id_pgsql >::init (
-            i.top_level_transform_id_value,
-            v,
-            sk))
-        grew = true;
-    }
-
     return grew;
   }
 
@@ -440,18 +413,6 @@ namespace odb
         i.configuration_value,
         db);
     }
-
-    // top_level_transform_id_
-    //
-    {
-      ::dogen::relational::tracing::transform_id& v =
-        o.top_level_transform_id ();
-
-      composite_value_traits< ::dogen::relational::tracing::transform_id, id_pgsql >::init (
-        v,
-        i.top_level_transform_id_value,
-        db);
-    }
   }
 
   void access::object_traits_impl< ::dogen::relational::tracing::run, id_pgsql >::
@@ -478,10 +439,9 @@ namespace odb
   "\"ID\", "
   "\"ACTIVITY\", "
   "\"VERSION\", "
-  "\"CONFIGURATION\", "
-  "\"TOP_LEVEL_TRANSFORM_ID\") "
+  "\"CONFIGURATION\") "
   "VALUES "
-  "($1, $2, $3, $4, $5, to_jsonb($6::jsonb), $7)";
+  "($1, $2, $3, $4, $5, to_jsonb($6::jsonb))";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::run, id_pgsql >::find_statement[] =
   "SELECT "
@@ -490,8 +450,7 @@ namespace odb
   "\"DOGEN\".\"RUN\".\"ID\", "
   "\"DOGEN\".\"RUN\".\"ACTIVITY\", "
   "\"DOGEN\".\"RUN\".\"VERSION\", "
-  "from_jsonb(\"DOGEN\".\"RUN\".\"CONFIGURATION\"), "
-  "\"DOGEN\".\"RUN\".\"TOP_LEVEL_TRANSFORM_ID\" "
+  "from_jsonb(\"DOGEN\".\"RUN\".\"CONFIGURATION\") "
   "FROM \"DOGEN\".\"RUN\" "
   "WHERE \"DOGEN\".\"RUN\".\"ID\"=$1";
 
@@ -502,9 +461,8 @@ namespace odb
   "\"END\"=$2, "
   "\"ACTIVITY\"=$3, "
   "\"VERSION\"=$4, "
-  "\"CONFIGURATION\"=to_jsonb($5::jsonb), "
-  "\"TOP_LEVEL_TRANSFORM_ID\"=$6 "
-  "WHERE \"ID\"=$7";
+  "\"CONFIGURATION\"=to_jsonb($5::jsonb) "
+  "WHERE \"ID\"=$6";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::run, id_pgsql >::erase_statement[] =
   "DELETE FROM \"DOGEN\".\"RUN\" "
@@ -517,8 +475,7 @@ namespace odb
   "\"DOGEN\".\"RUN\".\"ID\", "
   "\"DOGEN\".\"RUN\".\"ACTIVITY\", "
   "\"DOGEN\".\"RUN\".\"VERSION\", "
-  "from_jsonb(\"DOGEN\".\"RUN\".\"CONFIGURATION\"), "
-  "\"DOGEN\".\"RUN\".\"TOP_LEVEL_TRANSFORM_ID\" "
+  "from_jsonb(\"DOGEN\".\"RUN\".\"CONFIGURATION\") "
   "FROM \"DOGEN\".\"RUN\"";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::run, id_pgsql >::erase_query_statement[] =
@@ -943,8 +900,7 @@ namespace odb
                       "  \"ID\" TEXT NOT NULL PRIMARY KEY,\n"
                       "  \"ACTIVITY\" INTEGER NOT NULL,\n"
                       "  \"VERSION\" TEXT NOT NULL,\n"
-                      "  \"CONFIGURATION\" JSONB NOT NULL,\n"
-                      "  \"TOP_LEVEL_TRANSFORM_ID\" TEXT NOT NULL)");
+                      "  \"CONFIGURATION\" JSONB NOT NULL)");
           return false;
         }
       }

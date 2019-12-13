@@ -27,7 +27,8 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.relational/types/tracing/transform_id.hpp"
+#include <boost/date_time/posix_time/posix_time_types.hpp>
+#include "dogen.relational/types/tracing/run_id.hpp"
 
 namespace dogen::relational::tracing {
 
@@ -40,15 +41,21 @@ public:
 
 public:
     log(
-        const dogen::relational::tracing::transform_id& transform_id,
+        const dogen::relational::tracing::run_id& run_id,
+        const boost::posix_time::ptime& timestamp,
         const std::string& component,
         const std::string& message);
 
 public:
-    const dogen::relational::tracing::transform_id& transform_id() const;
-    dogen::relational::tracing::transform_id& transform_id();
-    void transform_id(const dogen::relational::tracing::transform_id& v);
-    void transform_id(const dogen::relational::tracing::transform_id&& v);
+    const dogen::relational::tracing::run_id& run_id() const;
+    dogen::relational::tracing::run_id& run_id();
+    void run_id(const dogen::relational::tracing::run_id& v);
+    void run_id(const dogen::relational::tracing::run_id&& v);
+
+    const boost::posix_time::ptime& timestamp() const;
+    boost::posix_time::ptime& timestamp();
+    void timestamp(const boost::posix_time::ptime& v);
+    void timestamp(const boost::posix_time::ptime&& v);
 
     const std::string& component() const;
     std::string& component();
@@ -71,7 +78,8 @@ public:
     log& operator=(log other);
 
 private:
-    dogen::relational::tracing::transform_id transform_id_;
+    dogen::relational::tracing::run_id run_id_;
+    boost::posix_time::ptime timestamp_;
     std::string component_;
     std::string message_;
 };

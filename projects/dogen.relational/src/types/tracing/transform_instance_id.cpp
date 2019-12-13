@@ -18,31 +18,42 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
-#include "dogen.relational/io/tracing/log_io.hpp"
-#include "dogen.relational/io/tracing/run_id_io.hpp"
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
+#include "dogen.relational/types/tracing/transform_instance_id.hpp"
 
 namespace dogen::relational::tracing {
 
-std::ostream& operator<<(std::ostream& s, const log& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::relational::tracing::log\"" << ", "
-      << "\"run_id\": " << v.run_id() << ", "
-      << "\"timestamp\": " << "\"" << v.timestamp() << "\"" << ", "
-      << "\"component\": " << "\"" << tidy_up_string(v.component()) << "\"" << ", "
-      << "\"message\": " << "\"" << tidy_up_string(v.message()) << "\""
-      << " }";
-    return(s);
+transform_instance_id::transform_instance_id(const std::string& value)
+    : value_(value) { }
+
+const std::string& transform_instance_id::value() const {
+    return value_;
+}
+
+std::string& transform_instance_id::value() {
+    return value_;
+}
+
+void transform_instance_id::value(const std::string& v) {
+    value_ = v;
+}
+
+void transform_instance_id::value(const std::string&& v) {
+    value_ = std::move(v);
+}
+
+bool transform_instance_id::operator==(const transform_instance_id& rhs) const {
+    return value_ == rhs.value_;
+}
+
+void transform_instance_id::swap(transform_instance_id& other) noexcept {
+    using std::swap;
+    swap(value_, other.value_);
+}
+
+transform_instance_id& transform_instance_id::operator=(transform_instance_id other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
 }
 
 }

@@ -34,7 +34,6 @@
 
 #include "dogen.relational/odb/tracing/json-odb.hxx"
 #include "dogen.relational/odb/tracing/run_id-odb.hxx"
-#include "dogen.relational/odb/tracing/transform_id-odb.hxx"
 
 #include <memory>
 #include <cstddef>

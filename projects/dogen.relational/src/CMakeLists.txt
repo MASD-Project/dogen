@@ -55,66 +55,6 @@ if (ODB_EXECUTABLE)
     endif()
 
 
-    add_custom_target(odb_dogen_relational_attribute
-        COMMENT "ODB attribute"
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${ODB_EXECUTABLE}
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/attribute_options.odb
-            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing
-            ${ODB_EXECUTABLE_GLOBAL_ARGS}
-            ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/types/tracing/attribute.hpp
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/attribute-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/attribute-odb-sqlite.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        VERBATIM
-    )
-    add_dependencies(odb_dogen_relational odb_dogen_relational_attribute)
-
-    add_custom_target(odb_dogen_relational_attribute_id
-        COMMENT "ODB attribute_id"
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${ODB_EXECUTABLE}
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/attribute_id_options.odb
-            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing
-            ${ODB_EXECUTABLE_GLOBAL_ARGS}
-            ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/types/tracing/attribute_id.hpp
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/attribute_id-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/attribute_id-odb-sqlite.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        VERBATIM
-    )
-    add_dependencies(odb_dogen_relational odb_dogen_relational_attribute_id)
-
-    add_custom_target(odb_dogen_relational_element
-        COMMENT "ODB element"
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${ODB_EXECUTABLE}
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/element_options.odb
-            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing
-            ${ODB_EXECUTABLE_GLOBAL_ARGS}
-            ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/types/tracing/element.hpp
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/element-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/element-odb-sqlite.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        VERBATIM
-    )
-    add_dependencies(odb_dogen_relational odb_dogen_relational_element)
-
-    add_custom_target(odb_dogen_relational_element_id
-        COMMENT "ODB element_id"
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${ODB_EXECUTABLE}
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/element_id_options.odb
-            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing
-            ${ODB_EXECUTABLE_GLOBAL_ARGS}
-            ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/types/tracing/element_id.hpp
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/element_id-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/element_id-odb-sqlite.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        VERBATIM
-    )
-    add_dependencies(odb_dogen_relational odb_dogen_relational_element_id)
-
     add_custom_target(odb_dogen_relational_json
         COMMENT "ODB json"
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
@@ -144,66 +84,6 @@ if (ODB_EXECUTABLE)
         VERBATIM
     )
     add_dependencies(odb_dogen_relational odb_dogen_relational_log)
-
-    add_custom_target(odb_dogen_relational_model
-        COMMENT "ODB model"
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${ODB_EXECUTABLE}
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/model_options.odb
-            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing
-            ${ODB_EXECUTABLE_GLOBAL_ARGS}
-            ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/types/tracing/model.hpp
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/model-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/model-odb-sqlite.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        VERBATIM
-    )
-    add_dependencies(odb_dogen_relational odb_dogen_relational_model)
-
-    add_custom_target(odb_dogen_relational_model_id
-        COMMENT "ODB model_id"
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${ODB_EXECUTABLE}
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/model_id_options.odb
-            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing
-            ${ODB_EXECUTABLE_GLOBAL_ARGS}
-            ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/types/tracing/model_id.hpp
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/model_id-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/model_id-odb-sqlite.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        VERBATIM
-    )
-    add_dependencies(odb_dogen_relational odb_dogen_relational_model_id)
-
-    add_custom_target(odb_dogen_relational_model_set
-        COMMENT "ODB model_set"
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${ODB_EXECUTABLE}
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/model_set_options.odb
-            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing
-            ${ODB_EXECUTABLE_GLOBAL_ARGS}
-            ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/types/tracing/model_set.hpp
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/model_set-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/model_set-odb-sqlite.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        VERBATIM
-    )
-    add_dependencies(odb_dogen_relational odb_dogen_relational_model_set)
-
-    add_custom_target(odb_dogen_relational_model_set_id
-        COMMENT "ODB model_set_id"
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${ODB_EXECUTABLE}
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/model_set_id_options.odb
-            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing
-            ${ODB_EXECUTABLE_GLOBAL_ARGS}
-            ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/types/tracing/model_set_id.hpp
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/model_set_id-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/model_set_id-odb-sqlite.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        VERBATIM
-    )
-    add_dependencies(odb_dogen_relational odb_dogen_relational_model_set_id)
 
     add_custom_target(odb_dogen_relational_run
         COMMENT "ODB run"
@@ -250,36 +130,6 @@ if (ODB_EXECUTABLE)
     )
     add_dependencies(odb_dogen_relational odb_dogen_relational_transform)
 
-    add_custom_target(odb_dogen_relational_transform_components
-        COMMENT "ODB transform_components"
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${ODB_EXECUTABLE}
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/transform_components_options.odb
-            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing
-            ${ODB_EXECUTABLE_GLOBAL_ARGS}
-            ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/types/tracing/transform_components.hpp
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/transform_components-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/transform_components-odb-sqlite.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        VERBATIM
-    )
-    add_dependencies(odb_dogen_relational odb_dogen_relational_transform_components)
-
-    add_custom_target(odb_dogen_relational_transform_components_key
-        COMMENT "ODB transform_components_key"
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${ODB_EXECUTABLE}
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/transform_components_key_options.odb
-            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing
-            ${ODB_EXECUTABLE_GLOBAL_ARGS}
-            ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/types/tracing/transform_components_key.hpp
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/transform_components_key-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/transform_components_key-odb-sqlite.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        VERBATIM
-    )
-    add_dependencies(odb_dogen_relational odb_dogen_relational_transform_components_key)
-
     add_custom_target(odb_dogen_relational_transform_id
         COMMENT "ODB transform_id"
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
@@ -295,48 +145,18 @@ if (ODB_EXECUTABLE)
     )
     add_dependencies(odb_dogen_relational odb_dogen_relational_transform_id)
 
-    add_custom_target(odb_dogen_relational_transform_model
-        COMMENT "ODB transform_model"
+    add_custom_target(odb_dogen_relational_transform_instance_id
+        COMMENT "ODB transform_instance_id"
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         COMMAND ${ODB_EXECUTABLE}
             --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/transform_model_options.odb
+            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/transform_instance_id_options.odb
             --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing
             ${ODB_EXECUTABLE_GLOBAL_ARGS}
-            ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/types/tracing/transform_model.hpp
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/transform_model-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/transform_model-odb-sqlite.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
+            ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/types/tracing/transform_instance_id.hpp
+        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/transform_instance_id-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
+        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/transform_instance_id-odb-sqlite.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
         VERBATIM
     )
-    add_dependencies(odb_dogen_relational odb_dogen_relational_transform_model)
-
-    add_custom_target(odb_dogen_relational_transform_model_set
-        COMMENT "ODB transform_model_set"
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${ODB_EXECUTABLE}
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/transform_model_set_options.odb
-            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing
-            ${ODB_EXECUTABLE_GLOBAL_ARGS}
-            ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/types/tracing/transform_model_set.hpp
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/transform_model_set-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/transform_model_set-odb-sqlite.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        VERBATIM
-    )
-    add_dependencies(odb_dogen_relational odb_dogen_relational_transform_model_set)
-
-    add_custom_target(odb_dogen_relational_xml
-        COMMENT "ODB xml"
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${ODB_EXECUTABLE}
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/xml_options.odb
-            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing
-            ${ODB_EXECUTABLE_GLOBAL_ARGS}
-            ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/types/tracing/xml.hpp
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/xml-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/xml-odb-sqlite.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
-        VERBATIM
-    )
-    add_dependencies(odb_dogen_relational odb_dogen_relational_xml)
+    add_dependencies(odb_dogen_relational odb_dogen_relational_transform_instance_id)
 endif()

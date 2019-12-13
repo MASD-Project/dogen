@@ -29,37 +29,41 @@ transform::transform(
     const boost::posix_time::ptime& start,
     const boost::posix_time::ptime& end,
     const dogen::relational::tracing::transform_id& id,
-    const std::string& name,
-    const std::string& description,
+    const dogen::relational::tracing::transform_instance_id& instance_id,
     const dogen::relational::tracing::run_id& run_id,
-    const dogen::relational::tracing::transform_type type)
+    const dogen::relational::tracing::transform_type type,
+    const dogen::relational::tracing::json& input,
+    const dogen::relational::tracing::json& output)
     : start_(start),
       end_(end),
       id_(id),
-      name_(name),
-      description_(description),
+      instance_id_(instance_id),
       run_id_(run_id),
-      type_(type) { }
+      type_(type),
+      input_(input),
+      output_(output) { }
 
 void transform::swap(transform& other) noexcept {
     using std::swap;
     swap(start_, other.start_);
     swap(end_, other.end_);
     swap(id_, other.id_);
-    swap(name_, other.name_);
-    swap(description_, other.description_);
+    swap(instance_id_, other.instance_id_);
     swap(run_id_, other.run_id_);
     swap(type_, other.type_);
+    swap(input_, other.input_);
+    swap(output_, other.output_);
 }
 
 bool transform::operator==(const transform& rhs) const {
     return start_ == rhs.start_ &&
         end_ == rhs.end_ &&
         id_ == rhs.id_ &&
-        name_ == rhs.name_ &&
-        description_ == rhs.description_ &&
+        instance_id_ == rhs.instance_id_ &&
         run_id_ == rhs.run_id_ &&
-        type_ == rhs.type_;
+        type_ == rhs.type_ &&
+        input_ == rhs.input_ &&
+        output_ == rhs.output_;
 }
 
 transform& transform::operator=(transform other) {
@@ -116,36 +120,20 @@ void transform::id(const dogen::relational::tracing::transform_id&& v) {
     id_ = std::move(v);
 }
 
-const std::string& transform::name() const {
-    return name_;
+const dogen::relational::tracing::transform_instance_id& transform::instance_id() const {
+    return instance_id_;
 }
 
-std::string& transform::name() {
-    return name_;
+dogen::relational::tracing::transform_instance_id& transform::instance_id() {
+    return instance_id_;
 }
 
-void transform::name(const std::string& v) {
-    name_ = v;
+void transform::instance_id(const dogen::relational::tracing::transform_instance_id& v) {
+    instance_id_ = v;
 }
 
-void transform::name(const std::string&& v) {
-    name_ = std::move(v);
-}
-
-const std::string& transform::description() const {
-    return description_;
-}
-
-std::string& transform::description() {
-    return description_;
-}
-
-void transform::description(const std::string& v) {
-    description_ = v;
-}
-
-void transform::description(const std::string&& v) {
-    description_ = std::move(v);
+void transform::instance_id(const dogen::relational::tracing::transform_instance_id&& v) {
+    instance_id_ = std::move(v);
 }
 
 const dogen::relational::tracing::run_id& transform::run_id() const {
@@ -170,6 +158,38 @@ dogen::relational::tracing::transform_type transform::type() const {
 
 void transform::type(const dogen::relational::tracing::transform_type v) {
     type_ = v;
+}
+
+const dogen::relational::tracing::json& transform::input() const {
+    return input_;
+}
+
+dogen::relational::tracing::json& transform::input() {
+    return input_;
+}
+
+void transform::input(const dogen::relational::tracing::json& v) {
+    input_ = v;
+}
+
+void transform::input(const dogen::relational::tracing::json&& v) {
+    input_ = std::move(v);
+}
+
+const dogen::relational::tracing::json& transform::output() const {
+    return output_;
+}
+
+dogen::relational::tracing::json& transform::output() {
+    return output_;
+}
+
+void transform::output(const dogen::relational::tracing::json& v) {
+    output_ = v;
+}
+
+void transform::output(const dogen::relational::tracing::json&& v) {
+    output_ = std::move(v);
 }
 
 }

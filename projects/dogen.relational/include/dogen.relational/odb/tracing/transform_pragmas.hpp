@@ -26,9 +26,11 @@
 #endif
 
 #include "dogen.relational/types/tracing/transform.hpp"
+#include "dogen.relational/odb/tracing/json_pragmas.hpp"
 #include "dogen.relational/odb/tracing/run_id_pragmas.hpp"
 #include "dogen.relational/odb/tracing/transform_id_pragmas.hpp"
 #include "dogen.relational/odb/tracing/transform_type_pragmas.hpp"
+#include "dogen.relational/odb/tracing/transform_instance_id_pragmas.hpp"
 
 namespace dogen::relational::tracing {
 

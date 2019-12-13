@@ -31,15 +31,13 @@ run::run(
     const dogen::relational::tracing::run_id& id,
     const dogen::relational::tracing::activity activity,
     const std::string& version,
-    const dogen::relational::tracing::json& configuration,
-    const dogen::relational::tracing::transform_id& top_level_transform_id)
+    const dogen::relational::tracing::json& configuration)
     : start_(start),
       end_(end),
       id_(id),
       activity_(activity),
       version_(version),
-      configuration_(configuration),
-      top_level_transform_id_(top_level_transform_id) { }
+      configuration_(configuration) { }
 
 void run::swap(run& other) noexcept {
     using std::swap;
@@ -49,7 +47,6 @@ void run::swap(run& other) noexcept {
     swap(activity_, other.activity_);
     swap(version_, other.version_);
     swap(configuration_, other.configuration_);
-    swap(top_level_transform_id_, other.top_level_transform_id_);
 }
 
 bool run::operator==(const run& rhs) const {
@@ -58,8 +55,7 @@ bool run::operator==(const run& rhs) const {
         id_ == rhs.id_ &&
         activity_ == rhs.activity_ &&
         version_ == rhs.version_ &&
-        configuration_ == rhs.configuration_ &&
-        top_level_transform_id_ == rhs.top_level_transform_id_;
+        configuration_ == rhs.configuration_;
 }
 
 run& run::operator=(run other) {
@@ -154,22 +150,6 @@ void run::configuration(const dogen::relational::tracing::json& v) {
 
 void run::configuration(const dogen::relational::tracing::json&& v) {
     configuration_ = std::move(v);
-}
-
-const dogen::relational::tracing::transform_id& run::top_level_transform_id() const {
-    return top_level_transform_id_;
-}
-
-dogen::relational::tracing::transform_id& run::top_level_transform_id() {
-    return top_level_transform_id_;
-}
-
-void run::top_level_transform_id(const dogen::relational::tracing::transform_id& v) {
-    top_level_transform_id_ = v;
-}
-
-void run::top_level_transform_id(const dogen::relational::tracing::transform_id&& v) {
-    top_level_transform_id_ = std::move(v);
 }
 
 }

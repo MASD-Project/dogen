@@ -35,7 +35,7 @@
 
 #include "dogen.relational/types/tracing/log.hpp"
 
-#include "dogen.relational/odb/tracing/transform_id-odb-sqlite.hxx"
+#include "dogen.relational/odb/tracing/run_id-odb-sqlite.hxx"
 
 #include "dogen.relational/odb/tracing/log-odb.hxx"
 
@@ -54,11 +54,11 @@ namespace odb
   template <typename A>
   struct query_columns< ::dogen::relational::tracing::log, id_sqlite, A >
   {
-    // transform_id
+    // run_id
     //
-    struct transform_id_class_
+    struct run_id_class_
     {
-      transform_id_class_ ()
+      run_id_class_ ()
       {
       }
 
@@ -75,7 +75,19 @@ namespace odb
       static const value_type_ value;
     };
 
-    static const transform_id_class_ transform_id;
+    static const run_id_class_ run_id;
+
+    // timestamp
+    //
+    typedef
+    sqlite::query_column<
+      sqlite::value_traits<
+        ::boost::posix_time::ptime,
+        sqlite::id_text >::query_type,
+      sqlite::id_text >
+    timestamp_type_;
+
+    static const timestamp_type_ timestamp;
 
     // component
     //
@@ -103,13 +115,18 @@ namespace odb
   };
 
   template <typename A>
-  const typename query_columns< ::dogen::relational::tracing::log, id_sqlite, A >::transform_id_class_::value_type_
-  query_columns< ::dogen::relational::tracing::log, id_sqlite, A >::transform_id_class_::
-  value (A::table_name, "\"TRANSFORM_ID\"", 0);
+  const typename query_columns< ::dogen::relational::tracing::log, id_sqlite, A >::run_id_class_::value_type_
+  query_columns< ::dogen::relational::tracing::log, id_sqlite, A >::run_id_class_::
+  value (A::table_name, "\"RUN_ID\"", 0);
 
   template <typename A>
-  const typename query_columns< ::dogen::relational::tracing::log, id_sqlite, A >::transform_id_class_
-  query_columns< ::dogen::relational::tracing::log, id_sqlite, A >::transform_id;
+  const typename query_columns< ::dogen::relational::tracing::log, id_sqlite, A >::run_id_class_
+  query_columns< ::dogen::relational::tracing::log, id_sqlite, A >::run_id;
+
+  template <typename A>
+  const typename query_columns< ::dogen::relational::tracing::log, id_sqlite, A >::timestamp_type_
+  query_columns< ::dogen::relational::tracing::log, id_sqlite, A >::
+  timestamp (A::table_name, "\"TIMESTAMP\"", 0);
 
   template <typename A>
   const typename query_columns< ::dogen::relational::tracing::log, id_sqlite, A >::component_type_
@@ -134,9 +151,15 @@ namespace odb
     public:
     struct image_type
     {
-      // transform_id_
+      // run_id_
       //
-      composite_value_traits< ::dogen::relational::tracing::transform_id, id_sqlite >::image_type transform_id_value;
+      composite_value_traits< ::dogen::relational::tracing::run_id, id_sqlite >::image_type run_id_value;
+
+      // timestamp_
+      //
+      details::buffer timestamp_value;
+      std::size_t timestamp_size;
+      bool timestamp_null;
 
       // component_
       //
@@ -178,7 +201,7 @@ namespace odb
 
     typedef sqlite::query_base query_base_type;
 
-    static const std::size_t column_count = 3UL;
+    static const std::size_t column_count = 4UL;
     static const std::size_t id_column_count = 0UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;

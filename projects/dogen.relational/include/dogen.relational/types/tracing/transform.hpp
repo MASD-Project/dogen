@@ -25,12 +25,13 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
+#include "dogen.relational/types/tracing/json.hpp"
 #include "dogen.relational/types/tracing/run_id.hpp"
 #include "dogen.relational/types/tracing/transform_id.hpp"
 #include "dogen.relational/types/tracing/transform_type.hpp"
+#include "dogen.relational/types/tracing/transform_instance_id.hpp"
 
 namespace dogen::relational::tracing {
 
@@ -48,10 +49,11 @@ public:
         const boost::posix_time::ptime& start,
         const boost::posix_time::ptime& end,
         const dogen::relational::tracing::transform_id& id,
-        const std::string& name,
-        const std::string& description,
+        const dogen::relational::tracing::transform_instance_id& instance_id,
         const dogen::relational::tracing::run_id& run_id,
-        const dogen::relational::tracing::transform_type type);
+        const dogen::relational::tracing::transform_type type,
+        const dogen::relational::tracing::json& input,
+        const dogen::relational::tracing::json& output);
 
 public:
     const boost::posix_time::ptime& start() const;
@@ -69,15 +71,10 @@ public:
     void id(const dogen::relational::tracing::transform_id& v);
     void id(const dogen::relational::tracing::transform_id&& v);
 
-    const std::string& name() const;
-    std::string& name();
-    void name(const std::string& v);
-    void name(const std::string&& v);
-
-    const std::string& description() const;
-    std::string& description();
-    void description(const std::string& v);
-    void description(const std::string&& v);
+    const dogen::relational::tracing::transform_instance_id& instance_id() const;
+    dogen::relational::tracing::transform_instance_id& instance_id();
+    void instance_id(const dogen::relational::tracing::transform_instance_id& v);
+    void instance_id(const dogen::relational::tracing::transform_instance_id&& v);
 
     const dogen::relational::tracing::run_id& run_id() const;
     dogen::relational::tracing::run_id& run_id();
@@ -86,6 +83,16 @@ public:
 
     dogen::relational::tracing::transform_type type() const;
     void type(const dogen::relational::tracing::transform_type v);
+
+    const dogen::relational::tracing::json& input() const;
+    dogen::relational::tracing::json& input();
+    void input(const dogen::relational::tracing::json& v);
+    void input(const dogen::relational::tracing::json&& v);
+
+    const dogen::relational::tracing::json& output() const;
+    dogen::relational::tracing::json& output();
+    void output(const dogen::relational::tracing::json& v);
+    void output(const dogen::relational::tracing::json&& v);
 
 public:
     bool operator==(const transform& rhs) const;
@@ -101,10 +108,11 @@ private:
     boost::posix_time::ptime start_;
     boost::posix_time::ptime end_;
     dogen::relational::tracing::transform_id id_;
-    std::string name_;
-    std::string description_;
+    dogen::relational::tracing::transform_instance_id instance_id_;
     dogen::relational::tracing::run_id run_id_;
     dogen::relational::tracing::transform_type type_;
+    dogen::relational::tracing::json input_;
+    dogen::relational::tracing::json output_;
 };
 
 }

@@ -37,7 +37,6 @@
 
 #include "dogen.relational/odb/tracing/json-odb-sqlite.hxx"
 #include "dogen.relational/odb/tracing/run_id-odb-sqlite.hxx"
-#include "dogen.relational/odb/tracing/transform_id-odb-sqlite.hxx"
 
 #include "dogen.relational/odb/tracing/run-odb.hxx"
 
@@ -149,29 +148,6 @@ namespace odb
     };
 
     static const configuration_class_ configuration;
-
-    // top_level_transform_id
-    //
-    struct top_level_transform_id_class_
-    {
-      top_level_transform_id_class_ ()
-      {
-      }
-
-      // value
-      //
-      typedef
-      sqlite::query_column<
-        sqlite::value_traits<
-          ::std::string,
-          sqlite::id_text >::query_type,
-        sqlite::id_text >
-      value_type_;
-
-      static const value_type_ value;
-    };
-
-    static const top_level_transform_id_class_ top_level_transform_id;
   };
 
   template <typename A>
@@ -211,15 +187,6 @@ namespace odb
   template <typename A>
   const typename query_columns< ::dogen::relational::tracing::run, id_sqlite, A >::configuration_class_
   query_columns< ::dogen::relational::tracing::run, id_sqlite, A >::configuration;
-
-  template <typename A>
-  const typename query_columns< ::dogen::relational::tracing::run, id_sqlite, A >::top_level_transform_id_class_::value_type_
-  query_columns< ::dogen::relational::tracing::run, id_sqlite, A >::top_level_transform_id_class_::
-  value (A::table_name, "\"TOP_LEVEL_TRANSFORM_ID\"", 0);
-
-  template <typename A>
-  const typename query_columns< ::dogen::relational::tracing::run, id_sqlite, A >::top_level_transform_id_class_
-  query_columns< ::dogen::relational::tracing::run, id_sqlite, A >::top_level_transform_id;
 
   template <typename A>
   struct pointer_query_columns< ::dogen::relational::tracing::run, id_sqlite, A >:
@@ -272,10 +239,6 @@ namespace odb
       //
       composite_value_traits< ::dogen::relational::tracing::json, id_sqlite >::image_type configuration_value;
 
-      // top_level_transform_id_
-      //
-      composite_value_traits< ::dogen::relational::tracing::transform_id, id_sqlite >::image_type top_level_transform_id_value;
-
       std::size_t version;
     };
 
@@ -315,7 +278,7 @@ namespace odb
 
     typedef sqlite::query_base query_base_type;
 
-    static const std::size_t column_count = 7UL;
+    static const std::size_t column_count = 6UL;
     static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;

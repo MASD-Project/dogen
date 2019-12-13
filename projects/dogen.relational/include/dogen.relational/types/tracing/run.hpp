@@ -31,7 +31,6 @@
 #include "dogen.relational/types/tracing/json.hpp"
 #include "dogen.relational/types/tracing/run_id.hpp"
 #include "dogen.relational/types/tracing/activity.hpp"
-#include "dogen.relational/types/tracing/transform_id.hpp"
 
 namespace dogen::relational::tracing {
 
@@ -51,8 +50,7 @@ public:
         const dogen::relational::tracing::run_id& id,
         const dogen::relational::tracing::activity activity,
         const std::string& version,
-        const dogen::relational::tracing::json& configuration,
-        const dogen::relational::tracing::transform_id& top_level_transform_id);
+        const dogen::relational::tracing::json& configuration);
 
 public:
     const boost::posix_time::ptime& start() const;
@@ -93,11 +91,6 @@ public:
     void configuration(const dogen::relational::tracing::json& v);
     void configuration(const dogen::relational::tracing::json&& v);
 
-    const dogen::relational::tracing::transform_id& top_level_transform_id() const;
-    dogen::relational::tracing::transform_id& top_level_transform_id();
-    void top_level_transform_id(const dogen::relational::tracing::transform_id& v);
-    void top_level_transform_id(const dogen::relational::tracing::transform_id&& v);
-
 public:
     bool operator==(const run& rhs) const;
     bool operator!=(const run& rhs) const {
@@ -115,7 +108,6 @@ private:
     dogen::relational::tracing::activity activity_;
     std::string version_;
     dogen::relational::tracing::json configuration_;
-    dogen::relational::tracing::transform_id top_level_transform_id_;
 };
 
 }

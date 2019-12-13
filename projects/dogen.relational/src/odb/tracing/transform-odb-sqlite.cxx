@@ -60,31 +60,33 @@ namespace odb
           i.id_value, t + 2UL))
       grew = true;
 
-    // name_
+    // instance_id_
     //
-    if (t[3UL])
-    {
-      i.name_value.capacity (i.name_size);
+    if (composite_value_traits< ::dogen::relational::tracing::transform_instance_id, id_sqlite >::grow (
+          i.instance_id_value, t + 3UL))
       grew = true;
-    }
-
-    // description_
-    //
-    if (t[4UL])
-    {
-      i.description_value.capacity (i.description_size);
-      grew = true;
-    }
 
     // run_id_
     //
     if (composite_value_traits< ::dogen::relational::tracing::run_id, id_sqlite >::grow (
-          i.run_id_value, t + 5UL))
+          i.run_id_value, t + 4UL))
       grew = true;
 
     // type_
     //
-    t[6UL] = false;
+    t[5UL] = false;
+
+    // input_
+    //
+    if (composite_value_traits< ::dogen::relational::tracing::json, id_sqlite >::grow (
+          i.input_value, t + 6UL))
+      grew = true;
+
+    // output_
+    //
+    if (composite_value_traits< ::dogen::relational::tracing::json, id_sqlite >::grow (
+          i.output_value, t + 7UL))
+      grew = true;
 
     return grew;
   }
@@ -128,27 +130,11 @@ namespace odb
       b + n, i.id_value, sk);
     n += 1UL;
 
-    // name_
+    // instance_id_
     //
-    b[n].type = sqlite::image_traits<
-      ::std::string,
-      sqlite::id_text>::bind_value;
-    b[n].buffer = i.name_value.data ();
-    b[n].size = &i.name_size;
-    b[n].capacity = i.name_value.capacity ();
-    b[n].is_null = &i.name_null;
-    n++;
-
-    // description_
-    //
-    b[n].type = sqlite::image_traits<
-      ::std::string,
-      sqlite::id_text>::bind_value;
-    b[n].buffer = i.description_value.data ();
-    b[n].size = &i.description_size;
-    b[n].capacity = i.description_value.capacity ();
-    b[n].is_null = &i.description_null;
-    n++;
+    composite_value_traits< ::dogen::relational::tracing::transform_instance_id, id_sqlite >::bind (
+      b + n, i.instance_id_value, sk);
+    n += 1UL;
 
     // run_id_
     //
@@ -162,6 +148,18 @@ namespace odb
     b[n].buffer = &i.type_value;
     b[n].is_null = &i.type_null;
     n++;
+
+    // input_
+    //
+    composite_value_traits< ::dogen::relational::tracing::json, id_sqlite >::bind (
+      b + n, i.input_value, sk);
+    n += 1UL;
+
+    // output_
+    //
+    composite_value_traits< ::dogen::relational::tracing::json, id_sqlite >::bind (
+      b + n, i.output_value, sk);
+    n += 1UL;
   }
 
   bool access::object_traits_impl< ::dogen::relational::tracing::transform, id_sqlite >::
@@ -228,42 +226,17 @@ namespace odb
         grew = true;
     }
 
-    // name_
+    // instance_id_
     //
     {
-      ::std::string const& v =
-        o.name ();
+      ::dogen::relational::tracing::transform_instance_id const& v =
+        o.instance_id ();
 
-      bool is_null (false);
-      std::size_t cap (i.name_value.capacity ());
-      sqlite::value_traits<
-          ::std::string,
-          sqlite::id_text >::set_image (
-        i.name_value,
-        i.name_size,
-        is_null,
-        v);
-      i.name_null = is_null;
-      grew = grew || (cap != i.name_value.capacity ());
-    }
-
-    // description_
-    //
-    {
-      ::std::string const& v =
-        o.description ();
-
-      bool is_null (false);
-      std::size_t cap (i.description_value.capacity ());
-      sqlite::value_traits<
-          ::std::string,
-          sqlite::id_text >::set_image (
-        i.description_value,
-        i.description_size,
-        is_null,
-        v);
-      i.description_null = is_null;
-      grew = grew || (cap != i.description_value.capacity ());
+      if (composite_value_traits< ::dogen::relational::tracing::transform_instance_id, id_sqlite >::init (
+            i.instance_id_value,
+            v,
+            sk))
+        grew = true;
     }
 
     // run_id_
@@ -293,6 +266,32 @@ namespace odb
         is_null,
         v);
       i.type_null = is_null;
+    }
+
+    // input_
+    //
+    {
+      ::dogen::relational::tracing::json const& v =
+        o.input ();
+
+      if (composite_value_traits< ::dogen::relational::tracing::json, id_sqlite >::init (
+            i.input_value,
+            v,
+            sk))
+        grew = true;
+    }
+
+    // output_
+    //
+    {
+      ::dogen::relational::tracing::json const& v =
+        o.output ();
+
+      if (composite_value_traits< ::dogen::relational::tracing::json, id_sqlite >::init (
+            i.output_value,
+            v,
+            sk))
+        grew = true;
     }
 
     return grew;
@@ -349,34 +348,16 @@ namespace odb
         db);
     }
 
-    // name_
+    // instance_id_
     //
     {
-      ::std::string& v =
-        o.name ();
+      ::dogen::relational::tracing::transform_instance_id& v =
+        o.instance_id ();
 
-      sqlite::value_traits<
-          ::std::string,
-          sqlite::id_text >::set_value (
+      composite_value_traits< ::dogen::relational::tracing::transform_instance_id, id_sqlite >::init (
         v,
-        i.name_value,
-        i.name_size,
-        i.name_null);
-    }
-
-    // description_
-    //
-    {
-      ::std::string& v =
-        o.description ();
-
-      sqlite::value_traits<
-          ::std::string,
-          sqlite::id_text >::set_value (
-        v,
-        i.description_value,
-        i.description_size,
-        i.description_null);
+        i.instance_id_value,
+        db);
     }
 
     // run_id_
@@ -405,6 +386,30 @@ namespace odb
 
       o.type (v);
     }
+
+    // input_
+    //
+    {
+      ::dogen::relational::tracing::json& v =
+        o.input ();
+
+      composite_value_traits< ::dogen::relational::tracing::json, id_sqlite >::init (
+        v,
+        i.input_value,
+        db);
+    }
+
+    // output_
+    //
+    {
+      ::dogen::relational::tracing::json& v =
+        o.output ();
+
+      composite_value_traits< ::dogen::relational::tracing::json, id_sqlite >::init (
+        v,
+        i.output_value,
+        db);
+    }
   }
 
   const char access::object_traits_impl< ::dogen::relational::tracing::transform, id_sqlite >::persist_statement[] =
@@ -412,22 +417,24 @@ namespace odb
   "(\"START\", "
   "\"END\", "
   "\"ID\", "
-  "\"NAME\", "
-  "\"DESCRIPTION\", "
+  "\"INSTANCE_ID\", "
   "\"RUN_ID\", "
-  "\"TYPE\") "
+  "\"TYPE\", "
+  "\"INPUT\", "
+  "\"OUTPUT\") "
   "VALUES "
-  "(?, ?, ?, ?, ?, ?, ?)";
+  "(?, ?, ?, ?, ?, ?, ?, ?)";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::transform, id_sqlite >::query_statement[] =
   "SELECT "
   "\"DOGEN\".\"TRANSFORM\".\"START\", "
   "\"DOGEN\".\"TRANSFORM\".\"END\", "
   "\"DOGEN\".\"TRANSFORM\".\"ID\", "
-  "\"DOGEN\".\"TRANSFORM\".\"NAME\", "
-  "\"DOGEN\".\"TRANSFORM\".\"DESCRIPTION\", "
+  "\"DOGEN\".\"TRANSFORM\".\"INSTANCE_ID\", "
   "\"DOGEN\".\"TRANSFORM\".\"RUN_ID\", "
-  "\"DOGEN\".\"TRANSFORM\".\"TYPE\" "
+  "\"DOGEN\".\"TRANSFORM\".\"TYPE\", "
+  "\"DOGEN\".\"TRANSFORM\".\"INPUT\", "
+  "\"DOGEN\".\"TRANSFORM\".\"OUTPUT\" "
   "FROM \"DOGEN\".\"TRANSFORM\"";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::transform, id_sqlite >::erase_query_statement[] =
@@ -585,10 +592,11 @@ namespace odb
                       "  \"START\" TEXT NULL,\n"
                       "  \"END\" TEXT NULL,\n"
                       "  \"ID\" TEXT NOT NULL,\n"
-                      "  \"NAME\" TEXT NOT NULL,\n"
-                      "  \"DESCRIPTION\" TEXT NOT NULL,\n"
+                      "  \"INSTANCE_ID\" TEXT NOT NULL,\n"
                       "  \"RUN_ID\" TEXT NOT NULL,\n"
-                      "  \"TYPE\" INTEGER NOT NULL)");
+                      "  \"TYPE\" INTEGER NOT NULL,\n"
+                      "  \"INPUT\" TEXT NOT NULL,\n"
+                      "  \"OUTPUT\" TEXT NOT NULL)");
           return false;
         }
       }

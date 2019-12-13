@@ -63,10 +63,6 @@
           "tagged_values": {
             "masd.orm.type_override": "postgresql,JSONB"
           }
-        },
-        {
-          "name": "top_level_transform_id",
-          "type": "transform_id"
         }
       ]
     },
@@ -91,129 +87,6 @@
         "masd.primitive.underlying_element": "std::string",
         "masd.orm.type_override": "postgresql,JSONB",
         "masd.orm.type_mapping": "sqlite,JSON_TEXT,TEXT,json((?))"
-      },
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "tracing::model",
-      "stereotypes": [
-        "masd::orm::object",
-        "JsonContent",
-        "XmlContent"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "id",
-          "type": "model_id"
-        },
-        {
-          "name": "model_set_id",
-          "type": "model_set_id",
-          "tagged_values": {
-            "masd.orm.is_nullable": "true"
-          }
-        },
-        {
-          "name": "qualified_name",
-          "type": "std::string"
-        },
-        {
-          "name": "qualified_meta_name",
-          "type": "std::string"
-        },
-        {
-          "name": "type",
-          "type": "model_type"
-        },
-        {
-          "name": "source_file",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": "tracing::element_id",
-      "stereotypes": [
-        "masd::orm::value",
-        "masd::primitive"
-      ],
-      "tagged_values": {
-        "masd.primitive.underlying_element": "std::string"
-      },
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "tracing::element",
-      "stereotypes": [
-        "masd::orm::object",
-        "JsonContent"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "id",
-          "type": "element_id"
-        },
-        {
-          "name": "model_id",
-          "type": "model_id"
-        },
-        {
-          "name": "qualified_name",
-          "type": "std::string"
-        },
-        {
-          "name": "qualified_meta_name",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": "tracing::attribute",
-      "stereotypes": [
-        "masd::orm::object",
-        "JsonContent"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "id",
-          "type": "attribute_id"
-        },
-        {
-          "name": "element_id",
-          "type": "element_id"
-        },
-        {
-          "name": "qualified_name",
-          "type": "std::string"
-        },
-        {
-          "name": "qualified_meta_name",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": "tracing::model_id",
-      "stereotypes": [
-        "masd::orm::value",
-        "masd::primitive"
-      ],
-      "tagged_values": {
-        "masd.primitive.underlying_element": "std::string"
-      },
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "tracing::attribute_id",
-      "stereotypes": [
-        "masd::orm::value",
-        "masd::primitive"
-      ],
-      "tagged_values": {
-        "masd.primitive.underlying_element": "std::string"
       },
       "fallback_element_type": "masd::object"
     },
@@ -246,17 +119,6 @@
       ]
     },
     {
-      "name": "tracing::model_set_id",
-      "stereotypes": [
-        "masd::orm::value",
-        "masd::primitive"
-      ],
-      "tagged_values": {
-        "masd.primitive.underlying_element": "std::string"
-      },
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "tracing::transform",
       "stereotypes": [
         "masd::orm::object",
@@ -269,12 +131,8 @@
           "type": "transform_id"
         },
         {
-          "name": "name",
-          "type": "std::string"
-        },
-        {
-          "name": "description",
-          "type": "std::string"
+          "name": "instance_id",
+          "type": "transform_instance_id"
         },
         {
           "name": "run_id",
@@ -283,6 +141,14 @@
         {
           "name": "type",
           "type": "transform_type"
+        },
+        {
+          "name": "input",
+          "type": "json"
+        },
+        {
+          "name": "output",
+          "type": "json"
         }
       ]
     },
@@ -296,82 +162,6 @@
         {
           "name": "json_content",
           "type": "json"
-        }
-      ]
-    },
-    {
-      "name": "tracing::transform_model",
-      "stereotypes": [
-        "masd::orm::object"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "transform_id",
-          "type": "transform_id"
-        },
-        {
-          "name": "model_id",
-          "type": "model_id"
-        },
-        {
-          "name": "type",
-          "type": "io_type"
-        }
-      ]
-    },
-    {
-      "name": "tracing::model_set",
-      "stereotypes": [
-        "masd::orm::object"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "id",
-          "type": "model_set_id"
-        },
-        {
-          "name": "qualified_name",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": "tracing::transform_model_set",
-      "stereotypes": [
-        "masd::orm::object"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "transform_id",
-          "type": "transform_id"
-        },
-        {
-          "name": "model_set_id",
-          "type": "model_set_id"
-        },
-        {
-          "name": "type",
-          "type": "io_type"
-        }
-      ]
-    },
-    {
-      "name": "tracing::io_type",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "input",
-          "type": ""
-        },
-        {
-          "name": "output",
-          "type": ""
         }
       ]
     },
@@ -393,97 +183,6 @@
       ]
     },
     {
-      "name": "tracing::model_type",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "injection_json",
-          "type": ""
-        },
-        {
-          "name": "injection_dia",
-          "type": ""
-        },
-        {
-          "name": "assets",
-          "type": ""
-        },
-        {
-          "name": "generation",
-          "type": ""
-        },
-        {
-          "name": "extraction",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "name": "tracing::XmlContent",
-      "stereotypes": [
-        "masd::object_template"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "xml_content",
-          "type": "xml"
-        }
-      ]
-    },
-    {
-      "name": "tracing::xml",
-      "stereotypes": [
-        "masd::orm::value",
-        "masd::primitive"
-      ],
-      "tagged_values": {
-        "masd.primitive.underlying_element": "std::string"
-      },
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "tracing::transform_components_key",
-      "stereotypes": [
-        "masd::orm::value"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "parent_id",
-          "type": "transform_id"
-        },
-        {
-          "name": "component_id",
-          "type": "transform_id"
-        }
-      ]
-    },
-    {
-      "name": "tracing::transform_components",
-      "stereotypes": [
-        "masd::orm::object"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "key",
-          "type": "transform_components_key",
-          "tagged_values": {
-            "masd.orm.is_primary_key": "true",
-            "masd.orm.is_composite": "true"
-          }
-        },
-        {
-          "name": "start",
-          "type": "boost::posix_time::ptime"
-        }
-      ]
-    },
-    {
       "name": "tracing::log",
       "stereotypes": [
         "masd::orm::object"
@@ -491,8 +190,12 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "transform_id",
-          "type": "transform_id"
+          "name": "run_id",
+          "type": "run_id"
+        },
+        {
+          "name": "timestamp",
+          "type": "boost::posix_time::ptime"
         },
         {
           "name": "component",
@@ -541,6 +244,17 @@
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "tracing::transform_instance_id",
+      "stereotypes": [
+        "masd::orm::value",
+        "masd::primitive"
+      ],
+      "tagged_values": {
+        "masd.primitive.underlying_element": "std::string"
+      },
       "fallback_element_type": "masd::object"
     }
   ]

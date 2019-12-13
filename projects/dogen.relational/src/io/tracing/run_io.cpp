@@ -25,7 +25,6 @@
 #include "dogen.relational/io/tracing/json_io.hpp"
 #include "dogen.relational/io/tracing/run_id_io.hpp"
 #include "dogen.relational/io/tracing/activity_io.hpp"
-#include "dogen.relational/io/tracing/transform_id_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -45,8 +44,7 @@ std::ostream& operator<<(std::ostream& s, const run& v) {
       << "\"id\": " << v.id() << ", "
       << "\"activity\": " << v.activity() << ", "
       << "\"version\": " << "\"" << tidy_up_string(v.version()) << "\"" << ", "
-      << "\"configuration\": " << v.configuration() << ", "
-      << "\"top_level_transform_id\": " << v.top_level_transform_id()
+      << "\"configuration\": " << v.configuration()
       << " }";
     return(s);
 }

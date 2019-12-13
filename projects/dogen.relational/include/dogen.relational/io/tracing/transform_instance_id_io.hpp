@@ -18,28 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_RELATIONAL_ODB_TRACING_RUN_PRAGMAS_HPP
-#define DOGEN_RELATIONAL_ODB_TRACING_RUN_PRAGMAS_HPP
+#ifndef DOGEN_RELATIONAL_IO_TRACING_TRANSFORM_INSTANCE_ID_IO_HPP
+#define DOGEN_RELATIONAL_IO_TRACING_TRANSFORM_INSTANCE_ID_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.relational/types/tracing/run.hpp"
-#include "dogen.relational/odb/tracing/json_pragmas.hpp"
-#include "dogen.relational/odb/tracing/run_id_pragmas.hpp"
-#include "dogen.relational/odb/tracing/activity_pragmas.hpp"
+#include <iosfwd>
+#include "dogen.relational/types/tracing/transform_instance_id.hpp"
 
 namespace dogen::relational::tracing {
 
-#ifdef ODB_COMPILER
-
-#pragma db object(run) schema("DOGEN")
-
-#pragma db member(run::id_) id
-#pragma db member(run::configuration_) pgsql:type("JSONB")
-
-#endif
+std::ostream&
+operator<<(std::ostream& s, const dogen::relational::tracing::transform_instance_id& v);
 
 }
 

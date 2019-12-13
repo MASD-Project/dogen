@@ -23,22 +23,26 @@
 namespace dogen::relational::tracing {
 
 log::log(
-    const dogen::relational::tracing::transform_id& transform_id,
+    const dogen::relational::tracing::run_id& run_id,
+    const boost::posix_time::ptime& timestamp,
     const std::string& component,
     const std::string& message)
-    : transform_id_(transform_id),
+    : run_id_(run_id),
+      timestamp_(timestamp),
       component_(component),
       message_(message) { }
 
 void log::swap(log& other) noexcept {
     using std::swap;
-    swap(transform_id_, other.transform_id_);
+    swap(run_id_, other.run_id_);
+    swap(timestamp_, other.timestamp_);
     swap(component_, other.component_);
     swap(message_, other.message_);
 }
 
 bool log::operator==(const log& rhs) const {
-    return transform_id_ == rhs.transform_id_ &&
+    return run_id_ == rhs.run_id_ &&
+        timestamp_ == rhs.timestamp_ &&
         component_ == rhs.component_ &&
         message_ == rhs.message_;
 }
@@ -49,20 +53,36 @@ log& log::operator=(log other) {
     return *this;
 }
 
-const dogen::relational::tracing::transform_id& log::transform_id() const {
-    return transform_id_;
+const dogen::relational::tracing::run_id& log::run_id() const {
+    return run_id_;
 }
 
-dogen::relational::tracing::transform_id& log::transform_id() {
-    return transform_id_;
+dogen::relational::tracing::run_id& log::run_id() {
+    return run_id_;
 }
 
-void log::transform_id(const dogen::relational::tracing::transform_id& v) {
-    transform_id_ = v;
+void log::run_id(const dogen::relational::tracing::run_id& v) {
+    run_id_ = v;
 }
 
-void log::transform_id(const dogen::relational::tracing::transform_id&& v) {
-    transform_id_ = std::move(v);
+void log::run_id(const dogen::relational::tracing::run_id&& v) {
+    run_id_ = std::move(v);
+}
+
+const boost::posix_time::ptime& log::timestamp() const {
+    return timestamp_;
+}
+
+boost::posix_time::ptime& log::timestamp() {
+    return timestamp_;
+}
+
+void log::timestamp(const boost::posix_time::ptime& v) {
+    timestamp_ = v;
+}
+
+void log::timestamp(const boost::posix_time::ptime&& v) {
+    timestamp_ = std::move(v);
 }
 
 const std::string& log::component() const {
