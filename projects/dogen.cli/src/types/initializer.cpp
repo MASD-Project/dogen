@@ -22,6 +22,7 @@
 #include "dogen.generation.cpp/types/initializer.hpp"
 #include "dogen.injection.json/types/initializer.hpp"
 #include "dogen.injection.dia/types/initializer.hpp"
+#include "dogen.tracing/types/initializer.hpp"
 #include "dogen.cli/types/initializer.hpp"
 
 namespace dogen::cli {
@@ -31,6 +32,7 @@ void initializer::initialize() {
     dogen::injection::dia::initializer::initialize();
     dogen::generation::csharp::initializer::initialize();
     dogen::generation::cpp::initializer::initialize();
+    dogen::tracing::initializer::initialize();
 }
 
 }

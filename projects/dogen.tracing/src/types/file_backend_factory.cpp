@@ -54,6 +54,9 @@ make(const configuration& cfg, const std::string& run_id) const {
     if (!tcfg) {
         BOOST_LOG_SEV(lg, trace) << "No tracing configuration.";
         return boost::shared_ptr<backend>();
+    } else if (tcfg->backend() != tracing_backend()) {
+        BOOST_LOG_SEV(lg, trace) << "Tracing backend is not file.";
+        return boost::shared_ptr<backend>();
     }
 
     return boost::make_shared<file_backend>(*tcfg, run_id);

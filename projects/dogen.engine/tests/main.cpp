@@ -29,7 +29,7 @@
 #include "dogen.generation.cpp/types/initializer.hpp"
 #include "dogen.injection.json/types/initializer.hpp"
 #include "dogen.injection.dia/types/initializer.hpp"
-
+#include "dogen.tracing/types/initializer.hpp"
 
 namespace  {
 
@@ -59,6 +59,7 @@ struct initializer {
         dogen::generation::csharp::initializer::initialize();
         dogen::generation::cpp::initializer::initialize();
         dogen::utility::test_data::dogen_generation::initialize();
+        dogen::tracing::initializer::initialize();
 #ifdef ENABLE_CPP_REF_IMPL_TESTS
         dogen::utility::test_data::cpp_ref_impl_generation::initialize();
 #endif // ENABLE_CPP_REF_IMPL_TESTS

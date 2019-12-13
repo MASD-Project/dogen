@@ -60,7 +60,7 @@ std::string relational_backend::id() const {
 }
 
 dogen::tracing_backend relational_backend::tracing_backend() const {
-    return dogen::tracing_backend::file;
+    return dogen::tracing_backend::relational_database;
 }
 
 void relational_backend::to_stream(std::ostream& s) const {

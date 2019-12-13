@@ -33,8 +33,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
 #include "dogen.tracing/types/backend.hpp"
-#include "dogen/types/tracing_configuration.hpp"
-#include "dogen/types/database_configuration.hpp"
+#include "dogen/types/configuration.hpp"
 #include "dogen.tracing/types/backend_factory_registrar.hpp"
 
 namespace dogen::tracing {
@@ -49,17 +48,11 @@ public:
      */
     static backend_factory_registrar& registrar();
 
-private:
-    static boost::shared_ptr<tracing::backend>
-    make_backend(const boost::optional<tracing_configuration>& tcfg,
-        const boost::optional<database_configuration>& dbcfg);
-
 public:
     tracer(const tracer&) = default;
 
 public:
-    tracer(const boost::optional<tracing_configuration>& tcfg,
-        const boost::optional<database_configuration>& dbcfg);
+    explicit tracer(const configuration& cfg);
 
 public:
     const boost::shared_ptr<tracing::backend> backend() const {
@@ -69,9 +62,6 @@ public:
 private:
     template<typename Ioable>
     std::string to_string(const Ioable& ioable) const {
-        if (!tracing_enabled_)
-            return "";
-
         std::ostringstream s;
         s << ioable;
         return s.str();
@@ -145,7 +135,6 @@ public:
     bool operator==(const tracer& rhs) const;
 
 private:
-    const bool tracing_enabled_;
     boost::shared_ptr<tracing::backend> backend_;
     static backend_factory_registrar registrar_;
 };

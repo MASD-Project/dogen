@@ -44,9 +44,8 @@ transforms::context mock_context_factory::make() {
     auto alrp(boost::make_shared<archetypes::location_repository>());
     r.archetype_location_repository(alrp);
 
-    boost::optional<tracing_configuration> tcfg;
-    boost::optional<database_configuration> dbcfg;
-    auto tracer(boost::make_shared<tracing::tracer>(tcfg, dbcfg));
+    configuration cfg;
+    auto tracer(boost::make_shared<tracing::tracer>(cfg));
     r.tracer(tracer);
 
     BOOST_LOG_SEV(lg, debug) << "Created the context.";

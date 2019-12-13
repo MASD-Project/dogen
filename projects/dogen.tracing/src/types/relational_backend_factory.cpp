@@ -25,10 +25,12 @@ void dumm_contents() { }
 #else
 
 #include <boost/make_shared.hpp>
+#include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen/io/tracing_configuration_io.hpp"
 #include "dogen/io/database_configuration_io.hpp"
+#include "dogen.tracing/types/tracing_error.hpp"
 #include "dogen.tracing/types/relational_backend.hpp"
 #include "dogen.tracing/types/relational_backend_factory.hpp"
 
@@ -39,6 +41,9 @@ const std::string id("tracing.relational_backend_factory");
 using namespace dogen::utility::log;
 auto lg(logger_factory(id));
 
+const std::string no_database_config("Relational tracing requested but "
+    " database settings not provided.");
+
 }
 
 namespace dogen::tracing {
@@ -48,7 +53,7 @@ std::string relational_backend_factory::id() const {
 }
 
 dogen::tracing_backend relational_backend_factory::tracing_backend() const {
-    return dogen::tracing_backend::file;
+    return dogen::tracing_backend::relational_database;
 }
 
 boost::shared_ptr<backend> relational_backend_factory::
@@ -60,13 +65,16 @@ make(const configuration& cfg, const std::string& run_id) const {
     if (!tcfg) {
         BOOST_LOG_SEV(lg, trace) << "No tracing configuration.";
         return boost::shared_ptr<backend>();
+    } else if (tcfg->backend() != tracing_backend()) {
+        BOOST_LOG_SEV(lg, trace) << "Backend is not relational database.";
+        return boost::shared_ptr<backend>();
     }
 
     const auto& dbcfg(cfg.database());
     BOOST_LOG_SEV(lg, trace) << "Database configuration: " << dbcfg;
     if (!dbcfg) {
-        BOOST_LOG_SEV(lg, trace) << "No database configuration.";
-        return boost::shared_ptr<backend>();
+        BOOST_LOG_SEV(lg, error) << no_database_config;
+        BOOST_THROW_EXCEPTION(tracing_error(no_database_config));
     }
 
     return boost::make_shared<relational_backend>(*tcfg, *dbcfg, run_id);

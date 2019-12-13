@@ -58,61 +58,11 @@ backend_factory_registrar& tracer::registrar() {
     return registrar_;
 }
 
-boost::shared_ptr<tracing::backend>
-tracer::make_backend(const boost::optional<tracing_configuration>& tcfg,
-    const boost::optional<database_configuration>& dbcfg) {
-    BOOST_LOG_SEV(lg, debug) << "Tracing configuration: " << tcfg;
-    BOOST_LOG_SEV(lg, debug) << "Database configuration: " << dbcfg;
-
-    /*
-     * If the user did not request any tracing, just use the null
-     * tracer. It has very little cost.
-     */
-    const bool tracing_enabled(!!tcfg);
-    if (!tracing_enabled) {
-        BOOST_LOG_SEV(lg, debug) << "Tracing not enabled, using null backend.";
-        return boost::make_shared<null_backend>();
-    }
-
-    /*
-     * If the user requested the file tracing backend, create it.
-     */
-    const auto be(tcfg->backend());
-    const auto run_id(generate_guid());
-    if (be == tracing_backend::file) {
-        BOOST_LOG_SEV(lg, debug) << "File tracing backend enabled.";
-        return boost::make_shared<file_backend>(*tcfg, run_id);
-    }
-
-    /*
-     * If the user requested a relational backend, create it if this
-     * dogen build supports it. Otherwise, throw.
-     */
-    if (be == tracing_backend::relational_database) {
-        BOOST_LOG_SEV(lg, debug) << "Relational tracing backend enabled.";
-#ifdef DOGEN_HAVE_RELATIONAL_MODEL
-        return boost::make_shared<relational_backend>(*tcfg, *dbcfg, run_id);
-#else
-        BOOST_LOG_SEV(lg, error) << no_relational_support;
-        BOOST_THROW_EXCEPTION(tracing_error(no_relational_support));
-#endif
-    }
-
-    /*
-     * Any other backend is not supported, so throw.
-     */
-    const auto s(boost::lexical_cast<std::string>(be));
-    BOOST_LOG_SEV(lg, error) << invalid_backend << s;
-    BOOST_THROW_EXCEPTION(tracing_error(invalid_backend + s));
-}
-
-tracer::tracer(const boost::optional<tracing_configuration>& tcfg,
-    const boost::optional<database_configuration>& dbcfg)
-    : tracing_enabled_(!!tcfg/*double bang by design*/),
-      backend_(make_backend(tcfg, dbcfg)) {}
+tracer::tracer(const configuration& cfg)
+    : backend_(registrar_.try_make_backend(cfg, generate_guid())) {}
 
 std::string tracer::generate_guid() {
-    auto uuid = boost::uuids::random_generator()();
+    const auto uuid = boost::uuids::random_generator()();
     return boost::uuids::to_string(uuid);
 }
 
