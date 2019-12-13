@@ -241,3 +241,13 @@
    fun:_ZN4masd5dogen7utility10filesystem10find_filesERKSt6vectorIN5boost10filesystem4pathESaIS6_EE
    ...
 }
+
+{
+   CMake
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:malloc
+   obj:/home/marco/local/cmake-3.15.3-Linux-x86_64/bin/cmake
+   obj:/home/marco/local/cmake-3.15.3-Linux-x86_64/bin/cmake
+   obj:/home/marco/local/cmake-3.15.3-Linux-x86_64/bin/cmake
+}
