@@ -11436,6 +11436,11 @@ pattern.
 We should also look for some support in clang format, although it
 seems very unlikely.
 
+In fact this is related to the notion of "themes" we need in dogen. We
+need to do some work around the possible "styles" that exist for
+member variable naming, and then allow users to choose their
+style. See [[*Add support for "capitalisation theming"][Add support for "capitalisation theming"]]
+
 *** Add support for boost concept                                     :story:
 
 #+begin_quote
