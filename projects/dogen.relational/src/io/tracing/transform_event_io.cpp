@@ -22,11 +22,10 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include "dogen.relational/io/tracing/json_io.hpp"
 #include "dogen.relational/io/tracing/run_id_io.hpp"
-#include "dogen.relational/io/tracing/event_type_io.hpp"
 #include "dogen.relational/io/tracing/transform_id_io.hpp"
 #include "dogen.relational/io/tracing/transform_type_io.hpp"
 #include "dogen.relational/io/tracing/transform_event_io.hpp"
-#include "dogen.relational/io/tracing/transform_instance_id_io.hpp"
+#include "dogen.relational/io/tracing/transform_event_key_io.hpp"
 
 namespace dogen::relational::tracing {
 
@@ -34,11 +33,10 @@ std::ostream& operator<<(std::ostream& s, const transform_event& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::relational::tracing::transform_event\"" << ", "
       << "\"timestamp\": " << "\"" << v.timestamp() << "\"" << ", "
-      << "\"id\": " << v.id() << ", "
-      << "\"instance_id\": " << v.instance_id() << ", "
+      << "\"transform_event_key\": " << v.transform_event_key() << ", "
       << "\"run_id\": " << v.run_id() << ", "
       << "\"transform_type\": " << v.transform_type() << ", "
-      << "\"event_type\": " << v.event_type() << ", "
+      << "\"transform_id\": " << v.transform_id() << ", "
       << "\"payload\": " << v.payload()
       << " }";
     return(s);

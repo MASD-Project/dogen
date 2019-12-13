@@ -50,9 +50,9 @@ namespace odb
 
     id_type id;
     {
-      composite_value_traits< ::dogen::relational::tracing::run_id, id_sqlite >::init (
+      composite_value_traits< ::dogen::relational::tracing::run_event_key, id_sqlite >::init (
         id,
-        i.id_value,
+        i.run_event_key_value,
         db);
     }
 
@@ -76,15 +76,11 @@ namespace odb
       grew = true;
     }
 
-    // id_
+    // run_event_key_
     //
-    if (composite_value_traits< ::dogen::relational::tracing::run_id, id_sqlite >::grow (
-          i.id_value, t + 1UL))
+    if (composite_value_traits< ::dogen::relational::tracing::run_event_key, id_sqlite >::grow (
+          i.run_event_key_value, t + 1UL))
       grew = true;
-
-    // activity_
-    //
-    t[2UL] = false;
 
     // version_
     //
@@ -100,7 +96,7 @@ namespace odb
           i.payload_value, t + 4UL))
       grew = true;
 
-    // event_type_
+    // activity_
     //
     t[5UL] = false;
 
@@ -129,21 +125,14 @@ namespace odb
     b[n].is_null = &i.timestamp_null;
     n++;
 
-    // id_
+    // run_event_key_
     //
     if (sk != statement_update)
     {
-      composite_value_traits< ::dogen::relational::tracing::run_id, id_sqlite >::bind (
-        b + n, i.id_value, sk);
-      n += 1UL;
+      composite_value_traits< ::dogen::relational::tracing::run_event_key, id_sqlite >::bind (
+        b + n, i.run_event_key_value, sk);
+      n += 2UL;
     }
-
-    // activity_
-    //
-    b[n].type = sqlite::bind::integer;
-    b[n].buffer = &i.activity_value;
-    b[n].is_null = &i.activity_null;
-    n++;
 
     // version_
     //
@@ -162,11 +151,11 @@ namespace odb
       b + n, i.payload_value, sk);
     n += 1UL;
 
-    // event_type_
+    // activity_
     //
     b[n].type = sqlite::bind::integer;
-    b[n].buffer = &i.event_type_value;
-    b[n].is_null = &i.event_type_null;
+    b[n].buffer = &i.activity_value;
+    b[n].is_null = &i.activity_null;
     n++;
   }
 
@@ -175,7 +164,7 @@ namespace odb
   {
     std::size_t n (0);
     sqlite::statement_kind sk (sqlite::statement_select);
-    composite_value_traits< ::dogen::relational::tracing::run_id, id_sqlite >::bind (
+    composite_value_traits< ::dogen::relational::tracing::run_event_key, id_sqlite >::bind (
       b + n, i.id_value, sk);
   }
 
@@ -211,34 +200,18 @@ namespace odb
       grew = grew || (cap != i.timestamp_value.capacity ());
     }
 
-    // id_
+    // run_event_key_
     //
     if (sk == statement_insert)
     {
-      ::dogen::relational::tracing::run_id const& v =
-        o.id ();
+      ::dogen::relational::tracing::run_event_key const& v =
+        o.run_event_key ();
 
-      if (composite_value_traits< ::dogen::relational::tracing::run_id, id_sqlite >::init (
-            i.id_value,
+      if (composite_value_traits< ::dogen::relational::tracing::run_event_key, id_sqlite >::init (
+            i.run_event_key_value,
             v,
             sk))
         grew = true;
-    }
-
-    // activity_
-    //
-    {
-      ::dogen::relational::tracing::activity const& v =
-        o.activity ();
-
-      bool is_null (false);
-      sqlite::value_traits<
-          ::dogen::relational::tracing::activity,
-          sqlite::id_integer >::set_image (
-        i.activity_value,
-        is_null,
-        v);
-      i.activity_null = is_null;
     }
 
     // version_
@@ -273,20 +246,20 @@ namespace odb
         grew = true;
     }
 
-    // event_type_
+    // activity_
     //
     {
-      ::dogen::relational::tracing::event_type const& v =
-        o.event_type ();
+      ::dogen::relational::tracing::activity const& v =
+        o.activity ();
 
       bool is_null (false);
       sqlite::value_traits<
-          ::dogen::relational::tracing::event_type,
+          ::dogen::relational::tracing::activity,
           sqlite::id_integer >::set_image (
-        i.event_type_value,
+        i.activity_value,
         is_null,
         v);
-      i.event_type_null = is_null;
+      i.activity_null = is_null;
     }
 
     return grew;
@@ -316,31 +289,16 @@ namespace odb
         i.timestamp_null);
     }
 
-    // id_
+    // run_event_key_
     //
     {
-      ::dogen::relational::tracing::run_id& v =
-        o.id ();
+      ::dogen::relational::tracing::run_event_key& v =
+        o.run_event_key ();
 
-      composite_value_traits< ::dogen::relational::tracing::run_id, id_sqlite >::init (
+      composite_value_traits< ::dogen::relational::tracing::run_event_key, id_sqlite >::init (
         v,
-        i.id_value,
+        i.run_event_key_value,
         db);
-    }
-
-    // activity_
-    //
-    {
-      ::dogen::relational::tracing::activity v;
-
-      sqlite::value_traits<
-          ::dogen::relational::tracing::activity,
-          sqlite::id_integer >::set_value (
-        v,
-        i.activity_value,
-        i.activity_null);
-
-      o.activity (v);
     }
 
     // version_
@@ -370,19 +328,19 @@ namespace odb
         db);
     }
 
-    // event_type_
+    // activity_
     //
     {
-      ::dogen::relational::tracing::event_type v;
+      ::dogen::relational::tracing::activity v;
 
       sqlite::value_traits<
-          ::dogen::relational::tracing::event_type,
+          ::dogen::relational::tracing::activity,
           sqlite::id_integer >::set_value (
         v,
-        i.event_type_value,
-        i.event_type_null);
+        i.activity_value,
+        i.activity_null);
 
-      o.event_type (v);
+      o.activity (v);
     }
   }
 
@@ -392,7 +350,7 @@ namespace odb
     bool grew (false);
     sqlite::statement_kind sk (sqlite::statement_select);
     {
-      if (composite_value_traits< ::dogen::relational::tracing::run_id, id_sqlite >::init (
+      if (composite_value_traits< ::dogen::relational::tracing::run_event_key, id_sqlite >::init (
             i.id_value,
             id,
             sk))
@@ -406,47 +364,46 @@ namespace odb
   const char access::object_traits_impl< ::dogen::relational::tracing::run_event, id_sqlite >::persist_statement[] =
   "INSERT INTO \"DOGEN\".\"RUN_EVENT\" "
   "(\"TIMESTAMP\", "
-  "\"ID\", "
-  "\"ACTIVITY\", "
+  "\"RUN_ID\", "
+  "\"EVENT_TYPE\", "
   "\"VERSION\", "
   "\"PAYLOAD\", "
-  "\"EVENT_TYPE\") "
+  "\"ACTIVITY\") "
   "VALUES "
   "(?, ?, ?, ?, ?, ?)";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::run_event, id_sqlite >::find_statement[] =
   "SELECT "
   "\"DOGEN\".\"RUN_EVENT\".\"TIMESTAMP\", "
-  "\"DOGEN\".\"RUN_EVENT\".\"ID\", "
-  "\"DOGEN\".\"RUN_EVENT\".\"ACTIVITY\", "
+  "\"DOGEN\".\"RUN_EVENT\".\"RUN_ID\", "
+  "\"DOGEN\".\"RUN_EVENT\".\"EVENT_TYPE\", "
   "\"DOGEN\".\"RUN_EVENT\".\"VERSION\", "
   "\"DOGEN\".\"RUN_EVENT\".\"PAYLOAD\", "
-  "\"DOGEN\".\"RUN_EVENT\".\"EVENT_TYPE\" "
+  "\"DOGEN\".\"RUN_EVENT\".\"ACTIVITY\" "
   "FROM \"DOGEN\".\"RUN_EVENT\" "
-  "WHERE \"DOGEN\".\"RUN_EVENT\".\"ID\"=?";
+  "WHERE \"DOGEN\".\"RUN_EVENT\".\"RUN_ID\"=? AND \"DOGEN\".\"RUN_EVENT\".\"EVENT_TYPE\"=?";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::run_event, id_sqlite >::update_statement[] =
   "UPDATE \"DOGEN\".\"RUN_EVENT\" "
   "SET "
   "\"TIMESTAMP\"=?, "
-  "\"ACTIVITY\"=?, "
   "\"VERSION\"=?, "
   "\"PAYLOAD\"=?, "
-  "\"EVENT_TYPE\"=? "
-  "WHERE \"ID\"=?";
+  "\"ACTIVITY\"=? "
+  "WHERE \"RUN_ID\"=? AND \"EVENT_TYPE\"=?";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::run_event, id_sqlite >::erase_statement[] =
   "DELETE FROM \"DOGEN\".\"RUN_EVENT\" "
-  "WHERE \"ID\"=?";
+  "WHERE \"RUN_ID\"=? AND \"EVENT_TYPE\"=?";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::run_event, id_sqlite >::query_statement[] =
   "SELECT "
   "\"DOGEN\".\"RUN_EVENT\".\"TIMESTAMP\", "
-  "\"DOGEN\".\"RUN_EVENT\".\"ID\", "
-  "\"DOGEN\".\"RUN_EVENT\".\"ACTIVITY\", "
+  "\"DOGEN\".\"RUN_EVENT\".\"RUN_ID\", "
+  "\"DOGEN\".\"RUN_EVENT\".\"EVENT_TYPE\", "
   "\"DOGEN\".\"RUN_EVENT\".\"VERSION\", "
   "\"DOGEN\".\"RUN_EVENT\".\"PAYLOAD\", "
-  "\"DOGEN\".\"RUN_EVENT\".\"EVENT_TYPE\" "
+  "\"DOGEN\".\"RUN_EVENT\".\"ACTIVITY\" "
   "FROM \"DOGEN\".\"RUN_EVENT\"";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::run_event, id_sqlite >::erase_query_statement[] =
@@ -860,11 +817,13 @@ namespace odb
         {
           db.execute ("CREATE TABLE \"DOGEN\".\"RUN_EVENT\" (\n"
                       "  \"TIMESTAMP\" TEXT NULL,\n"
-                      "  \"ID\" TEXT NOT NULL PRIMARY KEY,\n"
-                      "  \"ACTIVITY\" INTEGER NOT NULL,\n"
+                      "  \"RUN_ID\" TEXT NOT NULL,\n"
+                      "  \"EVENT_TYPE\" INTEGER NOT NULL,\n"
                       "  \"VERSION\" TEXT NOT NULL,\n"
                       "  \"PAYLOAD\" TEXT NOT NULL,\n"
-                      "  \"EVENT_TYPE\" INTEGER NOT NULL)");
+                      "  \"ACTIVITY\" INTEGER NOT NULL,\n"
+                      "  PRIMARY KEY (\"RUN_ID\",\n"
+                      "               \"EVENT_TYPE\"))");
           return false;
         }
       }

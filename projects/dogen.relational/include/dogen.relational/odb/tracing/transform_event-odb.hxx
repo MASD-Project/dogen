@@ -34,6 +34,7 @@
 
 #include "dogen.relational/odb/tracing/json-odb.hxx"
 #include "dogen.relational/odb/tracing/run_id-odb.hxx"
+#include "dogen.relational/odb/tracing/transform_event_key-odb.hxx"
 #include "dogen.relational/odb/tracing/transform_id-odb.hxx"
 #include "dogen.relational/odb/tracing/transform_instance_id-odb.hxx"
 
@@ -49,7 +50,7 @@
 #include <odb/container-traits.hxx>
 #include <odb/no-op-cache-traits.hxx>
 #include <odb/result.hxx>
-#include <odb/no-id-object-result.hxx>
+#include <odb/simple-object-result.hxx>
 
 #include <odb/details/unused.hxx>
 #include <odb/details/shared-ptr.hxx>
@@ -74,7 +75,7 @@ namespace odb
 
     static const bool polymorphic = false;
 
-    typedef void id_type;
+    typedef ::dogen::relational::tracing::transform_event_key id_type;
 
     static const bool auto_id = false;
 
@@ -84,11 +85,11 @@ namespace odb
     id (const object_type&);
 
     typedef
-    no_id_pointer_cache_traits<pointer_type>
+    no_op_pointer_cache_traits<pointer_type>
     pointer_cache_traits;
 
     typedef
-    no_id_reference_cache_traits<object_type>
+    no_op_reference_cache_traits<object_type>
     reference_cache_traits;
 
     static void

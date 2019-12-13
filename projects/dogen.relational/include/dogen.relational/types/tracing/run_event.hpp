@@ -29,9 +29,8 @@
 #include <algorithm>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
 #include "dogen.relational/types/tracing/json.hpp"
-#include "dogen.relational/types/tracing/run_id.hpp"
 #include "dogen.relational/types/tracing/activity.hpp"
-#include "dogen.relational/types/tracing/event_type.hpp"
+#include "dogen.relational/types/tracing/run_event_key.hpp"
 
 namespace dogen::relational::tracing {
 
@@ -47,11 +46,10 @@ public:
 public:
     run_event(
         const boost::posix_time::ptime& timestamp,
-        const dogen::relational::tracing::run_id& id,
-        const dogen::relational::tracing::activity activity,
+        const dogen::relational::tracing::run_event_key& run_event_key,
         const std::string& version,
         const dogen::relational::tracing::json& payload,
-        const dogen::relational::tracing::event_type event_type);
+        const dogen::relational::tracing::activity activity);
 
 public:
     const boost::posix_time::ptime& timestamp() const;
@@ -59,18 +57,10 @@ public:
     void timestamp(const boost::posix_time::ptime& v);
     void timestamp(const boost::posix_time::ptime&& v);
 
-    const dogen::relational::tracing::run_id& id() const;
-    dogen::relational::tracing::run_id& id();
-    void id(const dogen::relational::tracing::run_id& v);
-    void id(const dogen::relational::tracing::run_id&& v);
-
-    /**
-     * @brief What was the dogen activity that was executed, i.e. generate, convert, etc.
-     */
-    /**@{*/
-    dogen::relational::tracing::activity activity() const;
-    void activity(const dogen::relational::tracing::activity v);
-    /**@}*/
+    const dogen::relational::tracing::run_event_key& run_event_key() const;
+    dogen::relational::tracing::run_event_key& run_event_key();
+    void run_event_key(const dogen::relational::tracing::run_event_key& v);
+    void run_event_key(const dogen::relational::tracing::run_event_key&& v);
 
     /**
      * @brief Which version of dogen where we running.
@@ -87,8 +77,8 @@ public:
     void payload(const dogen::relational::tracing::json& v);
     void payload(const dogen::relational::tracing::json&& v);
 
-    dogen::relational::tracing::event_type event_type() const;
-    void event_type(const dogen::relational::tracing::event_type v);
+    dogen::relational::tracing::activity activity() const;
+    void activity(const dogen::relational::tracing::activity v);
 
 public:
     bool operator==(const run_event& rhs) const;
@@ -102,11 +92,10 @@ public:
 
 private:
     boost::posix_time::ptime timestamp_;
-    dogen::relational::tracing::run_id id_;
-    dogen::relational::tracing::activity activity_;
+    dogen::relational::tracing::run_event_key run_event_key_;
     std::string version_;
     dogen::relational::tracing::json payload_;
-    dogen::relational::tracing::event_type event_type_;
+    dogen::relational::tracing::activity activity_;
 };
 
 }

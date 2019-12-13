@@ -28,8 +28,11 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/tracing_error.hpp"
 #include "dogen.relational/types/tracing/run_event.hpp"
+#include "dogen.relational/types/tracing/run_event_key.hpp"
 #include "dogen.relational/odb/tracing/run_event-odb.hxx"
 #include "dogen.relational/odb/tracing/run_event-odb-pgsql.hxx"
+#include "dogen.relational/odb/tracing/run_event_key-odb.hxx"
+#include "dogen.relational/odb/tracing/run_event_key-odb-pgsql.hxx"
 #include "dogen.relational/types/tracing/transform_event.hpp"
 #include "dogen.relational/odb/tracing/transform_event-odb.hxx"
 #include "dogen.relational/odb/tracing/transform_event-odb-pgsql.hxx"
@@ -96,17 +99,33 @@ void relational_backend::start_tracing(const std::string& input_id,
     const std::string& input) const {
     BOOST_LOG_SEV(lg, debug) << "Adding initial input: " << input_id;
 
-    run_event run;
-    run.id(run_id(run_id_));
-    run.payload(json(input));
-    run.timestamp(boost::posix_time::microsec_clock::universal_time());
+    run_event_key k;
+    k.run_id(run_id(run_id_));
+    k.event_type(event_type::start);
+
+    run_event re;
+    re.run_event_key(k);
+    re.payload(json(input));
+    re.timestamp(boost::posix_time::microsec_clock::universal_time());
 
     odb::transaction t(database_->begin());
-    database_->persist(run);
+    database_->persist(re);
     t.commit();
 }
 
 void relational_backend::end_tracing() const {
+    run_event_key k;
+    k.run_id(run_id(run_id_));
+    k.event_type(event_type::end);
+
+    run_event re;
+    re.run_event_key(k);
+    re.timestamp(boost::posix_time::microsec_clock::universal_time());
+    re.payload(json("{}"));
+
+    odb::transaction t(database_->begin());
+    database_->persist(re);
+    t.commit();
 }
 
 void relational_backend::add_references_graph(

@@ -12,8 +12,9 @@ namespace odb
   inline
   access::object_traits< ::dogen::relational::tracing::transform_event >::id_type
   access::object_traits< ::dogen::relational::tracing::transform_event >::
-  id (const object_type&)
+  id (const object_type& o)
   {
+    return o.transform_event_key ();
   }
 
   inline

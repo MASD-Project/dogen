@@ -18,29 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_RELATIONAL_ODB_TRACING_RUN_EVENT_PRAGMAS_HPP
-#define DOGEN_RELATIONAL_ODB_TRACING_RUN_EVENT_PRAGMAS_HPP
+#ifndef DOGEN_RELATIONAL_TYPES_TRACING_RUN_EVENT_KEY_FWD_HPP
+#define DOGEN_RELATIONAL_TYPES_TRACING_RUN_EVENT_KEY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen.relational/types/tracing/run_event.hpp"
-#include "dogen.relational/odb/tracing/json_pragmas.hpp"
-#include "dogen.relational/odb/tracing/activity_pragmas.hpp"
-#include "dogen.relational/odb/tracing/run_event_key_pragmas.hpp"
-
 namespace dogen::relational::tracing {
 
-#ifdef ODB_COMPILER
-
-#pragma db object(run_event) schema("DOGEN")
-
-#pragma db member(run_event::run_event_key_) id
-#pragma db member(run_event::run_event_key_) column("")
-#pragma db member(run_event::payload_) pgsql:type("JSONB")
-
-#endif
+class run_event_key;
 
 }
 

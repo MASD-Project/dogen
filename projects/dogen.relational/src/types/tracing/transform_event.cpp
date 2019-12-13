@@ -23,43 +23,38 @@
 namespace dogen::relational::tracing {
 
 transform_event::transform_event()
-    : transform_type_(static_cast<dogen::relational::tracing::transform_type>(0)),
-      event_type_(static_cast<dogen::relational::tracing::event_type>(0)) { }
+    : transform_type_(static_cast<dogen::relational::tracing::transform_type>(0)) { }
 
 transform_event::transform_event(
     const boost::posix_time::ptime& timestamp,
-    const dogen::relational::tracing::transform_id& id,
-    const dogen::relational::tracing::transform_instance_id& instance_id,
+    const dogen::relational::tracing::transform_event_key& transform_event_key,
     const dogen::relational::tracing::run_id& run_id,
     const dogen::relational::tracing::transform_type transform_type,
-    const dogen::relational::tracing::event_type event_type,
+    const dogen::relational::tracing::transform_id& transform_id,
     const dogen::relational::tracing::json& payload)
     : timestamp_(timestamp),
-      id_(id),
-      instance_id_(instance_id),
+      transform_event_key_(transform_event_key),
       run_id_(run_id),
       transform_type_(transform_type),
-      event_type_(event_type),
+      transform_id_(transform_id),
       payload_(payload) { }
 
 void transform_event::swap(transform_event& other) noexcept {
     using std::swap;
     swap(timestamp_, other.timestamp_);
-    swap(id_, other.id_);
-    swap(instance_id_, other.instance_id_);
+    swap(transform_event_key_, other.transform_event_key_);
     swap(run_id_, other.run_id_);
     swap(transform_type_, other.transform_type_);
-    swap(event_type_, other.event_type_);
+    swap(transform_id_, other.transform_id_);
     swap(payload_, other.payload_);
 }
 
 bool transform_event::operator==(const transform_event& rhs) const {
     return timestamp_ == rhs.timestamp_ &&
-        id_ == rhs.id_ &&
-        instance_id_ == rhs.instance_id_ &&
+        transform_event_key_ == rhs.transform_event_key_ &&
         run_id_ == rhs.run_id_ &&
         transform_type_ == rhs.transform_type_ &&
-        event_type_ == rhs.event_type_ &&
+        transform_id_ == rhs.transform_id_ &&
         payload_ == rhs.payload_;
 }
 
@@ -85,36 +80,20 @@ void transform_event::timestamp(const boost::posix_time::ptime&& v) {
     timestamp_ = std::move(v);
 }
 
-const dogen::relational::tracing::transform_id& transform_event::id() const {
-    return id_;
+const dogen::relational::tracing::transform_event_key& transform_event::transform_event_key() const {
+    return transform_event_key_;
 }
 
-dogen::relational::tracing::transform_id& transform_event::id() {
-    return id_;
+dogen::relational::tracing::transform_event_key& transform_event::transform_event_key() {
+    return transform_event_key_;
 }
 
-void transform_event::id(const dogen::relational::tracing::transform_id& v) {
-    id_ = v;
+void transform_event::transform_event_key(const dogen::relational::tracing::transform_event_key& v) {
+    transform_event_key_ = v;
 }
 
-void transform_event::id(const dogen::relational::tracing::transform_id&& v) {
-    id_ = std::move(v);
-}
-
-const dogen::relational::tracing::transform_instance_id& transform_event::instance_id() const {
-    return instance_id_;
-}
-
-dogen::relational::tracing::transform_instance_id& transform_event::instance_id() {
-    return instance_id_;
-}
-
-void transform_event::instance_id(const dogen::relational::tracing::transform_instance_id& v) {
-    instance_id_ = v;
-}
-
-void transform_event::instance_id(const dogen::relational::tracing::transform_instance_id&& v) {
-    instance_id_ = std::move(v);
+void transform_event::transform_event_key(const dogen::relational::tracing::transform_event_key&& v) {
+    transform_event_key_ = std::move(v);
 }
 
 const dogen::relational::tracing::run_id& transform_event::run_id() const {
@@ -141,12 +120,20 @@ void transform_event::transform_type(const dogen::relational::tracing::transform
     transform_type_ = v;
 }
 
-dogen::relational::tracing::event_type transform_event::event_type() const {
-    return event_type_;
+const dogen::relational::tracing::transform_id& transform_event::transform_id() const {
+    return transform_id_;
 }
 
-void transform_event::event_type(const dogen::relational::tracing::event_type v) {
-    event_type_ = v;
+dogen::relational::tracing::transform_id& transform_event::transform_id() {
+    return transform_id_;
+}
+
+void transform_event::transform_id(const dogen::relational::tracing::transform_id& v) {
+    transform_id_ = v;
+}
+
+void transform_event::transform_id(const dogen::relational::tracing::transform_id&& v) {
+    transform_id_ = std::move(v);
 }
 
 const dogen::relational::tracing::json& transform_event::payload() const {

@@ -14,7 +14,7 @@ namespace odb
   access::object_traits< ::dogen::relational::tracing::run_event >::
   id (const object_type& o)
   {
-    return o.id ();
+    return o.run_event_key ();
   }
 
   inline

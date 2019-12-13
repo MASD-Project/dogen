@@ -28,17 +28,18 @@
 #include "dogen.relational/odb/tracing/json_pragmas.hpp"
 #include "dogen.relational/odb/tracing/run_id_pragmas.hpp"
 #include "dogen.relational/types/tracing/transform_event.hpp"
-#include "dogen.relational/odb/tracing/event_type_pragmas.hpp"
 #include "dogen.relational/odb/tracing/transform_id_pragmas.hpp"
 #include "dogen.relational/odb/tracing/transform_type_pragmas.hpp"
-#include "dogen.relational/odb/tracing/transform_instance_id_pragmas.hpp"
+#include "dogen.relational/odb/tracing/transform_event_key_pragmas.hpp"
 
 namespace dogen::relational::tracing {
 
 #ifdef ODB_COMPILER
 
 #pragma db object(transform_event) schema("DOGEN")
-#pragma db object(transform_event) no_id
+
+#pragma db member(transform_event::transform_event_key_) id
+#pragma db member(transform_event::transform_event_key_) column("")
 
 #endif
 

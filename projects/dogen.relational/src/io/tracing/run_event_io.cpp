@@ -22,10 +22,9 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include "dogen.relational/io/tracing/json_io.hpp"
-#include "dogen.relational/io/tracing/run_id_io.hpp"
 #include "dogen.relational/io/tracing/activity_io.hpp"
 #include "dogen.relational/io/tracing/run_event_io.hpp"
-#include "dogen.relational/io/tracing/event_type_io.hpp"
+#include "dogen.relational/io/tracing/run_event_key_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -41,11 +40,10 @@ std::ostream& operator<<(std::ostream& s, const run_event& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::relational::tracing::run_event\"" << ", "
       << "\"timestamp\": " << "\"" << v.timestamp() << "\"" << ", "
-      << "\"id\": " << v.id() << ", "
-      << "\"activity\": " << v.activity() << ", "
+      << "\"run_event_key\": " << v.run_event_key() << ", "
       << "\"version\": " << "\"" << tidy_up_string(v.version()) << "\"" << ", "
       << "\"payload\": " << v.payload() << ", "
-      << "\"event_type\": " << v.event_type()
+      << "\"activity\": " << v.activity()
       << " }";
     return(s);
 }

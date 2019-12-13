@@ -29,10 +29,9 @@
 #include <boost/date_time/posix_time/posix_time_types.hpp>
 #include "dogen.relational/types/tracing/json.hpp"
 #include "dogen.relational/types/tracing/run_id.hpp"
-#include "dogen.relational/types/tracing/event_type.hpp"
 #include "dogen.relational/types/tracing/transform_id.hpp"
 #include "dogen.relational/types/tracing/transform_type.hpp"
-#include "dogen.relational/types/tracing/transform_instance_id.hpp"
+#include "dogen.relational/types/tracing/transform_event_key.hpp"
 
 namespace dogen::relational::tracing {
 
@@ -48,11 +47,10 @@ public:
 public:
     transform_event(
         const boost::posix_time::ptime& timestamp,
-        const dogen::relational::tracing::transform_id& id,
-        const dogen::relational::tracing::transform_instance_id& instance_id,
+        const dogen::relational::tracing::transform_event_key& transform_event_key,
         const dogen::relational::tracing::run_id& run_id,
         const dogen::relational::tracing::transform_type transform_type,
-        const dogen::relational::tracing::event_type event_type,
+        const dogen::relational::tracing::transform_id& transform_id,
         const dogen::relational::tracing::json& payload);
 
 public:
@@ -61,15 +59,10 @@ public:
     void timestamp(const boost::posix_time::ptime& v);
     void timestamp(const boost::posix_time::ptime&& v);
 
-    const dogen::relational::tracing::transform_id& id() const;
-    dogen::relational::tracing::transform_id& id();
-    void id(const dogen::relational::tracing::transform_id& v);
-    void id(const dogen::relational::tracing::transform_id&& v);
-
-    const dogen::relational::tracing::transform_instance_id& instance_id() const;
-    dogen::relational::tracing::transform_instance_id& instance_id();
-    void instance_id(const dogen::relational::tracing::transform_instance_id& v);
-    void instance_id(const dogen::relational::tracing::transform_instance_id&& v);
+    const dogen::relational::tracing::transform_event_key& transform_event_key() const;
+    dogen::relational::tracing::transform_event_key& transform_event_key();
+    void transform_event_key(const dogen::relational::tracing::transform_event_key& v);
+    void transform_event_key(const dogen::relational::tracing::transform_event_key&& v);
 
     const dogen::relational::tracing::run_id& run_id() const;
     dogen::relational::tracing::run_id& run_id();
@@ -79,8 +72,10 @@ public:
     dogen::relational::tracing::transform_type transform_type() const;
     void transform_type(const dogen::relational::tracing::transform_type v);
 
-    dogen::relational::tracing::event_type event_type() const;
-    void event_type(const dogen::relational::tracing::event_type v);
+    const dogen::relational::tracing::transform_id& transform_id() const;
+    dogen::relational::tracing::transform_id& transform_id();
+    void transform_id(const dogen::relational::tracing::transform_id& v);
+    void transform_id(const dogen::relational::tracing::transform_id&& v);
 
     const dogen::relational::tracing::json& payload() const;
     dogen::relational::tracing::json& payload();
@@ -99,11 +94,10 @@ public:
 
 private:
     boost::posix_time::ptime timestamp_;
-    dogen::relational::tracing::transform_id id_;
-    dogen::relational::tracing::transform_instance_id instance_id_;
+    dogen::relational::tracing::transform_event_key transform_event_key_;
     dogen::relational::tracing::run_id run_id_;
     dogen::relational::tracing::transform_type transform_type_;
-    dogen::relational::tracing::event_type event_type_;
+    dogen::relational::tracing::transform_id transform_id_;
     dogen::relational::tracing::json payload_;
 };
 

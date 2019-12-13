@@ -19,10 +19,10 @@
 #include <odb/pgsql/connection.hxx>
 #include <odb/pgsql/statement.hxx>
 #include <odb/pgsql/statement-cache.hxx>
-#include <odb/pgsql/no-id-object-statements.hxx>
+#include <odb/pgsql/simple-object-statements.hxx>
 #include <odb/pgsql/container-statements.hxx>
 #include <odb/pgsql/exceptions.hxx>
-#include <odb/pgsql/no-id-object-result.hxx>
+#include <odb/pgsql/simple-object-result.hxx>
 
 namespace odb
 {
@@ -31,6 +31,15 @@ namespace odb
 
   const char access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
   persist_statement_name[] = "PERSIST_DOGEN_RELATIONAL_TRACING_TRANSFORM_EVENT";
+
+  const char access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
+  find_statement_name[] = "FIND_DOGEN_RELATIONAL_TRACING_TRANSFORM_EVENT";
+
+  const char access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
+  update_statement_name[] = "UPDATE_DOGEN_RELATIONAL_TRACING_TRANSFORM_EVENT";
+
+  const char access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
+  erase_statement_name[] = "ERASE_DOGEN_RELATIONAL_TRACING_TRANSFORM_EVENT";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
   query_statement_name[] = "QUERY_DOGEN_RELATIONAL_TRACING_TRANSFORM_EVENT";
@@ -43,12 +52,63 @@ namespace odb
   {
     pgsql::timestamp_oid,
     pgsql::text_oid,
-    pgsql::text_oid,
+    pgsql::int4_oid,
     pgsql::text_oid,
     pgsql::int4_oid,
-    pgsql::int4_oid,
+    pgsql::text_oid,
     pgsql::text_oid
   };
+
+  const unsigned int access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
+  find_statement_types[] =
+  {
+    pgsql::text_oid,
+    pgsql::int4_oid
+  };
+
+  const unsigned int access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
+  update_statement_types[] =
+  {
+    pgsql::timestamp_oid,
+    pgsql::text_oid,
+    pgsql::int4_oid,
+    pgsql::text_oid,
+    pgsql::text_oid,
+    pgsql::text_oid,
+    pgsql::int4_oid
+  };
+
+  struct access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::extra_statement_cache_type
+  {
+    extra_statement_cache_type (
+      pgsql::connection&,
+      image_type&,
+      id_image_type&,
+      pgsql::binding&,
+      pgsql::binding&,
+      pgsql::native_binding&,
+      const unsigned int*)
+    {
+    }
+  };
+
+  access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::id_type
+  access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
+  id (const image_type& i)
+  {
+    pgsql::database* db (0);
+    ODB_POTENTIALLY_UNUSED (db);
+
+    id_type id;
+    {
+      composite_value_traits< ::dogen::relational::tracing::transform_event_key, id_pgsql >::init (
+        id,
+        i.transform_event_key_value,
+        db);
+    }
+
+    return id;
+  }
 
   bool access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
   grow (image_type& i,
@@ -63,16 +123,10 @@ namespace odb
     //
     t[0UL] = 0;
 
-    // id_
+    // transform_event_key_
     //
-    if (composite_value_traits< ::dogen::relational::tracing::transform_id, id_pgsql >::grow (
-          i.id_value, t + 1UL))
-      grew = true;
-
-    // instance_id_
-    //
-    if (composite_value_traits< ::dogen::relational::tracing::transform_instance_id, id_pgsql >::grow (
-          i.instance_id_value, t + 2UL))
+    if (composite_value_traits< ::dogen::relational::tracing::transform_event_key, id_pgsql >::grow (
+          i.transform_event_key_value, t + 1UL))
       grew = true;
 
     // run_id_
@@ -85,9 +139,11 @@ namespace odb
     //
     t[4UL] = 0;
 
-    // event_type_
+    // transform_id_
     //
-    t[5UL] = 0;
+    if (composite_value_traits< ::dogen::relational::tracing::transform_id, id_pgsql >::grow (
+          i.transform_id_value, t + 5UL))
+      grew = true;
 
     // payload_
     //
@@ -116,17 +172,14 @@ namespace odb
     b[n].is_null = &i.timestamp_null;
     n++;
 
-    // id_
+    // transform_event_key_
     //
-    composite_value_traits< ::dogen::relational::tracing::transform_id, id_pgsql >::bind (
-      b + n, i.id_value, sk);
-    n += 1UL;
-
-    // instance_id_
-    //
-    composite_value_traits< ::dogen::relational::tracing::transform_instance_id, id_pgsql >::bind (
-      b + n, i.instance_id_value, sk);
-    n += 1UL;
+    if (sk != statement_update)
+    {
+      composite_value_traits< ::dogen::relational::tracing::transform_event_key, id_pgsql >::bind (
+        b + n, i.transform_event_key_value, sk);
+      n += 2UL;
+    }
 
     // run_id_
     //
@@ -141,18 +194,26 @@ namespace odb
     b[n].is_null = &i.transform_type_null;
     n++;
 
-    // event_type_
+    // transform_id_
     //
-    b[n].type = pgsql::bind::integer;
-    b[n].buffer = &i.event_type_value;
-    b[n].is_null = &i.event_type_null;
-    n++;
+    composite_value_traits< ::dogen::relational::tracing::transform_id, id_pgsql >::bind (
+      b + n, i.transform_id_value, sk);
+    n += 1UL;
 
     // payload_
     //
     composite_value_traits< ::dogen::relational::tracing::json, id_pgsql >::bind (
       b + n, i.payload_value, sk);
     n += 1UL;
+  }
+
+  void access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
+  bind (pgsql::bind* b, id_image_type& i)
+  {
+    std::size_t n (0);
+    pgsql::statement_kind sk (pgsql::statement_select);
+    composite_value_traits< ::dogen::relational::tracing::transform_event_key, id_pgsql >::bind (
+      b + n, i.id_value, sk);
   }
 
   bool access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
@@ -182,27 +243,15 @@ namespace odb
       i.timestamp_null = is_null;
     }
 
-    // id_
+    // transform_event_key_
     //
+    if (sk == statement_insert)
     {
-      ::dogen::relational::tracing::transform_id const& v =
-        o.id ();
+      ::dogen::relational::tracing::transform_event_key const& v =
+        o.transform_event_key ();
 
-      if (composite_value_traits< ::dogen::relational::tracing::transform_id, id_pgsql >::init (
-            i.id_value,
-            v,
-            sk))
-        grew = true;
-    }
-
-    // instance_id_
-    //
-    {
-      ::dogen::relational::tracing::transform_instance_id const& v =
-        o.instance_id ();
-
-      if (composite_value_traits< ::dogen::relational::tracing::transform_instance_id, id_pgsql >::init (
-            i.instance_id_value,
+      if (composite_value_traits< ::dogen::relational::tracing::transform_event_key, id_pgsql >::init (
+            i.transform_event_key_value,
             v,
             sk))
         grew = true;
@@ -235,18 +284,17 @@ namespace odb
       i.transform_type_null = is_null;
     }
 
-    // event_type_
+    // transform_id_
     //
     {
-      ::dogen::relational::tracing::event_type const& v =
-        o.event_type ();
+      ::dogen::relational::tracing::transform_id const& v =
+        o.transform_id ();
 
-      bool is_null (false);
-      pgsql::value_traits<
-          ::dogen::relational::tracing::event_type,
-          pgsql::id_integer >::set_image (
-        i.event_type_value, is_null, v);
-      i.event_type_null = is_null;
+      if (composite_value_traits< ::dogen::relational::tracing::transform_id, id_pgsql >::init (
+            i.transform_id_value,
+            v,
+            sk))
+        grew = true;
     }
 
     // payload_
@@ -288,27 +336,15 @@ namespace odb
         i.timestamp_null);
     }
 
-    // id_
+    // transform_event_key_
     //
     {
-      ::dogen::relational::tracing::transform_id& v =
-        o.id ();
+      ::dogen::relational::tracing::transform_event_key& v =
+        o.transform_event_key ();
 
-      composite_value_traits< ::dogen::relational::tracing::transform_id, id_pgsql >::init (
+      composite_value_traits< ::dogen::relational::tracing::transform_event_key, id_pgsql >::init (
         v,
-        i.id_value,
-        db);
-    }
-
-    // instance_id_
-    //
-    {
-      ::dogen::relational::tracing::transform_instance_id& v =
-        o.instance_id ();
-
-      composite_value_traits< ::dogen::relational::tracing::transform_instance_id, id_pgsql >::init (
-        v,
-        i.instance_id_value,
+        i.transform_event_key_value,
         db);
     }
 
@@ -339,19 +375,16 @@ namespace odb
       o.transform_type (v);
     }
 
-    // event_type_
+    // transform_id_
     //
     {
-      ::dogen::relational::tracing::event_type v;
+      ::dogen::relational::tracing::transform_id& v =
+        o.transform_id ();
 
-      pgsql::value_traits<
-          ::dogen::relational::tracing::event_type,
-          pgsql::id_integer >::set_value (
+      composite_value_traits< ::dogen::relational::tracing::transform_id, id_pgsql >::init (
         v,
-        i.event_type_value,
-        i.event_type_null);
-
-      o.event_type (v);
+        i.transform_id_value,
+        db);
     }
 
     // payload_
@@ -367,26 +400,69 @@ namespace odb
     }
   }
 
+  void access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
+  init (id_image_type& i, const id_type& id)
+  {
+    bool grew (false);
+    pgsql::statement_kind sk (pgsql::statement_select);
+    {
+      if (composite_value_traits< ::dogen::relational::tracing::transform_event_key, id_pgsql >::init (
+            i.id_value,
+            id,
+            sk))
+        grew = true;
+    }
+
+    if (grew)
+      i.version++;
+  }
+
   const char access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::persist_statement[] =
   "INSERT INTO \"DOGEN\".\"TRANSFORM_EVENT\" "
   "(\"TIMESTAMP\", "
-  "\"ID\", "
-  "\"INSTANCE_ID\", "
+  "\"TRANSFORM_INSTANCE_ID\", "
+  "\"EVENT_TYPE\", "
   "\"RUN_ID\", "
   "\"TRANSFORM_TYPE\", "
-  "\"EVENT_TYPE\", "
+  "\"TRANSFORM_ID\", "
   "\"PAYLOAD\") "
   "VALUES "
   "($1, $2, $3, $4, $5, $6, to_jsonb($7::jsonb))";
 
+  const char access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::find_statement[] =
+  "SELECT "
+  "\"DOGEN\".\"TRANSFORM_EVENT\".\"TIMESTAMP\", "
+  "\"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_INSTANCE_ID\", "
+  "\"DOGEN\".\"TRANSFORM_EVENT\".\"EVENT_TYPE\", "
+  "\"DOGEN\".\"TRANSFORM_EVENT\".\"RUN_ID\", "
+  "\"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_TYPE\", "
+  "\"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_ID\", "
+  "from_jsonb(\"DOGEN\".\"TRANSFORM_EVENT\".\"PAYLOAD\") "
+  "FROM \"DOGEN\".\"TRANSFORM_EVENT\" "
+  "WHERE \"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_INSTANCE_ID\"=$1 AND \"DOGEN\".\"TRANSFORM_EVENT\".\"EVENT_TYPE\"=$2";
+
+  const char access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::update_statement[] =
+  "UPDATE \"DOGEN\".\"TRANSFORM_EVENT\" "
+  "SET "
+  "\"TIMESTAMP\"=$1, "
+  "\"RUN_ID\"=$2, "
+  "\"TRANSFORM_TYPE\"=$3, "
+  "\"TRANSFORM_ID\"=$4, "
+  "\"PAYLOAD\"=to_jsonb($5::jsonb) "
+  "WHERE \"TRANSFORM_INSTANCE_ID\"=$6 AND \"EVENT_TYPE\"=$7";
+
+  const char access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::erase_statement[] =
+  "DELETE FROM \"DOGEN\".\"TRANSFORM_EVENT\" "
+  "WHERE \"TRANSFORM_INSTANCE_ID\"=$1 AND \"EVENT_TYPE\"=$2";
+
   const char access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::query_statement[] =
   "SELECT "
   "\"DOGEN\".\"TRANSFORM_EVENT\".\"TIMESTAMP\", "
-  "\"DOGEN\".\"TRANSFORM_EVENT\".\"ID\", "
-  "\"DOGEN\".\"TRANSFORM_EVENT\".\"INSTANCE_ID\", "
+  "\"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_INSTANCE_ID\", "
+  "\"DOGEN\".\"TRANSFORM_EVENT\".\"EVENT_TYPE\", "
   "\"DOGEN\".\"TRANSFORM_EVENT\".\"RUN_ID\", "
   "\"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_TYPE\", "
-  "\"DOGEN\".\"TRANSFORM_EVENT\".\"EVENT_TYPE\", "
+  "\"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_ID\", "
   "from_jsonb(\"DOGEN\".\"TRANSFORM_EVENT\".\"PAYLOAD\") "
   "FROM \"DOGEN\".\"TRANSFORM_EVENT\"";
 
@@ -433,6 +509,264 @@ namespace odb
     callback (db,
               obj,
               callback_event::post_persist);
+  }
+
+  void access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
+  update (database& db, const object_type& obj)
+  {
+    ODB_POTENTIALLY_UNUSED (db);
+
+    using namespace pgsql;
+    using pgsql::update_statement;
+
+    callback (db, obj, callback_event::pre_update);
+
+    pgsql::transaction& tr (pgsql::transaction::current ());
+    pgsql::connection& conn (tr.connection ());
+    statements_type& sts (
+      conn.statement_cache ().find_object<object_type> ());
+
+    id_image_type& idi (sts.id_image ());
+    init (idi, id (obj));
+
+    image_type& im (sts.image ());
+    if (init (im, obj, statement_update))
+      im.version++;
+
+    bool u (false);
+    binding& imb (sts.update_image_binding ());
+    if (im.version != sts.update_image_version () ||
+        imb.version == 0)
+    {
+      bind (imb.bind, im, statement_update);
+      sts.update_image_version (im.version);
+      imb.version++;
+      u = true;
+    }
+
+    binding& idb (sts.id_image_binding ());
+    if (idi.version != sts.update_id_image_version () ||
+        idb.version == 0)
+    {
+      if (idi.version != sts.id_image_version () ||
+          idb.version == 0)
+      {
+        bind (idb.bind, idi);
+        sts.id_image_version (idi.version);
+        idb.version++;
+      }
+
+      sts.update_id_image_version (idi.version);
+
+      if (!u)
+        imb.version++;
+    }
+
+    update_statement& st (sts.update_statement ());
+    if (st.execute () == 0)
+      throw object_not_persistent ();
+
+    callback (db, obj, callback_event::post_update);
+    pointer_cache_traits::update (db, obj);
+  }
+
+  void access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
+  erase (database& db, const id_type& id)
+  {
+    using namespace pgsql;
+
+    ODB_POTENTIALLY_UNUSED (db);
+
+    pgsql::connection& conn (
+      pgsql::transaction::current ().connection ());
+    statements_type& sts (
+      conn.statement_cache ().find_object<object_type> ());
+
+    id_image_type& i (sts.id_image ());
+    init (i, id);
+
+    binding& idb (sts.id_image_binding ());
+    if (i.version != sts.id_image_version () || idb.version == 0)
+    {
+      bind (idb.bind, i);
+      sts.id_image_version (i.version);
+      idb.version++;
+    }
+
+    if (sts.erase_statement ().execute () != 1)
+      throw object_not_persistent ();
+
+    pointer_cache_traits::erase (db, id);
+  }
+
+  access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::pointer_type
+  access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
+  find (database& db, const id_type& id)
+  {
+    using namespace pgsql;
+
+    {
+      pointer_type p (pointer_cache_traits::find (db, id));
+
+      if (!pointer_traits::null_ptr (p))
+        return p;
+    }
+
+    pgsql::connection& conn (
+      pgsql::transaction::current ().connection ());
+    statements_type& sts (
+      conn.statement_cache ().find_object<object_type> ());
+
+    statements_type::auto_lock l (sts);
+
+    if (l.locked ())
+    {
+      if (!find_ (sts, &id))
+        return pointer_type ();
+    }
+
+    pointer_type p (
+      access::object_factory<object_type, pointer_type>::create ());
+    pointer_traits::guard pg (p);
+
+    pointer_cache_traits::insert_guard ig (
+      pointer_cache_traits::insert (db, id, p));
+
+    object_type& obj (pointer_traits::get_ref (p));
+
+    if (l.locked ())
+    {
+      select_statement& st (sts.find_statement ());
+      ODB_POTENTIALLY_UNUSED (st);
+
+      callback (db, obj, callback_event::pre_load);
+      init (obj, sts.image (), &db);
+      load_ (sts, obj, false);
+      sts.load_delayed (0);
+      l.unlock ();
+      callback (db, obj, callback_event::post_load);
+      pointer_cache_traits::load (ig.position ());
+    }
+    else
+      sts.delay_load (id, obj, ig.position ());
+
+    ig.release ();
+    pg.release ();
+    return p;
+  }
+
+  bool access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
+  find (database& db, const id_type& id, object_type& obj)
+  {
+    using namespace pgsql;
+
+    pgsql::connection& conn (
+      pgsql::transaction::current ().connection ());
+    statements_type& sts (
+      conn.statement_cache ().find_object<object_type> ());
+
+    statements_type::auto_lock l (sts);
+    assert (l.locked ()) /* Must be a top-level call. */;
+
+    if (!find_ (sts, &id))
+      return false;
+
+    select_statement& st (sts.find_statement ());
+    ODB_POTENTIALLY_UNUSED (st);
+
+    reference_cache_traits::position_type pos (
+      reference_cache_traits::insert (db, id, obj));
+    reference_cache_traits::insert_guard ig (pos);
+
+    callback (db, obj, callback_event::pre_load);
+    init (obj, sts.image (), &db);
+    load_ (sts, obj, false);
+    sts.load_delayed (0);
+    l.unlock ();
+    callback (db, obj, callback_event::post_load);
+    reference_cache_traits::load (pos);
+    ig.release ();
+    return true;
+  }
+
+  bool access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
+  reload (database& db, object_type& obj)
+  {
+    using namespace pgsql;
+
+    pgsql::connection& conn (
+      pgsql::transaction::current ().connection ());
+    statements_type& sts (
+      conn.statement_cache ().find_object<object_type> ());
+
+    statements_type::auto_lock l (sts);
+    assert (l.locked ()) /* Must be a top-level call. */;
+
+    const id_type& id (object_traits_impl::id (obj));
+    if (!find_ (sts, &id))
+      return false;
+
+    select_statement& st (sts.find_statement ());
+    ODB_POTENTIALLY_UNUSED (st);
+
+    callback (db, obj, callback_event::pre_load);
+    init (obj, sts.image (), &db);
+    load_ (sts, obj, true);
+    sts.load_delayed (0);
+    l.unlock ();
+    callback (db, obj, callback_event::post_load);
+    return true;
+  }
+
+  bool access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
+  find_ (statements_type& sts,
+         const id_type* id)
+  {
+    using namespace pgsql;
+
+    id_image_type& i (sts.id_image ());
+    init (i, *id);
+
+    binding& idb (sts.id_image_binding ());
+    if (i.version != sts.id_image_version () || idb.version == 0)
+    {
+      bind (idb.bind, i);
+      sts.id_image_version (i.version);
+      idb.version++;
+    }
+
+    image_type& im (sts.image ());
+    binding& imb (sts.select_image_binding ());
+
+    if (im.version != sts.select_image_version () ||
+        imb.version == 0)
+    {
+      bind (imb.bind, im, statement_select);
+      sts.select_image_version (im.version);
+      imb.version++;
+    }
+
+    select_statement& st (sts.find_statement ());
+
+    st.execute ();
+    auto_result ar (st);
+    select_statement::result r (st.fetch ());
+
+    if (r == select_statement::truncated)
+    {
+      if (grow (im, sts.select_image_truncated ()))
+        im.version++;
+
+      if (im.version != sts.select_image_version ())
+      {
+        bind (imb.bind, im, statement_select);
+        sts.select_image_version (im.version);
+        imb.version++;
+        st.refetch ();
+      }
+    }
+
+    return r != select_statement::no_data;
   }
 
   result< access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::object_type >
@@ -483,8 +817,8 @@ namespace odb
     st->execute ();
     st->deallocate ();
 
-    shared_ptr< odb::no_id_object_result_impl<object_type> > r (
-      new (shared) pgsql::no_id_object_result_impl<object_type> (
+    shared_ptr< odb::object_result_impl<object_type> > r (
+      new (shared) pgsql::object_result_impl<object_type> (
         q, st, sts, 0));
 
     return result<object_type> (r);
@@ -550,12 +884,14 @@ namespace odb
         {
           db.execute ("CREATE TABLE \"DOGEN\".\"TRANSFORM_EVENT\" (\n"
                       "  \"TIMESTAMP\" TIMESTAMP NULL,\n"
-                      "  \"ID\" TEXT NOT NULL,\n"
-                      "  \"INSTANCE_ID\" TEXT NOT NULL,\n"
+                      "  \"TRANSFORM_INSTANCE_ID\" TEXT NOT NULL,\n"
+                      "  \"EVENT_TYPE\" INTEGER NOT NULL,\n"
                       "  \"RUN_ID\" TEXT NOT NULL,\n"
                       "  \"TRANSFORM_TYPE\" INTEGER NOT NULL,\n"
-                      "  \"EVENT_TYPE\" INTEGER NOT NULL,\n"
-                      "  \"PAYLOAD\" JSONB NOT NULL)");
+                      "  \"TRANSFORM_ID\" TEXT NOT NULL,\n"
+                      "  \"PAYLOAD\" JSONB NOT NULL,\n"
+                      "  PRIMARY KEY (\"TRANSFORM_INSTANCE_ID\",\n"
+                      "               \"EVENT_TYPE\"))");
           return false;
         }
       }

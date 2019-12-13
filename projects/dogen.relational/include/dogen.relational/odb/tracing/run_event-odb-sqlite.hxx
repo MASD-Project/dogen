@@ -36,6 +36,7 @@
 #include "dogen.relational/types/tracing/run_event.hpp"
 
 #include "dogen.relational/odb/tracing/json-odb-sqlite.hxx"
+#include "dogen.relational/odb/tracing/run_event_key-odb-sqlite.hxx"
 #include "dogen.relational/odb/tracing/run_id-odb-sqlite.hxx"
 
 #include "dogen.relational/odb/tracing/run_event-odb.hxx"
@@ -67,40 +68,51 @@ namespace odb
 
     static const timestamp_type_ timestamp;
 
-    // id
+    // run_event_key
     //
-    struct id_class_
+    struct run_event_key_class_
     {
-      id_class_ ()
+      run_event_key_class_ ()
       {
       }
 
-      // value
+      // run_id
+      //
+      struct run_id_class_1_
+      {
+        run_id_class_1_ ()
+        {
+        }
+
+        // value
+        //
+        typedef
+        sqlite::query_column<
+          sqlite::value_traits<
+            ::std::string,
+            sqlite::id_text >::query_type,
+          sqlite::id_text >
+        value_type_;
+
+        static const value_type_ value;
+      };
+
+      static const run_id_class_1_ run_id;
+
+      // event_type
       //
       typedef
       sqlite::query_column<
         sqlite::value_traits<
-          ::std::string,
-          sqlite::id_text >::query_type,
-        sqlite::id_text >
-      value_type_;
+          ::dogen::relational::tracing::event_type,
+          sqlite::id_integer >::query_type,
+        sqlite::id_integer >
+      event_type_type_;
 
-      static const value_type_ value;
+      static const event_type_type_ event_type;
     };
 
-    static const id_class_ id;
-
-    // activity
-    //
-    typedef
-    sqlite::query_column<
-      sqlite::value_traits<
-        ::dogen::relational::tracing::activity,
-        sqlite::id_integer >::query_type,
-      sqlite::id_integer >
-    activity_type_;
-
-    static const activity_type_ activity;
+    static const run_event_key_class_ run_event_key;
 
     // version
     //
@@ -137,17 +149,17 @@ namespace odb
 
     static const payload_class_ payload;
 
-    // event_type
+    // activity
     //
     typedef
     sqlite::query_column<
       sqlite::value_traits<
-        ::dogen::relational::tracing::event_type,
+        ::dogen::relational::tracing::activity,
         sqlite::id_integer >::query_type,
       sqlite::id_integer >
-    event_type_type_;
+    activity_type_;
 
-    static const event_type_type_ event_type;
+    static const activity_type_ activity;
   };
 
   template <typename A>
@@ -156,18 +168,22 @@ namespace odb
   timestamp (A::table_name, "\"TIMESTAMP\"", 0);
 
   template <typename A>
-  const typename query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::id_class_::value_type_
-  query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::id_class_::
-  value (A::table_name, "\"ID\"", 0);
+  const typename query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::run_event_key_class_::run_id_class_1_::value_type_
+  query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::run_event_key_class_::run_id_class_1_::
+  value (A::table_name, "\"RUN_ID\"", 0);
 
   template <typename A>
-  const typename query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::id_class_
-  query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::id;
+  const typename query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::run_event_key_class_::run_id_class_1_
+  query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::run_event_key_class_::run_id;
 
   template <typename A>
-  const typename query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::activity_type_
-  query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::
-  activity (A::table_name, "\"ACTIVITY\"", 0);
+  const typename query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::run_event_key_class_::event_type_type_
+  query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::run_event_key_class_::
+  event_type (A::table_name, "\"EVENT_TYPE\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::run_event_key_class_
+  query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::run_event_key;
 
   template <typename A>
   const typename query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::version_type_
@@ -184,9 +200,9 @@ namespace odb
   query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::payload;
 
   template <typename A>
-  const typename query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::event_type_type_
+  const typename query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::activity_type_
   query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::
-  event_type (A::table_name, "\"EVENT_TYPE\"", 0);
+  activity (A::table_name, "\"ACTIVITY\"", 0);
 
   template <typename A>
   struct pointer_query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >:
@@ -201,7 +217,7 @@ namespace odb
     public:
     struct id_image_type
     {
-      composite_value_traits< ::dogen::relational::tracing::run_id, id_sqlite >::image_type id_value;
+      composite_value_traits< ::dogen::relational::tracing::run_event_key, id_sqlite >::image_type id_value;
 
       std::size_t version;
     };
@@ -214,14 +230,9 @@ namespace odb
       std::size_t timestamp_size;
       bool timestamp_null;
 
-      // id_
+      // run_event_key_
       //
-      composite_value_traits< ::dogen::relational::tracing::run_id, id_sqlite >::image_type id_value;
-
-      // activity_
-      //
-      long long activity_value;
-      bool activity_null;
+      composite_value_traits< ::dogen::relational::tracing::run_event_key, id_sqlite >::image_type run_event_key_value;
 
       // version_
       //
@@ -233,10 +244,10 @@ namespace odb
       //
       composite_value_traits< ::dogen::relational::tracing::json, id_sqlite >::image_type payload_value;
 
-      // event_type_
+      // activity_
       //
-      long long event_type_value;
-      bool event_type_null;
+      long long activity_value;
+      bool activity_null;
 
       std::size_t version;
     };
@@ -278,7 +289,7 @@ namespace odb
     typedef sqlite::query_base query_base_type;
 
     static const std::size_t column_count = 6UL;
-    static const std::size_t id_column_count = 1UL;
+    static const std::size_t id_column_count = 2UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;
     static const std::size_t managed_optimistic_column_count = 0UL;

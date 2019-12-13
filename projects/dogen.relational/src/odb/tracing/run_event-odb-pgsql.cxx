@@ -61,18 +61,19 @@ namespace odb
   const unsigned int access::object_traits_impl< ::dogen::relational::tracing::run_event, id_pgsql >::
   find_statement_types[] =
   {
-    pgsql::text_oid
+    pgsql::text_oid,
+    pgsql::int4_oid
   };
 
   const unsigned int access::object_traits_impl< ::dogen::relational::tracing::run_event, id_pgsql >::
   update_statement_types[] =
   {
     pgsql::timestamp_oid,
-    pgsql::int4_oid,
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::int4_oid,
-    pgsql::text_oid
+    pgsql::text_oid,
+    pgsql::int4_oid
   };
 
   struct access::object_traits_impl< ::dogen::relational::tracing::run_event, id_pgsql >::extra_statement_cache_type
@@ -98,9 +99,9 @@ namespace odb
 
     id_type id;
     {
-      composite_value_traits< ::dogen::relational::tracing::run_id, id_pgsql >::init (
+      composite_value_traits< ::dogen::relational::tracing::run_event_key, id_pgsql >::init (
         id,
-        i.id_value,
+        i.run_event_key_value,
         db);
     }
 
@@ -120,15 +121,11 @@ namespace odb
     //
     t[0UL] = 0;
 
-    // id_
+    // run_event_key_
     //
-    if (composite_value_traits< ::dogen::relational::tracing::run_id, id_pgsql >::grow (
-          i.id_value, t + 1UL))
+    if (composite_value_traits< ::dogen::relational::tracing::run_event_key, id_pgsql >::grow (
+          i.run_event_key_value, t + 1UL))
       grew = true;
-
-    // activity_
-    //
-    t[2UL] = 0;
 
     // version_
     //
@@ -144,7 +141,7 @@ namespace odb
           i.payload_value, t + 4UL))
       grew = true;
 
-    // event_type_
+    // activity_
     //
     t[5UL] = 0;
 
@@ -169,21 +166,14 @@ namespace odb
     b[n].is_null = &i.timestamp_null;
     n++;
 
-    // id_
+    // run_event_key_
     //
     if (sk != statement_update)
     {
-      composite_value_traits< ::dogen::relational::tracing::run_id, id_pgsql >::bind (
-        b + n, i.id_value, sk);
-      n += 1UL;
+      composite_value_traits< ::dogen::relational::tracing::run_event_key, id_pgsql >::bind (
+        b + n, i.run_event_key_value, sk);
+      n += 2UL;
     }
-
-    // activity_
-    //
-    b[n].type = pgsql::bind::integer;
-    b[n].buffer = &i.activity_value;
-    b[n].is_null = &i.activity_null;
-    n++;
 
     // version_
     //
@@ -200,11 +190,11 @@ namespace odb
       b + n, i.payload_value, sk);
     n += 1UL;
 
-    // event_type_
+    // activity_
     //
     b[n].type = pgsql::bind::integer;
-    b[n].buffer = &i.event_type_value;
-    b[n].is_null = &i.event_type_null;
+    b[n].buffer = &i.activity_value;
+    b[n].is_null = &i.activity_null;
     n++;
   }
 
@@ -213,7 +203,7 @@ namespace odb
   {
     std::size_t n (0);
     pgsql::statement_kind sk (pgsql::statement_select);
-    composite_value_traits< ::dogen::relational::tracing::run_id, id_pgsql >::bind (
+    composite_value_traits< ::dogen::relational::tracing::run_event_key, id_pgsql >::bind (
       b + n, i.id_value, sk);
   }
 
@@ -244,32 +234,18 @@ namespace odb
       i.timestamp_null = is_null;
     }
 
-    // id_
+    // run_event_key_
     //
     if (sk == statement_insert)
     {
-      ::dogen::relational::tracing::run_id const& v =
-        o.id ();
+      ::dogen::relational::tracing::run_event_key const& v =
+        o.run_event_key ();
 
-      if (composite_value_traits< ::dogen::relational::tracing::run_id, id_pgsql >::init (
-            i.id_value,
+      if (composite_value_traits< ::dogen::relational::tracing::run_event_key, id_pgsql >::init (
+            i.run_event_key_value,
             v,
             sk))
         grew = true;
-    }
-
-    // activity_
-    //
-    {
-      ::dogen::relational::tracing::activity const& v =
-        o.activity ();
-
-      bool is_null (false);
-      pgsql::value_traits<
-          ::dogen::relational::tracing::activity,
-          pgsql::id_integer >::set_image (
-        i.activity_value, is_null, v);
-      i.activity_null = is_null;
     }
 
     // version_
@@ -306,18 +282,18 @@ namespace odb
         grew = true;
     }
 
-    // event_type_
+    // activity_
     //
     {
-      ::dogen::relational::tracing::event_type const& v =
-        o.event_type ();
+      ::dogen::relational::tracing::activity const& v =
+        o.activity ();
 
       bool is_null (false);
       pgsql::value_traits<
-          ::dogen::relational::tracing::event_type,
+          ::dogen::relational::tracing::activity,
           pgsql::id_integer >::set_image (
-        i.event_type_value, is_null, v);
-      i.event_type_null = is_null;
+        i.activity_value, is_null, v);
+      i.activity_null = is_null;
     }
 
     return grew;
@@ -346,31 +322,16 @@ namespace odb
         i.timestamp_null);
     }
 
-    // id_
+    // run_event_key_
     //
     {
-      ::dogen::relational::tracing::run_id& v =
-        o.id ();
+      ::dogen::relational::tracing::run_event_key& v =
+        o.run_event_key ();
 
-      composite_value_traits< ::dogen::relational::tracing::run_id, id_pgsql >::init (
+      composite_value_traits< ::dogen::relational::tracing::run_event_key, id_pgsql >::init (
         v,
-        i.id_value,
+        i.run_event_key_value,
         db);
-    }
-
-    // activity_
-    //
-    {
-      ::dogen::relational::tracing::activity v;
-
-      pgsql::value_traits<
-          ::dogen::relational::tracing::activity,
-          pgsql::id_integer >::set_value (
-        v,
-        i.activity_value,
-        i.activity_null);
-
-      o.activity (v);
     }
 
     // version_
@@ -400,19 +361,19 @@ namespace odb
         db);
     }
 
-    // event_type_
+    // activity_
     //
     {
-      ::dogen::relational::tracing::event_type v;
+      ::dogen::relational::tracing::activity v;
 
       pgsql::value_traits<
-          ::dogen::relational::tracing::event_type,
+          ::dogen::relational::tracing::activity,
           pgsql::id_integer >::set_value (
         v,
-        i.event_type_value,
-        i.event_type_null);
+        i.activity_value,
+        i.activity_null);
 
-      o.event_type (v);
+      o.activity (v);
     }
   }
 
@@ -422,7 +383,7 @@ namespace odb
     bool grew (false);
     pgsql::statement_kind sk (pgsql::statement_select);
     {
-      if (composite_value_traits< ::dogen::relational::tracing::run_id, id_pgsql >::init (
+      if (composite_value_traits< ::dogen::relational::tracing::run_event_key, id_pgsql >::init (
             i.id_value,
             id,
             sk))
@@ -436,47 +397,46 @@ namespace odb
   const char access::object_traits_impl< ::dogen::relational::tracing::run_event, id_pgsql >::persist_statement[] =
   "INSERT INTO \"DOGEN\".\"RUN_EVENT\" "
   "(\"TIMESTAMP\", "
-  "\"ID\", "
-  "\"ACTIVITY\", "
+  "\"RUN_ID\", "
+  "\"EVENT_TYPE\", "
   "\"VERSION\", "
   "\"PAYLOAD\", "
-  "\"EVENT_TYPE\") "
+  "\"ACTIVITY\") "
   "VALUES "
   "($1, $2, $3, $4, to_jsonb($5::jsonb), $6)";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::run_event, id_pgsql >::find_statement[] =
   "SELECT "
   "\"DOGEN\".\"RUN_EVENT\".\"TIMESTAMP\", "
-  "\"DOGEN\".\"RUN_EVENT\".\"ID\", "
-  "\"DOGEN\".\"RUN_EVENT\".\"ACTIVITY\", "
+  "\"DOGEN\".\"RUN_EVENT\".\"RUN_ID\", "
+  "\"DOGEN\".\"RUN_EVENT\".\"EVENT_TYPE\", "
   "\"DOGEN\".\"RUN_EVENT\".\"VERSION\", "
   "from_jsonb(\"DOGEN\".\"RUN_EVENT\".\"PAYLOAD\"), "
-  "\"DOGEN\".\"RUN_EVENT\".\"EVENT_TYPE\" "
+  "\"DOGEN\".\"RUN_EVENT\".\"ACTIVITY\" "
   "FROM \"DOGEN\".\"RUN_EVENT\" "
-  "WHERE \"DOGEN\".\"RUN_EVENT\".\"ID\"=$1";
+  "WHERE \"DOGEN\".\"RUN_EVENT\".\"RUN_ID\"=$1 AND \"DOGEN\".\"RUN_EVENT\".\"EVENT_TYPE\"=$2";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::run_event, id_pgsql >::update_statement[] =
   "UPDATE \"DOGEN\".\"RUN_EVENT\" "
   "SET "
   "\"TIMESTAMP\"=$1, "
-  "\"ACTIVITY\"=$2, "
-  "\"VERSION\"=$3, "
-  "\"PAYLOAD\"=to_jsonb($4::jsonb), "
-  "\"EVENT_TYPE\"=$5 "
-  "WHERE \"ID\"=$6";
+  "\"VERSION\"=$2, "
+  "\"PAYLOAD\"=to_jsonb($3::jsonb), "
+  "\"ACTIVITY\"=$4 "
+  "WHERE \"RUN_ID\"=$5 AND \"EVENT_TYPE\"=$6";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::run_event, id_pgsql >::erase_statement[] =
   "DELETE FROM \"DOGEN\".\"RUN_EVENT\" "
-  "WHERE \"ID\"=$1";
+  "WHERE \"RUN_ID\"=$1 AND \"EVENT_TYPE\"=$2";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::run_event, id_pgsql >::query_statement[] =
   "SELECT "
   "\"DOGEN\".\"RUN_EVENT\".\"TIMESTAMP\", "
-  "\"DOGEN\".\"RUN_EVENT\".\"ID\", "
-  "\"DOGEN\".\"RUN_EVENT\".\"ACTIVITY\", "
+  "\"DOGEN\".\"RUN_EVENT\".\"RUN_ID\", "
+  "\"DOGEN\".\"RUN_EVENT\".\"EVENT_TYPE\", "
   "\"DOGEN\".\"RUN_EVENT\".\"VERSION\", "
   "from_jsonb(\"DOGEN\".\"RUN_EVENT\".\"PAYLOAD\"), "
-  "\"DOGEN\".\"RUN_EVENT\".\"EVENT_TYPE\" "
+  "\"DOGEN\".\"RUN_EVENT\".\"ACTIVITY\" "
   "FROM \"DOGEN\".\"RUN_EVENT\"";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::run_event, id_pgsql >::erase_query_statement[] =
@@ -897,11 +857,13 @@ namespace odb
         {
           db.execute ("CREATE TABLE \"DOGEN\".\"RUN_EVENT\" (\n"
                       "  \"TIMESTAMP\" TIMESTAMP NULL,\n"
-                      "  \"ID\" TEXT NOT NULL PRIMARY KEY,\n"
-                      "  \"ACTIVITY\" INTEGER NOT NULL,\n"
+                      "  \"RUN_ID\" TEXT NOT NULL,\n"
+                      "  \"EVENT_TYPE\" INTEGER NOT NULL,\n"
                       "  \"VERSION\" TEXT NOT NULL,\n"
                       "  \"PAYLOAD\" JSONB NOT NULL,\n"
-                      "  \"EVENT_TYPE\" INTEGER NOT NULL)");
+                      "  \"ACTIVITY\" INTEGER NOT NULL,\n"
+                      "  PRIMARY KEY (\"RUN_ID\",\n"
+                      "               \"EVENT_TYPE\"))");
           return false;
         }
       }

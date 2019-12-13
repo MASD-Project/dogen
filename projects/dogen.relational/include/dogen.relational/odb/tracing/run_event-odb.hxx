@@ -33,6 +33,7 @@
 #include "dogen.relational/types/tracing/run_event.hpp"
 
 #include "dogen.relational/odb/tracing/json-odb.hxx"
+#include "dogen.relational/odb/tracing/run_event_key-odb.hxx"
 #include "dogen.relational/odb/tracing/run_id-odb.hxx"
 
 #include <memory>
@@ -72,7 +73,7 @@ namespace odb
 
     static const bool polymorphic = false;
 
-    typedef ::dogen::relational::tracing::run_id id_type;
+    typedef ::dogen::relational::tracing::run_event_key id_type;
 
     static const bool auto_id = false;
 

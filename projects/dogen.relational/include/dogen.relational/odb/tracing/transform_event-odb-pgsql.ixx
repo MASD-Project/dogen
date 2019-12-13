@@ -8,5 +8,24 @@ namespace odb
 {
   // transform_event
   //
+
+  inline
+  void access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
+  erase (database& db, const object_type& obj)
+  {
+    callback (db, obj, callback_event::pre_erase);
+    erase (db, id (obj));
+    callback (db, obj, callback_event::post_erase);
+  }
+
+  inline
+  void access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
+  load_ (statements_type& sts,
+         object_type& obj,
+         bool)
+  {
+    ODB_POTENTIALLY_UNUSED (sts);
+    ODB_POTENTIALLY_UNUSED (obj);
+  }
 }
 

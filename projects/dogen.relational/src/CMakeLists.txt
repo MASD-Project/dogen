@@ -100,6 +100,21 @@ if (ODB_EXECUTABLE)
     )
     add_dependencies(odb_dogen_relational odb_dogen_relational_run_event)
 
+    add_custom_target(odb_dogen_relational_run_event_key
+        COMMENT "ODB run_event_key"
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${ODB_EXECUTABLE}
+            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
+            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/run_event_key_options.odb
+            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing
+            ${ODB_EXECUTABLE_GLOBAL_ARGS}
+            ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/types/tracing/run_event_key.hpp
+        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/run_event_key-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
+        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/run_event_key-odb-sqlite.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
+        VERBATIM
+    )
+    add_dependencies(odb_dogen_relational odb_dogen_relational_run_event_key)
+
     add_custom_target(odb_dogen_relational_run_id
         COMMENT "ODB run_id"
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
@@ -129,6 +144,21 @@ if (ODB_EXECUTABLE)
         VERBATIM
     )
     add_dependencies(odb_dogen_relational odb_dogen_relational_transform_event)
+
+    add_custom_target(odb_dogen_relational_transform_event_key
+        COMMENT "ODB transform_event_key"
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${ODB_EXECUTABLE}
+            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
+            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/transform_event_key_options.odb
+            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing
+            ${ODB_EXECUTABLE_GLOBAL_ARGS}
+            ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/types/tracing/transform_event_key.hpp
+        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/transform_event_key-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
+        COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen.relational/odb/tracing/transform_event_key-odb-sqlite.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/tracing/
+        VERBATIM
+    )
+    add_dependencies(odb_dogen_relational odb_dogen_relational_transform_event_key)
 
     add_custom_target(odb_dogen_relational_transform_id
         COMMENT "ODB transform_id"

@@ -37,6 +37,7 @@
 
 #include "dogen.relational/odb/tracing/json-odb-sqlite.hxx"
 #include "dogen.relational/odb/tracing/run_id-odb-sqlite.hxx"
+#include "dogen.relational/odb/tracing/transform_event_key-odb-sqlite.hxx"
 #include "dogen.relational/odb/tracing/transform_id-odb-sqlite.hxx"
 #include "dogen.relational/odb/tracing/transform_instance_id-odb-sqlite.hxx"
 
@@ -69,51 +70,51 @@ namespace odb
 
     static const timestamp_type_ timestamp;
 
-    // id
+    // transform_event_key
     //
-    struct id_class_
+    struct transform_event_key_class_
     {
-      id_class_ ()
+      transform_event_key_class_ ()
       {
       }
 
-      // value
+      // transform_instance_id
+      //
+      struct transform_instance_id_class_1_
+      {
+        transform_instance_id_class_1_ ()
+        {
+        }
+
+        // value
+        //
+        typedef
+        sqlite::query_column<
+          sqlite::value_traits<
+            ::std::string,
+            sqlite::id_text >::query_type,
+          sqlite::id_text >
+        value_type_;
+
+        static const value_type_ value;
+      };
+
+      static const transform_instance_id_class_1_ transform_instance_id;
+
+      // event_type
       //
       typedef
       sqlite::query_column<
         sqlite::value_traits<
-          ::std::string,
-          sqlite::id_text >::query_type,
-        sqlite::id_text >
-      value_type_;
+          ::dogen::relational::tracing::event_type,
+          sqlite::id_integer >::query_type,
+        sqlite::id_integer >
+      event_type_type_;
 
-      static const value_type_ value;
+      static const event_type_type_ event_type;
     };
 
-    static const id_class_ id;
-
-    // instance_id
-    //
-    struct instance_id_class_
-    {
-      instance_id_class_ ()
-      {
-      }
-
-      // value
-      //
-      typedef
-      sqlite::query_column<
-        sqlite::value_traits<
-          ::std::string,
-          sqlite::id_text >::query_type,
-        sqlite::id_text >
-      value_type_;
-
-      static const value_type_ value;
-    };
-
-    static const instance_id_class_ instance_id;
+    static const transform_event_key_class_ transform_event_key;
 
     // run_id
     //
@@ -150,17 +151,28 @@ namespace odb
 
     static const transform_type_type_ transform_type;
 
-    // event_type
+    // transform_id
     //
-    typedef
-    sqlite::query_column<
-      sqlite::value_traits<
-        ::dogen::relational::tracing::event_type,
-        sqlite::id_integer >::query_type,
-      sqlite::id_integer >
-    event_type_type_;
+    struct transform_id_class_
+    {
+      transform_id_class_ ()
+      {
+      }
 
-    static const event_type_type_ event_type;
+      // value
+      //
+      typedef
+      sqlite::query_column<
+        sqlite::value_traits<
+          ::std::string,
+          sqlite::id_text >::query_type,
+        sqlite::id_text >
+      value_type_;
+
+      static const value_type_ value;
+    };
+
+    static const transform_id_class_ transform_id;
 
     // payload
     //
@@ -192,22 +204,22 @@ namespace odb
   timestamp (A::table_name, "\"TIMESTAMP\"", 0);
 
   template <typename A>
-  const typename query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::id_class_::value_type_
-  query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::id_class_::
-  value (A::table_name, "\"ID\"", 0);
+  const typename query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::transform_event_key_class_::transform_instance_id_class_1_::value_type_
+  query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::transform_event_key_class_::transform_instance_id_class_1_::
+  value (A::table_name, "\"TRANSFORM_INSTANCE_ID\"", 0);
 
   template <typename A>
-  const typename query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::id_class_
-  query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::id;
+  const typename query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::transform_event_key_class_::transform_instance_id_class_1_
+  query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::transform_event_key_class_::transform_instance_id;
 
   template <typename A>
-  const typename query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::instance_id_class_::value_type_
-  query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::instance_id_class_::
-  value (A::table_name, "\"INSTANCE_ID\"", 0);
+  const typename query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::transform_event_key_class_::event_type_type_
+  query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::transform_event_key_class_::
+  event_type (A::table_name, "\"EVENT_TYPE\"", 0);
 
   template <typename A>
-  const typename query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::instance_id_class_
-  query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::instance_id;
+  const typename query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::transform_event_key_class_
+  query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::transform_event_key;
 
   template <typename A>
   const typename query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::run_id_class_::value_type_
@@ -224,9 +236,13 @@ namespace odb
   transform_type (A::table_name, "\"TRANSFORM_TYPE\"", 0);
 
   template <typename A>
-  const typename query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::event_type_type_
-  query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::
-  event_type (A::table_name, "\"EVENT_TYPE\"", 0);
+  const typename query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::transform_id_class_::value_type_
+  query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::transform_id_class_::
+  value (A::table_name, "\"TRANSFORM_ID\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::transform_id_class_
+  query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::transform_id;
 
   template <typename A>
   const typename query_columns< ::dogen::relational::tracing::transform_event, id_sqlite, A >::payload_class_::value_type_
@@ -248,6 +264,13 @@ namespace odb
     public access::object_traits< ::dogen::relational::tracing::transform_event >
   {
     public:
+    struct id_image_type
+    {
+      composite_value_traits< ::dogen::relational::tracing::transform_event_key, id_sqlite >::image_type id_value;
+
+      std::size_t version;
+    };
+
     struct image_type
     {
       // timestamp_
@@ -256,13 +279,9 @@ namespace odb
       std::size_t timestamp_size;
       bool timestamp_null;
 
-      // id_
+      // transform_event_key_
       //
-      composite_value_traits< ::dogen::relational::tracing::transform_id, id_sqlite >::image_type id_value;
-
-      // instance_id_
-      //
-      composite_value_traits< ::dogen::relational::tracing::transform_instance_id, id_sqlite >::image_type instance_id_value;
+      composite_value_traits< ::dogen::relational::tracing::transform_event_key, id_sqlite >::image_type transform_event_key_value;
 
       // run_id_
       //
@@ -273,10 +292,9 @@ namespace odb
       long long transform_type_value;
       bool transform_type_null;
 
-      // event_type_
+      // transform_id_
       //
-      long long event_type_value;
-      bool event_type_null;
+      composite_value_traits< ::dogen::relational::tracing::transform_id, id_sqlite >::image_type transform_id_value;
 
       // payload_
       //
@@ -285,7 +303,12 @@ namespace odb
       std::size_t version;
     };
 
+    struct extra_statement_cache_type;
+
     using object_traits<object_type>::id;
+
+    static id_type
+    id (const image_type&);
 
     static bool
     grow (image_type&,
@@ -295,6 +318,9 @@ namespace odb
     bind (sqlite::bind*,
           image_type&,
           sqlite::statement_kind);
+
+    static void
+    bind (sqlite::bind*, id_image_type&);
 
     static bool
     init (image_type&,
@@ -306,12 +332,15 @@ namespace odb
           const image_type&,
           database*);
 
-    typedef sqlite::no_id_object_statements<object_type> statements_type;
+    static void
+    init (id_image_type&, const id_type&);
+
+    typedef sqlite::object_statements<object_type> statements_type;
 
     typedef sqlite::query_base query_base_type;
 
     static const std::size_t column_count = 7UL;
-    static const std::size_t id_column_count = 0UL;
+    static const std::size_t id_column_count = 2UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;
     static const std::size_t managed_optimistic_column_count = 0UL;
@@ -322,6 +351,9 @@ namespace odb
     static const bool versioned = false;
 
     static const char persist_statement[];
+    static const char find_statement[];
+    static const char update_statement[];
+    static const char erase_statement[];
     static const char query_statement[];
     static const char erase_query_statement[];
 
@@ -330,6 +362,24 @@ namespace odb
     static void
     persist (database&, const object_type&);
 
+    static pointer_type
+    find (database&, const id_type&);
+
+    static bool
+    find (database&, const id_type&, object_type&);
+
+    static bool
+    reload (database&, object_type&);
+
+    static void
+    update (database&, const object_type&);
+
+    static void
+    erase (database&, const id_type&);
+
+    static void
+    erase (database&, const object_type&);
+
     static result<object_type>
     query (database&, const query_base_type&);
 
@@ -337,6 +387,14 @@ namespace odb
     erase_query (database&, const query_base_type&);
 
     public:
+    static bool
+    find_ (statements_type&,
+           const id_type*);
+
+    static void
+    load_ (statements_type&,
+           object_type&,
+           bool reload);
   };
 
   // transform_event
