@@ -12,29 +12,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-12-13 Fri 17:33]
+#+CAPTION: Clock summary at [2019-12-13 Fri 18:32]
 | <75>                                                 |         |       |       |       |
 | Headline                                             | Time    |       |       |     % |
 |------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                         | *55:11* |       |       | 100.0 |
+| *Total time*                                         | *55:42* |       |       | 100.0 |
 |------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                              | 55:11   |       |       | 100.0 |
-| Active                                               |         | 55:11 |       | 100.0 |
-| Edit release notes for previous sprint               |         |       | 11:24 |  20.7 |
-| Create a demo and presentation for previous sprint   |         |       |  2:31 |   4.6 |
+| Stories                                              | 55:42   |       |       | 100.0 |
+| Active                                               |         | 55:42 |       | 100.0 |
+| Edit release notes for previous sprint               |         |       | 11:24 |  20.5 |
+| Create a demo and presentation for previous sprint   |         |       |  2:31 |   4.5 |
 | Sprint and product backlog grooming                  |         |       |  4:00 |   7.2 |
-| Fix OSX build errors                                 |         |       |  0:25 |   0.8 |
-| Fix broken build due to incorrect postgres library   |         |       |  2:31 |   4.6 |
-| Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   2.4 |
+| Fix OSX build errors                                 |         |       |  0:25 |   0.7 |
+| Fix broken build due to incorrect postgres library   |         |       |  2:31 |   4.5 |
+| Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   2.3 |
 | Create a profile called =untested=                   |         |       |  0:17 |   0.5 |
 | Remove =odb_properties= in element properties        |         |       |  2:36 |   4.7 |
 | Allow non-throwing casts for enums                   |         |       |  0:41 |   1.2 |
-| Add type overrides to primitives                     |         |       |  8:55 |  16.2 |
-| Create a string-based tracing backend interface      |         |       |  5:22 |   9.7 |
+| Add type overrides to primitives                     |         |       |  8:55 |  16.0 |
+| Create a string-based tracing backend interface      |         |       |  5:22 |   9.6 |
 | Create a tracing registrar                           |         |       |  1:10 |   2.1 |
 | Move member variable name to assets                  |         |       |  0:09 |   0.3 |
+| Create a transform instance ID property              |         |       |  0:31 |   0.9 |
 | Laptop issues                                        |         |       |  0:18 |   0.5 |
-| Add relational tracing support                       |         |       | 13:11 |  23.9 |
+| Add relational tracing support                       |         |       | 13:11 |  23.7 |
 | Nightly code coverage is not being reported          |         |       |  0:23 |   0.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -652,6 +653,35 @@ the "right" solution, and do a quick hack for now that just gives us
 what we have, but at assets level - similar to what we did with names
 and the "dot" and "colon" notations.
 
+*** COMPLETED Create a transform instance ID property                 :story:
+    CLOSED: [2019-12-13 Fri 18:30]
+    :LOGBOOK:
+    CLOCK: [2019-12-13 Fri 18:05]--[2019-12-13 Fri 18:30] =>  0:25
+    CLOCK: [2019-12-13 Fri 17:34]--[2019-12-13 Fri 17:40] =>  0:06
+    :END:
+
+At present we are generating the transform GUIDs inside the metrics
+builder. However, these are more fundamental: they tell us about the
+identity of each transform. As such, transforms should generate the
+GUIDs themselves when they start, and supply them to the tracer.
+
+We should also change the "add initial input" method to a start run
+method and create a matching end run method. The code generator is
+then responsible for supplying the GUID for the run.
+
+Notes:
+
+- for now, we can just add this to the scoped tracers.
+
+*** CANCELLED Make =scoped_tracer= header only                        :story:
+    CLOSED: [2019-12-13 Fri 18:31]
+
+*Rationale*: we've added new methods to this file, so its no longer
+header-only.
+
+At present we are generating the cpp for this file for no reason, use
+the correct profile for header only.
+
 *** STARTED Laptop issues                                             :story:
     :LOGBOOK:
     CLOCK: [2019-12-05 Thu 08:00]--[2019-12-05 Thu 08:18] =>  0:18
@@ -851,17 +881,6 @@ runs. The schema should be designed with this in mind.
 
 We are running kcov in the nightlies, but we cannot see the results in
 the coverage tool.
-
-*** Create a transform instance ID property                           :story:
-
-At present we are generating the transform GUIDs inside the metrics
-builder. However, these are more fundamental: they tell us about the
-identity of each transform. As such, transforms should generate the
-GUIDs themselves when they start, and supply them to the tracer.
-
-We should also change the "add initial input" method to a start run
-method and create a matching end run method. The code generator is
-then responsible for supplying the GUID for the run.
 
 *** Add dependency checks to transforms                               :story:
 
@@ -1166,157 +1185,6 @@ override happens either. Check the binding properties of this field.
 Many of the pictures we used in the past were in panoramio. These are
 now gone. We need to replace them with other pictures.
 
-*** Add relational tracing support                                    :story:
-
-Whenever we bump into a problem we seem to spend a lot of time going
-through the log files and trace files trying to figure out where the
-problem is happening. Have a quick go in trying to implement a
-relational model for tracing to see if we can transfer the bulk of the
-data into a relational format which we can query via SQL.
-
-We've created a basic relational model for tracing. The relational
-part of it seems straightforward (ish); the problem is the integration
-of the tracer with the relational model. At present we rely on the
-fact that all traceable objects have IO enabled; this works because
-the code generator creates the IO facet, which is then used by the
-write method in utility to convert any model type into a
-string. However, we now need to change the approach: we need multiple
-tracing backends:
-
-- file tracer
-- database tracer.
-
-The file tracer is more or less the current tracer. The database
-tracer needs to decompose the objects in existing models into a
-relational representation. In an ideal world, the user would configure
-the tracer to use one of the two backends and the remaining usage
-would be transparent. However, we cannot have an interface for the
-tracer backend that uses template methods because then we'd need
-virtual template functions, it seems.
-
-Another alternative is to make the tracer aware of the model objects
-it is tracing. This is also not ideal because we would create cycles
-in the design.
-
-In effect we need to somehow implement a similar approach to the existing
-tracer: rely on global template functions a-la =operator<<= to
-decompose objects into their relational representations and then
-supply those to the backend. It is not very clear how this would
-work. For now we've postponed this approach as it seems its not going
-to be a quick win.
-
-We should approach this incrementally. Next time we have a bit of
-spare time, we need to generate the model and then create the adapters
-from existing models. Finally we can look at how it will be integrated
-with tracing.
-
-Notes:
-
-- compilation generates an ODB error:
-
-: FATALODB include directories not defined.
-
-- the key difference between northwind and tracing is that we have a
-  namespace. The application of the schema pragma is probably not
-  working due to this. We need to look into the transform to see how
-  that pragma propagates.
-- the problem arises because we are only populating the primitive's
-  properties if there is a top-level pragma. As the schema is not
-  populated for the namespace, there isn't one. It is not clear why
-  one would want to skip properties such as DB member if there isn't a
-  schema, but perhaps this is due to some ODB error. We should
-  probably issue an error or warning if we cannot generate code
-  without a schema name.
-- with regards to the relational model, the problem is that we can't
-  really create a schema for each namespace in a model because schemas
-  are not really like namespaces. The entities in a schema should
-  really be self-contained and not refer to other schemas or else the
-  database will be confusing to use. For example in postgres we will
-  need to set the schema path, etc in order to see the different
-  tables. One possible solution is to set the schema name to the same
-  value for all namespaces (e.g. =dogen=). This would then allow us to
-  have namespaces in C++ but not in the database.
-- it seems foreign keys are not supported at present. We probably need
-  support for this in order to query quickly or else we will have to
-  manually setup indices for each of these joining fields.
-- we need a command line option to choose the tracing backend
-  (e.g. file or database). We also need the database configuration
-  parameters: hostname, port, database, user.
-- we need to refactor tracer as follows:
-  - update the tracer interface to take actual types rather than
-    templates.
-  - create a top-level interface for the notion of a backend.
-  - create two implementations of the backend: file and relational.
-  - move all the file related code to the file backend.
-  - implement adapters for each model to convert them into relational
-    model types.
-  - implement the relational backend.
-- Add relational model to the dogen model tests.
-
-Merged stories:
-
-*Scripts for loading traces into postgres*
-
-- rationale: this story is superseded by having a relational model.
-
-It would be really nice if as part of the tracing generation we also
-generated a set of SQL scripts that:
-
-- created a number of tables
-- copied all of the generated data into the database
-- added a number of utility functions such as get elements in model, etc.
-
-Over time we could build up functionality but to start off with we
-just want something really simple that copies all of the
-files. Interestingly this "looks" like a job for dogen. It would be
-nice to have a meta-model element for this etc.
-
-In the future it would be nice to have a think about the schema so
-that we could do joins etc. For example:
-
-- show me all transforms with element of type X (the state of the
-  element at each transform).
-
-We should also take into account multiple runs. Perhaps a more
-adequate solution is to create a dogen library that has the ORM
-support for this. Once we have proper JSON serialisation we can store
-the objects as JSON serialisable, allowing us to re-run transforms,
-etc.
-
-Notes:
-
-- ensure we upload the file name or at least the coordinates to the
-  transform graph with the data so that we know what it refers to.
-- rename relational database enum to just database
-- rename hostname to just host
-
-*Improved understanding*
-
-Better than uploading a whole load of JSON blobs and then having to do
-a number of really complex queries, is to have a ORM schema that is
-designed to capture the data in the format we're interested in. Then
-we could do very simple queries. What we really care about is
-capturing all attributes of the model as it changes across the
-transformations. We also care about the relationships between
-transformations. We also need a way to uniquely identify elements
-across their entire lifecycle. A simple way would be to create a hash
-of the file name of the model, column and line number. We can then
-associate other IDs to this one such as dia ID, etc.
-
-We need to create a set of adaptors that convert an existing model
-(injection, coding, etc) into the ORM model and then write the ORM
-model into the database. The ORM model does not need as much detail
-and structure as a regular model; for example, names can be flattened
-or linked into IDs (e.g. name table), etc. Whatever makes sense from a
-relational perspective.
-
-It would also be nice to dump the log into the database so that we
-could do simple correlations such as "what was logged between the
-start and end of this transform?"
-
-Interestingly, this would also allow us to compare things between
-runs. The schema should be designed with this in mind.
-
 *** Move registrar into assets                                        :story:
 
 Move the registrar type into assets, in the quickest way possible.
@@ -1395,11 +1263,6 @@ directly related to the schema name - we just require some ORM
 property to be set. AS it happens, it normally tends to be the schema
 name, because it makes sense to set it when defining a relational
 model. This is why we never bumped into this problem before.
-
-*** Make =scoped_tracer= header only                                  :story:
-
-At present we are generating the cpp for this file for no reason, use
-the correct profile for header only.
 
 *** Upgrade to boost 1.70                                             :story:
 
