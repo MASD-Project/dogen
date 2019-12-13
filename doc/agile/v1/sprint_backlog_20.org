@@ -12,30 +12,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-12-13 Fri 22:41]
+#+CAPTION: Clock summary at [2019-12-13 Fri 23:05]
 | <75>                                                 |         |       |       |       |
 | Headline                                             | Time    |       |       |     % |
 |------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                         | *58:21* |       |       | 100.0 |
+| *Total time*                                         | *58:44* |       |       | 100.0 |
 |------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                              | 58:21   |       |       | 100.0 |
-| Active                                               |         | 58:21 |       | 100.0 |
-| Edit release notes for previous sprint               |         |       | 11:24 |  19.5 |
+| Stories                                              | 58:44   |       |       | 100.0 |
+| Active                                               |         | 58:44 |       | 100.0 |
+| Edit release notes for previous sprint               |         |       | 11:24 |  19.4 |
 | Create a demo and presentation for previous sprint   |         |       |  2:31 |   4.3 |
-| Sprint and product backlog grooming                  |         |       |  4:00 |   6.9 |
+| Sprint and product backlog grooming                  |         |       |  4:00 |   6.8 |
 | Fix OSX build errors                                 |         |       |  0:25 |   0.7 |
 | Fix broken build due to incorrect postgres library   |         |       |  2:31 |   4.3 |
 | Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   2.2 |
 | Create a profile called =untested=                   |         |       |  0:17 |   0.5 |
-| Remove =odb_properties= in element properties        |         |       |  2:36 |   4.5 |
+| Remove =odb_properties= in element properties        |         |       |  2:36 |   4.4 |
 | Allow non-throwing casts for enums                   |         |       |  0:41 |   1.2 |
-| Add type overrides to primitives                     |         |       |  8:55 |  15.3 |
-| Create a string-based tracing backend interface      |         |       |  5:22 |   9.2 |
+| Add type overrides to primitives                     |         |       |  8:55 |  15.2 |
+| Create a string-based tracing backend interface      |         |       |  5:22 |   9.1 |
 | Create a tracing registrar                           |         |       |  1:10 |   2.0 |
 | Move member variable name to assets                  |         |       |  0:09 |   0.3 |
 | Create a transform instance ID property              |         |       |  0:31 |   0.9 |
 | Laptop issues                                        |         |       |  0:18 |   0.5 |
-| Add relational tracing support                       |         |       | 15:50 |  27.1 |
+| Add relational tracing support                       |         |       | 16:13 |  27.6 |
 | Nightly code coverage is not being reported          |         |       |  0:23 |   0.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -691,6 +691,7 @@ Time spent sorting out laptop.
 
 *** STARTED Add relational tracing support                            :story:
     :LOGBOOK:
+    CLOCK: [2019-12-13 Fri 22:42]--[2019-12-13 Fri 23:05] =>  0:23
     CLOCK: [2019-12-13 Fri 20:36]--[2019-12-13 Fri 22:41] =>  2:05
     CLOCK: [2019-12-13 Fri 18:31]--[2019-12-13 Fri 19:05] =>  0:34
     CLOCK: [2019-12-05 Thu 00:11]--[2019-12-05 Thu 00:29] =>  0:18
