@@ -56,6 +56,7 @@ namespace odb
     pgsql::text_oid,
     pgsql::int4_oid,
     pgsql::text_oid,
+    pgsql::text_oid,
     pgsql::text_oid
   };
 
@@ -72,6 +73,7 @@ namespace odb
     pgsql::timestamp_oid,
     pgsql::text_oid,
     pgsql::int4_oid,
+    pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
@@ -151,6 +153,14 @@ namespace odb
           i.payload_value, t + 6UL))
       grew = true;
 
+    // model_id_
+    //
+    if (t[7UL])
+    {
+      i.model_id_value.capacity (i.model_id_size);
+      grew = true;
+    }
+
     return grew;
   }
 
@@ -205,6 +215,15 @@ namespace odb
     composite_value_traits< ::dogen::relational::tracing::json, id_pgsql >::bind (
       b + n, i.payload_value, sk);
     n += 1UL;
+
+    // model_id_
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.model_id_value.data ();
+    b[n].capacity = i.model_id_value.capacity ();
+    b[n].size = &i.model_id_size;
+    b[n].is_null = &i.model_id_null;
+    n++;
   }
 
   void access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
@@ -310,6 +329,27 @@ namespace odb
         grew = true;
     }
 
+    // model_id_
+    //
+    {
+      ::std::string const& v =
+        o.model_id ();
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.model_id_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.model_id_value,
+        size,
+        is_null,
+        v);
+      i.model_id_null = is_null;
+      i.model_id_size = size;
+      grew = grew || (cap != i.model_id_value.capacity ());
+    }
+
     return grew;
   }
 
@@ -398,6 +438,21 @@ namespace odb
         i.payload_value,
         db);
     }
+
+    // model_id_
+    //
+    {
+      ::std::string& v =
+        o.model_id ();
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.model_id_value,
+        i.model_id_size,
+        i.model_id_null);
+    }
   }
 
   void access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
@@ -425,9 +480,10 @@ namespace odb
   "\"RUN_ID\", "
   "\"TRANSFORM_TYPE\", "
   "\"TRANSFORM_ID\", "
-  "\"PAYLOAD\") "
+  "\"PAYLOAD\", "
+  "\"MODEL_ID\") "
   "VALUES "
-  "($1, $2, $3, $4, $5, $6, to_jsonb($7::jsonb))";
+  "($1, $2, $3, $4, $5, $6, to_jsonb($7::jsonb), $8)";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::find_statement[] =
   "SELECT "
@@ -437,7 +493,8 @@ namespace odb
   "\"DOGEN\".\"TRANSFORM_EVENT\".\"RUN_ID\", "
   "\"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_TYPE\", "
   "\"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_ID\", "
-  "from_jsonb(\"DOGEN\".\"TRANSFORM_EVENT\".\"PAYLOAD\") "
+  "from_jsonb(\"DOGEN\".\"TRANSFORM_EVENT\".\"PAYLOAD\"), "
+  "\"DOGEN\".\"TRANSFORM_EVENT\".\"MODEL_ID\" "
   "FROM \"DOGEN\".\"TRANSFORM_EVENT\" "
   "WHERE \"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_INSTANCE_ID\"=$1 AND \"DOGEN\".\"TRANSFORM_EVENT\".\"EVENT_TYPE\"=$2";
 
@@ -448,8 +505,9 @@ namespace odb
   "\"RUN_ID\"=$2, "
   "\"TRANSFORM_TYPE\"=$3, "
   "\"TRANSFORM_ID\"=$4, "
-  "\"PAYLOAD\"=to_jsonb($5::jsonb) "
-  "WHERE \"TRANSFORM_INSTANCE_ID\"=$6 AND \"EVENT_TYPE\"=$7";
+  "\"PAYLOAD\"=to_jsonb($5::jsonb), "
+  "\"MODEL_ID\"=$6 "
+  "WHERE \"TRANSFORM_INSTANCE_ID\"=$7 AND \"EVENT_TYPE\"=$8";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::erase_statement[] =
   "DELETE FROM \"DOGEN\".\"TRANSFORM_EVENT\" "
@@ -463,7 +521,8 @@ namespace odb
   "\"DOGEN\".\"TRANSFORM_EVENT\".\"RUN_ID\", "
   "\"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_TYPE\", "
   "\"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_ID\", "
-  "from_jsonb(\"DOGEN\".\"TRANSFORM_EVENT\".\"PAYLOAD\") "
+  "from_jsonb(\"DOGEN\".\"TRANSFORM_EVENT\".\"PAYLOAD\"), "
+  "\"DOGEN\".\"TRANSFORM_EVENT\".\"MODEL_ID\" "
   "FROM \"DOGEN\".\"TRANSFORM_EVENT\"";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::erase_query_statement[] =
@@ -890,6 +949,7 @@ namespace odb
                       "  \"TRANSFORM_TYPE\" INTEGER NOT NULL,\n"
                       "  \"TRANSFORM_ID\" TEXT NOT NULL,\n"
                       "  \"PAYLOAD\" JSONB NOT NULL,\n"
+                      "  \"MODEL_ID\" TEXT NOT NULL,\n"
                       "  PRIMARY KEY (\"TRANSFORM_INSTANCE_ID\",\n"
                       "               \"EVENT_TYPE\"))");
           return false;

@@ -31,13 +31,15 @@ transform_event::transform_event(
     const dogen::relational::tracing::run_id& run_id,
     const dogen::relational::tracing::transform_type transform_type,
     const dogen::relational::tracing::transform_id& transform_id,
-    const dogen::relational::tracing::json& payload)
+    const dogen::relational::tracing::json& payload,
+    const std::string& model_id)
     : timestamp_(timestamp),
       transform_event_key_(transform_event_key),
       run_id_(run_id),
       transform_type_(transform_type),
       transform_id_(transform_id),
-      payload_(payload) { }
+      payload_(payload),
+      model_id_(model_id) { }
 
 void transform_event::swap(transform_event& other) noexcept {
     using std::swap;
@@ -47,6 +49,7 @@ void transform_event::swap(transform_event& other) noexcept {
     swap(transform_type_, other.transform_type_);
     swap(transform_id_, other.transform_id_);
     swap(payload_, other.payload_);
+    swap(model_id_, other.model_id_);
 }
 
 bool transform_event::operator==(const transform_event& rhs) const {
@@ -55,7 +58,8 @@ bool transform_event::operator==(const transform_event& rhs) const {
         run_id_ == rhs.run_id_ &&
         transform_type_ == rhs.transform_type_ &&
         transform_id_ == rhs.transform_id_ &&
-        payload_ == rhs.payload_;
+        payload_ == rhs.payload_ &&
+        model_id_ == rhs.model_id_;
 }
 
 transform_event& transform_event::operator=(transform_event other) {
@@ -150,6 +154,22 @@ void transform_event::payload(const dogen::relational::tracing::json& v) {
 
 void transform_event::payload(const dogen::relational::tracing::json&& v) {
     payload_ = std::move(v);
+}
+
+const std::string& transform_event::model_id() const {
+    return model_id_;
+}
+
+std::string& transform_event::model_id() {
+    return model_id_;
+}
+
+void transform_event::model_id(const std::string& v) {
+    model_id_ = v;
+}
+
+void transform_event::model_id(const std::string&& v) {
+    model_id_ = std::move(v);
 }
 
 }

@@ -196,6 +196,18 @@ namespace odb
     };
 
     static const payload_class_ payload;
+
+    // model_id
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    model_id_type_;
+
+    static const model_id_type_ model_id;
   };
 
   template <typename A>
@@ -254,6 +266,11 @@ namespace odb
   query_columns< ::dogen::relational::tracing::transform_event, id_pgsql, A >::payload;
 
   template <typename A>
+  const typename query_columns< ::dogen::relational::tracing::transform_event, id_pgsql, A >::model_id_type_
+  query_columns< ::dogen::relational::tracing::transform_event, id_pgsql, A >::
+  model_id (A::table_name, "\"MODEL_ID\"", 0);
+
+  template <typename A>
   struct pointer_query_columns< ::dogen::relational::tracing::transform_event, id_pgsql, A >:
     query_columns< ::dogen::relational::tracing::transform_event, id_pgsql, A >
   {
@@ -299,6 +316,12 @@ namespace odb
       //
       composite_value_traits< ::dogen::relational::tracing::json, id_pgsql >::image_type payload_value;
 
+      // model_id_
+      //
+      details::buffer model_id_value;
+      std::size_t model_id_size;
+      bool model_id_null;
+
       std::size_t version;
     };
 
@@ -338,7 +361,7 @@ namespace odb
 
     typedef pgsql::query_base query_base_type;
 
-    static const std::size_t column_count = 7UL;
+    static const std::size_t column_count = 8UL;
     static const std::size_t id_column_count = 2UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;

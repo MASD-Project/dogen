@@ -36,6 +36,8 @@
 #include "dogen.relational/types/tracing/transform_event.hpp"
 #include "dogen.relational/odb/tracing/transform_event-odb.hxx"
 #include "dogen.relational/odb/tracing/transform_event-odb-pgsql.hxx"
+#include "dogen.relational/odb/tracing/transform_event_key-odb.hxx"
+#include "dogen.relational/odb/tracing/transform_event_key-odb-pgsql.hxx"
 #include "dogen.relational/types/tracing/relational_backend.hpp"
 
 namespace {
@@ -134,19 +136,71 @@ void relational_backend::add_references_graph(
     /*edges_per_model*/) const {
 }
 
-void relational_backend::start_chain(const std::string& /*transform_id*/,
-    const std::string& /*transform_instance_id*/) const {
+void relational_backend::start_chain(const std::string& transform_id,
+    const std::string& transform_instance_id) const {
+    transform_event_key k;
+    k.transform_instance_id(
+        tracing::transform_instance_id(transform_instance_id));
+    k.event_type(event_type::start);
+
+    transform_event te;
+    te.transform_event_key(k);
+    te.run_id(run_id(run_id_));
+    te.timestamp(boost::posix_time::microsec_clock::universal_time());
+    te.payload(json("{}"));
+    te.transform_type(transform_type::chain);
+    te.transform_id(tracing::transform_id(transform_id));
+
+    odb::transaction t(database_->begin());
+    database_->persist(te);
+    t.commit();
 }
 
-void relational_backend::start_chain(const std::string& /*transform_id*/,
-    const std::string& /*transform_instance_id*/,
-    const std::string& /*model_id*/) const {
+void relational_backend::start_chain(const std::string& transform_id,
+    const std::string& transform_instance_id,
+    const std::string& model_id) const {
+
+    transform_event_key k;
+    k.transform_instance_id(
+        tracing::transform_instance_id(transform_instance_id));
+    k.event_type(event_type::start);
+
+    transform_event te;
+    te.transform_event_key(k);
+    te.run_id(run_id(run_id_));
+    te.timestamp(boost::posix_time::microsec_clock::universal_time());
+    te.payload(json("{}"));
+    te.transform_type(transform_type::chain);
+    te.transform_id(tracing::transform_id(transform_id));
+    te.model_id(model_id);
+
+    odb::transaction t(database_->begin());
+    database_->persist(te);
+    t.commit();
 }
 
-void relational_backend::start_chain(const std::string& /*transform_id*/,
-    const std::string& /*transform_instance_id*/,
-    const std::string& /*model_id*/,
-    const std::string& /*input*/) const {
+void relational_backend::start_chain(const std::string& transform_id,
+    const std::string& transform_instance_id,
+    const std::string& model_id,
+    const std::string& input) const {
+
+    transform_event_key k;
+    k.transform_instance_id(
+        tracing::transform_instance_id(transform_instance_id));
+    k.event_type(event_type::start);
+
+    transform_event te;
+    te.transform_event_key(k);
+    te.run_id(run_id(run_id_));
+    te.timestamp(boost::posix_time::microsec_clock::universal_time());
+    te.payload(json(input));
+    te.transform_type(transform_type::chain);
+    te.transform_id(tracing::transform_id(transform_id));
+    te.model_id(model_id);
+
+    odb::transaction t(database_->begin());
+    database_->persist(te);
+    t.commit();
 }
 
 void relational_backend::

@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <string>
 #include <algorithm>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
 #include "dogen.relational/types/tracing/json.hpp"
@@ -51,7 +52,8 @@ public:
         const dogen::relational::tracing::run_id& run_id,
         const dogen::relational::tracing::transform_type transform_type,
         const dogen::relational::tracing::transform_id& transform_id,
-        const dogen::relational::tracing::json& payload);
+        const dogen::relational::tracing::json& payload,
+        const std::string& model_id);
 
 public:
     const boost::posix_time::ptime& timestamp() const;
@@ -82,6 +84,11 @@ public:
     void payload(const dogen::relational::tracing::json& v);
     void payload(const dogen::relational::tracing::json&& v);
 
+    const std::string& model_id() const;
+    std::string& model_id();
+    void model_id(const std::string& v);
+    void model_id(const std::string&& v);
+
 public:
     bool operator==(const transform_event& rhs) const;
     bool operator!=(const transform_event& rhs) const {
@@ -99,6 +106,7 @@ private:
     dogen::relational::tracing::transform_type transform_type_;
     dogen::relational::tracing::transform_id transform_id_;
     dogen::relational::tracing::json payload_;
+    std::string model_id_;
 };
 
 }
