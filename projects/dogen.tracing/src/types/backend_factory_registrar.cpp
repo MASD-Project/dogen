@@ -37,6 +37,10 @@ const std::string missing_factory("Backend factory not available: ");
 const std::string null_factory("Backend factory supplied is null.");
 const std::string duplicate_factory(
     "More than one backend factory registered for this id: ");
+const std::string too_many_backends(
+    "More than one backend factory generated a backend.");
+const std::string unsupported_backend(
+    "Tracing backend is unsupported: ");
 
 }
 
@@ -74,15 +78,49 @@ void backend_factory_registrar::validate() const {
         BOOST_LOG_SEV(lg, trace) << "Backend factory: " << pair.second->id();
 }
 
-const boost::shared_ptr<backend_factory>
-backend_factory_registrar::obtain_backend_factory(const tracing_backend tb) {
-    const auto i(backend_factories_.find(tb));
-    if (i == backend_factories_.end()) {
-        const auto s(boost::lexical_cast<std::string>(tb));
-        BOOST_LOG_SEV(lg, error) << missing_factory << s;
-        BOOST_THROW_EXCEPTION(registrar_error(missing_factory + s));
+const boost::shared_ptr<backend>
+backend_factory_registrar::
+try_make_backend(const configuration& cfg, const std::string& run_id) {
+    bool found(false);
+    boost::shared_ptr<backend> r;
+
+    /*
+     * Use the factories to generate all backends for this
+     * configuration. Note that we only expect one to be generated, so
+     * throw if more than one show up.
+     */
+    for (const auto& pair : backend_factories_) {
+        const auto& f(*pair.second);
+        BOOST_LOG_SEV(lg, debug) << "Trying to generate a backend: " << f.id();
+        const auto b(f.make(cfg, run_id));
+        if (!b) {
+            BOOST_LOG_SEV(lg, debug) << "Factory did not generate a backend.";
+            continue;
+        }
+
+        BOOST_LOG_SEV(lg, debug) << "Factory generated a backend.";
+        if (found) {
+            BOOST_LOG_SEV(lg, error) << too_many_backends;
+            BOOST_THROW_EXCEPTION(registrar_error(too_many_backends));
+        }
+        r = b;
+        found = true;
     }
-    return i->second;
+
+    /*
+     * If tracing was requested but no backend was generated,
+     * throw. This is likely because the user asked for a backend that
+     * is not supported by this build of dogen.
+     */
+    if (!r && cfg.tracing()) {
+        const auto tb(cfg.tracing()->backend());
+        const auto s(boost::lexical_cast<std::string>(tb));
+
+        BOOST_LOG_SEV(lg, error) << unsupported_backend << s;
+        BOOST_THROW_EXCEPTION(registrar_error(unsupported_backend + s));
+    }
+
+    return r;
 }
 
 }

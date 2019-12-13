@@ -46,7 +46,7 @@ dogen::tracing_backend file_backend_factory::tracing_backend() const {
 }
 
 boost::shared_ptr<backend> file_backend_factory::
-make(const configuration& cfg, const std::string& run_id) {
+make(const configuration& cfg, const std::string& run_id) const {
     BOOST_LOG_SEV(lg, debug) << "Creating relational backend.";
 
     const auto& tcfg(cfg.tracing());

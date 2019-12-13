@@ -26,9 +26,11 @@
 #endif
 
 #include <unordered_map>
-#include <boost/make_shared.hpp>
 #include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
+#include "dogen/types/configuration.hpp"
 #include "dogen/types/tracing_backend.hpp"
+#include "dogen.tracing/types/backend_fwd.hpp"
 #include "dogen.tracing/types/backend_factory_fwd.hpp"
 
 namespace dogen::tracing {
@@ -49,11 +51,17 @@ public:
     void validate() const;
 
     /**
-     * @brief Returns the requested backend factory, if one
-     * exists. Otherwise throws.
+     * @brief Attempts to creates a backend using the registered
+     * factories.
+     *
+     * @pre If the configuration results in more than one backend,
+     * throws.
+     *
+     * @pre If the configuration for tracing is enabled, but no
+     * backend is generated, throws.
      */
-    const boost::shared_ptr<backend_factory>
-    obtain_backend_factory(const tracing_backend tb);
+    const boost::shared_ptr<backend>
+    try_make_backend(const configuration& cfg, const std::string& run_id);
 
 private:
     std::unordered_map<dogen::tracing_backend,

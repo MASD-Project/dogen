@@ -54,7 +54,7 @@ public:
      * @brief Makes a new backend.
      */
     virtual boost::shared_ptr<backend>
-    make(const configuration& cfg, const std::string& run_id) = 0;
+    make(const configuration& cfg, const std::string& run_id) const = 0;
 };
 
 inline backend_factory::~backend_factory() noexcept { }

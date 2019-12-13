@@ -34,7 +34,7 @@ public:
     std::string id() const override;
     dogen::tracing_backend tracing_backend() const override;
     boost::shared_ptr<backend>
-    make(const configuration& cfg, const std::string& run_id) override;
+    make(const configuration& cfg, const std::string& run_id) const override;
 };
 
 }
