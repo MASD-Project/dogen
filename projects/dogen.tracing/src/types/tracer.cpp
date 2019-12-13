@@ -113,38 +113,46 @@ std::string tracer::generate_guid() {
 void tracer::add_references_graph(const std::string& root_vertex,
     const std::unordered_map<std::string, std::list<std::string>>&
     edges_per_model) const {
-    backend_->add_references_graph(root_vertex, edges_per_model);
+    if (backend_)
+        backend_->add_references_graph(root_vertex, edges_per_model);
 }
 
 void tracer::end_tracing() const {
     BOOST_LOG_SEV(lg, debug) << "Finished tracing.";
-    backend_->end_tracing();
+    if (backend_)
+        backend_->end_tracing();
 }
 
 void tracer::start_chain(const std::string& transform_id) const {
-    backend_->start_chain(transform_id, "FIXME");
+    if (backend_)
+        backend_->start_chain(transform_id, "FIXME");
 }
 
 void tracer::start_chain(const std::string& transform_id,
     const std::string& model_id) const {
-    backend_->start_chain(transform_id, "FIXME", model_id);
+    if (backend_)
+        backend_->start_chain(transform_id, "FIXME", model_id);
 }
 
 void tracer::start_transform(const std::string& transform_id) const {
-    backend_->start_transform(transform_id, "FIXME");
+    if (backend_)
+        backend_->start_transform(transform_id, "FIXME");
 }
 
 void tracer::start_transform(const std::string& transform_id,
     const std::string& model_id) const {
-    backend_->start_transform(transform_id, "FIXME", model_id);
+    if (backend_)
+        backend_->start_transform(transform_id, "FIXME", model_id);
 }
 
 void tracer::end_chain() const {
-    backend_->end_chain();
+    if (backend_)
+        backend_->end_chain();
 }
 
 void tracer::end_transform() const {
-    backend_->end_transform();
+    if (backend_)
+        backend_->end_transform();
 }
 
 bool tracer::operator==(const tracer& /*rhs*/) const {

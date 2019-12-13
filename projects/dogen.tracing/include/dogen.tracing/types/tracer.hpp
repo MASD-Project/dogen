@@ -78,7 +78,8 @@ public:
     template<typename Ioable>
     void add_initial_input(const std::string& input_id,
         const Ioable& input) const {
-        backend_->start_tracing(input_id, to_string(input));
+        if (backend_)
+            backend_->start_tracing(input_id, to_string(input));
     }
 
     void add_references_graph(const std::string& root_vertex,
@@ -93,8 +94,10 @@ public:
     void start_chain(const std::string& transform_id,
         const std::string& model_id,
         const Ioable& input) const {
-        backend_->start_chain(transform_id, generate_guid(),
-            model_id, to_string(input));
+        if (backend_) {
+            backend_->start_chain(transform_id, generate_guid(),
+                model_id, to_string(input));
+        }
     }
 
     void start_transform(const std::string& transform_id) const;
@@ -106,22 +109,26 @@ public:
     void start_transform(const std::string& transform_id,
         const std::string& model_id,
         const Ioable& input) const {
-        backend_->start_transform(transform_id, generate_guid(),
-            model_id, to_string(input));
+        if (backend_) {
+            backend_->start_transform(transform_id, generate_guid(),
+                model_id, to_string(input));
+        }
     }
 
     void end_chain() const;
 
     template<typename Ioable>
     void end_chain(const Ioable& output) const {
-        backend_->end_chain(to_string(output));
+        if (backend_)
+            backend_->end_chain(to_string(output));
     }
 
     void end_transform() const;
 
     template<typename Ioable>
     void end_transform(const Ioable& output) const {
-        backend_->end_transform(to_string(output));
+        if (backend_)
+            backend_->end_transform(to_string(output));
     }
 
     void end_tracing() const;
