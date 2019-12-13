@@ -13100,6 +13100,31 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider generating SSL certificates and keys                     :story:
+
+When creating an HTTPS service, one needs to have certificates,
+etc. It would be nice if dogen could create self-signed certificates,
+or added support for Lets encrypt.
+
+*** Add support for terraform                                         :story:
+
+Terraform is a Infrastructure as Code (IaC) language. We should be
+able to model most of its concepts into the assets meta-model
+(modules, variables, =main.tf=, etc). In an ideal world, the user
+should be able to add a model with terraform elements and generate the
+IaC for it.
+
+For extra bonus points we should integrate the CI (travis, etc) with
+the IaC. We should also have a policy of naming for environments
+etc. This could be part of a theme.
+
+Links:
+
+- [[https://en.wikipedia.org/wiki/Terraform_(software)][Terraform Wikipedia]]
+- [[https://www.terraform.io/docs/configuration/syntax.html][Terraform: Configuration Syntax]]
+- [[https://www.terraform.io/docs/configuration/index.html][Configuration Language]]
+- [[https://github.com/syohex/emacs-terraform-mode][terraform emacs mode]]
+
 *** dogen as a github integration                                     :story:
 
 Perhaps there are some useful services dogen could provide to users in
