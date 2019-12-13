@@ -18,42 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TRACING_TYPES_BACKEND_REGISTRAR_HPP
-#define DOGEN_TRACING_TYPES_BACKEND_REGISTRAR_HPP
+#ifndef DOGEN_TRACING_TYPES_FILE_BACKEND_FACTORY_HPP
+#define DOGEN_TRACING_TYPES_FILE_BACKEND_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <unordered_map>
-#include <boost/shared_ptr.hpp>
-#include "dogen/types/tracing_backend.hpp"
-#include "dogen.tracing/types/backend_fwd.hpp"
+#include "dogen.tracing/types/backend_factory.hpp"
 
 namespace dogen::tracing {
 
-
-class backend_registrar final {
+class file_backend_factory final : public backend_factory {
 public:
-    /**
-     * @brief Registers a backend.
-     */
-    void register_backend(const boost::shared_ptr<backend> b);
-
-    /**
-     * @brief Ensures the registrar is ready to be used.
-     */
-    void validate() const;
-
-    /**
-     * @brief Returns the requested backend, if one exists. Otherwise
-     * throws.
-     */
-    const boost::shared_ptr<backend> obtain_backend(const tracing_backend tb);
-
-private:
-    std::unordered_map<dogen::tracing_backend,
-                       boost::shared_ptr<backend>> backends_;
+    std::string id() const override;
+    dogen::tracing_backend tracing_backend() const override;
+    boost::shared_ptr<backend>
+    make(const configuration& cfg, const std::string& run_id) override;
 };
 
 }

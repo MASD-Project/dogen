@@ -155,15 +155,15 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "backend_registrar",
+      "name": "backend_factory_registrar",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "backends_",
-          "type": "std::unordered_map<tracing_backend, boost::shared_ptr<backend>>"
+          "name": "backend_factories_",
+          "type": "std::unordered_map<tracing_backend, boost::shared_ptr<backend_factory>>"
         }
       ]
     },
@@ -171,6 +171,43 @@
       "name": "registrar_error",
       "stereotypes": [
         "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "backend_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable::header_only"
+      ],
+      "tagged_values": {
+        "masd.generation.cpp.types.class_forward_declarations.enabled": "true"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "file_backend_factory",
+      "parents": [
+        "backend_factory"
+      ],
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "relational_backend_factory",
+      "parents": [
+        "backend_factory"
+      ],
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "initializer",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     }
