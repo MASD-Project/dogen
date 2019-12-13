@@ -21,14 +21,18 @@
 #include <boost/make_shared.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/throw_exception.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
 #include "dogen/config.hpp"
 #include "dogen/io/tracing_configuration_io.hpp"
 #include "dogen/io/database_configuration_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/tracing_error.hpp"
-#include "dogen.relational/types/tracing/run.hpp"
-#include "dogen.relational/odb/tracing/run-odb.hxx"
-#include "dogen.relational/odb/tracing/run-odb-pgsql.hxx"
+#include "dogen.relational/types/tracing/run_event.hpp"
+#include "dogen.relational/odb/tracing/run_event-odb.hxx"
+#include "dogen.relational/odb/tracing/run_event-odb-pgsql.hxx"
+#include "dogen.relational/types/tracing/transform_event.hpp"
+#include "dogen.relational/odb/tracing/transform_event-odb.hxx"
+#include "dogen.relational/odb/tracing/transform_event-odb-pgsql.hxx"
 #include "dogen.relational/types/tracing/relational_backend.hpp"
 
 namespace {
@@ -92,12 +96,10 @@ void relational_backend::start_tracing(const std::string& input_id,
     const std::string& input) const {
     BOOST_LOG_SEV(lg, debug) << "Adding initial input: " << input_id;
 
-    dogen::relational::tracing::run_id id(run_id_);
-    dogen::relational::tracing::json json(input);
-
-    dogen::relational::tracing::run run;
-    run.id(id);
-    run.configuration(json);
+    run_event run;
+    run.id(run_id(run_id_));
+    run.payload(json(input));
+    run.timestamp(boost::posix_time::microsec_clock::universal_time());
 
     odb::transaction t(database_->begin());
     database_->persist(run);
