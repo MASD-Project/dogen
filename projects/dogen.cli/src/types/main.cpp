@@ -35,6 +35,7 @@
 #include "dogen.cli/types/injector_factory.hpp"
 #include "dogen.cli/types/parser_exception.hpp"
 #include "dogen.cli/types/command_line_parser.hpp"
+#include "dogen.relational/types/tracing/log_backend.hpp"
 
 namespace {
 
@@ -113,6 +114,12 @@ int execute_cli_workflow(const int argc, const char* argv[],
     slm.initialise(cfg.logging());
     BOOST_LOG_SEV(lg, info) << "Command line arguments: " << args;
     BOOST_LOG_SEV(lg, debug) << "Configuration: " << cfg;
+
+    if (cfg.api().database() && cfg.logging()) {
+        const auto sl(to_severity_level(cfg.logging()->severity()));
+        dogen::relational::tracing::create_relational_log_backend("AAA",
+            *cfg.api().database(), sl);
+    }
 
     /*
      * Now perform legacy initialisation. It uses logging so it must
