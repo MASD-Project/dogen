@@ -36,7 +36,8 @@ tracing_configuration::tracing_configuration(tracing_configuration&& rhs)
       logging_impact_(std::move(rhs.logging_impact_)),
       use_short_names_(std::move(rhs.use_short_names_)),
       output_directory_(std::move(rhs.output_directory_)),
-      backend_(std::move(rhs.backend_)) { }
+      backend_(std::move(rhs.backend_)),
+      run_id_(std::move(rhs.run_id_)) { }
 
 tracing_configuration::tracing_configuration(
     const dogen::tracing_level level,
@@ -45,14 +46,16 @@ tracing_configuration::tracing_configuration(
     const std::string& logging_impact,
     const bool use_short_names,
     const boost::filesystem::path& output_directory,
-    const dogen::tracing_backend backend)
+    const dogen::tracing_backend backend,
+    const std::string& run_id)
     : level_(level),
       format_(format),
       guids_enabled_(guids_enabled),
       logging_impact_(logging_impact),
       use_short_names_(use_short_names),
       output_directory_(output_directory),
-      backend_(backend) { }
+      backend_(backend),
+      run_id_(run_id) { }
 
 void tracing_configuration::swap(tracing_configuration& other) noexcept {
     using std::swap;
@@ -63,6 +66,7 @@ void tracing_configuration::swap(tracing_configuration& other) noexcept {
     swap(use_short_names_, other.use_short_names_);
     swap(output_directory_, other.output_directory_);
     swap(backend_, other.backend_);
+    swap(run_id_, other.run_id_);
 }
 
 bool tracing_configuration::operator==(const tracing_configuration& rhs) const {
@@ -72,7 +76,8 @@ bool tracing_configuration::operator==(const tracing_configuration& rhs) const {
         logging_impact_ == rhs.logging_impact_ &&
         use_short_names_ == rhs.use_short_names_ &&
         output_directory_ == rhs.output_directory_ &&
-        backend_ == rhs.backend_;
+        backend_ == rhs.backend_ &&
+        run_id_ == rhs.run_id_;
 }
 
 tracing_configuration& tracing_configuration::operator=(tracing_configuration other) {
@@ -159,6 +164,24 @@ dogen::tracing_backend tracing_configuration::backend() const {
 
 tracing_configuration& tracing_configuration::backend(const dogen::tracing_backend v) {
     backend_ = v;
+    return *this;
+}
+
+const std::string& tracing_configuration::run_id() const {
+    return run_id_;
+}
+
+std::string& tracing_configuration::run_id() {
+    return run_id_;
+}
+
+tracing_configuration& tracing_configuration::run_id(const std::string& v) {
+    run_id_ = v;
+    return *this;
+}
+
+tracing_configuration& tracing_configuration::run_id(const std::string&& v) {
+    run_id_ = std::move(v);
     return *this;
 }
 

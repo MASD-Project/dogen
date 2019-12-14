@@ -51,7 +51,8 @@ std::ostream& operator<<(std::ostream& s, const tracing_configuration& v) {
       << "\"logging_impact\": " << "\"" << tidy_up_string(v.logging_impact()) << "\"" << ", "
       << "\"use_short_names\": " << v.use_short_names() << ", "
       << "\"output_directory\": " << "\"" << v.output_directory().generic_string() << "\"" << ", "
-      << "\"backend\": " << v.backend()
+      << "\"backend\": " << v.backend() << ", "
+      << "\"run_id\": " << "\"" << tidy_up_string(v.run_id()) << "\""
       << " }";
     return(s);
 }

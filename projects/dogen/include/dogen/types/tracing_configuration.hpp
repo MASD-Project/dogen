@@ -56,7 +56,8 @@ public:
         const std::string& logging_impact,
         const bool use_short_names,
         const boost::filesystem::path& output_directory,
-        const dogen::tracing_backend backend);
+        const dogen::tracing_backend backend,
+        const std::string& run_id);
 
 public:
     /**
@@ -122,6 +123,16 @@ public:
     tracing_configuration& backend(const dogen::tracing_backend v);
     /**@}*/
 
+    /**
+     * @brief Identifier to use for the present run.
+     */
+    /**@{*/
+    const std::string& run_id() const;
+    std::string& run_id();
+    tracing_configuration& run_id(const std::string& v);
+    tracing_configuration& run_id(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const tracing_configuration& rhs) const;
     bool operator!=(const tracing_configuration& rhs) const {
@@ -140,6 +151,7 @@ private:
     bool use_short_names_;
     boost::filesystem::path output_directory_;
     dogen::tracing_backend backend_;
+    std::string run_id_;
 };
 
 }
