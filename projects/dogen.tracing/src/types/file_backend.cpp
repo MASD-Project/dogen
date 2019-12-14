@@ -276,12 +276,16 @@ void file_backend::end_run() const {
     utility::filesystem::write(p2, s2);
 }
 
-void file_backend::start_chain(const std::string& transform_id,
+void file_backend::start_chain(const std::string& parent_transform_instance_id,
+    const std::string& transform_id,
     const std::string& transform_instance_id) const {
-    start_chain(transform_id, transform_instance_id, empty);
+    start_chain(parent_transform_instance_id,
+        transform_id, transform_instance_id, empty);
 }
 
-void file_backend::start_chain(const std::string& transform_id,
+void file_backend::start_chain(
+    const std::string& /*parent_transform_instance_id*/,
+    const std::string& transform_id,
     const std::string& transform_instance_id,
     const std::string& model_id) const {
     builder_.start(transform_id, transform_instance_id, model_id);
@@ -296,11 +300,13 @@ void file_backend::start_chain(const std::string& transform_id,
     transform_position_.push(0);
 }
 
-void file_backend::start_chain(const std::string& transform_id,
+void file_backend::start_chain(const std::string& parent_transform_instance_id,
+    const std::string& transform_id,
     const std::string& transform_instance_id,
     const std::string& model_id,
     const std::string& input) const {
-    start_chain(transform_id, transform_instance_id, model_id);
+    start_chain(parent_transform_instance_id,
+        transform_id, transform_instance_id, model_id);
 
     if (!detailed_tracing_enabled_)
         return;
@@ -311,8 +317,8 @@ void file_backend::start_chain(const std::string& transform_id,
     ++transform_position_.top();
 }
 
-void file_backend::
-end_chain(const std::string& /*transform_id*/,
+void file_backend::end_chain(const std::string& /*parent_transform_instance_id*/,
+    const std::string& /*transform_id*/,
     const std::string& /*transform_instance_id*/) const {
     BOOST_LOG_SEV(lg, debug) << "Ending: " << builder_.current()->transform_id()
                              << " (" << builder_.current()->guid() << ")";
@@ -328,7 +334,8 @@ end_chain(const std::string& /*transform_id*/,
                              << current_directory_.generic_string();
 }
 
-void file_backend::end_chain(const std::string& transform_id,
+void file_backend::end_chain(const std::string& parent_transform_instance_id,
+    const std::string& transform_id,
     const std::string& transform_instance_id,
     const std::string& output) const {
     if (detailed_tracing_enabled_) {
@@ -337,15 +344,21 @@ void file_backend::end_chain(const std::string& transform_id,
         const auto p(full_path_for_writing(id, "output"));
         utility::filesystem::write(p, output);
     }
-    end_chain(transform_id, transform_instance_id);
+    end_chain(parent_transform_instance_id,
+        transform_id, transform_instance_id);
 }
 
-void file_backend::start_transform(const std::string& transform_id,
+void file_backend::
+start_transform(const std::string& parent_transform_instance_id,
+    const std::string& transform_id,
     const std::string& transform_instance_id) const {
-    start_transform(transform_id, transform_instance_id,empty);
+    start_transform(parent_transform_instance_id,
+        transform_id, transform_instance_id,empty);
 }
 
-void file_backend::start_transform(const std::string& transform_id,
+void file_backend::
+start_transform(const std::string& /*parent_transform_instance_id*/,
+    const std::string& transform_id,
     const std::string& transform_instance_id,
     const std::string& model_id) const {
     builder_.start(transform_id, transform_instance_id, model_id);
@@ -353,11 +366,14 @@ void file_backend::start_transform(const std::string& transform_id,
                              << " (" << builder_.current()->guid() << ")";
 }
 
-void file_backend::start_transform(const std::string& transform_id,
+void file_backend::start_transform(
+    const std::string& parent_transform_instance_id,
+    const std::string& transform_id,
     const std::string& transform_instance_id,
     const std::string& model_id,
     const std::string& input) const {
-    start_transform(transform_id, transform_instance_id, model_id);
+    start_transform(parent_transform_instance_id,
+        transform_id, transform_instance_id, model_id);
 
     if (detailed_tracing_enabled_) {
         ensure_transform_position_not_empty();
@@ -367,14 +383,18 @@ void file_backend::start_transform(const std::string& transform_id,
     }
 }
 
-void file_backend::end_transform(const std::string& /*transform_id*/,
+void file_backend::end_transform(
+    const std::string& /*parent_transform_instance_id*/,
+    const std::string& /*transform_id*/,
     const std::string& /*transform_instance_id*/) const {
     BOOST_LOG_SEV(lg, debug) << "Ending: " << builder_.current()->transform_id()
                              << " (" << builder_.current()->guid() << ")";
     builder_.end();
 }
 
-void file_backend::end_transform(const std::string& transform_id,
+void file_backend::
+end_transform(const std::string& parent_transform_instance_id,
+    const std::string& transform_id,
     const std::string& transform_instance_id,
     const std::string& output) const {
     if (detailed_tracing_enabled_) {
@@ -384,7 +404,8 @@ void file_backend::end_transform(const std::string& transform_id,
         utility::filesystem::write(p, output);
         ++transform_position_.top();
     }
-    end_transform(transform_id, transform_instance_id);
+    end_transform(parent_transform_instance_id,
+        transform_id, transform_instance_id);
 }
 
 bool file_backend::operator==(const file_backend& /*rhs*/) const {

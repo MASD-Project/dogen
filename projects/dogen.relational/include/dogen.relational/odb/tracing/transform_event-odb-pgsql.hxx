@@ -208,6 +208,29 @@ namespace odb
     model_id_type_;
 
     static const model_id_type_ model_id;
+
+    // parent_transform
+    //
+    struct parent_transform_class_
+    {
+      parent_transform_class_ ()
+      {
+      }
+
+      // value
+      //
+      typedef
+      pgsql::query_column<
+        pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::query_type,
+        pgsql::id_string >
+      value_type_;
+
+      static const value_type_ value;
+    };
+
+    static const parent_transform_class_ parent_transform;
   };
 
   template <typename A>
@@ -271,6 +294,15 @@ namespace odb
   model_id (A::table_name, "\"MODEL_ID\"", 0);
 
   template <typename A>
+  const typename query_columns< ::dogen::relational::tracing::transform_event, id_pgsql, A >::parent_transform_class_::value_type_
+  query_columns< ::dogen::relational::tracing::transform_event, id_pgsql, A >::parent_transform_class_::
+  value (A::table_name, "\"PARENT_TRANSFORM\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::dogen::relational::tracing::transform_event, id_pgsql, A >::parent_transform_class_
+  query_columns< ::dogen::relational::tracing::transform_event, id_pgsql, A >::parent_transform;
+
+  template <typename A>
   struct pointer_query_columns< ::dogen::relational::tracing::transform_event, id_pgsql, A >:
     query_columns< ::dogen::relational::tracing::transform_event, id_pgsql, A >
   {
@@ -322,6 +354,10 @@ namespace odb
       std::size_t model_id_size;
       bool model_id_null;
 
+      // parent_transform_
+      //
+      composite_value_traits< ::dogen::relational::tracing::transform_instance_id, id_pgsql >::image_type parent_transform_value;
+
       std::size_t version;
     };
 
@@ -361,7 +397,7 @@ namespace odb
 
     typedef pgsql::query_base query_base_type;
 
-    static const std::size_t column_count = 8UL;
+    static const std::size_t column_count = 9UL;
     static const std::size_t id_column_count = 2UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;

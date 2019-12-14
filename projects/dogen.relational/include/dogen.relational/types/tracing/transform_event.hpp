@@ -33,6 +33,7 @@
 #include "dogen.relational/types/tracing/transform_id.hpp"
 #include "dogen.relational/types/tracing/transform_type.hpp"
 #include "dogen.relational/types/tracing/transform_event_key.hpp"
+#include "dogen.relational/types/tracing/transform_instance_id.hpp"
 
 namespace dogen::relational::tracing {
 
@@ -53,7 +54,8 @@ public:
         const dogen::relational::tracing::transform_type transform_type,
         const dogen::relational::tracing::transform_id& transform_id,
         const dogen::relational::tracing::json& payload,
-        const std::string& model_id);
+        const std::string& model_id,
+        const dogen::relational::tracing::transform_instance_id& parent_transform);
 
 public:
     const boost::posix_time::ptime& timestamp() const;
@@ -89,6 +91,11 @@ public:
     void model_id(const std::string& v);
     void model_id(const std::string&& v);
 
+    const dogen::relational::tracing::transform_instance_id& parent_transform() const;
+    dogen::relational::tracing::transform_instance_id& parent_transform();
+    void parent_transform(const dogen::relational::tracing::transform_instance_id& v);
+    void parent_transform(const dogen::relational::tracing::transform_instance_id&& v);
+
 public:
     bool operator==(const transform_event& rhs) const;
     bool operator!=(const transform_event& rhs) const {
@@ -107,6 +114,7 @@ private:
     dogen::relational::tracing::transform_id transform_id_;
     dogen::relational::tracing::json payload_;
     std::string model_id_;
+    dogen::relational::tracing::transform_instance_id parent_transform_;
 };
 
 }

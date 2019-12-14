@@ -26,6 +26,7 @@
 #endif
 
 #include <list>
+#include <stack>
 #include <string>
 #include <sstream>
 #include <unordered_map>
@@ -69,6 +70,10 @@ private:
 
     static std::string generate_guid();
 
+    std::string last_transform_instance_id() const;
+    void push_parent_id(const std::string& id) const;
+    void pop_parent_id() const;
+
 public:
     /**
      * @brief Starts a tracing run.
@@ -99,8 +104,9 @@ public:
         const std::string& model_id,
         const Ioable& input) const {
         if (backend_) {
-            backend_->start_chain(transform_id, transform_instance_id,
-                model_id, to_string(input));
+            backend_->start_chain(last_transform_instance_id(), transform_id,
+                transform_instance_id, model_id, to_string(input));
+            push_parent_id(transform_instance_id);
         }
     }
     /**@}*/
@@ -120,8 +126,9 @@ public:
         const std::string& model_id,
         const Ioable& input) const {
         if (backend_) {
-            backend_->start_transform(transform_id, transform_instance_id,
-                model_id, to_string(input));
+            backend_->start_transform(last_transform_instance_id(),
+                transform_id, transform_instance_id, model_id,
+                to_string(input));
         }
     }
     /**@}*/
@@ -137,8 +144,9 @@ public:
         const std::string& transform_instance_id,
         const Ioable& output) const {
         if (backend_) {
-            backend_->end_chain(transform_id,
-                transform_instance_id, to_string(output));
+            pop_parent_id();
+            backend_->end_chain(last_transform_instance_id(),
+                transform_id, transform_instance_id, to_string(output));
         }
     }
     /**@}*/
@@ -154,8 +162,8 @@ public:
         const std::string& transform_instance_id,
         const Ioable& output) const {
         if (backend_) {
-            backend_->end_transform(transform_id,
-                transform_instance_id, to_string(output));
+            backend_->end_transform(last_transform_instance_id(),
+                transform_id, transform_instance_id, to_string(output));
         }
     }
     /**@}*/
@@ -171,6 +179,7 @@ public:
 private:
     boost::shared_ptr<tracing::backend> backend_;
     static backend_factory_registrar registrar_;
+    mutable std::stack<std::string> parent_id_;
 };
 
 /*

@@ -84,38 +84,47 @@ public:
     void end_run() const override;
 
 public:
-    void start_chain(const std::string& transform_id,
+    void start_chain(const std::string& parent_transform_instance_id,
+        const std::string& transform_id,
         const std::string& transform_instance_id) const override;
-    void start_chain(const std::string& transform_id,
+    void start_chain(const std::string& parent_transform_instance_id,
+        const std::string& transform_id,
         const std::string& transform_instance_id,
         const std::string& model_id) const override;
-    void start_chain(const std::string& transform_id,
+    void start_chain(const std::string& parent_transform_instance_id,
+        const std::string& transform_id,
         const std::string& transform_instance_id,
         const std::string& model_id,
         const std::string& input) const override;
 
-    void end_chain(const std::string& transform_id,
+    void end_chain(const std::string& parent_transform_instance_id,
+        const std::string& transform_id,
         const std::string& transform_instance_id) const override;
-    void end_chain(const std::string& transform_id,
+    void end_chain(const std::string& parent_transform_instance_id,
+        const std::string& transform_id,
         const std::string& transform_instance_id,
         const std::string& output) const override;
 
 public:
 
-    void start_transform(const std::string& transform_id,
+    void start_transform(const std::string& parent_transform_instance_id,
+        const std::string& transform_id,
         const std::string& transform_instance_id) const override;
-    void start_transform(const std::string& transform_id,
+    void start_transform(const std::string& parent_transform_instance_id,
+        const std::string& transform_id,
         const std::string& transform_instance_id,
         const std::string& model_id) const override;
-
-    void start_transform(const std::string& transform_id,
+    void start_transform(const std::string& parent_transform_instance_id,
+        const std::string& transform_id,
         const std::string& transform_instance_id,
         const std::string& model_id,
         const std::string& input) const override;
 
-    void end_transform(const std::string& transform_id,
+    void end_transform(const std::string& parent_transform_instance_id,
+        const std::string& transform_id,
         const std::string& transform_instance_id) const override;
-    void end_transform(const std::string& transform_id,
+    void end_transform(const std::string& parent_transform_instance_id,
+        const std::string& transform_id,
         const std::string& transform_instance_id,
         const std::string& output) const override;
 

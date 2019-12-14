@@ -31,6 +31,7 @@
 #include "dogen.relational/odb/tracing/transform_id_pragmas.hpp"
 #include "dogen.relational/odb/tracing/transform_type_pragmas.hpp"
 #include "dogen.relational/odb/tracing/transform_event_key_pragmas.hpp"
+#include "dogen.relational/odb/tracing/transform_instance_id_pragmas.hpp"
 
 namespace dogen::relational::tracing {
 

@@ -57,6 +57,7 @@ namespace odb
     pgsql::int4_oid,
     pgsql::text_oid,
     pgsql::text_oid,
+    pgsql::text_oid,
     pgsql::text_oid
   };
 
@@ -73,6 +74,7 @@ namespace odb
     pgsql::timestamp_oid,
     pgsql::text_oid,
     pgsql::int4_oid,
+    pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
@@ -161,6 +163,12 @@ namespace odb
       grew = true;
     }
 
+    // parent_transform_
+    //
+    if (composite_value_traits< ::dogen::relational::tracing::transform_instance_id, id_pgsql >::grow (
+          i.parent_transform_value, t + 8UL))
+      grew = true;
+
     return grew;
   }
 
@@ -224,6 +232,12 @@ namespace odb
     b[n].size = &i.model_id_size;
     b[n].is_null = &i.model_id_null;
     n++;
+
+    // parent_transform_
+    //
+    composite_value_traits< ::dogen::relational::tracing::transform_instance_id, id_pgsql >::bind (
+      b + n, i.parent_transform_value, sk);
+    n += 1UL;
   }
 
   void access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
@@ -350,6 +364,19 @@ namespace odb
       grew = grew || (cap != i.model_id_value.capacity ());
     }
 
+    // parent_transform_
+    //
+    {
+      ::dogen::relational::tracing::transform_instance_id const& v =
+        o.parent_transform ();
+
+      if (composite_value_traits< ::dogen::relational::tracing::transform_instance_id, id_pgsql >::init (
+            i.parent_transform_value,
+            v,
+            sk))
+        grew = true;
+    }
+
     return grew;
   }
 
@@ -453,6 +480,18 @@ namespace odb
         i.model_id_size,
         i.model_id_null);
     }
+
+    // parent_transform_
+    //
+    {
+      ::dogen::relational::tracing::transform_instance_id& v =
+        o.parent_transform ();
+
+      composite_value_traits< ::dogen::relational::tracing::transform_instance_id, id_pgsql >::init (
+        v,
+        i.parent_transform_value,
+        db);
+    }
   }
 
   void access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::
@@ -481,9 +520,10 @@ namespace odb
   "\"TRANSFORM_TYPE\", "
   "\"TRANSFORM_ID\", "
   "\"PAYLOAD\", "
-  "\"MODEL_ID\") "
+  "\"MODEL_ID\", "
+  "\"PARENT_TRANSFORM\") "
   "VALUES "
-  "($1, $2, $3, $4, $5, $6, to_jsonb($7::jsonb), $8)";
+  "($1, $2, $3, $4, $5, $6, to_jsonb($7::jsonb), $8, $9)";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::find_statement[] =
   "SELECT "
@@ -494,7 +534,8 @@ namespace odb
   "\"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_TYPE\", "
   "\"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_ID\", "
   "from_jsonb(\"DOGEN\".\"TRANSFORM_EVENT\".\"PAYLOAD\"), "
-  "\"DOGEN\".\"TRANSFORM_EVENT\".\"MODEL_ID\" "
+  "\"DOGEN\".\"TRANSFORM_EVENT\".\"MODEL_ID\", "
+  "\"DOGEN\".\"TRANSFORM_EVENT\".\"PARENT_TRANSFORM\" "
   "FROM \"DOGEN\".\"TRANSFORM_EVENT\" "
   "WHERE \"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_INSTANCE_ID\"=$1 AND \"DOGEN\".\"TRANSFORM_EVENT\".\"EVENT_TYPE\"=$2";
 
@@ -506,8 +547,9 @@ namespace odb
   "\"TRANSFORM_TYPE\"=$3, "
   "\"TRANSFORM_ID\"=$4, "
   "\"PAYLOAD\"=to_jsonb($5::jsonb), "
-  "\"MODEL_ID\"=$6 "
-  "WHERE \"TRANSFORM_INSTANCE_ID\"=$7 AND \"EVENT_TYPE\"=$8";
+  "\"MODEL_ID\"=$6, "
+  "\"PARENT_TRANSFORM\"=$7 "
+  "WHERE \"TRANSFORM_INSTANCE_ID\"=$8 AND \"EVENT_TYPE\"=$9";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::erase_statement[] =
   "DELETE FROM \"DOGEN\".\"TRANSFORM_EVENT\" "
@@ -522,7 +564,8 @@ namespace odb
   "\"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_TYPE\", "
   "\"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_ID\", "
   "from_jsonb(\"DOGEN\".\"TRANSFORM_EVENT\".\"PAYLOAD\"), "
-  "\"DOGEN\".\"TRANSFORM_EVENT\".\"MODEL_ID\" "
+  "\"DOGEN\".\"TRANSFORM_EVENT\".\"MODEL_ID\", "
+  "\"DOGEN\".\"TRANSFORM_EVENT\".\"PARENT_TRANSFORM\" "
   "FROM \"DOGEN\".\"TRANSFORM_EVENT\"";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_pgsql >::erase_query_statement[] =
@@ -950,6 +993,7 @@ namespace odb
                       "  \"TRANSFORM_ID\" TEXT NOT NULL,\n"
                       "  \"PAYLOAD\" JSONB NOT NULL,\n"
                       "  \"MODEL_ID\" TEXT NOT NULL,\n"
+                      "  \"PARENT_TRANSFORM\" TEXT NOT NULL,\n"
                       "  PRIMARY KEY (\"TRANSFORM_INSTANCE_ID\",\n"
                       "               \"EVENT_TYPE\"))");
           return false;

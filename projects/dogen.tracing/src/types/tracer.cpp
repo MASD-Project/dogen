@@ -38,6 +38,8 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("tracing.tracer"));
 
+const std::string empty;
+
 }
 
 namespace dogen::tracing {
@@ -56,6 +58,26 @@ std::string tracer::generate_guid() {
     return boost::uuids::to_string(uuid);
 }
 
+std::string tracer::last_transform_instance_id() const {
+    if (parent_id_.empty()) {
+        BOOST_LOG_SEV(lg, trace) << "Getting empty parent id";
+        return empty;
+    }
+
+    BOOST_LOG_SEV(lg, trace) << "Getting parent id: " << parent_id_.top();
+    return parent_id_.top();
+}
+
+void tracer::push_parent_id(const std::string& id) const {
+    BOOST_LOG_SEV(lg, trace) << "Pushing parent: " << id;
+    parent_id_.push(id);
+}
+
+void tracer::pop_parent_id() const {
+    BOOST_LOG_SEV(lg, trace) << "Popping parent: " << parent_id_.top();
+    parent_id_.pop();
+}
+
 void tracer::add_references_graph(const std::string& root_vertex,
     const std::unordered_map<std::string, std::list<std::string>>&
     edges_per_model) const {
@@ -71,41 +93,55 @@ void tracer::end_run() const {
 
 void tracer::start_chain(const std::string& transform_id,
     const std::string& transform_instance_id) const {
-    if (backend_)
-        backend_->start_chain(transform_id, transform_instance_id);
+    if (backend_) {
+        backend_->start_chain(last_transform_instance_id(),
+            transform_id, transform_instance_id);
+        push_parent_id(transform_instance_id);
+    }
 }
 
 void tracer::start_chain(const std::string& transform_id,
     const std::string& transform_instance_id,
     const std::string& model_id) const {
-    if (backend_)
-        backend_->start_chain(transform_id, transform_instance_id, model_id);
+    if (backend_) {
+        backend_->start_chain(last_transform_instance_id(), transform_id,
+            transform_instance_id, model_id);
+        push_parent_id(transform_instance_id);
+   }
 }
 
 void tracer::start_transform(const std::string& transform_id,
     const std::string& transform_instance_id) const {
-    if (backend_)
-        backend_->start_transform(transform_id, transform_instance_id);
+    if (backend_) {
+        backend_->start_transform(last_transform_instance_id(), transform_id,
+            transform_instance_id);
+    }
 }
 
 void tracer::start_transform(const std::string& transform_id,
     const std::string& transform_instance_id,
     const std::string& model_id) const {
-    if (backend_)
-        backend_->start_transform(transform_id,
+    if (backend_) {
+        backend_->start_transform(last_transform_instance_id(), transform_id,
             transform_instance_id, model_id);
+    }
 }
 
 void tracer::end_chain(const std::string& transform_id,
     const std::string& transform_instance_id) const {
-    if (backend_)
-        backend_->end_chain(transform_id, transform_instance_id);
+    if (backend_) {
+        pop_parent_id();
+        backend_->end_chain(last_transform_instance_id(),
+            transform_id, transform_instance_id);
+    }
 }
 
 void tracer::end_transform(const std::string& transform_id,
     const std::string& transform_instance_id) const {
-    if (backend_)
-        backend_->end_transform(transform_id, transform_instance_id);
+    if (backend_) {
+        backend_->end_transform(last_transform_instance_id(),
+            transform_id, transform_instance_id);
+    }
 }
 
 bool tracer::operator==(const tracer& /*rhs*/) const {

@@ -112,6 +112,12 @@ namespace odb
       grew = true;
     }
 
+    // parent_transform_
+    //
+    if (composite_value_traits< ::dogen::relational::tracing::transform_instance_id, id_sqlite >::grow (
+          i.parent_transform_value, t + 8UL))
+      grew = true;
+
     return grew;
   }
 
@@ -181,6 +187,12 @@ namespace odb
     b[n].capacity = i.model_id_value.capacity ();
     b[n].is_null = &i.model_id_null;
     n++;
+
+    // parent_transform_
+    //
+    composite_value_traits< ::dogen::relational::tracing::transform_instance_id, id_sqlite >::bind (
+      b + n, i.parent_transform_value, sk);
+    n += 1UL;
   }
 
   void access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_sqlite >::
@@ -312,6 +324,19 @@ namespace odb
       grew = grew || (cap != i.model_id_value.capacity ());
     }
 
+    // parent_transform_
+    //
+    {
+      ::dogen::relational::tracing::transform_instance_id const& v =
+        o.parent_transform ();
+
+      if (composite_value_traits< ::dogen::relational::tracing::transform_instance_id, id_sqlite >::init (
+            i.parent_transform_value,
+            v,
+            sk))
+        grew = true;
+    }
+
     return grew;
   }
 
@@ -416,6 +441,18 @@ namespace odb
         i.model_id_size,
         i.model_id_null);
     }
+
+    // parent_transform_
+    //
+    {
+      ::dogen::relational::tracing::transform_instance_id& v =
+        o.parent_transform ();
+
+      composite_value_traits< ::dogen::relational::tracing::transform_instance_id, id_sqlite >::init (
+        v,
+        i.parent_transform_value,
+        db);
+    }
   }
 
   void access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_sqlite >::
@@ -444,9 +481,10 @@ namespace odb
   "\"TRANSFORM_TYPE\", "
   "\"TRANSFORM_ID\", "
   "\"PAYLOAD\", "
-  "\"MODEL_ID\") "
+  "\"MODEL_ID\", "
+  "\"PARENT_TRANSFORM\") "
   "VALUES "
-  "(?, ?, ?, ?, ?, ?, ?, ?)";
+  "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_sqlite >::find_statement[] =
   "SELECT "
@@ -457,7 +495,8 @@ namespace odb
   "\"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_TYPE\", "
   "\"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_ID\", "
   "\"DOGEN\".\"TRANSFORM_EVENT\".\"PAYLOAD\", "
-  "\"DOGEN\".\"TRANSFORM_EVENT\".\"MODEL_ID\" "
+  "\"DOGEN\".\"TRANSFORM_EVENT\".\"MODEL_ID\", "
+  "\"DOGEN\".\"TRANSFORM_EVENT\".\"PARENT_TRANSFORM\" "
   "FROM \"DOGEN\".\"TRANSFORM_EVENT\" "
   "WHERE \"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_INSTANCE_ID\"=? AND \"DOGEN\".\"TRANSFORM_EVENT\".\"EVENT_TYPE\"=?";
 
@@ -469,7 +508,8 @@ namespace odb
   "\"TRANSFORM_TYPE\"=?, "
   "\"TRANSFORM_ID\"=?, "
   "\"PAYLOAD\"=?, "
-  "\"MODEL_ID\"=? "
+  "\"MODEL_ID\"=?, "
+  "\"PARENT_TRANSFORM\"=? "
   "WHERE \"TRANSFORM_INSTANCE_ID\"=? AND \"EVENT_TYPE\"=?";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_sqlite >::erase_statement[] =
@@ -485,7 +525,8 @@ namespace odb
   "\"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_TYPE\", "
   "\"DOGEN\".\"TRANSFORM_EVENT\".\"TRANSFORM_ID\", "
   "\"DOGEN\".\"TRANSFORM_EVENT\".\"PAYLOAD\", "
-  "\"DOGEN\".\"TRANSFORM_EVENT\".\"MODEL_ID\" "
+  "\"DOGEN\".\"TRANSFORM_EVENT\".\"MODEL_ID\", "
+  "\"DOGEN\".\"TRANSFORM_EVENT\".\"PARENT_TRANSFORM\" "
   "FROM \"DOGEN\".\"TRANSFORM_EVENT\"";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::transform_event, id_sqlite >::erase_query_statement[] =
@@ -906,6 +947,7 @@ namespace odb
                       "  \"TRANSFORM_ID\" TEXT NOT NULL,\n"
                       "  \"PAYLOAD\" TEXT NOT NULL,\n"
                       "  \"MODEL_ID\" TEXT NOT NULL,\n"
+                      "  \"PARENT_TRANSFORM\" TEXT NOT NULL,\n"
                       "  PRIMARY KEY (\"TRANSFORM_INSTANCE_ID\",\n"
                       "               \"EVENT_TYPE\"))");
           return false;

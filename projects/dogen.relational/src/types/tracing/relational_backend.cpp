@@ -148,7 +148,9 @@ void relational_backend::add_references_graph(
     /*edges_per_model*/) const {
 }
 
-void relational_backend::start_chain(const std::string& transform_id,
+void relational_backend::
+start_chain(const std::string& parent_transform_instance_id,
+    const std::string& transform_id,
     const std::string& transform_instance_id) const {
     transform_event_key k;
     k.transform_instance_id(
@@ -162,13 +164,17 @@ void relational_backend::start_chain(const std::string& transform_id,
     te.payload(json("{}"));
     te.transform_type(transform_type::chain);
     te.transform_id(tracing::transform_id(transform_id));
+    te.parent_transform(
+        tracing::transform_instance_id(parent_transform_instance_id));
 
     odb::transaction t(database_->begin());
     database_->persist(te);
     t.commit();
 }
 
-void relational_backend::start_chain(const std::string& transform_id,
+void relational_backend::start_chain(
+    const std::string& parent_transform_instance_id,
+    const std::string& transform_id,
     const std::string& transform_instance_id,
     const std::string& model_id) const {
 
@@ -185,13 +191,17 @@ void relational_backend::start_chain(const std::string& transform_id,
     te.transform_type(transform_type::chain);
     te.transform_id(tracing::transform_id(transform_id));
     te.model_id(model_id);
+    te.parent_transform(
+        tracing::transform_instance_id(parent_transform_instance_id));
 
     odb::transaction t(database_->begin());
     database_->persist(te);
     t.commit();
 }
 
-void relational_backend::start_chain(const std::string& transform_id,
+void relational_backend::start_chain(
+    const std::string& parent_transform_instance_id,
+    const std::string& transform_id,
     const std::string& transform_instance_id,
     const std::string& model_id,
     const std::string& input) const {
@@ -209,13 +219,17 @@ void relational_backend::start_chain(const std::string& transform_id,
     te.transform_type(transform_type::chain);
     te.transform_id(tracing::transform_id(transform_id));
     te.model_id(model_id);
+    te.parent_transform(
+        tracing::transform_instance_id(parent_transform_instance_id));
 
     odb::transaction t(database_->begin());
     database_->persist(te);
     t.commit();
 }
 
-void relational_backend::end_chain(const std::string& transform_id,
+void relational_backend::
+end_chain(const std::string& parent_transform_instance_id,
+    const std::string& transform_id,
     const std::string& transform_instance_id) const {
     transform_event_key k;
     k.transform_instance_id(
@@ -229,13 +243,17 @@ void relational_backend::end_chain(const std::string& transform_id,
     te.payload(json("{}"));
     te.transform_type(transform_type::chain);
     te.transform_id(tracing::transform_id(transform_id));
+    te.parent_transform(
+        tracing::transform_instance_id(parent_transform_instance_id));
 
     odb::transaction t(database_->begin());
     database_->persist(te);
     t.commit();
 }
 
-void relational_backend::end_chain(const std::string& transform_id,
+void relational_backend::
+end_chain(const std::string& parent_transform_instance_id,
+    const std::string& transform_id,
     const std::string& transform_instance_id,
     const std::string& output) const {
     transform_event_key k;
@@ -250,13 +268,17 @@ void relational_backend::end_chain(const std::string& transform_id,
     te.payload(json(output));
     te.transform_type(transform_type::chain);
     te.transform_id(tracing::transform_id(transform_id));
+    te.parent_transform(
+        tracing::transform_instance_id(parent_transform_instance_id));
 
     odb::transaction t(database_->begin());
     database_->persist(te);
     t.commit();
 }
 
-void relational_backend::start_transform(const std::string& transform_id,
+void relational_backend::start_transform(
+    const std::string& parent_transform_instance_id,
+    const std::string& transform_id,
     const std::string& transform_instance_id) const {
     transform_event_key k;
     k.transform_instance_id(
@@ -270,13 +292,17 @@ void relational_backend::start_transform(const std::string& transform_id,
     te.payload(json("{}"));
     te.transform_type(transform_type::leaf);
     te.transform_id(tracing::transform_id(transform_id));
+    te.parent_transform(
+        tracing::transform_instance_id(parent_transform_instance_id));
 
     odb::transaction t(database_->begin());
     database_->persist(te);
     t.commit();
 }
 
-void relational_backend::start_transform(const std::string& transform_id,
+void relational_backend::start_transform(
+    const std::string& parent_transform_instance_id,
+    const std::string& transform_id,
     const std::string& transform_instance_id,
     const std::string& model_id) const {
     transform_event_key k;
@@ -292,13 +318,17 @@ void relational_backend::start_transform(const std::string& transform_id,
     te.transform_type(transform_type::leaf);
     te.transform_id(tracing::transform_id(transform_id));
     te.model_id(model_id);
+    te.parent_transform(
+        tracing::transform_instance_id(parent_transform_instance_id));
 
     odb::transaction t(database_->begin());
     database_->persist(te);
     t.commit();
 }
 
-void relational_backend::start_transform(const std::string& transform_id,
+void relational_backend::start_transform(
+    const std::string& parent_transform_instance_id,
+    const std::string& transform_id,
     const std::string& transform_instance_id,
     const std::string& model_id,
     const std::string& input) const {
@@ -315,13 +345,17 @@ void relational_backend::start_transform(const std::string& transform_id,
     te.transform_type(transform_type::leaf);
     te.transform_id(tracing::transform_id(transform_id));
     te.model_id(model_id);
+    te.parent_transform(
+        tracing::transform_instance_id(parent_transform_instance_id));
 
     odb::transaction t(database_->begin());
     database_->persist(te);
     t.commit();
 }
 
-void relational_backend::end_transform(const std::string& transform_id,
+void relational_backend::
+end_transform(const std::string& parent_transform_instance_id,
+    const std::string& transform_id,
     const std::string& transform_instance_id) const {
     transform_event_key k;
     k.transform_instance_id(
@@ -335,14 +369,17 @@ void relational_backend::end_transform(const std::string& transform_id,
     te.payload(json("{}"));
     te.transform_type(transform_type::leaf);
     te.transform_id(tracing::transform_id(transform_id));
+    te.parent_transform(
+        tracing::transform_instance_id(parent_transform_instance_id));
 
     odb::transaction t(database_->begin());
     database_->persist(te);
     t.commit();
-
 }
 
-void relational_backend::end_transform(const std::string& transform_id,
+void relational_backend::end_transform(
+    const std::string& parent_transform_instance_id,
+    const std::string& transform_id,
     const std::string& transform_instance_id,
     const std::string& output) const {
     transform_event_key k;
@@ -357,6 +394,8 @@ void relational_backend::end_transform(const std::string& transform_id,
     te.payload(json(output));
     te.transform_type(transform_type::leaf);
     te.transform_id(tracing::transform_id(transform_id));
+    te.parent_transform(
+        tracing::transform_instance_id(parent_transform_instance_id));
 
     odb::transaction t(database_->begin());
     database_->persist(te);

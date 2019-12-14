@@ -85,12 +85,15 @@ public:
      * @brief Starts a new transform chain.
      */
     /**@{*/
-    virtual void start_chain(const std::string& transform_id,
+    virtual void start_chain(const std::string& parent_transform_instance_id,
+        const std::string& transform_id,
         const std::string& transform_instance_id) const = 0;
-    virtual void start_chain(const std::string& transform_id,
+    virtual void start_chain(const std::string& parent_transform_instance_id,
+        const std::string& transform_id,
         const std::string& transform_instance_id,
         const std::string& model_id) const = 0;
-    virtual void start_chain(const std::string& transform_id,
+    virtual void start_chain(const std::string& parent_transform_instance_id,
+        const std::string& transform_id,
         const std::string& transform_instance_id,
         const std::string& model_id, const std::string& input) const = 0;
     /**@}*/
@@ -101,9 +104,11 @@ public:
      * @pre A transform chain must have been staerted.
      */
     /**@{*/
-    virtual void end_chain(const std::string& transform_id,
+    virtual void end_chain(const std::string& parent_transform_instance_id,
+        const std::string& transform_id,
         const std::string& transform_instance_id) const = 0;
-    virtual void end_chain(const std::string& transform_id,
+    virtual void end_chain(const std::string& parent_transform_instance_id,
+        const std::string& transform_id,
         const std::string& transform_instance_id,
         const std::string& output) const = 0;
     /**@}*/
@@ -113,12 +118,18 @@ public:
      * @brief Starts a new transform.
      */
     /**@{*/
-    virtual void start_transform(const std::string& transform_id,
+    virtual void start_transform(
+        const std::string& parent_transform_instance_id,
+        const std::string& transform_id,
         const std::string& transform_instance_id) const = 0;
-    virtual void start_transform(const std::string& transform_id,
+    virtual void start_transform(
+        const std::string& parent_transform_instance_id,
+        const std::string& transform_id,
         const std::string& transform_instance_id,
         const std::string& model_id) const = 0;
-    virtual void start_transform(const std::string& transform_id,
+    virtual void start_transform(
+        const std::string& parent_transform_instance_id,
+        const std::string& transform_id,
         const std::string& transform_instance_id,
         const std::string& model_id, const std::string& input) const = 0;
     /**@}*/
@@ -129,9 +140,11 @@ public:
      * @pre A transform must have been staerted.
      */
     /**@{*/
-    virtual void end_transform(const std::string& transform_id,
+    virtual void end_transform(const std::string& parent_transform_instance_id,
+        const std::string& transform_id,
         const std::string& transform_instance_id) const = 0;
-    virtual void end_transform(const std::string& transform_id,
+    virtual void end_transform(const std::string& parent_transform_instance_id,
+        const std::string& transform_id,
         const std::string& transform_instance_id,
         const std::string& output) const = 0;
     /**@}*/

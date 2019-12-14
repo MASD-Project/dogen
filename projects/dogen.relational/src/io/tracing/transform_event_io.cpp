@@ -27,6 +27,7 @@
 #include "dogen.relational/io/tracing/transform_type_io.hpp"
 #include "dogen.relational/io/tracing/transform_event_io.hpp"
 #include "dogen.relational/io/tracing/transform_event_key_io.hpp"
+#include "dogen.relational/io/tracing/transform_instance_id_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -47,7 +48,8 @@ std::ostream& operator<<(std::ostream& s, const transform_event& v) {
       << "\"transform_type\": " << v.transform_type() << ", "
       << "\"transform_id\": " << v.transform_id() << ", "
       << "\"payload\": " << v.payload() << ", "
-      << "\"model_id\": " << "\"" << tidy_up_string(v.model_id()) << "\""
+      << "\"model_id\": " << "\"" << tidy_up_string(v.model_id()) << "\"" << ", "
+      << "\"parent_transform\": " << v.parent_transform()
       << " }";
     return(s);
 }
