@@ -5117,16 +5117,16 @@ ELEMENT_NAME and ATTRIBUTE_NAME can be left blank.#</dia:string>
         <dia:point val="-30.4462,-38.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-31.1962,-39.15;-29.5075,-34.2502"/>
+        <dia:rectangle val="-31.1962,-39.15;-29.5075,-34.2487"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="-30.4462,-38.4"/>
-        <dia:point val="-30.4462,-37"/>
-        <dia:point val="-29.7075,-37"/>
-        <dia:point val="-29.7075,-35.0502"/>
+        <dia:point val="-30.4462,-36.05"/>
+        <dia:point val="-29.7075,-36.05"/>
+        <dia:point val="-29.7075,-35.0487"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

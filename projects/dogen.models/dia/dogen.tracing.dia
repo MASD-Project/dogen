@@ -1850,13 +1850,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O7">
       <dia:attribute name="obj_pos">
-        <dia:point val="-23,-15"/>
+        <dia:point val="-25,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-23.05,-15.05;-15.135,-11.95"/>
+        <dia:rectangle val="-25.05,-15.05;-17.135,-11.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-23,-15"/>
+        <dia:point val="-25,-15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="7.8150000000000004"/>
@@ -2444,16 +2444,16 @@
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O12">
       <dia:attribute name="obj_pos">
-        <dia:point val="-24,-26"/>
+        <dia:point val="-24,-24"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-24.05,-26.05;2.745,-21.05"/>
+        <dia:rectangle val="-24.05,-24.05;2.745,-19.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-24,-26"/>
+        <dia:point val="-24,-24"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="26.695"/>
@@ -2486,7 +2486,7 @@ to re-enable tests.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-23.65,-24.755"/>
+            <dia:point val="-23.65,-22.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -2499,16 +2499,16 @@ to re-enable tests.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="-24,-23.55"/>
+        <dia:point val="-24,-21.55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-29.2351,-23.6207;-23.9293,-18.4288"/>
+        <dia:rectangle val="-29.1613,-21.6182;-23.9318,-18.3776"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="-24,-23.55"/>
+        <dia:point val="-24,-21.55"/>
         <dia:point val="-28.92,-18.75"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
@@ -2524,7 +2524,7 @@ to re-enable tests.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="-26.46,-20.65"/>
+        <dia:point val="-26.46,-19.65"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O12" connection="3"/>
@@ -3610,13 +3610,13 @@ to re-enable tests.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O20">
       <dia:attribute name="obj_pos">
-        <dia:point val="0,-15"/>
+        <dia:point val="-3,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-0.05,-15.05;35.97,-9.15"/>
+        <dia:rectangle val="-3.05,-15.05;32.97,-9.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="0,-15"/>
+        <dia:point val="-3,-15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="35.920000000000002"/>
@@ -3924,19 +3924,19 @@ to re-enable tests.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="0,-9.2"/>
+        <dia:point val="-3,-9.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-37.05,-9.95;0.75,-2.2"/>
+        <dia:rectangle val="-30.05,-9.95;-2.25,-2.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="0,-9.2"/>
-        <dia:point val="0,-7"/>
-        <dia:point val="-37,-7"/>
-        <dia:point val="-37,-3"/>
+        <dia:point val="-3,-9.2"/>
+        <dia:point val="-3,-7"/>
+        <dia:point val="-30,-7"/>
+        <dia:point val="-30,-3"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -3998,7 +3998,7 @@ to re-enable tests.#</dia:string>
         <dia:point val="45.185,-3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="35.87,-9.25;45.935,-2.2"/>
+        <dia:rectangle val="32.87,-9.25;45.935,-2.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4006,8 +4006,8 @@ to re-enable tests.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="45.185,-3"/>
         <dia:point val="45.185,-7"/>
-        <dia:point val="35.92,-7"/>
-        <dia:point val="35.92,-9.2"/>
+        <dia:point val="32.92,-7"/>
+        <dia:point val="32.92,-9.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4030,13 +4030,13 @@ to re-enable tests.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O23">
       <dia:attribute name="obj_pos">
-        <dia:point val="-11,-15"/>
+        <dia:point val="-14,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-11.05,-15.05;-3.135,-11.95"/>
+        <dia:rectangle val="-14.05,-15.05;-6.135,-11.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-11,-15"/>
+        <dia:point val="-14,-15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="7.8150000000000004"/>
@@ -4176,19 +4176,19 @@ to re-enable tests.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="17.96,-15"/>
+        <dia:point val="14.96,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-7.1425,-17.8;18.71,-14.2"/>
+        <dia:rectangle val="-10.1425,-17.8;15.71,-14.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="17.96,-15"/>
-        <dia:point val="17.96,-17"/>
-        <dia:point val="-7.0925,-17"/>
-        <dia:point val="-7.0925,-15.0492"/>
+        <dia:point val="14.96,-15"/>
+        <dia:point val="14.96,-17"/>
+        <dia:point val="-10.0925,-17"/>
+        <dia:point val="-10.0925,-15.0492"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4211,13 +4211,13 @@ to re-enable tests.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O25">
       <dia:attribute name="obj_pos">
-        <dia:point val="-37,-3"/>
+        <dia:point val="-30,-3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-37.05,-3.05;-10.655,3.85"/>
+        <dia:rectangle val="-30.05,-3.05;-3.655,3.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-37,-3"/>
+        <dia:point val="-30,-3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="26.294999999999998"/>
@@ -4534,17 +4534,17 @@ to re-enable tests.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-10.705,-3"/>
+        <dia:point val="-3.705,-3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-11.455,-5.8;3.2,-1.4"/>
+        <dia:rectangle val="-4.455,-5.8;3.2,-1.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-10.705,-3"/>
-        <dia:point val="-10.705,-5"/>
+        <dia:point val="-3.705,-3"/>
+        <dia:point val="-3.705,-5"/>
         <dia:point val="3,-5"/>
         <dia:point val="3,-3"/>
       </dia:attribute>
@@ -4569,13 +4569,13 @@ to re-enable tests.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O27">
       <dia:attribute name="obj_pos">
-        <dia:point val="-16,9"/>
+        <dia:point val="-14,9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-16.05,8.95;-3.13,12.05"/>
+        <dia:rectangle val="-14.05,8.95;-1.13,12.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-16,9"/>
+        <dia:point val="-14,9"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -4679,19 +4679,19 @@ to re-enable tests.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O28">
       <dia:attribute name="obj_pos">
-        <dia:point val="-23.8525,3.8"/>
+        <dia:point val="-16.8525,3.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-24.7025,3.75;-9.54,9.05"/>
+        <dia:rectangle val="-17.7025,3.75;-7.54,9.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-23.8525,3.8"/>
-        <dia:point val="-23.8525,7"/>
-        <dia:point val="-9.59,7"/>
-        <dia:point val="-9.59,9"/>
+        <dia:point val="-16.8525,3.8"/>
+        <dia:point val="-16.8525,7"/>
+        <dia:point val="-7.59,7"/>
+        <dia:point val="-7.59,9"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4720,13 +4720,13 @@ to re-enable tests.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O29">
       <dia:attribute name="obj_pos">
-        <dia:point val="-54,-3"/>
+        <dia:point val="-48,-3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-54.05,-3.05;-41.13,0.65"/>
+        <dia:rectangle val="-48.05,-3.05;-35.13,0.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-54,-3"/>
+        <dia:point val="-48,-3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -4897,17 +4897,17 @@ to re-enable tests.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-9.59,12"/>
+        <dia:point val="-7.59,12"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-10.34,11.25;1.05,21.7"/>
+        <dia:rectangle val="-8.34,11.25;1.05,21.7"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-9.59,12"/>
-        <dia:point val="-9.59,20.1"/>
+        <dia:point val="-7.59,12"/>
+        <dia:point val="-7.59,20.1"/>
         <dia:point val="1,20.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
