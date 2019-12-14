@@ -130,12 +130,16 @@ public:
      * @brief Ends a transform chain.
      */
     /**@{*/
-    void end_chain(const std::string& transform_instance_id) const;
+    void end_chain(const std::string& transform_id,
+        const std::string& transform_instance_id) const;
     template<typename Ioable>
-    void end_chain(const std::string& transform_instance_id,
+    void end_chain(const std::string& transform_id,
+        const std::string& transform_instance_id,
         const Ioable& output) const {
-        if (backend_)
-            backend_->end_chain(transform_instance_id, to_string(output));
+        if (backend_) {
+            backend_->end_chain(transform_id,
+                transform_instance_id, to_string(output));
+        }
     }
     /**@}*/
 
@@ -143,12 +147,16 @@ public:
      * @brief Ends a leaf transform.
      */
     /**@{*/
-    void end_transform(const std::string& transform_instance_id) const;
+    void end_transform(const std::string& transform_id,
+        const std::string& transform_instance_id) const;
     template<typename Ioable>
-    void end_transform(const std::string& transform_instance_id,
+    void end_transform(const std::string& transform_id,
+        const std::string& transform_instance_id,
         const Ioable& output) const {
-        if (backend_)
-            backend_->end_transform(transform_instance_id, to_string(output));
+        if (backend_) {
+            backend_->end_transform(transform_id,
+                transform_instance_id, to_string(output));
+        }
     }
     /**@}*/
 

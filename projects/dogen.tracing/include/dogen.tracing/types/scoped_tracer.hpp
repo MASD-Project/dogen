@@ -39,7 +39,7 @@ public:
     scoped_chain_tracer(dogen::utility::log::logger& lg,
         const std::string& description, const std::string& id, const tracer& tp)
         : description_(description), lg_(lg), dismiss_(false), tracer_(tp),
-          transform_instance_id_(generate_guid()) {
+          transform_id_(id), transform_instance_id_(generate_guid()) {
         using namespace dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "Started " << description << ".";
         tracer_.start_chain(id, transform_instance_id_);
@@ -49,7 +49,7 @@ public:
         const std::string& description, const std::string& id,
         const std::string& model_id, const tracer& tp)
         : description_(description), lg_(lg), dismiss_(false), tracer_(tp),
-          transform_instance_id_(generate_guid()) {
+          transform_id_(id), transform_instance_id_(generate_guid()) {
         using namespace dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "Started " << description << ".";
         tracer_.start_chain(id, transform_instance_id_, model_id);
@@ -60,7 +60,7 @@ public:
         const std::string& description, const std::string& id,
         const std::string& model_id, const tracer& tp, const Input& input)
         : description_(description), lg_(lg), dismiss_(false), tracer_(tp),
-          transform_instance_id_(generate_guid()) {
+          transform_id_(id), transform_instance_id_(generate_guid()) {
         using namespace dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "Started " << description
                                   << " [" << model_id << "]";
@@ -69,7 +69,7 @@ public:
 
     template<typename Output>
     void end_chain(const Output& output) {
-        tracer_.end_chain(transform_instance_id_, output);
+        tracer_.end_chain(transform_id_, transform_instance_id_, output);
         using namespace dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "Finished " << description_ << ".";
         dismiss_ = true;
@@ -80,7 +80,7 @@ public:
             return;
 
         try {
-            tracer_.end_chain(transform_instance_id_);
+            tracer_.end_chain(transform_id_, transform_instance_id_);
             using namespace dogen::utility::log;
             BOOST_LOG_SEV(lg_, debug) << "Finished " << description_<< ".";
         } catch (...) {}
@@ -91,6 +91,7 @@ private:
     dogen::utility::log::logger& lg_;
     bool dismiss_;
     const tracer& tracer_;
+    const std::string transform_id_;
     const std::string transform_instance_id_;
 };
 
@@ -103,7 +104,7 @@ public:
         const std::string& description, const std::string& id,
         const std::string& model_id, const tracer& tp)
         : description_(description), lg_(lg), dismiss_(false), tracer_(tp),
-          transform_instance_id_(generate_guid()) {
+          transform_id_(id), transform_instance_id_(generate_guid()) {
         using namespace dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "Started " << description << ". ";
         tracer_.start_transform(id, transform_instance_id_, model_id);
@@ -114,7 +115,7 @@ public:
         const std::string& description, const std::string& id,
         const tracer& tp, const Input& input)
         : description_(description), lg_(lg), dismiss_(false), tracer_(tp),
-          transform_instance_id_(generate_guid()) {
+          transform_id_(id), transform_instance_id_(generate_guid()) {
         using namespace dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "Started " << description << ". ";
         tracer_.start_transform(id, transform_instance_id_, "", input);
@@ -125,7 +126,7 @@ public:
         const std::string& description, const std::string& id,
         const std::string& model_id, const tracer& tp, const Input& input)
         : description_(description), lg_(lg), dismiss_(false), tracer_(tp),
-          transform_instance_id_(generate_guid()) {
+          transform_id_(id), transform_instance_id_(generate_guid()) {
         using namespace dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "Started " << description
                                   << ". Model: " << model_id;
@@ -134,7 +135,7 @@ public:
 
     template<typename Output>
     void end_transform(const Output& output) {
-        tracer_.end_transform(transform_instance_id_, output);
+        tracer_.end_transform(transform_id_, transform_instance_id_, output);
         using namespace dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "Finished " << description_ << ".";
         dismiss_ = true;
@@ -145,7 +146,7 @@ public:
             return;
 
         try {
-            tracer_.end_transform(transform_instance_id_);
+            tracer_.end_transform(transform_id_, transform_instance_id_);
             using namespace dogen::utility::log;
             BOOST_LOG_SEV(lg_, debug) << "Finished " << description_ << ".";
         } catch (...) {}
@@ -156,6 +157,7 @@ private:
     dogen::utility::log::logger& lg_;
     bool dismiss_;
     const tracer& tracer_;
+    const std::string transform_id_;
     const std::string transform_instance_id_;
 };
 

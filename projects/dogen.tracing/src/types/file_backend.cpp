@@ -312,7 +312,8 @@ void file_backend::start_chain(const std::string& transform_id,
 }
 
 void file_backend::
-end_chain(const std::string& /*transform_instance_id*/) const {
+end_chain(const std::string& /*transform_id*/,
+    const std::string& /*transform_instance_id*/) const {
     BOOST_LOG_SEV(lg, debug) << "Ending: " << builder_.current()->transform_id()
                              << " (" << builder_.current()->guid() << ")";
     builder_.end();
@@ -327,7 +328,8 @@ end_chain(const std::string& /*transform_instance_id*/) const {
                              << current_directory_.generic_string();
 }
 
-void file_backend::end_chain(const std::string& transform_instance_id,
+void file_backend::end_chain(const std::string& transform_id,
+    const std::string& transform_instance_id,
     const std::string& output) const {
     if (detailed_tracing_enabled_) {
         ensure_transform_position_not_empty();
@@ -335,7 +337,7 @@ void file_backend::end_chain(const std::string& transform_instance_id,
         const auto p(full_path_for_writing(id, "output"));
         utility::filesystem::write(p, output);
     }
-    end_chain(transform_instance_id);
+    end_chain(transform_id, transform_instance_id);
 }
 
 void file_backend::start_transform(const std::string& transform_id,
@@ -365,14 +367,15 @@ void file_backend::start_transform(const std::string& transform_id,
     }
 }
 
-void file_backend::
-end_transform(const std::string& /*transform_instance_id*/) const {
+void file_backend::end_transform(const std::string& /*transform_id*/,
+    const std::string& /*transform_instance_id*/) const {
     BOOST_LOG_SEV(lg, debug) << "Ending: " << builder_.current()->transform_id()
                              << " (" << builder_.current()->guid() << ")";
     builder_.end();
 }
 
-void file_backend::end_transform(const std::string& transform_instance_id,
+void file_backend::end_transform(const std::string& transform_id,
+    const std::string& transform_instance_id,
     const std::string& output) const {
     if (detailed_tracing_enabled_) {
         ensure_transform_position_not_empty();
@@ -381,7 +384,7 @@ void file_backend::end_transform(const std::string& transform_instance_id,
         utility::filesystem::write(p, output);
         ++transform_position_.top();
     }
-    end_transform(transform_instance_id);
+    end_transform(transform_id, transform_instance_id);
 }
 
 bool file_backend::operator==(const file_backend& /*rhs*/) const {
