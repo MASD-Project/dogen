@@ -138,3 +138,8 @@ from (
      where "TRANSFORM_INSTANCE_ID" = 'b996c91c-de1a-4bc0-9f97-504cb89232bf' and "EVENT_TYPE" = 1
      order by "TIMESTAMP" asc
 ) as foo;
+
+--
+-- Get logging
+--
+select * from "LOG_EVENT" limit 30;
