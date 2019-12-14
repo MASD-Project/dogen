@@ -17,6 +17,7 @@
     "masd.extraction.delete_empty_directories": "true",
     "masd.generation.cpp.enabled": "true",
     "masd.generation.cpp.standard": "c++-17",
+    "masd.generation.cpp.cmake.enabled": "true",
     "masd.variability.profile": "dogen.profiles.base.relational_profile",
     "masd.orm.database_system": "sqlite",
     "masd.orm.letter_case": "upper_case",
@@ -33,24 +34,20 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "tracing::run",
+      "name": "tracing::run_event",
       "stereotypes": [
         "masd::orm::object",
-        "Duration"
+        "Timestamped"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "id",
-          "type": "run_id",
+          "name": "run_event_key",
+          "type": "run_event_key",
           "tagged_values": {
-            "masd.orm.is_primary_key": "true"
+            "masd.orm.is_primary_key": "true",
+            "masd.orm.is_composite": "true"
           }
-        },
-        {
-          "name": "activity",
-          "type": "activity",
-          "documentation": "What was the dogen activity that was executed, i.e. generate, convert, etc.\n"
         },
         {
           "name": "version",
@@ -58,11 +55,23 @@
           "documentation": "Which version of dogen where we running.\n"
         },
         {
-          "name": "configuration",
+          "name": "payload",
           "type": "json",
           "tagged_values": {
             "masd.orm.type_override": "postgresql,JSONB"
           }
+        },
+        {
+          "name": "activity",
+          "type": "std::string"
+        },
+        {
+          "name": "logging_impact",
+          "type": "std::string"
+        },
+        {
+          "name": "tracing_impact",
+          "type": "std::string"
         }
       ]
     },
@@ -102,53 +111,57 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "tracing::Duration",
+      "name": "tracing::Timestamped",
       "stereotypes": [
         "masd::object_template"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "start",
-          "type": "boost::posix_time::ptime"
-        },
-        {
-          "name": "end",
+          "name": "timestamp",
           "type": "boost::posix_time::ptime"
         }
       ]
     },
     {
-      "name": "tracing::transform",
+      "name": "tracing::transform_event",
       "stereotypes": [
         "masd::orm::object",
-        "Duration"
+        "Timestamped"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "id",
-          "type": "transform_id"
-        },
-        {
-          "name": "instance_id",
-          "type": "transform_instance_id"
+          "name": "transform_event_key",
+          "type": "transform_event_key",
+          "tagged_values": {
+            "masd.orm.is_primary_key": "true",
+            "masd.orm.is_composite": "true"
+          }
         },
         {
           "name": "run_id",
           "type": "run_id"
         },
         {
-          "name": "type",
+          "name": "transform_type",
           "type": "transform_type"
         },
         {
-          "name": "input",
+          "name": "transform_id",
+          "type": "transform_id"
+        },
+        {
+          "name": "payload",
           "type": "json"
         },
         {
-          "name": "output",
-          "type": "json"
+          "name": "model_id",
+          "type": "std::string"
+        },
+        {
+          "name": "parent_transform",
+          "type": "transform_instance_id"
         }
       ]
     },
@@ -166,36 +179,16 @@
       ]
     },
     {
-      "name": "tracing::activity",
+      "name": "tracing::log_event",
       "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "generate",
-          "type": ""
-        },
-        {
-          "name": "convert",
-          "type": ""
-        }
-      ]
-    },
-    {
-      "name": "tracing::log",
-      "stereotypes": [
-        "masd::orm::object"
+        "masd::orm::object",
+        "Timestamped"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "run_id",
           "type": "run_id"
-        },
-        {
-          "name": "timestamp",
-          "type": "boost::posix_time::ptime"
         },
         {
           "name": "component",
@@ -256,6 +249,57 @@
         "masd.primitive.underlying_element": "std::string"
       },
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "tracing::event_type",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "start",
+          "type": ""
+        },
+        {
+          "name": "end",
+          "type": ""
+        }
+      ]
+    },
+    {
+      "name": "tracing::run_event_key",
+      "stereotypes": [
+        "masd::orm::value"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "run_id",
+          "type": "run_id"
+        },
+        {
+          "name": "event_type",
+          "type": "event_type"
+        }
+      ]
+    },
+    {
+      "name": "tracing::transform_event_key",
+      "stereotypes": [
+        "masd::orm::value"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "transform_instance_id",
+          "type": "transform_instance_id"
+        },
+        {
+          "name": "event_type",
+          "type": "event_type"
+        }
+      ]
     }
   ]
 }
