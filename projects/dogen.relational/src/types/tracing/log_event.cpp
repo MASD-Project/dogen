@@ -26,10 +26,12 @@ log_event::log_event(
     const boost::posix_time::ptime& timestamp,
     const dogen::relational::tracing::run_id& run_id,
     const std::string& component,
+    const std::string& severity,
     const std::string& message)
     : timestamp_(timestamp),
       run_id_(run_id),
       component_(component),
+      severity_(severity),
       message_(message) { }
 
 void log_event::swap(log_event& other) noexcept {
@@ -37,6 +39,7 @@ void log_event::swap(log_event& other) noexcept {
     swap(timestamp_, other.timestamp_);
     swap(run_id_, other.run_id_);
     swap(component_, other.component_);
+    swap(severity_, other.severity_);
     swap(message_, other.message_);
 }
 
@@ -44,6 +47,7 @@ bool log_event::operator==(const log_event& rhs) const {
     return timestamp_ == rhs.timestamp_ &&
         run_id_ == rhs.run_id_ &&
         component_ == rhs.component_ &&
+        severity_ == rhs.severity_ &&
         message_ == rhs.message_;
 }
 
@@ -99,6 +103,22 @@ void log_event::component(const std::string& v) {
 
 void log_event::component(const std::string&& v) {
     component_ = std::move(v);
+}
+
+const std::string& log_event::severity() const {
+    return severity_;
+}
+
+std::string& log_event::severity() {
+    return severity_;
+}
+
+void log_event::severity(const std::string& v) {
+    severity_ = v;
+}
+
+void log_event::severity(const std::string&& v) {
+    severity_ = std::move(v);
 }
 
 const std::string& log_event::message() const {

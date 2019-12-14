@@ -101,6 +101,18 @@ namespace odb
 
     static const component_type_ component;
 
+    // severity
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    severity_type_;
+
+    static const severity_type_ severity;
+
     // message
     //
     typedef
@@ -134,6 +146,11 @@ namespace odb
   component (A::table_name, "\"COMPONENT\"", 0);
 
   template <typename A>
+  const typename query_columns< ::dogen::relational::tracing::log_event, id_pgsql, A >::severity_type_
+  query_columns< ::dogen::relational::tracing::log_event, id_pgsql, A >::
+  severity (A::table_name, "\"SEVERITY\"", 0);
+
+  template <typename A>
   const typename query_columns< ::dogen::relational::tracing::log_event, id_pgsql, A >::message_type_
   query_columns< ::dogen::relational::tracing::log_event, id_pgsql, A >::
   message (A::table_name, "\"MESSAGE\"", 0);
@@ -165,6 +182,12 @@ namespace odb
       details::buffer component_value;
       std::size_t component_size;
       bool component_null;
+
+      // severity_
+      //
+      details::buffer severity_value;
+      std::size_t severity_size;
+      bool severity_null;
 
       // message_
       //
@@ -200,7 +223,7 @@ namespace odb
 
     typedef pgsql::query_base query_base_type;
 
-    static const std::size_t column_count = 4UL;
+    static const std::size_t column_count = 5UL;
     static const std::size_t id_column_count = 0UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;

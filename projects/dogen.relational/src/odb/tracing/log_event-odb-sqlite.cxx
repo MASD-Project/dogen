@@ -60,9 +60,17 @@ namespace odb
       grew = true;
     }
 
-    // message_
+    // severity_
     //
     if (t[3UL])
+    {
+      i.severity_value.capacity (i.severity_size);
+      grew = true;
+    }
+
+    // message_
+    //
+    if (t[4UL])
     {
       i.message_value.capacity (i.message_size);
       grew = true;
@@ -108,6 +116,17 @@ namespace odb
     b[n].size = &i.component_size;
     b[n].capacity = i.component_value.capacity ();
     b[n].is_null = &i.component_null;
+    n++;
+
+    // severity_
+    //
+    b[n].type = sqlite::image_traits<
+      ::std::string,
+      sqlite::id_text>::bind_value;
+    b[n].buffer = i.severity_value.data ();
+    b[n].size = &i.severity_size;
+    b[n].capacity = i.severity_value.capacity ();
+    b[n].is_null = &i.severity_null;
     n++;
 
     // message_
@@ -186,6 +205,25 @@ namespace odb
       grew = grew || (cap != i.component_value.capacity ());
     }
 
+    // severity_
+    //
+    {
+      ::std::string const& v =
+        o.severity ();
+
+      bool is_null (false);
+      std::size_t cap (i.severity_value.capacity ());
+      sqlite::value_traits<
+          ::std::string,
+          sqlite::id_text >::set_image (
+        i.severity_value,
+        i.severity_size,
+        is_null,
+        v);
+      i.severity_null = is_null;
+      grew = grew || (cap != i.severity_value.capacity ());
+    }
+
     // message_
     //
     {
@@ -259,6 +297,21 @@ namespace odb
         i.component_null);
     }
 
+    // severity_
+    //
+    {
+      ::std::string& v =
+        o.severity ();
+
+      sqlite::value_traits<
+          ::std::string,
+          sqlite::id_text >::set_value (
+        v,
+        i.severity_value,
+        i.severity_size,
+        i.severity_null);
+    }
+
     // message_
     //
     {
@@ -280,15 +333,17 @@ namespace odb
   "(\"TIMESTAMP\", "
   "\"RUN_ID\", "
   "\"COMPONENT\", "
+  "\"SEVERITY\", "
   "\"MESSAGE\") "
   "VALUES "
-  "(?, ?, ?, ?)";
+  "(?, ?, ?, ?, ?)";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::log_event, id_sqlite >::query_statement[] =
   "SELECT "
   "\"DOGEN\".\"LOG_EVENT\".\"TIMESTAMP\", "
   "\"DOGEN\".\"LOG_EVENT\".\"RUN_ID\", "
   "\"DOGEN\".\"LOG_EVENT\".\"COMPONENT\", "
+  "\"DOGEN\".\"LOG_EVENT\".\"SEVERITY\", "
   "\"DOGEN\".\"LOG_EVENT\".\"MESSAGE\" "
   "FROM \"DOGEN\".\"LOG_EVENT\"";
 
@@ -447,6 +502,7 @@ namespace odb
                       "  \"TIMESTAMP\" TEXT NULL,\n"
                       "  \"RUN_ID\" TEXT NOT NULL,\n"
                       "  \"COMPONENT\" TEXT NOT NULL,\n"
+                      "  \"SEVERITY\" TEXT NOT NULL,\n"
                       "  \"MESSAGE\" TEXT NOT NULL)");
           return false;
         }

@@ -40,6 +40,7 @@ std::ostream& operator<<(std::ostream& s, const log_event& v) {
       << "\"timestamp\": " << "\"" << v.timestamp() << "\"" << ", "
       << "\"run_id\": " << v.run_id() << ", "
       << "\"component\": " << "\"" << tidy_up_string(v.component()) << "\"" << ", "
+      << "\"severity\": " << "\"" << tidy_up_string(v.severity()) << "\"" << ", "
       << "\"message\": " << "\"" << tidy_up_string(v.message()) << "\""
       << " }";
     return(s);

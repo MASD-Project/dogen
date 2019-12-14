@@ -44,6 +44,7 @@ public:
         const boost::posix_time::ptime& timestamp,
         const dogen::relational::tracing::run_id& run_id,
         const std::string& component,
+        const std::string& severity,
         const std::string& message);
 
 public:
@@ -61,6 +62,11 @@ public:
     std::string& component();
     void component(const std::string& v);
     void component(const std::string&& v);
+
+    const std::string& severity() const;
+    std::string& severity();
+    void severity(const std::string& v);
+    void severity(const std::string&& v);
 
     const std::string& message() const;
     std::string& message();
@@ -81,6 +87,7 @@ private:
     boost::posix_time::ptime timestamp_;
     dogen::relational::tracing::run_id run_id_;
     std::string component_;
+    std::string severity_;
     std::string message_;
 };
 
