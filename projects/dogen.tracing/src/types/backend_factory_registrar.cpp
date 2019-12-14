@@ -101,8 +101,8 @@ void backend_factory_registrar::validate() const {
 }
 
 const boost::shared_ptr<backend>
-backend_factory_registrar::
-try_make_backend(const configuration& cfg, const std::string& run_id) {
+backend_factory_registrar::try_make_backend(const configuration& cfg,
+    const std::string& run_id, const std::string& activity) {
     bool found(false);
     boost::shared_ptr<backend> r;
 
@@ -117,7 +117,7 @@ try_make_backend(const configuration& cfg, const std::string& run_id) {
     for (const auto& pair : backend_factories_) {
         const auto& f(*pair.second);
         BOOST_LOG_SEV(lg, debug) << "Trying to generate a backend: " << f.id();
-        const auto b(f.make(cfg, v, run_id, li, ti));
+        const auto b(f.make(cfg, v, run_id, activity, li, ti));
         if (!b) {
             BOOST_LOG_SEV(lg, debug) << "Factory did not generate a backend.";
             continue;

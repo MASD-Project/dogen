@@ -28,6 +28,8 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("engine.generator"));
 
+const std::string generation_activity("generation");
+
 }
 
 namespace dogen::engine {
@@ -40,7 +42,7 @@ void generator::generate(const configuration& cfg,
 
     {
         using namespace transforms;
-        scoped_context_manager scm(cfg, output_directory);
+        scoped_context_manager scm(cfg, generation_activity, output_directory);
         code_generation_chain::apply(scm.context(), target);
     }
 

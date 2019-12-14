@@ -26,12 +26,13 @@ namespace dogen::engine::transforms {
 
 scoped_context_manager::scoped_context_manager(
     const configuration& cfg,
+    const std::string& activity,
     const boost::filesystem::path& output_directory) :
-    context_(context_factory::make_context(cfg, output_directory)) {}
+    context_(context_factory::make_context(cfg, activity, output_directory)) {}
 
 scoped_context_manager::~scoped_context_manager() {
     if (context_.injection_context().tracer())
-        context_.injection_context().tracer()->end_tracing();
+        context_.injection_context().tracer()->end_run();
 }
 
 const transforms::context& scoped_context_manager::context() const {
@@ -39,12 +40,12 @@ const transforms::context& scoped_context_manager::context() const {
 }
 
 scoped_injection_context_manager::scoped_injection_context_manager(
-    const configuration& cfg) :
-    context_(context_factory::make_injection_context(cfg)) {}
+    const configuration& cfg, const std::string& activity) :
+    context_(context_factory::make_injection_context(cfg, activity)) {}
 
 scoped_injection_context_manager::~scoped_injection_context_manager() {
     if (context_.tracer())
-        context_.tracer()->end_tracing();
+        context_.tracer()->end_run();
 }
 
 const injection::transforms::context&

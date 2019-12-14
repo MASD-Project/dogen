@@ -43,8 +43,8 @@ class relational_backend : public dogen::tracing::backend {
 public:
     relational_backend(const tracing_configuration& tcfg,
         const database_configuration& dbcfg, const std::string& version,
-        const std::string& run_id, const std::string& logging_impact,
-        const std::string& tracing_impact);
+        const std::string& run_id, const std::string& activity,
+        const std::string& logging_impact, const std::string& tracing_impact);
 
 public:
     virtual ~relational_backend() noexcept { }
@@ -57,9 +57,9 @@ public:
     virtual void to_stream(std::ostream& s) const override;
 
 public:
-    void start_tracing(const std::string& input_id,
+    void start_run(const std::string& input_id,
         const std::string& input) const override;
-    void end_tracing() const override;
+    void end_run() const override;
 
 public:
     void add_references_graph(const std::string& root_vertex,
@@ -101,6 +101,7 @@ private:
     const database_configuration database_configuration_;
     const std::string version_;
     const std::string run_id_;
+    const std::string activity_;
     const std::string logging_impact_;
     const std::string tracing_impact_;
     boost::shared_ptr<odb::pgsql::database> database_;

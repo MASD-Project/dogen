@@ -98,7 +98,11 @@ namespace odb
 
     // activity_
     //
-    t[5UL] = false;
+    if (t[5UL])
+    {
+      i.activity_value.capacity (i.activity_size);
+      grew = true;
+    }
 
     // logging_impact_
     //
@@ -169,8 +173,12 @@ namespace odb
 
     // activity_
     //
-    b[n].type = sqlite::bind::integer;
-    b[n].buffer = &i.activity_value;
+    b[n].type = sqlite::image_traits<
+      ::std::string,
+      sqlite::id_text>::bind_value;
+    b[n].buffer = i.activity_value.data ();
+    b[n].size = &i.activity_size;
+    b[n].capacity = i.activity_value.capacity ();
     b[n].is_null = &i.activity_null;
     n++;
 
@@ -287,17 +295,20 @@ namespace odb
     // activity_
     //
     {
-      ::dogen::relational::tracing::activity const& v =
+      ::std::string const& v =
         o.activity ();
 
       bool is_null (false);
+      std::size_t cap (i.activity_value.capacity ());
       sqlite::value_traits<
-          ::dogen::relational::tracing::activity,
-          sqlite::id_integer >::set_image (
+          ::std::string,
+          sqlite::id_text >::set_image (
         i.activity_value,
+        i.activity_size,
         is_null,
         v);
       i.activity_null = is_null;
+      grew = grew || (cap != i.activity_value.capacity ());
     }
 
     // logging_impact_
@@ -407,16 +418,16 @@ namespace odb
     // activity_
     //
     {
-      ::dogen::relational::tracing::activity v;
+      ::std::string& v =
+        o.activity ();
 
       sqlite::value_traits<
-          ::dogen::relational::tracing::activity,
-          sqlite::id_integer >::set_value (
+          ::std::string,
+          sqlite::id_text >::set_value (
         v,
         i.activity_value,
+        i.activity_size,
         i.activity_null);
-
-      o.activity (v);
     }
 
     // logging_impact_
@@ -935,7 +946,7 @@ namespace odb
                       "  \"EVENT_TYPE\" INTEGER NOT NULL,\n"
                       "  \"VERSION\" TEXT NOT NULL,\n"
                       "  \"PAYLOAD\" TEXT NOT NULL,\n"
-                      "  \"ACTIVITY\" INTEGER NOT NULL,\n"
+                      "  \"ACTIVITY\" TEXT NOT NULL,\n"
                       "  \"LOGGING_IMPACT\" TEXT NOT NULL,\n"
                       "  \"TRACING_IMPACT\" TEXT NOT NULL,\n"
                       "  PRIMARY KEY (\"RUN_ID\",\n"

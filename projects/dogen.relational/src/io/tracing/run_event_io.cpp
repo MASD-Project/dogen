@@ -22,7 +22,6 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include "dogen.relational/io/tracing/json_io.hpp"
-#include "dogen.relational/io/tracing/activity_io.hpp"
 #include "dogen.relational/io/tracing/run_event_io.hpp"
 #include "dogen.relational/io/tracing/run_event_key_io.hpp"
 
@@ -43,7 +42,7 @@ std::ostream& operator<<(std::ostream& s, const run_event& v) {
       << "\"run_event_key\": " << v.run_event_key() << ", "
       << "\"version\": " << "\"" << tidy_up_string(v.version()) << "\"" << ", "
       << "\"payload\": " << v.payload() << ", "
-      << "\"activity\": " << v.activity() << ", "
+      << "\"activity\": " << "\"" << tidy_up_string(v.activity()) << "\"" << ", "
       << "\"logging_impact\": " << "\"" << tidy_up_string(v.logging_impact()) << "\"" << ", "
       << "\"tracing_impact\": " << "\"" << tidy_up_string(v.tracing_impact()) << "\""
       << " }";

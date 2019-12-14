@@ -55,7 +55,7 @@ namespace odb
     pgsql::int4_oid,
     pgsql::text_oid,
     pgsql::text_oid,
-    pgsql::int4_oid,
+    pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid
   };
@@ -73,7 +73,7 @@ namespace odb
     pgsql::timestamp_oid,
     pgsql::text_oid,
     pgsql::text_oid,
-    pgsql::int4_oid,
+    pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
@@ -147,7 +147,11 @@ namespace odb
 
     // activity_
     //
-    t[5UL] = 0;
+    if (t[5UL])
+    {
+      i.activity_value.capacity (i.activity_size);
+      grew = true;
+    }
 
     // logging_impact_
     //
@@ -212,8 +216,10 @@ namespace odb
 
     // activity_
     //
-    b[n].type = pgsql::bind::integer;
-    b[n].buffer = &i.activity_value;
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.activity_value.data ();
+    b[n].capacity = i.activity_value.capacity ();
+    b[n].size = &i.activity_size;
     b[n].is_null = &i.activity_null;
     n++;
 
@@ -323,15 +329,22 @@ namespace odb
     // activity_
     //
     {
-      ::dogen::relational::tracing::activity const& v =
+      ::std::string const& v =
         o.activity ();
 
       bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.activity_value.capacity ());
       pgsql::value_traits<
-          ::dogen::relational::tracing::activity,
-          pgsql::id_integer >::set_image (
-        i.activity_value, is_null, v);
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.activity_value,
+        size,
+        is_null,
+        v);
       i.activity_null = is_null;
+      i.activity_size = size;
+      grew = grew || (cap != i.activity_value.capacity ());
     }
 
     // logging_impact_
@@ -444,16 +457,16 @@ namespace odb
     // activity_
     //
     {
-      ::dogen::relational::tracing::activity v;
+      ::std::string& v =
+        o.activity ();
 
       pgsql::value_traits<
-          ::dogen::relational::tracing::activity,
-          pgsql::id_integer >::set_value (
+          ::std::string,
+          pgsql::id_string >::set_value (
         v,
         i.activity_value,
+        i.activity_size,
         i.activity_null);
-
-      o.activity (v);
     }
 
     // logging_impact_
@@ -979,7 +992,7 @@ namespace odb
                       "  \"EVENT_TYPE\" INTEGER NOT NULL,\n"
                       "  \"VERSION\" TEXT NOT NULL,\n"
                       "  \"PAYLOAD\" JSONB NOT NULL,\n"
-                      "  \"ACTIVITY\" INTEGER NOT NULL,\n"
+                      "  \"ACTIVITY\" TEXT NOT NULL,\n"
                       "  \"LOGGING_IMPACT\" TEXT NOT NULL,\n"
                       "  \"TRACING_IMPACT\" TEXT NOT NULL,\n"
                       "  PRIMARY KEY (\"RUN_ID\",\n"

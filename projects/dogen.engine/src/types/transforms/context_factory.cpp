@@ -121,8 +121,10 @@ make_feature_template_repository() {
 }
 
 injection::transforms::context context_factory::
-make_injection_context(const configuration& cfg) {
-    BOOST_LOG_SEV(lg, debug) << "Creating the context.";
+make_injection_context(const configuration& cfg,
+    const std::string& activity) {
+    BOOST_LOG_SEV(lg, debug) << "Creating the context. Activity: "
+                             << activity;
 
     /*
      * Obtain the transform registrar and ensure it has been setup.
@@ -149,16 +151,18 @@ make_injection_context(const configuration& cfg) {
      * Setup the tracer. Note that we do it regardless of whether
      * tracing is enabled or not - its the tracer job to handle that.
      */
-    const auto tracer(boost::make_shared<tracing::tracer>(cfg));
+    const auto tracer(boost::make_shared<tracing::tracer>(cfg, activity));
     r.tracer(tracer);
 
     return r;
 
 }
 
-context context_factory::make_context(const configuration& cfg,
+context context_factory::
+make_context(const configuration& cfg, const std::string& activity,
     const boost::filesystem::path& output_directory) {
-    BOOST_LOG_SEV(lg, debug) << "Creating the top-level context.";
+    BOOST_LOG_SEV(lg, debug) << "Creating the top-level context. Activity: "
+                             << activity;
 
     /*
      * First we create the variability context, needed to create the
@@ -196,9 +200,9 @@ context context_factory::make_context(const configuration& cfg,
      * Setup the tracer. Note that we do it regardless of whether
      * tracing is enabled or not - its the tracer job to handle that.
      */
-    const auto tracer(boost::make_shared<tracing::tracer>(cfg));
+    const auto tracer(boost::make_shared<tracing::tracer>(cfg, activity));
     vctx.tracer(tracer);
-    tracer->add_initial_input(alrp_input_id, *alrp);
+    tracer->start_run(alrp_input_id, *alrp);
 
     /*
      * Create the top-level context and all of its sub-contexts.

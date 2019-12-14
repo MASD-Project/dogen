@@ -38,10 +38,11 @@ namespace dogen::engine::transforms {
  */
 class context_factory final {
 public:
-    static injection::transforms::context
-    make_injection_context(const configuration& cfg);
+    static injection::transforms::context make_injection_context(
+        const configuration& cfg, const std::string& activity);
 
     static context make_context(const configuration& cfg,
+        const std::string& activity,
         const boost::filesystem::path& output_directory);
 };
 

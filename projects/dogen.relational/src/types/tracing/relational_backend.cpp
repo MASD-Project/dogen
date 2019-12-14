@@ -73,11 +73,11 @@ void relational_backend::to_stream(std::ostream& s) const {
 
 relational_backend::relational_backend(const tracing_configuration& tcfg,
     const database_configuration& dbcfg, const std::string& version,
-    const std::string& run_id, const std::string& logging_impact,
-    const std::string& tracing_impact)
+    const std::string& run_id, const std::string& activity,
+    const std::string& logging_impact, const std::string& tracing_impact)
     : tracing_configuration_(tcfg), database_configuration_(dbcfg),
-      version_(version), run_id_(run_id), logging_impact_(logging_impact),
-      tracing_impact_(tracing_impact) {
+      version_(version), run_id_(run_id), activity_(activity),
+      logging_impact_(logging_impact), tracing_impact_(tracing_impact) {
 
     BOOST_LOG_SEV(lg, debug) << "Tracer initialised.";
     BOOST_LOG_SEV(lg, trace) << "Tracing configuration: "
@@ -100,7 +100,7 @@ relational_backend::relational_backend(const tracing_configuration& tcfg,
         BOOST_LOG_SEV(lg, info) << "Not generating database schema.";
 }
 
-void relational_backend::start_tracing(const std::string& input_id,
+void relational_backend::start_run(const std::string& input_id,
     const std::string& input) const {
     BOOST_LOG_SEV(lg, debug) << "Adding initial input: " << input_id;
 
@@ -112,6 +112,7 @@ void relational_backend::start_tracing(const std::string& input_id,
     re.run_event_key(k);
     re.version(version_);
     re.payload(json(input));
+    re.activity(activity_);
     re.timestamp(boost::posix_time::microsec_clock::universal_time());
     re.logging_impact(logging_impact_);
     re.tracing_impact(tracing_impact_);
@@ -121,7 +122,7 @@ void relational_backend::start_tracing(const std::string& input_id,
     t.commit();
 }
 
-void relational_backend::end_tracing() const {
+void relational_backend::end_run() const {
     run_event_key k;
     k.run_id(run_id(run_id_));
     k.event_type(event_type::end);
@@ -129,6 +130,7 @@ void relational_backend::end_tracing() const {
     run_event re;
     re.run_event_key(k);
     re.version(version_);
+    re.activity(activity_);
     re.timestamp(boost::posix_time::microsec_clock::universal_time());
     re.payload(json("{}"));
     re.timestamp(boost::posix_time::microsec_clock::universal_time());

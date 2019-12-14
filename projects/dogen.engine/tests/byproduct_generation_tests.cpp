@@ -127,7 +127,7 @@ void apply_transforms(const configuration& cfg, const path& output_dir,
     const path& target) {
 
     using namespace dogen::engine::transforms;
-    scoped_context_manager sco(cfg, output_dir);
+    scoped_context_manager sco(cfg, run_activity, output_dir);
     const auto ctx(sco.context());
 
     /*

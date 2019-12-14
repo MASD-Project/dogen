@@ -22,15 +22,12 @@
 
 namespace dogen::relational::tracing {
 
-run_event::run_event()
-    : activity_(static_cast<dogen::relational::tracing::activity>(0)) { }
-
 run_event::run_event(
     const boost::posix_time::ptime& timestamp,
     const dogen::relational::tracing::run_event_key& run_event_key,
     const std::string& version,
     const dogen::relational::tracing::json& payload,
-    const dogen::relational::tracing::activity activity,
+    const std::string& activity,
     const std::string& logging_impact,
     const std::string& tracing_impact)
     : timestamp_(timestamp),
@@ -132,12 +129,20 @@ void run_event::payload(const dogen::relational::tracing::json&& v) {
     payload_ = std::move(v);
 }
 
-dogen::relational::tracing::activity run_event::activity() const {
+const std::string& run_event::activity() const {
     return activity_;
 }
 
-void run_event::activity(const dogen::relational::tracing::activity v) {
+std::string& run_event::activity() {
+    return activity_;
+}
+
+void run_event::activity(const std::string& v) {
     activity_ = v;
+}
+
+void run_event::activity(const std::string&& v) {
+    activity_ = std::move(v);
 }
 
 const std::string& run_event::logging_impact() const {

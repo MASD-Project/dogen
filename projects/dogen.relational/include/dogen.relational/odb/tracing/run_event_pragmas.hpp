@@ -27,7 +27,6 @@
 
 #include "dogen.relational/types/tracing/run_event.hpp"
 #include "dogen.relational/odb/tracing/json_pragmas.hpp"
-#include "dogen.relational/odb/tracing/activity_pragmas.hpp"
 #include "dogen.relational/odb/tracing/run_event_key_pragmas.hpp"
 
 namespace dogen::relational::tracing {

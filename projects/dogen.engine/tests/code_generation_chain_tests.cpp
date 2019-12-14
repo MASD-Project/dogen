@@ -43,6 +43,7 @@ const std::string first_folder("first");
 const std::string second_folder("second");
 const std::string first_folders_path("first/second/third");
 const std::string second_folders_path("src/second");
+const std::string activity("testing");
 
 /*
  * Set these flag to true if you want to dump information for all
@@ -116,7 +117,7 @@ void execute_code_generation_transform(const boost::filesystem::path& target,
      * Create the context.
      */
     using namespace dogen::engine::transforms;
-    scoped_context_manager sco(cfg, output_dir);
+    scoped_context_manager sco(cfg, activity, output_dir);
     const auto ctx(sco.context());
 
     /*

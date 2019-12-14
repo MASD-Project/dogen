@@ -71,10 +71,11 @@ namespace dogen::tracing {
 
 file_backend::file_backend(const tracing_configuration& cfg,
     const std::string& version, const std::string& run_id,
-    const std::string& logging_impact, const std::string& tracing_impact)
+    const std::string& activity, const std::string& logging_impact,
+    const std::string& tracing_impact)
     : detailed_tracing_enabled_(cfg.level() == tracing_level::detail),
       configuration_(cfg),
-      builder_(version, run_id, logging_impact, tracing_impact),
+      builder_(version, run_id, activity, logging_impact, tracing_impact),
       current_directory_(get_current_directory(cfg)) {
 
     /*
@@ -239,8 +240,8 @@ void file_backend::add_references_graph(const std::string& root_vertex,
 }
 
 
-void file_backend::start_tracing(const std::string& input_id,
-    const std::string& input) const {
+void file_backend::
+start_run(const std::string& input_id, const std::string& input) const {
     if (!detailed_tracing_enabled_)
         return;
 
@@ -250,7 +251,7 @@ void file_backend::start_tracing(const std::string& input_id,
     ++transform_position_.top();
 }
 
-void file_backend::end_tracing() const {
+void file_backend::end_run() const {
     BOOST_LOG_SEV(lg, debug) << "Finished tracing.";
     /*
      * Write the metrics.

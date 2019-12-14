@@ -60,17 +60,17 @@ public:
 
 public:
     /**
-     * @brief Starts a tracing session.
+     * @brief Starts a tracing run.
      */
-    virtual void start_tracing(const std::string& input_id,
+    virtual void start_run(const std::string& input_id,
         const std::string& input) const = 0;
 
     /**
-     * @brief Ends the current tracing session.
+     * @brief Ends the current tracing run.
      *
-     * @pre A tracing session must have been started.
+     * @pre A tracing run must have been started.
      */
-    virtual void end_tracing() const = 0;
+    virtual void end_run() const = 0;
 
 public:
     /**

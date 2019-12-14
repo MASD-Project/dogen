@@ -30,7 +30,6 @@
 #include "dogen/io/database_configuration_io.hpp"
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.tracing/types/file_backend.hpp"
 #include "dogen.tracing/types/tracing_error.hpp"
 #include "dogen.tracing/types/tracer.hpp"
 
@@ -49,8 +48,8 @@ backend_factory_registrar& tracer::registrar() {
     return registrar_;
 }
 
-tracer::tracer(const configuration& cfg)
-    : backend_(registrar_.try_make_backend(cfg, generate_guid())) {}
+tracer::tracer(const configuration& cfg, const std::string& activity)
+    : backend_(registrar_.try_make_backend(cfg, generate_guid(), activity)) {}
 
 std::string tracer::generate_guid() {
     const auto uuid = boost::uuids::random_generator()();
@@ -64,10 +63,10 @@ void tracer::add_references_graph(const std::string& root_vertex,
         backend_->add_references_graph(root_vertex, edges_per_model);
 }
 
-void tracer::end_tracing() const {
+void tracer::end_run() const {
     BOOST_LOG_SEV(lg, debug) << "Finished tracing.";
     if (backend_)
-        backend_->end_tracing();
+        backend_->end_run();
 }
 
 void tracer::start_chain(const std::string& transform_id,

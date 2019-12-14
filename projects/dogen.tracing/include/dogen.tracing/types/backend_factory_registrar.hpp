@@ -61,7 +61,8 @@ public:
      * backend is generated, throws.
      */
     const boost::shared_ptr<backend>
-    try_make_backend(const configuration& cfg, const std::string& run_id);
+    try_make_backend(const configuration& cfg, const std::string& run_id,
+        const std::string& activity);
 
 private:
     std::unordered_map<dogen::tracing_backend,

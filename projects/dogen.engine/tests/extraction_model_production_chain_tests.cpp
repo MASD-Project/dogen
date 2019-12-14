@@ -91,7 +91,7 @@ apply_extraction_model_production(const boost::filesystem::path& target,
      * Create the context.
      */
     using namespace dogen::engine::transforms;
-    scoped_context_manager sco(cfg, output_dir);
+    scoped_context_manager sco(cfg, run_activity, output_dir);
     const auto ctx(sco.context());
 
     /*

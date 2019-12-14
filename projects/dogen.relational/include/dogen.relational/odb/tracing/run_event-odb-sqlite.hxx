@@ -154,9 +154,9 @@ namespace odb
     typedef
     sqlite::query_column<
       sqlite::value_traits<
-        ::dogen::relational::tracing::activity,
-        sqlite::id_integer >::query_type,
-      sqlite::id_integer >
+        ::std::string,
+        sqlite::id_text >::query_type,
+      sqlite::id_text >
     activity_type_;
 
     static const activity_type_ activity;
@@ -280,7 +280,8 @@ namespace odb
 
       // activity_
       //
-      long long activity_value;
+      details::buffer activity_value;
+      std::size_t activity_size;
       bool activity_null;
 
       // logging_impact_

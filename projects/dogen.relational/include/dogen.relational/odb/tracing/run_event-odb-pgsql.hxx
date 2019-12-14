@@ -154,9 +154,9 @@ namespace odb
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        ::dogen::relational::tracing::activity,
-        pgsql::id_integer >::query_type,
-      pgsql::id_integer >
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
     activity_type_;
 
     static const activity_type_ activity;
@@ -279,7 +279,8 @@ namespace odb
 
       // activity_
       //
-      int activity_value;
+      details::buffer activity_value;
+      std::size_t activity_size;
       bool activity_null;
 
       // logging_impact_

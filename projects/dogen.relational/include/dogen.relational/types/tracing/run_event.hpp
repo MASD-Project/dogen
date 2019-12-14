@@ -29,19 +29,16 @@
 #include <algorithm>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
 #include "dogen.relational/types/tracing/json.hpp"
-#include "dogen.relational/types/tracing/activity.hpp"
 #include "dogen.relational/types/tracing/run_event_key.hpp"
 
 namespace dogen::relational::tracing {
 
 class run_event final {
 public:
+    run_event() = default;
     run_event(const run_event&) = default;
     run_event(run_event&&) = default;
     ~run_event() = default;
-
-public:
-    run_event();
 
 public:
     run_event(
@@ -49,7 +46,7 @@ public:
         const dogen::relational::tracing::run_event_key& run_event_key,
         const std::string& version,
         const dogen::relational::tracing::json& payload,
-        const dogen::relational::tracing::activity activity,
+        const std::string& activity,
         const std::string& logging_impact,
         const std::string& tracing_impact);
 
@@ -79,8 +76,10 @@ public:
     void payload(const dogen::relational::tracing::json& v);
     void payload(const dogen::relational::tracing::json&& v);
 
-    dogen::relational::tracing::activity activity() const;
-    void activity(const dogen::relational::tracing::activity v);
+    const std::string& activity() const;
+    std::string& activity();
+    void activity(const std::string& v);
+    void activity(const std::string&& v);
 
     const std::string& logging_impact() const;
     std::string& logging_impact();
@@ -107,7 +106,7 @@ private:
     dogen::relational::tracing::run_event_key run_event_key_;
     std::string version_;
     dogen::relational::tracing::json payload_;
-    dogen::relational::tracing::activity activity_;
+    std::string activity_;
     std::string logging_impact_;
     std::string tracing_impact_;
 };

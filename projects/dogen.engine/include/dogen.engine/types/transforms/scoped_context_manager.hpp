@@ -37,6 +37,7 @@ namespace dogen::engine::transforms {
 class scoped_context_manager final {
 public:
     scoped_context_manager(const configuration& cfg,
+        const std::string& activity,
         const boost::filesystem::path& output_directory);
     ~scoped_context_manager();
 
@@ -52,7 +53,8 @@ private:
  */
 class scoped_injection_context_manager final {
 public:
-    scoped_injection_context_manager(const configuration& cfg);
+    scoped_injection_context_manager(const configuration& cfg,
+        const std::string& activity);
     ~scoped_injection_context_manager();
 
 public:

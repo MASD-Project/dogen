@@ -30,6 +30,8 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("engine.converter"));
 
+const std::string conversion_activity("conversion");
+
 }
 
 namespace dogen::engine {
@@ -41,7 +43,7 @@ void converter::convert(const configuration& cfg,
 
     {
         using namespace transforms;
-        scoped_injection_context_manager scim(cfg);
+        scoped_injection_context_manager scim(cfg, conversion_activity);
         using namespace dogen::injection::transforms;
         model_to_model_chain::apply(scim.context(), source, destination);
     }

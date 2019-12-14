@@ -52,7 +52,7 @@ public:
     tracer(const tracer&) = default;
 
 public:
-    explicit tracer(const configuration& cfg);
+    tracer(const configuration& cfg, const std::string& activity);
 
 public:
     const boost::shared_ptr<tracing::backend> backend() const {
@@ -71,25 +71,28 @@ private:
 
 public:
     /**
-     * @brief Writes an initial input to the filesystem.
+     * @brief Starts a tracing run.
      */
     template<typename Ioable>
-    void add_initial_input(const std::string& input_id,
-        const Ioable& input) const {
+    void start_run(const std::string& input_id, const Ioable& input) const {
         if (backend_)
-            backend_->start_tracing(input_id, to_string(input));
+            backend_->start_run(input_id, to_string(input));
     }
 
     void add_references_graph(const std::string& root_vertex,
         const std::unordered_map<std::string, std::list<std::string>>&
         edges_per_model) const;
 
+public:
+    /**
+     * @brief Starts a transform chain.
+     */
+    /**@{*/
     void start_chain(const std::string& transform_id,
         const std::string& transform_instance_id) const;
     void start_chain(const std::string& transform_id,
         const std::string& transform_instance_id,
         const std::string& model_id) const;
-
     template<typename Ioable>
     void start_chain(const std::string& transform_id,
         const std::string& transform_instance_id,
@@ -100,14 +103,17 @@ public:
                 model_id, to_string(input));
         }
     }
+    /**@}*/
 
+    /**
+     * @brief Starts a leaf transform.
+     */
+    /**@{*/
     void start_transform(const std::string& transform_id,
         const std::string& transform_instance_id) const;
-
     void start_transform(const std::string& transform_id,
         const std::string& transform_instance_id,
         const std::string& model_id) const;
-
     template<typename Ioable>
     void start_transform(const std::string& transform_id,
         const std::string& transform_instance_id,
@@ -118,26 +124,38 @@ public:
                 model_id, to_string(input));
         }
     }
+    /**@}*/
 
+    /**
+     * @brief Ends a transform chain.
+     */
+    /**@{*/
     void end_chain(const std::string& transform_instance_id) const;
-
     template<typename Ioable>
     void end_chain(const std::string& transform_instance_id,
         const Ioable& output) const {
         if (backend_)
             backend_->end_chain(transform_instance_id, to_string(output));
     }
+    /**@}*/
 
+    /**
+     * @brief Ends a leaf transform.
+     */
+    /**@{*/
     void end_transform(const std::string& transform_instance_id) const;
-
     template<typename Ioable>
     void end_transform(const std::string& transform_instance_id,
         const Ioable& output) const {
         if (backend_)
             backend_->end_transform(transform_instance_id, to_string(output));
     }
+    /**@}*/
 
-    void end_tracing() const;
+    /**
+     * @brief Ends a tracing run.
+     */
+    void end_run() const;
 
 public:
     bool operator==(const tracer& rhs) const;
