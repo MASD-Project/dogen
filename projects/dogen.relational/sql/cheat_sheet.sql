@@ -104,3 +104,37 @@ select "TIMESTAMP", "RUN_ID", "VERSION", "ACTIVITY", "LOGGING_IMPACT", "TRACING_
 -- Runs by time
 --
 select "TIMESTAMP", "RUN_ID", "ACTIVITY" from "RUN_EVENT" where "EVENT_TYPE" = 1 order by "TIMESTAMP";
+
+
+--
+-- Navigating into transforms
+--
+select "TIMESTAMP", "TRANSFORM_ID", (CASE WHEN "TRANSFORM_TYPE" = 1 THEN  'CHAIN' ELSE 'LEAF' END) "TRANSFORM_TYPE",
+(CASE WHEN "EVENT_TYPE" = 1 THEN  'START' ELSE 'END' END), "PARENT_TRANSFORM", "TRANSFORM_INSTANCE_ID",
+cast("PAYLOAD" as varchar(20)), "PAYLOAD"->'__type__' "PAYLOAD_TYPE"
+from "TRANSFORM_EVENT"
+where "PARENT_TRANSFORM" = '9b9032d1-edd9-4f34-ac2b-4f345ae5019f'
+order by "TIMESTAMP" asc;
+
+--
+-- Get JSONB for dia diagram
+--
+select "TIMESTAMP", "TRANSFORM_ID", (CASE WHEN "TRANSFORM_TYPE" = 1 THEN  'CHAIN' ELSE 'LEAF' END) "TRANSFORM_TYPE",
+(CASE WHEN "EVENT_TYPE" = 1 THEN  'START' ELSE 'END' END) "EVENT_TYPE",
+"PARENT_TRANSFORM", "TRANSFORM_INSTANCE_ID", jsonb_pretty("PAYLOAD"),
+"PAYLOAD"->'__type__' "PAYLOAD_TYPE"
+from "TRANSFORM_EVENT"
+where "TRANSFORM_INSTANCE_ID" = 'b996c91c-de1a-4bc0-9f97-504cb89232bf' and "EVENT_TYPE" = 1
+order by "TIMESTAMP" asc;
+
+
+--
+-- Get IDs for objects in diagram
+--
+select crap->'id'::text "ID", crap->'type'::text "TYPE"
+from (
+     select jsonb_array_elements("PAYLOAD"->'layers'->0->'objects') as crap
+     from "TRANSFORM_EVENT"
+     where "TRANSFORM_INSTANCE_ID" = 'b996c91c-de1a-4bc0-9f97-504cb89232bf' and "EVENT_TYPE" = 1
+     order by "TIMESTAMP" asc
+) as foo;
