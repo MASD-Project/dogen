@@ -100,6 +100,22 @@ namespace odb
     //
     t[5UL] = false;
 
+    // logging_impact_
+    //
+    if (t[6UL])
+    {
+      i.logging_impact_value.capacity (i.logging_impact_size);
+      grew = true;
+    }
+
+    // tracing_impact_
+    //
+    if (t[7UL])
+    {
+      i.tracing_impact_value.capacity (i.tracing_impact_size);
+      grew = true;
+    }
+
     return grew;
   }
 
@@ -156,6 +172,28 @@ namespace odb
     b[n].type = sqlite::bind::integer;
     b[n].buffer = &i.activity_value;
     b[n].is_null = &i.activity_null;
+    n++;
+
+    // logging_impact_
+    //
+    b[n].type = sqlite::image_traits<
+      ::std::string,
+      sqlite::id_text>::bind_value;
+    b[n].buffer = i.logging_impact_value.data ();
+    b[n].size = &i.logging_impact_size;
+    b[n].capacity = i.logging_impact_value.capacity ();
+    b[n].is_null = &i.logging_impact_null;
+    n++;
+
+    // tracing_impact_
+    //
+    b[n].type = sqlite::image_traits<
+      ::std::string,
+      sqlite::id_text>::bind_value;
+    b[n].buffer = i.tracing_impact_value.data ();
+    b[n].size = &i.tracing_impact_size;
+    b[n].capacity = i.tracing_impact_value.capacity ();
+    b[n].is_null = &i.tracing_impact_null;
     n++;
   }
 
@@ -262,6 +300,44 @@ namespace odb
       i.activity_null = is_null;
     }
 
+    // logging_impact_
+    //
+    {
+      ::std::string const& v =
+        o.logging_impact ();
+
+      bool is_null (false);
+      std::size_t cap (i.logging_impact_value.capacity ());
+      sqlite::value_traits<
+          ::std::string,
+          sqlite::id_text >::set_image (
+        i.logging_impact_value,
+        i.logging_impact_size,
+        is_null,
+        v);
+      i.logging_impact_null = is_null;
+      grew = grew || (cap != i.logging_impact_value.capacity ());
+    }
+
+    // tracing_impact_
+    //
+    {
+      ::std::string const& v =
+        o.tracing_impact ();
+
+      bool is_null (false);
+      std::size_t cap (i.tracing_impact_value.capacity ());
+      sqlite::value_traits<
+          ::std::string,
+          sqlite::id_text >::set_image (
+        i.tracing_impact_value,
+        i.tracing_impact_size,
+        is_null,
+        v);
+      i.tracing_impact_null = is_null;
+      grew = grew || (cap != i.tracing_impact_value.capacity ());
+    }
+
     return grew;
   }
 
@@ -342,6 +418,36 @@ namespace odb
 
       o.activity (v);
     }
+
+    // logging_impact_
+    //
+    {
+      ::std::string& v =
+        o.logging_impact ();
+
+      sqlite::value_traits<
+          ::std::string,
+          sqlite::id_text >::set_value (
+        v,
+        i.logging_impact_value,
+        i.logging_impact_size,
+        i.logging_impact_null);
+    }
+
+    // tracing_impact_
+    //
+    {
+      ::std::string& v =
+        o.tracing_impact ();
+
+      sqlite::value_traits<
+          ::std::string,
+          sqlite::id_text >::set_value (
+        v,
+        i.tracing_impact_value,
+        i.tracing_impact_size,
+        i.tracing_impact_null);
+    }
   }
 
   void access::object_traits_impl< ::dogen::relational::tracing::run_event, id_sqlite >::
@@ -368,9 +474,11 @@ namespace odb
   "\"EVENT_TYPE\", "
   "\"VERSION\", "
   "\"PAYLOAD\", "
-  "\"ACTIVITY\") "
+  "\"ACTIVITY\", "
+  "\"LOGGING_IMPACT\", "
+  "\"TRACING_IMPACT\") "
   "VALUES "
-  "(?, ?, ?, ?, ?, ?)";
+  "(?, ?, ?, ?, ?, ?, ?, ?)";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::run_event, id_sqlite >::find_statement[] =
   "SELECT "
@@ -379,7 +487,9 @@ namespace odb
   "\"DOGEN\".\"RUN_EVENT\".\"EVENT_TYPE\", "
   "\"DOGEN\".\"RUN_EVENT\".\"VERSION\", "
   "\"DOGEN\".\"RUN_EVENT\".\"PAYLOAD\", "
-  "\"DOGEN\".\"RUN_EVENT\".\"ACTIVITY\" "
+  "\"DOGEN\".\"RUN_EVENT\".\"ACTIVITY\", "
+  "\"DOGEN\".\"RUN_EVENT\".\"LOGGING_IMPACT\", "
+  "\"DOGEN\".\"RUN_EVENT\".\"TRACING_IMPACT\" "
   "FROM \"DOGEN\".\"RUN_EVENT\" "
   "WHERE \"DOGEN\".\"RUN_EVENT\".\"RUN_ID\"=? AND \"DOGEN\".\"RUN_EVENT\".\"EVENT_TYPE\"=?";
 
@@ -389,7 +499,9 @@ namespace odb
   "\"TIMESTAMP\"=?, "
   "\"VERSION\"=?, "
   "\"PAYLOAD\"=?, "
-  "\"ACTIVITY\"=? "
+  "\"ACTIVITY\"=?, "
+  "\"LOGGING_IMPACT\"=?, "
+  "\"TRACING_IMPACT\"=? "
   "WHERE \"RUN_ID\"=? AND \"EVENT_TYPE\"=?";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::run_event, id_sqlite >::erase_statement[] =
@@ -403,7 +515,9 @@ namespace odb
   "\"DOGEN\".\"RUN_EVENT\".\"EVENT_TYPE\", "
   "\"DOGEN\".\"RUN_EVENT\".\"VERSION\", "
   "\"DOGEN\".\"RUN_EVENT\".\"PAYLOAD\", "
-  "\"DOGEN\".\"RUN_EVENT\".\"ACTIVITY\" "
+  "\"DOGEN\".\"RUN_EVENT\".\"ACTIVITY\", "
+  "\"DOGEN\".\"RUN_EVENT\".\"LOGGING_IMPACT\", "
+  "\"DOGEN\".\"RUN_EVENT\".\"TRACING_IMPACT\" "
   "FROM \"DOGEN\".\"RUN_EVENT\"";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::run_event, id_sqlite >::erase_query_statement[] =
@@ -822,6 +936,8 @@ namespace odb
                       "  \"VERSION\" TEXT NOT NULL,\n"
                       "  \"PAYLOAD\" TEXT NOT NULL,\n"
                       "  \"ACTIVITY\" INTEGER NOT NULL,\n"
+                      "  \"LOGGING_IMPACT\" TEXT NOT NULL,\n"
+                      "  \"TRACING_IMPACT\" TEXT NOT NULL,\n"
                       "  PRIMARY KEY (\"RUN_ID\",\n"
                       "               \"EVENT_TYPE\"))");
           return false;

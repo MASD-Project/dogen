@@ -160,6 +160,30 @@ namespace odb
     activity_type_;
 
     static const activity_type_ activity;
+
+    // logging_impact
+    //
+    typedef
+    sqlite::query_column<
+      sqlite::value_traits<
+        ::std::string,
+        sqlite::id_text >::query_type,
+      sqlite::id_text >
+    logging_impact_type_;
+
+    static const logging_impact_type_ logging_impact;
+
+    // tracing_impact
+    //
+    typedef
+    sqlite::query_column<
+      sqlite::value_traits<
+        ::std::string,
+        sqlite::id_text >::query_type,
+      sqlite::id_text >
+    tracing_impact_type_;
+
+    static const tracing_impact_type_ tracing_impact;
   };
 
   template <typename A>
@@ -203,6 +227,16 @@ namespace odb
   const typename query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::activity_type_
   query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::
   activity (A::table_name, "\"ACTIVITY\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::logging_impact_type_
+  query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::
+  logging_impact (A::table_name, "\"LOGGING_IMPACT\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::tracing_impact_type_
+  query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >::
+  tracing_impact (A::table_name, "\"TRACING_IMPACT\"", 0);
 
   template <typename A>
   struct pointer_query_columns< ::dogen::relational::tracing::run_event, id_sqlite, A >:
@@ -249,6 +283,18 @@ namespace odb
       long long activity_value;
       bool activity_null;
 
+      // logging_impact_
+      //
+      details::buffer logging_impact_value;
+      std::size_t logging_impact_size;
+      bool logging_impact_null;
+
+      // tracing_impact_
+      //
+      details::buffer tracing_impact_value;
+      std::size_t tracing_impact_size;
+      bool tracing_impact_null;
+
       std::size_t version;
     };
 
@@ -288,7 +334,7 @@ namespace odb
 
     typedef sqlite::query_base query_base_type;
 
-    static const std::size_t column_count = 6UL;
+    static const std::size_t column_count = 8UL;
     static const std::size_t id_column_count = 2UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;

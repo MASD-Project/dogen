@@ -22,7 +22,6 @@
 #include <sstream>
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen/config.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/metrics.hpp"
 #include "dogen.tracing/types/tracing_error.hpp"
@@ -43,12 +42,12 @@ const std::string unmatch_start_end(
 
 namespace dogen::tracing {
 
-metrics_builder::metrics_builder(const std::string& run_id,
-    const std::string& logging_impact,
+metrics_builder::metrics_builder(const std::string& version,
+    const std::string& run_id, const std::string& logging_impact,
     const std::string& tracing_impact) {
     BOOST_LOG_SEV(lg, debug) << "Initialising.";
     std::ostringstream s;
-    s << "version: v" << DOGEN_VERSION << ", "
+    s << "version: v" << version << ", "
       << "logging impact: " << logging_impact << ", "
       << "tracing impact: " << tracing_impact;
 

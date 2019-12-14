@@ -20,18 +20,19 @@
  */
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
+#include "dogen/config.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen/io/tracing_backend_io.hpp"
 #include "dogen.tracing/types/backend_factory.hpp"
 #include "dogen.tracing/types/registrar_error.hpp"
 #include "dogen.tracing/types/backend_factory_registrar.hpp"
 
-
 namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory("tracing.backend_factory_registrar"));
 
+const std::string empty;
 const std::string no_factories("No backend factories provided.");
 const std::string missing_factory("Backend factory not available: ");
 const std::string null_factory("Backend factory supplied is null.");
@@ -41,6 +42,27 @@ const std::string too_many_backends(
     "More than one backend factory generated a backend.");
 const std::string unsupported_backend(
     "Tracing backend is unsupported: ");
+
+const std::string tracing_impact_moderate("none");
+const std::string tracing_impact_severe("severe");
+
+std::string get_logging_impact(
+    const boost::optional<dogen::tracing_configuration>& cfg) {
+    if (!cfg)
+        return empty;
+
+    return cfg->logging_impact();
+}
+
+std::string get_tracing_impact(
+    const boost::optional<dogen::tracing_configuration>& cfg) {
+    if (!cfg)
+        return empty;
+
+    if (cfg->level() == dogen::tracing_level::detail)
+        return tracing_impact_severe;
+    return tracing_impact_moderate;
+}
 
 }
 
@@ -89,10 +111,13 @@ try_make_backend(const configuration& cfg, const std::string& run_id) {
      * configuration. Note that we only expect one to be generated, so
      * throw if more than one show up.
      */
+    const auto v(DOGEN_VERSION);
+    const auto li(get_logging_impact(cfg.tracing()));
+    const auto ti(get_tracing_impact(cfg.tracing()));
     for (const auto& pair : backend_factories_) {
         const auto& f(*pair.second);
         BOOST_LOG_SEV(lg, debug) << "Trying to generate a backend: " << f.id();
-        const auto b(f.make(cfg, run_id));
+        const auto b(f.make(cfg, v, run_id, li, ti));
         if (!b) {
             BOOST_LOG_SEV(lg, debug) << "Factory did not generate a backend.";
             continue;

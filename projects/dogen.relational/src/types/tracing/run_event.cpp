@@ -30,12 +30,16 @@ run_event::run_event(
     const dogen::relational::tracing::run_event_key& run_event_key,
     const std::string& version,
     const dogen::relational::tracing::json& payload,
-    const dogen::relational::tracing::activity activity)
+    const dogen::relational::tracing::activity activity,
+    const std::string& logging_impact,
+    const std::string& tracing_impact)
     : timestamp_(timestamp),
       run_event_key_(run_event_key),
       version_(version),
       payload_(payload),
-      activity_(activity) { }
+      activity_(activity),
+      logging_impact_(logging_impact),
+      tracing_impact_(tracing_impact) { }
 
 void run_event::swap(run_event& other) noexcept {
     using std::swap;
@@ -44,6 +48,8 @@ void run_event::swap(run_event& other) noexcept {
     swap(version_, other.version_);
     swap(payload_, other.payload_);
     swap(activity_, other.activity_);
+    swap(logging_impact_, other.logging_impact_);
+    swap(tracing_impact_, other.tracing_impact_);
 }
 
 bool run_event::operator==(const run_event& rhs) const {
@@ -51,7 +57,9 @@ bool run_event::operator==(const run_event& rhs) const {
         run_event_key_ == rhs.run_event_key_ &&
         version_ == rhs.version_ &&
         payload_ == rhs.payload_ &&
-        activity_ == rhs.activity_;
+        activity_ == rhs.activity_ &&
+        logging_impact_ == rhs.logging_impact_ &&
+        tracing_impact_ == rhs.tracing_impact_;
 }
 
 run_event& run_event::operator=(run_event other) {
@@ -130,6 +138,38 @@ dogen::relational::tracing::activity run_event::activity() const {
 
 void run_event::activity(const dogen::relational::tracing::activity v) {
     activity_ = v;
+}
+
+const std::string& run_event::logging_impact() const {
+    return logging_impact_;
+}
+
+std::string& run_event::logging_impact() {
+    return logging_impact_;
+}
+
+void run_event::logging_impact(const std::string& v) {
+    logging_impact_ = v;
+}
+
+void run_event::logging_impact(const std::string&& v) {
+    logging_impact_ = std::move(v);
+}
+
+const std::string& run_event::tracing_impact() const {
+    return tracing_impact_;
+}
+
+std::string& run_event::tracing_impact() {
+    return tracing_impact_;
+}
+
+void run_event::tracing_impact(const std::string& v) {
+    tracing_impact_ = v;
+}
+
+void run_event::tracing_impact(const std::string&& v) {
+    tracing_impact_ = std::move(v);
 }
 
 }

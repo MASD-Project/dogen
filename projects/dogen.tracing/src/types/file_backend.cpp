@@ -57,27 +57,6 @@ const std::string unexpected_empty("The stack must not be empty.");
 const std::string invalid_tracing_format(
     "Invalid or unsupported tracing format: ");
 
-const std::string tracing_impact_moderate("none");
-const std::string tracing_impact_severe("severe");
-
-std::string get_logging_impact(
-    const boost::optional<dogen::tracing_configuration>& cfg) {
-    if (!cfg)
-        return empty;
-
-    return cfg->logging_impact();
-}
-
-std::string get_tracing_impact(
-    const boost::optional<dogen::tracing_configuration>& cfg) {
-    if (!cfg)
-        return empty;
-
-    if (cfg->level() == dogen::tracing_level::detail)
-        return tracing_impact_severe;
-    return tracing_impact_moderate;
-}
-
 boost::filesystem::path get_current_directory(
     const boost::optional<dogen::tracing_configuration>& cfg) {
     if (!cfg)
@@ -91,10 +70,11 @@ boost::filesystem::path get_current_directory(
 namespace dogen::tracing {
 
 file_backend::file_backend(const tracing_configuration& cfg,
-    const std::string& run_id)
+    const std::string& version, const std::string& run_id,
+    const std::string& logging_impact, const std::string& tracing_impact)
     : detailed_tracing_enabled_(cfg.level() == tracing_level::detail),
       configuration_(cfg),
-      builder_(run_id, get_logging_impact(cfg), get_tracing_impact(cfg)),
+      builder_(version, run_id, logging_impact, tracing_impact),
       current_directory_(get_current_directory(cfg)) {
 
     /*

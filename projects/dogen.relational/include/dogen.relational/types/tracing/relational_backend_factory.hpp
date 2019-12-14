@@ -35,7 +35,9 @@ public:
     std::string id() const override;
     dogen::tracing_backend tracing_backend() const override;
     boost::shared_ptr<dogen::tracing::backend>
-    make(const configuration& cfg, const std::string& run_id) const override;
+    make(const configuration& cfg, const std::string& version,
+        const std::string& run_id, const std::string& logging_impact,
+        const std::string& tracing_impact) const override;
 };
 
 }

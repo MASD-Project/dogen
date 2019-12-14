@@ -49,7 +49,9 @@ public:
         const dogen::relational::tracing::run_event_key& run_event_key,
         const std::string& version,
         const dogen::relational::tracing::json& payload,
-        const dogen::relational::tracing::activity activity);
+        const dogen::relational::tracing::activity activity,
+        const std::string& logging_impact,
+        const std::string& tracing_impact);
 
 public:
     const boost::posix_time::ptime& timestamp() const;
@@ -80,6 +82,16 @@ public:
     dogen::relational::tracing::activity activity() const;
     void activity(const dogen::relational::tracing::activity v);
 
+    const std::string& logging_impact() const;
+    std::string& logging_impact();
+    void logging_impact(const std::string& v);
+    void logging_impact(const std::string&& v);
+
+    const std::string& tracing_impact() const;
+    std::string& tracing_impact();
+    void tracing_impact(const std::string& v);
+    void tracing_impact(const std::string&& v);
+
 public:
     bool operator==(const run_event& rhs) const;
     bool operator!=(const run_event& rhs) const {
@@ -96,6 +108,8 @@ private:
     std::string version_;
     dogen::relational::tracing::json payload_;
     dogen::relational::tracing::activity activity_;
+    std::string logging_impact_;
+    std::string tracing_impact_;
 };
 
 }

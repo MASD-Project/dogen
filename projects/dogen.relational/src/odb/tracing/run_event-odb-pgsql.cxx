@@ -55,7 +55,9 @@ namespace odb
     pgsql::int4_oid,
     pgsql::text_oid,
     pgsql::text_oid,
-    pgsql::int4_oid
+    pgsql::int4_oid,
+    pgsql::text_oid,
+    pgsql::text_oid
   };
 
   const unsigned int access::object_traits_impl< ::dogen::relational::tracing::run_event, id_pgsql >::
@@ -72,6 +74,8 @@ namespace odb
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::int4_oid,
+    pgsql::text_oid,
+    pgsql::text_oid,
     pgsql::text_oid,
     pgsql::int4_oid
   };
@@ -145,6 +149,22 @@ namespace odb
     //
     t[5UL] = 0;
 
+    // logging_impact_
+    //
+    if (t[6UL])
+    {
+      i.logging_impact_value.capacity (i.logging_impact_size);
+      grew = true;
+    }
+
+    // tracing_impact_
+    //
+    if (t[7UL])
+    {
+      i.tracing_impact_value.capacity (i.tracing_impact_size);
+      grew = true;
+    }
+
     return grew;
   }
 
@@ -195,6 +215,24 @@ namespace odb
     b[n].type = pgsql::bind::integer;
     b[n].buffer = &i.activity_value;
     b[n].is_null = &i.activity_null;
+    n++;
+
+    // logging_impact_
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.logging_impact_value.data ();
+    b[n].capacity = i.logging_impact_value.capacity ();
+    b[n].size = &i.logging_impact_size;
+    b[n].is_null = &i.logging_impact_null;
+    n++;
+
+    // tracing_impact_
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.tracing_impact_value.data ();
+    b[n].capacity = i.tracing_impact_value.capacity ();
+    b[n].size = &i.tracing_impact_size;
+    b[n].is_null = &i.tracing_impact_null;
     n++;
   }
 
@@ -296,6 +334,48 @@ namespace odb
       i.activity_null = is_null;
     }
 
+    // logging_impact_
+    //
+    {
+      ::std::string const& v =
+        o.logging_impact ();
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.logging_impact_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.logging_impact_value,
+        size,
+        is_null,
+        v);
+      i.logging_impact_null = is_null;
+      i.logging_impact_size = size;
+      grew = grew || (cap != i.logging_impact_value.capacity ());
+    }
+
+    // tracing_impact_
+    //
+    {
+      ::std::string const& v =
+        o.tracing_impact ();
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.tracing_impact_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.tracing_impact_value,
+        size,
+        is_null,
+        v);
+      i.tracing_impact_null = is_null;
+      i.tracing_impact_size = size;
+      grew = grew || (cap != i.tracing_impact_value.capacity ());
+    }
+
     return grew;
   }
 
@@ -375,6 +455,36 @@ namespace odb
 
       o.activity (v);
     }
+
+    // logging_impact_
+    //
+    {
+      ::std::string& v =
+        o.logging_impact ();
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.logging_impact_value,
+        i.logging_impact_size,
+        i.logging_impact_null);
+    }
+
+    // tracing_impact_
+    //
+    {
+      ::std::string& v =
+        o.tracing_impact ();
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.tracing_impact_value,
+        i.tracing_impact_size,
+        i.tracing_impact_null);
+    }
   }
 
   void access::object_traits_impl< ::dogen::relational::tracing::run_event, id_pgsql >::
@@ -401,9 +511,11 @@ namespace odb
   "\"EVENT_TYPE\", "
   "\"VERSION\", "
   "\"PAYLOAD\", "
-  "\"ACTIVITY\") "
+  "\"ACTIVITY\", "
+  "\"LOGGING_IMPACT\", "
+  "\"TRACING_IMPACT\") "
   "VALUES "
-  "($1, $2, $3, $4, to_jsonb($5::jsonb), $6)";
+  "($1, $2, $3, $4, to_jsonb($5::jsonb), $6, $7, $8)";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::run_event, id_pgsql >::find_statement[] =
   "SELECT "
@@ -412,7 +524,9 @@ namespace odb
   "\"DOGEN\".\"RUN_EVENT\".\"EVENT_TYPE\", "
   "\"DOGEN\".\"RUN_EVENT\".\"VERSION\", "
   "from_jsonb(\"DOGEN\".\"RUN_EVENT\".\"PAYLOAD\"), "
-  "\"DOGEN\".\"RUN_EVENT\".\"ACTIVITY\" "
+  "\"DOGEN\".\"RUN_EVENT\".\"ACTIVITY\", "
+  "\"DOGEN\".\"RUN_EVENT\".\"LOGGING_IMPACT\", "
+  "\"DOGEN\".\"RUN_EVENT\".\"TRACING_IMPACT\" "
   "FROM \"DOGEN\".\"RUN_EVENT\" "
   "WHERE \"DOGEN\".\"RUN_EVENT\".\"RUN_ID\"=$1 AND \"DOGEN\".\"RUN_EVENT\".\"EVENT_TYPE\"=$2";
 
@@ -422,8 +536,10 @@ namespace odb
   "\"TIMESTAMP\"=$1, "
   "\"VERSION\"=$2, "
   "\"PAYLOAD\"=to_jsonb($3::jsonb), "
-  "\"ACTIVITY\"=$4 "
-  "WHERE \"RUN_ID\"=$5 AND \"EVENT_TYPE\"=$6";
+  "\"ACTIVITY\"=$4, "
+  "\"LOGGING_IMPACT\"=$5, "
+  "\"TRACING_IMPACT\"=$6 "
+  "WHERE \"RUN_ID\"=$7 AND \"EVENT_TYPE\"=$8";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::run_event, id_pgsql >::erase_statement[] =
   "DELETE FROM \"DOGEN\".\"RUN_EVENT\" "
@@ -436,7 +552,9 @@ namespace odb
   "\"DOGEN\".\"RUN_EVENT\".\"EVENT_TYPE\", "
   "\"DOGEN\".\"RUN_EVENT\".\"VERSION\", "
   "from_jsonb(\"DOGEN\".\"RUN_EVENT\".\"PAYLOAD\"), "
-  "\"DOGEN\".\"RUN_EVENT\".\"ACTIVITY\" "
+  "\"DOGEN\".\"RUN_EVENT\".\"ACTIVITY\", "
+  "\"DOGEN\".\"RUN_EVENT\".\"LOGGING_IMPACT\", "
+  "\"DOGEN\".\"RUN_EVENT\".\"TRACING_IMPACT\" "
   "FROM \"DOGEN\".\"RUN_EVENT\"";
 
   const char access::object_traits_impl< ::dogen::relational::tracing::run_event, id_pgsql >::erase_query_statement[] =
@@ -862,6 +980,8 @@ namespace odb
                       "  \"VERSION\" TEXT NOT NULL,\n"
                       "  \"PAYLOAD\" JSONB NOT NULL,\n"
                       "  \"ACTIVITY\" INTEGER NOT NULL,\n"
+                      "  \"LOGGING_IMPACT\" TEXT NOT NULL,\n"
+                      "  \"TRACING_IMPACT\" TEXT NOT NULL,\n"
                       "  PRIMARY KEY (\"RUN_ID\",\n"
                       "               \"EVENT_TYPE\"))");
           return false;

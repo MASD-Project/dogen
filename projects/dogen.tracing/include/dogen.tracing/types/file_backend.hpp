@@ -42,8 +42,9 @@ public:
     virtual ~file_backend() noexcept { }
 
 public:
-    file_backend(const tracing_configuration& cfg,
-        const std::string& run_id);
+    file_backend(const tracing_configuration& cfg, const std::string& version,
+        const std::string& run_id, const std::string& logging_impact,
+        const std::string& tracing_impact);
 
 public:
     virtual std::string id() const override;

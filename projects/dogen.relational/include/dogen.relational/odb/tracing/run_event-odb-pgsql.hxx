@@ -160,6 +160,30 @@ namespace odb
     activity_type_;
 
     static const activity_type_ activity;
+
+    // logging_impact
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    logging_impact_type_;
+
+    static const logging_impact_type_ logging_impact;
+
+    // tracing_impact
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    tracing_impact_type_;
+
+    static const tracing_impact_type_ tracing_impact;
   };
 
   template <typename A>
@@ -205,6 +229,16 @@ namespace odb
   activity (A::table_name, "\"ACTIVITY\"", 0);
 
   template <typename A>
+  const typename query_columns< ::dogen::relational::tracing::run_event, id_pgsql, A >::logging_impact_type_
+  query_columns< ::dogen::relational::tracing::run_event, id_pgsql, A >::
+  logging_impact (A::table_name, "\"LOGGING_IMPACT\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::dogen::relational::tracing::run_event, id_pgsql, A >::tracing_impact_type_
+  query_columns< ::dogen::relational::tracing::run_event, id_pgsql, A >::
+  tracing_impact (A::table_name, "\"TRACING_IMPACT\"", 0);
+
+  template <typename A>
   struct pointer_query_columns< ::dogen::relational::tracing::run_event, id_pgsql, A >:
     query_columns< ::dogen::relational::tracing::run_event, id_pgsql, A >
   {
@@ -248,6 +282,18 @@ namespace odb
       int activity_value;
       bool activity_null;
 
+      // logging_impact_
+      //
+      details::buffer logging_impact_value;
+      std::size_t logging_impact_size;
+      bool logging_impact_null;
+
+      // tracing_impact_
+      //
+      details::buffer tracing_impact_value;
+      std::size_t tracing_impact_size;
+      bool tracing_impact_null;
+
       std::size_t version;
     };
 
@@ -287,7 +333,7 @@ namespace odb
 
     typedef pgsql::query_base query_base_type;
 
-    static const std::size_t column_count = 6UL;
+    static const std::size_t column_count = 8UL;
     static const std::size_t id_column_count = 2UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;

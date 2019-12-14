@@ -42,8 +42,9 @@ namespace dogen::relational::tracing {
 class relational_backend : public dogen::tracing::backend {
 public:
     relational_backend(const tracing_configuration& tcfg,
-        const database_configuration& dbcfg,
-        const std::string& run_id);
+        const database_configuration& dbcfg, const std::string& version,
+        const std::string& run_id, const std::string& logging_impact,
+        const std::string& tracing_impact);
 
 public:
     virtual ~relational_backend() noexcept { }
@@ -98,7 +99,10 @@ public:
 private:
     const tracing_configuration tracing_configuration_;
     const database_configuration database_configuration_;
+    const std::string version_;
     const std::string run_id_;
+    const std::string logging_impact_;
+    const std::string tracing_impact_;
     boost::shared_ptr<odb::pgsql::database> database_;
 
 };
