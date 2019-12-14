@@ -89,3 +89,11 @@ select jsonb_pretty("CONFIGURATION") from "RUN";
 
 --
 with test as (select distinct (jsonb_array_elements("CONFIGURATION"->'all')->'archetype')::text as archetype from "RUN") select * from test where archetype like '%cpp%'
+
+--
+-- get all run events
+--
+select "TIMESTAMP", "RUN_ID", cast("PAYLOAD" as varchar(20)),
+(CASE WHEN "EVENT_TYPE" = 1 THEN  'START' ELSE 'END' END) as "EVENT_TYPE"
+from "RUN_EVENT"
+order by "TIMESTAMP";
