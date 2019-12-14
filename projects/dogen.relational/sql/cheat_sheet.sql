@@ -93,12 +93,14 @@ with test as (select distinct (jsonb_array_elements("CONFIGURATION"->'all')->'ar
 --
 -- get all run events
 --
-select "TIMESTAMP", "RUN_ID", cast("PAYLOAD" as varchar(20)),
+select "VERSION", "TIMESTAMP", "RUN_ID", cast("PAYLOAD" as varchar(100)), "LOGGING_IMPACT", "TRACING_IMPACT",
 (CASE WHEN "EVENT_TYPE" = 1 THEN  'START' ELSE 'END' END) as "EVENT_TYPE"
 from "RUN_EVENT"
 order by "TIMESTAMP";
 
-select "TIMESTAMP", "RUN_ID", "VERSION", "ACTIVITY", "LOGGING_IMPACT", "TRACING_IMPACT", cast("PAYLOAD" as varchar(20)), (CASE WHEN "EVENT_TYPE" = 1 THEN  'START' ELSE 'END' END) as "EVENT_TYPE" from "RUN_EVENT" order by "TIMESTAMP";
+select "TIMESTAMP", "RUN_ID", "VERSION", "ACTIVITY", "LOGGING_IMPACT", "TRACING_IMPACT",
+cast("PAYLOAD" as varchar(50)), (CASE WHEN "EVENT_TYPE" = 1 THEN  'START' ELSE 'END' END) as "EVENT_TYPE"
+from "RUN_EVENT" order by "TIMESTAMP";
 
 --
 -- Runs by time
@@ -132,8 +134,14 @@ select "TIMESTAMP", "TRANSFORM_ID", (CASE WHEN "TRANSFORM_TYPE" = 1 THEN  'CHAIN
 (CASE WHEN "EVENT_TYPE" = 1 THEN  'START' ELSE 'END' END), "PARENT_TRANSFORM", "TRANSFORM_INSTANCE_ID",
 cast("PAYLOAD" as varchar(20)), "PAYLOAD"->'__type__' "PAYLOAD_TYPE"
 from "TRANSFORM_EVENT"
-where "PARENT_TRANSFORM" = 'cb25de94-fe06-4ec0-bb8d-eb7928066221'
+where "PARENT_TRANSFORM" = 'cb25de94-fe06-4ec0-bb8d-eb7928066221' --
 order by "TIMESTAMP" asc;
+
+select jsonb_pretty("PAYLOAD")
+from "TRANSFORM_EVENT"
+where "TRANSFORM_INSTANCE_ID" = 'd090c622-9c55-4bac-ac97-61ed2e35f7d1'
+and "EVENT_TYPE" = 2;
+
 
 --
 -- Navigating into transforms
@@ -153,20 +161,28 @@ select "TIMESTAMP", "TRANSFORM_ID", (CASE WHEN "TRANSFORM_TYPE" = 1 THEN  'CHAIN
 "PARENT_TRANSFORM", "TRANSFORM_INSTANCE_ID", jsonb_pretty("PAYLOAD"),
 "PAYLOAD"->'__type__' "PAYLOAD_TYPE"
 from "TRANSFORM_EVENT"
-where "TRANSFORM_INSTANCE_ID" = 'b996c91c-de1a-4bc0-9f97-504cb89232bf' and "EVENT_TYPE" = 1
+where "TRANSFORM_INSTANCE_ID" = '27b9f4eb-a655-4fbf-83d7-c158ac8475b9' and "EVENT_TYPE" = 2
 order by "TIMESTAMP" asc;
 
 
 --
 -- Get IDs for objects in diagram
 --
-select crap->'id'::text "ID", crap->'type'::text "TYPE"
+select object->'id'::text "ID", object->'type'::text "TYPE"
 from (
-     select jsonb_array_elements("PAYLOAD"->'layers'->0->'objects') as crap
+     select jsonb_array_elements("PAYLOAD"->'layers'->0->'objects') as object
      from "TRANSFORM_EVENT"
-     where "TRANSFORM_INSTANCE_ID" = 'b996c91c-de1a-4bc0-9f97-504cb89232bf' and "EVENT_TYPE" = 1
+     where "TRANSFORM_INSTANCE_ID" = '954a4410-1481-48c7-8a11-5e0608ba3cff' and "EVENT_TYPE" = 1
+     and object->'id'::text = 'O0'
      order by "TIMESTAMP" asc
 ) as foo;
+
+
+select jsonb_array_elements("PAYLOAD"->'layers'->0->'objects')::text
+from "TRANSFORM_EVENT"
+where "TRANSFORM_INSTANCE_ID" = '954a4410-1481-48c7-8a11-5e0608ba3cff' and "EVENT_TYPE" = 1
+order by "TIMESTAMP" asc;
+
 
 --
 -- Get logging
@@ -178,6 +194,14 @@ select * from "LOG_EVENT" limit 30;
 --
 select "TIMESTAMP", "COMPONENT",  "SEVERITY", cast("MESSAGE" as varchar(100))
 from "LOG_EVENT"
-where "TIMESTAMP" between ' 2019-12-14 20:44:07.77754' and '2019-12-14 20:45:11.619425'
+where "TIMESTAMP" between '2019-12-14 20:44:29.017696' and '2019-12-14 20:44:32.266955'
 and "RUN_ID" = 'd92263a0-4965-4a3e-803d-1e2851e96fcc'
+and "COMPONENT" like '%injection%'
 order by "TIMESTAMP";
+
+--
+--
+--
+select "TIMESTAMP"
+from "TRANSFORM_EVENT"
+where  "TRANSFORM_INSTANCE_ID" = '954a4410-1481-48c7-8a11-5e0608ba3cff';
