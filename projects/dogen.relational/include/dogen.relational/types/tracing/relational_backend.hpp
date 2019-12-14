@@ -26,6 +26,7 @@
 #endif
 
 #include <string>
+#include <boost/shared_ptr.hpp>
 #include <odb/database.hxx>
 #include <odb/transaction.hxx>
 #include <odb/pgsql/database.hxx>
