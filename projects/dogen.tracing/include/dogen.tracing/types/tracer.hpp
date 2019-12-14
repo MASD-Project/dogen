@@ -68,8 +68,6 @@ private:
         return s.str();
     }
 
-    static std::string generate_guid();
-
     std::string last_transform_instance_id() const;
     void push_parent_id(const std::string& id) const;
     void pop_parent_id() const;

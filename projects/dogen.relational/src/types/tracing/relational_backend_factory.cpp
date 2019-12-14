@@ -52,8 +52,7 @@ dogen::tracing_backend relational_backend_factory::tracing_backend() const {
 
 boost::shared_ptr<dogen::tracing::backend> relational_backend_factory::
 make(const configuration& cfg, const std::string& version,
-    const std::string& run_id, const std::string& activity,
-    const std::string& logging_impact,
+    const std::string& activity, const std::string& logging_impact,
     const std::string& tracing_impact) const {
     BOOST_LOG_SEV(lg, debug) << "Creating relational backend.";
 
@@ -77,7 +76,7 @@ make(const configuration& cfg, const std::string& version,
     }
 
     return boost::make_shared<relational_backend>(*tcfg, *dbcfg, version,
-        run_id, activity, logging_impact, tracing_impact);
+        tcfg->run_id(), activity, logging_impact, tracing_impact);
 }
 
 }

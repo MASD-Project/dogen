@@ -81,12 +81,16 @@ void log_backend::consume(const boost::log::record_view& rv,
     t.commit();
 }
 
-void create_relational_log_backend(const std::string& run_id,
-    const database_configuration& dbcfg,
+void create_relational_log_backend(const configuration& cfg,
     const utility::log::severity_level severity) {
+
+    if (!cfg.database() || !cfg.tracing())
+        return;
+
     using namespace boost::log;
 
-    auto backend(boost::make_shared<log_backend>(run_id, dbcfg));
+    auto backend(boost::make_shared<log_backend>(
+            cfg.tracing()->run_id(), *cfg.database()));
 
     typedef sinks::synchronous_sink<log_backend> sink_type;
     auto sink(boost::make_shared<sink_type>(backend));

@@ -39,7 +39,7 @@
 #include <odb/pgsql/database.hxx>
 #include <odb/schema-catalog.hxx>
 #include "dogen.utility/types/log/severity_level.hpp"
-#include "dogen/types/database_configuration.hpp"
+#include "dogen/types/configuration.hpp"
 
 namespace dogen::relational::tracing {
 
@@ -58,8 +58,7 @@ private:
     boost::shared_ptr<odb::pgsql::database> database_;
 };
 
-void create_relational_log_backend(const std::string& run_id,
-    const database_configuration& dbcfg,
+void create_relational_log_backend(const configuration& cfg,
     const utility::log::severity_level severity);
 
 }

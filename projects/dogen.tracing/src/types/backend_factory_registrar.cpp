@@ -101,23 +101,22 @@ void backend_factory_registrar::validate() const {
 }
 
 const boost::shared_ptr<backend>
-backend_factory_registrar::try_make_backend(const configuration& cfg,
-    const std::string& run_id, const std::string& activity) {
-    bool found(false);
-    boost::shared_ptr<backend> r;
-
+backend_factory_registrar::
+try_make_backend(const configuration& cfg, const std::string& activity) {
     /*
      * Use the factories to generate all backends for this
      * configuration. Note that we only expect one to be generated, so
      * throw if more than one show up.
      */
+    bool found(false);
+    boost::shared_ptr<backend> r;
     const auto v(DOGEN_VERSION);
     const auto li(get_logging_impact(cfg.tracing()));
     const auto ti(get_tracing_impact(cfg.tracing()));
     for (const auto& pair : backend_factories_) {
         const auto& f(*pair.second);
         BOOST_LOG_SEV(lg, debug) << "Trying to generate a backend: " << f.id();
-        const auto b(f.make(cfg, v, run_id, activity, li, ti));
+        const auto b(f.make(cfg, v, activity, li, ti));
         if (!b) {
             BOOST_LOG_SEV(lg, debug) << "Factory did not generate a backend.";
             continue;

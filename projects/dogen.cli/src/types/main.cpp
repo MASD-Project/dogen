@@ -117,8 +117,8 @@ int execute_cli_workflow(const int argc, const char* argv[],
 
     if (cfg.api().database() && cfg.logging()) {
         const auto sl(to_severity_level(cfg.logging()->severity()));
-        dogen::relational::tracing::create_relational_log_backend("AAA",
-            *cfg.api().database(), sl);
+        using dogen::relational::tracing::create_relational_log_backend;
+        create_relational_log_backend(cfg.api(), sl);
     }
 
     /*

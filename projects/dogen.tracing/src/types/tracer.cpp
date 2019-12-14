@@ -18,12 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/uuid/uuid.hpp>
 #include <boost/make_shared.hpp>
-#include <boost/uuid/uuid_io.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include <boost/uuid/uuid_generators.hpp>
 #include "dogen/config.hpp"
 #include "dogen/io/tracing_backend_io.hpp"
 #include "dogen/io/tracing_configuration_io.hpp"
@@ -51,12 +48,7 @@ backend_factory_registrar& tracer::registrar() {
 }
 
 tracer::tracer(const configuration& cfg, const std::string& activity)
-    : backend_(registrar_.try_make_backend(cfg, generate_guid(), activity)) {}
-
-std::string tracer::generate_guid() {
-    const auto uuid = boost::uuids::random_generator()();
-    return boost::uuids::to_string(uuid);
-}
+    : backend_(registrar_.try_make_backend(cfg, activity)) {}
 
 std::string tracer::last_transform_instance_id() const {
     if (parent_id_.empty()) {
