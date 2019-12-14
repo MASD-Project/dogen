@@ -474,7 +474,7 @@
         <dia:point val="-19,-70"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-19.05,-70.05;-2.28,-61.55"/>
+        <dia:rectangle val="-19.05,-70.05;-2.28,-60.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-19,-70"/>
@@ -483,7 +483,7 @@
         <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.4000000000000004"/>
+        <dia:real val="9.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#tracing_configuration#</dia:string>
@@ -731,6 +731,29 @@ size limitations.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Which backend to use for tracing.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#run_id#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Identifier to use for the present run.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1638,7 +1661,7 @@ size limitations.#</dia:string>
         <dia:point val="-18.48,-58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-19.23,-61.65;-10.465,-57.2"/>
+        <dia:rectangle val="-19.23,-60.85;-10.465,-57.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1647,7 +1670,7 @@ size limitations.#</dia:string>
         <dia:point val="-18.48,-58"/>
         <dia:point val="-18.48,-60"/>
         <dia:point val="-10.665,-60"/>
-        <dia:point val="-10.665,-61.6"/>
+        <dia:point val="-10.665,-60.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4673,7 +4696,7 @@ ELEMENT_NAME and ATTRIBUTE_NAME can be left blank.#</dia:string>
         <dia:point val="-1,-79"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-1.05,-79.05;7.635,-73.75"/>
+        <dia:rectangle val="-1.05,-79.05;7.635,-74.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-1,-79"/>
@@ -4682,7 +4705,7 @@ ELEMENT_NAME and ATTRIBUTE_NAME can be left blank.#</dia:string>
         <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#tracing_backend#</dia:string>
@@ -4772,29 +4795,6 @@ ELEMENT_NAME and ATTRIBUTE_NAME can be left blank.#</dia:string>
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#dev_null#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Write tracing information to /dev/null.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#file#</dia:string>
@@ -4889,7 +4889,7 @@ ELEMENT_NAME and ATTRIBUTE_NAME can be left blank.#</dia:string>
         <dia:point val="-2.33,-70"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-3.08,-73.85;3.4925,-69.2"/>
+        <dia:rectangle val="-3.08,-74.65;3.4925,-69.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4898,7 +4898,7 @@ ELEMENT_NAME and ATTRIBUTE_NAME can be left blank.#</dia:string>
         <dia:point val="-2.33,-70"/>
         <dia:point val="-2.33,-72"/>
         <dia:point val="3.2925,-72"/>
-        <dia:point val="3.2925,-73.8"/>
+        <dia:point val="3.2925,-74.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

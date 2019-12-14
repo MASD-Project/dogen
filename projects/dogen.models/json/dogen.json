@@ -115,6 +115,11 @@
           "name": "backend",
           "type": "tracing_backend",
           "documentation": "Which backend to use for tracing.\n"
+        },
+        {
+          "name": "run_id",
+          "type": "std::string",
+          "documentation": "Identifier to use for the present run.\n"
         }
       ]
     },
@@ -348,11 +353,6 @@
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "dev_null",
-          "type": "",
-          "documentation": "Write tracing information to /dev/null.\n"
-        },
         {
           "name": "file",
           "type": "",
