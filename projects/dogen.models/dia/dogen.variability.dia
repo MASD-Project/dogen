@@ -68,7 +68,7 @@
         <dia:point val="-119,-42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-119.05,-42.05;-91.1,-20.25"/>
+        <dia:rectangle val="-119.05,-42.05;-91.1,-21.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="27.850000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="21.700000000000003"/>
+        <dia:real val="20.900000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -111,7 +111,6 @@ yet imposing some constraints on the shape of the data.
 #DOGEN masd.injection.reference=dogen.profiles
 #DOGEN masd.injection.reference=dogen.archetypes
 #DOGEN masd.injection.reference=dogen.tracing
-#DOGEN masd.injection.reference=dogen.relational
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
