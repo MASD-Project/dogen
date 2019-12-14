@@ -21,6 +21,9 @@
 #include <iomanip>
 #include <iostream>
 #include <string_view>
+#include <boost/uuid/uuid.hpp>
+#include <boost/uuid/uuid_io.hpp>
+#include <boost/uuid/uuid_generators.hpp>
 #include <boost/program_options.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/operations.hpp>
@@ -79,6 +82,7 @@ const std::string tracing_default_directory("tracing");
 const std::string tracing_backend_arg("tracing-backend");
 const std::string tracing_backend_file("file");
 const std::string tracing_backend_database("relational");
+const std::string tracing_run_id_arg("tracing-run-id");
 
 const std::string reporting_enabled_arg("reporting-enabled");
 const std::string reporting_style_arg("reporting-style");
@@ -183,7 +187,9 @@ options_description make_top_level_visible_options_description() {
             " metrics. Valid values: plain, org-mode, graphviz. "
             "Defaults to org-mode.")
         ("tracing-backend", value<std::string>(),
-            "Backend to use for tracing. Valid values: file, relational.");
+            "Backend to use for tracing. Valid values: file, relational.")
+        ("tracing-run-id", value<std::string>(),
+            "Run ID to use to identify the tracing session.");
     r.add(tod);
 
     options_description orod("Reporting");
@@ -473,6 +479,12 @@ read_tracing_configuration(const variables_map& vm,
         else
             BOOST_THROW_EXCEPTION(parser_exception(invalid_backend + s));
     }
+
+    if (!vm.count(tracing_run_id_arg)) {
+        const auto uuid = boost::uuids::random_generator()();
+        r.run_id(boost::uuids::to_string(uuid));
+    } else
+        r.run_id(vm[tracing_run_id_arg].as<std::string>());
 
     const auto tracing_dir(byproduct_dir / tracing_default_directory);
     r.output_directory(tracing_dir);
