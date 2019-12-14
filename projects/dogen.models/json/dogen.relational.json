@@ -195,6 +195,10 @@
           "type": "std::string"
         },
         {
+          "name": "severity",
+          "type": "std::string"
+        },
+        {
           "name": "message",
           "type": "std::string"
         }
@@ -300,6 +304,13 @@
           "type": "event_type"
         }
       ]
+    },
+    {
+      "name": "tracing::log_backend",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
