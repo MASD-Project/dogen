@@ -12,30 +12,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-12-14 Sat 15:30]
+#+CAPTION: Clock summary at [2019-12-14 Sat 18:32]
 | <75>                                                 |         |       |       |       |
 | Headline                                             | Time    |       |       |     % |
 |------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                         | *59:29* |       |       | 100.0 |
+| *Total time*                                         | *62:28* |       |       | 100.0 |
 |------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                              | 59:29   |       |       | 100.0 |
-| Active                                               |         | 59:29 |       | 100.0 |
-| Edit release notes for previous sprint               |         |       | 11:24 |  19.2 |
-| Create a demo and presentation for previous sprint   |         |       |  2:31 |   4.2 |
-| Sprint and product backlog grooming                  |         |       |  4:00 |   6.7 |
+| Stories                                              | 62:28   |       |       | 100.0 |
+| Active                                               |         | 62:28 |       | 100.0 |
+| Edit release notes for previous sprint               |         |       | 11:24 |  18.2 |
+| Create a demo and presentation for previous sprint   |         |       |  2:31 |   4.0 |
+| Sprint and product backlog grooming                  |         |       |  4:00 |   6.4 |
 | Fix OSX build errors                                 |         |       |  0:25 |   0.7 |
-| Fix broken build due to incorrect postgres library   |         |       |  2:31 |   4.2 |
-| Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   2.2 |
+| Fix broken build due to incorrect postgres library   |         |       |  2:31 |   4.0 |
+| Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   2.1 |
 | Create a profile called =untested=                   |         |       |  0:17 |   0.5 |
-| Remove =odb_properties= in element properties        |         |       |  2:36 |   4.4 |
+| Remove =odb_properties= in element properties        |         |       |  2:36 |   4.2 |
 | Allow non-throwing casts for enums                   |         |       |  0:41 |   1.1 |
-| Add type overrides to primitives                     |         |       |  8:55 |  15.0 |
-| Create a string-based tracing backend interface      |         |       |  5:22 |   9.0 |
-| Create a tracing registrar                           |         |       |  1:10 |   2.0 |
-| Move member variable name to assets                  |         |       |  0:09 |   0.3 |
-| Create a transform instance ID property              |         |       |  0:31 |   0.9 |
+| Add type overrides to primitives                     |         |       |  8:55 |  14.3 |
+| Create a string-based tracing backend interface      |         |       |  5:22 |   8.6 |
+| Create a tracing registrar                           |         |       |  1:10 |   1.9 |
+| Move member variable name to assets                  |         |       |  0:09 |   0.2 |
+| Create a transform instance ID property              |         |       |  0:31 |   0.8 |
 | Laptop issues                                        |         |       |  0:18 |   0.5 |
-| Add relational tracing support                       |         |       | 16:58 |  28.5 |
+| Add relational tracing support                       |         |       | 19:57 |  31.9 |
 | Nightly code coverage is not being reported          |         |       |  0:23 |   0.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -691,6 +691,8 @@ Time spent sorting out laptop.
 
 *** STARTED Add relational tracing support                            :story:
     :LOGBOOK:
+    CLOCK: [2019-12-14 Sat 16:30]--[2019-12-14 Sat 18:31] =>  2:01
+    CLOCK: [2019-12-14 Sat 15:31]--[2019-12-14 Sat 16:29] =>  0:58
     CLOCK: [2019-12-14 Sat 14:45]--[2019-12-14 Sat 15:30] =>  0:45
     CLOCK: [2019-12-13 Fri 22:42]--[2019-12-13 Fri 23:05] =>  0:23
     CLOCK: [2019-12-13 Fri 20:36]--[2019-12-13 Fri 22:41] =>  2:05
