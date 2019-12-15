@@ -50,9 +50,6 @@ endif()
 target_link_libraries(${lib_target_name}
     dogen.archetypes.lib
     dogen.variability.lib
-    dogen.tracing.lib
-    dogen.lib
-    dogen.utility.lib
     dogen.dia.lib
     dogen.extraction.lib
     dogen.injection.lib
@@ -63,8 +60,12 @@ target_link_libraries(${lib_target_name}
     dogen.generation.csharp.lib
     dogen.generation.lib
     ${relational_lib}
-    ${Boost_LIBRARIES}
+    dogen.lib
+    dogen.tracing.lib
+    dogen.utility.lib
+    Boost::serialization
     ${LIBXML2_LIBRARIES}
+    ${Boost_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES})
 
 install(TARGETS ${lib_target_name}
