@@ -91,12 +91,15 @@ select jsonb_pretty("CONFIGURATION") from "RUN";
 with test as (select distinct (jsonb_array_elements("CONFIGURATION"->'all')->'archetype')::text as archetype from "RUN") select * from test where archetype like '%cpp%'
 
 --
--- get all run events
+-- get all run events (all runs).
 --
-select "VERSION", "TIMESTAMP", "RUN_ID", cast("PAYLOAD" as varchar(100)), "LOGGING_IMPACT", "TRACING_IMPACT",
+select "VERSION", "TIMESTAMP", "RUN_ID", "LOGGING_IMPACT", "TRACING_IMPACT",
 (CASE WHEN "EVENT_TYPE" = 1 THEN  'START' ELSE 'END' END) as "EVENT_TYPE"
 from "RUN_EVENT"
+where "EVENT_TYPE" = 1
 order by "TIMESTAMP";
+
+
 
 select "TIMESTAMP", "RUN_ID", "VERSION", "ACTIVITY", "LOGGING_IMPACT", "TRACING_IMPACT",
 cast("PAYLOAD" as varchar(50)), (CASE WHEN "EVENT_TYPE" = 1 THEN  'START' ELSE 'END' END) as "EVENT_TYPE"
@@ -105,7 +108,10 @@ from "RUN_EVENT" order by "TIMESTAMP";
 --
 -- Runs by time
 --
-select "TIMESTAMP", "RUN_ID", "ACTIVITY" from "RUN_EVENT" where "EVENT_TYPE" = 1 order by "TIMESTAMP";
+select "TIMESTAMP", "RUN_ID", "ACTIVITY"
+from "RUN_EVENT"
+where "EVENT_TYPE" = 1
+order by "TIMESTAMP";
 
 --
 -- All transforms in a run
@@ -188,6 +194,13 @@ order by "TIMESTAMP" asc;
 -- Get logging
 --
 select * from "LOG_EVENT" limit 30;
+
+-- log for a specific run
+select * from "LOG_EVENT"
+where "RUN_ID" = 'd9dc87fe-6ce2-4259-b780-b1b9c9d33dd9'
+order by "TIMESTAMP" asc limit 20;
+
+
 
 --
 -- Log events for an interval
