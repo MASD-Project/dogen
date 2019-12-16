@@ -114,8 +114,6 @@ int execute_cli_workflow(const int argc, const char* argv[],
      */
     const auto& cfg(*ocfg);
     slm.initialise(cfg.logging());
-    BOOST_LOG_SEV(lg, info) << "Command line arguments: " << args;
-    BOOST_LOG_SEV(lg, debug) << "Configuration: " << cfg;
 
 #ifdef DOGEN_HAVE_RELATIONAL_MODEL
     if (cfg.api().database() && cfg.logging()) {
@@ -124,6 +122,12 @@ int execute_cli_workflow(const int argc, const char* argv[],
         create_relational_log_backend(cfg.api(), sl);
     }
 #endif
+
+    /*
+     * Log the configuration and command line arguments.
+     */
+    BOOST_LOG_SEV(lg, info) << "Command line arguments: " << args;
+    BOOST_LOG_SEV(lg, debug) << "Configuration: " << cfg;
 
     /*
      * Now perform legacy initialisation. It uses logging so it must
