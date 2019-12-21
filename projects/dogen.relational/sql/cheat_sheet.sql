@@ -218,3 +218,20 @@ order by "TIMESTAMP";
 select "TIMESTAMP"
 from "TRANSFORM_EVENT"
 where  "TRANSFORM_INSTANCE_ID" = '954a4410-1481-48c7-8a11-5e0608ba3cff';
+
+select * from runs();
+select * from last_run();
+select last_run_id();
+select * from peek_log('4a1e5d10-4179-4e42-b3d1-e31e01baa21d', 10);
+
+
+
+truncate "LOG_EVENT";
+truncate "RUN_EVENT";
+truncate "TRANSFORM_EVENT";
+
+
+select "RUN_ID", jsonb_pretty(substring("MESSAGE", 25)::jsonb->2) file_name
+from "LOG_EVENT"
+where "COMPONENT" = 'main' and "SEVERITY" = 'INFO';
+and "RUN_ID" = '4a1e5d10-4179-4e42-b3d1-e31e01baa21d';

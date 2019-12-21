@@ -12,30 +12,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-12-16 Mon 19:27]
+#+CAPTION: Clock summary at [2019-12-21 Sat 14:46]
 | <75>                                                 |         |       |       |       |
 | Headline                                             | Time    |       |       |     % |
 |------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                         | *65:47* |       |       | 100.0 |
+| *Total time*                                         | *66:54* |       |       | 100.0 |
 |------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                              | 65:47   |       |       | 100.0 |
-| Active                                               |         | 65:47 |       | 100.0 |
-| Edit release notes for previous sprint               |         |       | 11:24 |  17.3 |
+| Stories                                              | 66:54   |       |       | 100.0 |
+| Active                                               |         | 66:54 |       | 100.0 |
+| Edit release notes for previous sprint               |         |       | 11:24 |  17.0 |
 | Create a demo and presentation for previous sprint   |         |       |  2:31 |   3.8 |
-| Sprint and product backlog grooming                  |         |       |  4:00 |   6.1 |
+| Sprint and product backlog grooming                  |         |       |  4:00 |   6.0 |
 | Fix OSX build errors                                 |         |       |  0:25 |   0.6 |
 | Fix broken build due to incorrect postgres library   |         |       |  2:31 |   3.8 |
-| Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   2.0 |
+| Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   1.9 |
 | Create a profile called =untested=                   |         |       |  0:17 |   0.4 |
-| Remove =odb_properties= in element properties        |         |       |  2:36 |   4.0 |
+| Remove =odb_properties= in element properties        |         |       |  2:36 |   3.9 |
 | Allow non-throwing casts for enums                   |         |       |  0:41 |   1.0 |
-| Add type overrides to primitives                     |         |       |  8:55 |  13.6 |
-| Create a string-based tracing backend interface      |         |       |  5:22 |   8.2 |
-| Create a tracing registrar                           |         |       |  1:10 |   1.8 |
+| Add type overrides to primitives                     |         |       |  8:55 |  13.3 |
+| Create a string-based tracing backend interface      |         |       |  5:22 |   8.0 |
+| Create a tracing registrar                           |         |       |  1:10 |   1.7 |
 | Move member variable name to assets                  |         |       |  0:09 |   0.2 |
 | Create a transform instance ID property              |         |       |  0:31 |   0.8 |
-| Laptop issues                                        |         |       |  0:18 |   0.5 |
-| Add relational tracing support                       |         |       | 23:16 |  35.4 |
+| Laptop issues                                        |         |       |  0:18 |   0.4 |
+| Add relational tracing support                       |         |       | 24:23 |  36.4 |
 | Nightly code coverage is not being reported          |         |       |  0:23 |   0.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -691,6 +691,7 @@ Time spent sorting out laptop.
 
 *** STARTED Add relational tracing support                            :story:
     :LOGBOOK:
+    CLOCK: [2019-12-21 Sat 11:24]--[2019-12-21 Sat 12:31] =>  1:07
     CLOCK: [2019-12-16 Mon 17:42]--[2019-12-16 Mon 18:30] =>  0:48
     CLOCK: [2019-12-14 Sat 22:13]--[2019-12-14 Sat 22:25] =>  0:12
     CLOCK: [2019-12-14 Sat 21:40]--[2019-12-14 Sat 22:12] =>  0:32
@@ -823,6 +824,11 @@ Notes:
   helpers to build them.
 - we need some kind of "model tag" that tells us if its a model set,
   if its a injection model, etc.
+
+Links:
+
+- [[http://www.postgresqlforbeginners.com/2010/12/create-function-basic-anatomy.html][CREATE FUNCTION - basic anatomy]]
+- [[http://www.postgresqlforbeginners.com/2010/12/create-function-return-types.html][CREATE FUNCTION: return types]]
 
 Merged stories:
 

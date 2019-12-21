@@ -22,55 +22,48 @@
  * Returns all of the runs available.
  */
 create or replace function runs()
-    returns setof "RUN_EVENT" as $$
-begin
-    return query select "VERSION", "TIMESTAMP", "RUN_ID", "LOGGING_IMPACT", "TRACING_IMPACT"
+    returns table("VERSION" text, "TIMESTAMP" timestamp,
+        "RUN_ID" text, "LOGGING_IMPACT" text, "TRACING_IMPACT"text)
+as $$
+    select "RUN_EVENT"."VERSION", "RUN_EVENT"."TIMESTAMP", "RUN_EVENT"."RUN_ID",
+        "RUN_EVENT"."LOGGING_IMPACT", "RUN_EVENT"."TRACING_IMPACT"
         from "RUN_EVENT"
         where "EVENT_TYPE" = 1
         order by "TIMESTAMP" desc;
-end;
-$$ language 'plpgsql';
+$$ language 'sql';
 
 /**
  * Returns details of the last run.
  */
 create or replace function last_run()
-    returns setof "RUN_EVENT" as $$
-begin
-    return query select "VERSION", "TIMESTAMP", "RUN_ID", "LOGGING_IMPACT", "TRACING_IMPACT"
+    returns table("VERSION" text, "TIMESTAMP" timestamp,
+        "RUN_ID" text, "LOGGING_IMPACT" text, "TRACING_IMPACT"text)
+as $$
+    select "RUN_EVENT"."VERSION", "RUN_EVENT"."TIMESTAMP", "RUN_EVENT"."RUN_ID",
+        "RUN_EVENT"."LOGGING_IMPACT", "RUN_EVENT"."TRACING_IMPACT"
         from "RUN_EVENT"
         where "EVENT_TYPE" = 1
         order by "TIMESTAMP" desc limit 1;
-end;
-$$ language 'plpgsql';
+$$ language 'sql';
 
 /**
  * Returns the run_id of the last session.
  */
 create or replace function last_run_id()
     returns text as $$
-declare
-    l_run_id TEXT;
-begin
-    return query select "RUN_ID"
-        from "RUN_EVENT"
-        where "EVENT_TYPE" = 1
-        order by "TIMESTAMP" desc limit 1;
-end;
-$$ language 'plpgsql';
+    select "RUN_ID" from last_run();
+$$ language 'sql';
 
 /**
  * Returns the top few lines of a log for a given run.
  */
 create or replace function peek_log(in p_run_id text, in p_how_many int)
-returns setof "LOG_EVENT" as $$
-begin
-    return query select *
-        from "LOG_EVENT"
-        where "RUN_ID" = p_run_id
+    returns setof "LOG_EVENT" as $$
+    select *
+    from "LOG_EVENT"
+    where "RUN_ID" = p_run_id
     order by "TIMESTAMP" asc limit p_how_many;
-end;
-$$ language 'plpgsql';
+$$ language 'sql';
 
 /*
  *
