@@ -213,12 +213,13 @@ where  "TRANSFORM_INSTANCE_ID" = '954a4410-1481-48c7-8a11-5e0608ba3cff';
 select * from runs();
 select * from last_run();
 select last_run_id();
+select * from target_for_run();
 select * from target_for_run() where "FILE_NAME" like '%generation%';
 select * from peek_log('4a1e5d10-4179-4e42-b3d1-e31e01baa21d', 10);
-select * from transforms_for_run_id('b65d66c7-9952-43c8-a59a-20bcb413c390');
+select * from transforms_for_run_id('1e4f6480-03b4-4581-ae59-a4af4db27fb0');
 select * from peek_log('5ca899c4-6d48-4a07-ae93-d43cc0d9ac9b', 10);
 select * from target_for_run();
-select * from configuration_for_run_id('5ca899c4-6d48-4a07-ae93-d43cc0d9ac9b');
+select * from configuration_for_run_id('c2211d91-22e1-40bc-948c-aecd08c98285');
 
 select "RUN_ID", jsonb_pretty(substring("MESSAGE", 25)::jsonb->2) file_name
 from "LOG_EVENT"
@@ -231,11 +232,58 @@ from "LOG_EVENT"
 where "COMPONENT" = 'main' and "SEVERITY" = 'INFO';
 
 
+select x."TRANSFORM_ID", x."NAME"
+from (
+   select "TRANSFORM_ID",
+   jsonb_array_elements(
+       "PAYLOAD"->'serialization_elements'->'type_registrars')->1->'data'->'data'->'__parent_0__'->'name'->'qualified'->>'dot'
+   "NAME"
+   from "TRANSFORM_EVENT"
+   where "TRANSFORM_INSTANCE_ID" in (
+       select "TRANSFORM_INSTANCE_ID" from "TRANSFORM_EVENT"
+       where "RUN_ID" = '1e4f6480-03b4-4581-ae59-a4af4db27fb0'
+       and "PAYLOAD"->>'__type__' = 'dogen::assets::meta_model::model'
+   )
+) as x
+where x."NAME" = 'cpp_ref_impl.cpp_model.registrar';
+
+
+select x."TRANSFORM_ID", x."NAME", x."EVENT_TYPE"
+from (
+    select "TRANSFORM_ID", "PAYLOAD"->>'__type__' "PAYLOAD_TYPE",
+        jsonb_array_elements(
+            "PAYLOAD"->'elements')->'data'->'__parent_0__'->'name'->'qualified'->>'dot' "NAME",
+            "EVENT_TYPE"
+    from "TRANSFORM_EVENT"
+    where "TRANSFORM_INSTANCE_ID" in (
+        select "TRANSFORM_INSTANCE_ID" from "TRANSFORM_EVENT"
+        where "RUN_ID" = '1e4f6480-03b4-4581-ae59-a4af4db27fb0'
+        and "PAYLOAD"->>'__type__' = 'dogen::generation::meta_model::model'
+    )
+) as x
+where x."NAME" = 'cpp_ref_impl.cpp_model.registrar';
+
+
+
+
+
+
+
+
 select "TRANSFORM_ID", "PAYLOAD"->>'__type__' "PAYLOAD_TYPE",
 cast(
-    jsonb_array_elements(
-        "PAYLOAD"->'structural_elements'->'objects')->1->'data'->'data'->'__parent_0__'->'name'->'qualified'->'dot'
-    as varchar(1000)
+"PAYLOAD"->'serialization'
+as varchar(1000)
 )
 from "TRANSFORM_EVENT"
-where "TRANSFORM_INSTANCE_ID" = 'ce9cb092-6cc4-4e2f-9c61-11311f9bbfb0';
+where "TRANSFORM_INSTANCE_ID" = 'cb2120a9-bac1-4f98-9d31-4a022df15718';
+
+
+select "TRANSFORM_ID", "TRANSFORM_INSTANCE_ID", "PAYLOAD"->>'__type__' "PAYLOAD_TYPE",
+cast(
+"PAYLOAD"->'name'->'qualified'->'dot'
+as varchar(1000)
+)
+from "TRANSFORM_EVENT"
+where "RUN_ID" = '1e4f6480-03b4-4581-ae59-a4af4db27fb0'
+and "TRANSFORM_ID" like '%parsing%';
