@@ -12,30 +12,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2019-12-21 Sat 14:46]
+#+CAPTION: Clock summary at [2019-12-22 Sun 21:27]
 | <75>                                                 |         |       |       |       |
 | Headline                                             | Time    |       |       |     % |
 |------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                         | *66:54* |       |       | 100.0 |
+| *Total time*                                         | *68:20* |       |       | 100.0 |
 |------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                              | 66:54   |       |       | 100.0 |
-| Active                                               |         | 66:54 |       | 100.0 |
-| Edit release notes for previous sprint               |         |       | 11:24 |  17.0 |
-| Create a demo and presentation for previous sprint   |         |       |  2:31 |   3.8 |
-| Sprint and product backlog grooming                  |         |       |  4:00 |   6.0 |
+| Stories                                              | 68:20   |       |       | 100.0 |
+| Active                                               |         | 68:20 |       | 100.0 |
+| Edit release notes for previous sprint               |         |       | 11:24 |  16.7 |
+| Create a demo and presentation for previous sprint   |         |       |  2:31 |   3.7 |
+| Sprint and product backlog grooming                  |         |       |  4:00 |   5.9 |
 | Fix OSX build errors                                 |         |       |  0:25 |   0.6 |
-| Fix broken build due to incorrect postgres library   |         |       |  2:31 |   3.8 |
+| Fix broken build due to incorrect postgres library   |         |       |  2:31 |   3.7 |
 | Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   1.9 |
 | Create a profile called =untested=                   |         |       |  0:17 |   0.4 |
-| Remove =odb_properties= in element properties        |         |       |  2:36 |   3.9 |
+| Remove =odb_properties= in element properties        |         |       |  2:36 |   3.8 |
 | Allow non-throwing casts for enums                   |         |       |  0:41 |   1.0 |
-| Add type overrides to primitives                     |         |       |  8:55 |  13.3 |
-| Create a string-based tracing backend interface      |         |       |  5:22 |   8.0 |
+| Add type overrides to primitives                     |         |       |  8:55 |  13.0 |
+| Create a string-based tracing backend interface      |         |       |  5:22 |   7.9 |
 | Create a tracing registrar                           |         |       |  1:10 |   1.7 |
 | Move member variable name to assets                  |         |       |  0:09 |   0.2 |
 | Create a transform instance ID property              |         |       |  0:31 |   0.8 |
 | Laptop issues                                        |         |       |  0:18 |   0.4 |
-| Add relational tracing support                       |         |       | 24:23 |  36.4 |
+| Add relational tracing support                       |         |       | 25:49 |  37.8 |
 | Nightly code coverage is not being reported          |         |       |  0:23 |   0.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -691,6 +691,7 @@ Time spent sorting out laptop.
 
 *** STARTED Add relational tracing support                            :story:
     :LOGBOOK:
+    CLOCK: [2019-12-22 Sun 20:01]--[2019-12-22 Sun 21:27] =>  1:26
     CLOCK: [2019-12-21 Sat 11:24]--[2019-12-21 Sat 12:31] =>  1:07
     CLOCK: [2019-12-16 Mon 17:42]--[2019-12-16 Mon 18:30] =>  0:48
     CLOCK: [2019-12-14 Sat 22:13]--[2019-12-14 Sat 22:25] =>  0:12
@@ -902,6 +903,41 @@ runs. The schema should be designed with this in mind.
 
 We are running kcov in the nightlies, but we cannot see the results in
 the coverage tool.
+
+*** Move registrar into assets                                        :story:
+
+Move the registrar type into assets, in the quickest way possible.
+
+Notes:
+
+- In order to avoid blocking due to lots of analysis, we need
+  to split this story into three:
+  - first, we need to just move the registrar as is into assets.
+  - a second story is to clean up the existing registrar code to have
+    less templates and possibly address the existing registration
+    bugs. We could also look into calling the registrars for
+    referenced models automatically as part of this work (at present
+    we are doing this manually).
+  - finally, we need some meta-level refactoring to figure out if the
+    pattern can be generalised to include initialisers, etc.
+  In general that should be our approach: try to split out the
+  capturing of patterns into as many steps as possible, to make sure
+  we don't get overwhelmed as we implement things.
+- we need to keep track of all type registrars on referenced models,
+  not on the referenced models themselves. We need to know which
+  models we referenced directly, and then find the registrars for
+  those models.
+- leaves need to know of the registrar. This is so that we can call it
+  in their generated tests. We could use the registrar transform to go
+  and find all leaves and populate their registrar name.
+- current state is that we cannot generate the registrar for some
+  reason.
+- test model with registrar is C++ model. Type is called
+  registrar. Its probably not a good idea to also call it registrar -
+  wouldn't that clash with the existing type?
+- we should have a warning/error: if using boost serialisation with a
+  model that has inheritance, the registrar should be present. Added
+  to warnings story.
 
 *** References to ODB types in different namespaces fails             :story:
 
@@ -1167,41 +1203,6 @@ if Dogen still works. If it does, remove this.
 :   else()
 :       message(FATAL "could not find C++ runtime")
 :   endif()
-
-*** Move registrar into assets                                        :story:
-
-Move the registrar type into assets, in the quickest way possible.
-
-Notes:
-
-- In order to avoid blocking due to lots of analysis, we need
-  to split this story into three:
-  - first, we need to just move the registrar as is into assets.
-  - a second story is to clean up the existing registrar code to have
-    less templates and possibly address the existing registration
-    bugs. We could also look into calling the registrars for
-    referenced models automatically as part of this work (at present
-    we are doing this manually).
-  - finally, we need some meta-level refactoring to figure out if the
-    pattern can be generalised to include initialisers, etc.
-  In general that should be our approach: try to split out the
-  capturing of patterns into as many steps as possible, to make sure
-  we don't get overwhelmed as we implement things.
-- we need to keep track of all type registrars on referenced models,
-  not on the referenced models themselves. We need to know which
-  models we referenced directly, and then find the registrars for
-  those models.
-- leaves need to know of the registrar. This is so that we can call it
-  in their generated tests. We could use the registrar transform to go
-  and find all leaves and populate their registrar name.
-- current state is that we cannot generate the registrar for some
-  reason.
-- test model with registrar is C++ model. Type is called
-  registrar. Its probably not a good idea to also call it registrar -
-  wouldn't that clash with the existing type?
-- we should have a warning/error: if using boost serialisation with a
-  model that has inheritance, the registrar should be present. Added
-  to warnings story.
 
 *** Modeling elements can have =profile= setup                        :story:
 

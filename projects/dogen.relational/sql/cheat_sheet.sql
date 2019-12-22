@@ -90,16 +90,6 @@ select jsonb_pretty("CONFIGURATION") from "RUN";
 --
 with test as (select distinct (jsonb_array_elements("CONFIGURATION"->'all')->'archetype')::text as archetype from "RUN") select * from test where archetype like '%cpp%'
 
---
--- get all run events (all runs).
---
-select "VERSION", "TIMESTAMP", "RUN_ID", "LOGGING_IMPACT", "TRACING_IMPACT",
-(CASE WHEN "EVENT_TYPE" = 1 THEN  'START' ELSE 'END' END) as "EVENT_TYPE"
-from "RUN_EVENT"
-where "EVENT_TYPE" = 1
-order by "TIMESTAMP";
-
-
 
 select "TIMESTAMP", "RUN_ID", "VERSION", "ACTIVITY", "LOGGING_IMPACT", "TRACING_IMPACT",
 cast("PAYLOAD" as varchar(50)), (CASE WHEN "EVENT_TYPE" = 1 THEN  'START' ELSE 'END' END) as "EVENT_TYPE"
@@ -219,19 +209,33 @@ select "TIMESTAMP"
 from "TRANSFORM_EVENT"
 where  "TRANSFORM_INSTANCE_ID" = '954a4410-1481-48c7-8a11-5e0608ba3cff';
 
+
 select * from runs();
 select * from last_run();
 select last_run_id();
+select * from target_for_run() where "FILE_NAME" like '%generation%';
 select * from peek_log('4a1e5d10-4179-4e42-b3d1-e31e01baa21d', 10);
-
-
-
-truncate "LOG_EVENT";
-truncate "RUN_EVENT";
-truncate "TRANSFORM_EVENT";
-
+select * from transforms_for_run_id('b65d66c7-9952-43c8-a59a-20bcb413c390');
+select * from peek_log('5ca899c4-6d48-4a07-ae93-d43cc0d9ac9b', 10);
+select * from target_for_run();
+select * from configuration_for_run_id('5ca899c4-6d48-4a07-ae93-d43cc0d9ac9b');
 
 select "RUN_ID", jsonb_pretty(substring("MESSAGE", 25)::jsonb->2) file_name
 from "LOG_EVENT"
 where "COMPONENT" = 'main' and "SEVERITY" = 'INFO';
 and "RUN_ID" = '4a1e5d10-4179-4e42-b3d1-e31e01baa21d';
+
+
+select jsonb_pretty(substring("MESSAGE", 25)::jsonb) "CONFIG"
+from "LOG_EVENT"
+where "COMPONENT" = 'main' and "SEVERITY" = 'INFO';
+
+
+select "TRANSFORM_ID", "PAYLOAD"->>'__type__' "PAYLOAD_TYPE",
+cast(
+    jsonb_array_elements(
+        "PAYLOAD"->'structural_elements'->'objects')->1->'data'->'data'->'__parent_0__'->'name'->'qualified'->'dot'
+    as varchar(1000)
+)
+from "TRANSFORM_EVENT"
+where "TRANSFORM_INSTANCE_ID" = 'ce9cb092-6cc4-4e2f-9c61-11311f9bbfb0';
