@@ -999,6 +999,14 @@ Links:
 - [[https://gist.github.com/jhasse/990731][SHA-1 With Boost]]
 - [[https://stackoverflow.com/questions/28489153/how-to-portably-compute-a-sha1-hash-in-c][How to portably compute a sha1 hash in C++?]]
 
+*** Allow outputting a SHA1 of model in decoration                    :story:
+
+One way to check if a generated model corresponds to the current
+version of the file is to create a SHA1 key of the model. This could
+optionally be outputted somewhere such as the comments for the model
+itself or, less ideally, into each generated file. This could be a
+parameter in decoration. We should also record if the model was
+compressed or uncompressed.
 
 *** Add injection details to all models                               :story:
     :LOGBOOK:
