@@ -119,12 +119,11 @@ as $$
     truncate "TRANSFORM_EVENT";
 $$ language 'sql';
 
-
 /**
 * Get all objects in a dia diagram.
 */
 create or replace function dia_objects_in_diagram(in p_transform_instance_id text)
-    returns table("OBJECTS" jsonb)
+    returns table("OBJECT" jsonb)
 as $$
     select jsonb_array_elements(jsonb_array_elements("PAYLOAD"->'layers')->'objects') as object
     from "TRANSFORM_EVENT"
@@ -142,9 +141,9 @@ as $$
         ) "name"
     from (
         select
-            objects.object->>'id' "id",
-            objects.object->>'type' "type",
-            jsonb_array_elements(objects.object->'attributes') "attributes"
+            objects."OBJECT"->>'id' "id",
+            objects."OBJECT"->>'type' "type",
+            jsonb_array_elements(objects."OBJECT"->'attributes') "attributes"
             from (
                 select * from dia_objects_in_diagram(p_transform_instance_id)
             ) as objects
