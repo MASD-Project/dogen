@@ -25,25 +25,14 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
 
 namespace dogen::utility::hash {
 
-class sha1_hash final {
-public:
-    sha1_hash() = default;
-    sha1_hash(const sha1_hash&) = default;
-    sha1_hash(sha1_hash&&) = default;
-    ~sha1_hash() = default;
-    sha1_hash& operator=(const sha1_hash&) = default;
-
-public:
-    bool operator==(const sha1_hash& rhs) const;
-    bool operator!=(const sha1_hash& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-};
+/**
+ * @brief Computes the SHA1 hash for the input string.
+ */
+std::string sha1_hash(const std::string& s);
 
 }
 
