@@ -156,6 +156,8 @@ element::element(element&& rhs)
     : name_(std::move(rhs.name_)),
       documentation_(std::move(rhs.documentation_)),
       origin_type_(std::move(rhs.origin_type_)),
+      origin_sha1_hash_(std::move(rhs.origin_sha1_hash_)),
+      origin_element_id_(std::move(rhs.origin_element_id_)),
       contained_by_(std::move(rhs.contained_by_)),
       in_global_module_(std::move(rhs.in_global_module_)),
       static_stereotypes_(std::move(rhs.static_stereotypes_)),
@@ -172,6 +174,8 @@ element::element(
     const dogen::assets::meta_model::name& name,
     const std::string& documentation,
     const dogen::assets::meta_model::origin_types origin_type,
+    const std::string& origin_sha1_hash,
+    const std::string& origin_element_id,
     const std::string& contained_by,
     const bool in_global_module,
     const std::list<dogen::assets::meta_model::static_stereotypes>& static_stereotypes,
@@ -186,6 +190,8 @@ element::element(
     : name_(name),
       documentation_(documentation),
       origin_type_(origin_type),
+      origin_sha1_hash_(origin_sha1_hash),
+      origin_element_id_(origin_element_id),
       contained_by_(contained_by),
       in_global_module_(in_global_module),
       static_stereotypes_(static_stereotypes),
@@ -210,6 +216,8 @@ void element::to_stream(std::ostream& s) const {
       << "\"name\": " << name_ << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
       << "\"origin_type\": " << origin_type_ << ", "
+      << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(origin_sha1_hash_) << "\"" << ", "
+      << "\"origin_element_id\": " << "\"" << tidy_up_string(origin_element_id_) << "\"" << ", "
       << "\"contained_by\": " << "\"" << tidy_up_string(contained_by_) << "\"" << ", "
       << "\"in_global_module\": " << in_global_module_ << ", "
       << "\"static_stereotypes\": " << static_stereotypes_ << ", "
@@ -229,6 +237,8 @@ void element::swap(element& other) noexcept {
     swap(name_, other.name_);
     swap(documentation_, other.documentation_);
     swap(origin_type_, other.origin_type_);
+    swap(origin_sha1_hash_, other.origin_sha1_hash_);
+    swap(origin_element_id_, other.origin_element_id_);
     swap(contained_by_, other.contained_by_);
     swap(in_global_module_, other.in_global_module_);
     swap(static_stereotypes_, other.static_stereotypes_);
@@ -246,6 +256,8 @@ bool element::compare(const element& rhs) const {
     return name_ == rhs.name_ &&
         documentation_ == rhs.documentation_ &&
         origin_type_ == rhs.origin_type_ &&
+        origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
+        origin_element_id_ == rhs.origin_element_id_ &&
         contained_by_ == rhs.contained_by_ &&
         in_global_module_ == rhs.in_global_module_ &&
         static_stereotypes_ == rhs.static_stereotypes_ &&
@@ -297,6 +309,38 @@ dogen::assets::meta_model::origin_types element::origin_type() const {
 
 void element::origin_type(const dogen::assets::meta_model::origin_types v) {
     origin_type_ = v;
+}
+
+const std::string& element::origin_sha1_hash() const {
+    return origin_sha1_hash_;
+}
+
+std::string& element::origin_sha1_hash() {
+    return origin_sha1_hash_;
+}
+
+void element::origin_sha1_hash(const std::string& v) {
+    origin_sha1_hash_ = v;
+}
+
+void element::origin_sha1_hash(const std::string&& v) {
+    origin_sha1_hash_ = std::move(v);
+}
+
+const std::string& element::origin_element_id() const {
+    return origin_element_id_;
+}
+
+std::string& element::origin_element_id() {
+    return origin_element_id_;
+}
+
+void element::origin_element_id(const std::string& v) {
+    origin_element_id_ = v;
+}
+
+void element::origin_element_id(const std::string&& v) {
+    origin_element_id_ = std::move(v);
 }
 
 const std::string& element::contained_by() const {

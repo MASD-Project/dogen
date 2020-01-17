@@ -52,6 +52,8 @@ public:
         const dogen::assets::meta_model::name& name,
         const std::string& documentation,
         const dogen::assets::meta_model::origin_types origin_type,
+        const std::string& origin_sha1_hash,
+        const std::string& origin_element_id,
         const std::string& contained_by,
         const bool in_global_module,
         const std::list<dogen::assets::meta_model::static_stereotypes>& static_stereotypes,
@@ -67,7 +69,9 @@ public:
         const bool add_dogen_version,
         const bool add_model_to_text_transform_details,
         const bool add_warning,
-        const std::string& message);
+        const bool add_origin_sha1_hash,
+        const std::string& message,
+        const std::string& date_time);
 
 public:
     using element::accept;
@@ -116,6 +120,14 @@ public:
     /**@}*/
 
     /**
+     * @brief If true, adds the SHA1 hash of the original model to the marker.
+     */
+    /**@{*/
+    bool add_origin_sha1_hash() const;
+    void add_origin_sha1_hash(const bool v);
+    /**@}*/
+
+    /**
      * @brief Custom message to add to each generated file.
      */
     /**@{*/
@@ -123,6 +135,16 @@ public:
     std::string& message();
     void message(const std::string& v);
     void message(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Human readable timestamp to be used within the marker.
+     */
+    /**@{*/
+    const std::string& date_time() const;
+    std::string& date_time();
+    void date_time(const std::string& v);
+    void date_time(const std::string&& v);
     /**@}*/
 
 public:
@@ -143,7 +165,9 @@ private:
     bool add_dogen_version_;
     bool add_model_to_text_transform_details_;
     bool add_warning_;
+    bool add_origin_sha1_hash_;
     std::string message_;
+    std::string date_time_;
 };
 
 }

@@ -39,12 +39,15 @@ generation_marker::generation_marker()
     : add_date_time_(static_cast<bool>(0)),
       add_dogen_version_(static_cast<bool>(0)),
       add_model_to_text_transform_details_(static_cast<bool>(0)),
-      add_warning_(static_cast<bool>(0)) { }
+      add_warning_(static_cast<bool>(0)),
+      add_origin_sha1_hash_(static_cast<bool>(0)) { }
 
 generation_marker::generation_marker(
     const dogen::assets::meta_model::name& name,
     const std::string& documentation,
     const dogen::assets::meta_model::origin_types origin_type,
+    const std::string& origin_sha1_hash,
+    const std::string& origin_element_id,
     const std::string& contained_by,
     const bool in_global_module,
     const std::list<dogen::assets::meta_model::static_stereotypes>& static_stereotypes,
@@ -60,11 +63,15 @@ generation_marker::generation_marker(
     const bool add_dogen_version,
     const bool add_model_to_text_transform_details,
     const bool add_warning,
-    const std::string& message)
+    const bool add_origin_sha1_hash,
+    const std::string& message,
+    const std::string& date_time)
     : dogen::assets::meta_model::element(
       name,
       documentation,
       origin_type,
+      origin_sha1_hash,
+      origin_element_id,
       contained_by,
       in_global_module,
       static_stereotypes,
@@ -80,7 +87,9 @@ generation_marker::generation_marker(
       add_dogen_version_(add_dogen_version),
       add_model_to_text_transform_details_(add_model_to_text_transform_details),
       add_warning_(add_warning),
-      message_(message) { }
+      add_origin_sha1_hash_(add_origin_sha1_hash),
+      message_(message),
+      date_time_(date_time) { }
 
 void generation_marker::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -114,7 +123,9 @@ void generation_marker::to_stream(std::ostream& s) const {
       << "\"add_dogen_version\": " << add_dogen_version_ << ", "
       << "\"add_model_to_text_transform_details\": " << add_model_to_text_transform_details_ << ", "
       << "\"add_warning\": " << add_warning_ << ", "
-      << "\"message\": " << "\"" << tidy_up_string(message_) << "\""
+      << "\"add_origin_sha1_hash\": " << add_origin_sha1_hash_ << ", "
+      << "\"message\": " << "\"" << tidy_up_string(message_) << "\"" << ", "
+      << "\"date_time\": " << "\"" << tidy_up_string(date_time_) << "\""
       << " }";
 }
 
@@ -126,7 +137,9 @@ void generation_marker::swap(generation_marker& other) noexcept {
     swap(add_dogen_version_, other.add_dogen_version_);
     swap(add_model_to_text_transform_details_, other.add_model_to_text_transform_details_);
     swap(add_warning_, other.add_warning_);
+    swap(add_origin_sha1_hash_, other.add_origin_sha1_hash_);
     swap(message_, other.message_);
+    swap(date_time_, other.date_time_);
 }
 
 bool generation_marker::equals(const dogen::assets::meta_model::element& other) const {
@@ -141,7 +154,9 @@ bool generation_marker::operator==(const generation_marker& rhs) const {
         add_dogen_version_ == rhs.add_dogen_version_ &&
         add_model_to_text_transform_details_ == rhs.add_model_to_text_transform_details_ &&
         add_warning_ == rhs.add_warning_ &&
-        message_ == rhs.message_;
+        add_origin_sha1_hash_ == rhs.add_origin_sha1_hash_ &&
+        message_ == rhs.message_ &&
+        date_time_ == rhs.date_time_;
 }
 
 generation_marker& generation_marker::operator=(generation_marker other) {
@@ -182,6 +197,14 @@ void generation_marker::add_warning(const bool v) {
     add_warning_ = v;
 }
 
+bool generation_marker::add_origin_sha1_hash() const {
+    return add_origin_sha1_hash_;
+}
+
+void generation_marker::add_origin_sha1_hash(const bool v) {
+    add_origin_sha1_hash_ = v;
+}
+
 const std::string& generation_marker::message() const {
     return message_;
 }
@@ -196,6 +219,22 @@ void generation_marker::message(const std::string& v) {
 
 void generation_marker::message(const std::string&& v) {
     message_ = std::move(v);
+}
+
+const std::string& generation_marker::date_time() const {
+    return date_time_;
+}
+
+std::string& generation_marker::date_time() {
+    return date_time_;
+}
+
+void generation_marker::date_time(const std::string& v) {
+    date_time_ = v;
+}
+
+void generation_marker::date_time(const std::string&& v) {
+    date_time_ = std::move(v);
 }
 
 }

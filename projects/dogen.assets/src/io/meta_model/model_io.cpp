@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen.assets/io/meta_model/name_io.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/io/meta_model/origin_types_io.hpp"
@@ -32,6 +33,14 @@
 #include "dogen.assets/io/meta_model/templating/element_repository_io.hpp"
 #include "dogen.assets/io/meta_model/variability/element_repository_io.hpp"
 #include "dogen.assets/io/meta_model/serialization/element_repository_io.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
 
 namespace std {
 
@@ -118,6 +127,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"name\": " << v.name() << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"origin_type\": " << v.origin_type() << ", "
+      << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(v.origin_sha1_hash()) << "\"" << ", "
+      << "\"origin_element_id\": " << "\"" << tidy_up_string(v.origin_element_id()) << "\"" << ", "
       << "\"references\": " << v.references() << ", "
       << "\"leaves\": " << v.leaves() << ", "
       << "\"root_module\": " << v.root_module() << ", "

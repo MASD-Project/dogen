@@ -45,6 +45,8 @@ public:
         const dogen::assets::meta_model::name& name,
         const std::string& documentation,
         const dogen::assets::meta_model::origin_types origin_type,
+        const std::string& origin_sha1_hash,
+        const std::string& origin_element_id,
         const std::string& contained_by,
         const bool in_global_module,
         const std::list<dogen::assets::meta_model::static_stereotypes>& static_stereotypes,

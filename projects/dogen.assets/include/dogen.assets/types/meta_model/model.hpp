@@ -26,6 +26,7 @@
 #endif
 
 #include <list>
+#include <string>
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
@@ -66,6 +67,8 @@ public:
         const dogen::assets::meta_model::name& name,
         const dogen::assets::meta_model::name& meta_name,
         const dogen::assets::meta_model::origin_types origin_type,
+        const std::string& origin_sha1_hash,
+        const std::string& origin_element_id,
         const std::unordered_map<dogen::assets::meta_model::name, dogen::assets::meta_model::origin_types>& references,
         const std::unordered_set<dogen::assets::meta_model::name>& leaves,
         const boost::shared_ptr<dogen::assets::meta_model::structural::module>& root_module,
@@ -107,6 +110,26 @@ public:
     /**@{*/
     dogen::assets::meta_model::origin_types origin_type() const;
     void origin_type(const dogen::assets::meta_model::origin_types v);
+    /**@}*/
+
+    /**
+     * @brief SHA1 key of the original injection model.
+     */
+    /**@{*/
+    const std::string& origin_sha1_hash() const;
+    std::string& origin_sha1_hash();
+    void origin_sha1_hash(const std::string& v);
+    void origin_sha1_hash(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Unique identifier within the originan injection model for this modeling element.
+     */
+    /**@{*/
+    const std::string& origin_element_id() const;
+    std::string& origin_element_id();
+    void origin_element_id(const std::string& v);
+    void origin_element_id(const std::string&& v);
     /**@}*/
 
     /**
@@ -239,6 +262,8 @@ private:
     dogen::assets::meta_model::name name_;
     dogen::assets::meta_model::name meta_name_;
     dogen::assets::meta_model::origin_types origin_type_;
+    std::string origin_sha1_hash_;
+    std::string origin_element_id_;
     std::unordered_map<dogen::assets::meta_model::name, dogen::assets::meta_model::origin_types> references_;
     std::unordered_set<dogen::assets::meta_model::name> leaves_;
     boost::shared_ptr<dogen::assets::meta_model::structural::module> root_module_;
