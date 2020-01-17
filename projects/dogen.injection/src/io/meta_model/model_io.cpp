@@ -128,6 +128,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"configuration\": " << v.configuration() << ", "
+      << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(v.origin_sha1_hash()) << "\"" << ", "
+      << "\"origin_element_id\": " << "\"" << tidy_up_string(v.origin_element_id()) << "\"" << ", "
       << "\"elements\": " << v.elements() << ", "
       << "\"input_technical_space\": " << "\"" << tidy_up_string(v.input_technical_space()) << "\"" << ", "
       << "\"references\": " << v.references() << ", "

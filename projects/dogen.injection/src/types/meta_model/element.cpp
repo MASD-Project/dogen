@@ -47,6 +47,8 @@ element::element(
     const std::string& documentation,
     const std::string& name,
     const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
+    const std::string& origin_sha1_hash,
+    const std::string& origin_element_id,
     const std::list<std::string>& parents,
     const std::list<dogen::injection::meta_model::attribute>& attributes,
     const std::string& fallback_element_type,
@@ -62,6 +64,8 @@ element::element(
       documentation_(documentation),
       name_(name),
       configuration_(configuration),
+      origin_sha1_hash_(origin_sha1_hash),
+      origin_element_id_(origin_element_id),
       parents_(parents),
       attributes_(attributes),
       fallback_element_type_(fallback_element_type),
@@ -80,6 +84,8 @@ void element::swap(element& other) noexcept {
     swap(documentation_, other.documentation_);
     swap(name_, other.name_);
     swap(configuration_, other.configuration_);
+    swap(origin_sha1_hash_, other.origin_sha1_hash_);
+    swap(origin_element_id_, other.origin_element_id_);
     swap(parents_, other.parents_);
     swap(attributes_, other.attributes_);
     swap(fallback_element_type_, other.fallback_element_type_);
@@ -98,6 +104,8 @@ bool element::operator==(const element& rhs) const {
         documentation_ == rhs.documentation_ &&
         name_ == rhs.name_ &&
         configuration_ == rhs.configuration_ &&
+        origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
+        origin_element_id_ == rhs.origin_element_id_ &&
         parents_ == rhs.parents_ &&
         attributes_ == rhs.attributes_ &&
         fallback_element_type_ == rhs.fallback_element_type_ &&
@@ -209,6 +217,38 @@ void element::configuration(const boost::shared_ptr<dogen::variability::meta_mod
 
 void element::configuration(const boost::shared_ptr<dogen::variability::meta_model::configuration>&& v) {
     configuration_ = std::move(v);
+}
+
+const std::string& element::origin_sha1_hash() const {
+    return origin_sha1_hash_;
+}
+
+std::string& element::origin_sha1_hash() {
+    return origin_sha1_hash_;
+}
+
+void element::origin_sha1_hash(const std::string& v) {
+    origin_sha1_hash_ = v;
+}
+
+void element::origin_sha1_hash(const std::string&& v) {
+    origin_sha1_hash_ = std::move(v);
+}
+
+const std::string& element::origin_element_id() const {
+    return origin_element_id_;
+}
+
+std::string& element::origin_element_id() {
+    return origin_element_id_;
+}
+
+void element::origin_element_id(const std::string& v) {
+    origin_element_id_ = v;
+}
+
+void element::origin_element_id(const std::string&& v) {
+    origin_element_id_ = std::move(v);
 }
 
 const std::list<std::string>& element::parents() const {

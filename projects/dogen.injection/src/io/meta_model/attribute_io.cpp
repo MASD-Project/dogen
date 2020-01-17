@@ -99,6 +99,8 @@ std::ostream& operator<<(std::ostream& s, const attribute& v) {
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"configuration\": " << v.configuration() << ", "
+      << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(v.origin_sha1_hash()) << "\"" << ", "
+      << "\"origin_element_id\": " << "\"" << tidy_up_string(v.origin_element_id()) << "\"" << ", "
       << "\"type\": " << "\"" << tidy_up_string(v.type()) << "\"" << ", "
       << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
       << " }";

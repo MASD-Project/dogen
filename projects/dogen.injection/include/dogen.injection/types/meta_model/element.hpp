@@ -55,6 +55,8 @@ public:
         const std::string& documentation,
         const std::string& name,
         const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
+        const std::string& origin_sha1_hash,
+        const std::string& origin_element_id,
         const std::list<std::string>& parents,
         const std::list<dogen::injection::meta_model::attribute>& attributes,
         const std::string& fallback_element_type,
@@ -114,6 +116,26 @@ public:
     void configuration(const boost::shared_ptr<dogen::variability::meta_model::configuration>&& v);
     /**@}*/
 
+    /**
+     * @brief SHA1 hash of the original model that contained the element.
+     */
+    /**@{*/
+    const std::string& origin_sha1_hash() const;
+    std::string& origin_sha1_hash();
+    void origin_sha1_hash(const std::string& v);
+    void origin_sha1_hash(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Identifier within the origin model for the modeling element.
+     */
+    /**@{*/
+    const std::string& origin_element_id() const;
+    std::string& origin_element_id();
+    void origin_element_id(const std::string& v);
+    void origin_element_id(const std::string&& v);
+    /**@}*/
+
     const std::list<std::string>& parents() const;
     std::list<std::string>& parents();
     void parents(const std::list<std::string>& v);
@@ -170,6 +192,8 @@ private:
     std::string documentation_;
     std::string name_;
     boost::shared_ptr<dogen::variability::meta_model::configuration> configuration_;
+    std::string origin_sha1_hash_;
+    std::string origin_element_id_;
     std::list<std::string> parents_;
     std::list<dogen::injection::meta_model::attribute> attributes_;
     std::string fallback_element_type_;

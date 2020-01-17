@@ -39,6 +39,8 @@ attribute::attribute(
     const std::string& documentation,
     const std::string& name,
     const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
+    const std::string& origin_sha1_hash,
+    const std::string& origin_element_id,
     const std::string& type,
     const std::string& value)
     : tagged_values_(tagged_values),
@@ -47,6 +49,8 @@ attribute::attribute(
       documentation_(documentation),
       name_(name),
       configuration_(configuration),
+      origin_sha1_hash_(origin_sha1_hash),
+      origin_element_id_(origin_element_id),
       type_(type),
       value_(value) { }
 
@@ -58,6 +62,8 @@ void attribute::swap(attribute& other) noexcept {
     swap(documentation_, other.documentation_);
     swap(name_, other.name_);
     swap(configuration_, other.configuration_);
+    swap(origin_sha1_hash_, other.origin_sha1_hash_);
+    swap(origin_element_id_, other.origin_element_id_);
     swap(type_, other.type_);
     swap(value_, other.value_);
 }
@@ -69,6 +75,8 @@ bool attribute::operator==(const attribute& rhs) const {
         documentation_ == rhs.documentation_ &&
         name_ == rhs.name_ &&
         configuration_ == rhs.configuration_ &&
+        origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
+        origin_element_id_ == rhs.origin_element_id_ &&
         type_ == rhs.type_ &&
         value_ == rhs.value_;
 }
@@ -173,6 +181,38 @@ void attribute::configuration(const boost::shared_ptr<dogen::variability::meta_m
 
 void attribute::configuration(const boost::shared_ptr<dogen::variability::meta_model::configuration>&& v) {
     configuration_ = std::move(v);
+}
+
+const std::string& attribute::origin_sha1_hash() const {
+    return origin_sha1_hash_;
+}
+
+std::string& attribute::origin_sha1_hash() {
+    return origin_sha1_hash_;
+}
+
+void attribute::origin_sha1_hash(const std::string& v) {
+    origin_sha1_hash_ = v;
+}
+
+void attribute::origin_sha1_hash(const std::string&& v) {
+    origin_sha1_hash_ = std::move(v);
+}
+
+const std::string& attribute::origin_element_id() const {
+    return origin_element_id_;
+}
+
+std::string& attribute::origin_element_id() {
+    return origin_element_id_;
+}
+
+void attribute::origin_element_id(const std::string& v) {
+    origin_element_id_ = v;
+}
+
+void attribute::origin_element_id(const std::string&& v) {
+    origin_element_id_ = std::move(v);
 }
 
 const std::string& attribute::type() const {
