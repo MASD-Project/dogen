@@ -26,7 +26,9 @@ artefact::artefact()
     : overwrite_(static_cast<bool>(0)) { }
 
 artefact::artefact(artefact&& rhs)
-    : path_(std::move(rhs.path_)),
+    : origin_sha1_hash_(std::move(rhs.origin_sha1_hash_)),
+      origin_element_id_(std::move(rhs.origin_element_id_)),
+      path_(std::move(rhs.path_)),
       content_(std::move(rhs.content_)),
       overwrite_(std::move(rhs.overwrite_)),
       dependencies_(std::move(rhs.dependencies_)),
@@ -34,13 +36,17 @@ artefact::artefact(artefact&& rhs)
       operation_(std::move(rhs.operation_)) { }
 
 artefact::artefact(
+    const std::string& origin_sha1_hash,
+    const std::string& origin_element_id,
     const boost::filesystem::path& path,
     const std::string& content,
     const bool overwrite,
     const std::vector<boost::filesystem::path>& dependencies,
     const std::string& unified_diff,
     const dogen::extraction::meta_model::operation& operation)
-    : path_(path),
+    : origin_sha1_hash_(origin_sha1_hash),
+      origin_element_id_(origin_element_id),
+      path_(path),
       content_(content),
       overwrite_(overwrite),
       dependencies_(dependencies),
@@ -49,6 +55,8 @@ artefact::artefact(
 
 void artefact::swap(artefact& other) noexcept {
     using std::swap;
+    swap(origin_sha1_hash_, other.origin_sha1_hash_);
+    swap(origin_element_id_, other.origin_element_id_);
     swap(path_, other.path_);
     swap(content_, other.content_);
     swap(overwrite_, other.overwrite_);
@@ -58,7 +66,9 @@ void artefact::swap(artefact& other) noexcept {
 }
 
 bool artefact::operator==(const artefact& rhs) const {
-    return path_ == rhs.path_ &&
+    return origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
+        origin_element_id_ == rhs.origin_element_id_ &&
+        path_ == rhs.path_ &&
         content_ == rhs.content_ &&
         overwrite_ == rhs.overwrite_ &&
         dependencies_ == rhs.dependencies_ &&
@@ -70,6 +80,38 @@ artefact& artefact::operator=(artefact other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const std::string& artefact::origin_sha1_hash() const {
+    return origin_sha1_hash_;
+}
+
+std::string& artefact::origin_sha1_hash() {
+    return origin_sha1_hash_;
+}
+
+void artefact::origin_sha1_hash(const std::string& v) {
+    origin_sha1_hash_ = v;
+}
+
+void artefact::origin_sha1_hash(const std::string&& v) {
+    origin_sha1_hash_ = std::move(v);
+}
+
+const std::string& artefact::origin_element_id() const {
+    return origin_element_id_;
+}
+
+std::string& artefact::origin_element_id() {
+    return origin_element_id_;
+}
+
+void artefact::origin_element_id(const std::string& v) {
+    origin_element_id_ = v;
+}
+
+void artefact::origin_element_id(const std::string&& v) {
+    origin_element_id_ = std::move(v);
 }
 
 const boost::filesystem::path& artefact::path() const {

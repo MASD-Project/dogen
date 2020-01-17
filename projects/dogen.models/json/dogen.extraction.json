@@ -34,7 +34,8 @@
     {
       "name": "meta_model::model",
       "stereotypes": [
-        "Configurable"
+        "Configurable",
+        "DeterminableOrigin"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -64,6 +65,9 @@
     {
       "name": "meta_model::artefact",
       "documentation": "Artefact in a text model.\n",
+      "stereotypes": [
+        "DeterminableOrigin"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -465,6 +469,26 @@
           "tagged_values": {
             "masd.variability.qualified_name": "masd.extraction.enable_backend_directories"
           }
+        }
+      ]
+    },
+    {
+      "name": "meta_model::DeterminableOrigin",
+      "documentation": "Properties related to the origin of the modeling element.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "origin_sha1_hash",
+          "type": "std::string",
+          "documentation": "SHA1 hash of the original model that contained the element.\n"
+        },
+        {
+          "name": "origin_element_id",
+          "type": "std::string",
+          "documentation": "Identifier within the origin model for the modeling element.\n"
         }
       ]
     }

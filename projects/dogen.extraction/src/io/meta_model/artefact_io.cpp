@@ -57,6 +57,8 @@ std::ostream& operator<<(std::ostream& s, const artefact& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::extraction::meta_model::artefact\"" << ", "
+      << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(v.origin_sha1_hash()) << "\"" << ", "
+      << "\"origin_element_id\": " << "\"" << tidy_up_string(v.origin_element_id()) << "\"" << ", "
       << "\"path\": " << "\"" << v.path().generic_string() << "\"" << ", "
       << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\"" << ", "
       << "\"overwrite\": " << v.overwrite() << ", "

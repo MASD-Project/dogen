@@ -49,6 +49,8 @@ public:
 
 public:
     artefact(
+        const std::string& origin_sha1_hash,
+        const std::string& origin_element_id,
         const boost::filesystem::path& path,
         const std::string& content,
         const bool overwrite,
@@ -57,6 +59,26 @@ public:
         const dogen::extraction::meta_model::operation& operation);
 
 public:
+    /**
+     * @brief SHA1 hash of the original model that contained the element.
+     */
+    /**@{*/
+    const std::string& origin_sha1_hash() const;
+    std::string& origin_sha1_hash();
+    void origin_sha1_hash(const std::string& v);
+    void origin_sha1_hash(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Identifier within the origin model for the modeling element.
+     */
+    /**@{*/
+    const std::string& origin_element_id() const;
+    std::string& origin_element_id();
+    void origin_element_id(const std::string& v);
+    void origin_element_id(const std::string&& v);
+    /**@}*/
+
     /**
      * @brief Absolute path to the file, indicating the location in the filesystem where it will be written.
      */
@@ -124,6 +146,8 @@ public:
     artefact& operator=(artefact other);
 
 private:
+    std::string origin_sha1_hash_;
+    std::string origin_element_id_;
     boost::filesystem::path path_;
     std::string content_;
     bool overwrite_;

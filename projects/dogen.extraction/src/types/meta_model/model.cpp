@@ -34,12 +34,16 @@ namespace dogen::extraction::meta_model {
 
 model::model(
     const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
+    const std::string& origin_sha1_hash,
+    const std::string& origin_element_id,
     const std::string& name,
     const std::string& technical_space,
     const std::list<dogen::extraction::meta_model::artefact>& artefacts,
     const std::list<boost::filesystem::path>& managed_directories,
     const dogen::extraction::meta_model::outputting_properties& outputting_properties)
     : configuration_(configuration),
+      origin_sha1_hash_(origin_sha1_hash),
+      origin_element_id_(origin_element_id),
       name_(name),
       technical_space_(technical_space),
       artefacts_(artefacts),
@@ -49,6 +53,8 @@ model::model(
 void model::swap(model& other) noexcept {
     using std::swap;
     swap(configuration_, other.configuration_);
+    swap(origin_sha1_hash_, other.origin_sha1_hash_);
+    swap(origin_element_id_, other.origin_element_id_);
     swap(name_, other.name_);
     swap(technical_space_, other.technical_space_);
     swap(artefacts_, other.artefacts_);
@@ -58,6 +64,8 @@ void model::swap(model& other) noexcept {
 
 bool model::operator==(const model& rhs) const {
     return configuration_ == rhs.configuration_ &&
+        origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
+        origin_element_id_ == rhs.origin_element_id_ &&
         name_ == rhs.name_ &&
         technical_space_ == rhs.technical_space_ &&
         artefacts_ == rhs.artefacts_ &&
@@ -85,6 +93,38 @@ void model::configuration(const boost::shared_ptr<dogen::variability::meta_model
 
 void model::configuration(const boost::shared_ptr<dogen::variability::meta_model::configuration>&& v) {
     configuration_ = std::move(v);
+}
+
+const std::string& model::origin_sha1_hash() const {
+    return origin_sha1_hash_;
+}
+
+std::string& model::origin_sha1_hash() {
+    return origin_sha1_hash_;
+}
+
+void model::origin_sha1_hash(const std::string& v) {
+    origin_sha1_hash_ = v;
+}
+
+void model::origin_sha1_hash(const std::string&& v) {
+    origin_sha1_hash_ = std::move(v);
+}
+
+const std::string& model::origin_element_id() const {
+    return origin_element_id_;
+}
+
+std::string& model::origin_element_id() {
+    return origin_element_id_;
+}
+
+void model::origin_element_id(const std::string& v) {
+    origin_element_id_ = v;
+}
+
+void model::origin_element_id(const std::string&& v) {
+    origin_element_id_ = std::move(v);
 }
 
 const std::string& model::name() const {

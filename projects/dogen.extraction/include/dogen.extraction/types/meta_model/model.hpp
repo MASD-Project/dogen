@@ -46,6 +46,8 @@ public:
 public:
     model(
         const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
+        const std::string& origin_sha1_hash,
+        const std::string& origin_element_id,
         const std::string& name,
         const std::string& technical_space,
         const std::list<dogen::extraction::meta_model::artefact>& artefacts,
@@ -61,6 +63,26 @@ public:
     boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration();
     void configuration(const boost::shared_ptr<dogen::variability::meta_model::configuration>& v);
     void configuration(const boost::shared_ptr<dogen::variability::meta_model::configuration>&& v);
+    /**@}*/
+
+    /**
+     * @brief SHA1 hash of the original model that contained the element.
+     */
+    /**@{*/
+    const std::string& origin_sha1_hash() const;
+    std::string& origin_sha1_hash();
+    void origin_sha1_hash(const std::string& v);
+    void origin_sha1_hash(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Identifier within the origin model for the modeling element.
+     */
+    /**@{*/
+    const std::string& origin_element_id() const;
+    std::string& origin_element_id();
+    void origin_element_id(const std::string& v);
+    void origin_element_id(const std::string&& v);
     /**@}*/
 
     const std::string& name() const;
@@ -105,6 +127,8 @@ public:
 
 private:
     boost::shared_ptr<dogen::variability::meta_model::configuration> configuration_;
+    std::string origin_sha1_hash_;
+    std::string origin_element_id_;
     std::string name_;
     std::string technical_space_;
     std::list<dogen::extraction::meta_model::artefact> artefacts_;
