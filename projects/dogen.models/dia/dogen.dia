@@ -1767,7 +1767,7 @@ size limitations.#</dia:string>
         <dia:point val="-60,-70"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-60.05,-70.05;-40.97,-65.55"/>
+        <dia:rectangle val="-60.05,-70.05;-40.97,-64.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-60,-70"/>
@@ -1776,7 +1776,7 @@ size limitations.#</dia:string>
         <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#model_processing_configuration#</dia:string>
@@ -1944,6 +1944,29 @@ ELEMENT_NAME and ATTRIBUTE_NAME can be left blank.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#activity_timestamp#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#boost::posix_time::ptime#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Timepoint at which the activity started.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -1992,7 +2015,7 @@ ELEMENT_NAME and ATTRIBUTE_NAME can be left blank.#</dia:string>
         <dia:point val="-39,-58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-50.56,-65.601;-38.25,-57.2"/>
+        <dia:rectangle val="-50.56,-64.8006;-38.25,-57.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2001,7 +2024,7 @@ ELEMENT_NAME and ATTRIBUTE_NAME can be left blank.#</dia:string>
         <dia:point val="-39,-58"/>
         <dia:point val="-39,-60"/>
         <dia:point val="-50.51,-60"/>
-        <dia:point val="-50.51,-65.551"/>
+        <dia:point val="-50.51,-64.7506"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -2019,7 +2042,7 @@ ELEMENT_NAME and ATTRIBUTE_NAME can be left blank.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O0" connection="0"/>
-        <dia:connection handle="1" to="O12" connection="14"/>
+        <dia:connection handle="1" to="O12" connection="16"/>
       </dia:connections>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O14">

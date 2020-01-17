@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
 #include "dogen/io/model_processing_configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -58,7 +59,8 @@ std::ostream& operator<<(std::ostream& s, const model_processing_configuration& 
       << "\"__type__\": " << "\"dogen::model_processing_configuration\"" << ", "
       << "\"compatibility_mode_enabled\": " << v.compatibility_mode_enabled() << ", "
       << "\"dry_run_mode_enabled\": " << v.dry_run_mode_enabled() << ", "
-      << "\"variability_overrides\": " << v.variability_overrides()
+      << "\"variability_overrides\": " << v.variability_overrides() << ", "
+      << "\"activity_timestamp\": " << "\"" << v.activity_timestamp() << "\""
       << " }";
     return(s);
 }

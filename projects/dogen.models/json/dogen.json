@@ -200,6 +200,11 @@
           "name": "variability_overrides",
           "type": "std::vector<std::string>",
           "documentation": "Raw set of variability overrides.\n\nOverrides are CSV strings in the following format:\n\nMODEL_NAME,ELEMENT_NAME,ATTRIBUTE_NAME,KEY,VALUE\n\nELEMENT_NAME and ATTRIBUTE_NAME can be left blank.\n"
+        },
+        {
+          "name": "activity_timestamp",
+          "type": "boost::posix_time::ptime",
+          "documentation": "Timepoint at which the activity started.\n"
         }
       ]
     },

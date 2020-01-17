@@ -28,6 +28,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <boost/date_time/posix_time/posix_time_types.hpp>
 
 namespace dogen {
 
@@ -47,7 +48,8 @@ public:
     model_processing_configuration(
         const bool compatibility_mode_enabled,
         const bool dry_run_mode_enabled,
-        const std::vector<std::string>& variability_overrides);
+        const std::vector<std::string>& variability_overrides,
+        const boost::posix_time::ptime& activity_timestamp);
 
 public:
     /**
@@ -85,6 +87,16 @@ public:
     void variability_overrides(const std::vector<std::string>&& v);
     /**@}*/
 
+    /**
+     * @brief Timepoint at which the activity started.
+     */
+    /**@{*/
+    const boost::posix_time::ptime& activity_timestamp() const;
+    boost::posix_time::ptime& activity_timestamp();
+    void activity_timestamp(const boost::posix_time::ptime& v);
+    void activity_timestamp(const boost::posix_time::ptime&& v);
+    /**@}*/
+
 public:
     bool operator==(const model_processing_configuration& rhs) const;
     bool operator!=(const model_processing_configuration& rhs) const {
@@ -99,6 +111,7 @@ private:
     bool compatibility_mode_enabled_;
     bool dry_run_mode_enabled_;
     std::vector<std::string> variability_overrides_;
+    boost::posix_time::ptime activity_timestamp_;
 };
 
 }
