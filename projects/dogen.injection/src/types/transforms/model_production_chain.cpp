@@ -22,6 +22,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.injection/io/meta_model/model_io.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
+#include "dogen.injection/types/transforms/compute_sha1_transform.hpp"
 #include "dogen.injection/types/transforms/input_technical_space_transform.hpp"
 #include "dogen.injection/types/transforms/references_transform.hpp"
 #include "dogen.injection/types/transforms/configuration_transform.hpp"
@@ -72,7 +73,12 @@ apply(const context& ctx, const boost::filesystem::path& p) {
     auto r(t.apply(ctx, p));
 
     /*
-     * Process thevariability overrides.
+     * Update the SHA1 hash.
+     */
+    compute_sha1_transform::apply(ctx, p, r);
+
+    /*
+     * Process the variability overrides.
      */
     tagged_values_overrides_transform::apply(ctx, r);
 

@@ -25,24 +25,21 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <boost/filesystem/path.hpp>
+#include "dogen.injection/types/meta_model/model.hpp"
+#include "dogen.injection/types/transforms/context_fwd.hpp"
 
 namespace dogen::injection::transforms {
 
+/**
+ * @brief Computes the SHA1 hash for a model content and updates the
+ * model with this value.
+ */
 class compute_sha1_transform final {
 public:
-    compute_sha1_transform() = default;
-    compute_sha1_transform(const compute_sha1_transform&) = default;
-    compute_sha1_transform(compute_sha1_transform&&) = default;
-    ~compute_sha1_transform() = default;
-    compute_sha1_transform& operator=(const compute_sha1_transform&) = default;
-
-public:
-    bool operator==(const compute_sha1_transform& rhs) const;
-    bool operator!=(const compute_sha1_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const transforms::context& ctx,
+        const boost::filesystem::path& p,
+        meta_model::model& m);
 };
 
 }
