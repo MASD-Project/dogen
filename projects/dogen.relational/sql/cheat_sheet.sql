@@ -216,10 +216,26 @@ select last_run_id();
 select * from target_for_run();
 select * from target_for_run() where "FILE_NAME" like '%generation%';
 select * from peek_log('4a1e5d10-4179-4e42-b3d1-e31e01baa21d', 10);
-select * from transforms_for_run_id('1e4f6480-03b4-4581-ae59-a4af4db27fb0');
+select * from transforms_for_run_id('d9dc87fe-6ce2-4259-b780-b1b9c9d33dd9');
 select * from peek_log('5ca899c4-6d48-4a07-ae93-d43cc0d9ac9b', 10);
 select * from target_for_run();
 select * from configuration_for_run_id('c2211d91-22e1-40bc-948c-aecd08c98285');
+
+select distinct "RUN_ID", count(1) from "LOG_EVENT"
+group by "RUN_ID";
+
+select * from
+dia_objects_in_diagram('7365a22d-fa44-43d1-8882-9d738f26a8db');
+
+select * from
+classes_in_diagram('7365a22d-fa44-43d1-8882-9d738f26a8db');
+
+
+
+select "TIMESTAMP", "RUN_ID"
+from "LOG_EVENT"
+where "COMPONENT" = 'main' and "SEVERITY" = 'INFO';
+
 
 select "RUN_ID", jsonb_pretty(substring("MESSAGE", 25)::jsonb->2) file_name
 from "LOG_EVENT"
@@ -262,13 +278,6 @@ from (
     )
 ) as x
 where x."NAME" = 'cpp_ref_impl.cpp_model.registrar';
-
-
-
-
-
-
-
 
 select "TRANSFORM_ID", "PAYLOAD"->>'__type__' "PAYLOAD_TYPE",
 cast(

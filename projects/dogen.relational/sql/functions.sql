@@ -20,6 +20,7 @@
 
 /**
  * Returns all of the runs available.
+ * select * from runs();
  */
 create or replace function runs()
     returns table("VERSION" text, "TIMESTAMP" timestamp,
@@ -116,4 +117,38 @@ as $$
     truncate "LOG_EVENT";
     truncate "RUN_EVENT";
     truncate "TRANSFORM_EVENT";
+$$ language 'sql';
+
+
+/**
+* Get all objects in a dia diagram.
+*/
+create or replace function dia_objects_in_diagram(in p_transform_instance_id text)
+    returns table("OBJECTS" jsonb)
+as $$
+    select jsonb_array_elements(jsonb_array_elements("PAYLOAD"->'layers')->'objects') as object
+    from "TRANSFORM_EVENT"
+    where "TRANSFORM_INSTANCE_ID" = p_transform_instance_id
+    and "EVENT_TYPE" = 1;
+$$ language 'sql';
+
+
+create or replace function classes_in_diagram(in p_transform_instance_id text)
+    returns table("ID" text, "TYPE" text, "NAME" text)
+as $$
+    select "id", "type",
+        substring(attrs.attributes->'values'->0->'data'->>'value', 2,
+            length(attrs.attributes->'values'->0->'data'->>'value') - 2
+        ) "name"
+    from (
+        select
+            objects.object->>'id' "id",
+            objects.object->>'type' "type",
+            jsonb_array_elements(objects.object->'attributes') "attributes"
+            from (
+                select * from dia_objects_in_diagram(p_transform_instance_id)
+            ) as objects
+     ) as attrs
+     where
+         attrs.attributes->>'name' like 'name' and "type" like 'UML - Class';
 $$ language 'sql';
