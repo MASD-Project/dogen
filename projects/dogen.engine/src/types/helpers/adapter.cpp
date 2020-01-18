@@ -185,6 +185,9 @@ void adapter::populate_element(const assets::meta_model::location& l,
     e.documentation(ie.documentation());
     e.static_stereotypes(scr.static_stereotypes());
 
+    e.origin_element_id(ie.origin_element_id());
+    e.origin_sha1_hash(ie.origin_sha1_hash());
+
     e.configuration(ie.configuration());
     e.configuration()->name().qualified(e.name().qualified().dot());
 

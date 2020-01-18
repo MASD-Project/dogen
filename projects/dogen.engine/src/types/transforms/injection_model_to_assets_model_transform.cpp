@@ -263,6 +263,9 @@ apply(const context& ctx, const injection::meta_model::model& m) {
     b.model_modules(model_location.model_modules());
     r.name(b.build());
     r.input_technical_space(to_technical_space(m.input_technical_space()));
+    r.origin_element_id(m.origin_element_id());
+    r.origin_sha1_hash(m.origin_sha1_hash());
+
     BOOST_LOG_SEV(lg, debug) << "Computed model name: " << r.name();
 
     /*
@@ -287,6 +290,8 @@ apply(const context& ctx, const injection::meta_model::model& m) {
     rm.configuration(m.configuration());
     rm.configuration()->name().qualified(rm.name().qualified().dot());
     rm.is_root(true);
+    rm.origin_element_id(m.origin_element_id());
+    rm.origin_sha1_hash(m.origin_sha1_hash());
 
     helpers::stereotypes_helper h;
     const auto scr(h.from_string(m.stereotypes()));
