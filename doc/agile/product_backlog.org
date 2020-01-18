@@ -7639,6 +7639,28 @@ Features for which there is no urgency but we'd like to see them
 implemented at some point. They may require some alterations to the
 core, but not fundamental rethinking.
 
+*** Create a test model with SHA1 hash in generation marker           :story:
+
+At present we cannot test this feature because we are using all models
+in both JSON and Dia generation. When we do this, the original model
+produces different SHA1 hashes. We need to create a test for a model
+which has only one injection type.
+
+*** Supply dogen version as a configuration parameter                 :story:
+
+At present we are using the =config.hpp= file in several places in
+dogen to determine the dogen version. This makes things complicated
+when we don't actually care about the particular version such as in
+tests. We should supply the version as part of the initial
+configuration and then reuse it from there.
+
+*** Consider adding text transform details to generation marker       :story:
+
+It would be nice if we could tell which formatter generated which
+file. We could add this to the generation marker:
+
+: add_model_to_text_transform_details
+
 *** Add a "info" activity to dogen                                    :story:
 
 This is somewhat similar to the dry run mode and diff mode so we need

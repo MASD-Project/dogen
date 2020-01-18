@@ -12,34 +12,34 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-01-18 Sat 18:11]
+#+CAPTION: Clock summary at [2020-01-18 Sat 23:04]
 | <75>                                                 |         |       |       |       |
 | Headline                                             | Time    |       |       |     % |
 |------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                         | *78:21* |       |       | 100.0 |
+| *Total time*                                         | *79:28* |       |       | 100.0 |
 |------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                              | 78:21   |       |       | 100.0 |
-| Active                                               |         | 78:21 |       | 100.0 |
-| Edit release notes for previous sprint               |         |       | 11:24 |  14.6 |
+| Stories                                              | 79:28   |       |       | 100.0 |
+| Active                                               |         | 79:28 |       | 100.0 |
+| Edit release notes for previous sprint               |         |       | 11:24 |  14.3 |
 | Create a demo and presentation for previous sprint   |         |       |  2:31 |   3.2 |
-| Sprint and product backlog grooming                  |         |       |  4:15 |   5.4 |
+| Sprint and product backlog grooming                  |         |       |  4:15 |   5.3 |
 | Fix OSX build errors                                 |         |       |  0:25 |   0.5 |
 | Fix broken build due to incorrect postgres library   |         |       |  2:31 |   3.2 |
-| Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   1.7 |
+| Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   1.6 |
 | Create a profile called =untested=                   |         |       |  0:17 |   0.4 |
 | Remove =odb_properties= in element properties        |         |       |  2:36 |   3.3 |
 | Allow non-throwing casts for enums                   |         |       |  0:41 |   0.9 |
-| Add type overrides to primitives                     |         |       |  8:55 |  11.4 |
+| Add type overrides to primitives                     |         |       |  8:55 |  11.2 |
 | Create a string-based tracing backend interface      |         |       |  5:22 |   6.8 |
 | Create a tracing registrar                           |         |       |  1:10 |   1.5 |
 | Move member variable name to assets                  |         |       |  0:09 |   0.2 |
 | Create a transform instance ID property              |         |       |  0:31 |   0.7 |
 | Laptop issues                                        |         |       |  0:18 |   0.4 |
-| Add relational tracing support                       |         |       | 27:47 |  35.5 |
-| Nightly code coverage is not being reported          |         |       |  0:23 |   0.5 |
-| Move registrar into assets                           |         |       |  0:59 |   1.3 |
 | Do not compute the timestamp at formatting time      |         |       |  1:53 |   2.4 |
-| Record a SHA1 of loaded injection models             |         |       |  4:31 |   5.8 |
+| Record a SHA1 of loaded injection models             |         |       |  5:38 |   7.1 |
+| Add relational tracing support                       |         |       | 27:47 |  35.0 |
+| Nightly code coverage is not being reported          |         |       |  0:23 |   0.5 |
+| Move registrar into assets                           |         |       |  0:59 |   1.2 |
 | Add injection details to all models                  |         |       |  0:25 |   0.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -695,6 +695,59 @@ the correct profile for header only.
 
 Time spent sorting out laptop.
 
+*** COMPLETED Do not compute the timestamp at formatting time         :story:
+    CLOSED: [2020-01-18 Sat 22:55]
+    :LOGBOOK:
+    CLOCK: [2020-01-17 Fri 15:01]--[2020-01-17 Fri 16:46] =>  1:45
+    CLOCK: [2020-01-17 Fri 11:51]--[2020-01-17 Fri 11:59] =>  0:08
+    :END:
+
+At present we are recomputing the timestamp for every model element we
+write (=generation_marker_formatter.cpp=):
+
+:         using namespace boost::posix_time;
+:         ptime now(second_clock::local_time());
+:         s << generation_timestamp << to_iso_extended_string(now) << std::endl;
+
+This is not only inefficient but it also means we end up with lots of
+different timestamps. In reality what we want is a "generation time"
+computed at the start of the run, possibly with a user supplied clock,
+which is then used everywhere.
+
+*** COMPLETED Record a SHA1 of loaded injection models                :story:
+    CLOSED: [2020-01-18 Sat 22:54]
+     :LOGBOOK:
+     CLOCK: [2020-01-18 Sat 22:55]--[2020-01-18 Sat 23:04] =>  0:09
+     CLOCK: [2020-01-18 Sat 21:56]--[2020-01-18 Sat 22:54] =>  0:58
+     CLOCK: [2020-01-18 Sat 16:07]--[2020-01-18 Sat 18:11] =>  2:04
+     CLOCK: [2020-01-18 Sat 15:00]--[2020-01-18 Sat 15:42] =>  0:42
+     CLOCK: [2020-01-17 Fri 19:54]--[2020-01-17 Fri 20:02] =>  0:08
+     CLOCK: [2020-01-17 Fri 19:35]--[2020-01-17 Fri 19:53] =>  0:18
+     CLOCK: [2020-01-17 Fri 17:48]--[2020-01-17 Fri 17:59] =>  0:11
+     CLOCK: [2020-01-17 Fri 16:47]--[2020-01-17 Fri 17:47] =>  1:00
+     CLOCK: [2020-01-17 Fri 11:42]--[2020-01-17 Fri 11:50] =>  0:17
+     :END:
+
+ One way to check if a generated model corresponds to the current
+ version of the file is to create a SHA1 key of the model.
+
+ We can use git to validate the SHA1:
+
+ : $ git ls-files -s dogen.variability.dia
+ : 100644 7db05738eb5765affe4590d541dcfe4484619e08 0 dogen.variability.dia
+
+ We should also add the SHA1 to the model references tracing.
+
+ Actually we can't rely on git for this (see links below). Users need
+ to compute the SHA1 themselves.
+
+ Links:
+
+ - [[https://stackoverflow.com/questions/460297/git-finding-the-sha1-of-an-individual-file-in-the-index][Git - finding the SHA1 of an individual file in the index]]
+ - [[https://stackoverflow.com/questions/5290444/why-does-git-hash-object-return-a-different-hash-than-openssl-sha1][Why does git hash-object return a different hash than openssl sha1?]]
+ - [[https://gist.github.com/jhasse/990731][SHA-1 With Boost]]
+ - [[https://stackoverflow.com/questions/28489153/how-to-portably-compute-a-sha1-hash-in-c][How to portably compute a sha1 hash in C++?]]
+
 *** STARTED Add relational tracing support                            :story:
     :LOGBOOK:
     CLOCK: [2020-01-17 Fri 10:01]--[2020-01-17 Fri 11:15] =>  1:14
@@ -951,55 +1004,6 @@ Notes:
 - we should have a warning/error: if using boost serialisation with a
   model that has inheritance, the registrar should be present. Added
   to warnings story.
-
-*** STARTED Do not compute the timestamp at formatting time           :story:
-    :LOGBOOK:
-    CLOCK: [2020-01-17 Fri 15:01]--[2020-01-17 Fri 16:46] =>  1:45
-    CLOCK: [2020-01-17 Fri 11:51]--[2020-01-17 Fri 11:59] =>  0:08
-    :END:
-
-At present we are recomputing the timestamp for every model element we
-write (=generation_marker_formatter.cpp=):
-
-:         using namespace boost::posix_time;
-:         ptime now(second_clock::local_time());
-:         s << generation_timestamp << to_iso_extended_string(now) << std::endl;
-
-This is not only inefficient but it also means we end up with lots of
-different timestamps. In reality what we want is a "generation time"
-computed at the start of the run, possibly with a user supplied clock,
-which is then used everywhere.
-
-*** STARTED Record a SHA1 of loaded injection models                  :story:
-    :LOGBOOK:
-    CLOCK: [2020-01-18 Sat 16:07]--[2020-01-18 Sat 18:11] =>  2:04
-    CLOCK: [2020-01-18 Sat 15:00]--[2020-01-18 Sat 15:42] =>  0:42
-    CLOCK: [2020-01-17 Fri 19:54]--[2020-01-17 Fri 20:02] =>  0:08
-    CLOCK: [2020-01-17 Fri 19:35]--[2020-01-17 Fri 19:53] =>  0:18
-    CLOCK: [2020-01-17 Fri 17:48]--[2020-01-17 Fri 17:59] =>  0:11
-    CLOCK: [2020-01-17 Fri 16:47]--[2020-01-17 Fri 17:47] =>  1:00
-    CLOCK: [2020-01-17 Fri 11:42]--[2020-01-17 Fri 11:50] =>  0:17
-    :END:
-
-One way to check if a generated model corresponds to the current
-version of the file is to create a SHA1 key of the model.
-
-We can use git to validate the SHA1:
-
-: $ git ls-files -s dogen.variability.dia
-: 100644 7db05738eb5765affe4590d541dcfe4484619e08 0 dogen.variability.dia
-
-We should also add the SHA1 to the model references tracing.
-
-Actually we can't rely on git for this (see links below). Users need
-to compute the SHA1 themselves.
-
-Links:
-
-- [[https://stackoverflow.com/questions/460297/git-finding-the-sha1-of-an-individual-file-in-the-index][Git - finding the SHA1 of an individual file in the index]]
-- [[https://stackoverflow.com/questions/5290444/why-does-git-hash-object-return-a-different-hash-than-openssl-sha1][Why does git hash-object return a different hash than openssl sha1?]]
-- [[https://gist.github.com/jhasse/990731][SHA-1 With Boost]]
-- [[https://stackoverflow.com/questions/28489153/how-to-portably-compute-a-sha1-hash-in-c][How to portably compute a sha1 hash in C++?]]
 
 *** Tracing backend is not defaulted                                  :story:
 
