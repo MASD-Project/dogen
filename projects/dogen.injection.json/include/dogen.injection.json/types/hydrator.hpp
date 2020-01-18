@@ -77,8 +77,8 @@ private:
      * @brief Reads an element according to its meta-type by
      * dispatching to the correct read functions.
      */
-    injection::meta_model::element
-    read_element(const boost::property_tree::ptree& pt) const;
+    injection::meta_model::element read_element(
+        const boost::property_tree::ptree& pt, const std::string& id) const;
 
     /**
      * @brief Reads the entire stream as a property tree.

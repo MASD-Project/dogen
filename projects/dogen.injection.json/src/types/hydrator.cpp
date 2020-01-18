@@ -128,8 +128,8 @@ read_attribute(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-injection::meta_model::element hydrator::
-read_element(const boost::property_tree::ptree& pt) const {
+injection::meta_model::element hydrator::read_element(
+    const boost::property_tree::ptree& pt, const std::string& id) const {
     injection::meta_model::element r;
     r.name(pt.get<std::string>(name_key));
     r.documentation(read_documentation(pt));
@@ -152,6 +152,7 @@ read_element(const boost::property_tree::ptree& pt) const {
     }
 
     const auto f(false);
+    r.origin_element_id(id);
     r.in_global_module(pt.get(in_global_module_key, f));
     r.is_associative_container(pt.get(is_associative_container_key, f));
     r.can_be_primitive_underlier(pt.get(can_be_primitive_underlier_key, f));
@@ -179,8 +180,17 @@ hydrator::read_stream(std::istream& s) const {
     } else if (i->second.empty())
         BOOST_LOG_SEV(lg, warn) << "Elements collection is empty.";
     else {
-        for (auto j(i->second.begin()); j != i->second.end(); ++j)
-            r.elements().push_back(read_element(j->second));
+        /*
+         * Compute an element ID based on the position of the object
+         * in the diagram. This allows us to uniquely identify an
+         * element in a diagram.
+         */
+        const std::string prefix("J");
+        unsigned int j = 0;
+        for (auto k = i->second.begin(); k != i->second.end(); ++k, ++j) {
+            const auto id(prefix + std::to_string(j));
+            r.elements().push_back(read_element(k->second, id));
+        }
     }
 
     return r;
