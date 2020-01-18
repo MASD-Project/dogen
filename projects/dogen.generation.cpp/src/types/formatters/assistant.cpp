@@ -672,6 +672,8 @@ extraction::meta_model::artefact assistant::make_artefact() const {
     extraction::meta_model::artefact r;
     r.content(stream_.str());
     r.path(artefact_properties_.file_path());
+    r.origin_element_id(element_.origin_element_id());
+    r.origin_sha1_hash(element_.origin_sha1_hash());
 
     const auto& ap(element_.artefact_properties());
     const auto arch(archetype_location_.archetype());

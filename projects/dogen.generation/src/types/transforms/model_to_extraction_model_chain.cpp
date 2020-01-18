@@ -119,6 +119,9 @@ apply(const generation::transforms::context& ctx,
      */
     const bool ekd(m.extraction_properties().enable_backend_directories());
     auto r(t.apply(ctx, ekd, m));
+    // r.origin_element_id(m.origin_element_id());
+    // r.origin_sha1_hash(m.origin_sha1_hash());
+
     BOOST_LOG_SEV(lg, debug) << "Generated artefacts for : " << id
                              << ". Total artefacts: " << r.artefacts().size();
 

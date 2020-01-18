@@ -78,8 +78,10 @@ std::list<std::string> builtin_header_formatter::inclusion_dependencies(
 }
 
 extraction::meta_model::artefact builtin_header_formatter::
-format(const context& /*ctx*/, const assets::meta_model::element& /*e*/) const {
+format(const context& /*ctx*/, const assets::meta_model::element& e) const {
     extraction::meta_model::artefact r;
+    r.origin_element_id(e.origin_element_id());
+    r.origin_sha1_hash(e.origin_sha1_hash());
     return r;
 }
 
