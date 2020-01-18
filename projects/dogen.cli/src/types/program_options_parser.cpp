@@ -27,6 +27,7 @@
 #include <boost/program_options.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/operations.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
 #include "dogen/types/database_engine.hpp"
 #include "dogen/config.hpp"
 #include "dogen.utility/types/log/severity_level.hpp"
@@ -109,7 +110,9 @@ const std::string model_processing_compatibility_mode_arg(
     "compatibility-mode-enabled");
 const std::string model_processing_dry_run_mode_enabled_arg(
     "dry-run-mode-enabled");
-const std::string variability_override_arg("variability-override");
+const std::string model_processing_variability_override_arg(
+    "variability-override");
+const std::string model_processing_activity_timestamp_arg("activity-timestamp");
 
 const std::string output_byproduct_directory_arg(
     "byproduct-directory");
@@ -132,6 +135,7 @@ const std::string invalid_diffing_destination(
     "Diffing destination is invalid or unsupported: ");
 const std::string invalid_reporting_style(
     "Reporting style is invalid or unsupported: ");
+const std::string invalid_activity_timestamp("Invalid activity timestamp: ");
 
 const std::string logging_impact_none("none");
 const std::string logging_impact_moderate("none");
@@ -215,7 +219,10 @@ options_description make_top_level_visible_options_description() {
             "Executes all transforms but does not emit generated code.")
         ("variability-override", value<std::vector<std::string>>(),
             "CSV string with a variability override. Must have the form of "
-            "[MODEL_NAME,][ELEMENT_NAME,][ATTRIBUTE_NAME,]KEY,VALUE");
+            "[MODEL_NAME,][ELEMENT_NAME,][ATTRIBUTE_NAME,]KEY,VALUE")
+        ("activity-timestamp", value<std::string>(),
+            "Override the NOW value used for the activity timestamp. "
+            "Format: %Y-%m-%dT%H:%M:%S");
     r.add(ehod);
 
     options_description db("Database");
@@ -504,11 +511,31 @@ read_model_processing_configuration(const variables_map& vm) {
         vm.count(model_processing_dry_run_mode_enabled_arg) != 0);
     r.dry_run_mode_enabled(dry_run);
 
-    if (vm.count(variability_override_arg)) {
-        const auto vo(vm[variability_override_arg]
+    if (vm.count(model_processing_variability_override_arg)) {
+        const auto vo(vm[model_processing_variability_override_arg]
             .as<std::vector<std::string>>());
         r.variability_overrides(vo);
     }
+
+    if (vm.count(model_processing_activity_timestamp_arg)) {
+        const auto at(vm[model_processing_activity_timestamp_arg]
+            .as<std::string>());
+
+        const std::string fmt("%Y-%m-%dT%H:%M:%S");
+        const std::locale l(std::locale::classic(),
+            new boost::posix_time::time_input_facet(fmt));
+
+        std::istringstream is(at);
+        is.imbue(l);
+        boost::posix_time::ptime pt;
+        is >> pt;
+        if(pt == boost::posix_time::ptime()) {
+            BOOST_THROW_EXCEPTION(
+                parser_exception(invalid_activity_timestamp + at));
+        }
+        r.activity_timestamp(pt);
+    } else
+        r.activity_timestamp(boost::posix_time::second_clock::local_time());
 
     return r;
 }
