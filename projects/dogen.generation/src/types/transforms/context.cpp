@@ -57,19 +57,22 @@ context::context(context&& rhs)
       intra_backend_segment_properties_(std::move(rhs.intra_backend_segment_properties_)),
       output_directory_path_(std::move(rhs.output_directory_path_)),
       feature_model_(std::move(rhs.feature_model_)),
-      tracer_(std::move(rhs.tracer_)) { }
+      tracer_(std::move(rhs.tracer_)),
+      generation_timestamp_(std::move(rhs.generation_timestamp_)) { }
 
 context::context(
     const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository,
     const std::unordered_map<std::string, dogen::generation::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties,
     const boost::filesystem::path& output_directory_path,
     const boost::shared_ptr<dogen::variability::meta_model::feature_model>& feature_model,
-    const boost::shared_ptr<dogen::tracing::tracer>& tracer)
+    const boost::shared_ptr<dogen::tracing::tracer>& tracer,
+    const std::string& generation_timestamp)
     : archetype_location_repository_(archetype_location_repository),
       intra_backend_segment_properties_(intra_backend_segment_properties),
       output_directory_path_(output_directory_path),
       feature_model_(feature_model),
-      tracer_(tracer) { }
+      tracer_(tracer),
+      generation_timestamp_(generation_timestamp) { }
 
 void context::swap(context& other) noexcept {
     using std::swap;
@@ -78,6 +81,7 @@ void context::swap(context& other) noexcept {
     swap(output_directory_path_, other.output_directory_path_);
     swap(feature_model_, other.feature_model_);
     swap(tracer_, other.tracer_);
+    swap(generation_timestamp_, other.generation_timestamp_);
 }
 
 bool context::operator==(const context& rhs) const {
@@ -85,7 +89,8 @@ bool context::operator==(const context& rhs) const {
         intra_backend_segment_properties_ == rhs.intra_backend_segment_properties_ &&
         output_directory_path_ == rhs.output_directory_path_ &&
         feature_model_ == rhs.feature_model_ &&
-        tracer_ == rhs.tracer_;
+        tracer_ == rhs.tracer_ &&
+        generation_timestamp_ == rhs.generation_timestamp_;
 }
 
 context& context::operator=(context other) {
@@ -172,6 +177,22 @@ void context::tracer(const boost::shared_ptr<dogen::tracing::tracer>& v) {
 
 void context::tracer(const boost::shared_ptr<dogen::tracing::tracer>&& v) {
     tracer_ = std::move(v);
+}
+
+const std::string& context::generation_timestamp() const {
+    return generation_timestamp_;
+}
+
+std::string& context::generation_timestamp() {
+    return generation_timestamp_;
+}
+
+void context::generation_timestamp(const std::string& v) {
+    generation_timestamp_ = v;
+}
+
+void context::generation_timestamp(const std::string&& v) {
+    generation_timestamp_ = std::move(v);
 }
 
 }

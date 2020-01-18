@@ -109,7 +109,8 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"intra_backend_segment_properties\": " << v.intra_backend_segment_properties() << ", "
       << "\"output_directory_path\": " << "\"" << v.output_directory_path().generic_string() << "\"" << ", "
       << "\"feature_model\": " << v.feature_model() << ", "
-      << "\"tracer\": " << v.tracer()
+      << "\"tracer\": " << v.tracer() << ", "
+      << "\"generation_timestamp\": " << "\"" << tidy_up_string(v.generation_timestamp()) << "\""
       << " }";
     return(s);
 }

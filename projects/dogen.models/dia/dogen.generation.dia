@@ -9154,7 +9154,7 @@ model directory.#</dia:string>
         <dia:point val="35.7857,114.143"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="35.7357,114.093;84.0757,120.993"/>
+        <dia:rectangle val="35.7357,114.093;84.0757,121.793"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="35.7857,114.143"/>
@@ -9163,7 +9163,7 @@ model directory.#</dia:string>
         <dia:real val="48.239999999999995"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="7.6000000000000005"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#context#</dia:string>
@@ -9357,6 +9357,29 @@ model directory.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#generation_timestamp#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Human readable timestamp of when the generation took place.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

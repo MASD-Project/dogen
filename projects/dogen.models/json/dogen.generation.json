@@ -670,6 +670,11 @@
         {
           "name": "tracer",
           "type": "boost::shared_ptr<tracing::tracer>"
+        },
+        {
+          "name": "generation_timestamp",
+          "type": "std::string",
+          "documentation": "Human readable timestamp of when the generation took place.\n"
         }
       ]
     },

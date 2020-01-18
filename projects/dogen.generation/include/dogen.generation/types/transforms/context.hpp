@@ -52,7 +52,8 @@ public:
         const std::unordered_map<std::string, dogen::generation::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties,
         const boost::filesystem::path& output_directory_path,
         const boost::shared_ptr<dogen::variability::meta_model::feature_model>& feature_model,
-        const boost::shared_ptr<dogen::tracing::tracer>& tracer);
+        const boost::shared_ptr<dogen::tracing::tracer>& tracer,
+        const std::string& generation_timestamp);
 
 public:
     const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository() const;
@@ -85,6 +86,16 @@ public:
     void tracer(const boost::shared_ptr<dogen::tracing::tracer>& v);
     void tracer(const boost::shared_ptr<dogen::tracing::tracer>&& v);
 
+    /**
+     * @brief Human readable timestamp of when the generation took place.
+     */
+    /**@{*/
+    const std::string& generation_timestamp() const;
+    std::string& generation_timestamp();
+    void generation_timestamp(const std::string& v);
+    void generation_timestamp(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const context& rhs) const;
     bool operator!=(const context& rhs) const {
@@ -101,6 +112,7 @@ private:
     boost::filesystem::path output_directory_path_;
     boost::shared_ptr<dogen::variability::meta_model::feature_model> feature_model_;
     boost::shared_ptr<dogen::tracing::tracer> tracer_;
+    std::string generation_timestamp_;
 };
 
 }
