@@ -60,6 +60,8 @@ model_to_extraction_model_chain::registrar() {
 
 void model_to_extraction_model_chain::
 merge(extraction::meta_model::model&& src, extraction::meta_model::model& dst) {
+    dst.origin_element_id(src.origin_element_id());
+    dst.origin_sha1_hash(src.origin_sha1_hash());
     dst.artefacts().splice(dst.artefacts().end(), src.artefacts());
     dst.managed_directories().splice(dst.managed_directories().end(),
         src.managed_directories());
@@ -119,8 +121,8 @@ apply(const generation::transforms::context& ctx,
      */
     const bool ekd(m.extraction_properties().enable_backend_directories());
     auto r(t.apply(ctx, ekd, m));
-    // r.origin_element_id(m.origin_element_id());
-    // r.origin_sha1_hash(m.origin_sha1_hash());
+    r.origin_element_id(m.origin_element_id());
+    r.origin_sha1_hash(m.origin_sha1_hash());
 
     BOOST_LOG_SEV(lg, debug) << "Generated artefacts for : " << id
                              << ". Total artefacts: " << r.artefacts().size();
