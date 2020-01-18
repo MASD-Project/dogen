@@ -37,7 +37,8 @@ namespace dogen::generation::formatters {
  */
 class generation_marker_formatter final {
 public:
-    void format(std::ostream& s,
+    void format(std::ostream& s, const std::string& generation_timestamp,
+        const std::string& origin_shah1_hash,
         const assets::meta_model::decoration::generation_marker& gm) const;
 };
 

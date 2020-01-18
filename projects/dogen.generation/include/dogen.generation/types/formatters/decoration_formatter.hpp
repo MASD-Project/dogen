@@ -50,8 +50,10 @@ private:
     /**
      * @brief Adds the formatted modeline to the content.
      */
-    void add_marker(std::list<std::string>& content, const
-        boost::shared_ptr<
+    void add_marker(std::list<std::string>& content,
+        const std::string& generation_timestamp,
+        const std::string& origin_shah1_hash,
+        const boost::shared_ptr<
         assets::meta_model::decoration::generation_marker> gm) const;
 
     /**
@@ -70,6 +72,8 @@ public:
     void format_preamble(std::ostream& s, const comment_style& single_line_cs,
         const comment_style& multi_line_cs, const std::string& licence_text,
         const std::list<std::string>& copyright_notices,
+        const std::string& generation_timestamp,
+        const std::string& origin_shah1_hash,
         const boost::shared_ptr<
         assets::meta_model::decoration::modeline> ml, const
         boost::shared_ptr<
@@ -78,6 +82,8 @@ public:
     void format_preamble(std::ostream& s, const comment_style& cs,
         const std::string& licence_text,
         const std::list<std::string>& copyright_notices,
+        const std::string& generation_timestamp,
+        const std::string& origin_shah1_hash,
         const boost::shared_ptr<
         assets::meta_model::decoration::modeline> ml, const
         boost::shared_ptr<

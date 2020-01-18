@@ -125,6 +125,8 @@ decoration_transform::make_decoration(const std::string& licence_text,
     const boost::shared_ptr<modeline> ml,
     const boost::shared_ptr<generation_marker> gm,
     const std::list<std::string>& copyright_notices,
+    const std::string& generation_timestamp,
+    const std::string& origin_shah1_hash,
     const assets::meta_model::technical_space ts) {
 
     /*
@@ -140,19 +142,20 @@ decoration_transform::make_decoration(const std::string& licence_text,
         df.format_preamble(preamble_stream,
             comment_style::cpp_style/*single line*/,
             comment_style::c_style/*multi-line*/,
-            licence_text, copyright_notices,  ml, gm);
+            licence_text, copyright_notices,
+            generation_timestamp, origin_shah1_hash, ml, gm);
     } else if (ts == technical_space::csharp) {
         df.format_preamble(preamble_stream,
-            comment_style::csharp_style,
-            licence_text, copyright_notices,  ml, gm);
+            comment_style::csharp_style, licence_text, copyright_notices,
+            generation_timestamp, origin_shah1_hash, ml, gm);
     } else if (ts == technical_space::cmake || ts == technical_space::odb) {
         df.format_preamble(preamble_stream,
             comment_style::shell_style, licence_text,
-            copyright_notices,  ml, gm);
+            copyright_notices, generation_timestamp, origin_shah1_hash, ml, gm);
     } else if (ts == technical_space::xml) {
         df.format_preamble(preamble_stream,
             comment_style::xml_style, licence_text,
-            copyright_notices,  ml, gm);
+            copyright_notices, generation_timestamp, origin_shah1_hash, ml, gm);
     }
 
     std::ostringstream postamble_stream;
@@ -237,6 +240,8 @@ boost::optional<assets::meta_model::decoration::element_properties>
 decoration_transform::
 make_global_decoration(const helpers::decoration_repository drp,
     const boost::optional<decoration_configuration> root_dc,
+    const std::string& generation_timestamp,
+    const std::string& origin_shah1_hash,
     const assets::meta_model::technical_space ts) {
     /*
      * If there is no decoration configuration there shall be no
@@ -267,7 +272,8 @@ make_global_decoration(const helpers::decoration_repository drp,
     const auto l(get_short_form_licence(drp, dc.licence_name()));
     const auto ml(get_modeline(drp, dc.modeline_group_name(), ts));
     const auto gm(get_generation_marker(drp, dc.marker_name()));
-    const auto r(make_decoration(l, ml, gm, dc.copyright_notices(), ts));
+    const auto r(make_decoration(l, ml, gm, dc.copyright_notices(),
+            generation_timestamp, origin_shah1_hash, ts));
 
     BOOST_LOG_SEV(lg, trace) << "Created global decoration: " << r;
     return r;
@@ -280,6 +286,8 @@ decoration_transform::make_local_decoration(
     const boost::optional<assets::meta_model::decoration::element_properties>
     global_decoration,
     const boost::optional<decoration_configuration> element_dc,
+    const std::string& generation_timestamp,
+    const std::string& origin_shah1_hash,
     const assets::meta_model::technical_space ts) {
 
     BOOST_LOG_SEV(lg, trace) << "Creating local decoration.";
@@ -338,7 +346,8 @@ decoration_transform::make_local_decoration(
      * decoration configuration.
      */
     if (!root_dc) {
-        const auto r(make_decoration(ol, oml, ogm, dc.copyright_notices(), ts));
+        const auto r(make_decoration(ol, oml, ogm, dc.copyright_notices(),
+                generation_timestamp, origin_shah1_hash, ts));
         BOOST_LOG_SEV(lg, trace) << "Created local decoration without "
                                  << "overrides: " << r;
         return r;
@@ -356,7 +365,8 @@ decoration_transform::make_local_decoration(
     const auto overriden_copyright_notices(!dc.copyright_notices().empty() ?
         dc.copyright_notices() : root_dc->copyright_notices());
     const auto r(make_decoration(overriden_licence, overriden_modeline,
-            overriden_marker, overriden_copyright_notices, ts));
+            overriden_marker, overriden_copyright_notices,
+            generation_timestamp, origin_shah1_hash, ts));
 
     BOOST_LOG_SEV(lg, trace) << "Created local decoration with overrides: "
                              << r;
@@ -404,7 +414,8 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
         BOOST_LOG_SEV(lg, trace) << "Generating global decoration for "
                                  <<  "technical space: " << ts;
 
-        const auto gd(make_global_decoration(drp, root_dc, ts));
+        const auto gd(make_global_decoration(drp, root_dc,
+                ctx.generation_timestamp(), m.origin_sha1_hash(), ts));
         root_decorations[ts] = gd;
 
         if (ts == mts) {
@@ -477,7 +488,8 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
          */
         const auto& cfg(*e->configuration());
         const auto element_dc(read_decoration_configuration(fg, cfg));
-        e->decoration(make_local_decoration(drp, root_dc, gd, element_dc, ts));
+        e->decoration(make_local_decoration(drp, root_dc, gd, element_dc,
+                ctx.generation_timestamp(), m.origin_sha1_hash(), ts));
     }
     stp.end_transform(m);
 }

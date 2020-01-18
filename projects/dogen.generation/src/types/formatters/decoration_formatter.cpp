@@ -62,7 +62,9 @@ add_modeline(std::list<std::string>& content,
 }
 
 void decoration_formatter::
-add_marker(std::list<std::string>& content, const boost::shared_ptr<
+add_marker(std::list<std::string>& content,
+    const std::string& generation_timestamp,
+    const std::string& origin_shah1_hash, const boost::shared_ptr<
     assets::meta_model::decoration::generation_marker> gm) const {
     if (!gm) {
         BOOST_LOG_SEV(lg, trace) << "Generation marker is empty.";
@@ -71,7 +73,7 @@ add_marker(std::list<std::string>& content, const boost::shared_ptr<
 
     std::ostringstream s;
     generation_marker_formatter f;
-    f.format(s, *gm);
+    f.format(s, generation_timestamp, origin_shah1_hash, *gm);
     content.push_back(s.str());
 }
 
@@ -100,6 +102,8 @@ void decoration_formatter::format_preamble(
     std::ostream& s, const comment_style& single_line_cs,
     const comment_style& multi_line_cs, const std::string& licence_text,
     const std::list<std::string>& copyright_notices,
+    const std::string& generation_timestamp,
+    const std::string& origin_shah1_hash,
     const boost::shared_ptr<assets::meta_model::decoration::modeline> ml,
     const boost::shared_ptr<
     assets::meta_model::decoration::generation_marker> gm) const {
@@ -118,7 +122,7 @@ void decoration_formatter::format_preamble(
     if (is_top)
         add_modeline(content, ml);
 
-    add_marker(content, gm);
+    add_marker(content, generation_timestamp, origin_shah1_hash, gm);
     add_copyright_notices(content, copyright_notices);
     add_licence(content, licence_text);
 
@@ -150,12 +154,15 @@ void decoration_formatter::
 format_preamble(std::ostream& s, const comment_style& cs,
     const std::string& licence_text,
     const std::list<std::string>& copyright_notices,
+    const std::string& generation_timestamp,
+    const std::string& origin_shah1_hash,
     const boost::shared_ptr<assets::meta_model::decoration::modeline> ml,
     const boost::shared_ptr<
     assets::meta_model::decoration::generation_marker> gm) const {
 
     BOOST_LOG_SEV(lg, trace) << "Comment style: " << cs;
-    format_preamble(s, cs, cs, licence_text, copyright_notices, ml, gm);
+    format_preamble(s, cs, cs, licence_text, copyright_notices,
+        generation_timestamp, origin_shah1_hash, ml, gm);
 }
 
 void decoration_formatter::

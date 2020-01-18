@@ -93,6 +93,8 @@ private:
         const boost::shared_ptr<
         assets::meta_model::decoration::generation_marker> gm,
         const std::list<std::string>& copyright_notices,
+        const std::string& generation_timestamp,
+        const std::string& origin_shah1_hash,
         const assets::meta_model::technical_space ts);
 
 private:
@@ -102,6 +104,8 @@ private:
     static boost::optional<assets::meta_model::decoration::element_properties>
     make_global_decoration(const helpers::decoration_repository drp,
         const boost::optional<decoration_configuration> root_dc,
+        const std::string& generation_timestamp,
+        const std::string& origin_shah1_hash,
         const assets::meta_model::technical_space ts);
 
     /**
@@ -113,6 +117,8 @@ private:
         const boost::optional<
         assets::meta_model::decoration::element_properties> global_decoration,
         const boost::optional<decoration_configuration> element_dc,
+        const std::string& generation_timestamp,
+        const std::string& origin_shah1_hash,
         const assets::meta_model::technical_space ts);
 
 public:
