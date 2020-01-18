@@ -33,6 +33,14 @@
 #include "dogen.generation/io/meta_model/locator_properties_io.hpp"
 #include "dogen.generation/io/meta_model/global_archetype_location_properties_io.hpp"
 
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::assets::meta_model::name, dogen::assets::meta_model::origin_types>& v) {
@@ -111,14 +119,6 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 }
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
-
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
@@ -189,6 +189,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"__type__\": " << "\"dogen::generation::meta_model::model\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
+      << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(v.origin_sha1_hash()) << "\"" << ", "
+      << "\"origin_element_id\": " << "\"" << tidy_up_string(v.origin_element_id()) << "\"" << ", "
       << "\"references\": " << v.references() << ", "
       << "\"leaves\": " << v.leaves() << ", "
       << "\"elements\": " << v.elements() << ", "

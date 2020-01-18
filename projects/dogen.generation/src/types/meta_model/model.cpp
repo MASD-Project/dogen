@@ -50,6 +50,8 @@ model::model()
 model::model(model&& rhs)
     : name_(std::move(rhs.name_)),
       meta_name_(std::move(rhs.meta_name_)),
+      origin_sha1_hash_(std::move(rhs.origin_sha1_hash_)),
+      origin_element_id_(std::move(rhs.origin_element_id_)),
       references_(std::move(rhs.references_)),
       leaves_(std::move(rhs.leaves_)),
       elements_(std::move(rhs.elements_)),
@@ -68,6 +70,8 @@ model::model(model&& rhs)
 model::model(
     const dogen::assets::meta_model::name& name,
     const dogen::assets::meta_model::name& meta_name,
+    const std::string& origin_sha1_hash,
+    const std::string& origin_element_id,
     const std::unordered_map<dogen::assets::meta_model::name, dogen::assets::meta_model::origin_types>& references,
     const std::unordered_set<dogen::assets::meta_model::name>& leaves,
     const std::vector<boost::shared_ptr<dogen::assets::meta_model::element> >& elements,
@@ -84,6 +88,8 @@ model::model(
     const dogen::assets::meta_model::extraction_properties& extraction_properties)
     : name_(name),
       meta_name_(meta_name),
+      origin_sha1_hash_(origin_sha1_hash),
+      origin_element_id_(origin_element_id),
       references_(references),
       leaves_(leaves),
       elements_(elements),
@@ -103,6 +109,8 @@ void model::swap(model& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(meta_name_, other.meta_name_);
+    swap(origin_sha1_hash_, other.origin_sha1_hash_);
+    swap(origin_element_id_, other.origin_element_id_);
     swap(references_, other.references_);
     swap(leaves_, other.leaves_);
     swap(elements_, other.elements_);
@@ -122,6 +130,8 @@ void model::swap(model& other) noexcept {
 bool model::operator==(const model& rhs) const {
     return name_ == rhs.name_ &&
         meta_name_ == rhs.meta_name_ &&
+        origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
+        origin_element_id_ == rhs.origin_element_id_ &&
         references_ == rhs.references_ &&
         leaves_ == rhs.leaves_ &&
         elements_ == rhs.elements_ &&
@@ -174,6 +184,38 @@ void model::meta_name(const dogen::assets::meta_model::name& v) {
 
 void model::meta_name(const dogen::assets::meta_model::name&& v) {
     meta_name_ = std::move(v);
+}
+
+const std::string& model::origin_sha1_hash() const {
+    return origin_sha1_hash_;
+}
+
+std::string& model::origin_sha1_hash() {
+    return origin_sha1_hash_;
+}
+
+void model::origin_sha1_hash(const std::string& v) {
+    origin_sha1_hash_ = v;
+}
+
+void model::origin_sha1_hash(const std::string&& v) {
+    origin_sha1_hash_ = std::move(v);
+}
+
+const std::string& model::origin_element_id() const {
+    return origin_element_id_;
+}
+
+std::string& model::origin_element_id() {
+    return origin_element_id_;
+}
+
+void model::origin_element_id(const std::string& v) {
+    origin_element_id_ = v;
+}
+
+void model::origin_element_id(const std::string&& v) {
+    origin_element_id_ = std::move(v);
 }
 
 const std::unordered_map<dogen::assets::meta_model::name, dogen::assets::meta_model::origin_types>& model::references() const {

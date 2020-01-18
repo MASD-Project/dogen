@@ -33,7 +33,8 @@
       "documentation": "Yarn model.\n",
       "stereotypes": [
         "Nameable",
-        "MetaNameable"
+        "MetaNameable",
+        "DeterminableOrigin"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1066,6 +1067,26 @@
           "name": "formatting_input",
           "type": "masd::variability::text",
           "documentation": "If the formatting style requires a template, the name of the template to use.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::DeterminableOrigin",
+      "documentation": "A unit of assets that can be code generated.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "origin_sha1_hash",
+          "type": "std::string",
+          "documentation": "SHA1 key of the original injection model.\n"
+        },
+        {
+          "name": "origin_element_id",
+          "type": "std::string",
+          "documentation": "Unique identifier within the originan injection model for this modeling element.\n"
         }
       ]
     }

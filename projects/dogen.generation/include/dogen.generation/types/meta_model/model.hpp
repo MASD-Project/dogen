@@ -66,6 +66,8 @@ public:
     model(
         const dogen::assets::meta_model::name& name,
         const dogen::assets::meta_model::name& meta_name,
+        const std::string& origin_sha1_hash,
+        const std::string& origin_element_id,
         const std::unordered_map<dogen::assets::meta_model::name, dogen::assets::meta_model::origin_types>& references,
         const std::unordered_set<dogen::assets::meta_model::name>& leaves,
         const std::vector<boost::shared_ptr<dogen::assets::meta_model::element> >& elements,
@@ -91,6 +93,26 @@ public:
     dogen::assets::meta_model::name& meta_name();
     void meta_name(const dogen::assets::meta_model::name& v);
     void meta_name(const dogen::assets::meta_model::name&& v);
+
+    /**
+     * @brief SHA1 key of the original injection model.
+     */
+    /**@{*/
+    const std::string& origin_sha1_hash() const;
+    std::string& origin_sha1_hash();
+    void origin_sha1_hash(const std::string& v);
+    void origin_sha1_hash(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Unique identifier within the originan injection model for this modeling element.
+     */
+    /**@{*/
+    const std::string& origin_element_id() const;
+    std::string& origin_element_id();
+    void origin_element_id(const std::string& v);
+    void origin_element_id(const std::string&& v);
+    /**@}*/
 
     /**
      * @brief All other models that this model depends on, mapped to their origin.
@@ -215,6 +237,8 @@ public:
 private:
     dogen::assets::meta_model::name name_;
     dogen::assets::meta_model::name meta_name_;
+    std::string origin_sha1_hash_;
+    std::string origin_element_id_;
     std::unordered_map<dogen::assets::meta_model::name, dogen::assets::meta_model::origin_types> references_;
     std::unordered_set<dogen::assets::meta_model::name> leaves_;
     std::vector<boost::shared_ptr<dogen::assets::meta_model::element> > elements_;
