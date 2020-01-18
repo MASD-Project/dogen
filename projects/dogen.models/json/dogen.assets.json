@@ -1842,11 +1842,6 @@
           "name": "message",
           "type": "std::string",
           "documentation": "Custom message to add to each generated file.\n"
-        },
-        {
-          "name": "date_time",
-          "type": "std::string",
-          "documentation": "Human readable timestamp to be used within the marker.\n"
         }
       ]
     },

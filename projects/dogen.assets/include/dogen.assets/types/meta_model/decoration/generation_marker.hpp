@@ -70,8 +70,7 @@ public:
         const bool add_model_to_text_transform_details,
         const bool add_warning,
         const bool add_origin_sha1_hash,
-        const std::string& message,
-        const std::string& date_time);
+        const std::string& message);
 
 public:
     using element::accept;
@@ -137,16 +136,6 @@ public:
     void message(const std::string&& v);
     /**@}*/
 
-    /**
-     * @brief Human readable timestamp to be used within the marker.
-     */
-    /**@{*/
-    const std::string& date_time() const;
-    std::string& date_time();
-    void date_time(const std::string& v);
-    void date_time(const std::string&& v);
-    /**@}*/
-
 public:
     bool operator==(const generation_marker& rhs) const;
     bool operator!=(const generation_marker& rhs) const {
@@ -167,7 +156,6 @@ private:
     bool add_warning_;
     bool add_origin_sha1_hash_;
     std::string message_;
-    std::string date_time_;
 };
 
 }
