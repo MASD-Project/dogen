@@ -46,6 +46,7 @@ const std::string add_model_to_text_transform_details_attr_name(
     "add_model_to_text_transform_details");
 const std::string add_warning_attr_name("add_warning");
 const std::string add_message_attr_name("message");
+const std::string add_origin_sha1_hash_attr_name("add_origin_sha1_hash");
 const std::string true_value("true");
 const std::string false_value("false");
 
@@ -360,6 +361,8 @@ adapter::to_generation_marker(const assets::meta_model::location& l,
             r->add_warning(str_to_bool(v));
         else if (n == add_message_attr_name)
             r->message(attr.documentation());
+        else if (n == add_origin_sha1_hash_attr_name)
+            r->add_origin_sha1_hash(str_to_bool(v));
         else {
             BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
             BOOST_THROW_EXCEPTION(
