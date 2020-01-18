@@ -222,6 +222,8 @@ apply(const assets::meta_model::model& m) {
     r.root_module(m.root_module());
     r.orm_properties(m.orm_properties());
     r.extraction_properties(m.extraction_properties());
+    r.origin_element_id(m.origin_element_id());
+    r.origin_sha1_hash(m.origin_sha1_hash());
 
     const auto size(compute_total_size(m));
     r.elements().reserve(size);
