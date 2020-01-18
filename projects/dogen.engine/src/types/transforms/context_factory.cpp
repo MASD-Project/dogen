@@ -19,6 +19,7 @@
  *
  */
 #include <boost/make_shared.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
@@ -274,6 +275,14 @@ make_context(const configuration& cfg, const std::string& activity,
      */
     const auto& vo(cfg.model_processing().variability_overrides());
     r.injection_context().variability_overrides(vo);
+
+    /*
+     * Populate the generation timestamp.
+     */
+    using namespace boost::posix_time;
+    std::ostringstream s;
+    s << to_iso_extended_string(cfg.model_processing().activity_timestamp());
+    r.generation_context().generation_timestamp(s.str());
 
     return r;
 }
