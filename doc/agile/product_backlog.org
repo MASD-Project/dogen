@@ -3584,6 +3584,13 @@ in the frontend that returns a description and a method in the
 workflow that returns all descriptions. These must be static. Then
 knitter can then call these methods and build the info text.
 
+It would also be nice to have two different invocations of this
+command:
+
+- against a model: dumps stats on the model such as number of objects,
+  whether the generated code is up-to-date, etc.
+- system: information about the backends and frontends.
+
 *** Ignore ODB files automatically                                    :story:
 
 At present we are adding the following regular expressions to knitter
@@ -7731,16 +7738,6 @@ field instead.
       ]
     },
 #+end_example
-
-*** Emacs maintenance and exploration work                            :story:
-
-Any time spent improving emacs, exploring new modes, fixing snags,
-etc.
-
-- add support for indent guides. [[https://github.com/DarthFennec/highlight-indent-guides][highlight-indent-guides]], [[https://stackoverflow.com/questions/1587972/how-to-display-indentation-guides-in-emacs/56144459#56144459][SO question]].
-- treemacs issues: when blank type g to refresh.
-- lsp seems to update with every character we type. It would be nice
-  to update on save only.
 
 *** Consider adding support for JWT                                   :story:
 
@@ -13330,6 +13327,42 @@ It seems this is yet another RPC framework.
 Links:
 
 - [[http://bert-rpc.org/][specification]]
+
+*** LSP damemon for Dogen                                             :story:
+
+We should be able to create a simple LSP daemon that helps with dogen
+models and stitch templates. For dogen models:
+
+- provide completion of meta-data keys
+- model validation (flycheck)
+- completion of model elements, context sensitive.
+- completion of references (assuming a "reference directory"
+  parameter)
+- help hints for meta-data features: description of the feature and
+  example usage. This should be added to every feature.
+- help hints for types based on their documentation.
+
+See also the MOP story for more ideas. In terms of implementation, we
+probably need to know the current line of the model so that we can
+figure out what modeling element we are sitting on. With this context,
+we can build an assets model and extract all of the required
+information.
+
+For stitch templates:
+
+- mainly meta-data hints and help.
+- find a way to call the LSP daemon for c++ with the expanded
+  template, and then interpret the resulting errors in terms of
+  template lines (we have a story for this).
+- find a way to call the LSP daemon for c++ and obtain its view of
+  completion etc. This is slightly harder because we need to map the
+  current line to the expanded template line. It may be even
+  impossible if in a for loop etc.
+
+Links:
+
+- [[https://www.reddit.com/r/cpp/comments/eov5fh/critique_my_project_libclsp_a_c17_library/][Critique my project. Libclsp, a C++17 library]]
+= [[https://github.com/otreblan/libclsp][libclsp]]: A C++17 library for language servers.
 
 *** LSP daemon for MOP                                                :story:
 
