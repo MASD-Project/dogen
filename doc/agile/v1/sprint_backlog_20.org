@@ -12,32 +12,32 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-01-19 Sun 09:47]
+#+CAPTION: Clock summary at [2020-01-19 Sun 18:54]
 | <75>                                                 |         |       |       |       |
 | Headline                                             | Time    |       |       |     % |
 |------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                         | *79:55* |       |       | 100.0 |
+| *Total time*                                         | *82:16* |       |       | 100.0 |
 |------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                              | 79:55   |       |       | 100.0 |
-| Active                                               |         | 79:55 |       | 100.0 |
-| Edit release notes for previous sprint               |         |       | 11:24 |  14.3 |
+| Stories                                              | 82:16   |       |       | 100.0 |
+| Active                                               |         | 82:16 |       | 100.0 |
+| Edit release notes for previous sprint               |         |       | 11:24 |  13.9 |
 | Create a demo and presentation for previous sprint   |         |       |  2:31 |   3.1 |
-| Sprint and product backlog grooming                  |         |       |  4:42 |   5.9 |
+| Sprint and product backlog grooming                  |         |       |  4:42 |   5.7 |
 | Fix OSX build errors                                 |         |       |  0:25 |   0.5 |
 | Fix broken build due to incorrect postgres library   |         |       |  2:31 |   3.1 |
 | Fix borked nightly  due to serialisation link errors |         |       |  1:18 |   1.6 |
-| Create a profile called =untested=                   |         |       |  0:17 |   0.4 |
-| Remove =odb_properties= in element properties        |         |       |  2:36 |   3.3 |
-| Allow non-throwing casts for enums                   |         |       |  0:41 |   0.9 |
-| Add type overrides to primitives                     |         |       |  8:55 |  11.2 |
-| Create a string-based tracing backend interface      |         |       |  5:22 |   6.7 |
-| Create a tracing registrar                           |         |       |  1:10 |   1.5 |
+| Create a profile called =untested=                   |         |       |  0:17 |   0.3 |
+| Remove =odb_properties= in element properties        |         |       |  2:36 |   3.2 |
+| Allow non-throwing casts for enums                   |         |       |  0:41 |   0.8 |
+| Add type overrides to primitives                     |         |       |  8:55 |  10.8 |
+| Create a string-based tracing backend interface      |         |       |  5:22 |   6.5 |
+| Create a tracing registrar                           |         |       |  1:10 |   1.4 |
 | Move member variable name to assets                  |         |       |  0:09 |   0.2 |
 | Create a transform instance ID property              |         |       |  0:31 |   0.6 |
 | Laptop issues                                        |         |       |  0:18 |   0.4 |
-| Do not compute the timestamp at formatting time      |         |       |  1:53 |   2.4 |
-| Record a SHA1 of loaded injection models             |         |       |  5:38 |   7.0 |
-| Add relational tracing support                       |         |       | 27:47 |  34.8 |
+| Do not compute the timestamp at formatting time      |         |       |  1:53 |   2.3 |
+| Record a SHA1 of loaded injection models             |         |       |  5:38 |   6.8 |
+| Add relational tracing support                       |         |       | 30:08 |  36.6 |
 | Nightly code coverage is not being reported          |         |       |  0:23 |   0.5 |
 | Move registrar into assets                           |         |       |  0:59 |   1.2 |
 | Add injection details to all models                  |         |       |  0:25 |   0.5 |
@@ -749,6 +749,18 @@ which is then used everywhere.
  - [[https://gist.github.com/jhasse/990731][SHA-1 With Boost]]
  - [[https://stackoverflow.com/questions/28489153/how-to-portably-compute-a-sha1-hash-in-c][How to portably compute a sha1 hash in C++?]]
 
+*** COMPLETED Allow outputting a SHA1 of model in decoration          :story:
+    CLOSED: [2020-01-19 Sun 18:53]
+
+*Rationale*: implemented as part of the SHA1 hash work.
+
+One way to check if a generated model corresponds to the current
+version of the file is to create a SHA1 key of the model. This could
+optionally be outputted somewhere such as the comments for the model
+itself or, less ideally, into each generated file. This could be a
+parameter in decoration. We should also record if the model was
+compressed or uncompressed.
+
 *** COMPLETED Emacs maintenance and exploration work                  :story:
     CLOSED: [2020-01-19 Sun 09:32]
 
@@ -762,8 +774,11 @@ etc.
 - lsp seems to update with every character we type. It would be nice
   to update on save only.
 
-*** STARTED Add relational tracing support                            :story:
+*** COMPLETED Add relational tracing support                          :story:
+    CLOSED: [2020-01-19 Sun 18:53]
     :LOGBOOK:
+    CLOCK: [2020-01-19 Sun 17:04]--[2020-01-19 Sun 18:53] =>  1:49
+    CLOCK: [2020-01-19 Sun 13:01]--[2020-01-19 Sun 13:33] =>  0:32
     CLOCK: [2020-01-17 Fri 10:01]--[2020-01-17 Fri 11:15] =>  1:14
     CLOCK: [2020-01-13 Mon 18:26]--[2020-01-13 Mon 19:05] =>  0:39
     CLOCK: [2020-01-09 Thu 18:57]--[2020-01-09 Thu 19:02] =>  0:05
@@ -1028,15 +1043,6 @@ Not supplying a tracing backend results in the following error:
 : Error: Tracing backend is unsupported: { "__type__": "tracing_backend", "value": "invalid" }
 
 We need to add a sensible default value.
-
-*** Allow outputting a SHA1 of model in decoration                    :story:
-
-One way to check if a generated model corresponds to the current
-version of the file is to create a SHA1 key of the model. This could
-optionally be outputted somewhere such as the comments for the model
-itself or, less ideally, into each generated file. This could be a
-parameter in decoration. We should also record if the model was
-compressed or uncompressed.
 
 *** Add injection details to all models                               :story:
     :LOGBOOK:

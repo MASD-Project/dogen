@@ -230,6 +230,7 @@ dia_objects_in_diagram('7365a22d-fa44-43d1-8882-9d738f26a8db');
 select * from
 classes_in_diagram('7365a22d-fa44-43d1-8882-9d738f26a8db');
 
+select * from target_for_run();
 
 
 select "TIMESTAMP", "RUN_ID"
@@ -296,3 +297,87 @@ as varchar(1000)
 from "TRANSFORM_EVENT"
 where "RUN_ID" = '1e4f6480-03b4-4581-ae59-a4af4db27fb0'
 and "TRANSFORM_ID" like '%parsing%';
+
+
+select * from classes_in_diagram('e3c2d9e2-6f69-48c7-9fc6-bb3f6142b0b3');
+select * from dia_objects_names_and_stereotypes('e3c2d9e2-6f69-48c7-9fc6-bb3f6142b0b3');
+select * from dia_objects_names_and_stereotypes('0dbc4a13-5616-47bc-a7db-3385c053b1fe');
+select * from dia_objects_names_and_stereotypes('3a02b124-1f96-4615-b2bd-65dbbca88ce6');
+select * from dia_objects_names_and_stereotypes('1ac468b1-0b4f-4285-85a1-d664b581bf23');
+
+
+select * from dia_objects_names_and_stereotypes('e3c2d9e2-6f69-48c7-9fc6-bb3f6142b0b3');
+select * from dia_objects_names_and_stereotypes('fffffc78-af5c-437b-9c2c-fb85a6438817');
+fffffc78-af5c-437b-9c2c-fb85a6438817
+
+
+select distinct "PAYLOAD_TYPE"
+from transforms_for_run_id('5036d5a6-d10c-4de8-a83a-25f15347fa40');
+where "PAYLOAD_TYPE" = 'dogen::dia::diagram';
+
+select "TRANSFORM_INSTANCE_ID", "TRANSFORM_ID", cast("PAYLOAD" as varchar(50)) "PAYLOAD"
+from transforms_for_run_id('5036d5a6-d10c-4de8-a83a-25f15347fa40')
+where "PAYLOAD_TYPE" = 'dogen::injection::meta_model::model';
+
+/*
+ * Find registrars in assets model.
+ */
+select "TRANSFORM_INSTANCE_ID", "TRANSFORM_ID",
+cast("PAYLOAD"->'serialization_elements'->'type_registrars' as varchar(50)) "PAYLOAD"
+from transforms_for_run_id('1675f7b9-5ccd-4e9d-8d92-d0b7972031ba')
+where "PAYLOAD_TYPE" = 'dogen::assets::meta_model::model';
+
+select "TRANSFORM_INSTANCE_ID", "TRANSFORM_ID",
+cast("PAYLOAD"->'elements' as varchar(50)) "PAYLOAD"
+from transforms_for_run_id('1675f7b9-5ccd-4e9d-8d92-d0b7972031ba')
+where "PAYLOAD_TYPE" = 'dogen::generation::meta_model::model';
+
+/*
+* All types on a generation model.
+*/
+select "TRANSFORM_INSTANCE_ID", "TRANSFORM_ID",
+cast(jsonb_array_elements("PAYLOAD"->'elements')->'data'->'__parent_0__'->'name'->'qualified'->>'dot' as varchar(50)) "PAYLOAD"
+from "TRANSFORM_EVENT"
+where "TRANSFORM_INSTANCE_ID" = 'eb11cf0b-4e81-465f-8ba3-581538197275';
+
+select x."TRANSFORM_INSTANCE_ID", x."TRANSFORM_ID", x."NAME"
+from (
+    select "TRANSFORM_INSTANCE_ID", "TRANSFORM_ID",
+    cast(jsonb_array_elements("PAYLOAD"->'elements')->'data'->'__parent_0__'->'name'->'qualified'->>'dot' as varchar(50)) "NAME"
+    from transforms_for_run_id('1675f7b9-5ccd-4e9d-8d92-d0b7972031ba')
+    where "PAYLOAD_TYPE" = 'dogen::generation::meta_model::model'
+) x
+where x."NAME" like '%registrar%';
+
+select "NAME", jsonb_pretty("PROPS")
+from (
+    select x."ELEMENT"->'data'->'__parent_0__'->'name'->'qualified'->>'dot' "NAME",
+        x."ELEMENT"->'data'->'__parent_0__'->'archetype_location_properties' "PROPS"
+    from (
+        select jsonb_array_elements("PAYLOAD"->'elements') "ELEMENT"
+        from "TRANSFORM_EVENT"
+        where "TRANSFORM_INSTANCE_ID" = 'befb54bc-de91-4c52-a73d-0839d3e87871'
+    ) x
+) y
+where y."NAME" like '%registrar%';
+
+
+
+
+
+/*
+ * Extraction
+ */
+select "TRANSFORM_INSTANCE_ID", "TRANSFORM_ID",
+cast("PAYLOAD" as varchar(50)) "PAYLOAD"
+from transforms_for_run_id('1675f7b9-5ccd-4e9d-8d92-d0b7972031ba')
+where "PAYLOAD_TYPE" = 'dogen::extraction::meta_model::model';
+
+select a."TRANSFORM_ID", a."PATH" from
+(
+select "TRANSFORM_ID", cast(jsonb_array_elements("PAYLOAD"->'artefacts')->>'path' as varchar(200)) "PATH"
+    from transforms_for_run_id('1675f7b9-5ccd-4e9d-8d92-d0b7972031ba')
+    where
+       "PAYLOAD_TYPE" = 'dogen::extraction::meta_model::model'
+) a
+where a."PATH" like '%registrar%';

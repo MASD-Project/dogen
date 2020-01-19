@@ -30876,7 +30876,7 @@ as a modeline.#</dia:string>
         <dia:point val="-232.007,-4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-232.757,-9.77857;-223.8,-3.2"/>
+        <dia:rectangle val="-232.757,-9.7786;-223.8,-3.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30885,7 +30885,7 @@ as a modeline.#</dia:string>
         <dia:point val="-232.007,-4"/>
         <dia:point val="-232.007,-7"/>
         <dia:point val="-224,-7"/>
-        <dia:point val="-224,-9.72857"/>
+        <dia:point val="-224,-9.7286"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -31017,7 +31017,7 @@ as a modeline.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-201.17,-9.72857"/>
+        <dia:point val="-201.17,-9.7286"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
         <dia:rectangle val="-206.405,-10.4786;-200.42,-3.2"/>
@@ -31026,7 +31026,7 @@ as a modeline.#</dia:string>
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-201.17,-9.72857"/>
+        <dia:point val="-201.17,-9.7286"/>
         <dia:point val="-201.17,-7"/>
         <dia:point val="-206.355,-7"/>
         <dia:point val="-206.355,-4"/>

@@ -97,12 +97,12 @@ $$ language 'sql';
  */
 create or replace function transforms_for_run_id(in p_run_id text)
     returns table("TIMESTAMP" timestamp, "TRANSFORM_ID" text, "TRANSFORM_TYPE" text,
-        "EVENT_TYPE" text, "PARENT_TRANSFORM" text, "TRANSFORM_INSTANCE_ID" text, "PAYLOAD" text,
+        "EVENT_TYPE" text, "PARENT_TRANSFORM" text, "TRANSFORM_INSTANCE_ID" text, "PAYLOAD" jsonb,
         "PAYLOAD_TYPE" text)
 as $$
     select "TIMESTAMP", "TRANSFORM_ID", (CASE WHEN "TRANSFORM_TYPE" = 1 THEN  'CHAIN' ELSE 'LEAF' END) "TRANSFORM_TYPE",
         (CASE WHEN "EVENT_TYPE" = 1 THEN  'START' ELSE 'END' END) "EVENT_TYPE", "PARENT_TRANSFORM",
-        "TRANSFORM_INSTANCE_ID", cast("PAYLOAD" as varchar(20)) "PAYLOAD", "PAYLOAD"->>'__type__' "PAYLOAD_TYPE"
+        "TRANSFORM_INSTANCE_ID", "PAYLOAD", "PAYLOAD"->>'__type__' "PAYLOAD_TYPE"
     from "TRANSFORM_EVENT"
     where "RUN_ID" = p_run_id
     order by "TIMESTAMP" asc;
@@ -131,23 +131,54 @@ as $$
     and "EVENT_TYPE" = 1;
 $$ language 'sql';
 
+create or replace function dia_objects_with_attributes_in_diagram(in p_transform_instance_id text)
+    returns table("ID" text, "TYPE" text, "ATTRIBUTES" jsonb)
+as $$
+    select
+        objects."OBJECT"->>'id' "ID",
+        objects."OBJECT"->>'type' "type",
+        jsonb_array_elements(objects."OBJECT"->'attributes') "ATTRIBUTES"
+    from (
+        select * from dia_objects_in_diagram(p_transform_instance_id)
+         ) as objects;
+$$ language 'sql';
 
 create or replace function classes_in_diagram(in p_transform_instance_id text)
-    returns table("ID" text, "TYPE" text, "NAME" text)
+    returns table("ID" text, "NAME" text)
 as $$
-    select "id", "type",
-        substring(attrs.attributes->'values'->0->'data'->>'value', 2,
-            length(attrs.attributes->'values'->0->'data'->>'value') - 2
-        ) "name"
+    select "ID", substring(attrs."ATTRIBUTES"->'values'->0->'data'->>'value', 2,
+            length(attrs."ATTRIBUTES"->'values'->0->'data'->>'value') - 2
+        ) "NAME"
     from (
         select
-            objects."OBJECT"->>'id' "id",
-            objects."OBJECT"->>'type' "type",
-            jsonb_array_elements(objects."OBJECT"->'attributes') "attributes"
+            objects."OBJECT"->>'id' "ID",
+            objects."OBJECT"->>'type' "TYPE",
+            jsonb_array_elements(objects."OBJECT"->'attributes') "ATTRIBUTES"
             from (
                 select * from dia_objects_in_diagram(p_transform_instance_id)
             ) as objects
      ) as attrs
      where
-         attrs.attributes->>'name' like 'name' and "type" like 'UML - Class';
+         attrs."ATTRIBUTES"->>'name' like 'name' and "TYPE" like 'UML - Class';
+$$ language 'sql';
+
+create or replace function dia_objects_names_and_stereotypes(in p_transform_instance_id text)
+    returns table("ID" text, "NAME" text, "STEREOTYPES" text)
+as $$
+    select a."ID", a."NAME", b."STEREOTYPES"
+    from (
+        select "ID", substring("ATTRIBUTES"->'values'->0->'data'->>'value', 2,
+            length("ATTRIBUTES"->'values'->0->'data'->>'value') - 2) "NAME"
+        from
+            dia_objects_with_attributes_in_diagram(p_transform_instance_id)
+        where
+            "ATTRIBUTES"->>'name' = 'name' and "TYPE" = 'UML - Class'
+    ) a inner join (
+        select "ID", substring("ATTRIBUTES"->'values'->0->'data'->>'value', 2,
+            length("ATTRIBUTES"->'values'->0->'data'->>'value') - 2) "STEREOTYPES"
+        from
+            dia_objects_with_attributes_in_diagram(p_transform_instance_id)
+        where
+            "ATTRIBUTES"->>'name' = 'stereotype' and "TYPE" = 'UML - Class'
+    ) b on a."ID" = b."ID";
 $$ language 'sql';
