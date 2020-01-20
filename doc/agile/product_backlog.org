@@ -16,6 +16,451 @@ such as profiles, licences etc.
 
 Stories that we haven't quite classified yet, but are needed.
 
+*** Tracing backend is not defaulted                                  :story:
+
+Not supplying a tracing backend results in the following error:
+
+: FAILED: projects/dogen.models/dia/CMakeFiles/generate_dogen.dia
+: cd /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang9/Release && /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang9/Release/stage/bin/dogen.cli generate --target /work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen.models/dia/dogen.dia --log-enabled --log-level trace --tracing-enabled --tracing-level detail --tracing-guids-enabled --reporting-enabled --reporting-style org-mode --output-directory /work/DomainDrivenConsulting/masd/dogen/integration/projects/
+: Error: Tracing backend is unsupported: { "__type__": "tracing_backend", "value": "invalid" }
+
+We need to add a sensible default value.
+
+*** Add injection details to all models                               :story:
+    :LOGBOOK:
+    CLOCK: [2020-01-17 Fri 11:16]--[2020-01-17 Fri 11:41] =>  0:25
+    :END:
+
+At present we have no way to connect a given element to its origin in
+an extraction model. This is a particular problem in the relation
+model because we want to be able to join columns from different models
+(e.g. get this object across all representations). We need to record:
+
+- dia ID.
+- file name: or maybe hash of the filename? or of path? or even better
+  the SHA1 of the model? This would enable us to know exactly if a
+  given dia file in its current state
+- line, column.
+
+However our current parsers (XML, JSON will not make it easy to record
+the line and column so this needs to be deferred.
+
+*** Add support for qualified class names in dia                      :story:
+
+Note: test this feature as we implemented something similar.
+
+#+begin_quote
+*Story*: As a dogen user, I don't want to have to define packages in
+certain cases.
+#+end_quote
+
+It has become apparent that creating large packages in dia and placing
+all classes in a large package is cumbersome:
+
+- there are issues with the large package implementation in dia,
+  making copying and pasting a dark art; its not very obvious how one
+  copies into a package (e.g. populating the child node id correctly).
+- models do not always have a neat division between packages; in
+  dogen, where packages would be useful, there are all sorts of
+  connections (e.g. inheritance, association) between the package and
+  the model "package" or other packages. Thus is very difficult to
+  produce a representative diagram.
+
+A solution to this problem would be to support qualified names in
+class names; these would be interpreted as being part of the current
+model. One would still have to define a large package, but it could be
+empty, or contain only the types which only have connections inside
+the package, plus comments for the package, etc.
+
+*** References to ODB types in different namespaces fails             :story:
+
+By mistake we created a type which was meant to be in the relational
+namespace, but due to dia's peculiarities around copy and pasting,
+ended up in the model namespace. The generated ODB files had includes
+that placed the referenced ODB files in "types" rather than in
+"odb". It seems there is some kind of regex error.
+
+*** Add dependency checks to transforms                               :story:
+
+Check the backlog as we may already have this story. At present we do
+not have a way to determine if a given transform dependency has been
+met. Say for example transform A depends on transform B; we are aware
+of this only because the comments on the transform chains tell us
+so. It would be nicer if we could declare transform dependencies (and
+reasons) as part of the transform "interface" and then check that a
+given transform has indeed been applied to a model. This also fits in
+with the idea that we keep track of which transforms have affected a
+given model. In this sense we need to capture:
+
+- what transforms have been applied;
+- whether the transform has modified anything or not.
+
+*** Schema name propagation is not handled correctly                  :story:
+
+The logic around the propagation of schema names is very dodgy. Not
+only do we rely on overwriting the schema name (e.g. first we take the
+containing module schema name, then we check to see if its overridden
+at the element level) but we also do not take into account recursive
+composition. We need to revisit this.
+
+*** Fix broken tests for clang-cl on release                          :story:
+
+We have a number of failing tests, without any output:
+
+- dogen.assets.tests:
+  - attributes_transform_tests/model_with_object_template_that_inhertis_missing_object_template_throws
+  - attributes_transform_tests/model_with_object_that_instantiates_missing_object_template_throws
+  - attributes_transform_tests/model_with_object_that_instantiates_object_template_with_missing_parent_throws
+  - object_templates_transform_tests/model_with_object_template_that_parents_missing_object_template_throws
+  - object_templates_transform_tests/model_with_object_that_models_missing_object_template_throws
+  - object_templates_transform_tests/model_with_object_with_missing_parent_throws
+  - pre_assembly_validator_tests/type_with_inconsistent_key_value_pair_throws
+  - pre_assembly_validator_tests/type_with_incorrect_model_name_throws
+  - resolver_tests/object_with_missing_attribute_type_throws
+  - resolver_tests/object_with_missing_third_degree_parent_in_different_models_throws
+  - resolver_tests/object_with_third_degree_parent_missing_within_single_model_throws
+  - stereotypes_transform_tests/visitable_object_with_no_leaves_throws
+- dogen.injection.dia.tests
+  - grapher_tests/adding_object_after_graph_has_been_generated_throws
+  - grapher_tests/generating_after_graph_has_been_generated_throws
+  - grapher_tests/generating_graph_with_first_degree_cycle_throws
+  - grapher_tests/querying_state_before_generating_throws
+  - hydrator_tests/missing_elements_model_throws
+- dogen.templating.tests
+  - stitch_formatter_tests/line_with_unmapped_variable_throws
+  - stitch_parser_tests/end_control_block_with_additional_characters_throws
+  - stitch_parser_tests/expression_in_expression_throws
+  - stitch_parser_tests/invalid_directive_throws
+  - stitch_parser_tests/invalid_inline_control_blocks_throw
+  - stitch_parser_tests/multiline_expression_block_throws
+  - stitch_parser_tests/standard_control_block_with_text_block_in_the_same_line_throws
+  - stitch_parser_tests/start_standard_control_block_marker_prefixed_by_additional_characters_throws
+  - stitch_parser_tests/stray_end_expression_block_throws
+  - stitch_parser_tests/text_block_with_standard_control_block_in_the_same_line_throws
+  - stitch_parser_tests/two_end_control_block_markers_in_a_row_throws
+  - stitch_parser_tests/two_start_standard_control_blocks_in_a_row_throws
+  - stitch_parser_tests/untermined_expression_block_throws
+- dogen.utility.tests:
+  - asserter_tests/assert_file_throws_for_non_existent_files
+  - file_tests/find_files_throws_when_argument_is_a_file
+  - file_tests/find_files_throws_when_directory_does_not_exist
+  - file_tests/read_file_content_throws_when_reading_non_existent_file
+  - resolver_tests/validating_resolver_throws_for_non_existent_paths
+  - splitter_tests/parsing_string_with_mixed_scope_operators_throws
+  - utility_tests/exception_shall_be_usable_as_a_boost_exception
+  - utility_tests/exception_shall_be_usable_as_a_standard_exception
+  - utility_tests/exericise_exception_derived_classes
+  - xml_tests/text_reader_reads_boolean_values_correctly
+
+Notes:
+
+- try disabling XML logs to see if we can get any additional output on
+  the console.
+
+*** Build dogen from docker                                           :story:
+
+- fix references to gcc6 etc
+- run:
+
+: docker exec -it zen_euclid env TERM=dumb
+: /home/marco/Development/DomainDrivenConsulting/dogen/build/scripts/build.linux.sh
+: Release 4 gcc /home/marco/local
+
+Merged stories:
+
+*Build dogen docker images from travis*
+
+We should build docker images with each commit into master.
+
+Links:
+
+- [[https://sebest.github.io/post/using-travis-ci-to-build-docker-images/][Using Travis.ci to build Docker images]]
+- [[https://github.com/OpenSourceRisk/Engine/tree/master/tools/docker][ORE docker script]]
+- [[https://giorgos.sealabs.net/build-and-test-against-docker-images-in-travis.html][Build and Test against Docker Images in Travis]]
+- [[https://medium.com/travis-on-docker/triple-stage-docker-builds-with-go-and-angular-1b7d2006cb88][Triple-Stage Docker Builds with Go and Angular]]
+- [[https://medium.com/travis-on-docker/multi-stage-docker-builds-for-creating-tiny-go-images-e0e1867efe5a][Multi-Stage Docker Builds for Creating Tiny Go Images]]
+- [[https://github.com/gliderlabs/docker-alpine/issues/24][What is the alpine equivalent to build-essential?]]
+- [[https://caveofcode.com/2017/03/continuous-delivery-to-kubernetes-with-travis-ci/][Continuous delivery to Kubernetes with Travis CI]]
+
+*** Test ORM support for table name and column name                   :story:
+
+At present it seems we can supply a table name, but no corresponding
+ODB pragmas are generated for it. The same seems to be the case with
+column name.
+
+Actually column name seems to work because we are using "raw" odb
+pragmas:
+
+: #DOGEN masd.orm.odb_pragma=column("LASTNAME")
+
+We should really have an ORM level concept of column name and table
+name.
+
+*** Allow property level bindings to primitives                       :story:
+
+We should map any variability bindings that happen at the
+property/attribute level to the anonymous attribute that all
+primitives have. This is because its not possible to address the
+anonymous attribute in a diagram. At present we are hacking these
+features to the =any= scope just so that we can move on. Affected
+features:
+
+: masd.orm.type_override
+: masd.orm.type_mapping
+
+In order for this to work, when we are building configurations from
+the original meta-model element, we need to "override" the
+type. However, this raises the question: what if we do want to bind
+something at the primitive level? What if something binds both to the
+property and the primitive?
+
+The alternative is to make the attribute explicit. We need to think
+about the consequences of this as well.
+
+*** Create a docker image for builds                                  :story:
+
+GCP's cloud builde uses the idea of cloud-builder images. These
+contain all of the basics required to build for a given language. Now,
+we can't use their images directly as they do not have CMake, but it
+does give us an interesting approach: we can create a MASD base build
+image with:
+
+- clang, gcc
+- cmake
+
+And then with it build vcpkg and build and install all of the deps. We
+need to be careful not to push the build files (over 13 GB!). We can
+then use this image for both Travis and the nightlies, as well as, one
+day, cloud build.
+
+While we're at it, we should also consider the points in the article below.
+
+Links:
+
+- [[https://github.com/GoogleCloudPlatform/cloud-builders/blob/master/bazel/Dockerfile][Bazel's cloud builder]]
+- [[https://www.toptal.com/devops/better-google-cloud-continuous-deployment][A Better Approach to Google Cloud Continuous Deployment]]
+- [[https://www.reddit.com/r/googlecloud/comments/9i093f/google_cloud_build_is_there_an_easier_way/][google cloud build is there an easier way?]]
+- [[https://cloud.google.com/cloud-build/docs/configuring-builds/create-basic-configuration][Creating a basic build configuration file]]
+- [[https://cloud.google.com/blog/products/devops-sre/cloud-build-brings-advanced-cicd-capabilities-to-github][Cloud Build brings advanced CI/CD capabilities to GitHub]]
+- [[https://cloud.google.com/cloud-build/docs/quickstart-docker?hl=en_GB&_ga=2.136964915.-2065564734.1572530049][Quickstart for Docker]]
+- [[https://github.com/GoogleCloudPlatform/cloud-builders/blob/master/bazel/Dockerfile][Dockerfile]]
+
+*** Profile overriding may cause link errors                          :story:
+
+In the previous sprint we've addressed the issue of generating all
+facets by using profile overriding. This worked, but relied on
+something we didn't notice: the code must always link against all
+libraries required by the full code generation. We subsequently
+removed boost serialisation from our list of libraries and now the
+nightly is failing to link with lots of errors like these:
+
+: /work/DomainDrivenConsulting/masd/vcpkg/masd/installed/x64-linux/include/boost/archive/basic_xml_oarchive.hpp:99: error: undefined reference to 'boost::archive::basic_xml_oarchive<boost::archive::xml_oarchive>::save_start(char const*)'
+
+The right solution is to have "facet specific" link libraries, that
+kick in when the facet is enabled. This will not happen for a long
+time.
+
+*** Move the build-file entities from fabric into assets              :story:
+
+We have a number of entities in fabric that are related to build files
+and should be moved together. The only problem is that we will need
+locator in generation in order to move these entities - or we need to
+update the existing expanders in =generation.cpp= to point to these
+new meta-elements. This may be the best bet so that we can break this
+work into discrete parts.
+
+*** Keep track of which transforms touch which elements               :story:
+
+It would be nice to be able to know, for a given modeling element,
+which transforms modified it. We can add a property to element in
+assets that is a list of transforms and guids, so that we can
+distinguish invocations. This way we can then easily ask the database
+for details.
+
+Notes:
+
+- add a "modified by" container to element. Its a pair of transform ID
+  and GUID. Add it to models as well.
+- update every transform to record this information.
+
+*** Create a meta-model mapping type for ORM                          :story:
+
+At present we are hacking the mapping of types in ODB by adding them
+next to the class using it. Ideally we should create a separate header
+file with all the mappings in a model and include it as required. The
+inclusion logic probably requires a fair bit of cleverness (.e.g is
+type in map?).
+
+Notes:
+
+- create a modeling element called =orm::type_map=. It has entries
+  with the fields of an ODB type map:
+  - database: optional
+  - source type
+  - destination type
+  - to: optional
+  - from: optional
+- we can use the attributes to represent entries, and name for source
+  type and value for destination type. The rest is supplied as
+  meta-data.
+- the name of the element will give raise to the name of the
+  file. There can be more than one map per model.
+- for each type with type overrides, check to see if the type name is
+  in any of the maps. If so, add an include. At the meta-model level
+  this can be captured as a dependency.
+- we should add a database of "any" or "all" - this would allow us to
+  add references that are not specific to a database engine.
+- we should obtain a list of the core types in ODB and check if a type
+  is n the list. If not, we should tell the user a type map needs to
+  be created.
+
+: #pragma db map sqlite:type("JSON_TEXT") as("TEXT") to("json((?))")
+: #pragma db map pgsql:type("JSONB") as("TEXT") to("to_jsonb((?)::jsonb)") from("from_jsonb((?))")
+
+*** Check OSX packages                                                :story:
+
+We need to ensure OSX packages are still working. At present, the
+build says:
+
+: FATALcould not find C++ runtime
+
+For this the problem appears to be that we are trying to add the C++
+run time and not finding it. We need to test the OSX packages and see
+if Dogen still works. If it does, remove this.
+
+:   if(EXISTS "/usr/local/lib/i386/libstdc++.6.dylib")
+:       set (cpp_runtime_libs
+:           ${cpp_runtime_libs} "/usr/local/lib/i386/libstdc++.6.dylib")
+:       set (cpp_runtime_libs
+:           ${cpp_runtime_libs} "/usr/local/lib/i386/libgcc_s.1.dylib")
+:   else()
+:       message(FATAL "could not find C++ runtime")
+:   endif()
+
+*** Modeling elements can have =profile= setup                        :story:
+
+We expected =masd.variability.profile= to be only applicable at the
+global scope, but when overriding it manually no error occurs but no
+override happens either. Check the binding properties of this field.
+
+*** Fix pictures in old release notes                                 :story:
+
+Many of the pictures we used in the past were in panoramio. These are
+now gone. We need to replace them with other pictures.
+
+*** Move registrar into assets                                        :story:
+
+Move the registrar type into assets, in the quickest way possible.
+
+Notes:
+
+- In order to avoid blocking due to lots of analysis, we need
+  to split this story into three:
+  - first, we need to just move the registrar as is into assets.
+  - a second story is to clean up the existing registrar code to have
+    less templates and possibly address the existing registration
+    bugs. We could also look into calling the registrars for
+    referenced models automatically as part of this work (at present
+    we are doing this manually).
+  - finally, we need some meta-level refactoring to figure out if the
+    pattern can be generalised to include initialisers, etc.
+  In general that should be our approach: try to split out the
+  capturing of patterns into as many steps as possible, to make sure
+  we don't get overwhelmed as we implement things.
+- we need to keep track of all type registrars on referenced models,
+  not on the referenced models themselves. We need to know which
+  models we referenced directly, and then find the registrars for
+  those models.
+- leaves need to know of the registrar. This is so that we can call it
+  in their generated tests. We could use the registrar transform to go
+  and find all leaves and populate their registrar name.
+- current state is that we cannot generate the registrar for some
+  reason.
+- test model with registrar is C++ model. Type is called
+  registrar. Its probably not a good idea to also call it registrar -
+  wouldn't that clash with the existing type?
+- we should have a warning/error: if using boost serialisation with a
+  model that has inheritance, the registrar should be present. Added
+  to warnings story.
+
+*** Setup laptop to work on dogen                                     :story:
+
+We haven't used the laptop for dogen for quite a bit so its behind the
+main machine. Get it in a shape to do development again.
+
+Items missing:
+
+- dir locals for projects
+- polymode
+- build2
+- odb
+
+*** Generate ORM tests                                                :story:
+
+We do not seem to be testing the generated ODB code. We don't need to
+test ODB per se, but we should at least have some sanity checks that
+test CRUD functionality.
+
+Notes:
+
+- for this we need a "masd database".
+- tests should only trigger if postgres or some other relational
+  database is detected.
+- if foreign keys are used we need to detect them and ensure we
+  populate the data accordingly.
+
+*** Schema name in ORM should be transitive                           :story:
+
+At present when we define the schema name on a top-level namespace, we
+don't "inherit" it from child namespaces. The problem is compounded by
+the fact that we need the schema name in order to output ODB pragmas
+(separate bug). It seems more logical to propagate the schema name to
+child namespaces.
+
+*** ODB pragmas not populated when schema name is not set             :story:
+
+At present we have a bug whereby not setting the schema name results
+in not having most ODB pragmas set. We should always populate them
+even if the schema name is not set. To be precise, the problem is not
+directly related to the schema name - we just require some ORM
+property to be set. AS it happens, it normally tends to be the schema
+name, because it makes sense to set it when defining a relational
+model. This is why we never bumped into this problem before.
+
+*** Upgrade to boost 1.70                                             :story:
+
+We should try to upgrade to latest boost.
+
+Notes:
+
+- the problem appears to be that with OSX we do not have a compiler
+  installed that can compile vcpkg. It is not clear how we did it
+  before. The installed XCode compiler is too old and we do not have
+  homebrew for gcc.
+- installed LLVM 7. Ninja then went on a strange loop, regenerating
+  CMake files. This was because NTP had not been working on OSX for
+  some reason, and the clock was in the past.
+- compiling with clang 7 causes the =-lc++fs= linking error. Tried
+  compiling with clang 8.
+- Compilation required setting LDFLAGS -L to point to the lib
+  directory of the download, else the static library for filesystem
+  could not be location.
+- We may have linking problems now that we are using XCode 10 in
+  travis and clang 8 to build vcpkg dependencies.
+- ODB 2.5 no longer works due to a git ref mismatch. Not clear why
+  that would be but the object we were referencing no longer exists in
+  code synthesis git repo.
+- the ref for ODB SQL lite 2.5.0-b.9 does not seem to exist in their
+  repo any longer. Due to this, the OSX build is failing. For now we
+  shall try to update excluding that dependency, given we are not even
+  using it.
+- boost regex fails to build. The problem is that we are picking up
+  the system compiler instead of CXX. It is not clear why that
+  is. Maybe we got lucky in the past because we were using c++14 but
+  now with c++17 system clang fails to compile because it does not
+  have c++ 17 support.
+- nightlies are now failing with a missing reference to SQL lite.
+
 *** Add "is abstract" to assets                                       :story:
 
 With C# we have started deciding if a class is abstract or not on the
