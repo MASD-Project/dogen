@@ -16,6 +16,15 @@ such as profiles, licences etc.
 
 Stories that we haven't quite classified yet, but are needed.
 
+*** Nightly code coverage is not being reported                       :story:
+    :LOGBOOK:
+    CLOCK: [2019-11-23 Sat 16:39]--[2019-11-23 Sat 16:49] =>  0:10
+    CLOCK: [2019-11-23 Sat 16:25]--[2019-11-23 Sat 16:38] =>  0:13
+    :END:
+
+We are running kcov in the nightlies, but we cannot see the results in
+the coverage tool.
+
 *** Tracing backend is not defaulted                                  :story:
 
 Not supplying a tracing backend results in the following error:

@@ -19,8 +19,9 @@ To be done on the last Sunday of the sprint.
 
 To be done on the Monday morning of the new sprint.
 
-1. Open new sprint, updating CMake version, README and appveyor
-   version. This should all be in one commit.
+1. Open new sprint, updating CMake version, README, appveyor version
+   and decoration formatter tests. This should all be in one
+   commit. Do NOT push.
 2. Regenerate the LAM models for C# and C++ with the new version, and
    commit the changed files. Push the commit. (Ensure there are no
    pending builds still running or tests will fail due to version
