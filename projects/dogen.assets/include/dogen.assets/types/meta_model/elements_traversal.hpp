@@ -100,6 +100,9 @@ inline void elements_traversal(const meta_model::model& m,
 
     for (const auto& pair : m.templating_elements().logic_less_templates())
         v(*pair.second);
+
+    // for (const auto& pair : m.serialization_elements().type_registrars())
+    //     v(*pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -152,6 +155,9 @@ inline void elements_traversal(const meta_model::model& m,
 
     for (const auto& pair : m.templating_elements().logic_less_templates())
         v(*pair.second);
+
+    // for (const auto& pair : m.serialization_elements().type_registrars())
+    //     v(*pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -205,6 +211,8 @@ inline void elements_traversal(meta_model::model& m,
     for (const auto& pair : m.templating_elements().logic_less_templates())
         v(*pair.second);
 
+    // for (const auto& pair : m.serialization_elements().type_registrars())
+    //     v(*pair.second);
 }
 /**@}*/
 
@@ -263,6 +271,9 @@ inline void shared_elements_traversal(const meta_model::model& m,
 
     for (const auto& pair : m.templating_elements().logic_less_templates())
         v(pair.second);
+
+    // for (const auto& pair : m.serialization_elements().type_registrars())
+    //     v(pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -315,6 +326,9 @@ inline void shared_elements_traversal(const meta_model::model& m,
 
     for (const auto& pair : m.templating_elements().logic_less_templates())
         v(pair.second);
+
+    // for (const auto& pair : m.serialization_elements().type_registrars())
+    //     v(pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -367,6 +381,9 @@ inline void shared_elements_traversal(meta_model::model& m,
 
     for (const auto& pair : m.templating_elements().logic_less_templates())
         v(pair.second);
+
+    // for (const auto& pair : m.serialization_elements().type_registrars())
+    //     v(pair.second);
 }
 /**@}*/
 
