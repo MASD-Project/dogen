@@ -6772,16 +6772,16 @@ model.#</dia:string>
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O45">
       <dia:attribute name="obj_pos">
-        <dia:point val="-247,14"/>
+        <dia:point val="-247,14.2143"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-247.05,12.95;-143.95,98.05"/>
+        <dia:rectangle val="-247.05,13.1643;-143.95,98.2643"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-247,14"/>
+        <dia:point val="-247,14.2143"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="103"/>
@@ -11303,16 +11303,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O77">
       <dia:attribute name="obj_pos">
-        <dia:point val="-141,14"/>
+        <dia:point val="-141,13.9286"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-141.05,12.95;46.05,98.05"/>
+        <dia:rectangle val="-141.05,12.8786;46.05,97.9786"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-141,14"/>
+        <dia:point val="-141,13.9286"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="187"/>
@@ -11744,7 +11744,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:point val="-114.317,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-125.518,22.15;-113.567,26.8"/>
+        <dia:rectangle val="-125.517,22.15;-113.567,26.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13033,7 +13033,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:point val="-95.59,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-102.143,20.0002;-94.84,26.8"/>
+        <dia:rectangle val="-102.142,20.0002;-94.84,26.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -16654,7 +16654,7 @@ space.#</dia:string>
         <dia:point val="-100,45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-107.143,42.2;-99.25,45.8"/>
+        <dia:rectangle val="-107.142,42.2;-99.25,45.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -25191,7 +25191,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:point val="-218.97,59"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-230.057,55.55;-218.22,59.8"/>
+        <dia:rectangle val="-230.058,55.55;-218.22,59.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -40295,13 +40295,13 @@ to serialisation.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O300">
       <dia:attribute name="obj_pos">
-        <dia:point val="-66,-27"/>
+        <dia:point val="-66,-27.0714"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-66.05,-27.05;-40.425,-23.35"/>
+        <dia:rectangle val="-66.05,-27.1214;-40.425,-23.4214"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-66,-27"/>
+        <dia:point val="-66,-27.0714"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.524999999999999"/>
@@ -41020,16 +41020,16 @@ to serialisation.
     </dia:object>
     <dia:object type="UML - Realizes" version="1" id="O307">
       <dia:attribute name="obj_pos">
-        <dia:point val="-53.2375,-23.4"/>
+        <dia:point val="-53.2375,-23.4714"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-57.0625,-23.45;-52.3875,-4.95"/>
+        <dia:rectangle val="-57.0625,-23.5214;-52.3875,-4.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-53.2375,-23.4"/>
+        <dia:point val="-53.2375,-23.4714"/>
         <dia:point val="-53.2375,-19"/>
         <dia:point val="-57.0125,-19"/>
         <dia:point val="-57.0125,-5"/>
@@ -41062,16 +41062,16 @@ to serialisation.
     </dia:object>
     <dia:object type="UML - Realizes" version="1" id="O308">
       <dia:attribute name="obj_pos">
-        <dia:point val="-53.2375,-23.4"/>
+        <dia:point val="-53.2375,-23.4714"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-54.0875,-23.45;-50.95,-16.95"/>
+        <dia:rectangle val="-54.0875,-23.5214;-50.95,-16.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-53.2375,-23.4"/>
+        <dia:point val="-53.2375,-23.4714"/>
         <dia:point val="-53.2375,-19"/>
         <dia:point val="-51,-19"/>
         <dia:point val="-51,-17"/>
@@ -41140,16 +41140,16 @@ to serialisation.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-66,-23.4"/>
+        <dia:point val="-66,-23.4714"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-66.75,-24.15;-60.585,-16.2"/>
+        <dia:rectangle val="-66.75,-24.2214;-60.585,-16.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-66,-23.4"/>
+        <dia:point val="-66,-23.4714"/>
         <dia:point val="-66,-19"/>
         <dia:point val="-60.785,-19"/>
         <dia:point val="-60.785,-17"/>
