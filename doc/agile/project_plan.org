@@ -90,7 +90,7 @@ task juggler installed:
 *** Project start
     :PROPERTIES:
     :task_id: start
-    :start: 2019-11-22
+    :start: 2020-01-23
     :END:
 
 * Sprints                                              :taskjuggler_resource:

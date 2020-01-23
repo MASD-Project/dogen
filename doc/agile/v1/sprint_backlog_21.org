@@ -12,20 +12,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-01-22 Wed 19:16]
+#+CAPTION: Clock summary at [2020-01-23 Thu 00:42]
 | <75>                                   |        |      |      |       |
 | Headline                               | Time   |      |      |     % |
 |----------------------------------------+--------+------+------+-------|
-| *Total time*                           | *3:47* |      |      | 100.0 |
+| *Total time*                           | *5:46* |      |      | 100.0 |
 |----------------------------------------+--------+------+------+-------|
-| Stories                                | 3:47   |      |      | 100.0 |
-| Active                                 |        | 3:47 |      | 100.0 |
-| Edit release notes for previous sprint |        |      | 3:47 | 100.0 |
+| Stories                                | 5:46   |      |      | 100.0 |
+| Active                                 |        | 5:46 |      | 100.0 |
+| Edit release notes for previous sprint |        |      | 5:46 | 100.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Edit release notes for previous sprint                    :story:
     :LOGBOOK:
+    CLOCK: [2020-01-23 Thu 00:38]--[2020-01-23 Thu 00:42] =>  0:04
+    CLOCK: [2020-01-22 Wed 22:42]--[2020-01-23 Thu 00:37] =>  1:55
     CLOCK: [2020-01-22 Wed 18:30]--[2020-01-22 Wed 19:16] =>  0:46
     CLOCK: [2020-01-22 Wed 08:02]--[2020-01-22 Wed 09:03] =>  1:01
     CLOCK: [2020-01-21 Tue 20:41]--[2020-01-21 Tue 22:09] =>  1:28
@@ -37,30 +39,31 @@ Add github release notes for previous sprint.
 Title: Dogen v1.0.20, "Oasis do Arco"
 
 #+BEGIN_SRC markdown
-**DRAFT: this release notes are still being worked on**
+- **DRAFT: release notes are still being worked on**
 
 ![Oasis do Arco](https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Mini_oasis_in_the_namibe_desert%2C_Angola.JPG/800px-Mini_oasis_in_the_namibe_desert%2C_Angola.JPG)
 _Arco Oasis, Namibe, Moçamedes, Angola. (C) 2011 [Paulo César Santos](https://commons.wikimedia.org/wiki/File:Mini_oasis_in_the_namibe_desert,_Angola.JPG)_
 
 # Introduction
 
-New year, new Dogen sprint! At around two months of elapsed time for 83 hours worth of commitment, this was yet another long, drawn-out affair, and the festive period most certainly did not help matters. Having said that, the sprint was reasonably focused on the mission at hand: making the relational model _just about_ usable. In doing so, it provided its fair share of highs and lows, and taught a great deal of lessons - more than we ever wished for. Ah, the joys, the joys. But, onwards we march!
+New year, new Dogen sprint! At around two months of elapsed time for 83 hours worth of commitment, this was yet another long, drawn-out affair, and the festive period most certainly did not help matters. Having said that, the sprint was reasonably focused on the one mission at hand: making the relational model _just about_ usable. In doing so, it provided its fair share of highs and lows, and taught a great deal of lessons - more than we ever wished for. Ah, the joys, the joys. But, onwards we march!
 
 # User visible changes
 
 This section covers stories that affect end users, with the video providing a quick demonstration of the new features, and the sections below describing them in more detail. Note that breaking changes are annotated with  :warning:. There were only a few small features this sprint.
 
 [![Sprint 1.0.20 Demo](https://img.youtube.com/vi/TkYQTW_jAGk/0.jpg)](https://youtu.be/TkYQTW_jAGk)
+_Video 1: Sprint 20 Demo._
 
 ## Add ODB type overrides to primitives
 
-Type overrides had not been used in anger in ORM until the relational model. As a result, we did not notice a problem in its implementation. The problem stems from declaring type overrides inline with the column, at the attribute level:
+Type overrides had not been used in anger in ORM until the relational model, and, as a result, we did not notice any problems with its implementation. Because the relational model makes heavy use of JSONB, we quickly spotted an issue when declaring type overrides inline with the column (_i.e._, at the attribute level):
 
 ```
 #DOGEN masd.orm.type_override=postgresql,JSONB
 ```
 
-However, according to the [ODB manual](https://www.codesynthesis.com/products/odb/doc/manual.xhtml#14.8), this incantation is not sufficient to cope with conversion functions and other more complex uses. And so, with this sprint, type mapping was updated to take advantage of ODB's flexibility. You can now define a type mapping at the element level:
+According to the [ODB manual](https://www.codesynthesis.com/products/odb/doc/manual.xhtml#14.8), this incantation is not sufficient to cope with conversion functions and other more complex uses. And so, with this sprint, type mapping was updated to take advantage of ODB's flexibility. You can now define a type mapping at the element level:
 
 ```
 #DOGEN masd.orm.type_override=postgresql,JSONB
@@ -68,19 +71,20 @@ However, according to the [ODB manual](https://www.codesynthesis.com/products/od
 #DOGEN masd.orm.type_mapping=sqlite,JSON_TEXT,TEXT,json((?))
 ```
 
-And make use of it at attribute level, as follows:
+You can then make use of it at attribute level, as previously. An even better scenario is to define a ```masd::primitive``` for the type, which takes care of it for you, and generates code like so:
 
 ```
-#pragma db member(json::value_) column("A_COLUMN") pgsql:type("JSONB")
+#pragma db member(json::value_) column("") pgsql:type("JSONB")
 ```
 
 For example uses of JSONB, please look at the discussion on the relational model in section _Significant Internal Stories_ below.
 
 ## Allow outputting the model's SHA1 hash in decoration
 
-The decoration marker has been expanded to allow the recording of the SHA1 hash of the target model. This is intended as a simple way to keep track of which model was used to generate the source code. In order to switch it on, simply add ```add_origin_sha1_hash``` to the generation marker:
+The decoration marker has been expanded to allow recording the SHA1 hash of the target model. This is intended as a simple way to keep track of which model was used to generate the source code. In order to switch it on, simply add ```add_origin_sha1_hash``` to the generation marker:
 
 ![Decoration marker](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/decoration_sha1_hash_example.png)
+_Figure 1: Sample decoration marker, obtained from the C++ Reference Model._
 
 The generated code will then contain the SHA1 hash:
 
@@ -94,22 +98,23 @@ The generated code will then contain the SHA1 hash:
  * Generated by MASD Dogen v1.0.21
 ```
 
-Sadly the SHA1 hash does not match the [git hash](https://stackoverflow.com/questions/5290444/why-does-git-hash-object-return-a-different-hash-than-openssl-sha1), but one can easily use ```sha1sum``` to compute the hash:
+Sadly the SHA1 hash does not match the [git hash](https://stackoverflow.com/questions/5290444/why-does-git-hash-object-return-a-different-hash-than-openssl-sha1); however, one can easily use ```sha1sum``` to compute the hash manually:
 
 ```
 $ sha1sum cpp_ref_impl.lam_model.dia
 be42bdb7f246ad4040f17dbcc953222492e1a3bf  cpp_ref_impl.lam_model.dia
 ```
 
-However, as we mentioned in the past features such as these should be used with caution since they may cause unnecessary changes to generated code and thus trigger expensive rebuilds. Careful consideration should be given before enabling it.
+Before we move on, there are a couple of points worthy of note with regards to this feature. First and foremost, we leave the following warning:
+
+> :exclamation: **Important**: Remember that SHA1 hashes in Dogen **are NOT a security measure**; they exist **only** for informational purposes.
+
+
+Secondly, as we mentioned in the past, features such as these (e.g. date/time, Dogen version, SHA1 hash, _etc._) should be used with caution since they may cause unnecessary changes to generated code and thus trigger expensive rebuilds. As such, we recommend that careful consideration should be given before enabling it.
 
 ## Improvements in generation timestamps
 
-For the longest of times, Dogen has allowed users to stamp each
-generated file with a generation timestamp. This is achieved via the
-parameter ```add_date_time``` which lives in generation markers - see
-screenshot above, where it is disabled. The typical output is as
-follows:
+For the longest time, Dogen has allowed users to stamp each file it generates with a _generation timestamp_. This is enabled via the parameter ```add_date_time```, which is part of the  generation marker meta-element; for an example of this meta-element see the screenshot above, where it is disabled. With it enabled, a typical output is as follows:
 
 ```
 /* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
@@ -122,27 +127,13 @@ follows:
  *
 ```
 
-In this sprint we did some minor improvements around the sourcing of
-this timestamp. Previously, we obtained it individually for each and
-every generated file, resulting in a (possibly) moving timestamp
-across an entire model generation. With this release, the timestamp
-for a given activity - e.g. conversion, generation - is now obtained
-once upfront and reused by all who require it. Not only is this
-approach more performant but it yields a better practical result
-because users are not particulary interested in the precise second a
-particular file was generated, but care instead about when a model was
-generated.
+In this sprint we did some minor improvements around the sourcing of this timestamp. Previously, we obtained it individually for each and every generated file, resulting in a (possibly) moving timestamp across a model generation. With this release, the timestamp for a given activity - e.g. conversion, generation, _etc._ - is now obtained once upfront and reused by all those who require it. Not only is this approach more performant but it yields a better outcome because users are not particularly interested in the precise second _any given file_ was generated, but care more about knowing when _a given model_ was generated.
 
-In addition, we decided to allow users to control this timestamp
-externally. The main rationale for this was unit testing, where having
-a moving timestamp with each test run was just asking for trouble. But
-it also seemed sensilbe to allow users to override this timestamp, if,
-for whatever reason, they need to. Remember that generation timestamps
-and SHA1 hashes of models **are NOT security measures**; they exist
-**only** for informational purposes.
+In addition, we decided to allow users to control this timestamp externally. The main rationale for this was unit testing, where having a moving timestamp with each test run was just asking for trouble. While we were at it, we also deemed sensible to allow users to override this timestamp, if, for whatever reason, they need to. Now, lest you start to think we are enabling "tampering", we repeat the previous warning:
 
-With that disclaimer firmly in hand, lets see how one can override the
-generation timestamp. A new command line argument was introduced:
+> :exclamation: **Important**: Remember that generation timestamps in Dogen **are NOT a security measure**; they exist **only** for informational purposes.
+
+With that disclaimer firmly in hand, lets see how one can override the generation timestamp. A new command line argument was introduced:
 
 ```
 Processing:
@@ -151,20 +142,17 @@ Processing:
                                  timestamp. Format: %Y-%m-%dT%H:%M:%S
 ```
 
-For instance, to change the generation timestamp of the example above,
-one could set it to ```--activity-timestamp 2020-02-01T01:01:01```,
-obtaining the following output:
+For instance, to change the generation timestamp of the example above, one could set it to ```--activity-timestamp 2020-02-01T01:01:01```, obtaining the following output:
 
 ```
-* This is a code-generated file.
+ * This is a code-generated file.
  *
  * Generation timestamp: 2020-02-01T01:01:01
  * WARNING: do not edit this file manually.
  * Generated by MASD Dogen v1.0.21
 ```
 
-Clearly, this is more of a troubleshooting feature than anything else,
-but it may prove to be useful.
+Clearly, this is more of a troubleshooting feature than anything else, but it may prove to be useful.
 
 # Development Matters
 
@@ -175,46 +163,22 @@ In this section we cover topics that are mainly of interest if you follow Dogen 
 The 9999th commit was made to Dogen this sprint.
 
 ![100th release](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/milestones_9999_commits.png)
-_Figure 6: 100th release of Dogen from GitHub._
+_Figure 2: 9999th release of Dogen from GitHub._
 
 ## Significant Internal Stories
 
-The sprint was composed by mainly internal stories, which this section
-describes in detail.
+The sprint was mostly dominated by internal stories, which this section describes in detail.
 
 ### Add relational tracing support
 
-This sprint brought to a close work on the relational model. It was
-the culmination of a multi-sprint effort that required some
-significant changes to the core of Dogen - particularly to the tracing
-subsystem, as well as to ORM. The hard-core Dogen fan may be
-interested in a series of videos which captured the design and
-development of this feature:
+This sprint brought to a close work on the relational model. It was the culmination of a multi-sprint effort that required some significant changes to the core of Dogen - particularly to the tracing subsystem, as well as to ORM. The hard-core Dogen fan may be interested in a series of videos which captured the design and development of this feature:
 
 [![MASD - Dogen Coding: Relational Model for Tracing - Part 1](https://img.youtube.com/vi/re36Sr1u0Iw/0.jpg)](https://www.youtube.com/watch?v=re36Sr1u0Iw&list=PLwfrwe216gF3EzrrvwNFivnLSZ2l8X9k6&index=2)
+_Video 2: Playlist "MASD - Dogen Coding: Relational Model for Tracing"._
 
-The (rather long) series will hopefully reach its "grand finale" this
-sprint, but the "TL; DR" is that it is now possible to dump all
-information produced by a Dogen run into a relational database. This
-includes both tracing data as well as all logging, at the user has
-chosen log level. It is important to note that a full run in this
-manner is slow: dumping all of Dogen's models (18, at the present
-count) can take the best part of an hour. Interestingly, the majority
-of the cost comes from dumping the log at debug level. A dump with
-just tracing information takes less than 10 minutes, making it
-reasonably useful. Regardless of the wait, once the data is in the
-database, the full power of SQL and Postgres can be harnessed.
+The (rather long) series of videos will hopefully reach its "climax" this sprint, but (spoiler alert) its "TL; DR" is that it is now possible to dump all information produced by a Dogen run into a relational database. This includes both tracing data as well as all logging, at the user-chosen log level. It is important to note that a full run in this manner is slow: dumping all of Dogen's models (18, at the present count) can take the best part of an hour. Interestingly, the majority of the cost comes from dumping the log at debug level. A dump with just tracing information takes less than 10 minutes, making it reasonably useful. Regardless of the wait, once the data is in the database, the full power of SQL and Postgres can be harnessed.
 
-Implementation-wise, we decided to take path of least resistance and
-create a small number of tables, with models and other complex data
-types stored in JSONB fields. Though by no means trivial, this
-approach required fewer changes to Dogen itself, pushing instead the
-complexity to the queries over the generated dataset. This seemed like
-a worthwhile trade-off at the time, because normalising a Dogen model
-in code was a non-trivial exercise. Nonetheless, as we sooon find out,
-writing queries with complex JSON documents and multiple rows is not
-an entirely trivial exercise either. As an examople, the following
-query returns objects in a Dia diagram:
+Implementation-wise, we decided to take path of least resistance and create a small number of tables, with models and other complex data types stored in JSONB fields. Though by no means trivial, this approach required fewer changes to Dogen itself, pushing instead the complexity to the queries over the generated dataset. This seemed like a worthwhile trade-off at the time, because normalising a Dogen model in code was a non-trivial exercise. Nonetheless, as we sooon find out, writing queries with complex JSON documents and multiple rows is not an entirely trivial exercise either. As an examople, the following query returns objects in a Dia diagram:
 
 ```
 create or replace function classes_in_diagram(in p_transform_instance_id text)
@@ -237,6 +201,7 @@ as $$
 $$ language 'sql';
 ```
 
+This function can be used as follows:
 
 ```
 => select * from dia_objects_names_and_stereotypes('8ce7069e-6261-4f9f-b701-814bed17cafb');
@@ -260,20 +225,28 @@ $$ language 'sql';
  O18 | sln         | masd::decoration::modeline
  O19 | sln         | masd::decoration::modeline
 ````
+A library of assorted functions was assembled this way (see [functions.sql](https://github.com/MASD-Project/dogen/blob/master/projects/dogen.relational/sql/functions.sql)), and proved useful enough to track the problem at hand which was to figure out why the new meta-element registrar was not being generated. In addition, the expectation is that. over time, more and more powerful queries will be written, allowing us to better exploit the available information. However, all and all, it must be said that the complexity of writing JSONB queries is much higher than anticipated, and as such, the feature is not quite as useful as we originally thought it would be. With a bit of luck we shall produce a blog post narrating in more detail the saga and its somewhat surprising conclusions.
 
 ## Resourcing
 
-![Story Pie Chart](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_19_pie_chart.jpg)
+Now that we have moved to part-time sprints, looking at the overall commitment makes less sense; after all, by definition, one is guaranteed to have around 80 hours of work on a sprint. Whilst pondering on this matter, another interesting measure has popped into our radars: the _utilisation rate_ - though, perhaps, not yet its final name. The utilisation rate is computed as the number of days on a full time sprint (_e.g._, 14) divided by the total number of days elapsed since the previous sprint. The utilisation rate measures how "expensive" a day of work is in terms of elapsed days. A high utilisation rate is good, and a low one is bad; on a good sprint we are aiming for close to 50%. In this particular sprint our utilisation rate was around 23%. Since the previous sprint involved a long stretch where we were not doing any work at all, we do not have any comparative figures, but we'll keep tracking this number from now on and hopefully it will became a useful indicator.In terms of our more traditional measurements, the sprint was rather well behaved, as the chart demonstrates:
+
+![Story Pie Chart](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_20_pie_chart.jpg)
+_Figure 3: Cost of stories for sprint 20._
+
+Some 45% of the total committed time was taken by the relational model and related activities; and even diversions such as the SHA1 hashes (6.8%) and improvements on generation timestamps (2.3%) were actually byproducts of this work. In terms of process, this was an expensive sprint: whilst the demo was cheap (3%), the release notes were very expensive (13.7%) and so was backlog grooming (5.7%), resulting on an overall figure of 22.4% for process - one of the most costly sprints in this department. Part of this is related to the amount of "uncoordinated" work that had been carried out previously and which was difficult to describe in a manner suitable for the release notes  (remember that demo and release notes describe the work of the _previous sprint_, _e.g. sprint 19 in this case). All and all, for a part time sprint, it was a rather successful one, though we are clearly aiming for a higher utilisation rate for the next one.
 
 ## Roadmap
 
-![Project Plan](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_19_project_plan.png)
+We still haven't quite managed to get the roadmap to work for us, but it seems to provide some kind of visual indication of just how long the road ahead is so we're keeping it for now. However, for it to became truly useful in our current process it requires some more tuning. Perhaps some time spent learning [task juggler](http://taskjuggler.org/) is in order...
 
-![Resource Allocation Graph](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_19_resource_allocation_graph.png)
+![Project Plan](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_20_project_plan.png)
+
+![Resource Allocation Graph](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_20_resource_allocation_graph.png)
 
 # Next Sprint
 
-The main focus next sprint is going to be to wrap things up with the relational model and to use it to diagnose problems when moving elements from generation to assets.
+Now that the relational model is out of the way, the focus on meta-model entities and the fabric clean-up is resumed once more. We are hoping to get one or two of these entities out of the way by sprint end.
 
 # Binaries
 
