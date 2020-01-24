@@ -1,0 +1,51 @@
+\documentclass{beamer}
+\mode<presentation>
+{ \usetheme{boxes} }
+
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{csquotes}
+\usepackage[backend=bibtex]{biblatex}
+
+\title{Dogen v1.0.20, \enquote{Oasis do Arco}}
+
+\author{Marco Craveiro \\
+  Domain Driven Development
+}
+\date{\today}
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\bibliography{sprint_19_features}
+\begin{document}
+
+\begin{frame}
+\titlepage{}
+\end{frame}
+
+\begin{frame}
+\frametitle{User Visible Changes}
+
+\begin{itemize}
+  \pause{}
+\item Add ODB type overrides to primitives
+  \pause{}
+\item Allow outputting the model's SHA1 hash in decoration
+  \pause{}
+\item Improvements in generation timestamps
+  \pause{}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Fin}
+\end{frame}
+
+\end{document}

@@ -12,15 +12,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-01-24 Fri 12:58]
-| <75>                                   |        |      |      |       |
-| Headline                               | Time   |      |      |     % |
-|----------------------------------------+--------+------+------+-------|
-| *Total time*                           | *6:49* |      |      | 100.0 |
-|----------------------------------------+--------+------+------+-------|
-| Stories                                | 6:49   |      |      | 100.0 |
-| Active                                 |        | 6:49 |      | 100.0 |
-| Edit release notes for previous sprint |        |      | 6:49 | 100.0 |
+#+CAPTION: Clock summary at [2020-01-24 Fri 15:28]
+| <75>                                               |        |      |      |       |
+| Headline                                           | Time   |      |      |     % |
+|----------------------------------------------------+--------+------+------+-------|
+| *Total time*                                       | *8:23* |      |      | 100.0 |
+|----------------------------------------------------+--------+------+------+-------|
+| Stories                                            | 8:23   |      |      | 100.0 |
+| Active                                             |        | 8:23 |      | 100.0 |
+| Edit release notes for previous sprint             |        |      | 6:49 |  81.3 |
+| Create a demo and presentation for previous sprint |        |      | 1:34 |  18.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -305,11 +306,19 @@ Happy Modeling!
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6541333935140458497][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
-*** Create a demo and presentation for previous sprint                :story:
+*** COMPLETED Create a demo and presentation for previous sprint      :story:
+    CLOSED: [2020-01-24 Fri 15:28]
+    :LOGBOOK:
+    CLOCK: [2020-01-24 Fri 14:20]--[2020-01-24 Fri 15:28] =>  1:08
+    CLOCK: [2020-01-24 Fri 12:59]--[2020-01-24 Fri 13:25] =>  0:26
+    :END:
 
 Time spent creating the demo and presentation. Use the demo project:
 
 - https://github.com/MASD-Project/demo
+
+Actually since the features are quite trivial, we can demonstrate them
+using the Dogen test models.
 
 *** Sprint and product backlog grooming                               :story:
 
