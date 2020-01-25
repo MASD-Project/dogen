@@ -79,9 +79,12 @@ update_and_collect_parent_ids(const helpers::indices& idx,
         const auto scfg(generalization::make_static_configuration(fg, o));
 
         /*
-         * Populate is final requested directly. Note that we cannot
-         * actually compute the flag's ultimate state at this point -
-         * hence why two fields are needed.
+         * Populate "is final requested" directly, as per user
+         * input. Note that we cannot actually compute the flag's
+         * ultimate state at this point, and hence why two fields are
+         * needed: one to signify that the user requested the class to
+         * be final and another to determine that the class is really
+         * final.
          */
         o.is_final_requested(scfg.is_final);
 
@@ -151,7 +154,7 @@ update_and_collect_parent_ids(const helpers::indices& idx,
 }
 
 void generalization_transform::walk_up_generalization_tree(
-    const meta_model::name& leaf, meta_model::model& em,
+    const meta_model::name &leaf, meta_model::model& m,
     meta_model::structural::object& o) {
 
     BOOST_LOG_SEV(lg, trace) << "Updating leaves for: "
@@ -179,9 +182,9 @@ void generalization_transform::walk_up_generalization_tree(
          * model's list of leaves. Ignore non-target leaves.
          */
         const auto& ll(leaf.location());
-        const auto& ml(em.name().location());
+        const auto& ml(m.name().location());
         if (ll.model_modules() == ml.model_modules()) {
-            em.leaves().insert(leaf);
+            m.leaves().insert(leaf);
             BOOST_LOG_SEV(lg, trace) << "Added leaf to model.";
         } else
             BOOST_LOG_SEV(lg, trace) << "Ignoring non-target leaf.";
@@ -190,20 +193,23 @@ void generalization_transform::walk_up_generalization_tree(
     }
 
     /*
-     * Now we climb up the inheritance graph. Parents must exist or
-     * else the model is not consistent.
+     * Now we climb up the inheritance graph.
      */
     for (const auto& pn : o.parents()) {
         const auto& pid(pn.qualified().dot());
         BOOST_LOG_SEV(lg, trace) << "Processing parent: " << pid;
-        auto i(em.structural_elements().objects().find(pid));
-        if (i == em.structural_elements().objects().end()) {
+
+        /*
+         * Parents must exist or else the model is inconsistent.
+         */
+        auto i(m.structural_elements().objects().find(pid));
+        if (i == m.structural_elements().objects().end()) {
             BOOST_LOG_SEV(lg, error) << parent_not_found << pid;
             BOOST_THROW_EXCEPTION(transformation_error(parent_not_found + pid));
         }
 
         auto& parent(*i->second);
-        walk_up_generalization_tree(leaf, em, parent);
+        walk_up_generalization_tree(leaf, m, parent);
 
         if (parent.parents().empty()) {
             /*
