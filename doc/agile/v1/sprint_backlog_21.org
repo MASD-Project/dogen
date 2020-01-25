@@ -12,22 +12,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-01-24 Fri 15:28]
-| <75>                                               |        |      |      |       |
-| Headline                                           | Time   |      |      |     % |
-|----------------------------------------------------+--------+------+------+-------|
-| *Total time*                                       | *8:23* |      |      | 100.0 |
-|----------------------------------------------------+--------+------+------+-------|
-| Stories                                            | 8:23   |      |      | 100.0 |
-| Active                                             |        | 8:23 |      | 100.0 |
-| Edit release notes for previous sprint             |        |      | 6:49 |  81.3 |
-| Create a demo and presentation for previous sprint |        |      | 1:34 |  18.7 |
+#+CAPTION: Clock summary at [2020-01-25 Sat 16:18]
+| <75>                                                  |         |       |      |       |
+| Headline                                              | Time    |       |      |     % |
+|-------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                          | *10:43* |       |      | 100.0 |
+|-------------------------------------------------------+---------+-------+------+-------|
+| Stories                                               | 10:43   |       |      | 100.0 |
+| Active                                                |         | 10:43 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 7:01 |  65.5 |
+| Create a demo and presentation for previous sprint    |         |       | 1:49 |  17.0 |
+| Create the final video on the relational model series |         |       | 0:30 |   4.7 |
+| Move registrar into assets                            |         |       | 1:23 |  12.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2020-01-24 Fri 12:58]
     :LOGBOOK:
+    CLOCK: [2020-01-24 Fri 16:00]--[2020-01-24 Fri 16:12] =>  0:12
     CLOCK: [2020-01-24 Fri 12:01]--[2020-01-24 Fri 12:58] =>  0:57
     CLOCK: [2020-01-23 Thu 00:43]--[2020-01-23 Thu 00:49] =>  0:06
     CLOCK: [2020-01-23 Thu 00:38]--[2020-01-23 Thu 00:42] =>  0:04
@@ -302,13 +305,16 @@ For all other architectures and/or operative systems, you will need to build Dog
 Happy Modeling!
 #+END_SRC markdown
 
-- [[https://twitter.com/MarcoCraveiro/status/1197975747614400517][twitter]]
-- [[https://www.linkedin.com/feed/update/urn:li:activity:6541333935140458497][linkedin]]
+- [[https://twitter.com/MarcoCraveiro/status/1220738254158344196][twitter]]
+- [[https://www.linkedin.com/posts/marco-craveiro-31558919_dogen-the-masd-code-generator-generates-activity-6626505315070332929-a5pv/][https://www.linkedin.com/posts/marco-craveiro-31558919_masd-projectdogen-activity-6626505954353569792-JAue]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
+
+https://lnkd.in/eAwwjRv
 
 *** COMPLETED Create a demo and presentation for previous sprint      :story:
     CLOSED: [2020-01-24 Fri 15:28]
     :LOGBOOK:
+    CLOCK: [2020-01-25 Sat 14:40]--[2020-01-25 Sat 14:55] =>  0:15
     CLOCK: [2020-01-24 Fri 14:20]--[2020-01-24 Fri 15:28] =>  1:08
     CLOCK: [2020-01-24 Fri 12:59]--[2020-01-24 Fri 13:25] =>  0:26
     :END:
@@ -320,11 +326,18 @@ Time spent creating the demo and presentation. Use the demo project:
 Actually since the features are quite trivial, we can demonstrate them
 using the Dogen test models.
 
-*** Sprint and product backlog grooming                               :story:
+*** COMPLETED Create the final video on the relational model series   :story:
+    CLOSED: [2020-01-24 Fri 15:59]
+    :LOGBOOK:
+    CLOCK: [2020-01-24 Fri 15:29]--[2020-01-24 Fri 15:59] =>  0:30
+    :END:
 
-Updates to sprint and product backlog.
+Do a video summarising the work on the relational model.
 
-*** Move registrar into assets                                        :story:
+*** STARTED Move registrar into assets                                :story:
+    :LOGBOOK:
+    CLOCK: [2020-01-25 Sat 14:55]--[2020-01-25 Sat 16:18] =>  1:23
+    :END:
 
 Move the registrar type into assets, in the quickest way possible.
 
@@ -349,7 +362,8 @@ Notes:
   those models.
 - leaves need to know of the registrar. This is so that we can call it
   in their generated tests. We could use the registrar transform to go
-  and find all leaves and populate their registrar name.
+  and find all leaves and populate their registrar name. This can be
+  added as a property in the generalisation object template.
 - current state is that we cannot generate the registrar for some
   reason.
 - test model with registrar is C++ model. Type is called
@@ -358,5 +372,9 @@ Notes:
 - we should have a warning/error: if using boost serialisation with a
   model that has inheritance, the registrar should be present. Added
   to warnings story.
+
+*** Sprint and product backlog grooming                               :story:
+
+Updates to sprint and product backlog.
 
 ** Deprecated
