@@ -161,6 +161,7 @@ object::object(object&& rhs)
       root_parents_(std::move(rhs.root_parents_)),
       parents_(std::move(rhs.parents_)),
       leaves_(std::move(rhs.leaves_)),
+      type_registrar_(std::move(rhs.type_registrar_)),
       type_parameters_(std::move(rhs.type_parameters_)),
       is_associative_container_(std::move(rhs.is_associative_container_)),
       object_templates_(std::move(rhs.object_templates_)),
@@ -207,6 +208,7 @@ object::object(
     const std::list<dogen::assets::meta_model::name>& root_parents,
     const std::list<dogen::assets::meta_model::name>& parents,
     const std::list<dogen::assets::meta_model::name>& leaves,
+    const boost::optional<dogen::assets::meta_model::name>& type_registrar,
     const dogen::assets::meta_model::type_parameters& type_parameters,
     const bool is_associative_container,
     const std::list<dogen::assets::meta_model::name>& object_templates,
@@ -252,6 +254,7 @@ object::object(
       root_parents_(root_parents),
       parents_(parents),
       leaves_(leaves),
+      type_registrar_(type_registrar),
       type_parameters_(type_parameters),
       is_associative_container_(is_associative_container),
       object_templates_(object_templates),
@@ -309,6 +312,7 @@ void object::to_stream(std::ostream& s) const {
       << "\"root_parents\": " << root_parents_ << ", "
       << "\"parents\": " << parents_ << ", "
       << "\"leaves\": " << leaves_ << ", "
+      << "\"type_registrar\": " << type_registrar_ << ", "
       << "\"type_parameters\": " << type_parameters_ << ", "
       << "\"is_associative_container\": " << is_associative_container_ << ", "
       << "\"object_templates\": " << object_templates_ << ", "
@@ -344,6 +348,7 @@ void object::swap(object& other) noexcept {
     swap(root_parents_, other.root_parents_);
     swap(parents_, other.parents_);
     swap(leaves_, other.leaves_);
+    swap(type_registrar_, other.type_registrar_);
     swap(type_parameters_, other.type_parameters_);
     swap(is_associative_container_, other.is_associative_container_);
     swap(object_templates_, other.object_templates_);
@@ -382,6 +387,7 @@ bool object::operator==(const object& rhs) const {
         root_parents_ == rhs.root_parents_ &&
         parents_ == rhs.parents_ &&
         leaves_ == rhs.leaves_ &&
+        type_registrar_ == rhs.type_registrar_ &&
         type_parameters_ == rhs.type_parameters_ &&
         is_associative_container_ == rhs.is_associative_container_ &&
         object_templates_ == rhs.object_templates_ &&
@@ -666,6 +672,22 @@ void object::leaves(const std::list<dogen::assets::meta_model::name>& v) {
 
 void object::leaves(const std::list<dogen::assets::meta_model::name>&& v) {
     leaves_ = std::move(v);
+}
+
+const boost::optional<dogen::assets::meta_model::name>& object::type_registrar() const {
+    return type_registrar_;
+}
+
+boost::optional<dogen::assets::meta_model::name>& object::type_registrar() {
+    return type_registrar_;
+}
+
+void object::type_registrar(const boost::optional<dogen::assets::meta_model::name>& v) {
+    type_registrar_ = v;
+}
+
+void object::type_registrar(const boost::optional<dogen::assets::meta_model::name>&& v) {
+    type_registrar_ = std::move(v);
 }
 
 const dogen::assets::meta_model::type_parameters& object::type_parameters() const {

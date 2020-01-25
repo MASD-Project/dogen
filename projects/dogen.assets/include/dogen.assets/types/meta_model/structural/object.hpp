@@ -99,6 +99,7 @@ public:
         const std::list<dogen::assets::meta_model::name>& root_parents,
         const std::list<dogen::assets::meta_model::name>& parents,
         const std::list<dogen::assets::meta_model::name>& leaves,
+        const boost::optional<dogen::assets::meta_model::name>& type_registrar,
         const dogen::assets::meta_model::type_parameters& type_parameters,
         const bool is_associative_container,
         const std::list<dogen::assets::meta_model::name>& object_templates,
@@ -325,6 +326,11 @@ public:
     void leaves(const std::list<dogen::assets::meta_model::name>&& v);
     /**@}*/
 
+    const boost::optional<dogen::assets::meta_model::name>& type_registrar() const;
+    boost::optional<dogen::assets::meta_model::name>& type_registrar();
+    void type_registrar(const boost::optional<dogen::assets::meta_model::name>& v);
+    void type_registrar(const boost::optional<dogen::assets::meta_model::name>&& v);
+
     const dogen::assets::meta_model::type_parameters& type_parameters() const;
     dogen::assets::meta_model::type_parameters& type_parameters();
     void type_parameters(const dogen::assets::meta_model::type_parameters& v);
@@ -405,6 +411,7 @@ private:
     std::list<dogen::assets::meta_model::name> root_parents_;
     std::list<dogen::assets::meta_model::name> parents_;
     std::list<dogen::assets::meta_model::name> leaves_;
+    boost::optional<dogen::assets::meta_model::name> type_registrar_;
     dogen::assets::meta_model::type_parameters type_parameters_;
     bool is_associative_container_;
     std::list<dogen::assets::meta_model::name> object_templates_;

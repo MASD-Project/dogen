@@ -613,6 +613,10 @@
           "name": "leaves",
           "type": "std::list<name>",
           "documentation": "Elements that are at the bottom of the inheritance tree.\n"
+        },
+        {
+          "name": "type_registrar",
+          "type": "boost::optional<name>"
         }
       ]
     },
