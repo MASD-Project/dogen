@@ -91,7 +91,6 @@ void type_registrar_transform::apply(const context& ctx, meta_model::model& m) {
             /*
              * We need to ensure the leaves are stable sorted.
              */
-
             rg.leaves().sort(
                 [](const name& a, const name& b) {
                     return a.qualified().dot() < b.qualified().dot();
