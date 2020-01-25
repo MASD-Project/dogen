@@ -296,7 +296,7 @@ make_masd_generation_cpp_serialization_type_registrar_header_postfix() {
     r.binding_point(binding_point::global);
     r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "tst" }));
+    r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
     archetypes::location al;
     al.kernel("masd");
@@ -316,7 +316,7 @@ make_masd_generation_cpp_serialization_type_registrar_implementation_postfix() {
     r.binding_point(binding_point::global);
     r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "tst" }));
+    r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
     archetypes::location al;
     al.kernel("masd");

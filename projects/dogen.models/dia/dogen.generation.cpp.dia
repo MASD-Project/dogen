@@ -38828,7 +38828,7 @@ code.
             <dia:string>#masd::variability::text#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#"tst"#</dia:string>
+            <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.serialization.type_registrar_header.postfix#</dia:string>
@@ -38851,7 +38851,7 @@ code.
             <dia:string>#masd::variability::text#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#"tst"#</dia:string>
+            <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.serialization.type_registrar_implementation.postfix#</dia:string>
