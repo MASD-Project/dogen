@@ -63,10 +63,10 @@ available as a separate git repo:
 
 - [C++ Reference
   Implementation](https://github.com/MASD-Project/cpp_ref_impl). Models
-  available [here](https://github.com/MASD-Project/cpp_ref_impl/tree/master/projects/models).
+  available [here](https://github.com/MASD-Project/cpp_ref_impl/tree/master/projects/cpp_ref_impl.models).
 - [C# Reference
   Implementation](https://github.com/MASD-Project/csharp_ref_impl). Models
-  available [here](https://github.com/MASD-Project/csharp_ref_impl/tree/master/Src/Models).
+  available [here](https://github.com/MASD-Project/csharp_ref_impl/tree/master/Src/CSharpRefImpl.Models).
 
 These are designed to give you a feel for how the generated code will
 look like, and they attempt to exercise all of Dogen's functionality.
@@ -115,6 +115,7 @@ Dogen has the following additional dependencies, across all operative systems:
 | [CMake](https://cmake.org/)  | Mandatory | 3.12 or later.  | Required to generate the build files.Earlier versions may also work.  |
 | [Boost](https://boost.org)  | Mandatory | 1.68 or later. | Earlier versions may also work, but patches may be needed. **Very Important**: We link statically against Boost at present, so be sure to build and install the static libraries.|
 | [LibXml2](http://xmlsoft.org/) | Mandatory | 2.9.4 | Earlier versions may work but haven't been tested.|
+| [DTL](https://github.com/cubicdaiya/dtl) | Mandatory | 1.19 | Earlier versions may work but haven't been tested.|
 
 Though Dogen should build fine with package manager supplied
 libraries - or even with hand-built dependencies - the easiest way to
@@ -283,11 +284,15 @@ contains all of the logs, under the directory ```log```.
 
 # Videos
 
-There are a limited number of videos available about Dogen, though we
-are trying to get into the habit of demoing new features at the end of
-each sprint. The videos are gathered under the [MASD -
-Dogen](https://www.youtube.com/playlist?list=PLwfrwe216gF0RmXOv8yCinHfv9QeSRDcm)
-playlist.
+A number of videos are now available discussing Dogen, gathered under
+"themed" playlists:
+
+- [MASD - Dogen
+  Demos](https://www.youtube.com/playlist?list=PLwfrwe216gF0RmXOv8yCinHfv9QeSRDcm):
+  end of sprint demos.
+- [MASD - Dogen Coding: Relational Model for
+  Tracing](https://www.youtube.com/playlist?list=PLwfrwe216gF3EzrrvwNFivnLSZ2l8X9k6):
+  Narrates the design and implementation of the relational model for tracing.
 
 # Blog Posts
 
@@ -319,7 +324,7 @@ also include:
   Example)](https://en.wikipedia.org/wiki/Minimal_working_example).
 - the compressed log. By default, dogen creates a directory structure
   for all of its byproducts, in the folder it was executed from. It
-  has the form ```masd.dogen.byproducts/cli.generate.MODEL```, where
+  has the form ```dogen.byproducts/cli.generate.MODEL```, where
   ```MODEL``` is the file name and extension of the generated
   model. The log file is stored in this directory, with a name such as
   ```cli.generate.MODEL.log```.
