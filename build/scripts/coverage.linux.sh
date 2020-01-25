@@ -44,8 +44,7 @@ for t in ${tests}; do
     then
         echo "Created coverage for: $t"
     else
-        echo "Failed to create coverage for: $t" >&2
-        exit 1
+        echo "Error whilst creating coverage for: $t" >&2
     fi
 done;
 
