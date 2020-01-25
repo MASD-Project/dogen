@@ -375,8 +375,8 @@ where "PAYLOAD_TYPE" = 'dogen::extraction::meta_model::model';
 
 select a."TRANSFORM_ID", a."PATH" from
 (
-select "TRANSFORM_ID", cast(jsonb_array_elements("PAYLOAD"->'artefacts')->>'path' as varchar(200)) "PATH"
-    from transforms_for_run_id('1675f7b9-5ccd-4e9d-8d92-d0b7972031ba')
+    select "TRANSFORM_ID", cast(jsonb_array_elements("PAYLOAD"->'artefacts')->>'path' as varchar(200)) "PATH"
+    from transforms_for_run_id('3ded166f-754d-4df8-a2cd-1a391503e5b8')
     where
        "PAYLOAD_TYPE" = 'dogen::extraction::meta_model::model'
 ) a
