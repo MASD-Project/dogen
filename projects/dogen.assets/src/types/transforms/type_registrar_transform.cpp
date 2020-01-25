@@ -22,6 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
+#include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.assets/io/meta_model/origin_types_io.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
 #include "dogen.assets/types/transforms/transformation_error.hpp"
@@ -36,6 +37,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 const std::string multiple_targets("Found more than one target registrar: ");
+const std::string missing_leaf("Could not locate leaf: ");
 
 }
 
@@ -85,8 +87,20 @@ void type_registrar_transform::apply(const context& ctx, meta_model::model& m) {
              * The registrar needs to know about all of the leaf types
              * in this model - it is these that it will register.
              */
-            for (const auto& l : m.leaves())
+            for (const auto& l : m.leaves()) {
                 rg.leaves().push_back(l);
+                auto& objs(m.structural_elements().objects());
+                const auto leaf_id(l.qualified().dot());
+                const auto i(objs.find(leaf_id));
+                if (i == objs.end()) {
+                    BOOST_LOG_SEV(lg, error) << missing_leaf << leaf_id;
+                    BOOST_THROW_EXCEPTION(
+                        transformation_error(missing_leaf + leaf_id));
+                }
+
+                auto& leaf(*i->second);
+                leaf.type_registrar(rg.name());
+            }
 
             /*
              * We need to ensure the leaves are stable sorted.
