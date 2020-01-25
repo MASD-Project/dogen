@@ -40,6 +40,7 @@
 #include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_template_initializer.hpp"
 #include "dogen.assets/types/meta_model/templating/logic_less_template.hpp"
+#include "dogen.assets/types/meta_model/serialization/type_registrar.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/io/meta_model/technical_space_io.hpp"
 #include "dogen.assets/types/helpers/meta_name_factory.hpp"
@@ -159,6 +160,10 @@ public:
         logic_less_template> llt) {
         add(llt);
     }
+    void operator()(boost::shared_ptr<assets::meta_model::serialization::
+        type_registrar> tg) {
+        add(tg);
+    }
 
 public:
     void add(
@@ -196,6 +201,7 @@ compute_total_size(const assets::meta_model::model& m) {
     r += m.variability_elements().feature_template_initializer()
         != nullptr ?  1 : 0;
     r += m.templating_elements().logic_less_templates().size();
+    r += m.serialization_elements().type_registrars().size();
 
     return r;
 }
