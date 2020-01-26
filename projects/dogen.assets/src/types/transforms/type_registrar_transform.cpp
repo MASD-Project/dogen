@@ -146,13 +146,12 @@ void type_registrar_transform::apply(const context& ctx, meta_model::model& m) {
             BOOST_LOG_SEV(lg, debug) << "Ignoring registrar with other origin: "
                                      << ot;
         }
-
     }
 
     /*
      * If there is no target registrar then there is nothing to do.
      */
-    if (target_registrar.get() != nullptr) {
+    if (!target_registrar) {
         BOOST_LOG_SEV(lg, debug) << "Model has no target registrar.";
         return;
     }
@@ -161,7 +160,7 @@ void type_registrar_transform::apply(const context& ctx, meta_model::model& m) {
      * If there are no referenced registrars, then we're done.
      */
     if (referenced_registrars.empty()) {
-        BOOST_LOG_SEV(lg, debug) << "No referenced registrars found";
+        BOOST_LOG_SEV(lg, debug) << "No referenced registrars found.";
         return;
     }
 
