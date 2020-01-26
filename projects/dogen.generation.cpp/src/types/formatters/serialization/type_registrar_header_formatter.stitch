@@ -34,11 +34,16 @@ format(const context& ctx, const assets::meta_model::element& e) const {
         {
             const auto ns(a.make_namespaces(rg.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto sn(e.name().simple());
 #>
 
-template<typename Archive>
-void register_types(Archive& ar);
+class <#= sn #> {
+public:
 
+template<typename Archive>
+static void register_types(Archive& ar);
+
+};
 <#+
         } // snf
 #>

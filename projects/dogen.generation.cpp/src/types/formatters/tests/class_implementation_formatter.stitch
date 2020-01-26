@@ -101,12 +101,8 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     if (ser_enabled) {
         builder.add(o.name(), ser_arch);
 
-        // FIXME: hack for registrar
-        assets::helpers::name_factory nf;
-        auto n(o.name());
-        n.location().internal_modules().clear();
-        const auto rn(nf.build_element_in_model(n, "registrar"));
-        builder.add(rn, ser::registrar_header_archetype());
+        if (o.type_registrar())
+            builder.add(o.type_registrar(), ser::type_registrar_header_archetype());
 
         builder.add(ic::boost::archive::text_iarchive());
         builder.add(ic::boost::archive::text_oarchive());
@@ -326,12 +322,8 @@ BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
                 /*
                  * Serialization tests.
                  */
-                // FIXME: hack for register_types
-                assets::helpers::name_factory nf;
-                auto n(o.name());
-                n.location().internal_modules().clear();
-                const auto rn(nf.build_element_in_model(n, "register_types"));
-                const auto registrar_qn(a.get_qualified_name(rn));
+                 const auto registrar_qn(o.type_registrar() ?
+                     a.get_qualified_name(*o.type_registrar()) : std::string());
 
                 if (o.is_parent()) {
 #>
@@ -343,7 +335,14 @@ BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {
     std::ostringstream os;
     {
         xml_oarchive oa(os);
-        <#= registrar_qn #><xml_oarchive>(oa);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<xml_oarchive>(oa);
+<#+
+                    }
+#>
+
         oa << BOOST_SERIALIZATION_NVP(a);
     }
 
@@ -351,7 +350,13 @@ BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {
     std::istringstream is(os.str());
     {
         xml_iarchive ia(is);
-        <#= registrar_qn #><xml_iarchive>(ia);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<xml_iarchive>(ia);
+<#+
+                    }
+#>
         ia >> BOOST_SERIALIZATION_NVP(b);
     }
 
@@ -368,7 +373,13 @@ BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {
     std::ostringstream os;
     {
         text_oarchive oa(os);
-        <#= registrar_qn #><text_oarchive>(oa);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<text_oarchive>(oa);
+<#+
+                    }
+#>
         oa << a;
     }
 
@@ -376,7 +387,13 @@ BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {
     std::istringstream is(os.str());
     {
         text_iarchive ia(is);
-        <#= registrar_qn #><text_iarchive>(ia);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<text_iarchive>(ia);
+<#+
+                    }
+#>
         ia >> b;
     }
 
@@ -393,7 +410,13 @@ BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {
     std::ostringstream os;
     {
         binary_oarchive oa(os);
-        <#= registrar_qn #><binary_oarchive>(oa);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<binary_oarchive>(oa);
+<#+
+                    }
+#>
         oa << a;
     }
 
@@ -401,7 +424,13 @@ BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {
     std::istringstream is(os.str());
     {
         binary_iarchive ia(is);
-        <#= registrar_qn #><binary_iarchive>(ia);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<binary_iarchive>(ia);
+<#+
+                    }
+#>
         ia >> b;
     }
 
@@ -422,7 +451,13 @@ BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {
     std::ostringstream os;
     {
         xml_oarchive oa(os);
-        <#= registrar_qn #><xml_oarchive>(oa);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<xml_oarchive>(oa);
+<#+
+                    }
+#>
         oa << BOOST_SERIALIZATION_NVP(a);
     }
 
@@ -430,7 +465,13 @@ BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {
     std::istringstream is(os.str());
     {
         xml_iarchive ia(is);
-        <#= registrar_qn #><xml_iarchive>(ia);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<xml_iarchive>(ia);
+<#+
+                    }
+#>
         ia >> BOOST_SERIALIZATION_NVP(b);
     }
 
@@ -445,7 +486,13 @@ BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {
     std::ostringstream os;
     {
         text_oarchive oa(os);
-        <#= registrar_qn #><text_oarchive>(oa);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<text_oarchive>(oa);
+<#+
+                    }
+#>
         oa << a;
     }
 
@@ -453,7 +500,13 @@ BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {
     std::istringstream is(os.str());
     {
         text_iarchive ia(is);
-        <#= registrar_qn #><text_iarchive>(ia);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<text_iarchive>(ia);
+<#+
+                    }
+#>
         ia >> b;
     }
 
@@ -468,7 +521,13 @@ BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {
     std::ostringstream os;
     {
         binary_oarchive oa(os);
-        <#= registrar_qn #><binary_oarchive>(oa);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<binary_oarchive>(oa);
+<#+
+                    }
+#>
         oa << a;
     }
 
@@ -476,7 +535,13 @@ BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {
     std::istringstream is(os.str());
     {
         binary_iarchive ia(is);
-        <#= registrar_qn #><binary_iarchive>(ia);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<binary_iarchive>(ia);
+<#+
+                    }
+#>
         ia >> b;
     }
 

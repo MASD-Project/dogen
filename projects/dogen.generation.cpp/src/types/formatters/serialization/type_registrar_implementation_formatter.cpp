@@ -90,7 +90,7 @@ inclusion_dependencies(
     const auto& rg(assistant::as<assets::meta_model::serialization::type_registrar>(e));
     auto builder(f.make());
 
-    const auto rh_fn(traits::registrar_header_archetype());
+    const auto rh_fn(traits::type_registrar_header_archetype());
     builder.add(rg.name(), rh_fn);
 
     using ic = inclusion_constants;
@@ -128,9 +128,10 @@ format(const context& ctx, const assets::meta_model::element& e) const {
             const auto leaves(a.names_with_enabled_archetype(carch, rg.leaves()));
             const bool has_types(!deps.empty() || !leaves.empty());
             const std::string arg_name(has_types ? " ar" : "");
+            const auto sn(e.name().simple());
 a.stream() << std::endl;
 a.stream() << "template<typename Archive>" << std::endl;
-a.stream() << "void register_types(Archive&" << arg_name << ") {" << std::endl;
+a.stream() << "void " << sn << "::register_types(Archive&" << arg_name << ") {" << std::endl;
             if (has_types) {
                 for (const auto& d : deps) {
                     const auto dqn(a.get_qualified_name(d));
@@ -146,17 +147,17 @@ a.stream() << "    ar.template register_type<" << lqn << ">();" << std::endl;
             }
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
-a.stream() << "template void register_types(boost::archive::polymorphic_oarchive&" << arg_name << ");" << std::endl;
-a.stream() << "template void register_types(boost::archive::polymorphic_iarchive&" << arg_name << ");" << std::endl;
+a.stream() << "template void " << sn << "::register_types(boost::archive::polymorphic_oarchive&" << arg_name << ");" << std::endl;
+a.stream() << "template void " << sn << "::register_types(boost::archive::polymorphic_iarchive&" << arg_name << ");" << std::endl;
 a.stream() << std::endl;
-a.stream() << "template void register_types(boost::archive::text_oarchive&" << arg_name << ");" << std::endl;
-a.stream() << "template void register_types(boost::archive::text_iarchive&" << arg_name << ");" << std::endl;
+a.stream() << "template void " << sn << "::register_types(boost::archive::text_oarchive&" << arg_name << ");" << std::endl;
+a.stream() << "template void " << sn << "::register_types(boost::archive::text_iarchive&" << arg_name << ");" << std::endl;
 a.stream() << std::endl;
-a.stream() << "template void register_types(boost::archive::binary_oarchive&" << arg_name << ");" << std::endl;
-a.stream() << "template void register_types(boost::archive::binary_iarchive&" << arg_name << ");" << std::endl;
+a.stream() << "template void " << sn << "::register_types(boost::archive::binary_oarchive&" << arg_name << ");" << std::endl;
+a.stream() << "template void " << sn << "::register_types(boost::archive::binary_iarchive&" << arg_name << ");" << std::endl;
 a.stream() << std::endl;
-a.stream() << "template void register_types(boost::archive::xml_oarchive&" << arg_name << ");" << std::endl;
-a.stream() << "template void register_types(boost::archive::xml_iarchive&" << arg_name << ");" << std::endl;
+a.stream() << "template void " << sn << "::register_types(boost::archive::xml_oarchive&" << arg_name << ");" << std::endl;
+a.stream() << "template void " << sn << "::register_types(boost::archive::xml_iarchive&" << arg_name << ");" << std::endl;
 a.stream() << std::endl;
         } // snf
     } // sbf

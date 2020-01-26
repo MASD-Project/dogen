@@ -86,10 +86,15 @@ format(const context& ctx, const assets::meta_model::element& e) const {
         {
             const auto ns(a.make_namespaces(rg.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto sn(e.name().simple());
+a.stream() << std::endl;
+a.stream() << "class " << sn << " {" << std::endl;
+a.stream() << "public:" << std::endl;
 a.stream() << std::endl;
 a.stream() << "template<typename Archive>" << std::endl;
-a.stream() << "void register_types(Archive& ar);" << std::endl;
+a.stream() << "static void register_types(Archive& ar);" << std::endl;
 a.stream() << std::endl;
+a.stream() << "};" << std::endl;
         } // snf
 a.stream() << std::endl;
 
