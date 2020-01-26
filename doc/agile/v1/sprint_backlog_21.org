@@ -12,18 +12,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-01-25 Sat 16:18]
+#+CAPTION: Clock summary at [2020-01-25 Sat 23:59]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *10:43* |       |      | 100.0 |
+| *Total time*                                          | *12:31* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 10:43   |       |      | 100.0 |
-| Active                                                |         | 10:43 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 7:01 |  65.5 |
-| Create a demo and presentation for previous sprint    |         |       | 1:49 |  17.0 |
-| Create the final video on the relational model series |         |       | 0:30 |   4.7 |
-| Move registrar into assets                            |         |       | 1:23 |  12.9 |
+| Stories                                               | 12:31   |       |      | 100.0 |
+| Active                                                |         | 12:31 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 7:01 |  56.1 |
+| Create a demo and presentation for previous sprint    |         |       | 1:49 |  14.5 |
+| Create the final video on the relational model series |         |       | 0:30 |   4.0 |
+| Move registrar into assets                            |         |       | 2:56 |  23.4 |
+| Sprint and product backlog grooming                   |         |       | 0:15 |   2.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -336,6 +337,8 @@ Do a video summarising the work on the relational model.
 
 *** STARTED Move registrar into assets                                :story:
     :LOGBOOK:
+    CLOCK: [2020-01-25 Sat 23:27]--[2020-01-25 Sat 23:40] =>  0:13
+    CLOCK: [2020-01-25 Sat 22:06]--[2020-01-25 Sat 23:26] =>  1:20
     CLOCK: [2020-01-25 Sat 14:55]--[2020-01-25 Sat 16:18] =>  1:23
     :END:
 
@@ -372,8 +375,34 @@ Notes:
 - we should have a warning/error: if using boost serialisation with a
   model that has inheritance, the registrar should be present. Added
   to warnings story.
+- we started by trying to make type registrars available only to leaf
+  types. However, this does not work:
+  - all other members of the inheritance graph also need to know of
+    their type registrar, else their tests will fail.
+  - types which are composed of types which are in an inheritance
+    relationship (directly or through further composition) also need
+    to know of the model's type registrar. To know which types would
+    require a DAG of the model.
+  A slightly easier solution, which we had used before, is to make all
+  objects aware of the registrar regardless. This is only needed for
+  generated tests anyhow and the complexity of getting this right
+  makes the right solution too expensive. However, by the time we get
+  to the type registrar transform we have already merged the model, so
+  now we have the issue of determining which type registrar belongs to
+  which models. We could check =model_modules= of each object.
+- we have an inconsistency: the name of the method is =register_types=
+  but we can call instances of the =type_registrar= meta-type anything
+  we like. It would make more sense to create a class with the name of
+  the instance and then call a static method in that class. However,
+  we did some hackery with templates which may not work with this
+  approach. An alternative is to keep the function as is but use the
+  type name to name the function. This is not entirely clean but its
+  also not entirely wrong conceptually.
 
-*** Sprint and product backlog grooming                               :story:
+*** STARTED Sprint and product backlog grooming                       :story:
+    :LOGBOOK:
+    CLOCK: [2020-01-25 Sat 23:41]--[2020-01-25 Sat 23:56] =>  0:15
+    :END:
 
 Updates to sprint and product backlog.
 
