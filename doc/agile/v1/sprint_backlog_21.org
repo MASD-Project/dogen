@@ -12,19 +12,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-01-25 Sat 23:59]
+#+CAPTION: Clock summary at [2020-01-26 Sun 12:46]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *12:31* |       |      | 100.0 |
+| *Total time*                                          | *13:28* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 12:31   |       |      | 100.0 |
-| Active                                                |         | 12:31 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 7:01 |  56.1 |
-| Create a demo and presentation for previous sprint    |         |       | 1:49 |  14.5 |
-| Create the final video on the relational model series |         |       | 0:30 |   4.0 |
-| Move registrar into assets                            |         |       | 2:56 |  23.4 |
-| Sprint and product backlog grooming                   |         |       | 0:15 |   2.0 |
+| Stories                                               | 13:28   |       |      | 100.0 |
+| Active                                                |         | 13:28 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 7:01 |  52.1 |
+| Create a demo and presentation for previous sprint    |         |       | 1:49 |  13.5 |
+| Create the final video on the relational model series |         |       | 0:30 |   3.7 |
+| Move registrar into assets                            |         |       | 3:53 |  28.8 |
+| Sprint and product backlog grooming                   |         |       | 0:15 |   1.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -337,6 +337,8 @@ Do a video summarising the work on the relational model.
 
 *** STARTED Move registrar into assets                                :story:
     :LOGBOOK:
+    CLOCK: [2020-01-26 Sun 12:35]--[2020-01-26 Sun 12:46] =>  0:11
+    CLOCK: [2020-01-26 Sun 10:02]--[2020-01-26 Sun 10:48] =>  0:46
     CLOCK: [2020-01-25 Sat 23:27]--[2020-01-25 Sat 23:40] =>  0:13
     CLOCK: [2020-01-25 Sat 22:06]--[2020-01-25 Sat 23:26] =>  1:20
     CLOCK: [2020-01-25 Sat 14:55]--[2020-01-25 Sat 16:18] =>  1:23
