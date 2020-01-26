@@ -12,19 +12,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-01-26 Sun 13:36]
+#+CAPTION: Clock summary at [2020-01-26 Sun 22:41]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *13:43* |       |      | 100.0 |
+| *Total time*                                          | *14:38* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 13:43   |       |      | 100.0 |
-| Active                                                |         | 13:43 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 7:01 |  51.2 |
-| Create a demo and presentation for previous sprint    |         |       | 1:49 |  13.2 |
-| Create the final video on the relational model series |         |       | 0:30 |   3.6 |
-| Move registrar into assets                            |         |       | 4:08 |  30.1 |
-| Sprint and product backlog grooming                   |         |       | 0:15 |   1.8 |
+| Stories                                               | 14:38   |       |      | 100.0 |
+| Active                                                |         | 14:38 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 7:01 |  47.9 |
+| Create a demo and presentation for previous sprint    |         |       | 1:49 |  12.4 |
+| Create the final video on the relational model series |         |       | 0:30 |   3.4 |
+| Move registrar into assets                            |         |       | 5:03 |  34.5 |
+| Sprint and product backlog grooming                   |         |       | 0:15 |   1.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -335,8 +335,10 @@ using the Dogen test models.
 
 Do a video summarising the work on the relational model.
 
-*** STARTED Move registrar into assets                                :story:
+*** COMPLETED Move registrar into assets                              :story:
+    CLOSED: [2020-01-26 Sun 22:40]
     :LOGBOOK:
+    CLOCK: [2020-01-26 Sun 21:45]--[2020-01-26 Sun 22:40] =>  0:55
     CLOCK: [2020-01-26 Sun 13:21]--[2020-01-26 Sun 13:36] =>  0:15
     CLOCK: [2020-01-26 Sun 12:35]--[2020-01-26 Sun 12:46] =>  0:11
     CLOCK: [2020-01-26 Sun 10:02]--[2020-01-26 Sun 10:48] =>  0:46
@@ -401,6 +403,11 @@ Notes:
   approach. An alternative is to keep the function as is but use the
   type name to name the function. This is not entirely clean but its
   also not entirely wrong conceptually.
+
+*** Move visual studio fabric types into assets                       :story:
+
+We need to do this for both C# and C++. We should create a namespace
+for build infrastructure.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
