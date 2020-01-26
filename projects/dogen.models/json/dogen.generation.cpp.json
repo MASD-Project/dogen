@@ -705,30 +705,6 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "fabric::registrar",
-      "tagged_values": {
-        "masd.generalization.parent": "assets::meta_model::element"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "leaves",
-          "type": "std::list<assets::meta_model::name>",
-          "documentation": "List of all concrete classes which are part of an inheritance tree.\n"
-        },
-        {
-          "name": "model_dependencies",
-          "type": "std::list<assets::meta_model::name>",
-          "documentation": "List of all models which the model depends on.\n"
-        },
-        {
-          "name": "registrar_dependencies",
-          "type": "std::list<assets::meta_model::name>",
-          "documentation": "Registrars on other models this registrar depends on.\n"
-        }
-      ]
-    },
-    {
       "name": "fabric::injector",
       "stereotypes": [
         "dogen::handcrafted::typeable"
@@ -737,13 +713,6 @@
     },
     {
       "name": "fabric::initializer",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "fabric::registrar_factory",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

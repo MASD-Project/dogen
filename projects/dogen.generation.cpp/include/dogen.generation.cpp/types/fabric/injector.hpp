@@ -48,7 +48,6 @@ private:
         generation::meta_model::model& m) const;
 
 private:
-    void inject_registrar(generation::meta_model::model& m) const;
     void inject_build_files(generation::meta_model::model& m) const;
     void inject_odb_options(generation::meta_model::model& m) const;
     void inject_visual_studio(const variability::meta_model::feature_model& fm,

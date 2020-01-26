@@ -22,7 +22,6 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.generation.cpp/types/formatters/workflow.hpp"
-#include "dogen.generation.cpp/types/fabric/registrar_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/build_files_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/odb_options_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/visual_studio_factory.hpp"
@@ -56,13 +55,6 @@ void injector::add_elements(
 }
 
 void injector::
-inject_registrar(generation::meta_model::model& m) const {
-    registrar_factory f;
-    const auto elements(f.make(m));
-    add_elements(elements, m);
-}
-
-void injector::
 inject_build_files(generation::meta_model::model& m) const {
     build_files_factory f;
     const auto elements(f.make(m));
@@ -92,7 +84,6 @@ void injector::inject_entry_point(generation::meta_model::model& m) const {
 
 void injector::inject(const variability::meta_model::feature_model& fm,
     generation::meta_model::model& m) const {
-    inject_registrar(m);
     inject_build_files(m);
     inject_odb_options(m);
     inject_visual_studio(fm, m);
