@@ -59,16 +59,6 @@ std::string traits::primitive_forward_declarations_archetype() {
     return r;
 }
 
-std::string traits::registrar_header_archetype() {
-    static std::string r(traits::facet() + ".registrar_header");
-    return r;
-}
-
-std::string traits::registrar_implementation_archetype() {
-    static std::string r(traits::facet() + ".registrar_implementation");
-    return r;
-}
-
 std::string traits::builtin_header_archetype() {
     static std::string r(traits::facet() + ".builtin_header");
     return r;

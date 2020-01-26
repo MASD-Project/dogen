@@ -66,16 +66,6 @@ struct traits {
     static std::string primitive_forward_declarations_archetype();
 
     /**
-     * @brief Name of the registrar header archetype.
-     */
-    static std::string registrar_header_archetype();
-
-    /**
-     * @brief Name of the registrar implementation archetype.
-     */
-    static std::string registrar_implementation_archetype();
-
-    /**
      * @brief Name of the built-in header archetype.
      */
     static std::string builtin_header_archetype();
