@@ -87,19 +87,29 @@ void type_registrar_transform::apply(const context& ctx, meta_model::model& m) {
              * The registrar needs to know about all of the leaf types
              * in this model - it is these that it will register.
              */
-            for (const auto& l : m.leaves()) {
+            for (const auto& l : m.leaves())
                 rg.leaves().push_back(l);
-                auto& objs(m.structural_elements().objects());
-                const auto leaf_id(l.qualified().dot());
-                const auto i(objs.find(leaf_id));
-                if (i == objs.end()) {
-                    BOOST_LOG_SEV(lg, error) << missing_leaf << leaf_id;
-                    BOOST_THROW_EXCEPTION(
-                        transformation_error(missing_leaf + leaf_id));
-                }
 
-                auto& leaf(*i->second);
-                leaf.type_registrar(rg.name());
+            /*
+             * Now tell all objects in the target model about the
+             * registrar. Note that in practice we only need to tell
+             * objects that are directly or indirectly involved in
+             * inheritance relationships, but its hard to do this
+             * right, so instead we take the machine-gun approach and
+             * tell everyone.
+             */
+            auto& objs(m.structural_elements().objects());
+            for(auto& pair : objs) {
+                auto& o(*pair.second);
+
+                /*
+                 * We can safely ignore types that do not belong to
+                 * the target model.
+                 */
+                if (o.origin_type() != origin_types::target)
+                    continue;
+
+                o.type_registrar(rg.name());
             }
 
             /*
