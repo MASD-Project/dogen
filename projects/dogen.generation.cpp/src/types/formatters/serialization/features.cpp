@@ -166,46 +166,6 @@ make_masd_generation_cpp_serialization_primitive_implementation_postfix() {
 }
 
 dogen::variability::meta_model::feature_template
-make_masd_generation_cpp_serialization_registrar_header_postfix() {
-    using namespace dogen::variability::meta_model;
-    feature_template r;
-    r.name().simple("postfix");
-    r.name().qualified("masd.generation.cpp.serialization.registrar_header.postfix");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
-    dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
-    return r;
-}
-
-dogen::variability::meta_model::feature_template
-make_masd_generation_cpp_serialization_registrar_implementation_postfix() {
-    using namespace dogen::variability::meta_model;
-    feature_template r;
-    r.name().simple("postfix");
-    r.name().qualified("masd.generation.cpp.serialization.registrar_implementation.postfix");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
-    dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
-    return r;
-}
-
-dogen::variability::meta_model::feature_template
 make_masd_generation_cpp_serialization_class_forward_declarations_postfix() {
     using namespace dogen::variability::meta_model;
     feature_template r;
@@ -339,8 +299,6 @@ features::make_templates() {
     r.push_back(make_masd_generation_cpp_serialization_enum_header_postfix());
     r.push_back(make_masd_generation_cpp_serialization_primitive_header_postfix());
     r.push_back(make_masd_generation_cpp_serialization_primitive_implementation_postfix());
-    r.push_back(make_masd_generation_cpp_serialization_registrar_header_postfix());
-    r.push_back(make_masd_generation_cpp_serialization_registrar_implementation_postfix());
     r.push_back(make_masd_generation_cpp_serialization_class_forward_declarations_postfix());
     r.push_back(make_masd_generation_cpp_serialization_primitive_forward_declarations_postfix());
     r.push_back(make_masd_generation_cpp_serialization_master_header_postfix());
