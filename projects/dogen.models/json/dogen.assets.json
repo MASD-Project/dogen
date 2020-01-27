@@ -1,5 +1,5 @@
 {
-  "documentation": "Assets is the core Dogen meta-model representing software entities.\n\n@section assets_0 Overview\n\nAssets is a meta-model that strives to provide a technical-space agnostic\ntype representation, designed for code generation. Injection models\nare obtained via frontends and transformed into \"bare\" asset models, at\nwhich point they can enter its pipeline. Within it, they are processed\nuntil they form a cohesive whole. They are then in a suitable state for\ncode generation.\n\n@section asset_1 Mission\n\nThe objectives of the assets model are:\n\n@li to represent all high-level entities that exist across a number\nof technical spaces used in software engineering. These entities\nare not necessarily limited to programming entities, though, of course,\nthese form the core set of elements we're interested in. Additional\nentities such as build sytems and high-level patterns such as GoF\nand others are also captured.\n\n@li to provide the tooling required to combine multiple models \ntogether into a bigger model - called the @e merged model.\n\n@li to ensure the consistency of the merged model via validation\nrules (such as verifying that all types have a definitions,\netc.).\n",
+  "documentation": "Assets is the core Dogen meta-model representing software entities.\n\n@section assets_0 Overview\n\nAssets is a meta-model that strives to provide a technical-space agnostic\ntype representation, designed for code generation. Injection models\nare obtained via frontends and transformed into \"bare\" asset models, at\nwhich point they can enter its pipeline. Within it, they are processed\nuntil they form a cohesive whole. They are then in a suitable state for\ncode generation.\n\n@section asset_1 Mission\n\nThe objectives of the assets model are:\n\n@li to represent all high-level entities that exist across a number\nof technical spaces used in software engineering. These entities\nare not necessarily limited to programming entities, though, of course,\nthese form the core set of elements we're interested in. Additional\nentities such as build sytems and high-level patterns such as GoF\nand others are also captured.\n\n@li to provide the tooling required to combine multiple models\ntogether into a bigger model - called the @e merged model.\n\n@li to ensure the consistency of the merged model via validation\nrules (such as verifying that all types have a definitions,\netc.).\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "dogen.assets",
@@ -1900,7 +1900,7 @@
     },
     {
       "name": "meta_model::variability::feature_bundle",
-      "documentation": "A feature bundle represents an aggregation of feature templates in a model.\n\nThe feature templates should be \"semantically related\", that is, belong to a related\ntopic. A feature bundle is used by code generation to generate infrastructural code\nto ease the creation and subsequent processing of features. Generated code\ncomprises of two aspects: the registration of the feature for the dynamic part of the\nprocessing and the generation of a static configuration class to represent the \nfeature once read out from the dynamic configuration.\n",
+      "documentation": "A feature bundle represents an aggregation of feature templates in a model.\n\nThe feature templates should be \"semantically related\", that is, belong to a related\ntopic. A feature bundle is used by code generation to generate infrastructural code\nto ease the creation and subsequent processing of features. Generated code\ncomprises of two aspects: the registration of the feature for the dynamic part of the\nprocessing and the generation of a static configuration class to represent the\nfeature once read out from the dynamic configuration.\n",
       "stereotypes": [
         "assets::meta_element",
         "Associatable"
@@ -1920,7 +1920,7 @@
         {
           "name": "requires_manual_default_constructor",
           "type": "bool",
-          "documentation": "If true, the code generated for this feature bundle needs a manually generated \ndefault constructor.\n"
+          "documentation": "If true, the code generated for this feature bundle needs a manually generated\ndefault constructor.\n"
         },
         {
           "name": "template_kind",
@@ -3190,7 +3190,7 @@
     },
     {
       "name": "meta_model::serialization::type_registrar",
-      "documentation": "Responsible for registering types for serialisation purposes.\n\nCertain libraries in certain technical spaces - such as Boost Serialisation, in C++ -\nrequire types that are in an inheritance relationship to be made known to the \nserialisation infrastructure in order for the deserialisation of base and derived \ntypes to work. The type registrar is aware of all types with such requirements and\ngenerates the registration code as needed.\n",
+      "documentation": "Responsible for registering types for serialisation purposes.\n\nCertain libraries in certain technical spaces - such as Boost Serialisation, in C++ -\nrequire types that are in an inheritance relationship to be made known to the\nserialisation infrastructure in order for the deserialisation of base and derived\ntypes to work. The type registrar is aware of all types with such requirements and\ngenerates the registration code as needed.\n",
       "stereotypes": [
         "assets::meta_element"
       ],
@@ -3200,11 +3200,6 @@
           "name": "leaves",
           "type": "std::list<assets::meta_model::name>",
           "documentation": "List of all concrete classes which are part of an inheritance tree.\n"
-        },
-        {
-          "name": "model_dependencies",
-          "type": "std::list<assets::meta_model::name>",
-          "documentation": "List of all models which the model depends on.\n"
         },
         {
           "name": "registrar_dependencies",

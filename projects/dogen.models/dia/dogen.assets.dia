@@ -39450,19 +39450,19 @@ At present the system only supports wale templates.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O290">
       <dia:attribute name="obj_pos">
-        <dia:point val="75,-69"/>
+        <dia:point val="76,-69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="74.95,-69.05;98.65,-63.75"/>
+        <dia:rectangle val="75.95,-69.05;99.65,-64.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="75,-69"/>
+        <dia:point val="76,-69"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="23.600000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#type_registrar#</dia:string>
@@ -39570,29 +39570,6 @@ generates the registration code as needed.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#List of all concrete classes which are part of an inheritance tree.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#model_dependencies#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;assets::meta_model::name&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#List of all models which the model depends on.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -39993,7 +39970,7 @@ generates the registration code as needed.#</dia:string>
         <dia:point val="92.42,-74.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="86.75,-74.95;93.17,-68.2459"/>
+        <dia:rectangle val="87.75,-74.95;93.17,-68.2502"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -40001,8 +39978,8 @@ generates the registration code as needed.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="92.42,-74.2"/>
         <dia:point val="92.42,-71"/>
-        <dia:point val="86.8,-71"/>
-        <dia:point val="86.8,-69.0459"/>
+        <dia:point val="87.8,-71"/>
+        <dia:point val="87.8,-69.0502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -40020,7 +39997,7 @@ generates the registration code as needed.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O293" connection="6"/>
-        <dia:connection handle="1" to="O290" connection="14"/>
+        <dia:connection handle="1" to="O290" connection="12"/>
       </dia:connections>
       <dia:childnode parent="O289"/>
     </dia:object>

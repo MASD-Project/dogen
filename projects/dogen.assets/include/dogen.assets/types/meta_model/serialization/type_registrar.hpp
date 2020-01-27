@@ -69,7 +69,6 @@ public:
         const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
         const std::list<dogen::assets::meta_model::name>& leaves,
-        const std::list<dogen::assets::meta_model::name>& model_dependencies,
         const std::list<dogen::assets::meta_model::name>& registrar_dependencies);
 
 public:
@@ -91,16 +90,6 @@ public:
     std::list<dogen::assets::meta_model::name>& leaves();
     void leaves(const std::list<dogen::assets::meta_model::name>& v);
     void leaves(const std::list<dogen::assets::meta_model::name>&& v);
-    /**@}*/
-
-    /**
-     * @brief List of all models which the model depends on.
-     */
-    /**@{*/
-    const std::list<dogen::assets::meta_model::name>& model_dependencies() const;
-    std::list<dogen::assets::meta_model::name>& model_dependencies();
-    void model_dependencies(const std::list<dogen::assets::meta_model::name>& v);
-    void model_dependencies(const std::list<dogen::assets::meta_model::name>&& v);
     /**@}*/
 
     /**
@@ -128,7 +117,6 @@ public:
 
 private:
     std::list<dogen::assets::meta_model::name> leaves_;
-    std::list<dogen::assets::meta_model::name> model_dependencies_;
     std::list<dogen::assets::meta_model::name> registrar_dependencies_;
 };
 

@@ -58,7 +58,6 @@ type_registrar::type_registrar(
     const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
     const std::list<dogen::assets::meta_model::name>& leaves,
-    const std::list<dogen::assets::meta_model::name>& model_dependencies,
     const std::list<dogen::assets::meta_model::name>& registrar_dependencies)
     : dogen::assets::meta_model::element(
       name,
@@ -78,7 +77,6 @@ type_registrar::type_registrar(
       archetype_location_properties,
       decoration),
       leaves_(leaves),
-      model_dependencies_(model_dependencies),
       registrar_dependencies_(registrar_dependencies) { }
 
 void type_registrar::accept(const element_visitor& v) const {
@@ -104,7 +102,6 @@ void type_registrar::to_stream(std::ostream& s) const {
     dogen::assets::meta_model::element::to_stream(s);
     s << ", "
       << "\"leaves\": " << leaves_ << ", "
-      << "\"model_dependencies\": " << model_dependencies_ << ", "
       << "\"registrar_dependencies\": " << registrar_dependencies_
       << " }";
 }
@@ -114,7 +111,6 @@ void type_registrar::swap(type_registrar& other) noexcept {
 
     using std::swap;
     swap(leaves_, other.leaves_);
-    swap(model_dependencies_, other.model_dependencies_);
     swap(registrar_dependencies_, other.registrar_dependencies_);
 }
 
@@ -127,7 +123,6 @@ bool type_registrar::equals(const dogen::assets::meta_model::element& other) con
 bool type_registrar::operator==(const type_registrar& rhs) const {
     return dogen::assets::meta_model::element::compare(rhs) &&
         leaves_ == rhs.leaves_ &&
-        model_dependencies_ == rhs.model_dependencies_ &&
         registrar_dependencies_ == rhs.registrar_dependencies_;
 }
 
@@ -151,22 +146,6 @@ void type_registrar::leaves(const std::list<dogen::assets::meta_model::name>& v)
 
 void type_registrar::leaves(const std::list<dogen::assets::meta_model::name>&& v) {
     leaves_ = std::move(v);
-}
-
-const std::list<dogen::assets::meta_model::name>& type_registrar::model_dependencies() const {
-    return model_dependencies_;
-}
-
-std::list<dogen::assets::meta_model::name>& type_registrar::model_dependencies() {
-    return model_dependencies_;
-}
-
-void type_registrar::model_dependencies(const std::list<dogen::assets::meta_model::name>& v) {
-    model_dependencies_ = v;
-}
-
-void type_registrar::model_dependencies(const std::list<dogen::assets::meta_model::name>&& v) {
-    model_dependencies_ = std::move(v);
 }
 
 const std::list<dogen::assets::meta_model::name>& type_registrar::registrar_dependencies() const {
