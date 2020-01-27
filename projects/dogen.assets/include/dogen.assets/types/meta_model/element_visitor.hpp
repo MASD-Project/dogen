@@ -38,7 +38,9 @@
 #include "dogen.assets/types/meta_model/decoration/modeline_group_fwd.hpp"
 #include "dogen.assets/types/meta_model/structural/object_template_fwd.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_bundle_fwd.hpp"
+#include "dogen.assets/types/meta_model/build/visual_studio_project_fwd.hpp"
 #include "dogen.assets/types/meta_model/mapping/extensible_mappable_fwd.hpp"
+#include "dogen.assets/types/meta_model/build/visual_studio_solution_fwd.hpp"
 #include "dogen.assets/types/meta_model/decoration/generation_marker_fwd.hpp"
 #include "dogen.assets/types/meta_model/serialization/type_registrar_fwd.hpp"
 #include "dogen.assets/types/meta_model/variability/profile_template_fwd.hpp"
@@ -55,6 +57,26 @@ public:
     virtual ~element_visitor() noexcept = 0;
 
 public:
+    /**
+     * @brief Accept visits for type dogen::assets::meta_model::build::visual_studio_project
+     */
+    /**@{*/
+    virtual void visit(const dogen::assets::meta_model::build::visual_studio_project&) const { }
+    virtual void visit(const dogen::assets::meta_model::build::visual_studio_project&) { }
+    virtual void visit(dogen::assets::meta_model::build::visual_studio_project&) const { }
+    virtual void visit(dogen::assets::meta_model::build::visual_studio_project&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::assets::meta_model::build::visual_studio_solution
+     */
+    /**@{*/
+    virtual void visit(const dogen::assets::meta_model::build::visual_studio_solution&) const { }
+    virtual void visit(const dogen::assets::meta_model::build::visual_studio_solution&) { }
+    virtual void visit(dogen::assets::meta_model::build::visual_studio_solution&) const { }
+    virtual void visit(dogen::assets::meta_model::build::visual_studio_solution&) { }
+    /**@}*/
+
     /**
      * @brief Accept visits for type dogen::assets::meta_model::decoration::generation_marker
      */

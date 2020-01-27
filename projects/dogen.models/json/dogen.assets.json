@@ -486,6 +486,10 @@
           "name": "serialization_elements",
           "type": "serialization::element_repository",
           "documentation": "Elements related to serialization.\n"
+        },
+        {
+          "name": "build_elements",
+          "type": "build::element_repository"
         }
       ]
     },
@@ -3366,6 +3370,76 @@
         "masd::serialization::type_registrar"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::build",
+      "documentation": "Houses meta-model elements related to\nbuild systems.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "meta_model::build::visual_studio_project",
+      "documentation": "Represents a project for the Visual Studio IDE.\n",
+      "stereotypes": [
+        "assets::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "project_guid",
+          "type": "std::string"
+        },
+        {
+          "name": "project_name",
+          "type": "std::string"
+        },
+        {
+          "name": "tools_version",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::build::visual_studio_solution",
+      "documentation": "Represents a solution  for the Visual Studio IDE.\n",
+      "stereotypes": [
+        "assets::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "project_guid",
+          "type": "std::string"
+        },
+        {
+          "name": "project_solution_guid",
+          "type": "std::string"
+        },
+        {
+          "name": "version",
+          "type": "std::string"
+        },
+        {
+          "name": "project_name",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::build::element_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "visual_studio_projects",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<visual_studio_project>>"
+        },
+        {
+          "name": "visual_studio_solutions",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<visual_studio_solution>>"
+        }
+      ]
     }
   ]
 }

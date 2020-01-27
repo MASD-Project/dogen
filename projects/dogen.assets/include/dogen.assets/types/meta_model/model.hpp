@@ -39,6 +39,7 @@
 #include "dogen.assets/types/meta_model/orm/model_properties.hpp"
 #include "dogen.assets/types/meta_model/extraction_properties.hpp"
 #include "dogen.assets/types/meta_model/structural/module_fwd.hpp"
+#include "dogen.assets/types/meta_model/build/element_repository.hpp"
 #include "dogen.assets/types/meta_model/mapping/element_repository.hpp"
 #include "dogen.assets/types/meta_model/decoration/element_repository.hpp"
 #include "dogen.assets/types/meta_model/structural/element_repository.hpp"
@@ -81,7 +82,8 @@ public:
         const dogen::assets::meta_model::variability::element_repository& variability_elements,
         const dogen::assets::meta_model::mapping::element_repository& mapping_elements,
         const dogen::assets::meta_model::templating::element_repository& templating_elements,
-        const dogen::assets::meta_model::serialization::element_repository& serialization_elements);
+        const dogen::assets::meta_model::serialization::element_repository& serialization_elements,
+        const dogen::assets::meta_model::build::element_repository& build_elements);
 
 public:
     /**
@@ -248,6 +250,11 @@ public:
     void serialization_elements(const dogen::assets::meta_model::serialization::element_repository&& v);
     /**@}*/
 
+    const dogen::assets::meta_model::build::element_repository& build_elements() const;
+    dogen::assets::meta_model::build::element_repository& build_elements();
+    void build_elements(const dogen::assets::meta_model::build::element_repository& v);
+    void build_elements(const dogen::assets::meta_model::build::element_repository&& v);
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -277,6 +284,7 @@ private:
     dogen::assets::meta_model::mapping::element_repository mapping_elements_;
     dogen::assets::meta_model::templating::element_repository templating_elements_;
     dogen::assets::meta_model::serialization::element_repository serialization_elements_;
+    dogen::assets::meta_model::build::element_repository build_elements_;
 };
 
 }
