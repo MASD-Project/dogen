@@ -14,7 +14,7 @@
 [![Report CI](https://report.ci/status/MASD-Project/dogen/badge.svg?branch=master)](https://report.ci/status/MASD-Project/dogen?branch=master)
 [![Build Status](https://img.shields.io/travis/MASD-Project/dogen.svg?label=linux/osx)](https://travis-ci.org/MASD-Project/dogen)
 [![Build Status](https://img.shields.io/appveyor/ci/mcraveiro/dogen.svg?label=windows)](https://ci.appveyor.com/project/mcraveiro/dogen)
-[![Coverage Status](https://coveralls.io/repos/github/MASD-Project/dogen/badge.svg?branch=master&service=github)](https://coveralls.io/github/MASD-Project/dogen?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/MASD-Project/dogen/badge.svg?branch=master)](https://coveralls.io/github/MASD-Project/dogen?branch=master)
 [![codecov](https://codecov.io/gh/MASD-Project/dogen/branch/master/graph/badge.svg)](https://codecov.io/gh/MASD-Project/dogen)
 [![Coverity](https://img.shields.io/coverity/scan/16865.svg)](https://scan.coverity.com/projects/masd-project-dogen)
 [![Releases](https://img.shields.io/github/release/MASD-Project/dogen.svg)](https://github.com/MASD-Project/dogen/releases)
