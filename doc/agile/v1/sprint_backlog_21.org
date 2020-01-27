@@ -12,22 +12,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-01-27 Mon 23:21]
+#+CAPTION: Clock summary at [2020-01-27 Mon 23:51]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *16:48* |       |      | 100.0 |
+| *Total time*                                          | *17:17* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 16:48   |       |      | 100.0 |
-| Active                                                |         | 16:48 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 7:01 |  41.8 |
-| Create a demo and presentation for previous sprint    |         |       | 1:49 |  10.8 |
-| Sprint and product backlog grooming                   |         |       | 0:37 |   3.7 |
-| Create the final video on the relational model series |         |       | 0:30 |   3.0 |
-| Move registrar into assets                            |         |       | 5:34 |  33.1 |
-| Fix error in asserter tests                           |         |       | 0:38 |   3.8 |
-| Fix nightly error in registrar                        |         |       | 0:33 |   3.3 |
-| Move visual studio fabric types into assets           |         |       | 0:06 |   0.6 |
+| Stories                                               | 17:17   |       |      | 100.0 |
+| Active                                                |         | 17:17 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 7:01 |  40.6 |
+| Create a demo and presentation for previous sprint    |         |       | 1:49 |  10.5 |
+| Sprint and product backlog grooming                   |         |       | 0:37 |   3.6 |
+| Create the final video on the relational model series |         |       | 0:30 |   2.9 |
+| Move registrar into assets                            |         |       | 5:34 |  32.2 |
+| Fix error in asserter tests                           |         |       | 0:38 |   3.7 |
+| Fix nightly error in registrar                        |         |       | 0:33 |   3.2 |
+| Move visual studio fabric types into assets           |         |       | 0:35 |   3.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -440,6 +440,7 @@ calling referenced models.
 
 *** STARTED Move visual studio fabric types into assets               :story:
     :LOGBOOK:
+    CLOCK: [2020-01-27 Mon 23:22]--[2020-01-27 Mon 23:51] =>  0:29
     CLOCK: [2020-01-27 Mon 18:23]--[2020-01-27 Mon 18:29] =>  0:06
     :END:
 
@@ -449,6 +450,9 @@ for build infrastructure.
 Notes:
 
 - do we need visual studio configuration? Can't seem to find any uses
-  for it.
+  for it. Actually we needed it in the past because we were reading
+  meta-data from the model itself. With meta-types, this is no longer
+  required. We just need to update the adaptor to look for the new
+  meta-type and copy across the properties accordingly.
 
 ** Deprecated
