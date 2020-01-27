@@ -57,7 +57,7 @@ void type_registrar_transform::apply(const context& ctx, meta_model::model& m) {
 
     using meta_model::name;
     using meta_model::origin_types;
-    std::list<std::pair<name, name>> referenced_registrars;
+    std::list<name> registrar_dependencies;
     using meta_model::serialization::type_registrar;
     boost::shared_ptr<type_registrar> target_registrar;
     for (auto& pair : m.serialization_elements().type_registrars()) {
@@ -134,8 +134,7 @@ void type_registrar_transform::apply(const context& ctx, meta_model::model& m) {
 
                 if (lhs.external_modules() == rhs.external_modules() &&
                     lhs.model_modules() == rhs.model_modules()) {
-                    const auto p(std::make_pair(ref, rg.name()));
-                    referenced_registrars.push_back(p);
+                    registrar_dependencies.push_back(rg.name());
                 }
             }
         } else {
@@ -149,33 +148,11 @@ void type_registrar_transform::apply(const context& ctx, meta_model::model& m) {
     }
 
     /*
-     * If there is no target registrar then there is nothing to do.
+     * If there is a target registrar, update all of the model and
+     * registrar dependencies on the target model.
      */
-    if (!target_registrar) {
-        BOOST_LOG_SEV(lg, debug) << "Model has no target registrar.";
-        return;
-    }
-
-    /*
-     * If there are no referenced registrars, then we're done.
-     */
-    if (referenced_registrars.empty()) {
-        BOOST_LOG_SEV(lg, debug) << "No referenced registrars found.";
-        return;
-    }
-
-    /*
-     * Finally, update all of the model and registrar dependencies on
-     * the target model.
-     */
-    auto& tr(*target_registrar);
-    for (const auto& pair : referenced_registrars) {
-        const auto& ref(pair.first);
-        tr.model_dependencies().push_back(ref);
-
-        const auto& ref_rg(pair.second);
-        tr.registrar_dependencies().push_back(ref_rg);
-    }
+    if (target_registrar)
+        target_registrar->registrar_dependencies(registrar_dependencies);
 
     stp.end_transform(m);
 }
