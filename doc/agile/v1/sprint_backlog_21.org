@@ -12,21 +12,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-01-27 Mon 18:22]
+#+CAPTION: Clock summary at [2020-01-27 Mon 18:29]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *15:15* |       |      | 100.0 |
+| *Total time*                                          | *15:21* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 15:15   |       |      | 100.0 |
-| Active                                                |         | 15:15 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 7:01 |  46.0 |
-| Create a demo and presentation for previous sprint    |         |       | 1:49 |  11.9 |
+| Stories                                               | 15:21   |       |      | 100.0 |
+| Active                                                |         | 15:21 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 7:01 |  45.7 |
+| Create a demo and presentation for previous sprint    |         |       | 1:49 |  11.8 |
 | Sprint and product backlog grooming                   |         |       | 0:22 |   2.4 |
 | Create the final video on the relational model series |         |       | 0:30 |   3.3 |
-| Move registrar into assets                            |         |       | 5:16 |  34.5 |
+| Move registrar into assets                            |         |       | 5:16 |  34.3 |
 | Fix error in asserter tests                           |         |       | 0:08 |   0.9 |
 | Fix nightly error in registrar                        |         |       | 0:09 |   1.0 |
+| Move visual studio fabric types into assets           |         |       | 0:06 |   0.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -414,6 +415,8 @@ Notes:
   approach. An alternative is to keep the function as is but use the
   type name to name the function. This is not entirely clean but its
   also not entirely wrong conceptually.
+- registrar has a set of model dependencies. Its not clear that we
+  still need those. Check to see if deleting it causes any errors.
 
 *** COMPLETED Fix error in asserter tests                             :story:
     CLOSED: [2020-01-27 Mon 17:58]
@@ -431,9 +434,17 @@ At present we cannot run the utility tests twice.
 We are not using the fully qualified name of the registrar when
 calling referenced models.
 
-*** Move visual studio fabric types into assets                       :story:
+*** STARTED Move visual studio fabric types into assets               :story:
+    :LOGBOOK:
+    CLOCK: [2020-01-27 Mon 18:23]--[2020-01-27 Mon 18:29] =>  0:06
+    :END:
 
 We need to do this for both C# and C++. We should create a namespace
 for build infrastructure.
+
+Notes:
+
+- do we need visual studio configuration? Can't seem to find any uses
+  for it.
 
 ** Deprecated
