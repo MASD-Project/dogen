@@ -99,9 +99,6 @@ public:
             return true;
         }
 
-        BOOST_LOG_SEV(lg_, debug) << "Writing actual: " << actual_path.string();
-        xml_serialize(actual_path, actual);
-
         using dogen::utility::test::xml_deserialize;
         using namespace dogen::utility::log;
         BOOST_LOG_SEV(lg_, debug) << "Reading expected: "

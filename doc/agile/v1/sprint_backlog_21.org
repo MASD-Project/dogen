@@ -12,19 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-01-26 Sun 22:41]
+#+CAPTION: Clock summary at [2020-01-27 Mon 17:58]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *14:38* |       |      | 100.0 |
+| *Total time*                                          | *14:53* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 14:38   |       |      | 100.0 |
-| Active                                                |         | 14:38 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 7:01 |  47.9 |
-| Create a demo and presentation for previous sprint    |         |       | 1:49 |  12.4 |
+| Stories                                               | 14:53   |       |      | 100.0 |
+| Active                                                |         | 14:53 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 7:01 |  47.1 |
+| Create a demo and presentation for previous sprint    |         |       | 1:49 |  12.2 |
 | Create the final video on the relational model series |         |       | 0:30 |   3.4 |
-| Move registrar into assets                            |         |       | 5:03 |  34.5 |
-| Sprint and product backlog grooming                   |         |       | 0:15 |   1.7 |
+| Move registrar into assets                            |         |       | 5:03 |  33.9 |
+| Fix error in asserter tests                           |         |       | 0:08 |   0.9 |
+| Sprint and product backlog grooming                   |         |       | 0:22 |   2.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -404,16 +405,30 @@ Notes:
   type name to name the function. This is not entirely clean but its
   also not entirely wrong conceptually.
 
-*** Move visual studio fabric types into assets                       :story:
+*** COMPLETED Fix error in asserter tests                             :story:
+    CLOSED: [2020-01-27 Mon 17:58]
+    :LOGBOOK:
+    CLOCK: [2020-01-27 Mon 17:50]--[2020-01-27 Mon 17:58] =>  0:08
+    :END:
 
-We need to do this for both C# and C++. We should create a namespace
-for build infrastructure.
+At present we cannot run the utility tests twice.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-01-27 Mon 17:42]--[2020-01-27 Mon 17:49] =>  0:07
     CLOCK: [2020-01-25 Sat 23:41]--[2020-01-25 Sat 23:56] =>  0:15
     :END:
 
 Updates to sprint and product backlog.
+
+*** Fix nightly error in registrar                                    :story:
+
+We are not using the fully qualified name of the registrar when
+calling referenced models.
+
+*** Move visual studio fabric types into assets                       :story:
+
+We need to do this for both C# and C++. We should create a namespace
+for build infrastructure.
 
 ** Deprecated
