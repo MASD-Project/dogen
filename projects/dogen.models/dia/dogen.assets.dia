@@ -835,7 +835,7 @@ these form the core set of elements we're interested in. Additional
 entities such as build sytems and high-level patterns such as GoF
 and others are also captured.
 
-@li to provide the tooling required to combine multiple models 
+@li to provide the tooling required to combine multiple models
 together into a bigger model - called the @e merged model.
 
 @li to ensure the consistency of the merged model via validation
@@ -27966,7 +27966,7 @@ The feature templates should be "semantically related", that is, belong to a rel
 topic. A feature bundle is used by code generation to generate infrastructural code
 to ease the creation and subsequent processing of features. Generated code
 comprises of two aspects: the registration of the feature for the dynamic part of the
-processing and the generation of a static configuration class to represent the 
+processing and the generation of a static configuration class to represent the
 feature once read out from the dynamic configuration.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -28105,7 +28105,7 @@ feature once read out from the dynamic configuration.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If true, the code generated for this feature bundle needs a manually generated 
+            <dia:string>#If true, the code generated for this feature bundle needs a manually generated
 default constructor.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -39474,8 +39474,8 @@ At present the system only supports wale templates.#</dia:string>
         <dia:string>#Responsible for registering types for serialisation purposes.
 
 Certain libraries in certain technical spaces - such as Boost Serialisation, in C++ -
-require types that are in an inheritance relationship to be made known to the 
-serialisation infrastructure in order for the deserialisation of base and derived 
+require types that are in an inheritance relationship to be made known to the
+serialisation infrastructure in order for the deserialisation of base and derived
 types to work. The type registrar is aware of all types with such requirements and
 generates the registration code as needed.#</dia:string>
       </dia:attribute>
@@ -41391,7 +41391,7 @@ to serialisation.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#new_registrar#</dia:string>
+        <dia:string>#registrar#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::serialization::type_registrar#</dia:string>

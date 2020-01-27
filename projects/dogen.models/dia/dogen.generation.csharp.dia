@@ -4285,7 +4285,7 @@
         <dia:point val="141.725,40.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="118.857,38.95;142.475,44.05"/>
+        <dia:rectangle val="118.858,38.95;142.475,44.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -18780,7 +18780,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#new_registrar#</dia:string>
+        <dia:string>#registrar#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::serialization::type_registrar#</dia:string>
