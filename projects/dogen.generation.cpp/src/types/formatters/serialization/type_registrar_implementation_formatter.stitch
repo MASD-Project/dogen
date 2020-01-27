@@ -62,7 +62,7 @@ format(const context& ctx, const assets::meta_model::element& e) const {
         {
             const auto ns(a.make_namespaces(rg.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
-            const auto deps(rg.model_dependencies());
+            const auto deps(rg.registrar_dependencies());
             const auto carch(traits::canonical_archetype());
             const auto leaves(a.names_with_enabled_archetype(carch, rg.leaves()));
             const bool has_types(!deps.empty() || !leaves.empty());
