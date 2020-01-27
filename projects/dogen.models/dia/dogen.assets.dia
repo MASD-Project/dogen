@@ -65,22 +65,22 @@
   <dia:layer name="Background" visible="true" active="true">
     <dia:object type="UML - LargePackage" version="0" id="O0">
       <dia:attribute name="obj_pos">
-        <dia:point val="-247,-97"/>
+        <dia:point val="-247,-98"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-247.05,-98.05;133.05,11.05"/>
+        <dia:rectangle val="-247.05,-99.05;133.05,11.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-247,-97"/>
+        <dia:point val="-247,-98"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="380"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="108"/>
+        <dia:real val="109"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -679,7 +679,7 @@ C++ pointers, references and so on.#</dia:string>
         <dia:point val="-100.392,-69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-114.615,-81.05;-99.642,-68.2"/>
+        <dia:rectangle val="-114.615,-81.05;-99.6425,-68.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -784,16 +784,16 @@ C++ pointers, references and so on.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O5">
       <dia:attribute name="obj_pos">
-        <dia:point val="-279,-97"/>
+        <dia:point val="-279,-98"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-279.05,-97.05;-249.945,-56.05"/>
+        <dia:rectangle val="-279.05,-98.05;-249.945,-57.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-279,-97"/>
+        <dia:point val="-279,-98"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="29.005000000000003"/>
@@ -871,7 +871,7 @@ etc.).
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-278.65,-95.755"/>
+            <dia:point val="-278.65,-96.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -2377,7 +2377,7 @@ formatting.#</dia:string>
         <dia:point val="-193.782,-63.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-194.632,-63.85;-173.888,-45.95"/>
+        <dia:rectangle val="-194.632,-63.85;-173.887,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2577,7 +2577,7 @@ formatting.#</dia:string>
         <dia:point val="-196.49,-51.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-197.34,-51.65;-173.888,-45.95"/>
+        <dia:rectangle val="-197.34,-51.65;-173.887,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5073,7 +5073,7 @@ If not present, user did not make any statements with regards to finality.#</dia
         <dia:point val="-235.665,-58.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-236.515,-58.45;-209.888,-45.95"/>
+        <dia:rectangle val="-236.515,-58.45;-209.887,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5115,7 +5115,7 @@ If not present, user did not make any statements with regards to finality.#</dia
         <dia:point val="-219.28,-50.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-220.13,-50.85;-209.888,-45.95"/>
+        <dia:rectangle val="-220.13,-50.85;-209.887,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5253,7 +5253,7 @@ names in assets element
         <dia:point val="-128.123,-61"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-128.189,-63.3834;-123.643,-60.9335"/>
+        <dia:rectangle val="-128.189,-63.3834;-123.642,-60.9335"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -22169,19 +22169,19 @@ Temporary data structure used to build trees of names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O151">
       <dia:attribute name="obj_pos">
-        <dia:point val="-192,-95"/>
+        <dia:point val="-192,-96"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-192.05,-95.05;-175.665,-73.75"/>
+        <dia:rectangle val="-192.05,-96.05;-175.665,-73.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-192,-95"/>
+        <dia:point val="-192,-96"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.285"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="21.200000000000006"/>
+        <dia:real val="22.800000000000008"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#static_stereotypes#</dia:string>
@@ -22780,6 +22780,52 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#serialization_type_registrar#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#build_visual_studio_project#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#build_visual_studio_solution#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -23818,7 +23864,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-201.5,-34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-202.25,-40.85;-192.272,-33.2"/>
+        <dia:rectangle val="-202.25,-40.85;-192.273,-33.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23962,7 +24008,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-172.125,-69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-183.907,-73.85;-171.375,-68.2"/>
+        <dia:rectangle val="-183.907,-73.25;-171.375,-68.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23971,7 +24017,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-172.125,-69"/>
         <dia:point val="-172.125,-71"/>
         <dia:point val="-183.857,-71"/>
-        <dia:point val="-183.857,-73.8"/>
+        <dia:point val="-183.857,-73.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -24775,7 +24821,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:point val="-182.472,-52.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-183.322,-52.45;-173.888,-45.95"/>
+        <dia:rectangle val="-183.322,-52.45;-173.887,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

@@ -54,7 +54,9 @@ enum class static_stereotypes : unsigned int {
     mapping_fixed_mappable = 20,
     mapping_extensible_mappable = 21,
     templating_logic_less_template = 22,
-    serialization_type_registrar = 23
+    serialization_type_registrar = 23,
+    build_visual_studio_project = 24,
+    build_visual_studio_solution = 25
 };
 
 }
