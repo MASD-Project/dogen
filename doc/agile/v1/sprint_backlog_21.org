@@ -12,22 +12,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-01-27 Mon 18:29]
+#+CAPTION: Clock summary at [2020-01-27 Mon 23:02]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *15:21* |       |      | 100.0 |
+| *Total time*                                          | *16:30* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 15:21   |       |      | 100.0 |
-| Active                                                |         | 15:21 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 7:01 |  45.7 |
-| Create a demo and presentation for previous sprint    |         |       | 1:49 |  11.8 |
-| Sprint and product backlog grooming                   |         |       | 0:22 |   2.4 |
-| Create the final video on the relational model series |         |       | 0:30 |   3.3 |
-| Move registrar into assets                            |         |       | 5:16 |  34.3 |
-| Fix error in asserter tests                           |         |       | 0:08 |   0.9 |
-| Fix nightly error in registrar                        |         |       | 0:09 |   1.0 |
-| Move visual studio fabric types into assets           |         |       | 0:06 |   0.7 |
+| Stories                                               | 16:30   |       |      | 100.0 |
+| Active                                                |         | 16:30 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 7:01 |  42.5 |
+| Create a demo and presentation for previous sprint    |         |       | 1:49 |  11.0 |
+| Sprint and product backlog grooming                   |         |       | 0:37 |   3.7 |
+| Create the final video on the relational model series |         |       | 0:30 |   3.0 |
+| Move registrar into assets                            |         |       | 5:16 |  31.9 |
+| Fix error in asserter tests                           |         |       | 0:38 |   3.8 |
+| Fix nightly error in registrar                        |         |       | 0:33 |   3.3 |
+| Move visual studio fabric types into assets           |         |       | 0:06 |   0.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -332,6 +332,7 @@ using the Dogen test models.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-01-27 Mon 22:47]--[2020-01-27 Mon 23:02] =>  0:15
     CLOCK: [2020-01-27 Mon 17:42]--[2020-01-27 Mon 17:49] =>  0:07
     CLOCK: [2020-01-25 Sat 23:41]--[2020-01-25 Sat 23:56] =>  0:15
     :END:
@@ -422,6 +423,7 @@ Notes:
     CLOSED: [2020-01-27 Mon 17:58]
     :LOGBOOK:
     CLOCK: [2020-01-27 Mon 17:50]--[2020-01-27 Mon 17:58] =>  0:08
+    CLOCK: [2020-01-26 Sun 23:06]--[2020-01-26 Sun 23:36] =>  0:30
     :END:
 
 At present we cannot run the utility tests twice.
@@ -429,6 +431,7 @@ At present we cannot run the utility tests twice.
 *** STARTED Fix nightly error in registrar                            :story:
     :LOGBOOK:
     CLOCK: [2020-01-27 Mon 17:59]--[2020-01-27 Mon 18:08] =>  0:09
+    CLOCK: [2020-01-26 Sun 22:41]--[2020-01-26 Sun 23:05] =>  0:24
     :END:
 
 We are not using the fully qualified name of the registrar when
