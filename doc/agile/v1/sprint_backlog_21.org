@@ -12,23 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-01-28 Tue 21:45]
+#+CAPTION: Clock summary at [2020-01-28 Tue 22:35]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *18:33* |       |      | 100.0 |
+| *Total time*                                          | *19:22* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 18:33   |       |      | 100.0 |
-| Active                                                |         | 18:33 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 7:01 |  37.8 |
-| Create a demo and presentation for previous sprint    |         |       | 1:49 |   9.8 |
-| Sprint and product backlog grooming                   |         |       | 1:03 |   5.7 |
-| Create the final video on the relational model series |         |       | 0:30 |   2.7 |
-| Move registrar into assets                            |         |       | 5:34 |  30.0 |
-| Fix error in asserter tests                           |         |       | 0:38 |   3.4 |
+| Stories                                               | 19:22   |       |      | 100.0 |
+| Active                                                |         | 19:22 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 7:01 |  36.2 |
+| Create a demo and presentation for previous sprint    |         |       | 1:49 |   9.4 |
+| Sprint and product backlog grooming                   |         |       | 1:03 |   5.4 |
+| Create the final video on the relational model series |         |       | 0:30 |   2.6 |
+| Move registrar into assets                            |         |       | 5:34 |  28.7 |
+| Fix error in asserter tests                           |         |       | 0:38 |   3.3 |
 | Add injection details to all models                   |         |       | 0:25 |   2.2 |
-| Fix nightly error in registrar                        |         |       | 0:33 |   3.0 |
-| Move visual studio fabric types into assets           |         |       | 0:35 |   3.1 |
+| Fix nightly error in registrar                        |         |       | 0:33 |   2.8 |
+| Move visual studio fabric types into assets           |         |       | 1:24 |   7.2 |
 | Nightly code coverage is not being reported           |         |       | 0:25 |   2.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -567,6 +567,7 @@ Notes:
 
 *** STARTED Move visual studio fabric types into assets               :story:
     :LOGBOOK:
+    CLOCK: [2020-01-28 Tue 21:46]--[2020-01-28 Tue 22:35] =>  0:49
     CLOCK: [2020-01-27 Mon 23:22]--[2020-01-27 Mon 23:51] =>  0:29
     CLOCK: [2020-01-27 Mon 18:23]--[2020-01-27 Mon 18:29] =>  0:06
     :END:
@@ -581,6 +582,11 @@ Notes:
   meta-data from the model itself. With meta-types, this is no longer
   required. We just need to update the adaptor to look for the new
   meta-type and copy across the properties accordingly.
+- we cannot create two distinct meta-model elements if they then
+  generate two files with the same filename and different extensions,
+  e.g.: =cpp_ref_impl.cpp_model.vcxproj=,
+  =cpp_ref_impl.cpp_model-vc.sln=. Instead, we need to have a single
+  meta-model element with two facets.
 
 *** STARTED Nightly code coverage is not being reported               :story:
     :LOGBOOK:
