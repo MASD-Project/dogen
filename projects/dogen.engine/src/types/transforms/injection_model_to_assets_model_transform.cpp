@@ -69,6 +69,8 @@ const std::string too_many_element_types(
     "Attempting to set the masd type more than once.");
 const std::string unsupported_technical_space(
     "Technical space is not supported: ");
+const std::string too_many_initializers(
+    "Found more than one feature template initializer in model.");
 
 using dogen::assets::meta_model::location;
 const location empty_location = location();
@@ -218,7 +220,14 @@ process_element(const helpers::adapter& ad,
             m.variability_elements().feature_bundles());
         break;
     case static_stereotypes::variability_feature_template_initializer:
-        // FIXME: throw if already set.
+        /*
+         * A model can only have zero or one feature template
+         * initializers.
+         */
+        if (m.variability_elements().feature_template_initializer()) {
+            BOOST_LOG_SEV(lg, error) << too_many_initializers;
+            BOOST_THROW_EXCEPTION(transform_exception(too_many_initializers));
+        }
         m.variability_elements().feature_template_initializer(
             ad.to_variability_feature_template_initializer(l, scr, e));
         break;
@@ -237,6 +246,14 @@ process_element(const helpers::adapter& ad,
     case static_stereotypes::serialization_type_registrar:
         insert(ad.to_type_registrar(l, scr, e),
             m.serialization_elements().type_registrars());
+        break;
+    case static_stereotypes::build_visual_studio_project:
+        insert(ad.to_visual_studio_project(l, scr, e),
+            m.build_elements().visual_studio_projects());
+        break;
+    case static_stereotypes::build_visual_studio_solution:
+        insert(ad.to_visual_studio_solution(l, scr, e),
+            m.build_elements().visual_studio_solutions());
         break;
 
     default: {
