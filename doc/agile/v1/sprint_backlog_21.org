@@ -12,22 +12,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-01-27 Mon 23:51]
+#+CAPTION: Clock summary at [2020-01-28 Tue 00:00]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *17:17* |       |      | 100.0 |
+| *Total time*                                          | *17:49* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 17:17   |       |      | 100.0 |
-| Active                                                |         | 17:17 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 7:01 |  40.6 |
-| Create a demo and presentation for previous sprint    |         |       | 1:49 |  10.5 |
-| Sprint and product backlog grooming                   |         |       | 0:37 |   3.6 |
-| Create the final video on the relational model series |         |       | 0:30 |   2.9 |
-| Move registrar into assets                            |         |       | 5:34 |  32.2 |
-| Fix error in asserter tests                           |         |       | 0:38 |   3.7 |
-| Fix nightly error in registrar                        |         |       | 0:33 |   3.2 |
-| Move visual studio fabric types into assets           |         |       | 0:35 |   3.4 |
+| Stories                                               | 17:49   |       |      | 100.0 |
+| Active                                                |         | 17:49 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 7:01 |  39.4 |
+| Create a demo and presentation for previous sprint    |         |       | 1:49 |  10.2 |
+| Sprint and product backlog grooming                   |         |       | 0:37 |   3.5 |
+| Create the final video on the relational model series |         |       | 0:30 |   2.8 |
+| Move registrar into assets                            |         |       | 5:34 |  31.2 |
+| Fix error in asserter tests                           |         |       | 0:38 |   3.6 |
+| Add injection details to all models                   |         |       | 0:25 |   2.3 |
+| Fix nightly error in registrar                        |         |       | 0:33 |   3.1 |
+| Move visual studio fabric types into assets           |         |       | 0:35 |   3.3 |
+| Nightly code coverage is not being reported           |         |       | 0:07 |   0.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -429,6 +431,28 @@ Notes:
 
 At present we cannot run the utility tests twice.
 
+*** COMPLETED Add injection details to all models                     :story:
+    CLOSED: [2020-01-28 Tue 00:00]
+    :LOGBOOK:
+    CLOCK: [2020-01-17 Fri 11:16]--[2020-01-17 Fri 11:41] =>  0:25
+    :END:
+
+*Rationale*: completed in previous sprint via SHA1 hashes.
+
+At present we have no way to connect a given element to its origin in
+an extraction model. This is a particular problem in the relation
+model because we want to be able to join columns from different models
+(e.g. get this object across all representations). We need to record:
+
+- dia ID.
+- file name: or maybe hash of the filename? or of path? or even better
+  the SHA1 of the model? This would enable us to know exactly if a
+  given dia file in its current state
+- line, column.
+
+However our current parsers (XML, JSON will not make it easy to record
+the line and column so this needs to be deferred.
+
 *** STARTED Fix nightly error in registrar                            :story:
     :LOGBOOK:
     CLOCK: [2020-01-27 Mon 17:59]--[2020-01-27 Mon 18:08] =>  0:09
@@ -454,5 +478,23 @@ Notes:
   meta-data from the model itself. With meta-types, this is no longer
   required. We just need to update the adaptor to look for the new
   meta-type and copy across the properties accordingly.
+
+*** STARTED Nightly code coverage is not being reported               :story:
+    :LOGBOOK:
+    CLOCK: [2020-01-27 Mon 23:52]--[2020-01-27 Mon 23:59] =>  0:07
+    :END:
+
+We are running kcov in the nightlies, but we cannot see the results in
+the coverage tool.
+
+*** Tracing backend is not defaulted                                  :story:
+
+Not supplying a tracing backend results in the following error:
+
+: FAILED: projects/dogen.models/dia/CMakeFiles/generate_dogen.dia
+: cd /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang9/Release && /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang9/Release/stage/bin/dogen.cli generate --target /work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen.models/dia/dogen.dia --log-enabled --log-level trace --tracing-enabled --tracing-level detail --tracing-guids-enabled --reporting-enabled --reporting-style org-mode --output-directory /work/DomainDrivenConsulting/masd/dogen/integration/projects/
+: Error: Tracing backend is unsupported: { "__type__": "tracing_backend", "value": "invalid" }
+
+We need to add a sensible default value.
 
 ** Deprecated
