@@ -16,7 +16,12 @@ such as profiles, licences etc.
 
 Stories that we haven't quite classified yet, but are needed.
 
-*** Add support for qualified class names in dia                      :story:
+** Core work
+
+The most significant stories needed by v2. These are either features
+or refactoring that must go in.
+
+*** Add support for qualified class names in dia            :reviewing:story:
 
 Note: test this feature as we implemented something similar.
 
@@ -74,85 +79,6 @@ containing module schema name, then we check to see if its overridden
 at the element level) but we also do not take into account recursive
 composition. We need to revisit this.
 
-*** Fix broken tests for clang-cl on release                          :story:
-
-We have a number of failing tests, without any output:
-
-- dogen.assets.tests:
-  - attributes_transform_tests/model_with_object_template_that_inhertis_missing_object_template_throws
-  - attributes_transform_tests/model_with_object_that_instantiates_missing_object_template_throws
-  - attributes_transform_tests/model_with_object_that_instantiates_object_template_with_missing_parent_throws
-  - object_templates_transform_tests/model_with_object_template_that_parents_missing_object_template_throws
-  - object_templates_transform_tests/model_with_object_that_models_missing_object_template_throws
-  - object_templates_transform_tests/model_with_object_with_missing_parent_throws
-  - pre_assembly_validator_tests/type_with_inconsistent_key_value_pair_throws
-  - pre_assembly_validator_tests/type_with_incorrect_model_name_throws
-  - resolver_tests/object_with_missing_attribute_type_throws
-  - resolver_tests/object_with_missing_third_degree_parent_in_different_models_throws
-  - resolver_tests/object_with_third_degree_parent_missing_within_single_model_throws
-  - stereotypes_transform_tests/visitable_object_with_no_leaves_throws
-- dogen.injection.dia.tests
-  - grapher_tests/adding_object_after_graph_has_been_generated_throws
-  - grapher_tests/generating_after_graph_has_been_generated_throws
-  - grapher_tests/generating_graph_with_first_degree_cycle_throws
-  - grapher_tests/querying_state_before_generating_throws
-  - hydrator_tests/missing_elements_model_throws
-- dogen.templating.tests
-  - stitch_formatter_tests/line_with_unmapped_variable_throws
-  - stitch_parser_tests/end_control_block_with_additional_characters_throws
-  - stitch_parser_tests/expression_in_expression_throws
-  - stitch_parser_tests/invalid_directive_throws
-  - stitch_parser_tests/invalid_inline_control_blocks_throw
-  - stitch_parser_tests/multiline_expression_block_throws
-  - stitch_parser_tests/standard_control_block_with_text_block_in_the_same_line_throws
-  - stitch_parser_tests/start_standard_control_block_marker_prefixed_by_additional_characters_throws
-  - stitch_parser_tests/stray_end_expression_block_throws
-  - stitch_parser_tests/text_block_with_standard_control_block_in_the_same_line_throws
-  - stitch_parser_tests/two_end_control_block_markers_in_a_row_throws
-  - stitch_parser_tests/two_start_standard_control_blocks_in_a_row_throws
-  - stitch_parser_tests/untermined_expression_block_throws
-- dogen.utility.tests:
-  - asserter_tests/assert_file_throws_for_non_existent_files
-  - file_tests/find_files_throws_when_argument_is_a_file
-  - file_tests/find_files_throws_when_directory_does_not_exist
-  - file_tests/read_file_content_throws_when_reading_non_existent_file
-  - resolver_tests/validating_resolver_throws_for_non_existent_paths
-  - splitter_tests/parsing_string_with_mixed_scope_operators_throws
-  - utility_tests/exception_shall_be_usable_as_a_boost_exception
-  - utility_tests/exception_shall_be_usable_as_a_standard_exception
-  - utility_tests/exericise_exception_derived_classes
-  - xml_tests/text_reader_reads_boolean_values_correctly
-
-Notes:
-
-- try disabling XML logs to see if we can get any additional output on
-  the console.
-
-*** Build dogen from docker                                           :story:
-
-- fix references to gcc6 etc
-- run:
-
-: docker exec -it zen_euclid env TERM=dumb
-: /home/marco/Development/DomainDrivenConsulting/dogen/build/scripts/build.linux.sh
-: Release 4 gcc /home/marco/local
-
-Merged stories:
-
-*Build dogen docker images from travis*
-
-We should build docker images with each commit into master.
-
-Links:
-
-- [[https://sebest.github.io/post/using-travis-ci-to-build-docker-images/][Using Travis.ci to build Docker images]]
-- [[https://github.com/OpenSourceRisk/Engine/tree/master/tools/docker][ORE docker script]]
-- [[https://giorgos.sealabs.net/build-and-test-against-docker-images-in-travis.html][Build and Test against Docker Images in Travis]]
-- [[https://medium.com/travis-on-docker/triple-stage-docker-builds-with-go-and-angular-1b7d2006cb88][Triple-Stage Docker Builds with Go and Angular]]
-- [[https://medium.com/travis-on-docker/multi-stage-docker-builds-for-creating-tiny-go-images-e0e1867efe5a][Multi-Stage Docker Builds for Creating Tiny Go Images]]
-- [[https://github.com/gliderlabs/docker-alpine/issues/24][What is the alpine equivalent to build-essential?]]
-- [[https://caveofcode.com/2017/03/continuous-delivery-to-kubernetes-with-travis-ci/][Continuous delivery to Kubernetes with Travis CI]]
-
 *** Test ORM support for table name and column name                   :story:
 
 At present it seems we can supply a table name, but no corresponding
@@ -187,34 +113,6 @@ property and the primitive?
 
 The alternative is to make the attribute explicit. We need to think
 about the consequences of this as well.
-
-*** Create a docker image for builds                                  :story:
-
-GCP's cloud builde uses the idea of cloud-builder images. These
-contain all of the basics required to build for a given language. Now,
-we can't use their images directly as they do not have CMake, but it
-does give us an interesting approach: we can create a MASD base build
-image with:
-
-- clang, gcc
-- cmake
-
-And then with it build vcpkg and build and install all of the deps. We
-need to be careful not to push the build files (over 13 GB!). We can
-then use this image for both Travis and the nightlies, as well as, one
-day, cloud build.
-
-While we're at it, we should also consider the points in the article below.
-
-Links:
-
-- [[https://github.com/GoogleCloudPlatform/cloud-builders/blob/master/bazel/Dockerfile][Bazel's cloud builder]]
-- [[https://www.toptal.com/devops/better-google-cloud-continuous-deployment][A Better Approach to Google Cloud Continuous Deployment]]
-- [[https://www.reddit.com/r/googlecloud/comments/9i093f/google_cloud_build_is_there_an_easier_way/][google cloud build is there an easier way?]]
-- [[https://cloud.google.com/cloud-build/docs/configuring-builds/create-basic-configuration][Creating a basic build configuration file]]
-- [[https://cloud.google.com/blog/products/devops-sre/cloud-build-brings-advanced-cicd-capabilities-to-github][Cloud Build brings advanced CI/CD capabilities to GitHub]]
-- [[https://cloud.google.com/cloud-build/docs/quickstart-docker?hl=en_GB&_ga=2.136964915.-2065564734.1572530049][Quickstart for Docker]]
-- [[https://github.com/GoogleCloudPlatform/cloud-builders/blob/master/bazel/Dockerfile][Dockerfile]]
 
 *** Profile overriding may cause link errors                          :story:
 
@@ -319,41 +217,6 @@ override happens either. Check the binding properties of this field.
 Many of the pictures we used in the past were in panoramio. These are
 now gone. We need to replace them with other pictures.
 
-*** Move registrar into assets                                        :story:
-
-Move the registrar type into assets, in the quickest way possible.
-
-Notes:
-
-- In order to avoid blocking due to lots of analysis, we need
-  to split this story into three:
-  - first, we need to just move the registrar as is into assets.
-  - a second story is to clean up the existing registrar code to have
-    less templates and possibly address the existing registration
-    bugs. We could also look into calling the registrars for
-    referenced models automatically as part of this work (at present
-    we are doing this manually).
-  - finally, we need some meta-level refactoring to figure out if the
-    pattern can be generalised to include initialisers, etc.
-  In general that should be our approach: try to split out the
-  capturing of patterns into as many steps as possible, to make sure
-  we don't get overwhelmed as we implement things.
-- we need to keep track of all type registrars on referenced models,
-  not on the referenced models themselves. We need to know which
-  models we referenced directly, and then find the registrars for
-  those models.
-- leaves need to know of the registrar. This is so that we can call it
-  in their generated tests. We could use the registrar transform to go
-  and find all leaves and populate their registrar name.
-- current state is that we cannot generate the registrar for some
-  reason.
-- test model with registrar is C++ model. Type is called
-  registrar. Its probably not a good idea to also call it registrar -
-  wouldn't that clash with the existing type?
-- we should have a warning/error: if using boost serialisation with a
-  model that has inheritance, the registrar should be present. Added
-  to warnings story.
-
 *** Setup laptop to work on dogen                                     :story:
 
 We haven't used the laptop for dogen for quite a bit so its behind the
@@ -365,20 +228,6 @@ Items missing:
 - polymode
 - build2
 - odb
-
-*** Generate ORM tests                                                :story:
-
-We do not seem to be testing the generated ODB code. We don't need to
-test ODB per se, but we should at least have some sanity checks that
-test CRUD functionality.
-
-Notes:
-
-- for this we need a "masd database".
-- tests should only trigger if postgres or some other relational
-  database is detected.
-- if foreign keys are used we need to detect them and ensure we
-  populate the data accordingly.
 
 *** Schema name in ORM should be transitive                           :story:
 
@@ -398,40 +247,6 @@ property to be set. AS it happens, it normally tends to be the schema
 name, because it makes sense to set it when defining a relational
 model. This is why we never bumped into this problem before.
 
-*** Upgrade to boost 1.70                                             :story:
-
-We should try to upgrade to latest boost.
-
-Notes:
-
-- the problem appears to be that with OSX we do not have a compiler
-  installed that can compile vcpkg. It is not clear how we did it
-  before. The installed XCode compiler is too old and we do not have
-  homebrew for gcc.
-- installed LLVM 7. Ninja then went on a strange loop, regenerating
-  CMake files. This was because NTP had not been working on OSX for
-  some reason, and the clock was in the past.
-- compiling with clang 7 causes the =-lc++fs= linking error. Tried
-  compiling with clang 8.
-- Compilation required setting LDFLAGS -L to point to the lib
-  directory of the download, else the static library for filesystem
-  could not be location.
-- We may have linking problems now that we are using XCode 10 in
-  travis and clang 8 to build vcpkg dependencies.
-- ODB 2.5 no longer works due to a git ref mismatch. Not clear why
-  that would be but the object we were referencing no longer exists in
-  code synthesis git repo.
-- the ref for ODB SQL lite 2.5.0-b.9 does not seem to exist in their
-  repo any longer. Due to this, the OSX build is failing. For now we
-  shall try to update excluding that dependency, given we are not even
-  using it.
-- boost regex fails to build. The problem is that we are picking up
-  the system compiler instead of CXX. It is not clear why that
-  is. Maybe we got lucky in the past because we were using c++14 but
-  now with c++17 system clang fails to compile because it does not
-  have c++ 17 support.
-- nightlies are now failing with a missing reference to SQL lite.
-
 *** Add "is abstract" to assets                                       :story:
 
 With C# we have started deciding if a class is abstract or not on the
@@ -442,38 +257,9 @@ the current logic of parents are abstract).
 We then need to review the C++ templates and figure out where we were
 also inferring "abstractness", and use the new flag.
 
-*** Report validation errors like compilers do                        :story:
-
-It would be very useful to output validation errors like a compiler,
-referencing the original file from where the meta-element was defined
-and any other additional information the user may find useful. We
-could also have "reporting themes" such as visual studio or
-GCC. Finally, we should support validation warnings, using the same
-conventions as compilers (-Wall, etc). Though perhaps these are better
-defined as part of the metamodel rather than command-line arguments.
-
 *** Update all exception names to match framework guiidelines         :story:
 
 Exceptions should end with "exception".
-
-*** Log file per transform                                            :story:
-
-At present we have a good view of the graph of the chain when tracing
-is enabled. We then use the GUIDs to find the details of the
-transformation in the log. It would be even easier if somehow it was
-possible to have sinks in boost log that are added for each transform
-and removed at the end of it. This way we could generate "mini log
-files" that contain all of the activity that occurred in that
-transform.
-
-Boost log seems to be setup for it, we'd just have to manipulate the
-logger from within the tracer. One slight problem is that we'd only
-want to log from "leaf transforms". This probably means that we need
-to make sure that only transform chains can call other transforms.
-
-In theory all we'd have to do is to get the tracer to do the hooking
-and unhooking for each transform. It should already know about chains
-vs transforms.
 
 *** Implement CLI configuration validator                             :story:
 
@@ -636,19 +422,6 @@ It is confusing to have it mixed up with product models. Use a regular
 dogen model to test the package. We could have it on the reference
 model as a stand alone example, or we could create a "hello dogen"
 product for a trivial example of dogen usage.
-
-*** Move from doxygen to standardese                                  :story:
-
-We should try to use standardese to generate the documentation for
-dogen. Seems easier to use and CMake friendly. Also, it seems more c++
-compliant because it uses libclang.
-
-Once the move is done, we should update dogen to generate comments in
-either markup via a meta-data parameter (documentation markup?).
-
-Links:
-
-- https://github.com/foonathan/standardese
 
 *** Create some basic naming guidelines                               :story:
 
@@ -1376,7 +1149,7 @@ At present we do:
 
 The "c++-" seems a bit redundant.
 
-*** Add a C++ version to types                              :reviewing:story:
+*** Add a C++ version to types                                        :story:
 
 Not all system model types are available for all versions. This
 applies to the C++ standard (e.g. 98, 11, 14 etc) but also to
@@ -1505,10 +1278,20 @@ disable setter etc).
 We can then create the notion of a "pojo", where all attributes are
 automatically mapped to properties.
 
-** Core work
+*** Make vistor a proper meta-model element                           :story:
 
-The most significant stories needed by v2. These are either features
-or refactoring that must go in.
+At present we use the stereotype of =visitable= to emit a
+visitor. This violates the principle of making all types
+explicit. Instead, we should:
+
+- create a new stereotype =masd::visitor=. It triggers the creation of
+  the visitor meta-model element.
+- visitor must have a target via meta-data. This points to the element
+  to visit.
+
+We need to make sure we don't break cross model visitation with this
+change - i.e. derived models must also explicitly create their own
+visitors.
 
 *** Allow generating executables from dogen                           :story:
 
@@ -1684,41 +1467,6 @@ the CMake file. This means that we need to somehow map one formatter
 to multiple facets. For now we just hacked it and used one of the
 facets. It means that if you disable CMake but enable testing you'll
 still end up with the testing CMake file.
-
-*** Configuration classes with traits                                 :story:
-
-There are several aspects related to configuration:
-
-- the c++ class itself
-- the fields with names and types for annotations. These are
-  static-like functions that will inject the field definition into the
-  annotation repository via initialisers / Boost.DI. We could have a
-  top-level class that includes all of these classes and takes in the
-  annotation repository and asks each of them to register. The class
-  is code-generated by looking for each class in the model. e.g. a
-  registrar but for the
-  meta-data. =masd::configuration_registrar=. Top-level, one per
-  model. has a list of names marked as config or config factory.
-- the "factory" class which reads the fields to create the c++
-  class. In effect the factory class should contain both the fields,
-  registration etc. as well as the reading the C++ from
-  meta-data. Users can then create two related types:
-  =masd::configuration= and =masd::configuration_factory=, with the
-  factory pointing to the configuration. The configuration must
-  contain the mappings to annotation types. Actually the configuration
-  should provide the static method for registration so that we may
-  register fields even without a factory. This is useful for cases
-  such as enablement where we use templates and may not instantiate
-  the class directly. Or if we could fuse the factory with the class,
-  that would make life even easier. Classes should also have
-  associated "field documentation". We should be able to call a method
-  in annotations and produce all of the field documentation.
-- the transform which uses the factory to populate meta-model
-  elements.
-
-When we start code-generating the first tree, we should allow users to
-enter the type name and other field related parameters as
-configuration on the meta-element.
 
 *** Associate includes with model elements                            :story:
 
@@ -2939,40 +2687,6 @@ However, this is not really the model's "origin". It is more like "the
 model's purpose in this context". We need to think more about the
 meaning of this enumeration.
 
-*** Move fabric types into coding                                     :epic:
-
-Fabric types need to be tidied up and moved into coding as regular
-meta-model elements. We need to try to make them as technical space
-agnostic as possible.
-
-*Previous understanding*
-
-Move fabric types into generation.
-
-- copy across the fabric types from cpp and csharp into generation.
-- update formatters to use the types from generation.
-- delete them from original models.
-
-At present we are always generating the fabric types via the injctor
-and then asking the user to disable them as required via the
-enablement settings. This is very silly. The approach should now be
-that we look for elements with the correct stereotypes,
-e.g. =masd::cmakelists= and so forth and use those to generate these
-elements. This must be done as part of the work to move fabric types
-into the metamodel. We should also take this opportunity to merge
-common types between C# and C++, if any exist.
-
-Notes:
-
-- this will also address the naming of types such as registrar.
-- we need to remove all top-level knobs that are controlling the
-  enablement of meta-types such as visual studio, etc. In addition, at
-  present when we enable say ODB we automatically get ODB options,
-  etc. In this world, we would need to create the element in the
-  model. This is a bit confusing because users won't know this is a
-  requirement. Perhaps we need to have a combination of implicit and
-  explicit types?
-
 *** Create metamodel elements for =entry_point= and =interface=       :story:
 
 These have been incorrectly added as configurations and/or fabric
@@ -2985,117 +2699,6 @@ ODB level.
 
 Similarly, we should move the ODB databases into yarn and make that a
 ORM-level concept.
-
-*** Make explicit all implicit modeling elements                      :story:
-
-At present we have a number of modeling elements that can be
-configured (enabled/disabled) but do not have a representation within
-a model. Example:
-
-- cmake
-- visual studio
-- odb
-- etc.
-
-This means we cannot associate any configuration with these elements
-such as licences, modelines etc. This is one reason why there are
-hacks to hard-code the modeline of CMake files. A better way is to
-force users to create a modeling element (with the appropriate
-meta-model stereotype, e.g. =masd::visual_studio::project=) and then
-have them configured via named configurations. This means that for
-each archetype we must have a distinct modeling element. It also means
-that some modeling elements are language specific, but the metamodel
-will merge them all into one space. We should also have them inherit
-from common base classes where possible.
-
-Note: not all meta-model elements will be available on all technical
-spaces. We need a way to make sure they are compatible. Perhaps the
-element could have a list of compatible TSs.
-
-This approach follows the unwritten rule of "no black box injection of
-modeling elements". We should formalise this rule somewhat and explain
-the rationale for it.
-
-Note that the handling of =invalid= in enumeration also falls under
-this remit. At present we are injecting the invalid enumerator
-transparently via meta-data switches. This is not a good idea. Users
-should instead have some kind of "enumeration template" from which
-they can inherit which will give them the required enumerators. We
-should not do anything special for invalid.
-
-Merged Stories:
-
-*Consider allowing renaming of "internal" types*
-
-Users may want to change the =_visitor= postfix for visitors or the
-boost serialisation registrar name. This could be achieved via
-meta-data.
-
-*Consider renaming registrar in boost serialisation*
-
-At present we have a registrar formatter that does the boost
-serialisation work. However, the name =registrar= is a bit too
-generic; we may for example add formatters for static registrars. We
-should rename this formatter to something more meaningful. Also the
-name registrar is already well understood to mean static registrar.
-
-This is a big problem now that we cannot add a type with the name
-registrar to the main model as it clashes with the serialisation
-registrar.
-
-We could simply name it serialisation registrar or some such name that
-is very unlikely to clash. We should then have a validation rule that
-stops users from defining types with that name.
-
-We need to go through all of the renamed registrars and fix them.
-
-Another option is to allow users to supply a name via meta-data to
-avoid name clashes. We could error when the user has defined a type.
-
-Actually, since the clash is only internal - the names we are
-generating on the fly are clashing with the user defined names - we
-should probably have a "postfix" that can be added in case of
-clashes. The generated code will not cause problems, its just the
-formattables pipeline.
-
-*Allow renaming of visitor*                                         :story:*
-
-At present the visitor is named by dogen. There is nothing stopping us
-from allowing users to rename it via meta-data. We don't have a use
-case yet.
-
-*Handcrafted support for fabric types*
-
-At present we can either disable fabric types or enable them
-(CMakeLists, etc). However, there is a third common use case: to
-handcraft them. To do this we normally disable them and then add the
-file to the ignore list:
-
-:  --ignore-files-matching-regex .*/CMakeLists.txt)
-
-One could conceive of some meta-data support that would make this
-process a tad easier and more generic:
-
-: quilt.cpp.cmakelists.stereotypes=handcrafted
-
-Then hopefully the existing pipeline would take over and we'd generate
-the files for the first time but then let the user overwrite it. This
-would also be applicable to all fabric types (registrar, etc) but we'd
-have to manually read each stereotype on each factory.
-
-Merged stories:
-
-*Make visitor an explicit type*
-
-Instead of automatically generating visitors via the visitable
-stereotype, we should:
-
-- create a new stereotype =masd::visitor=. It triggers the creation of
-  the visitor meta-model element.
-- visitor must have a target via meta-data. This points to the element
-  to visit.
-
-We need to make sure we don't break cross model visitation with this change.
 
 *** Read variability papers                                           :story:
 
@@ -5325,10 +4928,6 @@ interfaces at the end after any base classes or else we will have
 compiler errors. This means we need to be able to distinguish
 interfaces from other types (e.g. =interface= stereotype).
 
-*** Registrar in serialisation generated unnecessarily                :story:
-
-Registrar coming out even when there is no inheritance.
-
 *** Registrar assumes references have serialisation enabled           :story:
 
 At present we are assuming that all references that are nom-proxy
@@ -5516,17 +5115,6 @@ Links:
   Computation with Generic Types
 - [[https://github.com/schuyler/levenshtein][levenshtein]]: Fast string edit distance computation, using the
   Damerau-Levenshtein algorithm.
-
-*** Registrar in serialisation is not stable sorted                   :story:
-
-We seem to have a traffic light diff on =registrar_ser.cpp=:
-
-: -    dogen::config::register_types(ar);
-:      dogen::quilt::cpp::register_types(ar);
-:      dogen::yarn::register_types(ar);
-: +    dogen::config::register_types(ar);
-
-This is probably a lack of a stable sort in model dependencies.
 
 *** Using =std::unordered_map<my_enum, ...>= fails equality           :story:
 
@@ -5835,12 +5423,19 @@ if there is a shared pointer to built-in; if there is, put in:
 Things we are not testing at present but should, validation that could
 provide helpful errors to end users but is not being performed yet.
 
-*** Improve registrar testing                                         :story:
+*** Generate ORM tests                                                :story:
 
-We need a proper registrar test, with three models and types that
-require registration on all. We need to create a type with a base
-pointer in each model and ensure the generated tests are executing the
-registration code.
+We do not seem to be testing the generated ODB code. We don't need to
+test ODB per se, but we should at least have some sanity checks that
+test CRUD functionality.
+
+Notes:
+
+- for this we need a "masd database".
+- tests should only trigger if postgres or some other relational
+  database is detected.
+- if foreign keys are used we need to detect them and ensure we
+  populate the data accordingly.
 
 *** Handling of unsupported dia objects                               :story:
 
@@ -5959,7 +5554,12 @@ ideas into stories and add them as we go along.
 - detect cycles in references. Done, just needs warnings/errors framework.
 - detect references to self. Done, just needs warnings/errors framework.
 - if a model is making use of boost serialisation and it has leaves, a
-  warning should come up stating that a type registrar is needed.
+  warning should come up stating that a type registrar is needed. The
+  check should also take into account if a model is referencing models
+  which have registrars.
+- if a meta-model element is requested for a technical space which has
+  no formatters, we should issue a warning. For example, registrar on
+  a C# model.
 - For C# models: attribute that start with lower case will cause
   problems because the property name will match the argument name,
   resulting in warnings in the complete constructor (argument assigned
@@ -6095,6 +5695,18 @@ use a similar scheme as GCC: =-Wname= and =-Wno-name=.
 
 We should issue a warning if a user defines methods in value or entity
 objects as its most likely by mistake.
+
+Merged stories:
+
+*Report validation errors like compilers do*
+
+It would be very useful to output validation errors like a compiler,
+referencing the original file from where the meta-element was defined
+and any other additional information the user may find useful. We
+could also have "reporting themes" such as visual studio or
+GCC. Finally, we should support validation warnings, using the same
+conventions as compilers (-Wall, etc). Though perhaps these are better
+defined as part of the metamodel rather than command-line arguments.
 
 *** Check for incompatibility between input language and kernels      :story:
 
@@ -6477,6 +6089,106 @@ check that an invalid type doesn't work.
 Stories related to infrastructure improvements that we may or may not
 achieve.
 
+*** Upgrade to boost 1.70                                             :story:
+
+We should try to upgrade to latest boost.
+
+Notes:
+
+- the problem appears to be that with OSX we do not have a compiler
+  installed that can compile vcpkg. It is not clear how we did it
+  before. The installed XCode compiler is too old and we do not have
+  homebrew for gcc.
+- installed LLVM 7. Ninja then went on a strange loop, regenerating
+  CMake files. This was because NTP had not been working on OSX for
+  some reason, and the clock was in the past.
+- compiling with clang 7 causes the =-lc++fs= linking error. Tried
+  compiling with clang 8.
+- Compilation required setting LDFLAGS -L to point to the lib
+  directory of the download, else the static library for filesystem
+  could not be location.
+- We may have linking problems now that we are using XCode 10 in
+  travis and clang 8 to build vcpkg dependencies.
+- ODB 2.5 no longer works due to a git ref mismatch. Not clear why
+  that would be but the object we were referencing no longer exists in
+  code synthesis git repo.
+- the ref for ODB SQL lite 2.5.0-b.9 does not seem to exist in their
+  repo any longer. Due to this, the OSX build is failing. For now we
+  shall try to update excluding that dependency, given we are not even
+  using it.
+- boost regex fails to build. The problem is that we are picking up
+  the system compiler instead of CXX. It is not clear why that
+  is. Maybe we got lucky in the past because we were using c++14 but
+  now with c++17 system clang fails to compile because it does not
+  have c++ 17 support.
+- nightlies are now failing with a missing reference to SQL lite.
+
+*** Move from doxygen to standardese                                  :story:
+
+We should try to use standardese to generate the documentation for
+dogen. Seems easier to use and CMake friendly. Also, it seems more c++
+compliant because it uses libclang.
+
+Once the move is done, we should update dogen to generate comments in
+either markup via a meta-data parameter (documentation markup?).
+
+Links:
+
+- https://github.com/foonathan/standardese
+
+*** Build dogen from docker                                           :story:
+
+- fix references to gcc6 etc
+- run:
+
+: docker exec -it zen_euclid env TERM=dumb
+: /home/marco/Development/DomainDrivenConsulting/dogen/build/scripts/build.linux.sh
+: Release 4 gcc /home/marco/local
+
+Merged stories:
+
+*Build dogen docker images from travis*
+
+We should build docker images with each commit into master.
+
+Links:
+
+- [[https://sebest.github.io/post/using-travis-ci-to-build-docker-images/][Using Travis.ci to build Docker images]]
+- [[https://github.com/OpenSourceRisk/Engine/tree/master/tools/docker][ORE docker script]]
+- [[https://giorgos.sealabs.net/build-and-test-against-docker-images-in-travis.html][Build and Test against Docker Images in Travis]]
+- [[https://medium.com/travis-on-docker/triple-stage-docker-builds-with-go-and-angular-1b7d2006cb88][Triple-Stage Docker Builds with Go and Angular]]
+- [[https://medium.com/travis-on-docker/multi-stage-docker-builds-for-creating-tiny-go-images-e0e1867efe5a][Multi-Stage Docker Builds for Creating Tiny Go Images]]
+- [[https://github.com/gliderlabs/docker-alpine/issues/24][What is the alpine equivalent to build-essential?]]
+- [[https://caveofcode.com/2017/03/continuous-delivery-to-kubernetes-with-travis-ci/][Continuous delivery to Kubernetes with Travis CI]]
+
+*** Create a docker image for builds                                  :story:
+
+GCP's cloud builde uses the idea of cloud-builder images. These
+contain all of the basics required to build for a given language. Now,
+we can't use their images directly as they do not have CMake, but it
+does give us an interesting approach: we can create a MASD base build
+image with:
+
+- clang, gcc
+- cmake
+
+And then with it build vcpkg and build and install all of the deps. We
+need to be careful not to push the build files (over 13 GB!). We can
+then use this image for both Travis and the nightlies, as well as, one
+day, cloud build.
+
+While we're at it, we should also consider the points in the article below.
+
+Links:
+
+- [[https://github.com/GoogleCloudPlatform/cloud-builders/blob/master/bazel/Dockerfile][Bazel's cloud builder]]
+- [[https://www.toptal.com/devops/better-google-cloud-continuous-deployment][A Better Approach to Google Cloud Continuous Deployment]]
+- [[https://www.reddit.com/r/googlecloud/comments/9i093f/google_cloud_build_is_there_an_easier_way/][google cloud build is there an easier way?]]
+- [[https://cloud.google.com/cloud-build/docs/configuring-builds/create-basic-configuration][Creating a basic build configuration file]]
+- [[https://cloud.google.com/blog/products/devops-sre/cloud-build-brings-advanced-cicd-capabilities-to-github][Cloud Build brings advanced CI/CD capabilities to GitHub]]
+- [[https://cloud.google.com/cloud-build/docs/quickstart-docker?hl=en_GB&_ga=2.136964915.-2065564734.1572530049][Quickstart for Docker]]
+- [[https://github.com/GoogleCloudPlatform/cloud-builders/blob/master/bazel/Dockerfile][Dockerfile]]
+
 *** Split library into JSON and dia                                   :story:
 
 We should supply the PDMs models as both. This is a good test for PDMs
@@ -6561,6 +6273,14 @@ Stories that will not be handled on the current major release.
 ** Technical debt
 
 Ideas to improve the code base.
+
+*** Check all of the warnings in lgtm                                 :story:
+
+We have [[https://lgtm.com/projects/g/MASD-Project/dogen/context:cpp][a number of warnings in lgtm]], some of which are actually
+relevant. Even the FIXMEs should be dealt with - either create a story
+or just make it a comment. The data has been saved as a file under:
+
+- https://github.com/MASD-Project/dogen/tree/master/doc/lgtm.json
 
 *** Convert utility exceptions into dogen exceptions                  :story:
 
@@ -9265,6 +8985,7 @@ Links:
 - [[https://github.com/OAI/OpenAPI-Specification/tree/master/examples/v3.0][OpenAPI examples]]: YAML documents with examples.
 - [[https://github.com/matt-42/silicon][silicon]]: yet another C++ HTTP framework.
 - [[https://github.com/qicosmos/cinatra][cinatra]]: another HTTP framework. Example site: http://purecpp.org/
+- OpenApi code generator examples: [[https://github.com/OpenAPITools/openapi-generator/tree/master/samples/server/petstore/cpp-pistache][petstore/cpp-pistache]], [[https://github.com/OpenAPITools/openapi-generator/tree/master/samples/server/petstore/cpp-restbed][cpp-restbed]]
 
 *** Factory method instead of complete constructor                    :story:
 
@@ -12803,6 +12524,25 @@ Links:
 Stuff that is not directly related to the problem domain but its
 needed by Dogen. Tooling, infrastructure, blog posts, etc. However,
 they must still be in keeping with the vision, so not too left field.
+
+*** Log file per transform                                            :story:
+
+At present we have a good view of the graph of the chain when tracing
+is enabled. We then use the GUIDs to find the details of the
+transformation in the log. It would be even easier if somehow it was
+possible to have sinks in boost log that are added for each transform
+and removed at the end of it. This way we could generate "mini log
+files" that contain all of the activity that occurred in that
+transform.
+
+Boost log seems to be setup for it, we'd just have to manipulate the
+logger from within the tracer. One slight problem is that we'd only
+want to log from "leaf transforms". This probably means that we need
+to make sure that only transform chains can call other transforms.
+
+In theory all we'd have to do is to get the tracer to do the hooking
+and unhooking for each transform. It should already know about chains
+vs transforms.
 
 *** Consider adding pre-commit hooks                                  :story:
 

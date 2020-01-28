@@ -1039,6 +1039,7 @@ Notes:
   to warnings story.
 
 ** Deprecated
+
 *** CANCELLED Fix issues with nightly build and CI                    :story:
     CLOSED: [2019-12-03 Tue 20:45]
 

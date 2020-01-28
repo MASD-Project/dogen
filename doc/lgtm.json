@@ -1,0 +1,1792 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "LGTM.com",
+          "organization": "Semmle",
+          "version": "1.24.0-SNAPSHOT",
+          "rules": [
+            {
+              "id": "com.lgtm/python-queries:py/test-equals-none",
+              "name": "com.lgtm/python-queries:py/test-equals-none",
+              "shortDescription": {
+                "text": "Testing equality to None"
+              },
+              "fullDescription": {
+                "text": "Testing whether an object is 'None' using the == operator is inefficient and potentially incorrect."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "tags": [
+                  "efficiency",
+                  "maintainability"
+                ],
+                "kind": "problem",
+                "precision": "very-high",
+                "sub-severity": "high",
+                "problem.severity": "recommendation"
+              }
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "projects/dogen.dia/python/add_to_package.py",
+            "uriBaseId": "%SRCROOT%",
+            "index": 0
+          }
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "com.lgtm/python-queries:py/test-equals-none",
+          "ruleIndex": 0,
+          "message": {
+            "text": "Testing for None should use the 'is' operator."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/dogen.dia/python/add_to_package.py",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 39,
+                  "startColumn": 20,
+                  "endColumn": 41
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "2d66936c6ca1b85d:1",
+            "primaryLocationStartColumnFingerprint": "3"
+          }
+        }
+      ],
+      "columnKind": "unicodeCodePoints",
+      "properties": {
+        "semmle.formatSpecifier": "2.1.0",
+        "semmle.sourceLanguage": "python"
+      }
+    },
+    {
+      "tool": {
+        "driver": {
+          "name": "LGTM.com",
+          "organization": "Semmle",
+          "version": "1.24.0-SNAPSHOT",
+          "rules": [
+            {
+              "id": "com.lgtm/cpp-queries:cpp/fixme-comment",
+              "name": "com.lgtm/cpp-queries:cpp/fixme-comment",
+              "shortDescription": {
+                "text": "FIXME comment"
+              },
+              "fullDescription": {
+                "text": "Comments containing 'FIXME' indicate that the code has known bugs."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "tags": [
+                  "maintainability",
+                  "documentation",
+                  "external/cwe/cwe-546"
+                ],
+                "kind": "problem",
+                "precision": "very-high",
+                "problem.severity": "recommendation"
+              }
+            },
+            {
+              "id": "com.lgtm/cpp-queries:cpp/declaration-hides-parameter",
+              "name": "com.lgtm/cpp-queries:cpp/declaration-hides-parameter",
+              "shortDescription": {
+                "text": "Declaration hides parameter"
+              },
+              "fullDescription": {
+                "text": "A local variable hides a parameter. This may be confusing. Consider renaming one of them."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "tags": [
+                  "maintainability",
+                  "readability"
+                ],
+                "kind": "problem",
+                "precision": "very-high",
+                "problem.severity": "recommendation"
+              }
+            },
+            {
+              "id": "com.lgtm/cpp-queries:cpp/missing-return",
+              "name": "com.lgtm/cpp-queries:cpp/missing-return",
+              "shortDescription": {
+                "text": "Missing return statement"
+              },
+              "fullDescription": {
+                "text": "All functions that are not void should return a value on every exit path."
+              },
+              "defaultConfiguration": {
+                "level": "error"
+              },
+              "properties": {
+                "tags": [
+                  "reliability",
+                  "readability",
+                  "language-features",
+                  "external/jsf"
+                ],
+                "kind": "problem",
+                "precision": "high",
+                "problem.severity": "error"
+              }
+            },
+            {
+              "id": "com.lgtm/cpp-queries:cpp/large-parameter",
+              "name": "com.lgtm/cpp-queries:cpp/large-parameter",
+              "shortDescription": {
+                "text": "Large object passed by value"
+              },
+              "fullDescription": {
+                "text": "An object larger than 64 bytes is passed by value to a function. Passing large objects by value unnecessarily use up scarce stack space, increase the cost of calling a function and can be a security risk. Use a const pointer to the object instead."
+              },
+              "defaultConfiguration": {
+                "level": "note"
+              },
+              "properties": {
+                "tags": [
+                  "efficiency",
+                  "readability",
+                  "statistical",
+                  "non-attributable"
+                ],
+                "kind": "problem",
+                "precision": "very-high",
+                "problem.severity": "recommendation"
+              }
+            }
+          ]
+        }
+      },
+      "artifacts": [
+        {
+          "location": {
+            "uri": "projects/masd.dogen.external.dia/src/types/processed_object_factory.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 0
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.formatting/include/masd.dogen.formatting/types/cpp/namespace_formatter.hpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 1
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.formatting/src/types/comment_formatter.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 2
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.formatting/src/types/decoration_properties_factory.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 3
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.generation.cpp/src/types/formattables/inclusion_expander.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 4
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.generation.cpp/src/types/formattables/locator.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 5
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.generation.cpp/src/types/formatters/assistant.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 6
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.generation.cpp/src/types/formatters/registrar.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 7
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.generation.cpp/src/types/formatters/serialization/forward_declarations_formatter.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 8
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.generation.cpp/src/types/formatters/types/class_implementation_formatter.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 9
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.generation.csharp/src/types/formattables/aspect_expander.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 10
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.generation.csharp/src/types/formattables/locator.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 11
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.generation/include/masd.dogen.generation/types/helpers/filesystem_writer.hpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 12
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.generation/src/types/helpers/filesystem_writer.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 13
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.generation/src/types/traits.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 14
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.modeling/include/masd.dogen.modeling/types/helpers/filesystem_writer.hpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 15
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.modeling/src/types/helpers/endomodel_post_processing_validator.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 16
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.modeling/src/types/helpers/endomodel_pre_processing_validator.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 17
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.modeling/src/types/helpers/filesystem_writer.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 18
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.modeling/src/types/helpers/new_adapter.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 19
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.modeling/src/types/helpers/resolver.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 20
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.modeling/src/types/traits.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 21
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.modeling/src/types/transforms/external_model_to_endomodel_transform.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 22
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.modeling/src/types/transforms/merge_transform.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 23
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.modeling/src/types/transforms/stereotypes_transform.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 24
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.templating/src/types/stitch/formatter.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 25
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.templating/src/types/stitch/instantiator.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 26
+          }
+        },
+        {
+          "location": {
+            "uri": "projects/masd.dogen.modeling/src/types/helpers/legacy_name_tree_parser.cpp",
+            "uriBaseId": "%SRCROOT%",
+            "index": 27
+          }
+        }
+      ],
+      "results": [
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: we should probably replace this with a static visitor."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.external.dia/src/types/processed_object_factory.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 105,
+                  "startColumn": 5,
+                  "endColumn": 69
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "702fe6f851687021:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: we should really handle anonymous namespaces separately, \\[...\\]"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.formatting/include/masd.dogen.formatting/types/cpp/namespace_formatter.hpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 1
+                },
+                "region": {
+                  "startLine": 39,
+                  "startColumn": 5,
+                  "endLine": 54,
+                  "endColumn": 8
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "6cff85321a61ff0b:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: massive hack: we assume that documenting"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.formatting/src/types/comment_formatter.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 269,
+                  "startColumn": 13,
+                  "endColumn": 63
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "d4ab14a53a3f360f:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: fairly random default."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.formatting/src/types/decoration_properties_factory.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 3
+                },
+                "region": {
+                  "startLine": 235,
+                  "startColumn": 22,
+                  "endColumn": 54
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "fc0e0124c215214e:1",
+            "primaryLocationStartColumnFingerprint": "13"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: hacks for headers that must be last"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.generation.cpp/src/types/formattables/inclusion_expander.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 4
+                },
+                "region": {
+                  "startLine": 76,
+                  "startColumn": 9,
+                  "endColumn": 54
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "298dec2152c8b19:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: hack for extension"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.generation.cpp/src/types/formattables/locator.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 5
+                },
+                "region": {
+                  "startLine": 462,
+                  "startColumn": 31,
+                  "endColumn": 59
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "6cbb9f6755851de3:1",
+            "primaryLocationStartColumnFingerprint": "26"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: hack for extension"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.generation.cpp/src/types/formattables/locator.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 5
+                },
+                "region": {
+                  "startLine": 469,
+                  "startColumn": 31,
+                  "endColumn": 59
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "6c8e0f2342304bd6:1",
+            "primaryLocationStartColumnFingerprint": "26"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: hack"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.generation.cpp/src/types/formattables/locator.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 5
+                },
+                "region": {
+                  "startLine": 477,
+                  "startColumn": 29,
+                  "endColumn": 43
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "3fc98113965adc97:1",
+            "primaryLocationStartColumnFingerprint": "24"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: hack to determine if we are being dereferenced."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.generation.cpp/src/types/formatters/assistant.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 6
+                },
+                "region": {
+                  "startLine": 579,
+                  "startColumn": 9,
+                  "endColumn": 66
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "54cd156bc106c527:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: this check is broken at the moment because this is \\[...\\]"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.generation.cpp/src/types/formatters/registrar.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 7
+                },
+                "region": {
+                  "startLine": 144,
+                  "startColumn": 9,
+                  "endLine": 151,
+                  "endColumn": 12
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "cd045d5703bcd7e9:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: broken at present."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.generation.cpp/src/types/formatters/registrar.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 7
+                },
+                "region": {
+                  "startLine": 160,
+                  "startColumn": 13,
+                  "endColumn": 41
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "daa783720e5d7d9b:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: hack: legacy formatters do not support serialisation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.generation.cpp/src/types/formatters/serialization/forward_declarations_formatter.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 8
+                },
+                "region": {
+                  "startLine": 94,
+                  "startColumn": 5,
+                  "endColumn": 67
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "229c8a8c27ed0d03:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: this was just too hard to hack with a sequence."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.generation.cpp/src/types/formatters/types/class_implementation_formatter.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 9
+                },
+                "region": {
+                  "startLine": 150,
+                  "startColumn": 17,
+                  "endColumn": 74
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "cfe81c3d5c844ee9:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: indentation is all off too."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.generation.cpp/src/types/formatters/types/class_implementation_formatter.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 9
+                },
+                "region": {
+                  "startLine": 151,
+                  "startColumn": 17,
+                  "endColumn": 54
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "d95ac916b720069c:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: looking at root_parent as a hack due to service leafs not"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.generation.cpp/src/types/formatters/types/class_implementation_formatter.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 9
+                },
+                "region": {
+                  "startLine": 356,
+                  "startColumn": 13,
+                  "endColumn": 80
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "42d1c0e6715b3a95:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: being processed atm."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.generation.cpp/src/types/formatters/types/class_implementation_formatter.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 9
+                },
+                "region": {
+                  "startLine": 357,
+                  "startColumn": 13,
+                  "endColumn": 43
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "28466f3ca4bcf43:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: It would be nice to make this container sparse rather \\[...\\]"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.generation.csharp/src/types/formattables/aspect_expander.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 10
+                },
+                "region": {
+                  "startLine": 101,
+                  "startColumn": 5,
+                  "endLine": 106,
+                  "endColumn": 8
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "ba059b866c12b515:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: check directory name is not empty"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.generation.csharp/src/types/formattables/locator.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 11
+                },
+                "region": {
+                  "startLine": 179,
+                  "startColumn": 9,
+                  "endColumn": 52
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "fcfdf54a329c1c3c:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: this is a hack for now."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.generation/include/masd.dogen.generation/types/helpers/filesystem_writer.hpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 12
+                },
+                "region": {
+                  "startLine": 53,
+                  "startColumn": 5,
+                  "endLine": 57,
+                  "endColumn": 8
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "2968592007dbf8e7:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: massive hack to deal with ranlib warnings on OSX"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.generation/src/types/helpers/filesystem_writer.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 13
+                },
+                "region": {
+                  "startLine": 109,
+                  "startColumn": 5,
+                  "endColumn": 63
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "d37a211c98e43f74:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: throw"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.generation/src/types/helpers/filesystem_writer.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 13
+                },
+                "region": {
+                  "startLine": 127,
+                  "startColumn": 9,
+                  "endColumn": 24
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "ae6d5418190a8b06:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: rename to yarn"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.generation/src/types/traits.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 14
+                },
+                "region": {
+                  "startLine": 81,
+                  "startColumn": 5,
+                  "endColumn": 29
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "49cac4b80c5fd61f:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: this is a hack for now."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.modeling/include/masd.dogen.modeling/types/helpers/filesystem_writer.hpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 15
+                },
+                "region": {
+                  "startLine": 53,
+                  "startColumn": 5,
+                  "endLine": 57,
+                  "endColumn": 8
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "2968592007dbf8e7:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: we've removed the following keywords for now because yarn \\[...\\]"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.modeling/src/types/helpers/endomodel_post_processing_validator.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 16
+                },
+                "region": {
+                  "startLine": 45,
+                  "endLine": 48,
+                  "endColumn": 4
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "ffacab4863a8d5e1:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: we've removed the following keywords for now because test \\[...\\]"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.modeling/src/types/helpers/endomodel_post_processing_validator.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 16
+                },
+                "region": {
+                  "startLine": 72,
+                  "endLine": 75,
+                  "endColumn": 4
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "1230d47ba67ba406:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: we've removed the following builtins for now, because they \\[...\\]"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.modeling/src/types/helpers/endomodel_post_processing_validator.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 16
+                },
+                "region": {
+                  "startLine": 95,
+                  "endLine": 101,
+                  "endColumn": 4
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "ff1e10522896ba37:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: however we should check that types in global namespace \\[...\\]"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.modeling/src/types/helpers/endomodel_pre_processing_validator.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 17
+                },
+                "region": {
+                  "startLine": 84,
+                  "startColumn": 5,
+                  "endLine": 90,
+                  "endColumn": 8
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "2fe1b338038bd057:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: massive hack to deal with ranlib warnings on OSX"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.modeling/src/types/helpers/filesystem_writer.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 18
+                },
+                "region": {
+                  "startLine": 109,
+                  "startColumn": 5,
+                  "endColumn": 63
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "d37a211c98e43f74:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: throw"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.modeling/src/types/helpers/filesystem_writer.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 18
+                },
+                "region": {
+                  "startLine": 127,
+                  "startColumn": 9,
+                  "endColumn": 24
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "ae6d5418190a8b06:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.modeling/src/types/helpers/new_adapter.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 19
+                },
+                "region": {
+                  "startLine": 85,
+                  "startColumn": 33,
+                  "endColumn": 41
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "606a31226385470c:1",
+            "primaryLocationStartColumnFingerprint": "28"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.modeling/src/types/helpers/new_adapter.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 19
+                },
+                "region": {
+                  "startLine": 105,
+                  "startColumn": 33,
+                  "endColumn": 41
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "cdee493b457d91a7:1",
+            "primaryLocationStartColumnFingerprint": "28"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: conversion to work. \\[...\\]\nFIXME comment: major hack to get external modules to model modules \\[...\\]"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.modeling/src/types/helpers/resolver.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 212,
+                  "startColumn": 5,
+                  "endLine": 225,
+                  "endColumn": 8
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "34e716d41271f9e5:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: hack for now, just take simple name. Requires a bit more"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.modeling/src/types/helpers/resolver.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 20
+                },
+                "region": {
+                  "startLine": 669,
+                  "startColumn": 5,
+                  "endColumn": 71
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "c4a7cb16ecc81359:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: rename to yarn"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.modeling/src/types/traits.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 21
+                },
+                "region": {
+                  "startLine": 81,
+                  "startColumn": 5,
+                  "endColumn": 29
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "49cac4b80c5fd61f:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: For now, we must inject the root module into the element \\[...\\]"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.modeling/src/types/transforms/external_model_to_endomodel_transform.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 22
+                },
+                "region": {
+                  "startLine": 247,
+                  "startColumn": 5,
+                  "endLine": 252,
+                  "endColumn": 8
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "7a4a73229cf83a8e:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: we should just throw."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.modeling/src/types/transforms/merge_transform.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 23
+                },
+                "region": {
+                  "startLine": 52,
+                  "startColumn": 5,
+                  "endLine": 57,
+                  "endColumn": 8
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "f9a969ee74780190:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: This is a massive hack; we should really ask \\[...\\]"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.modeling/src/types/transforms/stereotypes_transform.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 24
+                },
+                "region": {
+                  "startLine": 144,
+                  "startColumn": 9,
+                  "endLine": 151,
+                  "endColumn": 12
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "ffd277e8c02b0aee:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: humongous hackery just to get annotations to let us \\[...\\]"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.templating/src/types/stitch/formatter.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 25
+                },
+                "region": {
+                  "startLine": 37,
+                  "endLine": 41,
+                  "endColumn": 4
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "dc7b9f1855d7ba6e:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/fixme-comment",
+          "ruleIndex": 0,
+          "message": {
+            "text": "FIXME comment: compute extension based on properties"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.templating/src/types/stitch/instantiator.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 26
+                },
+                "region": {
+                  "startLine": 69,
+                  "startColumn": 5,
+                  "endColumn": 52
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "36197ee4bc57f6d9:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/declaration-hides-parameter",
+          "ruleIndex": 1,
+          "message": {
+            "text": "Local variable 'a' hides a [parameter of the same name](1)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.external.dia/src/types/processed_object_factory.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 232,
+                  "startColumn": 21,
+                  "endColumn": 22
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "8e1e91c3f1e8d76a:1",
+            "primaryLocationStartColumnFingerprint": "16"
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.external.dia/src/types/processed_object_factory.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 208,
+                  "startColumn": 53,
+                  "endColumn": 54
+                }
+              },
+              "message": {
+                "text": "parameter of the same name"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/declaration-hides-parameter",
+          "ruleIndex": 1,
+          "message": {
+            "text": "Local variable 'a' hides a [parameter of the same name](1)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.external.dia/src/types/processed_object_factory.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 262,
+                  "startColumn": 25,
+                  "endColumn": 26
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "157f717cc540b318:1",
+            "primaryLocationStartColumnFingerprint": "16"
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.external.dia/src/types/processed_object_factory.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 0
+                },
+                "region": {
+                  "startLine": 241,
+                  "startColumn": 39,
+                  "endColumn": 40
+                }
+              },
+              "message": {
+                "text": "parameter of the same name"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/declaration-hides-parameter",
+          "ruleIndex": 1,
+          "message": {
+            "text": "Local variable 's' hides a [parameter of the same name](1)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.formatting/src/types/comment_formatter.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 181,
+                  "startColumn": 20,
+                  "endColumn": 21
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "d39d8f67e412ddb3:2",
+            "primaryLocationStartColumnFingerprint": "11"
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.formatting/src/types/comment_formatter.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 2
+                },
+                "region": {
+                  "startLine": 152,
+                  "startColumn": 65,
+                  "endColumn": 66
+                }
+              },
+              "message": {
+                "text": "parameter of the same name"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/declaration-hides-parameter",
+          "ruleIndex": 1,
+          "message": {
+            "text": "Local variable 'id' hides a [parameter of the same name](1)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.modeling/src/types/helpers/endomodel_pre_processing_validator.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 17
+                },
+                "region": {
+                  "startLine": 143,
+                  "startColumn": 20,
+                  "endColumn": 22
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "435e05589aeefa57:1",
+            "primaryLocationStartColumnFingerprint": "11"
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.modeling/src/types/helpers/endomodel_pre_processing_validator.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 17
+                },
+                "region": {
+                  "startLine": 136,
+                  "startColumn": 29,
+                  "endColumn": 31
+                }
+              },
+              "message": {
+                "text": "parameter of the same name"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/declaration-hides-parameter",
+          "ruleIndex": 1,
+          "message": {
+            "text": "Local variable 'l' hides a [parameter of the same name](1)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.modeling/src/types/transforms/stereotypes_transform.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 24
+                },
+                "region": {
+                  "startLine": 208,
+                  "startColumn": 22,
+                  "endColumn": 23
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "5439193d5ca20b7b:1",
+            "primaryLocationStartColumnFingerprint": "17"
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.modeling/src/types/transforms/stereotypes_transform.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 24
+                },
+                "region": {
+                  "startLine": 189,
+                  "startColumn": 33,
+                  "endColumn": 34
+                }
+              },
+              "message": {
+                "text": "parameter of the same name"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/declaration-hides-parameter",
+          "ruleIndex": 1,
+          "message": {
+            "text": "Local variable 's' hides a [parameter of the same name](1)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.templating/src/types/stitch/formatter.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 25
+                },
+                "region": {
+                  "startLine": 142,
+                  "startColumn": 20,
+                  "endColumn": 21
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "7648221eab6b5041:1",
+            "primaryLocationStartColumnFingerprint": "11"
+          },
+          "relatedLocations": [
+            {
+              "id": 1,
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.templating/src/types/stitch/formatter.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 25
+                },
+                "region": {
+                  "startLine": 124,
+                  "startColumn": 54,
+                  "endColumn": 55
+                }
+              },
+              "message": {
+                "text": "parameter of the same name"
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/missing-return",
+          "ruleIndex": 2,
+          "message": {
+            "text": "Function scope_operator_for_language should return a value of type string but does not return a value here"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.modeling/src/types/helpers/legacy_name_tree_parser.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 27
+                },
+                "region": {
+                  "startLine": 123,
+                  "startColumn": 13,
+                  "endLine": 124,
+                  "endColumn": 90
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "5a5bd23cdae87d67:1",
+            "primaryLocationStartColumnFingerprint": "0"
+          }
+        },
+        {
+          "ruleId": "com.lgtm/cpp-queries:cpp/large-parameter",
+          "ruleIndex": 3,
+          "message": {
+            "text": "This parameter of type const optional<decoration_properties> is 184 bytes - consider passing a const pointer/reference instead."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "projects/masd.dogen.generation.cpp/src/types/formatters/assistant.cpp",
+                  "uriBaseId": "%SRCROOT%",
+                  "index": 6
+                },
+                "region": {
+                  "startLine": 396,
+                  "startColumn": 69,
+                  "endColumn": 71
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "primaryLocationLineHash": "9bbe576eb8b29bd:1",
+            "primaryLocationStartColumnFingerprint": "64"
+          }
+        }
+      ],
+      "columnKind": "utf16CodeUnits",
+      "properties": {
+        "semmle.formatSpecifier": "2.1.0",
+        "semmle.sourceLanguage": "cpp"
+      }
+    }
+  ]
+}
