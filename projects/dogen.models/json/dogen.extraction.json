@@ -491,6 +491,13 @@
           "documentation": "Identifier within the origin model for the modeling element.\n"
         }
       ]
+    },
+    {
+      "name": "registrar",
+      "stereotypes": [
+        "masd::serialization::type_registrar"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
