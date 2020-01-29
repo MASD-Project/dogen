@@ -493,7 +493,6 @@ adapter::to_variability_feature_template_initializer(
     return r;
 }
 
-
 boost::shared_ptr<assets::meta_model::mapping::fixed_mappable>
 adapter::to_fixed_mappable(const assets::meta_model::location& l,
     const stereotypes_conversion_result& scr,
@@ -534,22 +533,12 @@ adapter::to_type_registrar(const assets::meta_model::location& l,
     return r;
 }
 
-boost::shared_ptr<assets::meta_model::build::visual_studio_project>
-adapter::to_visual_studio_project(const assets::meta_model::location& l,
+boost::shared_ptr<assets::meta_model::build::visual_studio_component>
+adapter::to_visual_studio_component(const assets::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
-    using assets::meta_model::build::visual_studio_project;
-    auto r(boost::make_shared<visual_studio_project>());
-    populate_element(l, scr, ie, *r);
-    return r;
-}
-
-boost::shared_ptr<assets::meta_model::build::visual_studio_solution>
-adapter::to_visual_studio_solution(const assets::meta_model::location& l,
-    const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
-    using assets::meta_model::build::visual_studio_solution;
-    auto r(boost::make_shared<visual_studio_solution>());
+    using assets::meta_model::build::visual_studio_component;
+    auto r(boost::make_shared<visual_studio_component>());
     populate_element(l, scr, ie, *r);
     return r;
 }

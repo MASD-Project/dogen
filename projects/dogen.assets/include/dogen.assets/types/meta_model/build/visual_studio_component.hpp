@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_META_MODEL_BUILD_VISUAL_STUDIO_SOLUTION_HPP
-#define DOGEN_ASSETS_TYPES_META_MODEL_BUILD_VISUAL_STUDIO_SOLUTION_HPP
+#ifndef DOGEN_ASSETS_TYPES_META_MODEL_BUILD_VISUAL_STUDIO_COMPONENT_HPP
+#define DOGEN_ASSETS_TYPES_META_MODEL_BUILD_VISUAL_STUDIO_COMPONENT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,18 +33,19 @@
 namespace dogen::assets::meta_model::build {
 
 /**
- * @brief Represents a solution  for the Visual Studio IDE.
+ * @brief Gathers the information required to make Visual Studio projects and solutions for
+ * a component.
  */
-class visual_studio_solution final : public dogen::assets::meta_model::element {
+class visual_studio_component final : public dogen::assets::meta_model::element {
 public:
-    visual_studio_solution() = default;
-    visual_studio_solution(const visual_studio_solution&) = default;
-    visual_studio_solution(visual_studio_solution&&) = default;
+    visual_studio_component() = default;
+    visual_studio_component(const visual_studio_component&) = default;
+    visual_studio_component(visual_studio_component&&) = default;
 
-    virtual ~visual_studio_solution() noexcept { }
+    virtual ~visual_studio_component() noexcept { }
 
 public:
-    visual_studio_solution(
+    visual_studio_component(
         const dogen::assets::meta_model::name& name,
         const std::string& documentation,
         const dogen::assets::meta_model::origin_types origin_type,
@@ -64,7 +65,8 @@ public:
         const std::string& project_guid,
         const std::string& project_solution_guid,
         const std::string& version,
-        const std::string& project_name);
+        const std::string& project_name,
+        const std::string& tools_version);
 
 public:
     using element::accept;
@@ -97,9 +99,14 @@ public:
     void project_name(const std::string& v);
     void project_name(const std::string&& v);
 
+    const std::string& tools_version() const;
+    std::string& tools_version();
+    void tools_version(const std::string& v);
+    void tools_version(const std::string&& v);
+
 public:
-    bool operator==(const visual_studio_solution& rhs) const;
-    bool operator!=(const visual_studio_solution& rhs) const {
+    bool operator==(const visual_studio_component& rhs) const;
+    bool operator!=(const visual_studio_component& rhs) const {
         return !this->operator==(rhs);
     }
 
@@ -107,14 +114,15 @@ public:
     bool equals(const dogen::assets::meta_model::element& other) const override;
 
 public:
-    void swap(visual_studio_solution& other) noexcept;
-    visual_studio_solution& operator=(visual_studio_solution other);
+    void swap(visual_studio_component& other) noexcept;
+    visual_studio_component& operator=(visual_studio_component other);
 
 private:
     std::string project_guid_;
     std::string project_solution_guid_;
     std::string version_;
     std::string project_name_;
+    std::string tools_version_;
 };
 
 }
@@ -123,8 +131,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::assets::meta_model::build::visual_studio_solution& lhs,
-    dogen::assets::meta_model::build::visual_studio_solution& rhs) {
+    dogen::assets::meta_model::build::visual_studio_component& lhs,
+    dogen::assets::meta_model::build::visual_studio_component& rhs) {
     lhs.swap(rhs);
 }
 

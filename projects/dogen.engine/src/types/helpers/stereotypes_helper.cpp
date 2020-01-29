@@ -69,10 +69,8 @@ const std::string stereotype_templating_logic_less_templates(
     "masd::templating::logic_less_templates");
 const std::string stereotype_serialization_type_registrar(
     "masd::serialization::type_registrar");
-const std::string stereotype_build_visual_studio_project(
-    "masd::build::visual_studio::project");
-const std::string stereotype_build_visual_studio_solution(
-    "masd::build::visual_studio::solution");
+const std::string stereotype_build_visual_studio_component(
+    "masd::build::visual_studio::component");
 const std::string unsupported_stereotype("Invalid or unsupported stereotype: ");
 
 }
@@ -130,10 +128,8 @@ static_stereotypes stereotypes_helper::from_string(const std::string& s) const {
         return static_stereotypes::templating_logic_less_template;
     else if (s == stereotype_serialization_type_registrar)
         return static_stereotypes::serialization_type_registrar;
-    else if (s == stereotype_build_visual_studio_project)
-        return static_stereotypes::build_visual_studio_project;
-    else if (s == stereotype_build_visual_studio_solution)
-        return static_stereotypes::build_visual_studio_solution;
+    else if (s == stereotype_build_visual_studio_component)
+        return static_stereotypes::build_visual_studio_component;
 
     BOOST_LOG_SEV(lg, debug) << "Could not convert stereotype."
                              << " Assuming dynamic.";
@@ -202,10 +198,8 @@ to_string(const static_stereotypes ss) const {
         return stereotype_templating_logic_less_templates;
     case static_stereotypes::serialization_type_registrar:
         return stereotype_serialization_type_registrar;
-    case static_stereotypes::build_visual_studio_project:
-        return stereotype_build_visual_studio_project;
-    case static_stereotypes::build_visual_studio_solution:
-        return stereotype_build_visual_studio_solution;
+    case static_stereotypes::build_visual_studio_component:
+        return stereotype_build_visual_studio_component;
 
     default: {
         const std::string s(boost::lexical_cast<std::string>(ss));
@@ -236,8 +230,7 @@ is_element_type(const static_stereotypes ss) const {
         ss == static_stereotypes::mapping_extensible_mappable ||
         ss == static_stereotypes::templating_logic_less_template ||
         ss == static_stereotypes::serialization_type_registrar ||
-        ss == static_stereotypes::build_visual_studio_project ||
-        ss == static_stereotypes::build_visual_studio_solution;
+        ss == static_stereotypes::build_visual_studio_component;
 }
 
 std::list<static_stereotypes> stereotypes_helper::extract_element_types(

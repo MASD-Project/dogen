@@ -19,22 +19,12 @@
  *
  */
 #include "dogen.assets/types/meta_model/build/element_repository.hpp"
-#include "dogen.assets/types/meta_model/build/visual_studio_project.hpp"
-#include "dogen.assets/types/meta_model/build/visual_studio_solution.hpp"
+#include "dogen.assets/types/meta_model/build/visual_studio_component.hpp"
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_project>& lhs,
-const boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_project>& rhs) {
-    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
-}
-
-}
-
-namespace boost {
-
-inline bool operator==(const boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_solution>& lhs,
-const boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_solution>& rhs) {
+inline bool operator==(const boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_component>& lhs,
+const boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_component>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -42,21 +32,16 @@ const boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_solution
 
 namespace dogen::assets::meta_model::build {
 
-element_repository::element_repository(
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_project> >& visual_studio_projects,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_solution> >& visual_studio_solutions)
-    : visual_studio_projects_(visual_studio_projects),
-      visual_studio_solutions_(visual_studio_solutions) { }
+element_repository::element_repository(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_component> >& visual_studio_components)
+    : visual_studio_components_(visual_studio_components) { }
 
 void element_repository::swap(element_repository& other) noexcept {
     using std::swap;
-    swap(visual_studio_projects_, other.visual_studio_projects_);
-    swap(visual_studio_solutions_, other.visual_studio_solutions_);
+    swap(visual_studio_components_, other.visual_studio_components_);
 }
 
 bool element_repository::operator==(const element_repository& rhs) const {
-    return visual_studio_projects_ == rhs.visual_studio_projects_ &&
-        visual_studio_solutions_ == rhs.visual_studio_solutions_;
+    return visual_studio_components_ == rhs.visual_studio_components_;
 }
 
 element_repository& element_repository::operator=(element_repository other) {
@@ -65,36 +50,20 @@ element_repository& element_repository::operator=(element_repository other) {
     return *this;
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_project> >& element_repository::visual_studio_projects() const {
-    return visual_studio_projects_;
+const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_component> >& element_repository::visual_studio_components() const {
+    return visual_studio_components_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_project> >& element_repository::visual_studio_projects() {
-    return visual_studio_projects_;
+std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_component> >& element_repository::visual_studio_components() {
+    return visual_studio_components_;
 }
 
-void element_repository::visual_studio_projects(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_project> >& v) {
-    visual_studio_projects_ = v;
+void element_repository::visual_studio_components(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_component> >& v) {
+    visual_studio_components_ = v;
 }
 
-void element_repository::visual_studio_projects(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_project> >&& v) {
-    visual_studio_projects_ = std::move(v);
-}
-
-const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_solution> >& element_repository::visual_studio_solutions() const {
-    return visual_studio_solutions_;
-}
-
-std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_solution> >& element_repository::visual_studio_solutions() {
-    return visual_studio_solutions_;
-}
-
-void element_repository::visual_studio_solutions(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_solution> >& v) {
-    visual_studio_solutions_ = v;
-}
-
-void element_repository::visual_studio_solutions(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_solution> >&& v) {
-    visual_studio_solutions_ = std::move(v);
+void element_repository::visual_studio_components(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::build::visual_studio_component> >&& v) {
+    visual_studio_components_ = std::move(v);
 }
 
 }

@@ -22,7 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.assets/io/meta_model/element_io.hpp"
 #include "dogen.assets/types/meta_model/element_visitor.hpp"
-#include "dogen.assets/types/meta_model/build/visual_studio_solution.hpp"
+#include "dogen.assets/types/meta_model/build/visual_studio_component.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -34,7 +34,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace dogen::assets::meta_model::build {
 
-visual_studio_solution::visual_studio_solution(
+visual_studio_component::visual_studio_component(
     const dogen::assets::meta_model::name& name,
     const std::string& documentation,
     const dogen::assets::meta_model::origin_types origin_type,
@@ -54,7 +54,8 @@ visual_studio_solution::visual_studio_solution(
     const std::string& project_guid,
     const std::string& project_solution_guid,
     const std::string& version,
-    const std::string& project_name)
+    const std::string& project_name,
+    const std::string& tools_version)
     : dogen::assets::meta_model::element(
       name,
       documentation,
@@ -75,38 +76,40 @@ visual_studio_solution::visual_studio_solution(
       project_guid_(project_guid),
       project_solution_guid_(project_solution_guid),
       version_(version),
-      project_name_(project_name) { }
+      project_name_(project_name),
+      tools_version_(tools_version) { }
 
-void visual_studio_solution::accept(const element_visitor& v) const {
+void visual_studio_component::accept(const element_visitor& v) const {
     v.visit(*this);
 }
 
-void visual_studio_solution::accept(element_visitor& v) const {
+void visual_studio_component::accept(element_visitor& v) const {
     v.visit(*this);
     }
 
-void visual_studio_solution::accept(const element_visitor& v) {
+void visual_studio_component::accept(const element_visitor& v) {
     v.visit(*this);
 }
 
-void visual_studio_solution::accept(element_visitor& v) {
+void visual_studio_component::accept(element_visitor& v) {
     v.visit(*this);
 }
 
-void visual_studio_solution::to_stream(std::ostream& s) const {
+void visual_studio_component::to_stream(std::ostream& s) const {
     s << " { "
-      << "\"__type__\": " << "\"dogen::assets::meta_model::build::visual_studio_solution\"" << ", "
+      << "\"__type__\": " << "\"dogen::assets::meta_model::build::visual_studio_component\"" << ", "
       << "\"__parent_0__\": ";
     dogen::assets::meta_model::element::to_stream(s);
     s << ", "
       << "\"project_guid\": " << "\"" << tidy_up_string(project_guid_) << "\"" << ", "
       << "\"project_solution_guid\": " << "\"" << tidy_up_string(project_solution_guid_) << "\"" << ", "
       << "\"version\": " << "\"" << tidy_up_string(version_) << "\"" << ", "
-      << "\"project_name\": " << "\"" << tidy_up_string(project_name_) << "\""
+      << "\"project_name\": " << "\"" << tidy_up_string(project_name_) << "\"" << ", "
+      << "\"tools_version\": " << "\"" << tidy_up_string(tools_version_) << "\""
       << " }";
 }
 
-void visual_studio_solution::swap(visual_studio_solution& other) noexcept {
+void visual_studio_component::swap(visual_studio_component& other) noexcept {
     dogen::assets::meta_model::element::swap(other);
 
     using std::swap;
@@ -114,90 +117,108 @@ void visual_studio_solution::swap(visual_studio_solution& other) noexcept {
     swap(project_solution_guid_, other.project_solution_guid_);
     swap(version_, other.version_);
     swap(project_name_, other.project_name_);
+    swap(tools_version_, other.tools_version_);
 }
 
-bool visual_studio_solution::equals(const dogen::assets::meta_model::element& other) const {
-    const visual_studio_solution* const p(dynamic_cast<const visual_studio_solution* const>(&other));
+bool visual_studio_component::equals(const dogen::assets::meta_model::element& other) const {
+    const visual_studio_component* const p(dynamic_cast<const visual_studio_component* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
-bool visual_studio_solution::operator==(const visual_studio_solution& rhs) const {
+bool visual_studio_component::operator==(const visual_studio_component& rhs) const {
     return dogen::assets::meta_model::element::compare(rhs) &&
         project_guid_ == rhs.project_guid_ &&
         project_solution_guid_ == rhs.project_solution_guid_ &&
         version_ == rhs.version_ &&
-        project_name_ == rhs.project_name_;
+        project_name_ == rhs.project_name_ &&
+        tools_version_ == rhs.tools_version_;
 }
 
-visual_studio_solution& visual_studio_solution::operator=(visual_studio_solution other) {
+visual_studio_component& visual_studio_component::operator=(visual_studio_component other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::string& visual_studio_solution::project_guid() const {
+const std::string& visual_studio_component::project_guid() const {
     return project_guid_;
 }
 
-std::string& visual_studio_solution::project_guid() {
+std::string& visual_studio_component::project_guid() {
     return project_guid_;
 }
 
-void visual_studio_solution::project_guid(const std::string& v) {
+void visual_studio_component::project_guid(const std::string& v) {
     project_guid_ = v;
 }
 
-void visual_studio_solution::project_guid(const std::string&& v) {
+void visual_studio_component::project_guid(const std::string&& v) {
     project_guid_ = std::move(v);
 }
 
-const std::string& visual_studio_solution::project_solution_guid() const {
+const std::string& visual_studio_component::project_solution_guid() const {
     return project_solution_guid_;
 }
 
-std::string& visual_studio_solution::project_solution_guid() {
+std::string& visual_studio_component::project_solution_guid() {
     return project_solution_guid_;
 }
 
-void visual_studio_solution::project_solution_guid(const std::string& v) {
+void visual_studio_component::project_solution_guid(const std::string& v) {
     project_solution_guid_ = v;
 }
 
-void visual_studio_solution::project_solution_guid(const std::string&& v) {
+void visual_studio_component::project_solution_guid(const std::string&& v) {
     project_solution_guid_ = std::move(v);
 }
 
-const std::string& visual_studio_solution::version() const {
+const std::string& visual_studio_component::version() const {
     return version_;
 }
 
-std::string& visual_studio_solution::version() {
+std::string& visual_studio_component::version() {
     return version_;
 }
 
-void visual_studio_solution::version(const std::string& v) {
+void visual_studio_component::version(const std::string& v) {
     version_ = v;
 }
 
-void visual_studio_solution::version(const std::string&& v) {
+void visual_studio_component::version(const std::string&& v) {
     version_ = std::move(v);
 }
 
-const std::string& visual_studio_solution::project_name() const {
+const std::string& visual_studio_component::project_name() const {
     return project_name_;
 }
 
-std::string& visual_studio_solution::project_name() {
+std::string& visual_studio_component::project_name() {
     return project_name_;
 }
 
-void visual_studio_solution::project_name(const std::string& v) {
+void visual_studio_component::project_name(const std::string& v) {
     project_name_ = v;
 }
 
-void visual_studio_solution::project_name(const std::string&& v) {
+void visual_studio_component::project_name(const std::string&& v) {
     project_name_ = std::move(v);
+}
+
+const std::string& visual_studio_component::tools_version() const {
+    return tools_version_;
+}
+
+std::string& visual_studio_component::tools_version() {
+    return tools_version_;
+}
+
+void visual_studio_component::tools_version(const std::string& v) {
+    tools_version_ = v;
+}
+
+void visual_studio_component::tools_version(const std::string&& v) {
+    tools_version_ = std::move(v);
 }
 
 }
