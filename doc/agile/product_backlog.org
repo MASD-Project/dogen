@@ -21,197 +21,6 @@ Stories that we haven't quite classified yet, but are needed.
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
-*** Add support for qualified class names in dia            :reviewing:story:
-
-Note: test this feature as we implemented something similar.
-
-#+begin_quote
-*Story*: As a dogen user, I don't want to have to define packages in
-certain cases.
-#+end_quote
-
-It has become apparent that creating large packages in dia and placing
-all classes in a large package is cumbersome:
-
-- there are issues with the large package implementation in dia,
-  making copying and pasting a dark art; its not very obvious how one
-  copies into a package (e.g. populating the child node id correctly).
-- models do not always have a neat division between packages; in
-  dogen, where packages would be useful, there are all sorts of
-  connections (e.g. inheritance, association) between the package and
-  the model "package" or other packages. Thus is very difficult to
-  produce a representative diagram.
-
-A solution to this problem would be to support qualified names in
-class names; these would be interpreted as being part of the current
-model. One would still have to define a large package, but it could be
-empty, or contain only the types which only have connections inside
-the package, plus comments for the package, etc.
-
-*** References to ODB types in different namespaces fails             :story:
-
-By mistake we created a type which was meant to be in the relational
-namespace, but due to dia's peculiarities around copy and pasting,
-ended up in the model namespace. The generated ODB files had includes
-that placed the referenced ODB files in "types" rather than in
-"odb". It seems there is some kind of regex error.
-
-*** Add dependency checks to transforms                               :story:
-
-Check the backlog as we may already have this story. At present we do
-not have a way to determine if a given transform dependency has been
-met. Say for example transform A depends on transform B; we are aware
-of this only because the comments on the transform chains tell us
-so. It would be nicer if we could declare transform dependencies (and
-reasons) as part of the transform "interface" and then check that a
-given transform has indeed been applied to a model. This also fits in
-with the idea that we keep track of which transforms have affected a
-given model. In this sense we need to capture:
-
-- what transforms have been applied;
-- whether the transform has modified anything or not.
-
-*** Schema name propagation is not handled correctly                  :story:
-
-The logic around the propagation of schema names is very dodgy. Not
-only do we rely on overwriting the schema name (e.g. first we take the
-containing module schema name, then we check to see if its overridden
-at the element level) but we also do not take into account recursive
-composition. We need to revisit this.
-
-*** Test ORM support for table name and column name                   :story:
-
-At present it seems we can supply a table name, but no corresponding
-ODB pragmas are generated for it. The same seems to be the case with
-column name.
-
-Actually column name seems to work because we are using "raw" odb
-pragmas:
-
-: #DOGEN masd.orm.odb_pragma=column("LASTNAME")
-
-We should really have an ORM level concept of column name and table
-name.
-
-*** Allow property level bindings to primitives                       :story:
-
-We should map any variability bindings that happen at the
-property/attribute level to the anonymous attribute that all
-primitives have. This is because its not possible to address the
-anonymous attribute in a diagram. At present we are hacking these
-features to the =any= scope just so that we can move on. Affected
-features:
-
-: masd.orm.type_override
-: masd.orm.type_mapping
-
-In order for this to work, when we are building configurations from
-the original meta-model element, we need to "override" the
-type. However, this raises the question: what if we do want to bind
-something at the primitive level? What if something binds both to the
-property and the primitive?
-
-The alternative is to make the attribute explicit. We need to think
-about the consequences of this as well.
-
-*** Profile overriding may cause link errors                          :story:
-
-In the previous sprint we've addressed the issue of generating all
-facets by using profile overriding. This worked, but relied on
-something we didn't notice: the code must always link against all
-libraries required by the full code generation. We subsequently
-removed boost serialisation from our list of libraries and now the
-nightly is failing to link with lots of errors like these:
-
-: /work/DomainDrivenConsulting/masd/vcpkg/masd/installed/x64-linux/include/boost/archive/basic_xml_oarchive.hpp:99: error: undefined reference to 'boost::archive::basic_xml_oarchive<boost::archive::xml_oarchive>::save_start(char const*)'
-
-The right solution is to have "facet specific" link libraries, that
-kick in when the facet is enabled. This will not happen for a long
-time.
-
-*** Move the build-file entities from fabric into assets              :story:
-
-We have a number of entities in fabric that are related to build files
-and should be moved together. The only problem is that we will need
-locator in generation in order to move these entities - or we need to
-update the existing expanders in =generation.cpp= to point to these
-new meta-elements. This may be the best bet so that we can break this
-work into discrete parts.
-
-*** Keep track of which transforms touch which elements               :story:
-
-It would be nice to be able to know, for a given modeling element,
-which transforms modified it. We can add a property to element in
-assets that is a list of transforms and guids, so that we can
-distinguish invocations. This way we can then easily ask the database
-for details.
-
-Notes:
-
-- add a "modified by" container to element. Its a pair of transform ID
-  and GUID. Add it to models as well.
-- update every transform to record this information.
-
-*** Create a meta-model mapping type for ORM                          :story:
-
-At present we are hacking the mapping of types in ODB by adding them
-next to the class using it. Ideally we should create a separate header
-file with all the mappings in a model and include it as required. The
-inclusion logic probably requires a fair bit of cleverness (.e.g is
-type in map?).
-
-Notes:
-
-- create a modeling element called =orm::type_map=. It has entries
-  with the fields of an ODB type map:
-  - database: optional
-  - source type
-  - destination type
-  - to: optional
-  - from: optional
-- we can use the attributes to represent entries, and name for source
-  type and value for destination type. The rest is supplied as
-  meta-data.
-- the name of the element will give raise to the name of the
-  file. There can be more than one map per model.
-- for each type with type overrides, check to see if the type name is
-  in any of the maps. If so, add an include. At the meta-model level
-  this can be captured as a dependency.
-- we should add a database of "any" or "all" - this would allow us to
-  add references that are not specific to a database engine.
-- we should obtain a list of the core types in ODB and check if a type
-  is n the list. If not, we should tell the user a type map needs to
-  be created.
-
-: #pragma db map sqlite:type("JSON_TEXT") as("TEXT") to("json((?))")
-: #pragma db map pgsql:type("JSONB") as("TEXT") to("to_jsonb((?)::jsonb)") from("from_jsonb((?))")
-
-*** Check OSX packages                                                :story:
-
-We need to ensure OSX packages are still working. At present, the
-build says:
-
-: FATALcould not find C++ runtime
-
-For this the problem appears to be that we are trying to add the C++
-run time and not finding it. We need to test the OSX packages and see
-if Dogen still works. If it does, remove this.
-
-:   if(EXISTS "/usr/local/lib/i386/libstdc++.6.dylib")
-:       set (cpp_runtime_libs
-:           ${cpp_runtime_libs} "/usr/local/lib/i386/libstdc++.6.dylib")
-:       set (cpp_runtime_libs
-:           ${cpp_runtime_libs} "/usr/local/lib/i386/libgcc_s.1.dylib")
-:   else()
-:       message(FATAL "could not find C++ runtime")
-:   endif()
-
-*** Modeling elements can have =profile= setup                        :story:
-
-We expected =masd.variability.profile= to be only applicable at the
-global scope, but when overriding it manually no error occurs but no
-override happens either. Check the binding properties of this field.
-
 *** Fix pictures in old release notes                                 :story:
 
 Many of the pictures we used in the past were in panoramio. These are
@@ -2782,9 +2591,14 @@ At present we have a models directory in each component of a
 product. However, perhaps it makes more sense to have it as a
 subdirectory of the component itself. This is because in an ideal
 world, we should create a package for the component with the model and
-the header files as well as the SO, allowing users to consume it. In
-the Dogen case, it means users can create plugins for Dogen. In the
-PDM case, it means users can make use of the PDM in their own models.
+the header files as well as the binaries, allowing users to consume
+it:
+
+- in the Dogen case, it means users can create plugins for Dogen;
+- in the PDM case, it means users can make use of the PDM in their own
+  models;
+- for user models, it means you can consume a product in another
+  product by referencing its models.
 
 However, one downside of this approach is that we then need to have
 many directories in the include path for models. If we take the
@@ -2826,11 +2640,57 @@ Maybe we have two separate issues here:
   =shared/dogen/models= directory, just like we will also place all of
   the PDM's includes under =/usr/include= and the SO's under
   =/usr/lib=. We could split it into Dia and JSON if need be.
+- the product model itself should be at the top-most directory of the
+  git repository. We also need a "models" directory to store models
+  which are not expressed as source code (profiles, PDMs, etc). Then,
+  for each component, we should have the models at the root directory
+  of the component. Whilst this is not in line with our OCD, it is
+  required in order for the product model to be able to locate the
+  component models. An alternative is to have a convention that we
+  always look into a "models" directory (which can be renamed via a
+  meta-data parameter) for models, plus any additional directories in
+  the "model path". We must inject the model file names to dogen so
+  that we do not delete the models.
 
 ** Feature Heap
 
 New features for this release. These are more nice to haves rather
 than mandatory work.
+
+*** Keep track of which transforms touch which elements               :story:
+
+It would be nice to be able to know, for a given modeling element,
+which transforms modified it. We can add a property to element in
+assets that is a list of transforms and guids, so that we can
+distinguish invocations. This way we can then easily ask the database
+for details.
+
+Notes:
+
+- add a "modified by" container to element. Its a pair of transform ID
+  and GUID. Add it to models as well.
+- update every transform to record this information.
+
+*** Allow property level bindings to primitives                       :story:
+
+We should map any variability bindings that happen at the
+property/attribute level to the anonymous attribute that all
+primitives have. This is because its not possible to address the
+anonymous attribute in a diagram. At present we are hacking these
+features to the =any= scope just so that we can move on. Affected
+features:
+
+: masd.orm.type_override
+: masd.orm.type_mapping
+
+In order for this to work, when we are building configurations from
+the original meta-model element, we need to "override" the
+type. However, this raises the question: what if we do want to bind
+something at the primitive level? What if something binds both to the
+property and the primitive?
+
+The alternative is to make the attribute explicit. We need to think
+about the consequences of this as well.
 
 *** Default model modules from filename                               :story:
 
@@ -3786,6 +3646,40 @@ useful for languages like C# and Java, to control serialisation, etc.
 
 Stories that deal with cleaning up the code base.
 
+*** Create a meta-model mapping type for ORM                          :story:
+
+At present we are hacking the mapping of types in ODB by adding them
+next to the class using it. Ideally we should create a separate header
+file with all the mappings in a model and include it as required. The
+inclusion logic probably requires a fair bit of cleverness (.e.g is
+type in map?).
+
+Notes:
+
+- create a modeling element called =orm::type_map=. It has entries
+  with the fields of an ODB type map:
+  - database: optional
+  - source type
+  - destination type
+  - to: optional
+  - from: optional
+- we can use the attributes to represent entries, and name for source
+  type and value for destination type. The rest is supplied as
+  meta-data.
+- the name of the element will give raise to the name of the
+  file. There can be more than one map per model.
+- for each type with type overrides, check to see if the type name is
+  in any of the maps. If so, add an include. At the meta-model level
+  this can be captured as a dependency.
+- we should add a database of "any" or "all" - this would allow us to
+  add references that are not specific to a database engine.
+- we should obtain a list of the core types in ODB and check if a type
+  is n the list. If not, we should tell the user a type map needs to
+  be created.
+
+: #pragma db map sqlite:type("JSON_TEXT") as("TEXT") to("json((?))")
+: #pragma db map pgsql:type("JSONB") as("TEXT") to("to_jsonb((?)::jsonb)") from("from_jsonb((?))")
+
 *** Improve handling of stereotypes                                   :story:
 
 At present we can add any string as a stereotype. If anyone binds to
@@ -4243,6 +4137,95 @@ most domain experts know what that means,
 
 Things we should address as soon as possible because they impact dogen
 usage. Urgent things that are going to annoy users.
+
+*** Modeling elements should not have =profile= setup                 :story:
+
+We expected =masd.variability.profile= to be only applicable at the
+global scope, but when overriding it manually no error occurs and no
+override happens either. Check the binding properties of this
+field. We need to ensure that users cannot add this field to profiles
+or else we will end up with very weird error messages and/or
+behaviours.
+
+*** Check OSX packages                                                :story:
+
+We need to ensure OSX packages are still working. At present, the
+build says:
+
+: FATALcould not find C++ runtime
+
+For this the problem appears to be that we are trying to add the C++
+run time and not finding it. We need to test the OSX packages and see
+if Dogen still works. If it does, remove this.
+
+:   if(EXISTS "/usr/local/lib/i386/libstdc++.6.dylib")
+:       set (cpp_runtime_libs
+:           ${cpp_runtime_libs} "/usr/local/lib/i386/libstdc++.6.dylib")
+:       set (cpp_runtime_libs
+:           ${cpp_runtime_libs} "/usr/local/lib/i386/libgcc_s.1.dylib")
+:   else()
+:       message(FATAL "could not find C++ runtime")
+:   endif()
+
+*** Profile overriding may cause link errors                          :story:
+
+In the previous sprint we've addressed the issue of generating all
+facets by using profile overriding. This worked, but relied on
+something we didn't notice: the code must always link against all
+libraries required by the full code generation. We subsequently
+removed boost serialisation from our list of libraries and now the
+nightly is failing to link with lots of errors like these:
+
+: /work/DomainDrivenConsulting/masd/vcpkg/masd/installed/x64-linux/include/boost/archive/basic_xml_oarchive.hpp:99: error: undefined reference to 'boost::archive::basic_xml_oarchive<boost::archive::xml_oarchive>::save_start(char const*)'
+
+The right solution is to have "facet specific" link libraries, that
+kick in when the facet is enabled. This will not happen for a long
+time.
+
+*** References to ODB types in different namespaces fails             :story:
+
+By mistake we created a type which was meant to be in the relational
+namespace, but due to dia's peculiarities around copy and pasting,
+ended up in the model namespace. The generated ODB files had includes
+that placed the referenced ODB files in "types" rather than in
+"odb". It seems there is some kind of regex error.
+
+*** Add dependency checks to transforms                               :story:
+
+Check the backlog as we may already have this story. At present we do
+not have a way to determine if a given transform dependency has been
+met. Say for example transform A depends on transform B; we are aware
+of this only because the comments on the transform chains tell us
+so. It would be nicer if we could declare transform dependencies (and
+reasons) as part of the transform "interface" and then check that a
+given transform has indeed been applied to a model. This also fits in
+with the idea that we keep track of which transforms have affected a
+given model. In this sense we need to capture:
+
+- what transforms have been applied;
+- whether the transform has modified anything or not.
+
+*** Schema name propagation is not handled correctly                  :story:
+
+The logic around the propagation of schema names is very dodgy. Not
+only do we rely on overwriting the schema name (e.g. first we take the
+containing module schema name, then we check to see if its overridden
+at the element level) but we also do not take into account recursive
+composition. We need to revisit this.
+
+*** Test ORM support for table name and column name                   :story:
+
+At present it seems we can supply a table name, but no corresponding
+ODB pragmas are generated for it. The same seems to be the case with
+column name.
+
+Actually column name seems to work because we are using "raw" odb
+pragmas:
+
+: #DOGEN masd.orm.odb_pragma=column("LASTNAME")
+
+We should really have an ORM level concept of column name and table
+name.
 
 *** Conversion does not output static stereotypes                     :story:
 
@@ -8420,6 +8403,29 @@ Notes:
   component. Both of these need to be projected into artefact space
   (because we have multiple facets in products as well). This means we
   somehow need to use archetypes from both models.
+- the product model should have meta-elements describing the component
+  models (perhaps =masd::component_model::target=, with a matching
+  =masd::component_model::reference= in the component models).
+- See aslo the story about directories in dogen: [[*Move models into the project directory][Move models into the
+  project directory]].
+- we could create separate chains for product and component
+  model. This would imply a need for distinct model types. On the
+  product model, we would locate all of the meta-elements representing
+  a component model, and for each of these, run the product model
+  chain. For other meta-model elements we just run their associated
+  transforms - hopefully not many as these are expected to be very
+  simple elements. We should also make use of injection model caching
+  to avoid reloading models.
+- as with component models, we should also have templates for product
+  models so that we could simply do a "dogen new product" or some such
+  incantation and that would result in the creation of a dogen product
+  model and possibly its initial generation. One slight problem is
+  that if we do a "dogen new component" we still have to manually add
+  the component to the product model.
+- we need to have a separate injection adapter for product models so
+  that we filter out "invalid" meta-elements for the model
+  type. Similarly, in the component injection adapter, we should
+  filter out product model meta-elements (travis build files, etc).
 
 Links:
 
