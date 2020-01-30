@@ -25,10 +25,12 @@
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
 #include <string>
 #include <algorithm>
 #include "dogen.assets/types/meta_model/element.hpp"
+#include "dogen.assets/types/meta_model/build/visual_studio_item_group.hpp"
 
 namespace dogen::assets::meta_model::build {
 
@@ -64,9 +66,8 @@ public:
         const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
         const std::string& project_guid,
         const std::string& project_solution_guid,
-        const std::string& version,
         const std::string& project_name,
-        const std::string& tools_version);
+        const std::list<dogen::assets::meta_model::build::visual_studio_item_group>& item_groups);
 
 public:
     using element::accept;
@@ -79,30 +80,45 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
+    /**
+     * @brief GUID to use for the Visual Studio project.
+     */
+    /**@{*/
     const std::string& project_guid() const;
     std::string& project_guid();
     void project_guid(const std::string& v);
     void project_guid(const std::string&& v);
+    /**@}*/
 
+    /**
+     * @brief GUID to use for the Visual Studio solution for the project.
+     */
+    /**@{*/
     const std::string& project_solution_guid() const;
     std::string& project_solution_guid();
     void project_solution_guid(const std::string& v);
     void project_solution_guid(const std::string&& v);
+    /**@}*/
 
-    const std::string& version() const;
-    std::string& version();
-    void version(const std::string& v);
-    void version(const std::string&& v);
-
+    /**
+     * @brief Name of the visual studio project.
+     */
+    /**@{*/
     const std::string& project_name() const;
     std::string& project_name();
     void project_name(const std::string& v);
     void project_name(const std::string&& v);
+    /**@}*/
 
-    const std::string& tools_version() const;
-    std::string& tools_version();
-    void tools_version(const std::string& v);
-    void tools_version(const std::string&& v);
+    /**
+     * @brief Set of item groups in the project.
+     */
+    /**@{*/
+    const std::list<dogen::assets::meta_model::build::visual_studio_item_group>& item_groups() const;
+    std::list<dogen::assets::meta_model::build::visual_studio_item_group>& item_groups();
+    void item_groups(const std::list<dogen::assets::meta_model::build::visual_studio_item_group>& v);
+    void item_groups(const std::list<dogen::assets::meta_model::build::visual_studio_item_group>&& v);
+    /**@}*/
 
 public:
     bool operator==(const visual_studio_component& rhs) const;
@@ -120,9 +136,8 @@ public:
 private:
     std::string project_guid_;
     std::string project_solution_guid_;
-    std::string version_;
     std::string project_name_;
-    std::string tools_version_;
+    std::list<dogen::assets::meta_model::build::visual_studio_item_group> item_groups_;
 };
 
 }

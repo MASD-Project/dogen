@@ -3393,23 +3393,23 @@
       "attributes": [
         {
           "name": "project_guid",
-          "type": "std::string"
+          "type": "std::string",
+          "documentation": "GUID to use for the Visual Studio project.\n"
         },
         {
           "name": "project_solution_guid",
-          "type": "std::string"
-        },
-        {
-          "name": "version",
-          "type": "std::string"
+          "type": "std::string",
+          "documentation": "GUID to use for the Visual Studio solution for the project.\n"
         },
         {
           "name": "project_name",
-          "type": "std::string"
+          "type": "std::string",
+          "documentation": "Name of the visual studio project.\n"
         },
         {
-          "name": "tools_version",
-          "type": "std::string"
+          "name": "item_groups",
+          "type": "std::list<visual_studio_item_group>",
+          "documentation": "Set of item groups in the project.\n"
         }
       ]
     },
@@ -3420,6 +3420,33 @@
         {
           "name": "visual_studio_components",
           "type": "std::unordered_map<std::string, boost::shared_ptr<visual_studio_component>>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::build::visual_studio_item_group",
+      "documentation": "Represents an MSBuild ItemGroup.\n\nDocumented as follows: Contains a set of user-defined Item elements. Every item\nused in a MSBuild project must be specified as a child of an ItemGroup element.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "items",
+          "type": "std::list<visual_studio_item>",
+          "documentation": "Set of MSBuild Items that make up this ItemGroup.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::build::visual_studio_item",
+      "documentation": "Represents an MSBuild Item, used in Visual Studio projects.\n\nDocumentation:  Contains a user-defined item and its metadata. Every item that is\nused in a MSBuild project must be specified as a child of an ItemGroup element.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string"
+        },
+        {
+          "name": "include",
+          "type": "std::string"
         }
       ]
     }

@@ -19,15 +19,30 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen.assets/io/meta_model/element_io.hpp"
-#include "dogen.assets/io/meta_model/build/visual_studio_component_io.hpp"
+#include "dogen.assets/io/meta_model/build/visual_studio_item_io.hpp"
 #include "dogen.assets/io/meta_model/build/visual_studio_item_group_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::meta_model::build::visual_studio_item>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen::assets::meta_model::build {
 
-std::ostream& operator<<(std::ostream& s, const visual_studio_component& v) {
-    v.to_stream(s);
+std::ostream& operator<<(std::ostream& s, const visual_studio_item_group& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::assets::meta_model::build::visual_studio_item_group\"" << ", "
+      << "\"items\": " << v.items()
+      << " }";
     return(s);
 }
 

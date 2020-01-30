@@ -23,6 +23,7 @@
 #include "dogen.assets/io/meta_model/element_io.hpp"
 #include "dogen.assets/types/meta_model/element_visitor.hpp"
 #include "dogen.assets/types/meta_model/build/visual_studio_component.hpp"
+#include "dogen.assets/io/meta_model/build/visual_studio_item_group_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -30,6 +31,20 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\"", "<quote>");
     boost::replace_all(s, "\\", "<backslash>");
     return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::meta_model::build::visual_studio_item_group>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
 }
 
 namespace dogen::assets::meta_model::build {
@@ -53,9 +68,8 @@ visual_studio_component::visual_studio_component(
     const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
     const std::string& project_guid,
     const std::string& project_solution_guid,
-    const std::string& version,
     const std::string& project_name,
-    const std::string& tools_version)
+    const std::list<dogen::assets::meta_model::build::visual_studio_item_group>& item_groups)
     : dogen::assets::meta_model::element(
       name,
       documentation,
@@ -75,9 +89,8 @@ visual_studio_component::visual_studio_component(
       decoration),
       project_guid_(project_guid),
       project_solution_guid_(project_solution_guid),
-      version_(version),
       project_name_(project_name),
-      tools_version_(tools_version) { }
+      item_groups_(item_groups) { }
 
 void visual_studio_component::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -103,9 +116,8 @@ void visual_studio_component::to_stream(std::ostream& s) const {
     s << ", "
       << "\"project_guid\": " << "\"" << tidy_up_string(project_guid_) << "\"" << ", "
       << "\"project_solution_guid\": " << "\"" << tidy_up_string(project_solution_guid_) << "\"" << ", "
-      << "\"version\": " << "\"" << tidy_up_string(version_) << "\"" << ", "
       << "\"project_name\": " << "\"" << tidy_up_string(project_name_) << "\"" << ", "
-      << "\"tools_version\": " << "\"" << tidy_up_string(tools_version_) << "\""
+      << "\"item_groups\": " << item_groups_
       << " }";
 }
 
@@ -115,9 +127,8 @@ void visual_studio_component::swap(visual_studio_component& other) noexcept {
     using std::swap;
     swap(project_guid_, other.project_guid_);
     swap(project_solution_guid_, other.project_solution_guid_);
-    swap(version_, other.version_);
     swap(project_name_, other.project_name_);
-    swap(tools_version_, other.tools_version_);
+    swap(item_groups_, other.item_groups_);
 }
 
 bool visual_studio_component::equals(const dogen::assets::meta_model::element& other) const {
@@ -130,9 +141,8 @@ bool visual_studio_component::operator==(const visual_studio_component& rhs) con
     return dogen::assets::meta_model::element::compare(rhs) &&
         project_guid_ == rhs.project_guid_ &&
         project_solution_guid_ == rhs.project_solution_guid_ &&
-        version_ == rhs.version_ &&
         project_name_ == rhs.project_name_ &&
-        tools_version_ == rhs.tools_version_;
+        item_groups_ == rhs.item_groups_;
 }
 
 visual_studio_component& visual_studio_component::operator=(visual_studio_component other) {
@@ -173,22 +183,6 @@ void visual_studio_component::project_solution_guid(const std::string&& v) {
     project_solution_guid_ = std::move(v);
 }
 
-const std::string& visual_studio_component::version() const {
-    return version_;
-}
-
-std::string& visual_studio_component::version() {
-    return version_;
-}
-
-void visual_studio_component::version(const std::string& v) {
-    version_ = v;
-}
-
-void visual_studio_component::version(const std::string&& v) {
-    version_ = std::move(v);
-}
-
 const std::string& visual_studio_component::project_name() const {
     return project_name_;
 }
@@ -205,20 +199,20 @@ void visual_studio_component::project_name(const std::string&& v) {
     project_name_ = std::move(v);
 }
 
-const std::string& visual_studio_component::tools_version() const {
-    return tools_version_;
+const std::list<dogen::assets::meta_model::build::visual_studio_item_group>& visual_studio_component::item_groups() const {
+    return item_groups_;
 }
 
-std::string& visual_studio_component::tools_version() {
-    return tools_version_;
+std::list<dogen::assets::meta_model::build::visual_studio_item_group>& visual_studio_component::item_groups() {
+    return item_groups_;
 }
 
-void visual_studio_component::tools_version(const std::string& v) {
-    tools_version_ = v;
+void visual_studio_component::item_groups(const std::list<dogen::assets::meta_model::build::visual_studio_item_group>& v) {
+    item_groups_ = v;
 }
 
-void visual_studio_component::tools_version(const std::string&& v) {
-    tools_version_ = std::move(v);
+void visual_studio_component::item_groups(const std::list<dogen::assets::meta_model::build::visual_studio_item_group>&& v) {
+    item_groups_ = std::move(v);
 }
 
 }

@@ -20,14 +20,24 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.assets/io/meta_model/element_io.hpp"
-#include "dogen.assets/io/meta_model/build/visual_studio_component_io.hpp"
-#include "dogen.assets/io/meta_model/build/visual_studio_item_group_io.hpp"
+#include "dogen.assets/io/meta_model/build/visual_studio_item_io.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
 
 namespace dogen::assets::meta_model::build {
 
-std::ostream& operator<<(std::ostream& s, const visual_studio_component& v) {
-    v.to_stream(s);
+std::ostream& operator<<(std::ostream& s, const visual_studio_item& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::assets::meta_model::build::visual_studio_item\"" << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"include\": " << "\"" << tidy_up_string(v.include()) << "\""
+      << " }";
     return(s);
 }
 
