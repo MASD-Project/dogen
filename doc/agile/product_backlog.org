@@ -3646,6 +3646,45 @@ useful for languages like C# and Java, to control serialisation, etc.
 
 Stories that deal with cleaning up the code base.
 
+*** Current implementation of vcxproj has many problems               :story:
+
+Problems:
+
+- bug: startup project is hard-coded in both c++ and c#:
+
+: StartupItem = CppModel.vcxroj
+: StartupItem = CSharpModel.csproj
+
+- bug: project items are not populated at present for C++:
+
+: ctx.model().project_items())
+
+- we are using =Compile= instead of =ClCompile= for c++:
+
+: <#+
+:    for (const auto& f : ctx.model().project_items())
+: #>
+:    <Compile Include="<#= f #>" />
+
+  Should really be:
+
+: <ClCompile Include="Scenario_CloudFontOverview.xaml.cpp">
+
+- header files should be in the file as well:
+
+: <ClInclude Include="SampleConfiguration.h" />
+
+- we should create separate groups for ODB files, etc.
+- its not possible to supply versions (VS version, tools version,
+  etc).
+
+Links:
+
+- [[https://github.com/Teivaz/vcxproj-generator/blob/master/generate_vcxproj.py%0A][vcxproj-generator]]
+- [[https://docs.microsoft.com/en-us/visualstudio/msbuild/itemgroup-element-msbuild?view=vs-2019][ItemGroup element (MSBuild)]]
+- [[https://docs.microsoft.com/en-us/visualstudio/msbuild/item-element-msbuild?view=vs-2019][Item element (MSBuild)]]
+- [[https://docs.microsoft.com/en-us/cpp/build/reference/vcxproj-file-structure?view=vs-2019][.vcxproj and .props file structure]]
+
 *** Create a meta-model mapping type for ORM                          :story:
 
 At present we are hacking the mapping of types in ODB by adding them
