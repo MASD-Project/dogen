@@ -33,7 +33,7 @@ make_masd_injection_is_simple_name_internal() {
     feature_template r;
     r.name().simple("is_simple_name_internal");
     r.name().qualified("masd.injection.is_simple_name_internal");
-    const auto vt(value_type::text);
+    const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
     r.kind(template_kind::instance);
@@ -64,7 +64,7 @@ naming::static_configuration naming::make_static_configuration(
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
     if (s.has_configuration_point(fg.is_simple_name_internal))
-        r.is_simple_name_internal = s.get_text_content(fg.is_simple_name_internal);
+        r.is_simple_name_internal = s.get_boolean_content(fg.is_simple_name_internal);
     return r;
 }
 

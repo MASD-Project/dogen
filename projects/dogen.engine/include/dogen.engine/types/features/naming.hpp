@@ -26,7 +26,7 @@
 #endif
 
 #include <list>
-#include <string>
+#include <boost/optional.hpp>
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
@@ -48,7 +48,7 @@ public:
 
 public:
     struct static_configuration {
-        std::string is_simple_name_internal;
+        boost::optional<bool> is_simple_name_internal;
     };
 
     static static_configuration make_static_configuration(

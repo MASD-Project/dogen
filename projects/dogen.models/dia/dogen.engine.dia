@@ -6113,13 +6113,13 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.
         <dia:point val="117,87"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="116.95,86.95;142.19,90.65"/>
+        <dia:rectangle val="116.95,86.95;143.345,90.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="117,87"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.140000000000001"/>
+        <dia:real val="26.294999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -6221,7 +6221,7 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.
             <dia:string>#masd.injection.is_simple_name_internal#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
+            <dia:string>#masd::variability::boolean#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

@@ -299,7 +299,7 @@
       "attributes": [
         {
           "name": "masd.injection.is_simple_name_internal",
-          "type": "masd::variability::text",
+          "type": "masd::variability::boolean",
           "documentation": "If set to true, the simple name will be used only internally within assets.\n",
           "tagged_values": {
             "masd.variability.qualified_name": "masd.injection.is_simple_name_internal",
