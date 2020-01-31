@@ -22,25 +22,32 @@
 
 namespace dogen::assets::meta_model {
 
+name::name()
+    : is_simple_name_internal_(static_cast<bool>(0)) { }
+
 name::name(
     const dogen::assets::meta_model::fully_qualified_representation& qualified,
     const std::string& simple,
-    const dogen::assets::meta_model::location& location)
+    const dogen::assets::meta_model::location& location,
+    const bool is_simple_name_internal)
     : qualified_(qualified),
       simple_(simple),
-      location_(location) { }
+      location_(location),
+      is_simple_name_internal_(is_simple_name_internal) { }
 
 void name::swap(name& other) noexcept {
     using std::swap;
     swap(qualified_, other.qualified_);
     swap(simple_, other.simple_);
     swap(location_, other.location_);
+    swap(is_simple_name_internal_, other.is_simple_name_internal_);
 }
 
 bool name::operator==(const name& rhs) const {
     return qualified_ == rhs.qualified_ &&
         simple_ == rhs.simple_ &&
-        location_ == rhs.location_;
+        location_ == rhs.location_ &&
+        is_simple_name_internal_ == rhs.is_simple_name_internal_;
 }
 
 name& name::operator=(name other) {
@@ -95,6 +102,14 @@ void name::location(const dogen::assets::meta_model::location& v) {
 
 void name::location(const dogen::assets::meta_model::location&& v) {
     location_ = std::move(v);
+}
+
+bool name::is_simple_name_internal() const {
+    return is_simple_name_internal_;
+}
+
+void name::is_simple_name_internal(const bool v) {
+    is_simple_name_internal_ = v;
 }
 
 }

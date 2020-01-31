@@ -40,6 +40,7 @@ std::size_t name_hasher::hash(const name& v) {
     combine(seed, v.qualified());
     combine(seed, v.simple());
     combine(seed, v.location());
+    combine(seed, v.is_simple_name_internal());
 
     return seed;
 }

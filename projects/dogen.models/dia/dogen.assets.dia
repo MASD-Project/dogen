@@ -923,7 +923,7 @@ etc.).
         <dia:point val="-138.938,-56"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-139.688,-64.65;-135.98,-55.2"/>
+        <dia:rectangle val="-139.688,-63.85;-135.98,-55.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -932,7 +932,7 @@ etc.).
         <dia:point val="-138.938,-56"/>
         <dia:point val="-138.938,-59"/>
         <dia:point val="-136.18,-59"/>
-        <dia:point val="-136.18,-64.6"/>
+        <dia:point val="-136.18,-63.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1504,7 +1504,7 @@ purpose.#</dia:string>
         <dia:point val="-149,-69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-149.05,-69.05;-136.13,-64.55"/>
+        <dia:rectangle val="-149.05,-69.05;-136.13,-63.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-149,-69"/>
@@ -1513,7 +1513,7 @@ purpose.#</dia:string>
         <dia:real val="12.82"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#name#</dia:string>
@@ -1652,6 +1652,30 @@ The simple name must be unique for a given location.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Where the name is located in element space.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#is_simple_name_internal#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Simple name exists only within the assets space and should not be propagated
+ elsewhere.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -20673,7 +20697,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-150.938,-56"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-151.688,-64.65;-148.8,-55.2"/>
+        <dia:rectangle val="-151.688,-63.85;-148.8,-55.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20682,7 +20706,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-150.938,-56"/>
         <dia:point val="-150.938,-59"/>
         <dia:point val="-149,-59"/>
-        <dia:point val="-149,-64.6"/>
+        <dia:point val="-149,-63.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -42330,7 +42354,7 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
         <dia:point val="89.365,-26.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="88.615,-28.15;95.05,-24.9"/>
+        <dia:rectangle val="88.615,-28.9;95.05,-25.7"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -42402,7 +42426,7 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
         <dia:point val="102.373,-27.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="98.3575,-27.95;103.123,-21.4"/>
+        <dia:rectangle val="98.3575,-27.95;103.123,-22.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
