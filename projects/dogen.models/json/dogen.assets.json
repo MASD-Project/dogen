@@ -3402,11 +3402,6 @@
           "documentation": "GUID to use for the Visual Studio solution for the project.\n"
         },
         {
-          "name": "project_name",
-          "type": "std::string",
-          "documentation": "Name of the visual studio project.\n"
-        },
-        {
           "name": "item_groups",
           "type": "std::list<visual_studio_item_group>",
           "documentation": "Set of item groups in the project.\n"

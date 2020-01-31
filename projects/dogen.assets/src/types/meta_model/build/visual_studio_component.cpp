@@ -68,7 +68,6 @@ visual_studio_component::visual_studio_component(
     const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
     const std::string& project_guid,
     const std::string& project_solution_guid,
-    const std::string& project_name,
     const std::list<dogen::assets::meta_model::build::visual_studio_item_group>& item_groups)
     : dogen::assets::meta_model::element(
       name,
@@ -89,7 +88,6 @@ visual_studio_component::visual_studio_component(
       decoration),
       project_guid_(project_guid),
       project_solution_guid_(project_solution_guid),
-      project_name_(project_name),
       item_groups_(item_groups) { }
 
 void visual_studio_component::accept(const element_visitor& v) const {
@@ -116,7 +114,6 @@ void visual_studio_component::to_stream(std::ostream& s) const {
     s << ", "
       << "\"project_guid\": " << "\"" << tidy_up_string(project_guid_) << "\"" << ", "
       << "\"project_solution_guid\": " << "\"" << tidy_up_string(project_solution_guid_) << "\"" << ", "
-      << "\"project_name\": " << "\"" << tidy_up_string(project_name_) << "\"" << ", "
       << "\"item_groups\": " << item_groups_
       << " }";
 }
@@ -127,7 +124,6 @@ void visual_studio_component::swap(visual_studio_component& other) noexcept {
     using std::swap;
     swap(project_guid_, other.project_guid_);
     swap(project_solution_guid_, other.project_solution_guid_);
-    swap(project_name_, other.project_name_);
     swap(item_groups_, other.item_groups_);
 }
 
@@ -141,7 +137,6 @@ bool visual_studio_component::operator==(const visual_studio_component& rhs) con
     return dogen::assets::meta_model::element::compare(rhs) &&
         project_guid_ == rhs.project_guid_ &&
         project_solution_guid_ == rhs.project_solution_guid_ &&
-        project_name_ == rhs.project_name_ &&
         item_groups_ == rhs.item_groups_;
 }
 
@@ -181,22 +176,6 @@ void visual_studio_component::project_solution_guid(const std::string& v) {
 
 void visual_studio_component::project_solution_guid(const std::string&& v) {
     project_solution_guid_ = std::move(v);
-}
-
-const std::string& visual_studio_component::project_name() const {
-    return project_name_;
-}
-
-std::string& visual_studio_component::project_name() {
-    return project_name_;
-}
-
-void visual_studio_component::project_name(const std::string& v) {
-    project_name_ = v;
-}
-
-void visual_studio_component::project_name(const std::string&& v) {
-    project_name_ = std::move(v);
 }
 
 const std::list<dogen::assets::meta_model::build::visual_studio_item_group>& visual_studio_component::item_groups() const {

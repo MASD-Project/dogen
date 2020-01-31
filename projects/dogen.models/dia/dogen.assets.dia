@@ -41606,7 +41606,7 @@ build systems.
         <dia:point val="70,-30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="69.95,-30.05;89.415,-23.95"/>
+        <dia:rectangle val="69.95,-30.05;89.415,-24.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="70,-30"/>
@@ -41615,7 +41615,7 @@ build systems.
         <dia:real val="19.365000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#visual_studio_component#</dia:string>
@@ -41741,29 +41741,6 @@ a component.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#GUID to use for the Visual Studio solution for the project.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#project_name#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Name of the visual studio project.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

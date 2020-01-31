@@ -66,7 +66,6 @@ public:
         const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
         const std::string& project_guid,
         const std::string& project_solution_guid,
-        const std::string& project_name,
         const std::list<dogen::assets::meta_model::build::visual_studio_item_group>& item_groups);
 
 public:
@@ -101,16 +100,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Name of the visual studio project.
-     */
-    /**@{*/
-    const std::string& project_name() const;
-    std::string& project_name();
-    void project_name(const std::string& v);
-    void project_name(const std::string&& v);
-    /**@}*/
-
-    /**
      * @brief Set of item groups in the project.
      */
     /**@{*/
@@ -136,7 +125,6 @@ public:
 private:
     std::string project_guid_;
     std::string project_solution_guid_;
-    std::string project_name_;
     std::list<dogen::assets::meta_model::build::visual_studio_item_group> item_groups_;
 };
 
