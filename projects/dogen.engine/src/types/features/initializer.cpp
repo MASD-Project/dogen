@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.engine/types/features/naming.hpp"
 #include "dogen.engine/types/features/initializer.hpp"
 #include "dogen.engine/types/features/model_location.hpp"
 
@@ -26,6 +27,7 @@ namespace dogen::engine::features {
 void initializer::
 register_templates(variability::helpers::feature_template_registrar& rg) {
     rg.register_templates(dogen::engine::features::model_location::make_templates());
+    rg.register_templates(dogen::engine::features::naming::make_templates());
 
 }
 

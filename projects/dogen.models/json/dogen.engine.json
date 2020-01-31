@@ -247,7 +247,7 @@
     },
     {
       "name": "features::model_location",
-      "documentation": "Feature group for name related features.\n",
+      "documentation": "Feature group for model location related features.\n",
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
@@ -283,6 +283,30 @@
         "masd::variability::feature_template_initializer"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::naming",
+      "documentation": "Feature group for name related features.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "element",
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.injection.is_simple_name_internal",
+          "type": "masd::variability::text",
+          "documentation": "If set to true, the simple name will be used only internally within assets.\n",
+          "tagged_values": {
+            "masd.variability.qualified_name": "masd.injection.is_simple_name_internal",
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
     }
   ]
 }
