@@ -21,6 +21,20 @@ Stories that we haven't quite classified yet, but are needed.
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Add model name to tracing dumps                                   :story:
+
+At present we are dumping just the transform name and GUID. This makes
+it really hard to figure out which model is in each transform. If the
+model name is not blank we should add it to the file name.
+
+*** Create a README meta-type                                         :story:
+
+Once we have a product generation framework, it makes sense to have
+the README as a meta-type, with its contents as markdown. We could
+then generate all of the emblems. These can be properties that we
+enable or disable in the meta-type as required (e.g. visual studio
+version, etc).
+
 *** Fix pictures in old release notes                                 :story:
 
 Many of the pictures we used in the past were in panoramio. These are
