@@ -44,7 +44,8 @@ namespace dogen::assets::helpers {
  */
 class name_builder {
 public:
-    explicit name_builder(const bool model_name_mode_ = false);
+    explicit name_builder(const bool model_name_mode_ = false,
+        const bool is_simple_name_internal = false);
 
 public:
     void simple_name(const std::string& sn);
@@ -81,6 +82,7 @@ public:
 
 private:
     const bool model_name_mode_;
+    const bool is_simple_name_internal_;
     meta_model::name name_;
     location_builder location_builder_;
 };

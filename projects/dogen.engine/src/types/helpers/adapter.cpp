@@ -27,9 +27,10 @@
 #include "dogen.assets/io/meta_model/location_io.hpp"
 #include "dogen.assets/types/helpers/name_builder.hpp"
 #include "dogen.assets/types/helpers/name_factory.hpp"
+#include "dogen.engine/types/helpers/adaptation_exception.hpp"
 #include "dogen.assets/types/helpers/string_processor.hpp"
 #include "dogen.engine/types/helpers/stereotypes_helper.hpp"
-#include "dogen.engine/types/helpers/adaptation_exception.hpp"
+#include "dogen.engine/types/features/naming.hpp"
 #include "dogen.engine/types/helpers/adapter.hpp"
 
 namespace {
@@ -97,7 +98,11 @@ to_potential_binding(const std::list<std::string>& stereotypes) const {
     return r;
 }
 
+adapter::adapter(const variability::meta_model::feature_model& fm)
+    : feature_model_(fm) {}
+
 assets::meta_model::name adapter::to_name(const assets::meta_model::location& l,
+    const bool is_simple_name_internal,
     const std::string& n) const {
     BOOST_LOG_SEV(lg, debug) << "Location: " << l;
     /*
@@ -106,7 +111,8 @@ assets::meta_model::name adapter::to_name(const assets::meta_model::location& l,
      */
     ensure_not_empty(n);
     auto tokens(utility::string::splitter::split_scoped(n));
-    assets::helpers::name_builder b;
+    using assets::helpers::name_builder;
+    name_builder b(false/*model_name_mode*/, is_simple_name_internal);
     b.simple_name(tokens.back());
     tokens.pop_back();
     if (!tokens.empty())
@@ -116,6 +122,11 @@ assets::meta_model::name adapter::to_name(const assets::meta_model::location& l,
     b.model_modules(l.model_modules());
 
     return b.build();
+}
+
+assets::meta_model::name adapter::to_name(const assets::meta_model::location& l,
+    const std::string& n) const {
+    return to_name(l, false/*is_simple_name_internal*/, n);
 }
 
 modeline_field
@@ -184,20 +195,37 @@ void adapter::populate_element(const assets::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie,
     assets::meta_model::element& e) const {
-    e.name(to_name(l, ie.name()));
+
+    /*
+     * Ensure we populate the configuration before we attempt to read
+     * any meta-data from it.
+     */
+    e.configuration(ie.configuration());
+    const auto& ds(scr.dynamic_stereotypes());
+    e.configuration()->profile_bindings(to_potential_binding(ds));
+
+    /*
+     * Now read the meta-data related to naming, and populate
+     * name. Then we can set the name for both the element and
+     * configuration.
+     */
+    const auto fg(features::naming::make_feature_group(feature_model_));
+    const auto scfg(features::naming::make_static_configuration(fg, e));
+    const auto isni(scfg.is_simple_name_internal ?
+        *scfg.is_simple_name_internal : false);
+
+    e.name(to_name(l, isni, ie.name()));
+    e.configuration()->name().qualified(e.name().qualified().dot());
+
+    /*
+     * Finally, populate all other attributes.
+     */
     e.origin_type(assets::meta_model::origin_types::not_yet_determined);
     e.documentation(ie.documentation());
     e.static_stereotypes(scr.static_stereotypes());
 
     e.origin_element_id(ie.origin_element_id());
     e.origin_sha1_hash(ie.origin_sha1_hash());
-
-    e.configuration(ie.configuration());
-    e.configuration()->name().qualified(e.name().qualified().dot());
-
-    const auto& ds(scr.dynamic_stereotypes());
-    e.configuration()->profile_bindings(to_potential_binding(ds));
-
     e.in_global_module(
         l.external_modules().empty() && l.model_modules().empty());
 }

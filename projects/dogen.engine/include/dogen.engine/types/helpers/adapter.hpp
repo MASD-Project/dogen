@@ -29,6 +29,7 @@
 #include <string>
 #include <iosfwd>
 #include <boost/shared_ptr.hpp>
+#include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.variability/types/meta_model/potential_binding.hpp"
 #include "dogen.injection/types/meta_model/attribute.hpp"
 #include "dogen.injection/types/meta_model/element.hpp"
@@ -64,6 +65,9 @@ namespace dogen::engine::helpers {
  * @brief Adapts types from the injection model into the assets model.
  */
 class adapter final {
+public:
+    explicit adapter(const variability::meta_model::feature_model& fm);
+
 private:
     /**
      * @brief Ensure the string is not empty.
@@ -93,8 +97,13 @@ private:
      *
      * @pre n must not be empty.
      */
+    /*@{*/
+    assets::meta_model::name to_name(const assets::meta_model::location& l,
+        const bool is_simple_name_internal,
+        const std::string& n) const;
     assets::meta_model::name to_name(const assets::meta_model::location& l,
         const std::string& n) const;
+    /*}@*/
 
     /**
      * @brief Converts an injection attribute to a modeline field.
@@ -312,6 +321,9 @@ public:
     to_visual_studio_component(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
+
+private:
+    const variability::meta_model::feature_model& feature_model_;
 };
 
 }

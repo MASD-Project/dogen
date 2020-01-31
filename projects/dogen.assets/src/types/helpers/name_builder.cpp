@@ -44,8 +44,10 @@ const std::string unexpected_simple_name("Simple name is not expected.");
 
 namespace dogen::assets::helpers {
 
-name_builder::name_builder(const bool model_name_mode)
-    : model_name_mode_(model_name_mode) { }
+name_builder::name_builder(const bool model_name_mode,
+    const bool is_simple_name_internal) :
+    model_name_mode_(model_name_mode),
+    is_simple_name_internal_(is_simple_name_internal) { }
 
 void name_builder::simple_name(const std::string& sn) {
     if (model_name_mode_) {
@@ -109,6 +111,7 @@ meta_model::name name_builder::build() {
     fully_qualified_representation_builder b;
     const auto fqr(b.build(name_, model_name_mode_));
     name_.qualified(fqr);
+    name_.is_simple_name_internal(is_simple_name_internal_);
 
     BOOST_LOG_SEV(lg, debug) << "Built name: " << name_;
     return name_;

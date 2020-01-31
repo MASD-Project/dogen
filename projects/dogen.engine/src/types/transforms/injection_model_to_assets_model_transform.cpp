@@ -285,7 +285,8 @@ apply(const context& ctx, const injection::meta_model::model& m) {
      * Then we populate all model elements by adapting the injection
      * elements into assets elements.
      */
-    const helpers::adapter ad;
+    const auto& fm(*ctx.injection_context().feature_model());
+    const helpers::adapter ad(fm);
     for (const auto& e : m.elements()) {
         const auto l(e.in_global_module() ? empty_location : model_location);
         process_element(ad, l, e, r);
