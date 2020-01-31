@@ -12,27 +12,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-01-31 Fri 16:39]
+#+CAPTION: Clock summary at [2020-01-31 Fri 17:22]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *27:58* |       |      | 100.0 |
+| *Total time*                                          | *28:34* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 27:58   |       |      | 100.0 |
-| Active                                                |         | 27:58 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 7:01 |  25.1 |
-| Create a demo and presentation for previous sprint    |         |       | 1:49 |   6.5 |
-| Sprint and product backlog grooming                   |         |       | 2:08 |   7.6 |
-| Create new playlist for assets work                   |         |       | 1:10 |   4.2 |
+| Stories                                               | 28:34   |       |      | 100.0 |
+| Active                                                |         | 28:34 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 7:01 |  24.6 |
+| Create a demo and presentation for previous sprint    |         |       | 1:49 |   6.4 |
+| Sprint and product backlog grooming                   |         |       | 2:08 |   7.5 |
+| Create new playlist for assets work                   |         |       | 1:10 |   4.1 |
 | Create the final video on the relational model series |         |       | 0:30 |   1.8 |
-| Move registrar into assets                            |         |       | 5:34 |  19.9 |
-| Fix error in asserter tests                           |         |       | 0:38 |   2.3 |
+| Move registrar into assets                            |         |       | 5:34 |  19.5 |
+| Fix error in asserter tests                           |         |       | 0:38 |   2.2 |
 | Add injection details to all models                   |         |       | 0:25 |   1.5 |
-| Fix nightly error in registrar                        |         |       | 0:33 |   2.0 |
+| Fix nightly error in registrar                        |         |       | 0:33 |   1.9 |
 | Nightly code coverage is not being reported           |         |       | 0:25 |   1.5 |
-| Fixes to setup                                        |         |       | 1:05 |   3.9 |
-| Cannot see source file in coveralls                   |         |       | 0:16 |   1.0 |
-| Move visual studio fabric types into assets           |         |       | 6:24 |  22.9 |
+| Fixes to setup                                        |         |       | 1:05 |   3.8 |
+| Cannot see source file in coveralls                   |         |       | 0:16 |   0.9 |
+| Move visual studio fabric types into assets           |         |       | 7:00 |  24.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -655,6 +655,7 @@ also can't see the fake commit we did.
 
 *** STARTED Move visual studio fabric types into assets               :story:
     :LOGBOOK:
+    CLOCK: [2020-01-31 Fri 16:46]--[2020-01-31 Fri 17:22] =>  0:36
     CLOCK: [2020-01-31 Fri 15:19]--[2020-01-31 Fri 16:22] =>  1:03
     CLOCK: [2020-01-31 Fri 13:51]--[2020-01-31 Fri 15:02] =>  1:27
     CLOCK: [2020-01-31 Fri 10:02]--[2020-01-31 Fri 10:23] =>  0:21
@@ -705,6 +706,22 @@ Notes:
   between them in terms of data members. That is, two files are
   associated to the same meta-element if they can be produced by
   roughly by one meta-model element.
+- remove types that are not "special" from decomposer to avoid
+  confusion.
+
+
+**** How to add new meta-model elements
+
+1. create the namespace and type in assets model.
+2. add enumerations for the meta-type in assets in static_stereotypes.
+3. add processing of new stereotype to =stereotypes_helper= in assets.
+4. add processing of new meta-type in =adapter= in engine, and also in
+   =injection_model_to_assets_model_transform=.
+5. add any meta-type specific transforms to assets.
+6. add meta-type to =elements_traversal.hpp=.
+7. =meta_naming_transform=, =meta_name_factory=.
+8. =origin_transform=.
+9. engine: =assets_model_to_generation_model_transform=.
 
 *** Improve error messages for mistakes in meta-data enums            :story:
 

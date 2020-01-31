@@ -129,10 +129,15 @@ make_templating_logic_less_templates_name() {
     return r;
 }
 
-meta_model::name meta_name_factory::
-make_serialization_type_registrar_name() {
+meta_model::name meta_name_factory::make_serialization_type_registrar_name() {
     static const auto r(
         make_name("serialization_type_registrar"));
+    return r;
+}
+
+meta_model::name meta_name_factory::make_build_visual_studio_compent_name() {
+    static const auto r(
+        make_name("build_visual_studio_component"));
     return r;
 }
 

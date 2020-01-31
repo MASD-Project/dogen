@@ -58,6 +58,8 @@ public:
     make_templating_logic_less_templates_name();
     static meta_model::name
     make_serialization_type_registrar_name();
+    static meta_model::name
+    make_build_visual_studio_compent_name();
 };
 
 }
