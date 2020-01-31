@@ -42,7 +42,7 @@
 #include "dogen.assets/types/helpers/name_builder.hpp"
 #include "dogen.assets/types/helpers/location_builder.hpp"
 #include "dogen.engine/io/helpers/stereotypes_conversion_result_io.hpp"
-#include "dogen.engine/types/features/naming.hpp"
+#include "dogen.engine/types/features/model_location.hpp"
 #include "dogen.engine/types/helpers/stereotypes_helper.hpp"
 #include "dogen.engine/types/transforms/context.hpp"
 #include "dogen.engine/types/transforms/transform_exception.hpp"
@@ -108,8 +108,8 @@ assets::meta_model::location
 injection_model_to_assets_model_transform::
 create_location(const context& ctx, const injection::meta_model::model& m) {
     const auto& fm(*ctx.assets_context().feature_model());
-    const auto fg(features::naming::make_feature_group(fm));
-    const auto scfg(features::naming::make_static_configuration(fg, m));
+    const auto fg(features::model_location::make_feature_group(fm));
+    const auto scfg(features::model_location::make_static_configuration(fg, m));
 
     assets::helpers::location_builder b;
     b.external_modules(scfg.external_modules);

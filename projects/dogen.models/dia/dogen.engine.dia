@@ -5788,7 +5788,7 @@ assets types.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#naming#</dia:string>
+        <dia:string>#model_location#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::variability::feature_bundle#</dia:string>

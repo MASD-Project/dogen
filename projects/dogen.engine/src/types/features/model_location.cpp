@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.engine/types/features/naming.hpp"
+#include "dogen.engine/types/features/model_location.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
@@ -65,8 +65,8 @@ make_masd_injection_model_modules() {
 
 }
 
-naming::feature_group
-naming::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+model_location::feature_group
+model_location::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
@@ -76,7 +76,7 @@ naming::make_feature_group(const dogen::variability::meta_model::feature_model& 
     return r;
 }
 
-naming::static_configuration naming::make_static_configuration(
+model_location::static_configuration model_location::make_static_configuration(
     const feature_group& fg,
     const dogen::variability::meta_model::configuration& cfg) {
 
@@ -89,7 +89,7 @@ naming::static_configuration naming::make_static_configuration(
 }
 
 std::list<dogen::variability::meta_model::feature_template>
-naming::make_templates() {
+model_location::make_templates() {
     using namespace dogen::variability::meta_model;
     std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_injection_external_modules());

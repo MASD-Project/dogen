@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ENGINE_TYPES_FEATURES_NAMING_HPP
-#define DOGEN_ENGINE_TYPES_FEATURES_NAMING_HPP
+#ifndef DOGEN_ENGINE_TYPES_FEATURES_MODEL_LOCATION_HPP
+#define DOGEN_ENGINE_TYPES_FEATURES_MODEL_LOCATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -37,7 +37,7 @@ namespace dogen::engine::features {
 /**
  * @brief Feature group for name related features.
  */
-class naming final {
+class model_location final {
 public:
     struct feature_group {
         variability::meta_model::feature external_modules;

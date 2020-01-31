@@ -246,7 +246,7 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "features::naming",
+      "name": "features::model_location",
       "documentation": "Feature group for name related features.\n",
       "stereotypes": [
         "masd::variability::feature_bundle"
