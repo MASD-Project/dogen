@@ -45,7 +45,8 @@
 #include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
 #include "dogen.assets/types/meta_model/templating/logic_less_template.hpp"
 #include "dogen.assets/types/meta_model/serialization/type_registrar.hpp"
-#include "dogen.assets/types/meta_model/build/visual_studio_component.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/solution.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/project.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
 #include "dogen.assets/types/transforms/transformation_error.hpp"
 #include "dogen.assets/types/transforms/origin_transform.hpp"
@@ -71,7 +72,7 @@ using namespace meta_model::decoration;
 using namespace meta_model::variability;
 using namespace meta_model::templating;
 using namespace meta_model::serialization;
-using namespace meta_model::build;
+using namespace meta_model::visual_studio;
 
 class updater {
 public:
@@ -100,7 +101,8 @@ public:
     void operator()(profile_template& v) { update(v); }
     void operator()(logic_less_template& v) { update(v); }
     void operator()(type_registrar& v) { update(v); }
-    void operator()(visual_studio_component& v) { update(v); }
+    void operator()(solution& v) { update(v); }
+    void operator()(project& v) { update(v); }
 
 private:
     const meta_model::origin_types origin_types_;

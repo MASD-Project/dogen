@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_META_MODEL_BUILD_VISUAL_STUDIO_ITEM_GROUP_HPP
-#define DOGEN_ASSETS_TYPES_META_MODEL_BUILD_VISUAL_STUDIO_ITEM_GROUP_HPP
+#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VISUAL_STUDIO_ITEM_GROUP_HPP
+#define DOGEN_ASSETS_TYPES_META_MODEL_VISUAL_STUDIO_ITEM_GROUP_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,9 +27,9 @@
 
 #include <list>
 #include <algorithm>
-#include "dogen.assets/types/meta_model/build/visual_studio_item.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/item.hpp"
 
-namespace dogen::assets::meta_model::build {
+namespace dogen::assets::meta_model::visual_studio {
 
 /**
  * @brief Represents an MSBuild ItemGroup.
@@ -37,39 +37,39 @@ namespace dogen::assets::meta_model::build {
  * Documented as follows: Contains a set of user-defined Item elements. Every item
  * used in a MSBuild project must be specified as a child of an ItemGroup element.
  */
-class visual_studio_item_group final {
+class item_group final {
 public:
-    visual_studio_item_group() = default;
-    visual_studio_item_group(const visual_studio_item_group&) = default;
-    visual_studio_item_group(visual_studio_item_group&&) = default;
-    ~visual_studio_item_group() = default;
+    item_group() = default;
+    item_group(const item_group&) = default;
+    item_group(item_group&&) = default;
+    ~item_group() = default;
 
 public:
-    explicit visual_studio_item_group(const std::list<dogen::assets::meta_model::build::visual_studio_item>& items);
+    explicit item_group(const std::list<dogen::assets::meta_model::visual_studio::item>& items);
 
 public:
     /**
      * @brief Set of MSBuild Items that make up this ItemGroup.
      */
     /**@{*/
-    const std::list<dogen::assets::meta_model::build::visual_studio_item>& items() const;
-    std::list<dogen::assets::meta_model::build::visual_studio_item>& items();
-    void items(const std::list<dogen::assets::meta_model::build::visual_studio_item>& v);
-    void items(const std::list<dogen::assets::meta_model::build::visual_studio_item>&& v);
+    const std::list<dogen::assets::meta_model::visual_studio::item>& items() const;
+    std::list<dogen::assets::meta_model::visual_studio::item>& items();
+    void items(const std::list<dogen::assets::meta_model::visual_studio::item>& v);
+    void items(const std::list<dogen::assets::meta_model::visual_studio::item>&& v);
     /**@}*/
 
 public:
-    bool operator==(const visual_studio_item_group& rhs) const;
-    bool operator!=(const visual_studio_item_group& rhs) const {
+    bool operator==(const item_group& rhs) const;
+    bool operator!=(const item_group& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(visual_studio_item_group& other) noexcept;
-    visual_studio_item_group& operator=(visual_studio_item_group other);
+    void swap(item_group& other) noexcept;
+    item_group& operator=(item_group other);
 
 private:
-    std::list<dogen::assets::meta_model::build::visual_studio_item> items_;
+    std::list<dogen::assets::meta_model::visual_studio::item> items_;
 };
 
 }
@@ -78,8 +78,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::assets::meta_model::build::visual_studio_item_group& lhs,
-    dogen::assets::meta_model::build::visual_studio_item_group& rhs) {
+    dogen::assets::meta_model::visual_studio::item_group& lhs,
+    dogen::assets::meta_model::visual_studio::item_group& rhs) {
     lhs.swap(rhs);
 }
 

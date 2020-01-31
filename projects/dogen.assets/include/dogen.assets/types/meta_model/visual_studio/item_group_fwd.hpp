@@ -18,16 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_META_MODEL_BUILD_VISUAL_STUDIO_COMPONENT_FWD_HPP
-#define DOGEN_ASSETS_TYPES_META_MODEL_BUILD_VISUAL_STUDIO_COMPONENT_FWD_HPP
+#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VISUAL_STUDIO_ITEM_GROUP_FWD_HPP
+#define DOGEN_ASSETS_TYPES_META_MODEL_VISUAL_STUDIO_ITEM_GROUP_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::assets::meta_model::build {
+namespace dogen::assets::meta_model::visual_studio {
 
-class visual_studio_component;
+class item_group;
 
 }
 

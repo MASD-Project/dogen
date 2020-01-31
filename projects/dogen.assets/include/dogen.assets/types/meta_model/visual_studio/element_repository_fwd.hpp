@@ -18,18 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_META_MODEL_BUILD_BUILD_HPP
-#define DOGEN_ASSETS_TYPES_META_MODEL_BUILD_BUILD_HPP
+#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VISUAL_STUDIO_ELEMENT_REPOSITORY_FWD_HPP
+#define DOGEN_ASSETS_TYPES_META_MODEL_VISUAL_STUDIO_ELEMENT_REPOSITORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-/**
- * @brief Houses meta-model elements related to
- * build systems.
- */
-namespace dogen::assets::meta_model {
+namespace dogen::assets::meta_model::visual_studio {
+
+class element_repository;
+
 }
 
 #endif

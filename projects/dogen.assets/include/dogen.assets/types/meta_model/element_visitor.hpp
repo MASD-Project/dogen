@@ -33,8 +33,10 @@
 #include "dogen.assets/types/meta_model/decoration/modeline_fwd.hpp"
 #include "dogen.assets/types/meta_model/structural/exception_fwd.hpp"
 #include "dogen.assets/types/meta_model/structural/primitive_fwd.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/project_fwd.hpp"
 #include "dogen.assets/types/meta_model/mapping/fixed_mappable_fwd.hpp"
 #include "dogen.assets/types/meta_model/structural/enumeration_fwd.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/solution_fwd.hpp"
 #include "dogen.assets/types/meta_model/decoration/modeline_group_fwd.hpp"
 #include "dogen.assets/types/meta_model/structural/object_template_fwd.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_bundle_fwd.hpp"
@@ -42,7 +44,6 @@
 #include "dogen.assets/types/meta_model/decoration/generation_marker_fwd.hpp"
 #include "dogen.assets/types/meta_model/serialization/type_registrar_fwd.hpp"
 #include "dogen.assets/types/meta_model/variability/profile_template_fwd.hpp"
-#include "dogen.assets/types/meta_model/build/visual_studio_component_fwd.hpp"
 #include "dogen.assets/types/meta_model/templating/logic_less_template_fwd.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_template_initializer_fwd.hpp"
 
@@ -56,16 +57,6 @@ public:
     virtual ~element_visitor() noexcept = 0;
 
 public:
-    /**
-     * @brief Accept visits for type dogen::assets::meta_model::build::visual_studio_component
-     */
-    /**@{*/
-    virtual void visit(const dogen::assets::meta_model::build::visual_studio_component&) const { }
-    virtual void visit(const dogen::assets::meta_model::build::visual_studio_component&) { }
-    virtual void visit(dogen::assets::meta_model::build::visual_studio_component&) const { }
-    virtual void visit(dogen::assets::meta_model::build::visual_studio_component&) { }
-    /**@}*/
-
     /**
      * @brief Accept visits for type dogen::assets::meta_model::decoration::generation_marker
      */
@@ -254,6 +245,26 @@ public:
     virtual void visit(const dogen::assets::meta_model::variability::profile_template&) { }
     virtual void visit(dogen::assets::meta_model::variability::profile_template&) const { }
     virtual void visit(dogen::assets::meta_model::variability::profile_template&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::assets::meta_model::visual_studio::project
+     */
+    /**@{*/
+    virtual void visit(const dogen::assets::meta_model::visual_studio::project&) const { }
+    virtual void visit(const dogen::assets::meta_model::visual_studio::project&) { }
+    virtual void visit(dogen::assets::meta_model::visual_studio::project&) const { }
+    virtual void visit(dogen::assets::meta_model::visual_studio::project&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::assets::meta_model::visual_studio::solution
+     */
+    /**@{*/
+    virtual void visit(const dogen::assets::meta_model::visual_studio::solution&) const { }
+    virtual void visit(const dogen::assets::meta_model::visual_studio::solution&) { }
+    virtual void visit(dogen::assets::meta_model::visual_studio::solution&) const { }
+    virtual void visit(dogen::assets::meta_model::visual_studio::solution&) { }
     /**@}*/
 };
 

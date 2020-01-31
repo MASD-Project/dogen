@@ -12,27 +12,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-01-31 Fri 17:22]
+#+CAPTION: Clock summary at [2020-01-31 Fri 21:27]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *28:34* |       |      | 100.0 |
+| *Total time*                                          | *31:01* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 28:34   |       |      | 100.0 |
-| Active                                                |         | 28:34 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 7:01 |  24.6 |
-| Create a demo and presentation for previous sprint    |         |       | 1:49 |   6.4 |
-| Sprint and product backlog grooming                   |         |       | 2:08 |   7.5 |
-| Create new playlist for assets work                   |         |       | 1:10 |   4.1 |
-| Create the final video on the relational model series |         |       | 0:30 |   1.8 |
-| Move registrar into assets                            |         |       | 5:34 |  19.5 |
-| Fix error in asserter tests                           |         |       | 0:38 |   2.2 |
-| Add injection details to all models                   |         |       | 0:25 |   1.5 |
-| Fix nightly error in registrar                        |         |       | 0:33 |   1.9 |
-| Nightly code coverage is not being reported           |         |       | 0:25 |   1.5 |
-| Fixes to setup                                        |         |       | 1:05 |   3.8 |
+| Stories                                               | 31:01   |       |      | 100.0 |
+| Active                                                |         | 31:01 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 7:01 |  22.6 |
+| Create a demo and presentation for previous sprint    |         |       | 1:49 |   5.9 |
+| Sprint and product backlog grooming                   |         |       | 2:08 |   6.9 |
+| Create new playlist for assets work                   |         |       | 1:22 |   4.4 |
+| Create the final video on the relational model series |         |       | 0:30 |   1.6 |
+| Move registrar into assets                            |         |       | 5:34 |  17.9 |
+| Fix error in asserter tests                           |         |       | 0:38 |   2.0 |
+| Add injection details to all models                   |         |       | 0:25 |   1.3 |
+| Fix nightly error in registrar                        |         |       | 0:33 |   1.8 |
+| Nightly code coverage is not being reported           |         |       | 0:25 |   1.3 |
+| Fixes to setup                                        |         |       | 1:05 |   3.5 |
 | Cannot see source file in coveralls                   |         |       | 0:16 |   0.9 |
-| Move visual studio fabric types into assets           |         |       | 7:00 |  24.5 |
+| Move visual studio fabric types into assets           |         |       | 9:15 |  29.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -352,6 +352,7 @@ Updates to sprint and product backlog.
 
 *** STARTED Create new playlist for assets work                       :story:
     :LOGBOOK:
+    CLOCK: [2020-01-31 Fri 17:22]--[2020-01-31 Fri 17:34] =>  0:12
     CLOCK: [2020-01-31 Fri 16:35]--[2020-01-31 Fri 16:39] =>  0:04
     CLOCK: [2020-01-31 Fri 10:24]--[2020-01-31 Fri 10:58] =>  0:34
     CLOCK: [2020-01-31 Fri 09:03]--[2020-01-31 Fri 09:35] =>  0:32
@@ -655,6 +656,9 @@ also can't see the fake commit we did.
 
 *** STARTED Move visual studio fabric types into assets               :story:
     :LOGBOOK:
+    CLOCK: [2020-01-31 Fri 20:01]--[2020-01-31 Fri 21:26] =>  1:25
+    CLOCK: [2020-01-31 Fri 18:55]--[2020-01-31 Fri 19:40] =>  0:45
+    CLOCK: [2020-01-31 Fri 17:35]--[2020-01-31 Fri 17:40] =>  0:05
     CLOCK: [2020-01-31 Fri 16:46]--[2020-01-31 Fri 17:22] =>  0:36
     CLOCK: [2020-01-31 Fri 15:19]--[2020-01-31 Fri 16:22] =>  1:03
     CLOCK: [2020-01-31 Fri 13:51]--[2020-01-31 Fri 15:02] =>  1:27
@@ -708,7 +712,6 @@ Notes:
   roughly by one meta-model element.
 - remove types that are not "special" from decomposer to avoid
   confusion.
-
 
 **** How to add new meta-model elements
 

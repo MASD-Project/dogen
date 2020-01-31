@@ -18,62 +18,62 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.assets/types/meta_model/build/visual_studio_item.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/item.hpp"
 
-namespace dogen::assets::meta_model::build {
+namespace dogen::assets::meta_model::visual_studio {
 
-visual_studio_item::visual_studio_item(
+item::item(
     const std::string& name,
     const std::string& include)
     : name_(name),
       include_(include) { }
 
-void visual_studio_item::swap(visual_studio_item& other) noexcept {
+void item::swap(item& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(include_, other.include_);
 }
 
-bool visual_studio_item::operator==(const visual_studio_item& rhs) const {
+bool item::operator==(const item& rhs) const {
     return name_ == rhs.name_ &&
         include_ == rhs.include_;
 }
 
-visual_studio_item& visual_studio_item::operator=(visual_studio_item other) {
+item& item::operator=(item other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::string& visual_studio_item::name() const {
+const std::string& item::name() const {
     return name_;
 }
 
-std::string& visual_studio_item::name() {
+std::string& item::name() {
     return name_;
 }
 
-void visual_studio_item::name(const std::string& v) {
+void item::name(const std::string& v) {
     name_ = v;
 }
 
-void visual_studio_item::name(const std::string&& v) {
+void item::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-const std::string& visual_studio_item::include() const {
+const std::string& item::include() const {
     return include_;
 }
 
-std::string& visual_studio_item::include() {
+std::string& item::include() {
     return include_;
 }
 
-void visual_studio_item::include(const std::string& v) {
+void item::include(const std::string& v) {
     include_ = v;
 }
 
-void visual_studio_item::include(const std::string&& v) {
+void item::include(const std::string&& v) {
     include_ = std::move(v);
 }
 

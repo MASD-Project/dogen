@@ -56,7 +56,8 @@
 #include "dogen.assets/types/meta_model/mapping/extensible_mappable.hpp"
 #include "dogen.assets/types/meta_model/templating/logic_less_template.hpp"
 #include "dogen.assets/types/meta_model/serialization/type_registrar.hpp"
-#include "dogen.assets/types/meta_model/build/visual_studio_component.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/solution.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/project.hpp"
 #include "dogen.engine/types/helpers/stereotypes_conversion_result.hpp"
 
 namespace dogen::engine::helpers {
@@ -317,8 +318,17 @@ public:
      * @brief Converts an injection element with a stereotype of
      * @e masd::build::visual_studio::component.
      */
-    boost::shared_ptr<assets::meta_model::build::visual_studio_component>
-    to_visual_studio_component(const assets::meta_model::location& l,
+    boost::shared_ptr<assets::meta_model::visual_studio::solution>
+    to_visual_studio_solution(const assets::meta_model::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::meta_model::element& ie) const;
+
+    /**
+     * @brief Converts an injection element with a stereotype of
+     * @e masd::build::visual_studio::component.
+     */
+    boost::shared_ptr<assets::meta_model::visual_studio::project>
+    to_visual_studio_project(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 

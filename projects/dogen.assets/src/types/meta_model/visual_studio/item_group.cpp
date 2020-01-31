@@ -18,41 +18,41 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.assets/types/meta_model/build/visual_studio_item_group.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/item_group.hpp"
 
-namespace dogen::assets::meta_model::build {
+namespace dogen::assets::meta_model::visual_studio {
 
-visual_studio_item_group::visual_studio_item_group(const std::list<dogen::assets::meta_model::build::visual_studio_item>& items)
+item_group::item_group(const std::list<dogen::assets::meta_model::visual_studio::item>& items)
     : items_(items) { }
 
-void visual_studio_item_group::swap(visual_studio_item_group& other) noexcept {
+void item_group::swap(item_group& other) noexcept {
     using std::swap;
     swap(items_, other.items_);
 }
 
-bool visual_studio_item_group::operator==(const visual_studio_item_group& rhs) const {
+bool item_group::operator==(const item_group& rhs) const {
     return items_ == rhs.items_;
 }
 
-visual_studio_item_group& visual_studio_item_group::operator=(visual_studio_item_group other) {
+item_group& item_group::operator=(item_group other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::list<dogen::assets::meta_model::build::visual_studio_item>& visual_studio_item_group::items() const {
+const std::list<dogen::assets::meta_model::visual_studio::item>& item_group::items() const {
     return items_;
 }
 
-std::list<dogen::assets::meta_model::build::visual_studio_item>& visual_studio_item_group::items() {
+std::list<dogen::assets::meta_model::visual_studio::item>& item_group::items() {
     return items_;
 }
 
-void visual_studio_item_group::items(const std::list<dogen::assets::meta_model::build::visual_studio_item>& v) {
+void item_group::items(const std::list<dogen::assets::meta_model::visual_studio::item>& v) {
     items_ = v;
 }
 
-void visual_studio_item_group::items(const std::list<dogen::assets::meta_model::build::visual_studio_item>&& v) {
+void item_group::items(const std::list<dogen::assets::meta_model::visual_studio::item>&& v) {
     items_ = std::move(v);
 }
 

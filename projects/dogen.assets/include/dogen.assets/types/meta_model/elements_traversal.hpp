@@ -43,7 +43,8 @@
 #include "dogen.assets/types/meta_model/variability/feature_template_initializer.hpp"
 #include "dogen.assets/types/meta_model/templating/logic_less_template.hpp"
 #include "dogen.assets/types/meta_model/serialization/type_registrar.hpp"
-#include "dogen.assets/types/meta_model/build/visual_studio_component.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/solution.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/project.hpp"
 
 namespace dogen::assets::meta_model {
 
@@ -106,7 +107,10 @@ inline void elements_traversal(const meta_model::model& m,
     for (const auto& pair : m.serialization_elements().type_registrars())
         v(*pair.second);
 
-    for (const auto& pair : m.build_elements().visual_studio_components())
+    for (const auto& pair : m.visual_studio_elements().solutions())
+        v(*pair.second);
+
+    for (const auto& pair : m.visual_studio_elements().projects())
         v(*pair.second);
 }
 
@@ -164,7 +168,10 @@ inline void elements_traversal(const meta_model::model& m,
     for (const auto& pair : m.serialization_elements().type_registrars())
         v(*pair.second);
 
-    for (const auto& pair : m.build_elements().visual_studio_components())
+    for (const auto& pair : m.visual_studio_elements().solutions())
+        v(*pair.second);
+
+    for (const auto& pair : m.visual_studio_elements().projects())
         v(*pair.second);
 }
 
@@ -222,7 +229,10 @@ inline void elements_traversal(meta_model::model& m,
     for (const auto& pair : m.serialization_elements().type_registrars())
         v(*pair.second);
 
-    for (const auto& pair : m.build_elements().visual_studio_components())
+    for (const auto& pair : m.visual_studio_elements().solutions())
+        v(*pair.second);
+
+    for (const auto& pair : m.visual_studio_elements().projects())
         v(*pair.second);
 }
 /**@}*/
@@ -286,7 +296,10 @@ inline void shared_elements_traversal(const meta_model::model& m,
     for (const auto& pair : m.serialization_elements().type_registrars())
         v(pair.second);
 
-    for (const auto& pair : m.build_elements().visual_studio_components())
+    for (const auto& pair : m.visual_studio_elements().solutions())
+        v(pair.second);
+
+    for (const auto& pair : m.visual_studio_elements().projects())
         v(pair.second);
 }
 
@@ -344,7 +357,10 @@ inline void shared_elements_traversal(const meta_model::model& m,
     for (const auto& pair : m.serialization_elements().type_registrars())
         v(pair.second);
 
-    for (const auto& pair : m.build_elements().visual_studio_components())
+    for (const auto& pair : m.visual_studio_elements().solutions())
+        v(pair.second);
+
+    for (const auto& pair : m.visual_studio_elements().projects())
         v(pair.second);
 }
 
@@ -402,7 +418,10 @@ inline void shared_elements_traversal(meta_model::model& m,
     for (const auto& pair : m.serialization_elements().type_registrars())
         v(pair.second);
 
-    for (const auto& pair : m.build_elements().visual_studio_components())
+    for (const auto& pair : m.visual_studio_elements().solutions())
+        v(pair.second);
+
+    for (const auto& pair : m.visual_studio_elements().projects())
         v(pair.second);
 }
 /**@}*/

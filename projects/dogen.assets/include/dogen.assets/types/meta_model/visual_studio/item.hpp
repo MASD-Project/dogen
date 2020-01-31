@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_META_MODEL_BUILD_VISUAL_STUDIO_ITEM_HPP
-#define DOGEN_ASSETS_TYPES_META_MODEL_BUILD_VISUAL_STUDIO_ITEM_HPP
+#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VISUAL_STUDIO_ITEM_HPP
+#define DOGEN_ASSETS_TYPES_META_MODEL_VISUAL_STUDIO_ITEM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen::assets::meta_model::build {
+namespace dogen::assets::meta_model::visual_studio {
 
 /**
  * @brief Represents an MSBuild Item, used in Visual Studio projects.
@@ -36,15 +36,15 @@ namespace dogen::assets::meta_model::build {
  * Documentation:  Contains a user-defined item and its metadata. Every item that is
  * used in a MSBuild project must be specified as a child of an ItemGroup element.
  */
-class visual_studio_item final {
+class item final {
 public:
-    visual_studio_item() = default;
-    visual_studio_item(const visual_studio_item&) = default;
-    visual_studio_item(visual_studio_item&&) = default;
-    ~visual_studio_item() = default;
+    item() = default;
+    item(const item&) = default;
+    item(item&&) = default;
+    ~item() = default;
 
 public:
-    visual_studio_item(
+    item(
         const std::string& name,
         const std::string& include);
 
@@ -60,14 +60,14 @@ public:
     void include(const std::string&& v);
 
 public:
-    bool operator==(const visual_studio_item& rhs) const;
-    bool operator!=(const visual_studio_item& rhs) const {
+    bool operator==(const item& rhs) const;
+    bool operator!=(const item& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(visual_studio_item& other) noexcept;
-    visual_studio_item& operator=(visual_studio_item other);
+    void swap(item& other) noexcept;
+    item& operator=(item other);
 
 private:
     std::string name_;
@@ -80,8 +80,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::assets::meta_model::build::visual_studio_item& lhs,
-    dogen::assets::meta_model::build::visual_studio_item& rhs) {
+    dogen::assets::meta_model::visual_studio::item& lhs,
+    dogen::assets::meta_model::visual_studio::item& rhs) {
     lhs.swap(rhs);
 }
 

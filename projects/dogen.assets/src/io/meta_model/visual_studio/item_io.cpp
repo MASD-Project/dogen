@@ -18,17 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_META_MODEL_BUILD_VISUAL_STUDIO_ITEM_GROUP_FWD_HPP
-#define DOGEN_ASSETS_TYPES_META_MODEL_BUILD_VISUAL_STUDIO_ITEM_GROUP_FWD_HPP
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen.assets/io/meta_model/visual_studio/item_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-namespace dogen::assets::meta_model::build {
-
-class visual_studio_item_group;
-
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
 }
 
-#endif
+namespace dogen::assets::meta_model::visual_studio {
+
+std::ostream& operator<<(std::ostream& s, const item& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::assets::meta_model::visual_studio::item\"" << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"include\": " << "\"" << tidy_up_string(v.include()) << "\""
+      << " }";
+    return(s);
+}
+
+}

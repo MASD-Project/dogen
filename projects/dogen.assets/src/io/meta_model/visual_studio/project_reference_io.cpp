@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.assets/io/meta_model/build/visual_studio_item_io.hpp"
+#include "dogen.assets/io/meta_model/visual_studio/project_reference_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -30,13 +30,14 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen::assets::meta_model::build {
+namespace dogen::assets::meta_model::visual_studio {
 
-std::ostream& operator<<(std::ostream& s, const visual_studio_item& v) {
+std::ostream& operator<<(std::ostream& s, const project_reference& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::assets::meta_model::build::visual_studio_item\"" << ", "
+      << "\"__type__\": " << "\"dogen::assets::meta_model::visual_studio::project_reference\"" << ", "
+      << "\"guid\": " << "\"" << tidy_up_string(v.guid()) << "\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"include\": " << "\"" << tidy_up_string(v.include()) << "\""
+      << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\""
       << " }";
     return(s);
 }

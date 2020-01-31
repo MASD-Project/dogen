@@ -18,32 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen.assets/io/meta_model/build/visual_studio_item_io.hpp"
-#include "dogen.assets/io/meta_model/build/visual_studio_item_group_io.hpp"
+#ifndef DOGEN_ASSETS_IO_META_MODEL_VISUAL_STUDIO_ITEM_IO_HPP
+#define DOGEN_ASSETS_IO_META_MODEL_VISUAL_STUDIO_ITEM_IO_HPP
 
-namespace std {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::meta_model::build::visual_studio_item>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
+#include <iosfwd>
+#include "dogen.assets/types/meta_model/visual_studio/item.hpp"
 
-}
+namespace dogen::assets::meta_model::visual_studio {
 
-namespace dogen::assets::meta_model::build {
-
-std::ostream& operator<<(std::ostream& s, const visual_studio_item_group& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::assets::meta_model::build::visual_studio_item_group\"" << ", "
-      << "\"items\": " << v.items()
-      << " }";
-    return(s);
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::assets::meta_model::visual_studio::item& v);
 
 }
+
+#endif

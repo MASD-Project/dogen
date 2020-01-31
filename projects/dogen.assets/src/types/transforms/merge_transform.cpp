@@ -84,8 +84,10 @@ merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
                              << src.decoration_elements().licences().size()
                              << " type registrars: "
                              << src.serialization_elements().type_registrars().size()
-                             << " visual studio components: "
-                             << src.build_elements().visual_studio_components().size();
+                             << " visual studio solutions: "
+                             << src.visual_studio_elements().solutions().size()
+                             << " visual studio projects: "
+                             << src.visual_studio_elements().projects().size();
 
     copy(src.structural_elements().modules(), dst.structural_elements().modules());
     copy(src.structural_elements().object_templates(), dst.structural_elements().object_templates());
@@ -102,7 +104,8 @@ merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
     copy(src.mapping_elements().fixed_mappables(), dst.mapping_elements().fixed_mappables());
     copy(src.mapping_elements().extensible_mappables(), dst.mapping_elements().extensible_mappables());
     copy(src.serialization_elements().type_registrars(), dst.serialization_elements().type_registrars());
-    copy(src.build_elements().visual_studio_components(), dst.build_elements().visual_studio_components());
+    copy(src.visual_studio_elements().solutions(), dst.visual_studio_elements().solutions());
+    copy(src.visual_studio_elements().projects(), dst.visual_studio_elements().projects());
 
     /*
      * Update the references of the merged model.

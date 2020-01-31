@@ -41,7 +41,8 @@
 #include "dogen.assets/types/meta_model/variability/feature_template_initializer.hpp"
 #include "dogen.assets/types/meta_model/templating/logic_less_template.hpp"
 #include "dogen.assets/types/meta_model/serialization/type_registrar.hpp"
-#include "dogen.assets/types/meta_model/build/visual_studio_component.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/solution.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/project.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/io/meta_model/technical_space_io.hpp"
 #include "dogen.assets/types/helpers/meta_name_factory.hpp"
@@ -166,9 +167,14 @@ public:
         add(tg);
     }
 
-    void operator()(boost::shared_ptr<assets::meta_model::build::
-        visual_studio_component> tg) {
-        add(tg);
+    void operator()(boost::shared_ptr<assets::meta_model::visual_studio::
+        solution> s) {
+        add(s);
+    }
+
+    void operator()(boost::shared_ptr<assets::meta_model::visual_studio::
+        project> p) {
+        add(p);
     }
 
 public:
@@ -208,7 +214,8 @@ compute_total_size(const assets::meta_model::model& m) {
         != nullptr ?  1 : 0;
     r += m.templating_elements().logic_less_templates().size();
     r += m.serialization_elements().type_registrars().size();
-    r += m.build_elements().visual_studio_components().size();
+    r += m.visual_studio_elements().solutions().size();
+    r += m.visual_studio_elements().projects().size();
 
     return r;
 }

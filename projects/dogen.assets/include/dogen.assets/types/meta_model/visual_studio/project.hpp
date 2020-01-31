@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_META_MODEL_BUILD_VISUAL_STUDIO_COMPONENT_HPP
-#define DOGEN_ASSETS_TYPES_META_MODEL_BUILD_VISUAL_STUDIO_COMPONENT_HPP
+#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VISUAL_STUDIO_PROJECT_HPP
+#define DOGEN_ASSETS_TYPES_META_MODEL_VISUAL_STUDIO_PROJECT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,24 +30,23 @@
 #include <string>
 #include <algorithm>
 #include "dogen.assets/types/meta_model/element.hpp"
-#include "dogen.assets/types/meta_model/build/visual_studio_item_group.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/item_group.hpp"
 
-namespace dogen::assets::meta_model::build {
+namespace dogen::assets::meta_model::visual_studio {
 
 /**
- * @brief Gathers the information required to make Visual Studio projects and solutions for
- * a component.
+ * @brief Represents a Visual Studio project.
  */
-class visual_studio_component final : public dogen::assets::meta_model::element {
+class project final : public dogen::assets::meta_model::element {
 public:
-    visual_studio_component() = default;
-    visual_studio_component(const visual_studio_component&) = default;
-    visual_studio_component(visual_studio_component&&) = default;
+    project() = default;
+    project(const project&) = default;
+    project(project&&) = default;
 
-    virtual ~visual_studio_component() noexcept { }
+    virtual ~project() noexcept { }
 
 public:
-    visual_studio_component(
+    project(
         const dogen::assets::meta_model::name& name,
         const std::string& documentation,
         const dogen::assets::meta_model::origin_types origin_type,
@@ -64,9 +63,8 @@ public:
         const std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
-        const std::string& project_guid,
-        const std::string& project_solution_guid,
-        const std::list<dogen::assets::meta_model::build::visual_studio_item_group>& item_groups);
+        const std::string& guid,
+        const std::list<dogen::assets::meta_model::visual_studio::item_group>& item_groups);
 
 public:
     using element::accept;
@@ -80,38 +78,28 @@ public:
 
 public:
     /**
-     * @brief GUID to use for the Visual Studio project.
+     * @brief GUID that uniquely identifies this element.
      */
     /**@{*/
-    const std::string& project_guid() const;
-    std::string& project_guid();
-    void project_guid(const std::string& v);
-    void project_guid(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief GUID to use for the Visual Studio solution for the project.
-     */
-    /**@{*/
-    const std::string& project_solution_guid() const;
-    std::string& project_solution_guid();
-    void project_solution_guid(const std::string& v);
-    void project_solution_guid(const std::string&& v);
+    const std::string& guid() const;
+    std::string& guid();
+    void guid(const std::string& v);
+    void guid(const std::string&& v);
     /**@}*/
 
     /**
      * @brief Set of item groups in the project.
      */
     /**@{*/
-    const std::list<dogen::assets::meta_model::build::visual_studio_item_group>& item_groups() const;
-    std::list<dogen::assets::meta_model::build::visual_studio_item_group>& item_groups();
-    void item_groups(const std::list<dogen::assets::meta_model::build::visual_studio_item_group>& v);
-    void item_groups(const std::list<dogen::assets::meta_model::build::visual_studio_item_group>&& v);
+    const std::list<dogen::assets::meta_model::visual_studio::item_group>& item_groups() const;
+    std::list<dogen::assets::meta_model::visual_studio::item_group>& item_groups();
+    void item_groups(const std::list<dogen::assets::meta_model::visual_studio::item_group>& v);
+    void item_groups(const std::list<dogen::assets::meta_model::visual_studio::item_group>&& v);
     /**@}*/
 
 public:
-    bool operator==(const visual_studio_component& rhs) const;
-    bool operator!=(const visual_studio_component& rhs) const {
+    bool operator==(const project& rhs) const;
+    bool operator!=(const project& rhs) const {
         return !this->operator==(rhs);
     }
 
@@ -119,13 +107,12 @@ public:
     bool equals(const dogen::assets::meta_model::element& other) const override;
 
 public:
-    void swap(visual_studio_component& other) noexcept;
-    visual_studio_component& operator=(visual_studio_component other);
+    void swap(project& other) noexcept;
+    project& operator=(project other);
 
 private:
-    std::string project_guid_;
-    std::string project_solution_guid_;
-    std::list<dogen::assets::meta_model::build::visual_studio_item_group> item_groups_;
+    std::string guid_;
+    std::list<dogen::assets::meta_model::visual_studio::item_group> item_groups_;
 };
 
 }
@@ -134,8 +121,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::assets::meta_model::build::visual_studio_component& lhs,
-    dogen::assets::meta_model::build::visual_studio_component& rhs) {
+    dogen::assets::meta_model::visual_studio::project& lhs,
+    dogen::assets::meta_model::visual_studio::project& rhs) {
     lhs.swap(rhs);
 }
 

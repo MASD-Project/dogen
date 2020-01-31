@@ -18,21 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_IO_META_MODEL_BUILD_VISUAL_STUDIO_ITEM_GROUP_IO_HPP
-#define DOGEN_ASSETS_IO_META_MODEL_BUILD_VISUAL_STUDIO_ITEM_GROUP_IO_HPP
+#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VISUAL_STUDIO_ITEM_FWD_HPP
+#define DOGEN_ASSETS_TYPES_META_MODEL_VISUAL_STUDIO_ITEM_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen.assets/types/meta_model/build/visual_studio_item_group.hpp"
+namespace dogen::assets::meta_model::visual_studio {
 
-namespace dogen::assets::meta_model::build {
-
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::assets::meta_model::build::visual_studio_item_group& v);
+class item;
 
 }
 

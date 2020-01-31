@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen.assets/io/meta_model/element_io.hpp"
-#include "dogen.assets/io/meta_model/build/visual_studio_component_io.hpp"
-#include "dogen.assets/io/meta_model/build/visual_studio_item_group_io.hpp"
+#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VISUAL_STUDIO_PROJECT_REFERENCE_FWD_HPP
+#define DOGEN_ASSETS_TYPES_META_MODEL_VISUAL_STUDIO_PROJECT_REFERENCE_FWD_HPP
 
-namespace dogen::assets::meta_model::build {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const visual_studio_component& v) {
-    v.to_stream(s);
-    return(s);
-}
+namespace dogen::assets::meta_model::visual_studio {
+
+class project_reference;
 
 }
+
+#endif

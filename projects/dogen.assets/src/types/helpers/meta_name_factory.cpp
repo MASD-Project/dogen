@@ -135,9 +135,15 @@ meta_model::name meta_name_factory::make_serialization_type_registrar_name() {
     return r;
 }
 
-meta_model::name meta_name_factory::make_build_visual_studio_compent_name() {
+meta_model::name meta_name_factory::make_build_visual_studio_solution_name() {
     static const auto r(
-        make_name("build_visual_studio_component"));
+        make_name("build_visual_studio_solution"));
+    return r;
+}
+
+meta_model::name meta_name_factory::make_build_visual_studio_project_name() {
+    static const auto r(
+        make_name("build_visual_studio_project"));
     return r;
 }
 

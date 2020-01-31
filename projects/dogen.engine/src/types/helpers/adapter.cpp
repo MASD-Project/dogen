@@ -51,8 +51,7 @@ const std::string add_origin_sha1_hash_attr_name("add_origin_sha1_hash");
 const std::string true_value("true");
 const std::string false_value("false");
 
-const std::string project_guid_attr_name("project_guid");
-const std::string project_solution_guid_attr_name("project_solution_guid");
+const std::string guid_attr_name("guid");
 
 const std::string empty_string("String is empty but expected value.");
 const std::string non_empty_string(
@@ -564,12 +563,12 @@ adapter::to_type_registrar(const assets::meta_model::location& l,
     return r;
 }
 
-boost::shared_ptr<assets::meta_model::build::visual_studio_component>
-adapter::to_visual_studio_component(const assets::meta_model::location& l,
+boost::shared_ptr<assets::meta_model::visual_studio::solution>
+adapter::to_visual_studio_solution(const assets::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
-    using assets::meta_model::build::visual_studio_component;
-    auto r(boost::make_shared<visual_studio_component>());
+    using assets::meta_model::visual_studio::solution;
+    auto r(boost::make_shared<solution>());
     populate_element(l, scr, ie, *r);
 
     for (const auto& attr : ie.attributes()) {
@@ -577,10 +576,33 @@ adapter::to_visual_studio_component(const assets::meta_model::location& l,
         ensure_not_empty(n);
 
         const auto v(attr.value());
-        if (n == project_guid_attr_name)
-            r->project_guid(v);
-        else if (n == project_solution_guid_attr_name)
-            r->project_solution_guid(v);
+        if (n == guid_attr_name)
+            r->guid(v);
+        else {
+            BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
+            BOOST_THROW_EXCEPTION(
+                adaptation_exception(unsupported_attribute + n));
+        }
+    }
+
+    return r;
+}
+
+boost::shared_ptr<assets::meta_model::visual_studio::project>
+adapter::to_visual_studio_project(const assets::meta_model::location& l,
+    const stereotypes_conversion_result& scr,
+    const injection::meta_model::element& ie) const {
+    using assets::meta_model::visual_studio::project;
+    auto r(boost::make_shared<project>());
+    populate_element(l, scr, ie, *r);
+
+    for (const auto& attr : ie.attributes()) {
+        const auto n(attr.name());
+        ensure_not_empty(n);
+
+        const auto v(attr.value());
+        if (n == guid_attr_name)
+            r->guid(v);
         else {
             BOOST_LOG_SEV(lg, error) << unsupported_attribute << n;
             BOOST_THROW_EXCEPTION(

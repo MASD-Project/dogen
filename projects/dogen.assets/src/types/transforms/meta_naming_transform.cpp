@@ -29,7 +29,8 @@
 #include "dogen.assets/types/meta_model/variability/feature_template_initializer.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
 #include "dogen.assets/types/meta_model/serialization/type_registrar.hpp"
-#include "dogen.assets/types/meta_model/build/visual_studio_component.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/solution.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/project.hpp"
 #include "dogen.assets/types/meta_model/elements_traversal.hpp"
 #include "dogen.assets/types/meta_model/model.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
@@ -146,8 +147,13 @@ public:
         v.meta_name(n);
     }
 
-    void operator()(assets::meta_model::build::visual_studio_component& v) {
-        static const auto n(mnf::make_build_visual_studio_compent_name());
+    void operator()(assets::meta_model::visual_studio::solution& v) {
+        static const auto n(mnf::make_build_visual_studio_solution_name());
+        v.meta_name(n);
+    }
+
+    void operator()(assets::meta_model::visual_studio::project& v) {
+        static const auto n(mnf::make_build_visual_studio_project_name());
         v.meta_name(n);
     }
 };
