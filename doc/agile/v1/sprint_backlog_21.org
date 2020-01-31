@@ -12,26 +12,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-01-31 Fri 11:51]
+#+CAPTION: Clock summary at [2020-01-31 Fri 16:39]
 | <75>                                                  |         |       |      |       |
 | Headline                                              | Time    |       |      |     % |
 |-------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                          | *25:13* |       |      | 100.0 |
+| *Total time*                                          | *27:58* |       |      | 100.0 |
 |-------------------------------------------------------+---------+-------+------+-------|
-| Stories                                               | 25:13   |       |      | 100.0 |
-| Active                                                |         | 25:13 |      | 100.0 |
-| Edit release notes for previous sprint                |         |       | 7:01 |  27.8 |
-| Create a demo and presentation for previous sprint    |         |       | 1:49 |   7.2 |
-| Sprint and product backlog grooming                   |         |       | 1:57 |   7.7 |
-| Create new playlist for assets work                   |         |       | 1:06 |   4.4 |
-| Create the final video on the relational model series |         |       | 0:30 |   2.0 |
-| Move registrar into assets                            |         |       | 5:34 |  22.1 |
-| Fix error in asserter tests                           |         |       | 0:38 |   2.5 |
-| Add injection details to all models                   |         |       | 0:25 |   1.7 |
-| Fix nightly error in registrar                        |         |       | 0:33 |   2.2 |
-| Fixes to setup                                        |         |       | 1:05 |   4.3 |
-| Move visual studio fabric types into assets           |         |       | 4:10 |  16.5 |
-| Nightly code coverage is not being reported           |         |       | 0:25 |   1.7 |
+| Stories                                               | 27:58   |       |      | 100.0 |
+| Active                                                |         | 27:58 |      | 100.0 |
+| Edit release notes for previous sprint                |         |       | 7:01 |  25.1 |
+| Create a demo and presentation for previous sprint    |         |       | 1:49 |   6.5 |
+| Sprint and product backlog grooming                   |         |       | 2:08 |   7.6 |
+| Create new playlist for assets work                   |         |       | 1:10 |   4.2 |
+| Create the final video on the relational model series |         |       | 0:30 |   1.8 |
+| Move registrar into assets                            |         |       | 5:34 |  19.9 |
+| Fix error in asserter tests                           |         |       | 0:38 |   2.3 |
+| Add injection details to all models                   |         |       | 0:25 |   1.5 |
+| Fix nightly error in registrar                        |         |       | 0:33 |   2.0 |
+| Nightly code coverage is not being reported           |         |       | 0:25 |   1.5 |
+| Fixes to setup                                        |         |       | 1:05 |   3.9 |
+| Cannot see source file in coveralls                   |         |       | 0:16 |   1.0 |
+| Move visual studio fabric types into assets           |         |       | 6:24 |  22.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -336,6 +337,7 @@ using the Dogen test models.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-01-31 Fri 16:23]--[2020-01-31 Fri 16:34] =>  0:11
     CLOCK: [2020-01-31 Fri 08:42]--[2020-01-31 Fri 09:02] =>  0:20
     CLOCK: [2020-01-29 Wed 08:35]--[2020-01-29 Wed 08:48] =>  0:13
     CLOCK: [2020-01-29 Wed 08:13]--[2020-01-29 Wed 08:34] =>  0:21
@@ -350,6 +352,7 @@ Updates to sprint and product backlog.
 
 *** STARTED Create new playlist for assets work                       :story:
     :LOGBOOK:
+    CLOCK: [2020-01-31 Fri 16:35]--[2020-01-31 Fri 16:39] =>  0:04
     CLOCK: [2020-01-31 Fri 10:24]--[2020-01-31 Fri 10:58] =>  0:34
     CLOCK: [2020-01-31 Fri 09:03]--[2020-01-31 Fri 09:35] =>  0:32
     :END:
@@ -580,6 +583,49 @@ Notes:
 - we need to supply registrar on models like injection and extraction
   because we are making use of variability.
 
+*** COMPLETED Nightly code coverage is not being reported             :story:
+    CLOSED: [2020-01-31 Fri 11:52]
+    :LOGBOOK:
+    CLOCK: [2020-01-28 Tue 20:54]--[2020-01-28 Tue 21:12] =>  0:18
+    CLOCK: [2020-01-27 Mon 23:52]--[2020-01-27 Mon 23:59] =>  0:07
+    :END:
+
+We are running kcov in the nightlies, but we cannot see the results in
+the coverage tool. Problems:
+
+- pointing to the wrong kcov path.
+- not supplying API key.
+
+*** COMPLETED Add support for qualified class names in dia            :story:
+    CLOSED: [2020-01-31 Fri 14:00]
+
+*Rationale*: internal namespaces are created as expected.
+
+Note: test this feature as we implemented something similar.
+
+#+begin_quote
+*Story*: As a dogen user, I don't want to have to define packages in
+certain cases.
+#+end_quote
+
+It has become apparent that creating large packages in dia and placing
+all classes in a large package is cumbersome:
+
+- there are issues with the large package implementation in dia,
+  making copying and pasting a dark art; its not very obvious how one
+  copies into a package (e.g. populating the child node id correctly).
+- models do not always have a neat division between packages; in
+  dogen, where packages would be useful, there are all sorts of
+  connections (e.g. inheritance, association) between the package and
+  the model "package" or other packages. Thus is very difficult to
+  produce a representative diagram.
+
+A solution to this problem would be to support qualified names in
+class names; these would be interpreted as being part of the current
+model. One would still have to define a large package, but it could be
+empty, or contain only the types which only have connections inside
+the package, plus comments for the package, etc.
+
 *** STARTED Fixes to setup                                            :story:
     :LOGBOOK:
     CLOCK: [2020-01-31 Fri 11:38]--[2020-01-31 Fri 11:51] =>  0:13
@@ -592,8 +638,25 @@ Time spent fixing setup issues:
 - fixes to emacs
 - dist-upgrade PC to latest.
 
+*** STARTED Cannot see source file in coveralls                       :story:
+    :LOGBOOK:
+    CLOCK: [2020-01-31 Fri 15:03]--[2020-01-31 Fri 15:19] =>  0:16
+    :END:
+
+At present the path of source files in coveralls is incorrect:
+
+: /cpp_ref_impl.boost_model/src/types/class_a.cpp
+
+: SOURCE NOT AVAILABLE
+: The file "cpp_ref_impl.boost_model/src/types/class_a.cpp" isn't available on github. Either it's been removed, or the repo root directory needs to be updated.
+
+We have the same problem in codecove, only there is worse because we
+also can't see the fake commit we did.
+
 *** STARTED Move visual studio fabric types into assets               :story:
     :LOGBOOK:
+    CLOCK: [2020-01-31 Fri 15:19]--[2020-01-31 Fri 16:22] =>  1:03
+    CLOCK: [2020-01-31 Fri 13:51]--[2020-01-31 Fri 15:02] =>  1:27
     CLOCK: [2020-01-31 Fri 10:02]--[2020-01-31 Fri 10:23] =>  0:21
     CLOCK: [2020-01-31 Fri 09:55]--[2020-01-31 Fri 10:02] =>  0:07
     CLOCK: [2020-01-31 Fri 09:36]--[2020-01-31 Fri 09:40] =>  0:25
@@ -643,17 +706,29 @@ Notes:
   associated to the same meta-element if they can be produced by
   roughly by one meta-model element.
 
-*** STARTED Nightly code coverage is not being reported               :story:
-    :LOGBOOK:
-    CLOCK: [2020-01-28 Tue 20:54]--[2020-01-28 Tue 21:12] =>  0:18
-    CLOCK: [2020-01-27 Mon 23:52]--[2020-01-27 Mon 23:59] =>  0:07
-    :END:
+*** Improve error messages for mistakes in meta-data enums            :story:
 
-We are running kcov in the nightlies, but we cannot see the results in
-the coverage tool. Problems:
+At present when one makes a mistake in meta data the errors are not
+particularly enlightening:
 
-- pointing to the wrong kcov path.
-- not supplying API key.
+: FAILED: projects/dogen.models/dia/CMakeFiles/generate_dogen.engine.dia
+: cd /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang9/Release && /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang9/Release/stage/bin/dogen.cli generate --target /work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen.models/dia/dogen.engine.dia --output-directory /work/DomainDrivenConsulting/masd/dogen/integration/projects/
+: Error: bad lexical cast: source type value could not be interpreted as target
+
+This was caused because we put in an invalid binding point:
+
+: #DOGEN masd.variability.default_binding_point=entity
+
+We should trap the lexical cast exception and provide a proper error
+given the context.
+
+*** Remove support for element extensions                             :story:
+
+We are not using element extensions any longer since we added the
+forward declaration meta-type (we believe), so in theory all of the
+machinery dealing with element extensions can be deleted.
+
+This includes the formatter master segments.
 
 *** Tracing backend is not defaulted                                  :story:
 
@@ -665,32 +740,18 @@ Not supplying a tracing backend results in the following error:
 
 We need to add a sensible default value.
 
-*** Add support for qualified class names in dia                      :story:
+*** Create meta-entity for root module                                :story:
 
-Note: test this feature as we implemented something similar.
+At present we are supplying model properties via a "special" comment
+in a model. Items such as model_modules etc are read from this
+comment. We then generate the root module and use these properties to
+configure model-wide variability. However, according to the rule that
+there are no implicit model elements, we should have a meta-model
+element representing the root module. The properties of this element
+should reflect those on the "special" comment.
 
-#+begin_quote
-*Story*: As a dogen user, I don't want to have to define packages in
-certain cases.
-#+end_quote
-
-It has become apparent that creating large packages in dia and placing
-all classes in a large package is cumbersome:
-
-- there are issues with the large package implementation in dia,
-  making copying and pasting a dark art; its not very obvious how one
-  copies into a package (e.g. populating the child node id correctly).
-- models do not always have a neat division between packages; in
-  dogen, where packages would be useful, there are all sorts of
-  connections (e.g. inheritance, association) between the package and
-  the model "package" or other packages. Thus is very difficult to
-  produce a representative diagram.
-
-A solution to this problem would be to support qualified names in
-class names; these would be interpreted as being part of the current
-model. One would still have to define a large package, but it could be
-empty, or contain only the types which only have connections inside
-the package, plus comments for the package, etc.
+Or perhaps a case can be made that the root module is special and it
+is the only implicit element.
 
 ** Deprecated
 *** CANCELLED Move fabric types into coding                            :epic:

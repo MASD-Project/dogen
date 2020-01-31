@@ -3847,8 +3847,6 @@ analysis on this.
 
 Notes:
 
-- [[http://json-schema.org/][JSON Schema]], [[https://modeling-languages.com/jsonschema-uml-tool-generate-diagrams-json/][JSONSchema To UML]]
-- [[https://github.com/aspnet/Home/wiki/Project.json-file][Project.Json]]
 - yarn.dia.comment is no longer necessary, just look for the
   markers.
 - we should only allow arrays of simple types.
@@ -4310,7 +4308,6 @@ inferred metamodel type. For this we need to check against a list of
 metamodel types ("has the user already defined a stereotype?") and if
 not, use the default one. This means our conversion will not roundtrip
 without differences, but at least it produces more sensible models.
-
 
 We directly mapped KVPs in UML to JSON, e.g.:
 
@@ -13326,6 +13323,24 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Consider adding JSON schemas and XSDs as an injection source      :story:
+
+Similar to XSD, perhaps JSON schemas could also be used to inject
+models into Dogen. This could be useful in the context of the Open API
+specification.
+
+Links:
+
+- [[https://tools.ietf.org/html/draft-wright-json-schema-00][JSON Schema: A Media Type for Describing JSON Documents]]
+- [[https://cswr.github.io/JsonSchema/spec/introduction/#json][JSON schema introduction]]
+- [[https://www.json.org/json-en.html][JSON spec]]
+- [[http://json-schema.org/][JSON Schema]], [[https://modeling-languages.com/jsonschema-uml-tool-generate-diagrams-json/][JSONSchema To UML]]
+- [[https://jsonnet.org/][jsonnet]]
+- [[https://json-schema.org/learn/miscellaneous-examples.html][JSON schema examples]]
+- [[https://github.com/aspnet/Home/wiki/Project.json-file][Project.Json]]
+- [[https://github.com/json-schema-org/JSON-Schema-Test-Suite][JSON-Schema-Test-Suite]]
+- [[https://github.com/pboettch/json-schema-validator][json-schema-validator]]: JSON schema validator for JSON for Modern C++
 
 *** Consider generating SSL certificates and keys                     :story:
 

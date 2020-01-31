@@ -986,6 +986,15 @@ start and end of this transform?"
 Interestingly, this would also allow us to compare things between
 runs. The schema should be designed with this in mind.
 
+Links:
+
+- [[https://postgrespro.com/docs/postgresql/10/functions-json][JSON Functions and Operators]]
+- [[https://clarkdave.net/2013/06/what-can-you-do-with-postgresql-and-json/][What can you do with PostgreSQL and JSON?]]
+- [[https://blog.codeship.com/unleash-the-power-of-storing-json-in-postgres/][Unleash the Power of Storing JSON in Postgres]]
+- [[https://stackoverflow.com/questions/59330565/is-there-a-way-to-set-the-max-width-of-a-column-when-displaying-jsonb-results-in][Is there a way to set the max width of a column when displaying JSONB results in psql?]]
+- [[https://www.postgresqltutorial.com/postgresql-json/][PostgreSQL JSON]]
+- [[https://dba.stackexchange.com/questions/151838/postgresql-json-column-to-view][Postgresql json column to view]]
+
 *** POSTPONED Nightly code coverage is not being reported             :story:
     CLOSED: [2020-01-20 Mon 23:09]
     :LOGBOOK:
