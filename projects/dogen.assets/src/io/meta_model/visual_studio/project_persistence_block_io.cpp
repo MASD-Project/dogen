@@ -18,17 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VISUAL_STUDIO_PROJECT_REFERENCE_FWD_HPP
-#define DOGEN_ASSETS_TYPES_META_MODEL_VISUAL_STUDIO_PROJECT_REFERENCE_FWD_HPP
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen.assets/io/meta_model/visual_studio/project_persistence_block_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
 
 namespace dogen::assets::meta_model::visual_studio {
 
-class project_reference;
-
+std::ostream& operator<<(std::ostream& s, const project_persistence_block& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::assets::meta_model::visual_studio::project_persistence_block\"" << ", "
+      << "\"guid\": " << "\"" << tidy_up_string(v.guid()) << "\"" << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\""
+      << " }";
+    return(s);
 }
 
-#endif
+}

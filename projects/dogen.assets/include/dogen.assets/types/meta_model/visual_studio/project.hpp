@@ -64,6 +64,7 @@ public:
         const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
         const std::string& guid,
+        const std::string& type_guid,
         const std::list<dogen::assets::meta_model::visual_studio::item_group>& item_groups);
 
 public:
@@ -85,6 +86,16 @@ public:
     std::string& guid();
     void guid(const std::string& v);
     void guid(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief GUID used by Visual Studio to identify projects of this type.
+     */
+    /**@{*/
+    const std::string& type_guid() const;
+    std::string& type_guid();
+    void type_guid(const std::string& v);
+    void type_guid(const std::string&& v);
     /**@}*/
 
     /**
@@ -112,6 +123,7 @@ public:
 
 private:
     std::string guid_;
+    std::string type_guid_;
     std::list<dogen::assets::meta_model::visual_studio::item_group> item_groups_;
 };
 

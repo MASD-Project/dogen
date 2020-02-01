@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VISUAL_STUDIO_PROJECT_REFERENCE_HPP
-#define DOGEN_ASSETS_TYPES_META_MODEL_VISUAL_STUDIO_PROJECT_REFERENCE_HPP
+#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VISUAL_STUDIO_PROJECT_PERSISTENCE_BLOCK_HPP
+#define DOGEN_ASSETS_TYPES_META_MODEL_VISUAL_STUDIO_PROJECT_PERSISTENCE_BLOCK_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,17 +31,17 @@
 
 namespace dogen::assets::meta_model::visual_studio {
 
-class project_reference final {
+class project_persistence_block final {
 public:
-    project_reference() = default;
-    project_reference(const project_reference&) = default;
-    ~project_reference() = default;
+    project_persistence_block() = default;
+    project_persistence_block(const project_persistence_block&) = default;
+    ~project_persistence_block() = default;
 
 public:
-    project_reference(project_reference&& rhs);
+    project_persistence_block(project_persistence_block&& rhs);
 
 public:
-    project_reference(
+    project_persistence_block(
         const std::string& guid,
         const std::string& name,
         const boost::filesystem::path& relative_path);
@@ -68,14 +68,14 @@ public:
     void relative_path(const boost::filesystem::path&& v);
 
 public:
-    bool operator==(const project_reference& rhs) const;
-    bool operator!=(const project_reference& rhs) const {
+    bool operator==(const project_persistence_block& rhs) const;
+    bool operator!=(const project_persistence_block& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(project_reference& other) noexcept;
-    project_reference& operator=(project_reference other);
+    void swap(project_persistence_block& other) noexcept;
+    project_persistence_block& operator=(project_persistence_block other);
 
 private:
     std::string guid_;
@@ -89,8 +89,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::assets::meta_model::visual_studio::project_reference& lhs,
-    dogen::assets::meta_model::visual_studio::project_reference& rhs) {
+    dogen::assets::meta_model::visual_studio::project_persistence_block& lhs,
+    dogen::assets::meta_model::visual_studio::project_persistence_block& rhs) {
     lhs.swap(rhs);
 }
 

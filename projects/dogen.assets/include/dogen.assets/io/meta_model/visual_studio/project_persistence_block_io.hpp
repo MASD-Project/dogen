@@ -18,28 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen.assets/io/meta_model/visual_studio/project_reference_io.hpp"
+#ifndef DOGEN_ASSETS_IO_META_MODEL_VISUAL_STUDIO_PROJECT_PERSISTENCE_BLOCK_IO_HPP
+#define DOGEN_ASSETS_IO_META_MODEL_VISUAL_STUDIO_PROJECT_PERSISTENCE_BLOCK_IO_HPP
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen.assets/types/meta_model/visual_studio/project_persistence_block.hpp"
 
 namespace dogen::assets::meta_model::visual_studio {
 
-std::ostream& operator<<(std::ostream& s, const project_reference& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::assets::meta_model::visual_studio::project_reference\"" << ", "
-      << "\"guid\": " << "\"" << tidy_up_string(v.guid()) << "\"" << ", "
-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\""
-      << " }";
-    return(s);
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::assets::meta_model::visual_studio::project_persistence_block& v);
 
 }
+
+#endif

@@ -3402,6 +3402,11 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
+          "name": "type_guid",
+          "type": "std::string",
+          "documentation": "GUID used by Visual Studio to identify projects of this type.\n"
+        },
+        {
           "name": "item_groups",
           "type": "std::list<item_group>",
           "documentation": "Set of item groups in the project.\n"
@@ -3458,13 +3463,13 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "projects",
-          "type": "std::list<project_reference>"
+          "name": "project_persistence_blocks",
+          "type": "std::list<project_persistence_block>"
         }
       ]
     },
     {
-      "name": "meta_model::visual_studio::project_reference",
+      "name": "meta_model::visual_studio::project_persistence_block",
       "stereotypes": [
         "UniquelyIdentifiable"
       ],

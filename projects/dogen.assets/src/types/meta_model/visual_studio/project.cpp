@@ -67,6 +67,7 @@ project::project(
     const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
     const std::string& guid,
+    const std::string& type_guid,
     const std::list<dogen::assets::meta_model::visual_studio::item_group>& item_groups)
     : dogen::assets::meta_model::element(
       name,
@@ -86,6 +87,7 @@ project::project(
       archetype_location_properties,
       decoration),
       guid_(guid),
+      type_guid_(type_guid),
       item_groups_(item_groups) { }
 
 void project::accept(const element_visitor& v) const {
@@ -111,6 +113,7 @@ void project::to_stream(std::ostream& s) const {
     dogen::assets::meta_model::element::to_stream(s);
     s << ", "
       << "\"guid\": " << "\"" << tidy_up_string(guid_) << "\"" << ", "
+      << "\"type_guid\": " << "\"" << tidy_up_string(type_guid_) << "\"" << ", "
       << "\"item_groups\": " << item_groups_
       << " }";
 }
@@ -120,6 +123,7 @@ void project::swap(project& other) noexcept {
 
     using std::swap;
     swap(guid_, other.guid_);
+    swap(type_guid_, other.type_guid_);
     swap(item_groups_, other.item_groups_);
 }
 
@@ -132,6 +136,7 @@ bool project::equals(const dogen::assets::meta_model::element& other) const {
 bool project::operator==(const project& rhs) const {
     return dogen::assets::meta_model::element::compare(rhs) &&
         guid_ == rhs.guid_ &&
+        type_guid_ == rhs.type_guid_ &&
         item_groups_ == rhs.item_groups_;
 }
 
@@ -155,6 +160,22 @@ void project::guid(const std::string& v) {
 
 void project::guid(const std::string&& v) {
     guid_ = std::move(v);
+}
+
+const std::string& project::type_guid() const {
+    return type_guid_;
+}
+
+std::string& project::type_guid() {
+    return type_guid_;
+}
+
+void project::type_guid(const std::string& v) {
+    type_guid_ = v;
+}
+
+void project::type_guid(const std::string&& v) {
+    type_guid_ = std::move(v);
 }
 
 const std::list<dogen::assets::meta_model::visual_studio::item_group>& project::item_groups() const {

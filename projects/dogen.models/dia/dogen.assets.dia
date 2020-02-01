@@ -39507,7 +39507,7 @@ At present the system only supports wale templates.#</dia:string>
         <dia:point val="66,-86"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="65.95,-87.05;120.05,-47.95"/>
+        <dia:rectangle val="65.95,-87.05;126.05,-47.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -39516,7 +39516,7 @@ At present the system only supports wale templates.#</dia:string>
         <dia:point val="66,-86"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="54"/>
+        <dia:real val="60"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="38"/>
@@ -41559,7 +41559,7 @@ to serialisation.
         <dia:point val="66,-45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="65.95,-46.05;120.05,8.05"/>
+        <dia:rectangle val="65.95,-46.05;126.05,8.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -41568,7 +41568,7 @@ to serialisation.
         <dia:point val="66,-45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="54"/>
+        <dia:real val="60"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="53"/>
@@ -41650,19 +41650,19 @@ build systems.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O315">
       <dia:attribute name="obj_pos">
-        <dia:point val="71,-34"/>
+        <dia:point val="68,-34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="70.95,-34.05;89.26,-30.35"/>
+        <dia:rectangle val="67.95,-34.05;86.26,-29.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="71,-34"/>
+        <dia:point val="68,-34"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.210000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#project#</dia:string>
@@ -41752,6 +41752,29 @@ build systems.
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#type_guid#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#GUID used by Visual Studio to identify projects of this type.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#item_groups#</dia:string>
@@ -41982,7 +42005,7 @@ build systems.
         <dia:point val="79,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="70.95,-30.45;79.75,-14.2"/>
+        <dia:rectangle val="67.95,-29.65;79.75,-14.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -41990,8 +42013,8 @@ build systems.
       <dia:attribute name="orth_points">
         <dia:point val="79,-15"/>
         <dia:point val="79,-18"/>
-        <dia:point val="71,-18"/>
-        <dia:point val="71,-30.4"/>
+        <dia:point val="68,-18"/>
+        <dia:point val="68,-29.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -42015,13 +42038,13 @@ build systems.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O318">
       <dia:attribute name="obj_pos">
-        <dia:point val="84,-26"/>
+        <dia:point val="72,-26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="83.95,-26.05;93.405,-23.15"/>
+        <dia:rectangle val="71.95,-26.05;81.405,-23.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="84,-26"/>
+        <dia:point val="72,-26"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="9.3550000000000004"/>
@@ -42153,13 +42176,13 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O319">
       <dia:attribute name="obj_pos">
-        <dia:point val="73,-26"/>
+        <dia:point val="84,-26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.95,-26.05;81.635,-22.35"/>
+        <dia:rectangle val="83.95,-26.05;92.635,-22.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="73,-26"/>
+        <dia:point val="84,-26"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.5849999999999991"/>
@@ -42350,19 +42373,19 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="88.6775,-23.2"/>
+        <dia:point val="76.6775,-23.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="77.2425,-23.95;89.4275,-19.95"/>
+        <dia:rectangle val="75.9275,-23.95;88.4925,-19.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="88.6775,-23.2"/>
-        <dia:point val="88.6775,-20"/>
-        <dia:point val="77.2925,-20"/>
-        <dia:point val="77.2925,-22.3497"/>
+        <dia:point val="76.6775,-23.2"/>
+        <dia:point val="76.6775,-20"/>
+        <dia:point val="88.2925,-20"/>
+        <dia:point val="88.2925,-22.3497"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -42389,13 +42412,13 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
         <dia:point val="98,-34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="97.95,-34.05;116.26,-30.35"/>
+        <dia:rectangle val="97.95,-34.05;123.575,-30.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="98,-34"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.210000000000001"/>
+        <dia:real val="25.524999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -42490,10 +42513,10 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#projects#</dia:string>
+            <dia:string>#project_persistence_blocks#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;project_reference&gt;#</dia:string>
+            <dia:string>#std::list&lt;project_persistence_block&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -42536,7 +42559,7 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#project_reference#</dia:string>
+        <dia:string>#project_persistence_block#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#UniquelyIdentifiable#</dia:string>
@@ -42925,7 +42948,7 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
         <dia:point val="107.22,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="106.47,-30.45;116.41,-13.4"/>
+        <dia:rectangle val="106.47,-30.45;123.725,-13.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -42933,8 +42956,8 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
       <dia:attribute name="orth_points">
         <dia:point val="107.22,-15"/>
         <dia:point val="107.22,-18"/>
-        <dia:point val="116.21,-18"/>
-        <dia:point val="116.21,-30.4"/>
+        <dia:point val="123.525,-18"/>
+        <dia:point val="123.525,-30.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -42997,7 +43020,7 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
         <dia:point val="87,-38.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="80.055,-39.15;87.75,-32.4"/>
+        <dia:rectangle val="77.055,-39.15;87.75,-32.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -43005,8 +43028,8 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
       <dia:attribute name="orth_points">
         <dia:point val="87,-38.4"/>
         <dia:point val="87,-36"/>
-        <dia:point val="80.105,-36"/>
-        <dia:point val="80.105,-34"/>
+        <dia:point val="77.105,-36"/>
+        <dia:point val="77.105,-34"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -43069,7 +43092,7 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
         <dia:point val="97.125,-38.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="96.375,-39.15;107.305,-32.4"/>
+        <dia:rectangle val="96.375,-39.15;110.963,-32.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -43077,8 +43100,8 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
       <dia:attribute name="orth_points">
         <dia:point val="97.125,-38.4"/>
         <dia:point val="97.125,-36"/>
-        <dia:point val="107.105,-36"/>
-        <dia:point val="107.105,-34"/>
+        <dia:point val="110.763,-36"/>
+        <dia:point val="110.763,-34"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -43210,19 +43233,19 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="77.2925,-26"/>
+        <dia:point val="76.6775,-26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="77.2425,-31.15;89.96,-24.4"/>
+        <dia:rectangle val="76.6275,-30.35;86.96,-24.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="77.2925,-26"/>
-        <dia:point val="77.2925,-28"/>
-        <dia:point val="89.21,-28"/>
-        <dia:point val="89.21,-30.4"/>
+        <dia:point val="76.6775,-26"/>
+        <dia:point val="76.6775,-28"/>
+        <dia:point val="86.21,-28"/>
+        <dia:point val="86.21,-29.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -43239,7 +43262,7 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O319" connection="1"/>
+        <dia:connection handle="0" to="O318" connection="1"/>
         <dia:connection handle="1" to="O315" connection="7"/>
       </dia:connections>
       <dia:childnode parent="O313"/>

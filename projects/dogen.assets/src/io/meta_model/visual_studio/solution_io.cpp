@@ -22,7 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.assets/io/meta_model/element_io.hpp"
 #include "dogen.assets/io/meta_model/visual_studio/solution_io.hpp"
-#include "dogen.assets/io/meta_model/visual_studio/project_reference_io.hpp"
+#include "dogen.assets/io/meta_model/visual_studio/project_persistence_block_io.hpp"
 
 namespace dogen::assets::meta_model::visual_studio {
 

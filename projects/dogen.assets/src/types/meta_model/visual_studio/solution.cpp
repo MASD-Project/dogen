@@ -23,7 +23,7 @@
 #include "dogen.assets/io/meta_model/element_io.hpp"
 #include "dogen.assets/types/meta_model/element_visitor.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/solution.hpp"
-#include "dogen.assets/io/meta_model/visual_studio/project_reference_io.hpp"
+#include "dogen.assets/io/meta_model/visual_studio/project_persistence_block_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -35,7 +35,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::meta_model::visual_studio::project_reference>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::meta_model::visual_studio::project_persistence_block>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -67,7 +67,7 @@ solution::solution(
     const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
     const std::string& guid,
-    const std::list<dogen::assets::meta_model::visual_studio::project_reference>& projects)
+    const std::list<dogen::assets::meta_model::visual_studio::project_persistence_block>& project_persistence_blocks)
     : dogen::assets::meta_model::element(
       name,
       documentation,
@@ -86,7 +86,7 @@ solution::solution(
       archetype_location_properties,
       decoration),
       guid_(guid),
-      projects_(projects) { }
+      project_persistence_blocks_(project_persistence_blocks) { }
 
 void solution::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -111,7 +111,7 @@ void solution::to_stream(std::ostream& s) const {
     dogen::assets::meta_model::element::to_stream(s);
     s << ", "
       << "\"guid\": " << "\"" << tidy_up_string(guid_) << "\"" << ", "
-      << "\"projects\": " << projects_
+      << "\"project_persistence_blocks\": " << project_persistence_blocks_
       << " }";
 }
 
@@ -120,7 +120,7 @@ void solution::swap(solution& other) noexcept {
 
     using std::swap;
     swap(guid_, other.guid_);
-    swap(projects_, other.projects_);
+    swap(project_persistence_blocks_, other.project_persistence_blocks_);
 }
 
 bool solution::equals(const dogen::assets::meta_model::element& other) const {
@@ -132,7 +132,7 @@ bool solution::equals(const dogen::assets::meta_model::element& other) const {
 bool solution::operator==(const solution& rhs) const {
     return dogen::assets::meta_model::element::compare(rhs) &&
         guid_ == rhs.guid_ &&
-        projects_ == rhs.projects_;
+        project_persistence_blocks_ == rhs.project_persistence_blocks_;
 }
 
 solution& solution::operator=(solution other) {
@@ -157,20 +157,20 @@ void solution::guid(const std::string&& v) {
     guid_ = std::move(v);
 }
 
-const std::list<dogen::assets::meta_model::visual_studio::project_reference>& solution::projects() const {
-    return projects_;
+const std::list<dogen::assets::meta_model::visual_studio::project_persistence_block>& solution::project_persistence_blocks() const {
+    return project_persistence_blocks_;
 }
 
-std::list<dogen::assets::meta_model::visual_studio::project_reference>& solution::projects() {
-    return projects_;
+std::list<dogen::assets::meta_model::visual_studio::project_persistence_block>& solution::project_persistence_blocks() {
+    return project_persistence_blocks_;
 }
 
-void solution::projects(const std::list<dogen::assets::meta_model::visual_studio::project_reference>& v) {
-    projects_ = v;
+void solution::project_persistence_blocks(const std::list<dogen::assets::meta_model::visual_studio::project_persistence_block>& v) {
+    project_persistence_blocks_ = v;
 }
 
-void solution::projects(const std::list<dogen::assets::meta_model::visual_studio::project_reference>&& v) {
-    projects_ = std::move(v);
+void solution::project_persistence_blocks(const std::list<dogen::assets::meta_model::visual_studio::project_persistence_block>&& v) {
+    project_persistence_blocks_ = std::move(v);
 }
 
 }

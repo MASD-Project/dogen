@@ -30,7 +30,7 @@
 #include <string>
 #include <algorithm>
 #include "dogen.assets/types/meta_model/element.hpp"
-#include "dogen.assets/types/meta_model/visual_studio/project_reference.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/project_persistence_block.hpp"
 
 namespace dogen::assets::meta_model::visual_studio {
 
@@ -61,7 +61,7 @@ public:
         const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
         const std::string& guid,
-        const std::list<dogen::assets::meta_model::visual_studio::project_reference>& projects);
+        const std::list<dogen::assets::meta_model::visual_studio::project_persistence_block>& project_persistence_blocks);
 
 public:
     using element::accept;
@@ -84,10 +84,10 @@ public:
     void guid(const std::string&& v);
     /**@}*/
 
-    const std::list<dogen::assets::meta_model::visual_studio::project_reference>& projects() const;
-    std::list<dogen::assets::meta_model::visual_studio::project_reference>& projects();
-    void projects(const std::list<dogen::assets::meta_model::visual_studio::project_reference>& v);
-    void projects(const std::list<dogen::assets::meta_model::visual_studio::project_reference>&& v);
+    const std::list<dogen::assets::meta_model::visual_studio::project_persistence_block>& project_persistence_blocks() const;
+    std::list<dogen::assets::meta_model::visual_studio::project_persistence_block>& project_persistence_blocks();
+    void project_persistence_blocks(const std::list<dogen::assets::meta_model::visual_studio::project_persistence_block>& v);
+    void project_persistence_blocks(const std::list<dogen::assets::meta_model::visual_studio::project_persistence_block>&& v);
 
 public:
     bool operator==(const solution& rhs) const;
@@ -104,7 +104,7 @@ public:
 
 private:
     std::string guid_;
-    std::list<dogen::assets::meta_model::visual_studio::project_reference> projects_;
+    std::list<dogen::assets::meta_model::visual_studio::project_persistence_block> project_persistence_blocks_;
 };
 
 }
