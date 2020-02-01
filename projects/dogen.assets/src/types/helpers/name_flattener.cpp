@@ -40,10 +40,8 @@ name_flattener::flatten(const meta_model::name& n) const {
      * If the simple name is internal, it should not contribute to the
      * flattened name.
      */
-    if (n.is_simple_name_internal()) {
-        r.pop_back();
+    if (n.is_simple_name_internal())
         return r;
-    }
 
     if (!detect_model_name_)
         return r;
