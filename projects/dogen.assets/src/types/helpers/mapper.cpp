@@ -134,11 +134,15 @@ mapper::injections_for_technical_space(const mapping_set& ms,
         BOOST_THROW_EXCEPTION(mapping_error(unsupported_technical_space + s));
     }
 
+    /*
+     * If there are no mappings for LAM pointers, then there is
+     * nothing to do. This is the case for languages such as C#.
+     */
     const auto& map(i->second);
     const auto j(map.find(lam_pointer));
     if (j == map.end()) {
-        BOOST_LOG_SEV(lg, error) << missing_mapping << lam_pointer;
-        BOOST_THROW_EXCEPTION(mapping_error(missing_mapping + lam_pointer));
+        BOOST_LOG_SEV(lg, debug) << "No mapping for LAM pointer.";
+        return r;
     }
 
     const auto& n(j->second);
@@ -155,10 +159,10 @@ mapper::injections_for_technical_space(const mapping_set& ms,
 
 mapping_context mapper::create_mapping_context(const mapping_set& ms,
     const meta_model::technical_space from,
-    const meta_model::technical_space to, const meta_model::model& /*m*/) const {
+    const meta_model::technical_space to, const meta_model::model& m) const {
     mapping_context r;
     r.translations(translations_for_technical_space(ms, from, to));
-    // r.injections(injections_for_technical_space(ms, to, m));
+    r.injections(injections_for_technical_space(ms, to, m));
 
     const auto i(ms.erasures_by_technical_space().find(to));
     if (i != ms.erasures_by_technical_space().end())
