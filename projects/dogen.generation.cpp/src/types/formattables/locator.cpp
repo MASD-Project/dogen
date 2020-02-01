@@ -368,12 +368,11 @@ boost::filesystem::path locator::make_facet_path_temp(
     BOOST_LOG_SEV(lg, trace) << "Making facet path for: "
                              << n.qualified().dot();
 
-    boost::filesystem::path r;
-
     /*
      * If there is a facet directory, and it is configured to
      * contribute to the file name path, add it.
      */
+    boost::filesystem::path r;
     const auto& cfg(configuration_);
     const auto& arch_cfg(configuration_for_archetype(archetype));
     if (!arch_cfg.facet_directory().empty() && !cfg.disable_facet_directories())

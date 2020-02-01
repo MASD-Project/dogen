@@ -31,6 +31,7 @@
 #include "dogen.generation.cpp/types/formatters/test_data/features.hpp"
 #include "dogen.generation.cpp/types/formatters/lexical_cast/features.hpp"
 #include "dogen.generation.cpp/types/formatters/serialization/features.hpp"
+#include "dogen.generation.cpp/types/formatters/visual_studio/features.hpp"
 
 namespace dogen::generation::cpp {
 
@@ -48,6 +49,7 @@ register_templates(variability::helpers::feature_template_registrar& rg) {
     rg.register_templates(dogen::generation::cpp::formatters::test_data::features::make_templates());
     rg.register_templates(dogen::generation::cpp::formatters::tests::features::make_templates());
     rg.register_templates(dogen::generation::cpp::formatters::types::features::make_templates());
+    rg.register_templates(dogen::generation::cpp::formatters::visual_studio::features::make_templates());
 
 }
 
