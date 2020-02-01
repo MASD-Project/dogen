@@ -3308,14 +3308,14 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::visual_studio::visual_studio_project_formatter",
+      "name": "formatters::visual_studio::project_formatter",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::visual_studio::visual_studio_solution_formatter",
+      "name": "formatters::visual_studio::solution_formatter",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
