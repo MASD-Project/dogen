@@ -43521,13 +43521,13 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
         <dia:point val="5,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="4.95,25.95;36.35,29.65"/>
+        <dia:rectangle val="4.95,25.95;32.115,29.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="5,26"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="31.300000000000001"/>
+        <dia:real val="27.064999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -43623,7 +43623,7 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#technical_space_to_project_type#</dia:string>
+            <dia:string>#from_technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
