@@ -34,6 +34,8 @@
 #include "dogen.assets/types/meta_model/attribute.hpp"
 #include "dogen.assets/types/helpers/mapping_error.hpp"
 #include "dogen.assets/io/helpers/mapping_context_io.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/project.hpp"
+#include "dogen.assets/types/helpers/visual_studio_project_type_mapper.hpp"
 #include "dogen.assets/types/helpers/mapper.hpp"
 
 namespace {
@@ -61,9 +63,13 @@ clone(const meta_model::model& m) const {
     auto r(m);
 
     /*
-     * Create deep copies of each element type. This needs to be
-     * replaced by a proper clone implementation by the code
-     * generator.
+     * Create deep copies of the elements affected by mapping. This
+     * needs to be replaced by a proper clone implementation by the
+     * code generator.
+     *
+     * Note that we worry mainly about structural elements because the
+     * rest of the meta-types are largely unaffected by mappings, with
+     * the exception of visual studio projects.
      */
     r.structural_elements().object_templates(
         clone(m.structural_elements().object_templates()));
@@ -73,18 +79,19 @@ clone(const meta_model::model& m) const {
         clone(m.structural_elements().enumerations()));
     r.structural_elements().primitives(
         clone(m.structural_elements().primitives()));
-    r.structural_elements().objects(
-        clone(m.structural_elements().objects()));
+    r.structural_elements().objects(clone(
+            m.structural_elements().objects()));
     r.structural_elements().exceptions(
         clone(m.structural_elements().exceptions()));
-    r.structural_elements().visitors(
-        clone(m.structural_elements().visitors()));
+    r.structural_elements().visitors(clone(
+            m.structural_elements().visitors()));
+    r.visual_studio_elements().projects(clone(
+            m.visual_studio_elements().projects()));
 
     /*
      * Copy across the modules, and sync up the root module.
      */
-    r.structural_elements().modules(
-        clone(m.structural_elements().modules()));
+    r.structural_elements().modules(clone(m.structural_elements().modules()));
     const auto rm_id(m.name().qualified().dot());
     const auto i(r.structural_elements().modules().find(rm_id));
     if (i == r.structural_elements().modules().end()) {
@@ -283,6 +290,22 @@ meta_model::model mapper::map(const meta_model::technical_space from,
             map_attributes(mc, pair.second->local_attributes());
     }
 
+    /*
+     * Visual studio project types are relative to the technical space
+     * we are in.
+     */
+    helpers::visual_studio_project_type_mapper tm;
+    for (auto& pair : r.visual_studio_elements().projects()) {
+        auto& proj(*pair.second);
+        proj.type_guid(tm.from_technical_space(to));
+    }
+
+    /*
+     * Finally, update all the technical space-related properties. We
+     * set both the input and output to the mapped technical space for
+     * consistency reasons, as it doesn't actually do anything (at
+     * least at present).
+     */
     r.input_technical_space(to);
     r.output_technical_spaces().clear();
     r.output_technical_spaces().push_back(to);
