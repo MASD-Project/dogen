@@ -1,0 +1,122 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::generation::cpp::formatters::visual_studio #>
+<#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/visual_studio_project.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/formatting_error.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/visual_studio/project_formatter.hpp" #>
+<#+
+
+std::string project_formatter::static_id() {
+    return traits::visual_studio_project_archetype();
+}
+
+std::string project_formatter::id() const {
+    static auto r(archetype_location().archetype());
+    return r;
+}
+
+archetypes::location
+project_formatter::archetype_location() const {
+    static archetypes::location
+        r(cpp::traits::kernel(), cpp::traits::backend(),
+          traits::visual_studio_facet(),
+          project_formatter::static_id());
+    return r;
+}
+
+const assets::meta_model::name&
+project_formatter::meta_name() const {
+    static auto r(fabric::meta_name_factory::make_visual_studio_project_name());
+    return r;
+}
+
+std::string project_formatter::family() const {
+    return cpp::traits::visual_studio_project_family();
+}
+
+inclusion_support_types
+project_formatter::inclusion_support_type() const {
+    return inclusion_support_types::not_supported;
+}
+
+boost::filesystem::path project_formatter::inclusion_path(
+    const formattables::locator& /*l*/, const assets::meta_model::name& n) const {
+
+    using namespace dogen::utility::log;
+    using namespace dogen::generation::cpp::formatters;
+    static logger lg(logger_factory(static_id()));
+
+    static const std::string not_supported("Inclusion path is not supported: ");
+
+    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
+}
+
+boost::filesystem::path project_formatter::
+full_path(const formattables::locator& l, const assets::meta_model::name& n) const {
+    return l.make_full_path_for_project(n, static_id());
+}
+
+std::list<std::string> project_formatter::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& /*f*/,
+    const assets::meta_model::element& /*e*/) const {
+    static std::list<std::string> r;
+    return r;
+}
+
+extraction::meta_model::artefact project_formatter::
+format(const context& ctx, const assets::meta_model::element& e) const {
+    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    const auto& vsp(a.as<fabric::visual_studio_project>(e));
+
+#>
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{<#= vsp.project_guid() #>}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace><#= vsp.project_name() #></RootNamespace>
+    <AssemblyName><#= vsp.project_name() #></AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+<#+
+    for (const auto& f : ctx.model().project_items())
+#>
+    <Compile Include="<#= f #>" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.Cpp.targets" />
+</Project>
+<#+
+    return a.make_artefact();
+}
+#>
