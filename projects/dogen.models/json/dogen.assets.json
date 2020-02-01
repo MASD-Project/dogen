@@ -3493,6 +3493,13 @@
           "documentation": "GUID that uniquely identifies this element.\n"
         }
       ]
+    },
+    {
+      "name": "transforms::visual_studio_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
