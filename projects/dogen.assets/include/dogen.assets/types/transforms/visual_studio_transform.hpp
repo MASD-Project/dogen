@@ -25,24 +25,26 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.assets/types/meta_model/model.hpp"
+#include "dogen.assets/types/meta_model/technical_space.hpp"
+#include "dogen.assets/types/transforms/context_fwd.hpp"
 
 namespace dogen::assets::transforms {
 
+/**
+ * @brief Transforms the Visual Studo elements in the model.
+ */
 class visual_studio_transform final {
-public:
-    visual_studio_transform() = default;
-    visual_studio_transform(const visual_studio_transform&) = default;
-    visual_studio_transform(visual_studio_transform&&) = default;
-    ~visual_studio_transform() = default;
-    visual_studio_transform& operator=(const visual_studio_transform&) = default;
+private:
+    /**
+     * @brief Maps a technical space to the associated Visual Studio
+     * project type, if any such mapping exists.
+     */
+    static std::string technical_space_to_project_guid(
+        const meta_model::technical_space ts);
 
 public:
-    bool operator==(const visual_studio_transform& rhs) const;
-    bool operator!=(const visual_studio_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, const assets::meta_model::model& m);
 };
 
 }
