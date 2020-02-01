@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include "dogen.assets/types/meta_model/name.hpp"
 #include "dogen.assets/types/meta_model/model.hpp"
 #include "dogen.assets/types/transforms/context_fwd.hpp"
 
@@ -34,6 +35,13 @@ namespace dogen::assets::transforms {
  * @brief Transforms the Visual Studo elements in the model.
  */
 class visual_studio_transform final {
+private:
+    /**
+     * @brief Computes the Visual Studio project name for a given
+     * model name.
+     */
+    static std::string project_name(const meta_model::name& n);
+
 public:
     static void apply(const context& ctx, const assets::meta_model::model& m);
 };

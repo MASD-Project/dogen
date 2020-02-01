@@ -23,10 +23,12 @@
 #include <boost/uuid/uuid_io.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/uuid/uuid_generators.hpp>
+#include <boost/algorithm/string/join.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
+#include "dogen.assets/types/helpers/name_flattener.hpp"
 #include "dogen.assets/lexical_cast/meta_model/technical_space_lc.hpp"
 #include "dogen.assets/types/helpers/visual_studio_project_type_mapper.hpp"
 #include "dogen.assets/types/transforms/transformation_error.hpp"
@@ -40,6 +42,8 @@ const std::string transform_id("assets.transforms.visual_studio_transform");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
+const std::string dot(".");
+
 const std::string too_many_projects(
     "Expected at most one Visual Studio project per model. Found: ");
 const std::string too_many_solutions(
@@ -48,6 +52,14 @@ const std::string too_many_solutions(
 }
 
 namespace dogen::assets::transforms {
+
+std::string
+visual_studio_transform::project_name(const meta_model::name& n) {
+    assets::helpers::name_flattener nfl(false/*detect_model_name*/);
+    const auto ns(nfl.flatten(n));
+    const auto r(boost::algorithm::join(ns, dot));
+    return r;
+}
 
 void visual_studio_transform::
 apply(const context& ctx, const assets::meta_model::model& m) {
@@ -81,6 +93,8 @@ apply(const context& ctx, const assets::meta_model::model& m) {
      * generation. This is nonetheless useful for the first generation
      * so that we do not have to come up with a guid manually.
      */
+    using meta_model::visual_studio::project_persistence_block;
+    std::list<project_persistence_block> ppbs;
     for (auto& pair : m.visual_studio_elements().projects()) {
         auto& proj(*pair.second);
         if (proj.guid().empty()) {
@@ -99,6 +113,14 @@ apply(const context& ctx, const assets::meta_model::model& m) {
             helpers::visual_studio_project_type_mapper tm;
             proj.type_guid(tm.from_technical_space(ts));
         }
+
+        /*
+         * Create the project persistence block for this project.
+         */
+        project_persistence_block ppb;
+        ppb.guid(proj.guid());
+        ppb.name(project_name(proj.name()));
+        ppbs.push_back(ppb);
     }
 
     /*
@@ -114,17 +136,8 @@ apply(const context& ctx, const assets::meta_model::model& m) {
             BOOST_LOG_SEV(lg, warn) << "Generated solution GUID: " << uuid;
             sln.guid(boost::uuids::to_string(uuid));
         }
-        //sln.projects()
-
-            //project_guids.push_back(proj.guid());
-
+        sln.project_persistence_blocks(ppbs);
     }
-
-
-
-
-
-
 
     stp.end_transform(m);
 }
