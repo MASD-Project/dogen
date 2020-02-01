@@ -25,24 +25,23 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <iostream>
+#include "dogen.assets/types/meta_model/technical_space.hpp"
 
 namespace dogen::assets::helpers {
 
+/**
+ * @brief Maps asset meta-model concepts to visual studio project
+ * types.
+ */
 class visual_studio_project_type_mapper final {
 public:
-    visual_studio_project_type_mapper() = default;
-    visual_studio_project_type_mapper(const visual_studio_project_type_mapper&) = default;
-    visual_studio_project_type_mapper(visual_studio_project_type_mapper&&) = default;
-    ~visual_studio_project_type_mapper() = default;
-    visual_studio_project_type_mapper& operator=(const visual_studio_project_type_mapper&) = default;
-
-public:
-    bool operator==(const visual_studio_project_type_mapper& rhs) const;
-    bool operator!=(const visual_studio_project_type_mapper& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * @brief Maps a technical space to the associated Visual Studio
+     * project type, if any such mapping exists.
+     */
+    static std::string
+    from_technical_space(const meta_model::technical_space ts);
 };
 
 }
