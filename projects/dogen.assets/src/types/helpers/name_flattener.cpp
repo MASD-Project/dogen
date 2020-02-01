@@ -36,11 +36,20 @@ name_flattener::flatten(const meta_model::name& n) const {
     for (const auto& m : l.internal_modules())
         r.push_back(m);
 
+    /*
+     * If the simple name is internal, it should not contribute to the
+     * flattened name.
+     */
+    if (n.is_simple_name_internal()) {
+        r.pop_back();
+        return r;
+    }
 
     if (!detect_model_name_)
         return r;
 
-    /* if the name belongs to the model's module, we need to remove the
+    /*
+     * if the name belongs to the model's module, we need to remove the
      * module's simple name from the module path (it is in both the
      * module path and it is also the module's simple name).
      */
