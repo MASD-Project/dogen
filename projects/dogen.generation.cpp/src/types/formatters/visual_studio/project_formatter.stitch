@@ -4,9 +4,9 @@
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/visual_studio_project.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.assets/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.assets/types/meta_model/visual_studio/project.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/visual_studio/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/formatting_error.hpp" #>
@@ -26,14 +26,15 @@ archetypes::location
 project_formatter::archetype_location() const {
     static archetypes::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
-          traits::visual_studio_facet(),
+          traits::facet(),
           project_formatter::static_id());
     return r;
 }
 
 const assets::meta_model::name&
 project_formatter::meta_name() const {
-    static auto r(fabric::meta_name_factory::make_visual_studio_project_name());
+    using assets::helpers::meta_name_factory;
+    static auto r(meta_name_factory::make_visual_studio_project_name());
     return r;
 }
 
@@ -74,7 +75,8 @@ std::list<std::string> project_formatter::inclusion_dependencies(
 extraction::meta_model::artefact project_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& vsp(a.as<fabric::visual_studio_project>(e));
+    using assets::meta_model::visual_studio::project;
+    const auto& proj(a.as<project>(e));
 
 #>
 <?xml version="1.0" encoding="utf-8"?>
@@ -82,10 +84,10 @@ format(const context& ctx, const assets::meta_model::element& e) const {
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{<#= vsp.project_guid() #>}</ProjectGuid>
+    <ProjectGuid>{<#= proj.guid() #>}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace><#= vsp.project_name() #></RootNamespace>
-    <AssemblyName><#= vsp.project_name() #></AssemblyName>
+    <RootNamespace><#= proj.project_name() #></RootNamespace>
+    <AssemblyName><#= proj.project_name() #></AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -108,12 +110,18 @@ format(const context& ctx, const assets::meta_model::element& e) const {
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
+<#+
+        for (const auto& ig : proj.item_groups()) {
+#>
   <ItemGroup>
 <#+
-    for (const auto& f : ctx.model().project_items())
+            for (const auto& i : ig.items())
 #>
-    <Compile Include="<#= f #>" />
+    <<#= i.name() #>Include="<#= i.include() #>" />
   </ItemGroup>
+<#+
+        }
+#>
   <Import Project="$(MSBuildBinPath)\Microsoft.Cpp.targets" />
 </Project>
 <#+

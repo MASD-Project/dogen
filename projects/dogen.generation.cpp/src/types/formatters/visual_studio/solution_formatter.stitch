@@ -4,9 +4,9 @@
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/visual_studio_solution.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.assets/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.assets/types/meta_model/visual_studio/solution.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/visual_studio/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/formatting_error.hpp" #>
@@ -26,14 +26,13 @@ archetypes::location
 solution_formatter::archetype_location() const {
     static archetypes::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
-          traits::visual_studio_facet(),
-          solution_formatter::static_id());
+          traits::facet(), solution_formatter::static_id());
     return r;
 }
 
 const assets::meta_model::name&
 solution_formatter::meta_name() const {
-    using fabric::meta_name_factory;
+    using assets::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_visual_studio_solution_name());
     return r;
 }
@@ -75,22 +74,35 @@ std::list<std::string> solution_formatter::inclusion_dependencies(
 extraction::meta_model::artefact solution_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& vsl(a.as<fabric::visual_studio_solution>(e));
+    using assets::meta_model::visual_studio::solution;
+    const auto& sln(a.as<solution>(e));
 #>
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{<#= vsl.project_solution_guid() #>}") = "<#= vsl.project_name() #>", "<#= vsl.project_name() #>.csproj", "{<#= vsl.project_guid() #>}"
+<#+
+    for (const auto& ppb : sln.project_persistence_blocks()) {
+#>
+Project("{<#= ppb.type_guid() #>}") = "<#= ppb.name() #>", "<#= ppb.name() #>.csproj", "{<#= ppb.guid() #>}"
 EndProject
+<#+
+    }
+#>
 Global
     GlobalSection(SolutionConfigurationPlatforms) = preSolution
         Debug|Any CPU = Debug|Any CPU
         Release|Any CPU = Release|Any CPU
     EndGlobalSection
     GlobalSection(ProjectConfigurationPlatforms) = postSolution
-        {<#= vsl.project_guid() #>}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-        {<#= vsl.project_guid() #>}.Debug|Any CPU.Build.0 = Debug|Any CPU
-        {<#= vsl.project_guid() #>}.Release|Any CPU.ActiveCfg = Release|Any CPU
-        {<#= vsl.project_guid() #>}.Release|Any CPU.Build.0 = Release|Any CPU
+<#+
+    for (const auto& ppb : sln.project_persistence_blocks()) {
+#>
+        {<#= ppb.guid() #>}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {<#= ppb.guid() #>}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {<#= ppb.guid() #>}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {<#= ppb.guid() #>}.Release|Any CPU.Build.0 = Release|Any CPU
+<#+
+    }
+#>
     EndGlobalSection
     GlobalSection(MonoDevelopProperties) = preSolution
         StartupItem = CppModel.vcxroj

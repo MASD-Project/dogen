@@ -22,9 +22,9 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
-#include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
-#include "dogen.generation.cpp/types/fabric/visual_studio_solution.hpp"
-#include "dogen.generation.cpp/types/formatters/traits.hpp"
+#include "dogen.assets/types/helpers/meta_name_factory.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/solution.hpp"
+#include "dogen.generation.cpp/types/formatters/visual_studio/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/types/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/formatters/formatting_error.hpp"
@@ -45,14 +45,13 @@ archetypes::location
 solution_formatter::archetype_location() const {
     static archetypes::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
-          traits::visual_studio_facet(),
-          solution_formatter::static_id());
+          traits::facet(), solution_formatter::static_id());
     return r;
 }
 
 const assets::meta_model::name&
 solution_formatter::meta_name() const {
-    using fabric::meta_name_factory;
+    using assets::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_visual_studio_solution_name());
     return r;
 }
@@ -94,21 +93,26 @@ std::list<std::string> solution_formatter::inclusion_dependencies(
 extraction::meta_model::artefact solution_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& vsl(a.as<fabric::visual_studio_solution>(e));
+    using assets::meta_model::visual_studio::solution;
+    const auto& sln(a.as<solution>(e));
 a.stream() << "Microsoft Visual Studio Solution File, Format Version 12.00" << std::endl;
 a.stream() << "# Visual Studio 2012" << std::endl;
-a.stream() << "Project(\"{" << vsl.project_solution_guid() << "}\") = \"" << vsl.project_name() << "\", \"" << vsl.project_name() << ".csproj\", \"{" << vsl.project_guid() << "}\"" << std::endl;
+    for (const auto& ppb : sln.project_persistence_blocks()) {
+a.stream() << "Project(\"{" << ppb.type_guid() << "}\") = \"" << ppb.name() << "\", \"" << ppb.name() << ".csproj\", \"{" << ppb.guid() << "}\"" << std::endl;
 a.stream() << "EndProject" << std::endl;
+    }
 a.stream() << "Global" << std::endl;
 a.stream() << "    GlobalSection(SolutionConfigurationPlatforms) = preSolution" << std::endl;
 a.stream() << "        Debug|Any CPU = Debug|Any CPU" << std::endl;
 a.stream() << "        Release|Any CPU = Release|Any CPU" << std::endl;
 a.stream() << "    EndGlobalSection" << std::endl;
 a.stream() << "    GlobalSection(ProjectConfigurationPlatforms) = postSolution" << std::endl;
-a.stream() << "        {" << vsl.project_guid() << "}.Debug|Any CPU.ActiveCfg = Debug|Any CPU" << std::endl;
-a.stream() << "        {" << vsl.project_guid() << "}.Debug|Any CPU.Build.0 = Debug|Any CPU" << std::endl;
-a.stream() << "        {" << vsl.project_guid() << "}.Release|Any CPU.ActiveCfg = Release|Any CPU" << std::endl;
-a.stream() << "        {" << vsl.project_guid() << "}.Release|Any CPU.Build.0 = Release|Any CPU" << std::endl;
+    for (const auto& ppb : sln.project_persistence_blocks()) {
+a.stream() << "        {" << ppb.guid() << "}.Debug|Any CPU.ActiveCfg = Debug|Any CPU" << std::endl;
+a.stream() << "        {" << ppb.guid() << "}.Debug|Any CPU.Build.0 = Debug|Any CPU" << std::endl;
+a.stream() << "        {" << ppb.guid() << "}.Release|Any CPU.ActiveCfg = Release|Any CPU" << std::endl;
+a.stream() << "        {" << ppb.guid() << "}.Release|Any CPU.Build.0 = Release|Any CPU" << std::endl;
+    }
 a.stream() << "    EndGlobalSection" << std::endl;
 a.stream() << "    GlobalSection(MonoDevelopProperties) = preSolution" << std::endl;
 a.stream() << "        StartupItem = CppModel.vcxroj" << std::endl;

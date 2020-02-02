@@ -22,9 +22,9 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
-#include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
-#include "dogen.generation.cpp/types/fabric/visual_studio_project.hpp"
-#include "dogen.generation.cpp/types/formatters/traits.hpp"
+#include "dogen.assets/types/helpers/meta_name_factory.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/project.hpp"
+#include "dogen.generation.cpp/types/formatters/visual_studio/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/types/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/formatters/formatting_error.hpp"
@@ -45,14 +45,15 @@ archetypes::location
 project_formatter::archetype_location() const {
     static archetypes::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
-          traits::visual_studio_facet(),
+          traits::facet(),
           project_formatter::static_id());
     return r;
 }
 
 const assets::meta_model::name&
 project_formatter::meta_name() const {
-    static auto r(fabric::meta_name_factory::make_visual_studio_project_name());
+    using assets::helpers::meta_name_factory;
+    static auto r(meta_name_factory::make_visual_studio_project_name());
     return r;
 }
 
@@ -93,17 +94,18 @@ std::list<std::string> project_formatter::inclusion_dependencies(
 extraction::meta_model::artefact project_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& vsp(a.as<fabric::visual_studio_project>(e));
+    using assets::meta_model::visual_studio::project;
+    const auto& proj(a.as<project>(e));
 
 a.stream() << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << std::endl;
 a.stream() << "<Project DefaultTargets=\"Build\" ToolsVersion=\"4.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">" << std::endl;
 a.stream() << "  <PropertyGroup>" << std::endl;
 a.stream() << "    <Configuration Condition=\" '$(Configuration)' == '' \">Debug</Configuration>" << std::endl;
 a.stream() << "    <Platform Condition=\" '$(Platform)' == '' \">AnyCPU</Platform>" << std::endl;
-a.stream() << "    <ProjectGuid>{" << vsp.project_guid() << "}</ProjectGuid>" << std::endl;
+a.stream() << "    <ProjectGuid>{" << proj.guid() << "}</ProjectGuid>" << std::endl;
 a.stream() << "    <OutputType>Library</OutputType>" << std::endl;
-a.stream() << "    <RootNamespace>" << vsp.project_name() << "</RootNamespace>" << std::endl;
-a.stream() << "    <AssemblyName>" << vsp.project_name() << "</AssemblyName>" << std::endl;
+a.stream() << "    <RootNamespace>" << proj.project_name() << "</RootNamespace>" << std::endl;
+a.stream() << "    <AssemblyName>" << proj.project_name() << "</AssemblyName>" << std::endl;
 a.stream() << "  </PropertyGroup>" << std::endl;
 a.stream() << "  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' \">" << std::endl;
 a.stream() << "    <DebugSymbols>true</DebugSymbols>" << std::endl;
@@ -126,10 +128,12 @@ a.stream() << "  </PropertyGroup>" << std::endl;
 a.stream() << "  <ItemGroup>" << std::endl;
 a.stream() << "    <Reference Include=\"System\" />" << std::endl;
 a.stream() << "  </ItemGroup>" << std::endl;
+        for (const auto& ig : proj.item_groups()) {
 a.stream() << "  <ItemGroup>" << std::endl;
-    for (const auto& f : ctx.model().project_items())
-a.stream() << "    <Compile Include=\"" << f << "\" />" << std::endl;
+            for (const auto& i : ig.items())
+a.stream() << "    <" << i.name() << "Include=\"" << i.include() << "\" />" << std::endl;
 a.stream() << "  </ItemGroup>" << std::endl;
+        }
 a.stream() << "  <Import Project=\"$(MSBuildBinPath)\\Microsoft.Cpp.targets\" />" << std::endl;
 a.stream() << "</Project>" << std::endl;
     return a.make_artefact();
