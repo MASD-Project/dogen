@@ -22,8 +22,8 @@
 
 namespace dogen::generation::csharp::formatters::visual_studio {
 
-bool initializer::operator==(const initializer& /*rhs*/) const {
-    return true;
+void initializer::initialize(registrar& /*rg*/) {
+    // register_formatter<class_formatter>(rg);
 }
 
 }
