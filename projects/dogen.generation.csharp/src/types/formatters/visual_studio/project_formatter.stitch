@@ -1,59 +1,61 @@
 <#@ masd.stitch.stream_variable_name=a.stream() #>
-<#@ masd.stitch.containing_namespaces=dogen::generation::csharp::formatters #>
+<#@ masd.stitch.containing_namespaces=dogen::generation::csharp::formatters::visual_studio #>
 <#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/fabric/meta_name_factory.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/fabric/visual_studio_project.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.assets/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.assets/types/meta_model/visual_studio/project.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/visual_studio/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/assistant.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/visual_studio_project_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/visual_studio/project_formatter.hpp" #>
 <#+
 
-std::string visual_studio_project_formatter::static_id() {
-    return traits::visual_studio_project_archetype();
+std::string project_formatter::static_id() {
+    return traits::project_archetype();
 }
 
-std::string visual_studio_project_formatter::id() const {
+std::string project_formatter::id() const {
     static auto r(archetype_location().archetype());
     return r;
 }
 
 archetypes::location
-visual_studio_project_formatter::archetype_location() const {
+project_formatter::archetype_location() const {
     static archetypes::location
         r(csharp::traits::kernel(), csharp::traits::backend(),
-          traits::visual_studio_facet(),
-          visual_studio_project_formatter::static_id());
+          traits::facet(),
+          project_formatter::static_id());
     return r;
 }
 
 const assets::meta_model::name&
-visual_studio_project_formatter::meta_name() const {
-    static auto r(fabric::meta_name_factory::make_visual_studio_project_name());
+project_formatter::meta_name() const {
+    using assets::helpers::meta_name_factory;
+    static auto r(meta_name_factory::make_visual_studio_project_name());
     return r;
 }
 
-std::string visual_studio_project_formatter::family() const {
+std::string project_formatter::family() const {
     return csharp::traits::visual_studio_project_family();
 }
 
-boost::filesystem::path visual_studio_project_formatter::
+boost::filesystem::path project_formatter::
 full_path(const formattables::locator& l, const assets::meta_model::name& n) const {
     return l.make_full_path_for_project(n, static_id());
 }
 
-std::list<std::string> visual_studio_project_formatter::
+std::list<std::string> project_formatter::
 inclusion_dependencies(const assets::meta_model::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
-extraction::meta_model::artefact visual_studio_project_formatter::
+extraction::meta_model::artefact project_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location());
-    const auto& vsp(a.as<fabric::visual_studio_project>(static_id(), e));
+    using assets::meta_model::visual_studio::project;
+    const auto& proj(a.as<project>(static_id(), e));
 
 #>
 <?xml version="1.0" encoding="utf-8"?>
@@ -61,10 +63,10 @@ format(const context& ctx, const assets::meta_model::element& e) const {
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{<#= vsp.project_guid() #>}</ProjectGuid>
+    <ProjectGuid>{<#= proj.guid() #>}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace><#= vsp.project_name() #></RootNamespace>
-    <AssemblyName><#= vsp.project_name() #></AssemblyName>
+    <RootNamespace><#= proj.project_name() #></RootNamespace>
+    <AssemblyName><#= proj.project_name() #></AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -87,12 +89,18 @@ format(const context& ctx, const assets::meta_model::element& e) const {
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
+<#+
+        for (const auto& ig : proj.item_groups()) {
+#>
   <ItemGroup>
 <#+
-    for (const auto& f : ctx.model().project_items())
+            for (const auto& i : ig.items())
 #>
-    <Compile Include="<#= f #>" />
+    <<#= i.name() #>Include="<#= i.include() #>" />
   </ItemGroup>
+<#+
+        }
+#>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
 <#+
