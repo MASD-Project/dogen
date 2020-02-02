@@ -6635,7 +6635,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="145.358,180.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="145.288,180.43;150.704,184.358"/>
+        <dia:rectangle val="145.289,180.43;150.704,184.358"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6706,7 +6706,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="166.086,184"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="165.336,178.117;176.894,184.8"/>
+        <dia:rectangle val="165.336,178.117;176.893,184.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -25499,7 +25499,7 @@ not a regular" helper.#</dia:string>
         <dia:point val="75.0375,285.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="73.1469,285.429;75.1082,287.324"/>
+        <dia:rectangle val="73.147,285.429;75.1082,287.324"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -39563,7 +39563,7 @@ code.
         <dia:point val="49,324"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="48.95,322.95;94.05,352.05"/>
+        <dia:rectangle val="48.95,322.95;96.05,352.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -39572,7 +39572,7 @@ code.
         <dia:point val="49,324"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="45"/>
+        <dia:real val="47"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="28"/>
@@ -40834,7 +40834,7 @@ string.
         <dia:point val="49,355"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="48.95,353.95;94.05,382.05"/>
+        <dia:rectangle val="48.95,353.95;96.05,382.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -40843,7 +40843,7 @@ string.
         <dia:point val="49,355"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="45"/>
+        <dia:real val="47"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="27"/>
