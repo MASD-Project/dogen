@@ -25,6 +25,7 @@
 #include "dogen.generation.csharp/types/formatters/global_features.hpp"
 #include "dogen.generation.csharp/types/formatters/archetype_features.hpp"
 #include "dogen.generation.csharp/types/formatters/test_data/features.hpp"
+#include "dogen.generation.csharp/types/formatters/visual_studio/Class.hpp"
 
 namespace dogen::generation::csharp {
 
@@ -36,6 +37,7 @@ register_templates(variability::helpers::feature_template_registrar& rg) {
     rg.register_templates(dogen::generation::csharp::formatters::io::features::make_templates());
     rg.register_templates(dogen::generation::csharp::formatters::test_data::features::make_templates());
     rg.register_templates(dogen::generation::csharp::formatters::types::features::make_templates());
+    rg.register_templates(dogen::generation::csharp::formatters::visual_studio::Class::make_templates());
 
 }
 

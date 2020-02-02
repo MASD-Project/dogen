@@ -1303,6 +1303,85 @@
         "masd::serialization::type_registrar"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::visual_studio",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "formatters::visual_studio::initializer",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::visual_studio::traits",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::visual_studio::Class",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.generate_static_configuration": "false",
+        "masd.variability.default_binding_point": "global",
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.csharp.visual_studio.directory",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.qualified_name": "masd.generation.csharp..visual_studio.directory"
+          }
+        },
+        {
+          "name": "masd.generation.csharp.visual_studio.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.qualified_name": "masd.generation.csharp..visual_studio.postfix"
+          }
+        },
+        {
+          "name": "masd.generation.csharp..visual_studio.new_solution.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.qualified_name": "masd.generation.csharp..visual_studio.solution.postfix2"
+          }
+        },
+        {
+          "name": "masd.generation.csharp.visual_studio.new_project.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.qualified_name": "masd.generation.csharp..visual_studio.project.postfix2"
+          }
+        }
+      ]
+    },
+    {
+      "name": "formatters::visual_studio::project_formatter",
+      "stereotypes": [
+        "dogen::csharp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::visual_studio::solution_formatter",
+      "stereotypes": [
+        "dogen::csharp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
