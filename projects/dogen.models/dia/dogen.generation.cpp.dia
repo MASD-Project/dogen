@@ -42868,13 +42868,13 @@ string.
         <dia:point val="102,342"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="101.95,341.95;134.12,348.05"/>
+        <dia:rectangle val="101.95,341.95;135.275,348.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="102,342"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.07"/>
+        <dia:real val="33.225000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
@@ -43018,7 +43018,7 @@ string.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.visual_studio.solution.postfix2#</dia:string>
+            <dia:string>#masd.generation.cpp.visual_studio.new_solution.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -43041,7 +43041,7 @@ string.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.visual_studio.project.postfix2#</dia:string>
+            <dia:string>#masd.generation.cpp.visual_studio.new_project.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
