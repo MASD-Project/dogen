@@ -29,6 +29,7 @@
 #include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
 #include "dogen.assets/types/helpers/name_flattener.hpp"
+#include "dogen.assets/io/meta_model/technical_space_io.hpp"
 #include "dogen.assets/lexical_cast/meta_model/technical_space_lc.hpp"
 #include "dogen.assets/types/helpers/visual_studio_project_type_mapper.hpp"
 #include "dogen.assets/types/transforms/transformation_error.hpp"
@@ -111,9 +112,12 @@ apply(const context& ctx, const assets::meta_model::model& m) {
          * for after mapping. Else we should attempt to map it now.
          */
         const auto ts(m.input_technical_space());
+        BOOST_LOG_SEV(lg, debug) << "Model technical space: " << ts;
         if (ts != meta_model::technical_space::agnostic) {
             helpers::visual_studio_project_type_mapper tm;
             proj.type_guid(tm.from_technical_space(ts));
+            BOOST_LOG_SEV(lg, debug) << "Project type for technical space: "
+                                     << proj.type_guid();
         }
 
         /*
@@ -122,6 +126,7 @@ apply(const context& ctx, const assets::meta_model::model& m) {
         project_persistence_block ppb;
         ppb.guid(proj.guid());
         ppb.name(project_name(proj.name()));
+        ppb.type_guid(proj.type_guid());
         ppbs.push_back(ppb);
     }
 
