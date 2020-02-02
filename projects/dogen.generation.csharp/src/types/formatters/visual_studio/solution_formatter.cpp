@@ -21,73 +21,78 @@
 #include <boost/make_shared.hpp>
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.csharp/types/traits.hpp"
-#include "dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
-#include "dogen.generation.csharp/types/fabric/visual_studio_solution.hpp"
-#include "dogen.generation.csharp/types/formatters/traits.hpp"
+#include "dogen.assets/types/helpers/meta_name_factory.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/solution.hpp"
+#include "dogen.generation.csharp/types/formatters/visual_studio/traits.hpp"
 #include "dogen.generation.csharp/types/formatters/types/traits.hpp"
 #include "dogen.generation.csharp/types/formatters/assistant.hpp"
-#include "dogen.generation.csharp/types/formatters/visual_studio_solution_formatter.hpp"
+#include "dogen.generation.csharp/types/formatters/visual_studio/solution_formatter.hpp"
 
-namespace dogen::generation::csharp::formatters {
+namespace dogen::generation::csharp::formatters::visual_studio {
 
-std::string visual_studio_solution_formatter::static_id() {
-    return traits::visual_studio_solution_archetype();
+std::string solution_formatter::static_id() {
+    return traits::solution_archetype();
 }
 
-std::string visual_studio_solution_formatter::id() const {
+std::string solution_formatter::id() const {
     static auto r(archetype_location().archetype());
     return r;
 }
 
 archetypes::location
-visual_studio_solution_formatter::archetype_location() const {
+solution_formatter::archetype_location() const {
     static archetypes::location
         r(csharp::traits::kernel(), csharp::traits::backend(),
-          traits::visual_studio_facet(),
-          visual_studio_solution_formatter::static_id());
+          traits::facet(),
+          solution_formatter::static_id());
     return r;
 }
 
 const assets::meta_model::name&
-visual_studio_solution_formatter::meta_name() const {
-    using fabric::meta_name_factory;
+solution_formatter::meta_name() const {
+    using assets::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_visual_studio_solution_name());
     return r;
 }
 
-std::string visual_studio_solution_formatter::family() const {
+std::string solution_formatter::family() const {
     return csharp::traits::visual_studio_solution_family();
 }
 
-boost::filesystem::path visual_studio_solution_formatter::
+boost::filesystem::path solution_formatter::
 full_path(const formattables::locator& l, const assets::meta_model::name& n) const {
     return l.make_full_path_for_solution(n, static_id());
 }
 
-std::list<std::string> visual_studio_solution_formatter::
+std::list<std::string> solution_formatter::
 inclusion_dependencies(const assets::meta_model::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
-extraction::meta_model::artefact visual_studio_solution_formatter::
+extraction::meta_model::artefact solution_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location());
-    const auto& vsl(a.as<fabric::visual_studio_solution>(static_id(), e));
+    using assets::meta_model::visual_studio::solution;
+    const auto& sln(a.as<solution>(static_id(), e));
 a.stream() << "Microsoft Visual Studio Solution File, Format Version 12.00" << std::endl;
 a.stream() << "# Visual Studio 2012" << std::endl;
-a.stream() << "Project(\"{" << vsl.project_solution_guid() << "}\") = \"" << vsl.project_name() << "\", \"" << vsl.project_name() << ".csproj\", \"{" << vsl.project_guid() << "}\"" << std::endl;
+    for (const auto& ppb : sln.project_persistence_blocks()) {
+a.stream() << "Project(\"{" << ppb.type_guid() << "}\") = \"" << ppb.name() << "\", \"" << ppb.name() << ".csproj\", \"{" << ppb.guid() << "}\"" << std::endl;
 a.stream() << "EndProject" << std::endl;
+    }
 a.stream() << "Global" << std::endl;
 a.stream() << "    GlobalSection(SolutionConfigurationPlatforms) = preSolution" << std::endl;
 a.stream() << "        Debug|Any CPU = Debug|Any CPU" << std::endl;
 a.stream() << "        Release|Any CPU = Release|Any CPU" << std::endl;
 a.stream() << "    EndGlobalSection" << std::endl;
 a.stream() << "    GlobalSection(ProjectConfigurationPlatforms) = postSolution" << std::endl;
-a.stream() << "        {" << vsl.project_guid() << "}.Debug|Any CPU.ActiveCfg = Debug|Any CPU" << std::endl;
-a.stream() << "        {" << vsl.project_guid() << "}.Debug|Any CPU.Build.0 = Debug|Any CPU" << std::endl;
-a.stream() << "        {" << vsl.project_guid() << "}.Release|Any CPU.ActiveCfg = Release|Any CPU" << std::endl;
-a.stream() << "        {" << vsl.project_guid() << "}.Release|Any CPU.Build.0 = Release|Any CPU" << std::endl;
+    for (const auto& ppb : sln.project_persistence_blocks()) {
+a.stream() << "        {" << ppb.guid() << "}.Debug|Any CPU.ActiveCfg = Debug|Any CPU" << std::endl;
+a.stream() << "        {" << ppb.guid() << "}.Debug|Any CPU.Build.0 = Debug|Any CPU" << std::endl;
+a.stream() << "        {" << ppb.guid() << "}.Release|Any CPU.ActiveCfg = Release|Any CPU" << std::endl;
+a.stream() << "        {" << ppb.guid() << "}.Release|Any CPU.Build.0 = Release|Any CPU" << std::endl;
+    }
 a.stream() << "    EndGlobalSection" << std::endl;
 a.stream() << "    GlobalSection(MonoDevelopProperties) = preSolution" << std::endl;
 a.stream() << "        StartupItem = CSharpModel.csproj" << std::endl;
