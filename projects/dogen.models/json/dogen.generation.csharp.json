@@ -1323,7 +1323,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::visual_studio::Class",
+      "name": "formatters::visual_studio::features",
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
@@ -1352,11 +1352,11 @@
           }
         },
         {
-          "name": "masd.generation.csharp..visual_studio.new_solution.postfix",
+          "name": "masd.generation.csharp.visual_studio.new_solution.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp..visual_studio.solution.postfix2"
+            "masd.variability.qualified_name": "masd.generation.csharp..visual_studio.new_solution.postfix"
           }
         },
         {
@@ -1364,7 +1364,7 @@
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp..visual_studio.project.postfix2"
+            "masd.variability.qualified_name": "masd.generation.csharp..visual_studio.new_project.postfix"
           }
         }
       ]

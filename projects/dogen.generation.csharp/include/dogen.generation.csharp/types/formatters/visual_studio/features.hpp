@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_VISUAL_STUDIO_CLASS_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_VISUAL_STUDIO_CLASS_HPP
+#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_VISUAL_STUDIO_FEATURES_HPP
+#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_VISUAL_STUDIO_FEATURES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 
 namespace dogen::generation::csharp::formatters::visual_studio {
 
-class Class final {
+class features final {
 
 public:
     static std::list<dogen::variability::meta_model::feature_template>

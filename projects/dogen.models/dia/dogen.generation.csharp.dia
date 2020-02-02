@@ -19139,19 +19139,19 @@
         <dia:point val="117,92"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="116.95,91.95;151.815,98.05"/>
+        <dia:rectangle val="116.95,91.95;151.43,98.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="117,92"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="34.765000000000001"/>
+        <dia:real val="34.380000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#Class#</dia:string>
+        <dia:string>#features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::variability::feature_bundle#</dia:string>
@@ -19289,7 +19289,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp..visual_studio.new_solution.postfix#</dia:string>
+            <dia:string>#masd.generation.csharp.visual_studio.new_solution.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -19298,7 +19298,7 @@
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp..visual_studio.solution.postfix2#</dia:string>
+            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp..visual_studio.new_solution.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -19321,7 +19321,7 @@
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp..visual_studio.project.postfix2#</dia:string>
+            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp..visual_studio.new_project.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
