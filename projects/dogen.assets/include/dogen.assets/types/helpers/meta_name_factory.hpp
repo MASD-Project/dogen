@@ -56,8 +56,8 @@ public:
     make_variability_feature_template_initializer_name();
     static meta_model::name make_templating_logic_less_templates_name();
     static meta_model::name make_serialization_type_registrar_name();
-    static meta_model::name make_build_visual_studio_solution_name();
-    static meta_model::name make_build_visual_studio_project_name();
+    static meta_model::name make_visual_studio_solution_name();
+    static meta_model::name make_visual_studio_project_name();
 };
 
 }

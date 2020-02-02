@@ -148,12 +148,12 @@ public:
     }
 
     void operator()(assets::meta_model::visual_studio::solution& v) {
-        static const auto n(mnf::make_build_visual_studio_solution_name());
+        static const auto n(mnf::make_visual_studio_solution_name());
         v.meta_name(n);
     }
 
     void operator()(assets::meta_model::visual_studio::project& v) {
-        static const auto n(mnf::make_build_visual_studio_project_name());
+        static const auto n(mnf::make_visual_studio_project_name());
         v.meta_name(n);
     }
 };
