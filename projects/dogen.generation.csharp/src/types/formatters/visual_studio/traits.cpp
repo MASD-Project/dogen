@@ -22,8 +22,26 @@
 
 namespace dogen::generation::csharp::formatters::visual_studio {
 
-bool traits::operator==(const traits& /*rhs*/) const {
-    return true;
+std::string traits::facet() {
+    static std::string r("masd.generation.csharp.visual_studio");
+    return r;
+}
+
+std::string traits::canonical_archetype() {
+    static std::string r(traits::facet() + ".canonical_archetype");
+    return r;
+}
+
+std::string traits::solution_archetype() {
+    // FIXME: drop new prefix.
+    static std::string r("masd.generation.csharp.visual_studio.new_solution");
+    return r;
+}
+
+std::string traits::project_archetype() {
+    // FIXME: drop new prefix.
+    static std::string r("masd.generation.csharp.visual_studio.new_project");
+    return r;
 }
 
 }
