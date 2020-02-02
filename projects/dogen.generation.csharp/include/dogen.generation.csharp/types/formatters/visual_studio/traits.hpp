@@ -30,6 +30,7 @@
 namespace dogen::generation::csharp::formatters::visual_studio {
 
 class traits final {
+public:
     /**
      * @brief Name of this facet.
      */
