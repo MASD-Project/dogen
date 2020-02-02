@@ -605,6 +605,28 @@ may just leave it as is for now until we fix it properly.
 Since all meta-elements should live in assets, we should fix this once
 all of them have been moved across.
 
+*** Do logic-less templates belong in =generation.cpp=?               :story:
+
+For purely expediency purposes, we placed the logic-less templates
+formatter in the =generation.cpp= model. However, this means you
+cannot create logic-less templates in C# models. For now its fine as
+Dogen is the only user of these meta-model elements, but in the future
+when we create a JSON schema for model data, we will want to use these
+from any technical space. We need to either implement formatters on
+every technical space or find a way to create TS-neutral formatters.
+
+That is to say, we create a formatter for logic-less templates in the
+C++ generation model. This means that you can only use these in the
+C++ technical space. The easy solution is just to copy across the
+formatters into the C# technical space. However, this is not scalable
+as we add more backends. However, this may be the correct approach
+given our conceptual model - as we found out with forward
+declarations.
+
+In light of the change related to primary and secondary technical
+spaces, we should really create a technical space for stitch and move
+the formatters there.
+
 *** Add model name to tracing dumps                                   :story:
 
 At present we are dumping just the transform name and GUID. This makes
@@ -2385,24 +2407,6 @@ PDM before we can do this because otherwise the logging will be in
 different locations (i.e. dogen vs reference model).
 
 We should add some meta-data flag to suppress/enable logging.
-
-*** Do logic-less templates belong in =generation.cpp=?               :story:
-
-For purely expediency purposes, we placed the logic-less templates
-formatter in the =generation.cpp= model. However, this means you
-cannot create logic-less templates in C# models. For now its fine as
-Dogen is the only user of these meta-model elements, but in the future
-when we create a JSON schema for model data, we will want to use these
-from any technical space. We need to either implement formatters on
-every technical space or find a way to create TS-neutral formatters.
-
-That is to say, we create a formatter for logic-less templates in the
-C++ generation model. This means that you can only use these in the
-C++ technical space. The easy solution is just to copy across the
-formatters into the C# technical space. However, this is not scalable
-as we add more backends. However, this may be the correct approach
-given our conceptual model - as we found out with forward
-declarations.
 
 *** Colouring script should be included as part of package            :story:
 
