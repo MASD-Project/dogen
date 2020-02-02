@@ -22,8 +22,24 @@
 
 namespace dogen::generation::cpp::formatters::visual_studio {
 
-bool traits::operator==(const traits& /*rhs*/) const {
-    return true;
+std::string traits::facet() {
+    static std::string r("masd.generation.cpp.visual_studio");
+    return r;
+}
+
+std::string traits::canonical_archetype() {
+    static std::string r(traits::facet() + ".canonical_archetype");
+    return r;
+}
+
+std::string traits::visual_studio_solution_archetype() {
+    static std::string r("masd.generation.cpp.visual_studio.solution");
+    return r;
+}
+
+std::string traits::visual_studio_project_archetype() {
+    static std::string r("masd.generation.cpp.visual_studio.project");
+    return r;
 }
 
 }
