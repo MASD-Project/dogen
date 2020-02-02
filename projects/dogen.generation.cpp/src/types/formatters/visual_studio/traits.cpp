@@ -32,13 +32,13 @@ std::string traits::canonical_archetype() {
     return r;
 }
 
-std::string traits::visual_studio_solution_archetype() {
+std::string traits::solution_archetype() {
     // FIXME: drop new prefix.
     static std::string r("masd.generation.cpp.visual_studio.new_solution");
     return r;
 }
 
-std::string traits::visual_studio_project_archetype() {
+std::string traits::project_archetype() {
     // FIXME: drop new prefix.
     static std::string r("masd.generation.cpp.visual_studio.new_project");
     return r;

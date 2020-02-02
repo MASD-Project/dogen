@@ -43,12 +43,12 @@ struct traits {
     /**
      * @brief Visual Studio solution.
      */
-    static std::string visual_studio_solution_archetype();
+    static std::string solution_archetype();
 
     /**
      * @brief Visual Studio solution.
      */
-    static std::string visual_studio_project_archetype();
+    static std::string project_archetype();
 };
 
 }

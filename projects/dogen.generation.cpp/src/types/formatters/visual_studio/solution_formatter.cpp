@@ -33,7 +33,7 @@
 namespace dogen::generation::cpp::formatters::visual_studio {
 
 std::string solution_formatter::static_id() {
-    return traits::visual_studio_solution_archetype();
+    return traits::solution_archetype();
 }
 
 std::string solution_formatter::id() const {
