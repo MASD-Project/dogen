@@ -18,12 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.generation.cpp/types/formatters/visual_studio/project_formatter.hpp"
+#include "dogen.generation.cpp/types/formatters/visual_studio/solution_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/visual_studio/initializer.hpp"
 
 namespace dogen::generation::cpp::formatters::visual_studio {
 
-bool initializer::operator==(const initializer& /*rhs*/) const {
-    return true;
+void initializer::initialize(registrar& rg) {
+    register_formatter<project_formatter>(rg);
+    register_formatter<solution_formatter>(rg);
 }
 
 }
