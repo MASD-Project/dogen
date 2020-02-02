@@ -84,10 +84,15 @@ public:
     void guid(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Set of project persistence blocks in this solution.
+     */
+    /**@{*/
     const std::list<dogen::assets::meta_model::visual_studio::project_persistence_block>& project_persistence_blocks() const;
     std::list<dogen::assets::meta_model::visual_studio::project_persistence_block>& project_persistence_blocks();
     void project_persistence_blocks(const std::list<dogen::assets::meta_model::visual_studio::project_persistence_block>& v);
     void project_persistence_blocks(const std::list<dogen::assets::meta_model::visual_studio::project_persistence_block>&& v);
+    /**@}*/
 
 public:
     bool operator==(const solution& rhs) const;

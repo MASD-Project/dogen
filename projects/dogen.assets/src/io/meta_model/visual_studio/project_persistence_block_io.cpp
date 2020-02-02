@@ -37,7 +37,8 @@ std::ostream& operator<<(std::ostream& s, const project_persistence_block& v) {
       << "\"__type__\": " << "\"dogen::assets::meta_model::visual_studio::project_persistence_block\"" << ", "
       << "\"guid\": " << "\"" << tidy_up_string(v.guid()) << "\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\""
+      << "\"relative_path\": " << "\"" << v.relative_path().generic_string() << "\"" << ", "
+      << "\"type_guid\": " << "\"" << tidy_up_string(v.type_guid()) << "\""
       << " }";
     return(s);
 }

@@ -25,27 +25,32 @@ namespace dogen::assets::meta_model::visual_studio {
 project_persistence_block::project_persistence_block(project_persistence_block&& rhs)
     : guid_(std::move(rhs.guid_)),
       name_(std::move(rhs.name_)),
-      relative_path_(std::move(rhs.relative_path_)) { }
+      relative_path_(std::move(rhs.relative_path_)),
+      type_guid_(std::move(rhs.type_guid_)) { }
 
 project_persistence_block::project_persistence_block(
     const std::string& guid,
     const std::string& name,
-    const boost::filesystem::path& relative_path)
+    const boost::filesystem::path& relative_path,
+    const std::string& type_guid)
     : guid_(guid),
       name_(name),
-      relative_path_(relative_path) { }
+      relative_path_(relative_path),
+      type_guid_(type_guid) { }
 
 void project_persistence_block::swap(project_persistence_block& other) noexcept {
     using std::swap;
     swap(guid_, other.guid_);
     swap(name_, other.name_);
     swap(relative_path_, other.relative_path_);
+    swap(type_guid_, other.type_guid_);
 }
 
 bool project_persistence_block::operator==(const project_persistence_block& rhs) const {
     return guid_ == rhs.guid_ &&
         name_ == rhs.name_ &&
-        relative_path_ == rhs.relative_path_;
+        relative_path_ == rhs.relative_path_ &&
+        type_guid_ == rhs.type_guid_;
 }
 
 project_persistence_block& project_persistence_block::operator=(project_persistence_block other) {
@@ -100,6 +105,22 @@ void project_persistence_block::relative_path(const boost::filesystem::path& v) 
 
 void project_persistence_block::relative_path(const boost::filesystem::path&& v) {
     relative_path_ = std::move(v);
+}
+
+const std::string& project_persistence_block::type_guid() const {
+    return type_guid_;
+}
+
+std::string& project_persistence_block::type_guid() {
+    return type_guid_;
+}
+
+void project_persistence_block::type_guid(const std::string& v) {
+    type_guid_ = v;
+}
+
+void project_persistence_block::type_guid(const std::string&& v) {
+    type_guid_ = std::move(v);
 }
 
 }

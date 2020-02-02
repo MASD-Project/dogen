@@ -49,15 +49,27 @@ public:
         const std::string& include);
 
 public:
+    /**
+     * @brief Name of the item, such as "Compile", "CompileCl", etc.
+     *
+     * Maps to a well known MSBuild target.
+     */
+    /**@{*/
     const std::string& name() const;
     std::string& name();
     void name(const std::string& v);
     void name(const std::string&& v);
+    /**@}*/
 
+    /**
+     * @brief Name of the file to include.
+     */
+    /**@{*/
     const std::string& include() const;
     std::string& include();
     void include(const std::string& v);
     void include(const std::string&& v);
+    /**@}*/
 
 public:
     bool operator==(const item& rhs) const;

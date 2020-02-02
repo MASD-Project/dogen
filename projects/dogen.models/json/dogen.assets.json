@@ -3410,6 +3410,11 @@
           "name": "item_groups",
           "type": "std::list<item_group>",
           "documentation": "Set of item groups in the project.\n"
+        },
+        {
+          "name": "project_name",
+          "type": "std::string",
+          "documentation": "Formatted name of the project.\n"
         }
       ]
     },
@@ -3419,11 +3424,13 @@
       "attributes": [
         {
           "name": "solutions",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<solution>>"
+          "type": "std::unordered_map<std::string, boost::shared_ptr<solution>>",
+          "documentation": "All solutions in this model.\n"
         },
         {
           "name": "projects",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<project>>"
+          "type": "std::unordered_map<std::string, boost::shared_ptr<project>>",
+          "documentation": "All projects in this model.\n"
         }
       ]
     },
@@ -3446,11 +3453,13 @@
       "attributes": [
         {
           "name": "name",
-          "type": "std::string"
+          "type": "std::string",
+          "documentation": "Name of the item, such as \"Compile\", \"CompileCl\", etc.\n\nMaps to a well known MSBuild target.\n"
         },
         {
           "name": "include",
-          "type": "std::string"
+          "type": "std::string",
+          "documentation": "Name of the file to include.\n"
         }
       ]
     },
@@ -3464,7 +3473,8 @@
       "attributes": [
         {
           "name": "project_persistence_blocks",
-          "type": "std::list<project_persistence_block>"
+          "type": "std::list<project_persistence_block>",
+          "documentation": "Set of project persistence blocks in this solution.\n"
         }
       ]
     },
@@ -3477,11 +3487,18 @@
       "attributes": [
         {
           "name": "name",
-          "type": "std::string"
+          "type": "std::string",
+          "documentation": "Name of the project.\n"
         },
         {
           "name": "relative_path",
-          "type": "boost::filesystem::path"
+          "type": "boost::filesystem::path",
+          "documentation": "Relative path to the project file.\n"
+        },
+        {
+          "name": "type_guid",
+          "type": "std::string",
+          "documentation": "GUID used by Visual Studio to identify projects of this type.\n"
         }
       ]
     },

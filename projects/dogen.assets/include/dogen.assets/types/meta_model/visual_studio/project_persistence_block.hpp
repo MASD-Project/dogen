@@ -44,7 +44,8 @@ public:
     project_persistence_block(
         const std::string& guid,
         const std::string& name,
-        const boost::filesystem::path& relative_path);
+        const boost::filesystem::path& relative_path,
+        const std::string& type_guid);
 
 public:
     /**
@@ -57,15 +58,35 @@ public:
     void guid(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Name of the project.
+     */
+    /**@{*/
     const std::string& name() const;
     std::string& name();
     void name(const std::string& v);
     void name(const std::string&& v);
+    /**@}*/
 
+    /**
+     * @brief Relative path to the project file.
+     */
+    /**@{*/
     const boost::filesystem::path& relative_path() const;
     boost::filesystem::path& relative_path();
     void relative_path(const boost::filesystem::path& v);
     void relative_path(const boost::filesystem::path&& v);
+    /**@}*/
+
+    /**
+     * @brief GUID used by Visual Studio to identify projects of this type.
+     */
+    /**@{*/
+    const std::string& type_guid() const;
+    std::string& type_guid();
+    void type_guid(const std::string& v);
+    void type_guid(const std::string&& v);
+    /**@}*/
 
 public:
     bool operator==(const project_persistence_block& rhs) const;
@@ -81,6 +102,7 @@ private:
     std::string guid_;
     std::string name_;
     boost::filesystem::path relative_path_;
+    std::string type_guid_;
 };
 
 }

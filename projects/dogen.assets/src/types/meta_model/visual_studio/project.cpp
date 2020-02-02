@@ -68,7 +68,8 @@ project::project(
     const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
     const std::string& guid,
     const std::string& type_guid,
-    const std::list<dogen::assets::meta_model::visual_studio::item_group>& item_groups)
+    const std::list<dogen::assets::meta_model::visual_studio::item_group>& item_groups,
+    const std::string& project_name)
     : dogen::assets::meta_model::element(
       name,
       documentation,
@@ -88,7 +89,8 @@ project::project(
       decoration),
       guid_(guid),
       type_guid_(type_guid),
-      item_groups_(item_groups) { }
+      item_groups_(item_groups),
+      project_name_(project_name) { }
 
 void project::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -114,7 +116,8 @@ void project::to_stream(std::ostream& s) const {
     s << ", "
       << "\"guid\": " << "\"" << tidy_up_string(guid_) << "\"" << ", "
       << "\"type_guid\": " << "\"" << tidy_up_string(type_guid_) << "\"" << ", "
-      << "\"item_groups\": " << item_groups_
+      << "\"item_groups\": " << item_groups_ << ", "
+      << "\"project_name\": " << "\"" << tidy_up_string(project_name_) << "\""
       << " }";
 }
 
@@ -125,6 +128,7 @@ void project::swap(project& other) noexcept {
     swap(guid_, other.guid_);
     swap(type_guid_, other.type_guid_);
     swap(item_groups_, other.item_groups_);
+    swap(project_name_, other.project_name_);
 }
 
 bool project::equals(const dogen::assets::meta_model::element& other) const {
@@ -137,7 +141,8 @@ bool project::operator==(const project& rhs) const {
     return dogen::assets::meta_model::element::compare(rhs) &&
         guid_ == rhs.guid_ &&
         type_guid_ == rhs.type_guid_ &&
-        item_groups_ == rhs.item_groups_;
+        item_groups_ == rhs.item_groups_ &&
+        project_name_ == rhs.project_name_;
 }
 
 project& project::operator=(project other) {
@@ -192,6 +197,22 @@ void project::item_groups(const std::list<dogen::assets::meta_model::visual_stud
 
 void project::item_groups(const std::list<dogen::assets::meta_model::visual_studio::item_group>&& v) {
     item_groups_ = std::move(v);
+}
+
+const std::string& project::project_name() const {
+    return project_name_;
+}
+
+std::string& project::project_name() {
+    return project_name_;
+}
+
+void project::project_name(const std::string& v) {
+    project_name_ = v;
+}
+
+void project::project_name(const std::string&& v) {
+    project_name_ = std::move(v);
 }
 
 }

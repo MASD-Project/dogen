@@ -47,15 +47,25 @@ public:
         const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::project> >& projects);
 
 public:
+    /**
+     * @brief All solutions in this model.
+     */
+    /**@{*/
     const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::solution> >& solutions() const;
     std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::solution> >& solutions();
     void solutions(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::solution> >& v);
     void solutions(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::solution> >&& v);
+    /**@}*/
 
+    /**
+     * @brief All projects in this model.
+     */
+    /**@{*/
     const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::project> >& projects() const;
     std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::project> >& projects();
     void projects(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::project> >& v);
     void projects(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::project> >&& v);
+    /**@}*/
 
 public:
     bool operator==(const element_repository& rhs) const;

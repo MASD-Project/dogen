@@ -65,7 +65,8 @@ public:
         const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
         const std::string& guid,
         const std::string& type_guid,
-        const std::list<dogen::assets::meta_model::visual_studio::item_group>& item_groups);
+        const std::list<dogen::assets::meta_model::visual_studio::item_group>& item_groups,
+        const std::string& project_name);
 
 public:
     using element::accept;
@@ -108,6 +109,16 @@ public:
     void item_groups(const std::list<dogen::assets::meta_model::visual_studio::item_group>&& v);
     /**@}*/
 
+    /**
+     * @brief Formatted name of the project.
+     */
+    /**@{*/
+    const std::string& project_name() const;
+    std::string& project_name();
+    void project_name(const std::string& v);
+    void project_name(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const project& rhs) const;
     bool operator!=(const project& rhs) const {
@@ -125,6 +136,7 @@ private:
     std::string guid_;
     std::string type_guid_;
     std::list<dogen::assets::meta_model::visual_studio::item_group> item_groups_;
+    std::string project_name_;
 };
 
 }

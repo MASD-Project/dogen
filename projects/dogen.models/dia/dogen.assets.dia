@@ -41653,7 +41653,7 @@ build systems.
         <dia:point val="68,-34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="67.95,-34.05;86.26,-29.55"/>
+        <dia:rectangle val="67.95,-34.05;86.26,-28.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="68,-34"/>
@@ -41662,7 +41662,7 @@ build systems.
         <dia:real val="18.210000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#project#</dia:string>
@@ -41798,6 +41798,29 @@ build systems.
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#project_name#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Formatted name of the project.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -41921,7 +41944,7 @@ build systems.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#All solutions in this model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -41944,7 +41967,7 @@ build systems.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#All projects in this model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -42005,7 +42028,7 @@ build systems.
         <dia:point val="79,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="67.95,-29.65;79.75,-14.2"/>
+        <dia:rectangle val="67.95,-28.85;79.75,-14.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -42014,7 +42037,7 @@ build systems.
         <dia:point val="79,-15"/>
         <dia:point val="79,-18"/>
         <dia:point val="68,-18"/>
-        <dia:point val="68,-29.6"/>
+        <dia:point val="68,-28.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -42292,7 +42315,9 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the item, such as "Compile", "CompileCl", etc.
+
+Maps to a well known MSBuild target.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -42315,7 +42340,7 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the file to include.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -42522,7 +42547,7 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Set of project persistence blocks in this solution.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -42547,7 +42572,7 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
         <dia:point val="95,-26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="94.95,-26.05;110.565,-21.55"/>
+        <dia:rectangle val="94.95,-26.05;110.565,-20.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="95,-26"/>
@@ -42556,7 +42581,7 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
         <dia:real val="15.515000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#project_persistence_block#</dia:string>
@@ -42657,7 +42682,7 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Name of the project.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -42680,7 +42705,30 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
+            <dia:string>#Relative path to the project file.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#type_guid#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
             <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#GUID used by Visual Studio to identify projects of this type.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -43236,7 +43284,7 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
         <dia:point val="76.6775,-26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="76.6275,-30.35;86.96,-24.4"/>
+        <dia:rectangle val="76.6275,-29.55;86.96,-24.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -43245,7 +43293,7 @@ used in a MSBuild project must be specified as a child of an ItemGroup element.#
         <dia:point val="76.6775,-26"/>
         <dia:point val="76.6775,-28"/>
         <dia:point val="86.21,-28"/>
-        <dia:point val="86.21,-29.6"/>
+        <dia:point val="86.21,-28.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
