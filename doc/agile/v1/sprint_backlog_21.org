@@ -12,27 +12,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-02-01 Sat 20:52]
+#+CAPTION: Clock summary at [2020-02-02 Sun 17:58]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *35:13* |       |       | 100.0 |
+| *Total time*                                          | *36:38* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 35:13   |       |       | 100.0 |
-| Active                                                |         | 35:13 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  7:01 |  19.9 |
-| Create a demo and presentation for previous sprint    |         |       |  1:49 |   5.2 |
-| Sprint and product backlog grooming                   |         |       |  2:08 |   6.1 |
-| Create new playlist for assets work                   |         |       |  1:22 |   3.9 |
+| Stories                                               | 36:38   |       |       | 100.0 |
+| Active                                                |         | 36:38 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  7:01 |  19.2 |
+| Create a demo and presentation for previous sprint    |         |       |  1:49 |   5.0 |
+| Sprint and product backlog grooming                   |         |       |  2:20 |   6.4 |
+| Create new playlist for assets work                   |         |       |  1:22 |   3.7 |
 | Create the final video on the relational model series |         |       |  0:30 |   1.4 |
-| Move registrar into assets                            |         |       |  5:34 |  15.8 |
-| Fix error in asserter tests                           |         |       |  0:38 |   1.8 |
-| Add injection details to all models                   |         |       |  0:25 |   1.2 |
-| Fix nightly error in registrar                        |         |       |  0:33 |   1.6 |
-| Nightly code coverage is not being reported           |         |       |  0:25 |   1.2 |
-| Fixes to setup                                        |         |       |  1:05 |   3.1 |
-| Cannot see source file in coveralls                   |         |       |  0:16 |   0.8 |
-| Move visual studio fabric types into assets           |         |       | 13:27 |  38.2 |
+| Move registrar into assets                            |         |       |  5:34 |  15.2 |
+| Fix error in asserter tests                           |         |       |  0:38 |   1.7 |
+| Add injection details to all models                   |         |       |  0:25 |   1.1 |
+| Fix nightly error in registrar                        |         |       |  0:33 |   1.5 |
+| Nightly code coverage is not being reported           |         |       |  0:25 |   1.1 |
+| Fixes to setup                                        |         |       |  1:05 |   3.0 |
+| Cannot see source file in coveralls                   |         |       |  0:16 |   0.7 |
+| Move visual studio fabric types into assets           |         |       | 13:27 |  36.7 |
+| Integration of archetypes into assets                 |         |       |  1:13 |   3.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -337,6 +338,7 @@ using the Dogen test models.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-02-02 Sun 16:31]--[2020-02-02 Sun 16:43] =>  0:12
     CLOCK: [2020-01-31 Fri 16:23]--[2020-01-31 Fri 16:34] =>  0:11
     CLOCK: [2020-01-31 Fri 08:42]--[2020-01-31 Fri 09:02] =>  0:20
     CLOCK: [2020-01-29 Wed 08:35]--[2020-01-29 Wed 08:48] =>  0:13
@@ -730,6 +732,76 @@ Notes:
 8. =origin_transform=.
 9. engine: =assets_model_to_generation_model_transform=.
 
+***
+
+*** STARTED Integration of archetypes into assets                     :story:
+    :LOGBOOK:
+    CLOCK: [2020-02-02 Sun 17:54]--[2020-02-02 Sun 17:58] =>  0:04
+    CLOCK: [2020-02-02 Sun 16:44]--[2020-02-02 Sun 17:53] =>  1:09
+    :END:
+
+Up to recently, there was a belief that the archetypes model was
+distinct from the assets model. The idea was that the projection of
+assets into archetype space could be done without knowledge of the
+things we are projecting. However, that is demonstrably false: n order
+to project we need a name. That name contains a location. The location
+is a point on a one-dimensional asset space.
+
+In reality, what we always had is:
+
+- a first dimension within assets space: "modeling dimension",
+  "logical dimension"? It has an associated location.
+- a second dimension within assets space: "physical dimension", with
+  an associated location. Actually we cannot call it physical because
+  physical is understood to mean the filesystem.
+
+So it is that concepts such as archetype, facet and technical space
+are all part of assets - they just happen to be part of the
+two-dimensional projection. Generation is in effect a collection of
+model to text transforms that adapts the two-dimensional element
+representation into the extraction meta-model. Formatters are model to
+text transforms which bind to locations in the physical dimension.
+
+In this view of the world, we have meta-model elements to declare
+archetypes, with their associated physical locations. This then
+results in the injection of these meta-elements. Formatters bind to
+these locations.
+
+However, note that formatters provide dependencies. This is because
+these are implementation dependent. This means we still need some
+transforms to occur at the generation level. However, all of the
+dependencies which are modeling related should happen within
+assets. Only those which are formatter specific should happen in
+generation. The problem though is that at present we deem all
+dependencies to be formatter specific and each formatter explicitly
+names its dependencies against which facets. It does make sense for
+these to be together.
+
+Perhaps what we are trying to say is that there are 3 distinct
+concepts:
+
+- modeling locations;
+- logical locations;
+- physical locations.
+
+The first two are within the domain of assets. The last one is in the
+domain of generation and extraction. Assets should make the required
+data structures available, but it is the job of generation to populate
+this information. Thus directory themes, locator, etc are all
+generation concepts.
+
+One could, with a hint of humour, call the "logical dimension" the
+meta-physical dimension. This is because it provides the meta-concepts
+for the physical dimension.
+
+A backend provides a translation into a representation considered
+valid according to the rules of a technical space. A backend can be
+the primary or secondary backend for a technical space. A component
+can only have a primary backend, and any number of secondary
+backends. Artefacts produced by a backend must have a unique physical
+location. In LAM mode, the component is split into multiple
+components, each with their own primary technical space.
+
 *** Technical space composition                                       :story:
 
 There are some formatters which are really not specific to a technical
@@ -793,6 +865,81 @@ machinery dealing with element extensions can be deleted.
 
 This includes the formatter master segments.
 
+Merged stories:
+
+*Element extensions considered harmful*
+
+When we implemented forward declarations we created them as "element
+extensions"; that is, some kind of hack where we'd have two model
+elements stuck together (the main model element and its "extension",
+the forward declaration). In reality, they are just projections of the
+same model element. We need to handle them just as we handle class
+header / implementation. We just need to use the formatter specific
+postfix to distinguish between files.
+
+The problem with this approach, of course, is that we now need to
+create many formatters (per element type). A possible solution is to
+factor them out into a formatting helper function that they call. We
+still need all of the common machinery to formatters
+though. Nevertheless, this is a price worth paying in order to keep
+the meta-model simple (e.g. none of the hacks we introduced for
+element extensions).
+
+Notes:
+
+- add forward declaration formatters for each type. Create common
+  formatting function.
+- remove forward declaration element in fabric.
+- remove element extensions across the code base. Actually this is not
+  possible at present as it is used by ODB options. We need to first
+  move them into assets before this can be done.
+
+Merged stories:
+
+*Remove element segmentation*
+
+We need to remove the idea of forward declarations being handled as
+"element segmentation". They should just be different facets of the
+same elements. There is another story for this which should be merged
+with this one.
+
+*Move element segmentation into yarn*
+
+We've added the notion that an element can be composed of other
+elements in quilt, in order to handle forward declarations. However,
+with a little bit of effort we can generalise it into yarn. It would
+be useful for other things such as inner classes. We don't need to
+actually implement inner classes right now but we should make sure the
+moving of this feature into yarn is compatible with it.
+
+Notes:
+
+- seems like we have two use cases: a) we need all elements, master
+  and extensions and we don't really care about which is which. b) we
+  only want masters. However, we must be able to access the same
+  element properties from either the master or the extension. Having
+  said all that, it seems we don't really need all of the element
+  properties for both - forward declarations probably only need:
+  decoration and artefact properties.
+- we don't seem to use the map in formattables model anywhere, other
+  than to find master/extension elements.
+- Yarn model could have two simple list containers (masters and
+  all). Or maybe we don't even need this to start off with, we can
+  just iterate and skip extensions where required.
+- so in conclusion, we to move decoration, enablement and dependencies
+  into yarn (basically decoration and artefact properties) first and
+  then see where segmentation ends.
+
+Tasks:
+
+- add a concept for element extensions: =Extensible=. Contains a list
+  of element pointers.
+- populate it with the extensions.
+- change enablement to merge all element properties of extensible
+  elements.
+
+
+
 *** Tracing backend is not defaulted                                  :story:
 
 Not supplying a tracing backend results in the following error:
@@ -815,6 +962,11 @@ should reflect those on the "special" comment.
 
 Or perhaps a case can be made that the root module is special and it
 is the only implicit element.
+
+*** Create metamodel elements for =entry_point= and =interface=       :story:
+
+These have been incorrectly added as configurations and/or fabric
+types. This should be looked at after merging the fabric types.
 
 ** Deprecated
 *** CANCELLED Move fabric types into coding                            :epic:
@@ -1018,3 +1170,14 @@ locator in generation in order to move these entities - or we need to
 update the existing expanders in =generation.cpp= to point to these
 new meta-elements. This may be the best bet so that we can break this
 work into discrete parts.
+*** CANCELLED Investigate helper generation in formattables           :story:
+    CLOSED: [2020-02-02 Sun 16:45]
+
+*Rationale*: once we move to PDMs, helpers will be manually crafted so
+we will remove all of this code.
+
+We seem to be generating an helper for every node of every name tree,
+regardless of whether the name needs a helper or not. Intuitively, we
+should check the family and the streaming settings; if both of these
+are empty then there should not be a need for a helper. But maybe
+there is more to it.
