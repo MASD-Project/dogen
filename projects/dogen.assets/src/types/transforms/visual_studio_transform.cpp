@@ -97,6 +97,8 @@ apply(const context& ctx, const assets::meta_model::model& m) {
     std::list<project_persistence_block> ppbs;
     for (auto& pair : m.visual_studio_elements().projects()) {
         auto& proj(*pair.second);
+        proj.project_name(project_name(proj.name()));
+
         if (proj.guid().empty()) {
             BOOST_LOG_SEV(lg, warn) << "User did not supply project GUID.";
             const auto uuid = boost::uuids::random_generator()();
