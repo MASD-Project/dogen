@@ -96,7 +96,7 @@ format(const context& ctx, const assets::meta_model::element& e) const {
 <#+
             for (const auto& i : ig.items())
 #>
-    <<#= i.name() #>Include="<#= i.include() #>" />
+    <<#= i.name() #> Include="<#= i.include() #>" />
   </ItemGroup>
 <#+
         }

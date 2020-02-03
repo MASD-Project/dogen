@@ -110,7 +110,7 @@ a.stream() << "  </ItemGroup>" << std::endl;
         for (const auto& ig : proj.item_groups()) {
 a.stream() << "  <ItemGroup>" << std::endl;
             for (const auto& i : ig.items())
-a.stream() << "    <" << i.name() << "Include=\"" << i.include() << "\" />" << std::endl;
+a.stream() << "    <" << i.name() << " Include=\"" << i.include() << "\" />" << std::endl;
 a.stream() << "  </ItemGroup>" << std::endl;
         }
 a.stream() << "  <Import Project=\"$(MSBuildBinPath)\\Microsoft.CSharp.targets\" />" << std::endl;
