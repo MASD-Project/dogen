@@ -20,6 +20,7 @@
  */
 #include <set>
 #include <algorithm>
+#include <boost/pointer_cast.hpp>
 #include "dogen.assets/types/helpers/meta_name_factory.hpp"
 #include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.assets/types/meta_model/structural/visitor.hpp"
@@ -27,9 +28,17 @@
 #include "dogen.assets/types/meta_model/structural/exception.hpp"
 #include "dogen.assets/types/meta_model/structural/enumeration.hpp"
 #include "dogen.assets/types/meta_model/structural/primitive.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/project_persistence_block.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/project.hpp"
 #include "dogen.generation.csharp/types/fabric/assistant.hpp"
 #include "dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
 #include "dogen.generation.csharp/types/formattables/project_items_expander.hpp"
+
+namespace {
+
+const std::string msbuild_target("Compile");
+
+}
 
 namespace dogen::generation::csharp::formattables {
 
@@ -44,7 +53,8 @@ project_items_expander::meta_names_for_project_items() {
     r.insert(ymnf::make_object_name().qualified().dot());
     r.insert(ymnf::make_builtin_name().qualified().dot());
     r.insert(ymnf::make_visitor_name().qualified().dot());
-    r.insert(fabric::meta_name_factory::make_assistant_name().qualified().dot());
+    r.insert(fabric::meta_name_factory::
+        make_assistant_name().qualified().dot());
 
     return r;
 }
@@ -57,13 +67,22 @@ bool project_items_expander::is_project_item(const std::string& mn) const {
 }
 
 void project_items_expander::expand(model& fm) const {
+    using assets::meta_model::visual_studio::project;
+    boost::shared_ptr<project> proj;
+    using ymnf = assets::helpers::meta_name_factory;
+    const auto proj_name(ymnf::make_visual_studio_project_name());
+    const auto proj_qn(proj_name.qualified().dot());
+
     std::set<std::string> set;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
         const auto& e(*formattable.element());
 
         const auto mt(e.meta_name().qualified().dot());
-        if (!is_project_item(mt))
+        if (mt == proj_qn) {
+            proj = boost::dynamic_pointer_cast<project>(formattable.element());
+            continue;
+        } else if (!is_project_item(mt))
             continue;
 
         const auto& eprops(formattable.element_properties());
@@ -80,8 +99,19 @@ void project_items_expander::expand(model& fm) const {
         }
     }
 
-    for (const auto& p : set)
-        fm.project_items().push_back(p);
+    for (const auto& pi : set)
+        fm.project_items().push_back(pi);
+
+    if (proj) {
+        assets::meta_model::visual_studio::item_group ig;
+        for (const auto& pi : set) {
+            assets::meta_model::visual_studio::item item;
+            item.include(pi);
+            item.name(msbuild_target);
+            ig.items().push_back(item);
+        }
+        proj->item_groups().push_back(ig);
+    }
 }
 
 }
