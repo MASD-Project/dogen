@@ -483,86 +483,6 @@ make_masd_generation_cpp_msbuild_targets_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
-make_masd_generation_cpp_visual_studio_project_solution_guid() {
-    using namespace dogen::variability::meta_model;
-    feature_template r;
-    r.name().simple("project_solution_guid");
-    r.name().qualified("masd.generation.cpp.visual_studio.project_solution_guid");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
-    dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "00000000-0000-0000-0000-000000000000" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
-    return r;
-}
-
-dogen::variability::meta_model::feature_template
-make_masd_generation_cpp_visual_studio_project_guid() {
-    using namespace dogen::variability::meta_model;
-    feature_template r;
-    r.name().simple("project_guid");
-    r.name().qualified("masd.generation.cpp.visual_studio.project_guid");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
-    dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "00000000-0000-0000-0000-000000000000" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
-    return r;
-}
-
-dogen::variability::meta_model::feature_template
-make_masd_generation_cpp_visual_studio_solution_postfix() {
-    using namespace dogen::variability::meta_model;
-    feature_template r;
-    r.name().simple("postfix");
-    r.name().qualified("masd.generation.cpp.visual_studio.solution.postfix");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
-    dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
-    return r;
-}
-
-dogen::variability::meta_model::feature_template
-make_masd_generation_cpp_visual_studio_project_postfix() {
-    using namespace dogen::variability::meta_model;
-    feature_template r;
-    r.name().simple("postfix");
-    r.name().qualified("masd.generation.cpp.visual_studio.project.postfix");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
-    dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
-    return r;
-}
-
 }
 
 
@@ -593,10 +513,6 @@ global_features::make_templates() {
     r.push_back(make_masd_generation_cpp_cmake_source_cmakelists_postfix());
     r.push_back(make_masd_generation_cpp_cmake_include_cmakelists_postfix());
     r.push_back(make_masd_generation_cpp_msbuild_targets_postfix());
-    r.push_back(make_masd_generation_cpp_visual_studio_project_solution_guid());
-    r.push_back(make_masd_generation_cpp_visual_studio_project_guid());
-    r.push_back(make_masd_generation_cpp_visual_studio_solution_postfix());
-    r.push_back(make_masd_generation_cpp_visual_studio_project_postfix());
     return r;
 }
 

@@ -37190,16 +37190,16 @@ code.
         <dia:point val="19.1429,174.357"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.0929,174.307;66.6629,198.807"/>
+        <dia:rectangle val="19.0929,174.307;58.5779,195.607"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="19.1429,174.357"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="47.469999999999999"/>
+        <dia:real val="39.385000000000005"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="24.400000000000009"/>
+        <dia:real val="21.200000000000006"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#global_features#</dia:string>
@@ -37878,110 +37878,6 @@ code.
 
 #DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.qualified_name=masd.generation.cpp.msbuild.targets.postfix#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.visual_studio.project_solution_guid#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#"00000000-0000-0000-0000-000000000000"#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Which GUID to use for Visual Studio solutions.
-
-#DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.visual_studio.project_solution_guid#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.visual_studio.project_guid#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#"00000000-0000-0000-0000-000000000000"#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Which GUID to use for Visual Studio projects.
-
-#DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.visual_studio.project_guid#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.visual_studio.solution.postfix#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#""#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Which postfix to use for Visual Studio solutions.
-
-#DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.visual_studio.solution.postfix#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.visual_studio.project.postfix#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#""#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Which postfix to use for Visual Studio projects.
-
-#DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.visual_studio.project.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -41656,13 +41552,13 @@ string.
         <dia:point val="102,342"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="101.95,341.95;135.275,348.05"/>
+        <dia:rectangle val="101.95,341.95;133.735,348.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="102,342"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="33.225000000000001"/>
+        <dia:real val="31.685000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
@@ -41806,7 +41702,7 @@ string.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.visual_studio.new_solution.postfix#</dia:string>
+            <dia:string>#masd.generation.cpp.visual_studio.solution.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -41815,7 +41711,7 @@ string.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.visual_studio.solution.postfix2#</dia:string>
+            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.visual_studio.solution.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -41829,7 +41725,7 @@ string.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.visual_studio.new_project.postfix#</dia:string>
+            <dia:string>#masd.generation.cpp.visual_studio.project.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -41838,7 +41734,7 @@ string.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.visual_studio.project.postfix2#</dia:string>
+            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.visual_studio.project.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

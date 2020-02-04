@@ -2861,46 +2861,6 @@
             "masd.variability.binding_point": "global",
             "masd.variability.qualified_name": "masd.generation.cpp.msbuild.targets.postfix"
           }
-        },
-        {
-          "name": "masd.generation.cpp.visual_studio.project_solution_guid",
-          "type": "masd::variability::text",
-          "value": "\"00000000-0000-0000-0000-000000000000\"",
-          "documentation": "Which GUID to use for Visual Studio solutions.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.visual_studio.project_solution_guid"
-          }
-        },
-        {
-          "name": "masd.generation.cpp.visual_studio.project_guid",
-          "type": "masd::variability::text",
-          "value": "\"00000000-0000-0000-0000-000000000000\"",
-          "documentation": "Which GUID to use for Visual Studio projects.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.visual_studio.project_guid"
-          }
-        },
-        {
-          "name": "masd.generation.cpp.visual_studio.solution.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\"",
-          "documentation": "Which postfix to use for Visual Studio solutions.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.visual_studio.solution.postfix"
-          }
-        },
-        {
-          "name": "masd.generation.cpp.visual_studio.project.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\"",
-          "documentation": "Which postfix to use for Visual Studio projects.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.visual_studio.project.postfix"
-          }
         }
       ]
     },
@@ -3270,19 +3230,19 @@
           }
         },
         {
-          "name": "masd.generation.cpp.visual_studio.new_solution.postfix",
+          "name": "masd.generation.cpp.visual_studio.solution.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.visual_studio.solution.postfix2"
+            "masd.variability.qualified_name": "masd.generation.cpp.visual_studio.solution.postfix"
           }
         },
         {
-          "name": "masd.generation.cpp.visual_studio.new_project.postfix",
+          "name": "masd.generation.cpp.visual_studio.project.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.visual_studio.project.postfix2"
+            "masd.variability.qualified_name": "masd.generation.cpp.visual_studio.project.postfix"
           }
         }
       ]
