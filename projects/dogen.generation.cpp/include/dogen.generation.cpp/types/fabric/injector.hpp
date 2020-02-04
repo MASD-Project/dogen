@@ -50,14 +50,11 @@ private:
 private:
     void inject_build_files(generation::meta_model::model& m) const;
     void inject_odb_options(generation::meta_model::model& m) const;
-    void inject_visual_studio(const variability::meta_model::feature_model& fm,
-        generation::meta_model::model& m) const;
     void inject_entry_point(
         generation::meta_model::model& m) const;
 
 public:
-    void inject(const variability::meta_model::feature_model& fm,
-        generation::meta_model::model& m) const;
+    void inject(generation::meta_model::model& m) const;
 };
 
 }
