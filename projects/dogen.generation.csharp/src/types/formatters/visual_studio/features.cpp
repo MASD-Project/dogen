@@ -66,11 +66,11 @@ make_masd_generation_csharp_visual_studio_postfix() {
 }
 
 dogen::variability::meta_model::feature_template
-make_masd_generation_csharp_visual_studio_new_solution_postfix() {
+make_masd_generation_csharp_visual_studio_solution_postfix() {
     using namespace dogen::variability::meta_model;
     feature_template r;
     r.name().simple("postfix");
-    r.name().qualified("masd.generation.csharp.visual_studio.new_solution.postfix");
+    r.name().qualified("masd.generation.csharp.visual_studio.solution.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -86,11 +86,11 @@ make_masd_generation_csharp_visual_studio_new_solution_postfix() {
 }
 
 dogen::variability::meta_model::feature_template
-make_masd_generation_csharp_visual_studio_new_project_postfix() {
+make_masd_generation_csharp_visual_studio_project_postfix() {
     using namespace dogen::variability::meta_model;
     feature_template r;
     r.name().simple("postfix");
-    r.name().qualified("masd.generation.csharp.visual_studio.new_project.postfix");
+    r.name().qualified("masd.generation.csharp.visual_studio.project.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -114,8 +114,8 @@ features::make_templates() {
     std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_generation_csharp_visual_studio_directory());
     r.push_back(make_masd_generation_csharp_visual_studio_postfix());
-    r.push_back(make_masd_generation_csharp_visual_studio_new_solution_postfix());
-    r.push_back(make_masd_generation_csharp_visual_studio_new_project_postfix());
+    r.push_back(make_masd_generation_csharp_visual_studio_solution_postfix());
+    r.push_back(make_masd_generation_csharp_visual_studio_project_postfix());
     return r;
 }
 

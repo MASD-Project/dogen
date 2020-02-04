@@ -1069,42 +1069,6 @@
           }
         },
         {
-          "name": "masd.generation.csharp.visual_studio.project_solution_guid",
-          "type": "masd::variability::text",
-          "value": "\"00000000-0000-0000-0000-000000000000\"",
-          "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.csharp.visual_studio.project_solution_guid"
-          }
-        },
-        {
-          "name": "masd.generation.csharp.visual_studio.project_guid",
-          "type": "masd::variability::text",
-          "value": "\"00000000-0000-0000-0000-000000000000\"",
-          "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.csharp.visual_studio.project_guid"
-          }
-        },
-        {
-          "name": "masd.generation.csharp.visual_studio.solution.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.csharp.visual_studio.solution.postfix"
-          }
-        },
-        {
-          "name": "masd.generation.csharp.visual_studio.project.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.csharp.visual_studio.project.postfix"
-          }
-        },
-        {
           "name": "masd.generation.csharp.helper.family",
           "type": "masd::variability::text",
           "value": "\"Default\"",
@@ -1271,19 +1235,19 @@
           }
         },
         {
-          "name": "masd.generation.csharp.visual_studio.new_solution.postfix",
+          "name": "masd.generation.csharp.visual_studio.solution.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp..visual_studio.new_solution.postfix"
+            "masd.variability.qualified_name": "masd.generation.csharp..visual_studio.solution.postfix"
           }
         },
         {
-          "name": "masd.generation.csharp.visual_studio.new_project.postfix",
+          "name": "masd.generation.csharp.visual_studio.project.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp..visual_studio.new_project.postfix"
+            "masd.variability.qualified_name": "masd.generation.csharp..visual_studio.project.postfix"
           }
         }
       ]
