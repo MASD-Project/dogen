@@ -1,6 +1,7 @@
 <#@ masd.stitch.stream_variable_name=a.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::generation::cpp::formatters::visual_studio #>
 <#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+<#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/join.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
@@ -61,7 +62,9 @@ boost::filesystem::path solution_formatter::inclusion_path(
 
 boost::filesystem::path solution_formatter::
 full_path(const formattables::locator& l, const assets::meta_model::name& n) const {
-    return l.make_full_path_for_solution(n, static_id());
+    auto temp(n);
+    temp.simple(boost::algorithm::join(n.location().model_modules(), ".") + ".sln");
+    return l.make_full_path_for_project(temp, static_id());
 }
 
 std::list<std::string> solution_formatter::inclusion_dependencies(

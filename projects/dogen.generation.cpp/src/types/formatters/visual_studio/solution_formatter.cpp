@@ -19,6 +19,7 @@
  *
  */
 #include <boost/make_shared.hpp>
+#include <boost/algorithm/string/join.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
@@ -80,7 +81,9 @@ boost::filesystem::path solution_formatter::inclusion_path(
 
 boost::filesystem::path solution_formatter::
 full_path(const formattables::locator& l, const assets::meta_model::name& n) const {
-    return l.make_full_path_for_solution(n, static_id());
+    auto temp(n);
+    temp.simple(boost::algorithm::join(n.location().model_modules(), ".") + ".sln");
+    return l.make_full_path_for_project(temp, static_id());
 }
 
 std::list<std::string> solution_formatter::inclusion_dependencies(
