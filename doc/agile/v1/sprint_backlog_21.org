@@ -12,28 +12,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-02-03 Mon 18:32]
+#+CAPTION: Clock summary at [2020-02-04 Tue 22:57]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *40:41* |       |       | 100.0 |
+| *Total time*                                          | *43:58* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 40:41   |       |       | 100.0 |
-| Active                                                |         | 40:41 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  7:01 |  17.2 |
-| Create a demo and presentation for previous sprint    |         |       |  1:49 |   4.5 |
-| Sprint and product backlog grooming                   |         |       |  2:20 |   5.7 |
-| Create new playlist for assets work                   |         |       |  1:48 |   4.4 |
-| Create the final video on the relational model series |         |       |  0:30 |   1.2 |
-| Move registrar into assets                            |         |       |  5:34 |  13.7 |
-| Fix error in asserter tests                           |         |       |  0:38 |   1.6 |
-| Add injection details to all models                   |         |       |  0:25 |   1.0 |
-| Fix nightly error in registrar                        |         |       |  0:33 |   1.4 |
-| Nightly code coverage is not being reported           |         |       |  0:25 |   1.0 |
-| Fixes to setup                                        |         |       |  1:05 |   2.7 |
-| Cannot see source file in coveralls                   |         |       |  0:16 |   0.7 |
-| Move visual studio fabric types into assets           |         |       | 15:36 |  38.3 |
-| Integration of archetypes into assets                 |         |       |  2:41 |   6.6 |
+| Stories                                               | 43:58   |       |       | 100.0 |
+| Active                                                |         | 43:58 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  7:01 |  16.0 |
+| Create a demo and presentation for previous sprint    |         |       |  1:49 |   4.1 |
+| Sprint and product backlog grooming                   |         |       |  2:20 |   5.3 |
+| Create new playlist for assets work                   |         |       |  1:57 |   4.4 |
+| Create the final video on the relational model series |         |       |  0:30 |   1.1 |
+| Move registrar into assets                            |         |       |  5:34 |  12.7 |
+| Fix error in asserter tests                           |         |       |  0:38 |   1.4 |
+| Add injection details to all models                   |         |       |  0:25 |   0.9 |
+| Fix nightly error in registrar                        |         |       |  0:33 |   1.3 |
+| Nightly code coverage is not being reported           |         |       |  0:25 |   0.9 |
+| Move visual studio fabric types into assets           |         |       | 18:34 |  42.2 |
+| Fixes to setup                                        |         |       |  1:05 |   2.5 |
+| Cannot see source file in coveralls                   |         |       |  0:16 |   0.6 |
+| Integration of archetypes into assets                 |         |       |  2:41 |   6.1 |
+| Remove support for element extensions                 |         |       |  0:10 |   0.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -354,6 +355,7 @@ Updates to sprint and product backlog.
 
 *** STARTED Create new playlist for assets work                       :story:
     :LOGBOOK:
+    CLOCK: [2020-02-02 Sun 22:10]--[2020-02-02 Sun 22:19] =>  0:09
     CLOCK: [2020-02-02 Sun 20:36]--[2020-02-02 Sun 21:02] =>  0:26
     CLOCK: [2020-01-31 Fri 17:22]--[2020-01-31 Fri 17:34] =>  0:12
     CLOCK: [2020-01-31 Fri 16:35]--[2020-01-31 Fri 16:39] =>  0:04
@@ -630,35 +632,11 @@ model. One would still have to define a large package, but it could be
 empty, or contain only the types which only have connections inside
 the package, plus comments for the package, etc.
 
-*** STARTED Fixes to setup                                            :story:
+*** COMPLETED Move visual studio fabric types into assets             :story:
+    CLOSED: [2020-02-04 Tue 22:44]
     :LOGBOOK:
-    CLOCK: [2020-01-31 Fri 11:38]--[2020-01-31 Fri 11:51] =>  0:13
-    CLOCK: [2020-01-31 Fri 10:59]--[2020-01-31 Fri 11:37] =>  0:38
-    CLOCK: [2020-01-31 Fri 09:41]--[2020-01-31 Fri 09:55] =>  0:15
-    :END:
-
-Time spent fixing setup issues:
-
-- fixes to emacs
-- dist-upgrade PC to latest.
-
-*** STARTED Cannot see source file in coveralls                       :story:
-    :LOGBOOK:
-    CLOCK: [2020-01-31 Fri 15:03]--[2020-01-31 Fri 15:19] =>  0:16
-    :END:
-
-At present the path of source files in coveralls is incorrect:
-
-: /cpp_ref_impl.boost_model/src/types/class_a.cpp
-
-: SOURCE NOT AVAILABLE
-: The file "cpp_ref_impl.boost_model/src/types/class_a.cpp" isn't available on github. Either it's been removed, or the repo root directory needs to be updated.
-
-We have the same problem in codecove, only there is worse because we
-also can't see the fake commit we did.
-
-*** STARTED Move visual studio fabric types into assets               :story:
-    :LOGBOOK:
+    CLOCK: [2020-02-04 Tue 20:32]--[2020-02-04 Tue 22:44] =>  2:12
+    CLOCK: [2020-02-03 Mon 23:10]--[2020-02-03 Mon 23:56] =>  0:46
     CLOCK: [2020-02-02 Sun 21:16]--[2020-02-02 Sun 22:09] =>  0:53
     CLOCK: [2020-02-02 Sun 21:03]--[2020-02-02 Sun 21:16] =>  0:13
     CLOCK: [2020-02-02 Sun 18:51]--[2020-02-02 Sun 19:03] =>  0:12
@@ -723,6 +701,24 @@ Notes:
   roughly by one meta-model element.
 - remove types that are not "special" from decomposer to avoid
   confusion.
+- the name flag =is_simple_name_internal= doesn't quite work as we
+  expected. The problem is that we normally ignore both external
+  modules and model modules when creating paths. This means that the
+  quickest solution may just be to name the file after the model and
+  worry about this issue later. Except, of course, we then would end
+  up with the same name for two asset elements. What we really need is
+  a flag to give the physical name after the containing modules (model
+  and internal), ignoring simple name. We have a similar situation for
+  the folders under include, where the model modules are used, e.g.:
+  =dogen.generation.csharp=. This is a bit of a more general idea, and
+  we've already started to think about it with "model segments",
+  though it was never properly fleshed out. This is clearly a complex
+  problem.
+- the right thing to do for now is to hack it by any means, so we can
+  move on, and tackle this problem properly later when we develop a
+  proper physical model and meta-model. For now we can simply hack the
+  templates to produce *exactly* the desired name (e.g. use model
+  modules as simple name with extension).
 
 **** How to add new meta-model elements
 
@@ -738,6 +734,33 @@ Notes:
 9. engine: =assets_model_to_generation_model_transform=.
 10. Add formatters in the =generation.cpp= and/or =generation.csharp=
     models.
+
+*** STARTED Fixes to setup                                            :story:
+    :LOGBOOK:
+    CLOCK: [2020-01-31 Fri 11:38]--[2020-01-31 Fri 11:51] =>  0:13
+    CLOCK: [2020-01-31 Fri 10:59]--[2020-01-31 Fri 11:37] =>  0:38
+    CLOCK: [2020-01-31 Fri 09:41]--[2020-01-31 Fri 09:55] =>  0:15
+    :END:
+
+Time spent fixing setup issues:
+
+- fixes to emacs
+- dist-upgrade PC to latest.
+
+*** STARTED Cannot see source file in coveralls                       :story:
+    :LOGBOOK:
+    CLOCK: [2020-01-31 Fri 15:03]--[2020-01-31 Fri 15:19] =>  0:16
+    :END:
+
+At present the path of source files in coveralls is incorrect:
+
+: /cpp_ref_impl.boost_model/src/types/class_a.cpp
+
+: SOURCE NOT AVAILABLE
+: The file "cpp_ref_impl.boost_model/src/types/class_a.cpp" isn't available on github. Either it's been removed, or the repo root directory needs to be updated.
+
+We have the same problem in codecove, only there is worse because we
+also can't see the fake commit we did.
 
 *** STARTED Integration of archetypes into assets                     :story:
     :LOGBOOK:
@@ -809,68 +832,21 @@ backends. Artefacts produced by a backend must have a unique physical
 location. In LAM mode, the component is split into multiple
 components, each with their own primary technical space.
 
-*** Technical space composition                                       :story:
-
-There are some formatters which are really not specific to a technical
-space:
-
-- CMake can be used with several languages such as C, C++, etc.
-- Visual studio solutions are common to many technical spaces (F#, C#,
-  C++, etc).
-
-It seems we need to create a set of generation models which can be
-used in conjunction with the "dominant" technical space. These are
-triggered by the presence of meta-elements. Or perhaps we can just say
-that we iterate through all "non-dominant" technical spaces ("main"
-and "secondary"?  "subsidiary"?) and generate anything for which there
-is an enabled and matching meta-element.
-
-*** Replace detection of model name with new flag                     :story:
-
-In the past we tried to detect if a name referred to the model, and if
-so, to ignore the simple name. This avoids names such as =a::b::b=,
-creating instead =a::b=. For example, in name flattener we have
-=detect_model_name=. There are others such as name builder etc with
-possibly similar behaviours.
-
-However, we recently created a new flag:
-=is_simple_name_internal=. This was added for meta-types with the same
-name as the model, but its use solves this issue. We need to remove
-all hacks around this and use the flag consistently.
-
-The problem is that at present we use the model module as a simple
-name, such that a model name is, for example:
-
-- model modules: dogen
-- simple name: cli
-
-Whereas for a type, we have:
-
-- model modules: dogen.cli
-
-*** Improve error messages for mistakes in meta-data enums            :story:
-
-At present when one makes a mistake in meta data the errors are not
-particularly enlightening:
-
-: FAILED: projects/dogen.models/dia/CMakeFiles/generate_dogen.engine.dia
-: cd /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang9/Release && /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang9/Release/stage/bin/dogen.cli generate --target /work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen.models/dia/dogen.engine.dia --output-directory /work/DomainDrivenConsulting/masd/dogen/integration/projects/
-: Error: bad lexical cast: source type value could not be interpreted as target
-
-This was caused because we put in an invalid binding point:
-
-: #DOGEN masd.variability.default_binding_point=entity
-
-We should trap the lexical cast exception and provide a proper error
-given the context.
-
-*** Remove support for element extensions                             :story:
+*** STARTED Remove support for element extensions                     :story:
+    :LOGBOOK:
+    CLOCK: [2020-02-04 Tue 22:54]--[2020-02-04 Tue 22:56] =>  0:02
+    CLOCK: [2020-02-04 Tue 22:45]--[2020-02-04 Tue 22:53] =>  0:08
+    :END:
 
 We are not using element extensions any longer since we added the
 forward declaration meta-type (we believe), so in theory all of the
 machinery dealing with element extensions can be deleted.
 
 This includes the formatter master segments.
+
+Actually this is not true, we are using it in
+=odb_options_factory=. We need to make this a proper facet instead of
+this hack.
 
 Merged stories:
 
@@ -945,6 +921,60 @@ Tasks:
 - change enablement to merge all element properties of extensible
   elements.
 
+*** Technical space composition                                       :story:
+
+There are some formatters which are really not specific to a technical
+space:
+
+- CMake can be used with several languages such as C, C++, etc.
+- Visual studio solutions are common to many technical spaces (F#, C#,
+  C++, etc).
+
+It seems we need to create a set of generation models which can be
+used in conjunction with the "dominant" technical space. These are
+triggered by the presence of meta-elements. Or perhaps we can just say
+that we iterate through all "non-dominant" technical spaces ("main"
+and "secondary"?  "subsidiary"?) and generate anything for which there
+is an enabled and matching meta-element.
+
+*** Replace detection of model name with new flag                     :story:
+
+In the past we tried to detect if a name referred to the model, and if
+so, to ignore the simple name. This avoids names such as =a::b::b=,
+creating instead =a::b=. For example, in name flattener we have
+=detect_model_name=. There are others such as name builder etc with
+possibly similar behaviours.
+
+However, we recently created a new flag:
+=is_simple_name_internal=. This was added for meta-types with the same
+name as the model, but its use solves this issue. We need to remove
+all hacks around this and use the flag consistently.
+
+The problem is that at present we use the model module as a simple
+name, such that a model name is, for example:
+
+- model modules: dogen
+- simple name: cli
+
+Whereas for a type, we have:
+
+- model modules: dogen.cli
+
+*** Improve error messages for mistakes in meta-data enums            :story:
+
+At present when one makes a mistake in meta data the errors are not
+particularly enlightening:
+
+: FAILED: projects/dogen.models/dia/CMakeFiles/generate_dogen.engine.dia
+: cd /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang9/Release && /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang9/Release/stage/bin/dogen.cli generate --target /work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen.models/dia/dogen.engine.dia --output-directory /work/DomainDrivenConsulting/masd/dogen/integration/projects/
+: Error: bad lexical cast: source type value could not be interpreted as target
+
+This was caused because we put in an invalid binding point:
+
+: #DOGEN masd.variability.default_binding_point=entity
+
+We should trap the lexical cast exception and provide a proper error
+given the context.
 
 *** Tracing backend is not defaulted                                  :story:
 
