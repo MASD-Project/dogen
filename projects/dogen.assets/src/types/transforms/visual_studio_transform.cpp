@@ -31,7 +31,6 @@
 #include "dogen.assets/types/helpers/name_flattener.hpp"
 #include "dogen.assets/io/meta_model/technical_space_io.hpp"
 #include "dogen.assets/lexical_cast/meta_model/technical_space_lc.hpp"
-#include "dogen.assets/types/helpers/visual_studio_project_type_mapper.hpp"
 #include "dogen.assets/types/transforms/transformation_error.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/project.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/solution.hpp"
@@ -65,8 +64,8 @@ visual_studio_transform::project_name(const meta_model::name& n) {
 void visual_studio_transform::
 apply(const context& ctx, const assets::meta_model::model& m) {
     const auto id(m.name().qualified().dot());
-    tracing::scoped_transform_tracer stp(lg, "mapping transform", transform_id,
-        id, *ctx.tracer(), m);
+    tracing::scoped_transform_tracer stp(lg, "visual studio transform",
+        transform_id, id, *ctx.tracer(), m);
 
     /*
      * We expect to have zero or one projects on a model.
@@ -98,6 +97,12 @@ apply(const context& ctx, const assets::meta_model::model& m) {
     std::list<project_persistence_block> ppbs;
     for (auto& pair : m.visual_studio_elements().projects()) {
         auto& proj(*pair.second);
+        /*
+         * Populate the project properties. Note that we do not
+         * compute the project type guid here because we do not know
+         * the final technical space for the model (it may change
+         * after mapping).
+         */
         proj.project_name(project_name(proj.name()));
 
         if (proj.guid().empty()) {
@@ -108,25 +113,11 @@ apply(const context& ctx, const assets::meta_model::model& m) {
         }
 
         /*
-         * If the technical space is "agnostic", we need to leave it
-         * for after mapping. Else we should attempt to map it now.
-         */
-        const auto ts(m.input_technical_space());
-        BOOST_LOG_SEV(lg, debug) << "Model technical space: " << ts;
-        if (ts != meta_model::technical_space::agnostic) {
-            helpers::visual_studio_project_type_mapper tm;
-            proj.type_guid(tm.from_technical_space(ts));
-            BOOST_LOG_SEV(lg, debug) << "Project type for technical space: "
-                                     << proj.type_guid();
-        }
-
-        /*
          * Create the project persistence block for this project.
          */
         project_persistence_block ppb;
         ppb.guid(proj.guid());
         ppb.name(project_name(proj.name()));
-        ppb.type_guid(proj.type_guid());
         ppbs.push_back(ppb);
     }
 

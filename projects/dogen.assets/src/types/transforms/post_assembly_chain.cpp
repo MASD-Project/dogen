@@ -35,6 +35,7 @@
 #include "dogen.assets/types/transforms/associations_transform.hpp"
 #include "dogen.assets/types/transforms/meta_naming_transform.hpp"
 #include "dogen.assets/types/transforms/type_registrar_transform.hpp"
+#include "dogen.assets/types/transforms/visual_studio_project_type_transform.hpp"
 #include "dogen.assets/types/transforms/post_assembly_chain.hpp"
 
 namespace {
@@ -52,6 +53,11 @@ namespace dogen::assets::transforms {
 void post_assembly_chain::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_chain_tracer stp(lg, "model post-processing chain",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+
+    /*
+     * Visual studio project type transform has no dependencies.
+     */
+    visual_studio_project_type_transform::apply(ctx, m);
 
     /*
      * Enumeration transform must be done after merging as we need the
