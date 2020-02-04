@@ -1,6 +1,7 @@
 <#@ masd.stitch.stream_variable_name=a.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::generation::csharp::formatters::visual_studio #>
 <#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+<#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/join.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.assets/types/helpers/meta_name_factory.hpp" #>
@@ -42,7 +43,9 @@ std::string project_formatter::family() const {
 
 boost::filesystem::path project_formatter::
 full_path(const formattables::locator& l, const assets::meta_model::name& n) const {
-    return l.make_full_path_for_project(n, static_id());
+    auto temp(n);
+    temp.simple(boost::algorithm::join(n.location().model_modules(), ".") + ".csproj");
+    return l.make_full_path_for_project(temp, static_id());
 }
 
 std::list<std::string> project_formatter::

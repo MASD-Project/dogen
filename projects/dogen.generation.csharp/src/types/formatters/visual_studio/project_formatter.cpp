@@ -19,6 +19,7 @@
  *
  */
 #include <boost/make_shared.hpp>
+#include <boost/algorithm/string/join.hpp>
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.csharp/types/traits.hpp"
 #include "dogen.assets/types/helpers/meta_name_factory.hpp"
@@ -61,7 +62,9 @@ std::string project_formatter::family() const {
 
 boost::filesystem::path project_formatter::
 full_path(const formattables::locator& l, const assets::meta_model::name& n) const {
-    return l.make_full_path_for_project(n, static_id());
+    auto temp(n);
+    temp.simple(boost::algorithm::join(n.location().model_modules(), ".") + ".csproj");
+    return l.make_full_path_for_project(temp, static_id());
 }
 
 std::list<std::string> project_formatter::

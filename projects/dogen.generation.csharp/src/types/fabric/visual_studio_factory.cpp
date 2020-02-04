@@ -156,16 +156,19 @@ make_project(const visual_studio_configuration cfg,
 }
 
 std::list<boost::shared_ptr<assets::meta_model::element>>
-visual_studio_factory::make(const variability::meta_model::feature_model& fm,
-    const generation::meta_model::model& m) const {
-
+visual_studio_factory::make(const variability::meta_model::feature_model& /*fm*/,
+    const generation::meta_model::model& /*m*/) const {
+    /*
     const auto pn(obtain_project_name(m));
     const auto rcfg(*m.root_module()->configuration());
     const auto cfg(make_configuration(fm, rcfg));
+    */
 
     std::list<boost::shared_ptr<assets::meta_model::element>> r;
+    /*
     r.push_back(make_solution(cfg, pn, m));
     r.push_back(make_project(cfg, pn, m));
+    */
 
     return r;
 }
