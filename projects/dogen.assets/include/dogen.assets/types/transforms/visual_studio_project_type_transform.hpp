@@ -25,24 +25,17 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.assets/types/meta_model/model.hpp"
+#include "dogen.assets/types/transforms/context_fwd.hpp"
 
 namespace dogen::assets::transforms {
 
+/**
+ * @brief Updates the mapping of visual studio project types.
+ */
 class visual_studio_project_type_transform final {
 public:
-    visual_studio_project_type_transform() = default;
-    visual_studio_project_type_transform(const visual_studio_project_type_transform&) = default;
-    visual_studio_project_type_transform(visual_studio_project_type_transform&&) = default;
-    ~visual_studio_project_type_transform() = default;
-    visual_studio_project_type_transform& operator=(const visual_studio_project_type_transform&) = default;
-
-public:
-    bool operator==(const visual_studio_project_type_transform& rhs) const;
-    bool operator!=(const visual_studio_project_type_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, const assets::meta_model::model& m);
 };
 
 }

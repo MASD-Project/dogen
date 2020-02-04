@@ -18,12 +18,50 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.assets/io/meta_model/model_io.hpp"
+#include "dogen.assets/types/transforms/context.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/project.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/solution.hpp"
+#include "dogen.assets/types/helpers/visual_studio_project_type_mapper.hpp"
 #include "dogen.assets/types/transforms/visual_studio_project_type_transform.hpp"
+
+namespace {
+
+const std::string transform_id(
+    "assets.transforms.visual_studio_project_type_transform");
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::assets::transforms {
 
-bool visual_studio_project_type_transform::operator==(const visual_studio_project_type_transform& /*rhs*/) const {
-    return true;
+void visual_studio_project_type_transform::
+apply(const context& ctx, const assets::meta_model::model& m) {
+    const auto id(m.name().qualified().dot());
+    tracing::scoped_transform_tracer stp(lg,
+        "visual studio project type transform", transform_id, id,
+        *ctx.tracer(), m);
+
+    const auto ts(m.input_technical_space());
+    helpers::visual_studio_project_type_mapper tm;
+    const auto pt_guid(tm.from_technical_space(ts));
+    BOOST_LOG_SEV(lg, debug) << "Project type for technical space: " << pt_guid;
+
+    for (auto& pair : m.visual_studio_elements().projects()) {
+        auto& proj(*pair.second);
+        proj.type_guid(pt_guid);
+    }
+
+    for (auto& pair : m.visual_studio_elements().solutions()) {
+        for (auto& ppb : pair.second->project_persistence_blocks())
+            ppb.type_guid(pt_guid);
+    }
+
+    stp.end_transform(m);
 }
 
 }
