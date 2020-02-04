@@ -22,7 +22,6 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.generation.csharp/types/fabric/assembly_info_factory.hpp"
-#include "dogen.generation.csharp/types/fabric/visual_studio_factory.hpp"
 #include "dogen.generation.csharp/types/fabric/assistant_factory.hpp"
 #include "dogen.generation.csharp/types/fabric/injector.hpp"
 
@@ -52,14 +51,6 @@ void injector::add_elements(
         add_element(e, m);
 }
 
-void injector::inject_visual_studio(
-    const variability::meta_model::feature_model& fm,
-    generation::meta_model::model& m) const {
-    visual_studio_factory f;
-    const auto e(f.make(fm, m));
-    add_elements(e, m);
-}
-
 void injector::
 inject_assembly_info(generation::meta_model::model& m) const {
     assembly_info_factory f;
@@ -73,9 +64,7 @@ void injector::inject_assistant(generation::meta_model::model& m) const {
     add_element(e, m);
 }
 
-void injector::inject(const variability::meta_model::feature_model& fm,
-    generation::meta_model::model& m) const {
-    inject_visual_studio(fm, m);
+void injector::inject(generation::meta_model::model& m) const {
     inject_assembly_info(m);
     inject_assistant(m);
 }

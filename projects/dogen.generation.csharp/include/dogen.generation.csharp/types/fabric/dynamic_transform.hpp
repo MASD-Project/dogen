@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.assets/types/transforms/context_fwd.hpp"
 #include "dogen.generation/types/transforms/dynamic_transform_interface.hpp"
 
@@ -37,8 +36,7 @@ private:
     bool requires_expansion(
         const generation::meta_model::model& m) const;
 
-    void expand_injection(const variability::meta_model::feature_model& fm,
-        generation::meta_model::model& m) const;
+    void expand_injection(generation::meta_model::model& m) const;
 
 public:
     std::string id() const override;

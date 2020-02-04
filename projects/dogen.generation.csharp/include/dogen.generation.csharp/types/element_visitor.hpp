@@ -28,8 +28,6 @@
 #include "dogen.assets/types/meta_model/element_visitor.hpp"
 #include "dogen.generation.csharp/types/fabric/assistant_fwd.hpp"
 #include "dogen.generation.csharp/types/fabric/assembly_info_fwd.hpp"
-#include "dogen.generation.csharp/types/fabric/visual_studio_project_fwd.hpp"
-#include "dogen.generation.csharp/types/fabric/visual_studio_solution_fwd.hpp"
 
 namespace dogen::generation::csharp {
 
@@ -61,26 +59,6 @@ public:
     virtual void visit(const dogen::generation::csharp::fabric::assistant&) { }
     virtual void visit(dogen::generation::csharp::fabric::assistant&) const { }
     virtual void visit(dogen::generation::csharp::fabric::assistant&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::generation::csharp::fabric::visual_studio_project
-     */
-    /**@{*/
-    virtual void visit(const dogen::generation::csharp::fabric::visual_studio_project&) const { }
-    virtual void visit(const dogen::generation::csharp::fabric::visual_studio_project&) { }
-    virtual void visit(dogen::generation::csharp::fabric::visual_studio_project&) const { }
-    virtual void visit(dogen::generation::csharp::fabric::visual_studio_project&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::generation::csharp::fabric::visual_studio_solution
-     */
-    /**@{*/
-    virtual void visit(const dogen::generation::csharp::fabric::visual_studio_solution&) const { }
-    virtual void visit(const dogen::generation::csharp::fabric::visual_studio_solution&) { }
-    virtual void visit(dogen::generation::csharp::fabric::visual_studio_solution&) const { }
-    virtual void visit(dogen::generation::csharp::fabric::visual_studio_solution&) { }
     /**@}*/
 };
 

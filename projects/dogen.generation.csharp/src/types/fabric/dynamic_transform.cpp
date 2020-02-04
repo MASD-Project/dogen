@@ -50,18 +50,16 @@ requires_expansion(const generation::meta_model::model& m) const {
     return r;
 }
 
-void dynamic_transform::expand_injection(
-    const variability::meta_model::feature_model& fm,
-    generation::meta_model::model& m) const {
+void dynamic_transform::expand_injection(generation::meta_model::model& m) const {
     injector i;
-    i.inject(fm, m);
+    i.inject(m);
 }
 
 std::string dynamic_transform::id() const {
     return ::id;
 }
 
-void dynamic_transform::apply(const generation::transforms::context& ctx,
+void dynamic_transform::apply(const generation::transforms::context& /*ctx*/,
     generation::meta_model::model& m) const {
 
     if (!requires_expansion(m)) {
@@ -69,9 +67,7 @@ void dynamic_transform::apply(const generation::transforms::context& ctx,
                                  << m.name().qualified().dot();
         return;
     }
-
-    const auto fm(*ctx.feature_model());
-    expand_injection(fm, m);
+    expand_injection(m);
 }
 
 }
