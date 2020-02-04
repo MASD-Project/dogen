@@ -49,19 +49,16 @@ namespace dogen::assets::meta_model {
  */
 class name final {
 public:
+    name() = default;
     name(const name&) = default;
     name(name&&) = default;
     ~name() = default;
 
 public:
-    name();
-
-public:
     name(
         const dogen::assets::meta_model::fully_qualified_representation& qualified,
         const std::string& simple,
-        const dogen::assets::meta_model::location& location,
-        const bool is_simple_name_internal);
+        const dogen::assets::meta_model::location& location);
 
 public:
     const dogen::assets::meta_model::fully_qualified_representation& qualified() const;
@@ -91,15 +88,6 @@ public:
     void location(const dogen::assets::meta_model::location&& v);
     /**@}*/
 
-    /**
-     * @brief Simple name exists only within the assets space and should not be propagated
-     *  elsewhere.
-     */
-    /**@{*/
-    bool is_simple_name_internal() const;
-    void is_simple_name_internal(const bool v);
-    /**@}*/
-
 public:
     bool operator==(const name& rhs) const;
     bool operator!=(const name& rhs) const {
@@ -114,7 +102,6 @@ private:
     dogen::assets::meta_model::fully_qualified_representation qualified_;
     std::string simple_;
     dogen::assets::meta_model::location location_;
-    bool is_simple_name_internal_;
 };
 
 }

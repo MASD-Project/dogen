@@ -288,11 +288,6 @@
           "name": "location",
           "type": "location",
           "documentation": "Where the name is located in element space.\n"
-        },
-        {
-          "name": "is_simple_name_internal",
-          "type": "bool",
-          "documentation": "Simple name exists only within the assets space and should not be propagated\n elsewhere.\n"
         }
       ]
     },

@@ -30,7 +30,6 @@
 #include "dogen.engine/types/helpers/adaptation_exception.hpp"
 #include "dogen.assets/types/helpers/string_processor.hpp"
 #include "dogen.engine/types/helpers/stereotypes_helper.hpp"
-#include "dogen.engine/types/features/naming.hpp"
 #include "dogen.engine/types/helpers/adapter.hpp"
 
 namespace {
@@ -97,11 +96,7 @@ to_potential_binding(const std::list<std::string>& stereotypes) const {
     return r;
 }
 
-adapter::adapter(const variability::meta_model::feature_model& fm)
-    : feature_model_(fm) {}
-
 assets::meta_model::name adapter::to_name(const assets::meta_model::location& l,
-    const bool is_simple_name_internal,
     const std::string& n) const {
     BOOST_LOG_SEV(lg, debug) << "Location: " << l;
     /*
@@ -111,7 +106,7 @@ assets::meta_model::name adapter::to_name(const assets::meta_model::location& l,
     ensure_not_empty(n);
     auto tokens(utility::string::splitter::split_scoped(n));
     using assets::helpers::name_builder;
-    name_builder b(false/*model_name_mode*/, is_simple_name_internal);
+    name_builder b;
     b.simple_name(tokens.back());
     tokens.pop_back();
     if (!tokens.empty())
@@ -121,11 +116,6 @@ assets::meta_model::name adapter::to_name(const assets::meta_model::location& l,
     b.model_modules(l.model_modules());
 
     return b.build();
-}
-
-assets::meta_model::name adapter::to_name(const assets::meta_model::location& l,
-    const std::string& n) const {
-    return to_name(l, false/*is_simple_name_internal*/, n);
 }
 
 modeline_field
@@ -202,18 +192,7 @@ void adapter::populate_element(const assets::meta_model::location& l,
     e.configuration(ie.configuration());
     const auto& ds(scr.dynamic_stereotypes());
     e.configuration()->profile_bindings(to_potential_binding(ds));
-
-    /*
-     * Now read the meta-data related to naming, and populate
-     * name. Then we can set the name for both the element and
-     * configuration.
-     */
-    const auto fg(features::naming::make_feature_group(feature_model_));
-    const auto scfg(features::naming::make_static_configuration(fg, e));
-    const auto isni(scfg.is_simple_name_internal ?
-        *scfg.is_simple_name_internal : false);
-
-    e.name(to_name(l, isni, ie.name()));
+    e.name(to_name(l, ie.name()));
     e.configuration()->name().qualified(e.name().qualified().dot());
 
     /*

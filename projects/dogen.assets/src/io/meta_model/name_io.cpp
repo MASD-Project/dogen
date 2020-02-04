@@ -19,7 +19,6 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.assets/io/meta_model/name_io.hpp"
 #include "dogen.assets/io/meta_model/location_io.hpp"
@@ -36,18 +35,11 @@ inline std::string tidy_up_string(std::string s) {
 namespace dogen::assets::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const name& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
     s << " { "
       << "\"__type__\": " << "\"dogen::assets::meta_model::name\"" << ", "
       << "\"qualified\": " << v.qualified() << ", "
       << "\"simple\": " << "\"" << tidy_up_string(v.simple()) << "\"" << ", "
-      << "\"location\": " << v.location() << ", "
-      << "\"is_simple_name_internal\": " << v.is_simple_name_internal()
+      << "\"location\": " << v.location()
       << " }";
     return(s);
 }
