@@ -195,6 +195,10 @@ process_element(const helpers::adapter& ad,
         insert(ad.to_builtin(l, scr, e),
             m.structural_elements().builtins());
         break;
+    case static_stereotypes::structural_entry_point:
+        insert(ad.to_entry_point(l, scr, e),
+            m.structural_elements().entry_points());
+        break;
     case static_stereotypes::decoration_modeline_group:
         insert(ad.to_modeline_group(l, scr, e),
             m.decoration_elements().modeline_groups());

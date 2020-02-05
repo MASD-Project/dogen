@@ -318,6 +318,18 @@ adapter::to_builtin(const assets::meta_model::location& l,
     return r;
 }
 
+boost::shared_ptr<assets::meta_model::structural::entry_point>
+adapter::to_entry_point(const assets::meta_model::location& l,
+    const stereotypes_conversion_result& scr,
+    const injection::meta_model::element& ie) const {
+    BOOST_LOG_SEV(lg, debug) << "Transforming external element to exception: "
+                             << ie.name();
+
+    auto r(boost::make_shared<assets::meta_model::structural::entry_point>());
+    populate_element(l, scr, ie, *r);
+    return r;
+}
+
 boost::shared_ptr<modeline_group>
 adapter::to_modeline_group(const assets::meta_model::location& l,
     const stereotypes_conversion_result& scr,

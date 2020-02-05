@@ -47,6 +47,7 @@ const std::string stereotype_structural_primitive("masd::primitive");
 const std::string stereotype_structural_enumeration("masd::enumeration");
 const std::string stereotype_structural_module("masd::module");
 const std::string stereotype_structural_builtin("masd::builtin");
+const std::string stereotype_structural_entry_point("masd::entry_point");
 const std::string stereotype_orm_object("masd::orm::object");
 const std::string stereotype_orm_value("masd::orm::value");
 const std::string stereotype_decoration_modeline_group(
@@ -104,6 +105,8 @@ static_stereotypes stereotypes_helper::from_string(const std::string& s) const {
         return static_stereotypes::structural_module;
     else if (s == stereotype_structural_builtin)
         return static_stereotypes::structural_builtin;
+    else if (s == stereotype_structural_entry_point)
+        return static_stereotypes::structural_entry_point;
     else if (s == stereotype_orm_object)
         return static_stereotypes::orm_object;
     else if (s == stereotype_orm_value)
@@ -188,6 +191,8 @@ to_string(const static_stereotypes ss) const {
         return stereotype_structural_module;
     case static_stereotypes::structural_builtin:
         return stereotype_structural_builtin;
+    case static_stereotypes::structural_entry_point:
+        return stereotype_structural_entry_point;
     case static_stereotypes::orm_object: return stereotype_orm_object;
     case static_stereotypes::orm_value: return stereotype_orm_value;
     case static_stereotypes::decoration_modeline_group:
@@ -235,6 +240,7 @@ is_element_type(const static_stereotypes ss) const {
         ss == static_stereotypes::structural_enumeration ||
         ss == static_stereotypes::structural_module ||
         ss == static_stereotypes::structural_builtin ||
+        ss == static_stereotypes::structural_entry_point ||
         ss == static_stereotypes::decoration_modeline_group ||
         ss == static_stereotypes::decoration_modeline ||
         ss == static_stereotypes::decoration_generation_marker ||
@@ -250,8 +256,8 @@ is_element_type(const static_stereotypes ss) const {
         ss == static_stereotypes::build_visual_studio_project;
 }
 
-std::list<static_stereotypes> stereotypes_helper::extract_element_types(
-    const std::list<static_stereotypes>& ss) const {
+std::list<static_stereotypes> stereotypes_helper::
+extract_element_types(const std::list<static_stereotypes>& ss) const {
 
     std::list<static_stereotypes> r;
     for (const auto st : ss)

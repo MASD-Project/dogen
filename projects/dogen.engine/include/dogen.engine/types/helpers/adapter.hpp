@@ -39,6 +39,7 @@
 #include "dogen.assets/types/meta_model/structural/enumeration.hpp"
 #include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include "dogen.assets/types/meta_model/structural/exception.hpp"
+#include "dogen.assets/types/meta_model/structural/entry_point.hpp"
 #include "dogen.assets/types/meta_model/element.hpp"
 #include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.assets/types/meta_model/structural/module.hpp"
@@ -202,6 +203,16 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
+     * @e masd::entry_point to a assets entry_point.
+     */
+    boost::shared_ptr<assets::meta_model::structural::entry_point>
+    to_entry_point(const assets::meta_model::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::meta_model::element& ie) const;
+
+public:
+    /**
+     * @brief Converts an injection element with a stereotype of
      * masd::modeline_group to a assets modeline group.
      */
     boost::shared_ptr<assets::meta_model::decoration::modeline_group>
@@ -236,6 +247,7 @@ public:
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
+public:
     /**
      * @brief Converts an injection element with a stereotype of
      * masd::to_variability::profile_template to a variability feature
@@ -269,6 +281,7 @@ public:
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
+public:
     /**
      * @brief Converts an injection element with a stereotype of
      * masd::mapping::fixed_mappable to a fixed mappable element.
@@ -288,6 +301,7 @@ public:
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
+public:
     /**
      * @brief Converts an injection element with a stereotype of
      * masd::templating::logic_less_template to a logic-less template.
@@ -297,6 +311,7 @@ public:
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
+public:
     /**
      * @brief Converts an injection element with a stereotype of
      * masd::serialization::type_registrar to a logic-less template.
@@ -306,6 +321,7 @@ public:
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
+public:
     /**
      * @brief Converts an injection element with a stereotype of
      * @e masd::build::visual_studio::component.
