@@ -1,0 +1,120 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::generation::cpp::formatters::tests #>
+<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/entry_point.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/inclusion_constants.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/formatting_error.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/tests/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/tests/new_main_formatter.hpp" #>
+<#+
+
+std::string new_main_formatter::static_id() {
+    return traits::main_archetype();
+}
+
+std::string new_main_formatter::id() const {
+    return static_id();
+}
+
+archetypes::location
+new_main_formatter::archetype_location() const {
+    static archetypes::location
+        r(cpp::traits::kernel(),  cpp::traits::backend(),
+          traits::facet(),
+          new_main_formatter::static_id());
+    return r;
+}
+
+const assets::meta_model::name& new_main_formatter::meta_name() const {
+    static auto r(fabric::meta_name_factory::make_entry_point_name());
+    return r;
+}
+
+std::string new_main_formatter::family() const {
+    return cpp::traits::implementation_family();
+}
+
+inclusion_support_types new_main_formatter::inclusion_support_type() const {
+    return inclusion_support_types::not_supported;
+}
+
+boost::filesystem::path new_main_formatter::inclusion_path(
+    const formattables::locator& /*l*/, const assets::meta_model::name& n) const {
+
+    using namespace dogen::utility::log;
+    static logger lg(
+        logger_factory(new_main_formatter::static_id()));
+    static const std::string not_supported("Inclusion path is not supported: ");
+
+    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
+}
+
+boost::filesystem::path new_main_formatter::full_path(
+    const formattables::locator& l, const assets::meta_model::name& n) const {
+    return l.make_full_path_for_tests_cpp_main(n, static_id());
+}
+
+std::list<std::string> new_main_formatter::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& f,
+    const assets::meta_model::element& /*e*/) const {
+
+    using assets::meta_model::structural::object;
+    auto builder(f.make());
+
+    using ic = inclusion_constants;
+    builder.add(ic::boost::test::unit_test());
+    builder.add(ic::boost::test::unit_test_monitor());
+    builder.add(ic::boost::exception::info());
+    builder.add(ic::std::iostream());
+    builder.add(ic::boost::exception::diagnostic_information());
+
+    return builder.build();
+}
+
+extraction::meta_model::artefact new_main_formatter::
+format(const context& ctx, const assets::meta_model::element& e) const {
+    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    const auto& ep(a.as<fabric::entry_point>(e));
+    const auto qn(a.get_qualified_name(ep.name()));
+#>
+#define BOOST_TEST_MODULE <#= qn #>
+
+<#+
+    {
+        auto sbf(a.make_scoped_boilerplate_formatter(ep));
+#>
+
+namespace  {
+
+const std::string error_msg("Error during test.");
+
+inline void translate(const boost::exception& e) {
+    std::cerr << std::endl << boost::diagnostic_information(e);
+    throw std::runtime_error(error_msg);
+}
+
+struct exception_fixture {
+    exception_fixture() {
+        using boost::exception;
+        using boost::unit_test::unit_test_monitor;
+        unit_test_monitor.register_exception_translator<exception>(&translate);
+    }
+};
+
+}
+
+BOOST_GLOBAL_FIXTURE(exception_fixture);
+<#+
+    } // sbf
+    return a.make_artefact();
+}
+#>
