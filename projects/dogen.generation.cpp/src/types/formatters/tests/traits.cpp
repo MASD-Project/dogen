@@ -49,6 +49,11 @@ std::string traits::main_archetype() {
     return r;
 }
 
+std::string traits::new_main_archetype() {
+    static std::string r(traits::facet() + ".new_main");
+    return r;
+}
+
 std::string traits::cmakelists_archetype() {
     static std::string r(traits::facet() + ".cmakelists");
     return r;
