@@ -35,6 +35,7 @@
 #include "dogen.assets/types/meta_model/structural/primitive_fwd.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/project_fwd.hpp"
 #include "dogen.assets/types/meta_model/mapping/fixed_mappable_fwd.hpp"
+#include "dogen.assets/types/meta_model/structural/entry_point_fwd.hpp"
 #include "dogen.assets/types/meta_model/structural/enumeration_fwd.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/solution_fwd.hpp"
 #include "dogen.assets/types/meta_model/decoration/modeline_group_fwd.hpp"
@@ -135,6 +136,16 @@ public:
     virtual void visit(const dogen::assets::meta_model::structural::builtin&) { }
     virtual void visit(dogen::assets::meta_model::structural::builtin&) const { }
     virtual void visit(dogen::assets::meta_model::structural::builtin&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::assets::meta_model::structural::entry_point
+     */
+    /**@{*/
+    virtual void visit(const dogen::assets::meta_model::structural::entry_point&) const { }
+    virtual void visit(const dogen::assets::meta_model::structural::entry_point&) { }
+    virtual void visit(dogen::assets::meta_model::structural::entry_point&) const { }
+    virtual void visit(dogen::assets::meta_model::structural::entry_point&) { }
     /**@}*/
 
     /**

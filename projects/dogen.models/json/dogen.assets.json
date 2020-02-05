@@ -2494,6 +2494,10 @@
         {
           "name": "visitors",
           "type": "std::unordered_map<std::string, boost::shared_ptr<visitor>>"
+        },
+        {
+          "name": "entry_points",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<entry_point>>"
         }
       ]
     },
@@ -3529,6 +3533,14 @@
       "name": "transforms::visual_studio_project_type_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::structural::entry_point",
+      "documentation": "Represents an entry point to a binary.\n",
+      "stereotypes": [
+        "assets::meta_element"
       ],
       "fallback_element_type": "masd::object"
     }

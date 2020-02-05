@@ -26,6 +26,7 @@
 #include "dogen.assets/io/meta_model/structural/visitor_io.hpp"
 #include "dogen.assets/io/meta_model/structural/exception_io.hpp"
 #include "dogen.assets/io/meta_model/structural/primitive_io.hpp"
+#include "dogen.assets/io/meta_model/structural/entry_point_io.hpp"
 #include "dogen.assets/io/meta_model/structural/enumeration_io.hpp"
 #include "dogen.assets/io/meta_model/structural/object_template_io.hpp"
 #include "dogen.assets/io/meta_model/structural/element_repository_io.hpp"
@@ -310,6 +311,40 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::assets::meta_model::structural::entry_point>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::structural::entry_point> >& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen::assets::meta_model::structural {
 
 std::ostream& operator<<(std::ostream& s, const element_repository& v) {
@@ -322,7 +357,8 @@ std::ostream& operator<<(std::ostream& s, const element_repository& v) {
       << "\"primitives\": " << v.primitives() << ", "
       << "\"objects\": " << v.objects() << ", "
       << "\"exceptions\": " << v.exceptions() << ", "
-      << "\"visitors\": " << v.visitors()
+      << "\"visitors\": " << v.visitors() << ", "
+      << "\"entry_points\": " << v.entry_points()
       << " }";
     return(s);
 }
