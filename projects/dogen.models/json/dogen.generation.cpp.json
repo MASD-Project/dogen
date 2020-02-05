@@ -2618,6 +2618,14 @@
           "tagged_values": {
             "masd.variability.qualified_name": "masd.generation.cpp.tests.cmakelists.postfix"
           }
+        },
+        {
+          "name": "masd.generation.cpp.tests.new_main.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.qualified_name": "masd.generation.cpp.tests.new_main.postfix"
+          }
         }
       ]
     },
