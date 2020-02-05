@@ -72,13 +72,13 @@ bool stereotypes_transform::
 is_element_type(const meta_model::static_stereotypes ss) {
     using meta_model::static_stereotypes;
     return
-        ss == static_stereotypes::object ||
-        ss == static_stereotypes::object_template ||
-        ss == static_stereotypes::exception ||
-        ss == static_stereotypes::primitive ||
-        ss == static_stereotypes::enumeration ||
-        ss == static_stereotypes::module ||
-        ss == static_stereotypes::builtin;
+        ss == static_stereotypes::structural_object ||
+        ss == static_stereotypes::structural_object_template ||
+        ss == static_stereotypes::structural_exception ||
+        ss == static_stereotypes::structural_primitive ||
+        ss == static_stereotypes::structural_enumeration ||
+        ss == static_stereotypes::structural_module ||
+        ss == static_stereotypes::structural_builtin;
 }
 
 void stereotypes_transform::transform_static_stereotypes(

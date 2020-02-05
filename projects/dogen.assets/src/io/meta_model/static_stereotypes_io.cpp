@@ -33,35 +33,38 @@ std::ostream& operator<<(std::ostream& s, const static_stereotypes& v) {
     case static_stereotypes::invalid:
         attr = "\"invalid\"";
         break;
-    case static_stereotypes::object:
-        attr = "\"object\"";
-        break;
-    case static_stereotypes::object_template:
-        attr = "\"object_template\"";
-        break;
-    case static_stereotypes::exception:
-        attr = "\"exception\"";
-        break;
-    case static_stereotypes::primitive:
-        attr = "\"primitive\"";
-        break;
-    case static_stereotypes::enumeration:
-        attr = "\"enumeration\"";
-        break;
-    case static_stereotypes::module:
-        attr = "\"module\"";
-        break;
-    case static_stereotypes::builtin:
-        attr = "\"builtin\"";
-        break;
-    case static_stereotypes::visitable:
-        attr = "\"visitable\"";
-        break;
     case static_stereotypes::fluent:
         attr = "\"fluent\"";
         break;
     case static_stereotypes::immutable:
         attr = "\"immutable\"";
+        break;
+    case static_stereotypes::visitable:
+        attr = "\"visitable\"";
+        break;
+    case static_stereotypes::structural_object:
+        attr = "\"structural_object\"";
+        break;
+    case static_stereotypes::structural_object_template:
+        attr = "\"structural_object_template\"";
+        break;
+    case static_stereotypes::structural_exception:
+        attr = "\"structural_exception\"";
+        break;
+    case static_stereotypes::structural_primitive:
+        attr = "\"structural_primitive\"";
+        break;
+    case static_stereotypes::structural_enumeration:
+        attr = "\"structural_enumeration\"";
+        break;
+    case static_stereotypes::structural_module:
+        attr = "\"structural_module\"";
+        break;
+    case static_stereotypes::structural_builtin:
+        attr = "\"structural_builtin\"";
+        break;
+    case static_stereotypes::structural_entry_point:
+        attr = "\"structural_entry_point\"";
         break;
     case static_stereotypes::orm_object:
         attr = "\"orm_object\"";
@@ -69,17 +72,17 @@ std::ostream& operator<<(std::ostream& s, const static_stereotypes& v) {
     case static_stereotypes::orm_value:
         attr = "\"orm_value\"";
         break;
-    case static_stereotypes::modeline_group:
-        attr = "\"modeline_group\"";
+    case static_stereotypes::decoration_modeline_group:
+        attr = "\"decoration_modeline_group\"";
         break;
-    case static_stereotypes::modeline:
-        attr = "\"modeline\"";
+    case static_stereotypes::decoration_modeline:
+        attr = "\"decoration_modeline\"";
         break;
-    case static_stereotypes::generation_marker:
-        attr = "\"generation_marker\"";
+    case static_stereotypes::decoration_generation_marker:
+        attr = "\"decoration_generation_marker\"";
         break;
-    case static_stereotypes::licence:
-        attr = "\"licence\"";
+    case static_stereotypes::decoration_licence:
+        attr = "\"decoration_licence\"";
         break;
     case static_stereotypes::variability_profile_template:
         attr = "\"variability_profile_template\"";

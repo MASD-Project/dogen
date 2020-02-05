@@ -1436,31 +1436,11 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "object",
+          "name": "fluent",
           "type": ""
         },
         {
-          "name": "object_template",
-          "type": ""
-        },
-        {
-          "name": "exception",
-          "type": ""
-        },
-        {
-          "name": "primitive",
-          "type": ""
-        },
-        {
-          "name": "enumeration",
-          "type": ""
-        },
-        {
-          "name": "module",
-          "type": ""
-        },
-        {
-          "name": "builtin",
+          "name": "immutable",
           "type": ""
         },
         {
@@ -1468,11 +1448,35 @@
           "type": ""
         },
         {
-          "name": "fluent",
+          "name": "structural_object",
           "type": ""
         },
         {
-          "name": "immutable",
+          "name": "structural_object_template",
+          "type": ""
+        },
+        {
+          "name": "structural_exception",
+          "type": ""
+        },
+        {
+          "name": "structural_primitive",
+          "type": ""
+        },
+        {
+          "name": "structural_enumeration",
+          "type": ""
+        },
+        {
+          "name": "structural_module",
+          "type": ""
+        },
+        {
+          "name": "structural_builtin",
+          "type": ""
+        },
+        {
+          "name": "structural_entry_point",
           "type": ""
         },
         {
@@ -1484,19 +1488,19 @@
           "type": ""
         },
         {
-          "name": "modeline_group",
+          "name": "decoration_modeline_group",
           "type": ""
         },
         {
-          "name": "modeline",
+          "name": "decoration_modeline",
           "type": ""
         },
         {
-          "name": "generation_marker",
+          "name": "decoration_generation_marker",
           "type": ""
         },
         {
-          "name": "licence",
+          "name": "decoration_licence",
           "type": ""
         },
         {

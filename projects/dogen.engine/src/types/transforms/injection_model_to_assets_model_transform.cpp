@@ -167,47 +167,47 @@ process_element(const helpers::adapter& ad,
 
     using assets::meta_model::static_stereotypes;
     switch (et) {
-    case static_stereotypes::object:
+    case static_stereotypes::structural_object:
         insert(ad.to_object(l, scr, e),
             m.structural_elements().objects());
         break;
-    case static_stereotypes::object_template:
+    case static_stereotypes::structural_object_template:
         insert(ad.to_object_template(l, scr, e),
             m.structural_elements().object_templates());
         break;
-    case static_stereotypes::exception:
+    case static_stereotypes::structural_exception:
         insert(ad.to_exception(l, scr, e),
             m.structural_elements().exceptions());
         break;
-    case static_stereotypes::primitive:
+    case static_stereotypes::structural_primitive:
         insert(ad.to_primitive(l, scr, e),
             m.structural_elements().primitives());
         break;
-    case static_stereotypes::enumeration:
+    case static_stereotypes::structural_enumeration:
         insert(ad.to_enumeration(l, scr, e),
             m.structural_elements().enumerations());
         break;
-    case static_stereotypes::module:
+    case static_stereotypes::structural_module:
         insert(ad.to_module(l, scr, e),
             m.structural_elements().modules());
         break;
-    case static_stereotypes::builtin:
+    case static_stereotypes::structural_builtin:
         insert(ad.to_builtin(l, scr, e),
             m.structural_elements().builtins());
         break;
-    case static_stereotypes::modeline_group:
+    case static_stereotypes::decoration_modeline_group:
         insert(ad.to_modeline_group(l, scr, e),
             m.decoration_elements().modeline_groups());
         break;
-    case static_stereotypes::modeline:
+    case static_stereotypes::decoration_modeline:
         insert(ad.to_modeline(l, scr, e),
             m.decoration_elements().modelines());
         break;
-    case static_stereotypes::generation_marker:
+    case static_stereotypes::decoration_generation_marker:
         insert(ad.to_generation_marker(l, scr, e),
             m.decoration_elements().generation_markers());
         break;
-    case static_stereotypes::licence:
+    case static_stereotypes::decoration_licence:
         insert(ad.to_licence(l, scr, e),
             m.decoration_elements().licences());
         break;
