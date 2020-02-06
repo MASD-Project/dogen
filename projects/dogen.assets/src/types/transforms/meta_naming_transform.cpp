@@ -20,21 +20,10 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.assets/types/meta_model/structural/object.hpp"
-#include "dogen.assets/types/meta_model/decoration/licence.hpp"
-#include "dogen.assets/types/meta_model/decoration/modeline.hpp"
-#include "dogen.assets/types/meta_model/decoration/modeline_group.hpp"
-#include "dogen.assets/types/meta_model/decoration/generation_marker.hpp"
-#include "dogen.assets/types/meta_model/variability/profile_template.hpp"
-#include "dogen.assets/types/meta_model/variability/feature_template_initializer.hpp"
-#include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
-#include "dogen.assets/types/meta_model/serialization/type_registrar.hpp"
-#include "dogen.assets/types/meta_model/visual_studio/solution.hpp"
-#include "dogen.assets/types/meta_model/visual_studio/project.hpp"
-#include "dogen.assets/types/meta_model/elements_traversal.hpp"
 #include "dogen.assets/types/meta_model/model.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/types/helpers/meta_name_factory.hpp"
+#include "dogen.assets/types/meta_model/elements_traversal.hpp"
 #include "dogen.assets/types/transforms/transformation_error.hpp"
 #include "dogen.assets/types/transforms/meta_naming_transform.hpp"
 
@@ -97,6 +86,11 @@ public:
 
     void operator()(meta_model::structural::visitor& v) {
         static const auto n(mnf::make_visitor_name());
+        v.meta_name(n);
+    }
+
+    void operator()(meta_model::structural::entry_point& v) {
+        static const auto n(mnf::make_entry_point_name());
         v.meta_name(n);
     }
 
