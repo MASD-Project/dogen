@@ -20,8 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.generation.cpp/types/fabric/entry_point.hpp"
-#include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
+#include "dogen.assets/types/meta_model/structural/entry_point.hpp"
+#include "dogen.assets/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
@@ -36,7 +36,7 @@
 namespace dogen::generation::cpp::formatters::tests {
 
 std::string new_main_formatter::static_id() {
-    return traits::main_archetype();
+    return traits::new_main_archetype();
 }
 
 std::string new_main_formatter::id() const {
@@ -53,7 +53,8 @@ new_main_formatter::archetype_location() const {
 }
 
 const assets::meta_model::name& new_main_formatter::meta_name() const {
-    static auto r(fabric::meta_name_factory::make_entry_point_name());
+    using assets::helpers::meta_name_factory;
+    static auto r(meta_name_factory::make_entry_point_name());
     return r;
 }
 
@@ -102,7 +103,8 @@ std::list<std::string> new_main_formatter::inclusion_dependencies(
 extraction::meta_model::artefact new_main_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& ep(a.as<fabric::entry_point>(e));
+    using assets::meta_model::structural::entry_point;
+    const auto& ep(a.as<entry_point>(e));
     const auto qn(a.get_qualified_name(ep.name()));
 a.stream() << "#define BOOST_TEST_MODULE " << qn << std::endl;
 a.stream() << std::endl;
