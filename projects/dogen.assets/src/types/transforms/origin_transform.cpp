@@ -63,27 +63,7 @@ public:
     void update(DeterminableOrigin& d) { d.origin_type(origin_types_); }
 
 public:
-    void operator()(meta_model::element&) { }
-    void operator()(module& v) { update(v); }
-    void operator()(object_template& v) { update(v); }
-    void operator()(builtin& v) { update(v); }
-    void operator()(enumeration& v) { update(v); }
-    void operator()(primitive& v) { update(v); }
-    void operator()(object& v) { update(v); }
-    void operator()(exception& v) { update(v); }
-    void operator()(visitor& v) { update(v); }
-    void operator()(entry_point& v) { update(v); }
-    void operator()(modeline_group& v) { update(v); }
-    void operator()(modeline& v) { update(v); }
-    void operator()(generation_marker& v) { update(v); }
-    void operator()(licence& v) { update(v); }
-    void operator()(feature_template_initializer& v) { update(v); }
-    void operator()(feature_bundle& v) { update(v); }
-    void operator()(profile_template& v) { update(v); }
-    void operator()(logic_less_template& v) { update(v); }
-    void operator()(type_registrar& v) { update(v); }
-    void operator()(solution& v) { update(v); }
-    void operator()(project& v) { update(v); }
+    void operator()(meta_model::element& v) { update(v); }
 
 private:
     const meta_model::origin_types origin_types_;
