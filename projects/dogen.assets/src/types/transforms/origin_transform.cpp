@@ -26,27 +26,7 @@
 #include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/types/traits.hpp"
 #include "dogen.assets/types/features/origin.hpp"
-#include "dogen.assets/types/meta_model/element.hpp"
-#include "dogen.assets/types/meta_model/structural/module.hpp"
-#include "dogen.assets/types/meta_model/structural/object.hpp"
-#include "dogen.assets/types/meta_model/structural/builtin.hpp"
-#include "dogen.assets/types/meta_model/structural/visitor.hpp"
-#include "dogen.assets/types/meta_model/structural/exception.hpp"
-#include "dogen.assets/types/meta_model/structural/primitive.hpp"
-#include "dogen.assets/types/meta_model/structural/enumeration.hpp"
-#include "dogen.assets/types/meta_model/structural/object_template.hpp"
 #include "dogen.assets/types/meta_model/elements_traversal.hpp"
-#include "dogen.assets/types/meta_model/decoration/licence.hpp"
-#include "dogen.assets/types/meta_model/decoration/modeline.hpp"
-#include "dogen.assets/types/meta_model/decoration/modeline_group.hpp"
-#include "dogen.assets/types/meta_model/decoration/generation_marker.hpp"
-#include "dogen.assets/types/meta_model/variability/profile_template.hpp"
-#include "dogen.assets/types/meta_model/variability/feature_template_initializer.hpp"
-#include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
-#include "dogen.assets/types/meta_model/templating/logic_less_template.hpp"
-#include "dogen.assets/types/meta_model/serialization/type_registrar.hpp"
-#include "dogen.assets/types/meta_model/visual_studio/solution.hpp"
-#include "dogen.assets/types/meta_model/visual_studio/project.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
 #include "dogen.assets/types/transforms/transformation_error.hpp"
 #include "dogen.assets/types/transforms/origin_transform.hpp"
@@ -92,6 +72,7 @@ public:
     void operator()(object& v) { update(v); }
     void operator()(exception& v) { update(v); }
     void operator()(visitor& v) { update(v); }
+    void operator()(entry_point& v) { update(v); }
     void operator()(modeline_group& v) { update(v); }
     void operator()(modeline& v) { update(v); }
     void operator()(generation_marker& v) { update(v); }
