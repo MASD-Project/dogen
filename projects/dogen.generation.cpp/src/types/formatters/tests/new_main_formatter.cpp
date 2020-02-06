@@ -46,7 +46,7 @@ std::string new_main_formatter::id() const {
 archetypes::location
 new_main_formatter::archetype_location() const {
     static archetypes::location
-        r(cpp::traits::kernel(),  cpp::traits::backend(),
+        r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(),
           new_main_formatter::static_id());
     return r;
