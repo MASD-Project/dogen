@@ -2460,6 +2460,18 @@ Tasks:
 - update all models, adding =masd::test= for each manual test, with
   the new stereotype.
 
+Notes:
+
+- the present situation of ignoring regexes is a bit dangerous, e.g.:
+
+: #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
+: #DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
+
+  This means any type in a model in the path "tests" will be
+  ignored. This results in a lot of surprising behaviour because some
+  times we create packages called tests (for example the "tests"
+  facet).
+
 *Previous understanding*
 
 *Rationale*: the right solution for this is to split generated tests
