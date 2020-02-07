@@ -76,7 +76,7 @@ void injector::inject_entry_point(generation::meta_model::model& m) const {
 void injector::inject(generation::meta_model::model& m) const {
     inject_build_files(m);
     inject_odb_options(m);
-    inject_entry_point(m);
+    // inject_entry_point(m);
 }
 
 }

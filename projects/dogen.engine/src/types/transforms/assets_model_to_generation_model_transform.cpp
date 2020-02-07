@@ -24,25 +24,6 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.assets/types/meta_model/structural/module.hpp"
-#include "dogen.assets/types/meta_model/structural/object.hpp"
-#include "dogen.assets/types/meta_model/structural/builtin.hpp"
-#include "dogen.assets/types/meta_model/element.hpp"
-#include "dogen.assets/types/meta_model/structural/visitor.hpp"
-#include "dogen.assets/types/meta_model/structural/exception.hpp"
-#include "dogen.assets/types/meta_model/structural/primitive.hpp"
-#include "dogen.assets/types/meta_model/structural/enumeration.hpp"
-#include "dogen.assets/types/meta_model/structural/object_template.hpp"
-#include "dogen.assets/types/meta_model/decoration/licence.hpp"
-#include "dogen.assets/types/meta_model/decoration/modeline.hpp"
-#include "dogen.assets/types/meta_model/decoration/generation_marker.hpp"
-#include "dogen.assets/types/meta_model/decoration/modeline_group.hpp"
-#include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
-#include "dogen.assets/types/meta_model/variability/feature_template_initializer.hpp"
-#include "dogen.assets/types/meta_model/templating/logic_less_template.hpp"
-#include "dogen.assets/types/meta_model/serialization/type_registrar.hpp"
-#include "dogen.assets/types/meta_model/visual_studio/solution.hpp"
-#include "dogen.assets/types/meta_model/visual_studio/project.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/io/meta_model/technical_space_io.hpp"
 #include "dogen.assets/types/helpers/meta_name_factory.hpp"
@@ -98,8 +79,7 @@ private:
     }
 
 public:
-    void operator()
-    (boost::shared_ptr<assets::meta_model::element>) { }
+    void operator()(boost::shared_ptr<assets::meta_model::element>) { }
     void operator()
     (boost::shared_ptr<assets::meta_model::structural::module> m) {
         result_.module_ids().insert(m->name().qualified().dot());
@@ -132,6 +112,11 @@ public:
     void operator()
     (boost::shared_ptr<assets::meta_model::structural::visitor> v) {
         add(v);
+    }
+
+    void operator()
+    (boost::shared_ptr<assets::meta_model::structural::entry_point> ep) {
+        add(ep);
     }
     void operator()
     (boost::shared_ptr<assets::meta_model::decoration::licence> l) {
