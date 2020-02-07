@@ -55,8 +55,8 @@ public:
         const boost::optional<dogen::assets::meta_model::orm::letter_case>& letter_case,
         const bool generate_mapping,
         const std::list<dogen::assets::meta_model::orm::type_mapping>& type_mappings,
-        const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides,
-        const std::list<std::string>& odb_pragmas);
+        const std::list<std::string>& odb_pragmas,
+        const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides);
 
 public:
     /**
@@ -108,16 +108,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Override the default type for this attribute for a given database system.
-     */
-    /**@{*/
-    const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides() const;
-    std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides();
-    void type_overrides(const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& v);
-    void type_overrides(const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>&& v);
-    /**@}*/
-
-    /**
      * @brief Pragmas for the ODB ORM backend.
      */
     /**@{*/
@@ -125,6 +115,16 @@ public:
     std::list<std::string>& odb_pragmas();
     void odb_pragmas(const std::list<std::string>& v);
     void odb_pragmas(const std::list<std::string>&& v);
+    /**@}*/
+
+    /**
+     * @brief Override the default type for this attribute for a given database system.
+     */
+    /**@{*/
+    const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides() const;
+    std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides();
+    void type_overrides(const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& v);
+    void type_overrides(const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>&& v);
     /**@}*/
 
 public:
@@ -143,8 +143,8 @@ private:
     boost::optional<dogen::assets::meta_model::orm::letter_case> letter_case_;
     bool generate_mapping_;
     std::list<dogen::assets::meta_model::orm::type_mapping> type_mappings_;
-    std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string> type_overrides_;
     std::list<std::string> odb_pragmas_;
+    std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string> type_overrides_;
 };
 
 }
