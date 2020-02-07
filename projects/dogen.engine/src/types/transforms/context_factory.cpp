@@ -124,8 +124,7 @@ make_feature_template_repository() {
 injection::transforms::context context_factory::
 make_injection_context(const configuration& cfg,
     const std::string& activity) {
-    BOOST_LOG_SEV(lg, debug) << "Creating the context. Activity: "
-                             << activity;
+    BOOST_LOG_SEV(lg, debug) << "Creating the context. Activity: " << activity;
 
     /*
      * Obtain the transform registrar and ensure it has been setup.
