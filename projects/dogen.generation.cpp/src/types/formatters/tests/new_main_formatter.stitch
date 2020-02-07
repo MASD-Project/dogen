@@ -61,7 +61,7 @@ boost::filesystem::path new_main_formatter::inclusion_path(
 
 boost::filesystem::path new_main_formatter::full_path(
     const formattables::locator& l, const assets::meta_model::name& n) const {
-    return l.make_full_path_for_tests_cpp_main(n, static_id());
+    return l.make_full_path_for_tests_cpp_implementation(n, static_id());
 }
 
 std::list<std::string> new_main_formatter::inclusion_dependencies(
