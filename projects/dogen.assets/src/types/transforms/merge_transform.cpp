@@ -64,50 +64,68 @@ merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
         return;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Merging source model: '"
-                             << src.name().qualified().dot()
-                             << "'. modules: " << src.structural_elements().modules().size()
-                             << " object templates: "
-                             << src.structural_elements().object_templates().size()
-                             << " builtins: " << src.structural_elements().builtins().size()
-                             << " enumerations: " << src.structural_elements().enumerations().size()
-                             << " primitives: " << src.structural_elements().primitives().size()
-                             << " objects: " << src.structural_elements().objects().size()
-                             << " exceptions: " << src.structural_elements().exceptions().size()
-                             << " visitors: " << src.structural_elements().visitors().size()
-                             << " entry points: " << src.structural_elements().entry_points().size()
-                             << " modeline_groups: "
-                             << src.decoration_elements().modeline_groups().size()
-                             << " modeline: " << src.decoration_elements().modelines().size()
-                             << " generation markers: "
-                             << src.decoration_elements().generation_markers().size()
-                             << " licences: "
-                             << src.decoration_elements().licences().size()
-                             << " type registrars: "
-                             << src.serialization_elements().type_registrars().size()
-                             << " visual studio solutions: "
-                             << src.visual_studio_elements().solutions().size()
-                             << " visual studio projects: "
-                             << src.visual_studio_elements().projects().size();
+    BOOST_LOG_SEV(lg, debug)
+        << "Merging source model: '"
+        << src.name().qualified().dot()
+        << "'. modules: " << src.structural_elements().modules().size()
+        << " object templates: "
+        << src.structural_elements().object_templates().size()
+        << " builtins: " << src.structural_elements().builtins().size()
+        << " enumerations: " << src.structural_elements().enumerations().size()
+        << " primitives: " << src.structural_elements().primitives().size()
+        << " objects: " << src.structural_elements().objects().size()
+        << " exceptions: " << src.structural_elements().exceptions().size()
+        << " visitors: " << src.structural_elements().visitors().size()
+        << " entry points: " << src.structural_elements().entry_points().size()
+        << " modeline_groups: "
+        << src.decoration_elements().modeline_groups().size()
+        << " modeline: " << src.decoration_elements().modelines().size()
+        << " generation markers: "
+        << src.decoration_elements().generation_markers().size()
+        << " licences: " << src.decoration_elements().licences().size()
+        << " type registrars: "
+        << src.serialization_elements().type_registrars().size()
+        << " visual studio solutions: "
+        << src.visual_studio_elements().solutions().size()
+        << " visual studio projects: "
+        << src.visual_studio_elements().projects().size();
 
-    copy(src.structural_elements().modules(), dst.structural_elements().modules());
-    copy(src.structural_elements().object_templates(), dst.structural_elements().object_templates());
-    copy(src.structural_elements().builtins(), dst.structural_elements().builtins());
-    copy(src.structural_elements().enumerations(), dst.structural_elements().enumerations());
-    copy(src.structural_elements().primitives(), dst.structural_elements().primitives());
-    copy(src.structural_elements().objects(), dst.structural_elements().objects());
-    copy(src.structural_elements().exceptions(), dst.structural_elements().exceptions());
-    copy(src.structural_elements().visitors(), dst.structural_elements().visitors());
-    copy(src.structural_elements().entry_points(), dst.structural_elements().entry_points());
-    copy(src.decoration_elements().modeline_groups(), dst.decoration_elements().modeline_groups());
-    copy(src.decoration_elements().modelines(), dst.decoration_elements().modelines());
-    copy(src.decoration_elements().generation_markers(), dst.decoration_elements().generation_markers());
-    copy(src.decoration_elements().licences(), dst.decoration_elements().licences());
-    copy(src.mapping_elements().fixed_mappables(), dst.mapping_elements().fixed_mappables());
-    copy(src.mapping_elements().extensible_mappables(), dst.mapping_elements().extensible_mappables());
-    copy(src.serialization_elements().type_registrars(), dst.serialization_elements().type_registrars());
-    copy(src.visual_studio_elements().solutions(), dst.visual_studio_elements().solutions());
-    copy(src.visual_studio_elements().projects(), dst.visual_studio_elements().projects());
+    copy(src.structural_elements().modules(),
+        dst.structural_elements().modules());
+    copy(src.structural_elements().object_templates(),
+        dst.structural_elements().object_templates());
+    copy(src.structural_elements().builtins(),
+        dst.structural_elements().builtins());
+    copy(src.structural_elements().enumerations(),
+        dst.structural_elements().enumerations());
+    copy(src.structural_elements().primitives(),
+        dst.structural_elements().primitives());
+    copy(src.structural_elements().objects(),
+        dst.structural_elements().objects());
+    copy(src.structural_elements().exceptions(),
+        dst.structural_elements().exceptions());
+    copy(src.structural_elements().visitors(),
+        dst.structural_elements().visitors());
+    copy(src.structural_elements().entry_points(),
+        dst.structural_elements().entry_points());
+    copy(src.decoration_elements().modeline_groups(),
+        dst.decoration_elements().modeline_groups());
+    copy(src.decoration_elements().modelines(),
+        dst.decoration_elements().modelines());
+    copy(src.decoration_elements().generation_markers(),
+        dst.decoration_elements().generation_markers());
+    copy(src.decoration_elements().licences(),
+        dst.decoration_elements().licences());
+    copy(src.mapping_elements().fixed_mappables(),
+        dst.mapping_elements().fixed_mappables());
+    copy(src.mapping_elements().extensible_mappables(),
+        dst.mapping_elements().extensible_mappables());
+    copy(src.serialization_elements().type_registrars(),
+        dst.serialization_elements().type_registrars());
+    copy(src.visual_studio_elements().solutions(),
+        dst.visual_studio_elements().solutions());
+    copy(src.visual_studio_elements().projects(),
+        dst.visual_studio_elements().projects());
 
     /*
      * Update the references of the merged model.
