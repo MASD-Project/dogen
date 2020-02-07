@@ -24,6 +24,9 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
+#include "dogen.assets/types/meta_model/orm/odb_options.hpp"
+#include "dogen.assets/types/meta_model/structural/object.hpp"
+#include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include "dogen.generation.cpp/types/formattables/adapter.hpp"
 #include "dogen.generation.cpp/types/fabric/common_odb_options.hpp"
 #include "dogen.generation.cpp/types/fabric/object_odb_options.hpp"
@@ -55,8 +58,14 @@ class updator : public element_visitor {
 public:
     updator(model& fm, const locator& l);
 
+private:
+    assets::meta_model::orm::odb_options
+    make_options(const assets::meta_model::name& n);
+
 public:
     using element_visitor::visit;
+    void visit(assets::meta_model::structural::object& o);
+    void visit(assets::meta_model::structural::primitive& p);
     void visit(fabric::common_odb_options& coo);
     void visit(fabric::object_odb_options& ooo);
 
@@ -71,6 +80,47 @@ updator::updator(model& fm, const locator& l)
 void updator::visit(fabric::common_odb_options& coo) {
     coo.databases(model_.odb_databases());
     coo.sql_name_case(model_.odb_sql_name_case());
+}
+
+assets::meta_model::orm::odb_options
+updator::make_options(const assets::meta_model::name& n) {
+    assets::meta_model::orm::odb_options r;
+    const auto odb_arch(formatters::odb::traits::class_header_archetype());
+    const auto odb_rp(locator_.make_inclusion_path_for_cpp_header(n, odb_arch));
+
+    std::ostringstream os;
+    os << "'#include \"" << odb_rp.generic_string() << "\"'";
+    r.epilogue(os.str());
+    os.str("");
+
+    const auto types_arch(formatters::types::traits::class_header_archetype());
+    const auto ip(locator_.make_inclusion_path_for_cpp_header(n, types_arch));
+    const auto types_rp(ip.parent_path());
+
+    os << "'%(.*).hpp%" << types_rp.generic_string() << "/$1.hpp%'";
+    r.include_regexes().push_back(os.str());
+
+    os.str("");
+    os << "'%(^[a-zA-Z0-9_]+)-odb(.*)%"
+       << odb_rp.parent_path().generic_string() << "/$1-odb$2%'";
+    r.include_regexes().push_back(os.str());
+
+    os.str("");
+    os << "'%" << types_rp.generic_string() << "/(.*)-odb(.*)%"
+       << odb_rp.parent_path().generic_string() << "/$1-odb$2%'";
+    r.include_regexes().push_back(os.str());
+    r.header_guard_prefix(header_guard_factory::make(odb_rp.parent_path()));
+    return r;
+}
+
+void updator::visit(assets::meta_model::structural::object& o) {
+    if (o.orm_properties())
+        o.orm_properties()->odb_options(make_options(o.name()));
+}
+
+void updator::visit(assets::meta_model::structural::primitive& p) {
+    if (p.orm_properties())
+        p.orm_properties()->odb_options(make_options(p.name()));
 }
 
 void updator::visit(fabric::object_odb_options& ooo) {
