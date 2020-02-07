@@ -704,7 +704,7 @@ other layers can then configure features.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests.new_main.enabled#</dia:string>
+            <dia:string>#masd.generation.cpp.tests.main.enabled#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -4824,7 +4824,7 @@ for the element.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests.new_main.enabled#</dia:string>
+            <dia:string>#masd.generation.cpp.tests.main.enabled#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -5102,7 +5102,7 @@ for the element.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests.new_main.enabled#</dia:string>
+            <dia:string>#masd.generation.cpp.tests.main.enabled#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>

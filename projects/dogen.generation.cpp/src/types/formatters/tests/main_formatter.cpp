@@ -31,59 +31,59 @@
 #include "dogen.generation.cpp/types/formatters/types/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/test_data/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/tests/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/tests/new_main_formatter.hpp"
+#include "dogen.generation.cpp/types/formatters/tests/main_formatter.hpp"
 
 namespace dogen::generation::cpp::formatters::tests {
 
-std::string new_main_formatter::static_id() {
-    return traits::new_main_archetype();
+std::string main_formatter::static_id() {
+    return traits::main_archetype();
 }
 
-std::string new_main_formatter::id() const {
+std::string main_formatter::id() const {
     return static_id();
 }
 
 archetypes::location
-new_main_formatter::archetype_location() const {
+main_formatter::archetype_location() const {
     static archetypes::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(),
-          new_main_formatter::static_id());
+          main_formatter::static_id());
     return r;
 }
 
-const assets::meta_model::name& new_main_formatter::meta_name() const {
+const assets::meta_model::name& main_formatter::meta_name() const {
     using assets::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_entry_point_name());
     return r;
 }
 
-std::string new_main_formatter::family() const {
+std::string main_formatter::family() const {
     return cpp::traits::implementation_family();
 }
 
-inclusion_support_types new_main_formatter::inclusion_support_type() const {
+inclusion_support_types main_formatter::inclusion_support_type() const {
     return inclusion_support_types::not_supported;
 }
 
-boost::filesystem::path new_main_formatter::inclusion_path(
+boost::filesystem::path main_formatter::inclusion_path(
     const formattables::locator& /*l*/, const assets::meta_model::name& n) const {
 
     using namespace dogen::utility::log;
     static logger lg(
-        logger_factory(new_main_formatter::static_id()));
+        logger_factory(main_formatter::static_id()));
     static const std::string not_supported("Inclusion path is not supported: ");
 
     BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
     BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
 }
 
-boost::filesystem::path new_main_formatter::full_path(
+boost::filesystem::path main_formatter::full_path(
     const formattables::locator& l, const assets::meta_model::name& n) const {
     return l.make_full_path_for_tests_cpp_implementation(n, static_id());
 }
 
-std::list<std::string> new_main_formatter::inclusion_dependencies(
+std::list<std::string> main_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const assets::meta_model::element& /*e*/) const {
 
@@ -100,7 +100,7 @@ std::list<std::string> new_main_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-extraction::meta_model::artefact new_main_formatter::
+extraction::meta_model::artefact main_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     using assets::meta_model::structural::entry_point;

@@ -146,11 +146,11 @@ make_masd_generation_cpp_tests_cmakelists_postfix() {
 }
 
 dogen::variability::meta_model::feature_template
-make_masd_generation_cpp_tests_new_main_postfix() {
+make_masd_generation_cpp_tests_main_postfix() {
     using namespace dogen::variability::meta_model;
     feature_template r;
     r.name().simple("postfix");
-    r.name().qualified("masd.generation.cpp.tests.new_main.postfix");
+    r.name().qualified("masd.generation.cpp.tests.main.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -178,7 +178,7 @@ features::make_templates() {
     r.push_back(make_masd_generation_cpp_tests_enum_implementation_postfix());
     r.push_back(make_masd_generation_cpp_tests_master_header_postfix());
     r.push_back(make_masd_generation_cpp_tests_cmakelists_postfix());
-    r.push_back(make_masd_generation_cpp_tests_new_main_postfix());
+    r.push_back(make_masd_generation_cpp_tests_main_postfix());
     return r;
 }
 

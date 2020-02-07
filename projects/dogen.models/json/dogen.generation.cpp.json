@@ -2591,11 +2591,11 @@
           }
         },
         {
-          "name": "masd.generation.cpp.tests.new_main.postfix",
+          "name": "masd.generation.cpp.tests.main.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.tests.new_main.postfix"
+            "masd.variability.qualified_name": "masd.generation.cpp.tests.main.postfix"
           }
         }
       ]
@@ -3227,7 +3227,7 @@
       ]
     },
     {
-      "name": "formatters::tests::new_main_formatter",
+      "name": "formatters::tests::main_formatter",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],

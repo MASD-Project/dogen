@@ -36632,7 +36632,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests.new_main.postfix#</dia:string>
+            <dia:string>#masd.generation.cpp.tests.main.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -36641,7 +36641,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.tests.new_main.postfix#</dia:string>
+            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.tests.main.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -41247,7 +41247,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#new_main_formatter#</dia:string>
+        <dia:string>#main_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
