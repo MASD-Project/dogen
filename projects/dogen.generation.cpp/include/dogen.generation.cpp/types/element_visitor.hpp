@@ -27,7 +27,6 @@
 
 #include "dogen.assets/types/meta_model/element_visitor.hpp"
 #include "dogen.generation.cpp/types/fabric/cmakelists_fwd.hpp"
-#include "dogen.generation.cpp/types/fabric/entry_point_fwd.hpp"
 #include "dogen.generation.cpp/types/fabric/msbuild_targets_fwd.hpp"
 #include "dogen.generation.cpp/types/fabric/common_odb_options_fwd.hpp"
 #include "dogen.generation.cpp/types/fabric/object_odb_options_fwd.hpp"
@@ -62,16 +61,6 @@ public:
     virtual void visit(const dogen::generation::cpp::fabric::common_odb_options&) { }
     virtual void visit(dogen::generation::cpp::fabric::common_odb_options&) const { }
     virtual void visit(dogen::generation::cpp::fabric::common_odb_options&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::generation::cpp::fabric::entry_point
-     */
-    /**@{*/
-    virtual void visit(const dogen::generation::cpp::fabric::entry_point&) const { }
-    virtual void visit(const dogen::generation::cpp::fabric::entry_point&) { }
-    virtual void visit(dogen::generation::cpp::fabric::entry_point&) const { }
-    virtual void visit(dogen::generation::cpp::fabric::entry_point&) { }
     /**@}*/
 
     /**

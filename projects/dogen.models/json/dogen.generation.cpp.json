@@ -1798,27 +1798,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "fabric::entry_point",
-      "tagged_values": {
-        "masd.generalization.parent": "dogen::assets::meta_model::element"
-      },
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "fabric::entry_point_factory",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formatters::tests::main_formatter",
-      "stereotypes": [
-        "dogen::cpp::artefact_formatter"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formatters::tests::cmakelists_formatter",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
@@ -2601,14 +2580,6 @@
           "value": "\"\"",
           "tagged_values": {
             "masd.variability.qualified_name": "masd.generation.cpp.tests.master_header.postfix"
-          }
-        },
-        {
-          "name": "masd.generation.cpp.tests.main.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.tests.main.postfix"
           }
         },
         {

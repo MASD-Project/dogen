@@ -24,7 +24,6 @@
 #include "dogen.generation.cpp/types/formatters/workflow.hpp"
 #include "dogen.generation.cpp/types/fabric/build_files_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/odb_options_factory.hpp"
-#include "dogen.generation.cpp/types/fabric/entry_point_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/injector.hpp"
 
 namespace {
@@ -67,16 +66,9 @@ inject_odb_options(generation::meta_model::model& m) const {
     add_elements(elements, m);
 }
 
-void injector::inject_entry_point(generation::meta_model::model& m) const {
-    entry_point_factory f;
-    const auto e(f.make(m));
-    add_element(e, m);
-}
-
 void injector::inject(generation::meta_model::model& m) const {
     inject_build_files(m);
     inject_odb_options(m);
-    // inject_entry_point(m);
 }
 
 }

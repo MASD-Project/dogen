@@ -129,7 +129,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.tests.main.enabled",
+          "name": "masd.generation.cpp.tests.new_main.enabled",
           "type": "",
           "value": "false",
           "tagged_values": {
@@ -977,7 +977,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.tests.main.enabled",
+          "name": "masd.generation.cpp.tests.new_main.enabled",
           "type": "",
           "value": "true",
           "tagged_values": {
@@ -1038,7 +1038,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.tests.main.enabled",
+          "name": "masd.generation.cpp.tests.new_main.enabled",
           "type": "",
           "value": "true",
           "tagged_values": {

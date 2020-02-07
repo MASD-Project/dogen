@@ -704,7 +704,7 @@ other layers can then configure features.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests.main.enabled#</dia:string>
+            <dia:string>#masd.generation.cpp.tests.new_main.enabled#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -4302,13 +4302,13 @@ for the element.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O34">
       <dia:attribute name="obj_pos">
-        <dia:point val="97,1"/>
+        <dia:point val="99,1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="96.95,0.95;117.57,5.45"/>
+        <dia:rectangle val="98.95,0.95;119.57,5.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="97,1"/>
+        <dia:point val="99,1"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.52"/>
@@ -4468,7 +4468,7 @@ for the element.
         <dia:point val="82.955,-3.34968"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="82.105,-3.39968;107.31,0.99978"/>
+        <dia:rectangle val="82.105,-3.39968;109.31,0.99978"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4476,8 +4476,8 @@ for the element.
       <dia:attribute name="orth_points">
         <dia:point val="82.955,-3.34968"/>
         <dia:point val="82.955,-1"/>
-        <dia:point val="107.26,-1"/>
-        <dia:point val="107.26,0.94978"/>
+        <dia:point val="109.26,-1"/>
+        <dia:point val="109.26,0.94978"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4824,7 +4824,7 @@ for the element.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests.main.enabled#</dia:string>
+            <dia:string>#masd.generation.cpp.tests.new_main.enabled#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -5102,7 +5102,7 @@ for the element.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests.main.enabled#</dia:string>
+            <dia:string>#masd.generation.cpp.tests.new_main.enabled#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
