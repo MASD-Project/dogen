@@ -22,6 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.assets/io/meta_model/orm/letter_case_io.hpp"
+#include "dogen.assets/io/meta_model/orm/odb_options_io.hpp"
 #include "dogen.assets/io/meta_model/orm/type_mapping_io.hpp"
 #include "dogen.assets/io/meta_model/orm/database_system_io.hpp"
 #include "dogen.assets/io/meta_model/orm/primitive_properties_io.hpp"
@@ -106,6 +107,7 @@ std::ostream& operator<<(std::ostream& s, const primitive_properties& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::assets::meta_model::orm::primitive_properties\"" << ", "
+      << "\"odb_options\": " << v.odb_options() << ", "
       << "\"schema_name\": " << "\"" << tidy_up_string(v.schema_name()) << "\"" << ", "
       << "\"capitalised_schema_name\": " << "\"" << tidy_up_string(v.capitalised_schema_name()) << "\"" << ", "
       << "\"letter_case\": " << v.letter_case() << ", "

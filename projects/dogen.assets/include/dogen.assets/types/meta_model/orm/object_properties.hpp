@@ -30,6 +30,7 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 #include "dogen.assets/types/meta_model/orm/letter_case.hpp"
+#include "dogen.assets/types/meta_model/orm/odb_options.hpp"
 #include "dogen.assets/types/meta_model/orm/type_mapping.hpp"
 
 namespace dogen::assets::meta_model::orm {
@@ -47,6 +48,7 @@ public:
 
 public:
     object_properties(
+        const dogen::assets::meta_model::orm::odb_options& odb_options,
         const std::string& schema_name,
         const std::string& capitalised_schema_name,
         const boost::optional<dogen::assets::meta_model::orm::letter_case>& letter_case,
@@ -58,6 +60,11 @@ public:
         const bool has_primary_key);
 
 public:
+    const dogen::assets::meta_model::orm::odb_options& odb_options() const;
+    dogen::assets::meta_model::orm::odb_options& odb_options();
+    void odb_options(const dogen::assets::meta_model::orm::odb_options& v);
+    void odb_options(const dogen::assets::meta_model::orm::odb_options&& v);
+
     /**
      * @brief Name of the database schema in which to place this element.
      */
@@ -153,6 +160,7 @@ public:
     object_properties& operator=(object_properties other);
 
 private:
+    dogen::assets::meta_model::orm::odb_options odb_options_;
     std::string schema_name_;
     std::string capitalised_schema_name_;
     boost::optional<dogen::assets::meta_model::orm::letter_case> letter_case_;

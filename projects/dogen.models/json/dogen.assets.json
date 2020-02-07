@@ -3332,7 +3332,13 @@
       "stereotypes": [
         "masd::object_template"
       ],
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "odb_options",
+          "type": "odb_options"
+        }
+      ]
     },
     {
       "name": "meta_model::orm::Overridable",
@@ -3546,6 +3552,24 @@
         "assets::meta_element"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::orm::odb_options",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "epilogue",
+          "type": "std::string"
+        },
+        {
+          "name": "include_regexes",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "header_guard_prefix",
+          "type": "std::string"
+        }
+      ]
     }
   ]
 }

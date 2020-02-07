@@ -26,7 +26,8 @@ primitive_properties::primitive_properties()
     : generate_mapping_(static_cast<bool>(0)) { }
 
 primitive_properties::primitive_properties(primitive_properties&& rhs)
-    : schema_name_(std::move(rhs.schema_name_)),
+    : odb_options_(std::move(rhs.odb_options_)),
+      schema_name_(std::move(rhs.schema_name_)),
       capitalised_schema_name_(std::move(rhs.capitalised_schema_name_)),
       letter_case_(std::move(rhs.letter_case_)),
       generate_mapping_(std::move(rhs.generate_mapping_)),
@@ -35,6 +36,7 @@ primitive_properties::primitive_properties(primitive_properties&& rhs)
       type_overrides_(std::move(rhs.type_overrides_)) { }
 
 primitive_properties::primitive_properties(
+    const dogen::assets::meta_model::orm::odb_options& odb_options,
     const std::string& schema_name,
     const std::string& capitalised_schema_name,
     const boost::optional<dogen::assets::meta_model::orm::letter_case>& letter_case,
@@ -42,7 +44,8 @@ primitive_properties::primitive_properties(
     const std::list<dogen::assets::meta_model::orm::type_mapping>& type_mappings,
     const std::list<std::string>& odb_pragmas,
     const std::unordered_map<dogen::assets::meta_model::orm::database_system, std::string>& type_overrides)
-    : schema_name_(schema_name),
+    : odb_options_(odb_options),
+      schema_name_(schema_name),
       capitalised_schema_name_(capitalised_schema_name),
       letter_case_(letter_case),
       generate_mapping_(generate_mapping),
@@ -52,6 +55,7 @@ primitive_properties::primitive_properties(
 
 void primitive_properties::swap(primitive_properties& other) noexcept {
     using std::swap;
+    swap(odb_options_, other.odb_options_);
     swap(schema_name_, other.schema_name_);
     swap(capitalised_schema_name_, other.capitalised_schema_name_);
     swap(letter_case_, other.letter_case_);
@@ -62,7 +66,8 @@ void primitive_properties::swap(primitive_properties& other) noexcept {
 }
 
 bool primitive_properties::operator==(const primitive_properties& rhs) const {
-    return schema_name_ == rhs.schema_name_ &&
+    return odb_options_ == rhs.odb_options_ &&
+        schema_name_ == rhs.schema_name_ &&
         capitalised_schema_name_ == rhs.capitalised_schema_name_ &&
         letter_case_ == rhs.letter_case_ &&
         generate_mapping_ == rhs.generate_mapping_ &&
@@ -75,6 +80,22 @@ primitive_properties& primitive_properties::operator=(primitive_properties other
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const dogen::assets::meta_model::orm::odb_options& primitive_properties::odb_options() const {
+    return odb_options_;
+}
+
+dogen::assets::meta_model::orm::odb_options& primitive_properties::odb_options() {
+    return odb_options_;
+}
+
+void primitive_properties::odb_options(const dogen::assets::meta_model::orm::odb_options& v) {
+    odb_options_ = v;
+}
+
+void primitive_properties::odb_options(const dogen::assets::meta_model::orm::odb_options&& v) {
+    odb_options_ = std::move(v);
 }
 
 const std::string& primitive_properties::schema_name() const {

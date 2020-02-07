@@ -28,7 +28,8 @@ object_properties::object_properties()
       has_primary_key_(static_cast<bool>(0)) { }
 
 object_properties::object_properties(object_properties&& rhs)
-    : schema_name_(std::move(rhs.schema_name_)),
+    : odb_options_(std::move(rhs.odb_options_)),
+      schema_name_(std::move(rhs.schema_name_)),
       capitalised_schema_name_(std::move(rhs.capitalised_schema_name_)),
       letter_case_(std::move(rhs.letter_case_)),
       generate_mapping_(std::move(rhs.generate_mapping_)),
@@ -39,6 +40,7 @@ object_properties::object_properties(object_properties&& rhs)
       has_primary_key_(std::move(rhs.has_primary_key_)) { }
 
 object_properties::object_properties(
+    const dogen::assets::meta_model::orm::odb_options& odb_options,
     const std::string& schema_name,
     const std::string& capitalised_schema_name,
     const boost::optional<dogen::assets::meta_model::orm::letter_case>& letter_case,
@@ -48,7 +50,8 @@ object_properties::object_properties(
     const std::string& table_name,
     const bool is_value,
     const bool has_primary_key)
-    : schema_name_(schema_name),
+    : odb_options_(odb_options),
+      schema_name_(schema_name),
       capitalised_schema_name_(capitalised_schema_name),
       letter_case_(letter_case),
       generate_mapping_(generate_mapping),
@@ -60,6 +63,7 @@ object_properties::object_properties(
 
 void object_properties::swap(object_properties& other) noexcept {
     using std::swap;
+    swap(odb_options_, other.odb_options_);
     swap(schema_name_, other.schema_name_);
     swap(capitalised_schema_name_, other.capitalised_schema_name_);
     swap(letter_case_, other.letter_case_);
@@ -72,7 +76,8 @@ void object_properties::swap(object_properties& other) noexcept {
 }
 
 bool object_properties::operator==(const object_properties& rhs) const {
-    return schema_name_ == rhs.schema_name_ &&
+    return odb_options_ == rhs.odb_options_ &&
+        schema_name_ == rhs.schema_name_ &&
         capitalised_schema_name_ == rhs.capitalised_schema_name_ &&
         letter_case_ == rhs.letter_case_ &&
         generate_mapping_ == rhs.generate_mapping_ &&
@@ -87,6 +92,22 @@ object_properties& object_properties::operator=(object_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const dogen::assets::meta_model::orm::odb_options& object_properties::odb_options() const {
+    return odb_options_;
+}
+
+dogen::assets::meta_model::orm::odb_options& object_properties::odb_options() {
+    return odb_options_;
+}
+
+void object_properties::odb_options(const dogen::assets::meta_model::orm::odb_options& v) {
+    odb_options_ = v;
+}
+
+void object_properties::odb_options(const dogen::assets::meta_model::orm::odb_options&& v) {
+    odb_options_ = std::move(v);
 }
 
 const std::string& object_properties::schema_name() const {
