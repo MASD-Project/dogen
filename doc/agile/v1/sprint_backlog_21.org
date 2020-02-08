@@ -12,31 +12,31 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-02-07 Fri 16:35]
+#+CAPTION: Clock summary at [2020-02-08 Sat 23:05]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *51:22* |       |       | 100.0 |
+| *Total time*                                          | *54:15* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 51:22   |       |       | 100.0 |
-| Active                                                |         | 51:22 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  7:01 |  13.7 |
-| Create a demo and presentation for previous sprint    |         |       |  1:49 |   3.5 |
-| Sprint and product backlog grooming                   |         |       |  3:29 |   6.8 |
-| Create new playlist for assets work                   |         |       |  2:19 |   4.5 |
-| Create the final video on the relational model series |         |       |  0:30 |   1.0 |
-| Move registrar into assets                            |         |       |  5:34 |  10.8 |
+| Stories                                               | 54:15   |       |       | 100.0 |
+| Active                                                |         | 54:15 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  7:01 |  12.9 |
+| Create a demo and presentation for previous sprint    |         |       |  1:49 |   3.3 |
+| Sprint and product backlog grooming                   |         |       |  3:29 |   6.4 |
+| Create new playlist for assets work                   |         |       |  2:19 |   4.3 |
+| Create the final video on the relational model series |         |       |  0:30 |   0.9 |
+| Move registrar into assets                            |         |       |  5:34 |  10.3 |
 | Fix error in asserter tests                           |         |       |  0:38 |   1.2 |
 | Add injection details to all models                   |         |       |  0:25 |   0.8 |
-| Fix nightly error in registrar                        |         |       |  0:33 |   1.1 |
+| Fix nightly error in registrar                        |         |       |  0:33 |   1.0 |
 | Nightly code coverage is not being reported           |         |       |  0:25 |   0.8 |
-| Move visual studio fabric types into assets           |         |       | 18:34 |  36.1 |
-| Create metamodel elements for =entry_point=           |         |       |  4:05 |   7.9 |
-| Fixes to setup                                        |         |       |  1:05 |   2.1 |
+| Move visual studio fabric types into assets           |         |       | 18:34 |  34.2 |
+| Create metamodel elements for =entry_point=           |         |       |  6:58 |  12.8 |
+| Fixes to setup                                        |         |       |  1:05 |   2.0 |
 | Cannot see source file in coveralls                   |         |       |  0:16 |   0.5 |
-| Integration of archetypes into assets                 |         |       |  2:41 |   5.2 |
+| Integration of archetypes into assets                 |         |       |  2:41 |   4.9 |
 | Remove support for element extensions                 |         |       |  0:10 |   0.3 |
-| Move =object_odb_options= into assets                 |         |       |  1:48 |   3.5 |
+| Move =object_odb_options= into assets                 |         |       |  1:48 |   3.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -737,9 +737,8 @@ Notes:
 6. add meta-type to =elements_traversal.hpp=.
 7. =meta_naming_transform=, =meta_name_factory=.
 8. add type to =merge_transform=.
-9. engine: =assets_model_to_generation_model_transform=.
-10. Add formatters in the =generation.cpp= and/or =generation.csharp=
-    models.
+9. Add formatters in the =generation.cpp= and/or =generation.csharp=
+   models.
 
 *** CANCELLED Replace detection of model name with new flag           :story:
     CLOSED: [2020-02-05 Wed 08:03]
@@ -772,6 +771,8 @@ Whereas for a type, we have:
 *** COMPLETED Create metamodel elements for =entry_point=             :story:
     CLOSED: [2020-02-07 Fri 11:29]
     :LOGBOOK:
+    CLOCK: [2020-02-08 Sat 20:20]--[2020-02-08 Sat 23:05] =>  2:45
+    CLOCK: [2020-02-08 Sat 20:11]--[2020-02-08 Sat 20:19] =>  0:08
     CLOCK: [2020-02-07 Fri 09:38]--[2020-02-07 Fri 11:29] =>  1:51
     CLOCK: [2020-02-06 Thu 21:30]--[2020-02-06 Thu 22:22] =>  0:52
     CLOCK: [2020-02-05 Wed 17:44]--[2020-02-05 Wed 18:28] =>  0:44
@@ -905,6 +906,12 @@ Actually this is not true, we are using it in
 =odb_options_factory=. We need to make this a proper facet instead of
 this hack.
 
+Notes:
+
+- See enablement:
+
+: FIXME: check this when element extension is removed.
+
 Merged stories:
 
 *Element extensions considered harmful*
@@ -1018,6 +1025,25 @@ decorations per element. We can:
   has to pick up the appropriate decoration given its technical space.
 - need to create a story for associating a technical space with an
   archetype properly.
+
+*** Consider moving more configuration to profiles                    :story:
+
+At present we have a number of "model specific" configuration options
+which are really not that model specific:
+
+: #DOGEN masd.injection.input_technical_space=cpp
+: #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
+: #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
+: #DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
+: #DOGEN masd.extraction.delete_extra_files=true
+: #DOGEN masd.extraction.delete_empty_directories=true
+: #DOGEN masd.extraction.force_write=false
+: #DOGEN masd.generation.cpp.enabled=true
+: #DOGEN masd.generation.csharp.enabled=false
+: #DOGEN masd.generation.cpp.standard=c++-17
+
+Most of these options are common to all models, particularly in
+Dogen. We should try to move them into profiles and see what happens.
 
 *** Handling of "derived meta-types"                                  :story:
 

@@ -2602,7 +2602,7 @@ association. However, we should still allow supplying this
 meta-parameter as meta-data because it may not be practical to have
 the association. And we need a way to express this in JSON as well.
 
-*** Consider allowing inheritance of object templates                 :story:
+*** Consider allowing uml inheritance of object templates             :story:
 
 It would be nice if we could infer that an object inherits an
 interface from an object template via the "implements" generalisation,
@@ -3505,6 +3505,19 @@ useful for languages like C# and Java, to control serialisation, etc.
 ** Technical debt and refactoring
 
 Stories that deal with cleaning up the code base.
+
+*** Add inheritance via meta-data to profiles                         :story:
+
+For objects we can use meta-data to declare inheritance relationships:
+
+: #DOGEN masd.generalization.parent=assets::meta_model::element
+
+However, this is not honoured for other element types. We should
+extend this to any case where there is inheritance. At present these
+are:
+
+- object templates;
+- profiles.
 
 *** Consider renaming =origin_types=                                  :story:
 
@@ -5048,7 +5061,7 @@ This is a bit more relevant now we are generating wale templates
 because we are including algorithm all over the place on the generated
 templates.
 
-*** Multiple inheritance and profiles do not work                     :story:
+*** Multiple inheritance and profiles do not work predictably         :story:
 
 The current inheritance logic is fine for single inheritance or even
 multiple inheritance when two parts of the inheritance tree do not
