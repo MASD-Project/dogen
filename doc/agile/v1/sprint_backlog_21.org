@@ -12,31 +12,31 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-02-08 Sat 23:05]
+#+CAPTION: Clock summary at [2020-02-08 Sat 23:37]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *54:15* |       |       | 100.0 |
+| *Total time*                                          | *54:45* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 54:15   |       |       | 100.0 |
-| Active                                                |         | 54:15 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  7:01 |  12.9 |
+| Stories                                               | 54:45   |       |       | 100.0 |
+| Active                                                |         | 54:45 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  7:01 |  12.8 |
 | Create a demo and presentation for previous sprint    |         |       |  1:49 |   3.3 |
 | Sprint and product backlog grooming                   |         |       |  3:29 |   6.4 |
-| Create new playlist for assets work                   |         |       |  2:19 |   4.3 |
+| Create new playlist for assets work                   |         |       |  2:19 |   4.2 |
 | Create the final video on the relational model series |         |       |  0:30 |   0.9 |
-| Move registrar into assets                            |         |       |  5:34 |  10.3 |
+| Move registrar into assets                            |         |       |  5:34 |  10.2 |
 | Fix error in asserter tests                           |         |       |  0:38 |   1.2 |
 | Add injection details to all models                   |         |       |  0:25 |   0.8 |
 | Fix nightly error in registrar                        |         |       |  0:33 |   1.0 |
 | Nightly code coverage is not being reported           |         |       |  0:25 |   0.8 |
-| Move visual studio fabric types into assets           |         |       | 18:34 |  34.2 |
-| Create metamodel elements for =entry_point=           |         |       |  6:58 |  12.8 |
+| Move visual studio fabric types into assets           |         |       | 18:34 |  33.9 |
+| Create metamodel elements for =entry_point=           |         |       |  6:58 |  12.7 |
 | Fixes to setup                                        |         |       |  1:05 |   2.0 |
 | Cannot see source file in coveralls                   |         |       |  0:16 |   0.5 |
 | Integration of archetypes into assets                 |         |       |  2:41 |   4.9 |
 | Remove support for element extensions                 |         |       |  0:10 |   0.3 |
-| Move =object_odb_options= into assets                 |         |       |  1:48 |   3.3 |
+| Move =object_odb_options= into assets                 |         |       |  2:18 |   4.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -793,6 +793,25 @@ Notes:
   coming out.
 - do not overload traversal in assets to generation model transform.
 
+*** COMPLETED Entry point is confusing when used only for tests       :story:
+    CLOSED: [2020-02-08 Sat 23:08]
+
+*Rationale*: addressed when we had to add the types facet to entry
+point and associated profiles.
+
+At present we use the entry point element purely to generate the main
+for unit tests. However, we need it to be on every model:
+
+- for the reference implementation its needed because we generate
+  tests and commit them to git;
+- for dogen models, we generate tests on the nightly and these would
+  fail to run if there was no main.
+
+However, for a normal developer if you look at a model and see an
+entry point, it won't be entirely obvious for what purpose it is being
+used. We need a way to signal that. It can be simply by creating a
+profile that enables testing. We may already have something like this.
+
 *** STARTED Fixes to setup                                            :story:
     :LOGBOOK:
     CLOCK: [2020-01-31 Fri 11:38]--[2020-01-31 Fri 11:51] =>  0:13
@@ -987,6 +1006,8 @@ Tasks:
 
 *** STARTED Move =object_odb_options= into assets                     :story:
     :LOGBOOK:
+    CLOCK: [2020-02-08 Sat 23:18]--[2020-02-08 Sat 23:37] =>  0:19
+    CLOCK: [2020-02-08 Sat 23:06]--[2020-02-08 Sat 23:17] =>  0:11
     CLOCK: [2020-02-07 Fri 14:54]--[2020-02-07 Fri 16:35] =>  1:41
     CLOCK: [2020-02-07 Fri 14:46]--[2020-02-07 Fri 14:53] =>  0:07
     :END:
@@ -1109,21 +1130,6 @@ Notes:
 - this may also apply to cases such as delete extra, etc. We need to
   do an inventory of all models that have exactly the same composition
   but different configurations.
-
-*** Entry point is confusing when used only for tests                 :story:
-
-At present we use the entry point element purely to generate the main
-for unit tests. However, we need it to be on every model:
-
-- for the reference implementation its needed because we generate
-  tests and commit them to git;
-- for dogen models, we generate tests on the nightly and these would
-  fail to run if there was no main.
-
-However, for a normal developer if you look at a model and see an
-entry point, it won't be entirely obvious for what purpose it is being
-used. We need a way to signal that. It can be simply by creating a
-profile that enables testing. We may already have something like this.
 
 *** Allow dropping facet postfix for an element                       :story:
 
