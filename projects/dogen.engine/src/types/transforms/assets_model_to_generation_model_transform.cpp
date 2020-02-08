@@ -79,87 +79,13 @@ private:
     }
 
 public:
-    void operator()(boost::shared_ptr<assets::meta_model::element>) { }
+    void operator()(boost::shared_ptr<assets::meta_model::element> e) {
+        add(e);
+    }
     void operator()
     (boost::shared_ptr<assets::meta_model::structural::module> m) {
         result_.module_ids().insert(m->name().qualified().dot());
         add(m);
-    }
-    void operator()
-    (boost::shared_ptr<assets::meta_model::structural::object_template> ot) {
-        add(ot);
-    }
-    void operator()
-    (boost::shared_ptr<assets::meta_model::structural::builtin> b) {
-        add(b);
-    }
-    void operator()
-    (boost::shared_ptr<assets::meta_model::structural::enumeration> e) {
-        add(e);
-    }
-    void operator()
-    (boost::shared_ptr<assets::meta_model::structural::primitive> p) {
-        add(p);
-    }
-    void operator()
-    (boost::shared_ptr<assets::meta_model::structural::object> o) {
-        add(o);
-    }
-    void operator()
-    (boost::shared_ptr<assets::meta_model::structural::exception> e) {
-        add(e);
-    }
-    void operator()
-    (boost::shared_ptr<assets::meta_model::structural::visitor> v) {
-        add(v);
-    }
-
-    void operator()
-    (boost::shared_ptr<assets::meta_model::structural::entry_point> ep) {
-        add(ep);
-    }
-    void operator()
-    (boost::shared_ptr<assets::meta_model::decoration::licence> l) {
-        add(l);
-    }
-    void operator()
-    (boost::shared_ptr<assets::meta_model::decoration::generation_marker> gm) {
-        add(gm);
-    }
-    void operator()
-    (boost::shared_ptr<assets::meta_model::decoration::modeline_group> mg) {
-        add(mg);
-    }
-    void operator()
-    (boost::shared_ptr<assets::meta_model::decoration::modeline> m) {
-        add(m);
-    }
-
-    void operator()(boost::shared_ptr<
-        assets::meta_model::variability::feature_bundle> ftg) {
-        add(ftg);
-    }
-    void operator()(boost::shared_ptr<assets::meta_model::variability::
-        feature_template_initializer> ftgrg) {
-        add(ftgrg);
-    }
-    void operator()(boost::shared_ptr<assets::meta_model::templating::
-        logic_less_template> llt) {
-        add(llt);
-    }
-    void operator()(boost::shared_ptr<assets::meta_model::serialization::
-        type_registrar> tg) {
-        add(tg);
-    }
-
-    void operator()(boost::shared_ptr<assets::meta_model::visual_studio::
-        solution> s) {
-        add(s);
-    }
-
-    void operator()(boost::shared_ptr<assets::meta_model::visual_studio::
-        project> p) {
-        add(p);
     }
 
 public:
