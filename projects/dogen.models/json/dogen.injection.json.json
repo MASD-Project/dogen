@@ -21,7 +21,6 @@
     "masd.extraction.delete_empty_directories": "true",
     "masd.generation.cpp.enabled": "true",
     "masd.generation.cpp.standard": "c++-17",
-    "masd.generation.cpp.tests.enabled": "false",
     "masd.variability.profile": "dogen.profiles.base.default_profile"
   },
   "elements": [

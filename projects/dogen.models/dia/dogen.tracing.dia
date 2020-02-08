@@ -68,7 +68,7 @@
         <dia:point val="-56,-28"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-56.05,-28.05;-28.87,-9.45"/>
+        <dia:rectangle val="-56.05,-28.05;-28.87,-10.25"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="18.500000000000004"/>
+        <dia:real val="17.700000000000003"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -114,7 +114,6 @@
 #DOGEN masd.extraction.force_write=false
 #DOGEN masd.generation.cpp.enabled=true
 #DOGEN masd.generation.cpp.standard=c++-17
-#DOGEN masd.generation.cpp.tests.enabled=false
 #DOGEN masd.variability.profile=dogen.profiles.base.default_profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -2502,14 +2501,14 @@ to re-enable tests.#</dia:string>
         <dia:point val="-24,-21.55"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-29.1613,-21.6182;-23.9318,-18.3776"/>
+        <dia:rectangle val="-29.1403,-21.6169;-23.9331,-18.7686"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="-24,-21.55"/>
-        <dia:point val="-28.92,-18.75"/>
+        <dia:point val="-28.92,-19.15"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -2524,7 +2523,7 @@ to re-enable tests.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="-26.46,-19.65"/>
+        <dia:point val="-26.46,-19.85"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O12" connection="3"/>
@@ -4933,13 +4932,13 @@ to re-enable tests.#</dia:string>
         <dia:point val="-52,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-52.05,-1.05;-35.28,2.05"/>
+        <dia:rectangle val="-52.05,-1.05;-36.435,2.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-52,-1"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.669999999999998"/>
+        <dia:real val="15.515000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>

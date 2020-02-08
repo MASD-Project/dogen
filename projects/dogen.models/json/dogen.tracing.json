@@ -20,7 +20,6 @@
     "masd.extraction.force_write": "false",
     "masd.generation.cpp.enabled": "true",
     "masd.generation.cpp.standard": "c++-17",
-    "masd.generation.cpp.tests.enabled": "false",
     "masd.variability.profile": "dogen.profiles.base.default_profile"
   },
   "elements": [
