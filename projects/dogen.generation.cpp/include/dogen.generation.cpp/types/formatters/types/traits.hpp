@@ -104,6 +104,11 @@ struct traits {
     static std::string feature_bundle_implementation_archetype();
     static std::string feature_template_initializer_header_archetype();
     static std::string feature_template_initializer_implementation_archetype();
+
+    /**
+     * @brief Name of the entry point.
+     */
+    static std::string main_archetype();
 };
 
 }

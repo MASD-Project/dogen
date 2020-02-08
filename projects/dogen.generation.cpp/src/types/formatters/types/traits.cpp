@@ -115,6 +115,9 @@ std::string traits::feature_template_initializer_implementation_archetype() {
     return r;
 }
 
-
+std::string traits::main_archetype() {
+    static std::string r(traits::facet() + ".main");
+    return r;
+}
 
 }
