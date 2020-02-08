@@ -67,7 +67,7 @@ private:
     }
 
 public:
-    void operator()(assets::meta_model::element&) { }
+    void operator()(assets::meta_model::element& e) { extract(e); }
     void operator()(assets::meta_model::structural::module& m) {
         if (m.is_root())
             model_.global(m.configuration());
@@ -79,33 +79,15 @@ public:
         for (auto& attr : ot.local_attributes())
             extract(attr);
     }
-    void operator()(assets::meta_model::structural::builtin& b) { extract(b); }
     void operator()(assets::meta_model::structural::enumeration& e) {
         extract(e);
         for (auto& enm : e.enumerators())
             extract(enm);
     }
-    void operator()(assets::meta_model::structural::primitive& p) {
-        extract(p);
-    }
     void operator()(assets::meta_model::structural::object& o) {
         extract(o);
         for (auto& attr : o.local_attributes())
             extract(attr);
-    }
-    void operator()(assets::meta_model::structural::exception& e) {
-        extract(e);
-    }
-    void operator()(assets::meta_model::structural::visitor& v) { extract(v); }
-    void operator()(assets::meta_model::decoration::licence& l) { extract(l); }
-    void operator()(assets::meta_model::decoration::modeline& ml) {
-        extract(ml);
-    }
-    void operator()(assets::meta_model::decoration::modeline_group& mg) {
-        extract(mg);
-    }
-    void operator()(assets::meta_model::decoration::generation_marker& gm) {
-        extract(gm);
     }
 
 public:
