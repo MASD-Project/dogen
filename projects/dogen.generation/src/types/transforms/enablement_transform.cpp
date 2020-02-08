@@ -116,6 +116,7 @@ void enablement_transform::compute_enablement_for_artefact_properties(
      * present in the local configuration container because we are
      * only processing one segment at a time. So, we need to ignore
      * the formatting for the segments we are not processing.
+     * FIXME: check this when element extension is removed.
      */
     const auto j(lalp.find(archetype));
     if (j == lalp.end()) {
