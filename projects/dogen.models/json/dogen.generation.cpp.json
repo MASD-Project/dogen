@@ -3264,6 +3264,13 @@
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "main",
+      "stereotypes": [
+        "masd::entry_point"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

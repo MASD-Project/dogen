@@ -389,6 +389,13 @@
           "documentation": "Connect to a SQLite database.\n"
         }
       ]
+    },
+    {
+      "name": "main",
+      "stereotypes": [
+        "masd::entry_point"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

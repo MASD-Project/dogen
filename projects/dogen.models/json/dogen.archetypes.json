@@ -4,14 +4,7 @@
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "dogen.archetypes",
     "masd.injection.input_technical_space": "cpp",
-    "masd.injection.reference": "cpp.builtins",
-    "masd.injection.reference": "cpp.std",
-    "masd.injection.reference": "cpp.boost",
-    "masd.injection.reference": "masd",
-    "masd.injection.reference": "masd.variability",
     "masd.injection.reference": "dogen.profiles",
-    "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
-    "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
     "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
     "masd.extraction.delete_extra_files": "true",
     "masd.extraction.delete_empty_directories": "true",
@@ -181,6 +174,13 @@
       "name": "features::initializer",
       "stereotypes": [
         "masd::variability::feature_template_initializer"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "main",
+      "stereotypes": [
+        "masd::entry_point"
       ],
       "fallback_element_type": "masd::object"
     }
