@@ -85,7 +85,9 @@ format(const context& ctx, const assets::meta_model::element& e) const {
         {
             const auto ns(a.make_namespaces(o.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
-a.stream() << std::endl;
+a.stream() << "int main (int argc, char* argv[]) {" << std::endl;
+a.stream() << "    return 0;" << std::endl;
+a.stream() << "}" << std::endl;
         } // snf
 a.stream() << std::endl;
     } // sbf

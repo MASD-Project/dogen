@@ -34,7 +34,9 @@ format(const context& ctx, const assets::meta_model::element& e) const {
             const auto ns(a.make_namespaces(o.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
 #>
-
+int main (int argc, char* argv[]) {
+    return 0;
+}
 <#+
         } // snf
 #>
