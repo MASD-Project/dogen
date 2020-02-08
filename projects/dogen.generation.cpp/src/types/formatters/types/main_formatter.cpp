@@ -18,12 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/types/log/logger.hpp"
 #include "dogen.assets/types/meta_model/structural/entry_point.hpp"
 #include "dogen.assets/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/formatters/types/main_formatter.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/types/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/formatting_error.hpp"
 
 namespace dogen::generation::cpp::formatters::types {
 
@@ -38,7 +41,7 @@ std::string main_formatter::id() const {
 archetypes::location
 main_formatter::archetype_location() const {
     static archetypes::location
-        r(cpp::traits::kernel(), cpp::traits::backend(),
+        r(cpp::traits::kernel(),  cpp::traits::backend(),
           traits::facet(),
           main_formatter::static_id());
     return r;
@@ -51,21 +54,28 @@ const assets::meta_model::name& main_formatter::meta_name() const {
 }
 
 std::string main_formatter::family() const {
-    return cpp::traits::header_family();
+    return cpp::traits::implementation_family();
 }
 
 inclusion_support_types main_formatter::inclusion_support_type() const {
-    return inclusion_support_types::regular_support;
+    return inclusion_support_types::not_supported;
 }
 
 boost::filesystem::path main_formatter::inclusion_path(
-    const formattables::locator& l, const assets::meta_model::name& n) const {
-    return l.make_inclusion_path_for_cpp_header(n, static_id());
+    const formattables::locator& /*l*/, const assets::meta_model::name& n) const {
+
+    using namespace dogen::utility::log;
+    static logger lg(
+        logger_factory(main_formatter::static_id()));
+    static const std::string not_supported("Inclusion path is not supported: ");
+
+    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
 }
 
 boost::filesystem::path main_formatter::full_path(
     const formattables::locator& l, const assets::meta_model::name& n) const {
-    return l.make_full_path_for_cpp_header(n, static_id());
+    return l.make_full_path_for_cpp_implementation(n, static_id());
 }
 
 std::list<std::string> main_formatter::inclusion_dependencies(
@@ -77,7 +87,7 @@ std::list<std::string> main_formatter::inclusion_dependencies(
 
 extraction::meta_model::artefact main_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
-    assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
+    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& o(a.as<assets::meta_model::structural::entry_point>(e));
 
     {
@@ -85,9 +95,11 @@ format(const context& ctx, const assets::meta_model::element& e) const {
         {
             const auto ns(a.make_namespaces(o.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
-a.stream() << "int main (int argc, char* argv[]) {" << std::endl;
+a.stream() << std::endl;
+a.stream() << "int main(int /*argc*/, char* /*argv*/[]) {" << std::endl;
 a.stream() << "    return 0;" << std::endl;
 a.stream() << "}" << std::endl;
+a.stream() << std::endl;
         } // snf
 a.stream() << std::endl;
     } // sbf
