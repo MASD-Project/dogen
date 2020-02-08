@@ -9565,16 +9565,16 @@ If empty, file logging is disabled.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O91">
       <dia:attribute name="obj_pos">
-        <dia:point val="32,-21"/>
+        <dia:point val="32,-20"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.95,-21.05;40.635,-17.95"/>
+        <dia:rectangle val="31.95,-20.05;48.72,-16.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="32,-21"/>
+        <dia:point val="32,-20"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -9583,7 +9583,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:string>#main#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::entry_point#</dia:string>
+        <dia:string>#masd::entry_point, dogen::untypable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

@@ -1101,6 +1101,30 @@
           }
         }
       ]
+    },
+    {
+      "name": "composable::untypable",
+      "documentation": "The element does not have a types facet.\n",
+      "stereotypes": [
+        "masd::variability::profile_template"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "element",
+        "masd.variability.labels": "dogen::untypable"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.cpp.types.enabled",
+          "type": "",
+          "value": "false",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.archetype_location.backend": "masd.generation.cpp",
+            "masd.variability.template_kind": "instance"
+          }
+        }
+      ]
     }
   ]
 }

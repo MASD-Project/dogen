@@ -3274,16 +3274,17 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "main",
+      "name": "formatters::types::main_formatter",
       "stereotypes": [
-        "masd::entry_point"
+        "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::main_formatter",
+      "name": "main",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "masd::entry_point",
+        "dogen::untypable"
       ],
       "fallback_element_type": "masd::object"
     }

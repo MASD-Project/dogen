@@ -5160,13 +5160,13 @@ into an External model.#</dia:string>
         <dia:point val="-65,19"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-65.05,18.95;-56.365,22.05"/>
+        <dia:rectangle val="-65.05,18.95;-48.28,22.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-65,19"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5175,7 +5175,7 @@ into an External model.#</dia:string>
         <dia:string>#main#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::entry_point#</dia:string>
+        <dia:string>#masd::entry_point, dogen::untypable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

@@ -4720,13 +4720,13 @@ to re-enable tests.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O29">
       <dia:attribute name="obj_pos">
-        <dia:point val="-48,-3"/>
+        <dia:point val="-52,-7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,-3.05;-35.13,0.65"/>
+        <dia:rectangle val="-52.05,-7.05;-39.13,-3.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-48,-3"/>
+        <dia:point val="-52,-7"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -4930,16 +4930,16 @@ to re-enable tests.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O31">
       <dia:attribute name="obj_pos">
-        <dia:point val="-48,3"/>
+        <dia:point val="-52,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,2.95;-39.365,6.05"/>
+        <dia:rectangle val="-52.05,-1.05;-35.28,2.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-48,3"/>
+        <dia:point val="-52,-1"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4948,7 +4948,7 @@ to re-enable tests.#</dia:string>
         <dia:string>#main#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::entry_point#</dia:string>
+        <dia:string>#masd::entry_point, dogen::untypable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

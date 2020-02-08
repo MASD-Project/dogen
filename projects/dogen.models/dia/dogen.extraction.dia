@@ -6636,13 +6636,13 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:point val="-55,-75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-55.05,-75.05;-46.365,-71.95"/>
+        <dia:rectangle val="-55.05,-75.05;-38.28,-71.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-55,-75"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -6651,7 +6651,7 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:string>#main#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::entry_point#</dia:string>
+        <dia:string>#masd::entry_point, dogen::untypable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

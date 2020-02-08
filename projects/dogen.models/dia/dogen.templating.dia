@@ -5857,13 +5857,13 @@
         <dia:point val="7,12"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="6.95,11.95;15.635,15.05"/>
+        <dia:rectangle val="6.95,11.95;23.72,15.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="7,12"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5872,7 +5872,7 @@
         <dia:string>#main#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::entry_point#</dia:string>
+        <dia:string>#masd::entry_point, dogen::untypable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

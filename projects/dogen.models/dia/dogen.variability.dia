@@ -16847,13 +16847,13 @@ alias.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O131">
       <dia:attribute name="obj_pos">
-        <dia:point val="-119,-19"/>
+        <dia:point val="-117,-18.9286"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-119.05,-19.05;-103.435,-15.95"/>
+        <dia:rectangle val="-117.05,-18.9786;-101.435,-15.8786"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-119,-19"/>
+        <dia:point val="-117,-18.9286"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -16957,16 +16957,16 @@ alias.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O132">
       <dia:attribute name="obj_pos">
-        <dia:point val="-119,-14"/>
+        <dia:point val="-117,-14"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-119.05,-14.05;-110.365,-10.95"/>
+        <dia:rectangle val="-117.05,-14.05;-101.435,-10.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-119,-14"/>
+        <dia:point val="-117,-14"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="15.515000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -16975,7 +16975,7 @@ alias.#</dia:string>
         <dia:string>#main#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::entry_point#</dia:string>
+        <dia:string>#masd::entry_point, dogen::untypable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

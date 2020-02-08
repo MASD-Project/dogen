@@ -8494,13 +8494,13 @@ graph.#</dia:string>
         <dia:point val="-17,37"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.05,36.95;-8.365,40.05"/>
+        <dia:rectangle val="-17.05,36.95;-0.28,40.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-17,37"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -8509,7 +8509,7 @@ graph.#</dia:string>
         <dia:string>#main#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::entry_point#</dia:string>
+        <dia:string>#masd::entry_point, dogen::untypable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

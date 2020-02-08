@@ -180,7 +180,8 @@
     {
       "name": "main",
       "stereotypes": [
-        "masd::entry_point"
+        "masd::entry_point",
+        "dogen::untypable"
       ],
       "fallback_element_type": "masd::object"
     }
