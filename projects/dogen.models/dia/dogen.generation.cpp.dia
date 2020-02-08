@@ -21223,13 +21223,13 @@ and element.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O168">
       <dia:attribute name="obj_pos">
-        <dia:point val="-14,295"/>
+        <dia:point val="-14,294"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.05,294.95;-1.13,298.05"/>
+        <dia:rectangle val="-14.05,293.95;-1.13,297.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-14,295"/>
+        <dia:point val="-14,294"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.82"/>
@@ -33788,13 +33788,13 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O283">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,295"/>
+        <dia:point val="-44,294"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,294.95;-18.68,298.05"/>
+        <dia:rectangle val="-44.05,293.95;-18.68,297.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,295"/>
+        <dia:point val="-44,294"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.27"/>
@@ -33899,19 +33899,19 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O284">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,301"/>
+        <dia:point val="-44,299"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,300.95;-1.87,319.85"/>
+        <dia:rectangle val="-44.05,298.95;-1.87,318.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,301"/>
+        <dia:point val="-44,299"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="42.079999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="18.800000000000004"/>
+        <dia:real val="19.600000000000005"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#features#</dia:string>
@@ -34453,6 +34453,29 @@ code.
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.feature_template_initializer_implementation.postfix#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#masd.generation.cpp.types.main.postfix#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#masd::variability::text#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#""#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.main.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
