@@ -19,6 +19,7 @@
  *
  */
 #include "dogen.generation.cpp/types/formatters/types/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/types/main_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/types/builtin_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/types/primitive_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/types/primitive_implementation_formatter.hpp"
@@ -56,7 +57,9 @@ void initializer::initialize(registrar& rg) {
     register_formatter<feature_bundle_header_formatter>(rg);
     register_formatter<feature_bundle_implementation_formatter>(rg);
     register_formatter<feature_template_initializer_header_formatter>(rg);
-    register_formatter<feature_template_initializer_implementation_formatter>(rg);
+    register_formatter<
+        feature_template_initializer_implementation_formatter>(rg);
+    register_formatter<main_formatter>(rg);
 
     register_helper_formatter<smart_pointer_helper>(rg);
 }
