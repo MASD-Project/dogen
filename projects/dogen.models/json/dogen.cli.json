@@ -62,13 +62,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "main",
-      "stereotypes": [
-        "dogen::handcrafted::typeable::implementation_only"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "application_exception",
       "documentation": "A fatal error has occurred whilst executing the application.\n",
       "stereotypes": [
@@ -171,6 +164,14 @@
           "documentation": "Directory in which to place all files not directly related to generated code.\n"
         }
       ]
+    },
+    {
+      "name": "main",
+      "stereotypes": [
+        "masd::entry_point",
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
