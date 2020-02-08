@@ -63,36 +63,21 @@ private:
     }
 
 public:
-    void operator()(assets::meta_model::element&) { }
-    void operator()(assets::meta_model::structural::module& m) { update(m); }
+    void operator()(assets::meta_model::element& e) { update(e); }
     void operator()(assets::meta_model::structural::object_template &ot) {
         update(ot);
         for (auto& attr : ot.local_attributes())
             attr.dynamic_stereotypes(extract(attr));
     }
-    void operator()(assets::meta_model::structural::builtin& b) {  update(b); }
     void operator()(assets::meta_model::structural::enumeration& e) {
         update(e);
         for (auto& enm : e.enumerators())
             enm.dynamic_stereotypes(extract(enm));
     }
-    void operator()(assets::meta_model::structural::primitive& p) { update(p); }
     void operator()(assets::meta_model::structural::object& o) {
         update(o);
         for (auto& attr : o.local_attributes())
             attr.dynamic_stereotypes(extract(attr));
-    }
-    void operator()(assets::meta_model::structural::exception& e) { update(e); }
-    void operator()(assets::meta_model::structural::visitor& v) { update(v); }
-    void operator()(assets::meta_model::decoration::licence& l) { update(l); }
-    void operator()(assets::meta_model::decoration::modeline& ml) {
-        update(ml);
-    }
-    void operator()(assets::meta_model::decoration::modeline_group& mg) {
-        update(mg);
-    }
-    void operator()(assets::meta_model::decoration::generation_marker& gm) {
-        update(gm);
     }
 };
 
