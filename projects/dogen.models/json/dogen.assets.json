@@ -396,11 +396,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "is_element_extension",
-          "type": "bool",
-          "documentation": "If true, this element extends another element with the same id.\n"
-        },
-        {
           "name": "artefact_properties",
           "type": "std::unordered_map<std::string, artefact_properties>"
         },

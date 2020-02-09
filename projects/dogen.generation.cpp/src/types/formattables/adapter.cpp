@@ -144,13 +144,11 @@ model adapter::adapt(const formatters::repository& frp,
          */
         auto& fbl(i->second);
         fbl.all_segments().push_back(ptr);
-        if (!e.is_element_extension()) {
-            if (fbl.master_segment()) {
-                BOOST_LOG_SEV(lg, error) << duplicate_master << id;
-                BOOST_THROW_EXCEPTION(adaptation_error(duplicate_master + id));
-            }
-            fbl.master_segment(ptr);
+        if (fbl.master_segment()) {
+            BOOST_LOG_SEV(lg, error) << duplicate_master << id;
+            BOOST_THROW_EXCEPTION(adaptation_error(duplicate_master + id));
         }
+        fbl.master_segment(ptr);
 
         /*
          * Check to see if the element has any formatters. Some

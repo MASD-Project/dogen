@@ -50,13 +50,6 @@ adapter::adapt(const formatters::repository& frp,
         BOOST_LOG_SEV(lg, debug) << "Processing element: " << id;
 
         /*
-         * In C# we do not care about element extensions, just the
-         * master segment.
-         */
-        if (e.is_element_extension())
-            continue;
-
-        /*
          * Check to see if the element has any formatters.
          */
         const auto mn(e.meta_name().qualified().dot());

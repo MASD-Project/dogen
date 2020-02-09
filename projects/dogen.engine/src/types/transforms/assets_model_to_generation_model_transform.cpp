@@ -65,16 +65,9 @@ private:
     }
 
     void add(boost::shared_ptr<assets::meta_model::element> e) {
-        /*
-         * Element extensions share the same id as the original
-         * element, so they are not considered duplicates. All other
-         * elements must have unique element ids.
-         */
-        if (!e->is_element_extension()) {
-            const auto id(e->name().qualified().dot());
-            ensure_not_yet_processed(id);
-            processed_ids_.insert(id);
-        }
+        const auto id(e->name().qualified().dot());
+        ensure_not_yet_processed(id);
+        processed_ids_.insert(id);
         result_.elements().push_back(e);
     }
 

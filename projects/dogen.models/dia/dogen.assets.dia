@@ -2856,7 +2856,7 @@ that are not modules, such as attributes, inner classes, etc.#</dia:string>
         <dia:point val="-221,-34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-221.05,-34.05;-181.95,-27.95"/>
+        <dia:rectangle val="-221.05,-34.05;-181.95,-28.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-221,-34"/>
@@ -2865,7 +2865,7 @@ that are not modules, such as attributes, inner classes, etc.#</dia:string>
         <dia:real val="39"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#element#</dia:string>
@@ -2959,29 +2959,6 @@ meta-types (object templates) and non-types (modules and backend specific entiti
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#is_element_extension#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, this element extends another element with the same id.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#artefact_properties#</dia:string>
@@ -33000,7 +32977,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="-207.585,-22.9286"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-208.335,-27.9998;-201.3,-22.1286"/>
+        <dia:rectangle val="-208.335,-28.7996;-201.3,-22.1286"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -33009,7 +32986,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="-207.585,-22.9286"/>
         <dia:point val="-207.585,-25"/>
         <dia:point val="-201.5,-25"/>
-        <dia:point val="-201.5,-27.9498"/>
+        <dia:point val="-201.5,-28.7496"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -33027,7 +33004,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O23" connection="1"/>
-        <dia:connection handle="1" to="O22" connection="16"/>
+        <dia:connection handle="1" to="O22" connection="14"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>

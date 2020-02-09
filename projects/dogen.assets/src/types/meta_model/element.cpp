@@ -167,8 +167,7 @@ namespace dogen::assets::meta_model {
 element::element()
     : origin_type_(static_cast<dogen::assets::meta_model::origin_types>(0)),
       in_global_module_(static_cast<bool>(0)),
-      intrinsic_technical_space_(static_cast<dogen::assets::meta_model::technical_space>(0)),
-      is_element_extension_(static_cast<bool>(0)) { }
+      intrinsic_technical_space_(static_cast<dogen::assets::meta_model::technical_space>(0)) { }
 
 element::element(
     const dogen::assets::meta_model::name& name,
@@ -183,7 +182,6 @@ element::element(
     const dogen::assets::meta_model::name& meta_name,
     const dogen::assets::meta_model::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
-    const bool is_element_extension,
     const std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& decoration)
@@ -199,7 +197,6 @@ element::element(
       meta_name_(meta_name),
       intrinsic_technical_space_(intrinsic_technical_space),
       configuration_(configuration),
-      is_element_extension_(is_element_extension),
       artefact_properties_(artefact_properties),
       archetype_location_properties_(archetype_location_properties),
       decoration_(decoration) { }
@@ -225,7 +222,6 @@ void element::to_stream(std::ostream& s) const {
       << "\"meta_name\": " << meta_name_ << ", "
       << "\"intrinsic_technical_space\": " << intrinsic_technical_space_ << ", "
       << "\"configuration\": " << configuration_ << ", "
-      << "\"is_element_extension\": " << is_element_extension_ << ", "
       << "\"artefact_properties\": " << artefact_properties_ << ", "
       << "\"archetype_location_properties\": " << archetype_location_properties_ << ", "
       << "\"decoration\": " << decoration_
@@ -246,7 +242,6 @@ void element::swap(element& other) noexcept {
     swap(meta_name_, other.meta_name_);
     swap(intrinsic_technical_space_, other.intrinsic_technical_space_);
     swap(configuration_, other.configuration_);
-    swap(is_element_extension_, other.is_element_extension_);
     swap(artefact_properties_, other.artefact_properties_);
     swap(archetype_location_properties_, other.archetype_location_properties_);
     swap(decoration_, other.decoration_);
@@ -265,7 +260,6 @@ bool element::compare(const element& rhs) const {
         meta_name_ == rhs.meta_name_ &&
         intrinsic_technical_space_ == rhs.intrinsic_technical_space_ &&
         configuration_ == rhs.configuration_ &&
-        is_element_extension_ == rhs.is_element_extension_ &&
         artefact_properties_ == rhs.artefact_properties_ &&
         archetype_location_properties_ == rhs.archetype_location_properties_ &&
         decoration_ == rhs.decoration_;
@@ -437,14 +431,6 @@ void element::configuration(const boost::shared_ptr<dogen::variability::meta_mod
 
 void element::configuration(const boost::shared_ptr<dogen::variability::meta_model::configuration>&& v) {
     configuration_ = std::move(v);
-}
-
-bool element::is_element_extension() const {
-    return is_element_extension_;
-}
-
-void element::is_element_extension(const bool v) {
-    is_element_extension_ = v;
 }
 
 const std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties>& element::artefact_properties() const {

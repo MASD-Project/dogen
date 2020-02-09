@@ -76,7 +76,6 @@ public:
         const dogen::assets::meta_model::name& meta_name,
         const dogen::assets::meta_model::technical_space intrinsic_technical_space,
         const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
-        const bool is_element_extension,
         const std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& decoration);
@@ -214,14 +213,6 @@ public:
     void configuration(const boost::shared_ptr<dogen::variability::meta_model::configuration>&& v);
     /**@}*/
 
-    /**
-     * @brief If true, this element extends another element with the same id.
-     */
-    /**@{*/
-    bool is_element_extension() const;
-    void is_element_extension(const bool v);
-    /**@}*/
-
     const std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties>& artefact_properties() const;
     std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties>& artefact_properties();
     void artefact_properties(const std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties>& v);
@@ -263,7 +254,6 @@ private:
     dogen::assets::meta_model::name meta_name_;
     dogen::assets::meta_model::technical_space intrinsic_technical_space_;
     boost::shared_ptr<dogen::variability::meta_model::configuration> configuration_;
-    bool is_element_extension_;
     std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties> artefact_properties_;
     std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties> archetype_location_properties_;
     std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> > decoration_;
