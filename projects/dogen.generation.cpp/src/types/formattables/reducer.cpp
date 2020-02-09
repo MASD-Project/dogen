@@ -38,7 +38,7 @@ void reducer::reduce(model& fm) const {
     std::unordered_map<std::string, formattable> reduced;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
-        const auto& e(*formattable.master_segment());
+        const auto& e(*formattable.element());
         if (e.origin_type() != assets::meta_model::origin_types::target)
             continue;
 

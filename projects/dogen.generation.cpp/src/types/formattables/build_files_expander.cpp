@@ -206,13 +206,12 @@ void build_files_expander::expand(const locator& l, model& fm) const {
     odb_targets_factory f(fm, l, fm.name());
     const auto ott(assets::meta_model::origin_types::target);
     for (auto& pair : fm.formattables()) {
-        auto& formattable(pair.second);
-
         /*
-         * We only want to process the master segment; the extensions
-         * can be ignored.
+         * We only want to process target elements; references can be
+         * ignored.
          */
-        auto& segment(formattable.master_segment());
+        auto& formattable(pair.second);
+        auto& segment(formattable.element());
         if (segment->origin_type() != ott) {
             BOOST_LOG_SEV(lg, debug) << "Skipping non-target element.";
             continue;
@@ -236,7 +235,7 @@ void build_files_expander::expand(const locator& l, model& fm) const {
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
         auto& formattable(pair.second);
-        auto& segment(formattable.master_segment());
+        auto& segment(formattable.element());
         if (segment->origin_type() != ott) {
             BOOST_LOG_SEV(lg, debug) << "Skipping non-target element.";
             continue;

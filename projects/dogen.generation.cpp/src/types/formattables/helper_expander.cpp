@@ -334,7 +334,7 @@ make_configuration(const feature_group& fg, const model& fm) const {
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
         auto& formattable(pair.second);
-        auto& segment(*formattable.master_segment());
+        auto& segment(*formattable.element());
         const auto& cfg(*segment.configuration());
         const variability::helpers::configuration_selector s(cfg);
         const auto fam(s.get_text_content_or_default(fg.family));
@@ -385,7 +385,7 @@ void helper_expander::populate_helper_properties(
          * We only want to process the master segment; the extensions
          * can be ignored.
          */
-        auto& segment(formattable.master_segment());
+        auto& segment(formattable.element());
 
         /*
          * We only need to generate helpers for the target

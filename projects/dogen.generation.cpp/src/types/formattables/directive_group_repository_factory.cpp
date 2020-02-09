@@ -343,19 +343,16 @@ directive_group_repository_factory::make(const feature_group& fg,
     for (const auto& pair : formattables) {
         const auto& formattable(pair.second);
 
-        for (const auto& segment : formattable.all_segments()) {
-            const auto& e(*segment);
-            const auto id(e.name().qualified().dot());
-            const auto mt(e.meta_name().qualified().dot());
+        const auto& e(*formattable.element());
+        const auto id(e.name().qualified().dot());
+        const auto mt(e.meta_name().qualified().dot());
 
-            const auto i(afmt.find(mt));
-            if (i == afmt.end() || i->second.empty()) {
-                BOOST_LOG_SEV(lg, debug) << formatter_not_found_for_type << id;
-                continue;
-            }
-
-            compute_directives(fg, e, i->second, l, r);
+        const auto i(afmt.find(mt));
+        if (i == afmt.end() || i->second.empty()) {
+            BOOST_LOG_SEV(lg, debug) << formatter_not_found_for_type << id;
+            continue;
         }
+        compute_directives(fg, e, i->second, l, r);
     }
     return r;
 }

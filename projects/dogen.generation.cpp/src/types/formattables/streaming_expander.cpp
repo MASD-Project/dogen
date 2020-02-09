@@ -112,7 +112,7 @@ expand(const variability::meta_model::feature_model& feature_model,
          * We only want to process the master segment; the element
          * extensions can be ignored.
          */
-        auto segment(formattable.master_segment());
+        auto segment(formattable.element());
         const auto& e(*segment);
         const auto sp(make_streaming_properties(fg, *e.configuration()));
         if (!sp)

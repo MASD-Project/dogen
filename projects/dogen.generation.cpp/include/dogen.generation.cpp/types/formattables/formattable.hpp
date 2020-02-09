@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <list>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
 #include "dogen.assets/types/meta_model/element_fwd.hpp"
@@ -42,20 +41,14 @@ public:
 
 public:
     formattable(
-        const boost::shared_ptr<dogen::assets::meta_model::element>& master_segment,
-        const std::list<boost::shared_ptr<dogen::assets::meta_model::element> >& all_segments,
+        const boost::shared_ptr<dogen::assets::meta_model::element>& element,
         const dogen::generation::cpp::formattables::element_properties& element_properties);
 
 public:
-    const boost::shared_ptr<dogen::assets::meta_model::element>& master_segment() const;
-    boost::shared_ptr<dogen::assets::meta_model::element>& master_segment();
-    void master_segment(const boost::shared_ptr<dogen::assets::meta_model::element>& v);
-    void master_segment(const boost::shared_ptr<dogen::assets::meta_model::element>&& v);
-
-    const std::list<boost::shared_ptr<dogen::assets::meta_model::element> >& all_segments() const;
-    std::list<boost::shared_ptr<dogen::assets::meta_model::element> >& all_segments();
-    void all_segments(const std::list<boost::shared_ptr<dogen::assets::meta_model::element> >& v);
-    void all_segments(const std::list<boost::shared_ptr<dogen::assets::meta_model::element> >&& v);
+    const boost::shared_ptr<dogen::assets::meta_model::element>& element() const;
+    boost::shared_ptr<dogen::assets::meta_model::element>& element();
+    void element(const boost::shared_ptr<dogen::assets::meta_model::element>& v);
+    void element(const boost::shared_ptr<dogen::assets::meta_model::element>&& v);
 
     const dogen::generation::cpp::formattables::element_properties& element_properties() const;
     dogen::generation::cpp::formattables::element_properties& element_properties();
@@ -73,8 +66,7 @@ public:
     formattable& operator=(formattable other);
 
 private:
-    boost::shared_ptr<dogen::assets::meta_model::element> master_segment_;
-    std::list<boost::shared_ptr<dogen::assets::meta_model::element> > all_segments_;
+    boost::shared_ptr<dogen::assets::meta_model::element> element_;
     dogen::generation::cpp::formattables::element_properties element_properties_;
 };
 

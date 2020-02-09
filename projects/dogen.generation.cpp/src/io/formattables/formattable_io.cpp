@@ -39,27 +39,12 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<boost::shared_ptr<dogen::assets::meta_model::element> >& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace dogen::generation::cpp::formattables {
 
 std::ostream& operator<<(std::ostream& s, const formattable& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::generation::cpp::formattables::formattable\"" << ", "
-      << "\"master_segment\": " << v.master_segment() << ", "
-      << "\"all_segments\": " << v.all_segments() << ", "
+      << "\"element\": " << v.element() << ", "
       << "\"element_properties\": " << v.element_properties()
       << " }";
     return(s);

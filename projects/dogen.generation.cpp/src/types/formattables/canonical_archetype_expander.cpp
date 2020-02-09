@@ -39,7 +39,8 @@ namespace dogen::generation::cpp::formattables {
 void canonical_archetype_expander::expand(const formatters::repository& frp,
     formattables::element_properties& eprops,
     const assets::meta_model::element& e) const {
-    BOOST_LOG_SEV(lg, debug) << "Procesing element: " << e.name().qualified().dot();
+    BOOST_LOG_SEV(lg, debug) << "Procesing element: "
+                             << e.name().qualified().dot();
     const auto cs(formatters::inclusion_support_types::canonical_support);
     const auto& safmt(frp.stock_artefact_formatters_by_meta_name());
 
@@ -86,10 +87,8 @@ expand(const formatters::repository& frp, model& fm) const {
     for (auto& pair : fm.formattables()) {
         auto& formattable(pair.second);
         auto& eprops(pair.second.element_properties());
-        for (const auto& segment : formattable.all_segments()) {
-            const auto& e(*segment);
-            expand(frp, eprops, e);
-        }
+        const auto& e(*formattable.element());
+        expand(frp, eprops, e);
     }
     BOOST_LOG_SEV(lg, debug) << "Finished expansion.";
 }

@@ -137,15 +137,13 @@ void odb_expander::expand(const locator& l, model& fm) const {
          * be build prior to reduction or else we will not get aspects
          * for referenced models.
          */
-        auto segment(formattable.master_segment());
+        auto segment(formattable.element());
         if (segment->origin_type() != assets::meta_model::origin_types::target)
             continue;
 
-        for (const auto& ptr : formattable.all_segments()) {
-            auto& e(*ptr);
-            updator g(fm, l);
-            e.accept(g);
-        }
+        auto& e(*segment);
+        updator g(fm, l);
+        e.accept(g);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished expanding odb properties. ";

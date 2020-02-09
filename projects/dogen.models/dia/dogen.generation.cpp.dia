@@ -14462,16 +14462,16 @@ and element.#</dia:string>
         <dia:point val="150,53.2143"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="149.95,53.1643;178.27,57.6643"/>
+        <dia:rectangle val="149.95,53.1643;172.11,56.8643"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="150,53.2143"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="28.219999999999999"/>
+        <dia:real val="22.059999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#formattable#</dia:string>
@@ -14563,33 +14563,10 @@ and element.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#master_segment#</dia:string>
+            <dia:string>#element#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boost::shared_ptr&lt;assets::meta_model::element&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#all_segments#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::list&lt;boost::shared_ptr&lt;assets::meta_model::element&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -14676,16 +14653,16 @@ and element.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="150,57.6143"/>
+        <dia:point val="150,56.8143"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="149.25,56.8643;154.12,69.0143"/>
+        <dia:rectangle val="149.25,56.0643;154.12,69.0143"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="150,57.6143"/>
+        <dia:point val="150,56.8143"/>
         <dia:point val="150,63.5477"/>
         <dia:point val="153.92,63.5477"/>
         <dia:point val="153.92,68.2143"/>
@@ -17617,7 +17594,7 @@ and element.#</dia:string>
         <dia:point val="180,68.2143"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="178.17,57.5643;180.75,69.0143"/>
+        <dia:rectangle val="172.01,56.7643;180.75,69.0143"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17625,8 +17602,8 @@ and element.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="180,68.2143"/>
         <dia:point val="180,63.5477"/>
-        <dia:point val="178.22,63.5477"/>
-        <dia:point val="178.22,57.6143"/>
+        <dia:point val="172.06,63.5477"/>
+        <dia:point val="172.06,56.8143"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

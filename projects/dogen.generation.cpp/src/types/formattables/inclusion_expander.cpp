@@ -193,47 +193,44 @@ void inclusion_expander::populate_inclusion_dependencies(
          */
         auto& eprops(formattable.element_properties());
         auto& art_props(eprops.artefact_properties());
-        for (const auto& ptr : formattable.all_segments()) {
-            const auto& e(*ptr);
+        const auto& e(*formattable.element());
 
-            /*
-             * We do not need to compute inclusion dependencies for
-             * elements that are not part of the target
-             * model. However, we do need them around for inclusion
-             * directives, so we can't rely on reduction.
-             */
-            if (e.origin_type() != assets::meta_model::origin_types::target)
-                continue;
+        /*
+         * We do not need to compute inclusion dependencies for
+         * elements that are not part of the target
+         * model. However, we do need them around for inclusion
+         * directives, so we can't rely on reduction.
+         */
+        if (e.origin_type() != assets::meta_model::origin_types::target)
+            continue;
 
-            /*
-             * Compute the dependencies for this segment of the
-             * element. If it does not have any dependencies, we
-             * haven't got any work to do.
-             */
-            const auto deps(compute_inclusion_dependencies(frp, df, e));
-            if (deps.empty())
-                continue;
+        /*
+         * Compute the dependencies for this segment of the
+         * element. If it does not have any dependencies, we
+         * haven't got any work to do.
+         */
+        const auto deps(compute_inclusion_dependencies(frp, df, e));
+        if (deps.empty())
+            continue;
 
+        /*
+         * Copy across all of the dependencies for the element.
+         * Note that this caters for multi-segment elements,
+         * merging them all into a single set of dependencies.
+         */
+        for (const auto& pair : deps) {
             /*
-             * Copy across all of the dependencies for the element.
-             * Note that this caters for multi-segment elements,
-             * merging them all into a single set of dependencies.
+             * First we need to obtain the configuration for this
+             * formatter. It must have been initialised by the
+             * transformer.
              */
-            for (const auto& pair : deps) {
-                /*
-                 * First we need to obtain the configuration for this
-                 * formatter. It must have been initialised by the
-                 * transformer.
-                 */
-                const auto arch(pair.first);
-                const auto i(art_props.find(arch));
-                if (i == art_props.end()) {
-                    BOOST_LOG_SEV(lg, error) << missing_archetype << arch;
-                    BOOST_THROW_EXCEPTION(
-                        expansion_error(missing_archetype + arch));
-                }
-                i->second.inclusion_dependencies(pair.second);
+            const auto arch(pair.first);
+            const auto i(art_props.find(arch));
+            if (i == art_props.end()) {
+                BOOST_LOG_SEV(lg, error) << missing_archetype << arch;
+                BOOST_THROW_EXCEPTION(expansion_error(missing_archetype + arch));
             }
+            i->second.inclusion_dependencies(pair.second);
         }
     }
     BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies "

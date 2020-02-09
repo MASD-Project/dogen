@@ -839,12 +839,8 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "master_segment",
+          "name": "element",
           "type": "boost::shared_ptr<assets::meta_model::element>"
-        },
-        {
-          "name": "all_segments",
-          "type": "std::list<boost::shared_ptr<assets::meta_model::element>>"
         },
         {
           "name": "element_properties",

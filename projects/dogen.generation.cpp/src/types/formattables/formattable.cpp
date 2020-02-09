@@ -33,23 +33,19 @@ const boost::shared_ptr<dogen::assets::meta_model::element>& rhs) {
 namespace dogen::generation::cpp::formattables {
 
 formattable::formattable(
-    const boost::shared_ptr<dogen::assets::meta_model::element>& master_segment,
-    const std::list<boost::shared_ptr<dogen::assets::meta_model::element> >& all_segments,
+    const boost::shared_ptr<dogen::assets::meta_model::element>& element,
     const dogen::generation::cpp::formattables::element_properties& element_properties)
-    : master_segment_(master_segment),
-      all_segments_(all_segments),
+    : element_(element),
       element_properties_(element_properties) { }
 
 void formattable::swap(formattable& other) noexcept {
     using std::swap;
-    swap(master_segment_, other.master_segment_);
-    swap(all_segments_, other.all_segments_);
+    swap(element_, other.element_);
     swap(element_properties_, other.element_properties_);
 }
 
 bool formattable::operator==(const formattable& rhs) const {
-    return master_segment_ == rhs.master_segment_ &&
-        all_segments_ == rhs.all_segments_ &&
+    return element_ == rhs.element_ &&
         element_properties_ == rhs.element_properties_;
 }
 
@@ -59,36 +55,20 @@ formattable& formattable::operator=(formattable other) {
     return *this;
 }
 
-const boost::shared_ptr<dogen::assets::meta_model::element>& formattable::master_segment() const {
-    return master_segment_;
+const boost::shared_ptr<dogen::assets::meta_model::element>& formattable::element() const {
+    return element_;
 }
 
-boost::shared_ptr<dogen::assets::meta_model::element>& formattable::master_segment() {
-    return master_segment_;
+boost::shared_ptr<dogen::assets::meta_model::element>& formattable::element() {
+    return element_;
 }
 
-void formattable::master_segment(const boost::shared_ptr<dogen::assets::meta_model::element>& v) {
-    master_segment_ = v;
+void formattable::element(const boost::shared_ptr<dogen::assets::meta_model::element>& v) {
+    element_ = v;
 }
 
-void formattable::master_segment(const boost::shared_ptr<dogen::assets::meta_model::element>&& v) {
-    master_segment_ = std::move(v);
-}
-
-const std::list<boost::shared_ptr<dogen::assets::meta_model::element> >& formattable::all_segments() const {
-    return all_segments_;
-}
-
-std::list<boost::shared_ptr<dogen::assets::meta_model::element> >& formattable::all_segments() {
-    return all_segments_;
-}
-
-void formattable::all_segments(const std::list<boost::shared_ptr<dogen::assets::meta_model::element> >& v) {
-    all_segments_ = v;
-}
-
-void formattable::all_segments(const std::list<boost::shared_ptr<dogen::assets::meta_model::element> >&& v) {
-    all_segments_ = std::move(v);
+void formattable::element(const boost::shared_ptr<dogen::assets::meta_model::element>&& v) {
+    element_ = std::move(v);
 }
 
 const dogen::generation::cpp::formattables::element_properties& formattable::element_properties() const {

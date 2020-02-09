@@ -105,7 +105,7 @@ obtain_aspect_properties(
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
         auto& formattable(pair.second);
-        const auto& segment(*formattable.master_segment());
+        const auto& segment(*formattable.element());
 
         const auto ap(make_aspect_properties(fg, *segment.configuration()));
         if (ap)
@@ -168,7 +168,7 @@ void aspect_expander::populate_aspect_properties(const std::string& element_id,
      * We only want to process the master segment; extensions can
      * be ignored.
      */
-    const auto& ms(formattable.master_segment());
+    const auto& ms(formattable.element());
 
     /*
      * We only need to generate the aspect configuration for

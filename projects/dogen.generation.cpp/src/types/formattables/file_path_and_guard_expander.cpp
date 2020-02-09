@@ -50,7 +50,7 @@ expand(const formatters::repository& frp, const locator& l, model& fm) const {
          * It doesn't really matter which segment we choose here since
          * they are both mapped to the same name.
          */
-        const auto& e(*formattable.master_segment());
+        const auto& e(*formattable.element());
         const auto n(e.name());
         auto& eprops(formattable.element_properties());
 

@@ -150,11 +150,8 @@ execute(const std::unordered_set<generation::meta_model::element_archetype>&
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
         const auto& eprops(formattable.element_properties());
-        for (const auto& segment : formattable.all_segments()) {
-            const auto& e(*segment);
-            r.splice(r.end(),
-                format(enabled_archetype_for_element, fm, e, eprops));
-        }
+        const auto& e(*formattable.element());
+        r.splice(r.end(), format(enabled_archetype_for_element, fm, e, eprops));
     }
     BOOST_LOG_SEV(lg, debug) << "Finished formatting.";
     return r;
