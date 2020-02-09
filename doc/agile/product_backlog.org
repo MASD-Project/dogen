@@ -3520,7 +3520,7 @@ At present we have two types of profiles:
 
 There are several problems:
 
-- the names aren't great. Unless you know doogen you don't know what
+- the names aren't great. Unless you know Dogen you don't know what
   most of these profile names mean.
 - We now have a third use case: enable types without disabling all
   other facets. This is needed because we want the entry point in CLI
