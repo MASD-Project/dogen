@@ -22,10 +22,9 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/case_conv.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.assets/types/meta_model/structural/object.hpp"
+#include "dogen.assets/types/meta_model/structural/primitive.hpp"
+#include "dogen.assets/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
-#include "dogen.generation.cpp/types/fabric/object_odb_options.hpp"
-#include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
@@ -55,7 +54,8 @@ primitive_odb_options_formatter::archetype_location() const {
 }
 
 const assets::meta_model::name& primitive_odb_options_formatter::meta_name() const {
-    static auto r(fabric::meta_name_factory::make_object_odb_options_name());
+    using assets::helpers::meta_name_factory;
+    static auto r(meta_name_factory::make_primitive_name());
     return r;
 }
 
@@ -97,16 +97,21 @@ std::list<std::string> primitive_odb_options_formatter::inclusion_dependencies(
 extraction::meta_model::artefact primitive_odb_options_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& ooo(a.as<fabric::object_odb_options>(e));
+    const auto& p(a.as<assets::meta_model::structural::primitive>(e));
 
     {
         a.make_decoration_preamble(e);
+
+        if (!p.orm_properties()) {
+a.stream() << "# class has no ODB options defined." << std::endl;
+        } else {
+            const auto ooo(p.orm_properties()->odb_options());
 a.stream() << "# epilogue" << std::endl;
 a.stream() << "--odb-epilogue " << ooo.epilogue() << std::endl;
 a.stream() << std::endl;
-        if (!ooo.include_regexes().empty()) {
+            if (!ooo.include_regexes().empty()) {
 a.stream() << "# regexes" << std::endl;
-            for (const auto& regex : ooo.include_regexes())
+                for (const auto& regex : ooo.include_regexes())
 a.stream() << "--include-regex " << regex << std::endl;
 a.stream() << std::endl;
 a.stream() << "# debug regexes" << std::endl;
@@ -114,6 +119,7 @@ a.stream() << "# --include-regex-trace" << std::endl;
 a.stream() << std::endl;
 a.stream() << "# make the header guards similar to dogen ones" << std::endl;
 a.stream() << "--guard-prefix " << ooo.header_guard_prefix() << std::endl;
+            }
         }
     } // sbf
     return a.make_artefact();

@@ -5,9 +5,8 @@
 <#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.assets/types/meta_model/structural/object.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.assets/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/object_odb_options.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/fabric/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
@@ -36,7 +35,8 @@ new_object_odb_options_formatter::archetype_location() const {
 }
 
 const assets::meta_model::name& new_object_odb_options_formatter::meta_name() const {
-    static auto r(fabric::meta_name_factory::make_object_odb_options_name());
+    using assets::helpers::meta_name_factory;
+    static auto r(meta_name_factory::make_object_name());
     return r;
 }
 
@@ -78,20 +78,27 @@ std::list<std::string> new_object_odb_options_formatter::inclusion_dependencies(
 extraction::meta_model::artefact new_object_odb_options_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& ooo(a.as<fabric::object_odb_options>(e));
+    const auto& o(a.as<assets::meta_model::structural::object>(e));
 
     {
         a.make_decoration_preamble(e);
+
+        if (!o.orm_properties()) {
+#>
+# class has no ODB options defined.
+<#+
+        } else {
+            const auto ooo(o.orm_properties()->odb_options());
 #>
 # epilogue
 --odb-epilogue <#= ooo.epilogue() #>
 
 <#+
-        if (!ooo.include_regexes().empty()) {
+            if (!ooo.include_regexes().empty()) {
 #>
 # regexes
 <#+
-            for (const auto& regex : ooo.include_regexes())
+                for (const auto& regex : ooo.include_regexes())
 #>
 --include-regex <#= regex #>
 
@@ -101,6 +108,7 @@ format(const context& ctx, const assets::meta_model::element& e) const {
 # make the header guards similar to dogen ones
 --guard-prefix <#= ooo.header_guard_prefix() #>
 <#+
+            }
         }
     } // sbf
     return a.make_artefact();
