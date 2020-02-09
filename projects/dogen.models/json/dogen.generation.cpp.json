@@ -1643,27 +1643,6 @@
       ]
     },
     {
-      "name": "fabric::object_odb_options",
-      "tagged_values": {
-        "masd.generalization.parent": "assets::meta_model::element"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "epilogue",
-          "type": "std::string"
-        },
-        {
-          "name": "include_regexes",
-          "type": "std::list<std::string>"
-        },
-        {
-          "name": "header_guard_prefix",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
       "name": "formattables::test_data_properties",
       "fallback_element_type": "masd::object",
       "attributes": [

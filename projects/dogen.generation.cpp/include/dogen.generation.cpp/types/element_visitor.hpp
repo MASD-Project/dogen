@@ -29,7 +29,6 @@
 #include "dogen.generation.cpp/types/fabric/cmakelists_fwd.hpp"
 #include "dogen.generation.cpp/types/fabric/msbuild_targets_fwd.hpp"
 #include "dogen.generation.cpp/types/fabric/common_odb_options_fwd.hpp"
-#include "dogen.generation.cpp/types/fabric/object_odb_options_fwd.hpp"
 
 namespace dogen::generation::cpp {
 
@@ -71,16 +70,6 @@ public:
     virtual void visit(const dogen::generation::cpp::fabric::msbuild_targets&) { }
     virtual void visit(dogen::generation::cpp::fabric::msbuild_targets&) const { }
     virtual void visit(dogen::generation::cpp::fabric::msbuild_targets&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::generation::cpp::fabric::object_odb_options
-     */
-    /**@{*/
-    virtual void visit(const dogen::generation::cpp::fabric::object_odb_options&) const { }
-    virtual void visit(const dogen::generation::cpp::fabric::object_odb_options&) { }
-    virtual void visit(dogen::generation::cpp::fabric::object_odb_options&) const { }
-    virtual void visit(dogen::generation::cpp::fabric::object_odb_options&) { }
     /**@}*/
 };
 

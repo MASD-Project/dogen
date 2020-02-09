@@ -30,17 +30,10 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.assets/types/meta_model/element.hpp"
 #include "dogen.generation/types/meta_model/model.hpp"
-#include "dogen.generation.cpp/types/fabric/object_odb_options.hpp"
 
 namespace dogen::generation::cpp::fabric {
 
 class odb_options_factory final {
-private:
-    boost::shared_ptr<assets::meta_model::element>
-    make(const assets::meta_model::name& n,
-        const assets::meta_model::origin_types& ot,
-        const variability::meta_model::configuration cfg) const;
-
 public:
     std::list<boost::shared_ptr<assets::meta_model::element>>
     make(const generation::meta_model::model& m) const;

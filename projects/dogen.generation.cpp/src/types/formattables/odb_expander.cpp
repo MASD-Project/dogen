@@ -29,7 +29,6 @@
 #include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include "dogen.generation.cpp/types/formattables/adapter.hpp"
 #include "dogen.generation.cpp/types/fabric/common_odb_options.hpp"
-#include "dogen.generation.cpp/types/fabric/object_odb_options.hpp"
 #include "dogen.generation.cpp/types/element_visitor.hpp"
 #include "dogen.generation.cpp/types/fabric/odb_options_factory.hpp"
 #include "dogen.generation.cpp/types/formattables/header_guard_factory.hpp"
@@ -67,7 +66,6 @@ public:
     void visit(assets::meta_model::structural::object& o);
     void visit(assets::meta_model::structural::primitive& p);
     void visit(fabric::common_odb_options& coo);
-    void visit(fabric::object_odb_options& ooo);
 
 private:
     const model& model_;
@@ -121,35 +119,6 @@ void updator::visit(assets::meta_model::structural::object& o) {
 void updator::visit(assets::meta_model::structural::primitive& p) {
     if (p.orm_properties())
         p.orm_properties()->odb_options(make_options(p.name()));
-}
-
-void updator::visit(fabric::object_odb_options& ooo) {
-    const auto odb_arch(formatters::odb::traits::class_header_archetype());
-    const auto odb_rp(locator_.make_inclusion_path_for_cpp_header(ooo.name(),
-            odb_arch));
-
-    std::ostringstream os;
-    os << "'#include \"" << odb_rp.generic_string() << "\"'";
-    ooo.epilogue(os.str());
-    os.str("");
-
-    const auto types_arch(formatters::types::traits::class_header_archetype());
-    const auto types_rp(locator_.make_inclusion_path_for_cpp_header(ooo.name(),
-            types_arch).parent_path());
-
-    os << "'%(.*).hpp%" << types_rp.generic_string() << "/$1.hpp%'";
-    ooo.include_regexes().push_back(os.str());
-
-    os.str("");
-    os << "'%(^[a-zA-Z0-9_]+)-odb(.*)%"
-       << odb_rp.parent_path().generic_string() << "/$1-odb$2%'";
-    ooo.include_regexes().push_back(os.str());
-
-    os.str("");
-    os << "'%" << types_rp.generic_string() << "/(.*)-odb(.*)%"
-       << odb_rp.parent_path().generic_string() << "/$1-odb$2%'";
-    ooo.include_regexes().push_back(os.str());
-    ooo.header_guard_prefix(header_guard_factory::make(odb_rp.parent_path()));
 }
 
 void odb_expander::expand(const locator& l, model& fm) const {
