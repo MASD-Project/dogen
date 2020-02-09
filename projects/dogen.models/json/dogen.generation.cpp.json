@@ -1664,13 +1664,6 @@
       ]
     },
     {
-      "name": "formatters::odb::object_odb_options_formatter",
-      "stereotypes": [
-        "dogen::cpp::artefact_formatter"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formattables::test_data_properties",
       "fallback_element_type": "masd::object",
       "attributes": [
