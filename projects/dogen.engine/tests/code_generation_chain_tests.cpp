@@ -80,9 +80,11 @@ bool are_generated_files_healthy(const boost::filesystem::path& output_dir,
         return false;
 
     /*
-     * Ensure all files have the minimum content size.
+     * Ensure all files have the minimum content size. We are using
+     * 900 bytes because the empty ODB option files only have 915
+     * bytes.
      */
-    const boost::uintmax_t minimum_file_size(1000);
+    const boost::uintmax_t minimum_file_size(900);
     for (const auto& f : files) {
         const auto sz(file_size(f));
         if (sz < minimum_file_size)
