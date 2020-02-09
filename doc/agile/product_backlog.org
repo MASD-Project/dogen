@@ -3506,6 +3506,27 @@ useful for languages like C# and Java, to control serialisation, etc.
 
 Stories that deal with cleaning up the code base.
 
+*** Tidy-up profile names                                             :story:
+
+At present we have two types of profiles:
+
+- the "enable just one facet" profiles such as typeable, etc. These
+  are meant to allow for composition: e.g., =dogen::typeable,
+  dogen::pretty_printable=. in order to allow composition, the type is
+  based on profile "disable all facets".
+- the "handcraft this type" profiles such as =handcrafted_typeable=,
+  =handcrafted_pretty_printable= etc. These are also meant for
+  composition. Again, their base type is using "disable all facets".
+
+There are several problems:
+
+- the names aren't great. Unless you know doogen you don't know what
+  most of these profile names mean.
+- We now have a third use case: enable types without disabling all
+  other facets. This is needed because we want the entry point in CLI
+  to work for tests with profile overrides. For now we need to do this
+  manually.
+
 *** Add inheritance via meta-data to profiles                         :story:
 
 For objects we can use meta-data to declare inheritance relationships:

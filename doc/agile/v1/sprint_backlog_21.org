@@ -12,26 +12,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-02-08 Sat 23:37]
+#+CAPTION: Clock summary at [2020-02-09 Sun 09:09]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *54:45* |       |       | 100.0 |
+| *Total time*                                          | *55:05* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 54:45   |       |       | 100.0 |
-| Active                                                |         | 54:45 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  7:01 |  12.8 |
+| Stories                                               | 55:05   |       |       | 100.0 |
+| Active                                                |         | 55:05 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  7:01 |  12.7 |
 | Create a demo and presentation for previous sprint    |         |       |  1:49 |   3.3 |
-| Sprint and product backlog grooming                   |         |       |  3:29 |   6.4 |
+| Sprint and product backlog grooming                   |         |       |  3:29 |   6.3 |
 | Create new playlist for assets work                   |         |       |  2:19 |   4.2 |
 | Create the final video on the relational model series |         |       |  0:30 |   0.9 |
-| Move registrar into assets                            |         |       |  5:34 |  10.2 |
-| Fix error in asserter tests                           |         |       |  0:38 |   1.2 |
+| Move registrar into assets                            |         |       |  5:34 |  10.1 |
+| Fix error in asserter tests                           |         |       |  0:38 |   1.1 |
 | Add injection details to all models                   |         |       |  0:25 |   0.8 |
 | Fix nightly error in registrar                        |         |       |  0:33 |   1.0 |
 | Nightly code coverage is not being reported           |         |       |  0:25 |   0.8 |
-| Move visual studio fabric types into assets           |         |       | 18:34 |  33.9 |
-| Create metamodel elements for =entry_point=           |         |       |  6:58 |  12.7 |
+| Move visual studio fabric types into assets           |         |       | 18:34 |  33.7 |
+| Create metamodel elements for =entry_point=           |         |       |  7:18 |  13.3 |
 | Fixes to setup                                        |         |       |  1:05 |   2.0 |
 | Cannot see source file in coveralls                   |         |       |  0:16 |   0.5 |
 | Integration of archetypes into assets                 |         |       |  2:41 |   4.9 |
@@ -771,6 +771,7 @@ Whereas for a type, we have:
 *** COMPLETED Create metamodel elements for =entry_point=             :story:
     CLOSED: [2020-02-07 Fri 11:29]
     :LOGBOOK:
+    CLOCK: [2020-02-09 Sun 08:49]--[2020-02-09 Sun 09:09] =>  0:20
     CLOCK: [2020-02-08 Sat 20:20]--[2020-02-08 Sat 23:05] =>  2:45
     CLOCK: [2020-02-08 Sat 20:11]--[2020-02-08 Sat 20:19] =>  0:08
     CLOCK: [2020-02-07 Fri 09:38]--[2020-02-07 Fri 11:29] =>  1:51
