@@ -32,47 +32,47 @@
 #include "dogen.generation.cpp/types/formatters/formatting_error.hpp"
 #include "dogen.generation.cpp/types/formatters/odb/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/types/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/odb/new_object_odb_options_formatter.hpp"
+#include "dogen.generation.cpp/types/formatters/odb/object_odb_options_formatter.hpp"
 
 namespace dogen::generation::cpp::formatters::odb {
 
-std::string new_object_odb_options_formatter::static_id() {
-    return traits::new_object_odb_options_archetype();
+std::string object_odb_options_formatter::static_id() {
+    return traits::object_odb_options_archetype();
 }
 
-std::string new_object_odb_options_formatter::id() const {
+std::string object_odb_options_formatter::id() const {
     static auto r(archetype_location().archetype());
     return r;
 }
 
 archetypes::location
-new_object_odb_options_formatter::archetype_location() const {
+object_odb_options_formatter::archetype_location() const {
     static archetypes::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
-          traits::facet(), new_object_odb_options_formatter::static_id());
+          traits::facet(), object_odb_options_formatter::static_id());
     return r;
 }
 
-const assets::meta_model::name& new_object_odb_options_formatter::meta_name() const {
+const assets::meta_model::name& object_odb_options_formatter::meta_name() const {
     using assets::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_object_name());
     return r;
 }
 
-std::string new_object_odb_options_formatter::family() const {
+std::string object_odb_options_formatter::family() const {
     return cpp::traits::odb_family();
 }
 
 inclusion_support_types
-new_object_odb_options_formatter::inclusion_support_type() const {
+object_odb_options_formatter::inclusion_support_type() const {
     return inclusion_support_types::not_supported;
 }
 
-boost::filesystem::path new_object_odb_options_formatter::inclusion_path(
+boost::filesystem::path object_odb_options_formatter::inclusion_path(
     const formattables::locator& /*l*/, const assets::meta_model::name& n) const {
     using namespace dogen::utility::log;
     static logger lg(logger_factory(
-            "generation.cpp.formatters.odb.new_object_odb_options_formatter"));
+            "generation.cpp.formatters.odb.object_odb_options_formatter"));
 
         const std::string not_supported("Inclusion path is not supported: ");
 
@@ -80,19 +80,19 @@ boost::filesystem::path new_object_odb_options_formatter::inclusion_path(
     BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
 }
 
-boost::filesystem::path new_object_odb_options_formatter::full_path(
+boost::filesystem::path object_odb_options_formatter::full_path(
     const formattables::locator& l, const assets::meta_model::name& n) const {
     return l.make_full_path_for_odb_options(n, static_id());
 }
 
-std::list<std::string> new_object_odb_options_formatter::inclusion_dependencies(
+std::list<std::string> object_odb_options_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
     const assets::meta_model::element& /*e*/) const {
     static std::list<std::string> r;
     return r;
 }
 
-extraction::meta_model::artefact new_object_odb_options_formatter::
+extraction::meta_model::artefact object_odb_options_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& o(a.as<assets::meta_model::structural::object>(e));

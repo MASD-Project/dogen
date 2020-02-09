@@ -35189,16 +35189,16 @@ code.
         <dia:point val="104,304"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="103.95,303.95;137.275,316.45"/>
+        <dia:rectangle val="103.95,303.95;136.89,315.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="104,304"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="33.225000000000001"/>
+        <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="12.4"/>
+        <dia:real val="11.6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#features#</dia:string>
@@ -35519,30 +35519,6 @@ code.
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.qualified_name=masd.generation.cpp.odb.builtin_header.postfix#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.odb.new_object_odb_options.postfix#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#""#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.odb.new_object_odb_options.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -41306,19 +41282,19 @@ string.
         <dia:point val="101,272"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="100.95,271.95;117.237,275.05"/>
+        <dia:rectangle val="100.95,271.95;114.985,275.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="101,272"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.1875"/>
+        <dia:real val="13.934999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#new_object_odb_options_formatter#</dia:string>
+        <dia:string>#object_odb_options_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>

@@ -2315,15 +2315,6 @@
           }
         },
         {
-          "name": "masd.generation.cpp.odb.new_object_odb_options.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.odb.new_object_odb_options.postfix"
-          }
-        },
-        {
           "name": "masd.generation.cpp.odb.primitive_odb_options.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
@@ -3253,7 +3244,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::odb::new_object_odb_options_formatter",
+      "name": "formatters::odb::object_odb_options_formatter",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
