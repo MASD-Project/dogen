@@ -100,10 +100,14 @@ format(const context& ctx, const assets::meta_model::element& e) const {
     const auto& p(a.as<assets::meta_model::structural::primitive>(e));
 
     {
-        a.make_decoration_preamble(e);
+        const auto ts(assets::meta_model::technical_space::odb);
+        a.make_decoration_preamble(e, ts);
 
         if (!p.orm_properties()) {
+a.stream() << std::endl;
+a.stream() << "#" << std::endl;
 a.stream() << "# class has no ODB options defined." << std::endl;
+a.stream() << "#" << std::endl;
         } else {
             const auto ooo(p.orm_properties()->odb_options());
 a.stream() << "# epilogue" << std::endl;

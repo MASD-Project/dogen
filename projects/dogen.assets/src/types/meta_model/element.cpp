@@ -144,6 +144,24 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::as
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << i->first;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen::assets::meta_model {
 
 element::element()
@@ -151,24 +169,6 @@ element::element()
       in_global_module_(static_cast<bool>(0)),
       intrinsic_technical_space_(static_cast<dogen::assets::meta_model::technical_space>(0)),
       is_element_extension_(static_cast<bool>(0)) { }
-
-element::element(element&& rhs)
-    : name_(std::move(rhs.name_)),
-      documentation_(std::move(rhs.documentation_)),
-      origin_type_(std::move(rhs.origin_type_)),
-      origin_sha1_hash_(std::move(rhs.origin_sha1_hash_)),
-      origin_element_id_(std::move(rhs.origin_element_id_)),
-      contained_by_(std::move(rhs.contained_by_)),
-      in_global_module_(std::move(rhs.in_global_module_)),
-      static_stereotypes_(std::move(rhs.static_stereotypes_)),
-      dynamic_stereotypes_(std::move(rhs.dynamic_stereotypes_)),
-      meta_name_(std::move(rhs.meta_name_)),
-      intrinsic_technical_space_(std::move(rhs.intrinsic_technical_space_)),
-      configuration_(std::move(rhs.configuration_)),
-      is_element_extension_(std::move(rhs.is_element_extension_)),
-      artefact_properties_(std::move(rhs.artefact_properties_)),
-      archetype_location_properties_(std::move(rhs.archetype_location_properties_)),
-      decoration_(std::move(rhs.decoration_)) { }
 
 element::element(
     const dogen::assets::meta_model::name& name,
@@ -186,7 +186,7 @@ element::element(
     const bool is_element_extension,
     const std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
-    const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration)
+    const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& decoration)
     : name_(name),
       documentation_(documentation),
       origin_type_(origin_type),
@@ -479,19 +479,19 @@ void element::archetype_location_properties(const std::unordered_map<std::string
     archetype_location_properties_ = std::move(v);
 }
 
-const boost::optional<dogen::assets::meta_model::decoration::element_properties>& element::decoration() const {
+const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& element::decoration() const {
     return decoration_;
 }
 
-boost::optional<dogen::assets::meta_model::decoration::element_properties>& element::decoration() {
+std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& element::decoration() {
     return decoration_;
 }
 
-void element::decoration(const boost::optional<dogen::assets::meta_model::decoration::element_properties>& v) {
+void element::decoration(const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& v) {
     decoration_ = v;
 }
 
-void element::decoration(const boost::optional<dogen::assets::meta_model::decoration::element_properties>&& v) {
+void element::decoration(const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >&& v) {
     decoration_ = std::move(v);
 }
 

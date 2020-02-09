@@ -64,7 +64,7 @@ modeline::modeline(
     const bool is_element_extension,
     const std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
-    const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration,
+    const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& decoration,
     const dogen::assets::meta_model::decoration::editor editor,
     const dogen::assets::meta_model::decoration::modeline_location location,
     const std::list<dogen::assets::meta_model::decoration::modeline_field>& fields,

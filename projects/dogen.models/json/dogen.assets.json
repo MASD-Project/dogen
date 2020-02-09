@@ -410,7 +410,7 @@
         },
         {
           "name": "decoration",
-          "type": "boost::optional<decoration::element_properties>",
+          "type": "std::unordered_map<technical_space, boost::optional<decoration::element_properties>>",
           "documentation": "If set, decoration to be added to each generated file.\n"
         }
       ]

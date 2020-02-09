@@ -96,7 +96,9 @@ format(const context& ctx, const assets::meta_model::element& e) const {
     const auto& c(a.as<fabric::cmakelists>(e));
 
     {
-        a.make_decoration_preamble(e);
+
+        const auto ts(assets::meta_model::technical_space::cmake);
+        a.make_decoration_preamble(e, ts);
         const auto model_name(a.get_dot_separated_model_name(c.name()));
         const auto product_name(a.get_product_name(c.name()));
 a.stream() << "set(name \"" << model_name << "\")" << std::endl;

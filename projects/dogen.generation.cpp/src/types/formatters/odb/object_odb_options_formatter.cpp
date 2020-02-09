@@ -98,7 +98,8 @@ format(const context& ctx, const assets::meta_model::element& e) const {
     const auto& ooo(a.as<fabric::object_odb_options>(e));
 
     {
-        a.make_decoration_preamble(e);
+        const auto ts(assets::meta_model::technical_space::odb);
+        a.make_decoration_preamble(e, ts);
 a.stream() << "# epilogue" << std::endl;
 a.stream() << "--odb-epilogue " << ooo.epilogue() << std::endl;
 a.stream() << std::endl;

@@ -45,7 +45,7 @@ apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "technical space transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    auto& ats(m.all_technical_spaces());
+    std::unordered_set<assets::meta_model::technical_space> ats;
     const auto its(m.input_technical_space());
     ats.insert(its);
     BOOST_LOG_SEV(lg, trace) << "Input technical space: " << its;
@@ -54,6 +54,12 @@ apply(const context& ctx, meta_model::model& m) {
     ats.insert(ots);
     BOOST_LOG_SEV(lg, trace) << "Output technical space: " << ots;
 
+    /*
+     * FIXME: hackery for ODB options.
+     */
+    using namespace assets::meta_model;
+    ats.insert(technical_space::odb);
+
     for (const auto& ptr : m.elements()) {
         const auto id(ptr->name().qualified().dot());
         const auto ts(ptr->intrinsic_technical_space());
@@ -61,7 +67,7 @@ apply(const context& ctx, meta_model::model& m) {
         /*
          * Skip agnostic as it is an abstract technical space.
          */
-        if (ts == assets::meta_model::technical_space::agnostic)
+        if (ts == technical_space::agnostic)
             continue;
 
         const auto i(ats.insert(ts));
@@ -71,6 +77,7 @@ apply(const context& ctx, meta_model::model& m) {
         }
     }
 
+    m.all_technical_spaces(ats);
     stp.end_transform(m);
 }
 

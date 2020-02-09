@@ -96,7 +96,8 @@ format(const context& ctx, const assets::meta_model::element& e) const {
     const auto& c(a.as<fabric::cmakelists>(e));
 
     {
-        a.make_decoration_preamble(e);
+        const auto ts(assets::meta_model::technical_space::cmake);
+        a.make_decoration_preamble(e, ts);
 a.stream() << "add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/" << c.source_directory_name() << ")" << std::endl;
        if (a.is_tests_enabled()) {
 a.stream() << "add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/" << c.tests_directory_name() << ")" << std::endl;

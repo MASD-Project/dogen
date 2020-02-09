@@ -122,8 +122,8 @@ void assistant::validate() const {
     }
 }
 
-std::string
-assistant::make_final_keyword_text(const assets::meta_model::structural::object& o) const {
+std::string assistant::
+make_final_keyword_text(const assets::meta_model::structural::object& o) const {
     if (is_cpp_standard_98())
         return empty;
 
@@ -378,15 +378,20 @@ bool assistant::is_test_data_enabled() const {
 }
 
 generation::formatters::scoped_boilerplate_formatter assistant::
-make_scoped_boilerplate_formatter(const assets::meta_model::element& e) {
+make_scoped_boilerplate_formatter(const assets::meta_model::element& e,
+    const assets::meta_model::technical_space ts) {
     generation::formatters::boilerplate_properties bp;
 
     const auto& art_props(artefact_properties_);
     bp.dependencies(art_props.inclusion_dependencies());
     bp.header_guard(art_props.header_guard());
-    bp.technical_space(assets::meta_model::technical_space::cpp);
-    bp.preamble(e.decoration() ? e.decoration()->preamble() : empty);
-    bp.postamble(e.decoration() ? e.decoration()->postamble() : empty);
+    bp.technical_space(ts);
+    const auto i(e.decoration().find(ts));
+    if (i != e.decoration().end() && i->second) {
+        const auto dec(*i->second);
+        bp.preamble(dec.preamble());
+        bp.postamble(dec.postamble());
+    }
     bp.generate_preamble(true);
     bp.generate_header_guards(true);
 
@@ -401,11 +406,14 @@ assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
         ns, true/*add_new_line*/, requires_nested_namespaces());
 }
 
-void assistant::make_decoration_preamble(const assets::meta_model::element& e) {
-    if (!e.decoration())
-        return;
+void assistant::make_decoration_preamble(const assets::meta_model::element& e,
+    const assets::meta_model::technical_space ts) {
 
-    stream() << e.decoration()->preamble();
+    const auto i(e.decoration().find(ts));
+    if (i != e.decoration().end() && i->second) {
+        const auto dec(*i->second);
+        stream() << dec.preamble();
+    }
 }
 
 void assistant::comment(const std::string& c) {

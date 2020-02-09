@@ -36,6 +36,7 @@
 #include "dogen.assets/types/meta_model/origin_types.hpp"
 #include "dogen.assets/types/meta_model/technical_space.hpp"
 #include "dogen.assets/types/meta_model/static_stereotypes.hpp"
+#include "dogen.assets/hash/meta_model/technical_space_hash.hpp"
 #include "dogen.assets/types/meta_model/artefact_properties.hpp"
 #include "dogen.assets/types/meta_model/element_visitor_fwd.hpp"
 #include "dogen.variability/types/meta_model/configuration_fwd.hpp"
@@ -54,14 +55,12 @@ namespace dogen::assets::meta_model {
 class element {
 public:
     element(const element&) = default;
+    element(element&&) = default;
 
 public:
     element();
 
     virtual ~element() noexcept = 0;
-
-public:
-    element(element&& rhs);
 
 public:
     element(
@@ -80,7 +79,7 @@ public:
         const bool is_element_extension,
         const std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
-        const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration);
+        const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& decoration);
 
 public:
     virtual void accept(const element_visitor& v) const = 0;
@@ -237,10 +236,10 @@ public:
      * @brief If set, decoration to be added to each generated file.
      */
     /**@{*/
-    const boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration() const;
-    boost::optional<dogen::assets::meta_model::decoration::element_properties>& decoration();
-    void decoration(const boost::optional<dogen::assets::meta_model::decoration::element_properties>& v);
-    void decoration(const boost::optional<dogen::assets::meta_model::decoration::element_properties>&& v);
+    const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& decoration() const;
+    std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& decoration();
+    void decoration(const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& v);
+    void decoration(const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >&& v);
     /**@}*/
 
 protected:
@@ -267,7 +266,7 @@ private:
     bool is_element_extension_;
     std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties> artefact_properties_;
     std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties> archetype_location_properties_;
-    boost::optional<dogen::assets::meta_model::decoration::element_properties> decoration_;
+    std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> > decoration_;
 };
 
 inline element::~element() noexcept { }

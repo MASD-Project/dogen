@@ -100,14 +100,19 @@ obtain_artefact_properties(const std::string& archetype) const {
 }
 
 generation::formatters::scoped_boilerplate_formatter assistant::
-make_scoped_boilerplate_formatter(const assets::meta_model::element& e) {
+make_scoped_boilerplate_formatter(const assets::meta_model::element& e,
+    const assets::meta_model::technical_space ts) {
     generation::formatters::boilerplate_properties bp;
 
     const auto& art_props(artefact_properties_);
     bp.dependencies(art_props.using_dependencies());
-    bp.technical_space(assets::meta_model::technical_space::cpp);
-    bp.preamble(e.decoration() ? e.decoration()->preamble() : empty);
-    bp.postamble(e.decoration() ? e.decoration()->postamble() : empty);
+    bp.technical_space(ts);
+    const auto i(e.decoration().find(ts));
+    if (i != e.decoration().end() && i->second) {
+        const auto dec(*i->second);
+        bp.preamble(dec.preamble());
+        bp.postamble(dec.postamble());
+    }
     bp.generate_preamble(true);
 
     using generation::formatters::scoped_boilerplate_formatter;

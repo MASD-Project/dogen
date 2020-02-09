@@ -90,14 +90,15 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
     /*
      * Since the template exists, we can instantiate it.
      */
+    const auto ts(assets::meta_model::technical_space::cpp);
+    const auto i(e.decoration().find(ts));
+    auto dec(i->second);
     const auto external_keys = std::unordered_map<std::string, std::string> {
         {
-            decoration_preamble_key,
-            e.decoration() ?  e.decoration()->preamble() : empty
+            decoration_preamble_key, dec ? dec->preamble() : empty
         },
         {
-            decoration_postamble_key,
-            e.decoration() ?  e.decoration()->postamble() : empty
+            decoration_postamble_key, dec ? dec->postamble() : empty
         }
     };
 

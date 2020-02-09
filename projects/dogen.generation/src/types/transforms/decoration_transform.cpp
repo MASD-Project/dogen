@@ -52,6 +52,8 @@ const std::string modeline_group_not_found("Modeline group not found: ");
 const std::string modeline_not_found("Modeline not found: ");
 const std::string generation_marker_not_found("Generation marker not found: ");
 const std::string technical_space_not_found("Technical space not found: ");
+const std::string duplicate_technical_space(
+    "Duplicate decoration for technical space: ");
 
 }
 
@@ -405,6 +407,8 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
      * technical space.
      */
     const auto mts(m.output_technical_space());
+    const auto gt(ctx.generation_timestamp());
+    const auto h(m.origin_sha1_hash());
     std::unordered_map<assets::meta_model::technical_space,
                        boost::optional<
                            assets::meta_model::decoration::element_properties>
@@ -414,14 +418,21 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
         BOOST_LOG_SEV(lg, trace) << "Generating global decoration for "
                                  <<  "technical space: " << ts;
 
-        const auto gd(make_global_decoration(drp, root_dc,
-                ctx.generation_timestamp(), m.origin_sha1_hash(), ts));
+        const auto gd(make_global_decoration(drp, root_dc, gt, h, ts));
         root_decorations[ts] = gd;
 
         if (ts == mts) {
             BOOST_LOG_SEV(lg, trace) << "Populating the root module "
                                      <<  "decoration.";
-            rm.decoration(gd);
+
+            auto pair(std::make_pair(ts, *gd));
+            const auto inserted(rm.decoration().insert(pair).second);
+            if (!inserted) {
+                const auto s(boost::lexical_cast<std::string>(ts));
+                BOOST_LOG_SEV(lg, error) << duplicate_technical_space << s;
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(duplicate_technical_space + s ));
+            }
         }
     }
     BOOST_LOG_SEV(lg, trace) << "Generated all global decorations.";
@@ -463,6 +474,35 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
         }
 
         /*
+         * For all elements (other than the root module), we need to
+         * build the decoration based on the local configuration, and
+         * the global configuration.
+         */
+        const auto& cfg(*e->configuration());
+        const auto dc(read_decoration_configuration(fg, cfg));
+        auto lambda(
+            [&](const assets::meta_model::technical_space nts) {
+                const auto i(root_decorations.find(nts));
+                if (i == root_decorations.end()) {
+                    const auto s(boost::lexical_cast<std::string>(nts));
+                    BOOST_LOG_SEV(lg, error) << technical_space_not_found << s;
+                    BOOST_THROW_EXCEPTION(
+                        transformation_error(technical_space_not_found + s));
+                }
+                const auto& gd(i->second);
+                const auto ld(
+                    make_local_decoration(drp, root_dc, gd, dc, gt, h, nts));
+                auto pair(std::make_pair(nts, *ld));
+                const auto inserted(e->decoration().insert(pair).second);
+                if (!inserted) {
+                    const auto s(boost::lexical_cast<std::string>(nts));
+                    BOOST_LOG_SEV(lg, error) << duplicate_technical_space << s;
+                    BOOST_THROW_EXCEPTION(
+                        transformation_error(duplicate_technical_space + s ));
+                }
+            });
+
+        /*
          * Model elements may not belong to the dominant technical
          * space. If that's the case, we need to ensure we use the
          * element's technical space instead.
@@ -471,25 +511,18 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
         const auto ts(its == ats ? mts : its);
         BOOST_LOG_SEV(lg, trace) << "Element intrinsic technical space: " << its
                                  << " Model technical space: " << mts;
-
-        const auto i(root_decorations.find(ts));
-        if (i == root_decorations.end()) {
-            const auto s(boost::lexical_cast<std::string>(ts));
-            BOOST_LOG_SEV(lg, error) << technical_space_not_found << s;
-            BOOST_THROW_EXCEPTION(
-                transformation_error(technical_space_not_found +s ));
-        }
-        const auto& gd(i->second);
+        lambda(ts);
 
         /*
-         * For all elements (other than the root module), we need to
-         * build the decoration based on the local configuration, and
-         * the global configuration.
+         * FIXME: hack for ODB options. We inject it regardless, just
+         * so that when the formatters create the ODB options, it is
+         * available.
          */
-        const auto& cfg(*e->configuration());
-        const auto element_dc(read_decoration_configuration(fg, cfg));
-        e->decoration(make_local_decoration(drp, root_dc, gd, element_dc,
-                ctx.generation_timestamp(), m.origin_sha1_hash(), ts));
+        const auto odb_ts(assets::meta_model::technical_space::odb);
+        if (ts != odb_ts) {
+            lambda(odb_ts);
+            BOOST_LOG_SEV(lg, trace) << "Added decoration for ODB.";
+        }
     }
     stp.end_transform(m);
 }

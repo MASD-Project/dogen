@@ -292,7 +292,9 @@ public:
      * @brief Returns a scoped boilerplate formatter.
      */
     generation::formatters::scoped_boilerplate_formatter
-    make_scoped_boilerplate_formatter(const assets::meta_model::element& e);
+    make_scoped_boilerplate_formatter(const assets::meta_model::element& e,
+        const assets::meta_model::technical_space ts =
+        assets::meta_model::technical_space::cpp);
 
     /**
      * @brief Returns a scoped namespace formatter.
@@ -303,7 +305,8 @@ public:
     /**
      * @brief Creates the decoration preamble.
      */
-    void make_decoration_preamble(const assets::meta_model::element& e);
+    void make_decoration_preamble(const assets::meta_model::element& e,
+        const assets::meta_model::technical_space ts);
 
 public:
     /**

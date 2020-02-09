@@ -83,7 +83,9 @@ public:
      * @brief Returns a scoped boilerplate formatter.
      */
     generation::formatters::scoped_boilerplate_formatter
-    make_scoped_boilerplate_formatter(const assets::meta_model::element& e);
+    make_scoped_boilerplate_formatter(const assets::meta_model::element& e,
+        const assets::meta_model::technical_space ts =
+        assets::meta_model::technical_space::csharp);
 
     /**
      * @brief Returns a scoped namespace formatter.
