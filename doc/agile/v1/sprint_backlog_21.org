@@ -12,15 +12,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-02-09 Sun 20:01]
+#+CAPTION: Clock summary at [2020-02-09 Sun 20:53]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *59:41* |       |       | 100.0 |
+| *Total time*                                          | *60:04* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 59:41   |       |       | 100.0 |
-| Active                                                |         | 59:41 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  7:01 |  11.8 |
+| Stories                                               | 60:04   |       |       | 100.0 |
+| Active                                                |         | 60:04 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  7:01 |  11.7 |
 | Create a demo and presentation for previous sprint    |         |       |  1:49 |   3.0 |
 | Sprint and product backlog grooming                   |         |       |  3:29 |   5.8 |
 | Create new playlist for assets work                   |         |       |  2:19 |   3.9 |
@@ -30,13 +30,13 @@
 | Add injection details to all models                   |         |       |  0:25 |   0.7 |
 | Fix nightly error in registrar                        |         |       |  0:33 |   0.9 |
 | Nightly code coverage is not being reported           |         |       |  0:25 |   0.7 |
-| Move visual studio fabric types into assets           |         |       | 18:34 |  31.1 |
+| Move visual studio fabric types into assets           |         |       | 18:34 |  30.9 |
 | Create metamodel elements for =entry_point=           |         |       |  7:18 |  12.2 |
+| Remove support for element extensions                 |         |       |  0:44 |   1.2 |
+| Move =object_odb_options= into assets                 |         |       |  6:43 |  11.2 |
 | Fixes to setup                                        |         |       |  1:05 |   1.8 |
 | Cannot see source file in coveralls                   |         |       |  0:16 |   0.4 |
 | Integration of archetypes into assets                 |         |       |  2:41 |   4.5 |
-| Remove support for element extensions                 |         |       |  0:21 |   0.6 |
-| Move =object_odb_options= into assets                 |         |       |  6:43 |  11.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -813,6 +813,161 @@ entry point, it won't be entirely obvious for what purpose it is being
 used. We need a way to signal that. It can be simply by creating a
 profile that enables testing. We may already have something like this.
 
+*** COMPLETED Remove support for element extensions                   :story:
+    CLOSED: [2020-02-09 Sun 20:52]
+    :LOGBOOK:
+    CLOCK: [2020-02-09 Sun 20:28]--[2020-02-09 Sun 20:51] =>  0:23
+    CLOCK: [2020-02-09 Sun 19:50]--[2020-02-09 Sun 20:01] =>  0:11
+    CLOCK: [2020-02-04 Tue 22:54]--[2020-02-04 Tue 22:56] =>  0:02
+    CLOCK: [2020-02-04 Tue 22:45]--[2020-02-04 Tue 22:53] =>  0:08
+    :END:
+
+We are not using element extensions any longer since we added the
+forward declaration meta-type (we believe), so in theory all of the
+machinery dealing with element extensions can be deleted.
+
+This includes the formatter master segments.
+
+Actually this is not true, we are using it in
+=odb_options_factory=. We need to make this a proper facet instead of
+this hack.
+
+Notes:
+
+- See enablement:
+
+: FIXME: check this when element extension is removed.
+
+Merged stories:
+
+*Element extensions considered harmful*
+
+When we implemented forward declarations we created them as "element
+extensions"; that is, some kind of hack where we'd have two model
+elements stuck together (the main model element and its "extension",
+the forward declaration). In reality, they are just projections of the
+same model element. We need to handle them just as we handle class
+header / implementation. We just need to use the formatter specific
+postfix to distinguish between files.
+
+The problem with this approach, of course, is that we now need to
+create many formatters (per element type). A possible solution is to
+factor them out into a formatting helper function that they call. We
+still need all of the common machinery to formatters
+though. Nevertheless, this is a price worth paying in order to keep
+the meta-model simple (e.g. none of the hacks we introduced for
+element extensions).
+
+Notes:
+
+- add forward declaration formatters for each type. Create common
+  formatting function.
+- remove forward declaration element in fabric.
+- remove element extensions across the code base. Actually this is not
+  possible at present as it is used by ODB options. We need to first
+  move them into assets before this can be done.
+
+Merged stories:
+
+*Remove element segmentation*
+
+We need to remove the idea of forward declarations being handled as
+"element segmentation". They should just be different facets of the
+same elements. There is another story for this which should be merged
+with this one.
+
+*Move element segmentation into yarn*
+
+We've added the notion that an element can be composed of other
+elements in quilt, in order to handle forward declarations. However,
+with a little bit of effort we can generalise it into yarn. It would
+be useful for other things such as inner classes. We don't need to
+actually implement inner classes right now but we should make sure the
+moving of this feature into yarn is compatible with it.
+
+Notes:
+
+- seems like we have two use cases: a) we need all elements, master
+  and extensions and we don't really care about which is which. b) we
+  only want masters. However, we must be able to access the same
+  element properties from either the master or the extension. Having
+  said all that, it seems we don't really need all of the element
+  properties for both - forward declarations probably only need:
+  decoration and artefact properties.
+- we don't seem to use the map in formattables model anywhere, other
+  than to find master/extension elements.
+- Yarn model could have two simple list containers (masters and
+  all). Or maybe we don't even need this to start off with, we can
+  just iterate and skip extensions where required.
+- so in conclusion, we to move decoration, enablement and dependencies
+  into yarn (basically decoration and artefact properties) first and
+  then see where segmentation ends.
+
+Tasks:
+
+- add a concept for element extensions: =Extensible=. Contains a list
+  of element pointers.
+- populate it with the extensions.
+- change enablement to merge all element properties of extensible
+  elements.
+
+*** COMPLETED Move =object_odb_options= into assets                   :story:
+    CLOSED: [2020-02-09 Sun 20:53]
+    :LOGBOOK:
+    CLOCK: [2020-02-09 Sun 18:58]--[2020-02-09 Sun 19:49] =>  0:51
+    CLOCK: [2020-02-09 Sun 17:45]--[2020-02-09 Sun 18:26] =>  0:41
+    CLOCK: [2020-02-09 Sun 15:45]--[2020-02-09 Sun 17:29] =>  1:44
+    CLOCK: [2020-02-09 Sun 13:31]--[2020-02-09 Sun 14:33] =>  1:02
+    CLOCK: [2020-02-09 Sun 13:15]--[2020-02-09 Sun 13:22] =>  0:07
+    CLOCK: [2020-02-08 Sat 23:18]--[2020-02-08 Sat 23:37] =>  0:19
+    CLOCK: [2020-02-08 Sat 23:06]--[2020-02-08 Sat 23:17] =>  0:11
+    CLOCK: [2020-02-07 Fri 14:54]--[2020-02-07 Fri 16:35] =>  1:41
+    CLOCK: [2020-02-07 Fri 14:46]--[2020-02-07 Fri 14:53] =>  0:07
+    :END:
+
+For now simply create a property within the ORM types with this data,
+and create templates for each element type to generate them. These
+will be identical for each required meta-element.
+
+This is actually not quite a trivial thing to do. For the first time,
+we have the issue of having a single assets element which spans more
+than one technical space. This probably means we will have problems
+with the decoration formatting. The problem is that the decoration is
+computed in the generation transforms; it assumes the technical space
+of the model or that the modeling element has an
+=intrinsic_technical_space=. This is supplied manually when the
+element is constructed, and is mainly an artefact of fabric
+elements. Most other elements do not require this and instead use the
+model technical space.
+
+Now that we support fabric elements directly inside of assets, we need
+to be able to ask all archetypes for their technical spaces, just like
+we ask for the archetype locations. However this is really hard to do
+at present because we still need the generation and the archetypes
+refactoring. We need a quick hack that enables us to have multiple
+decorations per element. We can:
+
+- create a map of decoration to technical space.
+- update the decoration transform to use the model technical space (or
+  the intrinsic technical space, whilst fabric is still alive) except
+  for certain cases.
+- the exceptional cases are:
+   a) the types that have been ported across from fabric which need
+      it;
+   b) the types with orm properties.
+- in these cases we generate more than one decoration. Formatter then
+  has to pick up the appropriate decoration given its technical space.
+- need to create a story for associating a technical space with an
+  archetype properly.
+
+Another problem: at present we are determining if ORM support is on by
+looking at the stereotypes. This then results in a number of "empty"
+files with just comments stating the files are empty. This is not
+ideal. However, a proper fix for this would be quite tricky as we need
+to take into account element state in order to determine
+enablement. For now we should just take the exact same approach as we
+did for ODB pragmas.
+
 *** STARTED Fixes to setup                                            :story:
     :LOGBOOK:
     CLOCK: [2020-01-31 Fri 11:38]--[2020-01-31 Fri 11:51] =>  0:13
@@ -909,158 +1064,6 @@ can only have a primary backend, and any number of secondary
 backends. Artefacts produced by a backend must have a unique physical
 location. In LAM mode, the component is split into multiple
 components, each with their own primary technical space.
-
-*** STARTED Remove support for element extensions                     :story:
-    :LOGBOOK:
-    CLOCK: [2020-02-09 Sun 19:50]--[2020-02-09 Sun 20:01] =>  0:11
-    CLOCK: [2020-02-04 Tue 22:54]--[2020-02-04 Tue 22:56] =>  0:02
-    CLOCK: [2020-02-04 Tue 22:45]--[2020-02-04 Tue 22:53] =>  0:08
-    :END:
-
-We are not using element extensions any longer since we added the
-forward declaration meta-type (we believe), so in theory all of the
-machinery dealing with element extensions can be deleted.
-
-This includes the formatter master segments.
-
-Actually this is not true, we are using it in
-=odb_options_factory=. We need to make this a proper facet instead of
-this hack.
-
-Notes:
-
-- See enablement:
-
-: FIXME: check this when element extension is removed.
-
-Merged stories:
-
-*Element extensions considered harmful*
-
-When we implemented forward declarations we created them as "element
-extensions"; that is, some kind of hack where we'd have two model
-elements stuck together (the main model element and its "extension",
-the forward declaration). In reality, they are just projections of the
-same model element. We need to handle them just as we handle class
-header / implementation. We just need to use the formatter specific
-postfix to distinguish between files.
-
-The problem with this approach, of course, is that we now need to
-create many formatters (per element type). A possible solution is to
-factor them out into a formatting helper function that they call. We
-still need all of the common machinery to formatters
-though. Nevertheless, this is a price worth paying in order to keep
-the meta-model simple (e.g. none of the hacks we introduced for
-element extensions).
-
-Notes:
-
-- add forward declaration formatters for each type. Create common
-  formatting function.
-- remove forward declaration element in fabric.
-- remove element extensions across the code base. Actually this is not
-  possible at present as it is used by ODB options. We need to first
-  move them into assets before this can be done.
-
-Merged stories:
-
-*Remove element segmentation*
-
-We need to remove the idea of forward declarations being handled as
-"element segmentation". They should just be different facets of the
-same elements. There is another story for this which should be merged
-with this one.
-
-*Move element segmentation into yarn*
-
-We've added the notion that an element can be composed of other
-elements in quilt, in order to handle forward declarations. However,
-with a little bit of effort we can generalise it into yarn. It would
-be useful for other things such as inner classes. We don't need to
-actually implement inner classes right now but we should make sure the
-moving of this feature into yarn is compatible with it.
-
-Notes:
-
-- seems like we have two use cases: a) we need all elements, master
-  and extensions and we don't really care about which is which. b) we
-  only want masters. However, we must be able to access the same
-  element properties from either the master or the extension. Having
-  said all that, it seems we don't really need all of the element
-  properties for both - forward declarations probably only need:
-  decoration and artefact properties.
-- we don't seem to use the map in formattables model anywhere, other
-  than to find master/extension elements.
-- Yarn model could have two simple list containers (masters and
-  all). Or maybe we don't even need this to start off with, we can
-  just iterate and skip extensions where required.
-- so in conclusion, we to move decoration, enablement and dependencies
-  into yarn (basically decoration and artefact properties) first and
-  then see where segmentation ends.
-
-Tasks:
-
-- add a concept for element extensions: =Extensible=. Contains a list
-  of element pointers.
-- populate it with the extensions.
-- change enablement to merge all element properties of extensible
-  elements.
-
-*** STARTED Move =object_odb_options= into assets                     :story:
-    :LOGBOOK:
-    CLOCK: [2020-02-09 Sun 18:58]--[2020-02-09 Sun 19:49] =>  0:51
-    CLOCK: [2020-02-09 Sun 17:45]--[2020-02-09 Sun 18:26] =>  0:41
-    CLOCK: [2020-02-09 Sun 15:45]--[2020-02-09 Sun 17:29] =>  1:44
-    CLOCK: [2020-02-09 Sun 13:31]--[2020-02-09 Sun 14:33] =>  1:02
-    CLOCK: [2020-02-09 Sun 13:15]--[2020-02-09 Sun 13:22] =>  0:07
-    CLOCK: [2020-02-08 Sat 23:18]--[2020-02-08 Sat 23:37] =>  0:19
-    CLOCK: [2020-02-08 Sat 23:06]--[2020-02-08 Sat 23:17] =>  0:11
-    CLOCK: [2020-02-07 Fri 14:54]--[2020-02-07 Fri 16:35] =>  1:41
-    CLOCK: [2020-02-07 Fri 14:46]--[2020-02-07 Fri 14:53] =>  0:07
-    :END:
-
-For now simply create a property within the ORM types with this data,
-and create templates for each element type to generate them. These
-will be identical for each required meta-element.
-
-This is actually not quite a trivial thing to do. For the first time,
-we have the issue of having a single assets element which spans more
-than one technical space. This probably means we will have problems
-with the decoration formatting. The problem is that the decoration is
-computed in the generation transforms; it assumes the technical space
-of the model or that the modeling element has an
-=intrinsic_technical_space=. This is supplied manually when the
-element is constructed, and is mainly an artefact of fabric
-elements. Most other elements do not require this and instead use the
-model technical space.
-
-Now that we support fabric elements directly inside of assets, we need
-to be able to ask all archetypes for their technical spaces, just like
-we ask for the archetype locations. However this is really hard to do
-at present because we still need the generation and the archetypes
-refactoring. We need a quick hack that enables us to have multiple
-decorations per element. We can:
-
-- create a map of decoration to technical space.
-- update the decoration transform to use the model technical space (or
-  the intrinsic technical space, whilst fabric is still alive) except
-  for certain cases.
-- the exceptional cases are:
-   a) the types that have been ported across from fabric which need
-      it;
-   b) the types with orm properties.
-- in these cases we generate more than one decoration. Formatter then
-  has to pick up the appropriate decoration given its technical space.
-- need to create a story for associating a technical space with an
-  archetype properly.
-
-Another problem: at present we are determining if ORM support is on by
-looking at the stereotypes. This then results in a number of "empty"
-files with just comments stating the files are empty. This is not
-ideal. However, a proper fix for this would be quite tricky as we need
-to take into account element state in order to determine
-enablement. For now we should just take the exact same approach as we
-did for ODB pragmas.
 
 *** Intrinsic non-generatable types                                   :story:
 
