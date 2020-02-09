@@ -168,9 +168,12 @@
     {
       "name": "main",
       "stereotypes": [
-        "masd::entry_point",
-        "dogen::handcrafted::typeable"
+        "masd::entry_point"
       ],
+      "tagged_values": {
+        "masd.generation.cpp.types.enabled": "true",
+        "masd.generation.cpp.types.overwrite": "false"
+      },
       "fallback_element_type": "masd::object"
     }
   ]
