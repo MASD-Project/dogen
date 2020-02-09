@@ -61,6 +61,16 @@ struct traits {
     static std::string object_odb_options_archetype();
 
     /**
+     * @brief Name of the object odb options archetype.
+     */
+    static std::string new_object_odb_options_archetype();
+
+    /**
+     * @brief Name of the primitive odb options archetype.
+     */
+    static std::string primitive_odb_options_archetype();
+
+    /**
      * @brief Name of the built-in header archetype.
      */
     static std::string builtin_header_archetype();

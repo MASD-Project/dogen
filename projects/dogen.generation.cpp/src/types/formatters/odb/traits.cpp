@@ -54,6 +54,16 @@ std::string traits::object_odb_options_archetype() {
     return r;
 }
 
+std::string traits::new_object_odb_options_archetype() {
+    static std::string r(traits::facet() + ".new_object_odb_options");
+    return r;
+}
+
+std::string traits::primitive_odb_options_archetype() {
+    static std::string r(traits::facet() + ".primitive_odb_options");
+    return r;
+}
+
 std::string traits::builtin_header_archetype() {
     static std::string r(traits::facet() + ".builtin_header");
     return r;
