@@ -110,6 +110,8 @@ odb_options_factory::make(const generation::meta_model::model& m) const {
     if (r.empty())
         return r;
 
+    r.clear();
+
     assets::helpers::name_factory nf;
     const auto n(nf.build_element_in_model(m.name(), common_odb_options_name));
 

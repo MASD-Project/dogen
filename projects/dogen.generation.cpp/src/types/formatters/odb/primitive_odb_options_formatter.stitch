@@ -63,9 +63,7 @@ boost::filesystem::path primitive_odb_options_formatter::inclusion_path(
 
 boost::filesystem::path primitive_odb_options_formatter::full_path(
     const formattables::locator& l, const assets::meta_model::name& n) const {
-    auto new_name(n);
-    new_name.simple("new_" + n.simple());
-    return l.make_full_path_for_odb_options(new_name, static_id());
+    return l.make_full_path_for_odb_options(n, static_id());
 }
 
 std::list<std::string> primitive_odb_options_formatter::inclusion_dependencies(
