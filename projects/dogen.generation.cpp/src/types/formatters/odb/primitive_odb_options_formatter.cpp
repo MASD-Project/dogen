@@ -38,7 +38,7 @@
 namespace dogen::generation::cpp::formatters::odb {
 
 std::string primitive_odb_options_formatter::static_id() {
-    return traits::object_odb_options_archetype();
+    return traits::primitive_odb_options_archetype();
 }
 
 std::string primitive_odb_options_formatter::id() const {
