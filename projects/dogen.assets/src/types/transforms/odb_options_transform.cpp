@@ -18,12 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/types/transforms/odb_options_transform.hpp"
+
+namespace {
+
+const std::string transform_id("assets.transforms.odb_options_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::assets::transforms {
 
-bool odb_options_transform::operator==(const odb_options_transform& /*rhs*/) const {
-    return true;
+void odb_options_transform::apply(const context& ctx, meta_model::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "ODB options transform",
+        transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+
+    stp.end_transform(m);
 }
 
 }

@@ -25,24 +25,17 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.assets/types/transforms/context.hpp"
+#include "dogen.assets/types/meta_model/model.hpp"
 
 namespace dogen::assets::transforms {
 
+/**
+ * @brief Transforms the meta-model elements related to ODB options.
+ */
 class odb_options_transform final {
 public:
-    odb_options_transform() = default;
-    odb_options_transform(const odb_options_transform&) = default;
-    odb_options_transform(odb_options_transform&&) = default;
-    ~odb_options_transform() = default;
-    odb_options_transform& operator=(const odb_options_transform&) = default;
-
-public:
-    bool operator==(const odb_options_transform& rhs) const;
-    bool operator!=(const odb_options_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, meta_model::model& m);
 };
 
 }
