@@ -1537,6 +1537,10 @@
         {
           "name": "build_visual_studio_project",
           "type": ""
+        },
+        {
+          "name": "orm_common_odb_options",
+          "type": ""
         }
       ]
     },

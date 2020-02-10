@@ -57,7 +57,8 @@ enum class static_stereotypes : unsigned int {
     templating_logic_less_template = 23,
     serialization_type_registrar = 24,
     build_visual_studio_solution = 25,
-    build_visual_studio_project = 26
+    build_visual_studio_project = 26,
+    orm_common_odb_options = 27
 };
 
 }

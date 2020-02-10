@@ -22172,7 +22172,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-192,-97"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-192.05,-97.05;-175.665,-73.35"/>
+        <dia:rectangle val="-192.05,-97.05;-175.665,-72.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-192,-97"/>
@@ -22181,7 +22181,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:real val="16.285"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="23.600000000000009"/>
+        <dia:real val="24.400000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#static_stereotypes#</dia:string>
@@ -22849,6 +22849,29 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#build_visual_studio_project#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#orm_common_odb_options#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -24031,7 +24054,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-172.125,-69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-183.907,-73.45;-171.375,-68.2"/>
+        <dia:rectangle val="-183.907,-72.65;-171.375,-68.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24040,7 +24063,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-172.125,-69"/>
         <dia:point val="-172.125,-71"/>
         <dia:point val="-183.857,-71"/>
-        <dia:point val="-183.857,-73.4"/>
+        <dia:point val="-183.857,-72.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
