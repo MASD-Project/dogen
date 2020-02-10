@@ -88,7 +88,9 @@ merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
         << " visual studio solutions: "
         << src.visual_studio_elements().solutions().size()
         << " visual studio projects: "
-        << src.visual_studio_elements().projects().size();
+        << src.visual_studio_elements().projects().size()
+        << " ORM common ODB options: "
+        << src.orm_elements().common_odb_options().size();
 
     copy(src.structural_elements().modules(),
         dst.structural_elements().modules());
@@ -126,6 +128,8 @@ merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
         dst.visual_studio_elements().solutions());
     copy(src.visual_studio_elements().projects(),
         dst.visual_studio_elements().projects());
+    copy(src.orm_elements().common_odb_options(),
+        dst.orm_elements().common_odb_options());
 
     /*
      * Update the references of the merged model.
