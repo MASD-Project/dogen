@@ -3604,6 +3604,13 @@
           "type": "std::unordered_map<std::string, boost::shared_ptr<common_odb_options>>"
         }
       ]
+    },
+    {
+      "name": "transforms::odb_options_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
