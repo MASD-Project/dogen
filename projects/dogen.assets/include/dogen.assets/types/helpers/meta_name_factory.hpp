@@ -59,6 +59,7 @@ public:
     static meta_model::name make_serialization_type_registrar_name();
     static meta_model::name make_visual_studio_solution_name();
     static meta_model::name make_visual_studio_project_name();
+    static meta_model::name make_orm_common_odb_options_name();
 };
 
 }

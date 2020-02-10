@@ -152,4 +152,10 @@ meta_model::name meta_name_factory::make_visual_studio_project_name() {
     return r;
 }
 
+meta_model::name meta_name_factory::make_orm_common_odb_options_name() {
+    static const auto r(
+        make_name("orm_common_odb_options"));
+    return r;
+}
+
 }
