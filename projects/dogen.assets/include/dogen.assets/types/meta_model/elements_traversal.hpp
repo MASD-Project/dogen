@@ -46,6 +46,7 @@
 #include "dogen.assets/types/meta_model/serialization/type_registrar.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/solution.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/project.hpp"
+#include "dogen.assets/types/meta_model/orm/common_odb_options.hpp"
 
 namespace dogen::assets::meta_model {
 
@@ -116,6 +117,9 @@ inline void elements_traversal(const meta_model::model& m,
 
     for (const auto& pair : m.structural_elements().entry_points())
         v(*pair.second);
+
+    for (const auto& pair : m.orm_elements().common_odb_options())
+        v(*pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -180,6 +184,9 @@ inline void elements_traversal(const meta_model::model& m,
 
     for (auto& pair : m.structural_elements().entry_points())
         v(*pair.second);
+
+    for (auto& pair : m.orm_elements().common_odb_options())
+        v(*pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -243,6 +250,9 @@ inline void elements_traversal(meta_model::model& m,
         v(*pair.second);
 
     for (auto& pair : m.structural_elements().entry_points())
+        v(*pair.second);
+
+    for (auto& pair : m.orm_elements().common_odb_options())
         v(*pair.second);
 }
 /**@}*/
@@ -314,6 +324,9 @@ inline void shared_elements_traversal(const meta_model::model& m,
 
     for (const auto& pair : m.structural_elements().entry_points())
         v(pair.second);
+
+    for (const auto& pair : m.orm_elements().common_odb_options())
+        v(pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -378,6 +391,9 @@ inline void shared_elements_traversal(const meta_model::model& m,
 
     for (auto& pair : m.structural_elements().entry_points())
         v(pair.second);
+
+    for (auto& pair : m.orm_elements().common_odb_options())
+        v(pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -441,6 +457,9 @@ inline void shared_elements_traversal(meta_model::model& m,
         v(pair.second);
 
     for (auto& pair : m.structural_elements().entry_points())
+        v(pair.second);
+
+    for (auto& pair : m.orm_elements().common_odb_options())
         v(pair.second);
 }
 /**@}*/
