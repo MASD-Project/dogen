@@ -259,6 +259,10 @@ process_element(const helpers::adapter& ad,
         insert(ad.to_visual_studio_project(l, scr, e),
             m.visual_studio_elements().projects());
         break;
+    case static_stereotypes::orm_common_odb_options:
+        insert(ad.to_orm_common_odb_options(l, scr, e),
+            m.orm_elements().common_odb_options());
+        break;
 
     default: {
         const auto s(boost::lexical_cast<std::string>(et));
