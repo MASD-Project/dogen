@@ -25,8 +25,13 @@
 #pragma once
 #endif
 
-#include "dogen.assets/types/transforms/context.hpp"
+#include<list>
+#include <string>
+#include "dogen.assets/types/meta_model/orm/letter_case.hpp"
+#include "dogen.assets/types/meta_model/orm/database_system.hpp"
+#include "dogen.assets/types/meta_model/orm/model_properties.hpp"
 #include "dogen.assets/types/meta_model/model.hpp"
+#include "dogen.assets/types/transforms/context.hpp"
 
 namespace dogen::assets::transforms {
 
@@ -34,6 +39,16 @@ namespace dogen::assets::transforms {
  * @brief Transforms the meta-model elements related to ODB options.
  */
 class odb_options_transform final {
+public:
+    static std::string
+    to_odb_database(const assets::meta_model::orm::database_system ds);
+
+    static std::string
+    to_odb_sql_name_case(const assets::meta_model::orm::letter_case lc);
+
+    static std::list<std::string>
+    make_databases(const assets::meta_model::orm::model_properties& omp);
+
 public:
     static void apply(const context& ctx, meta_model::model& m);
 };

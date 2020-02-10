@@ -18,9 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/lexical_cast.hpp>
+#include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
+#include "dogen.assets/io/meta_model/orm/letter_case_io.hpp"
+#include "dogen.assets/io/meta_model/orm/database_system_io.hpp"
+#include "dogen.assets/types/meta_model/orm/common_odb_options.hpp"
+#include "dogen.assets/types/transforms/transformation_error.hpp"
 #include "dogen.assets/types/transforms/odb_options_transform.hpp"
 
 namespace {
@@ -30,13 +36,89 @@ const std::string transform_id("assets.transforms.odb_options_transform");
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
+const std::string mysql("mysql");
+const std::string postgresql("pgsql");
+const std::string oracle("oracle");
+const std::string sql_server("sqlserver");
+const std::string sqlite("sqlite");
+
+const std::string upper_case("upper");
+const std::string lower_case("lower");
+
+const std::string duplicate_archetype("Duplicate archetype: ");
+const std::string duplicate_master(
+    "More than one master segment found. Last: ");
+const std::string invalid_daatabase_system(
+    "Database system is invalid or unsupported: ");
+const std::string invalid_case("Letter case is invalid or unsupported: ");
+
 }
 
 namespace dogen::assets::transforms {
 
+std::string odb_options_transform::
+to_odb_database(const assets::meta_model::orm::database_system ds) {
+    using assets::meta_model::orm::database_system;
+
+    switch (ds) {
+    case database_system::mysql: return mysql;
+    case database_system::postgresql: return postgresql;
+    case database_system::oracle: return oracle;
+    case database_system::sql_server: return sql_server;
+    case database_system::sqlite: return sqlite;
+    default: {
+        const auto s(boost::lexical_cast<std::string>(ds));
+        BOOST_LOG_SEV(lg, error) << invalid_daatabase_system << s;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(invalid_daatabase_system + s));
+    } }
+}
+
+std::string odb_options_transform::
+to_odb_sql_name_case(const assets::meta_model::orm::letter_case lc) {
+    using assets::meta_model::orm::letter_case;
+
+    switch (lc) {
+    case letter_case::upper_case: return upper_case;
+    case letter_case::lower_case: return lower_case;
+    default: {
+        const auto s(boost::lexical_cast<std::string>(lc));
+        BOOST_LOG_SEV(lg, error) << invalid_case << s;
+        BOOST_THROW_EXCEPTION(transformation_error(invalid_case + s));
+    } }
+}
+
+std::list<std::string> odb_options_transform::
+make_databases(const assets::meta_model::orm::model_properties& omp) {
+    std::list<std::string> r;
+
+    if (omp.database_systems().size() > 1)
+        r.push_back("common");
+
+    for (const auto ds : omp.database_systems())
+        r.push_back(to_odb_database(ds));
+
+    return r;
+}
+
 void odb_options_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "ODB options transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
+
+    /*
+     * If the model has no ORM properties then there is nothing to
+     * update.
+     */
+    if (!m.orm_properties())
+        return;
+
+    const auto& op(*m.orm_properties());
+    for (auto& pair : m.orm_elements().common_odb_options()) {
+        auto& coo(*pair.second);
+        coo.databases(make_databases(op));
+        if (op.letter_case())
+            coo.sql_name_case(to_odb_sql_name_case(*op.letter_case()));
+    }
 
     stp.end_transform(m);
 }
