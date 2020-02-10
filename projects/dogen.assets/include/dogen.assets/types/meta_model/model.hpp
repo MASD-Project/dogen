@@ -39,6 +39,7 @@
 #include "dogen.assets/types/meta_model/orm/model_properties.hpp"
 #include "dogen.assets/types/meta_model/extraction_properties.hpp"
 #include "dogen.assets/types/meta_model/structural/module_fwd.hpp"
+#include "dogen.assets/types/meta_model/orm/element_repository.hpp"
 #include "dogen.assets/types/meta_model/mapping/element_repository.hpp"
 #include "dogen.assets/types/meta_model/decoration/element_repository.hpp"
 #include "dogen.assets/types/meta_model/structural/element_repository.hpp"
@@ -83,7 +84,8 @@ public:
         const dogen::assets::meta_model::mapping::element_repository& mapping_elements,
         const dogen::assets::meta_model::templating::element_repository& templating_elements,
         const dogen::assets::meta_model::serialization::element_repository& serialization_elements,
-        const dogen::assets::meta_model::visual_studio::element_repository& visual_studio_elements);
+        const dogen::assets::meta_model::visual_studio::element_repository& visual_studio_elements,
+        const dogen::assets::meta_model::orm::element_repository& orm_elements);
 
 public:
     /**
@@ -255,6 +257,11 @@ public:
     void visual_studio_elements(const dogen::assets::meta_model::visual_studio::element_repository& v);
     void visual_studio_elements(const dogen::assets::meta_model::visual_studio::element_repository&& v);
 
+    const dogen::assets::meta_model::orm::element_repository& orm_elements() const;
+    dogen::assets::meta_model::orm::element_repository& orm_elements();
+    void orm_elements(const dogen::assets::meta_model::orm::element_repository& v);
+    void orm_elements(const dogen::assets::meta_model::orm::element_repository&& v);
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -285,6 +292,7 @@ private:
     dogen::assets::meta_model::templating::element_repository templating_elements_;
     dogen::assets::meta_model::serialization::element_repository serialization_elements_;
     dogen::assets::meta_model::visual_studio::element_repository visual_studio_elements_;
+    dogen::assets::meta_model::orm::element_repository orm_elements_;
 };
 
 }

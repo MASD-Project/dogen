@@ -3041,7 +3041,7 @@ meta-types (object templates) and non-types (modules and backend specific entiti
         <dia:point val="-219,-22.9286"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-219.05,-22.9786;-196.12,-8.8786"/>
+        <dia:rectangle val="-219.05,-22.9786;-196.12,-8.0786"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-219,-22.9286"/>
@@ -3050,7 +3050,7 @@ meta-types (object templates) and non-types (modules and backend specific entiti
         <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="14.000000000000002"/>
+        <dia:real val="14.800000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#model#</dia:string>
@@ -3448,6 +3448,29 @@ Leaves are types concrete types which have a parent.#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#visual_studio::element_repository#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#orm_elements#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#orm::element_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -30824,16 +30847,16 @@ as a modeline.#</dia:string>
         <dia:point val="-227.007,-4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-227.757,-8.9786;-218.8,-3.2"/>
+        <dia:rectangle val="-227.757,-8.1786;-218.8,-3.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="-227.007,-4"/>
-        <dia:point val="-227.007,-7"/>
-        <dia:point val="-219,-7"/>
-        <dia:point val="-219,-8.9286"/>
+        <dia:point val="-227.007,-6"/>
+        <dia:point val="-219,-6"/>
+        <dia:point val="-219,-8.1286"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -30965,18 +30988,18 @@ as a modeline.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-196.17,-8.9286"/>
+        <dia:point val="-196.17,-8.1286"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-201.405,-9.6786;-195.42,-3.2"/>
+        <dia:rectangle val="-201.405,-8.8786;-195.42,-3.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-196.17,-8.9286"/>
-        <dia:point val="-196.17,-7"/>
-        <dia:point val="-201.355,-7"/>
+        <dia:point val="-196.17,-8.1286"/>
+        <dia:point val="-196.17,-6"/>
+        <dia:point val="-201.355,-6"/>
         <dia:point val="-201.355,-4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -44732,7 +44755,7 @@ Maps to a well known MSBuild target.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ffffff"/>
+        <dia:color val="#f5fffa"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>

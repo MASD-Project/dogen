@@ -27,6 +27,7 @@
 #include "dogen.assets/io/meta_model/structural/module_io.hpp"
 #include "dogen.assets/io/meta_model/orm/model_properties_io.hpp"
 #include "dogen.assets/io/meta_model/extraction_properties_io.hpp"
+#include "dogen.assets/io/meta_model/orm/element_repository_io.hpp"
 #include "dogen.assets/io/meta_model/mapping/element_repository_io.hpp"
 #include "dogen.assets/io/meta_model/decoration/element_repository_io.hpp"
 #include "dogen.assets/io/meta_model/structural/element_repository_io.hpp"
@@ -143,7 +144,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"mapping_elements\": " << v.mapping_elements() << ", "
       << "\"templating_elements\": " << v.templating_elements() << ", "
       << "\"serialization_elements\": " << v.serialization_elements() << ", "
-      << "\"visual_studio_elements\": " << v.visual_studio_elements()
+      << "\"visual_studio_elements\": " << v.visual_studio_elements() << ", "
+      << "\"orm_elements\": " << v.orm_elements()
       << " }";
     return(s);
 }

@@ -485,6 +485,10 @@
         {
           "name": "visual_studio_elements",
           "type": "visual_studio::element_repository"
+        },
+        {
+          "name": "orm_elements",
+          "type": "orm::element_repository"
         }
       ]
     },
