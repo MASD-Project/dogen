@@ -12,31 +12,32 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-02-09 Sun 20:53]
+#+CAPTION: Clock summary at [2020-02-10 Mon 08:44]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *60:04* |       |       | 100.0 |
+| *Total time*                                          | *60:47* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 60:04   |       |       | 100.0 |
-| Active                                                |         | 60:04 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  7:01 |  11.7 |
+| Stories                                               | 60:47   |       |       | 100.0 |
+| Active                                                |         | 60:47 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  7:01 |  11.5 |
 | Create a demo and presentation for previous sprint    |         |       |  1:49 |   3.0 |
-| Sprint and product backlog grooming                   |         |       |  3:29 |   5.8 |
-| Create new playlist for assets work                   |         |       |  2:19 |   3.9 |
+| Sprint and product backlog grooming                   |         |       |  3:29 |   5.7 |
+| Create new playlist for assets work                   |         |       |  2:19 |   3.8 |
 | Create the final video on the relational model series |         |       |  0:30 |   0.8 |
-| Move registrar into assets                            |         |       |  5:34 |   9.3 |
-| Fix error in asserter tests                           |         |       |  0:38 |   1.1 |
+| Move registrar into assets                            |         |       |  5:34 |   9.2 |
+| Fix error in asserter tests                           |         |       |  0:38 |   1.0 |
 | Add injection details to all models                   |         |       |  0:25 |   0.7 |
 | Fix nightly error in registrar                        |         |       |  0:33 |   0.9 |
 | Nightly code coverage is not being reported           |         |       |  0:25 |   0.7 |
-| Move visual studio fabric types into assets           |         |       | 18:34 |  30.9 |
-| Create metamodel elements for =entry_point=           |         |       |  7:18 |  12.2 |
+| Move visual studio fabric types into assets           |         |       | 18:34 |  30.5 |
+| Create metamodel elements for =entry_point=           |         |       |  7:18 |  12.0 |
 | Remove support for element extensions                 |         |       |  0:44 |   1.2 |
-| Move =object_odb_options= into assets                 |         |       |  6:43 |  11.2 |
+| Move =object_odb_options= into assets                 |         |       |  6:43 |  11.1 |
 | Fixes to setup                                        |         |       |  1:05 |   1.8 |
 | Cannot see source file in coveralls                   |         |       |  0:16 |   0.4 |
-| Integration of archetypes into assets                 |         |       |  2:41 |   4.5 |
+| Integration of archetypes into assets                 |         |       |  2:41 |   4.4 |
+| Move common ODB options into assets                   |         |       |  0:43 |   1.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1065,6 +1066,40 @@ backends. Artefacts produced by a backend must have a unique physical
 location. In LAM mode, the component is split into multiple
 components, each with their own primary technical space.
 
+*** STARTED Move common ODB options into assets                       :story:
+    :LOGBOOK:
+    CLOCK: [2020-02-10 Mon 08:01]--[2020-02-10 Mon 08:44] =>  0:43
+    :END:
+
+Copy the type across, create required formatters and associated
+infrastructure and delete the fabric types.
+
+Notes:
+
+- for extra points, we should try to move the ODB expanders into
+  assets. This is also for ODB options. We could create a single ODB
+  transform for this.
+
+*** Consider creating a "model" meta-model element                    :story:
+
+This is not yet particularly clear, and we may already have something
+on the backlog for this, but the gist of it is that we have a number
+of elements in the meta-model that are functions of the model itself:
+
+- the root module.
+- projects and solutions for the model itself.
+- common ODB options.
+- top-level CMakefile (and perhaps others).
+- msbuild
+
+In all those cases we are duplicating information available at the
+model level, with perhaps a tiny bit of extra processing. It would
+make more sense for there to be an element that models the model
+itself and then to have formatters for this element. We should wait
+until we finish with the fabric refactor (and possibly the generation
+refactor too) until we look into this. We should also take into
+account the product models.
+
 *** Intrinsic non-generatable types                                   :story:
 
 In the decoration transform we have this hack:
@@ -1519,3 +1554,36 @@ regardless of whether the name needs a helper or not. Intuitively, we
 should check the family and the streaming settings; if both of these
 are empty then there should not be a need for a helper. But maybe
 there is more to it.
+*** CANCELLED Add validation for helper families                      :story:
+    CLOSED: [2020-02-10 Mon 08:26]
+
+*Rationale*: this will no longer be required once we move to a
+"needle" based implementation of helpers.
+
+At present we are checking that the name tree has the expected number
+of type arguments:
+
+:    const auto children(t.children());
+:    if (children.size() != 1) {
+:        BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
+:        BOOST_THROW_EXCEPTION(formatting_error(invalid_smart_pointer));
+:    }
+:    smart_pointer_helper_stitch(fa, t);
+
+In the future with dynamic helpers we will remove these checks. In
+order to implement them we need to declare the type families up front
+in a JSON file, with a name and number of type arguments. When
+constructing the type helpers, we can check the name tree to make sure
+the number of type arguments is correct.
+
+This can be done as a helper setting (number of type arguments?).
+
+Actually this is a core yarn property. So:
+
+- add number of type arguments to object;
+- read this as a dynamic field;
+- during validation, check that all name trees that instantiate this
+  object have the expected number of type arguments.
+- in order to cope with cases such as variant we also need some kind
+  of enum, e.g. type parameterisation: none, variable, fixed. if
+  fixed, then number of type parameters must be non-zero.

@@ -5669,6 +5669,11 @@ Existing validation code:
   - they are unique and valid according to enumeration type;
   - they do not class with invalid value.
 
+*ORM*
+
+- if there are ODB options, check that there are common ODB options
+  too.
+
 *Decoration elements*
 
 - modeline groups must be defined at the top-level.
@@ -5775,36 +5780,6 @@ In practice this never does anything.
 - get the =on_error= expression to trigger when an error occurs
 - raise an exception with the contents that we are sending to
   std::cout at present.
-
-*** Add validation for helper families                                :story:
-
-At present we are checking that the name tree has the expected number
-of type arguments:
-
-:    const auto children(t.children());
-:    if (children.size() != 1) {
-:        BOOST_LOG_SEV(lg, error) << invalid_smart_pointer;
-:        BOOST_THROW_EXCEPTION(formatting_error(invalid_smart_pointer));
-:    }
-:    smart_pointer_helper_stitch(fa, t);
-
-In the future with dynamic helpers we will remove these checks. In
-order to implement them we need to declare the type families up front
-in a JSON file, with a name and number of type arguments. When
-constructing the type helpers, we can check the name tree to make sure
-the number of type arguments is correct.
-
-This can be done as a helper setting (number of type arguments?).
-
-Actually this is a core yarn property. So:
-
-- add number of type arguments to object;
-- read this as a dynamic field;
-- during validation, check that all name trees that instantiate this
-  object have the expected number of type arguments.
-- in order to cope with cases such as variant we also need some kind
-  of enum, e.g. type parameterisation: none, variable, fixed. if
-  fixed, then number of type parameters must be non-zero.
 
 *** Add validation for field definitions                              :story:
 
