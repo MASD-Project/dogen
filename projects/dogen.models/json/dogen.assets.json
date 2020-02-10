@@ -3573,6 +3573,33 @@
         "dogen::untypable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::orm::common_odb_options",
+      "stereotypes": [
+        "assets::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "sql_name_case",
+          "type": "std::string"
+        },
+        {
+          "name": "databases",
+          "type": "std::list<std::string>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::orm::element_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "common_odb_options",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<common_odb_options>>"
+        }
+      ]
     }
   ]
 }

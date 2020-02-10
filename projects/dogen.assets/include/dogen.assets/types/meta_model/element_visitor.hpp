@@ -35,6 +35,7 @@
 #include "dogen.assets/types/meta_model/structural/primitive_fwd.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/project_fwd.hpp"
 #include "dogen.assets/types/meta_model/mapping/fixed_mappable_fwd.hpp"
+#include "dogen.assets/types/meta_model/orm/common_odb_options_fwd.hpp"
 #include "dogen.assets/types/meta_model/structural/entry_point_fwd.hpp"
 #include "dogen.assets/types/meta_model/structural/enumeration_fwd.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/solution_fwd.hpp"
@@ -116,6 +117,16 @@ public:
     virtual void visit(const dogen::assets::meta_model::mapping::fixed_mappable&) { }
     virtual void visit(dogen::assets::meta_model::mapping::fixed_mappable&) const { }
     virtual void visit(dogen::assets::meta_model::mapping::fixed_mappable&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::assets::meta_model::orm::common_odb_options
+     */
+    /**@{*/
+    virtual void visit(const dogen::assets::meta_model::orm::common_odb_options&) const { }
+    virtual void visit(const dogen::assets::meta_model::orm::common_odb_options&) { }
+    virtual void visit(dogen::assets::meta_model::orm::common_odb_options&) const { }
+    virtual void visit(dogen::assets::meta_model::orm::common_odb_options&) { }
     /**@}*/
 
     /**
