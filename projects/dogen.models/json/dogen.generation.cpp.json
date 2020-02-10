@@ -3246,6 +3246,13 @@
         "dogen::untypable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::odb::new_common_odb_options_formatter",
+      "stereotypes": [
+        "dogen::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
