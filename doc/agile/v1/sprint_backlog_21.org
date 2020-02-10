@@ -12,32 +12,32 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-02-10 Mon 08:44]
+#+CAPTION: Clock summary at [2020-02-10 Mon 18:48]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *60:47* |       |       | 100.0 |
+| *Total time*                                          | *61:40* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 60:47   |       |       | 100.0 |
-| Active                                                |         | 60:47 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  7:01 |  11.5 |
-| Create a demo and presentation for previous sprint    |         |       |  1:49 |   3.0 |
-| Sprint and product backlog grooming                   |         |       |  3:29 |   5.7 |
+| Stories                                               | 61:40   |       |       | 100.0 |
+| Active                                                |         | 61:40 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  7:01 |  11.4 |
+| Create a demo and presentation for previous sprint    |         |       |  1:49 |   2.9 |
+| Sprint and product backlog grooming                   |         |       |  3:29 |   5.6 |
 | Create new playlist for assets work                   |         |       |  2:19 |   3.8 |
 | Create the final video on the relational model series |         |       |  0:30 |   0.8 |
-| Move registrar into assets                            |         |       |  5:34 |   9.2 |
+| Move registrar into assets                            |         |       |  5:34 |   9.0 |
 | Fix error in asserter tests                           |         |       |  0:38 |   1.0 |
 | Add injection details to all models                   |         |       |  0:25 |   0.7 |
 | Fix nightly error in registrar                        |         |       |  0:33 |   0.9 |
 | Nightly code coverage is not being reported           |         |       |  0:25 |   0.7 |
-| Move visual studio fabric types into assets           |         |       | 18:34 |  30.5 |
-| Create metamodel elements for =entry_point=           |         |       |  7:18 |  12.0 |
+| Move visual studio fabric types into assets           |         |       | 18:34 |  30.1 |
+| Create metamodel elements for =entry_point=           |         |       |  7:18 |  11.8 |
 | Remove support for element extensions                 |         |       |  0:44 |   1.2 |
-| Move =object_odb_options= into assets                 |         |       |  6:43 |  11.1 |
+| Move =object_odb_options= into assets                 |         |       |  6:43 |  10.9 |
 | Fixes to setup                                        |         |       |  1:05 |   1.8 |
 | Cannot see source file in coveralls                   |         |       |  0:16 |   0.4 |
 | Integration of archetypes into assets                 |         |       |  2:41 |   4.4 |
-| Move common ODB options into assets                   |         |       |  0:43 |   1.2 |
+| Move common ODB options into assets                   |         |       |  1:36 |   2.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1068,6 +1068,7 @@ components, each with their own primary technical space.
 
 *** STARTED Move common ODB options into assets                       :story:
     :LOGBOOK:
+    CLOCK: [2020-02-10 Mon 17:55]--[2020-02-10 Mon 18:48] =>  0:53
     CLOCK: [2020-02-10 Mon 08:01]--[2020-02-10 Mon 08:44] =>  0:43
     :END:
 
@@ -1099,6 +1100,13 @@ itself and then to have formatters for this element. We should wait
 until we finish with the fabric refactor (and possibly the generation
 refactor too) until we look into this. We should also take into
 account the product models.
+
+In addition, cases such as common ODB options need to be rethought; if
+all we are supplying is a different representation of data that
+already exists in the model itself, then we should either rely on the
+model meta-type or move those properties to the new meta-type. Seems a
+tad excessive having common ODB options just for a "post-processed"
+set of properties.
 
 *** Intrinsic non-generatable types                                   :story:
 
