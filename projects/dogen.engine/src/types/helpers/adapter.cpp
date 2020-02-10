@@ -604,4 +604,14 @@ adapter::to_visual_studio_project(const assets::meta_model::location& l,
     return r;
 }
 
+boost::shared_ptr<assets::meta_model::orm::common_odb_options>
+adapter::to_orm_common_odb_options(const assets::meta_model::location& l,
+    const stereotypes_conversion_result& scr,
+    const injection::meta_model::element& ie) const {
+    using assets::meta_model::orm::common_odb_options;
+    auto r(boost::make_shared<common_odb_options>());
+    populate_element(l, scr, ie, *r);
+    return r;
+}
+
 }

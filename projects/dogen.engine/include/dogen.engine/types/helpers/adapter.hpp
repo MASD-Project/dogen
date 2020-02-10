@@ -58,6 +58,7 @@
 #include "dogen.assets/types/meta_model/serialization/type_registrar.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/solution.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/project.hpp"
+#include "dogen.assets/types/meta_model/orm/common_odb_options.hpp"
 #include "dogen.engine/types/helpers/stereotypes_conversion_result.hpp"
 
 namespace dogen::engine::helpers {
@@ -324,7 +325,7 @@ public:
 public:
     /**
      * @brief Converts an injection element with a stereotype of
-     * @e masd::build::visual_studio::component.
+     * @e masd::visual_studio::solution.
      */
     boost::shared_ptr<assets::meta_model::visual_studio::solution>
     to_visual_studio_solution(const assets::meta_model::location& l,
@@ -333,10 +334,20 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * @e masd::build::visual_studio::component.
+     * @e masd::visual_studio::project.
      */
     boost::shared_ptr<assets::meta_model::visual_studio::project>
     to_visual_studio_project(const assets::meta_model::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::meta_model::element& ie) const;
+
+public:
+    /**
+     * @brief Converts an injection element with a stereotype of
+     * @e masd::orm::common_odb_options.
+     */
+    boost::shared_ptr<assets::meta_model::orm::common_odb_options>
+    to_orm_common_odb_options(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 };
