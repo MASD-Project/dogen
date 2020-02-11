@@ -129,8 +129,8 @@ orm_transform::capitalise_schema_name(const std::string& schema_name,
     BOOST_THROW_EXCEPTION(transformation_error(invalid_case + s));
 }
 
-std::vector<meta_model::orm::database_system> orm_transform::
-to_orm_database_system(const std::list<std::string>& vs) {
+std::vector<meta_model::orm::database_system>
+orm_transform::to_orm_database_system(const std::list<std::string>& vs) {
     using meta_model::orm::database_system;
     std::vector<database_system> r;
     r.reserve(vs.size());
