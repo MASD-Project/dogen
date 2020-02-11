@@ -35,7 +35,6 @@
 #include "dogen.assets/types/transforms/extraction_properties_transform.hpp"
 #include "dogen.assets/types/transforms/variability_feature_bundle_transform.hpp"
 #include "dogen.assets/types/transforms/visual_studio_transform.hpp"
-#include "dogen.assets/types/transforms/odb_options_transform.hpp"
 #include "dogen.assets/types/transforms/pre_assembly_chain.hpp"
 
 namespace {
@@ -77,7 +76,6 @@ void pre_assembly_chain::apply(const context& ctx,
     extraction_properties_transform::apply(ctx, m);
     variability_feature_bundle_transform::apply(ctx, fixed_mappings, m);
     visual_studio_transform::apply(ctx, m);
-    odb_options_transform::apply(ctx, m);
 
     /*
      * Primitive transform must happen before parsing transform, as it

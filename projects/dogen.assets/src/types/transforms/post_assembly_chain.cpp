@@ -35,6 +35,7 @@
 #include "dogen.assets/types/transforms/associations_transform.hpp"
 #include "dogen.assets/types/transforms/meta_naming_transform.hpp"
 #include "dogen.assets/types/transforms/type_registrar_transform.hpp"
+#include "dogen.assets/types/transforms/odb_options_transform.hpp"
 #include "dogen.assets/types/transforms/visual_studio_project_type_transform.hpp"
 #include "dogen.assets/types/transforms/post_assembly_chain.hpp"
 
@@ -110,6 +111,12 @@ void post_assembly_chain::apply(const context& ctx, meta_model::model& m) {
      * containment.
      */
     orm_transform::apply(ctx, m);
+
+    /*
+     * ODB options must be processed after ORM properties have been
+     * expanded.
+     */
+    odb_options_transform::apply(ctx, m);
 
     /*
      * Resolution must be done after system elements have been
