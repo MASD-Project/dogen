@@ -94,6 +94,8 @@ for layer in dia.active_display().diagram.data.layers:
             object.properties["fill_colour"] = "#98FB98"
         elif "masd::orm::value" in stereotype:
             object.properties["fill_colour"] = "#DDA0DD"
+        elif "masd::orm::common_odb_options" in stereotype:
+            object.properties["fill_colour"] = "#C278C2"
 
         #
         # Theme: Decorations
