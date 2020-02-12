@@ -23,6 +23,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/pair_io.hpp"
+#include "dogen.assets/types/meta_model/orm/common_odb_options.hpp"
 #include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include "dogen.generation.cpp/types/fabric/odb_target.hpp"
@@ -68,6 +69,7 @@ private:
 public:
     using element_visitor::visit;
     void visit(const fabric::common_odb_options& coo);
+    void visit(const assets::meta_model::orm::common_odb_options& coo);
     void visit(const assets::meta_model::structural::object& o);
     void visit(const assets::meta_model::structural::primitive& p);
 
@@ -87,14 +89,6 @@ odb_targets_factory::odb_targets_factory(const model& fm, const locator& l,
       target_name_("odb_" + boost::join(model_name.location().model_modules(),
               separator)) {
     result_.main_target_name(target_name_);
-}
-
-void odb_targets_factory::visit(const fabric::common_odb_options& coo) {
-    const auto arch(formatters::odb::traits::common_odb_options_archetype());
-    result_.common_odb_options(
-        locator_.make_relative_path_for_odb_options(coo.name(), arch,
-            false/*include_source_directory*/).generic_string()
-        );
 }
 
 void odb_targets_factory::
@@ -144,6 +138,23 @@ generate_targets(const assets::meta_model::name& n) {
         t.move_parameters().push_back(pair);
     }
     result_.targets().push_back(t);
+}
+
+void odb_targets_factory::visit(const fabric::common_odb_options& coo) {
+    const auto arch(formatters::odb::traits::common_odb_options_archetype());
+    result_.common_odb_options(
+        locator_.make_relative_path_for_odb_options(coo.name(), arch,
+            false/*include_source_directory*/).generic_string()
+        );
+}
+
+void odb_targets_factory::
+visit(const assets::meta_model::orm::common_odb_options& coo) {
+    const auto arch(formatters::odb::traits::common_odb_options_archetype());
+    result_.common_odb_options(
+        locator_.make_relative_path_for_odb_options(coo.name(), arch,
+            false/*include_source_directory*/).generic_string()
+        );
 }
 
 void odb_targets_factory::visit(const assets::meta_model::structural::object& o) {

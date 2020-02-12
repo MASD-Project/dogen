@@ -319,6 +319,13 @@
         "dogen::untypable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "common",
+      "stereotypes": [
+        "masd::orm::common_odb_options"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
