@@ -74,7 +74,7 @@ boost::filesystem::path new_common_odb_options_formatter::inclusion_path(
     static logger
         lg(logger_factory("generation.cpp.formatters.odb.new_common_odb_options_formatter"));
 
-        const std::string not_supported("Inclusion path is not supported: ");
+    const std::string not_supported("Inclusion path is not supported: ");
 
     BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
     BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
@@ -82,9 +82,7 @@ boost::filesystem::path new_common_odb_options_formatter::inclusion_path(
 
 boost::filesystem::path new_common_odb_options_formatter::full_path(
     const formattables::locator& l, const assets::meta_model::name& n) const {
-    auto new_name(n);
-    new_name.simple("new_" + n.simple());
-    return l.make_full_path_for_odb_options(new_name, static_id());
+    return l.make_full_path_for_odb_options(n, static_id());
 }
 
 std::list<std::string> new_common_odb_options_formatter::inclusion_dependencies(
