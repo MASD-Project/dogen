@@ -68,7 +68,7 @@
         <dia:point val="-48,31"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,29.95;236.05,147.264"/>
+        <dia:rectangle val="-48.05,29.95;236.05,147.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="284"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="116.21430000000001"/>
+        <dia:real val="116"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -14531,7 +14531,7 @@ and element.#</dia:string>
         <dia:point val="135.96,74.2143"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="120.327,73.4643;136.71,86.0143"/>
+        <dia:rectangle val="120.328,73.4643;136.71,86.0143"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -18985,7 +18985,7 @@ and element.#</dia:string>
         <dia:point val="190.406,88.7928"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="189.656,88.0428;210.878,99.5977"/>
+        <dia:rectangle val="189.656,88.0428;210.877,99.5977"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20226,7 +20226,7 @@ and element.#</dia:string>
         <dia:point val="-45,68.2143"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-45.75,57.8977;-38.2738,69.0143"/>
+        <dia:rectangle val="-45.75,57.8977;-38.2737,69.0143"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20438,7 +20438,7 @@ and element.#</dia:string>
         <dia:point val="215.15,76.6143"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="210.628,75.8643;215.9,86.0143"/>
+        <dia:rectangle val="210.627,75.8643;215.9,86.0143"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -34323,16 +34323,16 @@ code.
         <dia:point val="104,304"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="103.95,303.95;137.275,316.45"/>
+        <dia:rectangle val="103.95,303.95;136.89,315.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="104,304"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="33.225000000000001"/>
+        <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="12.4"/>
+        <dia:real val="11.6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#features#</dia:string>
@@ -34677,30 +34677,6 @@ code.
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.qualified_name=masd.generation.cpp.odb.primitive_odb_options.postfix#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.odb.new_common_odb_options.postfix#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#""#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.odb.new_common_odb_options.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -40883,19 +40859,19 @@ string.
         <dia:point val="121,259"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="120.95,258.95;138.25,262.05"/>
+        <dia:rectangle val="120.95,258.95;135.998,262.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="121,259"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.199999999999999"/>
+        <dia:real val="14.9475"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#new_common_odb_options_formatter#</dia:string>
+        <dia:string>#common_odb_options_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>

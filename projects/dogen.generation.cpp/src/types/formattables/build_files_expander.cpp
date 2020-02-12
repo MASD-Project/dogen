@@ -140,7 +140,7 @@ generate_targets(const assets::meta_model::name& n) {
 
 void odb_targets_factory::
 visit(const assets::meta_model::orm::common_odb_options& coo) {
-    const auto arch(formatters::odb::traits::new_common_odb_options_archetype());
+    const auto arch(formatters::odb::traits::common_odb_options_archetype());
     result_.common_odb_options(
         locator_.make_relative_path_for_odb_options(coo.name(), arch,
             false/*include_source_directory*/).generic_string()

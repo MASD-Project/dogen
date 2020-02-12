@@ -43,14 +43,9 @@ std::string traits::enum_header_archetype() {
     static std::string r(traits::facet() + ".enum_header");
     return r;
 }
-/*
+
 std::string traits::common_odb_options_archetype() {
     static std::string r(traits::facet() + ".common_odb_options");
-    return r;
-}
-*/
-std::string traits::new_common_odb_options_archetype() {
-    static std::string r(traits::facet() + ".new_common_odb_options");
     return r;
 }
 
