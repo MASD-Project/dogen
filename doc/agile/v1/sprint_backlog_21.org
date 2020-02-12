@@ -968,6 +968,37 @@ to take into account element state in order to determine
 enablement. For now we should just take the exact same approach as we
 did for ODB pragmas.
 
+*** COMPLETED Move common ODB options into assets                     :story:
+    CLOSED: [2020-02-12 Wed 18:53]
+    :LOGBOOK:
+    CLOCK: [2020-02-12 Wed 18:13]--[2020-02-12 Wed 18:53] =>  0:40
+    CLOCK: [2020-02-12 Wed 18:10]--[2020-02-12 Wed 18:12] =>  0:02
+    CLOCK: [2020-02-12 Wed 08:00]--[2020-02-12 Wed 08:45] =>  0:45
+    CLOCK: [2020-02-11 Tue 21:41]--[2020-02-11 Tue 22:26] =>  0:45
+    CLOCK: [2020-02-10 Mon 23:34]--[2020-02-10 Mon 23:40] =>  0:06
+    CLOCK: [2020-02-10 Mon 22:53]--[2020-02-10 Mon 23:33] =>  0:40
+    CLOCK: [2020-02-10 Mon 17:55]--[2020-02-10 Mon 18:48] =>  0:53
+    CLOCK: [2020-02-10 Mon 08:01]--[2020-02-10 Mon 08:44] =>  0:43
+    :END:
+
+Copy the type across, create required formatters and associated
+infrastructure and delete the fabric types.
+
+Notes:
+
+- for extra points, we should try to move the ODB expanders into
+  assets. This is also for ODB options. We could create a single ODB
+  transform for this.
+- odb options should point to common odb options name rather than
+  hard-coding it.
+- common odb options are used in the ODB targets generation.
+- the generation of odb options file names is at present very
+  convoluted. We are adding a postfix of =options= and an extension of
+  =odb= manually. We could instead rely on the facet prefix, but
+  because that is already =odb=, we cannot change it to options. The
+  logical thing would be to change the extension to =.options= and the
+  postfix to =odb= so that we can reuse the existing infrastructure.
+
 *** STARTED Fixes to setup                                            :story:
     :LOGBOOK:
     CLOCK: [2020-01-31 Fri 11:38]--[2020-01-31 Fri 11:51] =>  0:13
@@ -1065,26 +1096,12 @@ backends. Artefacts produced by a backend must have a unique physical
 location. In LAM mode, the component is split into multiple
 components, each with their own primary technical space.
 
-*** STARTED Move common ODB options into assets                       :story:
+*** STARTED Move msbuild and cmakelists into assets                   :story:
     :LOGBOOK:
-    CLOCK: [2020-02-11 Tue 21:41]--[2020-02-11 Tue 22:26] =>  0:45
-    CLOCK: [2020-02-10 Mon 23:34]--[2020-02-10 Mon 23:40] =>  0:06
-    CLOCK: [2020-02-10 Mon 22:53]--[2020-02-10 Mon 23:33] =>  0:40
-    CLOCK: [2020-02-10 Mon 17:55]--[2020-02-10 Mon 18:48] =>  0:53
-    CLOCK: [2020-02-10 Mon 08:01]--[2020-02-10 Mon 08:44] =>  0:43
+    CLOCK: [2020-02-12 Wed 18:54]--[2020-02-12 Wed 18:56] =>  0:02
     :END:
 
-Copy the type across, create required formatters and associated
-infrastructure and delete the fabric types.
-
-Notes:
-
-- for extra points, we should try to move the ODB expanders into
-  assets. This is also for ODB options. We could create a single ODB
-  transform for this.
-- odb options should point to common odb options name rather than
-  hard-coding it.
-- common odb options are used in the ODB targets generation.
+Move the build targets related types from fabric into assets.
 
 *** Consider creating a "model" meta-model element                    :story:
 
