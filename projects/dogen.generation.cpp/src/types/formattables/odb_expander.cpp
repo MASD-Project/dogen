@@ -28,9 +28,7 @@
 #include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include "dogen.generation.cpp/types/formattables/adapter.hpp"
-#include "dogen.generation.cpp/types/fabric/common_odb_options.hpp"
 #include "dogen.generation.cpp/types/element_visitor.hpp"
-#include "dogen.generation.cpp/types/fabric/odb_options_factory.hpp"
 #include "dogen.generation.cpp/types/formattables/header_guard_factory.hpp"
 #include "dogen.generation.cpp/types/formatters/odb/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/types/traits.hpp"
@@ -55,7 +53,7 @@ namespace dogen::generation::cpp::formattables {
 
 class updator : public element_visitor {
 public:
-    updator(model& fm, const locator& l);
+    explicit updator(const locator& l);
 
 private:
     assets::meta_model::orm::odb_options
@@ -65,20 +63,12 @@ public:
     using element_visitor::visit;
     void visit(assets::meta_model::structural::object& o);
     void visit(assets::meta_model::structural::primitive& p);
-    void visit(fabric::common_odb_options& coo);
 
 private:
-    const model& model_;
     const locator locator_;
 };
 
-updator::updator(model& fm, const locator& l)
-    : model_(fm), locator_(l) {}
-
-void updator::visit(fabric::common_odb_options& coo) {
-    coo.databases(model_.odb_databases());
-    coo.sql_name_case(model_.odb_sql_name_case());
-}
+updator::updator(const locator& l) : locator_(l) {}
 
 assets::meta_model::orm::odb_options
 updator::make_options(const assets::meta_model::name& n) {
@@ -121,11 +111,11 @@ void updator::visit(assets::meta_model::structural::primitive& p) {
         p.orm_properties()->odb_options(make_options(p.name()));
 }
 
-void odb_expander::expand(const locator& l, model& fm) const {
+void odb_expander::expand(const locator& l, model& m) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started expanding odb properties.";
 
-    for (auto& pair : fm.formattables()) {
+    for (auto& pair : m.formattables()) {
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
@@ -142,7 +132,7 @@ void odb_expander::expand(const locator& l, model& fm) const {
             continue;
 
         auto& e(*segment);
-        updator g(fm, l);
+        updator g(l);
         e.accept(g);
     }
 

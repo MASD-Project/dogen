@@ -23,7 +23,6 @@
 #include "dogen.generation.cpp/types/formatters/odb/primitive_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/odb/class_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/odb/enum_header_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/odb/common_odb_options_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/odb/new_common_odb_options_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/odb/object_odb_options_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/odb/primitive_odb_options_formatter.hpp"
@@ -36,7 +35,6 @@ void initializer::initialize(registrar& rg) {
     register_formatter<primitive_header_formatter>(rg);
     register_formatter<class_header_formatter>(rg);
     register_formatter<enum_header_formatter>(rg);
-    register_formatter<common_odb_options_formatter>(rg);
     register_formatter<new_common_odb_options_formatter>(rg);
     register_formatter<object_odb_options_formatter>(rg);
     register_formatter<primitive_odb_options_formatter>(rg);

@@ -53,7 +53,7 @@ struct traits {
     /**
      * @brief Name of the common odb options archetype.
      */
-    static std::string common_odb_options_archetype();
+    //static std::string common_odb_options_archetype();
 
     /**
      * @brief Name of the common odb options archetype.

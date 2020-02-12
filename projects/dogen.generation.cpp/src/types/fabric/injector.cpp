@@ -23,7 +23,6 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.generation.cpp/types/formatters/workflow.hpp"
 #include "dogen.generation.cpp/types/fabric/build_files_factory.hpp"
-#include "dogen.generation.cpp/types/fabric/odb_options_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/injector.hpp"
 
 namespace {
@@ -59,16 +58,8 @@ inject_build_files(generation::meta_model::model& m) const {
     add_elements(elements, m);
 }
 
-void injector::
-inject_odb_options(generation::meta_model::model& m) const {
-    odb_options_factory f;
-    const auto elements(f.make(m));
-    add_elements(elements, m);
-}
-
 void injector::inject(generation::meta_model::model& m) const {
     inject_build_files(m);
-    // inject_odb_options(m);
 }
 
 }

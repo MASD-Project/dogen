@@ -240,13 +240,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::odb::common_odb_options_formatter",
-      "stereotypes": [
-        "dogen::cpp::artefact_formatter"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formatters::include_cmakelists_formatter",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
@@ -748,23 +741,6 @@
         {
           "name": "tests_directory_name",
           "type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": "fabric::common_odb_options",
-      "tagged_values": {
-        "masd.generalization.parent": "assets::meta_model::element"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "sql_name_case",
-          "type": "std::string"
-        },
-        {
-          "name": "databases",
-          "type": "std::list<std::string>"
         }
       ]
     },
@@ -1522,13 +1498,6 @@
           "documentation": "Any other directives that are also needed for this element.\n"
         }
       ]
-    },
-    {
-      "name": "fabric::odb_options_factory",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
     },
     {
       "name": "fabric::building_error",

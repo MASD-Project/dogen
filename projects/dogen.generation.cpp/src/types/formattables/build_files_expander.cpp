@@ -30,7 +30,6 @@
 #include "dogen.generation.cpp/types/fabric/cmakelists.hpp"
 #include "dogen.generation.cpp/types/fabric/msbuild_targets.hpp"
 #include "dogen.generation.cpp/types/fabric/odb_targets.hpp"
-#include "dogen.generation.cpp/types/fabric/common_odb_options.hpp"
 #include "dogen.generation.cpp/types/element_visitor.hpp"
 #include "dogen.generation.cpp/types/formatters/odb/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/types/traits.hpp"
@@ -68,7 +67,6 @@ private:
 
 public:
     using element_visitor::visit;
-    void visit(const fabric::common_odb_options& coo);
     void visit(const assets::meta_model::orm::common_odb_options& coo);
     void visit(const assets::meta_model::structural::object& o);
     void visit(const assets::meta_model::structural::primitive& p);
@@ -140,8 +138,9 @@ generate_targets(const assets::meta_model::name& n) {
     result_.targets().push_back(t);
 }
 
-void odb_targets_factory::visit(const fabric::common_odb_options& coo) {
-    const auto arch(formatters::odb::traits::common_odb_options_archetype());
+void odb_targets_factory::
+visit(const assets::meta_model::orm::common_odb_options& coo) {
+    const auto arch(formatters::odb::traits::new_common_odb_options_archetype());
     result_.common_odb_options(
         locator_.make_relative_path_for_odb_options(coo.name(), arch,
             false/*include_source_directory*/).generic_string()
@@ -149,15 +148,7 @@ void odb_targets_factory::visit(const fabric::common_odb_options& coo) {
 }
 
 void odb_targets_factory::
-visit(const assets::meta_model::orm::common_odb_options& coo) {
-    const auto arch(formatters::odb::traits::common_odb_options_archetype());
-    result_.common_odb_options(
-        locator_.make_relative_path_for_odb_options(coo.name(), arch,
-            false/*include_source_directory*/).generic_string()
-        );
-}
-
-void odb_targets_factory::visit(const assets::meta_model::structural::object& o) {
+visit(const assets::meta_model::structural::object& o) {
     /*
      * We only care about objects which have ORM enabled.
      */
@@ -168,7 +159,8 @@ void odb_targets_factory::visit(const assets::meta_model::structural::object& o)
     generate_targets(n);
 }
 
-void odb_targets_factory::visit(const assets::meta_model::structural::primitive& p) {
+void odb_targets_factory::
+visit(const assets::meta_model::structural::primitive& p) {
     /*
      * We only care about objects which have ORM enabled.
      */

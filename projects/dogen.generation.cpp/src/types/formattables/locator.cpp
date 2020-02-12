@@ -268,8 +268,10 @@ configuration_for_archetype(const std::string& archetype) const {
     const auto& arch_cfg(configuration_.archetype_configurations());
     const auto i(arch_cfg.find(archetype));
     if (i == arch_cfg.end()) {
-        BOOST_LOG_SEV(lg, error) << missing_archetype_configuration;
-        BOOST_THROW_EXCEPTION(location_error(missing_archetype_configuration));
+        BOOST_LOG_SEV(lg, error) << missing_archetype_configuration
+                                 << archetype;
+        BOOST_THROW_EXCEPTION(
+            location_error(missing_archetype_configuration + archetype));
     }
 
     return i->second;
