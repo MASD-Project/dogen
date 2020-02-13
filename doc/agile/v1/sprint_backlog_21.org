@@ -11,32 +11,34 @@
 
 ** Active
 
-#+CAPTION: Clock summary at [2020-02-11 Tue 22:27]
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2020-02-13 Thu 00:11]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *63:11* |       |       | 100.0 |
+| *Total time*                                          | *65:19* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 63:11   |       |       | 100.0 |
-| Active                                                |         | 63:11 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  7:01 |  11.1 |
-| Create a demo and presentation for previous sprint    |         |       |  1:49 |   2.9 |
-| Sprint and product backlog grooming                   |         |       |  3:29 |   5.5 |
-| Create new playlist for assets work                   |         |       |  2:19 |   3.7 |
+| Stories                                               | 65:19   |       |       | 100.0 |
+| Active                                                |         | 65:19 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  7:01 |  10.7 |
+| Create a demo and presentation for previous sprint    |         |       |  1:49 |   2.8 |
+| Sprint and product backlog grooming                   |         |       |  3:38 |   5.6 |
+| Create new playlist for assets work                   |         |       |  2:19 |   3.5 |
 | Create the final video on the relational model series |         |       |  0:30 |   0.8 |
-| Move registrar into assets                            |         |       |  5:34 |   8.8 |
+| Move registrar into assets                            |         |       |  5:34 |   8.5 |
 | Fix error in asserter tests                           |         |       |  0:38 |   1.0 |
-| Add injection details to all models                   |         |       |  0:25 |   0.7 |
-| Fix nightly error in registrar                        |         |       |  0:33 |   0.9 |
-| Nightly code coverage is not being reported           |         |       |  0:25 |   0.7 |
-| Move visual studio fabric types into assets           |         |       | 18:34 |  29.4 |
-| Create metamodel elements for =entry_point=           |         |       |  7:18 |  11.6 |
-| Remove support for element extensions                 |         |       |  0:44 |   1.2 |
-| Move =object_odb_options= into assets                 |         |       |  6:43 |  10.6 |
+| Add injection details to all models                   |         |       |  0:25 |   0.6 |
+| Fix nightly error in registrar                        |         |       |  0:33 |   0.8 |
+| Nightly code coverage is not being reported           |         |       |  0:25 |   0.6 |
+| Move visual studio fabric types into assets           |         |       | 18:34 |  28.4 |
+| Create metamodel elements for =entry_point=           |         |       |  7:18 |  11.2 |
+| Remove support for element extensions                 |         |       |  0:44 |   1.1 |
+| Move =object_odb_options= into assets                 |         |       |  6:43 |  10.3 |
+| Move common ODB options into assets                   |         |       |  4:34 |   7.0 |
 | Fixes to setup                                        |         |       |  1:05 |   1.7 |
 | Cannot see source file in coveralls                   |         |       |  0:16 |   0.4 |
-| Integration of archetypes into assets                 |         |       |  2:41 |   4.2 |
-| Move common ODB options into assets                   |         |       |  3:07 |   4.9 |
+| Integration of archetypes into assets                 |         |       |  2:41 |   4.1 |
+| Move msbuild and cmakelists into assets               |         |       |  0:32 |   0.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -341,6 +343,7 @@ using the Dogen test models.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-02-12 Wed 22:42]--[2020-02-12 Wed 22:51] =>  0:09
     CLOCK: [2020-02-07 Fri 14:02]--[2020-02-07 Fri 14:45] =>  0:43
     CLOCK: [2020-02-07 Fri 09:15]--[2020-02-07 Fri 09:37] =>  0:22
     CLOCK: [2020-02-05 Wed 08:00]--[2020-02-05 Wed 08:04] =>  0:05
@@ -997,7 +1000,8 @@ Notes:
   =odb= manually. We could instead rely on the facet prefix, but
   because that is already =odb=, we cannot change it to options. The
   logical thing would be to change the extension to =.options= and the
-  postfix to =odb= so that we can reuse the existing infrastructure.
+  postfix to =odb= so that we can reuse the existing
+  infrastructure. We can leave this work for when we refactor locator.
 
 *** STARTED Fixes to setup                                            :story:
     :LOGBOOK:
@@ -1098,6 +1102,7 @@ components, each with their own primary technical space.
 
 *** STARTED Move msbuild and cmakelists into assets                   :story:
     :LOGBOOK:
+    CLOCK: [2020-02-12 Wed 23:40]--[2020-02-13 Thu 00:10] =>  0:30
     CLOCK: [2020-02-12 Wed 18:54]--[2020-02-12 Wed 18:56] =>  0:02
     :END:
 
