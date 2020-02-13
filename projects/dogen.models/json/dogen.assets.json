@@ -3442,6 +3442,10 @@
           "name": "projects",
           "type": "std::unordered_map<std::string, boost::shared_ptr<project>>",
           "documentation": "All projects in this model.\n"
+        },
+        {
+          "name": "msbuild_targets",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<msbuild_targets>>"
         }
       ]
     },
@@ -3615,6 +3619,67 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::orm::odb_targets",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "main_target_name",
+          "type": "std::string"
+        },
+        {
+          "name": "common_odb_options",
+          "type": "std::string"
+        },
+        {
+          "name": "targets",
+          "type": "std::list<odb_target>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::orm::odb_target",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string"
+        },
+        {
+          "name": "comment",
+          "type": "std::string"
+        },
+        {
+          "name": "output_directory",
+          "type": "std::string"
+        },
+        {
+          "name": "types_file",
+          "type": "std::string"
+        },
+        {
+          "name": "move_parameters",
+          "type": "std::list<std::pair<std::string, std::string>>"
+        },
+        {
+          "name": "object_odb_options",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::visual_studio::msbuild_targets",
+      "stereotypes": [
+        "assets::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "odb_targets",
+          "type": "dogen::assets::meta_model::orm::odb_targets"
+        }
+      ]
     }
   ]
 }

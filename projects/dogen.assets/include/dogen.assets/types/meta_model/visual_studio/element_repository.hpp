@@ -31,6 +31,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.assets/types/meta_model/visual_studio/project_fwd.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/solution_fwd.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/msbuild_targets_fwd.hpp"
 
 namespace dogen::assets::meta_model::visual_studio {
 
@@ -44,7 +45,8 @@ public:
 public:
     element_repository(
         const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::solution> >& solutions,
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::project> >& projects);
+        const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::project> >& projects,
+        const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::msbuild_targets> >& msbuild_targets);
 
 public:
     /**
@@ -67,6 +69,11 @@ public:
     void projects(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::project> >&& v);
     /**@}*/
 
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::msbuild_targets> >& msbuild_targets() const;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::msbuild_targets> >& msbuild_targets();
+    void msbuild_targets(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::msbuild_targets> >& v);
+    void msbuild_targets(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::msbuild_targets> >&& v);
+
 public:
     bool operator==(const element_repository& rhs) const;
     bool operator!=(const element_repository& rhs) const {
@@ -80,6 +87,7 @@ public:
 private:
     std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::solution> > solutions_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::project> > projects_;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::msbuild_targets> > msbuild_targets_;
 };
 
 }

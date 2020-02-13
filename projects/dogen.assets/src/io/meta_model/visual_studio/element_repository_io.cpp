@@ -22,6 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.assets/io/meta_model/visual_studio/project_io.hpp"
 #include "dogen.assets/io/meta_model/visual_studio/solution_io.hpp"
+#include "dogen.assets/io/meta_model/visual_studio/msbuild_targets_io.hpp"
 #include "dogen.assets/io/meta_model/visual_studio/element_repository_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -100,13 +101,48 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::assets::meta_model::visual_studio::msbuild_targets>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::msbuild_targets> >& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen::assets::meta_model::visual_studio {
 
 std::ostream& operator<<(std::ostream& s, const element_repository& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::assets::meta_model::visual_studio::element_repository\"" << ", "
       << "\"solutions\": " << v.solutions() << ", "
-      << "\"projects\": " << v.projects()
+      << "\"projects\": " << v.projects() << ", "
+      << "\"msbuild_targets\": " << v.msbuild_targets()
       << " }";
     return(s);
 }

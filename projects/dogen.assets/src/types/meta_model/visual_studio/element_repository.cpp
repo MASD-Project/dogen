@@ -20,6 +20,7 @@
  */
 #include "dogen.assets/types/meta_model/visual_studio/project.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/solution.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/msbuild_targets.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/element_repository.hpp"
 
 namespace boost {
@@ -40,23 +41,36 @@ const boost::shared_ptr<dogen::assets::meta_model::visual_studio::project>& rhs)
 
 }
 
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::assets::meta_model::visual_studio::msbuild_targets>& lhs,
+const boost::shared_ptr<dogen::assets::meta_model::visual_studio::msbuild_targets>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
 namespace dogen::assets::meta_model::visual_studio {
 
 element_repository::element_repository(
     const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::solution> >& solutions,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::project> >& projects)
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::project> >& projects,
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::msbuild_targets> >& msbuild_targets)
     : solutions_(solutions),
-      projects_(projects) { }
+      projects_(projects),
+      msbuild_targets_(msbuild_targets) { }
 
 void element_repository::swap(element_repository& other) noexcept {
     using std::swap;
     swap(solutions_, other.solutions_);
     swap(projects_, other.projects_);
+    swap(msbuild_targets_, other.msbuild_targets_);
 }
 
 bool element_repository::operator==(const element_repository& rhs) const {
     return solutions_ == rhs.solutions_ &&
-        projects_ == rhs.projects_;
+        projects_ == rhs.projects_ &&
+        msbuild_targets_ == rhs.msbuild_targets_;
 }
 
 element_repository& element_repository::operator=(element_repository other) {
@@ -95,6 +109,22 @@ void element_repository::projects(const std::unordered_map<std::string, boost::s
 
 void element_repository::projects(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::project> >&& v) {
     projects_ = std::move(v);
+}
+
+const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::msbuild_targets> >& element_repository::msbuild_targets() const {
+    return msbuild_targets_;
+}
+
+std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::msbuild_targets> >& element_repository::msbuild_targets() {
+    return msbuild_targets_;
+}
+
+void element_repository::msbuild_targets(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::msbuild_targets> >& v) {
+    msbuild_targets_ = v;
+}
+
+void element_repository::msbuild_targets(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::visual_studio::msbuild_targets> >&& v) {
+    msbuild_targets_ = std::move(v);
 }
 
 }

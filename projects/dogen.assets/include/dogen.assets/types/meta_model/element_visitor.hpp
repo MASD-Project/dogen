@@ -46,6 +46,7 @@
 #include "dogen.assets/types/meta_model/decoration/generation_marker_fwd.hpp"
 #include "dogen.assets/types/meta_model/serialization/type_registrar_fwd.hpp"
 #include "dogen.assets/types/meta_model/variability/profile_template_fwd.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/msbuild_targets_fwd.hpp"
 #include "dogen.assets/types/meta_model/templating/logic_less_template_fwd.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_template_initializer_fwd.hpp"
 
@@ -267,6 +268,16 @@ public:
     virtual void visit(const dogen::assets::meta_model::variability::profile_template&) { }
     virtual void visit(dogen::assets::meta_model::variability::profile_template&) const { }
     virtual void visit(dogen::assets::meta_model::variability::profile_template&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::assets::meta_model::visual_studio::msbuild_targets
+     */
+    /**@{*/
+    virtual void visit(const dogen::assets::meta_model::visual_studio::msbuild_targets&) const { }
+    virtual void visit(const dogen::assets::meta_model::visual_studio::msbuild_targets&) { }
+    virtual void visit(dogen::assets::meta_model::visual_studio::msbuild_targets&) const { }
+    virtual void visit(dogen::assets::meta_model::visual_studio::msbuild_targets&) { }
     /**@}*/
 
     /**
