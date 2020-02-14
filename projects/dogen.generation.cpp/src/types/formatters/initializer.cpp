@@ -20,7 +20,6 @@
  */
 #include "dogen.generation.cpp/types/formatters/include_cmakelists_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/source_cmakelists_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/msbuild_targets_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/templates/initializer.hpp"
 #include "dogen.generation.cpp/types/formatters/types/initializer.hpp"
 #include "dogen.generation.cpp/types/formatters/hash/initializer.hpp"
@@ -38,7 +37,6 @@ namespace dogen::generation::cpp::formatters {
 void initializer::initialize(registrar& rg) {
     register_formatter<include_cmakelists_formatter>(rg);
     register_formatter<source_cmakelists_formatter>(rg);
-    register_formatter<msbuild_targets_formatter>(rg);
 
     types::initializer::initialize(rg);
     hash::initializer::initialize(rg);

@@ -25,7 +25,6 @@
 #include "dogen.assets/types/helpers/name_factory.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
 #include "dogen.generation.cpp/types/fabric/cmakelists.hpp"
-#include "dogen.generation.cpp/types/fabric/msbuild_targets.hpp"
 #include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen.generation.cpp/types/fabric/build_files_factory.hpp"
 
@@ -35,7 +34,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.fabric"));
 
 const std::string cmakelists_name("CMakeLists");
-const std::string msbuild_targets_name("msbuild");
 
 }
 
@@ -64,33 +62,12 @@ make_cmakelists(const generation::meta_model::model& m) const {
     return r;
 }
 
-boost::shared_ptr<assets::meta_model::element> build_files_factory::
-make_msbuild_targets(const generation::meta_model::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Generating MSBuild Targets.";
-
-    assets::helpers::name_factory nf;
-    const auto n(nf.build_element_in_model(m.name(), msbuild_targets_name));
-    auto r(boost::make_shared<msbuild_targets>());
-    r->name(n);
-    r->meta_name(meta_name_factory::make_msbuild_targets_name());
-    r->origin_type(origin_types::target);
-    r->intrinsic_technical_space(technical_space::xml);
-    r->configuration(
-        boost::make_shared<variability::meta_model::configuration>());
-    r->configuration()->name().simple(n.simple());
-    r->configuration()->name().qualified(n.qualified().dot());
-
-    BOOST_LOG_SEV(lg, debug) << "Generated MSBuild Targets.";
-    return r;
-}
-
 std::list<boost::shared_ptr<assets::meta_model::element>> build_files_factory::
 make(const generation::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Build Files.";
 
     std::list<boost::shared_ptr<assets::meta_model::element>> r;
     r.push_back(make_cmakelists(m));
-    // r.push_back(make_msbuild_targets(m));
 
     BOOST_LOG_SEV(lg, debug) << "Generated Build Files.";
     return r;

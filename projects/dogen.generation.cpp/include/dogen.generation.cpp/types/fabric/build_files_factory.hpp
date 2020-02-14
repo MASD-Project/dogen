@@ -40,9 +40,6 @@ private:
     boost::shared_ptr<assets::meta_model::element>
     make_cmakelists(const generation::meta_model::model& m) const;
 
-    boost::shared_ptr<assets::meta_model::element>
-    make_msbuild_targets(const generation::meta_model::model& m) const;
-
 public:
     std::list<boost::shared_ptr<assets::meta_model::element>>
     make(const generation::meta_model::model& m) const;

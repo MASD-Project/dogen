@@ -179,16 +179,6 @@
           }
         },
         {
-          "name": "masd.generation.cpp.msbuild.enabled",
-          "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
-        },
-        {
           "name": "masd.generation.csharp.enabled",
           "type": "",
           "value": "false",

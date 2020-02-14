@@ -31,7 +31,6 @@
 #include "dogen.assets/types/meta_model/visual_studio/msbuild_targets.hpp"
 #include "dogen.generation.cpp/types/fabric/odb_target.hpp"
 #include "dogen.generation.cpp/types/fabric/cmakelists.hpp"
-#include "dogen.generation.cpp/types/fabric/msbuild_targets.hpp"
 #include "dogen.generation.cpp/types/fabric/odb_targets.hpp"
 #include "dogen.generation.cpp/types/element_visitor.hpp"
 #include "dogen.generation.cpp/types/formatters/odb/traits.hpp"
@@ -209,7 +208,6 @@ public:
 public:
     using element_visitor::visit;
     void visit(fabric::cmakelists& c);
-    void visit(fabric::msbuild_targets& mt);
     void visit(assets::meta_model::visual_studio::msbuild_targets& v);
 
 private:
@@ -230,10 +228,6 @@ void build_files_updater::visit(fabric::cmakelists& c) {
     c.tests_directory_name(locator_.tests_directory_name());
     c.header_file_extension(locator_.header_file_extension());
     c.implementation_file_extension(locator_.implementation_file_extension());
-}
-
-void build_files_updater::visit(fabric::msbuild_targets& mt) {
-    mt.odb_targets(targets_);
 }
 
 void build_files_updater::

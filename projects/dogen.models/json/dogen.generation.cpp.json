@@ -1629,26 +1629,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "fabric::msbuild_targets",
-      "tagged_values": {
-        "masd.generalization.parent": "assets::meta_model::element"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "odb_targets",
-          "type": "odb_targets"
-        }
-      ]
-    },
-    {
-      "name": "formatters::msbuild_targets_formatter",
-      "stereotypes": [
-        "dogen::cpp::artefact_formatter"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formatters::rapidjson",
       "documentation": "Formatters that enable serialisation into and\nfrom JSON,using the RapidJson library.\n",
       "tagged_values": {
@@ -2783,16 +2763,6 @@
           "tagged_values": {
             "masd.variability.binding_point": "global",
             "masd.variability.qualified_name": "masd.generation.cpp.cmake.include_cmakelists.postfix"
-          }
-        },
-        {
-          "name": "masd.generation.cpp.msbuild.targets.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\"",
-          "documentation": "Which postfix to use for msbuild.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.msbuild.targets.postfix"
           }
         }
       ]
