@@ -90,7 +90,7 @@ make(const generation::meta_model::model& m) const {
 
     std::list<boost::shared_ptr<assets::meta_model::element>> r;
     r.push_back(make_cmakelists(m));
-    r.push_back(make_msbuild_targets(m));
+    // r.push_back(make_msbuild_targets(m));
 
     BOOST_LOG_SEV(lg, debug) << "Generated Build Files.";
     return r;
