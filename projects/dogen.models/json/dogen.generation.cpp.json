@@ -3177,6 +3177,14 @@
           "tagged_values": {
             "masd.variability.qualified_name": "masd.generation.cpp.visual_studio.project.postfix"
           }
+        },
+        {
+          "name": "masd.generation.cpp.visual_studio.msbuild_targets.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.qualified_name": "masd.generation.cpp.visual_studio.msbuild_targets.postfix"
+          }
         }
       ]
     },
@@ -3218,6 +3226,13 @@
     },
     {
       "name": "formatters::odb::common_odb_options_formatter",
+      "stereotypes": [
+        "dogen::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::visual_studio::msbuild_targets_formatter",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
