@@ -46,9 +46,14 @@ struct traits {
     static std::string solution_archetype();
 
     /**
-     * @brief Visual Studio solution.
+     * @brief Visual Studio project.
      */
     static std::string project_archetype();
+
+    /**
+     * @brief Visual Studio msbuild targets.
+     */
+    static std::string msbuild_targets_archetype();
 };
 
 }

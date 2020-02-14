@@ -42,4 +42,9 @@ std::string traits::project_archetype() {
     return r;
 }
 
+std::string traits::msbuild_targets_archetype() {
+    static std::string r("masd.generation.cpp.visual_studio.msbuild_targets");
+    return r;
+}
+
 }
