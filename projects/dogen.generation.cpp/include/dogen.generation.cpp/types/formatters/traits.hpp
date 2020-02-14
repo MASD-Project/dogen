@@ -38,8 +38,6 @@ struct traits {
     static std::string cmake_facet();
     static std::string include_cmakelists_archetype();
     static std::string source_cmakelists_archetype();
-    static std::string msbuild_facet();
-    static std::string msbuild_targets_archetype();
 
     static std::string canonical_archetype(const std::string& facet);
 };
