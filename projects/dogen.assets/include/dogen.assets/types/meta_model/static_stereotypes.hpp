@@ -58,7 +58,8 @@ enum class static_stereotypes : unsigned int {
     serialization_type_registrar = 24,
     visual_studio_solution = 25,
     visual_studio_project = 26,
-    orm_common_odb_options = 27
+    visual_studio_msbuild_targets = 27,
+    orm_common_odb_options = 28
 };
 
 }

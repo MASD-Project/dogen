@@ -1539,6 +1539,10 @@
           "type": ""
         },
         {
+          "name": "visual_studio_msbuild_targets",
+          "type": ""
+        },
+        {
           "name": "orm_common_odb_options",
           "type": ""
         }
