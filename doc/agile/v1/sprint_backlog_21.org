@@ -12,33 +12,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-02-14 Fri 12:17]
+#+CAPTION: Clock summary at [2020-02-14 Fri 16:50]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *67:29* |       |       | 100.0 |
+| *Total time*                                          | *70:02* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 67:29   |       |       | 100.0 |
-| Active                                                |         | 67:29 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  7:01 |  10.4 |
-| Create a demo and presentation for previous sprint    |         |       |  1:49 |   2.7 |
-| Sprint and product backlog grooming                   |         |       |  3:38 |   5.4 |
-| Create new playlist for assets work                   |         |       |  2:19 |   3.4 |
+| Stories                                               | 70:02   |       |       | 100.0 |
+| Active                                                |         | 70:02 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  7:01 |  10.0 |
+| Create a demo and presentation for previous sprint    |         |       |  1:49 |   2.6 |
+| Sprint and product backlog grooming                   |         |       |  3:38 |   5.2 |
+| Create new playlist for assets work                   |         |       |  2:19 |   3.3 |
 | Create the final video on the relational model series |         |       |  0:30 |   0.7 |
-| Move registrar into assets                            |         |       |  5:34 |   8.2 |
+| Move registrar into assets                            |         |       |  5:34 |   7.9 |
 | Fix error in asserter tests                           |         |       |  0:38 |   0.9 |
 | Add injection details to all models                   |         |       |  0:25 |   0.6 |
 | Fix nightly error in registrar                        |         |       |  0:33 |   0.8 |
 | Nightly code coverage is not being reported           |         |       |  0:25 |   0.6 |
-| Move visual studio fabric types into assets           |         |       | 18:34 |  27.5 |
-| Create metamodel elements for =entry_point=           |         |       |  7:18 |  10.8 |
-| Remove support for element extensions                 |         |       |  0:44 |   1.1 |
-| Move =object_odb_options= into assets                 |         |       |  6:43 |  10.0 |
-| Move common ODB options into assets                   |         |       |  4:34 |   6.8 |
-| Fixes to setup                                        |         |       |  1:05 |   1.6 |
+| Move visual studio fabric types into assets           |         |       | 18:34 |  26.5 |
+| Create metamodel elements for =entry_point=           |         |       |  7:18 |  10.4 |
+| Remove support for element extensions                 |         |       |  0:44 |   1.0 |
+| Move =object_odb_options= into assets                 |         |       |  6:43 |   9.6 |
+| Move common ODB options into assets                   |         |       |  4:34 |   6.5 |
+| Fixes to setup                                        |         |       |  1:05 |   1.5 |
 | Cannot see source file in coveralls                   |         |       |  0:16 |   0.4 |
-| Integration of archetypes into assets                 |         |       |  2:41 |   4.0 |
-| Move msbuild and cmakelists into assets               |         |       |  2:42 |   4.0 |
+| Integration of archetypes into assets                 |         |       |  2:41 |   3.8 |
+| Move msbuild and cmakelists into assets               |         |       |  5:15 |   7.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1102,6 +1102,7 @@ components, each with their own primary technical space.
 
 *** STARTED Move msbuild and cmakelists into assets                   :story:
     :LOGBOOK:
+    CLOCK: [2020-02-14 Fri 14:22]--[2020-02-14 Fri 16:55] =>  2:33
     CLOCK: [2020-02-14 Fri 11:58]--[2020-02-14 Fri 12:18] =>  0:20
     CLOCK: [2020-02-14 Fri 09:51]--[2020-02-14 Fri 11:41] =>  2:07
     CLOCK: [2020-02-12 Wed 23:40]--[2020-02-13 Thu 00:10] =>  0:30
