@@ -1531,11 +1531,11 @@
           "type": ""
         },
         {
-          "name": "build_visual_studio_solution",
+          "name": "visual_studio_solution",
           "type": ""
         },
         {
-          "name": "build_visual_studio_project",
+          "name": "visual_studio_project",
           "type": ""
         },
         {

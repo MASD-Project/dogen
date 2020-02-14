@@ -105,11 +105,11 @@ std::ostream& operator<<(std::ostream& s, const static_stereotypes& v) {
     case static_stereotypes::serialization_type_registrar:
         attr = "\"serialization_type_registrar\"";
         break;
-    case static_stereotypes::build_visual_studio_solution:
-        attr = "\"build_visual_studio_solution\"";
+    case static_stereotypes::visual_studio_solution:
+        attr = "\"visual_studio_solution\"";
         break;
-    case static_stereotypes::build_visual_studio_project:
-        attr = "\"build_visual_studio_project\"";
+    case static_stereotypes::visual_studio_project:
+        attr = "\"visual_studio_project\"";
         break;
     case static_stereotypes::orm_common_odb_options:
         attr = "\"orm_common_odb_options\"";

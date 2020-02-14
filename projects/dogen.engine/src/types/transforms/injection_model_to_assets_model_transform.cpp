@@ -251,11 +251,11 @@ process_element(const helpers::adapter& ad,
         insert(ad.to_type_registrar(l, scr, e),
             m.serialization_elements().type_registrars());
         break;
-    case static_stereotypes::build_visual_studio_solution:
+    case static_stereotypes::visual_studio_solution:
         insert(ad.to_visual_studio_solution(l, scr, e),
             m.visual_studio_elements().solutions());
         break;
-    case static_stereotypes::build_visual_studio_project:
+    case static_stereotypes::visual_studio_project:
         insert(ad.to_visual_studio_project(l, scr, e),
             m.visual_studio_elements().projects());
         break;
