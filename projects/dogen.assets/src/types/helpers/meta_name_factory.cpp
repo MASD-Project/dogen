@@ -152,7 +152,7 @@ meta_model::name meta_name_factory::make_visual_studio_project_name() {
     return r;
 }
 
-meta_model::name meta_name_factory::make_visual_studio_msbuild_targets() {
+meta_model::name meta_name_factory::make_visual_studio_msbuild_targets_name() {
     static const auto r(
         make_name("visual_studio_msbuild_targets"));
     return r;
