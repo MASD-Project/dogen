@@ -58,6 +58,7 @@
 #include "dogen.assets/types/meta_model/serialization/type_registrar.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/solution.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/project.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/msbuild_targets.hpp"
 #include "dogen.assets/types/meta_model/orm/common_odb_options.hpp"
 #include "dogen.engine/types/helpers/stereotypes_conversion_result.hpp"
 
@@ -338,6 +339,15 @@ public:
      */
     boost::shared_ptr<assets::meta_model::visual_studio::project>
     to_visual_studio_project(const assets::meta_model::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::meta_model::element& ie) const;
+
+    /**
+     * @brief Converts an injection element with a stereotype of
+     * @e masd::visual_studio::project.
+     */
+    boost::shared_ptr<assets::meta_model::visual_studio::msbuild_targets>
+    to_visual_studio_msbuild_targets(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
