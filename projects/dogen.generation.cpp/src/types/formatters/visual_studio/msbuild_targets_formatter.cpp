@@ -24,13 +24,14 @@
 #include "dogen.assets/types/meta_model/visual_studio/msbuild_targets.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
-#include "dogen.generation.cpp/types/traits.hpp"
+#include "dogen.generation.cpp/types/formatters/visual_studio/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/traits.hpp"
+#include "dogen.generation.cpp/types/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/formatters/formatting_error.hpp"
-#include "dogen.generation.cpp/types/formatters/msbuild_targets_formatter.hpp"
+#include "dogen.generation.cpp/types/formatters/visual_studio/msbuild_targets_formatter.hpp"
 
-namespace dogen::generation::cpp::formatters {
+namespace dogen::generation::cpp::formatters::visual_studio {
 
 std::string msbuild_targets_formatter::static_id() {
     return traits::msbuild_targets_archetype();
@@ -45,7 +46,7 @@ archetypes::location
 msbuild_targets_formatter::archetype_location() const {
     static archetypes::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
-          traits::msbuild_facet(),
+          traits::facet(),
           msbuild_targets_formatter::static_id());
     return r;
 }
