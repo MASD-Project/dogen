@@ -23,9 +23,12 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/pair_io.hpp"
+#include "dogen.assets/types/meta_model/orm/odb_target.hpp"
+#include "dogen.assets/types/meta_model/orm/odb_targets.hpp"
 #include "dogen.assets/types/meta_model/orm/common_odb_options.hpp"
 #include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.assets/types/meta_model/structural/primitive.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/msbuild_targets.hpp"
 #include "dogen.generation.cpp/types/fabric/odb_target.hpp"
 #include "dogen.generation.cpp/types/fabric/cmakelists.hpp"
 #include "dogen.generation.cpp/types/fabric/msbuild_targets.hpp"
@@ -57,13 +60,19 @@ bool odb_target_comparer(
     return lhs.name() < rhs.name();
 }
 
+bool new_odb_target_comparer(const assets::meta_model::orm::odb_target& lhs,
+    const assets::meta_model::orm::odb_target& rhs) {
+    return lhs.name() < rhs.name();
+}
+
 class odb_targets_factory : public element_visitor {
 public:
     odb_targets_factory(const model& fm,
         const locator& l, const assets::meta_model::name& model_name);
 
 private:
-    void generate_targets(const assets::meta_model::name& n);
+    template<typename OdbTargets>
+    OdbTargets generate_targets(const assets::meta_model::name& n);
 
 public:
     using element_visitor::visit;
@@ -73,12 +82,14 @@ public:
 
 public:
     const fabric::odb_targets& result() const;
+    const assets::meta_model::orm::odb_targets& new_result() const;
 
 private:
     const model& model_;
     const locator locator_;
     const std::string target_name_;
     fabric::odb_targets result_;
+    assets::meta_model::orm::odb_targets new_result_;
 };
 
 odb_targets_factory::odb_targets_factory(const model& fm, const locator& l,
@@ -87,13 +98,15 @@ odb_targets_factory::odb_targets_factory(const model& fm, const locator& l,
       target_name_("odb_" + boost::join(model_name.location().model_modules(),
               separator)) {
     result_.main_target_name(target_name_);
+    new_result_.main_target_name(target_name_);
 }
 
-void odb_targets_factory::
-generate_targets(const assets::meta_model::name& n) {
-    fabric::odb_target t;
-    t.name(target_name_ + separator + n.simple());
-    t.comment("ODB " + n.simple());
+template<typename OdbTarget>
+OdbTarget
+odb_targets_factory::generate_targets(const assets::meta_model::name& n) {
+    OdbTarget r;
+    r.name(target_name_ + separator + n.simple());
+    r.comment("ODB " + n.simple());
 
     /*
      * We need to compute relative paths, from the project directory
@@ -105,15 +118,15 @@ generate_targets(const assets::meta_model::name& n) {
         .parent_path());
     const auto src_dir(l.make_full_path_to_implementation_directory());
     const auto rp(odb_fp.lexically_relative(src_dir));
-    t.output_directory(rp.generic_string());
+    r.output_directory(rp.generic_string());
 
     const auto types_arch(formatters::types::traits::class_header_archetype());
     const auto tp(l.make_full_path_for_cpp_header(n, types_arch));
-    t.types_file(tp.lexically_relative(src_dir).generic_string());
+    r.types_file(tp.lexically_relative(src_dir).generic_string());
 
     const auto odb_options_rp(locator_.make_relative_path_for_odb_options(n,
             odb_arch, false/*include_source_directory*/));
-    t.object_odb_options(odb_options_rp.generic_string());
+    r.object_odb_options(odb_options_rp.generic_string());
 
     BOOST_LOG_SEV(lg, debug) << "Databases: " << model_.odb_databases();
     const auto odb_rp(odb_options_rp.parent_path().generic_string());
@@ -131,17 +144,21 @@ generate_targets(const assets::meta_model::name& n) {
         const auto file_name(os.str());
 
         std::pair<std::string, std::string> pair;
-        pair.first = t.output_directory() + "/" + file_name;
+        pair.first = r.output_directory() + "/" + file_name;
         pair.second = odb_rp + "/";
-        t.move_parameters().push_back(pair);
+        r.move_parameters().push_back(pair);
     }
-    result_.targets().push_back(t);
+    return r;
 }
 
 void odb_targets_factory::
 visit(const assets::meta_model::orm::common_odb_options& coo) {
     const auto arch(formatters::odb::traits::common_odb_options_archetype());
     result_.common_odb_options(
+        locator_.make_relative_path_for_odb_options(coo.name(), arch,
+            false/*include_source_directory*/).generic_string()
+        );
+    new_result_.common_odb_options(
         locator_.make_relative_path_for_odb_options(coo.name(), arch,
             false/*include_source_directory*/).generic_string()
         );
@@ -156,7 +173,9 @@ visit(const assets::meta_model::structural::object& o) {
         return;
 
     const auto& n(o.name());
-    generate_targets(n);
+    result_.targets().push_back(generate_targets<fabric::odb_target>(n));
+    new_result_.targets().push_back(
+        generate_targets<assets::meta_model::orm::odb_target>(n));
 }
 
 void odb_targets_factory::
@@ -168,29 +187,41 @@ visit(const assets::meta_model::structural::primitive& p) {
         return;
 
     const auto& n(p.name());
-    generate_targets(n);
+    result_.targets().push_back(generate_targets<fabric::odb_target>(n));
+    new_result_.targets().push_back(
+        generate_targets<assets::meta_model::orm::odb_target>(n));
 }
 
 const fabric::odb_targets& odb_targets_factory::result() const {
     return result_;
 }
 
+const assets::meta_model::orm::odb_targets&
+odb_targets_factory::new_result() const {
+    return new_result_;
+}
+
 class build_files_updater : public element_visitor {
 public:
-    build_files_updater(const locator& l, const fabric::odb_targets& targets);
+    build_files_updater(const locator& l, const fabric::odb_targets& targets,
+        const assets::meta_model::orm::odb_targets& new_targets);
 
 public:
     using element_visitor::visit;
     void visit(fabric::cmakelists& c);
     void visit(fabric::msbuild_targets& mt);
+    void visit(assets::meta_model::visual_studio::msbuild_targets& v);
 
 private:
     const locator& locator_;
     const fabric::odb_targets& targets_;
+    const assets::meta_model::orm::odb_targets& new_targets_;
 };
 
 build_files_updater::build_files_updater(const locator& l,
-    const fabric::odb_targets& targets) : locator_(l), targets_(targets) {}
+    const fabric::odb_targets& targets,
+    const assets::meta_model::orm::odb_targets& new_targets)
+    : locator_(l), targets_(targets), new_targets_(new_targets) {}
 
 void build_files_updater::visit(fabric::cmakelists& c) {
     c.odb_targets(targets_);
@@ -203,6 +234,11 @@ void build_files_updater::visit(fabric::cmakelists& c) {
 
 void build_files_updater::visit(fabric::msbuild_targets& mt) {
     mt.odb_targets(targets_);
+}
+
+void build_files_updater::
+visit(assets::meta_model::visual_studio::msbuild_targets& v) {
+    v.odb_targets(new_targets_);
 }
 
 void build_files_expander::expand(const locator& l, model& fm) const {
@@ -229,10 +265,20 @@ void build_files_expander::expand(const locator& l, model& fm) const {
      * stable. We obtained the formattables from an unordered map so
      * they could have come in in any order.
      */
-    auto odb_targets(f.result());
-    odb_targets.targets().sort(odb_target_comparer);
+    const auto odb_targets(
+        [&]() {
+            auto r(f.result());
+            r.targets().sort(odb_target_comparer);
+            return r;
+        }());
+    const auto new_odb_targets(
+        [&]() {
+            auto r(f.new_result());
+            r.targets().sort(new_odb_target_comparer);
+            return r;
+        }());
 
-    build_files_updater cu(l, odb_targets);
+    build_files_updater u(l, odb_targets, new_odb_targets);
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
@@ -245,7 +291,7 @@ void build_files_expander::expand(const locator& l, model& fm) const {
         }
 
         auto& e(*segment);
-        e.accept(cu);
+        e.accept(u);
     }
 }
 
