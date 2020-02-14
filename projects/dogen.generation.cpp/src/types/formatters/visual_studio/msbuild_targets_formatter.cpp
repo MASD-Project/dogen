@@ -20,9 +20,9 @@
  */
 #include <boost/make_shared.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.assets/types/helpers/meta_name_factory.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/msbuild_targets.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
-#include "dogen.generation.cpp/types/fabric/meta_name_factory.hpp"
-#include "dogen.generation.cpp/types/fabric/msbuild_targets.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/traits.hpp"
@@ -51,7 +51,8 @@ msbuild_targets_formatter::archetype_location() const {
 }
 
 const assets::meta_model::name& msbuild_targets_formatter::meta_name() const {
-    static auto r(fabric::meta_name_factory::make_msbuild_targets_name());
+    using assets::helpers::meta_name_factory;
+    static auto r(meta_name_factory::make_visual_studio_msbuild_targets_name());
     return r;
 }
 
@@ -92,7 +93,8 @@ std::list<std::string> msbuild_targets_formatter::inclusion_dependencies(
 extraction::meta_model::artefact msbuild_targets_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& c(a.as<fabric::msbuild_targets>(e));
+    using assets::meta_model::visual_studio::msbuild_targets;
+    const auto& c(a.as<msbuild_targets>(e));
 
     {
         const auto ts(assets::meta_model::technical_space::xml);
