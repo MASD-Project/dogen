@@ -631,10 +631,10 @@ boost::filesystem::path locator::make_full_path_for_tests_cmakelists(
 }
 
 boost::filesystem::path locator::
-make_full_path_for_msbuild_targets(const assets::meta_model::name& /*n*/,
+make_full_path_for_msbuild_targets(const assets::meta_model::name& n,
     const std::string& /*archetype*/) const {
     auto r(make_full_path_to_implementation_directory());
-    r /= "msbuild.targets"; // FIXME: hack
+    r /= n.simple() + ".targets"; // FIXME: hack
     return r;
 }
 

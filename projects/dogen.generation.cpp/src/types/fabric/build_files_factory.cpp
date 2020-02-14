@@ -35,7 +35,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("generation.cpp.fabric"));
 
 const std::string cmakelists_name("CMakeLists");
-const std::string msbuild_targets_name("msbuild_targets");
+const std::string msbuild_targets_name("msbuild");
 
 }
 
