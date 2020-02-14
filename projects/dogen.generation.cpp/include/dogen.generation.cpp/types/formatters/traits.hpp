@@ -41,13 +41,6 @@ struct traits {
     static std::string msbuild_facet();
     static std::string msbuild_targets_archetype();
 
-    static std::string visual_studio_facet();
-    static std::string visual_studio_project_archetype();
-    static std::string visual_studio_solution_archetype();
-
-    static std::string visual_studio_project_solution_guid();
-    static std::string visual_studio_project_guid();
-
     static std::string canonical_archetype(const std::string& facet);
 };
 

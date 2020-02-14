@@ -59,33 +59,8 @@ std::string traits::msbuild_targets_archetype() {
     return r;
 }
 
-std::string traits::visual_studio_facet() {
-    static std::string r("masd.generation.cpp.visual_studio");
-    return r;
-}
-
-std::string traits::visual_studio_project_archetype() {
-    static std::string r("masd.generation.cpp.visual_studio.project");
-    return r;
-}
-
-std::string traits::visual_studio_solution_archetype() {
-    static std::string r("masd.generation.cpp.visual_studio.solution");
-    return r;
-}
-
 std::string traits::canonical_archetype(const std::string& facet) {
     return facet + canonical_archetype_postfix;
-}
-
-std::string traits::visual_studio_project_solution_guid() {
-    static std::string r("masd.generation.cpp.visual_studio.project_solution_guid");
-    return r;
-}
-
-std::string traits::visual_studio_project_guid() {
-    static std::string r("masd.generation.cpp.visual_studio.project_guid");
-    return r;
 }
 
 }
