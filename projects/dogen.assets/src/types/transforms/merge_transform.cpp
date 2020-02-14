@@ -89,6 +89,8 @@ merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
         << src.visual_studio_elements().solutions().size()
         << " visual studio projects: "
         << src.visual_studio_elements().projects().size()
+        << " visual studio projects: "
+        << src.visual_studio_elements().msbuild_targets().size()
         << " ORM common ODB options: "
         << src.orm_elements().common_odb_options().size();
 
@@ -128,6 +130,8 @@ merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
         dst.visual_studio_elements().solutions());
     copy(src.visual_studio_elements().projects(),
         dst.visual_studio_elements().projects());
+    copy(src.visual_studio_elements().msbuild_targets(),
+        dst.visual_studio_elements().msbuild_targets());
     copy(src.orm_elements().common_odb_options(),
         dst.orm_elements().common_odb_options());
 
