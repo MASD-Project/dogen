@@ -140,11 +140,11 @@ for layer in dia.active_display().diagram.data.layers:
         #
         # Theme: Build
         #
-        elif "masd::build::visual_studio::solution" in stereotype:
+        elif "masd::visual_studio::solution" in stereotype:
             object.properties["fill_colour"] = "#5768FF"
-        elif "masd::build::visual_studio::project" in stereotype:
+        elif "masd::visual_studio::project" in stereotype:
             object.properties["fill_colour"] = "#909BFF"
-        elif "masd::build::visual_studio::msbuild_targets" in stereotype:
+        elif "masd::visual_studio::msbuild_targets" in stereotype:
             object.properties["fill_colour"] = "#535A99"
 
         #

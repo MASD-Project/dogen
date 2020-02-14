@@ -71,11 +71,11 @@ const std::string stereotype_templating_logic_less_templates(
 const std::string stereotype_serialization_type_registrar(
     "masd::serialization::type_registrar");
 const std::string stereotype_visual_studio_solution(
-    "masd::build::visual_studio::solution");
+    "masd::visual_studio::solution");
 const std::string stereotype_visual_studio_project(
-    "masd::build::visual_studio::project");
+    "masd::visual_studio::project");
 const std::string stereotype_visual_studio_msbuild_targets(
-    "masd::build::visual_studio::msbuild_targets");
+    "masd::visual_studio::msbuild_targets");
 const std::string stereotype_orm_common_odb_options(
     "masd::orm::common_odb_options");
 const std::string unsupported_stereotype("Invalid or unsupported stereotype: ");
