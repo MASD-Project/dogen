@@ -523,6 +523,17 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
             lambda(odb_ts);
             BOOST_LOG_SEV(lg, trace) << "Added decoration for ODB.";
         }
+
+        /*
+         * FIXME: hack for XML. We inject it regardless, just so that
+         * when the formatters create the ODB options, it is
+         * available.
+         */
+        const auto xml_ts(assets::meta_model::technical_space::xml);
+        if (ts != xml_ts) {
+            lambda(xml_ts);
+            BOOST_LOG_SEV(lg, trace) << "Added decoration for ODB.";
+        }
     }
     stp.end_transform(m);
 }
