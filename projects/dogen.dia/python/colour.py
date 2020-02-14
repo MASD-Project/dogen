@@ -144,6 +144,8 @@ for layer in dia.active_display().diagram.data.layers:
             object.properties["fill_colour"] = "#5768FF"
         elif "masd::build::visual_studio::project" in stereotype:
             object.properties["fill_colour"] = "#909BFF"
+        elif "masd::build::visual_studio::msbuild_targets" in stereotype:
+            object.properties["fill_colour"] = "#535A99"
 
         #
         # Theme: Core meta-elements
