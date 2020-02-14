@@ -489,6 +489,10 @@
         {
           "name": "orm_elements",
           "type": "orm::element_repository"
+        },
+        {
+          "name": "build_elements",
+          "type": "build::element_repository"
         }
       ]
     },
@@ -3682,6 +3686,58 @@
         {
           "name": "odb_targets",
           "type": "dogen::assets::meta_model::orm::odb_targets"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::build",
+      "documentation": "Houses all of the meta-modeling elements related\nto building, which don't have their own containing\nnamespace.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "meta_model::build::element_repository",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "cmakelists",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<cmakelists>>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::build::cmakelists",
+      "documentation": "Represents build CMakeLists files.\n",
+      "stereotypes": [
+        "assets::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "include_directory_path",
+          "type": "std::string"
+        },
+        {
+          "name": "source_directory_name",
+          "type": "std::string"
+        },
+        {
+          "name": "header_file_extension",
+          "type": "std::string"
+        },
+        {
+          "name": "implementation_file_extension",
+          "type": "std::string"
+        },
+        {
+          "name": "odb_targets",
+          "type": "dogen::assets::meta_model::orm::odb_targets"
+        },
+        {
+          "name": "tests_directory_name",
+          "type": "std::string"
         }
       ]
     }

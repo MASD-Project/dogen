@@ -56,7 +56,8 @@ model::model(model&& rhs)
       templating_elements_(std::move(rhs.templating_elements_)),
       serialization_elements_(std::move(rhs.serialization_elements_)),
       visual_studio_elements_(std::move(rhs.visual_studio_elements_)),
-      orm_elements_(std::move(rhs.orm_elements_)) { }
+      orm_elements_(std::move(rhs.orm_elements_)),
+      build_elements_(std::move(rhs.build_elements_)) { }
 
 model::model(
     const dogen::assets::meta_model::name& name,
@@ -78,7 +79,8 @@ model::model(
     const dogen::assets::meta_model::templating::element_repository& templating_elements,
     const dogen::assets::meta_model::serialization::element_repository& serialization_elements,
     const dogen::assets::meta_model::visual_studio::element_repository& visual_studio_elements,
-    const dogen::assets::meta_model::orm::element_repository& orm_elements)
+    const dogen::assets::meta_model::orm::element_repository& orm_elements,
+    const dogen::assets::meta_model::build::element_repository& build_elements)
     : name_(name),
       meta_name_(meta_name),
       origin_type_(origin_type),
@@ -98,7 +100,8 @@ model::model(
       templating_elements_(templating_elements),
       serialization_elements_(serialization_elements),
       visual_studio_elements_(visual_studio_elements),
-      orm_elements_(orm_elements) { }
+      orm_elements_(orm_elements),
+      build_elements_(build_elements) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -122,6 +125,7 @@ void model::swap(model& other) noexcept {
     swap(serialization_elements_, other.serialization_elements_);
     swap(visual_studio_elements_, other.visual_studio_elements_);
     swap(orm_elements_, other.orm_elements_);
+    swap(build_elements_, other.build_elements_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -144,7 +148,8 @@ bool model::operator==(const model& rhs) const {
         templating_elements_ == rhs.templating_elements_ &&
         serialization_elements_ == rhs.serialization_elements_ &&
         visual_studio_elements_ == rhs.visual_studio_elements_ &&
-        orm_elements_ == rhs.orm_elements_;
+        orm_elements_ == rhs.orm_elements_ &&
+        build_elements_ == rhs.build_elements_;
 }
 
 model& model::operator=(model other) {
@@ -455,6 +460,22 @@ void model::orm_elements(const dogen::assets::meta_model::orm::element_repositor
 
 void model::orm_elements(const dogen::assets::meta_model::orm::element_repository&& v) {
     orm_elements_ = std::move(v);
+}
+
+const dogen::assets::meta_model::build::element_repository& model::build_elements() const {
+    return build_elements_;
+}
+
+dogen::assets::meta_model::build::element_repository& model::build_elements() {
+    return build_elements_;
+}
+
+void model::build_elements(const dogen::assets::meta_model::build::element_repository& v) {
+    build_elements_ = v;
+}
+
+void model::build_elements(const dogen::assets::meta_model::build::element_repository&& v) {
+    build_elements_ = std::move(v);
 }
 
 }

@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include "dogen.assets/types/meta_model/build/cmakelists_fwd.hpp"
 #include "dogen.assets/types/meta_model/structural/module_fwd.hpp"
 #include "dogen.assets/types/meta_model/structural/object_fwd.hpp"
 #include "dogen.assets/types/meta_model/decoration/licence_fwd.hpp"
@@ -60,6 +61,16 @@ public:
     virtual ~element_visitor() noexcept = 0;
 
 public:
+    /**
+     * @brief Accept visits for type dogen::assets::meta_model::build::cmakelists
+     */
+    /**@{*/
+    virtual void visit(const dogen::assets::meta_model::build::cmakelists&) const { }
+    virtual void visit(const dogen::assets::meta_model::build::cmakelists&) { }
+    virtual void visit(dogen::assets::meta_model::build::cmakelists&) const { }
+    virtual void visit(dogen::assets::meta_model::build::cmakelists&) { }
+    /**@}*/
+
     /**
      * @brief Accept visits for type dogen::assets::meta_model::decoration::generation_marker
      */
