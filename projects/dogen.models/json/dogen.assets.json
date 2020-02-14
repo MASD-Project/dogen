@@ -1549,6 +1549,10 @@
         {
           "name": "orm_common_odb_options",
           "type": ""
+        },
+        {
+          "name": "build_cmakelists",
+          "type": ""
         }
       ]
     },

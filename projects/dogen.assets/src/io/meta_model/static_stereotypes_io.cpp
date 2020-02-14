@@ -117,6 +117,9 @@ std::ostream& operator<<(std::ostream& s, const static_stereotypes& v) {
     case static_stereotypes::orm_common_odb_options:
         attr = "\"orm_common_odb_options\"";
         break;
+    case static_stereotypes::build_cmakelists:
+        attr = "\"build_cmakelists\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for static_stereotypes");
     }
