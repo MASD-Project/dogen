@@ -19,6 +19,7 @@
  *
  */
 #include "dogen.assets/types/meta_model/orm/common_odb_options.hpp"
+#include "dogen.assets/types/meta_model/visual_studio/msbuild_targets.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.assets/types/meta_model/model.hpp"
@@ -149,6 +150,11 @@ public:
 
     void operator()(assets::meta_model::visual_studio::project& v) {
         static const auto n(mnf::make_visual_studio_project_name());
+        v.meta_name(n);
+    }
+
+    void operator()(assets::meta_model::visual_studio::msbuild_targets& v) {
+        static const auto n(mnf::make_visual_studio_msbuild_targets_name());
         v.meta_name(n);
     }
 
