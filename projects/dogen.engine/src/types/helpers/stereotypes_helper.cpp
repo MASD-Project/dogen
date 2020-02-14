@@ -74,6 +74,8 @@ const std::string stereotype_visual_studio_solution(
     "masd::build::visual_studio::solution");
 const std::string stereotype_visual_studio_project(
     "masd::build::visual_studio::project");
+const std::string stereotype_visual_studio_msbuild_targets(
+    "masd::build::visual_studio::msbuild_targets");
 const std::string stereotype_orm_common_odb_options(
     "masd::orm::common_odb_options");
 const std::string unsupported_stereotype("Invalid or unsupported stereotype: ");
@@ -139,6 +141,8 @@ static_stereotypes stereotypes_helper::from_string(const std::string& s) const {
         return static_stereotypes::visual_studio_solution;
     else if (s == stereotype_visual_studio_project)
         return static_stereotypes::visual_studio_project;
+    else if (s == stereotype_visual_studio_msbuild_targets)
+        return static_stereotypes::visual_studio_msbuild_targets;
     else if (s == stereotype_orm_common_odb_options)
         return static_stereotypes::orm_common_odb_options;
 
@@ -225,6 +229,8 @@ to_string(const static_stereotypes ss) const {
         return stereotype_visual_studio_solution;
     case static_stereotypes::visual_studio_project:
         return stereotype_visual_studio_project;
+    case static_stereotypes::visual_studio_msbuild_targets:
+        return stereotype_visual_studio_msbuild_targets;
     case static_stereotypes::orm_common_odb_options:
         return stereotype_orm_common_odb_options;
 
@@ -260,6 +266,7 @@ is_element_type(const static_stereotypes ss) const {
         ss == static_stereotypes::serialization_type_registrar ||
         ss == static_stereotypes::visual_studio_solution ||
         ss == static_stereotypes::visual_studio_project ||
+        ss == static_stereotypes::visual_studio_msbuild_targets ||
         ss ==  static_stereotypes::orm_common_odb_options;
 }
 
