@@ -71,11 +71,12 @@ void decomposer::decompose_element(const meta_model::element& e) {
 }
 
 void decomposer::operator()(const meta_model::element& e) {
+    decompose_element(e);
     /*
      * Injected names go to a separate validation bucket.
      */
-    add_injected_name(e.name().qualified().dot(), e.name());
-    add_meta_name(e.name().qualified().dot(), e.meta_name());
+    // add_injected_name(e.name().qualified().dot(), e.name());
+    // add_meta_name(e.name().qualified().dot(), e.meta_name());
 }
 
 void decomposer::operator()(const meta_model::structural::module& m) {
