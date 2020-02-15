@@ -43,6 +43,7 @@ if [ ! -d "${git_dir}" ]; then
     git clone ${git_url} ${git_dir}
 fi
 cd ${git_dir}
+git pull origin master
 
 compiler=${clang_compiler}
 ctest --extra-verbose --script ".ctest.cmake,configuration_type=${configuration},generator=${generator},compiler=${compiler},number_of_jobs=${JOBS},build_group=${build_group}"  > ${logs_dir}/ctest_${product}_${compiler}.log 2>&1
@@ -62,7 +63,7 @@ fi
 
 pristine_dir="${workspace}/${product}_pristine"
 if [ -d "${pristine_dir}" ]; then
-    rm -rf ${git_dir}
+    rm -rf ${pristine_dir}
 fi
 
 git clone --depth=3 ${git_url} ${git_dir}
