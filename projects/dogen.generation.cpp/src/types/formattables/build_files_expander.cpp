@@ -52,7 +52,7 @@ const std::string missing_qualified_name(
 
 namespace dogen::generation::cpp::formattables {
 
-bool new_odb_target_comparer(const assets::meta_model::orm::odb_target& lhs,
+bool odb_target_comparer(const assets::meta_model::orm::odb_target& lhs,
     const assets::meta_model::orm::odb_target& rhs) {
     return lhs.name() < rhs.name();
 }
@@ -75,13 +75,13 @@ public:
     void visit(const assets::meta_model::structural::primitive& p);
 
 public:
-    const assets::meta_model::orm::odb_targets& new_result() const;
+    const assets::meta_model::orm::odb_targets& result() const;
 
 private:
     const model& model_;
     const locator locator_;
     const std::string target_name_;
-    assets::meta_model::orm::odb_targets new_result_;
+    assets::meta_model::orm::odb_targets result_;
 };
 
 odb_targets_factory::odb_targets_factory(const model& fm, const locator& l,
@@ -89,7 +89,7 @@ odb_targets_factory::odb_targets_factory(const model& fm, const locator& l,
     : model_(fm), locator_(l),
       target_name_("odb_" + boost::join(model_name.location().model_modules(),
               separator)) {
-    new_result_.main_target_name(target_name_);
+    result_.main_target_name(target_name_);
 }
 
 template<typename OdbTarget>
@@ -145,7 +145,7 @@ generate_targets(const assets::meta_model::name& n) {
 void odb_targets_factory::
 visit(const assets::meta_model::orm::common_odb_options& coo) {
     const auto arch(formatters::odb::traits::common_odb_options_archetype());
-    new_result_.common_odb_options(
+    result_.common_odb_options(
         locator_.make_relative_path_for_odb_options(coo.name(), arch,
             false/*include_source_directory*/).generic_string()
         );
@@ -160,7 +160,7 @@ visit(const assets::meta_model::structural::object& o) {
         return;
 
     const auto& n(o.name());
-    new_result_.targets().push_back(
+    result_.targets().push_back(
         generate_targets<assets::meta_model::orm::odb_target>(n));
 }
 
@@ -173,19 +173,19 @@ visit(const assets::meta_model::structural::primitive& p) {
         return;
 
     const auto& n(p.name());
-    new_result_.targets().push_back(
+    result_.targets().push_back(
         generate_targets<assets::meta_model::orm::odb_target>(n));
 }
 
 const assets::meta_model::orm::odb_targets&
-odb_targets_factory::new_result() const {
-    return new_result_;
+odb_targets_factory::result() const {
+    return result_;
 }
 
 class build_files_updater : public element_visitor {
 public:
     build_files_updater(const locator& l,
-        const assets::meta_model::orm::odb_targets& new_targets);
+        const assets::meta_model::orm::odb_targets& targets);
 
 public:
     using element_visitor::visit;
@@ -194,15 +194,15 @@ public:
 
 private:
     const locator& locator_;
-    const assets::meta_model::orm::odb_targets& new_targets_;
+    const assets::meta_model::orm::odb_targets& targets_;
 };
 
 build_files_updater::build_files_updater(const locator& l,
-    const assets::meta_model::orm::odb_targets& new_targets)
-    : locator_(l), new_targets_(new_targets) {}
+    const assets::meta_model::orm::odb_targets& targets)
+    : locator_(l), targets_(targets) {}
 
 void build_files_updater::visit(assets::meta_model::build::cmakelists& c) {
-    c.odb_targets(new_targets_);
+    c.odb_targets(targets_);
     c.include_directory_path(locator_.include_directory_name());
     c.source_directory_name(locator_.source_directory_name());
     c.tests_directory_name(locator_.tests_directory_name());
@@ -212,7 +212,7 @@ void build_files_updater::visit(assets::meta_model::build::cmakelists& c) {
 
 void build_files_updater::
 visit(assets::meta_model::visual_studio::msbuild_targets& v) {
-    v.odb_targets(new_targets_);
+    v.odb_targets(targets_);
 }
 
 void build_files_expander::expand(const locator& l, model& fm) const {
@@ -238,14 +238,14 @@ void build_files_expander::expand(const locator& l, model& fm) const {
      * stable. We obtained the formattables from an unordered map so
      * they could have come in in any order.
      */
-    const auto new_odb_targets(
+    const auto odb_targets(
         [&]() {
-            auto r(f.new_result());
-            r.targets().sort(new_odb_target_comparer);
+            auto r(f.result());
+            r.targets().sort(odb_target_comparer);
             return r;
         }());
 
-    build_files_updater u(l, new_odb_targets);
+    build_files_updater u(l, odb_targets);
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
