@@ -212,7 +212,7 @@ boost::shared_ptr<assets::meta_model::structural::object>
 adapter::to_object(const assets::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming external element to object: "
+    BOOST_LOG_SEV(lg, debug) << "Transforming injection element to object: "
                              << ie.name();
 
     auto r(boost::make_shared<assets::meta_model::structural::object>());
@@ -233,7 +233,7 @@ boost::shared_ptr<assets::meta_model::structural::object_template>
 adapter::to_object_template(const assets::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming external element "
+    BOOST_LOG_SEV(lg, debug) << "Transforming injection element "
                              << "to object template: " << ie.name();
 
     auto r(boost::make_shared<assets::meta_model::structural::object_template>());
@@ -252,7 +252,7 @@ boost::shared_ptr<assets::meta_model::structural::exception>
 adapter::to_exception(const assets::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming external element to exception: "
+    BOOST_LOG_SEV(lg, debug) << "Transforming injection element to exception: "
                              << ie.name();
 
     auto r(boost::make_shared<assets::meta_model::structural::exception>());
@@ -264,7 +264,7 @@ boost::shared_ptr<assets::meta_model::structural::primitive>
 adapter::to_primitive(const assets::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming external element to primitive: "
+    BOOST_LOG_SEV(lg, debug) << "Transforming injection element to primitive: "
                              << ie.name();
 
     auto r(boost::make_shared<assets::meta_model::structural::primitive>());
@@ -276,7 +276,7 @@ boost::shared_ptr<assets::meta_model::structural::enumeration>
 adapter::to_enumeration(const assets::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming external element to enumeration: "
+    BOOST_LOG_SEV(lg, debug) << "Transforming injection element to enumeration: "
                              << ie.name();
 
     auto r(boost::make_shared<assets::meta_model::structural::enumeration>());
@@ -292,7 +292,7 @@ boost::shared_ptr<assets::meta_model::structural::module> adapter::
 to_module(const assets::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming external element to module: "
+    BOOST_LOG_SEV(lg, debug) << "Transforming injection element to module: "
                              << ie.name();
 
     auto r(boost::make_shared<assets::meta_model::structural::module>());
@@ -304,7 +304,7 @@ boost::shared_ptr<assets::meta_model::structural::builtin>
 adapter::to_builtin(const assets::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming external element to builtin: "
+    BOOST_LOG_SEV(lg, debug) << "Transforming injection element to builtin: "
                              << ie.name();
 
     auto r(boost::make_shared<assets::meta_model::structural::builtin>());
@@ -322,10 +322,22 @@ boost::shared_ptr<assets::meta_model::structural::entry_point>
 adapter::to_entry_point(const assets::meta_model::location& l,
     const stereotypes_conversion_result& scr,
     const injection::meta_model::element& ie) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming external element to exception: "
+    BOOST_LOG_SEV(lg, debug) << "Transforming injection element to exception: "
                              << ie.name();
 
     auto r(boost::make_shared<assets::meta_model::structural::entry_point>());
+    populate_element(l, scr, ie, *r);
+    return r;
+}
+
+boost::shared_ptr<assets::meta_model::structural::assistant>
+adapter::to_assistant(const assets::meta_model::location& l,
+    const stereotypes_conversion_result& scr,
+    const injection::meta_model::element& ie) const {
+    BOOST_LOG_SEV(lg, debug) << "Transforming injection element to assistant: "
+                             << ie.name();
+
+    auto r(boost::make_shared<assets::meta_model::structural::assistant>());
     populate_element(l, scr, ie, *r);
     return r;
 }

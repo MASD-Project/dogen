@@ -40,6 +40,7 @@
 #include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include "dogen.assets/types/meta_model/structural/exception.hpp"
 #include "dogen.assets/types/meta_model/structural/entry_point.hpp"
+#include "dogen.assets/types/meta_model/structural/assistant.hpp"
 #include "dogen.assets/types/meta_model/element.hpp"
 #include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.assets/types/meta_model/structural/module.hpp"
@@ -61,7 +62,6 @@
 #include "dogen.assets/types/meta_model/visual_studio/msbuild_targets.hpp"
 #include "dogen.assets/types/meta_model/orm/common_odb_options.hpp"
 #include "dogen.assets/types/meta_model/build/cmakelists.hpp"
-
 #include "dogen.engine/types/helpers/stereotypes_conversion_result.hpp"
 
 namespace dogen::engine::helpers {
@@ -211,6 +211,15 @@ public:
      */
     boost::shared_ptr<assets::meta_model::structural::entry_point>
     to_entry_point(const assets::meta_model::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::meta_model::element& ie) const;
+
+    /**
+     * @brief Converts an injection element with a stereotype of
+     * @e masd::assistant to a assets entry_point.
+     */
+    boost::shared_ptr<assets::meta_model::structural::assistant>
+    to_assistant(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
