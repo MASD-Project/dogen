@@ -19,11 +19,14 @@
  *
  */
 #include "dogen.generation.cpp/types/formatters/build/initializer.hpp"
+#include "dogen.generation.cpp/types/formatters/build/include_cmakelists_formatter.hpp"
+#include "dogen.generation.cpp/types/formatters/build/source_cmakelists_formatter.hpp"
 
 namespace dogen::generation::cpp::formatters::build {
 
-bool initializer::operator==(const initializer& /*rhs*/) const {
-    return true;
+void initializer::initialize(registrar& /*rg*/) {
+    /*register_formatter<include_cmakelists_formatter>(rg);
+      register_formatter<source_cmakelists_formatter>(rg);*/
 }
 
 }

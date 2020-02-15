@@ -25,24 +25,16 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.generation.cpp/types/formatters/registrar.hpp"
 
 namespace dogen::generation::cpp::formatters::build {
 
-class initializer final {
+/**
+ * @brief Initialises the visual studio facet.
+ */
+class initializer {
 public:
-    initializer() = default;
-    initializer(const initializer&) = default;
-    initializer(initializer&&) = default;
-    ~initializer() = default;
-    initializer& operator=(const initializer&) = default;
-
-public:
-    bool operator==(const initializer& rhs) const;
-    bool operator!=(const initializer& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void initialize(registrar& rg);
 };
 
 }

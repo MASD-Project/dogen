@@ -22,8 +22,24 @@
 
 namespace dogen::generation::cpp::formatters::build {
 
-bool traits::operator==(const traits& /*rhs*/) const {
-    return true;
+std::string traits::facet() {
+    static std::string r("masd.generation.cpp.build");
+    return r;
+}
+
+std::string traits::canonical_archetype() {
+    static std::string r(traits::facet() + ".canonical_archetype");
+    return r;
+}
+
+std::string traits::include_cmakelists_archetype() {
+    static std::string r("masd.generation.cpp.build.include_cmakelists");
+    return r;
+}
+
+std::string traits::source_cmakelists_archetype() {
+    static std::string r("masd.generation.cpp.build.source_cmakelists");
+    return r;
 }
 
 }
