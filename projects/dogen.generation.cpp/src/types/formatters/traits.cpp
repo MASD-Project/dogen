@@ -34,21 +34,6 @@ master_header_archetype(const std::string& facet) {
     return facet + master_header_postfix;
 }
 
-std::string traits::cmake_facet() {
-    static std::string r("masd.generation.cpp.cmake");
-    return r;
-}
-
-std::string traits::include_cmakelists_archetype() {
-    static std::string r("masd.generation.cpp.cmake.include_cmakelists");
-    return r;
-}
-
-std::string traits::source_cmakelists_archetype() {
-    static std::string r("masd.generation.cpp.cmake.source_cmakelists");
-    return r;
-}
-
 std::string traits::canonical_archetype(const std::string& facet) {
     return facet + canonical_archetype_postfix;
 }
