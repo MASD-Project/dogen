@@ -20,8 +20,8 @@
  */
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.csharp/types/traits.hpp"
-#include "dogen.generation.csharp/types/fabric/assistant.hpp"
-#include "dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
+#include "dogen.assets/types/helpers/meta_name_factory.hpp"
+#include "dogen.assets/types/meta_model/structural/assistant.hpp"
 #include "dogen.generation.csharp/types/formatters/test_data/traits.hpp"
 #include "dogen.generation.csharp/types/formatters/assistant.hpp"
 #include "dogen.generation.csharp/types/formatters/test_data/new_assistant_formatter.hpp"
@@ -45,7 +45,7 @@ archetypes::location new_assistant_formatter::archetype_location() const {
 }
 
 const assets::meta_model::name& new_assistant_formatter::meta_name() const {
-    using fabric::meta_name_factory;
+    using assets::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_assistant_name());
     return r;
 }

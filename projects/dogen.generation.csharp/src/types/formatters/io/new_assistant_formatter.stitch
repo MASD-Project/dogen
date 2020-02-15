@@ -2,17 +2,17 @@
 <#@ masd.stitch.containing_namespaces=dogen::generation::csharp::formatters::io #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/fabric/assistant.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/fabric/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.assets/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.assets/types/meta_model/structural/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/io/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/io/new_assistant_formatter.hpp" #>
 <#@ masd.stitch.wale.text_template=csharp_formatter_implementation.wale #>
 <#@ masd.stitch.wale.kvp.class.simple_name=new_assistant_formatter #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=assistant #>
-<#@ masd.stitch.wale.kvp.yarn_element=fabric::assistant #>
+<#@ masd.stitch.wale.kvp.yarn_element=assets::meta_model::structural::assistant #>
 <#@ masd.stitch.wale.kvp.meta_element=assistant #>
-<#@ masd.stitch.wale.kvp.meta_name_factory=fabric::meta_name_factory #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=assets::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
