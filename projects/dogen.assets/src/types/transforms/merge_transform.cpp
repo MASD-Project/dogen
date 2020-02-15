@@ -77,6 +77,7 @@ merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
         << " exceptions: " << src.structural_elements().exceptions().size()
         << " visitors: " << src.structural_elements().visitors().size()
         << " entry points: " << src.structural_elements().entry_points().size()
+        << " assistants: " << src.structural_elements().assistants().size()
         << " modeline_groups: "
         << src.decoration_elements().modeline_groups().size()
         << " modeline: " << src.decoration_elements().modelines().size()
@@ -114,6 +115,8 @@ merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
         dst.structural_elements().visitors());
     copy(src.structural_elements().entry_points(),
         dst.structural_elements().entry_points());
+    copy(src.structural_elements().assistants(),
+        dst.structural_elements().assistants());
     copy(src.decoration_elements().modeline_groups(),
         dst.decoration_elements().modeline_groups());
     copy(src.decoration_elements().modelines(),
