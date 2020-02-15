@@ -6,9 +6,9 @@
 <#@ masd.stitch.inclusion_dependency="dogen.assets/types/meta_model/structural/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/test_data/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/assistant.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/test_data/new_assistant_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/test_data/assistant_formatter.hpp" #>
 <#@ masd.stitch.wale.text_template=csharp_formatter_implementation.wale #>
-<#@ masd.stitch.wale.kvp.class.simple_name=new_assistant_formatter #>
+<#@ masd.stitch.wale.kvp.class.simple_name=assistant_formatter #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=assistant #>
 <#@ masd.stitch.wale.kvp.yarn_element=assets::meta_model::structural::assistant #>
 <#@ masd.stitch.wale.kvp.meta_element=assistant #>
@@ -16,7 +16,7 @@
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-extraction::meta_model::artefact new_assistant_formatter::format(
+extraction::meta_model::artefact assistant_formatter::format(
     const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location());
     {

@@ -1194,14 +1194,14 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::io::new_assistant_formatter",
+      "name": "formatters::io::assistant_formatter",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::test_data::new_assistant_formatter",
+      "name": "formatters::test_data::assistant_formatter",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],

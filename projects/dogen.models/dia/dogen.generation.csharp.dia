@@ -16437,13 +16437,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O132">
       <dia:attribute name="obj_pos">
-        <dia:point val="32,75"/>
+        <dia:point val="32,57"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.95,74.95;46.795,78.05"/>
+        <dia:rectangle val="31.95,56.95;46.795,60.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="32,75"/>
+        <dia:point val="32,57"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -16452,7 +16452,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#new_assistant_formatter#</dia:string>
+        <dia:string>#assistant_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
@@ -16548,13 +16548,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O133">
       <dia:attribute name="obj_pos">
-        <dia:point val="73,75"/>
+        <dia:point val="73,57"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.95,74.95;87.795,78.05"/>
+        <dia:rectangle val="72.95,56.95;87.795,60.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="73,75"/>
+        <dia:point val="73,57"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -16563,7 +16563,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#new_assistant_formatter#</dia:string>
+        <dia:string>#assistant_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::csharp::artefact_formatter#</dia:string>

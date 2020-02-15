@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_TEST_DATA_NEW_ASSISTANT_FORMATTER_HPP
-#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_TEST_DATA_NEW_ASSISTANT_FORMATTER_HPP
+#ifndef DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_TEST_DATA_ASSISTANT_FORMATTER_HPP
+#define DOGEN_GENERATION_CSHARP_TYPES_FORMATTERS_TEST_DATA_ASSISTANT_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 
 namespace dogen::generation::csharp::formatters::test_data {
 
-class new_assistant_formatter final : public artefact_formatter_interface {
+class assistant_formatter final : public artefact_formatter_interface {
 public:
     static std::string static_id();
 

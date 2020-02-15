@@ -23,7 +23,7 @@
 #include "dogen.generation.csharp/types/formatters/io/primitive_formatter.hpp"
 #include "dogen.generation.csharp/types/formatters/io/class_formatter.hpp"
 #include "dogen.generation.csharp/types/formatters/io/enum_formatter.hpp"
-#include "dogen.generation.csharp/types/formatters/io/new_assistant_formatter.hpp"
+#include "dogen.generation.csharp/types/formatters/io/assistant_formatter.hpp"
 #include "dogen.generation.csharp/types/formatters/io/initializer.hpp"
 
 namespace dogen::generation::csharp::formatters::io {
@@ -32,7 +32,7 @@ void initializer::initialize(registrar& rg) {
     register_formatter<class_formatter>(rg);
     register_formatter<primitive_formatter>(rg);
     register_formatter<enum_formatter>(rg);
-    register_formatter<new_assistant_formatter>(rg);
+    register_formatter<assistant_formatter>(rg);
     register_formatter_helper<enumerable_helper>(rg);
 }
 

@@ -24,48 +24,48 @@
 #include "dogen.assets/types/meta_model/structural/assistant.hpp"
 #include "dogen.generation.csharp/types/formatters/io/traits.hpp"
 #include "dogen.generation.csharp/types/formatters/assistant.hpp"
-#include "dogen.generation.csharp/types/formatters/io/new_assistant_formatter.hpp"
+#include "dogen.generation.csharp/types/formatters/io/assistant_formatter.hpp"
 
 namespace dogen::generation::csharp::formatters::io {
 
-std::string new_assistant_formatter::static_id() {
+std::string assistant_formatter::static_id() {
     return traits::assistant_archetype();
 }
 
-std::string new_assistant_formatter::id() const {
+std::string assistant_formatter::id() const {
     return static_id();
 }
 
-archetypes::location new_assistant_formatter::archetype_location() const {
+archetypes::location assistant_formatter::archetype_location() const {
     static archetypes::location
         r(csharp::traits::kernel(), csharp::traits::backend(),
           traits::facet(),
-          new_assistant_formatter::static_id());
+          assistant_formatter::static_id());
     return r;
 }
 
-const assets::meta_model::name& new_assistant_formatter::meta_name() const {
+const assets::meta_model::name& assistant_formatter::meta_name() const {
     using assets::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_assistant_name());
     return r;
 }
 
-std::string new_assistant_formatter::family() const {
+std::string assistant_formatter::family() const {
     return csharp::traits::csharp_family();
 }
 
-boost::filesystem::path new_assistant_formatter::full_path(
+boost::filesystem::path assistant_formatter::full_path(
     const formattables::locator& l, const assets::meta_model::name& n) const {
     return l.make_full_path(n, static_id());
 }
 
-std::list<std::string> new_assistant_formatter::
+std::list<std::string> assistant_formatter::
 inclusion_dependencies(const assets::meta_model::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
-extraction::meta_model::artefact new_assistant_formatter::
+extraction::meta_model::artefact assistant_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location());
     {
