@@ -32656,7 +32656,7 @@ code.
         <dia:point val="7,373"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="6.95,372.95;40.275,382.25"/>
+        <dia:rectangle val="6.95,372.95;40.275,381.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="7,373"/>
@@ -32665,7 +32665,7 @@ code.
         <dia:real val="33.225000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="9.2000000000000011"/>
+        <dia:real val="8.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#features#</dia:string>
@@ -32908,29 +32908,6 @@ code.
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.tests.main.postfix#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests.new_cmakelists.postfix#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#""#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.tests.new_cmakelists.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -39038,13 +39015,13 @@ string.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O310">
       <dia:attribute name="obj_pos">
-        <dia:point val="7,347"/>
+        <dia:point val="26,337"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="6.95,346.95;20.64,350.05"/>
+        <dia:rectangle val="25.95,336.95;39.64,340.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="7,347"/>
+        <dia:point val="26,337"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.59"/>
@@ -39053,7 +39030,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#new_cmakelists_formatter#</dia:string>
+        <dia:string>#cmakelists_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>

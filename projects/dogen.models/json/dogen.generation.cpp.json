@@ -2379,14 +2379,6 @@
           "tagged_values": {
             "masd.variability.qualified_name": "masd.generation.cpp.tests.main.postfix"
           }
-        },
-        {
-          "name": "masd.generation.cpp.tests.new_cmakelists.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.tests.new_cmakelists.postfix"
-          }
         }
       ]
     },
@@ -3152,7 +3144,7 @@
       ]
     },
     {
-      "name": "formatters::tests::new_cmakelists_formatter",
+      "name": "formatters::tests::cmakelists_formatter",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],

@@ -59,11 +59,6 @@ struct traits {
     * @brief Name of the cmakelists formatter.
     */
     static std::string cmakelists_archetype();
-
-    /**
-     * @brief Name of the cmakelists formatter.
-     */
-    static std::string new_cmakelists_archetype();
 };
 
 }

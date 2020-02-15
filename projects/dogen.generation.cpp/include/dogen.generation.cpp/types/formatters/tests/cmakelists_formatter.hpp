@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTERS_TESTS_NEW_CMAKELISTS_FORMATTER_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTERS_TESTS_NEW_CMAKELISTS_FORMATTER_HPP
+#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTERS_TESTS_CMAKELISTS_FORMATTER_HPP
+#define DOGEN_GENERATION_CPP_TYPES_FORMATTERS_TESTS_CMAKELISTS_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 
 namespace dogen::generation::cpp::formatters::tests {
 
-class new_cmakelists_formatter final : public artefact_formatter_interface {
+class cmakelists_formatter final : public artefact_formatter_interface {
 public:
     static std::string static_id();
 
