@@ -79,7 +79,7 @@ const std::string stereotype_visual_studio_msbuild_targets(
 const std::string stereotype_orm_common_odb_options(
     "masd::orm::common_odb_options");
 const std::string stereotype_build_cmakelists(
-    "masd::orm::common_odb_options");
+    "masd::build::cmakelists");
 const std::string unsupported_stereotype("Invalid or unsupported stereotype: ");
 
 }
