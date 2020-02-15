@@ -60,6 +60,8 @@
 #include "dogen.assets/types/meta_model/visual_studio/project.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/msbuild_targets.hpp"
 #include "dogen.assets/types/meta_model/orm/common_odb_options.hpp"
+#include "dogen.assets/types/meta_model/build/cmakelists.hpp"
+
 #include "dogen.engine/types/helpers/stereotypes_conversion_result.hpp"
 
 namespace dogen::engine::helpers {
@@ -358,6 +360,16 @@ public:
      */
     boost::shared_ptr<assets::meta_model::orm::common_odb_options>
     to_orm_common_odb_options(const assets::meta_model::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::meta_model::element& ie) const;
+
+public:
+    /**
+     * @brief Converts an injection element with a stereotype of
+     * @e masd::build::cmakelists.
+     */
+    boost::shared_ptr<assets::meta_model::build::cmakelists>
+    to_build_cmakelists(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 };
