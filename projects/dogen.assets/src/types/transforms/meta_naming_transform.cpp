@@ -162,6 +162,11 @@ public:
         static const auto n(mnf::make_orm_common_odb_options_name());
         v.meta_name(n);
     }
+
+    void operator()(assets::meta_model::build::cmakelists& v) {
+        static const auto n(mnf::make_build_cmakelists_name());
+        v.meta_name(n);
+    }
 };
 
 void meta_naming_transform::
