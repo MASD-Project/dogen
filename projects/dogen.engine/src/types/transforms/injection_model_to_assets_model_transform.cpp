@@ -35,6 +35,7 @@
 #include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include "dogen.assets/types/meta_model/structural/enumeration.hpp"
 #include "dogen.assets/types/meta_model/structural/object_template.hpp"
+#include "dogen.assets/types/meta_model/structural/assistant.hpp"
 #include "dogen.assets/io/meta_model/name_io.hpp"
 #include "dogen.assets/io/meta_model/location_io.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
@@ -199,7 +200,11 @@ process_element(const helpers::adapter& ad,
         insert(ad.to_entry_point(l, scr, e),
             m.structural_elements().entry_points());
         break;
-    case static_stereotypes::decoration_modeline_group:
+    case static_stereotypes::structural_assistant:
+        insert(ad.to_assistant(l, scr, e),
+            m.structural_elements().assistants());
+        break;
+   case static_stereotypes::decoration_modeline_group:
         insert(ad.to_modeline_group(l, scr, e),
             m.decoration_elements().modeline_groups());
         break;
