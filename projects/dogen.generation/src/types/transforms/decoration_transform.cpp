@@ -526,13 +526,22 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
 
         /*
          * FIXME: hack for XML. We inject it regardless, just so that
-         * when the formatters create the ODB options, it is
-         * available.
+         * that when the formatters need it, it is available.
          */
         const auto xml_ts(assets::meta_model::technical_space::xml);
         if (ts != xml_ts) {
             lambda(xml_ts);
-            BOOST_LOG_SEV(lg, trace) << "Added decoration for ODB.";
+            BOOST_LOG_SEV(lg, trace) << "Added decoration for XML.";
+        }
+
+        /*
+         * FIXME: hack for CMake. We inject it regardless, just so
+         * that when the formatters need it, it is available.
+         */
+        const auto cmake_ts(assets::meta_model::technical_space::cmake);
+        if (ts != cmake_ts) {
+            lambda(cmake_ts);
+            BOOST_LOG_SEV(lg, trace) << "Added decoration for CMake.";
         }
     }
     stp.end_transform(m);

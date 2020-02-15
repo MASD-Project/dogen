@@ -55,11 +55,12 @@ apply(const context& ctx, meta_model::model& m) {
     BOOST_LOG_SEV(lg, trace) << "Output technical space: " << ots;
 
     /*
-     * FIXME: hackery for ODB options and xml
+     * FIXME: hackery for ODB options, XML and CMake.
      */
     using namespace assets::meta_model;
     ats.insert(technical_space::odb);
     ats.insert(technical_space::xml);
+    ats.insert(technical_space::cmake);
 
     for (const auto& ptr : m.elements()) {
         const auto id(ptr->name().qualified().dot());
