@@ -96,6 +96,11 @@ public:
         v.meta_name(n);
     }
 
+    void operator()(meta_model::structural::assistant& v) {
+        static const auto n(mnf::make_assistant_name());
+        v.meta_name(n);
+    }
+
     void operator()(meta_model::decoration::licence& v) {
         static const auto n(mnf::make_licence_name());
         v.meta_name(n);

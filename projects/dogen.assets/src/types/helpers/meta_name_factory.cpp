@@ -89,6 +89,11 @@ meta_model::name meta_name_factory::make_entry_point_name() {
     return r;
 }
 
+meta_model::name meta_name_factory::make_assistant_name() {
+    static const auto r(make_name("assistant"));
+    return r;
+}
+
 meta_model::name meta_name_factory::make_licence_name() {
     static const auto r(make_name("licence"));
     return r;
