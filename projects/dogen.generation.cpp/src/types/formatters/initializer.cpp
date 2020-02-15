@@ -30,6 +30,7 @@
 #include "dogen.generation.cpp/types/formatters/serialization/initializer.hpp"
 #include "dogen.generation.cpp/types/formatters/tests/initializer.hpp"
 #include "dogen.generation.cpp/types/formatters/visual_studio/initializer.hpp"
+#include "dogen.generation.cpp/types/formatters/build/initializer.hpp"
 #include "dogen.generation.cpp/types/formatters/initializer.hpp"
 
 namespace dogen::generation::cpp::formatters {
@@ -48,6 +49,7 @@ void initializer::initialize(registrar& rg) {
     tests::initializer::initialize(rg);
     templates::initializer::initialize(rg);
     visual_studio::initializer::initialize(rg);
+    build::initializer::initialize(rg);
 }
 
 }
