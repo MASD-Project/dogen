@@ -1483,6 +1483,10 @@
           "type": ""
         },
         {
+          "name": "structural_assistant",
+          "type": ""
+        },
+        {
           "name": "orm_object",
           "type": ""
         },

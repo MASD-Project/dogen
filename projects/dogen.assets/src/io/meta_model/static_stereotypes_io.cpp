@@ -66,6 +66,9 @@ std::ostream& operator<<(std::ostream& s, const static_stereotypes& v) {
     case static_stereotypes::structural_entry_point:
         attr = "\"structural_entry_point\"";
         break;
+    case static_stereotypes::structural_assistant:
+        attr = "\"structural_assistant\"";
+        break;
     case static_stereotypes::orm_object:
         attr = "\"orm_object\"";
         break;
