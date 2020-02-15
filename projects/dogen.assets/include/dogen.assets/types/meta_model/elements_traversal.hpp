@@ -35,6 +35,7 @@
 #include "dogen.assets/types/meta_model/structural/module.hpp"
 #include "dogen.assets/types/meta_model/structural/object_template.hpp"
 #include "dogen.assets/types/meta_model/structural/entry_point.hpp"
+#include "dogen.assets/types/meta_model/structural/assistant.hpp"
 #include "dogen.assets/types/meta_model/decoration/licence.hpp"
 #include "dogen.assets/types/meta_model/decoration/modeline.hpp"
 #include "dogen.assets/types/meta_model/decoration/modeline_group.hpp"
@@ -82,6 +83,9 @@ inline void elements_traversal(const meta_model::model& m,
         v(*pair.second);
 
     for (const auto& pair : m.structural_elements().visitors())
+        v(*pair.second);
+
+    for (const auto& pair : m.structural_elements().assistants())
         v(*pair.second);
 
     for (const auto& pair : m.decoration_elements().licences())
@@ -157,6 +161,9 @@ inline void elements_traversal(const meta_model::model& m,
     for (auto& pair : m.structural_elements().visitors())
         v(*pair.second);
 
+    for (auto& pair : m.structural_elements().assistants())
+        v(*pair.second);
+
     for (const auto& pair : m.decoration_elements().licences())
         v(*pair.second);
 
@@ -228,6 +235,9 @@ inline void elements_traversal(meta_model::model& m,
         v(*pair.second);
 
     for (auto& pair : m.structural_elements().visitors())
+        v(*pair.second);
+
+    for (auto& pair : m.structural_elements().assistants())
         v(*pair.second);
 
     for (const auto& pair : m.decoration_elements().licences())
@@ -309,6 +319,9 @@ inline void shared_elements_traversal(const meta_model::model& m,
     for (const auto& pair : m.structural_elements().visitors())
         v(pair.second);
 
+    for (const auto& pair : m.structural_elements().assistants())
+        v(pair.second);
+
     for (const auto& pair : m.decoration_elements().licences())
         v(pair.second);
 
@@ -382,6 +395,9 @@ inline void shared_elements_traversal(const meta_model::model& m,
     for (auto& pair : m.structural_elements().visitors())
         v(pair.second);
 
+    for (auto& pair : m.structural_elements().assistants())
+        v(pair.second);
+
     for (const auto& pair : m.decoration_elements().licences())
         v(pair.second);
 
@@ -453,6 +469,9 @@ inline void shared_elements_traversal(meta_model::model& m,
         v(pair.second);
 
     for (auto& pair : m.structural_elements().visitors())
+        v(pair.second);
+
+    for (auto& pair : m.structural_elements().assistants())
         v(pair.second);
 
     for (const auto& pair : m.decoration_elements().licences())
