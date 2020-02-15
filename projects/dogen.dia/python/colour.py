@@ -138,7 +138,7 @@ for layer in dia.active_display().diagram.data.layers:
             object.properties["fill_colour"] = "#00FF00"
 
         #
-        # Theme: Build
+        # Theme: Visual Studio
         #
         elif "masd::visual_studio::solution" in stereotype:
             object.properties["fill_colour"] = "#5768FF"
@@ -146,6 +146,12 @@ for layer in dia.active_display().diagram.data.layers:
             object.properties["fill_colour"] = "#909BFF"
         elif "masd::visual_studio::msbuild_targets" in stereotype:
             object.properties["fill_colour"] = "#535A99"
+
+        #
+        # Theme: Build
+        #
+        elif "masd::build::cmakelists" in stereotype:
+            object.properties["fill_colour"] = "#C0CE42"
 
         #
         # Theme: Core meta-elements
