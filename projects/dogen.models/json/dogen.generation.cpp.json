@@ -3286,11 +3286,19 @@
           }
         },
         {
-          "name": "masd.generation.cpp.build.cmakelists.postfix",
+          "name": "masd.generation.cpp.build.include_cmakelists.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
             "masd.variability.qualified_name": "masd.generation.cpp.build.cmakelists.postfix"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.build.source_cmakelists.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.qualified_name": "masd.generation.cpp.build.source_cmakelists.postfix"
           }
         }
       ]

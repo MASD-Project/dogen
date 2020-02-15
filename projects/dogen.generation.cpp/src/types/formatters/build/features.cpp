@@ -66,11 +66,31 @@ make_masd_generation_cpp_build_postfix() {
 }
 
 dogen::variability::meta_model::feature_template
-make_masd_generation_cpp_build_cmakelists_postfix() {
+make_masd_generation_cpp_build_include_cmakelists_postfix() {
     using namespace dogen::variability::meta_model;
     feature_template r;
     r.name().simple("postfix");
-    r.name().qualified("masd.generation.cpp.build.cmakelists.postfix");
+    r.name().qualified("masd.generation.cpp.build.include_cmakelists.postfix");
+    const auto vt(value_type::text);
+    r.value_type(vt);
+    r.binding_point(binding_point::global);
+    r.kind(template_kind::instance);
+    dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ "" }));
+
+    archetypes::location al;
+    al.kernel("masd");
+
+    r.location(al);
+    return r;
+}
+
+dogen::variability::meta_model::feature_template
+make_masd_generation_cpp_build_source_cmakelists_postfix() {
+    using namespace dogen::variability::meta_model;
+    feature_template r;
+    r.name().simple("postfix");
+    r.name().qualified("masd.generation.cpp.build.source_cmakelists.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -94,7 +114,8 @@ features::make_templates() {
     std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_masd_generation_cpp_build_directory());
     r.push_back(make_masd_generation_cpp_build_postfix());
-    r.push_back(make_masd_generation_cpp_build_cmakelists_postfix());
+    r.push_back(make_masd_generation_cpp_build_include_cmakelists_postfix());
+    r.push_back(make_masd_generation_cpp_build_source_cmakelists_postfix());
     return r;
 }
 
