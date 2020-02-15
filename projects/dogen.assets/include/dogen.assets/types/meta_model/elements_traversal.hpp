@@ -48,6 +48,7 @@
 #include "dogen.assets/types/meta_model/visual_studio/project.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/msbuild_targets.hpp"
 #include "dogen.assets/types/meta_model/orm/common_odb_options.hpp"
+#include "dogen.assets/types/meta_model/build/cmakelists.hpp"
 
 namespace dogen::assets::meta_model {
 
@@ -124,6 +125,9 @@ inline void elements_traversal(const meta_model::model& m,
 
     for (const auto& pair : m.visual_studio_elements().msbuild_targets())
         v(*pair.second);
+
+    for (const auto& pair : m.build_elements().cmakelists())
+        v(*pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -194,6 +198,9 @@ inline void elements_traversal(const meta_model::model& m,
 
     for (const auto& pair : m.visual_studio_elements().msbuild_targets())
         v(*pair.second);
+
+    for (const auto& pair : m.build_elements().cmakelists())
+        v(*pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -263,6 +270,9 @@ inline void elements_traversal(meta_model::model& m,
         v(*pair.second);
 
     for (const auto& pair : m.visual_studio_elements().msbuild_targets())
+        v(*pair.second);
+
+    for (const auto& pair : m.build_elements().cmakelists())
         v(*pair.second);
 }
 /**@}*/
@@ -340,6 +350,9 @@ inline void shared_elements_traversal(const meta_model::model& m,
 
     for (const auto& pair : m.visual_studio_elements().msbuild_targets())
         v(pair.second);
+
+    for (const auto& pair : m.build_elements().cmakelists())
+        v(pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -410,6 +423,9 @@ inline void shared_elements_traversal(const meta_model::model& m,
 
     for (const auto& pair : m.visual_studio_elements().msbuild_targets())
         v(pair.second);
+
+    for (const auto& pair : m.build_elements().cmakelists())
+        v(pair.second);
 }
 
 template<typename TraversalVisitor>
@@ -479,6 +495,9 @@ inline void shared_elements_traversal(meta_model::model& m,
         v(pair.second);
 
     for (const auto& pair : m.visual_studio_elements().msbuild_targets())
+        v(pair.second);
+
+    for (const auto& pair : m.build_elements().cmakelists())
         v(pair.second);
 }
 /**@}*/
