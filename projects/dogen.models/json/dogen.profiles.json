@@ -895,16 +895,6 @@
             "masd.variability.archetype_location.backend": "masd.generation.cpp",
             "masd.variability.template_kind": "instance"
           }
-        },
-        {
-          "name": "masd.generation.cpp.tests.enabled",
-          "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
         }
       ]
     },
