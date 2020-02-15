@@ -127,11 +127,10 @@ void odb_expander::expand(const locator& l, model& m) const {
          * be build prior to reduction or else we will not get aspects
          * for referenced models.
          */
-        auto segment(formattable.element());
-        if (segment->origin_type() != assets::meta_model::origin_types::target)
+        auto& e(*formattable.element());
+        if (e.origin_type() != assets::meta_model::origin_types::target)
             continue;
 
-        auto& e(*segment);
         updator g(l);
         e.accept(g);
     }

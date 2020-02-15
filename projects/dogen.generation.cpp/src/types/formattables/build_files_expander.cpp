@@ -67,8 +67,8 @@ bool new_odb_target_comparer(const assets::meta_model::orm::odb_target& lhs,
 
 class odb_targets_factory : public element_visitor {
 public:
-    odb_targets_factory(const model& fm,
-        const locator& l, const assets::meta_model::name& model_name);
+    odb_targets_factory(const model& fm, const locator& l,
+        const assets::meta_model::name& model_name);
 
 private:
     template<typename OdbTargets>
@@ -102,8 +102,8 @@ odb_targets_factory::odb_targets_factory(const model& fm, const locator& l,
 }
 
 template<typename OdbTarget>
-OdbTarget
-odb_targets_factory::generate_targets(const assets::meta_model::name& n) {
+OdbTarget odb_targets_factory::
+generate_targets(const assets::meta_model::name& n) {
     OdbTarget r;
     r.name(target_name_ + separator + n.simple());
     r.comment("ODB " + n.simple());
@@ -255,13 +255,12 @@ void build_files_expander::expand(const locator& l, model& fm) const {
          * ignored.
          */
         auto& formattable(pair.second);
-        auto& segment(formattable.element());
-        if (segment->origin_type() != ott) {
+        auto& e(*formattable.element());
+        if (e.origin_type() != ott) {
             BOOST_LOG_SEV(lg, debug) << "Skipping non-target element.";
             continue;
         }
 
-        const auto& e(*segment);
         e.accept(f);
     }
 
@@ -289,13 +288,12 @@ void build_files_expander::expand(const locator& l, model& fm) const {
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
         auto& formattable(pair.second);
-        auto& segment(formattable.element());
-        if (segment->origin_type() != ott) {
+        auto& e(*formattable.element());
+        if (e.origin_type() != ott) {
             BOOST_LOG_SEV(lg, debug) << "Skipping non-target element.";
             continue;
         }
 
-        auto& e(*segment);
         e.accept(u);
     }
 }

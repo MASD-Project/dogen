@@ -58,8 +58,8 @@ inject_build_files(generation::meta_model::model& m) const {
     add_elements(elements, m);
 }
 
-void injector::inject(generation::meta_model::model& m) const {
-    inject_build_files(m);
+void injector::inject(generation::meta_model::model& /*m*/) const {
+    // inject_build_files(m);
 }
 
 }
