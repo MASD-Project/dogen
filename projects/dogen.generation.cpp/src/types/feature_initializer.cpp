@@ -22,6 +22,7 @@
 #include "dogen.generation.cpp/types/formatters/io/features.hpp"
 #include "dogen.generation.cpp/types/formatters/odb/features.hpp"
 #include "dogen.generation.cpp/types/formatters/hash/features.hpp"
+#include "dogen.generation.cpp/types/formatters/build/features.hpp"
 #include "dogen.generation.cpp/types/formatters/facet_features.hpp"
 #include "dogen.generation.cpp/types/formatters/tests/features.hpp"
 #include "dogen.generation.cpp/types/formatters/types/features.hpp"
@@ -38,6 +39,7 @@ namespace dogen::generation::cpp {
 void feature_initializer::
 register_templates(variability::helpers::feature_template_registrar& rg) {
     rg.register_templates(dogen::generation::cpp::formatters::archetype_features::make_templates());
+    rg.register_templates(dogen::generation::cpp::formatters::build::features::make_templates());
     rg.register_templates(dogen::generation::cpp::formatters::facet_features::make_templates());
     rg.register_templates(dogen::generation::cpp::formatters::global_features::make_templates());
     rg.register_templates(dogen::generation::cpp::formatters::hash::features::make_templates());

@@ -3073,6 +3073,10 @@
     },
     {
       "name": "formatters::visual_studio",
+      "documentation": "Formatters related to Visual Studio support.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
       "fallback_element_type": "masd::module"
     },
     {
@@ -3203,6 +3207,88 @@
     },
     {
       "name": "formatters::visual_studio::msbuild_targets_formatter",
+      "stereotypes": [
+        "dogen::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::build",
+      "documentation": "Formatters related to build files.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "formatters::build::source_cmakelists_formatter",
+      "stereotypes": [
+        "dogen::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::build::include_cmakelists_formatter",
+      "stereotypes": [
+        "dogen::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::build::initializer",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::build::traits",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::build::features",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.generate_static_configuration": "false",
+        "masd.variability.default_binding_point": "global",
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.cpp.build.directory",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.qualified_name": "masd.generation.cpp.build.directory"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.build.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.qualified_name": "masd.generation.cpp.build.postfix"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.build.cmakelists.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.qualified_name": "masd.generation.cpp.build.cmakelists.postfix"
+          }
+        }
+      ]
+    },
+    {
+      "name": "formatters::tests::new_cmakelists_formatter",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
