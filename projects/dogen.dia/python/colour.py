@@ -168,5 +168,7 @@ for layer in dia.active_display().diagram.data.layers:
             object.properties["fill_colour"] = "#EED2DE"
         elif "masd::entry_point" in stereotype:
             object.properties["fill_colour"] = "#A8EAFF"
+        elif "masd::assistant" in stereotype:
+            object.properties["fill_colour"] = "#A09D9D"
         else:
             object.properties["fill_colour"] = "#F5FFFA"
