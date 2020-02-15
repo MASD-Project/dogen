@@ -4081,6 +4081,15 @@ We could have a "light weight model" that just gets the IDs and
 mappings of all injection models that have not been referenced and
 uses it for resolution failures and mapping failures.
 
+*** Move to .net core in C#                                           :story:
+
+At present we are using .net framework, but everyone has moved on to
+.net core. Update projects to use .net core.
+
+Links:
+
+- [[https://kimsereyblog.blogspot.com/2018/08/sdk-style-project-and-projectassetsjson.html][SDK-Style project and project.assets.json]]
+
 *** Use C# notation in JSON C# models                                 :story:
 
 At present we are generating C++ style types in JSON models (at least
@@ -6145,6 +6154,8 @@ We should build docker images with each commit into master.
 
 Links:
 
+- [[https://devblogs.microsoft.com/cppblog/using-multi-stage-containers-for-c-development/][Using multi-stage containers for C++ development]]
+- [[https://github.com/GoogleCloudPlatform/cloud-builders/blob/master/bazel/Dockerfile][cloud-builders]]
 - [[https://sebest.github.io/post/using-travis-ci-to-build-docker-images/][Using Travis.ci to build Docker images]]
 - [[https://github.com/OpenSourceRisk/Engine/tree/master/tools/docker][ORE docker script]]
 - [[https://giorgos.sealabs.net/build-and-test-against-docker-images-in-travis.html][Build and Test against Docker Images in Travis]]
@@ -8463,6 +8474,10 @@ not able to cope with this use case. Changes required:
 - disable the helper for types for optional.
 - update the helper settings to read this new field.
 - enabled method now checks the helper properties.
+
+Links:
+
+- [[https://www.sciencedirect.com/topics/computer-science/product-line-engineering][Product Line Engineering]]
 
 *** Add support for type_index                                        :story:
 

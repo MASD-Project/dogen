@@ -12,33 +12,34 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-02-14 Fri 19:52]
+#+CAPTION: Clock summary at [2020-02-15 Sat 18:35]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *70:14* |       |       | 100.0 |
+| *Total time*                                          | *72:58* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 70:14   |       |       | 100.0 |
-| Active                                                |         | 70:14 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  7:01 |  10.0 |
-| Create a demo and presentation for previous sprint    |         |       |  1:49 |   2.6 |
-| Sprint and product backlog grooming                   |         |       |  3:38 |   5.2 |
-| Create new playlist for assets work                   |         |       |  2:19 |   3.3 |
+| Stories                                               | 72:58   |       |       | 100.0 |
+| Active                                                |         | 72:58 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  7:01 |   9.6 |
+| Create a demo and presentation for previous sprint    |         |       |  1:49 |   2.5 |
+| Sprint and product backlog grooming                   |         |       |  3:46 |   5.2 |
+| Create new playlist for assets work                   |         |       |  2:19 |   3.2 |
 | Create the final video on the relational model series |         |       |  0:30 |   0.7 |
-| Move registrar into assets                            |         |       |  5:34 |   7.9 |
+| Move registrar into assets                            |         |       |  5:34 |   7.6 |
 | Fix error in asserter tests                           |         |       |  0:38 |   0.9 |
 | Add injection details to all models                   |         |       |  0:25 |   0.6 |
 | Fix nightly error in registrar                        |         |       |  0:33 |   0.8 |
 | Nightly code coverage is not being reported           |         |       |  0:25 |   0.6 |
-| Move visual studio fabric types into assets           |         |       | 18:34 |  26.4 |
-| Create metamodel elements for =entry_point=           |         |       |  7:18 |  10.4 |
+| Move visual studio fabric types into assets           |         |       | 18:34 |  25.4 |
+| Create metamodel elements for =entry_point=           |         |       |  7:18 |  10.0 |
 | Remove support for element extensions                 |         |       |  0:44 |   1.0 |
-| Move =object_odb_options= into assets                 |         |       |  6:43 |   9.6 |
-| Move common ODB options into assets                   |         |       |  4:34 |   6.5 |
+| Move =object_odb_options= into assets                 |         |       |  6:43 |   9.2 |
+| Move common ODB options into assets                   |         |       |  4:34 |   6.3 |
 | Fixes to setup                                        |         |       |  1:05 |   1.5 |
 | Cannot see source file in coveralls                   |         |       |  0:16 |   0.4 |
-| Integration of archetypes into assets                 |         |       |  2:41 |   3.8 |
-| Move msbuild and cmakelists into assets               |         |       |  5:27 |   7.8 |
+| Integration of archetypes into assets                 |         |       |  2:41 |   3.7 |
+| Move msbuild and cmakelists into assets               |         |       |  7:36 |  10.4 |
+| Investigate borked nightly build                      |         |       |  0:27 |   0.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -343,6 +344,7 @@ using the Dogen test models.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-02-15 Sat 16:29]--[2020-02-15 Sat 16:37] =>  0:08
     CLOCK: [2020-02-12 Wed 22:42]--[2020-02-12 Wed 22:51] =>  0:09
     CLOCK: [2020-02-07 Fri 14:02]--[2020-02-07 Fri 14:45] =>  0:43
     CLOCK: [2020-02-07 Fri 09:15]--[2020-02-07 Fri 09:37] =>  0:22
@@ -361,7 +363,8 @@ using the Dogen test models.
 
 Updates to sprint and product backlog.
 
-*** STARTED Create new playlist for assets work                       :story:
+*** COMPLETED Create new playlist for assets work                     :story:
+    CLOSED: [2020-02-15 Sat 16:37]
     :LOGBOOK:
     CLOCK: [2020-02-04 Tue 22:53]--[2020-02-04 Tue 23:15] =>  0:22
     CLOCK: [2020-02-02 Sun 22:10]--[2020-02-02 Sun 22:19] =>  0:09
@@ -374,6 +377,8 @@ Updates to sprint and product backlog.
 
 Create a series of videos describing the refactoring of fabric into
 assets.
+
+- [[https://www.youtube.com/playlist?list=PLwfrwe216gF2pmF54Re9lgWIuafh0_ksz][MASD - Dogen Coding: Visual Studio Component Refactor]]
 
 *** COMPLETED Create the final video on the relational model series   :story:
     CLOSED: [2020-01-24 Fri 15:59]
@@ -1102,7 +1107,13 @@ components, each with their own primary technical space.
 
 *** STARTED Move msbuild and cmakelists into assets                   :story:
     :LOGBOOK:
+    CLOCK: [2020-02-15 Sat 18:33]--[2020-02-15 Sat 18:38] =>  0:05
+    CLOCK: [2020-02-15 Sat 18:22]--[2020-02-15 Sat 18:32] =>  0:10
+    CLOCK: [2020-02-15 Sat 18:04]--[2020-02-15 Sat 18:21] =>  0:17
+    CLOCK: [2020-02-15 Sat 17:16]--[2020-02-15 Sat 18:03] =>  0:47
+    CLOCK: [2020-02-15 Sat 16:37]--[2020-02-15 Sat 17:15] =>  0:38
     CLOCK: [2020-02-14 Fri 19:40]--[2020-02-14 Fri 19:52] =>  0:12
+    CLOCK: [2020-02-14 Fri 19:53]--[2020-02-14 Fri 20:05] =>  0:12
     CLOCK: [2020-02-14 Fri 14:22]--[2020-02-14 Fri 16:55] =>  2:33
     CLOCK: [2020-02-14 Fri 11:58]--[2020-02-14 Fri 12:18] =>  0:20
     CLOCK: [2020-02-14 Fri 09:51]--[2020-02-14 Fri 11:41] =>  2:07
@@ -1114,7 +1125,21 @@ Move the build targets related types from fabric into assets.
 
 Notes:
 
-- drop =build= in visual studio stereotypes.
+- drop =build= in visual studio stereotypes. Done.
+
+*** STARTED Investigate borked nightly build                          :story:
+    :LOGBOOK:
+    CLOCK: [2020-02-15 Sat 16:01]--[2020-02-15 Sat 16:28] =>  0:27
+    :END:
+
+We have a broken build but no particular reason for it:
+
+- https://my.cdash.org/viewTest.php?onlyfailed&buildid=1774915
+
+It seems we were not deleting the pristine directory, causing it to
+become out of sync. It also seems like we have a git clone inside a
+git clone in dogen, but its not clear how this came to be. We need to
+recheck this on tomorrow's nightly.
 
 *** Consider creating a "model" meta-model element                    :story:
 
