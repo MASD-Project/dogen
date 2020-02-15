@@ -92,7 +92,9 @@ merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
         << " visual studio projects: "
         << src.visual_studio_elements().msbuild_targets().size()
         << " ORM common ODB options: "
-        << src.orm_elements().common_odb_options().size();
+        << src.orm_elements().common_odb_options().size()
+        << " build cmakelists: "
+        << src.build_elements().cmakelists().size();
 
     copy(src.structural_elements().modules(),
         dst.structural_elements().modules());
@@ -134,6 +136,8 @@ merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
         dst.visual_studio_elements().msbuild_targets());
     copy(src.orm_elements().common_odb_options(),
         dst.orm_elements().common_odb_options());
+    copy(src.build_elements().cmakelists(),
+        dst.build_elements().cmakelists());
 
     /*
      * Update the references of the merged model.
