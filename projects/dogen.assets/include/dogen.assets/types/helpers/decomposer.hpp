@@ -53,7 +53,6 @@ class decomposer final {
 private:
     void add_name(const std::string& owner, const meta_model::name& n);
     void add_meta_name(const std::string& owner, const meta_model::name& n);
-    void add_injected_name(const std::string& owner, const meta_model::name& n);
     void add_name_tree(const std::string& owner,
         const meta_model::name_tree& nt);
     void add_names(const std::string& owner,

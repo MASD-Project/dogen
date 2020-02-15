@@ -42,11 +42,6 @@ add_meta_name(const std::string& owner, const meta_model::name& n) {
 }
 
 void decomposer::
-add_injected_name(const std::string& owner, const meta_model::name& n) {
-    result_.injected_names().push_back(std::make_pair(owner, n));
-}
-
-void decomposer::
 add_name_tree(const std::string& owner, const meta_model::name_tree& nt) {
     result_.name_trees().push_back(std::make_pair(owner, nt));
 }
@@ -72,11 +67,6 @@ void decomposer::decompose_element(const meta_model::element& e) {
 
 void decomposer::operator()(const meta_model::element& e) {
     decompose_element(e);
-    /*
-     * Injected names go to a separate validation bucket.
-     */
-    // add_injected_name(e.name().qualified().dot(), e.name());
-    // add_meta_name(e.name().qualified().dot(), e.meta_name());
 }
 
 void decomposer::operator()(const meta_model::structural::module& m) {

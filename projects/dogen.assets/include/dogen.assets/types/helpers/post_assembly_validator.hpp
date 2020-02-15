@@ -53,8 +53,6 @@ private:
     static void validate_names(
         const std::list<std::pair<std::string, meta_model::name>>& names,
         const meta_model::technical_space ts);
-    static void validate_injected_names(
-        const std::list<std::pair<std::string, meta_model::name>>& names);
     static void validate_meta_names(
         const std::list<std::pair<std::string, meta_model::name>>& meta_names);
 

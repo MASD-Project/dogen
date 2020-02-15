@@ -268,62 +268,6 @@ validate_names(const std::list<std::pair<std::string, meta_model::name>>& names,
     BOOST_LOG_SEV(lg, debug) << "Finished validating names.";
 }
 
-void post_assembly_validator::
-validate_injected_names(
-    const std::list<std::pair<std::string, meta_model::name>>& names) {
-    BOOST_LOG_SEV(lg, debug) << "Sanity checking injected names.";
-
-    /*
-     * Injected names have a number of peculiarities that make
-     * validation harder:
-     *
-     * - we need a looser regular expression validation because the
-     *   injected types represent in many cases file names -
-     *   e.g. CMakeLists, Visual Studio solutions and project files,
-     *   etc. These may require things such as dashes and dots. All
-     *   other model types which map to technical space constructs do
-     *   not allow these characters. So to make our life easier we use
-     *   strict validation for most model types and the loose
-     *   validation for the injected types. This is, of course, not
-     *   strictly correct, because in theory one can inject fabric
-     *   types which do not correspond to a file - e.g. serialisation
-     *   registrar in c++). However, this is a good enough
-     *   approximation for now.
-     *
-     * - injected types can have duplicate names. This is due to
-     *   element extensions such as forward declarations and ODB
-     *   options. These take on the name of the element they are
-     *   extending; now, normally, this is not a problem because the
-     *   extended element will be processed as part of the names
-     *   collection and the extension as part of the injected
-     *   elements. However, when we are using ORM support, we end up
-     *   with more than one extension for each element (both forward
-     *   declaration and the ODB option). This means that duplicates
-     *   will occur even within the injected names collection. So we
-     *   just ignore duplicates altogether to make our life easier.
-     */
-    for (const auto& pair : names) {
-        const auto& owner(pair.first);
-        const auto& n(pair.second);
-        const auto& id(n.qualified().dot());
-        BOOST_LOG_SEV(lg, trace) << "Validating: '" << id << "'"
-                                 << " owner id: '" << owner << "'";
-
-        try {
-            /*
-             * Element name must pass all sanity checks. Note that in
-             */
-            validate_name(n, loose_name_regex, false/*allow_spaces*/);
-
-            BOOST_LOG_SEV(lg, trace) << "Name is valid.";
-        } catch (boost::exception& e) {
-            e << errmsg_validation_owner(owner);
-            throw;
-        }
-    }
-    BOOST_LOG_SEV(lg, debug) << "Finished validating all names.";
-}
-
 void post_assembly_validator::validate_meta_names(
     const std::list<std::pair<std::string, meta_model::name>>& meta_names) {
     BOOST_LOG_SEV(lg, debug) << "Validating all meta-names.";
@@ -411,7 +355,6 @@ validate(const indices& idx, const meta_model::model& m) {
     const auto ts(m.input_technical_space());
     const auto dr(decomposer::decompose(m));
     validate_names(dr.names(), ts);
-    validate_injected_names(dr.injected_names());
     validate_meta_names(dr.meta_names());
     validate_name_trees(idx.abstract_elements(), ts, dr.name_trees());
 

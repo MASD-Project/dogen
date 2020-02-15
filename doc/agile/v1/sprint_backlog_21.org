@@ -12,31 +12,32 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-02-15 Sat 23:33]
+#+CAPTION: Clock summary at [2020-02-15 Sat 23:43]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *76:47* |       |       | 100.0 |
+| *Total time*                                          | *76:56* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 76:47   |       |       | 100.0 |
-| Active                                                |         | 76:47 |       | 100.0 |
+| Stories                                               | 76:56   |       |       | 100.0 |
+| Active                                                |         | 76:56 |       | 100.0 |
 | Edit release notes for previous sprint                |         |       |  7:01 |   9.1 |
 | Create a demo and presentation for previous sprint    |         |       |  1:49 |   2.4 |
 | Sprint and product backlog grooming                   |         |       |  3:46 |   4.9 |
 | Create new playlist for assets work                   |         |       |  2:19 |   3.0 |
-| Create the final video on the relational model series |         |       |  0:30 |   0.7 |
+| Create the final video on the relational model series |         |       |  0:30 |   0.6 |
 | Move registrar into assets                            |         |       |  5:34 |   7.2 |
 | Fix error in asserter tests                           |         |       |  0:38 |   0.8 |
 | Add injection details to all models                   |         |       |  0:25 |   0.5 |
 | Fix nightly error in registrar                        |         |       |  0:33 |   0.7 |
 | Nightly code coverage is not being reported           |         |       |  0:25 |   0.5 |
-| Move visual studio fabric types into assets           |         |       | 18:34 |  24.2 |
+| Move visual studio fabric types into assets           |         |       | 18:34 |  24.1 |
 | Create metamodel elements for =entry_point=           |         |       |  7:18 |   9.5 |
 | Remove support for element extensions                 |         |       |  0:44 |   1.0 |
 | Move =object_odb_options= into assets                 |         |       |  6:43 |   8.7 |
 | Move common ODB options into assets                   |         |       |  4:34 |   5.9 |
 | Move msbuild and cmakelists into assets               |         |       |  9:50 |  12.8 |
 | Move assembly info and assistant into assets          |         |       |  1:35 |   2.1 |
+| Remove injected element names validation              |         |       |  0:09 |   0.2 |
 | Fixes to setup                                        |         |       |  1:05 |   1.4 |
 | Cannot see source file in coveralls                   |         |       |  0:16 |   0.3 |
 | Integration of archetypes into assets                 |         |       |  2:41 |   3.5 |
@@ -1043,6 +1044,16 @@ Notes:
     :END:
 
 We need to move the C# fabric types into assets.
+
+*** COMPLETED Remove injected element names validation                :story:
+    CLOSED: [2020-02-15 Sat 23:43]
+    :LOGBOOK:
+    CLOCK: [2020-02-15 Sat 23:34]--[2020-02-15 Sat 23:43] =>  0:09
+    :END:
+
+When we had fabric, we split name validation into "regular" types and
+"injected" types. With the removal of fabric, this is no longer
+applicable so remove this logic.
 
 *** STARTED Fixes to setup                                            :story:
     :LOGBOOK:

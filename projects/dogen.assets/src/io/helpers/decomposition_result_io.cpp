@@ -93,8 +93,7 @@ std::ostream& operator<<(std::ostream& s, const decomposition_result& v) {
       << "\"__type__\": " << "\"dogen::assets::helpers::decomposition_result\"" << ", "
       << "\"names\": " << v.names() << ", "
       << "\"meta_names\": " << v.meta_names() << ", "
-      << "\"name_trees\": " << v.name_trees() << ", "
-      << "\"injected_names\": " << v.injected_names()
+      << "\"name_trees\": " << v.name_trees()
       << " }";
     return(s);
 }

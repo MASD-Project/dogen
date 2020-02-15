@@ -980,10 +980,6 @@
         {
           "name": "name_trees",
           "type": "std::list<std::pair<std::string, meta_model::name_tree>>"
-        },
-        {
-          "name": "injected_names",
-          "type": "std::list<std::pair<std::string, meta_model::name>>"
         }
       ]
     },
