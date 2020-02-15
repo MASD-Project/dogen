@@ -530,27 +530,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::dynamic_transforms_chain",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::dynamic_transform_interface",
-      "stereotypes": [
-        "dogen::handcrafted::typeable::header_only"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::dynamic_transform_registrar",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::model_to_extraction_model_chain",
       "stereotypes": [
         "dogen::handcrafted::typeable"

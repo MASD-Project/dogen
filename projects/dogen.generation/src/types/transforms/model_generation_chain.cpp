@@ -23,7 +23,6 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.generation/io/meta_model/model_io.hpp"
 #include "dogen.generation/types/transforms/generability_transform.hpp"
-#include "dogen.generation/types/transforms/dynamic_transforms_chain.hpp"
 #include "dogen.generation/types/transforms/artefact_properties_transform.hpp"
 #include "dogen.generation/types/transforms/enablement_transform.hpp"
 #include "dogen.generation/types/transforms/formatting_transform.hpp"
@@ -64,11 +63,6 @@ void model_generation_chain::apply(const context& ctx,
      * Apply all of the post-processing transforms to the model.
      */
     for (auto& m : ms) {
-        /*
-         * Perform dynamic expansion first. These are backend specific.
-         */
-        dynamic_transforms_chain::apply(ctx, m);
-
         /*
          * Technical spaces transform must be done after the dynamic
          * transform but before decorations.
