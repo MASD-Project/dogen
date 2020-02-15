@@ -29,6 +29,7 @@
 #include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/msbuild_targets.hpp"
+#include "dogen.assets/types/meta_model/build/cmakelists.hpp"
 #include "dogen.generation.cpp/types/fabric/odb_target.hpp"
 #include "dogen.generation.cpp/types/fabric/cmakelists.hpp"
 #include "dogen.generation.cpp/types/fabric/odb_targets.hpp"
@@ -208,6 +209,7 @@ public:
 public:
     using element_visitor::visit;
     void visit(fabric::cmakelists& c);
+    void visit(assets::meta_model::build::cmakelists& v);
     void visit(assets::meta_model::visual_studio::msbuild_targets& v);
 
 private:
@@ -223,6 +225,15 @@ build_files_updater::build_files_updater(const locator& l,
 
 void build_files_updater::visit(fabric::cmakelists& c) {
     c.odb_targets(targets_);
+    c.include_directory_path(locator_.include_directory_name());
+    c.source_directory_name(locator_.source_directory_name());
+    c.tests_directory_name(locator_.tests_directory_name());
+    c.header_file_extension(locator_.header_file_extension());
+    c.implementation_file_extension(locator_.implementation_file_extension());
+}
+
+void build_files_updater::visit(assets::meta_model::build::cmakelists& c) {
+    c.odb_targets(new_targets_);
     c.include_directory_path(locator_.include_directory_name());
     c.source_directory_name(locator_.source_directory_name());
     c.tests_directory_name(locator_.tests_directory_name());
