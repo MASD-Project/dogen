@@ -625,7 +625,9 @@ boost::filesystem::path locator::make_full_path_for_source_cmakelists(
 boost::filesystem::path locator::make_full_path_for_tests_cmakelists(
     const assets::meta_model::name& n, const std::string& archetype) const {
     auto r(project_path_);
-    const auto facet_path(make_facet_path_temp(archetype, "CMakeLists.txt", n)); // FIXME: hack
+    const auto facet_path(make_facet_path_temp(archetype,
+            n.simple() + ".txt", // FIXME: hack for extension
+            n));
     r /= facet_path;
     return r;
 }
