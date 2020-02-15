@@ -46,7 +46,6 @@ private:
         generation::meta_model::model& m) const;
 
 private:
-    void inject_assembly_info(generation::meta_model::model& m) const;
     void inject_assistant(generation::meta_model::model& m) const;
 
 public:

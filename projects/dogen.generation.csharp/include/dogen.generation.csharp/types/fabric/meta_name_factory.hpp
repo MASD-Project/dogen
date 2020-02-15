@@ -38,7 +38,6 @@ private:
     static assets::meta_model::name make_name(const std::string& sn);
 
 public:
-    static assets::meta_model::name make_assembly_info_name();
     static assets::meta_model::name make_assistant_name();
     static assets::meta_model::name make_visual_studio_project_name();
     static assets::meta_model::name make_visual_studio_solution_name();

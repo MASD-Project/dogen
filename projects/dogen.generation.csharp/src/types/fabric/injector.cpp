@@ -21,7 +21,6 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.generation.csharp/types/fabric/assembly_info_factory.hpp"
 #include "dogen.generation.csharp/types/fabric/assistant_factory.hpp"
 #include "dogen.generation.csharp/types/fabric/injector.hpp"
 
@@ -51,13 +50,6 @@ void injector::add_elements(
         add_element(e, m);
 }
 
-void injector::
-inject_assembly_info(generation::meta_model::model& m) const {
-    assembly_info_factory f;
-    const auto e(f.make(m));
-    add_element(e, m);
-}
-
 void injector::inject_assistant(generation::meta_model::model& m) const {
     assistant_factory f;
     const auto e(f.make(m));
@@ -65,7 +57,6 @@ void injector::inject_assistant(generation::meta_model::model& m) const {
 }
 
 void injector::inject(generation::meta_model::model& m) const {
-    inject_assembly_info(m);
     inject_assistant(m);
 }
 

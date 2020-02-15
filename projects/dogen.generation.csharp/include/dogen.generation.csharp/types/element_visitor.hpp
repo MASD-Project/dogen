@@ -27,7 +27,6 @@
 
 #include "dogen.assets/types/meta_model/element_visitor.hpp"
 #include "dogen.generation.csharp/types/fabric/assistant_fwd.hpp"
-#include "dogen.generation.csharp/types/fabric/assembly_info_fwd.hpp"
 
 namespace dogen::generation::csharp {
 
@@ -40,16 +39,6 @@ public:
 
 public:
     using dogen::assets::meta_model::element_visitor::visit;
-
-    /**
-     * @brief Accept visits for type dogen::generation::csharp::fabric::assembly_info
-     */
-    /**@{*/
-    virtual void visit(const dogen::generation::csharp::fabric::assembly_info&) const { }
-    virtual void visit(const dogen::generation::csharp::fabric::assembly_info&) { }
-    virtual void visit(dogen::generation::csharp::fabric::assembly_info&) const { }
-    virtual void visit(dogen::generation::csharp::fabric::assembly_info&) { }
-    /**@}*/
 
     /**
      * @brief Accept visits for type dogen::generation::csharp::fabric::assistant

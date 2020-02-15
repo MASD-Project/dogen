@@ -484,20 +484,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "fabric::assembly_info_factory",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "fabric::assembly_info",
-      "tagged_values": {
-        "masd.generalization.parent": "assets::meta_model::element"
-      },
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formatters::traits",
       "stereotypes": [
         "dogen::handcrafted::typeable"

@@ -40,10 +40,6 @@ assets::meta_model::name meta_name_factory::make_name(const std::string& sn) {
     return b.build();
 }
 
-assets::meta_model::name meta_name_factory::make_assembly_info_name() {
-    return make_name("assembly_info");
-}
-
 assets::meta_model::name meta_name_factory::make_assistant_name() {
     return make_name("assistant");
 }
