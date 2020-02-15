@@ -267,6 +267,10 @@ process_element(const helpers::adapter& ad,
         insert(ad.to_orm_common_odb_options(l, scr, e),
             m.orm_elements().common_odb_options());
         break;
+    case static_stereotypes::build_cmakelists:
+        insert(ad.to_build_cmakelists(l, scr, e),
+            m.build_elements().cmakelists());
+        break;
 
     default: {
         const auto s(boost::lexical_cast<std::string>(et));
