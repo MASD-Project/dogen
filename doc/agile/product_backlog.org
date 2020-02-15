@@ -26,10 +26,7 @@ or refactoring that must go in.
 We need to move all functionality which is not kernel specific into
 yarn for the locator. This will exist in the helpers namespace. We
 then need to implement the C++ locator as a composite of yarn
-locator. It will live in fabric. Actually this will now be part of
-archetypes now.
-
-Actually this will now be placed in the archetypes model.
+locator.
 
 *Other Notes*
 
@@ -147,21 +144,6 @@ kernel must also supply a factory for the builders.
 
 We need to support the formatting styles at the meta-model level.
 
-*** Distinguish between meta-types that require canonical archetypes  :story:
-
-At present it is not possible to know which meta-types require
-canonical archetypes and which don't. In the validation we said:
-
-:         * We must have one canonical formatter per type per facet.
-:         * FIXME: this check is broken at the moment because this is
-:         * only applicable to yarn types, not fabric types. It is also
-:         * not applicable to forward declarations. We need some
-:         * additional information from yarn to be able to figure out
-:         * which types must have a canonical archetype.
-
-We should have some kind of flag in yarn to distinguish. This still
-requires a bit of thinking.
-
 *** Make creating new facets easier                                   :story:
 
 For types that are stitchable such as formatters, we need to always
@@ -243,25 +225,26 @@ Notes:
   formatter's archetype - its the kernel.
 - users can make use of this very same mechanism to generate their own
   formatters. We can then load up the DLL with boost plugin. Note that
-  users are not constrained by the yarn meta-model. That is to say,
-  they can create new meta-types using the fabric approach as we do in
-  =quilt.cpp=. Their DLL then defines the formatters which are able to
-  process those meta-types. The only snag in all of this is the
-  expansion machinery. We use static visitors all over the place, and
-  without somehow dynamically knowing about the new types, they will
-  not get expanded. We need to revisit expansion in this light to see
-  if there is a way to make it more dynamic somehow, or at least have
-  a "default" behaviour for all unknown types where we do the generic
-  things to them such as computing the file path, etc. This is
-  probably sufficient for the vast majority of use cases. The other
-  wrinkle is also locator. We are hard-coding paths. If the users
-  limit themselves to creating "regular" entities rather than say
-  CMakeLists/msbuild like entities which have some special way to
-  compute their names, then we don't have a problem. But there should
-  be a generic way to obtain all path elements apart from the file
-  name from locator. And also perhaps have facets that do not have a
-  facet directory so that we can place types above the facet
-  directories such as SLNs, CMakeLists, etc.
+  users are not constrained by the assets meta-model. That is to say,
+  they can create new meta-types and inject them into assets. Whilst
+  we don't support this use case at present, we should make sure the
+  framework does not preclude it. Their DLL then defines the
+  formatters which are able to process those meta-types. The only snag
+  in all of this is the expansion machinery. We use static visitors
+  all over the place, and without somehow dynamically knowing about
+  the new types, they will not get expanded. We need to revisit
+  expansion in this light to see if there is a way to make it more
+  dynamic somehow, or at least have a "default" behaviour for all
+  unknown types where we do the generic things to them such as
+  computing the file path, etc. This is probably sufficient for the
+  vast majority of use cases. The other wrinkle is also locator. We
+  are hard-coding paths. If the users limit themselves to creating
+  "regular" entities rather than say CMakeLists/msbuild like entities
+  which have some special way to compute their names, then we don't
+  have a problem. But there should be a generic way to obtain all path
+  elements apart from the file name from locator. And also perhaps
+  have facets that do not have a facet directory so that we can place
+  types above the facet directories such as SLNs, CMakeLists, etc.
 
 *** Create the notion of project destinations                         :story:
 
@@ -4387,41 +4370,6 @@ copyright holders.
 This functionality has been implemented but requires tests in the test
 model.
 
-*** Duplicate elements in model                                       :story:
-
-Whilst running queries on postgres against a model dumped in tracing,
-we found evidence of duplicate elements. Query:
-
-: select jsonb_pretty(
-:           jsonb_array_elements(
-:           jsonb_array_elements(data)->'elements')->'data'->'__parent_0__'->'name'->'qualified'->'dot'
-:       )
-: from traces;
-
-Snippet of results after =sort | uniq -c=
-
-:      1  "masd.dogen.generation.csharp"
-:      1  "masd.dogen.generation.csharp.all"
-:      1  "masd.dogen.generation.csharp.CMakeLists"
-:      1  "masd.dogen.generation.csharp.entry_point"
-:      1  "masd.dogen.generation.csharp.fabric"
-:      2  "masd.dogen.generation.csharp.fabric.assembly_info"
-:      2  "masd.dogen.generation.csharp.fabric.assembly_info_factory"
-:      2  "masd.dogen.generation.csharp.fabric.assistant"
-:      2  "masd.dogen.generation.csharp.fabric.assistant_factory"
-:      2  "masd.dogen.generation.csharp.fabric.decoration_expander"
-:      2  "masd.dogen.generation.csharp.fabric.dynamic_transform"
-:      2  "masd.dogen.generation.csharp.fabric.element_visitor"
-:      2  "masd.dogen.generation.csharp.fabric.initializer"
-:      2  "masd.dogen.generation.csharp.fabric.injector"
-:      2  "masd.dogen.generation.csharp.fabric.meta_name_factory"
-:      2  "masd.dogen.generation.csharp.fabric.traits"
-:      2  "masd.dogen.generation.csharp.fabric.visual_studio_configuration"
-:      2  "masd.dogen.generation.csharp.fabric.visual_studio_factory"
-
-We need to investigate the generation pipeline to understand where
-this is coming from.
-
 *** Check support for decoration configuration overrides              :story:
 
 At present we have hard-coded the decoration configuration to be read
@@ -4482,26 +4430,6 @@ arguably better than adding a fake type.
 *** Validate feature template names                                   :story:
 
 We need to ensure the template names are valid identifiers in C++.
-
-*** Fabric generates forward decls with no path                       :story:
-
-The following looks strange:
-
-: 2019-03-06 17:30:20.074618 [DEBUG] [quit.cpp.formatters.workflow] Procesing element: <dogen><hello_world><transformation_error>
-: 2019-03-06 17:30:20.074627 [DEBUG] [quit.cpp.formatters.workflow] Meta name: <dogen><generation><cpp><fabric><forward_declarations>
-: 2019-03-06 17:30:20.074636 [DEBUG] [quit.cpp.formatters.workflow] Using the stock formatter: masd.extraction.cpp.serialization.forward_declarations
-: 2019-03-06 17:30:20.074647 [DEBUG] [generation.cpp.formatters.assistant] Processing element: <dogen><hello_world><transformation_error> for archetype: masd.extraction.cpp.serialization.forward_declarations
-: 2019-03-06 17:30:20.074659 [DEBUG] [quit.cpp.formatters.workflow] Formatted artefact. Path: ""
-
-This could help explain the problems we're having with empty
-artefacts. This should be fixed with the new approach to forward
-declarations.
-
-Another related problem is that we are not setting the path when
-creating stitch templates for the first time in the stitch formatter.
-
-We should add checks for empty path and see what breaks, now that we
-are using the new implementation of forward declarations.
 
 *** Add meta-data to "force" parent                                   :story:
 
@@ -9964,11 +9892,6 @@ can then do a simple heuristic:
 - what is the max value for the counter that will fit the string size?
   Use it as a modulus.
 
-Tasks:
-
-- inject a new fabric type for test data configuration. It can be a
-  simple struct.
-
 *** Add a top-level "Visual Studio" knob                              :story:
 
 We have a number of features that only make sense when on Windows and
@@ -10429,7 +10352,7 @@ supply two parameters:
 - root namespace: similarly this may differ from the proxy model name.
 
 These should be supplied as meta data and used when constructing
-fabric types.
+elements.
 
 *** Add msbuild target for C# test model                              :story:
 

@@ -12,17 +12,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-02-15 Sat 23:43]
+#+CAPTION: Clock summary at [2020-02-15 Sat 23:51]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *76:56* |       |       | 100.0 |
+| *Total time*                                          | *77:03* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 76:56   |       |       | 100.0 |
-| Active                                                |         | 76:56 |       | 100.0 |
+| Stories                                               | 77:03   |       |       | 100.0 |
+| Active                                                |         | 77:03 |       | 100.0 |
 | Edit release notes for previous sprint                |         |       |  7:01 |   9.1 |
 | Create a demo and presentation for previous sprint    |         |       |  1:49 |   2.4 |
-| Sprint and product backlog grooming                   |         |       |  3:46 |   4.9 |
+| Sprint and product backlog grooming                   |         |       |  3:53 |   5.0 |
 | Create new playlist for assets work                   |         |       |  2:19 |   3.0 |
 | Create the final video on the relational model series |         |       |  0:30 |   0.6 |
 | Move registrar into assets                            |         |       |  5:34 |   7.2 |
@@ -346,6 +346,7 @@ using the Dogen test models.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-02-15 Sat 23:44]--[2020-02-15 Sat 23:51] =>  0:07
     CLOCK: [2020-02-15 Sat 16:29]--[2020-02-15 Sat 16:37] =>  0:08
     CLOCK: [2020-02-12 Wed 22:42]--[2020-02-12 Wed 22:51] =>  0:09
     CLOCK: [2020-02-07 Fri 14:02]--[2020-02-07 Fri 14:45] =>  0:43
@@ -1698,3 +1699,85 @@ Actually this is a core yarn property. So:
 - in order to cope with cases such as variant we also need some kind
   of enum, e.g. type parameterisation: none, variable, fixed. if
   fixed, then number of type parameters must be non-zero.
+*** CANCELLED Fabric generates forward decls with no path             :story:
+    CLOSED: [2020-02-15 Sat 23:45]
+
+*Rationale*: Fabric has been removed and file path generation code is
+going to change a lot with the generation refactor.
+
+The following looks strange:
+
+: 2019-03-06 17:30:20.074618 [DEBUG] [quit.cpp.formatters.workflow] Procesing element: <dogen><hello_world><transformation_error>
+: 2019-03-06 17:30:20.074627 [DEBUG] [quit.cpp.formatters.workflow] Meta name: <dogen><generation><cpp><fabric><forward_declarations>
+: 2019-03-06 17:30:20.074636 [DEBUG] [quit.cpp.formatters.workflow] Using the stock formatter: masd.extraction.cpp.serialization.forward_declarations
+: 2019-03-06 17:30:20.074647 [DEBUG] [generation.cpp.formatters.assistant] Processing element: <dogen><hello_world><transformation_error> for archetype: masd.extraction.cpp.serialization.forward_declarations
+: 2019-03-06 17:30:20.074659 [DEBUG] [quit.cpp.formatters.workflow] Formatted artefact. Path: ""
+
+This could help explain the problems we're having with empty
+artefacts. This should be fixed with the new approach to forward
+declarations.
+
+Another related problem is that we are not setting the path when
+creating stitch templates for the first time in the stitch formatter.
+
+We should add checks for empty path and see what breaks, now that we
+are using the new implementation of forward declarations.
+
+*** CANCELLED Duplicate elements in model                             :story:
+    CLOSED: [2020-02-15 Sat 23:47]
+
+*Rationale*: Fabric has been removed. We just need to make sure we
+have validation code looking for duplicates.
+
+Whilst running queries on postgres against a model dumped in tracing,
+we found evidence of duplicate elements. Query:
+
+: select jsonb_pretty(
+:           jsonb_array_elements(
+:           jsonb_array_elements(data)->'elements')->'data'->'__parent_0__'->'name'->'qualified'->'dot'
+:       )
+: from traces;
+
+Snippet of results after =sort | uniq -c=
+
+:      1  "masd.dogen.generation.csharp"
+:      1  "masd.dogen.generation.csharp.all"
+:      1  "masd.dogen.generation.csharp.CMakeLists"
+:      1  "masd.dogen.generation.csharp.entry_point"
+:      1  "masd.dogen.generation.csharp.fabric"
+:      2  "masd.dogen.generation.csharp.fabric.assembly_info"
+:      2  "masd.dogen.generation.csharp.fabric.assembly_info_factory"
+:      2  "masd.dogen.generation.csharp.fabric.assistant"
+:      2  "masd.dogen.generation.csharp.fabric.assistant_factory"
+:      2  "masd.dogen.generation.csharp.fabric.decoration_expander"
+:      2  "masd.dogen.generation.csharp.fabric.dynamic_transform"
+:      2  "masd.dogen.generation.csharp.fabric.element_visitor"
+:      2  "masd.dogen.generation.csharp.fabric.initializer"
+:      2  "masd.dogen.generation.csharp.fabric.injector"
+:      2  "masd.dogen.generation.csharp.fabric.meta_name_factory"
+:      2  "masd.dogen.generation.csharp.fabric.traits"
+:      2  "masd.dogen.generation.csharp.fabric.visual_studio_configuration"
+:      2  "masd.dogen.generation.csharp.fabric.visual_studio_factory"
+
+We need to investigate the generation pipeline to understand where
+this is coming from.
+
+*** CANCELLED Distinguish between meta-types that require canonical archetypes :story:
+    CLOSED: [2020-02-15 Sat 23:48]
+
+*Rationale*: with the removal of fabric types, this story no longer
+applies. Also, we will refactor canonical archetypes as part of the
+generation clean up.
+
+At present it is not possible to know which meta-types require
+canonical archetypes and which don't. In the validation we said:
+
+:         * We must have one canonical formatter per type per facet.
+:         * FIXME: this check is broken at the moment because this is
+:         * only applicable to yarn types, not fabric types. It is also
+:         * not applicable to forward declarations. We need some
+:         * additional information from yarn to be able to figure out
+:         * which types must have a canonical archetype.
+
+We should have some kind of flag in yarn to distinguish. This still
+requires a bit of thinking.
