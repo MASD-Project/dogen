@@ -21,7 +21,6 @@
 #include "dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 #include "dogen.generation.csharp/types/formatters/workflow.hpp"
 #include "dogen.generation.csharp/types/formatters/initializer.hpp"
-#include "dogen.generation.csharp/types/fabric/initializer.hpp"
 #include "dogen.generation.csharp/types/model_to_extraction_model_transform.hpp"
 #include "dogen.generation.csharp/types/initializer.hpp"
 
@@ -29,7 +28,6 @@ namespace dogen::generation::csharp {
 
 void initializer::initialize() {
     formatters::initializer::initialize(formatters::workflow::registrar());
-    fabric::initializer::initialize();
     using generation::transforms::register_transform;
     register_transform<model_to_extraction_model_transform>();
 }

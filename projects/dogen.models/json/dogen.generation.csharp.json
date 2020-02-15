@@ -430,24 +430,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "fabric",
-      "fallback_element_type": "masd::module"
-    },
-    {
-      "name": "fabric::initializer",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "fabric::injector",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formattables::using_expander",
       "stereotypes": [
         "dogen::handcrafted::typeable"
@@ -485,13 +467,6 @@
     },
     {
       "name": "formatters::traits",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "fabric::traits",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -677,34 +652,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "fabric::assistant_factory",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "fabric::assistant",
-      "tagged_values": {
-        "masd.generalization.parent": "assets::meta_model::element"
-      },
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formatters::io::assistant_formatter",
-      "stereotypes": [
-        "dogen::csharp::artefact_formatter"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formatters::test_data::assistant_formatter",
-      "stereotypes": [
-        "dogen::csharp::artefact_formatter"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formattables::assistant_properties",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -795,20 +742,6 @@
       "name": "formatters::io::primitive_formatter",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "fabric::dynamic_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "fabric::meta_name_factory",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },

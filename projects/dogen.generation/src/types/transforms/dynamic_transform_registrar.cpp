@@ -51,7 +51,7 @@ void dynamic_transform_registrar::register_dynamic_transform(
 void dynamic_transform_registrar::validate() const {
     if (transforms_.empty()) {
         BOOST_LOG_SEV(lg, debug) << no_transforms;
-        BOOST_THROW_EXCEPTION(registrar_error(no_transforms));
+        // BOOST_THROW_EXCEPTION(registrar_error(no_transforms));
     }
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
 

@@ -31,7 +31,6 @@
 #include "dogen.assets/types/meta_model/visual_studio/project_persistence_block.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/project.hpp"
 #include "dogen.assets/types/meta_model/structural/assistant.hpp"
-#include "dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
 #include "dogen.generation.csharp/types/formattables/project_items_expander.hpp"
 
 namespace {
