@@ -22,6 +22,7 @@
 #include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.assets/types/meta_model/structural/builtin.hpp"
 #include "dogen.assets/types/meta_model/structural/visitor.hpp"
+#include "dogen.assets/types/meta_model/structural/assistant.hpp"
 #include "dogen.assets/types/meta_model/structural/exception.hpp"
 #include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include "dogen.assets/types/meta_model/structural/entry_point.hpp"
@@ -110,6 +111,15 @@ const boost::shared_ptr<dogen::assets::meta_model::structural::entry_point>& rhs
 
 }
 
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::assets::meta_model::structural::assistant>& lhs,
+const boost::shared_ptr<dogen::assets::meta_model::structural::assistant>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
 namespace dogen::assets::meta_model::structural {
 
 element_repository::element_repository(
@@ -121,7 +131,8 @@ element_repository::element_repository(
     const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::structural::object> >& objects,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::structural::exception> >& exceptions,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::structural::visitor> >& visitors,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::structural::entry_point> >& entry_points)
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::structural::entry_point> >& entry_points,
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::structural::assistant> >& assistants)
     : modules_(modules),
       object_templates_(object_templates),
       builtins_(builtins),
@@ -130,7 +141,8 @@ element_repository::element_repository(
       objects_(objects),
       exceptions_(exceptions),
       visitors_(visitors),
-      entry_points_(entry_points) { }
+      entry_points_(entry_points),
+      assistants_(assistants) { }
 
 void element_repository::swap(element_repository& other) noexcept {
     using std::swap;
@@ -143,6 +155,7 @@ void element_repository::swap(element_repository& other) noexcept {
     swap(exceptions_, other.exceptions_);
     swap(visitors_, other.visitors_);
     swap(entry_points_, other.entry_points_);
+    swap(assistants_, other.assistants_);
 }
 
 bool element_repository::operator==(const element_repository& rhs) const {
@@ -154,7 +167,8 @@ bool element_repository::operator==(const element_repository& rhs) const {
         objects_ == rhs.objects_ &&
         exceptions_ == rhs.exceptions_ &&
         visitors_ == rhs.visitors_ &&
-        entry_points_ == rhs.entry_points_;
+        entry_points_ == rhs.entry_points_ &&
+        assistants_ == rhs.assistants_;
 }
 
 element_repository& element_repository::operator=(element_repository other) {
@@ -305,6 +319,22 @@ void element_repository::entry_points(const std::unordered_map<std::string, boos
 
 void element_repository::entry_points(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::structural::entry_point> >&& v) {
     entry_points_ = std::move(v);
+}
+
+const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::structural::assistant> >& element_repository::assistants() const {
+    return assistants_;
+}
+
+std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::structural::assistant> >& element_repository::assistants() {
+    return assistants_;
+}
+
+void element_repository::assistants(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::structural::assistant> >& v) {
+    assistants_ = v;
+}
+
+void element_repository::assistants(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::structural::assistant> >&& v) {
+    assistants_ = std::move(v);
 }
 
 }

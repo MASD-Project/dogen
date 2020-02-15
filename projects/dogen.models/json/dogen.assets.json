@@ -2515,6 +2515,10 @@
         {
           "name": "entry_points",
           "type": "std::unordered_map<std::string, boost::shared_ptr<entry_point>>"
+        },
+        {
+          "name": "assistants",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<assistant>>"
         }
       ]
     },
@@ -3744,6 +3748,14 @@
           "type": "std::string"
         }
       ]
+    },
+    {
+      "name": "meta_model::structural::assistant",
+      "documentation": "General type to provide helpers.\n",
+      "stereotypes": [
+        "assets::meta_element"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

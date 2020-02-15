@@ -32,6 +32,7 @@
 #include "dogen.assets/types/meta_model/structural/builtin_fwd.hpp"
 #include "dogen.assets/types/meta_model/structural/visitor_fwd.hpp"
 #include "dogen.assets/types/meta_model/decoration/modeline_fwd.hpp"
+#include "dogen.assets/types/meta_model/structural/assistant_fwd.hpp"
 #include "dogen.assets/types/meta_model/structural/exception_fwd.hpp"
 #include "dogen.assets/types/meta_model/structural/primitive_fwd.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/project_fwd.hpp"
@@ -149,6 +150,16 @@ public:
     virtual void visit(const dogen::assets::meta_model::serialization::type_registrar&) { }
     virtual void visit(dogen::assets::meta_model::serialization::type_registrar&) const { }
     virtual void visit(dogen::assets::meta_model::serialization::type_registrar&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::assets::meta_model::structural::assistant
+     */
+    /**@{*/
+    virtual void visit(const dogen::assets::meta_model::structural::assistant&) const { }
+    virtual void visit(const dogen::assets::meta_model::structural::assistant&) { }
+    virtual void visit(dogen::assets::meta_model::structural::assistant&) const { }
+    virtual void visit(dogen::assets::meta_model::structural::assistant&) { }
     /**@}*/
 
     /**
