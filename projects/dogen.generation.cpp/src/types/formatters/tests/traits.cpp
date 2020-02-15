@@ -54,4 +54,9 @@ std::string traits::cmakelists_archetype() {
     return r;
 }
 
+std::string traits::new_cmakelists_archetype() {
+    static std::string r(traits::facet() + ".new_cmakelists");
+    return r;
+}
+
 }

@@ -21,6 +21,7 @@
 #include "dogen.generation.cpp/types/formatters/tests/class_implementation_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/tests/enum_implementation_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/tests/cmakelists_formatter.hpp"
+#include "dogen.generation.cpp/types/formatters/tests/new_cmakelists_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/tests/main_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/tests/initializer.hpp"
 
@@ -28,6 +29,7 @@ namespace dogen::generation::cpp::formatters::tests {
 
 void initializer::initialize(registrar& rg) {
     register_formatter<cmakelists_formatter>(rg);
+    register_formatter<new_cmakelists_formatter>(rg);
     register_formatter<class_implementation_formatter>(rg);
     register_formatter<enum_implementation_formatter>(rg);
     register_formatter<main_formatter>(rg);

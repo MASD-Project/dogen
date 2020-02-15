@@ -35070,7 +35070,7 @@ code.
         <dia:point val="7,373"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="6.95,372.95;40.275,381.45"/>
+        <dia:rectangle val="6.95,372.95;40.275,382.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="7,373"/>
@@ -35079,7 +35079,7 @@ code.
         <dia:real val="33.225000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.4000000000000004"/>
+        <dia:real val="9.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#features#</dia:string>
@@ -35322,6 +35322,29 @@ code.
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.tests.main.postfix#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#masd.generation.cpp.tests.new_cmakelists.postfix#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#masd::variability::text#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#""#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.tests.new_cmakelists.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

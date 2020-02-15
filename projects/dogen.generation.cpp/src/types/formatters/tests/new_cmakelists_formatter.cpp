@@ -35,7 +35,7 @@
 namespace dogen::generation::cpp::formatters::tests {
 
 std::string new_cmakelists_formatter::static_id() {
-    return tests::traits::cmakelists_archetype();
+    return tests::traits::new_cmakelists_archetype();
 }
 
 std::string new_cmakelists_formatter::id() const {

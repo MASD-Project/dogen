@@ -24,9 +24,9 @@
 
 namespace dogen::generation::cpp::formatters::build {
 
-void initializer::initialize(registrar& /*rg*/) {
-    /*register_formatter<include_cmakelists_formatter>(rg);
-      register_formatter<source_cmakelists_formatter>(rg);*/
+void initializer::initialize(registrar& rg) {
+    register_formatter<include_cmakelists_formatter>(rg);
+    register_formatter<source_cmakelists_formatter>(rg);
 }
 
 }
