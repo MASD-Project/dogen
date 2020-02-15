@@ -10354,7 +10354,7 @@ dogen's benchmarks:
 
 *** Generate AssemblyInfo in C#                                       :story:
 
-We need to inject a type for this in fabric. For now we can leave it
+We need to inject a type for this in assets. For now we can leave it
 mainly blank but in the future we need to have meta-data in yarn for
 all of its properties:
 
@@ -10368,7 +10368,11 @@ all of its properties:
 : [assembly: AssemblyCulture ("")]
 : [assembly: AssemblyVersion ("1.0.*")]
 
-These appear to just be properties at the model level.
+These appear to just be properties at the model level. We need to also
+make it a bit more general and try to figure out what it maps to in
+C++. For example, the version file could be generated from this file
+- or perhaps these should be distinct concepts? At present we are
+using CMake templates to generate =version.hpp=.
 
 *** Consider adding a clone method for C#                             :story:
 
