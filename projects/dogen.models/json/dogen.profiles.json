@@ -79,16 +79,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.cpp.cmake.enabled",
-          "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
-        },
-        {
           "name": "masd.generation.cpp.odb.enabled",
           "type": "",
           "value": "false",
@@ -110,26 +100,6 @@
         },
         {
           "name": "masd.generation.cpp.serialization.enabled",
-          "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
-        },
-        {
-          "name": "masd.generation.cpp.tests.cmakelists.enabled",
-          "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
-        },
-        {
-          "name": "masd.generation.cpp.tests.main.enabled",
           "type": "",
           "value": "false",
           "tagged_values": {
@@ -917,26 +887,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.cpp.cmake.enabled",
-          "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
-        },
-        {
-          "name": "masd.generation.cpp.tests.cmakelists.enabled",
-          "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
-        },
-        {
           "name": "masd.generation.cpp.odb.enabled",
           "type": "",
           "value": "true",
@@ -947,7 +897,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.tests.main.enabled",
+          "name": "masd.generation.cpp.tests.enabled",
           "type": "",
           "value": "true",
           "tagged_values": {
@@ -981,26 +931,6 @@
           "name": "masd.generation.csharp.enabled",
           "type": "",
           "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
-        },
-        {
-          "name": "masd.generation.cpp.cmake.enabled",
-          "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
-        },
-        {
-          "name": "masd.generation.cpp.tests.cmakelists.enabled",
-          "type": "",
-          "value": "true",
           "tagged_values": {
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp",

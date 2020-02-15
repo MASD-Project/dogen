@@ -17,7 +17,6 @@
     "masd.extraction.delete_empty_directories": "true",
     "masd.generation.cpp.enabled": "true",
     "masd.generation.cpp.standard": "c++-17",
-    "masd.generation.cpp.cmake.enabled": "true",
     "masd.variability.profile": "dogen.profiles.base.relational_profile",
     "masd.orm.database_system": "sqlite",
     "masd.orm.letter_case": "upper_case",
@@ -324,6 +323,13 @@
       "name": "common",
       "stereotypes": [
         "masd::orm::common_odb_options"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "CMakeLists",
+      "stereotypes": [
+        "masd::build::cmakelists"
       ],
       "fallback_element_type": "masd::object"
     }

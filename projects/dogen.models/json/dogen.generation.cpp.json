@@ -240,20 +240,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::include_cmakelists_formatter",
-      "stereotypes": [
-        "dogen::cpp::artefact_formatter"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formatters::source_cmakelists_formatter",
-      "stereotypes": [
-        "dogen::cpp::artefact_formatter"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formatters::types::traits",
       "stereotypes": [
         "dogen::handcrafted::typeable"
@@ -686,61 +672,6 @@
         {
           "name": "requires_stream_manipulators",
           "type": "bool"
-        }
-      ]
-    },
-    {
-      "name": "fabric",
-      "documentation": "Houses the masd.generation.cpp extensions to masd.\n",
-      "tagged_values": {
-        "masd.injection.dia.comment": "true"
-      },
-      "fallback_element_type": "masd::module"
-    },
-    {
-      "name": "fabric::injector",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "fabric::initializer",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "fabric::cmakelists",
-      "tagged_values": {
-        "masd.generalization.parent": "assets::meta_model::element"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "include_directory_path",
-          "type": "std::string"
-        },
-        {
-          "name": "source_directory_name",
-          "type": "std::string"
-        },
-        {
-          "name": "header_file_extension",
-          "type": "std::string"
-        },
-        {
-          "name": "implementation_file_extension",
-          "type": "std::string"
-        },
-        {
-          "name": "odb_targets",
-          "type": "odb_targets"
-        },
-        {
-          "name": "tests_directory_name",
-          "type": "std::string"
         }
       ]
     },
@@ -1500,20 +1431,6 @@
       ]
     },
     {
-      "name": "fabric::building_error",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "fabric::build_files_factory",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formattables::build_files_expander",
       "stereotypes": [
         "dogen::handcrafted::typeable"
@@ -1558,54 +1475,6 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "fabric::odb_targets",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "main_target_name",
-          "type": "std::string"
-        },
-        {
-          "name": "common_odb_options",
-          "type": "std::string"
-        },
-        {
-          "name": "targets",
-          "type": "std::list<odb_target>"
-        }
-      ]
-    },
-    {
-      "name": "fabric::odb_target",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "name",
-          "type": "std::string"
-        },
-        {
-          "name": "comment",
-          "type": "std::string"
-        },
-        {
-          "name": "output_directory",
-          "type": "std::string"
-        },
-        {
-          "name": "types_file",
-          "type": "std::string"
-        },
-        {
-          "name": "move_parameters",
-          "type": "std::list<std::pair<std::string, std::string>>"
-        },
-        {
-          "name": "object_odb_options",
-          "type": "std::string"
-        }
-      ]
     },
     {
       "name": "formattables::test_data_properties",
@@ -1665,20 +1534,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "fabric::dynamic_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "fabric::meta_name_factory",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formatters::repository_factory",
       "stereotypes": [
         "dogen::handcrafted::typeable"
@@ -1709,13 +1564,6 @@
     },
     {
       "name": "formatters::tests::class_implementation_formatter",
-      "stereotypes": [
-        "dogen::cpp::artefact_formatter"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formatters::tests::cmakelists_formatter",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],

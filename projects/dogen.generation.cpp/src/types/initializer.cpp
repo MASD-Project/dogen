@@ -22,7 +22,6 @@
 #include "dogen.generation.cpp/types/formatters/workflow.hpp"
 #include "dogen.generation.cpp/types/formattables/workflow.hpp"
 #include "dogen.generation.cpp/types/formatters/initializer.hpp"
-#include "dogen.generation.cpp/types/fabric/initializer.hpp"
 #include "dogen.generation.cpp/types/model_to_extraction_model_transform.hpp"
 #include "dogen.generation.cpp/types/initializer.hpp"
 
@@ -30,7 +29,6 @@ namespace dogen::generation::cpp {
 
 void initializer::initialize() {
     formatters::initializer::initialize(formatters::workflow::registrar());
-    fabric::initializer::initialize();
     using generation::transforms::register_transform;
     register_transform<model_to_extraction_model_transform>();
 }

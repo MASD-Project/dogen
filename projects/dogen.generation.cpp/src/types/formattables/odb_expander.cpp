@@ -27,8 +27,8 @@
 #include "dogen.assets/types/meta_model/orm/odb_options.hpp"
 #include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.assets/types/meta_model/structural/primitive.hpp"
+#include "dogen.assets/types/meta_model/element_visitor.hpp"
 #include "dogen.generation.cpp/types/formattables/adapter.hpp"
-#include "dogen.generation.cpp/types/element_visitor.hpp"
 #include "dogen.generation.cpp/types/formattables/header_guard_factory.hpp"
 #include "dogen.generation.cpp/types/formatters/odb/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/types/traits.hpp"
@@ -50,6 +50,8 @@ const std::string value_pragma("value");
 }
 
 namespace dogen::generation::cpp::formattables {
+
+using dogen::assets::meta_model::element_visitor;
 
 class updator : public element_visitor {
 public:

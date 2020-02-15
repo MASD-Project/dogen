@@ -478,16 +478,16 @@ other layers can then configure features.
         <dia:point val="57,-39"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="56.95,-39.05;77.955,-27.35"/>
+        <dia:rectangle val="56.95,-39.05;76.8,-29.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="57,-39"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.905000000000001"/>
+        <dia:real val="19.75"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="11.6"/>
+        <dia:real val="9.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#basic_facet_selection#</dia:string>
@@ -579,31 +579,6 @@ other layers can then configure features.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.cmake.enabled#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#false#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.archetype_location.backend=masd.generation.cpp
-#DOGEN masd.variability.template_kind=instance#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#masd.generation.cpp.odb.enabled#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -655,56 +630,6 @@ other layers can then configure features.
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#masd.generation.cpp.serialization.enabled#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#false#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.archetype_location.backend=masd.generation.cpp
-#DOGEN masd.variability.template_kind=instance#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests.cmakelists.enabled#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#false#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.archetype_location.backend=masd.generation.cpp
-#DOGEN masd.variability.template_kind=instance#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests.main.enabled#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -865,7 +790,7 @@ other layers can then configure features.
         <dia:point val="71.8,-43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="67.4025,-43.05;72.65,-38.95"/>
+        <dia:rectangle val="66.825,-43.05;72.65,-38.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -873,8 +798,8 @@ other layers can then configure features.
       <dia:attribute name="orth_points">
         <dia:point val="71.8,-43"/>
         <dia:point val="71.8,-41"/>
-        <dia:point val="67.4525,-41"/>
-        <dia:point val="67.4525,-39"/>
+        <dia:point val="66.875,-41"/>
+        <dia:point val="66.875,-39"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1017,17 +942,17 @@ other layers can then configure features.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O8">
       <dia:attribute name="obj_pos">
-        <dia:point val="67.4525,-27.4"/>
+        <dia:point val="66.875,-29.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="59.7075,-27.45;68.3025,-20.95"/>
+        <dia:rectangle val="59.7075,-29.85;67.725,-20.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="67.4525,-27.4"/>
-        <dia:point val="67.4525,-23"/>
+        <dia:point val="66.875,-29.8"/>
+        <dia:point val="66.875,-23"/>
         <dia:point val="59.7575,-23"/>
         <dia:point val="59.7575,-21"/>
       </dia:attribute>
@@ -4573,16 +4498,16 @@ for the element.
         <dia:point val="71,-21"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="70.95,-21.05;91.57,-14.95"/>
+        <dia:rectangle val="70.95,-21.05;87.335,-16.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="71,-21"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.52"/>
+        <dia:real val="16.285"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#relational_profile#</dia:string>
@@ -4674,56 +4599,6 @@ for the element.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.cmake.enabled#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#false#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.archetype_location.backend=masd.generation.cpp
-#DOGEN masd.variability.template_kind=instance#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests.cmakelists.enabled#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#true#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.archetype_location.backend=masd.generation.cpp
-#DOGEN masd.variability.template_kind=instance#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#masd.generation.cpp.odb.enabled#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -4749,7 +4624,7 @@ for the element.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests.main.enabled#</dia:string>
+            <dia:string>#masd.generation.cpp.tests.enabled#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -4782,19 +4657,19 @@ for the element.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O38">
       <dia:attribute name="obj_pos">
-        <dia:point val="67.4525,-27.4"/>
+        <dia:point val="66.875,-29.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="66.6025,-27.45;81.31,-20.9999"/>
+        <dia:rectangle val="66.025,-29.85;79.1925,-21.0002"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="67.4525,-27.4"/>
-        <dia:point val="67.4525,-23"/>
-        <dia:point val="81.26,-23"/>
-        <dia:point val="81.26,-21.0499"/>
+        <dia:point val="66.875,-29.8"/>
+        <dia:point val="66.875,-23"/>
+        <dia:point val="79.1425,-23"/>
+        <dia:point val="79.1425,-21.0502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4818,7 +4693,7 @@ for the element.
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O5" connection="6"/>
-        <dia:connection handle="1" to="O37" connection="16"/>
+        <dia:connection handle="1" to="O37" connection="12"/>
       </dia:connections>
       <dia:childnode parent="O1"/>
     </dia:object>
@@ -4827,7 +4702,7 @@ for the element.
         <dia:point val="83,-39"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="82.95,-39.05;109.73,-32.15"/>
+        <dia:rectangle val="82.95,-39.05;109.73,-33.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="83,-39"/>
@@ -4836,7 +4711,7 @@ for the element.
         <dia:real val="26.68"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#test_all_facets#</dia:string>
@@ -4959,56 +4834,6 @@ for the element.
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>#false#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.archetype_location.backend=masd.generation.cpp
-#DOGEN masd.variability.template_kind=instance#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.cmake.enabled#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#false#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.archetype_location.backend=masd.generation.cpp
-#DOGEN masd.variability.template_kind=instance#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests.cmakelists.enabled#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>#true#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
