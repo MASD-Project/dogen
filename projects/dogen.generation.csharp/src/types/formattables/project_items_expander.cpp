@@ -30,7 +30,7 @@
 #include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/project_persistence_block.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/project.hpp"
-#include "dogen.generation.csharp/types/fabric/assistant.hpp"
+#include "dogen.assets/types/meta_model/structural/assistant.hpp"
 #include "dogen.generation.csharp/types/fabric/meta_name_factory.hpp"
 #include "dogen.generation.csharp/types/formattables/project_items_expander.hpp"
 
@@ -53,8 +53,7 @@ project_items_expander::meta_names_for_project_items() {
     r.insert(ymnf::make_object_name().qualified().dot());
     r.insert(ymnf::make_builtin_name().qualified().dot());
     r.insert(ymnf::make_visitor_name().qualified().dot());
-    r.insert(fabric::meta_name_factory::
-        make_assistant_name().qualified().dot());
+    r.insert(ymnf::make_assistant_name().qualified().dot());
 
     return r;
 }
