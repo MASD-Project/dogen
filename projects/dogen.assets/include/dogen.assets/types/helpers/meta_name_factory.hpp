@@ -61,6 +61,7 @@ public:
     static meta_model::name make_visual_studio_project_name();
     static meta_model::name make_visual_studio_msbuild_targets_name();
     static meta_model::name make_orm_common_odb_options_name();
+    static meta_model::name make_build_cmakelists_name();
 };
 
 }

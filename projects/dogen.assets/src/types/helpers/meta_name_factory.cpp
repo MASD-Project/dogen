@@ -164,4 +164,10 @@ meta_model::name meta_name_factory::make_orm_common_odb_options_name() {
     return r;
 }
 
+meta_model::name meta_name_factory::make_build_cmakelists_name() {
+    static const auto r(
+        make_name("build_cmakelists"));
+    return r;
+}
+
 }
