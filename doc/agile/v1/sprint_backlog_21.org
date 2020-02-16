@@ -12,36 +12,37 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-02-15 Sat 23:51]
+#+CAPTION: Clock summary at [2020-02-16 Sun 12:34]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *77:03* |       |       | 100.0 |
+| *Total time*                                          | *78:20* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 77:03   |       |       | 100.0 |
-| Active                                                |         | 77:03 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  7:01 |   9.1 |
-| Create a demo and presentation for previous sprint    |         |       |  1:49 |   2.4 |
+| Stories                                               | 78:20   |       |       | 100.0 |
+| Active                                                |         | 78:20 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  7:01 |   9.0 |
+| Create a demo and presentation for previous sprint    |         |       |  1:49 |   2.3 |
 | Sprint and product backlog grooming                   |         |       |  3:53 |   5.0 |
 | Create new playlist for assets work                   |         |       |  2:19 |   3.0 |
 | Create the final video on the relational model series |         |       |  0:30 |   0.6 |
-| Move registrar into assets                            |         |       |  5:34 |   7.2 |
+| Move registrar into assets                            |         |       |  5:34 |   7.1 |
 | Fix error in asserter tests                           |         |       |  0:38 |   0.8 |
 | Add injection details to all models                   |         |       |  0:25 |   0.5 |
 | Fix nightly error in registrar                        |         |       |  0:33 |   0.7 |
 | Nightly code coverage is not being reported           |         |       |  0:25 |   0.5 |
-| Move visual studio fabric types into assets           |         |       | 18:34 |  24.1 |
-| Create metamodel elements for =entry_point=           |         |       |  7:18 |   9.5 |
-| Remove support for element extensions                 |         |       |  0:44 |   1.0 |
-| Move =object_odb_options= into assets                 |         |       |  6:43 |   8.7 |
-| Move common ODB options into assets                   |         |       |  4:34 |   5.9 |
-| Move msbuild and cmakelists into assets               |         |       |  9:50 |  12.8 |
-| Move assembly info and assistant into assets          |         |       |  1:35 |   2.1 |
+| Move visual studio fabric types into assets           |         |       | 18:34 |  23.7 |
+| Create metamodel elements for =entry_point=           |         |       |  7:18 |   9.3 |
+| Remove support for element extensions                 |         |       |  0:44 |   0.9 |
+| Move =object_odb_options= into assets                 |         |       |  6:43 |   8.6 |
+| Move common ODB options into assets                   |         |       |  4:34 |   5.8 |
+| Move msbuild and cmakelists into assets               |         |       | 10:12 |  13.0 |
+| Move assembly info and assistant into assets          |         |       |  1:35 |   2.0 |
 | Remove injected element names validation              |         |       |  0:09 |   0.2 |
 | Fixes to setup                                        |         |       |  1:05 |   1.4 |
 | Cannot see source file in coveralls                   |         |       |  0:16 |   0.3 |
-| Integration of archetypes into assets                 |         |       |  2:41 |   3.5 |
-| Investigate borked nightly build                      |         |       |  0:27 |   0.6 |
+| Integration of archetypes into assets                 |         |       |  2:41 |   3.4 |
+| Investigate borked nightly build                      |         |       |  0:38 |   0.8 |
+| Define a combined logical-physical space              |         |       |  0:44 |   0.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -1014,6 +1015,7 @@ Notes:
 *** COMPLETED Move msbuild and cmakelists into assets                 :story:
     CLOSED: [2020-02-15 Sat 21:57]
     :LOGBOOK:
+    CLOCK: [2020-02-16 Sun 12:12]--[2020-02-16 Sun 12:34] =>  0:22
     CLOCK: [2020-02-15 Sat 21:01]--[2020-02-15 Sat 21:56] =>  0:55
     CLOCK: [2020-02-15 Sat 19:46]--[2020-02-15 Sat 20:20] =>  0:34
     CLOCK: [2020-02-15 Sat 19:00]--[2020-02-15 Sat 19:45] =>  0:45
@@ -1155,6 +1157,7 @@ components, each with their own primary technical space.
 
 *** STARTED Investigate borked nightly build                          :story:
     :LOGBOOK:
+    CLOCK: [2020-02-16 Sun 10:25]--[2020-02-16 Sun 10:36] =>  0:11
     CLOCK: [2020-02-15 Sat 16:01]--[2020-02-15 Sat 16:28] =>  0:27
     :END:
 
@@ -1166,6 +1169,27 @@ It seems we were not deleting the pristine directory, causing it to
 become out of sync. It also seems like we have a git clone inside a
 git clone in dogen, but its not clear how this came to be. We need to
 recheck this on tomorrow's nightly.
+
+*** STARTED Define a combined logical-physical space                  :story:
+    :LOGBOOK:
+    CLOCK: [2020-02-16 Sun 06:08]--[2020-02-16 Sun 06:52] =>  0:44
+    :END:
+
+It now seems that we have been searching for a meta-model that
+combines both aspects of logical modeling as well as physical
+modeling. Facets, archetypes etc are all parts of the physical
+dimension of this space. We need to find all stories on this topic and
+organise them to see if we can come up with a consistent system of
+meaning.
+
+Notes:
+
+- archetypes must support a notion of "kind". This is so we can have
+  public include headers, private include headers and implementation
+  files. This "kind" affects the topology of the physical dimension.
+- the locator is a function that takes points in the logical-physical
+  space and maps them to filesystem locations. It uses properties of
+  those meta-model elements to configure the mapping.
 
 *** Add "structural" to structural stereotypes                        :story:
 
