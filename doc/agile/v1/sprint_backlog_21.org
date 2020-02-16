@@ -12,17 +12,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-02-16 Sun 23:30]
+#+CAPTION: Clock summary at [2020-02-16 Sun 23:38]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *79:55* |       |       | 100.0 |
+| *Total time*                                          | *80:02* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 79:55   |       |       | 100.0 |
-| Active                                                |         | 79:55 |       | 100.0 |
+| Stories                                               | 80:02   |       |       | 100.0 |
+| Active                                                |         | 80:02 |       | 100.0 |
 | Edit release notes for previous sprint                |         |       |  7:01 |   8.8 |
 | Create a demo and presentation for previous sprint    |         |       |  1:49 |   2.3 |
-| Sprint and product backlog grooming                   |         |       |  3:53 |   4.9 |
+| Sprint and product backlog grooming                   |         |       |  4:00 |   5.0 |
 | Create new playlist for assets work                   |         |       |  2:19 |   2.9 |
 | Create the final video on the relational model series |         |       |  0:30 |   0.6 |
 | Move registrar into assets                            |         |       |  5:34 |   7.0 |
@@ -35,7 +35,7 @@
 | Remove support for element extensions                 |         |       |  0:44 |   0.9 |
 | Move =object_odb_options= into assets                 |         |       |  6:43 |   8.4 |
 | Move common ODB options into assets                   |         |       |  4:34 |   5.7 |
-| Move msbuild and cmakelists into assets               |         |       | 10:12 |  12.8 |
+| Move msbuild and cmakelists into assets               |         |       | 10:12 |  12.7 |
 | Move assembly info and assistant into assets          |         |       |  1:35 |   2.0 |
 | Remove injected element names validation              |         |       |  0:09 |   0.2 |
 | Consider moving more configuration to profiles        |         |       |  1:35 |   2.0 |
@@ -348,6 +348,7 @@ using the Dogen test models.
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-02-16 Sun 23:31]--[2020-02-16 Sun 23:38] =>  0:07
     CLOCK: [2020-02-15 Sat 23:44]--[2020-02-15 Sat 23:51] =>  0:07
     CLOCK: [2020-02-15 Sat 16:29]--[2020-02-15 Sat 16:37] =>  0:08
     CLOCK: [2020-02-12 Wed 22:42]--[2020-02-12 Wed 22:51] =>  0:09
@@ -1086,7 +1087,8 @@ Dogen. We should try to move them into profiles and see what happens.
 We cannot move =ignore_files_matching_regex= due to a bug in merging
 logic (story raised).
 
-*** STARTED Fixes to setup                                            :story:
+*** COMPLETED Fixes to setup                                          :story:
+    CLOSED: [2020-02-16 Sun 23:36]
     :LOGBOOK:
     CLOCK: [2020-01-31 Fri 11:38]--[2020-01-31 Fri 11:51] =>  0:13
     CLOCK: [2020-01-31 Fri 10:59]--[2020-01-31 Fri 11:37] =>  0:38
@@ -1098,7 +1100,8 @@ Time spent fixing setup issues:
 - fixes to emacs
 - dist-upgrade PC to latest.
 
-*** STARTED Cannot see source file in coveralls                       :story:
+*** POSTPONED Cannot see source file in coveralls                     :story:
+    CLOSED: [2020-02-16 Sun 23:36]
      :LOGBOOK:
      CLOCK: [2020-01-31 Fri 15:03]--[2020-01-31 Fri 15:19] =>  0:16
      :END:
@@ -1113,7 +1116,8 @@ Time spent fixing setup issues:
  We have the same problem in codecove, only there is worse because we
  also can't see the fake commit we did.
 
-*** STARTED Integration of archetypes into assets                     :story:
+*** POSTPONED Integration of archetypes into assets                   :story:
+    CLOSED: [2020-02-16 Sun 23:36]
     :LOGBOOK:
     CLOCK: [2020-02-03 Mon 17:46]--[2020-02-03 Mon 18:32] =>  0:46
     CLOCK: [2020-02-03 Mon 08:00]--[2020-02-03 Mon 08:42] =>  0:42
@@ -1183,7 +1187,8 @@ backends. Artefacts produced by a backend must have a unique physical
 location. In LAM mode, the component is split into multiple
 components, each with their own primary technical space.
 
-*** STARTED Investigate borked nightly build                          :story:
+*** COMPLETED Investigate borked nightly build                        :story:
+    CLOSED: [2020-02-16 Sun 23:36]
     :LOGBOOK:
     CLOCK: [2020-02-16 Sun 10:25]--[2020-02-16 Sun 10:36] =>  0:11
     CLOCK: [2020-02-15 Sat 16:01]--[2020-02-15 Sat 16:28] =>  0:27
@@ -1198,7 +1203,8 @@ become out of sync. It also seems like we have a git clone inside a
 git clone in dogen, but its not clear how this came to be. We need to
 recheck this on tomorrow's nightly.
 
-*** STARTED Define a combined logical-physical space                  :story:
+*** POSTPONED Define a combined logical-physical space                :story:
+    CLOSED: [2020-02-16 Sun 23:37]
     :LOGBOOK:
     CLOCK: [2020-02-16 Sun 06:08]--[2020-02-16 Sun 06:52] =>  0:44
     :END:
@@ -1218,303 +1224,6 @@ Notes:
 - the locator is a function that takes points in the logical-physical
   space and maps them to filesystem locations. It uses properties of
   those meta-model elements to configure the mapping.
-
-*** Add "structural" to structural stereotypes                        :story:
-
-At present all masd stereotypes are namespaced correctly, according to
-the matching meta-model elements, except for the structural ones. That
-is, we do =masd::entry_point= instead of
-=masd::structural::entry_point= etc.
-
-*** Improve error message for missing files                           :story:
-
-At present when we are expecting a file but the file is missing, the
-tests state:
-
-: Unexpected file (remove): CSharpRefImpl.CSharpModel/SequenceGenerators/AssistantSequenceGenerator.cs
-: Unexpected file (remove): CSharpRefImpl.CSharpModel/Dumpers/AssistantDumper.cs
-
-We should really say "Expected file". Think a bit more about the right
-wording for these messages.
-
-*** Consider creating a "model" meta-model element                    :story:
-
-This is not yet particularly clear, and we may already have something
-on the backlog for this, but the gist of it is that we have a number
-of elements in the meta-model that are functions of the model itself:
-
-- the root module.
-- projects and solutions for the model itself.
-- common ODB options.
-- top-level CMakefile (and perhaps others).
-- msbuild
-
-In all those cases we are duplicating information available at the
-model level, with perhaps a tiny bit of extra processing. It would
-make more sense for there to be an element that models the model
-itself and then to have formatters for this element. We should wait
-until we finish with the fabric refactor (and possibly the generation
-refactor too) until we look into this. We should also take into
-account the product models.
-
-In addition, cases such as common ODB options need to be rethought; if
-all we are supplying is a different representation of data that
-already exists in the model itself, then we should either rely on the
-model meta-type or move those properties to the new meta-type. Seems a
-tad excessive having common ODB options just for a "post-processed"
-set of properties.
-
-*** Intrinsic non-generatable types                                   :story:
-
-In the decoration transform we have this hack:
-
-: bool decoration_transform::
-: is_generatable(const assets::meta_model::name& meta_name) {
-:     // FIXME: massive hack for now.
-:     using mnf = assets::helpers::meta_name_factory;
-:     static const auto otn(mnf::make_object_template_name());
-:     static const auto ln(mnf::make_licence_name());
-:     static const auto mln(mnf::make_modeline_name());
-:     static const auto mgn(mnf::make_modeline_group_name());
-:     static const auto gmn(mnf::make_generation_marker_name());
-:
-:     const auto id(meta_name.qualified().dot());
-:     return
-:         id != otn.qualified().dot() &&
-:         id != ln.qualified().dot() &&
-:         id != mln.qualified().dot() &&
-:         id != mgn.qualified().dot() &&
-:         id != gmn.qualified().dot();
-: }
-
-This is done because we know up front that some elements in the assets
-meta-model cannot be generated. We need a way to tag this elements
-statically. This should be done when the elements are code
-generated. It is not yet clear how this should be done though.
-
-*** Profiles do not support collection types                          :story:
-
-If one tries to make a profile with a collection type, an error
-occurs. For example, moving these entries into a profile:
-
-: #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
-: #DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
-
-Results in the following error:
-
-: std::exception::what: Found more than one configuration point for the same feature: masd.extraction.ignore_files_matching_regex
-
-This is because we try to simply insert these entries into a map:
-
-:             const auto inserted(r.configuration_points().insert(pair).second);
-
-In order for this to work correctly, we need to dispatch it to a
-visitor to resolve the value first and then have some type-specific
-merge logic. In addition, if you add an entry to a profile as well as
-to an element, it will not be merged as you'd expect. That is, if the
-profile has:
-
-: #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
-
-And the element has:
-
-: #DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
-
-Only the element's entry will be taken into account.
-
-*** Handling of "derived meta-types"                                  :story:
-
-In the past we had the notion of "element extensions". This was
-basically a way to allow a meta-element to have more than one
-associated representation. For example: many elements can give rise to
-forward declarations in C++, so it would be nice to transform these
-"source" elements into a second (common) element that reflects this
-(say a "forward declaration" meta element). Then we can easily create
-a simple template. However there were numerous problems with this
-approach:
-
-- we had two distinct elements occupying the same point in modeling
-  space. Due to this we made elements contain elements (effectively,
-  though it wasn't explicit in the design).
-- we then had the notion that an archetype associated with a was no
-  longer a "complete" location in archetype space; this is because
-  until you know the facet for which you are creating the forward
-  declaration for you cannot know your location in archetype space.
-- code was rather complex in order to handle all of these special
-  cases.
-
-To solve this problem we made forward declarations an archetype,
-projected across facets. This made the design much neater but now we
-have a second problem: we need to duplicate all of the formatting
-logic for e.g. objects, enumerations, etc and worse, for each facet as
-well.
-
-The existing state was just too complex so we just "fixed it" at the
-time. However, we now have a very similar problem with ODB "object"
-options. These are only applicable to a facet, at least, but we still
-need them for more than one element (primitive, object).
-
-One possible solution is to use the same approach as we did for
-helpers, but in a much simpler way. We could:
-
-- create simple functions that just take an assets type design for the
-  template (e.g. forward declaration, element ODB options).
-- the element itself would contain these types, which are created as
-  part of the transforms.
-- the existing facet level templates simply call the helper function,
-  supplying the type.
-
-We still have to create all of the duplicate machinery for the
-formatter, but once all of that is code-generated, this won't be too
-much of a problem. This way there is no duplication of formatting
-code, but also no meta-model complexity. Conceptually, these are just
-facets, but at the implementation level they are implemented
-differently. This also means we do not violate the rule of making
-implicit meta-model elements explicit.
-
-*** Use profile overrides to test facets                              :story:
-
-At present we have a number of models that are variations on the same
-theme: testing the enablement of a single facet. However, this could
-easily be achieved if we had a single model and used the new profile
-override machinery that was developed for nightlies.
-
-Notes:
-
-- we need to somehow also override the model modules.
-- we could create separate CMake targets for these special cases.
-- this may also apply to cases such as delete extra, etc. We need to
-  do an inventory of all models that have exactly the same composition
-  but different configurations.
-
-*** Allow dropping facet postfix for an element                       :story:
-
-We sometimes need to suppress the facet postfix. For example, when
-outputting tests, at present we have:
-
-: cpp_ref_impl.boost_model/generated_tests/main_tests.cpp
-
-We may want it just to be called:
-
-: cpp_ref_impl.boost_model/generated_tests/main.cpp
-
-However, we don't want all files on that facet to drop their postfix,
-just main.
-
-*** Boost test module is named after the entity                       :story:
-
-At present we have:
-
-: #define BOOST_TEST_MODULE cpp_ref_impl::boost_model::entry_point
-
-In reality, the test module name should be more something reflective
-of the model itself, such as cpp_ref_impl::boost_model::tests.
-
-*** Generate a feature initialiser for all initialisers               :story:
-
-At present we are code-generating the features and the initialiser for
-the features in each model. However, we then need to remember to call
-all of the initialisers. This is done, somewhat arbitrarily, in the
-context factory:
-
-: variability::meta_model::feature_template_repository
-: make_feature_template_repository() {
-:     variability::helpers::feature_template_registrar rg;
-:     injection::features::initializer::register_templates(rg);
-:     assets::features::initializer::register_templates(rg);
-:     generation::features::initializer::register_templates(rg);
-:     templating::initializer::register_templates(rg);
-:     variability::features::initializer::register_templates(rg);
-:     archetypes::features::initializer::register_templates(rg);
-:     extraction::features::initializer::register_templates(rg);
-:     generation::cpp::feature_initializer::register_templates(rg);
-:     generation::csharp::feature_initializer::register_templates(rg);
-:     features::initializer::register_templates(rg);
-:     const auto r(rg.repository());
-:     return r;
-: }
-
-It would be much better if we could just extend the initialiser to
-know of all dependent initialisers and call them. This way the
-initialiser in engine would already call all of the initialisers. This
-can probably be easily done by:
-
-- allowing more than one initialiser in the merged model
-- as part of the merge, keep track of the "dependent" models, and of
-  their initialisers. We probably already do something similar for the
-  registrar.
-- ensure the initialisers only do something the first time they are
-  called. We already have a story for this somewhere in the backlog.
-
-*** Naming of DLL entry point does not follow existing convention     :story:
-
-With the introduction of =entry_point=, users can now declare an
-entity representing the component's entry point. It is projected to
-the different facets:
-
-- for types, it should mean =main.cpp= for executables and
-  =dllmain.cpp= for shared objects.
-- for tests it should mean =main.cpp=.
-
-At present we do not have a way to define a "prefix" for a
-formatter. Thus it is not possible to generate a file called
-=dllmain.cpp=. We need to investigate the naming conventions for these
-files.
-
-*** Technical space composition                                       :story:
-
-There are some formatters which are really not specific to a technical
-space:
-
-- CMake can be used with several languages such as C, C++, etc.
-- Visual studio solutions are common to many technical spaces (F#, C#,
-  C++, etc).
-
-It seems we need to create a set of generation models which can be
-used in conjunction with the "dominant" technical space. These are
-triggered by the presence of meta-elements. Or perhaps we can just say
-that we iterate through all "non-dominant" technical spaces ("main"
-and "secondary"?  "subsidiary"?) and generate anything for which there
-is an enabled and matching meta-element.
-
-*** Improve error messages for mistakes in meta-data enums            :story:
-
-At present when one makes a mistake in meta data the errors are not
-particularly enlightening:
-
-: FAILED: projects/dogen.models/dia/CMakeFiles/generate_dogen.engine.dia
-: cd /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang9/Release && /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang9/Release/stage/bin/dogen.cli generate --target /work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen.models/dia/dogen.engine.dia --output-directory /work/DomainDrivenConsulting/masd/dogen/integration/projects/
-: Error: bad lexical cast: source type value could not be interpreted as target
-
-This was caused because we put in an invalid binding point:
-
-: #DOGEN masd.variability.default_binding_point=entity
-
-We should trap the lexical cast exception and provide a proper error
-given the context.
-
-*** Tracing backend is not defaulted                                  :story:
-
-Not supplying a tracing backend results in the following error:
-
-: FAILED: projects/dogen.models/dia/CMakeFiles/generate_dogen.dia
-: cd /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang9/Release && /work/DomainDrivenConsulting/masd/dogen/integration/build/output/clang9/Release/stage/bin/dogen.cli generate --target /work/DomainDrivenConsulting/masd/dogen/integration/projects/dogen.models/dia/dogen.dia --log-enabled --log-level trace --tracing-enabled --tracing-level detail --tracing-guids-enabled --reporting-enabled --reporting-style org-mode --output-directory /work/DomainDrivenConsulting/masd/dogen/integration/projects/
-: Error: Tracing backend is unsupported: { "__type__": "tracing_backend", "value": "invalid" }
-
-We need to add a sensible default value.
-
-*** Create meta-entity for root module                                :story:
-
-At present we are supplying model properties via a "special" comment
-in a model. Items such as model_modules etc are read from this
-comment. We then generate the root module and use these properties to
-configure model-wide variability. However, according to the rule that
-there are no implicit model elements, we should have a meta-model
-element representing the root module. The properties of this element
-should reflect those on the "special" comment.
-
-Or perhaps a case can be made that the root module is special and it
-is the only implicit element.
 
 ** Deprecated
 *** CANCELLED Move fabric types into coding                            :epic:
