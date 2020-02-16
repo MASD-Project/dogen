@@ -3756,6 +3756,14 @@
         "assets::meta_element"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "CMakeLists",
+      "stereotypes": [
+        "masd::build::cmakelists",
+        "dogen::handcrafted::cmake"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
