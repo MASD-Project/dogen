@@ -602,8 +602,8 @@ template_instantiator::instantiate(const meta_model::feature_model& fm,
             if (!inserted) {
                 BOOST_LOG_SEV(lg, error) << duplicate_configuration_point
                                          << cpqn;
-                BOOST_THROW_EXCEPTION(
-                    instantiation_exception(unsupported_template_kind + cpqn));
+                BOOST_THROW_EXCEPTION(instantiation_exception(
+                        duplicate_configuration_point + cpqn));
             }
         }
     }
