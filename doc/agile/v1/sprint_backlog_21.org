@@ -12,32 +12,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-02-16 Sun 12:34]
+#+CAPTION: Clock summary at [2020-02-16 Sun 23:30]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                          | *78:20* |       |       | 100.0 |
+| *Total time*                                          | *79:55* |       |       | 100.0 |
 |-------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                               | 78:20   |       |       | 100.0 |
-| Active                                                |         | 78:20 |       | 100.0 |
-| Edit release notes for previous sprint                |         |       |  7:01 |   9.0 |
+| Stories                                               | 79:55   |       |       | 100.0 |
+| Active                                                |         | 79:55 |       | 100.0 |
+| Edit release notes for previous sprint                |         |       |  7:01 |   8.8 |
 | Create a demo and presentation for previous sprint    |         |       |  1:49 |   2.3 |
-| Sprint and product backlog grooming                   |         |       |  3:53 |   5.0 |
-| Create new playlist for assets work                   |         |       |  2:19 |   3.0 |
+| Sprint and product backlog grooming                   |         |       |  3:53 |   4.9 |
+| Create new playlist for assets work                   |         |       |  2:19 |   2.9 |
 | Create the final video on the relational model series |         |       |  0:30 |   0.6 |
-| Move registrar into assets                            |         |       |  5:34 |   7.1 |
+| Move registrar into assets                            |         |       |  5:34 |   7.0 |
 | Fix error in asserter tests                           |         |       |  0:38 |   0.8 |
 | Add injection details to all models                   |         |       |  0:25 |   0.5 |
 | Fix nightly error in registrar                        |         |       |  0:33 |   0.7 |
 | Nightly code coverage is not being reported           |         |       |  0:25 |   0.5 |
-| Move visual studio fabric types into assets           |         |       | 18:34 |  23.7 |
-| Create metamodel elements for =entry_point=           |         |       |  7:18 |   9.3 |
+| Move visual studio fabric types into assets           |         |       | 18:34 |  23.2 |
+| Create metamodel elements for =entry_point=           |         |       |  7:18 |   9.1 |
 | Remove support for element extensions                 |         |       |  0:44 |   0.9 |
-| Move =object_odb_options= into assets                 |         |       |  6:43 |   8.6 |
-| Move common ODB options into assets                   |         |       |  4:34 |   5.8 |
-| Move msbuild and cmakelists into assets               |         |       | 10:12 |  13.0 |
+| Move =object_odb_options= into assets                 |         |       |  6:43 |   8.4 |
+| Move common ODB options into assets                   |         |       |  4:34 |   5.7 |
+| Move msbuild and cmakelists into assets               |         |       | 10:12 |  12.8 |
 | Move assembly info and assistant into assets          |         |       |  1:35 |   2.0 |
 | Remove injected element names validation              |         |       |  0:09 |   0.2 |
+| Consider moving more configuration to profiles        |         |       |  1:35 |   2.0 |
 | Fixes to setup                                        |         |       |  1:05 |   1.4 |
 | Cannot see source file in coveralls                   |         |       |  0:16 |   0.3 |
 | Integration of archetypes into assets                 |         |       |  2:41 |   3.4 |
@@ -1058,6 +1059,33 @@ When we had fabric, we split name validation into "regular" types and
 "injected" types. With the removal of fabric, this is no longer
 applicable so remove this logic.
 
+*** COMPLETED Consider moving more configuration to profiles          :story:
+    CLOSED: [2020-02-16 Sun 23:30]
+    :LOGBOOK:
+    CLOCK: [2020-02-16 Sun 23:07]--[2020-02-16 Sun 23:30] =>  0:23
+    CLOCK: [2020-02-16 Sun 21:54]--[2020-02-16 Sun 23:06] =>  1:12
+    :END:
+
+At present we have a number of "model specific" configuration options
+which are really not that model specific:
+
+: #DOGEN masd.injection.input_technical_space=cpp
+: #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
+: #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
+: #DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
+: #DOGEN masd.extraction.delete_extra_files=true
+: #DOGEN masd.extraction.delete_empty_directories=true
+: #DOGEN masd.extraction.force_write=false
+: #DOGEN masd.generation.cpp.enabled=true
+: #DOGEN masd.generation.csharp.enabled=false
+: #DOGEN masd.generation.cpp.standard=c++-17
+
+Most of these options are common to all models, particularly in
+Dogen. We should try to move them into profiles and see what happens.
+
+We cannot move =ignore_files_matching_regex= due to a bug in merging
+logic (story raised).
+
 *** STARTED Fixes to setup                                            :story:
     :LOGBOOK:
     CLOCK: [2020-01-31 Fri 11:38]--[2020-01-31 Fri 11:51] =>  0:13
@@ -1264,24 +1292,35 @@ meta-model cannot be generated. We need a way to tag this elements
 statically. This should be done when the elements are code
 generated. It is not yet clear how this should be done though.
 
-*** Consider moving more configuration to profiles                    :story:
+*** Profiles do not support collection types                          :story:
 
-At present we have a number of "model specific" configuration options
-which are really not that model specific:
+If one tries to make a profile with a collection type, an error
+occurs. For example, moving these entries into a profile:
 
-: #DOGEN masd.injection.input_technical_space=cpp
-: #DOGEN masd.extraction.ignore_files_matching_regex=.*/CMakeLists.txt
 : #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
 : #DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
-: #DOGEN masd.extraction.delete_extra_files=true
-: #DOGEN masd.extraction.delete_empty_directories=true
-: #DOGEN masd.extraction.force_write=false
-: #DOGEN masd.generation.cpp.enabled=true
-: #DOGEN masd.generation.csharp.enabled=false
-: #DOGEN masd.generation.cpp.standard=c++-17
 
-Most of these options are common to all models, particularly in
-Dogen. We should try to move them into profiles and see what happens.
+Results in the following error:
+
+: std::exception::what: Found more than one configuration point for the same feature: masd.extraction.ignore_files_matching_regex
+
+This is because we try to simply insert these entries into a map:
+
+:             const auto inserted(r.configuration_points().insert(pair).second);
+
+In order for this to work correctly, we need to dispatch it to a
+visitor to resolve the value first and then have some type-specific
+merge logic. In addition, if you add an entry to a profile as well as
+to an element, it will not be merged as you'd expect. That is, if the
+profile has:
+
+: #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
+
+And the element has:
+
+: #DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
+
+Only the element's entry will be taken into account.
 
 *** Handling of "derived meta-types"                                  :story:
 

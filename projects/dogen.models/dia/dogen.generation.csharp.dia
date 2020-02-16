@@ -112,10 +112,6 @@
 #DOGEN masd.injection.input_technical_space=cpp
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
-#DOGEN masd.extraction.delete_extra_files=true
-#DOGEN masd.extraction.delete_empty_directories=true
-#DOGEN masd.generation.cpp.enabled=true
-#DOGEN masd.generation.cpp.standard=c++-17
 #DOGEN masd.variability.profile=dogen.profiles.base.default_profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

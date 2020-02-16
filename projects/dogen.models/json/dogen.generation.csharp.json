@@ -15,13 +15,8 @@
     "masd.injection.reference": "masd.variability",
     "masd.injection.reference": "dogen.profiles",
     "masd.injection.input_technical_space": "cpp",
-    "masd.extraction.ignore_files_matching_regex": ".*/CMakeLists.txt",
     "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
     "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
-    "masd.extraction.delete_extra_files": "true",
-    "masd.extraction.delete_empty_directories": "true",
-    "masd.generation.cpp.enabled": "true",
-    "masd.generation.cpp.standard": "c++-17",
     "masd.variability.profile": "dogen.profiles.base.default_profile"
   },
   "elements": [

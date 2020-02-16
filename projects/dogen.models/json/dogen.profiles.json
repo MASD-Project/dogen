@@ -19,7 +19,7 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "base::decoration",
+      "name": "base::base",
       "documentation": "Top-level configuration for Dogen.\n",
       "stereotypes": [
         "masd::variability::profile_template"
@@ -64,13 +64,40 @@
             "masd.variability.template_kind": "instance",
             "masd.variability.value": "Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>"
           }
+        },
+        {
+          "name": "masd.extraction.delete_extra_files",
+          "type": "",
+          "value": "true",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance"
+          }
+        },
+        {
+          "name": "masd.extraction.delete_empty_directories",
+          "type": "",
+          "value": "true",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.standard",
+          "type": "",
+          "value": "c++-17",
+          "tagged_values": {
+            "masd.variability.archetype_location.kernel": "masd",
+            "masd.variability.template_kind": "instance"
+          }
         }
       ]
     },
     {
       "name": "base::basic_facet_selection",
       "parents": [
-        "base::decoration"
+        "base::base"
       ],
       "documentation": "Enables only a select set of facets in the C++ backend.\n",
       "stereotypes": [
@@ -177,7 +204,7 @@
     {
       "name": "base::disable_all_facets",
       "parents": [
-        "base::decoration"
+        "base::base"
       ],
       "documentation": "\nDisables all facets in the C++ backend.\n",
       "stereotypes": [
@@ -911,7 +938,7 @@
     {
       "name": "base::test_all_facets",
       "parents": [
-        "base::decoration"
+        "base::base"
       ],
       "stereotypes": [
         "masd::variability::profile_template"
