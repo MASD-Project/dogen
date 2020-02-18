@@ -12,7 +12,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-02-16 Sun 23:38]
+#+CAPTION: Clock summary at [2020-02-18 Tue 00:12]
 | <75>                                                  |         |       |       |       |
 | Headline                                              | Time    |       |       |     % |
 |-------------------------------------------------------+---------+-------+-------+-------|
@@ -495,7 +495,7 @@ model because we want to be able to join columns from different models
   given dia file in its current state
 - line, column.
 
-However our current parsers (XML, JSON will not make it easy to record
+However our current parsers (XML, JSON) will not make it easy to record
 the line and column so this needs to be deferred.
 
 *** COMPLETED Configuration classes with traits                       :story:

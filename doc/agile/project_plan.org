@@ -17,21 +17,11 @@ task juggler installed:
 
 ** Software Development
 
-*** Fabric clean-up
-   :PROPERTIES:
-   :EFFORT:   6d
-   :BLOCKER:  start
-   :allocate: s20
-   :END:
-
-- move all C++ fabric types into coding.
-- move all C# fabric types into coding.
-
 *** Generation meta-model clean-up
    :PROPERTIES:
-   :EFFORT:   6d
+   :EFFORT:   12d
    :BLOCKER:  previous-sibling
-   :allocate: s21
+   :allocate: s22
    :END:
 
 - remove all types that are in coding but are related to generation
@@ -39,9 +29,9 @@ task juggler installed:
 
 *** Formattables clean-up
    :PROPERTIES:
-   :EFFORT:   6d
+   :EFFORT:   12d
    :BLOCKER:  previous-sibling
-   :allocate: s22
+   :allocate: s23
    :END:
 
 - move formattables concepts into generation, generalising them. This
@@ -49,9 +39,9 @@ task juggler installed:
 
 *** Generation extraction model
    :PROPERTIES:
-   :EFFORT:   4d
+   :EFFORT:   8d
    :BLOCKER:  previous-sibling
-   :allocate: s23
+   :allocate: s24
    :END:
 
 - when C++ and C# models only have formatters, merge them into one
@@ -59,9 +49,9 @@ task juggler installed:
 
 *** Makefiles clean up
    :PROPERTIES:
-   :EFFORT:   2d
+   :EFFORT:   5d
    :BLOCKER:  previous-sibling
-   :allocate: s23
+   :allocate: s24
    :END:
 
 - update all CMake templates with latest layout from hand-crafted
@@ -69,18 +59,18 @@ task juggler installed:
 
 *** Product generation
    :PROPERTIES:
-   :EFFORT:   6d
+   :EFFORT:   12d
    :BLOCKER:  previous-sibling
-   :allocate: s23
+   :allocate: s25
    :END:
 
 - add proudct and product family level entities to coding.
 
 *** PDMs generation
    :PROPERTIES:
-   :EFFORT:   6d
+   :EFFORT:   12d
    :BLOCKER:  previous-sibling
-   :allocate: s24
+   :allocate: s26
    :END:
 
 - create PDMs
@@ -90,21 +80,13 @@ task juggler installed:
 *** Project start
     :PROPERTIES:
     :task_id: start
-    :start: 2020-01-23
+    :start: 2020-02-18
     :END:
 
 * Sprints                                              :taskjuggler_resource:
 
 Sprints for the project plan.
 
-** Sprint 20
-   :PROPERTIES:
-   :resource_id: s20
-   :END:
-** Sprint 21
-   :PROPERTIES:
-   :resource_id: s21
-   :END:
 ** Sprint 22
    :PROPERTIES:
    :resource_id: s22
@@ -116,4 +98,12 @@ Sprints for the project plan.
 ** Sprint 24
    :PROPERTIES:
    :resource_id: s24
+   :END:
+** Sprint 25
+   :PROPERTIES:
+   :resource_id: s25
+   :END:
+** Sprint 26
+   :PROPERTIES:
+   :resource_id: s26
    :END:

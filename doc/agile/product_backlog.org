@@ -12,10 +12,6 @@ vision. The V2 vision is to finish the dogen API and implement all
 functionality in terms of metamodel elements - e.g. no special cases
 such as profiles, licences etc.
 
-** Dumping ground from previous releases
-
-Stories that we haven't quite classified yet, but are needed.
-
 ** Core work
 
 The most significant stories needed by v2. These are either features
