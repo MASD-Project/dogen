@@ -13,25 +13,31 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-02-18 Tue 00:23]
-| <75>                                   |        |      |      |       |
-| Headline                               | Time   |      |      |     % |
-|----------------------------------------+--------+------+------+-------|
-| *Total time*                           | *2:59* |      |      | 100.0 |
-|----------------------------------------+--------+------+------+-------|
-| Stories                                | 2:59   |      |      | 100.0 |
-| Active                                 |        | 2:59 |      | 100.0 |
-| Edit release notes for previous sprint |        |      | 1:56 |  64.8 |
-| Sprint and product backlog grooming    |        |      | 1:03 |  35.2 |
+#+CAPTION: Clock summary at [2020-02-18 Tue 20:43]
+| <75>                                               |        |      |      |       |
+| Headline                                           | Time   |      |      |     % |
+|----------------------------------------------------+--------+------+------+-------|
+| *Total time*                                       | *5:39* |      |      | 100.0 |
+|----------------------------------------------------+--------+------+------+-------|
+| Stories                                            | 5:39   |      |      | 100.0 |
+| Active                                             |        | 5:39 |      | 100.0 |
+| Edit release notes for previous sprint             |        |      | 4:11 |  74.0 |
+| Create a demo and presentation for previous sprint |        |      | 0:25 |   7.4 |
+| Sprint and product backlog grooming                |        |      | 1:03 |  18.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
-*** STARTED Edit release notes for previous sprint                    :story:
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2020-02-18 Tue 20:35]
     :LOGBOOK:
+    CLOCK: [2020-02-18 Tue 20:30]--[2020-02-18 Tue 20:44] =>  0:14
+    CLOCK: [2020-02-18 Tue 19:04]--[2020-02-18 Tue 19:34] =>  0:30
+    CLOCK: [2020-02-18 Tue 18:02]--[2020-02-18 Tue 18:37] =>  0:35
     CLOCK: [2020-02-17 Mon 23:16]--[2020-02-18 Tue 00:23] =>  1:07
     CLOCK: [2020-02-17 Mon 22:44]--[2020-02-17 Mon 23:15] =>  0:31
     CLOCK: [2020-02-17 Mon 20:00]--[2020-02-17 Mon 20:10] =>  0:10
     CLOCK: [2020-02-17 Mon 19:51]--[2020-02-17 Mon 19:59] =>  0:08
+    CLOCK: [2020-02-17 Mon 19:02]--[2020-02-17 Mon 19:58] =>  0:56
     :END:
 
 Add github release notes for previous sprint.
@@ -39,257 +45,143 @@ Add github release notes for previous sprint.
 Title: Dogen v1.0.21, "Nossa Senhora do Rosário"
 
 #+BEGIN_SRC markdown
-**DRAFT: release notes are still being worked on**
-
-![Oasis do Arco](https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Mini_oasis_in_the_namibe_desert%2C_Angola.JPG/800px-Mini_oasis_in_the_namibe_desert%2C_Angola.JPG)
-_Arco Oasis, Namibe, Moçamedes, Angola. (C) 2011 [Paulo César Santos](https://commons.wikimedia.org/wiki/File:Mini_oasis_in_the_namibe_desert,_Angola.JPG)_
+![Igreja de Nossa Senhora do Rosário](
+https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Church_in_Tombua%2C_Namibe%2C_Angola.JPG/1280px-Church_in_Tombua%2C_Namibe%2C_Angola.JPG)
+_Igreja de Nossa Senhora do Rosário, Tombwa, Namibe, Angola. (C) 2010 Paulo César Santos._
 
 # Introduction
 
-New year, new Dogen sprint! At around two months of elapsed time for 83 hours worth of commitment, this was yet another long, drawn-out affair, and the festive period most certainly did not help matters. Having said that, the sprint was reasonably focused on the mission at hand: making the relational model _just about_ usable. In doing so, it provided its fair share of highs and lows, and taught a great deal of lessons - more than we ever wished for. Ah, the joys, the joys. But, onwards we march!
+Very much like an iceberg, this sprint was deceptively small on user features but big on internal changes: after several sprints of desperate chasing, we finally completed the mythical "fabric refactor". The coding work was not exactly glamorous, as we engaged on a frontal attack on all "quasi-meta-types" we had previously scattered across the codebase. One by one, each type was polished and moved into the assets meta-model, to be reborn anew as a fully-fledged modeling element. All the while, we tried to avoid breaking the world - but nevertheless did so, frequently. It was grueling work. Having said that, the end of the refactor made for a very exciting sprint, and though the war remains long, we can't help but feel an important battle was won.
+
+So let's have a look at how it all went down.
 
 # User visible changes
 
-This section covers stories that affect end users, with the video providing a quick demonstration of the new features, and the sections below describing them in more detail. There were only a few small features this sprint, and there are no breaking changes.
+This section covers stories that affect end users, with the video providing a quick demonstration of the new features, and the sections below describing them in more detail. All features this sprint are related to the addition of new meta-model types, which resulted in a number of breaking changes. These we have highlighted with :warning:.
 
-[![Sprint 1.0.20 Demo](https://img.youtube.com/vi/TkYQTW_jAGk/0.jpg)](https://youtu.be/TkYQTW_jAGk)
-_Video 1: Sprint 20 Demo._
+[![Sprint 1.0.21 Demo](https://img.youtube.com/vi/J5duq-gw-nI/0.jpg)](https://youtu.be/J5duq-gw-nI)
+_Video 1: Sprint 21 Demo._
 
-## Add ODB type overrides to primitives
+## New meta-model elements
 
-ORM type overrides had not been used in anger until the relational model was introduced (see below), and, as a result, we did not notice any problems with its implementation. Because the relational model makes heavy use of JSONB, we quickly spotted an issue when declaring type overrides inline with the column (_i.e._, at the attribute level):
+As we explored the lay of the land of our problem domain, we inadvertently found ourselves allowing Dogen to evolve a "special" set of meta-types. These we used to model files deemed inferior in stature to _real source code_: mostly build-related material, but also some more "regular" source code which could be derived from existing elements - _e.g._ visitors, serialisation registrars and the like. Due to its second-class-citizen nature, these  "special types" were controlled via variability in haphazard ways. Over the years, a plethora of meta-data switches was introduced at the model level but, in the absence of a coherent overall plan, these were _ad-hoc_ and inconsistent. On the main, the switches were used to enable or disable the emission of these "special types", as well as to configure some of their properties. Table 1 provides a listing of these switches.
 
-```
-#DOGEN masd.orm.type_override=postgresql,JSONB
-```
+|Meta-data key|Description|
+|-------------------------------------------------------------------------------------|---------------------------------------------------------|
+|```masd.generation.cpp.cmake.enabled```|Enable the CMake facet.|
+|```masd.generation.cpp.cmake.postfix```|Postfix to use for filename.|
+|```masd.generation.cpp.cmake.source_cmakelists.enabled```|Enable the CMakeLists file in ```src``` directory.|
+|```masd.generation.cpp.cmake.source_cmakelists.postfix```|Postfix to use for filename.|
+|```masd.generation.cpp.cmake.include_cmakelists.enabled```|Enable the CMakeLists file in ```include``` directory.|
+|```masd.generation.cpp.cmake.include_cmakelists.postfix```|Postfix to use for filename.|
+|```masd.generation.cpp.msbuild.enabled```|Enable the MSBuild facet.|
+|```masd.generation.cpp.msbuild.targets.enabled```|Enable the MSBuild formatter for ODB targets.|
+|```masd.generation.cpp.msbuild.targets.postfix```|Postfix to use for filename.|
+|```masd.generation.cpp.visual_studio.enabled```|Enable the Visual Studio facet.|
+|```masd.generation.cpp.visual_studio.postfix```|Postfix to use for filename.|
+|```masd.generation.cpp.visual_studio.project_solution_guid```|GUID for the Visual studio solution.|
+|```masd.generation.cpp.visual_studio.project_guid```|GUID for the Visual studio project.|
+|```masd.generation.cpp.visual_studio.solution.enabled```|Enables a Visual Studio solution for C++.|
+|```masd.generation.cpp.visual_studio.solution.postfix```|Postfix to use for filename.|
+|```masd.generation.cpp.visual_studio.project.enabled```|Enables a Visual Studio solution for C++.|
+|```masd.generation.cpp.visual_studio.project.postfix```|Postfix to use for filename.|
+|```masd.generation.csharp.visual_studio.project_solution_guid```|GUID for the Visual studio solution.|
+|```masd.generation.csharp.visual_studio.project_guid```|GUID for the Visual studio project.|
+|```masd.generation.csharp.visual_studio.solution.enabled```|Enables a Visual Studio solution for C#.|
+|```masd.generation.csharp.visual_studio.solution.postfix```|Postfix to use for filename.|
+|```masd.generation.csharp.visual_studio.project.enabled```|Enables a Visual Studio project for C#.|
+|```masd.generation.csharp.visual_studio.project.postfix```|Postfix to use for filename.|
 
-According to the [ODB manual](https://www.codesynthesis.com/products/odb/doc/manual.xhtml#14.8), this incantation is not sufficient to cope with conversion functions and other more complex uses. And so, with this sprint, type mapping was updated to take advantage of ODB's flexibility. You can now define type mappings at the element level:
+_Table 1: Meta-data switches related to "special" types._
 
-```
-#DOGEN masd.orm.type_override=postgresql,JSONB
-#DOGEN masd.orm.type_mapping=postgresql,JSONB,TEXT,to_jsonb((?)::jsonb),from_jsonb((?))
-#DOGEN masd.orm.type_mapping=sqlite,JSON_TEXT,TEXT,json((?))
-```
-
-You can then make use of it at attribute level, as previously. An even better scenario is to define a ```masd::primitive``` for the type, which takes care of it for you, and generates code like so:
-
-```
-#pragma db member(json::value_) column("") pgsql:type("JSONB")
-```
-
-For example uses of JSONB, please look at the discussion on the relational model in section _Significant Internal Stories_ below.
-
-## Allow outputting the model's SHA1 hash in decoration
-
-The decoration marker has been expanded to allow recording the SHA1 hash of the target model. This is intended as a simple way to keep track of which model was used to generate the source code. In order to switch it on, simply add ```add_origin_sha1_hash``` to the generation marker:
-
-![Decoration marker](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/decoration_sha1_hash_example.png)
-_Figure 1: Sample decoration marker, obtained from the C++ Reference Model._
-
-The generated code will then contain the SHA1 hash:
-
-```c++
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * This is a code-generated file.
- *
- * Model SHA1 hash: be42bdb7f246ad4040f17dbcc953222492e1a3bf
- * WARNING: do not edit this file manually.
- * Generated by MASD Dogen v1.0.21
-```
-
-Sadly the SHA1 hash does not match the [git hash](https://stackoverflow.com/questions/5290444/why-does-git-hash-object-return-a-different-hash-than-openssl-sha1); however, one can easily use ```sha1sum``` to compute the hash manually:
+The meta-data was then latched on to model properties, like so:
 
 ```
-$ sha1sum cpp_ref_impl.lam_model.dia
-be42bdb7f246ad4040f17dbcc953222492e1a3bf  cpp_ref_impl.lam_model.dia
+#DOGEN masd.generation.cpp.msbuild.enabled=true
+#DOGEN masd.generation.csharp.visual_studio.project_guid=9E645ACD-C04A-4734-AB23-C3FCC0F7981B
+#DOGEN masd.generation.csharp.visual_studio.project_solution_guid=FAE04EC0-301F-11D3-BF4B-00C04F79EFBC
+#DOGEN masd.generation.cpp.cmake.enabled=true
+...
 ```
 
-Before we move on, there are a couple of points worthy of note with regards to this feature. First and foremost, please heed the following warning:
+As we continued to mull over the problem across sprints, the entire idea of "implicit" element types - injected into the model and treated differently from regular elements - was [ultimately understood to be harmful](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_11.org#analyse-the-state-of-the-mess-of-refactors). The approach is in fact an _abuse_ of variability, due to how these elements had been (_mis-_)modeled. And it had consequences:
 
-> :warning: : **Important**: Remember that SHA1 hashes in Dogen **are NOT a security measure**; they exist **only** for informational purposes.
+- **Invisibility**: it was not possible to manage variability of the injected types in the same fashion as for all other elements because they were "invisible" to the modeler.
+- **Difficulty in troubleshooting**: it was hard to diagnose when something didn't work as expected, because all of the magic was internal to the code generator.
+- **Inconsistency in generation**: we had a rather inconsistent way of handling different element types; some "just appeared" due to the state of the model (like ```registrar```); others were a consequence of enabling formatters (_e.g._ ```CMakeLists.txt```); still others required the presence of stereotypes (_e.g._ ```visitor```). It was very hard to explain the rationale for each of these to an unsuspecting user.
+- **Inconsistency in population**: properties that were common to other elements had to be handled specially via meta-data. For example, adding comments or changing decoration for these elements required bespoke meta-data and associated transforms, even though we already had a pipeline which operated on "regular" elements.
+- **Inconsistencies in facet spaces**: the types did not follow the existing facet conventions - _i.e._, to be placed on a folder named after the facet, _etc_. Even in that they were "special".
 
-Secondly, as we mentioned in the past, features such as these (_e.g._ date/time, Dogen version, SHA1 hash, _etc._) should be used with caution since they may cause unnecessary changes to generated code and thus trigger expensive rebuilds. As such, we recommend that careful consideration is given before enabling it.
+Programming is nothing if not a quest for the generalisation and removal of special cases, and these types had been a major thorn in the design. Thus the idea of refactoring fabric out of existence was born. With this release we finally removed all of the above meta-data keys, and replaced them with regular meta-model elements, instantiable via the appropriate stereotypes (Table 2). Sadly, a single use case was left, due to the specificity of its implementation: visitors. These shall be addressed on a future release.
 
-## Improvements in generation timestamps
+> :warning: **Breaking change**: Users need to update any models which make use of the meta-data in Table 1 and replace them with the corresponding elements and stereotypes.
 
-For the longest time, Dogen has allowed users to stamp each file it generates with a _generation timestamp_. This is enabled via the parameter ```add_date_time```, which is part of the  generation marker meta-element; for an example of this meta-element see [the screenshot above](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/decoration_sha1_hash_example.png), where it is disabled.
+|Stereotype|Description|
+|--------------|---------------|
+|```masd::serialization::type_registrar```|The serialisation type registrar used mainly for boost serialisation support.|
+|```masd::visual_studio::solution```|Visual Studio solution support.|
+|```masd::visual_studio::project```|Visual Studio solution support.|
+|```masd::entry_point```| Provides an entry point to a component, _e.g._ ```main```.|
+|```masd::orm::common_odb_options```|Element modeling the common arguments for ODB.|
+|```masd::visual_studio::msbuild_targets```|Element modeling ODB targets using MSBuild.|
+|```masd::build::cmakelists```|Element modeling build files using CMake.|
+|```masd::assistant```|C# helper type.|
 
-When enabled, a typical output looks like so:
+_Table 2: Stereotypes for the new meta-model elements ._
 
-```c++
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * This is a code-generated file.
- *
- * Generation timestamp: 2020-01-22T08:29:41
- * WARNING: do not edit this file manually.
- * Generated by MASD Dogen v1.0.21
- *
-```
+Now, the observant reader won't fail to notice that _the generated code has not changed_ in any way - well, at least not intentionally. All of these new meta-model elements already existed, but in their previous incantation variability was used to trigger them (mostly). With this release they are modeled as proper meta-model elements, controlled by the user, and processed in the exact same way as all other elements. This means we can make use of all of the existing machinery in Dogen such as profiles.
 
-In this sprint we did some minor improvements around the sourcing of this timestamp. Previously, we obtained it individually for each and every generated file, resulting in a (possibly) moving timestamp across a model generation. With this release, the timestamp for a given activity - _e.g._ conversion, generation, _etc._ - is now obtained once upfront and reused by all those who require it. Not only is this approach more performant but it yields a better outcome because users are not particularly interested in the precise second _any given file_ was generated, but care more about knowing when _a given model_ was generated.
+![Use of new meta-elements in C++](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/cpp_new_meta_elements.png)
+_Figure 1: Use of new meta-elements in a C++ model._
 
-In addition, we decided to allow users to control this timestamp externally. The main rationale for this was unit testing, where having a moving timestamp with each test run was just asking for trouble. While we were at it, we also deemed sensible to allow users to override this timestamp, if, for whatever reason, they need to. Now, lest you start to think we are enabling "tampering", we repeat the previous warning:
+Whilst this is a big improvement in usability, there are still a number of pitfalls:
 
-> :warning: **Important**: Remember that generation timestamps in Dogen **are NOT a security measure**; they exist **only** for informational purposes.
+- users now need to remember to add types where Dogen used to inject them automatically. This is the case with ```registrar```, which was generated automatically when a model made use of inheritance.
+- there are no errors or warnings when a diagram is on an inconsistent state due to the choice of elements used. For example, one can add a solution without a project.
 
-With that disclaimer firmly in hand, lets see how one can override the generation timestamp. A new command line argument was introduced:
+![Use of new meta-elements in C#](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/csharp_new_meta_elements.png)
+_Figure 2: Use of new meta-elements in a C# model._
 
-```
-Processing:
-<SNIP>
-  --activity-timestamp arg       Override the NOW value used for the activity
-                                 timestamp. Format: %Y-%m-%dT%H:%M:%S
-```
-
-For instance, to change the generation timestamp of the example above, one could set it to ```--activity-timestamp 2020-02-01T01:01:01```, obtaining the following output:
-
-```c++
-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * This is a code-generated file.
- *
- * Generation timestamp: 2020-02-01T01:01:01
- * WARNING: do not edit this file manually.
- * Generated by MASD Dogen v1.0.21
-```
-
-Clearly, this is more of a troubleshooting feature than anything else, but it may prove to be useful.
+These are problems that will hopefully be looked into once we eventually reach the validation work, in a few sprints time.
 
 # Development Matters
 
-In this section we cover topics that are mainly of interest if you follow Dogen development, such as details on internal stories that consumed significant resources, important events, etc. As usual, for all the gory details of the work carried out this sprint, see the [sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_20.org).
-
-## Milestones
-
-The 9999th commit was made to Dogen this sprint.
-
-![100th release](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/milestones_9999_commits.png)
-_Figure 2: GitHub repo at the 9999th commit._
+In this section we cover topics that are mainly of interest if you follow Dogen development, such as details on internal stories that consumed significant resources, important events, etc. As usual, for all the gory details of the work carried out this sprint, see the [sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_21.org).
 
 ## Significant Internal Stories
 
-The sprint was mostly dominated by one internal story, which this section describes in detail.
+The sprint was mostly dominated by a number of stories dealing with moving fabric types, but since they have user visible consequences, they have been dealt with in _User visible changes_. The only other story of note is described below.
 
-### Add relational tracing support
+### Remove support for element extensions
 
-This sprint brought to a close work on the relational model. It was the culmination of a multi-sprint effort that required some significant changes to the core of Dogen - particularly to the tracing subsystem, as well as to ORM. The hard-core Dogen fan may be interested in a series of videos which captured the design and development of this feature:
-
-[![MASD - Dogen Coding: Relational Model for Tracing - Part 1](https://img.youtube.com/vi/re36Sr1u0Iw/0.jpg)](https://www.youtube.com/watch?v=re36Sr1u0Iw&list=PLwfrwe216gF3EzrrvwNFivnLSZ2l8X9k6&index=2)
-_Video 2: Playlist "MASD - Dogen Coding: Relational Model for Tracing"._
-
-The (rather long) series of videos will hopefully reach its "climax" next sprint, but (spoiler alert) its "TL; DR" is that it is now possible to dump all information produced by a Dogen run into a relational database. This includes both tracing data as well as all logging, at the user-chosen log level. It is important to note that a full run in this manner is slow: dumping all of Dogen's models (18, at the present count) can take the best part of an hour. Interestingly, the majority of the cost comes from dumping the log at debug level. A dump with just tracing information takes less than 10 minutes, making it reasonably useful. Regardless of the wait, once the data is in the database, the full power of SQL and Postgres can be harnessed.
-
-Implementation-wise, we decided to take path of least resistance and create a small number of tables, code-generated by Dogen and [ODB](https://www.codesynthesis.com/products/odb/):
-
-```
-musseque=> \dt
-            List of relations
- Schema |      Name       | Type  | Owner
---------+-----------------+-------+-------
- DOGEN  | LOG_EVENT       | table | build
- DOGEN  | RUN_EVENT       | table | build
- DOGEN  | TRANSFORM_EVENT | table | build
-(3 rows)
-```
-
-Models and other complex data types stored in JSONB fields, _e.g._:
-
-```
-musseque=> \dS "RUN_EVENT"
-                            Table "DOGEN.RUN_EVENT"
-     Column     |            Type             | Collation | Nullable | Default
-----------------+-----------------------------+-----------+----------+---------
- TIMESTAMP      | timestamp without time zone |           |          |
- RUN_ID         | text                        |           | not null |
- EVENT_TYPE     | integer                     |           | not null |
- VERSION        | text                        |           | not null |
- PAYLOAD        | jsonb                       |           | not null |
- ACTIVITY       | text                        |           | not null |
- LOGGING_IMPACT | text                        |           | not null |
- TRACING_IMPACT | text                        |           | not null |
-Indexes:
-    "RUN_EVENT_pkey" PRIMARY KEY, btree ("RUN_ID", "EVENT_TYPE")
-```
-
-Though by no means trivial, this approach required fewer changes to Dogen itself, pushing instead the complexity to the queries over the generated dataset. This seemed like a worthwhile trade-off at the time, because normalising a Dogen model in code was a non-trivial exercise. Nonetheless, as we sooon find out, writing queries with complex JSON documents and multiple rows is not an entirely trivial exercise either. As an example, the following query returns objects in a Dia diagram:
-
-```sql
-create or replace function classes_in_diagram(in p_transform_instance_id text)
-    returns table("ID" text, "NAME" text)
-as $$
-    select "ID", substring(attrs."ATTRIBUTES"->'values'->0->'data'->>'value', 2,
-            length(attrs."ATTRIBUTES"->'values'->0->'data'->>'value') - 2
-        ) "NAME"
-    from (
-        select
-            objects."OBJECT"->>'id' "ID",
-            objects."OBJECT"->>'type' "TYPE",
-            jsonb_array_elements(objects."OBJECT"->'attributes') "ATTRIBUTES"
-            from (
-                select * from dia_objects_in_diagram(p_transform_instance_id)
-            ) as objects
-     ) as attrs
-     where
-         attrs."ATTRIBUTES"->>'name' like 'name' and "TYPE" like 'UML - Class';
-$$ language 'sql';
-```
-
-This function can be used as follows:
-
-```
-=> select * from dia_objects_names_and_stereotypes('8ce7069e-6261-4f9f-b701-814bed17cafb');
- ID  |    NAME     |        STEREOTYPES
------+-------------+----------------------------
- O1  | cpp         | masd::decoration::modeline
- O2  | cs          | masd::decoration::modeline
- O3  | cmake       | masd::decoration::modeline
- O4  | odb         | masd::decoration::modeline
- O5  | xml         | masd::decoration::modeline
- O7  | xml         | masd::decoration::modeline
- O8  | odb         | masd::decoration::modeline
- O9  | cmake       | masd::decoration::modeline
- O10 | cs          | masd::decoration::modeline
- O11 | cpp         | masd::decoration::modeline
- O13 | apache_v2_0 | masd::decoration::licence
- O14 | bsl_v1_0    | masd::decoration::licence
- O15 | gpl_v2      | masd::decoration::licence
- O16 | gpl_v3      | masd::decoration::licence
- O17 | proprietary | masd::decoration::licence
- O18 | sln         | masd::decoration::modeline
- O19 | sln         | masd::decoration::modeline
-````
-A library of assorted functions was assembled this way (see [functions.sql](https://github.com/MASD-Project/dogen/blob/master/projects/dogen.relational/sql/functions.sql)), and proved useful enough to track the problem at hand which was to figure out why the [new meta-element registrar](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_20.org#move-registrar-into-assets) was not being generated. In addition, the expectation is that, over time, more and more powerful queries will be written, allowing us to better exploit the available information. However, it must be said that the complexity of writing JSONB queries is much higher than anticipated, and as such, the feature is not quite as useful as we envisioned. With a bit of luck, next sprint we shall produce a blog post narrating in more detail the saga and its somewhat surprising conclusions.
+In the past we created another "special" concept: element extensions. These allowed two meta-model elements to share the same position in modeling space, _i.e._ two elements sharing the same name. Whilst this may sound crazy on first sight, the initial idea behind it was more or less sound. Files such as forward declarations in C++, or ODB options, were better modeled when using "lightweight" meta-model elements which provided the specific data needed. In order for this to work, we needed to have some kind of way of containing meta-elements within meta-elements, and thus "element extensions" were born. As with fabric types, element extensions did not stood the test of time and added a lot of complexity and special cases. Now that the last fabric types that made use of element extensions were removed, we managed to remove the extensions themselves from the meta-model, greatly simplifying things.
 
 ## Resourcing
 
-Now that we have moved to part-time sprints, looking only at the overall commitment makes less sense; after all, by definition, one is guaranteed to have around 80 hours of work on a sprint. Whilst pondering on this matter, another interesting measure popped up on our radars: the _utilisation rate_ - though, perhaps, not yet its final name. The utilisation rate is computed as the number of days on a full time sprint (_e.g._, 14) divided by the total number of days elapsed since the previous sprint. The utilisation rate measures how "expensive" a day of work is in terms of elapsed days. A high utilisation rate is good, and a low one is bad; on a good sprint we are aiming for close to 50%. In this particular sprint our utilisation rate was around 23%. Since the previous sprint involved a long stretch where we were not doing any work at all, we do not have any comparative figures, but we'll keep tracking this number from now on and hopefully it will became a useful indicator.In terms of our more traditional measurements, the sprint was rather well behaved, as the chart demonstrates:
+This sprint was a "model" sprint (if you pardon the pun) in terms of Dogen development. At an overall elapsed time of four weeks, our utilisation rate improved significantly from 23% to an amazing 56%. In other words, we managed to maintain a steady pace and clocked around 20 hours every week. Furthermore, a staggering _75.5%_ of the overall ask was spent on stories directly related to the sprint's mission of refactoring fabric. This is quite possibly the highest in Dogen's eight-year history, as far as I can recall. We spent 19.6% on process related activities, which whilst not the smallest amount ever, its also in line with recent sprints - particularly when we have video recording activities. The remainder of the sprint was used chasing minor spikes such as problems with the setup (1.4%), errors in tests (0.8%), issues with coveralls (0.3%) and so on. Overall, from a resource management perspective, this was a very successful sprint.
 
-![Story Pie Chart](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_20_pie_chart.jpg)
-_Figure 3: Cost of stories for sprint 20._
-
-Some 45% of the total committed time was taken by the relational model and related activities; and even diversions such as the SHA1 hashes (6.8%) and improvements on generation timestamps (2.3%) were actually byproducts of this work. In terms of process, this was an expensive sprint: whilst the demo was cheap (3%), the release notes were very expensive (13.7%) and so was backlog grooming (5.7%), resulting on an overall figure of 22.4% for process - one of the most costly sprints in this department. Part of this is related to the amount of "uncoordinated" work that had been carried out previously and which was difficult to describe in a manner suitable for the release notes  (remember that demo and release notes describe the work of the _previous sprint_, _e.g. sprint 19 in this case). All and all, for a part time sprint, it was a rather successful one, though we are clearly aiming for a higher utilisation rate for the next one.
+![Story Pie Chart](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_21_pie_chart.jpg)
+_Figure 3: Cost of stories for sprint 21._
 
 ## Roadmap
 
-We still haven't quite managed to get the roadmap to work for us, but it seems to provide some kind of visual indication of just how long the road ahead is so we're keeping it for now. However, for it to became truly useful in our current process it requires some more tuning. Perhaps some time spent learning [task juggler](http://taskjuggler.org/) is in order...
+Two very minor changes were made to the road map this sprint. First and foremost, we finally removed the fabric refactor from the roadmap, which is extremely pleasing. Secondly, we bumped up resource usage by a fair (if somewhat random) amount, which projected timescales in time somewhat, in a more realistic manner. How realistic is up to debate, but at least it is hopefully slightly less wrong.
 
-![Project Plan](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_20_project_plan.png)
+![Project Plan](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_21_project_plan.png)
 
-![Resource Allocation Graph](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_20_resource_allocation_graph.png)
+![Resource Allocation Graph](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_21_resource_allocation_graph.png)
 
 # Next Sprint
 
-Now that the relational model is out of the way, the focus on meta-model entities and the fabric clean-up is resumed once more. We are hoping to get one or two of these entities out of the way by sprint end.
+The next great big refactoring battle is with the generation model. We need to move all concepts that had been incorrectly placed in generation to the meta-model, and, with it, reduce the huge code duplication we have between backends.
 
 # Binaries
 
 You can download binaries from [Bintray](https://bintray.com/masd-project/main/dogen) for OSX, Linux and Windows (all 64-bit):
 
-- [dogen_1.0.20_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.20/dogen_1.0.20_amd64-applications.deb)
-- [dogen-1.0.20-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.20/DOGEN-1.0.20-Darwin-x86_64.dmg)
-- [dogen-1.0.20-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/DOGEN-1.0.20-Windows-AMD64.msi)
+- [dogen_1.0.21_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.21/dogen_1.0.21_amd64-applications.deb)
+- [dogen-1.0.21-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.21/DOGEN-1.0.21-Darwin-x86_64.dmg)
+- [dogen-1.0.21-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/DOGEN-1.0.21-Windows-AMD64.msi)
 
 **Note:** The OSX and Linux binaries are not stripped at present and so are larger than they should be. We have [an outstanding story](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org#linux-and-osx-binaries-are-not-stripped) to address this issue, but sadly CMake does not make this trivial.
 
@@ -298,13 +190,15 @@ For all other architectures and/or operative systems, you will need to build Dog
 Happy Modeling!
 #+END_SRC markdown
 
-- [[https://twitter.com/MarcoCraveiro/status/1220738254158344196][twitter]]
-- [[https://www.linkedin.com/posts/marco-craveiro-31558919_dogen-the-masd-code-generator-generates-activity-6626505315070332929-a5pv/][https://www.linkedin.com/posts/marco-craveiro-31558919_masd-projectdogen-activity-6626505954353569792-JAue]]
+- [[https://twitter.com/MarcoCraveiro/status/1229849866416816129][twitter]]
+- [[https://www.linkedin.com/posts/marco-craveiro-31558919_masd-projectdogen-activity-6635632094846476289-oXZM][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
-https://lnkd.in/eAwwjRv
-
-*** Create a demo and presentation for previous sprint                :story:
+*** COMPLETED Create a demo and presentation for previous sprint      :story:
+    CLOSED: [2020-02-18 Tue 19:03]
+    :LOGBOOK:
+    CLOCK: [2020-02-18 Tue 18:38]--[2020-02-18 Tue 19:03] =>  0:25
+    :END:
 
 Time spent creating the demo and presentation. Use the demo project:
 

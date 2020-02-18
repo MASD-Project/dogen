@@ -326,10 +326,8 @@ Happy Modeling!
 #+END_SRC markdown
 
 - [[https://twitter.com/MarcoCraveiro/status/1220738254158344196][twitter]]
-- [[https://www.linkedin.com/posts/marco-craveiro-31558919_dogen-the-masd-code-generator-generates-activity-6626505315070332929-a5pv/][https://www.linkedin.com/posts/marco-craveiro-31558919_masd-projectdogen-activity-6626505954353569792-JAue]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6626505954353569792/][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
-
-https://lnkd.in/eAwwjRv
 
 *** COMPLETED Create a demo and presentation for previous sprint      :story:
     CLOSED: [2020-01-24 Fri 15:28]
@@ -346,7 +344,8 @@ Time spent creating the demo and presentation. Use the demo project:
 Actually since the features are quite trivial, we can demonstrate them
 using the Dogen test models.
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2020-02-18 Tue 18:13]
     :LOGBOOK:
     CLOCK: [2020-02-16 Sun 23:31]--[2020-02-16 Sun 23:38] =>  0:07
     CLOCK: [2020-02-15 Sat 23:44]--[2020-02-15 Sat 23:51] =>  0:07
