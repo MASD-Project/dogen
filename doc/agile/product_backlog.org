@@ -5577,6 +5577,18 @@ check that an invalid type doesn't work.
 Stories related to infrastructure improvements that we may or may not
 achieve.
 
+*** Cannot see source file in coveralls                               :story:
+
+ At present the path of source files in coveralls is incorrect:
+
+ : /cpp_ref_impl.boost_model/src/types/class_a.cpp
+
+ : SOURCE NOT AVAILABLE
+ : The file "cpp_ref_impl.boost_model/src/types/class_a.cpp" isn't available on github. Either it's been removed, or the repo root directory needs to be updated.
+
+ We have the same problem in codecove, only there is worse because we
+ also can't see the fake commit we did.
+
 *** Check OSX packages                                                :story:
 
 We need to ensure OSX packages are still working. At present, the

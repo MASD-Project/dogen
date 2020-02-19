@@ -13,17 +13,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-02-18 Tue 20:43]
+#+CAPTION: Clock summary at [2020-02-19 Wed 19:01]
 | <75>                                               |        |      |      |       |
 | Headline                                           | Time   |      |      |     % |
 |----------------------------------------------------+--------+------+------+-------|
-| *Total time*                                       | *5:39* |      |      | 100.0 |
+| *Total time*                                       | *7:59* |      |      | 100.0 |
 |----------------------------------------------------+--------+------+------+-------|
-| Stories                                            | 5:39   |      |      | 100.0 |
-| Active                                             |        | 5:39 |      | 100.0 |
-| Edit release notes for previous sprint             |        |      | 4:11 |  74.0 |
-| Create a demo and presentation for previous sprint |        |      | 0:25 |   7.4 |
-| Sprint and product backlog grooming                |        |      | 1:03 |  18.6 |
+| Stories                                            | 7:59   |      |      | 100.0 |
+| Active                                             |        | 7:59 |      | 100.0 |
+| Edit release notes for previous sprint             |        |      | 4:11 |  52.4 |
+| Create a demo and presentation for previous sprint |        |      | 0:25 |   5.2 |
+| Sprint and product backlog grooming                |        |      | 1:03 |  13.2 |
+| Define a combined logical-physical space           |        |      | 2:20 |  29.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -227,17 +228,85 @@ This resulted in some puzzling errors:
 Ideally we should either warn and ignore or fail to process models
 with self-references.
 
-*** Cannot see source file in coveralls                               :story:
+*** STARTED Define a combined logical-physical space                  :story:
+    :LOGBOOK:
+    CLOCK: [2020-02-19 Wed 18:01]--[2020-02-19 Wed 19:01] =>  1:00
+    CLOCK: [2020-02-19 Wed 08:02]--[2020-02-19 Wed 08:54] =>  0:52
+    CLOCK: [2020-02-19 Wed 07:02]--[2020-02-19 Wed 07:30] =>  0:28
+    :END:
 
- At present the path of source files in coveralls is incorrect:
+It now seems that we have been searching for a meta-model that
+combines both aspects of logical modeling as well as physical
+modeling. Facets, archetypes etc are all parts of the physical
+dimension of this space. We need to find all stories on this topic and
+organise them to see if we can come up with a consistent system of
+meaning.
 
- : /cpp_ref_impl.boost_model/src/types/class_a.cpp
+Notes:
 
- : SOURCE NOT AVAILABLE
- : The file "cpp_ref_impl.boost_model/src/types/class_a.cpp" isn't available on github. Either it's been removed, or the repo root directory needs to be updated.
+- archetypes must support a notion of "kind". This is so we can have
+  public include headers, private include headers and implementation
+  files. This "kind" affects the topology of the physical dimension.
+- the locator is a function that takes points in the logical-physical
+  space and maps them to filesystem locations. It uses properties of
+  those meta-model elements to configure the mapping.
+- actually, the separation of technical spaces and backends is
+  somewhat artificial. In reality, if we were to clean up all backends
+  such that they only contain a single technical space then we
+  wouldn't have this distinction. However, there are problems with
+  this approach. Some features span across multiple technical spaces,
+  such as ODB. It requires:
 
- We have the same problem in codecove, only there is worse because we
- also can't see the fake commit we did.
+  - c++ support in generating the pragmas,
+  - ODB options files.
+  - msbuild for odb targets
+  - cmake for odb targets
+
+  It would be tempting to say that ODB is not a technical space, but
+  just a feature. In which case we need options files to be a
+  technical space not solely connected to ODB. This is possible,
+  provided we can find evidence of other systems using options
+  files. If we could generalise this then the problem would be
+  solved. However, it is not yet clear if ODB is a special case or an
+  indicator of a pattern which we are ignoring.
+- in this world, we would have a top-level =techspace= model,
+  equivalent to generation at present. It would be responsible for
+  knowing about all available technical spaces. Component models would
+  have one or more representations. A representation can have one
+  primary technical space and zero or many secondary technical
+  spaces.
+- input and output technical spaces are modeling errors. In reality,
+  models have types: they are either PIMs or PSMs. If a model is a
+  PIM, he must only refer to other PIMs. However, an additional
+  wrinkle is that in order to load the mappings, we need to have
+  access to the references (as these contain the mappings). Perhaps we
+  can allow any reference, but then when resolving, we need to ensure
+  that the types are all consistent.
+- perhaps we are looking at this in the wrong way. In reality, there
+  are only the following permutations:
+
+  - if a model has a single representation, then either a) the input
+    technical space is the same as the output (e.g. PSM) or b) its a
+    PIM in which case we need to perform the mapping.
+  - if a model has more than one representation, then it must be a
+    PIM.
+
+  If a model had a way to declare itself PIM, then in resolver we
+  could ensure that all types are referencing only other PIM
+  types. However, it would still be possible for a C++ model to
+  reference a C# model. For this validation to take place, we would
+  need a way to associate a technical space to an element and then
+  check that on reference resolution. Actually, if we ensure we map
+  before we resolve (which we probably already do) then we can rely on
+  the fact that only PSM types will exist. If we had a way of knowing
+  which types in a PIM need mapping, then we could detect which ones
+  did not map. Then we could issue a mapping error. This way the world
+  would be cleanly divided between PIM and PSM, and we could ignore
+  technical spaces for PIMs. We cannot know at mapping time
+- one aspect that is not very clean is that we should only allow more
+  than one representation on a model prior to mapping. After mapping,
+  there can only be one representation (the technical space we have
+  mapped to).
 
 *** Integration of archetypes into assets                             :story:
 
@@ -302,24 +371,6 @@ can only have a primary backend, and any number of secondary
 backends. Artefacts produced by a backend must have a unique physical
 location. In LAM mode, the component is split into multiple
 components, each with their own primary technical space.
-
-*** Define a combined logical-physical space                          :story:
-
-It now seems that we have been searching for a meta-model that
-combines both aspects of logical modeling as well as physical
-modeling. Facets, archetypes etc are all parts of the physical
-dimension of this space. We need to find all stories on this topic and
-organise them to see if we can come up with a consistent system of
-meaning.
-
-Notes:
-
-- archetypes must support a notion of "kind". This is so we can have
-  public include headers, private include headers and implementation
-  files. This "kind" affects the topology of the physical dimension.
-- the locator is a function that takes points in the logical-physical
-  space and maps them to filesystem locations. It uses properties of
-  those meta-model elements to configure the mapping.
 
 *** Create a archetypes locator                                       :story:
 
