@@ -121,7 +121,8 @@ void modules_transform::create_modules(const std::unordered_map<std::string,
     for (const auto& pair : internal_modules) {
         const auto& ipp(pair.second);
         const auto n(f.build_module_name(m.name(), ipp));
-        const auto i(m.structural_elements().modules().find(n.qualified().dot()));
+        const auto i(m.structural_elements().modules().find(
+                n.qualified().dot()));
         if (i == m.structural_elements().modules().end()) {
             auto mod(boost::make_shared<meta_model::structural::module>());
             mod->name(n);
@@ -130,7 +131,8 @@ void modules_transform::create_modules(const std::unordered_map<std::string,
                 boost::make_shared<variability::meta_model::configuration>());
             mod->configuration()->name().simple(n.simple());
             mod->configuration()->name().qualified(n.qualified().dot());
-            m.structural_elements().modules().insert(std::make_pair(n.qualified().dot(), mod));
+            m.structural_elements().modules().insert(
+                std::make_pair(n.qualified().dot(), mod));
         }
     }
 }

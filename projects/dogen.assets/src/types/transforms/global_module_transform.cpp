@@ -94,7 +94,8 @@ inject_global_module(meta_model::model& m) {
         BOOST_THROW_EXCEPTION(
             transformation_error(model_already_has_global_module + id));
     }
-    m.structural_elements().modules().insert(std::make_pair(r.qualified().dot(), gm));
+    m.structural_elements().modules().insert(
+        std::make_pair(r.qualified().dot(), gm));
 
     BOOST_LOG_SEV(lg, debug) << "Done injecting global module";
     return r;
@@ -106,14 +107,22 @@ update_element_containment(const meta_model::name& global_module_name,
     BOOST_LOG_SEV(lg, debug) << "Updating element containment.";
 
     const auto& gmn(global_module_name);
-    add_containing_module_to_non_contained_entities(gmn, m.structural_elements().modules());
-    add_containing_module_to_non_contained_entities(gmn, m.structural_elements().object_templates());
-    add_containing_module_to_non_contained_entities(gmn, m.structural_elements().builtins());
-    add_containing_module_to_non_contained_entities(gmn, m.structural_elements().enumerations());
-    add_containing_module_to_non_contained_entities(gmn, m.structural_elements().objects());
-    add_containing_module_to_non_contained_entities(gmn, m.structural_elements().exceptions());
-    add_containing_module_to_non_contained_entities(gmn, m.structural_elements().visitors());
-    add_containing_module_to_non_contained_entities(gmn, m.structural_elements().primitives());
+    add_containing_module_to_non_contained_entities(gmn,
+        m.structural_elements().modules());
+    add_containing_module_to_non_contained_entities(gmn,
+        m.structural_elements().object_templates());
+    add_containing_module_to_non_contained_entities(gmn,
+        m.structural_elements().builtins());
+    add_containing_module_to_non_contained_entities(gmn,
+        m.structural_elements().enumerations());
+    add_containing_module_to_non_contained_entities(gmn,
+        m.structural_elements().objects());
+    add_containing_module_to_non_contained_entities(gmn,
+        m.structural_elements().exceptions());
+    add_containing_module_to_non_contained_entities(gmn,
+        m.structural_elements().visitors());
+    add_containing_module_to_non_contained_entities(gmn,
+        m.structural_elements().primitives());
 
     BOOST_LOG_SEV(lg, debug) << "Finished updating element containment.";
 }

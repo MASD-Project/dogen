@@ -96,8 +96,9 @@ update_and_collect_parent_ids(const helpers::indices& idx,
             BOOST_LOG_SEV(lg, trace) << "Parent: " << scfg.parent;
 
             /*
-             * If we've already have a parent name, this means there are now
-             * two conflicting sources of parenting information so bomb out.
+             * If we've already have a parent name, this means there
+             * are now two conflicting sources of parenting
+             * information, so we need to bomb out.
              */
             BOOST_LOG_SEV(lg, trace) << "Parents: " << o.parents();
             if (!o.parents().empty()) {
@@ -128,8 +129,8 @@ update_and_collect_parent_ids(const helpers::indices& idx,
          * have been supplied via meta-data, and as such, may be
          * incomplete. We can't wait for the resolution step proper
          * because there is a circular dependency: resolution needs
-         * streotype expansion and streotype expansion needs
-         * generalization (as it handles visitors, which need leaves,
+         * stereotype expansion and streotype expansion needs
+         * generalisation (as it handles visitors, which need leaves,
          * etc), which in turn needs resolution. So, in order to break
          * the cycle, we resolve here.
          *
@@ -263,6 +264,10 @@ void generalization_transform::populate_generalizable_properties(
           * Handle the case where the user decided to override final.
           */
          if (o.is_final_requested()) {
+           /*
+            * We can't have a final class if we already know it is a
+            * parent.
+            */
              if (*o.is_final_requested() && o.is_parent()) {
                  BOOST_LOG_SEV(lg, error) << incompatible_is_final << id;
                  BOOST_THROW_EXCEPTION(
@@ -279,7 +284,7 @@ void generalization_transform::populate_generalizable_properties(
 
          /*
           * We are in an inheritance (generalisation) relationship if
-          * we are either a parent or a child (or both).
+          * we are either a parent or a child or both.
           */
          o.in_inheritance_relationship(o.is_parent() || o.is_child());
 
@@ -287,7 +292,6 @@ void generalization_transform::populate_generalizable_properties(
           * We are a leaf if we are not a parent but we are a child.
           */
          o.is_leaf(!o.is_parent() && o.is_child());
-
          if (!o.is_leaf()) {
              BOOST_LOG_SEV(lg, trace) << "Non-leaf type, processing finished.";
              continue;

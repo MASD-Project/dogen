@@ -185,8 +185,6 @@ void associations_transform::process_feature_bundle(const meta_model::model& m,
          */
         remove_duplicates(fb.opaque_associations(), transparent_associations);
     }
-
-
 }
 
 void associations_transform::
