@@ -108,6 +108,16 @@ meta-model cannot be generated. We need a way to tag this elements
 statically. This should be done when the elements are code
 generated. It is not yet clear how this should be done though.
 
+Notes:
+
+- one possible approach is to have a constant that is code generated
+  which states if a type is meant for generation or not.
+- however, it would be even better if we could determine if a type has
+  formatters or not. This would mean we would cover two possible
+  scenarios: types that are intrinsically non-generatable and types
+  that are not yet generatable. It may be that there is no need to
+  distinguish between these two.
+
 *** Consider creating a "model" meta-model element                    :story:
 
 This is not yet particularly clear, and we may already have something
@@ -236,6 +246,115 @@ may just leave it as is for now until we fix it properly.
 
 Since all meta-elements should live in assets, we should fix this once
 all of them have been moved across.
+
+*** Formatter meta-model elements                                     :story:
+
+A second approach is to leave this work until we have a way to code
+generate meta-model elements. Then we could have a way to supply this
+information as meta-data - or perhaps it is derived from the position
+of the element in modeling space? The key thing is we need a static
+method to determine the meta-name, and a virtual method to allow
+access to it via inheritance. Perhaps we need to capture this pattern
+in a more generic way. It may even already exist in the patterns
+book. Then the elements would become an instance of the pattern. We
+should also validate that all descendants provide a value for this
+argument (e.g. an element descendant must have the meta-name set). We
+could also use this for stereotypes.
+
+The binding of the formatter against the meta-type is interesting, in
+this light. The formatter has a type parameter - the type it is
+formatting. In fact the formatter may have a number of type
+parameters - we need to look at the stitch templates to itemise them
+all - and these are then used to generate the formatter's template. We
+could take this a level up and say that, at least conceptually, there
+is a meta-meta-type for formatters, which is made up of a
+parameterisable type. Then we could declare the formatter as an
+instance of this meta-meta-type with a well-defined set of
+parameters. Then, when a user instantiates a formatter, we can check
+that all of the mandatory parameters have been filled in and error if
+not. In this case we have something like:
+
+- =masd::structural::parameterisable_type=. This is a meta-type that
+  has a list of KVPs. Some are mandatory, some are optional.
+- =masd::codegen::meta_formatter=. This defines the parameters needed
+  for the formatter, with default values etc.
+- =masd::codegen::formatter=. This is the actual formatters. They must
+  supply values for the parameters defined by the meta-formatter.
+
+Of course, we do not need a three-level hierarchy for this, and if
+this is the only case where these parameters are used, we could just
+hard-code the formatter as a meta-element and treat it like we do with
+all other meta-types. Interestingly, we could bind formatters to
+stereotypes rather than meta-elements. This would allow us to avoid
+binding into the dogen implementation, and instead think at the MASD
+level (e.g. =dogen::assets::meta_model::structural::enumeration= is a
+lot less elegant than =masd::enumeration= or even
+=masd::structural::enumeration=).
+
+We could also validate that the wale template exists. In fact, if the
+wale template is a meta-model element, we can check for consistency
+within resolution. However, we need a generic way to associate a wale
+template with any facet. The ideal setup would be for users to define
+wale templates as instances of a meta-model element which is
+parameterisable (see above). In reality, what we have found here is
+another pattern:
+
+- there are templates as model elements. When we create a template we
+  are instantiating a template's template.
+- we can then constrain the world of possibilities in to a
+  well-defined set of parameters which are needed for the specific
+  template that we are working on. This has a meta-model element
+  associated with it, and a file.
+- the file is the template file. In the case of wale, the template
+  file is then instantiated. This is done by associating facets with
+  the wale templates, and for each facet, supplying the arguments to
+  instantiate the template. We then end up with a number of actual
+  CPP/HPP files.
+- for stitch the process is a bit different. The main problem is
+  because we incorrectly "weaved" the arguments into the stitch
+  template. It made sense at the time purely because we don't really
+  expect to instantiate a given stitch template N times; it is really
+  only done once. This was slightly misleading. Because of this we
+  hard-coded the behaviour related to certain keys (e.g. includes,
+  etc). If instead we somehow handle stitch in exactly the same way as
+  we handle wale, we can keep the templates in a common template
+  directory; then associate them to specific facets via meta-data, and
+  supply the arguments as part of the same meta-data. The template
+  would then just contain the code that would be weaved. A formatter
+  is then a meta-model element associated with a wale template for the
+  header file and - very interestingly - a wale template for the cpp
+  file _which generates stitch templates_. The user then manually
+  fills in the stitch template, but supplies any parameters (remember
+  these are fixed) in the meta-model element. Generation will then
+  produce the CPP
+- the logical consequence of this approach is that we must reference
+  the c++ generation model in order to create new formatters, because
+  it will contain the templates. However, because the wale content of
+  the template is located in the filesystem, it will not be possible
+  to instantiate the template. We need instead to find a way to embed
+  the content of the template into the model element itself. Then the
+  reference would be sufficient. The downside is that, in the absence
+  of org-mode injectors, these templates will be extremely difficult
+  to manage (imagine having to update a dia comment with a wale
+  template every time you need to change the template). On the plus
+  side, we wouldn't have to have a set of files in the filesystem,
+  which would make things a bit "neater".
+- in fact, we have two use cases: the templates which generate
+  generators (e.g. stitch) and so must be loaded into the code
+  generator and the templates which are a DSL and so can be
+  interpreted. Ultimately these should have a JSON object as
+  input. Ultimately there should be a JSON representation of instances
+  of the meta-model that can be used as input. However, what we are
+  saying is that there is a ladder of flexibility and each has its own
+  use cases:
+
+  - code generated;
+  - code generated with overrides;
+  - DSL templates;
+  - generator templates;
+  - handcrafted
+
+  Each of these has a role to play.
 
 *** Do logic-less templates belong in =generation.cpp=?               :story:
 
