@@ -17,6 +17,39 @@ such as profiles, licences etc.
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Model types and element binding                                   :story:
+
+Once we introduce the concept of model types (e.g. product, component,
+possibly different types of components), we should also take into
+account that some model types don't support some model elements. It
+should be possible to declare which model types support which element
+types such that if a user tries to use an invalid model type, we get a
+sensible error. In effect, this is a binding problem at the meta-model
+level.
+
+One of the component model types should be "generative
+components". These are used to augment the code generator. We need to
+look at the thesis on generative development to look for terminology.
+
+We should also have model types for terraform, etc.
+
+*** Add =ignore= meta-model element                                   :story:
+
+It would be nice if we had a meta-model element to represent ignore
+files for version control. For extra bonus points we should support
+multiple version control systems. We should also have out of the box
+ignore collections. These could link in via technical spaces. We
+should also be able to use composition (e.g. C++ with CMake and Visual
+Studio). It should also be possible to generate a user defined
+collection.
+
+Links:
+
+- [[https://github.com/github/gitignore][gitignore]]: A collection of useful .gitignore templates. We should
+  use this project, unmodified; perhaps by adding a PDM model which
+  imports the git ignore files they provide. The downside is having to
+  create meta-model elements for each file.
+
 *** Create meta-entity for root module                                :story:
 
 At present we are supplying model properties via a "special" comment
@@ -247,115 +280,6 @@ may just leave it as is for now until we fix it properly.
 Since all meta-elements should live in assets, we should fix this once
 all of them have been moved across.
 
-*** Formatter meta-model elements                                     :story:
-
-A second approach is to leave this work until we have a way to code
-generate meta-model elements. Then we could have a way to supply this
-information as meta-data - or perhaps it is derived from the position
-of the element in modeling space? The key thing is we need a static
-method to determine the meta-name, and a virtual method to allow
-access to it via inheritance. Perhaps we need to capture this pattern
-in a more generic way. It may even already exist in the patterns
-book. Then the elements would become an instance of the pattern. We
-should also validate that all descendants provide a value for this
-argument (e.g. an element descendant must have the meta-name set). We
-could also use this for stereotypes.
-
-The binding of the formatter against the meta-type is interesting, in
-this light. The formatter has a type parameter - the type it is
-formatting. In fact the formatter may have a number of type
-parameters - we need to look at the stitch templates to itemise them
-all - and these are then used to generate the formatter's template. We
-could take this a level up and say that, at least conceptually, there
-is a meta-meta-type for formatters, which is made up of a
-parameterisable type. Then we could declare the formatter as an
-instance of this meta-meta-type with a well-defined set of
-parameters. Then, when a user instantiates a formatter, we can check
-that all of the mandatory parameters have been filled in and error if
-not. In this case we have something like:
-
-- =masd::structural::parameterisable_type=. This is a meta-type that
-  has a list of KVPs. Some are mandatory, some are optional.
-- =masd::codegen::meta_formatter=. This defines the parameters needed
-  for the formatter, with default values etc.
-- =masd::codegen::formatter=. This is the actual formatters. They must
-  supply values for the parameters defined by the meta-formatter.
-
-Of course, we do not need a three-level hierarchy for this, and if
-this is the only case where these parameters are used, we could just
-hard-code the formatter as a meta-element and treat it like we do with
-all other meta-types. Interestingly, we could bind formatters to
-stereotypes rather than meta-elements. This would allow us to avoid
-binding into the dogen implementation, and instead think at the MASD
-level (e.g. =dogen::assets::meta_model::structural::enumeration= is a
-lot less elegant than =masd::enumeration= or even
-=masd::structural::enumeration=).
-
-We could also validate that the wale template exists. In fact, if the
-wale template is a meta-model element, we can check for consistency
-within resolution. However, we need a generic way to associate a wale
-template with any facet. The ideal setup would be for users to define
-wale templates as instances of a meta-model element which is
-parameterisable (see above). In reality, what we have found here is
-another pattern:
-
-- there are templates as model elements. When we create a template we
-  are instantiating a template's template.
-- we can then constrain the world of possibilities in to a
-  well-defined set of parameters which are needed for the specific
-  template that we are working on. This has a meta-model element
-  associated with it, and a file.
-- the file is the template file. In the case of wale, the template
-  file is then instantiated. This is done by associating facets with
-  the wale templates, and for each facet, supplying the arguments to
-  instantiate the template. We then end up with a number of actual
-  CPP/HPP files.
-- for stitch the process is a bit different. The main problem is
-  because we incorrectly "weaved" the arguments into the stitch
-  template. It made sense at the time purely because we don't really
-  expect to instantiate a given stitch template N times; it is really
-  only done once. This was slightly misleading. Because of this we
-  hard-coded the behaviour related to certain keys (e.g. includes,
-  etc). If instead we somehow handle stitch in exactly the same way as
-  we handle wale, we can keep the templates in a common template
-  directory; then associate them to specific facets via meta-data, and
-  supply the arguments as part of the same meta-data. The template
-  would then just contain the code that would be weaved. A formatter
-  is then a meta-model element associated with a wale template for the
-  header file and - very interestingly - a wale template for the cpp
-  file _which generates stitch templates_. The user then manually
-  fills in the stitch template, but supplies any parameters (remember
-  these are fixed) in the meta-model element. Generation will then
-  produce the CPP
-- the logical consequence of this approach is that we must reference
-  the c++ generation model in order to create new formatters, because
-  it will contain the templates. However, because the wale content of
-  the template is located in the filesystem, it will not be possible
-  to instantiate the template. We need instead to find a way to embed
-  the content of the template into the model element itself. Then the
-  reference would be sufficient. The downside is that, in the absence
-  of org-mode injectors, these templates will be extremely difficult
-  to manage (imagine having to update a dia comment with a wale
-  template every time you need to change the template). On the plus
-  side, we wouldn't have to have a set of files in the filesystem,
-  which would make things a bit "neater".
-- in fact, we have two use cases: the templates which generate
-  generators (e.g. stitch) and so must be loaded into the code
-  generator and the templates which are a DSL and so can be
-  interpreted. Ultimately these should have a JSON object as
-  input. Ultimately there should be a JSON representation of instances
-  of the meta-model that can be used as input. However, what we are
-  saying is that there is a ladder of flexibility and each has its own
-  use cases:
-
-  - code generated;
-  - code generated with overrides;
-  - DSL templates;
-  - generator templates;
-  - handcrafted
-
-  Each of these has a role to play.
-
 *** Do logic-less templates belong in =generation.cpp=?               :story:
 
 For purely expediency purposes, we placed the logic-less templates
@@ -399,6 +323,13 @@ don't "inherit" it from child namespaces. The problem is compounded by
 the fact that we need the schema name in order to output ODB pragmas
 (separate bug). It seems more logical to propagate the schema name to
 child namespaces.
+
+*** Run ODB on nightlies                                              :story:
+
+At present we are code-generating all code on dogen nightlies but we
+are not running ODB. This means that if we have broken ODB pragma
+generation, we will not find out until we manually run it. We should
+run it as part of the "generate everything" approach in nightly.
 
 *** ODB pragmas not populated when schema name is not set             :story:
 
@@ -1887,33 +1818,6 @@ generation model, the hope is that coding will take over the archetype
 expansion (via a collaboration with the archetypes model). Then we
 could do name resolution inside of coding.
 
-*** Postfix and directory fields should be templates                  :story:
-
-We need to understand why we didn't templatise these fields. It is
-very painful to have to add these manually for each facet and
-formatter.
-
-Most likely it is because each formatter/facet needs to "override" a
-base value with its own value. For example, we almost always want a
-blank postfix, but occasionally need to set it (=fwd= for forward
-declarations and so forth). Our variability implementation does not
-cope with this type of overrides. We would have to have some kind of
-way of allowing instance templates even though a facet/archetype
-template already exists, and then use the instance template as the
-override. Alternatively, we could simply check for postfix/directory;
-if not present default to empty string.
-
-For extra bonus points, we could allow variables: =${facet.name}=
-could expand to the current facet name on the facet template.
-
-Merged stories:
-
-*Postfix and directory fields in annotations look weird*
-
-Why are we manually instantiating postfix and directory for each
-formatter/facet instead of using templates? This is one of the main
-reasons for breaks/errors when adding a new formatter.
-
 *** Add logging support to generated tests                            :story:
 
 At present generated tests are not writing to the log file. This is
@@ -1928,6 +1832,12 @@ PDM before we can do this because otherwise the logging will be in
 different locations (i.e. dogen vs reference model).
 
 We should add some meta-data flag to suppress/enable logging.
+
+*** Add include directories to models                                 :story:
+
+In some cases we may require additional include directories to be
+added to a project. It should be possible to add these to a product or
+component. We need to find a specific use case for this though.
 
 *** Colouring script should be included as part of package            :story:
 
@@ -3016,6 +2926,16 @@ manually deleting them.
 
 This also means we can add the ODB files to the visual studio project
 even before they get generated.
+
+We should have meta-data configuration that describes the ODB files:
+
+- their extension
+- the location of headers and implementation
+- the need to move the files
+
+We should generalise this problem so that when we are using other
+cartridges such as protobuf/grpc, we can extend it for these use
+cases - expected cartridge files?
 
 *** Add visibility to coding attributes                               :story:
 
@@ -4616,47 +4536,6 @@ interfaces at the end after any base classes or else we will have
 compiler errors. This means we need to be able to distinguish
 interfaces from other types (e.g. =interface= stereotype).
 
-*** Registrar assumes references have serialisation enabled           :story:
-
-At present we are assuming that all references that are nom-proxy
-references have serialisation enabled. This is a problem because:
-
-- we are now disabling serialisation where possible unless we need it
-- as we move from the data directory into real models we will have a
-  number of models that will not require generation and so will not
-  have a registrar.
-
-We need to figure out a way to obtain an enablement map of referenced
-types. In theory we already have this because we do not add includes
-when a facet is off. However, something is not working quite right
-with registrar because we are including this file. Sample diff:
-
-: diff -u src/serialization/registrar_ser.cpp src/serialization/registrar_ser.cpp
-: Reason: Changed generated file.
-: ---  src/serialization/registrar_ser.cpp
-: +++  src/serialization/registrar_ser.cpp
-: @@ -26,6 +26,7 @@
-:  #include <boost/archive/binary_oarchive.hpp>
-:  #include <boost/archive/polymorphic_iarchive.hpp>
-:  #include <boost/archive/polymorphic_oarchive.hpp>
-: +#include "masd/serialization/registrar_ser.hpp"
-:  #include "masd.cpp_ref_impl.two_layers_with_objects/serialization/registrar_ser.hpp"
-:
-:  namespace masd::cpp_ref_impl::two_layers_with_objects {
-: @@ -32,18 +33,19 @@
-:
-:  template<typename Archive>
-: -void register_types(Archive&) {
-: +void register_types(Archive& ar) {
-: +    masd::register_types(ar);
-:  }
-:
-
-For now we did a quick hack to solve this problem and marked the MASD
-model as proxy:
-
-:    "masd.injection.is_proxy_model": true,
-
 *** Add meta-data to trigger inclusion/generation of =stdafx=         :story:
 
 No setting to add include for precompiled headers: =stdafx.h=
@@ -5015,17 +4894,6 @@ external model transform level; this means the enablement on the
 reference must be correct. However, somehow we seem to be looking at
 the element on the target model when deciding to include the hash file
 from reference model.
-
-*** Stitch does not handle directories very well                      :story:
-
-At present we seem to generate log files called =.= when we use stitch
-against a directory. This should only happen if we use =.= on the
-target parameter, e.g.:
-
-: --target .
-
-Not sure why it is happening when we call stitch from CMake since it
-should use the full path to the =cpp= directory.
 
 *** Serialisation support for C++-11 specific containers              :story:
 
@@ -6470,37 +6338,6 @@ translation unit for each formatter. This will also make life easier
 when we move to a mustache world where there may not be a formatter
 header file at all.
 
-*** Use templates for directory and prefix fields                     :story:
-
-At present we have a lot of duplication on the annotations for certain
-fields. This is because we need different defaults depending on the
-facet etc. A different approach would be to use the appropriate
-template (without default values) and then using profiles to default
-those that need defaulting.
-
-Other fields may also need a similar clean up:
-
-- overwrite
-
-In addition, we could add support for "default value variables". These
-are useful for directories. They work as follows: the default value is
-something like =${facet.simple_name}= or perhaps just
-=${simple_name}=, in which case we assume the template kind determines
-the target. Say the target is the kernel:
-
-:      "family": "quilt",
-:      "kernel": "quilt.cpp",
-
-The simple name is then =kernel - family=, e.g. =cpp=. Unfortunately
-this does not work for prefix.
-
-Tasks:
-
-- make prefix a recursive field at archetype level, adding default
-  values to profiles.
-- make directory a recursive field at facet level,  adding default
-  values to profiles.
-
 *** Merge properties factory with stitching factory                   :story:
 
 In stitch we still have a few classes that are light on
@@ -6965,24 +6802,6 @@ have some really meaningful exception that tells users when they
 forgot to initialise the framework.
 
 This story will eventually become irrelevant once we move to Boost.DI.
-
-*** Field definition templates do not support facet specific defaults :story:
-
-At present we cannot use field definition templates for fields that
-require facet specific default values such as =directory=. We could
-either support something like a "variable", e.g. "find facet simple
-name" or we could do overrides - the field definition is defined as a
-template but then overriden at a facet level. Or we could handle
-default values in a totally separate way - maybe a file with just the
-default values.
-
-In addition, we have the case where at the facet level we may have a
-default value for a field but not at the formatter level - =postfix=.
-
-For variables, the simple way is to have some "special names". For
-example =$(facet_name)= could be made to mean the facet name. With
-just support for this we could probably handle all of the use cases
-except for =postfix=.
 
 *** Perform lexical casts once only for error reporting               :story:
 
@@ -7783,202 +7602,6 @@ class name. We need a way of controlling all of the default
 constructors and all of the operators in one go so we can set it on
 the handcrafted profile.
 
-*** Add support for product skeleton generation                       :story:
-
-Now that dogen is evolving to a MDSD tool, it would be great to be
-able to create a complete product skeleton from a tool. This would
-entail:
-
-- directory structure. We should document our standard product
-  directory structure as part of this exercise. Initial document added
-  to manual as "project_structure.org".
-- licence: user can choose one.
-- copyright: input by user, used in CMakeFiles, etc. added to the
-  licence.
-- CI support: travis, appveyor
-- CMake support: top-level CMakefiles, CPack. versioning
-  templates, valgrind, doxygen. For CTest we should also generate a
-  "setup cron" and "setup windows scheduler" scripts. User can just
-  run these from the build machine and it will start running CTest.
-- vcpkg support: add "ports" code? user could point to vcpkg directory
-  and a ports directory is created.
-- agile with first sprint
-- README with emblems.
-
-Name for the tool: dart.
-
-Tool should have different "template sets" so that we could have a
-"standard dogen product" but users can come up with other project
-structures.
-
-Tool should add FindODB if user wants ODB support. Similar for EOS
-when we support it again. We should probably have HTTP links to the
-sources of these packages and download them on the fly.
-
-Tool should also create git repo and do first commit (optional).
-
-For extra bonus points, we should create a project in GitHub, Travis
-and AppVeyor from dart.
-
-We should also generate a RPM/Deb installation script for at least
-boost, doxygen, build essentials, clang.
-
-We should also consider a "refresh" or "force" statement, perhaps on a
-file-by-file basis, which would allow one to regenerate all of these
-files. This would be useful to pick-up changes in travis files, etc.
-
-One problem with travis files is that each project has its own
-dependencies. We should move these over to a shell script and call
-these. The script is not generated or perhaps we just generate a
-skeleton. This also highlights the issue that we have different kinds
-of files:
-
-- files that we generate and expect the user to modify;
-- files that we generate but don't expect user modifications;
-- files that the user generates.
-
-We need a way to classify these.
-
-Dart should use stitch templates to generate files.
-
-We may need some options such as "generate boost test ctest
-integration", etc.
-
-Notes:
-
-- [[https://github.com/elbeno/skeleton][Skeleton]]: project to generate c++ project skeletons.
-- split all of the configuration of CMake dependencies from main CMake
-  file. Possible name: ConfigureX? ConfigureODB, etc. See how find_X
-  is implemented.
-- detect all projects by looping through directories.
-- fix CMake generation so that most projects are generated by Dogen.
-- add option to Dogen to generate test skeleton.
-- detect all input models and generate targets by looping through
-  them.
-- add CMake file to find knitter etc and include those files in
-  package. We probably should install dogen now and have dogen rely on
-  installed dogen first, with an option to switch to "built" dogen.
-- generate git ignore files with common regexes. See [[https://github.com/github/gitignore][A collection of
-  useful .gitignore templates]]. We could also model it as a meta-model
-  object with associated options so that the user does not have to
-  manually edit the file.
-- generate top-level CMake, allowing user to enter dependencies and
-  their versions (e.g. Boost 1.62 etc) and CMake version.
-- inject dogen support automatically to CMake (on a feature switch).
-- determine the list of projects by looking at the contents of the
-  input models directory.
-- user to enter copyright, github URL.
-- we probably need to create a kernel for dart due to the
-  peculiarities of the directory structure.
-
-*Directory Themes*
-
-It seems obvious no one in C++ will agree with a single way of
-structuring projects. The best way out is to start a taxonomy of these
-project layouts (directory structure themes?) and add this to the
-project generator as a theme. At present there are several already
-available:
-
-- [[https://github.com/vector-of-bool/vector-of-bool.github.io/blob/master/_drafts/project-layout.md][Project Layout]]: see also discussion in [[https://old.reddit.com/r/cpp/comments/996q8o/prepare_thy_pitchforks_a_de_facto_standard/][reddit]]. Also: [[https://vector-of-bool.github.io/2018/09/16/layout-survey.html][Project
-  Layout - Survey Results and Updates]]
-- [[https://build2.org/][Build2]]: the packaging system seems to have a preferred directory
-  layout. In particular, see [[https://build2.org/build2-toolchain/doc/build2-toolchain-intro.xhtml#proj-struct][Canonical Project Structure]].
-- GNU: gnu projects seem to have a well-defined structure, if not the
-  most sensible.
-- [[https://www.reddit.com/r/cpp/comments/cvuywh/structuring_your_code_in_directories/][Structuring your code in directories]]
-- [[https://api.csswg.org/bikeshed/?force=1&url=https://raw.githubusercontent.com/vector-of-bool/pitchfork/develop/data/spec.bs#src.layout][The Pitchfork Layout (PFL)]]
-- [[https://www.boost.org/development/requirements.html#Organization][Boost: Organization]]
-- [[https://hiltmon.com/blog/2013/07/03/a-simple-c-plus-plus-project-structure/][A Simple C++ Project Structure]]
-
-*Product Model*
-
-Actually we have been going about this all wrong. What we've called
-"orchestration" is in fact the product model. It is just lacking all
-other entities in the product meta-model such as:
-
-- injection/coding models: injection/coding models are themselves
-  modeling elements within the product meta-model. However, to avoid
-  having to load an entire coding/injection model, a product coding
-  model can contain only the key aspects of the injection/coding
-  models we're interested in: a) file or path to the model b)
-  references c) labels: these allow us to group models easily such as
-  say "pipeline" or "injection" etc. d) references: with this we can
-  make a product graph of model dependencies. We can also avoid
-  rereading models. we can also figure out what packages needed by the
-  model graph.
-- build systems: visual studio, msbuild, cmake
-- ctest
-- CI: travis, appveyor.
-- kubernetes support, docker support.
-- valgrind
-- compiler: clang, gcc, msvc, clang-cl. Version of the compiler. This
-  is used in several places such as the scripts, CI, etc.
-- operative system: windows, linux. used in installation scripts, CI,
-  etc.
-- dependencies for install scripts; these are sourced from the
-  component models.
-- manual: org mode, latex
-- org agile: product backlog, sprints, vision, etc.
-
-Notes:
-
-- a product may be associated with one or more primary technical
-  spaces (e.g. support for say C# and C++ in the same model). This
-  would have an impact at the product level.
-- a product could have some simple wale templates so that when you
-  initialise a product you would get a trivial dia model with a simple
-  entry point (for executables) or a library with maybe no types.
-- when generating a product we can generate all models (product and
-  component), generate just the product, generate a specific component
-  or generate a label (which groups components).
-- we need a "init" command that initialises a product. It needs a
-  product name and maybe some other parameters to determine what to
-  add. Maybe it just makes a product model and asks the user to fill
-  it in instead.
-- there are several types of component models: 1) models that do not
-  generate anything at all. these are useful for defining templates,
-  configurations, etc. 2) regular component models 3) product
-  models. 4) platform definition models that are used to adapt
-  existing libraries into MASD.
-- in this sense, we have two different models: product and
-  component. Both of these need to be projected into artefact space
-  (because we have multiple facets in products as well). This means we
-  somehow need to use archetypes from both models.
-- the product model should have meta-elements describing the component
-  models (perhaps =masd::component_model::target=, with a matching
-  =masd::component_model::reference= in the component models).
-- See aslo the story about directories in dogen: [[*Move models into the project directory][Move models into the
-  project directory]].
-- we could create separate chains for product and component
-  model. This would imply a need for distinct model types. On the
-  product model, we would locate all of the meta-elements representing
-  a component model, and for each of these, run the product model
-  chain. For other meta-model elements we just run their associated
-  transforms - hopefully not many as these are expected to be very
-  simple elements. We should also make use of injection model caching
-  to avoid reloading models.
-- as with component models, we should also have templates for product
-  models so that we could simply do a "dogen new product" or some such
-  incantation and that would result in the creation of a dogen product
-  model and possibly its initial generation. One slight problem is
-  that if we do a "dogen new component" we still have to manually add
-  the component to the product model.
-- we need to have a separate injection adapter for product models so
-  that we filter out "invalid" meta-elements for the model
-  type. Similarly, in the component injection adapter, we should
-  filter out product model meta-elements (travis build files, etc).
-
-Links:
-
-- [[https://github.com/bkaradzic/GENie][GENie - Project generator tool]]
-- see [[https://github.com/cginternals/cmake-init][cmake-init]] for ideas.
-- [[https://github.com/premake/premake-core][Premake: powerfully simple build configuration.]]
-- [[https://jgcoded.github.io/CMakeStarter/][CMake Starter]]: "This website is a simple tool to help C++ developers
-  quickly start new CMake-based projects. The tool generates an entire
-  C++ project with boiler-plate CMake files and source code, and the
-  generated project can be downloaded as a zip file."
-- [[https://awfulcode.io/2019/04/13/professional-zero-cost-setup-for-c-projects-part-1-of-n/][Professional, zero-cost setup for C++ projects (Part 1 of N)]]:
-
 *** Add support for selectively disabling helpers on a family         :story:
 
 At present when a type belongs to a helper family it must provide all
@@ -8097,115 +7720,6 @@ Alternatively we could have each exception define the supported error
 codes. This would allow us to code generate them. The only problem is
 if multiple exceptions share an error code, but this should probably
 not happen?
-
-*** Create different kinds of master header files                     :story:
-
-#+begin_quote
-*Story*: As a dogen user, I don't want to include every object in a
-model when I use includers.
-#+end_quote
-
-At present we are using the facet includers in unit tests. This is not
-ideal because it means that every time we do a change in a service
-header, all tests recompile. In reality we should have two types of
-inclusions:
-
-- canned tests should include only value objects, etc - e.g. no
-  services.
-- service tests should include the header for the service and any
-  additional dependencies the service may require.
-
-Perhaps we could have a second type of includer that only has value
-objects, etc.
-
-Another way to look at this is that there should be user-configurable
-master header files:
-
-#+begin_quote
-*Story*: As a dogen user, I want to create master header files for
-user defined sets of files so that I don't have to do it manually.
-#+end_quote
-
-Merged stories:
-
-*Add an includer for all includers*
-
-#+begin_quote
-*Story*: As a dogen user, I need a quick and dirty way of including
-all files in a model so that I can test them without having to
-include every file manually.
-#+end_quote
-
-It would be nice to totally include a model. For that we need an
-includer that includes all other includers. This should be as easy as
-keeping track of the different includers for each facet in the map
-inside of the includer service.
-
-We need to find a good use case for this.
-
-Taking into account the "[[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#consider-renaming-includers][master header]]" rename, this would be a
-"master master include" file?
-
-*** Private and public includes                                       :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to hide some internal types from
-users so that I don't increase coupling for no reason.
-#+end_quote
-
-NOTE: We should use the terms =internal= and =external= to avoid
-confusion with C++ scopes. This follows Microsoft terminology for C#
-assemblies.
-
-At present we are making all headers in a model public. However, for
-models such as cpp this doesn't make any sense since only one type
-should be available to the outside world. What we really need is a
-separation between public and private headers, a functionality similar
-to =internal= in C#. In conjunction with [[*Build%20shared%20objects%20instead%20of%20dynamic%20libraries][using shared objects]], this
-should improve build times.
-
-In order to do this:
-
-- add a new config parameter: default visibility to private or default
-  visibility to public. This is just so we don't have to mark all
-  types manually - instead we just need to mark the exceptions.
-- add two new stereotypes: =public= and =private=.
-- add enum to sml: =visibility_type= (check with .Net for
-  names). Valid values are =public=, =private=. Objects, enumerations,
-  etc will have this enum.
-- locator will now respect this value when producing an absolute file
-  path. If public files go under =include/public=, if private files go
-  under =include/private=.
-- CMakelists for the component will add to the include path the
-  private directory. Same for the spec CMakelists. Need to check that
-  this not add to the global include path.
-- CMakelists for the include files will only package the public
-  headers.
-- mark all the types accordingly in all our models. fix all the
-  ensuing breakage. we will probably need to move forward on the IoC
-  front in order for this to work as we don't want to expose
-  implementations - e.g. =workflow_interface= will be public but
-  =workflow= will be private; this means we need some kind of factory
-  to generate =workflow_interface=.
-
-More thoughts on this:
-
-- we don't really need to have different directories for this; we
-  could just put all the include files in the same directory. At
-  packaging time, we should only package the public files (this would
-  have to be done using CPack).
-- also the GCC/MSVC visibility pragmas should take into account these
-  options and only export public types.
-- the slight problem with this is that we need some tests to ensure
-  the packages we create are actually exporting all public types; we
-  could easily have a public type that depends on a private type
-  etc. We should also validate yarn to ensure this does not
-  happen. This can be done by ensuring that a type marked as external
-  only depends on types also marked as external and so forth.
-- this could also just be a packaging artefact - we would only package
-  public headers. Layout of source code would remain the same.
-- when module support is available, we could use this to determine
-  what is exported on the module interfaces.
 
 *** Control the emission of pragma once with dynamic extensions       :story:
 
@@ -9868,6 +9382,22 @@ Implement the visitor formatters for C#.
 We should automatically add the benchmarking code in the generated
 CMakeLists. This could be behind a feature switch in meta-data.
 
+Alternatively, we should consider adding wrapper code around unit
+tests which generates benchmarking code via existing libraries. This
+can be done once we create a facet for manual tests. However, we would
+have to declare each test in the model and hard-code both the unit
+test framework as well as the benchmark framework.
+
+*** Remove existing benchmark infrastructure                          :story:
+
+We have not used it since it was implemented a long time ago. In
+addition, it is not very practical because it requires us to manually
+generate the benchmark numbers and we never remember to do it. We
+should just remove it and create a new benchmark framework based on
+existing libraries and integrated with nightlies. Ideally it should
+also output results to relational so that we can plot the evolution
+over time.
+
 *** Consider using hayai for benchmarks                               :story:
 
 It seems there is a C++ benchmarks framework which could be used for
@@ -10336,6 +9866,20 @@ Links:
 - [[https://en.wikipedia.org/wiki/Camel_case][Camel Case]]
 - [[https://en.wikipedia.org/wiki/Indentation_style][Indentation style]]
 - [[https://llvm.org/docs/Proposals/VariableNames.html][LLVM: Variable Names Plan]]
+
+Merged stories:
+
+*Add camel case option*
+
+#+begin_quote
+*Story*: As a dogen user, I want my models to use camel case so that I
+can integrate dogen code with my code base.
+#+end_quote
+
+It would be nice to have a command line option that switches names
+from underscores into camel case. The default convention would be that
+diagrams are always with underscores and then you can convert them at
+generation time. There should be a regex for this conversion.
 
 *** Add support for clang format configurations                       :story:
 
@@ -11252,6 +10796,31 @@ more accurately.
 We should have an operator that compares the state of two objects
 ignoring the version (for versioned objects).
 
+*** Add version support                                               :story:
+
+At present we are generating the product version file as part of some
+CMake hackery. In reality, this is really a property of a MASD product
+and possibly component.
+
+Notes:
+
+- there should be a meta-model element for version. It should be
+  usable in either product or component models. In product models, we
+  still need to figure out where the file with the details should be
+  placed.
+- version can then be used for details such as travis/appveyor
+  version, CMake version, DLL/SO version, assembly properties, etc.
+- however, we need to figure out how components will be able to see
+  product level elements.
+- this can also be used for [[*Add versioning support][serialisation versioning]].
+- the version is a property of the product itself, so perhaps we
+  should just make it a meta-data element. Then, if you would like the
+  version to come out as a header file you need to create a "product
+  version" element. This will use the product version (in a yet to be
+  defined manner). This would allow users to decide where they want
+  the header file to be created. A similar approach can be taken for
+  components as well.
+
 *** Add versioning support                                            :story:
 
 #+begin_quote
@@ -11626,18 +11195,6 @@ that I don't have to do it manually.
 It may be useful to mark classes as pimpl and generate a private
 implementation. On the public header we could forward declare all
 types.
-
-*** Add camel case option                                             :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want my models to use camel case so that I
-can integrate dogen code with my code base.
-#+end_quote
-
-It would be nice to have a command line option that switches names
-from underscores into camel case. The default convention would be that
-diagrams are always with underscores and then you can convert them at
-generation time. There should be a regex for this conversion.
 
 *** Manual typedef generation                                         :story:
 
@@ -12817,6 +12374,68 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+
+*** Dogen Modeling Studio                                             :story:
+
+Assorted set of ideas of what an "integrated environment" for modeling
+within Dogen would look like. Very random.
+
+- model management, concept of projects.
+- integration with git in order to link model versioning with version
+  control. References should point to specific versions (tags or
+  commits).
+- ability to view revisions for a given model set. That is, at model
+  version X, code looks like Y. Linkage between generated code and
+  model.
+- configuration for all models and for each models - e.g. product
+  families, component families.
+- load all revisions with model changes: given a git repo, show me all
+  the commits that changed a model and see these as a log for the
+  model. We should also be able to see the comments on the
+  commit. We can then visualise the model and see the diffs across
+  revisions somehow.
+- ability to config the git repo, model location, output
+  directory. Performs a clone of up to X depth. Then reads history of
+  model files.
+- it should be possible to select branches for a git repo as well.
+- for injectors with text formats, it would be nice to be able to edit
+  the models within the IDE.
+- ability to download a zip with generated code for the model at a
+  specified version.
+- support for tracing within the IDE so that we can browse and
+  navigate all of the generated tracing information. Visualisation of
+  JSON as a expandable tree.
+- ability to load/save models into a relational database.
+- it would be nice to have endpoints with different versions of
+  Dogen. That way we could generate code and diff it. We can also
+  check if a model will error in the future/past versions of
+  Dogen. There should also be an endpoint of "latest" which is always
+  the latest version.
+- once we have warnings and validation, we can generate github
+  badges. Perhaps a =.dogen= file at the top could be used to describe
+  the settings (API tokens, location of models, etc). Then we could
+  provide the following information:
+
+  - is the model green (no errors, no warnings).
+  - if its not green, what warnings and errors is it generating.
+  - is the code out of sync with the model?
+  - model health reports, based on complexity measures, etc.
+
+  The idea is that we would provide feedback with each commit so that
+  users can be on top of it. Also, users can choose to point to latest
+  just to see whenever their models break with latest changes.
+- this story has a lot in common with [[*Consider adding a wt frontend][Consider adding a wt frontend]].
+
+*** Consider adding support for TOML                                  :story:
+
+Links:
+
+- [[https://github.com/marzer/tomlplusplus/][toml++]]: header-only toml parser and serializer for C++17, C++20 and
+  whatever comes after.
+- [[https://github.com/ToruNiina/toml11][toml11]]: TOML for Modern C++
+- [[https://github.com/skystrife/cpptoml][cpptoml]]: cpptoml is a header-only library for parsing TOML
+- [[https://www.reddit.com/r/cpp/comments/f70io2/toml_a_toml_parser_and_serializer_for_c17/][reddit discussion]]
 
 *** Consider integration with GNU plot library                        :story:
 
