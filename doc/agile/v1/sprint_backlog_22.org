@@ -13,19 +13,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-02 Mon 18:02]
-| <75>                                               |         |       |      |       |
-| Headline                                           | Time    |       |      |     % |
-|----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                       | *11:58* |       |      | 100.0 |
-|----------------------------------------------------+---------+-------+------+-------|
-| Stories                                            | 11:58   |       |      | 100.0 |
-| Active                                             |         | 11:58 |      | 100.0 |
-| Edit release notes for previous sprint             |         |       | 4:11 |  35.0 |
-| Create a demo and presentation for previous sprint |         |       | 0:25 |   3.5 |
-| Sprint and product backlog grooming                |         |       | 2:50 |  23.7 |
-| Define a combined logical-physical space           |         |       | 4:14 |  35.4 |
-| Create meta-model elements for location            |         |       | 0:18 |   2.5 |
+#+CAPTION: Clock summary at [2020-03-03 Tue 12:51]
+| <75>                                                   |         |       |      |       |
+| Headline                                               | Time    |       |      |     % |
+|--------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                           | *13:46* |       |      | 100.0 |
+|--------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                | 13:46   |       |      | 100.0 |
+| Active                                                 |         | 13:46 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 4:11 |  30.4 |
+| Create a demo and presentation for previous sprint     |         |       | 0:25 |   3.0 |
+| Sprint and product backlog grooming                    |         |       | 3:15 |  23.6 |
+| Analysis on defining a combined logical-physical space |         |       | 5:55 |  43.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -206,6 +205,8 @@ Time spent creating the demo and presentation. Use the demo project:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-03-03 Tue 12:37]--[2020-03-03 Tue 12:51] =>  0:14
+    CLOCK: [2020-03-03 Tue 11:01]--[2020-03-03 Tue 11:12] =>  0:11
     CLOCK: [2020-03-02 Mon 17:24]--[2020-03-02 Mon 18:02] =>  0:38
     CLOCK: [2020-03-02 Mon 15:20]--[2020-03-02 Mon 15:40] =>  0:20
     CLOCK: [2020-02-28 Fri 17:21]--[2020-02-28 Fri 18:10] =>  0:49
@@ -278,13 +279,20 @@ model as proxy:
 
 :    "masd.injection.is_proxy_model": true,
 
-*** STARTED Define a combined logical-physical space                  :story:
+*** COMPLETED Analysis on defining a combined logical-physical space  :story:
+    CLOSED: [2020-03-03 Tue 12:43]
     :LOGBOOK:
+    CLOCK: [2020-03-03 Tue 11:13]--[2020-03-03 Tue 12:36] =>  1:23
+    CLOCK: [2020-03-02 Mon 15:41]--[2020-03-02 Mon 15:59] =>  0:18
     CLOCK: [2020-03-02 Mon 13:25]--[2020-03-02 Mon 15:19] =>  1:54
     CLOCK: [2020-02-19 Wed 18:01]--[2020-02-19 Wed 19:01] =>  1:00
     CLOCK: [2020-02-19 Wed 08:02]--[2020-02-19 Wed 08:54] =>  0:52
     CLOCK: [2020-02-19 Wed 07:02]--[2020-02-19 Wed 07:30] =>  0:28
     :END:
+
+*Rationale*: we understand the problem well enough to start moving
+forwards a bit with coding. This is too complex to design it all up
+front.
 
 It now seems that we have been searching for a meta-model that
 combines both aspects of logical modeling as well as physical
@@ -359,10 +367,9 @@ Notes:
   there can only be one representation (the technical space we have
   mapped to).
 
-*** STARTED Create meta-model elements for location                   :story:
-    :LOGBOOK:
-    CLOCK: [2020-03-02 Mon 15:41]--[2020-03-02 Mon 15:59] =>  0:18
-    :END:
+Merged stories:
+
+*Create meta-model elements for location*
 
 We need to factor out all meta-model elements we have scattered around
 the generation models which model concepts related to physical
@@ -370,6 +377,468 @@ locations, and move them into assets. We then need to create classes
 to instantiate these model elements as part of kernel registration, as
 well as the associated overrides. Finally, we need a way to compute
 paths using these new meta-model elements.
+
+Notes:
+
+- at present, we are relying on archetype location in the variability
+  model. The main reason why is template expansion. We have a small
+  number of features that are templated, and need to expand across
+  physical space (e.g. for each facet, for each archetype, for each
+  kernel etc). These we inject into variability by reading them from
+  the backend. Thing is, variability is not really connected directly
+  to the physical space. That is to say, these archetype locations are
+  not points in variability space where we find these features - just
+  like when we are using features in the logical model, we are not
+  stating that points in logical space "have" features. Instead, we
+  have points in feature space that happen to be mapped to points in
+  other spaces. We need a clear cut separation between variability
+  space and all other spaces to avoid confusion. We could say that
+  variability space is hierarchical, and features can live at
+  "levels". These levels can then be mapped to the hierarchy of
+  physical space or modeling space as required.
+- up to know we have assumed that physical space was somehow connected
+  to logical space. An alternative way of looking at this is to see
+  them as completely separate dimensions. It just so happens that on
+  very few occasions, we need to refer to physical concepts in logical
+  space, but this is just an implementation detail and should be kept
+  to the minimum.
+- when we finally enter generation, we require points in the
+  logical-physical space in order to resolve them to concrete
+  artefacts
+
+*** Remove references to archetypes model in variability              :story:
+
+- create the notion of "levels".
+- replace archetype location with a variability location based on
+  levels.
+- inject these locations by transforming archetype locations into
+  variability locations within engine.
+
+By the end of this story there should be no dependencies between the
+archetype location model and the variability model.
+
+*** Refactor archetype model                                          :story:
+
+- rename model to =physical=.
+- create meta-model namespace.
+- add missing meta-types from generation (parts, etc).
+- remove all types from generation which are not yet used.
+- add concept of artefact types (e.g. c++ public header, c++ private
+  header, etc). Associate extensions with artefact types (and perhaps
+  other properties?).
+
+*** Rename assets model to logical model                              :story:
+
+- rename all references to archetypes to "physical", e.g.:
+  =artefact_properties= should be renamed, etc.
+
+*** Implement locator in terms of new physical types                  :story:
+
+- get kernels to export the new information.
+- using the information compute the paths. Create a new field so that
+  we can diff new and old paths.
+- once there are no differences, remove all locator related legacy code.
+
+*** Implement dependencies in terms of new physical types             :story:
+
+- add dependency types to physical model.
+- add dependency types to logical model, as required.
+- compute dependencies in generation. We need a way to express
+  dependencies as a file dependency as well as a model
+  dependency. This caters for both C++ and C#/Java.
+- remove dependency code from C++ and C# model.
+
+*** Remove =element= from the modeling location                       :story:
+
+We introduced this for inner classes, but its (probably) not being
+used. If so, remove it and add a story for inner classes, if one does
+not yet exist.
+
+*** Add primitives to the archetypes model                            :story:
+
+Instead of using strings we should use primitives for:
+
+- facets
+- formatters
+- backends
+- simple and qualified names.
+- etc.
+
+*** Enablement problem is in the variability domain                   :story:
+
+Up to now we have considered the enablement problem as a generation
+model problem, but this is incorrect. The enablement problem is
+basically the idea that if I set a type to be hashable (for example),
+the system should implicitly determine all other types that need to be
+hashable too. This means that if I have descendants, they should also
+be hashable, and if I have properties, the type of those properties
+must also be hashable. In reality this is just a variability
+problem. We need to tell the variability model about:
+
+- features that require "propagation across model elements". We need a
+  good name for this, without referencing model elements.
+- the relationship between bound configurations. This can be copied
+  from the model element (the bound configuration has the exact same
+  name as the model element).
+
+Then, we can simply build a DAG for the feature model using only bound
+configurations (e.g. at present, binding type of "not applicable") and
+then DFS the DAG setting properties across this relationship. Call the
+relationship R between a and b, where a and b are configurations; all
+properties that have the "propagate" flag on will be copied across
+from a to b as is (due to R). If done after building the merged model
+and after stereotype expansion this will work really well:
+
+- we don't really care how a got into the state it is at present, we
+  just copy the relevant properties across.
+- there is no solving, BDD, etc. However, R must not have cycles. We
+  probably need to first see how many cycles we find with inheritance
+  and associations.
+- we may need a way to switch this off. Say we really want to
+  introduce a cycle; in that case, the bound configurations should be
+  ignored.
+
+Note that we will probably need to store pointers to the configuration
+in order for this to work, or else we'll end up doing a lot of lookups
+and copying around (to get the configurations from the model elements
+into variability, the DAG etc and then back into the model at the
+end).
+
+Interestingly, this also means that we should not move the
+global/local enablement computations into archetypes as we had planned
+earlier. Instead, we need to explore if it is possible to generalise
+the notion of "local" and "global" configurations, with overrides and
+default values. This would work as part of the configuration binding
+via implicit relationships - its just that the global configuration is
+not really a relationship inferred from the underlying model. We then
+need to look at the cleverness that we are using for overwrite as
+well. Whilst we only need this logic for enablement, it may be useful
+for other fields as well in the future. We also need some kind of way
+of declaring certain fields as "cloneable" (for want of a better
+term). In this case, we start off with a list of these fields, and if
+there is no configuration point for them locally, we take the global
+configuration point; if none exists, we take the default value.
+
+Actually its more like "hierarchical copy" because we need to take
+into account the hierarchy. In addition, we don't particularly care
+about say backend, facet, etc at the element level, we just want the
+archetype. So we need to encode these rules as a type of bind. It can
+even be hacked as a bind "special" just for this purpose, its still a
+better approach.
+
+Another interesting issue is that of "reverse references". That is,
+the fact that a model m is referenced by a set of models S; each of
+these models may enable facets on elements that are associated with
+elements from model m. On a first pass, we need to be able to consider
+the configuration requirements as "non-satisfiable". The user
+requested a configuration on the target model which cannot be
+satisfied unless we alter the configuration of a referenced model. On
+a second pass, when we have product level support, we could consider
+adding "referenced" models to each model. This means that when we are
+building m we have visibility of how m is used in the product and we
+can take those uses into account when building the DAG.
+
+We should really read up on OMG's CVL and associated technologies, as
+it seems they have done much of the analysis required here.
+
+Merged stories:
+
+*Propagate =fluent= stereotype*
+
+It would be nice to be able to mark an object template called say
+Message with =dogen::fluent= and then have all of the classes that
+instantiate that template set to fluent.
+
+This is a variation on the general problem of feature propagation
+(e.g. hashing, etc).
+
+It would also be nice to have a meta-data parameter to determine if
+the "auto-propagation" is on or off.
+
+*Computation of enablement values*
+
+Note: this story is still *very* sketchy.
+
+At present we have a very simple way of determining what formatters
+are enabled: if a facet has been enabled by the user then all
+formatters on that facet are enabled. This is a good starting point
+but results in a lot of manual work:
+
+- if we add a type which does not support all facets, we will generate
+  invalid code. Users should be able to mark which facets are
+  supported and then the graph of dependencies should do the right
+  thing, propagating the disabled status.
+- we are enabling all formatters in a facet. For hashing and forward
+  declarations, it would make more sense to have a "dependency based
+  enablement": if we determine that someone in the model needs that
+  feature, we enable it, if not its disabled. Users can always
+  override this and force it to be globally enabled.
+- if a user creates a "service", all facets other than types are
+  disabled. Ideally we should be able to define "enablement profiles"
+  and then set an element's enablement profile. Each enablement
+  profile is made up of a set of enabled facets. They could be
+  supplied as a KVP. In fairness we probably just need "types and io"
+  or "default".
+
+One way to think of this problem is to imagine a matrix for each
+element in element space. Each matrix is two-dimensional: one
+dimension is the facets and the other are "dependent elements". These
+are effectively made up of all attributes for each element, with a
+name tree expansion. Each value of the matrix can either be 0
+(disabled), 1 (enabled) or 2 (not computable). Not computable is a
+hack to cope with cycles in the graph of dependencies.
+
+Each value is computed by looking up an element's matrix and looking
+for zeros. If there is one or more zero against a facet, the element's
+value for that facet is zero. If there is a two we need to do a
+two-pass whereby we first compute the matrix ignoring all the two's;
+then, for each cycle we create a list of all the elements on that path
+and the pair of elements that causes the cycle. We then compute the
+enablement for this pair with a simple table (OR the computed
+enablement values). We then traverse the cycle in reverse, updating
+the twos to real values.
+
+We could start with one large matrix with rows by element and columns
+by feature. All values on this matrix are set to 1. We would then
+multiply it against the global enablement matrix. We would then
+multiply it by the local enablement matrix, for each element. We would
+then compute the dependency matrices for all elements only taking into
+account facets that are still enabled. We need to find the linear
+algebra operation that takes a column with zeros and ones and returns
+one if all rows are one and zero otherwise.
+
+This produces the enabled facets. We then need to worry about the
+formatters. There are a few sources of information:
+
+- the facet enablement.
+- the user local or global decision for that formatter.
+- some kind of default formatter property (e.g. disabled by default).
+- dependencies.
+
+For these we need to create a "get dependencies" method in
+each formatter which returns dependent formatters. For example, the
+visitor formatter depends on the forward declarations formatter. This
+is a static dependency. The more complex case is where there are
+dynamic dependencies. For example, if hashing is detected for a given
+type, we then need to enable the hashing facet for the containee. We
+should probably hard-code this scenario for now.
+
+We may want to make these computations disableable. For example: a)
+all: no computation, everything is enabled b) all supported: all that
+is supported is enabled c) by dependencies.
+
+Requested help from FB. Core of the email:
+
+#+begin_quote
+Lets start with the simple case. Let G be a DAG. For each vertex of G
+there is an associated vector over a field F. Now I would say F is
+GF(2), which suits my needs (as you will see below). The objective is
+to compute, for each vertex, the value of its associated vector, as
+follows:
+
+- first we go through the vertices in any order and setup its initial
+  values according to a predetermined heuristic. Different nodes will
+  have different values, and the heuristic has no dependency on G.
+- then we iterate through G using DFS. If a vertex has no children
+  then the final value of its vertex is the initial value. If a vertex
+  has children, the value of its vector is obtained by multiplying the
+  initial value against the values of the vectors of its child
+  vertices. Multiplication under GF(2) is just a logical AND which is
+  great for my purposes.
+
+Just to make sure I'm explaining my self correctly, lets look at it in
+layperson's terms: if a vertex has a 1 at position zero of its vector,
+and all of its children also have a 1 at position zero, then the final
+value for position zero will be 1. If there is a 0 anywhere at
+position zero then the value is 0. So far so good, this works as
+expected.
+
+However! The problem is, G is actually not always a DAG. Sometimes
+there may be cycles, which are detectable during DFS. My question is:
+is there anything I can do to still perform this heuristic (or some
+approximation of it) with a graph that has cycles? For example:
+
+- record the path to the cycle and perform several passes. This seems
+  to breakdown when there are several cycles because I seem to hit
+  some kind of recursive problem.
+- ignore the cycle. Of course, the problem with this approach is that
+  if there was a zero at either side of the cycle, I would be
+  incorrectly computing the node, but maybe that's the best one can
+  do?
+#+end_quote
+
+Actually maybe we are looking at this the wrong way. Lets imagine that
+for each element there is a vector v in GF(2) called the initial
+vector. The objective is to compute u, the output vector. The output
+vector is made up of the initial vector of the element, times the
+output vectors of all the elements the element depends on. However,
+these can be formulated in terms of initial vectors too (e.g. the
+initial vector of the depended element times the initial vectors of
+the elements it depends on times the initial vectors of the elements
+they depend on and so forth). Thus for each element there is an
+expansion that just relies on initial vectors. For the cases where
+there are cycles: its not a problem since multiplying n times by
+the same vector (in GF(2)) produces the same result as multiplying
+just once.
+
+It would still be useful to have a graph though, to find all of the
+initial vectors for a given element. We just need to stop DFS'ing when
+we find a cycle. We can also cache the initial vectors for each
+element.
+
+Notes:
+
+- we can greatly simplify this story if we do not allow for cycles. We
+  can simply create a graph of all dependencies and then iterate the
+  graph from the leaves. Call Ev the enablement vector for each
+  element; we can descend the graph and perform an OR of Ev at each
+  level. Consider element e0, which is a child of a set of elements E;
+  for each entry in the set, we'd OR the element vector of e0 (and of
+  all of its descendants). As a result, its values would be the
+  superset of all of the enabled values on each leaf element.
+- since we do not allow cycles, we should detect them and break with
+  an error. We should provide the cycle path to the user and then
+  allow users to remove certain types from this computation via
+  meta-data. If a type is set not to contribute to the graph, we can
+  simply skip it. The user is then responsible for manually setting
+  that type.
+- since we can only alter generatable types, we should detect when we
+  reach an element which is not generatable. If the OR'ing of that
+  element does not produce its current enablement vector we should
+  simply error and tell the user the current enablement requirements
+  are not satisfiable. The user is then responsible for addressing the
+  issue by either changing enablement requirements, ignoring types,
+  updating reference models manually or providing helper types. To
+  make life easier we could state what are the enablement requirements
+  that have not been met so that users can quickly decide what to do.
+- once we compute the dependency graph we can also check to see what
+  types are on it. Any type which is absent can be removed from the
+  model. We could also compute the models that are on the graph and
+  compare them to the list of references. If the list of references at
+  present only includes references of the target model, we can figure
+  out any unnecessary references. Sadly we cannot do the opposite:
+  (lost the train of thought).
+- it would be nice to have "enablement requirements". For example, if
+  the user used =std::unordered_map= against a dogen type, it should
+  trigger the generation of hash for that type (and all dependent
+  types). Similarly, for =std::map= it should trigger the creation of
+  =operator<=. If we could declare upfront that a type's types facet
+  depends on another facet, this could be computed.
+
+*Formatters need different =enabled= defaults*
+
+We should be able to disable some formatters such as forward
+declarations. Some users may not require them. We can do this using
+dynamic extensions. We can either implement it in the backend or make
+all the formatters return an =std::optional<dogen::formatters::file>=
+and internally look for a =enabled= trait.
+
+We need to be able to distinguish "optional" formatters - those that
+can be disabled - and "mandatory" formatters - those that cannot. If a
+user requests the disabling of a mandatory formatter, we must
+throw. This must be handled in enabler.
+
+This story was merged with a previous one: Parameter to disable cpp
+file.
+
+#+begin_quote
+*Story*: As a dogen user, I want to disable cpp files so that I don't
+generate files with dummy content when I'm not using them.
+#+end_quote
+
+It would be really useful to define a implementation specific
+parameter which disables the generation of a cpp file for a
+service. This would stop us from having to create noddy translation
+units with dummy functions just to avoid having to define exclusion
+regexes.
+
+In some cases we may need a "enable by usage". For example,
+it would be great to be able to enable forward declarations only for
+those types for which we required them. Same with hash. We can detect
+this by looking at the generated include dependencies. However,
+because the include dependency only has a directive, we cannot tell
+which formatter it belonged to. This would require some augmenting of
+the directive to record the "origination" formatter.
+
+*Disable facets on element state*
+
+In certain cases it may not make sense to enable a facet. The main use
+case is for testing: we should not bother testing an object if there
+are no attributes. This can be achieved with a small hack: add a
+container in archetype repository of all archetypes that require
+objects to have properties. Then, augment =is_element_disabled= to
+perform this check. We just need formatters to supply this information
+when building the repository.
+
+A much more robust version would be to have formatters return a
+function that takes in the element and returns true or false. We could
+default all formatters to just return true. However, we do not have
+support for boost/std function so this would mean manually coding the
+repository. We'd have a similar problem if we add an interface.
+
+*Add support for facet dependencies*
+
+At present we left it as an exercise to the user to ensure facets are
+enabled to meet dependencies. In reality we need a solver for
+this. Look for other solver story in backlog. In addition, we also
+need to have a way to declare facet dependencies:
+
+- all facets other than types depend on types.
+- tests depends on at least types and test data.
+
+Actually what we really need is a model to declare all entities in the
+archetype space and their relationships:
+
+- archetypes
+- facets
+- formatters
+- kernels
+
+The annotations model can then depend on this model. It should have
+facilities for registration of kerneles, etc. However, note that this
+has nothing to do with model to text transforms - its just declaring
+the lay of the land for the archetype space. We called this generation
+space up to know but generation is concerned with the mapping of
+coding entities into archetype space, not with defining the geometry
+of that space. We need a good name for this model:
+
+- =masd.dogen.archetypes=
+
+This also makes it clear why annotations had a need for locations in
+archetype space: its because the configuration is the configuration of
+formatting functions which are responsible for mapping coding elements
+into archetypes. Of course we have configuration that is not related
+to archetypes as well. We need some kind of way of stating this at the
+archetype model level so that we don't have to associate all features
+with a location on archetype space when none exists.
+
+*Add support for formatter and facet dependencies*
+
+Once we are finished with the refactoring of the C++ model, we should
+add a way of declaring dependencies between facets and between
+formatters. We may not need dependencies between facets as these are
+actually a manifestation of the formatter dependencies.
+
+These are required to ensure users have not chosen some invalid
+combination of formatters (for example disable serialisation when a
+formatter requires it). It is also required when a given
+facet/formatter is not supported (for example when an STL type does
+not support serialisation out of the box).
+
+Note that the dependencies are not just static. For example, the types
+facet depends on the hash facet if the user decides to add a
+=std::unordered_map= of a user defined type to another user defined
+type. We need to make sure we take these run-time dependencies into
+account too.
+
+*** Consider using a primitive for qualified representations          :story:
+
+At present we have a number of maps with =string= as their key. We
+can't tell what that string means. It would be better to have a
+primitive to represent the different kinds of qualified id's we
+have. This would also stop us from making mistakes such as using dot
+notation in a container where we expected colon notation, or just
+using any random string.
 
 *** Add support for product skeleton generation                       :story:
 
