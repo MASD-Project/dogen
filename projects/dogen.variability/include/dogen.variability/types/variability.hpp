@@ -26,11 +26,39 @@
 #endif
 
 /**
- * @brief The Annotations model is responsible for managing run-time typed data.
+ * @brief The varibility model is responsible for managing variation in MASD.
  *
- * The idea is to allow the meta-models to carry data over to the
- * formatting process without necessarily knowing about this data, but
- * yet imposing some constraints on the shape of the data.
+ * One of the core principles of MASD is to enable the development of
+ * "families" of software products; that is, sets of products which share
+ * similar "traits". Those traits are encoded as "configuration" so that
+ * we can talk about them at a higher level of abstraction. This approach
+ * is often referred to in the literature as Software Product Line
+ * Engineering (SPLE). MASD takes a very simplistic view of SPLE,
+ * allowing a very restricted form of variation across a set of
+ * well-defined features. The present model provides the basic
+ * infrastructure required to define features, as well as to read those
+ * features from dynamic data structures.
+ *
+ * Note that the present model only concerns itself with the low-level
+ * implementation of variability. You can think of it as a stack, with
+ * this model sitting at the bottom. Above it lie the logical
+ * representation of variability, which enables the code generator to
+ * generate code that makes use of the infrastructure provided by this
+ * model. But the present model is designed to be understood in complete
+ * isolation from the layers above (and in fact, precedes the generalised
+ * approach).
+ *
+ * The variability space is connected to the physical dimension. We
+ * originally tried to avoid this, but due to how some features are
+ * defined, we did not achieve our aims, The main reason is because we
+ * have feature templates which are instantiated according to the
+ * topology of physical space (e.g. enablement, postfix).  In order to
+ * instantiate those templates, one needs to know the shape of physical
+ * space (by definition). In addition, we also query those features by
+ * properties of physical space; e.g., "give me all features called
+ * 'enablement' for every archetype". This is so that we can compute
+ * enablement in a general manner. At present, enablement is the only use
+ * case.
  */
 namespace dogen::variability {
 }

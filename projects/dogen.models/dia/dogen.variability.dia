@@ -68,7 +68,7 @@
         <dia:point val="-119,-42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-119.05,-42.05;-91.1,-21.85"/>
+        <dia:rectangle val="-119.05,-42.05;-90.715,-1.85"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -77,10 +77,10 @@
         <dia:point val="-119,-42"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.850000000000001"/>
+        <dia:real val="28.235000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="20.100000000000005"/>
+        <dia:real val="40.100000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -94,11 +94,39 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#The Annotations model is responsible for managing run-time typed data.
+              <dia:string>#The varibility model is responsible for managing variation in MASD.
 
-The idea is to allow the meta-models to carry data over to the
-formatting process without necessarily knowing about this data, but
-yet imposing some constraints on the shape of the data.
+One of the core principles of MASD is to enable the development of
+"families" of software products; that is, sets of products which share
+similar "traits". Those traits are encoded as "configuration" so that
+we can talk about them at a higher level of abstraction. This approach
+is often referred to in the literature as Software Product Line
+Engineering (SPLE). MASD takes a very simplistic view of SPLE,
+allowing a very restricted form of variation across a set of
+well-defined features. The present model provides the basic
+infrastructure required to define features, as well as to read those
+features from dynamic data structures.
+
+Note that the present model only concerns itself with the low-level
+implementation of variability. You can think of it as a stack, with
+this model sitting at the bottom. Above it lie the logical
+representation of variability, which enables the code generator to
+generate code that makes use of the infrastructure provided by this
+model. But the present model is designed to be understood in complete
+isolation from the layers above (and in fact, precedes the generalised
+approach).
+
+The variability space is connected to the physical dimension. We
+originally tried to avoid this, but due to how some features are
+defined, we did not achieve our aims, The main reason is because we
+have feature templates which are instantiated according to the
+topology of physical space (e.g. enablement, postfix).  In order to
+instantiate those templates, one needs to know the shape of physical
+space (by definition). In addition, we also query those features by
+properties of physical space; e.g., "give me all features called
+'enablement' for every archetype". This is so that we can compute
+enablement in a general manner. At present, enablement is the only use
+case.
 
 #DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=dogen.variability
@@ -16842,13 +16870,13 @@ alias.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O131">
       <dia:attribute name="obj_pos">
-        <dia:point val="-118,-19.9286"/>
+        <dia:point val="-117,1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-118.05,-19.9786;-102.435,-16.8786"/>
+        <dia:rectangle val="-117.05,0.95;-101.435,4.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-118,-19.9286"/>
+        <dia:point val="-117,1"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -16952,13 +16980,13 @@ alias.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O132">
       <dia:attribute name="obj_pos">
-        <dia:point val="-118,-15"/>
+        <dia:point val="-117,5.9286"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-118.05,-15.05;-102.435,-11.95"/>
+        <dia:rectangle val="-117.05,5.8786;-101.435,8.9786"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-118,-15"/>
+        <dia:point val="-117,5.9286"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -17062,13 +17090,13 @@ alias.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O133">
       <dia:attribute name="obj_pos">
-        <dia:point val="-118,-10"/>
+        <dia:point val="-117,10.9286"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-118.05,-10.05;-96.66,-6.95"/>
+        <dia:rectangle val="-117.05,10.8786;-95.66,13.9786"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-118,-10"/>
+        <dia:point val="-117,10.9286"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="21.289999999999999"/>
