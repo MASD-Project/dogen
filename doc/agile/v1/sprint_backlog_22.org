@@ -406,7 +406,15 @@ Notes:
   logical-physical space in order to resolve them to concrete
   artefacts
 
-*** Remove references to archetypes model in variability              :story:
+*** STARTED Remove references to archetypes model in variability      :story:
+    :LOGBOOK:
+    CLOCK: [2020-03-04 Wed 17:00]--[2020-03-04 Wed 17:44] =>  0:44
+    CLOCK: [2020-03-04 Wed 10:41]--[2020-03-04 Wed 12:38] =>  1:57
+    CLOCK: [2020-03-03 Tue 17:26]--[2020-03-03 Tue 17:47] =>  0:21
+    CLOCK: [2020-03-03 Tue 15:15]--[2020-03-03 Tue 16:01] =>  0:46
+    :END:
+
+Tasks:
 
 - create the notion of "levels".
 - replace archetype location with a variability location based on
@@ -416,6 +424,153 @@ Notes:
 
 By the end of this story there should be no dependencies between the
 archetype location model and the variability model.
+
+Notes:
+
+- in reality we only need the archetype location in order to perform
+  the template expansion. Which leads to the obvious conclusion that
+  we probably should have a type to be used as input for that, and not
+  associated with every instance.
+- since all we need is a three-tiered hierarchy, we could use the
+  terminology of group, subgroup and element, or even set, subset and
+  element - both loosely borrowed from maths.
+- we can clean up a number of related issues in one go if we shift our
+  approach slightly. First, let us posit that we only need template
+  instantiation for three cases: kernel, facet, archetype. Then, let
+  us redefine facet bundles as facet groups (with potentially the
+  ability to rename the facet group name's contribution to the feature
+  full name). Let us also redefine facet template initialisers as
+  "owners" (the actual name needs some work). In this scenario, there
+  is no longer the need to have fully qualified names, as these are
+  computed on the basis of ownership: on feature initialisation, the
+  owner supplies its name as it registers the feature. In addition, we
+  also know the name of the facet group statically. This addresses the
+  needs for all non-templatised features. For the templatised
+  features, we need to have a way to "inject" owners and groups which
+  are "instantiable". For owners we can simply have meta-data for
+  this. For groups we could also have meta-data, and allow "empty
+  groups" (e.g. groups with no attributes. we can validate that such
+  groups must be "abstract" or "instantiable"). However, given that in
+  the future we shall introduce the notion of "facets" in the
+  meta-model, it may be wiser to allow the creation of groups via
+  meta-data. Or maybe this can wait until they are introduced. At any
+  rate, finally we need a third concept, which is really only required
+  for formatters. We can call these "subgroups". These should be added
+  via meta-data since we do not want to have to add a new entity for
+  each formatter. Meta-data could look like so:
+
+: #DOGEN masd.variability.subgroup.name=x
+: #DOGEN masd.variability.subgroup.description=y
+
+  Of course one needs to associate the new subgroup to an existing
+  owner and group.
+- in fact there is yet another way of looking at this, and it appears
+  to be the best.
+
+
+- feature groups with templates should be marked as abstract.
+
+
+*** Postfix and directory fields should be templates                  :story:
+
+We need to understand why we didn't templatise these fields. It is
+very painful to have to add these manually for each facet and
+formatter.
+
+Most likely it is because each formatter/facet needs to "override" a
+base value with its own value. For example, we almost always want a
+blank postfix, but occasionally need to set it (=fwd= for forward
+declarations and so forth). Our variability implementation does not
+cope with this type of overrides. We would have to have some kind of
+way of allowing instance templates even though a facet/archetype
+template already exists, and then use the instance template as the
+override. Alternatively, we could simply check for postfix/directory;
+if not present default to empty string.
+
+For extra bonus points, we could allow variables: =${facet.name}=
+could expand to the current facet name on the facet template.
+
+The right solution for this is to allow users to supply a map with
+KEY, VALUE on a field:
+
+: #DOGEN masd.variability.template_kind=archetype_template
+: #DOGEN masd.variability.mapped_default=forward_declaration,fwd
+
+In this case, any archetypes (e.g. "elements" in the new world)
+matching the KEY =forward_declaration= would have a default value of
+=fwd=.
+
+Merged stories:
+
+*Field definition templates do not support facet specific defaults*
+
+At present we cannot use field definition templates for fields that
+require facet specific default values such as =directory=. We could
+either support something like a "variable", e.g. "find facet simple
+name" or we could do overrides - the field definition is defined as a
+template but then overriden at a facet level. Or we could handle
+default values in a totally separate way - maybe a file with just the
+default values.
+
+In addition, we have the case where at the facet level we may have a
+default value for a field but not at the formatter level - =postfix=.
+
+For variables, the simple way is to have some "special names". For
+example =$(facet_name)= could be made to mean the facet name. With
+just support for this we could probably handle all of the use cases
+except for =postfix=.
+
+*Use templates for directory and prefix fields*
+
+At present we have a lot of duplication on the annotations for certain
+fields. This is because we need different defaults depending on the
+facet etc. A different approach would be to use the appropriate
+template (without default values) and then using profiles to default
+those that need defaulting.
+
+Other fields may also need a similar clean up:
+
+- overwrite
+
+In addition, we could add support for "default value variables". These
+are useful for directories. They work as follows: the default value is
+something like =${facet.simple_name}= or perhaps just
+=${simple_name}=, in which case we assume the template kind determines
+the target. Say the target is the kernel:
+
+:      "family": "quilt",
+:      "kernel": "quilt.cpp",
+
+The simple name is then =kernel - family=, e.g. =cpp=. Unfortunately
+this does not work for prefix.
+
+Tasks:
+
+- make prefix a recursive field at archetype level, adding default
+  values to profiles.
+- make directory a recursive field at facet level,  adding default
+  values to profiles.
+
+*Postfix and directory fields in annotations look weird*
+
+Why are we manually instantiating postfix and directory for each
+formatter/facet instead of using templates? This is one of the main
+reasons for breaks/errors when adding a new formatter.
+
+*** Allow dropping facet postfix for an element                       :story:
+
+We sometimes need to suppress the facet postfix. For example, when
+outputting tests, at present we have:
+
+: cpp_ref_impl.boost_model/generated_tests/main_tests.cpp
+
+We may want it just to be called:
+
+: cpp_ref_impl.boost_model/generated_tests/main.cpp
+
+However, we don't want all files on that facet to drop their postfix,
+just main.
+
 
 *** Refactor archetype model                                          :story:
 
@@ -1144,82 +1299,6 @@ another pattern:
   - handcrafted
 
   Each of these has a role to play.
-
-*** Postfix and directory fields should be templates                  :story:
-
-We need to understand why we didn't templatise these fields. It is
-very painful to have to add these manually for each facet and
-formatter.
-
-Most likely it is because each formatter/facet needs to "override" a
-base value with its own value. For example, we almost always want a
-blank postfix, but occasionally need to set it (=fwd= for forward
-declarations and so forth). Our variability implementation does not
-cope with this type of overrides. We would have to have some kind of
-way of allowing instance templates even though a facet/archetype
-template already exists, and then use the instance template as the
-override. Alternatively, we could simply check for postfix/directory;
-if not present default to empty string.
-
-For extra bonus points, we could allow variables: =${facet.name}=
-could expand to the current facet name on the facet template.
-
-Merged stories:
-
-*Field definition templates do not support facet specific defaults*
-
-At present we cannot use field definition templates for fields that
-require facet specific default values such as =directory=. We could
-either support something like a "variable", e.g. "find facet simple
-name" or we could do overrides - the field definition is defined as a
-template but then overriden at a facet level. Or we could handle
-default values in a totally separate way - maybe a file with just the
-default values.
-
-In addition, we have the case where at the facet level we may have a
-default value for a field but not at the formatter level - =postfix=.
-
-For variables, the simple way is to have some "special names". For
-example =$(facet_name)= could be made to mean the facet name. With
-just support for this we could probably handle all of the use cases
-except for =postfix=.
-
-*Use templates for directory and prefix fields*
-
-At present we have a lot of duplication on the annotations for certain
-fields. This is because we need different defaults depending on the
-facet etc. A different approach would be to use the appropriate
-template (without default values) and then using profiles to default
-those that need defaulting.
-
-Other fields may also need a similar clean up:
-
-- overwrite
-
-In addition, we could add support for "default value variables". These
-are useful for directories. They work as follows: the default value is
-something like =${facet.simple_name}= or perhaps just
-=${simple_name}=, in which case we assume the template kind determines
-the target. Say the target is the kernel:
-
-:      "family": "quilt",
-:      "kernel": "quilt.cpp",
-
-The simple name is then =kernel - family=, e.g. =cpp=. Unfortunately
-this does not work for prefix.
-
-Tasks:
-
-- make prefix a recursive field at archetype level, adding default
-  values to profiles.
-- make directory a recursive field at facet level,  adding default
-  values to profiles.
-
-*Postfix and directory fields in annotations look weird*
-
-Why are we manually instantiating postfix and directory for each
-formatter/facet instead of using templates? This is one of the main
-reasons for breaks/errors when adding a new formatter.
 
 *** Private and public includes                                       :story:
 

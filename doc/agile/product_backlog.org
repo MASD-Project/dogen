@@ -296,6 +296,8 @@ Links:
 - [[https://github.com/odygrd/quill][quill]]: Asynchronous Low Latency Logging Library
 - [[https://github.com/KjellKod/g3log][g3log]]: G3log is an asynchronous, "crash safe", logger that is easy
   to use with default logging sinks or you can add your own.
+- [[https://github.com/PlatformLab/NanoLog][NanoLog]]: Nanolog is an extremely performant nanosecond scale logging
+  system for C++ that exposes a simple printf-like API.
 
 *** Do logic-less templates belong in =generation.cpp=?               :story:
 
@@ -2751,19 +2753,6 @@ formatter. Thus it is not possible to generate a file called
 =dllmain.cpp=. We need to investigate the naming conventions for these
 files.
 
-*** Allow dropping facet postfix for an element                       :story:
-
-We sometimes need to suppress the facet postfix. For example, when
-outputting tests, at present we have:
-
-: cpp_ref_impl.boost_model/generated_tests/main_tests.cpp
-
-We may want it just to be called:
-
-: cpp_ref_impl.boost_model/generated_tests/main.cpp
-
-However, we don't want all files on that facet to drop their postfix,
-just main.
 *** Boost test module is named after the entity                       :story:
 
 At present we have:
