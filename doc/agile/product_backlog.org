@@ -17,6 +17,31 @@ such as profiles, licences etc.
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Consider creating a =modeling= folder                             :story:
+
+At present we were thinking about having several folders related to
+modeling, for each component:
+
+- templates
+- models
+- etc
+
+It may make more sense to gather them all under =modeling=. We could
+also have a product level folder with the same name.
+
+*** Project layout analysis                                           :story:
+
+We should probably look at the layout of a few projects and see if our
+meta-model covers these cases.
+
+Links:
+
+- http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p1204r0.html
+- https://www.reddit.com/r/cpp/comments/8qzepa/poll_c_project_layout/
+- https://www.reddit.com/r/cpp/comments/996q8o/prepare_thy_pitchforks_a_de_facto_standard/
+- https://github.com/vector-of-bool/pitchfork
+- https://mariuszbartosik.com/directory-structure-for-a-c-project/
+
 *** Model types and element binding                                   :story:
 
 Once we introduce the concept of model types (e.g. product, component,
@@ -1177,40 +1202,6 @@ simply do:
 This should be very simple to do, we just need a way to know if an
 attribute is static or not.
 
-*** Detect non-configurable fields                                    :story:
-
-Some stereotypes cannot be placed in a configuration. Placing them
-there will only cause confusion and hard to debug errors. List:
-
-- =injection.dia.comment=: this is only applicable to the UML note in
-  dia.
-- =injection.reference=: as we need these to load models, it would
-  cause cycles if placed in configuration.
-- =injection.input_technical_space=
-- all fields needed to load the configuration itself, as it would
-  cause cycles.
-
-We should have a property in the field such as "supports
-configuration" or configurable or some such. When reading the
-configuration, we need to validate that none of the entry templates
-contain fields with this value set to false.
-
-Its not quite "supporting configuration", more like " supporting
-unbound configurations". All features are by definition configurable.
-
-A related problem is the converse: some fields _can_ be placed on a
-configuration. In this case, we should not read the fields prior to
-performing configuration expansion. This can probably be detected
-quite easily: say we can have a flag that tells us if we have expanded
-the configuration. If the flag is false, we should throw when we
-attempt to read fields that can be placed in profiles. In effect we
-are saying configurations exist in one of two states:
-
-- pre-expansion, in which only fields that are "pre-expansion" can be
-  read;
-- post-expansion, in which only fields that are "post-expansion" can
-  be read.
-
 *** Come up with a name for models that contain "meta-elements        :story:
 
 At present we created a number of models called "profiles"; these have
@@ -1341,27 +1332,6 @@ was formed, and then ownership by DDC.
 
 - first update to personal ownership has been done, but we need to
   test if multiple copyright entries is properly supported.
-
-*** Add annotation types description                                  :story:
-
-It would be useful to have a description of the purpose of the field
-so that we could print it to the command line. We could simply add a
-JSON attribute to the field called description to start off with. But
-ideally we need a command line argument to dump all fields and their
-descriptions so that users know what's available.
-
-This should be sorted by qualified name.
-
-Notes:
-
-- we already added comments to many features. This seems to be the
-  right place in the model to record this information. We just need to
-  propagate it into the feature template and then into the feature.
-- context is already doing all of the hard work for feature
-  instantiation. We just need to create a transform that calls the
-  context factory, retrieves all of the descriptions as strings
-  somehow, and then get the command line to print them out. This can
-  then be extended in the future to include backends, etc.
 
 *** Merging of profiles and configurations is non-intuitive           :story:
 
@@ -2526,6 +2496,9 @@ command:
 - against a model: dumps stats on the model such as number of objects,
   whether the generated code is up-to-date, etc.
 - system: information about the backends and frontends.
+
+Note that this story is different from the dumping of all features,
+though they share some commonalities.
 
 *** Ignore ODB files automatically                                    :story:
 
@@ -6322,20 +6295,6 @@ and value types:
 
 And so forth. The only problem with this approach is with simple
 types. If we have a key
-
-*** Consider changing fields where "qualified name" is not qualified  :story:
-
-At present, the the qualified field name is not always a prefix +
-simple name. For example, for general settings and for stitch, the
-qualified field names do not have a prefix. We could just add a prefix
-to make everything symmetric (e.g. =formatters.copyright_notice=) but
-it would make the fields less readable at the usage point and this was
-the reason why we didn't add it in the first place. For now, we will
-leave stitch as it is. This is a bit more meaningful with the
-annotation rename.
-
-This may even be a more wide-ranging question: why do users need to
-know who owns the field? e.g. =dia.comment=, do I care?
 
 *** Consider removing filtering ostream                               :story:
 
@@ -11781,6 +11740,7 @@ https://llvm.org/svn/llvm-project/cfe/trunk/tools/clang-format/clang-format.el
 Links:
 
 - [[https://github.com/STEllAR-GROUP/hpx/blob/master/.clang-format][HPX clang format]]
+- [[https://engineering.mongodb.com/post/succeeding-with-clangformat-part-1-pitfalls-and-planning][Succeeding With ClangFormat, Part 1: Pitfalls And Planning]]
 
 *** Consider adding an emblem for clang's analysis checks             :story:
 
@@ -12003,6 +11963,32 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Consider adding TableGen                                          :story:
+
+Its not entirely clear how one would use this but since its code
+generation, we've added a story here. From the docs:
+
+#+begin_example
+TableGen’s purpose is to help a human develop and maintain records of
+domain-specific information. Because there may be a large number of
+these records, it is specifically designed to allow writing flexible
+descriptions and for common features of these records to be factored
+out. This reduces the amount of duplication in the description,
+reduces the chance of error, and makes it easier to structure domain
+specific information.
+
+The core part of TableGen parses a file, instantiates the
+declarations, and hands the result off to a domain-specific backend
+for processing.
+
+The current major users of TableGen are The LLVM Target-Independent
+Code Generator and the Clang diagnostics and attributes.
+#+end_example
+
+Links:
+
+- https://llvm.org/docs/TableGen/
 
 
 *** Dogen Modeling Studio                                             :story:
@@ -14240,6 +14226,15 @@ at least to start off with force users to manually update it. Ideally
 we should be able to use clang to update the UUID but for this we need
 merging code generation support.
 
+*** Consider adding support for spelling on comments                  :story:
+
+It would be nice if we could spell-check comments on models.
+
+Links:
+
+- [[https://github.com/nuspell/nuspell][nuspell]]: Free and open source C++ spell checking library
+  https://nuspell.github.io
+
 *** Consider offering identifier suggestions for misspelling           :story:
 
 We just bumped into an error where a type was not spelled correctly:
@@ -14259,6 +14254,7 @@ distance]]. Still haven't found clang's API for this but there are
 several implementations available.
 
 - https://github.com/cdmh/algorithms
+- https://github.com/Martinsos/edlib
 
 We could compute the Levenshtein distance as part of resolution, in
 cases where we fail to resolve - e.g. second pass after all has
@@ -15659,3 +15655,70 @@ there are many different languages that implement textual UML:
 - [[https://www.eclipse.org/epsilon/doc/articles/hutn-basic/][Using the Human-Usable Textual Notation (HUTN) in Epsilon]]
 - [[https://www.cooperate-project.de/images/publications/MODELSWARD2016.pdf][Survey on Textual Notations for the Unified Modeling Language]]:
   academic paper.
+*** Consider implementing a "mock server" for HTTP                    :story:
+
+This project looks very interesting: [[https://www.mock-server.com/][MockServer]].
+
+From the docs:
+
+#+begin_quote
+
+For any system you integrate with via HTTP or HTTPS MockServer can be
+used as:
+
+- a mock configured to return specific responses for different
+  requests
+- a proxy recording and optionally modifying requests and responses
+- both a proxy for some requests and a mock for other requests at the
+  same time
+
+When MockServer receives a request it matches the request against
+active expectations that have been configured, if no matches are found
+it proxies the request if appropriate otherwise a 404 is returned.
+
+For each request received the following steps happen:
+
+- find matching expectation and perform action
+- if no matching expectation proxy request
+- if not a proxy request return 404
+
+An expectation defines the action that is taken, for example, a
+response could be returned.
+#+end_quote
+
+It seems we could generate a "mock server" facet for models with HTTP
+support.
+
+*** Consider adding metrics support                                   :story:
+
+All services should have support for metrics. Dogen should implement
+this directly in the meta-model and then code-generate it using a PDM.
+
+Links:
+
+- [[https://github.com/jupp0r/prometheus-cpp][prometheus-cpp]]: This library aims to enable Metrics-Driven
+  Development for C++ services. It implements the Prometheus Data
+  Model, a powerful abstraction on which to collect and expose
+  metrics. We offer the possibility for metrics to be collected by
+  Prometheus, but other push/pull collections can be added as plugins.
+
+*** Consider adding support for RAFT protocol                         :story:
+
+It may be useful to add RAFT as a meta-model concept.
+
+Links:
+
+- https://github.com/eBay/NuRaft
+- https://github.com/datatechnology/cornerstone
+
+*** Consider adding support for static site generators                :story:
+
+Its not entirely clear how this would work, but it may be interesting
+to describe a site at the meta-model level and then use an existing
+generator to output the code as a cartridge. This could also be an
+interesting way to document an API a-la OpenAPI.
+
+Links:
+
+- [[https://github.com/nifty-site-manager/nsm][Nift]]: Nift is a cross-platform open source framework for managing
+  and generating websites. See also [[https://www.nift.cc/index.html][homepage]].

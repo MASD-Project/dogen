@@ -5,7 +5,8 @@
 
 * Mission Statement
 
-- Start the generation refactor.
+- Start the variability model refactor, removing all direct
+  dependencies to the physical model.
 - Get a good grasp of the physical domain model.
 
 * Stories
@@ -13,18 +14,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-03 Tue 12:51]
-| <75>                                                   |         |       |      |       |
-| Headline                                               | Time    |       |      |     % |
-|--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *13:46* |       |      | 100.0 |
-|--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 13:46   |       |      | 100.0 |
-| Active                                                 |         | 13:46 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 4:11 |  30.4 |
-| Create a demo and presentation for previous sprint     |         |       | 0:25 |   3.0 |
-| Sprint and product backlog grooming                    |         |       | 3:15 |  23.6 |
-| Analysis on defining a combined logical-physical space |         |       | 5:55 |  43.0 |
+#+CAPTION: Clock summary at [2020-03-05 Thu 14:53]
+| <75>                                                    |         |       |      |       |
+| Headline                                                | Time    |       |      |     % |
+|---------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                            | *20:23* |       |      | 100.0 |
+|---------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                 | 20:23   |       |      | 100.0 |
+| Active                                                  |         | 20:23 |      | 100.0 |
+| Edit release notes for previous sprint                  |         |       | 4:11 |  20.5 |
+| Create a demo and presentation for previous sprint      |         |       | 0:25 |   2.0 |
+| Sprint and product backlog grooming                     |         |       | 4:25 |  21.7 |
+| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  29.0 |
+| Analysis on removing physical references in variability |         |       | 5:27 |  26.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -205,6 +207,10 @@ Time spent creating the demo and presentation. Use the demo project:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-03-05 Thu 14:48]--[2020-03-05 Thu 14:53] =>  0:05
+    CLOCK: [2020-03-05 Thu 14:20]--[2020-03-05 Thu 14:47] =>  0:27
+    CLOCK: [2020-03-05 Thu 14:04]--[2020-03-05 Thu 14:19] =>  0:15
+    CLOCK: [2020-03-05 Thu 10:50]--[2020-03-05 Thu 11:13] =>  0:23
     CLOCK: [2020-03-03 Tue 12:37]--[2020-03-03 Tue 12:51] =>  0:14
     CLOCK: [2020-03-03 Tue 11:01]--[2020-03-03 Tue 11:12] =>  0:11
     CLOCK: [2020-03-02 Mon 17:24]--[2020-03-02 Mon 18:02] =>  0:38
@@ -406,21 +412,15 @@ Notes:
   logical-physical space in order to resolve them to concrete
   artefacts
 
-*** STARTED Remove references to archetypes model in variability      :story:
+*** COMPLETED Analysis on removing physical references in variability :story:
+    CLOSED: [2020-03-05 Thu 14:19]
     :LOGBOOK:
+    CLOCK: [2020-03-05 Thu 11:24]--[2020-03-05 Thu 13:03] =>  1:39
     CLOCK: [2020-03-04 Wed 17:00]--[2020-03-04 Wed 17:44] =>  0:44
     CLOCK: [2020-03-04 Wed 10:41]--[2020-03-04 Wed 12:38] =>  1:57
     CLOCK: [2020-03-03 Tue 17:26]--[2020-03-03 Tue 17:47] =>  0:21
     CLOCK: [2020-03-03 Tue 15:15]--[2020-03-03 Tue 16:01] =>  0:46
     :END:
-
-Tasks:
-
-- create the notion of "levels".
-- replace archetype location with a variability location based on
-  levels.
-- inject these locations by transforming archetype locations into
-  variability locations within engine.
 
 By the end of this story there should be no dependencies between the
 archetype location model and the variability model.
@@ -465,11 +465,153 @@ Notes:
   Of course one needs to associate the new subgroup to an existing
   owner and group.
 - in fact there is yet another way of looking at this, and it appears
-  to be the best.
+  to be the best. There are three types of variability elements:
 
+  - feature groups. These map to UML packages. They are containers and
+    merely add to path. they support "overrides" such that the
+    physical directory may differ from the "logical" directory. For
+    example, we want to place features on a folder called =features=
+    but we don't want to have to have a feature name =feature.x.y=.
+  - feature bundles. These map to UML classes, in terms of how we
+    access the features. Note that these do not exist within
+    variability itself, only in the logical meta-model. Note also that
+    with this we no longer need feature templates everywhere - the
+    bundles should contain only features (see next section).
+  - feature template bundles: these only contain feature templates,
+    not features themselves. Feature templates do not respect
+    containment in groups etc. They behave quite differently:
+    templates are instantiated against a "range". Ranges are mapped to
+    "tags". Any meta-model element can introduce tags. These are
+    simple KVPs, of the form:
 
-- feature groups with templates should be marked as abstract.
+: #DOGEN masd.variability.tag=X,a.b.c
 
+    Where =X= is the tag, and =a.b.c= is an element in the range. Many
+    such elements can be added to the range. For example, let =kernel=
+    be the tag and =masd.generation.cpp= be an element in the
+    range. Then, in instantiation, any template for tag =X= is
+    instantiated for each element in the range. Note that the range is
+    a qualified path. It will give rise to the groups
+    (e.g. =x.y.z=). Note that these groups are expected to already
+    exist, created via the usual meta-model formalism of
+    =feature_group=. That will contain the documentation for the
+    group.
+
+    With this infrastructure, we can now dump all the features to the
+    console, organised by groups, very easily. We just need a
+    container which keeps track of this hierarchical structure and
+    associated descriptions; we can iterate through it and generate
+    text to output in the console. We should also allow for a
+    grep-friendly mode where we just simply list all the
+    features. This must be done after template instantiation.
+
+    Note that this approach still requires the mapping in order to
+    solve the "directory and prefix" duplication issue.
+
+Previous understanding:
+
+Tasks:
+
+- create the notion of "levels".
+- replace archetype location with a variability location based on
+  levels.
+- inject these locations by transforming archetype locations into
+  variability locations within engine.
+
+*** Separate feature templates from bundles                           :story:
+
+At present we have the notion of feature templates where the template
+instantiation type is "instance". This is, in effect, the vast
+majority of the features. We then have some 5 or less cases where we
+use the feature templates proper. We should not have to instantiate
+templates for the cases where the instantiation is just the identity
+of the feature. We need a way to model these directly as features. We
+then need to introduce "feature template bundles", which are marked as
+abstract and can only contain feature templates.
+
+*** Add location and modules to variability                           :story:
+
+We need to create a location class in variability, based on a simple
+list of strings. It should probably have an attribute called "modules"
+in order to follow the same approach as assets. We then need to
+replace the existing uses of archetype location with this new,
+variability-only, location. However, note that this is only done for
+the features, not for the feature templates.
+
+We need to introduce "feature groups". This is a stereotype applied to
+packages which generates a feature group with documentation. Note that
+these groups do not contribute to the path of physical elements, only
+to the path of features - note, specifically *not* to feature
+templates. Groups can nest arbitrarily.
+
+Notes:
+
+- we need to also figure out how to code-generate infrastructure for
+  templates that allows us to retrieve features for a tag. We may not
+  need code generation in fact, given we deal with them
+  generically. We should just retrieve them manually. See
+  =archetype_location_properties_transform=.
+
+*** Add command line option to dump all features                      :story:
+
+We need a way to access a text description of all features in the
+command line. The variability model should expose this, and then the
+CLI model should use it to print a human readable version of the
+features. We should allow for two modes: human friendly (e.g. wrap at
+a column, indent by groups) and grep friendly (e.g. no indent, long
+lines).
+
+We should probably create a new command called info and then have
+options of what to dump:
+
+- features
+- frontends
+- backends
+- stereotypes
+
+And so forth.
+
+Links:
+
+- https://www.rosettacode.org/wiki/Word_wrap#C.2B.2B
+
+Merged stories:
+
+*Add annotation types description*
+
+It would be useful to have a description of the purpose of the field
+so that we could print it to the command line. We could simply add a
+JSON attribute to the field called description to start off with. But
+ideally we need a command line argument to dump all fields and their
+descriptions so that users know what's available.
+
+This should be sorted by qualified name.
+
+Notes:
+
+- we already added comments to many features. This seems to be the
+  right place in the model to record this information. We just need to
+  propagate it into the feature template and then into the feature.
+- context is already doing all of the hard work for feature
+  instantiation. We just need to create a transform that calls the
+  context factory, retrieves all of the descriptions as strings
+  somehow, and then get the command line to print them out. This can
+  then be extended in the future to include backends, etc.
+
+*** Implement template instantiation in terms of tags                 :story:
+
+At present we are instantiating templates over a physical space
+(e.g. kernel, facet, archetypes). We need to replace this with
+tags. The idea is that we can inject tags (which are qualified names)
+into the model via meta-data:
+
+: #DOGEN masd.variability.tag=X,a.b.c
+
+We can then create feature templates that are instantiated on a range
+given by the set of all values for a given tag, for example =X=
+(e.g. =kernel=, =facet=, =archetype=). Tags can be introduced by any
+model which has a configuration point. However, elements in ranges are
+expected to be unique and to point to existing groups.
 
 *** Postfix and directory fields should be templates                  :story:
 
@@ -557,6 +699,40 @@ Why are we manually instantiating postfix and directory for each
 formatter/facet instead of using templates? This is one of the main
 reasons for breaks/errors when adding a new formatter.
 
+*** Detect non-configurable fields                                    :story:
+
+Some stereotypes cannot be placed in a configuration. Placing them
+there will only cause confusion and hard to debug errors. List:
+
+- =injection.dia.comment=: this is only applicable to the UML note in
+  dia.
+- =injection.reference=: as we need these to load models, it would
+  cause cycles if placed in configuration.
+- =injection.input_technical_space=
+- all fields needed to load the configuration itself, as it would
+  cause cycles.
+
+We should have a property in the field such as "supports
+configuration" or configurable or some such. When reading the
+configuration, we need to validate that none of the entry templates
+contain fields with this value set to false.
+
+Its not quite "supporting configuration", more like " supporting
+unbound configurations". All features are by definition configurable.
+
+A related problem is the converse: some fields _can_ be placed on a
+configuration. In this case, we should not read the fields prior to
+performing configuration expansion. This can probably be detected
+quite easily: say we can have a flag that tells us if we have expanded
+the configuration. If the flag is false, we should throw when we
+attempt to read fields that can be placed in profiles. In effect we
+are saying configurations exist in one of two states:
+
+- pre-expansion, in which only fields that are "pre-expansion" can be
+  read;
+- post-expansion, in which only fields that are "post-expansion" can
+  be read.
+
 *** Allow dropping facet postfix for an element                       :story:
 
 We sometimes need to suppress the facet postfix. For example, when
@@ -571,7 +747,6 @@ We may want it just to be called:
 However, we don't want all files on that facet to drop their postfix,
 just main.
 
-
 *** Refactor archetype model                                          :story:
 
 - rename model to =physical=.
@@ -581,6 +756,11 @@ just main.
 - add concept of artefact types (e.g. c++ public header, c++ private
   header, etc). Associate extensions with artefact types (and perhaps
   other properties?).
+
+*** Remove =rapidjson= formatters                                     :story:
+
+We never finished implementing these and now they are just adding to
+the cognitive load. Remove them for now, re-add them properly later.
 
 *** Rename assets model to logical model                              :story:
 
@@ -2321,3 +2501,20 @@ target parameter, e.g.:
 
 Not sure why it is happening when we call stitch from CMake since it
 should use the full path to the =cpp= directory.
+*** CANCELLED Consider changing fields where "qualified name" is not qualified :story:
+    CLOSED: [2020-03-05 Thu 12:58]
+
+*Rationale*: this story will be impacted by the current variability
+refactor.
+
+At present, the the qualified field name is not always a prefix +
+simple name. For example, for general settings and for stitch, the
+qualified field names do not have a prefix. We could just add a prefix
+to make everything symmetric (e.g. =formatters.copyright_notice=) but
+it would make the fields less readable at the usage point and this was
+the reason why we didn't add it in the first place. For now, we will
+leave stitch as it is. This is a bit more meaningful with the
+annotation rename.
+
+This may even be a more wide-ranging question: why do users need to
+know who owns the field? e.g. =dia.comment=, do I care?
