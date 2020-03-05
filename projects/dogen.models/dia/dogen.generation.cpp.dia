@@ -106,7 +106,7 @@
         <dia:point val="-48,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,7.95;-21.255,28.15"/>
+        <dia:rectangle val="-48.05,7.95;-21.255,24.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -118,7 +118,7 @@
         <dia:real val="26.695"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="20.100000000000005"/>
+        <dia:real val="16.900000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -6297,7 +6297,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="145.358,180.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="145.289,180.43;150.704,184.358"/>
+        <dia:rectangle val="145.288,180.43;150.704,184.358"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6368,7 +6368,7 @@ registry of all available formatters.#</dia:string>
         <dia:point val="166.086,184"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="165.336,178.117;176.893,184.8"/>
+        <dia:rectangle val="165.336,178.117;176.894,184.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24104,7 +24104,7 @@ not a regular" helper.#</dia:string>
         <dia:point val="75.0375,285.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="73.147,285.429;75.1082,287.324"/>
+        <dia:rectangle val="73.1469,285.429;75.1082,287.324"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -33637,7 +33637,7 @@ code.
 #DOGEN masd.variability.template_kind=facet_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
-        <dia:boolean val="false"/>
+        <dia:boolean val="true"/>
       </dia:attribute>
       <dia:attribute name="suppress_attributes">
         <dia:boolean val="false"/>
