@@ -30,7 +30,8 @@
 #include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include "dogen.assets/types/meta_model/structural/enumeration.hpp"
-#include "dogen.assets/types/meta_model/variability//feature_template_bundle.hpp"
+#include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
+#include "dogen.assets/types/meta_model/variability/feature_template_bundle.hpp"
 #include "dogen.assets/io/meta_model/name_io.hpp"
 #include "dogen.assets/io/meta_model/name_tree_io.hpp"
 #include "dogen.assets/io/meta_model/attribute_io.hpp"
@@ -696,6 +697,17 @@ void resolver::resolve_feature_template_bundles(const indices& idx,
     }
 }
 
+void resolver::resolve_feature_bundles(const indices& idx,
+    meta_model::model& m) {
+    for (auto& pair : m.variability_elements().feature_bundles()) {
+        auto& fb(*pair.second);
+        for (auto& ft : fb.features()) {
+            resolve_name_tree(m, idx, fb.name(), ft.parsed_type());
+            if (ft.parsed_type().is_current_simple_type())
+                fb.requires_manual_default_constructor(true);
+        }
+    }
+}
 
 meta_model::name resolver::
 resolve(const meta_model::model& m, const indices& idx,

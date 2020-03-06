@@ -161,9 +161,15 @@ private:
         meta_model::model& m);
 
     /**
-     * @brief Resolve all feature bundles.
+     * @brief Resolve all feature template bundles.
      */
     static void resolve_feature_template_bundles(const indices& idx,
+        meta_model::model& m);
+
+    /**
+     * @brief Resolve all feature bundles.
+     */
+    static void resolve_feature_bundles(const indices& idx,
         meta_model::model& m);
 
 public:
