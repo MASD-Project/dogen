@@ -312,7 +312,7 @@
     {
       "name": "initializer",
       "stereotypes": [
-        "masd::variability::feature_template_initializer"
+        "masd::variability::initializer"
       ],
       "fallback_element_type": "masd::object"
     },

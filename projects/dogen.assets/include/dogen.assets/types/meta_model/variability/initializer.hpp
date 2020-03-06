@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_INITIALIZER_HPP
-#define DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_INITIALIZER_HPP
+#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_INITIALIZER_HPP
+#define DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_INITIALIZER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,16 +36,16 @@ namespace dogen::assets::meta_model::variability {
 /**
  * @brief Responsible for initialising features and feature templates.
  */
-class feature_template_initializer final : public dogen::assets::meta_model::element {
+class initializer final : public dogen::assets::meta_model::element {
 public:
-    feature_template_initializer() = default;
-    feature_template_initializer(const feature_template_initializer&) = default;
-    feature_template_initializer(feature_template_initializer&&) = default;
+    initializer() = default;
+    initializer(const initializer&) = default;
+    initializer(initializer&&) = default;
 
-    virtual ~feature_template_initializer() noexcept { }
+    virtual ~initializer() noexcept { }
 
 public:
-    feature_template_initializer(
+    initializer(
         const dogen::assets::meta_model::name& name,
         const std::string& documentation,
         const dogen::assets::meta_model::origin_types origin_type,
@@ -96,8 +96,8 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const feature_template_initializer& rhs) const;
-    bool operator!=(const feature_template_initializer& rhs) const {
+    bool operator==(const initializer& rhs) const;
+    bool operator!=(const initializer& rhs) const {
         return !this->operator==(rhs);
     }
 
@@ -105,8 +105,8 @@ public:
     bool equals(const dogen::assets::meta_model::element& other) const override;
 
 public:
-    void swap(feature_template_initializer& other) noexcept;
-    feature_template_initializer& operator=(feature_template_initializer other);
+    void swap(initializer& other) noexcept;
+    initializer& operator=(initializer other);
 
 private:
     std::list<dogen::assets::meta_model::name> feature_template_bundles_;
@@ -119,8 +119,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::assets::meta_model::variability::feature_template_initializer& lhs,
-    dogen::assets::meta_model::variability::feature_template_initializer& rhs) {
+    dogen::assets::meta_model::variability::initializer& lhs,
+    dogen::assets::meta_model::variability::initializer& rhs) {
     lhs.swap(rhs);
 }
 

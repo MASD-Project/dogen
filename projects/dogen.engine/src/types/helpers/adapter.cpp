@@ -514,14 +514,13 @@ adapter::to_variability_feature_template_bundle(
 }
 
 boost::shared_ptr<
-    assets::meta_model::variability::feature_template_initializer
+    assets::meta_model::variability::initializer
     >
-adapter::to_variability_feature_template_initializer(
-    const assets::meta_model::location &l,
+adapter::to_variability_initializer(const assets::meta_model::location &l,
     const stereotypes_conversion_result &scr,
     const injection::meta_model::element &ie) const {
-    using assets::meta_model::variability::feature_template_initializer;
-    auto r(boost::make_shared<feature_template_initializer>());
+    using assets::meta_model::variability::initializer;
+    auto r(boost::make_shared<initializer>());
     populate_element(l, scr, ie, *r);
     return r;
 }

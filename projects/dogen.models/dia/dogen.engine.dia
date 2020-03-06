@@ -5958,7 +5958,7 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.
         <dia:string>#initializer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_template_initializer#</dia:string>
+        <dia:string>#masd::variability::initializer#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

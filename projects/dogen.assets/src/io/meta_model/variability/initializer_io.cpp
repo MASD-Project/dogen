@@ -21,11 +21,11 @@
 #include <ostream>
 #include "dogen.assets/io/meta_model/name_io.hpp"
 #include "dogen.assets/io/meta_model/element_io.hpp"
-#include "dogen.assets/io/meta_model/variability/feature_template_initializer_io.hpp"
+#include "dogen.assets/io/meta_model/variability/initializer_io.hpp"
 
 namespace dogen::assets::meta_model::variability {
 
-std::ostream& operator<<(std::ostream& s, const feature_template_initializer& v) {
+std::ostream& operator<<(std::ostream& s, const initializer& v) {
     v.to_stream(s);
     return(s);
 }

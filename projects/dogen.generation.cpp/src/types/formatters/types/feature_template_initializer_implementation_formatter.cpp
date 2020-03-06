@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.assets/types/meta_model/variability/feature_template_initializer.hpp"
+#include "dogen.assets/types/meta_model/variability/initializer.hpp"
 #include "dogen.assets/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
@@ -86,8 +86,8 @@ boost::filesystem::path feature_template_initializer_implementation_formatter::f
 std::list<std::string> feature_template_initializer_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const assets::meta_model::element& e) const {
-    using assets::meta_model::variability::feature_template_initializer;
-    const auto& o(assistant::as<feature_template_initializer>(e));
+    using assets::meta_model::variability::initializer;
+    const auto& o(assistant::as<initializer>(e));
     auto builder(f.make());
 
     const auto ch_arch(traits::feature_template_initializer_header_archetype());
@@ -102,7 +102,7 @@ std::list<std::string> feature_template_initializer_implementation_formatter::in
 extraction::meta_model::artefact feature_template_initializer_implementation_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& o(a.as<assets::meta_model::variability::feature_template_initializer>(e));
+    const auto& o(a.as<assets::meta_model::variability::initializer>(e));
 
     {
         const auto sn(o.name().simple());

@@ -6618,7 +6618,7 @@ the injection model.
         <dia:string>#initializer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_template_initializer#</dia:string>
+        <dia:string>#masd::variability::initializer#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

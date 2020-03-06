@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.assets/types/meta_model/variability/initializer.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
 #include "dogen.assets/types/meta_model/variability/profile_template.hpp"
 #include "dogen.assets/types/meta_model/variability/element_repository.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_template_bundle.hpp"
-#include "dogen.assets/types/meta_model/variability/feature_template_initializer.hpp"
 
 namespace boost {
 
@@ -53,8 +53,8 @@ const boost::shared_ptr<dogen::assets::meta_model::variability::feature_bundle>&
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::assets::meta_model::variability::feature_template_initializer>& lhs,
-const boost::shared_ptr<dogen::assets::meta_model::variability::feature_template_initializer>& rhs) {
+inline bool operator==(const boost::shared_ptr<dogen::assets::meta_model::variability::initializer>& lhs,
+const boost::shared_ptr<dogen::assets::meta_model::variability::initializer>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -66,25 +66,25 @@ element_repository::element_repository(
     const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::profile_template> >& profile_templates,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::feature_template_bundle> >& feature_template_bundles,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::feature_bundle> >& feature_bundles,
-    const boost::shared_ptr<dogen::assets::meta_model::variability::feature_template_initializer>& feature_template_initializer)
+    const boost::shared_ptr<dogen::assets::meta_model::variability::initializer>& initializer)
     : profile_templates_(profile_templates),
       feature_template_bundles_(feature_template_bundles),
       feature_bundles_(feature_bundles),
-      feature_template_initializer_(feature_template_initializer) { }
+      initializer_(initializer) { }
 
 void element_repository::swap(element_repository& other) noexcept {
     using std::swap;
     swap(profile_templates_, other.profile_templates_);
     swap(feature_template_bundles_, other.feature_template_bundles_);
     swap(feature_bundles_, other.feature_bundles_);
-    swap(feature_template_initializer_, other.feature_template_initializer_);
+    swap(initializer_, other.initializer_);
 }
 
 bool element_repository::operator==(const element_repository& rhs) const {
     return profile_templates_ == rhs.profile_templates_ &&
         feature_template_bundles_ == rhs.feature_template_bundles_ &&
         feature_bundles_ == rhs.feature_bundles_ &&
-        feature_template_initializer_ == rhs.feature_template_initializer_;
+        initializer_ == rhs.initializer_;
 }
 
 element_repository& element_repository::operator=(element_repository other) {
@@ -141,20 +141,20 @@ void element_repository::feature_bundles(const std::unordered_map<std::string, b
     feature_bundles_ = std::move(v);
 }
 
-const boost::shared_ptr<dogen::assets::meta_model::variability::feature_template_initializer>& element_repository::feature_template_initializer() const {
-    return feature_template_initializer_;
+const boost::shared_ptr<dogen::assets::meta_model::variability::initializer>& element_repository::initializer() const {
+    return initializer_;
 }
 
-boost::shared_ptr<dogen::assets::meta_model::variability::feature_template_initializer>& element_repository::feature_template_initializer() {
-    return feature_template_initializer_;
+boost::shared_ptr<dogen::assets::meta_model::variability::initializer>& element_repository::initializer() {
+    return initializer_;
 }
 
-void element_repository::feature_template_initializer(const boost::shared_ptr<dogen::assets::meta_model::variability::feature_template_initializer>& v) {
-    feature_template_initializer_ = v;
+void element_repository::initializer(const boost::shared_ptr<dogen::assets::meta_model::variability::initializer>& v) {
+    initializer_ = v;
 }
 
-void element_repository::feature_template_initializer(const boost::shared_ptr<dogen::assets::meta_model::variability::feature_template_initializer>&& v) {
-    feature_template_initializer_ = std::move(v);
+void element_repository::initializer(const boost::shared_ptr<dogen::assets::meta_model::variability::initializer>&& v) {
+    initializer_ = std::move(v);
 }
 
 }

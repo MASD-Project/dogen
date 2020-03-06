@@ -2,7 +2,7 @@
 <#@ masd.stitch.containing_namespaces=dogen::generation::cpp::formatters::types #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.assets/types/meta_model/variability/feature_template_initializer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.assets/types/meta_model/variability/initializer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.assets/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
@@ -17,7 +17,7 @@
 <#@ masd.stitch.wale.text_template=cpp_artefact_formatter_implementation.wale #>
 <#@ masd.stitch.wale.kvp.class.simple_name=feature_template_initializer_implementation_formatter #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=feature_template_initializer_implementation #>
-<#@ masd.stitch.wale.kvp.yarn_element=assets::meta_model::variability::feature_template_initializer #>
+<#@ masd.stitch.wale.kvp.yarn_element=assets::meta_model::variability::initializer #>
 <#@ masd.stitch.wale.kvp.meta_element=variability_feature_template_initializer #>
 <#@ masd.stitch.wale.kvp.meta_name_factory=assets::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
@@ -26,8 +26,8 @@
 std::list<std::string> feature_template_initializer_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const assets::meta_model::element& e) const {
-    using assets::meta_model::variability::feature_template_initializer;
-    const auto& o(assistant::as<feature_template_initializer>(e));
+    using assets::meta_model::variability::initializer;
+    const auto& o(assistant::as<initializer>(e));
     auto builder(f.make());
 
     const auto ch_arch(traits::feature_template_initializer_header_archetype());
@@ -42,7 +42,7 @@ std::list<std::string> feature_template_initializer_implementation_formatter::in
 extraction::meta_model::artefact feature_template_initializer_implementation_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& o(a.as<assets::meta_model::variability::feature_template_initializer>(e));
+    const auto& o(a.as<assets::meta_model::variability::initializer>(e));
 
     {
         const auto sn(o.name().simple());

@@ -28680,7 +28680,7 @@ This is only required if the feature template is optional and has no default val
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#feature_template_initializer#</dia:string>
+        <dia:string>#initializer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#assets::meta_element#</dia:string>
@@ -33725,10 +33725,10 @@ to structural modeling.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#feature_template_initializer#</dia:string>
+            <dia:string>#initializer#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;feature_template_initializer&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;initializer&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -34465,7 +34465,7 @@ to structural modeling.
         <dia:string>#initializer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_template_initializer#</dia:string>
+        <dia:string>#masd::variability::initializer#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

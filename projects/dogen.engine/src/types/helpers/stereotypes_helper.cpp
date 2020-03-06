@@ -61,8 +61,8 @@ const std::string stereotype_variability_profile_template(
     "masd::variability::profile_template");
 const std::string stereotype_variability_feature_template_bundle(
     "masd::variability::feature_template_bundle");
-const std::string stereotype_variability_feature_template_initializer(
-    "masd::variability::feature_template_initializer");
+const std::string stereotype_variability_initializer(
+    "masd::variability::initializer");
 const std::string stereotype_mapping_fixed_mappable(
     "masd::mapping::fixed_mappable");
 const std::string stereotype_mapping_extensible_mappable(
@@ -132,7 +132,7 @@ static_stereotypes stereotypes_helper::from_string(const std::string& s) const {
         return static_stereotypes::variability_profile_template;
     else if (s == stereotype_variability_feature_template_bundle)
         return static_stereotypes::variability_feature_template_bundle;
-    else if (s == stereotype_variability_feature_template_initializer)
+    else if (s == stereotype_variability_initializer)
         return static_stereotypes::variability_feature_template_initializer;
     else if (s == stereotype_mapping_fixed_mappable)
         return static_stereotypes::mapping_fixed_mappable;
@@ -223,9 +223,9 @@ to_string(const static_stereotypes ss) const {
     case static_stereotypes::variability_profile_template:
         return stereotype_variability_profile_template;
     case static_stereotypes::variability_feature_template_bundle:
-        return stereotype_variability_feature_template_initializer;
+        return stereotype_variability_initializer;
     case static_stereotypes::variability_feature_template_initializer:
-        return stereotype_variability_feature_template_initializer;
+        return stereotype_variability_initializer;
     case static_stereotypes::mapping_fixed_mappable:
         return stereotype_mapping_fixed_mappable;
     case static_stereotypes::mapping_extensible_mappable:

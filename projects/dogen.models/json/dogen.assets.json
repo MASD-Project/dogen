@@ -2028,7 +2028,7 @@
       ]
     },
     {
-      "name": "meta_model::variability::feature_template_initializer",
+      "name": "meta_model::variability::initializer",
       "documentation": "Responsible for initialising features and feature templates.\n",
       "stereotypes": [
         "assets::meta_element"
@@ -2478,8 +2478,8 @@
           "type": "std::unordered_map<std::string, boost::shared_ptr<feature_bundle>>"
         },
         {
-          "name": "feature_template_initializer",
-          "type": "boost::shared_ptr<feature_template_initializer>"
+          "name": "initializer",
+          "type": "boost::shared_ptr<initializer>"
         }
       ]
     },
@@ -2579,7 +2579,7 @@
     {
       "name": "features::initializer",
       "stereotypes": [
-        "masd::variability::feature_template_initializer"
+        "masd::variability::initializer"
       ],
       "fallback_element_type": "masd::object"
     },

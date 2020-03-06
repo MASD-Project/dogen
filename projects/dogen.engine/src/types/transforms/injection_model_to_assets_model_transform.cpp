@@ -233,12 +233,12 @@ process_element(const helpers::adapter& ad,
          * A model can only have zero or one feature template
          * initializers.
          */
-        if (m.variability_elements().feature_template_initializer()) {
+        if (m.variability_elements().initializer()) {
             BOOST_LOG_SEV(lg, error) << too_many_initializers;
             BOOST_THROW_EXCEPTION(transform_exception(too_many_initializers));
         }
-        m.variability_elements().feature_template_initializer(
-            ad.to_variability_feature_template_initializer(l, scr, e));
+        m.variability_elements().
+            initializer(ad.to_variability_initializer(l, scr, e));
         break;
     case static_stereotypes::mapping_fixed_mappable:
         insert(ad.to_fixed_mappable(l, scr, e),

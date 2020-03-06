@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.assets/types/meta_model/variability/feature_template_initializer.hpp"
+#include "dogen.assets/types/meta_model/variability/initializer.hpp"
 #include "dogen.assets/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
@@ -78,7 +78,7 @@ std::list<std::string> feature_template_initializer_header_formatter::inclusion_
     const formattables::dependencies_builder_factory& f,
     const assets::meta_model::element& /*e*/) const {
 
-    using assets::meta_model::variability::feature_template_initializer;
+    using assets::meta_model::variability::initializer;
     auto builder(f.make());
     builder.add("\"dogen.variability/types/meta_model/feature_template.hpp\"");
     builder.add("\"dogen.variability/types/helpers/feature_template_registrar.hpp\"");
@@ -89,7 +89,7 @@ std::list<std::string> feature_template_initializer_header_formatter::inclusion_
 extraction::meta_model::artefact feature_template_initializer_header_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& o(a.as<assets::meta_model::variability::feature_template_initializer>(e));
+    const auto& o(a.as<assets::meta_model::variability::initializer>(e));
 
     {
         const auto sn(o.name().simple());

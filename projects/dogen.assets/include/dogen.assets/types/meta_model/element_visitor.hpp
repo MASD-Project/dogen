@@ -41,6 +41,7 @@
 #include "dogen.assets/types/meta_model/structural/entry_point_fwd.hpp"
 #include "dogen.assets/types/meta_model/structural/enumeration_fwd.hpp"
 #include "dogen.assets/types/meta_model/visual_studio/solution_fwd.hpp"
+#include "dogen.assets/types/meta_model/variability/initializer_fwd.hpp"
 #include "dogen.assets/types/meta_model/decoration/modeline_group_fwd.hpp"
 #include "dogen.assets/types/meta_model/structural/object_template_fwd.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_bundle_fwd.hpp"
@@ -51,7 +52,6 @@
 #include "dogen.assets/types/meta_model/visual_studio/msbuild_targets_fwd.hpp"
 #include "dogen.assets/types/meta_model/templating/logic_less_template_fwd.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_template_bundle_fwd.hpp"
-#include "dogen.assets/types/meta_model/variability/feature_template_initializer_fwd.hpp"
 
 namespace dogen::assets::meta_model {
 
@@ -284,13 +284,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Accept visits for type dogen::assets::meta_model::variability::feature_template_initializer
+     * @brief Accept visits for type dogen::assets::meta_model::variability::initializer
      */
     /**@{*/
-    virtual void visit(const dogen::assets::meta_model::variability::feature_template_initializer&) const { }
-    virtual void visit(const dogen::assets::meta_model::variability::feature_template_initializer&) { }
-    virtual void visit(dogen::assets::meta_model::variability::feature_template_initializer&) const { }
-    virtual void visit(dogen::assets::meta_model::variability::feature_template_initializer&) { }
+    virtual void visit(const dogen::assets::meta_model::variability::initializer&) const { }
+    virtual void visit(const dogen::assets::meta_model::variability::initializer&) { }
+    virtual void visit(dogen::assets::meta_model::variability::initializer&) const { }
+    virtual void visit(dogen::assets::meta_model::variability::initializer&) { }
     /**@}*/
 
     /**

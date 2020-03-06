@@ -26,7 +26,7 @@
 #include "dogen.assets/types/traits.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/types/meta_model/attribute.hpp"
-#include "dogen.assets/types/meta_model/variability/feature_template_initializer.hpp"
+#include "dogen.assets/types/meta_model/variability/initializer.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
 #include "dogen.assets/types/transforms/transformation_error.hpp"
 #include "dogen.assets/types/transforms/variability_feature_template_bundle_transform.hpp"
@@ -202,10 +202,10 @@ apply(const context& ctx,
         }
     }
 
-    if (m.variability_elements().feature_template_initializer() == nullptr)
+    if (m.variability_elements().initializer() == nullptr)
         return;
 
-    auto& fti(*m.variability_elements().feature_template_initializer());
+    auto& fti(*m.variability_elements().initializer());
     for (auto& pair : ftb) {
         auto& fb(*pair.second);
         fti.feature_template_bundles().push_back(fb.name());

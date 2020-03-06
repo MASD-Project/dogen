@@ -132,7 +132,7 @@ public:
         v.meta_name(n);
     }
 
-    void operator()(meta_model::variability::feature_template_initializer& v) {
+    void operator()(meta_model::variability::initializer& v) {
         static const auto
             n(mnf::make_variability_feature_template_initializer_name());
         v.meta_name(n);

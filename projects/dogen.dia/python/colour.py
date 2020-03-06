@@ -114,7 +114,7 @@ for layer in dia.active_display().diagram.data.layers:
             object.properties["fill_colour"] = "#EDE6F2"
         elif "masd::variability::feature_template_bundle" in stereotype:
             object.properties["fill_colour"] = "#B2E2E2"
-        elif "masd::variability::feature_template_initializer" in stereotype:
+        elif "masd::variability::initializer" in stereotype:
             object.properties["fill_colour"] = "#B2E2E2"
 
         #

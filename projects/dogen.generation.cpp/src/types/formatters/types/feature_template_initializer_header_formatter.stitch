@@ -1,6 +1,6 @@
 <#@ masd.stitch.stream_variable_name=a.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::generation::cpp::formatters::types #>
-<#@ masd.stitch.inclusion_dependency="dogen.assets/types/meta_model/variability/feature_template_initializer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.assets/types/meta_model/variability/initializer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.assets/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
@@ -16,7 +16,7 @@
 <#@ masd.stitch.wale.kvp.class.simple_name=feature_template_initializer_header_formatter #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=feature_template_initializer_header #>
 <#@ masd.stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
-<#@ masd.stitch.wale.kvp.yarn_element=assets::meta_model::variability::feature_template_initializer #>
+<#@ masd.stitch.wale.kvp.yarn_element=assets::meta_model::variability::initializer #>
 <#@ masd.stitch.wale.kvp.meta_element=variability_feature_template_initializer #>
 <#@ masd.stitch.wale.kvp.meta_name_factory=assets::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
@@ -26,7 +26,7 @@ std::list<std::string> feature_template_initializer_header_formatter::inclusion_
     const formattables::dependencies_builder_factory& f,
     const assets::meta_model::element& /*e*/) const {
 
-    using assets::meta_model::variability::feature_template_initializer;
+    using assets::meta_model::variability::initializer;
     auto builder(f.make());
     builder.add("\"dogen.variability/types/meta_model/feature_template.hpp\"");
     builder.add("\"dogen.variability/types/helpers/feature_template_registrar.hpp\"");
@@ -37,7 +37,7 @@ std::list<std::string> feature_template_initializer_header_formatter::inclusion_
 extraction::meta_model::artefact feature_template_initializer_header_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& o(a.as<assets::meta_model::variability::feature_template_initializer>(e));
+    const auto& o(a.as<assets::meta_model::variability::initializer>(e));
 
     {
         const auto sn(o.name().simple());

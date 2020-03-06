@@ -29672,13 +29672,13 @@ code.
         <dia:point val="-44,278"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,277.95;-28.2975,281.05"/>
+        <dia:rectangle val="-44.05,277.95;-23.8275,281.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-44,278"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.6525"/>
+        <dia:real val="20.122499999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -29780,16 +29780,16 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O249">
       <dia:attribute name="obj_pos">
-        <dia:point val="-18,273"/>
+        <dia:point val="-24,273"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.05,272.95;1.6825,276.05"/>
+        <dia:rectangle val="-24.05,272.95;0.1525,276.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-18,273"/>
+        <dia:point val="-24,273"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="19.6325"/>
+        <dia:real val="24.102499999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -30729,7 +30729,7 @@ code.
         <dia:string>#feature_initializer#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_template_initializer#</dia:string>
+        <dia:string>#masd::variability::initializer#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
