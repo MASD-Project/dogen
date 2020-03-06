@@ -60,8 +60,6 @@ feature_template_instantiation_transform::apply(const context& ctx,
 
     stp.end_transform(r);
     return r;
-
-
 }
 
 }
