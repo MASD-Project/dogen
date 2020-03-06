@@ -44,6 +44,12 @@ private:
     static void update(const features::variability_bundle::feature_group& fg,
         meta_model::variability::feature_template_bundle& fb);
 
+    static void update(const features::variability_templates::feature_group& fg,
+        meta_model::variability::feature& f);
+
+    static void update(const features::variability_bundle::feature_group& fg,
+        meta_model::variability::feature_bundle& fb);
+
 private:
     static void process_features(const context& ctx,
         const std::unordered_map<std::string, std::string>& fixed_mappings,

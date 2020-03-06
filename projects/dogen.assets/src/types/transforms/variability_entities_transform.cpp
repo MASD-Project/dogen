@@ -100,6 +100,47 @@ update(const features::variability_bundle::feature_group& fg,
     }
 }
 
+void variability_entities_transform::update(
+    const features::variability_templates::feature_group& fg,
+    meta_model::variability::feature& f) {
+
+    using features::variability_templates;
+    const auto scfg(variability_templates::make_static_configuration(fg, f));
+
+    f.is_optional(scfg.is_optional);
+
+    using boost::lexical_cast;
+    using variability::meta_model::binding_point;
+    if (!scfg.binding_point.empty())
+        f.binding_point(lexical_cast<binding_point>(scfg.binding_point));
+}
+
+void variability_entities_transform::
+update(const features::variability_bundle::feature_group& fg,
+    meta_model::variability::feature_bundle& fb) {
+
+    using features::variability_bundle;
+    const auto scfg(variability_bundle::make_static_configuration(fg, fb));
+    fb.generate_static_configuration(scfg.generate_static_configuration);
+
+    archetypes::location al;
+    al.kernel(scfg.kernel);
+    al.backend(scfg.backend);
+    al.facet(scfg.facet);
+    al.archetype(scfg.archetype);
+    fb.location(al);
+
+    using boost::lexical_cast;
+    using variability::meta_model::template_kind;
+
+    using boost::lexical_cast;
+    using variability::meta_model::binding_point;
+    if (!scfg.default_binding_point.empty()) {
+        fb.default_binding_point(lexical_cast<binding_point>(
+                scfg.default_binding_point));
+    }
+}
+
 void variability_entities_transform::
 process_feature_templates(const context& ctx,
     const std::unordered_map<std::string, std::string>& fixed_mappings,
@@ -214,11 +255,11 @@ void variability_entities_transform::process_features(const context& ctx,
 
         using features::variability_bundle;
         const auto fg2(variability_bundle::make_feature_group(fm));
-        // update(fg2, fb);
+        update(fg2, fb);
         const bool is_bound(fb.default_binding_point().is_initialized());
 
         for (auto& f : fb.features()) {
-            // update(fg1, f);
+            update(fg1, f);
 
             if (is_bound) {
                 /*
