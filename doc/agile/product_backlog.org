@@ -1684,6 +1684,11 @@ frowned upon from a theoretical perspective.
 The other problem as well is that we need to mix and match dynamic and
 static stereotypes (e.g. we need =masd::object_template= as well).
 
+Another example of where this feature would come in handy is with
+features and feature templates, which could share an object template
+but can't because we also need to inherit from "Documentable,
+Configurable, Nameable".
+
 *** Keep track of which transforms touch which elements               :story:
 
 It would be nice to be able to know, for a given modeling element,
@@ -7032,6 +7037,7 @@ Merged stories:
 For the previous attempt to integrate RapidJson see this commit:
 
 b2cce41 * third party: remove includes and rapid json
+fc4edeb416 integration generation.cpp: remove rapid json remnants
 
 *Add support for JSON serialisation*
 

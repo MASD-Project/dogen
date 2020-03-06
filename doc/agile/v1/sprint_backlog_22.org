@@ -14,19 +14,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-05 Thu 14:53]
+#+CAPTION: Clock summary at [2020-03-06 Fri 13:29]
 | <75>                                                    |         |       |      |       |
 | Headline                                                | Time    |       |      |     % |
 |---------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                            | *20:23* |       |      | 100.0 |
+| *Total time*                                            | *22:56* |       |      | 100.0 |
 |---------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                 | 20:23   |       |      | 100.0 |
-| Active                                                  |         | 20:23 |      | 100.0 |
-| Edit release notes for previous sprint                  |         |       | 4:11 |  20.5 |
-| Create a demo and presentation for previous sprint      |         |       | 0:25 |   2.0 |
-| Sprint and product backlog grooming                     |         |       | 4:25 |  21.7 |
-| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  29.0 |
-| Analysis on removing physical references in variability |         |       | 5:27 |  26.7 |
+| Stories                                                 | 22:56   |       |      | 100.0 |
+| Active                                                  |         | 22:56 |      | 100.0 |
+| Edit release notes for previous sprint                  |         |       | 4:11 |  18.2 |
+| Create a demo and presentation for previous sprint      |         |       | 0:25 |   1.8 |
+| Sprint and product backlog grooming                     |         |       | 4:25 |  19.3 |
+| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  25.8 |
+| Analysis on removing physical references in variability |         |       | 5:27 |  23.8 |
+| Remove =rapidjson= formatters                           |         |       | 0:03 |   0.2 |
+| Separate feature templates from bundles                 |         |       | 2:30 |  10.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -518,7 +520,20 @@ Tasks:
 - inject these locations by transforming archetype locations into
   variability locations within engine.
 
-*** Separate feature templates from bundles                           :story:
+*** COMPLETED Remove =rapidjson= formatters                           :story:
+    CLOSED: [2020-03-06 Fri 12:42]
+    :LOGBOOK:
+    CLOCK: [2020-03-06 Fri 12:39]--[2020-03-06 Fri 12:42] =>  0:03
+    :END:
+
+We never finished implementing these and now they are just adding to
+the cognitive load. Remove them for now, re-add them properly later.
+
+*** STARTED Separate feature templates from bundles                   :story:
+    :LOGBOOK:
+    CLOCK: [2020-03-06 Fri 12:43]--[2020-03-06 Fri 13:29] =>  0:46
+    CLOCK: [2020-03-06 Fri 10:55]--[2020-03-06 Fri 12:39] =>  1:44
+    :END:
 
 At present we have the notion of feature templates where the template
 instantiation type is "instance". This is, in effect, the vast
@@ -756,11 +771,6 @@ just main.
 - add concept of artefact types (e.g. c++ public header, c++ private
   header, etc). Associate extensions with artefact types (and perhaps
   other properties?).
-
-*** Remove =rapidjson= formatters                                     :story:
-
-We never finished implementing these and now they are just adding to
-the cognitive load. Remove them for now, re-add them properly later.
 
 *** Rename assets model to logical model                              :story:
 
