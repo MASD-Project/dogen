@@ -30,7 +30,6 @@ register_templates(variability::helpers::registrar& rg) {
     rg.register_templates(dogen::injection::features::input_technical_space::make_templates());
     rg.register_templates(dogen::injection::features::reference::make_templates());
     rg.register_templates(dogen::injection::features::uml::make_templates());
-
 }
 
 }

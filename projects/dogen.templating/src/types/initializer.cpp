@@ -26,7 +26,6 @@ namespace dogen::templating {
 void initializer::
 register_templates(variability::helpers::registrar& rg) {
     rg.register_templates(dogen::templating::stitch::features::make_templates());
-
 }
 
 }

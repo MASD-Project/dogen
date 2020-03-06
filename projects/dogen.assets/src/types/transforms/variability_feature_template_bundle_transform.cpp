@@ -98,7 +98,6 @@ update(const features::variability_bundle::feature_group& fg,
         fb.default_binding_point(lexical_cast<binding_point>(
                 scfg.default_binding_point));
     }
-
 }
 
 void variability_feature_template_bundle_transform::

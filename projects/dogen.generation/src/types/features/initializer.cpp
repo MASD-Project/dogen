@@ -28,7 +28,6 @@ void initializer::
 register_templates(variability::helpers::registrar& rg) {
     rg.register_templates(dogen::generation::features::decoration::make_templates());
     rg.register_templates(dogen::generation::features::formatting::make_templates());
-
 }
 
 }

@@ -48,7 +48,6 @@ register_templates(variability::helpers::registrar& rg) {
     rg.register_templates(dogen::assets::features::type_parameters::make_templates());
     rg.register_templates(dogen::assets::features::variability_bundle::make_templates());
     rg.register_templates(dogen::assets::features::variability_templates::make_templates());
-
 }
 
 }

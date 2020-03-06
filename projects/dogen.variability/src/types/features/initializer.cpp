@@ -26,7 +26,6 @@ namespace dogen::variability::features {
 void initializer::
 register_templates(variability::helpers::registrar& rg) {
     rg.register_templates(dogen::variability::features::profile::make_templates());
-
 }
 
 }

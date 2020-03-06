@@ -95,6 +95,7 @@ std::list<std::string> variability_initializer_implementation_formatter::inclusi
 
     const auto fb_arch(traits::feature_template_bundle_header_archetype());
     builder.add(o.feature_template_bundles(), fb_arch);
+    builder.add(o.feature_bundles(), fb_arch);
 
     return builder.build();
 }
@@ -118,7 +119,11 @@ a.stream() << "void " << sn << "::" << std::endl;
 a.stream() << "register_templates(variability::helpers::registrar& rg) {" << std::endl;
             for (const auto& n : o.feature_template_bundles())
 a.stream() << "    rg.register_templates(" << n.qualified().colon() << "::make_templates());" << std::endl;
+            if (!o.feature_bundles().empty()) {
+                for (const auto& n : o.feature_bundles())
+a.stream() << "    rg.register_features(" << n.qualified().colon() << "::make_features());" << std::endl;
 a.stream() << std::endl;
+            }
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
         } // snf

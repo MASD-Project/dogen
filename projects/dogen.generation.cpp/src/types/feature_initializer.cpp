@@ -52,7 +52,6 @@ register_templates(variability::helpers::registrar& rg) {
     rg.register_templates(dogen::generation::cpp::formatters::tests::features::make_templates());
     rg.register_templates(dogen::generation::cpp::formatters::types::features::make_templates());
     rg.register_templates(dogen::generation::cpp::formatters::visual_studio::features::make_templates());
-
 }
 
 }

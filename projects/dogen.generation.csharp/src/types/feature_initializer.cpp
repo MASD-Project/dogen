@@ -38,7 +38,6 @@ register_templates(variability::helpers::registrar& rg) {
     rg.register_templates(dogen::generation::csharp::formatters::test_data::features::make_templates());
     rg.register_templates(dogen::generation::csharp::formatters::types::features::make_templates());
     rg.register_templates(dogen::generation::csharp::formatters::visual_studio::features::make_templates());
-
 }
 
 }

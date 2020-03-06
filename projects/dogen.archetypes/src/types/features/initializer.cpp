@@ -26,7 +26,6 @@ namespace dogen::archetypes::features {
 void initializer::
 register_templates(variability::helpers::registrar& rg) {
     rg.register_templates(dogen::archetypes::features::enablement::make_templates());
-
 }
 
 }
