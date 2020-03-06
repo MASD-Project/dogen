@@ -27,6 +27,7 @@
 
 #include <list>
 #include "dogen.variability/types/meta_model/feature_template.hpp"
+#include "dogen.variability/types/meta_model/feature_repository.hpp"
 #include "dogen.variability/types/meta_model/feature_template_repository.hpp"
 
 namespace dogen::variability::helpers {
@@ -40,17 +41,28 @@ public:
     /**
      * @brief Adds a number of templates into the registrar.
      */
-    void register_templates(
-        const std::list<meta_model::feature_template>& fts);
+    void register_templates(const std::list<meta_model::feature_template>& fts);
+
+    /**
+     * @brief Adds a number of features into the registrar.
+     */
+    void register_features(const std::list<meta_model::feature>& fts);
 
 public:
     /**
-     * @brief Returns the current state of the registrar.
+     * @brief Returns all of the feature templates.
      */
-    const meta_model::feature_template_repository& repository();
+    const meta_model::feature_template_repository&
+    feature_template_repository();
+
+    /**
+     * @brief Returns all of the features.
+     */
+    const meta_model::feature_repository& feature_repository();
 
 private:
-    meta_model::feature_template_repository repository_;
+    meta_model::feature_template_repository feature_template_repository_;
+    meta_model::feature_repository feature_repository_;
 };
 
 }

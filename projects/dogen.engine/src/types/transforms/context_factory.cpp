@@ -117,7 +117,7 @@ make_feature_template_repository() {
     generation::cpp::feature_initializer::register_templates(rg);
     generation::csharp::feature_initializer::register_templates(rg);
     features::initializer::register_templates(rg);
-    const auto r(rg.repository());
+    const auto r(rg.feature_template_repository());
     return r;
 }
 
