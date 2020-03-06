@@ -104,6 +104,16 @@ std::string traits::feature_template_bundle_implementation_archetype() {
     return r;
 }
 
+std::string traits::feature_bundle_header_archetype() {
+    static std::string r(traits::facet() + ".feature_bundle_header");
+    return r;
+}
+
+std::string traits::feature_bundle_implementation_archetype() {
+    static std::string r(traits::facet() + ".feature_bundle_implementation");
+    return r;
+}
+
 std::string traits::variability_initializer_header_archetype() {
     static std::string r(traits::facet() + ".variability_initializer_header");
     return r;

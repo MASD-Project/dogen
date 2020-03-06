@@ -3,7 +3,7 @@
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/string/splitter.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.assets/types/meta_model/variability/feature_template_bundle.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.assets/types/meta_model/variability/feature_bundle.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.assets/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
@@ -17,10 +17,10 @@
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/types/feature_bundle_header_formatter.hpp" #>
 <#@ masd.stitch.wale.text_template=cpp_artefact_formatter_implementation_header.wale #>
 <#@ masd.stitch.wale.kvp.class.simple_name=feature_bundle_header_formatter #>
-<#@ masd.stitch.wale.kvp.archetype.simple_name=feature_template_bundle_header #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=feature_bundle_header #>
 <#@ masd.stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
-<#@ masd.stitch.wale.kvp.yarn_element=assets::meta_model::variability::feature_template_bundle #>
-<#@ masd.stitch.wale.kvp.meta_element=variability_feature_template_bundle #>
+<#@ masd.stitch.wale.kvp.yarn_element=assets::meta_model::variability::feature_bundle #>
+<#@ masd.stitch.wale.kvp.meta_element=variability_feature_bundle #>
 <#@ masd.stitch.wale.kvp.meta_name_factory=assets::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
@@ -28,13 +28,13 @@
 std::list<std::string> feature_bundle_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const assets::meta_model::element& e) const {
-    using assets::meta_model::variability::feature_template_bundle;
+    using assets::meta_model::variability::feature_bundle;
 
-    const auto& fb(assistant::as<feature_template_bundle>(e));
+    const auto& fb(assistant::as<feature_bundle>(e));
     auto builder(f.make());
 
     builder.add(inclusion_constants::std::list());
-    builder.add("\"dogen.variability/types/meta_model/feature_template.hpp\"");
+    builder.add("\"dogen.variability/types/meta_model/feature.hpp\"");
 
     if (fb.generate_static_configuration()) {
         builder.add("\"dogen.variability/types/meta_model/feature_model.hpp\"");
@@ -54,7 +54,7 @@ std::list<std::string> feature_bundle_header_formatter::inclusion_dependencies(
 extraction::meta_model::artefact feature_bundle_header_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& fb(a.as<assets::meta_model::variability::feature_template_bundle>(e));
+    const auto& fb(a.as<assets::meta_model::variability::feature_bundle>(e));
 
     {
         const auto sn(fb.name().simple());
@@ -78,7 +78,7 @@ class <#= sn #> final {
 public:
     struct feature_group {
 <#+
-                for (const auto& fb_ft : fb.feature_templates()) {
+                for (const auto& fb_ft : fb.features()) {
                     const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
 #>
         variability::meta_model::feature <#= simple_key #>;
@@ -93,7 +93,7 @@ public:
 public:
     struct static_configuration {
 <#+
-                for (const auto& fb_ft : fb.feature_templates()) {
+                for (const auto& fb_ft : fb.features()) {
                     const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
 #>
         <#= a.get_qualified_name(fb_ft.parsed_type()) #> <#= simple_key #>;
@@ -103,7 +103,7 @@ public:
                 if (fb.requires_manual_default_constructor()) {
                     bool is_first(true);
                     std::ostringstream ss;
-                    for (const auto& fb_ft : fb.feature_templates()) {
+                    for (const auto& fb_ft : fb.features()) {
                         if (!fb_ft.parsed_type().is_current_simple_type())
                             continue;
 
@@ -138,7 +138,7 @@ public:
 #>
 
 public:
-    static std::list<dogen::variability::meta_model::feature_template>
+    static std::list<dogen::variability::meta_model::features>
     make_templates();
 };
 

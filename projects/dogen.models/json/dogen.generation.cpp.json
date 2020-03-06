@@ -1731,6 +1731,7 @@
         {
           "name": "masd.generation.cpp.types.feature_bundle_implementation.postfix",
           "type": "masd::variability::text",
+          "value": "\"\"",
           "tagged_values": {
             "masd.variability.qualified_name": "masd.generation.cpp.types.feature_bundle_implementation.postfix"
           }

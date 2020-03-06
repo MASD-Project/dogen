@@ -22,7 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
 #include "dogen.variability/types/helpers/enum_mapper.hpp"
-#include "dogen.assets/types/meta_model/variability/feature_template_bundle.hpp"
+#include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
 #include "dogen.assets/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
@@ -38,7 +38,7 @@
 namespace dogen::generation::cpp::formatters::types {
 
 std::string feature_bundle_implementation_formatter::static_id() {
-    return traits::feature_template_bundle_implementation_archetype();
+    return traits::feature_bundle_implementation_archetype();
 }
 
 std::string feature_bundle_implementation_formatter::id() const {
@@ -56,7 +56,7 @@ feature_bundle_implementation_formatter::archetype_location() const {
 
 const assets::meta_model::name& feature_bundle_implementation_formatter::meta_name() const {
     using assets::helpers::meta_name_factory;
-    static auto r(meta_name_factory::make_variability_feature_template_bundle_name());
+    static auto r(meta_name_factory::make_variability_feature_bundle_name());
     return r;
 }
 
@@ -88,11 +88,11 @@ boost::filesystem::path feature_bundle_implementation_formatter::full_path(
 std::list<std::string> feature_bundle_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const assets::meta_model::element& e) const {
-    using assets::meta_model::variability::feature_template_bundle;
-    const auto& fb(assistant::as<feature_template_bundle>(e));
+    using assets::meta_model::variability::feature_bundle;
+    const auto& fb(assistant::as<feature_bundle>(e));
     auto builder(f.make());
 
-    const auto ch_arch(traits::feature_template_bundle_header_archetype());
+    const auto ch_arch(traits::feature_bundle_header_archetype());
     builder.add(fb.name(), ch_arch);
     builder.add("\"dogen.variability/types/helpers/value_factory.hpp\"");
 
@@ -107,7 +107,7 @@ std::list<std::string> feature_bundle_implementation_formatter::inclusion_depend
 extraction::meta_model::artefact feature_bundle_implementation_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& fb(a.as<assets::meta_model::variability::feature_template_bundle>(e));
+    const auto& fb(a.as<assets::meta_model::variability::feature_bundle>(e));
 
     {
         const auto sn(fb.name().simple());
@@ -122,14 +122,14 @@ format(const context& ctx, const assets::meta_model::element& e) const {
             using utility::string::splitter;
 a.stream() << std::endl;
 a.stream() << "namespace {" << std::endl;
-            for (const auto& fb_ft : fb.feature_templates()) {
+            for (const auto& fb_ft : fb.features()) {
                 const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
                 const bool has_qualified_name(simple_key != fb_ft.key());
 a.stream() << std::endl;
-a.stream() << "dogen::variability::meta_model::feature_template" << std::endl;
+a.stream() << "dogen::variability::meta_model::feature" << std::endl;
 a.stream() << "make_" << fb_ft.identifiable_key() << "() {" << std::endl;
 a.stream() << "    using namespace dogen::variability::meta_model;" << std::endl;
-a.stream() << "    feature_template r;" << std::endl;
+a.stream() << "    feature r;" << std::endl;
 a.stream() << "    r.name().simple(\"" << simple_key << "\");" << std::endl;
                if (has_qualified_name) {
 a.stream() << "    r.name().qualified(\"" << fb_ft.key() << "\");" << std::endl;
@@ -137,7 +137,6 @@ a.stream() << "    r.name().qualified(\"" << fb_ft.key() << "\");" << std::endl;
 a.stream() << "    const auto vt(" << enum_mapper::from_value_type(fb_ft.value_type()) << ");" << std::endl;
 a.stream() << "    r.value_type(vt);" << std::endl;
 a.stream() << "    r.binding_point(" << enum_mapper::from_binding_point(*fb_ft.binding_point()) << ");" << std::endl;
-a.stream() << "    r.kind(" << enum_mapper::from_template_kind(fb.template_kind()) << ");" << std::endl;
     if (!fb_ft.value().empty()) {
 a.stream() << "    dogen::variability::helpers::value_factory f;" << std::endl;
 a.stream() << "    r.default_value(f.make(vt, std::list<std::string>{ " << fb_ft.value() << " }));" << std::endl;
@@ -166,7 +165,7 @@ a.stream() << sn << "::make_feature_group(const dogen::variability::meta_model::
 a.stream() << "    feature_group r;" << std::endl;
 a.stream() << "    const dogen::variability::helpers::feature_selector s(fm);" << std::endl;
 a.stream() << std::endl;
-                for (const auto& fb_ft : fb.feature_templates()) {
+                for (const auto& fb_ft : fb.features()) {
                     const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
 a.stream() << "    r." << simple_key << " = s.get_by_name(\"" << fb_ft.key() << "\");" << std::endl;
                 }
@@ -180,7 +179,7 @@ a.stream() << "    const dogen::variability::meta_model::configuration& cfg) {" 
 a.stream() << std::endl;
 a.stream() << "    static_configuration r;" << std::endl;
 a.stream() << "    const dogen::variability::helpers::configuration_selector s(cfg);" << std::endl;
-                for (const auto& fb_ft : fb.feature_templates()) {
+                for (const auto& fb_ft : fb.features()) {
                     const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
 
                     const bool has_default_value(!fb_ft.value().empty());
@@ -197,12 +196,12 @@ a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;
             }
 a.stream() << std::endl;
-a.stream() << "std::list<dogen::variability::meta_model::feature_template>" << std::endl;
+a.stream() << "std::list<dogen::variability::meta_model::feature>" << std::endl;
 a.stream() << sn << "::make_templates() {" << std::endl;
 a.stream() << "    using namespace dogen::variability::meta_model;" << std::endl;
-a.stream() << "    std::list<dogen::variability::meta_model::feature_template> r;" << std::endl;
+a.stream() << "    std::list<dogen::variability::meta_model::feature> r;" << std::endl;
 
-            for (const auto& fb_ft : fb.feature_templates()) {
+            for (const auto& fb_ft : fb.features()) {
 a.stream() << "    r.push_back(make_" << fb_ft.identifiable_key() << "());" << std::endl;
             }
 a.stream() << "    return r;" << std::endl;

@@ -415,6 +415,8 @@ make_masd_generation_cpp_types_feature_bundle_implementation_postfix() {
     r.value_type(vt);
     r.binding_point(binding_point::global);
     r.kind(template_kind::instance);
+    dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
     archetypes::location al;
     al.kernel("masd");
