@@ -28,6 +28,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/types/configuration.hpp"
 #include "dogen.archetypes/types/location_repository.hpp"
+#include "dogen.variability/types/helpers/registrar.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
 #include "dogen.engine/types/transforms/context.hpp"
 
@@ -37,6 +38,9 @@ namespace dogen::engine::transforms {
  * @brief Factory that creates the transformation context.
  */
 class context_factory final {
+private:
+    static void populate_registrar(variability::helpers::registrar& rg);
+
 public:
     static injection::transforms::context make_injection_context(
         const configuration& cfg, const std::string& activity);

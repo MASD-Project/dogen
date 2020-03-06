@@ -29,7 +29,6 @@
 #include "dogen.archetypes/types/location_repository_builder.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
 #include "dogen.variability/types/features/initializer.hpp"
-#include "dogen.variability/types/helpers/registrar.hpp"
 #include "dogen.variability/types/meta_model/feature_template_repository.hpp"
 #include "dogen.variability/types/transforms/feature_model_production_chain.hpp"
 #include "dogen.templating/types/initializer.hpp"
@@ -103,10 +102,7 @@ create_archetype_location_repository(
     }
     return boost::make_shared<archetypes::location_repository>(b.build());
 }
-
-variability::meta_model::feature_template_repository
-make_feature_template_repository() {
-    variability::helpers::registrar rg;
+void context_factory::populate_registrar(variability::helpers::registrar& rg) {
     injection::features::initializer::register_templates(rg);
     assets::features::initializer::register_templates(rg);
     generation::features::initializer::register_templates(rg);
@@ -117,15 +113,6 @@ make_feature_template_repository() {
     generation::cpp::feature_initializer::register_templates(rg);
     generation::csharp::feature_initializer::register_templates(rg);
     features::initializer::register_templates(rg);
-    const auto r(rg.feature_template_repository());
-    return r;
-}
-
-variability::meta_model::feature_repository
-make_feature_repository() {
-    variability::helpers::registrar rg;
-    const auto r(rg.feature_repository());
-    return r;
 }
 
 injection::transforms::context context_factory::
@@ -220,8 +207,10 @@ make_context(const configuration& cfg, const std::string& activity,
     /*
      * Now we can create the feature model.
      */
-    const auto ftrp(make_feature_template_repository());
-    const auto frp(make_feature_repository());
+    variability::helpers::registrar vrg;
+    populate_registrar(vrg);
+    const auto ftrp(vrg.feature_template_repository());
+    const auto frp(vrg.feature_repository());
     using variability::transforms::feature_model_production_chain;
     const auto fm(feature_model_production_chain::apply(vctx, ftrp, frp));
     r.injection_context().feature_model(fm);
