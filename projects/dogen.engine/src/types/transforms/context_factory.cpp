@@ -121,6 +121,13 @@ make_feature_template_repository() {
     return r;
 }
 
+variability::meta_model::feature_repository
+make_feature_repository() {
+    variability::helpers::registrar rg;
+    const auto r(rg.feature_repository());
+    return r;
+}
+
 injection::transforms::context context_factory::
 make_injection_context(const configuration& cfg,
     const std::string& activity) {
@@ -214,8 +221,9 @@ make_context(const configuration& cfg, const std::string& activity,
      * Now we can create the feature model.
      */
     const auto ftrp(make_feature_template_repository());
+    const auto frp(make_feature_repository());
     using variability::transforms::feature_model_production_chain;
-    const auto fm(feature_model_production_chain::apply(vctx, ftrp));
+    const auto fm(feature_model_production_chain::apply(vctx, ftrp, frp));
     r.injection_context().feature_model(fm);
     r.assets_context().feature_model(fm);
     r.generation_context().feature_model(fm);

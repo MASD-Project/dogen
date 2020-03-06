@@ -40,11 +40,14 @@ namespace dogen::variability::transforms {
 
 boost::shared_ptr<meta_model::feature_model>
 feature_model_production_chain::apply(const context& ctx,
-    const meta_model::feature_template_repository& ftrp) {
+    const meta_model::feature_template_repository& ftrp,
+    const meta_model::feature_repository& frp) {
     tracing::scoped_chain_tracer stp(lg, "feature model production chain",
         transform_id, transform_id, *ctx.tracer());
 
-    const auto fts(feature_template_instantiation_transform::apply(ctx, ftrp));
+    auto fts(frp.features());
+    fts.splice(fts.end(),
+        feature_template_instantiation_transform::apply(ctx, ftrp));
     const auto r(feature_model_transform::apply(ctx, fts));
 
     stp.end_chain(r);
