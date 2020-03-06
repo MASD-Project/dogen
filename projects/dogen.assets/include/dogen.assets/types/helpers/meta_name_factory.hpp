@@ -54,8 +54,7 @@ public:
     static meta_model::name make_generation_marker_name();
     static meta_model::name make_variability_profile_template_name();
     static meta_model::name make_variability_feature_template_bundle_name();
-    static meta_model::name
-    make_variability_feature_template_initializer_name();
+    static meta_model::name make_variability_initializer_name();
     static meta_model::name make_templating_logic_less_templates_name();
     static meta_model::name make_serialization_type_registrar_name();
     static meta_model::name make_visual_studio_solution_name();

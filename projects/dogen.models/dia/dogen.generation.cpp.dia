@@ -29100,13 +29100,13 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O242">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,289"/>
+        <dia:point val="-44,288"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,288.95;-23.8275,292.05"/>
+        <dia:rectangle val="-44.05,287.95;-23.8275,291.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,289"/>
+        <dia:point val="-44,288"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.122499999999999"/>
@@ -29211,13 +29211,13 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O243">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,294"/>
+        <dia:point val="-44,293"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,293.95;-19.8475,297.05"/>
+        <dia:rectangle val="-44.05,292.95;-19.8475,296.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,294"/>
+        <dia:point val="-44,293"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="24.102499999999999"/>
@@ -29322,22 +29322,22 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O244">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,299"/>
+        <dia:point val="-44,298"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,298.95;-22.66,302.05"/>
+        <dia:rectangle val="-44.05,297.95;-25.875,301.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,299"/>
+        <dia:point val="-44,298"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="21.289999999999999"/>
+        <dia:real val="18.074999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#feature_template_initializer_header_formatter#</dia:string>
+        <dia:string>#variability_initializer_header_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -29433,22 +29433,22 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O245">
       <dia:attribute name="obj_pos">
-        <dia:point val="-44,304"/>
+        <dia:point val="-21,298"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,303.95;-18.68,307.05"/>
+        <dia:rectangle val="-21.05,297.95;1.105,301.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-44,304"/>
+        <dia:point val="-21,298"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.27"/>
+        <dia:real val="22.055"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#feature_template_initializer_implementation_formatter#</dia:string>
+        <dia:string>#variability_initializer_implementation_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -29547,13 +29547,13 @@ code.
         <dia:point val="-44,362"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,361.95;-1.87,381.65"/>
+        <dia:rectangle val="-44.05,361.95;-3.795,381.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-44,362"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="42.079999999999998"/>
+        <dia:real val="40.155000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="19.600000000000005"/>
@@ -30065,7 +30065,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.feature_template_initializer_header.postfix#</dia:string>
+            <dia:string>#masd.generation.cpp.types.variability_initializer_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30074,7 +30074,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.feature_template_initializer_header.postfix#</dia:string>
+            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.variability_initializer_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30088,7 +30088,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.feature_template_initializer_implementation.postfix#</dia:string>
+            <dia:string>#masd.generation.cpp.types.variability_initializer_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30097,7 +30097,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.feature_template_initializer_implementation.postfix#</dia:string>
+            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.variability_initializer_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

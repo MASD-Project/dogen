@@ -13,24 +13,24 @@
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/io/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/io/inserter_implementation_helper.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/types/feature_template_initializer_implementation_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/types/variability_initializer_implementation_formatter.hpp" #>
 <#@ masd.stitch.wale.text_template=cpp_artefact_formatter_implementation.wale #>
-<#@ masd.stitch.wale.kvp.class.simple_name=feature_template_initializer_implementation_formatter #>
-<#@ masd.stitch.wale.kvp.archetype.simple_name=feature_template_initializer_implementation #>
+<#@ masd.stitch.wale.kvp.class.simple_name=variability_initializer_implementation_formatter #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=variability_initializer_implementation #>
 <#@ masd.stitch.wale.kvp.yarn_element=assets::meta_model::variability::initializer #>
-<#@ masd.stitch.wale.kvp.meta_element=variability_feature_template_initializer #>
+<#@ masd.stitch.wale.kvp.meta_element=variability_initializer #>
 <#@ masd.stitch.wale.kvp.meta_name_factory=assets::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-std::list<std::string> feature_template_initializer_implementation_formatter::inclusion_dependencies(
+std::list<std::string> variability_initializer_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const assets::meta_model::element& e) const {
     using assets::meta_model::variability::initializer;
     const auto& o(assistant::as<initializer>(e));
     auto builder(f.make());
 
-    const auto ch_arch(traits::feature_template_initializer_header_archetype());
+    const auto ch_arch(traits::variability_initializer_header_archetype());
     builder.add(o.name(), ch_arch);
 
     const auto fb_arch(traits::feature_template_bundle_header_archetype());
@@ -39,7 +39,7 @@ std::list<std::string> feature_template_initializer_implementation_formatter::in
     return builder.build();
 }
 
-extraction::meta_model::artefact feature_template_initializer_implementation_formatter::
+extraction::meta_model::artefact variability_initializer_implementation_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& o(a.as<assets::meta_model::variability::initializer>(e));

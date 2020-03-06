@@ -11,18 +11,18 @@
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/serialization/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/hash/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/types/feature_template_initializer_header_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/types/variability_initializer_header_formatter.hpp" #>
 <#@ masd.stitch.wale.text_template=cpp_artefact_formatter_implementation_header.wale #>
-<#@ masd.stitch.wale.kvp.class.simple_name=feature_template_initializer_header_formatter #>
-<#@ masd.stitch.wale.kvp.archetype.simple_name=feature_template_initializer_header #>
+<#@ masd.stitch.wale.kvp.class.simple_name=variability_initializer_header_formatter #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=variability_initializer_header #>
 <#@ masd.stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
 <#@ masd.stitch.wale.kvp.yarn_element=assets::meta_model::variability::initializer #>
-<#@ masd.stitch.wale.kvp.meta_element=variability_feature_template_initializer #>
+<#@ masd.stitch.wale.kvp.meta_element=variability_initializer #>
 <#@ masd.stitch.wale.kvp.meta_name_factory=assets::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-std::list<std::string> feature_template_initializer_header_formatter::inclusion_dependencies(
+std::list<std::string> variability_initializer_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const assets::meta_model::element& /*e*/) const {
 
@@ -34,7 +34,7 @@ std::list<std::string> feature_template_initializer_header_formatter::inclusion_
     return builder.build();
 }
 
-extraction::meta_model::artefact feature_template_initializer_header_formatter::
+extraction::meta_model::artefact variability_initializer_header_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
     const auto& o(a.as<assets::meta_model::variability::initializer>(e));

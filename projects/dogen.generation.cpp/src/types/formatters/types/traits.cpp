@@ -104,14 +104,14 @@ std::string traits::feature_template_bundle_implementation_archetype() {
     return r;
 }
 
-std::string traits::feature_template_initializer_header_archetype() {
-    static std::string r(traits::facet() + ".feature_template_initializer_header");
+std::string traits::variability_initializer_header_archetype() {
+    static std::string r(traits::facet() + ".variability_initializer_header");
     return r;
 }
 
-std::string traits::feature_template_initializer_implementation_archetype() {
+std::string traits::variability_initializer_implementation_archetype() {
     static std::string r(traits::facet() +
-        ".feature_template_initializer_implementation");
+        ".variability_initializer_implementation");
     return r;
 }
 

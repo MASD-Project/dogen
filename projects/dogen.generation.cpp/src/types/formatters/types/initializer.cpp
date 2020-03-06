@@ -35,8 +35,8 @@
 #include "dogen.generation.cpp/types/formatters/types/smart_pointer_helper.hpp"
 #include "dogen.generation.cpp/types/formatters/types/feature_template_bundle_header_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/types/feature_template_bundle_implementation_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/types/feature_template_initializer_header_formatter.hpp"
-#include "dogen.generation.cpp/types/formatters/types/feature_template_initializer_implementation_formatter.hpp"
+#include "dogen.generation.cpp/types/formatters/types/variability_initializer_header_formatter.hpp"
+#include "dogen.generation.cpp/types/formatters/types/variability_initializer_implementation_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/types/initializer.hpp"
 
 namespace dogen::generation::cpp::formatters::types {
@@ -56,9 +56,8 @@ void initializer::initialize(registrar& rg) {
     register_formatter<primitive_forward_declarations_formatter>(rg);
     register_formatter<feature_template_bundle_header_formatter>(rg);
     register_formatter<feature_template_bundle_implementation_formatter>(rg);
-    register_formatter<feature_template_initializer_header_formatter>(rg);
-    register_formatter<
-        feature_template_initializer_implementation_formatter>(rg);
+    register_formatter<variability_initializer_header_formatter>(rg);
+    register_formatter<variability_initializer_implementation_formatter>(rg);
     register_formatter<main_formatter>(rg);
 
     register_helper_formatter<smart_pointer_helper>(rg);

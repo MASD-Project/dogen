@@ -1550,14 +1550,14 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::feature_template_initializer_header_formatter",
+      "name": "formatters::types::variability_initializer_header_formatter",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::feature_template_initializer_implementation_formatter",
+      "name": "formatters::types::variability_initializer_implementation_formatter",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
@@ -1721,19 +1721,19 @@
           }
         },
         {
-          "name": "masd.generation.cpp.types.feature_template_initializer_header.postfix",
+          "name": "masd.generation.cpp.types.variability_initializer_header.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.feature_template_initializer_header.postfix"
+            "masd.variability.qualified_name": "masd.generation.cpp.types.variability_initializer_header.postfix"
           }
         },
         {
-          "name": "masd.generation.cpp.types.feature_template_initializer_implementation.postfix",
+          "name": "masd.generation.cpp.types.variability_initializer_implementation.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.feature_template_initializer_implementation.postfix"
+            "masd.variability.qualified_name": "masd.generation.cpp.types.variability_initializer_implementation.postfix"
           }
         },
         {

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTERS_TYPES_FEATURE_TEMPLATE_INITIALIZER_IMPLEMENTATION_FORMATTER_HPP
-#define DOGEN_GENERATION_CPP_TYPES_FORMATTERS_TYPES_FEATURE_TEMPLATE_INITIALIZER_IMPLEMENTATION_FORMATTER_HPP
+#ifndef DOGEN_GENERATION_CPP_TYPES_FORMATTERS_TYPES_VARIABILITY_INITIALIZER_HEADER_FORMATTER_HPP
+#define DOGEN_GENERATION_CPP_TYPES_FORMATTERS_TYPES_VARIABILITY_INITIALIZER_HEADER_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@
 
 namespace dogen::generation::cpp::formatters::types {
 
-class feature_template_initializer_implementation_formatter final : public artefact_formatter_interface {
+class variability_initializer_header_formatter final : public artefact_formatter_interface {
 public:
     static std::string static_id();
 
