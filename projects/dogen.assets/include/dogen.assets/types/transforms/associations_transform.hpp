@@ -31,6 +31,7 @@
 #include "dogen.assets/types/meta_model/model.hpp"
 #include "dogen.assets/hash/meta_model/name_hash.hpp"
 #include "dogen.assets/types/meta_model/structural/object.hpp"
+#include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_template_bundle.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
 
@@ -67,10 +68,16 @@ private:
         meta_model::structural::object& o);
 
     /**
-     * @brief Processes a feature bundle.
+     * @brief Processes a feature template bundle.
      */
     static void process_feature_template_bundle(const meta_model::model& m,
         meta_model::variability::feature_template_bundle& fb);
+
+        /**
+     * @brief Processes a feature bundle.
+     */
+    static void process_feature_bundle(const meta_model::model& m,
+        meta_model::variability::feature_bundle& fb);
 
 public:
     /**

@@ -154,6 +154,16 @@ process_feature_template_bundle(const meta_model::model& m,
     process(fb);
 }
 
+void associations_transform::process_feature_bundle(const meta_model::model& m,
+    meta_model::variability::feature_bundle& fb) {
+
+    for (const auto& f : fb.features()) {
+        const auto& nt(f.parsed_type());
+        walk_name_tree(m, fb, nt, false/*inherit_opaqueness_from_parent*/);
+    }
+    process(fb);
+}
+
 void associations_transform::
 apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "associations transform",
@@ -165,11 +175,17 @@ apply(const context& ctx, meta_model::model& m) {
     for (auto& pair : objs)
         process_object(m, *pair.second);
 
-    auto& bundles(m.variability_elements().feature_template_bundles());
-    BOOST_LOG_SEV(lg, debug) << "Total feature bundles: " << bundles.size();
+    auto& templates(m.variability_elements().feature_template_bundles());
+    BOOST_LOG_SEV(lg, debug) << "Total feature templates: " << templates.size();
+
+    for (auto& pair : templates)
+        process_feature_template_bundle(m, *pair.second);
+
+    auto& bundles(m.variability_elements().feature_bundles());
+    BOOST_LOG_SEV(lg, debug) << "Total feature bundles: " << templates.size();
 
     for (auto& pair : bundles)
-        process_feature_template_bundle(m, *pair.second);
+        process_feature_bundle(m, *pair.second);
 
     stp.end_transform(m);
 }
