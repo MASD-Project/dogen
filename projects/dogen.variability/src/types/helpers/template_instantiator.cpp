@@ -514,7 +514,6 @@ instantiate(const meta_model::feature_template& ft) const {
      * identity template.
      */
     using meta_model::template_kind;
-    const auto ftqn(ft.name().qualified());
     std::list<meta_model::feature> r;
     if (ft.kind() == template_kind::instance) {
         r.push_back(to_feature(ft));
