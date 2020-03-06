@@ -41,19 +41,55 @@ auto lg(logger_factory(transform_id));
 namespace dogen::assets::transforms {
 
 /**
- * @brief Walks through the name tree, picking up associations as
- * it goes along.
+ * @brief Removes duplicate names, preserving the original order
+ * of elements in the list.
+ *
+ * @param names list of names to process
+ * @param processed list of names that have already been processed
+ * somewhere else, if any.
+ */
+void remove_duplicates(std::list<meta_model::name>& names,
+    std::unordered_set<meta_model::name> processed =
+    std::unordered_set<meta_model::name>()) {
+    BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
+                             << names.size() << ". Processed starts with size: "
+                             << processed.size();
+
+    if (names.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "Nothing to do.";
+        return;
+    }
+
+    auto i(names.begin());
+    while (i != names.end()) {
+        const auto n(*i);
+        if (processed.find(n) != processed.end()) {
+            const auto j(i++);
+            names.erase(j);
+            continue;
+        }
+        ++i;
+        processed.insert(n);
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Removed duplicates from list. final size: "
+                             << names.size();
+}
+
+/**
+ * @brief Walks through the name tree, updating associations as it
+ * goes along.
  */
 template<typename Associatable>
-void walk_name_tree(const meta_model::model& m, Associatable& fb,
+void update_associations(const meta_model::model& m, Associatable& a,
     const meta_model::name_tree& nt,
     const bool inherit_opaqueness_from_parent) {
 
     const auto n(nt.current());
     if (inherit_opaqueness_from_parent)
-        fb.opaque_associations().push_back(n);
+        a.opaque_associations().push_back(n);
     else
-        fb.transparent_associations().push_back(n);
+        a.transparent_associations().push_back(n);
 
     /*
      * If the parent type is an associative container, the first child
@@ -73,60 +109,28 @@ void walk_name_tree(const meta_model::model& m, Associatable& fb,
 
     for (const auto c : nt.children()) {
         if (is_first && is_associative_container)
-            fb.associative_container_keys().push_back(c.current());
+            a.associative_container_keys().push_back(c.current());
 
-        walk_name_tree(m, fb, c, nt.are_children_opaque());
+        update_associations(m, a, c, nt.are_children_opaque());
         is_first = false;
     }
-}
 
-/**
- * @brief Removes duplicate names, preserving the original order
- * of elements in the list.
- *
- * @param names list of names to process
- * @param processed list of names that have already been processed
- * somewhere else, if any.
- */
-void remove_duplicates(std::list<meta_model::name>& names,
-    std::unordered_set<meta_model::name> processed =
-    std::unordered_set<meta_model::name>()) {
-    BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
-                             << names.size() << ". Processed starts with size: "
-                             << processed.size();
-
-    auto i(names.begin());
-    while (i != names.end()) {
-        const auto n(*i);
-        if (processed.find(n) != processed.end()) {
-            const auto j(i++);
-            names.erase(j);
-            continue;
-        }
-        ++i;
-        processed.insert(n);
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Removed duplicates from list. final size: "
-                             << names.size();
+    if (!a.associative_container_keys().empty())
+        remove_duplicates(a.associative_container_keys());
 }
 
 template<typename Associatable>
 void process(Associatable& a) {
     std::unordered_set<meta_model::name> transparent_associations;
-    if (!a.transparent_associations().empty()) {
-        remove_duplicates(a.transparent_associations());
-        for (const auto n : a.transparent_associations())
+    remove_duplicates(a.transparent_associations());
+    for (const auto n : a.transparent_associations())
         transparent_associations.insert(n);
-    }
 
-    if (!a.opaque_associations().empty()) {
-        /*
-         * Ensure we remove any items which are simultaneously regular
-         * and weak associations.
-         */
-        remove_duplicates(a.opaque_associations(), transparent_associations);
-    }
+    /*
+     * Ensure we remove any items which are simultaneously regular
+     * and weak associations.
+     */
+    remove_duplicates(a.opaque_associations(), transparent_associations);
 }
 
 void associations_transform::
@@ -135,12 +139,9 @@ process_object(const meta_model::model& m, meta_model::structural::object& o) {
 
     for (const auto& p : o.local_attributes()) {
         const auto& nt(p.parsed_type());
-        walk_name_tree(m, o, nt, false/*inherit_opaqueness_from_parent*/);
+        update_associations(m, o, nt, false/*inherit_opaqueness_from_parent*/);
     }
-
     process(o);
-    if (!o.associative_container_keys().empty())
-        remove_duplicates(o.associative_container_keys());
 }
 
 void associations_transform::
@@ -149,7 +150,7 @@ process_feature_template_bundle(const meta_model::model& m,
 
     for (const auto& ft : fb.feature_templates()) {
         const auto& nt(ft.parsed_type());
-        walk_name_tree(m, fb, nt, false/*inherit_opaqueness_from_parent*/);
+        update_associations(m, fb, nt, false/*inherit_opaqueness_from_parent*/);
     }
     process(fb);
 }
@@ -159,13 +160,12 @@ void associations_transform::process_feature_bundle(const meta_model::model& m,
 
     for (const auto& f : fb.features()) {
         const auto& nt(f.parsed_type());
-        walk_name_tree(m, fb, nt, false/*inherit_opaqueness_from_parent*/);
+        update_associations(m, fb, nt, false/*inherit_opaqueness_from_parent*/);
     }
     process(fb);
 }
 
-void associations_transform::
-apply(const context& ctx, meta_model::model& m) {
+void associations_transform::apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "associations transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
@@ -182,7 +182,7 @@ apply(const context& ctx, meta_model::model& m) {
         process_feature_template_bundle(m, *pair.second);
 
     auto& bundles(m.variability_elements().feature_bundles());
-    BOOST_LOG_SEV(lg, debug) << "Total feature bundles: " << templates.size();
+    BOOST_LOG_SEV(lg, debug) << "Total feature bundles: " << bundles.size();
 
     for (auto& pair : bundles)
         process_feature_bundle(m, *pair.second);
