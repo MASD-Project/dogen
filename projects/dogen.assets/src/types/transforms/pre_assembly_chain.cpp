@@ -33,7 +33,7 @@
 #include "dogen.assets/types/transforms/containment_transform.hpp"
 #include "dogen.assets/types/transforms/mapping_elements_transform.hpp"
 #include "dogen.assets/types/transforms/extraction_properties_transform.hpp"
-#include "dogen.assets/types/transforms/variability_feature_template_bundle_transform.hpp"
+#include "dogen.assets/types/transforms/variability_entities_transform.hpp"
 #include "dogen.assets/types/transforms/visual_studio_transform.hpp"
 #include "dogen.assets/types/transforms/pre_assembly_chain.hpp"
 

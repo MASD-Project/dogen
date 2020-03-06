@@ -1669,7 +1669,7 @@
       ]
     },
     {
-      "name": "transforms::variability_feature_template_bundle_transform",
+      "name": "transforms::variability_entities_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

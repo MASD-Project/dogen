@@ -29,7 +29,7 @@
 #include "dogen.assets/types/meta_model/variability/initializer.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
 #include "dogen.assets/types/transforms/transformation_error.hpp"
-#include "dogen.assets/types/transforms/variability_feature_template_bundle_transform.hpp"
+#include "dogen.assets/types/transforms/variability_entities_transform.hpp"
 
 namespace {
 

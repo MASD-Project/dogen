@@ -25584,22 +25584,22 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O176">
       <dia:attribute name="obj_pos">
-        <dia:point val="-201,26"/>
+        <dia:point val="-200,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-201.05,25.95;-179.295,29.65"/>
+        <dia:rectangle val="-200.05,25.95;-180.97,29.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-201,26"/>
+        <dia:point val="-200,26"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="21.655000000000001"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#variability_feature_template_bundle_transform#</dia:string>
+        <dia:string>#variability_entities_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -25800,7 +25800,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:point val="-180.857,43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-190.374,29.5981;-180.107,43.8"/>
+        <dia:rectangle val="-190.56,29.6004;-180.107,43.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -25808,8 +25808,8 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
       <dia:attribute name="orth_points">
         <dia:point val="-180.857,43"/>
         <dia:point val="-180.857,31"/>
-        <dia:point val="-190.322,31"/>
-        <dia:point val="-190.259,29.6504"/>
+        <dia:point val="-190.51,31"/>
+        <dia:point val="-190.51,29.6504"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
