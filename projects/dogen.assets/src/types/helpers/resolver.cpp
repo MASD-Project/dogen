@@ -795,6 +795,7 @@ void resolver::resolve(const indices& idx, meta_model::model& m) {
     resolve_enumerations(idx, m);
     resolve_primitives(idx, m);
     resolve_feature_template_bundles(idx, m);
+    resolve_feature_bundles(idx, m);
 
     BOOST_LOG_SEV(lg, debug) << "Resolved model.";
 }
