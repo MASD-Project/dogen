@@ -32,7 +32,8 @@
 #include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include "dogen.assets/types/meta_model/structural/enumeration.hpp"
 #include "dogen.assets/types/meta_model/structural/object_template.hpp"
-#include "dogen.assets/types/meta_model/variability//feature_template_bundle.hpp"
+#include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
+#include "dogen.assets/types/meta_model/variability/feature_template_bundle.hpp"
 #include "dogen.assets/io/meta_model/technical_space_io.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/types/helpers/legacy_name_tree_parser.hpp"
@@ -137,6 +138,30 @@ void parsing_transform::apply(const context& ctx, meta_model::model& m) {
             const helpers::legacy_name_tree_parser ntp(ts);
 
             for(auto& ft : fb.feature_templates()) {
+                const auto ut(boost::algorithm::trim_copy(ft.mapped_type()));
+
+                if (ut.empty()) {
+                    BOOST_LOG_SEV(lg, error) << empty_type << id;
+                    BOOST_THROW_EXCEPTION(
+                        transformation_error(empty_type + id));
+                }
+                auto nt(ntp.parse(ut));
+                ft.parsed_type(nt);
+            }
+        } catch (boost::exception& e) {
+            e << errmsg_parsing_owner(id);
+            throw;
+        }
+    }
+
+    for (auto& pair : m.variability_elements().feature_bundles()) {
+        auto& fb(*pair.second);
+        const auto id(fb.name().qualified().dot());
+
+        try {
+            const helpers::legacy_name_tree_parser ntp(ts);
+
+            for(auto& ft : fb.features()) {
                 const auto ut(boost::algorithm::trim_copy(ft.mapped_type()));
 
                 if (ut.empty()) {
