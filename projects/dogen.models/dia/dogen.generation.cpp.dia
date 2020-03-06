@@ -29684,7 +29684,7 @@ code.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#feature_bundle_header_formatter#</dia:string>
+        <dia:string>#feature_template_bundle_header_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -29795,7 +29795,7 @@ code.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#feature_bundle_implementation_formatter#</dia:string>
+        <dia:string>#feature_template_bundle_implementation_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -30131,7 +30131,7 @@ code.
         <dia:string>#features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
@@ -30588,7 +30588,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.feature_bundle_header.postfix#</dia:string>
+            <dia:string>#masd.generation.cpp.types.feature_template_bundle_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30597,7 +30597,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.feature_bundle_header.postfix#</dia:string>
+            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.feature_template_bundle_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30611,7 +30611,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.feature_bundle_implementation.postfix#</dia:string>
+            <dia:string>#masd.generation.cpp.types.feature_template_bundle_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30620,7 +30620,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.feature_bundle_implementation.postfix#</dia:string>
+            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.feature_template_bundle_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30839,7 +30839,7 @@ code.
         <dia:string>#features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
@@ -31184,7 +31184,7 @@ code.
         <dia:string>#features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
@@ -31529,7 +31529,7 @@ code.
         <dia:string>#features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
@@ -31907,7 +31907,7 @@ code.
         <dia:string>#features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
@@ -32252,7 +32252,7 @@ code.
         <dia:string>#features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
@@ -32666,7 +32666,7 @@ code.
         <dia:string>#features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
@@ -32942,7 +32942,7 @@ code.
         <dia:string>#global_features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
@@ -33628,7 +33628,7 @@ code.
         <dia:string>#facet_features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.default_binding_point=element
@@ -33789,7 +33789,7 @@ code.
         <dia:string>#archetype_features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.default_binding_point=element
@@ -34400,7 +34400,7 @@ string.
         <dia:string>#features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
@@ -35670,7 +35670,7 @@ string.
         <dia:string>#features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
@@ -37278,7 +37278,7 @@ string.
         <dia:string>#features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
@@ -38821,7 +38821,7 @@ string.
         <dia:string>#features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false

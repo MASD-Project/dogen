@@ -30,7 +30,7 @@
 #include "dogen.assets/types/meta_model/structural/object.hpp"
 #include "dogen.assets/types/meta_model/structural/primitive.hpp"
 #include "dogen.assets/types/meta_model/structural/enumeration.hpp"
-#include "dogen.assets/types/meta_model/variability//feature_bundle.hpp"
+#include "dogen.assets/types/meta_model/variability//feature_template_bundle.hpp"
 #include "dogen.assets/io/meta_model/name_io.hpp"
 #include "dogen.assets/io/meta_model/name_tree_io.hpp"
 #include "dogen.assets/io/meta_model/attribute_io.hpp"
@@ -684,9 +684,9 @@ resolve_primitives(const indices& idx, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Resolved primitives.";
 }
 
-void resolver::resolve_feature_bundles(const indices& idx,
+void resolver::resolve_feature_template_bundles(const indices& idx,
     meta_model::model& m) {
-    for (auto& pair : m.variability_elements().feature_bundles()) {
+    for (auto& pair : m.variability_elements().feature_template_bundles()) {
         auto& fb(*pair.second);
         for (auto& ft : fb.feature_templates()) {
             resolve_name_tree(m, idx, fb.name(), ft.parsed_type());
@@ -782,7 +782,7 @@ void resolver::resolve(const indices& idx, meta_model::model& m) {
     resolve_objects(idx, m);
     resolve_enumerations(idx, m);
     resolve_primitives(idx, m);
-    resolve_feature_bundles(idx, m);
+    resolve_feature_template_bundles(idx, m);
 
     BOOST_LOG_SEV(lg, debug) << "Resolved model.";
 }

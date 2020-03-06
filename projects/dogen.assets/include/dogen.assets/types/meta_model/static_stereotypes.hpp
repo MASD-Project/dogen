@@ -51,7 +51,7 @@ enum class static_stereotypes : unsigned int {
     decoration_generation_marker = 17,
     decoration_licence = 18,
     variability_profile_template = 19,
-    variability_feature_bundle = 20,
+    variability_feature_template_bundle = 20,
     variability_feature_template_initializer = 21,
     mapping_fixed_mappable = 22,
     mapping_extensible_mappable = 23,

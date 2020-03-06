@@ -126,9 +126,9 @@ public:
         v.meta_name(n);
     }
 
-    void operator()(meta_model::variability::feature_bundle& v) {
+    void operator()(meta_model::variability::feature_template_bundle& v) {
         static const auto
-            n(mnf::make_variability_feature_bundle_name());
+            n(mnf::make_variability_feature_template_bundle_name());
         v.meta_name(n);
     }
 

@@ -346,11 +346,11 @@ make_masd_generation_cpp_types_builtin_header_postfix() {
 }
 
 dogen::variability::meta_model::feature_template
-make_masd_generation_cpp_types_feature_bundle_header_postfix() {
+make_masd_generation_cpp_types_feature_template_bundle_header_postfix() {
     using namespace dogen::variability::meta_model;
     feature_template r;
     r.name().simple("postfix");
-    r.name().qualified("masd.generation.cpp.types.feature_bundle_header.postfix");
+    r.name().qualified("masd.generation.cpp.types.feature_template_bundle_header.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -366,11 +366,11 @@ make_masd_generation_cpp_types_feature_bundle_header_postfix() {
 }
 
 dogen::variability::meta_model::feature_template
-make_masd_generation_cpp_types_feature_bundle_implementation_postfix() {
+make_masd_generation_cpp_types_feature_template_bundle_implementation_postfix() {
     using namespace dogen::variability::meta_model;
     feature_template r;
     r.name().simple("postfix");
-    r.name().qualified("masd.generation.cpp.types.feature_bundle_implementation.postfix");
+    r.name().qualified("masd.generation.cpp.types.feature_template_bundle_implementation.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -468,8 +468,8 @@ features::make_templates() {
     r.push_back(make_masd_generation_cpp_types_primitive_forward_declarations_postfix());
     r.push_back(make_masd_generation_cpp_types_master_header_postfix());
     r.push_back(make_masd_generation_cpp_types_builtin_header_postfix());
-    r.push_back(make_masd_generation_cpp_types_feature_bundle_header_postfix());
-    r.push_back(make_masd_generation_cpp_types_feature_bundle_implementation_postfix());
+    r.push_back(make_masd_generation_cpp_types_feature_template_bundle_header_postfix());
+    r.push_back(make_masd_generation_cpp_types_feature_template_bundle_implementation_postfix());
     r.push_back(make_masd_generation_cpp_types_feature_template_initializer_header_postfix());
     r.push_back(make_masd_generation_cpp_types_feature_template_initializer_implementation_postfix());
     r.push_back(make_masd_generation_cpp_types_main_postfix());

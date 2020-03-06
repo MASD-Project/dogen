@@ -5786,7 +5786,7 @@ assets types.#</dia:string>
         <dia:string>#model_location#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Feature group for model location related features.

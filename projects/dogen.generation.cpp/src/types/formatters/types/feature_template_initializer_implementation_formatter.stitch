@@ -33,7 +33,7 @@ std::list<std::string> feature_template_initializer_implementation_formatter::in
     const auto ch_arch(traits::feature_template_initializer_header_archetype());
     builder.add(o.name(), ch_arch);
 
-    const auto fb_arch(traits::feature_bundle_header_archetype());
+    const auto fb_arch(traits::feature_template_bundle_header_archetype());
     builder.add(o.bundles(), fb_arch);
 
     return builder.build();

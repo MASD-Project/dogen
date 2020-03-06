@@ -120,8 +120,8 @@ meta_model::name meta_name_factory::make_variability_profile_template_name() {
 }
 
 meta_model::name meta_name_factory::
-make_variability_feature_bundle_name() {
-    static const auto r(make_name("variability_feature_bundle"));
+make_variability_feature_template_bundle_name() {
+    static const auto r(make_name("variability_feature_template_bundle"));
     return r;
 }
 

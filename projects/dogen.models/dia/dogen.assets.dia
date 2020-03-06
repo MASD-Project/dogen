@@ -679,7 +679,7 @@ C++ pointers, references and so on.#</dia:string>
         <dia:point val="-100.392,-69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-114.615,-81.05;-99.6425,-68.2"/>
+        <dia:rectangle val="-114.615,-81.05;-99.642,-68.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2372,7 +2372,7 @@ formatting.#</dia:string>
         <dia:point val="-193.782,-63.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-194.632,-63.85;-173.887,-45.95"/>
+        <dia:rectangle val="-194.632,-63.85;-173.888,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2572,7 +2572,7 @@ formatting.#</dia:string>
         <dia:point val="-196.49,-51.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-197.34,-51.65;-173.887,-45.95"/>
+        <dia:rectangle val="-197.34,-51.65;-173.888,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5091,7 +5091,7 @@ If not present, user did not make any statements with regards to finality.#</dia
         <dia:point val="-235.665,-58.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-236.515,-58.45;-209.887,-45.95"/>
+        <dia:rectangle val="-236.515,-58.45;-209.888,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5133,7 +5133,7 @@ If not present, user did not make any statements with regards to finality.#</dia
         <dia:point val="-219.28,-50.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-220.13,-50.85;-209.887,-45.95"/>
+        <dia:rectangle val="-220.13,-50.85;-209.888,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5271,7 +5271,7 @@ names in assets element
         <dia:point val="-128.123,-61"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-128.189,-63.3834;-123.642,-60.9335"/>
+        <dia:rectangle val="-128.189,-63.3834;-123.643,-60.9335"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -22705,7 +22705,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#variability_feature_bundle#</dia:string>
+            <dia:string>#variability_feature_template_bundle#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -23974,7 +23974,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-201.5,-34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-202.25,-40.85;-192.273,-33.2"/>
+        <dia:rectangle val="-202.25,-40.85;-192.272,-33.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24931,7 +24931,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:point val="-182.472,-52.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-183.322,-52.45;-173.887,-45.95"/>
+        <dia:rectangle val="-183.322,-52.45;-173.888,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -25564,19 +25564,19 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:point val="-201,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-201.05,25.95;-181.97,29.65"/>
+        <dia:rectangle val="-201.05,25.95;-179.295,29.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-201,26"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.98"/>
+        <dia:real val="21.655000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#variability_feature_bundle_transform#</dia:string>
+        <dia:string>#variability_feature_template_bundle_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -25777,7 +25777,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:point val="-180.857,43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-191.56,29.6004;-180.107,43.8"/>
+        <dia:rectangle val="-191.009,29.59;-180.107,43.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -25785,8 +25785,8 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
       <dia:attribute name="orth_points">
         <dia:point val="-180.857,43"/>
         <dia:point val="-180.857,31"/>
-        <dia:point val="-191.51,31"/>
-        <dia:point val="-191.51,29.6504"/>
+        <dia:point val="-190.946,31"/>
+        <dia:point val="-190.62,29.6504"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -27707,13 +27707,13 @@ to variability.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O194">
       <dia:attribute name="obj_pos">
-        <dia:point val="-6,-81"/>
+        <dia:point val="-6,-73"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-6.05,-81.05;11.105,-75.75"/>
+        <dia:rectangle val="-6.05,-73.05;11.105,-67.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-6,-81"/>
+        <dia:point val="-6,-73"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.055"/>
@@ -27888,13 +27888,13 @@ to variability.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O195">
       <dia:attribute name="obj_pos">
-        <dia:point val="-1,-69"/>
+        <dia:point val="-1,-61"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-1.05,-69.05;14.95,-64.55"/>
+        <dia:rectangle val="-1.05,-61.05;14.95,-56.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-1,-69"/>
+        <dia:point val="-1,-61"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.9"/>
@@ -28046,13 +28046,13 @@ to variability.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O196">
       <dia:attribute name="obj_pos">
-        <dia:point val="15,-81"/>
+        <dia:point val="15,-73"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.95,-81.05;45.965,-73.35"/>
+        <dia:rectangle val="14.95,-73.05;45.965,-65.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="15,-81"/>
+        <dia:point val="15,-73"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="30.914999999999999"/>
@@ -28061,7 +28061,7 @@ to variability.
         <dia:real val="7.6000000000000005"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#feature_bundle#</dia:string>
+        <dia:string>#feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#assets::meta_element, Associatable#</dia:string>
@@ -28309,13 +28309,13 @@ their individual binding points.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O197">
       <dia:attribute name="obj_pos">
-        <dia:point val="25,-69"/>
+        <dia:point val="25,-61"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="24.95,-69.05;52.885,-58.15"/>
+        <dia:rectangle val="24.95,-61.05;52.885,-50.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="25,-69"/>
+        <dia:point val="25,-61"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
@@ -28659,13 +28659,13 @@ This is only required if the feature template is optional and has no default val
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O198">
       <dia:attribute name="obj_pos">
-        <dia:point val="50,-81"/>
+        <dia:point val="48,-73"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,-81.05;63.01,-77.35"/>
+        <dia:rectangle val="47.95,-73.05;61.01,-69.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="50,-81"/>
+        <dia:point val="48,-73"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.959999999999999"/>
@@ -28830,19 +28830,19 @@ This is only required if the feature template is optional and has no default val
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="2.5275,-75.8"/>
+        <dia:point val="2.5275,-67.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="1.7775,-76.55;7.15,-68.2502"/>
+        <dia:rectangle val="1.7775,-68.55;7.15,-60.2502"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="2.5275,-75.8"/>
-        <dia:point val="2.5275,-71"/>
-        <dia:point val="6.95,-71"/>
-        <dia:point val="6.95,-69.0502"/>
+        <dia:point val="2.5275,-67.8"/>
+        <dia:point val="2.5275,-63"/>
+        <dia:point val="6.95,-63"/>
+        <dia:point val="6.95,-61.0502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -28902,19 +28902,19 @@ This is only required if the feature template is optional and has no default val
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="30.4575,-73.3613"/>
+        <dia:point val="30.4575,-65.3613"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.7075,-74.1113;39.1175,-68.2"/>
+        <dia:rectangle val="29.7075,-66.1113;39.1175,-60.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="30.4575,-73.3613"/>
-        <dia:point val="30.4575,-71"/>
-        <dia:point val="38.9175,-71"/>
-        <dia:point val="38.9175,-69"/>
+        <dia:point val="30.4575,-65.3613"/>
+        <dia:point val="30.4575,-63"/>
+        <dia:point val="38.9175,-63"/>
+        <dia:point val="38.9175,-61"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -33523,16 +33523,16 @@ to structural modeling.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O238">
       <dia:attribute name="obj_pos">
-        <dia:point val="16,-90"/>
+        <dia:point val="16,-82"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="15.95,-90.05;50.43,-85.55"/>
+        <dia:rectangle val="15.95,-82.05;55.82,-77.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="16,-90"/>
+        <dia:point val="16,-82"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="34.380000000000003"/>
+        <dia:real val="39.769999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -33650,10 +33650,10 @@ to structural modeling.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#feature_bundles#</dia:string>
+            <dia:string>#feature_template_bundles#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;feature_bundle&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;feature_template_bundle&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -34174,7 +34174,7 @@ to structural modeling.
         <dia:string>#type_parameters#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Parameters to configure generic types.
@@ -34524,7 +34524,7 @@ to structural modeling.
         <dia:string>#enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Parameters related to enumerations.
@@ -34742,7 +34742,7 @@ technical space targeted.
         <dia:string>#enumerator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Parameters related to enumerators.
@@ -34884,7 +34884,7 @@ technical space targeted.
         <dia:string>#generalization#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Features related to the generalization relationship.
@@ -35052,7 +35052,7 @@ technical space targeted.
         <dia:string>#origin#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Features related to the origin of the model.
@@ -35193,7 +35193,7 @@ technical space targeted.
         <dia:string>#output_technical_space#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Features related to the output technical space.
@@ -35335,7 +35335,7 @@ technical space targeted.
         <dia:string>#primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Features related to primitive elements.
@@ -35528,7 +35528,7 @@ it.
         <dia:string>#orm#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Features related to ORM support.
@@ -35949,7 +35949,7 @@ ORM in Dogen.
         <dia:string>#decoration_modeline#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Modeline properties.
@@ -36143,7 +36143,7 @@ ORM in Dogen.
         <dia:string>#variability_templates#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Features related to the processing of variability for feature and profile templates.
@@ -37251,19 +37251,19 @@ extend the mappings as required.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="16,-85.6"/>
+        <dia:point val="16,-77.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.4775,-86.35;16.75,-80.2459"/>
+        <dia:rectangle val="2.4775,-78.35;16.75,-72.2459"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="16,-85.6"/>
-        <dia:point val="16,-83"/>
-        <dia:point val="2.5275,-83"/>
-        <dia:point val="2.5275,-81.0459"/>
+        <dia:point val="16,-77.6"/>
+        <dia:point val="16,-75"/>
+        <dia:point val="2.5275,-75"/>
+        <dia:point val="2.5275,-73.0459"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -37323,19 +37323,19 @@ extend the mappings as required.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="33.19,-85.5497"/>
+        <dia:point val="35.885,-77.5497"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="30.4075,-86.2997;33.94,-80.2"/>
+        <dia:rectangle val="30.4075,-78.2997;36.635,-72.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="33.19,-85.5497"/>
-        <dia:point val="33.19,-83"/>
-        <dia:point val="30.4575,-83"/>
-        <dia:point val="30.4575,-81"/>
+        <dia:point val="35.885,-77.5497"/>
+        <dia:point val="35.885,-75"/>
+        <dia:point val="30.4575,-75"/>
+        <dia:point val="30.4575,-73"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -37395,19 +37395,19 @@ extend the mappings as required.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="50.38,-85.6"/>
+        <dia:point val="55.77,-77.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.63,-86.35;56.68,-80.2"/>
+        <dia:rectangle val="54.43,-78.35;56.52,-72.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="50.38,-85.6"/>
-        <dia:point val="50.38,-83"/>
-        <dia:point val="56.48,-83"/>
-        <dia:point val="56.48,-81"/>
+        <dia:point val="55.77,-77.6"/>
+        <dia:point val="55.77,-75"/>
+        <dia:point val="54.48,-75"/>
+        <dia:point val="54.48,-73"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -37758,7 +37758,7 @@ extend the mappings as required.#</dia:string>
         <dia:point val="-112.39,-25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-113.14,-29.05;-99.8125,-24.2"/>
+        <dia:rectangle val="-113.14,-29.05;-99.813,-24.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -38169,7 +38169,7 @@ extend the mappings as required.#</dia:string>
         <dia:string>#mapping#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Meta-data related to element mapping.
@@ -39209,7 +39209,7 @@ At present the system only supports wale templates.#</dia:string>
         <dia:string>#variability_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Features related to the processing of variability for feature bundles.

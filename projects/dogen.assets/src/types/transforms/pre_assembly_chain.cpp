@@ -33,7 +33,7 @@
 #include "dogen.assets/types/transforms/containment_transform.hpp"
 #include "dogen.assets/types/transforms/mapping_elements_transform.hpp"
 #include "dogen.assets/types/transforms/extraction_properties_transform.hpp"
-#include "dogen.assets/types/transforms/variability_feature_bundle_transform.hpp"
+#include "dogen.assets/types/transforms/variability_feature_template_bundle_transform.hpp"
 #include "dogen.assets/types/transforms/visual_studio_transform.hpp"
 #include "dogen.assets/types/transforms/pre_assembly_chain.hpp"
 
@@ -74,7 +74,7 @@ void pre_assembly_chain::apply(const context& ctx,
     origin_transform::apply(ctx, m);
     type_params_transform::apply(ctx, m);
     extraction_properties_transform::apply(ctx, m);
-    variability_feature_bundle_transform::apply(ctx, fixed_mappings, m);
+    variability_feature_template_bundle_transform::apply(ctx, fixed_mappings, m);
     visual_studio_transform::apply(ctx, m);
 
     /*

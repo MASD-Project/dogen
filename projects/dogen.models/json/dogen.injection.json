@@ -396,7 +396,7 @@
       "name": "features::input_technical_space",
       "documentation": "Feature bundle for the input technical space.\n",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "global",
@@ -420,7 +420,7 @@
       "name": "features::reference",
       "documentation": "Features related to model referencing.\n",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "global",
@@ -451,7 +451,7 @@
       "name": "features::uml",
       "documentation": "Features related to all UML injectors.\n",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "any",

@@ -13652,7 +13652,7 @@
         <dia:string>#features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
@@ -14038,7 +14038,7 @@
         <dia:string>#features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
@@ -14314,7 +14314,7 @@
         <dia:string>#features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
@@ -14567,7 +14567,7 @@
         <dia:string>#global_features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
@@ -14801,7 +14801,7 @@
         <dia:string>#archetype_features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.default_binding_point=element
@@ -14939,7 +14939,7 @@
         <dia:string>#facet_features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.default_binding_point=element
@@ -15911,7 +15911,7 @@
         <dia:string>#features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false

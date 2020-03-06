@@ -6280,7 +6280,7 @@ and, if so, ignore it.#</dia:string>
         <dia:string>#input_technical_space#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Feature bundle for the input technical space.
@@ -6476,7 +6476,7 @@ the injection model.
         <dia:string>#reference#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Features related to model referencing.
@@ -6729,7 +6729,7 @@ the injection model.
         <dia:string>#uml#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Features related to all UML injectors.

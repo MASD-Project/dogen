@@ -961,7 +961,7 @@
     {
       "name": "features::decoration",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "any",
@@ -1028,7 +1028,7 @@
       "name": "features::formatting",
       "documentation": "Features related to formatting.\n",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "any",

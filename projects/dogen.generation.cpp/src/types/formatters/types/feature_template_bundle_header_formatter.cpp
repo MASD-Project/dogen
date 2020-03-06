@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
-#include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
+#include "dogen.assets/types/meta_model/variability/feature_template_bundle.hpp"
 #include "dogen.assets/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
@@ -32,57 +32,57 @@
 #include "dogen.generation.cpp/types/formatters/io/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/io/inserter_implementation_helper.hpp"
 #include "dogen.generation.cpp/types/formatters/types/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/types/feature_bundle_header_formatter.hpp"
+#include "dogen.generation.cpp/types/formatters/types/feature_template_bundle_header_formatter.hpp"
 
 namespace dogen::generation::cpp::formatters::types {
 
-std::string feature_bundle_header_formatter::static_id() {
-    return traits::feature_bundle_header_archetype();
+std::string feature_template_bundle_header_formatter::static_id() {
+    return traits::feature_template_bundle_header_archetype();
 }
 
-std::string feature_bundle_header_formatter::id() const {
+std::string feature_template_bundle_header_formatter::id() const {
     return static_id();
 }
 
 archetypes::location
-feature_bundle_header_formatter::archetype_location() const {
+feature_template_bundle_header_formatter::archetype_location() const {
     static archetypes::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(),
-          feature_bundle_header_formatter::static_id());
+          feature_template_bundle_header_formatter::static_id());
     return r;
 }
 
-const assets::meta_model::name& feature_bundle_header_formatter::meta_name() const {
+const assets::meta_model::name& feature_template_bundle_header_formatter::meta_name() const {
     using assets::helpers::meta_name_factory;
-    static auto r(meta_name_factory::make_variability_feature_bundle_name());
+    static auto r(meta_name_factory::make_variability_feature_template_bundle_name());
     return r;
 }
 
-std::string feature_bundle_header_formatter::family() const {
+std::string feature_template_bundle_header_formatter::family() const {
     return cpp::traits::header_family();
 }
 
-inclusion_support_types feature_bundle_header_formatter::inclusion_support_type() const {
+inclusion_support_types feature_template_bundle_header_formatter::inclusion_support_type() const {
     return inclusion_support_types::canonical_support;
 }
 
-boost::filesystem::path feature_bundle_header_formatter::inclusion_path(
+boost::filesystem::path feature_template_bundle_header_formatter::inclusion_path(
     const formattables::locator& l, const assets::meta_model::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_id());
 }
 
-boost::filesystem::path feature_bundle_header_formatter::full_path(
+boost::filesystem::path feature_template_bundle_header_formatter::full_path(
     const formattables::locator& l, const assets::meta_model::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_id());
 }
 
-std::list<std::string> feature_bundle_header_formatter::inclusion_dependencies(
+std::list<std::string> feature_template_bundle_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const assets::meta_model::element& e) const {
-    using assets::meta_model::variability::feature_bundle;
+    using assets::meta_model::variability::feature_template_bundle;
 
-    const auto& fb(assistant::as<feature_bundle>(e));
+    const auto& fb(assistant::as<feature_template_bundle>(e));
     auto builder(f.make());
 
     builder.add(inclusion_constants::std::list());
@@ -103,10 +103,10 @@ std::list<std::string> feature_bundle_header_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-extraction::meta_model::artefact feature_bundle_header_formatter::
+extraction::meta_model::artefact feature_template_bundle_header_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& fb(a.as<assets::meta_model::variability::feature_bundle>(e));
+    const auto& fb(a.as<assets::meta_model::variability::feature_template_bundle>(e));
 
     {
         const auto sn(fb.name().simple());

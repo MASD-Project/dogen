@@ -51,7 +51,7 @@
 #include "dogen.assets/types/meta_model/decoration/modeline_group.hpp"
 #include "dogen.assets/types/meta_model/decoration/generation_marker.hpp"
 #include "dogen.assets/types/meta_model/variability/profile_template.hpp"
-#include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
+#include "dogen.assets/types/meta_model/variability/feature_template_bundle.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_template_initializer.hpp"
 #include "dogen.assets/types/meta_model/mapping/fixed_mappable.hpp"
 #include "dogen.assets/types/meta_model/mapping/extensible_mappable.hpp"
@@ -273,11 +273,11 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::variability::feature_bundle to a assets
+     * masd::variability::feature_template_bundle to a assets
      * variability feature template group
      */
-    boost::shared_ptr<assets::meta_model::variability::feature_bundle>
-    to_variability_feature_bundle(const assets::meta_model::location& l,
+    boost::shared_ptr<assets::meta_model::variability::feature_template_bundle>
+    to_variability_feature_template_bundle(const assets::meta_model::location& l,
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 

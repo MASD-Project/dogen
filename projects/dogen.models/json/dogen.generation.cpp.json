@@ -1572,14 +1572,14 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::feature_bundle_header_formatter",
+      "name": "formatters::types::feature_template_bundle_header_formatter",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::feature_bundle_implementation_formatter",
+      "name": "formatters::types::feature_template_bundle_implementation_formatter",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
@@ -1602,7 +1602,7 @@
     {
       "name": "formatters::types::features",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
@@ -1741,19 +1741,19 @@
           }
         },
         {
-          "name": "masd.generation.cpp.types.feature_bundle_header.postfix",
+          "name": "masd.generation.cpp.types.feature_template_bundle_header.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.feature_bundle_header.postfix"
+            "masd.variability.qualified_name": "masd.generation.cpp.types.feature_template_bundle_header.postfix"
           }
         },
         {
-          "name": "masd.generation.cpp.types.feature_bundle_implementation.postfix",
+          "name": "masd.generation.cpp.types.feature_template_bundle_implementation.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.feature_bundle_implementation.postfix"
+            "masd.variability.qualified_name": "masd.generation.cpp.types.feature_template_bundle_implementation.postfix"
           }
         },
         {
@@ -1792,7 +1792,7 @@
     {
       "name": "formatters::hash::features",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
@@ -1887,7 +1887,7 @@
     {
       "name": "formatters::io::features",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
@@ -1982,7 +1982,7 @@
     {
       "name": "formatters::odb::features",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
@@ -2095,7 +2095,7 @@
     {
       "name": "formatters::test_data::features",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
@@ -2190,7 +2190,7 @@
     {
       "name": "formatters::serialization::features",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
@@ -2309,7 +2309,7 @@
     {
       "name": "formatters::tests::features",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
@@ -2380,7 +2380,7 @@
     {
       "name": "formatters::global_features",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
@@ -2613,7 +2613,7 @@
     {
       "name": "formatters::facet_features",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "element",
@@ -2638,7 +2638,7 @@
     {
       "name": "formatters::archetype_features",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "element",
@@ -2694,7 +2694,7 @@
     {
       "name": "formatters::lexical_cast::features",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
@@ -2822,7 +2822,7 @@
     {
       "name": "formatters::templates::features",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
@@ -2953,7 +2953,7 @@
     {
       "name": "formatters::visual_studio::features",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
@@ -3094,7 +3094,7 @@
     {
       "name": "formatters::build::features",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",

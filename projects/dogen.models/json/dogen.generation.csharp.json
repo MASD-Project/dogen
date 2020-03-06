@@ -743,7 +743,7 @@
     {
       "name": "formatters::types::features",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
@@ -821,7 +821,7 @@
     {
       "name": "formatters::io::features",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
@@ -892,7 +892,7 @@
     {
       "name": "formatters::test_data::features",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
@@ -955,7 +955,7 @@
     {
       "name": "formatters::global_features",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
@@ -1013,7 +1013,7 @@
     {
       "name": "formatters::archetype_features",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "element",
@@ -1032,7 +1032,7 @@
     {
       "name": "formatters::facet_features",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "element",
@@ -1122,7 +1122,7 @@
     {
       "name": "formatters::visual_studio::features",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",

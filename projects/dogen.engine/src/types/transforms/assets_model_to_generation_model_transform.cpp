@@ -113,7 +113,7 @@ compute_total_size(const assets::meta_model::model& m) {
     r += m.decoration_elements().generation_markers().size();
     r += m.decoration_elements().modeline_groups().size();
     r += m.decoration_elements().modelines().size();
-    r += m.variability_elements().feature_bundles().size();
+    r += m.variability_elements().feature_template_bundles().size();
     r += m.variability_elements().feature_template_initializer()
         != nullptr ?  1 : 0;
     r += m.templating_elements().logic_less_templates().size();

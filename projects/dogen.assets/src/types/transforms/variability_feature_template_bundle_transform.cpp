@@ -29,12 +29,12 @@
 #include "dogen.assets/types/meta_model/variability/feature_template_initializer.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
 #include "dogen.assets/types/transforms/transformation_error.hpp"
-#include "dogen.assets/types/transforms/variability_feature_bundle_transform.hpp"
+#include "dogen.assets/types/transforms/variability_feature_template_bundle_transform.hpp"
 
 namespace {
 
 const std::string
-transform_id("assets.transforms.variability_feature_bundle_transform");
+transform_id("assets.transforms.variability_feature_template_bundle_transform");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -58,7 +58,7 @@ inline bool operator<(const name& lhs, const name& rhs) {
 
 namespace dogen::assets::transforms {
 
-void variability_feature_bundle_transform::update(
+void variability_feature_template_bundle_transform::update(
     const features::variability_templates::feature_group& fg,
     meta_model::variability::feature_template& ft) {
 
@@ -73,9 +73,9 @@ void variability_feature_bundle_transform::update(
         ft.binding_point(lexical_cast<binding_point>(scfg.binding_point));
 }
 
-void variability_feature_bundle_transform::
+void variability_feature_template_bundle_transform::
 update(const features::variability_bundle::feature_group& fg,
-    meta_model::variability::feature_bundle& fb) {
+    meta_model::variability::feature_template_bundle& fb) {
 
     using features::variability_bundle;
     const auto scfg(variability_bundle::make_static_configuration(fg, fb));
@@ -101,7 +101,7 @@ update(const features::variability_bundle::feature_group& fg,
 
 }
 
-void variability_feature_bundle_transform::
+void variability_feature_template_bundle_transform::
 apply(const context& ctx,
     const std::unordered_map<std::string, std::string>& fixed_mappings,
     meta_model::model& m) {
@@ -109,7 +109,7 @@ apply(const context& ctx,
         "variability feature bundle transform", transform_id,
         m.name().qualified().dot(), *ctx.tracer(), m);
 
-    auto& bundles(m.variability_elements().feature_bundles());
+    auto& bundles(m.variability_elements().feature_template_bundles());
     if (bundles.empty())
         return;
 

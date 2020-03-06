@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_FEATURE_BUNDLE_HPP
-#define DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_FEATURE_BUNDLE_HPP
+#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_BUNDLE_HPP
+#define DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_BUNDLE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -48,20 +48,20 @@ namespace dogen::assets::meta_model::variability {
  * processing and the generation of a static configuration class to represent the
  * feature once read out from the dynamic configuration.
  */
-class feature_bundle final : public dogen::assets::meta_model::element {
+class feature_template_bundle final : public dogen::assets::meta_model::element {
 public:
-    feature_bundle(const feature_bundle&) = default;
+    feature_template_bundle(const feature_template_bundle&) = default;
 
 public:
-    feature_bundle();
+    feature_template_bundle();
 
-    virtual ~feature_bundle() noexcept { }
-
-public:
-    feature_bundle(feature_bundle&& rhs);
+    virtual ~feature_template_bundle() noexcept { }
 
 public:
-    feature_bundle(
+    feature_template_bundle(feature_template_bundle&& rhs);
+
+public:
+    feature_template_bundle(
         const dogen::assets::meta_model::name& name,
         const std::string& documentation,
         const dogen::assets::meta_model::origin_types origin_type,
@@ -192,8 +192,8 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const feature_bundle& rhs) const;
-    bool operator!=(const feature_bundle& rhs) const {
+    bool operator==(const feature_template_bundle& rhs) const;
+    bool operator!=(const feature_template_bundle& rhs) const {
         return !this->operator==(rhs);
     }
 
@@ -201,8 +201,8 @@ public:
     bool equals(const dogen::assets::meta_model::element& other) const override;
 
 public:
-    void swap(feature_bundle& other) noexcept;
-    feature_bundle& operator=(feature_bundle other);
+    void swap(feature_template_bundle& other) noexcept;
+    feature_template_bundle& operator=(feature_template_bundle other);
 
 private:
     std::list<dogen::assets::meta_model::name> transparent_associations_;
@@ -222,8 +222,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::assets::meta_model::variability::feature_bundle& lhs,
-    dogen::assets::meta_model::variability::feature_bundle& rhs) {
+    dogen::assets::meta_model::variability::feature_template_bundle& lhs,
+    dogen::assets::meta_model::variability::feature_template_bundle& rhs) {
     lhs.swap(rhs);
 }
 

@@ -90,8 +90,8 @@ std::ostream& operator<<(std::ostream& s, const static_stereotypes& v) {
     case static_stereotypes::variability_profile_template:
         attr = "\"variability_profile_template\"";
         break;
-    case static_stereotypes::variability_feature_bundle:
-        attr = "\"variability_feature_bundle\"";
+    case static_stereotypes::variability_feature_template_bundle:
+        attr = "\"variability_feature_template_bundle\"";
         break;
     case static_stereotypes::variability_feature_template_initializer:
         attr = "\"variability_feature_template_initializer\"";

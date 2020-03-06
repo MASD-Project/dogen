@@ -148,7 +148,7 @@
       "name": "features::enablement",
       "documentation": "Enablement related properties.\n",
       "stereotypes": [
-        "masd::variability::feature_bundle"
+        "masd::variability::feature_template_bundle"
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "any",

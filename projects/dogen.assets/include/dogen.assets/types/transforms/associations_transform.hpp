@@ -31,7 +31,7 @@
 #include "dogen.assets/types/meta_model/model.hpp"
 #include "dogen.assets/hash/meta_model/name_hash.hpp"
 #include "dogen.assets/types/meta_model/structural/object.hpp"
-#include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
+#include "dogen.assets/types/meta_model/variability/feature_template_bundle.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
 
 namespace dogen::assets::transforms {
@@ -85,7 +85,7 @@ private:
      * it goes along.
      */
     static void walk_name_tree(const meta_model::model& m,
-        meta_model::variability::feature_bundle& fb,
+        meta_model::variability::feature_template_bundle& fb,
         const meta_model::name_tree& nt,
         const bool inherit_opaqueness_from_parent);
 
@@ -99,8 +99,8 @@ private:
     /**
      * @brief Processes a feature bundle.
      */
-    static void process_feature_bundle(const meta_model::model& m,
-        meta_model::variability::feature_bundle& fb);
+    static void process_feature_template_bundle(const meta_model::model& m,
+        meta_model::variability::feature_template_bundle& fb);
 
 public:
     /**

@@ -482,13 +482,13 @@ adapter::to_variability_profile_template(const assets::meta_model::location& l,
     return r;
 }
 
-boost::shared_ptr<assets::meta_model::variability::feature_bundle>
-adapter::to_variability_feature_bundle(
+boost::shared_ptr<assets::meta_model::variability::feature_template_bundle>
+adapter::to_variability_feature_template_bundle(
     const assets::meta_model::location &l,
     const stereotypes_conversion_result &scr,
     const injection::meta_model::element &ie) const {
-    using assets::meta_model::variability::feature_bundle;
-    auto r(boost::make_shared<feature_bundle>());
+    using assets::meta_model::variability::feature_template_bundle;
+    auto r(boost::make_shared<feature_template_bundle>());
     populate_element(l, scr, ie, *r);
 
     using variability::helpers::enum_mapper;

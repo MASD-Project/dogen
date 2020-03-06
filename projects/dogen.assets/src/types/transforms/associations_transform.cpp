@@ -100,7 +100,7 @@ walk_name_tree(const meta_model::model& m, meta_model::structural::object& o,
 }
 
 void associations_transform::walk_name_tree(const meta_model::model& m,
-    meta_model::variability::feature_bundle& fb,
+    meta_model::variability::feature_template_bundle& fb,
     const meta_model::name_tree& nt,
     const bool inherit_opaqueness_from_parent) {
 
@@ -163,8 +163,8 @@ process_object(const meta_model::model& m, meta_model::structural::object& o) {
         remove_duplicates(o.associative_container_keys());
 }
 
-void associations_transform::process_feature_bundle(const meta_model::model& m,
-    meta_model::variability::feature_bundle& fb) {
+void associations_transform::process_feature_template_bundle(const meta_model::model& m,
+    meta_model::variability::feature_template_bundle& fb) {
 
     for (const auto& ft : fb.feature_templates()) {
         const auto& nt(ft.parsed_type());
@@ -198,11 +198,11 @@ apply(const context& ctx, meta_model::model& m) {
     for (auto& pair : objs)
         process_object(m, *pair.second);
 
-    auto& bundles(m.variability_elements().feature_bundles());
+    auto& bundles(m.variability_elements().feature_template_bundles());
     BOOST_LOG_SEV(lg, debug) << "Total feature bundles: " << bundles.size();
 
     for (auto& pair : bundles)
-        process_feature_bundle(m, *pair.second);
+        process_feature_template_bundle(m, *pair.second);
 
     stp.end_transform(m);
 }

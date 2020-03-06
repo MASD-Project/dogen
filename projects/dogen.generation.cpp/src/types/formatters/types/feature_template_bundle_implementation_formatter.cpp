@@ -22,7 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
 #include "dogen.variability/types/helpers/enum_mapper.hpp"
-#include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
+#include "dogen.assets/types/meta_model/variability/feature_template_bundle.hpp"
 #include "dogen.assets/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
@@ -33,66 +33,66 @@
 #include "dogen.generation.cpp/types/formatters/io/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/io/inserter_implementation_helper.hpp"
 #include "dogen.generation.cpp/types/formatters/types/traits.hpp"
-#include "dogen.generation.cpp/types/formatters/types/feature_bundle_implementation_formatter.hpp"
+#include "dogen.generation.cpp/types/formatters/types/feature_template_bundle_implementation_formatter.hpp"
 
 namespace dogen::generation::cpp::formatters::types {
 
-std::string feature_bundle_implementation_formatter::static_id() {
-    return traits::feature_bundle_implementation_archetype();
+std::string feature_template_bundle_implementation_formatter::static_id() {
+    return traits::feature_template_bundle_implementation_archetype();
 }
 
-std::string feature_bundle_implementation_formatter::id() const {
+std::string feature_template_bundle_implementation_formatter::id() const {
     return static_id();
 }
 
 archetypes::location
-feature_bundle_implementation_formatter::archetype_location() const {
+feature_template_bundle_implementation_formatter::archetype_location() const {
     static archetypes::location
         r(cpp::traits::kernel(),  cpp::traits::backend(),
           traits::facet(),
-          feature_bundle_implementation_formatter::static_id());
+          feature_template_bundle_implementation_formatter::static_id());
     return r;
 }
 
-const assets::meta_model::name& feature_bundle_implementation_formatter::meta_name() const {
+const assets::meta_model::name& feature_template_bundle_implementation_formatter::meta_name() const {
     using assets::helpers::meta_name_factory;
-    static auto r(meta_name_factory::make_variability_feature_bundle_name());
+    static auto r(meta_name_factory::make_variability_feature_template_bundle_name());
     return r;
 }
 
-std::string feature_bundle_implementation_formatter::family() const {
+std::string feature_template_bundle_implementation_formatter::family() const {
     return cpp::traits::implementation_family();
 }
 
-inclusion_support_types feature_bundle_implementation_formatter::inclusion_support_type() const {
+inclusion_support_types feature_template_bundle_implementation_formatter::inclusion_support_type() const {
     return inclusion_support_types::not_supported;
 }
 
-boost::filesystem::path feature_bundle_implementation_formatter::inclusion_path(
+boost::filesystem::path feature_template_bundle_implementation_formatter::inclusion_path(
     const formattables::locator& /*l*/, const assets::meta_model::name& n) const {
 
     using namespace dogen::utility::log;
     static logger lg(
-        logger_factory(feature_bundle_implementation_formatter::static_id()));
+        logger_factory(feature_template_bundle_implementation_formatter::static_id()));
     static const std::string not_supported("Inclusion path is not supported: ");
 
     BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
     BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
 }
 
-boost::filesystem::path feature_bundle_implementation_formatter::full_path(
+boost::filesystem::path feature_template_bundle_implementation_formatter::full_path(
     const formattables::locator& l, const assets::meta_model::name& n) const {
     return l.make_full_path_for_cpp_implementation(n, static_id());
 }
 
-std::list<std::string> feature_bundle_implementation_formatter::inclusion_dependencies(
+std::list<std::string> feature_template_bundle_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const assets::meta_model::element& e) const {
-    using assets::meta_model::variability::feature_bundle;
-    const auto& fb(assistant::as<feature_bundle>(e));
+    using assets::meta_model::variability::feature_template_bundle;
+    const auto& fb(assistant::as<feature_template_bundle>(e));
     auto builder(f.make());
 
-    const auto ch_arch(traits::feature_bundle_header_archetype());
+    const auto ch_arch(traits::feature_template_bundle_header_archetype());
     builder.add(fb.name(), ch_arch);
     builder.add("\"dogen.variability/types/helpers/value_factory.hpp\"");
 
@@ -104,10 +104,10 @@ std::list<std::string> feature_bundle_implementation_formatter::inclusion_depend
     return builder.build();
 }
 
-extraction::meta_model::artefact feature_bundle_implementation_formatter::
+extraction::meta_model::artefact feature_template_bundle_implementation_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& fb(a.as<assets::meta_model::variability::feature_bundle>(e));
+    const auto& fb(a.as<assets::meta_model::variability::feature_template_bundle>(e));
 
     {
         const auto sn(fb.name().simple());

@@ -30,7 +30,7 @@
 #include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.assets/types/meta_model/model_set.hpp"
 #include "dogen.assets/types/meta_model/mapping/destination.hpp"
-#include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
+#include "dogen.assets/types/meta_model/variability/feature_template_bundle.hpp"
 #include "dogen.assets/types/transforms/context_fwd.hpp"
 
 namespace dogen::assets::transforms {
