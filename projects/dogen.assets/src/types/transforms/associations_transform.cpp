@@ -40,67 +40,12 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::assets::transforms {
 
-void associations_transform::remove_duplicates(
-    std::list<meta_model::name>& names,
-    std::unordered_set<meta_model::name> processed) {
-    BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
-                             << names.size() << ". Processed starts with size: "
-                             << processed.size();
-
-    auto i(names.begin());
-    while (i != names.end()) {
-        const auto n(*i);
-        if (processed.find(n) != processed.end()) {
-            const auto j(i++);
-            names.erase(j);
-            continue;
-        }
-        ++i;
-        processed.insert(n);
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Removed duplicates from list. final size: "
-                             << names.size();
-}
-
-void associations_transform::
-walk_name_tree(const meta_model::model& m, meta_model::structural::object& o,
-    const meta_model::name_tree& nt,
-    const bool inherit_opaqueness_from_parent) {
-
-    const auto n(nt.current());
-    if (inherit_opaqueness_from_parent)
-        o.opaque_associations().push_back(n);
-    else
-        o.transparent_associations().push_back(n);
-
-    /*
-     * If the parent type is an associative container, the first child
-     * type will represent the key of the associative container and
-     * the second type will be its value. We need to remember the
-     * keys.
-     *
-     * Note that we must still continue to walk the tree even if the
-     * type is not an associative container, since there are other
-     * properties to set (see above).
-     */
-    bool is_first(true);
-    const auto& objs(m.structural_elements().objects());
-    const auto i(objs.find(n.qualified().dot()));
-    const auto is_associative_container(i != objs.end() &&
-        i->second->is_associative_container());
-
-    for (const auto c : nt.children()) {
-        if (is_first && is_associative_container)
-            o.associative_container_keys().push_back(c.current());
-
-        walk_name_tree(m, o, c, nt.are_children_opaque());
-        is_first = false;
-    }
-}
-
-void associations_transform::walk_name_tree(const meta_model::model& m,
-    meta_model::variability::feature_template_bundle& fb,
+/**
+ * @brief Walks through the name tree, picking up associations as
+ * it goes along.
+ */
+template<typename Associatable>
+void walk_name_tree(const meta_model::model& m, Associatable& fb,
     const meta_model::name_tree& nt,
     const bool inherit_opaqueness_from_parent) {
 
@@ -135,6 +80,55 @@ void associations_transform::walk_name_tree(const meta_model::model& m,
     }
 }
 
+/**
+ * @brief Removes duplicate names, preserving the original order
+ * of elements in the list.
+ *
+ * @param names list of names to process
+ * @param processed list of names that have already been processed
+ * somewhere else, if any.
+ */
+void remove_duplicates(std::list<meta_model::name>& names,
+    std::unordered_set<meta_model::name> processed =
+    std::unordered_set<meta_model::name>()) {
+    BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
+                             << names.size() << ". Processed starts with size: "
+                             << processed.size();
+
+    auto i(names.begin());
+    while (i != names.end()) {
+        const auto n(*i);
+        if (processed.find(n) != processed.end()) {
+            const auto j(i++);
+            names.erase(j);
+            continue;
+        }
+        ++i;
+        processed.insert(n);
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Removed duplicates from list. final size: "
+                             << names.size();
+}
+
+template<typename Associatable>
+void process(Associatable& a) {
+    std::unordered_set<meta_model::name> transparent_associations;
+    if (!a.transparent_associations().empty()) {
+        remove_duplicates(a.transparent_associations());
+        for (const auto n : a.transparent_associations())
+        transparent_associations.insert(n);
+    }
+
+    if (!a.opaque_associations().empty()) {
+        /*
+         * Ensure we remove any items which are simultaneously regular
+         * and weak associations.
+         */
+        remove_duplicates(a.opaque_associations(), transparent_associations);
+    }
+}
+
 void associations_transform::
 process_object(const meta_model::model& m, meta_model::structural::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Expand object: " << o.name().qualified().dot();
@@ -144,47 +138,20 @@ process_object(const meta_model::model& m, meta_model::structural::object& o) {
         walk_name_tree(m, o, nt, false/*inherit_opaqueness_from_parent*/);
     }
 
-    std::unordered_set<meta_model::name> transparent_associations;
-    if (!o.transparent_associations().empty()) {
-        remove_duplicates(o.transparent_associations());
-        for (const auto n : o.transparent_associations())
-            transparent_associations.insert(n);
-    }
-
-    if (!o.opaque_associations().empty()) {
-        /*
-         * Ensure we remove any items which are simultaneously regular
-         * and weak associations.
-         */
-        remove_duplicates(o.opaque_associations(), transparent_associations);
-    }
-
+    process(o);
     if (!o.associative_container_keys().empty())
         remove_duplicates(o.associative_container_keys());
 }
 
-void associations_transform::process_feature_template_bundle(const meta_model::model& m,
+void associations_transform::
+process_feature_template_bundle(const meta_model::model& m,
     meta_model::variability::feature_template_bundle& fb) {
 
     for (const auto& ft : fb.feature_templates()) {
         const auto& nt(ft.parsed_type());
         walk_name_tree(m, fb, nt, false/*inherit_opaqueness_from_parent*/);
     }
-
-    std::unordered_set<meta_model::name> transparent_associations;
-    if (!fb.transparent_associations().empty()) {
-        remove_duplicates(fb.transparent_associations());
-        for (const auto n : fb.transparent_associations())
-            transparent_associations.insert(n);
-    }
-
-    if (!fb.opaque_associations().empty()) {
-        /*
-         * Ensure we remove any items which are simultaneously regular
-         * and weak associations.
-         */
-        remove_duplicates(fb.opaque_associations(), transparent_associations);
-    }
+    process(fb);
 }
 
 void associations_transform::

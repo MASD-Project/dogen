@@ -61,36 +61,6 @@ namespace dogen::assets::transforms {
 class associations_transform final {
 private:
     /**
-     * @brief Removes duplicate names, preserving the original order
-     * of elements in the list.
-     *
-     * @param names list of names to process
-     * @param processed list of names that have already been processed
-     * somewhere else, if any.
-     */
-    static void remove_duplicates(std::list<meta_model::name>& names,
-        std::unordered_set<meta_model::name> processed =
-        std::unordered_set<meta_model::name>());
-
-    /**
-     * @brief Walks through the name tree, picking up associations as
-     * it goes along.
-     */
-    static void walk_name_tree(const meta_model::model& m,
-        meta_model::structural::object& o, const meta_model::name_tree& nt,
-        const bool inherit_opaqueness_from_parent);
-
-    /**
-     * @brief Walks through the name tree, picking up associations as
-     * it goes along.
-     */
-    static void walk_name_tree(const meta_model::model& m,
-        meta_model::variability::feature_template_bundle& fb,
-        const meta_model::name_tree& nt,
-        const bool inherit_opaqueness_from_parent);
-
-private:
-    /**
      * @brief Processes a specific object.
      */
     static void process_object(const meta_model::model& m,
