@@ -1493,42 +1493,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::rapidjson",
-      "documentation": "Formatters that enable serialisation into and\nfrom JSON,using the RapidJson library.\n",
-      "tagged_values": {
-        "masd.injection.dia.comment": "true"
-      },
-      "fallback_element_type": "masd::module"
-    },
-    {
-      "name": "formatters::rapidjson::class_header_formatter",
-      "stereotypes": [
-        "dogen::cpp::artefact_formatter"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formatters::rapidjson::initializer",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formatters::rapidjson::traits",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formatters::rapidjson::class_implementation_formatter",
-      "stereotypes": [
-        "dogen::cpp::artefact_formatter"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formatters::repository_factory",
       "stereotypes": [
         "dogen::handcrafted::typeable"
