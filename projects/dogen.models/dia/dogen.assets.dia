@@ -28313,13 +28313,13 @@ their individual binding points.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O197">
       <dia:attribute name="obj_pos">
-        <dia:point val="30,-62"/>
+        <dia:point val="38,-62"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.95,-62.05;57.885,-51.15"/>
+        <dia:rectangle val="37.95,-62.05;65.885,-51.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="30,-62"/>
+        <dia:point val="38,-62"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
@@ -28668,16 +28668,16 @@ This is only required if the feature template is optional and has no default val
         <dia:point val="14,-66"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.95,-66.05;27.01,-62.35"/>
+        <dia:rectangle val="13.95,-66.05;30.72,-61.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="14,-66"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.959999999999999"/>
+        <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#feature_template_initializer#</dia:string>
@@ -28686,7 +28686,7 @@ This is only required if the feature template is optional and has no default val
         <dia:string>#assets::meta_element#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Responsible for initialising features and feature templates.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -28769,7 +28769,7 @@ This is only required if the feature template is optional and has no default val
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#bundles#</dia:string>
+            <dia:string>#feature_template_bundles#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::list&lt;name&gt;#</dia:string>
@@ -28778,7 +28778,30 @@ This is only required if the feature template is optional and has no default val
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
+            <dia:string>#Names of all the templates that this initialiser will register.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#feature_bundles#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::list&lt;name&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
             <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Names of all the features that this initialiser will register.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -28911,7 +28934,7 @@ This is only required if the feature template is optional and has no default val
         <dia:point val="50.4575,-67.35"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.8675,-68.1;51.2075,-61.2"/>
+        <dia:rectangle val="49.7075,-68.1;52.1175,-61.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -28919,8 +28942,8 @@ This is only required if the feature template is optional and has no default val
       <dia:attribute name="orth_points">
         <dia:point val="50.4575,-67.35"/>
         <dia:point val="50.4575,-64"/>
-        <dia:point val="43.9175,-64"/>
-        <dia:point val="43.9175,-62"/>
+        <dia:point val="51.9175,-64"/>
+        <dia:point val="51.9175,-62"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -37427,7 +37450,7 @@ extend the mappings as required.#</dia:string>
         <dia:point val="12.885,-69.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="12.135,-70.55;20.68,-65.2"/>
+        <dia:rectangle val="12.135,-70.55;22.535,-65.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -37435,8 +37458,8 @@ extend the mappings as required.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="12.885,-69.8"/>
         <dia:point val="12.885,-68"/>
-        <dia:point val="20.48,-68"/>
-        <dia:point val="20.48,-66"/>
+        <dia:point val="22.335,-68"/>
+        <dia:point val="22.335,-66"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

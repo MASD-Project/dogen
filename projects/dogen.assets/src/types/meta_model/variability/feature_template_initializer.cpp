@@ -56,7 +56,8 @@ feature_template_initializer::feature_template_initializer(
     const std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& decoration,
-    const std::list<dogen::assets::meta_model::name>& bundles)
+    const std::list<dogen::assets::meta_model::name>& feature_template_bundles,
+    const std::list<dogen::assets::meta_model::name>& feature_bundles)
     : dogen::assets::meta_model::element(
       name,
       documentation,
@@ -73,7 +74,8 @@ feature_template_initializer::feature_template_initializer(
       artefact_properties,
       archetype_location_properties,
       decoration),
-      bundles_(bundles) { }
+      feature_template_bundles_(feature_template_bundles),
+      feature_bundles_(feature_bundles) { }
 
 void feature_template_initializer::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -97,7 +99,8 @@ void feature_template_initializer::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     dogen::assets::meta_model::element::to_stream(s);
     s << ", "
-      << "\"bundles\": " << bundles_
+      << "\"feature_template_bundles\": " << feature_template_bundles_ << ", "
+      << "\"feature_bundles\": " << feature_bundles_
       << " }";
 }
 
@@ -105,7 +108,8 @@ void feature_template_initializer::swap(feature_template_initializer& other) noe
     dogen::assets::meta_model::element::swap(other);
 
     using std::swap;
-    swap(bundles_, other.bundles_);
+    swap(feature_template_bundles_, other.feature_template_bundles_);
+    swap(feature_bundles_, other.feature_bundles_);
 }
 
 bool feature_template_initializer::equals(const dogen::assets::meta_model::element& other) const {
@@ -116,7 +120,8 @@ bool feature_template_initializer::equals(const dogen::assets::meta_model::eleme
 
 bool feature_template_initializer::operator==(const feature_template_initializer& rhs) const {
     return dogen::assets::meta_model::element::compare(rhs) &&
-        bundles_ == rhs.bundles_;
+        feature_template_bundles_ == rhs.feature_template_bundles_ &&
+        feature_bundles_ == rhs.feature_bundles_;
 }
 
 feature_template_initializer& feature_template_initializer::operator=(feature_template_initializer other) {
@@ -125,20 +130,36 @@ feature_template_initializer& feature_template_initializer::operator=(feature_te
     return *this;
 }
 
-const std::list<dogen::assets::meta_model::name>& feature_template_initializer::bundles() const {
-    return bundles_;
+const std::list<dogen::assets::meta_model::name>& feature_template_initializer::feature_template_bundles() const {
+    return feature_template_bundles_;
 }
 
-std::list<dogen::assets::meta_model::name>& feature_template_initializer::bundles() {
-    return bundles_;
+std::list<dogen::assets::meta_model::name>& feature_template_initializer::feature_template_bundles() {
+    return feature_template_bundles_;
 }
 
-void feature_template_initializer::bundles(const std::list<dogen::assets::meta_model::name>& v) {
-    bundles_ = v;
+void feature_template_initializer::feature_template_bundles(const std::list<dogen::assets::meta_model::name>& v) {
+    feature_template_bundles_ = v;
 }
 
-void feature_template_initializer::bundles(const std::list<dogen::assets::meta_model::name>&& v) {
-    bundles_ = std::move(v);
+void feature_template_initializer::feature_template_bundles(const std::list<dogen::assets::meta_model::name>&& v) {
+    feature_template_bundles_ = std::move(v);
+}
+
+const std::list<dogen::assets::meta_model::name>& feature_template_initializer::feature_bundles() const {
+    return feature_bundles_;
+}
+
+std::list<dogen::assets::meta_model::name>& feature_template_initializer::feature_bundles() {
+    return feature_bundles_;
+}
+
+void feature_template_initializer::feature_bundles(const std::list<dogen::assets::meta_model::name>& v) {
+    feature_bundles_ = v;
+}
+
+void feature_template_initializer::feature_bundles(const std::list<dogen::assets::meta_model::name>&& v) {
+    feature_bundles_ = std::move(v);
 }
 
 }

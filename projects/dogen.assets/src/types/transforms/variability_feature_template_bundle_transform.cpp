@@ -109,13 +109,13 @@ apply(const context& ctx,
         "variability feature bundle transform", transform_id,
         m.name().qualified().dot(), *ctx.tracer(), m);
 
-    auto& bundles(m.variability_elements().feature_template_bundles());
-    if (bundles.empty())
+    auto& ftb(m.variability_elements().feature_template_bundles());
+    if (ftb.empty())
         return;
 
     const auto& fm(*ctx.feature_model());
     const auto fg1(features::variability_templates::make_feature_group(fm));
-    for (auto& pair : bundles) {
+    for (auto& pair : ftb) {
         auto& fb(*pair.second);
 
         using features::variability_bundle;
@@ -206,11 +206,11 @@ apply(const context& ctx,
         return;
 
     auto& fti(*m.variability_elements().feature_template_initializer());
-    for (auto& pair : bundles) {
+    for (auto& pair : ftb) {
         auto& fb(*pair.second);
-        fti.bundles().push_back(fb.name());
+        fti.feature_template_bundles().push_back(fb.name());
     }
-    fti.bundles().sort();
+    fti.feature_template_bundles().sort();
 
     stp.end_transform(m);
 }

@@ -33,6 +33,9 @@
 
 namespace dogen::assets::meta_model::variability {
 
+/**
+ * @brief Responsible for initialising features and feature templates.
+ */
 class feature_template_initializer final : public dogen::assets::meta_model::element {
 public:
     feature_template_initializer() = default;
@@ -58,7 +61,8 @@ public:
         const std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& decoration,
-        const std::list<dogen::assets::meta_model::name>& bundles);
+        const std::list<dogen::assets::meta_model::name>& feature_template_bundles,
+        const std::list<dogen::assets::meta_model::name>& feature_bundles);
 
 public:
     using element::accept;
@@ -71,10 +75,25 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const std::list<dogen::assets::meta_model::name>& bundles() const;
-    std::list<dogen::assets::meta_model::name>& bundles();
-    void bundles(const std::list<dogen::assets::meta_model::name>& v);
-    void bundles(const std::list<dogen::assets::meta_model::name>&& v);
+    /**
+     * @brief Names of all the templates that this initialiser will register.
+     */
+    /**@{*/
+    const std::list<dogen::assets::meta_model::name>& feature_template_bundles() const;
+    std::list<dogen::assets::meta_model::name>& feature_template_bundles();
+    void feature_template_bundles(const std::list<dogen::assets::meta_model::name>& v);
+    void feature_template_bundles(const std::list<dogen::assets::meta_model::name>&& v);
+    /**@}*/
+
+    /**
+     * @brief Names of all the features that this initialiser will register.
+     */
+    /**@{*/
+    const std::list<dogen::assets::meta_model::name>& feature_bundles() const;
+    std::list<dogen::assets::meta_model::name>& feature_bundles();
+    void feature_bundles(const std::list<dogen::assets::meta_model::name>& v);
+    void feature_bundles(const std::list<dogen::assets::meta_model::name>&& v);
+    /**@}*/
 
 public:
     bool operator==(const feature_template_initializer& rhs) const;
@@ -90,7 +109,8 @@ public:
     feature_template_initializer& operator=(feature_template_initializer other);
 
 private:
-    std::list<dogen::assets::meta_model::name> bundles_;
+    std::list<dogen::assets::meta_model::name> feature_template_bundles_;
+    std::list<dogen::assets::meta_model::name> feature_bundles_;
 };
 
 }

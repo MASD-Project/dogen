@@ -94,7 +94,7 @@ std::list<std::string> feature_template_initializer_implementation_formatter::in
     builder.add(o.name(), ch_arch);
 
     const auto fb_arch(traits::feature_template_bundle_header_archetype());
-    builder.add(o.bundles(), fb_arch);
+    builder.add(o.feature_template_bundles(), fb_arch);
 
     return builder.build();
 }
@@ -116,7 +116,7 @@ format(const context& ctx, const assets::meta_model::element& e) const {
 a.stream() << std::endl;
 a.stream() << "void " << sn << "::" << std::endl;
 a.stream() << "register_templates(variability::helpers::feature_template_registrar& rg) {" << std::endl;
-            for (const auto& n : o.bundles())
+            for (const auto& n : o.feature_template_bundles())
 a.stream() << "    rg.register_templates(" << n.qualified().colon() << "::make_templates());" << std::endl;
 a.stream() << std::endl;
 a.stream() << "}" << std::endl;

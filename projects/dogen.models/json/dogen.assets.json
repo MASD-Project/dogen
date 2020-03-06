@@ -2029,14 +2029,21 @@
     },
     {
       "name": "meta_model::variability::feature_template_initializer",
+      "documentation": "Responsible for initialising features and feature templates.\n",
       "stereotypes": [
         "assets::meta_element"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "bundles",
-          "type": "std::list<name>"
+          "name": "feature_template_bundles",
+          "type": "std::list<name>",
+          "documentation": "Names of all the templates that this initialiser will register.\n"
+        },
+        {
+          "name": "feature_bundles",
+          "type": "std::list<name>",
+          "documentation": "Names of all the features that this initialiser will register.\n"
         }
       ]
     },
