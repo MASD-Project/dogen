@@ -51,17 +51,18 @@ enum class static_stereotypes : unsigned int {
     decoration_generation_marker = 17,
     decoration_licence = 18,
     variability_profile_template = 19,
-    variability_feature_template_bundle = 20,
-    variability_feature_template_initializer = 21,
-    mapping_fixed_mappable = 22,
-    mapping_extensible_mappable = 23,
-    templating_logic_less_template = 24,
-    serialization_type_registrar = 25,
-    visual_studio_solution = 26,
-    visual_studio_project = 27,
-    visual_studio_msbuild_targets = 28,
-    orm_common_odb_options = 29,
-    build_cmakelists = 30
+    variability_feature_bundle = 20,
+    variability_feature_template_bundle = 21,
+    variability_initializer = 22,
+    mapping_fixed_mappable = 23,
+    mapping_extensible_mappable = 24,
+    templating_logic_less_template = 25,
+    serialization_type_registrar = 26,
+    visual_studio_solution = 27,
+    visual_studio_project = 28,
+    visual_studio_msbuild_targets = 29,
+    orm_common_odb_options = 30,
+    build_cmakelists = 31
 };
 
 }

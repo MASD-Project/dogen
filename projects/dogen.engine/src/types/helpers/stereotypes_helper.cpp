@@ -133,7 +133,7 @@ static_stereotypes stereotypes_helper::from_string(const std::string& s) const {
     else if (s == stereotype_variability_feature_template_bundle)
         return static_stereotypes::variability_feature_template_bundle;
     else if (s == stereotype_variability_initializer)
-        return static_stereotypes::variability_feature_template_initializer;
+        return static_stereotypes::variability_initializer;
     else if (s == stereotype_mapping_fixed_mappable)
         return static_stereotypes::mapping_fixed_mappable;
     else if (s == stereotype_mapping_extensible_mappable)
@@ -224,7 +224,7 @@ to_string(const static_stereotypes ss) const {
         return stereotype_variability_profile_template;
     case static_stereotypes::variability_feature_template_bundle:
         return stereotype_variability_initializer;
-    case static_stereotypes::variability_feature_template_initializer:
+    case static_stereotypes::variability_initializer:
         return stereotype_variability_initializer;
     case static_stereotypes::mapping_fixed_mappable:
         return stereotype_mapping_fixed_mappable;
@@ -271,7 +271,7 @@ is_element_type(const static_stereotypes ss) const {
         ss == static_stereotypes::decoration_licence ||
         ss == static_stereotypes::variability_profile_template ||
         ss == static_stereotypes::variability_feature_template_bundle ||
-        ss == static_stereotypes::variability_feature_template_initializer ||
+        ss == static_stereotypes::variability_initializer ||
         ss == static_stereotypes::mapping_fixed_mappable ||
         ss == static_stereotypes::mapping_extensible_mappable ||
         ss == static_stereotypes::templating_logic_less_template ||

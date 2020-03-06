@@ -1506,11 +1506,15 @@
           "type": ""
         },
         {
+          "name": "variability_feature_bundle",
+          "type": ""
+        },
+        {
           "name": "variability_feature_template_bundle",
           "type": ""
         },
         {
-          "name": "variability_feature_template_initializer",
+          "name": "variability_initializer",
           "type": ""
         },
         {
