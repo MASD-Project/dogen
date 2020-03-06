@@ -137,7 +137,7 @@ public:
 #>
 
 public:
-    static std::list<dogen::variability::meta_model::features>
+    static std::list<dogen::variability::meta_model::feature>
     make_features();
 };
 

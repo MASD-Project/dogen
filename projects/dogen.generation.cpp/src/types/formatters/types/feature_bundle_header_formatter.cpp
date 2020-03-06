@@ -172,7 +172,7 @@ a.stream() << "    }" << std::endl;
             }
 a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
-a.stream() << "    static std::list<dogen::variability::meta_model::features>" << std::endl;
+a.stream() << "    static std::list<dogen::variability::meta_model::feature>" << std::endl;
 a.stream() << "    make_features();" << std::endl;
 a.stream() << "};" << std::endl;
 a.stream() << std::endl;
