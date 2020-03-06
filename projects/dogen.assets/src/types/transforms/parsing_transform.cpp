@@ -161,8 +161,8 @@ void parsing_transform::apply(const context& ctx, meta_model::model& m) {
         try {
             const helpers::legacy_name_tree_parser ntp(ts);
 
-            for(auto& ft : fb.features()) {
-                const auto ut(boost::algorithm::trim_copy(ft.mapped_type()));
+            for(auto& f : fb.features()) {
+                const auto ut(boost::algorithm::trim_copy(f.mapped_type()));
 
                 if (ut.empty()) {
                     BOOST_LOG_SEV(lg, error) << empty_type << id;
@@ -170,7 +170,7 @@ void parsing_transform::apply(const context& ctx, meta_model::model& m) {
                         transformation_error(empty_type + id));
                 }
                 auto nt(ntp.parse(ut));
-                ft.parsed_type(nt);
+                f.parsed_type(nt);
             }
         } catch (boost::exception& e) {
             e << errmsg_parsing_owner(id);
