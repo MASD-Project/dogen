@@ -24,7 +24,7 @@
 namespace dogen::engine::features {
 
 void initializer::
-register_templates(variability::helpers::feature_template_registrar& rg) {
+register_templates(variability::helpers::registrar& rg) {
     rg.register_templates(dogen::engine::features::model_location::make_templates());
 
 }

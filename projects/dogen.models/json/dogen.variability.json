@@ -850,7 +850,7 @@
       ]
     },
     {
-      "name": "helpers::feature_template_registrar",
+      "name": "helpers::registrar",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

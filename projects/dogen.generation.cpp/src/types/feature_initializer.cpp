@@ -37,7 +37,7 @@
 namespace dogen::generation::cpp {
 
 void feature_initializer::
-register_templates(variability::helpers::feature_template_registrar& rg) {
+register_templates(variability::helpers::registrar& rg) {
     rg.register_templates(dogen::generation::cpp::formatters::archetype_features::make_templates());
     rg.register_templates(dogen::generation::cpp::formatters::build::features::make_templates());
     rg.register_templates(dogen::generation::cpp::formatters::facet_features::make_templates());

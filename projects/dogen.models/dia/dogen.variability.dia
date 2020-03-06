@@ -14466,7 +14466,7 @@ alias.#</dia:string>
         <dia:real val="7.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#feature_template_registrar#</dia:string>
+        <dia:string>#registrar#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>

@@ -81,7 +81,7 @@ std::list<std::string> variability_initializer_header_formatter::inclusion_depen
     using assets::meta_model::variability::initializer;
     auto builder(f.make());
     builder.add("\"dogen.variability/types/meta_model/feature_template.hpp\"");
-    builder.add("\"dogen.variability/types/helpers/feature_template_registrar.hpp\"");
+    builder.add("\"dogen.variability/types/helpers/registrar.hpp\"");
 
     return builder.build();
 }
@@ -104,8 +104,7 @@ a.stream() << " * @brief Registers all of the available feature templates with r
 a.stream() << " */" << std::endl;
 a.stream() << "class " << sn << " final {" << std::endl;
 a.stream() << "public:" << std::endl;
-a.stream() << "    static void register_templates(" << std::endl;
-a.stream() << "        variability::helpers::feature_template_registrar& rg);" << std::endl;
+a.stream() << "    static void register_templates(variability::helpers::registrar& rg);" << std::endl;
 a.stream() << "};" << std::endl;
 a.stream() << std::endl;
         }

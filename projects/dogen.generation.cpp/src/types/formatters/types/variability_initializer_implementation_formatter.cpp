@@ -115,7 +115,7 @@ format(const context& ctx, const assets::meta_model::element& e) const {
             auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
 a.stream() << "void " << sn << "::" << std::endl;
-a.stream() << "register_templates(variability::helpers::feature_template_registrar& rg) {" << std::endl;
+a.stream() << "register_templates(variability::helpers::registrar& rg) {" << std::endl;
             for (const auto& n : o.feature_template_bundles())
 a.stream() << "    rg.register_templates(" << n.qualified().colon() << "::make_templates());" << std::endl;
 a.stream() << std::endl;

@@ -29,7 +29,7 @@
 #include "dogen.archetypes/types/location_repository_builder.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
 #include "dogen.variability/types/features/initializer.hpp"
-#include "dogen.variability/types/helpers/feature_template_registrar.hpp"
+#include "dogen.variability/types/helpers/registrar.hpp"
 #include "dogen.variability/types/meta_model/feature_template_repository.hpp"
 #include "dogen.variability/types/transforms/feature_model_production_chain.hpp"
 #include "dogen.templating/types/initializer.hpp"
@@ -106,7 +106,7 @@ create_archetype_location_repository(
 
 variability::meta_model::feature_template_repository
 make_feature_template_repository() {
-    variability::helpers::feature_template_registrar rg;
+    variability::helpers::registrar rg;
     injection::features::initializer::register_templates(rg);
     assets::features::initializer::register_templates(rg);
     generation::features::initializer::register_templates(rg);

@@ -56,7 +56,7 @@ format(const context& ctx, const assets::meta_model::element& e) const {
 #>
 
 void <#= sn #>::
-register_templates(variability::helpers::feature_template_registrar& rg) {
+register_templates(variability::helpers::registrar& rg) {
 <#+
             for (const auto& n : o.feature_template_bundles())
 #>

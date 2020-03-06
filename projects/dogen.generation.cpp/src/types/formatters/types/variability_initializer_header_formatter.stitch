@@ -29,7 +29,7 @@ std::list<std::string> variability_initializer_header_formatter::inclusion_depen
     using assets::meta_model::variability::initializer;
     auto builder(f.make());
     builder.add("\"dogen.variability/types/meta_model/feature_template.hpp\"");
-    builder.add("\"dogen.variability/types/helpers/feature_template_registrar.hpp\"");
+    builder.add("\"dogen.variability/types/helpers/registrar.hpp\"");
 
     return builder.build();
 }
@@ -53,8 +53,7 @@ format(const context& ctx, const assets::meta_model::element& e) const {
  */
 class <#= sn #> final {
 public:
-    static void register_templates(
-        variability::helpers::feature_template_registrar& rg);
+    static void register_templates(variability::helpers::registrar& rg);
 };
 
 <#+

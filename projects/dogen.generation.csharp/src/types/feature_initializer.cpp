@@ -30,7 +30,7 @@
 namespace dogen::generation::csharp {
 
 void feature_initializer::
-register_templates(variability::helpers::feature_template_registrar& rg) {
+register_templates(variability::helpers::registrar& rg) {
     rg.register_templates(dogen::generation::csharp::formatters::archetype_features::make_templates());
     rg.register_templates(dogen::generation::csharp::formatters::facet_features::make_templates());
     rg.register_templates(dogen::generation::csharp::formatters::global_features::make_templates());

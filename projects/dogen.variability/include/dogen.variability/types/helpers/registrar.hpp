@@ -18,20 +18,41 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.variability/types/helpers/feature_template_registrar.hpp"
+#ifndef DOGEN_VARIABILITY_TYPES_HELPERS_REGISTRAR_HPP
+#define DOGEN_VARIABILITY_TYPES_HELPERS_REGISTRAR_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <list>
+#include "dogen.variability/types/meta_model/feature_template.hpp"
+#include "dogen.variability/types/meta_model/feature_template_repository.hpp"
 
 namespace dogen::variability::helpers {
 
-void feature_template_registrar::register_templates(
-    const std::list<meta_model::feature_template>& fts) {
+/**
+ * @brief Keeps track of all of the available feature templates in the
+ * system.
+ */
+class registrar final {
+public:
+    /**
+     * @brief Adds a number of templates into the registrar.
+     */
+    void register_templates(
+        const std::list<meta_model::feature_template>& fts);
 
-    for (const auto& ft : fts)
-        repository_.templates().push_back(ft);
+public:
+    /**
+     * @brief Returns the current state of the registrar.
+     */
+    const meta_model::feature_template_repository& repository();
+
+private:
+    meta_model::feature_template_repository repository_;
+};
+
 }
 
-const meta_model::feature_template_repository&
-feature_template_registrar::repository() {
-    return repository_;
-}
-
-}
+#endif

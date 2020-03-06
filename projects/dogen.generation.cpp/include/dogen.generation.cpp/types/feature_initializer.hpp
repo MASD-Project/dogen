@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen.variability/types/helpers/registrar.hpp"
 #include "dogen.variability/types/meta_model/feature_template.hpp"
-#include "dogen.variability/types/helpers/feature_template_registrar.hpp"
 
 namespace dogen::generation::cpp {
 
@@ -35,8 +35,7 @@ namespace dogen::generation::cpp {
  */
 class feature_initializer final {
 public:
-    static void register_templates(
-        variability::helpers::feature_template_registrar& rg);
+    static void register_templates(variability::helpers::registrar& rg);
 };
 
 }

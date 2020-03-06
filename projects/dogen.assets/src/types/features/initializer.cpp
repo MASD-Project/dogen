@@ -35,7 +35,7 @@
 namespace dogen::assets::features {
 
 void initializer::
-register_templates(variability::helpers::feature_template_registrar& rg) {
+register_templates(variability::helpers::registrar& rg) {
     rg.register_templates(dogen::assets::features::decoration_modeline::make_templates());
     rg.register_templates(dogen::assets::features::enumeration::make_templates());
     rg.register_templates(dogen::assets::features::enumerator::make_templates());
