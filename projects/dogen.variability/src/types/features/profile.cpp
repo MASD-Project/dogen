@@ -27,16 +27,15 @@ namespace dogen::variability::features {
 
 namespace {
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_variability_profile() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("profile");
     r.name().qualified("masd.variability.profile");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -67,10 +66,10 @@ profile::static_configuration profile::make_static_configuration(
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature_template>
-profile::make_templates() {
+std::list<dogen::variability::meta_model::feature>
+profile::make_features() {
     using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    std::list<dogen::variability::meta_model::feature> r;
     r.push_back(make_masd_variability_profile());
     return r;
 }
