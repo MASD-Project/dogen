@@ -42,6 +42,7 @@
 #include "dogen.assets/types/meta_model/decoration/generation_marker.hpp"
 #include "dogen.assets/types/meta_model/variability/profile_template.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_template_bundle.hpp"
+#include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
 #include "dogen.assets/types/meta_model/variability/initializer.hpp"
 #include "dogen.assets/types/meta_model/templating/logic_less_template.hpp"
 #include "dogen.assets/types/meta_model/serialization/type_registrar.hpp"
@@ -104,6 +105,9 @@ inline void elements_traversal(const meta_model::model& m,
         v(*pair.second);
 
     for (const auto& pair : m.variability_elements().feature_template_bundles())
+        v(*pair.second);
+
+    for (const auto& pair : m.variability_elements().feature_bundles())
         v(*pair.second);
 
     if (m.variability_elements().initializer())
@@ -182,6 +186,9 @@ inline void elements_traversal(const meta_model::model& m,
     for (const auto& pair : m.variability_elements().feature_template_bundles())
         v(*pair.second);
 
+    for (const auto& pair : m.variability_elements().feature_bundles())
+        v(*pair.second);
+
     if (m.variability_elements().initializer())
         v(*m.variability_elements().initializer());
 
@@ -256,6 +263,9 @@ inline void elements_traversal(meta_model::model& m,
         v(*pair.second);
 
     for (const auto& pair : m.variability_elements().feature_template_bundles())
+        v(*pair.second);
+
+    for (const auto& pair : m.variability_elements().feature_bundles())
         v(*pair.second);
 
     if (m.variability_elements().initializer())
@@ -340,6 +350,9 @@ inline void shared_elements_traversal(const meta_model::model& m,
     for (const auto& pair : m.variability_elements().feature_template_bundles())
         v(pair.second);
 
+    for (const auto& pair : m.variability_elements().feature_bundles())
+        v(pair.second);
+
     if (m.variability_elements().initializer())
         v(m.variability_elements().initializer());
 
@@ -416,6 +429,9 @@ inline void shared_elements_traversal(const meta_model::model& m,
     for (const auto& pair : m.variability_elements().feature_template_bundles())
         v(pair.second);
 
+    for (const auto& pair : m.variability_elements().feature_bundles())
+        v(pair.second);
+
     if (m.variability_elements().initializer())
         v(m.variability_elements().initializer());
 
@@ -490,6 +506,9 @@ inline void shared_elements_traversal(meta_model::model& m,
         v(pair.second);
 
     for (const auto& pair : m.variability_elements().feature_template_bundles())
+        v(pair.second);
+
+    for (const auto& pair : m.variability_elements().feature_bundles())
         v(pair.second);
 
     if (m.variability_elements().initializer())
