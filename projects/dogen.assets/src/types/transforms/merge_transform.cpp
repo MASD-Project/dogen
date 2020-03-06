@@ -97,6 +97,10 @@ merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
         << " build cmakelists: "
         << src.build_elements().cmakelists().size();
 
+    /*
+     * Note that we are ignoring some elements, which do not require
+     * merging. These are mainly variability related items.
+     */
     copy(src.structural_elements().modules(),
         dst.structural_elements().modules());
     copy(src.structural_elements().object_templates(),
