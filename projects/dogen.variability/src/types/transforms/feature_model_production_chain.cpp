@@ -19,8 +19,10 @@
  *
  */
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/shared_ptr_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.variability/io/meta_model/feature_io.hpp"
 #include "dogen.variability/io/meta_model/feature_model_io.hpp"
 #include "dogen.variability/types/transforms/feature_model_transform.hpp"
 #include "dogen.variability/types/transforms/feature_template_instantiation_transform.hpp"
@@ -46,8 +48,12 @@ feature_model_production_chain::apply(const context& ctx,
         transform_id, transform_id, *ctx.tracer());
 
     auto fts(frp.features());
-    fts.splice(fts.end(),
-        feature_template_instantiation_transform::apply(ctx, ftrp));
+    BOOST_LOG_SEV(lg, debug) << "Features: " << fts;
+
+    auto fs(feature_template_instantiation_transform::apply(ctx, ftrp));
+    BOOST_LOG_SEV(lg, debug) << "Features from templates: " << fs;
+
+    fts.splice(fts.end(), fs);
     const auto r(feature_model_transform::apply(ctx, fts));
 
     stp.end_chain(r);
