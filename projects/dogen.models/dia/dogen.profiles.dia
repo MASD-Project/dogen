@@ -326,7 +326,7 @@ other layers can then configure features.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -607,7 +607,7 @@ other layers can then configure features.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -963,7 +963,7 @@ other layers can then configure features.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -1118,7 +1118,7 @@ Disables all facets in the C++ backend.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -1300,7 +1300,7 @@ Disables all facets in the C++ backend.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -1468,7 +1468,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -1608,7 +1608,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -1746,7 +1746,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -1886,7 +1886,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2075,7 +2075,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2213,7 +2213,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2378,7 +2378,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2516,7 +2516,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2782,7 +2782,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2970,7 +2970,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -3232,7 +3232,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -3494,7 +3494,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -3840,7 +3840,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -4285,7 +4285,7 @@ for the element.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -4490,7 +4490,7 @@ for the element.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -4627,7 +4627,7 @@ for the element.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -4831,7 +4831,7 @@ for the element.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -5265,7 +5265,7 @@ for the element.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -5405,7 +5405,7 @@ for the element.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -5543,7 +5543,7 @@ for the element.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ede6f2"/>
+        <dia:color val="#dbeeee"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>

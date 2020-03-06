@@ -2219,13 +2219,13 @@ associated properties.#</dia:string>
         <dia:point val="24,44"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="23.95,43.95;41.875,47.65"/>
+        <dia:rectangle val="23.95,43.95;42.26,47.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="24,44"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.824999999999999"/>
+        <dia:real val="18.210000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -2281,7 +2281,7 @@ associated properties.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#b2e2e2"/>
+        <dia:color val="#7bb6b6"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2359,13 +2359,13 @@ associated properties.#</dia:string>
         <dia:point val="43,37"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.95,36.95;63.185,40.05"/>
+        <dia:rectangle val="42.95,36.95;56.64,40.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="43,37"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.134999999999998"/>
+        <dia:real val="13.59"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -2416,7 +2416,7 @@ associated properties.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#b2e2e2"/>
+        <dia:color val="#529999"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>

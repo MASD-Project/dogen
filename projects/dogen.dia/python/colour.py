@@ -111,11 +111,13 @@ for layer in dia.active_display().diagram.data.layers:
         # Theme: variability
         #
         elif "masd::variability::profile_template" in stereotype:
-            object.properties["fill_colour"] = "#EDE6F2"
+            object.properties["fill_colour"] = "#DBEEEE"
         elif "masd::variability::feature_template_bundle" in stereotype:
+            object.properties["fill_colour"] = "#7BB6B6"
+        elif "masd::variability::feature_bundle" in stereotype:
             object.properties["fill_colour"] = "#B2E2E2"
         elif "masd::variability::initializer" in stereotype:
-            object.properties["fill_colour"] = "#B2E2E2"
+            object.properties["fill_colour"] = "#529999"
 
         #
         # Theme: Mapping
