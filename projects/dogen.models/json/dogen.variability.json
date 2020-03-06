@@ -514,13 +514,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "helpers::feature_template_hydrator",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "transforms::feature_template_instantiation_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
@@ -536,13 +529,6 @@
     },
     {
       "name": "transforms::profile_repository_production_chain",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::profile_template_hydrator",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -619,13 +605,6 @@
     },
     {
       "name": "helpers::building_exception",
-      "stereotypes": [
-        "masd::exception"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::hydration_exception",
       "stereotypes": [
         "masd::exception"
       ],
