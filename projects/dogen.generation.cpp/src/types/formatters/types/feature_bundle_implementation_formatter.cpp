@@ -197,7 +197,7 @@ a.stream() << "}" << std::endl;
             }
 a.stream() << std::endl;
 a.stream() << "std::list<dogen::variability::meta_model::feature>" << std::endl;
-a.stream() << sn << "::make_templates() {" << std::endl;
+a.stream() << sn << "::make_features() {" << std::endl;
 a.stream() << "    using namespace dogen::variability::meta_model;" << std::endl;
 a.stream() << "    std::list<dogen::variability::meta_model::feature> r;" << std::endl;
 

@@ -174,7 +174,7 @@ make_<#= fb_ft.identifiable_key() #>() {
 #>
 
 std::list<dogen::variability::meta_model::feature>
-<#= sn #>::make_templates() {
+<#= sn #>::make_features() {
     using namespace dogen::variability::meta_model;
     std::list<dogen::variability::meta_model::feature> r;
 <#+

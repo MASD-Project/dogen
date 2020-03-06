@@ -139,7 +139,7 @@ public:
 
 public:
     static std::list<dogen::variability::meta_model::features>
-    make_templates();
+    make_features();
 };
 
 <#+
