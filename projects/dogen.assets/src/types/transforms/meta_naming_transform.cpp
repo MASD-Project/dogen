@@ -132,6 +132,11 @@ public:
         v.meta_name(n);
     }
 
+    void operator()(meta_model::variability::feature_bundle& v) {
+        static const auto n(mnf::make_variability_feature_bundle_name());
+        v.meta_name(n);
+    }
+
     void operator()(meta_model::variability::initializer& v) {
         static const auto n(mnf::make_variability_initializer_name());
         v.meta_name(n);

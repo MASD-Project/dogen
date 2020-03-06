@@ -126,6 +126,12 @@ make_variability_feature_template_bundle_name() {
 }
 
 meta_model::name meta_name_factory::
+make_variability_feature_bundle_name() {
+    static const auto r(make_name("variability_feature_bundle"));
+    return r;
+}
+
+meta_model::name meta_name_factory::
 make_variability_initializer_name() {
     static const auto r(make_name("variability_initializer"));
     return r;
