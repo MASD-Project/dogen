@@ -46,7 +46,7 @@ public:
     /**
      * @brief Adds a number of features into the registrar.
      */
-    void register_features(const std::list<meta_model::feature>& fts);
+    void register_features(const std::list<meta_model::feature>& fs);
 
 public:
     /**

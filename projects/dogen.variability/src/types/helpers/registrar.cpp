@@ -28,6 +28,12 @@ register_templates(const std::list<meta_model::feature_template>& fts) {
         feature_template_repository_.templates().push_back(ft);
 }
 
+void registrar::
+register_features(const std::list<meta_model::feature>& fs) {
+    for (const auto& f : fs)
+        feature_repository_.features().push_back(f);
+}
+
 const meta_model::feature_template_repository&
 registrar::feature_template_repository() {
     return feature_template_repository_;
