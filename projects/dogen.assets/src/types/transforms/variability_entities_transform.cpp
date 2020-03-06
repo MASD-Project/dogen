@@ -350,10 +350,10 @@ void variability_entities_transform::process_initialiser(meta_model::model& m) {
     }
     fti.feature_template_bundles().sort();
 
-    auto& ft(m.variability_elements().feature_bundles());
-    for (auto& pair : ft) {
-        auto& fb(*pair.second);
-        fti.feature_bundles().push_back(fb.name());
+    auto& fb(m.variability_elements().feature_bundles());
+    for (auto& pair : fb) {
+        auto& f(*pair.second);
+        fti.feature_bundles().push_back(f.name());
     }
     fti.feature_bundles().sort();
 }
