@@ -1721,6 +1721,21 @@
           }
         },
         {
+          "name": "masd.generation.cpp.types.feature_bundle_header.postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.qualified_name": "masd.generation.cpp.types.feature_bundle_header.postfix"
+          }
+        },
+        {
+          "name": "masd.generation.cpp.types.feature_bundle_implementation.postfix",
+          "type": "masd::variability::text",
+          "tagged_values": {
+            "masd.variability.qualified_name": "masd.generation.cpp.types.feature_bundle_implementation.postfix"
+          }
+        },
+        {
           "name": "masd.generation.cpp.types.variability_initializer_header.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
@@ -3114,6 +3129,20 @@
       "stereotypes": [
         "masd::build::cmakelists",
         "dogen::handcrafted::cmake"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::types::feature_bundle_header_formatter",
+      "stereotypes": [
+        "dogen::cpp::artefact_formatter"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "formatters::types::feature_bundle_implementation_formatter",
+      "stereotypes": [
+        "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     }
