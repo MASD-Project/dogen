@@ -30,6 +30,7 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "dogen.assets/types/meta_model/name.hpp"
+#include "dogen.assets/types/meta_model/name_tree.hpp"
 #include "dogen.variability/types/meta_model/value_type.hpp"
 #include "dogen.variability/types/meta_model/binding_point.hpp"
 #include "dogen.variability/types/meta_model/configuration_fwd.hpp"
@@ -59,7 +60,7 @@ public:
         const std::string& identifiable_key,
         const std::string& unparsed_type,
         const std::string& mapped_type,
-        const std::string& parsed_type,
+        const dogen::assets::meta_model::name_tree& parsed_type,
         const std::string& value,
         const dogen::variability::meta_model::value_type value_type,
         const boost::optional<dogen::variability::meta_model::binding_point>& binding_point,
@@ -147,10 +148,10 @@ public:
      * @brief Mapped type, after parsing has taken place.
      */
     /**@{*/
-    const std::string& parsed_type() const;
-    std::string& parsed_type();
-    void parsed_type(const std::string& v);
-    void parsed_type(const std::string&& v);
+    const dogen::assets::meta_model::name_tree& parsed_type() const;
+    dogen::assets::meta_model::name_tree& parsed_type();
+    void parsed_type(const dogen::assets::meta_model::name_tree& v);
+    void parsed_type(const dogen::assets::meta_model::name_tree&& v);
     /**@}*/
 
     /**
@@ -221,7 +222,7 @@ private:
     std::string identifiable_key_;
     std::string unparsed_type_;
     std::string mapped_type_;
-    std::string parsed_type_;
+    dogen::assets::meta_model::name_tree parsed_type_;
     std::string value_;
     dogen::variability::meta_model::value_type value_type_;
     boost::optional<dogen::variability::meta_model::binding_point> binding_point_;

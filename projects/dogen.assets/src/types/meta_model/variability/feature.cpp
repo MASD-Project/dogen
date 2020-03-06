@@ -60,7 +60,7 @@ feature::feature(
     const std::string& identifiable_key,
     const std::string& unparsed_type,
     const std::string& mapped_type,
-    const std::string& parsed_type,
+    const dogen::assets::meta_model::name_tree& parsed_type,
     const std::string& value,
     const dogen::variability::meta_model::value_type value_type,
     const boost::optional<dogen::variability::meta_model::binding_point>& binding_point,
@@ -231,19 +231,19 @@ void feature::mapped_type(const std::string&& v) {
     mapped_type_ = std::move(v);
 }
 
-const std::string& feature::parsed_type() const {
+const dogen::assets::meta_model::name_tree& feature::parsed_type() const {
     return parsed_type_;
 }
 
-std::string& feature::parsed_type() {
+dogen::assets::meta_model::name_tree& feature::parsed_type() {
     return parsed_type_;
 }
 
-void feature::parsed_type(const std::string& v) {
+void feature::parsed_type(const dogen::assets::meta_model::name_tree& v) {
     parsed_type_ = v;
 }
 
-void feature::parsed_type(const std::string&& v) {
+void feature::parsed_type(const dogen::assets::meta_model::name_tree&& v) {
     parsed_type_ = std::move(v);
 }
 

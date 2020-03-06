@@ -25,8 +25,8 @@
 #include "dogen.assets/io/meta_model/element_io.hpp"
 #include "dogen.assets/types/meta_model/element_visitor.hpp"
 #include "dogen.variability/io/meta_model/binding_point_io.hpp"
+#include "dogen.assets/io/meta_model/variability/feature_io.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
-#include "dogen.assets/io/meta_model/variability/feature_template_io.hpp"
 
 namespace std {
 
@@ -44,7 +44,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::meta_model::variability::feature_template>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::meta_model::variability::feature>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -108,7 +108,7 @@ feature_bundle::feature_bundle(
     const std::list<dogen::assets::meta_model::name>& transparent_associations,
     const std::list<dogen::assets::meta_model::name>& opaque_associations,
     const std::list<dogen::assets::meta_model::name>& associative_container_keys,
-    const std::list<dogen::assets::meta_model::variability::feature_template>& features,
+    const std::list<dogen::assets::meta_model::variability::feature>& features,
     const bool generate_static_configuration,
     const bool requires_manual_default_constructor,
     const dogen::archetypes::location& location,
@@ -263,19 +263,19 @@ void feature_bundle::associative_container_keys(const std::list<dogen::assets::m
     associative_container_keys_ = std::move(v);
 }
 
-const std::list<dogen::assets::meta_model::variability::feature_template>& feature_bundle::features() const {
+const std::list<dogen::assets::meta_model::variability::feature>& feature_bundle::features() const {
     return features_;
 }
 
-std::list<dogen::assets::meta_model::variability::feature_template>& feature_bundle::features() {
+std::list<dogen::assets::meta_model::variability::feature>& feature_bundle::features() {
     return features_;
 }
 
-void feature_bundle::features(const std::list<dogen::assets::meta_model::variability::feature_template>& v) {
+void feature_bundle::features(const std::list<dogen::assets::meta_model::variability::feature>& v) {
     features_ = v;
 }
 
-void feature_bundle::features(const std::list<dogen::assets::meta_model::variability::feature_template>&& v) {
+void feature_bundle::features(const std::list<dogen::assets::meta_model::variability::feature>&& v) {
     features_ = std::move(v);
 }
 

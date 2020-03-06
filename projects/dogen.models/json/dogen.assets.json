@@ -3787,7 +3787,7 @@
       "attributes": [
         {
           "name": "features",
-          "type": "std::list<feature_template>",
+          "type": "std::list<feature>",
           "documentation": "Set of features associated with this feature bundle.\n"
         },
         {
@@ -3844,7 +3844,7 @@
         },
         {
           "name": "parsed_type",
-          "type": "std::string",
+          "type": "name_tree",
           "documentation": "Mapped type, after parsing has taken place.\n"
         },
         {

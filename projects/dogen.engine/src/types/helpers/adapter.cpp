@@ -514,8 +514,7 @@ adapter::to_variability_feature_template_bundle(
 }
 
 boost::shared_ptr<assets::meta_model::variability::feature_bundle>
-adapter::to_variability_feature_bundle(
-    const assets::meta_model::location &l,
+adapter::to_variability_feature_bundle(const assets::meta_model::location &l,
     const stereotypes_conversion_result &scr,
     const injection::meta_model::element &ie) const {
     using assets::meta_model::variability::feature_bundle;
@@ -523,22 +522,22 @@ adapter::to_variability_feature_bundle(
     populate_element(l, scr, ie, *r);
 
     using variability::helpers::enum_mapper;
-    assets::helpers::name_factory f;
+    assets::helpers::name_factory nf;
     assets::helpers::string_processor sp;
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name());
         ensure_not_empty(n);
 
-        assets::meta_model::variability::feature_template ft;
-        ft.name(f.build_attribute_name(r->name(), n));
-        ft.key(n);
-        ft.identifiable_key(sp.to_identifiable(n));
-        ft.value(attr.value());
-        ft.unparsed_type(attr.type());
-        ft.value_type(enum_mapper::to_value_type(attr.type()));
-        ft.configuration(attr.configuration());
-        ft.configuration()->name().qualified(ft.name().qualified().dot());
-        r->features().push_back(ft);
+        assets::meta_model::variability::feature f;
+        f.name(nf.build_attribute_name(r->name(), n));
+        f.key(n);
+        f.identifiable_key(sp.to_identifiable(n));
+        f.value(attr.value());
+        f.unparsed_type(attr.type());
+        f.value_type(enum_mapper::to_value_type(attr.type()));
+        f.configuration(attr.configuration());
+        f.configuration()->name().qualified(f.name().qualified().dot());
+        r->features().push_back(f);
     }
 
     return r;

@@ -74,7 +74,7 @@ void pre_assembly_chain::apply(const context& ctx,
     origin_transform::apply(ctx, m);
     type_params_transform::apply(ctx, m);
     extraction_properties_transform::apply(ctx, m);
-    variability_feature_template_bundle_transform::apply(ctx, fixed_mappings, m);
+    variability_entities_transform::apply(ctx, fixed_mappings, m);
     visual_studio_transform::apply(ctx, m);
 
     /*

@@ -33,7 +33,7 @@
 #include "dogen.assets/types/meta_model/name.hpp"
 #include "dogen.assets/types/meta_model/element.hpp"
 #include "dogen.variability/types/meta_model/binding_point.hpp"
-#include "dogen.assets/types/meta_model/variability/feature_template.hpp"
+#include "dogen.assets/types/meta_model/variability/feature.hpp"
 
 namespace dogen::assets::meta_model::variability {
 
@@ -82,7 +82,7 @@ public:
         const std::list<dogen::assets::meta_model::name>& transparent_associations,
         const std::list<dogen::assets::meta_model::name>& opaque_associations,
         const std::list<dogen::assets::meta_model::name>& associative_container_keys,
-        const std::list<dogen::assets::meta_model::variability::feature_template>& features,
+        const std::list<dogen::assets::meta_model::variability::feature>& features,
         const bool generate_static_configuration,
         const bool requires_manual_default_constructor,
         const dogen::archetypes::location& location,
@@ -136,10 +136,10 @@ public:
      * @brief Set of features associated with this feature bundle.
      */
     /**@{*/
-    const std::list<dogen::assets::meta_model::variability::feature_template>& features() const;
-    std::list<dogen::assets::meta_model::variability::feature_template>& features();
-    void features(const std::list<dogen::assets::meta_model::variability::feature_template>& v);
-    void features(const std::list<dogen::assets::meta_model::variability::feature_template>&& v);
+    const std::list<dogen::assets::meta_model::variability::feature>& features() const;
+    std::list<dogen::assets::meta_model::variability::feature>& features();
+    void features(const std::list<dogen::assets::meta_model::variability::feature>& v);
+    void features(const std::list<dogen::assets::meta_model::variability::feature>&& v);
     /**@}*/
 
     /**
@@ -201,7 +201,7 @@ private:
     std::list<dogen::assets::meta_model::name> transparent_associations_;
     std::list<dogen::assets::meta_model::name> opaque_associations_;
     std::list<dogen::assets::meta_model::name> associative_container_keys_;
-    std::list<dogen::assets::meta_model::variability::feature_template> features_;
+    std::list<dogen::assets::meta_model::variability::feature> features_;
     bool generate_static_configuration_;
     bool requires_manual_default_constructor_;
     dogen::archetypes::location location_;

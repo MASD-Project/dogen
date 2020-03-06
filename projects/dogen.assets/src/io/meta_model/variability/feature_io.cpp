@@ -22,6 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.assets/io/meta_model/name_io.hpp"
+#include "dogen.assets/io/meta_model/name_tree_io.hpp"
 #include "dogen.variability/io/meta_model/value_type_io.hpp"
 #include "dogen.variability/io/meta_model/binding_point_io.hpp"
 #include "dogen.variability/io/meta_model/configuration_io.hpp"
@@ -84,7 +85,7 @@ std::ostream& operator<<(std::ostream& s, const feature& v) {
       << "\"identifiable_key\": " << "\"" << tidy_up_string(v.identifiable_key()) << "\"" << ", "
       << "\"unparsed_type\": " << "\"" << tidy_up_string(v.unparsed_type()) << "\"" << ", "
       << "\"mapped_type\": " << "\"" << tidy_up_string(v.mapped_type()) << "\"" << ", "
-      << "\"parsed_type\": " << "\"" << tidy_up_string(v.parsed_type()) << "\"" << ", "
+      << "\"parsed_type\": " << v.parsed_type() << ", "
       << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\"" << ", "
       << "\"value_type\": " << v.value_type() << ", "
       << "\"binding_point\": " << v.binding_point() << ", "

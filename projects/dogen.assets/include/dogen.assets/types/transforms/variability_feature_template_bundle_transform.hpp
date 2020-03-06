@@ -31,17 +31,29 @@
 #include "dogen.assets/types/features/variability_templates.hpp"
 #include "dogen.assets/types/features/variability_bundle.hpp"
 #include "dogen.assets/types/transforms/context_fwd.hpp"
+#include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_template_bundle.hpp"
 
 namespace dogen::assets::transforms {
 
-class variability_feature_template_bundle_transform final {
+class variability_entities_transform final {
 private:
     static void update(const features::variability_templates::feature_group& fg,
         meta_model::variability::feature_template& ft);
 
     static void update(const features::variability_bundle::feature_group& fg,
         meta_model::variability::feature_template_bundle& fb);
+
+private:
+    static void process_features(const context& ctx,
+        const std::unordered_map<std::string, std::string>& fixed_mappings,
+        meta_model::model& m);
+
+    static void process_feature_templates(const context& ctx,
+        const std::unordered_map<std::string, std::string>& fixed_mappings,
+        meta_model::model& m);
+
+    static void process_initialiser(meta_model::model& m);
 
 public:
     static void apply(const context& ctx,
