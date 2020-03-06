@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_BUNDLE_HPP
-#define DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_BUNDLE_HPP
+#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_FEATURE_BUNDLE_HPP
+#define DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_FEATURE_BUNDLE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,39 +33,37 @@
 #include "dogen.assets/types/meta_model/name.hpp"
 #include "dogen.assets/types/meta_model/element.hpp"
 #include "dogen.variability/types/meta_model/binding_point.hpp"
-#include "dogen.variability/types/meta_model/template_kind.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_template.hpp"
 
 namespace dogen::assets::meta_model::variability {
 
 /**
- * @brief A feature template bundle represents an aggregation of feature templates in a
- * model.
+ * @brief A feature bundle represents an aggregation of featuresin a model.
  *
- * The feature templates should be "semantically related", that is, belong to a related
- * topic. A feature template bundle is used by code generation to generate
- * infrastructural code to ease the creation and subsequent processing of features.
+ * The features should be "semantically related", that is, belong to a related
+ * topic. A feature bundle is used by code generation to generate infrastructural code
+ * to ease the creation and subsequent processing of features.
  *
  * Generated code comprises of two aspects:
  *
- * @li the registration of the feature template for the dynamic part of the processing;
+ * @li the registration of the feature for the dynamic part of the processing;
  * @li the generation of a static configuration class to  represent the feature once
  *  read out from the dynamic configuration - if requested.
  */
-class feature_template_bundle final : public dogen::assets::meta_model::element {
+class feature_bundle final : public dogen::assets::meta_model::element {
 public:
-    feature_template_bundle(const feature_template_bundle&) = default;
+    feature_bundle(const feature_bundle&) = default;
 
 public:
-    feature_template_bundle();
+    feature_bundle();
 
-    virtual ~feature_template_bundle() noexcept { }
-
-public:
-    feature_template_bundle(feature_template_bundle&& rhs);
+    virtual ~feature_bundle() noexcept { }
 
 public:
-    feature_template_bundle(
+    feature_bundle(feature_bundle&& rhs);
+
+public:
+    feature_bundle(
         const dogen::assets::meta_model::name& name,
         const std::string& documentation,
         const dogen::assets::meta_model::origin_types origin_type,
@@ -84,10 +82,9 @@ public:
         const std::list<dogen::assets::meta_model::name>& transparent_associations,
         const std::list<dogen::assets::meta_model::name>& opaque_associations,
         const std::list<dogen::assets::meta_model::name>& associative_container_keys,
-        const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates,
+        const std::list<dogen::assets::meta_model::variability::feature_template>& features,
         const bool generate_static_configuration,
         const bool requires_manual_default_constructor,
-        const dogen::variability::meta_model::template_kind template_kind,
         const dogen::archetypes::location& location,
         const boost::optional<dogen::variability::meta_model::binding_point>& default_binding_point);
 
@@ -136,13 +133,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Set of feature templates associated with this feature template bundle.
+     * @brief Set of features associated with this feature bundle.
      */
     /**@{*/
-    const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates() const;
-    std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates();
-    void feature_templates(const std::list<dogen::assets::meta_model::variability::feature_template>& v);
-    void feature_templates(const std::list<dogen::assets::meta_model::variability::feature_template>&& v);
+    const std::list<dogen::assets::meta_model::variability::feature_template>& features() const;
+    std::list<dogen::assets::meta_model::variability::feature_template>& features();
+    void features(const std::list<dogen::assets::meta_model::variability::feature_template>& v);
+    void features(const std::list<dogen::assets::meta_model::variability::feature_template>&& v);
     /**@}*/
 
     /**
@@ -154,8 +151,8 @@ public:
     /**@}*/
 
     /**
-     * @brief If true, the code generated for this feature template bundle needs a manually
-     * generated default constructor.
+     * @brief If true, the code generated for this feature bundle needs a manually generated
+     * default constructor.
      */
     /**@{*/
     bool requires_manual_default_constructor() const;
@@ -163,15 +160,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Kind of template expansion to perform for this feature template.
-     */
-    /**@{*/
-    dogen::variability::meta_model::template_kind template_kind() const;
-    void template_kind(const dogen::variability::meta_model::template_kind v);
-    /**@}*/
-
-    /**
-     * @brief Archetype location coordinates for the feature template to expand into.
+     * @brief Archetype location coordinates for the feature.
      */
     /**@{*/
     const dogen::archetypes::location& location() const;
@@ -181,7 +170,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Default binding point for all feature templates in this bundle.
+     * @brief Default binding point for all features in this bundle.
      *
      * The binding point indicates where the feature will bind when instantiated in a
      * model. If the default binding point is supplied for a bundle, the templates cannot
@@ -196,8 +185,8 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const feature_template_bundle& rhs) const;
-    bool operator!=(const feature_template_bundle& rhs) const {
+    bool operator==(const feature_bundle& rhs) const;
+    bool operator!=(const feature_bundle& rhs) const {
         return !this->operator==(rhs);
     }
 
@@ -205,17 +194,16 @@ public:
     bool equals(const dogen::assets::meta_model::element& other) const override;
 
 public:
-    void swap(feature_template_bundle& other) noexcept;
-    feature_template_bundle& operator=(feature_template_bundle other);
+    void swap(feature_bundle& other) noexcept;
+    feature_bundle& operator=(feature_bundle other);
 
 private:
     std::list<dogen::assets::meta_model::name> transparent_associations_;
     std::list<dogen::assets::meta_model::name> opaque_associations_;
     std::list<dogen::assets::meta_model::name> associative_container_keys_;
-    std::list<dogen::assets::meta_model::variability::feature_template> feature_templates_;
+    std::list<dogen::assets::meta_model::variability::feature_template> features_;
     bool generate_static_configuration_;
     bool requires_manual_default_constructor_;
-    dogen::variability::meta_model::template_kind template_kind_;
     dogen::archetypes::location location_;
     boost::optional<dogen::variability::meta_model::binding_point> default_binding_point_;
 };
@@ -226,8 +214,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::assets::meta_model::variability::feature_template_bundle& lhs,
-    dogen::assets::meta_model::variability::feature_template_bundle& rhs) {
+    dogen::assets::meta_model::variability::feature_bundle& lhs,
+    dogen::assets::meta_model::variability::feature_bundle& rhs) {
     lhs.swap(rhs);
 }
 

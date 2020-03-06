@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_HPP
-#define DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_FEATURE_TEMPLATE_HPP
+#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_FEATURE_HPP
+#define DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_FEATURE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,6 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "dogen.assets/types/meta_model/name.hpp"
-#include "dogen.assets/types/meta_model/name_tree.hpp"
 #include "dogen.variability/types/meta_model/value_type.hpp"
 #include "dogen.variability/types/meta_model/binding_point.hpp"
 #include "dogen.variability/types/meta_model/configuration_fwd.hpp"
@@ -38,23 +37,21 @@
 namespace dogen::assets::meta_model::variability {
 
 /**
- * @brief Represents a feature template in variability space.
- *
- * Feature templates are expanded into features within the variability model.
+ * @brief Represents a feature in variability space.
  */
-class feature_template final {
+class feature final {
 public:
-    feature_template(const feature_template&) = default;
-    ~feature_template() = default;
+    feature(const feature&) = default;
+    ~feature() = default;
 
 public:
-    feature_template();
+    feature();
 
 public:
-    feature_template(feature_template&& rhs);
+    feature(feature&& rhs);
 
 public:
-    feature_template(
+    feature(
         const std::string& documentation,
         const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
         const dogen::assets::meta_model::name& name,
@@ -62,7 +59,7 @@ public:
         const std::string& identifiable_key,
         const std::string& unparsed_type,
         const std::string& mapped_type,
-        const dogen::assets::meta_model::name_tree& parsed_type,
+        const std::string& parsed_type,
         const std::string& value,
         const dogen::variability::meta_model::value_type value_type,
         const boost::optional<dogen::variability::meta_model::binding_point>& binding_point,
@@ -105,7 +102,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Identifier of the feature template, as will be seen by the end user.
+     * @brief Identifier of the feature, as will be seen by the end user.
      */
     /**@{*/
     const std::string& key() const;
@@ -150,10 +147,10 @@ public:
      * @brief Mapped type, after parsing has taken place.
      */
     /**@{*/
-    const dogen::assets::meta_model::name_tree& parsed_type() const;
-    dogen::assets::meta_model::name_tree& parsed_type();
-    void parsed_type(const dogen::assets::meta_model::name_tree& v);
-    void parsed_type(const dogen::assets::meta_model::name_tree&& v);
+    const std::string& parsed_type() const;
+    std::string& parsed_type();
+    void parsed_type(const std::string& v);
+    void parsed_type(const std::string&& v);
     /**@}*/
 
     /**
@@ -175,9 +172,9 @@ public:
     /**@}*/
 
     /**
-     * @brief Override binding point for this feature template.
+     * @brief Override binding point for this feature.
      *
-     * If the default binding point is supplied for a bundle, the templates cannot
+     * If the default binding point is supplied for a bundle, the features cannot
      * supply individual binding points. Conversely, if not supplied, they must supply
      * their individual binding points.
      */
@@ -207,14 +204,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const feature_template& rhs) const;
-    bool operator!=(const feature_template& rhs) const {
+    bool operator==(const feature& rhs) const;
+    bool operator!=(const feature& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(feature_template& other) noexcept;
-    feature_template& operator=(feature_template other);
+    void swap(feature& other) noexcept;
+    feature& operator=(feature other);
 
 private:
     std::string documentation_;
@@ -224,7 +221,7 @@ private:
     std::string identifiable_key_;
     std::string unparsed_type_;
     std::string mapped_type_;
-    dogen::assets::meta_model::name_tree parsed_type_;
+    std::string parsed_type_;
     std::string value_;
     dogen::variability::meta_model::value_type value_type_;
     boost::optional<dogen::variability::meta_model::binding_point> binding_point_;
@@ -238,8 +235,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::assets::meta_model::variability::feature_template& lhs,
-    dogen::assets::meta_model::variability::feature_template& rhs) {
+    dogen::assets::meta_model::variability::feature& lhs,
+    dogen::assets::meta_model::variability::feature& rhs) {
     lhs.swap(rhs);
 }
 

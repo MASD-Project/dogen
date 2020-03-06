@@ -43,6 +43,7 @@
 #include "dogen.assets/types/meta_model/visual_studio/solution_fwd.hpp"
 #include "dogen.assets/types/meta_model/decoration/modeline_group_fwd.hpp"
 #include "dogen.assets/types/meta_model/structural/object_template_fwd.hpp"
+#include "dogen.assets/types/meta_model/variability/feature_bundle_fwd.hpp"
 #include "dogen.assets/types/meta_model/mapping/extensible_mappable_fwd.hpp"
 #include "dogen.assets/types/meta_model/decoration/generation_marker_fwd.hpp"
 #include "dogen.assets/types/meta_model/serialization/type_registrar_fwd.hpp"
@@ -260,6 +261,16 @@ public:
     virtual void visit(const dogen::assets::meta_model::templating::logic_less_template&) { }
     virtual void visit(dogen::assets::meta_model::templating::logic_less_template&) const { }
     virtual void visit(dogen::assets::meta_model::templating::logic_less_template&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::assets::meta_model::variability::feature_bundle
+     */
+    /**@{*/
+    virtual void visit(const dogen::assets::meta_model::variability::feature_bundle&) const { }
+    virtual void visit(const dogen::assets::meta_model::variability::feature_bundle&) { }
+    virtual void visit(dogen::assets::meta_model::variability::feature_bundle&) const { }
+    virtual void visit(dogen::assets::meta_model::variability::feature_bundle&) { }
     /**@}*/
 
     /**

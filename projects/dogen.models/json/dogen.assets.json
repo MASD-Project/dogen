@@ -1926,7 +1926,7 @@
     },
     {
       "name": "meta_model::variability::feature_template_bundle",
-      "documentation": "A feature bundle represents an aggregation of feature templates in a model.\n\nThe feature templates should be \"semantically related\", that is, belong to a related\ntopic. A feature bundle is used by code generation to generate infrastructural code\nto ease the creation and subsequent processing of features. Generated code\ncomprises of two aspects: the registration of the feature for the dynamic part of the\nprocessing and the generation of a static configuration class to represent the\nfeature once read out from the dynamic configuration.\n",
+      "documentation": "A feature template bundle represents an aggregation of feature templates in a\nmodel.\n\nThe feature templates should be \"semantically related\", that is, belong to a related\ntopic. A feature template bundle is used by code generation to generate\ninfrastructural code to ease the creation and subsequent processing of features. \n\nGenerated code comprises of two aspects: \n\n@li the registration of the feature template for the dynamic part of the processing;\n@li the generation of a static configuration class to  represent the feature once\n read out from the dynamic configuration - if requested.\n",
       "stereotypes": [
         "assets::meta_element",
         "Associatable"
@@ -1936,7 +1936,7 @@
         {
           "name": "feature_templates",
           "type": "std::list<feature_template>",
-          "documentation": "Set of feature templates associated with this feature bundle.\n"
+          "documentation": "Set of feature templates associated with this feature template bundle.\n"
         },
         {
           "name": "generate_static_configuration",
@@ -1946,7 +1946,7 @@
         {
           "name": "requires_manual_default_constructor",
           "type": "bool",
-          "documentation": "If true, the code generated for this feature bundle needs a manually generated\ndefault constructor.\n"
+          "documentation": "If true, the code generated for this feature template bundle needs a manually\ngenerated default constructor.\n"
         },
         {
           "name": "template_kind",
@@ -1967,6 +1967,7 @@
     },
     {
       "name": "meta_model::variability::feature_template",
+      "documentation": "Represents a feature template in variability space.\n\nFeature templates are expanded into features within the variability model.\n",
       "stereotypes": [
         "Documentable",
         "Configurable",
@@ -2464,6 +2465,10 @@
         {
           "name": "feature_template_bundles",
           "type": "std::unordered_map<std::string, boost::shared_ptr<feature_template_bundle>>"
+        },
+        {
+          "name": "feature_bundles",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<feature_bundle>>"
         },
         {
           "name": "feature_template_initializer",
@@ -3759,6 +3764,104 @@
         "dogen::handcrafted::cmake"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::variability::feature_bundle",
+      "documentation": "A feature bundle represents an aggregation of featuresin a model.\n\nThe features should be \"semantically related\", that is, belong to a related\ntopic. A feature bundle is used by code generation to generate infrastructural code\nto ease the creation and subsequent processing of features. \n\nGenerated code comprises of two aspects: \n\n@li the registration of the feature for the dynamic part of the processing;\n@li the generation of a static configuration class to  represent the feature once\n read out from the dynamic configuration - if requested.\n",
+      "stereotypes": [
+        "assets::meta_element",
+        "Associatable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "features",
+          "type": "std::list<feature_template>",
+          "documentation": "Set of features associated with this feature bundle.\n"
+        },
+        {
+          "name": "generate_static_configuration",
+          "type": "bool",
+          "documentation": "If true, the code generator will output a class to represent the static configuration.\n"
+        },
+        {
+          "name": "requires_manual_default_constructor",
+          "type": "bool",
+          "documentation": "If true, the code generated for this feature bundle needs a manually generated\ndefault constructor.\n"
+        },
+        {
+          "name": "location",
+          "type": "archetypes::location",
+          "documentation": "Archetype location coordinates for the feature.\n"
+        },
+        {
+          "name": "default_binding_point",
+          "type": "boost::optional<variability::meta_model::binding_point>",
+          "documentation": "Default binding point for all features in this bundle.\n\nThe binding point indicates where the feature will bind when instantiated in a\nmodel. If the default binding point is supplied for a bundle, the templates cannot\nsupply individual binding points. Conversely, if not supplied, they must supply\ntheir individual binding points.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::variability::feature",
+      "documentation": "Represents a feature in variability space.\n",
+      "stereotypes": [
+        "Documentable",
+        "Configurable",
+        "Nameable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "key",
+          "type": "std::string",
+          "documentation": "Identifier of the feature, as will be seen by the end user.\n"
+        },
+        {
+          "name": "identifiable_key",
+          "type": "std::string",
+          "documentation": "Post-processed key, suitable for use as an identifier.\n"
+        },
+        {
+          "name": "unparsed_type",
+          "type": "std::string",
+          "documentation": "Type of the static configuration field, as read out from original model.\n\nThis is the type before mapping and parsing.\n"
+        },
+        {
+          "name": "mapped_type",
+          "type": "std::string",
+          "documentation": "Unparsed type, after mapping has taken place.\n"
+        },
+        {
+          "name": "parsed_type",
+          "type": "std::string",
+          "documentation": "Mapped type, after parsing has taken place.\n"
+        },
+        {
+          "name": "value",
+          "type": "std::string",
+          "documentation": "String representing the default value set on the model.\n"
+        },
+        {
+          "name": "value_type",
+          "type": "variability::meta_model::value_type",
+          "documentation": "Type of the value pointed to by the feature.\n"
+        },
+        {
+          "name": "binding_point",
+          "type": "boost::optional<variability::meta_model::binding_point>",
+          "documentation": "Override binding point for this feature.\n\nIf the default binding point is supplied for a bundle, the features cannot\nsupply individual binding points. Conversely, if not supplied, they must supply\ntheir individual binding points.\n"
+        },
+        {
+          "name": "is_optional",
+          "type": "bool",
+          "documentation": "If true, the feature generated by the feature template is optional.\n"
+        },
+        {
+          "name": "requires_optionality",
+          "type": "bool",
+          "documentation": "If true, the feature's static configuration will have an optional type.\n\nThis is only required if the feature template is optional and has no default value.\n"
+        }
+      ]
     }
   ]
 }

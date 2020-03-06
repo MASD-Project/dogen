@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen.assets/io/meta_model/variability/feature_bundle_io.hpp"
 #include "dogen.assets/io/meta_model/variability/profile_template_io.hpp"
 #include "dogen.assets/io/meta_model/variability/element_repository_io.hpp"
 #include "dogen.assets/io/meta_model/variability/feature_template_bundle_io.hpp"
@@ -103,6 +104,40 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace boost {
 
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::assets::meta_model::variability::feature_bundle>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::feature_bundle> >& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace boost {
+
 inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::assets::meta_model::variability::feature_template_initializer>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
@@ -124,6 +159,7 @@ std::ostream& operator<<(std::ostream& s, const element_repository& v) {
       << "\"__type__\": " << "\"dogen::assets::meta_model::variability::element_repository\"" << ", "
       << "\"profile_templates\": " << v.profile_templates() << ", "
       << "\"feature_template_bundles\": " << v.feature_template_bundles() << ", "
+      << "\"feature_bundles\": " << v.feature_bundles() << ", "
       << "\"feature_template_initializer\": " << v.feature_template_initializer()
       << " }";
     return(s);
