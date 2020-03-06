@@ -91,7 +91,6 @@ std::list<std::string> feature_bundle_header_formatter::inclusion_dependencies(
     if (fb.generate_static_configuration()) {
         builder.add("\"dogen.variability/types/meta_model/feature_model.hpp\"");
         builder.add("\"dogen.variability/types/meta_model/configuration.hpp\"");
-        builder.add("\"dogen.variability/types/meta_model/feature.hpp\"");
 
         const auto ch_arch(traits::class_header_archetype());
         builder.add(fb.transparent_associations(), ch_arch);
