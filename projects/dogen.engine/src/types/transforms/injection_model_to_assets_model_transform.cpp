@@ -228,6 +228,10 @@ process_element(const helpers::adapter& ad,
         insert(ad.to_variability_feature_template_bundle(l, scr, e),
             m.variability_elements().feature_template_bundles());
         break;
+    case static_stereotypes::variability_feature_bundle:
+        insert(ad.to_variability_feature_bundle(l, scr, e),
+            m.variability_elements().feature_bundles());
+        break;
     case static_stereotypes::variability_initializer:
         /*
          * A model can only have zero or one feature template
