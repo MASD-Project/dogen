@@ -14,21 +14,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-06 Fri 13:29]
+#+CAPTION: Clock summary at [2020-03-06 Fri 14:59]
 | <75>                                                    |         |       |      |       |
 | Headline                                                | Time    |       |      |     % |
 |---------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                            | *22:56* |       |      | 100.0 |
+| *Total time*                                            | *23:29* |       |      | 100.0 |
 |---------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                 | 22:56   |       |      | 100.0 |
-| Active                                                  |         | 22:56 |      | 100.0 |
-| Edit release notes for previous sprint                  |         |       | 4:11 |  18.2 |
+| Stories                                                 | 23:29   |       |      | 100.0 |
+| Active                                                  |         | 23:29 |      | 100.0 |
+| Edit release notes for previous sprint                  |         |       | 4:11 |  17.8 |
 | Create a demo and presentation for previous sprint      |         |       | 0:25 |   1.8 |
-| Sprint and product backlog grooming                     |         |       | 4:25 |  19.3 |
-| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  25.8 |
-| Analysis on removing physical references in variability |         |       | 5:27 |  23.8 |
+| Sprint and product backlog grooming                     |         |       | 4:25 |  18.8 |
+| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  25.2 |
+| Analysis on removing physical references in variability |         |       | 5:27 |  23.2 |
 | Remove =rapidjson= formatters                           |         |       | 0:03 |   0.2 |
-| Separate feature templates from bundles                 |         |       | 2:30 |  10.9 |
+| Separate feature templates from bundles                 |         |       | 3:03 |  13.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -531,6 +531,7 @@ the cognitive load. Remove them for now, re-add them properly later.
 
 *** STARTED Separate feature templates from bundles                   :story:
     :LOGBOOK:
+    CLOCK: [2020-03-06 Fri 14:26]--[2020-03-06 Fri 14:59] =>  0:33
     CLOCK: [2020-03-06 Fri 12:43]--[2020-03-06 Fri 13:29] =>  0:46
     CLOCK: [2020-03-06 Fri 10:55]--[2020-03-06 Fri 12:39] =>  1:44
     :END:
