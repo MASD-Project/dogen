@@ -19,28 +19,10 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "dogen.archetypes/io/location_io.hpp"
-#include "dogen.assets/io/meta_model/name_io.hpp"
-#include "dogen.assets/io/meta_model/element_io.hpp"
 #include "dogen.assets/types/meta_model/element_visitor.hpp"
-#include "dogen.variability/io/meta_model/binding_point_io.hpp"
 #include "dogen.assets/io/meta_model/variability/feature_io.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::meta_model::name>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
+#include "dogen.assets/io/meta_model/variability/abstract_bundle_io.hpp"
 
 namespace std {
 
@@ -56,38 +38,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::
 
 }
 
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::variability::meta_model::binding_point>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
-    return s;
-}
-
-}
-
 namespace dogen::assets::meta_model::variability {
-
-feature_bundle::feature_bundle()
-    : generate_static_configuration_(static_cast<bool>(0)),
-      requires_manual_default_constructor_(static_cast<bool>(0)) { }
-
-feature_bundle::feature_bundle(feature_bundle&& rhs)
-    : dogen::assets::meta_model::element(
-        std::forward<dogen::assets::meta_model::element>(rhs)),
-      transparent_associations_(std::move(rhs.transparent_associations_)),
-      opaque_associations_(std::move(rhs.opaque_associations_)),
-      associative_container_keys_(std::move(rhs.associative_container_keys_)),
-      features_(std::move(rhs.features_)),
-      generate_static_configuration_(std::move(rhs.generate_static_configuration_)),
-      requires_manual_default_constructor_(std::move(rhs.requires_manual_default_constructor_)),
-      location_(std::move(rhs.location_)),
-      default_binding_point_(std::move(rhs.default_binding_point_)) { }
 
 feature_bundle::feature_bundle(
     const dogen::assets::meta_model::name& name,
@@ -108,12 +59,12 @@ feature_bundle::feature_bundle(
     const std::list<dogen::assets::meta_model::name>& transparent_associations,
     const std::list<dogen::assets::meta_model::name>& opaque_associations,
     const std::list<dogen::assets::meta_model::name>& associative_container_keys,
-    const std::list<dogen::assets::meta_model::variability::feature>& features,
     const bool generate_static_configuration,
     const bool requires_manual_default_constructor,
     const dogen::archetypes::location& location,
-    const boost::optional<dogen::variability::meta_model::binding_point>& default_binding_point)
-    : dogen::assets::meta_model::element(
+    const boost::optional<dogen::variability::meta_model::binding_point>& default_binding_point,
+    const std::list<dogen::assets::meta_model::variability::feature>& features)
+    : dogen::assets::meta_model::variability::abstract_bundle(
       name,
       documentation,
       origin_type,
@@ -128,15 +79,15 @@ feature_bundle::feature_bundle(
       configuration,
       artefact_properties,
       archetype_location_properties,
-      decoration),
-      transparent_associations_(transparent_associations),
-      opaque_associations_(opaque_associations),
-      associative_container_keys_(associative_container_keys),
-      features_(features),
-      generate_static_configuration_(generate_static_configuration),
-      requires_manual_default_constructor_(requires_manual_default_constructor),
-      location_(location),
-      default_binding_point_(default_binding_point) { }
+      decoration,
+      transparent_associations,
+      opaque_associations,
+      associative_container_keys,
+      generate_static_configuration,
+      requires_manual_default_constructor,
+      location,
+      default_binding_point),
+      features_(features) { }
 
 void feature_bundle::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -155,40 +106,20 @@ void feature_bundle::accept(element_visitor& v) {
 }
 
 void feature_bundle::to_stream(std::ostream& s) const {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
     s << " { "
       << "\"__type__\": " << "\"dogen::assets::meta_model::variability::feature_bundle\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::assets::meta_model::element::to_stream(s);
+    dogen::assets::meta_model::variability::abstract_bundle::to_stream(s);
     s << ", "
-      << "\"transparent_associations\": " << transparent_associations_ << ", "
-      << "\"opaque_associations\": " << opaque_associations_ << ", "
-      << "\"associative_container_keys\": " << associative_container_keys_ << ", "
-      << "\"features\": " << features_ << ", "
-      << "\"generate_static_configuration\": " << generate_static_configuration_ << ", "
-      << "\"requires_manual_default_constructor\": " << requires_manual_default_constructor_ << ", "
-      << "\"location\": " << location_ << ", "
-      << "\"default_binding_point\": " << default_binding_point_
+      << "\"features\": " << features_
       << " }";
 }
 
 void feature_bundle::swap(feature_bundle& other) noexcept {
-    dogen::assets::meta_model::element::swap(other);
+    dogen::assets::meta_model::variability::abstract_bundle::swap(other);
 
     using std::swap;
-    swap(transparent_associations_, other.transparent_associations_);
-    swap(opaque_associations_, other.opaque_associations_);
-    swap(associative_container_keys_, other.associative_container_keys_);
     swap(features_, other.features_);
-    swap(generate_static_configuration_, other.generate_static_configuration_);
-    swap(requires_manual_default_constructor_, other.requires_manual_default_constructor_);
-    swap(location_, other.location_);
-    swap(default_binding_point_, other.default_binding_point_);
 }
 
 bool feature_bundle::equals(const dogen::assets::meta_model::element& other) const {
@@ -198,69 +129,14 @@ bool feature_bundle::equals(const dogen::assets::meta_model::element& other) con
 }
 
 bool feature_bundle::operator==(const feature_bundle& rhs) const {
-    return dogen::assets::meta_model::element::compare(rhs) &&
-        transparent_associations_ == rhs.transparent_associations_ &&
-        opaque_associations_ == rhs.opaque_associations_ &&
-        associative_container_keys_ == rhs.associative_container_keys_ &&
-        features_ == rhs.features_ &&
-        generate_static_configuration_ == rhs.generate_static_configuration_ &&
-        requires_manual_default_constructor_ == rhs.requires_manual_default_constructor_ &&
-        location_ == rhs.location_ &&
-        default_binding_point_ == rhs.default_binding_point_;
+    return dogen::assets::meta_model::variability::abstract_bundle::compare(rhs) &&
+        features_ == rhs.features_;
 }
 
 feature_bundle& feature_bundle::operator=(feature_bundle other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const std::list<dogen::assets::meta_model::name>& feature_bundle::transparent_associations() const {
-    return transparent_associations_;
-}
-
-std::list<dogen::assets::meta_model::name>& feature_bundle::transparent_associations() {
-    return transparent_associations_;
-}
-
-void feature_bundle::transparent_associations(const std::list<dogen::assets::meta_model::name>& v) {
-    transparent_associations_ = v;
-}
-
-void feature_bundle::transparent_associations(const std::list<dogen::assets::meta_model::name>&& v) {
-    transparent_associations_ = std::move(v);
-}
-
-const std::list<dogen::assets::meta_model::name>& feature_bundle::opaque_associations() const {
-    return opaque_associations_;
-}
-
-std::list<dogen::assets::meta_model::name>& feature_bundle::opaque_associations() {
-    return opaque_associations_;
-}
-
-void feature_bundle::opaque_associations(const std::list<dogen::assets::meta_model::name>& v) {
-    opaque_associations_ = v;
-}
-
-void feature_bundle::opaque_associations(const std::list<dogen::assets::meta_model::name>&& v) {
-    opaque_associations_ = std::move(v);
-}
-
-const std::list<dogen::assets::meta_model::name>& feature_bundle::associative_container_keys() const {
-    return associative_container_keys_;
-}
-
-std::list<dogen::assets::meta_model::name>& feature_bundle::associative_container_keys() {
-    return associative_container_keys_;
-}
-
-void feature_bundle::associative_container_keys(const std::list<dogen::assets::meta_model::name>& v) {
-    associative_container_keys_ = v;
-}
-
-void feature_bundle::associative_container_keys(const std::list<dogen::assets::meta_model::name>&& v) {
-    associative_container_keys_ = std::move(v);
 }
 
 const std::list<dogen::assets::meta_model::variability::feature>& feature_bundle::features() const {
@@ -277,54 +153,6 @@ void feature_bundle::features(const std::list<dogen::assets::meta_model::variabi
 
 void feature_bundle::features(const std::list<dogen::assets::meta_model::variability::feature>&& v) {
     features_ = std::move(v);
-}
-
-bool feature_bundle::generate_static_configuration() const {
-    return generate_static_configuration_;
-}
-
-void feature_bundle::generate_static_configuration(const bool v) {
-    generate_static_configuration_ = v;
-}
-
-bool feature_bundle::requires_manual_default_constructor() const {
-    return requires_manual_default_constructor_;
-}
-
-void feature_bundle::requires_manual_default_constructor(const bool v) {
-    requires_manual_default_constructor_ = v;
-}
-
-const dogen::archetypes::location& feature_bundle::location() const {
-    return location_;
-}
-
-dogen::archetypes::location& feature_bundle::location() {
-    return location_;
-}
-
-void feature_bundle::location(const dogen::archetypes::location& v) {
-    location_ = v;
-}
-
-void feature_bundle::location(const dogen::archetypes::location&& v) {
-    location_ = std::move(v);
-}
-
-const boost::optional<dogen::variability::meta_model::binding_point>& feature_bundle::default_binding_point() const {
-    return default_binding_point_;
-}
-
-boost::optional<dogen::variability::meta_model::binding_point>& feature_bundle::default_binding_point() {
-    return default_binding_point_;
-}
-
-void feature_bundle::default_binding_point(const boost::optional<dogen::variability::meta_model::binding_point>& v) {
-    default_binding_point_ = v;
-}
-
-void feature_bundle::default_binding_point(const boost::optional<dogen::variability::meta_model::binding_point>&& v) {
-    default_binding_point_ = std::move(v);
 }
 
 }

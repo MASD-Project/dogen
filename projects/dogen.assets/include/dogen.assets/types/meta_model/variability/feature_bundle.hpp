@@ -28,12 +28,8 @@
 #include <list>
 #include <iosfwd>
 #include <algorithm>
-#include <boost/optional.hpp>
-#include "dogen.archetypes/types/location.hpp"
-#include "dogen.assets/types/meta_model/name.hpp"
-#include "dogen.assets/types/meta_model/element.hpp"
-#include "dogen.variability/types/meta_model/binding_point.hpp"
 #include "dogen.assets/types/meta_model/variability/feature.hpp"
+#include "dogen.assets/types/meta_model/variability/abstract_bundle.hpp"
 
 namespace dogen::assets::meta_model::variability {
 
@@ -50,17 +46,13 @@ namespace dogen::assets::meta_model::variability {
  * @li the generation of a static configuration class to  represent the feature once
  *  read out from the dynamic configuration - if requested.
  */
-class feature_bundle final : public dogen::assets::meta_model::element {
+class feature_bundle final : public dogen::assets::meta_model::variability::abstract_bundle {
 public:
+    feature_bundle() = default;
     feature_bundle(const feature_bundle&) = default;
-
-public:
-    feature_bundle();
+    feature_bundle(feature_bundle&&) = default;
 
     virtual ~feature_bundle() noexcept { }
-
-public:
-    feature_bundle(feature_bundle&& rhs);
 
 public:
     feature_bundle(
@@ -82,11 +74,11 @@ public:
         const std::list<dogen::assets::meta_model::name>& transparent_associations,
         const std::list<dogen::assets::meta_model::name>& opaque_associations,
         const std::list<dogen::assets::meta_model::name>& associative_container_keys,
-        const std::list<dogen::assets::meta_model::variability::feature>& features,
         const bool generate_static_configuration,
         const bool requires_manual_default_constructor,
         const dogen::archetypes::location& location,
-        const boost::optional<dogen::variability::meta_model::binding_point>& default_binding_point);
+        const boost::optional<dogen::variability::meta_model::binding_point>& default_binding_point,
+        const std::list<dogen::assets::meta_model::variability::feature>& features);
 
 public:
     using element::accept;
@@ -100,39 +92,6 @@ public:
 
 public:
     /**
-     * @brief Elements that are involved in aggregation or composition relationships.
-     */
-    /**@{*/
-    const std::list<dogen::assets::meta_model::name>& transparent_associations() const;
-    std::list<dogen::assets::meta_model::name>& transparent_associations();
-    void transparent_associations(const std::list<dogen::assets::meta_model::name>& v);
-    void transparent_associations(const std::list<dogen::assets::meta_model::name>&& v);
-    /**@}*/
-
-    /**
-     * @brief Elements that are involved in aggregation or composition relationships via
-     * indirection.
-     *
-     * This is used to break cycles where required.
-     */
-    /**@{*/
-    const std::list<dogen::assets::meta_model::name>& opaque_associations() const;
-    std::list<dogen::assets::meta_model::name>& opaque_associations();
-    void opaque_associations(const std::list<dogen::assets::meta_model::name>& v);
-    void opaque_associations(const std::list<dogen::assets::meta_model::name>&& v);
-    /**@}*/
-
-    /**
-     * @brief Elements that are keys in an associative container.
-     */
-    /**@{*/
-    const std::list<dogen::assets::meta_model::name>& associative_container_keys() const;
-    std::list<dogen::assets::meta_model::name>& associative_container_keys();
-    void associative_container_keys(const std::list<dogen::assets::meta_model::name>& v);
-    void associative_container_keys(const std::list<dogen::assets::meta_model::name>&& v);
-    /**@}*/
-
-    /**
      * @brief Set of features associated with this feature bundle.
      */
     /**@{*/
@@ -140,48 +99,6 @@ public:
     std::list<dogen::assets::meta_model::variability::feature>& features();
     void features(const std::list<dogen::assets::meta_model::variability::feature>& v);
     void features(const std::list<dogen::assets::meta_model::variability::feature>&& v);
-    /**@}*/
-
-    /**
-     * @brief If true, the code generator will output a class to represent the static configuration.
-     */
-    /**@{*/
-    bool generate_static_configuration() const;
-    void generate_static_configuration(const bool v);
-    /**@}*/
-
-    /**
-     * @brief If true, the code generated for this feature bundle needs a manually generated
-     * default constructor.
-     */
-    /**@{*/
-    bool requires_manual_default_constructor() const;
-    void requires_manual_default_constructor(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Archetype location coordinates for the feature.
-     */
-    /**@{*/
-    const dogen::archetypes::location& location() const;
-    dogen::archetypes::location& location();
-    void location(const dogen::archetypes::location& v);
-    void location(const dogen::archetypes::location&& v);
-    /**@}*/
-
-    /**
-     * @brief Default binding point for all features in this bundle.
-     *
-     * The binding point indicates where the feature will bind when instantiated in a
-     * model. If the default binding point is supplied for a bundle, the templates cannot
-     * supply individual binding points. Conversely, if not supplied, they must supply
-     * their individual binding points.
-     */
-    /**@{*/
-    const boost::optional<dogen::variability::meta_model::binding_point>& default_binding_point() const;
-    boost::optional<dogen::variability::meta_model::binding_point>& default_binding_point();
-    void default_binding_point(const boost::optional<dogen::variability::meta_model::binding_point>& v);
-    void default_binding_point(const boost::optional<dogen::variability::meta_model::binding_point>&& v);
     /**@}*/
 
 public:
@@ -198,14 +115,7 @@ public:
     feature_bundle& operator=(feature_bundle other);
 
 private:
-    std::list<dogen::assets::meta_model::name> transparent_associations_;
-    std::list<dogen::assets::meta_model::name> opaque_associations_;
-    std::list<dogen::assets::meta_model::name> associative_container_keys_;
     std::list<dogen::assets::meta_model::variability::feature> features_;
-    bool generate_static_configuration_;
-    bool requires_manual_default_constructor_;
-    dogen::archetypes::location location_;
-    boost::optional<dogen::variability::meta_model::binding_point> default_binding_point_;
 };
 
 }

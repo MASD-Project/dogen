@@ -1929,47 +1929,6 @@
       ]
     },
     {
-      "name": "meta_model::variability::feature_template_bundle",
-      "documentation": "A feature template bundle represents an aggregation of feature templates in a\nmodel.\n\nThe feature templates should be \"semantically related\", that is, belong to a related\ntopic. A feature template bundle is used by code generation to generate\ninfrastructural code to ease the creation and subsequent processing of features. \n\nGenerated code comprises of two aspects: \n\n@li the registration of the feature template for the dynamic part of the processing;\n@li the generation of a static configuration class to  represent the feature once\n read out from the dynamic configuration - if requested.\n",
-      "stereotypes": [
-        "assets::meta_element",
-        "Associatable"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "feature_templates",
-          "type": "std::list<feature_template>",
-          "documentation": "Set of feature templates associated with this feature template bundle.\n"
-        },
-        {
-          "name": "generate_static_configuration",
-          "type": "bool",
-          "documentation": "If true, the code generator will output a class to represent the static configuration.\n"
-        },
-        {
-          "name": "requires_manual_default_constructor",
-          "type": "bool",
-          "documentation": "If true, the code generated for this feature template bundle needs a manually\ngenerated default constructor.\n"
-        },
-        {
-          "name": "template_kind",
-          "type": "variability::meta_model::template_kind",
-          "documentation": "Kind of template expansion to perform for this feature template.\n"
-        },
-        {
-          "name": "location",
-          "type": "archetypes::location",
-          "documentation": "Archetype location coordinates for the feature template to expand into.\n"
-        },
-        {
-          "name": "default_binding_point",
-          "type": "boost::optional<variability::meta_model::binding_point>",
-          "documentation": "Default binding point for all feature templates in this bundle.\n\nThe binding point indicates where the feature will bind when instantiated in a\nmodel. If the default binding point is supplied for a bundle, the templates cannot\nsupply individual binding points. Conversely, if not supplied, they must supply\ntheir individual binding points.\n"
-        }
-      ]
-    },
-    {
       "name": "meta_model::variability::abstract_feature",
       "documentation": "Contains all of the common attributes between features and feature templates.\n",
       "stereotypes": [
@@ -3785,19 +3744,14 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::variability::feature_bundle",
-      "documentation": "A feature bundle represents an aggregation of featuresin a model.\n\nThe features should be \"semantically related\", that is, belong to a related\ntopic. A feature bundle is used by code generation to generate infrastructural code\nto ease the creation and subsequent processing of features. \n\nGenerated code comprises of two aspects: \n\n@li the registration of the feature for the dynamic part of the processing;\n@li the generation of a static configuration class to  represent the feature once\n read out from the dynamic configuration - if requested.\n",
+      "name": "meta_model::variability::abstract_bundle",
+      "documentation": "A feature template bundle represents an aggregation of feature templates in a\nmodel.\n\nThe feature templates should be \"semantically related\", that is, belong to a related\ntopic. A feature template bundle is used by code generation to generate\ninfrastructural code to ease the creation and subsequent processing of features. \n\nGenerated code comprises of two aspects: \n\n@li the registration of the feature template for the dynamic part of the processing;\n@li the generation of a static configuration class to  represent the feature once\n read out from the dynamic configuration - if requested.\n",
       "stereotypes": [
         "assets::meta_element",
         "Associatable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "features",
-          "type": "std::list<feature>",
-          "documentation": "Set of features associated with this feature bundle.\n"
-        },
         {
           "name": "generate_static_configuration",
           "type": "bool",
@@ -3806,17 +3760,32 @@
         {
           "name": "requires_manual_default_constructor",
           "type": "bool",
-          "documentation": "If true, the code generated for this feature bundle needs a manually generated\ndefault constructor.\n"
+          "documentation": "If true, the code generated for this feature template bundle needs a manually\ngenerated default constructor.\n"
         },
         {
           "name": "location",
           "type": "archetypes::location",
-          "documentation": "Archetype location coordinates for the feature.\n"
+          "documentation": "Archetype location coordinates for the feature template to expand into.\n"
         },
         {
           "name": "default_binding_point",
           "type": "boost::optional<variability::meta_model::binding_point>",
-          "documentation": "Default binding point for all features in this bundle.\n\nThe binding point indicates where the feature will bind when instantiated in a\nmodel. If the default binding point is supplied for a bundle, the templates cannot\nsupply individual binding points. Conversely, if not supplied, they must supply\ntheir individual binding points.\n"
+          "documentation": "Default binding point for all feature templates in this bundle.\n\nThe binding point indicates where the feature will bind when instantiated in a\nmodel. If the default binding point is supplied for a bundle, the templates cannot\nsupply individual binding points. Conversely, if not supplied, they must supply\ntheir individual binding points.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::variability::feature_bundle",
+      "parents": [
+        "meta_model::variability::abstract_bundle"
+      ],
+      "documentation": "A feature bundle represents an aggregation of featuresin a model.\n\nThe features should be \"semantically related\", that is, belong to a related\ntopic. A feature bundle is used by code generation to generate infrastructural code\nto ease the creation and subsequent processing of features. \n\nGenerated code comprises of two aspects: \n\n@li the registration of the feature for the dynamic part of the processing;\n@li the generation of a static configuration class to  represent the feature once\n read out from the dynamic configuration - if requested.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "features",
+          "type": "std::list<feature>",
+          "documentation": "Set of features associated with this feature bundle.\n"
         }
       ]
     },
@@ -3827,6 +3796,26 @@
       ],
       "documentation": "Represents a feature in variability space.\n",
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::variability::feature_template_bundle",
+      "parents": [
+        "meta_model::variability::abstract_bundle"
+      ],
+      "documentation": "A feature template bundle represents an aggregation of feature templates in a\nmodel.\n\nThe feature templates should be \"semantically related\", that is, belong to a related\ntopic. A feature template bundle is used by code generation to generate\ninfrastructural code to ease the creation and subsequent processing of features. \n\nGenerated code comprises of two aspects: \n\n@li the registration of the feature template for the dynamic part of the processing;\n@li the generation of a static configuration class to  represent the feature once\n read out from the dynamic configuration - if requested.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "feature_templates",
+          "type": "std::list<feature_template>",
+          "documentation": "Set of feature templates associated with this feature template bundle.\n"
+        },
+        {
+          "name": "template_kind",
+          "type": "variability::meta_model::template_kind",
+          "documentation": "Kind of template expansion to perform for this feature template.\n"
+        }
+      ]
     }
   ]
 }

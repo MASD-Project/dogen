@@ -18,17 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen.variability/io/meta_model/template_kind_io.hpp"
-#include "dogen.assets/io/meta_model/variability/abstract_bundle_io.hpp"
-#include "dogen.assets/io/meta_model/variability/feature_template_io.hpp"
-#include "dogen.assets/io/meta_model/variability/feature_template_bundle_io.hpp"
+#ifndef DOGEN_ASSETS_IO_META_MODEL_VARIABILITY_ABSTRACT_BUNDLE_IO_HPP
+#define DOGEN_ASSETS_IO_META_MODEL_VARIABILITY_ABSTRACT_BUNDLE_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen.assets/types/meta_model/variability/abstract_bundle.hpp"
 
 namespace dogen::assets::meta_model::variability {
 
-std::ostream& operator<<(std::ostream& s, const feature_template_bundle& v) {
-    v.to_stream(s);
-    return(s);
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::assets::meta_model::variability::abstract_bundle& v);
 
 }
+
+#endif
