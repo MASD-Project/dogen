@@ -19,12 +19,18 @@
  *
  */
 #include <ostream>
-#include "dogen.assets/io/meta_model/variability/feature_io.hpp"
+#include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
+#include "dogen.assets/io/meta_model/name_io.hpp"
+#include "dogen.assets/io/meta_model/name_tree_io.hpp"
+#include "dogen.variability/io/meta_model/value_type_io.hpp"
+#include "dogen.variability/io/meta_model/binding_point_io.hpp"
+#include "dogen.variability/io/meta_model/configuration_io.hpp"
 #include "dogen.assets/io/meta_model/variability/abstract_feature_io.hpp"
 
 namespace dogen::assets::meta_model::variability {
 
-std::ostream& operator<<(std::ostream& s, const feature& v) {
+std::ostream& operator<<(std::ostream& s, const abstract_feature& v) {
     v.to_stream(s);
     return(s);
 }

@@ -25,31 +25,22 @@
 #pragma once
 #endif
 
-#include <string>
+#include <iosfwd>
 #include <algorithm>
-#include <boost/optional.hpp>
-#include <boost/shared_ptr.hpp>
-#include "dogen.assets/types/meta_model/name.hpp"
-#include "dogen.assets/types/meta_model/name_tree.hpp"
-#include "dogen.variability/types/meta_model/value_type.hpp"
-#include "dogen.variability/types/meta_model/binding_point.hpp"
-#include "dogen.variability/types/meta_model/configuration_fwd.hpp"
+#include "dogen.assets/types/meta_model/variability/abstract_feature.hpp"
 
 namespace dogen::assets::meta_model::variability {
 
 /**
  * @brief Represents a feature in variability space.
  */
-class feature final {
+class feature final : public dogen::assets::meta_model::variability::abstract_feature {
 public:
+    feature() = default;
     feature(const feature&) = default;
-    ~feature() = default;
+    feature(feature&&) = default;
 
-public:
-    feature();
-
-public:
-    feature(feature&& rhs);
+    virtual ~feature() noexcept { }
 
 public:
     feature(
@@ -68,141 +59,7 @@ public:
         const bool requires_optionality);
 
 public:
-    /**
-     * @brief Code comments.
-     *
-     * These are expected to follow the grammar of the comment processing tools
-     * of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java,
-     * etc.
-     */
-    /**@{*/
-    const std::string& documentation() const;
-    std::string& documentation();
-    void documentation(const std::string& v);
-    void documentation(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Configuration for this element.
-     */
-    /**@{*/
-    const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration() const;
-    boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration();
-    void configuration(const boost::shared_ptr<dogen::variability::meta_model::configuration>& v);
-    void configuration(const boost::shared_ptr<dogen::variability::meta_model::configuration>&& v);
-    /**@}*/
-
-    /**
-     * @brief Fully qualified name.
-     */
-    /**@{*/
-    const dogen::assets::meta_model::name& name() const;
-    dogen::assets::meta_model::name& name();
-    void name(const dogen::assets::meta_model::name& v);
-    void name(const dogen::assets::meta_model::name&& v);
-    /**@}*/
-
-    /**
-     * @brief Identifier of the feature, as will be seen by the end user.
-     */
-    /**@{*/
-    const std::string& key() const;
-    std::string& key();
-    void key(const std::string& v);
-    void key(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Post-processed key, suitable for use as an identifier.
-     */
-    /**@{*/
-    const std::string& identifiable_key() const;
-    std::string& identifiable_key();
-    void identifiable_key(const std::string& v);
-    void identifiable_key(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Type of the static configuration field, as read out from original model.
-     *
-     * This is the type before mapping and parsing.
-     */
-    /**@{*/
-    const std::string& unparsed_type() const;
-    std::string& unparsed_type();
-    void unparsed_type(const std::string& v);
-    void unparsed_type(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Unparsed type, after mapping has taken place.
-     */
-    /**@{*/
-    const std::string& mapped_type() const;
-    std::string& mapped_type();
-    void mapped_type(const std::string& v);
-    void mapped_type(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Mapped type, after parsing has taken place.
-     */
-    /**@{*/
-    const dogen::assets::meta_model::name_tree& parsed_type() const;
-    dogen::assets::meta_model::name_tree& parsed_type();
-    void parsed_type(const dogen::assets::meta_model::name_tree& v);
-    void parsed_type(const dogen::assets::meta_model::name_tree&& v);
-    /**@}*/
-
-    /**
-     * @brief String representing the default value set on the model.
-     */
-    /**@{*/
-    const std::string& value() const;
-    std::string& value();
-    void value(const std::string& v);
-    void value(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Type of the value pointed to by the feature.
-     */
-    /**@{*/
-    dogen::variability::meta_model::value_type value_type() const;
-    void value_type(const dogen::variability::meta_model::value_type v);
-    /**@}*/
-
-    /**
-     * @brief Override binding point for this feature.
-     *
-     * If the default binding point is supplied for a bundle, the features cannot
-     * supply individual binding points. Conversely, if not supplied, they must supply
-     * their individual binding points.
-     */
-    /**@{*/
-    const boost::optional<dogen::variability::meta_model::binding_point>& binding_point() const;
-    boost::optional<dogen::variability::meta_model::binding_point>& binding_point();
-    void binding_point(const boost::optional<dogen::variability::meta_model::binding_point>& v);
-    void binding_point(const boost::optional<dogen::variability::meta_model::binding_point>&& v);
-    /**@}*/
-
-    /**
-     * @brief If true, the feature generated by the feature template is optional.
-     */
-    /**@{*/
-    bool is_optional() const;
-    void is_optional(const bool v);
-    /**@}*/
-
-    /**
-     * @brief If true, the feature's static configuration will have an optional type.
-     *
-     * This is only required if the feature template is optional and has no default value.
-     */
-    /**@{*/
-    bool requires_optionality() const;
-    void requires_optionality(const bool v);
-    /**@}*/
+    void to_stream(std::ostream& s) const override;
 
 public:
     bool operator==(const feature& rhs) const;
@@ -211,23 +68,12 @@ public:
     }
 
 public:
+    bool equals(const dogen::assets::meta_model::variability::abstract_feature& other) const override;
+
+public:
     void swap(feature& other) noexcept;
     feature& operator=(feature other);
 
-private:
-    std::string documentation_;
-    boost::shared_ptr<dogen::variability::meta_model::configuration> configuration_;
-    dogen::assets::meta_model::name name_;
-    std::string key_;
-    std::string identifiable_key_;
-    std::string unparsed_type_;
-    std::string mapped_type_;
-    dogen::assets::meta_model::name_tree parsed_type_;
-    std::string value_;
-    dogen::variability::meta_model::value_type value_type_;
-    boost::optional<dogen::variability::meta_model::binding_point> binding_point_;
-    bool is_optional_;
-    bool requires_optionality_;
 };
 
 }
