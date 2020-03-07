@@ -14,21 +14,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-06 Fri 22:00]
+#+CAPTION: Clock summary at [2020-03-07 Sat 20:03]
 | <75>                                                    |         |       |      |       |
 | Headline                                                | Time    |       |      |     % |
 |---------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                            | *27:15* |       |      | 100.0 |
+| *Total time*                                            | *28:06* |       |      | 100.0 |
 |---------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                 | 27:15   |       |      | 100.0 |
-| Active                                                  |         | 27:15 |      | 100.0 |
-| Edit release notes for previous sprint                  |         |       | 4:11 |  15.4 |
+| Stories                                                 | 28:06   |       |      | 100.0 |
+| Active                                                  |         | 28:06 |      | 100.0 |
+| Edit release notes for previous sprint                  |         |       | 4:11 |  14.9 |
 | Create a demo and presentation for previous sprint      |         |       | 0:25 |   1.5 |
-| Sprint and product backlog grooming                     |         |       | 4:25 |  16.2 |
-| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  21.7 |
-| Analysis on removing physical references in variability |         |       | 5:27 |  20.0 |
+| Sprint and product backlog grooming                     |         |       | 4:25 |  15.7 |
+| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  21.1 |
+| Analysis on removing physical references in variability |         |       | 5:27 |  19.4 |
 | Remove =rapidjson= formatters                           |         |       | 0:03 |   0.2 |
-| Separate feature templates from bundles                 |         |       | 6:49 |  25.0 |
+| Separate feature templates from bundles                 |         |       | 7:40 |  27.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -531,6 +531,8 @@ the cognitive load. Remove them for now, re-add them properly later.
 
 *** STARTED Separate feature templates from bundles                   :story:
     :LOGBOOK:
+    CLOCK: [2020-03-07 Sat 19:04]--[2020-03-07 Sat 19:15] =>  0:11
+    CLOCK: [2020-03-07 Sat 17:37]--[2020-03-07 Sat 18:17] =>  0:40
     CLOCK: [2020-03-06 Fri 20:52]--[2020-03-06 Fri 21:59] =>  1:07
     CLOCK: [2020-03-06 Fri 17:16]--[2020-03-06 Fri 18:28] =>  1:12
     CLOCK: [2020-03-06 Fri 15:48]--[2020-03-06 Fri 17:15] =>  1:27
@@ -552,6 +554,9 @@ Notes:
 
 - need to rename method in registrar, at present its called register
   templates but it also registers features.
+- we should create an abstract feature base class to simplify
+  code. Given the implementation is trivial we can do it now instead
+  of waiting until all of the refactor is finished.
 
 *** Add location and modules to variability                           :story:
 
