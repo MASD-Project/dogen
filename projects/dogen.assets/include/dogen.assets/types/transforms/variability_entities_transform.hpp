@@ -21,6 +21,7 @@
 #ifndef DOGEN_ASSETS_TYPES_TRANSFORMS_VARIABILITY_FEATURE_TEMPLATE_GROUP_TRANSFORM_HPP
 #define DOGEN_ASSETS_TYPES_TRANSFORMS_VARIABILITY_FEATURE_TEMPLATE_GROUP_TRANSFORM_HPP
 
+#include "dogen.variability/types/meta_model/feature_template.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -39,17 +40,26 @@ namespace dogen::assets::transforms {
 class variability_entities_transform final {
 private:
     static void update(const features::variability_templates::feature_group& fg,
-        meta_model::variability::abstract_feature& ft);
+        meta_model::variability::abstract_feature& af);
 
     static void update(const features::variability_bundle::feature_group& fg,
-        meta_model::variability::abstract_bundle& fb);
+        meta_model::variability::abstract_bundle& ab);
 
 private:
-    static void process_features(const context& ctx,
+    static void process_abstract_feature(
+        const features::variability_templates::feature_group& fg1,
+        const std::unordered_map<std::string, std::string>& fixed_mappings,
+        const boost::optional<variability::meta_model::binding_point>&
+        default_binding_point, meta_model::variability::abstract_feature& af);
+
+private:
+    static void process_features(
+        const variability::meta_model::feature_model& fm,
         const std::unordered_map<std::string, std::string>& fixed_mappings,
         meta_model::model& m);
 
-    static void process_feature_templates(const context& ctx,
+    static void process_feature_templates(
+        const variability::meta_model::feature_model& fm,
         const std::unordered_map<std::string, std::string>& fixed_mappings,
         meta_model::model& m);
 
