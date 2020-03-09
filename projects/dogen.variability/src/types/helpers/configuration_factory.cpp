@@ -42,7 +42,7 @@ const std::string actual_binding_point(" Actual binding point: ");
 const std::string duplicate_feature("Feature already inserted: ");
 const std::string duplicate_key("Key already inserted: ");
 const std::string too_many_values("More than one value supplied against key: ");
-const std::string feature_not_found("Type not found: ");
+const std::string feature_not_found("Feature not found: ");
 const std::string invalid_binding_for_point("Incorrect binding type: ");
 
 }
