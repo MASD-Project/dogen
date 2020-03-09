@@ -18,12 +18,59 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.engine/types/transforms/context.hpp"
+#include "dogen.engine/types/transforms/profile_binding_transform.hpp"
+#include "dogen.engine/types/transforms/profile_repository_transform.hpp"
+#include "dogen.engine/types/transforms/assets_model_set_to_configuration_model_set_transform.hpp"
+#include "dogen.engine/types/transforms/profile_template_adaption_transform.hpp"
 #include "dogen.engine/types/transforms/variability_data_chain.hpp"
 
+namespace {
+
+const std::string transform_id("engine.transforms.variability_data_chain");
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+}
 namespace dogen::engine::transforms {
 
-bool variability_data_chain::operator==(const variability_data_chain& /*rhs*/) const {
-    return true;
+void variability_data_chain::
+apply(const context& ctx, assets::meta_model::model_set& ms) {
+    const auto model_name(ms.target().name().qualified().dot());
+    tracing::scoped_chain_tracer stp(lg, "variability data",
+        transform_id, model_name, *ctx.assets_context().tracer());
+
+    /*
+     * First we need to retrieve the variability data structures -
+     * i.e. profile templates - from the models, across all model
+     * sets.
+     */
+    const auto pts(profile_template_adaption_transform::apply(ctx, ms));
+
+    /*
+     * If some templates were found, we need to process them.
+     */
+    if (!pts.empty()) {
+        /*
+         * First we need to create a repository of all profiles,
+         * organised for querying.
+         */
+        const auto prp(profile_repository_transform::apply(ctx, pts, ms));
+
+        /*
+         * Then we need to extract the configuration models from the
+         * assets model set.
+         */
+        auto cms(assets_model_set_to_configuration_model_set_transform::
+            apply(ctx, ms));
+
+        /*
+         * We then bind the profiles to the relevant configurations.
+         */
+        profile_binding_transform::apply(ctx, prp, cms);
+    }
 }
 
 }

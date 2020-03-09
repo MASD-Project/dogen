@@ -21,11 +21,8 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.engine/types/transforms/context.hpp"
-#include "dogen.engine/types/transforms/profile_binding_transform.hpp"
-#include "dogen.engine/types/transforms/profile_repository_transform.hpp"
+#include "dogen.engine/types/transforms/variability_data_chain.hpp"
 #include "dogen.engine/types/transforms/injection_model_to_assets_model_transform.hpp"
-#include "dogen.engine/types/transforms/assets_model_set_to_configuration_model_set_transform.hpp"
-#include "dogen.engine/types/transforms/profile_template_adaption_transform.hpp"
 #include "dogen.engine/types/transforms/dynamic_stereotypes_transform.hpp"
 #include "dogen.engine/types/transforms/injection_model_set_to_assets_model_set_chain.hpp"
 
@@ -67,34 +64,9 @@ apply(const context& ctx, const injection::meta_model::model_set& ms) {
 
     /*
      * The second part of this chain handles variability
-     * processing. First we need to retrieve the variability data
-     * structures - i.e. profile templates - from the models, across
-     * all model sets.
+     * processing. For this we delegate to the variability chain.
      */
-    const auto pts(profile_template_adaption_transform::apply(ctx, r));
-
-    /*
-     * If some templates were found, we need to process them.
-     */
-    if (!pts.empty()) {
-        /*
-         * First we need to create a repository of all profiles,
-         * organised for querying.
-         */
-        const auto prp(profile_repository_transform::apply(ctx, pts, r));
-
-        /*
-         * Then we need to extract the configuration models from the
-         * assets model set.
-         */
-        auto cms(assets_model_set_to_configuration_model_set_transform::
-            apply(ctx, r));
-
-        /*
-         * We then bind the profiles to the relevant configurations.
-         */
-        profile_binding_transform::apply(ctx, prp, cms);
-    }
+    variability_data_chain::apply(ctx, r);
 
     /*
      * The final step is to retrieve stereotypes which did not bind to
