@@ -2702,6 +2702,17 @@ useful for languages like C# and Java, to control serialisation, etc.
 
 Stories that deal with cleaning up the code base.
 
+*** Create a theme for element colours based on an algorithm          :story:
+
+It would be nice if we could automatically determine the colours for
+new modeling elements. This could be done by choosing some kind of
+base colour for each group and then incrementing by a colour step for
+each element. This can easily be done in the python script. The
+question is whether the result would look sensible. This needs some
+experimentation. We also need to make sure that the colour step
+results in colours that are distinct enough so that we can recognise
+the elements. We also need to make sure the elements are readable.
+
 *** Improve error messages for mistakes in meta-data enums            :story:
 
 At present when one makes a mistake in meta data the errors are not
@@ -3503,20 +3514,6 @@ empty. For cases such as enumerations this is just confusing:
 
 It would be much easier to read this if we ignored empty types. We
 need to check that the hydrator is not expecting this field.
-
-*** Create a chain to encapsulate variability transforms              :story:
-
-At present we are using individual variability transforms in the
-engine, and interspersing those with other transforms. A nicer way is
-to have a chain in variability that takes in a configuration model set
-and runs a chain against it.
-
-Actually we can only encapsulate two transforms:
-
-- profile_binding_transform
-- profile_repository_transform
-
-Still, its worthwhile doing it.
 
 *** Consider creating top level exceptions                            :story:
 
