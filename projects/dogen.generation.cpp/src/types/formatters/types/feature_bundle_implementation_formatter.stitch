@@ -75,7 +75,7 @@ make_<#= fb_ft.identifiable_key() #>() {
     feature r;
     r.name().simple("<#= simple_key #>");
 <#+
-               if (has_qualified_name) {
+                if (has_qualified_name) {
 #>
     r.name().qualified("<#= fb_ft.key() #>");
 <#+
@@ -83,14 +83,21 @@ make_<#= fb_ft.identifiable_key() #>() {
 #>
     const auto vt(<#= enum_mapper::from_value_type(fb_ft.value_type()) #>);
     r.value_type(vt);
+<#+
+                if (fb_ft.unparsed_type() == "masd::variability::key_value_pair") {
+#>
+    r.is_partially_matchable(true);
+<#+
+                }
+#>
     r.binding_point(<#= enum_mapper::from_binding_point(*fb_ft.binding_point()) #>);
 <#+
-    if (!fb_ft.value().empty()) {
+                if (!fb_ft.value().empty()) {
 #>
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ <#= fb_ft.value() #> }));
 <#+
-    }
+                }
 #>
 
     archetypes::location al;

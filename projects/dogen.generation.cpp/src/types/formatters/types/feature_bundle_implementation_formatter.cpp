@@ -131,16 +131,19 @@ a.stream() << "make_" << fb_ft.identifiable_key() << "() {" << std::endl;
 a.stream() << "    using namespace dogen::variability::meta_model;" << std::endl;
 a.stream() << "    feature r;" << std::endl;
 a.stream() << "    r.name().simple(\"" << simple_key << "\");" << std::endl;
-               if (has_qualified_name) {
+                if (has_qualified_name) {
 a.stream() << "    r.name().qualified(\"" << fb_ft.key() << "\");" << std::endl;
                }
 a.stream() << "    const auto vt(" << enum_mapper::from_value_type(fb_ft.value_type()) << ");" << std::endl;
 a.stream() << "    r.value_type(vt);" << std::endl;
+                if (fb_ft.unparsed_type() == "masd::variability::key_value_pair") {
+a.stream() << "    r.is_partially_matchable(true);" << std::endl;
+                }
 a.stream() << "    r.binding_point(" << enum_mapper::from_binding_point(*fb_ft.binding_point()) << ");" << std::endl;
-    if (!fb_ft.value().empty()) {
+                if (!fb_ft.value().empty()) {
 a.stream() << "    dogen::variability::helpers::value_factory f;" << std::endl;
 a.stream() << "    r.default_value(f.make(vt, std::list<std::string>{ " << fb_ft.value() << " }));" << std::endl;
-    }
+                }
 a.stream() << std::endl;
 a.stream() << "    archetypes::location al;" << std::endl;
                 if (!fb.location().kernel().empty())
