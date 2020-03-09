@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.archetypes/types/features/enablement.hpp"
+#include "dogen.generation/types/features/enablement.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
 
-namespace dogen::archetypes::features {
+namespace dogen::generation::features {
 
 namespace {
 

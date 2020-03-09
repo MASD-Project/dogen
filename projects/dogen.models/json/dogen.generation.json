@@ -1091,6 +1091,28 @@
         "dogen::handcrafted::cmake"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::enablement",
+      "documentation": "Enablement related properties.\n",
+      "stereotypes": [
+        "masd::variability::feature_template_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "any",
+        "masd.variability.generate_static_configuration": "false",
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "recursive_template"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "enabled",
+          "type": "masd::variability::boolean",
+          "value": "\"true\"",
+          "documentation": "If true, decorations are enabled on this modeling element.\n"
+        }
+      ]
     }
   ]
 }

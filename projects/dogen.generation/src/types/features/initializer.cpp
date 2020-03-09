@@ -19,6 +19,7 @@
  *
  */
 #include "dogen.generation/types/features/decoration.hpp"
+#include "dogen.generation/types/features/enablement.hpp"
 #include "dogen.generation/types/features/formatting.hpp"
 #include "dogen.generation/types/features/initializer.hpp"
 
@@ -26,6 +27,7 @@ namespace dogen::generation::features {
 
 void initializer::
 register_templates(variability::helpers::registrar& rg) {
+    rg.register_templates(dogen::generation::features::enablement::make_templates());
     rg.register_templates(dogen::generation::features::formatting::make_templates());
     rg.register_features(dogen::generation::features::decoration::make_features());
 }

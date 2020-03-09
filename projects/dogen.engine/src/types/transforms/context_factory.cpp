@@ -24,7 +24,6 @@
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/tracer.hpp"
-#include "dogen.archetypes/types/features/initializer.hpp"
 #include "dogen.archetypes/io/location_repository_io.hpp"
 #include "dogen.archetypes/types/location_repository_builder.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
@@ -108,7 +107,6 @@ void context_factory::populate_registrar(variability::helpers::registrar& rg) {
     generation::features::initializer::register_templates(rg);
     templating::initializer::register_templates(rg);
     variability::features::initializer::register_templates(rg);
-    archetypes::features::initializer::register_templates(rg);
     extraction::features::initializer::register_templates(rg);
     generation::cpp::feature_initializer::register_templates(rg);
     generation::csharp::feature_initializer::register_templates(rg);

@@ -18,17 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ARCHETYPES_TYPES_FEATURES_FEATURES_HPP
-#define DOGEN_ARCHETYPES_TYPES_FEATURES_FEATURES_HPP
+#ifndef DOGEN_GENERATION_TYPES_FEATURES_ENABLEMENT_HPP
+#define DOGEN_GENERATION_TYPES_FEATURES_ENABLEMENT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <list>
+#include "dogen.variability/types/meta_model/feature_template.hpp"
+
+namespace dogen::generation::features {
+
 /**
- * @brief Features for the archetype model.
+ * @brief Enablement related properties.
  */
-namespace dogen::archetypes {
+class enablement final {
+
+public:
+    static std::list<dogen::variability::meta_model::feature_template>
+    make_templates();
+};
+
 }
 
 #endif
