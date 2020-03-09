@@ -27662,7 +27662,7 @@ rebuilds for no good reason.#</dia:string>
         <dia:point val="-9,-100"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-9.05,-101.05;60.05,-23.95"/>
+        <dia:rectangle val="-9.05,-101.05;60.05,-22.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27674,7 +27674,7 @@ rebuilds for no good reason.#</dia:string>
         <dia:real val="69"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="76"/>
+        <dia:real val="77"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
