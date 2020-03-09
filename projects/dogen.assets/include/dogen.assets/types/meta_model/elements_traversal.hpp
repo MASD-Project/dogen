@@ -40,6 +40,7 @@
 #include "dogen.assets/types/meta_model/decoration/modeline.hpp"
 #include "dogen.assets/types/meta_model/decoration/modeline_group.hpp"
 #include "dogen.assets/types/meta_model/decoration/generation_marker.hpp"
+#include "dogen.assets/types/meta_model/variability/profile.hpp"
 #include "dogen.assets/types/meta_model/variability/profile_template.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_template_bundle.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
@@ -99,6 +100,9 @@ inline void elements_traversal(const meta_model::model& m,
         v(*pair.second);
 
     for (const auto& pair : m.decoration_elements().generation_markers())
+        v(*pair.second);
+
+    for (const auto& pair : m.variability_elements().profiles())
         v(*pair.second);
 
     for (const auto& pair : m.variability_elements().profile_templates())
@@ -180,6 +184,9 @@ inline void elements_traversal(const meta_model::model& m,
     for (const auto& pair : m.decoration_elements().generation_markers())
         v(*pair.second);
 
+    for (const auto& pair : m.variability_elements().profiles())
+        v(*pair.second);
+
     for (const auto& pair : m.variability_elements().profile_templates())
         v(*pair.second);
 
@@ -257,6 +264,9 @@ inline void elements_traversal(meta_model::model& m,
         v(*pair.second);
 
     for (const auto& pair : m.decoration_elements().generation_markers())
+        v(*pair.second);
+
+    for (const auto& pair : m.variability_elements().profiles())
         v(*pair.second);
 
     for (const auto& pair : m.variability_elements().profile_templates())
@@ -344,6 +354,9 @@ inline void shared_elements_traversal(const meta_model::model& m,
     for (const auto& pair : m.decoration_elements().generation_markers())
         v(pair.second);
 
+    for (const auto& pair : m.variability_elements().profiles())
+        v(pair.second);
+
     for (const auto& pair : m.variability_elements().profile_templates())
         v(pair.second);
 
@@ -423,6 +436,9 @@ inline void shared_elements_traversal(const meta_model::model& m,
     for (const auto& pair : m.decoration_elements().generation_markers())
         v(pair.second);
 
+    for (const auto& pair : m.variability_elements().profiles())
+        v(pair.second);
+
     for (const auto& pair : m.variability_elements().profile_templates())
         v(pair.second);
 
@@ -500,6 +516,9 @@ inline void shared_elements_traversal(meta_model::model& m,
         v(pair.second);
 
     for (const auto& pair : m.decoration_elements().generation_markers())
+        v(pair.second);
+
+    for (const auto& pair : m.variability_elements().profiles())
         v(pair.second);
 
     for (const auto& pair : m.variability_elements().profile_templates())
