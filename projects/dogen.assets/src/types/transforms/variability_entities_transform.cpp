@@ -19,6 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include "dogen.assets/types/meta_model/variability/abstract_feature.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/lexical_cast/meta_model/binding_point_lc.hpp"
@@ -60,7 +61,7 @@ namespace dogen::assets::transforms {
 
 void variability_entities_transform::update(
     const features::variability_templates::feature_group& fg,
-    meta_model::variability::feature_template& ft) {
+    meta_model::variability::abstract_feature& ft) {
 
     using features::variability_templates;
     const auto scfg(variability_templates::make_static_configuration(fg, ft));
@@ -75,7 +76,7 @@ void variability_entities_transform::update(
 
 void variability_entities_transform::
 update(const features::variability_bundle::feature_group& fg,
-    meta_model::variability::feature_template_bundle& fb) {
+    meta_model::variability::abstract_bundle& fb) {
 
     using features::variability_bundle;
     const auto scfg(variability_bundle::make_static_configuration(fg, fb));
@@ -90,48 +91,11 @@ update(const features::variability_bundle::feature_group& fg,
 
     using boost::lexical_cast;
     using variability::meta_model::template_kind;
-    fb.template_kind(lexical_cast<template_kind>(scfg.template_kind));
-
-    using boost::lexical_cast;
-    using variability::meta_model::binding_point;
-    if (!scfg.default_binding_point.empty()) {
-        fb.default_binding_point(lexical_cast<binding_point>(
-                scfg.default_binding_point));
+    using meta_model::variability::feature_template_bundle;
+    auto ftb(dynamic_cast<feature_template_bundle*>(&fb));
+    if (ftb) {
+        ftb->template_kind(lexical_cast<template_kind>(scfg.template_kind));
     }
-}
-
-void variability_entities_transform::update(
-    const features::variability_templates::feature_group& fg,
-    meta_model::variability::feature& f) {
-
-    using features::variability_templates;
-    const auto scfg(variability_templates::make_static_configuration(fg, f));
-
-    f.is_optional(scfg.is_optional);
-
-    using boost::lexical_cast;
-    using variability::meta_model::binding_point;
-    if (!scfg.binding_point.empty())
-        f.binding_point(lexical_cast<binding_point>(scfg.binding_point));
-}
-
-void variability_entities_transform::
-update(const features::variability_bundle::feature_group& fg,
-    meta_model::variability::feature_bundle& fb) {
-
-    using features::variability_bundle;
-    const auto scfg(variability_bundle::make_static_configuration(fg, fb));
-    fb.generate_static_configuration(scfg.generate_static_configuration);
-
-    archetypes::location al;
-    al.kernel(scfg.kernel);
-    al.backend(scfg.backend);
-    al.facet(scfg.facet);
-    al.archetype(scfg.archetype);
-    fb.location(al);
-
-    using boost::lexical_cast;
-    using variability::meta_model::template_kind;
 
     using boost::lexical_cast;
     using variability::meta_model::binding_point;

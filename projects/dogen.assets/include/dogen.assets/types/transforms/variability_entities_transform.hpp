@@ -39,16 +39,10 @@ namespace dogen::assets::transforms {
 class variability_entities_transform final {
 private:
     static void update(const features::variability_templates::feature_group& fg,
-        meta_model::variability::feature_template& ft);
+        meta_model::variability::abstract_feature& ft);
 
     static void update(const features::variability_bundle::feature_group& fg,
-        meta_model::variability::feature_template_bundle& fb);
-
-    static void update(const features::variability_templates::feature_group& fg,
-        meta_model::variability::feature& f);
-
-    static void update(const features::variability_bundle::feature_group& fg,
-        meta_model::variability::feature_bundle& fb);
+        meta_model::variability::abstract_bundle& fb);
 
 private:
     static void process_features(const context& ctx,
