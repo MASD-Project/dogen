@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.assets/types/meta_model/variability/profile.hpp"
 #include "dogen.assets/types/meta_model/variability/initializer.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
 #include "dogen.assets/types/meta_model/variability/profile_template.hpp"
@@ -28,6 +29,15 @@ namespace boost {
 
 inline bool operator==(const boost::shared_ptr<dogen::assets::meta_model::variability::profile_template>& lhs,
 const boost::shared_ptr<dogen::assets::meta_model::variability::profile_template>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::assets::meta_model::variability::profile>& lhs,
+const boost::shared_ptr<dogen::assets::meta_model::variability::profile>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -64,10 +74,12 @@ namespace dogen::assets::meta_model::variability {
 
 element_repository::element_repository(
     const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::profile_template> >& profile_templates,
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::profile> >& profiles,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::feature_template_bundle> >& feature_template_bundles,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::feature_bundle> >& feature_bundles,
     const boost::shared_ptr<dogen::assets::meta_model::variability::initializer>& initializer)
     : profile_templates_(profile_templates),
+      profiles_(profiles),
       feature_template_bundles_(feature_template_bundles),
       feature_bundles_(feature_bundles),
       initializer_(initializer) { }
@@ -75,6 +87,7 @@ element_repository::element_repository(
 void element_repository::swap(element_repository& other) noexcept {
     using std::swap;
     swap(profile_templates_, other.profile_templates_);
+    swap(profiles_, other.profiles_);
     swap(feature_template_bundles_, other.feature_template_bundles_);
     swap(feature_bundles_, other.feature_bundles_);
     swap(initializer_, other.initializer_);
@@ -82,6 +95,7 @@ void element_repository::swap(element_repository& other) noexcept {
 
 bool element_repository::operator==(const element_repository& rhs) const {
     return profile_templates_ == rhs.profile_templates_ &&
+        profiles_ == rhs.profiles_ &&
         feature_template_bundles_ == rhs.feature_template_bundles_ &&
         feature_bundles_ == rhs.feature_bundles_ &&
         initializer_ == rhs.initializer_;
@@ -107,6 +121,22 @@ void element_repository::profile_templates(const std::unordered_map<std::string,
 
 void element_repository::profile_templates(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::profile_template> >&& v) {
     profile_templates_ = std::move(v);
+}
+
+const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::profile> >& element_repository::profiles() const {
+    return profiles_;
+}
+
+std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::profile> >& element_repository::profiles() {
+    return profiles_;
+}
+
+void element_repository::profiles(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::profile> >& v) {
+    profiles_ = v;
+}
+
+void element_repository::profiles(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::profile> >&& v) {
+    profiles_ = std::move(v);
 }
 
 const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::feature_template_bundle> >& element_repository::feature_template_bundles() const {

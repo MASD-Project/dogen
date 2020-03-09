@@ -2441,6 +2441,10 @@
           "type": "std::unordered_map<std::string, boost::shared_ptr<profile_template>>"
         },
         {
+          "name": "profiles",
+          "type": "std::unordered_map<std::string, boost::shared_ptr<profile>>"
+        },
+        {
           "name": "feature_template_bundles",
           "type": "std::unordered_map<std::string, boost::shared_ptr<feature_template_bundle>>"
         },
@@ -3814,6 +3818,27 @@
           "name": "template_kind",
           "type": "variability::meta_model::template_kind",
           "documentation": "Kind of template expansion to perform for this feature template.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::variability::profile",
+      "stereotypes": [
+        "assets::meta_element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "labels",
+          "type": "std::unordered_set<std::string>"
+        },
+        {
+          "name": "entries",
+          "type": "std::list<profile_template_entry>"
+        },
+        {
+          "name": "parents",
+          "type": "std::list<name>"
         }
       ]
     }

@@ -29,6 +29,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
+#include "dogen.assets/types/meta_model/variability/profile_fwd.hpp"
 #include "dogen.assets/types/meta_model/variability/initializer_fwd.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_bundle_fwd.hpp"
 #include "dogen.assets/types/meta_model/variability/profile_template_fwd.hpp"
@@ -46,6 +47,7 @@ public:
 public:
     element_repository(
         const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::profile_template> >& profile_templates,
+        const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::profile> >& profiles,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::feature_template_bundle> >& feature_template_bundles,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::feature_bundle> >& feature_bundles,
         const boost::shared_ptr<dogen::assets::meta_model::variability::initializer>& initializer);
@@ -55,6 +57,11 @@ public:
     std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::profile_template> >& profile_templates();
     void profile_templates(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::profile_template> >& v);
     void profile_templates(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::profile_template> >&& v);
+
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::profile> >& profiles() const;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::profile> >& profiles();
+    void profiles(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::profile> >& v);
+    void profiles(const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::profile> >&& v);
 
     const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::feature_template_bundle> >& feature_template_bundles() const;
     std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::feature_template_bundle> >& feature_template_bundles();
@@ -83,6 +90,7 @@ public:
 
 private:
     std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::profile_template> > profile_templates_;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::profile> > profiles_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::feature_template_bundle> > feature_template_bundles_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::variability::feature_bundle> > feature_bundles_;
     boost::shared_ptr<dogen::assets::meta_model::variability::initializer> initializer_;

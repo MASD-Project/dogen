@@ -32,6 +32,7 @@
 #include "dogen.assets/types/meta_model/structural/builtin_fwd.hpp"
 #include "dogen.assets/types/meta_model/structural/visitor_fwd.hpp"
 #include "dogen.assets/types/meta_model/decoration/modeline_fwd.hpp"
+#include "dogen.assets/types/meta_model/variability/profile_fwd.hpp"
 #include "dogen.assets/types/meta_model/structural/assistant_fwd.hpp"
 #include "dogen.assets/types/meta_model/structural/exception_fwd.hpp"
 #include "dogen.assets/types/meta_model/structural/primitive_fwd.hpp"
@@ -291,6 +292,16 @@ public:
     virtual void visit(const dogen::assets::meta_model::variability::initializer&) { }
     virtual void visit(dogen::assets::meta_model::variability::initializer&) const { }
     virtual void visit(dogen::assets::meta_model::variability::initializer&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::assets::meta_model::variability::profile
+     */
+    /**@{*/
+    virtual void visit(const dogen::assets::meta_model::variability::profile&) const { }
+    virtual void visit(const dogen::assets::meta_model::variability::profile&) { }
+    virtual void visit(dogen::assets::meta_model::variability::profile&) const { }
+    virtual void visit(dogen::assets::meta_model::variability::profile&) { }
     /**@}*/
 
     /**
