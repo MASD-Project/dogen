@@ -220,6 +220,10 @@ process_element(const helpers::adapter& ad,
         insert(ad.to_licence(l, scr, e),
             m.decoration_elements().licences());
         break;
+    case static_stereotypes::variability_profile:
+        insert(ad.to_variability_profile(l, scr, e),
+            m.variability_elements().profiles());
+        break;
     case static_stereotypes::variability_profile_template:
         insert(ad.to_variability_profile_template(l, scr, e),
             m.variability_elements().profile_templates());
