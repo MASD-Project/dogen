@@ -478,9 +478,7 @@ template_instantiator::instantiate(const meta_model::feature_model& fm,
     /*
      * Finally, dispatch to the appropriate instantiator.
      */
-    BOOST_LOG_SEV(lg, debug) << "Instantiating point template: "
-                             << cpt;
-
+    BOOST_LOG_SEV(lg, debug) << "Instantiating point template: " << cpt;
     const auto tk(cpt.kind());
     if (tk == template_kind::recursive_template)
         r = instantiate_recursive_template(fm, cpt);

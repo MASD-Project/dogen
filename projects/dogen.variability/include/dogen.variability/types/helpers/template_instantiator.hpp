@@ -43,7 +43,7 @@
 namespace dogen::variability::helpers {
 
 /**
- * @brief Instantiates configuration and feature templates.
+ * @brief Instantiates profile templates and feature templates.
  */
 class template_instantiator final {
 public:
