@@ -27,16 +27,15 @@ namespace dogen::extraction::features {
 
 namespace {
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_extraction_force_write() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("force_write");
     r.name().qualified("masd.extraction.force_write");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));
 
@@ -47,16 +46,15 @@ make_masd_extraction_force_write() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_extraction_delete_extra_files() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("delete_extra_files");
     r.name().qualified("masd.extraction.delete_extra_files");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "true" }));
 
@@ -67,16 +65,15 @@ make_masd_extraction_delete_extra_files() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_extraction_ignore_files_matching_regex() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("ignore_files_matching_regex");
     r.name().qualified("masd.extraction.ignore_files_matching_regex");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -85,16 +82,15 @@ make_masd_extraction_ignore_files_matching_regex() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_extraction_delete_empty_directories() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("delete_empty_directories");
     r.name().qualified("masd.extraction.delete_empty_directories");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));
 
@@ -105,16 +101,15 @@ make_masd_extraction_delete_empty_directories() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_extraction_enable_backend_directories() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("enable_backend_directories");
     r.name().qualified("masd.extraction.enable_backend_directories");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));
 
@@ -156,10 +151,10 @@ filesystem::static_configuration filesystem::make_static_configuration(
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature_template>
-filesystem::make_templates() {
+std::list<dogen::variability::meta_model::feature>
+filesystem::make_features() {
     using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    std::list<dogen::variability::meta_model::feature> r;
     r.push_back(make_masd_extraction_force_write());
     r.push_back(make_masd_extraction_delete_extra_files());
     r.push_back(make_masd_extraction_ignore_files_matching_regex());
