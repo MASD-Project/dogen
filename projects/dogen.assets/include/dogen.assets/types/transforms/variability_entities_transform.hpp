@@ -37,15 +37,29 @@
 
 namespace dogen::assets::transforms {
 
+/**
+ * @brief Processes the variability entities related to the
+ * code-generation of variability code.
+ */
 class variability_entities_transform final {
 private:
+    /**
+     * @brief Reads configuration related to variability templates.
+     */
     static void update(const features::variability_templates::feature_group& fg,
         meta_model::variability::abstract_feature& af);
 
+    /**
+     * @brief Reads configuration related to feature bundles.
+     */
     static void update(const features::variability_bundle::feature_group& fg,
         meta_model::variability::abstract_bundle& ab);
 
 private:
+    /**
+     * @brief Populates the properties common to both features and
+     * feature templates.
+     */
     static void process_abstract_feature(
         const features::variability_templates::feature_group& fg1,
         const std::unordered_map<std::string, std::string>& fixed_mappings,
@@ -53,19 +67,33 @@ private:
         default_binding_point, meta_model::variability::abstract_feature& af);
 
 private:
+    /**
+     * @brief Processes the meta-model element representing features.
+     */
     static void process_features(
         const variability::meta_model::feature_model& fm,
         const std::unordered_map<std::string, std::string>& fixed_mappings,
         meta_model::model& m);
 
+    /**
+     * @brief Processes the meta-model element representing features
+     * templates.
+     */
     static void process_feature_templates(
         const variability::meta_model::feature_model& fm,
         const std::unordered_map<std::string, std::string>& fixed_mappings,
         meta_model::model& m);
 
+    /**
+     * @brief Processes the variability initialiser meta-model element.
+     */
     static void process_initialiser(meta_model::model& m);
 
 public:
+    /**
+     * @brief Transforms all variability meta-model elements involved
+     * in code generation.
+     */
     static void apply(const context& ctx,
         const std::unordered_map<std::string, std::string>& fixed_mappings,
         meta_model::model& m);

@@ -1885,7 +1885,7 @@
     },
     {
       "name": "meta_model::variability",
-      "documentation": "Houses all of the meta-modeling elements related\nto variability.\n",
+      "documentation": "Houses all of the meta-modeling elements related to variability.\n\nThere are two \"kinds\" of entities in this namespace:\n\n@li those that are used to model the data required to code-\ngenerate dogen's implementation of variability. That is to say,\nnone of these elements are directly involved in the processing\n of variability model data, but instead they generate code\nthat then injects variability data once compiled and integrated\ninto dogen. These are the feature bundle and feature bundle\ntemplates and related types.\n\n@li those that inject variability data as part of the processing\nof the current model. These types are responsible for \ninstantiating configurations. Example: profile and profile\ntemplates.\n",
       "tagged_values": {
         "masd.injection.dia.comment": "true"
       },

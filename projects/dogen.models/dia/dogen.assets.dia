@@ -27701,7 +27701,7 @@ rebuilds for no good reason.#</dia:string>
         <dia:point val="-7,-98"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-7.05,-98.05;12.43,-93.85"/>
+        <dia:rectangle val="-7.05,-98.05;18.59,-82.65"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -27710,10 +27710,10 @@ rebuilds for no good reason.#</dia:string>
         <dia:point val="-7,-98"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="19.380000000000003"/>
+        <dia:real val="25.540000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.0999999999999996"/>
+        <dia:real val="15.300000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -27727,8 +27727,22 @@ rebuilds for no good reason.#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Houses all of the meta-modeling elements related
-to variability.
+            <dia:string>#Houses all of the meta-modeling elements related to variability.
+
+There are two "kinds" of entities in this namespace:
+
+@li those that are used to model the data required to code-
+generate dogen's implementation of variability. That is to say,
+none of these elements are directly involved in the processing
+ of variability model data, but instead they generate code
+that then injects variability data once compiled and integrated
+into dogen. These are the feature bundle and feature bundle
+templates and related types.
+
+@li those that inject variability data as part of the processing
+of the current model. These types are responsible for 
+instantiating configurations. Example: profile and profile
+templates.
 
 #DOGEN masd.injection.dia.comment=true#</dia:string>
           </dia:attribute>
@@ -27753,13 +27767,13 @@ to variability.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O194">
       <dia:attribute name="obj_pos">
-        <dia:point val="32,-38"/>
+        <dia:point val="31,-38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.95,-38.05;47.95,-32.75"/>
+        <dia:rectangle val="30.95,-38.05;46.95,-32.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="32,-38"/>
+        <dia:point val="31,-38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.9"/>
@@ -28313,13 +28327,13 @@ their individual binding points.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O197">
       <dia:attribute name="obj_pos">
-        <dia:point val="33,-81"/>
+        <dia:point val="50,-81"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="32.95,-81.05;41.34,-78.75"/>
+        <dia:rectangle val="49.95,-81.05;58.34,-78.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="33,-81"/>
+        <dia:point val="50,-81"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.2900000000000009"/>
@@ -46460,13 +46474,13 @@ Generated code comprises of two aspects:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O354">
       <dia:attribute name="obj_pos">
-        <dia:point val="17,-96"/>
+        <dia:point val="28,-96"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="16.95,-96.05;44.885,-85.15"/>
+        <dia:rectangle val="27.95,-96.05;55.885,-85.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="17,-96"/>
+        <dia:point val="28,-96"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
@@ -46921,19 +46935,19 @@ This is only required if the feature template is optional and has no default val
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O356">
       <dia:attribute name="obj_pos">
-        <dia:point val="30.9175,-85.2"/>
+        <dia:point val="41.9175,-85.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="30.0675,-85.25;37.195,-80.95"/>
+        <dia:rectangle val="41.0675,-85.25;54.195,-80.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="30.9175,-85.2"/>
-        <dia:point val="30.9175,-82"/>
-        <dia:point val="37.145,-82"/>
-        <dia:point val="37.145,-81"/>
+        <dia:point val="41.9175,-85.2"/>
+        <dia:point val="41.9175,-82"/>
+        <dia:point val="54.145,-82"/>
+        <dia:point val="54.145,-81"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -46963,17 +46977,17 @@ This is only required if the feature template is optional and has no default val
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O357">
       <dia:attribute name="obj_pos">
-        <dia:point val="30.9175,-85.2"/>
+        <dia:point val="41.9175,-85.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="24.86,-85.25;31.7675,-80.95"/>
+        <dia:rectangle val="24.86,-85.25;42.7675,-80.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="30.9175,-85.2"/>
-        <dia:point val="30.9175,-82"/>
+        <dia:point val="41.9175,-85.2"/>
+        <dia:point val="41.9175,-82"/>
         <dia:point val="24.91,-82"/>
         <dia:point val="24.91,-81"/>
       </dia:attribute>
@@ -47369,7 +47383,7 @@ Generated code comprises of two aspects:
         <dia:point val="48.29,-65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="37.095,-78.85;49.04,-64.2"/>
+        <dia:rectangle val="47.54,-78.85;54.345,-64.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -47377,8 +47391,8 @@ Generated code comprises of two aspects:
       <dia:attribute name="orth_points">
         <dia:point val="48.29,-65"/>
         <dia:point val="48.29,-77"/>
-        <dia:point val="37.145,-77"/>
-        <dia:point val="37.145,-78.8"/>
+        <dia:point val="54.145,-77"/>
+        <dia:point val="54.145,-78.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -47984,17 +47998,17 @@ Generated code comprises of two aspects:
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O370">
       <dia:attribute name="obj_pos">
-        <dia:point val="39.95,-32.8"/>
+        <dia:point val="38.95,-32.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="30.8475,-32.85;40.8,-28.95"/>
+        <dia:rectangle val="30.8475,-32.85;39.8,-28.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="39.95,-32.8"/>
-        <dia:point val="39.95,-31"/>
+        <dia:point val="38.95,-32.8"/>
+        <dia:point val="38.95,-31"/>
         <dia:point val="30.8975,-31"/>
         <dia:point val="30.8975,-29"/>
       </dia:attribute>
@@ -48026,17 +48040,17 @@ Generated code comprises of two aspects:
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O371">
       <dia:attribute name="obj_pos">
-        <dia:point val="39.95,-32.8"/>
+        <dia:point val="38.95,-32.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.1,-32.85;49.05,-28.95"/>
+        <dia:rectangle val="38.1,-32.85;49.05,-28.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="39.95,-32.8"/>
-        <dia:point val="39.95,-31"/>
+        <dia:point val="38.95,-32.8"/>
+        <dia:point val="38.95,-31"/>
         <dia:point val="49,-31"/>
         <dia:point val="49,-29"/>
       </dia:attribute>
@@ -48104,17 +48118,17 @@ Generated code comprises of two aspects:
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="39.95,-38"/>
+        <dia:point val="38.95,-38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="35.9,-41.65;40.7,-36.4"/>
+        <dia:rectangle val="35.9,-41.65;39.7,-36.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="39.95,-38"/>
-        <dia:point val="39.95,-40"/>
+        <dia:point val="38.95,-38"/>
+        <dia:point val="38.95,-40"/>
         <dia:point val="35.95,-40"/>
         <dia:point val="35.95,-41.6"/>
       </dia:attribute>

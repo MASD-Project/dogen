@@ -26,8 +26,22 @@
 #endif
 
 /**
- * @brief Houses all of the meta-modeling elements related
- * to variability.
+ * @brief Houses all of the meta-modeling elements related to variability.
+ *
+ * There are two "kinds" of entities in this namespace:
+ *
+ * @li those that are used to model the data required to code-
+ * generate dogen's implementation of variability. That is to say,
+ * none of these elements are directly involved in the processing
+ *  of variability model data, but instead they generate code
+ * that then injects variability data once compiled and integrated
+ * into dogen. These are the feature bundle and feature bundle
+ * templates and related types.
+ *
+ * @li those that inject variability data as part of the processing
+ * of the current model. These types are responsible for
+ * instantiating configurations. Example: profile and profile
+ * templates.
  */
 namespace dogen::assets::meta_model {
 }
