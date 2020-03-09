@@ -114,6 +114,11 @@ meta_model::name meta_name_factory::make_generation_marker_name() {
     return r;
 }
 
+meta_model::name meta_name_factory::make_variability_profile_name() {
+    static const auto r(make_name("variability_profile"));
+    return r;
+}
+
 meta_model::name meta_name_factory::make_variability_profile_template_name() {
     static const auto r(make_name("variability_profile_template"));
     return r;

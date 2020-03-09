@@ -121,6 +121,11 @@ public:
         v.meta_name(n);
     }
 
+    void operator()(meta_model::variability::profile& v) {
+        static const auto n(mnf::make_variability_profile_name());
+        v.meta_name(n);
+    }
+
     void operator()(meta_model::variability::profile_template& v) {
         static const auto n(mnf::make_variability_profile_template_name());
         v.meta_name(n);
