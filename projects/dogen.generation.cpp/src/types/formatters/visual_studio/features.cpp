@@ -25,16 +25,15 @@ namespace dogen::generation::cpp::formatters::visual_studio {
 
 namespace {
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_visual_studio_directory() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("directory");
     r.name().qualified("masd.generation.cpp.visual_studio.directory");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -45,16 +44,15 @@ make_masd_generation_cpp_visual_studio_directory() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_visual_studio_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.visual_studio.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -65,16 +63,15 @@ make_masd_generation_cpp_visual_studio_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_visual_studio_solution_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.visual_studio.solution.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -85,16 +82,15 @@ make_masd_generation_cpp_visual_studio_solution_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_visual_studio_project_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.visual_studio.project.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -105,16 +101,15 @@ make_masd_generation_cpp_visual_studio_project_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_visual_studio_msbuild_targets_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.visual_studio.msbuild_targets.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -128,10 +123,10 @@ make_masd_generation_cpp_visual_studio_msbuild_targets_postfix() {
 }
 
 
-std::list<dogen::variability::meta_model::feature_template>
-features::make_templates() {
+std::list<dogen::variability::meta_model::feature>
+features::make_features() {
     using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    std::list<dogen::variability::meta_model::feature> r;
     r.push_back(make_masd_generation_cpp_visual_studio_directory());
     r.push_back(make_masd_generation_cpp_visual_studio_postfix());
     r.push_back(make_masd_generation_cpp_visual_studio_solution_postfix());

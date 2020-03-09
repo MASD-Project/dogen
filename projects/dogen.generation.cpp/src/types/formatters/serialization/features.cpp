@@ -25,16 +25,15 @@ namespace dogen::generation::cpp::formatters::serialization {
 
 namespace {
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_serialization_directory() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("directory");
     r.name().qualified("masd.generation.cpp.serialization.directory");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "serialization" }));
 
@@ -45,16 +44,15 @@ make_masd_generation_cpp_serialization_directory() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_serialization_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.serialization.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "ser" }));
 
@@ -65,16 +63,15 @@ make_masd_generation_cpp_serialization_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_serialization_class_header_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.serialization.class_header.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -85,16 +82,15 @@ make_masd_generation_cpp_serialization_class_header_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_serialization_class_implementation_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.serialization.class_implementation.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -105,16 +101,15 @@ make_masd_generation_cpp_serialization_class_implementation_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_serialization_enum_header_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.serialization.enum_header.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -125,16 +120,15 @@ make_masd_generation_cpp_serialization_enum_header_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_serialization_primitive_header_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.serialization.primitive_header.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -145,16 +139,15 @@ make_masd_generation_cpp_serialization_primitive_header_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_serialization_primitive_implementation_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.serialization.primitive_implementation.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -165,16 +158,15 @@ make_masd_generation_cpp_serialization_primitive_implementation_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_serialization_class_forward_declarations_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.serialization.class_forward_declarations.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "fwd" }));
 
@@ -185,16 +177,15 @@ make_masd_generation_cpp_serialization_class_forward_declarations_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_serialization_primitive_forward_declarations_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.serialization.primitive_forward_declarations.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "fwd" }));
 
@@ -205,16 +196,15 @@ make_masd_generation_cpp_serialization_primitive_forward_declarations_postfix() 
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_serialization_master_header_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.serialization.master_header.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -225,16 +215,15 @@ make_masd_generation_cpp_serialization_master_header_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_serialization_builtin_header_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.serialization.builtin_header.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -245,16 +234,15 @@ make_masd_generation_cpp_serialization_builtin_header_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_serialization_type_registrar_header_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.serialization.type_registrar_header.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -265,16 +253,15 @@ make_masd_generation_cpp_serialization_type_registrar_header_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_serialization_type_registrar_implementation_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.serialization.type_registrar_implementation.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -288,10 +275,10 @@ make_masd_generation_cpp_serialization_type_registrar_implementation_postfix() {
 }
 
 
-std::list<dogen::variability::meta_model::feature_template>
-features::make_templates() {
+std::list<dogen::variability::meta_model::feature>
+features::make_features() {
     using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    std::list<dogen::variability::meta_model::feature> r;
     r.push_back(make_masd_generation_cpp_serialization_directory());
     r.push_back(make_masd_generation_cpp_serialization_postfix());
     r.push_back(make_masd_generation_cpp_serialization_class_header_postfix());

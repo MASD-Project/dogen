@@ -25,16 +25,15 @@ namespace dogen::generation::cpp::formatters::lexical_cast {
 
 namespace {
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_lexical_cast_directory() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("directory");
     r.name().qualified("masd.generation.cpp.lexical_cast.directory");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "lexical_cast" }));
 
@@ -45,16 +44,15 @@ make_masd_generation_cpp_lexical_cast_directory() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_lexical_cast_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.lexical_cast.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "lc" }));
 
@@ -65,16 +63,15 @@ make_masd_generation_cpp_lexical_cast_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_lexical_cast_enum_header_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.lexical_cast.enum_header.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -88,10 +85,10 @@ make_masd_generation_cpp_lexical_cast_enum_header_postfix() {
 }
 
 
-std::list<dogen::variability::meta_model::feature_template>
-features::make_templates() {
+std::list<dogen::variability::meta_model::feature>
+features::make_features() {
     using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    std::list<dogen::variability::meta_model::feature> r;
     r.push_back(make_masd_generation_cpp_lexical_cast_directory());
     r.push_back(make_masd_generation_cpp_lexical_cast_postfix());
     r.push_back(make_masd_generation_cpp_lexical_cast_enum_header_postfix());

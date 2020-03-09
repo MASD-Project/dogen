@@ -26,15 +26,15 @@
 #endif
 
 #include <list>
-#include "dogen.variability/types/meta_model/feature_template.hpp"
+#include "dogen.variability/types/meta_model/feature.hpp"
 
 namespace dogen::generation::cpp::formatters::io {
 
 class features final {
 
 public:
-    static std::list<dogen::variability::meta_model::feature_template>
-    make_templates();
+    static std::list<dogen::variability::meta_model::feature>
+    make_features();
 };
 
 }

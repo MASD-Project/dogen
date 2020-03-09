@@ -25,16 +25,15 @@ namespace dogen::generation::cpp::formatters::types {
 
 namespace {
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_directory() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("directory");
     r.name().qualified("masd.generation.cpp.types.directory");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "types" }));
 
@@ -45,16 +44,15 @@ make_masd_generation_cpp_types_directory() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -65,16 +63,15 @@ make_masd_generation_cpp_types_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_class_header_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.class_header.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -85,16 +82,15 @@ make_masd_generation_cpp_types_class_header_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_class_implementation_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.class_implementation.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -105,16 +101,15 @@ make_masd_generation_cpp_types_class_implementation_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_enum_header_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.enum_header.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -125,16 +120,15 @@ make_masd_generation_cpp_types_enum_header_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_enum_implementation_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.enum_implementation.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -145,16 +139,15 @@ make_masd_generation_cpp_types_enum_implementation_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_primitive_header_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.primitive_header.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -165,16 +158,15 @@ make_masd_generation_cpp_types_primitive_header_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_primitive_implementation_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.primitive_implementation.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -185,16 +177,15 @@ make_masd_generation_cpp_types_primitive_implementation_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_exception_header_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.exception_header.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -205,16 +196,15 @@ make_masd_generation_cpp_types_exception_header_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_namespace_header_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.namespace_header.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -225,16 +215,15 @@ make_masd_generation_cpp_types_namespace_header_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_visitor_header_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.visitor_header.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -245,16 +234,15 @@ make_masd_generation_cpp_types_visitor_header_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_class_forward_declarations_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.class_forward_declarations.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "fwd" }));
 
@@ -265,16 +253,15 @@ make_masd_generation_cpp_types_class_forward_declarations_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_visitor_forward_declarations_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.visitor_forward_declarations.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "fwd" }));
 
@@ -285,16 +272,15 @@ make_masd_generation_cpp_types_visitor_forward_declarations_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_primitive_forward_declarations_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.primitive_forward_declarations.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "fwd" }));
 
@@ -305,16 +291,15 @@ make_masd_generation_cpp_types_primitive_forward_declarations_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_master_header_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.master_header.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -325,16 +310,15 @@ make_masd_generation_cpp_types_master_header_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_builtin_header_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.builtin_header.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -345,16 +329,15 @@ make_masd_generation_cpp_types_builtin_header_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_feature_template_bundle_header_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.feature_template_bundle_header.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -365,16 +348,15 @@ make_masd_generation_cpp_types_feature_template_bundle_header_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_feature_template_bundle_implementation_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.feature_template_bundle_implementation.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -385,16 +367,15 @@ make_masd_generation_cpp_types_feature_template_bundle_implementation_postfix() 
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_feature_bundle_header_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.feature_bundle_header.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -405,16 +386,15 @@ make_masd_generation_cpp_types_feature_bundle_header_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_feature_bundle_implementation_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.feature_bundle_implementation.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -425,16 +405,15 @@ make_masd_generation_cpp_types_feature_bundle_implementation_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_variability_initializer_header_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.variability_initializer_header.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -445,16 +424,15 @@ make_masd_generation_cpp_types_variability_initializer_header_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_variability_initializer_implementation_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.variability_initializer_implementation.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -465,16 +443,15 @@ make_masd_generation_cpp_types_variability_initializer_implementation_postfix() 
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_types_main_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.types.main.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -488,10 +465,10 @@ make_masd_generation_cpp_types_main_postfix() {
 }
 
 
-std::list<dogen::variability::meta_model::feature_template>
-features::make_templates() {
+std::list<dogen::variability::meta_model::feature>
+features::make_features() {
     using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    std::list<dogen::variability::meta_model::feature> r;
     r.push_back(make_masd_generation_cpp_types_directory());
     r.push_back(make_masd_generation_cpp_types_postfix());
     r.push_back(make_masd_generation_cpp_types_class_header_postfix());

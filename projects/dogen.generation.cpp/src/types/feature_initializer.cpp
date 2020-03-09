@@ -39,19 +39,19 @@ namespace dogen::generation::cpp {
 void feature_initializer::
 register_templates(variability::helpers::registrar& rg) {
     rg.register_templates(dogen::generation::cpp::formatters::archetype_features::make_templates());
-    rg.register_templates(dogen::generation::cpp::formatters::build::features::make_templates());
     rg.register_templates(dogen::generation::cpp::formatters::facet_features::make_templates());
-    rg.register_templates(dogen::generation::cpp::formatters::global_features::make_templates());
-    rg.register_templates(dogen::generation::cpp::formatters::hash::features::make_templates());
-    rg.register_templates(dogen::generation::cpp::formatters::io::features::make_templates());
-    rg.register_templates(dogen::generation::cpp::formatters::lexical_cast::features::make_templates());
-    rg.register_templates(dogen::generation::cpp::formatters::odb::features::make_templates());
-    rg.register_templates(dogen::generation::cpp::formatters::serialization::features::make_templates());
-    rg.register_templates(dogen::generation::cpp::formatters::templates::features::make_templates());
-    rg.register_templates(dogen::generation::cpp::formatters::test_data::features::make_templates());
-    rg.register_templates(dogen::generation::cpp::formatters::tests::features::make_templates());
-    rg.register_templates(dogen::generation::cpp::formatters::types::features::make_templates());
-    rg.register_templates(dogen::generation::cpp::formatters::visual_studio::features::make_templates());
+    rg.register_features(dogen::generation::cpp::formatters::build::features::make_features());
+    rg.register_features(dogen::generation::cpp::formatters::global_features::make_features());
+    rg.register_features(dogen::generation::cpp::formatters::hash::features::make_features());
+    rg.register_features(dogen::generation::cpp::formatters::io::features::make_features());
+    rg.register_features(dogen::generation::cpp::formatters::lexical_cast::features::make_features());
+    rg.register_features(dogen::generation::cpp::formatters::odb::features::make_features());
+    rg.register_features(dogen::generation::cpp::formatters::serialization::features::make_features());
+    rg.register_features(dogen::generation::cpp::formatters::templates::features::make_features());
+    rg.register_features(dogen::generation::cpp::formatters::test_data::features::make_features());
+    rg.register_features(dogen::generation::cpp::formatters::tests::features::make_features());
+    rg.register_features(dogen::generation::cpp::formatters::types::features::make_features());
+    rg.register_features(dogen::generation::cpp::formatters::visual_studio::features::make_features());
 }
 
 }

@@ -25,16 +25,15 @@ namespace dogen::generation::cpp::formatters {
 
 namespace {
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_headers_output_directory() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("cpp_headers_output_directory");
     r.name().qualified("masd.generation.cpp_headers_output_directory");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -43,16 +42,15 @@ make_masd_generation_cpp_headers_output_directory() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_directory() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("directory");
     r.name().qualified("masd.generation.cpp.directory");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "cpp" }));
 
@@ -63,16 +61,15 @@ make_masd_generation_cpp_directory() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_inclusion_required() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("inclusion_required");
     r.name().qualified("masd.generation.cpp.inclusion_required");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "true" }));
 
@@ -83,16 +80,15 @@ make_masd_generation_cpp_inclusion_required() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_source_directory_name() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("source_directory_name");
     r.name().qualified("masd.generation.cpp.source_directory_name");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "src" }));
 
@@ -103,16 +99,15 @@ make_masd_generation_cpp_source_directory_name() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_include_directory_name() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("include_directory_name");
     r.name().qualified("masd.generation.cpp.include_directory_name");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "include" }));
 
@@ -123,16 +118,15 @@ make_masd_generation_cpp_include_directory_name() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_tests_directory_name() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("tests_directory_name");
     r.name().qualified("masd.generation.cpp.tests_directory_name");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "generated_tests" }));
 
@@ -143,16 +137,15 @@ make_masd_generation_cpp_tests_directory_name() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_templates_directory_name() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("templates_directory_name");
     r.name().qualified("masd.generation.cpp.templates_directory_name");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "templates" }));
 
@@ -163,16 +156,15 @@ make_masd_generation_cpp_templates_directory_name() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_header_file_extension() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("header_file_extension");
     r.name().qualified("masd.generation.cpp.header_file_extension");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "hpp" }));
 
@@ -183,16 +175,15 @@ make_masd_generation_cpp_header_file_extension() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_implementation_file_extension() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("implementation_file_extension");
     r.name().qualified("masd.generation.cpp.implementation_file_extension");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "cpp" }));
 
@@ -203,16 +194,15 @@ make_masd_generation_cpp_implementation_file_extension() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_templates_file_extension() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("templates_file_extension");
     r.name().qualified("masd.generation.cpp.templates_file_extension");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "wale" }));
 
@@ -223,16 +213,15 @@ make_masd_generation_cpp_templates_file_extension() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_enable_unique_file_names() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("enable_unique_file_names");
     r.name().qualified("masd.generation.cpp.enable_unique_file_names");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "true" }));
 
@@ -243,16 +232,15 @@ make_masd_generation_cpp_enable_unique_file_names() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_aspect_requires_manual_default_constructor() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("requires_manual_default_constructor");
     r.name().qualified("masd.generation.cpp.aspect.requires_manual_default_constructor");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));
 
@@ -263,16 +251,15 @@ make_masd_generation_cpp_aspect_requires_manual_default_constructor() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_aspect_requires_manual_move_constructor() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("requires_manual_move_constructor");
     r.name().qualified("masd.generation.cpp.aspect.requires_manual_move_constructor");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));
 
@@ -283,16 +270,15 @@ make_masd_generation_cpp_aspect_requires_manual_move_constructor() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_aspect_requires_stream_manipulators() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("requires_stream_manipulators");
     r.name().qualified("masd.generation.cpp.aspect.requires_stream_manipulators");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));
 
@@ -303,16 +289,15 @@ make_masd_generation_cpp_aspect_requires_stream_manipulators() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_disable_facet_directories() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("disable_facet_directories");
     r.name().qualified("masd.generation.cpp.disable_facet_directories");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));
 
@@ -323,16 +308,15 @@ make_masd_generation_cpp_disable_facet_directories() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_standard() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("standard");
     r.name().qualified("masd.generation.cpp.standard");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "c++-14" }));
 
@@ -343,16 +327,15 @@ make_masd_generation_cpp_standard() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_helper_family() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("family");
     r.name().qualified("masd.generation.cpp.helper.family");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "Default" }));
 
@@ -363,16 +346,15 @@ make_masd_generation_cpp_helper_family() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_streaming_string_conversion_method() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("string_conversion_method");
     r.name().qualified("masd.generation.cpp.streaming.string_conversion_method");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -383,16 +365,15 @@ make_masd_generation_cpp_streaming_string_conversion_method() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_streaming_requires_quoting() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("requires_quoting");
     r.name().qualified("masd.generation.cpp.streaming.requires_quoting");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));
 
@@ -403,16 +384,15 @@ make_masd_generation_cpp_streaming_requires_quoting() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_streaming_remove_unprintable_characters() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("remove_unprintable_characters");
     r.name().qualified("masd.generation.cpp.streaming.remove_unprintable_characters");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));
 
@@ -423,16 +403,15 @@ make_masd_generation_cpp_streaming_remove_unprintable_characters() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_cmake_source_cmakelists_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.cmake.source_cmakelists.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -443,16 +422,15 @@ make_masd_generation_cpp_cmake_source_cmakelists_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_cpp_cmake_include_cmakelists_postfix() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("postfix");
     r.name().qualified("masd.generation.cpp.cmake.include_cmakelists.postfix");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
 
@@ -466,10 +444,10 @@ make_masd_generation_cpp_cmake_include_cmakelists_postfix() {
 }
 
 
-std::list<dogen::variability::meta_model::feature_template>
-global_features::make_templates() {
+std::list<dogen::variability::meta_model::feature>
+global_features::make_features() {
     using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    std::list<dogen::variability::meta_model::feature> r;
     r.push_back(make_masd_generation_cpp_headers_output_directory());
     r.push_back(make_masd_generation_cpp_directory());
     r.push_back(make_masd_generation_cpp_inclusion_required());
