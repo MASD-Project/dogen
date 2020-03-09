@@ -33,11 +33,11 @@ void feature_initializer::
 register_templates(variability::helpers::registrar& rg) {
     rg.register_templates(dogen::generation::csharp::formatters::archetype_features::make_templates());
     rg.register_templates(dogen::generation::csharp::formatters::facet_features::make_templates());
-    rg.register_templates(dogen::generation::csharp::formatters::global_features::make_templates());
-    rg.register_templates(dogen::generation::csharp::formatters::io::features::make_templates());
-    rg.register_templates(dogen::generation::csharp::formatters::test_data::features::make_templates());
-    rg.register_templates(dogen::generation::csharp::formatters::types::features::make_templates());
-    rg.register_templates(dogen::generation::csharp::formatters::visual_studio::features::make_templates());
+    rg.register_features(dogen::generation::csharp::formatters::global_features::make_features());
+    rg.register_features(dogen::generation::csharp::formatters::io::features::make_features());
+    rg.register_features(dogen::generation::csharp::formatters::test_data::features::make_features());
+    rg.register_features(dogen::generation::csharp::formatters::types::features::make_features());
+    rg.register_features(dogen::generation::csharp::formatters::visual_studio::features::make_features());
 }
 
 }

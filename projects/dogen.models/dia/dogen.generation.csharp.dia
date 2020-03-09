@@ -13652,7 +13652,7 @@
         <dia:string>#features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
@@ -13697,7 +13697,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#7bb6b6"/>
+        <dia:color val="#b2e2e2"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -14038,7 +14038,7 @@
         <dia:string>#features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
@@ -14083,7 +14083,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#7bb6b6"/>
+        <dia:color val="#b2e2e2"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -14296,13 +14296,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O116">
       <dia:attribute name="obj_pos">
-        <dia:point val="73,92"/>
+        <dia:point val="72.2143,92"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.95,91.95;108.585,99.65"/>
+        <dia:rectangle val="72.1643,91.95;107.799,99.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="73,92"/>
+        <dia:point val="72.2143,92"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="35.535000000000004"/>
@@ -14314,7 +14314,7 @@
         <dia:string>#features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
@@ -14359,7 +14359,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#7bb6b6"/>
+        <dia:color val="#b2e2e2"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -14567,7 +14567,7 @@
         <dia:string>#global_features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
@@ -14611,7 +14611,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#7bb6b6"/>
+        <dia:color val="#b2e2e2"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -14810,7 +14810,7 @@
 #DOGEN masd.variability.template_kind=archetype_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
-        <dia:boolean val="false"/>
+        <dia:boolean val="true"/>
       </dia:attribute>
       <dia:attribute name="suppress_attributes">
         <dia:boolean val="false"/>
@@ -14948,7 +14948,7 @@
 #DOGEN masd.variability.template_kind=facet_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
-        <dia:boolean val="false"/>
+        <dia:boolean val="true"/>
       </dia:attribute>
       <dia:attribute name="suppress_attributes">
         <dia:boolean val="false"/>
@@ -15911,7 +15911,7 @@
         <dia:string>#features#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
@@ -15956,7 +15956,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#7bb6b6"/>
+        <dia:color val="#b2e2e2"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
