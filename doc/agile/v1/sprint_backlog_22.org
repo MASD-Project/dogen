@@ -14,21 +14,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-07 Sat 20:03]
+#+CAPTION: Clock summary at [2020-03-09 Mon 11:58]
 | <75>                                                    |         |       |      |       |
 | Headline                                                | Time    |       |      |     % |
 |---------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                            | *28:06* |       |      | 100.0 |
+| *Total time*                                            | *29:58* |       |      | 100.0 |
 |---------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                 | 28:06   |       |      | 100.0 |
-| Active                                                  |         | 28:06 |      | 100.0 |
-| Edit release notes for previous sprint                  |         |       | 4:11 |  14.9 |
-| Create a demo and presentation for previous sprint      |         |       | 0:25 |   1.5 |
-| Sprint and product backlog grooming                     |         |       | 4:25 |  15.7 |
-| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  21.1 |
-| Analysis on removing physical references in variability |         |       | 5:27 |  19.4 |
+| Stories                                                 | 29:58   |       |      | 100.0 |
+| Active                                                  |         | 29:58 |      | 100.0 |
+| Edit release notes for previous sprint                  |         |       | 4:11 |  14.0 |
+| Create a demo and presentation for previous sprint      |         |       | 0:25 |   1.4 |
+| Sprint and product backlog grooming                     |         |       | 4:25 |  14.7 |
+| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  19.7 |
+| Analysis on removing physical references in variability |         |       | 5:27 |  18.2 |
 | Remove =rapidjson= formatters                           |         |       | 0:03 |   0.2 |
-| Separate feature templates from bundles                 |         |       | 7:40 |  27.3 |
+| Separate feature templates from bundles                 |         |       | 9:28 |  31.6 |
+| Move enabled to generation                              |         |       | 0:04 |   0.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -529,8 +530,11 @@ Tasks:
 We never finished implementing these and now they are just adding to
 the cognitive load. Remove them for now, re-add them properly later.
 
-*** STARTED Separate feature templates from bundles                   :story:
+*** COMPLETED Separate feature templates from bundles                 :story:
+    CLOSED: [2020-03-09 Mon 11:46]
     :LOGBOOK:
+    CLOCK: [2020-03-09 Mon 11:51]--[2020-03-09 Mon 11:58] =>  0:07
+    CLOCK: [2020-03-09 Mon 10:05]--[2020-03-09 Mon 11:46] =>  1:41
     CLOCK: [2020-03-07 Sat 19:04]--[2020-03-07 Sat 19:15] =>  0:11
     CLOCK: [2020-03-07 Sat 17:37]--[2020-03-07 Sat 18:17] =>  0:40
     CLOCK: [2020-03-06 Fri 20:52]--[2020-03-06 Fri 21:59] =>  1:07
@@ -557,6 +561,14 @@ Notes:
 - we should create an abstract feature base class to simplify
   code. Given the implementation is trivial we can do it now instead
   of waiting until all of the refactor is finished.
+
+*** COMPLETED Move enabled to generation                              :story:
+    CLOSED: [2020-03-09 Mon 11:50]
+    :LOGBOOK:
+    CLOCK: [2020-03-09 Mon 11:46]--[2020-03-09 Mon 11:50] =>  0:04
+    :END:
+
+For some reason we have placed this in the archetypes model.
 
 *** Add location and modules to variability                           :story:
 
@@ -790,6 +802,26 @@ just main.
 
 - rename all references to archetypes to "physical", e.g.:
   =artefact_properties= should be renamed, etc.
+
+*** Consider renaming "meta-model" namespace                          :story:
+
+Originally we created a number of namespaces in models called
+"meta-model". It started with assets, where it really was the
+meta-model, but we now have meta-models on pretty much all models
+(injection, extraction, etc). Its no longer clear what value this
+prefix adds. In addition its a technical word, so it seems to imply
+there is some meaning to it, but since pretty much we have in dogen is
+a meta-model of something, its not exactly useful. We need a term that
+is more neutral.
+
+Ideas:
+
+- elements
+- entities
+
+Notes:
+
+- look for ideas on other projects.
 
 *** Implement locator in terms of new physical types                  :story:
 
