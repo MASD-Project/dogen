@@ -23,8 +23,8 @@
 #include "dogen.assets/io/meta_model/name_io.hpp"
 #include "dogen.assets/io/meta_model/element_io.hpp"
 #include "dogen.assets/types/meta_model/element_visitor.hpp"
+#include "dogen.assets/io/meta_model/variability/entry_io.hpp"
 #include "dogen.assets/types/meta_model/variability/profile_template.hpp"
-#include "dogen.assets/io/meta_model/variability/profile_template_entry_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -50,7 +50,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::meta_model::variability::profile_template_entry>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::meta_model::variability::entry>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -95,7 +95,7 @@ profile_template::profile_template(
     const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& decoration,
     const std::unordered_set<std::string>& labels,
-    const std::list<dogen::assets::meta_model::variability::profile_template_entry>& entries,
+    const std::list<dogen::assets::meta_model::variability::entry>& entries,
     const std::list<dogen::assets::meta_model::name>& parents)
     : dogen::assets::meta_model::element(
       name,
@@ -189,19 +189,19 @@ void profile_template::labels(const std::unordered_set<std::string>&& v) {
     labels_ = std::move(v);
 }
 
-const std::list<dogen::assets::meta_model::variability::profile_template_entry>& profile_template::entries() const {
+const std::list<dogen::assets::meta_model::variability::entry>& profile_template::entries() const {
     return entries_;
 }
 
-std::list<dogen::assets::meta_model::variability::profile_template_entry>& profile_template::entries() {
+std::list<dogen::assets::meta_model::variability::entry>& profile_template::entries() {
     return entries_;
 }
 
-void profile_template::entries(const std::list<dogen::assets::meta_model::variability::profile_template_entry>& v) {
+void profile_template::entries(const std::list<dogen::assets::meta_model::variability::entry>& v) {
     entries_ = v;
 }
 
-void profile_template::entries(const std::list<dogen::assets::meta_model::variability::profile_template_entry>&& v) {
+void profile_template::entries(const std::list<dogen::assets::meta_model::variability::entry>&& v) {
     entries_ = std::move(v);
 }
 

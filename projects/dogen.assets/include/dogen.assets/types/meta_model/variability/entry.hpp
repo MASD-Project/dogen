@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_PROFILE_TEMPLATE_ENTRY_HPP
-#define DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_PROFILE_TEMPLATE_ENTRY_HPP
+#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_ENTRY_HPP
+#define DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_ENTRY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,15 +33,15 @@
 
 namespace dogen::assets::meta_model::variability {
 
-class profile_template_entry final {
+class entry final {
 public:
-    profile_template_entry() = default;
-    profile_template_entry(const profile_template_entry&) = default;
-    profile_template_entry(profile_template_entry&&) = default;
-    ~profile_template_entry() = default;
+    entry() = default;
+    entry(const entry&) = default;
+    entry(entry&&) = default;
+    ~entry() = default;
 
 public:
-    profile_template_entry(
+    entry(
         const std::string& documentation,
         const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
         const dogen::assets::meta_model::name& name,
@@ -94,14 +94,14 @@ public:
     void value(const std::string&& v);
 
 public:
-    bool operator==(const profile_template_entry& rhs) const;
-    bool operator!=(const profile_template_entry& rhs) const {
+    bool operator==(const entry& rhs) const;
+    bool operator!=(const entry& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(profile_template_entry& other) noexcept;
-    profile_template_entry& operator=(profile_template_entry other);
+    void swap(entry& other) noexcept;
+    entry& operator=(entry other);
 
 private:
     std::string documentation_;
@@ -117,8 +117,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::assets::meta_model::variability::profile_template_entry& lhs,
-    dogen::assets::meta_model::variability::profile_template_entry& rhs) {
+    dogen::assets::meta_model::variability::entry& lhs,
+    dogen::assets::meta_model::variability::entry& rhs) {
     lhs.swap(rhs);
 }
 

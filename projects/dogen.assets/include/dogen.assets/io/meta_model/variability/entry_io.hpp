@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_IO_META_MODEL_VARIABILITY_PROFILE_TEMPLATE_ENTRY_IO_HPP
-#define DOGEN_ASSETS_IO_META_MODEL_VARIABILITY_PROFILE_TEMPLATE_ENTRY_IO_HPP
+#ifndef DOGEN_ASSETS_IO_META_MODEL_VARIABILITY_ENTRY_IO_HPP
+#define DOGEN_ASSETS_IO_META_MODEL_VARIABILITY_ENTRY_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.assets/types/meta_model/variability/profile_template_entry.hpp"
+#include "dogen.assets/types/meta_model/variability/entry.hpp"
 
 namespace dogen::assets::meta_model::variability {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::assets::meta_model::variability::profile_template_entry& v);
+     const dogen::assets::meta_model::variability::entry& v);
 
 }
 

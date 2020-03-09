@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.assets/types/meta_model/variability/entry.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.assets/types/meta_model/variability/profile_template_entry.hpp"
 
 namespace boost {
 
@@ -32,7 +32,7 @@ const boost::shared_ptr<dogen::variability::meta_model::configuration>& rhs) {
 
 namespace dogen::assets::meta_model::variability {
 
-profile_template_entry::profile_template_entry(
+entry::entry(
     const std::string& documentation,
     const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
     const dogen::assets::meta_model::name& name,
@@ -44,7 +44,7 @@ profile_template_entry::profile_template_entry(
       key_(key),
       value_(value) { }
 
-void profile_template_entry::swap(profile_template_entry& other) noexcept {
+void entry::swap(entry& other) noexcept {
     using std::swap;
     swap(documentation_, other.documentation_);
     swap(configuration_, other.configuration_);
@@ -53,7 +53,7 @@ void profile_template_entry::swap(profile_template_entry& other) noexcept {
     swap(value_, other.value_);
 }
 
-bool profile_template_entry::operator==(const profile_template_entry& rhs) const {
+bool entry::operator==(const entry& rhs) const {
     return documentation_ == rhs.documentation_ &&
         configuration_ == rhs.configuration_ &&
         name_ == rhs.name_ &&
@@ -61,89 +61,89 @@ bool profile_template_entry::operator==(const profile_template_entry& rhs) const
         value_ == rhs.value_;
 }
 
-profile_template_entry& profile_template_entry::operator=(profile_template_entry other) {
+entry& entry::operator=(entry other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::string& profile_template_entry::documentation() const {
+const std::string& entry::documentation() const {
     return documentation_;
 }
 
-std::string& profile_template_entry::documentation() {
+std::string& entry::documentation() {
     return documentation_;
 }
 
-void profile_template_entry::documentation(const std::string& v) {
+void entry::documentation(const std::string& v) {
     documentation_ = v;
 }
 
-void profile_template_entry::documentation(const std::string&& v) {
+void entry::documentation(const std::string&& v) {
     documentation_ = std::move(v);
 }
 
-const boost::shared_ptr<dogen::variability::meta_model::configuration>& profile_template_entry::configuration() const {
+const boost::shared_ptr<dogen::variability::meta_model::configuration>& entry::configuration() const {
     return configuration_;
 }
 
-boost::shared_ptr<dogen::variability::meta_model::configuration>& profile_template_entry::configuration() {
+boost::shared_ptr<dogen::variability::meta_model::configuration>& entry::configuration() {
     return configuration_;
 }
 
-void profile_template_entry::configuration(const boost::shared_ptr<dogen::variability::meta_model::configuration>& v) {
+void entry::configuration(const boost::shared_ptr<dogen::variability::meta_model::configuration>& v) {
     configuration_ = v;
 }
 
-void profile_template_entry::configuration(const boost::shared_ptr<dogen::variability::meta_model::configuration>&& v) {
+void entry::configuration(const boost::shared_ptr<dogen::variability::meta_model::configuration>&& v) {
     configuration_ = std::move(v);
 }
 
-const dogen::assets::meta_model::name& profile_template_entry::name() const {
+const dogen::assets::meta_model::name& entry::name() const {
     return name_;
 }
 
-dogen::assets::meta_model::name& profile_template_entry::name() {
+dogen::assets::meta_model::name& entry::name() {
     return name_;
 }
 
-void profile_template_entry::name(const dogen::assets::meta_model::name& v) {
+void entry::name(const dogen::assets::meta_model::name& v) {
     name_ = v;
 }
 
-void profile_template_entry::name(const dogen::assets::meta_model::name&& v) {
+void entry::name(const dogen::assets::meta_model::name&& v) {
     name_ = std::move(v);
 }
 
-const std::string& profile_template_entry::key() const {
+const std::string& entry::key() const {
     return key_;
 }
 
-std::string& profile_template_entry::key() {
+std::string& entry::key() {
     return key_;
 }
 
-void profile_template_entry::key(const std::string& v) {
+void entry::key(const std::string& v) {
     key_ = v;
 }
 
-void profile_template_entry::key(const std::string&& v) {
+void entry::key(const std::string&& v) {
     key_ = std::move(v);
 }
 
-const std::string& profile_template_entry::value() const {
+const std::string& entry::value() const {
     return value_;
 }
 
-std::string& profile_template_entry::value() {
+std::string& entry::value() {
     return value_;
 }
 
-void profile_template_entry::value(const std::string& v) {
+void entry::value(const std::string& v) {
     value_ = v;
 }
 
-void profile_template_entry::value(const std::string&& v) {
+void entry::value(const std::string&& v) {
     value_ = std::move(v);
 }
 

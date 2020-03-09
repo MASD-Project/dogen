@@ -450,7 +450,7 @@ adapter::to_variability_profile_template(const assets::meta_model::location& l,
         /*
          * The conventions for naming profile entries are somewhat
          * confusing. The "simple" name of a profile entry must match
-         * the qualified naem of the feature it is configuring, e.g.:
+         * the qualified name of the feature it is configuring, e.g.:
          *
          *     masd.generalization.parent
          *
@@ -471,7 +471,7 @@ adapter::to_variability_profile_template(const assets::meta_model::location& l,
          * when we are looking at a configuration model
          * representation.
          */
-        assets::meta_model::variability::profile_template_entry e;
+        assets::meta_model::variability::entry e;
         e.name(f.build_attribute_name(r->name(), n));
         e.key(n);
         e.configuration(attr.configuration());

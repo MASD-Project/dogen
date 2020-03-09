@@ -21,8 +21,8 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.assets/io/meta_model/name_io.hpp"
+#include "dogen.assets/io/meta_model/variability/entry_io.hpp"
 #include "dogen.variability/io/meta_model/configuration_io.hpp"
-#include "dogen.assets/io/meta_model/variability/profile_template_entry_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -50,9 +50,9 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace dogen::assets::meta_model::variability {
 
-std::ostream& operator<<(std::ostream& s, const profile_template_entry& v) {
+std::ostream& operator<<(std::ostream& s, const entry& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::assets::meta_model::variability::profile_template_entry\"" << ", "
+      << "\"__type__\": " << "\"dogen::assets::meta_model::variability::entry\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"configuration\": " << v.configuration() << ", "
       << "\"name\": " << v.name() << ", "
