@@ -27,16 +27,15 @@ namespace dogen::generation::features {
 
 namespace {
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_decoration_enabled() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("enabled");
     r.name().qualified("masd.generation.decoration.enabled");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -45,16 +44,15 @@ make_masd_generation_decoration_enabled() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_decoration_copyright_notice() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("copyright_notice");
     r.name().qualified("masd.generation.decoration.copyright_notice");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -63,16 +61,15 @@ make_masd_generation_decoration_copyright_notice() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_decoration_licence_name() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("licence_name");
     r.name().qualified("masd.generation.decoration.licence_name");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -81,16 +78,15 @@ make_masd_generation_decoration_licence_name() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_decoration_modeline_group_name() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("modeline_group_name");
     r.name().qualified("masd.generation.decoration.modeline_group_name");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -99,16 +95,15 @@ make_masd_generation_decoration_modeline_group_name() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_generation_decoration_marker_name() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("marker_name");
     r.name().qualified("masd.generation.decoration.marker_name");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -152,10 +147,10 @@ decoration::static_configuration decoration::make_static_configuration(
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature_template>
-decoration::make_templates() {
+std::list<dogen::variability::meta_model::feature>
+decoration::make_features() {
     using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    std::list<dogen::variability::meta_model::feature> r;
     r.push_back(make_masd_generation_decoration_enabled());
     r.push_back(make_masd_generation_decoration_copyright_notice());
     r.push_back(make_masd_generation_decoration_licence_name());

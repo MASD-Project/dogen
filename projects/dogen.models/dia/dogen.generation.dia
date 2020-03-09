@@ -4477,7 +4477,7 @@ model directory.#</dia:string>
         <dia:point val="1,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="0.95,21.95;27.745,39.75"/>
+        <dia:rectangle val="0.95,21.95;27.745,36.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4489,7 +4489,7 @@ model directory.#</dia:string>
         <dia:real val="26.695"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="17.700000000000003"/>
+        <dia:real val="14.500000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -15203,7 +15203,7 @@ code: identation and dividers.#</dia:string>
         <dia:string>#decoration#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.default_binding_point=any
@@ -15432,13 +15432,13 @@ code: identation and dividers.#</dia:string>
         <dia:point val="225,138"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="224.95,137.95;245.185,141.05"/>
+        <dia:rectangle val="224.95,137.95;238.64,141.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="225,138"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.134999999999998"/>
+        <dia:real val="13.59"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -15489,7 +15489,7 @@ code: identation and dividers.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#b2e2e2"/>
+        <dia:color val="#529999"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -15543,13 +15543,13 @@ code: identation and dividers.#</dia:string>
         <dia:point val="243.071,145"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="243.021,144.95;259.791,149.45"/>
+        <dia:rectangle val="243.021,144.95;261.331,149.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="243.071,145"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.669999999999998"/>
+        <dia:real val="18.210000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -15568,7 +15568,7 @@ code: identation and dividers.#</dia:string>
 #DOGEN masd.variability.template_kind=archetype_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
-        <dia:boolean val="false"/>
+        <dia:boolean val="true"/>
       </dia:attribute>
       <dia:attribute name="suppress_attributes">
         <dia:boolean val="false"/>
@@ -15604,7 +15604,7 @@ code: identation and dividers.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#b2e2e2"/>
+        <dia:color val="#7bb6b6"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
