@@ -431,17 +431,13 @@ adapter::to_licence(const assets::meta_model::location& l,
     return r;
 }
 
-boost::shared_ptr<assets::meta_model::variability::profile_template>
-adapter::to_variability_profile_template(const assets::meta_model::location& l,
-    const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
-    using assets::meta_model::variability::profile_template;
-    auto r(boost::make_shared<profile_template>());
-    populate_element(l, scr, ie, *r);
+void adapter::populate_abstract_profile(const assets::meta_model::location& l,
+    const injection::meta_model::element& ie,
+    assets::meta_model::variability::abstract_profile& ap) const {
 
     assets::helpers::name_factory f;
     for (const auto& p : ie.parents())
-        r->parents().push_back(to_name(l, p));
+        ap.parents().push_back(to_name(l, p));
 
     for (const auto& attr : ie.attributes()) {
         const auto n(attr.name());
@@ -472,13 +468,56 @@ adapter::to_variability_profile_template(const assets::meta_model::location& l,
          * representation.
          */
         assets::meta_model::variability::entry e;
-        e.name(f.build_attribute_name(r->name(), n));
+        e.name(f.build_attribute_name(ap.name(), n));
         e.key(n);
         e.configuration(attr.configuration());
         e.configuration()->name().qualified(e.name().qualified().dot());
         e.value(attr.value());
-        r->entries().push_back(e);
+        ap.entries().push_back(e);
     }
+}
+
+void adapter::populate_abstract_feature(
+    const assets::meta_model::name& bundle_name,
+    const injection::meta_model::attribute& ia,
+    assets::meta_model::variability::abstract_feature& af) const {
+    const auto n(ia.name());
+    ensure_not_empty(n);
+
+    assets::helpers::name_factory f;
+    af.name(f.build_attribute_name(bundle_name, n));
+    af.key(n);
+
+    assets::helpers::string_processor sp;
+    af.identifiable_key(sp.to_identifiable(n));
+    af.value(ia.value());
+    af.unparsed_type(ia.type());
+
+    using variability::helpers::enum_mapper;
+    af.value_type(enum_mapper::to_value_type(ia.type()));
+    af.configuration(ia.configuration());
+    af.configuration()->name().qualified(af.name().qualified().dot());
+}
+
+boost::shared_ptr<assets::meta_model::variability::profile>
+adapter::to_variability_profile(const assets::meta_model::location& l,
+    const stereotypes_conversion_result& scr,
+    const injection::meta_model::element& ie) const {
+    using assets::meta_model::variability::profile;
+    auto r(boost::make_shared<profile>());
+    populate_element(l, scr, ie, *r);
+    populate_abstract_profile(l, ie, *r);
+    return r;
+}
+
+boost::shared_ptr<assets::meta_model::variability::profile_template>
+adapter::to_variability_profile_template(const assets::meta_model::location& l,
+    const stereotypes_conversion_result& scr,
+    const injection::meta_model::element& ie) const {
+    using assets::meta_model::variability::profile_template;
+    auto r(boost::make_shared<profile_template>());
+    populate_element(l, scr, ie, *r);
+    populate_abstract_profile(l, ie, *r);
     return r;
 }
 
@@ -491,22 +530,9 @@ adapter::to_variability_feature_template_bundle(
     auto r(boost::make_shared<feature_template_bundle>());
     populate_element(l, scr, ie, *r);
 
-    using variability::helpers::enum_mapper;
-    assets::helpers::name_factory f;
-    assets::helpers::string_processor sp;
-    for (const auto& attr : ie.attributes()) {
-        const auto n(attr.name());
-        ensure_not_empty(n);
-
+    for (const auto& ia : ie.attributes()) {
         assets::meta_model::variability::feature_template ft;
-        ft.name(f.build_attribute_name(r->name(), n));
-        ft.key(n);
-        ft.identifiable_key(sp.to_identifiable(n));
-        ft.value(attr.value());
-        ft.unparsed_type(attr.type());
-        ft.value_type(enum_mapper::to_value_type(attr.type()));
-        ft.configuration(attr.configuration());
-        ft.configuration()->name().qualified(ft.name().qualified().dot());
+        populate_abstract_feature(r->name(), ia, ft);
         r->feature_templates().push_back(ft);
     }
 
@@ -521,22 +547,9 @@ adapter::to_variability_feature_bundle(const assets::meta_model::location &l,
     auto r(boost::make_shared<feature_bundle>());
     populate_element(l, scr, ie, *r);
 
-    using variability::helpers::enum_mapper;
-    assets::helpers::name_factory nf;
-    assets::helpers::string_processor sp;
-    for (const auto& attr : ie.attributes()) {
-        const auto n(attr.name());
-        ensure_not_empty(n);
-
+    for (const auto& ia : ie.attributes()) {
         assets::meta_model::variability::feature f;
-        f.name(nf.build_attribute_name(r->name(), n));
-        f.key(n);
-        f.identifiable_key(sp.to_identifiable(n));
-        f.value(attr.value());
-        f.unparsed_type(attr.type());
-        f.value_type(enum_mapper::to_value_type(attr.type()));
-        f.configuration(attr.configuration());
-        f.configuration()->name().qualified(f.name().qualified().dot());
+        populate_abstract_feature(r->name(), ia, f);
         r->features().push_back(f);
     }
 

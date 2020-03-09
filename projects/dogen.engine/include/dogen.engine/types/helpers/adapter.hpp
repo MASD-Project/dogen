@@ -50,6 +50,7 @@
 #include "dogen.assets/types/meta_model/decoration/modeline.hpp"
 #include "dogen.assets/types/meta_model/decoration/modeline_group.hpp"
 #include "dogen.assets/types/meta_model/decoration/generation_marker.hpp"
+#include "dogen.assets/types/meta_model/variability/profile.hpp"
 #include "dogen.assets/types/meta_model/variability/profile_template.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_template_bundle.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
@@ -261,11 +262,36 @@ public:
         const stereotypes_conversion_result& scr,
         const injection::meta_model::element& ie) const;
 
+private:
+    /**
+     * @brief Populates the abstract profile properties.
+     */
+    void populate_abstract_profile(const assets::meta_model::location& l,
+        const injection::meta_model::element& ie,
+        assets::meta_model::variability::abstract_profile& ap) const;
+
+    /**
+     * @brief Populates the abstract feature properties.
+     */
+    void populate_abstract_feature(
+        const assets::meta_model::name& n,
+        const injection::meta_model::attribute& ia,
+        assets::meta_model::variability::abstract_feature& af) const;
+
 public:
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::to_variability::profile_template to a variability feature
-     * template group.
+     * masd::to_variability::profile to a variability profile.
+     */
+    boost::shared_ptr<assets::meta_model::variability::profile>
+    to_variability_profile(const assets::meta_model::location& l,
+        const stereotypes_conversion_result& scr,
+        const injection::meta_model::element& ie) const;
+
+    /**
+     * @brief Converts an injection element with a stereotype of
+     * masd::to_variability::profile_template to a variability profile
+     * template.
      */
     boost::shared_ptr<assets::meta_model::variability::profile_template>
     to_variability_profile_template(const assets::meta_model::location& l,
