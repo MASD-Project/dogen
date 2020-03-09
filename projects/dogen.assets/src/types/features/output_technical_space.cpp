@@ -27,16 +27,15 @@ namespace dogen::assets::features {
 
 namespace {
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_extraction_output_technical_space() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("output_technical_space");
     r.name().qualified("masd.extraction.output_technical_space");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -68,10 +67,10 @@ output_technical_space::static_configuration output_technical_space::make_static
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature_template>
-output_technical_space::make_templates() {
+std::list<dogen::variability::meta_model::feature>
+output_technical_space::make_features() {
     using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    std::list<dogen::variability::meta_model::feature> r;
     r.push_back(make_masd_extraction_output_technical_space());
     return r;
 }

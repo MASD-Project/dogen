@@ -27,16 +27,15 @@ namespace dogen::assets::features {
 
 namespace {
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_type_parameters_variable_number_of_parameters() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("variable_number_of_parameters");
     r.name().qualified("masd.type_parameters.variable_number_of_parameters");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));
 
@@ -47,16 +46,15 @@ make_masd_type_parameters_variable_number_of_parameters() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_type_parameters_count() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("count");
     r.name().qualified("masd.type_parameters.count");
     const auto vt(value_type::number);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "0" }));
 
@@ -67,16 +65,15 @@ make_masd_type_parameters_count() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_type_parameters_always_in_heap() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("always_in_heap");
     r.name().qualified("masd.type_parameters.always_in_heap");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));
 
@@ -113,10 +110,10 @@ type_parameters::static_configuration type_parameters::make_static_configuration
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature_template>
-type_parameters::make_templates() {
+std::list<dogen::variability::meta_model::feature>
+type_parameters::make_features() {
     using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    std::list<dogen::variability::meta_model::feature> r;
     r.push_back(make_masd_type_parameters_variable_number_of_parameters());
     r.push_back(make_masd_type_parameters_count());
     r.push_back(make_masd_type_parameters_always_in_heap());

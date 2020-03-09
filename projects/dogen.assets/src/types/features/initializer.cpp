@@ -36,18 +36,18 @@ namespace dogen::assets::features {
 
 void initializer::
 register_templates(variability::helpers::registrar& rg) {
-    rg.register_templates(dogen::assets::features::decoration_modeline::make_templates());
-    rg.register_templates(dogen::assets::features::enumeration::make_templates());
-    rg.register_templates(dogen::assets::features::enumerator::make_templates());
-    rg.register_templates(dogen::assets::features::generalization::make_templates());
-    rg.register_templates(dogen::assets::features::mapping::make_templates());
-    rg.register_templates(dogen::assets::features::origin::make_templates());
-    rg.register_templates(dogen::assets::features::orm::make_templates());
-    rg.register_templates(dogen::assets::features::output_technical_space::make_templates());
-    rg.register_templates(dogen::assets::features::primitive::make_templates());
-    rg.register_templates(dogen::assets::features::type_parameters::make_templates());
-    rg.register_templates(dogen::assets::features::variability_bundle::make_templates());
-    rg.register_templates(dogen::assets::features::variability_templates::make_templates());
+    rg.register_features(dogen::assets::features::decoration_modeline::make_features());
+    rg.register_features(dogen::assets::features::enumeration::make_features());
+    rg.register_features(dogen::assets::features::enumerator::make_features());
+    rg.register_features(dogen::assets::features::generalization::make_features());
+    rg.register_features(dogen::assets::features::mapping::make_features());
+    rg.register_features(dogen::assets::features::origin::make_features());
+    rg.register_features(dogen::assets::features::orm::make_features());
+    rg.register_features(dogen::assets::features::output_technical_space::make_features());
+    rg.register_features(dogen::assets::features::primitive::make_features());
+    rg.register_features(dogen::assets::features::type_parameters::make_features());
+    rg.register_features(dogen::assets::features::variability_bundle::make_features());
+    rg.register_features(dogen::assets::features::variability_templates::make_features());
 }
 
 }

@@ -31,7 +31,6 @@
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.variability/types/meta_model/feature_template.hpp"
 
 namespace dogen::assets::features {
 
@@ -65,8 +64,8 @@ public:
     }
 
 public:
-    static std::list<dogen::variability::meta_model::feature_template>
-    make_templates();
+    static std::list<dogen::variability::meta_model::feature>
+    make_features();
 };
 
 }

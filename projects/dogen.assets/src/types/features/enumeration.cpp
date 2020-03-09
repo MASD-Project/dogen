@@ -27,16 +27,15 @@ namespace dogen::assets::features {
 
 namespace {
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_enumeration_use_implementation_defined_underlying_element() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("use_implementation_defined_underlying_element");
     r.name().qualified("masd.enumeration.use_implementation_defined_underlying_element");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));
 
@@ -47,16 +46,15 @@ make_masd_enumeration_use_implementation_defined_underlying_element() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_enumeration_underlying_element() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("underlying_element");
     r.name().qualified("masd.enumeration.underlying_element");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -65,16 +63,15 @@ make_masd_enumeration_underlying_element() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_enumeration_use_implementation_defined_enumerator_values() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("use_implementation_defined_enumerator_values");
     r.name().qualified("masd.enumeration.use_implementation_defined_enumerator_values");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));
 
@@ -85,16 +82,15 @@ make_masd_enumeration_use_implementation_defined_enumerator_values() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_enumeration_add_invalid_enumerator() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("add_invalid_enumerator");
     r.name().qualified("masd.enumeration.add_invalid_enumerator");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "true" }));
 
@@ -134,10 +130,10 @@ enumeration::static_configuration enumeration::make_static_configuration(
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature_template>
-enumeration::make_templates() {
+std::list<dogen::variability::meta_model::feature>
+enumeration::make_features() {
     using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    std::list<dogen::variability::meta_model::feature> r;
     r.push_back(make_masd_enumeration_use_implementation_defined_underlying_element());
     r.push_back(make_masd_enumeration_underlying_element());
     r.push_back(make_masd_enumeration_use_implementation_defined_enumerator_values());

@@ -27,16 +27,15 @@ namespace dogen::assets::features {
 
 namespace {
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_injection_is_proxy_model() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("is_proxy_model");
     r.name().qualified("masd.injection.is_proxy_model");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));
 
@@ -69,10 +68,10 @@ origin::static_configuration origin::make_static_configuration(
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature_template>
-origin::make_templates() {
+std::list<dogen::variability::meta_model::feature>
+origin::make_features() {
     using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    std::list<dogen::variability::meta_model::feature> r;
     r.push_back(make_masd_injection_is_proxy_model());
     return r;
 }

@@ -27,16 +27,15 @@ namespace dogen::assets::features {
 
 namespace {
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_variability_binding_point() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("binding_point");
     r.name().qualified("masd.variability.binding_point");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -45,16 +44,15 @@ make_masd_variability_binding_point() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_variability_labels() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("labels");
     r.name().qualified("masd.variability.labels");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -63,16 +61,15 @@ make_masd_variability_labels() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_variability_value() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("value");
     r.name().qualified("masd.variability.value");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::property);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -81,16 +78,15 @@ make_masd_variability_value() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_variability_qualified_name() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("qualified_name");
     r.name().qualified("masd.variability.qualified_name");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::property);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -99,16 +95,15 @@ make_masd_variability_qualified_name() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_variability_is_optional() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("is_optional");
     r.name().qualified("masd.variability.is_optional");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::property);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));
 
@@ -153,10 +148,10 @@ variability_templates::static_configuration variability_templates::make_static_c
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature_template>
-variability_templates::make_templates() {
+std::list<dogen::variability::meta_model::feature>
+variability_templates::make_features() {
     using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    std::list<dogen::variability::meta_model::feature> r;
     r.push_back(make_masd_variability_binding_point());
     r.push_back(make_masd_variability_labels());
     r.push_back(make_masd_variability_value());

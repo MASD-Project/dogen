@@ -27,16 +27,15 @@ namespace dogen::assets::features {
 
 namespace {
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_decoration_modeline_editor() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("editor");
     r.name().qualified("masd.decoration.modeline.editor");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -45,16 +44,15 @@ make_masd_decoration_modeline_editor() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_decoration_modeline_location() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("location");
     r.name().qualified("masd.decoration.modeline.location");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -63,16 +61,15 @@ make_masd_decoration_modeline_location() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_decoration_modeline_technical_space() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("technical_space");
     r.name().qualified("masd.decoration.modeline.technical_space");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -110,10 +107,10 @@ decoration_modeline::static_configuration decoration_modeline::make_static_confi
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature_template>
-decoration_modeline::make_templates() {
+std::list<dogen::variability::meta_model::feature>
+decoration_modeline::make_features() {
     using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    std::list<dogen::variability::meta_model::feature> r;
     r.push_back(make_masd_decoration_modeline_editor());
     r.push_back(make_masd_decoration_modeline_location());
     r.push_back(make_masd_decoration_modeline_technical_space());

@@ -2512,7 +2512,7 @@
       "name": "features::type_parameters",
       "documentation": "Parameters to configure generic types.\n",
       "stereotypes": [
-        "masd::variability::feature_template_bundle"
+        "masd::variability::feature_bundle"
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "element",
@@ -2558,7 +2558,7 @@
       "name": "features::enumeration",
       "documentation": "Parameters related to enumerations.\n",
       "stereotypes": [
-        "masd::variability::feature_template_bundle"
+        "masd::variability::feature_bundle"
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "element",
@@ -2609,7 +2609,7 @@
       "name": "features::enumerator",
       "documentation": "Parameters related to enumerators.\n",
       "stereotypes": [
-        "masd::variability::feature_template_bundle"
+        "masd::variability::feature_bundle"
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "property",
@@ -2633,7 +2633,7 @@
       "name": "features::generalization",
       "documentation": "Features related to the generalization relationship.\n",
       "stereotypes": [
-        "masd::variability::feature_template_bundle"
+        "masd::variability::feature_bundle"
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "element",
@@ -2666,7 +2666,7 @@
       "name": "features::origin",
       "documentation": "Features related to the origin of the model.\n",
       "stereotypes": [
-        "masd::variability::feature_template_bundle"
+        "masd::variability::feature_bundle"
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "global",
@@ -2690,7 +2690,7 @@
       "name": "features::output_technical_space",
       "documentation": "Features related to the output technical space.\n",
       "stereotypes": [
-        "masd::variability::feature_template_bundle"
+        "masd::variability::feature_bundle"
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "global",
@@ -2714,7 +2714,7 @@
       "name": "features::primitive",
       "documentation": "Features related to primitive elements.\n",
       "stereotypes": [
-        "masd::variability::feature_template_bundle"
+        "masd::variability::feature_bundle"
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "element",
@@ -2756,7 +2756,7 @@
       "name": "features::orm",
       "documentation": "Features related to ORM support.\n",
       "stereotypes": [
-        "masd::variability::feature_template_bundle"
+        "masd::variability::feature_bundle"
       ],
       "tagged_values": {
         "masd.variability.archetype_location.kernel": "masd",
@@ -2880,7 +2880,7 @@
       "name": "features::decoration_modeline",
       "documentation": "Modeline properties.\n",
       "stereotypes": [
-        "masd::variability::feature_template_bundle"
+        "masd::variability::feature_bundle"
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "any",
@@ -2922,7 +2922,7 @@
       "name": "features::variability_templates",
       "documentation": "Features related to the processing of variability for feature and profile templates.\n",
       "stereotypes": [
-        "masd::variability::feature_template_bundle"
+        "masd::variability::feature_bundle"
       ],
       "tagged_values": {
         "masd.variability.archetype_location.kernel": "masd",
@@ -3037,7 +3037,7 @@
       "name": "features::mapping",
       "documentation": "Meta-data related to element mapping.\n",
       "stereotypes": [
-        "masd::variability::feature_template_bundle"
+        "masd::variability::feature_bundle"
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "any",
@@ -3117,7 +3117,7 @@
       "name": "features::variability_bundle",
       "documentation": "Features related to the processing of variability for feature bundles.\n",
       "stereotypes": [
-        "masd::variability::feature_template_bundle"
+        "masd::variability::feature_bundle"
       ],
       "tagged_values": {
         "masd.variability.archetype_location.kernel": "masd",
