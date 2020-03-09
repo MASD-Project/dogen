@@ -902,7 +902,7 @@
         <dia:point val="-20,-4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-20.05,-4.05;7.13,28.95"/>
+        <dia:rectangle val="-20.05,-4.05;7.13,25.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -914,7 +914,7 @@
         <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="32.899999999999999"/>
+        <dia:real val="29.700000000000003"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -6280,7 +6280,7 @@ and, if so, ignore it.#</dia:string>
         <dia:string>#input_technical_space#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Feature bundle for the input technical space.
@@ -6476,7 +6476,7 @@ the injection model.
         <dia:string>#reference#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Features related to model referencing.
@@ -6603,13 +6603,13 @@ the injection model.
         <dia:point val="140,47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="139.95,46.95;160.185,50.05"/>
+        <dia:rectangle val="139.95,46.95;153.64,50.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="140,47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.134999999999998"/>
+        <dia:real val="13.59"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -6660,7 +6660,7 @@ the injection model.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#b2e2e2"/>
+        <dia:color val="#529999"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -6729,7 +6729,7 @@ the injection model.
         <dia:string>#uml#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::feature_template_bundle#</dia:string>
+        <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Features related to all UML injectors.

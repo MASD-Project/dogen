@@ -25,16 +25,15 @@ namespace dogen::injection::features {
 
 namespace {
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_injection_dia_comment() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("comment");
     r.name().qualified("masd.injection.dia.comment");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -46,10 +45,10 @@ make_masd_injection_dia_comment() {
 }
 
 
-std::list<dogen::variability::meta_model::feature_template>
-uml::make_templates() {
+std::list<dogen::variability::meta_model::feature>
+uml::make_features() {
     using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    std::list<dogen::variability::meta_model::feature> r;
     r.push_back(make_masd_injection_dia_comment());
     return r;
 }

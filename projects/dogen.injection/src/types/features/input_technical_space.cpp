@@ -27,16 +27,15 @@ namespace dogen::injection::features {
 
 namespace {
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_injection_input_technical_space() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("input_technical_space");
     r.name().qualified("masd.injection.input_technical_space");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "agnostic" }));
 
@@ -69,10 +68,10 @@ input_technical_space::static_configuration input_technical_space::make_static_c
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature_template>
-input_technical_space::make_templates() {
+std::list<dogen::variability::meta_model::feature>
+input_technical_space::make_features() {
     using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    std::list<dogen::variability::meta_model::feature> r;
     r.push_back(make_masd_injection_input_technical_space());
     return r;
 }
