@@ -1888,28 +1888,6 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "meta_model::variability::profile_template",
-      "stereotypes": [
-        "assets::meta_element"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "labels",
-          "type": "std::unordered_set<std::string>"
-        },
-        {
-          "name": "entries",
-          "type": "std::list<entry>"
-        },
-        {
-          "name": "parents",
-          "type": "std::list<name>",
-          "documentation": "Parents of this profile template.\n"
-        }
-      ]
-    },
-    {
       "name": "meta_model::variability::entry",
       "stereotypes": [
         "Documentable",
@@ -3822,7 +3800,7 @@
       ]
     },
     {
-      "name": "meta_model::variability::profile",
+      "name": "meta_model::variability::abstract_profile",
       "stereotypes": [
         "assets::meta_element"
       ],
@@ -3838,9 +3816,24 @@
         },
         {
           "name": "parents",
-          "type": "std::list<name>"
+          "type": "std::list<name>",
+          "documentation": "Parents of this profile template.\n"
         }
       ]
+    },
+    {
+      "name": "meta_model::variability::profile_template",
+      "parents": [
+        "meta_model::variability::abstract_profile"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::variability::profile",
+      "parents": [
+        "meta_model::variability::abstract_profile"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

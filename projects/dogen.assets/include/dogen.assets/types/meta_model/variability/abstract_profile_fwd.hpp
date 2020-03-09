@@ -18,15 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen.assets/io/meta_model/variability/profile_io.hpp"
-#include "dogen.assets/io/meta_model/variability/abstract_profile_io.hpp"
+#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_ABSTRACT_PROFILE_FWD_HPP
+#define DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_ABSTRACT_PROFILE_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen::assets::meta_model::variability {
 
-std::ostream& operator<<(std::ostream& s, const profile& v) {
-    v.to_stream(s);
-    return(s);
-}
+class abstract_profile;
 
 }
+
+#endif

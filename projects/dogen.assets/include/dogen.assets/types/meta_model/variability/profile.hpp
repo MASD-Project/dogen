@@ -25,18 +25,13 @@
 #pragma once
 #endif
 
-#include <list>
 #include <iosfwd>
-#include <string>
 #include <algorithm>
-#include <unordered_set>
-#include "dogen.assets/types/meta_model/name.hpp"
-#include "dogen.assets/types/meta_model/element.hpp"
-#include "dogen.assets/types/meta_model/variability/entry.hpp"
+#include "dogen.assets/types/meta_model/variability/abstract_profile.hpp"
 
 namespace dogen::assets::meta_model::variability {
 
-class profile final : public dogen::assets::meta_model::element {
+class profile final : public dogen::assets::meta_model::variability::abstract_profile {
 public:
     profile() = default;
     profile(const profile&) = default;
@@ -76,22 +71,6 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const std::unordered_set<std::string>& labels() const;
-    std::unordered_set<std::string>& labels();
-    void labels(const std::unordered_set<std::string>& v);
-    void labels(const std::unordered_set<std::string>&& v);
-
-    const std::list<dogen::assets::meta_model::variability::entry>& entries() const;
-    std::list<dogen::assets::meta_model::variability::entry>& entries();
-    void entries(const std::list<dogen::assets::meta_model::variability::entry>& v);
-    void entries(const std::list<dogen::assets::meta_model::variability::entry>&& v);
-
-    const std::list<dogen::assets::meta_model::name>& parents() const;
-    std::list<dogen::assets::meta_model::name>& parents();
-    void parents(const std::list<dogen::assets::meta_model::name>& v);
-    void parents(const std::list<dogen::assets::meta_model::name>&& v);
-
-public:
     bool operator==(const profile& rhs) const;
     bool operator!=(const profile& rhs) const {
         return !this->operator==(rhs);
@@ -104,10 +83,6 @@ public:
     void swap(profile& other) noexcept;
     profile& operator=(profile other);
 
-private:
-    std::unordered_set<std::string> labels_;
-    std::list<dogen::assets::meta_model::variability::entry> entries_;
-    std::list<dogen::assets::meta_model::name> parents_;
 };
 
 }

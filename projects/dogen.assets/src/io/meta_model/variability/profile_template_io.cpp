@@ -19,10 +19,7 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen.assets/io/meta_model/name_io.hpp"
-#include "dogen.assets/io/meta_model/element_io.hpp"
-#include "dogen.assets/io/meta_model/variability/entry_io.hpp"
+#include "dogen.assets/io/meta_model/variability/abstract_profile_io.hpp"
 #include "dogen.assets/io/meta_model/variability/profile_template_io.hpp"
 
 namespace dogen::assets::meta_model::variability {

@@ -18,29 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_PROFILE_TEMPLATE_HPP
-#define DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_PROFILE_TEMPLATE_HPP
+#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_ABSTRACT_PROFILE_HPP
+#define DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_ABSTRACT_PROFILE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
+#include <string>
 #include <algorithm>
-#include "dogen.assets/types/meta_model/variability/abstract_profile.hpp"
+#include <unordered_set>
+#include "dogen.assets/types/meta_model/name.hpp"
+#include "dogen.assets/types/meta_model/element.hpp"
+#include "dogen.assets/types/meta_model/variability/entry.hpp"
 
 namespace dogen::assets::meta_model::variability {
 
-class profile_template final : public dogen::assets::meta_model::variability::abstract_profile {
+class abstract_profile : public dogen::assets::meta_model::element {
 public:
-    profile_template() = default;
-    profile_template(const profile_template&) = default;
-    profile_template(profile_template&&) = default;
+    abstract_profile() = default;
+    abstract_profile(const abstract_profile&) = default;
+    abstract_profile(abstract_profile&&) = default;
 
-    virtual ~profile_template() noexcept { }
+    virtual ~abstract_profile() noexcept = 0;
 
 public:
-    profile_template(
+    abstract_profile(
         const dogen::assets::meta_model::name& name,
         const std::string& documentation,
         const dogen::assets::meta_model::origin_types origin_type,
@@ -61,39 +66,47 @@ public:
         const std::list<dogen::assets::meta_model::name>& parents);
 
 public:
-    using element::accept;
-
-    virtual void accept(const element_visitor& v) const override;
-    virtual void accept(element_visitor& v) const override;
-    virtual void accept(const element_visitor& v) override;
-    virtual void accept(element_visitor& v) override;
-public:
-    void to_stream(std::ostream& s) const override;
+    virtual void to_stream(std::ostream& s) const;
 
 public:
-    bool operator==(const profile_template& rhs) const;
-    bool operator!=(const profile_template& rhs) const {
-        return !this->operator==(rhs);
-    }
+    const std::unordered_set<std::string>& labels() const;
+    std::unordered_set<std::string>& labels();
+    void labels(const std::unordered_set<std::string>& v);
+    void labels(const std::unordered_set<std::string>&& v);
 
+    const std::list<dogen::assets::meta_model::variability::entry>& entries() const;
+    std::list<dogen::assets::meta_model::variability::entry>& entries();
+    void entries(const std::list<dogen::assets::meta_model::variability::entry>& v);
+    void entries(const std::list<dogen::assets::meta_model::variability::entry>&& v);
+
+    /**
+     * @brief Parents of this profile template.
+     */
+    /**@{*/
+    const std::list<dogen::assets::meta_model::name>& parents() const;
+    std::list<dogen::assets::meta_model::name>& parents();
+    void parents(const std::list<dogen::assets::meta_model::name>& v);
+    void parents(const std::list<dogen::assets::meta_model::name>&& v);
+    /**@}*/
+
+protected:
+    bool compare(const abstract_profile& rhs) const;
 public:
-    bool equals(const dogen::assets::meta_model::element& other) const override;
+    virtual bool equals(const dogen::assets::meta_model::element& other) const = 0;
 
-public:
-    void swap(profile_template& other) noexcept;
-    profile_template& operator=(profile_template other);
+protected:
+    void swap(abstract_profile& other) noexcept;
 
+private:
+    std::unordered_set<std::string> labels_;
+    std::list<dogen::assets::meta_model::variability::entry> entries_;
+    std::list<dogen::assets::meta_model::name> parents_;
 };
 
-}
+inline abstract_profile::~abstract_profile() noexcept { }
 
-namespace std {
-
-template<>
-inline void swap(
-    dogen::assets::meta_model::variability::profile_template& lhs,
-    dogen::assets::meta_model::variability::profile_template& rhs) {
-    lhs.swap(rhs);
+inline bool operator==(const abstract_profile& lhs, const abstract_profile& rhs) {
+    return lhs.equals(rhs);
 }
 
 }

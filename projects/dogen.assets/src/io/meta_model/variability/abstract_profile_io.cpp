@@ -19,12 +19,15 @@
  *
  */
 #include <ostream>
-#include "dogen.assets/io/meta_model/variability/profile_io.hpp"
+#include <boost/algorithm/string.hpp>
+#include "dogen.assets/io/meta_model/name_io.hpp"
+#include "dogen.assets/io/meta_model/element_io.hpp"
+#include "dogen.assets/io/meta_model/variability/entry_io.hpp"
 #include "dogen.assets/io/meta_model/variability/abstract_profile_io.hpp"
 
 namespace dogen::assets::meta_model::variability {
 
-std::ostream& operator<<(std::ostream& s, const profile& v) {
+std::ostream& operator<<(std::ostream& s, const abstract_profile& v) {
     v.to_stream(s);
     return(s);
 }
