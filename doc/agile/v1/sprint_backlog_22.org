@@ -14,7 +14,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-09 Mon 11:58]
+#+CAPTION: Clock summary at [2020-03-09 Mon 15:37]
 | <75>                                                    |         |       |      |       |
 | Headline                                                | Time    |       |      |     % |
 |---------------------------------------------------------+---------+-------+------+-------|
@@ -210,6 +210,7 @@ Time spent creating the demo and presentation. Use the demo project:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-03-09 Mon 16:08]--[2020-03-09 Mon 16:39] =>  0:31
     CLOCK: [2020-03-05 Thu 14:48]--[2020-03-05 Thu 14:53] =>  0:05
     CLOCK: [2020-03-05 Thu 14:20]--[2020-03-05 Thu 14:47] =>  0:27
     CLOCK: [2020-03-05 Thu 14:04]--[2020-03-05 Thu 14:19] =>  0:15
@@ -570,7 +571,17 @@ Notes:
 
 For some reason we have placed this in the archetypes model.
 
-*** Add location and modules to variability                           :story:
+*** Split profiles and profile templates in variability               :story:
+
+As with features, we seem to have conflated the profiles with profile
+templates. Given we use templates in a very small number of cases, it
+should really be two separate concepts to avoid confusing end users
+and ourselves.
+
+*** STARTED Add location and modules to variability                   :story:
+    :LOGBOOK:
+    CLOCK: [2020-03-09 Mon 15:25]--[2020-03-09 Mon 16:08] =>  0:43
+    :END:
 
 We need to create a location class in variability, based on a simple
 list of strings. It should probably have an attribute called "modules"
@@ -592,6 +603,45 @@ Notes:
   need code generation in fact, given we deal with them
   generically. We should just retrieve them manually. See
   =archetype_location_properties_transform=.
+- check what the labels in variability are used for. If nothing,
+  remove them. Actually, these are used by profiles (e.g. the
+  stereotype to bind with). We probably should consider renaming
+  these. If its function is just to name the stereotype for a profile,
+  it should be called "stereotype" and there should be just one per
+  profile.
+- actually we have exactly the same problem with profiles and profile
+  templates. We used the approach of "template kind instance" for
+  profile templates. This is very confusing. We need to split these
+  two types prior to refactoring this code.
+
+*** Consider renaming labels to stereotypes in variability            :story:
+
+It appears we use labels just to store the stereotype of the
+profile. If so rename the attribute and associated feature and make it
+just a string.
+
+Merged stories:
+
+*Make labels a plain text field not a collection*
+
+At present it is possible to label a profile with multiple
+labels. This is not a good idea. Make it a plain text field so we can
+only apply a single label.
+
+*** Implement template instantiation in terms of tags                 :story:
+
+At present we are instantiating templates over a physical space
+(e.g. kernel, facet, archetypes). We need to replace this with
+tags. The idea is that we can inject tags (which are qualified names)
+into the model via meta-data:
+
+: #DOGEN masd.variability.tag=X,a.b.c
+
+We can then create feature templates that are instantiated on a range
+given by the set of all values for a given tag, for example =X=
+(e.g. =kernel=, =facet=, =archetype=). Tags can be introduced by any
+model which has a configuration point. However, elements in ranges are
+expected to be unique and to point to existing groups.
 
 *** Add command line option to dump all features                      :story:
 
@@ -638,21 +688,6 @@ Notes:
   context factory, retrieves all of the descriptions as strings
   somehow, and then get the command line to print them out. This can
   then be extended in the future to include backends, etc.
-
-*** Implement template instantiation in terms of tags                 :story:
-
-At present we are instantiating templates over a physical space
-(e.g. kernel, facet, archetypes). We need to replace this with
-tags. The idea is that we can inject tags (which are qualified names)
-into the model via meta-data:
-
-: #DOGEN masd.variability.tag=X,a.b.c
-
-We can then create feature templates that are instantiated on a range
-given by the set of all values for a given tag, for example =X=
-(e.g. =kernel=, =facet=, =archetype=). Tags can be introduced by any
-model which has a configuration point. However, elements in ranges are
-expected to be unique and to point to existing groups.
 
 *** Postfix and directory fields should be templates                  :story:
 
@@ -2574,3 +2609,72 @@ annotation rename.
 
 This may even be a more wide-ranging question: why do users need to
 know who owns the field? e.g. =dia.comment=, do I care?
+*** CANCELLED Add a modeline to stitch                                :story:
+    CLOSED: [2020-03-09 Mon 16:17]
+
+*Rationale*: this story is deprecated in light of the changes to
+stitch templates and will be even more deprecated when we finish the
+templating refactor.
+
+It would be nice to be able to supply the mode and other emacs
+properties to stitch templates. For that we just need a special KVP
+used at the top that contains the modeline:
+
+: <#@ modeline="-*- mode: poly-stitch; tab-width: 4; indent-tabs-mode: nil; -*-" #>
+
+Stitch can read this KVP and ignore it.
+
+*** CANCELLED Add support for command line meta-data parameters       :story:
+    CLOSED: [2020-03-09 Mon 16:20]
+
+*Rationale*: variability overrides solve most of the problems in this
+story, and we haven't had use cases for what is not solved, so the
+story is considered deprecated.
+
+We do not want to force end users to change their existing file
+format. However, it is sometimes necessary to supply parameters into
+dogen which are not representable in the existing format. We could
+create a very simple extension to the command line arguments that
+would generate scribbles; these would then be appended to the model
+during the yarn workflow. Example:
+
+: --kvp a=b
+
+or:
+
+: --meta-data a=b
+
+These are in effect model-module level tagged values. We should be
+able to supply them in a file or as command-line parameters.
+
+This could cause all sorts of weird and wonderful problems such as
+unrepeatable behaviour, so we need to find a very good use case for it
+first.
+
+One use case for this is the "enable all" functionality, useful for
+testing. It would put dogen in a mode where all facets would be
+enabled, regardless.
+*** CANCELLED Throw on profiles that refer to invalid fields          :story:
+    CLOSED: [2020-03-09 Mon 16:32]
+
+*Rationale*: compatibility mode has been implemented and stand-alone
+weaving has been deprecated, so this story has bit-rotted too much to
+be useful.
+
+At present during profile instantiation, if we detect a field which
+does not exist we skip the profile. This was done in the past because
+we had different binaries for stitch, knit etc, which meant that we
+could either split profiles by application or skip errors
+silently. Now we have a single binary, we could enable this
+validation. However, the stitch tests still rely on this
+behaviour. The right solution for this is to have some kind of
+override flag ("compatibility mode" springs to mind) which is off by
+default but can be used (judiciously).
+
+We put a fix in but it seems weave is still borked. The problem
+appears to be that we do something in the generation path that is not
+done for weaving (and presumably for conversion). The hack was put
+back in for now.
+
+This story is dependent on moving annotations out of stitch. Once this
+is done we can enable validation.

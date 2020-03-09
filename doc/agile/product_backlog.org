@@ -685,6 +685,9 @@ problem will apply to all new profiles:
 - serialisable
 - hashable
 
+Actually this probably should now work across all kernels, but we need
+tests to prove it.
+
 *** Rename facets                                                     :story:
 
 We originally called our support for =std::hash= just =hash= and our
@@ -1049,6 +1052,10 @@ we can do the profile processing on the first pass, and we can even
 generate the "dynamic profiles" as real meta-model elements, created
 on the fly.
 
+Note that this is a very complex story with the potential to cause a
+lot of problems. We should only start to tackle it when there is a
+very good use case.
+
 *** Handling of inclusion constants needs reviewing                   :story:
 
 At present we hard-coded "inclusion_constants" in C++ formatters for
@@ -1202,13 +1209,17 @@ simply do:
 This should be very simple to do, we just need a way to know if an
 attribute is static or not.
 
-*** Come up with a name for models that contain "meta-elements        :story:
+*** Come up with a name for models that contain "meta-elements"       :story:
 
 At present we created a number of models called "profiles"; these have
 only the profiles for configuring specific products. However,
 conceivably we want them to also store the generation markers and
 possibly licences, modelines, etc. Basically all of the shared
 meta-infrastructure. We need a name that reflects this.
+
+Ideas:
+
+- configuration
 
 *** Split wale out of stitch templates                                :story:
 
@@ -1356,12 +1367,12 @@ element in a configuration. For example, take feature =X= with a binding
 point of =global=; this feature can only be configured in the root
 module because it does not make sense to exist anywhere else.
 
-This concept was already present in the annotations model, where we
-checked that a "scope type" of a field matched the scope type of the
-element. However, this was present haphazardly in profiles; we had the
-notion of a "scope type" on a profile as a property but the profile
-hydrator never populated it; in addition, the profiler only set the
-annotation scope:
+This concept was already present in the old annotations model, where
+we checked that a "scope type" of a field matched the scope type of
+the element. However, this was present haphazardly in profiles; we had
+the notion of a "scope type" on a profile as a property but the
+profile hydrator never populated it; in addition, the profiler only
+set the annotation scope:
 
 : pc.annotation().scope(scope_types::not_applicable);
 
@@ -1392,12 +1403,6 @@ Once we do this, we can then remove the spurious quotes we added to
 all feature templates and do that directly in code-generation. It was
 added only because we needed to distinguish between the empty case and
 the "empty" string.
-
-*** Make labels a plain text field not a collection                   :story:
-
-At present it is possible to label a profile with multiple
-labels. This is not a good idea. Make it a plain text field so we can
-only apply a single label.
 
 *** Correct implementation of templates in meta-model                 :story:
 
@@ -1842,10 +1847,16 @@ then have it enable:
 - the appropriate ORM stereotype, e.g. =orm::object=, etc.
 
 However, at present there is no way to associate a stereotype with a
-profile. In addition, for this to work correctly we probably need to
-be able to at least validate that the element to which we applied the
-profile is of the expected type. Our binding at present is just
-"element" so it cannot distinguish between enumerations, etc.
+profile. Note carefully that we do not mean allow binding profiles
+against elements via stereotypes (this is what we do
+already). Instead, we are saying is: allow defining stereotypes as a
+configurable field within a profile and then when applying the
+profile, set the stereotype of the element it binds against.
+
+F this to work correctly we probably need to be able to at least
+validate that the element to which we applied the profile is of the
+expected type. Our binding at present is just "element" so it cannot
+distinguish between enumerations, etc.
 
 As far as just associating stereotypes with profiles, this could
 actually be done fairly easily: we could have a dynamic field called
@@ -3550,6 +3561,10 @@ field. We need to ensure that users cannot add this field to profiles
 or else we will end up with very weird error messages and/or
 behaviours.
 
+Actually this is probably not right - we have stereotypes on elements
+and these map to profile binds. The only real problem is when using
+profiles on profiles probably. This requires some thinking.
+
 *** Profile overriding may cause link errors                          :story:
 
 In the previous sprint we've addressed the issue of generating all
@@ -4346,10 +4361,10 @@ following error:
 There is no clue as to which object caused the error. Add a class name
 and dia object ID to the exception.
 
-*** Improve error messages around dynamic extensions kvp's            :story:
+*** Improve error messages on empty meta-data                         :story:
 
-Consider a dynamic extension "kvp" without a value, in a dia diagram
-(model note):
+Consider a meta-data entry without a value, in a dia diagram (model
+note):
 
 : #DOGEN dia.comment'
 
@@ -4357,9 +4372,13 @@ At present the following error is triggered:
 
 : 2014-09-27 10:07:32.761795 [ERROR] [dia_to_sml.comments_parser] Expected separator on KVP.
 
-This provides very little context of what went wrong. Also, should we
-allow a "kvp" that has no value, where the value is assumed to be
-true. For cases like comment it would make life easier.
+This provides very little context of what went wrong. Also, we should
+consider allowing for features that have no value, where the value is
+assumed to be true. For cases like comment it would make life
+easier. This may be good for boolean types with implied value
+(e.g. presence means true). However on read we should capture the fact
+that no value was supplied and then further down the processing
+pipeline handle the defaulting to true.
 
 *** Improve error message for blank types                             :story:
 
@@ -4577,26 +4596,6 @@ could relax the code in processor (object_types):
 
 We should also consider having a =strict= command line option to
 enable/disable this behaviour.
-
-*** Throw on profiles that refer to invalid fields                    :story:
-
-At present during profile instantiation, if we detect a field which
-does not exist we skip the profile. This was done in the past because
-we had different binaries for stitch, knit etc, which meant that we
-could either split profiles by application or skip errors
-silently. Now we have a single binary, we could enable this
-validation. However, the stitch tests still rely on this
-behaviour. The right solution for this is to have some kind of
-override flag ("compatibility mode" springs to mind) which is off by
-default but can be used (judiciously).
-
-We put a fix in but it seems weave is still borked. The problem
-appears to be that we do something in the generation path that is not
-done for weaving (and presumably for conversion). The hack was put
-back in for now.
-
-This story is dependent on moving annotations out of stitch. Once this
-is done we can enable validation.
 
 *** Fix clang-cl warnings                                             :story:
 
@@ -5873,16 +5872,6 @@ file paths and the includes. We need to add some comments.
 
 Now we have element in assistant we can start removing the need for
 element in the calls, making the templates simpler.
-
-*** Add a modeline to stitch                                          :story:
-
-It would be nice to be able to supply the mode and other emacs
-properties to stitch templates. For that we just need a special KVP
-used at the top that contains the modeline:
-
-: <#@ modeline="-*- mode: poly-stitch; tab-width: 4; indent-tabs-mode: nil; -*-" #>
-
-Stitch can read this KVP and ignore it.
 
 *** Dump transforms as serialisable data                              :story:
 
@@ -8813,32 +8802,6 @@ Notes:
 
 - we need a way to determine if we are using a helper, the assistant
   or a sequence generator directly.
-
-*** Add support for command line meta-data parameters                 :story:
-
-We do not want to force end users to change their existing file
-format. However, it is sometimes necessary to supply parameters into
-dogen which are not representable in the existing format. We could
-create a very simple extension to the command line arguments that
-would generate scribbles; these would then be appended to the model
-during the yarn workflow. Example:
-
-: --kvp a=b
-
-or:
-
-: --meta-data a=b
-
-These are in effect model-module level tagged values. We should be
-able to supply them in a file or as command-line parameters.
-
-This could cause all sorts of weird and wonderful problems such as
-unrepeatable behaviour, so we need to find a very good use case for it
-first.
-
-One use case for this is the "enable all" functionality, useful for
-testing. It would put dogen in a mode where all facets would be
-enabled, regardless.
 
 *** Add support for nullable built-ins and primitives                 :story:
 
@@ -15447,6 +15410,7 @@ Notes:
   incongruent though. We need to make sure we do not create a loop
   when we are changing an existing generator, whereby we can no longer
   generate code because the new state is not valid.
+
 *** Consider adding support for sandbox-api                           :story:
 
 It is not entirely clear how this works or how it would be integrated
