@@ -27,16 +27,15 @@ namespace dogen::templating::stitch {
 
 namespace {
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_stitch_stream_variable_name() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("stream_variable_name");
     r.name().qualified("masd.stitch.stream_variable_name");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "stream_" }));
 
@@ -47,16 +46,15 @@ make_masd_stitch_stream_variable_name() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_stitch_relative_output_directory() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("relative_output_directory");
     r.name().qualified("masd.stitch.relative_output_directory");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -65,16 +63,15 @@ make_masd_stitch_relative_output_directory() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_stitch_inclusion_dependency() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("inclusion_dependency");
     r.name().qualified("masd.stitch.inclusion_dependency");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -83,16 +80,15 @@ make_masd_stitch_inclusion_dependency() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_stitch_containing_namespaces() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("containing_namespaces");
     r.name().qualified("masd.stitch.containing_namespaces");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -101,16 +97,15 @@ make_masd_stitch_containing_namespaces() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_stitch_wale_text_template() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("text_template");
     r.name().qualified("masd.stitch.wale.text_template");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -119,16 +114,16 @@ make_masd_stitch_wale_text_template() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::meta_model::feature
 make_masd_stitch_wale_kvp() {
     using namespace dogen::variability::meta_model;
-    feature_template r;
+    feature r;
     r.name().simple("kvp");
     r.name().qualified("masd.stitch.wale.kvp");
     const auto vt(value_type::key_value_pair);
     r.value_type(vt);
+    r.is_partially_matchable(true);
     r.binding_point(binding_point::global);
-    r.kind(template_kind::instance);
 
     archetypes::location al;
     al.kernel("masd");
@@ -173,10 +168,10 @@ features::static_configuration features::make_static_configuration(
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature_template>
-features::make_templates() {
+std::list<dogen::variability::meta_model::feature>
+features::make_features() {
     using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    std::list<dogen::variability::meta_model::feature> r;
     r.push_back(make_masd_stitch_stream_variable_name());
     r.push_back(make_masd_stitch_relative_output_directory());
     r.push_back(make_masd_stitch_inclusion_dependency());

@@ -320,7 +320,7 @@
       "name": "stitch::features",
       "documentation": "Stitch templating features.\n",
       "stereotypes": [
-        "masd::variability::feature_template_bundle"
+        "masd::variability::feature_bundle"
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "global",
