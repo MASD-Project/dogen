@@ -1502,6 +1502,10 @@
           "type": ""
         },
         {
+          "name": "variability_profile",
+          "type": ""
+        },
+        {
           "name": "variability_profile_template",
           "type": ""
         },

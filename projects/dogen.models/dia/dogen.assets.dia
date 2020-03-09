@@ -22164,19 +22164,19 @@ Temporary data structure used to build trees of names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O151">
       <dia:attribute name="obj_pos">
-        <dia:point val="-192.214,-100.286"/>
+        <dia:point val="-192,-101"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-192.264,-100.336;-177.804,-72.636"/>
+        <dia:rectangle val="-192.05,-101.05;-177.59,-72.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-192.214,-100.286"/>
+        <dia:point val="-192,-101"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.359999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="27.600000000000012"/>
+        <dia:real val="28.400000000000013"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#static_stereotypes#</dia:string>
@@ -22660,6 +22660,29 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#decoration_licence#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#variability_profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -24141,7 +24164,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-172.125,-69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-185.084,-72.736;-171.375,-68.2"/>
+        <dia:rectangle val="-184.87,-72.65;-171.375,-68.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24149,8 +24172,8 @@ Temporary data structure used to build trees of names.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-172.125,-69"/>
         <dia:point val="-172.125,-71"/>
-        <dia:point val="-185.034,-71"/>
-        <dia:point val="-185.034,-72.686"/>
+        <dia:point val="-184.82,-71"/>
+        <dia:point val="-184.82,-72.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

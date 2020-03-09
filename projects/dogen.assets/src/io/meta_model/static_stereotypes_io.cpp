@@ -87,6 +87,9 @@ std::ostream& operator<<(std::ostream& s, const static_stereotypes& v) {
     case static_stereotypes::decoration_licence:
         attr = "\"decoration_licence\"";
         break;
+    case static_stereotypes::variability_profile:
+        attr = "\"variability_profile\"";
+        break;
     case static_stereotypes::variability_profile_template:
         attr = "\"variability_profile_template\"";
         break;
