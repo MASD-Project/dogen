@@ -57,6 +57,8 @@ const std::string stereotype_decoration_modeline("masd::decoration::modeline");
 const std::string stereotype_decoration_generation_marker(
     "masd::decoration::generation_marker");
 const std::string stereotype_decoration_licence("masd::decoration::licence");
+const std::string stereotype_variability_profile(
+    "masd::variability::profile");
 const std::string stereotype_variability_profile_template(
     "masd::variability::profile_template");
 const std::string stereotype_variability_feature_template_bundle(
@@ -130,6 +132,8 @@ static_stereotypes stereotypes_helper::from_string(const std::string& s) const {
         return static_stereotypes::decoration_generation_marker;
     else if (s == stereotype_decoration_licence)
         return static_stereotypes::decoration_licence;
+    else if (s == stereotype_variability_profile)
+        return static_stereotypes::variability_profile;
     else if (s == stereotype_variability_profile_template)
         return static_stereotypes::variability_profile_template;
     else if (s == stereotype_variability_feature_template_bundle)
@@ -224,6 +228,8 @@ to_string(const static_stereotypes ss) const {
         return stereotype_decoration_generation_marker;
     case static_stereotypes::decoration_licence:
         return stereotype_decoration_licence;
+    case static_stereotypes::variability_profile:
+        return stereotype_variability_profile;
     case static_stereotypes::variability_profile_template:
         return stereotype_variability_profile_template;
     case static_stereotypes::variability_feature_template_bundle:
@@ -275,6 +281,7 @@ is_element_type(const static_stereotypes ss) const {
         ss == static_stereotypes::decoration_modeline ||
         ss == static_stereotypes::decoration_generation_marker ||
         ss == static_stereotypes::decoration_licence ||
+        ss == static_stereotypes::variability_profile ||
         ss == static_stereotypes::variability_profile_template ||
         ss == static_stereotypes::variability_feature_template_bundle ||
         ss == static_stereotypes::variability_feature_bundle ||
