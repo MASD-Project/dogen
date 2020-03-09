@@ -24,7 +24,7 @@
 namespace dogen::templating {
 
 void initializer::
-register_templates(variability::helpers::registrar& rg) {
+register_entities(variability::helpers::registrar& rg) {
     rg.register_features(dogen::templating::stitch::features::make_features());
 }
 

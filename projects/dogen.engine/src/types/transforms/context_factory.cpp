@@ -101,16 +101,17 @@ create_archetype_location_repository(
     }
     return boost::make_shared<archetypes::location_repository>(b.build());
 }
-void context_factory::populate_registrar(variability::helpers::registrar& rg) {
-    injection::features::initializer::register_templates(rg);
-    assets::features::initializer::register_templates(rg);
-    generation::features::initializer::register_templates(rg);
-    templating::initializer::register_templates(rg);
-    variability::features::initializer::register_templates(rg);
-    extraction::features::initializer::register_templates(rg);
-    generation::cpp::feature_initializer::register_templates(rg);
-    generation::csharp::feature_initializer::register_templates(rg);
-    features::initializer::register_templates(rg);
+void context_factory::
+register_variability_entities(variability::helpers::registrar& rg) {
+    injection::features::initializer::register_entities(rg);
+    assets::features::initializer::register_entities(rg);
+    generation::features::initializer::register_entities(rg);
+    templating::initializer::register_entities(rg);
+    variability::features::initializer::register_entities(rg);
+    extraction::features::initializer::register_entities(rg);
+    generation::cpp::feature_initializer::register_entities(rg);
+    generation::csharp::feature_initializer::register_entities(rg);
+    features::initializer::register_entities(rg);
 }
 
 injection::transforms::context context_factory::
@@ -203,10 +204,14 @@ make_context(const configuration& cfg, const std::string& activity,
     r.variability_context(vctx);
 
     /*
-     * Now we can create the feature model.
+     * Now we can create the feature model. First we must register all
+     * entities in the variability space, which we obtain by all the
+     * initialisers scattered across all models. Then we can apply the
+     * feature model production chain to use those entities to create
+     * a feature model.
      */
     variability::helpers::registrar vrg;
-    populate_registrar(vrg);
+    register_variability_entities(vrg);
     const auto ftrp(vrg.feature_template_repository());
     const auto frp(vrg.feature_repository());
     using variability::transforms::feature_model_production_chain;

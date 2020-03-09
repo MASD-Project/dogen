@@ -26,7 +26,7 @@
 namespace dogen::injection::features {
 
 void initializer::
-register_templates(variability::helpers::registrar& rg) {
+register_entities(variability::helpers::registrar& rg) {
     rg.register_features(dogen::injection::features::input_technical_space::make_features());
     rg.register_features(dogen::injection::features::reference::make_features());
     rg.register_features(dogen::injection::features::uml::make_features());

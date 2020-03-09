@@ -24,7 +24,7 @@
 namespace dogen::extraction::features {
 
 void initializer::
-register_templates(variability::helpers::registrar& rg) {
+register_entities(variability::helpers::registrar& rg) {
     rg.register_features(dogen::extraction::features::filesystem::make_features());
 }
 

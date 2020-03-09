@@ -104,7 +104,7 @@ a.stream() << " * @brief Registers all of the available feature templates with r
 a.stream() << " */" << std::endl;
 a.stream() << "class " << sn << " final {" << std::endl;
 a.stream() << "public:" << std::endl;
-a.stream() << "    static void register_templates(variability::helpers::registrar& rg);" << std::endl;
+a.stream() << "    static void register_entities(variability::helpers::registrar& rg);" << std::endl;
 a.stream() << "};" << std::endl;
 a.stream() << std::endl;
         }

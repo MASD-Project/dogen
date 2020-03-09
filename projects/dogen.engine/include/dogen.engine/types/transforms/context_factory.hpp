@@ -39,12 +39,25 @@ namespace dogen::engine::transforms {
  */
 class context_factory final {
 private:
-    static void populate_registrar(variability::helpers::registrar& rg);
+    /**
+     * @brief Registers all entities defined by the variability
+     * initialisation process.
+     */
+    static void register_variability_entities(
+        variability::helpers::registrar& rg);
 
 public:
+    /**
+     * @brief Creates a transform context required by the injection
+     * chain.
+     */
     static injection::transforms::context make_injection_context(
         const configuration& cfg, const std::string& activity);
 
+    /**
+     * @brief Creates the injection context required by all transform
+     * chains.
+     */
     static context make_context(const configuration& cfg,
         const std::string& activity,
         const boost::filesystem::path& output_directory);

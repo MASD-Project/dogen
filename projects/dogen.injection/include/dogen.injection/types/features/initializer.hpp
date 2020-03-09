@@ -35,7 +35,7 @@ namespace dogen::injection::features {
  */
 class initializer final {
 public:
-    static void register_templates(variability::helpers::registrar& rg);
+    static void register_entities(variability::helpers::registrar& rg);
 };
 
 }
