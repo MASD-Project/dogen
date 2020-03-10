@@ -14,25 +14,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-09 Mon 20:14]
+#+CAPTION: Clock summary at [2020-03-10 Tue 12:04]
 | <75>                                                    |         |       |      |       |
 | Headline                                                | Time    |       |      |     % |
 |---------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                            | *33:26* |       |      | 100.0 |
+| *Total time*                                            | *36:56* |       |      | 100.0 |
 |---------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                 | 33:26   |       |      | 100.0 |
-| Active                                                  |         | 33:26 |      | 100.0 |
-| Edit release notes for previous sprint                  |         |       | 4:11 |  12.5 |
-| Create a demo and presentation for previous sprint      |         |       | 0:25 |   1.2 |
-| Sprint and product backlog grooming                     |         |       | 4:56 |  14.8 |
-| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  17.7 |
-| Analysis on removing physical references in variability |         |       | 5:27 |  16.3 |
+| Stories                                                 | 36:56   |       |      | 100.0 |
+| Active                                                  |         | 36:56 |      | 100.0 |
+| Edit release notes for previous sprint                  |         |       | 4:11 |  11.3 |
+| Create a demo and presentation for previous sprint      |         |       | 0:25 |   1.1 |
+| Sprint and product backlog grooming                     |         |       | 4:56 |  13.4 |
+| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  16.0 |
+| Analysis on removing physical references in variability |         |       | 5:27 |  14.8 |
 | Remove =rapidjson= formatters                           |         |       | 0:03 |   0.1 |
-| Separate feature templates from bundles                 |         |       | 9:28 |  28.3 |
+| Separate feature templates from bundles                 |         |       | 9:28 |  25.6 |
 | Move enabled to generation                              |         |       | 0:04 |   0.2 |
-| Split profiles and profile templates in variability     |         |       | 2:01 |   6.0 |
-| Create a chain to encapsulate variability transforms    |         |       | 0:13 |   0.6 |
-| Add location and modules to variability                 |         |       | 0:43 |   2.1 |
+| Create a chain to encapsulate variability transforms    |         |       | 0:37 |   1.7 |
+| Split profiles and profile templates in variability     |         |       | 2:01 |   5.5 |
+| Move profile meta-data into profile element             |         |       | 3:06 |   8.4 |
+| Add location and modules to variability                 |         |       | 0:43 |   1.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -574,6 +575,25 @@ Notes:
 
 For some reason we have placed this in the archetypes model.
 
+*** COMPLETED Create a chain to encapsulate variability transforms    :story:
+    CLOSED: [2020-03-09 Mon 23:11]
+    :LOGBOOK:
+    CLOCK: [2020-03-09 Mon 22:47]--[2020-03-09 Mon 23:11] =>  0:24
+    CLOCK: [2020-03-09 Mon 20:01]--[2020-03-09 Mon 20:14] =>  0:13
+    :END:
+
+At present we are using individual variability transforms in the
+engine, and interspersing those with other transforms. A nicer way is
+to have a chain in variability that takes in a configuration model set
+and runs a chain against it.
+
+Actually we can only encapsulate two transforms:
+
+- profile_binding_transform
+- profile_repository_transform
+
+Still, its worthwhile doing it.
+
 *** STARTED Split profiles and profile templates in variability       :story:
     :LOGBOOK:
     CLOCK: [2020-03-09 Mon 19:36]--[2020-03-09 Mon 20:00] =>  0:24
@@ -592,22 +612,38 @@ Notes:
 - we should create a chain in engine to gather all of the transforms
   related to variability.
 
-*** STARTED Create a chain to encapsulate variability transforms      :story:
+*** STARTED Move profile meta-data into profile element               :story:
     :LOGBOOK:
-    CLOCK: [2020-03-09 Mon 20:01]--[2020-03-09 Mon 20:14] =>  0:13
+    CLOCK: [2020-03-10 Tue 09:05]--[2020-03-10 Tue 12:04] =>  2:59
+    CLOCK: [2020-03-09 Mon 23:12]--[2020-03-09 Mon 23:19] =>  0:07
     :END:
 
-At present we are using individual variability transforms in the
-engine, and interspersing those with other transforms. A nicer way is
-to have a chain in variability that takes in a configuration model set
-and runs a chain against it.
+At present we have left some of the profile meta-data in the
+configuration of the profile element. However, for feature templates
+and feature bundles, we read out the meta-data in assets and then make
+use of it when transforming the element to its variability
+representation. We should use the same approach for profiles - if
+nothing else at least the approach is consistent.
 
-Actually we can only encapsulate two transforms:
+Notes:
 
-- profile_binding_transform
-- profile_repository_transform
-
-Still, its worthwhile doing it.
+- at present we always declare the features and create the static
+  configuration in the same place. This has worked thus far because we
+  tend to declare the features where we consume them. Profiles are
+  different: a profile is making use of a feature declared for a
+  feature. That is, a profile is the instantiation of a feature
+  defined elsewhere; remember that features are nothing more than a
+  type system designed to give a "strongly typed" feel to the
+  meta-data. Profiles are just an instantiation of those strong
+  types. In theory, profile meta-data should already exist and match
+  exactly what was defined for features. In practice there is a
+  mismatch, and this is due to how we modeled features and feature
+  bundles: to avoid repetition, we placed some features at the
+  top-level and others in the features themselves. This approach does
+  not match the shape required for profiles, so we need to redefine
+  the bundle. However, of course, we do not want to register the
+  features this time around (after all, they already exist) so we need
+  to disable feature registration.
 
 *** STARTED Add location and modules to variability                   :story:
     :LOGBOOK:
