@@ -18,12 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.variability/types/transforms/implicit_configuration_binding_transform.hpp"
+#ifndef DOGEN_VARIABILITY_TYPES_HELPERS_PROFILE_REPOSITORY_FACTORY_HPP
+#define DOGEN_VARIABILITY_TYPES_HELPERS_PROFILE_REPOSITORY_FACTORY_HPP
 
-namespace dogen::variability::transforms {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-bool implicit_configuration_binding_transform::operator==(const implicit_configuration_binding_transform& /*rhs*/) const {
-    return true;
+#include <algorithm>
+
+namespace dogen::variability::helpers {
+
+class profile_repository_factory final {
+public:
+    profile_repository_factory() = default;
+    profile_repository_factory(const profile_repository_factory&) = default;
+    profile_repository_factory(profile_repository_factory&&) = default;
+    ~profile_repository_factory() = default;
+    profile_repository_factory& operator=(const profile_repository_factory&) = default;
+
+public:
+    bool operator==(const profile_repository_factory& rhs) const;
+    bool operator!=(const profile_repository_factory& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
+
 }
 
-}
+#endif

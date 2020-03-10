@@ -815,13 +815,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::implicit_configuration_binding_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "meta_model::potential_binding",
       "documentation": "Contains information about a potential binding.\n",
       "fallback_element_type": "masd::object",
@@ -967,6 +960,13 @@
           "type": "std::list<feature>"
         }
       ]
+    },
+    {
+      "name": "helpers::profile_repository_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
