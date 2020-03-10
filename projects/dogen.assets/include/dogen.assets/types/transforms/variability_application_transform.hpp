@@ -25,24 +25,18 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.assets/types/meta_model/model_set.hpp"
+#include "dogen.assets/types/transforms/context_fwd.hpp"
 
 namespace dogen::assets::transforms {
 
+/**
+ * @brief Handles the application of variability into the model set
+ * currently being processed.
+ */
 class variability_application_transform final {
 public:
-    variability_application_transform() = default;
-    variability_application_transform(const variability_application_transform&) = default;
-    variability_application_transform(variability_application_transform&&) = default;
-    ~variability_application_transform() = default;
-    variability_application_transform& operator=(const variability_application_transform&) = default;
-
-public:
-    bool operator==(const variability_application_transform& rhs) const;
-    bool operator!=(const variability_application_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, assets::meta_model::model_set& ms);
 };
 
 }
