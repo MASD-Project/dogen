@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
 #include <string>
 #include <algorithm>
@@ -49,7 +50,7 @@ public:
         const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
         const dogen::assets::meta_model::name& name,
         const std::string& key,
-        const std::string& value,
+        const std::list<std::string>& value,
         const dogen::archetypes::location& location);
 
 public:
@@ -95,10 +96,10 @@ public:
     void key(const std::string& v);
     void key(const std::string&& v);
 
-    const std::string& value() const;
-    std::string& value();
-    void value(const std::string& v);
-    void value(const std::string&& v);
+    const std::list<std::string>& value() const;
+    std::list<std::string>& value();
+    void value(const std::list<std::string>& v);
+    void value(const std::list<std::string>&& v);
 
     /**
      * @brief Archetype location coordinates for the feature template to expand into.
@@ -123,7 +124,7 @@ private:
     boost::shared_ptr<dogen::variability::meta_model::configuration> configuration_;
     dogen::assets::meta_model::name name_;
     std::string key_;
-    std::string value_;
+    std::list<std::string> value_;
     dogen::archetypes::location location_;
 };
 

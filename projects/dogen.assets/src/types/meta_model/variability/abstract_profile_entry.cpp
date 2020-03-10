@@ -59,6 +59,20 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen::assets::meta_model::variability {
 
 abstract_profile_entry::abstract_profile_entry(
@@ -66,7 +80,7 @@ abstract_profile_entry::abstract_profile_entry(
     const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
     const dogen::assets::meta_model::name& name,
     const std::string& key,
-    const std::string& value,
+    const std::list<std::string>& value,
     const dogen::archetypes::location& location)
     : documentation_(documentation),
       configuration_(configuration),
@@ -82,7 +96,7 @@ void abstract_profile_entry::to_stream(std::ostream& s) const {
       << "\"configuration\": " << configuration_ << ", "
       << "\"name\": " << name_ << ", "
       << "\"key\": " << "\"" << tidy_up_string(key_) << "\"" << ", "
-      << "\"value\": " << "\"" << tidy_up_string(value_) << "\"" << ", "
+      << "\"value\": " << value_ << ", "
       << "\"location\": " << location_
       << " }";
 }
@@ -170,19 +184,19 @@ void abstract_profile_entry::key(const std::string&& v) {
     key_ = std::move(v);
 }
 
-const std::string& abstract_profile_entry::value() const {
+const std::list<std::string>& abstract_profile_entry::value() const {
     return value_;
 }
 
-std::string& abstract_profile_entry::value() {
+std::list<std::string>& abstract_profile_entry::value() {
     return value_;
 }
 
-void abstract_profile_entry::value(const std::string& v) {
+void abstract_profile_entry::value(const std::list<std::string>& v) {
     value_ = v;
 }
 
-void abstract_profile_entry::value(const std::string&& v) {
+void abstract_profile_entry::value(const std::list<std::string>&& v) {
     value_ = std::move(v);
 }
 

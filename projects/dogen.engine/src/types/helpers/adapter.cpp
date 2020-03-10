@@ -503,7 +503,8 @@ adapter::to_variability_profile(const assets::meta_model::location& l,
         e.key(n);
         e.configuration(attr.configuration());
         e.configuration()->name().qualified(e.name().qualified().dot());
-        e.value(attr.value());
+        if (!attr.value().empty())
+            e.value().push_back(attr.value());
         r->entries().push_back(e);
     }
 
@@ -553,7 +554,8 @@ adapter::to_variability_profile_template(const assets::meta_model::location& l,
         e.key(n);
         e.configuration(attr.configuration());
         e.configuration()->name().qualified(e.name().qualified().dot());
-        e.value(attr.value());
+        if (!attr.value().empty())
+            e.value().push_back(attr.value());
         r->entries().push_back(e);
     }
 

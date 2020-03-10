@@ -45,7 +45,7 @@ public:
         const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
         const dogen::assets::meta_model::name& name,
         const std::string& key,
-        const std::string& value,
+        const std::list<std::string>& value,
         const dogen::archetypes::location& location);
 
 public:

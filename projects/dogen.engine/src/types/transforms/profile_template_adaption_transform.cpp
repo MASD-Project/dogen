@@ -129,7 +129,7 @@ adapt(const variability::meta_model::feature_model& fm,
             cpt.untyped_value(scfg2.value);
         } else {
             BOOST_LOG_SEV(lg, trace) << "Untyped value: " << e.value();
-            cpt.untyped_value().push_back(e.value());
+            cpt.untyped_value(e.value());
         }
         r.templates().push_back(cpt);
     }

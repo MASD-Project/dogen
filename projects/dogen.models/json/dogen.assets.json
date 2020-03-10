@@ -3966,7 +3966,7 @@
         },
         {
           "name": "value",
-          "type": "std::string"
+          "type": "std::list<std::string>"
         },
         {
           "name": "location",
