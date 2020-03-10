@@ -20,6 +20,7 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.variability/types/transforms/context.hpp"
 #include "dogen.variability/types/transforms/profile_binding_transform.hpp"
 #include "dogen.variability/types/transforms/profile_repository_production_chain.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
@@ -38,6 +39,15 @@ static logger lg(logger_factory(transform_id));
 }
 
 namespace dogen::assets::transforms {
+
+variability::transforms::context
+variability_application_transform::adapt(const context& ctx) {
+    variability::transforms::context r;
+    r.archetype_location_repository(ctx.archetype_location_repository());
+    r.tracer(ctx.tracer());
+    r.compatibility_mode(ctx.compatibility_mode());
+    return r;
+}
 
 void variability_application_transform::
 apply(const context& ctx, assets::meta_model::model_set& ms) {
@@ -65,9 +75,7 @@ apply(const context& ctx, assets::meta_model::model_set& ms) {
      * repository of all profiles, organised for querying. The chain
      * takes care of instantiating templates into profiles.
      */
-    variability::transforms::context vctx;
-    // vctx.archetype_location_repository(ctx.archetype_location_repository());
-    vctx.tracer(ctx.tracer());
+    const auto vctx(adapt(ctx));
     using variability::transforms::profile_repository_production_chain;
     const auto prp(profile_repository_production_chain::apply(vctx, pts, fm));
 

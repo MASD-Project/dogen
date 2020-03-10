@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen.assets/types/meta_model/model_set.hpp"
+#include "dogen.variability/types/transforms/context_fwd.hpp"
 #include "dogen.assets/types/transforms/context_fwd.hpp"
 
 namespace dogen::assets::transforms {
@@ -35,6 +36,13 @@ namespace dogen::assets::transforms {
  * currently being processed.
  */
 class variability_application_transform final {
+private:
+    /**
+     * @brief Converts the assets transform context into a variability
+     * context.
+     */
+    static variability::transforms::context adapt(const context& ctx);
+
 public:
     static void apply(const context& ctx, assets::meta_model::model_set& ms);
 };
