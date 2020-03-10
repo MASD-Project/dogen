@@ -25,24 +25,18 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.assets/types/meta_model/model_set.hpp"
+#include "dogen.assets/types/transforms/context_fwd.hpp"
 
 namespace dogen::assets::transforms {
 
+/**
+ * @brief Populates the dynamic stereotypes of the assets model.
+ */
 class dynamic_stereotypes_transform final {
 public:
-    dynamic_stereotypes_transform() = default;
-    dynamic_stereotypes_transform(const dynamic_stereotypes_transform&) = default;
-    dynamic_stereotypes_transform(dynamic_stereotypes_transform&&) = default;
-    ~dynamic_stereotypes_transform() = default;
-    dynamic_stereotypes_transform& operator=(const dynamic_stereotypes_transform&) = default;
-
-public:
-    bool operator==(const dynamic_stereotypes_transform& rhs) const;
-    bool operator!=(const dynamic_stereotypes_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const assets::transforms::context& ctx,
+        assets::meta_model::model_set& ms);
 };
 
 }
