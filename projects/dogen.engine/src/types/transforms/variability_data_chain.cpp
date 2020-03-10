@@ -21,7 +21,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.engine/types/transforms/context.hpp"
-#include "dogen.engine/types/transforms/profile_binding_transform.hpp"
+#include "dogen.variability/types/transforms/profile_binding_transform.hpp"
 #include "dogen.engine/types/transforms/profile_repository_transform.hpp"
 #include "dogen.engine/types/transforms/assets_model_set_to_configuration_model_set_transform.hpp"
 #include "dogen.engine/types/transforms/profile_template_adaption_transform.hpp"
@@ -69,7 +69,10 @@ apply(const context& ctx, assets::meta_model::model_set& ms) {
         /*
          * We then bind the profiles to the relevant configurations.
          */
-        profile_binding_transform::apply(ctx, prp, cms);
+        const auto& fm(*ctx.injection_context().feature_model());
+        const auto& vctx(ctx.variability_context());
+        using variability::transforms::profile_binding_transform;
+        profile_binding_transform::apply(vctx, fm, prp, cms);
     }
 }
 

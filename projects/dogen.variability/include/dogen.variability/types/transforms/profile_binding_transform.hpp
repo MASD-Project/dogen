@@ -33,6 +33,7 @@
 #include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.variability/types/meta_model/profile_repository.hpp"
 #include "dogen.variability/types/meta_model/configuration_model.hpp"
+#include "dogen.variability/types/meta_model/configuration_model_set.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
 
 namespace dogen::variability::transforms {
@@ -76,11 +77,22 @@ private:
     static void bind(const meta_model::profile_repository& prp,
         const feature_group& fg, meta_model::configuration& cfg);
 
-public:
-    static void apply(const context& ctx,
-        const meta_model::profile_repository& prp,
+private:
+    /**
+     * @brief Runs the transform on a single configuration model.
+     */
+    static void apply(const meta_model::profile_repository& prp,
         const meta_model::feature_model& fm,
         meta_model::configuration_model& cm);
+
+public:
+    /**
+     * @brief Runs the transform on an entire configuration model set.
+     */
+    static void apply(const context& ctx,
+        const meta_model::feature_model& fm,
+        const meta_model::profile_repository& prp,
+        meta_model::configuration_model_set& cms);
 };
 
 }

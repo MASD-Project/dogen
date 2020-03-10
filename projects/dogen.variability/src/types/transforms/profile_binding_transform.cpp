@@ -27,6 +27,7 @@
 #include "dogen.variability/types/helpers/configuration_point_merger.hpp"
 #include "dogen.variability/io/meta_model/configuration_io.hpp"
 #include "dogen.variability/io/meta_model/configuration_model_io.hpp"
+#include "dogen.variability/io/meta_model/configuration_model_set_io.hpp"
 #include "dogen.variability/types/transforms/transformation_error.hpp"
 #include "dogen.variability/types/transforms/profile_binding_transform.hpp"
 
@@ -324,13 +325,8 @@ void profile_binding_transform::bind(const meta_model::profile_repository& prp,
     // BOOST_LOG_SEV(lg, debug) << "No profiles found, using original.";
 }
 
-void profile_binding_transform::apply(const context& ctx,
-    const meta_model::profile_repository& prp,
-    const meta_model::feature_model& fm,
-    meta_model::configuration_model& cm) {
-    tracing::scoped_transform_tracer stp(lg, "profile binding transform",
-        transform_id/*FIXME*/, transform_id, *ctx.tracer(), cm);
-
+void profile_binding_transform::apply(const meta_model::profile_repository& prp,
+    const meta_model::feature_model& fm, meta_model::configuration_model& cm) {
     /*
      * All configuration models must have a global configuration set.
      */
@@ -354,8 +350,19 @@ void profile_binding_transform::apply(const context& ctx,
         auto& cfg(*pair.second);
         bind(prp, fg, cfg);
     }
+}
 
-    stp.end_transform(cm);
+void profile_binding_transform::apply(const context& ctx,
+    const meta_model::feature_model& fm,
+    const meta_model::profile_repository& prp,
+    meta_model::configuration_model_set& cms) {
+    tracing::scoped_transform_tracer stp(lg,  "profile binding transform",
+        transform_id, *ctx.tracer(), cms);
+
+    for (auto& cm : cms.models())
+        apply(prp, fm, cm);
+
+    stp.end_transform(cms);
 }
 
 }
