@@ -14,26 +14,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-10 Tue 18:33]
+#+CAPTION: Clock summary at [2020-03-10 Tue 21:49]
 | <75>                                                    |         |       |      |       |
 | Headline                                                | Time    |       |      |     % |
 |---------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                            | *41:10* |       |      | 100.0 |
+| *Total time*                                            | *42:03* |       |      | 100.0 |
 |---------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                 | 41:10   |       |      | 100.0 |
-| Active                                                  |         | 41:10 |      | 100.0 |
-| Edit release notes for previous sprint                  |         |       | 4:11 |  10.2 |
+| Stories                                                 | 42:03   |       |      | 100.0 |
+| Active                                                  |         | 42:03 |      | 100.0 |
+| Edit release notes for previous sprint                  |         |       | 4:11 |   9.9 |
 | Create a demo and presentation for previous sprint      |         |       | 0:25 |   1.0 |
-| Sprint and product backlog grooming                     |         |       | 4:56 |  12.0 |
-| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  14.4 |
-| Analysis on removing physical references in variability |         |       | 5:27 |  13.2 |
+| Sprint and product backlog grooming                     |         |       | 5:05 |  12.1 |
+| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  14.1 |
+| Analysis on removing physical references in variability |         |       | 5:27 |  13.0 |
 | Remove =rapidjson= formatters                           |         |       | 0:03 |   0.1 |
-| Separate feature templates from bundles                 |         |       | 9:28 |  23.0 |
+| Separate feature templates from bundles                 |         |       | 9:28 |  22.5 |
 | Move enabled to generation                              |         |       | 0:04 |   0.2 |
 | Create a chain to encapsulate variability transforms    |         |       | 0:37 |   1.5 |
-| Move variability chain into assets                      |         |       | 2:22 |   5.7 |
-| Split profiles and profile templates in variability     |         |       | 2:01 |   4.9 |
-| Move profile meta-data into profile element             |         |       | 4:58 |  12.1 |
+| Move variability chain into assets                      |         |       | 2:22 |   5.6 |
+| Split profiles and profile templates in variability     |         |       | 2:01 |   4.8 |
+| Move profile meta-data into profile element             |         |       | 5:42 |  13.6 |
 | Add location and modules to variability                 |         |       | 0:43 |   1.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -215,6 +215,7 @@ Time spent creating the demo and presentation. Use the demo project:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-03-10 Tue 21:40]--[2020-03-10 Tue 21:49] =>  0:09
     CLOCK: [2020-03-09 Mon 16:08]--[2020-03-09 Mon 16:39] =>  0:31
     CLOCK: [2020-03-05 Thu 14:48]--[2020-03-05 Thu 14:53] =>  0:05
     CLOCK: [2020-03-05 Thu 14:20]--[2020-03-05 Thu 14:47] =>  0:27
@@ -632,6 +633,8 @@ Notes:
 
 *** STARTED Move profile meta-data into profile element               :story:
     :LOGBOOK:
+    CLOCK: [2020-03-10 Tue 21:10]--[2020-03-10 Tue 21:39] =>  0:29
+    CLOCK: [2020-03-10 Tue 19:01]--[2020-03-10 Tue 19:16] =>  0:15
     CLOCK: [2020-03-10 Tue 14:16]--[2020-03-10 Tue 16:08] =>  1:52
     CLOCK: [2020-03-10 Tue 09:05]--[2020-03-10 Tue 12:04] =>  2:59
     CLOCK: [2020-03-09 Mon 23:12]--[2020-03-09 Mon 23:19] =>  0:07
@@ -665,7 +668,15 @@ Notes:
   to disable feature registration.
 - "adaption" is not a word, rename to "adaptation" (in
   =profile_template_adaption_transform=).
-
+- rename "entities transform" to "features transform" and "application
+  transform" to profiles transform". Add lots of commentary explaining
+  the three distinct phases of variability processing (feature model
+  generation, profile processing and feature processing for code
+  generation). Copy across the profile processing from "entities
+  transform" into "application transform". Update profile adapter from
+  stash (and consider merging it into the application
+  transform?). Profiles transform is really a chain as it is calling
+  transforms.
 
 *** Replace variability enum mapper with lexical casts                :story:
 

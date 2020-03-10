@@ -2713,6 +2713,11 @@ experimentation. We also need to make sure that the colour step
 results in colours that are distinct enough so that we can recognise
 the elements. We also need to make sure the elements are readable.
 
+Links:
+
+- [[https://stackoverflow.com/questions/214359/converting-hex-color-to-rgb-and-vice-versa][Converting hex color to RGB and vice-versa]]
+- [[https://stackoverflow.com/questions/43001349/convert-numpy-array-of-rgb-values-to-hex-using-format-operator][Convert numpy array of RGB values to hex using format operator %]]
+
 *** Improve error messages for mistakes in meta-data enums            :story:
 
 At present when one makes a mistake in meta data the errors are not
