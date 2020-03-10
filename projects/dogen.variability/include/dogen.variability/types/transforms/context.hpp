@@ -46,18 +46,18 @@ public:
 
 public:
     context(
-        const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository,
         const bool compatibility_mode,
+        const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository,
         const boost::shared_ptr<dogen::tracing::tracer>& tracer);
 
 public:
+    bool compatibility_mode() const;
+    void compatibility_mode(const bool v);
+
     const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository() const;
     boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository();
     void archetype_location_repository(const boost::shared_ptr<dogen::archetypes::location_repository>& v);
     void archetype_location_repository(const boost::shared_ptr<dogen::archetypes::location_repository>&& v);
-
-    bool compatibility_mode() const;
-    void compatibility_mode(const bool v);
 
     const boost::shared_ptr<dogen::tracing::tracer>& tracer() const;
     boost::shared_ptr<dogen::tracing::tracer>& tracer();
@@ -75,8 +75,8 @@ public:
     context& operator=(context other);
 
 private:
-    boost::shared_ptr<dogen::archetypes::location_repository> archetype_location_repository_;
     bool compatibility_mode_;
+    boost::shared_ptr<dogen::archetypes::location_repository> archetype_location_repository_;
     boost::shared_ptr<dogen::tracing::tracer> tracer_;
 };
 

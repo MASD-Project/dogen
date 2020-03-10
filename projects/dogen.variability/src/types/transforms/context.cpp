@@ -46,23 +46,23 @@ context::context()
     : compatibility_mode_(static_cast<bool>(0)) { }
 
 context::context(
-    const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository,
     const bool compatibility_mode,
+    const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository,
     const boost::shared_ptr<dogen::tracing::tracer>& tracer)
-    : archetype_location_repository_(archetype_location_repository),
-      compatibility_mode_(compatibility_mode),
+    : compatibility_mode_(compatibility_mode),
+      archetype_location_repository_(archetype_location_repository),
       tracer_(tracer) { }
 
 void context::swap(context& other) noexcept {
     using std::swap;
-    swap(archetype_location_repository_, other.archetype_location_repository_);
     swap(compatibility_mode_, other.compatibility_mode_);
+    swap(archetype_location_repository_, other.archetype_location_repository_);
     swap(tracer_, other.tracer_);
 }
 
 bool context::operator==(const context& rhs) const {
-    return archetype_location_repository_ == rhs.archetype_location_repository_ &&
-        compatibility_mode_ == rhs.compatibility_mode_ &&
+    return compatibility_mode_ == rhs.compatibility_mode_ &&
+        archetype_location_repository_ == rhs.archetype_location_repository_ &&
         tracer_ == rhs.tracer_;
 }
 
@@ -70,6 +70,14 @@ context& context::operator=(context other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+bool context::compatibility_mode() const {
+    return compatibility_mode_;
+}
+
+void context::compatibility_mode(const bool v) {
+    compatibility_mode_ = v;
 }
 
 const boost::shared_ptr<dogen::archetypes::location_repository>& context::archetype_location_repository() const {
@@ -86,14 +94,6 @@ void context::archetype_location_repository(const boost::shared_ptr<dogen::arche
 
 void context::archetype_location_repository(const boost::shared_ptr<dogen::archetypes::location_repository>&& v) {
     archetype_location_repository_ = std::move(v);
-}
-
-bool context::compatibility_mode() const {
-    return compatibility_mode_;
-}
-
-void context::compatibility_mode(const bool v) {
-    compatibility_mode_ = v;
 }
 
 const boost::shared_ptr<dogen::tracing::tracer>& context::tracer() const {

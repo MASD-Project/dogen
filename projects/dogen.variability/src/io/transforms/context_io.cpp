@@ -67,8 +67,8 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::variability::transforms::context\"" << ", "
-      << "\"archetype_location_repository\": " << v.archetype_location_repository() << ", "
       << "\"compatibility_mode\": " << v.compatibility_mode() << ", "
+      << "\"archetype_location_repository\": " << v.archetype_location_repository() << ", "
       << "\"tracer\": " << v.tracer()
       << " }";
     return(s);
