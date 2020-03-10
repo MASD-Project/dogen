@@ -28,6 +28,25 @@ namespace dogen::assets::features {
 namespace {
 
 dogen::variability::meta_model::feature
+make_masd_variability_generate_registration() {
+    using namespace dogen::variability::meta_model;
+    feature r;
+    r.name().simple("generate_registration");
+    r.name().qualified("masd.variability.generate_registration");
+    const auto vt(value_type::boolean);
+    r.value_type(vt);
+    r.binding_point(binding_point::element);
+    dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ "true" }));
+
+    archetypes::location al;
+    al.kernel("masd");
+
+    r.location(al);
+    return r;
+}
+
+dogen::variability::meta_model::feature
 make_masd_variability_generate_static_configuration() {
     using namespace dogen::variability::meta_model;
     feature r;
@@ -155,6 +174,7 @@ variability_bundle::make_feature_group(const dogen::variability::meta_model::fea
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
+    r.generate_registration = s.get_by_name("masd.variability.generate_registration");
     r.generate_static_configuration = s.get_by_name("masd.variability.generate_static_configuration");
     r.kernel = s.get_by_name("masd.variability.archetype_location.kernel");
     r.backend = s.get_by_name("masd.variability.archetype_location.backend");
@@ -172,6 +192,7 @@ variability_bundle::static_configuration variability_bundle::make_static_configu
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
+    r.generate_registration = s.get_boolean_content_or_default(fg.generate_registration);
     r.generate_static_configuration = s.get_boolean_content_or_default(fg.generate_static_configuration);
     r.kernel = s.get_text_content(fg.kernel);
     if (s.has_configuration_point(fg.backend))
@@ -190,6 +211,7 @@ std::list<dogen::variability::meta_model::feature>
 variability_bundle::make_features() {
     using namespace dogen::variability::meta_model;
     std::list<dogen::variability::meta_model::feature> r;
+    r.push_back(make_masd_variability_generate_registration());
     r.push_back(make_masd_variability_generate_static_configuration());
     r.push_back(make_masd_variability_archetype_location_kernel());
     r.push_back(make_masd_variability_archetype_location_backend());

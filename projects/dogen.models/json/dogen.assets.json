@@ -3112,6 +3112,16 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
+          "name": "masd.variability.generate_registration",
+          "type": "masd::variability::boolean",
+          "value": "\"true\"",
+          "documentation": "If true, generates code to register the features.\n\n@pre Features must not already exist.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.variability.generate_registration"
+          }
+        },
+        {
           "name": "masd.variability.generate_static_configuration",
           "type": "masd::variability::boolean",
           "value": "\"true\"",

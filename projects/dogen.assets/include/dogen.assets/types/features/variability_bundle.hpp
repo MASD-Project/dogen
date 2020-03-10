@@ -39,6 +39,7 @@ namespace dogen::assets::features {
 class variability_bundle final {
 public:
     struct feature_group {
+        variability::meta_model::feature generate_registration;
         variability::meta_model::feature generate_static_configuration;
         variability::meta_model::feature kernel;
         variability::meta_model::feature backend;
@@ -53,6 +54,7 @@ public:
 
 public:
     struct static_configuration {
+        bool generate_registration;
         bool generate_static_configuration;
         std::string kernel;
         std::string backend;
@@ -62,6 +64,7 @@ public:
         std::string default_binding_point;
 
         static_configuration() :
+            generate_registration(),
             generate_static_configuration() {}
     };
 
