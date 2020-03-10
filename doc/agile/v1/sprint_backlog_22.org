@@ -14,26 +14,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-10 Tue 12:04]
+#+CAPTION: Clock summary at [2020-03-10 Tue 18:33]
 | <75>                                                    |         |       |      |       |
 | Headline                                                | Time    |       |      |     % |
 |---------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                            | *36:56* |       |      | 100.0 |
+| *Total time*                                            | *41:10* |       |      | 100.0 |
 |---------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                 | 36:56   |       |      | 100.0 |
-| Active                                                  |         | 36:56 |      | 100.0 |
-| Edit release notes for previous sprint                  |         |       | 4:11 |  11.3 |
-| Create a demo and presentation for previous sprint      |         |       | 0:25 |   1.1 |
-| Sprint and product backlog grooming                     |         |       | 4:56 |  13.4 |
-| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  16.0 |
-| Analysis on removing physical references in variability |         |       | 5:27 |  14.8 |
+| Stories                                                 | 41:10   |       |      | 100.0 |
+| Active                                                  |         | 41:10 |      | 100.0 |
+| Edit release notes for previous sprint                  |         |       | 4:11 |  10.2 |
+| Create a demo and presentation for previous sprint      |         |       | 0:25 |   1.0 |
+| Sprint and product backlog grooming                     |         |       | 4:56 |  12.0 |
+| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  14.4 |
+| Analysis on removing physical references in variability |         |       | 5:27 |  13.2 |
 | Remove =rapidjson= formatters                           |         |       | 0:03 |   0.1 |
-| Separate feature templates from bundles                 |         |       | 9:28 |  25.6 |
+| Separate feature templates from bundles                 |         |       | 9:28 |  23.0 |
 | Move enabled to generation                              |         |       | 0:04 |   0.2 |
-| Create a chain to encapsulate variability transforms    |         |       | 0:37 |   1.7 |
-| Split profiles and profile templates in variability     |         |       | 2:01 |   5.5 |
-| Move profile meta-data into profile element             |         |       | 3:06 |   8.4 |
-| Add location and modules to variability                 |         |       | 0:43 |   1.9 |
+| Create a chain to encapsulate variability transforms    |         |       | 0:37 |   1.5 |
+| Move variability chain into assets                      |         |       | 2:22 |   5.7 |
+| Split profiles and profile templates in variability     |         |       | 2:01 |   4.9 |
+| Move profile meta-data into profile element             |         |       | 4:58 |  12.1 |
+| Add location and modules to variability                 |         |       | 0:43 |   1.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -594,6 +595,23 @@ Actually we can only encapsulate two transforms:
 
 Still, its worthwhile doing it.
 
+*** COMPLETED Move variability chain into assets                      :story:
+    CLOSED: [2020-03-10 Tue 18:33]
+    :LOGBOOK:
+    CLOCK: [2020-03-10 Tue 18:13]--[2020-03-10 Tue 18:33] =>  0:20
+    CLOCK: [2020-03-10 Tue 16:10]--[2020-03-10 Tue 18:12] =>  2:02
+    :END:
+
+We originally placed this chain in engine because it went across
+models (e.g. variability and assets). In reality, the assets model is
+already composed of the variability model and they are closely
+intertwined so it doesn't make a lot of sense to separate them on that
+ground. And now that we are adding proper support for profiles at the
+assets level, this is more of a requirement because there are
+dependencies between transforms within the assets pipeline and the
+variability pipeline. We should just move the chain into assets if
+there are no dependencies in engine.
+
 *** STARTED Split profiles and profile templates in variability       :story:
     :LOGBOOK:
     CLOCK: [2020-03-09 Mon 19:36]--[2020-03-09 Mon 20:00] =>  0:24
@@ -614,6 +632,7 @@ Notes:
 
 *** STARTED Move profile meta-data into profile element               :story:
     :LOGBOOK:
+    CLOCK: [2020-03-10 Tue 14:16]--[2020-03-10 Tue 16:08] =>  1:52
     CLOCK: [2020-03-10 Tue 09:05]--[2020-03-10 Tue 12:04] =>  2:59
     CLOCK: [2020-03-09 Mon 23:12]--[2020-03-09 Mon 23:19] =>  0:07
     :END:
@@ -644,6 +663,14 @@ Notes:
   the bundle. However, of course, we do not want to register the
   features this time around (after all, they already exist) so we need
   to disable feature registration.
+- "adaption" is not a word, rename to "adaptation" (in
+  =profile_template_adaption_transform=).
+
+
+*** Replace variability enum mapper with lexical casts                :story:
+
+Its not clear what value the mapper adds now we can just lexical cast
+enums from strings.
 
 *** STARTED Add location and modules to variability                   :story:
     :LOGBOOK:
@@ -680,6 +707,12 @@ Notes:
   templates. We used the approach of "template kind instance" for
   profile templates. This is very confusing. We need to split these
   two types prior to refactoring this code.
+
+*** Name all transform exceptions consistently                        :story:
+
+It seems on engine we call them "transform exception" but on assets we
+call them "transformation error". Check all other models and them
+these consistently.
 
 *** Consider renaming labels to stereotypes in variability            :story:
 
