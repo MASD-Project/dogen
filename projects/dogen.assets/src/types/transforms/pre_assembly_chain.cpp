@@ -102,13 +102,6 @@ void pre_assembly_chain::apply(const context& ctx, meta_model::model_set& ms) {
         transform_id, ms.target().name().qualified().dot(), *ctx.tracer(), ms);
 
     /*
-     * First we handle the processing of mapping elements. There is no
-     * particular reason to do this first as it has no dependencies in
-     * this chain.
-     */
-    mapping_elements_transform::apply(ctx, ms);
-
-    /*
      * The second part of this chain handles variability
      * processing. For this we delegate to the variability chain.
      */
@@ -119,8 +112,14 @@ void pre_assembly_chain::apply(const context& ctx, meta_model::model_set& ms) {
      * a profile, and mark them as dynamic stereotypes. These are then
      * further processed within the assets model chain.
      */
-    using assets::transforms::dynamic_stereotypes_transform;
     dynamic_stereotypes_transform::apply(ctx, ms);
+
+    /*
+     * First we handle the processing of mapping elements. There is no
+     * particular reason to do this first as it has no dependencies in
+     * this chain.
+     */
+    mapping_elements_transform::apply(ctx, ms);
 
     /*
      * Apply all of the pre-processing transforms to the target.
