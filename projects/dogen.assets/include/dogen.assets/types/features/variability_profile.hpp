@@ -35,23 +35,6 @@ namespace dogen::assets::features {
 
 /**
  * @brief Features related to the processing of variability for profiles and profile templates.
- *
- * Notes on why we need to disable feature registration:
- *
- * In general, we always declare (register) the features and create the static
- * configuration in the same place. This works for almost all cases because we tend
- * to declare the features where we consume them. Profiles are different: a profile is
- * making use of a feature declared for a feature. That is, a profile is the instantiation
- * of a feature defined elsewhere; remember that features are nothing more than a
- * type system designed to give a "strongly typed" feel to the meta-data. Profiles are
- * just an instantiation of those strong types. In theory, profile meta-data should
- * already exist and match exactly what was defined for features. In practice there is a
- * mismatch, and this is due to how we modeled features and feature bundles: to
- * avoid repetition, we placed some features at the top-level and others in the
- * features themselves. This approach does not match the shape required for
- * profiles, so we need to redefine the bundle. However, of course, we do not want to
- * register the features this time around (after all, they already exist) so we need
- * to disable feature registration.
  */
 class variability_profile final {
 public:
