@@ -49295,13 +49295,13 @@ types, see the comments on the variability types.#</dia:string>
         <dia:point val="1,88"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="0.95,87.95;42.36,92.45"/>
+        <dia:rectangle val="0.95,87.95;42.745,92.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="1,88"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="41.310000000000002"/>
+        <dia:real val="41.695"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -49397,7 +49397,7 @@ types, see the comments on the variability types.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#make_profile_templates#</dia:string>
+            <dia:string>#adapt_profile_templates#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -49445,7 +49445,7 @@ types, see the comments on the variability types.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#make_profiles#</dia:string>
+            <dia:string>#adapt_profiles#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -50095,17 +50095,17 @@ types, see the comments on the variability types.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="21.655,88"/>
+        <dia:point val="21.8475,88"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.075,83.95;22.405,89.6"/>
+        <dia:rectangle val="19.075,83.95;22.5975,89.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="21.655,88"/>
-        <dia:point val="21.655,86"/>
+        <dia:point val="21.8475,88"/>
+        <dia:point val="21.8475,86"/>
         <dia:point val="19.125,86"/>
         <dia:point val="19.125,84"/>
       </dia:attribute>
