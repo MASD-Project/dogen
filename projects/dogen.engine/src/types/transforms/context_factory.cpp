@@ -195,6 +195,7 @@ make_context(const configuration& cfg, const std::string& activity,
      */
     engine::transforms::context r;
     r.variability_context(vctx);
+    r.assets_context().compatibility_mode(cm);
 
     /*
      * Obtain the data directories.
