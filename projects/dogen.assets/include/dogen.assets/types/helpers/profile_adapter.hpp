@@ -25,24 +25,34 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/meta_model/profile_template.hpp"
+#include "dogen.assets/types/meta_model/model_set.hpp"
+#include "dogen.assets/types/meta_model/variability/profile_template.hpp"
 
 namespace dogen::assets::helpers {
 
+/**
+ * @brief Adapts all types in a model set related to variability
+ * profiles into their variability counterparts.
+ */
 class profile_adapter final {
-public:
-    profile_adapter() = default;
-    profile_adapter(const profile_adapter&) = default;
-    profile_adapter(profile_adapter&&) = default;
-    ~profile_adapter() = default;
-    profile_adapter& operator=(const profile_adapter&) = default;
+private:
+    /**
+     * @brief Adapts an assets profile template into its variability
+     * counterpart.
+     */
+    static variability::meta_model::profile_template
+    adapt(const variability::meta_model::feature_model& fm,
+        const assets::meta_model::variability::profile_template& vpt);
 
 public:
-    bool operator==(const profile_adapter& rhs) const;
-    bool operator!=(const profile_adapter& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * @brief Adapt all profile templates.
+     */
+    static std::list<variability::meta_model::profile_template>
+    adapt_profile_templates(const variability::meta_model::feature_model& fm,
+        const assets::meta_model::model_set& ms);
 };
 
 }
