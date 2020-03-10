@@ -960,13 +960,6 @@
           "type": "std::list<feature>"
         }
       ]
-    },
-    {
-      "name": "helpers::profile_repository_factory",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
     }
   ]
 }
