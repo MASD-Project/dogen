@@ -259,13 +259,6 @@
         "dogen::handcrafted::cmake"
       ],
       "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::variability_data_chain",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
     }
   ]
 }
