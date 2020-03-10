@@ -41,7 +41,6 @@ namespace dogen::engine::transforms {
 variability::meta_model::profile_repository
 profile_repository_transform::apply(const context& ctx,
     const std::list<variability::meta_model::profile_template>& pts,
-
     const assets::meta_model::model_set& ms) {
     const auto& vctx(ctx.variability_context());
     tracing::scoped_transform_tracer stp(lg, "profile repository transform",
