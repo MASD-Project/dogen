@@ -33914,13 +33914,13 @@ to structural modeling.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O240">
       <dia:attribute name="obj_pos">
-        <dia:point val="52,29"/>
+        <dia:point val="73,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,28.95;86.815,34.25"/>
+        <dia:rectangle val="72.95,21.95;107.815,27.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="52,29"/>
+        <dia:point val="73,22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="34.765000000000001"/>
@@ -34264,13 +34264,13 @@ to structural modeling.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O243">
       <dia:attribute name="obj_pos">
-        <dia:point val="52,36"/>
+        <dia:point val="73,29"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,35.95;91.435,42.05"/>
+        <dia:rectangle val="72.95,28.95;112.435,35.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="52,36"/>
+        <dia:point val="73,29"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="39.385000000000005"/>
@@ -34482,13 +34482,13 @@ technical space targeted.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O244">
       <dia:attribute name="obj_pos">
-        <dia:point val="52,44"/>
+        <dia:point val="52,29"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,43.95;70.645,47.65"/>
+        <dia:rectangle val="51.95,28.95;70.645,32.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="52,44"/>
+        <dia:point val="52,29"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.594999999999999"/>
@@ -34624,13 +34624,13 @@ technical space targeted.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O245">
       <dia:attribute name="obj_pos">
-        <dia:point val="94,29"/>
+        <dia:point val="116,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="93.95,28.95;116.495,33.45"/>
+        <dia:rectangle val="115.95,21.95;138.495,26.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="94,29"/>
+        <dia:point val="116,22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="22.445"/>
@@ -34792,13 +34792,13 @@ technical space targeted.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O246">
       <dia:attribute name="obj_pos">
-        <dia:point val="94,36"/>
+        <dia:point val="116,29"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="93.95,35.95;120.73,39.65"/>
+        <dia:rectangle val="115.95,28.95;142.73,32.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="94,36"/>
+        <dia:point val="116,29"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="26.68"/>
@@ -34933,13 +34933,13 @@ technical space targeted.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O247">
       <dia:attribute name="obj_pos">
-        <dia:point val="94,44"/>
+        <dia:point val="74,38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="93.95,43.95;123.425,47.65"/>
+        <dia:rectangle val="73.95,37.95;103.425,41.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="94,44"/>
+        <dia:point val="74,38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="29.375"/>
@@ -35075,13 +35075,13 @@ technical space targeted.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O248">
       <dia:attribute name="obj_pos">
-        <dia:point val="52,50"/>
+        <dia:point val="52,45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,49.95;79.885,55.25"/>
+        <dia:rectangle val="51.95,44.95;79.885,50.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="52,50"/>
+        <dia:point val="52,45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
@@ -35268,13 +35268,13 @@ it.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O249">
       <dia:attribute name="obj_pos">
-        <dia:point val="52,57"/>
+        <dia:point val="82,45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,56.95;76.035,68.65"/>
+        <dia:rectangle val="81.95,44.95;106.035,56.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="52,57"/>
+        <dia:point val="82,45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="23.984999999999999"/>
@@ -35689,13 +35689,13 @@ ORM in Dogen.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O250">
       <dia:attribute name="obj_pos">
-        <dia:point val="52.2857,69.9286"/>
+        <dia:point val="116,37"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.2357,69.8786;78.2457,75.1786"/>
+        <dia:rectangle val="115.95,36.95;141.96,42.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="52.2857,69.9286"/>
+        <dia:point val="116,37"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>
@@ -35883,13 +35883,13 @@ ORM in Dogen.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O251">
       <dia:attribute name="obj_pos">
-        <dia:point val="94,70"/>
+        <dia:point val="91,70"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="93.95,69.95;120.345,76.85"/>
+        <dia:rectangle val="90.95,69.95;117.345,76.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="94,70"/>
+        <dia:point val="91,70"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="26.294999999999998"/>
@@ -37693,13 +37693,13 @@ extend the mappings as required.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O271">
       <dia:attribute name="obj_pos">
-        <dia:point val="94,50"/>
+        <dia:point val="52,38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="93.95,49.95;113.8,54.45"/>
+        <dia:rectangle val="51.95,37.95;71.8,42.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="94,50"/>
+        <dia:point val="52,38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="19.75"/>
@@ -38733,13 +38733,13 @@ At present the system only supports wale templates.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O281">
       <dia:attribute name="obj_pos">
-        <dia:point val="94,57"/>
+        <dia:point val="54,70"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="93.95,56.95;126.89,66.25"/>
+        <dia:rectangle val="53.95,69.95;86.89,79.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="94,57"/>
+        <dia:point val="54,70"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="32.839999999999996"/>
@@ -48234,22 +48234,22 @@ Generated code comprises of two aspects:
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O373">
       <dia:attribute name="obj_pos">
-        <dia:point val="94,80"/>
+        <dia:point val="55,85"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="93.95,79.95;121.885,89.25"/>
+        <dia:rectangle val="54.95,84.95;82.885,93.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="94,80"/>
+        <dia:point val="55,85"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="9.2000000000000011"/>
+        <dia:real val="8.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#variability_profile#</dia:string>
+        <dia:string>#variability_entry#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::variability::feature_bundle#</dia:string>
@@ -48355,33 +48355,6 @@ Generated code comprises of two aspects:
 
 #DOGEN masd.variability.binding_point=any
 #DOGEN masd.variability.qualified_name=masd.variability.default_binding_point
-#DOGEN masd.variability.is_optional=true#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.variability.labels#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text_collection#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Labels to apply to this profile. These are used for binding, via stereotypes.
-
-#DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.variability.labels
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -48563,6 +48536,203 @@ the default value field if available.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="templates"/>
+      <dia:childnode parent="O239"/>
+    </dia:object>
+    <dia:object type="UML - Class" version="0" id="O374">
+      <dia:attribute name="obj_pos">
+        <dia:point val="91,85"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="90.95,84.95;114.65,88.65"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="91,85"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="23.600000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="3.6000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>#variability_profile#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>#masd::variability::feature_bundle#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="comment">
+        <dia:string>#Features related to the processing of variability for profile entries.
+
+#DOGEN masd.variability.generate_registration=false
+#DOGEN masd.variability.archetype_location.kernel=masd
+#DOGEN masd.variability.template_kind=instance#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="abstract">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_attributes">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_operations">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="visible_attributes">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_comments">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_after_char">
+        <dia:int val="40"/>
+      </dia:attribute>
+      <dia:attribute name="comment_line_length">
+        <dia:int val="17"/>
+      </dia:attribute>
+      <dia:attribute name="comment_tagging">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_color">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="fill_color">
+        <dia:color val="#b2e2e2"/>
+      </dia:attribute>
+      <dia:attribute name="text_color">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font">
+        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font">
+        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font">
+        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font">
+        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font">
+        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font_height">
+        <dia:real val="0.69999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#masd.variability.labels#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#masd::variability::text_collection#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Labels to apply to this profile. These are used for binding, via stereotypes.
+
+#DOGEN masd.variability.binding_point=element
+#DOGEN masd.variability.qualified_name=masd.variability.labels
+#DOGEN masd.variability.is_optional=true#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:attribute name="operations"/>
+      <dia:attribute name="template">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="templates"/>
+      <dia:childnode parent="O239"/>
+    </dia:object>
+    <dia:object type="UML - Note" version="0" id="O375">
+      <dia:attribute name="obj_pos">
+        <dia:point val="76,63"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="75.95,62.95;102.36,66.35"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="76,63"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="26.310000000000002"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="3.3000000000000003"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="fill_colour">
+        <dia:color val="#f0e68c"/>
+      </dia:attribute>
+      <dia:attribute name="text">
+        <dia:composite type="text">
+          <dia:attribute name="string">
+            <dia:string>#To understand why the variability types are declared this way,
+including why we have disabled registration on the profile related
+types, see the comments on the variability types.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="font">
+            <dia:font family="monospace" style="0" name="Courier"/>
+          </dia:attribute>
+          <dia:attribute name="height">
+            <dia:real val="0.80000000000000004"/>
+          </dia:attribute>
+          <dia:attribute name="pos">
+            <dia:point val="76.35,64.245"/>
+          </dia:attribute>
+          <dia:attribute name="color">
+            <dia:color val="#000000"/>
+          </dia:attribute>
+          <dia:attribute name="alignment">
+            <dia:enum val="0"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:childnode parent="O239"/>
     </dia:object>
   </dia:layer>

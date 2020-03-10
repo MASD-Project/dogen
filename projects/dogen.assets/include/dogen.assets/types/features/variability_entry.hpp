@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_FEATURES_VARIABILITY_PROFILE_HPP
-#define DOGEN_ASSETS_TYPES_FEATURES_VARIABILITY_PROFILE_HPP
+#ifndef DOGEN_ASSETS_TYPES_FEATURES_VARIABILITY_ENTRY_HPP
+#define DOGEN_ASSETS_TYPES_FEATURES_VARIABILITY_ENTRY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,12 +34,18 @@
 namespace dogen::assets::features {
 
 /**
- * @brief Features related to the processing of variability for profile entries.
+ * @brief Features related to the processing of variability for profiles and profile templates.
  */
-class variability_profile final {
+class variability_entry final {
 public:
     struct feature_group {
-        variability::meta_model::feature labels;
+        variability::meta_model::feature binding_point;
+        variability::meta_model::feature kernel;
+        variability::meta_model::feature backend;
+        variability::meta_model::feature facet;
+        variability::meta_model::feature archetype;
+        variability::meta_model::feature template_kind;
+        variability::meta_model::feature value;
     };
 
     static feature_group
@@ -47,7 +53,13 @@ public:
 
 public:
     struct static_configuration {
-        std::list<std::string> labels;
+        std::string binding_point;
+        std::string kernel;
+        std::string backend;
+        std::string facet;
+        std::string archetype;
+        std::string template_kind;
+        std::list<std::string> value;
     };
 
     static static_configuration make_static_configuration(

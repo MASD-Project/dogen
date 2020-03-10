@@ -3855,7 +3855,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "features::variability_profile",
+      "name": "features::variability_entry",
       "documentation": "Features related to the processing of variability for profiles and profile templates.\n",
       "stereotypes": [
         "masd::variability::feature_bundle"
@@ -3874,16 +3874,6 @@
           "tagged_values": {
             "masd.variability.binding_point": "any",
             "masd.variability.qualified_name": "masd.variability.default_binding_point",
-            "masd.variability.is_optional": "true"
-          }
-        },
-        {
-          "name": "masd.variability.labels",
-          "type": "masd::variability::text_collection",
-          "documentation": "Labels to apply to this profile. These are used for binding, via stereotypes.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.variability.labels",
             "masd.variability.is_optional": "true"
           }
         },
@@ -3942,6 +3932,31 @@
           "tagged_values": {
             "masd.variability.binding_point": "property",
             "masd.variability.qualified_name": "masd.variability.value",
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": "features::variability_profile",
+      "documentation": "Features related to the processing of variability for profile entries.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.generate_registration": "false",
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.variability.labels",
+          "type": "masd::variability::text_collection",
+          "documentation": "Labels to apply to this profile. These are used for binding, via stereotypes.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd.variability.labels",
             "masd.variability.is_optional": "true"
           }
         }
