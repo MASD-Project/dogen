@@ -21,10 +21,10 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.engine/types/transforms/context.hpp"
+#include "dogen.assets/types/helpers/profile_adapter.hpp"
 #include "dogen.variability/types/transforms/profile_binding_transform.hpp"
 #include "dogen.assets/types/helpers/configuration_model_set_adapter.hpp"
 #include "dogen.variability/types/transforms/profile_repository_production_chain.hpp"
-#include "dogen.engine/types/transforms/profile_template_adaption_transform.hpp"
 #include "dogen.engine/types/transforms/variability_data_chain.hpp"
 
 namespace {
@@ -47,7 +47,9 @@ apply(const context& ctx, assets::meta_model::model_set& ms) {
      * i.e. profile templates - from the models, across all model
      * sets.
      */
-    const auto pts(profile_template_adaption_transform::apply(ctx, ms));
+    using assets::helpers::profile_adapter;
+    const auto& fm(*ctx.assets_context().feature_model());
+    const auto pts(profile_adapter::adapt_profile_templates(fm, ms));
 
     /*
      * If there are no profile templates, we have nothing to do.
@@ -61,7 +63,6 @@ apply(const context& ctx, assets::meta_model::model_set& ms) {
      * takes care of instantiating templates into profiles.
      */
     const auto& vctx(ctx.variability_context());
-    const auto& fm(*ctx.assets_context().feature_model());
     using variability::transforms::profile_repository_production_chain;
     const auto prp(profile_repository_production_chain::apply(vctx, pts, fm));
 
