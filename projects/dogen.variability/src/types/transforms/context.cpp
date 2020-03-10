@@ -46,26 +46,22 @@ context::context()
     : compatibility_mode_(static_cast<bool>(0)) { }
 
 context::context(
-    const std::vector<boost::filesystem::path>& data_directories,
     const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository,
     const bool compatibility_mode,
     const boost::shared_ptr<dogen::tracing::tracer>& tracer)
-    : data_directories_(data_directories),
-      archetype_location_repository_(archetype_location_repository),
+    : archetype_location_repository_(archetype_location_repository),
       compatibility_mode_(compatibility_mode),
       tracer_(tracer) { }
 
 void context::swap(context& other) noexcept {
     using std::swap;
-    swap(data_directories_, other.data_directories_);
     swap(archetype_location_repository_, other.archetype_location_repository_);
     swap(compatibility_mode_, other.compatibility_mode_);
     swap(tracer_, other.tracer_);
 }
 
 bool context::operator==(const context& rhs) const {
-    return data_directories_ == rhs.data_directories_ &&
-        archetype_location_repository_ == rhs.archetype_location_repository_ &&
+    return archetype_location_repository_ == rhs.archetype_location_repository_ &&
         compatibility_mode_ == rhs.compatibility_mode_ &&
         tracer_ == rhs.tracer_;
 }
@@ -74,22 +70,6 @@ context& context::operator=(context other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const std::vector<boost::filesystem::path>& context::data_directories() const {
-    return data_directories_;
-}
-
-std::vector<boost::filesystem::path>& context::data_directories() {
-    return data_directories_;
-}
-
-void context::data_directories(const std::vector<boost::filesystem::path>& v) {
-    data_directories_ = v;
-}
-
-void context::data_directories(const std::vector<boost::filesystem::path>&& v) {
-    data_directories_ = std::move(v);
 }
 
 const boost::shared_ptr<dogen::archetypes::location_repository>& context::archetype_location_repository() const {

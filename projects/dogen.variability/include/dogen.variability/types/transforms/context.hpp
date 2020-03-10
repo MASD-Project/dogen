@@ -25,10 +25,8 @@
 #pragma once
 #endif
 
-#include <vector>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include <boost/filesystem/path.hpp>
 #include "dogen.tracing/types/tracer_fwd.hpp"
 #include "dogen.archetypes/types/location_repository_fwd.hpp"
 
@@ -48,17 +46,11 @@ public:
 
 public:
     context(
-        const std::vector<boost::filesystem::path>& data_directories,
         const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository,
         const bool compatibility_mode,
         const boost::shared_ptr<dogen::tracing::tracer>& tracer);
 
 public:
-    const std::vector<boost::filesystem::path>& data_directories() const;
-    std::vector<boost::filesystem::path>& data_directories();
-    void data_directories(const std::vector<boost::filesystem::path>& v);
-    void data_directories(const std::vector<boost::filesystem::path>&& v);
-
     const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository() const;
     boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository();
     void archetype_location_repository(const boost::shared_ptr<dogen::archetypes::location_repository>& v);
@@ -83,7 +75,6 @@ public:
     context& operator=(context other);
 
 private:
-    std::vector<boost::filesystem::path> data_directories_;
     boost::shared_ptr<dogen::archetypes::location_repository> archetype_location_repository_;
     bool compatibility_mode_;
     boost::shared_ptr<dogen::tracing::tracer> tracer_;

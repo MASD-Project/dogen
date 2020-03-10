@@ -164,13 +164,6 @@ make_context(const configuration& cfg, const std::string& activity,
     variability::transforms::context vctx;
 
     /*
-     * Obtain the data directories.
-     */
-    const auto lib_dir(utility::filesystem::library_directory());
-    const auto lib_dirs(std::vector<boost::filesystem::path>{ lib_dir });
-    vctx.data_directories(lib_dirs);
-
-    /*
      * Obtain the transform registrar and ensure it has been setup.
      */
     using generation::transforms::model_to_extraction_model_chain;
@@ -204,6 +197,13 @@ make_context(const configuration& cfg, const std::string& activity,
     r.variability_context(vctx);
 
     /*
+     * Obtain the data directories.
+     */
+    const auto lib_dir(utility::filesystem::library_directory());
+    const auto lib_dirs(std::vector<boost::filesystem::path>{ lib_dir });
+    r.injection_context().data_directories(lib_dirs);
+
+    /*
      * Now we can create the feature model. First we must register all
      * entities in the variability space, which we obtain by all the
      * initialisers scattered across all models. Then we can apply the
@@ -230,11 +230,6 @@ make_context(const configuration& cfg, const std::string& activity,
      * Populate the output directory.
      */
     r.generation_context().output_directory_path(output_directory);
-
-    /*
-     * Populate the data directories.
-     */
-    r.injection_context().data_directories(lib_dirs);
 
     /*
      * Setup the archetype location repository.

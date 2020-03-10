@@ -572,10 +572,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "data_directories",
-          "type": "std::vector<boost::filesystem::path>"
-        },
-        {
           "name": "archetype_location_repository",
           "type": "boost::shared_ptr<archetypes::location_repository>"
         },

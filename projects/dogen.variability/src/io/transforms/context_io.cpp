@@ -24,20 +24,6 @@
 #include "dogen.archetypes/io/location_repository_io.hpp"
 #include "dogen.variability/io/transforms/context_io.hpp"
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::filesystem::path>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << (*i).generic_string() << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace boost {
 
 inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::archetypes::location_repository>& v) {
@@ -81,7 +67,6 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::variability::transforms::context\"" << ", "
-      << "\"data_directories\": " << v.data_directories() << ", "
       << "\"archetype_location_repository\": " << v.archetype_location_repository() << ", "
       << "\"compatibility_mode\": " << v.compatibility_mode() << ", "
       << "\"tracer\": " << v.tracer()
