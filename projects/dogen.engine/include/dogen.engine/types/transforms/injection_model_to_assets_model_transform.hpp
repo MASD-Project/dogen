@@ -40,6 +40,9 @@
 
 namespace dogen::engine::transforms {
 
+/**
+ * @brief Converts an injection model into an assets representation.
+ */
 class injection_model_to_assets_model_transform final {
 private:
     static assets::meta_model::location

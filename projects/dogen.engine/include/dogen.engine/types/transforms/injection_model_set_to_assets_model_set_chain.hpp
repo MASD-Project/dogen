@@ -34,8 +34,8 @@ namespace dogen::engine::transforms {
 /**
  * @brief Converts an injection model set into a assets model set.
  *
- * The transform assumes all injection transforms have been applied to
- * the injection model set.
+ * @pre all injection transforms must have been applied to the
+ * injection model set.
  */
 class injection_model_set_to_assets_model_set_chain final {
 public:
