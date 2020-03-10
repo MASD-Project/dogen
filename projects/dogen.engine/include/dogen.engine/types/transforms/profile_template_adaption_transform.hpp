@@ -41,55 +41,8 @@ namespace dogen::engine::transforms {
 
 class profile_template_adaption_transform final {
 private:
-    struct feature_group {
-        variability::meta_model::feature binding_point;
-        variability::meta_model::feature labels;
-        variability::meta_model::feature archetype_location_kernel;
-        variability::meta_model::feature archetype_location_backend;
-        variability::meta_model::feature archetype_location_facet;
-        variability::meta_model::feature archetype_location_archetype;
-        variability::meta_model::feature template_kind;
-        variability::meta_model::feature untyped_value;
-    };
-
-    static feature_group make_feature_group(
-        const variability::meta_model::feature_model& fm);
-
-    static variability::meta_model::binding_point
-    make_binding_point(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-    static std::unordered_set<std::string>
-    make_labels(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-    static std::string
-    make_archetype_location_kernel(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-    static std::string
-    make_archetype_location_backend(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-    static std::string
-    make_archetype_location_facet(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-    static std::string
-    make_archetype_location_archetype(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-    static variability::meta_model::template_kind
-    make_template_kind(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-    static std::list<std::string>
-    make_untyped_value(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
-
-private:
     static variability::meta_model::profile_template
-    adapt(const feature_group& fg,
+    adapt(const variability::meta_model::feature_model& fm,
         const assets::meta_model::variability::profile_template& vpt);
 
 public:
