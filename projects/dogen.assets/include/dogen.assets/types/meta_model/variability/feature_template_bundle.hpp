@@ -46,7 +46,9 @@ namespace dogen::assets::meta_model::variability {
  *
  * @li the registration of the feature template for the dynamic part of the processing;
  * @li the generation of a static configuration class to  represent the feature once
- *  read out from the dynamic configuration - if requested.
+ *  read out from the dynamic configuration.
+ *
+ * Both of these aspects are optional, but at least one must be chosen.
  */
 class feature_template_bundle final : public dogen::assets::meta_model::variability::abstract_bundle {
 public:

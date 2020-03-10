@@ -34,7 +34,7 @@
 namespace dogen::assets::meta_model::variability {
 
 /**
- * @brief A feature bundle represents an aggregation of featuresin a model.
+ * @brief A feature bundle represents an aggregation of features in a model.
  *
  * The features should be "semantically related", that is, belong to a related
  * topic. A feature bundle is used by code generation to generate infrastructural code
@@ -44,7 +44,9 @@ namespace dogen::assets::meta_model::variability {
  *
  * @li the registration of the feature for the dynamic part of the processing;
  * @li the generation of a static configuration class to  represent the feature once
- *  read out from the dynamic configuration - if requested.
+ *  read out from the dynamic configuration.
+ *
+ * Both of these aspects are optional, but at least one must be chosen.
  */
 class feature_bundle final : public dogen::assets::meta_model::variability::abstract_bundle {
 public:

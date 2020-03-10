@@ -3765,7 +3765,7 @@
       "parents": [
         "meta_model::variability::abstract_bundle"
       ],
-      "documentation": "A feature bundle represents an aggregation of featuresin a model.\n\nThe features should be \"semantically related\", that is, belong to a related\ntopic. A feature bundle is used by code generation to generate infrastructural code\nto ease the creation and subsequent processing of features.\n\nGenerated code comprises of two aspects:\n\n@li the registration of the feature for the dynamic part of the processing;\n@li the generation of a static configuration class to  represent the feature once\n read out from the dynamic configuration - if requested.\n",
+      "documentation": "A feature bundle represents an aggregation of features in a model.\n\nThe features should be \"semantically related\", that is, belong to a related\ntopic. A feature bundle is used by code generation to generate infrastructural code\nto ease the creation and subsequent processing of features.\n\nGenerated code comprises of two aspects:\n\n@li the registration of the feature for the dynamic part of the processing;\n@li the generation of a static configuration class to  represent the feature once\n read out from the dynamic configuration.\n\nBoth of these aspects are optional, but at least one must be chosen.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -3788,7 +3788,7 @@
       "parents": [
         "meta_model::variability::abstract_bundle"
       ],
-      "documentation": "A feature template bundle represents an aggregation of feature templates in a\nmodel.\n\nThe feature templates should be \"semantically related\", that is, belong to a related\ntopic. A feature template bundle is used by code generation to generate\ninfrastructural code to ease the creation and subsequent processing of features.\n\nGenerated code comprises of two aspects:\n\n@li the registration of the feature template for the dynamic part of the processing;\n@li the generation of a static configuration class to  represent the feature once\n read out from the dynamic configuration - if requested.\n",
+      "documentation": "A feature template bundle represents an aggregation of feature templates in a\nmodel.\n\nThe feature templates should be \"semantically related\", that is, belong to a related\ntopic. A feature template bundle is used by code generation to generate\ninfrastructural code to ease the creation and subsequent processing of features.\n\nGenerated code comprises of two aspects:\n\n@li the registration of the feature template for the dynamic part of the processing;\n@li the generation of a static configuration class to  represent the feature once\n read out from the dynamic configuration.\n\nBoth of these aspects are optional, but at least one must be chosen.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {

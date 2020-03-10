@@ -46381,7 +46381,7 @@ namespace.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#A feature bundle represents an aggregation of featuresin a model.
+        <dia:string>#A feature bundle represents an aggregation of features in a model.
 
 The features should be "semantically related", that is, belong to a related
 topic. A feature bundle is used by code generation to generate infrastructural code
@@ -46391,7 +46391,9 @@ Generated code comprises of two aspects:
 
 @li the registration of the feature for the dynamic part of the processing;
 @li the generation of a static configuration class to  represent the feature once
- read out from the dynamic configuration - if requested.#</dia:string>
+ read out from the dynamic configuration.
+
+Both of these aspects are optional, but at least one must be chosen.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -47082,7 +47084,9 @@ Generated code comprises of two aspects:
 
 @li the registration of the feature template for the dynamic part of the processing;
 @li the generation of a static configuration class to  represent the feature once
- read out from the dynamic configuration - if requested.#</dia:string>
+ read out from the dynamic configuration.
+
+Both of these aspects are optional, but at least one must be chosen.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
