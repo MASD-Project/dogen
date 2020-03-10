@@ -62,18 +62,24 @@ const boost::shared_ptr<dogen::tracing::tracer>& rhs) {
 
 namespace dogen::assets::transforms {
 
+context::context()
+    : compatibility_mode_(static_cast<bool>(0)) { }
+
 context::context(
+    const bool compatibility_mode,
     const boost::shared_ptr<dogen::variability::meta_model::feature_model>& feature_model,
     const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository,
     const boost::shared_ptr<dogen::assets::helpers::mapping_set_repository>& mapping_repository,
     const boost::shared_ptr<dogen::tracing::tracer>& tracer)
-    : feature_model_(feature_model),
+    : compatibility_mode_(compatibility_mode),
+      feature_model_(feature_model),
       archetype_location_repository_(archetype_location_repository),
       mapping_repository_(mapping_repository),
       tracer_(tracer) { }
 
 void context::swap(context& other) noexcept {
     using std::swap;
+    swap(compatibility_mode_, other.compatibility_mode_);
     swap(feature_model_, other.feature_model_);
     swap(archetype_location_repository_, other.archetype_location_repository_);
     swap(mapping_repository_, other.mapping_repository_);
@@ -81,7 +87,8 @@ void context::swap(context& other) noexcept {
 }
 
 bool context::operator==(const context& rhs) const {
-    return feature_model_ == rhs.feature_model_ &&
+    return compatibility_mode_ == rhs.compatibility_mode_ &&
+        feature_model_ == rhs.feature_model_ &&
         archetype_location_repository_ == rhs.archetype_location_repository_ &&
         mapping_repository_ == rhs.mapping_repository_ &&
         tracer_ == rhs.tracer_;
@@ -91,6 +98,14 @@ context& context::operator=(context other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+bool context::compatibility_mode() const {
+    return compatibility_mode_;
+}
+
+void context::compatibility_mode(const bool v) {
+    compatibility_mode_ = v;
 }
 
 const boost::shared_ptr<dogen::variability::meta_model::feature_model>& context::feature_model() const {

@@ -791,6 +791,10 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
+          "name": "compatibility_mode",
+          "type": "bool"
+        },
+        {
           "name": "feature_model",
           "type": "boost::shared_ptr<variability::meta_model::feature_model>"
         },

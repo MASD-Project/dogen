@@ -46,19 +46,25 @@ namespace dogen::assets::transforms {
  */
 class context final {
 public:
-    context() = default;
     context(const context&) = default;
     context(context&&) = default;
     ~context() = default;
 
 public:
+    context();
+
+public:
     context(
+        const bool compatibility_mode,
         const boost::shared_ptr<dogen::variability::meta_model::feature_model>& feature_model,
         const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository,
         const boost::shared_ptr<dogen::assets::helpers::mapping_set_repository>& mapping_repository,
         const boost::shared_ptr<dogen::tracing::tracer>& tracer);
 
 public:
+    bool compatibility_mode() const;
+    void compatibility_mode(const bool v);
+
     const boost::shared_ptr<dogen::variability::meta_model::feature_model>& feature_model() const;
     boost::shared_ptr<dogen::variability::meta_model::feature_model>& feature_model();
     void feature_model(const boost::shared_ptr<dogen::variability::meta_model::feature_model>& v);
@@ -90,6 +96,7 @@ public:
     context& operator=(context other);
 
 private:
+    bool compatibility_mode_;
     boost::shared_ptr<dogen::variability::meta_model::feature_model> feature_model_;
     boost::shared_ptr<dogen::archetypes::location_repository> archetype_location_repository_;
     boost::shared_ptr<dogen::assets::helpers::mapping_set_repository> mapping_repository_;

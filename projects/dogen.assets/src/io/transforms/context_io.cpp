@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include "dogen.tracing/io/tracer_io.hpp"
 #include "dogen.assets/io/transforms/context_io.hpp"
 #include "dogen.archetypes/io/location_repository_io.hpp"
@@ -92,8 +93,15 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 namespace dogen::assets::transforms {
 
 std::ostream& operator<<(std::ostream& s, const context& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::assets::transforms::context\"" << ", "
+      << "\"compatibility_mode\": " << v.compatibility_mode() << ", "
       << "\"feature_model\": " << v.feature_model() << ", "
       << "\"archetype_location_repository\": " << v.archetype_location_repository() << ", "
       << "\"mapping_repository\": " << v.mapping_repository() << ", "
