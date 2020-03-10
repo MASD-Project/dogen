@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.assets/types/transforms/assets_model_set_to_configuration_model_set_transform.hpp"
+#include "dogen.assets/types/transforms/variability_application_transform.hpp"
 
 namespace dogen::assets::transforms {
 
-bool assets_model_set_to_configuration_model_set_transform::operator==(const assets_model_set_to_configuration_model_set_transform& /*rhs*/) const {
+bool variability_application_transform::operator==(const variability_application_transform& /*rhs*/) const {
     return true;
 }
 

@@ -18,12 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.assets/types/transforms/variability_chain.hpp"
+#ifndef DOGEN_ASSETS_TYPES_TRANSFORMS_VARIABILITY_APPLICATION_TRANSFORM_HPP
+#define DOGEN_ASSETS_TYPES_TRANSFORMS_VARIABILITY_APPLICATION_TRANSFORM_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <algorithm>
 
 namespace dogen::assets::transforms {
 
-bool variability_chain::operator==(const variability_chain& /*rhs*/) const {
-    return true;
-}
+class variability_application_transform final {
+public:
+    variability_application_transform() = default;
+    variability_application_transform(const variability_application_transform&) = default;
+    variability_application_transform(variability_application_transform&&) = default;
+    ~variability_application_transform() = default;
+    variability_application_transform& operator=(const variability_application_transform&) = default;
+
+public:
+    bool operator==(const variability_application_transform& rhs) const;
+    bool operator!=(const variability_application_transform& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
 
 }
+
+#endif

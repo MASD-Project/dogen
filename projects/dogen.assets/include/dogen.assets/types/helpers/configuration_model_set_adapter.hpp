@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_TRANSFORMS_ASSETS_MODEL_SET_TO_CONFIGURATION_MODEL_SET_TRANSFORM_HPP
-#define DOGEN_ASSETS_TYPES_TRANSFORMS_ASSETS_MODEL_SET_TO_CONFIGURATION_MODEL_SET_TRANSFORM_HPP
+#ifndef DOGEN_ASSETS_TYPES_HELPERS_CONFIGURATION_MODEL_SET_ADAPTER_HPP
+#define DOGEN_ASSETS_TYPES_HELPERS_CONFIGURATION_MODEL_SET_ADAPTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,19 +27,19 @@
 
 #include <algorithm>
 
-namespace dogen::assets::transforms {
+namespace dogen::assets::helpers {
 
-class assets_model_set_to_configuration_model_set_transform final {
+class configuration_model_set_adapter final {
 public:
-    assets_model_set_to_configuration_model_set_transform() = default;
-    assets_model_set_to_configuration_model_set_transform(const assets_model_set_to_configuration_model_set_transform&) = default;
-    assets_model_set_to_configuration_model_set_transform(assets_model_set_to_configuration_model_set_transform&&) = default;
-    ~assets_model_set_to_configuration_model_set_transform() = default;
-    assets_model_set_to_configuration_model_set_transform& operator=(const assets_model_set_to_configuration_model_set_transform&) = default;
+    configuration_model_set_adapter() = default;
+    configuration_model_set_adapter(const configuration_model_set_adapter&) = default;
+    configuration_model_set_adapter(configuration_model_set_adapter&&) = default;
+    ~configuration_model_set_adapter() = default;
+    configuration_model_set_adapter& operator=(const configuration_model_set_adapter&) = default;
 
 public:
-    bool operator==(const assets_model_set_to_configuration_model_set_transform& rhs) const;
-    bool operator!=(const assets_model_set_to_configuration_model_set_transform& rhs) const {
+    bool operator==(const configuration_model_set_adapter& rhs) const;
+    bool operator!=(const configuration_model_set_adapter& rhs) const {
         return !this->operator==(rhs);
     }
 
