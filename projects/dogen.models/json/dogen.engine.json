@@ -198,13 +198,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::dynamic_stereotypes_transform",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "features",
       "documentation": "Features for the engine model.\n",
       "tagged_values": {
