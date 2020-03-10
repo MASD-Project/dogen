@@ -23,7 +23,7 @@
 #include "dogen.engine/types/transforms/context.hpp"
 #include "dogen.variability/types/transforms/profile_binding_transform.hpp"
 #include "dogen.assets/types/helpers/configuration_model_set_adapter.hpp"
-#include "dogen.engine/types/transforms/profile_repository_transform.hpp"
+#include "dogen.variability/types/transforms/profile_repository_production_chain.hpp"
 #include "dogen.engine/types/transforms/profile_template_adaption_transform.hpp"
 #include "dogen.engine/types/transforms/variability_data_chain.hpp"
 
@@ -50,30 +50,33 @@ apply(const context& ctx, assets::meta_model::model_set& ms) {
     const auto pts(profile_template_adaption_transform::apply(ctx, ms));
 
     /*
-     * If some templates were found, we need to process them.
+     * If there are no profile templates, we have nothing to do.
      */
-    if (!pts.empty()) {
-        /*
-         * First we need to create a repository of all profiles,
-         * organised for querying.
-         */
-        const auto prp(profile_repository_transform::apply(ctx, pts, ms));
+    if (pts.empty())
+        return;
 
-        /*
-         * Then we need to extract the configuration models from the
-         * assets model set.
-         */
-        using assets::helpers::configuration_model_set_adapter;
-        auto cms(configuration_model_set_adapter::adapt(ms));
+    /*
+     * We need to process the templates. We start by creating a
+     * repository of all profiles, organised for querying. The chain
+     * takes care of instantiating templates into profiles.
+     */
+    const auto& vctx(ctx.variability_context());
+    const auto& fm(*ctx.assets_context().feature_model());
+    using variability::transforms::profile_repository_production_chain;
+    const auto prp(profile_repository_production_chain::apply(vctx, pts, fm));
 
-        /*
-         * We then bind the profiles to the relevant configurations.
-         */
-        const auto& fm(*ctx.injection_context().feature_model());
-        const auto& vctx(ctx.variability_context());
-        using variability::transforms::profile_binding_transform;
-        profile_binding_transform::apply(vctx, fm, prp, cms);
-    }
+    /*
+     * Then we need to extract the configuration models from the
+     * assets model set.
+     */
+    using assets::helpers::configuration_model_set_adapter;
+    auto cms(configuration_model_set_adapter::adapt(ms));
+
+    /*
+     * We then bind the profiles to the relevant configurations.
+     */
+    using variability::transforms::profile_binding_transform;
+    profile_binding_transform::apply(vctx, fm, prp, cms);
 }
 
 }
