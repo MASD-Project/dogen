@@ -68,18 +68,19 @@ private:
 
 private:
     /**
-     * @brief Processes the meta-model element representing features.
+     * @brief Processes the meta-model element representing feature
+     * bundles.
      */
-    static void process_features(
+    static void process_feature_bundles(
         const variability::meta_model::feature_model& fm,
         const std::unordered_map<std::string, std::string>& fixed_mappings,
         meta_model::model& m);
 
     /**
-     * @brief Processes the meta-model element representing features
-     * templates.
+     * @brief Processes the meta-model element representing feature
+     * template bundles.
      */
-    static void process_feature_templates(
+    static void process_feature_template_bundles(
         const variability::meta_model::feature_model& fm,
         const std::unordered_map<std::string, std::string>& fixed_mappings,
         meta_model::model& m);

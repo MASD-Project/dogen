@@ -46,6 +46,8 @@ const std::string too_many_bindings(
     "Binding point supplied at bundle and template level: ");
 const std::string missing_bindings(
     "Binding point must be supplied at either bundle or template level: ");
+const std::string  bundle_generates_nothing(
+    "Bundle does not generate either registration or static configuration: ");
 
 }
 
@@ -112,6 +114,7 @@ void variability_entities_transform::process_abstract_feature(
     default_binding_point, meta_model::variability::abstract_feature& af) {
 
     update(fg1, af);
+
     const bool is_bound(default_binding_point.is_initialized());
     if (is_bound) {
         /*
@@ -187,7 +190,8 @@ void variability_entities_transform::process_abstract_feature(
 }
 
 void variability_entities_transform::
-process_feature_templates(const variability::meta_model::feature_model& fm,
+process_feature_template_bundles(
+    const variability::meta_model::feature_model& fm,
     const std::unordered_map<std::string, std::string>& fixed_mappings,
     meta_model::model& m) {
     /*
@@ -213,6 +217,18 @@ process_feature_templates(const variability::meta_model::feature_model& fm,
         auto& fb(*pair.second);
         update(fg1, fb);
 
+        /*
+         * Feature bundles are expected to generate either
+         * registration or static configuration or both, but never
+         * neither.
+         */
+        if (!fb.generate_registration() && !fb.generate_static_configuration()) {
+            const auto id(fb.name().qualified().dot());
+            BOOST_LOG_SEV(lg, error) << bundle_generates_nothing << id;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(bundle_generates_nothing + id));
+        }
+
         const auto& dbp(fb.default_binding_point());
         for (auto& ft : fb.feature_templates())
             process_abstract_feature(fg2, fixed_mappings, dbp, ft);
@@ -220,7 +236,7 @@ process_feature_templates(const variability::meta_model::feature_model& fm,
 }
 
 void variability_entities_transform::
-process_features(const variability::meta_model::feature_model& fm,
+process_feature_bundles(const variability::meta_model::feature_model& fm,
     const std::unordered_map<std::string, std::string>& fixed_mappings,
     meta_model::model& m) {
     /*
@@ -246,6 +262,18 @@ process_features(const variability::meta_model::feature_model& fm,
         auto& fb(*pair.second);
         update(fg1, fb);
 
+        /*
+         * Feature bundles are expected to generate either
+         * registration or static configuration or both, but never
+         * neither.
+         */
+        if (!fb.generate_registration() && !fb.generate_static_configuration()) {
+            const auto id(fb.name().qualified().dot());
+            BOOST_LOG_SEV(lg, error) << bundle_generates_nothing << id;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(bundle_generates_nothing + id));
+        }
+
         const auto& dbp(fb.default_binding_point());
         for (auto& f : fb.features())
             process_abstract_feature(fg2, fixed_mappings, dbp, f);
@@ -268,7 +296,12 @@ void variability_entities_transform::process_initialiser(meta_model::model& m) {
     auto& ftb(m.variability_elements().feature_template_bundles());
     for (auto& pair : ftb) {
         auto& fb(*pair.second);
-        fti.feature_template_bundles().push_back(fb.name());
+
+        /*
+         * Only add feature templates which require registration.
+         */
+        if (fb.generate_registration())
+            fti.feature_template_bundles().push_back(fb.name());
     }
     fti.feature_template_bundles().sort();
 
@@ -279,7 +312,12 @@ void variability_entities_transform::process_initialiser(meta_model::model& m) {
     auto& fb(m.variability_elements().feature_bundles());
     for (auto& pair : fb) {
         auto& f(*pair.second);
-        fti.feature_bundles().push_back(f.name());
+
+        /*
+         * Only add feature templates which require registration.
+         */
+        if (f.generate_registration())
+            fti.feature_bundles().push_back(f.name());
     }
     fti.feature_bundles().sort();
 }
@@ -291,8 +329,8 @@ void variability_entities_transform::apply(const context& ctx,
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto& fm(*ctx.feature_model());
-    process_feature_templates(fm, fixed_mappings, m);
-    process_features(fm, fixed_mappings, m);
+    process_feature_template_bundles(fm, fixed_mappings, m);
+    process_feature_bundles(fm, fixed_mappings, m);
     process_initialiser(m);
 
     stp.end_transform(m);
