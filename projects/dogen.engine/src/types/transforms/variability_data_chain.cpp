@@ -22,8 +22,8 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.engine/types/transforms/context.hpp"
 #include "dogen.variability/types/transforms/profile_binding_transform.hpp"
+#include "dogen.assets/types/helpers/configuration_model_set_adapter.hpp"
 #include "dogen.engine/types/transforms/profile_repository_transform.hpp"
-#include "dogen.engine/types/transforms/assets_model_set_to_configuration_model_set_transform.hpp"
 #include "dogen.engine/types/transforms/profile_template_adaption_transform.hpp"
 #include "dogen.engine/types/transforms/variability_data_chain.hpp"
 
@@ -63,8 +63,8 @@ apply(const context& ctx, assets::meta_model::model_set& ms) {
          * Then we need to extract the configuration models from the
          * assets model set.
          */
-        auto cms(assets_model_set_to_configuration_model_set_transform::
-            apply(ctx, ms));
+        using assets::helpers::configuration_model_set_adapter;
+        auto cms(configuration_model_set_adapter::adapt(ms));
 
         /*
          * We then bind the profiles to the relevant configurations.
