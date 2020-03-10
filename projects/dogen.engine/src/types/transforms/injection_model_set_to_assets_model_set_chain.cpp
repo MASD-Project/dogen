@@ -21,9 +21,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.engine/types/transforms/context.hpp"
-#include "dogen.engine/types/transforms/variability_data_chain.hpp"
 #include "dogen.engine/types/transforms/injection_model_to_assets_model_transform.hpp"
-#include "dogen.assets/types/transforms/dynamic_stereotypes_transform.hpp"
 #include "dogen.engine/types/transforms/injection_model_set_to_assets_model_set_chain.hpp"
 
 namespace {
@@ -61,20 +59,6 @@ apply(const context& ctx, const injection::meta_model::model_set& ms) {
      */
     for (const auto& ref : ms.references())
         r.references().push_back(tf::apply(ctx, ref));
-
-    /*
-     * The second part of this chain handles variability
-     * processing. For this we delegate to the variability chain.
-     */
-    variability_data_chain::apply(ctx, r);
-
-    /*
-     * The final step is to retrieve stereotypes which did not bind to
-     * a profile, and mark them as dynamic stereotypes. These are then
-     * further processed within the assets model chain.
-     */
-    using assets::transforms::dynamic_stereotypes_transform;
-    dynamic_stereotypes_transform::apply(ctx.assets_context(), r);
 
     return r;
 }
