@@ -171,10 +171,13 @@ a.stream() << "        const feature_group& fg, const Configurable& c) {" << std
 a.stream() << "        return make_static_configuration(fg, *c.configuration());" << std::endl;
 a.stream() << "    }" << std::endl;
             }
+
+            if (fb.generate_registration()) {
 a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
 a.stream() << "    static std::list<dogen::variability::meta_model::feature_template>" << std::endl;
 a.stream() << "    make_templates();" << std::endl;
+            }
 a.stream() << "};" << std::endl;
 a.stream() << std::endl;
         } // snf

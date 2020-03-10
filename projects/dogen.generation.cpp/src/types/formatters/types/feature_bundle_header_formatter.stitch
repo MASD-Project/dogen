@@ -136,9 +136,15 @@ public:
             }
 #>
 
+<#+
+            if (fb.generate_registration()) {
+#>
 public:
     static std::list<dogen::variability::meta_model::feature>
     make_features();
+<#+
+            }
+#>
 };
 
 <#+

@@ -120,46 +120,50 @@ format(const context& ctx, const assets::meta_model::element& e) const {
             auto snf(a.make_scoped_namespace_formatter(ns));
             using namespace variability::helpers;
             using utility::string::splitter;
+
+            if (fb.generate_registration()) {
 a.stream() << std::endl;
 a.stream() << "namespace {" << std::endl;
-            for (const auto& fb_ft : fb.feature_templates()) {
-                const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
-                const bool has_qualified_name(simple_key != fb_ft.key());
+                for (const auto& fb_ft : fb.feature_templates()) {
+                    const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
+                    const bool has_qualified_name(simple_key != fb_ft.key());
 a.stream() << std::endl;
 a.stream() << "dogen::variability::meta_model::feature_template" << std::endl;
 a.stream() << "make_" << fb_ft.identifiable_key() << "() {" << std::endl;
 a.stream() << "    using namespace dogen::variability::meta_model;" << std::endl;
 a.stream() << "    feature_template r;" << std::endl;
 a.stream() << "    r.name().simple(\"" << simple_key << "\");" << std::endl;
-               if (has_qualified_name) {
+                   if (has_qualified_name) {
 a.stream() << "    r.name().qualified(\"" << fb_ft.key() << "\");" << std::endl;
-               }
+                   }
 a.stream() << "    const auto vt(" << enum_mapper::from_value_type(fb_ft.value_type()) << ");" << std::endl;
 a.stream() << "    r.value_type(vt);" << std::endl;
 a.stream() << "    r.binding_point(" << enum_mapper::from_binding_point(*fb_ft.binding_point()) << ");" << std::endl;
 a.stream() << "    r.kind(" << enum_mapper::from_template_kind(fb.template_kind()) << ");" << std::endl;
-    if (!fb_ft.value().empty()) {
+                   if (!fb_ft.value().empty()) {
 a.stream() << "    dogen::variability::helpers::value_factory f;" << std::endl;
 a.stream() << "    r.default_value(f.make(vt, std::list<std::string>{ " << fb_ft.value() << " }));" << std::endl;
-    }
+                   }
 a.stream() << std::endl;
 a.stream() << "    archetypes::location al;" << std::endl;
-                if (!fb.location().kernel().empty())
+                   if (!fb.location().kernel().empty())
 a.stream() << "    al.kernel(\"" << fb.location().kernel() << "\");" << std::endl;
-                if (!fb.location().backend().empty())
+                   if (!fb.location().backend().empty())
 a.stream() << "    al.backend(\"" << fb.location().backend() << "\");" << std::endl;
-                if (!fb.location().facet().empty())
+                   if (!fb.location().facet().empty())
 a.stream() << "    al.facet(\"" << fb.location().facet() << "\");" << std::endl;
-                if (!fb.location().archetype().empty())
+                   if (!fb.location().archetype().empty())
 a.stream() << "    al.archetype(\"" << fb.location().archetype() << "\");" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    r.location(al);" << std::endl;
 a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;
-            }
+                }
 a.stream() << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
+            }
+
             if (fb.generate_static_configuration()) {
 a.stream() << sn << "::feature_group" << std::endl;
 a.stream() << sn << "::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {" << std::endl;
@@ -196,18 +200,22 @@ a.stream() << "    r." << simple_key << " = s.get_" << enum_mapper::from_value_t
 a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;
             }
+
+            if (fb.generate_registration()) {
+
 a.stream() << std::endl;
 a.stream() << "std::list<dogen::variability::meta_model::feature_template>" << std::endl;
 a.stream() << sn << "::make_templates() {" << std::endl;
 a.stream() << "    using namespace dogen::variability::meta_model;" << std::endl;
 a.stream() << "    std::list<dogen::variability::meta_model::feature_template> r;" << std::endl;
 
-            for (const auto& fb_ft : fb.feature_templates()) {
+                for (const auto& fb_ft : fb.feature_templates()) {
 a.stream() << "    r.push_back(make_" << fb_ft.identifiable_key() << "());" << std::endl;
-            }
+                }
 a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
+            }
         } // snf
     } // sbf
     return a.make_artefact();

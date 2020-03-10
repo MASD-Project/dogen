@@ -60,13 +60,15 @@ format(const context& ctx, const assets::meta_model::element& e) const {
             auto snf(a.make_scoped_namespace_formatter(ns));
             using namespace variability::helpers;
             using utility::string::splitter;
+
+            if (fb.generate_registration()) {
 #>
 
 namespace {
 <#+
-            for (const auto& fb_ft : fb.feature_templates()) {
-                const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
-                const bool has_qualified_name(simple_key != fb_ft.key());
+                for (const auto& fb_ft : fb.feature_templates()) {
+                    const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
+                    const bool has_qualified_name(simple_key != fb_ft.key());
 #>
 
 dogen::variability::meta_model::feature_template
@@ -75,40 +77,40 @@ make_<#= fb_ft.identifiable_key() #>() {
     feature_template r;
     r.name().simple("<#= simple_key #>");
 <#+
-               if (has_qualified_name) {
+                   if (has_qualified_name) {
 #>
     r.name().qualified("<#= fb_ft.key() #>");
 <#+
-               }
+                   }
 #>
     const auto vt(<#= enum_mapper::from_value_type(fb_ft.value_type()) #>);
     r.value_type(vt);
     r.binding_point(<#= enum_mapper::from_binding_point(*fb_ft.binding_point()) #>);
     r.kind(<#= enum_mapper::from_template_kind(fb.template_kind()) #>);
 <#+
-    if (!fb_ft.value().empty()) {
+                   if (!fb_ft.value().empty()) {
 #>
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ <#= fb_ft.value() #> }));
 <#+
-    }
+                   }
 #>
 
     archetypes::location al;
 <#+
-                if (!fb.location().kernel().empty())
+                   if (!fb.location().kernel().empty())
 #>
     al.kernel("<#= fb.location().kernel() #>");
 <#+
-                if (!fb.location().backend().empty())
+                   if (!fb.location().backend().empty())
 #>
     al.backend("<#= fb.location().backend() #>");
 <#+
-                if (!fb.location().facet().empty())
+                   if (!fb.location().facet().empty())
 #>
     al.facet("<#= fb.location().facet() #>");
 <#+
-                if (!fb.location().archetype().empty())
+                   if (!fb.location().archetype().empty())
 #>
     al.archetype("<#= fb.location().archetype() #>");
 
@@ -116,12 +118,14 @@ make_<#= fb_ft.identifiable_key() #>() {
     return r;
 }
 <#+
-            }
+                }
 #>
 
 }
 
 <#+
+            }
+
             if (fb.generate_static_configuration()) {
 #>
 <#= sn #>::feature_group
@@ -172,6 +176,9 @@ make_<#= fb_ft.identifiable_key() #>() {
 }
 <#+
             }
+
+            if (fb.generate_registration()) {
+
 #>
 
 std::list<dogen::variability::meta_model::feature_template>
@@ -180,16 +187,17 @@ std::list<dogen::variability::meta_model::feature_template>
     std::list<dogen::variability::meta_model::feature_template> r;
 <#+
 
-            for (const auto& fb_ft : fb.feature_templates()) {
+                for (const auto& fb_ft : fb.feature_templates()) {
 #>
     r.push_back(make_<#= fb_ft.identifiable_key() #>());
 <#+
-            }
+                }
 #>
     return r;
 }
 
 <#+
+            }
         } // snf
     } // sbf
     return a.make_artefact();
