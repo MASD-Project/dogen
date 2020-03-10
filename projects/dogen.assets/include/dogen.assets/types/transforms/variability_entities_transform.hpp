@@ -31,7 +31,11 @@
 #include "dogen.assets/types/meta_model/model.hpp"
 #include "dogen.assets/types/features/variability_templates.hpp"
 #include "dogen.assets/types/features/variability_bundle.hpp"
+#include "dogen.assets/types/features/variability_profile.hpp"
+#include "dogen.assets/types/features/variability_entry.hpp"
 #include "dogen.assets/types/transforms/context_fwd.hpp"
+#include "dogen.assets/types/meta_model/variability/abstract_profile.hpp"
+#include "dogen.assets/types/meta_model/variability/abstract_profile_entry.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_bundle.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_template_bundle.hpp"
 
@@ -54,6 +58,19 @@ private:
      */
     static void update(const features::variability_bundle::feature_group& fg,
         meta_model::variability::abstract_bundle& ab);
+
+private:
+    /**
+     * @brief Reads configuration related to profiles.
+     */
+    static void update(const features::variability_profile::feature_group& fg,
+        meta_model::variability::abstract_profile& ap);
+
+    /**
+     * @brief Reads configuration related to profile entries.
+     */
+    static void update(const features::variability_entry::feature_group& fg,
+        meta_model::variability::abstract_profile_entry& ape);
 
 private:
     /**
@@ -89,6 +106,20 @@ private:
      * @brief Processes the variability initialiser meta-model element.
      */
     static void process_initialiser(meta_model::model& m);
+
+
+private:
+    /**
+     * @brief
+     */
+    static void process_profile_templates(
+        const variability::meta_model::feature_model& fm, meta_model::model& m);
+
+    /**
+     * @brief
+     */
+    static void process_profiles(
+        const variability::meta_model::feature_model& fm, meta_model::model& m);
 
 public:
     /**
