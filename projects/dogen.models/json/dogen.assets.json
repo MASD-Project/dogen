@@ -3749,6 +3749,11 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
+          "name": "generate_registration",
+          "type": "bool",
+          "documentation": "If true, code will be generated to perform the registration of the features.\n"
+        },
+        {
           "name": "generate_static_configuration",
           "type": "bool",
           "documentation": "If true, the code generator will output a class to represent the static configuration.\n"

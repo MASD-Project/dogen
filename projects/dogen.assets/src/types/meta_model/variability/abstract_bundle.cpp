@@ -58,7 +58,8 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::va
 namespace dogen::assets::meta_model::variability {
 
 abstract_bundle::abstract_bundle()
-    : generate_static_configuration_(static_cast<bool>(0)),
+    : generate_registration_(static_cast<bool>(0)),
+      generate_static_configuration_(static_cast<bool>(0)),
       requires_manual_default_constructor_(static_cast<bool>(0)) { }
 
 abstract_bundle::abstract_bundle(abstract_bundle&& rhs)
@@ -67,6 +68,7 @@ abstract_bundle::abstract_bundle(abstract_bundle&& rhs)
       transparent_associations_(std::move(rhs.transparent_associations_)),
       opaque_associations_(std::move(rhs.opaque_associations_)),
       associative_container_keys_(std::move(rhs.associative_container_keys_)),
+      generate_registration_(std::move(rhs.generate_registration_)),
       generate_static_configuration_(std::move(rhs.generate_static_configuration_)),
       requires_manual_default_constructor_(std::move(rhs.requires_manual_default_constructor_)),
       location_(std::move(rhs.location_)),
@@ -91,6 +93,7 @@ abstract_bundle::abstract_bundle(
     const std::list<dogen::assets::meta_model::name>& transparent_associations,
     const std::list<dogen::assets::meta_model::name>& opaque_associations,
     const std::list<dogen::assets::meta_model::name>& associative_container_keys,
+    const bool generate_registration,
     const bool generate_static_configuration,
     const bool requires_manual_default_constructor,
     const dogen::archetypes::location& location,
@@ -114,6 +117,7 @@ abstract_bundle::abstract_bundle(
       transparent_associations_(transparent_associations),
       opaque_associations_(opaque_associations),
       associative_container_keys_(associative_container_keys),
+      generate_registration_(generate_registration),
       generate_static_configuration_(generate_static_configuration),
       requires_manual_default_constructor_(requires_manual_default_constructor),
       location_(location),
@@ -134,6 +138,7 @@ void abstract_bundle::to_stream(std::ostream& s) const {
       << "\"transparent_associations\": " << transparent_associations_ << ", "
       << "\"opaque_associations\": " << opaque_associations_ << ", "
       << "\"associative_container_keys\": " << associative_container_keys_ << ", "
+      << "\"generate_registration\": " << generate_registration_ << ", "
       << "\"generate_static_configuration\": " << generate_static_configuration_ << ", "
       << "\"requires_manual_default_constructor\": " << requires_manual_default_constructor_ << ", "
       << "\"location\": " << location_ << ", "
@@ -148,6 +153,7 @@ void abstract_bundle::swap(abstract_bundle& other) noexcept {
     swap(transparent_associations_, other.transparent_associations_);
     swap(opaque_associations_, other.opaque_associations_);
     swap(associative_container_keys_, other.associative_container_keys_);
+    swap(generate_registration_, other.generate_registration_);
     swap(generate_static_configuration_, other.generate_static_configuration_);
     swap(requires_manual_default_constructor_, other.requires_manual_default_constructor_);
     swap(location_, other.location_);
@@ -159,6 +165,7 @@ bool abstract_bundle::compare(const abstract_bundle& rhs) const {
         transparent_associations_ == rhs.transparent_associations_ &&
         opaque_associations_ == rhs.opaque_associations_ &&
         associative_container_keys_ == rhs.associative_container_keys_ &&
+        generate_registration_ == rhs.generate_registration_ &&
         generate_static_configuration_ == rhs.generate_static_configuration_ &&
         requires_manual_default_constructor_ == rhs.requires_manual_default_constructor_ &&
         location_ == rhs.location_ &&
@@ -211,6 +218,14 @@ void abstract_bundle::associative_container_keys(const std::list<dogen::assets::
 
 void abstract_bundle::associative_container_keys(const std::list<dogen::assets::meta_model::name>&& v) {
     associative_container_keys_ = std::move(v);
+}
+
+bool abstract_bundle::generate_registration() const {
+    return generate_registration_;
+}
+
+void abstract_bundle::generate_registration(const bool v) {
+    generate_registration_ = v;
 }
 
 bool abstract_bundle::generate_static_configuration() const {

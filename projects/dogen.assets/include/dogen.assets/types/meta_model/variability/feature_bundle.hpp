@@ -74,6 +74,7 @@ public:
         const std::list<dogen::assets::meta_model::name>& transparent_associations,
         const std::list<dogen::assets::meta_model::name>& opaque_associations,
         const std::list<dogen::assets::meta_model::name>& associative_container_keys,
+        const bool generate_registration,
         const bool generate_static_configuration,
         const bool requires_manual_default_constructor,
         const dogen::archetypes::location& location,

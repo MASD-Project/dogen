@@ -82,6 +82,7 @@ public:
         const std::list<dogen::assets::meta_model::name>& transparent_associations,
         const std::list<dogen::assets::meta_model::name>& opaque_associations,
         const std::list<dogen::assets::meta_model::name>& associative_container_keys,
+        const bool generate_registration,
         const bool generate_static_configuration,
         const bool requires_manual_default_constructor,
         const dogen::archetypes::location& location,
@@ -122,6 +123,14 @@ public:
     std::list<dogen::assets::meta_model::name>& associative_container_keys();
     void associative_container_keys(const std::list<dogen::assets::meta_model::name>& v);
     void associative_container_keys(const std::list<dogen::assets::meta_model::name>&& v);
+    /**@}*/
+
+    /**
+     * @brief If true, code will be generated to perform the registration of the features.
+     */
+    /**@{*/
+    bool generate_registration() const;
+    void generate_registration(const bool v);
     /**@}*/
 
     /**
@@ -178,6 +187,7 @@ private:
     std::list<dogen::assets::meta_model::name> transparent_associations_;
     std::list<dogen::assets::meta_model::name> opaque_associations_;
     std::list<dogen::assets::meta_model::name> associative_container_keys_;
+    bool generate_registration_;
     bool generate_static_configuration_;
     bool requires_manual_default_constructor_;
     dogen::archetypes::location location_;
