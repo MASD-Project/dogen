@@ -1892,25 +1892,6 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "meta_model::variability::entry",
-      "stereotypes": [
-        "Documentable",
-        "Configurable",
-        "Nameable"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "key",
-          "type": "std::string"
-        },
-        {
-          "name": "value",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
       "name": "meta_model::variability::abstract_feature",
       "documentation": "Contains all of the common attributes between features and feature templates.\n",
       "stereotypes": [
@@ -3830,10 +3811,6 @@
           "type": "std::unordered_set<std::string>"
         },
         {
-          "name": "entries",
-          "type": "std::list<entry>"
-        },
-        {
           "name": "parents",
           "type": "std::list<name>",
           "documentation": "Parents of this profile template.\n"
@@ -3845,14 +3822,26 @@
       "parents": [
         "meta_model::variability::abstract_profile"
       ],
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "entries",
+          "type": "std::list<profile_template_entry>"
+        }
+      ]
     },
     {
       "name": "meta_model::variability::profile",
       "parents": [
         "meta_model::variability::abstract_profile"
       ],
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "entries",
+          "type": "std::list<profile_entry>"
+        }
+      ]
     },
     {
       "name": "features::variability_entry",
@@ -3959,6 +3948,50 @@
             "masd.variability.qualified_name": "masd.variability.labels",
             "masd.variability.is_optional": "true"
           }
+        }
+      ]
+    },
+    {
+      "name": "meta_model::variability::abstract_profile_entry",
+      "stereotypes": [
+        "Documentable",
+        "Configurable",
+        "Nameable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "key",
+          "type": "std::string"
+        },
+        {
+          "name": "value",
+          "type": "std::string"
+        },
+        {
+          "name": "location",
+          "type": "archetypes::location",
+          "documentation": "Archetype location coordinates for the feature template to expand into.\n"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::variability::profile_entry",
+      "parents": [
+        "meta_model::variability::abstract_profile_entry"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::variability::profile_template_entry",
+      "parents": [
+        "meta_model::variability::abstract_profile_entry"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "template_kind",
+          "type": "variability::meta_model::template_kind"
         }
       ]
     }

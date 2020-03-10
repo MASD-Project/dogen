@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include "dogen.assets/io/meta_model/variability/profile_io.hpp"
+#include "dogen.assets/io/meta_model/variability/profile_entry_io.hpp"
 #include "dogen.assets/io/meta_model/variability/abstract_profile_io.hpp"
 
 namespace dogen::assets::meta_model::variability {

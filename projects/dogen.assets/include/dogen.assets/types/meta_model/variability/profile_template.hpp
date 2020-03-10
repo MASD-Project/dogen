@@ -25,9 +25,11 @@
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
 #include <algorithm>
 #include "dogen.assets/types/meta_model/variability/abstract_profile.hpp"
+#include "dogen.assets/types/meta_model/variability/profile_template_entry.hpp"
 
 namespace dogen::assets::meta_model::variability {
 
@@ -57,8 +59,8 @@ public:
         const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& decoration,
         const std::unordered_set<std::string>& labels,
-        const std::list<dogen::assets::meta_model::variability::entry>& entries,
-        const std::list<dogen::assets::meta_model::name>& parents);
+        const std::list<dogen::assets::meta_model::name>& parents,
+        const std::list<dogen::assets::meta_model::variability::profile_template_entry>& entries);
 
 public:
     using element::accept;
@@ -69,6 +71,12 @@ public:
     virtual void accept(element_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
+
+public:
+    const std::list<dogen::assets::meta_model::variability::profile_template_entry>& entries() const;
+    std::list<dogen::assets::meta_model::variability::profile_template_entry>& entries();
+    void entries(const std::list<dogen::assets::meta_model::variability::profile_template_entry>& v);
+    void entries(const std::list<dogen::assets::meta_model::variability::profile_template_entry>&& v);
 
 public:
     bool operator==(const profile_template& rhs) const;
@@ -83,6 +91,8 @@ public:
     void swap(profile_template& other) noexcept;
     profile_template& operator=(profile_template other);
 
+private:
+    std::list<dogen::assets::meta_model::variability::profile_template_entry> entries_;
 };
 
 }

@@ -18,35 +18,42 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_ENTRY_HPP
-#define DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_ENTRY_HPP
+#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_ABSTRACT_PROFILE_ENTRY_HPP
+#define DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_ABSTRACT_PROFILE_ENTRY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
 #include <string>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
+#include "dogen.archetypes/types/location.hpp"
 #include "dogen.assets/types/meta_model/name.hpp"
 #include "dogen.variability/types/meta_model/configuration_fwd.hpp"
 
 namespace dogen::assets::meta_model::variability {
 
-class entry final {
+class abstract_profile_entry {
 public:
-    entry() = default;
-    entry(const entry&) = default;
-    entry(entry&&) = default;
-    ~entry() = default;
+    abstract_profile_entry() = default;
+    abstract_profile_entry(const abstract_profile_entry&) = default;
+    abstract_profile_entry(abstract_profile_entry&&) = default;
+
+    virtual ~abstract_profile_entry() noexcept = 0;
 
 public:
-    entry(
+    abstract_profile_entry(
         const std::string& documentation,
         const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
         const dogen::assets::meta_model::name& name,
         const std::string& key,
-        const std::string& value);
+        const std::string& value,
+        const dogen::archetypes::location& location);
+
+public:
+    virtual void to_stream(std::ostream& s) const;
 
 public:
     /**
@@ -93,15 +100,23 @@ public:
     void value(const std::string& v);
     void value(const std::string&& v);
 
-public:
-    bool operator==(const entry& rhs) const;
-    bool operator!=(const entry& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Archetype location coordinates for the feature template to expand into.
+     */
+    /**@{*/
+    const dogen::archetypes::location& location() const;
+    dogen::archetypes::location& location();
+    void location(const dogen::archetypes::location& v);
+    void location(const dogen::archetypes::location&& v);
+    /**@}*/
 
+protected:
+    bool compare(const abstract_profile_entry& rhs) const;
 public:
-    void swap(entry& other) noexcept;
-    entry& operator=(entry other);
+    virtual bool equals(const abstract_profile_entry& other) const = 0;
+
+protected:
+    void swap(abstract_profile_entry& other) noexcept;
 
 private:
     std::string documentation_;
@@ -109,17 +124,13 @@ private:
     dogen::assets::meta_model::name name_;
     std::string key_;
     std::string value_;
+    dogen::archetypes::location location_;
 };
 
-}
+inline abstract_profile_entry::~abstract_profile_entry() noexcept { }
 
-namespace std {
-
-template<>
-inline void swap(
-    dogen::assets::meta_model::variability::entry& lhs,
-    dogen::assets::meta_model::variability::entry& rhs) {
-    lhs.swap(rhs);
+inline bool operator==(const abstract_profile_entry& lhs, const abstract_profile_entry& rhs) {
+    return lhs.equals(rhs);
 }
 
 }

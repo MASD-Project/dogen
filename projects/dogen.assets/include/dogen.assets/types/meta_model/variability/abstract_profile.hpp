@@ -32,7 +32,6 @@
 #include <unordered_set>
 #include "dogen.assets/types/meta_model/name.hpp"
 #include "dogen.assets/types/meta_model/element.hpp"
-#include "dogen.assets/types/meta_model/variability/entry.hpp"
 
 namespace dogen::assets::meta_model::variability {
 
@@ -62,7 +61,6 @@ public:
         const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& decoration,
         const std::unordered_set<std::string>& labels,
-        const std::list<dogen::assets::meta_model::variability::entry>& entries,
         const std::list<dogen::assets::meta_model::name>& parents);
 
 public:
@@ -73,11 +71,6 @@ public:
     std::unordered_set<std::string>& labels();
     void labels(const std::unordered_set<std::string>& v);
     void labels(const std::unordered_set<std::string>&& v);
-
-    const std::list<dogen::assets::meta_model::variability::entry>& entries() const;
-    std::list<dogen::assets::meta_model::variability::entry>& entries();
-    void entries(const std::list<dogen::assets::meta_model::variability::entry>& v);
-    void entries(const std::list<dogen::assets::meta_model::variability::entry>&& v);
 
     /**
      * @brief Parents of this profile template.
@@ -99,7 +92,6 @@ protected:
 
 private:
     std::unordered_set<std::string> labels_;
-    std::list<dogen::assets::meta_model::variability::entry> entries_;
     std::list<dogen::assets::meta_model::name> parents_;
 };
 

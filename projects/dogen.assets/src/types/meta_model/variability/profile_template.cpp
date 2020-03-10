@@ -22,6 +22,21 @@
 #include "dogen.assets/types/meta_model/element_visitor.hpp"
 #include "dogen.assets/io/meta_model/variability/abstract_profile_io.hpp"
 #include "dogen.assets/types/meta_model/variability/profile_template.hpp"
+#include "dogen.assets/io/meta_model/variability/profile_template_entry_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::meta_model::variability::profile_template_entry>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen::assets::meta_model::variability {
 
@@ -42,8 +57,8 @@ profile_template::profile_template(
     const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& decoration,
     const std::unordered_set<std::string>& labels,
-    const std::list<dogen::assets::meta_model::variability::entry>& entries,
-    const std::list<dogen::assets::meta_model::name>& parents)
+    const std::list<dogen::assets::meta_model::name>& parents,
+    const std::list<dogen::assets::meta_model::variability::profile_template_entry>& entries)
     : dogen::assets::meta_model::variability::abstract_profile(
       name,
       documentation,
@@ -61,8 +76,8 @@ profile_template::profile_template(
       archetype_location_properties,
       decoration,
       labels,
-      entries,
-      parents) { }
+      parents),
+      entries_(entries) { }
 
 void profile_template::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -85,12 +100,16 @@ void profile_template::to_stream(std::ostream& s) const {
       << "\"__type__\": " << "\"dogen::assets::meta_model::variability::profile_template\"" << ", "
       << "\"__parent_0__\": ";
     dogen::assets::meta_model::variability::abstract_profile::to_stream(s);
-    s << " }";
+    s << ", "
+      << "\"entries\": " << entries_
+      << " }";
 }
 
 void profile_template::swap(profile_template& other) noexcept {
     dogen::assets::meta_model::variability::abstract_profile::swap(other);
 
+    using std::swap;
+    swap(entries_, other.entries_);
 }
 
 bool profile_template::equals(const dogen::assets::meta_model::element& other) const {
@@ -100,13 +119,30 @@ bool profile_template::equals(const dogen::assets::meta_model::element& other) c
 }
 
 bool profile_template::operator==(const profile_template& rhs) const {
-    return dogen::assets::meta_model::variability::abstract_profile::compare(rhs);
+    return dogen::assets::meta_model::variability::abstract_profile::compare(rhs) &&
+        entries_ == rhs.entries_;
 }
 
 profile_template& profile_template::operator=(profile_template other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const std::list<dogen::assets::meta_model::variability::profile_template_entry>& profile_template::entries() const {
+    return entries_;
+}
+
+std::list<dogen::assets::meta_model::variability::profile_template_entry>& profile_template::entries() {
+    return entries_;
+}
+
+void profile_template::entries(const std::list<dogen::assets::meta_model::variability::profile_template_entry>& v) {
+    entries_ = v;
+}
+
+void profile_template::entries(const std::list<dogen::assets::meta_model::variability::profile_template_entry>&& v) {
+    entries_ = std::move(v);
 }
 
 }

@@ -434,47 +434,8 @@ adapter::to_licence(const assets::meta_model::location& l,
 void adapter::populate_abstract_profile(const assets::meta_model::location& l,
     const injection::meta_model::element& ie,
     assets::meta_model::variability::abstract_profile& ap) const {
-
-    assets::helpers::name_factory f;
     for (const auto& p : ie.parents())
         ap.parents().push_back(to_name(l, p));
-
-    for (const auto& attr : ie.attributes()) {
-        const auto n(attr.name());
-        ensure_not_empty(n);
-
-        /*
-         * The conventions for naming profile entries are somewhat
-         * confusing. The "simple" name of a profile entry must match
-         * the qualified name of the feature it is configuring, e.g.:
-         *
-         *     masd.generalization.parent
-         *
-         * The "qualified" name of the profile entry reflects its
-         * position in assets space, and as such is composed of the
-         * assets element that owns the profile entry (the profile):
-         *
-         *     dogen.cpp_artefact_formatter
-         *
-         * Concatenated with the "simple" name, e.g.:
-         *
-         *     dogen.cpp_artefact_formatter.masd.generalization.parent
-         *
-         * Whilst this may not be exactly the most aesthetically
-         * pleasing approach, it is more or less compliant with the
-         * conceptual model for the assets space. It also makes it
-         * really easy to find out where a configuration came from,
-         * when we are looking at a configuration model
-         * representation.
-         */
-        assets::meta_model::variability::entry e;
-        e.name(f.build_attribute_name(ap.name(), n));
-        e.key(n);
-        e.configuration(attr.configuration());
-        e.configuration()->name().qualified(e.name().qualified().dot());
-        e.value(attr.value());
-        ap.entries().push_back(e);
-    }
 }
 
 void adapter::populate_abstract_feature(
@@ -507,6 +468,45 @@ adapter::to_variability_profile(const assets::meta_model::location& l,
     auto r(boost::make_shared<profile>());
     populate_element(l, scr, ie, *r);
     populate_abstract_profile(l, ie, *r);
+
+    assets::helpers::name_factory f;
+    for (const auto& attr : ie.attributes()) {
+        const auto n(attr.name());
+        ensure_not_empty(n);
+
+        /*
+         * The conventions for naming profile entries are somewhat
+         * confusing. The "simple" name of a profile entry must match
+         * the qualified name of the feature it is configuring, e.g.:
+         *
+         *     masd.generalization.parent
+         *
+         * The "qualified" name of the profile entry reflects its
+         * position in assets space, and as such is composed of the
+         * assets element that owns the profile entry (the profile):
+         *
+         *     dogen.cpp_artefact_formatter
+         *
+         * Concatenated with the "simple" name, e.g.:
+         *
+         *     dogen.cpp_artefact_formatter.masd.generalization.parent
+         *
+         * Whilst this may not be exactly the most aesthetically
+         * pleasing approach, it is more or less compliant with the
+         * conceptual model for the assets space. It also makes it
+         * really easy to find out where a configuration came from,
+         * when we are looking at a configuration model
+         * representation.
+         */
+        assets::meta_model::variability::profile_entry e;
+        e.name(f.build_attribute_name(r->name(), n));
+        e.key(n);
+        e.configuration(attr.configuration());
+        e.configuration()->name().qualified(e.name().qualified().dot());
+        e.value(attr.value());
+        r->entries().push_back(e);
+    }
+
     return r;
 }
 
@@ -518,6 +518,45 @@ adapter::to_variability_profile_template(const assets::meta_model::location& l,
     auto r(boost::make_shared<profile_template>());
     populate_element(l, scr, ie, *r);
     populate_abstract_profile(l, ie, *r);
+
+    assets::helpers::name_factory f;
+    for (const auto& attr : ie.attributes()) {
+        const auto n(attr.name());
+        ensure_not_empty(n);
+
+        /*
+         * The conventions for naming profile entries are somewhat
+         * confusing. The "simple" name of a profile entry must match
+         * the qualified name of the feature it is configuring, e.g.:
+         *
+         *     masd.generalization.parent
+         *
+         * The "qualified" name of the profile entry reflects its
+         * position in assets space, and as such is composed of the
+         * assets element that owns the profile entry (the profile):
+         *
+         *     dogen.cpp_artefact_formatter
+         *
+         * Concatenated with the "simple" name, e.g.:
+         *
+         *     dogen.cpp_artefact_formatter.masd.generalization.parent
+         *
+         * Whilst this may not be exactly the most aesthetically
+         * pleasing approach, it is more or less compliant with the
+         * conceptual model for the assets space. It also makes it
+         * really easy to find out where a configuration came from,
+         * when we are looking at a configuration model
+         * representation.
+         */
+        assets::meta_model::variability::profile_template_entry e;
+        e.name(f.build_attribute_name(r->name(), n));
+        e.key(n);
+        e.configuration(attr.configuration());
+        e.configuration()->name().qualified(e.name().qualified().dot());
+        e.value(attr.value());
+        r->entries().push_back(e);
+    }
+
     return r;
 }
 
