@@ -52,7 +52,7 @@ variability_application_transform::adapt(const context& ctx) {
 void variability_application_transform::
 apply(const context& ctx, assets::meta_model::model_set& ms) {
     const auto model_name(ms.target().name().qualified().dot());
-    tracing::scoped_chain_tracer stp(lg, "variability data",
+    tracing::scoped_chain_tracer stp(lg, "variability application",
         transform_id, model_name, *ctx.tracer());
 
     /*
