@@ -18,12 +18,103 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.variability/types/meta_model/configuration.hpp"
+#include "dogen.variability/io/meta_model/configuration_model_set_io.hpp"
+#include "dogen.assets/types/meta_model/structural/module.hpp"
+#include "dogen.assets/types/meta_model/elements_traversal.hpp"
+#include "dogen.assets/types/helpers/adaptation_exception.hpp"
 #include "dogen.assets/types/helpers/configuration_model_set_adapter.hpp"
 
+namespace {
+
+const std::string transform_id("assets.helpers.configuration_model_set_adapter");
+using namespace dogen::utility::log;
+static logger lg(logger_factory(transform_id));
+
+const std::string duplicate_qualified_name(
+    "Duplicate qualified name for configuration: ");
+
+}
 namespace dogen::assets::helpers {
 
-bool configuration_model_set_adapter::operator==(const configuration_model_set_adapter& /*rhs*/) const {
-    return true;
+namespace {
+
+/**
+ * @brief Extracts variability data from assets meta-model types, and
+ * inserts it into a configuration model.
+ */
+class populator {
+private:
+    template<typename Configurable>
+    void extract(Configurable& c) {
+        const auto& n(c.configuration()->name());
+        const auto& qn(n.qualified());
+        BOOST_LOG_SEV(lg, trace) << "Extracting: " << n.simple()
+                                 << " (" << qn << ") ";
+
+        auto pair(std::make_pair(qn, c.configuration()));
+        const auto inserted(model_.local().insert(pair).second);
+        if (inserted)
+            return;
+
+        BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << qn;
+        BOOST_THROW_EXCEPTION(
+            adaptation_exception(duplicate_qualified_name + qn));
+    }
+
+public:
+    void operator()(meta_model::element& e) { extract(e); }
+    void operator()(meta_model::structural::module& m) {
+        if (m.is_root())
+            model_.global(m.configuration());
+        else
+            extract(m);
+    }
+    void operator()(meta_model::structural::object_template& ot) {
+        extract(ot);
+        for (auto& attr : ot.local_attributes())
+            extract(attr);
+    }
+    void operator()(meta_model::structural::enumeration& e) {
+        extract(e);
+        for (auto& enm : e.enumerators())
+            extract(enm);
+    }
+    void operator()(meta_model::structural::object& o) {
+        extract(o);
+        for (auto& attr : o.local_attributes())
+            extract(attr);
+    }
+
+public:
+    variability::meta_model::configuration_model& result() {
+        return model_;
+    }
+
+private:
+    variability::meta_model::configuration_model model_;
+};
+
+}
+
+variability::meta_model::configuration_model
+configuration_model_set_adapter::adapt(const meta_model::model& m) {
+    populator e;
+    meta_model::elements_traversal(m, e);
+    return e.result();
+}
+
+variability::meta_model::configuration_model_set
+configuration_model_set_adapter::adapt(const meta_model::model_set& ms) {
+    variability::meta_model::configuration_model_set r;
+    r.models().push_back(adapt(ms.target()));
+
+    for (const auto& m : ms.references())
+        r.models().push_back(adapt(m));
+
+    return r;
 }
 
 }

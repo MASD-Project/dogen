@@ -25,24 +25,29 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.variability/types/meta_model/configuration_model_set.hpp"
+#include "dogen.assets/types/meta_model/model_set.hpp"
 
 namespace dogen::assets::helpers {
 
+/**
+ * @brief Adapts an assets model set into its counterpart in
+ * variability, extracting all of the configuration information.
+ */
 class configuration_model_set_adapter final {
-public:
-    configuration_model_set_adapter() = default;
-    configuration_model_set_adapter(const configuration_model_set_adapter&) = default;
-    configuration_model_set_adapter(configuration_model_set_adapter&&) = default;
-    ~configuration_model_set_adapter() = default;
-    configuration_model_set_adapter& operator=(const configuration_model_set_adapter&) = default;
+private:
+    /**
+     * @brief Adapts a single model.
+     */
+    static variability::meta_model::configuration_model
+    adapt(const meta_model::model& m);
 
 public:
-    bool operator==(const configuration_model_set_adapter& rhs) const;
-    bool operator!=(const configuration_model_set_adapter& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * @brief Adapts all models in a model set.
+     */
+    static variability::meta_model::configuration_model_set
+    adapt(const meta_model::model_set& ms);
 };
 
 }
