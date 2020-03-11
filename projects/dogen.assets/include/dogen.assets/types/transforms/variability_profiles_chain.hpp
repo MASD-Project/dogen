@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen.assets/types/meta_model/model_set.hpp"
 #include "dogen.variability/types/transforms/context_fwd.hpp"
+#include "dogen.assets/types/meta_model/model_set.hpp"
 #include "dogen.assets/types/transforms/context_fwd.hpp"
 
 namespace dogen::assets::transforms {
@@ -34,6 +34,20 @@ namespace dogen::assets::transforms {
 /**
  * @brief Handles the application of variability into the model set
  * currently being processed.
+ *
+ * The variability profiles chain has the responsibility of
+ * initialising the "user-data" part of the variability
+ * subsystem. This is the second phase of variability processing; it
+ * presumes that the first phase was already performed - that is, the
+ * injection of all of the available features into a feature model.
+ *
+ * Profiles provide "named configurations" defined by users that allow
+ * for the packaging and sharing of configuration. The job of this
+ * transform is to locate all of the meta-model types that provide
+ * profile information (profiles and profile templates), convert them
+ * into the corresponding variability counterparts and then execute
+ * all of the required variability transforms.
+ *
  */
 class variability_profiles_chain final {
 private:
@@ -44,6 +58,9 @@ private:
     static variability::transforms::context adapt(const context& ctx);
 
 public:
+    /**
+     * @brief Applies the transform to the entire model set.
+     */
     static void apply(const context& ctx, assets::meta_model::model_set& ms);
 };
 
