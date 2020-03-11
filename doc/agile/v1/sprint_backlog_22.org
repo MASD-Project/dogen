@@ -14,27 +14,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-11 Wed 12:24]
+#+CAPTION: Clock summary at [2020-03-11 Wed 13:58]
 | <75>                                                    |         |       |      |       |
 | Headline                                                | Time    |       |      |     % |
 |---------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                            | *46:09* |       |      | 100.0 |
+| *Total time*                                            | *46:23* |       |      | 100.0 |
 |---------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                 | 46:09   |       |      | 100.0 |
-| Active                                                  |         | 46:09 |      | 100.0 |
-| Edit release notes for previous sprint                  |         |       | 4:11 |   9.1 |
+| Stories                                                 | 46:23   |       |      | 100.0 |
+| Active                                                  |         | 46:23 |      | 100.0 |
+| Edit release notes for previous sprint                  |         |       | 4:11 |   9.0 |
 | Create a demo and presentation for previous sprint      |         |       | 0:25 |   0.9 |
-| Sprint and product backlog grooming                     |         |       | 5:40 |  12.3 |
+| Sprint and product backlog grooming                     |         |       | 5:54 |  12.7 |
 | Analysis on defining a combined logical-physical space  |         |       | 5:55 |  12.8 |
-| Analysis on removing physical references in variability |         |       | 5:27 |  11.8 |
+| Analysis on removing physical references in variability |         |       | 5:27 |  11.7 |
 | Remove =rapidjson= formatters                           |         |       | 0:03 |   0.1 |
-| Separate feature templates from bundles                 |         |       | 9:28 |  20.5 |
+| Separate feature templates from bundles                 |         |       | 9:28 |  20.4 |
 | Move enabled to generation                              |         |       | 0:04 |   0.1 |
 | Create a chain to encapsulate variability transforms    |         |       | 0:37 |   1.3 |
 | Move variability chain into assets                      |         |       | 2:22 |   5.1 |
-| Move profile meta-data into profile element             |         |       | 7:12 |  15.6 |
+| Move profile meta-data into profile element             |         |       | 7:12 |  15.5 |
 | Split profiles and profile templates in variability     |         |       | 4:02 |   8.7 |
-| Add location and modules to variability                 |         |       | 0:43 |   1.6 |
+| Add location and modules to variability                 |         |       | 0:43 |   1.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -215,6 +215,7 @@ Time spent creating the demo and presentation. Use the demo project:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-03-11 Wed 13:44]--[2020-03-11 Wed 13:58] =>  0:14
     CLOCK: [2020-03-11 Wed 08:40]--[2020-03-11 Wed 08:50] =>  0:10
     CLOCK: [2020-03-11 Wed 08:14]--[2020-03-11 Wed 08:39] =>  0:25
     CLOCK: [2020-03-10 Tue 21:40]--[2020-03-10 Tue 21:49] =>  0:09
@@ -2807,3 +2808,16 @@ back in for now.
 
 This story is dependent on moving annotations out of stitch. Once this
 is done we can enable validation.
+*** CANCELLED Meta-names do not have namespaces                       :story:
+    CLOSED: [2020-03-11 Wed 13:47]
+
+*Rationale*: we shall remove meta-names and bind on stereotypes so
+this won't be a problem in the future.
+
+At present the meta-name factory is placing all meta-names in a
+top-level namespace. It should really respect the hierarchical
+namespaces we have. However, given we want to code-generate this, we
+may just leave it as is for now until we fix it properly.
+
+Since all meta-elements should live in assets, we should fix this once
+all of them have been moved across.

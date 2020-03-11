@@ -182,7 +182,7 @@ facets, but at the implementation level they are implemented
 differently. This also means we do not violate the rule of making
 implicit meta-model elements explicit.
 
-*** Intrinsic non-generatable types                         :reviewing:story:
+*** Intrinsic non-generatable types                                   :story:
 
 In the decoration transform we have this hack:
 
@@ -222,33 +222,6 @@ Notes:
 - when we have meta-model elements for logical meta-elements we just
   need to add this as a property (e.g. generatable). If a user tries
   to add a formatter to a non-generatable type we error.
-
-*** Consider creating a "model" meta-model element                    :story:
-
-This is not yet particularly clear, and we may already have something
-on the backlog for this, but the gist of it is that we have a number
-of elements in the meta-model that are functions of the model itself:
-
-- the root module.
-- projects and solutions for the model itself.
-- common ODB options.
-- top-level CMakefile (and perhaps others).
-- msbuild
-
-In all those cases we are duplicating information available at the
-model level, with perhaps a tiny bit of extra processing. It would
-make more sense for there to be an element that models the model
-itself and then to have formatters for this element. We should wait
-until we finish with the fabric refactor (and possibly the generation
-refactor too) until we look into this. We should also take into
-account the product models.
-
-In addition, cases such as common ODB options need to be rethought; if
-all we are supplying is a different representation of data that
-already exists in the model itself, then we should either rely on the
-model meta-type or move those properties to the new meta-type. Seems a
-tad excessive having common ODB options just for a "post-processed"
-set of properties.
 
 *** Make vistor a proper meta-model element                           :story:
 
@@ -342,34 +315,34 @@ Notes:
   itself will have a model, we need to make sure these are
   consistent. See [[*Add support for product skeleton generation][Add support for product skeleton generation]].
 
-*** Meta-names do not have namespaces                                 :story:
+Merged stories:
 
-At present the meta-name factory is placing all meta-names in a
-top-level namespace. It should really respect the hierarchical
-namespaces we have. However, given we want to code-generate this, we
-may just leave it as is for now until we fix it properly.
+*Consider creating a "model" meta-model element*
 
-Since all meta-elements should live in assets, we should fix this once
-all of them have been moved across.
+This is not yet particularly clear, and we may already have something
+on the backlog for this, but the gist of it is that we have a number
+of elements in the meta-model that are functions of the model itself:
 
-*** Consider adding support for binary logging                        :story:
+- the root module.
+- projects and solutions for the model itself.
+- common ODB options.
+- top-level CMakefile (and perhaps others).
+- msbuild
 
-Dogen logs are very large when we log at high-level such as debug and
-trace. It also takes a bit longer to run. This means its not very
-practical to enable logging all the time, only when we are
-troubleshooting. However, for "dogen as a service" we probably will
-end up using logging a lot more often so it would be nice to have a
-more efficient way of logging. One possibility is to use binary logs.
+In all those cases we are duplicating information available at the
+model level, with perhaps a tiny bit of extra processing. It would
+make more sense for there to be an element that models the model
+itself and then to have formatters for this element. We should wait
+until we finish with the fabric refactor (and possibly the generation
+refactor too) until we look into this. We should also take into
+account the product models.
 
-Links:
-
-- [[https://github.com/Morgan-Stanley/binlog][binlog]]: A high performance C++ log library, producing structured
-  binary logs http://binlog.org
-- [[https://github.com/odygrd/quill][quill]]: Asynchronous Low Latency Logging Library
-- [[https://github.com/KjellKod/g3log][g3log]]: G3log is an asynchronous, "crash safe", logger that is easy
-  to use with default logging sinks or you can add your own.
-- [[https://github.com/PlatformLab/NanoLog][NanoLog]]: Nanolog is an extremely performant nanosecond scale logging
-  system for C++ that exposes a simple printf-like API.
+In addition, cases such as common ODB options need to be rethought; if
+all we are supplying is a different representation of data that
+already exists in the model itself, then we should either rely on the
+model meta-type or move those properties to the new meta-type. Seems a
+tad excessive having common ODB options just for a "post-processed"
+set of properties.
 
 *** Do logic-less templates belong in =generation.cpp=?               :story:
 
@@ -415,13 +388,6 @@ the fact that we need the schema name in order to output ODB pragmas
 (separate bug). It seems more logical to propagate the schema name to
 child namespaces.
 
-*** Run ODB on nightlies                                              :story:
-
-At present we are code-generating all code on dogen nightlies but we
-are not running ODB. This means that if we have broken ODB pragma
-generation, we will not find out until we manually run it. We should
-run it as part of the "generate everything" approach in nightly.
-
 *** ODB pragmas not populated when schema name is not set             :story:
 
 At present we have a bug whereby not setting the schema name results
@@ -432,21 +398,6 @@ property to be set. AS it happens, it normally tends to be the schema
 name, because it makes sense to set it when defining a relational
 model. This is why we never bumped into this problem before.
 
-*** Add "is abstract" to assets                                       :story:
-
-With C# we have started deciding if a class is abstract or not on the
-basis of whether its a parent, etc. The right thing to do is to have a
-"is abstract" property which is populated on the guts of assets (using
-the current logic of parents are abstract).
-
-We then need to review the C++ templates and figure out where we were
-also inferring "abstractness", and use the new flag.
-
-*** Implement CLI configuration validator                             :story:
-
-At present we are not performing any validation to the new
-configuration classes in the API.
-
 *** Create transforms for templating                                  :story:
 
 At present we are using workflows to convert stitch and wale
@@ -455,50 +406,14 @@ if there should just be a high-level transform in orchestrator that
 encapsulates these or if the templating model itself should follow the
 naming convention.
 
-*** Add stereotype for IoC containers                                 :story:
+In addition, we want to link the template as a modeling element with
+the instantiation of the template, at the meta-model level. There are
+several use cases:
 
-At present we are marking IoC containers with either handcrafted or
-header only. In reality, they should have their own stereotype and
-colours as, in the future, we want to code generate them. However, we
-can only do this once we get rid of the initialisers because they are
-also a form of IoC containers, but with different requirements.
-
-Proposed stereotype: =masd::ioc::container=.
-
-Actually, this is not quite right. We are not creating the IoC
-containers themselves, but the wiring code that sets up these
-containers. We need to figure out the correct term for
-these. Suggestions:
-
-- [[https://github.com/avao/Qart/blob/master/Src/Qart.CyberTester/Bootstrapper.cs][bootstrapper]], with a =Bootstrapper.CreateContainer= method;
-  e.g. =masd::ioc::bootstrapper=.
-
-*** Handling of forward declarations on generated types               :story:
-
-At present, if we disable forward declarations globally (in a profile,
-say), the code fails to build with errors on visitors. This is because
-we need forward declarations for:
-
-- the visitable type;
-- all of its descendants;
-- the visitor.
-
-This is a hard requirement because, without these the code does not
-make sense. We need some way of "forcing" enablement for some features
-where there is such a hard dependency. This is probably something we
-need to look at when we implement "computable enablement". We then
-need some way of telling the system about these dependencies:
-e.g. visitor requires enablement x, y, z. This should done in archetypes
-by declaring facet depencies.
-
-A second problem is that, at present, there is no way to manually
-enable (force) forward declarations on visitors. We can enable them on
-all model elements but not on the generated type. Because of this we
-are generating forward declarations for all types, for no reason.
-
-The more general problem here is the declaration of dependency between
-formatters and the ability to take these into account when resolving
-enablement.
+- for the template itself: generate a skeleton.
+- for a meta-model element which uses a template on a given
+  logical-physical point in space: instantiate the template with the
+  required arguments.
 
 *** Stitch does not have a force write flag                           :story:
 
@@ -935,7 +850,7 @@ This also lines up with the story we had where we question our use of
 attributes. In reality we have created a notion of "property". We need
 a stereotype for this.
 
-*** Rename yarn types that clash with reserved keywords               :story:
+*** Rename types that clash with reserved keywords                    :story:
 
 When we added the new validation rules, yarn did not pass
 validation. This is because =module= and =concept= are reserved on
@@ -1032,7 +947,7 @@ this would make troubleshooting much easier. We need to add some
 information to the meta-model to keep track of the source of the
 types: file, line start, line end perhaps.
 
-*** Attributes versus properties                                      :story:
+*** Attributes versus properties                            :reviewing:story:
 
 At present we have assumed that all attributes in objects should be
 generated as properties. This is not quite the right thing to do; one
@@ -1611,6 +1526,24 @@ Time spent reading the literature on variability. We should do a
 
 New features for this release. These are more nice to haves rather
 than mandatory work.
+
+*** Add stereotype for IoC containers                                 :story:
+
+At present we are marking IoC containers with either handcrafted or
+header only. In reality, they should have their own stereotype and
+colours as, in the future, we want to code generate them. However, we
+can only do this once we get rid of the initialisers because they are
+also a form of IoC containers, but with different requirements.
+
+Proposed stereotype: =masd::ioc::container=.
+
+Actually, this is not quite right. We are not creating the IoC
+containers themselves, but the wiring code that sets up these
+containers. We need to figure out the correct term for
+these. Suggestions:
+
+- [[https://github.com/avao/Qart/blob/master/Src/Qart.CyberTester/Bootstrapper.cs][bootstrapper]], with a =Bootstrapper.CreateContainer= method;
+  e.g. =masd::ioc::bootstrapper=.
 
 *** Primitives are not comparable                                     :story:
 
@@ -2748,6 +2681,51 @@ useful for languages like C# and Java, to control serialisation, etc.
 ** Technical debt and refactoring
 
 Stories that deal with cleaning up the code base.
+
+*** Handling of forward declarations on generated types               :story:
+
+At present, if we disable forward declarations globally (in a profile,
+say), the code fails to build with errors on visitors. This is because
+we need forward declarations for:
+
+- the visitable type;
+- all of its descendants;
+- the visitor.
+
+This is a hard requirement because, without these the code does not
+make sense. We need some way of "forcing" enablement for some features
+where there is such a hard dependency. This is probably something we
+need to look at when we implement "computable enablement". We then
+need some way of telling the system about these dependencies:
+e.g. visitor requires enablement x, y, z. This should done in archetypes
+by declaring facet depencies.
+
+A second problem is that, at present, there is no way to manually
+enable (force) forward declarations on visitors. We can enable them on
+all model elements but not on the generated type. Because of this we
+are generating forward declarations for all types, for no reason.
+
+The more general problem here is the declaration of dependency between
+formatters and the ability to take these into account when resolving
+enablement.
+
+*** Add "is abstract" to assets                                       :story:
+
+With C# we have started deciding if a class is abstract or not on the
+basis of whether its a parent, etc. The right thing to do is to have a
+"is abstract" property which is populated on the guts of assets (using
+the current logic of parents are abstract).
+
+We then need to review the C++ templates and figure out where we were
+also inferring "abstractness", and use the new flag.
+
+Actually we already have an is abstract flag, we just need to check
+its been used correctly across all kernels.
+
+*** Implement CLI configuration validator                             :story:
+
+At present we are not performing any validation to the new
+configuration classes in the API.
 
 *** Create a theme for element colours based on an algorithm          :story:
 
@@ -5231,6 +5209,13 @@ check that an invalid type doesn't work.
 Stories related to infrastructure improvements that we may or may not
 achieve.
 
+*** Run ODB on nightlies                                              :story:
+
+At present we are code-generating all code on dogen nightlies but we
+are not running ODB. This means that if we have broken ODB pragma
+generation, we will not find out until we manually run it. We should
+run it as part of the "generate everything" approach in nightly.
+
 *** Cannot see source file in coveralls                               :story:
 
  At present the path of source files in coveralls is incorrect:
@@ -6767,6 +6752,25 @@ Links:
 Features for which there is no urgency but we'd like to see them
 implemented at some point. They may require some alterations to the
 core, but not fundamental rethinking.
+
+*** Consider adding support for binary logging                        :story:
+
+Dogen logs are very large when we log at high-level such as debug and
+trace. It also takes a bit longer to run. This means its not very
+practical to enable logging all the time, only when we are
+troubleshooting. However, for "dogen as a service" we probably will
+end up using logging a lot more often so it would be nice to have a
+more efficient way of logging. One possibility is to use binary logs.
+
+Links:
+
+- [[https://github.com/Morgan-Stanley/binlog][binlog]]: A high performance C++ log library, producing structured
+  binary logs http://binlog.org
+- [[https://github.com/odygrd/quill][quill]]: Asynchronous Low Latency Logging Library
+- [[https://github.com/KjellKod/g3log][g3log]]: G3log is an asynchronous, "crash safe", logger that is easy
+  to use with default logging sinks or you can add your own.
+- [[https://github.com/PlatformLab/NanoLog][NanoLog]]: Nanolog is an extremely performant nanosecond scale logging
+  system for C++ that exposes a simple printf-like API.
 
 *** Create a test model with SHA1 hash in generation marker           :story:
 
@@ -12019,7 +12023,6 @@ Code Generator and the Clang diagnostics and attributes.
 Links:
 
 - https://llvm.org/docs/TableGen/
-
 
 *** Dogen Modeling Studio                                             :story:
 
