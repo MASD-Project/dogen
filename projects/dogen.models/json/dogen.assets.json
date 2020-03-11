@@ -4040,6 +4040,30 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::variability_tagging",
+      "documentation": "Features related to variability tagging.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.archetype_location.kernel": "masd",
+        "masd.variability.template_kind": "instance"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.variability.tag",
+          "type": "masd::variability::key_value_pair",
+          "documentation": "Additional tags to be used on variability template expansion.\n\nThe value of the tag must be globally unique.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.variability.tag",
+            "masd.variability.is_optional": "true"
+          }
+        }
+      ]
     }
   ]
 }

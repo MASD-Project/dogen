@@ -679,7 +679,7 @@ C++ pointers, references and so on.#</dia:string>
         <dia:point val="-100.392,-69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-114.615,-81.05;-99.6425,-68.2"/>
+        <dia:rectangle val="-114.615,-81.05;-99.642,-68.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2372,7 +2372,7 @@ formatting.#</dia:string>
         <dia:point val="-193.782,-63.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-194.632,-63.85;-173.887,-45.95"/>
+        <dia:rectangle val="-194.632,-63.85;-173.888,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2572,7 +2572,7 @@ formatting.#</dia:string>
         <dia:point val="-196.49,-51.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-197.34,-51.65;-173.887,-45.95"/>
+        <dia:rectangle val="-197.34,-51.65;-173.888,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5091,7 +5091,7 @@ If not present, user did not make any statements with regards to finality.#</dia
         <dia:point val="-235.665,-58.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-236.515,-58.45;-209.887,-45.95"/>
+        <dia:rectangle val="-236.515,-58.45;-209.888,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5133,7 +5133,7 @@ If not present, user did not make any statements with regards to finality.#</dia
         <dia:point val="-219.28,-50.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-220.13,-50.85;-209.887,-45.95"/>
+        <dia:rectangle val="-220.13,-50.85;-209.888,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5271,7 +5271,7 @@ names in assets element
         <dia:point val="-128.123,-61"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-128.189,-63.3834;-123.642,-60.9335"/>
+        <dia:rectangle val="-128.189,-63.3834;-123.643,-60.9335"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11808,7 +11808,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         <dia:point val="-100.317,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-111.517,21.35;-99.5675,26.8"/>
+        <dia:rectangle val="-111.518,21.35;-99.567,26.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23971,7 +23971,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-201.5,-34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-202.25,-40.85;-192.273,-33.2"/>
+        <dia:rectangle val="-202.25,-40.85;-192.272,-33.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24928,7 +24928,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:point val="-182.472,-52.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-183.322,-52.45;-173.887,-45.95"/>
+        <dia:rectangle val="-183.322,-52.45;-173.888,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -25390,7 +25390,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:point val="-218.97,68"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-224.058,64.55;-218.22,68.8"/>
+        <dia:rectangle val="-224.057,64.55;-218.22,68.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -35834,13 +35834,13 @@ ORM in Dogen.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O250">
       <dia:attribute name="obj_pos">
-        <dia:point val="98,68"/>
+        <dia:point val="93,68"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="97.95,67.95;124.345,74.85"/>
+        <dia:rectangle val="92.95,67.95;119.345,74.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="98,68"/>
+        <dia:point val="93,68"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="26.294999999999998"/>
@@ -37251,7 +37251,7 @@ extend the mappings as required.#</dia:string>
         <dia:point val="-112.39,-25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-113.14,-29.05;-99.8125,-24.2"/>
+        <dia:rectangle val="-113.14,-29.05;-99.813,-24.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -38684,13 +38684,13 @@ At present the system only supports wale templates.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O280">
       <dia:attribute name="obj_pos">
-        <dia:point val="57,68"/>
+        <dia:point val="55,68"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="56.95,67.95;89.89,77.25"/>
+        <dia:rectangle val="54.95,67.95;87.89,77.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="57,68"/>
+        <dia:point val="55,68"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="32.839999999999996"/>
@@ -48399,13 +48399,13 @@ the default value field if available.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O371">
       <dia:attribute name="obj_pos">
-        <dia:point val="98,81"/>
+        <dia:point val="94,81"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="97.95,80.95;118.955,84.65"/>
+        <dia:rectangle val="93.95,80.95;114.955,84.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="98,81"/>
+        <dia:point val="94,81"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.905000000000001"/>
@@ -48845,7 +48845,7 @@ types, see the comments on the variability types.#</dia:string>
         <dia:point val="2.95,-48.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-3.93,-48.85;3.8,-45.4"/>
+        <dia:rectangle val="-3.93,-48.85;3.8,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -48887,7 +48887,7 @@ types, see the comments on the variability types.#</dia:string>
         <dia:point val="2.95,-48.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.1,-48.85;11.695,-45.4"/>
+        <dia:rectangle val="2.1,-48.85;11.695,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -48965,7 +48965,7 @@ types, see the comments on the variability types.#</dia:string>
         <dia:point val="42.5275,-43.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="11.595,-43.95;43.2775,-40.2"/>
+        <dia:rectangle val="11.595,-43.95;43.2775,-40.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -49037,7 +49037,7 @@ types, see the comments on the variability types.#</dia:string>
         <dia:point val="62.795,-43.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-3.93,-43.95;63.545,-37.2"/>
+        <dia:rectangle val="-3.93,-43.95;63.545,-37.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -49109,7 +49109,7 @@ types, see the comments on the variability types.#</dia:string>
         <dia:point val="26,-58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="22.285,-58.75;26.75,-52.4502"/>
+        <dia:rectangle val="22.285,-58.75;26.75,-53.2502"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -49726,7 +49726,7 @@ types, see the comments on the variability types.#</dia:string>
         <dia:point val="-189,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-203.56,28.55;-188.25,50.6"/>
+        <dia:rectangle val="-203.56,28.55;-188.25,49.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -49909,7 +49909,7 @@ types, see the comments on the variability types.#</dia:string>
         <dia:point val="-43,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-53.1425,20.0002;-42.25,27.6"/>
+        <dia:rectangle val="-53.1425,20.0002;-42.25,26.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -49981,7 +49981,7 @@ types, see the comments on the variability types.#</dia:string>
         <dia:point val="-43,18.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-49.235,17.35;-42.25,19.7"/>
+        <dia:rectangle val="-49.235,17.3;-42.25,18.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -50053,7 +50053,7 @@ types, see the comments on the variability types.#</dia:string>
         <dia:point val="21.035,76.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.075,75.85;21.785,82.5508"/>
+        <dia:rectangle val="19.075,75.85;21.785,81.7508"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -50125,7 +50125,7 @@ types, see the comments on the variability types.#</dia:string>
         <dia:point val="21.8475,88"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.075,83.95;22.5975,89.6"/>
+        <dia:rectangle val="19.075,83.95;22.5975,88.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -50374,7 +50374,7 @@ types, see the comments on the variability types.#</dia:string>
         <dia:point val="-172.715,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-173.465,28.55;-154.657,50.6"/>
+        <dia:rectangle val="-173.465,28.55;-154.657,49.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -50623,7 +50623,7 @@ types, see the comments on the variability types.#</dia:string>
         <dia:point val="-213.857,32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-223.907,28.55;-213.107,33.6"/>
+        <dia:rectangle val="-223.907,28.55;-213.107,32.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -50653,6 +50653,150 @@ types, see the comments on the variability types.#</dia:string>
         <dia:connection handle="1" to="O391" connection="6"/>
       </dia:connections>
       <dia:childnode parent="O45"/>
+    </dia:object>
+    <dia:object type="UML - Class" version="0" id="O393">
+      <dia:attribute name="obj_pos">
+        <dia:point val="126,68"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="125.95,67.95;148.11,71.65"/>
+      </dia:attribute>
+      <dia:attribute name="elem_corner">
+        <dia:point val="126,68"/>
+      </dia:attribute>
+      <dia:attribute name="elem_width">
+        <dia:real val="22.059999999999999"/>
+      </dia:attribute>
+      <dia:attribute name="elem_height">
+        <dia:real val="3.6000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="name">
+        <dia:string>#variability_tagging#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="stereotype">
+        <dia:string>#masd::variability::feature_bundle#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="comment">
+        <dia:string>#Features related to variability tagging.
+
+#DOGEN masd.variability.archetype_location.kernel=masd
+#DOGEN masd.variability.template_kind=instance#</dia:string>
+      </dia:attribute>
+      <dia:attribute name="abstract">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_attributes">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="suppress_operations">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="visible_attributes">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="visible_comments">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_operations">
+        <dia:boolean val="true"/>
+      </dia:attribute>
+      <dia:attribute name="wrap_after_char">
+        <dia:int val="40"/>
+      </dia:attribute>
+      <dia:attribute name="comment_line_length">
+        <dia:int val="17"/>
+      </dia:attribute>
+      <dia:attribute name="comment_tagging">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="line_width">
+        <dia:real val="0.10000000000000001"/>
+      </dia:attribute>
+      <dia:attribute name="line_color">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="fill_color">
+        <dia:color val="#b2e2e2"/>
+      </dia:attribute>
+      <dia:attribute name="text_color">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font">
+        <dia:font family="monospace" style="0" name="Courier"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font">
+        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font">
+        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font">
+        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font">
+        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font">
+        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
+      </dia:attribute>
+      <dia:attribute name="normal_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="polymorphic_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_font_height">
+        <dia:real val="0.80000000000000004"/>
+      </dia:attribute>
+      <dia:attribute name="classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="abstract_classname_font_height">
+        <dia:real val="1"/>
+      </dia:attribute>
+      <dia:attribute name="comment_font_height">
+        <dia:real val="0.69999999999999996"/>
+      </dia:attribute>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#masd.variability.tag#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#masd::variability::key_value_pair#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Additional tags to be used on variability template expansion.
+
+The value of the tag must be globally unique.
+
+#DOGEN masd.variability.binding_point=any
+#DOGEN masd.variability.qualified_name=masd.variability.tag
+#DOGEN masd.variability.is_optional=true#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
+      <dia:attribute name="operations"/>
+      <dia:attribute name="template">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="templates"/>
+      <dia:childnode parent="O238"/>
     </dia:object>
   </dia:layer>
 </dia:diagram>

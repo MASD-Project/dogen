@@ -29,6 +29,7 @@
 #include "dogen.assets/types/features/type_parameters.hpp"
 #include "dogen.assets/types/features/variability_bundle.hpp"
 #include "dogen.assets/types/features/decoration_modeline.hpp"
+#include "dogen.assets/types/features/variability_tagging.hpp"
 #include "dogen.assets/types/features/variability_templates.hpp"
 #include "dogen.assets/types/features/output_technical_space.hpp"
 
@@ -47,6 +48,7 @@ register_entities(variability::helpers::registrar& rg) {
     rg.register_features(dogen::assets::features::primitive::make_features());
     rg.register_features(dogen::assets::features::type_parameters::make_features());
     rg.register_features(dogen::assets::features::variability_bundle::make_features());
+    rg.register_features(dogen::assets::features::variability_tagging::make_features());
     rg.register_features(dogen::assets::features::variability_templates::make_features());
 }
 
