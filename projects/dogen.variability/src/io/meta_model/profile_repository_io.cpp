@@ -55,7 +55,7 @@ std::ostream& operator<<(std::ostream& s, const profile_repository& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::variability::meta_model::profile_repository\"" << ", "
       << "\"by_name\": " << v.by_name() << ", "
-      << "\"by_labels\": " << v.by_labels()
+      << "\"by_stereotype\": " << v.by_stereotype()
       << " }";
     return(s);
 }

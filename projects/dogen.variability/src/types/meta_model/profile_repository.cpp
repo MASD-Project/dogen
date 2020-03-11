@@ -24,19 +24,19 @@ namespace dogen::variability::meta_model {
 
 profile_repository::profile_repository(
     const std::unordered_map<std::string, dogen::variability::meta_model::profile>& by_name,
-    const std::unordered_map<std::string, dogen::variability::meta_model::profile>& by_labels)
+    const std::unordered_map<std::string, dogen::variability::meta_model::profile>& by_stereotype)
     : by_name_(by_name),
-      by_labels_(by_labels) { }
+      by_stereotype_(by_stereotype) { }
 
 void profile_repository::swap(profile_repository& other) noexcept {
     using std::swap;
     swap(by_name_, other.by_name_);
-    swap(by_labels_, other.by_labels_);
+    swap(by_stereotype_, other.by_stereotype_);
 }
 
 bool profile_repository::operator==(const profile_repository& rhs) const {
     return by_name_ == rhs.by_name_ &&
-        by_labels_ == rhs.by_labels_;
+        by_stereotype_ == rhs.by_stereotype_;
 }
 
 profile_repository& profile_repository::operator=(profile_repository other) {
@@ -61,20 +61,20 @@ void profile_repository::by_name(const std::unordered_map<std::string, dogen::va
     by_name_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::variability::meta_model::profile>& profile_repository::by_labels() const {
-    return by_labels_;
+const std::unordered_map<std::string, dogen::variability::meta_model::profile>& profile_repository::by_stereotype() const {
+    return by_stereotype_;
 }
 
-std::unordered_map<std::string, dogen::variability::meta_model::profile>& profile_repository::by_labels() {
-    return by_labels_;
+std::unordered_map<std::string, dogen::variability::meta_model::profile>& profile_repository::by_stereotype() {
+    return by_stereotype_;
 }
 
-void profile_repository::by_labels(const std::unordered_map<std::string, dogen::variability::meta_model::profile>& v) {
-    by_labels_ = v;
+void profile_repository::by_stereotype(const std::unordered_map<std::string, dogen::variability::meta_model::profile>& v) {
+    by_stereotype_ = v;
 }
 
-void profile_repository::by_labels(const std::unordered_map<std::string, dogen::variability::meta_model::profile>&& v) {
-    by_labels_ = std::move(v);
+void profile_repository::by_stereotype(const std::unordered_map<std::string, dogen::variability::meta_model::profile>&& v) {
+    by_stereotype_ = std::move(v);
 }
 
 }

@@ -262,7 +262,7 @@ meta_model::profile_repository profile_merging_transform::create_repository(
             continue;
 
         const auto second_pair(std::make_pair(s, prf));
-        const auto inserted(r.by_labels().insert(second_pair).second);
+        const auto inserted(r.by_stereotype().insert(second_pair).second);
         if (inserted)
             continue;
 

@@ -12566,16 +12566,16 @@ with Masd.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O100">
       <dia:attribute name="obj_pos">
-        <dia:point val="-30,15"/>
+        <dia:point val="-33,15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-30.05,14.95;-9.43,18.65"/>
+        <dia:rectangle val="-33.05,14.95;-10.89,18.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-30,15"/>
+        <dia:point val="-33,15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.52"/>
+        <dia:real val="22.059999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -12693,7 +12693,7 @@ with Masd.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#by_labels#</dia:string>
+            <dia:string>#by_stereotype#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_map&lt;std::string, profile&gt;#</dia:string>
@@ -12970,7 +12970,7 @@ with Masd.
         <dia:point val="-10.6686,1.32857"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-20.49,1.27857;-10.4686,15.8"/>
+        <dia:rectangle val="-22.72,1.27857;-10.4686,15.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12978,8 +12978,8 @@ with Masd.
       <dia:attribute name="orth_points">
         <dia:point val="-10.6686,1.32857"/>
         <dia:point val="-10.6686,12"/>
-        <dia:point val="-19.74,12"/>
-        <dia:point val="-19.74,15"/>
+        <dia:point val="-21.97,12"/>
+        <dia:point val="-21.97,15"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

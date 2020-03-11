@@ -140,12 +140,12 @@ void profile_binding_transform::handle_potential_bindings(
 
         /*
          * Check to see if the potential bind matches any of the
-         * profiles on our repository, by label - i.e. can be
+         * profiles on our repository, by stereotype - i.e. can be
          * "realised". If not, its not one of ours so we''re done.'
          */
         BOOST_LOG_SEV(lg, trace) << "Processing potential bind: " << pbn;
-        const auto i(prp.by_labels().find(pbn));
-        if (i == prp.by_labels().end()) {
+        const auto i(prp.by_stereotype().find(pbn));
+        if (i == prp.by_stereotype().end()) {
             BOOST_LOG_SEV(lg, trace) << "Binding not realised.";
             continue;
         }

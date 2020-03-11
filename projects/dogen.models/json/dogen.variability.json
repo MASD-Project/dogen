@@ -749,7 +749,7 @@
           "type": "std::unordered_map<std::string, profile>"
         },
         {
-          "name": "by_labels",
+          "name": "by_stereotype",
           "type": "std::unordered_map<std::string, profile>"
         }
       ]

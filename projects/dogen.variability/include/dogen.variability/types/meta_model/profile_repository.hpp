@@ -42,7 +42,7 @@ public:
 public:
     profile_repository(
         const std::unordered_map<std::string, dogen::variability::meta_model::profile>& by_name,
-        const std::unordered_map<std::string, dogen::variability::meta_model::profile>& by_labels);
+        const std::unordered_map<std::string, dogen::variability::meta_model::profile>& by_stereotype);
 
 public:
     const std::unordered_map<std::string, dogen::variability::meta_model::profile>& by_name() const;
@@ -50,10 +50,10 @@ public:
     void by_name(const std::unordered_map<std::string, dogen::variability::meta_model::profile>& v);
     void by_name(const std::unordered_map<std::string, dogen::variability::meta_model::profile>&& v);
 
-    const std::unordered_map<std::string, dogen::variability::meta_model::profile>& by_labels() const;
-    std::unordered_map<std::string, dogen::variability::meta_model::profile>& by_labels();
-    void by_labels(const std::unordered_map<std::string, dogen::variability::meta_model::profile>& v);
-    void by_labels(const std::unordered_map<std::string, dogen::variability::meta_model::profile>&& v);
+    const std::unordered_map<std::string, dogen::variability::meta_model::profile>& by_stereotype() const;
+    std::unordered_map<std::string, dogen::variability::meta_model::profile>& by_stereotype();
+    void by_stereotype(const std::unordered_map<std::string, dogen::variability::meta_model::profile>& v);
+    void by_stereotype(const std::unordered_map<std::string, dogen::variability::meta_model::profile>&& v);
 
 public:
     bool operator==(const profile_repository& rhs) const;
@@ -67,7 +67,7 @@ public:
 
 private:
     std::unordered_map<std::string, dogen::variability::meta_model::profile> by_name_;
-    std::unordered_map<std::string, dogen::variability::meta_model::profile> by_labels_;
+    std::unordered_map<std::string, dogen::variability::meta_model::profile> by_stereotype_;
 };
 
 }
