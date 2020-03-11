@@ -89,32 +89,6 @@ public:
     const meta_model::feature& get_by_name(
         const std::string& prefix, const std::string& simple_name) const;
 
-    /**
-     * @brief Returns the feature corresponding to the supplied name.
-     *
-     * @pre formatter name must exist.
-     */
-    const std::list<meta_model::feature>&
-    get_by_formatter_name(const std::string& n) const;
-
-    /**
-     * @brief Returns the feature corresponding to the supplied facet
-     * name.
-     *
-     * @pre facet name must exist.
-     */
-    const std::list<meta_model::feature>&
-    get_by_facet_name(const std::string& n) const;
-
-    /**
-     * @brief Returns the feature corresponding to the supplied
-     * backend name.
-     *
-     * @pre backend name must exist.
-     */
-    const std::list<meta_model::feature>&
-    get_by_backend_name(const std::string& n) const;
-
 private:
     const meta_model::feature_model& model_;
 };

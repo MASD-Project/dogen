@@ -30,12 +30,6 @@ static logger lg(logger_factory("variability.helpers.feature_selector"));
 
 const std::string dot(".");
 const std::string feature_not_found("Could not find expected feature: ");
-const std::string no_features_for_formatter(
-    "Could not find any features for formatter: ");
-const std::string no_features_for_facet(
-    "Could not find any features for facet: ");
-const std::string no_features_for_model(
-    "Could not find any features for model: ");
 
 }
 
@@ -78,39 +72,6 @@ feature_selector::get_by_name(const std::string& n) const {
 const meta_model::feature& feature_selector::get_by_name(
     const std::string& prefix, const std::string& simple_name) const {
     return get_by_name(qualify(prefix, simple_name));
-}
-
-const std::list<meta_model::feature>&
-feature_selector::get_by_formatter_name(const std::string& n) const {
-    const auto& c(model_.by_formatter_name());
-    const auto i(c.find(n));
-    if (i != c.end())
-        return i->second;
-
-    BOOST_LOG_SEV(lg, error) << no_features_for_formatter << n;
-    BOOST_THROW_EXCEPTION(selection_exception(no_features_for_formatter + n));
-}
-
-const std::list<meta_model::feature>&
-feature_selector::get_by_facet_name(const std::string& n) const {
-    const auto& c(model_.by_facet_name());
-    const auto i(c.find(n));
-    if (i != c.end())
-        return i->second;
-
-    BOOST_LOG_SEV(lg, error) << no_features_for_facet << n;
-    BOOST_THROW_EXCEPTION(selection_exception(no_features_for_facet + n));
-}
-
-const std::list<meta_model::feature>&
-feature_selector::get_by_backend_name(const std::string& n) const {
-    const auto& c(model_.by_backend_name());
-    const auto i(c.find(n));
-    if (i != c.end())
-        return i->second;
-
-    BOOST_LOG_SEV(lg, error) << no_features_for_model << n;
-    BOOST_THROW_EXCEPTION(selection_exception(no_features_for_model + n));
 }
 
 }
