@@ -169,4 +169,13 @@ adapt_profiles(const variability::meta_model::feature_model& fm,
     return r;
 }
 
+variability::transforms::profile_repository_inputs
+profile_adapter::adapt(const variability::meta_model::feature_model& fm,
+    const meta_model::model_set& ms) {
+    variability::transforms::profile_repository_inputs r;
+    r.profiles(adapt_profiles(fm, ms));
+    r.templates(adapt_profile_templates(ms));
+    return r;
+}
+
 }

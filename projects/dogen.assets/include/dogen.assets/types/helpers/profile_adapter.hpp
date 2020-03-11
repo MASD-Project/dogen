@@ -28,6 +28,7 @@
 #include "dogen.variability/types/meta_model/profile.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.variability/types/meta_model/profile_template.hpp"
+#include "dogen.variability/types/transforms/profile_repository_inputs.hpp"
 #include "dogen.assets/types/meta_model/model_set.hpp"
 #include "dogen.assets/types/meta_model/variability/profile.hpp"
 #include "dogen.assets/types/meta_model/variability/profile_template.hpp"
@@ -67,6 +68,14 @@ public:
      */
     static std::list<variability::meta_model::profile>
     adapt_profiles(const variability::meta_model::feature_model& fm,
+        const meta_model::model_set& ms);
+
+    /**
+     * @brief Adapts a model set into the inputs required to build a
+     * profile repository.
+     */
+    static variability::transforms::profile_repository_inputs
+    adapt(const variability::meta_model::feature_model& fm,
         const meta_model::model_set& ms);
 };
 

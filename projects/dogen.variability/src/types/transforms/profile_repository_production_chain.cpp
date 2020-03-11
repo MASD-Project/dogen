@@ -21,8 +21,8 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.variability/io/meta_model/feature_model_io.hpp"
 #include "dogen.variability/io/meta_model/profile_repository_io.hpp"
+#include "dogen.variability/io/transforms/profile_repository_inputs_io.hpp"
 #include "dogen.variability/types/transforms/profile_merging_transform.hpp"
 #include "dogen.variability/types/transforms/transformation_error.hpp"
 #include "dogen.variability/types/transforms/profile_template_instantiation_transform.hpp"
@@ -41,17 +41,17 @@ auto lg(logger_factory(transform_id));
 namespace dogen::variability::transforms {
 
 meta_model::profile_repository
-profile_repository_production_chain::apply(const context& ctx,
-    const std::list<variability::meta_model::profile>& ps,
-    const std::list<variability::meta_model::profile_template>& pts,
-    const meta_model::feature_model& fm) {
+profile_repository_production_chain::
+apply(const context& ctx, const meta_model::feature_model& fm,
+    const profile_repository_inputs& inputs) {
     tracing::scoped_chain_tracer stp(lg, "profile repository production chain",
-        transform_id, transform_id, *ctx.tracer(), fm);
+        transform_id, transform_id, *ctx.tracer(), inputs);
 
-    auto p(ps);
-    const auto i(p.end());
-    p.splice(i, profile_template_instantiation_transform::apply(ctx, fm, pts));
-    const auto r(profile_merging_transform::apply(ctx, fm, p));
+    auto ps(inputs.profiles());
+    const auto i(ps.end());
+    const auto& pts(inputs.templates());
+    ps.splice(i, profile_template_instantiation_transform::apply(ctx, fm, pts));
+    const auto r(profile_merging_transform::apply(ctx, fm, ps));
 
     stp.end_chain(r);
     return r;
