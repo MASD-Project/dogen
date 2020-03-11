@@ -102,38 +102,41 @@ void pre_assembly_chain::apply(const context& ctx, meta_model::model_set& ms) {
         transform_id, ms.target().name().qualified().dot(), *ctx.tracer(), ms);
 
     /*
-     * The second part of this chain handles variability
-     * processing. For this we delegate to the variability chain.
+     * First and foremost we must perform the variability processing
+     * in the model set. This will read all meta-model elements that
+     * contain variability data (e.g. profiles and profile templates),
+     * execute the required variability workflows and then bind them
+     * as configurations against the appropriate model elements. This
+     * ensures all the meta-data is ready for further processing.
      */
     variability_profiles_chain::apply(ctx, ms);
 
     /*
-     * The final step is to retrieve stereotypes which did not bind to
-     * a profile, and mark them as dynamic stereotypes. These are then
-     * further processed within the assets model chain.
+     * Now we need to figure out which stereotypes are left from
+     * profile processing. These will be considered dynamic
+     * stereotypes and will processed further down the pipeline.
      */
     dynamic_stereotypes_transform::apply(ctx, ms);
 
     /*
-     * First we handle the processing of mapping elements. There is no
-     * particular reason to do this first as it has no dependencies in
-     * this chain.
+     * Next we need to process all mapping elements, as these will be
+     * used by the remaining transforms. Its important to note that
+     * the mapping elements are not required by the first two phases
+     * of the variability transforms, only by the third phase (which
+     * is why the previous transforms work).
      */
     mapping_elements_transform::apply(ctx, ms);
 
     /*
-     * Apply all of the pre-processing transforms to the target.
+     * Finally, we enter the pre-assembly proper: we apply the
+     * remaining transforms to all models, starting with the target
+     * and then all referenced models.
      */
     apply(ctx, ms.fixed_mappings(), ms.target());
-
-    /*
-     * Now we do the same thing but for the reference models.
-     */
     for (auto& ref : ms.references())
         apply(ctx, ms.fixed_mappings(), ref);
 
     stp.end_chain(ms);
 }
-
 
 }

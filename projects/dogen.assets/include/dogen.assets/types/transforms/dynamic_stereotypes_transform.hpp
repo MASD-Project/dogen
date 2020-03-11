@@ -32,6 +32,18 @@ namespace dogen::assets::transforms {
 
 /**
  * @brief Populates the dynamic stereotypes of the assets model.
+ *
+ * Users add a number of stereotypes to their models. Some refer to
+ * meta-model elements (e.g. static stereotypes), and some refer to
+ * elements which are part of the model. These can be either profiles
+ * (part of the variability processing) or, mostly, object templates
+ * (at least at present; we may extend these in the future). The
+ * purpose of this transform is to look at the existing stereotypes
+ * and remove all of those which have already been handled
+ * (e.g. profiles), leaving us with the dynamic stereotypes that
+ * require further processing.
+ *
+ * @pre variability profiles chain must have been executed.
  */
 class dynamic_stereotypes_transform final {
 public:

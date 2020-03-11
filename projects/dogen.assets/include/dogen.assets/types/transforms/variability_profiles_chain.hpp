@@ -47,7 +47,6 @@ namespace dogen::assets::transforms {
  * profile information (profiles and profile templates), convert them
  * into the corresponding variability counterparts and then execute
  * all of the required variability transforms.
- *
  */
 class variability_profiles_chain final {
 private:
