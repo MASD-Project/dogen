@@ -26,10 +26,6 @@
 #endif
 
 #include "dogen.variability/types/transforms/context_fwd.hpp"
-#include "dogen.assets/types/features/variability_entry.hpp"
-#include "dogen.assets/types/features/variability_profile.hpp"
-#include "dogen.assets/types/meta_model/variability/abstract_profile.hpp"
-#include "dogen.assets/types/meta_model/variability/abstract_profile_entry.hpp"
 #include "dogen.assets/types/meta_model/model_set.hpp"
 #include "dogen.assets/types/transforms/context_fwd.hpp"
 
@@ -54,39 +50,6 @@ namespace dogen::assets::transforms {
  *
  */
 class variability_profiles_chain final {
-private:
-    /**
-     * @brief Reads configuration related to profiles.
-     */
-    static void update(const features::variability_profile::feature_group& fg,
-        meta_model::variability::abstract_profile& ap);
-
-    /**
-     * @brief Reads configuration related to profile entries.
-     */
-    static void update(const features::variability_entry::feature_group& fg,
-        meta_model::variability::abstract_profile_entry& ape);
-
-private:
-    /**
-     * @brief Processes all profile templates in model.
-     */
-    static void process_profile_templates(
-        const variability::meta_model::feature_model& fm, meta_model::model& m);
-
-    /**
-     * @brief Processes all profiles in model.
-     */
-    static void process_profiles(
-        const variability::meta_model::feature_model& fm, meta_model::model& m);
-
-    /**
-     * @brief Processes all profile-like entities in the model set.
-     */
-    static void process_all_profiles(
-        const variability::meta_model::feature_model& fm,
-        meta_model::model_set& ms);
-
 private:
     /**
      * @brief Converts the assets transform context into a variability
