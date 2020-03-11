@@ -17,6 +17,46 @@ such as profiles, licences etc.
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Consider creating a meta-element for logical elements             :story:
+
+We probably either have a story for this or these ideas are scattered
+over a few stories. At present we have a number of properties
+associated with assets (i.e. logical) model elements which we set
+manually (each of these probably has a separate story):
+
+- meta-name
+- stereotype
+- whether a type is intrinsically generatable or not
+- RGB colour
+
+There are probably more. These are all functions of the meta-type we
+are modeling. Just like we need "formatters" as a meta-type, we also
+need a way to express these within the model itself. The ideal
+solution would be to have a meta-type for these elements such that
+when we code-generate, we can add the additional elements that are
+specific to the logical model meta-types. However, the snag with that
+approach is that these elements have all attributes of an =object=
+plus these additional fields. We would have to create templates that
+intersperse object functionality with this meta-data, resulting on a
+lot of code duplication.
+
+A better approach is to copy what we did for ORM. We can have
+additional stereotypes associated with a meta-type, and those would
+result in the population of meta-data information. If those are
+present then we emit code for it (seems a bit much to create a facet
+for it as we did with ORM).
+
+Notes:
+
+- we probably don't need the meta-name. We just use it to bind
+  formatters to meta-types. We can use the "intrinsic stereotype" for
+  this.
+- we could use the same ORM-like approach for formatters and just
+  extend object.
+- we probably need a namespace for masd types. At present we have
+  =templating= but these are actually masd/dogen specific templates,
+  so they should also be in the same namespace.
+
 *** Consider creating a =modeling= folder                             :story:
 
 At present we were thinking about having several folders related to
@@ -36,11 +76,11 @@ meta-model covers these cases.
 
 Links:
 
-- http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p1204r0.html
-- https://www.reddit.com/r/cpp/comments/8qzepa/poll_c_project_layout/
-- https://www.reddit.com/r/cpp/comments/996q8o/prepare_thy_pitchforks_a_de_facto_standard/
-- https://github.com/vector-of-bool/pitchfork
-- https://mariuszbartosik.com/directory-structure-for-a-c-project/
+- [[http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p1204r0.html][Canonical Project Structure]]
+- [[https://www.reddit.com/r/cpp/comments/8qzepa/poll_c_project_layout/][Poll: C++ project layout]]
+- [[https://www.reddit.com/r/cpp/comments/996q8o/prepare_thy_pitchforks_a_de_facto_standard/][Prepare thy Pitchforks: A (de facto) Standard Project Layout]]
+- [[https://github.com/vector-of-bool/pitchfork][Pitchfork is a Set of C++ Project Conventions]]
+- [[https://mariuszbartosik.com/directory-structure-for-a-c-project/][Directory Structure for a C++ Project]]
 
 *** Model types and element binding                                   :story:
 
@@ -58,7 +98,11 @@ look at the thesis on generative development to look for terminology.
 
 We should also have model types for terraform, etc.
 
-*** Add =ignore= meta-model element                                   :story:
+One way to implement this is to add a feature at the element (once we
+have a way of expressing dogen meta-elements) that lists the supported
+model types for a given element.
+
+*** Add =ignore= meta-model element for VCS ignore files              :story:
 
 It would be nice if we had a meta-model element to represent ignore
 files for version control. For extra bonus points we should support
@@ -75,7 +119,7 @@ Links:
   imports the git ignore files they provide. The downside is having to
   create meta-model elements for each file.
 
-*** Create meta-entity for root module                                :story:
+*** Consider creating meta-entity for root module                     :story:
 
 At present we are supplying model properties via a "special" comment
 in a model. Items such as model_modules etc are read from this
@@ -138,7 +182,7 @@ facets, but at the implementation level they are implemented
 differently. This also means we do not violate the rule of making
 implicit meta-model elements explicit.
 
-*** Intrinsic non-generatable types                                   :story:
+*** Intrinsic non-generatable types                         :reviewing:story:
 
 In the decoration transform we have this hack:
 
@@ -175,6 +219,9 @@ Notes:
   scenarios: types that are intrinsically non-generatable and types
   that are not yet generatable. It may be that there is no need to
   distinguish between these two.
+- when we have meta-model elements for logical meta-elements we just
+  need to add this as a property (e.g. generatable). If a user tries
+  to add a formatter to a non-generatable type we error.
 
 *** Consider creating a "model" meta-model element                    :story:
 
@@ -2717,6 +2764,7 @@ Links:
 
 - [[https://stackoverflow.com/questions/214359/converting-hex-color-to-rgb-and-vice-versa][Converting hex color to RGB and vice-versa]]
 - [[https://stackoverflow.com/questions/43001349/convert-numpy-array-of-rgb-values-to-hex-using-format-operator][Convert numpy array of RGB values to hex using format operator %]]
+- [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Colors.html][emacs: Colors for Faces]]: list RGB colours in emacs.
 
 *** Improve error messages for mistakes in meta-data enums            :story:
 
@@ -3326,6 +3374,17 @@ A simpler version of this is to just go through the dia palette models
 and associate stereotypes with colours. Then use it to build the
 script. The user supplies one or more models as input. It would be a
 new "command" in dogen.
+
+Actually we should just create a meta-element for the colouring
+script. It is populated by looking at the static properties of each
+meta-element (once they are modeled correctly). If [[*Add support for "colour themes" to dogen][there are themes]],
+we should make it a function that takes in an argument with the theme
+name. Note also that we should take into account user-defined
+colouring schemes. This is mainly associated with profiles. For this
+we just need to have a colour property in the profile and use it in
+exactly the same fashion as we do for meta-elements. For good measure,
+once we start [[*Colouring script should be included as part of package][distributing the colouring script with dogen]], we can
+simply call the main script from the user script.
 
 *** Improve model mapping support                                     :story:
 
