@@ -1714,7 +1714,7 @@
     {
       "name": "meta_model::meta_element",
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",

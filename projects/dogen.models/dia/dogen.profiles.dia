@@ -65,16 +65,16 @@
   <dia:layer name="Background" visible="true" active="true">
     <dia:object type="UML - Note" version="0" id="O0">
       <dia:attribute name="obj_pos">
-        <dia:point val="-13,-53"/>
+        <dia:point val="-14,-53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-13.05,-53.05;11.435,-39.25"/>
+        <dia:rectangle val="-14.05,-53.05;10.435,-39.25"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-13,-53"/>
+        <dia:point val="-14,-53"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="24.385000000000002"/>
@@ -118,7 +118,7 @@ space; keep it technical space agnostic.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-12.65,-51.755"/>
+            <dia:point val="-13.65,-51.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -169,16 +169,16 @@ space; keep it technical space agnostic.
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O2">
       <dia:attribute name="obj_pos">
-        <dia:point val="13,-10"/>
+        <dia:point val="13,-11"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="12.95,-11.05;144.05,49.05"/>
+        <dia:rectangle val="12.95,-12.05;144.05,48.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="13,-10"/>
+        <dia:point val="13,-11"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="131"/>
@@ -282,7 +282,7 @@ other layers can then configure features.
         <dia:string>#base#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Top-level configuration for Dogen.
@@ -326,7 +326,7 @@ other layers can then configure features.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -565,7 +565,7 @@ other layers can then configure features.
         <dia:string>#basic_facet_selection#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Enables only a select set of facets in the C++ backend.#</dia:string>
@@ -607,7 +607,7 @@ other layers can then configure features.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -901,16 +901,16 @@ other layers can then configure features.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O7">
       <dia:attribute name="obj_pos">
-        <dia:point val="48,-22"/>
+        <dia:point val="50,-22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.95,-22.05;63.565,-18.95"/>
+        <dia:rectangle val="49.95,-22.05;62.1,-18.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="48,-22"/>
+        <dia:point val="50,-22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.515000000000001"/>
+        <dia:real val="12.050000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -919,7 +919,7 @@ other layers can then configure features.
         <dia:string>#default_profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Variability profile for a typical dogen model.
@@ -963,7 +963,7 @@ other layers can then configure features.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -1017,7 +1017,7 @@ other layers can then configure features.
         <dia:point val="66.875,-26.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="55.7075,-26.85;67.725,-21.95"/>
+        <dia:rectangle val="55.975,-26.85;67.725,-21.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1025,8 +1025,8 @@ other layers can then configure features.
       <dia:attribute name="orth_points">
         <dia:point val="66.875,-26.8"/>
         <dia:point val="66.875,-24"/>
-        <dia:point val="55.7575,-24"/>
-        <dia:point val="55.7575,-22"/>
+        <dia:point val="56.025,-24"/>
+        <dia:point val="56.025,-22"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1237,13 +1237,13 @@ Disables all facets in the C++ backend.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O11">
       <dia:attribute name="obj_pos">
-        <dia:point val="15,33"/>
+        <dia:point val="20,32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.95,32.95;40.96,37.45"/>
+        <dia:rectangle val="19.95,31.95;45.96,36.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="15,33"/>
+        <dia:point val="20,32"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>
@@ -1255,7 +1255,7 @@ Disables all facets in the C++ backend.#</dia:string>
         <dia:string>#typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Model element is defined as a type.
@@ -1300,7 +1300,7 @@ Disables all facets in the C++ backend.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -1405,16 +1405,16 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O12">
       <dia:attribute name="obj_pos">
-        <dia:point val="43,33"/>
+        <dia:point val="48,32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.95,32.95;58.565,36.65"/>
+        <dia:rectangle val="47.95,31.95;63.18,35.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="43,33"/>
+        <dia:point val="48,32"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.515000000000001"/>
+        <dia:real val="15.130000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -1423,7 +1423,7 @@ so we disable all facets.
         <dia:string>#pretty_printable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#The element has the ability to dump itself to a stream.
@@ -1468,7 +1468,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -1545,13 +1545,13 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="61,33"/>
+        <dia:point val="66,32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="60.95,32.95;76.95,36.65"/>
+        <dia:rectangle val="65.95,31.95;81.95,35.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="61,33"/>
+        <dia:point val="66,32"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.9"/>
@@ -1563,7 +1563,7 @@ so we disable all facets.
         <dia:string>#hashable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#The element has the ability to generate hashes.
@@ -1608,7 +1608,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -1685,13 +1685,13 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O14">
       <dia:attribute name="obj_pos">
-        <dia:point val="80,33"/>
+        <dia:point val="85,32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="79.95,32.95;99.415,36.65"/>
+        <dia:rectangle val="84.95,31.95;104.415,35.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="80,33"/>
+        <dia:point val="85,32"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="19.365000000000002"/>
@@ -1703,7 +1703,7 @@ so we disable all facets.
         <dia:string>#serializable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=element
@@ -1746,7 +1746,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -1823,13 +1823,13 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O15">
       <dia:attribute name="obj_pos">
-        <dia:point val="69,1"/>
+        <dia:point val="69,0"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="68.95,0.95;96.115,6.25"/>
+        <dia:rectangle val="68.95,-0.05;96.115,5.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="69,1"/>
+        <dia:point val="69,0"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.064999999999998"/>
@@ -1841,7 +1841,7 @@ so we disable all facets.
         <dia:string>#handcrafted_typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Configuration for model elements that are generated manually by the user.
@@ -1886,7 +1886,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2013,13 +2013,13 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O16">
       <dia:attribute name="obj_pos">
-        <dia:point val="74,-7"/>
+        <dia:point val="74,-8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="73.95,-7.05;99.96,-3.35"/>
+        <dia:rectangle val="73.95,-8.05;99.96,-4.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="74,-7"/>
+        <dia:point val="74,-8"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>
@@ -2031,7 +2031,7 @@ so we disable all facets.
         <dia:string>#handcrafted#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Base profile for model elements that are manually generated.
@@ -2075,7 +2075,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2152,13 +2152,13 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O17">
       <dia:attribute name="obj_pos">
-        <dia:point val="50,1"/>
+        <dia:point val="50,0"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,0.95;66.335,5.45"/>
+        <dia:rectangle val="49.95,-0.05;66.335,4.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="50,1"/>
+        <dia:point val="50,0"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.285"/>
@@ -2170,7 +2170,7 @@ so we disable all facets.
         <dia:string>#handcrafted_pretty_printable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=element
@@ -2213,7 +2213,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2315,13 +2315,13 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O18">
       <dia:attribute name="obj_pos">
-        <dia:point val="16,10"/>
+        <dia:point val="16,9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="15.95,9.95;40.805,13.65"/>
+        <dia:rectangle val="15.95,8.95;40.805,12.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="16,10"/>
+        <dia:point val="16,9"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="24.755000000000003"/>
@@ -2333,7 +2333,7 @@ so we disable all facets.
         <dia:string>#header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#This element has only a types header file.
@@ -2378,7 +2378,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2455,16 +2455,16 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O19">
       <dia:attribute name="obj_pos">
-        <dia:point val="122,1"/>
+        <dia:point val="122,0"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.95,0.95;137.565,4.65"/>
+        <dia:rectangle val="121.95,-0.05;136.795,3.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="122,1"/>
+        <dia:point val="122,0"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.515000000000001"/>
+        <dia:real val="14.744999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -2473,7 +2473,7 @@ so we disable all facets.
         <dia:string>#inheritable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=global
@@ -2516,7 +2516,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2593,19 +2593,19 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O20">
       <dia:attribute name="obj_pos">
-        <dia:point val="86.955,-3.34968"/>
+        <dia:point val="86.955,-4.34968"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="82.4825,-3.39968;87.805,1.05"/>
+        <dia:rectangle val="82.4825,-4.39968;87.805,0.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="86.955,-3.34968"/>
-        <dia:point val="86.955,-1"/>
-        <dia:point val="82.5325,-1"/>
-        <dia:point val="82.5325,1"/>
+        <dia:point val="86.955,-4.34968"/>
+        <dia:point val="86.955,-2"/>
+        <dia:point val="82.5325,-2"/>
+        <dia:point val="82.5325,0"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -2635,19 +2635,19 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O21">
       <dia:attribute name="obj_pos">
-        <dia:point val="86.955,-3.4"/>
+        <dia:point val="86.955,-4.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.0925,-3.45;87.805,1.05"/>
+        <dia:rectangle val="58.0925,-4.45;87.805,0.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="86.955,-3.4"/>
-        <dia:point val="86.955,-1"/>
-        <dia:point val="58.1425,-1"/>
-        <dia:point val="58.1425,1"/>
+        <dia:point val="86.955,-4.4"/>
+        <dia:point val="86.955,-2"/>
+        <dia:point val="58.1425,-2"/>
+        <dia:point val="58.1425,0"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -2677,19 +2677,19 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O22">
       <dia:attribute name="obj_pos">
-        <dia:point val="82.5325,6.2"/>
+        <dia:point val="82.5325,5.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.3275,6.15;83.3825,10.05"/>
+        <dia:rectangle val="28.3275,5.15;83.3825,9.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="82.5325,6.2"/>
-        <dia:point val="82.5325,8"/>
-        <dia:point val="28.3775,8"/>
-        <dia:point val="28.3775,10"/>
+        <dia:point val="82.5325,5.2"/>
+        <dia:point val="82.5325,7"/>
+        <dia:point val="28.3775,7"/>
+        <dia:point val="28.3775,9"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -2719,13 +2719,13 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O23">
       <dia:attribute name="obj_pos">
-        <dia:point val="29,20"/>
+        <dia:point val="29,19"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.95,19.95;56.115,25.25"/>
+        <dia:rectangle val="28.95,18.95;56.115,24.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="29,20"/>
+        <dia:point val="29,19"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.064999999999998"/>
@@ -2737,7 +2737,7 @@ so we disable all facets.
         <dia:string>#implementation_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#This element has only a types implementation file.
@@ -2782,7 +2782,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2909,13 +2909,13 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O24">
       <dia:attribute name="obj_pos">
-        <dia:point val="44,10"/>
+        <dia:point val="44,9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.95,9.95;80.355,17.65"/>
+        <dia:rectangle val="43.95,8.95;80.355,16.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="44,10"/>
+        <dia:point val="44,9"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="36.305"/>
@@ -2927,7 +2927,7 @@ so we disable all facets.
         <dia:string>#cpp_artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=global
@@ -2970,7 +2970,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -3171,13 +3171,13 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O25">
       <dia:attribute name="obj_pos">
-        <dia:point val="83,10"/>
+        <dia:point val="83,9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="82.95,9.95;120.51,17.65"/>
+        <dia:rectangle val="82.95,8.95;120.51,16.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="83,10"/>
+        <dia:point val="83,9"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="37.460000000000001"/>
@@ -3189,7 +3189,7 @@ so we disable all facets.
         <dia:string>#csharp_artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=global
@@ -3232,7 +3232,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -3433,13 +3433,13 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O26">
       <dia:attribute name="obj_pos">
-        <dia:point val="64,20"/>
+        <dia:point val="64,19"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="63.95,19.95;99.585,27.65"/>
+        <dia:rectangle val="63.95,18.95;99.585,26.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="64,20"/>
+        <dia:point val="64,19"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="35.535000000000004"/>
@@ -3451,7 +3451,7 @@ so we disable all facets.
         <dia:string>#cpp_helper_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=global
@@ -3494,7 +3494,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -3695,19 +3695,19 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O27">
       <dia:attribute name="obj_pos">
-        <dia:point val="82.5325,6.2"/>
+        <dia:point val="82.5325,5.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.4825,6.15;83.3825,20.05"/>
+        <dia:rectangle val="42.4825,5.15;83.3825,19.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="82.5325,6.2"/>
-        <dia:point val="82.5325,8"/>
-        <dia:point val="42.5325,8"/>
-        <dia:point val="42.5325,20"/>
+        <dia:point val="82.5325,5.2"/>
+        <dia:point val="82.5325,7"/>
+        <dia:point val="42.5325,7"/>
+        <dia:point val="42.5325,19"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -3737,19 +3737,19 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O28">
       <dia:attribute name="obj_pos">
-        <dia:point val="82.5325,6.2"/>
+        <dia:point val="82.5325,5.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="62.1025,6.15;83.3825,10.05"/>
+        <dia:rectangle val="62.1025,5.15;83.3825,9.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="82.5325,6.2"/>
-        <dia:point val="82.5325,8"/>
-        <dia:point val="62.1525,8"/>
-        <dia:point val="62.1525,10"/>
+        <dia:point val="82.5325,5.2"/>
+        <dia:point val="82.5325,7"/>
+        <dia:point val="62.1525,7"/>
+        <dia:point val="62.1525,9"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -3779,13 +3779,13 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O29">
       <dia:attribute name="obj_pos">
-        <dia:point val="104,20"/>
+        <dia:point val="104,19"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="103.95,19.95;140.74,27.65"/>
+        <dia:rectangle val="103.95,18.95;140.74,26.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="104,20"/>
+        <dia:point val="104,19"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="36.689999999999998"/>
@@ -3797,7 +3797,7 @@ so we disable all facets.
         <dia:string>#csharp_helper_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=global
@@ -3840,7 +3840,7 @@ so we disable all facets.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -4041,19 +4041,19 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O30">
       <dia:attribute name="obj_pos">
-        <dia:point val="82.5325,6.2"/>
+        <dia:point val="82.5325,5.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="81.6825,6.15;83.3825,20.05"/>
+        <dia:rectangle val="81.6825,5.15;83.3825,19.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="82.5325,6.2"/>
-        <dia:point val="82.5325,8"/>
-        <dia:point val="81.7675,8"/>
-        <dia:point val="81.7675,20"/>
+        <dia:point val="82.5325,5.2"/>
+        <dia:point val="82.5325,7"/>
+        <dia:point val="81.7675,7"/>
+        <dia:point val="81.7675,19"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4083,19 +4083,19 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O31">
       <dia:attribute name="obj_pos">
-        <dia:point val="82.5325,6.2"/>
+        <dia:point val="82.5325,5.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="81.6825,6.15;101.78,10.05"/>
+        <dia:rectangle val="81.6825,5.15;101.78,9.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="82.5325,6.2"/>
-        <dia:point val="82.5325,8"/>
-        <dia:point val="101.73,8"/>
-        <dia:point val="101.73,10"/>
+        <dia:point val="82.5325,5.2"/>
+        <dia:point val="82.5325,7"/>
+        <dia:point val="101.73,7"/>
+        <dia:point val="101.73,9"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4125,19 +4125,19 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O32">
       <dia:attribute name="obj_pos">
-        <dia:point val="82.5325,6.2"/>
+        <dia:point val="82.5325,5.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="81.6825,6.15;122.395,19.9998"/>
+        <dia:rectangle val="81.6825,5.15;122.395,18.9998"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="82.5325,6.2"/>
-        <dia:point val="82.5325,8"/>
-        <dia:point val="122.345,8"/>
-        <dia:point val="122.345,19.9498"/>
+        <dia:point val="82.5325,5.2"/>
+        <dia:point val="82.5325,7"/>
+        <dia:point val="122.345,7"/>
+        <dia:point val="122.345,18.9498"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4167,16 +4167,16 @@ so we disable all facets.
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O33">
       <dia:attribute name="obj_pos">
-        <dia:point val="16,-7"/>
+        <dia:point val="16,-8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="15.95,-7.05;36.97,-1.25"/>
+        <dia:rectangle val="15.95,-8.05;36.97,-2.25"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="16,-7"/>
+        <dia:point val="16,-8"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.920000000000002"/>
@@ -4210,7 +4210,7 @@ for the element.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="16.35,-5.755"/>
+            <dia:point val="16.35,-6.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -4224,13 +4224,13 @@ for the element.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O34">
       <dia:attribute name="obj_pos">
-        <dia:point val="99,1"/>
+        <dia:point val="99,0"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="98.95,0.95;119.57,5.45"/>
+        <dia:rectangle val="98.95,-0.05;119.57,4.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="99,1"/>
+        <dia:point val="99,0"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.52"/>
@@ -4242,7 +4242,7 @@ for the element.
         <dia:string>#handcrafted_serializable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=element
@@ -4285,7 +4285,7 @@ for the element.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -4387,19 +4387,19 @@ for the element.
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O35">
       <dia:attribute name="obj_pos">
-        <dia:point val="86.955,-3.34968"/>
+        <dia:point val="86.955,-4.34968"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="86.105,-3.39968;109.31,0.99978"/>
+        <dia:rectangle val="86.105,-4.39968;109.31,-0.000219727"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="86.955,-3.34968"/>
-        <dia:point val="86.955,-1"/>
-        <dia:point val="109.26,-1"/>
-        <dia:point val="109.26,0.94978"/>
+        <dia:point val="86.955,-4.34968"/>
+        <dia:point val="86.955,-2"/>
+        <dia:point val="109.26,-2"/>
+        <dia:point val="109.26,-0.0502197"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4429,13 +4429,13 @@ for the element.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O36">
       <dia:attribute name="obj_pos">
-        <dia:point val="102,33"/>
+        <dia:point val="107,32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="101.95,32.95;121.03,36.65"/>
+        <dia:rectangle val="106.95,31.95;126.03,35.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="102,33"/>
+        <dia:point val="107,32"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.98"/>
@@ -4447,7 +4447,7 @@ for the element.
         <dia:string>#convertible#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=element
@@ -4490,7 +4490,7 @@ for the element.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -4567,13 +4567,13 @@ for the element.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O37">
       <dia:attribute name="obj_pos">
-        <dia:point val="70,-22"/>
+        <dia:point val="68,-22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="69.95,-22.05;86.335,-17.55"/>
+        <dia:rectangle val="67.95,-22.05;84.335,-17.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="70,-22"/>
+        <dia:point val="68,-22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.285"/>
@@ -4585,7 +4585,7 @@ for the element.
         <dia:string>#relational_profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4627,7 +4627,7 @@ for the element.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -4732,7 +4732,7 @@ for the element.
         <dia:point val="66.875,-26.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="66.025,-26.85;78.1925,-22.0002"/>
+        <dia:rectangle val="66.025,-26.85;76.1925,-22.0002"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4740,8 +4740,8 @@ for the element.
       <dia:attribute name="orth_points">
         <dia:point val="66.875,-26.8"/>
         <dia:point val="66.875,-24"/>
-        <dia:point val="78.1425,-24"/>
-        <dia:point val="78.1425,-22.0502"/>
+        <dia:point val="76.1425,-24"/>
+        <dia:point val="76.1425,-22.0502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4771,13 +4771,13 @@ for the element.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O39">
       <dia:attribute name="obj_pos">
-        <dia:point val="83,-36"/>
+        <dia:point val="80,-36"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="82.95,-36.05;109.73,-30.75"/>
+        <dia:rectangle val="79.95,-36.05;106.73,-30.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="83,-36"/>
+        <dia:point val="80,-36"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="26.68"/>
@@ -4789,7 +4789,7 @@ for the element.
         <dia:string>#test_all_facets#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4831,7 +4831,7 @@ for the element.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -4957,13 +4957,13 @@ for the element.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O40">
       <dia:attribute name="obj_pos">
-        <dia:point val="-9,-37"/>
+        <dia:point val="-12,-37"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-9.05,-37.05;6.565,-30.95"/>
+        <dia:rectangle val="-12.05,-37.05;3.565,-30.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-9,-37"/>
+        <dia:point val="-12,-37"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -5163,7 +5163,7 @@ for the element.
         <dia:point val="72.8,-41.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="71.95,-41.65;96.39,-35.95"/>
+        <dia:rectangle val="71.95,-41.65;93.39,-35.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5171,8 +5171,8 @@ for the element.
       <dia:attribute name="orth_points">
         <dia:point val="72.8,-41.6"/>
         <dia:point val="72.8,-38"/>
-        <dia:point val="96.34,-38"/>
-        <dia:point val="96.34,-36"/>
+        <dia:point val="93.34,-38"/>
+        <dia:point val="93.34,-36"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -5202,13 +5202,13 @@ for the element.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O42">
       <dia:attribute name="obj_pos">
-        <dia:point val="34,40"/>
+        <dia:point val="39,39"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="33.95,39.95;50.72,43.65"/>
+        <dia:rectangle val="38.95,38.95;55.72,42.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="34,40"/>
+        <dia:point val="39,39"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.669999999999998"/>
@@ -5220,7 +5220,7 @@ for the element.
         <dia:string>#untestable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Model element will not be tested via generated tests.
@@ -5265,7 +5265,7 @@ for the element.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -5342,13 +5342,13 @@ for the element.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O43">
       <dia:attribute name="obj_pos">
-        <dia:point val="15,40"/>
+        <dia:point val="20,39"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.95,39.95;31.72,43.65"/>
+        <dia:rectangle val="19.95,38.95;36.72,42.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="15,40"/>
+        <dia:point val="20,39"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.669999999999998"/>
@@ -5360,7 +5360,7 @@ for the element.
         <dia:string>#untypable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#The element does not have a types facet.
@@ -5405,7 +5405,7 @@ for the element.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -5482,13 +5482,13 @@ for the element.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O44">
       <dia:attribute name="obj_pos">
-        <dia:point val="30,1"/>
+        <dia:point val="30,0"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.95,0.95;47.49,5.45"/>
+        <dia:rectangle val="29.95,-0.05;47.49,4.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="30,1"/>
+        <dia:point val="30,0"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.440000000000001"/>
@@ -5500,7 +5500,7 @@ for the element.
         <dia:string>#handcrafted_cmake#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=element
@@ -5543,7 +5543,7 @@ for the element.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#b8f1f1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>

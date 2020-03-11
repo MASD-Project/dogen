@@ -26077,7 +26077,7 @@ properties related to decorations.
         <dia:string>#meta_element#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::variability::profile_template#</dia:string>
+        <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=element

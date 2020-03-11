@@ -22,7 +22,7 @@
       "name": "base::base",
       "documentation": "Top-level configuration for Dogen.\n",
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global"
@@ -101,7 +101,7 @@
       ],
       "documentation": "Enables only a select set of facets in the C++ backend.\n",
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -194,7 +194,7 @@
       ],
       "documentation": "Variability profile for a typical dogen model.\n",
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global"
@@ -239,7 +239,7 @@
       "name": "composable::typeable",
       "documentation": "Model element is defined as a type.\n",
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
@@ -274,7 +274,7 @@
       "name": "composable::pretty_printable",
       "documentation": "The element has the ability to dump itself to a stream.\n",
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
@@ -298,7 +298,7 @@
       "name": "composable::hashable",
       "documentation": "The element has the ability to generate hashes.\n",
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
@@ -321,7 +321,7 @@
     {
       "name": "composable::serializable",
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
@@ -345,7 +345,7 @@
       "name": "composable::handcrafted",
       "documentation": "Base profile for model elements that are manually generated.\n",
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element"
@@ -370,7 +370,7 @@
         "composable::handcrafted"
       ],
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
@@ -407,7 +407,7 @@
       ],
       "documentation": "Configuration for model elements that are generated manually by the user.\n",
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
@@ -454,7 +454,7 @@
       ],
       "documentation": "This element has only a types header file.\n",
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
@@ -477,7 +477,7 @@
     {
       "name": "composable::inheritable",
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
@@ -504,7 +504,7 @@
       ],
       "documentation": "This element has only a types implementation file.\n",
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
@@ -550,7 +550,7 @@
         "composable::handcrafted_typeable"
       ],
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
@@ -625,7 +625,7 @@
         "composable::handcrafted_typeable"
       ],
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
@@ -700,7 +700,7 @@
         "composable::handcrafted_typeable"
       ],
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
@@ -775,7 +775,7 @@
         "composable::handcrafted_typeable"
       ],
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
@@ -850,7 +850,7 @@
         "composable::handcrafted"
       ],
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
@@ -883,7 +883,7 @@
     {
       "name": "composable::convertible",
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
@@ -909,7 +909,7 @@
         "base::basic_facet_selection"
       ],
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -941,7 +941,7 @@
         "base::base"
       ],
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1009,7 +1009,7 @@
       "name": "composable::untestable",
       "documentation": "Model element will not be tested via generated tests.\n",
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
@@ -1033,7 +1033,7 @@
       "name": "composable::untypable",
       "documentation": "The element does not have a types facet.\n",
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
@@ -1056,7 +1056,7 @@
     {
       "name": "composable::handcrafted_cmake",
       "stereotypes": [
-        "masd::variability::profile_template"
+        "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
