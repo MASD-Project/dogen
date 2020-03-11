@@ -165,7 +165,6 @@ adapt_profiles(const variability::meta_model::feature_model& fm,
     for (const auto& m : ms.references())
         lambda(m.variability_elements().profiles());
 
-    r.clear();
     return r;
 }
 
