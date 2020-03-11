@@ -956,6 +956,20 @@
           "type": "std::list<feature>"
         }
       ]
+    },
+    {
+      "name": "transforms::profile_repository_inputs",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "profiles",
+          "type": "std::list<meta_model::profile>"
+        },
+        {
+          "name": "templates",
+          "type": "std::list<meta_model::profile_template>"
+        }
+      ]
     }
   ]
 }
