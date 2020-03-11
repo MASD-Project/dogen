@@ -25,24 +25,51 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.assets/types/features/variability_entry.hpp"
+#include "dogen.assets/types/features/variability_profile.hpp"
+#include "dogen.assets/types/meta_model/model_set.hpp"
+#include "dogen.assets/types/transforms/context_fwd.hpp"
+#include "dogen.assets/types/meta_model/variability/abstract_profile.hpp"
+#include "dogen.assets/types/meta_model/variability/abstract_profile_entry.hpp"
 
 namespace dogen::assets::transforms {
 
+/**
+ * @brief Updates the meta-elements in assets that are model
+ * variability profiles and profile templates.
+ */
 class variability_profiles_transform final {
-public:
-    variability_profiles_transform() = default;
-    variability_profiles_transform(const variability_profiles_transform&) = default;
-    variability_profiles_transform(variability_profiles_transform&&) = default;
-    ~variability_profiles_transform() = default;
-    variability_profiles_transform& operator=(const variability_profiles_transform&) = default;
+private:
+    /**
+     * @brief Reads configuration related to profiles.
+     */
+    static void update(const features::variability_profile::feature_group& fg,
+        meta_model::variability::abstract_profile& ap);
+
+    /**
+     * @brief Reads configuration related to profile entries.
+     */
+    static void update(const features::variability_entry::feature_group& fg,
+        meta_model::variability::abstract_profile_entry& ape);
+
+private:
+    /**
+     * @brief Processes all profile templates in model.
+     */
+    static void process_profile_templates(
+        const variability::meta_model::feature_model& fm, meta_model::model& m);
+
+    /**
+     * @brief Processes all profiles in model.
+     */
+    static void process_profiles(
+        const variability::meta_model::feature_model& fm, meta_model::model& m);
 
 public:
-    bool operator==(const variability_profiles_transform& rhs) const;
-    bool operator!=(const variability_profiles_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * @brief Applies the transform to the entire model set.
+     */
+    static void apply(const context& ctx, meta_model::model_set& ms);
 };
 
 }
