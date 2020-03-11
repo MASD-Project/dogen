@@ -1677,7 +1677,7 @@
       ]
     },
     {
-      "name": "transforms::variability_entities_transform",
+      "name": "transforms::variability_features_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -4000,7 +4000,7 @@
       ]
     },
     {
-      "name": "transforms::variability_application_transform",
+      "name": "transforms::variability_profiles_chain",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

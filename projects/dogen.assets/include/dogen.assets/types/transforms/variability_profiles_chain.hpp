@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_TRANSFORMS_VARIABILITY_APPLICATION_TRANSFORM_HPP
-#define DOGEN_ASSETS_TYPES_TRANSFORMS_VARIABILITY_APPLICATION_TRANSFORM_HPP
+#ifndef DOGEN_ASSETS_TYPES_TRANSFORMS_VARIABILITY_PROFILES_CHAIN_HPP
+#define DOGEN_ASSETS_TYPES_TRANSFORMS_VARIABILITY_PROFILES_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,7 +35,7 @@ namespace dogen::assets::transforms {
  * @brief Handles the application of variability into the model set
  * currently being processed.
  */
-class variability_application_transform final {
+class variability_profiles_chain final {
 private:
     /**
      * @brief Converts the assets transform context into a variability

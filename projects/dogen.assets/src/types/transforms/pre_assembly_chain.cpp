@@ -33,10 +33,10 @@
 #include "dogen.assets/types/transforms/containment_transform.hpp"
 #include "dogen.assets/types/transforms/mapping_elements_transform.hpp"
 #include "dogen.assets/types/transforms/extraction_properties_transform.hpp"
-#include "dogen.assets/types/transforms/variability_entities_transform.hpp"
+#include "dogen.assets/types/transforms/variability_features_transform.hpp"
 #include "dogen.assets/types/transforms/visual_studio_transform.hpp"
 #include "dogen.assets/types/transforms/dynamic_stereotypes_transform.hpp"
-#include "dogen.assets/types/transforms/variability_application_transform.hpp"
+#include "dogen.assets/types/transforms/variability_profiles_chain.hpp"
 #include "dogen.assets/types/transforms/pre_assembly_chain.hpp"
 
 namespace {
@@ -76,7 +76,7 @@ void pre_assembly_chain::apply(const context& ctx,
     origin_transform::apply(ctx, m);
     type_params_transform::apply(ctx, m);
     extraction_properties_transform::apply(ctx, m);
-    variability_entities_transform::apply(ctx, fixed_mappings, m);
+    variability_features_transform::apply(ctx, fixed_mappings, m);
     visual_studio_transform::apply(ctx, m);
 
     /*
@@ -105,7 +105,7 @@ void pre_assembly_chain::apply(const context& ctx, meta_model::model_set& ms) {
      * The second part of this chain handles variability
      * processing. For this we delegate to the variability chain.
      */
-    variability_application_transform::apply(ctx, ms);
+    variability_profiles_chain::apply(ctx, ms);
 
     /*
      * The final step is to retrieve stereotypes which did not bind to

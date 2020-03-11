@@ -26,12 +26,12 @@
 #include "dogen.assets/types/transforms/context.hpp"
 #include "dogen.assets/types/helpers/profile_adapter.hpp"
 #include "dogen.assets/types/helpers/configuration_model_set_adapter.hpp"
-#include "dogen.assets/types/transforms/variability_application_transform.hpp"
+#include "dogen.assets/types/transforms/variability_profiles_chain.hpp"
 
 namespace {
 
 const std::string transform_id(
-    "assets.transforms.variability_application_transform");
+    "assets.transforms.variability_profiles_chain");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -41,7 +41,7 @@ static logger lg(logger_factory(transform_id));
 namespace dogen::assets::transforms {
 
 variability::transforms::context
-variability_application_transform::adapt(const context& ctx) {
+variability_profiles_chain::adapt(const context& ctx) {
     variability::transforms::context r;
     r.archetype_location_repository(ctx.archetype_location_repository());
     r.tracer(ctx.tracer());
@@ -49,7 +49,7 @@ variability_application_transform::adapt(const context& ctx) {
     return r;
 }
 
-void variability_application_transform::
+void variability_profiles_chain::
 apply(const context& ctx, assets::meta_model::model_set& ms) {
     const auto model_name(ms.target().name().qualified().dot());
     tracing::scoped_chain_tracer stp(lg, "variability application",

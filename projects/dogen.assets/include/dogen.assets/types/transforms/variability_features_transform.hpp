@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ASSETS_TYPES_TRANSFORMS_VARIABILITY_FEATURE_TEMPLATE_GROUP_TRANSFORM_HPP
-#define DOGEN_ASSETS_TYPES_TRANSFORMS_VARIABILITY_FEATURE_TEMPLATE_GROUP_TRANSFORM_HPP
+#ifndef DOGEN_ASSETS_TYPES_TRANSFORMS_VARIABILITY_ENTITIES_TRANSFORM_HPP
+#define DOGEN_ASSETS_TYPES_TRANSFORMS_VARIABILITY_ENTITIES_TRANSFORM_HPP
 
 #include "dogen.variability/types/meta_model/feature_template.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
@@ -45,7 +45,7 @@ namespace dogen::assets::transforms {
  * @brief Processes the variability entities related to the
  * code-generation of variability code.
  */
-class variability_entities_transform final {
+class variability_features_transform final {
 private:
     /**
      * @brief Reads configuration related to variability templates.

@@ -34,12 +34,12 @@
 #include "dogen.assets/types/transforms/transformation_error.hpp"
 #include "dogen.assets/types/meta_model/variability/profile_template.hpp"
 #include "dogen.assets/types/meta_model/variability/profile.hpp"
-#include "dogen.assets/types/transforms/variability_entities_transform.hpp"
+#include "dogen.assets/types/transforms/variability_features_transform.hpp"
 
 namespace {
 
 const std::string
-transform_id("assets.transforms.variability_entities_transform");
+transform_id("assets.transforms.variability_features_transform");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -69,7 +69,7 @@ inline bool operator<(const name& lhs, const name& rhs) {
 
 namespace dogen::assets::transforms {
 
-void variability_entities_transform::update(
+void variability_features_transform::update(
     const features::variability_templates::feature_group& fg,
     meta_model::variability::abstract_feature& ft) {
 
@@ -84,7 +84,7 @@ void variability_entities_transform::update(
         ft.binding_point(lexical_cast<binding_point>(scfg.binding_point));
 }
 
-void variability_entities_transform::
+void variability_features_transform::
 update(const features::variability_bundle::feature_group& fg,
     meta_model::variability::abstract_bundle& fb) {
 
@@ -115,7 +115,7 @@ update(const features::variability_bundle::feature_group& fg,
     }
 }
 
-void variability_entities_transform::update(
+void variability_features_transform::update(
     const features::variability_profile::feature_group& fg,
     meta_model::variability::abstract_profile& ap) {
 
@@ -133,7 +133,7 @@ void variability_entities_transform::update(
     ap.labels(labels);
 }
 
-void variability_entities_transform::update(
+void variability_features_transform::update(
     const features::variability_entry::feature_group& fg,
     meta_model::variability::abstract_profile_entry& ape) {
 
@@ -178,7 +178,7 @@ void variability_entities_transform::update(
     BOOST_LOG_SEV(lg, trace) << "Untyped value: " << ape.value();
 }
 
-void variability_entities_transform::process_abstract_feature(
+void variability_features_transform::process_abstract_feature(
     const features::variability_templates::feature_group& fg1,
     const std::unordered_map<std::string, std::string>& fixed_mappings,
     const boost::optional<variability::meta_model::binding_point>&
@@ -260,7 +260,7 @@ void variability_entities_transform::process_abstract_feature(
         af.mapped_type(i->second);
 }
 
-void variability_entities_transform::
+void variability_features_transform::
 process_feature_template_bundles(
     const variability::meta_model::feature_model& fm,
     const std::unordered_map<std::string, std::string>& fixed_mappings,
@@ -306,7 +306,7 @@ process_feature_template_bundles(
     }
 }
 
-void variability_entities_transform::
+void variability_features_transform::
 process_feature_bundles(const variability::meta_model::feature_model& fm,
     const std::unordered_map<std::string, std::string>& fixed_mappings,
     meta_model::model& m) {
@@ -351,7 +351,7 @@ process_feature_bundles(const variability::meta_model::feature_model& fm,
     }
 }
 
-void variability_entities_transform::process_initialiser(meta_model::model& m) {
+void variability_features_transform::process_initialiser(meta_model::model& m) {
     /*
      * If the user did not add an initialiser to the model, there is
      * nothing to be done.
@@ -393,7 +393,7 @@ void variability_entities_transform::process_initialiser(meta_model::model& m) {
     fti.feature_bundles().sort();
 }
 
-void variability_entities_transform::process_profile_templates(
+void variability_features_transform::process_profile_templates(
     const variability::meta_model::feature_model& fm, meta_model::model& m) {
     /*
      * If there are no profile templates, there is no work to do.
@@ -423,7 +423,7 @@ void variability_entities_transform::process_profile_templates(
     }
 }
 
-void variability_entities_transform::process_profiles(
+void variability_features_transform::process_profiles(
     const variability::meta_model::feature_model& fm, meta_model::model& m) {
     /*
      * If there are no profiles, there is no work to do.
@@ -453,7 +453,7 @@ void variability_entities_transform::process_profiles(
     }
 }
 
-void variability_entities_transform::apply(const context& ctx,
+void variability_features_transform::apply(const context& ctx,
     const std::unordered_map<std::string, std::string>& fixed_mappings,
     meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "variability entities transform",

@@ -25573,7 +25573,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#variability_entities_transform#</dia:string>
+        <dia:string>#variability_features_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -49157,7 +49157,7 @@ types, see the comments on the variability types.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#variability_application_transform#</dia:string>
+        <dia:string>#variability_profiles_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
