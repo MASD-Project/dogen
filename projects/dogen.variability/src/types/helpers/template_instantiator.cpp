@@ -180,7 +180,6 @@ void template_instantiator::validate(const archetypes::location& al,
 meta_model::configuration_point template_instantiator::to_configuration_point(
     const meta_model::feature_model& fm, const std::string& owner,
     const meta_model::configuration_point_template& cpt) const {
-
     /*
      * Determine which qualified name to use for the point's feature.
      */

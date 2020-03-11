@@ -68,13 +68,15 @@ apply(const context& ctx, assets::meta_model::model_set& ms) {
      * Now we adapt all the profile-like elements into their
      * variability counterparts.
      */
+    const auto& fm(*ctx.feature_model());
     using assets::helpers::profile_adapter;
     const auto pts(profile_adapter::adapt_profile_templates(ms));
+    const auto ps(profile_adapter::adapt_profiles(fm, ms));
 
     /*
      * If there are no profile-like elements, we have nothing to do.
      */
-    if (pts.empty())
+    if (pts.empty() && ps.empty())
         return;
 
     /*
@@ -84,9 +86,8 @@ apply(const context& ctx, assets::meta_model::model_set& ms) {
      * templates into profiles.
      */
     const auto vctx(adapt(ctx));
-    const auto& fm(*ctx.feature_model());
-    using variability::transforms::profile_repository_production_chain;
-    const auto prp(profile_repository_production_chain::apply(vctx, pts, fm));
+    using prpc = variability::transforms::profile_repository_production_chain;
+    const auto prp(prpc::apply(vctx, ps, pts, fm));
 
     /*
      * Then we need to extract the configuration models from the

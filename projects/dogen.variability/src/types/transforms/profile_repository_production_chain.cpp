@@ -42,12 +42,15 @@ namespace dogen::variability::transforms {
 
 meta_model::profile_repository
 profile_repository_production_chain::apply(const context& ctx,
+    const std::list<variability::meta_model::profile>& ps,
     const std::list<variability::meta_model::profile_template>& pts,
     const meta_model::feature_model& fm) {
     tracing::scoped_chain_tracer stp(lg, "profile repository production chain",
         transform_id, transform_id, *ctx.tracer(), fm);
 
-    const auto p(profile_template_instantiation_transform::apply(ctx, fm, pts));
+    auto p(ps);
+    const auto i(p.end());
+    p.splice(i, profile_template_instantiation_transform::apply(ctx, fm, pts));
     const auto r(profile_merging_transform::apply(ctx, fm, p));
 
     stp.end_chain(r);
