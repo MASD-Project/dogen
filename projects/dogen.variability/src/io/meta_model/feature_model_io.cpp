@@ -63,24 +63,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<dogen::variability::meta_model::feature> >& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
 namespace dogen::variability::meta_model {
 
 std::ostream& operator<<(std::ostream& s, const feature_model& v) {
@@ -88,9 +70,6 @@ std::ostream& operator<<(std::ostream& s, const feature_model& v) {
       << "\"__type__\": " << "\"dogen::variability::meta_model::feature_model\"" << ", "
       << "\"all\": " << v.all() << ", "
       << "\"by_name\": " << v.by_name() << ", "
-      << "\"by_facet_name\": " << v.by_facet_name() << ", "
-      << "\"by_formatter_name\": " << v.by_formatter_name() << ", "
-      << "\"by_backend_name\": " << v.by_backend_name() << ", "
       << "\"partially_matchable\": " << v.partially_matchable()
       << " }";
     return(s);

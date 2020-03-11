@@ -47,9 +47,6 @@ public:
     feature_model(
         const std::list<dogen::variability::meta_model::feature>& all,
         const std::unordered_map<std::string, dogen::variability::meta_model::feature>& by_name,
-        const std::unordered_map<std::string, std::list<dogen::variability::meta_model::feature> >& by_facet_name,
-        const std::unordered_map<std::string, std::list<dogen::variability::meta_model::feature> >& by_formatter_name,
-        const std::unordered_map<std::string, std::list<dogen::variability::meta_model::feature> >& by_backend_name,
         const std::unordered_map<std::string, dogen::variability::meta_model::feature>& partially_matchable);
 
 public:
@@ -66,36 +63,6 @@ public:
     std::unordered_map<std::string, dogen::variability::meta_model::feature>& by_name();
     void by_name(const std::unordered_map<std::string, dogen::variability::meta_model::feature>& v);
     void by_name(const std::unordered_map<std::string, dogen::variability::meta_model::feature>&& v);
-    /**@}*/
-
-    /**
-     * @brief Features by facet name, for all models.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, std::list<dogen::variability::meta_model::feature> >& by_facet_name() const;
-    std::unordered_map<std::string, std::list<dogen::variability::meta_model::feature> >& by_facet_name();
-    void by_facet_name(const std::unordered_map<std::string, std::list<dogen::variability::meta_model::feature> >& v);
-    void by_facet_name(const std::unordered_map<std::string, std::list<dogen::variability::meta_model::feature> >&& v);
-    /**@}*/
-
-    /**
-     * @brief Features by formatter name, for all models.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, std::list<dogen::variability::meta_model::feature> >& by_formatter_name() const;
-    std::unordered_map<std::string, std::list<dogen::variability::meta_model::feature> >& by_formatter_name();
-    void by_formatter_name(const std::unordered_map<std::string, std::list<dogen::variability::meta_model::feature> >& v);
-    void by_formatter_name(const std::unordered_map<std::string, std::list<dogen::variability::meta_model::feature> >&& v);
-    /**@}*/
-
-    /**
-     * @brief Features by backend name.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, std::list<dogen::variability::meta_model::feature> >& by_backend_name() const;
-    std::unordered_map<std::string, std::list<dogen::variability::meta_model::feature> >& by_backend_name();
-    void by_backend_name(const std::unordered_map<std::string, std::list<dogen::variability::meta_model::feature> >& v);
-    void by_backend_name(const std::unordered_map<std::string, std::list<dogen::variability::meta_model::feature> >&& v);
     /**@}*/
 
     /**
@@ -121,9 +88,6 @@ public:
 private:
     std::list<dogen::variability::meta_model::feature> all_;
     std::unordered_map<std::string, dogen::variability::meta_model::feature> by_name_;
-    std::unordered_map<std::string, std::list<dogen::variability::meta_model::feature> > by_facet_name_;
-    std::unordered_map<std::string, std::list<dogen::variability::meta_model::feature> > by_formatter_name_;
-    std::unordered_map<std::string, std::list<dogen::variability::meta_model::feature> > by_backend_name_;
     std::unordered_map<std::string, dogen::variability::meta_model::feature> partially_matchable_;
 };
 

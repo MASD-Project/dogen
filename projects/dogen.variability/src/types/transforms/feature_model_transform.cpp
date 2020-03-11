@@ -61,16 +61,6 @@ apply(const context& ctx, const std::list<meta_model::feature>& features) {
                 transformation_error(duplicate_qualified_name + qn));
         }
 
-        const auto& l(f.location());
-        if (!l.facet().empty())
-            r->by_facet_name()[l.facet()].push_back(f);
-
-        if (!l.archetype().empty())
-            r->by_formatter_name()[l.archetype()].push_back(f);
-
-        if (!l.backend().empty())
-            r->by_backend_name()[l.backend()].push_back(f);
-
         if (f.is_partially_matchable())
             r->partially_matchable()[qn] = f;
     }

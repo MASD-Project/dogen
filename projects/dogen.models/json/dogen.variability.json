@@ -119,21 +119,6 @@
           "documentation": "Features by qualified name.\n"
         },
         {
-          "name": "by_facet_name",
-          "type": "std::unordered_map<std::string, std::list<feature>>",
-          "documentation": "Features by facet name, for all models.\n"
-        },
-        {
-          "name": "by_formatter_name",
-          "type": "std::unordered_map<std::string,std::list<feature>>",
-          "documentation": "Features by formatter name, for all models.\n"
-        },
-        {
-          "name": "by_backend_name",
-          "type": "std::unordered_map<std::string, std::list<feature>>",
-          "documentation": "Features by backend name.\n"
-        },
-        {
           "name": "partially_matchable",
           "type": "std::unordered_map<std::string, feature>",
           "documentation": "Features that can be partially matcheable, by qualified name.\n"
