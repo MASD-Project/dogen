@@ -178,20 +178,16 @@ apply(const context& ctx, assets::meta_model::model_set& ms) {
     tracing::scoped_transform_tracer stp(lg, "variability profiles",
         transform_id, model_name, *ctx.tracer());
 
-    /*
-     * First process the target.
-     */
     const auto& fm(*ctx.feature_model());
-    process_profiles(fm, ms.target());
-    process_profile_templates(fm, ms.target());
+    const auto lambda(
+        [&](auto& model) {
+            process_profiles(fm, model);
+            process_profile_templates(fm, model);
+        });
 
-    /*
-     * Now process the references.
-     */
-    for (auto& m : ms.references()) {
-        process_profiles(fm, m);
-        process_profile_templates(fm, m);
-    }
+    lambda(ms.target());
+    for (auto& m : ms.references())
+        lambda(m);
 }
 
 }

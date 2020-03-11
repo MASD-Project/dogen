@@ -45,7 +45,8 @@ variability::meta_model::profile_template
 profile_adapter::adapt(const meta_model::variability::profile_template& pt) {
     const auto sn(pt.name().simple());
     const auto qn(pt.name().qualified().dot());
-    BOOST_LOG_SEV(lg, trace) << "Adapting: " << sn << " (" << qn << ")";
+    BOOST_LOG_SEV(lg, trace) << "Adapting profile template: "
+                             << sn << " (" << qn << ")";
 
     variability::meta_model::profile_template r;
     r.name().simple(sn);
@@ -80,7 +81,7 @@ profile_adapter::adapt(const variability::meta_model::feature_model& fm,
     const meta_model::variability::profile& p) {
     const auto sn(p.name().simple());
     const auto qn(p.name().qualified().dot());
-    BOOST_LOG_SEV(lg, trace) << "Adapting: " << sn << " (" << qn << ")";
+    BOOST_LOG_SEV(lg, trace) << "Adapting profile: " << sn << " (" << qn << ")";
 
     variability::meta_model::profile r;
     r.name().simple(sn);
@@ -136,12 +137,10 @@ std::list<variability::meta_model::profile_template> profile_adapter::
 adapt_profile_templates(const assets::meta_model::model_set& ms) {
     std::list<variability::meta_model::profile_template> r;
 
-    auto lambda(
+    const auto lambda(
         [&](auto& map) {
-            for (const auto& pair : map) {
-                const auto& pt(*pair.second);
-                r.push_back(adapt(pt));
-            }
+            for (const auto& pair : map)
+                r.push_back(adapt(*pair.second));
         });
 
     lambda(ms.target().variability_elements().profile_templates());
@@ -156,18 +155,17 @@ adapt_profiles(const variability::meta_model::feature_model& fm,
     const assets::meta_model::model_set& ms) {
     std::list<variability::meta_model::profile> r;
 
-    auto lambda(
+    const auto lambda(
         [&](auto& map) {
-            for (const auto& pair : map) {
-                const auto& pt(*pair.second);
-                r.push_back(adapt(fm, pt));
-            }
+            for (const auto& pair : map)
+                r.push_back(adapt(fm, *pair.second));
         });
 
     lambda(ms.target().variability_elements().profiles());
     for (const auto& m : ms.references())
         lambda(m.variability_elements().profiles());
 
+    r.clear();
     return r;
 }
 
