@@ -636,20 +636,6 @@ we need to disable CMake generation and do it by hand. However:
   model level. Also, references provide sufficient information to link
   against other dogen models.
 
-*** Add handcrafted stereotype to C# models                           :story:
-
-At present we do not have any tests for C# models with handcrafted. If
-we did it would not work because the annotations only set the C++
-facets. Add a test for this and fix the annotation profile. The same
-problem will apply to all new profiles:
-
-- pretty printable
-- serialisable
-- hashable
-
-Actually this probably should now work across all kernels, but we need
-tests to prove it.
-
 *** Rename facets                                                     :story:
 
 We originally called our support for =std::hash= just =hash= and our

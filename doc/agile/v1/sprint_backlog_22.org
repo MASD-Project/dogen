@@ -14,26 +14,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-11 Wed 13:58]
+#+CAPTION: Clock summary at [2020-03-11 Wed 14:34]
 | <75>                                                    |         |       |      |       |
 | Headline                                                | Time    |       |      |     % |
 |---------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                            | *46:23* |       |      | 100.0 |
+| *Total time*                                            | *46:56* |       |      | 100.0 |
 |---------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                 | 46:23   |       |      | 100.0 |
-| Active                                                  |         | 46:23 |      | 100.0 |
-| Edit release notes for previous sprint                  |         |       | 4:11 |   9.0 |
+| Stories                                                 | 46:56   |       |      | 100.0 |
+| Active                                                  |         | 46:56 |      | 100.0 |
+| Edit release notes for previous sprint                  |         |       | 4:11 |   8.9 |
 | Create a demo and presentation for previous sprint      |         |       | 0:25 |   0.9 |
-| Sprint and product backlog grooming                     |         |       | 5:54 |  12.7 |
-| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  12.8 |
-| Analysis on removing physical references in variability |         |       | 5:27 |  11.7 |
+| Sprint and product backlog grooming                     |         |       | 5:54 |  12.6 |
+| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  12.6 |
+| Analysis on removing physical references in variability |         |       | 5:27 |  11.6 |
 | Remove =rapidjson= formatters                           |         |       | 0:03 |   0.1 |
-| Separate feature templates from bundles                 |         |       | 9:28 |  20.4 |
+| Separate feature templates from bundles                 |         |       | 9:28 |  20.2 |
 | Move enabled to generation                              |         |       | 0:04 |   0.1 |
 | Create a chain to encapsulate variability transforms    |         |       | 0:37 |   1.3 |
-| Move variability chain into assets                      |         |       | 2:22 |   5.1 |
-| Move profile meta-data into profile element             |         |       | 7:12 |  15.5 |
-| Split profiles and profile templates in variability     |         |       | 4:02 |   8.7 |
+| Move variability chain into assets                      |         |       | 2:22 |   5.0 |
+| Move profile meta-data into profile element             |         |       | 7:12 |  15.3 |
+| Add handcrafted stereotype to C# models                 |         |       | 0:04 |   0.1 |
+| Split profiles and profile templates in variability     |         |       | 4:31 |   9.6 |
 | Add location and modules to variability                 |         |       | 0:43 |   1.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -657,8 +658,31 @@ Notes:
 - "adaption" is not a word, rename to "adaptation" (in
   =profile_template_adaption_transform=).
 
-*** STARTED Split profiles and profile templates in variability       :story:
+*** COMPLETED Add handcrafted stereotype to C# models                 :story:
+    CLOSED: [2020-03-11 Wed 14:33]
     :LOGBOOK:
+    CLOCK: [2020-03-11 Wed 14:29]--[2020-03-11 Wed 14:33] =>  0:04
+    :END:
+
+At present we do not have any tests for C# models with handcrafted. If
+we did it would not work because the annotations only set the C++
+facets. Add a test for this and fix the annotation profile. The same
+problem will apply to all new profiles:
+
+- pretty printable
+- serialisable
+- hashable
+
+Actually this probably should now work across all kernels, but we need
+tests to prove it.
+
+Added a simple type to prove it, just for types. Its good enough for
+now.
+
+*** COMPLETED Split profiles and profile templates in variability     :story:
+    CLOSED: [2020-03-11 Wed 14:34]
+    :LOGBOOK:
+    CLOCK: [2020-03-11 Wed 13:59]--[2020-03-11 Wed 14:28] =>  0:29
     CLOCK: [2020-03-11 Wed 10:23]--[2020-03-11 Wed 12:24] =>  2:01
     CLOCK: [2020-03-09 Mon 19:36]--[2020-03-09 Mon 20:00] =>  0:24
     CLOCK: [2020-03-09 Mon 18:49]--[2020-03-09 Mon 19:05] =>  0:16
@@ -684,18 +708,6 @@ Notes:
   stash (and consider merging it into the application
   transform?). Profiles transform is really a chain as it is calling
   transforms.
-
-*** Invalid stereotypes outside of objects are not detected           :story:
-
-At present we are only checking for invalid stereotypes (e.g. those
-which are neither static stereotypes, nor profiles nor object
-templates) on objects and object templates. We need to add a validator
-that checks all other element types. This should be easy, if we ended
-up with any dynamic stereotypes we should error.
-
-In fact we should generalise this processing: object templates should
-mark their stereotypes as bound and then we will check every element
-for any unbound stereotypes using the traversal.
 
 *** STARTED Add location and modules to variability                   :story:
     :LOGBOOK:
@@ -733,16 +745,28 @@ Notes:
   profile templates. This is very confusing. We need to split these
   two types prior to refactoring this code.
 
-*** Replace variability enum mapper with lexical casts                :story:
+*** Implement template instantiation in terms of tags                 :story:
 
-Its not clear what value the mapper adds now we can just lexical cast
-enums from strings.
+At present we are instantiating templates over a physical space
+(e.g. kernel, facet, archetypes). We need to replace this with
+tags. The idea is that we can inject tags (which are qualified names)
+into the model via meta-data:
 
-*** Name all transform exceptions consistently                        :story:
+: #DOGEN masd.variability.tag=X,a.b.c
 
-It seems on engine we call them "transform exception" but on assets we
-call them "transformation error". Check all other models and them
-these consistently.
+We can then create feature templates that are instantiated on a range
+given by the set of all values for a given tag, for example =X=
+(e.g. =kernel=, =facet=, =archetype=). Tags can be introduced by any
+model which has a configuration point. However, elements in ranges are
+expected to be unique and to point to existing groups.
+
+It is important to note that profile template instantiation is more of
+a convention at present. That is, nothing stops you from having a
+profile template that instantiates templates across any number of
+tags. However, for feature bundles we made it so that a bundle can
+only have a template kind (all features will share the same tag
+effectively). For symmetry purposes, we probably should make it so
+that profile templates can only bind to one tag.
 
 *** Consider renaming labels to stereotypes in variability            :story:
 
@@ -758,20 +782,17 @@ At present it is possible to label a profile with multiple
 labels. This is not a good idea. Make it a plain text field so we can
 only apply a single label.
 
-*** Implement template instantiation in terms of tags                 :story:
+*** Invalid stereotypes outside of objects are not detected           :story:
 
-At present we are instantiating templates over a physical space
-(e.g. kernel, facet, archetypes). We need to replace this with
-tags. The idea is that we can inject tags (which are qualified names)
-into the model via meta-data:
+At present we are only checking for invalid stereotypes (e.g. those
+which are neither static stereotypes, nor profiles nor object
+templates) on objects and object templates. We need to add a validator
+that checks all other element types. This should be easy, if we ended
+up with any dynamic stereotypes we should error.
 
-: #DOGEN masd.variability.tag=X,a.b.c
-
-We can then create feature templates that are instantiated on a range
-given by the set of all values for a given tag, for example =X=
-(e.g. =kernel=, =facet=, =archetype=). Tags can be introduced by any
-model which has a configuration point. However, elements in ranges are
-expected to be unique and to point to existing groups.
+In fact we should generalise this processing: object templates should
+mark their stereotypes as bound and then we will check every element
+for any unbound stereotypes using the traversal.
 
 *** Add command line option to dump all features                      :story:
 
@@ -905,6 +926,11 @@ Why are we manually instantiating postfix and directory for each
 formatter/facet instead of using templates? This is one of the main
 reasons for breaks/errors when adding a new formatter.
 
+*** Replace variability enum mapper with lexical casts                :story:
+
+Its not clear what value the mapper adds now we can just lexical cast
+enums from strings.
+
 *** Detect non-configurable fields                                    :story:
 
 Some stereotypes cannot be placed in a configuration. Placing them
@@ -987,6 +1013,12 @@ Ideas:
 Notes:
 
 - look for ideas on other projects.
+
+*** Name all transform exceptions consistently                        :story:
+
+It seems on engine we call them "transform exception" but on assets we
+call them "transformation error". Check all other models and them
+these consistently.
 
 *** Implement locator in terms of new physical types                  :story:
 
