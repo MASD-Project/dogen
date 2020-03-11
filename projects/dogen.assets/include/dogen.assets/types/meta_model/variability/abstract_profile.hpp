@@ -29,7 +29,6 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include <unordered_set>
 #include "dogen.assets/types/meta_model/name.hpp"
 #include "dogen.assets/types/meta_model/element.hpp"
 
@@ -60,17 +59,17 @@ public:
         const std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties>& artefact_properties,
         const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& decoration,
-        const std::unordered_set<std::string>& labels,
+        const std::string& stereotype,
         const std::list<dogen::assets::meta_model::name>& parents);
 
 public:
     virtual void to_stream(std::ostream& s) const;
 
 public:
-    const std::unordered_set<std::string>& labels() const;
-    std::unordered_set<std::string>& labels();
-    void labels(const std::unordered_set<std::string>& v);
-    void labels(const std::unordered_set<std::string>&& v);
+    const std::string& stereotype() const;
+    std::string& stereotype();
+    void stereotype(const std::string& v);
+    void stereotype(const std::string&& v);
 
     /**
      * @brief Parents of this profile template.
@@ -91,7 +90,7 @@ protected:
     void swap(abstract_profile& other) noexcept;
 
 private:
-    std::unordered_set<std::string> labels_;
+    std::string stereotype_;
     std::list<dogen::assets::meta_model::name> parents_;
 };
 

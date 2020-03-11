@@ -51,9 +51,7 @@ profile_adapter::adapt(const meta_model::variability::profile_template& pt) {
     variability::meta_model::profile_template r;
     r.name().simple(sn);
     r.name().qualified(qn);
-
-    if (!pt.labels().empty())
-        r.stereotype(*pt.labels().begin());
+    r.stereotype(pt.stereotype());
 
     for (const auto& n : pt.parents())
         r.parents().push_back(n.qualified().dot());
@@ -88,9 +86,7 @@ profile_adapter::adapt(const variability::meta_model::feature_model& fm,
     variability::meta_model::profile r;
     r.name().simple(sn);
     r.name().qualified(qn);
-
-    if (!p.labels().empty())
-        r.stereotype(*p.labels().begin())
+    r.stereotype(p.stereotype());
 ;
     for (const auto& n : p.parents())
         r.parents().push_back(n.qualified().dot());

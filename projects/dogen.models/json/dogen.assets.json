@@ -2913,8 +2913,8 @@
         },
         {
           "name": "masd.variability.labels",
-          "type": "masd::variability::text_collection",
-          "documentation": "Labels to apply to this profile. These are used for binding, via stereotypes.\n",
+          "type": "masd::variability::text",
+          "documentation": "Stereotype for this profile. Must be globally unique.\n",
           "tagged_values": {
             "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.variability.labels",
@@ -3811,8 +3811,8 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "labels",
-          "type": "std::unordered_set<std::string>"
+          "name": "stereotype",
+          "type": "std::string"
         },
         {
           "name": "parents",
@@ -3945,8 +3945,8 @@
       "attributes": [
         {
           "name": "masd.variability.labels",
-          "type": "masd::variability::text_collection",
-          "documentation": "Labels to apply to this profile. These are used for binding, via stereotypes.\n",
+          "type": "masd::variability::text",
+          "documentation": "Stereotype for this profile. Must be globally unique.\n",
           "tagged_values": {
             "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.variability.labels",

@@ -56,7 +56,7 @@ profile::profile(
     const std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& decoration,
-    const std::unordered_set<std::string>& labels,
+    const std::string& stereotype,
     const std::list<dogen::assets::meta_model::name>& parents,
     const std::list<dogen::assets::meta_model::variability::profile_entry>& entries)
     : dogen::assets::meta_model::variability::abstract_profile(
@@ -75,7 +75,7 @@ profile::profile(
       artefact_properties,
       archetype_location_properties,
       decoration,
-      labels,
+      stereotype,
       parents),
       entries_(entries) { }
 

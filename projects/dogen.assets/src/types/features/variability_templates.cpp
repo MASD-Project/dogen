@@ -50,7 +50,7 @@ make_masd_variability_labels() {
     feature r;
     r.name().simple("labels");
     r.name().qualified("masd.variability.labels");
-    const auto vt(value_type::text_collection);
+    const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);
 
@@ -139,7 +139,7 @@ variability_templates::static_configuration variability_templates::make_static_c
     if (s.has_configuration_point(fg.binding_point))
         r.binding_point = s.get_text_content(fg.binding_point);
     if (s.has_configuration_point(fg.labels))
-        r.labels = s.get_text_collection_content(fg.labels);
+        r.labels = s.get_text_content(fg.labels);
     if (s.has_configuration_point(fg.value))
         r.value = s.get_text_collection_content(fg.value);
     if (s.has_configuration_point(fg.qualified_name))

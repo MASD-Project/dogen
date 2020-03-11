@@ -41,7 +41,7 @@ variability_profile::static_configuration variability_profile::make_static_confi
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
     if (s.has_configuration_point(fg.labels))
-        r.labels = s.get_text_collection_content(fg.labels);
+        r.labels = s.get_text_content(fg.labels);
     return r;
 }
 }

@@ -41,7 +41,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 const std::string missing_value("Must supply a value for entry: ");
-const std::string duplicate_label("Profile has a duplicate label: ");
 const std::string conflicting_values(
     "Entry has a value as meta-data and as a property: ");
 
@@ -55,16 +54,7 @@ update(const features::variability_profile::feature_group& fg,
 
     using vp = assets::features::variability_profile;
     const auto scfg1(vp::make_static_configuration(fg, ap));
-
-    std::unordered_set<std::string> labels;
-    for (const auto& l : scfg1.labels) {
-        const auto inserted(labels.insert(l).second);
-        if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_label << l;
-            BOOST_THROW_EXCEPTION(transformation_error(duplicate_label + l));
-        }
-    }
-    ap.labels(labels);
+    ap.stereotype(scfg1.labels);
 }
 
 void variability_profiles_transform::

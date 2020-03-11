@@ -47,7 +47,7 @@ public:
 
 public:
     struct static_configuration {
-        std::list<std::string> labels;
+        std::string labels;
     };
 
     static static_configuration make_static_configuration(

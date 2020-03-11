@@ -52,7 +52,7 @@ public:
 public:
     struct static_configuration {
         std::string binding_point;
-        std::list<std::string> labels;
+        std::string labels;
         std::list<std::string> value;
         std::string qualified_name;
         bool is_optional;

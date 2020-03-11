@@ -34,20 +34,6 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
 inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::meta_model::name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -78,7 +64,7 @@ abstract_profile::abstract_profile(
     const std::unordered_map<std::string, dogen::assets::meta_model::artefact_properties>& artefact_properties,
     const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& decoration,
-    const std::unordered_set<std::string>& labels,
+    const std::string& stereotype,
     const std::list<dogen::assets::meta_model::name>& parents)
     : dogen::assets::meta_model::element(
       name,
@@ -96,7 +82,7 @@ abstract_profile::abstract_profile(
       artefact_properties,
       archetype_location_properties,
       decoration),
-      labels_(labels),
+      stereotype_(stereotype),
       parents_(parents) { }
 
 void abstract_profile::to_stream(std::ostream& s) const {
@@ -105,7 +91,7 @@ void abstract_profile::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     dogen::assets::meta_model::element::to_stream(s);
     s << ", "
-      << "\"labels\": " << labels_ << ", "
+      << "\"stereotype\": " << "\"" << tidy_up_string(stereotype_) << "\"" << ", "
       << "\"parents\": " << parents_
       << " }";
 }
@@ -114,30 +100,30 @@ void abstract_profile::swap(abstract_profile& other) noexcept {
     dogen::assets::meta_model::element::swap(other);
 
     using std::swap;
-    swap(labels_, other.labels_);
+    swap(stereotype_, other.stereotype_);
     swap(parents_, other.parents_);
 }
 
 bool abstract_profile::compare(const abstract_profile& rhs) const {
     return dogen::assets::meta_model::element::compare(rhs) &&
-        labels_ == rhs.labels_ &&
+        stereotype_ == rhs.stereotype_ &&
         parents_ == rhs.parents_;
 }
 
-const std::unordered_set<std::string>& abstract_profile::labels() const {
-    return labels_;
+const std::string& abstract_profile::stereotype() const {
+    return stereotype_;
 }
 
-std::unordered_set<std::string>& abstract_profile::labels() {
-    return labels_;
+std::string& abstract_profile::stereotype() {
+    return stereotype_;
 }
 
-void abstract_profile::labels(const std::unordered_set<std::string>& v) {
-    labels_ = v;
+void abstract_profile::stereotype(const std::string& v) {
+    stereotype_ = v;
 }
 
-void abstract_profile::labels(const std::unordered_set<std::string>&& v) {
-    labels_ = std::move(v);
+void abstract_profile::stereotype(const std::string&& v) {
+    stereotype_ = std::move(v);
 }
 
 const std::list<dogen::assets::meta_model::name>& abstract_profile::parents() const {
