@@ -191,13 +191,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "traits",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "features",
       "documentation": "Features for the engine model.\n",
       "tagged_values": {
