@@ -216,14 +216,14 @@ apply(const context& ctx, assets::meta_model::model_set& ms) {
      * with it.
      */
     const auto& fm(*ctx.feature_model());
-    // process_all_profiles(fm, ms);
+    process_all_profiles(fm, ms);
 
     /*
      * Now we adapt all the profile-like elements into their
      * variability counterparts.
      */
     using assets::helpers::profile_adapter;
-    const auto pts(profile_adapter::adapt_profile_templates(fm, ms));
+    const auto pts(profile_adapter::adapt_profile_templates(ms));
 
     /*
      * If there are no profile-like elements, we have nothing to do.

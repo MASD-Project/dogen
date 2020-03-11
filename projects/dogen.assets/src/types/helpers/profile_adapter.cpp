@@ -22,8 +22,6 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.variability/types/helpers/enum_mapper.hpp"
-#include "dogen.assets/types/features/variability_profile.hpp"
-#include "dogen.assets/types/features/variability_entry.hpp"
 #include "dogen.assets/types/helpers/adaptation_exception.hpp"
 #include "dogen.assets/types/helpers/profile_adapter.hpp"
 
@@ -36,24 +34,12 @@ auto lg(logger_factory(transform_id));
 
 const std::string empty;
 
-const std::string duplicate_label("Profile has a duplicate lable: ");
-const std::string conflicting_values(
-    "Entry has a value as meta-data and as a property: ");
-const std::string missing_value("Must supply a value for entry: ");
-
 }
-
 
 namespace dogen::assets::helpers {
 
 variability::meta_model::profile_template
-profile_adapter::adapt(const variability::meta_model::feature_model& fm,
-    const assets::meta_model::variability::profile_template& vpt) {
-
-    using assets::features::variability_profile;
-    const auto fg1(variability_profile::make_feature_group(fm));
-    const auto scfg1(variability_profile::make_static_configuration(fg1, vpt));
-
+profile_adapter::adapt(const meta_model::variability::profile_template& vpt) {
     const auto sn(vpt.name().simple());
     const auto qn(vpt.name().qualified().dot());
     BOOST_LOG_SEV(lg, trace) << "Adapting: " << sn << " (" << qn << ")";
@@ -61,86 +47,44 @@ profile_adapter::adapt(const variability::meta_model::feature_model& fm,
     variability::meta_model::profile_template r;
     r.name().simple(sn);
     r.name().qualified(qn);
-
-    std::unordered_set<std::string> labels;
-    for (const auto& l : scfg1.labels) {
-        const auto inserted(labels.insert(l).second);
-        if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_label << l;
-            BOOST_THROW_EXCEPTION(adaptation_exception(duplicate_label + l));
-        }
-    }
-
-    r.labels(labels);
+    r.labels(vpt.labels());
 
     for (const auto& n : vpt.parents())
         r.parents().push_back(n.qualified().dot());
 
-    using assets::features::variability_entry;
-    const auto fg2(variability_entry::make_feature_group(fm));
     for (const auto& e : vpt.entries()) {
         const auto& k(e.key());
         BOOST_LOG_SEV(lg, trace) << "Adapting entry: " << k;
 
-        using assets::features::variability_entry;
-        const auto scfg2(variability_entry::make_static_configuration(fg2, e));
-
         variability::meta_model::configuration_point_template cpt;
         cpt.name().simple(k);
-
-        using variability::helpers::enum_mapper;
-        const auto tc(enum_mapper::to_template_kind(scfg2.template_kind));
-        cpt.kind(tc);
-
-        /*
-         * FIXME: not yet reading binding point.
-         */
+        cpt.kind(e.template_kind());
 
         using variability::meta_model::template_kind;
         if (cpt.kind() == template_kind::instance)
             cpt.name().qualified(k);
 
-        archetypes::location al;
-        al.kernel(scfg2.kernel);
-        al.backend(scfg2.backend);
-        al.facet(scfg2.facet);
-        al.archetype(scfg2.archetype);
-        cpt.location(al);
-
-        if (!scfg2.value.empty() && !e.value().empty()) {
-            BOOST_LOG_SEV(lg, error) << conflicting_values << k;
-            BOOST_THROW_EXCEPTION(adaptation_exception(conflicting_values + k));
-        } else if (scfg2.value.empty() && e.value().empty()) {
-            BOOST_LOG_SEV(lg, error) << missing_value << k;
-            BOOST_THROW_EXCEPTION(adaptation_exception(missing_value + k));
-        } else if (!scfg2.value.empty()) {
-            BOOST_LOG_SEV(lg, trace) << "Untyped value: " << scfg2.value;
-            cpt.untyped_value(scfg2.value);
-        } else {
-            BOOST_LOG_SEV(lg, trace) << "Untyped value: " << e.value();
-            cpt.untyped_value(e.value());
-        }
+        cpt.location(e.location());
+        cpt.untyped_value(e.value());
         r.templates().push_back(cpt);
     }
 
     return r;
 }
 
-std::list<variability::meta_model::profile_template>
-profile_adapter::adapt_profile_templates(
-    const variability::meta_model::feature_model& fm,
-    const assets::meta_model::model_set& ms) {
+std::list<variability::meta_model::profile_template> profile_adapter::
+adapt_profile_templates(const assets::meta_model::model_set& ms) {
     std::list<variability::meta_model::profile_template> r;
     for (const auto& pair :
              ms.target().variability_elements().profile_templates()) {
         const auto& vpt(*pair.second);
-        r.push_back(adapt(fm, vpt));
+        r.push_back(adapt(vpt));
     }
 
     for (const auto& m : ms.references()) {
         for (const auto& pair : m.variability_elements().profile_templates()) {
             const auto& vpt(*pair.second);
-            r.push_back(adapt(fm, vpt));
+            r.push_back(adapt(vpt));
         }
     }
 
