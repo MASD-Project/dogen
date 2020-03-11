@@ -226,7 +226,7 @@
       "documentation": "Holds a set of templates for configuration points.\n",
       "stereotypes": [
         "Generalizable",
-        "Labelable"
+        "Stereotypable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -693,7 +693,7 @@
       "stereotypes": [
         "ConfigurationStore",
         "Generalizable",
-        "Labelable"
+        "Stereotypable"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -723,14 +723,14 @@
       ]
     },
     {
-      "name": "meta_model::Labelable",
+      "name": "meta_model::Stereotypable",
       "stereotypes": [
         "masd::object_template"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "labels",
+          "name": "stereotype",
           "type": "std::unordered_set<std::string>"
         }
       ]

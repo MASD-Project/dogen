@@ -80,13 +80,13 @@ profile_template::profile_template(
     const dogen::variability::meta_model::name& name,
     const std::string& description,
     const std::list<std::string>& parents,
-    const std::unordered_set<std::string>& labels,
+    const std::unordered_set<std::string>& stereotype,
     const std::list<dogen::variability::meta_model::configuration_point_template>& templates)
     : dogen::variability::meta_model::element(
       name,
       description),
       parents_(parents),
-      labels_(labels),
+      stereotype_(stereotype),
       templates_(templates) { }
 
 void profile_template::to_stream(std::ostream& s) const {
@@ -96,7 +96,7 @@ void profile_template::to_stream(std::ostream& s) const {
     dogen::variability::meta_model::element::to_stream(s);
     s << ", "
       << "\"parents\": " << parents_ << ", "
-      << "\"labels\": " << labels_ << ", "
+      << "\"stereotype\": " << stereotype_ << ", "
       << "\"templates\": " << templates_
       << " }";
 }
@@ -106,7 +106,7 @@ void profile_template::swap(profile_template& other) noexcept {
 
     using std::swap;
     swap(parents_, other.parents_);
-    swap(labels_, other.labels_);
+    swap(stereotype_, other.stereotype_);
     swap(templates_, other.templates_);
 }
 
@@ -119,7 +119,7 @@ bool profile_template::equals(const dogen::variability::meta_model::element& oth
 bool profile_template::operator==(const profile_template& rhs) const {
     return dogen::variability::meta_model::element::compare(rhs) &&
         parents_ == rhs.parents_ &&
-        labels_ == rhs.labels_ &&
+        stereotype_ == rhs.stereotype_ &&
         templates_ == rhs.templates_;
 }
 
@@ -145,20 +145,20 @@ void profile_template::parents(const std::list<std::string>&& v) {
     parents_ = std::move(v);
 }
 
-const std::unordered_set<std::string>& profile_template::labels() const {
-    return labels_;
+const std::unordered_set<std::string>& profile_template::stereotype() const {
+    return stereotype_;
 }
 
-std::unordered_set<std::string>& profile_template::labels() {
-    return labels_;
+std::unordered_set<std::string>& profile_template::stereotype() {
+    return stereotype_;
 }
 
-void profile_template::labels(const std::unordered_set<std::string>& v) {
-    labels_ = v;
+void profile_template::stereotype(const std::unordered_set<std::string>& v) {
+    stereotype_ = v;
 }
 
-void profile_template::labels(const std::unordered_set<std::string>&& v) {
-    labels_ = std::move(v);
+void profile_template::stereotype(const std::unordered_set<std::string>&& v) {
+    stereotype_ = std::move(v);
 }
 
 const std::list<dogen::variability::meta_model::configuration_point_template>& profile_template::templates() const {

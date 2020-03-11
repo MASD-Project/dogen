@@ -51,7 +51,7 @@ public:
         const dogen::variability::meta_model::name& name,
         const std::string& description,
         const std::list<std::string>& parents,
-        const std::unordered_set<std::string>& labels,
+        const std::unordered_set<std::string>& stereotype,
         const std::list<dogen::variability::meta_model::configuration_point_template>& templates);
 
 public:
@@ -63,10 +63,10 @@ public:
     void parents(const std::list<std::string>& v);
     void parents(const std::list<std::string>&& v);
 
-    const std::unordered_set<std::string>& labels() const;
-    std::unordered_set<std::string>& labels();
-    void labels(const std::unordered_set<std::string>& v);
-    void labels(const std::unordered_set<std::string>&& v);
+    const std::unordered_set<std::string>& stereotype() const;
+    std::unordered_set<std::string>& stereotype();
+    void stereotype(const std::unordered_set<std::string>& v);
+    void stereotype(const std::unordered_set<std::string>&& v);
 
     const std::list<dogen::variability::meta_model::configuration_point_template>& templates() const;
     std::list<dogen::variability::meta_model::configuration_point_template>& templates();
@@ -88,7 +88,7 @@ public:
 
 private:
     std::list<std::string> parents_;
-    std::unordered_set<std::string> labels_;
+    std::unordered_set<std::string> stereotype_;
     std::list<dogen::variability::meta_model::configuration_point_template> templates_;
 };
 

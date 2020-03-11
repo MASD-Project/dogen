@@ -89,7 +89,7 @@ profile::profile(
     const std::string& description,
     const std::unordered_map<std::string, dogen::variability::meta_model::configuration_point>& configuration_points,
     const std::list<std::string>& parents,
-    const std::unordered_set<std::string>& labels,
+    const std::unordered_set<std::string>& stereotype,
     const bool merged,
     const std::string& base_layer_profile)
     : dogen::variability::meta_model::element(
@@ -97,7 +97,7 @@ profile::profile(
       description),
       configuration_points_(configuration_points),
       parents_(parents),
-      labels_(labels),
+      stereotype_(stereotype),
       merged_(merged),
       base_layer_profile_(base_layer_profile) { }
 
@@ -115,7 +115,7 @@ void profile::to_stream(std::ostream& s) const {
     s << ", "
       << "\"configuration_points\": " << configuration_points_ << ", "
       << "\"parents\": " << parents_ << ", "
-      << "\"labels\": " << labels_ << ", "
+      << "\"stereotype\": " << stereotype_ << ", "
       << "\"merged\": " << merged_ << ", "
       << "\"base_layer_profile\": " << "\"" << tidy_up_string(base_layer_profile_) << "\""
       << " }";
@@ -127,7 +127,7 @@ void profile::swap(profile& other) noexcept {
     using std::swap;
     swap(configuration_points_, other.configuration_points_);
     swap(parents_, other.parents_);
-    swap(labels_, other.labels_);
+    swap(stereotype_, other.stereotype_);
     swap(merged_, other.merged_);
     swap(base_layer_profile_, other.base_layer_profile_);
 }
@@ -142,7 +142,7 @@ bool profile::operator==(const profile& rhs) const {
     return dogen::variability::meta_model::element::compare(rhs) &&
         configuration_points_ == rhs.configuration_points_ &&
         parents_ == rhs.parents_ &&
-        labels_ == rhs.labels_ &&
+        stereotype_ == rhs.stereotype_ &&
         merged_ == rhs.merged_ &&
         base_layer_profile_ == rhs.base_layer_profile_;
 }
@@ -185,20 +185,20 @@ void profile::parents(const std::list<std::string>&& v) {
     parents_ = std::move(v);
 }
 
-const std::unordered_set<std::string>& profile::labels() const {
-    return labels_;
+const std::unordered_set<std::string>& profile::stereotype() const {
+    return stereotype_;
 }
 
-std::unordered_set<std::string>& profile::labels() {
-    return labels_;
+std::unordered_set<std::string>& profile::stereotype() {
+    return stereotype_;
 }
 
-void profile::labels(const std::unordered_set<std::string>& v) {
-    labels_ = v;
+void profile::stereotype(const std::unordered_set<std::string>& v) {
+    stereotype_ = v;
 }
 
-void profile::labels(const std::unordered_set<std::string>&& v) {
-    labels_ = std::move(v);
+void profile::stereotype(const std::unordered_set<std::string>&& v) {
+    stereotype_ = std::move(v);
 }
 
 bool profile::merged() const {

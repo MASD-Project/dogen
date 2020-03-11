@@ -188,7 +188,7 @@ validate(const std::unordered_map<std::string, meta_model::profile>& pm) {
          * useful in picking up configuration errors.
          */
         std::unordered_set<std::string> done;
-        for (const auto label : prf.labels()) {
+        for (const auto label : prf.stereotype()) {
             if (label.empty()) {
                 BOOST_LOG_SEV(lg, error) << empty_label << prfn;
                 BOOST_THROW_EXCEPTION(transformation_error(empty_label + prfn));
@@ -255,7 +255,7 @@ meta_model::profile_repository profile_merging_transform::create_repository(
      */
     for (const auto& first_pair : pm) {
         const auto& prf(first_pair.second);
-        for (const auto l : prf.labels()) {
+        for (const auto l : prf.stereotype()) {
             const auto label_pair(std::make_pair(l, prf));
             const auto inserted(r.by_labels().insert(label_pair).second);
             if (!inserted) {
