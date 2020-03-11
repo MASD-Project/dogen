@@ -463,23 +463,13 @@ template_instantiator::instantiate(const meta_model::feature_model& fm,
     validate(cpt.location(), cpt.name(), cpt.kind());
 
     /*
-     * Then handle the simplest case, which is that of "instance" -
-     * the identity template.
-     */
-    using meta_model::template_kind;
-    const auto cptqn(cpt.name().qualified());
-    std::list<meta_model::configuration_point> r;
-    if (cpt.kind() == template_kind::instance) {
-        r.push_back(to_configuration_point(fm, cptqn, cpt));
-        return r;
-    }
-
-    /*
-     * Finally, dispatch to the appropriate instantiator.
+     * Dispatch to the appropriate instantiator.
      */
     BOOST_LOG_SEV(lg, debug) << "Instantiating point template: " << cpt;
 
     const auto tk(cpt.kind());
+    using meta_model::template_kind;
+    std::list<meta_model::configuration_point> r;
     if (tk == template_kind::recursive_template)
         r = instantiate_recursive_template(fm, cpt);
     else if (tk == template_kind::facet_template)
