@@ -29,7 +29,7 @@ variability_profile::make_feature_group(const dogen::variability::meta_model::fe
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
-    r.labels = s.get_by_name("masd.variability.labels");
+    r.stereotype = s.get_by_name("masd.variability.stereotype");
 
     return r;
 }
@@ -40,8 +40,8 @@ variability_profile::static_configuration variability_profile::make_static_confi
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    if (s.has_configuration_point(fg.labels))
-        r.labels = s.get_text_content(fg.labels);
+    if (s.has_configuration_point(fg.stereotype))
+        r.stereotype = s.get_text_content(fg.stereotype);
     return r;
 }
 }

@@ -1718,7 +1718,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.labels": "assets::meta_element"
+        "masd.variability.stereotype": "assets::meta_element"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2912,12 +2912,12 @@
           }
         },
         {
-          "name": "masd.variability.labels",
+          "name": "masd.variability.stereotype",
           "type": "masd::variability::text",
           "documentation": "Stereotype for this profile. Must be globally unique.\n",
           "tagged_values": {
             "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.variability.labels",
+            "masd.variability.qualified_name": "masd.variability.stereotype",
             "masd.variability.is_optional": "true"
           }
         },
@@ -3944,12 +3944,12 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.variability.labels",
+          "name": "masd.variability.stereotype",
           "type": "masd::variability::text",
           "documentation": "Stereotype for this profile. Must be globally unique.\n",
           "tagged_values": {
             "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.variability.labels",
+            "masd.variability.qualified_name": "masd.variability.stereotype",
             "masd.variability.is_optional": "true"
           }
         }

@@ -26081,7 +26081,7 @@ properties related to decorations.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=assets::meta_element#</dia:string>
+#DOGEN masd.variability.stereotype=assets::meta_element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -35968,7 +35968,7 @@ ORM in Dogen.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.variability.labels#</dia:string>
+            <dia:string>#masd.variability.stereotype#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -35980,7 +35980,7 @@ ORM in Dogen.
             <dia:string>#Stereotype for this profile. Must be globally unique.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.variability.labels
+#DOGEN masd.variability.qualified_name=masd.variability.stereotype
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -48402,13 +48402,13 @@ the default value field if available.
         <dia:point val="98,81"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="97.95,80.95;117.415,84.65"/>
+        <dia:rectangle val="97.95,80.95;118.955,84.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="98,81"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="19.365000000000002"/>
+        <dia:real val="20.905000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -48507,7 +48507,7 @@ the default value field if available.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.variability.labels#</dia:string>
+            <dia:string>#masd.variability.stereotype#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -48519,7 +48519,7 @@ the default value field if available.
             <dia:string>#Stereotype for this profile. Must be globally unique.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.variability.labels
+#DOGEN masd.variability.qualified_name=masd.variability.stereotype
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">

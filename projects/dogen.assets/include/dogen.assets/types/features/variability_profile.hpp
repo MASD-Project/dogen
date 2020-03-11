@@ -39,7 +39,7 @@ namespace dogen::assets::features {
 class variability_profile final {
 public:
     struct feature_group {
-        variability::meta_model::feature labels;
+        variability::meta_model::feature stereotype;
     };
 
     static feature_group
@@ -47,7 +47,7 @@ public:
 
 public:
     struct static_configuration {
-        std::string labels;
+        std::string stereotype;
     };
 
     static static_configuration make_static_configuration(

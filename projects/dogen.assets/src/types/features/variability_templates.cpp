@@ -45,11 +45,11 @@ make_masd_variability_binding_point() {
 }
 
 dogen::variability::meta_model::feature
-make_masd_variability_labels() {
+make_masd_variability_stereotype() {
     using namespace dogen::variability::meta_model;
     feature r;
-    r.name().simple("labels");
-    r.name().qualified("masd.variability.labels");
+    r.name().simple("stereotype");
+    r.name().qualified("masd.variability.stereotype");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);
@@ -122,7 +122,7 @@ variability_templates::make_feature_group(const dogen::variability::meta_model::
     const dogen::variability::helpers::feature_selector s(fm);
 
     r.binding_point = s.get_by_name("masd.variability.binding_point");
-    r.labels = s.get_by_name("masd.variability.labels");
+    r.stereotype = s.get_by_name("masd.variability.stereotype");
     r.value = s.get_by_name("masd.variability.value");
     r.qualified_name = s.get_by_name("masd.variability.qualified_name");
     r.is_optional = s.get_by_name("masd.variability.is_optional");
@@ -138,8 +138,8 @@ variability_templates::static_configuration variability_templates::make_static_c
     const dogen::variability::helpers::configuration_selector s(cfg);
     if (s.has_configuration_point(fg.binding_point))
         r.binding_point = s.get_text_content(fg.binding_point);
-    if (s.has_configuration_point(fg.labels))
-        r.labels = s.get_text_content(fg.labels);
+    if (s.has_configuration_point(fg.stereotype))
+        r.stereotype = s.get_text_content(fg.stereotype);
     if (s.has_configuration_point(fg.value))
         r.value = s.get_text_collection_content(fg.value);
     if (s.has_configuration_point(fg.qualified_name))
@@ -153,7 +153,7 @@ variability_templates::make_features() {
     using namespace dogen::variability::meta_model;
     std::list<dogen::variability::meta_model::feature> r;
     r.push_back(make_masd_variability_binding_point());
-    r.push_back(make_masd_variability_labels());
+    r.push_back(make_masd_variability_stereotype());
     r.push_back(make_masd_variability_value());
     r.push_back(make_masd_variability_qualified_name());
     r.push_back(make_masd_variability_is_optional());

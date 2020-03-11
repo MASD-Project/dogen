@@ -1261,7 +1261,7 @@ Disables all facets in the C++ backend.#</dia:string>
         <dia:string>#Model element is defined as a type.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=dogen::typeable#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1429,7 +1429,7 @@ so we disable all facets.
         <dia:string>#The element has the ability to dump itself to a stream.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=dogen::pretty_printable#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::pretty_printable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1569,7 +1569,7 @@ so we disable all facets.
         <dia:string>#The element has the ability to generate hashes.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=dogen::hashable#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::hashable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1707,7 +1707,7 @@ so we disable all facets.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=dogen::serializable#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::serializable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1847,7 +1847,7 @@ so we disable all facets.
         <dia:string>#Configuration for model elements that are generated manually by the user.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=dogen::handcrafted::typeable#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2174,7 +2174,7 @@ so we disable all facets.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=dogen::handcrafted::pretty_printable#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::handcrafted::pretty_printable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2339,7 +2339,7 @@ so we disable all facets.
         <dia:string>#This element has only a types header file.
 
 #DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.labels=dogen::handcrafted::typeable::header_only#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::handcrafted::typeable::header_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2477,7 +2477,7 @@ so we disable all facets.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.labels=dogen::inheritable#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::inheritable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2743,7 +2743,7 @@ so we disable all facets.
         <dia:string>#This element has only a types implementation file.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=dogen::handcrafted::typeable::implementation_only#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::handcrafted::typeable::implementation_only#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2931,7 +2931,7 @@ so we disable all facets.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.labels=dogen::cpp::artefact_formatter#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::cpp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3193,7 +3193,7 @@ so we disable all facets.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.labels=dogen::csharp::artefact_formatter#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::csharp::artefact_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3455,7 +3455,7 @@ so we disable all facets.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.labels=dogen::cpp::helper_formatter#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::cpp::helper_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3801,7 +3801,7 @@ so we disable all facets.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.labels=dogen::csharp::helper_formatter#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::csharp::helper_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4246,7 +4246,7 @@ for the element.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=dogen::handcrafted::serializable#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::handcrafted::serializable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4451,7 +4451,7 @@ for the element.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=dogen::convertible#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::convertible#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5226,7 +5226,7 @@ for the element.
         <dia:string>#Model element will not be tested via generated tests.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=dogen::untestable#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::untestable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5366,7 +5366,7 @@ for the element.
         <dia:string>#The element does not have a types facet.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=dogen::untypable#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::untypable#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5504,7 +5504,7 @@ for the element.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.labels=dogen::handcrafted::cmake#</dia:string>
+#DOGEN masd.variability.stereotype=dogen::handcrafted::cmake#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

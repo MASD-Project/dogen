@@ -40,7 +40,7 @@ class variability_templates final {
 public:
     struct feature_group {
         variability::meta_model::feature binding_point;
-        variability::meta_model::feature labels;
+        variability::meta_model::feature stereotype;
         variability::meta_model::feature value;
         variability::meta_model::feature qualified_name;
         variability::meta_model::feature is_optional;
@@ -52,7 +52,7 @@ public:
 public:
     struct static_configuration {
         std::string binding_point;
-        std::string labels;
+        std::string stereotype;
         std::list<std::string> value;
         std::string qualified_name;
         bool is_optional;
