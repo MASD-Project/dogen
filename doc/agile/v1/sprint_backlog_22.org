@@ -14,28 +14,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-11 Wed 14:34]
+#+CAPTION: Clock summary at [2020-03-11 Wed 17:56]
 | <75>                                                    |         |       |      |       |
 | Headline                                                | Time    |       |      |     % |
 |---------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                            | *46:56* |       |      | 100.0 |
+| *Total time*                                            | *50:17* |       |      | 100.0 |
 |---------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                 | 46:56   |       |      | 100.0 |
-| Active                                                  |         | 46:56 |      | 100.0 |
-| Edit release notes for previous sprint                  |         |       | 4:11 |   8.9 |
-| Create a demo and presentation for previous sprint      |         |       | 0:25 |   0.9 |
-| Sprint and product backlog grooming                     |         |       | 5:54 |  12.6 |
-| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  12.6 |
-| Analysis on removing physical references in variability |         |       | 5:27 |  11.6 |
+| Stories                                                 | 50:17   |       |      | 100.0 |
+| Active                                                  |         | 50:17 |      | 100.0 |
+| Edit release notes for previous sprint                  |         |       | 4:11 |   8.3 |
+| Create a demo and presentation for previous sprint      |         |       | 0:25 |   0.8 |
+| Sprint and product backlog grooming                     |         |       | 5:54 |  11.7 |
+| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  11.8 |
+| Analysis on removing physical references in variability |         |       | 5:27 |  10.8 |
 | Remove =rapidjson= formatters                           |         |       | 0:03 |   0.1 |
-| Separate feature templates from bundles                 |         |       | 9:28 |  20.2 |
+| Separate feature templates from bundles                 |         |       | 9:28 |  18.8 |
 | Move enabled to generation                              |         |       | 0:04 |   0.1 |
-| Create a chain to encapsulate variability transforms    |         |       | 0:37 |   1.3 |
-| Move variability chain into assets                      |         |       | 2:22 |   5.0 |
-| Move profile meta-data into profile element             |         |       | 7:12 |  15.3 |
+| Create a chain to encapsulate variability transforms    |         |       | 0:37 |   1.2 |
+| Move variability chain into assets                      |         |       | 2:22 |   4.7 |
+| Move profile meta-data into profile element             |         |       | 7:12 |  14.3 |
 | Add handcrafted stereotype to C# models                 |         |       | 0:04 |   0.1 |
-| Split profiles and profile templates in variability     |         |       | 4:31 |   9.6 |
-| Add location and modules to variability                 |         |       | 0:43 |   1.5 |
+| Split profiles and profile templates in variability     |         |       | 4:31 |   9.0 |
+| Consider renaming labels to stereotypes in variability  |         |       | 1:07 |   2.2 |
+| Add location and modules to variability                 |         |       | 0:43 |   1.4 |
+| Implement template instantiation in terms of tags       |         |       | 2:14 |   4.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -709,6 +711,24 @@ Notes:
   transform?). Profiles transform is really a chain as it is calling
   transforms.
 
+*** COMPLETED Consider renaming labels to stereotypes in variability  :story:
+    CLOSED: [2020-03-11 Wed 15:41]
+    :LOGBOOK:
+    CLOCK: [2020-03-11 Wed 14:34]--[2020-03-11 Wed 15:41] =>  1:07
+    :END:
+
+It appears we use labels just to store the stereotype of the
+profile. If so rename the attribute and associated feature and make it
+just a string.
+
+Merged stories:
+
+*Make labels a plain text field not a collection*
+
+At present it is possible to label a profile with multiple
+labels. This is not a good idea. Make it a plain text field so we can
+only apply a single label.
+
 *** STARTED Add location and modules to variability                   :story:
     :LOGBOOK:
     CLOCK: [2020-03-09 Mon 15:25]--[2020-03-09 Mon 16:08] =>  0:43
@@ -744,8 +764,15 @@ Notes:
   templates. We used the approach of "template kind instance" for
   profile templates. This is very confusing. We need to split these
   two types prior to refactoring this code.
+- given the usage patterns, we probably don't even need locations. We
+  can simply say that there are simple names and qualified
+  names. Qualified name can be composed from bundle name or some other
+  bundle property.
 
-*** Implement template instantiation in terms of tags                 :story:
+*** STARTED Implement template instantiation in terms of tags         :story:
+    :LOGBOOK:
+    CLOCK: [2020-03-11 Wed 15:42]--[2020-03-11 Wed 17:56] =>  2:14
+    :END:
 
 At present we are instantiating templates over a physical space
 (e.g. kernel, facet, archetypes). We need to replace this with
@@ -768,19 +795,50 @@ only have a template kind (all features will share the same tag
 effectively). For symmetry purposes, we probably should make it so
 that profile templates can only bind to one tag.
 
-*** Consider renaming labels to stereotypes in variability            :story:
+Tasks:
 
-It appears we use labels just to store the stereotype of the
-profile. If so rename the attribute and associated feature and make it
-just a string.
+- remove all support for archetype, facet etc in variability which is
+  not used at present. This includes repositories, selector etc. We
+  should get a much better picture of usage patterns once that is
+  done.
+- add new KVP feature in assets: =tag=.
+- add KVP to all relevant model elements (all, kernel, facet,
+  archetype).
+- add tags to configuration model in variability (map of string to
+  list).
+- add tag to feature templates and profile templates. Note that we
+  will need a different feature for this which is not a KVP. Maybe
+  "tag name"?
+- create a new template instantiator that uses the tags to
+  instantiate. Do a side-by-side diff of both.
+- replace all uses of archetype location in selector, etc.
+- remove archetype location from context and context factory for
+  variability.
+- remove references to archetypes model from variability model.
 
-Merged stories:
+Notes:
 
-*Make labels a plain text field not a collection*
+- actually the original tag based approach won't work. The problem is,
+  we need the tag information in order to generate the feature model
+  in variability's phase one. So we must have access to this
+  information at the very start of dogen. As luck would have it, we do
+  already: all the information is already encoded in archetype
+  locations. The problem is we do not want to _specifically_ bind
+  against archetype locations "shape" because we do not want
+  variability to be hard-coded against the geometry of the physical
+  dimension. However, nothing stops us from creating a container of
+  the right shape that is a transformation of the archetype locations
+  into string form:
 
-At present it is possible to label a profile with multiple
-labels. This is not a good idea. Make it a plain text field so we can
-only apply a single label.
+: masd -> all entries for the masd kernel.
+: masd.backend -> all backends in the masd kernel.
+: masd.generation.cpp -> all facets and formatters in generation.cpp kernel
+: masd.facet -> all facets in the masd kernel.
+: masd.generation.cpp.facet -> all facets in generation.cpp kernel.
+
+  and so forth. Each of this is an entry on a map, against a list: the
+  template instantiation domain. Features and profiles supply the
+  template instantiation domain name.
 
 *** Invalid stereotypes outside of objects are not detected           :story:
 
