@@ -14,27 +14,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-11 Wed 08:50]
+#+CAPTION: Clock summary at [2020-03-11 Wed 12:24]
 | <75>                                                    |         |       |      |       |
 | Headline                                                | Time    |       |      |     % |
 |---------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                            | *42:38* |       |      | 100.0 |
+| *Total time*                                            | *46:09* |       |      | 100.0 |
 |---------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                 | 42:38   |       |      | 100.0 |
-| Active                                                  |         | 42:38 |      | 100.0 |
-| Edit release notes for previous sprint                  |         |       | 4:11 |   9.8 |
-| Create a demo and presentation for previous sprint      |         |       | 0:25 |   1.0 |
-| Sprint and product backlog grooming                     |         |       | 5:40 |  13.3 |
-| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  13.9 |
-| Analysis on removing physical references in variability |         |       | 5:27 |  12.8 |
+| Stories                                                 | 46:09   |       |      | 100.0 |
+| Active                                                  |         | 46:09 |      | 100.0 |
+| Edit release notes for previous sprint                  |         |       | 4:11 |   9.1 |
+| Create a demo and presentation for previous sprint      |         |       | 0:25 |   0.9 |
+| Sprint and product backlog grooming                     |         |       | 5:40 |  12.3 |
+| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  12.8 |
+| Analysis on removing physical references in variability |         |       | 5:27 |  11.8 |
 | Remove =rapidjson= formatters                           |         |       | 0:03 |   0.1 |
-| Separate feature templates from bundles                 |         |       | 9:28 |  22.2 |
-| Move enabled to generation                              |         |       | 0:04 |   0.2 |
-| Create a chain to encapsulate variability transforms    |         |       | 0:37 |   1.4 |
-| Move variability chain into assets                      |         |       | 2:22 |   5.6 |
-| Split profiles and profile templates in variability     |         |       | 2:01 |   4.7 |
-| Move profile meta-data into profile element             |         |       | 5:42 |  13.4 |
-| Add location and modules to variability                 |         |       | 0:43 |   1.7 |
+| Separate feature templates from bundles                 |         |       | 9:28 |  20.5 |
+| Move enabled to generation                              |         |       | 0:04 |   0.1 |
+| Create a chain to encapsulate variability transforms    |         |       | 0:37 |   1.3 |
+| Move variability chain into assets                      |         |       | 2:22 |   5.1 |
+| Move profile meta-data into profile element             |         |       | 7:12 |  15.6 |
+| Split profiles and profile templates in variability     |         |       | 4:02 |   8.7 |
+| Add location and modules to variability                 |         |       | 0:43 |   1.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -615,35 +615,11 @@ dependencies between transforms within the assets pipeline and the
 variability pipeline. We should just move the chain into assets if
 there are no dependencies in engine.
 
-*** STARTED Split profiles and profile templates in variability       :story:
+*** COMPLETED Move profile meta-data into profile element             :story:
+    CLOSED: [2020-03-11 Wed 10:00]
     :LOGBOOK:
-    CLOCK: [2020-03-09 Mon 19:36]--[2020-03-09 Mon 20:00] =>  0:24
-    CLOCK: [2020-03-09 Mon 18:49]--[2020-03-09 Mon 19:05] =>  0:16
-    CLOCK: [2020-03-09 Mon 18:41]--[2020-03-09 Mon 18:48] =>  0:07
-    CLOCK: [2020-03-09 Mon 16:40]--[2020-03-09 Mon 17:54] =>  1:14
-    :END:
-
-As with features, we seem to have conflated the profiles with profile
-templates. Given we use templates in a very small number of cases, it
-should really be two separate concepts to avoid confusing end users
-and ourselves.
-
-Notes:
-
-- we should create a chain in engine to gather all of the transforms
-  related to variability.
-- rename "entities transform" to "features transform" and "application
-  transform" to profiles transform". Add lots of commentary explaining
-  the three distinct phases of variability processing (feature model
-  generation, profile processing and feature processing for code
-  generation). Copy across the profile processing from "entities
-  transform" into "application transform". Update profile adapter from
-  stash (and consider merging it into the application
-  transform?). Profiles transform is really a chain as it is calling
-  transforms.
-
-*** STARTED Move profile meta-data into profile element               :story:
-    :LOGBOOK:
+    CLOCK: [2020-03-11 Wed 10:00]--[2020-03-11 Wed 10:22] =>  0:22
+    CLOCK: [2020-03-11 Wed 08:51]--[2020-03-11 Wed 09:59] =>  1:08
     CLOCK: [2020-03-10 Tue 21:10]--[2020-03-10 Tue 21:39] =>  0:29
     CLOCK: [2020-03-10 Tue 19:01]--[2020-03-10 Tue 19:16] =>  0:15
     CLOCK: [2020-03-10 Tue 14:16]--[2020-03-10 Tue 16:08] =>  1:52
@@ -680,10 +656,45 @@ Notes:
 - "adaption" is not a word, rename to "adaptation" (in
   =profile_template_adaption_transform=).
 
-*** Replace variability enum mapper with lexical casts                :story:
+*** STARTED Split profiles and profile templates in variability       :story:
+    :LOGBOOK:
+    CLOCK: [2020-03-11 Wed 10:23]--[2020-03-11 Wed 12:24] =>  2:01
+    CLOCK: [2020-03-09 Mon 19:36]--[2020-03-09 Mon 20:00] =>  0:24
+    CLOCK: [2020-03-09 Mon 18:49]--[2020-03-09 Mon 19:05] =>  0:16
+    CLOCK: [2020-03-09 Mon 18:41]--[2020-03-09 Mon 18:48] =>  0:07
+    CLOCK: [2020-03-09 Mon 16:40]--[2020-03-09 Mon 17:54] =>  1:14
+    :END:
 
-Its not clear what value the mapper adds now we can just lexical cast
-enums from strings.
+As with features, we seem to have conflated the profiles with profile
+templates. Given we use templates in a very small number of cases, it
+should really be two separate concepts to avoid confusing end users
+and ourselves.
+
+Notes:
+
+- we should create a chain in engine to gather all of the transforms
+  related to variability.
+- rename "entities transform" to "features transform" and "application
+  transform" to profiles transform". Add lots of commentary explaining
+  the three distinct phases of variability processing (feature model
+  generation, profile processing and feature processing for code
+  generation). Copy across the profile processing from "entities
+  transform" into "application transform". Update profile adapter from
+  stash (and consider merging it into the application
+  transform?). Profiles transform is really a chain as it is calling
+  transforms.
+
+*** Invalid stereotypes outside of objects are not detected           :story:
+
+At present we are only checking for invalid stereotypes (e.g. those
+which are neither static stereotypes, nor profiles nor object
+templates) on objects and object templates. We need to add a validator
+that checks all other element types. This should be easy, if we ended
+up with any dynamic stereotypes we should error.
+
+In fact we should generalise this processing: object templates should
+mark their stereotypes as bound and then we will check every element
+for any unbound stereotypes using the traversal.
 
 *** STARTED Add location and modules to variability                   :story:
     :LOGBOOK:
@@ -720,6 +731,11 @@ Notes:
   templates. We used the approach of "template kind instance" for
   profile templates. This is very confusing. We need to split these
   two types prior to refactoring this code.
+
+*** Replace variability enum mapper with lexical casts                :story:
+
+Its not clear what value the mapper adds now we can just lexical cast
+enums from strings.
 
 *** Name all transform exceptions consistently                        :story:
 
