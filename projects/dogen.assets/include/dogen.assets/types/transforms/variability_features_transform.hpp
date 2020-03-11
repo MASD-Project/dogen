@@ -40,6 +40,17 @@ namespace dogen::assets::transforms {
 /**
  * @brief Processes the variability entities related to the
  * code-generation of variability code.
+ *
+ * The variability features transform is only worried about
+ * "feature-like" meta-model elements. It is considered the
+ * third-phase of variability processing. It is important to note that
+ * these elements have no part to play in the _current_ processing of
+ * variability data - instead, they will be used to generate code
+ * which will, in the future (e.g. after recompiling the code
+ * generator), inject features into dogen during the first phase of
+ * variability processing. As such, these are best understood as just
+ * like any other code-generation elements rather than variability
+ * entities per se.
  */
 class variability_features_transform final {
 private:
