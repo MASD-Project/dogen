@@ -43,8 +43,8 @@ const std::string no_profiles("Expected at least one profile.");
 const std::string profile_not_found("Profile not found: ");
 const std::string parent_not_found(
     "Parent not found in profile container: ");
-const std::string duplicate_label("Label applied more than once to profile: ");
-const std::string empty_label("Profile has an empty label: ");
+const std::string duplicate_stereotype(
+    "Stereotype used by more than one profile: ");
 const std::string profile_field("masd.variability.profile");
 
 }
@@ -139,11 +139,16 @@ create_profile_map(const std::list<meta_model::profile>& profiles) {
         const auto prfn(prf.name().qualified());
         const auto pair(std::make_pair(prfn, prf));
         const auto inserted(r.insert(pair).second);
-        if (!inserted) {
-            BOOST_LOG_SEV(lg, warn) << duplicate_profile_name << prfn;
-            BOOST_THROW_EXCEPTION(
-                transformation_error(duplicate_profile_name + prfn));
-        }
+        if (inserted)
+            continue;
+
+        /*
+         * Profile names must be globally unique. Stereotypes too,
+         * though we check that elsewhere.
+         */
+        BOOST_LOG_SEV(lg, warn) << duplicate_profile_name << prfn;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(duplicate_profile_name + prfn));
     }
     return r;
 }
@@ -177,29 +182,22 @@ validate(const std::unordered_map<std::string, meta_model::profile>& pm) {
             }
 
             /*
-             * Note that configuration point templates are validated
-             * by the instantiator, so we neeed not bother here.
+             * Note that configuration point templates have been
+             * validated by the instantiator, so we neeed not bother
+             * here.
              */
         }
 
         /*
-         * We don't expect users to define the same label multiple
-         * times on a profile. Nit-picking somewhat but this may be
-         * useful in picking up configuration errors.
+         * Stereotypes can be empty - e.g. for when we are creating
+         * base profiles that are designed to be inherited from and
+         * not used directly. However, since this could have been done
+         * by mistake, might as well log something so that we can at
+         * least grep for it.
          */
-        std::unordered_set<std::string> done;
-        for (const auto label : prf.stereotype()) {
-            if (label.empty()) {
-                BOOST_LOG_SEV(lg, error) << empty_label << prfn;
-                BOOST_THROW_EXCEPTION(transformation_error(empty_label + prfn));
-            }
-
-            if (done.find(label) != done.end()) {
-                BOOST_LOG_SEV(lg, error) << duplicate_label << label;
-                BOOST_THROW_EXCEPTION(
-                    transformation_error(duplicate_label + label));
-            }
-            done.insert(label);
+        if (prf.stereotype().empty()) {
+            BOOST_LOG_SEV(lg, warn) << "Profile has an empty stereotype: "
+                                    << prfn;
         }
 
         BOOST_LOG_SEV(lg, debug) << "Validated profile.";
@@ -241,36 +239,42 @@ populate_base_layer(const meta_model::feature_model& fm,
 
 meta_model::profile_repository profile_merging_transform::create_repository(
     const std::unordered_map<std::string, meta_model::profile>& pm) {
-
     /*
-     * First we insert the annotation against the profile name. This
-     * is just a copy of the map as it already exists.
+     * First we insert the profile against its name. This is just a
+     * copy of the map as it already exists.
      */
     meta_model::profile_repository r;
     r.by_name(pm);
 
     /*
-     * Then we insert it against all the labels. Labels must be
-     * unique across all profiles.
+     * Then we insert it against the stereotype. It must be unique
+     * globally.
      */
     for (const auto& first_pair : pm) {
         const auto& prf(first_pair.second);
-        for (const auto l : prf.stereotype()) {
-            const auto label_pair(std::make_pair(l, prf));
-            const auto inserted(r.by_labels().insert(label_pair).second);
-            if (!inserted) {
-                BOOST_LOG_SEV(lg, error) << duplicate_label << l
-                                         << " Profile: " << first_pair.first;
-                BOOST_THROW_EXCEPTION(
-                    transformation_error(duplicate_label + l));
-            }
-        }
+        const auto s(prf.stereotype());
+
+        /*
+         * If the user did not bother providing us with a stereotype,
+         * then there is nothing to do.
+         */
+        if (s.empty())
+            continue;
+
+        const auto second_pair(std::make_pair(s, prf));
+        const auto inserted(r.by_labels().insert(second_pair).second);
+        if (inserted)
+            continue;
+
+        BOOST_LOG_SEV(lg, error) << duplicate_stereotype << s
+                                 << " Profile: " << first_pair.first;
+        BOOST_THROW_EXCEPTION(transformation_error(duplicate_stereotype + s));
     }
     return r;
 }
 
-meta_model::profile_repository profile_merging_transform::
-apply(const context& ctx,
+meta_model::profile_repository
+profile_merging_transform::apply(const context& ctx,
     const meta_model::feature_model& fm,
     const std::list<meta_model::profile>& profiles) {
     tracing::scoped_transform_tracer stp(lg, "profile merging transform",
@@ -283,7 +287,7 @@ apply(const context& ctx,
     auto pm(create_profile_map(profiles));
 
     /*
-     * Ensure the map is vaguely valid.
+     * Ensure the map itself is vaguely valid.
      */
     validate(pm);
 

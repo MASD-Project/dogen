@@ -12129,13 +12129,13 @@ with Masd.
         <dia:point val="10,-18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.95,-18.05;27.49,-14.35"/>
+        <dia:rectangle val="9.95,-18.05;20.175,-14.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="10,-18"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.440000000000001"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -12233,7 +12233,7 @@ with Masd.
             <dia:string>#stereotype#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_set&lt;std::string&gt;#</dia:string>
+            <dia:string>#std::string#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

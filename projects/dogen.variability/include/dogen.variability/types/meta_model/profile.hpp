@@ -30,7 +30,6 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include <unordered_set>
 #include "dogen.variability/types/meta_model/element.hpp"
 #include "dogen.variability/types/meta_model/configuration_point.hpp"
 
@@ -52,7 +51,7 @@ public:
         const std::string& description,
         const std::unordered_map<std::string, dogen::variability::meta_model::configuration_point>& configuration_points,
         const std::list<std::string>& parents,
-        const std::unordered_set<std::string>& stereotype,
+        const std::string& stereotype,
         const bool merged,
         const std::string& base_layer_profile);
 
@@ -75,10 +74,10 @@ public:
     void parents(const std::list<std::string>& v);
     void parents(const std::list<std::string>&& v);
 
-    const std::unordered_set<std::string>& stereotype() const;
-    std::unordered_set<std::string>& stereotype();
-    void stereotype(const std::unordered_set<std::string>& v);
-    void stereotype(const std::unordered_set<std::string>&& v);
+    const std::string& stereotype() const;
+    std::string& stereotype();
+    void stereotype(const std::string& v);
+    void stereotype(const std::string&& v);
 
     /**
      * @brief If true, the profile has been merged with all of its parents.
@@ -114,7 +113,7 @@ public:
 private:
     std::unordered_map<std::string, dogen::variability::meta_model::configuration_point> configuration_points_;
     std::list<std::string> parents_;
-    std::unordered_set<std::string> stereotype_;
+    std::string stereotype_;
     bool merged_;
     std::string base_layer_profile_;
 };

@@ -48,20 +48,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
 inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::variability::meta_model::configuration_point_template>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -80,7 +66,7 @@ profile_template::profile_template(
     const dogen::variability::meta_model::name& name,
     const std::string& description,
     const std::list<std::string>& parents,
-    const std::unordered_set<std::string>& stereotype,
+    const std::string& stereotype,
     const std::list<dogen::variability::meta_model::configuration_point_template>& templates)
     : dogen::variability::meta_model::element(
       name,
@@ -96,7 +82,7 @@ void profile_template::to_stream(std::ostream& s) const {
     dogen::variability::meta_model::element::to_stream(s);
     s << ", "
       << "\"parents\": " << parents_ << ", "
-      << "\"stereotype\": " << stereotype_ << ", "
+      << "\"stereotype\": " << "\"" << tidy_up_string(stereotype_) << "\"" << ", "
       << "\"templates\": " << templates_
       << " }";
 }
@@ -145,19 +131,19 @@ void profile_template::parents(const std::list<std::string>&& v) {
     parents_ = std::move(v);
 }
 
-const std::unordered_set<std::string>& profile_template::stereotype() const {
+const std::string& profile_template::stereotype() const {
     return stereotype_;
 }
 
-std::unordered_set<std::string>& profile_template::stereotype() {
+std::string& profile_template::stereotype() {
     return stereotype_;
 }
 
-void profile_template::stereotype(const std::unordered_set<std::string>& v) {
+void profile_template::stereotype(const std::string& v) {
     stereotype_ = v;
 }
 
-void profile_template::stereotype(const std::unordered_set<std::string>&& v) {
+void profile_template::stereotype(const std::string&& v) {
     stereotype_ = std::move(v);
 }
 

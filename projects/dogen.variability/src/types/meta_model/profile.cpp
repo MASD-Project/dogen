@@ -65,20 +65,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace dogen::variability::meta_model {
 
 profile::profile()
@@ -89,7 +75,7 @@ profile::profile(
     const std::string& description,
     const std::unordered_map<std::string, dogen::variability::meta_model::configuration_point>& configuration_points,
     const std::list<std::string>& parents,
-    const std::unordered_set<std::string>& stereotype,
+    const std::string& stereotype,
     const bool merged,
     const std::string& base_layer_profile)
     : dogen::variability::meta_model::element(
@@ -115,7 +101,7 @@ void profile::to_stream(std::ostream& s) const {
     s << ", "
       << "\"configuration_points\": " << configuration_points_ << ", "
       << "\"parents\": " << parents_ << ", "
-      << "\"stereotype\": " << stereotype_ << ", "
+      << "\"stereotype\": " << "\"" << tidy_up_string(stereotype_) << "\"" << ", "
       << "\"merged\": " << merged_ << ", "
       << "\"base_layer_profile\": " << "\"" << tidy_up_string(base_layer_profile_) << "\""
       << " }";
@@ -185,19 +171,19 @@ void profile::parents(const std::list<std::string>&& v) {
     parents_ = std::move(v);
 }
 
-const std::unordered_set<std::string>& profile::stereotype() const {
+const std::string& profile::stereotype() const {
     return stereotype_;
 }
 
-std::unordered_set<std::string>& profile::stereotype() {
+std::string& profile::stereotype() {
     return stereotype_;
 }
 
-void profile::stereotype(const std::unordered_set<std::string>& v) {
+void profile::stereotype(const std::string& v) {
     stereotype_ = v;
 }
 
-void profile::stereotype(const std::unordered_set<std::string>&& v) {
+void profile::stereotype(const std::string&& v) {
     stereotype_ = std::move(v);
 }
 
