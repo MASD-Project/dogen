@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
-#include "dogen.variability/types/helpers/enum_mapper.hpp"
+#include "dogen.variability/types/helpers/value_factory.hpp"
 #include "dogen.assets/types/helpers/adaptation_exception.hpp"
 #include "dogen.assets/types/helpers/profile_adapter.hpp"
 
@@ -33,6 +33,9 @@ using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 const std::string empty;
+const std::string missing_feature("Feature not found: ");
+const std::string duplicate_configuration_point(
+    "Found more than one configuration point for the same feature: ");
 
 }
 
@@ -72,6 +75,63 @@ profile_adapter::adapt(const meta_model::variability::profile_template& pt) {
     return r;
 }
 
+variability::meta_model::profile
+profile_adapter::adapt(const variability::meta_model::feature_model& fm,
+    const meta_model::variability::profile& p) {
+    const auto sn(p.name().simple());
+    const auto qn(p.name().qualified().dot());
+    BOOST_LOG_SEV(lg, trace) << "Adapting: " << sn << " (" << qn << ")";
+
+    variability::meta_model::profile r;
+    r.name().simple(sn);
+    r.name().qualified(qn);
+    r.labels(p.labels());
+
+    for (const auto& n : p.parents())
+        r.parents().push_back(n.qualified().dot());
+
+    for (const auto& e : p.entries()) {
+        const auto& k(e.key());
+        BOOST_LOG_SEV(lg, trace) << "Adapting entry: " << k;
+
+        /*
+         * Locate the feature for this configuration point template.
+         */
+        const auto& bn(fm.by_name());
+        BOOST_LOG_SEV(lg, trace) << "Feature qualified name: " << k;
+        const auto i(bn.find(k));
+        if (i == bn.end()) {
+            BOOST_LOG_SEV(lg, error) << missing_feature << k;
+            BOOST_THROW_EXCEPTION(adaptation_exception(missing_feature + k));
+        }
+
+        /*
+         * Now we can populate the name of the point from the point
+         * template's associated feature, and, if supplied, the owner.
+         */
+        const auto& feature(i->second);
+        variability::meta_model::configuration_point cp;
+        cp.name().simple(feature.name().simple());
+        cp.name().qualified(feature.name().qualified());
+
+        /*
+         * Finally we can create the value.
+         */
+        variability::helpers::value_factory vf;
+        cp.value(vf.make(feature, e.value()));
+
+        const auto cpqn(cp.name().qualified());
+        const auto pair(std::make_pair(cpqn, cp));
+        const auto inserted(r.configuration_points().insert(pair).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_configuration_point << cpqn;
+            BOOST_THROW_EXCEPTION(adaptation_exception(
+                    duplicate_configuration_point + cpqn));
+        }
+    }
+    return r;
+}
+
 std::list<variability::meta_model::profile_template> profile_adapter::
 adapt_profile_templates(const assets::meta_model::model_set& ms) {
     std::list<variability::meta_model::profile_template> r;
@@ -87,6 +147,26 @@ adapt_profile_templates(const assets::meta_model::model_set& ms) {
     lambda(ms.target().variability_elements().profile_templates());
     for (const auto& m : ms.references())
         lambda(m.variability_elements().profile_templates());
+
+    return r;
+}
+
+std::list<variability::meta_model::profile> profile_adapter::
+adapt_profiles(const variability::meta_model::feature_model& fm,
+    const assets::meta_model::model_set& ms) {
+    std::list<variability::meta_model::profile> r;
+
+    auto lambda(
+        [&](auto& map) {
+            for (const auto& pair : map) {
+                const auto& pt(*pair.second);
+                r.push_back(adapt(fm, pt));
+            }
+        });
+
+    lambda(ms.target().variability_elements().profiles());
+    for (const auto& m : ms.references())
+        lambda(m.variability_elements().profiles());
 
     return r;
 }

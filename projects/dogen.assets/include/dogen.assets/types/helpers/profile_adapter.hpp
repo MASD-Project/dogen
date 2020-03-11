@@ -25,8 +25,11 @@
 #pragma once
 #endif
 
+#include "dogen.variability/types/meta_model/profile.hpp"
+#include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.variability/types/meta_model/profile_template.hpp"
 #include "dogen.assets/types/meta_model/model_set.hpp"
+#include "dogen.assets/types/meta_model/variability/profile.hpp"
 #include "dogen.assets/types/meta_model/variability/profile_template.hpp"
 
 namespace dogen::assets::helpers {
@@ -42,7 +45,15 @@ private:
      * counterpart.
      */
     static variability::meta_model::profile_template
-    adapt(const meta_model::variability::profile_template& vpt);
+    adapt(const meta_model::variability::profile_template& pt);
+
+    /**
+     * @brief Adapts an assets profile into its variability
+     * counterpart.
+     */
+    static variability::meta_model::profile
+    adapt(const variability::meta_model::feature_model& fm,
+        const meta_model::variability::profile& p);
 
 public:
     /**
@@ -50,6 +61,13 @@ public:
      */
     static std::list<variability::meta_model::profile_template>
     adapt_profile_templates(const meta_model::model_set& ms);
+
+    /**
+     * @brief Adapt all profiles.
+     */
+    static std::list<variability::meta_model::profile>
+    adapt_profiles(const variability::meta_model::feature_model& fm,
+        const meta_model::model_set& ms);
 };
 
 }
