@@ -39,20 +39,20 @@ const std::string empty;
 namespace dogen::assets::helpers {
 
 variability::meta_model::profile_template
-profile_adapter::adapt(const meta_model::variability::profile_template& vpt) {
-    const auto sn(vpt.name().simple());
-    const auto qn(vpt.name().qualified().dot());
+profile_adapter::adapt(const meta_model::variability::profile_template& pt) {
+    const auto sn(pt.name().simple());
+    const auto qn(pt.name().qualified().dot());
     BOOST_LOG_SEV(lg, trace) << "Adapting: " << sn << " (" << qn << ")";
 
     variability::meta_model::profile_template r;
     r.name().simple(sn);
     r.name().qualified(qn);
-    r.labels(vpt.labels());
+    r.labels(pt.labels());
 
-    for (const auto& n : vpt.parents())
+    for (const auto& n : pt.parents())
         r.parents().push_back(n.qualified().dot());
 
-    for (const auto& e : vpt.entries()) {
+    for (const auto& e : pt.entries()) {
         const auto& k(e.key());
         BOOST_LOG_SEV(lg, trace) << "Adapting entry: " << k;
 
@@ -75,18 +75,18 @@ profile_adapter::adapt(const meta_model::variability::profile_template& vpt) {
 std::list<variability::meta_model::profile_template> profile_adapter::
 adapt_profile_templates(const assets::meta_model::model_set& ms) {
     std::list<variability::meta_model::profile_template> r;
-    for (const auto& pair :
-             ms.target().variability_elements().profile_templates()) {
-        const auto& vpt(*pair.second);
-        r.push_back(adapt(vpt));
-    }
 
-    for (const auto& m : ms.references()) {
-        for (const auto& pair : m.variability_elements().profile_templates()) {
-            const auto& vpt(*pair.second);
-            r.push_back(adapt(vpt));
-        }
-    }
+    auto lambda(
+        [&](auto& map) {
+            for (const auto& pair : map) {
+                const auto& pt(*pair.second);
+                r.push_back(adapt(pt));
+            }
+        });
+
+    lambda(ms.target().variability_elements().profile_templates());
+    for (const auto& m : ms.references())
+        lambda(m.variability_elements().profile_templates());
 
     return r;
 }
