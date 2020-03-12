@@ -26,6 +26,7 @@
 #endif
 
 #include <unordered_set>
+#include <unordered_map>
 #include <boost/optional.hpp>
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
@@ -44,7 +45,8 @@ private:
     struct feature_group {
         variability::meta_model::feature cpp_headers_output_directory;
         variability::meta_model::feature enable_backend_directories;
-        std::list<variability::meta_model::feature> enabled;
+        std::unordered_map<std::string,
+                           variability::meta_model::feature> enabled;
     };
 
     static feature_group make_feature_group(

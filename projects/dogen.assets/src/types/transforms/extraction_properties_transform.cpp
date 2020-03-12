@@ -57,8 +57,8 @@ extraction_properties_transform::make_feature_group(
 
     const auto en(traits::enabled());
     for (const auto al : als) {
-        const auto backend(al.backend());
-        r.enabled.push_back(s.get_by_name(backend, en));
+        const auto b(al.backend());
+        r.enabled[b] = s.get_by_name(b, en);
     }
 
     return r;
@@ -81,7 +81,9 @@ obtain_enabled_backends(const feature_group& fg,
     const variability::meta_model::configuration& cfg) {
     std::unordered_set<std::string> r;
     const variability::helpers::configuration_selector s(cfg);
-    for (const auto& f : fg.enabled) {
+    for (const auto& pair : fg.enabled) {
+        const auto& b(pair.first);
+        const auto& f(pair.second);
         const bool enabled(s.get_boolean_content_or_default(f));
         if (!enabled) {
             BOOST_LOG_SEV(lg, trace) << "Backend disabled: "
@@ -89,7 +91,7 @@ obtain_enabled_backends(const feature_group& fg,
             continue;
         }
 
-        r.insert(f.location().backend());
+        r.insert(b);
     }
 
     BOOST_LOG_SEV(lg, trace) << "Enabled backends: " << r;
