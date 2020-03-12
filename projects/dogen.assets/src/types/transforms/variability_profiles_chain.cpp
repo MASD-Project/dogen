@@ -47,6 +47,7 @@ variability_profiles_chain::adapt(const context& ctx) {
     r.archetype_location_repository(ctx.archetype_location_repository());
     r.tracer(ctx.tracer());
     r.compatibility_mode(ctx.compatibility_mode());
+    r.template_instantiation_domains(ctx.template_instantiation_domains());
     return r;
 }
 
