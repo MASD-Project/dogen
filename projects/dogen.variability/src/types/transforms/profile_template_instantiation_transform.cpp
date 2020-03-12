@@ -48,12 +48,13 @@ apply(const context& ctx, const meta_model::feature_model& fm,
         transform_id, transform_id, *ctx.tracer(), pts);
 
     const auto cm(ctx.compatibility_mode());
+    const auto& tids(ctx.template_instantiation_domains());
     const auto& alrp(*ctx.archetype_location_repository());
     helpers::template_instantiator ti(alrp, cm);
 
     std::list<meta_model::profile> r;
     for (const auto& pt : pts) {
-        auto prf(ti.instantiate(fm, pt));
+        auto prf(ti.instantiate_new(tids, fm, pt));
         r.push_back(prf);
     }
 
