@@ -47,6 +47,7 @@ public:
         variability::meta_model::feature archetype;
         variability::meta_model::feature template_kind;
         variability::meta_model::feature default_binding_point;
+        variability::meta_model::feature instantiation_domain_name;
     };
 
     static feature_group
@@ -62,6 +63,7 @@ public:
         std::string archetype;
         std::string template_kind;
         std::string default_binding_point;
+        std::string instantiation_domain_name;
 
         static_configuration() :
             generate_registration(),

@@ -46,6 +46,7 @@ public:
         variability::meta_model::feature archetype;
         variability::meta_model::feature template_kind;
         variability::meta_model::feature value;
+        variability::meta_model::feature instantiation_domain_name;
     };
 
     static feature_group
@@ -60,6 +61,7 @@ public:
         std::string archetype;
         std::string template_kind;
         std::list<std::string> value;
+        std::string instantiation_domain_name;
     };
 
     static static_configuration make_static_configuration(

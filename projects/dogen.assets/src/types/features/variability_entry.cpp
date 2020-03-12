@@ -36,6 +36,7 @@ variability_entry::make_feature_group(const dogen::variability::meta_model::feat
     r.archetype = s.get_by_name("masd.variability.archetype_location.archetype");
     r.template_kind = s.get_by_name("masd.variability.template_kind");
     r.value = s.get_by_name("masd.variability.value");
+    r.instantiation_domain_name = s.get_by_name("masd.variability.instantiation_domain_name");
 
     return r;
 }
@@ -58,6 +59,8 @@ variability_entry::static_configuration variability_entry::make_static_configura
     r.template_kind = s.get_text_content(fg.template_kind);
     if (s.has_configuration_point(fg.value))
         r.value = s.get_text_collection_content(fg.value);
+    if (s.has_configuration_point(fg.instantiation_domain_name))
+        r.instantiation_domain_name = s.get_text_content(fg.instantiation_domain_name);
     return r;
 }
 }

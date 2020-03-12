@@ -3173,6 +3173,16 @@
             "masd.variability.qualified_name": "masd.variability.default_binding_point",
             "masd.variability.is_optional": "true"
           }
+        },
+        {
+          "name": "masd.variability.instantiation_domain_name",
+          "type": "masd::variability::text",
+          "documentation": "Template instantiation domain name to use when instantiating template.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.variability.instantiation_domain_name",
+            "masd.variability.is_optional": "true"
+          }
         }
       ]
     },
@@ -3929,6 +3939,16 @@
           "tagged_values": {
             "masd.variability.binding_point": "property",
             "masd.variability.qualified_name": "masd.variability.value",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "masd.variability.instantiation_domain_name",
+          "type": "masd::variability::text",
+          "documentation": "Template instantiation domain name to use when instantiating template.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "any",
+            "masd.variability.qualified_name": "masd.variability.instantiation_domain_name",
             "masd.variability.is_optional": "true"
           }
         }
