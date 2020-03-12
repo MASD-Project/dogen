@@ -57,6 +57,11 @@ const std::string archetype_name_not_empty(
     "Template is 'archetype template' but facet name is not empty. Template: ");
 const std::string unsupported_template_kind(
     "Template is not supported: ");
+const std::string empty_domains("No instantiation domain names found.");
+const std::string empty_domain_name(
+    "Template has an empty domain name: ");
+const std::string invalid_domain_name(
+    "Instantiation domain name could not be located: ");
 const std::string missing_feature("Feature not found: ");
 const std::string missing_kernel("Recursive templates must supply the kernel.");
 const std::string duplicate_configuration_point(
@@ -517,6 +522,64 @@ instantiate(const meta_model::feature_template& ft) const {
     }
 
     BOOST_LOG_SEV(lg, debug) << "Instantiation result: " << r;
+    return r;
+}
+
+std::list<meta_model::feature> template_instantiator::
+instantiate_new(const std::unordered_map<std::string, std::vector<std::string>>&
+    template_instantiation_domains,
+    const meta_model::feature_template& ft) const {
+    /*
+     * Domain names should never be empty.
+     */
+    if (template_instantiation_domains.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_domains ;
+        BOOST_THROW_EXCEPTION(instantiation_exception(empty_domains));
+
+    }
+
+    /*
+     * All templates must supply a simple name. This cannot be
+     * inferred.
+     */
+    const auto& n(ft.name());
+    const auto sn(n.simple());
+    if (sn.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_simple_name;
+        BOOST_THROW_EXCEPTION(instantiation_exception(empty_simple_name));
+    }
+
+    /*
+     * All templates must supply a instantiation domain name.
+     */
+    const auto idn(ft.instantiation_domain_name());
+    if (idn.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_domain_name << sn;
+        BOOST_THROW_EXCEPTION(instantiation_exception(empty_domain_name + sn));
+    }
+
+    /*
+     * The instantiation domain name provided must exist in our
+     * collection of all domain names.
+     */
+    const auto i(template_instantiation_domains.find(idn));
+    if (i == template_instantiation_domains.end()) {
+        BOOST_LOG_SEV(lg, error) << invalid_domain_name << idn
+                                 << " Requested for template: " << sn;
+        BOOST_THROW_EXCEPTION(
+            instantiation_exception(invalid_domain_name + idn));
+    }
+
+    /*
+     * Perform the template expansion across the domain.
+     */
+    const auto& domain(i->second);
+    std::list<meta_model::feature> r;
+    for (const auto& e : domain) {
+        auto f(to_feature(ft));
+        f.name().qualified(e + "." + sn);
+        r.push_back(f);
+    }
     return r;
 }
 

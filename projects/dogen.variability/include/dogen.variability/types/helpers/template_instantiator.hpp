@@ -165,6 +165,10 @@ public:
      */
     std::list<meta_model::feature>
     instantiate(const meta_model::feature_template& ft) const;
+    std::list<meta_model::feature> instantiate_new(
+        const std::unordered_map<std::string, std::vector<std::string>>&
+        template_instantiation_domains,
+        const meta_model::feature_template& ft) const;
 
     /**
      * @brief Instantiates a profile template across archetype space.
