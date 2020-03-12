@@ -14,32 +14,32 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-12 Thu 12:05]
+#+CAPTION: Clock summary at [2020-03-12 Thu 18:01]
 | <75>                                                    |         |       |      |       |
 | Headline                                                | Time    |       |      |     % |
 |---------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                            | *54:05* |       |      | 100.0 |
+| *Total time*                                            | *58:56* |       |      | 100.0 |
 |---------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                 | 54:05   |       |      | 100.0 |
-| Active                                                  |         | 54:05 |      | 100.0 |
-| Edit release notes for previous sprint                  |         |       | 4:11 |   7.7 |
-| Create a demo and presentation for previous sprint      |         |       | 0:25 |   0.8 |
-| Sprint and product backlog grooming                     |         |       | 6:38 |  12.3 |
-| Emacs configuration and issues                          |         |       | 0:38 |   1.2 |
-| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  10.9 |
-| Analysis on removing physical references in variability |         |       | 5:27 |  10.1 |
+| Stories                                                 | 58:56   |       |      | 100.0 |
+| Active                                                  |         | 58:56 |      | 100.0 |
+| Edit release notes for previous sprint                  |         |       | 4:11 |   7.1 |
+| Create a demo and presentation for previous sprint      |         |       | 0:25 |   0.7 |
+| Sprint and product backlog grooming                     |         |       | 7:04 |  12.0 |
+| Emacs configuration and issues                          |         |       | 1:02 |   1.8 |
+| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  10.0 |
+| Analysis on removing physical references in variability |         |       | 5:27 |   9.2 |
 | Remove =rapidjson= formatters                           |         |       | 0:03 |   0.1 |
-| Separate feature templates from bundles                 |         |       | 9:28 |  17.5 |
+| Separate feature templates from bundles                 |         |       | 9:28 |  16.1 |
 | Move enabled to generation                              |         |       | 0:04 |   0.1 |
-| Create a chain to encapsulate variability transforms    |         |       | 0:37 |   1.1 |
-| Move variability chain into assets                      |         |       | 2:22 |   4.4 |
-| Move profile meta-data into profile element             |         |       | 7:12 |  13.3 |
+| Create a chain to encapsulate variability transforms    |         |       | 0:37 |   1.0 |
+| Move variability chain into assets                      |         |       | 2:22 |   4.0 |
+| Move profile meta-data into profile element             |         |       | 7:12 |  12.2 |
 | Add handcrafted stereotype to C# models                 |         |       | 0:04 |   0.1 |
-| Split profiles and profile templates in variability     |         |       | 4:31 |   8.4 |
-| Consider renaming labels to stereotypes in variability  |         |       | 1:07 |   2.1 |
+| Split profiles and profile templates in variability     |         |       | 4:31 |   7.7 |
+| Consider renaming labels to stereotypes in variability  |         |       | 1:07 |   1.9 |
 | Declaring a =std::list= without parameters segfaults    |         |       | 0:10 |   0.3 |
-| Add location and modules to variability                 |         |       | 0:43 |   1.3 |
-| Implement template instantiation in terms of tags       |         |       | 4:30 |   8.3 |
+| Add location and modules to variability                 |         |       | 0:43 |   1.2 |
+| Implement template instantiation in terms of tags       |         |       | 8:31 |  14.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -220,6 +220,7 @@ Time spent creating the demo and presentation. Use the demo project:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-03-12 Thu 17:59]--[2020-03-12 Thu 18:01] =>  0:02
     CLOCK: [2020-03-12 Thu 12:53]--[2020-03-12 Thu 13:17] =>  0:24
     CLOCK: [2020-03-12 Thu 09:01]--[2020-03-12 Thu 09:09] =>  0:08
     CLOCK: [2020-03-12 Thu 08:46]--[2020-03-12 Thu 09:00] =>  0:14
@@ -247,6 +248,7 @@ Updates to sprint and product backlog.
 
 *** STARTED Emacs configuration and issues                            :story:
     :LOGBOOK:
+    CLOCK: [2020-03-12 Thu 14:41]--[2020-03-12 Thu 15:05] =>  0:24
     CLOCK: [2020-03-12 Thu 11:21]--[2020-03-12 Thu 11:32] =>  0:11
     CLOCK: [2020-03-12 Thu 10:20]--[2020-03-12 Thu 10:47] =>  0:27
     :END:
@@ -255,6 +257,7 @@ Time spent faffing around with emacs.
 
 - crashes related to large JSON files. Did a package update.
 - setup projectile with correct project name and run and test commands.
+- crashes due to playing around with GDB.
 
 Links:
 
@@ -769,10 +772,14 @@ checks on the number of type parameters. This has already been
 recorded in the validation story so we will just have to ignore it for
 now.
 
-*** STARTED Add location and modules to variability                   :story:
+*** CANCELLED Add location and modules to variability                 :story:
+    CLOSED: [2020-03-12 Thu 17:19]
     :LOGBOOK:
     CLOCK: [2020-03-09 Mon 15:25]--[2020-03-09 Mon 16:08] =>  0:43
     :END:
+
+*Rationale*: we didn't need these in the end, qualified names are
+sufficient.
 
 We need to create a location class in variability, based on a simple
 list of strings. It should probably have an attribute called "modules"
@@ -809,8 +816,11 @@ Notes:
   names. Qualified name can be composed from bundle name or some other
   bundle property.
 
-*** STARTED Implement template instantiation in terms of tags         :story:
+*** COMPLETED Implement template instantiation in terms of tags       :story:
+    CLOSED: [2020-03-12 Thu 17:58]
     :LOGBOOK:
+    CLOCK: [2020-03-12 Thu 15:05]--[2020-03-12 Thu 17:58] =>  2:53
+    CLOCK: [2020-03-12 Thu 13:32]--[2020-03-12 Thu 14:40] =>  1:32
     CLOCK: [2020-03-12 Thu 11:33]--[2020-03-12 Thu 12:05] =>  0:32
     CLOCK: [2020-03-12 Thu 10:48]--[2020-03-12 Thu 11:20] =>  0:42
     CLOCK: [2020-03-12 Thu 09:26]--[2020-03-12 Thu 10:19] =>  0:53
@@ -906,66 +916,11 @@ Reviewed tasks:
 - remove archetype location from context and context factory for
   variability.
 - remove references to archetypes model from variability model.
-- add prefixes to feature bundles and profiles. Compute qualified
-  names based on prefixes plus attribute names.
 
-*** Invalid stereotypes outside of objects are not detected           :story:
+*** Remove duplication from feature bundles and profiles              :story:
 
-At present we are only checking for invalid stereotypes (e.g. those
-which are neither static stereotypes, nor profiles nor object
-templates) on objects and object templates. We need to add a validator
-that checks all other element types. This should be easy, if we ended
-up with any dynamic stereotypes we should error.
-
-In fact we should generalise this processing: object templates should
-mark their stereotypes as bound and then we will check every element
-for any unbound stereotypes using the traversal.
-
-*** Add command line option to dump all features                      :story:
-
-We need a way to access a text description of all features in the
-command line. The variability model should expose this, and then the
-CLI model should use it to print a human readable version of the
-features. We should allow for two modes: human friendly (e.g. wrap at
-a column, indent by groups) and grep friendly (e.g. no indent, long
-lines).
-
-We should probably create a new command called info and then have
-options of what to dump:
-
-- features
-- frontends
-- backends
-- stereotypes
-
-And so forth.
-
-Links:
-
-- https://www.rosettacode.org/wiki/Word_wrap#C.2B.2B
-
-Merged stories:
-
-*Add annotation types description*
-
-It would be useful to have a description of the purpose of the field
-so that we could print it to the command line. We could simply add a
-JSON attribute to the field called description to start off with. But
-ideally we need a command line argument to dump all fields and their
-descriptions so that users know what's available.
-
-This should be sorted by qualified name.
-
-Notes:
-
-- we already added comments to many features. This seems to be the
-  right place in the model to record this information. We just need to
-  propagate it into the feature template and then into the feature.
-- context is already doing all of the hard work for feature
-  instantiation. We just need to create a transform that calls the
-  context factory, retrieves all of the descriptions as strings
-  somehow, and then get the command line to print them out. This can
-  then be extended in the future to include backends, etc.
+Add prefixes to feature bundles and profiles. Compute qualified names
+based on prefixes plus attribute names.
 
 *** Postfix and directory fields should be templates                  :story:
 
@@ -1053,10 +1008,65 @@ Why are we manually instantiating postfix and directory for each
 formatter/facet instead of using templates? This is one of the main
 reasons for breaks/errors when adding a new formatter.
 
-*** Replace variability enum mapper with lexical casts                :story:
+*** Allow dropping facet postfix for an element                       :story:
 
-Its not clear what value the mapper adds now we can just lexical cast
-enums from strings.
+We sometimes need to suppress the facet postfix. For example, when
+outputting tests, at present we have:
+
+: cpp_ref_impl.boost_model/generated_tests/main_tests.cpp
+
+We may want it just to be called:
+
+: cpp_ref_impl.boost_model/generated_tests/main.cpp
+
+However, we don't want all files on that facet to drop their postfix,
+just main.
+
+*** Add command line option to dump all features                      :story:
+
+We need a way to access a text description of all features in the
+command line. The variability model should expose this, and then the
+CLI model should use it to print a human readable version of the
+features. We should allow for two modes: human friendly (e.g. wrap at
+a column, indent by groups) and grep friendly (e.g. no indent, long
+lines).
+
+We should probably create a new command called info and then have
+options of what to dump:
+
+- features
+- frontends
+- backends
+- stereotypes
+
+And so forth.
+
+Links:
+
+- https://www.rosettacode.org/wiki/Word_wrap#C.2B.2B
+
+Merged stories:
+
+*Add annotation types description*
+
+It would be useful to have a description of the purpose of the field
+so that we could print it to the command line. We could simply add a
+JSON attribute to the field called description to start off with. But
+ideally we need a command line argument to dump all fields and their
+descriptions so that users know what's available.
+
+This should be sorted by qualified name.
+
+Notes:
+
+- we already added comments to many features. This seems to be the
+  right place in the model to record this information. We just need to
+  propagate it into the feature template and then into the feature.
+- context is already doing all of the hard work for feature
+  instantiation. We just need to create a transform that calls the
+  context factory, retrieves all of the descriptions as strings
+  somehow, and then get the command line to print them out. This can
+  then be extended in the future to include backends, etc.
 
 *** Detect non-configurable fields                                    :story:
 
@@ -1091,20 +1101,6 @@ are saying configurations exist in one of two states:
   read;
 - post-expansion, in which only fields that are "post-expansion" can
   be read.
-
-*** Allow dropping facet postfix for an element                       :story:
-
-We sometimes need to suppress the facet postfix. For example, when
-outputting tests, at present we have:
-
-: cpp_ref_impl.boost_model/generated_tests/main_tests.cpp
-
-We may want it just to be called:
-
-: cpp_ref_impl.boost_model/generated_tests/main.cpp
-
-However, we don't want all files on that facet to drop their postfix,
-just main.
 
 *** Refactor archetype model                                          :story:
 
@@ -1178,6 +1174,11 @@ Instead of using strings we should use primitives for:
 - backends
 - simple and qualified names.
 - etc.
+
+*** Replace variability enum mapper with lexical casts                :story:
+
+Its not clear what value the mapper adds now we can just lexical cast
+enums from strings.
 
 *** Enablement problem is in the variability domain                   :story:
 
@@ -1750,6 +1751,18 @@ Links:
   C++ project with boiler-plate CMake files and source code, and the
   generated project can be downloaded as a zip file."
 - [[https://awfulcode.io/2019/04/13/professional-zero-cost-setup-for-c-projects-part-1-of-n/][Professional, zero-cost setup for C++ projects (Part 1 of N)]]:
+
+*** Invalid stereotypes outside of objects are not detected           :story:
+
+At present we are only checking for invalid stereotypes (e.g. those
+which are neither static stereotypes, nor profiles nor object
+templates) on objects and object templates. We need to add a validator
+that checks all other element types. This should be easy, if we ended
+up with any dynamic stereotypes we should error.
+
+In fact we should generalise this processing: object templates should
+mark their stereotypes as bound and then we will check every element
+for any unbound stereotypes using the traversal.
 
 *** Formatter meta-model elements                                     :story:
 
