@@ -142,7 +142,7 @@ a.stream() << "    r.binding_point(" << enum_mapper::from_binding_point(*ft.bind
 a.stream() << "    r.kind(" << enum_mapper::from_template_kind(ftb.template_kind()) << ");" << std::endl;
                    // FIXME: whilst its optional
                    if (!ftb.instantiation_domain_name().empty()) {
-a.stream() << "    r.instantiation_domain_name(" << ftb.instantiation_domain_name() << ");" << std::endl;
+a.stream() << "    r.instantiation_domain_name(\"" << ftb.instantiation_domain_name() << "\");" << std::endl;
                    }
 
                    if (!ft.value().empty()) {
