@@ -199,11 +199,14 @@ make_context(const configuration& cfg, const std::string& activity,
     tracer->start_run(alrp_input_id, *alrp);
 
     /*
-     * Create the top-level context and all of its sub-contexts.
+     * Create the top-level context and all of its sub-contexts. Start
+     * by copying across attributes we've already defined.
      */
     engine::transforms::context r;
     r.variability_context(vctx);
     r.assets_context().compatibility_mode(cm);
+    r.assets_context().template_instantiation_domains(
+        vctx.template_instantiation_domains());
 
     /*
      * Obtain the data directories.
