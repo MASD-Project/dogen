@@ -86,14 +86,8 @@ make_<#= ft.identifiable_key() #>() {
     const auto vt(<#= enum_mapper::from_value_type(ft.value_type()) #>);
     r.value_type(vt);
     r.binding_point(<#= enum_mapper::from_binding_point(*ft.binding_point()) #>);
-    r.kind(<#= enum_mapper::from_template_kind(ftb.template_kind()) #>);
-<#+
-                   // FIXME: whilst its optional
-                   if (!ftb.instantiation_domain_name().empty()) {
-#>
     r.instantiation_domain_name("<#= ftb.instantiation_domain_name() #>");
 <#+
-                   }
 
                    if (!ft.value().empty()) {
 #>

@@ -35,7 +35,6 @@ make_formatting_style() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-    r.kind(template_kind::archetype_template);
     r.instantiation_domain_name("masd.archetype");
     return r;
 }
@@ -48,7 +47,6 @@ make_formatting_input() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-    r.kind(template_kind::archetype_template);
     r.instantiation_domain_name("masd.archetype");
     return r;
 }

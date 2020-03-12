@@ -139,11 +139,7 @@ a.stream() << "    r.name().qualified(\"" << ft.key() << "\");" << std::endl;
 a.stream() << "    const auto vt(" << enum_mapper::from_value_type(ft.value_type()) << ");" << std::endl;
 a.stream() << "    r.value_type(vt);" << std::endl;
 a.stream() << "    r.binding_point(" << enum_mapper::from_binding_point(*ft.binding_point()) << ");" << std::endl;
-a.stream() << "    r.kind(" << enum_mapper::from_template_kind(ftb.template_kind()) << ");" << std::endl;
-                   // FIXME: whilst its optional
-                   if (!ftb.instantiation_domain_name().empty()) {
 a.stream() << "    r.instantiation_domain_name(\"" << ftb.instantiation_domain_name() << "\");" << std::endl;
-                   }
 
                    if (!ft.value().empty()) {
 a.stream() << "    dogen::variability::helpers::value_factory f;" << std::endl;

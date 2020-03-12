@@ -35,7 +35,6 @@ make_overwrite() {
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-    r.kind(template_kind::archetype_template);
     r.instantiation_domain_name("masd.generation.cpp.archetype");
     return r;
 }
@@ -48,7 +47,6 @@ make_primary_inclusion_directive() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-    r.kind(template_kind::archetype_template);
     r.instantiation_domain_name("masd.generation.cpp.archetype");
     return r;
 }
@@ -61,7 +59,6 @@ make_secondary_inclusion_directive() {
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-    r.kind(template_kind::archetype_template);
     r.instantiation_domain_name("masd.generation.cpp.archetype");
     return r;
 }
