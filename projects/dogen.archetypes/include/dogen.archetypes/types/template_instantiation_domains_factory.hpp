@@ -25,24 +25,17 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include <unordered_map>
+#include "dogen.archetypes/types/location.hpp"
 
 namespace dogen::archetypes {
 
 class template_instantiation_domains_factory final {
 public:
-    template_instantiation_domains_factory() = default;
-    template_instantiation_domains_factory(const template_instantiation_domains_factory&) = default;
-    template_instantiation_domains_factory(template_instantiation_domains_factory&&) = default;
-    ~template_instantiation_domains_factory() = default;
-    template_instantiation_domains_factory& operator=(const template_instantiation_domains_factory&) = default;
-
-public:
-    bool operator==(const template_instantiation_domains_factory& rhs) const;
-    bool operator!=(const template_instantiation_domains_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static std::unordered_map<std::string, std::list<std::string>>
+    make(const std::list<location>& ls);
 };
 
 }
