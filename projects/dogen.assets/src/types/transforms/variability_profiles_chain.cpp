@@ -44,7 +44,6 @@ namespace dogen::assets::transforms {
 variability::transforms::context
 variability_profiles_chain::adapt(const context& ctx) {
     variability::transforms::context r;
-    r.archetype_location_repository(ctx.archetype_location_repository());
     r.tracer(ctx.tracer());
     r.compatibility_mode(ctx.compatibility_mode());
     r.template_instantiation_domains(ctx.template_instantiation_domains());

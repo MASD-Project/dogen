@@ -787,7 +787,7 @@ C++ pointers, references and so on.#</dia:string>
         <dia:point val="-279,-103"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-279.05,-103.05;-249.945,-66.05"/>
+        <dia:rectangle val="-279.05,-103.05;-249.945,-65.25"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -799,7 +799,7 @@ C++ pointers, references and so on.#</dia:string>
         <dia:real val="29.005000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="36.899999999999999"/>
+        <dia:real val="37.700000000000003"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -854,6 +854,7 @@ etc.).
 #DOGEN masd.injection.reference=masd
 #DOGEN masd.injection.reference=masd.variability
 #DOGEN masd.injection.reference=dogen.profiles
+#DOGEN masd.injection.reference=dogen.archetypes
 #DOGEN masd.injection.input_technical_space=cpp
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
@@ -48742,13 +48743,13 @@ types, see the comments on the variability types.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O374">
       <dia:attribute name="obj_pos">
-        <dia:point val="1,-43"/>
+        <dia:point val="2,-43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="0.95,-43.05;16.565,-40.15"/>
+        <dia:rectangle val="1.95,-43.05;17.565,-40.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="1,-43"/>
+        <dia:point val="2,-43"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -48922,7 +48923,7 @@ types, see the comments on the variability types.#</dia:string>
         <dia:point val="2.95,-45.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.1,-45.65;8.8075,-42.95"/>
+        <dia:rectangle val="2.1,-45.65;9.8075,-42.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -48930,8 +48931,8 @@ types, see the comments on the variability types.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="2.95,-45.6"/>
         <dia:point val="2.95,-44"/>
-        <dia:point val="8.7575,-44"/>
-        <dia:point val="8.7575,-43"/>
+        <dia:point val="9.7575,-44"/>
+        <dia:point val="9.7575,-43"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -49000,7 +49001,7 @@ types, see the comments on the variability types.#</dia:string>
         <dia:point val="42.5275,-40.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="8.7075,-40.95;43.2775,-37.95"/>
+        <dia:rectangle val="9.7075,-40.95;43.2775,-37.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -49008,8 +49009,8 @@ types, see the comments on the variability types.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="42.5275,-40.2"/>
         <dia:point val="42.5275,-38"/>
-        <dia:point val="8.7575,-38"/>
-        <dia:point val="8.7575,-40.2"/>
+        <dia:point val="9.7575,-38"/>
+        <dia:point val="9.7575,-40.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

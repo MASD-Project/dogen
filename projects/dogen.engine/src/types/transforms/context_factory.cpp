@@ -176,7 +176,6 @@ make_context(const configuration& cfg, const std::string& activity,
      * Obtain the archetype location repository.
      */
     const auto alrp(create_archetype_location_repository(rg));
-    vctx.archetype_location_repository(alrp);
 
     /*
      * Obtain the template instantiation domains.

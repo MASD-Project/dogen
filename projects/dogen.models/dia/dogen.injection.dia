@@ -902,7 +902,7 @@
         <dia:point val="-20,-4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-20.05,-4.05;7.13,25.75"/>
+        <dia:rectangle val="-20.05,-4.05;7.13,26.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -914,7 +914,7 @@
         <dia:real val="27.080000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="29.700000000000003"/>
+        <dia:real val="30.500000000000004"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -961,6 +961,7 @@ manage it.
 #DOGEN masd.injection.reference=masd
 #DOGEN masd.injection.reference=masd.variability
 #DOGEN masd.injection.reference=dogen.profiles
+#DOGEN masd.injection.reference=dogen.archetypes
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
 #DOGEN masd.variability.profile=dogen.profiles.base.default_profile#</dia:string>

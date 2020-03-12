@@ -22,24 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.tracing/io/tracer_io.hpp"
-#include "dogen.archetypes/io/location_repository_io.hpp"
 #include "dogen.variability/io/transforms/context_io.hpp"
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::archetypes::location_repository>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
-      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
-    return s;
-}
-
-}
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -109,7 +92,6 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::variability::transforms::context\"" << ", "
       << "\"compatibility_mode\": " << v.compatibility_mode() << ", "
-      << "\"archetype_location_repository\": " << v.archetype_location_repository() << ", "
       << "\"template_instantiation_domains\": " << v.template_instantiation_domains() << ", "
       << "\"tracer\": " << v.tracer()
       << " }";

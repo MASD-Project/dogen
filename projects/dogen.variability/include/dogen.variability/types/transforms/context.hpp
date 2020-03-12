@@ -31,7 +31,6 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include "dogen.tracing/types/tracer_fwd.hpp"
-#include "dogen.archetypes/types/location_repository_fwd.hpp"
 
 namespace dogen::variability::transforms {
 
@@ -50,18 +49,12 @@ public:
 public:
     context(
         const bool compatibility_mode,
-        const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository,
         const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains,
         const boost::shared_ptr<dogen::tracing::tracer>& tracer);
 
 public:
     bool compatibility_mode() const;
     void compatibility_mode(const bool v);
-
-    const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository() const;
-    boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository();
-    void archetype_location_repository(const boost::shared_ptr<dogen::archetypes::location_repository>& v);
-    void archetype_location_repository(const boost::shared_ptr<dogen::archetypes::location_repository>&& v);
 
     /**
      * @brief Provides all of the domains to be used for template instantiation.
@@ -94,7 +87,6 @@ public:
 
 private:
     bool compatibility_mode_;
-    boost::shared_ptr<dogen::archetypes::location_repository> archetype_location_repository_;
     std::unordered_map<std::string, std::vector<std::string> > template_instantiation_domains_;
     boost::shared_ptr<dogen::tracing::tracer> tracer_;
 };
