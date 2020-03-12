@@ -53,26 +53,16 @@ feature_template_instantiation_transform::apply(const context& ctx,
     unsigned int counter(0);
     std::list<meta_model::feature> r;
     for (const auto& ft : ftrp.templates()) {
-        r.splice(r.end(), ti.instantiate(ft));
+        r.splice(r.end(), ti.instantiate(tids, ft));
         ++counter;
     }
 
-    BOOST_LOG_SEV(lg, trace)  << "Old world: " << r;
-    BOOST_LOG_SEV(lg, debug) << "Total number of templates instantiated: "
-                             << counter;
-
-    std::list<meta_model::feature> r2;
-    for (const auto& ft : ftrp.templates()) {
-        r2.splice(r2.end(), ti.instantiate_new(tids, ft));
-        ++counter;
-    }
-
-    BOOST_LOG_SEV(lg, trace)  << "New world: " << r2;
+    BOOST_LOG_SEV(lg, trace)  << "Instantiated features: " << r;
     BOOST_LOG_SEV(lg, debug) << "Total number of templates instantiated: "
                              << counter;
 
     stp.end_transform(r);
-    return r2;
+    return r;
 }
 
 }

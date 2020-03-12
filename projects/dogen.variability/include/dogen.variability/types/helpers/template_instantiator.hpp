@@ -97,36 +97,6 @@ private:
 
 private:
     /**
-     * @brief Instantiates a feature template that is recursive across
-     * archetype space.
-     */
-    std::list<meta_model::feature> instantiate_recursive_template(
-        const meta_model::feature_template &ft) const;
-
-    /**
-     * @brief Instantiates the feature template for all available
-     * facets in archetype space, for a given backend.
-     */
-    void instantiate_facet_template(const meta_model::feature_template &ft,
-        const std::string &backend_name,
-        const std::unordered_set<std::string> &facet_names,
-        std::list<meta_model::feature> &features) const;
-
-    /**
-     * @brief Instantiates the feature template for all available
-     * facets in archetype space, across all backends.
-     */
-    std::list<meta_model::feature>
-    instantiate_facet_template(const meta_model::feature_template &ft) const;
-
-    /**
-     * @brief Instantiates a feature template across all archetypes.
-     */
-    std::list<meta_model::feature> instantiate_archetype_template(
-        const meta_model::feature_template &ft) const;
-
-private:
-    /**
      * @brief Instantiates a configuration point template that is
      * recursive across archetype space.
      */
@@ -163,9 +133,7 @@ public:
      * @brief Instantiates the feature template across archetype
      * space.
      */
-    std::list<meta_model::feature>
-    instantiate(const meta_model::feature_template& ft) const;
-    std::list<meta_model::feature> instantiate_new(
+    std::list<meta_model::feature> instantiate(
         const std::unordered_map<std::string, std::vector<std::string>>&
         template_instantiation_domains,
         const meta_model::feature_template& ft) const;
