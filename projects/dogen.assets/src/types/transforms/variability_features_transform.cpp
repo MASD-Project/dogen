@@ -24,7 +24,6 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/helpers/enum_mapper.hpp"
 #include "dogen.variability/lexical_cast/meta_model/binding_point_lc.hpp"
-#include "dogen.variability/lexical_cast/meta_model/template_kind_lc.hpp"
 #include "dogen.assets/types/traits.hpp"
 #include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/types/meta_model/attribute.hpp"
@@ -42,6 +41,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 const std::string empty;
+const std::string empty_domain("Domain name cannot be empty: ");
 const std::string fixed_mapping_not_found("Fixed mapping not found: ");
 const std::string too_many_bindings(
     "Binding point supplied at bundle and template level: ");
@@ -87,11 +87,14 @@ update(const features::variability_bundle::feature_group& fg,
     fb.generate_static_configuration(scfg.generate_static_configuration);
 
     using boost::lexical_cast;
-    using variability::meta_model::template_kind;
     using meta_model::variability::feature_template_bundle;
     auto ftb(dynamic_cast<feature_template_bundle*>(&fb));
     if (ftb) {
-        ftb->template_kind(lexical_cast<template_kind>(scfg.template_kind));
+        if (scfg.instantiation_domain_name.empty()) {
+            const auto qn(fb.name().qualified().dot());
+            BOOST_LOG_SEV(lg, error) << empty_domain << qn;
+            BOOST_THROW_EXCEPTION(transformation_error(empty_domain + qn));
+        }
         ftb->instantiation_domain_name(scfg.instantiation_domain_name);
     }
 

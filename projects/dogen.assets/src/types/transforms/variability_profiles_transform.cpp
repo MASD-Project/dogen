@@ -25,7 +25,6 @@
 #include "dogen.variability/types/transforms/context.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
 #include "dogen.variability/lexical_cast/meta_model/binding_point_lc.hpp"
-#include "dogen.variability/lexical_cast/meta_model/template_kind_lc.hpp"
 #include "dogen.assets/io/meta_model/model_set_io.hpp"
 #include "dogen.assets/types/meta_model/variability/profile.hpp"
 #include "dogen.assets/types/transforms/transformation_error.hpp"
@@ -40,6 +39,7 @@ const std::string transform_id(
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
+const std::string empty_domain("Domain name cannot be empty: ");
 const std::string missing_value("Must supply a value for entry: ");
 const std::string conflicting_values(
     "Entry has a value as meta-data and as a property: ");
@@ -68,11 +68,13 @@ update(const features::variability_entry::feature_group& fg,
     const auto scfg(variability_entry::make_static_configuration(fg, ape));
 
     using boost::lexical_cast;
-    using variability::meta_model::template_kind;
     using meta_model::variability::profile_template_entry;
     auto pte(dynamic_cast<profile_template_entry*>(&ape));
     if (pte) {
-        pte->template_kind(lexical_cast<template_kind>(scfg.template_kind));
+        if (scfg.instantiation_domain_name.empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_domain << k;
+            BOOST_THROW_EXCEPTION(transformation_error(empty_domain + k));
+        }
         pte->instantiation_domain_name(scfg.instantiation_domain_name);
     }
 
