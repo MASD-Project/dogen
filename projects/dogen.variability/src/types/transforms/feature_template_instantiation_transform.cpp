@@ -46,6 +46,7 @@ feature_template_instantiation_transform::apply(const context& ctx,
         transform_id, transform_id, *ctx.tracer(), ftrp);
 
     const auto cm(ctx.compatibility_mode());
+    const auto& tids(ctx.template_instantiation_domains());
     const auto& alrp(*ctx.archetype_location_repository());
     helpers::template_instantiator ti(alrp, cm);
 
@@ -55,11 +56,23 @@ feature_template_instantiation_transform::apply(const context& ctx,
         r.splice(r.end(), ti.instantiate(ft));
         ++counter;
     }
+
+    BOOST_LOG_SEV(lg, trace)  << "Old world: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Total number of templates instantiated: "
+                             << counter;
+
+    std::list<meta_model::feature> r2;
+    for (const auto& ft : ftrp.templates()) {
+        r2.splice(r2.end(), ti.instantiate_new(tids, ft));
+        ++counter;
+    }
+
+    BOOST_LOG_SEV(lg, trace)  << "New world: " << r2;
     BOOST_LOG_SEV(lg, debug) << "Total number of templates instantiated: "
                              << counter;
 
     stp.end_transform(r);
-    return r;
+    return r2;
 }
 
 }
