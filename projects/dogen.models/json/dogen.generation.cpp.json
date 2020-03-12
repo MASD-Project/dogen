@@ -1570,9 +1570,7 @@
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
-        "masd.variability.default_binding_point": "global",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.default_binding_point": "global"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1776,9 +1774,7 @@
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
-        "masd.variability.default_binding_point": "global",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.default_binding_point": "global"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1871,9 +1867,7 @@
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
-        "masd.variability.default_binding_point": "global",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.default_binding_point": "global"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1965,9 +1959,7 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.generate_static_configuration": "false",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.generate_static_configuration": "false"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2079,9 +2071,7 @@
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
-        "masd.variability.default_binding_point": "global",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.default_binding_point": "global"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2174,9 +2164,7 @@
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
-        "masd.variability.default_binding_point": "global",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.default_binding_point": "global"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2293,9 +2281,7 @@
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
-        "masd.variability.default_binding_point": "global",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.default_binding_point": "global"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2363,9 +2349,7 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.generate_static_configuration": "false",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.generate_static_configuration": "false"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2597,9 +2581,6 @@
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "element",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.archetype_location.backend": "masd.generation.cpp",
-        "masd.variability.template_kind": "facet_template",
         "masd.variability.instantiation_domain_name": "masd.generation.cpp.facet"
       },
       "fallback_element_type": "masd::object",
@@ -2623,9 +2604,6 @@
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "element",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.archetype_location.backend": "masd.generation.cpp",
-        "masd.variability.template_kind": "archetype_template",
         "masd.variability.instantiation_domain_name": "masd.generation.cpp.archetype"
       },
       "fallback_element_type": "masd::object",
@@ -2680,9 +2658,7 @@
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
-        "masd.variability.default_binding_point": "global",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.default_binding_point": "global"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2808,9 +2784,7 @@
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
-        "masd.variability.default_binding_point": "global",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.default_binding_point": "global"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2939,9 +2913,7 @@
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
-        "masd.variability.default_binding_point": "global",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.default_binding_point": "global"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3080,9 +3052,7 @@
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
-        "masd.variability.default_binding_point": "global",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.default_binding_point": "global"
       },
       "fallback_element_type": "masd::object",
       "attributes": [

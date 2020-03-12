@@ -40,11 +40,6 @@ class variability_entry final {
 public:
     struct feature_group {
         variability::meta_model::feature binding_point;
-        variability::meta_model::feature kernel;
-        variability::meta_model::feature backend;
-        variability::meta_model::feature facet;
-        variability::meta_model::feature archetype;
-        variability::meta_model::feature template_kind;
         variability::meta_model::feature value;
         variability::meta_model::feature instantiation_domain_name;
     };
@@ -55,11 +50,6 @@ public:
 public:
     struct static_configuration {
         std::string binding_point;
-        std::string kernel;
-        std::string backend;
-        std::string facet;
-        std::string archetype;
-        std::string template_kind;
         std::list<std::string> value;
         std::string instantiation_domain_name;
     };

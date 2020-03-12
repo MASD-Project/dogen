@@ -957,9 +957,7 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.default_binding_point": "any",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.default_binding_point": "any"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1025,8 +1023,6 @@
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "any",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "archetype_template",
         "masd.variability.instantiation_domain_name": "masd.archetype"
       },
       "fallback_element_type": "masd::object",
@@ -1095,8 +1091,6 @@
       "tagged_values": {
         "masd.variability.default_binding_point": "any",
         "masd.variability.generate_static_configuration": "false",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "recursive_template",
         "masd.variability.instantiation_domain_name": "masd"
       },
       "fallback_element_type": "masd::object",

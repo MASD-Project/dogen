@@ -13656,9 +13656,7 @@
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
-#DOGEN masd.variability.default_binding_point=global
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.default_binding_point=global#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14042,9 +14040,7 @@
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
-#DOGEN masd.variability.default_binding_point=global
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.default_binding_point=global#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14296,13 +14292,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O116">
       <dia:attribute name="obj_pos">
-        <dia:point val="72.2143,92"/>
+        <dia:point val="71.7143,91.7143"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.1643,91.95;107.799,99.65"/>
+        <dia:rectangle val="71.6643,91.6643;107.299,99.3643"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="72.2143,92"/>
+        <dia:point val="71.7143,91.7143"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="35.535000000000004"/>
@@ -14318,9 +14314,7 @@
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
-#DOGEN masd.variability.default_binding_point=global
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.default_binding_point=global#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14570,9 +14564,7 @@
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.variability.generate_static_configuration=false
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+        <dia:string>##DOGEN masd.variability.generate_static_configuration=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14805,9 +14797,6 @@
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.default_binding_point=element
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.archetype_location.backend=masd.generation.csharp
-#DOGEN masd.variability.template_kind=archetype_template
 #DOGEN masd.variability.instantiation_domain_name=masd.generation.csharp.archetype#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -14944,9 +14933,6 @@
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.default_binding_point=element
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.archetype_location.backend=masd.generation.csharp
-#DOGEN masd.variability.template_kind=facet_template
 #DOGEN masd.variability.instantiation_domain_name=masd.generation.csharp.facet#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -15917,9 +15903,7 @@
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
-#DOGEN masd.variability.default_binding_point=global
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.default_binding_point=global#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

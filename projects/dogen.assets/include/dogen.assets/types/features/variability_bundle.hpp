@@ -41,11 +41,6 @@ public:
     struct feature_group {
         variability::meta_model::feature generate_registration;
         variability::meta_model::feature generate_static_configuration;
-        variability::meta_model::feature kernel;
-        variability::meta_model::feature backend;
-        variability::meta_model::feature facet;
-        variability::meta_model::feature archetype;
-        variability::meta_model::feature template_kind;
         variability::meta_model::feature default_binding_point;
         variability::meta_model::feature instantiation_domain_name;
     };
@@ -57,11 +52,6 @@ public:
     struct static_configuration {
         bool generate_registration;
         bool generate_static_configuration;
-        std::string kernel;
-        std::string backend;
-        std::string facet;
-        std::string archetype;
-        std::string template_kind;
         std::string default_binding_point;
         std::string instantiation_domain_name;
 

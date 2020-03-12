@@ -56,66 +56,6 @@ make_masd_variability_generate_static_configuration() {
 }
 
 dogen::variability::meta_model::feature
-make_masd_variability_archetype_location_kernel() {
-    using namespace dogen::variability::meta_model;
-    feature r;
-    r.name().simple("kernel");
-    r.name().qualified("masd.variability.archetype_location.kernel");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::any);
-    return r;
-}
-
-dogen::variability::meta_model::feature
-make_masd_variability_archetype_location_backend() {
-    using namespace dogen::variability::meta_model;
-    feature r;
-    r.name().simple("backend");
-    r.name().qualified("masd.variability.archetype_location.backend");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::any);
-    return r;
-}
-
-dogen::variability::meta_model::feature
-make_masd_variability_archetype_location_facet() {
-    using namespace dogen::variability::meta_model;
-    feature r;
-    r.name().simple("facet");
-    r.name().qualified("masd.variability.archetype_location.facet");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::any);
-    return r;
-}
-
-dogen::variability::meta_model::feature
-make_masd_variability_archetype_location_archetype() {
-    using namespace dogen::variability::meta_model;
-    feature r;
-    r.name().simple("archetype");
-    r.name().qualified("masd.variability.archetype_location.archetype");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::any);
-    return r;
-}
-
-dogen::variability::meta_model::feature
-make_masd_variability_template_kind() {
-    using namespace dogen::variability::meta_model;
-    feature r;
-    r.name().simple("template_kind");
-    r.name().qualified("masd.variability.template_kind");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::any);
-    return r;
-}
-
-dogen::variability::meta_model::feature
 make_masd_variability_default_binding_point() {
     using namespace dogen::variability::meta_model;
     feature r;
@@ -148,11 +88,6 @@ variability_bundle::make_feature_group(const dogen::variability::meta_model::fea
 
     r.generate_registration = s.get_by_name("masd.variability.generate_registration");
     r.generate_static_configuration = s.get_by_name("masd.variability.generate_static_configuration");
-    r.kernel = s.get_by_name("masd.variability.archetype_location.kernel");
-    r.backend = s.get_by_name("masd.variability.archetype_location.backend");
-    r.facet = s.get_by_name("masd.variability.archetype_location.facet");
-    r.archetype = s.get_by_name("masd.variability.archetype_location.archetype");
-    r.template_kind = s.get_by_name("masd.variability.template_kind");
     r.default_binding_point = s.get_by_name("masd.variability.default_binding_point");
     r.instantiation_domain_name = s.get_by_name("masd.variability.instantiation_domain_name");
 
@@ -167,14 +102,6 @@ variability_bundle::static_configuration variability_bundle::make_static_configu
     const dogen::variability::helpers::configuration_selector s(cfg);
     r.generate_registration = s.get_boolean_content_or_default(fg.generate_registration);
     r.generate_static_configuration = s.get_boolean_content_or_default(fg.generate_static_configuration);
-    r.kernel = s.get_text_content(fg.kernel);
-    if (s.has_configuration_point(fg.backend))
-        r.backend = s.get_text_content(fg.backend);
-    if (s.has_configuration_point(fg.facet))
-        r.facet = s.get_text_content(fg.facet);
-    if (s.has_configuration_point(fg.archetype))
-        r.archetype = s.get_text_content(fg.archetype);
-    r.template_kind = s.get_text_content(fg.template_kind);
     if (s.has_configuration_point(fg.default_binding_point))
         r.default_binding_point = s.get_text_content(fg.default_binding_point);
     if (s.has_configuration_point(fg.instantiation_domain_name))
@@ -188,11 +115,6 @@ variability_bundle::make_features() {
     std::list<dogen::variability::meta_model::feature> r;
     r.push_back(make_masd_variability_generate_registration());
     r.push_back(make_masd_variability_generate_static_configuration());
-    r.push_back(make_masd_variability_archetype_location_kernel());
-    r.push_back(make_masd_variability_archetype_location_backend());
-    r.push_back(make_masd_variability_archetype_location_facet());
-    r.push_back(make_masd_variability_archetype_location_archetype());
-    r.push_back(make_masd_variability_template_kind());
     r.push_back(make_masd_variability_default_binding_point());
     r.push_back(make_masd_variability_instantiation_domain_name());
     return r;

@@ -5912,9 +5912,7 @@ external technical spaces.
       <dia:attribute name="comment">
         <dia:string>#Features related to filesystem operations.
 
-#DOGEN masd.variability.default_binding_point=global
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.default_binding_point=global#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

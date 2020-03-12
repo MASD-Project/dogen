@@ -25418,7 +25418,7 @@ agnostic. Otherwise, the element belongs to a concrete technical space.#</dia:st
         <dia:point val="-218.97,70"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-224.058,66.55;-218.22,70.8"/>
+        <dia:rectangle val="-224.057,66.55;-218.22,70.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -26201,8 +26201,7 @@ properties related to decorations.
             <dia:string>#dogen::assets::meta_model::element#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -33870,9 +33869,7 @@ to structural modeling.
       <dia:attribute name="comment">
         <dia:string>#Parameters to configure generic types.
 
-#DOGEN masd.variability.default_binding_point=element
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.default_binding_point=element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -34220,9 +34217,7 @@ to structural modeling.
       <dia:attribute name="comment">
         <dia:string>#Parameters related to enumerations.
 
-#DOGEN masd.variability.default_binding_point=element
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.default_binding_point=element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -34438,9 +34433,7 @@ technical space targeted.
       <dia:attribute name="comment">
         <dia:string>#Parameters related to enumerators.
 
-#DOGEN masd.variability.default_binding_point=property
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.default_binding_point=property#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -34580,9 +34573,7 @@ technical space targeted.
       <dia:attribute name="comment">
         <dia:string>#Features related to the generalization relationship.
 
-#DOGEN masd.variability.default_binding_point=element
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.default_binding_point=element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -34748,9 +34739,7 @@ technical space targeted.
       <dia:attribute name="comment">
         <dia:string>#Features related to the origin of the model.
 
-#DOGEN masd.variability.default_binding_point=global
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.default_binding_point=global#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -34889,9 +34878,7 @@ technical space targeted.
       <dia:attribute name="comment">
         <dia:string>#Features related to the output technical space.
 
-#DOGEN masd.variability.default_binding_point=global
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.default_binding_point=global#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -35031,9 +35018,7 @@ technical space targeted.
       <dia:attribute name="comment">
         <dia:string>#Features related to primitive elements.
 
-#DOGEN masd.variability.default_binding_point=element
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.default_binding_point=element#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -35222,10 +35207,7 @@ it.
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Features related to ORM support.
-
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+        <dia:string>#Features related to ORM support.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -35645,9 +35627,7 @@ ORM in Dogen.
       <dia:attribute name="comment">
         <dia:string>#Modeline properties.
 
-#DOGEN masd.variability.default_binding_point=any
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.default_binding_point=any#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -35837,10 +35817,7 @@ ORM in Dogen.
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Features related to the processing of variability for feature and profile templates.
-
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+        <dia:string>#Features related to the processing of variability for feature and profile templates.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -37649,9 +37626,7 @@ extend the mappings as required.#</dia:string>
       <dia:attribute name="comment">
         <dia:string>#Meta-data related to element mapping.
 
-#DOGEN masd.variability.default_binding_point=any
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.default_binding_point=any#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -38669,7 +38644,7 @@ At present the system only supports wale templates.#</dia:string>
         <dia:point val="70,68"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="69.95,67.95;102.89,78.05"/>
+        <dia:rectangle val="69.95,67.95;102.89,74.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="70,68"/>
@@ -38678,7 +38653,7 @@ At present the system only supports wale templates.#</dia:string>
         <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="10"/>
+        <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#variability_bundle#</dia:string>
@@ -38687,10 +38662,7 @@ At present the system only supports wale templates.#</dia:string>
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Features related to the processing of variability for feature bundles.
-
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+        <dia:string>#Features related to the processing of variability for feature bundles.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -38814,139 +38786,6 @@ At present the system only supports wale templates.#</dia:string>
 
 #DOGEN masd.variability.binding_point=element
 #DOGEN masd.variability.qualified_name=masd.variability.generate_static_configuration#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.variability.archetype_location.kernel#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Kernel for a facet or profile template.
-
-#DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.variability.archetype_location.kernel#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.variability.archetype_location.backend#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Backend for a facet or profile template.
-
-#DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.variability.archetype_location.backend
-#DOGEN masd.variability.is_optional=true#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.variability.archetype_location.facet#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Facet for a facet or profile template.
-
-#DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.variability.archetype_location.facet
-#DOGEN masd.variability.is_optional=true#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.variability.archetype_location.archetype#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Archetype for a facet or profile template.
-
-#DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.variability.archetype_location.archetype
-#DOGEN masd.variability.is_optional=true#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.variability.template_kind#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Template kind for a facet or profile template.
-
-#DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.variability.template_kind#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -48102,19 +47941,19 @@ Both of these aspects are optional, but at least one must be chosen.#</dia:strin
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O370">
       <dia:attribute name="obj_pos">
-        <dia:point val="72,81"/>
+        <dia:point val="73,77"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="71.95,80.95;99.885,90.25"/>
+        <dia:rectangle val="72.95,76.95;99.73,82.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="72,81"/>
+        <dia:point val="73,77"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="26.68"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="9.2000000000000011"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#variability_entry#</dia:string>
@@ -48125,9 +47964,7 @@ Both of these aspects are optional, but at least one must be chosen.#</dia:strin
       <dia:attribute name="comment">
         <dia:string>#Features related to the processing of variability for profiles and profile templates.
 
-#DOGEN masd.variability.generate_registration=false
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.generate_registration=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -48237,139 +48074,6 @@ Both of these aspects are optional, but at least one must be chosen.#</dia:strin
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.variability.archetype_location.kernel#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Kernel for a facet or profile template.
-
-#DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.variability.archetype_location.kernel#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.variability.archetype_location.backend#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Backend for a facet or profile template.
-
-#DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.variability.archetype_location.backend
-#DOGEN masd.variability.is_optional=true#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.variability.archetype_location.facet#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Facet for a facet or profile template.
-
-#DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.variability.archetype_location.facet
-#DOGEN masd.variability.is_optional=true#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.variability.archetype_location.archetype#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Archetype for a facet or profile template.
-
-#DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.variability.archetype_location.archetype
-#DOGEN masd.variability.is_optional=true#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#masd.variability.template_kind#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Template kind for a facet or profile template.
-
-#DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.variability.template_kind#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#masd.variability.value#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -48435,13 +48139,13 @@ the default value field if available.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O371">
       <dia:attribute name="obj_pos">
-        <dia:point val="109,81"/>
+        <dia:point val="109,77"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="108.95,80.95;129.955,84.65"/>
+        <dia:rectangle val="108.95,76.95;129.955,80.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="109,81"/>
+        <dia:point val="109,77"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.905000000000001"/>
@@ -48458,9 +48162,7 @@ the default value field if available.
       <dia:attribute name="comment">
         <dia:string>#Features related to the processing of variability for profile entries.
 
-#DOGEN masd.variability.generate_registration=false
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.generate_registration=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

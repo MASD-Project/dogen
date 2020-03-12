@@ -414,9 +414,7 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.default_binding_point": "global",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.default_binding_point": "global"
       },
       "fallback_element_type": "masd::object",
       "attributes": [

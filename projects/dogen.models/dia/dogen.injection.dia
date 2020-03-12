@@ -6286,9 +6286,7 @@ and, if so, ignore it.#</dia:string>
       <dia:attribute name="comment">
         <dia:string>#Feature bundle for the input technical space.
 
-#DOGEN masd.variability.default_binding_point=global
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.default_binding_point=global#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -6482,9 +6480,7 @@ the injection model.
       <dia:attribute name="comment">
         <dia:string>#Features related to model referencing.
 
-#DOGEN masd.variability.default_binding_point=global
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.default_binding_point=global#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -6736,9 +6732,7 @@ the injection model.
         <dia:string>#Features related to all UML injectors.
 
 #DOGEN masd.variability.default_binding_point=any
-#DOGEN masd.variability.generate_static_configuration=false
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.generate_static_configuration=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

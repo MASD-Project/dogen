@@ -30,11 +30,6 @@ variability_entry::make_feature_group(const dogen::variability::meta_model::feat
     const dogen::variability::helpers::feature_selector s(fm);
 
     r.binding_point = s.get_by_name("masd.variability.binding_point");
-    r.kernel = s.get_by_name("masd.variability.archetype_location.kernel");
-    r.backend = s.get_by_name("masd.variability.archetype_location.backend");
-    r.facet = s.get_by_name("masd.variability.archetype_location.facet");
-    r.archetype = s.get_by_name("masd.variability.archetype_location.archetype");
-    r.template_kind = s.get_by_name("masd.variability.template_kind");
     r.value = s.get_by_name("masd.variability.value");
     r.instantiation_domain_name = s.get_by_name("masd.variability.instantiation_domain_name");
 
@@ -49,14 +44,6 @@ variability_entry::static_configuration variability_entry::make_static_configura
     const dogen::variability::helpers::configuration_selector s(cfg);
     if (s.has_configuration_point(fg.binding_point))
         r.binding_point = s.get_text_content(fg.binding_point);
-    r.kernel = s.get_text_content(fg.kernel);
-    if (s.has_configuration_point(fg.backend))
-        r.backend = s.get_text_content(fg.backend);
-    if (s.has_configuration_point(fg.facet))
-        r.facet = s.get_text_content(fg.facet);
-    if (s.has_configuration_point(fg.archetype))
-        r.archetype = s.get_text_content(fg.archetype);
-    r.template_kind = s.get_text_content(fg.template_kind);
     if (s.has_configuration_point(fg.value))
         r.value = s.get_text_collection_content(fg.value);
     if (s.has_configuration_point(fg.instantiation_domain_name))

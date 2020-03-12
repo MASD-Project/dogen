@@ -15096,9 +15096,7 @@ code: identation and dividers.#</dia:string>
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.variability.default_binding_point=any
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+        <dia:string>##DOGEN masd.variability.default_binding_point=any#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -15430,13 +15428,13 @@ code: identation and dividers.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O108">
       <dia:attribute name="obj_pos">
-        <dia:point val="243.071,145"/>
+        <dia:point val="243,145"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="243.021,144.95;261.331,149.45"/>
+        <dia:rectangle val="242.95,144.95;261.26,149.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="243.071,145"/>
+        <dia:point val="243,145"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.210000000000001"/>
@@ -15454,8 +15452,6 @@ code: identation and dividers.#</dia:string>
         <dia:string>#Features related to formatting.
 
 #DOGEN masd.variability.default_binding_point=any
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=archetype_template
 #DOGEN masd.variability.instantiation_domain_name=masd.archetype#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -16250,8 +16246,6 @@ code: identation and dividers.#</dia:string>
 
 #DOGEN masd.variability.default_binding_point=any
 #DOGEN masd.variability.generate_static_configuration=false
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=recursive_template
 #DOGEN masd.variability.instantiation_domain_name=masd#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">

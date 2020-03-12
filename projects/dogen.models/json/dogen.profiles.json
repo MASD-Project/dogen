@@ -32,65 +32,39 @@
         {
           "name": "masd.generation.decoration.enabled",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "formatters",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         },
         {
           "name": "masd.generation.decoration.licence_name",
           "type": "",
-          "value": "masd.gpl_v3",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "formatters",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "masd.gpl_v3"
         },
         {
           "name": "masd.generation.decoration.modeline_group_name",
           "type": "",
-          "value": "masd.emacs",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "formatters",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "masd.emacs"
         },
         {
           "name": "masd.generation.decoration.copyright_notice",
           "type": "",
           "tagged_values": {
-            "masd.variability.archetype_location.kernel": "formatters",
-            "masd.variability.template_kind": "instance",
             "masd.variability.value": "Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>"
           }
         },
         {
           "name": "masd.extraction.delete_extra_files",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         },
         {
           "name": "masd.extraction.delete_empty_directories",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         },
         {
           "name": "masd.generation.cpp.standard",
           "type": "",
-          "value": "c++-17",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "c++-17"
         }
       ]
     },
@@ -108,82 +82,42 @@
         {
           "name": "masd.generation.cpp.odb.enabled",
           "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "false"
         },
         {
           "name": "masd.generation.cpp.hash.enabled",
           "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "false"
         },
         {
           "name": "masd.generation.cpp.serialization.enabled",
           "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "false"
         },
         {
           "name": "masd.generation.cpp.lexical_cast.enabled",
           "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "false"
         },
         {
           "name": "masd.generation.cpp.tests.enabled",
           "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "false"
         },
         {
           "name": "masd.generation.cpp.test_data.enabled",
           "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "false"
         },
         {
           "name": "masd.generation.cpp.templates.enabled",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         },
         {
           "name": "masd.generation.csharp.enabled",
           "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "false"
         }
       ]
     },
@@ -220,10 +154,7 @@
           "type": "",
           "value": "false",
           "tagged_values": {
-            "masd.variability.template_kind": "facet_template",
-            "masd.variability.instantiation_domain_name": "masd.facet",
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp"
+            "masd.variability.instantiation_domain_name": "masd.facet"
           }
         }
       ]
@@ -251,23 +182,13 @@
         {
           "name": "masd.generation.cpp.types.enabled",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         },
         {
           "name": "masd.variability.profile",
           "type": "",
           "value": "dogen.profiles.base.disable_all_facets",
-          "documentation": "If you are typeable, it probably means you do not want the default configuration,\nso we disable all facets.\n",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.variability",
-            "masd.variability.template_kind": "instance"
-          }
+          "documentation": "If you are typeable, it probably means you do not want the default configuration,\nso we disable all facets.\n"
         }
       ]
     },
@@ -286,12 +207,7 @@
         {
           "name": "masd.generation.cpp.io.enabled",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         }
       ]
     },
@@ -310,12 +226,7 @@
         {
           "name": "masd.generation.cpp.hash.enabled",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         }
       ]
     },
@@ -333,12 +244,7 @@
         {
           "name": "masd.generation.cpp.serialization.enabled",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         }
       ]
     },
@@ -356,12 +262,7 @@
         {
           "name": "masd.variability.profile",
           "type": "",
-          "value": "dogen.profiles.base.disable_all_facets",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.variability",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "dogen.profiles.base.disable_all_facets"
         }
       ]
     },
@@ -382,22 +283,12 @@
         {
           "name": "masd.generation.cpp.io.enabled",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         },
         {
           "name": "masd.generation.cpp.io.overwrite",
           "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "false"
         }
       ]
     },
@@ -419,32 +310,17 @@
         {
           "name": "masd.generation.cpp.types.enabled",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         },
         {
           "name": "masd.generation.cpp.types.overwrite",
           "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "false"
         },
         {
           "name": "masd.generation.cpp.types.class_forward_declarations.enabled",
           "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "false"
         }
       ]
     },
@@ -466,12 +342,7 @@
         {
           "name": "masd.generation.cpp.types.class_implementation.enabled",
           "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "false"
         }
       ]
     },
@@ -489,12 +360,7 @@
         {
           "name": "masd.generalization.is_final",
           "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "false"
         }
       ]
     },
@@ -516,32 +382,17 @@
         {
           "name": "masd.generation.cpp.types.class_header.enabled",
           "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "false"
         },
         {
           "name": "masd.generation.cpp.types.class_forward_declarations.enabled",
           "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "false"
         },
         {
           "name": "masd.generation.cpp.types.class_implementation.enabled",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         }
       ]
     },
@@ -562,61 +413,32 @@
         {
           "name": "masd.generalization.parent",
           "type": "",
-          "value": "formatters::artefact_formatter_interface",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "formatters::artefact_formatter_interface"
         },
         {
           "name": "masd.generation.cpp.types.class_header.formatting_style",
           "type": "",
-          "value": "wale",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "wale"
         },
         {
           "name": "masd.generation.cpp.types.class_header.formatting_input",
           "type": "",
-          "value": "cpp_artefact_formatter_header.wale",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "cpp_artefact_formatter_header.wale"
         },
         {
           "name": "masd.generation.cpp.types.class_header.overwrite",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         },
         {
           "name": "masd.generation.cpp.types.class_implementation.formatting_style",
           "type": "",
-          "value": "stitch",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "stitch"
         },
         {
           "name": "masd.generation.cpp.types.class_implementation.overwrite",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         }
       ]
     },
@@ -637,61 +459,32 @@
         {
           "name": "masd.generalization.parent",
           "type": "",
-          "value": "formatters::artefact_formatter_interface",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "formatters::artefact_formatter_interface"
         },
         {
           "name": "masd.generation.cpp.types.class_header.formatting_style",
           "type": "",
-          "value": "wale",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "wale"
         },
         {
           "name": "masd.generation.cpp.types.class_header.formatting_input",
           "type": "",
-          "value": "csharp_artefact_formatter_header.wale",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "csharp_artefact_formatter_header.wale"
         },
         {
           "name": "masd.generation.cpp.types.class_header.overwrite",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         },
         {
           "name": "masd.generation.cpp.types.class_implementation.formatting_style",
           "type": "",
-          "value": "stitch",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "stitch"
         },
         {
           "name": "masd.generation.cpp.types.class_implementation.overwrite",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         }
       ]
     },
@@ -712,61 +505,32 @@
         {
           "name": "masd.generalization.parent",
           "type": "",
-          "value": "formatters::helper_formatter_interface",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "formatters::helper_formatter_interface"
         },
         {
           "name": "masd.generation.cpp.types.class_header.formatting_style",
           "type": "",
-          "value": "wale",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "wale"
         },
         {
           "name": "masd.generation.cpp.types.class_header.formatting_input",
           "type": "",
-          "value": "cpp_helper_formatter_header.wale",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "cpp_helper_formatter_header.wale"
         },
         {
           "name": "masd.generation.cpp.types.class_header.overwrite",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         },
         {
           "name": "masd.generation.cpp.types.class_implementation.formatting_style",
           "type": "",
-          "value": "stitch",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "stitch"
         },
         {
           "name": "masd.generation.cpp.types.class_implementation.overwrite",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         }
       ]
     },
@@ -787,61 +551,32 @@
         {
           "name": "masd.generalization.parent",
           "type": "",
-          "value": "formatters::helper_formatter_interface",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "formatters::helper_formatter_interface"
         },
         {
           "name": "masd.generation.cpp.types.class_header.formatting_style",
           "type": "",
-          "value": "wale",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "wale"
         },
         {
           "name": "masd.generation.cpp.types.class_header.formatting_input",
           "type": "",
-          "value": "csharp_helper_formatter_header.wale",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "csharp_helper_formatter_header.wale"
         },
         {
           "name": "masd.generation.cpp.types.class_header.overwrite",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         },
         {
           "name": "masd.generation.cpp.types.class_implementation.formatting_style",
           "type": "",
-          "value": "stitch",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "stitch"
         },
         {
           "name": "masd.generation.cpp.types.class_implementation.overwrite",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         }
       ]
     },
@@ -862,22 +597,12 @@
         {
           "name": "masd.generation.cpp.serialization.enabled",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         },
         {
           "name": "masd.generation.cpp.serialization.overwrite",
           "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "false"
         }
       ]
     },
@@ -895,12 +620,7 @@
         {
           "name": "masd.generation.cpp.lexical_cast.enabled",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         }
       ]
     },
@@ -917,22 +637,12 @@
         {
           "name": "masd.generation.cpp.odb.enabled",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         },
         {
           "name": "masd.generation.cpp.build.enabled",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         }
       ]
     },
@@ -949,31 +659,17 @@
         {
           "name": "masd.generation.decoration.marker_name",
           "type": "",
-          "value": "dogen.profiles.test_marker",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "formatters",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "dogen.profiles.test_marker"
         },
         {
           "name": "masd.generation.csharp.enabled",
           "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "false"
         },
         {
           "name": "masd.generation.cpp.tests.main.enabled",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         }
       ]
     },
@@ -1021,12 +717,7 @@
         {
           "name": "masd.generation.cpp.tests.enabled",
           "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "false"
         }
       ]
     },
@@ -1045,12 +736,7 @@
         {
           "name": "masd.generation.cpp.types.enabled",
           "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "false"
         }
       ]
     },
@@ -1068,22 +754,12 @@
         {
           "name": "masd.generation.cpp.build.enabled",
           "type": "",
-          "value": "true",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "true"
         },
         {
           "name": "masd.generation.cpp.build.overwrite",
           "type": "",
-          "value": "false",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.archetype_location.backend": "masd.generation.cpp",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "false"
         }
       ]
     }

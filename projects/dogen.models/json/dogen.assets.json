@@ -1731,11 +1731,7 @@
         {
           "name": "masd.generalization.parent",
           "type": "",
-          "value": "dogen::assets::meta_model::element",
-          "tagged_values": {
-            "masd.variability.archetype_location.kernel": "masd",
-            "masd.variability.template_kind": "instance"
-          }
+          "value": "dogen::assets::meta_model::element"
         }
       ]
     },
@@ -2492,9 +2488,7 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.default_binding_point": "element",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.default_binding_point": "element"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2538,9 +2532,7 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.default_binding_point": "element",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.default_binding_point": "element"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2589,9 +2581,7 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.default_binding_point": "property",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.default_binding_point": "property"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2613,9 +2603,7 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.default_binding_point": "element",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.default_binding_point": "element"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2646,9 +2634,7 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.default_binding_point": "global",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.default_binding_point": "global"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2670,9 +2656,7 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.default_binding_point": "global",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.default_binding_point": "global"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2694,9 +2678,7 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.default_binding_point": "element",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.default_binding_point": "element"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2735,10 +2717,6 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
-      "tagged_values": {
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
-      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2860,9 +2838,7 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.default_binding_point": "any",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.default_binding_point": "any"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2901,10 +2877,6 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
-      "tagged_values": {
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
-      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -3017,9 +2989,7 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.default_binding_point": "any",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.default_binding_point": "any"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3096,10 +3066,6 @@
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
-      "tagged_values": {
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
-      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -3120,54 +3086,6 @@
           "tagged_values": {
             "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.variability.generate_static_configuration"
-          }
-        },
-        {
-          "name": "masd.variability.archetype_location.kernel",
-          "type": "masd::variability::text",
-          "documentation": "Kernel for a facet or profile template.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.variability.archetype_location.kernel"
-          }
-        },
-        {
-          "name": "masd.variability.archetype_location.backend",
-          "type": "masd::variability::text",
-          "documentation": "Backend for a facet or profile template.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.variability.archetype_location.backend",
-            "masd.variability.is_optional": "true"
-          }
-        },
-        {
-          "name": "masd.variability.archetype_location.facet",
-          "type": "masd::variability::text",
-          "documentation": "Facet for a facet or profile template.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.variability.archetype_location.facet",
-            "masd.variability.is_optional": "true"
-          }
-        },
-        {
-          "name": "masd.variability.archetype_location.archetype",
-          "type": "masd::variability::text",
-          "documentation": "Archetype for a facet or profile template.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.variability.archetype_location.archetype",
-            "masd.variability.is_optional": "true"
-          }
-        },
-        {
-          "name": "masd.variability.template_kind",
-          "type": "masd::variability::text",
-          "documentation": "Template kind for a facet or profile template.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.variability.template_kind"
           }
         },
         {
@@ -3864,9 +3782,7 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.generate_registration": "false",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.generate_registration": "false"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3878,54 +3794,6 @@
             "masd.variability.binding_point": "any",
             "masd.variability.qualified_name": "masd.variability.default_binding_point",
             "masd.variability.is_optional": "true"
-          }
-        },
-        {
-          "name": "masd.variability.archetype_location.kernel",
-          "type": "masd::variability::text",
-          "documentation": "Kernel for a facet or profile template.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.variability.archetype_location.kernel"
-          }
-        },
-        {
-          "name": "masd.variability.archetype_location.backend",
-          "type": "masd::variability::text",
-          "documentation": "Backend for a facet or profile template.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.variability.archetype_location.backend",
-            "masd.variability.is_optional": "true"
-          }
-        },
-        {
-          "name": "masd.variability.archetype_location.facet",
-          "type": "masd::variability::text",
-          "documentation": "Facet for a facet or profile template.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.variability.archetype_location.facet",
-            "masd.variability.is_optional": "true"
-          }
-        },
-        {
-          "name": "masd.variability.archetype_location.archetype",
-          "type": "masd::variability::text",
-          "documentation": "Archetype for a facet or profile template.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.variability.archetype_location.archetype",
-            "masd.variability.is_optional": "true"
-          }
-        },
-        {
-          "name": "masd.variability.template_kind",
-          "type": "masd::variability::text",
-          "documentation": "Template kind for a facet or profile template.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.variability.template_kind"
           }
         },
         {
@@ -3957,9 +3825,7 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.generate_registration": "false",
-        "masd.variability.archetype_location.kernel": "masd",
-        "masd.variability.template_kind": "instance"
+        "masd.variability.generate_registration": "false"
       },
       "fallback_element_type": "masd::object",
       "attributes": [

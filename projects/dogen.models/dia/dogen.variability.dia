@@ -14543,9 +14543,7 @@ alias.#</dia:string>
       <dia:attribute name="comment">
         <dia:string>#Features related to profile processing.
 
-#DOGEN masd.variability.default_binding_point=any
-#DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=instance#</dia:string>
+#DOGEN masd.variability.default_binding_point=any#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
