@@ -7005,16 +7005,16 @@ elements.#</dia:string>
         <dia:point val="3,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,33.95;35.12,39.25"/>
+        <dia:rectangle val="2.95,33.95;37.43,40.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="3,34"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.07"/>
+        <dia:real val="34.380000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#context#</dia:string>
@@ -7139,6 +7139,33 @@ elements.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#template_instantiation_domains#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::unordered_map&lt;std::string, std::list&lt;std::string&gt;&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Provides all of the domains to be used for template instantiation.
+
+Example of a domain is "masd.facet" which contains the list of all available facets.
+Templates (facet and profile) are then instantiated over this range, depending on 
+user choices.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

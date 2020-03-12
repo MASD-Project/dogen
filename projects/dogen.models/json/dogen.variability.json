@@ -565,6 +565,11 @@
           "type": "boost::shared_ptr<archetypes::location_repository>"
         },
         {
+          "name": "template_instantiation_domains",
+          "type": "std::unordered_map<std::string, std::list<std::string>>",
+          "documentation": "Provides all of the domains to be used for template instantiation.\n\nExample of a domain is \"masd.facet\" which contains the list of all available facets.\nTemplates (facet and profile) are then instantiated over this range, depending on \nuser choices.\n"
+        },
+        {
           "name": "tracer",
           "type": "boost::shared_ptr<tracing::tracer>"
         }

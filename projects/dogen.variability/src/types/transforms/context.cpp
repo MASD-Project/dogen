@@ -48,21 +48,25 @@ context::context()
 context::context(
     const bool compatibility_mode,
     const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository,
+    const std::unordered_map<std::string, std::list<std::string> >& template_instantiation_domains,
     const boost::shared_ptr<dogen::tracing::tracer>& tracer)
     : compatibility_mode_(compatibility_mode),
       archetype_location_repository_(archetype_location_repository),
+      template_instantiation_domains_(template_instantiation_domains),
       tracer_(tracer) { }
 
 void context::swap(context& other) noexcept {
     using std::swap;
     swap(compatibility_mode_, other.compatibility_mode_);
     swap(archetype_location_repository_, other.archetype_location_repository_);
+    swap(template_instantiation_domains_, other.template_instantiation_domains_);
     swap(tracer_, other.tracer_);
 }
 
 bool context::operator==(const context& rhs) const {
     return compatibility_mode_ == rhs.compatibility_mode_ &&
         archetype_location_repository_ == rhs.archetype_location_repository_ &&
+        template_instantiation_domains_ == rhs.template_instantiation_domains_ &&
         tracer_ == rhs.tracer_;
 }
 
@@ -94,6 +98,22 @@ void context::archetype_location_repository(const boost::shared_ptr<dogen::arche
 
 void context::archetype_location_repository(const boost::shared_ptr<dogen::archetypes::location_repository>&& v) {
     archetype_location_repository_ = std::move(v);
+}
+
+const std::unordered_map<std::string, std::list<std::string> >& context::template_instantiation_domains() const {
+    return template_instantiation_domains_;
+}
+
+std::unordered_map<std::string, std::list<std::string> >& context::template_instantiation_domains() {
+    return template_instantiation_domains_;
+}
+
+void context::template_instantiation_domains(const std::unordered_map<std::string, std::list<std::string> >& v) {
+    template_instantiation_domains_ = v;
+}
+
+void context::template_instantiation_domains(const std::unordered_map<std::string, std::list<std::string> >&& v) {
+    template_instantiation_domains_ = std::move(v);
 }
 
 const boost::shared_ptr<dogen::tracing::tracer>& context::tracer() const {
