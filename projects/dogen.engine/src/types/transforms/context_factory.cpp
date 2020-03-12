@@ -26,6 +26,7 @@
 #include "dogen.tracing/types/tracer.hpp"
 #include "dogen.archetypes/io/location_repository_io.hpp"
 #include "dogen.archetypes/types/location_repository_builder.hpp"
+#include "dogen.archetypes/types/template_instantiation_domains_factory.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
 #include "dogen.variability/types/features/initializer.hpp"
 #include "dogen.variability/types/meta_model/feature_template_repository.hpp"
@@ -40,6 +41,7 @@
 #include "dogen.generation.cpp/types/feature_initializer.hpp"
 #include "dogen.generation.csharp/types/feature_initializer.hpp"
 #include "dogen.extraction/types/features/initializer.hpp"
+#include "dogen.engine/io/transforms/context_io.hpp"
 #include "dogen.engine/types/features/initializer.hpp"
 #include "dogen.engine/types/transforms/factory_exception.hpp"
 #include "dogen.engine/types/transforms/context_factory.hpp"
@@ -177,6 +179,12 @@ make_context(const configuration& cfg, const std::string& activity,
     vctx.archetype_location_repository(alrp);
 
     /*
+     * Obtain the template instantiation domains.
+     */
+    using tidf = archetypes::template_instantiation_domains_factory;
+    vctx.template_instantiation_domains(tidf::make(alrp->all()));
+
+    /*
      * Handle the compatibility mode.
      */
     const bool cm(cfg.model_processing().compatibility_mode_enabled());
@@ -279,6 +287,7 @@ make_context(const configuration& cfg, const std::string& activity,
     s << to_iso_extended_string(cfg.model_processing().activity_timestamp());
     r.generation_context().generation_timestamp(s.str());
 
+    BOOST_LOG_SEV(lg, debug) << "Generated context. Result: " << r;
     return r;
 }
 
