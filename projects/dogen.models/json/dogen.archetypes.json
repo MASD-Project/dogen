@@ -151,6 +151,13 @@
         "dogen::handcrafted::cmake"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "template_instantiation_domains_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
