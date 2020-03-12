@@ -27,6 +27,7 @@
 
 #include <list>
 #include <iosfwd>
+#include <string>
 #include <algorithm>
 #include "dogen.variability/types/meta_model/template_kind.hpp"
 #include "dogen.assets/types/meta_model/variability/abstract_bundle.hpp"
@@ -86,7 +87,8 @@ public:
         const dogen::archetypes::location& location,
         const boost::optional<dogen::variability::meta_model::binding_point>& default_binding_point,
         const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates,
-        const dogen::variability::meta_model::template_kind template_kind);
+        const dogen::variability::meta_model::template_kind template_kind,
+        const std::string& instantiation_domain_name);
 
 public:
     using element::accept;
@@ -117,6 +119,11 @@ public:
     void template_kind(const dogen::variability::meta_model::template_kind v);
     /**@}*/
 
+    const std::string& instantiation_domain_name() const;
+    std::string& instantiation_domain_name();
+    void instantiation_domain_name(const std::string& v);
+    void instantiation_domain_name(const std::string&& v);
+
 public:
     bool operator==(const feature_template_bundle& rhs) const;
     bool operator!=(const feature_template_bundle& rhs) const {
@@ -133,6 +140,7 @@ public:
 private:
     std::list<dogen::assets::meta_model::variability::feature_template> feature_templates_;
     dogen::variability::meta_model::template_kind template_kind_;
+    std::string instantiation_domain_name_;
 };
 
 }

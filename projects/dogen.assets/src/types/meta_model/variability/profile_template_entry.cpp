@@ -19,9 +19,18 @@
  *
  */
 #include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen.variability/io/meta_model/template_kind_io.hpp"
 #include "dogen.assets/io/meta_model/variability/abstract_profile_entry_io.hpp"
 #include "dogen.assets/types/meta_model/variability/profile_template_entry.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
 
 namespace dogen::assets::meta_model::variability {
 
@@ -35,7 +44,8 @@ profile_template_entry::profile_template_entry(
     const std::string& key,
     const std::list<std::string>& value,
     const dogen::archetypes::location& location,
-    const dogen::variability::meta_model::template_kind template_kind)
+    const dogen::variability::meta_model::template_kind template_kind,
+    const std::string& instantiation_domain_name)
     : dogen::assets::meta_model::variability::abstract_profile_entry(
       documentation,
       configuration,
@@ -43,7 +53,8 @@ profile_template_entry::profile_template_entry(
       key,
       value,
       location),
-      template_kind_(template_kind) { }
+      template_kind_(template_kind),
+      instantiation_domain_name_(instantiation_domain_name) { }
 
 void profile_template_entry::to_stream(std::ostream& s) const {
     s << " { "
@@ -51,7 +62,8 @@ void profile_template_entry::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     dogen::assets::meta_model::variability::abstract_profile_entry::to_stream(s);
     s << ", "
-      << "\"template_kind\": " << template_kind_
+      << "\"template_kind\": " << template_kind_ << ", "
+      << "\"instantiation_domain_name\": " << "\"" << tidy_up_string(instantiation_domain_name_) << "\""
       << " }";
 }
 
@@ -60,6 +72,7 @@ void profile_template_entry::swap(profile_template_entry& other) noexcept {
 
     using std::swap;
     swap(template_kind_, other.template_kind_);
+    swap(instantiation_domain_name_, other.instantiation_domain_name_);
 }
 
 bool profile_template_entry::equals(const dogen::assets::meta_model::variability::abstract_profile_entry& other) const {
@@ -70,7 +83,8 @@ bool profile_template_entry::equals(const dogen::assets::meta_model::variability
 
 bool profile_template_entry::operator==(const profile_template_entry& rhs) const {
     return dogen::assets::meta_model::variability::abstract_profile_entry::compare(rhs) &&
-        template_kind_ == rhs.template_kind_;
+        template_kind_ == rhs.template_kind_ &&
+        instantiation_domain_name_ == rhs.instantiation_domain_name_;
 }
 
 profile_template_entry& profile_template_entry::operator=(profile_template_entry other) {
@@ -85,6 +99,22 @@ dogen::variability::meta_model::template_kind profile_template_entry::template_k
 
 void profile_template_entry::template_kind(const dogen::variability::meta_model::template_kind v) {
     template_kind_ = v;
+}
+
+const std::string& profile_template_entry::instantiation_domain_name() const {
+    return instantiation_domain_name_;
+}
+
+std::string& profile_template_entry::instantiation_domain_name() {
+    return instantiation_domain_name_;
+}
+
+void profile_template_entry::instantiation_domain_name(const std::string& v) {
+    instantiation_domain_name_ = v;
+}
+
+void profile_template_entry::instantiation_domain_name(const std::string&& v) {
+    instantiation_domain_name_ = std::move(v);
 }
 
 }

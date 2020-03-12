@@ -47055,7 +47055,7 @@ This is only required if the feature template is optional and has no default val
         <dia:point val="46,-71"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.95,-71.05;67.34,-67.35"/>
+        <dia:rectangle val="45.95,-71.05;67.34,-66.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="46,-71"/>
@@ -47064,7 +47064,7 @@ This is only required if the feature template is optional and has no default val
         <dia:real val="21.289999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#feature_template_bundle#</dia:string>
@@ -47202,6 +47202,29 @@ Both of these aspects are optional, but at least one must be chosen.#</dia:strin
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Kind of template expansion to perform for this feature template.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#instantiation_domain_name#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -47562,7 +47585,7 @@ Both of these aspects are optional, but at least one must be chosen.#</dia:strin
         <dia:point val="65.77,-64"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="56.595,-67.45;66.52,-63.2"/>
+        <dia:rectangle val="56.595,-66.8;66.52,-63.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -47571,7 +47594,7 @@ Both of these aspects are optional, but at least one must be chosen.#</dia:strin
         <dia:point val="65.77,-64"/>
         <dia:point val="65.77,-66"/>
         <dia:point val="56.645,-66"/>
-        <dia:point val="56.645,-67.4"/>
+        <dia:point val="56.645,-66.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -48710,7 +48733,7 @@ types, see the comments on the variability types.#</dia:string>
         <dia:point val="1,-46"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="0.95,-46.05;22.34,-43.15"/>
+        <dia:rectangle val="0.95,-46.05;22.34,-42.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="1,-46"/>
@@ -48719,7 +48742,7 @@ types, see the comments on the variability types.#</dia:string>
         <dia:real val="21.289999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="2.7999999999999998"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#profile_template_entry#</dia:string>
@@ -48815,6 +48838,29 @@ types, see the comments on the variability types.#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#variability::meta_model::template_kind#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#instantiation_domain_name#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -48965,7 +49011,7 @@ types, see the comments on the variability types.#</dia:string>
         <dia:point val="42.5275,-43.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="11.595,-43.95;43.2775,-40.95"/>
+        <dia:rectangle val="11.595,-43.95;43.2775,-40.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -48974,7 +49020,7 @@ types, see the comments on the variability types.#</dia:string>
         <dia:point val="42.5275,-43.2"/>
         <dia:point val="42.5275,-41"/>
         <dia:point val="11.645,-41"/>
-        <dia:point val="11.645,-43.2"/>
+        <dia:point val="11.645,-42.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

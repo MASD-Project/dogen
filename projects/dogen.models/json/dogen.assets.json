@@ -3800,6 +3800,10 @@
           "name": "template_kind",
           "type": "variability::meta_model::template_kind",
           "documentation": "Kind of template expansion to perform for this feature template.\n"
+        },
+        {
+          "name": "instantiation_domain_name",
+          "type": "std::string"
         }
       ]
     },
@@ -3996,6 +4000,10 @@
         {
           "name": "template_kind",
           "type": "variability::meta_model::template_kind"
+        },
+        {
+          "name": "instantiation_domain_name",
+          "type": "std::string"
         }
       ]
     },

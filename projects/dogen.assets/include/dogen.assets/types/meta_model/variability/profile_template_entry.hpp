@@ -26,6 +26,7 @@
 #endif
 
 #include <iosfwd>
+#include <string>
 #include <algorithm>
 #include "dogen.variability/types/meta_model/template_kind.hpp"
 #include "dogen.assets/types/meta_model/variability/abstract_profile_entry.hpp"
@@ -50,7 +51,8 @@ public:
         const std::string& key,
         const std::list<std::string>& value,
         const dogen::archetypes::location& location,
-        const dogen::variability::meta_model::template_kind template_kind);
+        const dogen::variability::meta_model::template_kind template_kind,
+        const std::string& instantiation_domain_name);
 
 public:
     void to_stream(std::ostream& s) const override;
@@ -58,6 +60,11 @@ public:
 public:
     dogen::variability::meta_model::template_kind template_kind() const;
     void template_kind(const dogen::variability::meta_model::template_kind v);
+
+    const std::string& instantiation_domain_name() const;
+    std::string& instantiation_domain_name();
+    void instantiation_domain_name(const std::string& v);
+    void instantiation_domain_name(const std::string&& v);
 
 public:
     bool operator==(const profile_template_entry& rhs) const;
@@ -74,6 +81,7 @@ public:
 
 private:
     dogen::variability::meta_model::template_kind template_kind_;
+    std::string instantiation_domain_name_;
 };
 
 }

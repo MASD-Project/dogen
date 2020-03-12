@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen.assets/types/meta_model/element_visitor.hpp"
 #include "dogen.variability/io/meta_model/template_kind_io.hpp"
 #include "dogen.assets/io/meta_model/variability/abstract_bundle_io.hpp"
@@ -37,6 +38,14 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::
     return s;
 }
 
+}
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
 }
 
 namespace dogen::assets::meta_model::variability {
@@ -69,7 +78,8 @@ feature_template_bundle::feature_template_bundle(
     const dogen::archetypes::location& location,
     const boost::optional<dogen::variability::meta_model::binding_point>& default_binding_point,
     const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates,
-    const dogen::variability::meta_model::template_kind template_kind)
+    const dogen::variability::meta_model::template_kind template_kind,
+    const std::string& instantiation_domain_name)
     : dogen::assets::meta_model::variability::abstract_bundle(
       name,
       documentation,
@@ -95,7 +105,8 @@ feature_template_bundle::feature_template_bundle(
       location,
       default_binding_point),
       feature_templates_(feature_templates),
-      template_kind_(template_kind) { }
+      template_kind_(template_kind),
+      instantiation_domain_name_(instantiation_domain_name) { }
 
 void feature_template_bundle::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -120,7 +131,8 @@ void feature_template_bundle::to_stream(std::ostream& s) const {
     dogen::assets::meta_model::variability::abstract_bundle::to_stream(s);
     s << ", "
       << "\"feature_templates\": " << feature_templates_ << ", "
-      << "\"template_kind\": " << template_kind_
+      << "\"template_kind\": " << template_kind_ << ", "
+      << "\"instantiation_domain_name\": " << "\"" << tidy_up_string(instantiation_domain_name_) << "\""
       << " }";
 }
 
@@ -130,6 +142,7 @@ void feature_template_bundle::swap(feature_template_bundle& other) noexcept {
     using std::swap;
     swap(feature_templates_, other.feature_templates_);
     swap(template_kind_, other.template_kind_);
+    swap(instantiation_domain_name_, other.instantiation_domain_name_);
 }
 
 bool feature_template_bundle::equals(const dogen::assets::meta_model::element& other) const {
@@ -141,7 +154,8 @@ bool feature_template_bundle::equals(const dogen::assets::meta_model::element& o
 bool feature_template_bundle::operator==(const feature_template_bundle& rhs) const {
     return dogen::assets::meta_model::variability::abstract_bundle::compare(rhs) &&
         feature_templates_ == rhs.feature_templates_ &&
-        template_kind_ == rhs.template_kind_;
+        template_kind_ == rhs.template_kind_ &&
+        instantiation_domain_name_ == rhs.instantiation_domain_name_;
 }
 
 feature_template_bundle& feature_template_bundle::operator=(feature_template_bundle other) {
@@ -172,6 +186,22 @@ dogen::variability::meta_model::template_kind feature_template_bundle::template_
 
 void feature_template_bundle::template_kind(const dogen::variability::meta_model::template_kind v) {
     template_kind_ = v;
+}
+
+const std::string& feature_template_bundle::instantiation_domain_name() const {
+    return instantiation_domain_name_;
+}
+
+std::string& feature_template_bundle::instantiation_domain_name() {
+    return instantiation_domain_name_;
+}
+
+void feature_template_bundle::instantiation_domain_name(const std::string& v) {
+    instantiation_domain_name_ = v;
+}
+
+void feature_template_bundle::instantiation_domain_name(const std::string&& v) {
+    instantiation_domain_name_ = std::move(v);
 }
 
 }
