@@ -3812,11 +3812,6 @@
           "documentation": "Set of feature templates associated with this feature template bundle.\n"
         },
         {
-          "name": "template_kind",
-          "type": "variability::meta_model::template_kind",
-          "documentation": "Kind of template expansion to perform for this feature template.\n"
-        },
-        {
           "name": "instantiation_domain_name",
           "type": "std::string"
         }
@@ -4022,10 +4017,6 @@
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "template_kind",
-          "type": "variability::meta_model::template_kind"
-        },
         {
           "name": "instantiation_domain_name",
           "type": "std::string"

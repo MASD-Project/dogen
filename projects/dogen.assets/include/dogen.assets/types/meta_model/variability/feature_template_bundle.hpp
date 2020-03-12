@@ -29,7 +29,6 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include "dogen.variability/types/meta_model/template_kind.hpp"
 #include "dogen.assets/types/meta_model/variability/abstract_bundle.hpp"
 #include "dogen.assets/types/meta_model/variability/feature_template.hpp"
 
@@ -53,11 +52,9 @@ namespace dogen::assets::meta_model::variability {
  */
 class feature_template_bundle final : public dogen::assets::meta_model::variability::abstract_bundle {
 public:
+    feature_template_bundle() = default;
     feature_template_bundle(const feature_template_bundle&) = default;
     feature_template_bundle(feature_template_bundle&&) = default;
-
-public:
-    feature_template_bundle();
 
     virtual ~feature_template_bundle() noexcept { }
 
@@ -87,7 +84,6 @@ public:
         const dogen::archetypes::location& location,
         const boost::optional<dogen::variability::meta_model::binding_point>& default_binding_point,
         const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates,
-        const dogen::variability::meta_model::template_kind template_kind,
         const std::string& instantiation_domain_name);
 
 public:
@@ -111,14 +107,6 @@ public:
     void feature_templates(const std::list<dogen::assets::meta_model::variability::feature_template>&& v);
     /**@}*/
 
-    /**
-     * @brief Kind of template expansion to perform for this feature template.
-     */
-    /**@{*/
-    dogen::variability::meta_model::template_kind template_kind() const;
-    void template_kind(const dogen::variability::meta_model::template_kind v);
-    /**@}*/
-
     const std::string& instantiation_domain_name() const;
     std::string& instantiation_domain_name();
     void instantiation_domain_name(const std::string& v);
@@ -139,7 +127,6 @@ public:
 
 private:
     std::list<dogen::assets::meta_model::variability::feature_template> feature_templates_;
-    dogen::variability::meta_model::template_kind template_kind_;
     std::string instantiation_domain_name_;
 };
 
