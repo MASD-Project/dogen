@@ -36,6 +36,7 @@ make_supported() {
     r.value_type(vt);
     r.binding_point(binding_point::element);
     r.kind(template_kind::facet_template);
+    r.instantiation_domain_name("masd.generation.csharp.facet");
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "true" }));
 
@@ -56,6 +57,7 @@ make_overwrite() {
     r.value_type(vt);
     r.binding_point(binding_point::element);
     r.kind(template_kind::facet_template);
+    r.instantiation_domain_name("masd.generation.csharp.facet");
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "true" }));
 

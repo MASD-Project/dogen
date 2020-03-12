@@ -36,6 +36,7 @@ make_overwrite() {
     r.value_type(vt);
     r.binding_point(binding_point::element);
     r.kind(template_kind::archetype_template);
+    r.instantiation_domain_name("masd.generation.csharp.archetype");
 
     archetypes::location al;
     al.kernel("masd");

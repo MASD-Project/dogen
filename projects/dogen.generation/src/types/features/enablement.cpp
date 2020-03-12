@@ -34,6 +34,7 @@ make_enabled() {
     r.value_type(vt);
     r.binding_point(binding_point::any);
     r.kind(template_kind::recursive_template);
+    r.instantiation_domain_name("masd");
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "true" }));
 

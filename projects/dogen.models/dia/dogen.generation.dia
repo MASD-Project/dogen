@@ -15455,7 +15455,8 @@ code: identation and dividers.#</dia:string>
 
 #DOGEN masd.variability.default_binding_point=any
 #DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=archetype_template#</dia:string>
+#DOGEN masd.variability.template_kind=archetype_template
+#DOGEN masd.variability.instantiation_domain_name=masd.archetype#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="true"/>
@@ -16250,7 +16251,8 @@ code: identation and dividers.#</dia:string>
 #DOGEN masd.variability.default_binding_point=any
 #DOGEN masd.variability.generate_static_configuration=false
 #DOGEN masd.variability.archetype_location.kernel=masd
-#DOGEN masd.variability.template_kind=recursive_template#</dia:string>
+#DOGEN masd.variability.template_kind=recursive_template
+#DOGEN masd.variability.instantiation_domain_name=masd#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

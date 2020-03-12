@@ -2599,7 +2599,8 @@
         "masd.variability.default_binding_point": "element",
         "masd.variability.archetype_location.kernel": "masd",
         "masd.variability.archetype_location.backend": "masd.generation.cpp",
-        "masd.variability.template_kind": "facet_template"
+        "masd.variability.template_kind": "facet_template",
+        "masd.variability.instantiation_domain_name": "masd.generation.cpp.facet"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2624,7 +2625,8 @@
         "masd.variability.default_binding_point": "element",
         "masd.variability.archetype_location.kernel": "masd",
         "masd.variability.archetype_location.backend": "masd.generation.cpp",
-        "masd.variability.template_kind": "archetype_template"
+        "masd.variability.template_kind": "archetype_template",
+        "masd.variability.instantiation_domain_name": "masd.generation.cpp.archetype"
       },
       "fallback_element_type": "masd::object",
       "attributes": [

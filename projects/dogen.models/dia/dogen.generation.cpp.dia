@@ -33087,13 +33087,13 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O255">
       <dia:attribute name="obj_pos">
-        <dia:point val="-9,175"/>
+        <dia:point val="-12,175"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-9.05,174.95;9.645,179.45"/>
+        <dia:rectangle val="-12.05,174.95;6.645,179.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-9,175"/>
+        <dia:point val="-12,175"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.594999999999999"/>
@@ -33111,7 +33111,9 @@ code.
         <dia:string>##DOGEN masd.variability.default_binding_point=element
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.archetype_location.backend=masd.generation.cpp
-#DOGEN masd.variability.template_kind=facet_template#</dia:string>
+#DOGEN masd.variability.template_kind=facet_template
+#DOGEN masd.variability.instantiation_domain_name=masd.generation.cpp.facet
+#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="true"/>
@@ -33248,13 +33250,13 @@ code.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O256">
       <dia:attribute name="obj_pos">
-        <dia:point val="-9,182"/>
+        <dia:point val="-12,182"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-9.05,181.95;16.96,187.25"/>
+        <dia:rectangle val="-12.05,181.95;13.96,187.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-9,182"/>
+        <dia:point val="-12,182"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.91"/>
@@ -33272,7 +33274,9 @@ code.
         <dia:string>##DOGEN masd.variability.default_binding_point=element
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.archetype_location.backend=masd.generation.cpp
-#DOGEN masd.variability.template_kind=archetype_template#</dia:string>
+#DOGEN masd.variability.template_kind=archetype_template
+#DOGEN masd.variability.instantiation_domain_name=masd.generation.cpp.archetype
+#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="true"/>

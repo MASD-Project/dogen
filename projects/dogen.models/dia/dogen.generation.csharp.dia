@@ -14807,7 +14807,8 @@
         <dia:string>##DOGEN masd.variability.default_binding_point=element
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.archetype_location.backend=masd.generation.csharp
-#DOGEN masd.variability.template_kind=archetype_template#</dia:string>
+#DOGEN masd.variability.template_kind=archetype_template
+#DOGEN masd.variability.instantiation_domain_name=masd.generation.csharp.archetype#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="true"/>
@@ -14945,7 +14946,8 @@
         <dia:string>##DOGEN masd.variability.default_binding_point=element
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.archetype_location.backend=masd.generation.csharp
-#DOGEN masd.variability.template_kind=facet_template#</dia:string>
+#DOGEN masd.variability.template_kind=facet_template
+#DOGEN masd.variability.instantiation_domain_name=masd.generation.csharp.facet#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="true"/>
