@@ -1175,16 +1175,6 @@ disable setter etc).
 We can then create the notion of a "pojo", where all attributes are
 automatically mapped to properties.
 
-*** Allow generating executables from dogen                           :story:
-
-At present dogen always assumes we want to generate a static
-library. It would be nice to be able to generate an executable too,
-with all of the cmake infrastructure generated.
-
-This falls under the "model types" work, though perhaps its not clear
-how it maps to libraries/executables. The problem is that at present,
-models generate multiple targets: tests, library/executable.
-
 *** Replace boost property tree with real JSON support                :story:
 
 Once we support JSON fully we should go through all of the uses of
@@ -1477,7 +1467,7 @@ Time spent reading the literature on variability. We should do a
 New features for this release. These are more nice to haves rather
 than mandatory work.
 
-*** Add stereotype for IoC containers                       :reviewing:story:
+*** Add stereotype for IoC containers                                 :story:
 
 At present we are marking IoC containers with either handcrafted or
 header only. In reality, they should have their own stereotype and
@@ -1783,7 +1773,7 @@ already). Instead, we are saying is: allow defining stereotypes as a
 configurable field within a profile and then when applying the
 profile, set the stereotype of the element it binds against.
 
-F this to work correctly we probably need to be able to at least
+For this to work correctly we probably need to be able to at least
 validate that the element to which we applied the profile is of the
 expected type. Our binding at present is just "element" so it cannot
 distinguish between enumerations, etc.
@@ -1807,6 +1797,15 @@ feature, we could try to see if the deprecated feature names match. If
 they do we could bind to the old name, issue a warning and
 continue. By removing the name from deprecated feature field we'd
 officially stop supporting the old name.
+
+Alternatively we could just process deprecated features in exactly the
+same way but issue a warning to users, just like compilers do. We
+could also add support for a message deprecation message.
+
+Links:
+
+- [[https://en.cppreference.com/w/cpp/language/attributes/deprecated][C++ attribute: deprecated]]
+- [[https://stackoverflow.com/questions/295120/c-mark-as-deprecated][SO: C++ mark as deprecated]]
 
 *** Add string view to dogen exception constructor                    :story:
 
@@ -1853,12 +1852,7 @@ Links:
 
 - [[http://www.two-sdg.demon.co.uk/curbralan/papers/WritingStreamManipulators.html][Writing your own stream manipulators]]
 
-*** Replace =operator<= for sorting with lambdas                      :story:
-
-We have used =operator<= a lot for sorting lists. We don't really need
-this since c++ 11, we can just create a simple inline lambda.
-
-*** Add models for the executables                                    :story:
+*** Add models for executables                                        :story:
 
 We have now updated all of dogen so that everything is a model,
 including the executables. However, we still haven't added high-level
@@ -1873,6 +1867,19 @@ components:
 - in a library per facet, multiple libraries
 
 We need to take this into account when we implement this.
+
+Merged stories:
+
+*Allow generating executables from dogen*
+
+At present dogen always assumes we want to generate a static
+library. It would be nice to be able to generate an executable too,
+with all of the cmake infrastructure generated.
+
+This falls under the "model types" work, though perhaps its not clear
+how it maps to libraries/executables. The problem is that at present,
+models generate multiple targets: tests, library/executable.
+
 
 *Previous understanding*
 
@@ -2041,6 +2048,12 @@ This also means we can transparently change the underlying collection;
 though it would force a recompile, no code should break (e.g. from
 list to vector or array).
 
+In a way this is very similar to what we already do for primitives. We
+should try to unify both approaches, though of course there are
+significant differences. The idea is to allow users to model a
+container after an existing STL container, but exposing a domain
+interface.
+
 *** Add support for "directory mode" in conversion                    :story:
 
 The real use case we have for conversion is to point it to a directory
@@ -2087,41 +2100,7 @@ in this set, set their overwrite flags to false - or maybe even remove
 them from the model?
 
 Of course, we still need for the model to be in a state good enough to
-build.
-
-*** Syntax checking support for stitch templates                      :story:
-
-It would be really nice to have syntax checking for stitch
-templates. This may be simpler than expected. We have two types of
-errors:
-
-- stitch errors: these are invalid stitch templates. We already detect
-  these. We just need to output a GCC-style error message.
-- c++ errors: these occur after we've weaved, by compiling the c++
-  code. These are slightly trickier: we need to map the c++ lines to
-  the stitch lines; this can be done during the generation of the
-  stitch template, where as we output the code, we also keep track of
-  the lines. For example, in a loop, one stitch template line will map
-  to many c++ lines. We also need access to the compilation
-  database. We then shell out using Boost.Process, run the compiler
-  against the c++ code, retrieve the GCC/Clang errors, and map the
-  line and columns from the compiler back into the stitch line and
-  columns. We then output the errors, but using the stitch line and
-  column numbers (presumably the column remains unchanged, or perhaps
-  we should just remove it).
-
-Ideally we want to preserve the original compiler output as much as
-possible, only interfering with the mapping. We should also make sure
-we only map lines in the template file, ignoring everything else.
-
-We will also have to reactivate the weaving mode, so this will require
-a bit of thinking:
-
-- we only want to weave a single template; however, in the new world,
-  that is actually equivalent to weaving the entire model because we
-  need to go through all of the transforms.
-- this also means we may end up with lots of errors from other
-  templates. We need to avoid this.
+build. We should wait for a proper use case for this feature.
 
 *** Add aliases to enumeration string conversions                     :story:
 
@@ -2191,7 +2170,7 @@ its basically "act as if this type was not defined in the input" or
 "this model did not exist". It should result in resolution failures if
 anyone is referring to the model/type.
 
-*** Consider making fully generated files read-only                   :story:
+*** Consider making fully generated files read-only         :reviewing:story:
 
 We could add emacs/vi tags to make fully generated files read-only -
 as opposed to partially generated files such as services, which are
@@ -2631,6 +2610,11 @@ useful for languages like C# and Java, to control serialisation, etc.
 ** Technical debt and refactoring
 
 Stories that deal with cleaning up the code base.
+
+*** Replace =operator<= for sorting with lambdas                      :story:
+
+We have used =operator<= a lot for sorting lists. We don't really need
+this since c++ 11, we can just create a simple inline lambda.
 
 *** Create tests for variability overrides                            :story:
 
@@ -12021,6 +12005,40 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Syntax checking support for stitch templates                      :story:
+
+It would be really nice to have syntax checking for stitch
+templates. This may be simpler than expected. We have two types of
+errors:
+
+- stitch errors: these are invalid stitch templates. We already detect
+  these. We just need to output a GCC-style error message.
+- c++ errors: these occur after we've weaved, by compiling the c++
+  code. These are slightly trickier: we need to map the c++ lines to
+  the stitch lines; this can be done during the generation of the
+  stitch template, where as we output the code, we also keep track of
+  the lines. For example, in a loop, one stitch template line will map
+  to many c++ lines. We also need access to the compilation
+  database. We then shell out using Boost.Process, run the compiler
+  against the c++ code, retrieve the GCC/Clang errors, and map the
+  line and columns from the compiler back into the stitch line and
+  columns. We then output the errors, but using the stitch line and
+  column numbers (presumably the column remains unchanged, or perhaps
+  we should just remove it).
+
+Ideally we want to preserve the original compiler output as much as
+possible, only interfering with the mapping. We should also make sure
+we only map lines in the template file, ignoring everything else.
+
+We will also have to reactivate the weaving mode, so this will require
+a bit of thinking:
+
+- we only want to weave a single template; however, in the new world,
+  that is actually equivalent to weaving the entire model because we
+  need to go through all of the transforms.
+- this also means we may end up with lots of errors from other
+  templates. We need to avoid this.
 
 *** Consider adding TableGen                                          :story:
 
