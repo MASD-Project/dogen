@@ -46,24 +46,13 @@ const std::string empty_msg("<empty>");
 const std::string empty_qualified_name(
     "Qualified name cannot be empty for instance templates.");
 const std::string empty_owner("Owner cannot be empty.");
-const std::string template_not_instantiable(
-    "Template cannot be instantiated: ");
 const std::string empty_simple_name("Simple name cannot be empty.");
-const std::string qualified_name_not_empty(
-    "Qualified name must be empty. Template: ");
-const std::string facet_name_not_empty(
-    "Template is 'facet template' but facet name is not empty. Template: ");
-const std::string archetype_name_not_empty(
-    "Template is 'archetype template' but facet name is not empty. Template: ");
-const std::string unsupported_template_kind(
-    "Template is not supported: ");
 const std::string empty_domains("No instantiation domain names found.");
 const std::string empty_domain_name(
     "Template has an empty domain name: ");
 const std::string invalid_domain_name(
     "Instantiation domain name could not be located: ");
 const std::string missing_feature("Feature not found: ");
-const std::string missing_kernel("Recursive templates must supply the kernel.");
 const std::string duplicate_configuration_point(
     "Found more than one configuration point for the same feature: ");
 
@@ -71,115 +60,15 @@ const std::string duplicate_configuration_point(
 
 namespace dogen::variability::helpers {
 
-template_instantiator::template_instantiator(
-    const archetypes::location_repository& alrp, const bool compatibility_mode)
-    : repository_(alrp), compatibility_mode_(compatibility_mode) {
+template_instantiator::template_instantiator(const bool compatibility_mode)
+    : compatibility_mode_(compatibility_mode) {
 
     BOOST_LOG_SEV(lg, trace) << "Compatibility mode: " << compatibility_mode_;
 }
 
 bool template_instantiator::
-is_instantiable(const meta_model::template_kind tk) const {
-    using meta_model::template_kind;
-    return
-        tk == template_kind::recursive_template ||
-        tk == template_kind::backend_template ||
-        tk == template_kind::facet_template ||
-        tk == template_kind::archetype_template;
-}
-
-bool template_instantiator::
 is_partially_mathcable(const meta_model::value_type vt) const {
     return vt == meta_model::value_type::key_value_pair;
-}
-
-bool template_instantiator::
-is_match(const std::string& lhs, const std::string& rhs) const {
-    /*
-     * We match at the backend or facet level for one of two possible
-     * cases: either the template has specifically requested a
-     * backend/facet - in which case we just want the items for that
-     * backend/facet, and all others can be ignored - or the template
-     * requested an expansion across all backends/facets.
-     */
-    if (lhs.empty())
-        return true;
-
-    return lhs == rhs;
-}
-
-void template_instantiator::validate(const archetypes::location& al,
-    const meta_model::name& n, const meta_model::template_kind tk) const {
-    /*
-     * All templates must supply a simple name. This cannot be
-     * inferred.
-     */
-    const auto sn(n.simple());
-    if (sn.empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_simple_name;
-        BOOST_THROW_EXCEPTION(instantiation_exception(empty_simple_name));
-    }
-
-    /*
-     * The qualified name must not be supplied by instantiable
-     * templates because it will be derived for each template
-     * instantiation.
-     */
-    if (is_instantiable(tk) && !n.qualified().empty()) {
-        BOOST_LOG_SEV(lg, error) << qualified_name_not_empty << sn;
-        BOOST_THROW_EXCEPTION(
-            instantiation_exception(qualified_name_not_empty + sn));
-    }
-
-    using meta_model::template_kind;
-    if (tk == template_kind::recursive_template) {
-        /*
-         * At present our recursive templates are limited to starting
-         * at the kernel or backend backend level. Ensure the user is
-         * not trying to start at the facet or archetype level.
-         */
-        if (!al.facet().empty()) {
-            BOOST_LOG_SEV(lg, error) << facet_name_not_empty << sn;
-            BOOST_THROW_EXCEPTION(
-                instantiation_exception(facet_name_not_empty + sn));
-        }
-
-        if (!al.archetype().empty()) {
-            BOOST_LOG_SEV(lg, error) << archetype_name_not_empty << sn;
-            BOOST_THROW_EXCEPTION(
-                instantiation_exception(archetype_name_not_empty + sn));
-        }
-    }
-
-    if (tk == template_kind::facet_template) {
-        /*
-         * Facet templates must not have a facet or archetype, as
-         * these will be derived for each instantiation.
-         */
-        if (!al.facet().empty()) {
-            BOOST_LOG_SEV(lg, error) << facet_name_not_empty << sn;
-            BOOST_THROW_EXCEPTION(
-                instantiation_exception(facet_name_not_empty + sn));
-        }
-
-        if (!al.archetype().empty()) {
-            BOOST_LOG_SEV(lg, error) << archetype_name_not_empty << sn;
-            BOOST_THROW_EXCEPTION(
-                instantiation_exception(archetype_name_not_empty + sn));
-        }
-    }
-
-    if (tk == template_kind::archetype_template) {
-        /*
-         * Archetype templates must not have an archetype, as these
-         * will be derived for each instantiation.
-         */
-        if (!al.archetype().empty()) {
-            BOOST_LOG_SEV(lg, error) << archetype_name_not_empty << sn;
-            BOOST_THROW_EXCEPTION(
-                instantiation_exception(archetype_name_not_empty + sn));
-        }
-    }
 }
 
 meta_model::configuration_point template_instantiator::to_configuration_point(
@@ -252,127 +141,6 @@ to_feature(const meta_model::feature_template& ft) const {
     return r;
 }
 
-std::list<meta_model::configuration_point>
-template_instantiator::instantiate_recursive_template(
-    const meta_model::feature_model& fm,
-    const meta_model::configuration_point_template& cpt) const {
-
-    const auto& l(cpt.location());
-    std::list<meta_model::configuration_point> r;
-    for (const auto pair : repository_.facet_names_by_backend_name()) {
-        /*
-         * If the point template specified a backend, make sure we
-         * only include facets that match it. If it was blank, we'll
-         * match all backends.
-         */
-        const auto backend_name(pair.first);
-        if (!is_match(l.backend(), backend_name))
-            continue;
-
-        /*
-         * Create the configuration point for the backend itself.
-         */
-        r.push_back(to_configuration_point(fm, backend_name, cpt));
-
-        /*
-         * Now create configuration points for its facets.
-         */
-        const auto& facet_names(pair.second);
-        for (const auto facet_name : facet_names)
-            r.push_back(to_configuration_point(fm, facet_name, cpt));
-    }
-
-    /*
-     * Now handle all archetypes.
-     */
-    for (const auto al : repository_.all()) {
-        /*
-         * Again, apply the backend matching logic.
-         */
-        if (!is_match(l.backend(), al.backend()))
-            continue;
-
-        const auto archetype_name(al.archetype() + "." + cpt.name().simple());
-        r.push_back(to_configuration_point(fm, archetype_name, cpt));
-    }
-
-    return r;
-}
-
-std::list<meta_model::configuration_point> template_instantiator::
-instantiate_facet_template(const meta_model::feature_model& fm,
-    const meta_model::configuration_point_template& cpt) const {
-
-    const auto& l(cpt.location());
-    std::list<meta_model::configuration_point> r;
-    for (const auto pair : repository_.facet_names_by_backend_name()) {
-        const auto backend_name(pair.first);
-        if (!is_match(l.backend(), backend_name)) {
-            BOOST_LOG_SEV(lg, trace) << "Ignoring backend: " << backend_name;
-            continue;
-        }
-
-        const auto& facet_names(pair.second);
-        for (const auto facet_name : facet_names) {
-            BOOST_LOG_SEV(lg, trace) << "Processing facet: " << facet_name;
-            r.push_back(to_configuration_point(fm, facet_name, cpt));
-        }
-    }
-    return r;
-}
-
-std::list<meta_model::configuration_point> template_instantiator::
-instantiate_archetype_template(const meta_model::feature_model& fm,
-    const meta_model::configuration_point_template& cpt) const {
-
-    std::list<meta_model::configuration_point> r;
-    const auto l(cpt.location());
-    for (const auto al : repository_.all()) {
-        if (!is_match(l.backend(), al.backend()) ||
-            !is_match(l.facet(), al.facet()))
-            continue;
-
-        const auto archetype_name(al.archetype() + "." + cpt.name().simple());
-        r.push_back(to_configuration_point(fm, archetype_name, cpt));
-    }
-
-    return r;
-}
-
-std::list<meta_model::configuration_point>
-template_instantiator::instantiate(const meta_model::feature_model& fm,
-    const meta_model::configuration_point_template& cpt) const {
-    /*
-     * First, sanity check the template to make sure it is vaguely
-     * valid.
-     */
-    validate(cpt.location(), cpt.name(), cpt.kind());
-
-    /*
-     * Dispatch to the appropriate instantiator.
-     */
-    BOOST_LOG_SEV(lg, debug) << "Instantiating point template: " << cpt;
-
-    const auto tk(cpt.kind());
-    using meta_model::template_kind;
-    std::list<meta_model::configuration_point> r;
-    if (tk == template_kind::recursive_template)
-        r = instantiate_recursive_template(fm, cpt);
-    else if (tk == template_kind::facet_template)
-        r = instantiate_facet_template(fm, cpt);
-    else if (tk == template_kind::archetype_template)
-        r = instantiate_archetype_template(fm, cpt);
-    else {
-        const auto s(boost::lexical_cast<std::string>(tk));
-        BOOST_LOG_SEV(lg, error) << unsupported_template_kind << s;
-        BOOST_THROW_EXCEPTION(
-            instantiation_exception(unsupported_template_kind + s));
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Instantiation result: " << r;
-    return r;
-}
-
 std::list<meta_model::feature> template_instantiator::
 instantiate(const std::unordered_map<std::string, std::vector<std::string>>&
     template_instantiation_domains,
@@ -432,79 +200,7 @@ instantiate(const std::unordered_map<std::string, std::vector<std::string>>&
     return r;
 }
 
-meta_model::profile
-template_instantiator::instantiate(const meta_model::feature_model& fm,
-    const meta_model::profile_template& pt) const {
-
-    const auto ptqn(pt.name().qualified());
-    BOOST_LOG_SEV(lg, debug) << "Instantiating profile template: " << ptqn;
-
-    meta_model::profile r;
-    r.name(pt.name());
-    r.stereotype(pt.stereotype());
-    r.parents(pt.parents());
-
-    for (auto& cpt : pt.templates()) {
-        const auto cptqn(cpt.name().qualified());
-        BOOST_LOG_SEV(lg, debug) << "Configuration point template: "
-                                 << cpt.name().simple() << " ('"
-                                 << (cptqn.empty() ? empty_msg : cptqn)
-                                 << "')" ;
-        std::list<meta_model::configuration_point> cps;
-
-        /*
-         * Try to instantiate the template.
-         */
-        try {
-            cps = instantiate(fm, cpt);
-        } catch(const instantiation_exception& e) {
-            /*
-             * This is not a particularly glamorous approach to handling
-             * backwards compatibility. The idea is that we may be trying
-             * to instantiate features that are no longer supported. If
-             * the user has requested backwards compatibility mode, we try
-             * to continue by ignoring the fact that those features no
-             * longer exist. This is also not ideal because we may capture
-             * errors when the user requested a template kind that is not
-             * supported.
-             */
-            if (!compatibility_mode_) {
-                BOOST_LOG_SEV(lg, error) << "Error instantiating template: "
-                                         << ptqn << ". Message: "
-                                         << e.what() << ".";
-                throw e;
-            }
-
-            BOOST_LOG_SEV(lg, warn) << "Error instantiating template: "
-                                    << ptqn << ". Message: " << e.what()
-                                    << ". Skipping template.";
-            continue;
-        }
-
-        /*
-         * Now process all configuration points that were generated as
-         * part of the instantiation.
-         */
-        for (const auto& cp : cps) {
-            const auto cpqn(cp.name().qualified());
-            const auto pair(std::make_pair(cpqn, cp));
-            const auto inserted(r.configuration_points().insert(pair).second);
-            if (!inserted) {
-                BOOST_LOG_SEV(lg, error) << duplicate_configuration_point
-                                         << cpqn;
-                BOOST_THROW_EXCEPTION(instantiation_exception(
-                        duplicate_configuration_point + cpqn));
-            }
-        }
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Instantiated profile template: "
-                             << ptqn << " Result: " << r;
-    return r;
-}
-
-std::list<meta_model::configuration_point>
-template_instantiator::instantiate_new(
+std::list<meta_model::configuration_point> template_instantiator::instantiate(
     const std::unordered_map<std::string, std::vector<std::string>>&
     template_instantiation_domains, const meta_model::feature_model& fm,
     const meta_model::configuration_point_template& cpt) const {
@@ -559,7 +255,7 @@ template_instantiator::instantiate_new(
     return r;
 }
 
-meta_model::profile template_instantiator::instantiate_new(
+meta_model::profile template_instantiator::instantiate(
     const std::unordered_map<std::string, std::vector<std::string>>&
     template_instantiation_domains, const meta_model::feature_model& fm,
     const meta_model::profile_template& pt) const {
@@ -594,7 +290,7 @@ meta_model::profile template_instantiator::instantiate_new(
          * Try to instantiate the template.
          */
         try {
-            cps = instantiate_new(tid, fm, cpt);
+            cps = instantiate(tid, fm, cpt);
         } catch(const instantiation_exception& e) {
             /*
              * This is not a particularly glamorous approach to handling

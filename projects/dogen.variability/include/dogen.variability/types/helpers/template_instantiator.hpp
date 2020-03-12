@@ -27,11 +27,7 @@
 
 #include <list>
 #include <string>
-#include <forward_list>
-#include <unordered_set>
 #include <unordered_map>
-#include <boost/shared_ptr.hpp>
-#include "dogen.archetypes/types/location_repository.hpp"
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/profile.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
@@ -50,36 +46,16 @@ public:
     /**
      * @brief Initialises the instantiator.
      *
-     * @param alrp Archetype location repository.
+     * @param compatibility_mode if true, keep processing even on
+     * instantiation errors.
      */
-    template_instantiator(const archetypes::location_repository& alrp,
-        const bool compatibility_mode);
+    explicit template_instantiator(const bool compatibility_mode);
 
 private:
-    /**
-     * @brief Returns true if the kind of template can be
-     * instantiated, false otherwise.
-     */
-    bool is_instantiable(const meta_model::template_kind tk) const;
-
     /**
      * @brief Returns true if the value type allows partial matching.
      */
     bool is_partially_mathcable(const meta_model::value_type vt) const;
-
-    /**
-     * @brief Returns true if there is a match between lhs and rhs,
-     * according to the matching rules.
-     */
-    bool is_match(const std::string& lhs, const std::string& rhs) const;
-
-private:
-    /**
-     * @brief Ensures the supplied parameters result in a valid
-     * instantiation.
-     */
-    void validate(const archetypes::location& al, const meta_model::name& n,
-        const meta_model::template_kind tk) const;
 
 private:
     /**
@@ -96,47 +72,15 @@ private:
     meta_model::feature to_feature(const meta_model::feature_template& ft) const;
 
 private:
-    /**
-     * @brief Instantiates a configuration point template that is
-     * recursive across archetype space.
-     */
     std::list<meta_model::configuration_point>
-    instantiate_recursive_template(const meta_model::feature_model& fm,
-        const meta_model::configuration_point_template& cpt) const;
-
-    /**
-     * @brief Instantiates the configuration point template for all
-     * available facets in archetype space.
-     */
-    std::list<meta_model::configuration_point>
-    instantiate_facet_template(const meta_model::feature_model& fm,
-        const meta_model::configuration_point_template& cpt) const;
-
-    /**
-     * @brief Instantiates the configuration point template for all
-     * archetypes.
-     */
-    std::list<meta_model::configuration_point>
-    instantiate_archetype_template(const meta_model::feature_model& fm,
-        const meta_model::configuration_point_template& cpt) const;
-
-    /**
-     * @brief Instantiates a configuration point template into a set
-     * of configuration points.
-     */
-    std::list<meta_model::configuration_point>
-    instantiate(const meta_model::feature_model& fm,
-        const meta_model::configuration_point_template& cpt) const;
-    std::list<meta_model::configuration_point>
-    instantiate_new(
-        const std::unordered_map<std::string, std::vector<std::string>>&
+    instantiate(const std::unordered_map<std::string, std::vector<std::string>>&
         template_instantiation_domains, const meta_model::feature_model& fm,
         const meta_model::configuration_point_template& cpt) const;
 
 public:
     /**
-     * @brief Instantiates the feature template across archetype
-     * space.
+     * @brief Instantiates the feature template across the elements of
+     * the requested domain.
      */
     std::list<meta_model::feature> instantiate(
         const std::unordered_map<std::string, std::vector<std::string>>&
@@ -144,17 +88,15 @@ public:
         const meta_model::feature_template& ft) const;
 
     /**
-     * @brief Instantiates a profile template across archetype space.
+     * @brief Instantiates a profile template across the elements of
+     * the requested domain.
      */
-    meta_model::profile instantiate(const meta_model::feature_model& fm,
-        const meta_model::profile_template& pt) const;
-    meta_model::profile instantiate_new(
+    meta_model::profile instantiate(
         const std::unordered_map<std::string, std::vector<std::string>>&
         template_instantiation_domains, const meta_model::feature_model& fm,
         const meta_model::profile_template& pt) const;
 
 private:
-    const archetypes::location_repository& repository_;
     const bool compatibility_mode_;
 };
 

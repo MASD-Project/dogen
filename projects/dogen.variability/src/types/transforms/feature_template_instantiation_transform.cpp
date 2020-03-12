@@ -45,13 +45,11 @@ feature_template_instantiation_transform::apply(const context& ctx,
         "feature template instantiation transform",
         transform_id, transform_id, *ctx.tracer(), ftrp);
 
-    const auto cm(ctx.compatibility_mode());
-    const auto& tids(ctx.template_instantiation_domains());
-    const auto& alrp(*ctx.archetype_location_repository());
-    helpers::template_instantiator ti(alrp, cm);
 
     unsigned int counter(0);
     std::list<meta_model::feature> r;
+    const auto& tids(ctx.template_instantiation_domains());
+    helpers::template_instantiator ti(ctx.compatibility_mode());
     for (const auto& ft : ftrp.templates()) {
         r.splice(r.end(), ti.instantiate(tids, ft));
         ++counter;
