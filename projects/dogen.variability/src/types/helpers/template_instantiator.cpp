@@ -380,7 +380,8 @@ instantiate(const std::unordered_map<std::string, std::vector<std::string>>&
     /*
      * Domain names should never be empty.
      */
-    if (template_instantiation_domains.empty()) {
+    const auto& tid(template_instantiation_domains);
+    if (tid.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_domains ;
         BOOST_THROW_EXCEPTION(instantiation_exception(empty_domains));
 
@@ -410,8 +411,8 @@ instantiate(const std::unordered_map<std::string, std::vector<std::string>>&
      * The instantiation domain name provided must exist in our
      * collection of all domain names.
      */
-    const auto i(template_instantiation_domains.find(idn));
-    if (i == template_instantiation_domains.end()) {
+    const auto i(tid.find(idn));
+    if (i == tid.end()) {
         BOOST_LOG_SEV(lg, error) << invalid_domain_name << idn
                                  << " Requested for template: " << sn;
         BOOST_THROW_EXCEPTION(
@@ -456,6 +457,144 @@ template_instantiator::instantiate(const meta_model::feature_model& fm,
          */
         try {
             cps = instantiate(fm, cpt);
+        } catch(const instantiation_exception& e) {
+            /*
+             * This is not a particularly glamorous approach to handling
+             * backwards compatibility. The idea is that we may be trying
+             * to instantiate features that are no longer supported. If
+             * the user has requested backwards compatibility mode, we try
+             * to continue by ignoring the fact that those features no
+             * longer exist. This is also not ideal because we may capture
+             * errors when the user requested a template kind that is not
+             * supported.
+             */
+            if (!compatibility_mode_) {
+                BOOST_LOG_SEV(lg, error) << "Error instantiating template: "
+                                         << ptqn << ". Message: "
+                                         << e.what() << ".";
+                throw e;
+            }
+
+            BOOST_LOG_SEV(lg, warn) << "Error instantiating template: "
+                                    << ptqn << ". Message: " << e.what()
+                                    << ". Skipping template.";
+            continue;
+        }
+
+        /*
+         * Now process all configuration points that were generated as
+         * part of the instantiation.
+         */
+        for (const auto& cp : cps) {
+            const auto cpqn(cp.name().qualified());
+            const auto pair(std::make_pair(cpqn, cp));
+            const auto inserted(r.configuration_points().insert(pair).second);
+            if (!inserted) {
+                BOOST_LOG_SEV(lg, error) << duplicate_configuration_point
+                                         << cpqn;
+                BOOST_THROW_EXCEPTION(instantiation_exception(
+                        duplicate_configuration_point + cpqn));
+            }
+        }
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Instantiated profile template: "
+                             << ptqn << " Result: " << r;
+    return r;
+}
+
+std::list<meta_model::configuration_point>
+template_instantiator::instantiate_new(
+    const std::unordered_map<std::string, std::vector<std::string>>&
+    template_instantiation_domains, const meta_model::feature_model& fm,
+    const meta_model::configuration_point_template& cpt) const {
+    const auto cptqn(cpt.name().qualified());
+    BOOST_LOG_SEV(lg, debug) << "Configuration point template: "
+                             << cpt.name().simple() << " ('"
+                             << (cptqn.empty() ? empty_msg : cptqn)
+                             << "')" ;
+
+    /*
+     * All templates must supply a simple name. This cannot be
+     * inferred.
+     */
+    const auto& n(cpt.name());
+    const auto sn(n.simple());
+    if (sn.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_simple_name;
+        BOOST_THROW_EXCEPTION(instantiation_exception(empty_simple_name));
+    }
+
+    /*
+     * All templates must supply a instantiation domain name.
+     */
+    const auto idn(cpt.instantiation_domain_name());
+    if (idn.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_domain_name << sn;
+        BOOST_THROW_EXCEPTION(
+            instantiation_exception(empty_domain_name + sn));
+    }
+
+    /*
+     * The instantiation domain name provided must exist in our
+     * collection of all domain names.
+     */
+    const auto& tid(template_instantiation_domains);
+    const auto i(tid.find(idn));
+    if (i == tid.end()) {
+        BOOST_LOG_SEV(lg, error) << invalid_domain_name << idn
+                                 << " Requested for template: " << sn;
+        BOOST_THROW_EXCEPTION(
+            instantiation_exception(invalid_domain_name + idn));
+    }
+
+    /*
+     * Perform the template expansion across the domain.
+     */
+    const auto& domain(i->second);
+    std::list<meta_model::configuration_point> r;
+    for (const auto& e : domain)
+        r.push_back(to_configuration_point(fm, e, cpt));
+
+    return r;
+}
+
+meta_model::profile template_instantiator::instantiate_new(
+    const std::unordered_map<std::string, std::vector<std::string>>&
+    template_instantiation_domains, const meta_model::feature_model& fm,
+    const meta_model::profile_template& pt) const {
+
+    const auto ptqn(pt.name().qualified());
+    BOOST_LOG_SEV(lg, debug) << "Instantiating profile template: " << ptqn;
+
+    /*
+     * Domain names should never be empty.
+     */
+    const auto& tid(template_instantiation_domains);
+    if (tid.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_domains ;
+        BOOST_THROW_EXCEPTION(instantiation_exception(empty_domains));
+
+    }
+
+    meta_model::profile r;
+    r.name(pt.name());
+    r.stereotype(pt.stereotype());
+    r.parents(pt.parents());
+
+    for (auto& cpt : pt.templates()) {
+        const auto cptqn(cpt.name().qualified());
+        BOOST_LOG_SEV(lg, debug) << "Configuration point template: "
+                                 << cpt.name().simple() << " ('"
+                                 << (cptqn.empty() ? empty_msg : cptqn)
+                                 << "')" ;
+        std::list<meta_model::configuration_point> cps;
+
+        /*
+         * Try to instantiate the template.
+         */
+        try {
+            cps = instantiate_new(tid, fm, cpt);
         } catch(const instantiation_exception& e) {
             /*
              * This is not a particularly glamorous approach to handling

@@ -127,6 +127,11 @@ private:
     std::list<meta_model::configuration_point>
     instantiate(const meta_model::feature_model& fm,
         const meta_model::configuration_point_template& cpt) const;
+    std::list<meta_model::configuration_point>
+    instantiate_new(
+        const std::unordered_map<std::string, std::vector<std::string>>&
+        template_instantiation_domains, const meta_model::feature_model& fm,
+        const meta_model::configuration_point_template& cpt) const;
 
 public:
     /**
@@ -142,6 +147,10 @@ public:
      * @brief Instantiates a profile template across archetype space.
      */
     meta_model::profile instantiate(const meta_model::feature_model& fm,
+        const meta_model::profile_template& pt) const;
+    meta_model::profile instantiate_new(
+        const std::unordered_map<std::string, std::vector<std::string>>&
+        template_instantiation_domains, const meta_model::feature_model& fm,
         const meta_model::profile_template& pt) const;
 
 private:
