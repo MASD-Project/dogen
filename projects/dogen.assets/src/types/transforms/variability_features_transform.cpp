@@ -86,13 +86,6 @@ update(const features::variability_bundle::feature_group& fg,
     fb.generate_registration(scfg.generate_registration);
     fb.generate_static_configuration(scfg.generate_static_configuration);
 
-    archetypes::location al;
-    al.kernel(scfg.kernel);
-    al.backend(scfg.backend);
-    al.facet(scfg.facet);
-    al.archetype(scfg.archetype);
-    fb.location(al);
-
     using boost::lexical_cast;
     using variability::meta_model::template_kind;
     using meta_model::variability::feature_template_bundle;

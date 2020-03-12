@@ -77,15 +77,6 @@ update(const features::variability_entry::feature_group& fg,
     }
 
     /*
-     * FIXME: not yet reading binding point.
-     */
-    archetypes::location al;
-    al.kernel(scfg.kernel);
-    al.backend(scfg.backend);
-    al.facet(scfg.facet);
-    al.archetype(scfg.archetype);
-
-    /*
      * We must supply the value for the entry _either_ via meta-data
      * or via the value attribute; they can't both be empty or both be
      * populated.
