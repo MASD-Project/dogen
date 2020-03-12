@@ -14,30 +14,32 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-12 Thu 09:13]
+#+CAPTION: Clock summary at [2020-03-12 Thu 12:05]
 | <75>                                                    |         |       |      |       |
 | Headline                                                | Time    |       |      |     % |
 |---------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                            | *51:19* |       |      | 100.0 |
+| *Total time*                                            | *54:05* |       |      | 100.0 |
 |---------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                 | 51:19   |       |      | 100.0 |
-| Active                                                  |         | 51:19 |      | 100.0 |
-| Edit release notes for previous sprint                  |         |       | 4:11 |   8.2 |
+| Stories                                                 | 54:05   |       |      | 100.0 |
+| Active                                                  |         | 54:05 |      | 100.0 |
+| Edit release notes for previous sprint                  |         |       | 4:11 |   7.7 |
 | Create a demo and presentation for previous sprint      |         |       | 0:25 |   0.8 |
-| Sprint and product backlog grooming                     |         |       | 6:38 |  12.9 |
-| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  11.5 |
-| Analysis on removing physical references in variability |         |       | 5:27 |  10.6 |
+| Sprint and product backlog grooming                     |         |       | 6:38 |  12.3 |
+| Emacs configuration and issues                          |         |       | 0:38 |   1.2 |
+| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  10.9 |
+| Analysis on removing physical references in variability |         |       | 5:27 |  10.1 |
 | Remove =rapidjson= formatters                           |         |       | 0:03 |   0.1 |
-| Separate feature templates from bundles                 |         |       | 9:28 |  18.4 |
+| Separate feature templates from bundles                 |         |       | 9:28 |  17.5 |
 | Move enabled to generation                              |         |       | 0:04 |   0.1 |
-| Create a chain to encapsulate variability transforms    |         |       | 0:37 |   1.2 |
-| Move variability chain into assets                      |         |       | 2:22 |   4.6 |
-| Move profile meta-data into profile element             |         |       | 7:12 |  14.0 |
+| Create a chain to encapsulate variability transforms    |         |       | 0:37 |   1.1 |
+| Move variability chain into assets                      |         |       | 2:22 |   4.4 |
+| Move profile meta-data into profile element             |         |       | 7:12 |  13.3 |
 | Add handcrafted stereotype to C# models                 |         |       | 0:04 |   0.1 |
-| Split profiles and profile templates in variability     |         |       | 4:31 |   8.8 |
-| Consider renaming labels to stereotypes in variability  |         |       | 1:07 |   2.2 |
-| Add location and modules to variability                 |         |       | 0:43 |   1.4 |
-| Implement template instantiation in terms of tags       |         |       | 2:32 |   4.9 |
+| Split profiles and profile templates in variability     |         |       | 4:31 |   8.4 |
+| Consider renaming labels to stereotypes in variability  |         |       | 1:07 |   2.1 |
+| Declaring a =std::list= without parameters segfaults    |         |       | 0:10 |   0.3 |
+| Add location and modules to variability                 |         |       | 0:43 |   1.3 |
+| Implement template instantiation in terms of tags       |         |       | 4:30 |   8.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -241,6 +243,23 @@ Time spent creating the demo and presentation. Use the demo project:
     :END:
 
 Updates to sprint and product backlog.
+
+*** STARTED Emacs configuration and issues                            :story:
+    :LOGBOOK:
+    CLOCK: [2020-03-12 Thu 11:21]--[2020-03-12 Thu 11:32] =>  0:11
+    CLOCK: [2020-03-12 Thu 10:20]--[2020-03-12 Thu 10:47] =>  0:27
+    :END:
+
+Time spent faffing around with emacs.
+
+- crashes related to large JSON files. Did a package update.
+- setup projectile with correct project name and run and test commands.
+
+Links:
+
+- [[https://emacs.stackexchange.com/questions/13080/reloading-directory-local-variables][Reloading directory-local variables]]
+- [[https://projectile.readthedocs.io/en/latest/projects/][Projectile: projects]]: section "Configure a Project's Compilation,
+  Test and Run commands"
 
 *** COMPLETED Adding reference to itself results in resolution errors :story:
     CLOSED: [2020-02-17 Mon 18:17]
@@ -733,6 +752,22 @@ At present it is possible to label a profile with multiple
 labels. This is not a good idea. Make it a plain text field so we can
 only apply a single label.
 
+*** CANCELLED Declaring a =std::list= without parameters segfaults    :story:
+    CLOSED: [2020-03-12 Thu 09:26]
+    :LOGBOOK:
+    CLOCK: [2020-03-12 Thu 09:15]--[2020-03-12 Thu 09:25] =>  0:10
+    :END:
+
+By mistake we declared a type like so:
+
+: std::unordered_map<std::string, std::list>
+
+This caused dogen to segfault. We need a slightly more informative
+behaviour. Actually it seems that at present we are not doing any
+checks on the number of type parameters. This has already been
+recorded in the validation story so we will just have to ignore it for
+now.
+
 *** STARTED Add location and modules to variability                   :story:
     :LOGBOOK:
     CLOCK: [2020-03-09 Mon 15:25]--[2020-03-09 Mon 16:08] =>  0:43
@@ -775,6 +810,10 @@ Notes:
 
 *** STARTED Implement template instantiation in terms of tags         :story:
     :LOGBOOK:
+    CLOCK: [2020-03-12 Thu 11:33]--[2020-03-12 Thu 12:05] =>  0:32
+    CLOCK: [2020-03-12 Thu 10:48]--[2020-03-12 Thu 11:20] =>  0:42
+    CLOCK: [2020-03-12 Thu 09:26]--[2020-03-12 Thu 10:19] =>  0:53
+    CLOCK: [2020-03-12 Thu 09:13]--[2020-03-12 Thu 09:14] =>  0:01
     CLOCK: [2020-03-12 Thu 09:10]--[2020-03-12 Thu 09:13] =>  0:03
     CLOCK: [2020-03-12 Thu 08:32]--[2020-03-12 Thu 08:45] =>  0:13
     CLOCK: [2020-03-11 Wed 15:42]--[2020-03-11 Wed 17:58] =>  2:16
@@ -860,12 +899,14 @@ Reviewed tasks:
 - generate code to populate domain name when creating features.
 - create a template instantiator based on domains, side by side with
   existing one.
-- add prefixes to feature bundles and profiles. Compute qualified
-  names based on prefixes plus attribute names.
+- remove template kind from assets
+- remove template kind from variability
 - remove archetype location from features and profiles.
 - remove archetype location from context and context factory for
   variability.
 - remove references to archetypes model from variability model.
+- add prefixes to feature bundles and profiles. Compute qualified
+  names based on prefixes plus attribute names.
 
 *** Invalid stereotypes outside of objects are not detected           :story:
 
