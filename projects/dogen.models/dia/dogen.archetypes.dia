@@ -2398,13 +2398,13 @@ associated properties.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O19">
       <dia:attribute name="obj_pos">
-        <dia:point val="66,3"/>
+        <dia:point val="67,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="65.95,2.95;91.575,7.45"/>
+        <dia:rectangle val="66.95,2.95;92.575,7.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="66,3"/>
+        <dia:point val="67,3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="25.524999999999999"/>
@@ -2593,17 +2593,17 @@ associated properties.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="78.7625,3"/>
+        <dia:point val="79.7625,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="63.305,0.95;79.5125,4.6"/>
+        <dia:rectangle val="63.305,0.95;80.5125,4.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="78.7625,3"/>
-        <dia:point val="78.7625,1"/>
+        <dia:point val="79.7625,3"/>
+        <dia:point val="79.7625,1"/>
         <dia:point val="63.355,1"/>
         <dia:point val="63.355,3"/>
       </dia:attribute>
