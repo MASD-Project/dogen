@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
+#include <vector>
 #include <algorithm>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
@@ -51,7 +51,7 @@ public:
     context(
         const bool compatibility_mode,
         const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository,
-        const std::unordered_map<std::string, std::list<std::string> >& template_instantiation_domains,
+        const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains,
         const boost::shared_ptr<dogen::tracing::tracer>& tracer);
 
 public:
@@ -71,10 +71,10 @@ public:
      * user choices.
      */
     /**@{*/
-    const std::unordered_map<std::string, std::list<std::string> >& template_instantiation_domains() const;
-    std::unordered_map<std::string, std::list<std::string> >& template_instantiation_domains();
-    void template_instantiation_domains(const std::unordered_map<std::string, std::list<std::string> >& v);
-    void template_instantiation_domains(const std::unordered_map<std::string, std::list<std::string> >&& v);
+    const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains() const;
+    std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains();
+    void template_instantiation_domains(const std::unordered_map<std::string, std::vector<std::string> >& v);
+    void template_instantiation_domains(const std::unordered_map<std::string, std::vector<std::string> >&& v);
     /**@}*/
 
     const boost::shared_ptr<dogen::tracing::tracer>& tracer() const;
@@ -95,7 +95,7 @@ public:
 private:
     bool compatibility_mode_;
     boost::shared_ptr<dogen::archetypes::location_repository> archetype_location_repository_;
-    std::unordered_map<std::string, std::list<std::string> > template_instantiation_domains_;
+    std::unordered_map<std::string, std::vector<std::string> > template_instantiation_domains_;
     boost::shared_ptr<dogen::tracing::tracer> tracer_;
 };
 

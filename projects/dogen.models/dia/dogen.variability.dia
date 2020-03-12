@@ -7005,13 +7005,13 @@ elements.#</dia:string>
         <dia:point val="3,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,33.95;37.43,40.05"/>
+        <dia:rectangle val="2.95,33.95;38.2,40.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="3,34"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="34.380000000000003"/>
+        <dia:real val="35.149999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
@@ -7155,7 +7155,7 @@ elements.#</dia:string>
             <dia:string>#template_instantiation_domains#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::list&lt;std::string&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::vector&lt;std::string&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

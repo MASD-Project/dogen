@@ -51,7 +51,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -65,7 +65,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<std::string> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::vector<std::string> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

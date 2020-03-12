@@ -48,7 +48,7 @@ context::context()
 context::context(
     const bool compatibility_mode,
     const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository,
-    const std::unordered_map<std::string, std::list<std::string> >& template_instantiation_domains,
+    const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains,
     const boost::shared_ptr<dogen::tracing::tracer>& tracer)
     : compatibility_mode_(compatibility_mode),
       archetype_location_repository_(archetype_location_repository),
@@ -100,19 +100,19 @@ void context::archetype_location_repository(const boost::shared_ptr<dogen::arche
     archetype_location_repository_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::list<std::string> >& context::template_instantiation_domains() const {
+const std::unordered_map<std::string, std::vector<std::string> >& context::template_instantiation_domains() const {
     return template_instantiation_domains_;
 }
 
-std::unordered_map<std::string, std::list<std::string> >& context::template_instantiation_domains() {
+std::unordered_map<std::string, std::vector<std::string> >& context::template_instantiation_domains() {
     return template_instantiation_domains_;
 }
 
-void context::template_instantiation_domains(const std::unordered_map<std::string, std::list<std::string> >& v) {
+void context::template_instantiation_domains(const std::unordered_map<std::string, std::vector<std::string> >& v) {
     template_instantiation_domains_ = v;
 }
 
-void context::template_instantiation_domains(const std::unordered_map<std::string, std::list<std::string> >&& v) {
+void context::template_instantiation_domains(const std::unordered_map<std::string, std::vector<std::string> >&& v) {
     template_instantiation_domains_ = std::move(v);
 }
 
