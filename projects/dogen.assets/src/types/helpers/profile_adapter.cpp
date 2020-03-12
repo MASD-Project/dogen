@@ -63,7 +63,6 @@ profile_adapter::adapt(const meta_model::variability::profile_template& pt) {
         variability::meta_model::configuration_point_template cpt;
         cpt.name().simple(k);
         cpt.instantiation_domain_name(e.instantiation_domain_name());
-        cpt.location(e.location());
         cpt.untyped_value(e.value());
         r.templates().push_back(cpt);
     }
