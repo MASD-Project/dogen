@@ -71,7 +71,6 @@ feature_template_bundle::feature_template_bundle(
     const bool generate_registration,
     const bool generate_static_configuration,
     const bool requires_manual_default_constructor,
-    const dogen::archetypes::location& location,
     const boost::optional<dogen::variability::meta_model::binding_point>& default_binding_point,
     const std::list<dogen::assets::meta_model::variability::feature_template>& feature_templates,
     const std::string& instantiation_domain_name)
@@ -97,7 +96,6 @@ feature_template_bundle::feature_template_bundle(
       generate_registration,
       generate_static_configuration,
       requires_manual_default_constructor,
-      location,
       default_binding_point),
       feature_templates_(feature_templates),
       instantiation_domain_name_(instantiation_domain_name) { }

@@ -29,7 +29,6 @@
 #include <iosfwd>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen.archetypes/types/location.hpp"
 #include "dogen.assets/types/meta_model/name.hpp"
 #include "dogen.assets/types/meta_model/element.hpp"
 #include "dogen.variability/types/meta_model/binding_point.hpp"
@@ -85,7 +84,6 @@ public:
         const bool generate_registration,
         const bool generate_static_configuration,
         const bool requires_manual_default_constructor,
-        const dogen::archetypes::location& location,
         const boost::optional<dogen::variability::meta_model::binding_point>& default_binding_point);
 
 public:
@@ -151,16 +149,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Archetype location coordinates for the feature template to expand into.
-     */
-    /**@{*/
-    const dogen::archetypes::location& location() const;
-    dogen::archetypes::location& location();
-    void location(const dogen::archetypes::location& v);
-    void location(const dogen::archetypes::location&& v);
-    /**@}*/
-
-    /**
      * @brief Default binding point for all feature templates in this bundle.
      *
      * The binding point indicates where the feature will bind when instantiated in a
@@ -190,7 +178,6 @@ private:
     bool generate_registration_;
     bool generate_static_configuration_;
     bool requires_manual_default_constructor_;
-    dogen::archetypes::location location_;
     boost::optional<dogen::variability::meta_model::binding_point> default_binding_point_;
 };
 

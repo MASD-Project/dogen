@@ -30,7 +30,6 @@
 #include <string>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "dogen.archetypes/types/location.hpp"
 #include "dogen.assets/types/meta_model/name.hpp"
 #include "dogen.variability/types/meta_model/configuration_fwd.hpp"
 
@@ -50,8 +49,7 @@ public:
         const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
         const dogen::assets::meta_model::name& name,
         const std::string& key,
-        const std::list<std::string>& value,
-        const dogen::archetypes::location& location);
+        const std::list<std::string>& value);
 
 public:
     virtual void to_stream(std::ostream& s) const;
@@ -101,16 +99,6 @@ public:
     void value(const std::list<std::string>& v);
     void value(const std::list<std::string>&& v);
 
-    /**
-     * @brief Archetype location coordinates for the feature template to expand into.
-     */
-    /**@{*/
-    const dogen::archetypes::location& location() const;
-    dogen::archetypes::location& location();
-    void location(const dogen::archetypes::location& v);
-    void location(const dogen::archetypes::location&& v);
-    /**@}*/
-
 protected:
     bool compare(const abstract_profile_entry& rhs) const;
 public:
@@ -125,7 +113,6 @@ private:
     dogen::assets::meta_model::name name_;
     std::string key_;
     std::list<std::string> value_;
-    dogen::archetypes::location location_;
 };
 
 inline abstract_profile_entry::~abstract_profile_entry() noexcept { }

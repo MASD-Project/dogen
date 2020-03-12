@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen.archetypes/io/location_io.hpp"
 #include "dogen.assets/io/meta_model/name_io.hpp"
 #include "dogen.assets/io/meta_model/element_io.hpp"
 #include "dogen.variability/io/meta_model/binding_point_io.hpp"
@@ -71,7 +70,6 @@ abstract_bundle::abstract_bundle(abstract_bundle&& rhs)
       generate_registration_(std::move(rhs.generate_registration_)),
       generate_static_configuration_(std::move(rhs.generate_static_configuration_)),
       requires_manual_default_constructor_(std::move(rhs.requires_manual_default_constructor_)),
-      location_(std::move(rhs.location_)),
       default_binding_point_(std::move(rhs.default_binding_point_)) { }
 
 abstract_bundle::abstract_bundle(
@@ -96,7 +94,6 @@ abstract_bundle::abstract_bundle(
     const bool generate_registration,
     const bool generate_static_configuration,
     const bool requires_manual_default_constructor,
-    const dogen::archetypes::location& location,
     const boost::optional<dogen::variability::meta_model::binding_point>& default_binding_point)
     : dogen::assets::meta_model::element(
       name,
@@ -120,7 +117,6 @@ abstract_bundle::abstract_bundle(
       generate_registration_(generate_registration),
       generate_static_configuration_(generate_static_configuration),
       requires_manual_default_constructor_(requires_manual_default_constructor),
-      location_(location),
       default_binding_point_(default_binding_point) { }
 
 void abstract_bundle::to_stream(std::ostream& s) const {
@@ -141,7 +137,6 @@ void abstract_bundle::to_stream(std::ostream& s) const {
       << "\"generate_registration\": " << generate_registration_ << ", "
       << "\"generate_static_configuration\": " << generate_static_configuration_ << ", "
       << "\"requires_manual_default_constructor\": " << requires_manual_default_constructor_ << ", "
-      << "\"location\": " << location_ << ", "
       << "\"default_binding_point\": " << default_binding_point_
       << " }";
 }
@@ -156,7 +151,6 @@ void abstract_bundle::swap(abstract_bundle& other) noexcept {
     swap(generate_registration_, other.generate_registration_);
     swap(generate_static_configuration_, other.generate_static_configuration_);
     swap(requires_manual_default_constructor_, other.requires_manual_default_constructor_);
-    swap(location_, other.location_);
     swap(default_binding_point_, other.default_binding_point_);
 }
 
@@ -168,7 +162,6 @@ bool abstract_bundle::compare(const abstract_bundle& rhs) const {
         generate_registration_ == rhs.generate_registration_ &&
         generate_static_configuration_ == rhs.generate_static_configuration_ &&
         requires_manual_default_constructor_ == rhs.requires_manual_default_constructor_ &&
-        location_ == rhs.location_ &&
         default_binding_point_ == rhs.default_binding_point_;
 }
 
@@ -242,22 +235,6 @@ bool abstract_bundle::requires_manual_default_constructor() const {
 
 void abstract_bundle::requires_manual_default_constructor(const bool v) {
     requires_manual_default_constructor_ = v;
-}
-
-const dogen::archetypes::location& abstract_bundle::location() const {
-    return location_;
-}
-
-dogen::archetypes::location& abstract_bundle::location() {
-    return location_;
-}
-
-void abstract_bundle::location(const dogen::archetypes::location& v) {
-    location_ = v;
-}
-
-void abstract_bundle::location(const dogen::archetypes::location&& v) {
-    location_ = std::move(v);
 }
 
 const boost::optional<dogen::variability::meta_model::binding_point>& abstract_bundle::default_binding_point() const {

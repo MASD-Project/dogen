@@ -3764,11 +3764,6 @@
           "documentation": "If true, the code generated for this feature template bundle needs a manually\ngenerated default constructor.\n"
         },
         {
-          "name": "location",
-          "type": "archetypes::location",
-          "documentation": "Archetype location coordinates for the feature template to expand into.\n"
-        },
-        {
           "name": "default_binding_point",
           "type": "boost::optional<variability::meta_model::binding_point>",
           "documentation": "Default binding point for all feature templates in this bundle.\n\nThe binding point indicates where the feature will bind when instantiated in a\nmodel. If the default binding point is supplied for a bundle, the templates cannot\nsupply individual binding points. Conversely, if not supplied, they must supply\ntheir individual binding points.\n"
@@ -3995,11 +3990,6 @@
         {
           "name": "value",
           "type": "std::list<std::string>"
-        },
-        {
-          "name": "location",
-          "type": "archetypes::location",
-          "documentation": "Archetype location coordinates for the feature template to expand into.\n"
         }
       ]
     },

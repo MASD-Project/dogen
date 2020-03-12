@@ -39,15 +39,13 @@ profile_template_entry::profile_template_entry(
     const dogen::assets::meta_model::name& name,
     const std::string& key,
     const std::list<std::string>& value,
-    const dogen::archetypes::location& location,
     const std::string& instantiation_domain_name)
     : dogen::assets::meta_model::variability::abstract_profile_entry(
       documentation,
       configuration,
       name,
       key,
-      value,
-      location),
+      value),
       instantiation_domain_name_(instantiation_domain_name) { }
 
 void profile_template_entry::to_stream(std::ostream& s) const {

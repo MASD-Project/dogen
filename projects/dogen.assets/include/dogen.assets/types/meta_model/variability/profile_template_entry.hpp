@@ -47,7 +47,6 @@ public:
         const dogen::assets::meta_model::name& name,
         const std::string& key,
         const std::list<std::string>& value,
-        const dogen::archetypes::location& location,
         const std::string& instantiation_domain_name);
 
 public:

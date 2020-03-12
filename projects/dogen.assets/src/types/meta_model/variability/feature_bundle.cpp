@@ -62,7 +62,6 @@ feature_bundle::feature_bundle(
     const bool generate_registration,
     const bool generate_static_configuration,
     const bool requires_manual_default_constructor,
-    const dogen::archetypes::location& location,
     const boost::optional<dogen::variability::meta_model::binding_point>& default_binding_point,
     const std::list<dogen::assets::meta_model::variability::feature>& features)
     : dogen::assets::meta_model::variability::abstract_bundle(
@@ -87,7 +86,6 @@ feature_bundle::feature_bundle(
       generate_registration,
       generate_static_configuration,
       requires_manual_default_constructor,
-      location,
       default_binding_point),
       features_(features) { }
 

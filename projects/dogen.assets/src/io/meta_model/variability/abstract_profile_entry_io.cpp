@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.archetypes/io/location_io.hpp"
 #include "dogen.assets/io/meta_model/name_io.hpp"
 #include "dogen.variability/io/meta_model/configuration_io.hpp"
 #include "dogen.assets/io/meta_model/variability/abstract_profile_entry_io.hpp"

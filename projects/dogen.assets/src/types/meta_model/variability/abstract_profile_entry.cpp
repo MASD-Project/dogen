@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.archetypes/io/location_io.hpp"
 #include "dogen.assets/io/meta_model/name_io.hpp"
 #include "dogen.variability/io/meta_model/configuration_io.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
@@ -80,14 +79,12 @@ abstract_profile_entry::abstract_profile_entry(
     const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
     const dogen::assets::meta_model::name& name,
     const std::string& key,
-    const std::list<std::string>& value,
-    const dogen::archetypes::location& location)
+    const std::list<std::string>& value)
     : documentation_(documentation),
       configuration_(configuration),
       name_(name),
       key_(key),
-      value_(value),
-      location_(location) { }
+      value_(value) { }
 
 void abstract_profile_entry::to_stream(std::ostream& s) const {
     s << " { "
@@ -96,8 +93,7 @@ void abstract_profile_entry::to_stream(std::ostream& s) const {
       << "\"configuration\": " << configuration_ << ", "
       << "\"name\": " << name_ << ", "
       << "\"key\": " << "\"" << tidy_up_string(key_) << "\"" << ", "
-      << "\"value\": " << value_ << ", "
-      << "\"location\": " << location_
+      << "\"value\": " << value_
       << " }";
 }
 
@@ -108,7 +104,6 @@ void abstract_profile_entry::swap(abstract_profile_entry& other) noexcept {
     swap(name_, other.name_);
     swap(key_, other.key_);
     swap(value_, other.value_);
-    swap(location_, other.location_);
 }
 
 bool abstract_profile_entry::compare(const abstract_profile_entry& rhs) const {
@@ -116,8 +111,7 @@ bool abstract_profile_entry::compare(const abstract_profile_entry& rhs) const {
         configuration_ == rhs.configuration_ &&
         name_ == rhs.name_ &&
         key_ == rhs.key_ &&
-        value_ == rhs.value_ &&
-        location_ == rhs.location_;
+        value_ == rhs.value_;
 }
 
 const std::string& abstract_profile_entry::documentation() const {
@@ -198,22 +192,6 @@ void abstract_profile_entry::value(const std::list<std::string>& v) {
 
 void abstract_profile_entry::value(const std::list<std::string>&& v) {
     value_ = std::move(v);
-}
-
-const dogen::archetypes::location& abstract_profile_entry::location() const {
-    return location_;
-}
-
-dogen::archetypes::location& abstract_profile_entry::location() {
-    return location_;
-}
-
-void abstract_profile_entry::location(const dogen::archetypes::location& v) {
-    location_ = v;
-}
-
-void abstract_profile_entry::location(const dogen::archetypes::location&& v) {
-    location_ = std::move(v);
 }
 
 }
