@@ -63,6 +63,7 @@ profile_adapter::adapt(const meta_model::variability::profile_template& pt) {
         variability::meta_model::configuration_point_template cpt;
         cpt.name().simple(k);
         cpt.kind(e.template_kind());
+        cpt.instantiation_domain_name(e.instantiation_domain_name());
 
         using variability::meta_model::template_kind;
         if (cpt.kind() == template_kind::instance)
