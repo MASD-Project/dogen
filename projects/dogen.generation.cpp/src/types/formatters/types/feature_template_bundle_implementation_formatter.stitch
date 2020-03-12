@@ -47,72 +47,79 @@ std::list<std::string> feature_template_bundle_implementation_formatter::inclusi
 extraction::meta_model::artefact feature_template_bundle_implementation_formatter::
 format(const context& ctx, const assets::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& fb(a.as<assets::meta_model::variability::feature_template_bundle>(e));
+    const auto& ftb(a.as<assets::meta_model::variability::feature_template_bundle>(e));
 
     {
-        const auto sn(fb.name().simple());
-        const auto qn(a.get_qualified_name(fb.name()));
-        auto sbf(a.make_scoped_boilerplate_formatter(fb));
-        a.add_helper_methods(fb.name().qualified().dot());
+        const auto sn(ftb.name().simple());
+        const auto qn(a.get_qualified_name(ftb.name()));
+        auto sbf(a.make_scoped_boilerplate_formatter(ftb));
+        a.add_helper_methods(ftb.name().qualified().dot());
 
         {
-            const auto ns(a.make_namespaces(fb.name()));
+            const auto ns(a.make_namespaces(ftb.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
             using namespace variability::helpers;
             using utility::string::splitter;
 
-            if (fb.generate_registration()) {
+            if (ftb.generate_registration()) {
 #>
 
 namespace {
 <#+
-                for (const auto& fb_ft : fb.feature_templates()) {
-                    const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
-                    const bool has_qualified_name(simple_key != fb_ft.key());
+                for (const auto& ft : ftb.feature_templates()) {
+                    const auto simple_key(splitter::split_scoped(ft.key()).back());
+                    const bool has_qualified_name(simple_key != ft.key());
 #>
 
 dogen::variability::meta_model::feature_template
-make_<#= fb_ft.identifiable_key() #>() {
+make_<#= ft.identifiable_key() #>() {
     using namespace dogen::variability::meta_model;
     feature_template r;
     r.name().simple("<#= simple_key #>");
 <#+
-                   if (has_qualified_name) {
+                    if (has_qualified_name) {
 #>
-    r.name().qualified("<#= fb_ft.key() #>");
+    r.name().qualified("<#= ft.key() #>");
+<#+
+                    }
+#>
+    const auto vt(<#= enum_mapper::from_value_type(ft.value_type()) #>);
+    r.value_type(vt);
+    r.binding_point(<#= enum_mapper::from_binding_point(*ft.binding_point()) #>);
+    r.kind(<#= enum_mapper::from_template_kind(ftb.template_kind()) #>);
+<#+
+                   // FIXME: whilst its optional
+                   if (!ftb.instantiation_domain_name().empty()) {
+#>
+    r.instantiation_domain_name(<#= ftb.instantiation_domain_name() #>);
 <#+
                    }
-#>
-    const auto vt(<#= enum_mapper::from_value_type(fb_ft.value_type()) #>);
-    r.value_type(vt);
-    r.binding_point(<#= enum_mapper::from_binding_point(*fb_ft.binding_point()) #>);
-    r.kind(<#= enum_mapper::from_template_kind(fb.template_kind()) #>);
-<#+
-                   if (!fb_ft.value().empty()) {
+
+                   if (!ft.value().empty()) {
 #>
     dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ <#= fb_ft.value() #> }));
+    r.default_value(f.make(vt, std::list<std::string>{ <#= ft.value() #> }));
 <#+
                    }
 #>
 
     archetypes::location al;
 <#+
-                   if (!fb.location().kernel().empty())
+                   if (!ftb.location().kernel().empty())
 #>
-    al.kernel("<#= fb.location().kernel() #>");
+    al.kernel("<#= ftb.location().kernel() #>");
 <#+
-                   if (!fb.location().backend().empty())
+                   if (!ftb.location().backend().empty())
 #>
-    al.backend("<#= fb.location().backend() #>");
+    al.backend("<#= ftb.location().backend() #>");
 <#+
-                   if (!fb.location().facet().empty())
+                   if (!ftb.location().facet().empty())
 #>
-    al.facet("<#= fb.location().facet() #>");
+    al.facet("<#= ftb.location().facet() #>");
 <#+
-                   if (!fb.location().archetype().empty())
+                   if (!ftb.location().archetype().empty())
 #>
-    al.archetype("<#= fb.location().archetype() #>");
+    al.archetype("<#= ftb.location().archetype() #>");
 
     r.location(al);
     return r;
@@ -126,7 +133,7 @@ make_<#= fb_ft.identifiable_key() #>() {
 <#+
             }
 
-            if (fb.generate_static_configuration()) {
+            if (ftb.generate_static_configuration()) {
 #>
 <#= sn #>::feature_group
 <#= sn #>::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
@@ -134,10 +141,10 @@ make_<#= fb_ft.identifiable_key() #>() {
     const dogen::variability::helpers::feature_selector s(fm);
 
 <#+
-                for (const auto& fb_ft : fb.feature_templates()) {
-                    const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
+                for (const auto& ft : ftb.feature_templates()) {
+                    const auto simple_key(splitter::split_scoped(ft.key()).back());
 #>
-    r.<#= simple_key #> = s.get_by_name("<#= fb_ft.key() #>");
+    r.<#= simple_key #> = s.get_by_name("<#= ft.key() #>");
 <#+
                 }
 #>
@@ -152,22 +159,22 @@ make_<#= fb_ft.identifiable_key() #>() {
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
 <#+
-                for (const auto& fb_ft : fb.feature_templates()) {
-                    const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
+                for (const auto& ft : ftb.feature_templates()) {
+                    const auto simple_key(splitter::split_scoped(ft.key()).back());
 
-                    const bool has_default_value(!fb_ft.value().empty());
+                    const bool has_default_value(!ft.value().empty());
                     if (has_default_value) {
 #>
-    r.<#= simple_key #> = s.get_<#= enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) #>_content_or_default(fg.<#= simple_key #>);
+    r.<#= simple_key #> = s.get_<#= enum_mapper::from_value_type(ft.value_type(), false/*simple*/) #>_content_or_default(fg.<#= simple_key #>);
 <#+
-                    } else if (fb_ft.is_optional()) {
+                    } else if (ft.is_optional()) {
 #>
     if (s.has_configuration_point(fg.<#= simple_key #>))
-        r.<#= simple_key #> = s.get_<#= enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) #>_content(fg.<#= simple_key #>);
+        r.<#= simple_key #> = s.get_<#= enum_mapper::from_value_type(ft.value_type(), false/*simple*/) #>_content(fg.<#= simple_key #>);
 <#+
                     } else {
 #>
-    r.<#= simple_key #> = s.get_<#= enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) #>_content(fg.<#= simple_key #>);
+    r.<#= simple_key #> = s.get_<#= enum_mapper::from_value_type(ft.value_type(), false/*simple*/) #>_content(fg.<#= simple_key #>);
 <#+
                     }
                 }
@@ -177,7 +184,7 @@ make_<#= fb_ft.identifiable_key() #>() {
 <#+
             }
 
-            if (fb.generate_registration()) {
+            if (ftb.generate_registration()) {
 
 #>
 
@@ -187,9 +194,9 @@ std::list<dogen::variability::meta_model::feature_template>
     std::list<dogen::variability::meta_model::feature_template> r;
 <#+
 
-                for (const auto& fb_ft : fb.feature_templates()) {
+                for (const auto& ft : ftb.feature_templates()) {
 #>
-    r.push_back(make_<#= fb_ft.identifiable_key() #>());
+    r.push_back(make_<#= ft.identifiable_key() #>());
 <#+
                 }
 #>
