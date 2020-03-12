@@ -34,7 +34,6 @@
 #include "dogen.variability/types/meta_model/value_fwd.hpp"
 #include "dogen.variability/types/meta_model/value_type.hpp"
 #include "dogen.variability/types/meta_model/binding_point.hpp"
-#include "dogen.variability/types/meta_model/template_kind.hpp"
 #include "dogen.variability/types/meta_model/binding_action.hpp"
 
 namespace dogen::variability::meta_model {
@@ -62,7 +61,6 @@ public:
         const dogen::variability::meta_model::binding_point binding_point,
         const dogen::variability::meta_model::binding_action profile_binding_action,
         const dogen::variability::meta_model::binding_action configuration_binding_action,
-        const dogen::variability::meta_model::template_kind kind,
         const std::string& instantiation_domain_name);
 
 public:
@@ -112,14 +110,6 @@ public:
     void configuration_binding_action(const dogen::variability::meta_model::binding_action v);
 
     /**
-     * @brief Kind of the template.
-     */
-    /**@{*/
-    dogen::variability::meta_model::template_kind kind() const;
-    void kind(const dogen::variability::meta_model::template_kind v);
-    /**@}*/
-
-    /**
      * @brief Name of the domain to use for template instantiation.
      *
      * @pre The instantiation domain name must exist.
@@ -151,7 +141,6 @@ private:
     dogen::variability::meta_model::binding_point binding_point_;
     dogen::variability::meta_model::binding_action profile_binding_action_;
     dogen::variability::meta_model::binding_action configuration_binding_action_;
-    dogen::variability::meta_model::template_kind kind_;
     std::string instantiation_domain_name_;
 };
 

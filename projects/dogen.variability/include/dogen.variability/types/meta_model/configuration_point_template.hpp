@@ -31,17 +31,14 @@
 #include <algorithm>
 #include "dogen.archetypes/types/location.hpp"
 #include "dogen.variability/types/meta_model/element.hpp"
-#include "dogen.variability/types/meta_model/template_kind.hpp"
 
 namespace dogen::variability::meta_model {
 
 class configuration_point_template final : public dogen::variability::meta_model::element {
 public:
+    configuration_point_template() = default;
     configuration_point_template(const configuration_point_template&) = default;
     configuration_point_template(configuration_point_template&&) = default;
-
-public:
-    configuration_point_template();
 
     virtual ~configuration_point_template() noexcept { }
 
@@ -50,7 +47,6 @@ public:
         const dogen::variability::meta_model::name& name,
         const std::string& description,
         const dogen::archetypes::location& location,
-        const dogen::variability::meta_model::template_kind kind,
         const std::string& instantiation_domain_name,
         const std::list<std::string>& untyped_value);
 
@@ -66,14 +62,6 @@ public:
     dogen::archetypes::location& location();
     void location(const dogen::archetypes::location& v);
     void location(const dogen::archetypes::location&& v);
-    /**@}*/
-
-    /**
-     * @brief Kind of the template.
-     */
-    /**@{*/
-    dogen::variability::meta_model::template_kind kind() const;
-    void kind(const dogen::variability::meta_model::template_kind v);
     /**@}*/
 
     /**
@@ -108,7 +96,6 @@ public:
 
 private:
     dogen::archetypes::location location_;
-    dogen::variability::meta_model::template_kind kind_;
     std::string instantiation_domain_name_;
     std::list<std::string> untyped_value_;
 };

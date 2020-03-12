@@ -27,7 +27,6 @@
 
 #include <string>
 #include "dogen.variability/types/meta_model/value_type.hpp"
-#include "dogen.variability/types/meta_model/template_kind.hpp"
 #include "dogen.variability/types/meta_model/binding_point.hpp"
 
 namespace dogen::variability::helpers {
@@ -40,11 +39,6 @@ public:
     static meta_model::value_type to_value_type(const std::string& s);
 
     /**
-     * @brief Converts a string to a template kind.
-     */
-    static meta_model::template_kind to_template_kind(const std::string& s);
-
-    /**
      * @brief Converts a string to a binding point.
      */
     static meta_model::binding_point to_binding_point(const std::string& s);
@@ -55,11 +49,6 @@ public:
      */
     static std::string from_value_type(const meta_model::value_type v,
         const bool qualified = true);
-
-    /**
-     * @brief Converts a template kind to a string.
-     */
-    static std::string from_template_kind(const meta_model::template_kind v);
 
     /**
      * @brief Converts a binding point to a string.

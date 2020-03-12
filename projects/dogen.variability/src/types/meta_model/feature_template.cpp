@@ -26,7 +26,6 @@
 #include "dogen.variability/io/meta_model/element_io.hpp"
 #include "dogen.variability/io/meta_model/value_type_io.hpp"
 #include "dogen.variability/io/meta_model/binding_point_io.hpp"
-#include "dogen.variability/io/meta_model/template_kind_io.hpp"
 #include "dogen.variability/io/meta_model/binding_action_io.hpp"
 #include "dogen.variability/types/meta_model/feature_template.hpp"
 
@@ -69,8 +68,7 @@ feature_template::feature_template()
     : value_type_(static_cast<dogen::variability::meta_model::value_type>(0)),
       binding_point_(static_cast<dogen::variability::meta_model::binding_point>(0)),
       profile_binding_action_(static_cast<dogen::variability::meta_model::binding_action>(0)),
-      configuration_binding_action_(static_cast<dogen::variability::meta_model::binding_action>(0)),
-      kind_(static_cast<dogen::variability::meta_model::template_kind>(0)) { }
+      configuration_binding_action_(static_cast<dogen::variability::meta_model::binding_action>(0)) { }
 
 feature_template::feature_template(
     const dogen::variability::meta_model::name& name,
@@ -81,7 +79,6 @@ feature_template::feature_template(
     const dogen::variability::meta_model::binding_point binding_point,
     const dogen::variability::meta_model::binding_action profile_binding_action,
     const dogen::variability::meta_model::binding_action configuration_binding_action,
-    const dogen::variability::meta_model::template_kind kind,
     const std::string& instantiation_domain_name)
     : dogen::variability::meta_model::element(
       name,
@@ -92,7 +89,6 @@ feature_template::feature_template(
       binding_point_(binding_point),
       profile_binding_action_(profile_binding_action),
       configuration_binding_action_(configuration_binding_action),
-      kind_(kind),
       instantiation_domain_name_(instantiation_domain_name) { }
 
 void feature_template::to_stream(std::ostream& s) const {
@@ -107,7 +103,6 @@ void feature_template::to_stream(std::ostream& s) const {
       << "\"binding_point\": " << binding_point_ << ", "
       << "\"profile_binding_action\": " << profile_binding_action_ << ", "
       << "\"configuration_binding_action\": " << configuration_binding_action_ << ", "
-      << "\"kind\": " << kind_ << ", "
       << "\"instantiation_domain_name\": " << "\"" << tidy_up_string(instantiation_domain_name_) << "\""
       << " }";
 }
@@ -122,7 +117,6 @@ void feature_template::swap(feature_template& other) noexcept {
     swap(binding_point_, other.binding_point_);
     swap(profile_binding_action_, other.profile_binding_action_);
     swap(configuration_binding_action_, other.configuration_binding_action_);
-    swap(kind_, other.kind_);
     swap(instantiation_domain_name_, other.instantiation_domain_name_);
 }
 
@@ -140,7 +134,6 @@ bool feature_template::operator==(const feature_template& rhs) const {
         binding_point_ == rhs.binding_point_ &&
         profile_binding_action_ == rhs.profile_binding_action_ &&
         configuration_binding_action_ == rhs.configuration_binding_action_ &&
-        kind_ == rhs.kind_ &&
         instantiation_domain_name_ == rhs.instantiation_domain_name_;
 }
 
@@ -212,14 +205,6 @@ dogen::variability::meta_model::binding_action feature_template::configuration_b
 
 void feature_template::configuration_binding_action(const dogen::variability::meta_model::binding_action v) {
     configuration_binding_action_ = v;
-}
-
-dogen::variability::meta_model::template_kind feature_template::kind() const {
-    return kind_;
-}
-
-void feature_template::kind(const dogen::variability::meta_model::template_kind v) {
-    kind_ = v;
 }
 
 const std::string& feature_template::instantiation_domain_name() const {

@@ -22,7 +22,6 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.archetypes/io/location_io.hpp"
 #include "dogen.variability/io/meta_model/element_io.hpp"
-#include "dogen.variability/io/meta_model/template_kind_io.hpp"
 #include "dogen.variability/io/meta_model/configuration_point_template_io.hpp"
 
 namespace dogen::variability::meta_model {

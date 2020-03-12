@@ -22,7 +22,6 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.variability/io/meta_model/value_type_io.hpp"
-#include "dogen.variability/io/meta_model/template_kind_io.hpp"
 #include "dogen.variability/io/meta_model/binding_point_io.hpp"
 #include "dogen.variability/types/helpers/enum_mapping_exception.hpp"
 #include "dogen.variability/types/helpers/enum_mapper.hpp"
@@ -65,26 +64,8 @@ const std::string output_binding_point_element("binding_point::element");
 const std::string output_binding_point_property("binding_point::property");
 const std::string output_binding_point_operation("binding_point::operation");
 
-const std::string input_template_kind_instance("instance");
-const std::string input_template_kind_recursive_template("recursive_template");
-const std::string input_template_kind_backend_template("backend_template");
-const std::string input_template_kind_facet_template("facet_template");
-const std::string input_template_kind_archetype_template("archetype_template");
-
-const std::string output_template_kind_instance("template_kind::instance");
-const std::string output_template_kind_recursive_template(
-    "template_kind::recursive_template");
-const std::string output_template_kind_backend_template(
-    "template_kind::backend_template");
-const std::string output_template_kind_facet_template(
-    "template_kind::facet_template");
-const std::string output_template_kind_archetype_template(
-    "template_kind::archetype_template");
-
 const std::string invalid_scope("Invalid or unsupported scope type: ");
 const std::string invalid_value_type("Invalid or unsupported value type: ");
-const std::string invalid_template_kind(
-    "Invalid or unsupported template kind: ");
 
 }
 
@@ -106,23 +87,6 @@ enum_mapper::to_value_type(const std::string& s) {
 
     BOOST_LOG_SEV(lg, error) << invalid_value_type << "'" << s << "'";
     BOOST_THROW_EXCEPTION(enum_mapping_exception(invalid_value_type + s));
-}
-
-meta_model::template_kind enum_mapper::to_template_kind(const std::string& s) {
-    using meta_model::template_kind;
-    if (s == input_template_kind_instance)
-        return template_kind::instance;
-    if (s == input_template_kind_recursive_template)
-        return template_kind::recursive_template;
-    if (s == input_template_kind_backend_template)
-        return template_kind::backend_template;
-    if (s == input_template_kind_facet_template)
-        return template_kind::facet_template;
-    if (s == input_template_kind_archetype_template)
-        return template_kind::archetype_template;
-
-    BOOST_LOG_SEV(lg, error) << invalid_template_kind << "'" << s << "'";
-    BOOST_THROW_EXCEPTION(enum_mapping_exception(invalid_template_kind + s));
 }
 
 meta_model::binding_point enum_mapper::to_binding_point(const std::string& s) {
@@ -166,27 +130,6 @@ std::string enum_mapper::from_value_type(const meta_model::value_type v,
         const auto s(boost::lexical_cast<std::string>(v));
         BOOST_LOG_SEV(lg, error) << invalid_value_type << "'" << s << "'";
         BOOST_THROW_EXCEPTION(enum_mapping_exception(invalid_value_type + s));
-    } }
-}
-
-std::string enum_mapper::from_template_kind(const meta_model::template_kind v) {
-    using meta_model::template_kind;
-    switch (v) {
-    case template_kind::instance:
-        return output_template_kind_instance;
-    case template_kind::recursive_template:
-        return output_template_kind_recursive_template;
-    case template_kind::backend_template:
-        return output_template_kind_backend_template;
-    case template_kind::facet_template:
-        return output_template_kind_facet_template;
-    case template_kind::archetype_template:
-        return output_template_kind_archetype_template;
-    default: {
-        const auto s(boost::lexical_cast<std::string>(v));
-        BOOST_LOG_SEV(lg, error) << invalid_template_kind << "'" << s << "'";
-        BOOST_THROW_EXCEPTION(
-            enum_mapping_exception(invalid_template_kind + s));
     } }
 }
 

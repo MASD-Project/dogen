@@ -168,42 +168,6 @@
       ]
     },
     {
-      "name": "meta_model::template_kind",
-      "documentation": "Determines the operations to perform when expanding the template.\n",
-      "stereotypes": [
-        "masd::enumeration",
-        "dogen::convertible"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "instance",
-          "type": "",
-          "documentation": "Template is directly converted into an instance.\n"
-        },
-        {
-          "name": "recursive_template",
-          "type": "",
-          "documentation": "The template is expanded recursively for every point in archetype space.\n"
-        },
-        {
-          "name": "backend_template",
-          "type": "",
-          "documentation": "The template is expanded for every backend in archetype space.\n"
-        },
-        {
-          "name": "facet_template",
-          "type": "",
-          "documentation": "The template is expanded for every facet in archetype space.\n"
-        },
-        {
-          "name": "archetype_template",
-          "type": "",
-          "documentation": "The template is expanded for every archetype in archetype space.\n"
-        }
-      ]
-    },
-    {
       "name": "meta_model::profile_template",
       "parents": [
         "meta_model::element"
@@ -640,11 +604,6 @@
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "kind",
-          "type": "template_kind",
-          "documentation": "Kind of the template.\n"
-        },
         {
           "name": "instantiation_domain_name",
           "type": "std::string",

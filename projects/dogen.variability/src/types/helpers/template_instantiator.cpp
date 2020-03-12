@@ -25,12 +25,10 @@
 #include "dogen.archetypes/io/location_io.hpp"
 #include "dogen.variability/io/meta_model/profile_io.hpp"
 #include "dogen.variability/io/meta_model/feature_io.hpp"
-#include "dogen.variability/io/meta_model/template_kind_io.hpp"
 #include "dogen.variability/io/meta_model/feature_template_io.hpp"
 #include "dogen.variability/io/meta_model/profile_template_io.hpp"
 #include "dogen.variability/io/meta_model/configuration_point_io.hpp"
 #include "dogen.variability/io/meta_model/configuration_point_template_io.hpp"
-#include "dogen.variability/types/meta_model/template_kind.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
 #include "dogen.variability/types/helpers/instantiation_exception.hpp"
 #include "dogen.variability/types/helpers/template_instantiator.hpp"
@@ -75,29 +73,13 @@ meta_model::configuration_point template_instantiator::to_configuration_point(
     const meta_model::feature_model& fm, const std::string& owner,
     const meta_model::configuration_point_template& cpt) const {
     /*
-     * Determine which qualified name to use for the point's feature.
+     * Non-instance templates must have a owner.
      */
-    std::string fqn;
-    if (cpt.kind() == meta_model::template_kind::instance) {
-        /*
-         * Instance templates must have a qualified name.
-         */
-        if (cpt.name().qualified().empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_qualified_name;
-            BOOST_THROW_EXCEPTION(
-                instantiation_exception(empty_qualified_name));
-        }
-        fqn = cpt.name().qualified();
-    } else {
-        /*
-         * Non-instance templates must have a owner.
-         */
-        if (owner.empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_owner;
-            BOOST_THROW_EXCEPTION(instantiation_exception(empty_owner));
-        }
-        fqn = owner + "." + cpt.name().simple();
+    if (owner.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_owner;
+        BOOST_THROW_EXCEPTION(instantiation_exception(empty_owner));
     }
+    const std::string fqn(owner + "." + cpt.name().simple());
 
     /*
      * Locate the feature for this configuration point template.
