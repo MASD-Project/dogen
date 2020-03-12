@@ -41,7 +41,7 @@ const std::string duplicate_value("Value was already inserted: ");
 
 namespace dogen::archetypes {
 
-std::unordered_map<std::string, std::list<std::string>>
+std::unordered_map<std::string, std::vector<std::string>>
 template_instantiation_domains_factory::make(const std::list<location>& ls) {
     /*
      * First we gather all of the information in sorted form, and
@@ -89,7 +89,7 @@ template_instantiation_domains_factory::make(const std::list<location>& ls) {
     /*
      * Now reformat the gathered data into the required shape.
      */
-    std::unordered_map<std::string, std::list<std::string>> r;
+    std::unordered_map<std::string, std::vector<std::string>> r;
     for (const auto& pair : sorted) {
         const auto& k(pair.first);
         const auto& v(pair.second);

@@ -34,7 +34,7 @@ namespace dogen::archetypes {
 
 class template_instantiation_domains_factory final {
 public:
-    static std::unordered_map<std::string, std::list<std::string>>
+    static std::unordered_map<std::string, std::vector<std::string>>
     make(const std::list<location>& ls);
 };
 
