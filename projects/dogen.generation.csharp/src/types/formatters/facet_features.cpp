@@ -39,12 +39,6 @@ make_supported() {
     r.instantiation_domain_name("masd.generation.csharp.facet");
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "true" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-    al.backend("masd.generation.csharp");
-
-    r.location(al);
     return r;
 }
 
@@ -60,12 +54,6 @@ make_overwrite() {
     r.instantiation_domain_name("masd.generation.csharp.facet");
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "true" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-    al.backend("masd.generation.csharp");
-
-    r.location(al);
     return r;
 }
 

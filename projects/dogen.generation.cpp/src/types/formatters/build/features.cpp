@@ -36,11 +36,6 @@ make_masd_generation_cpp_build_directory() {
     r.binding_point(binding_point::global);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -55,11 +50,6 @@ make_masd_generation_cpp_build_postfix() {
     r.binding_point(binding_point::global);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -74,11 +64,6 @@ make_masd_generation_cpp_build_include_cmakelists_postfix() {
     r.binding_point(binding_point::global);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -93,11 +78,6 @@ make_masd_generation_cpp_build_source_cmakelists_postfix() {
     r.binding_point(binding_point::global);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 

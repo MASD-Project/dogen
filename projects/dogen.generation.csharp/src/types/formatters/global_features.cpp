@@ -36,11 +36,6 @@ make_masd_generation_csharp_directory() {
     r.binding_point(binding_point::global);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "cs" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -55,11 +50,6 @@ make_masd_generation_csharp_aspect_requires_static_reference_equals() {
     r.binding_point(binding_point::element);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "true" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -74,11 +64,6 @@ make_masd_generation_csharp_helper_family() {
     r.binding_point(binding_point::element);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "Default" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -93,11 +78,6 @@ make_masd_generation_csharp_assistant_requires_assistance() {
     r.binding_point(binding_point::element);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -110,11 +90,6 @@ make_masd_generation_csharp_assistant_method_postfix() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 

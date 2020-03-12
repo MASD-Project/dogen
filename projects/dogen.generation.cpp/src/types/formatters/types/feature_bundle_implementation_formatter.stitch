@@ -101,26 +101,6 @@ make_<#= fb_ft.identifiable_key() #>() {
 <#+
                    }
 #>
-
-    archetypes::location al;
-<#+
-                   if (!fb.location().kernel().empty())
-#>
-    al.kernel("<#= fb.location().kernel() #>");
-<#+
-                   if (!fb.location().backend().empty())
-#>
-    al.backend("<#= fb.location().backend() #>");
-<#+
-                   if (!fb.location().facet().empty())
-#>
-    al.facet("<#= fb.location().facet() #>");
-<#+
-                   if (!fb.location().archetype().empty())
-#>
-    al.archetype("<#= fb.location().archetype() #>");
-
-    r.location(al);
     return r;
 }
 <#+

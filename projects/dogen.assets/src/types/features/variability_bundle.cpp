@@ -38,11 +38,6 @@ make_masd_variability_generate_registration() {
     r.binding_point(binding_point::element);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "true" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -57,11 +52,6 @@ make_masd_variability_generate_static_configuration() {
     r.binding_point(binding_point::element);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "true" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -74,11 +64,6 @@ make_masd_variability_archetype_location_kernel() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -91,11 +76,6 @@ make_masd_variability_archetype_location_backend() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -108,11 +88,6 @@ make_masd_variability_archetype_location_facet() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -125,11 +100,6 @@ make_masd_variability_archetype_location_archetype() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -142,11 +112,6 @@ make_masd_variability_template_kind() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -159,11 +124,6 @@ make_masd_variability_default_binding_point() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -176,11 +136,6 @@ make_masd_variability_instantiation_domain_name() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 

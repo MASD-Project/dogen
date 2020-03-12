@@ -36,11 +36,6 @@ make_masd_generation_cpp_lexical_cast_directory() {
     r.binding_point(binding_point::global);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "lexical_cast" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -55,11 +50,6 @@ make_masd_generation_cpp_lexical_cast_postfix() {
     r.binding_point(binding_point::global);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "lc" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -74,11 +64,6 @@ make_masd_generation_cpp_lexical_cast_enum_header_postfix() {
     r.binding_point(binding_point::global);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 

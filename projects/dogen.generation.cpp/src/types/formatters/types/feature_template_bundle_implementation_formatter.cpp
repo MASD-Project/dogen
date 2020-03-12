@@ -149,18 +149,6 @@ a.stream() << "    r.instantiation_domain_name(\"" << ftb.instantiation_domain_n
 a.stream() << "    dogen::variability::helpers::value_factory f;" << std::endl;
 a.stream() << "    r.default_value(f.make(vt, std::list<std::string>{ " << ft.value() << " }));" << std::endl;
                    }
-a.stream() << std::endl;
-a.stream() << "    archetypes::location al;" << std::endl;
-                   if (!ftb.location().kernel().empty())
-a.stream() << "    al.kernel(\"" << ftb.location().kernel() << "\");" << std::endl;
-                   if (!ftb.location().backend().empty())
-a.stream() << "    al.backend(\"" << ftb.location().backend() << "\");" << std::endl;
-                   if (!ftb.location().facet().empty())
-a.stream() << "    al.facet(\"" << ftb.location().facet() << "\");" << std::endl;
-                   if (!ftb.location().archetype().empty())
-a.stream() << "    al.archetype(\"" << ftb.location().archetype() << "\");" << std::endl;
-a.stream() << std::endl;
-a.stream() << "    r.location(al);" << std::endl;
 a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;
                 }

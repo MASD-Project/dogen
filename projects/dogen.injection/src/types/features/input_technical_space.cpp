@@ -38,11 +38,6 @@ make_masd_injection_input_technical_space() {
     r.binding_point(binding_point::global);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "agnostic" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 

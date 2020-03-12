@@ -36,11 +36,6 @@ make_masd_generalization_is_final() {
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -53,11 +48,6 @@ make_masd_generalization_parent() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 

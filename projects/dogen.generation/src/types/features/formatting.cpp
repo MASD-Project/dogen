@@ -37,11 +37,6 @@ make_formatting_style() {
     r.binding_point(binding_point::any);
     r.kind(template_kind::archetype_template);
     r.instantiation_domain_name("masd.archetype");
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -55,11 +50,6 @@ make_formatting_input() {
     r.binding_point(binding_point::any);
     r.kind(template_kind::archetype_template);
     r.instantiation_domain_name("masd.archetype");
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 

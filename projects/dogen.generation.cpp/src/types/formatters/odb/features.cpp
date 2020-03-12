@@ -36,11 +36,6 @@ make_masd_generation_cpp_odb_directory() {
     r.binding_point(binding_point::global);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "odb" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -55,11 +50,6 @@ make_masd_generation_cpp_odb_postfix() {
     r.binding_point(binding_point::global);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "pragmas" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -74,11 +64,6 @@ make_masd_generation_cpp_odb_class_header_postfix() {
     r.binding_point(binding_point::global);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -93,11 +78,6 @@ make_masd_generation_cpp_odb_enum_header_postfix() {
     r.binding_point(binding_point::global);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -112,11 +92,6 @@ make_masd_generation_cpp_odb_primitive_header_postfix() {
     r.binding_point(binding_point::global);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -131,11 +106,6 @@ make_masd_generation_cpp_odb_common_odb_options_postfix() {
     r.binding_point(binding_point::global);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -150,11 +120,6 @@ make_masd_generation_cpp_odb_object_odb_options_postfix() {
     r.binding_point(binding_point::global);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -169,11 +134,6 @@ make_masd_generation_cpp_odb_master_header_postfix() {
     r.binding_point(binding_point::global);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -188,11 +148,6 @@ make_masd_generation_cpp_odb_pragma() {
     r.binding_point(binding_point::any);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -207,11 +162,6 @@ make_masd_generation_cpp_odb_builtin_header_postfix() {
     r.binding_point(binding_point::global);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -226,11 +176,6 @@ make_masd_generation_cpp_odb_primitive_odb_options_postfix() {
     r.binding_point(binding_point::global);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 

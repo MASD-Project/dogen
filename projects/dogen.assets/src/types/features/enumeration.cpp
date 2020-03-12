@@ -38,11 +38,6 @@ make_masd_enumeration_use_implementation_defined_underlying_element() {
     r.binding_point(binding_point::element);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -55,11 +50,6 @@ make_masd_enumeration_underlying_element() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -74,11 +64,6 @@ make_masd_enumeration_use_implementation_defined_enumerator_values() {
     r.binding_point(binding_point::element);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -93,11 +78,6 @@ make_masd_enumeration_add_invalid_enumerator() {
     r.binding_point(binding_point::element);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "true" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 

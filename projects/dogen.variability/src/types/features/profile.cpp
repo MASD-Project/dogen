@@ -36,11 +36,6 @@ make_masd_variability_profile() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 

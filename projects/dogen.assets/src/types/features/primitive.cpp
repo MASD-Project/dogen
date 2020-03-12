@@ -36,11 +36,6 @@ make_masd_primitive_underlying_element() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -55,11 +50,6 @@ make_masd_primitive_is_nullable() {
     r.binding_point(binding_point::element);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -74,11 +64,6 @@ make_masd_primitive_use_type_aliasing() {
     r.binding_point(binding_point::element);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 

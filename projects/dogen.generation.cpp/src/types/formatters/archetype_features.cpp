@@ -37,12 +37,6 @@ make_overwrite() {
     r.binding_point(binding_point::element);
     r.kind(template_kind::archetype_template);
     r.instantiation_domain_name("masd.generation.cpp.archetype");
-
-    archetypes::location al;
-    al.kernel("masd");
-    al.backend("masd.generation.cpp");
-
-    r.location(al);
     return r;
 }
 
@@ -56,12 +50,6 @@ make_primary_inclusion_directive() {
     r.binding_point(binding_point::element);
     r.kind(template_kind::archetype_template);
     r.instantiation_domain_name("masd.generation.cpp.archetype");
-
-    archetypes::location al;
-    al.kernel("masd");
-    al.backend("masd.generation.cpp");
-
-    r.location(al);
     return r;
 }
 
@@ -75,12 +63,6 @@ make_secondary_inclusion_directive() {
     r.binding_point(binding_point::element);
     r.kind(template_kind::archetype_template);
     r.instantiation_domain_name("masd.generation.cpp.archetype");
-
-    archetypes::location al;
-    al.kernel("masd");
-    al.backend("masd.generation.cpp");
-
-    r.location(al);
     return r;
 }
 

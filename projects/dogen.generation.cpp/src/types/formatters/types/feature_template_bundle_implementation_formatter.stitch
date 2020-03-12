@@ -102,26 +102,6 @@ make_<#= ft.identifiable_key() #>() {
 <#+
                    }
 #>
-
-    archetypes::location al;
-<#+
-                   if (!ftb.location().kernel().empty())
-#>
-    al.kernel("<#= ftb.location().kernel() #>");
-<#+
-                   if (!ftb.location().backend().empty())
-#>
-    al.backend("<#= ftb.location().backend() #>");
-<#+
-                   if (!ftb.location().facet().empty())
-#>
-    al.facet("<#= ftb.location().facet() #>");
-<#+
-                   if (!ftb.location().archetype().empty())
-#>
-    al.archetype("<#= ftb.location().archetype() #>");
-
-    r.location(al);
     return r;
 }
 <#+

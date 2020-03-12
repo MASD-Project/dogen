@@ -36,11 +36,6 @@ make_masd_generation_decoration_enabled() {
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -53,11 +48,6 @@ make_masd_generation_decoration_copyright_notice() {
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -70,11 +60,6 @@ make_masd_generation_decoration_licence_name() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -87,11 +72,6 @@ make_masd_generation_decoration_modeline_group_name() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -104,11 +84,6 @@ make_masd_generation_decoration_marker_name() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 

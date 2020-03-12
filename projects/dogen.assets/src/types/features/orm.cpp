@@ -36,11 +36,6 @@ make_masd_orm_database_system() {
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -53,11 +48,6 @@ make_masd_orm_table_name() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -70,11 +60,6 @@ make_masd_orm_schema_name() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -87,11 +72,6 @@ make_masd_orm_is_primary_key() {
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::property);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -104,11 +84,6 @@ make_masd_orm_column_name() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::property);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -121,11 +96,6 @@ make_masd_orm_is_nullable() {
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::property);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -138,11 +108,6 @@ make_masd_orm_is_composite() {
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::property);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -155,11 +120,6 @@ make_masd_orm_letter_case() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -172,11 +132,6 @@ make_masd_orm_type_override() {
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -189,11 +144,6 @@ make_masd_orm_type_mapping() {
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -206,11 +156,6 @@ make_masd_orm_odb_pragma() {
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 

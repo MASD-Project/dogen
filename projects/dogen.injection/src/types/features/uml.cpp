@@ -34,11 +34,6 @@ make_masd_injection_dia_comment() {
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 

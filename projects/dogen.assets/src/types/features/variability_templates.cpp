@@ -36,11 +36,6 @@ make_masd_variability_binding_point() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -53,11 +48,6 @@ make_masd_variability_stereotype() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -70,11 +60,6 @@ make_masd_variability_value() {
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::property);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -87,11 +72,6 @@ make_masd_variability_qualified_name() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::property);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -106,11 +86,6 @@ make_masd_variability_is_optional() {
     r.binding_point(binding_point::property);
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "false" }));
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 

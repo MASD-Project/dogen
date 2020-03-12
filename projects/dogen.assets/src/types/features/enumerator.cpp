@@ -36,11 +36,6 @@ make_masd_enumerator_value() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::property);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 

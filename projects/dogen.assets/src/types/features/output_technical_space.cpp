@@ -36,11 +36,6 @@ make_masd_extraction_output_technical_space() {
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 

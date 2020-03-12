@@ -36,11 +36,6 @@ make_masd_injection_external_modules() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
@@ -53,11 +48,6 @@ make_masd_injection_model_modules() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
-
-    archetypes::location al;
-    al.kernel("masd");
-
-    r.location(al);
     return r;
 }
 
