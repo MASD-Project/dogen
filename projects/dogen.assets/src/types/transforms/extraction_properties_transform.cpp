@@ -19,9 +19,12 @@
  *
  */
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/io/unordered_set_io.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.archetypes/types/location_repository.hpp"
+#include "dogen.assets/io/meta_model/model_io.hpp"
 #include "dogen.assets/types/traits.hpp"
 #include "dogen.assets/types/meta_model/structural/module.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
@@ -29,9 +32,11 @@
 
 namespace {
 
+const std::string
+transform_id("transforms.extraction_properties_transform");
+
 using namespace dogen::utility::log;
-static logger
-lg(logger_factory("masd.transforms.extraction_properties_transform"));
+static logger lg(logger_factory(transform_id));
 
 }
 
@@ -78,12 +83,16 @@ obtain_enabled_backends(const feature_group& fg,
     const variability::helpers::configuration_selector s(cfg);
     for (const auto& f : fg.enabled) {
         const bool enabled(s.get_boolean_content_or_default(f));
-        if (!enabled)
+        if (!enabled) {
+            BOOST_LOG_SEV(lg, trace) << "Backend disabled: "
+                                     << f.name().qualified();
             continue;
+        }
 
         r.insert(f.location().backend());
     }
 
+    BOOST_LOG_SEV(lg, trace) << "Enabled backends: " << r;
     return r;
 }
 
@@ -123,12 +132,16 @@ make_extraction_properties(const context& ctx,
 
 void extraction_properties_transform::apply(const context& ctx,
     meta_model::model& m) {
+    tracing::scoped_transform_tracer stp(lg, "feature model transform",
+        transform_id, transform_id, *ctx.tracer(), m);
 
     const auto& alrp(*ctx.archetype_location_repository());
     const auto& als(alrp.all());
     const auto& cfg(*m.root_module()->configuration());
     const auto ep(make_extraction_properties(ctx, als, cfg));
     m.extraction_properties(ep);
+
+    stp.end_transform(m);
 }
 
 }
