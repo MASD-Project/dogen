@@ -97,8 +97,10 @@ update(const features::variability_bundle::feature_group& fg,
     using variability::meta_model::template_kind;
     using meta_model::variability::feature_template_bundle;
     auto ftb(dynamic_cast<feature_template_bundle*>(&fb));
-    if (ftb)
+    if (ftb) {
         ftb->template_kind(lexical_cast<template_kind>(scfg.template_kind));
+        ftb->instantiation_domain_name(scfg.instantiation_domain_name);
+    }
 
     using boost::lexical_cast;
     using variability::meta_model::binding_point;

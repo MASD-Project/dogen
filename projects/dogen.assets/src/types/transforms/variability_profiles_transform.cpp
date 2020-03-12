@@ -71,8 +71,10 @@ update(const features::variability_entry::feature_group& fg,
     using variability::meta_model::template_kind;
     using meta_model::variability::profile_template_entry;
     auto pte(dynamic_cast<profile_template_entry*>(&ape));
-    if (pte)
+    if (pte) {
         pte->template_kind(lexical_cast<template_kind>(scfg.template_kind));
+        pte->instantiation_domain_name(scfg.instantiation_domain_name);
+    }
 
     /*
      * FIXME: not yet reading binding point.
