@@ -94,7 +94,7 @@ template_instantiation_domains_factory::make(const std::list<location>& ls) {
         const auto& k(pair.first);
         const auto& v(pair.second);
         auto& vec(r[k]);
-        vec.resize(v.size());
+        vec.reserve(v.size());
         for (const auto& s : v)
             vec.push_back(s);
     }
