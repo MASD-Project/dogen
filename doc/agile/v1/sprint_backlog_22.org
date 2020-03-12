@@ -14,30 +14,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-11 Wed 17:56]
+#+CAPTION: Clock summary at [2020-03-12 Thu 09:13]
 | <75>                                                    |         |       |      |       |
 | Headline                                                | Time    |       |      |     % |
 |---------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                            | *50:17* |       |      | 100.0 |
+| *Total time*                                            | *51:19* |       |      | 100.0 |
 |---------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                 | 50:17   |       |      | 100.0 |
-| Active                                                  |         | 50:17 |      | 100.0 |
-| Edit release notes for previous sprint                  |         |       | 4:11 |   8.3 |
+| Stories                                                 | 51:19   |       |      | 100.0 |
+| Active                                                  |         | 51:19 |      | 100.0 |
+| Edit release notes for previous sprint                  |         |       | 4:11 |   8.2 |
 | Create a demo and presentation for previous sprint      |         |       | 0:25 |   0.8 |
-| Sprint and product backlog grooming                     |         |       | 5:54 |  11.7 |
-| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  11.8 |
-| Analysis on removing physical references in variability |         |       | 5:27 |  10.8 |
+| Sprint and product backlog grooming                     |         |       | 6:38 |  12.9 |
+| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  11.5 |
+| Analysis on removing physical references in variability |         |       | 5:27 |  10.6 |
 | Remove =rapidjson= formatters                           |         |       | 0:03 |   0.1 |
-| Separate feature templates from bundles                 |         |       | 9:28 |  18.8 |
+| Separate feature templates from bundles                 |         |       | 9:28 |  18.4 |
 | Move enabled to generation                              |         |       | 0:04 |   0.1 |
 | Create a chain to encapsulate variability transforms    |         |       | 0:37 |   1.2 |
-| Move variability chain into assets                      |         |       | 2:22 |   4.7 |
-| Move profile meta-data into profile element             |         |       | 7:12 |  14.3 |
+| Move variability chain into assets                      |         |       | 2:22 |   4.6 |
+| Move profile meta-data into profile element             |         |       | 7:12 |  14.0 |
 | Add handcrafted stereotype to C# models                 |         |       | 0:04 |   0.1 |
-| Split profiles and profile templates in variability     |         |       | 4:31 |   9.0 |
+| Split profiles and profile templates in variability     |         |       | 4:31 |   8.8 |
 | Consider renaming labels to stereotypes in variability  |         |       | 1:07 |   2.2 |
 | Add location and modules to variability                 |         |       | 0:43 |   1.4 |
-| Implement template instantiation in terms of tags       |         |       | 2:14 |   4.4 |
+| Implement template instantiation in terms of tags       |         |       | 2:32 |   4.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -218,6 +218,10 @@ Time spent creating the demo and presentation. Use the demo project:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-03-12 Thu 09:01]--[2020-03-12 Thu 09:09] =>  0:08
+    CLOCK: [2020-03-12 Thu 08:46]--[2020-03-12 Thu 09:00] =>  0:14
+    CLOCK: [2020-03-12 Thu 08:15]--[2020-03-12 Thu 08:31] =>  0:16
+    CLOCK: [2020-03-12 Thu 08:01]--[2020-03-12 Thu 08:07] =>  0:16
     CLOCK: [2020-03-11 Wed 13:44]--[2020-03-11 Wed 13:58] =>  0:14
     CLOCK: [2020-03-11 Wed 08:40]--[2020-03-11 Wed 08:50] =>  0:10
     CLOCK: [2020-03-11 Wed 08:14]--[2020-03-11 Wed 08:39] =>  0:25
@@ -771,7 +775,9 @@ Notes:
 
 *** STARTED Implement template instantiation in terms of tags         :story:
     :LOGBOOK:
-    CLOCK: [2020-03-11 Wed 15:42]--[2020-03-11 Wed 17:56] =>  2:14
+    CLOCK: [2020-03-12 Thu 09:10]--[2020-03-12 Thu 09:13] =>  0:03
+    CLOCK: [2020-03-12 Thu 08:32]--[2020-03-12 Thu 08:45] =>  0:13
+    CLOCK: [2020-03-11 Wed 15:42]--[2020-03-11 Wed 17:58] =>  2:16
     :END:
 
 At present we are instantiating templates over a physical space
@@ -839,6 +845,27 @@ Notes:
   and so forth. Each of this is an entry on a map, against a list: the
   template instantiation domain. Features and profiles supply the
   template instantiation domain name.
+
+Reviewed tasks:
+
+- add template instantiation domain to context in variability.
+- add factory for domains in archetypes.
+- generate domains from context factory.
+- add domain name property to feature template and profile template in
+  variability.
+- add domain name property to templates in asset.
+- add domain property to variability features in assets.
+- read field and populate meta-model elements.
+- update adapter to populate variability domain name.
+- generate code to populate domain name when creating features.
+- create a template instantiator based on domains, side by side with
+  existing one.
+- add prefixes to feature bundles and profiles. Compute qualified
+  names based on prefixes plus attribute names.
+- remove archetype location from features and profiles.
+- remove archetype location from context and context factory for
+  variability.
+- remove references to archetypes model from variability model.
 
 *** Invalid stereotypes outside of objects are not detected           :story:
 
