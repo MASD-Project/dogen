@@ -86,8 +86,7 @@ obtain_enabled_backends(const feature_group& fg,
         const auto& f(pair.second);
         const bool enabled(s.get_boolean_content_or_default(f));
         if (!enabled) {
-            BOOST_LOG_SEV(lg, trace) << "Backend disabled: "
-                                     << f.name().qualified();
+            BOOST_LOG_SEV(lg, trace) << "Backend disabled: " << b;
             continue;
         }
 
