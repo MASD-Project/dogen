@@ -221,6 +221,7 @@
           "value": "false",
           "tagged_values": {
             "masd.variability.template_kind": "facet_template",
+            "masd.variability.instantiation_domain_name": "masd.facet",
             "masd.variability.archetype_location.kernel": "masd",
             "masd.variability.archetype_location.backend": "masd.generation.cpp"
           }

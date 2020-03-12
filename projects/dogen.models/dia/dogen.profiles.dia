@@ -1172,6 +1172,7 @@ Disables all facets in the C++ backend.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##DOGEN masd.variability.template_kind=facet_template
+#DOGEN masd.variability.instantiation_domain_name=masd.facet
 #DOGEN masd.variability.archetype_location.kernel=masd
 #DOGEN masd.variability.archetype_location.backend=masd.generation.cpp#</dia:string>
           </dia:attribute>
