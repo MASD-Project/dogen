@@ -4010,17 +4010,17 @@ elements.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="20.0625,-25"/>
+        <dia:point val="24.7575,-25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.3125,-30.25;23.3425,-24.2"/>
+        <dia:rectangle val="23.0925,-30.25;25.5075,-24.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="20.0625,-25"/>
-        <dia:point val="20.0625,-28"/>
+        <dia:point val="24.7575,-25"/>
+        <dia:point val="24.7575,-28"/>
         <dia:point val="23.1425,-28"/>
         <dia:point val="23.1425,-30.2"/>
       </dia:attribute>
@@ -10912,19 +10912,19 @@ with Masd.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O83">
       <dia:attribute name="obj_pos">
-        <dia:point val="15,-25"/>
+        <dia:point val="17,-25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.95,-25.05;25.175,-21.35"/>
+        <dia:rectangle val="16.95,-25.05;32.565,-20.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="15,-25"/>
+        <dia:point val="17,-25"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.125"/>
+        <dia:real val="15.515000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#Templateable#</dia:string>
@@ -11026,6 +11026,31 @@ with Masd.
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Kind of the template.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#instantiation_domain_name#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Name of the domain to use for template instantiation.
+
+@pre The instantiation domain name must exist.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

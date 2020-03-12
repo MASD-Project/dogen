@@ -644,6 +644,11 @@
           "name": "kind",
           "type": "template_kind",
           "documentation": "Kind of the template.\n"
+        },
+        {
+          "name": "instantiation_domain_name",
+          "type": "std::string",
+          "documentation": "Name of the domain to use for template instantiation.\n\n@pre The instantiation domain name must exist.\n"
         }
       ]
     },

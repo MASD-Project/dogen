@@ -51,6 +51,7 @@ public:
         const std::string& description,
         const dogen::archetypes::location& location,
         const dogen::variability::meta_model::template_kind kind,
+        const std::string& instantiation_domain_name,
         const std::list<std::string>& untyped_value);
 
 public:
@@ -75,6 +76,18 @@ public:
     void kind(const dogen::variability::meta_model::template_kind v);
     /**@}*/
 
+    /**
+     * @brief Name of the domain to use for template instantiation.
+     *
+     * @pre The instantiation domain name must exist.
+     */
+    /**@{*/
+    const std::string& instantiation_domain_name() const;
+    std::string& instantiation_domain_name();
+    void instantiation_domain_name(const std::string& v);
+    void instantiation_domain_name(const std::string&& v);
+    /**@}*/
+
     const std::list<std::string>& untyped_value() const;
     std::list<std::string>& untyped_value();
     void untyped_value(const std::list<std::string>& v);
@@ -96,6 +109,7 @@ public:
 private:
     dogen::archetypes::location location_;
     dogen::variability::meta_model::template_kind kind_;
+    std::string instantiation_domain_name_;
     std::list<std::string> untyped_value_;
 };
 

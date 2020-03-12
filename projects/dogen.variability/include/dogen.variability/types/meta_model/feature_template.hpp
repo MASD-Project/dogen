@@ -26,6 +26,7 @@
 #endif
 
 #include <iosfwd>
+#include <string>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
 #include "dogen.archetypes/types/location.hpp"
@@ -61,7 +62,8 @@ public:
         const dogen::variability::meta_model::binding_point binding_point,
         const dogen::variability::meta_model::binding_action profile_binding_action,
         const dogen::variability::meta_model::binding_action configuration_binding_action,
-        const dogen::variability::meta_model::template_kind kind);
+        const dogen::variability::meta_model::template_kind kind,
+        const std::string& instantiation_domain_name);
 
 public:
     void to_stream(std::ostream& s) const override;
@@ -117,6 +119,18 @@ public:
     void kind(const dogen::variability::meta_model::template_kind v);
     /**@}*/
 
+    /**
+     * @brief Name of the domain to use for template instantiation.
+     *
+     * @pre The instantiation domain name must exist.
+     */
+    /**@{*/
+    const std::string& instantiation_domain_name() const;
+    std::string& instantiation_domain_name();
+    void instantiation_domain_name(const std::string& v);
+    void instantiation_domain_name(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const feature_template& rhs) const;
     bool operator!=(const feature_template& rhs) const {
@@ -138,6 +152,7 @@ private:
     dogen::variability::meta_model::binding_action profile_binding_action_;
     dogen::variability::meta_model::binding_action configuration_binding_action_;
     dogen::variability::meta_model::template_kind kind_;
+    std::string instantiation_domain_name_;
 };
 
 }

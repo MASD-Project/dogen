@@ -57,12 +57,14 @@ configuration_point_template::configuration_point_template(
     const std::string& description,
     const dogen::archetypes::location& location,
     const dogen::variability::meta_model::template_kind kind,
+    const std::string& instantiation_domain_name,
     const std::list<std::string>& untyped_value)
     : dogen::variability::meta_model::element(
       name,
       description),
       location_(location),
       kind_(kind),
+      instantiation_domain_name_(instantiation_domain_name),
       untyped_value_(untyped_value) { }
 
 void configuration_point_template::to_stream(std::ostream& s) const {
@@ -73,6 +75,7 @@ void configuration_point_template::to_stream(std::ostream& s) const {
     s << ", "
       << "\"location\": " << location_ << ", "
       << "\"kind\": " << kind_ << ", "
+      << "\"instantiation_domain_name\": " << "\"" << tidy_up_string(instantiation_domain_name_) << "\"" << ", "
       << "\"untyped_value\": " << untyped_value_
       << " }";
 }
@@ -83,6 +86,7 @@ void configuration_point_template::swap(configuration_point_template& other) noe
     using std::swap;
     swap(location_, other.location_);
     swap(kind_, other.kind_);
+    swap(instantiation_domain_name_, other.instantiation_domain_name_);
     swap(untyped_value_, other.untyped_value_);
 }
 
@@ -96,6 +100,7 @@ bool configuration_point_template::operator==(const configuration_point_template
     return dogen::variability::meta_model::element::compare(rhs) &&
         location_ == rhs.location_ &&
         kind_ == rhs.kind_ &&
+        instantiation_domain_name_ == rhs.instantiation_domain_name_ &&
         untyped_value_ == rhs.untyped_value_;
 }
 
@@ -127,6 +132,22 @@ dogen::variability::meta_model::template_kind configuration_point_template::kind
 
 void configuration_point_template::kind(const dogen::variability::meta_model::template_kind v) {
     kind_ = v;
+}
+
+const std::string& configuration_point_template::instantiation_domain_name() const {
+    return instantiation_domain_name_;
+}
+
+std::string& configuration_point_template::instantiation_domain_name() {
+    return instantiation_domain_name_;
+}
+
+void configuration_point_template::instantiation_domain_name(const std::string& v) {
+    instantiation_domain_name_ = v;
+}
+
+void configuration_point_template::instantiation_domain_name(const std::string&& v) {
+    instantiation_domain_name_ = std::move(v);
 }
 
 const std::list<std::string>& configuration_point_template::untyped_value() const {
