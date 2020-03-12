@@ -191,7 +191,6 @@
         "meta_model::element"
       ],
       "stereotypes": [
-        "Locatable",
         "Templateable"
       ],
       "fallback_element_type": "masd::object",
@@ -324,21 +323,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::Locatable",
-      "documentation": "Has a position in archetype space.\n",
-      "stereotypes": [
-        "masd::object_template"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "location",
-          "type": "archetypes::location",
-          "documentation": "The location of this element in archetype space.\n"
-        }
-      ]
-    },
-    {
       "name": "meta_model::Nameable",
       "stereotypes": [
         "masd::object_template"
@@ -429,7 +413,6 @@
     {
       "name": "meta_model::FeatureElement",
       "parents": [
-        "meta_model::Locatable",
         "meta_model::Element",
         "meta_model::Defaultable",
         "meta_model::Typeable",

@@ -28,6 +28,7 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <boost/optional.hpp>
+#include "dogen.archetypes/types/location.hpp"
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"

@@ -29,7 +29,6 @@
 #include <string>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "dogen.archetypes/types/location.hpp"
 #include "dogen.variability/types/meta_model/element.hpp"
 #include "dogen.variability/types/meta_model/value_fwd.hpp"
 #include "dogen.variability/types/meta_model/value_type.hpp"
@@ -55,7 +54,6 @@ public:
     feature_template(
         const dogen::variability::meta_model::name& name,
         const std::string& description,
-        const dogen::archetypes::location& location,
         const boost::shared_ptr<dogen::variability::meta_model::value>& default_value,
         const dogen::variability::meta_model::value_type value_type,
         const dogen::variability::meta_model::binding_point binding_point,
@@ -67,16 +65,6 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    /**
-     * @brief The location of this element in archetype space.
-     */
-    /**@{*/
-    const dogen::archetypes::location& location() const;
-    dogen::archetypes::location& location();
-    void location(const dogen::archetypes::location& v);
-    void location(const dogen::archetypes::location&& v);
-    /**@}*/
-
     /**
      * @brief Default value for element, if any.
      */
@@ -135,7 +123,6 @@ public:
     feature_template& operator=(feature_template other);
 
 private:
-    dogen::archetypes::location location_;
     boost::shared_ptr<dogen::variability::meta_model::value> default_value_;
     dogen::variability::meta_model::value_type value_type_;
     dogen::variability::meta_model::binding_point binding_point_;

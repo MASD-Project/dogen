@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.archetypes/io/location_io.hpp"
 #include "dogen.variability/io/meta_model/value_io.hpp"
 #include "dogen.variability/types/meta_model/value.hpp"
 #include "dogen.variability/io/meta_model/element_io.hpp"
@@ -73,7 +72,6 @@ feature_template::feature_template()
 feature_template::feature_template(
     const dogen::variability::meta_model::name& name,
     const std::string& description,
-    const dogen::archetypes::location& location,
     const boost::shared_ptr<dogen::variability::meta_model::value>& default_value,
     const dogen::variability::meta_model::value_type value_type,
     const dogen::variability::meta_model::binding_point binding_point,
@@ -83,7 +81,6 @@ feature_template::feature_template(
     : dogen::variability::meta_model::element(
       name,
       description),
-      location_(location),
       default_value_(default_value),
       value_type_(value_type),
       binding_point_(binding_point),
@@ -97,7 +94,6 @@ void feature_template::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     dogen::variability::meta_model::element::to_stream(s);
     s << ", "
-      << "\"location\": " << location_ << ", "
       << "\"default_value\": " << default_value_ << ", "
       << "\"value_type\": " << value_type_ << ", "
       << "\"binding_point\": " << binding_point_ << ", "
@@ -111,7 +107,6 @@ void feature_template::swap(feature_template& other) noexcept {
     dogen::variability::meta_model::element::swap(other);
 
     using std::swap;
-    swap(location_, other.location_);
     swap(default_value_, other.default_value_);
     swap(value_type_, other.value_type_);
     swap(binding_point_, other.binding_point_);
@@ -128,7 +123,6 @@ bool feature_template::equals(const dogen::variability::meta_model::element& oth
 
 bool feature_template::operator==(const feature_template& rhs) const {
     return dogen::variability::meta_model::element::compare(rhs) &&
-        location_ == rhs.location_ &&
         default_value_ == rhs.default_value_ &&
         value_type_ == rhs.value_type_ &&
         binding_point_ == rhs.binding_point_ &&
@@ -141,22 +135,6 @@ feature_template& feature_template::operator=(feature_template other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const dogen::archetypes::location& feature_template::location() const {
-    return location_;
-}
-
-dogen::archetypes::location& feature_template::location() {
-    return location_;
-}
-
-void feature_template::location(const dogen::archetypes::location& v) {
-    location_ = v;
-}
-
-void feature_template::location(const dogen::archetypes::location&& v) {
-    location_ = std::move(v);
 }
 
 const boost::shared_ptr<dogen::variability::meta_model::value>& feature_template::default_value() const {

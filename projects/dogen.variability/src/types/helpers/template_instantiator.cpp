@@ -22,7 +22,6 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
-#include "dogen.archetypes/io/location_io.hpp"
 #include "dogen.variability/io/meta_model/profile_io.hpp"
 #include "dogen.variability/io/meta_model/feature_io.hpp"
 #include "dogen.variability/io/meta_model/feature_template_io.hpp"
@@ -116,7 +115,6 @@ to_feature(const meta_model::feature_template& ft) const {
     r.name(ft.name());
     r.value_type(ft.value_type());
     r.binding_point(ft.binding_point());
-    r.location(ft.location());
     r.default_value(ft.default_value());
     r.is_partially_matchable(is_partially_mathcable(r.value_type()));
 

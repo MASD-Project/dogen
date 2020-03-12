@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.archetypes/io/location_io.hpp"
 #include "dogen.variability/io/meta_model/element_io.hpp"
 #include "dogen.variability/types/meta_model/configuration_point_template.hpp"
 
@@ -51,13 +50,11 @@ namespace dogen::variability::meta_model {
 configuration_point_template::configuration_point_template(
     const dogen::variability::meta_model::name& name,
     const std::string& description,
-    const dogen::archetypes::location& location,
     const std::string& instantiation_domain_name,
     const std::list<std::string>& untyped_value)
     : dogen::variability::meta_model::element(
       name,
       description),
-      location_(location),
       instantiation_domain_name_(instantiation_domain_name),
       untyped_value_(untyped_value) { }
 
@@ -67,7 +64,6 @@ void configuration_point_template::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     dogen::variability::meta_model::element::to_stream(s);
     s << ", "
-      << "\"location\": " << location_ << ", "
       << "\"instantiation_domain_name\": " << "\"" << tidy_up_string(instantiation_domain_name_) << "\"" << ", "
       << "\"untyped_value\": " << untyped_value_
       << " }";
@@ -77,7 +73,6 @@ void configuration_point_template::swap(configuration_point_template& other) noe
     dogen::variability::meta_model::element::swap(other);
 
     using std::swap;
-    swap(location_, other.location_);
     swap(instantiation_domain_name_, other.instantiation_domain_name_);
     swap(untyped_value_, other.untyped_value_);
 }
@@ -90,7 +85,6 @@ bool configuration_point_template::equals(const dogen::variability::meta_model::
 
 bool configuration_point_template::operator==(const configuration_point_template& rhs) const {
     return dogen::variability::meta_model::element::compare(rhs) &&
-        location_ == rhs.location_ &&
         instantiation_domain_name_ == rhs.instantiation_domain_name_ &&
         untyped_value_ == rhs.untyped_value_;
 }
@@ -99,22 +93,6 @@ configuration_point_template& configuration_point_template::operator=(configurat
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const dogen::archetypes::location& configuration_point_template::location() const {
-    return location_;
-}
-
-dogen::archetypes::location& configuration_point_template::location() {
-    return location_;
-}
-
-void configuration_point_template::location(const dogen::archetypes::location& v) {
-    location_ = v;
-}
-
-void configuration_point_template::location(const dogen::archetypes::location&& v) {
-    location_ = std::move(v);
 }
 
 const std::string& configuration_point_template::instantiation_domain_name() const {

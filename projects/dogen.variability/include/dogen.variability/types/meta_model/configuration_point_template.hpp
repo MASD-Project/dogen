@@ -29,7 +29,6 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include "dogen.archetypes/types/location.hpp"
 #include "dogen.variability/types/meta_model/element.hpp"
 
 namespace dogen::variability::meta_model {
@@ -46,7 +45,6 @@ public:
     configuration_point_template(
         const dogen::variability::meta_model::name& name,
         const std::string& description,
-        const dogen::archetypes::location& location,
         const std::string& instantiation_domain_name,
         const std::list<std::string>& untyped_value);
 
@@ -54,16 +52,6 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    /**
-     * @brief The location of this element in archetype space.
-     */
-    /**@{*/
-    const dogen::archetypes::location& location() const;
-    dogen::archetypes::location& location();
-    void location(const dogen::archetypes::location& v);
-    void location(const dogen::archetypes::location&& v);
-    /**@}*/
-
     /**
      * @brief Name of the domain to use for template instantiation.
      *
@@ -95,7 +83,6 @@ public:
     configuration_point_template& operator=(configuration_point_template other);
 
 private:
-    dogen::archetypes::location location_;
     std::string instantiation_domain_name_;
     std::list<std::string> untyped_value_;
 };
