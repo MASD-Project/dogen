@@ -35864,19 +35864,19 @@ ORM in Dogen.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O250">
       <dia:attribute name="obj_pos">
-        <dia:point val="105,65"/>
+        <dia:point val="106,71"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="104.95,64.95;124.8,71.05"/>
+        <dia:rectangle val="105.95,70.95;128.88,77.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="105,65"/>
+        <dia:point val="106,71"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="19.75"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.0000000000000009"/>
+        <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#variability_templates#</dia:string>
@@ -36063,6 +36063,34 @@ the default value field if available.
             <dia:string>#If true, the feature template provides an optional feature.
 
 #DOGEN masd.variability.binding_point=property#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#default_value_override#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#masd::variability::key_value_pair#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Default values to override the "default" default value.
+
+These match on keys ending with the specified string.
+
+#DOGEN masd.variability.binding_point=property
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -38677,13 +38705,13 @@ At present the system only supports wale templates.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O280">
       <dia:attribute name="obj_pos">
-        <dia:point val="73,65"/>
+        <dia:point val="74,71"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.95,64.95;99.345,71.85"/>
+        <dia:rectangle val="73.95,70.95;100.345,77.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="73,65"/>
+        <dia:point val="74,71"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="26.294999999999998"/>
@@ -48026,13 +48054,13 @@ Both of these aspects are optional, but at least one must be chosen.#</dia:strin
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O370">
       <dia:attribute name="obj_pos">
-        <dia:point val="106,76"/>
+        <dia:point val="107,82"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="105.95,75.95;126.185,81.25"/>
+        <dia:rectangle val="106.95,81.95;127.185,87.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="106,76"/>
+        <dia:point val="107,82"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.134999999999998"/>
@@ -48222,13 +48250,13 @@ the default value field if available.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O371">
       <dia:attribute name="obj_pos">
-        <dia:point val="82,76"/>
+        <dia:point val="83,82"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="81.95,75.95;96.795,80.45"/>
+        <dia:rectangle val="82.95,81.95;97.795,86.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="82,76"/>
+        <dia:point val="83,82"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.744999999999999"/>
@@ -48389,22 +48417,22 @@ the default value field if available.
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O372">
       <dia:attribute name="obj_pos">
-        <dia:point val="88,56"/>
+        <dia:point val="89,53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="87.95,55.95;116.67,61.75"/>
+        <dia:rectangle val="88.95,52.95;118.44,68.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="88,56"/>
+        <dia:point val="89,53"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="28.620000000000001"/>
+        <dia:real val="29.390000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.7000000000000002"/>
+        <dia:real val="15.300000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -48423,7 +48451,19 @@ including why we have disabled registration on the profile related
 types, see the comments on the variability types. The TL;DR: variability
 bundles have features for both feature bundles and feature template
 bundles. Variability profiles do the same for both profiles and profile
-templates.#</dia:string>
+templates. These features are now in an extremely messy state:
+
+- the names don't make any sense. variability bundle applies to both
+feature bundles and template bundles, but we don't have a good name for
+that. "variability templates" is a bit of a random name but captures 
+the notion that the properties are common to both feature bundle templates
+and profile templates. Note however, that we are not using (some of) the
+properties directly from the variability templates feature bundle; instead
+we are relying on their existence. This makes it very confusing because
+say if you rename a property (such as value) suddenly profiles will
+break because that feature will no longer be defined. Value is a case
+in point, since we are not using it for feature templates, but we can't
+remove it or else profiles will break.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -48432,7 +48472,7 @@ templates.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="88.35,57.245"/>
+            <dia:point val="89.35,54.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -50506,16 +50546,16 @@ templates.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O393">
       <dia:attribute name="obj_pos">
-        <dia:point val="91,84"/>
+        <dia:point val="92,90"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="90.95,83.95;111.585,85.75"/>
+        <dia:rectangle val="91.95,89.95;112.585,91.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="91,84"/>
+        <dia:point val="92,90"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.535"/>
@@ -50544,7 +50584,7 @@ templates.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="91.35,85.245"/>
+            <dia:point val="92.35,91.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -50558,17 +50598,17 @@ templates.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O394">
       <dia:attribute name="obj_pos">
-        <dia:point val="101.267,84"/>
+        <dia:point val="102.267,90"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="96.4567,80.0559;101.337,84.0703"/>
+        <dia:rectangle val="97.4568,86.0559;102.338,90.0703"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="101.267,84"/>
-        <dia:point val="96.745,80.4"/>
+        <dia:point val="102.267,90"/>
+        <dia:point val="97.745,86.4"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -50583,7 +50623,7 @@ templates.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="99.0063,82.7"/>
+        <dia:point val="100.007,88.7"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O393" connection="1"/>
@@ -50593,17 +50633,17 @@ templates.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O395">
       <dia:attribute name="obj_pos">
-        <dia:point val="101.267,84"/>
+        <dia:point val="102.267,90"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="101.199,80.8303;106.247,84.0685"/>
+        <dia:rectangle val="102.199,86.8303;107.247,90.0685"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="101.267,84"/>
-        <dia:point val="106,81.2"/>
+        <dia:point val="102.267,90"/>
+        <dia:point val="107,87.2"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -50618,7 +50658,7 @@ templates.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="103.634,83.1"/>
+        <dia:point val="104.634,89.1"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O393" connection="1"/>
@@ -50628,17 +50668,17 @@ templates.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O396">
       <dia:attribute name="obj_pos">
-        <dia:point val="102.31,61.7"/>
+        <dia:point val="103.695,68.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="98.966,61.6294;102.381,65.3067"/>
+        <dia:rectangle val="100.007,68.2298;103.765,71.3443"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="102.31,61.7"/>
-        <dia:point val="99.295,65"/>
+        <dia:point val="103.695,68.3"/>
+        <dia:point val="100.295,71"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -50653,7 +50693,7 @@ templates.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="100.803,63.85"/>
+        <dia:point val="101.995,70.15"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O372" connection="6"/>
@@ -50663,17 +50703,17 @@ templates.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O397">
       <dia:attribute name="obj_pos">
-        <dia:point val="102.31,61.7"/>
+        <dia:point val="103.695,68.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="102.24,61.6297;105.342,65.2915"/>
+        <dia:rectangle val="103.625,68.2295;106.337,71.2977"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="102.31,61.7"/>
-        <dia:point val="105,65"/>
+        <dia:point val="103.695,68.3"/>
+        <dia:point val="106,71"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -50688,7 +50728,7 @@ templates.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="103.655,63.85"/>
+        <dia:point val="104.847,70.15"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O372" connection="6"/>
@@ -50895,7 +50935,7 @@ templates.#</dia:string>
         <dia:point val="47,-80.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.845,-81.05;47.75,-77.5"/>
+        <dia:rectangle val="43.845,-81.1;47.75,-78.3"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

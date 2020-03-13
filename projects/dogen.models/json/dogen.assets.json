@@ -2889,6 +2889,15 @@
           "tagged_values": {
             "masd.variability.binding_point": "property"
           }
+        },
+        {
+          "name": "default_value_override",
+          "type": "masd::variability::key_value_pair",
+          "documentation": "Default values to override the \"default\" default value.\n\nThese match on keys ending with the specified string.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "property",
+            "masd.variability.is_optional": "true"
+          }
         }
       ]
     },

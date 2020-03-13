@@ -27,6 +27,7 @@
 
 #include <list>
 #include <string>
+#include <unordered_map>
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
@@ -43,6 +44,7 @@ public:
         variability::meta_model::feature stereotype;
         variability::meta_model::feature value;
         variability::meta_model::feature is_optional;
+        variability::meta_model::feature default_value_override;
     };
 
     static feature_group
@@ -54,6 +56,7 @@ public:
         std::string stereotype;
         std::list<std::string> value;
         bool is_optional;
+        std::unordered_map<std::string, std::string> default_value_override;
 
         static_configuration() :
             is_optional() {}

@@ -77,6 +77,19 @@ make_masd_variability_is_optional() {
     return r;
 }
 
+dogen::variability::meta_model::feature
+make_masd_variability_default_value_override() {
+    using namespace dogen::variability::meta_model;
+    feature r;
+    r.name().simple("default_value_override");
+    r.name().qualified("masd.variability.default_value_override");
+    const auto vt(value_type::key_value_pair);
+    r.value_type(vt);
+    r.is_partially_matchable(true);
+    r.binding_point(binding_point::property);
+    return r;
+}
+
 }
 
 variability_templates::feature_group
@@ -88,6 +101,7 @@ variability_templates::make_feature_group(const dogen::variability::meta_model::
     r.stereotype = s.get_by_name("masd.variability.stereotype");
     r.value = s.get_by_name("masd.variability.value");
     r.is_optional = s.get_by_name("masd.variability.is_optional");
+    r.default_value_override = s.get_by_name("masd.variability.default_value_override");
 
     return r;
 }
@@ -105,6 +119,8 @@ variability_templates::static_configuration variability_templates::make_static_c
     if (s.has_configuration_point(fg.value))
         r.value = s.get_text_collection_content(fg.value);
     r.is_optional = s.get_boolean_content_or_default(fg.is_optional);
+    if (s.has_configuration_point(fg.default_value_override))
+        r.default_value_override = s.get_key_value_pair_content(fg.default_value_override);
     return r;
 }
 
@@ -116,6 +132,7 @@ variability_templates::make_features() {
     r.push_back(make_masd_variability_stereotype());
     r.push_back(make_masd_variability_value());
     r.push_back(make_masd_variability_is_optional());
+    r.push_back(make_masd_variability_default_value_override());
     return r;
 }
 
