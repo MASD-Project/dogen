@@ -741,122 +741,11 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::features",
-      "stereotypes": [
-        "masd::variability::feature_bundle"
-      ],
-      "tagged_values": {
-        "masd.variability.generate_static_configuration": "false",
-        "masd.variability.default_binding_point": "global",
-        "masd.variability.key_prefix": "masd.generation.csharp.types"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "class.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        },
-        {
-          "name": "enum.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        },
-        {
-          "name": "primitive.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        },
-        {
-          "name": "builtin.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        },
-        {
-          "name": "exception.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        }
-      ]
-    },
-    {
       "name": "feature_initializer",
       "stereotypes": [
         "masd::variability::initializer"
       ],
       "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formatters::io::features",
-      "stereotypes": [
-        "masd::variability::feature_bundle"
-      ],
-      "tagged_values": {
-        "masd.variability.generate_static_configuration": "false",
-        "masd.variability.default_binding_point": "global"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "masd.generation.csharp.io.class.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        },
-        {
-          "name": "masd.generation.csharp.io.builtin.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        },
-        {
-          "name": "masd.generation.csharp.io.assistant.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        },
-        {
-          "name": "masd.generation.csharp.io.enum.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        },
-        {
-          "name": "masd.generation.csharp.io.primitive.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        }
-      ]
-    },
-    {
-      "name": "formatters::test_data::features",
-      "stereotypes": [
-        "masd::variability::feature_bundle"
-      ],
-      "tagged_values": {
-        "masd.variability.generate_static_configuration": "false",
-        "masd.variability.default_binding_point": "global",
-        "masd.variability.key_prefix": "masd.generation.csharp.test_data"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "class.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        },
-        {
-          "name": "assistant.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        },
-        {
-          "name": "enum.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        },
-        {
-          "name": "primitive.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        }
-      ]
     },
     {
       "name": "formatters::global_features",
@@ -1014,30 +903,6 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "formatters::visual_studio::features",
-      "stereotypes": [
-        "masd::variability::feature_bundle"
-      ],
-      "tagged_values": {
-        "masd.variability.generate_static_configuration": "false",
-        "masd.variability.default_binding_point": "global",
-        "masd.variability.key_prefix": "masd.generation.csharp.visual_studio"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "solution.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        },
-        {
-          "name": "project.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        }
-      ]
     },
     {
       "name": "formatters::visual_studio::project_formatter",

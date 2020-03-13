@@ -22,17 +22,11 @@
 
 namespace {
 
-const std::string master_header_postfix(".master_header");
 const std::string canonical_archetype_postfix(".canonical_archetype");
 
 }
 
 namespace dogen::generation::cpp::formatters {
-
-std::string traits::
-master_header_archetype(const std::string& facet) {
-    return facet + master_header_postfix;
-}
 
 std::string traits::canonical_archetype(const std::string& facet) {
     return facet + canonical_archetype_postfix;

@@ -33,7 +33,6 @@ struct traits {
     /**
      * @brief Name of the master header archetype for a given facet.
      */
-    static std::string master_header_archetype(const std::string& facet);
     static std::string canonical_archetype(const std::string& facet);
 };
 

@@ -19,13 +19,9 @@
  *
  */
 #include "dogen.generation.csharp/types/feature_initializer.hpp"
-#include "dogen.generation.csharp/types/formatters/io/features.hpp"
 #include "dogen.generation.csharp/types/formatters/facet_features.hpp"
-#include "dogen.generation.csharp/types/formatters/types/features.hpp"
 #include "dogen.generation.csharp/types/formatters/global_features.hpp"
 #include "dogen.generation.csharp/types/formatters/archetype_features.hpp"
-#include "dogen.generation.csharp/types/formatters/test_data/features.hpp"
-#include "dogen.generation.csharp/types/formatters/visual_studio/features.hpp"
 
 namespace dogen::generation::csharp {
 
@@ -34,10 +30,6 @@ register_entities(variability::helpers::registrar& rg) {
     rg.register_templates(dogen::generation::csharp::formatters::archetype_features::make_templates());
     rg.register_templates(dogen::generation::csharp::formatters::facet_features::make_templates());
     rg.register_features(dogen::generation::csharp::formatters::global_features::make_features());
-    rg.register_features(dogen::generation::csharp::formatters::io::features::make_features());
-    rg.register_features(dogen::generation::csharp::formatters::test_data::features::make_features());
-    rg.register_features(dogen::generation::csharp::formatters::types::features::make_features());
-    rg.register_features(dogen::generation::csharp::formatters::visual_studio::features::make_features());
 }
 
 }
