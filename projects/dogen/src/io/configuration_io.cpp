@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include "dogen/io/configuration_io.hpp"
 #include "dogen/io/diffing_configuration_io.hpp"
 #include "dogen/io/tracing_configuration_io.hpp"
@@ -89,6 +90,12 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::da
 namespace dogen {
 
 std::ostream& operator<<(std::ostream& s, const configuration& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::configuration\"" << ", "
       << "\"model_processing\": " << v.model_processing() << ", "
@@ -96,7 +103,8 @@ std::ostream& operator<<(std::ostream& s, const configuration& v) {
       << "\"diffing\": " << v.diffing() << ", "
       << "\"reporting\": " << v.reporting() << ", "
       << "\"byproduct_directory\": " << "\"" << v.byproduct_directory().generic_string() << "\"" << ", "
-      << "\"database\": " << v.database()
+      << "\"database\": " << v.database() << ", "
+      << "\"dump_specs\": " << v.dump_specs()
       << " }";
     return(s);
 }

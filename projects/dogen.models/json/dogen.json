@@ -48,6 +48,11 @@
           "name": "database",
           "type": "boost::optional<database_configuration>",
           "documentation": "Configuration related to database connectivity, if any.\n"
+        },
+        {
+          "name": "dump_specs",
+          "type": "bool",
+          "documentation": "If true, collects all the specs about this version of dogen.\n"
         }
       ]
     },
@@ -398,6 +403,65 @@
       "stereotypes": [
         "masd::build::cmakelists",
         "dogen::handcrafted::cmake"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "specs",
+      "documentation": "Describes details of the available functionality within this version of Dogen.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "groups",
+          "type": "std::list<spec_group>"
+        }
+      ]
+    },
+    {
+      "name": "spec_group",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "documentation": "Name of this group of specs.\n"
+        },
+        {
+          "name": "entries",
+          "type": "std::list<spec_entry>",
+          "documentation": "Entries describing various aspects of this group.\n"
+        }
+      ]
+    },
+    {
+      "name": "spec_entry",
+      "documentation": "Unit of functionality within Dogen.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "std::string",
+          "documentation": "Name for this spec entry.\n"
+        },
+        {
+          "name": "description",
+          "type": "std::string",
+          "documentation": "Human readable text describing this entry.\n"
+        }
+      ]
+    },
+    {
+      "name": "spec_dumper",
+      "stereotypes": [
+        "dogen::handcrafted::typeable::header_only"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "dumping_exception",
+      "documentation": "An error ocurred when dumping dogen's specs.\n",
+      "stereotypes": [
+        "masd::exception"
       ],
       "fallback_element_type": "masd::object"
     }

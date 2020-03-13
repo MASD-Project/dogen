@@ -38,9 +38,11 @@ namespace dogen {
 
 class configuration final {
 public:
-    configuration() = default;
     configuration(const configuration&) = default;
     ~configuration() = default;
+
+public:
+    configuration();
 
 public:
     configuration(configuration&& rhs);
@@ -52,7 +54,8 @@ public:
         const boost::optional<dogen::diffing_configuration>& diffing,
         const boost::optional<dogen::reporting_configuration>& reporting,
         const boost::filesystem::path& byproduct_directory,
-        const boost::optional<dogen::database_configuration>& database);
+        const boost::optional<dogen::database_configuration>& database,
+        const bool dump_specs);
 
 public:
     const dogen::model_processing_configuration& model_processing() const;
@@ -100,6 +103,14 @@ public:
     configuration& database(const boost::optional<dogen::database_configuration>&& v);
     /**@}*/
 
+    /**
+     * @brief If true, collects all the specs about this version of dogen.
+     */
+    /**@{*/
+    bool dump_specs() const;
+    configuration& dump_specs(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const configuration& rhs) const;
     bool operator!=(const configuration& rhs) const {
@@ -117,6 +128,7 @@ private:
     boost::optional<dogen::reporting_configuration> reporting_;
     boost::filesystem::path byproduct_directory_;
     boost::optional<dogen::database_configuration> database_;
+    bool dump_specs_;
 };
 
 }
