@@ -39,6 +39,7 @@ const std::string transform_id(
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
+const std::string dot(".");
 const std::string empty_domain("Domain name cannot be empty: ");
 const std::string missing_value("Must supply a value for entry: ");
 const std::string conflicting_values(
@@ -47,6 +48,19 @@ const std::string conflicting_values(
 }
 
 namespace dogen::assets::transforms {
+
+std::string variability_profiles_transform::
+compute_key(const std::string& key_prefix, const std::string& original_key) {
+    /*
+     * If a key prefix was supplied, we must merge the original key
+     * with the key prefix. Otherwise, use the original key as the
+     * key.
+     */
+    if (!key_prefix.empty())
+        return key_prefix + dot + original_key;
+
+    return original_key;
+}
 
 void variability_profiles_transform::
 update(const features::variability_profile::feature_group& fg,
@@ -60,7 +74,6 @@ update(const features::variability_profile::feature_group& fg,
 void variability_profiles_transform::
 update(const features::variability_entry::feature_group& fg,
     meta_model::variability::abstract_profile_entry& ape) {
-
     const auto& k(ape.key());
     BOOST_LOG_SEV(lg, trace) << "Adapting entry: " << k;
 
@@ -122,8 +135,10 @@ void variability_profiles_transform::process_profile_templates(
         auto& pt(*pair.second);
         update(fg1, pt);
 
-        for (auto& e : pt.entries())
+        for (auto& e : pt.entries()) {
+            e.key(compute_key(pt.key_prefix(), e.original_key()));
             update(fg2, e);
+        }
     }
 }
 
@@ -152,8 +167,10 @@ void variability_profiles_transform::process_profiles(
         auto& p(*pair.second);
         update(fg1, p);
 
-        for (auto& e : p.entries())
+        for (auto& e : p.entries()) {
+            e.key(compute_key(p.key_prefix(), e.original_key()));
             update(fg2, e);
+        }
     }
 }
 

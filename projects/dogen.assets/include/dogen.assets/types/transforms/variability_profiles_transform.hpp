@@ -41,6 +41,13 @@ namespace dogen::assets::transforms {
 class variability_profiles_transform final {
 private:
     /**
+     * @brief Computes the key for a profile entry.
+     */
+    static std::string compute_key(const std::string& key_prefix,
+        const std::string& original_key);
+
+private:
+    /**
      * @brief Reads configuration related to profiles.
      */
     static void update(const features::variability_profile::feature_group& fg,

@@ -489,7 +489,7 @@ void adapter::populate_abstract_profile_entry(const assets::meta_model::name& pn
      * representation.
      */
     ape.name(f.build_attribute_name(pn, n));
-    ape.key(n);
+    ape.original_key(n);
     ape.configuration(attr.configuration());
     ape.configuration()->name().qualified(ape.name().qualified().dot());
     if (!attr.value().empty())
