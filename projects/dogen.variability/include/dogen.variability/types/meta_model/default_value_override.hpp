@@ -44,19 +44,19 @@ public:
 
 public:
     default_value_override(
-        const std::string& key,
-        const boost::shared_ptr<dogen::variability::meta_model::value>& value);
+        const std::string& key_ends_with,
+        const boost::shared_ptr<dogen::variability::meta_model::value>& default_value);
 
 public:
-    const std::string& key() const;
-    std::string& key();
-    void key(const std::string& v);
-    void key(const std::string&& v);
+    const std::string& key_ends_with() const;
+    std::string& key_ends_with();
+    void key_ends_with(const std::string& v);
+    void key_ends_with(const std::string&& v);
 
-    const boost::shared_ptr<dogen::variability::meta_model::value>& value() const;
-    boost::shared_ptr<dogen::variability::meta_model::value>& value();
-    void value(const boost::shared_ptr<dogen::variability::meta_model::value>& v);
-    void value(const boost::shared_ptr<dogen::variability::meta_model::value>&& v);
+    const boost::shared_ptr<dogen::variability::meta_model::value>& default_value() const;
+    boost::shared_ptr<dogen::variability::meta_model::value>& default_value();
+    void default_value(const boost::shared_ptr<dogen::variability::meta_model::value>& v);
+    void default_value(const boost::shared_ptr<dogen::variability::meta_model::value>&& v);
 
 public:
     bool operator==(const default_value_override& rhs) const;
@@ -69,8 +69,8 @@ public:
     default_value_override& operator=(default_value_override other);
 
 private:
-    std::string key_;
-    boost::shared_ptr<dogen::variability::meta_model::value> value_;
+    std::string key_ends_with_;
+    boost::shared_ptr<dogen::variability::meta_model::value> default_value_;
 };
 
 }

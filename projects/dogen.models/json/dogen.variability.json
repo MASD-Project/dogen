@@ -912,11 +912,11 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "key",
+          "name": "key_ends_with",
           "type": "std::string"
         },
         {
-          "name": "value",
+          "name": "default_value",
           "type": "boost::shared_ptr<value>"
         }
       ]

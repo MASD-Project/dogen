@@ -16149,16 +16149,16 @@ alias.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O127">
       <dia:attribute name="obj_pos">
-        <dia:point val="-84,-15"/>
+        <dia:point val="-85,-15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-84.05,-15.05;-71.13,-11.35"/>
+        <dia:rectangle val="-85.05,-15.05;-69.05,-11.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-84,-15"/>
+        <dia:point val="-85,-15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.82"/>
+        <dia:real val="15.9"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -16253,7 +16253,7 @@ alias.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#key#</dia:string>
+            <dia:string>#key_ends_with#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -16276,7 +16276,7 @@ alias.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#value#</dia:string>
+            <dia:string>#default_value#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boost::shared_ptr&lt;value&gt;#</dia:string>
@@ -16346,7 +16346,7 @@ alias.#</dia:string>
         <dia:point val="-86,-4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-86.75,-11.45;-77.39,-2.4"/>
+        <dia:rectangle val="-86.75,-11.45;-76.85,-2.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -16354,8 +16354,8 @@ alias.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-86,-4"/>
         <dia:point val="-86,-8"/>
-        <dia:point val="-77.59,-8"/>
-        <dia:point val="-77.59,-11.4"/>
+        <dia:point val="-77.05,-8"/>
+        <dia:point val="-77.05,-11.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

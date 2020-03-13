@@ -33,20 +33,20 @@ const boost::shared_ptr<dogen::variability::meta_model::value>& rhs) {
 namespace dogen::variability::meta_model {
 
 default_value_override::default_value_override(
-    const std::string& key,
-    const boost::shared_ptr<dogen::variability::meta_model::value>& value)
-    : key_(key),
-      value_(value) { }
+    const std::string& key_ends_with,
+    const boost::shared_ptr<dogen::variability::meta_model::value>& default_value)
+    : key_ends_with_(key_ends_with),
+      default_value_(default_value) { }
 
 void default_value_override::swap(default_value_override& other) noexcept {
     using std::swap;
-    swap(key_, other.key_);
-    swap(value_, other.value_);
+    swap(key_ends_with_, other.key_ends_with_);
+    swap(default_value_, other.default_value_);
 }
 
 bool default_value_override::operator==(const default_value_override& rhs) const {
-    return key_ == rhs.key_ &&
-        value_ == rhs.value_;
+    return key_ends_with_ == rhs.key_ends_with_ &&
+        default_value_ == rhs.default_value_;
 }
 
 default_value_override& default_value_override::operator=(default_value_override other) {
@@ -55,36 +55,36 @@ default_value_override& default_value_override::operator=(default_value_override
     return *this;
 }
 
-const std::string& default_value_override::key() const {
-    return key_;
+const std::string& default_value_override::key_ends_with() const {
+    return key_ends_with_;
 }
 
-std::string& default_value_override::key() {
-    return key_;
+std::string& default_value_override::key_ends_with() {
+    return key_ends_with_;
 }
 
-void default_value_override::key(const std::string& v) {
-    key_ = v;
+void default_value_override::key_ends_with(const std::string& v) {
+    key_ends_with_ = v;
 }
 
-void default_value_override::key(const std::string&& v) {
-    key_ = std::move(v);
+void default_value_override::key_ends_with(const std::string&& v) {
+    key_ends_with_ = std::move(v);
 }
 
-const boost::shared_ptr<dogen::variability::meta_model::value>& default_value_override::value() const {
-    return value_;
+const boost::shared_ptr<dogen::variability::meta_model::value>& default_value_override::default_value() const {
+    return default_value_;
 }
 
-boost::shared_ptr<dogen::variability::meta_model::value>& default_value_override::value() {
-    return value_;
+boost::shared_ptr<dogen::variability::meta_model::value>& default_value_override::default_value() {
+    return default_value_;
 }
 
-void default_value_override::value(const boost::shared_ptr<dogen::variability::meta_model::value>& v) {
-    value_ = v;
+void default_value_override::default_value(const boost::shared_ptr<dogen::variability::meta_model::value>& v) {
+    default_value_ = v;
 }
 
-void default_value_override::value(const boost::shared_ptr<dogen::variability::meta_model::value>&& v) {
-    value_ = std::move(v);
+void default_value_override::default_value(const boost::shared_ptr<dogen::variability::meta_model::value>&& v) {
+    default_value_ = std::move(v);
 }
 
 }

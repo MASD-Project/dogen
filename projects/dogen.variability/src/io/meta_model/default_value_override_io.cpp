@@ -52,8 +52,8 @@ namespace dogen::variability::meta_model {
 std::ostream& operator<<(std::ostream& s, const default_value_override& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::variability::meta_model::default_value_override\"" << ", "
-      << "\"key\": " << "\"" << tidy_up_string(v.key()) << "\"" << ", "
-      << "\"value\": " << v.value()
+      << "\"key_ends_with\": " << "\"" << tidy_up_string(v.key_ends_with()) << "\"" << ", "
+      << "\"default_value\": " << v.default_value()
       << " }";
     return(s);
 }
