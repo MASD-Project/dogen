@@ -38,9 +38,11 @@ namespace dogen::cli {
  */
 class cli_configuration final {
 public:
-    cli_configuration() = default;
     cli_configuration(const cli_configuration&) = default;
     ~cli_configuration() = default;
+
+public:
+    cli_configuration();
 
 public:
     cli_configuration(cli_configuration&& rhs);
@@ -48,7 +50,8 @@ public:
 public:
     cli_configuration(
         const boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration>& activity,
-        const boost::filesystem::path& byproduct_directory);
+        const boost::filesystem::path& byproduct_directory,
+        const bool dumpspecs);
 
 public:
     const boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration>& activity() const;
@@ -66,6 +69,14 @@ public:
     cli_configuration& byproduct_directory(const boost::filesystem::path&& v);
     /**@}*/
 
+    /**
+     * @brief If true, dumps all the specs about this version of dogen.
+     */
+    /**@{*/
+    bool dumpspecs() const;
+    cli_configuration& dumpspecs(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const cli_configuration& rhs) const;
     bool operator!=(const cli_configuration& rhs) const {
@@ -79,6 +90,7 @@ public:
 private:
     boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration> activity_;
     boost::filesystem::path byproduct_directory_;
+    bool dumpspecs_;
 };
 
 }

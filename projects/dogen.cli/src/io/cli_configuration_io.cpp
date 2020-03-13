@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include <boost/variant/apply_visitor.hpp>
 #include "dogen.cli/io/cli_configuration_io.hpp"
 #include "dogen.cli/io/conversion_configuration_io.hpp"
@@ -56,10 +57,17 @@ inline std::ostream& operator<<(std::ostream& s, const boost::variant<dogen::cli
 namespace dogen::cli {
 
 std::ostream& operator<<(std::ostream& s, const cli_configuration& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::cli::cli_configuration\"" << ", "
       << "\"activity\": " << v.activity() << ", "
-      << "\"byproduct_directory\": " << "\"" << v.byproduct_directory().generic_string() << "\""
+      << "\"byproduct_directory\": " << "\"" << v.byproduct_directory().generic_string() << "\"" << ", "
+      << "\"dumpspecs\": " << v.dumpspecs()
       << " }";
     return(s);
 }

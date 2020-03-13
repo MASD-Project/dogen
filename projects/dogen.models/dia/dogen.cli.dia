@@ -68,7 +68,7 @@
         <dia:point val="-5,1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-5.05,0.95;21.745,17.95"/>
+        <dia:rectangle val="-5.05,0.95;21.745,14.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="26.695"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="16.900000000000002"/>
+        <dia:real val="13.700000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -2682,7 +2682,7 @@ infrastructure. To be removed.#</dia:string>
         <dia:point val="71,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="70.95,25.95;101.195,30.45"/>
+        <dia:rectangle val="70.95,25.95;101.195,31.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="71,26"/>
@@ -2691,7 +2691,7 @@ infrastructure. To be removed.#</dia:string>
         <dia:real val="30.145"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#cli_configuration#</dia:string>
@@ -2827,6 +2827,29 @@ infrastructure. To be removed.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#dumpspecs#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, dumps all the specs about this version of dogen.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -2946,7 +2969,7 @@ infrastructure. To be removed.#</dia:string>
         <dia:point val="69.37,34.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="68.62,30.35;86.2725,35.7"/>
+        <dia:rectangle val="68.62,31.15;86.2725,35.7"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2954,7 +2977,7 @@ infrastructure. To be removed.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="69.37,34.9"/>
         <dia:point val="86.0725,34.9"/>
-        <dia:point val="86.0725,30.4"/>
+        <dia:point val="86.0725,31.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>

@@ -157,6 +157,11 @@
           "name": "byproduct_directory",
           "type": "boost::filesystem::path",
           "documentation": "Directory in which to place all files not directly related to generated code.\n"
+        },
+        {
+          "name": "dumpspecs",
+          "type": "bool",
+          "documentation": "If true, dumps all the specs about this version of dogen.\n"
         }
       ]
     },
