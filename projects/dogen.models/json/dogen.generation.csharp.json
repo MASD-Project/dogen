@@ -755,58 +755,37 @@
         {
           "name": "directory",
           "type": "masd::variability::text",
-          "value": "\"Types\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp.types.directory"
-          }
+          "value": "\"Types\""
         },
         {
           "name": "postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp.types.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "class.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp.types.class.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "enum.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp.types.enum.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "primitive.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp.types.primitive.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "builtin.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp.types.builtin.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "exception.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp.types.exception.postfix"
-          }
+          "value": "\"\""
         }
       ]
     },
@@ -831,58 +810,37 @@
         {
           "name": "masd.generation.csharp.io.directory",
           "type": "masd::variability::text",
-          "value": "\"Dumpers\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp.io.directory"
-          }
+          "value": "\"Dumpers\""
         },
         {
           "name": "masd.generation.csharp.io.postfix",
           "type": "masd::variability::text",
-          "value": "\"Dumper\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp.io.postfix"
-          }
+          "value": "\"Dumper\""
         },
         {
           "name": "masd.generation.csharp.io.class.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp.io.class.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "masd.generation.csharp.io.builtin.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp.io.builtin.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "masd.generation.csharp.io.assistant.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp.io.assistant.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "masd.generation.csharp.io.enum.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp.io.enum.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "masd.generation.csharp.io.primitive.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp.io.primitive.postfix"
-          }
+          "value": "\"\""
         }
       ]
     },
@@ -901,50 +859,32 @@
         {
           "name": "directory",
           "type": "masd::variability::text",
-          "value": "\"SequenceGenerators\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp.test_data.directory"
-          }
+          "value": "\"SequenceGenerators\""
         },
         {
           "name": "postfix",
           "type": "masd::variability::text",
-          "value": "\"SequenceGenerator\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp.test_data.postfix"
-          }
+          "value": "\"SequenceGenerator\""
         },
         {
           "name": "class.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp.test_data.class.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "assistant.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp.test_data.assistant.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "enum.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp.test_data.enum.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "primitive.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp.test_data.primitive.postfix"
-          }
+          "value": "\"\""
         }
       ]
     },
@@ -964,8 +904,7 @@
           "type": "masd::variability::text",
           "value": "\"cs\"",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.csharp.directory"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -973,8 +912,7 @@
           "type": "masd::variability::boolean",
           "value": "\"true\"",
           "tagged_values": {
-            "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.generation.csharp.aspect.requires_static_reference_equals"
+            "masd.variability.binding_point": "element"
           }
         },
         {
@@ -982,8 +920,7 @@
           "type": "masd::variability::text",
           "value": "\"Default\"",
           "tagged_values": {
-            "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.generation.csharp.helper.family"
+            "masd.variability.binding_point": "element"
           }
         },
         {
@@ -991,16 +928,14 @@
           "type": "masd::variability::boolean",
           "value": "\"false\"",
           "tagged_values": {
-            "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.generation.csharp.assistant.requires_assistance"
+            "masd.variability.binding_point": "element"
           }
         },
         {
           "name": "assistant.method_postfix",
           "type": "masd::variability::text",
           "tagged_values": {
-            "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.generation.csharp.assistant.method_postfix"
+            "masd.variability.binding_point": "element"
           }
         }
       ]
@@ -1125,34 +1060,22 @@
         {
           "name": "directory",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp..visual_studio.directory"
-          }
+          "value": "\"\""
         },
         {
           "name": "postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp..visual_studio.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "solution.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp..visual_studio.solution.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "project.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.csharp..visual_studio.project.postfix"
-          }
+          "value": "\"\""
         }
       ]
     },

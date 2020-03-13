@@ -4356,7 +4356,6 @@ assets types.#</dia:string>
 External modules contribute to the namespace of the model but not the model
 name.
 
-#DOGEN masd.variability.qualified_name=masd.injection.external_modules
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -4382,9 +4381,7 @@ name.
           <dia:attribute name="comment">
             <dia:string>#Model modules containing this model.
 
-The model modules result in a top-level name separated by dots, e.g. a.b.c.
-
-#DOGEN masd.variability.qualified_name=masd.injection.model_modules#</dia:string>
+The model modules result in a top-level name separated by dots, e.g. a.b.c.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

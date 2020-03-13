@@ -14636,9 +14636,7 @@ alias.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Profile associated with this configuration.
-
-#DOGEN masd.variability.qualified_name=masd.variability.profile#</dia:string>
+            <dia:string>#Profile associated with this configuration.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

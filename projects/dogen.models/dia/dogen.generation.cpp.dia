@@ -29659,7 +29659,7 @@ code.
             <dia:string>#"types"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.directory#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -29682,7 +29682,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -29705,7 +29705,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.class_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -29728,7 +29728,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.class_implementation.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -29751,7 +29751,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.enum_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -29774,7 +29774,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.enum_implementation.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -29797,7 +29797,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.primitive_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -29820,7 +29820,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.primitive_implementation.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -29843,7 +29843,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.exception_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -29866,7 +29866,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.namespace_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -29889,7 +29889,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.visitor_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -29912,7 +29912,7 @@ code.
             <dia:string>#"fwd"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.class_forward_declarations.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -29935,7 +29935,7 @@ code.
             <dia:string>#"fwd"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.visitor_forward_declarations.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -29958,7 +29958,7 @@ code.
             <dia:string>#"fwd"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.primitive_forward_declarations.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -29981,7 +29981,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.master_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30004,7 +30004,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.builtin_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30027,7 +30027,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.feature_template_bundle_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30050,7 +30050,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.feature_template_bundle_implementation.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30073,7 +30073,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.feature_bundle_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30096,7 +30096,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.feature_bundle_implementation.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30119,7 +30119,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.variability_initializer_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30142,7 +30142,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.variability_initializer_implementation.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30165,7 +30165,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.types.main.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30412,7 +30412,7 @@ code.
             <dia:string>#"hash"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.hash.directory#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30435,7 +30435,7 @@ code.
             <dia:string>#"hash"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.hash.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30458,7 +30458,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.hash.class_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30481,7 +30481,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.hash.class_implementation.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30504,7 +30504,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.hash.enum_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30527,7 +30527,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.hash.enum_implementation.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30550,7 +30550,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.hash.primitive_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30573,7 +30573,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.hash.primitive_implementation.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30596,7 +30596,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.hash.master_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30619,7 +30619,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.hash.builtin_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30756,7 +30756,7 @@ code.
             <dia:string>#"io"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.io.directory#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30779,7 +30779,7 @@ code.
             <dia:string>#"io"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.io.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30802,7 +30802,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.io.class_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30825,7 +30825,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.io.class_implementation.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30848,7 +30848,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.io.enum_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30871,7 +30871,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.io.enum_implementation.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30894,7 +30894,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.io.primitive_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30917,7 +30917,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.io.primitive_implementation.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30940,7 +30940,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.io.master_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -30963,7 +30963,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.io.builtin_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31099,8 +31099,7 @@ code.
             <dia:string>#"odb"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.odb.directory#</dia:string>
+            <dia:string>##DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31123,8 +31122,7 @@ code.
             <dia:string>#"pragmas"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.odb.postfix#</dia:string>
+            <dia:string>##DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31147,8 +31145,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.odb.class_header.postfix#</dia:string>
+            <dia:string>##DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31171,8 +31168,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.odb.enum_header.postfix#</dia:string>
+            <dia:string>##DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31195,8 +31191,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.odb.primitive_header.postfix#</dia:string>
+            <dia:string>##DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31219,8 +31214,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.odb.common_odb_options.postfix#</dia:string>
+            <dia:string>##DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31243,8 +31237,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.odb.object_odb_options.postfix#</dia:string>
+            <dia:string>##DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31267,8 +31260,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.odb.master_header.postfix#</dia:string>
+            <dia:string>##DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31291,8 +31283,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.odb.pragma#</dia:string>
+            <dia:string>##DOGEN masd.variability.binding_point=any#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31315,8 +31306,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.odb.builtin_header.postfix#</dia:string>
+            <dia:string>##DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31339,8 +31329,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.odb.primitive_odb_options.postfix#</dia:string>
+            <dia:string>##DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31477,7 +31466,7 @@ code.
             <dia:string>#"test_data"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.test_data.directory#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31500,7 +31489,7 @@ code.
             <dia:string>#"td"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.test_data.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31523,7 +31512,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.test_data.class_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31546,7 +31535,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.test_data.class_implementation.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31569,7 +31558,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.test_data.enum_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31592,7 +31581,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.test_data.enum_implementation.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31615,7 +31604,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.test_data.primitive_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31638,7 +31627,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.test_data.primitive_implementation.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31661,7 +31650,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.test_data.master_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31684,7 +31673,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.test_data.builtin_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31821,7 +31810,7 @@ code.
             <dia:string>#"serialization"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.serialization.directory#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31844,7 +31833,7 @@ code.
             <dia:string>#"ser"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.serialization.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31867,7 +31856,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.serialization.class_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31890,7 +31879,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.serialization.class_implementation.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31913,7 +31902,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.serialization.enum_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31936,7 +31925,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.serialization.primitive_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31959,7 +31948,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.serialization.primitive_implementation.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -31982,7 +31971,7 @@ code.
             <dia:string>#"fwd"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.serialization.class_forward_declarations.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32005,7 +31994,7 @@ code.
             <dia:string>#"fwd"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.serialization.primitive_forward_declarations.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32028,7 +32017,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.serialization.master_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32051,7 +32040,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.serialization.builtin_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32074,7 +32063,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.serialization.type_registrar_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32097,7 +32086,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.serialization.type_registrar_implementation.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32234,7 +32223,7 @@ code.
             <dia:string>#"generated_tests"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.tests.directory#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32257,7 +32246,7 @@ code.
             <dia:string>#"tests"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.tests.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32280,7 +32269,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.tests.class_implementation.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32303,7 +32292,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.tests.enum_implementation.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32326,7 +32315,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.tests.master_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32349,7 +32338,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.tests.cmakelists.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32372,7 +32361,7 @@ code.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.tests.main.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32510,8 +32499,7 @@ code.
           <dia:attribute name="comment">
             <dia:string>#Override location of public c++ headers.
 
-#DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp_headers_output_directory#</dia:string>
+#DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32536,8 +32524,7 @@ code.
           <dia:attribute name="comment">
             <dia:string>#Directory in which to place code for the C++ backend.
 
-#DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.directory#</dia:string>
+#DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32562,8 +32549,7 @@ code.
           <dia:attribute name="comment">
             <dia:string>#If true, inclusion is required for this modeling element.
 
-#DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.inclusion_required#</dia:string>
+#DOGEN masd.variability.binding_point=element#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32588,8 +32574,7 @@ code.
           <dia:attribute name="comment">
             <dia:string>#Directory in which to place C++ source files.
 
-#DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.source_directory_name#</dia:string>
+#DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32614,8 +32599,7 @@ code.
           <dia:attribute name="comment">
             <dia:string>#Directory in which to place include headers.
 
-#DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.include_directory_name#</dia:string>
+#DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32640,8 +32624,7 @@ code.
           <dia:attribute name="comment">
             <dia:string>#Directory in which to place c++ tests.
 
-#DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.tests_directory_name#</dia:string>
+#DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32666,8 +32649,7 @@ code.
           <dia:attribute name="comment">
             <dia:string>#Directory in which to place text templates.
 
-#DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.templates_directory_name#</dia:string>
+#DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32692,8 +32674,7 @@ code.
           <dia:attribute name="comment">
             <dia:string>#Extension to use for C++ header files.
 
-#DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.header_file_extension#</dia:string>
+#DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32718,8 +32699,7 @@ code.
           <dia:attribute name="comment">
             <dia:string>#Extension to use for C++ implementation files.
 
-#DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.implementation_file_extension#</dia:string>
+#DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32744,8 +32724,7 @@ code.
           <dia:attribute name="comment">
             <dia:string>#Extension to use for text templates.
 
-#DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.templates_file_extension#</dia:string>
+#DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32770,8 +32749,7 @@ code.
           <dia:attribute name="comment">
             <dia:string>#If true, make all file names unique within a model.
 
-#DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.enable_unique_file_names#</dia:string>
+#DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32796,8 +32774,7 @@ code.
           <dia:attribute name="comment">
             <dia:string>#If true, the modeling element requires a manual defaul constructor.
 
-#DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.aspect.requires_manual_default_constructor#</dia:string>
+#DOGEN masd.variability.binding_point=element#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32822,8 +32799,7 @@ code.
           <dia:attribute name="comment">
             <dia:string>#If true, the modeling element requires a manual move constructor.
 
-#DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.aspect.requires_manual_move_constructor#</dia:string>
+#DOGEN masd.variability.binding_point=element#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32848,8 +32824,7 @@ code.
           <dia:attribute name="comment">
             <dia:string>#If true, the modeling element requires stream manipulators.
 
-#DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.aspect.requires_stream_manipulators#</dia:string>
+#DOGEN masd.variability.binding_point=element#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32874,8 +32849,7 @@ code.
           <dia:attribute name="comment">
             <dia:string>#If true, facet directories will not be used.
 
-#DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.disable_facet_directories#</dia:string>
+#DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32900,8 +32874,7 @@ code.
           <dia:attribute name="comment">
             <dia:string>#Which version of C++ to use.
 
-#DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.standard#</dia:string>
+#DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32926,8 +32899,7 @@ code.
           <dia:attribute name="comment">
             <dia:string>#Which family of helpers to use for this modeling element.
 
-#DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.helper.family#</dia:string>
+#DOGEN masd.variability.binding_point=element#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32952,8 +32924,7 @@ code.
           <dia:attribute name="comment">
             <dia:string>#Which conversion method to use to convert strings.
 
-#DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.streaming.string_conversion_method#</dia:string>
+#DOGEN masd.variability.binding_point=element#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32978,8 +32949,7 @@ code.
           <dia:attribute name="comment">
             <dia:string>#If true, streaming this type must be preceeded by quoting.
 
-#DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.streaming.requires_quoting#</dia:string>
+#DOGEN masd.variability.binding_point=element#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -33004,8 +32974,7 @@ code.
           <dia:attribute name="comment">
             <dia:string>#If true, streaming this type requires removing unprintable characters.
 
-#DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.generation.cpp.streaming.remove_unprintable_characters#</dia:string>
+#DOGEN masd.variability.binding_point=element#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -33910,7 +33879,7 @@ string.
             <dia:string>#"lexical_cast"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.lexical_cast.directory#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -33933,7 +33902,7 @@ string.
             <dia:string>#"lc"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.lexical_cast.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -33956,7 +33925,7 @@ string.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.lexical_cast.enum_header.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35179,7 +35148,7 @@ string.
             <dia:string>#"templates"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.templates.directory#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35202,7 +35171,7 @@ string.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.templates.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35225,7 +35194,7 @@ string.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.templates.logic_less_template.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -36786,7 +36755,7 @@ string.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.visual_studio.directory#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -36809,7 +36778,7 @@ string.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.visual_studio.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -36832,7 +36801,7 @@ string.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.visual_studio.solution.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -36855,7 +36824,7 @@ string.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.visual_studio.project.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -36878,7 +36847,7 @@ string.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.visual_studio.msbuild_targets.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -38328,7 +38297,7 @@ string.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.build.directory#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -38351,7 +38320,7 @@ string.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.build.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -38374,7 +38343,7 @@ string.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.build.cmakelists.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -38397,7 +38366,7 @@ string.
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.cpp.build.source_cmakelists.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

@@ -409,10 +409,7 @@
           "name": "input_technical_space",
           "type": "masd::variability::text",
           "value": "\"agnostic\"",
-          "documentation": "Input technical space for this model.\n",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.injection.input_technical_space"
-          }
+          "documentation": "Input technical space for this model.\n"
         }
       ]
     },
@@ -433,7 +430,6 @@
           "type": "masd::variability::text_collection",
           "documentation": "Imports an external model.\n",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.injection.reference",
             "masd.variability.is_optional": "true"
           }
         }
@@ -462,10 +458,7 @@
         {
           "name": "dia.comment",
           "type": "masd::variability::boolean",
-          "documentation": "If true, the UML comment is linked to the containing package.\n\nIf the containing package is the model itself, it is linked to the model's module.\n",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.injection.dia.comment"
-          }
+          "documentation": "If true, the UML comment is linked to the containing package.\n\nIf the containing package is the model itself, it is linked to the model's module.\n"
         }
       ]
     },

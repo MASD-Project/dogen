@@ -967,7 +967,6 @@
           "type": "masd::variability::boolean",
           "documentation": "If true, decorations are enabled on this modeling element.\n",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.decoration.enabled",
             "masd.variability.is_optional": "true"
           }
         },
@@ -976,7 +975,6 @@
           "type": "masd::variability::text_collection",
           "documentation": "Copyright notices for this modeling element.\n",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.decoration.copyright_notice",
             "masd.variability.is_optional": "true"
           }
         },
@@ -985,7 +983,6 @@
           "type": "masd::variability::text",
           "documentation": "Name of the licence to use for this modeling element.\n",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.decoration.licence_name",
             "masd.variability.is_optional": "true"
           }
         },
@@ -994,7 +991,6 @@
           "type": "masd::variability::text",
           "documentation": "Name of the modeline group for this modeling element.\n",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.decoration.modeline_group_name",
             "masd.variability.is_optional": "true"
           }
         },
@@ -1003,7 +999,6 @@
           "type": "masd::variability::text",
           "documentation": "Name of the decoration marker to use for this modeling element.\n",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.decoration.marker_name",
             "masd.variability.is_optional": "true"
           }
         }

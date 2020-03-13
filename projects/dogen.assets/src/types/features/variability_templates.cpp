@@ -64,18 +64,6 @@ make_masd_variability_value() {
 }
 
 dogen::variability::meta_model::feature
-make_masd_variability_qualified_name() {
-    using namespace dogen::variability::meta_model;
-    feature r;
-    r.name().simple("qualified_name");
-    r.name().qualified("masd.variability.qualified_name");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::property);
-    return r;
-}
-
-dogen::variability::meta_model::feature
 make_masd_variability_is_optional() {
     using namespace dogen::variability::meta_model;
     feature r;
@@ -99,7 +87,6 @@ variability_templates::make_feature_group(const dogen::variability::meta_model::
     r.binding_point = s.get_by_name("masd.variability.binding_point");
     r.stereotype = s.get_by_name("masd.variability.stereotype");
     r.value = s.get_by_name("masd.variability.value");
-    r.qualified_name = s.get_by_name("masd.variability.qualified_name");
     r.is_optional = s.get_by_name("masd.variability.is_optional");
 
     return r;
@@ -117,8 +104,6 @@ variability_templates::static_configuration variability_templates::make_static_c
         r.stereotype = s.get_text_content(fg.stereotype);
     if (s.has_configuration_point(fg.value))
         r.value = s.get_text_collection_content(fg.value);
-    if (s.has_configuration_point(fg.qualified_name))
-        r.qualified_name = s.get_text_content(fg.qualified_name);
     r.is_optional = s.get_boolean_content_or_default(fg.is_optional);
     return r;
 }
@@ -130,7 +115,6 @@ variability_templates::make_features() {
     r.push_back(make_masd_variability_binding_point());
     r.push_back(make_masd_variability_stereotype());
     r.push_back(make_masd_variability_value());
-    r.push_back(make_masd_variability_qualified_name());
     r.push_back(make_masd_variability_is_optional());
     return r;
 }

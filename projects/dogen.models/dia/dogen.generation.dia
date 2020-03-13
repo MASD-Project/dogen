@@ -15191,7 +15191,6 @@ code: identation and dividers.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#If true, decorations are enabled on this modeling element.
 
-#DOGEN masd.variability.qualified_name=masd.generation.decoration.enabled
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -15217,7 +15216,6 @@ code: identation and dividers.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#Copyright notices for this modeling element.
 
-#DOGEN masd.variability.qualified_name=masd.generation.decoration.copyright_notice
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -15243,7 +15241,6 @@ code: identation and dividers.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#Name of the licence to use for this modeling element.
 
-#DOGEN masd.variability.qualified_name=masd.generation.decoration.licence_name
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -15269,7 +15266,6 @@ code: identation and dividers.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#Name of the modeline group for this modeling element.
 
-#DOGEN masd.variability.qualified_name=masd.generation.decoration.modeline_group_name
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -15295,7 +15291,6 @@ code: identation and dividers.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#Name of the decoration marker to use for this modeling element.
 
-#DOGEN masd.variability.qualified_name=masd.generation.decoration.marker_name
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">

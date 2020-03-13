@@ -13749,7 +13749,7 @@
             <dia:string>#"Types"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp.types.directory#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -13772,7 +13772,7 @@
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp.types.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -13795,7 +13795,7 @@
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp.types.class.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -13818,7 +13818,7 @@
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp.types.enum.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -13841,7 +13841,7 @@
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp.types.primitive.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -13864,7 +13864,7 @@
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp.types.builtin.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -13887,7 +13887,7 @@
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp.types.exception.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14133,7 +14133,7 @@
             <dia:string>#"Dumpers"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp.io.directory#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14156,7 +14156,7 @@
             <dia:string>#"Dumper"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp.io.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14179,7 +14179,7 @@
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp.io.class.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14202,7 +14202,7 @@
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp.io.builtin.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14225,7 +14225,7 @@
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp.io.assistant.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14248,7 +14248,7 @@
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp.io.enum.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14271,7 +14271,7 @@
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp.io.primitive.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14408,7 +14408,7 @@
             <dia:string>#"SequenceGenerators"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp.test_data.directory#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14431,7 +14431,7 @@
             <dia:string>#"SequenceGenerator"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp.test_data.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14454,7 +14454,7 @@
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp.test_data.class.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14477,7 +14477,7 @@
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp.test_data.assistant.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14500,7 +14500,7 @@
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp.test_data.enum.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14523,7 +14523,7 @@
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp.test_data.primitive.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14659,8 +14659,7 @@
             <dia:string>#"cs"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.generation.csharp.directory#</dia:string>
+            <dia:string>##DOGEN masd.variability.binding_point=global#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14683,8 +14682,7 @@
             <dia:string>#"true"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.generation.csharp.aspect.requires_static_reference_equals#</dia:string>
+            <dia:string>##DOGEN masd.variability.binding_point=element#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14707,8 +14705,7 @@
             <dia:string>#"Default"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.generation.csharp.helper.family#</dia:string>
+            <dia:string>##DOGEN masd.variability.binding_point=element#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14731,8 +14728,7 @@
             <dia:string>#"false"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.generation.csharp.assistant.requires_assistance#</dia:string>
+            <dia:string>##DOGEN masd.variability.binding_point=element#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14755,8 +14751,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.generation.csharp.assistant.method_postfix#</dia:string>
+            <dia:string>##DOGEN masd.variability.binding_point=element#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -15999,7 +15994,7 @@
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp..visual_studio.directory#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16022,7 +16017,7 @@
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp..visual_studio.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16045,7 +16040,7 @@
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp..visual_studio.solution.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -16068,7 +16063,7 @@
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.generation.csharp..visual_studio.project.postfix#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

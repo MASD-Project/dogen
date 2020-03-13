@@ -68,7 +68,7 @@
         <dia:point val="-56,-28"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-56.05,-28.05;-29.255,-11.05"/>
+        <dia:rectangle val="-56.05,-28.05;-29.255,-15.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="26.695"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="16.900000000000002"/>
+        <dia:real val="12.9"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>

@@ -1578,186 +1578,117 @@
         {
           "name": "directory",
           "type": "masd::variability::text",
-          "value": "\"types\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.directory"
-          }
+          "value": "\"types\""
         },
         {
           "name": "postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "class_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.class_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "class_implementation.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.class_implementation.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "enum_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.enum_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "enum_implementation.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.enum_implementation.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "primitive_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.primitive_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "primitive_implementation.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.primitive_implementation.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "exception_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.exception_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "namespace_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.namespace_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "visitor_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.visitor_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "class_forward_declarations.postfix",
           "type": "masd::variability::text",
-          "value": "\"fwd\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.class_forward_declarations.postfix"
-          }
+          "value": "\"fwd\""
         },
         {
           "name": "visitor_forward_declarations.postfix",
           "type": "masd::variability::text",
-          "value": "\"fwd\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.visitor_forward_declarations.postfix"
-          }
+          "value": "\"fwd\""
         },
         {
           "name": "primitive_forward_declarations.postfix",
           "type": "masd::variability::text",
-          "value": "\"fwd\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.primitive_forward_declarations.postfix"
-          }
+          "value": "\"fwd\""
         },
         {
           "name": "master_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.master_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "builtin_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.builtin_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "feature_template_bundle_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.feature_template_bundle_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "feature_template_bundle_implementation.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.feature_template_bundle_implementation.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "feature_bundle_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.feature_bundle_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "feature_bundle_implementation.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.feature_bundle_implementation.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "variability_initializer_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.variability_initializer_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "variability_initializer_implementation.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.variability_initializer_implementation.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "main.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.types.main.postfix"
-          }
+          "value": "\"\""
         }
       ]
     },
@@ -1783,82 +1714,52 @@
         {
           "name": "directory",
           "type": "masd::variability::text",
-          "value": "\"hash\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.hash.directory"
-          }
+          "value": "\"hash\""
         },
         {
           "name": "postfix",
           "type": "masd::variability::text",
-          "value": "\"hash\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.hash.postfix"
-          }
+          "value": "\"hash\""
         },
         {
           "name": "class_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.hash.class_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "class_implementation.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.hash.class_implementation.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "enum_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.hash.enum_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "enum_implementation.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.hash.enum_implementation.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "primitive_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.hash.primitive_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "primitive_implementation.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.hash.primitive_implementation.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "master_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.hash.master_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "builtin_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.hash.builtin_header.postfix"
-          }
+          "value": "\"\""
         }
       ]
     },
@@ -1877,82 +1778,52 @@
         {
           "name": "directory",
           "type": "masd::variability::text",
-          "value": "\"io\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.io.directory"
-          }
+          "value": "\"io\""
         },
         {
           "name": "postfix",
           "type": "masd::variability::text",
-          "value": "\"io\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.io.postfix"
-          }
+          "value": "\"io\""
         },
         {
           "name": "class_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.io.class_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "class_implementation.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.io.class_implementation.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "enum_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.io.enum_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "enum_implementation.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.io.enum_implementation.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "primitive_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.io.primitive_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "primitive_implementation.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.io.primitive_implementation.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "master_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.io.master_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "builtin_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.io.builtin_header.postfix"
-          }
+          "value": "\"\""
         }
       ]
     },
@@ -1972,8 +1843,7 @@
           "type": "masd::variability::text",
           "value": "\"odb\"",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.odb.directory"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -1981,8 +1851,7 @@
           "type": "masd::variability::text",
           "value": "\"pragmas\"",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.odb.postfix"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -1990,8 +1859,7 @@
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.odb.class_header.postfix"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -1999,8 +1867,7 @@
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.odb.enum_header.postfix"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -2008,8 +1875,7 @@
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.odb.primitive_header.postfix"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -2017,8 +1883,7 @@
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.odb.common_odb_options.postfix"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -2026,8 +1891,7 @@
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.odb.object_odb_options.postfix"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -2035,8 +1899,7 @@
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.odb.master_header.postfix"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -2044,8 +1907,7 @@
           "type": "masd::variability::text_collection",
           "value": "\"\"",
           "tagged_values": {
-            "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.generation.cpp.odb.pragma"
+            "masd.variability.binding_point": "any"
           }
         },
         {
@@ -2053,8 +1915,7 @@
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.odb.builtin_header.postfix"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -2062,8 +1923,7 @@
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.odb.primitive_odb_options.postfix"
+            "masd.variability.binding_point": "global"
           }
         }
       ]
@@ -2083,82 +1943,52 @@
         {
           "name": "directory",
           "type": "masd::variability::text",
-          "value": "\"test_data\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.test_data.directory"
-          }
+          "value": "\"test_data\""
         },
         {
           "name": "postfix",
           "type": "masd::variability::text",
-          "value": "\"td\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.test_data.postfix"
-          }
+          "value": "\"td\""
         },
         {
           "name": "class_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.test_data.class_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "class_implementation.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.test_data.class_implementation.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "enum_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.test_data.enum_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "enum_implementation.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.test_data.enum_implementation.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "primitive_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.test_data.primitive_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "primitive_implementation.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.test_data.primitive_implementation.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "master_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.test_data.master_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "builtin_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.test_data.builtin_header.postfix"
-          }
+          "value": "\"\""
         }
       ]
     },
@@ -2177,106 +2007,67 @@
         {
           "name": "directory",
           "type": "masd::variability::text",
-          "value": "\"serialization\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.serialization.directory"
-          }
+          "value": "\"serialization\""
         },
         {
           "name": "postfix",
           "type": "masd::variability::text",
-          "value": "\"ser\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.serialization.postfix"
-          }
+          "value": "\"ser\""
         },
         {
           "name": "class_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.serialization.class_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "class_implementation.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.serialization.class_implementation.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "enum_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.serialization.enum_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "primitive_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.serialization.primitive_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "primitive_implementation.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.serialization.primitive_implementation.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "class_forward_declarations.postfix",
           "type": "masd::variability::text",
-          "value": "\"fwd\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.serialization.class_forward_declarations.postfix"
-          }
+          "value": "\"fwd\""
         },
         {
           "name": "primitive_forward_declarations.postfix",
           "type": "masd::variability::text",
-          "value": "\"fwd\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.serialization.primitive_forward_declarations.postfix"
-          }
+          "value": "\"fwd\""
         },
         {
           "name": "master_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.serialization.master_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "builtin_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.serialization.builtin_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "type_registrar_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.serialization.type_registrar_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "type_registrar_implementation.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.serialization.type_registrar_implementation.postfix"
-          }
+          "value": "\"\""
         }
       ]
     },
@@ -2295,58 +2086,37 @@
         {
           "name": "directory",
           "type": "masd::variability::text",
-          "value": "\"generated_tests\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.tests.directory"
-          }
+          "value": "\"generated_tests\""
         },
         {
           "name": "postfix",
           "type": "masd::variability::text",
-          "value": "\"tests\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.tests.postfix"
-          }
+          "value": "\"tests\""
         },
         {
           "name": "class_implementation.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.tests.class_implementation.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "enum_implementation.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.tests.enum_implementation.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "master_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.tests.master_header.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "cmakelists.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.tests.cmakelists.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "main.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.tests.main.postfix"
-          }
+          "value": "\"\""
         }
       ]
     },
@@ -2366,8 +2136,7 @@
           "type": "masd::variability::text",
           "documentation": "Override location of public c++ headers.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp_headers_output_directory"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -2376,8 +2145,7 @@
           "value": "\"cpp\"",
           "documentation": "Directory in which to place code for the C++ backend.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.directory"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -2386,8 +2154,7 @@
           "value": "\"true\"",
           "documentation": "If true, inclusion is required for this modeling element.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.generation.cpp.inclusion_required"
+            "masd.variability.binding_point": "element"
           }
         },
         {
@@ -2396,8 +2163,7 @@
           "value": "\"src\"",
           "documentation": "Directory in which to place C++ source files.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.source_directory_name"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -2406,8 +2172,7 @@
           "value": "\"include\"",
           "documentation": "Directory in which to place include headers.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.include_directory_name"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -2416,8 +2181,7 @@
           "value": "\"generated_tests\"",
           "documentation": "Directory in which to place c++ tests.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.tests_directory_name"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -2426,8 +2190,7 @@
           "value": "\"templates\"",
           "documentation": "Directory in which to place text templates.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.templates_directory_name"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -2436,8 +2199,7 @@
           "value": "\"hpp\"",
           "documentation": "Extension to use for C++ header files.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.header_file_extension"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -2446,8 +2208,7 @@
           "value": "\"cpp\"",
           "documentation": "Extension to use for C++ implementation files.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.implementation_file_extension"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -2456,8 +2217,7 @@
           "value": "\"wale\"",
           "documentation": "Extension to use for text templates.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.templates_file_extension"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -2466,8 +2226,7 @@
           "value": "\"true\"",
           "documentation": "If true, make all file names unique within a model.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.enable_unique_file_names"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -2476,8 +2235,7 @@
           "value": "\"false\"",
           "documentation": "If true, the modeling element requires a manual defaul constructor.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.generation.cpp.aspect.requires_manual_default_constructor"
+            "masd.variability.binding_point": "element"
           }
         },
         {
@@ -2486,8 +2244,7 @@
           "value": "\"false\"",
           "documentation": "If true, the modeling element requires a manual move constructor.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.generation.cpp.aspect.requires_manual_move_constructor"
+            "masd.variability.binding_point": "element"
           }
         },
         {
@@ -2496,8 +2253,7 @@
           "value": "\"false\"",
           "documentation": "If true, the modeling element requires stream manipulators.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.generation.cpp.aspect.requires_stream_manipulators"
+            "masd.variability.binding_point": "element"
           }
         },
         {
@@ -2506,8 +2262,7 @@
           "value": "\"false\"",
           "documentation": "If true, facet directories will not be used.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.disable_facet_directories"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -2516,8 +2271,7 @@
           "value": "\"c++-14\"",
           "documentation": "Which version of C++ to use.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.standard"
+            "masd.variability.binding_point": "global"
           }
         },
         {
@@ -2526,8 +2280,7 @@
           "value": "\"Default\"",
           "documentation": "Which family of helpers to use for this modeling element.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.generation.cpp.helper.family"
+            "masd.variability.binding_point": "element"
           }
         },
         {
@@ -2536,8 +2289,7 @@
           "value": "\"\"",
           "documentation": "Which conversion method to use to convert strings.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.generation.cpp.streaming.string_conversion_method"
+            "masd.variability.binding_point": "element"
           }
         },
         {
@@ -2546,8 +2298,7 @@
           "value": "\"false\"",
           "documentation": "If true, streaming this type must be preceeded by quoting.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.generation.cpp.streaming.requires_quoting"
+            "masd.variability.binding_point": "element"
           }
         },
         {
@@ -2556,8 +2307,7 @@
           "value": "\"false\"",
           "documentation": "If true, streaming this type requires removing unprintable characters.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.generation.cpp.streaming.remove_unprintable_characters"
+            "masd.variability.binding_point": "element"
           }
         }
       ]
@@ -2654,26 +2404,17 @@
         {
           "name": "directory",
           "type": "masd::variability::text",
-          "value": "\"lexical_cast\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.lexical_cast.directory"
-          }
+          "value": "\"lexical_cast\""
         },
         {
           "name": "postfix",
           "type": "masd::variability::text",
-          "value": "\"lc\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.lexical_cast.postfix"
-          }
+          "value": "\"lc\""
         },
         {
           "name": "enum_header.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.lexical_cast.enum_header.postfix"
-          }
+          "value": "\"\""
         }
       ]
     },
@@ -2781,26 +2522,17 @@
         {
           "name": "directory",
           "type": "masd::variability::text",
-          "value": "\"templates\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.templates.directory"
-          }
+          "value": "\"templates\""
         },
         {
           "name": "postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.templates.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "logic_less_template.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.templates.logic_less_template.postfix"
-          }
+          "value": "\"\""
         }
       ]
     },
@@ -2911,42 +2643,27 @@
         {
           "name": "directory",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.visual_studio.directory"
-          }
+          "value": "\"\""
         },
         {
           "name": "postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.visual_studio.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "solution.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.visual_studio.solution.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "project.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.visual_studio.project.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "msbuild_targets.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.visual_studio.msbuild_targets.postfix"
-          }
+          "value": "\"\""
         }
       ]
     },
@@ -3051,34 +2768,22 @@
         {
           "name": "directory",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.build.directory"
-          }
+          "value": "\"\""
         },
         {
           "name": "postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.build.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "include_cmakelists.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.build.cmakelists.postfix"
-          }
+          "value": "\"\""
         },
         {
           "name": "source_cmakelists.postfix",
           "type": "masd::variability::text",
-          "value": "\"\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.generation.cpp.build.source_cmakelists.postfix"
-          }
+          "value": "\"\""
         }
       ]
     },

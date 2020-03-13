@@ -6008,9 +6008,7 @@ external technical spaces.
             <dia:string>#If true, artefacts are always written to the filesystem.
 
 If false, the system will check to see if writing is needed by performing a binary
-diff. If no changes are detected, no writting is performed.
-
-#DOGEN masd.variability.qualified_name=masd.extraction.force_write#</dia:string>
+diff. If no changes are detected, no writting is performed.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6035,9 +6033,7 @@ diff. If no changes are detected, no writting is performed.
           <dia:attribute name="comment">
             <dia:string>#If true, any files the code generator is not aware of are deleted.
 
-If you'd like to skip the deletion of certain files, set  "ignore_files_matching_regex" accordingly.
-
-#DOGEN masd.variability.qualified_name=masd.extraction.delete_extra_files#</dia:string>
+If you'd like to skip the deletion of certain files, set  "ignore_files_matching_regex" accordingly.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6064,7 +6060,6 @@ If you'd like to skip the deletion of certain files, set  "ignore_files_matching
 
 Only applicable if "delete_extra_files" is enabled.
 
-#DOGEN masd.variability.qualified_name=masd.extraction.ignore_files_matching_regex
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -6091,9 +6086,7 @@ Only applicable if "delete_extra_files" is enabled.
             <dia:string>#If true, all directories without any files will be deleted.
 
 This setting is recursive: if a directory is composed of one or more directories that
-are themselves empty, the entire directory tree is deleted.
-
-#DOGEN masd.variability.qualified_name=masd.extraction.delete_empty_directories#</dia:string>
+are themselves empty, the entire directory tree is deleted.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6119,9 +6112,7 @@ are themselves empty, the entire directory tree is deleted.
             <dia:string>#If true, a directory is created for each technical space targeted.
 
 Note that this setting is only relevant if you are targetting a single output technical
-space. If you are targetting more than one, it will automatically be set to true.
-
-#DOGEN masd.variability.qualified_name=masd.extraction.enable_backend_directories#</dia:string>
+space. If you are targetting more than one, it will automatically be set to true.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

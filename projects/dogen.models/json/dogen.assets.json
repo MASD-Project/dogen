@@ -2501,26 +2501,17 @@
         {
           "name": "variable_number_of_parameters",
           "type": "masd::variability::boolean",
-          "value": "\"false\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.type_parameters.variable_number_of_parameters"
-          }
+          "value": "\"false\""
         },
         {
           "name": "count",
           "type": "masd::variability::number",
-          "value": "\"0\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.type_parameters.count"
-          }
+          "value": "\"0\""
         },
         {
           "name": "always_in_heap",
           "type": "masd::variability::boolean",
-          "value": "\"false\"",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.type_parameters.always_in_heap"
-          }
+          "value": "\"false\""
         }
       ]
     },
@@ -2547,17 +2538,13 @@
           "name": "use_implementation_defined_underlying_element",
           "type": "masd::variability::boolean",
           "value": "\"false\"",
-          "documentation": "If true, it uses the default implementation defined underlying element for the\ntechnical space targeted.\n",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.enumeration.use_implementation_defined_underlying_element"
-          }
+          "documentation": "If true, it uses the default implementation defined underlying element for the\ntechnical space targeted.\n"
         },
         {
           "name": "underlying_element",
           "type": "masd::variability::text",
           "documentation": "Name of the underlying element to use for the enumeration.\n",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.enumeration.underlying_element",
             "masd.variability.is_optional": "true"
           }
         },
@@ -2565,19 +2552,13 @@
           "name": "use_implementation_defined_enumerator_values",
           "type": "masd::variability::boolean",
           "value": "\"false\"",
-          "documentation": "If true, uses the enumeration values supplied by the underlying technical space.\n",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.enumeration.use_implementation_defined_enumerator_values"
-          }
+          "documentation": "If true, uses the enumeration values supplied by the underlying technical space.\n"
         },
         {
           "name": "add_invalid_enumerator",
           "type": "masd::variability::boolean",
           "value": "\"true\"",
-          "documentation": "If true, adds an enumerator to represent an invalid choice.\n",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.enumeration.add_invalid_enumerator"
-          }
+          "documentation": "If true, adds an enumerator to represent an invalid choice.\n"
         }
       ]
     },
@@ -2598,7 +2579,6 @@
           "type": "masd::variability::text",
           "documentation": "Value to use for this enumerator. Must be unique for an enumeration.\n",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.enumerator.value",
             "masd.variability.is_optional": "true"
           }
         }
@@ -2620,7 +2600,6 @@
           "type": "masd::variability::boolean",
           "documentation": "Whether to mark a type as final or not.\n",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.generalization.is_final",
             "masd.variability.is_optional": "true"
           }
         },
@@ -2629,7 +2608,6 @@
           "type": "masd::variability::text",
           "documentation": "Name of the parent of the current element.\n",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.generalization.parent",
             "masd.variability.is_optional": "true"
           }
         }
@@ -2650,10 +2628,7 @@
           "name": "masd.injection.is_proxy_model",
           "type": "masd::variability::boolean",
           "value": "\"false\"",
-          "documentation": "If true, sets the origin of the model to \"proxy model\".\n",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.injection.is_proxy_model"
-          }
+          "documentation": "If true, sets the origin of the model to \"proxy model\".\n"
         }
       ]
     },
@@ -2674,7 +2649,6 @@
           "type": "masd::variability::text_collection",
           "documentation": "Set of output technical spaces that this model targets.\n",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.extraction.output_technical_space",
             "masd.variability.is_optional": "true"
           }
         }
@@ -2697,7 +2671,6 @@
           "type": "masd::variability::text",
           "documentation": "Name of the underlying element to use for the primitive.\n",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.primitive.underlying_element",
             "masd.variability.is_optional": "true"
           }
         },
@@ -2705,19 +2678,13 @@
           "name": "is_nullable",
           "type": "masd::variability::boolean",
           "value": "\"false\"",
-          "documentation": "If true, the primitive can be null.\n",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.primitive.is_nullable"
-          }
+          "documentation": "If true, the primitive can be null.\n"
         },
         {
           "name": "use_type_aliasing",
           "type": "masd::variability::boolean",
           "value": "\"false\"",
-          "documentation": "If true, use type aliasing to implement the primitive if the technical space supports\nit.\n",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.primitive.use_type_aliasing"
-          }
+          "documentation": "If true, use type aliasing to implement the primitive if the technical space supports\nit.\n"
         }
       ]
     },
@@ -2738,7 +2705,6 @@
           "documentation": "Database system to target for ORM support.\n",
           "tagged_values": {
             "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.orm.database_system",
             "masd.variability.is_optional": "true"
           }
         },
@@ -2748,7 +2714,6 @@
           "documentation": "Name of the database table for this element.\n",
           "tagged_values": {
             "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.orm.table_name",
             "masd.variability.is_optional": "true"
           }
         },
@@ -2758,7 +2723,6 @@
           "documentation": "Name of the database schema for this modeling element.\n",
           "tagged_values": {
             "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.orm.schema_name",
             "masd.variability.is_optional": "true"
           }
         },
@@ -2768,7 +2732,6 @@
           "documentation": "If true, this property will be used for the primary key.\n",
           "tagged_values": {
             "masd.variability.binding_point": "property",
-            "masd.variability.qualified_name": "masd.orm.is_primary_key",
             "masd.variability.is_optional": "true"
           }
         },
@@ -2778,7 +2741,6 @@
           "documentation": "Overrides the name of the column name for the database table.\n",
           "tagged_values": {
             "masd.variability.binding_point": "property",
-            "masd.variability.qualified_name": "masd.orm.column_name",
             "masd.variability.is_optional": "true"
           }
         },
@@ -2788,7 +2750,6 @@
           "documentation": "If true, the column can be null.\n",
           "tagged_values": {
             "masd.variability.binding_point": "property",
-            "masd.variability.qualified_name": "masd.orm.is_nullable",
             "masd.variability.is_optional": "true"
           }
         },
@@ -2798,7 +2759,6 @@
           "documentation": "If true, the primary key is a composite key.\n",
           "tagged_values": {
             "masd.variability.binding_point": "property",
-            "masd.variability.qualified_name": "masd.orm.is_composite",
             "masd.variability.is_optional": "true"
           }
         },
@@ -2808,7 +2768,6 @@
           "documentation": "Determines the casing to use for identifiers.\n",
           "tagged_values": {
             "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.orm.letter_case",
             "masd.variability.is_optional": "true"
           }
         },
@@ -2818,7 +2777,6 @@
           "documentation": "Overrides to use for the relational type, for a given database system.\n\nNote: we've set the binding point to \"any\" as a hack to allow for primitive support.\nShould really be \"property\".\n",
           "tagged_values": {
             "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.orm.type_override",
             "masd.variability.is_optional": "true"
           }
         },
@@ -2828,7 +2786,6 @@
           "documentation": "Type maps to create for the relational type, possibly for a given database system.\n\nNote: we've set the binding point to \"any\" as a hack to allow for primitive support.\nShould really be \"property\".\n",
           "tagged_values": {
             "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.orm.type_mapping",
             "masd.variability.is_optional": "true"
           }
         },
@@ -2838,7 +2795,6 @@
           "documentation": "Raw ODB pragmas that are applied as-is by the system.\n\nUse these when you need some functionality which is not natively supported by\nORM in Dogen.\n",
           "tagged_values": {
             "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.orm.odb_pragma",
             "masd.variability.is_optional": "true"
           }
         }
@@ -2860,7 +2816,6 @@
           "type": "masd::variability::text",
           "documentation": "Editor to use in this modeline.\n",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.decoration.modeline.editor",
             "masd.variability.is_optional": "true"
           }
         },
@@ -2869,7 +2824,6 @@
           "type": "masd::variability::text",
           "documentation": "Where to place the modeline.\n",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.decoration.modeline.location",
             "masd.variability.is_optional": "true"
           }
         },
@@ -2878,7 +2832,6 @@
           "type": "masd::variability::text",
           "documentation": "Technical space targeted by the modeline.\n",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.decoration.modeline.technical_space",
             "masd.variability.is_optional": "true"
           }
         }
@@ -2901,7 +2854,6 @@
           "documentation": "Where does this feature bind into.\n",
           "tagged_values": {
             "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.variability.binding_point",
             "masd.variability.is_optional": "true"
           }
         },
@@ -2911,7 +2863,6 @@
           "documentation": "Stereotype for this profile. Must be globally unique.\n",
           "tagged_values": {
             "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.variability.stereotype",
             "masd.variability.is_optional": "true"
           }
         },
@@ -2921,17 +2872,6 @@
           "documentation": "Value for a facet or profile template.\n\nValue as meta-data should be used only for collections, for single values prefer\nthe default value field if available.\n",
           "tagged_values": {
             "masd.variability.binding_point": "property",
-            "masd.variability.qualified_name": "masd.variability.value",
-            "masd.variability.is_optional": "true"
-          }
-        },
-        {
-          "name": "qualified_name",
-          "type": "masd::variability::text",
-          "documentation": "Qualified name for this feature template.\n\nShould only be supplied for instance templates.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "property",
-            "masd.variability.qualified_name": "masd.variability.qualified_name",
             "masd.variability.is_optional": "true"
           }
         },
@@ -2941,8 +2881,7 @@
           "value": "\"false\"",
           "documentation": "If true, the feature template provides an optional feature.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "property",
-            "masd.variability.qualified_name": "masd.variability.is_optional"
+            "masd.variability.binding_point": "property"
           }
         }
       ]
@@ -3015,7 +2954,6 @@
           "type": "masd::variability::text",
           "documentation": "Type that is the source of the mapping.\n",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.mapping.target",
             "masd.variability.is_optional": "true"
           }
         },
@@ -3024,7 +2962,6 @@
           "type": "masd::variability::text",
           "documentation": "Type that is the destination of the mapping.\n",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.mapping.destination",
             "masd.variability.is_optional": "true"
           }
         }
@@ -3094,8 +3031,7 @@
           "value": "\"true\"",
           "documentation": "If true, generates code to register the features.\n\n@pre Features must not already exist.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.variability.generate_registration"
+            "masd.variability.binding_point": "element"
           }
         },
         {
@@ -3104,8 +3040,7 @@
           "value": "\"true\"",
           "documentation": "If true, generates a c++ class to contain the configuration at compile time.\n",
           "tagged_values": {
-            "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.variability.generate_static_configuration"
+            "masd.variability.binding_point": "element"
           }
         },
         {
@@ -3114,7 +3049,6 @@
           "documentation": "Where does this bundle bind to.\n",
           "tagged_values": {
             "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.variability.default_binding_point",
             "masd.variability.is_optional": "true"
           }
         },
@@ -3124,7 +3058,6 @@
           "documentation": "Template instantiation domain name to use when instantiating template.\n",
           "tagged_values": {
             "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.variability.instantiation_domain_name",
             "masd.variability.is_optional": "true"
           }
         },
@@ -3134,7 +3067,6 @@
           "documentation": "Prefix to apply to construct the qualified name, if any.\n",
           "tagged_values": {
             "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.variability.key_prefix",
             "masd.variability.is_optional": "true"
           }
         }
@@ -3833,7 +3765,6 @@
           "documentation": "Where does this profile or profile template bind to.\n",
           "tagged_values": {
             "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.variability.default_binding_point",
             "masd.variability.is_optional": "true"
           }
         },
@@ -3843,7 +3774,6 @@
           "documentation": "Value for a facet or profile template.\n\nValue as meta-data should be used only for collections, for single values prefer\nthe default value field if available.\n",
           "tagged_values": {
             "masd.variability.binding_point": "property",
-            "masd.variability.qualified_name": "masd.variability.value",
             "masd.variability.is_optional": "true"
           }
         },
@@ -3853,7 +3783,6 @@
           "documentation": "Template instantiation domain name to use when instantiating template.\n",
           "tagged_values": {
             "masd.variability.binding_point": "any",
-            "masd.variability.qualified_name": "masd.variability.instantiation_domain_name",
             "masd.variability.is_optional": "true"
           }
         }
@@ -3877,7 +3806,6 @@
           "documentation": "Stereotype for this profile. Must be globally unique.\n",
           "tagged_values": {
             "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.variability.stereotype",
             "masd.variability.is_optional": "true"
           }
         },
@@ -3887,7 +3815,6 @@
           "documentation": "Prefix to apply to construct the qualified name, if any.\n",
           "tagged_values": {
             "masd.variability.binding_point": "element",
-            "masd.variability.qualified_name": "masd.variability.key_prefix",
             "masd.variability.is_optional": "true"
           }
         }

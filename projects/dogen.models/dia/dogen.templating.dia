@@ -5695,9 +5695,7 @@
             <dia:string>#"stream_"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Which name to use for the variable with the stream.
-
-#DOGEN masd.variability.qualified_name=masd.stitch.stream_variable_name#</dia:string>
+            <dia:string>#Which name to use for the variable with the stream.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5722,7 +5720,6 @@
           <dia:attribute name="comment">
             <dia:string>#Relative path to the output directory.
 
-#DOGEN masd.variability.qualified_name=masd.stitch.relative_output_directory
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -5748,7 +5745,6 @@
           <dia:attribute name="comment">
             <dia:string>#C++ Include header.
 
-#DOGEN masd.variability.qualified_name=masd.stitch.inclusion_dependency
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -5772,9 +5768,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Namespaces that contain the class represented by the template.
-
-#DOGEN masd.variability.qualified_name=masd.stitch.containing_namespaces#</dia:string>
+            <dia:string>#Namespaces that contain the class represented by the template.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5799,7 +5793,6 @@
           <dia:attribute name="comment">
             <dia:string>#Name of the wale text template to instantiate, if any.
 
-#DOGEN masd.variability.qualified_name=masd.stitch.wale.text_template
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -5825,7 +5818,6 @@
           <dia:attribute name="comment">
             <dia:string>#Array of wale KVPs to use in template instantiation.
 
-#DOGEN masd.variability.qualified_name=masd.stitch.wale.kvp
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">

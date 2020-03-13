@@ -215,17 +215,13 @@
           "type": "masd::variability::text",
           "documentation": "External modules containing this model.\n\nExternal modules contribute to the namespace of the model but not the model\nname.\n",
           "tagged_values": {
-            "masd.variability.qualified_name": "masd.injection.external_modules",
             "masd.variability.is_optional": "true"
           }
         },
         {
           "name": "model_modules",
           "type": "masd::variability::text",
-          "documentation": "Model modules containing this model.\n\nThe model modules result in a top-level name separated by dots, e.g. a.b.c.\n",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.injection.model_modules"
-          }
+          "documentation": "Model modules containing this model.\n\nThe model modules result in a top-level name separated by dots, e.g. a.b.c.\n"
         }
       ]
     },

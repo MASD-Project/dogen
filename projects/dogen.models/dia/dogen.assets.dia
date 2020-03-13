@@ -34031,7 +34031,7 @@ to structural modeling.
             <dia:string>#"false"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.type_parameters.variable_number_of_parameters#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -34054,7 +34054,7 @@ to structural modeling.
             <dia:string>#"0"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.type_parameters.count#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -34077,7 +34077,7 @@ to structural modeling.
             <dia:string>#"false"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.qualified_name=masd.type_parameters.always_in_heap#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -34381,9 +34381,7 @@ to structural modeling.
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, it uses the default implementation defined underlying element for the
-technical space targeted.
-
-#DOGEN masd.variability.qualified_name=masd.enumeration.use_implementation_defined_underlying_element#</dia:string>
+technical space targeted.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -34408,7 +34406,6 @@ technical space targeted.
           <dia:attribute name="comment">
             <dia:string>#Name of the underlying element to use for the enumeration.
 
-#DOGEN masd.variability.qualified_name=masd.enumeration.underlying_element
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -34432,9 +34429,7 @@ technical space targeted.
             <dia:string>#"false"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If true, uses the enumeration values supplied by the underlying technical space.
-
-#DOGEN masd.variability.qualified_name=masd.enumeration.use_implementation_defined_enumerator_values#</dia:string>
+            <dia:string>#If true, uses the enumeration values supplied by the underlying technical space.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -34457,9 +34452,7 @@ technical space targeted.
             <dia:string>#"true"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If true, adds an enumerator to represent an invalid choice.
-
-#DOGEN masd.variability.qualified_name=masd.enumeration.add_invalid_enumerator#</dia:string>
+            <dia:string>#If true, adds an enumerator to represent an invalid choice.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -34599,7 +34592,6 @@ technical space targeted.
           <dia:attribute name="comment">
             <dia:string>#Value to use for this enumerator. Must be unique for an enumeration.
 
-#DOGEN masd.variability.qualified_name=masd.enumerator.value
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -34739,7 +34731,6 @@ technical space targeted.
           <dia:attribute name="comment">
             <dia:string>#Whether to mark a type as final or not.
 
-#DOGEN masd.variability.qualified_name=masd.generalization.is_final
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -34765,7 +34756,6 @@ technical space targeted.
           <dia:attribute name="comment">
             <dia:string>#Name of the parent of the current element.
 
-#DOGEN masd.variability.qualified_name=masd.generalization.parent
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -34903,9 +34893,7 @@ technical space targeted.
             <dia:string>#"false"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If true, sets the origin of the model to "proxy model".
-
-#DOGEN masd.variability.qualified_name=masd.injection.is_proxy_model#</dia:string>
+            <dia:string>#If true, sets the origin of the model to "proxy model".#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35045,7 +35033,6 @@ technical space targeted.
           <dia:attribute name="comment">
             <dia:string>#Set of output technical spaces that this model targets.
 
-#DOGEN masd.variability.qualified_name=masd.extraction.output_technical_space
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -35186,7 +35173,6 @@ technical space targeted.
           <dia:attribute name="comment">
             <dia:string>#Name of the underlying element to use for the primitive.
 
-#DOGEN masd.variability.qualified_name=masd.primitive.underlying_element
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -35210,9 +35196,7 @@ technical space targeted.
             <dia:string>#"false"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If true, the primitive can be null.
-
-#DOGEN masd.variability.qualified_name=masd.primitive.is_nullable#</dia:string>
+            <dia:string>#If true, the primitive can be null.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35236,9 +35220,7 @@ technical space targeted.
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#If true, use type aliasing to implement the primitive if the technical space supports
-it.
-
-#DOGEN masd.variability.qualified_name=masd.primitive.use_type_aliasing#</dia:string>
+it.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -35378,7 +35360,6 @@ it.
             <dia:string>#Database system to target for ORM support.
 
 #DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.orm.database_system
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -35405,7 +35386,6 @@ it.
             <dia:string>#Name of the database table for this element.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.orm.table_name
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -35432,7 +35412,6 @@ it.
             <dia:string>#Name of the database schema for this modeling element.
 
 #DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.orm.schema_name
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -35459,7 +35438,6 @@ it.
             <dia:string>#If true, this property will be used for the primary key.
 
 #DOGEN masd.variability.binding_point=property
-#DOGEN masd.variability.qualified_name=masd.orm.is_primary_key
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -35486,7 +35464,6 @@ it.
             <dia:string>#Overrides the name of the column name for the database table.
 
 #DOGEN masd.variability.binding_point=property
-#DOGEN masd.variability.qualified_name=masd.orm.column_name
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -35513,7 +35490,6 @@ it.
             <dia:string>#If true, the column can be null.
 
 #DOGEN masd.variability.binding_point=property
-#DOGEN masd.variability.qualified_name=masd.orm.is_nullable
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -35540,7 +35516,6 @@ it.
             <dia:string>#If true, the primary key is a composite key.
 
 #DOGEN masd.variability.binding_point=property
-#DOGEN masd.variability.qualified_name=masd.orm.is_composite
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -35567,7 +35542,6 @@ it.
             <dia:string>#Determines the casing to use for identifiers.
 
 #DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.qualified_name=masd.orm.letter_case
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -35597,7 +35571,6 @@ Note: we've set the binding point to "any" as a hack to allow for primitive supp
 Should really be "property".
 
 #DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.orm.type_override
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -35627,7 +35600,6 @@ Note: we've set the binding point to "any" as a hack to allow for primitive supp
 Should really be "property".
 
 #DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.orm.type_mapping
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -35657,7 +35629,6 @@ Use these when you need some functionality which is not natively supported by
 ORM in Dogen.
 
 #DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.orm.odb_pragma
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -35797,7 +35768,6 @@ ORM in Dogen.
           <dia:attribute name="comment">
             <dia:string>#Editor to use in this modeline.
 
-#DOGEN masd.variability.qualified_name=masd.decoration.modeline.editor
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -35823,7 +35793,6 @@ ORM in Dogen.
           <dia:attribute name="comment">
             <dia:string>#Where to place the modeline.
 
-#DOGEN masd.variability.qualified_name=masd.decoration.modeline.location
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -35849,7 +35818,6 @@ ORM in Dogen.
           <dia:attribute name="comment">
             <dia:string>#Technical space targeted by the modeline.
 
-#DOGEN masd.variability.qualified_name=masd.decoration.modeline.technical_space
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -35875,7 +35843,7 @@ ORM in Dogen.
         <dia:point val="105,65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="104.95,64.95;124.8,71.85"/>
+        <dia:rectangle val="104.95,64.95;124.8,71.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="105,65"/>
@@ -35884,7 +35852,7 @@ ORM in Dogen.
         <dia:real val="19.75"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#variability_templates#</dia:string>
@@ -35990,7 +35958,6 @@ ORM in Dogen.
             <dia:string>#Where does this feature bind into.
 
 #DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.variability.binding_point
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -36017,7 +35984,6 @@ ORM in Dogen.
             <dia:string>#Stereotype for this profile. Must be globally unique.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.variability.stereotype
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -36047,36 +36013,6 @@ Value as meta-data should be used only for collections, for single values prefer
 the default value field if available.
 
 #DOGEN masd.variability.binding_point=property
-#DOGEN masd.variability.qualified_name=masd.variability.value
-#DOGEN masd.variability.is_optional=true#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#qualified_name#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#masd::variability::text#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Qualified name for this feature template.
-
-Should only be supplied for instance templates.
-
-#DOGEN masd.variability.binding_point=property
-#DOGEN masd.variability.qualified_name=masd.variability.qualified_name
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -36102,8 +36038,7 @@ Should only be supplied for instance templates.
           <dia:attribute name="comment">
             <dia:string>#If true, the feature template provides an optional feature.
 
-#DOGEN masd.variability.binding_point=property
-#DOGEN masd.variability.qualified_name=masd.variability.is_optional#</dia:string>
+#DOGEN masd.variability.binding_point=property#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -37799,7 +37734,6 @@ extend the mappings as required.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#Type that is the source of the mapping.
 
-#DOGEN masd.variability.qualified_name=masd.mapping.target
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -37825,7 +37759,6 @@ extend the mappings as required.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#Type that is the destination of the mapping.
 
-#DOGEN masd.variability.qualified_name=masd.mapping.destination
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -38839,8 +38772,7 @@ At present the system only supports wale templates.#</dia:string>
 
 @pre Features must not already exist.
 
-#DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.variability.generate_registration#</dia:string>
+#DOGEN masd.variability.binding_point=element#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -38865,8 +38797,7 @@ At present the system only supports wale templates.#</dia:string>
           <dia:attribute name="comment">
             <dia:string>#If true, generates a c++ class to contain the configuration at compile time.
 
-#DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.variability.generate_static_configuration#</dia:string>
+#DOGEN masd.variability.binding_point=element#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -38892,7 +38823,6 @@ At present the system only supports wale templates.#</dia:string>
             <dia:string>#Where does this bundle bind to.
 
 #DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.variability.default_binding_point
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -38919,7 +38849,6 @@ At present the system only supports wale templates.#</dia:string>
             <dia:string>#Template instantiation domain name to use when instantiating template.
 
 #DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.variability.instantiation_domain_name
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -38946,7 +38875,6 @@ At present the system only supports wale templates.#</dia:string>
             <dia:string>#Prefix to apply to construct the qualified name, if any.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.variability.key_prefix
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -48191,7 +48119,6 @@ Both of these aspects are optional, but at least one must be chosen.#</dia:strin
             <dia:string>#Where does this profile or profile template bind to.
 
 #DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.variability.default_binding_point
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -48221,7 +48148,6 @@ Value as meta-data should be used only for collections, for single values prefer
 the default value field if available.
 
 #DOGEN masd.variability.binding_point=property
-#DOGEN masd.variability.qualified_name=masd.variability.value
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -48248,7 +48174,6 @@ the default value field if available.
             <dia:string>#Template instantiation domain name to use when instantiating template.
 
 #DOGEN masd.variability.binding_point=any
-#DOGEN masd.variability.qualified_name=masd.variability.instantiation_domain_name
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -48390,7 +48315,6 @@ the default value field if available.
             <dia:string>#Stereotype for this profile. Must be globally unique.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.variability.stereotype
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -48417,7 +48341,6 @@ the default value field if available.
             <dia:string>#Prefix to apply to construct the qualified name, if any.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd.variability.key_prefix
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">

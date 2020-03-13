@@ -825,10 +825,7 @@
         {
           "name": "profile",
           "type": "masd::variability::text",
-          "documentation": "Profile associated with this configuration.\n",
-          "tagged_values": {
-            "masd.variability.qualified_name": "masd.variability.profile"
-          }
+          "documentation": "Profile associated with this configuration.\n"
         }
       ]
     },
