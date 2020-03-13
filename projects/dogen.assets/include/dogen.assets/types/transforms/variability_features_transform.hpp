@@ -75,7 +75,8 @@ private:
         const features::variability_templates::feature_group& fg1,
         const std::unordered_map<std::string, std::string>& fixed_mappings,
         const boost::optional<variability::meta_model::binding_point>&
-        default_binding_point, meta_model::variability::abstract_feature& af);
+        default_binding_point, const std::string& key_prefix,
+        meta_model::variability::abstract_feature& af);
 
 private:
     /**

@@ -28,7 +28,6 @@
 #include "dogen.assets/types/helpers/name_builder.hpp"
 #include "dogen.assets/types/helpers/name_factory.hpp"
 #include "dogen.engine/types/helpers/adaptation_exception.hpp"
-#include "dogen.assets/types/helpers/string_processor.hpp"
 #include "dogen.engine/types/helpers/stereotypes_helper.hpp"
 #include "dogen.engine/types/helpers/adapter.hpp"
 
@@ -447,10 +446,7 @@ void adapter::populate_abstract_feature(
 
     assets::helpers::name_factory f;
     af.name(f.build_attribute_name(bundle_name, n));
-    af.key(n);
-
-    assets::helpers::string_processor sp;
-    af.identifiable_key(sp.to_identifiable(n));
+    af.original_key(n);
     af.value(ia.value());
     af.unparsed_type(ia.type());
 

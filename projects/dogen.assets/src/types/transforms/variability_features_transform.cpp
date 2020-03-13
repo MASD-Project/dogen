@@ -19,7 +19,6 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include "dogen.assets/types/meta_model/variability/abstract_feature.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/helpers/enum_mapper.hpp"
@@ -29,7 +28,9 @@
 #include "dogen.assets/types/meta_model/attribute.hpp"
 #include "dogen.assets/types/meta_model/variability/initializer.hpp"
 #include "dogen.assets/types/transforms/context.hpp"
+#include "dogen.assets/types/helpers/string_processor.hpp"
 #include "dogen.assets/types/transforms/transformation_error.hpp"
+#include "dogen.assets/types/meta_model/variability/abstract_feature.hpp"
 #include "dogen.assets/types/transforms/variability_features_transform.hpp"
 
 namespace {
@@ -41,6 +42,8 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
 const std::string empty;
+const std::string dot(".");
+
 const std::string empty_domain("Domain name cannot be empty: ");
 const std::string fixed_mapping_not_found("Fixed mapping not found: ");
 const std::string too_many_bindings(
@@ -110,10 +113,30 @@ void variability_features_transform::process_abstract_feature(
     const features::variability_templates::feature_group& fg1,
     const std::unordered_map<std::string, std::string>& fixed_mappings,
     const boost::optional<variability::meta_model::binding_point>&
-    default_binding_point, meta_model::variability::abstract_feature& af) {
+    default_binding_point, const std::string& key_prefix,
+    meta_model::variability::abstract_feature& af) {
 
     update(fg1, af);
 
+    /*
+     * If a key prefix was supplied, we must merge the original key
+     * with the key prefix. Otherwise, use the original key as the
+     * key.
+     */
+    if (!key_prefix.empty())
+        af.key(key_prefix + dot + af.original_key());
+    else
+        af.key(af.original_key());
+
+    /*
+     * Generate an identifiable version of the key.
+     */
+    assets::helpers::string_processor sp;
+    af.identifiable_key(sp.to_identifiable(af.key()));
+
+    /*
+     * Handle binding.
+     */
     const bool is_bound(default_binding_point.is_initialized());
     if (is_bound) {
         /*
@@ -228,9 +251,10 @@ process_feature_template_bundles(
                 transformation_error(bundle_generates_nothing + id));
         }
 
+        const auto kp(fb.key_prefix());
         const auto& dbp(fb.default_binding_point());
         for (auto& ft : fb.feature_templates())
-            process_abstract_feature(fg2, fixed_mappings, dbp, ft);
+            process_abstract_feature(fg2, fixed_mappings, dbp, kp, ft);
     }
 }
 
@@ -273,9 +297,10 @@ process_feature_bundles(const variability::meta_model::feature_model& fm,
                 transformation_error(bundle_generates_nothing + id));
         }
 
+        const auto kp(fb.key_prefix());
         const auto& dbp(fb.default_binding_point());
         for (auto& f : fb.features())
-            process_abstract_feature(fg2, fixed_mappings, dbp, f);
+            process_abstract_feature(fg2, fixed_mappings, dbp, kp, f);
     }
 }
 
