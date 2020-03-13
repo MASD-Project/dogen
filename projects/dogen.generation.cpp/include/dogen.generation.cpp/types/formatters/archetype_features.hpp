@@ -37,7 +37,6 @@ namespace dogen::generation::cpp::formatters {
 class archetype_features final {
 public:
     struct feature_group {
-        variability::meta_model::feature overwrite;
         variability::meta_model::feature primary_inclusion_directive;
         variability::meta_model::feature secondary_inclusion_directive;
     };
@@ -47,12 +46,8 @@ public:
 
 public:
     struct static_configuration {
-        bool overwrite;
         std::string primary_inclusion_directive;
         std::list<std::string> secondary_inclusion_directive;
-
-        static_configuration() :
-            overwrite() {}
     };
 
     static static_configuration make_static_configuration(

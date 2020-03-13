@@ -1774,10 +1774,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "overwrite",
-          "type": "masd::variability::boolean"
-        },
-        {
           "name": "primary_inclusion_directive",
           "type": "masd::variability::text"
         },

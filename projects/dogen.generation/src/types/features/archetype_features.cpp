@@ -44,6 +44,20 @@ make_postfix() {
     return r;
 }
 
+dogen::variability::meta_model::feature_template
+make_overwrite() {
+    using namespace dogen::variability::meta_model;
+    feature_template r;
+    r.name().simple("overwrite");
+    const auto vt(value_type::boolean);
+    r.value_type(vt);
+    r.binding_point(binding_point::element);
+    r.instantiation_domain_name("masd.archetype");
+    dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ "true" }));
+    return r;
+}
+
 }
 
 archetype_features::feature_group
@@ -52,6 +66,7 @@ archetype_features::make_feature_group(const dogen::variability::meta_model::fea
     const dogen::variability::helpers::feature_selector s(fm);
 
     r.postfix = s.get_by_name("postfix");
+    r.overwrite = s.get_by_name("overwrite");
 
     return r;
 }
@@ -63,6 +78,7 @@ archetype_features::static_configuration archetype_features::make_static_configu
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
     r.postfix = s.get_text_content_or_default(fg.postfix);
+    r.overwrite = s.get_boolean_content_or_default(fg.overwrite);
     return r;
 }
 
@@ -71,6 +87,7 @@ archetype_features::make_templates() {
     using namespace dogen::variability::meta_model;
     std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_postfix());
+    r.push_back(make_overwrite());
     return r;
 }
 

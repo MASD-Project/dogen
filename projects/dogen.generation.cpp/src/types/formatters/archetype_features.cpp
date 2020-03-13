@@ -28,18 +28,6 @@ namespace dogen::generation::cpp::formatters {
 namespace {
 
 dogen::variability::meta_model::feature_template
-make_overwrite() {
-    using namespace dogen::variability::meta_model;
-    feature_template r;
-    r.name().simple("overwrite");
-    const auto vt(value_type::boolean);
-    r.value_type(vt);
-    r.binding_point(binding_point::element);
-    r.instantiation_domain_name("masd.generation.cpp.archetype");
-    return r;
-}
-
-dogen::variability::meta_model::feature_template
 make_primary_inclusion_directive() {
     using namespace dogen::variability::meta_model;
     feature_template r;
@@ -70,7 +58,6 @@ archetype_features::make_feature_group(const dogen::variability::meta_model::fea
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
-    r.overwrite = s.get_by_name("overwrite");
     r.primary_inclusion_directive = s.get_by_name("primary_inclusion_directive");
     r.secondary_inclusion_directive = s.get_by_name("secondary_inclusion_directive");
 
@@ -83,7 +70,6 @@ archetype_features::static_configuration archetype_features::make_static_configu
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    r.overwrite = s.get_boolean_content(fg.overwrite);
     r.primary_inclusion_directive = s.get_text_content(fg.primary_inclusion_directive);
     r.secondary_inclusion_directive = s.get_text_collection_content(fg.secondary_inclusion_directive);
     return r;
@@ -93,7 +79,6 @@ std::list<dogen::variability::meta_model::feature_template>
 archetype_features::make_templates() {
     using namespace dogen::variability::meta_model;
     std::list<dogen::variability::meta_model::feature_template> r;
-    r.push_back(make_overwrite());
     r.push_back(make_primary_inclusion_directive());
     r.push_back(make_secondary_inclusion_directive());
     return r;

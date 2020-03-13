@@ -16565,16 +16565,16 @@ code: identation and dividers.#</dia:string>
         <dia:point val="258,154"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="257.95,153.95;276.26,157.65"/>
+        <dia:rectangle val="257.95,153.95;276.645,158.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="258,154"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.210000000000001"/>
+        <dia:real val="18.594999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#archetype_features#</dia:string>
@@ -16585,7 +16585,6 @@ code: identation and dividers.#</dia:string>
       <dia:attribute name="comment">
         <dia:string>#Features common to all archetypes.
 
-#DOGEN masd.variability.default_binding_point=global
 #DOGEN masd.variability.instantiation_domain_name=masd.archetype#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -16678,8 +16677,32 @@ code: identation and dividers.#</dia:string>
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.default_value_override.forward_declarations="fwd"
+            <dia:string>##DOGEN masd.variability.binding_point=global
+#DOGEN masd.variability.default_value_override.forward_declarations="fwd"
 #</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#overwrite#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#masd::variability::boolean#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>#"true"#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##DOGEN masd.variability.binding_point=element#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
