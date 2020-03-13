@@ -97,8 +97,8 @@ make_<#= ft.identifiable_key() #>() {
                         for (const auto& dvo : ft.default_value_overrides()) {
 #>
     r.default_value_overrides().push_back(
-        default_value_override("<#= dvo.key_ends_with() #>", 
-            f.make(vt, std::list<std::string>{ <#= dvo.default_value() #> }));
+        default_value_override("<#= dvo.key_ends_with() #>",
+            f.make(vt, std::list<std::string>{ <#= dvo.default_value() #> })));
 <#+
                        }
                    }

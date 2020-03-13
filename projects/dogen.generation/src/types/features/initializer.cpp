@@ -22,12 +22,14 @@
 #include "dogen.generation/types/features/enablement.hpp"
 #include "dogen.generation/types/features/formatting.hpp"
 #include "dogen.generation/types/features/initializer.hpp"
+#include "dogen.generation/types/features/facet_features.hpp"
 
 namespace dogen::generation::features {
 
 void initializer::
 register_entities(variability::helpers::registrar& rg) {
     rg.register_templates(dogen::generation::features::enablement::make_templates());
+    rg.register_templates(dogen::generation::features::facet_features::make_templates());
     rg.register_templates(dogen::generation::features::formatting::make_templates());
     rg.register_features(dogen::generation::features::decoration::make_features());
 }
