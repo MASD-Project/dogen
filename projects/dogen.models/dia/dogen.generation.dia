@@ -16245,7 +16245,7 @@ code: identation and dividers.#</dia:string>
 #DOGEN masd.variability.instantiation_domain_name=masd#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
-        <dia:boolean val="false"/>
+        <dia:boolean val="true"/>
       </dia:attribute>
       <dia:attribute name="suppress_attributes">
         <dia:boolean val="false"/>
