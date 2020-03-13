@@ -817,24 +817,6 @@
       ]
     },
     {
-      "name": "formatters::facet_features",
-      "stereotypes": [
-        "masd::variability::feature_template_bundle"
-      ],
-      "tagged_values": {
-        "masd.variability.default_binding_point": "element",
-        "masd.variability.instantiation_domain_name": "masd.generation.csharp.facet"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "supported",
-          "type": "masd::variability::boolean",
-          "value": "\"true\""
-        }
-      ]
-    },
-    {
       "name": "csharp_artefact_formatter_header",
       "stereotypes": [
         "masd::templating::logic_less_templates"

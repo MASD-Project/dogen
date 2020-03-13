@@ -19,7 +19,6 @@
  *
  */
 #include "dogen.generation.cpp/types/feature_initializer.hpp"
-#include "dogen.generation.cpp/types/formatters/facet_features.hpp"
 #include "dogen.generation.cpp/types/formatters/global_features.hpp"
 #include "dogen.generation.cpp/types/formatters/archetype_features.hpp"
 
@@ -28,7 +27,6 @@ namespace dogen::generation::cpp {
 void feature_initializer::
 register_entities(variability::helpers::registrar& rg) {
     rg.register_templates(dogen::generation::cpp::formatters::archetype_features::make_templates());
-    rg.register_templates(dogen::generation::cpp::formatters::facet_features::make_templates());
     rg.register_features(dogen::generation::cpp::formatters::global_features::make_features());
 }
 
