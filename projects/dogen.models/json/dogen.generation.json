@@ -1129,6 +1129,22 @@
             "masd.variability.default_value_override.csharp.io": "\"Dumpers\"",
             "masd.variability.default_value_override.csharp.test_data": "\"SequenceGenerators\""
           }
+        },
+        {
+          "name": "postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "tagged_values": {
+            "masd.variability.default_value_override.cpp.tests": "\"tests\"",
+            "masd.variability.default_value_override.cpp.hash": "\"hash\"",
+            "masd.variability.default_value_override.cpp.lexical_cast": "\"lc\"",
+            "masd.variability.default_value_override.cpp.io": "\"io\"",
+            "masd.variability.default_value_override.cpp.odb": "\"pragmas\"",
+            "masd.variability.default_value_override.cpp.test_data": "\"td\"",
+            "masd.variability.default_value_override.cpp.serialization": "\"ser\"",
+            "masd.variability.default_value_override.csharp.io": "\"Dumper\"",
+            "masd.variability.default_value_override.csharp.test_data": "\"SequenceGenerator\""
+          }
         }
       ]
     }

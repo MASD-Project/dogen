@@ -753,11 +753,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        },
-        {
           "name": "class.postfix",
           "type": "masd::variability::text",
           "value": "\"\""
@@ -803,11 +798,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.csharp.io.postfix",
-          "type": "masd::variability::text",
-          "value": "\"Dumper\""
-        },
-        {
           "name": "masd.generation.csharp.io.class.postfix",
           "type": "masd::variability::text",
           "value": "\"\""
@@ -846,11 +836,6 @@
       },
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "postfix",
-          "type": "masd::variability::text",
-          "value": "\"SequenceGenerator\""
-        },
         {
           "name": "class.postfix",
           "type": "masd::variability::text",
@@ -1042,11 +1027,6 @@
       },
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        },
         {
           "name": "solution.postfix",
           "type": "masd::variability::text",

@@ -1576,11 +1576,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        },
-        {
           "name": "class_header.postfix",
           "type": "masd::variability::text",
           "value": "\"\""
@@ -1707,11 +1702,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "postfix",
-          "type": "masd::variability::text",
-          "value": "\"hash\""
-        },
-        {
           "name": "class_header.postfix",
           "type": "masd::variability::text",
           "value": "\"\""
@@ -1766,11 +1756,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "postfix",
-          "type": "masd::variability::text",
-          "value": "\"io\""
-        },
-        {
           "name": "class_header.postfix",
           "type": "masd::variability::text",
           "value": "\"\""
@@ -1823,14 +1808,6 @@
       },
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "postfix",
-          "type": "masd::variability::text",
-          "value": "\"pragmas\"",
-          "tagged_values": {
-            "masd.variability.binding_point": "global"
-          }
-        },
         {
           "name": "class_header.postfix",
           "type": "masd::variability::text",
@@ -1918,11 +1895,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "postfix",
-          "type": "masd::variability::text",
-          "value": "\"td\""
-        },
-        {
           "name": "class_header.postfix",
           "type": "masd::variability::text",
           "value": "\"\""
@@ -1976,11 +1948,6 @@
       },
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "postfix",
-          "type": "masd::variability::text",
-          "value": "\"ser\""
-        },
         {
           "name": "class_header.postfix",
           "type": "masd::variability::text",
@@ -2050,11 +2017,6 @@
       },
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "postfix",
-          "type": "masd::variability::text",
-          "value": "\"tests\""
-        },
         {
           "name": "class_implementation.postfix",
           "type": "masd::variability::text",
@@ -2364,11 +2326,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "postfix",
-          "type": "masd::variability::text",
-          "value": "\"lc\""
-        },
-        {
           "name": "enum_header.postfix",
           "type": "masd::variability::text",
           "value": "\"\""
@@ -2476,11 +2433,6 @@
       },
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        },
         {
           "name": "logic_less_template.postfix",
           "type": "masd::variability::text",
@@ -2592,11 +2544,6 @@
       },
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        },
         {
           "name": "solution.postfix",
           "type": "masd::variability::text",
@@ -2712,11 +2659,6 @@
       },
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "postfix",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        },
         {
           "name": "include_cmakelists.postfix",
           "type": "masd::variability::text",

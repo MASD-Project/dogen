@@ -26,20 +26,6 @@ namespace dogen::generation::cpp::formatters::test_data {
 namespace {
 
 dogen::variability::meta_model::feature
-make_masd_generation_cpp_test_data_postfix() {
-    using namespace dogen::variability::meta_model;
-    feature r;
-    r.name().simple("postfix");
-    r.name().qualified("masd.generation.cpp.test_data.postfix");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::global);
-    dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "td" }));
-    return r;
-}
-
-dogen::variability::meta_model::feature
 make_masd_generation_cpp_test_data_class_header_postfix() {
     using namespace dogen::variability::meta_model;
     feature r;
@@ -158,7 +144,6 @@ std::list<dogen::variability::meta_model::feature>
 features::make_features() {
     using namespace dogen::variability::meta_model;
     std::list<dogen::variability::meta_model::feature> r;
-    r.push_back(make_masd_generation_cpp_test_data_postfix());
     r.push_back(make_masd_generation_cpp_test_data_class_header_postfix());
     r.push_back(make_masd_generation_cpp_test_data_class_implementation_postfix());
     r.push_back(make_masd_generation_cpp_test_data_enum_header_postfix());

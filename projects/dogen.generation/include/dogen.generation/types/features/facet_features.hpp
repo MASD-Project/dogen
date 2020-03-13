@@ -41,6 +41,7 @@ class facet_features final {
 public:
     struct feature_group {
         variability::meta_model::feature directory;
+        variability::meta_model::feature postfix;
     };
 
     static feature_group
@@ -49,6 +50,7 @@ public:
 public:
     struct static_configuration {
         std::string directory;
+        std::string postfix;
     };
 
     static static_configuration make_static_configuration(

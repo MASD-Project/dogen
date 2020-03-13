@@ -77,6 +77,47 @@ make_directory() {
     return r;
 }
 
+dogen::variability::meta_model::feature_template
+make_postfix() {
+    using namespace dogen::variability::meta_model;
+    feature_template r;
+    r.name().simple("postfix");
+    const auto vt(value_type::text);
+    r.value_type(vt);
+    r.binding_point(binding_point::global);
+    r.instantiation_domain_name("masd.facet");
+    dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ "" }));
+    r.default_value_overrides().push_back(
+        default_value_override("cpp.tests",
+            f.make(vt, std::list<std::string>{ "tests" })));
+    r.default_value_overrides().push_back(
+        default_value_override("cpp.lexical_cast",
+            f.make(vt, std::list<std::string>{ "lc" })));
+    r.default_value_overrides().push_back(
+        default_value_override("cpp.io",
+            f.make(vt, std::list<std::string>{ "io" })));
+    r.default_value_overrides().push_back(
+        default_value_override("cpp.odb",
+            f.make(vt, std::list<std::string>{ "pragmas" })));
+    r.default_value_overrides().push_back(
+        default_value_override("cpp.serialization",
+            f.make(vt, std::list<std::string>{ "ser" })));
+    r.default_value_overrides().push_back(
+        default_value_override("csharp.io",
+            f.make(vt, std::list<std::string>{ "Dumper" })));
+    r.default_value_overrides().push_back(
+        default_value_override("cpp.hash",
+            f.make(vt, std::list<std::string>{ "hash" })));
+    r.default_value_overrides().push_back(
+        default_value_override("cpp.test_data",
+            f.make(vt, std::list<std::string>{ "td" })));
+    r.default_value_overrides().push_back(
+        default_value_override("csharp.test_data",
+            f.make(vt, std::list<std::string>{ "SequenceGenerator" })));
+    return r;
+}
+
 }
 
 facet_features::feature_group
@@ -85,6 +126,7 @@ facet_features::make_feature_group(const dogen::variability::meta_model::feature
     const dogen::variability::helpers::feature_selector s(fm);
 
     r.directory = s.get_by_name("directory");
+    r.postfix = s.get_by_name("postfix");
 
     return r;
 }
@@ -96,6 +138,7 @@ facet_features::static_configuration facet_features::make_static_configuration(
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
     r.directory = s.get_text_content_or_default(fg.directory);
+    r.postfix = s.get_text_content_or_default(fg.postfix);
     return r;
 }
 
@@ -104,6 +147,7 @@ facet_features::make_templates() {
     using namespace dogen::variability::meta_model;
     std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_directory());
+    r.push_back(make_postfix());
     return r;
 }
 
