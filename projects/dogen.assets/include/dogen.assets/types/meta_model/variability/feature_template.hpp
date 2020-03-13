@@ -25,9 +25,11 @@
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
 #include <algorithm>
 #include "dogen.assets/types/meta_model/variability/abstract_feature.hpp"
+#include "dogen.assets/types/meta_model/variability/default_value_override.hpp"
 
 namespace dogen::assets::meta_model::variability {
 
@@ -59,10 +61,17 @@ public:
         const dogen::variability::meta_model::value_type value_type,
         const boost::optional<dogen::variability::meta_model::binding_point>& binding_point,
         const bool is_optional,
-        const bool requires_optionality);
+        const bool requires_optionality,
+        const std::list<dogen::assets::meta_model::variability::default_value_override>& default_value_overrides);
 
 public:
     void to_stream(std::ostream& s) const override;
+
+public:
+    const std::list<dogen::assets::meta_model::variability::default_value_override>& default_value_overrides() const;
+    std::list<dogen::assets::meta_model::variability::default_value_override>& default_value_overrides();
+    void default_value_overrides(const std::list<dogen::assets::meta_model::variability::default_value_override>& v);
+    void default_value_overrides(const std::list<dogen::assets::meta_model::variability::default_value_override>&& v);
 
 public:
     bool operator==(const feature_template& rhs) const;
@@ -77,6 +86,8 @@ public:
     void swap(feature_template& other) noexcept;
     feature_template& operator=(feature_template other);
 
+private:
+    std::list<dogen::assets::meta_model::variability::default_value_override> default_value_overrides_;
 };
 
 }

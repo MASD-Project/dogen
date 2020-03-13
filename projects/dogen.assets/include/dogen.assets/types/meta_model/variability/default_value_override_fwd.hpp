@@ -18,16 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen.assets/io/meta_model/variability/abstract_feature_io.hpp"
-#include "dogen.assets/io/meta_model/variability/feature_template_io.hpp"
-#include "dogen.assets/io/meta_model/variability/default_value_override_io.hpp"
+#ifndef DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_DEFAULT_VALUE_OVERRIDE_FWD_HPP
+#define DOGEN_ASSETS_TYPES_META_MODEL_VARIABILITY_DEFAULT_VALUE_OVERRIDE_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen::assets::meta_model::variability {
 
-std::ostream& operator<<(std::ostream& s, const feature_template& v) {
-    v.to_stream(s);
-    return(s);
-}
+class default_value_override;
 
 }
+
+#endif

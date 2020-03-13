@@ -19,14 +19,25 @@
  *
  */
 #include <ostream>
-#include "dogen.assets/io/meta_model/variability/abstract_feature_io.hpp"
-#include "dogen.assets/io/meta_model/variability/feature_template_io.hpp"
+#include <boost/algorithm/string.hpp>
 #include "dogen.assets/io/meta_model/variability/default_value_override_io.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
 
 namespace dogen::assets::meta_model::variability {
 
-std::ostream& operator<<(std::ostream& s, const feature_template& v) {
-    v.to_stream(s);
+std::ostream& operator<<(std::ostream& s, const default_value_override& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::assets::meta_model::variability::default_value_override\"" << ", "
+      << "\"key_ends_with\": " << "\"" << tidy_up_string(v.key_ends_with()) << "\"" << ", "
+      << "\"default_value\": " << "\"" << tidy_up_string(v.default_value()) << "\""
+      << " }";
     return(s);
 }
 

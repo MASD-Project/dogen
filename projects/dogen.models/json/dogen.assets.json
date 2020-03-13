@@ -1970,7 +1970,13 @@
         "meta_model::variability::abstract_feature"
       ],
       "documentation": "Represents a feature template in variability space.\n\nFeature templates are expanded into features within the variability model.\n",
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "default_value_overrides",
+          "type": "std::list<default_value_override>"
+        }
+      ]
     },
     {
       "name": "meta_model::variability::initializer",
@@ -3905,6 +3911,20 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "meta_model::variability::default_value_override",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "key_ends_with",
+          "type": "std::string"
+        },
+        {
+          "name": "default_value",
+          "type": "std::string"
+        }
+      ]
     }
   ]
 }
