@@ -30,6 +30,9 @@
 
 namespace dogen {
 
+/**
+ * @brief Converts a supported model type into another.
+ */
 class converter {
 public:
     converter() = default;

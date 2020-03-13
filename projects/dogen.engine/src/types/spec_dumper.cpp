@@ -18,12 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.engine/types/transforms/scoped_context_manager.hpp"
 #include "dogen.engine/types/spec_dumper.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("engine.spec_dumper"));
+
+const std::string activity("dumpspecs");
+
+}
 
 namespace dogen::engine {
 
-bool spec_dumper::operator==(const spec_dumper& /*rhs*/) const {
-    return true;
+void spec_dumper::dump(const configuration& cfg
+    ) const {
+
+    BOOST_LOG_SEV(lg, debug) << "Started dumping specs.";
+
+    {
+        using namespace transforms;
+        scoped_context_manager scm(cfg, activity, "");
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished dumping specs.";
 }
 
 }

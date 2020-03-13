@@ -29,6 +29,7 @@
 #include <ostream>
 #include "dogen/types/converter.hpp"
 #include "dogen/types/generator.hpp"
+#include "dogen/types/spec_dumper.hpp"
 #include "dogen.cli/types/configuration.hpp"
 
 namespace dogen::cli {
@@ -45,7 +46,7 @@ public:
     application& operator=(const application&) = delete;
 
 public:
-    application(const converter& c, const generator& g);
+    application(const converter& c, const generator& g, const spec_dumper& sd);
 
 public:
     /**
@@ -58,6 +59,7 @@ public:
 private:
     const converter& converter_;
     const generator& generator_;
+    const spec_dumper& dumper_;
 };
 
 }

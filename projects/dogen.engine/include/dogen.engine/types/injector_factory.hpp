@@ -28,6 +28,7 @@
 #include <boost/di.hpp>
 #include "dogen.engine/types/converter.hpp"
 #include "dogen.engine/types/generator.hpp"
+#include "dogen.engine/types/spec_dumper.hpp"
 
 namespace dogen::engine {
 
@@ -40,7 +41,9 @@ public:
             bind<dogen::converter>
             .to<dogen::engine::converter>(),
             bind<dogen::generator>
-            .to<dogen::engine::generator>());
+            .to<dogen::engine::generator>(),
+            bind<dogen::spec_dumper>
+            .to<dogen::engine::spec_dumper>());
     }
 };
 

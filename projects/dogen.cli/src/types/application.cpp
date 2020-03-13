@@ -32,6 +32,7 @@ auto lg(logger_factory("cli.application"));
 
 using dogen::generator;
 using dogen::converter;
+using dogen::spec_dumper;
 using dogen::cli::configuration;
 using dogen::cli::application_exception;
 using dogen::cli::generation_configuration;
@@ -41,8 +42,8 @@ using dogen::cli::dumpspecs_configuration;
 class activity_dispatcher : public boost::static_visitor<> {
 public:
     activity_dispatcher(const converter& c, const generator& g,
-        const configuration& cfg)
-        : converter_(c), generator_(g), configuration_(cfg) {}
+        const spec_dumper& sd, const configuration& cfg)
+        : converter_(c), generator_(g), dumper_(sd), configuration_(cfg) {}
 
 public:
     void operator()(const conversion_configuration& cfg) const {
@@ -56,11 +57,13 @@ public:
     }
 
     void operator()(const dumpspecs_configuration&) const {
+        dumper_.dump(configuration_.api());
     }
 
 private:
     const converter& converter_;
     const generator& generator_;
+    const spec_dumper& dumper_;
     const configuration& configuration_;
 };
 
@@ -69,8 +72,8 @@ private:
 namespace dogen::cli {
 
 application::
-application(const converter& c, const generator& g)
-    : converter_(c), generator_(g) {}
+application(const converter& c, const generator& g, const spec_dumper& sd)
+    : converter_(c), generator_(g), dumper_(sd) {}
 
 void application::run(const configuration& cfg) const {
     BOOST_LOG_SEV(lg, debug) << "Application started.";
@@ -80,7 +83,7 @@ void application::run(const configuration& cfg) const {
      * sense. No point in proceeding otherwise.
      */
     configuration_validator::validate(cfg);
-    activity_dispatcher d(converter_, generator_, cfg);
+    activity_dispatcher d(converter_, generator_, dumper_, cfg);
     boost::apply_visitor(d, cfg.cli().activity());
 
     BOOST_LOG_SEV(lg, debug) << "Application finished.";

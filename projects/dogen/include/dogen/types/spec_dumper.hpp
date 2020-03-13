@@ -25,24 +25,23 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/types/configuration.hpp"
 
 namespace dogen {
 
+/**
+ * @brief Dumps internal information from Dogen.
+ */
 class spec_dumper {
 public:
     spec_dumper() = default;
-    spec_dumper(const spec_dumper&) = default;
-    spec_dumper(spec_dumper&&) = default;
-    ~spec_dumper() = default;
-    spec_dumper& operator=(const spec_dumper&) = default;
+    spec_dumper(const spec_dumper&) = delete;
+    spec_dumper(spec_dumper&&) = delete;
+    virtual ~spec_dumper() noexcept = default;
+    spec_dumper& operator=(const spec_dumper&) = delete;
 
 public:
-    bool operator==(const spec_dumper& rhs) const;
-    bool operator!=(const spec_dumper& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    virtual void dump(const configuration& cfg) const = 0;
 };
 
 }

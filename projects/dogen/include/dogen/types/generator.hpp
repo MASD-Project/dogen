@@ -30,6 +30,9 @@
 
 namespace dogen {
 
+/**
+ * @brief Generates code for a given target model.
+ */
 class generator {
 public:
     generator() = default;

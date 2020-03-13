@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <algorithm>
 #include "dogen/types/spec_dumper.hpp"
 
 namespace dogen::engine {
@@ -33,20 +32,13 @@ namespace dogen::engine {
 class spec_dumper final : public dogen::spec_dumper {
 public:
     spec_dumper() = default;
-    spec_dumper(const spec_dumper&) = default;
-    spec_dumper(spec_dumper&&) = default;
-    spec_dumper& operator=(const spec_dumper&) = default;
-
-    virtual ~spec_dumper() noexcept { }
-
-public:
-    bool operator==(const spec_dumper& rhs) const;
-    bool operator!=(const spec_dumper& rhs) const {
-        return !this->operator==(rhs);
-    }
+    spec_dumper(const spec_dumper&) = delete;
+    spec_dumper(spec_dumper&&) = delete;
+    virtual ~spec_dumper() noexcept = default;
+    spec_dumper& operator=(const spec_dumper&) = delete;
 
 public:
-
+    virtual void dump(const dogen::configuration& cfg) const;
 };
 
 }
