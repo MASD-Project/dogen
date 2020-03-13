@@ -21,17 +21,40 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.variability/io/meta_model/value_io.hpp"
-#include "dogen.variability/io/meta_model/element_io.hpp"
-#include "dogen.variability/io/meta_model/value_type_io.hpp"
-#include "dogen.variability/io/meta_model/binding_point_io.hpp"
-#include "dogen.variability/io/meta_model/binding_action_io.hpp"
-#include "dogen.variability/io/meta_model/feature_template_io.hpp"
 #include "dogen.variability/io/meta_model/default_value_override_io.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::variability::meta_model::value>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
 
 namespace dogen::variability::meta_model {
 
-std::ostream& operator<<(std::ostream& s, const feature_template& v) {
-    v.to_stream(s);
+std::ostream& operator<<(std::ostream& s, const default_value_override& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::variability::meta_model::default_value_override\"" << ", "
+      << "\"key\": " << "\"" << tidy_up_string(v.key()) << "\"" << ", "
+      << "\"value\": " << v.value()
+      << " }";
     return(s);
 }
 

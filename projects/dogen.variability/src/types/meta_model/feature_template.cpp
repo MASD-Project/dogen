@@ -27,6 +27,7 @@
 #include "dogen.variability/io/meta_model/binding_point_io.hpp"
 #include "dogen.variability/io/meta_model/binding_action_io.hpp"
 #include "dogen.variability/types/meta_model/feature_template.hpp"
+#include "dogen.variability/io/meta_model/default_value_override_io.hpp"
 
 namespace boost {
 
@@ -61,6 +62,20 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::variability::meta_model::default_value_override>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen::variability::meta_model {
 
 feature_template::feature_template()
@@ -77,7 +92,8 @@ feature_template::feature_template(
     const dogen::variability::meta_model::binding_point binding_point,
     const dogen::variability::meta_model::binding_action profile_binding_action,
     const dogen::variability::meta_model::binding_action configuration_binding_action,
-    const std::string& instantiation_domain_name)
+    const std::string& instantiation_domain_name,
+    const std::list<dogen::variability::meta_model::default_value_override>& default_value_overrides)
     : dogen::variability::meta_model::element(
       name,
       description),
@@ -86,7 +102,8 @@ feature_template::feature_template(
       binding_point_(binding_point),
       profile_binding_action_(profile_binding_action),
       configuration_binding_action_(configuration_binding_action),
-      instantiation_domain_name_(instantiation_domain_name) { }
+      instantiation_domain_name_(instantiation_domain_name),
+      default_value_overrides_(default_value_overrides) { }
 
 void feature_template::to_stream(std::ostream& s) const {
     s << " { "
@@ -99,7 +116,8 @@ void feature_template::to_stream(std::ostream& s) const {
       << "\"binding_point\": " << binding_point_ << ", "
       << "\"profile_binding_action\": " << profile_binding_action_ << ", "
       << "\"configuration_binding_action\": " << configuration_binding_action_ << ", "
-      << "\"instantiation_domain_name\": " << "\"" << tidy_up_string(instantiation_domain_name_) << "\""
+      << "\"instantiation_domain_name\": " << "\"" << tidy_up_string(instantiation_domain_name_) << "\"" << ", "
+      << "\"default_value_overrides\": " << default_value_overrides_
       << " }";
 }
 
@@ -113,6 +131,7 @@ void feature_template::swap(feature_template& other) noexcept {
     swap(profile_binding_action_, other.profile_binding_action_);
     swap(configuration_binding_action_, other.configuration_binding_action_);
     swap(instantiation_domain_name_, other.instantiation_domain_name_);
+    swap(default_value_overrides_, other.default_value_overrides_);
 }
 
 bool feature_template::equals(const dogen::variability::meta_model::element& other) const {
@@ -128,7 +147,8 @@ bool feature_template::operator==(const feature_template& rhs) const {
         binding_point_ == rhs.binding_point_ &&
         profile_binding_action_ == rhs.profile_binding_action_ &&
         configuration_binding_action_ == rhs.configuration_binding_action_ &&
-        instantiation_domain_name_ == rhs.instantiation_domain_name_;
+        instantiation_domain_name_ == rhs.instantiation_domain_name_ &&
+        default_value_overrides_ == rhs.default_value_overrides_;
 }
 
 feature_template& feature_template::operator=(feature_template other) {
@@ -199,6 +219,22 @@ void feature_template::instantiation_domain_name(const std::string& v) {
 
 void feature_template::instantiation_domain_name(const std::string&& v) {
     instantiation_domain_name_ = std::move(v);
+}
+
+const std::list<dogen::variability::meta_model::default_value_override>& feature_template::default_value_overrides() const {
+    return default_value_overrides_;
+}
+
+std::list<dogen::variability::meta_model::default_value_override>& feature_template::default_value_overrides() {
+    return default_value_overrides_;
+}
+
+void feature_template::default_value_overrides(const std::list<dogen::variability::meta_model::default_value_override>& v) {
+    default_value_overrides_ = v;
+}
+
+void feature_template::default_value_overrides(const std::list<dogen::variability::meta_model::default_value_override>&& v) {
+    default_value_overrides_ = std::move(v);
 }
 
 }

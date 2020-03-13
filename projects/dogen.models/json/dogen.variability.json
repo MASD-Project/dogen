@@ -134,7 +134,14 @@
         "FeatureElement",
         "Templateable"
       ],
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "default_value_overrides",
+          "type": "std::list<default_value_override>",
+          "documentation": "Overrides for the default value, if any.\n"
+        }
+      ]
     },
     {
       "name": "meta_model::value_type",
@@ -896,6 +903,21 @@
         {
           "name": "templates",
           "type": "std::list<meta_model::profile_template>"
+        }
+      ]
+    },
+    {
+      "name": "meta_model::default_value_override",
+      "documentation": "Stores an override for a default value.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "key",
+          "type": "std::string"
+        },
+        {
+          "name": "value",
+          "type": "boost::shared_ptr<value>"
         }
       ]
     }

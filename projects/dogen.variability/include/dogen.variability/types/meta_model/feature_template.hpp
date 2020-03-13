@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
 #include <string>
 #include <algorithm>
@@ -34,6 +35,7 @@
 #include "dogen.variability/types/meta_model/value_type.hpp"
 #include "dogen.variability/types/meta_model/binding_point.hpp"
 #include "dogen.variability/types/meta_model/binding_action.hpp"
+#include "dogen.variability/types/meta_model/default_value_override.hpp"
 
 namespace dogen::variability::meta_model {
 
@@ -59,7 +61,8 @@ public:
         const dogen::variability::meta_model::binding_point binding_point,
         const dogen::variability::meta_model::binding_action profile_binding_action,
         const dogen::variability::meta_model::binding_action configuration_binding_action,
-        const std::string& instantiation_domain_name);
+        const std::string& instantiation_domain_name,
+        const std::list<dogen::variability::meta_model::default_value_override>& default_value_overrides);
 
 public:
     void to_stream(std::ostream& s) const override;
@@ -109,6 +112,16 @@ public:
     void instantiation_domain_name(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Overrides for the default value, if any.
+     */
+    /**@{*/
+    const std::list<dogen::variability::meta_model::default_value_override>& default_value_overrides() const;
+    std::list<dogen::variability::meta_model::default_value_override>& default_value_overrides();
+    void default_value_overrides(const std::list<dogen::variability::meta_model::default_value_override>& v);
+    void default_value_overrides(const std::list<dogen::variability::meta_model::default_value_override>&& v);
+    /**@}*/
+
 public:
     bool operator==(const feature_template& rhs) const;
     bool operator!=(const feature_template& rhs) const {
@@ -129,6 +142,7 @@ private:
     dogen::variability::meta_model::binding_action profile_binding_action_;
     dogen::variability::meta_model::binding_action configuration_binding_action_;
     std::string instantiation_domain_name_;
+    std::list<dogen::variability::meta_model::default_value_override> default_value_overrides_;
 };
 
 }

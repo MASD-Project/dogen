@@ -18,21 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen.variability/io/meta_model/value_io.hpp"
-#include "dogen.variability/io/meta_model/element_io.hpp"
-#include "dogen.variability/io/meta_model/value_type_io.hpp"
-#include "dogen.variability/io/meta_model/binding_point_io.hpp"
-#include "dogen.variability/io/meta_model/binding_action_io.hpp"
-#include "dogen.variability/io/meta_model/feature_template_io.hpp"
-#include "dogen.variability/io/meta_model/default_value_override_io.hpp"
+#ifndef DOGEN_VARIABILITY_IO_META_MODEL_DEFAULT_VALUE_OVERRIDE_IO_HPP
+#define DOGEN_VARIABILITY_IO_META_MODEL_DEFAULT_VALUE_OVERRIDE_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen.variability/types/meta_model/default_value_override.hpp"
 
 namespace dogen::variability::meta_model {
 
-std::ostream& operator<<(std::ostream& s, const feature_template& v) {
-    v.to_stream(s);
-    return(s);
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::variability::meta_model::default_value_override& v);
 
 }
+
+#endif
