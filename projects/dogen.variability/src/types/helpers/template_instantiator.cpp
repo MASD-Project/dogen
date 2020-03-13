@@ -132,7 +132,6 @@ instantiate(const std::unordered_map<std::string, std::vector<std::string>>&
     if (tid.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_domains ;
         BOOST_THROW_EXCEPTION(instantiation_exception(empty_domains));
-
     }
 
     /*

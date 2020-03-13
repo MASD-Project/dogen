@@ -124,27 +124,27 @@ format(const context& ctx, const assets::meta_model::element& e) const {
             if (fb.generate_registration()) {
 a.stream() << std::endl;
 a.stream() << "namespace {" << std::endl;
-                for (const auto& fb_ft : fb.features()) {
-                    const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
-                    const bool has_qualified_name(simple_key != fb_ft.key());
+                for (const auto& f : fb.features()) {
+                    const auto simple_key(splitter::split_scoped(f.key()).back());
+                    const bool has_qualified_name(simple_key != f.key());
 a.stream() << std::endl;
 a.stream() << "dogen::variability::meta_model::feature" << std::endl;
-a.stream() << "make_" << fb_ft.identifiable_key() << "() {" << std::endl;
+a.stream() << "make_" << f.identifiable_key() << "() {" << std::endl;
 a.stream() << "    using namespace dogen::variability::meta_model;" << std::endl;
 a.stream() << "    feature r;" << std::endl;
 a.stream() << "    r.name().simple(\"" << simple_key << "\");" << std::endl;
                    if (has_qualified_name) {
-a.stream() << "    r.name().qualified(\"" << fb_ft.key() << "\");" << std::endl;
+a.stream() << "    r.name().qualified(\"" << f.key() << "\");" << std::endl;
                    }
-a.stream() << "    const auto vt(" << enum_mapper::from_value_type(fb_ft.value_type()) << ");" << std::endl;
+a.stream() << "    const auto vt(" << enum_mapper::from_value_type(f.value_type()) << ");" << std::endl;
 a.stream() << "    r.value_type(vt);" << std::endl;
-                   if (fb_ft.unparsed_type() == "masd::variability::key_value_pair") {
+                   if (f.unparsed_type() == "masd::variability::key_value_pair") {
 a.stream() << "    r.is_partially_matchable(true);" << std::endl;
                    }
-a.stream() << "    r.binding_point(" << enum_mapper::from_binding_point(*fb_ft.binding_point()) << ");" << std::endl;
-                   if (!fb_ft.value().empty()) {
+a.stream() << "    r.binding_point(" << enum_mapper::from_binding_point(*f.binding_point()) << ");" << std::endl;
+                   if (!f.default_value().empty()) {
 a.stream() << "    dogen::variability::helpers::value_factory f;" << std::endl;
-a.stream() << "    r.default_value(f.make(vt, std::list<std::string>{ " << fb_ft.value() << " }));" << std::endl;
+a.stream() << "    r.default_value(f.make(vt, std::list<std::string>{ " << f.default_value() << " }));" << std::endl;
                    }
 a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;
@@ -160,9 +160,9 @@ a.stream() << sn << "::make_feature_group(const dogen::variability::meta_model::
 a.stream() << "    feature_group r;" << std::endl;
 a.stream() << "    const dogen::variability::helpers::feature_selector s(fm);" << std::endl;
 a.stream() << std::endl;
-                for (const auto& fb_ft : fb.features()) {
-                    const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
-a.stream() << "    r." << simple_key << " = s.get_by_name(\"" << fb_ft.key() << "\");" << std::endl;
+                for (const auto& f : fb.features()) {
+                    const auto simple_key(splitter::split_scoped(f.key()).back());
+a.stream() << "    r." << simple_key << " = s.get_by_name(\"" << f.key() << "\");" << std::endl;
                 }
 a.stream() << std::endl;
 a.stream() << "    return r;" << std::endl;
@@ -174,17 +174,17 @@ a.stream() << "    const dogen::variability::meta_model::configuration& cfg) {" 
 a.stream() << std::endl;
 a.stream() << "    static_configuration r;" << std::endl;
 a.stream() << "    const dogen::variability::helpers::configuration_selector s(cfg);" << std::endl;
-                for (const auto& fb_ft : fb.features()) {
-                    const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
+                for (const auto& f : fb.features()) {
+                    const auto simple_key(splitter::split_scoped(f.key()).back());
 
-                    const bool has_default_value(!fb_ft.value().empty());
+                    const bool has_default_value(!f.default_value().empty());
                     if (has_default_value) {
-a.stream() << "    r." << simple_key << " = s.get_" << enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) << "_content_or_default(fg." << simple_key << ");" << std::endl;
-                    } else if (fb_ft.is_optional()) {
+a.stream() << "    r." << simple_key << " = s.get_" << enum_mapper::from_value_type(f.value_type(), false/*simple*/) << "_content_or_default(fg." << simple_key << ");" << std::endl;
+                    } else if (f.is_optional()) {
 a.stream() << "    if (s.has_configuration_point(fg." << simple_key << "))" << std::endl;
-a.stream() << "        r." << simple_key << " = s.get_" << enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) << "_content(fg." << simple_key << ");" << std::endl;
+a.stream() << "        r." << simple_key << " = s.get_" << enum_mapper::from_value_type(f.value_type(), false/*simple*/) << "_content(fg." << simple_key << ");" << std::endl;
                     } else {
-a.stream() << "    r." << simple_key << " = s.get_" << enum_mapper::from_value_type(fb_ft.value_type(), false/*simple*/) << "_content(fg." << simple_key << ");" << std::endl;
+a.stream() << "    r." << simple_key << " = s.get_" << enum_mapper::from_value_type(f.value_type(), false/*simple*/) << "_content(fg." << simple_key << ");" << std::endl;
                     }
                 }
 a.stream() << "    return r;" << std::endl;
@@ -198,8 +198,8 @@ a.stream() << sn << "::make_features() {" << std::endl;
 a.stream() << "    using namespace dogen::variability::meta_model;" << std::endl;
 a.stream() << "    std::list<dogen::variability::meta_model::feature> r;" << std::endl;
 
-                for (const auto& fb_ft : fb.features()) {
-a.stream() << "    r.push_back(make_" << fb_ft.identifiable_key() << "());" << std::endl;
+                for (const auto& f : fb.features()) {
+a.stream() << "    r.push_back(make_" << f.identifiable_key() << "());" << std::endl;
                 }
 a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;

@@ -1938,14 +1938,14 @@
           "documentation": "Mapped type, after parsing has taken place.\n"
         },
         {
-          "name": "value",
+          "name": "default_value",
           "type": "std::string",
           "documentation": "String representing the default value set on the model.\n"
         },
         {
           "name": "value_type",
           "type": "variability::meta_model::value_type",
-          "documentation": "Type of the value pointed to by the feature.\n"
+          "documentation": "Type of the value pointed to by the feature.\n\nBy implication, this also determines the type of the default value.\n"
         },
         {
           "name": "binding_point",

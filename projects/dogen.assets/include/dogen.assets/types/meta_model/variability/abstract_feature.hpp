@@ -64,7 +64,7 @@ public:
         const std::string& unparsed_type,
         const std::string& mapped_type,
         const dogen::assets::meta_model::name_tree& parsed_type,
-        const std::string& value,
+        const std::string& default_value,
         const dogen::variability::meta_model::value_type value_type,
         const boost::optional<dogen::variability::meta_model::binding_point>& binding_point,
         const bool is_optional,
@@ -174,14 +174,16 @@ public:
      * @brief String representing the default value set on the model.
      */
     /**@{*/
-    const std::string& value() const;
-    std::string& value();
-    void value(const std::string& v);
-    void value(const std::string&& v);
+    const std::string& default_value() const;
+    std::string& default_value();
+    void default_value(const std::string& v);
+    void default_value(const std::string&& v);
     /**@}*/
 
     /**
      * @brief Type of the value pointed to by the feature.
+     *
+     * By implication, this also determines the type of the default value.
      */
     /**@{*/
     dogen::variability::meta_model::value_type value_type() const;
@@ -238,7 +240,7 @@ private:
     std::string unparsed_type_;
     std::string mapped_type_;
     dogen::assets::meta_model::name_tree parsed_type_;
-    std::string value_;
+    std::string default_value_;
     dogen::variability::meta_model::value_type value_type_;
     boost::optional<dogen::variability::meta_model::binding_point> binding_point_;
     bool is_optional_;

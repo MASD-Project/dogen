@@ -141,9 +141,9 @@ a.stream() << "    r.value_type(vt);" << std::endl;
 a.stream() << "    r.binding_point(" << enum_mapper::from_binding_point(*ft.binding_point()) << ");" << std::endl;
 a.stream() << "    r.instantiation_domain_name(\"" << ftb.instantiation_domain_name() << "\");" << std::endl;
 
-                   if (!ft.value().empty()) {
+                   if (!ft.default_value().empty()) {
 a.stream() << "    dogen::variability::helpers::value_factory f;" << std::endl;
-a.stream() << "    r.default_value(f.make(vt, std::list<std::string>{ " << ft.value() << " }));" << std::endl;
+a.stream() << "    r.default_value(f.make(vt, std::list<std::string>{ " << ft.default_value() << " }));" << std::endl;
                    }
 a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;
@@ -176,7 +176,7 @@ a.stream() << "    const dogen::variability::helpers::configuration_selector s(c
                 for (const auto& ft : ftb.feature_templates()) {
                     const auto simple_key(splitter::split_scoped(ft.key()).back());
 
-                    const bool has_default_value(!ft.value().empty());
+                    const bool has_default_value(!ft.default_value().empty());
                     if (has_default_value) {
 a.stream() << "    r." << simple_key << " = s.get_" << enum_mapper::from_value_type(ft.value_type(), false/*simple*/) << "_content_or_default(fg." << simple_key << ");" << std::endl;
                     } else if (ft.is_optional()) {

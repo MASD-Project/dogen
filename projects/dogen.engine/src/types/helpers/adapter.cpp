@@ -447,7 +447,7 @@ void adapter::populate_abstract_feature(
     assets::helpers::name_factory f;
     af.name(f.build_attribute_name(bundle_name, n));
     af.original_key(n);
-    af.value(ia.value());
+    af.default_value(ia.value());
     af.unparsed_type(ia.type());
 
     using variability::helpers::enum_mapper;

@@ -168,18 +168,16 @@ void variability_features_transform::process_abstract_feature(
     }
 
     /*
-     * A feature template will require optionality on the
-     * generated static configuration if it is optional and
-     * its underlying type does not have a natural way of
-     * representing absence (e.g. .empty()) and it has no
-     * default value. In this case, the property in the static
-     * configuration must be of an optional type, in order to
-     * handle the tri-bool logic: a) not supplied b) supplied
-     * but set to default (of the type, not of the template
-     * since it has not default) c) supplied and set to a
-     * value.
+     * A feature template will require optionality on the generated
+     * static configuration if: it is optional and its underlying type
+     * does not have a natural way of representing absence
+     * (e.g. .empty()) and it has no default value. In this case, the
+     * property in the static configuration must be of an optional
+     * type, in order to handle the tri-bool logic: a) not supplied b)
+     * supplied but set to default (of the type, not of the template
+     * since it has not default) c) supplied and set to a value.
      */
-    const bool has_default(!af.value().empty());
+    const bool has_default(!af.default_value().empty());
     using variability::meta_model::value_type;
     const bool type_without_empty(
         af.value_type() == value_type::boolean ||

@@ -46635,7 +46635,7 @@ This is the type before mapping and parsing.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#value#</dia:string>
+            <dia:string>#default_value#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -46667,7 +46667,9 @@ This is the type before mapping and parsing.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Type of the value pointed to by the feature.#</dia:string>
+            <dia:string>#Type of the value pointed to by the feature.
+
+By implication, this also determines the type of the default value.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

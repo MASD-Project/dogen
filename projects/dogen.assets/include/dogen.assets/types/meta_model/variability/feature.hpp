@@ -53,7 +53,7 @@ public:
         const std::string& unparsed_type,
         const std::string& mapped_type,
         const dogen::assets::meta_model::name_tree& parsed_type,
-        const std::string& value,
+        const std::string& default_value,
         const dogen::variability::meta_model::value_type value_type,
         const boost::optional<dogen::variability::meta_model::binding_point>& binding_point,
         const bool is_optional,

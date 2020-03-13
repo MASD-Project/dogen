@@ -89,10 +89,10 @@ make_<#= ft.identifiable_key() #>() {
     r.instantiation_domain_name("<#= ftb.instantiation_domain_name() #>");
 <#+
 
-                   if (!ft.value().empty()) {
+                   if (!ft.default_value().empty()) {
 #>
     dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ <#= ft.value() #> }));
+    r.default_value(f.make(vt, std::list<std::string>{ <#= ft.default_value() #> }));
 <#+
                    }
 #>
@@ -136,7 +136,7 @@ make_<#= ft.identifiable_key() #>() {
                 for (const auto& ft : ftb.feature_templates()) {
                     const auto simple_key(splitter::split_scoped(ft.key()).back());
 
-                    const bool has_default_value(!ft.value().empty());
+                    const bool has_default_value(!ft.default_value().empty());
                     if (has_default_value) {
 #>
     r.<#= simple_key #> = s.get_<#= enum_mapper::from_value_type(ft.value_type(), false/*simple*/) #>_content_or_default(fg.<#= simple_key #>);

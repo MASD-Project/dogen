@@ -94,7 +94,7 @@ abstract_feature::abstract_feature(abstract_feature&& rhs)
       unparsed_type_(std::move(rhs.unparsed_type_)),
       mapped_type_(std::move(rhs.mapped_type_)),
       parsed_type_(std::move(rhs.parsed_type_)),
-      value_(std::move(rhs.value_)),
+      default_value_(std::move(rhs.default_value_)),
       value_type_(std::move(rhs.value_type_)),
       binding_point_(std::move(rhs.binding_point_)),
       is_optional_(std::move(rhs.is_optional_)),
@@ -110,7 +110,7 @@ abstract_feature::abstract_feature(
     const std::string& unparsed_type,
     const std::string& mapped_type,
     const dogen::assets::meta_model::name_tree& parsed_type,
-    const std::string& value,
+    const std::string& default_value,
     const dogen::variability::meta_model::value_type value_type,
     const boost::optional<dogen::variability::meta_model::binding_point>& binding_point,
     const bool is_optional,
@@ -124,7 +124,7 @@ abstract_feature::abstract_feature(
       unparsed_type_(unparsed_type),
       mapped_type_(mapped_type),
       parsed_type_(parsed_type),
-      value_(value),
+      default_value_(default_value),
       value_type_(value_type),
       binding_point_(binding_point),
       is_optional_(is_optional),
@@ -148,7 +148,7 @@ void abstract_feature::to_stream(std::ostream& s) const {
       << "\"unparsed_type\": " << "\"" << tidy_up_string(unparsed_type_) << "\"" << ", "
       << "\"mapped_type\": " << "\"" << tidy_up_string(mapped_type_) << "\"" << ", "
       << "\"parsed_type\": " << parsed_type_ << ", "
-      << "\"value\": " << "\"" << tidy_up_string(value_) << "\"" << ", "
+      << "\"default_value\": " << "\"" << tidy_up_string(default_value_) << "\"" << ", "
       << "\"value_type\": " << value_type_ << ", "
       << "\"binding_point\": " << binding_point_ << ", "
       << "\"is_optional\": " << is_optional_ << ", "
@@ -167,7 +167,7 @@ void abstract_feature::swap(abstract_feature& other) noexcept {
     swap(unparsed_type_, other.unparsed_type_);
     swap(mapped_type_, other.mapped_type_);
     swap(parsed_type_, other.parsed_type_);
-    swap(value_, other.value_);
+    swap(default_value_, other.default_value_);
     swap(value_type_, other.value_type_);
     swap(binding_point_, other.binding_point_);
     swap(is_optional_, other.is_optional_);
@@ -184,7 +184,7 @@ bool abstract_feature::compare(const abstract_feature& rhs) const {
         unparsed_type_ == rhs.unparsed_type_ &&
         mapped_type_ == rhs.mapped_type_ &&
         parsed_type_ == rhs.parsed_type_ &&
-        value_ == rhs.value_ &&
+        default_value_ == rhs.default_value_ &&
         value_type_ == rhs.value_type_ &&
         binding_point_ == rhs.binding_point_ &&
         is_optional_ == rhs.is_optional_ &&
@@ -335,20 +335,20 @@ void abstract_feature::parsed_type(const dogen::assets::meta_model::name_tree&& 
     parsed_type_ = std::move(v);
 }
 
-const std::string& abstract_feature::value() const {
-    return value_;
+const std::string& abstract_feature::default_value() const {
+    return default_value_;
 }
 
-std::string& abstract_feature::value() {
-    return value_;
+std::string& abstract_feature::default_value() {
+    return default_value_;
 }
 
-void abstract_feature::value(const std::string& v) {
-    value_ = v;
+void abstract_feature::default_value(const std::string& v) {
+    default_value_ = v;
 }
 
-void abstract_feature::value(const std::string&& v) {
-    value_ = std::move(v);
+void abstract_feature::default_value(const std::string&& v) {
+    default_value_ = std::move(v);
 }
 
 dogen::variability::meta_model::value_type abstract_feature::value_type() const {
