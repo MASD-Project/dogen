@@ -29547,13 +29547,13 @@ code.
         <dia:point val="-44,360"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-44.05,359.95;-3.795,381.25"/>
+        <dia:rectangle val="-44.05,359.95;-13.805,381.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-44,360"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="40.155000000000001"/>
+        <dia:real val="30.145"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="21.200000000000006"/>
@@ -29566,7 +29566,8 @@ code.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
-#DOGEN masd.variability.default_binding_point=global#</dia:string>
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.key_prefix=masd.generation.cpp.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -29649,7 +29650,7 @@ code.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.directory#</dia:string>
+            <dia:string>#directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -29672,7 +29673,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.postfix#</dia:string>
+            <dia:string>#postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -29695,7 +29696,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.class_header.postfix#</dia:string>
+            <dia:string>#class_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -29718,7 +29719,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.class_implementation.postfix#</dia:string>
+            <dia:string>#class_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -29741,7 +29742,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.enum_header.postfix#</dia:string>
+            <dia:string>#enum_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -29764,7 +29765,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.enum_implementation.postfix#</dia:string>
+            <dia:string>#enum_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -29787,7 +29788,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.primitive_header.postfix#</dia:string>
+            <dia:string>#primitive_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -29810,7 +29811,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.primitive_implementation.postfix#</dia:string>
+            <dia:string>#primitive_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -29833,7 +29834,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.exception_header.postfix#</dia:string>
+            <dia:string>#exception_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -29856,7 +29857,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.namespace_header.postfix#</dia:string>
+            <dia:string>#namespace_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -29879,7 +29880,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.visitor_header.postfix#</dia:string>
+            <dia:string>#visitor_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -29902,7 +29903,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.class_forward_declarations.postfix#</dia:string>
+            <dia:string>#class_forward_declarations.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -29925,7 +29926,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.visitor_forward_declarations.postfix#</dia:string>
+            <dia:string>#visitor_forward_declarations.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -29948,7 +29949,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.primitive_forward_declarations.postfix#</dia:string>
+            <dia:string>#primitive_forward_declarations.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -29971,7 +29972,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.master_header.postfix#</dia:string>
+            <dia:string>#master_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -29994,7 +29995,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.builtin_header.postfix#</dia:string>
+            <dia:string>#builtin_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30017,7 +30018,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.feature_template_bundle_header.postfix#</dia:string>
+            <dia:string>#feature_template_bundle_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30040,7 +30041,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.feature_template_bundle_implementation.postfix#</dia:string>
+            <dia:string>#feature_template_bundle_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30063,7 +30064,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.feature_bundle_header.postfix#</dia:string>
+            <dia:string>#feature_bundle_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30086,7 +30087,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.feature_bundle_implementation.postfix#</dia:string>
+            <dia:string>#feature_bundle_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30109,7 +30110,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.variability_initializer_header.postfix#</dia:string>
+            <dia:string>#variability_initializer_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30132,7 +30133,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.variability_initializer_implementation.postfix#</dia:string>
+            <dia:string>#variability_initializer_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30155,7 +30156,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.main.postfix#</dia:string>
+            <dia:string>#main.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30299,13 +30300,13 @@ code.
         <dia:point val="8,304"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="7.95,303.95;42.43,314.85"/>
+        <dia:rectangle val="7.95,303.95;32.805,314.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="8,304"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="34.380000000000003"/>
+        <dia:real val="24.755000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="10.799999999999999"/>
@@ -30318,7 +30319,8 @@ code.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
-#DOGEN masd.variability.default_binding_point=global#</dia:string>
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.key_prefix=masd.generation.cpp.hash#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -30401,7 +30403,7 @@ code.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.hash.directory#</dia:string>
+            <dia:string>#directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30424,7 +30426,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.hash.postfix#</dia:string>
+            <dia:string>#postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30447,7 +30449,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.hash.class_header.postfix#</dia:string>
+            <dia:string>#class_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30470,7 +30472,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.hash.class_implementation.postfix#</dia:string>
+            <dia:string>#class_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30493,7 +30495,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.hash.enum_header.postfix#</dia:string>
+            <dia:string>#enum_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30516,7 +30518,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.hash.enum_implementation.postfix#</dia:string>
+            <dia:string>#enum_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30539,7 +30541,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.hash.primitive_header.postfix#</dia:string>
+            <dia:string>#primitive_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30562,7 +30564,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.hash.primitive_implementation.postfix#</dia:string>
+            <dia:string>#primitive_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30585,7 +30587,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.hash.master_header.postfix#</dia:string>
+            <dia:string>#master_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30608,7 +30610,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.hash.builtin_header.postfix#</dia:string>
+            <dia:string>#builtin_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30642,13 +30644,13 @@ code.
         <dia:point val="53,304"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.95,303.95;86.66,314.85"/>
+        <dia:rectangle val="52.95,303.95;77.805,314.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="53,304"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="33.609999999999999"/>
+        <dia:real val="24.755000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="10.799999999999999"/>
@@ -30661,7 +30663,8 @@ code.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
-#DOGEN masd.variability.default_binding_point=global#</dia:string>
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.key_prefix=masd.generation.cpp.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -30744,7 +30747,7 @@ code.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.io.directory#</dia:string>
+            <dia:string>#directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30767,7 +30770,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.io.postfix#</dia:string>
+            <dia:string>#postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30790,7 +30793,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.io.class_header.postfix#</dia:string>
+            <dia:string>#class_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30813,7 +30816,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.io.class_implementation.postfix#</dia:string>
+            <dia:string>#class_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30836,7 +30839,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.io.enum_header.postfix#</dia:string>
+            <dia:string>#enum_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30859,7 +30862,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.io.enum_implementation.postfix#</dia:string>
+            <dia:string>#enum_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30882,7 +30885,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.io.primitive_header.postfix#</dia:string>
+            <dia:string>#primitive_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30905,7 +30908,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.io.primitive_implementation.postfix#</dia:string>
+            <dia:string>#primitive_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30928,7 +30931,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.io.master_header.postfix#</dia:string>
+            <dia:string>#master_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30951,7 +30954,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.io.builtin_header.postfix#</dia:string>
+            <dia:string>#builtin_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -30985,13 +30988,13 @@ code.
         <dia:point val="106,304"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="105.95,303.95;138.89,315.65"/>
+        <dia:rectangle val="105.95,303.95;129.65,315.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="106,304"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="23.600000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="11.6"/>
@@ -31003,7 +31006,8 @@ code.
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.variability.generate_static_configuration=false#</dia:string>
+        <dia:string>##DOGEN masd.variability.generate_static_configuration=false
+#DOGEN masd.variability.key_prefix=masd.generation.cpp.odb#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -31086,7 +31090,7 @@ code.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.odb.directory#</dia:string>
+            <dia:string>#directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31110,7 +31114,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.odb.postfix#</dia:string>
+            <dia:string>#postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31134,7 +31138,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.odb.class_header.postfix#</dia:string>
+            <dia:string>#class_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31158,7 +31162,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.odb.enum_header.postfix#</dia:string>
+            <dia:string>#enum_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31182,7 +31186,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.odb.primitive_header.postfix#</dia:string>
+            <dia:string>#primitive_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31206,7 +31210,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.odb.common_odb_options.postfix#</dia:string>
+            <dia:string>#common_odb_options.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31230,7 +31234,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.odb.object_odb_options.postfix#</dia:string>
+            <dia:string>#object_odb_options.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31254,7 +31258,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.odb.master_header.postfix#</dia:string>
+            <dia:string>#master_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31278,7 +31282,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.odb.pragma#</dia:string>
+            <dia:string>#pragma#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text_collection#</dia:string>
@@ -31302,7 +31306,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.odb.builtin_header.postfix#</dia:string>
+            <dia:string>#builtin_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31326,7 +31330,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.odb.primitive_odb_options.postfix#</dia:string>
+            <dia:string>#primitive_odb_options.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31361,13 +31365,13 @@ code.
         <dia:point val="151,304"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="150.95,303.95;187.355,314.85"/>
+        <dia:rectangle val="150.95,303.95;175.805,314.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="151,304"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="36.305"/>
+        <dia:real val="24.755000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="10.799999999999999"/>
@@ -31380,7 +31384,8 @@ code.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
-#DOGEN masd.variability.default_binding_point=global#</dia:string>
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.key_prefix=masd.generation.cpp.test_data#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -31463,7 +31468,7 @@ code.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.test_data.directory#</dia:string>
+            <dia:string>#directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31486,7 +31491,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.test_data.postfix#</dia:string>
+            <dia:string>#postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31509,7 +31514,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.test_data.class_header.postfix#</dia:string>
+            <dia:string>#class_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31532,7 +31537,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.test_data.class_implementation.postfix#</dia:string>
+            <dia:string>#class_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31555,7 +31560,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.test_data.enum_header.postfix#</dia:string>
+            <dia:string>#enum_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31578,7 +31583,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.test_data.enum_implementation.postfix#</dia:string>
+            <dia:string>#enum_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31601,7 +31606,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.test_data.primitive_header.postfix#</dia:string>
+            <dia:string>#primitive_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31624,7 +31629,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.test_data.primitive_implementation.postfix#</dia:string>
+            <dia:string>#primitive_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31647,7 +31652,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.test_data.master_header.postfix#</dia:string>
+            <dia:string>#master_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31670,7 +31675,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.test_data.builtin_header.postfix#</dia:string>
+            <dia:string>#builtin_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31704,13 +31709,13 @@ code.
         <dia:point val="201,304"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="200.95,303.95;242.36,317.25"/>
+        <dia:rectangle val="200.95,303.95;229.27,317.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="201,304"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="41.310000000000002"/>
+        <dia:real val="28.219999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="13.200000000000001"/>
@@ -31723,7 +31728,8 @@ code.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
-#DOGEN masd.variability.default_binding_point=global#</dia:string>
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.key_prefix=masd.generation.cpp.serialization#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -31806,7 +31812,7 @@ code.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.serialization.directory#</dia:string>
+            <dia:string>#directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31829,7 +31835,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.serialization.postfix#</dia:string>
+            <dia:string>#postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31852,7 +31858,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.serialization.class_header.postfix#</dia:string>
+            <dia:string>#class_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31875,7 +31881,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.serialization.class_implementation.postfix#</dia:string>
+            <dia:string>#class_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31898,7 +31904,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.serialization.enum_header.postfix#</dia:string>
+            <dia:string>#enum_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31921,7 +31927,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.serialization.primitive_header.postfix#</dia:string>
+            <dia:string>#primitive_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31944,7 +31950,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.serialization.primitive_implementation.postfix#</dia:string>
+            <dia:string>#primitive_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31967,7 +31973,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.serialization.class_forward_declarations.postfix#</dia:string>
+            <dia:string>#class_forward_declarations.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -31990,7 +31996,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.serialization.primitive_forward_declarations.postfix#</dia:string>
+            <dia:string>#primitive_forward_declarations.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32013,7 +32019,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.serialization.master_header.postfix#</dia:string>
+            <dia:string>#master_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32036,7 +32042,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.serialization.builtin_header.postfix#</dia:string>
+            <dia:string>#builtin_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32059,7 +32065,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.serialization.type_registrar_header.postfix#</dia:string>
+            <dia:string>#type_registrar_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32082,7 +32088,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.serialization.type_registrar_implementation.postfix#</dia:string>
+            <dia:string>#type_registrar_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32116,13 +32122,13 @@ code.
         <dia:point val="9,373"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="8.95,372.95;42.275,381.45"/>
+        <dia:rectangle val="8.95,372.95;32.265,381.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="9,373"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="33.225000000000001"/>
+        <dia:real val="23.215"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="8.4000000000000004"/>
@@ -32135,7 +32141,8 @@ code.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
-#DOGEN masd.variability.default_binding_point=global#</dia:string>
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.key_prefix=masd.generation.cpp.tests#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -32218,7 +32225,7 @@ code.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests.directory#</dia:string>
+            <dia:string>#directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32241,7 +32248,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests.postfix#</dia:string>
+            <dia:string>#postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32264,7 +32271,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests.class_implementation.postfix#</dia:string>
+            <dia:string>#class_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32287,7 +32294,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests.enum_implementation.postfix#</dia:string>
+            <dia:string>#enum_implementation.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32310,7 +32317,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests.master_header.postfix#</dia:string>
+            <dia:string>#master_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32333,7 +32340,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests.cmakelists.postfix#</dia:string>
+            <dia:string>#cmakelists.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32356,7 +32363,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests.main.postfix#</dia:string>
+            <dia:string>#main.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -33842,13 +33849,13 @@ string.
         <dia:point val="54,342"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="53.95,341.95;87.275,347.25"/>
+        <dia:rectangle val="53.95,341.95;74.57,347.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="54,342"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="33.225000000000001"/>
+        <dia:real val="20.52"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -33861,7 +33868,8 @@ string.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
-#DOGEN masd.variability.default_binding_point=global#</dia:string>
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.key_prefix=masd.generation.cpp.lexical_cast#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -33944,7 +33952,7 @@ string.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.lexical_cast.directory#</dia:string>
+            <dia:string>#directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -33967,7 +33975,7 @@ string.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.lexical_cast.postfix#</dia:string>
+            <dia:string>#postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -33990,7 +33998,7 @@ string.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.lexical_cast.enum_header.postfix#</dia:string>
+            <dia:string>#enum_header.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -35110,13 +35118,13 @@ string.
         <dia:point val="54,373"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="53.95,372.95;88.43,378.25"/>
+        <dia:rectangle val="53.95,372.95;76.88,378.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="54,373"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="34.380000000000003"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -35129,7 +35137,8 @@ string.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
-#DOGEN masd.variability.default_binding_point=global#</dia:string>
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.key_prefix=masd.generation.cpp.templates#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -35212,7 +35221,7 @@ string.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.templates.directory#</dia:string>
+            <dia:string>#directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -35235,7 +35244,7 @@ string.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.templates.postfix#</dia:string>
+            <dia:string>#postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -35258,7 +35267,7 @@ string.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.templates.logic_less_template.postfix#</dia:string>
+            <dia:string>#logic_less_template.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -36716,13 +36725,13 @@ string.
         <dia:point val="104,342"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="103.95,341.95;138.43,348.85"/>
+        <dia:rectangle val="103.95,341.95;125.34,348.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="104,342"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="34.380000000000003"/>
+        <dia:real val="21.289999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -36735,7 +36744,8 @@ string.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
-#DOGEN masd.variability.default_binding_point=global#</dia:string>
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.key_prefix=masd.generation.cpp.visual_studio#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -36818,7 +36828,7 @@ string.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.visual_studio.directory#</dia:string>
+            <dia:string>#directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -36841,7 +36851,7 @@ string.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.visual_studio.postfix#</dia:string>
+            <dia:string>#postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -36864,7 +36874,7 @@ string.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.visual_studio.solution.postfix#</dia:string>
+            <dia:string>#solution.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -36887,7 +36897,7 @@ string.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.visual_studio.project.postfix#</dia:string>
+            <dia:string>#project.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -36910,7 +36920,7 @@ string.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.visual_studio.msbuild_targets.postfix#</dia:string>
+            <dia:string>#msbuild_targets.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -38257,13 +38267,13 @@ string.
         <dia:point val="104,373"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="103.95,372.95;136.505,379.05"/>
+        <dia:rectangle val="103.95,372.95;126.495,379.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="104,373"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.454999999999998"/>
+        <dia:real val="22.445"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
@@ -38276,7 +38286,8 @@ string.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
-#DOGEN masd.variability.default_binding_point=global#</dia:string>
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.key_prefix=masd.generation.cpp.build#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -38359,7 +38370,7 @@ string.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.build.directory#</dia:string>
+            <dia:string>#directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -38382,7 +38393,7 @@ string.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.build.postfix#</dia:string>
+            <dia:string>#postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -38405,7 +38416,7 @@ string.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.build.include_cmakelists.postfix#</dia:string>
+            <dia:string>#include_cmakelists.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -38428,7 +38439,7 @@ string.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.build.source_cmakelists.postfix#</dia:string>
+            <dia:string>#source_cmakelists.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>

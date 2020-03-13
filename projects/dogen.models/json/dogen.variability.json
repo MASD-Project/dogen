@@ -817,12 +817,13 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.default_binding_point": "any"
+        "masd.variability.default_binding_point": "any",
+        "masd.variability.key_prefix": "masd.variability"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.variability.profile",
+          "name": "profile",
           "type": "masd::variability::text",
           "documentation": "Profile associated with this configuration.\n",
           "tagged_values": {

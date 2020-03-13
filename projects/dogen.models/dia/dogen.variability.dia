@@ -14523,13 +14523,13 @@ alias.#</dia:string>
         <dia:point val="50,40"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,39.95;69.8,43.65"/>
+        <dia:rectangle val="49.95,39.95;64.795,43.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="50,40"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="19.75"/>
+        <dia:real val="14.744999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -14543,7 +14543,8 @@ alias.#</dia:string>
       <dia:attribute name="comment">
         <dia:string>#Features related to profile processing.
 
-#DOGEN masd.variability.default_binding_point=any#</dia:string>
+#DOGEN masd.variability.default_binding_point=any
+#DOGEN masd.variability.key_prefix=masd.variability#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14626,7 +14627,7 @@ alias.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.variability.profile#</dia:string>
+            <dia:string>#profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>

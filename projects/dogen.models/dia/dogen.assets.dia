@@ -33918,13 +33918,13 @@ to structural modeling.
         <dia:point val="79,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="78.95,21.95;113.815,27.25"/>
+        <dia:rectangle val="78.95,21.95;105.73,27.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="79,22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="34.765000000000001"/>
+        <dia:real val="26.68"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -33938,7 +33938,8 @@ to structural modeling.
       <dia:attribute name="comment">
         <dia:string>#Parameters to configure generic types.
 
-#DOGEN masd.variability.default_binding_point=element#</dia:string>
+#DOGEN masd.variability.default_binding_point=element
+#DOGEN masd.variability.key_prefix=masd.type_parameters#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -34021,7 +34022,7 @@ to structural modeling.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.type_parameters.variable_number_of_parameters#</dia:string>
+            <dia:string>#variable_number_of_parameters#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -34044,7 +34045,7 @@ to structural modeling.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.type_parameters.count#</dia:string>
+            <dia:string>#count#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::number#</dia:string>
@@ -34067,7 +34068,7 @@ to structural modeling.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.type_parameters.always_in_heap#</dia:string>
+            <dia:string>#always_in_heap#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -34266,13 +34267,13 @@ to structural modeling.
         <dia:point val="79,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="78.95,29.95;118.435,36.05"/>
+        <dia:rectangle val="78.95,29.95;111.89,36.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="79,30"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="39.385000000000005"/>
+        <dia:real val="32.839999999999996"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
@@ -34286,7 +34287,8 @@ to structural modeling.
       <dia:attribute name="comment">
         <dia:string>#Parameters related to enumerations.
 
-#DOGEN masd.variability.default_binding_point=element#</dia:string>
+#DOGEN masd.variability.default_binding_point=element
+#DOGEN masd.variability.key_prefix=masd.enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -34369,7 +34371,7 @@ to structural modeling.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.enumeration.use_implementation_defined_underlying_element#</dia:string>
+            <dia:string>#use_implementation_defined_underlying_element#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -34395,7 +34397,7 @@ technical space targeted.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.enumeration.underlying_element#</dia:string>
+            <dia:string>#underlying_element#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -34421,7 +34423,7 @@ technical space targeted.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.enumeration.use_implementation_defined_enumerator_values#</dia:string>
+            <dia:string>#use_implementation_defined_enumerator_values#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -34446,7 +34448,7 @@ technical space targeted.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.enumeration.add_invalid_enumerator#</dia:string>
+            <dia:string>#add_invalid_enumerator#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -34482,13 +34484,13 @@ technical space targeted.
         <dia:point val="52,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,21.95;70.645,25.65"/>
+        <dia:rectangle val="51.95,21.95;66.795,25.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="52,22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.594999999999999"/>
+        <dia:real val="14.744999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -34502,7 +34504,8 @@ technical space targeted.
       <dia:attribute name="comment">
         <dia:string>#Parameters related to enumerators.
 
-#DOGEN masd.variability.default_binding_point=property#</dia:string>
+#DOGEN masd.variability.default_binding_point=property
+#DOGEN masd.variability.key_prefix=masd.enumerator#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -34585,7 +34588,7 @@ technical space targeted.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.enumerator.value#</dia:string>
+            <dia:string>#value#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -34927,13 +34930,13 @@ technical space targeted.
         <dia:point val="79,38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="78.95,37.95;108.425,41.65"/>
+        <dia:rectangle val="78.95,37.95;102.265,41.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="79,38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="29.375"/>
+        <dia:real val="23.215"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -34947,7 +34950,8 @@ technical space targeted.
       <dia:attribute name="comment">
         <dia:string>#Features related to the output technical space.
 
-#DOGEN masd.variability.default_binding_point=global#</dia:string>
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.key_prefix=masd.extraction#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -35030,7 +35034,7 @@ technical space targeted.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.extraction.output_technical_space#</dia:string>
+            <dia:string>#output_technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text_collection#</dia:string>
@@ -35067,13 +35071,13 @@ technical space targeted.
         <dia:point val="79,45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="78.95,44.95;106.885,50.25"/>
+        <dia:rectangle val="78.95,44.95;101.11,50.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="79,45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.835000000000001"/>
+        <dia:real val="22.059999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -35087,7 +35091,8 @@ technical space targeted.
       <dia:attribute name="comment">
         <dia:string>#Features related to primitive elements.
 
-#DOGEN masd.variability.default_binding_point=element#</dia:string>
+#DOGEN masd.variability.default_binding_point=element
+#DOGEN masd.variability.key_prefix=masd.primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -35170,7 +35175,7 @@ technical space targeted.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.primitive.underlying_element#</dia:string>
+            <dia:string>#underlying_element#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -35196,7 +35201,7 @@ technical space targeted.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.primitive.is_nullable#</dia:string>
+            <dia:string>#is_nullable#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -35221,7 +35226,7 @@ technical space targeted.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.primitive.use_type_aliasing#</dia:string>
+            <dia:string>#use_type_aliasing#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -35258,13 +35263,13 @@ it.
         <dia:point val="52,38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,37.95;76.035,49.65"/>
+        <dia:rectangle val="51.95,37.95;72.57,49.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="52,38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="23.984999999999999"/>
+        <dia:real val="20.52"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="11.6"/>
@@ -35276,7 +35281,9 @@ it.
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Features related to ORM support.#</dia:string>
+        <dia:string>#Features related to ORM support.
+
+#DOGEN masd.variability.key_prefix=masd.orm#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -35359,7 +35366,7 @@ it.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.orm.database_system#</dia:string>
+            <dia:string>#database_system#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text_collection#</dia:string>
@@ -35386,7 +35393,7 @@ it.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.orm.table_name#</dia:string>
+            <dia:string>#table_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -35413,7 +35420,7 @@ it.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.orm.schema_name#</dia:string>
+            <dia:string>#schema_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -35440,7 +35447,7 @@ it.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.orm.is_primary_key#</dia:string>
+            <dia:string>#is_primary_key#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -35467,7 +35474,7 @@ it.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.orm.column_name#</dia:string>
+            <dia:string>#column_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -35494,7 +35501,7 @@ it.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.orm.is_nullable#</dia:string>
+            <dia:string>#is_nullable#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -35521,7 +35528,7 @@ it.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.orm.is_composite#</dia:string>
+            <dia:string>#is_composite#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -35548,7 +35555,7 @@ it.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.orm.letter_case#</dia:string>
+            <dia:string>#letter_case#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -35575,7 +35582,7 @@ it.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.orm.type_override#</dia:string>
+            <dia:string>#type_override#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text_collection#</dia:string>
@@ -35605,7 +35612,7 @@ Should really be "property".
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.orm.type_mapping#</dia:string>
+            <dia:string>#type_mapping#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text_collection#</dia:string>
@@ -35635,7 +35642,7 @@ Should really be "property".
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.orm.odb_pragma#</dia:string>
+            <dia:string>#odb_pragma#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text_collection#</dia:string>
@@ -35865,16 +35872,16 @@ ORM in Dogen.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O250">
       <dia:attribute name="obj_pos">
-        <dia:point val="107,65"/>
+        <dia:point val="105,65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="106.95,64.95;133.345,71.85"/>
+        <dia:rectangle val="104.95,64.95;124.8,71.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="107,65"/>
+        <dia:point val="105,65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.294999999999998"/>
+        <dia:real val="19.75"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -35886,7 +35893,9 @@ ORM in Dogen.
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Features related to the processing of variability for feature and profile templates.#</dia:string>
+        <dia:string>#Features related to the processing of variability for feature and profile templates.
+
+#DOGEN masd.variability.key_prefix=masd.variability#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -35969,7 +35978,7 @@ ORM in Dogen.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.variability.binding_point#</dia:string>
+            <dia:string>#binding_point#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -35996,7 +36005,7 @@ ORM in Dogen.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.variability.stereotype#</dia:string>
+            <dia:string>#stereotype#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -36023,7 +36032,7 @@ ORM in Dogen.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.variability.value#</dia:string>
+            <dia:string>#value#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text_collection#</dia:string>
@@ -36053,7 +36062,7 @@ the default value field if available.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.variability.qualified_name#</dia:string>
+            <dia:string>#qualified_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -36082,7 +36091,7 @@ Should only be supplied for instance templates.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.variability.is_optional#</dia:string>
+            <dia:string>#is_optional#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -37675,13 +37684,13 @@ extend the mappings as required.#</dia:string>
         <dia:point val="52,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="51.95,29.95;71.8,34.45"/>
+        <dia:rectangle val="51.95,29.95;66.795,34.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="52,30"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="19.75"/>
+        <dia:real val="14.744999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -37695,7 +37704,8 @@ extend the mappings as required.#</dia:string>
       <dia:attribute name="comment">
         <dia:string>#Meta-data related to element mapping.
 
-#DOGEN masd.variability.default_binding_point=any#</dia:string>
+#DOGEN masd.variability.default_binding_point=any
+#DOGEN masd.variability.key_prefix=masd.mapping#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -37778,7 +37788,7 @@ extend the mappings as required.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.mapping.target#</dia:string>
+            <dia:string>#target#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -37804,7 +37814,7 @@ extend the mappings as required.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.mapping.destination#</dia:string>
+            <dia:string>#destination#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -38710,16 +38720,16 @@ At present the system only supports wale templates.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O280">
       <dia:attribute name="obj_pos">
-        <dia:point val="66,65"/>
+        <dia:point val="73,65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="65.95,64.95;98.89,71.85"/>
+        <dia:rectangle val="72.95,64.95;99.345,71.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="66,65"/>
+        <dia:point val="73,65"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="26.294999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -38731,7 +38741,9 @@ At present the system only supports wale templates.#</dia:string>
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Features related to the processing of variability for feature bundles.#</dia:string>
+        <dia:string>#Features related to the processing of variability for feature bundles.
+
+#DOGEN masd.variability.key_prefix=masd.variability#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -38814,7 +38826,7 @@ At present the system only supports wale templates.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.variability.generate_registration#</dia:string>
+            <dia:string>#generate_registration#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -38842,7 +38854,7 @@ At present the system only supports wale templates.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.variability.generate_static_configuration#</dia:string>
+            <dia:string>#generate_static_configuration#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -38868,7 +38880,7 @@ At present the system only supports wale templates.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.variability.default_binding_point#</dia:string>
+            <dia:string>#default_binding_point#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -38895,7 +38907,7 @@ At present the system only supports wale templates.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.variability.instantiation_domain_name#</dia:string>
+            <dia:string>#instantiation_domain_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -38922,7 +38934,7 @@ At present the system only supports wale templates.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.variability.key_prefix#</dia:string>
+            <dia:string>#key_prefix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -48060,16 +48072,16 @@ Both of these aspects are optional, but at least one must be chosen.#</dia:strin
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O370">
       <dia:attribute name="obj_pos">
-        <dia:point val="107,76"/>
+        <dia:point val="106,76"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="106.95,75.95;133.73,81.25"/>
+        <dia:rectangle val="105.95,75.95;126.185,81.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="107,76"/>
+        <dia:point val="106,76"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.68"/>
+        <dia:real val="20.134999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -48083,7 +48095,8 @@ Both of these aspects are optional, but at least one must be chosen.#</dia:strin
       <dia:attribute name="comment">
         <dia:string>#Features related to the processing of variability for profiles and profile templates.
 
-#DOGEN masd.variability.generate_registration=false#</dia:string>
+#DOGEN masd.variability.generate_registration=false
+#DOGEN masd.variability.key_prefix=masd.variability#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -48166,7 +48179,7 @@ Both of these aspects are optional, but at least one must be chosen.#</dia:strin
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.variability.binding_point#</dia:string>
+            <dia:string>#binding_point#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -48193,7 +48206,7 @@ Both of these aspects are optional, but at least one must be chosen.#</dia:strin
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.variability.value#</dia:string>
+            <dia:string>#value#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text_collection#</dia:string>
@@ -48223,7 +48236,7 @@ the default value field if available.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.variability.instantiation_domain_name#</dia:string>
+            <dia:string>#instantiation_domain_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -48258,16 +48271,16 @@ the default value field if available.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O371">
       <dia:attribute name="obj_pos">
-        <dia:point val="75,77"/>
+        <dia:point val="82,76"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="74.95,76.95;95.955,81.45"/>
+        <dia:rectangle val="81.95,75.95;96.795,80.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="75,77"/>
+        <dia:point val="82,76"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.905000000000001"/>
+        <dia:real val="14.744999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -48281,7 +48294,8 @@ the default value field if available.
       <dia:attribute name="comment">
         <dia:string>#Features related to the processing of variability for profile entries.
 
-#DOGEN masd.variability.generate_registration=false#</dia:string>
+#DOGEN masd.variability.generate_registration=false
+#DOGEN masd.variability.key_prefix=masd.variability#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -48364,7 +48378,7 @@ the default value field if available.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.variability.stereotype#</dia:string>
+            <dia:string>#stereotype#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -48391,7 +48405,7 @@ the default value field if available.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.variability.key_prefix#</dia:string>
+            <dia:string>#key_prefix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -50598,14 +50612,14 @@ templates.#</dia:string>
         <dia:point val="101.267,84"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="95.6855,81.0183;101.334,84.0668"/>
+        <dia:rectangle val="96.4567,80.0559;101.337,84.0703"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="101.267,84"/>
-        <dia:point val="95.905,81.4"/>
+        <dia:point val="96.745,80.4"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -50620,7 +50634,7 @@ templates.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="98.5863,83.2"/>
+        <dia:point val="99.0063,82.7"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O393" connection="1"/>
@@ -50633,14 +50647,14 @@ templates.#</dia:string>
         <dia:point val="101.267,84"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="101.201,80.8186;107.22,84.0669"/>
+        <dia:rectangle val="101.199,80.8303;106.247,84.0685"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="101.267,84"/>
-        <dia:point val="107,81.2"/>
+        <dia:point val="106,81.2"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -50655,7 +50669,7 @@ templates.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="104.134,83.1"/>
+        <dia:point val="103.634,83.1"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O393" connection="1"/>
@@ -50668,14 +50682,14 @@ templates.#</dia:string>
         <dia:point val="102.31,61.7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="98.5281,61.6293;102.381,65.3243"/>
+        <dia:rectangle val="98.966,61.6294;102.381,65.3067"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="102.31,61.7"/>
-        <dia:point val="98.84,65"/>
+        <dia:point val="99.295,65"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -50690,7 +50704,7 @@ templates.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="100.575,63.85"/>
+        <dia:point val="100.803,63.85"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O372" connection="6"/>
@@ -50703,14 +50717,14 @@ templates.#</dia:string>
         <dia:point val="102.31,61.7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="102.24,61.6303;107.271,65.3559"/>
+        <dia:rectangle val="102.24,61.6297;105.342,65.2915"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="102.31,61.7"/>
-        <dia:point val="107,65"/>
+        <dia:point val="105,65"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -50725,7 +50739,7 @@ templates.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="104.655,63.85"/>
+        <dia:point val="103.655,63.85"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O372" connection="6"/>

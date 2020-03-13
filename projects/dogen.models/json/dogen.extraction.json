@@ -414,12 +414,13 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.default_binding_point": "global"
+        "masd.variability.default_binding_point": "global",
+        "masd.variability.key_prefix": "masd.extraction"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.extraction.force_write",
+          "name": "force_write",
           "type": "masd::variability::boolean",
           "value": "\"false\"",
           "documentation": "If true, artefacts are always written to the filesystem.\n\nIf false, the system will check to see if writing is needed by performing a binary\ndiff. If no changes are detected, no writting is performed.\n",
@@ -428,7 +429,7 @@
           }
         },
         {
-          "name": "masd.extraction.delete_extra_files",
+          "name": "delete_extra_files",
           "type": "masd::variability::boolean",
           "value": "\"true\"",
           "documentation": "If true, any files the code generator is not aware of are deleted.\n\nIf you'd like to skip the deletion of certain files, set  \"ignore_files_matching_regex\" accordingly.\n",
@@ -437,7 +438,7 @@
           }
         },
         {
-          "name": "masd.extraction.ignore_files_matching_regex",
+          "name": "ignore_files_matching_regex",
           "type": "masd::variability::text_collection",
           "documentation": "Regular expressions to filter files prior to deletion.\n\nOnly applicable if \"delete_extra_files\" is enabled.\n",
           "tagged_values": {
@@ -446,7 +447,7 @@
           }
         },
         {
-          "name": "masd.extraction.delete_empty_directories",
+          "name": "delete_empty_directories",
           "type": "masd::variability::boolean",
           "value": "\"false\"",
           "documentation": "If true, all directories without any files will be deleted.\n\nThis setting is recursive: if a directory is composed of one or more directories that\nare themselves empty, the entire directory tree is deleted.\n",
@@ -455,7 +456,7 @@
           }
         },
         {
-          "name": "masd.extraction.enable_backend_directories",
+          "name": "enable_backend_directories",
           "type": "masd::variability::boolean",
           "value": "\"false\"",
           "documentation": "If true, a directory is created for each technical space targeted.\n\nNote that this setting is only relevant if you are targetting a single output technical\nspace. If you are targetting more than one, it will automatically be set to true.\n",

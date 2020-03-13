@@ -6266,13 +6266,13 @@ and, if so, ignore it.#</dia:string>
         <dia:point val="107,53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="106.95,52.95;136.425,56.65"/>
+        <dia:rectangle val="106.95,52.95;130.65,56.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="107,53"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="29.375"/>
+        <dia:real val="23.600000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -6286,7 +6286,8 @@ and, if so, ignore it.#</dia:string>
       <dia:attribute name="comment">
         <dia:string>#Feature bundle for the input technical space.
 
-#DOGEN masd.variability.default_binding_point=global#</dia:string>
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.key_prefix=masd.injection#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -6369,7 +6370,7 @@ and, if so, ignore it.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.injection.input_technical_space#</dia:string>
+            <dia:string>#input_technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -6460,13 +6461,13 @@ the injection model.
         <dia:point val="140,53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="139.95,52.95;164.035,56.65"/>
+        <dia:rectangle val="139.95,52.95;158.26,56.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="140,53"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="23.984999999999999"/>
+        <dia:real val="18.210000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -6480,7 +6481,8 @@ the injection model.
       <dia:attribute name="comment">
         <dia:string>#Features related to model referencing.
 
-#DOGEN masd.variability.default_binding_point=global#</dia:string>
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.key_prefix=masd.injection#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -6563,7 +6565,7 @@ the injection model.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.injection.reference#</dia:string>
+            <dia:string>#reference#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text_collection#</dia:string>
@@ -6711,13 +6713,13 @@ the injection model.
         <dia:point val="107,59"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="106.95,58.95;128.725,62.65"/>
+        <dia:rectangle val="106.95,58.95;122.95,62.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="107,59"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="21.675000000000001"/>
+        <dia:real val="15.9"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -6732,7 +6734,8 @@ the injection model.
         <dia:string>#Features related to all UML injectors.
 
 #DOGEN masd.variability.default_binding_point=any
-#DOGEN masd.variability.generate_static_configuration=false#</dia:string>
+#DOGEN masd.variability.generate_static_configuration=false
+#DOGEN masd.variability.key_prefix=masd.injection#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -6815,7 +6818,7 @@ the injection model.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.injection.dia.comment#</dia:string>
+            <dia:string>#dia.comment#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>

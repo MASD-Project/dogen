@@ -5582,13 +5582,13 @@
         <dia:point val="-7,60"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-7.05,59.95;20.5,67.65"/>
+        <dia:rectangle val="-7.05,59.95;15.88,67.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-7,60"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.449999999999999"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.6000000000000005"/>
@@ -5602,7 +5602,8 @@
       <dia:attribute name="comment">
         <dia:string>#Stitch templating features.
 
-#DOGEN masd.variability.default_binding_point=global#</dia:string>
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.key_prefix=masd.stitch#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5685,7 +5686,7 @@
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.stitch.stream_variable_name#</dia:string>
+            <dia:string>#stream_variable_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -5710,7 +5711,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.stitch.relative_output_directory#</dia:string>
+            <dia:string>#relative_output_directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -5736,7 +5737,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.stitch.inclusion_dependency#</dia:string>
+            <dia:string>#inclusion_dependency#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text_collection#</dia:string>
@@ -5762,7 +5763,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.stitch.containing_namespaces#</dia:string>
+            <dia:string>#containing_namespaces#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -5787,7 +5788,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.stitch.wale.text_template#</dia:string>
+            <dia:string>#wale.text_template#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -5813,7 +5814,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.stitch.wale.kvp#</dia:string>
+            <dia:string>#wale.kvp#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::key_value_pair#</dia:string>

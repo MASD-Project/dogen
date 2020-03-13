@@ -4238,13 +4238,13 @@ assets types.#</dia:string>
         <dia:point val="117,66"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="116.95,65.95;139.495,70.45"/>
+        <dia:rectangle val="116.95,65.95;133.72,70.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="117,66"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="22.445"/>
+        <dia:real val="16.669999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -4258,7 +4258,8 @@ assets types.#</dia:string>
       <dia:attribute name="comment">
         <dia:string>#Feature group for model location related features.
 
-#DOGEN masd.variability.default_binding_point=global#</dia:string>
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.key_prefix=masd.injection#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4341,7 +4342,7 @@ assets types.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.injection.external_modules#</dia:string>
+            <dia:string>#external_modules#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -4370,7 +4371,7 @@ name.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.injection.model_modules#</dia:string>
+            <dia:string>#model_modules#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>

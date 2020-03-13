@@ -205,12 +205,13 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.default_binding_point": "global"
+        "masd.variability.default_binding_point": "global",
+        "masd.variability.key_prefix": "masd.injection"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.injection.external_modules",
+          "name": "external_modules",
           "type": "masd::variability::text",
           "documentation": "External modules containing this model.\n\nExternal modules contribute to the namespace of the model but not the model\nname.\n",
           "tagged_values": {
@@ -219,7 +220,7 @@
           }
         },
         {
-          "name": "masd.injection.model_modules",
+          "name": "model_modules",
           "type": "masd::variability::text",
           "documentation": "Model modules containing this model.\n\nThe model modules result in a top-level name separated by dots, e.g. a.b.c.\n",
           "tagged_values": {

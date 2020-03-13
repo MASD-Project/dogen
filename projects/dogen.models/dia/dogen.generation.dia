@@ -15078,13 +15078,13 @@ code: identation and dividers.#</dia:string>
         <dia:point val="209,145"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="208.95,144.95;240.35,151.85"/>
+        <dia:rectangle val="208.95,144.95;229.955,151.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="209,145"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="31.300000000000001"/>
+        <dia:real val="20.905000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -15096,7 +15096,8 @@ code: identation and dividers.#</dia:string>
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.variability.default_binding_point=any#</dia:string>
+        <dia:string>##DOGEN masd.variability.default_binding_point=any
+#DOGEN masd.variability.key_prefix=masd.generation.decoration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -15179,7 +15180,7 @@ code: identation and dividers.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.decoration.enabled#</dia:string>
+            <dia:string>#enabled#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -15205,7 +15206,7 @@ code: identation and dividers.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.decoration.copyright_notice#</dia:string>
+            <dia:string>#copyright_notice#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text_collection#</dia:string>
@@ -15231,7 +15232,7 @@ code: identation and dividers.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.decoration.licence_name#</dia:string>
+            <dia:string>#licence_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -15257,7 +15258,7 @@ code: identation and dividers.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.decoration.modeline_group_name#</dia:string>
+            <dia:string>#modeline_group_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -15283,7 +15284,7 @@ code: identation and dividers.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.decoration.marker_name#</dia:string>
+            <dia:string>#marker_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>

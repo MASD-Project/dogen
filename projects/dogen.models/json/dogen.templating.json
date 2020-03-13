@@ -323,12 +323,13 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.default_binding_point": "global"
+        "masd.variability.default_binding_point": "global",
+        "masd.variability.key_prefix": "masd.stitch"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.stitch.stream_variable_name",
+          "name": "stream_variable_name",
           "type": "masd::variability::text",
           "value": "\"stream_\"",
           "documentation": "Which name to use for the variable with the stream.\n",
@@ -337,7 +338,7 @@
           }
         },
         {
-          "name": "masd.stitch.relative_output_directory",
+          "name": "relative_output_directory",
           "type": "masd::variability::text",
           "documentation": "Relative path to the output directory.\n",
           "tagged_values": {
@@ -346,7 +347,7 @@
           }
         },
         {
-          "name": "masd.stitch.inclusion_dependency",
+          "name": "inclusion_dependency",
           "type": "masd::variability::text_collection",
           "documentation": "C++ Include header.\n",
           "tagged_values": {
@@ -355,7 +356,7 @@
           }
         },
         {
-          "name": "masd.stitch.containing_namespaces",
+          "name": "containing_namespaces",
           "type": "masd::variability::text",
           "documentation": "Namespaces that contain the class represented by the template.\n",
           "tagged_values": {
@@ -363,7 +364,7 @@
           }
         },
         {
-          "name": "masd.stitch.wale.text_template",
+          "name": "wale.text_template",
           "type": "masd::variability::text",
           "documentation": "Name of the wale text template to instantiate, if any.\n",
           "tagged_values": {
@@ -372,7 +373,7 @@
           }
         },
         {
-          "name": "masd.stitch.wale.kvp",
+          "name": "wale.kvp",
           "type": "masd::variability::key_value_pair",
           "documentation": "Array of wale KVPs to use in template instantiation.\n",
           "tagged_values": {

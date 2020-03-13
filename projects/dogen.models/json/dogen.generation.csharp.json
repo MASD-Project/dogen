@@ -747,12 +747,13 @@
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
-        "masd.variability.default_binding_point": "global"
+        "masd.variability.default_binding_point": "global",
+        "masd.variability.key_prefix": "masd.generation.csharp.types"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.csharp.types.directory",
+          "name": "directory",
           "type": "masd::variability::text",
           "value": "\"Types\"",
           "tagged_values": {
@@ -760,7 +761,7 @@
           }
         },
         {
-          "name": "masd.generation.csharp.types.postfix",
+          "name": "postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
@@ -768,7 +769,7 @@
           }
         },
         {
-          "name": "masd.generation.csharp.types.class.postfix",
+          "name": "class.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
@@ -776,7 +777,7 @@
           }
         },
         {
-          "name": "masd.generation.csharp.types.enum.postfix",
+          "name": "enum.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
@@ -784,7 +785,7 @@
           }
         },
         {
-          "name": "masd.generation.csharp.types.primitive.postfix",
+          "name": "primitive.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
@@ -792,7 +793,7 @@
           }
         },
         {
-          "name": "masd.generation.csharp.types.builtin.postfix",
+          "name": "builtin.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
@@ -800,7 +801,7 @@
           }
         },
         {
-          "name": "masd.generation.csharp.types.exception.postfix",
+          "name": "exception.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
@@ -892,12 +893,13 @@
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
-        "masd.variability.default_binding_point": "global"
+        "masd.variability.default_binding_point": "global",
+        "masd.variability.key_prefix": "masd.generation.csharp.test_data"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.csharp.test_data.directory",
+          "name": "directory",
           "type": "masd::variability::text",
           "value": "\"SequenceGenerators\"",
           "tagged_values": {
@@ -905,7 +907,7 @@
           }
         },
         {
-          "name": "masd.generation.csharp.test_data.postfix",
+          "name": "postfix",
           "type": "masd::variability::text",
           "value": "\"SequenceGenerator\"",
           "tagged_values": {
@@ -913,7 +915,7 @@
           }
         },
         {
-          "name": "masd.generation.csharp.test_data.class.postfix",
+          "name": "class.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
@@ -921,7 +923,7 @@
           }
         },
         {
-          "name": "masd.generation.csharp.test_data.assistant.postfix",
+          "name": "assistant.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
@@ -929,7 +931,7 @@
           }
         },
         {
-          "name": "masd.generation.csharp.test_data.enum.postfix",
+          "name": "enum.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
@@ -937,7 +939,7 @@
           }
         },
         {
-          "name": "masd.generation.csharp.test_data.primitive.postfix",
+          "name": "primitive.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
@@ -952,12 +954,13 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.generate_static_configuration": "false"
+        "masd.variability.generate_static_configuration": "false",
+        "masd.variability.key_prefix": "masd.generation.csharp"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.csharp.directory",
+          "name": "directory",
           "type": "masd::variability::text",
           "value": "\"cs\"",
           "tagged_values": {
@@ -966,7 +969,7 @@
           }
         },
         {
-          "name": "masd.generation.csharp.aspect.requires_static_reference_equals",
+          "name": "aspect.requires_static_reference_equals",
           "type": "masd::variability::boolean",
           "value": "\"true\"",
           "tagged_values": {
@@ -975,7 +978,7 @@
           }
         },
         {
-          "name": "masd.generation.csharp.helper.family",
+          "name": "helper.family",
           "type": "masd::variability::text",
           "value": "\"Default\"",
           "tagged_values": {
@@ -984,7 +987,7 @@
           }
         },
         {
-          "name": "masd.generation.csharp.assistant.requires_assistance",
+          "name": "assistant.requires_assistance",
           "type": "masd::variability::boolean",
           "value": "\"false\"",
           "tagged_values": {
@@ -993,7 +996,7 @@
           }
         },
         {
-          "name": "masd.generation.csharp.assistant.method_postfix",
+          "name": "assistant.method_postfix",
           "type": "masd::variability::text",
           "tagged_values": {
             "masd.variability.binding_point": "element",
@@ -1114,12 +1117,13 @@
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
-        "masd.variability.default_binding_point": "global"
+        "masd.variability.default_binding_point": "global",
+        "masd.variability.key_prefix": "masd.generation.csharp.visual_studio"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.csharp.visual_studio.directory",
+          "name": "directory",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
@@ -1127,7 +1131,7 @@
           }
         },
         {
-          "name": "masd.generation.csharp.visual_studio.postfix",
+          "name": "postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
@@ -1135,7 +1139,7 @@
           }
         },
         {
-          "name": "masd.generation.csharp.visual_studio.solution.postfix",
+          "name": "solution.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {
@@ -1143,7 +1147,7 @@
           }
         },
         {
-          "name": "masd.generation.csharp.visual_studio.project.postfix",
+          "name": "project.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "tagged_values": {

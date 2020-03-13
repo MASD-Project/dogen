@@ -13637,13 +13637,13 @@
         <dia:point val="-11,92"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-11.05,91.95;19.195,100.45"/>
+        <dia:rectangle val="-11.05,91.95;8.03,100.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-11,92"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="30.145"/>
+        <dia:real val="18.98"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="8.4000000000000004"/>
@@ -13656,7 +13656,8 @@
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
-#DOGEN masd.variability.default_binding_point=global#</dia:string>
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.key_prefix=masd.generation.csharp.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -13739,7 +13740,7 @@
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.types.directory#</dia:string>
+            <dia:string>#directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -13762,7 +13763,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.types.postfix#</dia:string>
+            <dia:string>#postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -13785,7 +13786,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.types.class.postfix#</dia:string>
+            <dia:string>#class.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -13808,7 +13809,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.types.enum.postfix#</dia:string>
+            <dia:string>#enum.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -13831,7 +13832,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.types.primitive.postfix#</dia:string>
+            <dia:string>#primitive.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -13854,7 +13855,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.types.builtin.postfix#</dia:string>
+            <dia:string>#builtin.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -13877,7 +13878,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.types.exception.postfix#</dia:string>
+            <dia:string>#exception.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -14292,16 +14293,16 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O116">
       <dia:attribute name="obj_pos">
-        <dia:point val="71.7143,91.7143"/>
+        <dia:point val="73,92"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="71.6643,91.6643;107.299,99.3643"/>
+        <dia:rectangle val="72.95,91.95;95.88,99.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="71.7143,91.7143"/>
+        <dia:point val="73,92"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="35.535000000000004"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.6000000000000005"/>
@@ -14314,7 +14315,8 @@
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
-#DOGEN masd.variability.default_binding_point=global#</dia:string>
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.key_prefix=masd.generation.csharp.test_data#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14397,7 +14399,7 @@
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.test_data.directory#</dia:string>
+            <dia:string>#directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -14420,7 +14422,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.test_data.postfix#</dia:string>
+            <dia:string>#postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -14443,7 +14445,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.test_data.class.postfix#</dia:string>
+            <dia:string>#class.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -14466,7 +14468,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.test_data.assistant.postfix#</dia:string>
+            <dia:string>#assistant.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -14489,7 +14491,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.test_data.enum.postfix#</dia:string>
+            <dia:string>#enum.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -14512,7 +14514,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.test_data.primitive.postfix#</dia:string>
+            <dia:string>#primitive.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -14546,13 +14548,13 @@
         <dia:point val="-14,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.05,21.95;25.05,28.85"/>
+        <dia:rectangle val="-14.05,21.95;16.195,28.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-14,22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="39"/>
+        <dia:real val="30.145"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -14564,7 +14566,8 @@
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.variability.generate_static_configuration=false#</dia:string>
+        <dia:string>##DOGEN masd.variability.generate_static_configuration=false
+#DOGEN masd.variability.key_prefix=masd.generation.csharp#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14647,7 +14650,7 @@
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.directory#</dia:string>
+            <dia:string>#directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -14671,7 +14674,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.aspect.requires_static_reference_equals#</dia:string>
+            <dia:string>#aspect.requires_static_reference_equals#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -14695,7 +14698,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.helper.family#</dia:string>
+            <dia:string>#helper.family#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -14719,7 +14722,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.assistant.requires_assistance#</dia:string>
+            <dia:string>#assistant.requires_assistance#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -14743,7 +14746,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.assistant.method_postfix#</dia:string>
+            <dia:string>#assistant.method_postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -15884,13 +15887,13 @@
         <dia:point val="117,92"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="116.95,91.95;149.89,98.05"/>
+        <dia:rectangle val="116.95,91.95;135.645,98.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="117,92"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="18.594999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
@@ -15903,7 +15906,8 @@
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
-#DOGEN masd.variability.default_binding_point=global#</dia:string>
+#DOGEN masd.variability.default_binding_point=global
+#DOGEN masd.variability.key_prefix=masd.generation.csharp.visual_studio#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -15986,7 +15990,7 @@
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.visual_studio.directory#</dia:string>
+            <dia:string>#directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -16009,7 +16013,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.visual_studio.postfix#</dia:string>
+            <dia:string>#postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -16032,7 +16036,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.visual_studio.solution.postfix#</dia:string>
+            <dia:string>#solution.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -16055,7 +16059,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.csharp.visual_studio.project.postfix#</dia:string>
+            <dia:string>#project.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
