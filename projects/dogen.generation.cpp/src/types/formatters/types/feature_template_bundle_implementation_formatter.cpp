@@ -141,9 +141,14 @@ a.stream() << "    r.value_type(vt);" << std::endl;
 a.stream() << "    r.binding_point(" << enum_mapper::from_binding_point(*ft.binding_point()) << ");" << std::endl;
 a.stream() << "    r.instantiation_domain_name(\"" << ftb.instantiation_domain_name() << "\");" << std::endl;
 
-                   if (!ft.default_value().empty()) {
+                    if (!ft.default_value().empty()) {
 a.stream() << "    dogen::variability::helpers::value_factory f;" << std::endl;
 a.stream() << "    r.default_value(f.make(vt, std::list<std::string>{ " << ft.default_value() << " }));" << std::endl;
+                        for (const auto& dvo : ft.default_value_overrides()) {
+a.stream() << "    r.default_value_overrides().push_back(" << std::endl;
+a.stream() << "        default_value_override(\"" << dvo.key_ends_with() << "\", " << std::endl;
+a.stream() << "            f.make(vt, std::list<std::string>{ " << dvo.default_value() << " }));" << std::endl;
+                       }
                    }
 a.stream() << "    return r;" << std::endl;
 a.stream() << "}" << std::endl;
