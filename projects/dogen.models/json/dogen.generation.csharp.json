@@ -831,11 +831,6 @@
           "name": "supported",
           "type": "masd::variability::boolean",
           "value": "\"true\""
-        },
-        {
-          "name": "overwrite",
-          "type": "masd::variability::boolean",
-          "value": "\"true\""
         }
       ]
     },

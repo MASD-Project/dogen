@@ -37,7 +37,6 @@ class facet_features final {
 public:
     struct feature_group {
         variability::meta_model::feature supported;
-        variability::meta_model::feature overwrite;
     };
 
     static feature_group
@@ -46,11 +45,9 @@ public:
 public:
     struct static_configuration {
         bool supported;
-        bool overwrite;
 
         static_configuration() :
-            supported(),
-            overwrite() {}
+            supported() {}
     };
 
     static static_configuration make_static_configuration(

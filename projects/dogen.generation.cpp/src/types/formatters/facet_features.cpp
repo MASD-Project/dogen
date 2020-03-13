@@ -41,20 +41,6 @@ make_supported() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
-make_overwrite() {
-    using namespace dogen::variability::meta_model;
-    feature_template r;
-    r.name().simple("overwrite");
-    const auto vt(value_type::boolean);
-    r.value_type(vt);
-    r.binding_point(binding_point::element);
-    r.instantiation_domain_name("masd.generation.cpp.facet");
-    dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "true" }));
-    return r;
-}
-
 }
 
 facet_features::feature_group
@@ -63,7 +49,6 @@ facet_features::make_feature_group(const dogen::variability::meta_model::feature
     const dogen::variability::helpers::feature_selector s(fm);
 
     r.supported = s.get_by_name("supported");
-    r.overwrite = s.get_by_name("overwrite");
 
     return r;
 }
@@ -75,7 +60,6 @@ facet_features::static_configuration facet_features::make_static_configuration(
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
     r.supported = s.get_boolean_content_or_default(fg.supported);
-    r.overwrite = s.get_boolean_content_or_default(fg.overwrite);
     return r;
 }
 
@@ -84,7 +68,6 @@ facet_features::make_templates() {
     using namespace dogen::variability::meta_model;
     std::list<dogen::variability::meta_model::feature_template> r;
     r.push_back(make_supported());
-    r.push_back(make_overwrite());
     return r;
 }
 
