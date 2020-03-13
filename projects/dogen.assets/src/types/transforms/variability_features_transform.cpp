@@ -67,17 +67,26 @@ namespace dogen::assets::transforms {
 
 void variability_features_transform::update(
     const features::variability_templates::feature_group& fg,
-    meta_model::variability::abstract_feature& ft) {
+    meta_model::variability::abstract_feature& af) {
 
     using features::variability_templates;
-    const auto scfg(variability_templates::make_static_configuration(fg, ft));
+    const auto scfg(variability_templates::make_static_configuration(fg, af));
+    af.is_optional(scfg.is_optional);
 
-    ft.is_optional(scfg.is_optional);
+    auto ft(dynamic_cast<meta_model::variability::feature_template*>(&af));
+    if (ft) {
+        for (const auto& pair : scfg.default_value_override) {
+            meta_model::variability::default_value_override dvo;
+            dvo.key_ends_with(pair.first);
+            dvo.default_value(pair.second);
+            ft->default_value_overrides().push_back(dvo);
+        }
+    }
 
     using boost::lexical_cast;
     using variability::meta_model::binding_point;
     if (!scfg.binding_point.empty())
-        ft.binding_point(lexical_cast<binding_point>(scfg.binding_point));
+        af.binding_point(lexical_cast<binding_point>(scfg.binding_point));
 }
 
 void variability_features_transform::
