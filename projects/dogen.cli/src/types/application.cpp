@@ -36,6 +36,7 @@ using dogen::cli::configuration;
 using dogen::cli::application_exception;
 using dogen::cli::generation_configuration;
 using dogen::cli::conversion_configuration;
+using dogen::cli::dumpspecs_configuration;
 
 class activity_dispatcher : public boost::static_visitor<> {
 public:
@@ -52,6 +53,9 @@ public:
     void operator()(const generation_configuration& cfg) const {
         generator_.generate(configuration_.api(), cfg.target(),
             cfg.output_directory());
+    }
+
+    void operator()(const dumpspecs_configuration&) const {
     }
 
 private:

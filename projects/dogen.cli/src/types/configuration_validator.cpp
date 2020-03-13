@@ -40,6 +40,7 @@ using dogen::cli::configuration;
 using dogen::cli::configuration_validator;
 using dogen::cli::generation_configuration;
 using dogen::cli::conversion_configuration;
+using dogen::cli::dumpspecs_configuration;
 
 class activity_dispatcher : public boost::static_visitor<> {
 public:
@@ -49,6 +50,10 @@ public:
 
     void operator()(const generation_configuration& cfg) const {
         configuration_validator::validate(cfg);
+    }
+
+    void operator()(const dumpspecs_configuration&) const {
+        // nothing to validate
     }
 };
 
@@ -68,7 +73,7 @@ void configuration_validator::validate(const generation_configuration& cfg) {
         BOOST_THROW_EXCEPTION(invalid_configuration_exception(missing_target));
     }
 
-    /**
+    /*
      * We require the target path supplied to us to be an absolute
      * path. This is because we perform calculations off of it such as
      * locating the reference models and so forth. The end-user is not
