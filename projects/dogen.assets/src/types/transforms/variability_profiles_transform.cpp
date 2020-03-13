@@ -68,7 +68,7 @@ update(const features::variability_profile::feature_group& fg,
     using vp = assets::features::variability_profile;
     const auto scfg(vp::make_static_configuration(fg, ap));
     ap.stereotype(scfg.stereotype);
-    ap.key_prefix(scfg.prefix);
+    ap.key_prefix(scfg.key_prefix);
 }
 
 void variability_profiles_transform::

@@ -38922,7 +38922,7 @@ At present the system only supports wale templates.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.variability.prefix#</dia:string>
+            <dia:string>#masd.variability.key_prefix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -38934,7 +38934,7 @@ At present the system only supports wale templates.#</dia:string>
             <dia:string>#Prefix to apply to construct the qualified name, if any.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd::variability::text
+#DOGEN masd.variability.qualified_name=masd.variability.key_prefix
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -48391,7 +48391,7 @@ the default value field if available.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.variability.prefix#</dia:string>
+            <dia:string>#masd.variability.key_prefix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -48403,7 +48403,7 @@ the default value field if available.
             <dia:string>#Prefix to apply to construct the qualified name, if any.
 
 #DOGEN masd.variability.binding_point=element
-#DOGEN masd.variability.qualified_name=masd::variability::text
+#DOGEN masd.variability.qualified_name=masd.variability.key_prefix
 #DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">

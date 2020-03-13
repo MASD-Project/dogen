@@ -86,7 +86,7 @@ update(const features::variability_bundle::feature_group& fg,
 
     using features::variability_bundle;
     const auto scfg(variability_bundle::make_static_configuration(fg, fb));
-    fb.key_prefix(scfg.prefix);
+    fb.key_prefix(scfg.key_prefix);
     fb.generate_registration(scfg.generate_registration);
     fb.generate_static_configuration(scfg.generate_static_configuration);
 

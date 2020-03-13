@@ -40,7 +40,7 @@ class variability_profile final {
 public:
     struct feature_group {
         variability::meta_model::feature stereotype;
-        variability::meta_model::feature prefix;
+        variability::meta_model::feature key_prefix;
     };
 
     static feature_group
@@ -49,7 +49,7 @@ public:
 public:
     struct static_configuration {
         std::string stereotype;
-        std::string prefix;
+        std::string key_prefix;
     };
 
     static static_configuration make_static_configuration(

@@ -43,7 +43,7 @@ public:
         variability::meta_model::feature generate_static_configuration;
         variability::meta_model::feature default_binding_point;
         variability::meta_model::feature instantiation_domain_name;
-        variability::meta_model::feature prefix;
+        variability::meta_model::feature key_prefix;
     };
 
     static feature_group
@@ -55,7 +55,7 @@ public:
         bool generate_static_configuration;
         std::string default_binding_point;
         std::string instantiation_domain_name;
-        std::string prefix;
+        std::string key_prefix;
 
         static_configuration() :
             generate_registration(),
