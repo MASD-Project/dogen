@@ -247,6 +247,16 @@
         "dogen::handcrafted::cmake"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "spec_dumper",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "tagged_values": {
+        "masd.generalization.parent": "dogen::spec_dumper"
+      },
+      "fallback_element_type": "masd::object"
     }
   ]
 }

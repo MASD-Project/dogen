@@ -18,30 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TYPES_SPEC_DUMPER_HPP
-#define DOGEN_TYPES_SPEC_DUMPER_HPP
+#ifndef DOGEN_ENGINE_TYPES_SPEC_DUMPER_HPP
+#define DOGEN_ENGINE_TYPES_SPEC_DUMPER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <algorithm>
+#include "dogen/types/spec_dumper.hpp"
 
-namespace dogen {
+namespace dogen::engine {
 
-class spec_dumper {
+class spec_dumper final : public dogen::spec_dumper {
 public:
     spec_dumper() = default;
     spec_dumper(const spec_dumper&) = default;
     spec_dumper(spec_dumper&&) = default;
-    ~spec_dumper() = default;
     spec_dumper& operator=(const spec_dumper&) = default;
+
+    virtual ~spec_dumper() noexcept { }
 
 public:
     bool operator==(const spec_dumper& rhs) const;
     bool operator!=(const spec_dumper& rhs) const {
         return !this->operator==(rhs);
     }
+
+public:
 
 };
 
