@@ -24,45 +24,48 @@
       "stereotypes": [
         "masd::variability::profile"
       ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd.generation.cpp"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.cpp.odb.enabled",
+          "name": "odb.enabled",
           "type": "",
           "value": "false"
         },
         {
-          "name": "masd.generation.cpp.hash.enabled",
+          "name": "hash.enabled",
           "type": "",
           "value": "false"
         },
         {
-          "name": "masd.generation.cpp.serialization.enabled",
+          "name": "serialization.enabled",
           "type": "",
           "value": "false"
         },
         {
-          "name": "masd.generation.cpp.lexical_cast.enabled",
+          "name": "lexical_cast.enabled",
           "type": "",
           "value": "false"
         },
         {
-          "name": "masd.generation.cpp.tests.enabled",
+          "name": "tests.enabled",
           "type": "",
           "value": "false"
         },
         {
-          "name": "masd.generation.cpp.test_data.enabled",
+          "name": "test_data.enabled",
           "type": "",
           "value": "false"
         },
         {
-          "name": "masd.generation.cpp.templates.enabled",
+          "name": "templates.enabled",
           "type": "",
           "value": "true"
         },
         {
-          "name": "masd.generation.cpp.standard",
+          "name": "standard",
           "type": "",
           "value": "c++-17"
         }
@@ -75,27 +78,28 @@
         "masd::variability::profile"
       ],
       "tagged_values": {
-        "masd.variability.binding_point": "global"
+        "masd.variability.binding_point": "global",
+        "masd.variability.key_prefix": "masd.generation.decoration"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.decoration.enabled",
+          "name": "enabled",
           "type": "",
           "value": "true"
         },
         {
-          "name": "masd.generation.decoration.licence_name",
+          "name": "licence_name",
           "type": "",
           "value": "masd.gpl_v3"
         },
         {
-          "name": "masd.generation.decoration.modeline_group_name",
+          "name": "modeline_group_name",
           "type": "",
           "value": "masd.emacs"
         },
         {
-          "name": "masd.generation.decoration.copyright_notice",
+          "name": "copyright_notice",
           "type": "",
           "tagged_values": {
             "masd.variability.value": "Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>"
@@ -109,15 +113,18 @@
       "stereotypes": [
         "masd::variability::profile"
       ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd.extraction"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.extraction.delete_extra_files",
+          "name": "delete_extra_files",
           "type": "",
           "value": "true"
         },
         {
-          "name": "masd.extraction.delete_empty_directories",
+          "name": "delete_empty_directories",
           "type": "",
           "value": "true"
         }
@@ -140,17 +147,20 @@
       "stereotypes": [
         "masd::variability::profile"
       ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd.generation.csharp"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.csharp.enabled",
+          "name": "enabled",
           "type": "",
           "value": "false"
         }
       ]
     },
     {
-      "name": "base::profile_base",
+      "name": "base::base_profile",
       "parents": [
         "base::cpp",
         "base::base",
@@ -164,7 +174,7 @@
     {
       "name": "base::default_profile",
       "parents": [
-        "base::profile_base"
+        "base::base_profile"
       ],
       "documentation": "Variability profile for a typical dogen model.\n",
       "stereotypes": [
@@ -240,12 +250,13 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.stereotype": "dogen::pretty_printable"
+        "masd.variability.stereotype": "dogen::pretty_printable",
+        "masd.variability.key_prefix": "masd.generation.cpp.io"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.cpp.io.enabled",
+          "name": "enabled",
           "type": "",
           "value": "true"
         }
@@ -259,12 +270,13 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.stereotype": "dogen::hashable"
+        "masd.variability.stereotype": "dogen::hashable",
+        "masd.variability.key_prefix": "masd.generation.cpp.hash"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.cpp.hash.enabled",
+          "name": "enabled",
           "type": "",
           "value": "true"
         }
@@ -277,12 +289,13 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.stereotype": "dogen::serializable"
+        "masd.variability.stereotype": "dogen::serializable",
+        "masd.variability.key_prefix": "masd.generation.cpp.serialization"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.cpp.serialization.enabled",
+          "name": "enabled",
           "type": "",
           "value": "true"
         }
@@ -316,17 +329,18 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.stereotype": "dogen::handcrafted::pretty_printable"
+        "masd.variability.stereotype": "dogen::handcrafted::pretty_printable",
+        "masd.variability.key_prefix": "masd.generation.cpp.io"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.cpp.io.enabled",
+          "name": "enabled",
           "type": "",
           "value": "true"
         },
         {
-          "name": "masd.generation.cpp.io.overwrite",
+          "name": "overwrite",
           "type": "",
           "value": "false"
         }
@@ -343,22 +357,23 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.stereotype": "dogen::handcrafted::typeable"
+        "masd.variability.stereotype": "dogen::handcrafted::typeable",
+        "masd.variability.key_prefix": "masd.generation.cpp.types"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.cpp.types.enabled",
+          "name": "enabled",
           "type": "",
           "value": "true"
         },
         {
-          "name": "masd.generation.cpp.types.overwrite",
+          "name": "overwrite",
           "type": "",
           "value": "false"
         },
         {
-          "name": "masd.generation.cpp.types.class_forward_declarations.enabled",
+          "name": "class_forward_declarations.enabled",
           "type": "",
           "value": "false"
         }
@@ -375,12 +390,13 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
-        "masd.variability.stereotype": "dogen::handcrafted::typeable::header_only"
+        "masd.variability.stereotype": "dogen::handcrafted::typeable::header_only",
+        "masd.variability.key_prefix": "masd.generation.cpp.types"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.cpp.types.class_implementation.enabled",
+          "name": "class_implementation.enabled",
           "type": "",
           "value": "false"
         }
@@ -415,68 +431,82 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.stereotype": "dogen::handcrafted::typeable::implementation_only"
+        "masd.variability.stereotype": "dogen::handcrafted::typeable::implementation_only",
+        "masd.variability.key_prefix": "masd.generation.cpp.types"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.cpp.types.class_header.enabled",
+          "name": "class_header.enabled",
           "type": "",
           "value": "false"
         },
         {
-          "name": "masd.generation.cpp.types.class_forward_declarations.enabled",
+          "name": "class_forward_declarations.enabled",
           "type": "",
           "value": "false"
         },
         {
-          "name": "masd.generation.cpp.types.class_implementation.enabled",
+          "name": "class_implementation.enabled",
           "type": "",
           "value": "true"
         }
       ]
     },
     {
-      "name": "composable::cpp_artefact_formatter",
+      "name": "composable::base_formatter",
       "parents": [
         "composable::handcrafted_typeable"
       ],
       "stereotypes": [
         "masd::variability::profile"
       ],
-      "tagged_values": {
-        "masd.variability.binding_point": "global",
-        "masd.variability.stereotype": "dogen::cpp::artefact_formatter"
-      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "masd.generalization.parent",
           "type": "",
           "value": "formatters::artefact_formatter_interface"
-        },
+        }
+      ]
+    },
+    {
+      "name": "composable::cpp_artefact_formatter",
+      "parents": [
+        "composable::base_formatter"
+      ],
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "global",
+        "masd.variability.stereotype": "dogen::cpp::artefact_formatter",
+        "masd.variability.key_prefix": "masd.generation.cpp.types"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
         {
-          "name": "masd.generation.cpp.types.class_header.formatting_style",
+          "name": "class_header.formatting_style",
           "type": "",
           "value": "wale"
         },
         {
-          "name": "masd.generation.cpp.types.class_header.formatting_input",
+          "name": "class_header.formatting_input",
           "type": "",
           "value": "cpp_artefact_formatter_header.wale"
         },
         {
-          "name": "masd.generation.cpp.types.class_header.overwrite",
+          "name": "class_header.overwrite",
           "type": "",
           "value": "true"
         },
         {
-          "name": "masd.generation.cpp.types.class_implementation.formatting_style",
+          "name": "class_implementation.formatting_style",
           "type": "",
           "value": "stitch"
         },
         {
-          "name": "masd.generation.cpp.types.class_implementation.overwrite",
+          "name": "class_implementation.overwrite",
           "type": "",
           "value": "true"
         }
@@ -485,90 +515,99 @@
     {
       "name": "composable::csharp_artefact_formatter",
       "parents": [
-        "composable::handcrafted_typeable"
+        "composable::base_formatter"
       ],
       "stereotypes": [
         "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
-        "masd.variability.stereotype": "dogen::csharp::artefact_formatter"
+        "masd.variability.stereotype": "dogen::csharp::artefact_formatter",
+        "masd.variability.key_prefix": "masd.generation.cpp.types"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generalization.parent",
-          "type": "",
-          "value": "formatters::artefact_formatter_interface"
-        },
-        {
-          "name": "masd.generation.cpp.types.class_header.formatting_style",
+          "name": "class_header.formatting_style",
           "type": "",
           "value": "wale"
         },
         {
-          "name": "masd.generation.cpp.types.class_header.formatting_input",
+          "name": "class_header.formatting_input",
           "type": "",
           "value": "csharp_artefact_formatter_header.wale"
         },
         {
-          "name": "masd.generation.cpp.types.class_header.overwrite",
+          "name": "class_header.overwrite",
           "type": "",
           "value": "true"
         },
         {
-          "name": "masd.generation.cpp.types.class_implementation.formatting_style",
+          "name": "class_implementation.formatting_style",
           "type": "",
           "value": "stitch"
         },
         {
-          "name": "masd.generation.cpp.types.class_implementation.overwrite",
+          "name": "class_implementation.overwrite",
           "type": "",
           "value": "true"
         }
       ]
     },
     {
-      "name": "composable::cpp_helper_formatter",
+      "name": "composable::base_helper_formatter",
       "parents": [
         "composable::handcrafted_typeable"
       ],
       "stereotypes": [
         "masd::variability::profile"
       ],
-      "tagged_values": {
-        "masd.variability.binding_point": "global",
-        "masd.variability.stereotype": "dogen::cpp::helper_formatter"
-      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "masd.generalization.parent",
           "type": "",
           "value": "formatters::helper_formatter_interface"
-        },
+        }
+      ]
+    },
+    {
+      "name": "composable::cpp_helper_formatter",
+      "parents": [
+        "composable::base_helper_formatter"
+      ],
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "tagged_values": {
+        "masd.variability.binding_point": "global",
+        "masd.variability.stereotype": "dogen::cpp::helper_formatter",
+        "masd.variability.key_prefix": "masd.generation.cpp.types"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
         {
-          "name": "masd.generation.cpp.types.class_header.formatting_style",
+          "name": "class_header.formatting_style",
           "type": "",
           "value": "wale"
         },
         {
-          "name": "masd.generation.cpp.types.class_header.formatting_input",
+          "name": "class_header.formatting_input",
           "type": "",
           "value": "cpp_helper_formatter_header.wale"
         },
         {
-          "name": "masd.generation.cpp.types.class_header.overwrite",
+          "name": "class_header.overwrite",
           "type": "",
           "value": "true"
         },
         {
-          "name": "masd.generation.cpp.types.class_implementation.formatting_style",
+          "name": "class_implementation.formatting_style",
           "type": "",
           "value": "stitch"
         },
         {
-          "name": "masd.generation.cpp.types.class_implementation.overwrite",
+          "name": "class_implementation.overwrite",
           "type": "",
           "value": "true"
         }
@@ -577,44 +616,40 @@
     {
       "name": "composable::csharp_helper_formatter",
       "parents": [
-        "composable::handcrafted_typeable"
+        "composable::base_helper_formatter"
       ],
       "stereotypes": [
         "masd::variability::profile"
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
-        "masd.variability.stereotype": "dogen::csharp::helper_formatter"
+        "masd.variability.stereotype": "dogen::csharp::helper_formatter",
+        "masd.variability.key_prefix": "masd.generation.cpp.types"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generalization.parent",
-          "type": "",
-          "value": "formatters::helper_formatter_interface"
-        },
-        {
-          "name": "masd.generation.cpp.types.class_header.formatting_style",
+          "name": "class_header.formatting_style",
           "type": "",
           "value": "wale"
         },
         {
-          "name": "masd.generation.cpp.types.class_header.formatting_input",
+          "name": "class_header.formatting_input",
           "type": "",
           "value": "csharp_helper_formatter_header.wale"
         },
         {
-          "name": "masd.generation.cpp.types.class_header.overwrite",
+          "name": "class_header.overwrite",
           "type": "",
           "value": "true"
         },
         {
-          "name": "masd.generation.cpp.types.class_implementation.formatting_style",
+          "name": "class_implementation.formatting_style",
           "type": "",
           "value": "stitch"
         },
         {
-          "name": "masd.generation.cpp.types.class_implementation.overwrite",
+          "name": "class_implementation.overwrite",
           "type": "",
           "value": "true"
         }
@@ -630,17 +665,18 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.stereotype": "dogen::handcrafted::serializable"
+        "masd.variability.stereotype": "dogen::handcrafted::serializable",
+        "masd.variability.key_prefix": "masd.generation.cpp.serialization"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.cpp.serialization.enabled",
+          "name": "enabled",
           "type": "",
           "value": "true"
         },
         {
-          "name": "masd.generation.cpp.serialization.overwrite",
+          "name": "overwrite",
           "type": "",
           "value": "false"
         }
@@ -653,12 +689,13 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.stereotype": "dogen::convertible"
+        "masd.variability.stereotype": "dogen::convertible",
+        "masd.variability.key_prefix": "masd.generation.cpp.lexical_cast"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.cpp.lexical_cast.enabled",
+          "name": "enabled",
           "type": "",
           "value": "true"
         }
@@ -667,20 +704,23 @@
     {
       "name": "base::relational_profile",
       "parents": [
-        "base::profile_base"
+        "base::base_profile"
       ],
       "stereotypes": [
         "masd::variability::profile"
       ],
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd.generation.cpp"
+      },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.cpp.odb.enabled",
+          "name": "odb.enabled",
           "type": "",
           "value": "true"
         },
         {
-          "name": "masd.generation.cpp.build.enabled",
+          "name": "build.enabled",
           "type": "",
           "value": "true"
         }
@@ -745,12 +785,13 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.stereotype": "dogen::untestable"
+        "masd.variability.stereotype": "dogen::untestable",
+        "masd.variability.key_prefix": "masd.generation.cpp.tests"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.cpp.tests.enabled",
+          "name": "enabled",
           "type": "",
           "value": "false"
         }
@@ -764,12 +805,13 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.stereotype": "dogen::untypable"
+        "masd.variability.stereotype": "dogen::untypable",
+        "masd.variability.key_prefix": "masd.generation.cpp.types"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.cpp.types.enabled",
+          "name": "enabled",
           "type": "",
           "value": "false"
         }
@@ -782,17 +824,18 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "element",
-        "masd.variability.stereotype": "dogen::handcrafted::cmake"
+        "masd.variability.stereotype": "dogen::handcrafted::cmake",
+        "masd.variability.key_prefix": "masd.generation.cpp"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.cpp.build.enabled",
+          "name": "build.enabled",
           "type": "",
           "value": "true"
         },
         {
-          "name": "masd.generation.cpp.build.overwrite",
+          "name": "build.overwrite",
           "type": "",
           "value": "false"
         }
