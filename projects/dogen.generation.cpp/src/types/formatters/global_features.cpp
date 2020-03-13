@@ -303,34 +303,6 @@ make_masd_generation_cpp_streaming_remove_unprintable_characters() {
     return r;
 }
 
-dogen::variability::meta_model::feature
-make_masd_generation_cpp_cmake_source_cmakelists_postfix() {
-    using namespace dogen::variability::meta_model;
-    feature r;
-    r.name().simple("postfix");
-    r.name().qualified("masd.generation.cpp.cmake.source_cmakelists.postfix");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::global);
-    dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "" }));
-    return r;
-}
-
-dogen::variability::meta_model::feature
-make_masd_generation_cpp_cmake_include_cmakelists_postfix() {
-    using namespace dogen::variability::meta_model;
-    feature r;
-    r.name().simple("postfix");
-    r.name().qualified("masd.generation.cpp.cmake.include_cmakelists.postfix");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::global);
-    dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "" }));
-    return r;
-}
-
 }
 
 
@@ -358,8 +330,6 @@ global_features::make_features() {
     r.push_back(make_masd_generation_cpp_streaming_string_conversion_method());
     r.push_back(make_masd_generation_cpp_streaming_requires_quoting());
     r.push_back(make_masd_generation_cpp_streaming_remove_unprintable_characters());
-    r.push_back(make_masd_generation_cpp_cmake_source_cmakelists_postfix());
-    r.push_back(make_masd_generation_cpp_cmake_include_cmakelists_postfix());
     return r;
 }
 

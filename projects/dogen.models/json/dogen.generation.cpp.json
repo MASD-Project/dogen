@@ -2559,26 +2559,6 @@
             "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.generation.cpp.streaming.remove_unprintable_characters"
           }
-        },
-        {
-          "name": "cmake.source_cmakelists.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\"",
-          "documentation": "Which postfix to use for source CMakelists.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.cmake.source_cmakelists.postfix"
-          }
-        },
-        {
-          "name": "cmake.include_cmakelists.postfix",
-          "type": "masd::variability::text",
-          "value": "\"\"",
-          "documentation": "Which postfix to use for include CMakelists.\n",
-          "tagged_values": {
-            "masd.variability.binding_point": "global",
-            "masd.variability.qualified_name": "masd.generation.cpp.cmake.include_cmakelists.postfix"
-          }
         }
       ]
     },
