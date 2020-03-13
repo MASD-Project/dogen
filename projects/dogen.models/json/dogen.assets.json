@@ -3107,6 +3107,16 @@
             "masd.variability.qualified_name": "masd.variability.instantiation_domain_name",
             "masd.variability.is_optional": "true"
           }
+        },
+        {
+          "name": "masd.variability.prefix",
+          "type": "masd::variability::text",
+          "documentation": "Prefix to apply to construct the qualified name, if any.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd::variability::text",
+            "masd.variability.is_optional": "true"
+          }
         }
       ]
     },
@@ -3836,6 +3846,16 @@
           "tagged_values": {
             "masd.variability.binding_point": "element",
             "masd.variability.qualified_name": "masd.variability.stereotype",
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "masd.variability.prefix",
+          "type": "masd::variability::text",
+          "documentation": "Prefix to apply to construct the qualified name, if any.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "element",
+            "masd.variability.qualified_name": "masd::variability::text",
             "masd.variability.is_optional": "true"
           }
         }

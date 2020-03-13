@@ -79,6 +79,18 @@ make_masd_variability_instantiation_domain_name() {
     return r;
 }
 
+dogen::variability::meta_model::feature
+make_masd_variability_prefix() {
+    using namespace dogen::variability::meta_model;
+    feature r;
+    r.name().simple("prefix");
+    r.name().qualified("masd.variability.prefix");
+    const auto vt(value_type::text);
+    r.value_type(vt);
+    r.binding_point(binding_point::element);
+    return r;
+}
+
 }
 
 variability_bundle::feature_group
@@ -90,6 +102,7 @@ variability_bundle::make_feature_group(const dogen::variability::meta_model::fea
     r.generate_static_configuration = s.get_by_name("masd.variability.generate_static_configuration");
     r.default_binding_point = s.get_by_name("masd.variability.default_binding_point");
     r.instantiation_domain_name = s.get_by_name("masd.variability.instantiation_domain_name");
+    r.prefix = s.get_by_name("masd.variability.prefix");
 
     return r;
 }
@@ -106,6 +119,8 @@ variability_bundle::static_configuration variability_bundle::make_static_configu
         r.default_binding_point = s.get_text_content(fg.default_binding_point);
     if (s.has_configuration_point(fg.instantiation_domain_name))
         r.instantiation_domain_name = s.get_text_content(fg.instantiation_domain_name);
+    if (s.has_configuration_point(fg.prefix))
+        r.prefix = s.get_text_content(fg.prefix);
     return r;
 }
 
@@ -117,6 +132,7 @@ variability_bundle::make_features() {
     r.push_back(make_masd_variability_generate_static_configuration());
     r.push_back(make_masd_variability_default_binding_point());
     r.push_back(make_masd_variability_instantiation_domain_name());
+    r.push_back(make_masd_variability_prefix());
     return r;
 }
 
