@@ -68,7 +68,7 @@
         <dia:point val="-39,-58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-39.05,-58.05;-18.43,-49.55"/>
+        <dia:rectangle val="-39.05,-58.05;-18.43,-50.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-39,-58"/>
@@ -77,7 +77,7 @@
         <dia:real val="20.52"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.4000000000000004"/>
+        <dia:real val="7.6000000000000005"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#configuration#</dia:string>
@@ -294,29 +294,6 @@
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Configuration related to database connectivity, if any.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#dump_specs#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#If true, collects all the specs about this version of dogen.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2406,16 +2383,16 @@ ELEMENT_NAME and ATTRIBUTE_NAME can be left blank.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-39,-49.6"/>
+        <dia:point val="-39,-50.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-51.1425,-49.65;-38.8,-45.2"/>
+        <dia:rectangle val="-51.1425,-50.45;-38.8,-45.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-39,-49.6"/>
+        <dia:point val="-39,-50.4"/>
         <dia:point val="-39,-48"/>
         <dia:point val="-50.3925,-48"/>
         <dia:point val="-50.3925,-46"/>
@@ -2670,16 +2647,16 @@ ELEMENT_NAME and ATTRIBUTE_NAME can be left blank.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-18.48,-49.6"/>
+        <dia:point val="-18.48,-50.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.53,-49.65;-6.835,-45.2"/>
+        <dia:rectangle val="-18.53,-50.45;-6.835,-45.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-18.48,-49.6"/>
+        <dia:point val="-18.48,-50.4"/>
         <dia:point val="-18.48,-48"/>
         <dia:point val="-7.585,-48"/>
         <dia:point val="-7.585,-46"/>
@@ -4699,16 +4676,16 @@ ELEMENT_NAME and ATTRIBUTE_NAME can be left blank.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-28.74,-49.6"/>
+        <dia:point val="-28.74,-50.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-30.4962,-50.35;-27.99,-45.2"/>
+        <dia:rectangle val="-30.4962,-51.15;-27.99,-45.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-28.74,-49.6"/>
+        <dia:point val="-28.74,-50.4"/>
         <dia:point val="-28.74,-48"/>
         <dia:point val="-30.4462,-48"/>
         <dia:point val="-30.4462,-46"/>

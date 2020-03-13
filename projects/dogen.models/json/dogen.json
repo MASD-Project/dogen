@@ -48,11 +48,6 @@
           "name": "database",
           "type": "boost::optional<database_configuration>",
           "documentation": "Configuration related to database connectivity, if any.\n"
-        },
-        {
-          "name": "dump_specs",
-          "type": "bool",
-          "documentation": "If true, collects all the specs about this version of dogen.\n"
         }
       ]
     },

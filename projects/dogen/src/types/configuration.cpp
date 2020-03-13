@@ -22,17 +22,13 @@
 
 namespace dogen {
 
-configuration::configuration()
-    : dump_specs_(static_cast<bool>(0)) { }
-
 configuration::configuration(configuration&& rhs)
     : model_processing_(std::move(rhs.model_processing_)),
       tracing_(std::move(rhs.tracing_)),
       diffing_(std::move(rhs.diffing_)),
       reporting_(std::move(rhs.reporting_)),
       byproduct_directory_(std::move(rhs.byproduct_directory_)),
-      database_(std::move(rhs.database_)),
-      dump_specs_(std::move(rhs.dump_specs_)) { }
+      database_(std::move(rhs.database_)) { }
 
 configuration::configuration(
     const dogen::model_processing_configuration& model_processing,
@@ -40,15 +36,13 @@ configuration::configuration(
     const boost::optional<dogen::diffing_configuration>& diffing,
     const boost::optional<dogen::reporting_configuration>& reporting,
     const boost::filesystem::path& byproduct_directory,
-    const boost::optional<dogen::database_configuration>& database,
-    const bool dump_specs)
+    const boost::optional<dogen::database_configuration>& database)
     : model_processing_(model_processing),
       tracing_(tracing),
       diffing_(diffing),
       reporting_(reporting),
       byproduct_directory_(byproduct_directory),
-      database_(database),
-      dump_specs_(dump_specs) { }
+      database_(database) { }
 
 void configuration::swap(configuration& other) noexcept {
     using std::swap;
@@ -58,7 +52,6 @@ void configuration::swap(configuration& other) noexcept {
     swap(reporting_, other.reporting_);
     swap(byproduct_directory_, other.byproduct_directory_);
     swap(database_, other.database_);
-    swap(dump_specs_, other.dump_specs_);
 }
 
 bool configuration::operator==(const configuration& rhs) const {
@@ -67,8 +60,7 @@ bool configuration::operator==(const configuration& rhs) const {
         diffing_ == rhs.diffing_ &&
         reporting_ == rhs.reporting_ &&
         byproduct_directory_ == rhs.byproduct_directory_ &&
-        database_ == rhs.database_ &&
-        dump_specs_ == rhs.dump_specs_;
+        database_ == rhs.database_;
 }
 
 configuration& configuration::operator=(configuration other) {
@@ -182,15 +174,6 @@ configuration& configuration::database(const boost::optional<dogen::database_con
 
 configuration& configuration::database(const boost::optional<dogen::database_configuration>&& v) {
     database_ = std::move(v);
-    return *this;
-}
-
-bool configuration::dump_specs() const {
-    return dump_specs_;
-}
-
-configuration& configuration::dump_specs(const bool v) {
-    dump_specs_ = v;
     return *this;
 }
 
