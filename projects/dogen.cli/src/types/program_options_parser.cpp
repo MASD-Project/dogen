@@ -61,6 +61,7 @@ const std::string convert_command_desc(
 const std::string help_arg("help");
 const std::string version_arg("version");
 const std::string command_arg("command");
+const std::string dumpspecs_arg("dumpspecs");
 const std::string logging_log_enabled_arg("log-enabled");
 const std::string logging_log_to_console_arg("log-to-console");
 const std::string logging_log_level_arg("log-level");
@@ -159,7 +160,8 @@ options_description make_top_level_visible_options_description() {
     options_description god("General");
     god.add_options()
         ("help,h", "Display usage and exit.")
-        ("version,v", "Output version information and exit.");
+        ("version,v", "Output version information and exit.")
+        ("dumpspecs", "Dumps internal information from Dogen setup.");
 
     options_description r;
     r.add(god);
@@ -400,24 +402,28 @@ void version(std::ostream& s) {
  */
 boost::optional<configuration>
 handle_no_command(const bool has_version, const bool has_help,
-    const options_description& od, std::ostream& info) {
+    const bool has_dumpspecs, const options_description& od,
+    std::ostream& info) {
     /*
-     * The only valid options are help or version, so if those are
-     * not present we can safely throw.
+     * The only valid options are help, version or dumpspecs, so if
+     * those are not present we can safely throw.
      */
-    if (!has_version && !has_help) {
+    if (!has_version && !has_help && !has_dumpspecs)
         BOOST_THROW_EXCEPTION(parser_exception(no_command_msg));
-    }
 
     /*
-     * Note that we do not mind if the user has supplied both help
-     * and version - help takes priority.
+     * Note that we do not mind if the user has supplied both help and
+     * version - help takes priority.
      */
     if (has_help)
         print_help(od, info);
     else if (has_version)
         version(info);
-
+    else {
+        configuration r;
+        r.cli().dumpspecs(has_dumpspecs);
+        return r;
+    }
     return boost::optional<configuration>();
 }
 
@@ -871,14 +877,17 @@ parse(const std::vector<std::string>& arguments, std::ostream& info) {
     boost::program_options::store(po, vm);
     const bool has_command(vm.count(command_arg));
     const bool has_version(vm.count(version_arg));
+    const bool has_dumpspecs(vm.count(dumpspecs_arg));
     const bool has_help(vm.count(help_arg));
 
     /*
      * First, handle the simpler case where no command is
      * supplied. Note that we only supply the visible options here.
      */
-    if (!has_command)
-        return handle_no_command(has_version, has_help, visible, info);
+    if (!has_command) {
+        return handle_no_command(has_version, has_help,
+            has_dumpspecs, visible, info);
+    }
 
     /*
      * If the user supplied a command, we need to retrieve it and
@@ -896,6 +905,12 @@ parse(const std::vector<std::string>& arguments, std::ostream& info) {
      */
     if (has_version)
         BOOST_THROW_EXCEPTION(parser_exception(invalid_option + "version"));
+
+    /*
+     * As with version, dumpsecs should be called on its own.
+     */
+    if (has_dumpspecs)
+        BOOST_THROW_EXCEPTION(parser_exception(invalid_option + "dumpspecs"));
 
     /*
      * We can now process the command. Notice that we are suppliying
