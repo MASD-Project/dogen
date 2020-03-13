@@ -271,10 +271,18 @@ private:
         assets::meta_model::variability::abstract_profile& ap) const;
 
     /**
+     * @brief Populates the abstract profile entry properties.
+     */
+    void populate_abstract_profile_entry(
+        const assets::meta_model::name& n,
+        const injection::meta_model::attribute& attr,
+        assets::meta_model::variability::abstract_profile_entry& ape) const;
+
+    /**
      * @brief Populates the abstract feature properties.
      */
     void populate_abstract_feature(
-        const assets::meta_model::name& n,
+        const assets::meta_model::name& pn,
         const injection::meta_model::attribute& ia,
         assets::meta_model::variability::abstract_feature& af) const;
 
