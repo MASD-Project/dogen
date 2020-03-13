@@ -151,17 +151,12 @@
       "attributes": [
         {
           "name": "activity",
-          "type": "boost::variant<generation_configuration, conversion_configuration>"
+          "type": "boost::variant<generation_configuration, conversion_configuration, dumpspecs_configuration>"
         },
         {
           "name": "byproduct_directory",
           "type": "boost::filesystem::path",
           "documentation": "Directory in which to place all files not directly related to generated code.\n"
-        },
-        {
-          "name": "dumpspecs",
-          "type": "bool",
-          "documentation": "If true, dumps all the specs about this version of dogen.\n"
         }
       ]
     },
@@ -181,6 +176,14 @@
       "stereotypes": [
         "masd::build::cmakelists",
         "dogen::handcrafted::cmake"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "dumpspecs_configuration",
+      "documentation": "Dumps all the specs about this version of dogen.\n",
+      "stereotypes": [
+        "masd::fluent"
       ],
       "fallback_element_type": "masd::object"
     }

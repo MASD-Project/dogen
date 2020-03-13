@@ -150,6 +150,7 @@ using dogen::cli::configuration;
 using dogen::cli::parser_exception;
 using dogen::cli::generation_configuration;
 using dogen::cli::conversion_configuration;
+using dogen::cli::dumpspecs_configuration;
 using dogen::utility::log::logging_configuration;
 
 /**
@@ -421,7 +422,7 @@ handle_no_command(const bool has_version, const bool has_help,
         version(info);
     else {
         configuration r;
-        r.cli().dumpspecs(has_dumpspecs);
+        r.cli().activity(dumpspecs_configuration());
         return r;
     }
     return boost::optional<configuration>();

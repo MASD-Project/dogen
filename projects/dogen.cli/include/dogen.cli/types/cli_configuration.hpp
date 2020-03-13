@@ -28,6 +28,7 @@
 #include <algorithm>
 #include <boost/variant.hpp>
 #include <boost/filesystem/path.hpp>
+#include "dogen.cli/types/dumpspecs_configuration.hpp"
 #include "dogen.cli/types/conversion_configuration.hpp"
 #include "dogen.cli/types/generation_configuration.hpp"
 
@@ -38,26 +39,23 @@ namespace dogen::cli {
  */
 class cli_configuration final {
 public:
+    cli_configuration() = default;
     cli_configuration(const cli_configuration&) = default;
     ~cli_configuration() = default;
-
-public:
-    cli_configuration();
 
 public:
     cli_configuration(cli_configuration&& rhs);
 
 public:
     cli_configuration(
-        const boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration>& activity,
-        const boost::filesystem::path& byproduct_directory,
-        const bool dumpspecs);
+        const boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration, dogen::cli::dumpspecs_configuration>& activity,
+        const boost::filesystem::path& byproduct_directory);
 
 public:
-    const boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration>& activity() const;
-    boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration>& activity();
-    cli_configuration& activity(const boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration>& v);
-    cli_configuration& activity(const boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration>&& v);
+    const boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration, dogen::cli::dumpspecs_configuration>& activity() const;
+    boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration, dogen::cli::dumpspecs_configuration>& activity();
+    cli_configuration& activity(const boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration, dogen::cli::dumpspecs_configuration>& v);
+    cli_configuration& activity(const boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration, dogen::cli::dumpspecs_configuration>&& v);
 
     /**
      * @brief Directory in which to place all files not directly related to generated code.
@@ -67,14 +65,6 @@ public:
     boost::filesystem::path& byproduct_directory();
     cli_configuration& byproduct_directory(const boost::filesystem::path& v);
     cli_configuration& byproduct_directory(const boost::filesystem::path&& v);
-    /**@}*/
-
-    /**
-     * @brief If true, dumps all the specs about this version of dogen.
-     */
-    /**@{*/
-    bool dumpspecs() const;
-    cli_configuration& dumpspecs(const bool v);
     /**@}*/
 
 public:
@@ -88,9 +78,8 @@ public:
     cli_configuration& operator=(cli_configuration other);
 
 private:
-    boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration> activity_;
+    boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration, dogen::cli::dumpspecs_configuration> activity_;
     boost::filesystem::path byproduct_directory_;
-    bool dumpspecs_;
 };
 
 }

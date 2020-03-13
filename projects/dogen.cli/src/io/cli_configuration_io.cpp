@@ -19,21 +19,21 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
 #include <boost/variant/apply_visitor.hpp>
 #include "dogen.cli/io/cli_configuration_io.hpp"
+#include "dogen.cli/io/dumpspecs_configuration_io.hpp"
 #include "dogen.cli/io/conversion_configuration_io.hpp"
 #include "dogen.cli/io/generation_configuration_io.hpp"
 
 namespace boost {
 
-struct boost_variant_dogen_cli_generation_configuration_dogen_cli_conversion_configuration_visitor : public boost::static_visitor<> {
-    boost_variant_dogen_cli_generation_configuration_dogen_cli_conversion_configuration_visitor(std::ostream& s) : stream_(s) {
+struct boost_variant_dogen_cli_generation_configuration_dogen_cli_conversion_configuration_dogen_cli_dumpspecs_configuration_visitor : public boost::static_visitor<> {
+    boost_variant_dogen_cli_generation_configuration_dogen_cli_conversion_configuration_dogen_cli_dumpspecs_configuration_visitor(std::ostream& s) : stream_(s) {
         s << "{ " << "\"__type__\": " << "\"boost::variant\"" << ", ";
         s << "\"data\": ";
     }
 
-    ~boost_variant_dogen_cli_generation_configuration_dogen_cli_conversion_configuration_visitor() { stream_ << " }"; }
+    ~boost_variant_dogen_cli_generation_configuration_dogen_cli_conversion_configuration_dogen_cli_dumpspecs_configuration_visitor() { stream_ << " }"; }
 
     void operator()(const dogen::cli::generation_configuration& v) const {
         stream_ << v;
@@ -43,12 +43,16 @@ struct boost_variant_dogen_cli_generation_configuration_dogen_cli_conversion_con
         stream_ << v;
     }
 
+    void operator()(const dogen::cli::dumpspecs_configuration& v) const {
+        stream_ << v;
+    }
+
 private:
     std::ostream& stream_;
 };
 
-inline std::ostream& operator<<(std::ostream& s, const boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration>& v) {
-    boost::apply_visitor(boost_variant_dogen_cli_generation_configuration_dogen_cli_conversion_configuration_visitor(s), v);
+inline std::ostream& operator<<(std::ostream& s, const boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration, dogen::cli::dumpspecs_configuration>& v) {
+    boost::apply_visitor(boost_variant_dogen_cli_generation_configuration_dogen_cli_conversion_configuration_dogen_cli_dumpspecs_configuration_visitor(s), v);
     return s;
 }
 
@@ -57,17 +61,10 @@ inline std::ostream& operator<<(std::ostream& s, const boost::variant<dogen::cli
 namespace dogen::cli {
 
 std::ostream& operator<<(std::ostream& s, const cli_configuration& v) {
-    boost::io::ios_flags_saver ifs(s);
-    s.setf(std::ios_base::boolalpha);
-    s.setf(std::ios::fixed, std::ios::floatfield);
-    s.precision(6);
-    s.setf(std::ios::showpoint);
-
     s << " { "
       << "\"__type__\": " << "\"dogen::cli::cli_configuration\"" << ", "
       << "\"activity\": " << v.activity() << ", "
-      << "\"byproduct_directory\": " << "\"" << v.byproduct_directory().generic_string() << "\"" << ", "
-      << "\"dumpspecs\": " << v.dumpspecs()
+      << "\"byproduct_directory\": " << "\"" << v.byproduct_directory().generic_string() << "\""
       << " }";
     return(s);
 }

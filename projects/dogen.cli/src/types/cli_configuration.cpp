@@ -22,33 +22,25 @@
 
 namespace dogen::cli {
 
-cli_configuration::cli_configuration()
-    : dumpspecs_(static_cast<bool>(0)) { }
-
 cli_configuration::cli_configuration(cli_configuration&& rhs)
     : activity_(std::move(rhs.activity_)),
-      byproduct_directory_(std::move(rhs.byproduct_directory_)),
-      dumpspecs_(std::move(rhs.dumpspecs_)) { }
+      byproduct_directory_(std::move(rhs.byproduct_directory_)) { }
 
 cli_configuration::cli_configuration(
-    const boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration>& activity,
-    const boost::filesystem::path& byproduct_directory,
-    const bool dumpspecs)
+    const boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration, dogen::cli::dumpspecs_configuration>& activity,
+    const boost::filesystem::path& byproduct_directory)
     : activity_(activity),
-      byproduct_directory_(byproduct_directory),
-      dumpspecs_(dumpspecs) { }
+      byproduct_directory_(byproduct_directory) { }
 
 void cli_configuration::swap(cli_configuration& other) noexcept {
     using std::swap;
     swap(activity_, other.activity_);
     swap(byproduct_directory_, other.byproduct_directory_);
-    swap(dumpspecs_, other.dumpspecs_);
 }
 
 bool cli_configuration::operator==(const cli_configuration& rhs) const {
     return activity_ == rhs.activity_ &&
-        byproduct_directory_ == rhs.byproduct_directory_ &&
-        dumpspecs_ == rhs.dumpspecs_;
+        byproduct_directory_ == rhs.byproduct_directory_;
 }
 
 cli_configuration& cli_configuration::operator=(cli_configuration other) {
@@ -57,20 +49,20 @@ cli_configuration& cli_configuration::operator=(cli_configuration other) {
     return *this;
 }
 
-const boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration>& cli_configuration::activity() const {
+const boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration, dogen::cli::dumpspecs_configuration>& cli_configuration::activity() const {
     return activity_;
 }
 
-boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration>& cli_configuration::activity() {
+boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration, dogen::cli::dumpspecs_configuration>& cli_configuration::activity() {
     return activity_;
 }
 
-cli_configuration& cli_configuration::activity(const boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration>& v) {
+cli_configuration& cli_configuration::activity(const boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration, dogen::cli::dumpspecs_configuration>& v) {
     activity_ = v;
     return *this;
 }
 
-cli_configuration& cli_configuration::activity(const boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration>&& v) {
+cli_configuration& cli_configuration::activity(const boost::variant<dogen::cli::generation_configuration, dogen::cli::conversion_configuration, dogen::cli::dumpspecs_configuration>&& v) {
     activity_ = std::move(v);
     return *this;
 }
@@ -90,15 +82,6 @@ cli_configuration& cli_configuration::byproduct_directory(const boost::filesyste
 
 cli_configuration& cli_configuration::byproduct_directory(const boost::filesystem::path&& v) {
     byproduct_directory_ = std::move(v);
-    return *this;
-}
-
-bool cli_configuration::dumpspecs() const {
-    return dumpspecs_;
-}
-
-cli_configuration& cli_configuration::dumpspecs(const bool v) {
-    dumpspecs_ = v;
     return *this;
 }
 
