@@ -65,10 +65,10 @@ compute_key(const std::string& key_prefix, const std::string& original_key) {
 void variability_profiles_transform::
 update(const features::variability_profile::feature_group& fg,
     meta_model::variability::abstract_profile& ap) {
-
     using vp = assets::features::variability_profile;
-    const auto scfg1(vp::make_static_configuration(fg, ap));
-    ap.stereotype(scfg1.stereotype);
+    const auto scfg(vp::make_static_configuration(fg, ap));
+    ap.stereotype(scfg.stereotype);
+    ap.key_prefix(scfg.prefix);
 }
 
 void variability_profiles_transform::
