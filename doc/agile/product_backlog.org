@@ -320,6 +320,58 @@ One way to implement this is to add a feature at the element (once we
 have a way of expressing dogen meta-elements) that lists the supported
 model types for a given element.
 
+*** Ignore ODB files automatically                                    :story:
+
+At present we are adding the following regular expressions to knitter
+whenever we are using ODB with dogen:
+
+:        --ignore-files-matching-regex .*sql
+:        --ignore-files-matching-regex .*-odb.*)
+
+We should inject the ODB files automatically into the list of expected
+files. For a given element =foreign_key=, we will have a dogen file
+
+: foreign_key_pragmas.hpp
+
+We will also have the following ODB files:
+
+: foreign_key-odb.cxx
+: foreign_key-odb.hxx
+: foreign_key-odb.ixx
+
+The first file can either be on the =include/odb= directory or on the
+=src/odb= directory (it is moved by the ODB target). All other files
+are placed in the =include/odb= folder. Note that at present we are
+using =cpp= extension rather than =cxx=.
+
+In addition, on a multi-database environment we also have:
+
+- =repository-odb-oracle.hxx=
+- =repository-odb-pgsql.hxx=
+- ...
+
+Ideally we should also add the ODB include files to the master
+includes. However, we probably need a separate master include file
+just for ODB files.
+
+One of the amazing side-effects of this approach is that we will
+automatically delete any ODB files which are no longer required
+(because we will not generate ignores for them). At present we are
+manually deleting them.
+
+This also means we can add the ODB files to the visual studio project
+even before they get generated.
+
+We should have meta-data configuration that describes the ODB files:
+
+- their extension
+- the location of headers and implementation
+- the need to move the files
+
+We should generalise this problem so that when we are using other
+cartridges such as protobuf/grpc, we can extend it for these use
+cases - expected cartridge files?
+
 *** Add =ignore= meta-model element for VCS ignore files              :story:
 
 It would be nice if we had a meta-model element to represent ignore
@@ -1467,6 +1519,27 @@ Time spent reading the literature on variability. We should do a
 New features for this release. These are more nice to haves rather
 than mandatory work.
 
+
+*** Add support for operations                                        :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to specify operations via the
+frontend so that I dogen can generate the header file and I can
+manually add the implementation.
+#+end_quote
+
+This story is a requirement in order to implement merging support.
+
+When we did the expansion and indexing work for properties, we omitted
+operations altogether. This is fine for now, as we only have a
+half-baked support for them anyway, but will need to be revisited as
+we start to use it in anger. In particular:
+
+- we need sets of operations: local, inherited, all
+- we need an operations indexer
+
+Actually we removed the half-baked support.
+
 *** Add stereotype for IoC containers                                 :story:
 
 At present we are marking IoC containers with either handcrafted or
@@ -2170,7 +2243,7 @@ its basically "act as if this type was not defined in the input" or
 "this model did not exist". It should result in resolution failures if
 anyone is referring to the model/type.
 
-*** Consider making fully generated files read-only         :reviewing:story:
+*** Consider making fully generated files read-only                   :story:
 
 We could add emacs/vi tags to make fully generated files read-only -
 as opposed to partially generated files such as services, which are
@@ -2205,6 +2278,12 @@ something in between the two. So we are doing the easy thing and
 adding the define before the preamble. In an ideal world we should be
 able to inject pre and post includes defines. These can be done by the
 formatter or even by the user.
+
+Actually the right thing to do is to have a meta-model attribute to
+represent this. We should avoid words such as "includes" and "defines"
+and try to model this in a more general way. For example we could
+create a macro meta-element that enables users to define any
+macro. This then maps to language specific constructs like C++ macros.
 
 Links:
 
@@ -2307,31 +2386,14 @@ Notes:
   - dogen generates a parser with an associated exception
     (parser_validation_error). The exception is simply injected as a
     type.
+- we should have a look at the existing syntax for defining command
+  line options and extract the meta-model elements for them. These can
+  then be injected into our logical model under a suitable namespace.
 
 Links:
 
 - [[https://github.com/abolz/CmdLine2][CmdLine2]]: alternative library to program options.
 - [[https://github.com/p-ranav/argparse][argparse]]: Argument Parser for Modern C++
-
-*** Add support for operations                                        :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to specify operations via the
-frontend so that I dogen can generate the header file and I can
-manually add the implementation.
-#+end_quote
-
-This story is a requirement in order to implement merging support.
-
-When we did the expansion and indexing work for properties, we omitted
-operations altogether. This is fine for now, as we only have a
-half-baked support for them anyway, but will need to be revisited as
-we start to use it in anger. In particular:
-
-- we need sets of operations: local, inherited, all
-- we need an operations indexer
-
-Actually we removed the half-baked support.
 
 *** Code-generate a "one-shot" serialisation API                      :story:
 
@@ -2399,84 +2461,6 @@ We should:
 - pass the archive type into persister;
 - throw if the archive type is not supported.
 
-*** Add frontends and backends to =info= command line option          :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to know what frontends and backends
-are available in my dogen version so that I don't try to use features
-that are not present.
-#+end_quote
-
-With the static registration of importers and backends, we should add
-some kind of mechanism to display whats on offer in the command line,
-via the =--info= option. This is slightly tricky because the fronend
-and backend models do not know of the command line. We need a method
-in the frontend that returns a description and a method in the
-workflow that returns all descriptions. These must be static. Then
-knitter can then call these methods and build the info text.
-
-It would also be nice to have two different invocations of this
-command:
-
-- against a model: dumps stats on the model such as number of objects,
-  whether the generated code is up-to-date, etc.
-- system: information about the backends and frontends.
-
-Note that this story is different from the dumping of all features,
-though they share some commonalities.
-
-*** Ignore ODB files automatically                                    :story:
-
-At present we are adding the following regular expressions to knitter
-whenever we are using ODB with dogen:
-
-:        --ignore-files-matching-regex .*sql
-:        --ignore-files-matching-regex .*-odb.*)
-
-We should inject the ODB files automatically into the list of expected
-files. For a given element =foreign_key=, we will have a dogen file
-
-: foreign_key_pragmas.hpp
-
-We will also have the following ODB files:
-
-: foreign_key-odb.cxx
-: foreign_key-odb.hxx
-: foreign_key-odb.ixx
-
-The first file can either be on the =include/odb= directory or on the
-=src/odb= directory (it is moved by the ODB target). All other files
-are placed in the =include/odb= folder. Note that at present we are
-using =cpp= extension rather than =cxx=.
-
-In addition, on a multi-database environment we also have:
-
-- =repository-odb-oracle.hxx=
-- =repository-odb-pgsql.hxx=
-- ...
-
-Ideally we should also add the ODB include files to the master
-includes. However, we probably need a separate master include file
-just for ODB files.
-
-One of the amazing side-effects of this approach is that we will
-automatically delete any ODB files which are no longer required
-(because we will not generate ignores for them). At present we are
-manually deleting them.
-
-This also means we can add the ODB files to the visual studio project
-even before they get generated.
-
-We should have meta-data configuration that describes the ODB files:
-
-- their extension
-- the location of headers and implementation
-- the need to move the files
-
-We should generalise this problem so that when we are using other
-cartridges such as protobuf/grpc, we can extend it for these use
-cases - expected cartridge files?
-
 *** Add visibility to coding attributes                               :story:
 
 We need to be able to mark yarn attributes as:
@@ -2487,40 +2471,40 @@ We need to be able to mark yarn attributes as:
 
 *** Add support for default values                                    :story:
 
-#+begin_quote
-*Story*: As a dogen user, I want to set default values for certain
-built-ins so that I can model my domain more accurately.
-#+end_quote
+ #+begin_quote
+ *Story*: As a dogen user, I want to set default values for certain
+ built-ins so that I can model my domain more accurately.
+ #+end_quote
 
-It would be nice to be able to add a default value in Dia and have it
-set on the default constructor, if the type is a built-in or a
-=std::string=.
+ It would be nice to be able to add a default value in Dia and have it
+ set on the default constructor, if the type is a built-in or a
+ =std::string=.
 
-These could be added as dynamic extensions; however, they should not
-be model specific - the same defaults should apply to all
-languages. However, note that in certain cases the default values may
-be language specific (e.g. =0.0f= for float, etc). We should have a
-language independent way to express defaults and then interpret them
-in language specific ways at the template level.
+ These could be added as dynamic extensions; however, they should not
+ be model specific - the same defaults should apply to all
+ languages. However, note that in certain cases the default values may
+ be language specific (e.g. =0.0f= for float, etc). We should have a
+ language independent way to express defaults and then interpret them
+ in language specific ways at the template level.
 
-Note also that there are two levels of default values: the type-level
-(all built-ins of type =x= default to =y=) and the property level
-(instances of type =x= in class =z= default to =y=). The meta-data can
-be applied at each level to achieve the desired effect.
+ Note also that there are two levels of default values: the type-level
+ (all built-ins of type =x= default to =y=) and the property level
+ (instances of type =x= in class =z= default to =y=). The meta-data can
+ be applied at each level to achieve the desired effect.
 
-Defaults are also useful with const properties, both if the class is
-immutable, or if just the defaulted property is immutable.
+ Defaults are also useful with const properties, both if the class is
+ immutable, or if just the defaulted property is immutable.
 
-Validation rules:
+ Validation rules:
 
-- property can only have a default value if built-in
-- property default value must be castable to built-in type.
+ - property can only have a default value if built-in
+ - property default value must be castable to built-in type.
 
-Notes:
+ Notes:
 
-- we have now implemented support for values at the dia and injection
-  level (not JSON). We just need to propagate it into coding and
-  express it on the model to text transforms.
+ - we have now implemented support for values at the dia and injection
+   level (not JSON). We just need to propagate it into coding and
+   express it on the model to text transforms.
 
 *** Add support for interfaces                                         :epic:
 
@@ -2607,11 +2591,14 @@ themselves.
 Perhaps we should add general support for attributes. This would be
 useful for languages like C# and Java, to control serialisation, etc.
 
+We should make this approach consistent with deprecation of features
+as per [[*Consider adding "deprecated feature names"][this story]].
+
 ** Technical debt and refactoring
 
 Stories that deal with cleaning up the code base.
 
-*** Replace =operator<= for sorting with lambdas                      :story:
+*** Replace =operator<= for sorting with lambdas            :reviewing:story:
 
 We have used =operator<= a lot for sorting lists. We don't really need
 this since c++ 11, we can just create a simple inline lambda.
@@ -12005,6 +11992,35 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Add GraphViz/Dot export support                                   :story:
+
+At present we assume the extraction model is the only destination for
+models. However, once we start moving to text based injectors, it may
+be useful to generate UML diagrams. This could be achieved via dot.
+
+Notes:
+
+- this could be added to the convert activity.
+- we could then have options such as include attributes, include
+  comments, etc.
+- PlantUML makes use of dot to generate nice-looking diagrams. We
+  should try to get some examples of the dot code they generate and
+  see if we can copy it. [[https://real-world-plantuml.com/][Image examples here]]. It [[https://forum.plantuml.net/2034/add-dot-as-output-format][may not be possible]]
+  though.
+- graphviz can be consumed as a library. This would mean we wouldn't
+  have any external dependencies, and we could generate PDFs
+  directly.
+- not yet supported on [[https://github.com/Microsoft/vcpkg/issues/737][vcpkg]].
+
+Links:
+
+- [[http://www.ffnn.nl/pages/articles/media/uml-diagrams-using-graphviz-dot.php][UML Diagrams Using Graphviz Dot]]
+- [[https://lornajane.net/posts/2011/uml-diagrams-with-graphviz][UML Diagrams with Graphviz]]
+- [[https://www.graphviz.org/pdf/libguide.pdf][Using Graphviz as a Library]]
+- [[https://fsteeg.wordpress.com/2006/11/17/uml-class-diagrams-with-graphviz/][UML class diagrams with Graphviz]]
+- [[https://www.graphviz.org/pdf/dotguide.pdf][Drawing graphs with dot]]
+- [[https://www.drdobbs.com/cpp/graphviz-and-c/184402049][GraphViz and C++]]
 
 *** Syntax checking support for stitch templates                      :story:
 

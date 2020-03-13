@@ -14,32 +14,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-12 Thu 18:01]
+#+CAPTION: Clock summary at [2020-03-13 Fri 08:21]
 | <75>                                                    |         |       |      |       |
 | Headline                                                | Time    |       |      |     % |
 |---------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                            | *58:56* |       |      | 100.0 |
+| *Total time*                                            | *60:02* |       |      | 100.0 |
 |---------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                 | 58:56   |       |      | 100.0 |
-| Active                                                  |         | 58:56 |      | 100.0 |
-| Edit release notes for previous sprint                  |         |       | 4:11 |   7.1 |
+| Stories                                                 | 60:02   |       |      | 100.0 |
+| Active                                                  |         | 60:02 |      | 100.0 |
+| Edit release notes for previous sprint                  |         |       | 4:11 |   7.0 |
 | Create a demo and presentation for previous sprint      |         |       | 0:25 |   0.7 |
-| Sprint and product backlog grooming                     |         |       | 7:04 |  12.0 |
-| Emacs configuration and issues                          |         |       | 1:02 |   1.8 |
-| Analysis on defining a combined logical-physical space  |         |       | 5:55 |  10.0 |
-| Analysis on removing physical references in variability |         |       | 5:27 |   9.2 |
+| Sprint and product backlog grooming                     |         |       | 7:49 |  13.0 |
+| Emacs configuration and issues                          |         |       | 1:02 |   1.7 |
+| Analysis on defining a combined logical-physical space  |         |       | 5:55 |   9.9 |
+| Analysis on removing physical references in variability |         |       | 5:27 |   9.1 |
 | Remove =rapidjson= formatters                           |         |       | 0:03 |   0.1 |
-| Separate feature templates from bundles                 |         |       | 9:28 |  16.1 |
+| Separate feature templates from bundles                 |         |       | 9:28 |  15.8 |
 | Move enabled to generation                              |         |       | 0:04 |   0.1 |
 | Create a chain to encapsulate variability transforms    |         |       | 0:37 |   1.0 |
-| Move variability chain into assets                      |         |       | 2:22 |   4.0 |
-| Move profile meta-data into profile element             |         |       | 7:12 |  12.2 |
+| Move variability chain into assets                      |         |       | 2:22 |   3.9 |
+| Move profile meta-data into profile element             |         |       | 7:12 |  12.0 |
 | Add handcrafted stereotype to C# models                 |         |       | 0:04 |   0.1 |
-| Split profiles and profile templates in variability     |         |       | 4:31 |   7.7 |
+| Split profiles and profile templates in variability     |         |       | 4:31 |   7.5 |
 | Consider renaming labels to stereotypes in variability  |         |       | 1:07 |   1.9 |
 | Declaring a =std::list= without parameters segfaults    |         |       | 0:10 |   0.3 |
 | Add location and modules to variability                 |         |       | 0:43 |   1.2 |
-| Implement template instantiation in terms of tags       |         |       | 8:31 |  14.5 |
+| Implement template instantiation in terms of tags       |         |       | 8:31 |  14.2 |
+| Add command line option to dump all features            |         |       | 0:21 |   0.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -220,6 +221,8 @@ Time spent creating the demo and presentation. Use the demo project:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-03-13 Fri 08:11]--[2020-03-13 Fri 08:21] =>  0:10
+    CLOCK: [2020-03-13 Fri 07:35]--[2020-03-13 Fri 08:10] =>  0:35
     CLOCK: [2020-03-12 Thu 17:59]--[2020-03-12 Thu 18:01] =>  0:02
     CLOCK: [2020-03-12 Thu 12:53]--[2020-03-12 Thu 13:17] =>  0:24
     CLOCK: [2020-03-12 Thu 09:01]--[2020-03-12 Thu 09:09] =>  0:08
@@ -917,7 +920,90 @@ Reviewed tasks:
   variability.
 - remove references to archetypes model from variability model.
 
-*** Remove duplication from feature bundles and profiles              :story:
+*** STARTED Add command line option to dump all features              :story:
+    :LOGBOOK:
+    CLOCK: [2020-03-12 Thu 19:45]--[2020-03-12 Thu 20:06] =>  0:21
+    :END:
+
+We need a way to access a text description of all features in the
+command line. The variability model should expose this, and then the
+CLI model should use it to print a human readable version of the
+features. We should allow for two modes: human friendly (e.g. wrap at
+a column, indent by groups) and grep friendly (e.g. no indent, long
+lines).
+
+We should probably create a new command called info and then have
+options of what to dump:
+
+- features
+- frontends
+- backends
+- stereotypes
+
+And so forth.
+
+Notes:
+
+- we could call this =dumpspecs= like GCC - though the format for
+  dumpsecs is somewhat unreadable.
+- its not clear if we should have a simple command line option or a
+  new activity. Help and version are already bypassing this notion of
+  activity...
+
+Links:
+
+- https://www.rosettacode.org/wiki/Word_wrap#C.2B.2B
+
+Merged stories:
+
+*Add annotation types description*
+
+It would be useful to have a description of the purpose of the field
+so that we could print it to the command line. We could simply add a
+JSON attribute to the field called description to start off with. But
+ideally we need a command line argument to dump all fields and their
+descriptions so that users know what's available.
+
+This should be sorted by qualified name.
+
+Notes:
+
+- we already added comments to many features. This seems to be the
+  right place in the model to record this information. We just need to
+  propagate it into the feature template and then into the feature.
+- context is already doing all of the hard work for feature
+  instantiation. We just need to create a transform that calls the
+  context factory, retrieves all of the descriptions as strings
+  somehow, and then get the command line to print them out. This can
+  then be extended in the future to include backends, etc.
+
+*** Add frontends and backends to =info= command line option          :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to know what frontends and backends
+are available in my dogen version so that I don't try to use features
+that are not present.
+#+end_quote
+
+With the static registration of importers and backends, we should add
+some kind of mechanism to display whats on offer in the command line,
+via the =--info= option. This is slightly tricky because the fronend
+and backend models do not know of the command line. We need a method
+in the frontend that returns a description and a method in the
+workflow that returns all descriptions. These must be static. Then
+knitter can then call these methods and build the info text.
+
+It would also be nice to have two different invocations of this
+command:
+
+- against a model: dumps stats on the model such as number of objects,
+  whether the generated code is up-to-date, etc.
+- system: information about the backends and frontends.
+
+Note that this story is different from the dumping of all features,
+though they share some commonalities.
+
+** Remove duplication from feature bundles and profiles              :story:
 
 Add prefixes to feature bundles and profiles. Compute qualified names
 based on prefixes plus attribute names.
@@ -1021,52 +1107,6 @@ We may want it just to be called:
 
 However, we don't want all files on that facet to drop their postfix,
 just main.
-
-*** Add command line option to dump all features                      :story:
-
-We need a way to access a text description of all features in the
-command line. The variability model should expose this, and then the
-CLI model should use it to print a human readable version of the
-features. We should allow for two modes: human friendly (e.g. wrap at
-a column, indent by groups) and grep friendly (e.g. no indent, long
-lines).
-
-We should probably create a new command called info and then have
-options of what to dump:
-
-- features
-- frontends
-- backends
-- stereotypes
-
-And so forth.
-
-Links:
-
-- https://www.rosettacode.org/wiki/Word_wrap#C.2B.2B
-
-Merged stories:
-
-*Add annotation types description*
-
-It would be useful to have a description of the purpose of the field
-so that we could print it to the command line. We could simply add a
-JSON attribute to the field called description to start off with. But
-ideally we need a command line argument to dump all fields and their
-descriptions so that users know what's available.
-
-This should be sorted by qualified name.
-
-Notes:
-
-- we already added comments to many features. This seems to be the
-  right place in the model to record this information. We just need to
-  propagate it into the feature template and then into the feature.
-- context is already doing all of the hard work for feature
-  instantiation. We just need to create a transform that calls the
-  context factory, retrieves all of the descriptions as strings
-  somehow, and then get the command line to print them out. This can
-  then be extended in the future to include backends, etc.
 
 *** Detect non-configurable fields                                    :story:
 
