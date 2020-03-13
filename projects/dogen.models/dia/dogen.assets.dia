@@ -48417,22 +48417,22 @@ the default value field if available.
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O372">
       <dia:attribute name="obj_pos">
-        <dia:point val="89,53"/>
+        <dia:point val="89,52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="88.95,52.95;118.44,68.35"/>
+        <dia:rectangle val="88.95,51.95;118.44,68.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="89,53"/>
+        <dia:point val="89,52"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="29.390000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="15.300000000000001"/>
+        <dia:real val="16.900000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -48463,7 +48463,9 @@ we are relying on their existence. This makes it very confusing because
 say if you rename a property (such as value) suddenly profiles will
 break because that feature will no longer be defined. Value is a case
 in point, since we are not using it for feature templates, but we can't
-remove it or else profiles will break.#</dia:string>
+remove it or else profiles will break. Similarly, stereotypes are not a
+property of features or feature bundles but we ended up adding them here
+just to avoid problems.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -48472,7 +48474,7 @@ remove it or else profiles will break.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="89.35,54.245"/>
+            <dia:point val="89.35,53.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -50668,16 +50670,16 @@ remove it or else profiles will break.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O396">
       <dia:attribute name="obj_pos">
-        <dia:point val="103.695,68.3"/>
+        <dia:point val="103.695,68.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="100.007,68.2298;103.765,71.3443"/>
+        <dia:rectangle val="100.042,68.8312;103.764,71.3666"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="103.695,68.3"/>
+        <dia:point val="103.695,68.9"/>
         <dia:point val="100.295,71"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
@@ -50693,7 +50695,7 @@ remove it or else profiles will break.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="101.995,70.15"/>
+        <dia:point val="101.995,70.45"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O372" connection="6"/>
@@ -50703,16 +50705,16 @@ remove it or else profiles will break.#</dia:string>
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O397">
       <dia:attribute name="obj_pos">
-        <dia:point val="103.695,68.3"/>
+        <dia:point val="103.695,68.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="103.625,68.2295;106.337,71.2977"/>
+        <dia:rectangle val="103.624,68.8294;106.306,71.3294"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="103.695,68.3"/>
+        <dia:point val="103.695,68.9"/>
         <dia:point val="106,71"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
@@ -50728,7 +50730,7 @@ remove it or else profiles will break.#</dia:string>
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="104.847,70.15"/>
+        <dia:point val="104.847,70.45"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O372" connection="6"/>
