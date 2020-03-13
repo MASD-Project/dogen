@@ -20,6 +20,7 @@
  */
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.variability/io/meta_model/profile_io.hpp"
@@ -38,6 +39,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("variability.helpers.template_instantiator"));
 
 const std::string empty;
+const std::string dot(".");
 const std::string empty_msg("<empty>");
 
 const std::string empty_qualified_name(
@@ -49,6 +51,8 @@ const std::string empty_domain_name(
     "Template has an empty domain name: ");
 const std::string invalid_domain_name(
     "Instantiation domain name could not be located: ");
+const std::string too_many_matches(
+    "Template has too many matches for default value overrides: ");
 const std::string missing_feature("Feature not found: ");
 const std::string duplicate_configuration_point(
     "Found more than one configuration point for the same feature: ");
@@ -108,15 +112,48 @@ meta_model::configuration_point template_instantiator::to_configuration_point(
     return r;
 }
 
-meta_model::feature template_instantiator::
-to_feature(const meta_model::feature_template& ft) const {
+meta_model::feature template_instantiator::to_feature(const std::string& domain,
+    const meta_model::feature_template& ft) const {
+    BOOST_LOG_SEV(lg, trace) << "Expanding feature for domain: "
+                             << domain;
+
     meta_model::feature r;
 
-    r.name(ft.name());
+    const auto sn(ft.name().simple());
+    r.name().simple(sn);
+
+    const auto qn(domain + "." + sn);
+    r.name().qualified(qn);
+    BOOST_LOG_SEV(lg, trace) << "Qualified name: " << qn;
+
     r.value_type(ft.value_type());
     r.binding_point(ft.binding_point());
-    r.default_value(ft.default_value());
     r.is_partially_matchable(is_partially_mathcable(r.value_type()));
+
+    /*
+     * Handle default values. First we start by taking whatever
+     * default was given. Then we check the overrides list to see if
+     * anything matches. We expect zero or one matches; it is possible
+     * that we want some elements of the domain to use the "default"
+     * default value, and some others to be overridden.
+     */
+    r.default_value(ft.default_value());
+    bool matched(false);
+    for (const auto& dvo : ft.default_value_overrides()) {
+        const auto s(dvo.key_ends_with() + dot + sn);
+        if (boost::algorithm::ends_with(qn, s)) {
+            BOOST_LOG_SEV(lg, trace) << "Matched: " << s;
+
+            if (matched) {
+                BOOST_LOG_SEV(lg, error) << too_many_matches << qn;
+                BOOST_THROW_EXCEPTION(
+                    instantiation_exception(too_many_matches + qn));
+            }
+            r.default_value(dvo.default_value());
+            matched = true;
+        } else
+            BOOST_LOG_SEV(lg, trace) << "Not matched: " << s;
+    }
 
     return r;
 }
@@ -130,7 +167,7 @@ instantiate(const std::unordered_map<std::string, std::vector<std::string>>&
      */
     const auto& tid(template_instantiation_domains);
     if (tid.empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_domains ;
+        BOOST_LOG_SEV(lg, error) << empty_domains;
         BOOST_THROW_EXCEPTION(instantiation_exception(empty_domains));
     }
 
@@ -171,11 +208,9 @@ instantiate(const std::unordered_map<std::string, std::vector<std::string>>&
      */
     const auto& domain(i->second);
     std::list<meta_model::feature> r;
-    for (const auto& e : domain) {
-        auto f(to_feature(ft));
-        f.name().qualified(e + "." + sn);
-        r.push_back(f);
-    }
+    for (const auto& e : domain)
+        r.push_back(to_feature(e, ft));
+
     return r;
 }
 

@@ -69,7 +69,8 @@ private:
     /*
      * @brief Expands a feature template into a feature.
      */
-    meta_model::feature to_feature(const meta_model::feature_template& ft) const;
+    meta_model::feature to_feature(const std::string& domain,
+        const meta_model::feature_template& ft) const;
 
 private:
     std::list<meta_model::configuration_point>
