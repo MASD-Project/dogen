@@ -2356,12 +2356,13 @@
         "masd::variability::feature_bundle"
       ],
       "tagged_values": {
-        "masd.variability.generate_static_configuration": "false"
+        "masd.variability.generate_static_configuration": "false",
+        "masd.variability.key_prefix": "masd.generation.cpp"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.cpp.headers_output_directory",
+          "name": "headers_output_directory",
           "type": "masd::variability::text",
           "documentation": "Override location of public c++ headers.\n",
           "tagged_values": {
@@ -2370,7 +2371,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.directory",
+          "name": "directory",
           "type": "masd::variability::text",
           "value": "\"cpp\"",
           "documentation": "Directory in which to place code for the C++ backend.\n",
@@ -2380,7 +2381,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.inclusion_required",
+          "name": "inclusion_required",
           "type": "masd::variability::boolean",
           "value": "\"true\"",
           "documentation": "If true, inclusion is required for this modeling element.\n",
@@ -2390,7 +2391,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.source_directory_name",
+          "name": "source_directory_name",
           "type": "masd::variability::text",
           "value": "\"src\"",
           "documentation": "Directory in which to place C++ source files.\n",
@@ -2400,7 +2401,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.include_directory_name",
+          "name": "include_directory_name",
           "type": "masd::variability::text",
           "value": "\"include\"",
           "documentation": "Directory in which to place include headers.\n",
@@ -2410,7 +2411,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.tests_directory_name",
+          "name": "tests_directory_name",
           "type": "masd::variability::text",
           "value": "\"generated_tests\"",
           "documentation": "Directory in which to place c++ tests.\n",
@@ -2420,7 +2421,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.templates_directory_name",
+          "name": "templates_directory_name",
           "type": "masd::variability::text",
           "value": "\"templates\"",
           "documentation": "Directory in which to place text templates.\n",
@@ -2430,7 +2431,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.header_file_extension",
+          "name": "header_file_extension",
           "type": "masd::variability::text",
           "value": "\"hpp\"",
           "documentation": "Extension to use for C++ header files.\n",
@@ -2440,7 +2441,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.implementation_file_extension",
+          "name": "implementation_file_extension",
           "type": "masd::variability::text",
           "value": "\"cpp\"",
           "documentation": "Extension to use for C++ implementation files.\n",
@@ -2450,7 +2451,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.templates_file_extension",
+          "name": "templates_file_extension",
           "type": "masd::variability::text",
           "value": "\"wale\"",
           "documentation": "Extension to use for text templates.\n",
@@ -2460,7 +2461,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.enable_unique_file_names",
+          "name": "enable_unique_file_names",
           "type": "masd::variability::boolean",
           "value": "\"true\"",
           "documentation": "If true, make all file names unique within a model.\n",
@@ -2470,7 +2471,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.aspect.requires_manual_default_constructor",
+          "name": "aspect.requires_manual_default_constructor",
           "type": "masd::variability::boolean",
           "value": "\"false\"",
           "documentation": "If true, the modeling element requires a manual defaul constructor.\n",
@@ -2480,7 +2481,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.aspect.requires_manual_move_constructor",
+          "name": "aspect.requires_manual_move_constructor",
           "type": "masd::variability::boolean",
           "value": "\"false\"",
           "documentation": "If true, the modeling element requires a manual move constructor.\n",
@@ -2490,7 +2491,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.aspect.requires_stream_manipulators",
+          "name": "aspect.requires_stream_manipulators",
           "type": "masd::variability::boolean",
           "value": "\"false\"",
           "documentation": "If true, the modeling element requires stream manipulators.\n",
@@ -2500,7 +2501,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.disable_facet_directories",
+          "name": "disable_facet_directories",
           "type": "masd::variability::boolean",
           "value": "\"false\"",
           "documentation": "If true, facet directories will not be used.\n",
@@ -2510,7 +2511,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.standard",
+          "name": "standard",
           "type": "masd::variability::text",
           "value": "\"c++-14\"",
           "documentation": "Which version of C++ to use.\n",
@@ -2520,7 +2521,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.helper.family",
+          "name": "helper.family",
           "type": "masd::variability::text",
           "value": "\"Default\"",
           "documentation": "Which family of helpers to use for this modeling element.\n",
@@ -2530,7 +2531,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.streaming.string_conversion_method",
+          "name": "streaming.string_conversion_method",
           "type": "masd::variability::text",
           "value": "\"\"",
           "documentation": "Which conversion method to use to convert strings.\n",
@@ -2540,7 +2541,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.streaming.requires_quoting",
+          "name": "streaming.requires_quoting",
           "type": "masd::variability::boolean",
           "value": "\"false\"",
           "documentation": "If true, streaming this type must be preceeded by quoting.\n",
@@ -2550,7 +2551,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.streaming.remove_unprintable_characters",
+          "name": "streaming.remove_unprintable_characters",
           "type": "masd::variability::boolean",
           "value": "\"false\"",
           "documentation": "If true, streaming this type requires removing unprintable characters.\n",
@@ -2560,7 +2561,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.cmake.source_cmakelists.postfix",
+          "name": "cmake.source_cmakelists.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "documentation": "Which postfix to use for source CMakelists.\n",
@@ -2570,7 +2571,7 @@
           }
         },
         {
-          "name": "masd.generation.cpp.cmake.include_cmakelists.postfix",
+          "name": "cmake.include_cmakelists.postfix",
           "type": "masd::variability::text",
           "value": "\"\"",
           "documentation": "Which postfix to use for include CMakelists.\n",

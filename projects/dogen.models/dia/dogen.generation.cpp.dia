@@ -32397,13 +32397,13 @@ code.
         <dia:point val="19.1429,174.357"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.0929,174.307;58.5779,194.807"/>
+        <dia:rectangle val="19.0929,174.307;50.8779,194.807"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="19.1429,174.357"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="39.385000000000005"/>
+        <dia:real val="31.685000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="20.400000000000006"/>
@@ -32415,7 +32415,8 @@ code.
         <dia:string>#masd::variability::feature_bundle#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.variability.generate_static_configuration=false#</dia:string>
+        <dia:string>##DOGEN masd.variability.generate_static_configuration=false
+#DOGEN masd.variability.key_prefix=masd.generation.cpp#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -32498,7 +32499,7 @@ code.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.headers_output_directory#</dia:string>
+            <dia:string>#headers_output_directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32524,7 +32525,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.directory#</dia:string>
+            <dia:string>#directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32550,7 +32551,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.inclusion_required#</dia:string>
+            <dia:string>#inclusion_required#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -32576,7 +32577,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.source_directory_name#</dia:string>
+            <dia:string>#source_directory_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32602,7 +32603,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.include_directory_name#</dia:string>
+            <dia:string>#include_directory_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32628,7 +32629,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests_directory_name#</dia:string>
+            <dia:string>#tests_directory_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32654,7 +32655,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.templates_directory_name#</dia:string>
+            <dia:string>#templates_directory_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32680,7 +32681,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.header_file_extension#</dia:string>
+            <dia:string>#header_file_extension#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32706,7 +32707,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.implementation_file_extension#</dia:string>
+            <dia:string>#implementation_file_extension#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32732,7 +32733,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.templates_file_extension#</dia:string>
+            <dia:string>#templates_file_extension#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32758,7 +32759,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.enable_unique_file_names#</dia:string>
+            <dia:string>#enable_unique_file_names#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -32784,7 +32785,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.aspect.requires_manual_default_constructor#</dia:string>
+            <dia:string>#aspect.requires_manual_default_constructor#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -32810,7 +32811,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.aspect.requires_manual_move_constructor#</dia:string>
+            <dia:string>#aspect.requires_manual_move_constructor#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -32836,7 +32837,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.aspect.requires_stream_manipulators#</dia:string>
+            <dia:string>#aspect.requires_stream_manipulators#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -32862,7 +32863,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.disable_facet_directories#</dia:string>
+            <dia:string>#disable_facet_directories#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -32888,7 +32889,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.standard#</dia:string>
+            <dia:string>#standard#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32914,7 +32915,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.helper.family#</dia:string>
+            <dia:string>#helper.family#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32940,7 +32941,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.streaming.string_conversion_method#</dia:string>
+            <dia:string>#streaming.string_conversion_method#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -32966,7 +32967,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.streaming.requires_quoting#</dia:string>
+            <dia:string>#streaming.requires_quoting#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -32992,7 +32993,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.streaming.remove_unprintable_characters#</dia:string>
+            <dia:string>#streaming.remove_unprintable_characters#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::boolean#</dia:string>
@@ -33018,7 +33019,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.cmake.source_cmakelists.postfix#</dia:string>
+            <dia:string>#cmake.source_cmakelists.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
@@ -33044,7 +33045,7 @@ code.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.cmake.include_cmakelists.postfix#</dia:string>
+            <dia:string>#cmake.include_cmakelists.postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>
