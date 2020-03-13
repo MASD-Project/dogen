@@ -81,7 +81,7 @@ profile_adapter::adapt(const variability::meta_model::feature_model& fm,
     r.name().simple(sn);
     r.name().qualified(qn);
     r.stereotype(p.stereotype());
-;
+
     for (const auto& n : p.parents())
         r.parents().push_back(n.qualified().dot());
 
