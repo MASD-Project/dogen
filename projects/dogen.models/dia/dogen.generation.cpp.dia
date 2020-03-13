@@ -32498,7 +32498,7 @@ code.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp_headers_output_directory#</dia:string>
+            <dia:string>#masd.generation.cpp.headers_output_directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#masd::variability::text#</dia:string>

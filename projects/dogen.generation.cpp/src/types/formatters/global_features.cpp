@@ -29,8 +29,8 @@ dogen::variability::meta_model::feature
 make_masd_generation_cpp_headers_output_directory() {
     using namespace dogen::variability::meta_model;
     feature r;
-    r.name().simple("cpp_headers_output_directory");
-    r.name().qualified("masd.generation.cpp_headers_output_directory");
+    r.name().simple("headers_output_directory");
+    r.name().qualified("masd.generation.cpp.headers_output_directory");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);

@@ -2361,7 +2361,7 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.cpp_headers_output_directory",
+          "name": "masd.generation.cpp.headers_output_directory",
           "type": "masd::variability::text",
           "documentation": "Override location of public c++ headers.\n",
           "tagged_values": {
