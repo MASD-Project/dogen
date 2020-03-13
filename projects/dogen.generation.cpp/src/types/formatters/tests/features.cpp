@@ -26,20 +26,6 @@ namespace dogen::generation::cpp::formatters::tests {
 namespace {
 
 dogen::variability::meta_model::feature
-make_masd_generation_cpp_tests_directory() {
-    using namespace dogen::variability::meta_model;
-    feature r;
-    r.name().simple("directory");
-    r.name().qualified("masd.generation.cpp.tests.directory");
-    const auto vt(value_type::text);
-    r.value_type(vt);
-    r.binding_point(binding_point::global);
-    dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "generated_tests" }));
-    return r;
-}
-
-dogen::variability::meta_model::feature
 make_masd_generation_cpp_tests_postfix() {
     using namespace dogen::variability::meta_model;
     feature r;
@@ -130,7 +116,6 @@ std::list<dogen::variability::meta_model::feature>
 features::make_features() {
     using namespace dogen::variability::meta_model;
     std::list<dogen::variability::meta_model::feature> r;
-    r.push_back(make_masd_generation_cpp_tests_directory());
     r.push_back(make_masd_generation_cpp_tests_postfix());
     r.push_back(make_masd_generation_cpp_tests_class_implementation_postfix());
     r.push_back(make_masd_generation_cpp_tests_enum_implementation_postfix());

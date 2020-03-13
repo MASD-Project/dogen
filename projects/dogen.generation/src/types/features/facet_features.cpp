@@ -28,10 +28,10 @@ namespace dogen::generation::features {
 namespace {
 
 dogen::variability::meta_model::feature_template
-make_directory_new() {
+make_directory() {
     using namespace dogen::variability::meta_model;
     feature_template r;
-    r.name().simple("directory_new");
+    r.name().simple("directory");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -84,7 +84,7 @@ facet_features::make_feature_group(const dogen::variability::meta_model::feature
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
-    r.directory_new = s.get_by_name("directory_new");
+    r.directory = s.get_by_name("directory");
 
     return r;
 }
@@ -95,7 +95,7 @@ facet_features::static_configuration facet_features::make_static_configuration(
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    r.directory_new = s.get_text_content_or_default(fg.directory_new);
+    r.directory = s.get_text_content_or_default(fg.directory);
     return r;
 }
 
@@ -103,7 +103,7 @@ std::list<dogen::variability::meta_model::feature_template>
 facet_features::make_templates() {
     using namespace dogen::variability::meta_model;
     std::list<dogen::variability::meta_model::feature_template> r;
-    r.push_back(make_directory_new());
+    r.push_back(make_directory());
     return r;
 }
 

@@ -40,7 +40,7 @@ namespace dogen::generation::features {
 class facet_features final {
 public:
     struct feature_group {
-        variability::meta_model::feature directory_new;
+        variability::meta_model::feature directory;
     };
 
     static feature_group
@@ -48,7 +48,7 @@ public:
 
 public:
     struct static_configuration {
-        std::string directory_new;
+        std::string directory;
     };
 
     static static_configuration make_static_configuration(

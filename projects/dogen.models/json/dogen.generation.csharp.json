@@ -753,11 +753,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "directory",
-          "type": "masd::variability::text",
-          "value": "\"Types\""
-        },
-        {
           "name": "postfix",
           "type": "masd::variability::text",
           "value": "\"\""
@@ -808,11 +803,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.csharp.io.directory",
-          "type": "masd::variability::text",
-          "value": "\"Dumpers\""
-        },
-        {
           "name": "masd.generation.csharp.io.postfix",
           "type": "masd::variability::text",
           "value": "\"Dumper\""
@@ -856,11 +846,6 @@
       },
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "directory",
-          "type": "masd::variability::text",
-          "value": "\"SequenceGenerators\""
-        },
         {
           "name": "postfix",
           "type": "masd::variability::text",
@@ -1057,11 +1042,6 @@
       },
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "directory",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        },
         {
           "name": "postfix",
           "type": "masd::variability::text",

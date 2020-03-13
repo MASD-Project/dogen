@@ -1576,11 +1576,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "directory",
-          "type": "masd::variability::text",
-          "value": "\"types\""
-        },
-        {
           "name": "postfix",
           "type": "masd::variability::text",
           "value": "\"\""
@@ -1712,11 +1707,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "directory",
-          "type": "masd::variability::text",
-          "value": "\"hash\""
-        },
-        {
           "name": "postfix",
           "type": "masd::variability::text",
           "value": "\"hash\""
@@ -1776,11 +1766,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "directory",
-          "type": "masd::variability::text",
-          "value": "\"io\""
-        },
-        {
           "name": "postfix",
           "type": "masd::variability::text",
           "value": "\"io\""
@@ -1838,14 +1823,6 @@
       },
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "directory",
-          "type": "masd::variability::text",
-          "value": "\"odb\"",
-          "tagged_values": {
-            "masd.variability.binding_point": "global"
-          }
-        },
         {
           "name": "postfix",
           "type": "masd::variability::text",
@@ -1941,11 +1918,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "directory",
-          "type": "masd::variability::text",
-          "value": "\"test_data\""
-        },
-        {
           "name": "postfix",
           "type": "masd::variability::text",
           "value": "\"td\""
@@ -2004,11 +1976,6 @@
       },
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "directory",
-          "type": "masd::variability::text",
-          "value": "\"serialization\""
-        },
         {
           "name": "postfix",
           "type": "masd::variability::text",
@@ -2083,11 +2050,6 @@
       },
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "directory",
-          "type": "masd::variability::text",
-          "value": "\"generated_tests\""
-        },
         {
           "name": "postfix",
           "type": "masd::variability::text",
@@ -2402,11 +2364,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "directory",
-          "type": "masd::variability::text",
-          "value": "\"lexical_cast\""
-        },
-        {
           "name": "postfix",
           "type": "masd::variability::text",
           "value": "\"lc\""
@@ -2519,11 +2476,6 @@
       },
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "directory",
-          "type": "masd::variability::text",
-          "value": "\"templates\""
-        },
         {
           "name": "postfix",
           "type": "masd::variability::text",
@@ -2640,11 +2592,6 @@
       },
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "directory",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        },
         {
           "name": "postfix",
           "type": "masd::variability::text",
@@ -2765,11 +2712,6 @@
       },
       "fallback_element_type": "masd::object",
       "attributes": [
-        {
-          "name": "directory",
-          "type": "masd::variability::text",
-          "value": "\"\""
-        },
         {
           "name": "postfix",
           "type": "masd::variability::text",
