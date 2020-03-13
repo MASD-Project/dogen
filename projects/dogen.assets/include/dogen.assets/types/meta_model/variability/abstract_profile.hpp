@@ -60,7 +60,8 @@ public:
         const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
         const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& decoration,
         const std::string& stereotype,
-        const std::list<dogen::assets::meta_model::name>& parents);
+        const std::list<dogen::assets::meta_model::name>& parents,
+        const std::string& key_prefix);
 
 public:
     virtual void to_stream(std::ostream& s) const;
@@ -81,6 +82,16 @@ public:
     void parents(const std::list<dogen::assets::meta_model::name>&& v);
     /**@}*/
 
+    /**
+     * @brief Prefix to use when composing the key, if any.
+     */
+    /**@{*/
+    const std::string& key_prefix() const;
+    std::string& key_prefix();
+    void key_prefix(const std::string& v);
+    void key_prefix(const std::string&& v);
+    /**@}*/
+
 protected:
     bool compare(const abstract_profile& rhs) const;
 public:
@@ -92,6 +103,7 @@ protected:
 private:
     std::string stereotype_;
     std::list<dogen::assets::meta_model::name> parents_;
+    std::string key_prefix_;
 };
 
 inline abstract_profile::~abstract_profile() noexcept { }

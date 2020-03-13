@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen.assets/io/meta_model/name_io.hpp"
 #include "dogen.assets/io/meta_model/element_io.hpp"
 #include "dogen.variability/io/meta_model/binding_point_io.hpp"

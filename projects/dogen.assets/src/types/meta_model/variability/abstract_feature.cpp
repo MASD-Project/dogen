@@ -88,6 +88,7 @@ abstract_feature::abstract_feature(abstract_feature&& rhs)
     : documentation_(std::move(rhs.documentation_)),
       configuration_(std::move(rhs.configuration_)),
       name_(std::move(rhs.name_)),
+      original_key_(std::move(rhs.original_key_)),
       key_(std::move(rhs.key_)),
       identifiable_key_(std::move(rhs.identifiable_key_)),
       unparsed_type_(std::move(rhs.unparsed_type_)),
@@ -103,6 +104,7 @@ abstract_feature::abstract_feature(
     const std::string& documentation,
     const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
     const dogen::assets::meta_model::name& name,
+    const std::string& original_key,
     const std::string& key,
     const std::string& identifiable_key,
     const std::string& unparsed_type,
@@ -116,6 +118,7 @@ abstract_feature::abstract_feature(
     : documentation_(documentation),
       configuration_(configuration),
       name_(name),
+      original_key_(original_key),
       key_(key),
       identifiable_key_(identifiable_key),
       unparsed_type_(unparsed_type),
@@ -139,6 +142,7 @@ void abstract_feature::to_stream(std::ostream& s) const {
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
       << "\"configuration\": " << configuration_ << ", "
       << "\"name\": " << name_ << ", "
+      << "\"original_key\": " << "\"" << tidy_up_string(original_key_) << "\"" << ", "
       << "\"key\": " << "\"" << tidy_up_string(key_) << "\"" << ", "
       << "\"identifiable_key\": " << "\"" << tidy_up_string(identifiable_key_) << "\"" << ", "
       << "\"unparsed_type\": " << "\"" << tidy_up_string(unparsed_type_) << "\"" << ", "
@@ -157,6 +161,7 @@ void abstract_feature::swap(abstract_feature& other) noexcept {
     swap(documentation_, other.documentation_);
     swap(configuration_, other.configuration_);
     swap(name_, other.name_);
+    swap(original_key_, other.original_key_);
     swap(key_, other.key_);
     swap(identifiable_key_, other.identifiable_key_);
     swap(unparsed_type_, other.unparsed_type_);
@@ -173,6 +178,7 @@ bool abstract_feature::compare(const abstract_feature& rhs) const {
     return documentation_ == rhs.documentation_ &&
         configuration_ == rhs.configuration_ &&
         name_ == rhs.name_ &&
+        original_key_ == rhs.original_key_ &&
         key_ == rhs.key_ &&
         identifiable_key_ == rhs.identifiable_key_ &&
         unparsed_type_ == rhs.unparsed_type_ &&
@@ -231,6 +237,22 @@ void abstract_feature::name(const dogen::assets::meta_model::name& v) {
 
 void abstract_feature::name(const dogen::assets::meta_model::name&& v) {
     name_ = std::move(v);
+}
+
+const std::string& abstract_feature::original_key() const {
+    return original_key_;
+}
+
+std::string& abstract_feature::original_key() {
+    return original_key_;
+}
+
+void abstract_feature::original_key(const std::string& v) {
+    original_key_ = v;
+}
+
+void abstract_feature::original_key(const std::string&& v) {
+    original_key_ = std::move(v);
 }
 
 const std::string& abstract_feature::key() const {

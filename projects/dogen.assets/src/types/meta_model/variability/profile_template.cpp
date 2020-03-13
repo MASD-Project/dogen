@@ -58,6 +58,7 @@ profile_template::profile_template(
     const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& decoration,
     const std::string& stereotype,
     const std::list<dogen::assets::meta_model::name>& parents,
+    const std::string& key_prefix,
     const std::list<dogen::assets::meta_model::variability::profile_template_entry>& entries)
     : dogen::assets::meta_model::variability::abstract_profile(
       name,
@@ -76,7 +77,8 @@ profile_template::profile_template(
       archetype_location_properties,
       decoration,
       stereotype,
-      parents),
+      parents,
+      key_prefix),
       entries_(entries) { }
 
 void profile_template::accept(const element_visitor& v) const {

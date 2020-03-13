@@ -47,6 +47,7 @@ public:
         const std::string& documentation,
         const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
         const dogen::assets::meta_model::name& name,
+        const std::string& original_key,
         const std::string& key,
         const std::string& identifiable_key,
         const std::string& unparsed_type,

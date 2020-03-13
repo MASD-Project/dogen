@@ -65,7 +65,8 @@ abstract_profile::abstract_profile(
     const std::unordered_map<std::string, dogen::assets::meta_model::local_archetype_location_properties>& archetype_location_properties,
     const std::unordered_map<dogen::assets::meta_model::technical_space, boost::optional<dogen::assets::meta_model::decoration::element_properties> >& decoration,
     const std::string& stereotype,
-    const std::list<dogen::assets::meta_model::name>& parents)
+    const std::list<dogen::assets::meta_model::name>& parents,
+    const std::string& key_prefix)
     : dogen::assets::meta_model::element(
       name,
       documentation,
@@ -83,7 +84,8 @@ abstract_profile::abstract_profile(
       archetype_location_properties,
       decoration),
       stereotype_(stereotype),
-      parents_(parents) { }
+      parents_(parents),
+      key_prefix_(key_prefix) { }
 
 void abstract_profile::to_stream(std::ostream& s) const {
     s << " { "
@@ -92,7 +94,8 @@ void abstract_profile::to_stream(std::ostream& s) const {
     dogen::assets::meta_model::element::to_stream(s);
     s << ", "
       << "\"stereotype\": " << "\"" << tidy_up_string(stereotype_) << "\"" << ", "
-      << "\"parents\": " << parents_
+      << "\"parents\": " << parents_ << ", "
+      << "\"key_prefix\": " << "\"" << tidy_up_string(key_prefix_) << "\""
       << " }";
 }
 
@@ -102,12 +105,14 @@ void abstract_profile::swap(abstract_profile& other) noexcept {
     using std::swap;
     swap(stereotype_, other.stereotype_);
     swap(parents_, other.parents_);
+    swap(key_prefix_, other.key_prefix_);
 }
 
 bool abstract_profile::compare(const abstract_profile& rhs) const {
     return dogen::assets::meta_model::element::compare(rhs) &&
         stereotype_ == rhs.stereotype_ &&
-        parents_ == rhs.parents_;
+        parents_ == rhs.parents_ &&
+        key_prefix_ == rhs.key_prefix_;
 }
 
 const std::string& abstract_profile::stereotype() const {
@@ -140,6 +145,22 @@ void abstract_profile::parents(const std::list<dogen::assets::meta_model::name>&
 
 void abstract_profile::parents(const std::list<dogen::assets::meta_model::name>&& v) {
     parents_ = std::move(v);
+}
+
+const std::string& abstract_profile::key_prefix() const {
+    return key_prefix_;
+}
+
+std::string& abstract_profile::key_prefix() {
+    return key_prefix_;
+}
+
+void abstract_profile::key_prefix(const std::string& v) {
+    key_prefix_ = v;
+}
+
+void abstract_profile::key_prefix(const std::string&& v) {
+    key_prefix_ = std::move(v);
 }
 
 }

@@ -78,11 +78,13 @@ abstract_profile_entry::abstract_profile_entry(
     const std::string& documentation,
     const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
     const dogen::assets::meta_model::name& name,
+    const std::string& original_key,
     const std::string& key,
     const std::list<std::string>& value)
     : documentation_(documentation),
       configuration_(configuration),
       name_(name),
+      original_key_(original_key),
       key_(key),
       value_(value) { }
 
@@ -92,6 +94,7 @@ void abstract_profile_entry::to_stream(std::ostream& s) const {
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
       << "\"configuration\": " << configuration_ << ", "
       << "\"name\": " << name_ << ", "
+      << "\"original_key\": " << "\"" << tidy_up_string(original_key_) << "\"" << ", "
       << "\"key\": " << "\"" << tidy_up_string(key_) << "\"" << ", "
       << "\"value\": " << value_
       << " }";
@@ -102,6 +105,7 @@ void abstract_profile_entry::swap(abstract_profile_entry& other) noexcept {
     swap(documentation_, other.documentation_);
     swap(configuration_, other.configuration_);
     swap(name_, other.name_);
+    swap(original_key_, other.original_key_);
     swap(key_, other.key_);
     swap(value_, other.value_);
 }
@@ -110,6 +114,7 @@ bool abstract_profile_entry::compare(const abstract_profile_entry& rhs) const {
     return documentation_ == rhs.documentation_ &&
         configuration_ == rhs.configuration_ &&
         name_ == rhs.name_ &&
+        original_key_ == rhs.original_key_ &&
         key_ == rhs.key_ &&
         value_ == rhs.value_;
 }
@@ -160,6 +165,22 @@ void abstract_profile_entry::name(const dogen::assets::meta_model::name& v) {
 
 void abstract_profile_entry::name(const dogen::assets::meta_model::name&& v) {
     name_ = std::move(v);
+}
+
+const std::string& abstract_profile_entry::original_key() const {
+    return original_key_;
+}
+
+std::string& abstract_profile_entry::original_key() {
+    return original_key_;
+}
+
+void abstract_profile_entry::original_key(const std::string& v) {
+    original_key_ = v;
+}
+
+void abstract_profile_entry::original_key(const std::string&& v) {
+    original_key_ = std::move(v);
 }
 
 const std::string& abstract_profile_entry::key() const {

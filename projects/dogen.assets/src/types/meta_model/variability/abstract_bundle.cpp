@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen.assets/io/meta_model/name_io.hpp"
 #include "dogen.assets/io/meta_model/element_io.hpp"
 #include "dogen.variability/io/meta_model/binding_point_io.hpp"
@@ -37,6 +38,14 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::
     return s;
 }
 
+}
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
 }
 
 namespace boost {
@@ -67,6 +76,7 @@ abstract_bundle::abstract_bundle(abstract_bundle&& rhs)
       transparent_associations_(std::move(rhs.transparent_associations_)),
       opaque_associations_(std::move(rhs.opaque_associations_)),
       associative_container_keys_(std::move(rhs.associative_container_keys_)),
+      key_prefix_(std::move(rhs.key_prefix_)),
       generate_registration_(std::move(rhs.generate_registration_)),
       generate_static_configuration_(std::move(rhs.generate_static_configuration_)),
       requires_manual_default_constructor_(std::move(rhs.requires_manual_default_constructor_)),
@@ -91,6 +101,7 @@ abstract_bundle::abstract_bundle(
     const std::list<dogen::assets::meta_model::name>& transparent_associations,
     const std::list<dogen::assets::meta_model::name>& opaque_associations,
     const std::list<dogen::assets::meta_model::name>& associative_container_keys,
+    const std::string& key_prefix,
     const bool generate_registration,
     const bool generate_static_configuration,
     const bool requires_manual_default_constructor,
@@ -114,6 +125,7 @@ abstract_bundle::abstract_bundle(
       transparent_associations_(transparent_associations),
       opaque_associations_(opaque_associations),
       associative_container_keys_(associative_container_keys),
+      key_prefix_(key_prefix),
       generate_registration_(generate_registration),
       generate_static_configuration_(generate_static_configuration),
       requires_manual_default_constructor_(requires_manual_default_constructor),
@@ -134,6 +146,7 @@ void abstract_bundle::to_stream(std::ostream& s) const {
       << "\"transparent_associations\": " << transparent_associations_ << ", "
       << "\"opaque_associations\": " << opaque_associations_ << ", "
       << "\"associative_container_keys\": " << associative_container_keys_ << ", "
+      << "\"key_prefix\": " << "\"" << tidy_up_string(key_prefix_) << "\"" << ", "
       << "\"generate_registration\": " << generate_registration_ << ", "
       << "\"generate_static_configuration\": " << generate_static_configuration_ << ", "
       << "\"requires_manual_default_constructor\": " << requires_manual_default_constructor_ << ", "
@@ -148,6 +161,7 @@ void abstract_bundle::swap(abstract_bundle& other) noexcept {
     swap(transparent_associations_, other.transparent_associations_);
     swap(opaque_associations_, other.opaque_associations_);
     swap(associative_container_keys_, other.associative_container_keys_);
+    swap(key_prefix_, other.key_prefix_);
     swap(generate_registration_, other.generate_registration_);
     swap(generate_static_configuration_, other.generate_static_configuration_);
     swap(requires_manual_default_constructor_, other.requires_manual_default_constructor_);
@@ -159,6 +173,7 @@ bool abstract_bundle::compare(const abstract_bundle& rhs) const {
         transparent_associations_ == rhs.transparent_associations_ &&
         opaque_associations_ == rhs.opaque_associations_ &&
         associative_container_keys_ == rhs.associative_container_keys_ &&
+        key_prefix_ == rhs.key_prefix_ &&
         generate_registration_ == rhs.generate_registration_ &&
         generate_static_configuration_ == rhs.generate_static_configuration_ &&
         requires_manual_default_constructor_ == rhs.requires_manual_default_constructor_ &&
@@ -211,6 +226,22 @@ void abstract_bundle::associative_container_keys(const std::list<dogen::assets::
 
 void abstract_bundle::associative_container_keys(const std::list<dogen::assets::meta_model::name>&& v) {
     associative_container_keys_ = std::move(v);
+}
+
+const std::string& abstract_bundle::key_prefix() const {
+    return key_prefix_;
+}
+
+std::string& abstract_bundle::key_prefix() {
+    return key_prefix_;
+}
+
+void abstract_bundle::key_prefix(const std::string& v) {
+    key_prefix_ = v;
+}
+
+void abstract_bundle::key_prefix(const std::string&& v) {
+    key_prefix_ = std::move(v);
 }
 
 bool abstract_bundle::generate_registration() const {

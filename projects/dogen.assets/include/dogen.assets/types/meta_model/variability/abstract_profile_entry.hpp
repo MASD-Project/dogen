@@ -48,6 +48,7 @@ public:
         const std::string& documentation,
         const boost::shared_ptr<dogen::variability::meta_model::configuration>& configuration,
         const dogen::assets::meta_model::name& name,
+        const std::string& original_key,
         const std::string& key,
         const std::list<std::string>& value);
 
@@ -89,6 +90,16 @@ public:
     void name(const dogen::assets::meta_model::name&& v);
     /**@}*/
 
+    /**
+     * @brief Key as it was originally provided by the user.
+     */
+    /**@{*/
+    const std::string& original_key() const;
+    std::string& original_key();
+    void original_key(const std::string& v);
+    void original_key(const std::string&& v);
+    /**@}*/
+
     const std::string& key() const;
     std::string& key();
     void key(const std::string& v);
@@ -111,6 +122,7 @@ private:
     std::string documentation_;
     boost::shared_ptr<dogen::variability::meta_model::configuration> configuration_;
     dogen::assets::meta_model::name name_;
+    std::string original_key_;
     std::string key_;
     std::list<std::string> value_;
 };

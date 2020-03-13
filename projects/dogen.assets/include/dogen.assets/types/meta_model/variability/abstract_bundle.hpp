@@ -27,6 +27,7 @@
 
 #include <list>
 #include <iosfwd>
+#include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
 #include "dogen.assets/types/meta_model/name.hpp"
@@ -81,6 +82,7 @@ public:
         const std::list<dogen::assets::meta_model::name>& transparent_associations,
         const std::list<dogen::assets::meta_model::name>& opaque_associations,
         const std::list<dogen::assets::meta_model::name>& associative_container_keys,
+        const std::string& key_prefix,
         const bool generate_registration,
         const bool generate_static_configuration,
         const bool requires_manual_default_constructor,
@@ -121,6 +123,16 @@ public:
     std::list<dogen::assets::meta_model::name>& associative_container_keys();
     void associative_container_keys(const std::list<dogen::assets::meta_model::name>& v);
     void associative_container_keys(const std::list<dogen::assets::meta_model::name>&& v);
+    /**@}*/
+
+    /**
+     * @brief Prefix to use when composing the key, if any.
+     */
+    /**@{*/
+    const std::string& key_prefix() const;
+    std::string& key_prefix();
+    void key_prefix(const std::string& v);
+    void key_prefix(const std::string&& v);
     /**@}*/
 
     /**
@@ -175,6 +187,7 @@ private:
     std::list<dogen::assets::meta_model::name> transparent_associations_;
     std::list<dogen::assets::meta_model::name> opaque_associations_;
     std::list<dogen::assets::meta_model::name> associative_container_keys_;
+    std::string key_prefix_;
     bool generate_registration_;
     bool generate_static_configuration_;
     bool requires_manual_default_constructor_;
