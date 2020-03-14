@@ -95,16 +95,24 @@ kvp_gatherer::result() {
 void kvp_gatherer::gather(const meta_model::feature& f,
     const std::string& key, const std::list<std::string>& value,
     const std::list<std::string>& override_value) {
-
+    /*
+     * We only expect a single value in the container. Note that
+     * multiple entries can happen due to the fact that the "same key"
+     * (e.g. the prefix of the key) can be repeated. But each entry is
+     * expected to have only one value.
+     */
     BOOST_LOG_SEV(lg, debug) << "Adding kvp for key: " << key;
     if (value.size() != 1) {
         BOOST_LOG_SEV(lg, debug) << too_many_values << key;
         BOOST_THROW_EXCEPTION(building_exception(too_many_values + key));
     }
 
+    /*
+     * Compute a new key by removing the prefix.
+     */
     const auto& qn(f.name().qualified());
     const auto new_key(boost::erase_first_copy(key, qn + "."));
-    BOOST_LOG_SEV(lg, debug) << "Actual key: " << new_key;
+    BOOST_LOG_SEV(lg, debug) << "New key: " << new_key;
 
     /*
      * Handle the override scenario, where the override value takes
@@ -172,7 +180,7 @@ void configuration_factory::validate_binding(const meta_model::feature& f,
 std::unordered_map<std::string, std::list<std::string>>
 configuration_factory::aggregate_entries(
     const std::list<std::pair<std::string, std::string>>& entries) const {
-    std::unordered_map<std::string, std::list<std::string> > r;
+    std::unordered_map<std::string, std::list<std::string>> r;
 
     for (const auto& entry : entries)
         r[entry.first].push_back(entry.second);
@@ -222,7 +230,7 @@ void configuration_factory::populate_configuration(
         }
 
         /*
-         * Ensure the entry is valid with regards to the binding type.
+         * Ensure the entry is valid with regards to the binding point.
          */
         const auto& f(*of);
         validate_binding(f, bp);
