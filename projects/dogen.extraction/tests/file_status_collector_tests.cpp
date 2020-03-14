@@ -39,7 +39,7 @@ const std::vector<std::string> ignored_files;
 
 const std::list<boost::filesystem::path> managed_directories() {
     std::list<boost::filesystem::path> r;
-    r.push_front(dogen::utility::test_data::tds_test_good::expected());
+    r.push_back(dogen::utility::test_data::tds_test_good::expected());
     return r;
 }
 

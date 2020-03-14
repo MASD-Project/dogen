@@ -80,7 +80,7 @@ workflow::execute(const formattables::model& fm) const {
             const auto& p(artefact.path());
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
-            r.push_front(artefact);
+            r.push_back(artefact);
         }
     }
 

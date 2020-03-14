@@ -118,7 +118,7 @@ void kvp_gatherer::gather(const meta_model::feature& f,
         BOOST_LOG_SEV(lg, debug) << duplicate_key << new_key;
         BOOST_THROW_EXCEPTION(building_exception(duplicate_key + new_key));
     }
-    result_[qn].push_front(pair);
+    result_[qn].push_back(pair);
 }
 
 }

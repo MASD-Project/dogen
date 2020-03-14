@@ -83,7 +83,7 @@ add(const std::string& meta_name, const std::string& family,
     const std::string& canonical_archetype, const location& al) {
 
     validate(meta_name, family, intra_backend_segment, al);
-    parts_.all().push_front(al);
+    parts_.all().push_back(al);
 
     auto& alg(parts_.by_meta_name()[meta_name]);
     alg.locations().push_back(al);

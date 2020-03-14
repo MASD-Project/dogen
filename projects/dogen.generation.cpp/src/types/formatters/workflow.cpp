@@ -115,7 +115,7 @@ workflow::format(
             const auto& p(artefact.path());
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
-            r.push_front(artefact);
+            r.push_back(artefact);
         } else if (fs == formatting_styles::wale) {
             BOOST_LOG_SEV(lg, debug) << "Using the wale formatter.";
 
@@ -124,7 +124,7 @@ workflow::format(
             const auto& p(artefact.path());
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
-            r.push_front(artefact);
+            r.push_back(artefact);
         } else if (fs == formatting_styles::stitch) {
             BOOST_LOG_SEV(lg, debug) << "Using the stitch formatter.";
 
@@ -132,7 +132,7 @@ workflow::format(
             const auto& p(artefact.path());
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
-            r.push_front(artefact);
+            r.push_back(artefact);
         } else {
             BOOST_LOG_SEV(lg, error) << invalid_formatting_style << fs;
             BOOST_THROW_EXCEPTION(formatting_error(invalid_formatting_style));

@@ -79,7 +79,7 @@ void variability_features_transform::update(
             meta_model::variability::default_value_override dvo;
             dvo.key_ends_with(pair.first);
             dvo.default_value(pair.second);
-            ft->default_value_overrides().push_front(dvo);
+            ft->default_value_overrides().push_back(dvo);
         }
     }
 
