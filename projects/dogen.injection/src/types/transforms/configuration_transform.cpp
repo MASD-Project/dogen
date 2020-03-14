@@ -40,8 +40,7 @@ namespace dogen::injection::transforms {
 template<typename NameableAndTaggable>
 inline void create_configuration(
     const variability::helpers::configuration_factory& f,
-    const variability::meta_model::binding_point bp,
-    NameableAndTaggable& nat) {
+    const variability::meta_model::binding_point bp, NameableAndTaggable& nat) {
 
     const auto& tv(nat.tagged_values());
     const auto& otv(nat.tagged_values_overrides());
