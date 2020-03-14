@@ -27,7 +27,7 @@
 
 #include <list>
 #include <string>
-#include <unordered_map>
+#include <utility>
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
@@ -56,7 +56,7 @@ public:
         std::string stereotype;
         std::list<std::string> value;
         bool is_optional;
-        std::unordered_map<std::string, std::string> default_value_override;
+        std::list<std::pair<std::string, std::string> > default_value_override;
 
         static_configuration() :
             is_optional() {}

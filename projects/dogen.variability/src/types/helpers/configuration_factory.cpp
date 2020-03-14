@@ -25,6 +25,7 @@
 #include <boost/algorithm/string/erase.hpp>
 #include <unordered_set>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.variability/io/meta_model/configuration_io.hpp"
 #include "dogen.variability/io/meta_model/binding_point_io.hpp"
@@ -48,6 +49,79 @@ const std::string invalid_binding_for_point("Incorrect binding type: ");
 }
 
 namespace dogen::variability::helpers {
+
+namespace {
+
+/**
+ * @brief Responsible for converting aggregated entries into the right
+ * layout for variability KVPs.
+ *
+ * KVP processing is done as a two step process. If we take a walke
+ * KVP as an example:
+ *
+ * masd.stitch.wale.kvp.helper.family=Pair
+ *
+ * The "masd.stitch.wale.kvp" part of the key is the feature name;
+ * anything following it is the real key (e.g. "helper.family"). The
+ * value is as per normal entries (e.g. "Pair"). So, the first step is
+ * to remove the feature name portion of the original key and to store
+ * it in a new collection of entries. This is the job of the
+ * processor. Afterwards, we process these just like we would process
+ * regular entries - but this is done on the main method below.
+ */
+class kvp_gatherer {
+public:
+    void gather(const meta_model::feature& f, const std::string& key,
+        const std::list<std::string>& value,
+        const std::list<std::string>& override_value);
+
+public:
+    const std::unordered_map<std::string,
+                             std::list<std::pair<std::string, std::string>>>&
+    result();
+
+private:
+    std::unordered_map<std::string, std::set<std::string>> keys_;
+    std::unordered_map<std::string,
+                       std::list<std::pair<std::string, std::string>>> result_;
+};
+
+const std::unordered_map<std::string,
+                         std::list<std::pair<std::string, std::string>>>&
+kvp_gatherer::result() {
+    return result_;
+}
+
+void kvp_gatherer::gather(const meta_model::feature& f,
+    const std::string& key, const std::list<std::string>& value,
+    const std::list<std::string>& override_value) {
+
+    BOOST_LOG_SEV(lg, debug) << "Adding kvp for key: " << key;
+    if (value.size() != 1) {
+        BOOST_LOG_SEV(lg, debug) << too_many_values << key;
+        BOOST_THROW_EXCEPTION(building_exception(too_many_values + key));
+    }
+
+    const auto& qn(f.name().qualified());
+    const auto new_key(boost::erase_first_copy(key, qn + "."));
+    BOOST_LOG_SEV(lg, debug) << "Actual key: " << new_key;
+
+    /*
+     * Handle the override scenario, where the override value takes
+     * over the value supplied in model.
+     */
+    const auto has_overrides(!override_value.empty());
+    const auto v(has_overrides ? override_value.front() : value.front());
+    const auto pair(std::make_pair(new_key, v));
+    const auto inserted(keys_[qn].insert(new_key).second);
+    if (!inserted) {
+        BOOST_LOG_SEV(lg, debug) << duplicate_key << new_key;
+        BOOST_THROW_EXCEPTION(building_exception(duplicate_key + new_key));
+    }
+    result_[qn].push_front(pair);
+}
+
+}
 
 configuration_factory::configuration_factory(
     const archetypes::location_repository& alrp,
@@ -111,16 +185,14 @@ void configuration_factory::populate_configuration(
     const std::unordered_map<std::string, std::list<std::string>>&
     aggregated_entries,
     const std::unordered_map<std::string, std::list<std::string>>&
-    aggregated_override_entries,
-    meta_model::configuration& cfg) const {
+    aggregated_override_entries, meta_model::configuration& cfg) const {
 
     cfg.source_binding_point(bp);
 
+    kvp_gatherer kvpg;
     value_factory factory;
     std::unordered_map<std::string,
                        boost::shared_ptr<meta_model::value>> entries;
-    std::unordered_map<std::string,
-                       std::unordered_map<std::string, std::string>> all_kvps;
     std::unordered_set<std::string> applied_overrides;
     for (auto kvp : aggregated_entries) {
         const auto& k(kvp.first);
@@ -137,8 +209,7 @@ void configuration_factory::populate_configuration(
                  * compatibility purposes - i.e. diagrams using features that
                  * we do not yet know about.
                  */
-                BOOST_LOG_SEV(lg, warn) << "Ignoring unsupported feature: "
-                                        << k;
+                BOOST_LOG_SEV(lg, warn) << "Ignoring missing feature: " << k;
                 continue;
             }
 
@@ -176,43 +247,9 @@ void configuration_factory::populate_configuration(
         const auto vt(f.value_type());
         if (vt == value_type::key_value_pair) {
             /*
-             * KVP processing is done as a two step process. If we
-             * take a walke KVP as an example:
-             *
-             * masd.stitch.wale.kvp.helper.family=Pair
-             *
-             * The "masd.stitch.wale.kvp" part of the key is the
-             * feature name; anything following it is the real key
-             * (e.g. "helper.family"). The value is as per normal
-             * entries (e.g. "Pair"). So, the first step is to remove
-             * the feature name portion of the original key and to
-             * store it in a new collection of entries. Afterwards, we
-             * process these just like we would process regular
-             * entries.
+             * Gather KVP details.
              */
-
-            BOOST_LOG_SEV(lg, debug) << "Adding kvp for key: " << k;
-            if (v.size() != 1) {
-                BOOST_LOG_SEV(lg, debug) << too_many_values << k;
-                BOOST_THROW_EXCEPTION(building_exception(too_many_values + k));
-            }
-
-            const auto& qn(f.name().qualified());
-            const auto new_key(boost::erase_first_copy(k, qn + "."));
-            BOOST_LOG_SEV(lg, debug) << "Actual key: " << new_key;
-
-            /*
-             * Handle the override scenario, where the override value
-             * takes over the value supplied in model.
-             */
-            const auto value(has_overrides ? ovs.front() : v.front());
-            const auto pair(std::make_pair(new_key, value));
-            const auto inserted(all_kvps[qn].insert(pair).second);
-            if (!inserted) {
-                BOOST_LOG_SEV(lg, debug) << duplicate_key << new_key;
-                BOOST_THROW_EXCEPTION(
-                    building_exception(duplicate_key + new_key));
-            }
+            kvpg.gather(f, k, v, ovs);
         } else {
             meta_model::configuration_point cp;
             cp.name().qualified(k);
@@ -231,7 +268,7 @@ void configuration_factory::populate_configuration(
     /*
      * Now process all of the KVPs that we gathered on the first step.
      */
-    for (const auto& pair : all_kvps) {
+    for (const auto& pair : kvpg.result()) {
         BOOST_LOG_SEV(lg, debug) << "Processing kvp:: " << pair;
 
         const auto k(pair.first);

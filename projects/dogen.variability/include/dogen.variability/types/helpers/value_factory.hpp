@@ -27,7 +27,7 @@
 
 #include <list>
 #include <string>
-#include <unordered_map>
+#include <utility>
 #include <boost/shared_ptr.hpp>
 #include "dogen.variability/types/meta_model/value.hpp"
 #include "dogen.variability/types/meta_model/feature.hpp"
@@ -99,7 +99,7 @@ public:
      * @brief Creates a stand alone kvp value.
      */
     boost::shared_ptr<meta_model::value>
-    make_kvp(const std::unordered_map<std::string, std::string>& v) const;
+    make_kvp(const std::list<std::pair<std::string, std::string>>& v) const;
 
 public:
     /**
@@ -126,7 +126,7 @@ public:
      * that it is of kvp type.
      */
     boost::shared_ptr<meta_model::value> make(const meta_model::feature& f,
-        const std::unordered_map<std::string, std::string>& v) const;
+        const std::list<std::pair<std::string, std::string>>& v) const;
 };
 
 }

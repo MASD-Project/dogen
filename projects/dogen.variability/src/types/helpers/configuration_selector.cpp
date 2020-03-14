@@ -301,7 +301,7 @@ get_number_content_or_default(const meta_model::feature& f) const {
     }
 }
 
-std::unordered_map<std::string, std::string>
+const std::list<std::pair<std::string, std::string>>&
 configuration_selector::get_key_value_pair_content(const meta_model::value& v) {
     try {
         const auto& b(dynamic_cast<const meta_model::key_value_pair&>(v));
@@ -312,7 +312,7 @@ configuration_selector::get_key_value_pair_content(const meta_model::value& v) {
     }
 }
 
-std::unordered_map<std::string, std::string>
+const std::list<std::pair<std::string, std::string>>&
 configuration_selector::get_key_value_pair_content(const std::string& qn) const {
     const auto& v(get_configuration_point_value(qn));
 
@@ -325,7 +325,7 @@ configuration_selector::get_key_value_pair_content(const std::string& qn) const 
     }
 }
 
-std::unordered_map<std::string, std::string> configuration_selector::
+const std::list<std::pair<std::string, std::string>>& configuration_selector::
 get_key_value_pair_content(const meta_model::feature& f) const {
     return get_key_value_pair_content(f.name().qualified());
 }

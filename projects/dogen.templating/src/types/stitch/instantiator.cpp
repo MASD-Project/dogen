@@ -170,7 +170,9 @@ properties instantiator::create_properties(
     r.containing_namespaces(cns);
 
     r.wale_template(scfg.text_template);
-    r.wale_kvps(scfg.kvp);
+    for (const auto& pair : scfg.kvp)
+        r.wale_kvps()[pair.first] = pair.second;
+
     return r;
 }
 

@@ -27,7 +27,7 @@
 
 #include <list>
 #include <string>
-#include <unordered_map>
+#include <utility>
 #include "dogen.variability/types/meta_model/value.hpp"
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
@@ -227,7 +227,7 @@ public:
      *
      * @pre @v must have a type of key/value pair.
      */
-    static std::unordered_map<std::string, std::string>
+    static const std::list<std::pair<std::string, std::string>>&
     get_key_value_pair_content(const meta_model::value& v);
 
     /**
@@ -241,9 +241,9 @@ public:
      * @pre The type of its value must be key/value pair.
      */
     /**@{*/
-    std::unordered_map<std::string, std::string>
+    const std::list<std::pair<std::string, std::string>>&
     get_key_value_pair_content(const std::string& qn) const;
-    std::unordered_map<std::string, std::string>
+    const std::list<std::pair<std::string, std::string>>&
     get_key_value_pair_content(const meta_model::feature& f) const;
     /**@}*/
 

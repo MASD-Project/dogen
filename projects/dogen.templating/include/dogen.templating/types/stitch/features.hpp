@@ -27,7 +27,7 @@
 
 #include <list>
 #include <string>
-#include <unordered_map>
+#include <utility>
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
@@ -58,7 +58,7 @@ public:
         std::list<std::string> inclusion_dependency;
         std::string containing_namespaces;
         std::string text_template;
-        std::unordered_map<std::string, std::string> kvp;
+        std::list<std::pair<std::string, std::string> > kvp;
     };
 
     static static_configuration make_static_configuration(

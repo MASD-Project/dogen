@@ -14,34 +14,35 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-13 Fri 21:54]
+#+CAPTION: Clock summary at [2020-03-14 Sat 09:12]
 | <75>                                                    |         |       |      |       |
 | Headline                                                | Time    |       |      |     % |
 |---------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                            | *70:23* |       |      | 100.0 |
+| *Total time*                                            | *71:34* |       |      | 100.0 |
 |---------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                 | 70:23   |       |      | 100.0 |
-| Active                                                  |         | 70:23 |      | 100.0 |
-| Edit release notes for previous sprint                  |         |       | 4:11 |   5.9 |
+| Stories                                                 | 71:34   |       |      | 100.0 |
+| Active                                                  |         | 71:34 |      | 100.0 |
+| Edit release notes for previous sprint                  |         |       | 4:11 |   5.8 |
 | Create a demo and presentation for previous sprint      |         |       | 0:25 |   0.6 |
-| Sprint and product backlog grooming                     |         |       | 8:00 |  11.4 |
-| Emacs configuration and issues                          |         |       | 1:02 |   1.5 |
-| Analysis on defining a combined logical-physical space  |         |       | 5:55 |   8.4 |
-| Analysis on removing physical references in variability |         |       | 5:27 |   7.7 |
+| Sprint and product backlog grooming                     |         |       | 8:00 |  11.2 |
+| Emacs configuration and issues                          |         |       | 1:02 |   1.4 |
+| Analysis on defining a combined logical-physical space  |         |       | 5:55 |   8.3 |
+| Analysis on removing physical references in variability |         |       | 5:27 |   7.6 |
 | Remove =rapidjson= formatters                           |         |       | 0:03 |   0.1 |
-| Separate feature templates from bundles                 |         |       | 9:28 |  13.5 |
+| Separate feature templates from bundles                 |         |       | 9:28 |  13.2 |
 | Move enabled to generation                              |         |       | 0:04 |   0.1 |
 | Create a chain to encapsulate variability transforms    |         |       | 0:37 |   0.9 |
-| Move variability chain into assets                      |         |       | 2:22 |   3.4 |
-| Move profile meta-data into profile element             |         |       | 7:12 |  10.2 |
+| Move variability chain into assets                      |         |       | 2:22 |   3.3 |
+| Move profile meta-data into profile element             |         |       | 7:12 |  10.1 |
 | Add handcrafted stereotype to C# models                 |         |       | 0:04 |   0.1 |
-| Split profiles and profile templates in variability     |         |       | 4:31 |   6.4 |
+| Split profiles and profile templates in variability     |         |       | 4:31 |   6.3 |
 | Consider renaming labels to stereotypes in variability  |         |       | 1:07 |   1.6 |
 | Declaring a =std::list= without parameters segfaults    |         |       | 0:10 |   0.2 |
 | Add location and modules to variability                 |         |       | 0:43 |   1.0 |
-| Implement template instantiation in terms of tags       |         |       | 8:31 |  12.1 |
-| Remove duplication from feature bundles and profiles    |         |       | 4:29 |   6.4 |
-| Postfix and directory fields should be templates        |         |       | 3:55 |   5.6 |
+| Implement template instantiation in terms of tags       |         |       | 8:31 |  11.9 |
+| Remove duplication from feature bundles and profiles    |         |       | 4:29 |   6.3 |
+| Postfix and directory fields should be templates        |         |       | 3:55 |   5.5 |
+| Default value overrides are not stable                  |         |       | 1:11 |   1.7 |
 | Add command line option to dump all features            |         |       | 2:07 |   3.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -1040,6 +1041,15 @@ Tasks:
 Why are we manually instantiating postfix and directory for each
 formatter/facet instead of using templates? This is one of the main
 reasons for breaks/errors when adding a new formatter.
+
+*** STARTED Default value overrides are not stable                    :story:
+    :LOGBOOK:
+    CLOCK: [2020-03-14 Sat 08:01]--[2020-03-14 Sat 09:12] =>  1:11
+    :END:
+
+Because KVPs in variability use an unordered map as the underlying
+structure, the order of KVPs is liable to move on different
+machines. We need to change it to a list and deal with the fallout.
 
 *** STARTED Add command line option to dump all features              :story:
     :LOGBOOK:

@@ -38,7 +38,7 @@ make_postfix() {
     r.instantiation_domain_name("masd.archetype");
     dogen::variability::helpers::value_factory f;
     r.default_value(f.make(vt, std::list<std::string>{ "" }));
-    r.default_value_overrides().push_back(
+    r.default_value_overrides().push_front(
         default_value_override("forward_declarations",
             f.make(vt, std::list<std::string>{ "fwd" })));
     return r;

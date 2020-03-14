@@ -281,7 +281,8 @@
       "attributes": [
         {
           "name": "content",
-          "type": "std::unordered_map<std::string, std::string>"
+          "type": "std::list<std::pair<std::string, std::string>>",
+          "documentation": "The data structure was chosen to guarantee that the order is maintained from \nsource.\n"
         }
       ]
     },

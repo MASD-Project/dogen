@@ -57,6 +57,7 @@ public:
 public:
     operator bool() const { return data; }
 
+    [[maybe_unused]]
     friend std::istream& operator>>(std::istream &s, locale_bool &b) {
         s >> std::boolalpha >> b.data;
         return s;
@@ -137,7 +138,7 @@ value_factory::make_number(const int v) const {
 }
 
 boost::shared_ptr<meta_model::value> value_factory::
-make_kvp(const std::unordered_map<std::string, std::string>& v) const {
+make_kvp(const std::list<std::pair<std::string, std::string>>& v) const {
     return boost::make_shared<meta_model::key_value_pair>(v);
 }
 
@@ -174,7 +175,7 @@ value_factory::make(const meta_model::feature& f,
 
 boost::shared_ptr<meta_model::value>
 value_factory::make(const meta_model::feature& f,
-    const std::unordered_map<std::string, std::string>& v) const {
+    const std::list<std::pair<std::string, std::string>>& v) const {
 
     if (f.value_type() != meta_model::value_type::key_value_pair) {
         const auto s(boost::lexical_cast<std::string>(f.value_type()));

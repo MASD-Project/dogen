@@ -25,10 +25,11 @@
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
 #include <string>
+#include <utility>
 #include <algorithm>
-#include <unordered_map>
 #include "dogen.variability/types/meta_model/value.hpp"
 
 namespace dogen::variability::meta_model {
@@ -45,7 +46,7 @@ public:
     virtual ~key_value_pair() noexcept { }
 
 public:
-    explicit key_value_pair(const std::unordered_map<std::string, std::string>& content);
+    explicit key_value_pair(const std::list<std::pair<std::string, std::string> >& content);
 
 public:
     using value::accept;
@@ -58,10 +59,16 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const std::unordered_map<std::string, std::string>& content() const;
-    std::unordered_map<std::string, std::string>& content();
-    void content(const std::unordered_map<std::string, std::string>& v);
-    void content(const std::unordered_map<std::string, std::string>&& v);
+    /**
+     * @brief The data structure was chosen to guarantee that the order is maintained from
+     * source.
+     */
+    /**@{*/
+    const std::list<std::pair<std::string, std::string> >& content() const;
+    std::list<std::pair<std::string, std::string> >& content();
+    void content(const std::list<std::pair<std::string, std::string> >& v);
+    void content(const std::list<std::pair<std::string, std::string> >&& v);
+    /**@}*/
 
 public:
     bool operator==(const key_value_pair& rhs) const;
@@ -77,7 +84,7 @@ public:
     key_value_pair& operator=(key_value_pair other);
 
 private:
-    std::unordered_map<std::string, std::string> content_;
+    std::list<std::pair<std::string, std::string> > content_;
 };
 
 }

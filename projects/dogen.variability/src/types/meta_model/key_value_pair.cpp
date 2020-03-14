@@ -34,17 +34,26 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
-    s << "[";
+inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
+    s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
+
+    s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
+    s << "\"second\": " << "\"" << tidy_up_string(v.second) << "\"";
+    s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::string, std::string> >& v) {
+    s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->second) << "\"";
-        s << " } ]";
+        s << *i;
     }
-    s << " ] ";
+    s << "] ";
     return s;
 }
 
@@ -52,7 +61,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace dogen::variability::meta_model {
 
-key_value_pair::key_value_pair(const std::unordered_map<std::string, std::string>& content)
+key_value_pair::key_value_pair(const std::list<std::pair<std::string, std::string> >& content)
     : dogen::variability::meta_model::value(),
       content_(content) { }
 
@@ -106,19 +115,19 @@ key_value_pair& key_value_pair::operator=(key_value_pair other) {
     return *this;
 }
 
-const std::unordered_map<std::string, std::string>& key_value_pair::content() const {
+const std::list<std::pair<std::string, std::string> >& key_value_pair::content() const {
     return content_;
 }
 
-std::unordered_map<std::string, std::string>& key_value_pair::content() {
+std::list<std::pair<std::string, std::string> >& key_value_pair::content() {
     return content_;
 }
 
-void key_value_pair::content(const std::unordered_map<std::string, std::string>& v) {
+void key_value_pair::content(const std::list<std::pair<std::string, std::string> >& v) {
     content_ = v;
 }
 
-void key_value_pair::content(const std::unordered_map<std::string, std::string>&& v) {
+void key_value_pair::content(const std::list<std::pair<std::string, std::string> >&& v) {
     content_ = std::move(v);
 }
 

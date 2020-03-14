@@ -481,7 +481,7 @@ space; keep it technical space agnostic.
         <dia:string>#masd::mapping::fixed_mappable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.mapping.destination=std::unordered_map&lt;std::string, std::string&gt;#</dia:string>
+        <dia:string>##DOGEN masd.mapping.destination=std::list&lt;std::pair&lt;std::string, std::string&gt;&gt;#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
