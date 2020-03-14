@@ -14,14 +14,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-14 Sat 21:09]
+#+CAPTION: Clock summary at [2020-03-14 Sat 21:36]
 | <75>                                                    |         |       |      |       |
 | Headline                                                | Time    |       |      |     % |
 |---------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                            | *73:35* |       |      | 100.0 |
+| *Total time*                                            | *73:37* |       |      | 100.0 |
 |---------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                 | 73:35   |       |      | 100.0 |
-| Active                                                  |         | 73:35 |      | 100.0 |
+| Stories                                                 | 73:37   |       |      | 100.0 |
+| Active                                                  |         | 73:37 |      | 100.0 |
 | Edit release notes for previous sprint                  |         |       | 4:11 |   5.7 |
 | Create a demo and presentation for previous sprint      |         |       | 0:25 |   0.6 |
 | Sprint and product backlog grooming                     |         |       | 8:00 |  10.9 |
@@ -42,7 +42,7 @@
 | Implement template instantiation in terms of tags       |         |       | 8:31 |  11.6 |
 | Remove duplication from feature bundles and profiles    |         |       | 4:29 |   6.1 |
 | Postfix and directory fields should be templates        |         |       | 3:55 |   5.3 |
-| Default value overrides are not stable                  |         |       | 3:12 |   4.3 |
+| Default value overrides are not stable                  |         |       | 3:14 |   4.4 |
 | Add command line option to dump all features            |         |       | 2:07 |   2.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -1044,6 +1044,7 @@ reasons for breaks/errors when adding a new formatter.
 
 *** STARTED Default value overrides are not stable                    :story:
     :LOGBOOK:
+    CLOCK: [2020-03-14 Sat 21:10]--[2020-03-14 Sat 21:12] =>  0:02
     CLOCK: [2020-03-14 Sat 20:37]--[2020-03-14 Sat 21:09] =>  0:32
     CLOCK: [2020-03-14 Sat 19:00]--[2020-03-14 Sat 19:22] =>  0:22
     CLOCK: [2020-03-14 Sat 17:11]--[2020-03-14 Sat 18:18] =>  1:07
@@ -1070,7 +1071,11 @@ Notes:
   aggregation. The easy solution is to stop aggregating first and
   instead take the same approach as we do for KVPs but for all
   entries.
-- we seem to be reverting the keys in JSON.
+- we seem to be reverting the keys in JSON. Check the adaptor to see
+  if we are pushing on the front.
+- add notes on variability overrides explaining that by design you
+  cannot override keys on profiles, only those that have been applied
+  directly to elements.
 
 *** STARTED Add command line option to dump all features              :story:
     :LOGBOOK:
