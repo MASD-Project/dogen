@@ -58,8 +58,11 @@ public:
 
 private:
     /**
-     * @brief Returns the feature for the given qualified name, if any
-     * such feature exists.
+     * @brief Returns the feature for the given qualified name.
+     *
+     * If the feature could not be found and compatibility mode was
+     * requested, returns null. If compatibility mode was not
+     * requested throws.
      */
     boost::optional<meta_model::feature>
     try_obtain_feature(const std::string& qn) const;

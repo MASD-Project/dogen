@@ -159,7 +159,26 @@ configuration_factory::try_obtain_feature(const std::string& qn) const {
             return t;
     }
 
-    return boost::optional<meta_model::feature>();
+    /*
+     * No feature matches the qualified name (key) requested.
+     */
+    if (compatibility_mode_) {
+        /*
+         * If we're in compatibility mode, skip any features for which
+         * we do not have a definition. This is for forward
+         * compatibility purposes - i.e. diagrams using features that
+         * we do not yet know about.
+         */
+        BOOST_LOG_SEV(lg, warn) << "Ignoring missing feature: " << qn;
+        return boost::optional<meta_model::feature>();
+    }
+
+    /*
+     * If we are not in compatibility mode and nothing
+     * matches, we need to throw.
+     */
+    BOOST_LOG_SEV(lg, error) << feature_not_found << qn;
+    BOOST_THROW_EXCEPTION(building_exception(feature_not_found + qn));
 }
 
 void configuration_factory::validate_binding(const meta_model::feature& f,
@@ -204,30 +223,13 @@ void configuration_factory::populate_configuration(
     std::unordered_set<std::string> applied_overrides;
     for (auto kvp : aggregated_entries) {
         const auto& k(kvp.first);
+
+        /*
+         * Try to obtain a feature for this key, if it exists.
+         */
         const auto of(try_obtain_feature(k));
-
-        if (!of) {
-            /*
-             * No feature matches the qualified name (key) requested.
-             */
-            if (compatibility_mode_) {
-                /*
-                 * If we're in compatibility mode, skip any features for which
-                 * we do not have a definition. This is for forward
-                 * compatibility purposes - i.e. diagrams using features that
-                 * we do not yet know about.
-                 */
-                BOOST_LOG_SEV(lg, warn) << "Ignoring missing feature: " << k;
-                continue;
-            }
-
-            /*
-             * If we are not in compatibility mode and nothing
-             * matches, we need to throw.
-             */
-            BOOST_LOG_SEV(lg, error) << feature_not_found << k;
-            BOOST_THROW_EXCEPTION(building_exception(feature_not_found + k));
-        }
+        if (!of)
+            continue;
 
         /*
          * Ensure the entry is valid with regards to the binding point.
