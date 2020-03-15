@@ -79,6 +79,12 @@ public:
      * MODEL_NAME,ELEMENT_NAME,ATTRIBUTE_NAME,KEY,VALUE
      *
      * ELEMENT_NAME and ATTRIBUTE_NAME can be left blank.
+     *
+     * Please note that you can only override elements in the following cases:
+     *
+     * - they must have been supplied by the user *directly* on a modeling element (e.g.
+     * not as part of a profile).
+     * - the type of the feature being overriden must be scalar.
      */
     /**@{*/
     const std::vector<std::string>& variability_overrides() const;

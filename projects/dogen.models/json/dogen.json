@@ -194,7 +194,7 @@
         {
           "name": "variability_overrides",
           "type": "std::vector<std::string>",
-          "documentation": "Raw set of variability overrides.\n\nOverrides are CSV strings in the following format:\n\nMODEL_NAME,ELEMENT_NAME,ATTRIBUTE_NAME,KEY,VALUE\n\nELEMENT_NAME and ATTRIBUTE_NAME can be left blank.\n"
+          "documentation": "Raw set of variability overrides.\n\nOverrides are CSV strings in the following format:\n\nMODEL_NAME,ELEMENT_NAME,ATTRIBUTE_NAME,KEY,VALUE\n\nELEMENT_NAME and ATTRIBUTE_NAME can be left blank.\n\nPlease note that you can only override elements in the following cases:\n\n- they must have been supplied by the user *directly* on a modeling element (e.g.\nnot as part of a profile).\n- the type of the feature being overriden must be scalar.\n"
         },
         {
           "name": "activity_timestamp",
