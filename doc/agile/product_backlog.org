@@ -11996,6 +11996,14 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Dump model stats and metrics                                      :story:
+
+It would be nice to be able to get some information about a model. We
+already have a dumpspecs command but that is more for the system
+itself. What we also need is to dump stats on the model such as number
+of objects, whether the generated code is up-to-date, etc. We could
+also link this story with [[*Add support for dependency graphs and complexity data][measurements of complexity]].
+
 *** Add Levenshtein distance to enums when converting from string     :story:
 
 When we fail to convert a string to an enum, it would be nice if the
