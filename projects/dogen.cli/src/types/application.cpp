@@ -74,6 +74,16 @@ public:
         const auto s(dumper_.dump(configuration_.api()));
         if (s.groups().empty()) {
             std::cout << "No specs found" << std::endl;
+        } else {
+            for (const auto& g : s.groups()) {
+                std::cout << "Group: " << g.name() << std::endl
+                          << "Purpose: " << g.description() << std::endl;
+
+                for (const auto& e : g.entries()) {
+                    std::cout << "    " << e.name() << ": "
+                              << e.description() << std::endl;
+                }
+            }
         }
     }
 

@@ -425,6 +425,11 @@
           "name": "entries",
           "type": "std::list<spec_entry>",
           "documentation": "Entries describing various aspects of this group.\n"
+        },
+        {
+          "name": "description",
+          "type": "std::string",
+          "documentation": "Purpose of the group.\n"
         }
       ]
     },

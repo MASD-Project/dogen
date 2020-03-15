@@ -44,8 +44,9 @@ using namespace dogen::utility::log;
 const std::string transform_id("injection.dia.decoding_transform");
 auto lg(logger_factory(transform_id));
 
+const std::string decoder_id("injection.dia");
+const std::string description("Decodes Dia diagrams.");
 const std::string extension(".dia");
-
 const std::string to_dia_support_unavailable(
     "Transformer cannot convert model into Dia representation");
 
@@ -114,6 +115,14 @@ decoding_transform::obtain_model(const std::string& name,
 
     BOOST_LOG_SEV(lg, debug) << "Generated injection model.";
     return r;
+}
+
+std::string decoding_transform::id() const {
+    return ::decoder_id;
+}
+
+std::string decoding_transform::description() const {
+    return ::description;
 }
 
 std::string decoding_transform::extension() const {

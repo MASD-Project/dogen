@@ -24,19 +24,23 @@ namespace dogen {
 
 spec_group::spec_group(
     const std::string& name,
-    const std::list<dogen::spec_entry>& entries)
+    const std::list<dogen::spec_entry>& entries,
+    const std::string& description)
     : name_(name),
-      entries_(entries) { }
+      entries_(entries),
+      description_(description) { }
 
 void spec_group::swap(spec_group& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(entries_, other.entries_);
+    swap(description_, other.description_);
 }
 
 bool spec_group::operator==(const spec_group& rhs) const {
     return name_ == rhs.name_ &&
-        entries_ == rhs.entries_;
+        entries_ == rhs.entries_ &&
+        description_ == rhs.description_;
 }
 
 spec_group& spec_group::operator=(spec_group other) {
@@ -75,6 +79,22 @@ void spec_group::entries(const std::list<dogen::spec_entry>& v) {
 
 void spec_group::entries(const std::list<dogen::spec_entry>&& v) {
     entries_ = std::move(v);
+}
+
+const std::string& spec_group::description() const {
+    return description_;
+}
+
+std::string& spec_group::description() {
+    return description_;
+}
+
+void spec_group::description(const std::string& v) {
+    description_ = v;
+}
+
+void spec_group::description(const std::string&& v) {
+    description_ = std::move(v);
 }
 
 }

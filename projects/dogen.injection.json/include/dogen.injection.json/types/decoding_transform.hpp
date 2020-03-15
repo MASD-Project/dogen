@@ -38,10 +38,12 @@ public:
     ~decoding_transform() noexcept;
 
 public:
-    std::string extension() const;
+    virtual std::string id() const override;
+    virtual std::string description() const override;
+    std::string extension() const override;
 
     meta_model::model apply(const transforms::context& ctx,
-        const boost::filesystem::path& p);
+        const boost::filesystem::path& p) override;
 };
 
 }

@@ -59,10 +59,12 @@ private:
         const std::list<processed_object>& pos) const;
 
 public:
-    std::string extension() const;
+    virtual std::string id() const override;
+    virtual std::string description() const override;
+    virtual std::string extension() const override;
 
-    meta_model::model
-    apply(const transforms::context& ctx, const boost::filesystem::path& p);
+    meta_model::model apply(const transforms::context& ctx,
+        const boost::filesystem::path& p) override;
 };
 
 }

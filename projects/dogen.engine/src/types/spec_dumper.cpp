@@ -18,9 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.injection/types/transforms/model_production_chain.hpp"
 #include "dogen.engine/types/transforms/scoped_context_manager.hpp"
 #include "dogen.engine/types/spec_dumper.hpp"
+#include "dogen/types/spec_entry.hpp"
+#include "dogen/types/spec_group.hpp"
 
 namespace {
 
@@ -41,6 +45,25 @@ specs spec_dumper::dump(const configuration& cfg) const {
         using namespace transforms;
         scoped_context_manager scm(cfg, activity, empty_output_directory);
         specs r;
+
+        spec_group injection;
+        injection.name("Injection");
+        injection.description("Read external formats into Dogen.");
+
+        using injection::transforms::model_production_chain;
+        auto& rg(model_production_chain::registrar());
+        for (const auto& ext : rg.registered_decoding_extensions()) {
+            const auto& d(rg.decoding_transform_for_extension(ext));
+            spec_entry e;
+            e.name(d.id());
+
+            std::ostringstream s;
+            s << d.description() << " Extension: '" << d.extension() << "'";
+            e.description(s.str());
+            injection.entries().push_back(e);
+        }
+        r.groups().push_back(injection);
+
         return r;
     }
 

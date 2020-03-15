@@ -5530,7 +5530,7 @@ not as part of a profile).
         <dia:point val="17,-60"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="16.95,-60.05;29.485,-56.35"/>
+        <dia:rectangle val="16.95,-60.05;29.485,-55.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="17,-60"/>
@@ -5539,7 +5539,7 @@ not as part of a profile).
         <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#spec_group#</dia:string>
@@ -5664,6 +5664,29 @@ not as part of a profile).
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Entries describing various aspects of this group.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#description#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Purpose of the group.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5880,7 +5903,7 @@ not as part of a profile).
         <dia:point val="20.025,-53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.275,-56.45;23.4175,-51.4"/>
+        <dia:rectangle val="19.275,-55.65;23.4175,-51.4"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5889,7 +5912,7 @@ not as part of a profile).
         <dia:point val="20.025,-53"/>
         <dia:point val="20.025,-55"/>
         <dia:point val="23.2175,-55"/>
-        <dia:point val="23.2175,-56.4"/>
+        <dia:point val="23.2175,-55.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

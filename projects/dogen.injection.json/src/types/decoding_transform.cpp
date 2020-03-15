@@ -33,6 +33,8 @@ using namespace dogen::utility::log;
 const std::string transform_id("injection.json.decoding_transform");
 auto lg(logger_factory(transform_id));
 
+const std::string decoder_id("injection.json");
+const std::string description("Decodes diagrams in JSON format.");
 const std::string extension(".json");
 
 }
@@ -40,6 +42,14 @@ const std::string extension(".json");
 namespace dogen::injection::json {
 
 decoding_transform::~decoding_transform() noexcept {}
+
+std::string decoding_transform::id() const {
+    return ::decoder_id;
+}
+
+std::string decoding_transform::description() const {
+    return ::description;
+}
 
 std::string decoding_transform::extension() const {
     return ::extension;

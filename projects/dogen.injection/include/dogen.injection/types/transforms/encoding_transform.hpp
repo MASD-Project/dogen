@@ -44,6 +44,16 @@ public:
 
 public:
     /**
+     * @brief Returns the identity of this transform.
+     */
+    virtual std::string id() const = 0;
+
+    /**
+     * @brief Returns a human readable description of this transform.
+     */
+    virtual std::string description() const = 0;
+
+    /**
      * @brief Returns the extension of the files that this transform
      * can process.
      */

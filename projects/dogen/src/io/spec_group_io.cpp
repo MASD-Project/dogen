@@ -51,7 +51,8 @@ std::ostream& operator<<(std::ostream& s, const spec_group& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::spec_group\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"entries\": " << v.entries()
+      << "\"entries\": " << v.entries() << ", "
+      << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\""
       << " }";
     return(s);
 }

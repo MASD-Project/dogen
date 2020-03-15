@@ -42,7 +42,8 @@ public:
 public:
     spec_group(
         const std::string& name,
-        const std::list<dogen::spec_entry>& entries);
+        const std::list<dogen::spec_entry>& entries,
+        const std::string& description);
 
 public:
     /**
@@ -65,6 +66,16 @@ public:
     void entries(const std::list<dogen::spec_entry>&& v);
     /**@}*/
 
+    /**
+     * @brief Purpose of the group.
+     */
+    /**@{*/
+    const std::string& description() const;
+    std::string& description();
+    void description(const std::string& v);
+    void description(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const spec_group& rhs) const;
     bool operator!=(const spec_group& rhs) const {
@@ -78,6 +89,7 @@ public:
 private:
     std::string name_;
     std::list<dogen::spec_entry> entries_;
+    std::string description_;
 };
 
 }
