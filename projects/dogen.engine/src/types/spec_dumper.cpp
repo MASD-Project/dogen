@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.injection/types/transforms/model_production_chain.hpp"
 #include "dogen.engine/types/transforms/scoped_context_manager.hpp"
@@ -63,6 +64,19 @@ specs spec_dumper::dump(const configuration& cfg) const {
             injection.entries().push_back(e);
         }
         r.groups().push_back(injection);
+
+        spec_group features;
+        features.name("Features");
+        features.description("Available features for configuration.");
+        const auto& fm(*scm.context().assets_context().feature_model());
+        for (const auto& f : fm.all()) {
+            spec_entry e;
+            e.name(f.name().qualified());
+            e.description(f.description());
+            features.entries().push_back(e);
+        }
+        r.groups().push_back(features);
+
 
         return r;
     }
