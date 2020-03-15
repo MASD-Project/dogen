@@ -33,6 +33,9 @@ make_masd_injection_input_technical_space() {
     feature r;
     r.name().simple("input_technical_space");
     r.name().qualified("masd.injection.input_technical_space");
+    r.description(R"(Input technical space for this model.
+
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);

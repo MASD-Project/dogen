@@ -33,6 +33,9 @@ make_masd_generation_decoration_enabled() {
     feature r;
     r.name().simple("enabled");
     r.name().qualified("masd.generation.decoration.enabled");
+    r.description(R"(If true, decorations are enabled on this modeling element.
+
+)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::any);
@@ -45,6 +48,9 @@ make_masd_generation_decoration_copyright_notice() {
     feature r;
     r.name().simple("copyright_notice");
     r.name().qualified("masd.generation.decoration.copyright_notice");
+    r.description(R"(Copyright notices for this modeling element.
+
+)");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::any);
@@ -57,6 +63,9 @@ make_masd_generation_decoration_licence_name() {
     feature r;
     r.name().simple("licence_name");
     r.name().qualified("masd.generation.decoration.licence_name");
+    r.description(R"(Name of the licence to use for this modeling element.
+
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
@@ -69,6 +78,9 @@ make_masd_generation_decoration_modeline_group_name() {
     feature r;
     r.name().simple("modeline_group_name");
     r.name().qualified("masd.generation.decoration.modeline_group_name");
+    r.description(R"(Name of the modeline group for this modeling element.
+
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
@@ -81,6 +93,9 @@ make_masd_generation_decoration_marker_name() {
     feature r;
     r.name().simple("marker_name");
     r.name().qualified("masd.generation.decoration.marker_name");
+    r.description(R"(Name of the decoration marker to use for this modeling element.
+
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);

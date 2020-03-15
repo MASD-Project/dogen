@@ -33,6 +33,9 @@ make_masd_primitive_underlying_element() {
     feature r;
     r.name().simple("underlying_element");
     r.name().qualified("masd.primitive.underlying_element");
+    r.description(R"(Name of the underlying element to use for the primitive.
+
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);
@@ -45,6 +48,9 @@ make_masd_primitive_is_nullable() {
     feature r;
     r.name().simple("is_nullable");
     r.name().qualified("masd.primitive.is_nullable");
+    r.description(R"(If true, the primitive can be null.
+
+)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
@@ -59,6 +65,10 @@ make_masd_primitive_use_type_aliasing() {
     feature r;
     r.name().simple("use_type_aliasing");
     r.name().qualified("masd.primitive.use_type_aliasing");
+    r.description(R"(If true, use type aliasing to implement the primitive if the technical space supports
+it.
+
+)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);

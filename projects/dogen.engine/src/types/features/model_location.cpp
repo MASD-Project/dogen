@@ -33,6 +33,12 @@ make_masd_injection_external_modules() {
     feature r;
     r.name().simple("external_modules");
     r.name().qualified("masd.injection.external_modules");
+    r.description(R"(External modules containing this model.
+
+External modules contribute to the namespace of the model but not the model
+name.
+
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -45,6 +51,11 @@ make_masd_injection_model_modules() {
     feature r;
     r.name().simple("model_modules");
     r.name().qualified("masd.injection.model_modules");
+    r.description(R"(Model modules containing this model.
+
+The model modules result in a top-level name separated by dots, e.g. a.b.c.
+
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);

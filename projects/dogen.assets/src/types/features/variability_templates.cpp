@@ -33,6 +33,9 @@ make_masd_variability_binding_point() {
     feature r;
     r.name().simple("binding_point");
     r.name().qualified("masd.variability.binding_point");
+    r.description(R"(Where does this feature bind into.
+
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
@@ -45,6 +48,9 @@ make_masd_variability_stereotype() {
     feature r;
     r.name().simple("stereotype");
     r.name().qualified("masd.variability.stereotype");
+    r.description(R"(Stereotype for this profile. Must be globally unique.
+
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);
@@ -57,6 +63,12 @@ make_masd_variability_value() {
     feature r;
     r.name().simple("value");
     r.name().qualified("masd.variability.value");
+    r.description(R"(Value for a facet or profile template.
+
+Value as meta-data should be used only for collections, for single values prefer
+the default value field if available.
+
+)");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::property);
@@ -69,6 +81,9 @@ make_masd_variability_is_optional() {
     feature r;
     r.name().simple("is_optional");
     r.name().qualified("masd.variability.is_optional");
+    r.description(R"(If true, the feature template provides an optional feature.
+
+)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::property);
@@ -83,6 +98,11 @@ make_masd_variability_default_value_override() {
     feature r;
     r.name().simple("default_value_override");
     r.name().qualified("masd.variability.default_value_override");
+    r.description(R"(Default values to override the "default" default value.
+
+These match on keys ending with the specified string.
+
+)");
     const auto vt(value_type::key_value_pair);
     r.value_type(vt);
     r.is_partially_matchable(true);

@@ -83,6 +83,8 @@ make_<#= f.identifiable_key() #>() {
 <#+
                    }
 #>
+    r.description(R"(<#= f.documentation() #>
+)");
     const auto vt(<#= enum_mapper::from_value_type(f.value_type()) #>);
     r.value_type(vt);
 <#+

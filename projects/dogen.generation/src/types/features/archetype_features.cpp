@@ -32,6 +32,8 @@ make_postfix() {
     using namespace dogen::variability::meta_model;
     feature_template r;
     r.name().simple("postfix");
+    r.description(R"(
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -49,6 +51,8 @@ make_overwrite() {
     using namespace dogen::variability::meta_model;
     feature_template r;
     r.name().simple("overwrite");
+    r.description(R"(
+)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);

@@ -33,6 +33,9 @@ make_masd_injection_is_proxy_model() {
     feature r;
     r.name().simple("is_proxy_model");
     r.name().qualified("masd.injection.is_proxy_model");
+    r.description(R"(If true, sets the origin of the model to "proxy model".
+
+)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::global);

@@ -33,6 +33,9 @@ make_masd_orm_database_system() {
     feature r;
     r.name().simple("database_system");
     r.name().qualified("masd.orm.database_system");
+    r.description(R"(Database system to target for ORM support.
+
+)");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -45,6 +48,9 @@ make_masd_orm_table_name() {
     feature r;
     r.name().simple("table_name");
     r.name().qualified("masd.orm.table_name");
+    r.description(R"(Name of the database table for this element.
+
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);
@@ -57,6 +63,9 @@ make_masd_orm_schema_name() {
     feature r;
     r.name().simple("schema_name");
     r.name().qualified("masd.orm.schema_name");
+    r.description(R"(Name of the database schema for this modeling element.
+
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
@@ -69,6 +78,9 @@ make_masd_orm_is_primary_key() {
     feature r;
     r.name().simple("is_primary_key");
     r.name().qualified("masd.orm.is_primary_key");
+    r.description(R"(If true, this property will be used for the primary key.
+
+)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::property);
@@ -81,6 +93,9 @@ make_masd_orm_column_name() {
     feature r;
     r.name().simple("column_name");
     r.name().qualified("masd.orm.column_name");
+    r.description(R"(Overrides the name of the column name for the database table.
+
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::property);
@@ -93,6 +108,9 @@ make_masd_orm_is_nullable() {
     feature r;
     r.name().simple("is_nullable");
     r.name().qualified("masd.orm.is_nullable");
+    r.description(R"(If true, the column can be null.
+
+)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::property);
@@ -105,6 +123,9 @@ make_masd_orm_is_composite() {
     feature r;
     r.name().simple("is_composite");
     r.name().qualified("masd.orm.is_composite");
+    r.description(R"(If true, the primary key is a composite key.
+
+)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::property);
@@ -117,6 +138,9 @@ make_masd_orm_letter_case() {
     feature r;
     r.name().simple("letter_case");
     r.name().qualified("masd.orm.letter_case");
+    r.description(R"(Determines the casing to use for identifiers.
+
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -129,6 +153,12 @@ make_masd_orm_type_override() {
     feature r;
     r.name().simple("type_override");
     r.name().qualified("masd.orm.type_override");
+    r.description(R"(Overrides to use for the relational type, for a given database system.
+
+Note: we've set the binding point to "any" as a hack to allow for primitive support.
+Should really be "property".
+
+)");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::any);
@@ -141,6 +171,12 @@ make_masd_orm_type_mapping() {
     feature r;
     r.name().simple("type_mapping");
     r.name().qualified("masd.orm.type_mapping");
+    r.description(R"(Type maps to create for the relational type, possibly for a given database system.
+
+Note: we've set the binding point to "any" as a hack to allow for primitive support.
+Should really be "property".
+
+)");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::any);
@@ -153,6 +189,12 @@ make_masd_orm_odb_pragma() {
     feature r;
     r.name().simple("odb_pragma");
     r.name().qualified("masd.orm.odb_pragma");
+    r.description(R"(Raw ODB pragmas that are applied as-is by the system.
+
+Use these when you need some functionality which is not natively supported by
+ORM in Dogen.
+
+)");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::any);

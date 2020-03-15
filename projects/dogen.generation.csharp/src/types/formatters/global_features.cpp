@@ -31,6 +31,8 @@ make_masd_generation_csharp_directory() {
     feature r;
     r.name().simple("directory");
     r.name().qualified("masd.generation.csharp.directory");
+    r.description(R"(
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -45,6 +47,8 @@ make_masd_generation_csharp_aspect_requires_static_reference_equals() {
     feature r;
     r.name().simple("requires_static_reference_equals");
     r.name().qualified("masd.generation.csharp.aspect.requires_static_reference_equals");
+    r.description(R"(
+)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
@@ -59,6 +63,8 @@ make_masd_generation_csharp_helper_family() {
     feature r;
     r.name().simple("family");
     r.name().qualified("masd.generation.csharp.helper.family");
+    r.description(R"(
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);
@@ -73,6 +79,8 @@ make_masd_generation_csharp_assistant_requires_assistance() {
     feature r;
     r.name().simple("requires_assistance");
     r.name().qualified("masd.generation.csharp.assistant.requires_assistance");
+    r.description(R"(
+)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
@@ -87,6 +95,8 @@ make_masd_generation_csharp_assistant_method_postfix() {
     feature r;
     r.name().simple("method_postfix");
     r.name().qualified("masd.generation.csharp.assistant.method_postfix");
+    r.description(R"(
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);

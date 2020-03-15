@@ -33,6 +33,8 @@ make_masd_type_parameters_variable_number_of_parameters() {
     feature r;
     r.name().simple("variable_number_of_parameters");
     r.name().qualified("masd.type_parameters.variable_number_of_parameters");
+    r.description(R"(
+)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);
@@ -47,6 +49,8 @@ make_masd_type_parameters_count() {
     feature r;
     r.name().simple("count");
     r.name().qualified("masd.type_parameters.count");
+    r.description(R"(
+)");
     const auto vt(value_type::number);
     r.value_type(vt);
     r.binding_point(binding_point::element);
@@ -61,6 +65,8 @@ make_masd_type_parameters_always_in_heap() {
     feature r;
     r.name().simple("always_in_heap");
     r.name().qualified("masd.type_parameters.always_in_heap");
+    r.description(R"(
+)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::element);

@@ -32,6 +32,9 @@ make_formatting_style() {
     using namespace dogen::variability::meta_model;
     feature_template r;
     r.name().simple("formatting_style");
+    r.description(R"(Style of formatting to use for this archetype.
+
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);
@@ -44,6 +47,9 @@ make_formatting_input() {
     using namespace dogen::variability::meta_model;
     feature_template r;
     r.name().simple("formatting_input");
+    r.description(R"(If the formatting style requires a template, the name of the template to use.
+
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::any);

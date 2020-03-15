@@ -33,6 +33,9 @@ make_masd_stitch_stream_variable_name() {
     feature r;
     r.name().simple("stream_variable_name");
     r.name().qualified("masd.stitch.stream_variable_name");
+    r.description(R"(Which name to use for the variable with the stream.
+
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -47,6 +50,9 @@ make_masd_stitch_relative_output_directory() {
     feature r;
     r.name().simple("relative_output_directory");
     r.name().qualified("masd.stitch.relative_output_directory");
+    r.description(R"(Relative path to the output directory.
+
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -59,6 +65,9 @@ make_masd_stitch_inclusion_dependency() {
     feature r;
     r.name().simple("inclusion_dependency");
     r.name().qualified("masd.stitch.inclusion_dependency");
+    r.description(R"(C++ Include header.
+
+)");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -71,6 +80,9 @@ make_masd_stitch_containing_namespaces() {
     feature r;
     r.name().simple("containing_namespaces");
     r.name().qualified("masd.stitch.containing_namespaces");
+    r.description(R"(Namespaces that contain the class represented by the template.
+
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -83,6 +95,9 @@ make_masd_stitch_wale_text_template() {
     feature r;
     r.name().simple("text_template");
     r.name().qualified("masd.stitch.wale.text_template");
+    r.description(R"(Name of the wale text template to instantiate, if any.
+
+)");
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -95,6 +110,9 @@ make_masd_stitch_wale_kvp() {
     feature r;
     r.name().simple("kvp");
     r.name().qualified("masd.stitch.wale.kvp");
+    r.description(R"(Array of wale KVPs to use in template instantiation.
+
+)");
     const auto vt(value_type::key_value_pair);
     r.value_type(vt);
     r.is_partially_matchable(true);

@@ -136,6 +136,8 @@ a.stream() << "    r.name().simple(\"" << simple_key << "\");" << std::endl;
                     if (has_qualified_name) {
 a.stream() << "    r.name().qualified(\"" << ft.key() << "\");" << std::endl;
                     }
+a.stream() << "    r.description(R\"(" << ft.documentation() << std::endl;
+a.stream() << ")\");" << std::endl;
 a.stream() << "    const auto vt(" << enum_mapper::from_value_type(ft.value_type()) << ");" << std::endl;
 a.stream() << "    r.value_type(vt);" << std::endl;
 a.stream() << "    r.binding_point(" << enum_mapper::from_binding_point(*ft.binding_point()) << ");" << std::endl;

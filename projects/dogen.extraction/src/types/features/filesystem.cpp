@@ -33,6 +33,12 @@ make_masd_extraction_force_write() {
     feature r;
     r.name().simple("force_write");
     r.name().qualified("masd.extraction.force_write");
+    r.description(R"(If true, artefacts are always written to the filesystem.
+
+If false, the system will check to see if writing is needed by performing a binary
+diff. If no changes are detected, no writting is performed.
+
+)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -47,6 +53,11 @@ make_masd_extraction_delete_extra_files() {
     feature r;
     r.name().simple("delete_extra_files");
     r.name().qualified("masd.extraction.delete_extra_files");
+    r.description(R"(If true, any files the code generator is not aware of are deleted.
+
+If you'd like to skip the deletion of certain files, set  "ignore_files_matching_regex" accordingly.
+
+)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -61,6 +72,11 @@ make_masd_extraction_ignore_files_matching_regex() {
     feature r;
     r.name().simple("ignore_files_matching_regex");
     r.name().qualified("masd.extraction.ignore_files_matching_regex");
+    r.description(R"(Regular expressions to filter files prior to deletion.
+
+Only applicable if "delete_extra_files" is enabled.
+
+)");
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -73,6 +89,12 @@ make_masd_extraction_delete_empty_directories() {
     feature r;
     r.name().simple("delete_empty_directories");
     r.name().qualified("masd.extraction.delete_empty_directories");
+    r.description(R"(If true, all directories without any files will be deleted.
+
+This setting is recursive: if a directory is composed of one or more directories that
+are themselves empty, the entire directory tree is deleted.
+
+)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::global);
@@ -87,6 +109,12 @@ make_masd_extraction_enable_backend_directories() {
     feature r;
     r.name().simple("enable_backend_directories");
     r.name().qualified("masd.extraction.enable_backend_directories");
+    r.description(R"(If true, a directory is created for each technical space targeted.
+
+Note that this setting is only relevant if you are targetting a single output technical
+space. If you are targetting more than one, it will automatically be set to true.
+
+)");
     const auto vt(value_type::boolean);
     r.value_type(vt);
     r.binding_point(binding_point::global);
