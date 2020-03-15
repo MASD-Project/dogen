@@ -449,6 +449,7 @@ void adapter::populate_abstract_feature(
     af.original_key(n);
     af.default_value(ia.value());
     af.unparsed_type(ia.type());
+    af.documentation(ia.documentation());
 
     using variability::helpers::enum_mapper;
     af.value_type(enum_mapper::to_value_type(ia.type()));
