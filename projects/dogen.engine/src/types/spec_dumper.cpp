@@ -22,7 +22,6 @@
 #include <sstream>
 #include <boost/algorithm/string/replace.hpp>
 #include "dogen.variability/lexical_cast/meta_model/binding_point_lc.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.injection/types/transforms/model_production_chain.hpp"
 #include "dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
@@ -39,7 +38,11 @@ auto lg(logger_factory("engine.spec_dumper"));
 const std::string empty_output_directory;
 const std::string activity("dumpspecs");
 
-std::string preprocess(std::string s) {
+}
+
+namespace dogen::engine {
+
+std::string spec_dumper::preprocess(std::string s) const {
     if (s.empty())
         return "<missing description>.";
 
@@ -48,18 +51,74 @@ std::string preprocess(std::string s) {
     return s;
 }
 
-using dogen::variability::meta_model::binding_point;
-std::string process_binding_point(const binding_point bp) {
+std::string spec_dumper::
+process_binding_point(const variability::meta_model::binding_point bp) const {
     std::string r(" Binding point: '");
     r += boost::lexical_cast<std::string>(bp) + "'.";
     boost::replace_all(r, "binding_point::", "");
     return r;
-
 }
 
+spec_group spec_dumper::create_injection_group() const {
+    spec_group r;
+    r.name("Injection");
+    r.description("Read external formats into Dogen.");
+
+    using injection::transforms::model_production_chain;
+    auto& rg(model_production_chain::registrar());
+    for (const auto& ext : rg.registered_decoding_extensions()) {
+        const auto& d(rg.decoding_transform_for_extension(ext));
+        spec_entry e;
+        e.name(d.id());
+
+        std::ostringstream s;
+        s << preprocess(d.description())
+          << " Extension: '" << d.extension() << "'";
+        e.description(s.str());
+        r.entries().push_back(e);
+    }
+    return r;
 }
 
-namespace dogen::engine {
+spec_group spec_dumper::create_generation_group() const {
+    spec_group r;
+    r.name("Generators");
+    r.description("Available backends for code generation.");
+    using dogen::generation::transforms::model_to_extraction_model_chain;
+    const auto& rg2(model_to_extraction_model_chain::registrar());
+    for(const auto& pair: rg2.transforms_by_technical_space()) {
+        const auto& t(*pair.second);
+        spec_entry e;
+        e.name(t.id());
+        e.description(t.description());
+        r.entries().push_back(e);
+    }
+    return r;
+}
+
+spec_group spec_dumper::
+create_features_group(const variability::meta_model::feature_model& fm) const {
+    spec_group r;
+    r.name("Features");
+    r.description("Available features for configuration.");
+    std::map<std::string, std::string> map;
+    for (const auto& f : fm.all()) {
+        const auto qn(f.name().qualified());
+
+        std::ostringstream s;
+        s << preprocess(f.description())
+          << process_binding_point(f.binding_point());
+        map.insert(std::make_pair(qn, s.str()));
+    }
+
+    for (const auto& pair : map) {
+        spec_entry e;
+        e.name(pair.first);
+        e.description(pair.second);
+        r.entries().push_back(e);
+    }
+    return r;
+}
 
 specs spec_dumper::dump(const configuration& cfg) const {
     BOOST_LOG_SEV(lg, debug) << "Started dumping specs.";
@@ -67,62 +126,12 @@ specs spec_dumper::dump(const configuration& cfg) const {
     {
         using namespace transforms;
         scoped_context_manager scm(cfg, activity, empty_output_directory);
-        specs r;
-
-        spec_group injection;
-        injection.name("Injection");
-        injection.description("Read external formats into Dogen.");
-
-        using injection::transforms::model_production_chain;
-        auto& rg(model_production_chain::registrar());
-        for (const auto& ext : rg.registered_decoding_extensions()) {
-            const auto& d(rg.decoding_transform_for_extension(ext));
-            spec_entry e;
-            e.name(d.id());
-
-            std::ostringstream s;
-            s << preprocess(d.description())
-              << " Extension: '" << d.extension() << "'";
-            e.description(s.str());
-            injection.entries().push_back(e);
-        }
-        r.groups().push_back(injection);
-
-        spec_group generators;
-        generators.name("Generators");
-        generators.description("Available backends for code generation.");
-        using dogen::generation::transforms::model_to_extraction_model_chain;
-        const auto& rg2(model_to_extraction_model_chain::registrar());
-        for(const auto& pair: rg2.transforms_by_technical_space()) {
-            const auto& t(*pair.second);
-            spec_entry e;
-            e.name(t.id());
-            e.description(t.description());
-            generators.entries().push_back(e);
-        }
-        r.groups().push_back(generators);
-
-        spec_group features;
-        features.name("Features");
-        features.description("Available features for configuration.");
         const auto& fm(*scm.context().assets_context().feature_model());
-        std::map<std::string, std::string> map;
-        for (const auto& f : fm.all()) {
-            const auto qn(f.name().qualified());
 
-            std::ostringstream s;
-            s << preprocess(f.description())
-              << process_binding_point(f.binding_point());
-            map.insert(std::make_pair(qn, s.str()));
-        }
-
-        for (const auto& pair : map) {
-            spec_entry e;
-            e.name(pair.first);
-            e.description(pair.second);
-            features.entries().push_back(e);
-        }
-        r.groups().push_back(features);
+        specs r;
+        r.groups().push_back(create_injection_group());
+        r.groups().push_back(create_generation_group());
+        r.groups().push_back(create_features_group(fm));
 
         return r;
     }
