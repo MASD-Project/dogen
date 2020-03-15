@@ -224,6 +224,7 @@ Time spent creating the demo and presentation. Use the demo project:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-03-15 Sun 12:34]--[2020-03-15 Sun 12:44] =>  0:10
     CLOCK: [2020-03-13 Fri 12:48]--[2020-03-13 Fri 12:59] =>  0:11
     CLOCK: [2020-03-13 Fri 08:11]--[2020-03-13 Fri 08:21] =>  0:10
     CLOCK: [2020-03-13 Fri 07:35]--[2020-03-13 Fri 08:10] =>  0:35

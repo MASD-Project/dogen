@@ -12428,6 +12428,18 @@ For stitch templates:
   current line to the expanded template line. It may be even
   impossible if in a for loop etc.
 
+Notes:
+
+- we should consider "LSP delegation". That is, our LSP could call a
+  technical space specific LSP for the stitch fragments and for model
+  fragments. We just need to figure out if its possible to send the
+  current file contents to the LSP server rather than have it read
+  from the filesystem because otherwise we would have to regenerate
+  the model every time the user changes a fragment or a
+  template. Ideally we should regenerate in memory (in the LSP server
+  itself) and then send the new file to the LSP server such that the
+  actual file in the filesystem is not touched.
+
 Links:
 
 - [[https://www.reddit.com/r/cpp/comments/eov5fh/critique_my_project_libclsp_a_c17_library/][Critique my project. Libclsp, a C++17 library]]
