@@ -131,17 +131,6 @@
       ]
     },
     {
-      "name": "base::base",
-      "parents": [
-        "base::decoration",
-        "base::extraction"
-      ],
-      "stereotypes": [
-        "masd::variability::profile"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "base::csharp",
       "documentation": "Configures the main options for the C# backend.\n",
       "stereotypes": [
@@ -160,11 +149,22 @@
       ]
     },
     {
+      "name": "base::base",
+      "parents": [
+        "base::decoration",
+        "base::extraction",
+        "base::csharp"
+      ],
+      "stereotypes": [
+        "masd::variability::profile"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
       "name": "base::base_profile",
       "parents": [
         "base::cpp",
-        "base::base",
-        "base::csharp"
+        "base::base"
       ],
       "stereotypes": [
         "masd::variability::profile"
