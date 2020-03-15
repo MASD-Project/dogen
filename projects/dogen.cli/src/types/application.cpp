@@ -22,6 +22,7 @@
 #include <boost/variant.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen/types/specs.hpp"
 #include "dogen.cli/types/configuration_validator.hpp"
 #include "dogen.cli/types/application_exception.hpp"
 #include "dogen.cli/types/application.hpp"
@@ -39,6 +40,28 @@ using dogen::cli::application_exception;
 using dogen::cli::generation_configuration;
 using dogen::cli::conversion_configuration;
 using dogen::cli::dumpspecs_configuration;
+
+void print_specs(const dogen::specs& s) {
+    if (s.groups().empty()) {
+        std::cout << "No specs found" << std::endl;
+        return;
+    }
+
+    bool is_first(true);
+    for (const auto& g : s.groups()) {
+        if (!is_first)
+            std::cout << std::endl;
+
+        std::cout << "Group: " << g.name() << std::endl
+                  << "Purpose: " << g.description() << std::endl;
+
+        for (const auto& e : g.entries()) {
+            std::cout << "    " << e.name() << ": "
+                      << e.description() << std::endl;
+        }
+        is_first = false;
+    }
+}
 
 /**
  * @brief Given the configuration selected by the user, dispatches to
@@ -72,24 +95,7 @@ public:
      */
     void operator()(const dumpspecs_configuration&) const {
         const auto s(dumper_.dump(configuration_.api()));
-        if (s.groups().empty()) {
-            std::cout << "No specs found" << std::endl;
-        } else {
-            bool is_first(true);
-            for (const auto& g : s.groups()) {
-                if (!is_first)
-                    std::cout << std::endl;
-
-                std::cout << "Group: " << g.name() << std::endl
-                          << "Purpose: " << g.description() << std::endl;
-
-                for (const auto& e : g.entries()) {
-                    std::cout << "    " << e.name() << ": "
-                              << e.description() << std::endl;
-                }
-                is_first = false;
-            }
-        }
+        print_specs(s);
     }
 
 private:

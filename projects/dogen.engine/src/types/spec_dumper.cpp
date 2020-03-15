@@ -18,7 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
+#include <map>
 #include <sstream>
+#include <boost/algorithm/string/replace.hpp>
+#include "dogen.variability/lexical_cast/meta_model/binding_point_lc.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.injection/types/transforms/model_production_chain.hpp"
@@ -34,6 +37,24 @@ auto lg(logger_factory("engine.spec_dumper"));
 
 const std::string empty_output_directory;
 const std::string activity("dumpspecs");
+
+std::string preprocess(std::string s) {
+    if (s.empty())
+        return "<missing description>.";
+
+    s.erase(std::remove(s.begin(), s.end(), '\n'), s.end());
+    s.erase(std::remove(s.begin(), s.end(), '\r'), s.end());
+    return s;
+}
+
+using dogen::variability::meta_model::binding_point;
+std::string process_binding_point(const binding_point bp) {
+    std::string r(" Binding point: '");
+    r += boost::lexical_cast<std::string>(bp) + "'.";
+    boost::replace_all(r, "binding_point::", "");
+    return r;
+
+}
 
 }
 
@@ -59,7 +80,8 @@ specs spec_dumper::dump(const configuration& cfg) const {
             e.name(d.id());
 
             std::ostringstream s;
-            s << d.description() << " Extension: '" << d.extension() << "'";
+            s << preprocess(d.description())
+              << " Extension: '" << d.extension() << "'";
             e.description(s.str());
             injection.entries().push_back(e);
         }
@@ -69,14 +91,23 @@ specs spec_dumper::dump(const configuration& cfg) const {
         features.name("Features");
         features.description("Available features for configuration.");
         const auto& fm(*scm.context().assets_context().feature_model());
+        std::map<std::string, std::string> map;
         for (const auto& f : fm.all()) {
+            const auto qn(f.name().qualified());
+
+            std::ostringstream s;
+            s << preprocess(f.description())
+              << process_binding_point(f.binding_point());
+            map.insert(std::make_pair(qn, s.str()));
+        }
+
+        for (const auto& pair : map) {
             spec_entry e;
-            e.name(f.name().qualified());
-            e.description(f.description());
+            e.name(pair.first);
+            e.description(pair.second);
             features.entries().push_back(e);
         }
         r.groups().push_back(features);
-
 
         return r;
     }
