@@ -27,20 +27,21 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("engine.spec_dumper"));
 
+const std::string empty_output_directory;
 const std::string activity("dumpspecs");
 
 }
 
 namespace dogen::engine {
 
-void spec_dumper::dump(const configuration& cfg
-    ) const {
-
+specs spec_dumper::dump(const configuration& cfg) const {
     BOOST_LOG_SEV(lg, debug) << "Started dumping specs.";
 
     {
         using namespace transforms;
-        scoped_context_manager scm(cfg, activity, "");
+        scoped_context_manager scm(cfg, activity, empty_output_directory);
+        specs r;
+        return r;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished dumping specs.";

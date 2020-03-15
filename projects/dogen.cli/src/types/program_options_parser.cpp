@@ -57,11 +57,13 @@ const std::string generate_command_desc(
 const std::string convert_command_name("convert");
 const std::string convert_command_desc(
     "Converts a model from one codec to another. ");
+const std::string dumpspecs_command_name("dumpspecs");
+const std::string dumpspecs_command_desc(
+    "Dumps all specs for Dogen.");
 
 const std::string help_arg("help");
 const std::string version_arg("version");
 const std::string command_arg("command");
-const std::string dumpspecs_arg("dumpspecs");
 const std::string logging_log_enabled_arg("log-enabled");
 const std::string logging_log_to_console_arg("log-to-console");
 const std::string logging_log_level_arg("log-level");
@@ -161,8 +163,7 @@ options_description make_top_level_visible_options_description() {
     options_description god("General");
     god.add_options()
         ("help,h", "Display usage and exit.")
-        ("version,v", "Output version information and exit.")
-        ("dumpspecs", "Dumps internal information from Dogen setup.");
+        ("version,v", "Output version information and exit.");
 
     options_description r;
     r.add(god);
@@ -259,7 +260,7 @@ options_description make_top_level_hidden_options_description() {
     options_description r("Commands");
     r.add_options()
         ("command", value<std::string>(), "Command to execute. "
-            "Available commands: generate, convert.")
+            "Available commands: generate, convert, dumpspecs.")
         ("args", value<std::vector<std::string> >(),
             "Arguments for command");
     return r;
@@ -313,7 +314,8 @@ options_description make_convert_options_description() {
 void validate_command_name(const std::string& command_name) {
     const bool is_valid_command_name(
         command_name == generate_command_name ||
-        command_name == convert_command_name);
+        command_name == convert_command_name ||
+        command_name == dumpspecs_command_name);
 
     if (is_valid_command_name)
         return;
@@ -352,6 +354,7 @@ void print_help(const boost::program_options::options_description& od,
                 });
     lambda(generate_command_name, generate_command_desc);
     lambda(convert_command_name, convert_command_desc);
+    lambda(dumpspecs_command_name, dumpspecs_command_desc);
 
     s << std::endl << "For command specific options, type <command> --help."
       << std::endl;
@@ -403,13 +406,12 @@ void version(std::ostream& s) {
  */
 boost::optional<configuration>
 handle_no_command(const bool has_version, const bool has_help,
-    const bool has_dumpspecs, const options_description& od,
-    std::ostream& info) {
+    const options_description& od, std::ostream& info) {
     /*
-     * The only valid options are help, version or dumpspecs, so if
-     * those are not present we can safely throw.
+     * The only valid options are help or version, so if those are not
+     * present we can safely throw.
      */
-    if (!has_version && !has_help && !has_dumpspecs)
+    if (!has_version && !has_help)
         BOOST_THROW_EXCEPTION(parser_exception(no_command_msg));
 
     /*
@@ -420,11 +422,7 @@ handle_no_command(const bool has_version, const bool has_help,
         print_help(od, info);
     else if (has_version)
         version(info);
-    else {
-        configuration r;
-        r.cli().activity(dumpspecs_configuration());
-        return r;
-    }
+
     return boost::optional<configuration>();
 }
 
@@ -825,6 +823,9 @@ handle_command(const std::string& command_name, const bool has_help,
         const auto cc(read_conversion_configuration(vm));
         target = cc.source();
         r.cli().activity(cc);
+    } else if (command_name == dumpspecs_command_name) {
+        dumpspecs_configuration dc;
+        r.cli().activity(dc);
     }
 
     /*
@@ -878,17 +879,14 @@ parse(const std::vector<std::string>& arguments, std::ostream& info) {
     boost::program_options::store(po, vm);
     const bool has_command(vm.count(command_arg));
     const bool has_version(vm.count(version_arg));
-    const bool has_dumpspecs(vm.count(dumpspecs_arg));
     const bool has_help(vm.count(help_arg));
 
     /*
      * First, handle the simpler case where no command is
      * supplied. Note that we only supply the visible options here.
      */
-    if (!has_command) {
-        return handle_no_command(has_version, has_help,
-            has_dumpspecs, visible, info);
-    }
+    if (!has_command)
+        return handle_no_command(has_version, has_help, visible, info);
 
     /*
      * If the user supplied a command, we need to retrieve it and
@@ -906,12 +904,6 @@ parse(const std::vector<std::string>& arguments, std::ostream& info) {
      */
     if (has_version)
         BOOST_THROW_EXCEPTION(parser_exception(invalid_option + "version"));
-
-    /*
-     * As with version, dumpsecs should be called on its own.
-     */
-    if (has_dumpspecs)
-        BOOST_THROW_EXCEPTION(parser_exception(invalid_option + "dumpspecs"));
 
     /*
      * We can now process the command. Notice that we are suppliying

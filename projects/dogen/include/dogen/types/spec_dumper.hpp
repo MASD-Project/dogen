@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include "dogen/types/specs.hpp"
 #include "dogen/types/configuration.hpp"
 
 namespace dogen {
@@ -41,7 +42,7 @@ public:
     spec_dumper& operator=(const spec_dumper&) = delete;
 
 public:
-    virtual void dump(const configuration& cfg) const = 0;
+    virtual specs dump(const configuration& cfg) const = 0;
 };
 
 }

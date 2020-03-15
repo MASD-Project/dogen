@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <iostream>
 #include <boost/variant.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
@@ -39,6 +40,10 @@ using dogen::cli::generation_configuration;
 using dogen::cli::conversion_configuration;
 using dogen::cli::dumpspecs_configuration;
 
+/**
+ * @brief Given the configuration selected by the user, dispatches to
+ * the appropriate activity.
+ */
 class activity_dispatcher : public boost::static_visitor<> {
 public:
     activity_dispatcher(const converter& c, const generator& g,
@@ -46,18 +51,30 @@ public:
         : converter_(c), generator_(g), dumper_(sd), configuration_(cfg) {}
 
 public:
+    /**
+     * @brief Dispatches to the converter.
+     */
     void operator()(const conversion_configuration& cfg) const {
         converter_.convert(configuration_.api(), cfg.source(),
             cfg.destination());
     }
 
+    /**
+     * @brief Dispatches to the generator.
+     */
     void operator()(const generation_configuration& cfg) const {
         generator_.generate(configuration_.api(), cfg.target(),
             cfg.output_directory());
     }
 
+    /**
+     * @brief Dispatches to the spec dumper.
+     */
     void operator()(const dumpspecs_configuration&) const {
-        dumper_.dump(configuration_.api());
+        const auto s(dumper_.dump(configuration_.api()));
+        if (s.groups().empty()) {
+            std::cout << "No specs found" << std::endl;
+        }
     }
 
 private:

@@ -38,7 +38,7 @@ public:
     spec_dumper& operator=(const spec_dumper&) = delete;
 
 public:
-    virtual void dump(const dogen::configuration& cfg) const;
+    virtual specs dump(const dogen::configuration& cfg) const;
 };
 
 }
