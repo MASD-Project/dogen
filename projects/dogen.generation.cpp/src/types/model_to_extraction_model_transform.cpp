@@ -176,9 +176,8 @@ extraction::meta_model::model model_to_extraction_model_transform::apply(
      */
     extraction::meta_model::model r;
     const auto& eafe(m.enabled_archetype_for_element());
-    const variability::helpers::configuration_factory
-        cf(*ctx.archetype_location_repository(), feature_model,
-            false);
+    using variability::helpers::configuration_factory;
+    const configuration_factory cf(feature_model, false/*compatibility_model*/);
 
     r.artefacts(format(eafe, l, feature_model, cf, fm));
     r.managed_directories(managed_directories(l));

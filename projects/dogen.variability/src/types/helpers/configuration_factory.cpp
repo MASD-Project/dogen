@@ -46,6 +46,7 @@ const std::string duplicate_key("Key already inserted: ");
 const std::string too_many_values("More than one value supplied against key: ");
 const std::string feature_not_found("Feature not found: ");
 const std::string invalid_binding_for_point("Incorrect binding type: ");
+const std::string overrides_not_supported("Feature cannot be overridden: ");
 
 }
 
@@ -54,60 +55,71 @@ namespace dogen::variability::helpers {
 namespace {
 
 /**
- * @brief Responsible for converting aggregated entries into the right
- * layout for variability KVPs.
+ * @brief Responsible for gathering information to compose non-scalar
+ * type such as collections and key-value-pairs.
  *
- * KVP processing is done as a two step process. If we take a walke
- * KVP as an example:
- *
- * masd.stitch.wale.kvp.helper.family=Pair
- *
- * The "masd.stitch.wale.kvp" part of the key is the feature name;
- * anything following it is the real key (e.g. "helper.family"). The
- * value is as per normal entries (e.g. "Pair"). So, the first step is
- * to remove the feature name portion of the original key and to store
- * it in a new collection of entries. This is the job of the
+This is the job of the
  * processor. Afterwards, we process these just like we would process
  * regular entries - but this is done on the main method below.
  */
-class kvp_gatherer {
+class gatherer {
 public:
-    void gather(const meta_model::feature& f, const std::string& key,
-        const std::list<std::string>& value,
-        const std::list<std::string>& override_value);
+    /**
+     * @brief Responsible for gathering KVPs.
+     *
+     * Keys in KVPs actually encode _two_ sets of keys. Taking a wale
+     * KVP as an example:
+     *
+     * @e masd.stitch.wale.kvp.helper.family=Pair
+     *
+     * The "masd.stitch.wale.kvp" part of the key is the feature name;
+     * anything following it is the "real" key ("helper.family"). The
+     * value is as per normal entries ("Pair"). So, gather is
+     * responsible for removing the feature name portion of the
+     * original key and to store it in a new collection of entries.
+     */
+    void gather_kvp(const meta_model::feature& f, const std::string& key,
+        const std::string& value);
+
+    /**
+     * @brief Gathers all elements of a collection.
+     */
+    void gather_collection(const std::string& key, const std::string& value);
 
 public:
+    /**
+     * @brief Returns the KVPs that were gathered.
+     */
     const std::unordered_map<std::string,
                              std::list<std::pair<std::string, std::string>>>&
-    result();
+    kvps();
+
+    /**
+     * @brief Returns all of the collections that were gathered.
+     */
+    const std::unordered_map<std::string, std::list<std::string>>& collections();
 
 private:
     std::unordered_map<std::string, std::set<std::string>> keys_;
     std::unordered_map<std::string,
-                       std::list<std::pair<std::string, std::string>>> result_;
+                       std::list<std::pair<std::string, std::string>>> kvps_;
+    std::unordered_map<std::string, std::list<std::string>> collections_;
+
 };
 
 const std::unordered_map<std::string,
                          std::list<std::pair<std::string, std::string>>>&
-kvp_gatherer::result() {
-    return result_;
+gatherer::kvps() {
+    return kvps_;
 }
 
-void kvp_gatherer::gather(const meta_model::feature& f,
-    const std::string& key, const std::list<std::string>& value,
-    const std::list<std::string>& override_value) {
-    /*
-     * We only expect a single value in the container. Note that
-     * multiple entries can happen due to the fact that the "same key"
-     * (e.g. the prefix of the key) can be repeated. But each entry is
-     * expected to have only one value.
-     */
-    BOOST_LOG_SEV(lg, debug) << "Adding kvp for key: " << key;
-    if (value.size() != 1) {
-        BOOST_LOG_SEV(lg, debug) << too_many_values << key;
-        BOOST_THROW_EXCEPTION(building_exception(too_many_values + key));
-    }
+const std::unordered_map<std::string, std::list<std::string>>&
+gatherer::collections() {
+    return collections_;
+}
 
+void gatherer::gather_kvp(const meta_model::feature& f,
+    const std::string& key, const std::string& value) {
     /*
      * Compute a new key by removing the prefix.
      */
@@ -116,27 +128,30 @@ void kvp_gatherer::gather(const meta_model::feature& f,
     BOOST_LOG_SEV(lg, debug) << "New key: " << new_key;
 
     /*
-     * Handle the override scenario, where the override value takes
-     * over the value supplied in model.
+     * Ensure we haven't seen this key before.
      */
-    const auto has_overrides(!override_value.empty());
-    const auto v(has_overrides ? override_value.front() : value.front());
-    const auto pair(std::make_pair(new_key, v));
     const auto inserted(keys_[qn].insert(new_key).second);
     if (!inserted) {
         BOOST_LOG_SEV(lg, debug) << duplicate_key << new_key;
         BOOST_THROW_EXCEPTION(building_exception(duplicate_key + new_key));
     }
-    result_[qn].push_back(pair);
+
+    /*
+     * Insert the pair.
+     */
+    kvps_[qn].push_back(std::make_pair(new_key, value));
+}
+
+void gatherer::gather_collection(const std::string& key,
+    const std::string& value) {
+    collections_[key].push_back(value);
 }
 
 }
 
 configuration_factory::configuration_factory(
-    const archetypes::location_repository& alrp,
     const meta_model::feature_model& fm, const bool compatibility_mode)
-    : archetype_location_repository_(alrp), feature_model_(fm),
-      compatibility_mode_(compatibility_mode) {}
+    : feature_model_(fm), compatibility_mode_(compatibility_mode) {}
 
 boost::optional<meta_model::feature>
 configuration_factory::try_obtain_feature(const std::string& qn) const {
@@ -210,24 +225,19 @@ configuration_factory::aggregate_entries(
 
 void configuration_factory::populate_configuration(
     const meta_model::binding_point bp,
-    const std::unordered_map<std::string, std::list<std::string>>&
-    aggregated_entries,
+    const std::list<std::pair<std::string, std::string>>& tagged_values,
     const std::unordered_map<std::string, std::list<std::string>>&
     aggregated_override_entries, meta_model::configuration& cfg) const {
 
     cfg.source_binding_point(bp);
 
-    kvp_gatherer kvpg;
+    gatherer g;
     value_factory factory;
-    std::unordered_map<std::string,
-                       boost::shared_ptr<meta_model::value>> entries;
-    std::unordered_set<std::string> applied_overrides;
-    for (auto kvp : aggregated_entries) {
-        const auto& k(kvp.first);
-
+    for (auto pair : tagged_values) {
         /*
          * Try to obtain a feature for this key, if it exists.
          */
+        const auto& k(pair.first);
         const auto of(try_obtain_feature(k));
         if (!of)
             continue;
@@ -239,39 +249,57 @@ void configuration_factory::populate_configuration(
         validate_binding(f, bp);
 
         /*
-         * Check to see if we have any overrides for this entry, and
-         * if so, mark the override as processed.
+         * Check to see if we have any overrides for this entry,
+         * and if so, mark the override as processed.
          */
         const auto ovs(
             [&]() {
                 const auto i(aggregated_override_entries.find(k));
-                if (i != aggregated_override_entries.end()) {
-                    applied_overrides.insert(k);
+                if (i != aggregated_override_entries.end())
                     return i->second;
-                }
-                return std::list<std::string>();
+                return std::list<std::string>{};
             }());
-        const bool has_overrides(!ovs.empty());
+        const auto has_overrides(!ovs.empty());
 
-        const auto& v(kvp.second);
+        /*
+         * Overrides are only supported for scalars.
+         */
         using meta_model::value_type;
         const auto vt(f.value_type());
-        if (vt == value_type::key_value_pair) {
+        const bool is_scalar(vt != value_type::key_value_pair &&
+            vt != value_type::text_collection);
+        if (!is_scalar && has_overrides) {
+            BOOST_LOG_SEV(lg, error) << overrides_not_supported << k;
+            BOOST_THROW_EXCEPTION(
+                building_exception(overrides_not_supported + k));
+        }
+
+        /*
+         * Process the tagged value.
+         */
+        const auto& v(pair.second);
+        if (vt == value_type::key_value_pair)
+            g.gather_kvp(f, k, v);
+        else if (vt == value_type::text_collection)
+            g.gather_collection(k, v);
+        else {
             /*
-             * Gather KVP details.
+             * Handle the scalar case; these we can process on the
+             * first pass.
              */
-            kvpg.gather(f, k, v, ovs);
-        } else {
             meta_model::configuration_point cp;
             cp.name().qualified(k);
 
             /*
              * Handle the override scenario, where the override value
-             * takes over the value supplied in model. Note that the
-             * factory handles both the collection and the scalar use
-             * case (v is then expected to contain a single value).
+             * takes over the value supplied in model. This is only
+             * supported for scalars at present.
              */
-            cp.value(factory.make(f, has_overrides ? ovs : v));
+            if (has_overrides)
+                cp.value(factory.make(f, ovs));
+            else
+                cp.value(factory.make(f, std::list<std::string> { v }));
+
             cfg.configuration_points()[k] = cp;
         }
     }
@@ -279,8 +307,8 @@ void configuration_factory::populate_configuration(
     /*
      * Now process all of the KVPs that we gathered on the first step.
      */
-    for (const auto& pair : kvpg.result()) {
-        BOOST_LOG_SEV(lg, debug) << "Processing kvp:: " << pair;
+    for (const auto& pair : g.kvps()) {
+        BOOST_LOG_SEV(lg, debug) << "Processing kvp: " << pair;
 
         const auto k(pair.first);
         const auto kvps(pair.second);
@@ -290,28 +318,43 @@ void configuration_factory::populate_configuration(
         cp.value(factory.make_kvp(kvps));
         cfg.configuration_points()[k] = cp;
     }
+
+    /*
+     * Now process all of the collections.
+     */
+    for (const auto& pair : g.collections()) {
+        const auto k(pair.first);
+        const auto values(pair.second);
+
+        BOOST_LOG_SEV(lg, debug) << "Processing collection: " << k;
+
+        meta_model::configuration_point cp;
+        cp.name().qualified(k);
+        cp.value(factory.make_text_collection(values));
+        cfg.configuration_points()[k] = cp;
+    }
 }
 
 meta_model::configuration configuration_factory::make(
-    const std::list<std::pair<std::string, std::string>>& entries,
-    const std::list<std::pair<std::string, std::string>>& override_entries,
-    const meta_model::binding_point bp) const {
-    const auto ae(aggregate_entries(entries));
-    const auto aoe(aggregate_entries(override_entries));
+    const std::list<std::pair<std::string, std::string>>& tagged_values,
+    const std::list<std::pair<std::string, std::string>>&
+    tagged_values_overrides, const meta_model::binding_point bp) const {
+    const auto& tv(tagged_values);
+    const auto atvo(aggregate_entries(tagged_values_overrides));
     meta_model::configuration r;
-    populate_configuration(bp, ae, aoe, r);
+    populate_configuration(bp, tv, atvo, r);
     return r;
 }
 
 boost::shared_ptr<meta_model::configuration>
 configuration_factory::make_shared_ptr(
-    const std::list<std::pair<std::string, std::string>>& entries,
-    const std::list<std::pair<std::string, std::string>>& override_entries,
-    const meta_model::binding_point bp) const {
-    const auto ae(aggregate_entries(entries));
-    const auto aoe(aggregate_entries(override_entries));
+    const std::list<std::pair<std::string, std::string>>& tagged_values,
+    const std::list<std::pair<std::string, std::string>>&
+    tagged_values_overrides, const meta_model::binding_point bp) const {
+    const auto& tv(tagged_values);
+    const auto atvo(aggregate_entries(tagged_values_overrides));
     auto r(boost::make_shared<meta_model::configuration>());
-    populate_configuration(bp, ae, aoe, *r);
+    populate_configuration(bp, tv, atvo, *r);
     return r;
 }
 

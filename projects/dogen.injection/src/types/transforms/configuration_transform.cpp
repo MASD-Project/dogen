@@ -56,10 +56,9 @@ apply(const transforms::context& ctx, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Transforming model: " << m.name()
                              << "Total elements: " << m.elements().size();
 
-    const auto& alrp(*ctx.archetype_location_repository());
     const auto& fm(*ctx.feature_model());
     const auto& cm(ctx.compatibility_mode());
-    variability::helpers::configuration_factory f(alrp, fm, cm);
+    variability::helpers::configuration_factory f(fm, cm);
 
     using bp = variability::meta_model::binding_point;
     create_configuration(f, bp::global, m);

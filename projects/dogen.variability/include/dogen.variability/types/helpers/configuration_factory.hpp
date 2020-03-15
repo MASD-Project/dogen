@@ -32,7 +32,6 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.archetypes/types/location_repository.hpp"
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
@@ -48,13 +47,12 @@ public:
     /**
      * @brief Initialise the configuration factory.
      *
-     * @param alrp the archetype location repository.
      * @param fm the feature model.
      * @param compatibility_mode if true, try to ignore some
      * resolution errors.
      */
-    configuration_factory(const archetypes::location_repository& alrp,
-        const meta_model::feature_model& fm, const bool compatibility_mode);
+    configuration_factory(const meta_model::feature_model& fm,
+        const bool compatibility_mode);
 
 private:
     /**
@@ -94,8 +92,7 @@ private:
      */
     void
     populate_configuration(const meta_model::binding_point bp,
-        const std::unordered_map<std::string, std::list<std::string>>&
-        aggregated_entries,
+        const std::list<std::pair<std::string, std::string>>& entries,
         const std::unordered_map<std::string, std::list<std::string>>&
         aggregated_override_entries, meta_model::configuration& cfg) const;
 
@@ -111,13 +108,13 @@ public:
     /**
      * @brief Create a configuration as a shared pointer.
      */
-    boost::shared_ptr<meta_model::configuration> make_shared_ptr(
-        const std::list<std::pair<std::string, std::string>>& entries,
-        const std::list<std::pair<std::string, std::string>>& override_entries,
-        const meta_model::binding_point bp) const;
+    boost::shared_ptr<meta_model::configuration>
+    make_shared_ptr(
+        const std::list<std::pair<std::string, std::string>>& tagged_values,
+        const std::list<std::pair<std::string, std::string>>&
+        tagged_values_overrides, const meta_model::binding_point bp) const;
 
 private:
-    const archetypes::location_repository& archetype_location_repository_;
     const meta_model::feature_model& feature_model_;
     const bool compatibility_mode_;
 };
