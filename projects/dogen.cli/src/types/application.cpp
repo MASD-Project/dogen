@@ -75,7 +75,11 @@ public:
         if (s.groups().empty()) {
             std::cout << "No specs found" << std::endl;
         } else {
+            bool is_first(true);
             for (const auto& g : s.groups()) {
+                if (!is_first)
+                    std::cout << std::endl;
+
                 std::cout << "Group: " << g.name() << std::endl
                           << "Purpose: " << g.description() << std::endl;
 
@@ -83,6 +87,7 @@ public:
                     std::cout << "    " << e.name() << ": "
                               << e.description() << std::endl;
                 }
+                is_first = false;
             }
         }
     }
