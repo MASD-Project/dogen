@@ -25,6 +25,7 @@
 #include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.injection/types/transforms/model_production_chain.hpp"
+#include "dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 #include "dogen.engine/types/transforms/scoped_context_manager.hpp"
 #include "dogen.engine/types/spec_dumper.hpp"
 #include "dogen/types/spec_entry.hpp"
@@ -86,6 +87,20 @@ specs spec_dumper::dump(const configuration& cfg) const {
             injection.entries().push_back(e);
         }
         r.groups().push_back(injection);
+
+        spec_group generators;
+        generators.name("Generators");
+        generators.description("Available backends for code generation.");
+        using dogen::generation::transforms::model_to_extraction_model_chain;
+        const auto& rg2(model_to_extraction_model_chain::registrar());
+        for(const auto& pair: rg2.transforms_by_technical_space()) {
+            const auto& t(*pair.second);
+            spec_entry e;
+            e.name(t.id());
+            e.description(t.description());
+            generators.entries().push_back(e);
+        }
+        r.groups().push_back(generators);
 
         spec_group features;
         features.name("Features");

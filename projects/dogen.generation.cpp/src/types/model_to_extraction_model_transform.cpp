@@ -37,6 +37,8 @@ static logger lg(logger_factory(transform_id));
 
 const std::string empty;
 const std::string dot(".");
+const std::string description(
+    "Generates C++ code according to the MASD generative model.");
 
 }
 
@@ -81,6 +83,10 @@ formattables::locator model_to_extraction_model_transform::make_locator(
 
 std::string model_to_extraction_model_transform::id() const {
     return traits::backend();
+}
+
+std::string model_to_extraction_model_transform::description() const {
+    return ::description;
 }
 
 std::list<extraction::meta_model::artefact>

@@ -102,6 +102,7 @@ private:
     managed_directories(const formattables::locator& l) const;
 
 public:
+    std::string description() const override;
     std::string id() const override;
 
     const std::forward_list<archetypes::location>&

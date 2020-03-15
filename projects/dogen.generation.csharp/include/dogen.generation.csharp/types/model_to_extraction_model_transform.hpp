@@ -65,6 +65,7 @@ private:
     format(const formattables::model& fm) const;
 
 public:
+    std::string description() const override;
     std::string id() const override;
 
     const std::forward_list<archetypes::location>&

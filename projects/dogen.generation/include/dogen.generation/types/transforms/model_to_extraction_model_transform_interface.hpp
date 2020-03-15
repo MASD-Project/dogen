@@ -68,6 +68,11 @@ public:
     archetype_locations() const = 0;
 
     /**
+     * @brief Returns a human readable description of this transform.
+     */
+    virtual std::string description() const = 0;
+
+    /**
      * @brief Returns the archetype locations for each meta name.
      */
     virtual const std::unordered_map<std::string,
