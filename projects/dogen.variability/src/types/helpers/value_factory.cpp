@@ -36,15 +36,12 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("variability.helpers.value_factory"));
 
-const std::string invalid_numeric_value(
-    "Invalid numeric value: ");
-const std::string invalid_boolean_value(
-    "Invalid boolean value: ");
-
+const std::string invalid_numeric_value("Invalid numeric value: ");
+const std::string invalid_boolean_value("Invalid boolean value: ");
 const std::string value_type_not_supported(
     "Value type is not supported by factory: ");
-const std::string expected_at_most_one_element(
-    "Expected at most one element");
+const std::string expected_at_most_one_element("Expected at most one element");
+const std::string empty_collection("Collection is empty");
 
 /**
  * @brief Provides support for "true" and "false" as Boolean values.
@@ -89,8 +86,8 @@ bool value_factory::to_bool(const std::string& s) const {
     }
 }
 
-void value_factory::ensure_at_most_one_element(
-    const std::list<std::string>& raw_values) const {
+void value_factory::
+ensure_at_most_one_element(const std::list<std::string>& raw_values) const {
 
     if (raw_values.empty())
         return;
@@ -99,6 +96,14 @@ void value_factory::ensure_at_most_one_element(
     if (i != raw_values.end()) {
         BOOST_LOG_SEV(lg, error) << expected_at_most_one_element;
         BOOST_THROW_EXCEPTION(building_exception(expected_at_most_one_element));
+    }
+}
+
+void value_factory::
+ensure_non_empty(const std::list<std::string>& raw_values) const {
+    if (raw_values.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_collection;
+        BOOST_THROW_EXCEPTION(building_exception(empty_collection));
     }
 }
 
@@ -144,6 +149,8 @@ make_kvp(const std::list<std::pair<std::string, std::string>>& v) const {
 
 boost::shared_ptr<meta_model::value> value_factory::
 make(const meta_model::value_type& vt, const std::list<std::string>& v) const {
+    ensure_non_empty(v);
+
     using meta_model::value_type;
     switch (vt) {
     case value_type::text:
@@ -163,10 +170,9 @@ make(const meta_model::value_type& vt, const std::list<std::string>& v) const {
     BOOST_THROW_EXCEPTION(building_exception(value_type_not_supported + s));
 }
 
-boost::shared_ptr<meta_model::value>
-value_factory::make(const meta_model::feature& f,
-    const std::list<std::string>& v) const {
-
+boost::shared_ptr<meta_model::value> value_factory::
+make(const meta_model::feature& f, const std::list<std::string>& v) const {
+    ensure_non_empty(v);
     if (!is_collection(f.value_type()))
         ensure_at_most_one_element(v);
 
@@ -176,7 +182,6 @@ value_factory::make(const meta_model::feature& f,
 boost::shared_ptr<meta_model::value>
 value_factory::make(const meta_model::feature& f,
     const std::list<std::pair<std::string, std::string>>& v) const {
-
     if (f.value_type() != meta_model::value_type::key_value_pair) {
         const auto s(boost::lexical_cast<std::string>(f.value_type()));
         BOOST_LOG_SEV(lg, error) << value_type_not_supported << s;

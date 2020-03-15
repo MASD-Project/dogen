@@ -61,6 +61,11 @@ private:
     void ensure_at_most_one_element(const std::list<std::string>& v) const;
 
     /**
+     * @brief Throws if the collection is empty.
+     */
+    void ensure_non_empty(const std::list<std::string>& v) const;
+
+    /**
      * @brief Returns true if the value type refers to a collection.
      */
     bool is_collection(const meta_model::value_type vt) const;
