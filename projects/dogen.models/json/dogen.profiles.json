@@ -19,59 +19,6 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "base::cpp",
-      "documentation": "Configures the main options for the C++ backend.\n",
-      "stereotypes": [
-        "masd::variability::profile"
-      ],
-      "tagged_values": {
-        "masd.variability.key_prefix": "masd.generation.cpp"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "odb.enabled",
-          "type": "",
-          "value": "false"
-        },
-        {
-          "name": "hash.enabled",
-          "type": "",
-          "value": "false"
-        },
-        {
-          "name": "serialization.enabled",
-          "type": "",
-          "value": "false"
-        },
-        {
-          "name": "lexical_cast.enabled",
-          "type": "",
-          "value": "false"
-        },
-        {
-          "name": "tests.enabled",
-          "type": "",
-          "value": "false"
-        },
-        {
-          "name": "test_data.enabled",
-          "type": "",
-          "value": "false"
-        },
-        {
-          "name": "templates.enabled",
-          "type": "",
-          "value": "true"
-        },
-        {
-          "name": "standard",
-          "type": "",
-          "value": "c++-17"
-        }
-      ]
-    },
-    {
       "name": "base::decoration",
       "documentation": "Configuration for the decoration elements.\n",
       "stereotypes": [
@@ -158,18 +105,65 @@
       "stereotypes": [
         "masd::variability::profile"
       ],
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "masd.generation.cpp.standard",
+          "type": "",
+          "value": "c++-17"
+        }
+      ]
     },
     {
       "name": "base::base_profile",
       "parents": [
-        "base::cpp",
         "base::base"
       ],
+      "documentation": "Configures the main options for the C++ backend.\n",
       "stereotypes": [
         "masd::variability::profile"
       ],
-      "fallback_element_type": "masd::object"
+      "tagged_values": {
+        "masd.variability.key_prefix": "masd.generation.cpp"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "odb.enabled",
+          "type": "",
+          "value": "false"
+        },
+        {
+          "name": "hash.enabled",
+          "type": "",
+          "value": "false"
+        },
+        {
+          "name": "serialization.enabled",
+          "type": "",
+          "value": "false"
+        },
+        {
+          "name": "lexical_cast.enabled",
+          "type": "",
+          "value": "false"
+        },
+        {
+          "name": "tests.enabled",
+          "type": "",
+          "value": "false"
+        },
+        {
+          "name": "test_data.enabled",
+          "type": "",
+          "value": "false"
+        },
+        {
+          "name": "templates.enabled",
+          "type": "",
+          "value": "true"
+        }
+      ]
     },
     {
       "name": "base::default_profile",
