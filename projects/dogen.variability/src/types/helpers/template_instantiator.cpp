@@ -129,6 +129,7 @@ meta_model::feature template_instantiator::to_feature(const std::string& domain,
     r.value_type(ft.value_type());
     r.binding_point(ft.binding_point());
     r.is_partially_matchable(is_partially_mathcable(r.value_type()));
+    r.description(ft.description());
 
     /*
      * Handle default values. First we start by taking whatever
