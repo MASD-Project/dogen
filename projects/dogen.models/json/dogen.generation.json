@@ -380,7 +380,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::locator_properties_transform",
+      "name": "transforms::technical_space_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -580,13 +580,6 @@
     },
     {
       "name": "formatters::generation_marker_formatter",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "transforms::technical_space_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
