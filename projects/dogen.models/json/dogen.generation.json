@@ -86,10 +86,6 @@
           "type": "std::unordered_set<element_archetype>"
         },
         {
-          "name": "locator_properties",
-          "type": "locator_properties"
-        },
-        {
           "name": "global_archetype_location_properties",
           "type": "global_archetype_location_properties"
         },
@@ -168,114 +164,6 @@
       ]
     },
     {
-      "name": "entities::locator_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "directory_structure_style",
-          "type": "directory_structure_styles"
-        },
-        {
-          "name": "name_separator",
-          "type": "std::string",
-          "documentation": "Separator to use when concatenating sub-components of a path component.\n"
-        },
-        {
-          "name": "model_segment_properties",
-          "type": "model_segment_properties"
-        },
-        {
-          "name": "intra_backend_segment_properties",
-          "type": "std::unordered_map<std::string, intra_backend_segment_properties>"
-        },
-        {
-          "name": "archetype_family_properties",
-          "type": "std::unordered_map<std::string, archetype_family_properties>"
-        },
-        {
-          "name": "force_backend_directory",
-          "type": "bool",
-          "documentation": "If true, the backend directory will be expressed, even when there is only one\nbackend enabled.\n"
-        },
-        {
-          "name": "disable_facet_directories",
-          "type": "bool",
-          "documentation": "If true, directories for facets are not generated.\n"
-        }
-      ]
-    },
-    {
-      "name": "entities::directory_structure_styles",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "structured",
-          "type": "",
-          "documentation": "Create the standard directory structure.\n"
-        },
-        {
-          "name": "completely_flat",
-          "type": "",
-          "documentation": "Suppress the generation of all directories.\n"
-        },
-        {
-          "name": "flatten_facets",
-          "type": "",
-          "documentation": "Flatten only the facets but preserve remaining structure.\n"
-        }
-      ]
-    },
-    {
-      "name": "entities::model_segment_properties",
-      "documentation": "Properties related to the model segment of the path.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "directory",
-          "type": "std::string",
-          "documentation": "If supplied, the override directory name will take precedence and all other\nsettings will be ignored.\n\nIf not supplied the model path segment is computed from the remaining settings.\n"
-        },
-        {
-          "name": "external_modules",
-          "type": "path_contribution_types",
-          "documentation": "What kind of contribution do the external modules make to the final path.\n"
-        },
-        {
-          "name": "model_modules",
-          "type": "path_contribution_types",
-          "documentation": "What kind of contribution do the model modules make to the final path.\n"
-        }
-      ]
-    },
-    {
-      "name": "entities::path_contribution_types",
-      "documentation": "Different kinds of contributions that can be made to the final path computation.\n",
-      "stereotypes": [
-        "masd::enumeration"
-      ],
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "none",
-          "type": "",
-          "documentation": "The item does not contribute at all to the path.\n"
-        },
-        {
-          "name": "as_folders",
-          "type": "",
-          "documentation": "The itemcontributes folders to the path.\n"
-        },
-        {
-          "name": "as_path_components",
-          "type": "",
-          "documentation": "The item contributes a single folder to the path, as a delimited string.\n"
-        }
-      ]
-    },
-    {
       "name": "entities::backend_properties",
       "documentation": "Properties related to the backend.\n",
       "fallback_element_type": "masd::object",
@@ -289,54 +177,6 @@
           "name": "directory",
           "type": "std::string",
           "documentation": "Backend specific directory name, if any.\n"
-        }
-      ]
-    },
-    {
-      "name": "entities::intra_backend_segment_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "override_parent_path",
-          "type": "boost::filesystem::path",
-          "documentation": "If supplied, this path is used as the parent path instead of the output path.\n\nThis is useful for example when you want to place the include files outside of the\nmodel directory.\n"
-        },
-        {
-          "name": "path_segment",
-          "type": "boost::filesystem::path",
-          "documentation": "Path segment to use for this intra-backend segment.\n"
-        },
-        {
-          "name": "external_modules",
-          "type": "path_contribution_types",
-          "documentation": "What kind of contribution do the external modules make to the final path.\n"
-        },
-        {
-          "name": "model_modules",
-          "type": "path_contribution_types",
-          "documentation": "What kind of contribution do the model modules make to the final path.\n"
-        },
-        {
-          "name": "internal_modules",
-          "type": "path_contribution_types",
-          "documentation": "What kind of contribution do the internal modules make to the final path.\n"
-        },
-        {
-          "name": "facet",
-          "type": "path_contribution_types",
-          "documentation": "What kind of contribution does the facet make to the final path.\n"
-        }
-      ]
-    },
-    {
-      "name": "entities::archetype_family_properties",
-      "documentation": "Properties pertaining to families of archetypes, related to the path computation.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "extension",
-          "type": "std::string",
-          "documentation": "Extension to use for files of this group. Includes the leading dot.\n"
         }
       ]
     },
@@ -627,10 +467,6 @@
         {
           "name": "archetype_location_repository",
           "type": "boost::shared_ptr<physical::entities::location_repository>"
-        },
-        {
-          "name": "intra_backend_segment_properties",
-          "type": "std::unordered_map<std::string, generation::entities::intra_backend_segment_properties>"
         },
         {
           "name": "output_directory_path",

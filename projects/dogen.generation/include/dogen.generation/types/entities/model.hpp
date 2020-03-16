@@ -40,7 +40,6 @@
 #include "dogen.logical/hash/entities/technical_space_hash.hpp"
 #include "dogen.generation/types/entities/element_archetype.hpp"
 #include "dogen.logical/types/entities/orm/model_properties.hpp"
-#include "dogen.generation/types/entities/locator_properties.hpp"
 #include "dogen.logical/types/entities/extraction_properties.hpp"
 #include "dogen.logical/types/entities/structural/module_fwd.hpp"
 #include "dogen.generation/hash/entities/element_archetype_hash.hpp"
@@ -79,7 +78,6 @@ public:
         const std::unordered_set<dogen::logical::entities::technical_space>& all_technical_spaces,
         const boost::optional<dogen::logical::entities::orm::model_properties>& orm_properties,
         const std::unordered_set<dogen::generation::entities::element_archetype>& enabled_archetype_for_element,
-        const dogen::generation::entities::locator_properties& locator_properties,
         const dogen::generation::entities::global_archetype_location_properties& global_archetype_location_properties,
         const dogen::logical::entities::extraction_properties& extraction_properties);
 
@@ -209,11 +207,6 @@ public:
     void enabled_archetype_for_element(const std::unordered_set<dogen::generation::entities::element_archetype>& v);
     void enabled_archetype_for_element(const std::unordered_set<dogen::generation::entities::element_archetype>&& v);
 
-    const dogen::generation::entities::locator_properties& locator_properties() const;
-    dogen::generation::entities::locator_properties& locator_properties();
-    void locator_properties(const dogen::generation::entities::locator_properties& v);
-    void locator_properties(const dogen::generation::entities::locator_properties&& v);
-
     const dogen::generation::entities::global_archetype_location_properties& global_archetype_location_properties() const;
     dogen::generation::entities::global_archetype_location_properties& global_archetype_location_properties();
     void global_archetype_location_properties(const dogen::generation::entities::global_archetype_location_properties& v);
@@ -250,7 +243,6 @@ private:
     std::unordered_set<dogen::logical::entities::technical_space> all_technical_spaces_;
     boost::optional<dogen::logical::entities::orm::model_properties> orm_properties_;
     std::unordered_set<dogen::generation::entities::element_archetype> enabled_archetype_for_element_;
-    dogen::generation::entities::locator_properties locator_properties_;
     dogen::generation::entities::global_archetype_location_properties global_archetype_location_properties_;
     dogen::logical::entities::extraction_properties extraction_properties_;
 };

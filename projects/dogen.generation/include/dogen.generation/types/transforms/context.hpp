@@ -27,13 +27,11 @@
 
 #include <string>
 #include <algorithm>
-#include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen.tracing/types/tracer_fwd.hpp"
 #include "dogen.variability/types/entities/feature_model_fwd.hpp"
 #include "dogen.physical/types/entities/location_repository_fwd.hpp"
-#include "dogen.generation/types/entities/intra_backend_segment_properties.hpp"
 
 namespace dogen::generation::transforms {
 
@@ -49,7 +47,6 @@ public:
 public:
     context(
         const boost::shared_ptr<dogen::physical::entities::location_repository>& archetype_location_repository,
-        const std::unordered_map<std::string, dogen::generation::entities::intra_backend_segment_properties>& intra_backend_segment_properties,
         const boost::filesystem::path& output_directory_path,
         const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
         const boost::shared_ptr<dogen::tracing::tracer>& tracer,
@@ -60,11 +57,6 @@ public:
     boost::shared_ptr<dogen::physical::entities::location_repository>& archetype_location_repository();
     void archetype_location_repository(const boost::shared_ptr<dogen::physical::entities::location_repository>& v);
     void archetype_location_repository(const boost::shared_ptr<dogen::physical::entities::location_repository>&& v);
-
-    const std::unordered_map<std::string, dogen::generation::entities::intra_backend_segment_properties>& intra_backend_segment_properties() const;
-    std::unordered_map<std::string, dogen::generation::entities::intra_backend_segment_properties>& intra_backend_segment_properties();
-    void intra_backend_segment_properties(const std::unordered_map<std::string, dogen::generation::entities::intra_backend_segment_properties>& v);
-    void intra_backend_segment_properties(const std::unordered_map<std::string, dogen::generation::entities::intra_backend_segment_properties>&& v);
 
     /**
      * @brief FIXME: to be removed
@@ -108,7 +100,6 @@ public:
 
 private:
     boost::shared_ptr<dogen::physical::entities::location_repository> archetype_location_repository_;
-    std::unordered_map<std::string, dogen::generation::entities::intra_backend_segment_properties> intra_backend_segment_properties_;
     boost::filesystem::path output_directory_path_;
     boost::shared_ptr<dogen::variability::entities::feature_model> feature_model_;
     boost::shared_ptr<dogen::tracing::tracer> tracer_;

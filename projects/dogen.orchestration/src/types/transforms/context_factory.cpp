@@ -62,34 +62,6 @@ namespace dogen::orchestration::transforms {
 
 using generation::transforms::model_to_extraction_model_transform_registrar;
 
-std::unordered_map<std::string,
-                   generation::entities::intra_backend_segment_properties>
-create_intra_backend_segment_properties(
-    const model_to_extraction_model_transform_registrar& rg) {
-    std::unordered_map<
-        std::string,
-        generation::entities::intra_backend_segment_properties> r;
-
-    /*
-     * Obtain the intra-backend segment properties of each registered
-     * model-to-text transform. Notice that the segment names must be
-     * unique globally. Then merge them all into a single container of
-     * segment properties.
-     */
-    for (const auto& pair : rg.transforms_by_technical_space()) {
-        const auto& t(*pair.second);
-        for (const auto& pair : t.intra_backend_segment_properties()) {
-            const auto inserted(r.insert(pair).second);
-            if (!inserted) {
-                BOOST_LOG_SEV(lg, error) << duplicate_segment << pair.first;
-                BOOST_THROW_EXCEPTION(
-                    factory_exception(duplicate_segment + pair.first));
-            }
-        }
-    }
-    return r;
-}
-
 boost::shared_ptr<physical::entities::location_repository>
 create_archetype_location_repository(
     const model_to_extraction_model_transform_registrar& rg) {
@@ -249,12 +221,6 @@ make_context(const configuration& cfg, const std::string& activity,
     r.injection_context().archetype_location_repository(alrp);
     r.assets_context().archetype_location_repository(alrp);
     r.generation_context().archetype_location_repository(alrp);
-
-    /*
-     * Setup the intrabackend segment properties.
-     */
-    const auto ibsp(create_intra_backend_segment_properties(rg));
-    r.generation_context().intra_backend_segment_properties(ibsp);
 
     /*
      * Setup the tracer.

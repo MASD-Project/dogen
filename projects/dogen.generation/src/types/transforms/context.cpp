@@ -54,7 +54,6 @@ namespace dogen::generation::transforms {
 
 context::context(context&& rhs)
     : archetype_location_repository_(std::move(rhs.archetype_location_repository_)),
-      intra_backend_segment_properties_(std::move(rhs.intra_backend_segment_properties_)),
       output_directory_path_(std::move(rhs.output_directory_path_)),
       feature_model_(std::move(rhs.feature_model_)),
       tracer_(std::move(rhs.tracer_)),
@@ -62,13 +61,11 @@ context::context(context&& rhs)
 
 context::context(
     const boost::shared_ptr<dogen::physical::entities::location_repository>& archetype_location_repository,
-    const std::unordered_map<std::string, dogen::generation::entities::intra_backend_segment_properties>& intra_backend_segment_properties,
     const boost::filesystem::path& output_directory_path,
     const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
     const boost::shared_ptr<dogen::tracing::tracer>& tracer,
     const std::string& generation_timestamp)
     : archetype_location_repository_(archetype_location_repository),
-      intra_backend_segment_properties_(intra_backend_segment_properties),
       output_directory_path_(output_directory_path),
       feature_model_(feature_model),
       tracer_(tracer),
@@ -77,7 +74,6 @@ context::context(
 void context::swap(context& other) noexcept {
     using std::swap;
     swap(archetype_location_repository_, other.archetype_location_repository_);
-    swap(intra_backend_segment_properties_, other.intra_backend_segment_properties_);
     swap(output_directory_path_, other.output_directory_path_);
     swap(feature_model_, other.feature_model_);
     swap(tracer_, other.tracer_);
@@ -86,7 +82,6 @@ void context::swap(context& other) noexcept {
 
 bool context::operator==(const context& rhs) const {
     return archetype_location_repository_ == rhs.archetype_location_repository_ &&
-        intra_backend_segment_properties_ == rhs.intra_backend_segment_properties_ &&
         output_directory_path_ == rhs.output_directory_path_ &&
         feature_model_ == rhs.feature_model_ &&
         tracer_ == rhs.tracer_ &&
@@ -113,22 +108,6 @@ void context::archetype_location_repository(const boost::shared_ptr<dogen::physi
 
 void context::archetype_location_repository(const boost::shared_ptr<dogen::physical::entities::location_repository>&& v) {
     archetype_location_repository_ = std::move(v);
-}
-
-const std::unordered_map<std::string, dogen::generation::entities::intra_backend_segment_properties>& context::intra_backend_segment_properties() const {
-    return intra_backend_segment_properties_;
-}
-
-std::unordered_map<std::string, dogen::generation::entities::intra_backend_segment_properties>& context::intra_backend_segment_properties() {
-    return intra_backend_segment_properties_;
-}
-
-void context::intra_backend_segment_properties(const std::unordered_map<std::string, dogen::generation::entities::intra_backend_segment_properties>& v) {
-    intra_backend_segment_properties_ = v;
-}
-
-void context::intra_backend_segment_properties(const std::unordered_map<std::string, dogen::generation::entities::intra_backend_segment_properties>&& v) {
-    intra_backend_segment_properties_ = std::move(v);
 }
 
 const boost::filesystem::path& context::output_directory_path() const {

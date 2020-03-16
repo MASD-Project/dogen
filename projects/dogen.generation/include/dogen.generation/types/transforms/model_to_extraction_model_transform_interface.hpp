@@ -33,7 +33,6 @@
 #include "dogen.physical/types/entities/locations_group.hpp"
 #include "dogen.physical/types/entities/location_repository_parts.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
-#include "dogen.generation/types/entities/intra_backend_segment_properties.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
 #include "dogen.generation/types/entities/model.hpp"
 #include "dogen.extraction/types/entities/model.hpp"
@@ -98,14 +97,6 @@ public:
      * @brief Technical space supported by this transform.
      */
     virtual logical::entities::technical_space technical_space() const = 0;
-
-    /**
-     * @brief Returns all intra-backend segment properties.
-     */
-    virtual std::unordered_map<
-        std::string,
-        generation::entities::intra_backend_segment_properties>
-    intra_backend_segment_properties() const = 0;
 
     /**
      * @brief Generates the text model representation for this

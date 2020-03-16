@@ -84,10 +84,6 @@ public:
 
     logical::entities::technical_space technical_space() const override;
 
-    std::unordered_map<std::string,
-                       generation::entities::intra_backend_segment_properties>
-    intra_backend_segment_properties() const override;
-
     extraction::entities::model
     apply(const generation::transforms::context& ctx,
         const bool enable_backend_directories,

@@ -104,23 +104,6 @@ model_to_extraction_model_transform::technical_space() const {
     return logical::entities::technical_space::csharp;
 }
 
-std::unordered_map<std::string,
-                   generation::entities::intra_backend_segment_properties>
-model_to_extraction_model_transform::intra_backend_segment_properties() const {
-    using namespace logical::entities;
-    generation::entities::intra_backend_segment_properties project;
-
-    using generation::entities::path_contribution_types;
-    project.internal_modules(path_contribution_types::as_folders);
-    project.facet(path_contribution_types::as_folders);
-
-    std::unordered_map<
-        std::string,
-        generation::entities::intra_backend_segment_properties> r;
-    r["project"] = project;
-    return r;
-}
-
 extraction::entities::model
 model_to_extraction_model_transform::apply(
     const generation::transforms::context& ctx,

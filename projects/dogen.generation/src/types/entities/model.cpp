@@ -63,7 +63,6 @@ model::model(model&& rhs)
       all_technical_spaces_(std::move(rhs.all_technical_spaces_)),
       orm_properties_(std::move(rhs.orm_properties_)),
       enabled_archetype_for_element_(std::move(rhs.enabled_archetype_for_element_)),
-      locator_properties_(std::move(rhs.locator_properties_)),
       global_archetype_location_properties_(std::move(rhs.global_archetype_location_properties_)),
       extraction_properties_(std::move(rhs.extraction_properties_)) { }
 
@@ -83,7 +82,6 @@ model::model(
     const std::unordered_set<dogen::logical::entities::technical_space>& all_technical_spaces,
     const boost::optional<dogen::logical::entities::orm::model_properties>& orm_properties,
     const std::unordered_set<dogen::generation::entities::element_archetype>& enabled_archetype_for_element,
-    const dogen::generation::entities::locator_properties& locator_properties,
     const dogen::generation::entities::global_archetype_location_properties& global_archetype_location_properties,
     const dogen::logical::entities::extraction_properties& extraction_properties)
     : name_(name),
@@ -101,7 +99,6 @@ model::model(
       all_technical_spaces_(all_technical_spaces),
       orm_properties_(orm_properties),
       enabled_archetype_for_element_(enabled_archetype_for_element),
-      locator_properties_(locator_properties),
       global_archetype_location_properties_(global_archetype_location_properties),
       extraction_properties_(extraction_properties) { }
 
@@ -122,7 +119,6 @@ void model::swap(model& other) noexcept {
     swap(all_technical_spaces_, other.all_technical_spaces_);
     swap(orm_properties_, other.orm_properties_);
     swap(enabled_archetype_for_element_, other.enabled_archetype_for_element_);
-    swap(locator_properties_, other.locator_properties_);
     swap(global_archetype_location_properties_, other.global_archetype_location_properties_);
     swap(extraction_properties_, other.extraction_properties_);
 }
@@ -143,7 +139,6 @@ bool model::operator==(const model& rhs) const {
         all_technical_spaces_ == rhs.all_technical_spaces_ &&
         orm_properties_ == rhs.orm_properties_ &&
         enabled_archetype_for_element_ == rhs.enabled_archetype_for_element_ &&
-        locator_properties_ == rhs.locator_properties_ &&
         global_archetype_location_properties_ == rhs.global_archetype_location_properties_ &&
         extraction_properties_ == rhs.extraction_properties_;
 }
@@ -368,22 +363,6 @@ void model::enabled_archetype_for_element(const std::unordered_set<dogen::genera
 
 void model::enabled_archetype_for_element(const std::unordered_set<dogen::generation::entities::element_archetype>&& v) {
     enabled_archetype_for_element_ = std::move(v);
-}
-
-const dogen::generation::entities::locator_properties& model::locator_properties() const {
-    return locator_properties_;
-}
-
-dogen::generation::entities::locator_properties& model::locator_properties() {
-    return locator_properties_;
-}
-
-void model::locator_properties(const dogen::generation::entities::locator_properties& v) {
-    locator_properties_ = v;
-}
-
-void model::locator_properties(const dogen::generation::entities::locator_properties&& v) {
-    locator_properties_ = std::move(v);
 }
 
 const dogen::generation::entities::global_archetype_location_properties& model::global_archetype_location_properties() const {
