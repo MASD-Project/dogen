@@ -65,22 +65,22 @@
   <dia:layer name="Background" visible="true" active="true">
     <dia:object type="UML - Note" version="0" id="O0">
       <dia:attribute name="obj_pos">
-        <dia:point val="-119,-42"/>
+        <dia:point val="-121,-42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-119.05,-42.05;-91.1,-3.45"/>
+        <dia:rectangle val="-121.05,-42.05;-91.945,-4.25"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-119,-42"/>
+        <dia:point val="-121,-42"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.850000000000001"/>
+        <dia:real val="29.005000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="38.5"/>
+        <dia:real val="37.700000000000003"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -116,17 +116,16 @@ model. But the present model is designed to be understood in complete
 isolation from the layers above (and in fact, precedes the generalised
 approach).
 
-The variability space is connected to the physical dimension. We
-originally tried to avoid this, but due to how some features are
-defined, we did not achieve our aims, The main reason is because we
-have feature templates which are instantiated according to the
-topology of physical space (e.g. enablement, postfix).  In order to
-instantiate those templates, one needs to know the shape of physical
-space (by definition). In addition, we also query those features by
-properties of physical space; e.g., "give me all features called
-'enablement' for every archetype". This is so that we can compute
-enablement in a general manner. At present, enablement is the only use
-case.
+The variability space is indirectly connected to the physical dimension.
+The main reason why is because we need to instantiate features across
+the geometry of physical space (e.g. "for every facet...", "for every
+archetype...", etc). However, we have tried to avoid coupling these two
+models together because we do not think that conceptually this coupling
+makes sense. That is, it just happens that we instantiate features across
+the geometry of physical space, but this is not a concern o veriability -
+only of its user. This decoupling was achieved by creating the concept
+of template instantiation domains, which are just sets. These are mapped
+elsewhere from the geometry of physical space.
 
 #DOGEN masd.injection.dia.comment=true
 #DOGEN masd.injection.model_modules=dogen.variability
@@ -149,7 +148,7 @@ case.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-118.65,-40.755"/>
+            <dia:point val="-120.65,-40.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -15383,13 +15382,13 @@ alias.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O120">
       <dia:attribute name="obj_pos">
-        <dia:point val="-116,-1"/>
+        <dia:point val="-118,-2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-116.05,-1.05;-100.435,2.05"/>
+        <dia:rectangle val="-118.05,-2.05;-102.435,1.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-116,-1"/>
+        <dia:point val="-118,-2"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -15493,13 +15492,13 @@ alias.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O121">
       <dia:attribute name="obj_pos">
-        <dia:point val="-116,3.9286"/>
+        <dia:point val="-118,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-116.05,3.8786;-100.435,6.9786"/>
+        <dia:rectangle val="-118.05,2.95;-102.435,6.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-116,3.9286"/>
+        <dia:point val="-118,3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -15603,13 +15602,13 @@ alias.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O122">
       <dia:attribute name="obj_pos">
-        <dia:point val="-116,8.9286"/>
+        <dia:point val="-118,8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-116.05,8.8786;-94.66,11.9786"/>
+        <dia:rectangle val="-118.05,7.95;-96.66,11.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-116,8.9286"/>
+        <dia:point val="-118,8"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="21.289999999999999"/>

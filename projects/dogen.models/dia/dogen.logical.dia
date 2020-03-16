@@ -787,7 +787,7 @@ C++ pointers, references and so on.#</dia:string>
         <dia:point val="-279,-103"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-279.05,-103.05;-249.945,-65.25"/>
+        <dia:rectangle val="-279.05,-103.05;-250.715,-64.45"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -796,10 +796,10 @@ C++ pointers, references and so on.#</dia:string>
         <dia:point val="-279,-103"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="29.005000000000003"/>
+        <dia:real val="28.235000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="37.700000000000003"/>
+        <dia:real val="38.5"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -813,20 +813,21 @@ C++ pointers, references and so on.#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Assets is the core Dogen meta-model representing software entities.
+            <dia:string>#The logcal model defines the core entities that live in the logical
+dimension of MASD's conceptual model.
 
 @section assets_0 Overview
 
-Assets is a meta-model that strives to provide a technical-space agnostic
-type representation, designed for code generation. Injection models
-are obtained via frontends and transformed into "bare" asset models, at
-which point they can enter its pipeline. Within it, they are processed
-until they form a cohesive whole. They are then in a suitable state for
-code generation.
+The logical model strives to provide a technical-space agnostic
+element representation, designed for code generation. Injection models
+are obtained via frontends and transformed into "bare" logical models,
+at which point they can enter its pipeline. Within it, they are 
+processed until they form a cohesive whole. They are then in a suitable
+state for code generation.
 
 @section asset_1 Mission
 
-The objectives of the assets model are:
+The objectives of the logical model are:
 
 @li to represent all high-level entities that exist across a number
 of technical spaces used in software engineering. These entities
@@ -5692,13 +5693,13 @@ names in assets element
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O39">
       <dia:attribute name="obj_pos">
-        <dia:point val="-277,-64"/>
+        <dia:point val="-277,-62"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-277.05,-64.05;-258.74,-57.15"/>
+        <dia:rectangle val="-277.05,-62.05;-258.74,-55.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-277,-64"/>
+        <dia:point val="-277,-62"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="18.210000000000001"/>
@@ -36771,7 +36772,7 @@ extend the mappings as required.#</dia:string>
         <dia:point val="-55,-83"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-55.75,-86.6011;-51.7775,-82.2"/>
+        <dia:rectangle val="-55.75,-86.6008;-51.7612,-82.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -36779,8 +36780,8 @@ extend the mappings as required.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-55,-83"/>
         <dia:point val="-55,-85"/>
-        <dia:point val="-52.005,-85"/>
-        <dia:point val="-51.9775,-86.5502"/>
+        <dia:point val="-51.9775,-85"/>
+        <dia:point val="-51.9612,-86.5502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -38423,7 +38424,7 @@ At present the system only supports wale templates.#</dia:string>
         <dia:point val="166.345,-89.1513"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="153.974,-89.9013;167.095,-83.2492"/>
+        <dia:rectangle val="153.996,-89.9013;167.095,-83.2492"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -38431,8 +38432,8 @@ At present the system only supports wale templates.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="166.345,-89.1513"/>
         <dia:point val="166.345,-86"/>
-        <dia:point val="154.025,-86"/>
-        <dia:point val="154.046,-84.0492"/>
+        <dia:point val="154.046,-86"/>
+        <dia:point val="154.055,-84.0492"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -39508,7 +39509,7 @@ generates the registration code as needed.#</dia:string>
         <dia:point val="118.42,-91.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="112.587,-91.95;119.17,-86.2502"/>
+        <dia:rectangle val="112.573,-91.95;119.17,-86.2502"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -39516,8 +39517,8 @@ generates the registration code as needed.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="118.42,-91.2"/>
         <dia:point val="118.42,-89"/>
-        <dia:point val="112.663,-89"/>
-        <dia:point val="112.637,-87.0502"/>
+        <dia:point val="112.637,-89"/>
+        <dia:point val="112.623,-87.0502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -40771,13 +40772,13 @@ to serialisation.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O302">
       <dia:attribute name="obj_pos">
-        <dia:point val="-277,-55"/>
+        <dia:point val="-277,-53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-277.05,-55.05;-261.435,-51.95"/>
+        <dia:rectangle val="-277.05,-53.05;-261.435,-49.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-277,-55"/>
+        <dia:point val="-277,-53"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -44017,13 +44018,13 @@ Maps to a well known MSBuild target.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O333">
       <dia:attribute name="obj_pos">
-        <dia:point val="-277,-50"/>
+        <dia:point val="-277,-48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-277.05,-50.05;-261.435,-46.95"/>
+        <dia:rectangle val="-277.05,-48.05;-261.435,-44.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-277,-50"/>
+        <dia:point val="-277,-48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -45418,7 +45419,7 @@ Maps to a well known MSBuild target.#</dia:string>
         <dia:point val="104.612,-12.5497"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="101.001,-13.2997;105.362,-7.25037"/>
+        <dia:rectangle val="100.99,-13.2997;105.362,-7.25037"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -45426,8 +45427,8 @@ Maps to a well known MSBuild target.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="104.612,-12.5497"/>
         <dia:point val="104.612,-10"/>
-        <dia:point val="101.075,-10"/>
-        <dia:point val="101.052,-8.05037"/>
+        <dia:point val="101.052,-10"/>
+        <dia:point val="101.041,-8.05037"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -46186,13 +46187,13 @@ namespace.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O351">
       <dia:attribute name="obj_pos">
-        <dia:point val="-277,-45"/>
+        <dia:point val="-277,-43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-277.05,-45.05;-255.66,-41.95"/>
+        <dia:rectangle val="-277.05,-43.05;-255.66,-39.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-277,-45"/>
+        <dia:point val="-277,-43"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="21.289999999999999"/>

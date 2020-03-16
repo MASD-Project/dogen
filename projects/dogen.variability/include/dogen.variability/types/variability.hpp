@@ -48,17 +48,16 @@
  * isolation from the layers above (and in fact, precedes the generalised
  * approach).
  *
- * The variability space is connected to the physical dimension. We
- * originally tried to avoid this, but due to how some features are
- * defined, we did not achieve our aims, The main reason is because we
- * have feature templates which are instantiated according to the
- * topology of physical space (e.g. enablement, postfix).  In order to
- * instantiate those templates, one needs to know the shape of physical
- * space (by definition). In addition, we also query those features by
- * properties of physical space; e.g., "give me all features called
- * 'enablement' for every archetype". This is so that we can compute
- * enablement in a general manner. At present, enablement is the only use
- * case.
+ * The variability space is indirectly connected to the physical dimension.
+ * The main reason why is because we need to instantiate features across
+ * the geometry of physical space (e.g. "for every facet...", "for every
+ * archetype...", etc). However, we have tried to avoid coupling these two
+ * models together because we do not think that conceptually this coupling
+ * makes sense. That is, it just happens that we instantiate features across
+ * the geometry of physical space, but this is not a concern o veriability -
+ * only of its user. This decoupling was achieved by creating the concept
+ * of template instantiation domains, which are just sets. These are mapped
+ * elsewhere from the geometry of physical space.
  */
 namespace dogen::variability {
 }

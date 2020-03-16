@@ -992,9 +992,9 @@
 
 An external model is defined as:
 
-- a third-party format that is not owned or controlled by
-  Dogen, such as Dia;
-- a Dogen format designed for interoperability (JSON).
+@li a third-party format that is not owned or controlled by
+    Dogen, such as Dia;
+@li a Dogen format designed for interoperability (JSON).
 
 External models are converted into an intermediate format called
 the @e injection model, because it is the original entry point into

@@ -26,20 +26,21 @@
 #endif
 
 /**
- * @brief Assets is the core Dogen meta-model representing software entities.
+ * @brief The logcal model defines the core entities that live in the logical
+ * dimension of MASD's conceptual model.
  *
  * @section assets_0 Overview
  *
- * Assets is a meta-model that strives to provide a technical-space agnostic
- * type representation, designed for code generation. Injection models
- * are obtained via frontends and transformed into "bare" asset models, at
- * which point they can enter its pipeline. Within it, they are processed
- * until they form a cohesive whole. They are then in a suitable state for
- * code generation.
+ * The logical model strives to provide a technical-space agnostic
+ * element representation, designed for code generation. Injection models
+ * are obtained via frontends and transformed into "bare" logical models,
+ * at which point they can enter its pipeline. Within it, they are
+ * processed until they form a cohesive whole. They are then in a suitable
+ * state for code generation.
  *
  * @section asset_1 Mission
  *
- * The objectives of the assets model are:
+ * The objectives of the logical model are:
  *
  * @li to represent all high-level entities that exist across a number
  * of technical spaces used in software engineering. These entities
