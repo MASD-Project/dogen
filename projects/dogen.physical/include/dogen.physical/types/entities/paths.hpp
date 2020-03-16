@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
+#include <string>
 #include <algorithm>
+#include <unordered_map>
 #include <boost/filesystem/path.hpp>
 
 namespace dogen::physical::entities {
@@ -45,7 +47,7 @@ public:
 public:
     paths(
         const boost::filesystem::path& absolute,
-        const boost::filesystem::path& relative);
+        const std::unordered_map<std::string, boost::filesystem::path>& relative);
 
 public:
     const boost::filesystem::path& absolute() const;
@@ -53,10 +55,15 @@ public:
     void absolute(const boost::filesystem::path& v);
     void absolute(const boost::filesystem::path&& v);
 
-    const boost::filesystem::path& relative() const;
-    boost::filesystem::path& relative();
-    void relative(const boost::filesystem::path& v);
-    void relative(const boost::filesystem::path&& v);
+    /**
+     * @brief Path relative to parts, which required it.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, boost::filesystem::path>& relative() const;
+    std::unordered_map<std::string, boost::filesystem::path>& relative();
+    void relative(const std::unordered_map<std::string, boost::filesystem::path>& v);
+    void relative(const std::unordered_map<std::string, boost::filesystem::path>&& v);
+    /**@}*/
 
 public:
     bool operator==(const paths& rhs) const;
@@ -70,7 +77,7 @@ public:
 
 private:
     boost::filesystem::path absolute_;
-    boost::filesystem::path relative_;
+    std::unordered_map<std::string, boost::filesystem::path> relative_;
 };
 
 }

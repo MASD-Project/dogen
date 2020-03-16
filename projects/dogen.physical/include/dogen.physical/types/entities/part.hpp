@@ -37,10 +37,12 @@ namespace dogen::physical::entities {
 
 class part final {
 public:
-    part() = default;
     part(const part&) = default;
     part(part&&) = default;
     ~part() = default;
+
+public:
+    part();
 
 public:
     part(
@@ -49,7 +51,8 @@ public:
         const std::string& description,
         const dogen::physical::entities::path_configuration& path_configuration,
         const std::unordered_map<std::string, dogen::physical::entities::facet>& facets,
-        const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes);
+        const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes,
+        const bool requires_relative_path);
 
 public:
     const std::string& directory_name() const;
@@ -92,6 +95,14 @@ public:
     void archetypes(const std::unordered_map<std::string, dogen::physical::entities::archetype>& v);
     void archetypes(const std::unordered_map<std::string, dogen::physical::entities::archetype>&& v);
 
+    /**
+     * @brief If true, this part needs a path relative to its root.
+     */
+    /**@{*/
+    bool requires_relative_path() const;
+    void requires_relative_path(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const part& rhs) const;
     bool operator!=(const part& rhs) const {
@@ -109,6 +120,7 @@ private:
     dogen::physical::entities::path_configuration path_configuration_;
     std::unordered_map<std::string, dogen::physical::entities::facet> facets_;
     std::unordered_map<std::string, dogen::physical::entities::archetype> archetypes_;
+    bool requires_relative_path_;
 };
 
 }

@@ -236,6 +236,11 @@
         {
           "name": "archetypes",
           "type": "std::unordered_map<std::string, archetype>"
+        },
+        {
+          "name": "requires_relative_path",
+          "type": "bool",
+          "documentation": "If true, this part needs a path relative to its root.\n"
         }
       ]
     },
@@ -392,7 +397,8 @@
         },
         {
           "name": "relative",
-          "type": "boost::filesystem::path"
+          "type": "std::unordered_map<std::string, boost::filesystem::path>",
+          "documentation": "Path relative to parts, which required it.\n"
         }
       ]
     },

@@ -28,7 +28,7 @@ paths::paths(paths&& rhs)
 
 paths::paths(
     const boost::filesystem::path& absolute,
-    const boost::filesystem::path& relative)
+    const std::unordered_map<std::string, boost::filesystem::path>& relative)
     : absolute_(absolute),
       relative_(relative) { }
 
@@ -65,19 +65,19 @@ void paths::absolute(const boost::filesystem::path&& v) {
     absolute_ = std::move(v);
 }
 
-const boost::filesystem::path& paths::relative() const {
+const std::unordered_map<std::string, boost::filesystem::path>& paths::relative() const {
     return relative_;
 }
 
-boost::filesystem::path& paths::relative() {
+std::unordered_map<std::string, boost::filesystem::path>& paths::relative() {
     return relative_;
 }
 
-void paths::relative(const boost::filesystem::path& v) {
+void paths::relative(const std::unordered_map<std::string, boost::filesystem::path>& v) {
     relative_ = v;
 }
 
-void paths::relative(const boost::filesystem::path&& v) {
+void paths::relative(const std::unordered_map<std::string, boost::filesystem::path>&& v) {
     relative_ = std::move(v);
 }
 

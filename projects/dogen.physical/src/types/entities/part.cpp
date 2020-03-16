@@ -22,19 +22,24 @@
 
 namespace dogen::physical::entities {
 
+part::part()
+    : requires_relative_path_(static_cast<bool>(0)) { }
+
 part::part(
     const std::string& directory_name,
     const dogen::physical::entities::location& location,
     const std::string& description,
     const dogen::physical::entities::path_configuration& path_configuration,
     const std::unordered_map<std::string, dogen::physical::entities::facet>& facets,
-    const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes)
+    const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes,
+    const bool requires_relative_path)
     : directory_name_(directory_name),
       location_(location),
       description_(description),
       path_configuration_(path_configuration),
       facets_(facets),
-      archetypes_(archetypes) { }
+      archetypes_(archetypes),
+      requires_relative_path_(requires_relative_path) { }
 
 void part::swap(part& other) noexcept {
     using std::swap;
@@ -44,6 +49,7 @@ void part::swap(part& other) noexcept {
     swap(path_configuration_, other.path_configuration_);
     swap(facets_, other.facets_);
     swap(archetypes_, other.archetypes_);
+    swap(requires_relative_path_, other.requires_relative_path_);
 }
 
 bool part::operator==(const part& rhs) const {
@@ -52,7 +58,8 @@ bool part::operator==(const part& rhs) const {
         description_ == rhs.description_ &&
         path_configuration_ == rhs.path_configuration_ &&
         facets_ == rhs.facets_ &&
-        archetypes_ == rhs.archetypes_;
+        archetypes_ == rhs.archetypes_ &&
+        requires_relative_path_ == rhs.requires_relative_path_;
 }
 
 part& part::operator=(part other) {
@@ -155,6 +162,14 @@ void part::archetypes(const std::unordered_map<std::string, dogen::physical::ent
 
 void part::archetypes(const std::unordered_map<std::string, dogen::physical::entities::archetype>&& v) {
     archetypes_ = std::move(v);
+}
+
+bool part::requires_relative_path() const {
+    return requires_relative_path_;
+}
+
+void part::requires_relative_path(const bool v) {
+    requires_relative_path_ = v;
 }
 
 }

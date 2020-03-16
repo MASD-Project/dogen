@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/part_io.hpp"
 #include "dogen.physical/io/entities/facet_io.hpp"
@@ -73,6 +74,12 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 namespace dogen::physical::entities {
 
 std::ostream& operator<<(std::ostream& s, const part& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::part\"" << ", "
       << "\"directory_name\": " << "\"" << tidy_up_string(v.directory_name()) << "\"" << ", "
@@ -80,7 +87,8 @@ std::ostream& operator<<(std::ostream& s, const part& v) {
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
       << "\"path_configuration\": " << v.path_configuration() << ", "
       << "\"facets\": " << v.facets() << ", "
-      << "\"archetypes\": " << v.archetypes()
+      << "\"archetypes\": " << v.archetypes() << ", "
+      << "\"requires_relative_path\": " << v.requires_relative_path()
       << " }";
     return(s);
 }
