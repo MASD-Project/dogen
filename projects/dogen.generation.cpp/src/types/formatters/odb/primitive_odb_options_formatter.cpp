@@ -45,9 +45,9 @@ std::string primitive_odb_options_formatter::id() const {
     return r;
 }
 
-archetypes::location
+physical::location
 primitive_odb_options_formatter::archetype_location() const {
-    static archetypes::location
+    static physical::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(), primitive_odb_options_formatter::static_id());
     return r;

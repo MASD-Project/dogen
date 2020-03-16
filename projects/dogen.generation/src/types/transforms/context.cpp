@@ -19,14 +19,14 @@
  *
  */
 #include "dogen.tracing/types/tracer.hpp"
+#include "dogen.physical/types/location_repository.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
-#include "dogen.archetypes/types/location_repository.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::archetypes::location_repository>& lhs,
-const boost::shared_ptr<dogen::archetypes::location_repository>& rhs) {
+inline bool operator==(const boost::shared_ptr<dogen::physical::location_repository>& lhs,
+const boost::shared_ptr<dogen::physical::location_repository>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -61,7 +61,7 @@ context::context(context&& rhs)
       generation_timestamp_(std::move(rhs.generation_timestamp_)) { }
 
 context::context(
-    const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository,
+    const boost::shared_ptr<dogen::physical::location_repository>& archetype_location_repository,
     const std::unordered_map<std::string, dogen::generation::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties,
     const boost::filesystem::path& output_directory_path,
     const boost::shared_ptr<dogen::variability::meta_model::feature_model>& feature_model,
@@ -99,19 +99,19 @@ context& context::operator=(context other) {
     return *this;
 }
 
-const boost::shared_ptr<dogen::archetypes::location_repository>& context::archetype_location_repository() const {
+const boost::shared_ptr<dogen::physical::location_repository>& context::archetype_location_repository() const {
     return archetype_location_repository_;
 }
 
-boost::shared_ptr<dogen::archetypes::location_repository>& context::archetype_location_repository() {
+boost::shared_ptr<dogen::physical::location_repository>& context::archetype_location_repository() {
     return archetype_location_repository_;
 }
 
-void context::archetype_location_repository(const boost::shared_ptr<dogen::archetypes::location_repository>& v) {
+void context::archetype_location_repository(const boost::shared_ptr<dogen::physical::location_repository>& v) {
     archetype_location_repository_ = v;
 }
 
-void context::archetype_location_repository(const boost::shared_ptr<dogen::archetypes::location_repository>&& v) {
+void context::archetype_location_repository(const boost::shared_ptr<dogen::physical::location_repository>&& v) {
     archetype_location_repository_ = std::move(v);
 }
 

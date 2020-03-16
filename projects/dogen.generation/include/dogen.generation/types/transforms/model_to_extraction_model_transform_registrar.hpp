@@ -29,7 +29,7 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
-#include "dogen.archetypes/types/location.hpp"
+#include "dogen.physical/types/location.hpp"
 #include "dogen.assets/types/meta_model/technical_space.hpp"
 #include "dogen.assets/hash/meta_model/technical_space_hash.hpp"
 #include "dogen.generation/types/transforms/model_to_extraction_model_transform_interface.hpp"

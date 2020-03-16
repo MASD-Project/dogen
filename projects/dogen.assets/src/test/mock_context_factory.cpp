@@ -22,7 +22,7 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.archetypes/types/location_repository_builder.hpp"
+#include "dogen.physical/types/location_repository_builder.hpp"
 #include "dogen.tracing/types/tracer.hpp"
 #include "dogen/types/tracing_configuration.hpp"
 #include "dogen/types/database_configuration.hpp"
@@ -41,7 +41,7 @@ transforms::context mock_context_factory::make() {
     BOOST_LOG_SEV(lg, debug) << "Creating the mock context.";
 
     transforms::context r;
-    auto alrp(boost::make_shared<archetypes::location_repository>());
+    auto alrp(boost::make_shared<physical::location_repository>());
     r.archetype_location_repository(alrp);
 
     configuration cfg;

@@ -30,8 +30,8 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen.archetypes/types/locations_group.hpp"
-#include "dogen.archetypes/types/location_repository_parts.hpp"
+#include "dogen.physical/types/locations_group.hpp"
+#include "dogen.physical/types/location_repository_parts.hpp"
 #include "dogen.assets/types/meta_model/technical_space.hpp"
 #include "dogen.generation/types/meta_model/intra_backend_segment_properties.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
@@ -64,7 +64,7 @@ public:
      * transform, listing all available backends, facets and
      * archetypes.
      */
-    virtual const std::forward_list<archetypes::location>&
+    virtual const std::forward_list<physical::location>&
     archetype_locations() const = 0;
 
     /**
@@ -76,14 +76,14 @@ public:
      * @brief Returns the archetype locations for each meta name.
      */
     virtual const std::unordered_map<std::string,
-                                     archetypes::locations_group>&
+                                     physical::locations_group>&
     archetype_locations_by_meta_name() const = 0;
 
     /**
      * @brief Returns the archetype locations for each family.
      */
     virtual const std::unordered_map<std::string,
-                                     std::list<archetypes::location>
+                                     std::list<physical::location>
                                      >&
     archetype_locations_by_family() const = 0;
 
@@ -91,7 +91,7 @@ public:
      * @brief Returns this backend's part of the repository of
      * archetype locations.
      */
-    virtual const archetypes::location_repository_parts&
+    virtual const physical::location_repository_parts&
     archetype_location_repository_parts() const = 0;
 
     /**

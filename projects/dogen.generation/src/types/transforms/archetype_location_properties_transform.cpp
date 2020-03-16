@@ -59,7 +59,7 @@ std::unordered_map<
     archetype_location_properties_transform::backend_feature_group>
 archetype_location_properties_transform::
 make_backend_feature_group(const variability::meta_model::feature_model& fm,
-    const archetypes::location_repository& alrp) {
+    const physical::location_repository& alrp) {
     std::unordered_map<std::string, backend_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
@@ -82,7 +82,7 @@ std::unordered_map<
     archetype_location_properties_transform::facet_feature_group>
 archetype_location_properties_transform::
 make_facet_feature_group(const variability::meta_model::feature_model& fm,
-    const archetypes::location_repository& alrp) {
+    const physical::location_repository& alrp) {
     std::unordered_map<std::string, facet_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
@@ -111,7 +111,7 @@ std::unordered_map<
     archetype_location_properties_transform::global_archetype_feature_group>
 archetype_location_properties_transform::make_global_archetype_feature_group(
     const variability::meta_model::feature_model& fm,
-    const archetypes::location_repository& alrp) {
+    const physical::location_repository& alrp) {
     std::unordered_map<std::string, global_archetype_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
@@ -136,7 +136,7 @@ std::unordered_map<
     archetype_location_properties_transform::local_archetype_feature_group>
 archetype_location_properties_transform::make_local_archetype_feature_group(
     const variability::meta_model::feature_model& fm,
-    const archetypes::location_repository& alrp) {
+    const physical::location_repository& alrp) {
     std::unordered_map<std::string, local_archetype_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
@@ -238,7 +238,7 @@ archetype_location_properties_transform::obtain_archetype_properties(
 void archetype_location_properties_transform::
 populate_global_archetype_location_properties(
     const variability::meta_model::feature_model& fm,
-    const archetypes::location_repository& alrp,
+    const physical::location_repository& alrp,
     meta_model::model& m) {
 
     const auto bftg(make_backend_feature_group(fm, alrp));
@@ -317,7 +317,7 @@ std::unordered_map<std::string,
 archetype_location_properties_transform::
 obtain_local_archetype_location_properties(
     const std::unordered_map<std::string, local_archetype_feature_group>& fgs,
-    const std::list<archetypes::location>& als,
+    const std::list<physical::location>& als,
     const variability::meta_model::configuration& cfg) {
 
     BOOST_LOG_SEV(lg, debug) << "Creating local archetype location properties.";
@@ -365,7 +365,7 @@ obtain_local_archetype_location_properties(
 void archetype_location_properties_transform::
 populate_local_archetype_location_properties(
     const variability::meta_model::feature_model& fm,
-    const archetypes::location_repository& alrp,
+    const physical::location_repository& alrp,
     meta_model::model& m) {
     /*
      * Computes all of the possible features for every archetype

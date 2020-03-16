@@ -24,9 +24,9 @@
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/tracer.hpp"
-#include "dogen.archetypes/io/location_repository_io.hpp"
-#include "dogen.archetypes/types/location_repository_builder.hpp"
-#include "dogen.archetypes/types/template_instantiation_domains_factory.hpp"
+#include "dogen.physical/io/location_repository_io.hpp"
+#include "dogen.physical/types/location_repository_builder.hpp"
+#include "dogen.physical/types/template_instantiation_domains_factory.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
 #include "dogen.variability/types/features/initializer.hpp"
 #include "dogen.variability/types/meta_model/feature_template_repository.hpp"
@@ -90,18 +90,18 @@ create_intra_backend_segment_properties(
     return r;
 }
 
-boost::shared_ptr<archetypes::location_repository>
+boost::shared_ptr<physical::location_repository>
 create_archetype_location_repository(
     const model_to_extraction_model_transform_registrar& rg) {
 
-    archetypes::location_repository_builder b;
+    physical::location_repository_builder b;
     for (const auto& pair : rg.transforms_by_technical_space()) {
         const auto& t(*pair.second);
         b.add(t.archetype_locations_by_meta_name());
         b.add(t.archetype_locations_by_family());
         b.add(t.archetype_location_repository_parts());
     }
-    return boost::make_shared<archetypes::location_repository>(b.build());
+    return boost::make_shared<physical::location_repository>(b.build());
 }
 void context_factory::
 register_variability_entities(variability::helpers::registrar& rg) {
@@ -137,7 +137,7 @@ make_injection_context(const configuration& cfg,
     r.data_directories(lib_dirs);
 
     /*
-     * Setup the archetypes data structures.
+     * Setup the physical data structures.
      */
     const auto alrp(create_archetype_location_repository(rg));
     r.archetype_location_repository(alrp);
@@ -173,14 +173,14 @@ make_context(const configuration& cfg, const std::string& activity,
     rg.validate();
 
     /*
-     * Obtain the archetype location repository.
+     * Obtain the physical location repository.
      */
     const auto alrp(create_archetype_location_repository(rg));
 
     /*
      * Obtain the template instantiation domains.
      */
-    using tidf = archetypes::template_instantiation_domains_factory;
+    using tidf = physical::template_instantiation_domains_factory;
     vctx.template_instantiation_domains(tidf::make(alrp->all()));
 
     /*

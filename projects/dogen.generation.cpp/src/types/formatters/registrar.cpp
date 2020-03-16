@@ -25,7 +25,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/set_io.hpp"
 #include "dogen.utility/types/io/forward_list_io.hpp"
-#include "dogen.archetypes/io/location_io.hpp"
+#include "dogen.physical/io/location_io.hpp"
 #include "dogen.generation.cpp/types/formatters/traits.hpp"
 #include "dogen.generation.cpp/io/formatters/repository_io.hpp"
 #include "dogen.generation.cpp/types/formatters/registrar_error.hpp"
@@ -258,24 +258,24 @@ const repository& registrar::formatter_repository() const {
     return formatter_repository_;
 }
 
-const std::forward_list<archetypes::location>&
+const std::forward_list<physical::location>&
 registrar::archetype_locations() const {
     return archetype_locations_;
 }
 
 const std::unordered_map<std::string,
-                   archetypes::locations_group>&
+                   physical::locations_group>&
 registrar::archetype_locations_by_meta_name() const {
     return archetype_locations_by_meta_name_;
 }
 
 const std::unordered_map<std::string,
-                         std::list<archetypes::location>>&
+                         std::list<physical::location>>&
 registrar::archetype_locations_by_family() const {
     return archetype_locations_by_family_;
 }
 
-const archetypes::location_repository_parts&
+const physical::location_repository_parts&
 registrar::archetype_location_repository_parts() const {
     return archetype_location_repository_parts_;
 }

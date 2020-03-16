@@ -35,8 +35,8 @@ std::string builtin_formatter::id() const {
     return static_id();
 }
 
-archetypes::location builtin_formatter::archetype_location() const {
-    static archetypes::location
+physical::location builtin_formatter::archetype_location() const {
+    static physical::location
         r(csharp::traits::kernel(), csharp::traits::backend(),
           traits::facet(),
           builtin_formatter::static_id());

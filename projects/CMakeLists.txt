@@ -252,7 +252,7 @@ include_directories(
 
     # real code
     ${CMAKE_SOURCE_DIR}/projects/dogen/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.archetypes/include
+    ${CMAKE_SOURCE_DIR}/projects/dogen.physical/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.cli/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.utility/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.variability/include
@@ -287,7 +287,7 @@ endforeach()
 # add all other projects
 #
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.archetypes)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.physical)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.cli)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.utility)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.variability)

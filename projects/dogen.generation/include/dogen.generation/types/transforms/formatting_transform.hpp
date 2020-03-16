@@ -50,7 +50,7 @@ private:
 
     static std::unordered_map<std::string, feature_group>
     make_feature_groups(const variability::meta_model::feature_model& fm,
-        const std::list<archetypes::location>& als);
+        const std::list<physical::location>& als);
 
     static std::unordered_map<std::string, formatting_configuration>
     make_formatting_configuration(

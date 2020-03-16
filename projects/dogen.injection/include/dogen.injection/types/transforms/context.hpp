@@ -31,7 +31,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen.tracing/types/tracer_fwd.hpp"
-#include "dogen.archetypes/types/location_repository_fwd.hpp"
+#include "dogen.physical/types/location_repository_fwd.hpp"
 #include "dogen.variability/types/meta_model/feature_model_fwd.hpp"
 
 namespace dogen::injection::transforms {
@@ -49,7 +49,7 @@ public:
     context(
         const std::vector<boost::filesystem::path>& data_directories,
         const boost::shared_ptr<dogen::variability::meta_model::feature_model>& feature_model,
-        const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository,
+        const boost::shared_ptr<dogen::physical::location_repository>& archetype_location_repository,
         const boost::shared_ptr<dogen::tracing::tracer>& tracer,
         const bool compatibility_mode,
         const std::vector<std::string>& variability_overrides);
@@ -65,10 +65,10 @@ public:
     void feature_model(const boost::shared_ptr<dogen::variability::meta_model::feature_model>& v);
     void feature_model(const boost::shared_ptr<dogen::variability::meta_model::feature_model>&& v);
 
-    const boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository() const;
-    boost::shared_ptr<dogen::archetypes::location_repository>& archetype_location_repository();
-    void archetype_location_repository(const boost::shared_ptr<dogen::archetypes::location_repository>& v);
-    void archetype_location_repository(const boost::shared_ptr<dogen::archetypes::location_repository>&& v);
+    const boost::shared_ptr<dogen::physical::location_repository>& archetype_location_repository() const;
+    boost::shared_ptr<dogen::physical::location_repository>& archetype_location_repository();
+    void archetype_location_repository(const boost::shared_ptr<dogen::physical::location_repository>& v);
+    void archetype_location_repository(const boost::shared_ptr<dogen::physical::location_repository>&& v);
 
     const boost::shared_ptr<dogen::tracing::tracer>& tracer() const;
     boost::shared_ptr<dogen::tracing::tracer>& tracer();
@@ -101,7 +101,7 @@ public:
 private:
     std::vector<boost::filesystem::path> data_directories_;
     boost::shared_ptr<dogen::variability::meta_model::feature_model> feature_model_;
-    boost::shared_ptr<dogen::archetypes::location_repository> archetype_location_repository_;
+    boost::shared_ptr<dogen::physical::location_repository> archetype_location_repository_;
     boost::shared_ptr<dogen::tracing::tracer> tracer_;
     bool compatibility_mode_;
     std::vector<std::string> variability_overrides_;

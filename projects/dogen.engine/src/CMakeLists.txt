@@ -48,7 +48,7 @@ if (WITH_RELATIONAL_SUPPORT)
 endif()
 
 target_link_libraries(${lib_target_name}
-    dogen.archetypes.lib
+    dogen.physical.lib
     dogen.variability.lib
     dogen.dia.lib
     dogen.extraction.lib

@@ -28,7 +28,7 @@
 #include <sstream>
 #include <boost/optional.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
-#include "dogen.archetypes/types/location.hpp"
+#include "dogen.physical/types/location.hpp"
 #include "dogen.extraction/types/meta_model/artefact.hpp"
 #include "dogen.generation/types/formatters/scoped_boilerplate_formatter.hpp"
 #include "dogen.generation/types/formatters/scoped_namespace_formatter.hpp"
@@ -47,7 +47,7 @@ namespace dogen::generation::csharp::formatters {
 class assistant final {
 public:
     assistant(const context& ctx, const assets::meta_model::element& e,
-        const archetypes::location& al);
+        const physical::location& al);
 
 private:
     const formattables::artefact_properties&
@@ -153,7 +153,7 @@ private:
     const assets::meta_model::element& element_;
     const context& context_;
     formattables::artefact_properties artefact_properties_;
-    const archetypes::location archetype_location_;
+    const physical::location archetype_location_;
 };
 
 }

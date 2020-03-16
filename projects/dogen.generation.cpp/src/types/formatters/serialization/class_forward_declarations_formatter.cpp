@@ -38,9 +38,9 @@ std::string class_forward_declarations_formatter::id() const {
     return static_id();
 }
 
-archetypes::location
+physical::location
 class_forward_declarations_formatter::archetype_location() const {
-    static archetypes::location
+    static physical::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(),
           class_forward_declarations_formatter::static_id());

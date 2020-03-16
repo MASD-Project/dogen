@@ -626,7 +626,7 @@
       "attributes": [
         {
           "name": "archetype_location_repository",
-          "type": "boost::shared_ptr<archetypes::location_repository>"
+          "type": "boost::shared_ptr<physical::location_repository>"
         },
         {
           "name": "intra_backend_segment_properties",

@@ -4,7 +4,7 @@ public:
 
 public:
     std::string id() const override;
-    archetypes::location archetype_location() const override;
+    physical::location archetype_location() const override;
     const assets::meta_model::name& meta_name() const override;
     std::string family() const override;
 

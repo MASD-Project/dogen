@@ -40,9 +40,9 @@ std::string exception_header_formatter::id() const {
     return static_id();
 }
 
-archetypes::location
+physical::location
 exception_header_formatter::archetype_location() const {
-    static archetypes::location
+    static physical::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(),
           exception_header_formatter::static_id());

@@ -78,7 +78,7 @@ if (DOGEN_CLI_EXECUTABLE)
     #
     set(prefix "dogen")
     set(models ${prefix})
-    set(models ${models} ${prefix}.archetypes)
+    set(models ${models} ${prefix}.physical)
     set(models ${models} ${prefix}.cli)
     set(models ${models} ${prefix}.dia)
     set(models ${models} ${prefix}.extraction)

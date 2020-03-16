@@ -5831,7 +5831,7 @@ elements.#</dia:string>
                 <dia:string>#alrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#archetypes::location_repository#</dia:string>
+                <dia:string>#physical::location_repository#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -10135,7 +10135,7 @@ with Masd.
                 <dia:string>#alrp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#archetypes::location_repository#</dia:string>
+                <dia:string>#physical::location_repository#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

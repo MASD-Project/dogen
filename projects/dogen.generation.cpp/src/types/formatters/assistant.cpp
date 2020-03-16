@@ -86,7 +86,7 @@ namespace dogen::generation::cpp::formatters {
 
 assistant::
 assistant(const context& ctx, const assets::meta_model::element& e,
-    const archetypes::location& al, const bool requires_header_guard)
+    const physical::location& al, const bool requires_header_guard)
     : element_(e), context_(ctx),
       artefact_properties_(
         obtain_artefact_properties(element_.name().qualified().dot(),

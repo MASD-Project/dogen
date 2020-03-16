@@ -28,7 +28,7 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "dogen.archetypes/types/location.hpp"
+#include "dogen.physical/types/location.hpp"
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
@@ -52,7 +52,7 @@ private:
 
     static feature_group make_feature_group(
         const variability::meta_model::feature_model& fm,
-        const std::list<archetypes::location>& als);
+        const std::list<physical::location>& als);
 
     static boost::filesystem::path
     obtain_cpp_headers_output_directory(const feature_group& fg,
@@ -67,7 +67,7 @@ private:
 
     static meta_model::extraction_properties make_extraction_properties(
         const context& ctx,
-        const std::list<archetypes::location>& als,
+        const std::list<physical::location>& als,
         const variability::meta_model::configuration& cfg);
 
 public:

@@ -36,7 +36,7 @@ set_target_properties(${lib_target_name}
 target_link_libraries(${lib_target_name}
     dogen.tracing.lib
     dogen.variability.lib
-    dogen.archetypes.lib
+    dogen.physical.lib
     dogen.utility.lib
     dogen.injection.lib
     dogen.dia.lib

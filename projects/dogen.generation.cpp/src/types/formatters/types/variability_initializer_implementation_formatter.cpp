@@ -43,9 +43,9 @@ std::string variability_initializer_implementation_formatter::id() const {
     return static_id();
 }
 
-archetypes::location
+physical::location
 variability_initializer_implementation_formatter::archetype_location() const {
-    static archetypes::location
+    static physical::location
         r(cpp::traits::kernel(),  cpp::traits::backend(),
           traits::facet(),
           variability_initializer_implementation_formatter::static_id());

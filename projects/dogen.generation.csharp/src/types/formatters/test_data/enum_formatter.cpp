@@ -36,8 +36,8 @@ std::string enum_formatter::id() const {
     return static_id();
 }
 
-archetypes::location enum_formatter::archetype_location() const {
-    static archetypes::location
+physical::location enum_formatter::archetype_location() const {
+    static physical::location
         r(csharp::traits::kernel(), csharp::traits::backend(),
           traits::facet(),
           enum_formatter::static_id());

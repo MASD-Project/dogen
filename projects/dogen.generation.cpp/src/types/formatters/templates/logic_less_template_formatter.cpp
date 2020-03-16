@@ -41,9 +41,9 @@ std::string logic_less_template_formatter::id() const {
     return static_id();
 }
 
-archetypes::location
+physical::location
 logic_less_template_formatter::archetype_location() const {
-    static archetypes::location
+    static physical::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(),
           logic_less_template_formatter::static_id());

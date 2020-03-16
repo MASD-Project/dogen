@@ -29,9 +29,9 @@
 #include <memory>
 #include <forward_list>
 #include <unordered_map>
-#include "dogen.archetypes/types/location.hpp"
-#include "dogen.archetypes/types/locations_group.hpp"
-#include "dogen.archetypes/types/location_repository_parts.hpp"
+#include "dogen.physical/types/location.hpp"
+#include "dogen.physical/types/locations_group.hpp"
+#include "dogen.physical/types/location_repository_parts.hpp"
 #include "dogen.generation.csharp/types/formatters/repository.hpp"
 #include "dogen.generation.csharp/types/formatters/helper_formatter_interface.hpp"
 #include "dogen.generation.csharp/types/formatters/artefact_formatter_interface.hpp"
@@ -67,36 +67,36 @@ public:
      * @brief Returns the archetype locations for the registered
      * formatters.
      */
-    const std::forward_list<archetypes::location>&
+    const std::forward_list<physical::location>&
     archetype_locations() const;
 
     /**
      * @brief Returns the archetype locations for each meta name.
      */
     const std::unordered_map<std::string,
-                             archetypes::locations_group>&
+                             physical::locations_group>&
     archetype_locations_by_meta_name() const;
 
     /**
      * @brief Returns the archetype locations for each family.
      */
     const std::unordered_map<std::string,
-                             std::list<archetypes::location>>&
+                             std::list<physical::location>>&
     archetype_locations_by_family() const;
 
-    const archetypes::location_repository_parts&
+    const physical::location_repository_parts&
     archetype_location_repository_parts() const;
 
 private:
     repository formatter_repository_;
-    std::forward_list<archetypes::location> archetype_locations_;
+    std::forward_list<physical::location> archetype_locations_;
     std::unordered_map<std::string,
-                       archetypes::locations_group>
+                       physical::locations_group>
     archetype_locations_by_meta_name_;
     std::unordered_map<std::string,
-                       std::list<archetypes::location>>
+                       std::list<physical::location>>
     archetype_locations_by_family_;
-    archetypes::location_repository_parts
+    physical::location_repository_parts
     archetype_location_repository_parts_;
 };
 

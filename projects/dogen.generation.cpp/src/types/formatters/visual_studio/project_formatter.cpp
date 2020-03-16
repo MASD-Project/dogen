@@ -42,9 +42,9 @@ std::string project_formatter::id() const {
     return r;
 }
 
-archetypes::location
+physical::location
 project_formatter::archetype_location() const {
-    static archetypes::location
+    static physical::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(),
           project_formatter::static_id());

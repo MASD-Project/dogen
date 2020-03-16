@@ -41,7 +41,7 @@ endif()
 target_link_libraries(${lib_target_name}
     dogen.lib
     dogen.tracing.lib
-    dogen.archetypes.lib
+    dogen.physical.lib
     dogen.utility.lib
     # ${relational_lib}
     ${Boost_LIBRARIES})

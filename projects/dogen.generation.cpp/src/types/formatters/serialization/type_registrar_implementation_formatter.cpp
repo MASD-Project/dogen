@@ -42,9 +42,9 @@ std::string type_registrar_implementation_formatter::id() const {
     return static_id();
 }
 
-archetypes::location
+physical::location
 type_registrar_implementation_formatter::archetype_location() const {
-    static archetypes::location
+    static physical::location
         r(cpp::traits::kernel(),  cpp::traits::backend(),
           traits::facet(),
           type_registrar_implementation_formatter::static_id());

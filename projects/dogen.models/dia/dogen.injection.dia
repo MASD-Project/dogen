@@ -1021,7 +1021,7 @@ manage it.
 #DOGEN masd.injection.reference=masd
 #DOGEN masd.injection.reference=masd.variability
 #DOGEN masd.injection.reference=dogen.profiles
-#DOGEN masd.injection.reference=dogen.archetypes
+#DOGEN masd.injection.reference=dogen.physical
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
 #DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
 #DOGEN masd.variability.profile=dogen.profiles.base.default_profile#</dia:string>
@@ -3000,7 +3000,7 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
             <dia:string>#archetype_location_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;archetypes::location_repository&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;physical::location_repository&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

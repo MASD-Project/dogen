@@ -20,7 +20,7 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.archetypes/types/location_repository.hpp"
+#include "dogen.physical/types/location_repository.hpp"
 #include "dogen.assets/types/meta_model/element.hpp"
 #include "dogen.assets/types/meta_model/structural/module.hpp"
 #include "dogen.assets/types/meta_model/structural/builtin.hpp"
