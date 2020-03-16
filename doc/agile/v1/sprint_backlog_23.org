@@ -12,20 +12,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-16 Mon 12:00]
+#+CAPTION: Clock summary at [2020-03-16 Mon 16:49]
 | <75>                                      |        |      |      |       |
 | Headline                                  | Time   |      |      |     % |
 |-------------------------------------------+--------+------+------+-------|
-| *Total time*                              | *3:11* |      |      | 100.0 |
+| *Total time*                              | *7:18* |      |      | 100.0 |
 |-------------------------------------------+--------+------+------+-------|
-| Stories                                   | 3:11   |      |      | 100.0 |
-| Active                                    |        | 3:11 |      | 100.0 |
-| Edit release notes for previous sprint    |        |      | 0:15 |   7.9 |
-| Sprint and product backlog grooming       |        |      | 0:18 |   9.4 |
-| Rename archetypes model to physical model |        |      | 0:28 |  14.7 |
-| Rename assets model to logical model      |        |      | 0:29 |  15.2 |
-| Consider renaming "meta-model" namespace  |        |      | 0:37 |  19.4 |
-| Rename engine to orchestration            |        |      | 1:04 |  33.5 |
+| Stories                                   | 7:18   |      |      | 100.0 |
+| Active                                    |        | 7:18 |      | 100.0 |
+| Edit release notes for previous sprint    |        |      | 0:15 |   3.4 |
+| Sprint and product backlog grooming       |        |      | 0:18 |   4.1 |
+| Rename archetypes model to physical model |        |      | 0:28 |   6.4 |
+| Rename assets model to logical model      |        |      | 0:29 |   6.6 |
+| Consider renaming "meta-model" namespace  |        |      | 0:37 |   8.4 |
+| Rename engine to orchestration            |        |      | 1:04 |  14.6 |
+| Design and implement new physical types   |        |      | 4:07 |  56.4 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -114,12 +115,44 @@ this rename now.
 
 While we were at it we also created namespaces in physical model.
 
-*** Implement locator in terms of new physical types                  :story:
+*** STARTED Design and implement new physical types                   :story:
+    :LOGBOOK:
+    CLOCK: [2020-03-16 Mon 12:42]--[2020-03-16 Mon 16:49] =>  4:07
+    :END:
 
+- implement locator in terms of new types.
 - get kernels to export the new information.
 - using the information compute the paths. Create a new field so that
   we can diff new and old paths.
-- once there are no differences, remove all locator related legacy code.
+- once there are no differences, remove all locator related legacy
+  code.
+
+Notes:
+
+- start by removing all types which are no longer needed. Then create
+  new types in the physical model.
+- replace references to archetypes location with physical location.
+- create a model for the physical world, and replace the archetype
+  location repository with it. Kernels return the components of the
+  model.
+
+*** Refactor enablement types                                         :story:
+
+These types all have historical names.
+
+Tasks:
+
+- =local_archetype_location_properties=: these are just enablement
+  properties. We need to also add =backend_enabled=, at which point
+  the type in the logical model is identical to the one in the
+  generation model.
+- =global_archetype_location_properties=: with the exception of
+  =denormalised_archetype_properties=, these types are just used to
+  read the meta-data for enablement. They could be private to a helper
+  that generates =enablement_properties= and could be used for both
+  global and local.
+- the enablement transform (probably) has no dependencies and could be
+  lifted into the physical model.
 
 *** Implement dependencies in terms of new physical types             :story:
 
