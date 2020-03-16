@@ -12,8 +12,10 @@ To be done on the last Sunday of the sprint.
 2. Move all untouched stories into product backlog.
 3. Close current sprint: close all open tasks, delete tasks we did not
    work on, update clocks.
+4. Push commit and wait for builds. This ensures that if there are any
+   failures you can fix them before the release tag.
 4. Tag commit and sign it with key.
-5. Push commit tag and tag. Generate new builds over night.
+5. Push tag. You can generate new builds overnight.
 
 * Open new sprint
 
