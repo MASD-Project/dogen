@@ -33,6 +33,7 @@
 #include "dogen.variability/types/transforms/feature_model_production_chain.hpp"
 #include "dogen.templating/types/initializer.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
+#include "dogen.physical/types/features/initializer.hpp"
 #include "dogen.injection/types/features/initializer.hpp"
 #include "dogen.logical/types/features/initializer.hpp"
 #include "dogen.generation/types/features/initializer.hpp"
@@ -78,6 +79,7 @@ create_archetype_location_repository(
 }
 void context_factory::
 register_variability_entities(variability::helpers::registrar& rg) {
+    physical::features::initializer::register_entities(rg);
     injection::features::initializer::register_entities(rg);
     logical::features::initializer::register_entities(rg);
     generation::features::initializer::register_entities(rg);

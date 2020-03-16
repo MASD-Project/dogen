@@ -19,58 +19,61 @@
  *
  */
 #include "dogen.variability/types/helpers/value_factory.hpp"
-#include "dogen.generation/types/features/facet_features.hpp"
+#include "dogen.physical/types/features/archetype_features.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 
-namespace dogen::generation::features {
+namespace dogen::physical::features {
 
 namespace {
 
 dogen::variability::entities::feature_template
-make_overwrite() {
+make_postfix() {
     using namespace dogen::variability::entities;
     feature_template r;
-    r.name().simple("overwrite");
-    r.description(R"(If true, the generated files will overwrite existing files. 
+    r.name().simple("postfix");
+    r.description(R"(Postfix to use for all files that belong to this facet.
 
 )");
-    const auto vt(value_type::boolean);
+    const auto vt(value_type::text);
     r.value_type(vt);
-    r.binding_point(binding_point::element);
-    r.instantiation_domain_name("masd.facet");
+    r.binding_point(binding_point::global);
+    r.instantiation_domain_name("masd.archetype");
     dogen::variability::helpers::value_factory f;
-    r.default_value(f.make(vt, std::list<std::string>{ "true" }));
+    r.default_value(f.make(vt, std::list<std::string>{ "" }));
+    r.default_value_overrides().push_back(
+        default_value_override("forward_declarations",
+            f.make(vt, std::list<std::string>{ "fwd" })));
     return r;
 }
 
 }
 
-facet_features::feature_group
-facet_features::make_feature_group(const dogen::variability::entities::feature_model& fm) {
+archetype_features::feature_group
+archetype_features::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
-    r.overwrite = s.get_by_name("overwrite");
+    r.postfix = s.get_by_name("postfix");
 
     return r;
 }
 
-facet_features::static_configuration facet_features::make_static_configuration(
+archetype_features::static_configuration archetype_features::make_static_configuration(
     const feature_group& fg,
     const dogen::variability::entities::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    r.overwrite = s.get_boolean_content_or_default(fg.overwrite);
+    r.postfix = s.get_text_content_or_default(fg.postfix);
     return r;
 }
 
 std::list<dogen::variability::entities::feature_template>
-facet_features::make_templates() {
+archetype_features::make_templates() {
     using namespace dogen::variability::entities;
     std::list<dogen::variability::entities::feature_template> r;
-    r.push_back(make_overwrite());
+    r.push_back(make_postfix());
     return r;
 }
 

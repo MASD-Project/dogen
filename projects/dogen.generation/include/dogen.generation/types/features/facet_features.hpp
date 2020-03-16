@@ -26,7 +26,6 @@
 #endif
 
 #include <list>
-#include <string>
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
@@ -40,8 +39,6 @@ namespace dogen::generation::features {
 class facet_features final {
 public:
     struct feature_group {
-        variability::entities::feature directory;
-        variability::entities::feature postfix;
         variability::entities::feature overwrite;
     };
 
@@ -50,8 +47,6 @@ public:
 
 public:
     struct static_configuration {
-        std::string directory;
-        std::string postfix;
         bool overwrite;
 
         static_configuration() :

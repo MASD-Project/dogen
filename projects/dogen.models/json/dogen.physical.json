@@ -464,6 +464,92 @@
           "documentation": "Postfix to apply to the element.\n"
         }
       ]
+    },
+    {
+      "name": "features",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "features::facet_features",
+      "documentation": "Physical features common to all facets.\n",
+      "stereotypes": [
+        "masd::variability::feature_template_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.instantiation_domain_name": "masd.facet"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "directory",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "documentation": "Directory in which to place this facet.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "global",
+            "masd.variability.default_value_override.cpp.types": "\"types\"",
+            "masd.variability.default_value_override.cpp.hash": "\"hash\"",
+            "masd.variability.default_value_override.cpp.tests": "\"generated_tests\"",
+            "masd.variability.default_value_override.cpp.io": "\"io\"",
+            "masd.variability.default_value_override.cpp.lexical_cast": "\"lexical_cast\"",
+            "masd.variability.default_value_override.cpp.templates": "\"templates\"",
+            "masd.variability.default_value_override.cpp.odb": "\"odb\"",
+            "masd.variability.default_value_override.cpp.test_data": "\"test_data\"",
+            "masd.variability.default_value_override.cpp.serialization": "\"serialization\"",
+            "masd.variability.default_value_override.csharp.types": "\"Types\"",
+            "masd.variability.default_value_override.csharp.io": "\"Dumpers\"",
+            "masd.variability.default_value_override.csharp.test_data": "\"SequenceGenerators\""
+          }
+        },
+        {
+          "name": "postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "documentation": "Postfix to use for all files that belong to this facet.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "global",
+            "masd.variability.default_value_override.cpp.tests": "\"tests\"",
+            "masd.variability.default_value_override.cpp.hash": "\"hash\"",
+            "masd.variability.default_value_override.cpp.lexical_cast": "\"lc\"",
+            "masd.variability.default_value_override.cpp.io": "\"io\"",
+            "masd.variability.default_value_override.cpp.odb": "\"pragmas\"",
+            "masd.variability.default_value_override.cpp.test_data": "\"td\"",
+            "masd.variability.default_value_override.cpp.serialization": "\"ser\"",
+            "masd.variability.default_value_override.csharp.io": "\"Dumper\"",
+            "masd.variability.default_value_override.csharp.test_data": "\"SequenceGenerator\""
+          }
+        }
+      ]
+    },
+    {
+      "name": "features::archetype_features",
+      "documentation": "Features common to all archetypes.\n",
+      "stereotypes": [
+        "masd::variability::feature_template_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.instantiation_domain_name": "masd.archetype"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "postfix",
+          "type": "masd::variability::text",
+          "value": "\"\"",
+          "documentation": "Postfix to use for all files that belong to this facet.\n",
+          "tagged_values": {
+            "masd.variability.binding_point": "global",
+            "masd.variability.default_value_override.forward_declarations": "\"fwd\""
+          }
+        }
+      ]
+    },
+    {
+      "name": "features::initializer",
+      "stereotypes": [
+        "masd::variability::initializer"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }

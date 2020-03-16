@@ -18,20 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_FEATURES_ARCHETYPE_FEATURES_HPP
-#define DOGEN_GENERATION_TYPES_FEATURES_ARCHETYPE_FEATURES_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_FEATURES_ARCHETYPE_FEATURES_HPP
+#define DOGEN_PHYSICAL_TYPES_FEATURES_ARCHETYPE_FEATURES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <list>
+#include <string>
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.variability/types/entities/feature_template.hpp"
 
-namespace dogen::generation::features {
+namespace dogen::physical::features {
 
 /**
  * @brief Features common to all archetypes.
@@ -39,7 +40,7 @@ namespace dogen::generation::features {
 class archetype_features final {
 public:
     struct feature_group {
-        variability::entities::feature overwrite;
+        variability::entities::feature postfix;
     };
 
     static feature_group
@@ -47,10 +48,7 @@ public:
 
 public:
     struct static_configuration {
-        bool overwrite;
-
-        static_configuration() :
-            overwrite() {}
+        std::string postfix;
     };
 
     static static_configuration make_static_configuration(
