@@ -96,36 +96,6 @@
       ]
     },
     {
-      "name": "entities::artefact_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "enabled",
-          "type": "bool"
-        },
-        {
-          "name": "overwrite",
-          "type": "bool"
-        },
-        {
-          "name": "file_path",
-          "type": "boost::filesystem::path"
-        },
-        {
-          "name": "dependencies",
-          "type": "std::list<std::string>"
-        },
-        {
-          "name": "formatting_style",
-          "type": "formatting_styles"
-        },
-        {
-          "name": "formatting_input",
-          "type": "std::string"
-        }
-      ]
-    },
-    {
       "name": "entities::formatting_styles",
       "stereotypes": [
         "masd::enumeration"
@@ -199,28 +169,6 @@
         {
           "name": "denormalised_archetype_properties",
           "type": "std::unordered_map<std::string, denormalised_archetype_properties>"
-        }
-      ]
-    },
-    {
-      "name": "entities::local_archetype_location_properties",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "facet_enabled",
-          "type": "boost::optional<bool>"
-        },
-        {
-          "name": "archetype_enabled",
-          "type": "boost::optional<bool>"
-        },
-        {
-          "name": "facet_overwrite",
-          "type": "boost::optional<bool>"
-        },
-        {
-          "name": "archetype_overwrite",
-          "type": "boost::optional<bool>"
         }
       ]
     },
@@ -335,21 +283,6 @@
         {
           "name": "meta_name",
           "type": "logical::entities::name"
-        }
-      ]
-    },
-    {
-      "name": "entities::generatable_properties",
-      "documentation": "Element properties related to code generation.\n",
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "artefact_properties",
-          "type": "std::unordered_map<std::string, artefact_properties>"
-        },
-        {
-          "name": "archetype_location_properties",
-          "type": "std::unordered_map<std::string, local_archetype_location_properties>"
         }
       ]
     },
