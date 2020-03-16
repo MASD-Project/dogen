@@ -47,6 +47,7 @@ const std::string activity("dumpspecs");
 using namespace dogen::variability::meta_model;
 class visitor : public value_visitor {
 public:
+    using value_visitor::visit;
     void visit(const number& v) {
         result_ = boost::lexical_cast<std::string>(v.content());
     }
