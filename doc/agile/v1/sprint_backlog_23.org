@@ -12,21 +12,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-16 Mon 16:49]
+#+CAPTION: Clock summary at [2020-03-16 Mon 21:46]
 | <75>                                      |        |      |      |       |
 | Headline                                  | Time   |      |      |     % |
 |-------------------------------------------+--------+------+------+-------|
-| *Total time*                              | *7:18* |      |      | 100.0 |
+| *Total time*                              | *8:23* |      |      | 100.0 |
 |-------------------------------------------+--------+------+------+-------|
-| Stories                                   | 7:18   |      |      | 100.0 |
-| Active                                    |        | 7:18 |      | 100.0 |
-| Edit release notes for previous sprint    |        |      | 0:15 |   3.4 |
-| Sprint and product backlog grooming       |        |      | 0:18 |   4.1 |
-| Rename archetypes model to physical model |        |      | 0:28 |   6.4 |
-| Rename assets model to logical model      |        |      | 0:29 |   6.6 |
-| Consider renaming "meta-model" namespace  |        |      | 0:37 |   8.4 |
-| Rename engine to orchestration            |        |      | 1:04 |  14.6 |
-| Design and implement new physical types   |        |      | 4:07 |  56.4 |
+| Stories                                   | 8:23   |      |      | 100.0 |
+| Active                                    |        | 8:23 |      | 100.0 |
+| Edit release notes for previous sprint    |        |      | 0:15 |   3.0 |
+| Sprint and product backlog grooming       |        |      | 0:18 |   3.6 |
+| Rename archetypes model to physical model |        |      | 0:28 |   5.6 |
+| Rename assets model to logical model      |        |      | 0:29 |   5.8 |
+| Consider renaming "meta-model" namespace  |        |      | 0:37 |   7.4 |
+| Rename engine to orchestration            |        |      | 1:04 |  12.7 |
+| Design and implement new physical types   |        |      | 5:12 |  62.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -117,6 +117,7 @@ While we were at it we also created namespaces in physical model.
 
 *** STARTED Design and implement new physical types                   :story:
     :LOGBOOK:
+    CLOCK: [2020-03-16 Mon 20:41]--[2020-03-16 Mon 21:46] =>  1:05
     CLOCK: [2020-03-16 Mon 12:42]--[2020-03-16 Mon 16:49] =>  4:07
     :END:
 
@@ -135,6 +136,16 @@ Notes:
 - create a model for the physical world, and replace the archetype
   location repository with it. Kernels return the components of the
   model.
+- kernel model is meta-model.
+- physical model and extraction model need to merge. We must supply
+  the artefact for updates to the formatters.
+- generation has a pair of logical element, artefact (e.g. formattable
+  by another name).
+- physical model properties must exist in the artefact.
+- enablement and overwrites are physical model concerns.
+- artefact / archetype properties are physical model concerns (mainly
+  enablement, really).
+- decoration should move to the logical model.
 
 *** Refactor enablement types                                         :story:
 
@@ -1124,6 +1135,5 @@ Links:
 - [[https://www.reddit.com/r/cpp/comments/996q8o/prepare_thy_pitchforks_a_de_facto_standard/][Prepare thy Pitchforks: A (de facto) Standard Project Layout]]
 - [[https://github.com/vector-of-bool/pitchfork][Pitchfork is a Set of C++ Project Conventions]]
 - [[https://mariuszbartosik.com/directory-structure-for-a-c-project/][Directory Structure for a C++ Project]]
-
 
 ** Deprecated
