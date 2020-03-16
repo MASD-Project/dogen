@@ -20,8 +20,8 @@
  */
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.csharp/types/traits.hpp"
-#include "dogen.assets/types/helpers/meta_name_factory.hpp"
-#include "dogen.assets/types/meta_model/structural/assistant.hpp"
+#include "dogen.logical/types/helpers/meta_name_factory.hpp"
+#include "dogen.logical/types/meta_model/structural/assistant.hpp"
 #include "dogen.generation.csharp/types/formatters/test_data/traits.hpp"
 #include "dogen.generation.csharp/types/formatters/assistant.hpp"
 #include "dogen.generation.csharp/types/formatters/test_data/assistant_formatter.hpp"
@@ -44,8 +44,8 @@ physical::location assistant_formatter::archetype_location() const {
     return r;
 }
 
-const assets::meta_model::name& assistant_formatter::meta_name() const {
-    using assets::helpers::meta_name_factory;
+const logical::meta_model::name& assistant_formatter::meta_name() const {
+    using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_assistant_name());
     return r;
 }
@@ -55,18 +55,18 @@ std::string assistant_formatter::family() const {
 }
 
 boost::filesystem::path assistant_formatter::full_path(
-    const formattables::locator& l, const assets::meta_model::name& n) const {
+    const formattables::locator& l, const logical::meta_model::name& n) const {
     return l.make_full_path(n, static_id());
 }
 
 std::list<std::string> assistant_formatter::
-inclusion_dependencies(const assets::meta_model::element& /*e*/) const {
+inclusion_dependencies(const logical::meta_model::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
 extraction::meta_model::artefact assistant_formatter::format(
-    const context& ctx, const assets::meta_model::element& e) const {
+    const context& ctx, const logical::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location());
     {
         const auto sn(e.name().simple());

@@ -55,7 +55,7 @@ target_link_libraries(${lib_target_name}
     dogen.injection.lib
     dogen.injection.json.lib
     dogen.injection.dia.lib
-    dogen.assets.lib
+    dogen.logical.lib
     dogen.generation.cpp.lib
     dogen.generation.csharp.lib
     dogen.generation.lib

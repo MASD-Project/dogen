@@ -22,7 +22,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
-#include "dogen.assets/io/meta_model/name_io.hpp"
+#include "dogen.logical/io/meta_model/name_io.hpp"
 #include "dogen.generation/hash/meta_model/element_archetype_hash.hpp"
 #include "dogen.generation.cpp/types/formattables/building_error.hpp"
 #include "dogen.generation.cpp/io/formattables/directive_group_io.hpp"
@@ -59,7 +59,7 @@ dependencies_builder::dependencies_builder(
 
 boost::optional<directive_group>
 dependencies_builder::get_directive_group(
-    const assets::meta_model::name& n, const std::string& archetype) const {
+    const logical::meta_model::name& n, const std::string& archetype) const {
     const auto& c(repository_.by_id());
     const auto i(c.find(n.qualified().dot()));
     if (i == c.end())
@@ -72,7 +72,7 @@ dependencies_builder::get_directive_group(
     return j->second;
 }
 
-bool dependencies_builder::is_enabled(const assets::meta_model::name& n,
+bool dependencies_builder::is_enabled(const logical::meta_model::name& n,
     const std::string& archetype) const {
     generation::meta_model::element_archetype
         ea(n.qualified().dot(), archetype);
@@ -99,7 +99,7 @@ add(const std::list<std::string>& inclusion_directives) {
 }
 
 void dependencies_builder::
-add(const assets::meta_model::name& n, const std::string& archetype) {
+add(const logical::meta_model::name& n, const std::string& archetype) {
     BOOST_LOG_SEV(lg, debug) << "Adding name: " << n.qualified().dot();
 
     if (!is_enabled(n, archetype)) {
@@ -116,7 +116,7 @@ add(const assets::meta_model::name& n, const std::string& archetype) {
         BOOST_LOG_SEV(lg, trace) << "Could not find an inclusion directive.";
 }
 
-void dependencies_builder::add(const boost::optional<assets::meta_model::name>& n,
+void dependencies_builder::add(const boost::optional<logical::meta_model::name>& n,
     const std::string& archetype) {
 
     if (!n)
@@ -125,7 +125,7 @@ void dependencies_builder::add(const boost::optional<assets::meta_model::name>& 
     add(*n, archetype);
 }
 
-void dependencies_builder::add(const std::list<assets::meta_model::name>& names,
+void dependencies_builder::add(const std::list<logical::meta_model::name>& names,
     const std::string& archetype) {
     for (const auto& n : names)
         add(n, archetype);

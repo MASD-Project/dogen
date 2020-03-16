@@ -1,7 +1,7 @@
 <#@ masd.stitch.stream_variable_name=a.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::generation::csharp::formatters::test_data #>
-<#@ masd.stitch.inclusion_dependency="dogen.assets/types/meta_model/structural/enumeration.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.assets/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/meta_model/structural/enumeration.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/test_data/traits.hpp" #>
@@ -10,16 +10,16 @@
 <#@ masd.stitch.wale.text_template=csharp_formatter_implementation.wale #>
 <#@ masd.stitch.wale.kvp.class.simple_name=enum_formatter #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=enum #>
-<#@ masd.stitch.wale.kvp.yarn_element=assets::meta_model::structural::enumeration #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::meta_model::structural::enumeration #>
 <#@ masd.stitch.wale.kvp.meta_element=enumeration #>
-<#@ masd.stitch.wale.kvp.meta_name_factory=assets::helpers::meta_name_factory #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
 extraction::meta_model::artefact enum_formatter::format(
-    const context& ctx, const assets::meta_model::element& e) const {
+    const context& ctx, const logical::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location());
-    const auto& ye(a.as<assets::meta_model::structural::enumeration>(static_id(), e));
+    const auto& ye(a.as<logical::meta_model::structural::enumeration>(static_id(), e));
     {
         const auto sn(e.name().simple());
         auto sbf(a.make_scoped_boilerplate_formatter(e));

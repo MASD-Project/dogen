@@ -210,7 +210,7 @@
             <dia:string>#references#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;assets::meta_model::name, assets::meta_model::origin_types&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;logical::meta_model::name, logical::meta_model::origin_types&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -233,7 +233,7 @@
             <dia:string>#leaves#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_set&lt;assets::meta_model::name&gt;#</dia:string>
+            <dia:string>#std::unordered_set&lt;logical::meta_model::name&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -258,7 +258,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>#elements#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::vector&lt;boost::shared_ptr&lt;assets::meta_model::element&gt;&gt;#</dia:string>
+            <dia:string>#std::vector&lt;boost::shared_ptr&lt;logical::meta_model::element&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -281,7 +281,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>#root_module#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;assets::meta_model::structural::module&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;logical::meta_model::structural::module&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -350,7 +350,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>#input_technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#assets::meta_model::technical_space#</dia:string>
+            <dia:string>#logical::meta_model::technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -373,7 +373,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>#output_technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#assets::meta_model::technical_space#</dia:string>
+            <dia:string>#logical::meta_model::technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -396,7 +396,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>#all_technical_spaces#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_set&lt;assets::meta_model::technical_space&gt;#</dia:string>
+            <dia:string>#std::unordered_set&lt;logical::meta_model::technical_space&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -423,7 +423,7 @@ spaces.#</dia:string>
             <dia:string>#orm_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;assets::meta_model::orm::model_properties&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;logical::meta_model::orm::model_properties&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -515,7 +515,7 @@ spaces.#</dia:string>
             <dia:string>#extraction_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#assets::meta_model::extraction_properties#</dia:string>
+            <dia:string>#logical::meta_model::extraction_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -4511,7 +4511,7 @@ model directory.#</dia:string>
 #DOGEN masd.injection.reference=dogen
 #DOGEN masd.injection.reference=dogen.variability
 #DOGEN masd.injection.reference=dogen.tracing
-#DOGEN masd.injection.reference=dogen.assets
+#DOGEN masd.injection.reference=dogen.logical
 #DOGEN masd.injection.reference=dogen.extraction
 #DOGEN masd.injection.reference=masd
 #DOGEN masd.injection.reference=masd.variability
@@ -4648,7 +4648,7 @@ model directory.#</dia:string>
             <dia:string>#name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#assets::meta_model::name#</dia:string>
+            <dia:string>#logical::meta_model::name#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -4783,7 +4783,7 @@ model directory.#</dia:string>
             <dia:string>#meta_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#assets::meta_model::name#</dia:string>
+            <dia:string>#logical::meta_model::name#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -5782,7 +5782,7 @@ model directory.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#assets::meta_model::context#</dia:string>
+                <dia:string>#logical::meta_model::context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -5799,7 +5799,7 @@ model directory.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#assets::meta_model::model#</dia:string>
+                <dia:string>#logical::meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6083,7 +6083,7 @@ model directory.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#assets::meta_model::technical_space#</dia:string>
+            <dia:string>#logical::meta_model::technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6139,7 +6139,7 @@ model directory.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#assets::meta_model::context#</dia:string>
+                <dia:string>#logical::meta_model::context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6173,7 +6173,7 @@ model directory.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#assets::meta_model::model#</dia:string>
+                <dia:string>#logical::meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6303,7 +6303,7 @@ model directory.#</dia:string>
             <dia:string>#transforms_by_technical_space_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;assets::meta_model::technical_space, std::shared_ptr&lt;model_to_extraction_model_transform_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;logical::meta_model::technical_space, std::shared_ptr&lt;model_to_extraction_model_transform_interface&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -6435,7 +6435,7 @@ model directory.#</dia:string>
                 <dia:string>#ts#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#assets::meta_model::technical_space#</dia:string>
+                <dia:string>#logical::meta_model::technical_space#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6457,7 +6457,7 @@ model directory.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;assets::meta_model::technical_space, std::shared_ptr&lt;model_to_extraction_model_transform_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;logical::meta_model::technical_space, std::shared_ptr&lt;model_to_extraction_model_transform_interface&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7691,7 +7691,7 @@ model directory.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#assets::meta_model::model#</dia:string>
+                <dia:string>#logical::meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -10497,7 +10497,7 @@ model directory.#</dia:string>
             <dia:string>#modelines_by_modeline_group_by_technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;assets::meta_model::technical_space, boost::shared_ptr&lt;assets::meta_model::decoration::modeline&gt;&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::unordered_map&lt;logical::meta_model::technical_space, boost::shared_ptr&lt;logical::meta_model::decoration::modeline&gt;&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -10520,7 +10520,7 @@ model directory.#</dia:string>
             <dia:string>#licences_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;assets::meta_model::decoration::licence&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;logical::meta_model::decoration::licence&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -10543,7 +10543,7 @@ model directory.#</dia:string>
             <dia:string>#generation_markers_by_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;assets::meta_model::decoration::generation_marker&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;logical::meta_model::decoration::generation_marker&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -11174,7 +11174,7 @@ model directory.#</dia:string>
                 <dia:string>#ml#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;assets::meta_model::modeline&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;logical::meta_model::modeline&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11191,7 +11191,7 @@ model directory.#</dia:string>
                 <dia:string>#gm#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;assets::meta_model::generation_marker&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;logical::meta_model::generation_marker&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11273,7 +11273,7 @@ model directory.#</dia:string>
                 <dia:string>#ml#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;assets::meta_model::modeline&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;logical::meta_model::modeline&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11521,7 +11521,7 @@ model directory.#</dia:string>
                 <dia:string>#ml#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#assets::meta_model::modeline#</dia:string>
+                <dia:string>#logical::meta_model::modeline#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11770,7 +11770,7 @@ model directory.#</dia:string>
                 <dia:string>#gm#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#assets::meta_model::generation_marker#</dia:string>
+                <dia:string>#logical::meta_model::generation_marker#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13109,7 +13109,7 @@ code: identation and dividers.#</dia:string>
                 <dia:string>#ts#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#assets::meta_model::technical_space#</dia:string>
+                <dia:string>#logical::meta_model::technical_space#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13363,7 +13363,7 @@ code: identation and dividers.#</dia:string>
                 <dia:string>#ts#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#assets::meta_model::technical_space#</dia:string>
+                <dia:string>#logical::meta_model::technical_space#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14103,7 +14103,7 @@ code: identation and dividers.#</dia:string>
                 <dia:string>#ts#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#assets::meta_model::technical_space#</dia:string>
+                <dia:string>#logical::meta_model::technical_space#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14579,7 +14579,7 @@ code: identation and dividers.#</dia:string>
             <dia:string>#technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#assets::meta_model::technical_space#</dia:string>
+            <dia:string>#logical::meta_model::technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

@@ -104,7 +104,7 @@
 #DOGEN masd.injection.reference=dogen
 #DOGEN masd.injection.reference=dogen.variability
 #DOGEN masd.injection.reference=dogen.tracing
-#DOGEN masd.injection.reference=dogen.assets
+#DOGEN masd.injection.reference=dogen.logical
 #DOGEN masd.injection.reference=dogen.extraction
 #DOGEN masd.injection.reference=masd
 #DOGEN masd.injection.reference=masd.variability
@@ -343,7 +343,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#assets::meta_model::technical_space#</dia:string>
+            <dia:string>#logical::meta_model::technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -399,7 +399,7 @@
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#assets::transforms::context#</dia:string>
+                <dia:string>#logical::transforms::context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -433,7 +433,7 @@
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#assets::meta_model::model#</dia:string>
+                <dia:string>#logical::meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -1462,7 +1462,7 @@
                 <dia:string>#e#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const assets::meta_model::element&amp;#</dia:string>
+                <dia:string>#const logical::meta_model::element&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -1527,7 +1527,7 @@
                 <dia:string>#e#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const assets::meta_model::element&amp;#</dia:string>
+                <dia:string>#const logical::meta_model::element&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -4600,7 +4600,7 @@
             <dia:string>#name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#assets::meta_model::name#</dia:string>
+            <dia:string>#logical::meta_model::name#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -4850,7 +4850,7 @@
             <dia:string>#element#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;assets::meta_model::element&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;logical::meta_model::element&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -5408,7 +5408,7 @@
                 <dia:string>#model_name#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const assets::meta_model::name&amp;#</dia:string>
+                <dia:string>#const logical::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -5473,7 +5473,7 @@
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const assets::meta_model::name&amp;#</dia:string>
+                <dia:string>#const logical::meta_model::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -5871,7 +5871,7 @@
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const assets::meta_model::model&amp;#</dia:string>
+                <dia:string>#const logical::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6227,7 +6227,7 @@
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const assets::meta_model::model&amp;#</dia:string>
+                <dia:string>#const logical::meta_model::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

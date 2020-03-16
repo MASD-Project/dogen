@@ -32,11 +32,11 @@
 #include "dogen.extraction/types/meta_model/artefact.hpp"
 #include "dogen.generation/types/formatters/scoped_boilerplate_formatter.hpp"
 #include "dogen.generation/types/formatters/scoped_namespace_formatter.hpp"
-#include "dogen.assets/types/meta_model/name.hpp"
-#include "dogen.assets/types/meta_model/attribute.hpp"
-#include "dogen.assets/types/meta_model/name_tree.hpp"
-#include "dogen.assets/types/meta_model/element.hpp"
-#include "dogen.assets/types/meta_model/structural/object.hpp"
+#include "dogen.logical/types/meta_model/name.hpp"
+#include "dogen.logical/types/meta_model/attribute.hpp"
+#include "dogen.logical/types/meta_model/name_tree.hpp"
+#include "dogen.logical/types/meta_model/element.hpp"
+#include "dogen.logical/types/meta_model/structural/object.hpp"
 #include "dogen.generation.csharp/types/formatters/context.hpp"
 #include "dogen.generation.csharp/types/formattables/helper_properties.hpp"
 #include "dogen.generation.csharp/types/formattables/assistant_properties.hpp"
@@ -46,7 +46,7 @@ namespace dogen::generation::csharp::formatters {
 
 class assistant final {
 public:
-    assistant(const context& ctx, const assets::meta_model::element& e,
+    assistant(const context& ctx, const logical::meta_model::element& e,
         const physical::location& al);
 
 private:
@@ -56,7 +56,7 @@ private:
 public:
     template<typename T>
         static const T& as(const std::string& /*archetype*/,
-            const assets::meta_model::element& e) {
+            const logical::meta_model::element& e) {
         return dynamic_cast<const T&>(e);
     }
 
@@ -66,16 +66,16 @@ public:
      * includes a trailing space.
      */
     static std::string
-    make_inheritance_keyword_text(const assets::meta_model::structural::object& o);
+    make_inheritance_keyword_text(const logical::meta_model::structural::object& o);
 
 public:
     /**
      * @brief Obtains the qualified name.
      */
     /**@{*/
-    std::string get_qualified_name(const assets::meta_model::name& n) const;
+    std::string get_qualified_name(const logical::meta_model::name& n) const;
     std::string
-    get_qualified_name(const assets::meta_model::name_tree& nt) const;
+    get_qualified_name(const logical::meta_model::name_tree& nt) const;
     /**@}*/
 
 public:
@@ -83,9 +83,9 @@ public:
      * @brief Returns a scoped boilerplate formatter.
      */
     generation::formatters::scoped_boilerplate_formatter
-    make_scoped_boilerplate_formatter(const assets::meta_model::element& e,
-        const assets::meta_model::technical_space ts =
-        assets::meta_model::technical_space::csharp);
+    make_scoped_boilerplate_formatter(const logical::meta_model::element& e,
+        const logical::meta_model::technical_space ts =
+        logical::meta_model::technical_space::csharp);
 
     /**
      * @brief Returns a scoped namespace formatter.
@@ -98,11 +98,11 @@ public:
      * @brief returns the c# namespaces for the name.
      */
     std::list<std::string>
-    make_namespaces(const assets::meta_model::name& n) const;
+    make_namespaces(const logical::meta_model::name& n) const;
 
 public:
     std::string
-    reference_equals(const assets::meta_model::attribute& attr) const;
+    reference_equals(const logical::meta_model::attribute& attr) const;
 
 public:
     /**
@@ -117,7 +117,7 @@ public:
 
 public:
     std::string
-    make_argument_name(const assets::meta_model::attribute& attr) const;
+    make_argument_name(const logical::meta_model::attribute& attr) const;
 
 private:
     std::list<std::shared_ptr<formatters::helper_formatter_interface>>
@@ -132,7 +132,7 @@ public:
 
 public:
     boost::optional<formattables::assistant_properties>
-    get_assistant_properties(const assets::meta_model::attribute& attr) const;
+    get_assistant_properties(const logical::meta_model::attribute& attr) const;
 
 public:
     /**
@@ -150,7 +150,7 @@ private:
     std::ostringstream stream_;
     boost::iostreams::filtering_ostream filtering_stream_;
     const std::string element_id_;
-    const assets::meta_model::element& element_;
+    const logical::meta_model::element& element_;
     const context& context_;
     formattables::artefact_properties artefact_properties_;
     const physical::location archetype_location_;

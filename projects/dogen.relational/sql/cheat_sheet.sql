@@ -259,7 +259,7 @@ from (
    where "TRANSFORM_INSTANCE_ID" in (
        select "TRANSFORM_INSTANCE_ID" from "TRANSFORM_EVENT"
        where "RUN_ID" = '1e4f6480-03b4-4581-ae59-a4af4db27fb0'
-       and "PAYLOAD"->>'__type__' = 'dogen::assets::meta_model::model'
+       and "PAYLOAD"->>'__type__' = 'dogen::logical::meta_model::model'
    )
 ) as x
 where x."NAME" = 'cpp_ref_impl.cpp_model.registrar';
@@ -325,7 +325,7 @@ where "PAYLOAD_TYPE" = 'dogen::injection::meta_model::model';
 select "TRANSFORM_INSTANCE_ID", "TRANSFORM_ID",
 cast("PAYLOAD"->'serialization_elements'->'type_registrars' as varchar(50)) "PAYLOAD"
 from transforms_for_run_id('1675f7b9-5ccd-4e9d-8d92-d0b7972031ba')
-where "PAYLOAD_TYPE" = 'dogen::assets::meta_model::model';
+where "PAYLOAD_TYPE" = 'dogen::logical::meta_model::model';
 
 select "TRANSFORM_INSTANCE_ID", "TRANSFORM_ID",
 cast("PAYLOAD"->'elements' as varchar(50)) "PAYLOAD"

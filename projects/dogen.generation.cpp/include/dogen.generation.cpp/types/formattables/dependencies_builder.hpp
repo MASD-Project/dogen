@@ -30,7 +30,7 @@
 #include <unordered_set>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
-#include "dogen.assets/types/meta_model/structural/object.hpp"
+#include "dogen.logical/types/meta_model/structural/object.hpp"
 #include "dogen.generation/types/meta_model/element_archetype.hpp"
 #include "dogen.generation.cpp/types/formattables/directive_group.hpp"
 #include "dogen.generation.cpp/types/formattables/directive_group_repository.hpp"
@@ -56,14 +56,14 @@ private:
      * @pre name must exist in path derivatives collection.
      */
     boost::optional<directive_group>
-    get_directive_group(const assets::meta_model::name& n,
+    get_directive_group(const logical::meta_model::name& n,
         const std::string& archetype) const;
 
 public:
     /**
      * @brief Returns true if the formatter is enabled.
      */
-    bool is_enabled(const assets::meta_model::name& n,
+    bool is_enabled(const logical::meta_model::name& n,
         const std::string& archetype) const;
 
 public:
@@ -81,8 +81,8 @@ public:
      * and name.
      */
     /**@{*/
-    void add(const assets::meta_model::name& n, const std::string& archetype);
-    void add(const boost::optional<assets::meta_model::name>& n,
+    void add(const logical::meta_model::name& n, const std::string& archetype);
+    void add(const boost::optional<logical::meta_model::name>& n,
         const std::string& archetype);
     /**@}*/
 
@@ -90,7 +90,7 @@ public:
      * @brief Adds the inclusion directives for the supplied
      * archetype, for each of the supplied names.
      */
-    void add(const std::list<assets::meta_model::name>& names,
+    void add(const std::list<logical::meta_model::name>& names,
         const std::string& archetype);
 
 public:

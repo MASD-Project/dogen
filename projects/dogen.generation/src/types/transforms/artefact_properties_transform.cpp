@@ -21,16 +21,16 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/types/location_repository.hpp"
-#include "dogen.assets/types/meta_model/element.hpp"
-#include "dogen.assets/types/meta_model/structural/module.hpp"
-#include "dogen.assets/types/meta_model/structural/builtin.hpp"
-#include "dogen.assets/types/meta_model/structural/enumeration.hpp"
-#include "dogen.assets/types/meta_model/structural/primitive.hpp"
-#include "dogen.assets/types/meta_model/structural/object.hpp"
-#include "dogen.assets/types/meta_model/structural/exception.hpp"
-#include "dogen.assets/types/meta_model/structural/visitor.hpp"
-#include "dogen.assets/types/meta_model/structural/object_template.hpp"
-#include "dogen.assets/types/meta_model/artefact_properties.hpp"
+#include "dogen.logical/types/meta_model/element.hpp"
+#include "dogen.logical/types/meta_model/structural/module.hpp"
+#include "dogen.logical/types/meta_model/structural/builtin.hpp"
+#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
+#include "dogen.logical/types/meta_model/structural/primitive.hpp"
+#include "dogen.logical/types/meta_model/structural/object.hpp"
+#include "dogen.logical/types/meta_model/structural/exception.hpp"
+#include "dogen.logical/types/meta_model/structural/visitor.hpp"
+#include "dogen.logical/types/meta_model/structural/object_template.hpp"
+#include "dogen.logical/types/meta_model/artefact_properties.hpp"
 #include "dogen.generation/io/meta_model/model_io.hpp"
 #include "dogen.generation/types/transforms/transformation_error.hpp"
 #include "dogen.generation/types/transforms/artefact_properties_transform.hpp"
@@ -50,7 +50,7 @@ const std::string duplicate_archetype("Duplicate archetype: ");
 namespace dogen::generation::transforms {
 
 void artefact_properties_transform::
-update_element(const context& ctx, assets::meta_model::element& e) {
+update_element(const context& ctx, logical::meta_model::element& e) {
     /*
      * Check to see if the element has any archetypes. Some elements
      * such as object templates do not have any at present.
@@ -76,7 +76,7 @@ update_element(const context& ctx, assets::meta_model::element& e) {
     auto& ap(e.artefact_properties());
     for (const auto& al : i->second.locations()) {
         const auto a(al.archetype());
-        using assets::meta_model::artefact_properties;
+        using logical::meta_model::artefact_properties;
         const auto pair(std::make_pair(a, artefact_properties()));
         const auto inserted(ap.insert(pair).second);
         if (inserted) {

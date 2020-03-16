@@ -82,7 +82,7 @@ public:
     const physical::location_repository_parts&
     archetype_location_repository_parts() const override;
 
-    assets::meta_model::technical_space technical_space() const override;
+    logical::meta_model::technical_space technical_space() const override;
 
     std::unordered_map<std::string,
                        generation::meta_model::intra_backend_segment_properties>

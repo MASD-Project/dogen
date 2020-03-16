@@ -34,7 +34,7 @@
 #include "dogen.templating/types/initializer.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
 #include "dogen.injection/types/features/initializer.hpp"
-#include "dogen.assets/types/features/initializer.hpp"
+#include "dogen.logical/types/features/initializer.hpp"
 #include "dogen.generation/types/features/initializer.hpp"
 #include "dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 #include "dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
@@ -106,7 +106,7 @@ create_archetype_location_repository(
 void context_factory::
 register_variability_entities(variability::helpers::registrar& rg) {
     injection::features::initializer::register_entities(rg);
-    assets::features::initializer::register_entities(rg);
+    logical::features::initializer::register_entities(rg);
     generation::features::initializer::register_entities(rg);
     templating::initializer::register_entities(rg);
     variability::features::initializer::register_entities(rg);

@@ -24,12 +24,12 @@
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
-#include "dogen.assets/types/meta_model/structural/object.hpp"
-#include "dogen.assets/types/meta_model/element.hpp"
-#include "dogen.assets/types/meta_model/structural/exception.hpp"
-#include "dogen.assets/types/meta_model/structural/builtin.hpp"
-#include "dogen.assets/types/meta_model/structural/enumeration.hpp"
-#include "dogen.assets/types/meta_model/element_visitor.hpp"
+#include "dogen.logical/types/meta_model/structural/object.hpp"
+#include "dogen.logical/types/meta_model/element.hpp"
+#include "dogen.logical/types/meta_model/structural/exception.hpp"
+#include "dogen.logical/types/meta_model/structural/builtin.hpp"
+#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
+#include "dogen.logical/types/meta_model/element_visitor.hpp"
 #include "dogen.generation.csharp/types/traits.hpp"
 #include "dogen.generation.csharp/types/formattables/aspect_properties.hpp"
 #include "dogen.generation.csharp/types/formatters/artefact_formatter_interface.hpp"
@@ -45,7 +45,7 @@ static logger lg(logger_factory("generation.csharp.formattables.aspect_expander"
 
 namespace dogen::generation::csharp::formattables {
 
-class aspect_properties_generator : public assets::meta_model::element_visitor {
+class aspect_properties_generator : public logical::meta_model::element_visitor {
 private:
     struct feature_group {
         variability::meta_model::feature requires_static_reference_equals;
@@ -64,11 +64,11 @@ private:
         const std::string& id, const bool is_floating_point = false);
 
 public:
-    using assets::meta_model::element_visitor::visit;
-    void visit(const assets::meta_model::structural::enumeration& e);
-    void visit(const assets::meta_model::structural::exception& e);
-    void visit(const assets::meta_model::structural::object& o);
-    void visit(const assets::meta_model::structural::builtin& p);
+    using logical::meta_model::element_visitor::visit;
+    void visit(const logical::meta_model::structural::enumeration& e);
+    void visit(const logical::meta_model::structural::exception& e);
+    void visit(const logical::meta_model::structural::object& o);
+    void visit(const logical::meta_model::structural::builtin& p);
 
 public:
     const std::unordered_map<std::string, formattables::aspect_properties>&
@@ -116,20 +116,20 @@ void aspect_properties_generator::handle_aspect_properties(
 }
 
 void aspect_properties_generator::
-visit(const assets::meta_model::structural::enumeration& e) {
+visit(const logical::meta_model::structural::enumeration& e) {
     handle_aspect_properties(*e.configuration(), e.name().qualified().dot());
 }
 
 void aspect_properties_generator::
-visit(const assets::meta_model::structural::exception& e) {
+visit(const logical::meta_model::structural::exception& e) {
     handle_aspect_properties(*e.configuration(), e.name().qualified().dot());
 }
 
-void aspect_properties_generator::visit(const assets::meta_model::structural::object& o) {
+void aspect_properties_generator::visit(const logical::meta_model::structural::object& o) {
     handle_aspect_properties(*o.configuration(), o.name().qualified().dot());
 }
 
-void aspect_properties_generator::visit(const assets::meta_model::structural::builtin& p) {
+void aspect_properties_generator::visit(const logical::meta_model::structural::builtin& p) {
     handle_aspect_properties(*p.configuration(), p.name().qualified().dot());
 }
 

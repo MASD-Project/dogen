@@ -33,7 +33,7 @@
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.assets/types/meta_model/name.hpp"
+#include "dogen.logical/types/meta_model/name.hpp"
 #include "dogen.generation.csharp/types/formatters/repository.hpp"
 #include "dogen.generation.csharp/types/formattables/locator_configuration.hpp"
 
@@ -88,7 +88,7 @@ public:
         const variability::meta_model::feature_model& fm,
         const formatters::repository& frp,
         const variability::meta_model::configuration& rcfg,
-        const assets::meta_model::name& model_name,
+        const logical::meta_model::name& model_name,
         const std::unordered_set<std::string>& module_ids,
         const bool enable_backend_directories);
 
@@ -98,7 +98,7 @@ private:
      */
     boost::filesystem::path make_project_path(
         const boost::filesystem::path& output_directory_path,
-        const assets::meta_model::name& model_name,
+        const logical::meta_model::name& model_name,
         const locator_configuration& lc,
         const bool enable_backend_directories) const;
 
@@ -109,7 +109,7 @@ private:
      * folders; it starts at the facet and includes the file name.
      */
     boost::filesystem::path make_facet_path(const std::string& archetype,
-        const std::string& extension, const assets::meta_model::name& n) const;
+        const std::string& extension, const logical::meta_model::name& n) const;
 
 public:
     /**
@@ -122,17 +122,17 @@ public:
         const boost::filesystem::path& full_path) const;
 
 public:
-    boost::filesystem::path make_full_path(const assets::meta_model::name& n,
+    boost::filesystem::path make_full_path(const logical::meta_model::name& n,
         const std::string& archetype) const;
 
     boost::filesystem::path make_full_path_for_project(
-        const assets::meta_model::name& n, const std::string& archetype) const;
+        const logical::meta_model::name& n, const std::string& archetype) const;
 
     boost::filesystem::path make_full_path_for_solution(
-        const assets::meta_model::name& n, const std::string& archetype) const;
+        const logical::meta_model::name& n, const std::string& archetype) const;
 
 private:
-    const assets::meta_model::name& model_name_;
+    const logical::meta_model::name& model_name_;
     const locator_configuration configuration_;
     const std::unordered_set<std::string> module_ids_;
     const boost::filesystem::path project_path_;

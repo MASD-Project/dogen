@@ -45,7 +45,7 @@ const std::string models_json_dir("dogen.models/json");
 
 const std::string path_dogen_variability_dia("dogen.variability.dia");
 const std::string path_dogen_cli_dia("dogen.cli.dia");
-const std::string path_dogen_assets_dia("dogen.assets.dia");
+const std::string path_dogen_logical_dia("dogen.logical.dia");
 const std::string path_dogen_dia("dogen.dia");
 const std::string path_dogen_dia_dia("dogen.dia.dia");
 const std::string path_dogen_extraction_dia("dogen.extraction.dia");
@@ -62,7 +62,7 @@ const std::string path_dogen_utility_dia("dogen.utility.dia");
 
 const std::string path_dogen_cli_json("dogen.cli.json");
 const std::string path_dogen_variability_json("dogen.variability.json");
-const std::string path_dogen_assets_json("dogen.assets.json");
+const std::string path_dogen_logical_json("dogen.logical.json");
 const std::string path_dogen_json("dogen.json");
 const std::string path_dogen_dia_json("dogen.dia.json");
 const std::string path_dogen_extraction_json("dogen.extraction.json");
@@ -154,9 +154,9 @@ path dogen_generation::input_dogen_cli_dia() {
     return dia_models_directory_ / path_dogen_cli_dia;
 }
 
-path dogen_generation::input_dogen_assets_dia() {
+path dogen_generation::input_dogen_logical_dia() {
     ensure_initialized();
-    return dia_models_directory_ / path_dogen_assets_dia;
+    return dia_models_directory_ / path_dogen_logical_dia;
 }
 
 path dogen_generation::input_dogen_dia() {
@@ -234,9 +234,9 @@ path dogen_generation::input_dogen_cli_json() {
     return json_models_directory_ / path_dogen_cli_json;
 }
 
-path dogen_generation::input_dogen_assets_json() {
+path dogen_generation::input_dogen_logical_json() {
     ensure_initialized();
-    return json_models_directory_ / path_dogen_assets_json;
+    return json_models_directory_ / path_dogen_logical_json;
 }
 
 path dogen_generation::input_dogen_json() {

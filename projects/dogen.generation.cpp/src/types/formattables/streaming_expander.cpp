@@ -23,7 +23,7 @@
 #include "dogen.generation.cpp/types/traits.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
-#include "dogen.assets/types/meta_model/element.hpp"
+#include "dogen.logical/types/meta_model/element.hpp"
 #include "dogen.generation.cpp/io/formattables/streaming_properties_io.hpp"
 #include "dogen.generation.cpp/types/formattables/streaming_expander.hpp"
 

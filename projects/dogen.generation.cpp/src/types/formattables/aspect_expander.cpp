@@ -22,8 +22,8 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
-#include "dogen.assets/types/meta_model/element.hpp"
-#include "dogen.assets/types/meta_model/structural/object.hpp"
+#include "dogen.logical/types/meta_model/element.hpp"
+#include "dogen.logical/types/meta_model/structural/object.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
 #include "dogen.generation.cpp/io/formattables/aspect_properties_io.hpp"
 #include "dogen.generation.cpp/types/formattables/aspect_expander.hpp"
@@ -117,7 +117,7 @@ obtain_aspect_properties(
     return r;
 }
 
-void aspect_expander::walk_name_tree(const assets::meta_model::name_tree& nt,
+void aspect_expander::walk_name_tree(const logical::meta_model::name_tree& nt,
     const bool is_top_level, const aspect_properties_type& element_aps,
     aspect_properties& ap) const {
 
@@ -147,7 +147,7 @@ void aspect_expander::walk_name_tree(const assets::meta_model::name_tree& nt,
 
 aspect_properties aspect_expander::compute_aspect_properties(
     const aspect_properties_type& element_aps,
-    const std::list<assets::meta_model::attribute>& attrs) const {
+    const std::list<logical::meta_model::attribute>& attrs) const {
 
     aspect_properties r;
     for (const auto attr : attrs) {
@@ -177,14 +177,14 @@ void aspect_expander::populate_aspect_properties(const std::string& element_id,
      * be build prior to reduction or else we will not get aspects
      * for referenced models.
      */
-    if (ms->origin_type() != assets::meta_model::origin_types::target)
+    if (ms->origin_type() != logical::meta_model::origin_types::target)
         return;
 
     /*
      * We are only interested in yarn objects; all other element
      * types do not need helpers.
      */
-    const auto ptr(dynamic_cast<const assets::meta_model::structural::object*>(ms.get()));
+    const auto ptr(dynamic_cast<const logical::meta_model::structural::object*>(ms.get()));
     if (ptr == nullptr)
         return;
 

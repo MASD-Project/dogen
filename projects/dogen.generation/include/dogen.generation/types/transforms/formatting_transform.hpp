@@ -32,7 +32,7 @@
 #include "dogen.generation/types/transforms/context.hpp"
 #include "dogen.generation/types/meta_model/model.hpp"
 #include "dogen.generation/types/features/formatting.hpp"
-#include "dogen.assets/types/meta_model/formatting_styles.hpp"
+#include "dogen.logical/types/meta_model/formatting_styles.hpp"
 #include "dogen.generation/types/transforms/formatting_configuration.hpp"
 
 namespace dogen::generation::transforms {
@@ -58,7 +58,7 @@ private:
         const variability::meta_model::configuration& cfg);
 
     static void apply(const std::unordered_map<std::string, feature_group> fgs,
-        assets::meta_model::element& e);
+        logical::meta_model::element& e);
 
 public:
     static void apply(const context& ctx, meta_model::model& m);

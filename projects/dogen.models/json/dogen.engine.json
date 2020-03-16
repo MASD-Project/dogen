@@ -10,7 +10,7 @@
     "masd.injection.reference": "dogen.variability",
     "masd.injection.reference": "dogen.tracing",
     "masd.injection.reference": "dogen.injection",
-    "masd.injection.reference": "dogen.assets",
+    "masd.injection.reference": "dogen.logical",
     "masd.injection.reference": "dogen.generation",
     "masd.injection.reference": "dogen.extraction",
     "masd.injection.reference": "masd",
@@ -81,7 +81,7 @@
         },
         {
           "name": "assets_context",
-          "type": "assets::transforms::context"
+          "type": "logical::transforms::context"
         },
         {
           "name": "generation_context",
@@ -154,7 +154,7 @@
       "attributes": [
         {
           "name": "static_stereotypes",
-          "type": "std::list<assets::meta_model::static_stereotypes>"
+          "type": "std::list<logical::meta_model::static_stereotypes>"
         },
         {
           "name": "dynamic_stereotypes",

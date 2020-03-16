@@ -1,7 +1,7 @@
 <#@ masd.stitch.stream_variable_name=a.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::generation::cpp::formatters::types #>
-<#@ masd.stitch.inclusion_dependency="dogen.assets/types/meta_model/variability/initializer.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.assets/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/meta_model/variability/initializer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
@@ -16,17 +16,17 @@
 <#@ masd.stitch.wale.kvp.class.simple_name=variability_initializer_header_formatter #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=variability_initializer_header #>
 <#@ masd.stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
-<#@ masd.stitch.wale.kvp.yarn_element=assets::meta_model::variability::initializer #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::meta_model::variability::initializer #>
 <#@ masd.stitch.wale.kvp.meta_element=variability_initializer #>
-<#@ masd.stitch.wale.kvp.meta_name_factory=assets::helpers::meta_name_factory #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
 std::list<std::string> variability_initializer_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const assets::meta_model::element& /*e*/) const {
+    const logical::meta_model::element& /*e*/) const {
 
-    using assets::meta_model::variability::initializer;
+    using logical::meta_model::variability::initializer;
     auto builder(f.make());
     builder.add("\"dogen.variability/types/meta_model/feature_template.hpp\"");
     builder.add("\"dogen.variability/types/helpers/registrar.hpp\"");
@@ -35,9 +35,9 @@ std::list<std::string> variability_initializer_header_formatter::inclusion_depen
 }
 
 extraction::meta_model::artefact variability_initializer_header_formatter::
-format(const context& ctx, const assets::meta_model::element& e) const {
+format(const context& ctx, const logical::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& o(a.as<assets::meta_model::variability::initializer>(e));
+    const auto& o(a.as<logical::meta_model::variability::initializer>(e));
 
     {
         const auto sn(o.name().simple());

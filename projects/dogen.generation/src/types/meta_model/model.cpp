@@ -18,14 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.assets/types/meta_model/element.hpp"
+#include "dogen.logical/types/meta_model/element.hpp"
 #include "dogen.generation/types/meta_model/model.hpp"
-#include "dogen.assets/types/meta_model/structural/module.hpp"
+#include "dogen.logical/types/meta_model/structural/module.hpp"
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::assets::meta_model::element>& lhs,
-const boost::shared_ptr<dogen::assets::meta_model::element>& rhs) {
+inline bool operator==(const boost::shared_ptr<dogen::logical::meta_model::element>& lhs,
+const boost::shared_ptr<dogen::logical::meta_model::element>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -33,8 +33,8 @@ const boost::shared_ptr<dogen::assets::meta_model::element>& rhs) {
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::assets::meta_model::structural::module>& lhs,
-const boost::shared_ptr<dogen::assets::meta_model::structural::module>& rhs) {
+inline bool operator==(const boost::shared_ptr<dogen::logical::meta_model::structural::module>& lhs,
+const boost::shared_ptr<dogen::logical::meta_model::structural::module>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -44,8 +44,8 @@ namespace dogen::generation::meta_model {
 
 model::model()
     : has_generatable_types_(static_cast<bool>(0)),
-      input_technical_space_(static_cast<dogen::assets::meta_model::technical_space>(0)),
-      output_technical_space_(static_cast<dogen::assets::meta_model::technical_space>(0)) { }
+      input_technical_space_(static_cast<dogen::logical::meta_model::technical_space>(0)),
+      output_technical_space_(static_cast<dogen::logical::meta_model::technical_space>(0)) { }
 
 model::model(model&& rhs)
     : name_(std::move(rhs.name_)),
@@ -68,24 +68,24 @@ model::model(model&& rhs)
       extraction_properties_(std::move(rhs.extraction_properties_)) { }
 
 model::model(
-    const dogen::assets::meta_model::name& name,
-    const dogen::assets::meta_model::name& meta_name,
+    const dogen::logical::meta_model::name& name,
+    const dogen::logical::meta_model::name& meta_name,
     const std::string& origin_sha1_hash,
     const std::string& origin_element_id,
-    const std::unordered_map<dogen::assets::meta_model::name, dogen::assets::meta_model::origin_types>& references,
-    const std::unordered_set<dogen::assets::meta_model::name>& leaves,
-    const std::vector<boost::shared_ptr<dogen::assets::meta_model::element> >& elements,
-    const boost::shared_ptr<dogen::assets::meta_model::structural::module>& root_module,
+    const std::unordered_map<dogen::logical::meta_model::name, dogen::logical::meta_model::origin_types>& references,
+    const std::unordered_set<dogen::logical::meta_model::name>& leaves,
+    const std::vector<boost::shared_ptr<dogen::logical::meta_model::element> >& elements,
+    const boost::shared_ptr<dogen::logical::meta_model::structural::module>& root_module,
     const std::unordered_set<std::string>& module_ids,
     const bool has_generatable_types,
-    const dogen::assets::meta_model::technical_space input_technical_space,
-    const dogen::assets::meta_model::technical_space output_technical_space,
-    const std::unordered_set<dogen::assets::meta_model::technical_space>& all_technical_spaces,
-    const boost::optional<dogen::assets::meta_model::orm::model_properties>& orm_properties,
+    const dogen::logical::meta_model::technical_space input_technical_space,
+    const dogen::logical::meta_model::technical_space output_technical_space,
+    const std::unordered_set<dogen::logical::meta_model::technical_space>& all_technical_spaces,
+    const boost::optional<dogen::logical::meta_model::orm::model_properties>& orm_properties,
     const std::unordered_set<dogen::generation::meta_model::element_archetype>& enabled_archetype_for_element,
     const dogen::generation::meta_model::locator_properties& locator_properties,
     const dogen::generation::meta_model::global_archetype_location_properties& global_archetype_location_properties,
-    const dogen::assets::meta_model::extraction_properties& extraction_properties)
+    const dogen::logical::meta_model::extraction_properties& extraction_properties)
     : name_(name),
       meta_name_(meta_name),
       origin_sha1_hash_(origin_sha1_hash),
@@ -154,35 +154,35 @@ model& model::operator=(model other) {
     return *this;
 }
 
-const dogen::assets::meta_model::name& model::name() const {
+const dogen::logical::meta_model::name& model::name() const {
     return name_;
 }
 
-dogen::assets::meta_model::name& model::name() {
+dogen::logical::meta_model::name& model::name() {
     return name_;
 }
 
-void model::name(const dogen::assets::meta_model::name& v) {
+void model::name(const dogen::logical::meta_model::name& v) {
     name_ = v;
 }
 
-void model::name(const dogen::assets::meta_model::name&& v) {
+void model::name(const dogen::logical::meta_model::name&& v) {
     name_ = std::move(v);
 }
 
-const dogen::assets::meta_model::name& model::meta_name() const {
+const dogen::logical::meta_model::name& model::meta_name() const {
     return meta_name_;
 }
 
-dogen::assets::meta_model::name& model::meta_name() {
+dogen::logical::meta_model::name& model::meta_name() {
     return meta_name_;
 }
 
-void model::meta_name(const dogen::assets::meta_model::name& v) {
+void model::meta_name(const dogen::logical::meta_model::name& v) {
     meta_name_ = v;
 }
 
-void model::meta_name(const dogen::assets::meta_model::name&& v) {
+void model::meta_name(const dogen::logical::meta_model::name&& v) {
     meta_name_ = std::move(v);
 }
 
@@ -218,67 +218,67 @@ void model::origin_element_id(const std::string&& v) {
     origin_element_id_ = std::move(v);
 }
 
-const std::unordered_map<dogen::assets::meta_model::name, dogen::assets::meta_model::origin_types>& model::references() const {
+const std::unordered_map<dogen::logical::meta_model::name, dogen::logical::meta_model::origin_types>& model::references() const {
     return references_;
 }
 
-std::unordered_map<dogen::assets::meta_model::name, dogen::assets::meta_model::origin_types>& model::references() {
+std::unordered_map<dogen::logical::meta_model::name, dogen::logical::meta_model::origin_types>& model::references() {
     return references_;
 }
 
-void model::references(const std::unordered_map<dogen::assets::meta_model::name, dogen::assets::meta_model::origin_types>& v) {
+void model::references(const std::unordered_map<dogen::logical::meta_model::name, dogen::logical::meta_model::origin_types>& v) {
     references_ = v;
 }
 
-void model::references(const std::unordered_map<dogen::assets::meta_model::name, dogen::assets::meta_model::origin_types>&& v) {
+void model::references(const std::unordered_map<dogen::logical::meta_model::name, dogen::logical::meta_model::origin_types>&& v) {
     references_ = std::move(v);
 }
 
-const std::unordered_set<dogen::assets::meta_model::name>& model::leaves() const {
+const std::unordered_set<dogen::logical::meta_model::name>& model::leaves() const {
     return leaves_;
 }
 
-std::unordered_set<dogen::assets::meta_model::name>& model::leaves() {
+std::unordered_set<dogen::logical::meta_model::name>& model::leaves() {
     return leaves_;
 }
 
-void model::leaves(const std::unordered_set<dogen::assets::meta_model::name>& v) {
+void model::leaves(const std::unordered_set<dogen::logical::meta_model::name>& v) {
     leaves_ = v;
 }
 
-void model::leaves(const std::unordered_set<dogen::assets::meta_model::name>&& v) {
+void model::leaves(const std::unordered_set<dogen::logical::meta_model::name>&& v) {
     leaves_ = std::move(v);
 }
 
-const std::vector<boost::shared_ptr<dogen::assets::meta_model::element> >& model::elements() const {
+const std::vector<boost::shared_ptr<dogen::logical::meta_model::element> >& model::elements() const {
     return elements_;
 }
 
-std::vector<boost::shared_ptr<dogen::assets::meta_model::element> >& model::elements() {
+std::vector<boost::shared_ptr<dogen::logical::meta_model::element> >& model::elements() {
     return elements_;
 }
 
-void model::elements(const std::vector<boost::shared_ptr<dogen::assets::meta_model::element> >& v) {
+void model::elements(const std::vector<boost::shared_ptr<dogen::logical::meta_model::element> >& v) {
     elements_ = v;
 }
 
-void model::elements(const std::vector<boost::shared_ptr<dogen::assets::meta_model::element> >&& v) {
+void model::elements(const std::vector<boost::shared_ptr<dogen::logical::meta_model::element> >&& v) {
     elements_ = std::move(v);
 }
 
-const boost::shared_ptr<dogen::assets::meta_model::structural::module>& model::root_module() const {
+const boost::shared_ptr<dogen::logical::meta_model::structural::module>& model::root_module() const {
     return root_module_;
 }
 
-boost::shared_ptr<dogen::assets::meta_model::structural::module>& model::root_module() {
+boost::shared_ptr<dogen::logical::meta_model::structural::module>& model::root_module() {
     return root_module_;
 }
 
-void model::root_module(const boost::shared_ptr<dogen::assets::meta_model::structural::module>& v) {
+void model::root_module(const boost::shared_ptr<dogen::logical::meta_model::structural::module>& v) {
     root_module_ = v;
 }
 
-void model::root_module(const boost::shared_ptr<dogen::assets::meta_model::structural::module>&& v) {
+void model::root_module(const boost::shared_ptr<dogen::logical::meta_model::structural::module>&& v) {
     root_module_ = std::move(v);
 }
 
@@ -306,51 +306,51 @@ void model::has_generatable_types(const bool v) {
     has_generatable_types_ = v;
 }
 
-dogen::assets::meta_model::technical_space model::input_technical_space() const {
+dogen::logical::meta_model::technical_space model::input_technical_space() const {
     return input_technical_space_;
 }
 
-void model::input_technical_space(const dogen::assets::meta_model::technical_space v) {
+void model::input_technical_space(const dogen::logical::meta_model::technical_space v) {
     input_technical_space_ = v;
 }
 
-dogen::assets::meta_model::technical_space model::output_technical_space() const {
+dogen::logical::meta_model::technical_space model::output_technical_space() const {
     return output_technical_space_;
 }
 
-void model::output_technical_space(const dogen::assets::meta_model::technical_space v) {
+void model::output_technical_space(const dogen::logical::meta_model::technical_space v) {
     output_technical_space_ = v;
 }
 
-const std::unordered_set<dogen::assets::meta_model::technical_space>& model::all_technical_spaces() const {
+const std::unordered_set<dogen::logical::meta_model::technical_space>& model::all_technical_spaces() const {
     return all_technical_spaces_;
 }
 
-std::unordered_set<dogen::assets::meta_model::technical_space>& model::all_technical_spaces() {
+std::unordered_set<dogen::logical::meta_model::technical_space>& model::all_technical_spaces() {
     return all_technical_spaces_;
 }
 
-void model::all_technical_spaces(const std::unordered_set<dogen::assets::meta_model::technical_space>& v) {
+void model::all_technical_spaces(const std::unordered_set<dogen::logical::meta_model::technical_space>& v) {
     all_technical_spaces_ = v;
 }
 
-void model::all_technical_spaces(const std::unordered_set<dogen::assets::meta_model::technical_space>&& v) {
+void model::all_technical_spaces(const std::unordered_set<dogen::logical::meta_model::technical_space>&& v) {
     all_technical_spaces_ = std::move(v);
 }
 
-const boost::optional<dogen::assets::meta_model::orm::model_properties>& model::orm_properties() const {
+const boost::optional<dogen::logical::meta_model::orm::model_properties>& model::orm_properties() const {
     return orm_properties_;
 }
 
-boost::optional<dogen::assets::meta_model::orm::model_properties>& model::orm_properties() {
+boost::optional<dogen::logical::meta_model::orm::model_properties>& model::orm_properties() {
     return orm_properties_;
 }
 
-void model::orm_properties(const boost::optional<dogen::assets::meta_model::orm::model_properties>& v) {
+void model::orm_properties(const boost::optional<dogen::logical::meta_model::orm::model_properties>& v) {
     orm_properties_ = v;
 }
 
-void model::orm_properties(const boost::optional<dogen::assets::meta_model::orm::model_properties>&& v) {
+void model::orm_properties(const boost::optional<dogen::logical::meta_model::orm::model_properties>&& v) {
     orm_properties_ = std::move(v);
 }
 
@@ -402,19 +402,19 @@ void model::global_archetype_location_properties(const dogen::generation::meta_m
     global_archetype_location_properties_ = std::move(v);
 }
 
-const dogen::assets::meta_model::extraction_properties& model::extraction_properties() const {
+const dogen::logical::meta_model::extraction_properties& model::extraction_properties() const {
     return extraction_properties_;
 }
 
-dogen::assets::meta_model::extraction_properties& model::extraction_properties() {
+dogen::logical::meta_model::extraction_properties& model::extraction_properties() {
     return extraction_properties_;
 }
 
-void model::extraction_properties(const dogen::assets::meta_model::extraction_properties& v) {
+void model::extraction_properties(const dogen::logical::meta_model::extraction_properties& v) {
     extraction_properties_ = v;
 }
 
-void model::extraction_properties(const dogen::assets::meta_model::extraction_properties&& v) {
+void model::extraction_properties(const dogen::logical::meta_model::extraction_properties&& v) {
     extraction_properties_ = std::move(v);
 }
 

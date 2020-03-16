@@ -25,7 +25,7 @@ namespace dogen::engine::transforms {
 context::context(
     const dogen::variability::transforms::context& variability_context,
     const dogen::injection::transforms::context& injection_context,
-    const dogen::assets::transforms::context& assets_context,
+    const dogen::logical::transforms::context& assets_context,
     const dogen::generation::transforms::context& generation_context,
     const dogen::extraction::transforms::context& extraction_context)
     : variability_context_(variability_context),
@@ -89,19 +89,19 @@ void context::injection_context(const dogen::injection::transforms::context&& v)
     injection_context_ = std::move(v);
 }
 
-const dogen::assets::transforms::context& context::assets_context() const {
+const dogen::logical::transforms::context& context::assets_context() const {
     return assets_context_;
 }
 
-dogen::assets::transforms::context& context::assets_context() {
+dogen::logical::transforms::context& context::assets_context() {
     return assets_context_;
 }
 
-void context::assets_context(const dogen::assets::transforms::context& v) {
+void context::assets_context(const dogen::logical::transforms::context& v) {
     assets_context_ = v;
 }
 
-void context::assets_context(const dogen::assets::transforms::context&& v) {
+void context::assets_context(const dogen::logical::transforms::context&& v) {
     assets_context_ = std::move(v);
 }
 

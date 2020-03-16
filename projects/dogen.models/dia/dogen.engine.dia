@@ -105,7 +105,7 @@
 #DOGEN masd.injection.reference=dogen.variability
 #DOGEN masd.injection.reference=dogen.tracing
 #DOGEN masd.injection.reference=dogen.injection
-#DOGEN masd.injection.reference=dogen.assets
+#DOGEN masd.injection.reference=dogen.logical
 #DOGEN masd.injection.reference=dogen.generation
 #DOGEN masd.injection.reference=dogen.extraction
 #DOGEN masd.injection.reference=masd
@@ -1014,7 +1014,7 @@
             <dia:string>#assets_context#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#assets::transforms::context#</dia:string>
+            <dia:string>#logical::transforms::context#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -1624,7 +1624,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#assets::meta_model::model#</dia:string>
+            <dia:string>#logical::meta_model::model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1650,7 +1650,7 @@
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#assets::transforms::context#</dia:string>
+                <dia:string>#logical::transforms::context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -1801,7 +1801,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#assets::meta_model::model_set#</dia:string>
+            <dia:string>#logical::meta_model::model_set#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1827,7 +1827,7 @@
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#assets::transforms::context#</dia:string>
+                <dia:string>#logical::transforms::context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -2380,7 +2380,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#assets::meta_model::static_stereotypes#</dia:string>
+            <dia:string>#logical::meta_model::static_stereotypes#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2502,7 +2502,7 @@
                 <dia:string>#st#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#assets::meta_model::static_stereotypes#</dia:string>
+                <dia:string>#logical::meta_model::static_stereotypes#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -2524,7 +2524,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;assets::meta_model::static_stereotypes&gt;#</dia:string>
+            <dia:string>#std::list&lt;logical::meta_model::static_stereotypes&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2550,7 +2550,7 @@
                 <dia:string>#ss#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#assets::meta_model::static_stereotypes#</dia:string>
+                <dia:string>#logical::meta_model::static_stereotypes#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -2572,7 +2572,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;assets::meta_model::static_stereotypes&gt;#</dia:string>
+            <dia:string>#std::list&lt;logical::meta_model::static_stereotypes&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2598,7 +2598,7 @@
                 <dia:string>#ss#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#assets::meta_model::static_stereotypes#</dia:string>
+                <dia:string>#logical::meta_model::static_stereotypes#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -2729,7 +2729,7 @@ user defined stereotypes.#</dia:string>
             <dia:string>#static_stereotypes#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;assets::meta_model::static_stereotypes&gt;#</dia:string>
+            <dia:string>#std::list&lt;logical::meta_model::static_stereotypes&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -3187,7 +3187,7 @@ user defined stereotypes.#</dia:string>
                 <dia:string>#cm#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#assets::meta_model::model#</dia:string>
+                <dia:string>#logical::meta_model::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

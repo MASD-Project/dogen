@@ -26,7 +26,7 @@ model::model()
     : cpp_standard_(static_cast<dogen::generation::cpp::formattables::cpp_standards>(0)) { }
 
 model::model(
-    const dogen::assets::meta_model::name& name,
+    const dogen::logical::meta_model::name& name,
     const std::unordered_map<std::string, dogen::generation::cpp::formattables::streaming_properties>& streaming_properties,
     const std::unordered_map<std::string, dogen::generation::cpp::formattables::formattable>& formattables,
     const std::unordered_map<std::string, dogen::generation::cpp::formattables::facet_properties>& facet_properties,
@@ -72,19 +72,19 @@ model& model::operator=(model other) {
     return *this;
 }
 
-const dogen::assets::meta_model::name& model::name() const {
+const dogen::logical::meta_model::name& model::name() const {
     return name_;
 }
 
-dogen::assets::meta_model::name& model::name() {
+dogen::logical::meta_model::name& model::name() {
     return name_;
 }
 
-void model::name(const dogen::assets::meta_model::name& v) {
+void model::name(const dogen::logical::meta_model::name& v) {
     name_ = v;
 }
 
-void model::name(const dogen::assets::meta_model::name&& v) {
+void model::name(const dogen::logical::meta_model::name&& v) {
     name_ = std::move(v);
 }
 

@@ -80,7 +80,7 @@ public:
     element_inclusion_dependencies_type compute_inclusion_dependencies(
         const formatters::repository& frp,
         const dependencies_builder_factory& f,
-        const assets::meta_model::element& e) const;
+        const logical::meta_model::element& e) const;
 
     void populate_inclusion_dependencies(const formatters::repository& frp,
         const dependencies_builder_factory& df,

@@ -31,7 +31,7 @@
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.physical/types/location_repository.hpp"
-#include "dogen.assets/types/meta_model/element.hpp"
+#include "dogen.logical/types/meta_model/element.hpp"
 #include "dogen.generation/types/meta_model/element_archetype.hpp"
 #include "dogen.generation/types/meta_model/backend_properties.hpp"
 #include "dogen.generation/types/meta_model/facet_properties.hpp"
@@ -112,7 +112,7 @@ private:
 
     static std::unordered_map<
         std::string,
-        assets::meta_model::local_archetype_location_properties>
+        logical::meta_model::local_archetype_location_properties>
     obtain_local_archetype_location_properties(
         const std::unordered_map<std::string,
         local_archetype_feature_group>& fgs,

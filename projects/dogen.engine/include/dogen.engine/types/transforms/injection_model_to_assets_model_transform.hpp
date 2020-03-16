@@ -31,10 +31,10 @@
 #include <unordered_map>
 #include "dogen.variability/types/meta_model/feature_model.hpp"
 #include "dogen.injection/types/meta_model/model.hpp"
-#include "dogen.assets/types/meta_model/element.hpp"
-#include "dogen.assets/types/meta_model/location.hpp"
-#include "dogen.assets/types/meta_model/attribute.hpp"
-#include "dogen.assets/types/meta_model/model.hpp"
+#include "dogen.logical/types/meta_model/element.hpp"
+#include "dogen.logical/types/meta_model/location.hpp"
+#include "dogen.logical/types/meta_model/attribute.hpp"
+#include "dogen.logical/types/meta_model/model.hpp"
 #include "dogen.engine/types/transforms/context_fwd.hpp"
 #include "dogen.engine/types/helpers/adapter.hpp"
 
@@ -45,20 +45,20 @@ namespace dogen::engine::transforms {
  */
 class injection_model_to_assets_model_transform final {
 private:
-    static assets::meta_model::location
+    static logical::meta_model::location
     create_location(const context& ctx, const injection::meta_model::model& m);
 
-    static assets::meta_model::static_stereotypes compute_element_type(
-        const std::list<assets::meta_model::static_stereotypes>& st,
+    static logical::meta_model::static_stereotypes compute_element_type(
+        const std::list<logical::meta_model::static_stereotypes>& st,
         const std::string& fallback_element_type);
 
     static void process_element(const helpers::adapter& ad,
-        const assets::meta_model::location& l,
+        const logical::meta_model::location& l,
         const injection::meta_model::element& ie,
-        assets::meta_model::model& m);
+        logical::meta_model::model& m);
 
 public:
-    static assets::meta_model::model
+    static logical::meta_model::model
     apply(const context& ctx, const injection::meta_model::model& m);
 };
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.assets/types/meta_model/structural/builtin.hpp"
-#include "dogen.assets/types/helpers/meta_name_factory.hpp"
+#include "dogen.logical/types/meta_model/structural/builtin.hpp"
+#include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/traits.hpp"
@@ -47,8 +47,8 @@ builtin_header_formatter::archetype_location() const {
     return r;
 }
 
-const assets::meta_model::name& builtin_header_formatter::meta_name() const {
-    using assets::helpers::meta_name_factory;
+const logical::meta_model::name& builtin_header_formatter::meta_name() const {
+    using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_builtin_name());
     return r;
 }
@@ -62,24 +62,24 @@ inclusion_support_types builtin_header_formatter::inclusion_support_type() const
 }
 
 boost::filesystem::path builtin_header_formatter::inclusion_path(
-    const formattables::locator& l, const assets::meta_model::name& n) const {
+    const formattables::locator& l, const logical::meta_model::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_id());
 }
 
 boost::filesystem::path builtin_header_formatter::full_path(
-    const formattables::locator& l, const assets::meta_model::name& n) const {
+    const formattables::locator& l, const logical::meta_model::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_id());
 }
 
 std::list<std::string> builtin_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
-    const assets::meta_model::element& /*e*/) const {
+    const logical::meta_model::element& /*e*/) const {
     static const std::list<std::string> r;
     return r;
 }
 
 extraction::meta_model::artefact builtin_header_formatter::
-format(const context& /*ctx*/, const assets::meta_model::element& e) const {
+format(const context& /*ctx*/, const logical::meta_model::element& e) const {
     extraction::meta_model::artefact r;
     r.origin_element_id(e.origin_element_id());
     r.origin_sha1_hash(e.origin_sha1_hash());

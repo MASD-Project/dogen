@@ -24,10 +24,10 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.assets/io/meta_model/model_io.hpp"
-#include "dogen.assets/io/meta_model/technical_space_io.hpp"
-#include "dogen.assets/types/helpers/meta_name_factory.hpp"
-#include "dogen.assets/types/meta_model/elements_traversal.hpp"
+#include "dogen.logical/io/meta_model/model_io.hpp"
+#include "dogen.logical/io/meta_model/technical_space_io.hpp"
+#include "dogen.logical/types/helpers/meta_name_factory.hpp"
+#include "dogen.logical/types/meta_model/elements_traversal.hpp"
 #include "dogen.generation/io/meta_model/model_io.hpp"
 #include "dogen.engine/types/transforms/transform_exception.hpp"
 #include "dogen.engine/types/transforms/assets_model_to_generation_model_transform.hpp"
@@ -64,7 +64,7 @@ private:
         }
     }
 
-    void add(boost::shared_ptr<assets::meta_model::element> e) {
+    void add(boost::shared_ptr<logical::meta_model::element> e) {
         const auto id(e->name().qualified().dot());
         ensure_not_yet_processed(id);
         processed_ids_.insert(id);
@@ -72,18 +72,18 @@ private:
     }
 
 public:
-    void operator()(boost::shared_ptr<assets::meta_model::element> e) {
+    void operator()(boost::shared_ptr<logical::meta_model::element> e) {
         add(e);
     }
     void operator()
-    (boost::shared_ptr<assets::meta_model::structural::module> m) {
+    (boost::shared_ptr<logical::meta_model::structural::module> m) {
         result_.module_ids().insert(m->name().qualified().dot());
         add(m);
     }
 
 public:
     void add(
-        const std::list<boost::shared_ptr<assets::meta_model::element>>& ie) {
+        const std::list<boost::shared_ptr<logical::meta_model::element>>& ie) {
         for (const auto& e : ie)
             add(e);
     }
@@ -99,7 +99,7 @@ private:
 }
 
 std::size_t assets_model_to_generation_model_transform::
-compute_total_size(const assets::meta_model::model& m) {
+compute_total_size(const logical::meta_model::model& m) {
     std::size_t r;
     r = m.structural_elements().modules().size();
     r += m.structural_elements().object_templates().size();
@@ -125,10 +125,10 @@ compute_total_size(const assets::meta_model::model& m) {
 }
 
 generation::meta_model::model assets_model_to_generation_model_transform::
-apply(const assets::meta_model::model& m) {
+apply(const logical::meta_model::model& m) {
     generation::meta_model::model r;
     r.name(m.name());
-    r.meta_name(assets::helpers::meta_name_factory::make_model_name());
+    r.meta_name(logical::helpers::meta_name_factory::make_model_name());
 
     r.input_technical_space(m.input_technical_space());
     if (m.output_technical_spaces().size() != 1) {
@@ -153,7 +153,7 @@ apply(const assets::meta_model::model& m) {
     r.elements().reserve(size);
 
     model_populator mp(r);
-    assets::meta_model::shared_elements_traversal(m, mp);
+    logical::meta_model::shared_elements_traversal(m, mp);
 
     return r;
 }
@@ -161,7 +161,7 @@ apply(const assets::meta_model::model& m) {
 std::list<generation::meta_model::model>
 assets_model_to_generation_model_transform::
 apply(const generation::transforms::context& ctx,
-    const std::list<assets::meta_model::model>& ms) {
+    const std::list<logical::meta_model::model>& ms) {
     tracing::scoped_transform_tracer stp(lg,
         "assets model to generation model transform",
         transform_id, *ctx.tracer(), ms);

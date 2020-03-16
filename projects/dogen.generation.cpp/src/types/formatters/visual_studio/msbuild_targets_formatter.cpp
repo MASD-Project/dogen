@@ -20,8 +20,8 @@
  */
 #include <boost/make_shared.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.assets/types/helpers/meta_name_factory.hpp"
-#include "dogen.assets/types/meta_model/visual_studio/msbuild_targets.hpp"
+#include "dogen.logical/types/helpers/meta_name_factory.hpp"
+#include "dogen.logical/types/meta_model/visual_studio/msbuild_targets.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/formatters/visual_studio/traits.hpp"
@@ -51,8 +51,8 @@ msbuild_targets_formatter::archetype_location() const {
     return r;
 }
 
-const assets::meta_model::name& msbuild_targets_formatter::meta_name() const {
-    using assets::helpers::meta_name_factory;
+const logical::meta_model::name& msbuild_targets_formatter::meta_name() const {
+    using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_visual_studio_msbuild_targets_name());
     return r;
 }
@@ -67,7 +67,7 @@ msbuild_targets_formatter::inclusion_support_type() const {
 }
 
 boost::filesystem::path msbuild_targets_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const assets::meta_model::name& n) const {
+    const formattables::locator& /*l*/, const logical::meta_model::name& n) const {
 
     using namespace dogen::utility::log;
     using namespace dogen::generation::cpp::formatters;
@@ -80,25 +80,25 @@ boost::filesystem::path msbuild_targets_formatter::inclusion_path(
 }
 
 boost::filesystem::path msbuild_targets_formatter::full_path(
-    const formattables::locator& l, const assets::meta_model::name& n) const {
+    const formattables::locator& l, const logical::meta_model::name& n) const {
     return l.make_full_path_for_msbuild_targets(n, static_id());
 }
 
 std::list<std::string> msbuild_targets_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
-    const assets::meta_model::element& /*e*/) const {
+    const logical::meta_model::element& /*e*/) const {
     static std::list<std::string> r;
     return r;
 }
 
 extraction::meta_model::artefact msbuild_targets_formatter::
-format(const context& ctx, const assets::meta_model::element& e) const {
+format(const context& ctx, const logical::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    using assets::meta_model::visual_studio::msbuild_targets;
+    using logical::meta_model::visual_studio::msbuild_targets;
     const auto& c(a.as<msbuild_targets>(e));
 
     {
-        const auto ts(assets::meta_model::technical_space::xml);
+        const auto ts(logical::meta_model::technical_space::xml);
         a.make_decoration_preamble(e, ts);
         const auto model_name(a.get_identifiable_model_name(c.name()));
         const auto product_name(a.get_product_name(c.name()));

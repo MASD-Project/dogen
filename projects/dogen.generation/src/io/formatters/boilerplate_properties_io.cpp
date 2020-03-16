@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.assets/io/meta_model/technical_space_io.hpp"
+#include "dogen.logical/io/meta_model/technical_space_io.hpp"
 #include "dogen.generation/io/formatters/boilerplate_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {

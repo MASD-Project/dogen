@@ -27,7 +27,7 @@
 
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "dogen.assets/types/meta_model/element_fwd.hpp"
+#include "dogen.logical/types/meta_model/element_fwd.hpp"
 #include "dogen.generation.cpp/types/formattables/element_properties.hpp"
 
 namespace dogen::generation::cpp::formattables {
@@ -41,14 +41,14 @@ public:
 
 public:
     formattable(
-        const boost::shared_ptr<dogen::assets::meta_model::element>& element,
+        const boost::shared_ptr<dogen::logical::meta_model::element>& element,
         const dogen::generation::cpp::formattables::element_properties& element_properties);
 
 public:
-    const boost::shared_ptr<dogen::assets::meta_model::element>& element() const;
-    boost::shared_ptr<dogen::assets::meta_model::element>& element();
-    void element(const boost::shared_ptr<dogen::assets::meta_model::element>& v);
-    void element(const boost::shared_ptr<dogen::assets::meta_model::element>&& v);
+    const boost::shared_ptr<dogen::logical::meta_model::element>& element() const;
+    boost::shared_ptr<dogen::logical::meta_model::element>& element();
+    void element(const boost::shared_ptr<dogen::logical::meta_model::element>& v);
+    void element(const boost::shared_ptr<dogen::logical::meta_model::element>&& v);
 
     const dogen::generation::cpp::formattables::element_properties& element_properties() const;
     dogen::generation::cpp::formattables::element_properties& element_properties();
@@ -66,7 +66,7 @@ public:
     formattable& operator=(formattable other);
 
 private:
-    boost::shared_ptr<dogen::assets::meta_model::element> element_;
+    boost::shared_ptr<dogen::logical::meta_model::element> element_;
     dogen::generation::cpp::formattables::element_properties element_properties_;
 };
 

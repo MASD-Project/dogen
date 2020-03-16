@@ -27,7 +27,7 @@
 
 #include "dogen.variability/types/helpers/configuration_factory.hpp"
 #include "dogen.extraction/types/meta_model/artefact.hpp"
-#include "dogen.assets/types/meta_model/element_fwd.hpp"
+#include "dogen.logical/types/meta_model/element_fwd.hpp"
 #include "dogen.templating/types/stitch/instantiator.hpp"
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
 #include "dogen.generation.cpp/types/formattables/artefact_properties.hpp"
@@ -47,7 +47,7 @@ private:
 public:
     extraction::meta_model::artefact
     format(const artefact_formatter_interface& stock_formatter,
-        const context& ctx, const assets::meta_model::element& e) const;
+        const context& ctx, const logical::meta_model::element& e) const;
 
 private:
     const templating::stitch::instantiator instantiator_;

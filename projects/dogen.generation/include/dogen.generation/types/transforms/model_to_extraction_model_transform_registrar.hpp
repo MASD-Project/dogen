@@ -30,8 +30,8 @@
 #include <memory>
 #include <unordered_map>
 #include "dogen.physical/types/location.hpp"
-#include "dogen.assets/types/meta_model/technical_space.hpp"
-#include "dogen.assets/hash/meta_model/technical_space_hash.hpp"
+#include "dogen.logical/types/meta_model/technical_space.hpp"
+#include "dogen.logical/hash/meta_model/technical_space_hash.hpp"
 #include "dogen.generation/types/transforms/model_to_extraction_model_transform_interface.hpp"
 
 namespace dogen::generation::transforms {
@@ -62,18 +62,18 @@ public:
      */
     std::shared_ptr<model_to_extraction_model_transform_interface>
     transform_for_technical_space(
-        const assets::meta_model::technical_space ts) const;
+        const logical::meta_model::technical_space ts) const;
 
     /**
      * @brief Returns all available transforms, by technical space.
      */
     const std::unordered_map<
-        assets::meta_model::technical_space,
+        logical::meta_model::technical_space,
         std::shared_ptr<model_to_extraction_model_transform_interface>>&
     transforms_by_technical_space() const;
 
 private:
-    std::unordered_map<assets::meta_model::technical_space,
+    std::unordered_map<logical::meta_model::technical_space,
     std::shared_ptr<model_to_extraction_model_transform_interface>>
     transforms_by_technical_space_;
 };

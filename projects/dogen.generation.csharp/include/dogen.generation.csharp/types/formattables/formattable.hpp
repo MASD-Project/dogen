@@ -27,7 +27,7 @@
 
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "dogen.assets/types/meta_model/element_fwd.hpp"
+#include "dogen.logical/types/meta_model/element_fwd.hpp"
 #include "dogen.generation.csharp/types/formattables/element_properties.hpp"
 
 namespace dogen::generation::csharp::formattables {
@@ -42,7 +42,7 @@ public:
 public:
     formattable(
         const dogen::generation::csharp::formattables::element_properties& element_properties,
-        const boost::shared_ptr<dogen::assets::meta_model::element>& element);
+        const boost::shared_ptr<dogen::logical::meta_model::element>& element);
 
 public:
     const dogen::generation::csharp::formattables::element_properties& element_properties() const;
@@ -50,10 +50,10 @@ public:
     void element_properties(const dogen::generation::csharp::formattables::element_properties& v);
     void element_properties(const dogen::generation::csharp::formattables::element_properties&& v);
 
-    const boost::shared_ptr<dogen::assets::meta_model::element>& element() const;
-    boost::shared_ptr<dogen::assets::meta_model::element>& element();
-    void element(const boost::shared_ptr<dogen::assets::meta_model::element>& v);
-    void element(const boost::shared_ptr<dogen::assets::meta_model::element>&& v);
+    const boost::shared_ptr<dogen::logical::meta_model::element>& element() const;
+    boost::shared_ptr<dogen::logical::meta_model::element>& element();
+    void element(const boost::shared_ptr<dogen::logical::meta_model::element>& v);
+    void element(const boost::shared_ptr<dogen::logical::meta_model::element>&& v);
 
 public:
     bool operator==(const formattable& rhs) const;
@@ -67,7 +67,7 @@ public:
 
 private:
     dogen::generation::csharp::formattables::element_properties element_properties_;
-    boost::shared_ptr<dogen::assets::meta_model::element> element_;
+    boost::shared_ptr<dogen::logical::meta_model::element> element_;
 };
 
 }

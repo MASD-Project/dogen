@@ -21,9 +21,9 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/join.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.assets/types/meta_model/structural/object.hpp"
-#include "dogen.assets/types/helpers/meta_name_factory.hpp"
-#include "dogen.assets/types/helpers/name_factory.hpp"
+#include "dogen.logical/types/meta_model/structural/object.hpp"
+#include "dogen.logical/types/helpers/meta_name_factory.hpp"
+#include "dogen.logical/types/helpers/name_factory.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
@@ -57,8 +57,8 @@ class_implementation_formatter::archetype_location() const {
     return r;
 }
 
-const assets::meta_model::name& class_implementation_formatter::meta_name() const {
-    using assets::helpers::meta_name_factory;
+const logical::meta_model::name& class_implementation_formatter::meta_name() const {
+    using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_object_name());
     return r;
 }
@@ -72,7 +72,7 @@ inclusion_support_types class_implementation_formatter::inclusion_support_type()
 }
 
 boost::filesystem::path class_implementation_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const assets::meta_model::name& n) const {
+    const formattables::locator& /*l*/, const logical::meta_model::name& n) const {
 
     using namespace dogen::utility::log;
     static logger lg(
@@ -84,15 +84,15 @@ boost::filesystem::path class_implementation_formatter::inclusion_path(
 }
 
 boost::filesystem::path class_implementation_formatter::full_path(
-    const formattables::locator& l, const assets::meta_model::name& n) const {
+    const formattables::locator& l, const logical::meta_model::name& n) const {
     return l.make_full_path_for_tests_cpp_implementation(n, static_id());
 }
 
 std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const assets::meta_model::element& e) const {
+    const logical::meta_model::element& e) const {
 
-    using assets::meta_model::structural::object;
+    using logical::meta_model::structural::object;
     const auto& o(assistant::as<object>(e));
     auto builder(f.make());
     builder.add(o.name(), types::traits::class_header_archetype());
@@ -147,9 +147,9 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
 }
 
 extraction::meta_model::artefact class_implementation_formatter::
-format(const context& ctx, const assets::meta_model::element& e) const {
+format(const context& ctx, const logical::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& o(a.as<assets::meta_model::structural::object>(e));
+    const auto& o(a.as<logical::meta_model::structural::object>(e));
     {
         auto sbf(a.make_scoped_boilerplate_formatter(o));
         const auto qn(a.get_qualified_name(o.name()));

@@ -32,8 +32,8 @@
 #include "dogen.variability/types/meta_model/feature.hpp"
 #include "dogen.variability/types/meta_model/configuration.hpp"
 #include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.assets/types/meta_model/name_tree.hpp"
-#include "dogen.assets/types/meta_model/attribute.hpp"
+#include "dogen.logical/types/meta_model/name_tree.hpp"
+#include "dogen.logical/types/meta_model/attribute.hpp"
 #include "dogen.generation.cpp/types/formattables/formattable.hpp"
 #include "dogen.generation.cpp/types/formattables/aspect_properties.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
@@ -65,13 +65,13 @@ private:
         const std::unordered_map<std::string, formattable>& formattables) const;
 
 private:
-    void walk_name_tree(const assets::meta_model::name_tree& nt,
+    void walk_name_tree(const logical::meta_model::name_tree& nt,
         const bool is_top_level, const aspect_properties_type& element_aps,
         aspect_properties& ap) const;
 
     aspect_properties compute_aspect_properties(
         const aspect_properties_type& element_aps,
-        const std::list<assets::meta_model::attribute>& attrs) const;
+        const std::list<logical::meta_model::attribute>& attrs) const;
 
     void populate_aspect_properties(const std::string& element_id,
         const aspect_properties_type& element_aps,

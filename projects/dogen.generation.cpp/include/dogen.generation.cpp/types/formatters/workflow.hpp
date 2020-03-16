@@ -34,7 +34,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.variability/types/helpers/configuration_factory.hpp"
 #include "dogen.extraction/types/meta_model/artefact.hpp"
-#include "dogen.assets/types/meta_model/element.hpp"
+#include "dogen.logical/types/meta_model/element.hpp"
 #include "dogen.generation/types/meta_model/element_archetype.hpp"
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
@@ -60,15 +60,15 @@ public:
     static cpp::formatters::registrar& registrar();
 
 private:
-    const assets::meta_model::artefact_properties&
-    get_artefact_properties(const assets::meta_model::element& e,
+    const logical::meta_model::artefact_properties&
+    get_artefact_properties(const logical::meta_model::element& e,
         const std::string& archetype) const;
 
 private:
     std::list<extraction::meta_model::artefact>
     format(const std::unordered_set<generation::meta_model::element_archetype>&
         enabled_archetype_for_element, const formattables::model& fm,
-        const assets::meta_model::element& e,
+        const logical::meta_model::element& e,
         const formattables::element_properties& ep) const;
 
 public:

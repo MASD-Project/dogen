@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.assets/types/meta_model/structural/primitive.hpp"
-#include "dogen.assets/types/helpers/meta_name_factory.hpp"
+#include "dogen.logical/types/meta_model/structural/primitive.hpp"
+#include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/formatters/types/primitive_forward_declarations_formatter.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
@@ -44,8 +44,8 @@ primitive_forward_declarations_formatter::archetype_location() const {
     return r;
 }
 
-const assets::meta_model::name& primitive_forward_declarations_formatter::meta_name() const {
-    using assets::helpers::meta_name_factory;
+const logical::meta_model::name& primitive_forward_declarations_formatter::meta_name() const {
+    using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_primitive_name());
     return r;
 }
@@ -59,26 +59,26 @@ inclusion_support_types primitive_forward_declarations_formatter::inclusion_supp
 }
 
 boost::filesystem::path primitive_forward_declarations_formatter::inclusion_path(
-    const formattables::locator& l, const assets::meta_model::name& n) const {
+    const formattables::locator& l, const logical::meta_model::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_id());
 }
 
 boost::filesystem::path primitive_forward_declarations_formatter::full_path(
-    const formattables::locator& l, const assets::meta_model::name& n) const {
+    const formattables::locator& l, const logical::meta_model::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_id());
 }
 
 std::list<std::string> primitive_forward_declarations_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
-    const assets::meta_model::element& /*e*/) const {
+    const logical::meta_model::element& /*e*/) const {
     static std::list<std::string> r;
     return r;
 }
 
 extraction::meta_model::artefact primitive_forward_declarations_formatter::
-format(const context& ctx, const assets::meta_model::element& e) const {
+format(const context& ctx, const logical::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& p(a.as<assets::meta_model::structural::primitive>(e));
+    const auto& p(a.as<logical::meta_model::structural::primitive>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(p));

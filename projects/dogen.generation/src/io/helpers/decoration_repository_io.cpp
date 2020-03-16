@@ -20,11 +20,11 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.assets/io/meta_model/technical_space_io.hpp"
-#include "dogen.assets/io/meta_model/decoration/licence_io.hpp"
-#include "dogen.assets/io/meta_model/decoration/modeline_io.hpp"
+#include "dogen.logical/io/meta_model/technical_space_io.hpp"
+#include "dogen.logical/io/meta_model/decoration/licence_io.hpp"
+#include "dogen.logical/io/meta_model/decoration/modeline_io.hpp"
 #include "dogen.generation/io/helpers/decoration_repository_io.hpp"
-#include "dogen.assets/io/meta_model/decoration/generation_marker_io.hpp"
+#include "dogen.logical/io/meta_model/decoration/generation_marker_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -36,7 +36,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::assets::meta_model::decoration::modeline>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::logical::meta_model::decoration::modeline>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -52,7 +52,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::assets::meta_model::technical_space, boost::shared_ptr<dogen::assets::meta_model::decoration::modeline> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::logical::meta_model::technical_space, boost::shared_ptr<dogen::logical::meta_model::decoration::modeline> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -70,7 +70,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::unordered_map<dogen::assets::meta_model::technical_space, boost::shared_ptr<dogen::assets::meta_model::decoration::modeline> > >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::unordered_map<dogen::logical::meta_model::technical_space, boost::shared_ptr<dogen::logical::meta_model::decoration::modeline> > >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -88,7 +88,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::assets::meta_model::decoration::licence>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::logical::meta_model::decoration::licence>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -104,7 +104,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::decoration::licence> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::meta_model::decoration::licence> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -122,7 +122,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::assets::meta_model::decoration::generation_marker>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::logical::meta_model::decoration::generation_marker>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -138,7 +138,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<dogen::assets::meta_model::decoration::generation_marker> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<dogen::logical::meta_model::decoration::generation_marker> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

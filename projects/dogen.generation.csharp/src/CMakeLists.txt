@@ -36,7 +36,7 @@ set_target_properties(${lib_target_name}
 target_link_libraries(${lib_target_name}
     dogen.variability.lib
     dogen.extraction.lib
-    dogen.assets.lib
+    dogen.logical.lib
     ${Boost_LIBRARIES})
 
 install(TARGETS ${lib_target_name}

@@ -50,7 +50,7 @@ public:
 public:
     static boost::filesystem::path input_dogen_variability_dia();
     static boost::filesystem::path input_dogen_cli_dia();
-    static boost::filesystem::path input_dogen_assets_dia();
+    static boost::filesystem::path input_dogen_logical_dia();
     static boost::filesystem::path input_dogen_dia();
     static boost::filesystem::path input_dogen_dia_dia();
     static boost::filesystem::path input_dogen_extraction_dia();
@@ -68,7 +68,7 @@ public:
 public:
     static boost::filesystem::path input_dogen_variability_json();
     static boost::filesystem::path input_dogen_cli_json();
-    static boost::filesystem::path input_dogen_assets_json();
+    static boost::filesystem::path input_dogen_logical_json();
     static boost::filesystem::path input_dogen_json();
     static boost::filesystem::path input_dogen_dia_json();
     static boost::filesystem::path input_dogen_extraction_json();

@@ -21,7 +21,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.injection/types/transforms/model_set_production_chain.hpp"
-#include "dogen.assets/types/transforms/model_production_chain.hpp"
+#include "dogen.logical/types/transforms/model_production_chain.hpp"
 #include "dogen.generation/types/transforms/model_generation_chain.hpp"
 #include "dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 #include "dogen.extraction/io/meta_model/model_io.hpp"
@@ -70,7 +70,7 @@ extraction_model_production_chain::apply(const context& ctx,
     /*
      * Run all the assets transforms against the model set.
      */
-    const auto cms(assets::transforms::model_production_chain::
+    const auto cms(logical::transforms::model_production_chain::
         apply(ctx.assets_context(), cmset));
 
     /*

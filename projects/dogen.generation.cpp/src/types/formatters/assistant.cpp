@@ -27,8 +27,8 @@
 #include "dogen.generation/types/formatters/indent_filter.hpp"
 #include "dogen.generation/types/formatters/comment_formatter.hpp"
 #include "dogen.utility/types/formatters/utility_formatter.hpp"
-#include "dogen.assets/types/helpers/name_flattener.hpp"
-#include "dogen.assets/types/meta_model/structural/primitive.hpp"
+#include "dogen.logical/types/helpers/name_flattener.hpp"
+#include "dogen.logical/types/meta_model/structural/primitive.hpp"
 #include "dogen.generation/hash/meta_model/element_archetype_hash.hpp"
 #include "dogen.generation/types/formatters/boilerplate_properties.hpp"
 #include "dogen.generation.cpp/io/formattables/streaming_properties_io.hpp"
@@ -85,7 +85,7 @@ const std::string helpless_family("No registered helpers found for family: ");
 namespace dogen::generation::cpp::formatters {
 
 assistant::
-assistant(const context& ctx, const assets::meta_model::element& e,
+assistant(const context& ctx, const logical::meta_model::element& e,
     const physical::location& al, const bool requires_header_guard)
     : element_(e), context_(ctx),
       artefact_properties_(
@@ -123,7 +123,7 @@ void assistant::validate() const {
 }
 
 std::string assistant::
-make_final_keyword_text(const assets::meta_model::structural::object& o) const {
+make_final_keyword_text(const logical::meta_model::structural::object& o) const {
     if (is_cpp_standard_98())
         return empty;
 
@@ -145,13 +145,13 @@ std::string assistant::make_noexcept_keyword_text() const {
 }
 
 std::string
-assistant::make_by_ref_text(const assets::meta_model::attribute& attr) {
+assistant::make_by_ref_text(const logical::meta_model::attribute& attr) {
     return attr.parsed_type().is_current_simple_type() ? empty : by_ref_text;
 }
 
 std::string assistant::
 make_setter_return_type(const std::string& containing_type_name,
-    const assets::meta_model::attribute& attr) {
+    const logical::meta_model::attribute& attr) {
 
     std::ostringstream s;
     if (attr.is_fluent())
@@ -163,17 +163,17 @@ make_setter_return_type(const std::string& containing_type_name,
 }
 
 std::string
-assistant::get_qualified_name(const assets::meta_model::name& n) const {
+assistant::get_qualified_name(const logical::meta_model::name& n) const {
     return n.qualified().colon();
 }
 
 std::string
-assistant::get_qualified_name(const assets::meta_model::name_tree& nt) const {
+assistant::get_qualified_name(const logical::meta_model::name_tree& nt) const {
     return nt.qualified().colon();
 }
 
 std::string
-assistant::get_qualified_namespace(const assets::meta_model::name& n) const {
+assistant::get_qualified_namespace(const logical::meta_model::name& n) const {
     // FIXME: why not use helper?
     const auto& l(n.location());
     auto ns(l.external_modules());
@@ -189,20 +189,20 @@ assistant::get_qualified_namespace(const assets::meta_model::name& n) const {
 }
 
 std::string assistant::
-get_identifiable_model_name(const assets::meta_model::name& n) const {
+get_identifiable_model_name(const logical::meta_model::name& n) const {
     // FIXME: why not use helper?
     using boost::algorithm::join;
     return join(n.location().model_modules(), underscore);
 }
 
 std::string assistant::
-get_dot_separated_model_name(const assets::meta_model::name& n) const {
+get_dot_separated_model_name(const logical::meta_model::name& n) const {
     using boost::algorithm::join;
     return join(n.location().model_modules(), dot);
 }
 
 std::string
-assistant::get_product_name(const assets::meta_model::name& n) const {
+assistant::get_product_name(const logical::meta_model::name& n) const {
     if (n.location().external_modules().empty())
         return empty;
 
@@ -238,9 +238,9 @@ const formattables::artefact_properties& assistant::obtain_artefact_properties(
     return i->second;
 }
 
-const assets::meta_model::artefact_properties&
+const logical::meta_model::artefact_properties&
 assistant::obtain_new_artefact_properties(
-    const assets::meta_model::element& e, const std::string& archetype) const {
+    const logical::meta_model::element& e, const std::string& archetype) const {
     const auto& ap(e.artefact_properties());
     const auto i(ap.find(archetype));
     if (i == ap.end()) {
@@ -265,9 +265,9 @@ obtain_facet_properties(const std::string& facet_name) const {
 }
 
 std::list<std::string>
-assistant::make_namespaces(const assets::meta_model::name& n,
+assistant::make_namespaces(const logical::meta_model::name& n,
     const bool detect_model_name) const {
-    assets::helpers::name_flattener nf(detect_model_name);
+    logical::helpers::name_flattener nf(detect_model_name);
     return nf.flatten(n);
 }
 
@@ -378,8 +378,8 @@ bool assistant::is_test_data_enabled() const {
 }
 
 generation::formatters::scoped_boilerplate_formatter assistant::
-make_scoped_boilerplate_formatter(const assets::meta_model::element& e,
-    const assets::meta_model::technical_space ts) {
+make_scoped_boilerplate_formatter(const logical::meta_model::element& e,
+    const logical::meta_model::technical_space ts) {
     generation::formatters::boilerplate_properties bp;
 
     const auto& art_props(artefact_properties_);
@@ -402,12 +402,12 @@ make_scoped_boilerplate_formatter(const assets::meta_model::element& e,
 generation::formatters::scoped_namespace_formatter
 assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
     return generation::formatters::scoped_namespace_formatter(
-        stream(), assets::meta_model::technical_space::cpp,
+        stream(), logical::meta_model::technical_space::cpp,
         ns, true/*add_new_line*/, requires_nested_namespaces());
 }
 
-void assistant::make_decoration_preamble(const assets::meta_model::element& e,
-    const assets::meta_model::technical_space ts) {
+void assistant::make_decoration_preamble(const logical::meta_model::element& e,
+    const logical::meta_model::technical_space ts) {
 
     const auto i(e.decoration().find(ts));
     if (i != e.decoration().end() && i->second) {
@@ -605,7 +605,7 @@ streaming_for_type(const formattables::streaming_properties& sp,
     return stream.str();
 }
 
-std::string assistant::streaming_for_type(const assets::meta_model::name& n,
+std::string assistant::streaming_for_type(const logical::meta_model::name& n,
     const std::string& s) const {
 
     const auto str_propss(context_.model().streaming_properties());
@@ -628,7 +628,7 @@ streaming_for_type(const formattables::helper_descriptor& hd,
 }
 
 bool assistant::requires_hashing_helper_method(
-    const assets::meta_model::attribute& attr) const {
+    const logical::meta_model::attribute& attr) const {
     const auto& eprops(context_.element_properties());
     for (const auto& hlp_props : eprops.helper_properties()) {
         const auto ident(attr.parsed_type().qualified().identifiable());
@@ -642,10 +642,10 @@ bool assistant::requires_hashing_helper_method(
     return false;
 }
 
-std::list<assets::meta_model::name> assistant::
+std::list<logical::meta_model::name> assistant::
 names_with_enabled_archetype(const std::string& archetype,
-    const std::list<assets::meta_model::name> names) const {
-    std::list<assets::meta_model::name> r;
+    const std::list<logical::meta_model::name> names) const {
+    std::list<logical::meta_model::name> r;
     for (const auto& n : names) {
         const auto id(n.qualified().dot());
         BOOST_LOG_SEV(lg, debug) << "Checking enablement for name: " << id;
@@ -667,7 +667,7 @@ assistant::artefact_properties() const {
     return artefact_properties_;
 }
 
-const assets::meta_model::artefact_properties&
+const logical::meta_model::artefact_properties&
 assistant::new_artefact_properties() const {
     return new_artefact_properties_;
 }

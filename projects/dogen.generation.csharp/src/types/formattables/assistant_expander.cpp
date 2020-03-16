@@ -20,7 +20,7 @@
  */
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
-#include "dogen.assets/types/meta_model/element.hpp"
+#include "dogen.logical/types/meta_model/element.hpp"
 #include "dogen.generation.csharp/types/traits.hpp"
 #include "dogen.generation.csharp/types/formattables/assistant_expander.hpp"
 

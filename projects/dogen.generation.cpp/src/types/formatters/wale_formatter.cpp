@@ -47,7 +47,7 @@ bool wale_formatter::is_header(const inclusion_support_types ist) const {
 extraction::meta_model::artefact wale_formatter::
 format(const formattables::locator& l,
     const artefact_formatter_interface& stock_formatter, const context& ctx,
-    const assets::meta_model::element& e) const {
+    const logical::meta_model::element& e) const {
     const auto al(stock_formatter.archetype_location());
     const auto needs_guard(is_header(stock_formatter.inclusion_support_type()));
     assistant a(ctx, e, al, needs_guard);

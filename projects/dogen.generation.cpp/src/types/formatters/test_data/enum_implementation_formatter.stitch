@@ -3,8 +3,8 @@
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.assets/types/meta_model/structural/enumeration.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.assets/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/meta_model/structural/enumeration.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
@@ -16,15 +16,15 @@
 <#@ masd.stitch.wale.text_template=cpp_artefact_formatter_implementation.wale #>
 <#@ masd.stitch.wale.kvp.class.simple_name=enum_implementation_formatter #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=enum_implementation #>
-<#@ masd.stitch.wale.kvp.yarn_element=assets::meta_model::structural::enumeration #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::meta_model::structural::enumeration #>
 <#@ masd.stitch.wale.kvp.meta_element=enumeration #>
-<#@ masd.stitch.wale.kvp.meta_name_factory=assets::helpers::meta_name_factory #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
 std::list<std::string> enum_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const assets::meta_model::element& e) const {
+    const logical::meta_model::element& e) const {
     auto builder(f.make());
 
     builder.add(e.name(), traits::enum_header_archetype());
@@ -32,9 +32,9 @@ std::list<std::string> enum_implementation_formatter::inclusion_dependencies(
 }
 
 extraction::meta_model::artefact enum_implementation_formatter::
-format(const context& ctx, const assets::meta_model::element& e) const {
+format(const context& ctx, const logical::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& ye(a.as<assets::meta_model::structural::enumeration>(e));
+    const auto& ye(a.as<logical::meta_model::structural::enumeration>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

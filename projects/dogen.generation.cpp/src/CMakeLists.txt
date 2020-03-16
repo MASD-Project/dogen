@@ -39,7 +39,7 @@ target_link_libraries(${lib_target_name}
     dogen.physical.lib
     dogen.variability.lib
     dogen.extraction.lib
-    dogen.assets.lib
+    dogen.logical.lib
     dogen.templating.lib
     ${Boost_LIBRARIES})
 

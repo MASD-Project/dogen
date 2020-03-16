@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen.assets/types/meta_model/element.hpp"
+#include "dogen.logical/types/meta_model/element.hpp"
 #include "dogen.generation/types/meta_model/model.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
 
@@ -38,7 +38,7 @@ namespace dogen::generation::transforms {
 class artefact_properties_transform final {
 private:
     static void update_element(const context& ctx,
-        assets::meta_model::element& e);
+        logical::meta_model::element& e);
 
 public:
     static void apply(const context& ctx, meta_model::model& m);

@@ -48,7 +48,7 @@ locator::locator(const boost::filesystem::path& output_directory_path,
     const variability::meta_model::feature_model& fm,
     const formatters::repository& frp,
     const variability::meta_model::configuration& rcfg,
-    const assets::meta_model::name& model_name,
+    const logical::meta_model::name& model_name,
     const std::unordered_set<std::string>& module_ids,
     const bool enable_backend_directories)
     : model_name_(model_name),
@@ -170,7 +170,7 @@ configuration_for_archetype(const std::string& archetype) const {
 
 boost::filesystem::path locator::make_project_path(
     const boost::filesystem::path& output_directory_path,
-    const assets::meta_model::name& model_name, const locator_configuration& lc,
+    const logical::meta_model::name& model_name, const locator_configuration& lc,
     const bool enable_backend_directories) const {
 
     boost::filesystem::path r;
@@ -187,7 +187,7 @@ boost::filesystem::path locator::make_project_path(
 
 boost::filesystem::path locator::make_facet_path(
     const std::string& archetype, const std::string& extension,
-    const assets::meta_model::name& n) const {
+    const logical::meta_model::name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Making facet path for: "
                              << n.qualified().dot();
 
@@ -254,7 +254,7 @@ boost::filesystem::path locator::make_relative_path(
 }
 
 boost::filesystem::path locator::make_full_path(
-    const assets::meta_model::name& n, const std::string& archetype) const {
+    const logical::meta_model::name& n, const std::string& archetype) const {
 
     auto r(project_path_);
     const auto facet_path(make_facet_path(archetype, extension, n));
@@ -263,7 +263,7 @@ boost::filesystem::path locator::make_full_path(
 }
 
 boost::filesystem::path locator::make_full_path_for_project(
-    const assets::meta_model::name& n, const std::string& archetype) const {
+    const logical::meta_model::name& n, const std::string& archetype) const {
     auto r(project_path_);
     const auto facet_path(make_facet_path(archetype, empty, n));
     r /= facet_path;
@@ -271,7 +271,7 @@ boost::filesystem::path locator::make_full_path_for_project(
 }
 
 boost::filesystem::path locator::make_full_path_for_solution(
-    const assets::meta_model::name& n, const std::string& archetype) const {
+    const logical::meta_model::name& n, const std::string& archetype) const {
     auto r(project_path_);
     const auto facet_path(make_facet_path(archetype, empty, n));
     r /= facet_path;

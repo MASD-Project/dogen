@@ -9,7 +9,7 @@
     "masd.injection.reference": "dogen",
     "masd.injection.reference": "dogen.variability",
     "masd.injection.reference": "dogen.tracing",
-    "masd.injection.reference": "dogen.assets",
+    "masd.injection.reference": "dogen.logical",
     "masd.injection.reference": "dogen.extraction",
     "masd.injection.reference": "dogen.generation",
     "masd.injection.reference": "masd",
@@ -742,7 +742,7 @@
       "attributes": [
         {
           "name": "element",
-          "type": "boost::shared_ptr<assets::meta_model::element>"
+          "type": "boost::shared_ptr<logical::meta_model::element>"
         },
         {
           "name": "element_properties",
@@ -827,7 +827,7 @@
       "attributes": [
         {
           "name": "name",
-          "type": "assets::meta_model::name"
+          "type": "logical::meta_model::name"
         },
         {
           "name": "streaming_properties",

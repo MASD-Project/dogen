@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen.assets/types/meta_model/name.hpp"
-#include "dogen.assets/types/meta_model/element.hpp"
+#include "dogen.logical/types/meta_model/name.hpp"
+#include "dogen.logical/types/meta_model/element.hpp"
 #include "dogen.generation/types/meta_model/model.hpp"
 #include "dogen.generation/types/helpers/decoration_repository.hpp"
 
@@ -34,15 +34,15 @@ namespace dogen::generation::helpers {
 
 class decoration_repository_factory final {
 private:
-    bool is_meta_element(const assets::meta_model::name& me,
-        const assets::meta_model::element& e) const;
+    bool is_meta_element(const logical::meta_model::name& me,
+        const logical::meta_model::element& e) const;
 
 private:
     void handle_licence(
-        const boost::shared_ptr<assets::meta_model::element> e,
+        const boost::shared_ptr<logical::meta_model::element> e,
         decoration_repository& drp) const;
     void handle_generation_marker(
-        const boost::shared_ptr<assets::meta_model::element> e,
+        const boost::shared_ptr<logical::meta_model::element> e,
         decoration_repository& drp) const;
 
     /**
@@ -50,7 +50,7 @@ private:
      * technical space.
      */
     void handle_modeline_group(
-        const boost::shared_ptr<assets::meta_model::element> e,
+        const boost::shared_ptr<logical::meta_model::element> e,
         decoration_repository& drp) const;
 
 public:

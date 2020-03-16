@@ -141,10 +141,10 @@ BOOST_AUTO_TEST_CASE(dogen_variability_dia_produces_expected_code) {
     BOOST_CHECK(are_generated_files_healthy(od, t));
 }
 
-BOOST_AUTO_TEST_CASE(dogen_assets_json_produces_expected_model) {
-    SETUP_TEST_LOG("dogen_assets_json_produces_expected_model");
+BOOST_AUTO_TEST_CASE(dogen_logical_json_produces_expected_model) {
+    SETUP_TEST_LOG("dogen_logical_json_produces_expected_model");
     using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_assets_json());
+    const auto t(dogen_generation::input_dogen_logical_json());
     const auto od(dogen_generation::output_directory());
     execute_code_generation_transform(t, od);
     BOOST_CHECK(are_generated_files_healthy(od, t));

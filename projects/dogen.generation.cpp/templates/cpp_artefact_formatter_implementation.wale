@@ -16,7 +16,7 @@ physical::location
     return r;
 }
 
-const assets::meta_model::name& {{class.simple_name}}::meta_name() const {
+const logical::meta_model::name& {{class.simple_name}}::meta_name() const {
     using {{meta_name_factory}};
     static auto r(meta_name_factory::make_{{meta_element}}_name());
     return r;
@@ -31,7 +31,7 @@ inclusion_support_types {{class.simple_name}}::inclusion_support_type() const {
 }
 
 boost::filesystem::path {{class.simple_name}}::inclusion_path(
-    const formattables::locator& /*l*/, const assets::meta_model::name& n) const {
+    const formattables::locator& /*l*/, const logical::meta_model::name& n) const {
 
     using namespace dogen::utility::log;
     static logger lg(
@@ -43,6 +43,6 @@ boost::filesystem::path {{class.simple_name}}::inclusion_path(
 }
 
 boost::filesystem::path {{class.simple_name}}::full_path(
-    const formattables::locator& l, const assets::meta_model::name& n) const {
+    const formattables::locator& l, const logical::meta_model::name& n) const {
     return l.make_full_path_for_cpp_implementation(n, static_id());
 }

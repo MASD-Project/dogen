@@ -21,10 +21,10 @@
 #include <unordered_map>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.assets/types/meta_model/element.hpp"
-#include "dogen.assets/types/meta_model/technical_space.hpp"
-#include "dogen.assets/hash/meta_model/technical_space_hash.hpp"
-#include "dogen.assets/io/meta_model/technical_space_io.hpp"
+#include "dogen.logical/types/meta_model/element.hpp"
+#include "dogen.logical/types/meta_model/technical_space.hpp"
+#include "dogen.logical/hash/meta_model/technical_space_hash.hpp"
+#include "dogen.logical/io/meta_model/technical_space_io.hpp"
 #include "dogen.generation/io/meta_model/model_io.hpp"
 #include "dogen.generation/types/transforms/technical_space_transform.hpp"
 
@@ -45,7 +45,7 @@ apply(const context& ctx, meta_model::model& m) {
     tracing::scoped_transform_tracer stp(lg, "technical space transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    std::unordered_set<assets::meta_model::technical_space> ats;
+    std::unordered_set<logical::meta_model::technical_space> ats;
     const auto its(m.input_technical_space());
     ats.insert(its);
     BOOST_LOG_SEV(lg, trace) << "Input technical space: " << its;
@@ -57,7 +57,7 @@ apply(const context& ctx, meta_model::model& m) {
     /*
      * FIXME: hackery for ODB options, XML and CMake.
      */
-    using namespace assets::meta_model;
+    using namespace logical::meta_model;
     ats.insert(technical_space::odb);
     ats.insert(technical_space::xml);
     ats.insert(technical_space::cmake);

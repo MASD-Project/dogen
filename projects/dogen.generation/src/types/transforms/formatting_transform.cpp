@@ -25,9 +25,9 @@
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.assets/types/meta_model/element.hpp"
+#include "dogen.logical/types/meta_model/element.hpp"
 #include "dogen.generation/io/meta_model/model_io.hpp"
-#include "dogen.assets/io/meta_model/formatting_styles_io.hpp"
+#include "dogen.logical/io/meta_model/formatting_styles_io.hpp"
 #include "dogen.generation/types/transforms/transformation_error.hpp"
 #include "dogen.generation/types/transforms/formatting_transform.hpp"
 
@@ -122,7 +122,7 @@ formatting_transform::make_formatting_configuration(
 
 void formatting_transform::
 apply(const std::unordered_map<std::string, feature_group> fgs,
-    assets::meta_model::element& e) {
+    logical::meta_model::element& e) {
     BOOST_LOG_SEV(lg, trace) << "Transforming element: "
                              << e.name().qualified().dot();
 
@@ -133,7 +133,7 @@ apply(const std::unordered_map<std::string, feature_group> fgs,
         auto& art_prop(pair.second);
         const auto i(cfgs.find(arch));
         if (i == cfgs.end()) {
-            using assets::meta_model::formatting_styles;
+            using logical::meta_model::formatting_styles;
             art_prop.formatting_style(formatting_styles::stock);
             BOOST_LOG_SEV(lg,trace) << "Element has a stock formatter.";
             continue;
@@ -146,13 +146,13 @@ apply(const std::unordered_map<std::string, feature_group> fgs,
             [](meta_model::formatting_styles fs) {
                 using meta_model::formatting_styles;
                 if (fs == meta_model::formatting_styles::wale)
-                    return assets::meta_model::formatting_styles::wale;
+                    return logical::meta_model::formatting_styles::wale;
                 else if (fs == meta_model::formatting_styles::stitch)
-                    return assets::meta_model::formatting_styles::stitch;
+                    return logical::meta_model::formatting_styles::stitch;
                 else if (fs == meta_model::formatting_styles::stock)
-                    return assets::meta_model::formatting_styles::stock;
+                    return logical::meta_model::formatting_styles::stock;
                 else
-                    return assets::meta_model::formatting_styles::invalid;
+                    return logical::meta_model::formatting_styles::invalid;
             });
         art_prop.formatting_style(lambda(cfg.style()));
         art_prop.formatting_input(cfg.input());

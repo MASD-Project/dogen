@@ -19,8 +19,8 @@
  *
  */
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
-#include "dogen.assets/types/meta_model/structural/object.hpp"
-#include "dogen.assets/types/helpers/meta_name_factory.hpp"
+#include "dogen.logical/types/meta_model/structural/object.hpp"
+#include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/io/traits.hpp"
@@ -48,8 +48,8 @@ class_header_formatter::archetype_location() const {
     return r;
 }
 
-const assets::meta_model::name& class_header_formatter::meta_name() const {
-    using assets::helpers::meta_name_factory;
+const logical::meta_model::name& class_header_formatter::meta_name() const {
+    using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_object_name());
     return r;
 }
@@ -63,18 +63,18 @@ inclusion_support_types class_header_formatter::inclusion_support_type() const {
 }
 
 boost::filesystem::path class_header_formatter::inclusion_path(
-    const formattables::locator& l, const assets::meta_model::name& n) const {
+    const formattables::locator& l, const logical::meta_model::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_id());
 }
 
 boost::filesystem::path class_header_formatter::full_path(
-    const formattables::locator& l, const assets::meta_model::name& n) const {
+    const formattables::locator& l, const logical::meta_model::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_id());
 }
 
 std::list<std::string> class_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const assets::meta_model::element& e) const {
+    const logical::meta_model::element& e) const {
     auto builder(f.make());
     builder.add(inclusion_constants::std::iosfwd());
 
@@ -85,9 +85,9 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
 }
 
 extraction::meta_model::artefact class_header_formatter::
-format(const context& ctx, const assets::meta_model::element& e) const {
+format(const context& ctx, const logical::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& o(a.as<assets::meta_model::structural::object>(e));
+    const auto& o(a.as<logical::meta_model::structural::object>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

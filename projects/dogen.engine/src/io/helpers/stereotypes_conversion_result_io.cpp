@@ -20,12 +20,12 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.assets/io/meta_model/static_stereotypes_io.hpp"
+#include "dogen.logical/io/meta_model/static_stereotypes_io.hpp"
 #include "dogen.engine/io/helpers/stereotypes_conversion_result_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::assets::meta_model::static_stereotypes>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::logical::meta_model::static_stereotypes>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

@@ -32,7 +32,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.physical/types/locations_group.hpp"
 #include "dogen.physical/types/location_repository_parts.hpp"
-#include "dogen.assets/types/meta_model/technical_space.hpp"
+#include "dogen.logical/types/meta_model/technical_space.hpp"
 #include "dogen.generation/types/meta_model/intra_backend_segment_properties.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
 #include "dogen.generation/types/meta_model/model.hpp"
@@ -97,7 +97,7 @@ public:
     /**
      * @brief Technical space supported by this transform.
      */
-    virtual assets::meta_model::technical_space technical_space() const = 0;
+    virtual logical::meta_model::technical_space technical_space() const = 0;
 
     /**
      * @brief Returns all intra-backend segment properties.

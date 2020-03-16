@@ -26,7 +26,7 @@
 #endif
 
 #include <algorithm>
-#include "dogen.assets/types/transforms/context.hpp"
+#include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
 #include "dogen.extraction/types/transforms/context.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
@@ -45,7 +45,7 @@ public:
     context(
         const dogen::variability::transforms::context& variability_context,
         const dogen::injection::transforms::context& injection_context,
-        const dogen::assets::transforms::context& assets_context,
+        const dogen::logical::transforms::context& assets_context,
         const dogen::generation::transforms::context& generation_context,
         const dogen::extraction::transforms::context& extraction_context);
 
@@ -60,10 +60,10 @@ public:
     void injection_context(const dogen::injection::transforms::context& v);
     void injection_context(const dogen::injection::transforms::context&& v);
 
-    const dogen::assets::transforms::context& assets_context() const;
-    dogen::assets::transforms::context& assets_context();
-    void assets_context(const dogen::assets::transforms::context& v);
-    void assets_context(const dogen::assets::transforms::context&& v);
+    const dogen::logical::transforms::context& assets_context() const;
+    dogen::logical::transforms::context& assets_context();
+    void assets_context(const dogen::logical::transforms::context& v);
+    void assets_context(const dogen::logical::transforms::context&& v);
 
     const dogen::generation::transforms::context& generation_context() const;
     dogen::generation::transforms::context& generation_context();
@@ -88,7 +88,7 @@ public:
 private:
     dogen::variability::transforms::context variability_context_;
     dogen::injection::transforms::context injection_context_;
-    dogen::assets::transforms::context assets_context_;
+    dogen::logical::transforms::context assets_context_;
     dogen::generation::transforms::context generation_context_;
     dogen::extraction::transforms::context extraction_context_;
 };

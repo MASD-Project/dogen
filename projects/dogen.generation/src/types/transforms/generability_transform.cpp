@@ -20,14 +20,14 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.assets/types/meta_model/structural/module.hpp"
-#include "dogen.assets/types/meta_model/structural/object.hpp"
-#include "dogen.assets/types/meta_model/structural/builtin.hpp"
-#include "dogen.assets/types/meta_model/element.hpp"
-#include "dogen.assets/types/meta_model/structural/exception.hpp"
-#include "dogen.assets/types/meta_model/structural/primitive.hpp"
-#include "dogen.assets/types/meta_model/structural/enumeration.hpp"
-#include "dogen.assets/types/meta_model/structural/object_template.hpp"
+#include "dogen.logical/types/meta_model/structural/module.hpp"
+#include "dogen.logical/types/meta_model/structural/object.hpp"
+#include "dogen.logical/types/meta_model/structural/builtin.hpp"
+#include "dogen.logical/types/meta_model/element.hpp"
+#include "dogen.logical/types/meta_model/structural/exception.hpp"
+#include "dogen.logical/types/meta_model/structural/primitive.hpp"
+#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
+#include "dogen.logical/types/meta_model/structural/object_template.hpp"
 #include "dogen.generation/io/meta_model/model_io.hpp"
 #include "dogen.generation/types/transforms/generability_transform.hpp"
 
@@ -44,9 +44,9 @@ auto lg(logger_factory(transform_id));
 namespace dogen::generation::transforms {
 
 bool generability_transform::
-is_generatable(const assets::meta_model::element& e) {
+is_generatable(const logical::meta_model::element& e) {
     const auto ot(e.origin_type());
-    return ot == assets::meta_model::origin_types::target;
+    return ot == logical::meta_model::origin_types::target;
 }
 
 bool generability_transform::

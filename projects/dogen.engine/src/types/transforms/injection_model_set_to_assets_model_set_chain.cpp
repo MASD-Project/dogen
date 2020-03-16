@@ -35,7 +35,7 @@ static logger lg(logger_factory(transform_id));
 
 namespace dogen::engine::transforms {
 
-assets::meta_model::model_set
+logical::meta_model::model_set
 injection_model_set_to_assets_model_set_chain::
 apply(const context& ctx, const injection::meta_model::model_set& ms) {
     const auto model_name(ms.target().name());
@@ -49,10 +49,10 @@ apply(const context& ctx, const injection::meta_model::model_set& ms) {
      * that further transforms can be applied such as the origin
      * transform.
      */
-    assets::meta_model::model_set r;
+    logical::meta_model::model_set r;
     using tf = injection_model_to_assets_model_transform;
     r.target(tf::apply(ctx, ms.target()));
-    r.target().origin_type(assets::meta_model::origin_types::target);
+    r.target().origin_type(logical::meta_model::origin_types::target);
 
     /*
      * Now we do the same conversion to the reference models.

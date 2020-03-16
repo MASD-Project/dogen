@@ -24,13 +24,13 @@
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.assets/types/meta_model/structural/module.hpp"
-#include "dogen.assets/types/meta_model/decoration/licence.hpp"
-#include "dogen.assets/types/meta_model/decoration/modeline_group.hpp"
-#include "dogen.assets/types/helpers/meta_name_factory.hpp"
-#include "dogen.assets/io/meta_model/decoration/element_properties_io.hpp"
-#include "dogen.assets/io/meta_model/technical_space_io.hpp"
-#include "dogen.assets/hash/meta_model/technical_space_hash.hpp"
+#include "dogen.logical/types/meta_model/structural/module.hpp"
+#include "dogen.logical/types/meta_model/decoration/licence.hpp"
+#include "dogen.logical/types/meta_model/decoration/modeline_group.hpp"
+#include "dogen.logical/types/helpers/meta_name_factory.hpp"
+#include "dogen.logical/io/meta_model/decoration/element_properties_io.hpp"
+#include "dogen.logical/io/meta_model/technical_space_io.hpp"
+#include "dogen.logical/hash/meta_model/technical_space_hash.hpp"
 #include "dogen.generation/io/meta_model/model_io.hpp"
 #include "dogen.generation/types/transforms/transformation_error.hpp"
 #include "dogen.generation/types/helpers/decoration_repository_factory.hpp"
@@ -59,8 +59,8 @@ const std::string duplicate_technical_space(
 
 namespace dogen::generation::transforms {
 
-using assets::meta_model::decoration::generation_marker;
-using assets::meta_model::decoration::modeline;
+using logical::meta_model::decoration::generation_marker;
+using logical::meta_model::decoration::modeline;
 
 boost::optional<decoration_configuration>
 decoration_transform::read_decoration_configuration(
@@ -104,9 +104,9 @@ decoration_transform::read_decoration_configuration(
 }
 
 bool decoration_transform::
-is_generatable(const assets::meta_model::name& meta_name) {
+is_generatable(const logical::meta_model::name& meta_name) {
     // FIXME: massive hack for now.
-    using mnf = assets::helpers::meta_name_factory;
+    using mnf = logical::helpers::meta_name_factory;
     static const auto otn(mnf::make_object_template_name());
     static const auto ln(mnf::make_licence_name());
     static const auto mln(mnf::make_modeline_name());
@@ -122,21 +122,21 @@ is_generatable(const assets::meta_model::name& meta_name) {
         id != gmn.qualified().dot();
 }
 
-boost::optional<assets::meta_model::decoration::element_properties>
+boost::optional<logical::meta_model::decoration::element_properties>
 decoration_transform::make_decoration(const std::string& licence_text,
     const boost::shared_ptr<modeline> ml,
     const boost::shared_ptr<generation_marker> gm,
     const std::list<std::string>& copyright_notices,
     const std::string& generation_timestamp,
     const std::string& origin_shah1_hash,
-    const assets::meta_model::technical_space ts) {
+    const logical::meta_model::technical_space ts) {
 
     /*
      * Create the preamble and postamble for the decoration, taking
      * into account the element's technical space.
      */
     using formatters::comment_style;
-    using assets::meta_model::technical_space;
+    using logical::meta_model::technical_space;
 
     std::ostringstream preamble_stream;
     formatters::decoration_formatter df;
@@ -166,7 +166,7 @@ decoration_transform::make_decoration(const std::string& licence_text,
     else if (ts == technical_space::csharp)
         df.format_postamble(postamble_stream, comment_style::csharp_style, ml);
 
-    assets::meta_model::decoration::element_properties r;
+    logical::meta_model::decoration::element_properties r;
     r.preamble(preamble_stream.str());
     r.postamble(postamble_stream.str());
     return r;
@@ -192,7 +192,7 @@ get_short_form_licence(const helpers::decoration_repository drp,
 boost::shared_ptr<modeline>
 decoration_transform::get_modeline(const helpers::decoration_repository drp,
     const std::string& modeline_group_name,
-    const assets::meta_model::technical_space ts) {
+    const logical::meta_model::technical_space ts) {
 
     if (modeline_group_name.empty())
         return boost::shared_ptr<modeline>();
@@ -238,19 +238,19 @@ get_generation_marker(const helpers::decoration_repository drp,
     return i->second;
 }
 
-boost::optional<assets::meta_model::decoration::element_properties>
+boost::optional<logical::meta_model::decoration::element_properties>
 decoration_transform::
 make_global_decoration(const helpers::decoration_repository drp,
     const boost::optional<decoration_configuration> root_dc,
     const std::string& generation_timestamp,
     const std::string& origin_shah1_hash,
-    const assets::meta_model::technical_space ts) {
+    const logical::meta_model::technical_space ts) {
     /*
      * If there is no decoration configuration there shall be no
      * decoration either.
      */
     typedef boost::optional<
-        assets::meta_model::decoration::element_properties> empty_decorations;
+        logical::meta_model::decoration::element_properties> empty_decorations;
     if (!root_dc)
         return empty_decorations();
 
@@ -281,16 +281,16 @@ make_global_decoration(const helpers::decoration_repository drp,
     return r;
 }
 
-boost::optional<assets::meta_model::decoration::element_properties>
+boost::optional<logical::meta_model::decoration::element_properties>
 decoration_transform::make_local_decoration(
     const helpers::decoration_repository drp,
     const boost::optional<decoration_configuration> root_dc,
-    const boost::optional<assets::meta_model::decoration::element_properties>
+    const boost::optional<logical::meta_model::decoration::element_properties>
     global_decoration,
     const boost::optional<decoration_configuration> element_dc,
     const std::string& generation_timestamp,
     const std::string& origin_shah1_hash,
-    const assets::meta_model::technical_space ts) {
+    const logical::meta_model::technical_space ts) {
 
     BOOST_LOG_SEV(lg, trace) << "Creating local decoration.";
 
@@ -321,7 +321,7 @@ decoration_transform::make_local_decoration(
                                  << " disabled_locally: " << disabled_locally
                                  << " enabled_globally: " << enabled_globally;
         return boost::optional<
-            assets::meta_model::decoration::element_properties>();
+            logical::meta_model::decoration::element_properties>();
     }
 
     /*
@@ -409,9 +409,9 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
     const auto mts(m.output_technical_space());
     const auto gt(ctx.generation_timestamp());
     const auto h(m.origin_sha1_hash());
-    std::unordered_map<assets::meta_model::technical_space,
+    std::unordered_map<logical::meta_model::technical_space,
                        boost::optional<
-                           assets::meta_model::decoration::element_properties>
+                           logical::meta_model::decoration::element_properties>
                        > root_decorations;
     BOOST_LOG_SEV(lg, trace) << "Generating all global decorations";
     for (const auto ts : m.all_technical_spaces()) {
@@ -443,12 +443,12 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
      * root decoration configuration to build the elements decoration.
      */
     const auto root_id(rm.name().qualified().dot());
-    const auto ats(assets::meta_model::technical_space::agnostic);
+    const auto ats(logical::meta_model::technical_space::agnostic);
     for (auto e : m.elements()) {
         const auto id(e->name().qualified().dot());
         BOOST_LOG_SEV(lg, trace) << "Processing element: " << id;
 
-        if (e->origin_type() != assets::meta_model::origin_types::target) {
+        if (e->origin_type() != logical::meta_model::origin_types::target) {
             BOOST_LOG_SEV(lg, trace) << "Element is not in target model.";
             continue;
         }
@@ -481,7 +481,7 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
         const auto& cfg(*e->configuration());
         const auto dc(read_decoration_configuration(fg, cfg));
         auto lambda(
-            [&](const assets::meta_model::technical_space nts) {
+            [&](const logical::meta_model::technical_space nts) {
                 const auto i(root_decorations.find(nts));
                 if (i == root_decorations.end()) {
                     const auto s(boost::lexical_cast<std::string>(nts));
@@ -518,7 +518,7 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
          * so that when the formatters create the ODB options, it is
          * available.
          */
-        const auto odb_ts(assets::meta_model::technical_space::odb);
+        const auto odb_ts(logical::meta_model::technical_space::odb);
         if (ts != odb_ts) {
             lambda(odb_ts);
             BOOST_LOG_SEV(lg, trace) << "Added decoration for ODB.";
@@ -528,7 +528,7 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
          * FIXME: hack for XML. We inject it regardless, just so that
          * that when the formatters need it, it is available.
          */
-        const auto xml_ts(assets::meta_model::technical_space::xml);
+        const auto xml_ts(logical::meta_model::technical_space::xml);
         if (ts != xml_ts) {
             lambda(xml_ts);
             BOOST_LOG_SEV(lg, trace) << "Added decoration for XML.";
@@ -538,7 +538,7 @@ void decoration_transform::apply(const context& ctx, meta_model::model& m) {
          * FIXME: hack for CMake. We inject it regardless, just so
          * that when the formatters need it, it is available.
          */
-        const auto cmake_ts(assets::meta_model::technical_space::cmake);
+        const auto cmake_ts(logical::meta_model::technical_space::cmake);
         if (ts != cmake_ts) {
             lambda(cmake_ts);
             BOOST_LOG_SEV(lg, trace) << "Added decoration for CMake.";

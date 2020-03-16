@@ -22,8 +22,8 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/case_conv.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.assets/types/helpers/meta_name_factory.hpp"
-#include "dogen.assets/types/meta_model/build/cmakelists.hpp"
+#include "dogen.logical/types/helpers/meta_name_factory.hpp"
+#include "dogen.logical/types/meta_model/build/cmakelists.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/formatters/build/traits.hpp"
@@ -53,8 +53,8 @@ archetype_location() const {
     return r;
 }
 
-const assets::meta_model::name& include_cmakelists_formatter::meta_name() const {
-    using assets::helpers::meta_name_factory;
+const logical::meta_model::name& include_cmakelists_formatter::meta_name() const {
+    using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_build_cmakelists_name());
     return r;
 }
@@ -69,7 +69,7 @@ inclusion_support_type() const {
 }
 
 boost::filesystem::path include_cmakelists_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const assets::meta_model::name& n) const {
+    const formattables::locator& /*l*/, const logical::meta_model::name& n) const {
 
     using namespace dogen::utility::log;
     using namespace dogen::generation::cpp::formatters;
@@ -82,25 +82,25 @@ boost::filesystem::path include_cmakelists_formatter::inclusion_path(
 }
 
 boost::filesystem::path include_cmakelists_formatter::full_path(
-    const formattables::locator& l, const assets::meta_model::name& n) const {
+    const formattables::locator& l, const logical::meta_model::name& n) const {
     return l.make_full_path_for_include_cmakelists(n, static_id());
 }
 
 std::list<std::string> include_cmakelists_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
-    const assets::meta_model::element& /*e*/) const {
+    const logical::meta_model::element& /*e*/) const {
     static std::list<std::string> r;
     return r;
 }
 
 extraction::meta_model::artefact include_cmakelists_formatter::
-format(const context& ctx, const assets::meta_model::element& e) const {
+format(const context& ctx, const logical::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    using assets::meta_model::build::cmakelists;
+    using logical::meta_model::build::cmakelists;
     const auto& c(a.as<cmakelists>(e));
 
     {
-        const auto ts(assets::meta_model::technical_space::cmake);
+        const auto ts(logical::meta_model::technical_space::cmake);
         a.make_decoration_preamble(e, ts);
 a.stream() << "add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/" << c.source_directory_name() << ")" << std::endl;
        if (a.is_tests_enabled()) {

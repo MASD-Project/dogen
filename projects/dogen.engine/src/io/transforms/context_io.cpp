@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
-#include "dogen.assets/io/transforms/context_io.hpp"
 #include "dogen.engine/io/transforms/context_io.hpp"
+#include "dogen.logical/io/transforms/context_io.hpp"
 #include "dogen.injection/io/transforms/context_io.hpp"
 #include "dogen.extraction/io/transforms/context_io.hpp"
 #include "dogen.generation/io/transforms/context_io.hpp"

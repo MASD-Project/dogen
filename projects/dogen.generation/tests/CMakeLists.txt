@@ -36,7 +36,7 @@ target_link_libraries(${tests_target_name}
     ${lib_target_name}
     dogen.utility.lib
     dogen.dia.lib
-    dogen.assets.lib
+    dogen.logical.lib
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     ${PQXX_LIBRARIES}

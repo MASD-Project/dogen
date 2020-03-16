@@ -20,8 +20,8 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.assets/types/meta_model/structural/primitive.hpp"
-#include "dogen.assets/types/helpers/meta_name_factory.hpp"
+#include "dogen.logical/types/meta_model/structural/primitive.hpp"
+#include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/traits.hpp"
@@ -51,8 +51,8 @@ primitive_implementation_formatter::archetype_location() const {
     return r;
 }
 
-const assets::meta_model::name& primitive_implementation_formatter::meta_name() const {
-    using assets::helpers::meta_name_factory;
+const logical::meta_model::name& primitive_implementation_formatter::meta_name() const {
+    using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_primitive_name());
     return r;
 }
@@ -66,7 +66,7 @@ inclusion_support_types primitive_implementation_formatter::inclusion_support_ty
 }
 
 boost::filesystem::path primitive_implementation_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const assets::meta_model::name& n) const {
+    const formattables::locator& /*l*/, const logical::meta_model::name& n) const {
 
     using namespace dogen::utility::log;
     static logger lg(
@@ -78,15 +78,15 @@ boost::filesystem::path primitive_implementation_formatter::inclusion_path(
 }
 
 boost::filesystem::path primitive_implementation_formatter::full_path(
-    const formattables::locator& l, const assets::meta_model::name& n) const {
+    const formattables::locator& l, const logical::meta_model::name& n) const {
     return l.make_full_path_for_cpp_implementation(n, static_id());
 }
 
 std::list<std::string> primitive_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const assets::meta_model::element& e) const {
+    const logical::meta_model::element& e) const {
 
-    const auto& p(assistant::as<assets::meta_model::structural::primitive>(e));
+    const auto& p(assistant::as<logical::meta_model::structural::primitive>(e));
     auto builder(f.make());
     builder.add(p.name(), traits::primitive_header_archetype());
 
@@ -97,9 +97,9 @@ std::list<std::string> primitive_implementation_formatter::inclusion_dependencie
 }
 
 extraction::meta_model::artefact primitive_implementation_formatter::
-format(const context& ctx, const assets::meta_model::element& e) const {
+format(const context& ctx, const logical::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& p(a.as<assets::meta_model::structural::primitive>(e));
+    const auto& p(a.as<logical::meta_model::structural::primitive>(e));
 
     const auto sn(p.name().simple());
     const auto qn(a.get_qualified_name(p.name()));

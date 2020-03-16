@@ -32,7 +32,7 @@ namespace dogen::generation::transforms {
 
 class generability_transform final {
 private:
-    static bool is_generatable(const assets::meta_model::element& e);
+    static bool is_generatable(const logical::meta_model::element& e);
     static bool has_generatable_types(const meta_model::model& m);
 
 public:

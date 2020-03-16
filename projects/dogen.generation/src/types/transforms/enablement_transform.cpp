@@ -25,7 +25,7 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/types/location_repository.hpp"
-#include "dogen.assets/types/meta_model/structural/module.hpp"
+#include "dogen.logical/types/meta_model/structural/module.hpp"
 #include "dogen.generation/io/meta_model/model_io.hpp"
 #include "dogen.generation/io/meta_model/facet_properties_io.hpp"
 #include "dogen.generation/types/transforms/transformation_error.hpp"
@@ -59,12 +59,12 @@ scope_exit<T> make_scope_exit(T &&t) {
 namespace dogen::generation::transforms {
 
 bool enablement_transform::
-is_element_disabled(const assets::meta_model::element& e) {
+is_element_disabled(const logical::meta_model::element& e) {
     /*
      * We're only interested in modules as these are the only elements
      * that can be enabled/disabled based on their state.
      */
-    using assets::meta_model::structural::module;
+    using logical::meta_model::structural::module;
     const auto ptr(dynamic_cast<const module*>(&e));
     if (!ptr)
         return false;
@@ -97,10 +97,10 @@ void enablement_transform::compute_enablement_for_artefact_properties(
     meta_model::denormalised_archetype_properties>&
     global_archetype_location_properties,
     const std::unordered_map<std::string,
-    assets::meta_model::local_archetype_location_properties>&
+    logical::meta_model::local_archetype_location_properties>&
     local_archetype_location_properties,
     const std::string& archetype,
-    assets::meta_model::artefact_properties& ap) {
+    logical::meta_model::artefact_properties& ap) {
 
     const auto& galp(global_archetype_location_properties);
     const auto& lalp(local_archetype_location_properties);
@@ -258,7 +258,7 @@ void enablement_transform::compute_enablement_for_element(
     meta_model::denormalised_archetype_properties>&
     global_archetype_location_properties,
     std::unordered_set<meta_model::element_archetype>&
-    enabled_archetype_for_element, assets::meta_model::element& e) {
+    enabled_archetype_for_element, logical::meta_model::element& e) {
 
     const auto id(e.name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Started computing enablement: " << id;

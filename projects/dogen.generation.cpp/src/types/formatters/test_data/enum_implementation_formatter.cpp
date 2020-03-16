@@ -21,8 +21,8 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
-#include "dogen.assets/types/meta_model/structural/enumeration.hpp"
-#include "dogen.assets/types/helpers/meta_name_factory.hpp"
+#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
+#include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
@@ -51,8 +51,8 @@ enum_implementation_formatter::archetype_location() const {
     return r;
 }
 
-const assets::meta_model::name& enum_implementation_formatter::meta_name() const {
-    using assets::helpers::meta_name_factory;
+const logical::meta_model::name& enum_implementation_formatter::meta_name() const {
+    using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_enumeration_name());
     return r;
 }
@@ -66,7 +66,7 @@ inclusion_support_types enum_implementation_formatter::inclusion_support_type() 
 }
 
 boost::filesystem::path enum_implementation_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const assets::meta_model::name& n) const {
+    const formattables::locator& /*l*/, const logical::meta_model::name& n) const {
 
     using namespace dogen::utility::log;
     static logger lg(
@@ -78,13 +78,13 @@ boost::filesystem::path enum_implementation_formatter::inclusion_path(
 }
 
 boost::filesystem::path enum_implementation_formatter::full_path(
-    const formattables::locator& l, const assets::meta_model::name& n) const {
+    const formattables::locator& l, const logical::meta_model::name& n) const {
     return l.make_full_path_for_cpp_implementation(n, static_id());
 }
 
 std::list<std::string> enum_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const assets::meta_model::element& e) const {
+    const logical::meta_model::element& e) const {
     auto builder(f.make());
 
     builder.add(e.name(), traits::enum_header_archetype());
@@ -92,9 +92,9 @@ std::list<std::string> enum_implementation_formatter::inclusion_dependencies(
 }
 
 extraction::meta_model::artefact enum_implementation_formatter::
-format(const context& ctx, const assets::meta_model::element& e) const {
+format(const context& ctx, const logical::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& ye(a.as<assets::meta_model::structural::enumeration>(e));
+    const auto& ye(a.as<logical::meta_model::structural::enumeration>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

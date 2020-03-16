@@ -36,10 +36,10 @@
 #include "dogen.extraction/types/meta_model/artefact.hpp"
 #include "dogen.generation/types/formatters/scoped_namespace_formatter.hpp"
 #include "dogen.generation/types/formatters/scoped_boilerplate_formatter.hpp"
-#include "dogen.assets/types/meta_model/name.hpp"
-#include "dogen.assets/types/meta_model/element.hpp"
-#include "dogen.assets/types/meta_model/structural/object.hpp"
-#include "dogen.assets/types/meta_model/name_tree.hpp"
+#include "dogen.logical/types/meta_model/name.hpp"
+#include "dogen.logical/types/meta_model/element.hpp"
+#include "dogen.logical/types/meta_model/structural/object.hpp"
+#include "dogen.logical/types/meta_model/name_tree.hpp"
 #include "dogen.generation.cpp/types/formatters/context.hpp"
 #include "dogen.generation.cpp/types/formattables/helper_properties.hpp"
 
@@ -50,7 +50,7 @@ namespace dogen::generation::cpp::formatters {
  */
 class assistant final {
 public:
-    assistant(const context& ctx, const assets::meta_model::element& e,
+    assistant(const context& ctx, const logical::meta_model::element& e,
         const physical::location& al,
         const bool requires_header_guard);
 
@@ -64,7 +64,7 @@ private:
 public:
     template<typename T>
     static const T&
-    as(const assets::meta_model::element& e) {
+    as(const logical::meta_model::element& e) {
         return dynamic_cast<const T&>(e);
     }
 
@@ -73,7 +73,7 @@ public:
      * final keyword. If non-empty, includes a trailing space.
      */
     std::string
-    make_final_keyword_text(const assets::meta_model::structural::object& o) const;
+    make_final_keyword_text(const logical::meta_model::structural::object& o) const;
 
     /**
      * @brief Returns the override keyword, if supported by the
@@ -91,7 +91,7 @@ public:
      * @brief Returns the by-ref to use given the property.
      */
     static std::string
-    make_by_ref_text(const assets::meta_model::attribute& attr);
+    make_by_ref_text(const logical::meta_model::attribute& attr);
 
     /**
      * @brief Makes the return type of a setter, taking into account
@@ -99,14 +99,14 @@ public:
      */
     static std::string make_setter_return_type(
         const std::string& containing_type_name,
-        const assets::meta_model::attribute& attr);
+        const logical::meta_model::attribute& attr);
 
     /**
      * @brief Obtains the qualified name.
      */
     /**@{*/
-    std::string get_qualified_name(const assets::meta_model::name& n) const;
-    std::string get_qualified_name(const assets::meta_model::name_tree& nt) const;
+    std::string get_qualified_name(const logical::meta_model::name& n) const;
+    std::string get_qualified_name(const logical::meta_model::name_tree& nt) const;
     /**@}*/
 
     /**
@@ -115,26 +115,26 @@ public:
      * The qualified namespace contains all modules, but not the
      * element name itself.
      */
-    std::string get_qualified_namespace(const assets::meta_model::name& n) const;
+    std::string get_qualified_namespace(const logical::meta_model::name& n) const;
 
     /**
      * @brief Obtains the model name as a string.
      */
     std::string
-    get_identifiable_model_name(const assets::meta_model::name& n) const;
+    get_identifiable_model_name(const logical::meta_model::name& n) const;
 
     /**
      * @brief Obtains the model name as a set of strings separated by
      * dots.
      */
     std::string
-    get_dot_separated_model_name(const assets::meta_model::name& n) const;
+    get_dot_separated_model_name(const logical::meta_model::name& n) const;
 
     /**
      * @brief Obtains the product name. This is defined to be the
      * first external module, if any exists.
      */
-    std::string get_product_name(const assets::meta_model::name& n) const;
+    std::string get_product_name(const logical::meta_model::name& n) const;
 
 private:
     /**
@@ -152,8 +152,8 @@ private:
     const formattables::artefact_properties& obtain_artefact_properties(
         const std::string& element_id, const std::string& archetype) const;
 
-    const assets::meta_model::artefact_properties& obtain_new_artefact_properties(
-        const assets::meta_model::element& e, const std::string& archetype) const;
+    const logical::meta_model::artefact_properties& obtain_new_artefact_properties(
+        const logical::meta_model::element& e, const std::string& archetype) const;
 
     /**
      * @brief Obtains the facet configuration for the facet
@@ -236,7 +236,7 @@ public:
      * @brief returns the c++ namespaces for the name.
      */
     std::list<std::string>
-    make_namespaces(const assets::meta_model::name& n,
+    make_namespaces(const logical::meta_model::name& n,
         const bool detect_model_name = true) const;
 
  public:
@@ -292,9 +292,9 @@ public:
      * @brief Returns a scoped boilerplate formatter.
      */
     generation::formatters::scoped_boilerplate_formatter
-    make_scoped_boilerplate_formatter(const assets::meta_model::element& e,
-        const assets::meta_model::technical_space ts =
-        assets::meta_model::technical_space::cpp);
+    make_scoped_boilerplate_formatter(const logical::meta_model::element& e,
+        const logical::meta_model::technical_space ts =
+        logical::meta_model::technical_space::cpp);
 
     /**
      * @brief Returns a scoped namespace formatter.
@@ -305,8 +305,8 @@ public:
     /**
      * @brief Creates the decoration preamble.
      */
-    void make_decoration_preamble(const assets::meta_model::element& e,
-        const assets::meta_model::technical_space ts);
+    void make_decoration_preamble(const logical::meta_model::element& e,
+        const logical::meta_model::technical_space ts);
 
 public:
     /**
@@ -354,7 +354,7 @@ public:
     /**@{*/
     std::string streaming_for_type(const formattables::helper_descriptor& hd,
         const std::string& s) const;
-    std::string streaming_for_type(const assets::meta_model::name& n,
+    std::string streaming_for_type(const logical::meta_model::name& n,
         const std::string& s) const;
     /**@}*/
 
@@ -363,20 +363,20 @@ public:
      * helper method.
      */
     bool requires_hashing_helper_method(
-        const assets::meta_model::attribute& attr) const;
+        const logical::meta_model::attribute& attr) const;
 
 public:
     /**
      * @brief Returns the subset of names for which the supplied
      * archetype is enabled.
      */
-    std::list<assets::meta_model::name>
+    std::list<logical::meta_model::name>
     names_with_enabled_archetype(const std::string& archetype,
-        const std::list<assets::meta_model::name> names) const;
+        const std::list<logical::meta_model::name> names) const;
 
 public:
     const formattables::artefact_properties& artefact_properties() const;
-    const assets::meta_model::artefact_properties&
+    const logical::meta_model::artefact_properties&
     new_artefact_properties() const;
 
 public:
@@ -394,10 +394,10 @@ public:
 private:
     std::ostringstream stream_;
     boost::iostreams::filtering_ostream filtering_stream_;
-    const assets::meta_model::element& element_;
+    const logical::meta_model::element& element_;
     const context& context_;
     formattables::artefact_properties artefact_properties_;
-    assets::meta_model::artefact_properties new_artefact_properties_;
+    logical::meta_model::artefact_properties new_artefact_properties_;
     const physical::location archetype_location_;
     const bool requires_header_guard_;
 };

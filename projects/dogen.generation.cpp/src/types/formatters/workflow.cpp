@@ -23,7 +23,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.generation.cpp/types/workflow_error.hpp"
-#include "dogen.assets/io/meta_model/formatting_styles_io.hpp"
+#include "dogen.logical/io/meta_model/formatting_styles_io.hpp"
 #include "dogen.generation.cpp/io/formattables/artefact_properties_io.hpp"
 #include "dogen.generation.cpp/types/formatters/context.hpp"
 #include "dogen.generation.cpp/types/formatters/wale_formatter.hpp"
@@ -56,8 +56,8 @@ cpp::formatters::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-const assets::meta_model::artefact_properties&
-workflow::get_artefact_properties(const assets::meta_model::element& e,
+const logical::meta_model::artefact_properties&
+workflow::get_artefact_properties(const logical::meta_model::element& e,
     const std::string& archetype) const {
 
     const auto& ap(e.artefact_properties());
@@ -73,7 +73,7 @@ std::list<extraction::meta_model::artefact>
 workflow::format(
     const std::unordered_set<generation::meta_model::element_archetype>&
     enabled_archetype_for_element, const formattables::model& fm,
-    const assets::meta_model::element& e,
+    const logical::meta_model::element& e,
     const formattables::element_properties& ep) const {
 
     const auto id(e.name().qualified().dot());
@@ -101,7 +101,7 @@ workflow::format(
             continue;
         }
 
-        using assets::meta_model::formatting_styles;
+        using logical::meta_model::formatting_styles;
         const auto& frp(registrar().formatter_repository());
         context ctx(enabled_archetype_for_element, ep, fm,
             frp.helper_formatters());

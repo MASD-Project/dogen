@@ -34,7 +34,7 @@ class canonical_archetype_expander {
 private:
     void expand(const formatters::repository& frp,
         formattables::element_properties& eprops,
-        const assets::meta_model::element& e) const;
+        const logical::meta_model::element& e) const;
 
 public:
     void expand(const formatters::repository& frp, model& fm) const;

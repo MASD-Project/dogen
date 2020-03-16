@@ -29,8 +29,8 @@
 #include <string>
 #include <iosfwd>
 #include <boost/shared_ptr.hpp>
-#include "dogen.assets/types/meta_model/decoration/modeline.hpp"
-#include "dogen.assets/types/meta_model/decoration/generation_marker.hpp"
+#include "dogen.logical/types/meta_model/decoration/modeline.hpp"
+#include "dogen.logical/types/meta_model/decoration/generation_marker.hpp"
 #include "dogen.generation/types/formatters/comment_style.hpp"
 
 namespace dogen::generation::formatters {
@@ -44,7 +44,7 @@ private:
      * @brief Adds the formatted modeline to the content.
      */
     void add_modeline(std::list<std::string>& content,
-        const boost::shared_ptr<assets::meta_model::decoration::modeline> ml
+        const boost::shared_ptr<logical::meta_model::decoration::modeline> ml
         ) const;
 
     /**
@@ -54,7 +54,7 @@ private:
         const std::string& generation_timestamp,
         const std::string& origin_shah1_hash,
         const boost::shared_ptr<
-        assets::meta_model::decoration::generation_marker> gm) const;
+        logical::meta_model::decoration::generation_marker> gm) const;
 
     /**
      * @brief Adds the copyright notices to the content.
@@ -75,9 +75,9 @@ public:
         const std::string& generation_timestamp,
         const std::string& origin_shah1_hash,
         const boost::shared_ptr<
-        assets::meta_model::decoration::modeline> ml, const
+        logical::meta_model::decoration::modeline> ml, const
         boost::shared_ptr<
-        assets::meta_model::decoration::generation_marker> gm) const;
+        logical::meta_model::decoration::generation_marker> gm) const;
 
     void format_preamble(std::ostream& s, const comment_style& cs,
         const std::string& licence_text,
@@ -85,13 +85,13 @@ public:
         const std::string& generation_timestamp,
         const std::string& origin_shah1_hash,
         const boost::shared_ptr<
-        assets::meta_model::decoration::modeline> ml, const
+        logical::meta_model::decoration::modeline> ml, const
         boost::shared_ptr<
-        assets::meta_model::decoration::generation_marker> gm) const;
+        logical::meta_model::decoration::generation_marker> gm) const;
 
     void format_postamble(std::ostream& s, const comment_style& cs,
         const boost::shared_ptr<
-        assets::meta_model::decoration::modeline> ml) const;
+        logical::meta_model::decoration::modeline> ml) const;
 };
 
 }

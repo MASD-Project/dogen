@@ -27,9 +27,9 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
-#include "dogen.assets/types/meta_model/technical_space.hpp"
-#include "dogen.assets/types/meta_model/decoration/modeline.hpp"
-#include "dogen.assets/types/meta_model/decoration/generation_marker.hpp"
+#include "dogen.logical/types/meta_model/technical_space.hpp"
+#include "dogen.logical/types/meta_model/decoration/modeline.hpp"
+#include "dogen.logical/types/meta_model/decoration/generation_marker.hpp"
 #include "dogen.generation/types/formatters/indent_filter.hpp"
 #include "dogen.generation/types/formatters/decoration_formatter.hpp"
 
@@ -299,8 +299,8 @@ make_copyright_notices(const bool with_multiple_holders = false) {
     return r;
 }
 
-using namespace dogen::assets::meta_model;
-using namespace dogen::assets::meta_model::decoration;
+using namespace dogen::logical::meta_model;
+using namespace dogen::logical::meta_model::decoration;
 boost::shared_ptr<generation_marker> empty_marker;
 boost::shared_ptr<modeline> empty_modeline;
 

@@ -1,8 +1,8 @@
 <#@ masd.stitch.stream_variable_name=a.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::generation::cpp::formatters::serialization #>
-<#@ masd.stitch.inclusion_dependency="dogen.assets/types/meta_model/structural/object.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/meta_model/structural/object.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.assets/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/formatting_error.hpp" #>
@@ -13,15 +13,15 @@
 <#@ masd.stitch.wale.kvp.class.simple_name=class_forward_declarations_formatter #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=class_forward_declarations #>
 <#@ masd.stitch.wale.kvp.class.inclusion_support_type=regular_support #>
-<#@ masd.stitch.wale.kvp.yarn_element=assets::meta_model::structural::object #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::meta_model::structural::object #>
 <#@ masd.stitch.wale.kvp.meta_element=object #>
-<#@ masd.stitch.wale.kvp.meta_name_factory=assets::helpers::meta_name_factory #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
 std::list<std::string> class_forward_declarations_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const assets::meta_model::element& e) const {
+    const logical::meta_model::element& e) const {
     auto builder(f.make());
 
     using tp = formatters::types::traits;
@@ -32,9 +32,9 @@ std::list<std::string> class_forward_declarations_formatter::inclusion_dependenc
 }
 
 extraction::meta_model::artefact class_forward_declarations_formatter::
-format(const context& ctx, const assets::meta_model::element& e) const {
+format(const context& ctx, const logical::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& o(a.as<assets::meta_model::structural::object>(e));
+    const auto& o(a.as<logical::meta_model::structural::object>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(o));

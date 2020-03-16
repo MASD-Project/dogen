@@ -22,8 +22,8 @@
 #include <boost/algorithm/string/join.hpp>
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.csharp/types/traits.hpp"
-#include "dogen.assets/types/helpers/meta_name_factory.hpp"
-#include "dogen.assets/types/meta_model/visual_studio/solution.hpp"
+#include "dogen.logical/types/helpers/meta_name_factory.hpp"
+#include "dogen.logical/types/meta_model/visual_studio/solution.hpp"
 #include "dogen.generation.csharp/types/formatters/visual_studio/traits.hpp"
 #include "dogen.generation.csharp/types/formatters/types/traits.hpp"
 #include "dogen.generation.csharp/types/formatters/assistant.hpp"
@@ -49,9 +49,9 @@ solution_formatter::archetype_location() const {
     return r;
 }
 
-const assets::meta_model::name&
+const logical::meta_model::name&
 solution_formatter::meta_name() const {
-    using assets::helpers::meta_name_factory;
+    using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_visual_studio_solution_name());
     return r;
 }
@@ -61,22 +61,22 @@ std::string solution_formatter::family() const {
 }
 
 boost::filesystem::path solution_formatter::
-full_path(const formattables::locator& l, const assets::meta_model::name& n) const {
+full_path(const formattables::locator& l, const logical::meta_model::name& n) const {
     auto temp(n);
     temp.simple(boost::algorithm::join(n.location().model_modules(), ".") + ".sln");
     return l.make_full_path_for_project(temp, static_id());
 }
 
 std::list<std::string> solution_formatter::
-inclusion_dependencies(const assets::meta_model::element& /*e*/) const {
+inclusion_dependencies(const logical::meta_model::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
 extraction::meta_model::artefact solution_formatter::
-format(const context& ctx, const assets::meta_model::element& e) const {
+format(const context& ctx, const logical::meta_model::element& e) const {
     assistant a(ctx, e, archetype_location());
-    using assets::meta_model::visual_studio::solution;
+    using logical::meta_model::visual_studio::solution;
     const auto& sln(a.as<solution>(static_id(), e));
 a.stream() << "Microsoft Visual Studio Solution File, Format Version 12.00" << std::endl;
 a.stream() << "# Visual Studio 2012" << std::endl;

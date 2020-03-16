@@ -8,7 +8,7 @@
     "masd.injection.reference": "dogen",
     "masd.injection.reference": "dogen.variability",
     "masd.injection.reference": "dogen.tracing",
-    "masd.injection.reference": "dogen.assets",
+    "masd.injection.reference": "dogen.logical",
     "masd.injection.reference": "dogen.extraction",
     "masd.injection.reference": "masd",
     "masd.injection.reference": "masd.variability",
@@ -35,21 +35,21 @@
       "attributes": [
         {
           "name": "references",
-          "type": "std::unordered_map<assets::meta_model::name, assets::meta_model::origin_types>",
+          "type": "std::unordered_map<logical::meta_model::name, logical::meta_model::origin_types>",
           "documentation": "All other models that this model depends on, mapped to their origin.\n"
         },
         {
           "name": "leaves",
-          "type": "std::unordered_set<assets::meta_model::name>",
+          "type": "std::unordered_set<logical::meta_model::name>",
           "documentation": "All leaf types in this model.\n\nLeaves are types concrete types which have a parent.\n"
         },
         {
           "name": "elements",
-          "type": "std::vector<boost::shared_ptr<assets::meta_model::element>>"
+          "type": "std::vector<boost::shared_ptr<logical::meta_model::element>>"
         },
         {
           "name": "root_module",
-          "type": "boost::shared_ptr<assets::meta_model::structural::module>",
+          "type": "boost::shared_ptr<logical::meta_model::structural::module>",
           "documentation": "The module that represents the model.\n"
         },
         {
@@ -64,22 +64,22 @@
         },
         {
           "name": "input_technical_space",
-          "type": "assets::meta_model::technical_space",
+          "type": "logical::meta_model::technical_space",
           "documentation": "Technical space which this model used originally.\n"
         },
         {
           "name": "output_technical_space",
-          "type": "assets::meta_model::technical_space",
+          "type": "logical::meta_model::technical_space",
           "documentation": "Technical space into which to output the model.\n"
         },
         {
           "name": "all_technical_spaces",
-          "type": "std::unordered_set<assets::meta_model::technical_space>",
+          "type": "std::unordered_set<logical::meta_model::technical_space>",
           "documentation": "Set of all technical concrete spaces involved in generating this model.\n\nIncludes the primary technical space (e.g. the output technical space) as well as\nall of the secondary technical spaces. Does not include any abstract technical\nspaces.\n"
         },
         {
           "name": "orm_properties",
-          "type": "boost::optional<assets::meta_model::orm::model_properties>"
+          "type": "boost::optional<logical::meta_model::orm::model_properties>"
         },
         {
           "name": "enabled_archetype_for_element",
@@ -95,7 +95,7 @@
         },
         {
           "name": "extraction_properties",
-          "type": "assets::meta_model::extraction_properties"
+          "type": "logical::meta_model::extraction_properties"
         }
       ]
     },
@@ -481,7 +481,7 @@
       "attributes": [
         {
           "name": "name",
-          "type": "assets::meta_model::name"
+          "type": "logical::meta_model::name"
         }
       ]
     },
@@ -494,7 +494,7 @@
       "attributes": [
         {
           "name": "meta_name",
-          "type": "assets::meta_model::name"
+          "type": "logical::meta_model::name"
         }
       ]
     },
@@ -553,7 +553,7 @@
       "attributes": [
         {
           "name": "transforms_by_technical_space_",
-          "type": "std::unordered_map<assets::meta_model::technical_space, std::shared_ptr<model_to_extraction_model_transform_interface>>"
+          "type": "std::unordered_map<logical::meta_model::technical_space, std::shared_ptr<model_to_extraction_model_transform_interface>>"
         }
       ]
     },
@@ -769,15 +769,15 @@
       "attributes": [
         {
           "name": "modelines_by_modeline_group_by_technical_space",
-          "type": "std::unordered_map<std::string, std::unordered_map<assets::meta_model::technical_space, boost::shared_ptr<assets::meta_model::decoration::modeline>>>"
+          "type": "std::unordered_map<std::string, std::unordered_map<logical::meta_model::technical_space, boost::shared_ptr<logical::meta_model::decoration::modeline>>>"
         },
         {
           "name": "licences_by_name",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<assets::meta_model::decoration::licence>>"
+          "type": "std::unordered_map<std::string, boost::shared_ptr<logical::meta_model::decoration::licence>>"
         },
         {
           "name": "generation_markers_by_name",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<assets::meta_model::decoration::generation_marker>>"
+          "type": "std::unordered_map<std::string, boost::shared_ptr<logical::meta_model::decoration::generation_marker>>"
         }
       ]
     },
@@ -931,7 +931,7 @@
         },
         {
           "name": "technical_space",
-          "type": "assets::meta_model::technical_space"
+          "type": "logical::meta_model::technical_space"
         },
         {
           "name": "generate_preamble",

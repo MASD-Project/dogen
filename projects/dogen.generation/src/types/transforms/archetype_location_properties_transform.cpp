@@ -25,14 +25,14 @@
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.assets/types/traits.hpp"
-#include "dogen.assets/types/meta_model/structural/module.hpp"
+#include "dogen.logical/types/traits.hpp"
+#include "dogen.logical/types/meta_model/structural/module.hpp"
 #include "dogen.generation/io/meta_model/model_io.hpp"
 #include "dogen.generation/io/meta_model/element_archetype_io.hpp"
 #include "dogen.generation/io/meta_model/backend_properties_io.hpp"
 #include "dogen.generation/io/meta_model/facet_properties_io.hpp"
 #include "dogen.generation/io/meta_model/archetype_properties_io.hpp"
-#include "dogen.assets/io/meta_model/local_archetype_location_properties_io.hpp"
+#include "dogen.logical/io/meta_model/local_archetype_location_properties_io.hpp"
 #include "dogen.generation/types/transforms/transformation_error.hpp"
 #include "dogen.generation/types/transforms/archetype_location_properties_transform.hpp"
 
@@ -66,10 +66,10 @@ make_backend_feature_group(const variability::meta_model::feature_model& fm,
     for (const auto& pair : alrp.facet_names_by_backend_name()) {
         const auto& backend(pair.first);
         backend_feature_group btg;
-        const auto ebl(assets::traits::enabled());
+        const auto ebl(logical::traits::enabled());
         btg.enabled = s.get_by_name(backend, ebl);
 
-        const auto dir(assets::traits::directory());
+        const auto dir(logical::traits::directory());
         btg.directory = s.get_by_name(backend, dir);
 
         r.insert(std::make_pair(backend, btg));
@@ -89,16 +89,16 @@ make_facet_feature_group(const variability::meta_model::feature_model& fm,
     for (const auto& pair : alrp.facet_names_by_backend_name()) {
         for (const auto& fct : pair.second) {
             facet_feature_group ftg;
-            const auto ebl(assets::traits::enabled());
+            const auto ebl(logical::traits::enabled());
             ftg.enabled = s.get_by_name(fct, ebl);
 
-            const auto ow(assets::traits::overwrite());
+            const auto ow(logical::traits::overwrite());
             ftg.overwrite = s.get_by_name(fct, ow);
 
             ftg.directory = s.try_get_by_name(fct,
-                assets::traits::directory());
+                logical::traits::directory());
             ftg.postfix = s.try_get_by_name(fct,
-                assets::traits::postfix());
+                logical::traits::postfix());
 
             r.insert(std::make_pair(fct, ftg));
         }
@@ -117,13 +117,13 @@ archetype_location_properties_transform::make_global_archetype_feature_group(
     const variability::helpers::feature_selector s(fm);
     for (const auto& al : alrp.all()) {
         global_archetype_feature_group gatg;
-        const auto ebl(assets::traits::enabled());
+        const auto ebl(logical::traits::enabled());
         gatg.enabled = s.get_by_name(al.archetype(), ebl);
 
-        const auto ow(assets::traits::overwrite());
+        const auto ow(logical::traits::overwrite());
         gatg.overwrite = s.get_by_name(al.archetype(), ow);
 
-        const auto postfix(assets::traits::postfix());
+        const auto postfix(logical::traits::postfix());
         gatg.postfix = s.get_by_name(al.archetype(), postfix);
 
         r.insert(std::make_pair(al.archetype(), gatg));
@@ -142,11 +142,11 @@ archetype_location_properties_transform::make_local_archetype_feature_group(
     const variability::helpers::feature_selector s(fm);
     for (const auto& al : alrp.all()) {
         local_archetype_feature_group latg;
-        const auto ebl(assets::traits::enabled());
+        const auto ebl(logical::traits::enabled());
         latg.facet_enabled = s.get_by_name(al.facet(), ebl);
         latg.archetype_enabled = s.get_by_name(al.archetype(), ebl);
 
-        const auto ow(assets::traits::overwrite());
+        const auto ow(logical::traits::overwrite());
         latg.facet_overwrite = s.get_by_name(al.facet(), ow);
         latg.archetype_overwrite = s.get_by_name(al.archetype(), ow);
 
@@ -313,7 +313,7 @@ populate_global_archetype_location_properties(
 }
 
 std::unordered_map<std::string,
-                   assets::meta_model::local_archetype_location_properties>
+                   logical::meta_model::local_archetype_location_properties>
 archetype_location_properties_transform::
 obtain_local_archetype_location_properties(
     const std::unordered_map<std::string, local_archetype_feature_group>& fgs,
@@ -324,7 +324,7 @@ obtain_local_archetype_location_properties(
 
     std::unordered_map<
         std::string,
-        assets::meta_model::local_archetype_location_properties> r;
+        logical::meta_model::local_archetype_location_properties> r;
     const variability::helpers::configuration_selector s(cfg);
     for (const auto& al : als) {
         const auto archetype(al.archetype());
@@ -336,7 +336,7 @@ obtain_local_archetype_location_properties(
         }
         const auto fg(i->second);
 
-        assets::meta_model::local_archetype_location_properties lalp;
+        logical::meta_model::local_archetype_location_properties lalp;
         if (s.has_configuration_point(fg.facet_enabled)) {
             lalp.facet_enabled(
                 s.get_boolean_content_or_default(fg.facet_enabled));
@@ -378,7 +378,7 @@ populate_local_archetype_location_properties(
      * Bucket all elements by their meta-name.
      */
     std::unordered_map<std::string,
-                       std::list<boost::shared_ptr<assets::meta_model::element>>>
+                       std::list<boost::shared_ptr<logical::meta_model::element>>>
         bucketed_elements;
     for (auto ptr : m.elements())
         bucketed_elements[ptr->meta_name().qualified().dot()].push_back(ptr);

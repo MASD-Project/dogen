@@ -21,16 +21,16 @@
 #include <set>
 #include <algorithm>
 #include <boost/pointer_cast.hpp>
-#include "dogen.assets/types/helpers/meta_name_factory.hpp"
-#include "dogen.assets/types/meta_model/structural/object.hpp"
-#include "dogen.assets/types/meta_model/structural/visitor.hpp"
-#include "dogen.assets/types/meta_model/structural/builtin.hpp"
-#include "dogen.assets/types/meta_model/structural/exception.hpp"
-#include "dogen.assets/types/meta_model/structural/enumeration.hpp"
-#include "dogen.assets/types/meta_model/structural/primitive.hpp"
-#include "dogen.assets/types/meta_model/visual_studio/project_persistence_block.hpp"
-#include "dogen.assets/types/meta_model/visual_studio/project.hpp"
-#include "dogen.assets/types/meta_model/structural/assistant.hpp"
+#include "dogen.logical/types/helpers/meta_name_factory.hpp"
+#include "dogen.logical/types/meta_model/structural/object.hpp"
+#include "dogen.logical/types/meta_model/structural/visitor.hpp"
+#include "dogen.logical/types/meta_model/structural/builtin.hpp"
+#include "dogen.logical/types/meta_model/structural/exception.hpp"
+#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
+#include "dogen.logical/types/meta_model/structural/primitive.hpp"
+#include "dogen.logical/types/meta_model/visual_studio/project_persistence_block.hpp"
+#include "dogen.logical/types/meta_model/visual_studio/project.hpp"
+#include "dogen.logical/types/meta_model/structural/assistant.hpp"
 #include "dogen.generation.csharp/types/formattables/project_items_expander.hpp"
 
 namespace {
@@ -45,7 +45,7 @@ std::unordered_set<std::string>
 project_items_expander::meta_names_for_project_items() {
     std::unordered_set<std::string> r;
 
-    using ymnf = assets::helpers::meta_name_factory;
+    using ymnf = logical::helpers::meta_name_factory;
     r.insert(ymnf::make_enumeration_name().qualified().dot());
     r.insert(ymnf::make_primitive_name().qualified().dot());
     r.insert(ymnf::make_exception_name().qualified().dot());
@@ -65,9 +65,9 @@ bool project_items_expander::is_project_item(const std::string& mn) const {
 }
 
 void project_items_expander::expand(model& fm) const {
-    using assets::meta_model::visual_studio::project;
+    using logical::meta_model::visual_studio::project;
     boost::shared_ptr<project> proj;
-    using ymnf = assets::helpers::meta_name_factory;
+    using ymnf = logical::helpers::meta_name_factory;
     const auto proj_name(ymnf::make_visual_studio_project_name());
     const auto proj_qn(proj_name.qualified().dot());
 
@@ -101,9 +101,9 @@ void project_items_expander::expand(model& fm) const {
         fm.project_items().push_back(pi);
 
     if (proj) {
-        assets::meta_model::visual_studio::item_group ig;
+        logical::meta_model::visual_studio::item_group ig;
         for (const auto& pi : set) {
-            assets::meta_model::visual_studio::item item;
+            logical::meta_model::visual_studio::item item;
             item.include(pi);
             item.name(msbuild_target);
             ig.items().push_back(item);

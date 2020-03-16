@@ -54,7 +54,7 @@ bool stitch_formatter::is_header(const inclusion_support_types ist) const {
 
 extraction::meta_model::artefact stitch_formatter::
 format(const artefact_formatter_interface& stock_formatter, const context& ctx,
-    const assets::meta_model::element& e) const {
+    const logical::meta_model::element& e) const {
     const auto al(stock_formatter.archetype_location());
     const auto needs_guard(is_header(stock_formatter.inclusion_support_type()));
 
@@ -90,7 +90,7 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
     /*
      * Since the template exists, we can instantiate it.
      */
-    const auto ts(assets::meta_model::technical_space::cpp);
+    const auto ts(logical::meta_model::technical_space::cpp);
     const auto i(e.decoration().find(ts));
     auto dec(i->second);
     const auto external_keys = std::unordered_map<std::string, std::string> {
