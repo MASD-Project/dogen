@@ -20,7 +20,13 @@
  */
 #include <map>
 #include <sstream>
+#include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string/replace.hpp>
+#include "dogen.variability/types/meta_model/text.hpp"
+#include "dogen.variability/types/meta_model/boolean.hpp"
+#include "dogen.variability/types/meta_model/number.hpp"
+#include "dogen.variability/types/meta_model/value_visitor.hpp"
+#include "dogen.variability/lexical_cast/meta_model/value_type_lc.hpp"
 #include "dogen.variability/lexical_cast/meta_model/binding_point_lc.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.injection/types/transforms/model_production_chain.hpp"
@@ -37,6 +43,28 @@ auto lg(logger_factory("engine.spec_dumper"));
 
 const std::string empty_output_directory;
 const std::string activity("dumpspecs");
+
+using namespace dogen::variability::meta_model;
+class visitor : public value_visitor {
+public:
+    void visit(const number& v) {
+        result_ = boost::lexical_cast<std::string>(v.content());
+    }
+
+    void visit(const text& v) {
+        result_ = v.content();
+    }
+
+    void visit(const boolean& v) {
+        result_ = v.content() ? "true" : "false";
+    }
+
+public:
+    std::string result() { return result_; }
+
+private:
+    std::string result_;
+};
 
 }
 
@@ -59,6 +87,29 @@ process_binding_point(const variability::meta_model::binding_point bp) const {
     return r;
 }
 
+std::string spec_dumper::process_value(
+    const boost::shared_ptr<variability::meta_model::value> v) const {
+    visitor vis;
+    std::string r;
+    if (v) {
+        v->accept(vis);
+        r = " Default value: ";
+        if (vis.result().empty())
+            r += "''.";
+        else
+            r += vis.result() + ".";
+    }
+    return r;
+}
+
+std::string spec_dumper::process_value_type(
+    const variability::meta_model::value_type vt) const {
+    std::string r(" Value type: '");
+    r += boost::lexical_cast<std::string>(vt) + "'.";
+    boost::replace_all(r, "value_type::", "masd::variability::");
+    return r;
+}
+
 spec_group spec_dumper::create_injection_group() const {
     spec_group r;
     r.name("Injection");
@@ -77,6 +128,28 @@ spec_group spec_dumper::create_injection_group() const {
         e.description(s.str());
         r.entries().push_back(e);
     }
+    return r;
+}
+
+spec_group spec_dumper::create_conversion_group() const {
+    spec_group r;
+    r.name("Conversion");
+    r.description("Output to an external format from a Dogen model.");
+
+    using injection::transforms::model_production_chain;
+    auto& rg(model_production_chain::registrar());
+    for (const auto& ext : rg.registered_encoding_extensions()) {
+        const auto& d(rg.encoding_transform_for_extension(ext));
+        spec_entry e;
+        e.name(d.id());
+
+        std::ostringstream s;
+        s << preprocess(d.description())
+          << " Extension: '" << d.extension() << "'";
+        e.description(s.str());
+        r.entries().push_back(e);
+    }
+
     return r;
 }
 
@@ -107,7 +180,9 @@ create_features_group(const variability::meta_model::feature_model& fm) const {
 
         std::ostringstream s;
         s << preprocess(f.description())
-          << process_binding_point(f.binding_point());
+          << process_binding_point(f.binding_point())
+          << process_value(f.default_value())
+          << process_value_type(f.value_type());
         map.insert(std::make_pair(qn, s.str()));
     }
 
@@ -130,9 +205,9 @@ specs spec_dumper::dump(const configuration& cfg) const {
 
         specs r;
         r.groups().push_back(create_injection_group());
+        r.groups().push_back(create_conversion_group());
         r.groups().push_back(create_generation_group());
         r.groups().push_back(create_features_group(fm));
-
         return r;
     }
 
