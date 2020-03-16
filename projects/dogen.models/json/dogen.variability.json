@@ -147,7 +147,8 @@
       "name": "meta_model::value_type",
       "documentation": "What values can a feature have.\n",
       "stereotypes": [
-        "masd::enumeration"
+        "masd::enumeration",
+        "dogen::convertible"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [

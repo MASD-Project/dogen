@@ -1074,16 +1074,16 @@ case.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O8">
       <dia:attribute name="obj_pos">
-        <dia:point val="-42,-38"/>
+        <dia:point val="-50,-38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-42.05,-38.05;-33.365,-31.15"/>
+        <dia:rectangle val="-50.05,-38.05;-33.665,-31.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-42,-38"/>
+        <dia:point val="-50,-38"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="16.285"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -1092,7 +1092,7 @@ case.
         <dia:string>#value_type#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#masd::enumeration#</dia:string>
+        <dia:string>#masd::enumeration, dogen::convertible#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#What values can a feature have.#</dia:string>
@@ -3603,7 +3603,7 @@ elements.#</dia:string>
         <dia:point val="-34.9375,-19"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-37.7575,-31.25;-34.1875,-18.2"/>
+        <dia:rectangle val="-41.9075,-31.25;-34.1875,-18.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3611,8 +3611,8 @@ elements.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-34.9375,-19"/>
         <dia:point val="-34.9375,-29"/>
-        <dia:point val="-37.7075,-29"/>
-        <dia:point val="-37.7075,-31.2"/>
+        <dia:point val="-41.8575,-29"/>
+        <dia:point val="-41.8575,-31.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
