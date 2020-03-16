@@ -89,8 +89,7 @@ std::ostream& operator<<(std::ostream& s, const location_repository_parts& v) {
       << "\"__type__\": " << "\"dogen::physical::entities::location_repository_parts\"" << ", "
       << "\"all\": " << v.all() << ", "
       << "\"by_meta_name\": " << v.by_meta_name() << ", "
-      << "\"by_family\": " << v.by_family() << ", "
-      << "\"by_intra_backend_segment\": " << v.by_intra_backend_segment()
+      << "\"by_family\": " << v.by_family()
       << " }";
     return(s);
 }

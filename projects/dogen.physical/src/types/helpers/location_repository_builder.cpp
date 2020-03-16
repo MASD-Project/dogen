@@ -190,7 +190,6 @@ add(const entities::location_repository_parts& parts) {
     add(parts.all());
     add(parts.by_meta_name());
     add(parts.by_family());
-    add(parts.by_intra_backend_segment());
 }
 
 const entities::location_repository&

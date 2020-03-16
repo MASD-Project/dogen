@@ -45,8 +45,7 @@ public:
     location_repository_parts(
         const std::list<dogen::physical::entities::location>& all,
         const std::unordered_map<std::string, dogen::physical::entities::locations_group>& by_meta_name,
-        const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_family,
-        const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_intra_backend_segment);
+        const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_family);
 
 public:
     /**
@@ -83,19 +82,6 @@ public:
     void by_family(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >&& v);
     /**@}*/
 
-    /**
-     * @brief All archetype locations for a given intra-backend segment.
-     *
-     * Intra-backend segments are backend specific sets of archetype locations, with
-     * associated properties.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_intra_backend_segment() const;
-    std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_intra_backend_segment();
-    void by_intra_backend_segment(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& v);
-    void by_intra_backend_segment(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >&& v);
-    /**@}*/
-
 public:
     bool operator==(const location_repository_parts& rhs) const;
     bool operator!=(const location_repository_parts& rhs) const {
@@ -110,7 +96,6 @@ private:
     std::list<dogen::physical::entities::location> all_;
     std::unordered_map<std::string, dogen::physical::entities::locations_group> by_meta_name_;
     std::unordered_map<std::string, std::list<dogen::physical::entities::location> > by_family_;
-    std::unordered_map<std::string, std::list<dogen::physical::entities::location> > by_intra_backend_segment_;
 };
 
 }

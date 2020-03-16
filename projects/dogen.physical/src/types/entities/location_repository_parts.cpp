@@ -25,26 +25,22 @@ namespace dogen::physical::entities {
 location_repository_parts::location_repository_parts(
     const std::list<dogen::physical::entities::location>& all,
     const std::unordered_map<std::string, dogen::physical::entities::locations_group>& by_meta_name,
-    const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_family,
-    const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_intra_backend_segment)
+    const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_family)
     : all_(all),
       by_meta_name_(by_meta_name),
-      by_family_(by_family),
-      by_intra_backend_segment_(by_intra_backend_segment) { }
+      by_family_(by_family) { }
 
 void location_repository_parts::swap(location_repository_parts& other) noexcept {
     using std::swap;
     swap(all_, other.all_);
     swap(by_meta_name_, other.by_meta_name_);
     swap(by_family_, other.by_family_);
-    swap(by_intra_backend_segment_, other.by_intra_backend_segment_);
 }
 
 bool location_repository_parts::operator==(const location_repository_parts& rhs) const {
     return all_ == rhs.all_ &&
         by_meta_name_ == rhs.by_meta_name_ &&
-        by_family_ == rhs.by_family_ &&
-        by_intra_backend_segment_ == rhs.by_intra_backend_segment_;
+        by_family_ == rhs.by_family_;
 }
 
 location_repository_parts& location_repository_parts::operator=(location_repository_parts other) {
@@ -99,22 +95,6 @@ void location_repository_parts::by_family(const std::unordered_map<std::string, 
 
 void location_repository_parts::by_family(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >&& v) {
     by_family_ = std::move(v);
-}
-
-const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& location_repository_parts::by_intra_backend_segment() const {
-    return by_intra_backend_segment_;
-}
-
-std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& location_repository_parts::by_intra_backend_segment() {
-    return by_intra_backend_segment_;
-}
-
-void location_repository_parts::by_intra_backend_segment(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& v) {
-    by_intra_backend_segment_ = v;
-}
-
-void location_repository_parts::by_intra_backend_segment(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >&& v) {
-    by_intra_backend_segment_ = std::move(v);
 }
 
 }
