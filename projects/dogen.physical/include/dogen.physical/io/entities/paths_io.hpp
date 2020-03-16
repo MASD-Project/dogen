@@ -18,18 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_PHYSICAL_HPP
-#define DOGEN_PHYSICAL_TYPES_PHYSICAL_HPP
+#ifndef DOGEN_PHYSICAL_IO_ENTITIES_PATHS_IO_HPP
+#define DOGEN_PHYSICAL_IO_ENTITIES_PATHS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-/**
- * @brief The pysical model defines the core entities that make up the
- * physical dimension of MASD conceptual space.
- */
-namespace dogen::physical {
+#include <iosfwd>
+#include "dogen.physical/types/entities/paths.hpp"
+
+namespace dogen::physical::entities {
+
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::physical::entities::paths& v);
+
 }
 
 #endif

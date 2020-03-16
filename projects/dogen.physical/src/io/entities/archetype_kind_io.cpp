@@ -18,18 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_PHYSICAL_HPP
-#define DOGEN_PHYSICAL_TYPES_PHYSICAL_HPP
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen.physical/io/entities/archetype_kind_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-/**
- * @brief The pysical model defines the core entities that make up the
- * physical dimension of MASD conceptual space.
- */
-namespace dogen::physical {
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
 }
 
-#endif
+namespace dogen::physical::entities {
+
+std::ostream& operator<<(std::ostream& s, const archetype_kind& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::physical::entities::archetype_kind\"" << ", "
+      << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
+      << "\"id\": " << "\"" << tidy_up_string(v.id()) << "\"" << ", "
+      << "\"file_extension\": " << "\"" << tidy_up_string(v.file_extension()) << "\""
+      << " }";
+    return(s);
+}
+
+}

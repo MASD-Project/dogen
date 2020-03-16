@@ -1,5 +1,5 @@
 {
-  "documentation": "The pysical model defines the core entities that make up the\nphysical dimension of MASD space.\n",
+  "documentation": "The pysical model defines the core entities that make up the\nphysical dimension of MASD conceptual space.\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "dogen.physical",
@@ -166,6 +166,304 @@
         "masd::exception"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::kernel_model",
+      "documentation": "Collection of code generation kernels available in the current instance of Dogen.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "kernels",
+          "type": "std::unordered_map<std::string, kernel>",
+          "documentation": "Lists all available kernels, by kernel id.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::kernel",
+      "stereotypes": [
+        "Element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "backends",
+          "type": "std::list<backend>"
+        }
+      ]
+    },
+    {
+      "name": "entities::backend",
+      "documentation": "Code generation backend, targeting a given technical space.\n",
+      "stereotypes": [
+        "ContainingElement"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "parts",
+          "type": "std::unordered_map<std::string, part>"
+        },
+        {
+          "name": "facets",
+          "type": "std::unordered_map<std::string, facet>"
+        },
+        {
+          "name": "archetypes",
+          "type": "std::unordered_map<std::string, archetype>"
+        },
+        {
+          "name": "archetype_kinds",
+          "type": "std::unordered_map<std::string, archetype_kind>"
+        }
+      ]
+    },
+    {
+      "name": "entities::part",
+      "stereotypes": [
+        "ContainingElement"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "path_configuration",
+          "type": "path_configuration"
+        },
+        {
+          "name": "facets",
+          "type": "std::unordered_map<std::string, facet>"
+        },
+        {
+          "name": "archetypes",
+          "type": "std::unordered_map<std::string, archetype>"
+        }
+      ]
+    },
+    {
+      "name": "entities::path_configuration",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "external_modules",
+          "type": "path_contribution_type",
+          "documentation": "What kind of contribution do the external modules make to the final path.\n"
+        },
+        {
+          "name": "model_modules",
+          "type": "path_contribution_type",
+          "documentation": "What kind of contribution do the model modules make to the final path.\n"
+        },
+        {
+          "name": "facet",
+          "type": "path_contribution_type",
+          "documentation": "What kind of contribution does the facet make to the final path.\n"
+        },
+        {
+          "name": "internal_modules",
+          "type": "path_contribution_type"
+        }
+      ]
+    },
+    {
+      "name": "entities::path_contribution_type",
+      "documentation": "Different kinds of contributions that can be made to the final path computation.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "none",
+          "type": "",
+          "documentation": "The item does not contribute at all to the path.\n"
+        },
+        {
+          "name": "as_directories",
+          "type": "",
+          "documentation": "The item contributes folders to the path.\n"
+        },
+        {
+          "name": "as_path_components",
+          "type": "",
+          "documentation": "The item contributes a single folder to the path, as a delimited string.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::facet",
+      "stereotypes": [
+        "ContainingElement",
+        "Postfixable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "archetypes",
+          "type": "std::unordered_map<std::string, archetype>"
+        }
+      ]
+    },
+    {
+      "name": "entities::archetype",
+      "stereotypes": [
+        "Element",
+        "Postfixable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "archetype_kind_id",
+          "type": "std::string"
+        },
+        {
+          "name": "meta_element_id",
+          "type": "std::string",
+          "documentation": "Which types of the logical model this archetype supports.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::archetype_kind",
+      "stereotypes": [
+        "Describable"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "std::string"
+        },
+        {
+          "name": "file_extension",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "entities::element",
+      "documentation": "Represents an entity which we would like to place in physical space.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "simple_name",
+          "type": "std::string"
+        },
+        {
+          "name": "qualified_name",
+          "type": "std::string"
+        },
+        {
+          "name": "external_modules",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "model_modules",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "internal_modules",
+          "type": "std::list<std::string>"
+        },
+        {
+          "name": "paths",
+          "type": "std::unordered_map<std::string, paths>"
+        }
+      ]
+    },
+    {
+      "name": "entities::element_model",
+      "documentation": "Collection of entities that need placing in physical space.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "elements",
+          "type": "std::unordered_map<std::string, element>"
+        }
+      ]
+    },
+    {
+      "name": "entities::paths",
+      "documentation": "Path information for a given element.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "absolute",
+          "type": "boost::filesystem::path"
+        },
+        {
+          "name": "relative",
+          "type": "boost::filesystem::path"
+        }
+      ]
+    },
+    {
+      "name": "entities::Locatable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "location",
+          "type": "location",
+          "documentation": "Position of this entity in physical space.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::Describable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "description",
+          "type": "std::string",
+          "documentation": "Human readable description of the entity.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::Element",
+      "parents": [
+        "entities::Locatable",
+        "entities::Describable"
+      ],
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::ContainingElement",
+      "parents": [
+        "entities::Element"
+      ],
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "directory_name",
+          "type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": "entities::Postfixable",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "postfix",
+          "type": "std::string",
+          "documentation": "Postfix to apply to the element.\n"
+        }
+      ]
     }
   ]
 }

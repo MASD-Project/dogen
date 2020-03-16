@@ -18,18 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_PHYSICAL_HPP
-#define DOGEN_PHYSICAL_TYPES_PHYSICAL_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_PATH_CONTRIBUTION_TYPE_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_PATH_CONTRIBUTION_TYPE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+namespace dogen::physical::entities {
+
 /**
- * @brief The pysical model defines the core entities that make up the
- * physical dimension of MASD conceptual space.
+ * @brief Different kinds of contributions that can be made to the final path computation.
  */
-namespace dogen::physical {
+enum class path_contribution_type : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    none = 1, ///< The item does not contribute at all to the path.
+    as_directories = 2, ///< The item contributes folders to the path.
+    as_path_components = 3 ///< The item contributes a single folder to the path, as a delimited string.
+};
+
 }
 
 #endif
