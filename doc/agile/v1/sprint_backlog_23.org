@@ -12,16 +12,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-16 Mon 09:16]
-| <75>                                   |        |      |      |       |
-| Headline                               | Time   |      |      |     % |
-|----------------------------------------+--------+------+------+-------|
-| *Total time*                           | *0:33* |      |      | 100.0 |
-|----------------------------------------+--------+------+------+-------|
-| Stories                                | 0:33   |      |      | 100.0 |
-| Active                                 |        | 0:33 |      | 100.0 |
-| Edit release notes for previous sprint |        |      | 0:15 |  45.5 |
-| Sprint and product backlog grooming    |        |      | 0:18 |  54.5 |
+#+CAPTION: Clock summary at [2020-03-16 Mon 12:00]
+| <75>                                      |        |      |      |       |
+| Headline                                  | Time   |      |      |     % |
+|-------------------------------------------+--------+------+------+-------|
+| *Total time*                              | *3:11* |      |      | 100.0 |
+|-------------------------------------------+--------+------+------+-------|
+| Stories                                   | 3:11   |      |      | 100.0 |
+| Active                                    |        | 3:11 |      | 100.0 |
+| Edit release notes for previous sprint    |        |      | 0:15 |   7.9 |
+| Sprint and product backlog grooming       |        |      | 0:18 |   9.4 |
+| Rename archetypes model to physical model |        |      | 0:28 |  14.7 |
+| Rename assets model to logical model      |        |      | 0:29 |  15.2 |
+| Consider renaming "meta-model" namespace  |        |      | 0:37 |  19.4 |
+| Rename engine to orchestration            |        |      | 1:04 |  33.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -53,12 +57,32 @@ Time spent creating the demo and presentation. Use the demo project:
 
 Updates to sprint and product backlog.
 
-*** Rename assets model to logical model                              :story:
+*** COMPLETED Rename archetypes model to physical model               :story:
+    CLOSED: [2020-03-16 Mon 10:15]
+    :LOGBOOK:
+    CLOCK: [2020-03-16 Mon 09:17]--[2020-03-16 Mon 09:45] =>  0:28
+    :END:
+
+According to the new understanding, the role of the archetypes model
+is to model entities in the physical dimension of MASD. Rename the
+model accordingly, and create the new entities namespace while we're
+at it.
+
+*** COMPLETED Rename assets model to logical model                    :story:
+    CLOSED: [2020-03-16 Mon 10:15]
+    :LOGBOOK:
+    CLOCK: [2020-03-16 Mon 09:46]--[2020-03-16 Mon 10:15] =>  0:29
+    :END:
 
 - rename all references to archetypes to "physical", e.g.:
   =artefact_properties= should be renamed, etc.
 
-*** Consider renaming "meta-model" namespace                          :story:
+*** COMPLETED Consider renaming "meta-model" namespace                :story:
+    CLOSED: [2020-03-16 Mon 10:43]
+    :LOGBOOK:
+    CLOCK: [2020-03-16 Mon 10:43]--[2020-03-16 Mon 10:54] =>  0:11
+    CLOCK: [2020-03-16 Mon 10:16]--[2020-03-16 Mon 10:42] =>  0:26
+    :END:
 
 Originally we created a number of namespaces in models called
 "meta-model". It started with assets, where it really was the
@@ -77,6 +101,18 @@ Ideas:
 Notes:
 
 - look for ideas on other projects.
+
+*** COMPLETED Rename engine to orchestration                          :story:
+    CLOSED: [2020-03-16 Mon 11:59]
+    :LOGBOOK:
+    CLOCK: [2020-03-16 Mon 10:55]--[2020-03-16 Mon 11:59] =>  1:04
+    :END:
+
+Since this model is responsible for the top-level orchestration, its
+probably a more meaningful name. Whilst we are at it, might as well do
+this rename now.
+
+While we were at it we also created namespaces in physical model.
 
 *** Implement locator in terms of new physical types                  :story:
 
