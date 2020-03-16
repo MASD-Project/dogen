@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.physical/io/location_io.hpp"
+#include "dogen.physical/io/entities/location_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -30,11 +30,11 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace dogen::physical {
+namespace dogen::physical::entities {
 
 std::ostream& operator<<(std::ostream& s, const location& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::physical::location\"" << ", "
+      << "\"__type__\": " << "\"dogen::physical::entities::location\"" << ", "
       << "\"kernel\": " << "\"" << tidy_up_string(v.kernel()) << "\"" << ", "
       << "\"backend\": " << "\"" << tidy_up_string(v.backend()) << "\"" << ", "
       << "\"facet\": " << "\"" << tidy_up_string(v.facet()) << "\"" << ", "

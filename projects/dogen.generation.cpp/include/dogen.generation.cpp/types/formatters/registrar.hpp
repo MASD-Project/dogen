@@ -30,9 +30,9 @@
 #include <memory>
 #include <forward_list>
 #include <unordered_map>
-#include "dogen.physical/types/location.hpp"
-#include "dogen.physical/types/locations_group.hpp"
-#include "dogen.physical/types/location_repository_parts.hpp"
+#include "dogen.physical/types/entities/location.hpp"
+#include "dogen.physical/types/entities/locations_group.hpp"
+#include "dogen.physical/types/entities/location_repository_parts.hpp"
 #include "dogen.generation.cpp/types/formatters/repository.hpp"
 #include "dogen.generation.cpp/types/formatters/helper_formatter_interface.hpp"
 #include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
@@ -81,24 +81,24 @@ public:
      * @brief Returns the archetype locations for the registered
      * formatters.
      */
-    const std::forward_list<physical::location>&
+    const std::forward_list<physical::entities::location>&
     archetype_locations() const;
 
     /**
      * @brief Returns the archetype locations for each meta-type.
      */
     const std::unordered_map<std::string,
-                             physical::locations_group>&
+                             physical::entities::locations_group>&
     archetype_locations_by_meta_name() const;
 
     /**
      * @brief Returns the archetype locations for each family.
      */
     const std::unordered_map<std::string,
-                             std::list<physical::location>>&
+                             std::list<physical::entities::location>>&
     archetype_locations_by_family() const;
 
-    const physical::location_repository_parts&
+    const physical::entities::location_repository_parts&
     archetype_location_repository_parts() const;
 
     /**
@@ -113,14 +113,14 @@ public:
 
 private:
     repository formatter_repository_;
-    std::forward_list<physical::location> archetype_locations_;
+    std::forward_list<physical::entities::location> archetype_locations_;
     std::unordered_map<std::string,
-                       physical::locations_group>
+                       physical::entities::locations_group>
     archetype_locations_by_meta_name_;
     std::unordered_map<std::string,
-                       std::list<physical::location>>
+                       std::list<physical::entities::location>>
     archetype_locations_by_family_;
-    physical::location_repository_parts
+    physical::entities::location_repository_parts
     archetype_location_repository_parts_;
 };
 

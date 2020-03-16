@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.physical/types/locations_group.hpp"
+#include "dogen.physical/types/entities/locations_group.hpp"
 
-namespace dogen::physical {
+namespace dogen::physical::entities {
 
 locations_group::locations_group(
-    const std::list<dogen::physical::location>& locations,
+    const std::list<dogen::physical::entities::location>& locations,
     const std::unordered_map<std::string, std::string>& canonical_locations)
     : locations_(locations),
       canonical_locations_(canonical_locations) { }
@@ -45,19 +45,19 @@ locations_group& locations_group::operator=(locations_group other) {
     return *this;
 }
 
-const std::list<dogen::physical::location>& locations_group::locations() const {
+const std::list<dogen::physical::entities::location>& locations_group::locations() const {
     return locations_;
 }
 
-std::list<dogen::physical::location>& locations_group::locations() {
+std::list<dogen::physical::entities::location>& locations_group::locations() {
     return locations_;
 }
 
-void locations_group::locations(const std::list<dogen::physical::location>& v) {
+void locations_group::locations(const std::list<dogen::physical::entities::location>& v) {
     locations_ = v;
 }
 
-void locations_group::locations(const std::list<dogen::physical::location>&& v) {
+void locations_group::locations(const std::list<dogen::physical::entities::location>&& v) {
     locations_ = std::move(v);
 }
 

@@ -23,7 +23,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
-#include "dogen.physical/types/location_repository.hpp"
+#include "dogen.physical/types/entities/location_repository.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/traits.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
@@ -45,7 +45,7 @@ namespace dogen::logical::transforms {
 extraction_properties_transform::feature_group
 extraction_properties_transform::make_feature_group(
     const variability::entities::feature_model& fm,
-    const std::list<physical::location>& als) {
+    const std::list<physical::entities::location>& als) {
     feature_group r;
     const variability::helpers::feature_selector s(fm);
 
@@ -106,7 +106,7 @@ obtain_enable_backend_directories(const feature_group& fg,
 
 entities::extraction_properties extraction_properties_transform::
 make_extraction_properties(const context& ctx,
-    const std::list<physical::location>& als,
+    const std::list<physical::entities::location>& als,
     const variability::entities::configuration& cfg) {
 
     const auto fg(make_feature_group(*ctx.feature_model(), als));

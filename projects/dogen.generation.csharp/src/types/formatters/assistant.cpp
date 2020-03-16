@@ -56,7 +56,7 @@ namespace dogen::generation::csharp::formatters {
 
 assistant::
 assistant(const context& ctx, const logical::entities::element& e,
-    const physical::location& al) :
+    const physical::entities::location& al) :
     element_id_(e.name().qualified().dot()), element_(e), context_(ctx),
     artefact_properties_(obtain_artefact_properties(al.archetype())),
     archetype_location_(al) {

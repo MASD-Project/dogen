@@ -24,7 +24,7 @@
 #include "dogen.utility/types/io/unordered_set_io.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.physical/types/location_repository.hpp"
+#include "dogen.physical/types/entities/location_repository.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.generation/io/entities/model_io.hpp"
 #include "dogen.generation/io/entities/facet_properties_io.hpp"
@@ -253,7 +253,7 @@ void enablement_transform::compute_enablement_for_artefact_properties(
 
 void enablement_transform::compute_enablement_for_element(
     const std::unordered_map<std::string,
-    physical::locations_group>& archetype_locations_by_meta_name,
+    physical::entities::locations_group>& archetype_locations_by_meta_name,
     const std::unordered_map<std::string,
     entities::denormalised_archetype_properties>&
     global_archetype_location_properties,

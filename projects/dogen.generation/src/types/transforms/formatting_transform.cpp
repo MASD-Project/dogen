@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
-#include "dogen.physical/types/location_repository.hpp"
+#include "dogen.physical/types/entities/location_repository.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
@@ -66,7 +66,7 @@ formatting_transform::to_formatting_style(const std::string& s) {
 std::unordered_map<std::string, formatting_transform::feature_group>
 formatting_transform::make_feature_groups(
     const variability::entities::feature_model& fm,
-    const std::list<physical::location>& als) {
+    const std::list<physical::entities::location>& als) {
 
     BOOST_LOG_SEV(lg, debug) << "Creating feature groups.";
 

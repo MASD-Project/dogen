@@ -18,44 +18,44 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_LOGICAL_TYPES_LOCATION_REPOSITORY_BUILDER_HPP
-#define DOGEN_LOGICAL_TYPES_LOCATION_REPOSITORY_BUILDER_HPP
+#ifndef DOGEN_LOGICAL_TYPES_HELPERS_LOCATION_REPOSITORY_BUILDER_HPP
+#define DOGEN_LOGICAL_TYPES_HELPERS_LOCATION_REPOSITORY_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <list>
-#include "dogen.physical/types/location.hpp"
-#include "dogen.physical/types/locations_group.hpp"
-#include "dogen.physical/types/location_repository_parts.hpp"
-#include "dogen.physical/types/location_repository.hpp"
+#include "dogen.physical/types/entities/location.hpp"
+#include "dogen.physical/types/entities/locations_group.hpp"
+#include "dogen.physical/types/entities/location_repository_parts.hpp"
+#include "dogen.physical/types/entities/location_repository.hpp"
 
-namespace dogen::physical {
+namespace dogen::physical::helpers {
 
 class location_repository_builder final {
 private:
-    void validate(const std::list<location>& als) const;
-    void populate_locations(const std::list<location>& als);
+    void validate(const std::list<entities::location>& als) const;
+    void populate_locations(const std::list<entities::location>& als);
     void populate_archetypes_by_facet_by_backend();
     void populate_facet_names_by_backend_name();
     void populate_formatter_names_by_backend_name();
 
 public:
-    void add(const std::list<location>& als);
-    void add(const std::unordered_map<std::string, locations_group>&
+    void add(const std::list<entities::location>& als);
+    void add(const std::unordered_map<std::string, entities::locations_group>&
         locations_by_meta_name);
     void add(const std::unordered_map<std::string,
-        std::list<location>>& locations_by_family);
+        std::list<entities::location>>& locations_by_family);
 
 public:
-    void add(const location_repository_parts& parts);
+    void add(const entities::location_repository_parts& parts);
 
 public:
-    const location_repository& build();
+    const entities::location_repository& build();
 
 private:
-    location_repository repository_;
+    entities::location_repository repository_;
 };
 
 }

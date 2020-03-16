@@ -20,12 +20,13 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.physical/io/location_io.hpp"
-#include "dogen.physical/io/locations_group_io.hpp"
+#include "dogen.physical/io/entities/location_io.hpp"
+#include "dogen.physical/io/entities/locations_group_io.hpp"
+#include "dogen.physical/io/entities/location_repository_parts_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::physical::location>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::physical::entities::location>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -47,14 +48,14 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::locations_group>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
         s << "\"" << tidy_up_string(i->first) << "\"";
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->second) << "\"";
+        s << i->second;
         s << " } ]";
     }
     s << " ] ";
@@ -63,13 +64,33 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace dogen::physical {
+namespace std {
 
-std::ostream& operator<<(std::ostream& s, const locations_group& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace dogen::physical::entities {
+
+std::ostream& operator<<(std::ostream& s, const location_repository_parts& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::physical::locations_group\"" << ", "
-      << "\"locations\": " << v.locations() << ", "
-      << "\"canonical_locations\": " << v.canonical_locations()
+      << "\"__type__\": " << "\"dogen::physical::entities::location_repository_parts\"" << ", "
+      << "\"all\": " << v.all() << ", "
+      << "\"by_meta_name\": " << v.by_meta_name() << ", "
+      << "\"by_family\": " << v.by_family() << ", "
+      << "\"by_intra_backend_segment\": " << v.by_intra_backend_segment()
       << " }";
     return(s);
 }

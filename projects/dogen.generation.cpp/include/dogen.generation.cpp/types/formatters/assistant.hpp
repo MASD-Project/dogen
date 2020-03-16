@@ -32,7 +32,7 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
-#include "dogen.physical/types/location.hpp"
+#include "dogen.physical/types/entities/location.hpp"
 #include "dogen.extraction/types/entities/artefact.hpp"
 #include "dogen.generation/types/formatters/scoped_namespace_formatter.hpp"
 #include "dogen.generation/types/formatters/scoped_boilerplate_formatter.hpp"
@@ -51,7 +51,7 @@ namespace dogen::generation::cpp::formatters {
 class assistant final {
 public:
     assistant(const context& ctx, const logical::entities::element& e,
-        const physical::location& al,
+        const physical::entities::location& al,
         const bool requires_header_guard);
 
 private:
@@ -72,8 +72,8 @@ public:
      * @brief Returns the text to use for a given class for the @code
      * final keyword. If non-empty, includes a trailing space.
      */
-    std::string
-    make_final_keyword_text(const logical::entities::structural::object& o) const;
+    std::string make_final_keyword_text(
+        const logical::entities::structural::object& o) const;
 
     /**
      * @brief Returns the override keyword, if supported by the
@@ -398,7 +398,7 @@ private:
     const context& context_;
     formattables::artefact_properties artefact_properties_;
     logical::entities::artefact_properties new_artefact_properties_;
-    const physical::location archetype_location_;
+    const physical::entities::location archetype_location_;
     const bool requires_header_guard_;
 };
 

@@ -44,9 +44,9 @@ std::string feature_template_bundle_header_formatter::id() const {
     return static_id();
 }
 
-physical::location
+physical::entities::location
 feature_template_bundle_header_formatter::archetype_location() const {
-    static physical::location
+    static physical::entities::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(),
           feature_template_bundle_header_formatter::static_id());

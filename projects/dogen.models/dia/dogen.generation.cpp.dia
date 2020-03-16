@@ -532,7 +532,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#physical::location#</dia:string>
+            <dia:string>#physical::entities::location#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -994,7 +994,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#physical::location#</dia:string>
+            <dia:string>#physical::entities::location#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1024,7 +1024,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;physical::location&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;physical::entities::location&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -9885,7 +9885,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#al#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const physical::location&amp;#</dia:string>
+                <dia:string>#const physical::entities::location&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

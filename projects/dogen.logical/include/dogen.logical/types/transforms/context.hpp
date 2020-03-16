@@ -31,8 +31,8 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include "dogen.tracing/types/tracer_fwd.hpp"
-#include "dogen.physical/types/location_repository_fwd.hpp"
 #include "dogen.variability/types/entities/feature_model_fwd.hpp"
+#include "dogen.physical/types/entities/location_repository_fwd.hpp"
 #include "dogen.logical/types/helpers/mapping_set_repository_fwd.hpp"
 
 namespace dogen::logical::transforms {
@@ -60,7 +60,7 @@ public:
     context(
         const bool compatibility_mode,
         const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
-        const boost::shared_ptr<dogen::physical::location_repository>& archetype_location_repository,
+        const boost::shared_ptr<dogen::physical::entities::location_repository>& archetype_location_repository,
         const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains,
         const boost::shared_ptr<dogen::logical::helpers::mapping_set_repository>& mapping_repository,
         const boost::shared_ptr<dogen::tracing::tracer>& tracer);
@@ -74,10 +74,10 @@ public:
     void feature_model(const boost::shared_ptr<dogen::variability::entities::feature_model>& v);
     void feature_model(const boost::shared_ptr<dogen::variability::entities::feature_model>&& v);
 
-    const boost::shared_ptr<dogen::physical::location_repository>& archetype_location_repository() const;
-    boost::shared_ptr<dogen::physical::location_repository>& archetype_location_repository();
-    void archetype_location_repository(const boost::shared_ptr<dogen::physical::location_repository>& v);
-    void archetype_location_repository(const boost::shared_ptr<dogen::physical::location_repository>&& v);
+    const boost::shared_ptr<dogen::physical::entities::location_repository>& archetype_location_repository() const;
+    boost::shared_ptr<dogen::physical::entities::location_repository>& archetype_location_repository();
+    void archetype_location_repository(const boost::shared_ptr<dogen::physical::entities::location_repository>& v);
+    void archetype_location_repository(const boost::shared_ptr<dogen::physical::entities::location_repository>&& v);
 
     /**
      * @brief Provides all of the domains to be used for template instantiation.
@@ -116,7 +116,7 @@ public:
 private:
     bool compatibility_mode_;
     boost::shared_ptr<dogen::variability::entities::feature_model> feature_model_;
-    boost::shared_ptr<dogen::physical::location_repository> archetype_location_repository_;
+    boost::shared_ptr<dogen::physical::entities::location_repository> archetype_location_repository_;
     std::unordered_map<std::string, std::vector<std::string> > template_instantiation_domains_;
     boost::shared_ptr<dogen::logical::helpers::mapping_set_repository> mapping_repository_;
     boost::shared_ptr<dogen::tracing::tracer> tracer_;

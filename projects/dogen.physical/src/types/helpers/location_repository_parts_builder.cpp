@@ -20,14 +20,14 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.physical/types/building_error.hpp"
-#include "dogen.physical/types/location_repository_parts_builder.hpp"
+#include "dogen.physical/types/helpers/building_error.hpp"
+#include "dogen.physical/types/helpers/location_repository_parts_builder.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 static logger
-lg(logger_factory("physical.location_repository_parts_builder"));
+lg(logger_factory("physical.helpers.location_repository_parts_builder"));
 
 const std::string empty_archetype("Archetype is empty.");
 const std::string empty_facet_name("Facet name is empty.");
@@ -40,11 +40,11 @@ const std::string empty_family("Family cannot be empty.");
 
 }
 
-namespace dogen::physical {
+namespace dogen::physical::helpers {
 
 void location_repository_parts_builder::
 validate(const std::string& meta_name, const std::string& family,
-    const std::string& intra_backend_segment, const location& al) {
+    const std::string& intra_backend_segment, const entities::location& al) {
 
     if(meta_name.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_meta_name;
@@ -80,7 +80,7 @@ validate(const std::string& meta_name, const std::string& family,
 void location_repository_parts_builder::
 add(const std::string& meta_name, const std::string& family,
     const std::string& intra_backend_segment,
-    const std::string& canonical_archetype, const location& al) {
+    const std::string& canonical_archetype, const entities::location& al) {
 
     validate(meta_name, family, intra_backend_segment, al);
     parts_.all().push_back(al);
@@ -112,7 +112,7 @@ add(const std::string& meta_name, const std::string& family,
     }
 }
 
-location_repository_parts
+entities::location_repository_parts
 location_repository_parts_builder::build() {
     return parts_;
 }

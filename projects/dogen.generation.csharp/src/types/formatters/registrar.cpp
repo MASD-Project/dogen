@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/forward_list_io.hpp"
-#include "dogen.physical/io/location_io.hpp"
+#include "dogen.physical/io/entities/location_io.hpp"
 #include "dogen.generation.csharp/io/formatters/repository_io.hpp"
 #include "dogen.generation.csharp/types/formatters/registrar_error.hpp"
 #include "dogen.generation.csharp/types/formatters/registrar.hpp"
@@ -155,24 +155,24 @@ const repository& registrar::formatter_repository() const {
     return formatter_repository_;
 }
 
-const std::forward_list<physical::location>&
+const std::forward_list<physical::entities::location>&
 registrar::archetype_locations() const {
     return archetype_locations_;
 }
 
 const std::unordered_map<std::string,
-                         physical::locations_group>&
+                         physical::entities::locations_group>&
 registrar::archetype_locations_by_meta_name() const {
     return archetype_locations_by_meta_name_;
 }
 
 const std::unordered_map<std::string,
-                         std::list<physical::location>>&
+                         std::list<physical::entities::location>>&
 registrar::archetype_locations_by_family() const {
     return archetype_locations_by_family_;
 }
 
-const physical::location_repository_parts&
+const physical::entities::location_repository_parts&
 registrar::archetype_location_repository_parts() const {
     return archetype_location_repository_parts_;
 }

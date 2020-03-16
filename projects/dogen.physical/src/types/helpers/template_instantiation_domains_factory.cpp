@@ -22,8 +22,8 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/unordered_set_io.hpp"
-#include "dogen.physical/types/building_error.hpp"
-#include "dogen.physical/types/template_instantiation_domains_factory.hpp"
+#include "dogen.physical/types/helpers/building_error.hpp"
+#include "dogen.physical/types/helpers/template_instantiation_domains_factory.hpp"
 
 namespace {
 
@@ -39,10 +39,11 @@ const std::string duplicate_value("Value was already inserted: ");
 
 }
 
-namespace dogen::physical {
+namespace dogen::physical::helpers {
 
 std::unordered_map<std::string, std::vector<std::string>>
-template_instantiation_domains_factory::make(const std::list<location>& ls) {
+template_instantiation_domains_factory::
+make(const std::list<entities::location>& ls) {
     /*
      * First we gather all of the information in sorted form, and
      * filter out any duplicate backends of facets. We are however not

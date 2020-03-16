@@ -18,18 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.physical/types/location_repository.hpp"
+#include "dogen.physical/types/entities/location_repository.hpp"
 
-namespace dogen::physical {
+namespace dogen::physical::entities {
 
 location_repository::location_repository(
-    const std::list<dogen::physical::location>& all,
+    const std::list<dogen::physical::entities::location>& all,
     const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name,
     const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name,
-    const std::unordered_map<std::string, dogen::physical::locations_group>& by_meta_name,
-    const std::unordered_map<std::string, std::list<dogen::physical::location> >& by_family,
+    const std::unordered_map<std::string, dogen::physical::entities::locations_group>& by_meta_name,
+    const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_family,
     const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& by_backend_by_facet,
-    const std::unordered_map<std::string, std::list<dogen::physical::location> >& by_intra_backend_segment)
+    const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_intra_backend_segment)
     : all_(all),
       facet_names_by_backend_name_(facet_names_by_backend_name),
       formatter_names_by_backend_name_(formatter_names_by_backend_name),
@@ -65,19 +65,19 @@ location_repository& location_repository::operator=(location_repository other) {
     return *this;
 }
 
-const std::list<dogen::physical::location>& location_repository::all() const {
+const std::list<dogen::physical::entities::location>& location_repository::all() const {
     return all_;
 }
 
-std::list<dogen::physical::location>& location_repository::all() {
+std::list<dogen::physical::entities::location>& location_repository::all() {
     return all_;
 }
 
-void location_repository::all(const std::list<dogen::physical::location>& v) {
+void location_repository::all(const std::list<dogen::physical::entities::location>& v) {
     all_ = v;
 }
 
-void location_repository::all(const std::list<dogen::physical::location>&& v) {
+void location_repository::all(const std::list<dogen::physical::entities::location>&& v) {
     all_ = std::move(v);
 }
 
@@ -113,35 +113,35 @@ void location_repository::formatter_names_by_backend_name(const std::unordered_m
     formatter_names_by_backend_name_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::physical::locations_group>& location_repository::by_meta_name() const {
+const std::unordered_map<std::string, dogen::physical::entities::locations_group>& location_repository::by_meta_name() const {
     return by_meta_name_;
 }
 
-std::unordered_map<std::string, dogen::physical::locations_group>& location_repository::by_meta_name() {
+std::unordered_map<std::string, dogen::physical::entities::locations_group>& location_repository::by_meta_name() {
     return by_meta_name_;
 }
 
-void location_repository::by_meta_name(const std::unordered_map<std::string, dogen::physical::locations_group>& v) {
+void location_repository::by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::locations_group>& v) {
     by_meta_name_ = v;
 }
 
-void location_repository::by_meta_name(const std::unordered_map<std::string, dogen::physical::locations_group>&& v) {
+void location_repository::by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::locations_group>&& v) {
     by_meta_name_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::list<dogen::physical::location> >& location_repository::by_family() const {
+const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& location_repository::by_family() const {
     return by_family_;
 }
 
-std::unordered_map<std::string, std::list<dogen::physical::location> >& location_repository::by_family() {
+std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& location_repository::by_family() {
     return by_family_;
 }
 
-void location_repository::by_family(const std::unordered_map<std::string, std::list<dogen::physical::location> >& v) {
+void location_repository::by_family(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& v) {
     by_family_ = v;
 }
 
-void location_repository::by_family(const std::unordered_map<std::string, std::list<dogen::physical::location> >&& v) {
+void location_repository::by_family(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >&& v) {
     by_family_ = std::move(v);
 }
 
@@ -161,19 +161,19 @@ void location_repository::by_backend_by_facet(const std::unordered_map<std::stri
     by_backend_by_facet_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::list<dogen::physical::location> >& location_repository::by_intra_backend_segment() const {
+const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& location_repository::by_intra_backend_segment() const {
     return by_intra_backend_segment_;
 }
 
-std::unordered_map<std::string, std::list<dogen::physical::location> >& location_repository::by_intra_backend_segment() {
+std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& location_repository::by_intra_backend_segment() {
     return by_intra_backend_segment_;
 }
 
-void location_repository::by_intra_backend_segment(const std::unordered_map<std::string, std::list<dogen::physical::location> >& v) {
+void location_repository::by_intra_backend_segment(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& v) {
     by_intra_backend_segment_ = v;
 }
 
-void location_repository::by_intra_backend_segment(const std::unordered_map<std::string, std::list<dogen::physical::location> >&& v) {
+void location_repository::by_intra_backend_segment(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >&& v) {
     by_intra_backend_segment_ = std::move(v);
 }
 

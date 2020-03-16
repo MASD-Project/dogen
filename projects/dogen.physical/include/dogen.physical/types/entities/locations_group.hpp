@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_LOCATIONS_GROUP_HPP
-#define DOGEN_PHYSICAL_TYPES_LOCATIONS_GROUP_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_LOCATIONS_GROUP_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_LOCATIONS_GROUP_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,9 +29,9 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.physical/types/location.hpp"
+#include "dogen.physical/types/entities/location.hpp"
 
-namespace dogen::physical {
+namespace dogen::physical::entities {
 
 class locations_group final {
 public:
@@ -42,7 +42,7 @@ public:
 
 public:
     locations_group(
-        const std::list<dogen::physical::location>& locations,
+        const std::list<dogen::physical::entities::location>& locations,
         const std::unordered_map<std::string, std::string>& canonical_locations);
 
 public:
@@ -50,10 +50,10 @@ public:
      * @brief All archetype locations that belong to this group.
      */
     /**@{*/
-    const std::list<dogen::physical::location>& locations() const;
-    std::list<dogen::physical::location>& locations();
-    void locations(const std::list<dogen::physical::location>& v);
-    void locations(const std::list<dogen::physical::location>&& v);
+    const std::list<dogen::physical::entities::location>& locations() const;
+    std::list<dogen::physical::entities::location>& locations();
+    void locations(const std::list<dogen::physical::entities::location>& v);
+    void locations(const std::list<dogen::physical::entities::location>&& v);
     /**@}*/
 
     /**
@@ -78,7 +78,7 @@ public:
     locations_group& operator=(locations_group other);
 
 private:
-    std::list<dogen::physical::location> locations_;
+    std::list<dogen::physical::entities::location> locations_;
     std::unordered_map<std::string, std::string> canonical_locations_;
 };
 
@@ -88,8 +88,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::physical::locations_group& lhs,
-    dogen::physical::locations_group& rhs) {
+    dogen::physical::entities::locations_group& lhs,
+    dogen::physical::entities::locations_group& rhs) {
     lhs.swap(rhs);
 }
 

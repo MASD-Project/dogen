@@ -18,25 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_LOGICAL_TYPES_TEMPLATE_INSTANTIATION_DOMAINS_FACTORY_HPP
-#define DOGEN_LOGICAL_TYPES_TEMPLATE_INSTANTIATION_DOMAINS_FACTORY_HPP
+#ifndef DOGEN_PHYSICAL_IO_ENTITIES_LOCATIONS_GROUP_IO_HPP
+#define DOGEN_PHYSICAL_IO_ENTITIES_LOCATIONS_GROUP_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <string>
-#include <unordered_map>
-#include "dogen.physical/types/location.hpp"
+#include <iosfwd>
+#include "dogen.physical/types/entities/locations_group.hpp"
 
-namespace dogen::physical {
+namespace dogen::physical::entities {
 
-class template_instantiation_domains_factory final {
-public:
-    static std::unordered_map<std::string, std::vector<std::string>>
-    make(const std::list<location>& ls);
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::physical::entities::locations_group& v);
 
 }
 

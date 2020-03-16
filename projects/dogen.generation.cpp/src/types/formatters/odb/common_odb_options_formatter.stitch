@@ -26,9 +26,9 @@ std::string common_odb_options_formatter::id() const {
     return r;
 }
 
-physical::location
+physical::entities::location
 common_odb_options_formatter::archetype_location() const {
-    static physical::location
+    static physical::entities::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(), common_odb_options_formatter::static_id());
     return r;

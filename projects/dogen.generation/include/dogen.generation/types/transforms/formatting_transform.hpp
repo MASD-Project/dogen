@@ -26,6 +26,7 @@
 #endif
 
 #include <string>
+#include "dogen.physical/types/entities/location.hpp"
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
@@ -50,7 +51,7 @@ private:
 
     static std::unordered_map<std::string, feature_group>
     make_feature_groups(const variability::entities::feature_model& fm,
-        const std::list<physical::location>& als);
+        const std::list<physical::entities::location>& als);
 
     static std::unordered_map<std::string, formatting_configuration>
     make_formatting_configuration(

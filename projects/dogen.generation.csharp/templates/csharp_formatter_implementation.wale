@@ -7,8 +7,8 @@ std::string {{class.simple_name}}::id() const {
     return static_id();
 }
 
-physical::location {{class.simple_name}}::archetype_location() const {
-    static physical::location
+physical::entities::location {{class.simple_name}}::archetype_location() const {
+    static physical::entities::location
         r(csharp::traits::kernel(), csharp::traits::backend(),
           traits::facet(),
           {{class.simple_name}}::static_id());

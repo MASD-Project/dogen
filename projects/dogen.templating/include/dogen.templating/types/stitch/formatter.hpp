@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include "dogen.extraction/types/entities/artefact.hpp"
-#include "dogen.physical/types/location.hpp"
+#include "dogen.physical/types/entities/location.hpp"
 #include "dogen.templating/types/helpers/kvp_resolver.hpp"
 #include "dogen.templating/types/stitch/line.hpp"
 #include "dogen.templating/types/stitch/text_template.hpp"
@@ -82,7 +82,7 @@ public:
     /**
      * @brief Archetype location for this formatter.
      */
-    physical::location archetype_location() const;
+    physical::entities::location archetype_location() const;
 
     /**
      * @brief Formats the template into an artefact.

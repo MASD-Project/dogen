@@ -18,33 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_LOGICAL_TYPES_LOCATION_REPOSITORY_PARTS_BUILDER_HPP
-#define DOGEN_LOGICAL_TYPES_LOCATION_REPOSITORY_PARTS_BUILDER_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_LOCATION_FWD_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_LOCATION_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include "dogen.physical/types/location.hpp"
-#include "dogen.physical/types/location_repository_parts.hpp"
+namespace dogen::physical::entities {
 
-namespace dogen::physical {
-
-class location_repository_parts_builder final {
-private:
-    void validate(const std::string& meta_name, const std::string& family,
-        const std::string& intra_backend_segment, const location& al);
-
-public:
-    void add(const std::string& meta_name, const std::string& family,
-        const std::string& intra_backend_segment,
-        const std::string& canonical_archetype, const location& al);
-    location_repository_parts build();
-
-private:
-    location_repository_parts parts_;
-};
+class location;
 
 }
 

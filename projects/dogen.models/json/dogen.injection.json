@@ -176,7 +176,7 @@
         },
         {
           "name": "archetype_location_repository",
-          "type": "boost::shared_ptr<physical::location_repository>"
+          "type": "boost::shared_ptr<physical::entities::location_repository>"
         },
         {
           "name": "tracer",

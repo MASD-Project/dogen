@@ -26,8 +26,8 @@
 #endif
 
 /**
- * @brief The archetypes model defines the core entities that make up the
- * archetype space.
+ * @brief The pysical model defines the core entities that make up the
+ * physical dimension of MASD space.
  */
 namespace dogen::physical {
 }

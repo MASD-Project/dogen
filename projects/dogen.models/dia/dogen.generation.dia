@@ -5993,7 +5993,7 @@ model directory.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#physical::location_repository_parts#</dia:string>
+            <dia:string>#physical::entities::location_repository_parts#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -8391,7 +8391,7 @@ model directory.#</dia:string>
             <dia:string>#archetype_location_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;physical::location_repository&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;physical::entities::location_repository&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -11335,7 +11335,7 @@ model directory.#</dia:string>
         <dia:point val="239.585,36.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="238.835,35.85;251.657,41.8"/>
+        <dia:rectangle val="238.835,35.85;251.658,41.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12722,7 +12722,7 @@ than one element.#</dia:string>
         <dia:point val="218.875,65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="218.125,64.25;224.877,72.8"/>
+        <dia:rectangle val="218.125,64.25;224.878,72.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14980,7 +14980,7 @@ code: identation and dividers.#</dia:string>
         <dia:point val="236,78"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="226.097,77.25;236.75,82.8"/>
+        <dia:rectangle val="226.098,77.25;236.75,82.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

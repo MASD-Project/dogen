@@ -36,8 +36,8 @@ std::string exception_formatter::id() const {
     return static_id();
 }
 
-physical::location exception_formatter::archetype_location() const {
-    static physical::location
+physical::entities::location exception_formatter::archetype_location() const {
+    static physical::entities::location
         r(csharp::traits::kernel(), csharp::traits::backend(),
           traits::facet(),
           exception_formatter::static_id());

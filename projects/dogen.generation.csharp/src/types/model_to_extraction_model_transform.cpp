@@ -72,27 +72,27 @@ format(const formattables::model& fm) const {
     return wf.execute(fm);
 }
 
-const std::forward_list<physical::location>&
+const std::forward_list<physical::entities::location>&
 model_to_extraction_model_transform::archetype_locations() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations();
 }
 
 const std::unordered_map<std::string,
-                         physical::locations_group>&
+                         physical::entities::locations_group>&
 model_to_extraction_model_transform::archetype_locations_by_meta_name() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations_by_meta_name();
 }
 
 const std::unordered_map<std::string,
-                         std::list<physical::location>>&
+                         std::list<physical::entities::location>>&
 model_to_extraction_model_transform::archetype_locations_by_family() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations_by_family();
 }
 
-const physical::location_repository_parts&
+const physical::entities::location_repository_parts&
 model_to_extraction_model_transform::
 archetype_location_repository_parts() const {
     const auto& rg(formatters::workflow::registrar());

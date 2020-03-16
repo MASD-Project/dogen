@@ -20,8 +20,8 @@
  */
 #include "dogen.tracing/types/tracer.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
-#include "dogen.physical/types/location_repository.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.physical/types/entities/location_repository.hpp"
 #include "dogen.logical/types/helpers/mapping_set_repository.hpp"
 
 namespace boost {
@@ -35,8 +35,8 @@ const boost::shared_ptr<dogen::variability::entities::feature_model>& rhs) {
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::physical::location_repository>& lhs,
-const boost::shared_ptr<dogen::physical::location_repository>& rhs) {
+inline bool operator==(const boost::shared_ptr<dogen::physical::entities::location_repository>& lhs,
+const boost::shared_ptr<dogen::physical::entities::location_repository>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -68,7 +68,7 @@ context::context()
 context::context(
     const bool compatibility_mode,
     const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
-    const boost::shared_ptr<dogen::physical::location_repository>& archetype_location_repository,
+    const boost::shared_ptr<dogen::physical::entities::location_repository>& archetype_location_repository,
     const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains,
     const boost::shared_ptr<dogen::logical::helpers::mapping_set_repository>& mapping_repository,
     const boost::shared_ptr<dogen::tracing::tracer>& tracer)
@@ -128,19 +128,19 @@ void context::feature_model(const boost::shared_ptr<dogen::variability::entities
     feature_model_ = std::move(v);
 }
 
-const boost::shared_ptr<dogen::physical::location_repository>& context::archetype_location_repository() const {
+const boost::shared_ptr<dogen::physical::entities::location_repository>& context::archetype_location_repository() const {
     return archetype_location_repository_;
 }
 
-boost::shared_ptr<dogen::physical::location_repository>& context::archetype_location_repository() {
+boost::shared_ptr<dogen::physical::entities::location_repository>& context::archetype_location_repository() {
     return archetype_location_repository_;
 }
 
-void context::archetype_location_repository(const boost::shared_ptr<dogen::physical::location_repository>& v) {
+void context::archetype_location_repository(const boost::shared_ptr<dogen::physical::entities::location_repository>& v) {
     archetype_location_repository_ = v;
 }
 
-void context::archetype_location_repository(const boost::shared_ptr<dogen::physical::location_repository>&& v) {
+void context::archetype_location_repository(const boost::shared_ptr<dogen::physical::entities::location_repository>&& v) {
     archetype_location_repository_ = std::move(v);
 }
 

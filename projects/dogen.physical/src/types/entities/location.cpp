@@ -18,9 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.physical/types/location.hpp"
+#include "dogen.physical/types/entities/location.hpp"
 
-namespace dogen::physical {
+namespace dogen::physical::entities {
 
 location::location(
     const std::string& kernel,

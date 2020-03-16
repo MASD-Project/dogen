@@ -28,7 +28,7 @@
 #include <string>
 #include <typeindex>
 #include <boost/filesystem/path.hpp>
-#include "dogen.physical/types/location.hpp"
+#include "dogen.physical/types/entities/location.hpp"
 #include "dogen.extraction/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
@@ -53,7 +53,7 @@ public:
     /**
      * @brief Ownership hierarchy for this formatter
      */
-    virtual physical::location archetype_location() const = 0;
+    virtual physical::entities::location archetype_location() const = 0;
 
     /**
      * @brief Returns name of the meta-model element that this

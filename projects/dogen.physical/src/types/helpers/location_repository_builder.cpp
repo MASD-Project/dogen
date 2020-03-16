@@ -20,15 +20,15 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.physical/types/building_error.hpp"
-#include "dogen.physical/io/location_repository_io.hpp"
-#include "dogen.physical/types/location_repository_builder.hpp"
+#include "dogen.physical/types/helpers/building_error.hpp"
+#include "dogen.physical/io/entities/location_repository_io.hpp"
+#include "dogen.physical/types/helpers/location_repository_builder.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 static logger
-lg(logger_factory("physical.location_repository_builder"));
+lg(logger_factory("physical.helpers.location_repository_builder"));
 
 const std::string empty_backend("Backend name cannot be empty. Archetype: ");
 const std::string empty_facet("Facet name cannot be empty. Archetype: ");
@@ -38,10 +38,10 @@ const std::string duplicate_archetype("Archetype name already inserted: ");
 
 }
 
-namespace dogen::physical {
+namespace dogen::physical::helpers {
 
 void location_repository_builder::
-validate(const std::list<location>& als) const {
+validate(const std::list<entities::location>& als) const {
     BOOST_LOG_SEV(lg, debug) << "Validating archetype locations.";
 
     for (const auto& al : als) {
@@ -69,7 +69,7 @@ validate(const std::list<location>& als) const {
 }
 
 void location_repository_builder::
-populate_locations(const std::list<location>& als) {
+populate_locations(const std::list<entities::location>& als) {
     for(const auto& al : als)
         repository_.all().push_back(al);
 }
@@ -96,7 +96,7 @@ populate_archetypes_by_facet_by_backend() {
 }
 
 void location_repository_builder::
-add(const std::list<location>& als) {
+add(const std::list<entities::location>& als) {
     BOOST_LOG_SEV(lg, debug) << "Adding list of archetype location.";
 
     validate(als);
@@ -106,7 +106,7 @@ add(const std::list<location>& als) {
 }
 
 void location_repository_builder::
-add(const std::unordered_map<std::string, locations_group>&
+add(const std::unordered_map<std::string, entities::locations_group>&
     locations_by_meta_name) {
     auto& albmn(repository_.by_meta_name());
     for (const auto& pair : locations_by_meta_name) {
@@ -153,7 +153,7 @@ add(const std::unordered_map<std::string, locations_group>&
 
 void location_repository_builder::
 add(const std::unordered_map<std::string,
-    std::list<location>>& locations_by_family) {
+    std::list<entities::location>>& locations_by_family) {
     auto& albf(repository_.by_family());
     for (const auto& pair : locations_by_family) {
         const auto& family(pair.first);
@@ -186,14 +186,14 @@ add(const std::unordered_map<std::string,
 }
 
 void location_repository_builder::
-add(const location_repository_parts& parts) {
+add(const entities::location_repository_parts& parts) {
     add(parts.all());
     add(parts.by_meta_name());
     add(parts.by_family());
     add(parts.by_intra_backend_segment());
 }
 
-const location_repository&
+const entities::location_repository&
 location_repository_builder::build() {
     populate_facet_names_by_backend_name();
     populate_formatter_names_by_backend_name();

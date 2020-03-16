@@ -38,9 +38,9 @@ std::string primitive_forward_declarations_formatter::id() const {
     return static_id();
 }
 
-physical::location
+physical::entities::location
 primitive_forward_declarations_formatter::archetype_location() const {
-    static physical::location
+    static physical::entities::location
         r(cpp::traits::kernel(), cpp::traits::backend(),
           traits::facet(),
           primitive_forward_declarations_formatter::static_id());

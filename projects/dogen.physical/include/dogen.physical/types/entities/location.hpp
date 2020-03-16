@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_LOCATION_HPP
-#define DOGEN_PHYSICAL_TYPES_LOCATION_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_LOCATION_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_LOCATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,10 +28,10 @@
 #include <string>
 #include <algorithm>
 
-namespace dogen::physical {
+namespace dogen::physical::entities {
 
 /**
- * @brief Location of an archetype or set of archetypes in the hierarchical artchetype space.
+ * @brief Location of an entity or set of entities in the hierarchical physical space.
  *
  * These must be populated in order, e.g. in order to have a backend we must have a
  * kernel; in order to have a facet we must have a backend and in order to have a
@@ -115,8 +115,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::physical::location& lhs,
-    dogen::physical::location& rhs) {
+    dogen::physical::entities::location& lhs,
+    dogen::physical::entities::location& rhs) {
     lhs.swap(rhs);
 }
 

@@ -24,9 +24,9 @@
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/tracer.hpp"
-#include "dogen.physical/io/location_repository_io.hpp"
-#include "dogen.physical/types/location_repository_builder.hpp"
-#include "dogen.physical/types/template_instantiation_domains_factory.hpp"
+#include "dogen.physical/io/entities/location_repository_io.hpp"
+#include "dogen.physical/types/helpers/location_repository_builder.hpp"
+#include "dogen.physical/types/helpers/template_instantiation_domains_factory.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
 #include "dogen.variability/types/features/initializer.hpp"
 #include "dogen.variability/types/entities/feature_template_repository.hpp"
@@ -90,18 +90,19 @@ create_intra_backend_segment_properties(
     return r;
 }
 
-boost::shared_ptr<physical::location_repository>
+boost::shared_ptr<physical::entities::location_repository>
 create_archetype_location_repository(
     const model_to_extraction_model_transform_registrar& rg) {
 
-    physical::location_repository_builder b;
+    physical::helpers::location_repository_builder b;
     for (const auto& pair : rg.transforms_by_technical_space()) {
         const auto& t(*pair.second);
         b.add(t.archetype_locations_by_meta_name());
         b.add(t.archetype_locations_by_family());
         b.add(t.archetype_location_repository_parts());
     }
-    return boost::make_shared<physical::location_repository>(b.build());
+    using physical::entities::location_repository;
+    return boost::make_shared<location_repository>(b.build());
 }
 void context_factory::
 register_variability_entities(variability::helpers::registrar& rg) {
@@ -180,7 +181,7 @@ make_context(const configuration& cfg, const std::string& activity,
     /*
      * Obtain the template instantiation domains.
      */
-    using tidf = physical::template_instantiation_domains_factory;
+    using tidf = physical::helpers::template_instantiation_domains_factory;
     vctx.template_instantiation_domains(tidf::make(alrp->all()));
 
     /*
