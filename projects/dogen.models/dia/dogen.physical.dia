@@ -2131,13 +2131,13 @@ associated properties.#</dia:string>
         <dia:real val="2.7999999999999998"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#kernel_model#</dia:string>
+        <dia:string>#model#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Collection of code generation kernels available in the current instance of Dogen.#</dia:string>
+        <dia:string>#Describes the kernels available in the current instance of Dogen.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

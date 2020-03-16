@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/kernel_io.hpp"
-#include "dogen.physical/io/entities/kernel_model_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -51,9 +51,9 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace dogen::physical::entities {
 
-std::ostream& operator<<(std::ostream& s, const kernel_model& v) {
+std::ostream& operator<<(std::ostream& s, const model& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::physical::entities::kernel_model\"" << ", "
+      << "\"__type__\": " << "\"dogen::physical::entities::model\"" << ", "
       << "\"kernels\": " << v.kernels()
       << " }";
     return(s);

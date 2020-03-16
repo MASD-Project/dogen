@@ -168,8 +168,8 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "entities::kernel_model",
-      "documentation": "Collection of code generation kernels available in the current instance of Dogen.\n",
+      "name": "entities::model",
+      "documentation": "Describes the kernels available in the current instance of Dogen.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {

@@ -18,41 +18,41 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.physical/types/entities/kernel_model.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 
 namespace dogen::physical::entities {
 
-kernel_model::kernel_model(const std::unordered_map<std::string, dogen::physical::entities::kernel>& kernels)
+model::model(const std::unordered_map<std::string, dogen::physical::entities::kernel>& kernels)
     : kernels_(kernels) { }
 
-void kernel_model::swap(kernel_model& other) noexcept {
+void model::swap(model& other) noexcept {
     using std::swap;
     swap(kernels_, other.kernels_);
 }
 
-bool kernel_model::operator==(const kernel_model& rhs) const {
+bool model::operator==(const model& rhs) const {
     return kernels_ == rhs.kernels_;
 }
 
-kernel_model& kernel_model::operator=(kernel_model other) {
+model& model::operator=(model other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::unordered_map<std::string, dogen::physical::entities::kernel>& kernel_model::kernels() const {
+const std::unordered_map<std::string, dogen::physical::entities::kernel>& model::kernels() const {
     return kernels_;
 }
 
-std::unordered_map<std::string, dogen::physical::entities::kernel>& kernel_model::kernels() {
+std::unordered_map<std::string, dogen::physical::entities::kernel>& model::kernels() {
     return kernels_;
 }
 
-void kernel_model::kernels(const std::unordered_map<std::string, dogen::physical::entities::kernel>& v) {
+void model::kernels(const std::unordered_map<std::string, dogen::physical::entities::kernel>& v) {
     kernels_ = v;
 }
 
-void kernel_model::kernels(const std::unordered_map<std::string, dogen::physical::entities::kernel>&& v) {
+void model::kernels(const std::unordered_map<std::string, dogen::physical::entities::kernel>&& v) {
     kernels_ = std::move(v);
 }
 

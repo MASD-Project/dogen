@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_KERNEL_MODEL_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_KERNEL_MODEL_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_MODEL_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_MODEL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,17 +33,17 @@
 namespace dogen::physical::entities {
 
 /**
- * @brief Collection of code generation kernels available in the current instance of Dogen.
+ * @brief Describes the kernels available in the current instance of Dogen.
  */
-class kernel_model final {
+class model final {
 public:
-    kernel_model() = default;
-    kernel_model(const kernel_model&) = default;
-    kernel_model(kernel_model&&) = default;
-    ~kernel_model() = default;
+    model() = default;
+    model(const model&) = default;
+    model(model&&) = default;
+    ~model() = default;
 
 public:
-    explicit kernel_model(const std::unordered_map<std::string, dogen::physical::entities::kernel>& kernels);
+    explicit model(const std::unordered_map<std::string, dogen::physical::entities::kernel>& kernels);
 
 public:
     /**
@@ -57,14 +57,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const kernel_model& rhs) const;
-    bool operator!=(const kernel_model& rhs) const {
+    bool operator==(const model& rhs) const;
+    bool operator!=(const model& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(kernel_model& other) noexcept;
-    kernel_model& operator=(kernel_model other);
+    void swap(model& other) noexcept;
+    model& operator=(model other);
 
 private:
     std::unordered_map<std::string, dogen::physical::entities::kernel> kernels_;
@@ -76,8 +76,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::physical::entities::kernel_model& lhs,
-    dogen::physical::entities::kernel_model& rhs) {
+    dogen::physical::entities::model& lhs,
+    dogen::physical::entities::model& rhs) {
     lhs.swap(rhs);
 }
 
