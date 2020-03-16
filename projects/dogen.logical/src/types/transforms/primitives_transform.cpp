@@ -26,10 +26,10 @@
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/types/traits.hpp"
-#include "dogen.logical/io/meta_model/technical_space_io.hpp"
+#include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/helpers/name_factory.hpp"
 #include "dogen.logical/types/features/primitive.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/primitives_transform.hpp"
@@ -56,8 +56,8 @@ const std::string missing_underlier(
 namespace dogen::logical::transforms {
 
 std::string primitives_transform::
-obtain_value_attribute_simple_name(const meta_model::technical_space ts) {
-    using meta_model::technical_space;
+obtain_value_attribute_simple_name(const entities::technical_space ts) {
+    using entities::technical_space;
     switch(ts) {
     case technical_space::csharp: return csharp_value;
     case technical_space::cpp: return cpp_value;
@@ -69,9 +69,9 @@ obtain_value_attribute_simple_name(const meta_model::technical_space ts) {
     } }
 }
 
-meta_model::attribute
+entities::attribute
 primitives_transform::create_attribute_for_underlying_element(
-    const meta_model::name& owner, const meta_model::technical_space ts,
+    const entities::name& owner, const entities::technical_space ts,
     std::string underlying_element) {
 
     /*
@@ -95,7 +95,7 @@ primitives_transform::create_attribute_for_underlying_element(
     /*
      * Create the name value attribute.
      */
-    meta_model::attribute r;
+    entities::attribute r;
     r.name(nf.build_attribute_name(n, sn));
     r.member_variable_name(r.name().simple() + member_variable_postfix);
     r.getter_setter_name(r.name().simple());
@@ -105,7 +105,7 @@ primitives_transform::create_attribute_for_underlying_element(
     return r;
 }
 
-void primitives_transform::apply(const context& ctx, meta_model::model& m) {
+void primitives_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "primitives transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 

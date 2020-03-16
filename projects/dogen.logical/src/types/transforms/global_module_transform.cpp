@@ -22,16 +22,16 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
-#include "dogen.logical/types/meta_model/element.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/structural/builtin.hpp"
-#include "dogen.logical/types/meta_model/structural/visitor.hpp"
-#include "dogen.logical/types/meta_model/structural/exception.hpp"
-#include "dogen.logical/types/meta_model/structural/primitive.hpp"
-#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
-#include "dogen.logical/types/meta_model/structural/object_template.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/types/entities/element.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/builtin.hpp"
+#include "dogen.logical/types/entities/structural/visitor.hpp"
+#include "dogen.logical/types/entities/structural/exception.hpp"
+#include "dogen.logical/types/entities/structural/primitive.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
+#include "dogen.logical/types/entities/structural/object_template.hpp"
 #include "dogen.logical/types/helpers/name_builder.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/global_module_transform.hpp"
@@ -53,7 +53,7 @@ namespace dogen::logical::transforms {
 
 template<typename AssociativeContainerOfContainable>
 inline void add_containing_module_to_non_contained_entities(
-    const meta_model::name& container_name,
+    const entities::name& container_name,
     AssociativeContainerOfContainable& c) {
     for (auto& pair : c) {
         auto& s(*pair.second);
@@ -62,26 +62,26 @@ inline void add_containing_module_to_non_contained_entities(
     }
 }
 
-boost::shared_ptr<meta_model::structural::module> global_module_transform::
-create_global_module(const meta_model::origin_types ot) {
+boost::shared_ptr<entities::structural::module> global_module_transform::
+create_global_module(const entities::origin_types ot) {
     const std::string gm("global_module");
-    const meta_model::fully_qualified_representation fqr(gm, gm, gm);
-    auto r(boost::make_shared<meta_model::structural::module>());
+    const entities::fully_qualified_representation fqr(gm, gm, gm);
+    auto r(boost::make_shared<entities::structural::module>());
     r->name().qualified(fqr);
     r->origin_type(ot);
     r->documentation(global_module_doc);
     r->is_global_module(true);
-    r->intrinsic_technical_space(meta_model::technical_space::agnostic);
+    r->intrinsic_technical_space(entities::technical_space::agnostic);
     r->configuration(
-        boost::make_shared<variability::meta_model::configuration>());
+        boost::make_shared<variability::entities::configuration>());
     r->configuration()->name().simple(gm);
     r->configuration()->name().qualified(fqr.dot());
 
     return r;
 }
 
-meta_model::name global_module_transform::
-inject_global_module(meta_model::model& m) {
+entities::name global_module_transform::
+inject_global_module(entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Injecting global module for: "
                              << m.name().qualified().dot();
 
@@ -102,8 +102,8 @@ inject_global_module(meta_model::model& m) {
 }
 
 void global_module_transform::
-update_element_containment(const meta_model::name& global_module_name,
-    meta_model::model& m) {
+update_element_containment(const entities::name& global_module_name,
+    entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Updating element containment.";
 
     const auto& gmn(global_module_name);
@@ -128,7 +128,7 @@ update_element_containment(const meta_model::name& global_module_name,
 }
 
 void global_module_transform::
-apply(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "containment transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 

@@ -29,9 +29,9 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 #include "dogen.generation.cpp/types/formatters/repository.hpp"
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
@@ -43,29 +43,29 @@ namespace dogen::generation::cpp::formattables {
 class directive_group_repository_factory final {
 private:
     struct formattater_feature_group {
-        variability::meta_model::feature primary_inclusion_directive;
-        variability::meta_model::feature secondary_inclusion_directive;
+        variability::entities::feature primary_inclusion_directive;
+        variability::entities::feature secondary_inclusion_directive;
     };
 
     struct feature_group {
-        variability::meta_model::feature inclusion_required;
+        variability::entities::feature inclusion_required;
         std::unordered_map<std::string, formattater_feature_group>
         formattaters_feature_groups;
     };
 
     feature_group make_feature_group(
-        const variability::meta_model::feature_model& fm,
+        const variability::entities::feature_model& fm,
         const formatters::repository& frp) const;
 
     bool make_top_level_inclusion_required(const feature_group& fg,
-        const variability::meta_model::configuration& cfg) const;
+        const variability::entities::configuration& cfg) const;
 
     boost::optional<directive_group> make_directive_group(
         const feature_group& fg, const std::string& archetype,
-        const variability::meta_model::configuration& cfg) const;
+        const variability::entities::configuration& cfg) const;
 
     bool has_inclusion_directive_overrides(
-        const variability::meta_model::configuration& cfg) const;
+        const variability::entities::configuration& cfg) const;
 
 private:
     std::string to_inclusion_directive(const boost::filesystem::path& p) const;
@@ -87,7 +87,7 @@ private:
         directive_group_repository& dgrp) const;
 
     void compute_directives(const feature_group& fg,
-        const logical::meta_model::element& e,
+        const logical::entities::element& e,
         const artefact_formatters_type& formatters,
         const locator& l, directive_group_repository& dgrp) const;
 
@@ -99,7 +99,7 @@ private:
 
 public:
     directive_group_repository
-    make(const variability::meta_model::feature_model& feature_model,
+    make(const variability::entities::feature_model& feature_model,
         const formatters::repository& frp,
         const locator& l,
         const std::unordered_map<std::string, formattable>& formattables) const;

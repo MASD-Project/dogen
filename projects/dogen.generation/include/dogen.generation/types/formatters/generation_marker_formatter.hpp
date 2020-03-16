@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include <string>
-#include "dogen.logical/types/meta_model/decoration/generation_marker.hpp"
+#include "dogen.logical/types/entities/decoration/generation_marker.hpp"
 
 namespace dogen::generation::formatters {
 
@@ -39,7 +39,7 @@ class generation_marker_formatter final {
 public:
     void format(std::ostream& s, const std::string& generation_timestamp,
         const std::string& origin_shah1_hash,
-        const logical::meta_model::decoration::generation_marker& gm) const;
+        const logical::entities::decoration::generation_marker& gm) const;
 };
 
 }

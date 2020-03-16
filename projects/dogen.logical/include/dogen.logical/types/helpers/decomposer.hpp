@@ -26,17 +26,17 @@
 #endif
 
 #include <string>
-#include "dogen.logical/types/meta_model/model.hpp"
-#include "dogen.logical/types/meta_model/element.hpp"
-#include "dogen.logical/types/meta_model/attribute.hpp"
-#include "dogen.logical/types/meta_model/structural/module.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/structural/exception.hpp"
-#include "dogen.logical/types/meta_model/structural/builtin.hpp"
-#include "dogen.logical/types/meta_model/structural/visitor.hpp"
-#include "dogen.logical/types/meta_model/structural/primitive.hpp"
-#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
-#include "dogen.logical/types/meta_model/structural/object_template.hpp"
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/entities/element.hpp"
+#include "dogen.logical/types/entities/attribute.hpp"
+#include "dogen.logical/types/entities/structural/module.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/exception.hpp"
+#include "dogen.logical/types/entities/structural/builtin.hpp"
+#include "dogen.logical/types/entities/structural/visitor.hpp"
+#include "dogen.logical/types/entities/structural/primitive.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
+#include "dogen.logical/types/entities/structural/object_template.hpp"
 #include "dogen.logical/types/helpers/decomposition_result.hpp"
 
 namespace dogen::logical::helpers {
@@ -51,37 +51,37 @@ namespace dogen::logical::helpers {
  */
 class decomposer final {
 private:
-    void add_name(const std::string& owner, const meta_model::name& n);
-    void add_meta_name(const std::string& owner, const meta_model::name& n);
+    void add_name(const std::string& owner, const entities::name& n);
+    void add_meta_name(const std::string& owner, const entities::name& n);
     void add_name_tree(const std::string& owner,
-        const meta_model::name_tree& nt);
+        const entities::name_tree& nt);
     void add_names(const std::string& owner,
-        const std::list<meta_model::name>& names);
+        const std::list<entities::name>& names);
     void decompose_attributes(const std::string& owner,
-        const std::list<meta_model::attribute>& attrs);
-    void decompose_element(const meta_model::element& e);
+        const std::list<entities::attribute>& attrs);
+    void decompose_element(const entities::element& e);
 
 public:
     /*
      * These methods are morally private, but are required to be
      * public due to the traversal.
      */
-    void operator()(const meta_model::element& e);
-    void operator()(const meta_model::structural::module& m);
-    void operator()(const meta_model::structural::object_template& ot);
-    void operator()(const meta_model::structural::builtin& b);
-    void operator()(const meta_model::structural::enumeration& e);
-    void operator()(const meta_model::structural::primitive& p);
-    void operator()(const meta_model::structural::object& o);
-    void operator()(const meta_model::structural::exception& e);
-    void operator()(const meta_model::structural::visitor& v);
+    void operator()(const entities::element& e);
+    void operator()(const entities::structural::module& m);
+    void operator()(const entities::structural::object_template& ot);
+    void operator()(const entities::structural::builtin& b);
+    void operator()(const entities::structural::enumeration& e);
+    void operator()(const entities::structural::primitive& p);
+    void operator()(const entities::structural::object& o);
+    void operator()(const entities::structural::exception& e);
+    void operator()(const entities::structural::visitor& v);
 
 private:
     const decomposition_result& result() const;
 
 public:
     static decomposition_result
-    decompose(const meta_model::model& em);
+    decompose(const entities::model& em);
 
 private:
     decomposition_result result_;

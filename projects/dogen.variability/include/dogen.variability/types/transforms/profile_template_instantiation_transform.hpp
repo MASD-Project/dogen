@@ -26,9 +26,9 @@
 #endif
 
 #include <list>
-#include "dogen.variability/types/meta_model/profile.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.variability/types/meta_model/profile_template.hpp"
+#include "dogen.variability/types/entities/profile.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.variability/types/entities/profile_template.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
 
 namespace dogen::variability::transforms {
@@ -38,9 +38,9 @@ namespace dogen::variability::transforms {
  */
 class profile_template_instantiation_transform final {
 public:
-    static std::list<meta_model::profile>
-    apply(const context& ctx, const meta_model::feature_model& fm,
-        const std::list<meta_model::profile_template>& pts);
+    static std::list<entities::profile>
+    apply(const context& ctx, const entities::feature_model& fm,
+        const std::list<entities::profile_template>& pts);
 };
 
 }

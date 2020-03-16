@@ -25,14 +25,14 @@
 #pragma once
 #endif
 
-#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.generation.csharp/types/formattables/model.hpp"
 
 namespace dogen::generation::csharp::formattables {
 
 class aspect_expander final {
 public:
-    void expand(const variability::meta_model::feature_model& feature_model,
+    void expand(const variability::entities::feature_model& feature_model,
         model& fm) const;
 };
 

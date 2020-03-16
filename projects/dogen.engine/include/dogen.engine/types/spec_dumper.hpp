@@ -28,10 +28,10 @@
 
 #include <boost/shared_ptr.hpp>
 #include "dogen/types/spec_dumper.hpp"
-#include "dogen.variability/types/meta_model/value.hpp"
-#include "dogen.variability/types/meta_model/value_type.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.variability/types/meta_model/binding_point.hpp"
+#include "dogen.variability/types/entities/value.hpp"
+#include "dogen.variability/types/entities/value_type.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.variability/types/entities/binding_point.hpp"
 #include "dogen.engine/types/transforms/context.hpp"
 
 namespace dogen::engine {
@@ -47,18 +47,18 @@ public:
 private:
     std::string preprocess(std::string s) const;
     std::string process_binding_point(
-        const variability::meta_model::binding_point bp) const;
+        const variability::entities::binding_point bp) const;
     std::string process_value(
-        const boost::shared_ptr<variability::meta_model::value> v) const;
+        const boost::shared_ptr<variability::entities::value> v) const;
     std::string process_value_type(
-        const variability::meta_model::value_type vt) const;
+        const variability::entities::value_type vt) const;
 
 private:
     spec_group create_injection_group() const;
     spec_group create_conversion_group() const;
     spec_group create_generation_group() const;
     spec_group create_features_group(
-        const variability::meta_model::feature_model& fm) const;
+        const variability::entities::feature_model& fm) const;
 
 public:
     virtual specs dump(const dogen::configuration& cfg) const;

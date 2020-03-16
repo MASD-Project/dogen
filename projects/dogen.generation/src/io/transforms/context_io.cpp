@@ -23,8 +23,8 @@
 #include "dogen.tracing/io/tracer_io.hpp"
 #include "dogen.physical/io/location_repository_io.hpp"
 #include "dogen.generation/io/transforms/context_io.hpp"
-#include "dogen.variability/io/meta_model/feature_model_io.hpp"
-#include "dogen.generation/io/meta_model/intra_backend_segment_properties_io.hpp"
+#include "dogen.variability/io/entities/feature_model_io.hpp"
+#include "dogen.generation/io/entities/intra_backend_segment_properties_io.hpp"
 
 namespace boost {
 
@@ -52,7 +52,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::generation::meta_model::intra_backend_segment_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::generation::entities::intra_backend_segment_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -70,7 +70,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::variability::meta_model::feature_model>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::variability::entities::feature_model>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 

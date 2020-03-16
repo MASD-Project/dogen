@@ -29,12 +29,12 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include "dogen.physical/types/location.hpp"
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
-#include "dogen.logical/types/meta_model/model.hpp"
-#include "dogen.logical/types/meta_model/extraction_properties.hpp"
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/entities/extraction_properties.hpp"
 
 namespace dogen::logical::transforms {
 
@@ -44,38 +44,38 @@ namespace dogen::logical::transforms {
 class extraction_properties_transform final {
 private:
     struct feature_group {
-        variability::meta_model::feature cpp_headers_output_directory;
-        variability::meta_model::feature enable_backend_directories;
+        variability::entities::feature cpp_headers_output_directory;
+        variability::entities::feature enable_backend_directories;
         std::unordered_map<std::string,
-                           variability::meta_model::feature> enabled;
+                           variability::entities::feature> enabled;
     };
 
     static feature_group make_feature_group(
-        const variability::meta_model::feature_model& fm,
+        const variability::entities::feature_model& fm,
         const std::list<physical::location>& als);
 
     static boost::filesystem::path
     obtain_cpp_headers_output_directory(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
+        const variability::entities::configuration& cfg);
 
     static std::unordered_set<std::string>
     obtain_enabled_backends(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
+        const variability::entities::configuration& cfg);
 
     static bool obtain_enable_backend_directories(const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
+        const variability::entities::configuration& cfg);
 
-    static meta_model::extraction_properties make_extraction_properties(
+    static entities::extraction_properties make_extraction_properties(
         const context& ctx,
         const std::list<physical::location>& als,
-        const variability::meta_model::configuration& cfg);
+        const variability::entities::configuration& cfg);
 
 public:
     /**
      * Applies the extraction properties transform to the supplied
      * model.
      */
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

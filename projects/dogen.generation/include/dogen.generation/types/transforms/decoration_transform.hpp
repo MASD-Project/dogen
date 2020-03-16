@@ -29,13 +29,13 @@
 #include <list>
 #include <string>
 #include <boost/optional.hpp>
-#include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.logical/types/meta_model/decoration/element_properties.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.logical/types/entities/decoration/element_properties.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
 #include "dogen.generation/types/features/decoration.hpp"
 #include "dogen.generation/types/helpers/decoration_repository.hpp"
 #include "dogen.generation/types/transforms/decoration_configuration.hpp"
-#include "dogen.generation/types/meta_model/model.hpp"
+#include "dogen.generation/types/entities/model.hpp"
 
 namespace dogen::generation::transforms {
 
@@ -49,7 +49,7 @@ private:
      */
     static boost::optional<decoration_configuration>
     read_decoration_configuration(const features::decoration::feature_group& fg,
-        const variability::meta_model::configuration& cfg);
+        const variability::entities::configuration& cfg);
 
 private:
     /**
@@ -67,15 +67,15 @@ private:
      * @brief Retrieves the modeline for the supplied technical space
      * and modeline group.
      */
-    static boost::shared_ptr<logical::meta_model::decoration::modeline>
+    static boost::shared_ptr<logical::entities::decoration::modeline>
     get_modeline(const helpers::decoration_repository drp,
         const std::string& modeline_group_name,
-        const logical::meta_model::technical_space ts);
+        const logical::entities::technical_space ts);
 
     /**
      * @brief Retrieves the generation marker for the supplied name.
      */
-    static boost::shared_ptr<logical::meta_model::decoration::generation_marker>
+    static boost::shared_ptr<logical::entities::decoration::generation_marker>
     get_generation_marker(const helpers::decoration_repository drp,
         const std::string& generation_marker_name);
 
@@ -84,45 +84,45 @@ private:
      * @brief Returns true if the meta-model element can be generated,
      * false otherwise.
      */
-    static bool is_generatable(const logical::meta_model::name& meta_name);
+    static bool is_generatable(const logical::entities::name& meta_name);
 
 private:
-    static boost::optional<logical::meta_model::decoration::element_properties>
+    static boost::optional<logical::entities::decoration::element_properties>
     make_decoration(const std::string& licence_text,
-        const boost::shared_ptr<logical::meta_model::decoration::modeline> ml,
+        const boost::shared_ptr<logical::entities::decoration::modeline> ml,
         const boost::shared_ptr<
-        logical::meta_model::decoration::generation_marker> gm,
+        logical::entities::decoration::generation_marker> gm,
         const std::list<std::string>& copyright_notices,
         const std::string& generation_timestamp,
         const std::string& origin_shah1_hash,
-        const logical::meta_model::technical_space ts);
+        const logical::entities::technical_space ts);
 
 private:
     /**
      * @brief Creates the global decoration.
      */
-    static boost::optional<logical::meta_model::decoration::element_properties>
+    static boost::optional<logical::entities::decoration::element_properties>
     make_global_decoration(const helpers::decoration_repository drp,
         const boost::optional<decoration_configuration> root_dc,
         const std::string& generation_timestamp,
         const std::string& origin_shah1_hash,
-        const logical::meta_model::technical_space ts);
+        const logical::entities::technical_space ts);
 
     /**
      * @brief Creates a local decoration.
      */
-    static boost::optional<logical::meta_model::decoration::element_properties>
+    static boost::optional<logical::entities::decoration::element_properties>
     make_local_decoration(const helpers::decoration_repository drp,
         const boost::optional<decoration_configuration> root_dc,
         const boost::optional<
-        logical::meta_model::decoration::element_properties> global_decoration,
+        logical::entities::decoration::element_properties> global_decoration,
         const boost::optional<decoration_configuration> element_dc,
         const std::string& generation_timestamp,
         const std::string& origin_shah1_hash,
-        const logical::meta_model::technical_space ts);
+        const logical::entities::technical_space ts);
 
 public:
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

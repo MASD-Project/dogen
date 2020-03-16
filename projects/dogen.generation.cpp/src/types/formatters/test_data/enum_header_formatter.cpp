@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
@@ -48,7 +48,7 @@ enum_header_formatter::archetype_location() const {
     return r;
 }
 
-const logical::meta_model::name& enum_header_formatter::meta_name() const {
+const logical::entities::name& enum_header_formatter::meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_enumeration_name());
     return r;
@@ -63,28 +63,28 @@ inclusion_support_types enum_header_formatter::inclusion_support_type() const {
 }
 
 boost::filesystem::path enum_header_formatter::inclusion_path(
-    const formattables::locator& l, const logical::meta_model::name& n) const {
+    const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_id());
 }
 
 boost::filesystem::path enum_header_formatter::full_path(
-    const formattables::locator& l, const logical::meta_model::name& n) const {
+    const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_id());
 }
 
 std::list<std::string> enum_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const logical::meta_model::element& e) const {
+    const logical::entities::element& e) const {
     auto builder(f.make());
 
     builder.add(e.name(), types::traits::enum_header_archetype());
     return builder.build();
 }
 
-extraction::meta_model::artefact enum_header_formatter::
-format(const context& ctx, const logical::meta_model::element& e) const {
+extraction::entities::artefact enum_header_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& ye(a.as<logical::meta_model::structural::enumeration>(e));
+    const auto& ye(a.as<logical::entities::structural::enumeration>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

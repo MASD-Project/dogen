@@ -29,8 +29,8 @@
 #include <string>
 #include <utility>
 #include <algorithm>
-#include "dogen.logical/types/meta_model/name.hpp"
-#include "dogen.logical/types/meta_model/name_tree.hpp"
+#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.logical/types/entities/name_tree.hpp"
 
 namespace dogen::logical::helpers {
 
@@ -43,25 +43,25 @@ public:
 
 public:
     decomposition_result(
-        const std::list<std::pair<std::string, dogen::logical::meta_model::name> >& names,
-        const std::list<std::pair<std::string, dogen::logical::meta_model::name> >& meta_names,
-        const std::list<std::pair<std::string, dogen::logical::meta_model::name_tree> >& name_trees);
+        const std::list<std::pair<std::string, dogen::logical::entities::name> >& names,
+        const std::list<std::pair<std::string, dogen::logical::entities::name> >& meta_names,
+        const std::list<std::pair<std::string, dogen::logical::entities::name_tree> >& name_trees);
 
 public:
-    const std::list<std::pair<std::string, dogen::logical::meta_model::name> >& names() const;
-    std::list<std::pair<std::string, dogen::logical::meta_model::name> >& names();
-    void names(const std::list<std::pair<std::string, dogen::logical::meta_model::name> >& v);
-    void names(const std::list<std::pair<std::string, dogen::logical::meta_model::name> >&& v);
+    const std::list<std::pair<std::string, dogen::logical::entities::name> >& names() const;
+    std::list<std::pair<std::string, dogen::logical::entities::name> >& names();
+    void names(const std::list<std::pair<std::string, dogen::logical::entities::name> >& v);
+    void names(const std::list<std::pair<std::string, dogen::logical::entities::name> >&& v);
 
-    const std::list<std::pair<std::string, dogen::logical::meta_model::name> >& meta_names() const;
-    std::list<std::pair<std::string, dogen::logical::meta_model::name> >& meta_names();
-    void meta_names(const std::list<std::pair<std::string, dogen::logical::meta_model::name> >& v);
-    void meta_names(const std::list<std::pair<std::string, dogen::logical::meta_model::name> >&& v);
+    const std::list<std::pair<std::string, dogen::logical::entities::name> >& meta_names() const;
+    std::list<std::pair<std::string, dogen::logical::entities::name> >& meta_names();
+    void meta_names(const std::list<std::pair<std::string, dogen::logical::entities::name> >& v);
+    void meta_names(const std::list<std::pair<std::string, dogen::logical::entities::name> >&& v);
 
-    const std::list<std::pair<std::string, dogen::logical::meta_model::name_tree> >& name_trees() const;
-    std::list<std::pair<std::string, dogen::logical::meta_model::name_tree> >& name_trees();
-    void name_trees(const std::list<std::pair<std::string, dogen::logical::meta_model::name_tree> >& v);
-    void name_trees(const std::list<std::pair<std::string, dogen::logical::meta_model::name_tree> >&& v);
+    const std::list<std::pair<std::string, dogen::logical::entities::name_tree> >& name_trees() const;
+    std::list<std::pair<std::string, dogen::logical::entities::name_tree> >& name_trees();
+    void name_trees(const std::list<std::pair<std::string, dogen::logical::entities::name_tree> >& v);
+    void name_trees(const std::list<std::pair<std::string, dogen::logical::entities::name_tree> >&& v);
 
 public:
     bool operator==(const decomposition_result& rhs) const;
@@ -74,9 +74,9 @@ public:
     decomposition_result& operator=(decomposition_result other);
 
 private:
-    std::list<std::pair<std::string, dogen::logical::meta_model::name> > names_;
-    std::list<std::pair<std::string, dogen::logical::meta_model::name> > meta_names_;
-    std::list<std::pair<std::string, dogen::logical::meta_model::name_tree> > name_trees_;
+    std::list<std::pair<std::string, dogen::logical::entities::name> > names_;
+    std::list<std::pair<std::string, dogen::logical::entities::name> > meta_names_;
+    std::list<std::pair<std::string, dogen::logical::entities::name_tree> > name_trees_;
 };
 
 }

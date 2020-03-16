@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.logical/io/meta_model/decoration/modeline_io.hpp"
+#include "dogen.logical/io/entities/decoration/modeline_io.hpp"
 #include "dogen.generation/types/formatters/formatting_error.hpp"
 #include "dogen.generation/types/formatters/modeline_formatter.hpp"
 
@@ -46,9 +46,9 @@ const std::string unsupported_modeline("Modeline is not supported.");
 
 namespace dogen::generation::formatters {
 
-using logical::meta_model::decoration::editor;
-using logical::meta_model::decoration::modeline_location;
-using logical::meta_model::decoration::modeline;
+using logical::entities::decoration::editor;
+using logical::entities::decoration::modeline_location;
+using logical::entities::decoration::modeline;
 
 bool modeline_formatter::
 is_vim(const modeline& ml) const {

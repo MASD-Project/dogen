@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.logical/types/meta_model/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
@@ -48,7 +48,7 @@ class_header_formatter::archetype_location() const {
     return r;
 }
 
-const logical::meta_model::name& class_header_formatter::meta_name() const {
+const logical::entities::name& class_header_formatter::meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_object_name());
     return r;
@@ -63,19 +63,19 @@ inclusion_support_types class_header_formatter::inclusion_support_type() const {
 }
 
 boost::filesystem::path class_header_formatter::inclusion_path(
-    const formattables::locator& l, const logical::meta_model::name& n) const {
+    const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_id());
 }
 
 boost::filesystem::path class_header_formatter::full_path(
-    const formattables::locator& l, const logical::meta_model::name& n) const {
+    const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_id());
 }
 
 std::list<std::string> class_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const logical::meta_model::element& e) const {
-    using logical::meta_model::structural::object;
+    const logical::entities::element& e) const {
+    using logical::entities::structural::object;
     const auto& o(assistant::as<object>(e));
     auto builder(f.make());
     builder.add(o.name(), types::traits::class_header_archetype());
@@ -90,11 +90,11 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-extraction::meta_model::artefact
+extraction::entities::artefact
 class_header_formatter::
-format(const context& ctx, const logical::meta_model::element& e) const {
+format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& o(a.as<logical::meta_model::structural::object>(e));
+    const auto& o(a.as<logical::entities::structural::object>(e));
 
     {
         const auto sn(o.name().simple());

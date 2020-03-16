@@ -23,14 +23,14 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/pair_io.hpp"
-#include "dogen.logical/types/meta_model/element_visitor.hpp"
-#include "dogen.logical/types/meta_model/orm/odb_target.hpp"
-#include "dogen.logical/types/meta_model/orm/odb_targets.hpp"
-#include "dogen.logical/types/meta_model/orm/common_odb_options.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/structural/primitive.hpp"
-#include "dogen.logical/types/meta_model/visual_studio/msbuild_targets.hpp"
-#include "dogen.logical/types/meta_model/build/cmakelists.hpp"
+#include "dogen.logical/types/entities/element_visitor.hpp"
+#include "dogen.logical/types/entities/orm/odb_target.hpp"
+#include "dogen.logical/types/entities/orm/odb_targets.hpp"
+#include "dogen.logical/types/entities/orm/common_odb_options.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/primitive.hpp"
+#include "dogen.logical/types/entities/visual_studio/msbuild_targets.hpp"
+#include "dogen.logical/types/entities/build/cmakelists.hpp"
 #include "dogen.generation.cpp/types/formatters/odb/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/types/traits.hpp"
 #include "dogen.generation.cpp/types/formattables/expansion_error.hpp"
@@ -52,40 +52,40 @@ const std::string missing_qualified_name(
 
 namespace dogen::generation::cpp::formattables {
 
-bool odb_target_comparer(const logical::meta_model::orm::odb_target& lhs,
-    const logical::meta_model::orm::odb_target& rhs) {
+bool odb_target_comparer(const logical::entities::orm::odb_target& lhs,
+    const logical::entities::orm::odb_target& rhs) {
     return lhs.name() < rhs.name();
 }
 
-using dogen::logical::meta_model::element_visitor;
+using dogen::logical::entities::element_visitor;
 
 class odb_targets_factory : public element_visitor {
 public:
     odb_targets_factory(const model& fm, const locator& l,
-        const logical::meta_model::name& model_name);
+        const logical::entities::name& model_name);
 
 private:
     template<typename OdbTargets>
-    OdbTargets generate_targets(const logical::meta_model::name& n);
+    OdbTargets generate_targets(const logical::entities::name& n);
 
 public:
     using element_visitor::visit;
-    void visit(const logical::meta_model::orm::common_odb_options& coo);
-    void visit(const logical::meta_model::structural::object& o);
-    void visit(const logical::meta_model::structural::primitive& p);
+    void visit(const logical::entities::orm::common_odb_options& coo);
+    void visit(const logical::entities::structural::object& o);
+    void visit(const logical::entities::structural::primitive& p);
 
 public:
-    const logical::meta_model::orm::odb_targets& result() const;
+    const logical::entities::orm::odb_targets& result() const;
 
 private:
     const model& model_;
     const locator locator_;
     const std::string target_name_;
-    logical::meta_model::orm::odb_targets result_;
+    logical::entities::orm::odb_targets result_;
 };
 
 odb_targets_factory::odb_targets_factory(const model& fm, const locator& l,
-    const logical::meta_model::name& model_name)
+    const logical::entities::name& model_name)
     : model_(fm), locator_(l),
       target_name_("odb_" + boost::join(model_name.location().model_modules(),
               separator)) {
@@ -94,7 +94,7 @@ odb_targets_factory::odb_targets_factory(const model& fm, const locator& l,
 
 template<typename OdbTarget>
 OdbTarget odb_targets_factory::
-generate_targets(const logical::meta_model::name& n) {
+generate_targets(const logical::entities::name& n) {
     OdbTarget r;
     r.name(target_name_ + separator + n.simple());
     r.comment("ODB " + n.simple());
@@ -143,7 +143,7 @@ generate_targets(const logical::meta_model::name& n) {
 }
 
 void odb_targets_factory::
-visit(const logical::meta_model::orm::common_odb_options& coo) {
+visit(const logical::entities::orm::common_odb_options& coo) {
     const auto arch(formatters::odb::traits::common_odb_options_archetype());
     result_.common_odb_options(
         locator_.make_relative_path_for_odb_options(coo.name(), arch,
@@ -152,7 +152,7 @@ visit(const logical::meta_model::orm::common_odb_options& coo) {
 }
 
 void odb_targets_factory::
-visit(const logical::meta_model::structural::object& o) {
+visit(const logical::entities::structural::object& o) {
     /*
      * We only care about objects which have ORM enabled.
      */
@@ -161,11 +161,11 @@ visit(const logical::meta_model::structural::object& o) {
 
     const auto& n(o.name());
     result_.targets().push_back(
-        generate_targets<logical::meta_model::orm::odb_target>(n));
+        generate_targets<logical::entities::orm::odb_target>(n));
 }
 
 void odb_targets_factory::
-visit(const logical::meta_model::structural::primitive& p) {
+visit(const logical::entities::structural::primitive& p) {
     /*
      * We only care about objects which have ORM enabled.
      */
@@ -174,10 +174,10 @@ visit(const logical::meta_model::structural::primitive& p) {
 
     const auto& n(p.name());
     result_.targets().push_back(
-        generate_targets<logical::meta_model::orm::odb_target>(n));
+        generate_targets<logical::entities::orm::odb_target>(n));
 }
 
-const logical::meta_model::orm::odb_targets&
+const logical::entities::orm::odb_targets&
 odb_targets_factory::result() const {
     return result_;
 }
@@ -185,23 +185,23 @@ odb_targets_factory::result() const {
 class build_files_updater : public element_visitor {
 public:
     build_files_updater(const locator& l,
-        const logical::meta_model::orm::odb_targets& targets);
+        const logical::entities::orm::odb_targets& targets);
 
 public:
     using element_visitor::visit;
-    void visit(logical::meta_model::build::cmakelists& v);
-    void visit(logical::meta_model::visual_studio::msbuild_targets& v);
+    void visit(logical::entities::build::cmakelists& v);
+    void visit(logical::entities::visual_studio::msbuild_targets& v);
 
 private:
     const locator& locator_;
-    const logical::meta_model::orm::odb_targets& targets_;
+    const logical::entities::orm::odb_targets& targets_;
 };
 
 build_files_updater::build_files_updater(const locator& l,
-    const logical::meta_model::orm::odb_targets& targets)
+    const logical::entities::orm::odb_targets& targets)
     : locator_(l), targets_(targets) {}
 
-void build_files_updater::visit(logical::meta_model::build::cmakelists& c) {
+void build_files_updater::visit(logical::entities::build::cmakelists& c) {
     c.odb_targets(targets_);
     c.include_directory_path(locator_.include_directory_name());
     c.source_directory_name(locator_.source_directory_name());
@@ -211,13 +211,13 @@ void build_files_updater::visit(logical::meta_model::build::cmakelists& c) {
 }
 
 void build_files_updater::
-visit(logical::meta_model::visual_studio::msbuild_targets& v) {
+visit(logical::entities::visual_studio::msbuild_targets& v) {
     v.odb_targets(targets_);
 }
 
 void build_files_expander::expand(const locator& l, model& fm) const {
     odb_targets_factory f(fm, l, fm.name());
-    const auto ott(logical::meta_model::origin_types::target);
+    const auto ott(logical::entities::origin_types::target);
     for (auto& pair : fm.formattables()) {
         /*
          * We only want to process target elements; references can be

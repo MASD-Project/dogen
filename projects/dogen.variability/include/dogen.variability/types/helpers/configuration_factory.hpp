@@ -32,10 +32,10 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/binding_point.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/binding_point.hpp"
 
 namespace dogen::variability::helpers {
 
@@ -51,7 +51,7 @@ public:
      * @param compatibility_mode if true, try to ignore some
      * resolution errors.
      */
-    configuration_factory(const meta_model::feature_model& fm,
+    configuration_factory(const entities::feature_model& fm,
         const bool compatibility_mode);
 
 private:
@@ -62,22 +62,22 @@ private:
      * requested, returns null. If compatibility mode was not
      * requested throws.
      */
-    boost::optional<meta_model::feature>
+    boost::optional<entities::feature>
     try_obtain_feature(const std::string& qn) const;
 
     /**
      * @brief Ensures the feature can be bound to the supplied binding
      * type.
      */
-    void validate_binding(const meta_model::feature& f,
-        const meta_model::binding_point bp) const;
+    void validate_binding(const entities::feature& f,
+        const entities::binding_point bp) const;
 
     /**
      * @brief Given a binding type, returns the well-known name of its
      * the default configuration.
      */
     std::string get_default_configuration_name_for_binding_point(
-        const meta_model::binding_point bp) const;
+        const entities::binding_point bp) const;
 
 private:
     /**
@@ -91,31 +91,31 @@ private:
      * @brief Uses the raw data to populate the configuration.
      */
     void
-    populate_configuration(const meta_model::binding_point bp,
+    populate_configuration(const entities::binding_point bp,
         const std::list<std::pair<std::string, std::string>>& entries,
         const std::unordered_map<std::string, std::list<std::string>>&
-        aggregated_override_entries, meta_model::configuration& cfg) const;
+        aggregated_override_entries, entities::configuration& cfg) const;
 
 public:
     /**
      * @brief Create a configuration.
      */
-    meta_model::configuration
+    entities::configuration
     make(const std::list<std::pair<std::string, std::string>>& entries,
         const std::list<std::pair<std::string, std::string>>& override_entries,
-        const meta_model::binding_point bp) const;
+        const entities::binding_point bp) const;
 
     /**
      * @brief Create a configuration as a shared pointer.
      */
-    boost::shared_ptr<meta_model::configuration>
+    boost::shared_ptr<entities::configuration>
     make_shared_ptr(
         const std::list<std::pair<std::string, std::string>>& tagged_values,
         const std::list<std::pair<std::string, std::string>>&
-        tagged_values_overrides, const meta_model::binding_point bp) const;
+        tagged_values_overrides, const entities::binding_point bp) const;
 
 private:
-    const meta_model::feature_model& feature_model_;
+    const entities::feature_model& feature_model_;
     const bool compatibility_mode_;
 };
 

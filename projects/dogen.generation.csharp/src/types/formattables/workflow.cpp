@@ -34,7 +34,7 @@ static logger lg(logger_factory("generation.csharp.formattables.workflow"));
 namespace dogen::generation::csharp::formattables {
 
 model workflow::make_model(const formatters::repository& frp,
-    const generation::meta_model::model& m) const {
+    const generation::entities::model& m) const {
     model r;
     r.name(m.name());
 
@@ -45,16 +45,16 @@ model workflow::make_model(const formatters::repository& frp,
 }
 
 void workflow::expand_model(
-    const variability::meta_model::feature_model& feature_model,
+    const variability::entities::feature_model& feature_model,
     const formatters::repository& frp, const locator& l, model& fm) const {
     model_expander ex;
     ex.expand(feature_model, frp, l, fm);
 }
 
 model workflow::execute(
-    const variability::meta_model::feature_model& feature_model,
+    const variability::entities::feature_model& feature_model,
     const formatters::repository& frp, const locator& l,
-    const generation::meta_model::model& m) const {
+    const generation::entities::model& m) const {
 
     auto r(make_model(frp, m));
     expand_model(feature_model, frp, l, r);

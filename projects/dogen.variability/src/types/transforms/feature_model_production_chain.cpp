@@ -22,8 +22,8 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/shared_ptr_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.variability/io/meta_model/feature_io.hpp"
-#include "dogen.variability/io/meta_model/feature_model_io.hpp"
+#include "dogen.variability/io/entities/feature_io.hpp"
+#include "dogen.variability/io/entities/feature_model_io.hpp"
 #include "dogen.variability/types/transforms/feature_model_transform.hpp"
 #include "dogen.variability/types/transforms/feature_template_instantiation_transform.hpp"
 #include "dogen.variability/types/transforms/feature_model_production_chain.hpp"
@@ -40,10 +40,10 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::variability::transforms {
 
-boost::shared_ptr<meta_model::feature_model>
+boost::shared_ptr<entities::feature_model>
 feature_model_production_chain::apply(const context& ctx,
-    const meta_model::feature_template_repository& ftrp,
-    const meta_model::feature_repository& frp) {
+    const entities::feature_template_repository& ftrp,
+    const entities::feature_repository& frp) {
     tracing::scoped_chain_tracer stp(lg, "feature model production chain",
         transform_id, transform_id, *ctx.tracer());
 

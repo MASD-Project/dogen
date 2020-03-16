@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include <iostream> // FIXME
+#include <iostream>
 #include <sstream>
 #include <boost/filesystem.hpp>
 #include <boost/lexical_cast.hpp>
@@ -27,7 +27,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.extraction/io/meta_model/model_io.hpp"
+#include "dogen.extraction/io/entities/model_io.hpp"
 #include "dogen.extraction/types/transforms/transform_exception.hpp"
 #include "dogen.extraction/types/transforms/generate_patch_transform.hpp"
 
@@ -49,7 +49,7 @@ const std::string using_dir_message("Using directory: ");
 namespace dogen::extraction::transforms {
 
 void generate_patch_transform::
-apply(const context& ctx, const meta_model::model& m) {
+apply(const context& ctx, const entities::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "generate patch transform", transform_id, m.name(),
         *ctx.tracer(), m);
@@ -102,7 +102,6 @@ apply(const context& ctx, const meta_model::model& m) {
     }
     case diffing_destination::console:
         BOOST_LOG_SEV(lg, debug) << "Outputting patch to console.";
-
         std::cout << c;
         break;
     default: {

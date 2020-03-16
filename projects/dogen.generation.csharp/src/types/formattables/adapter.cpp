@@ -36,7 +36,7 @@ namespace dogen::generation::csharp::formattables {
 
 std::unordered_map<std::string, formattable>
 adapter::adapt(const formatters::repository& frp,
-    const generation::meta_model::model& m) const {
+    const generation::entities::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming yarn to formattables."
                              << " Elements in model: " << m.elements().size();
 

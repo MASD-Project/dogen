@@ -28,8 +28,8 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
-#include "dogen.variability/io/meta_model/configuration_io.hpp"
-#include "dogen.variability/io/meta_model/binding_point_io.hpp"
+#include "dogen.variability/io/entities/configuration_io.hpp"
+#include "dogen.variability/io/entities/binding_point_io.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
 #include "dogen.variability/types/helpers/building_exception.hpp"
 #include "dogen.variability/types/helpers/configuration_factory.hpp"
@@ -78,7 +78,7 @@ public:
      * responsible for removing the feature name portion of the
      * original key and to store it in a new collection of entries.
      */
-    void gather_kvp(const meta_model::feature& f, const std::string& key,
+    void gather_kvp(const entities::feature& f, const std::string& key,
         const std::string& value);
 
     /**
@@ -118,7 +118,7 @@ gatherer::collections() {
     return collections_;
 }
 
-void gatherer::gather_kvp(const meta_model::feature& f,
+void gatherer::gather_kvp(const entities::feature& f,
     const std::string& key, const std::string& value) {
     /*
      * Compute a new key by removing the prefix.
@@ -150,10 +150,10 @@ void gatherer::gather_collection(const std::string& key,
 }
 
 configuration_factory::configuration_factory(
-    const meta_model::feature_model& fm, const bool compatibility_mode)
+    const entities::feature_model& fm, const bool compatibility_mode)
     : feature_model_(fm), compatibility_mode_(compatibility_mode) {}
 
-boost::optional<meta_model::feature>
+boost::optional<entities::feature>
 configuration_factory::try_obtain_feature(const std::string& qn) const {
     /*
      * First try a full match; if it exists, return the feature.
@@ -186,7 +186,7 @@ configuration_factory::try_obtain_feature(const std::string& qn) const {
          * we do not yet know about.
          */
         BOOST_LOG_SEV(lg, warn) << "Ignoring missing feature: " << qn;
-        return boost::optional<meta_model::feature>();
+        return boost::optional<entities::feature>();
     }
 
     /*
@@ -197,11 +197,11 @@ configuration_factory::try_obtain_feature(const std::string& qn) const {
     BOOST_THROW_EXCEPTION(building_exception(feature_not_found + qn));
 }
 
-void configuration_factory::validate_binding(const meta_model::feature& f,
-    const meta_model::binding_point bp) const {
+void configuration_factory::validate_binding(const entities::feature& f,
+    const entities::binding_point bp) const {
 
     const auto fbt(f.binding_point());
-    if (fbt != meta_model::binding_point::any && fbt != bp) {
+    if (fbt != entities::binding_point::any && fbt != bp) {
         std::stringstream s;
         s << invalid_binding_for_point << f.name().qualified()
           << expected_binding_point << f.binding_point()
@@ -224,10 +224,10 @@ configuration_factory::aggregate_entries(
 }
 
 void configuration_factory::populate_configuration(
-    const meta_model::binding_point bp,
+    const entities::binding_point bp,
     const std::list<std::pair<std::string, std::string>>& tagged_values,
     const std::unordered_map<std::string, std::list<std::string>>&
-    aggregated_override_entries, meta_model::configuration& cfg) const {
+    aggregated_override_entries, entities::configuration& cfg) const {
 
     cfg.source_binding_point(bp);
 
@@ -264,7 +264,7 @@ void configuration_factory::populate_configuration(
         /*
          * Overrides are only supported for scalars.
          */
-        using meta_model::value_type;
+        using entities::value_type;
         const auto vt(f.value_type());
         const bool is_scalar(vt != value_type::key_value_pair &&
             vt != value_type::text_collection);
@@ -287,7 +287,7 @@ void configuration_factory::populate_configuration(
              * Handle the scalar case; these we can process on the
              * first pass.
              */
-            meta_model::configuration_point cp;
+            entities::configuration_point cp;
             cp.name().qualified(k);
 
             /*
@@ -313,7 +313,7 @@ void configuration_factory::populate_configuration(
         const auto k(pair.first);
         const auto kvps(pair.second);
 
-        meta_model::configuration_point cp;
+        entities::configuration_point cp;
         cp.name().qualified(k);
         cp.value(factory.make_kvp(kvps));
         cfg.configuration_points()[k] = cp;
@@ -328,32 +328,32 @@ void configuration_factory::populate_configuration(
 
         BOOST_LOG_SEV(lg, debug) << "Processing collection: " << k;
 
-        meta_model::configuration_point cp;
+        entities::configuration_point cp;
         cp.name().qualified(k);
         cp.value(factory.make_text_collection(values));
         cfg.configuration_points()[k] = cp;
     }
 }
 
-meta_model::configuration configuration_factory::make(
+entities::configuration configuration_factory::make(
     const std::list<std::pair<std::string, std::string>>& tagged_values,
     const std::list<std::pair<std::string, std::string>>&
-    tagged_values_overrides, const meta_model::binding_point bp) const {
+    tagged_values_overrides, const entities::binding_point bp) const {
     const auto& tv(tagged_values);
     const auto atvo(aggregate_entries(tagged_values_overrides));
-    meta_model::configuration r;
+    entities::configuration r;
     populate_configuration(bp, tv, atvo, r);
     return r;
 }
 
-boost::shared_ptr<meta_model::configuration>
+boost::shared_ptr<entities::configuration>
 configuration_factory::make_shared_ptr(
     const std::list<std::pair<std::string, std::string>>& tagged_values,
     const std::list<std::pair<std::string, std::string>>&
-    tagged_values_overrides, const meta_model::binding_point bp) const {
+    tagged_values_overrides, const entities::binding_point bp) const {
     const auto& tv(tagged_values);
     const auto atvo(aggregate_entries(tagged_values_overrides));
-    auto r(boost::make_shared<meta_model::configuration>());
+    auto r(boost::make_shared<entities::configuration>());
     populate_configuration(bp, tv, atvo, *r);
     return r;
 }

@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen.variability/types/helpers/registrar.hpp"
-#include "dogen.variability/types/meta_model/feature_template.hpp"
+#include "dogen.variability/types/entities/feature_template.hpp"
 
 namespace dogen::templating {
 

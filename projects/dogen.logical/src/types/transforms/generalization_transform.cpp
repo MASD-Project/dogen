@@ -24,9 +24,9 @@
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/meta_model/name_io.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
+#include "dogen.logical/io/entities/name_io.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/helpers/resolver.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/helpers/name_builder.hpp"
@@ -49,7 +49,7 @@ const std::string parent_name_conflict(
 
 }
 
-namespace dogen::logical::meta_model {
+namespace dogen::logical::entities {
 
 inline bool operator<(const name& lhs, const name& rhs) {
     return lhs.qualified().dot() < rhs.qualified().dot();
@@ -61,7 +61,7 @@ namespace dogen::logical::transforms {
 
 std::unordered_set<std::string> generalization_transform::
 update_and_collect_parent_ids(const helpers::indices& idx,
-    const variability::meta_model::feature_model& fm, meta_model::model& m) {
+    const variability::entities::feature_model& fm, entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Updating and collecting parent ids.";
 
     using helpers::resolver;
@@ -137,7 +137,7 @@ update_and_collect_parent_ids(const helpers::indices& idx,
          * Note that we are also gathering the parent names after
          * resolution.
          */
-        std::list<meta_model::name> resolved_parents;
+        std::list<entities::name> resolved_parents;
         for (const auto& pn : o.parents()) {
             const auto resolved_pn(resolver::resolve(m, idx, o.name(), pn));
             resolved_parents.push_back(resolved_pn);
@@ -155,8 +155,8 @@ update_and_collect_parent_ids(const helpers::indices& idx,
 }
 
 void generalization_transform::walk_up_generalization_tree(
-    const meta_model::name &leaf, meta_model::model& m,
-    meta_model::structural::object& o) {
+    const entities::name &leaf, entities::model& m,
+    entities::structural::object& o) {
 
     BOOST_LOG_SEV(lg, trace) << "Updating leaves for: "
                              << o.name().qualified().dot()
@@ -236,7 +236,7 @@ void generalization_transform::walk_up_generalization_tree(
 }
 
 void generalization_transform::populate_generalizable_properties(
-    const std::unordered_set<std::string>& parent_ids, meta_model::model& m) {
+    const std::unordered_set<std::string>& parent_ids, entities::model& m) {
 
     for (auto& pair : m.structural_elements().objects()) {
         const auto& id(pair.first);
@@ -301,7 +301,7 @@ void generalization_transform::populate_generalizable_properties(
     }
 }
 
-void generalization_transform::sort_leaves(meta_model::model& m) {
+void generalization_transform::sort_leaves(entities::model& m) {
     for (auto& pair : m.structural_elements().objects()) {
         auto& o(*pair.second);
         o.leaves().sort();
@@ -309,7 +309,7 @@ void generalization_transform::sort_leaves(meta_model::model& m) {
 }
 
 void generalization_transform::apply(const context& ctx,
-    const helpers::indices& idx, meta_model::model& m) {
+    const helpers::indices& idx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "generalization transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 

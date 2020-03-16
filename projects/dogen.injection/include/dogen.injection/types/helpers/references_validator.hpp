@@ -29,7 +29,7 @@
 #include <string>
 #include <unordered_set>
 #include <unordered_map>
-#include "dogen.injection/types/meta_model/reference_graph_data.hpp"
+#include "dogen.injection/types/entities/reference_graph_data.hpp"
 
 namespace dogen::injection::helpers {
 
@@ -58,7 +58,7 @@ private:
         edges_per_model, dfs_data dd = dfs_data());
 
 public:
-    static void validate(const meta_model::reference_graph_data& rgd);
+    static void validate(const entities::reference_graph_data& rgd);
 };
 
 }

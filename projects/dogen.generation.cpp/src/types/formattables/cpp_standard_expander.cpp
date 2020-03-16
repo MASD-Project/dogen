@@ -58,7 +58,7 @@ cpp_standard_expander::to_cpp_standard(const std::string& s) const {
 }
 
 cpp_standard_expander::feature_group cpp_standard_expander::
-make_feature_group(const variability::meta_model::feature_model& fm) const {
+make_feature_group(const variability::entities::feature_model& fm) const {
     const variability::helpers::feature_selector s(fm);
     feature_group r;
     const auto cs(traits::cpp::standard());
@@ -67,15 +67,15 @@ make_feature_group(const variability::meta_model::feature_model& fm) const {
 }
 
 cpp_standards cpp_standard_expander::make_standard(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) const {
+    const variability::entities::configuration& cfg) const {
     const variability::helpers::configuration_selector s(cfg);
     const auto cs(s.get_text_content_or_default(fg.cpp_standard));
     return to_cpp_standard(cs);
 }
 
 void cpp_standard_expander::
-expand(const variability::meta_model::feature_model& feature_model,
-    const variability::meta_model::configuration& rcfg, model& fm) const {
+expand(const variability::entities::feature_model& feature_model,
+    const variability::entities::configuration& rcfg, model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started expanding C++ standard.";
 
     const auto fg(make_feature_group(feature_model));

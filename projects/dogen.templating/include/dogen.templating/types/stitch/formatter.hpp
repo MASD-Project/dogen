@@ -26,7 +26,7 @@
 #endif
 
 #include <iosfwd>
-#include "dogen.extraction/types/meta_model/artefact.hpp"
+#include "dogen.extraction/types/entities/artefact.hpp"
 #include "dogen.physical/types/location.hpp"
 #include "dogen.templating/types/helpers/kvp_resolver.hpp"
 #include "dogen.templating/types/stitch/line.hpp"
@@ -87,7 +87,7 @@ public:
     /**
      * @brief Formats the template into an artefact.
      */
-    extraction::meta_model::artefact format(const text_template& tt) const;
+    extraction::entities::artefact format(const text_template& tt) const;
 };
 
 }

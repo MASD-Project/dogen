@@ -23,7 +23,7 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.injection/io/meta_model/model_io.hpp"
+#include "dogen.injection/io/entities/model_io.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
 #include "dogen.injection/types/features/reference.hpp"
 #include "dogen.injection/types/transforms/references_transform.hpp"
@@ -39,7 +39,7 @@ static logger lg(logger_factory(transform_id));
 
 namespace dogen::injection::transforms {
 
-void references_transform::apply(const context& ctx, meta_model::model& m) {
+void references_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "references transform",
         transform_id, m.name(), *ctx.tracer(), m);
 

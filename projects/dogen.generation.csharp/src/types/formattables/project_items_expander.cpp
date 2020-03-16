@@ -22,15 +22,15 @@
 #include <algorithm>
 #include <boost/pointer_cast.hpp>
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/structural/visitor.hpp"
-#include "dogen.logical/types/meta_model/structural/builtin.hpp"
-#include "dogen.logical/types/meta_model/structural/exception.hpp"
-#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
-#include "dogen.logical/types/meta_model/structural/primitive.hpp"
-#include "dogen.logical/types/meta_model/visual_studio/project_persistence_block.hpp"
-#include "dogen.logical/types/meta_model/visual_studio/project.hpp"
-#include "dogen.logical/types/meta_model/structural/assistant.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/visitor.hpp"
+#include "dogen.logical/types/entities/structural/builtin.hpp"
+#include "dogen.logical/types/entities/structural/exception.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
+#include "dogen.logical/types/entities/structural/primitive.hpp"
+#include "dogen.logical/types/entities/visual_studio/project_persistence_block.hpp"
+#include "dogen.logical/types/entities/visual_studio/project.hpp"
+#include "dogen.logical/types/entities/structural/assistant.hpp"
 #include "dogen.generation.csharp/types/formattables/project_items_expander.hpp"
 
 namespace {
@@ -65,7 +65,7 @@ bool project_items_expander::is_project_item(const std::string& mn) const {
 }
 
 void project_items_expander::expand(model& fm) const {
-    using logical::meta_model::visual_studio::project;
+    using logical::entities::visual_studio::project;
     boost::shared_ptr<project> proj;
     using ymnf = logical::helpers::meta_name_factory;
     const auto proj_name(ymnf::make_visual_studio_project_name());
@@ -101,9 +101,9 @@ void project_items_expander::expand(model& fm) const {
         fm.project_items().push_back(pi);
 
     if (proj) {
-        logical::meta_model::visual_studio::item_group ig;
+        logical::entities::visual_studio::item_group ig;
         for (const auto& pi : set) {
-            logical::meta_model::visual_studio::item item;
+            logical::entities::visual_studio::item item;
             item.include(pi);
             item.name(msbuild_target);
             ig.items().push_back(item);

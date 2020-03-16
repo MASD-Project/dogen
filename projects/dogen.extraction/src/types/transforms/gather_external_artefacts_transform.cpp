@@ -23,7 +23,7 @@
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.extraction/io/meta_model/model_io.hpp"
+#include "dogen.extraction/io/entities/model_io.hpp"
 #include "dogen.extraction/io/helpers/files_by_status_io.hpp"
 #include "dogen.extraction/types/helpers/file_status_collector.hpp"
 #include "dogen.extraction/types/transforms/gather_external_artefacts_transform.hpp"
@@ -40,12 +40,12 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::extraction::transforms {
 
-meta_model::artefact gather_external_artefacts_transform::make_artefact(
+entities::artefact gather_external_artefacts_transform::make_artefact(
     const boost::filesystem::path& p,
-    const meta_model::operation_type ot,
-    const meta_model::operation_reason rsn) {
+    const entities::operation_type ot,
+    const entities::operation_reason rsn) {
 
-    meta_model::artefact r;
+    entities::artefact r;
     r.path(p);
     r.operation().type(ot);
     r.operation().reason(rsn);
@@ -54,7 +54,7 @@ meta_model::artefact gather_external_artefacts_transform::make_artefact(
 }
 
 void gather_external_artefacts_transform::
-apply(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "gather external artefacts transform", transform_id, m.name(),
         *ctx.tracer(), m);
@@ -69,9 +69,9 @@ apply(const context& ctx, meta_model::model& m) {
         return;
     }
 
-    using meta_model::operation_type;
-    using meta_model::operation_reason;
-    using meta_model::artefact;
+    using entities::operation_type;
+    using entities::operation_reason;
+    using entities::artefact;
 
     /*
      * Now, for each file, generate artefacts with the appropriate

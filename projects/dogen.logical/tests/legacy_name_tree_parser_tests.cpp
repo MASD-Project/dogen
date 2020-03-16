@@ -25,13 +25,13 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.logical/types/helpers/name_factory.hpp"
 #include "dogen.logical/types/helpers/parsing_error.hpp"
-#include "dogen.logical/io/meta_model/name_tree_io.hpp"
-#include "dogen.logical/io/meta_model/name_io.hpp"
+#include "dogen.logical/io/entities/name_tree_io.hpp"
+#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/types/helpers/legacy_name_tree_parser.hpp"
 #include "dogen.utility/types/test/exception_checkers.hpp"
 
 using dogen::utility::test::asserter;
-using dogen::logical::meta_model::name_tree;
+using dogen::logical::entities::name_tree;
 using dogen::logical::helpers::legacy_name_tree_parser;
 using dogen::logical::helpers::name_factory;
 
@@ -41,9 +41,9 @@ const std::string empty;
 const std::string test_module("dogen.logical.tests");
 const std::string test_suite("legacy_name_tree_parser_tests");
 
-const auto cpp(dogen::logical::meta_model::technical_space::cpp);
+const auto cpp(dogen::logical::entities::technical_space::cpp);
 
-name_tree make(const dogen::logical::meta_model::name& n) {
+name_tree make(const dogen::logical::entities::name& n) {
     name_tree r;
     r.current(n);
     return r;

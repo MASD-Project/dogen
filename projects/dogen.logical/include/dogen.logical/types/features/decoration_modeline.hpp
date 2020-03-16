@@ -27,9 +27,9 @@
 
 #include <list>
 #include <string>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
 
 namespace dogen::logical::features {
 
@@ -39,13 +39,13 @@ namespace dogen::logical::features {
 class decoration_modeline final {
 public:
     struct feature_group {
-        variability::meta_model::feature editor;
-        variability::meta_model::feature location;
-        variability::meta_model::feature technical_space;
+        variability::entities::feature editor;
+        variability::entities::feature location;
+        variability::entities::feature technical_space;
     };
 
     static feature_group
-    make_feature_group(const variability::meta_model::feature_model& fm);
+    make_feature_group(const variability::entities::feature_model& fm);
 
 public:
     struct static_configuration {
@@ -56,7 +56,7 @@ public:
 
     static static_configuration make_static_configuration(
         const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
+        const variability::entities::configuration& cfg);
 
     template<typename Configurable>
     static static_configuration make_static_configuration(
@@ -65,7 +65,7 @@ public:
     }
 
 public:
-    static std::list<dogen::variability::meta_model::feature>
+    static std::list<dogen::variability::entities::feature>
     make_features();
 };
 

@@ -19,13 +19,13 @@
  *
  */
 #include <ostream>
-#include "dogen.variability/io/meta_model/profile_io.hpp"
-#include "dogen.variability/io/meta_model/profile_template_io.hpp"
+#include "dogen.variability/io/entities/profile_io.hpp"
+#include "dogen.variability/io/entities/profile_template_io.hpp"
 #include "dogen.variability/io/transforms/profile_repository_inputs_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::variability::meta_model::profile>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::variability::entities::profile>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -39,7 +39,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::variabil
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::variability::meta_model::profile_template>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::variability::entities::profile_template>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

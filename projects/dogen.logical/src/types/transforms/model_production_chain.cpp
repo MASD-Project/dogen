@@ -24,9 +24,9 @@
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/types/traits.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
-#include "dogen.logical/io/meta_model/model_set_io.hpp"
-#include "dogen.logical/io/meta_model/technical_space_io.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/io/entities/model_set_io.hpp"
+#include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/assembly_chain.hpp"
 #include "dogen.logical/types/transforms/post_assembly_chain.hpp"
@@ -44,9 +44,9 @@ static logger lg(logger_factory(transform_id));
 
 namespace dogen::logical::transforms {
 
-std::list<meta_model::model>
+std::list<entities::model>
 model_production_chain::apply(const context& ctx,
-    logical::meta_model::model_set ms) {
+    logical::entities::model_set ms) {
     tracing::scoped_chain_tracer stp(lg, "assets model production chain",
         transform_id, ms.target().name().qualified().dot(), *ctx.tracer(), ms);
 
@@ -84,7 +84,7 @@ model_production_chain::apply(const context& ctx,
      * The below code takes into account all of these permutations,
      * performing mapping as required.
      */
-    std::list<meta_model::model> r;
+    std::list<entities::model> r;
     for (const auto ots : ms.target().output_technical_spaces()) {
         /*
          * Execute the assembly chain for each of the requested output

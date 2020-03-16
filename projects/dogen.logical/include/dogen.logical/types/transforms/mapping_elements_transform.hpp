@@ -27,10 +27,10 @@
 
 #include <list>
 #include <unordered_map>
-#include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.logical/types/meta_model/model_set.hpp"
-#include "dogen.logical/types/meta_model/mapping/destination.hpp"
-#include "dogen.logical/types/meta_model/variability/feature_template_bundle.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.logical/types/entities/model_set.hpp"
+#include "dogen.logical/types/entities/mapping/destination.hpp"
+#include "dogen.logical/types/entities/variability/feature_template_bundle.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
@@ -39,24 +39,24 @@ class mapping_elements_transform final {
 private:
     static std::unordered_map<std::string,
                               std::list<
-                                  logical::meta_model::mapping::destination>
+                                  logical::entities::mapping::destination>
                               >
-    make_destinations(const variability::meta_model::feature_model& fm,
-        const logical::meta_model::model_set& ms);
+    make_destinations(const variability::entities::feature_model& fm,
+        const logical::entities::model_set& ms);
 
     static void populate_extensible_mappables(
         const std::unordered_map<std::string,
-        std::list<logical::meta_model::mapping::destination>>&
-        destinations_for_target, logical::meta_model::model_set& ms);
+        std::list<logical::entities::mapping::destination>>&
+        destinations_for_target, logical::entities::model_set& ms);
 
 private:
     static void populate_fixed_mappables(
-        const variability::meta_model::feature_model& fm,
-        logical::meta_model::model_set& ms);
+        const variability::entities::feature_model& fm,
+        logical::entities::model_set& ms);
 
 public:
     static void
-    apply(const context& ctx, logical::meta_model::model_set& ms);
+    apply(const context& ctx, logical::entities::model_set& ms);
 };
 
 }

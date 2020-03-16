@@ -27,9 +27,9 @@ namespace dogen::engine::features {
 
 namespace {
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_injection_external_modules() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("external_modules");
     r.name().qualified("masd.injection.external_modules");
@@ -45,9 +45,9 @@ name.
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_injection_model_modules() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("model_modules");
     r.name().qualified("masd.injection.model_modules");
@@ -65,7 +65,7 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.
 }
 
 model_location::feature_group
-model_location::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+model_location::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
@@ -77,7 +77,7 @@ model_location::make_feature_group(const dogen::variability::meta_model::feature
 
 model_location::static_configuration model_location::make_static_configuration(
     const feature_group& fg,
-    const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::entities::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
@@ -87,10 +87,10 @@ model_location::static_configuration model_location::make_static_configuration(
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature>
+std::list<dogen::variability::entities::feature>
 model_location::make_features() {
-    using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature> r;
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature> r;
     r.push_back(make_masd_injection_external_modules());
     r.push_back(make_masd_injection_model_modules());
     return r;

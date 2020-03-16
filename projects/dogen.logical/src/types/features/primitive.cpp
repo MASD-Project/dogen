@@ -27,9 +27,9 @@ namespace dogen::logical::features {
 
 namespace {
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_primitive_underlying_element() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("underlying_element");
     r.name().qualified("masd.primitive.underlying_element");
@@ -42,9 +42,9 @@ make_masd_primitive_underlying_element() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_primitive_is_nullable() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("is_nullable");
     r.name().qualified("masd.primitive.is_nullable");
@@ -59,9 +59,9 @@ make_masd_primitive_is_nullable() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_primitive_use_type_aliasing() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("use_type_aliasing");
     r.name().qualified("masd.primitive.use_type_aliasing");
@@ -80,7 +80,7 @@ it.
 }
 
 primitive::feature_group
-primitive::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+primitive::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
@@ -93,7 +93,7 @@ primitive::make_feature_group(const dogen::variability::meta_model::feature_mode
 
 primitive::static_configuration primitive::make_static_configuration(
     const feature_group& fg,
-    const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::entities::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
@@ -104,10 +104,10 @@ primitive::static_configuration primitive::make_static_configuration(
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature>
+std::list<dogen::variability::entities::feature>
 primitive::make_features() {
-    using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature> r;
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature> r;
     r.push_back(make_masd_primitive_underlying_element());
     r.push_back(make_masd_primitive_is_nullable());
     r.push_back(make_masd_primitive_use_type_aliasing());

@@ -20,7 +20,7 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.injection/io/meta_model/model_io.hpp"
+#include "dogen.injection/io/entities/model_io.hpp"
 #include "dogen.injection/types/features/input_technical_space.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
 #include "dogen.injection/types/transforms/input_technical_space_transform.hpp"
@@ -38,7 +38,7 @@ auto lg(logger_factory(transform_id));
 namespace dogen::injection::transforms {
 
 void input_technical_space_transform::
-apply(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "technical space transform",
         transform_id, m.name(), *ctx.tracer(), m);
 

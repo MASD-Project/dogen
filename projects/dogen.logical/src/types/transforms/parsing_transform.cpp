@@ -23,19 +23,19 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/unordered_set_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/types/meta_model/element.hpp"
-#include "dogen.logical/types/meta_model/structural/module.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/structural/builtin.hpp"
-#include "dogen.logical/types/meta_model/structural/visitor.hpp"
-#include "dogen.logical/types/meta_model/structural/exception.hpp"
-#include "dogen.logical/types/meta_model/structural/primitive.hpp"
-#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
-#include "dogen.logical/types/meta_model/structural/object_template.hpp"
-#include "dogen.logical/types/meta_model/variability/feature_bundle.hpp"
-#include "dogen.logical/types/meta_model/variability/feature_template_bundle.hpp"
-#include "dogen.logical/io/meta_model/technical_space_io.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
+#include "dogen.logical/types/entities/element.hpp"
+#include "dogen.logical/types/entities/structural/module.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/builtin.hpp"
+#include "dogen.logical/types/entities/structural/visitor.hpp"
+#include "dogen.logical/types/entities/structural/exception.hpp"
+#include "dogen.logical/types/entities/structural/primitive.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
+#include "dogen.logical/types/entities/structural/object_template.hpp"
+#include "dogen.logical/types/entities/variability/feature_bundle.hpp"
+#include "dogen.logical/types/entities/variability/feature_template_bundle.hpp"
+#include "dogen.logical/io/entities/technical_space_io.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/helpers/legacy_name_tree_parser.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
@@ -61,8 +61,8 @@ const std::string empty_type("Attribute type is empty: ");
 
 namespace dogen::logical::transforms {
 
-void parsing_transform::parse_attributes(const meta_model::technical_space ts,
-    std::list<meta_model::attribute>& attrs) {
+void parsing_transform::parse_attributes(const entities::technical_space ts,
+    std::list<entities::attribute>& attrs) {
     const helpers::legacy_name_tree_parser ntp(ts);
     for (auto& attr : attrs) {
         const auto ut(boost::algorithm::trim_copy(attr.unparsed_type()));
@@ -82,14 +82,14 @@ void parsing_transform::parse_attributes(const meta_model::technical_space ts,
 }
 
 void parsing_transform::
-parse_underlying_element(const meta_model::technical_space ts,
-    meta_model::structural::primitive& p) {
+parse_underlying_element(const entities::technical_space ts,
+    entities::structural::primitive& p) {
     const helpers::legacy_name_tree_parser ntp(ts);
     const auto nt(ntp.parse(p.value_attribute().unparsed_type()));
     p.value_attribute().parsed_type(nt);
 }
 
-void parsing_transform::apply(const context& ctx, meta_model::model& m) {
+void parsing_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "parsing transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 

@@ -22,11 +22,11 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.logical/types/meta_model/decoration/licence.hpp"
-#include "dogen.logical/types/meta_model/decoration/generation_marker.hpp"
-#include "dogen.logical/types/meta_model/decoration/modeline.hpp"
-#include "dogen.logical/types/meta_model/decoration/modeline_group.hpp"
-#include "dogen.logical/io/meta_model/technical_space_io.hpp"
+#include "dogen.logical/types/entities/decoration/licence.hpp"
+#include "dogen.logical/types/entities/decoration/generation_marker.hpp"
+#include "dogen.logical/types/entities/decoration/modeline.hpp"
+#include "dogen.logical/types/entities/decoration/modeline_group.hpp"
+#include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation/types/helpers/building_exception.hpp"
 #include "dogen.generation/types/helpers/decoration_repository_factory.hpp"
@@ -52,20 +52,20 @@ const std::string inconsistent_meta_name(
 namespace dogen::generation::helpers {
 
 bool decoration_repository_factory::
-is_meta_element(const logical::meta_model::name& me,
-    const logical::meta_model::element& e) const {
+is_meta_element(const logical::entities::name& me,
+    const logical::entities::element& e) const {
     const auto mid(me.qualified().dot());
     const auto eid(e.meta_name().qualified().dot());
     return mid == eid;
 }
 
 void decoration_repository_factory::handle_licence(
-    const boost::shared_ptr<logical::meta_model::element> e,
+    const boost::shared_ptr<logical::entities::element> e,
     decoration_repository& drp) const {
 
     BOOST_LOG_SEV(lg, trace) << "Processing licence.";
     const auto id(e->name().qualified().dot());
-    using logical::meta_model::decoration::licence;
+    using logical::entities::decoration::licence;
     const auto l(boost::dynamic_pointer_cast<licence>(e));
     if (!l) {
         BOOST_LOG_SEV(lg, error) << inconsistent_meta_name << id;
@@ -84,12 +84,12 @@ void decoration_repository_factory::handle_licence(
 }
 
 void decoration_repository_factory::handle_generation_marker(
-    const boost::shared_ptr<logical::meta_model::element> e,
+    const boost::shared_ptr<logical::entities::element> e,
     decoration_repository& drp) const {
     BOOST_LOG_SEV(lg, trace) << "Processing generation marker.";
 
     const auto id(e->name().qualified().dot());
-    using logical::meta_model::decoration::generation_marker;
+    using logical::entities::decoration::generation_marker;
     const auto gm(boost::dynamic_pointer_cast<generation_marker>(e));
     if (!gm) {
         BOOST_LOG_SEV(lg, error) << inconsistent_meta_name << id;
@@ -108,21 +108,21 @@ void decoration_repository_factory::handle_generation_marker(
 }
 
 void decoration_repository_factory::handle_modeline_group(
-    const boost::shared_ptr<logical::meta_model::element> e,
+    const boost::shared_ptr<logical::entities::element> e,
     decoration_repository& drp) const {
 
     BOOST_LOG_SEV(lg, trace) << "Processing modeline group.";
 
     const auto id(e->name().qualified().dot());
-    using logical::meta_model::decoration::modeline_group;
+    using logical::entities::decoration::modeline_group;
     const auto mg(boost::dynamic_pointer_cast<modeline_group>(e));
     if (!mg) {
         BOOST_LOG_SEV(lg, error) << inconsistent_meta_name << id;
         BOOST_THROW_EXCEPTION(building_exception(inconsistent_meta_name + id));
     }
 
-    using logical::meta_model::decoration::modeline;
-    std::unordered_map<logical::meta_model::technical_space,
+    using logical::entities::decoration::modeline;
+    std::unordered_map<logical::entities::technical_space,
                        boost::shared_ptr<modeline>> map;
 
     for (const auto& ml : mg->modelines()) {
@@ -156,7 +156,7 @@ void decoration_repository_factory::handle_modeline_group(
 }
 
 decoration_repository
-decoration_repository_factory::make(const meta_model::model& m) const {
+decoration_repository_factory::make(const entities::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Creating decoration repository for model: "
                              << m.name().qualified().dot();
 

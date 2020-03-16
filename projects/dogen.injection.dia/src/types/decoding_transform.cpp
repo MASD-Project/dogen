@@ -29,7 +29,7 @@
 #include "dogen.dia/types/diagram.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
-#include "dogen.injection/io/meta_model/model_io.hpp"
+#include "dogen.injection/io/entities/model_io.hpp"
 #include "dogen.injection/types/transforms/transformation_error.hpp"
 #include "dogen.injection.dia/types/builder.hpp"
 #include "dogen.injection.dia/types/visitor.hpp"
@@ -91,7 +91,7 @@ obtain_processed_objects(const dogen::dia::diagram& d) const {
     return r;
 }
 
-injection::meta_model::model
+injection::entities::model
 decoding_transform::obtain_model(const std::string& name,
     const std::list<processed_object>& pos) const {
     BOOST_LOG_SEV(lg, debug) << "Generating injection model.";
@@ -129,7 +129,7 @@ std::string decoding_transform::extension() const {
     return ::extension;
 }
 
-injection::meta_model::model
+injection::entities::model
 decoding_transform::apply(const injection::transforms::context& ctx,
     const boost::filesystem::path& p) {
 

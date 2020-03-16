@@ -20,7 +20,7 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/merge_transform.hpp"
 #include "dogen.logical/types/transforms/extensible_mapping_transform.hpp"
@@ -37,8 +37,8 @@ static logger lg(logger_factory(transform_id));
 
 namespace dogen::logical::transforms {
 
-meta_model::model assembly_chain::apply(const context& ctx,
-    const meta_model::technical_space ts, logical::meta_model::model_set ms) {
+entities::model assembly_chain::apply(const context& ctx,
+    const entities::technical_space ts, logical::entities::model_set ms) {
     const auto ms_id(ms.target().name().qualified().dot());
     tracing::scoped_chain_tracer stp(lg, "model assembly chain", transform_id,
         ms_id, *ctx.tracer());

@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen.logical/types/meta_model/name.hpp"
-#include "dogen.logical/types/meta_model/model.hpp"
+#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
@@ -40,10 +40,10 @@ private:
      * @brief Computes the Visual Studio project name for a given
      * model name.
      */
-    static std::string project_name(const meta_model::name& n);
+    static std::string project_name(const entities::name& n);
 
 public:
-    static void apply(const context& ctx, const logical::meta_model::model& m);
+    static void apply(const context& ctx, const logical::entities::model& m);
 };
 
 }

@@ -30,8 +30,8 @@
 #include <unordered_set>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.generation/types/meta_model/element_archetype.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.generation/types/entities/element_archetype.hpp"
 #include "dogen.generation.cpp/types/formattables/directive_group.hpp"
 #include "dogen.generation.cpp/types/formattables/directive_group_repository.hpp"
 
@@ -45,7 +45,7 @@ class dependencies_builder {
 public:
     dependencies_builder(
         const directive_group_repository& dgrp,
-        const std::unordered_set<generation::meta_model::element_archetype>&
+        const std::unordered_set<generation::entities::element_archetype>&
         enabled_archetype_for_element);
 
 private:
@@ -56,14 +56,14 @@ private:
      * @pre name must exist in path derivatives collection.
      */
     boost::optional<directive_group>
-    get_directive_group(const logical::meta_model::name& n,
+    get_directive_group(const logical::entities::name& n,
         const std::string& archetype) const;
 
 public:
     /**
      * @brief Returns true if the formatter is enabled.
      */
-    bool is_enabled(const logical::meta_model::name& n,
+    bool is_enabled(const logical::entities::name& n,
         const std::string& archetype) const;
 
 public:
@@ -81,8 +81,8 @@ public:
      * and name.
      */
     /**@{*/
-    void add(const logical::meta_model::name& n, const std::string& archetype);
-    void add(const boost::optional<logical::meta_model::name>& n,
+    void add(const logical::entities::name& n, const std::string& archetype);
+    void add(const boost::optional<logical::entities::name>& n,
         const std::string& archetype);
     /**@}*/
 
@@ -90,7 +90,7 @@ public:
      * @brief Adds the inclusion directives for the supplied
      * archetype, for each of the supplied names.
      */
-    void add(const std::list<logical::meta_model::name>& names,
+    void add(const std::list<logical::entities::name>& names,
         const std::string& archetype);
 
 public:
@@ -103,7 +103,7 @@ public:
 private:
     const directive_group_repository& repository_;
     std::list<std::string> dependencies_;
-    const std::unordered_set<generation::meta_model::element_archetype>&
+    const std::unordered_set<generation::entities::element_archetype>&
     enabled_archetype_for_element_;
 };
 

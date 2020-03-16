@@ -29,7 +29,7 @@
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.utility/types/test_data/dogen_generation.hpp"
 #include "dogen.utility/types/test_data/cpp_ref_impl_generation.hpp"
-#include "dogen.extraction/io/meta_model/operation_io.hpp"
+#include "dogen.extraction/io/entities/operation_io.hpp"
 #include "dogen.engine/types/transforms/scoped_context_manager.hpp"
 #include "dogen.engine/types/transforms/code_generation_chain.hpp"
 

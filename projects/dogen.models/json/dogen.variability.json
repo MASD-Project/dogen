@@ -17,7 +17,7 @@
   },
   "elements": [
     {
-      "name": "meta_model",
+      "name": "entities",
       "documentation": "Contains all of the types describing variability\nwith Masd.\n",
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -25,7 +25,7 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "meta_model::element",
+      "name": "entities::element",
       "documentation": "Represents an element modeling some aspect of variability.\n",
       "stereotypes": [
         "Element"
@@ -33,9 +33,9 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::feature",
+      "name": "entities::feature",
       "parents": [
-        "meta_model::element"
+        "entities::element"
       ],
       "documentation": "Unit of configuration within Dogen. Defines the domain of values.\n",
       "stereotypes": [
@@ -51,7 +51,7 @@
       ]
     },
     {
-      "name": "meta_model::name",
+      "name": "entities::name",
       "documentation": "Name of the element in the variability metamodel.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -68,7 +68,7 @@
       ]
     },
     {
-      "name": "meta_model::binding_point",
+      "name": "entities::binding_point",
       "documentation": "Determines how a feature can be bound to a modeling element.\n",
       "stereotypes": [
         "masd::enumeration",
@@ -104,7 +104,7 @@
       ]
     },
     {
-      "name": "meta_model::feature_model",
+      "name": "entities::feature_model",
       "documentation": "Container of all available features, organised for querying.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -125,9 +125,9 @@
       ]
     },
     {
-      "name": "meta_model::feature_template",
+      "name": "entities::feature_template",
       "parents": [
-        "meta_model::element"
+        "entities::element"
       ],
       "documentation": "Defines a template that can be used to instantiate features.\n",
       "stereotypes": [
@@ -144,7 +144,7 @@
       ]
     },
     {
-      "name": "meta_model::value_type",
+      "name": "entities::value_type",
       "documentation": "What values can a feature have.\n",
       "stereotypes": [
         "masd::enumeration",
@@ -175,9 +175,9 @@
       ]
     },
     {
-      "name": "meta_model::profile_template",
+      "name": "entities::profile_template",
       "parents": [
-        "meta_model::element"
+        "entities::element"
       ],
       "documentation": "Holds a set of templates for configuration points.\n",
       "stereotypes": [
@@ -193,9 +193,9 @@
       ]
     },
     {
-      "name": "meta_model::configuration_point_template",
+      "name": "entities::configuration_point_template",
       "parents": [
-        "meta_model::element"
+        "entities::element"
       ],
       "stereotypes": [
         "Templateable"
@@ -209,7 +209,7 @@
       ]
     },
     {
-      "name": "meta_model::value",
+      "name": "entities::value",
       "documentation": "Base class of all value types.\n\nRepresents a value for a configuration point, a default value for a feature, etc.\n",
       "stereotypes": [
         "masd::visitable"
@@ -217,9 +217,9 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::number",
+      "name": "entities::number",
       "parents": [
-        "meta_model::value"
+        "entities::value"
       ],
       "documentation": "Represents a numeric integral value.\n",
       "fallback_element_type": "masd::object",
@@ -231,9 +231,9 @@
       ]
     },
     {
-      "name": "meta_model::text",
+      "name": "entities::text",
       "parents": [
-        "meta_model::value"
+        "entities::value"
       ],
       "documentation": "Represents a text value.\n",
       "fallback_element_type": "masd::object",
@@ -245,9 +245,9 @@
       ]
     },
     {
-      "name": "meta_model::text_collection",
+      "name": "entities::text_collection",
       "parents": [
-        "meta_model::value"
+        "entities::value"
       ],
       "documentation": "Represents a collection of text values.\n",
       "fallback_element_type": "masd::object",
@@ -259,9 +259,9 @@
       ]
     },
     {
-      "name": "meta_model::boolean",
+      "name": "entities::boolean",
       "parents": [
-        "meta_model::value"
+        "entities::value"
       ],
       "documentation": "Represents a boolean value.\n",
       "fallback_element_type": "masd::object",
@@ -273,9 +273,9 @@
       ]
     },
     {
-      "name": "meta_model::key_value_pair",
+      "name": "entities::key_value_pair",
       "parents": [
-        "meta_model::value"
+        "entities::value"
       ],
       "documentation": "Represents a pair of key and value.\n",
       "fallback_element_type": "masd::object",
@@ -288,9 +288,9 @@
       ]
     },
     {
-      "name": "meta_model::configuration",
+      "name": "entities::configuration",
       "parents": [
-        "meta_model::element"
+        "entities::element"
       ],
       "stereotypes": [
         "ConfigurationStore"
@@ -320,9 +320,9 @@
       ]
     },
     {
-      "name": "meta_model::configuration_point",
+      "name": "entities::configuration_point",
       "parents": [
-        "meta_model::element"
+        "entities::element"
       ],
       "documentation": "Maps a feature name to an instance value\n",
       "stereotypes": [
@@ -331,7 +331,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::Nameable",
+      "name": "entities::Nameable",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -344,7 +344,7 @@
       ]
     },
     {
-      "name": "meta_model::Describable",
+      "name": "entities::Describable",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -358,10 +358,10 @@
       ]
     },
     {
-      "name": "meta_model::Element",
+      "name": "entities::Element",
       "parents": [
-        "meta_model::Nameable",
-        "meta_model::Describable"
+        "entities::Nameable",
+        "entities::Describable"
       ],
       "stereotypes": [
         "masd::object_template"
@@ -369,7 +369,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::Defaultable",
+      "name": "entities::Defaultable",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -383,7 +383,7 @@
       ]
     },
     {
-      "name": "meta_model::Typeable",
+      "name": "entities::Typeable",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -397,7 +397,7 @@
       ]
     },
     {
-      "name": "meta_model::Bindeable",
+      "name": "entities::Bindeable",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -419,12 +419,12 @@
       ]
     },
     {
-      "name": "meta_model::FeatureElement",
+      "name": "entities::FeatureElement",
       "parents": [
-        "meta_model::Element",
-        "meta_model::Defaultable",
-        "meta_model::Typeable",
-        "meta_model::Bindeable"
+        "entities::Element",
+        "entities::Defaultable",
+        "entities::Typeable",
+        "entities::Bindeable"
       ],
       "stereotypes": [
         "masd::object_template"
@@ -585,7 +585,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::Templateable",
+      "name": "entities::Templateable",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -599,7 +599,7 @@
       ]
     },
     {
-      "name": "meta_model::Valuable",
+      "name": "entities::Valuable",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -613,7 +613,7 @@
       ]
     },
     {
-      "name": "meta_model::ConfigurationStore",
+      "name": "entities::ConfigurationStore",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -627,9 +627,9 @@
       ]
     },
     {
-      "name": "meta_model::profile",
+      "name": "entities::profile",
       "parents": [
-        "meta_model::element"
+        "entities::element"
       ],
       "stereotypes": [
         "ConfigurationStore",
@@ -651,7 +651,7 @@
       ]
     },
     {
-      "name": "meta_model::Generalizable",
+      "name": "entities::Generalizable",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -664,7 +664,7 @@
       ]
     },
     {
-      "name": "meta_model::Stereotypable",
+      "name": "entities::Stereotypable",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -677,7 +677,7 @@
       ]
     },
     {
-      "name": "meta_model::binding_action",
+      "name": "entities::binding_action",
       "documentation": "What action to take when binding.\n",
       "stereotypes": [
         "masd::enumeration"
@@ -697,7 +697,7 @@
       ]
     },
     {
-      "name": "meta_model::profile_repository",
+      "name": "entities::profile_repository",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -711,7 +711,7 @@
       ]
     },
     {
-      "name": "meta_model::configuration_model_set",
+      "name": "entities::configuration_model_set",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -721,7 +721,7 @@
       ]
     },
     {
-      "name": "meta_model::configuration_model",
+      "name": "entities::configuration_model",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -735,7 +735,7 @@
       ]
     },
     {
-      "name": "meta_model::profile_template_repository",
+      "name": "entities::profile_template_repository",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -752,7 +752,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::potential_binding",
+      "name": "entities::potential_binding",
       "documentation": "Contains information about a potential binding.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -769,7 +769,7 @@
       ]
     },
     {
-      "name": "meta_model::feature_template_repository",
+      "name": "entities::feature_template_repository",
       "documentation": "Stores a set of feature templates.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -788,11 +788,11 @@
       "attributes": [
         {
           "name": "templates_repository",
-          "type": "meta_model::feature_template_repository"
+          "type": "entities::feature_template_repository"
         },
         {
           "name": "features_repository",
-          "type": "meta_model::feature_repository"
+          "type": "entities::feature_repository"
         }
       ]
     },
@@ -884,7 +884,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::feature_repository",
+      "name": "entities::feature_repository",
       "documentation": "Stores a set of features.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -900,16 +900,16 @@
       "attributes": [
         {
           "name": "profiles",
-          "type": "std::list<meta_model::profile>"
+          "type": "std::list<entities::profile>"
         },
         {
           "name": "templates",
-          "type": "std::list<meta_model::profile_template>"
+          "type": "std::list<entities::profile_template>"
         }
       ]
     },
     {
-      "name": "meta_model::default_value_override",
+      "name": "entities::default_value_override",
       "documentation": "Stores an override for a default value.\n",
       "fallback_element_type": "masd::object",
       "attributes": [

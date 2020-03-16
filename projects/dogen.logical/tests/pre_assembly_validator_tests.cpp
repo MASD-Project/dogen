@@ -24,11 +24,11 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/test/exception_checkers.hpp"
-#include "dogen.logical/types/meta_model/name.hpp"
-#include "dogen.logical/io/meta_model/name_io.hpp"
-#include "dogen.logical/types/meta_model/model.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
+#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.logical/io/entities/name_io.hpp"
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/helpers/validation_error.hpp"
 #include "dogen.logical/test/mock_model_factory.hpp"
 #include "dogen.logical/types/helpers/pre_assembly_validator.hpp"
@@ -52,8 +52,8 @@ const std::string inconsistent_kvp("Inconsistency between key and value");
 
 using dogen::utility::test::contains_checker;
 using dogen::logical::helpers::validation_error;
-using dogen::logical::meta_model::origin_types;
-using dogen::logical::meta_model::technical_space;
+using dogen::logical::entities::origin_types;
+using dogen::logical::entities::technical_space;
 using dogen::logical::helpers::pre_assembly_validator;
 
 
@@ -80,7 +80,7 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
     const auto ot(origin_types::target);
     auto m(factory.make_multi_type_model(0, 2, ot));
 
-    using dogen::logical::meta_model::fully_qualified_representation;
+    using dogen::logical::entities::fully_qualified_representation;
     const fully_qualified_representation
         fqr(invalid_id, invalid_id, invalid_id);
     m.structural_elements().objects().begin()->second->name().qualified(fqr);

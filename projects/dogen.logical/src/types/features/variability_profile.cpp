@@ -25,7 +25,7 @@
 
 namespace dogen::logical::features {
 variability_profile::feature_group
-variability_profile::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+variability_profile::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
@@ -37,7 +37,7 @@ variability_profile::make_feature_group(const dogen::variability::meta_model::fe
 
 variability_profile::static_configuration variability_profile::make_static_configuration(
     const feature_group& fg,
-    const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::entities::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);

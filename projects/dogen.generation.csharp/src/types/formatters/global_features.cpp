@@ -25,9 +25,9 @@ namespace dogen::generation::csharp::formatters {
 
 namespace {
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_csharp_directory() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("directory");
     r.name().qualified("masd.generation.csharp.directory");
@@ -41,9 +41,9 @@ make_masd_generation_csharp_directory() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_csharp_aspect_requires_static_reference_equals() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("requires_static_reference_equals");
     r.name().qualified("masd.generation.csharp.aspect.requires_static_reference_equals");
@@ -57,9 +57,9 @@ make_masd_generation_csharp_aspect_requires_static_reference_equals() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_csharp_helper_family() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("family");
     r.name().qualified("masd.generation.csharp.helper.family");
@@ -73,9 +73,9 @@ make_masd_generation_csharp_helper_family() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_csharp_assistant_requires_assistance() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("requires_assistance");
     r.name().qualified("masd.generation.csharp.assistant.requires_assistance");
@@ -89,9 +89,9 @@ make_masd_generation_csharp_assistant_requires_assistance() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_csharp_assistant_method_postfix() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("method_postfix");
     r.name().qualified("masd.generation.csharp.assistant.method_postfix");
@@ -106,10 +106,10 @@ make_masd_generation_csharp_assistant_method_postfix() {
 }
 
 
-std::list<dogen::variability::meta_model::feature>
+std::list<dogen::variability::entities::feature>
 global_features::make_features() {
-    using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature> r;
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature> r;
     r.push_back(make_masd_generation_csharp_directory());
     r.push_back(make_masd_generation_csharp_aspect_requires_static_reference_equals());
     r.push_back(make_masd_generation_csharp_helper_family());

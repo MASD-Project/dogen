@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include "dogen.logical/io/helpers/node_io.hpp"
-#include "dogen.logical/io/meta_model/name_io.hpp"
+#include "dogen.logical/io/entities/name_io.hpp"
 
 namespace boost {
 

@@ -23,18 +23,18 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
-#include "dogen.logical/types/meta_model/structural/module.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/structural/visitor.hpp"
-#include "dogen.logical/types/meta_model/structural/builtin.hpp"
-#include "dogen.logical/types/meta_model/structural/primitive.hpp"
-#include "dogen.logical/types/meta_model/structural/exception.hpp"
-#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
-#include "dogen.logical/types/meta_model/structural/object_template.hpp"
-#include "dogen.logical/types/meta_model/decoration/modeline.hpp"
-#include "dogen.logical/types/meta_model/decoration/modeline_group.hpp"
-#include "dogen.logical/types/meta_model/elements_traversal.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/types/entities/structural/module.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/visitor.hpp"
+#include "dogen.logical/types/entities/structural/builtin.hpp"
+#include "dogen.logical/types/entities/structural/primitive.hpp"
+#include "dogen.logical/types/entities/structural/exception.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
+#include "dogen.logical/types/entities/structural/object_template.hpp"
+#include "dogen.logical/types/entities/decoration/modeline.hpp"
+#include "dogen.logical/types/entities/decoration/modeline_group.hpp"
+#include "dogen.logical/types/entities/elements_traversal.hpp"
 #include "dogen.logical/types/helpers/name_factory.hpp"
 #include "dogen.logical/types/helpers/name_builder.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
@@ -64,7 +64,7 @@ namespace {
  */
 class updater {
 public:
-    updater(meta_model::model& m) : model_(m) { }
+    updater(entities::model& m) : model_(m) { }
 
 private:
     /**
@@ -98,36 +98,36 @@ private:
      * @brief Creates the name of the containing element, derived from
      * the element's name.
      */
-    boost::optional<meta_model::name>
-    create_containing_element_name(const meta_model::name& n) const;
+    boost::optional<entities::name>
+    create_containing_element_name(const entities::name& n) const;
 
     /**
      * @brief Update the containing element with information about the
      * relationship.
      */
-    void update_containing_element(const meta_model::name& container,
-        const meta_model::name& containee);
+    void update_containing_element(const entities::name& container,
+        const entities::name& containee);
 
-    void update(meta_model::element& e);
-
-public:
-    void operator()(meta_model::element&) { }
-    void operator()(meta_model::structural::module& m) { update(m); }
-    void operator()(meta_model::structural::object_template& ot) { update(ot); }
-    void operator()(meta_model::structural::builtin& b) { update(b); }
-    void operator()(meta_model::structural::enumeration& e) { update(e); }
-    void operator()(meta_model::structural::primitive& p) { update(p); }
-    void operator()(meta_model::structural::object& o) { update(o); }
-    void operator()(meta_model::structural::exception& e) { update(e); }
-    void operator()(meta_model::structural::visitor& v) { update(v); }
-    void operator()(meta_model::decoration::modeline& ml) { update(ml); }
+    void update(entities::element& e);
 
 public:
-    meta_model::model& model_;
+    void operator()(entities::element&) { }
+    void operator()(entities::structural::module& m) { update(m); }
+    void operator()(entities::structural::object_template& ot) { update(ot); }
+    void operator()(entities::structural::builtin& b) { update(b); }
+    void operator()(entities::structural::enumeration& e) { update(e); }
+    void operator()(entities::structural::primitive& p) { update(p); }
+    void operator()(entities::structural::object& o) { update(o); }
+    void operator()(entities::structural::exception& e) { update(e); }
+    void operator()(entities::structural::visitor& v) { update(v); }
+    void operator()(entities::decoration::modeline& ml) { update(ml); }
+
+public:
+    entities::model& model_;
 };
 
-boost::optional<meta_model::name>
-updater::create_containing_element_name(const meta_model::name& n) const {
+boost::optional<entities::name>
+updater::create_containing_element_name(const entities::name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Creating containing element name for: "
                              << n.qualified().dot();
 
@@ -141,7 +141,7 @@ updater::create_containing_element_name(const meta_model::name& n) const {
         BOOST_LOG_SEV(lg, debug) << "Element is in global module so, it has"
                                  << " no containing module yet. Type: "
                                  << n.qualified().dot();
-        return boost::optional<meta_model::name>();
+        return boost::optional<entities::name>();
     }
 
     /*
@@ -158,7 +158,7 @@ updater::create_containing_element_name(const meta_model::name& n) const {
         BOOST_LOG_SEV(lg, debug) << "Type is a model module, so containing "
                                  << "module will be handled later. Type: "
                                  << n.qualified().dot();
-        return boost::optional<meta_model::name>();
+        return boost::optional<entities::name>();
     }
 
     /*
@@ -214,8 +214,8 @@ updater::create_containing_element_name(const meta_model::name& n) const {
     return b.build();
 }
 
-void updater::update_containing_element(const meta_model::name& container,
-    const meta_model::name& containee) {
+void updater::update_containing_element(const entities::name& container,
+    const entities::name& containee) {
 
     const auto container_id(container.qualified().dot());
     const auto containee_id(containee.qualified().dot());
@@ -247,7 +247,7 @@ void updater::update_containing_element(const meta_model::name& container,
         transformation_error(missing_container + container_id));
 }
 
-void updater::update(meta_model::element& e) {
+void updater::update(entities::element& e) {
     BOOST_LOG_SEV(lg, trace) << "Processing element: "
                              << e.name().qualified().dot();
 
@@ -275,12 +275,12 @@ void updater::update(meta_model::element& e) {
 
 }
 
-void containment_transform::apply(const context& ctx, meta_model::model& m) {
+void containment_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "containment transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     updater u(m);
-    meta_model::elements_traversal(m, u);
+    entities::elements_traversal(m, u);
 
     stp.end_transform(m);
 }

@@ -56,11 +56,11 @@ std::string adapter::qualified_name(const std::string& contained_by,
     return contained_by + name_delimiter + simple_name;
 }
 
-injection::meta_model::attribute
+injection::entities::attribute
 adapter::adapt(const processed_attribute& a) {
     validate_dia_name(a.name());
 
-    injection::meta_model::attribute r;
+    injection::entities::attribute r;
     r.name(a.name());
     r.type(a.type());
     r.value(a.value());
@@ -70,7 +70,7 @@ adapter::adapt(const processed_attribute& a) {
 }
 
 void adapter::process_stereotypes(const processed_object& po,
-    injection::meta_model::element& e) {
+    injection::entities::element& e) {
     BOOST_LOG_SEV(lg, debug) << "Original stereotypes string: '"
                              << po.stereotypes() << "'";
 
@@ -91,12 +91,12 @@ void adapter::process_stereotypes(const processed_object& po,
     BOOST_LOG_SEV(lg, debug) << "Split stereotypes: " << e.stereotypes();
 }
 
-injection::meta_model::element adapter::
+injection::entities::element adapter::
 adapt(const processed_object& po, const std::string& contained_by,
     const std::list<std::string>& parents) {
     validate_dia_name(po.name());
 
-    injection::meta_model::element r;
+    injection::entities::element r;
     r.name(qualified_name(contained_by, po.name()));
     r.parents(parents);
     r.documentation(po.comment().documentation());

@@ -28,9 +28,9 @@
 #include <list>
 #include <string>
 #include <utility>
-#include "dogen.variability/types/meta_model/value.hpp"
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
+#include "dogen.variability/types/entities/value.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
 
 
 namespace dogen::variability::helpers {
@@ -41,13 +41,13 @@ namespace dogen::variability::helpers {
  */
 class configuration_selector final {
 public:
-    explicit configuration_selector(const meta_model::configuration& c);
+    explicit configuration_selector(const entities::configuration& c);
 
 private:
     /**
      * @brief Throws if the feature has no default value.
      */
-    void ensure_default_value(const meta_model::feature& f) const;
+    void ensure_default_value(const entities::feature& f) const;
 
 public:
     /**
@@ -56,7 +56,7 @@ public:
      */
     /**@{*/
     bool has_configuration_point(const std::string& qn) const;
-    bool has_configuration_point(const meta_model::feature& f) const;
+    bool has_configuration_point(const entities::feature& f) const;
     /**@}*/
 
     /**
@@ -73,10 +73,10 @@ private:
      * @pre @e has_configuration_point must be true.
      */
     /**@{*/
-    const meta_model::value&
+    const entities::value&
     get_configuration_point_value(const std::string& qn) const;
-    const meta_model::value&
-    get_configuration_point_value(const meta_model::feature& f) const;
+    const entities::value&
+    get_configuration_point_value(const entities::feature& f) const;
     /**@}*/
 
 public:
@@ -85,7 +85,7 @@ public:
      *
      * @pre @v must be of text type.
      */
-    static std::string get_text_content(const meta_model::value& v);
+    static std::string get_text_content(const entities::value& v);
 
     /**
      * @brief Retrieves the configuration point associated with the
@@ -99,7 +99,7 @@ public:
      */
     /**@{*/
     std::string get_text_content(const std::string& qn) const;
-    std::string get_text_content(const meta_model::feature& f) const;
+    std::string get_text_content(const entities::feature& f) const;
     /**@}*/
 
     /**
@@ -111,7 +111,7 @@ public:
      * @pre feature must have a default value.
      * @pre default value must be of type text.
      */
-    std::string get_text_content_or_default(const meta_model::feature& f) const;
+    std::string get_text_content_or_default(const entities::feature& f) const;
 
 public:
     /**
@@ -121,7 +121,7 @@ public:
      * @pre @v must be of text collection type.
      */
     static std::list<std::string>
-    get_text_collection_content(const meta_model::value& v);
+    get_text_collection_content(const entities::value& v);
 
     /**
      * @brief Retrieves the configuration point associated with the
@@ -137,7 +137,7 @@ public:
     std::list<std::string>
     get_text_collection_content(const std::string& qn) const;
     std::list<std::string>
-    get_text_collection_content(const meta_model::feature& f) const;
+    get_text_collection_content(const entities::feature& f) const;
     /**@}*/
 
     /**
@@ -150,7 +150,7 @@ public:
      * @pre default value must be of type text collection.
      */
     std::list<std::string>
-    get_text_collection_content_or_default(const meta_model::feature& f) const;
+    get_text_collection_content_or_default(const entities::feature& f) const;
 
 public:
     /**
@@ -158,7 +158,7 @@ public:
      *
      * @pre @v must be of boolean type.
      */
-    static bool get_boolean_content(const meta_model::value& v);
+    static bool get_boolean_content(const entities::value& v);
 
     /**
      * @brief Retrieves the configuration point associated with the
@@ -172,7 +172,7 @@ public:
      */
     /**@{*/
     bool get_boolean_content(const std::string& qn) const;
-    bool get_boolean_content(const meta_model::feature& f) const;
+    bool get_boolean_content(const entities::feature& f) const;
     /**@}*/
 
     /**
@@ -184,7 +184,7 @@ public:
      * @pre feature must have a default value.
      * @pre default value must be of type boolean.
      */
-    bool get_boolean_content_or_default(const meta_model::feature& f) const;
+    bool get_boolean_content_or_default(const entities::feature& f) const;
 
 public:
     /**
@@ -192,7 +192,7 @@ public:
      *
      * @pre @v must have a type of number.
      */
-    static int get_number_content(const meta_model::value& v);
+    static int get_number_content(const entities::value& v);
 
     /**
      * @brief Retrieves the configuration point associated with the
@@ -206,7 +206,7 @@ public:
      */
     /**@{*/
     int get_number_content(const std::string& qn) const;
-    int get_number_content(const meta_model::feature& f) const;
+    int get_number_content(const entities::feature& f) const;
     /**@}*/
 
     /**
@@ -218,7 +218,7 @@ public:
      * @pre feature must have a default value.
      * @pre default value must be of type number.
      */
-    int get_number_content_or_default(const meta_model::feature& f) const;
+    int get_number_content_or_default(const entities::feature& f) const;
 
 public:
     /**
@@ -228,7 +228,7 @@ public:
      * @pre @v must have a type of key/value pair.
      */
     static const std::list<std::pair<std::string, std::string>>&
-    get_key_value_pair_content(const meta_model::value& v);
+    get_key_value_pair_content(const entities::value& v);
 
     /**
      * @brief Retrieves the configuration point associated with the
@@ -244,11 +244,11 @@ public:
     const std::list<std::pair<std::string, std::string>>&
     get_key_value_pair_content(const std::string& qn) const;
     const std::list<std::pair<std::string, std::string>>&
-    get_key_value_pair_content(const meta_model::feature& f) const;
+    get_key_value_pair_content(const entities::feature& f) const;
     /**@}*/
 
 private:
-    const meta_model::configuration& configuration_;
+    const entities::configuration& configuration_;
 };
 
 }

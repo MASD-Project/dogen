@@ -20,7 +20,7 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.extraction/io/meta_model/model_io.hpp"
+#include "dogen.extraction/io/entities/model_io.hpp"
 #include "dogen.extraction/types/transforms/code_generation_chain.hpp"
 #include "dogen.engine/types/transforms/context.hpp"
 #include "dogen.engine/types/transforms/extraction_model_production_chain.hpp"

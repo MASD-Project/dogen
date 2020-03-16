@@ -26,8 +26,8 @@
 #endif
 
 #include <list>
-#include "dogen.logical/types/meta_model/model.hpp"
-#include "dogen.logical/types/meta_model/model_set.hpp"
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/entities/model_set.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
@@ -39,8 +39,8 @@ namespace dogen::logical::transforms {
  */
 class model_production_chain final {
 public:
-    static std::list<meta_model::model>
-    apply(const context& ctx, logical::meta_model::model_set ms);
+    static std::list<entities::model>
+    apply(const context& ctx, logical::entities::model_set ms);
 };
 
 }

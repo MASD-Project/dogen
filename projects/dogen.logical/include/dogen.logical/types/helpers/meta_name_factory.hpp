@@ -26,44 +26,44 @@
 #endif
 
 #include <string>
-#include "dogen.logical/types/meta_model/name.hpp"
+#include "dogen.logical/types/entities/name.hpp"
 
 namespace dogen::logical::helpers {
 
 class meta_name_factory final {
 private:
-    static meta_model::location make_location();
-    static meta_model::name make_name(const std::string& sn);
+    static entities::location make_location();
+    static entities::name make_name(const std::string& sn);
 
 public:
-    static meta_model::name make_model_name();
+    static entities::name make_model_name();
 
-    static meta_model::name make_module_name();
-    static meta_model::name make_object_template_name();
-    static meta_model::name make_builtin_name();
-    static meta_model::name make_enumeration_name();
-    static meta_model::name make_primitive_name();
-    static meta_model::name make_object_name();
-    static meta_model::name make_exception_name();
-    static meta_model::name make_visitor_name();
-    static meta_model::name make_assistant_name();
-    static meta_model::name make_entry_point_name();
-    static meta_model::name make_licence_name();
-    static meta_model::name make_modeline_name();
-    static meta_model::name make_modeline_group_name();
-    static meta_model::name make_generation_marker_name();
-    static meta_model::name make_variability_profile_name();
-    static meta_model::name make_variability_profile_template_name();
-    static meta_model::name make_variability_feature_template_bundle_name();
-    static meta_model::name make_variability_feature_bundle_name();
-    static meta_model::name make_variability_initializer_name();
-    static meta_model::name make_templating_logic_less_templates_name();
-    static meta_model::name make_serialization_type_registrar_name();
-    static meta_model::name make_visual_studio_solution_name();
-    static meta_model::name make_visual_studio_project_name();
-    static meta_model::name make_visual_studio_msbuild_targets_name();
-    static meta_model::name make_orm_common_odb_options_name();
-    static meta_model::name make_build_cmakelists_name();
+    static entities::name make_module_name();
+    static entities::name make_object_template_name();
+    static entities::name make_builtin_name();
+    static entities::name make_enumeration_name();
+    static entities::name make_primitive_name();
+    static entities::name make_object_name();
+    static entities::name make_exception_name();
+    static entities::name make_visitor_name();
+    static entities::name make_assistant_name();
+    static entities::name make_entry_point_name();
+    static entities::name make_licence_name();
+    static entities::name make_modeline_name();
+    static entities::name make_modeline_group_name();
+    static entities::name make_generation_marker_name();
+    static entities::name make_variability_profile_name();
+    static entities::name make_variability_profile_template_name();
+    static entities::name make_variability_feature_template_bundle_name();
+    static entities::name make_variability_feature_bundle_name();
+    static entities::name make_variability_initializer_name();
+    static entities::name make_templating_logic_less_templates_name();
+    static entities::name make_serialization_type_registrar_name();
+    static entities::name make_visual_studio_solution_name();
+    static entities::name make_visual_studio_project_name();
+    static entities::name make_visual_studio_msbuild_targets_name();
+    static entities::name make_orm_common_odb_options_name();
+    static entities::name make_build_cmakelists_name();
 };
 
 }

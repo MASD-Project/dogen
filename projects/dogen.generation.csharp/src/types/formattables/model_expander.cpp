@@ -35,14 +35,14 @@ void model_expander::expand_file_paths(
 }
 
 void model_expander::expand_aspect_properties(
-    const variability::meta_model::feature_model& feature_model,
+    const variability::entities::feature_model& feature_model,
     model& fm) const {
     aspect_expander ex;
     ex.expand(feature_model, fm);
 }
 
 void model_expander::expand_assistant_properties(
-    const variability::meta_model::feature_model& feature_model,
+    const variability::entities::feature_model& feature_model,
     model& fm) const {
 
     assistant_expander ex;
@@ -60,14 +60,14 @@ void model_expander::expand_project_items(model& fm) const {
 }
 
 void model_expander::
-expand_helpers(const variability::meta_model::feature_model& feature_model,
+expand_helpers(const variability::entities::feature_model& feature_model,
     const formatters::repository& frp, model& fm) const {
     helper_expander he;
     he.expand(feature_model, frp, fm);
 }
 
 void model_expander::expand(
-    const variability::meta_model::feature_model& feature_model,
+    const variability::entities::feature_model& feature_model,
     const formatters::repository& frp, const locator& l, model& fm) const {
 
     /*

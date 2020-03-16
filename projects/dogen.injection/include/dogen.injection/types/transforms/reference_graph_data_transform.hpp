@@ -28,19 +28,19 @@
 #include <list>
 #include <string>
 #include <unordered_set>
-#include "dogen.injection/types/meta_model/model_set.hpp"
-#include "dogen.injection/types/meta_model/reference_graph_data.hpp"
+#include "dogen.injection/types/entities/model_set.hpp"
+#include "dogen.injection/types/entities/reference_graph_data.hpp"
 #include "dogen.injection/types/transforms/context_fwd.hpp"
 
 namespace dogen::injection::transforms {
 
 class reference_graph_data_transform final {
 private:
-    static meta_model::reference_graph_data
-    obtain_references_for_model(const meta_model::model_set& ms);
+    static entities::reference_graph_data
+    obtain_references_for_model(const entities::model_set& ms);
 
 public:
-    static void apply(const context& ctx, meta_model::model_set& ms);
+    static void apply(const context& ctx, entities::model_set& ms);
 };
 
 }

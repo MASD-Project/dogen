@@ -28,9 +28,9 @@
 #include <list>
 #include <string>
 #include <utility>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
 
 namespace dogen::logical::features {
 
@@ -40,15 +40,15 @@ namespace dogen::logical::features {
 class variability_templates final {
 public:
     struct feature_group {
-        variability::meta_model::feature binding_point;
-        variability::meta_model::feature stereotype;
-        variability::meta_model::feature value;
-        variability::meta_model::feature is_optional;
-        variability::meta_model::feature default_value_override;
+        variability::entities::feature binding_point;
+        variability::entities::feature stereotype;
+        variability::entities::feature value;
+        variability::entities::feature is_optional;
+        variability::entities::feature default_value_override;
     };
 
     static feature_group
-    make_feature_group(const variability::meta_model::feature_model& fm);
+    make_feature_group(const variability::entities::feature_model& fm);
 
 public:
     struct static_configuration {
@@ -64,7 +64,7 @@ public:
 
     static static_configuration make_static_configuration(
         const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
+        const variability::entities::configuration& cfg);
 
     template<typename Configurable>
     static static_configuration make_static_configuration(
@@ -73,7 +73,7 @@ public:
     }
 
 public:
-    static std::list<dogen::variability::meta_model::feature>
+    static std::list<dogen::variability::entities::feature>
     make_features();
 };
 

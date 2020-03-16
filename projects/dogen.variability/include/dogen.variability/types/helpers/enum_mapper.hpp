@@ -26,8 +26,8 @@
 #endif
 
 #include <string>
-#include "dogen.variability/types/meta_model/value_type.hpp"
-#include "dogen.variability/types/meta_model/binding_point.hpp"
+#include "dogen.variability/types/entities/value_type.hpp"
+#include "dogen.variability/types/entities/binding_point.hpp"
 
 namespace dogen::variability::helpers {
 
@@ -36,24 +36,24 @@ public:
     /**
      * @brief Converts a string to a value type.
      */
-    static meta_model::value_type to_value_type(const std::string& s);
+    static entities::value_type to_value_type(const std::string& s);
 
     /**
      * @brief Converts a string to a binding point.
      */
-    static meta_model::binding_point to_binding_point(const std::string& s);
+    static entities::binding_point to_binding_point(const std::string& s);
 
 public:
     /**
      * @brief Converts a value type to a string.
      */
-    static std::string from_value_type(const meta_model::value_type v,
+    static std::string from_value_type(const entities::value_type v,
         const bool qualified = true);
 
     /**
      * @brief Converts a binding point to a string.
      */
-    static std::string from_binding_point(const meta_model::binding_point s);
+    static std::string from_binding_point(const entities::binding_point s);
 };
 
 }

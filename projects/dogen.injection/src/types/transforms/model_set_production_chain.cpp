@@ -21,7 +21,7 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.injection/io/meta_model/model_set_io.hpp"
+#include "dogen.injection/io/entities/model_set_io.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
 #include "dogen.injection/types/transforms/model_production_chain.hpp"
 #include "dogen.injection/types/helpers/references_validator.hpp"
@@ -57,7 +57,7 @@ model_set_production_chain::obtain_directory_list(const context& ctx,
     return r;
 }
 
-std::list<meta_model::model>
+std::list<entities::model>
 model_set_production_chain::transform(const context& ctx,
     const helpers::references_resolver& res,
     const boost::filesystem::path& p,
@@ -65,7 +65,7 @@ model_set_production_chain::transform(const context& ctx,
 
     BOOST_LOG_SEV(lg, trace) << "Processing: " << p.generic();
 
-    std::list<meta_model::model> r;
+    std::list<entities::model> r;
     r.push_back(model_production_chain::apply(ctx, p));
     BOOST_LOG_SEV(lg, trace) << "References: " << r.front().references();
     for (const auto& ref : r.front().references()) {
@@ -85,7 +85,7 @@ model_set_production_chain::transform(const context& ctx,
     return r;
 }
 
-meta_model::model_set
+entities::model_set
 model_set_production_chain::apply(const context& ctx,
     const boost::filesystem::path& p) {
     const auto mn(p.filename().string());
@@ -104,7 +104,7 @@ model_set_production_chain::apply(const context& ctx,
      * Obtain the injection models.
      */
     std::unordered_set<std::string> processed_models;
-    meta_model::model_set r;
+    entities::model_set r;
     auto models(transform(ctx, res, p, processed_models));
     BOOST_LOG_SEV(lg, debug) << "Read injection model graph. Total: "
                              << models.size();

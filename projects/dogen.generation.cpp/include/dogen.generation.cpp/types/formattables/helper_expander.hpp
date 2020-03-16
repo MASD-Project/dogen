@@ -27,9 +27,9 @@
 
 #include <unordered_map>
 #include <unordered_set>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.generation.cpp/types/formatters/repository.hpp"
 #include "dogen.generation.cpp/types/formattables/helper_configuration.hpp"
 #include "dogen.generation.cpp/types/formattables/formattable.hpp"
@@ -40,11 +40,11 @@ namespace dogen::generation::cpp::formattables {
 class helper_expander {
 private:
     struct feature_group {
-        variability::meta_model::feature family;
+        variability::entities::feature family;
     };
 
     feature_group make_feature_group(
-        const variability::meta_model::feature_model& fm) const;
+        const variability::entities::feature_model& fm) const;
 
     helper_configuration
     make_configuration(const feature_group& fg, const model& fm) const;
@@ -62,7 +62,7 @@ private:
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
-    void expand(const variability::meta_model::feature_model& feature_model,
+    void expand(const variability::entities::feature_model& feature_model,
         const formatters::repository& frp, model& fm) const;
 };
 

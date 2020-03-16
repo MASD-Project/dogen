@@ -28,9 +28,9 @@
 #include <list>
 #include <string>
 #include <utility>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
 
 namespace dogen::templating::stitch {
 
@@ -40,16 +40,16 @@ namespace dogen::templating::stitch {
 class features final {
 public:
     struct feature_group {
-        variability::meta_model::feature stream_variable_name;
-        variability::meta_model::feature relative_output_directory;
-        variability::meta_model::feature inclusion_dependency;
-        variability::meta_model::feature containing_namespaces;
-        variability::meta_model::feature text_template;
-        variability::meta_model::feature kvp;
+        variability::entities::feature stream_variable_name;
+        variability::entities::feature relative_output_directory;
+        variability::entities::feature inclusion_dependency;
+        variability::entities::feature containing_namespaces;
+        variability::entities::feature text_template;
+        variability::entities::feature kvp;
     };
 
     static feature_group
-    make_feature_group(const variability::meta_model::feature_model& fm);
+    make_feature_group(const variability::entities::feature_model& fm);
 
 public:
     struct static_configuration {
@@ -63,7 +63,7 @@ public:
 
     static static_configuration make_static_configuration(
         const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
+        const variability::entities::configuration& cfg);
 
     template<typename Configurable>
     static static_configuration make_static_configuration(
@@ -72,7 +72,7 @@ public:
     }
 
 public:
-    static std::list<dogen::variability::meta_model::feature>
+    static std::list<dogen::variability::entities::feature>
     make_features();
 };
 

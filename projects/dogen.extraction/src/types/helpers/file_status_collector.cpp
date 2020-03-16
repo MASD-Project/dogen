@@ -44,7 +44,7 @@ auto lg(logger_factory("extraction.helpers.file_status_collector"));
 namespace dogen::extraction::helpers {
 
 std::set<boost::filesystem::path> file_status_collector::
-obtain_expected_files(const meta_model::model& m) {
+obtain_expected_files(const entities::model& m) {
     std::set<boost::filesystem::path> r;
     for (const auto a : m.artefacts()) {
         r.insert(a.path().generic_string());
@@ -124,7 +124,7 @@ bucket_by_status(const std::vector<std::string>& patterns,
 }
 
 files_by_status
-file_status_collector::collect(const meta_model::model& m) {
+file_status_collector::collect(const entities::model& m) {
     BOOST_LOG_SEV(lg, info) << "Started collecting status for model: "
                             << m.name();
     BOOST_LOG_SEV(lg, debug) << "Initial directories: "

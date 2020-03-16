@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen.variability/types/meta_model/configuration_model_set.hpp"
-#include "dogen.logical/types/meta_model/model_set.hpp"
+#include "dogen.variability/types/entities/configuration_model_set.hpp"
+#include "dogen.logical/types/entities/model_set.hpp"
 
 namespace dogen::logical::helpers {
 
@@ -39,15 +39,15 @@ private:
     /**
      * @brief Adapts a single model.
      */
-    static variability::meta_model::configuration_model
-    adapt(const meta_model::model& m);
+    static variability::entities::configuration_model
+    adapt(const entities::model& m);
 
 public:
     /**
      * @brief Adapts all models in a model set.
      */
-    static variability::meta_model::configuration_model_set
-    adapt(const meta_model::model_set& ms);
+    static variability::entities::configuration_model_set
+    adapt(const entities::model_set& ms);
 };
 
 }

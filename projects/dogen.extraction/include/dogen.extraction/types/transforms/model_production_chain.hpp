@@ -25,14 +25,14 @@
 #pragma once
 #endif
 
-#include "dogen.extraction/types/meta_model/model.hpp"
+#include "dogen.extraction/types/entities/model.hpp"
 #include "dogen.extraction/types/transforms/context.hpp"
 
 namespace dogen::extraction::transforms {
 
 class model_production_chain final {
 public:
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

@@ -20,13 +20,13 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.logical/types/meta_model/structural/module.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/structural/builtin.hpp"
-#include "dogen.logical/types/meta_model/structural/visitor.hpp"
-#include "dogen.logical/types/meta_model/structural/exception.hpp"
-#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
-#include "dogen.logical/types/meta_model/structural/object_template.hpp"
+#include "dogen.logical/types/entities/structural/module.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/builtin.hpp"
+#include "dogen.logical/types/entities/structural/visitor.hpp"
+#include "dogen.logical/types/entities/structural/exception.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
+#include "dogen.logical/types/entities/structural/object_template.hpp"
 #include "dogen.logical/types/helpers/validation_error.hpp"
 #include "dogen.logical/types/helpers/pre_assembly_validator.hpp"
 
@@ -51,41 +51,41 @@ namespace dogen::logical::helpers {
 
 class validator {
 public:
-    validator(const meta_model::name& model_name,
+    validator(const entities::name& model_name,
         const bool is_proxy_reference);
 
 private:
     void validate_name(const std::string& id, const bool in_global_module,
-        const meta_model::name& n) const;
+        const entities::name& n) const;
 
 public:
     void validate(const std::string& id,
-        const meta_model::structural::object_template& ot) const;
+        const entities::structural::object_template& ot) const;
     void validate(const std::string& id,
-        const meta_model::structural::builtin& b) const;
+        const entities::structural::builtin& b) const;
     void validate(const std::string& id,
-        const meta_model::structural::visitor& v) const;
+        const entities::structural::visitor& v) const;
     void validate(const std::string& id,
-        const meta_model::structural::enumeration& e) const;
+        const entities::structural::enumeration& e) const;
     void validate(const std::string& id,
-        const meta_model::structural::object& o) const;
+        const entities::structural::object& o) const;
     void validate(const std::string& id,
-        const meta_model::structural::exception& e) const;
+        const entities::structural::exception& e) const;
     void validate(const std::string& id,
-        const meta_model::structural::module& m) const;
+        const entities::structural::module& m) const;
 
 private:
-    const meta_model::name model_name_;
+    const entities::name model_name_;
     const bool is_proxy_reference_;
 };
 
 validator::
-validator(const meta_model::name& model_name, const bool is_proxy_reference)
+validator(const entities::name& model_name, const bool is_proxy_reference)
     : model_name_(model_name), is_proxy_reference_(is_proxy_reference) {}
 
 void validator::
 validate_name(const std::string& id, const bool in_global_module,
-    const meta_model::name& n) const {
+    const entities::name& n) const {
     /*
      * Types in global module are known to have a mismatch between
      * their name and model name, so we need to ignore those.
@@ -119,27 +119,27 @@ validate_name(const std::string& id, const bool in_global_module,
 }
 
 void validator::validate(const std::string& id,
-    const meta_model::structural::object_template& ot) const {
+    const entities::structural::object_template& ot) const {
     validate_name(id, ot.in_global_module(), ot.name());
 }
 
 void validator::validate(const std::string& id,
-    const meta_model::structural::builtin& b) const {
+    const entities::structural::builtin& b) const {
     validate_name(id, b.in_global_module(), b.name());
 }
 
 void validator::validate(const std::string& id,
-    const meta_model::structural::visitor& v) const {
+    const entities::structural::visitor& v) const {
     validate_name(id, v.in_global_module(), v.name());
 }
 
 void validator::validate(const std::string& id,
-    const meta_model::structural::enumeration& e) const {
+    const entities::structural::enumeration& e) const {
     validate_name(id, e.in_global_module(), e.name());
 }
 
 void validator::validate(const std::string& id,
-    const meta_model::structural::object& o) const {
+    const entities::structural::object& o) const {
     validate_name(id, o.in_global_module(), o.name());
 
     /*
@@ -195,21 +195,21 @@ void validator::validate(const std::string& id,
 }
 
 void validator::validate(const std::string& id,
-    const meta_model::structural::exception& e) const {
+    const entities::structural::exception& e) const {
     validate_name(id, e.in_global_module(), e.name());
 }
 
 void validator::validate(const std::string& id,
-    const meta_model::structural::module& m) const {
+    const entities::structural::module& m) const {
     validate_name(id, m.in_global_module(), m.name());
 }
 
 void pre_assembly_validator::
-validate(const meta_model::model& m) {
+validate(const entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: "
                              << m.name().qualified().dot();
 
-    using meta_model::origin_types;
+    using entities::origin_types;
     const bool ipr(m.origin_type() == origin_types::proxy_reference);
 
     validator v(m.name(), ipr);

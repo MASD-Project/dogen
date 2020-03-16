@@ -20,7 +20,7 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.injection/io/meta_model/model_io.hpp"
+#include "dogen.injection/io/entities/model_io.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
 #include "dogen.injection/types/transforms/compute_sha1_transform.hpp"
 #include "dogen.injection/types/transforms/input_technical_space_transform.hpp"
@@ -59,7 +59,7 @@ transforms::registrar& model_production_chain::registrar() {
     return *registrar_;
 }
 
-meta_model::model model_production_chain::
+entities::model model_production_chain::
 apply(const context& ctx, const boost::filesystem::path& p) {
     const auto model_name(p.stem().generic_string());
     tracing::scoped_chain_tracer stp(lg, "injection model production chain",

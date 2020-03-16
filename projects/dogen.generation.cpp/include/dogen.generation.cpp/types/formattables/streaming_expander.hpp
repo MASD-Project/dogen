@@ -26,9 +26,9 @@
 #endif
 
 #include <boost/optional.hpp>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.generation.cpp/types/formattables/streaming_properties.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 
@@ -37,20 +37,20 @@ namespace dogen::generation::cpp::formattables {
 class streaming_expander {
 private:
     struct feature_group {
-        variability::meta_model::feature requires_quoting;
-        variability::meta_model::feature string_conversion_method;
-        variability::meta_model::feature remove_unprintable_characters;
+        variability::entities::feature requires_quoting;
+        variability::entities::feature string_conversion_method;
+        variability::entities::feature remove_unprintable_characters;
     };
 
     feature_group
-    make_feature_group(const variability::meta_model::feature_model& fm) const;
+    make_feature_group(const variability::entities::feature_model& fm) const;
 
     boost::optional<streaming_properties>
     make_streaming_properties(const feature_group& fg,
-        const variability::meta_model::configuration& cfg) const;
+        const variability::entities::configuration& cfg) const;
 
 public:
-    void expand(const variability::meta_model::feature_model& feature_model,
+    void expand(const variability::entities::feature_model& feature_model,
         model& fm) const;
 };
 

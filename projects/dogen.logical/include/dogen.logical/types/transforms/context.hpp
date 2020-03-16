@@ -32,7 +32,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen.tracing/types/tracer_fwd.hpp"
 #include "dogen.physical/types/location_repository_fwd.hpp"
-#include "dogen.variability/types/meta_model/feature_model_fwd.hpp"
+#include "dogen.variability/types/entities/feature_model_fwd.hpp"
 #include "dogen.logical/types/helpers/mapping_set_repository_fwd.hpp"
 
 namespace dogen::logical::transforms {
@@ -59,7 +59,7 @@ public:
 public:
     context(
         const bool compatibility_mode,
-        const boost::shared_ptr<dogen::variability::meta_model::feature_model>& feature_model,
+        const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
         const boost::shared_ptr<dogen::physical::location_repository>& archetype_location_repository,
         const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains,
         const boost::shared_ptr<dogen::logical::helpers::mapping_set_repository>& mapping_repository,
@@ -69,10 +69,10 @@ public:
     bool compatibility_mode() const;
     void compatibility_mode(const bool v);
 
-    const boost::shared_ptr<dogen::variability::meta_model::feature_model>& feature_model() const;
-    boost::shared_ptr<dogen::variability::meta_model::feature_model>& feature_model();
-    void feature_model(const boost::shared_ptr<dogen::variability::meta_model::feature_model>& v);
-    void feature_model(const boost::shared_ptr<dogen::variability::meta_model::feature_model>&& v);
+    const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model() const;
+    boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model();
+    void feature_model(const boost::shared_ptr<dogen::variability::entities::feature_model>& v);
+    void feature_model(const boost::shared_ptr<dogen::variability::entities::feature_model>&& v);
 
     const boost::shared_ptr<dogen::physical::location_repository>& archetype_location_repository() const;
     boost::shared_ptr<dogen::physical::location_repository>& archetype_location_repository();
@@ -115,7 +115,7 @@ public:
 
 private:
     bool compatibility_mode_;
-    boost::shared_ptr<dogen::variability::meta_model::feature_model> feature_model_;
+    boost::shared_ptr<dogen::variability::entities::feature_model> feature_model_;
     boost::shared_ptr<dogen::physical::location_repository> archetype_location_repository_;
     std::unordered_map<std::string, std::vector<std::string> > template_instantiation_domains_;
     boost::shared_ptr<dogen::logical::helpers::mapping_set_repository> mapping_repository_;

@@ -20,17 +20,17 @@
  */
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
-#include "dogen.logical/types/meta_model/technical_space.hpp"
+#include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/meta_model/technical_space_io.hpp"
-#include "dogen.logical/lexical_cast/meta_model/technical_space_lc.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
+#include "dogen.logical/io/entities/technical_space_io.hpp"
+#include "dogen.logical/lexical_cast/entities/technical_space_lc.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/traits.hpp"
 #include "dogen.logical/types/features/output_technical_space.hpp"
-#include "dogen.logical/types/meta_model/structural/module.hpp"
-#include "dogen.logical/types/meta_model/elements_traversal.hpp"
+#include "dogen.logical/types/entities/structural/module.hpp"
+#include "dogen.logical/types/entities/elements_traversal.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/technical_space_transform.hpp"
@@ -48,10 +48,10 @@ const std::string technical_space_not_set("Input technical space must be set.");
 
 namespace dogen::logical::transforms {
 
-using meta_model::technical_space;
+using entities::technical_space;
 
 void technical_space_transform::
-apply(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "technical space transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
@@ -59,15 +59,15 @@ apply(const context& ctx, meta_model::model& m) {
      * Update the intrinsic technical space on all modeling elements
      * available thus far.
      */
-    meta_model::elements_traversal(m,
-        [](meta_model::element& e) {
+    entities::elements_traversal(m,
+        [](entities::element& e) {
             e.intrinsic_technical_space(technical_space::agnostic);
         });
 
     /*
      * Ensure the input technical space has been set by now.
      */
-    const auto inv(meta_model::technical_space::invalid);
+    const auto inv(entities::technical_space::invalid);
     const bool has_input_ts(m.input_technical_space() != inv);
     if (!has_input_ts) {
         BOOST_LOG_SEV(lg, error) << technical_space_not_set;
@@ -105,9 +105,9 @@ apply(const context& ctx, meta_model::model& m) {
                                  << "  found. Defaulting to input: "
                                  << m.output_technical_spaces();
     } else {
-        std::list<meta_model::technical_space> ots;
+        std::list<entities::technical_space> ots;
         for (const auto s : scfg.output_technical_space)
-            ots.push_back(boost::lexical_cast<meta_model::technical_space>(s));
+            ots.push_back(boost::lexical_cast<entities::technical_space>(s));
 
         m.output_technical_spaces(ots);
         BOOST_LOG_SEV(lg, debug) << "Expanded output technical spaces to: "

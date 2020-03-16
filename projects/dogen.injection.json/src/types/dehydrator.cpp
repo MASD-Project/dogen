@@ -106,7 +106,7 @@ void dehydrator::insert_parents(std::ostream& s,
 }
 
 void dehydrator::insert_attribute(std::ostream& s,
-    const injection::meta_model::attribute& a) {
+    const injection::entities::attribute& a) {
 
     s << "{ ";
 
@@ -145,7 +145,7 @@ void dehydrator::insert_attribute(std::ostream& s,
 }
 
 void dehydrator::insert_element(std::ostream& s,
-    const injection::meta_model::element& e) {
+    const injection::entities::element& e) {
 
     s << "{ ";
 
@@ -198,7 +198,7 @@ void dehydrator::insert_element(std::ostream& s,
     s << " }";
 }
 
-std::string dehydrator::dehydrate(const injection::meta_model::model& m) {
+std::string dehydrator::dehydrate(const injection::entities::model& m) {
     std::ostringstream s;
 
     s << "{ ";
@@ -238,7 +238,7 @@ std::string dehydrator::dehydrate(const injection::meta_model::model& m) {
     return s.str();
 }
 
-void dehydrator::dehydrate(const injection::meta_model::model& m,
+void dehydrator::dehydrate(const injection::entities::model& m,
     const boost::filesystem::path& p) {
     const auto s(dehydrate(m));
     utility::filesystem::write_file_content(p, s);

@@ -29,7 +29,7 @@
 #include <string>
 #include <unordered_set>
 #include "dogen.generation/types/transforms/context_fwd.hpp"
-#include "dogen.extraction/types/meta_model/model.hpp"
+#include "dogen.extraction/types/entities/model.hpp"
 #include "dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
 
 namespace dogen::generation::transforms {
@@ -45,16 +45,16 @@ private:
     /*
      * Merges source into destination.
      */
-    static void merge(extraction::meta_model::model&& src,
-        extraction::meta_model::model& dst);
+    static void merge(extraction::entities::model&& src,
+        extraction::entities::model& dst);
 
 public:
-    static extraction::meta_model::model
+    static extraction::entities::model
     apply(const generation::transforms::context& ctx,
-        const generation::meta_model::model& m);
-    static extraction::meta_model::model
+        const generation::entities::model& m);
+    static extraction::entities::model
     apply(const generation::transforms::context& ctx,
-        const std::list<generation::meta_model::model>& ms);
+        const std::list<generation::entities::model>& ms);
 
 private:
     static std::shared_ptr<model_to_extraction_model_transform_registrar>

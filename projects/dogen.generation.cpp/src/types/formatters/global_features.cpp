@@ -25,9 +25,9 @@ namespace dogen::generation::cpp::formatters {
 
 namespace {
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_cpp_headers_output_directory() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("headers_output_directory");
     r.name().qualified("masd.generation.cpp.headers_output_directory");
@@ -40,9 +40,9 @@ make_masd_generation_cpp_headers_output_directory() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_cpp_directory() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("directory");
     r.name().qualified("masd.generation.cpp.directory");
@@ -57,9 +57,9 @@ make_masd_generation_cpp_directory() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_cpp_inclusion_required() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("inclusion_required");
     r.name().qualified("masd.generation.cpp.inclusion_required");
@@ -74,9 +74,9 @@ make_masd_generation_cpp_inclusion_required() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_cpp_source_directory_name() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("source_directory_name");
     r.name().qualified("masd.generation.cpp.source_directory_name");
@@ -91,9 +91,9 @@ make_masd_generation_cpp_source_directory_name() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_cpp_include_directory_name() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("include_directory_name");
     r.name().qualified("masd.generation.cpp.include_directory_name");
@@ -108,9 +108,9 @@ make_masd_generation_cpp_include_directory_name() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_cpp_tests_directory_name() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("tests_directory_name");
     r.name().qualified("masd.generation.cpp.tests_directory_name");
@@ -125,9 +125,9 @@ make_masd_generation_cpp_tests_directory_name() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_cpp_templates_directory_name() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("templates_directory_name");
     r.name().qualified("masd.generation.cpp.templates_directory_name");
@@ -142,9 +142,9 @@ make_masd_generation_cpp_templates_directory_name() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_cpp_header_file_extension() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("header_file_extension");
     r.name().qualified("masd.generation.cpp.header_file_extension");
@@ -159,9 +159,9 @@ make_masd_generation_cpp_header_file_extension() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_cpp_implementation_file_extension() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("implementation_file_extension");
     r.name().qualified("masd.generation.cpp.implementation_file_extension");
@@ -176,9 +176,9 @@ make_masd_generation_cpp_implementation_file_extension() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_cpp_templates_file_extension() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("templates_file_extension");
     r.name().qualified("masd.generation.cpp.templates_file_extension");
@@ -193,9 +193,9 @@ make_masd_generation_cpp_templates_file_extension() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_cpp_enable_unique_file_names() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("enable_unique_file_names");
     r.name().qualified("masd.generation.cpp.enable_unique_file_names");
@@ -210,9 +210,9 @@ make_masd_generation_cpp_enable_unique_file_names() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_cpp_aspect_requires_manual_default_constructor() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("requires_manual_default_constructor");
     r.name().qualified("masd.generation.cpp.aspect.requires_manual_default_constructor");
@@ -227,9 +227,9 @@ make_masd_generation_cpp_aspect_requires_manual_default_constructor() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_cpp_aspect_requires_manual_move_constructor() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("requires_manual_move_constructor");
     r.name().qualified("masd.generation.cpp.aspect.requires_manual_move_constructor");
@@ -244,9 +244,9 @@ make_masd_generation_cpp_aspect_requires_manual_move_constructor() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_cpp_aspect_requires_stream_manipulators() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("requires_stream_manipulators");
     r.name().qualified("masd.generation.cpp.aspect.requires_stream_manipulators");
@@ -261,9 +261,9 @@ make_masd_generation_cpp_aspect_requires_stream_manipulators() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_cpp_disable_facet_directories() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("disable_facet_directories");
     r.name().qualified("masd.generation.cpp.disable_facet_directories");
@@ -278,9 +278,9 @@ make_masd_generation_cpp_disable_facet_directories() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_cpp_standard() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("standard");
     r.name().qualified("masd.generation.cpp.standard");
@@ -295,9 +295,9 @@ make_masd_generation_cpp_standard() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_cpp_helper_family() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("family");
     r.name().qualified("masd.generation.cpp.helper.family");
@@ -312,9 +312,9 @@ make_masd_generation_cpp_helper_family() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_cpp_streaming_string_conversion_method() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("string_conversion_method");
     r.name().qualified("masd.generation.cpp.streaming.string_conversion_method");
@@ -329,9 +329,9 @@ make_masd_generation_cpp_streaming_string_conversion_method() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_cpp_streaming_requires_quoting() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("requires_quoting");
     r.name().qualified("masd.generation.cpp.streaming.requires_quoting");
@@ -346,9 +346,9 @@ make_masd_generation_cpp_streaming_requires_quoting() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generation_cpp_streaming_remove_unprintable_characters() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("remove_unprintable_characters");
     r.name().qualified("masd.generation.cpp.streaming.remove_unprintable_characters");
@@ -366,10 +366,10 @@ make_masd_generation_cpp_streaming_remove_unprintable_characters() {
 }
 
 
-std::list<dogen::variability::meta_model::feature>
+std::list<dogen::variability::entities::feature>
 global_features::make_features() {
-    using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature> r;
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature> r;
     r.push_back(make_masd_generation_cpp_headers_output_directory());
     r.push_back(make_masd_generation_cpp_directory());
     r.push_back(make_masd_generation_cpp_inclusion_required());

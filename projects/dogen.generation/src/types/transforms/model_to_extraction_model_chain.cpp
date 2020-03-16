@@ -22,10 +22,10 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/types/meta_model/structural/module.hpp"
-#include "dogen.logical/io/meta_model/technical_space_io.hpp"
-#include "dogen.extraction/io/meta_model/model_io.hpp"
-#include "dogen.generation/io/meta_model/model_io.hpp"
+#include "dogen.logical/types/entities/structural/module.hpp"
+#include "dogen.logical/io/entities/technical_space_io.hpp"
+#include "dogen.extraction/io/entities/model_io.hpp"
+#include "dogen.generation/io/entities/model_io.hpp"
 #include "dogen.generation/types/transforms/transformation_error.hpp"
 #include "dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
 
@@ -59,7 +59,7 @@ model_to_extraction_model_chain::registrar() {
 }
 
 void model_to_extraction_model_chain::
-merge(extraction::meta_model::model&& src, extraction::meta_model::model& dst) {
+merge(extraction::entities::model&& src, extraction::entities::model& dst) {
     dst.origin_element_id(src.origin_element_id());
     dst.origin_sha1_hash(src.origin_sha1_hash());
     dst.artefacts().splice(dst.artefacts().end(), src.artefacts());
@@ -67,9 +67,9 @@ merge(extraction::meta_model::model&& src, extraction::meta_model::model& dst) {
         src.managed_directories());
 }
 
-extraction::meta_model::model model_to_extraction_model_chain::
+extraction::entities::model model_to_extraction_model_chain::
 apply(const generation::transforms::context& ctx,
-    const generation::meta_model::model& m) {
+    const generation::entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Transforming model: "
                              << m.name().qualified().dot();
 
@@ -79,7 +79,7 @@ apply(const generation::transforms::context& ctx,
      */
     if (!m.has_generatable_types()) {
         BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
-        return extraction::meta_model::model();
+        return extraction::entities::model();
     }
 
     /*
@@ -131,15 +131,15 @@ apply(const generation::transforms::context& ctx,
     return r;
 }
 
-extraction::meta_model::model model_to_extraction_model_chain::
+extraction::entities::model model_to_extraction_model_chain::
 apply(const generation::transforms::context& ctx,
-    const std::list<generation::meta_model::model>& ms) {
+    const std::list<generation::entities::model>& ms) {
     tracing::scoped_chain_tracer stp(lg, "model to extraction model chain",
         transform_id, "FIXME", *ctx.tracer(), ms);
 
     BOOST_LOG_SEV(lg, debug) << "Transforming models: " << ms.size();
 
-    extraction::meta_model::model r;
+    extraction::entities::model r;
     if (ms.empty())
         return r;
 

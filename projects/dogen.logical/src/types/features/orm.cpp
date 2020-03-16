@@ -27,9 +27,9 @@ namespace dogen::logical::features {
 
 namespace {
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_orm_database_system() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("database_system");
     r.name().qualified("masd.orm.database_system");
@@ -42,9 +42,9 @@ make_masd_orm_database_system() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_orm_table_name() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("table_name");
     r.name().qualified("masd.orm.table_name");
@@ -57,9 +57,9 @@ make_masd_orm_table_name() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_orm_schema_name() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("schema_name");
     r.name().qualified("masd.orm.schema_name");
@@ -72,9 +72,9 @@ make_masd_orm_schema_name() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_orm_is_primary_key() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("is_primary_key");
     r.name().qualified("masd.orm.is_primary_key");
@@ -87,9 +87,9 @@ make_masd_orm_is_primary_key() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_orm_column_name() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("column_name");
     r.name().qualified("masd.orm.column_name");
@@ -102,9 +102,9 @@ make_masd_orm_column_name() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_orm_is_nullable() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("is_nullable");
     r.name().qualified("masd.orm.is_nullable");
@@ -117,9 +117,9 @@ make_masd_orm_is_nullable() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_orm_is_composite() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("is_composite");
     r.name().qualified("masd.orm.is_composite");
@@ -132,9 +132,9 @@ make_masd_orm_is_composite() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_orm_letter_case() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("letter_case");
     r.name().qualified("masd.orm.letter_case");
@@ -147,9 +147,9 @@ make_masd_orm_letter_case() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_orm_type_override() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("type_override");
     r.name().qualified("masd.orm.type_override");
@@ -165,9 +165,9 @@ Should really be "property".
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_orm_type_mapping() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("type_mapping");
     r.name().qualified("masd.orm.type_mapping");
@@ -183,9 +183,9 @@ Should really be "property".
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_orm_odb_pragma() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("odb_pragma");
     r.name().qualified("masd.orm.odb_pragma");
@@ -204,7 +204,7 @@ ORM in Dogen.
 }
 
 orm::feature_group
-orm::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+orm::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
@@ -225,7 +225,7 @@ orm::make_feature_group(const dogen::variability::meta_model::feature_model& fm)
 
 orm::static_configuration orm::make_static_configuration(
     const feature_group& fg,
-    const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::entities::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
@@ -254,10 +254,10 @@ orm::static_configuration orm::make_static_configuration(
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature>
+std::list<dogen::variability::entities::feature>
 orm::make_features() {
-    using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature> r;
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature> r;
     r.push_back(make_masd_orm_database_system());
     r.push_back(make_masd_orm_table_name());
     r.push_back(make_masd_orm_schema_name());

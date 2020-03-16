@@ -29,7 +29,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
-#include "dogen.logical/types/meta_model/name.hpp"
+#include "dogen.logical/types/entities/name.hpp"
 
 namespace dogen::logical::helpers {
 
@@ -42,25 +42,25 @@ public:
 
 public:
     mapping_context(
-        const std::unordered_map<std::string, dogen::logical::meta_model::name>& translations,
+        const std::unordered_map<std::string, dogen::logical::entities::name>& translations,
         const std::unordered_set<std::string>& erasures,
-        const std::unordered_map<std::string, dogen::logical::meta_model::name>& injections);
+        const std::unordered_map<std::string, dogen::logical::entities::name>& injections);
 
 public:
-    const std::unordered_map<std::string, dogen::logical::meta_model::name>& translations() const;
-    std::unordered_map<std::string, dogen::logical::meta_model::name>& translations();
-    void translations(const std::unordered_map<std::string, dogen::logical::meta_model::name>& v);
-    void translations(const std::unordered_map<std::string, dogen::logical::meta_model::name>&& v);
+    const std::unordered_map<std::string, dogen::logical::entities::name>& translations() const;
+    std::unordered_map<std::string, dogen::logical::entities::name>& translations();
+    void translations(const std::unordered_map<std::string, dogen::logical::entities::name>& v);
+    void translations(const std::unordered_map<std::string, dogen::logical::entities::name>&& v);
 
     const std::unordered_set<std::string>& erasures() const;
     std::unordered_set<std::string>& erasures();
     void erasures(const std::unordered_set<std::string>& v);
     void erasures(const std::unordered_set<std::string>&& v);
 
-    const std::unordered_map<std::string, dogen::logical::meta_model::name>& injections() const;
-    std::unordered_map<std::string, dogen::logical::meta_model::name>& injections();
-    void injections(const std::unordered_map<std::string, dogen::logical::meta_model::name>& v);
-    void injections(const std::unordered_map<std::string, dogen::logical::meta_model::name>&& v);
+    const std::unordered_map<std::string, dogen::logical::entities::name>& injections() const;
+    std::unordered_map<std::string, dogen::logical::entities::name>& injections();
+    void injections(const std::unordered_map<std::string, dogen::logical::entities::name>& v);
+    void injections(const std::unordered_map<std::string, dogen::logical::entities::name>&& v);
 
 public:
     bool operator==(const mapping_context& rhs) const;
@@ -73,9 +73,9 @@ public:
     mapping_context& operator=(mapping_context other);
 
 private:
-    std::unordered_map<std::string, dogen::logical::meta_model::name> translations_;
+    std::unordered_map<std::string, dogen::logical::entities::name> translations_;
     std::unordered_set<std::string> erasures_;
-    std::unordered_map<std::string, dogen::logical::meta_model::name> injections_;
+    std::unordered_map<std::string, dogen::logical::entities::name> injections_;
 };
 
 }

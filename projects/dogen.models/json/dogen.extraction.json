@@ -19,7 +19,7 @@
   },
   "elements": [
     {
-      "name": "meta_model",
+      "name": "entities",
       "documentation": "The extraction meta-model captures the entities required\nto transport information from the MASD technical space to\nexternal technical spaces.\n",
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -27,7 +27,7 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "meta_model::model",
+      "name": "entities::model",
       "stereotypes": [
         "Configurable",
         "DeterminableOrigin"
@@ -58,7 +58,7 @@
       ]
     },
     {
-      "name": "meta_model::artefact",
+      "name": "entities::artefact",
       "documentation": "Artefact in a text model.\n",
       "stereotypes": [
         "DeterminableOrigin"
@@ -164,7 +164,7 @@
         },
         {
           "name": "feature_model",
-          "type": "boost::shared_ptr<variability::meta_model::feature_model>"
+          "type": "boost::shared_ptr<variability::entities::feature_model>"
         },
         {
           "name": "tracer",
@@ -173,7 +173,7 @@
       ]
     },
     {
-      "name": "meta_model::operation",
+      "name": "entities::operation",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -187,7 +187,7 @@
       ]
     },
     {
-      "name": "meta_model::operation_type",
+      "name": "entities::operation_type",
       "documentation": "Operation to perform to a given artefact.\n",
       "stereotypes": [
         "masd::enumeration"
@@ -220,7 +220,7 @@
       ]
     },
     {
-      "name": "meta_model::operation_reason",
+      "name": "entities::operation_reason",
       "documentation": "Reasons for performing an operation.\n",
       "stereotypes": [
         "masd::enumeration"
@@ -355,7 +355,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::outputting_properties",
+      "name": "entities::outputting_properties",
       "documentation": "Properties related to outputting.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -378,7 +378,7 @@
       ]
     },
     {
-      "name": "meta_model::Configurable",
+      "name": "entities::Configurable",
       "documentation": "Ability to have meta-data associated.\n",
       "stereotypes": [
         "masd::object_template"
@@ -387,7 +387,7 @@
       "attributes": [
         {
           "name": "configuration",
-          "type": "boost::shared_ptr<variability::meta_model::configuration>",
+          "type": "boost::shared_ptr<variability::entities::configuration>",
           "documentation": "Configuration for this element.\n"
         }
       ]
@@ -454,7 +454,7 @@
       ]
     },
     {
-      "name": "meta_model::DeterminableOrigin",
+      "name": "entities::DeterminableOrigin",
       "documentation": "Properties related to the origin of the modeling element.\n",
       "stereotypes": [
         "masd::object_template"

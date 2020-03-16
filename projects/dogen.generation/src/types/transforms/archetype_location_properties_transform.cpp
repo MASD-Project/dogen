@@ -26,13 +26,13 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/types/traits.hpp"
-#include "dogen.logical/types/meta_model/structural/module.hpp"
-#include "dogen.generation/io/meta_model/model_io.hpp"
-#include "dogen.generation/io/meta_model/element_archetype_io.hpp"
-#include "dogen.generation/io/meta_model/backend_properties_io.hpp"
-#include "dogen.generation/io/meta_model/facet_properties_io.hpp"
-#include "dogen.generation/io/meta_model/archetype_properties_io.hpp"
-#include "dogen.logical/io/meta_model/local_archetype_location_properties_io.hpp"
+#include "dogen.logical/types/entities/structural/module.hpp"
+#include "dogen.generation/io/entities/model_io.hpp"
+#include "dogen.generation/io/entities/element_archetype_io.hpp"
+#include "dogen.generation/io/entities/backend_properties_io.hpp"
+#include "dogen.generation/io/entities/facet_properties_io.hpp"
+#include "dogen.generation/io/entities/archetype_properties_io.hpp"
+#include "dogen.logical/io/entities/local_archetype_location_properties_io.hpp"
 #include "dogen.generation/types/transforms/transformation_error.hpp"
 #include "dogen.generation/types/transforms/archetype_location_properties_transform.hpp"
 
@@ -58,7 +58,7 @@ std::unordered_map<
     std::string,
     archetype_location_properties_transform::backend_feature_group>
 archetype_location_properties_transform::
-make_backend_feature_group(const variability::meta_model::feature_model& fm,
+make_backend_feature_group(const variability::entities::feature_model& fm,
     const physical::location_repository& alrp) {
     std::unordered_map<std::string, backend_feature_group> r;
 
@@ -81,7 +81,7 @@ std::unordered_map<
     std::string,
     archetype_location_properties_transform::facet_feature_group>
 archetype_location_properties_transform::
-make_facet_feature_group(const variability::meta_model::feature_model& fm,
+make_facet_feature_group(const variability::entities::feature_model& fm,
     const physical::location_repository& alrp) {
     std::unordered_map<std::string, facet_feature_group> r;
 
@@ -110,7 +110,7 @@ std::unordered_map<
     std::string,
     archetype_location_properties_transform::global_archetype_feature_group>
 archetype_location_properties_transform::make_global_archetype_feature_group(
-    const variability::meta_model::feature_model& fm,
+    const variability::entities::feature_model& fm,
     const physical::location_repository& alrp) {
     std::unordered_map<std::string, global_archetype_feature_group> r;
 
@@ -135,7 +135,7 @@ std::unordered_map<
     std::string,
     archetype_location_properties_transform::local_archetype_feature_group>
 archetype_location_properties_transform::make_local_archetype_feature_group(
-    const variability::meta_model::feature_model& fm,
+    const variability::entities::feature_model& fm,
     const physical::location_repository& alrp) {
     std::unordered_map<std::string, local_archetype_feature_group> r;
 
@@ -155,20 +155,20 @@ archetype_location_properties_transform::make_local_archetype_feature_group(
     return r;
 }
 
-std::unordered_map<std::string, meta_model::backend_properties>
+std::unordered_map<std::string, entities::backend_properties>
 archetype_location_properties_transform::obtain_backend_properties(
     const std::unordered_map<std::string, backend_feature_group>& fgs,
-    const variability::meta_model::configuration& cfg) {
+    const variability::entities::configuration& cfg) {
 
     BOOST_LOG_SEV(lg, debug) << "Creating backend properties.";
 
-    std::unordered_map<std::string, meta_model::backend_properties> r;
+    std::unordered_map<std::string, entities::backend_properties> r;
     const variability::helpers::configuration_selector s(cfg);
     for (const auto& pair : fgs) {
         const auto& backend(pair.first);
         const auto& tg(pair.second);
 
-        meta_model::backend_properties bp;
+        entities::backend_properties bp;
         bp.enabled(s.get_boolean_content_or_default(tg.enabled));
         bp.directory(s.get_text_content_or_default(tg.directory));
 
@@ -179,20 +179,20 @@ archetype_location_properties_transform::obtain_backend_properties(
     return r;
 }
 
-std::unordered_map<std::string, meta_model::facet_properties>
+std::unordered_map<std::string, entities::facet_properties>
 archetype_location_properties_transform::obtain_facet_properties(
     const std::unordered_map<std::string, facet_feature_group>& fgs,
-    const variability::meta_model::configuration& cfg) {
+    const variability::entities::configuration& cfg) {
 
     BOOST_LOG_SEV(lg, debug) << "Creating facet properties.";
 
-    std::unordered_map<std::string, meta_model::facet_properties> r;
+    std::unordered_map<std::string, entities::facet_properties> r;
     const variability::helpers::configuration_selector s(cfg);
     for (const auto& pair : fgs) {
         const auto& facet(pair.first);
         const auto& tg(pair.second);
 
-        meta_model::facet_properties fp;
+        entities::facet_properties fp;
         fp.enabled(s.get_boolean_content_or_default(tg.enabled));
         fp.overwrite(s.get_boolean_content_or_default(tg.overwrite));
         if (tg.directory)
@@ -208,20 +208,20 @@ archetype_location_properties_transform::obtain_facet_properties(
     return r;
 }
 
-std::unordered_map<std::string, meta_model::archetype_properties>
+std::unordered_map<std::string, entities::archetype_properties>
 archetype_location_properties_transform::obtain_archetype_properties(
     const std::unordered_map<std::string, global_archetype_feature_group>& fgs,
-    const variability::meta_model::configuration& ra) {
+    const variability::entities::configuration& ra) {
 
     BOOST_LOG_SEV(lg, debug) << "Creating archetype properties.";
 
-    std::unordered_map<std::string, meta_model::archetype_properties> r;
+    std::unordered_map<std::string, entities::archetype_properties> r;
     const variability::helpers::configuration_selector s(ra);
     for (const auto& pair : fgs) {
         const auto& archetype(pair.first);
         const auto& tg(pair.second);
 
-        meta_model::archetype_properties ap;
+        entities::archetype_properties ap;
         ap.enabled(s.get_boolean_content_or_default(tg.enabled));
         if (s.has_configuration_point(tg.overwrite))
             ap.overwrite(s.get_boolean_content(tg.overwrite));
@@ -237,9 +237,9 @@ archetype_location_properties_transform::obtain_archetype_properties(
 
 void archetype_location_properties_transform::
 populate_global_archetype_location_properties(
-    const variability::meta_model::feature_model& fm,
+    const variability::entities::feature_model& fm,
     const physical::location_repository& alrp,
-    meta_model::model& m) {
+    entities::model& m) {
 
     const auto bftg(make_backend_feature_group(fm, alrp));
     const auto fftg(make_facet_feature_group(fm, alrp));
@@ -287,7 +287,7 @@ populate_global_archetype_location_properties(
              * populate the denormalised properties.
              */
             for (const auto& an : facet_pair.second) {
-                meta_model::denormalised_archetype_properties dap;
+                entities::denormalised_archetype_properties dap;
                 dap.backend_enabled(backend.enabled());
                 dap.backend_directory(backend.directory());
                 dap.facet_enabled(facet.enabled());
@@ -313,18 +313,18 @@ populate_global_archetype_location_properties(
 }
 
 std::unordered_map<std::string,
-                   logical::meta_model::local_archetype_location_properties>
+                   logical::entities::local_archetype_location_properties>
 archetype_location_properties_transform::
 obtain_local_archetype_location_properties(
     const std::unordered_map<std::string, local_archetype_feature_group>& fgs,
     const std::list<physical::location>& als,
-    const variability::meta_model::configuration& cfg) {
+    const variability::entities::configuration& cfg) {
 
     BOOST_LOG_SEV(lg, debug) << "Creating local archetype location properties.";
 
     std::unordered_map<
         std::string,
-        logical::meta_model::local_archetype_location_properties> r;
+        logical::entities::local_archetype_location_properties> r;
     const variability::helpers::configuration_selector s(cfg);
     for (const auto& al : als) {
         const auto archetype(al.archetype());
@@ -336,7 +336,7 @@ obtain_local_archetype_location_properties(
         }
         const auto fg(i->second);
 
-        logical::meta_model::local_archetype_location_properties lalp;
+        logical::entities::local_archetype_location_properties lalp;
         if (s.has_configuration_point(fg.facet_enabled)) {
             lalp.facet_enabled(
                 s.get_boolean_content_or_default(fg.facet_enabled));
@@ -364,9 +364,9 @@ obtain_local_archetype_location_properties(
 
 void archetype_location_properties_transform::
 populate_local_archetype_location_properties(
-    const variability::meta_model::feature_model& fm,
+    const variability::entities::feature_model& fm,
     const physical::location_repository& alrp,
-    meta_model::model& m) {
+    entities::model& m) {
     /*
      * Computes all of the possible features for every archetype
      * location. Not all of these will be of use to a given element,
@@ -378,7 +378,7 @@ populate_local_archetype_location_properties(
      * Bucket all elements by their meta-name.
      */
     std::unordered_map<std::string,
-                       std::list<boost::shared_ptr<logical::meta_model::element>>>
+                       std::list<boost::shared_ptr<logical::entities::element>>>
         bucketed_elements;
     for (auto ptr : m.elements())
         bucketed_elements[ptr->meta_name().qualified().dot()].push_back(ptr);
@@ -415,7 +415,7 @@ populate_local_archetype_location_properties(
 }
 
 void archetype_location_properties_transform::
-apply(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "archetype location properties transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);

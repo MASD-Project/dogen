@@ -26,9 +26,9 @@
 #endif
 
 #include <list>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
 
 namespace dogen::logical::features {
 
@@ -38,13 +38,13 @@ namespace dogen::logical::features {
 class type_parameters final {
 public:
     struct feature_group {
-        variability::meta_model::feature variable_number_of_parameters;
-        variability::meta_model::feature count;
-        variability::meta_model::feature always_in_heap;
+        variability::entities::feature variable_number_of_parameters;
+        variability::entities::feature count;
+        variability::entities::feature always_in_heap;
     };
 
     static feature_group
-    make_feature_group(const variability::meta_model::feature_model& fm);
+    make_feature_group(const variability::entities::feature_model& fm);
 
 public:
     struct static_configuration {
@@ -60,7 +60,7 @@ public:
 
     static static_configuration make_static_configuration(
         const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
+        const variability::entities::configuration& cfg);
 
     template<typename Configurable>
     static static_configuration make_static_configuration(
@@ -69,7 +69,7 @@ public:
     }
 
 public:
-    static std::list<dogen::variability::meta_model::feature>
+    static std::list<dogen::variability::entities::feature>
     make_features();
 };
 

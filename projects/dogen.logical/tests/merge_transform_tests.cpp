@@ -24,12 +24,12 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/test/exception_checkers.hpp"
-#include "dogen.logical/types/meta_model/name.hpp"
-#include "dogen.logical/io/meta_model/name_io.hpp"
-#include "dogen.logical/types/meta_model/model.hpp"
-#include "dogen.logical/types/meta_model/model_set.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
+#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.logical/io/entities/name_io.hpp"
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/entities/model_set.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/test/mock_context_factory.hpp"
 #include "dogen.logical/test/mock_model_factory.hpp"
@@ -56,8 +56,8 @@ const std::string too_many_targets("Only one target expected.");
 }
 
 using dogen::utility::test::contains_checker;
-using dogen::logical::meta_model::origin_types;
-using dogen::logical::meta_model::model;
+using dogen::logical::entities::origin_types;
+using dogen::logical::entities::model;
 using dogen::logical::transforms::merge_transform;
 using dogen::logical::test::mock_context_factory;
 
@@ -67,7 +67,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     SETUP_TEST_LOG_SOURCE("merging_n_distinct_models_with_one_object_each_results_in_n_objects_in_merged_model");
 
     const auto tg(origin_types::target);
-    dogen::logical::meta_model::model_set ms;
+    dogen::logical::entities::model_set ms;
     ms.target(factory.make_single_type_model(tg, 0));
 
     const unsigned int n(5);
@@ -131,7 +131,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
 
 BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
     SETUP_TEST_LOG_SOURCE("merging_empty_model_results_in_empty_merged_model");
-    dogen::logical::meta_model::model_set ms;
+    dogen::logical::entities::model_set ms;
     const auto tg(origin_types::target);
     ms.target(factory.make_empty_model(tg));
 

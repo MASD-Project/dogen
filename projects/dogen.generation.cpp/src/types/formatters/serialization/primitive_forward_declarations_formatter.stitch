@@ -1,6 +1,6 @@
 <#@ masd.stitch.stream_variable_name=a.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::generation::cpp::formatters::serialization #>
-<#@ masd.stitch.inclusion_dependency="dogen.logical/types/meta_model/structural/primitive.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/traits.hpp" #>
@@ -13,7 +13,7 @@
 <#@ masd.stitch.wale.kvp.class.simple_name=primitive_forward_declarations_formatter #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=primitive_forward_declarations #>
 <#@ masd.stitch.wale.kvp.class.inclusion_support_type=regular_support #>
-<#@ masd.stitch.wale.kvp.yarn_element=logical::meta_model::structural::primitive #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::primitive #>
 <#@ masd.stitch.wale.kvp.meta_element=primitive #>
 <#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
@@ -21,7 +21,7 @@
 
 std::list<std::string> primitive_forward_declarations_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const logical::meta_model::element& e) const {
+    const logical::entities::element& e) const {
     auto builder(f.make());
 
     using tp = formatters::types::traits;
@@ -31,10 +31,10 @@ std::list<std::string> primitive_forward_declarations_formatter::inclusion_depen
     return builder.build();
 }
 
-extraction::meta_model::artefact primitive_forward_declarations_formatter::
-format(const context& ctx, const logical::meta_model::element& e) const {
+extraction::entities::artefact primitive_forward_declarations_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& p(a.as<logical::meta_model::structural::primitive>(e));
+    const auto& p(a.as<logical::entities::structural::primitive>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(p));

@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.generation.cpp/types/formattables/cpp_standards.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 
@@ -39,18 +39,18 @@ private:
 
 private:
     struct feature_group {
-        variability::meta_model::feature cpp_standard;
+        variability::entities::feature cpp_standard;
     };
 
     feature_group make_feature_group(
-        const variability::meta_model::feature_model& fm) const;
+        const variability::entities::feature_model& fm) const;
 
     cpp_standards make_standard(const feature_group& fg,
-        const variability::meta_model::configuration& cfg) const;
+        const variability::entities::configuration& cfg) const;
 
 public:
-    void expand(const variability::meta_model::feature_model& feature_model,
-        const variability::meta_model::configuration& rcfg, model& fm) const;
+    void expand(const variability::entities::feature_model& feature_model,
+        const variability::entities::configuration& rcfg, model& fm) const;
 };
 
 }

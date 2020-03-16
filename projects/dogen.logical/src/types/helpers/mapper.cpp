@@ -21,20 +21,20 @@
 #include <boost/lexical_cast.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
-#include "dogen.logical/io/meta_model/technical_space_io.hpp"
-#include "dogen.logical/lexical_cast/meta_model/technical_space_lc.hpp"
-#include "dogen.logical/types/meta_model/structural/module.hpp"
-#include "dogen.logical/types/meta_model/structural/builtin.hpp"
-#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
-#include "dogen.logical/types/meta_model/structural/primitive.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/structural/exception.hpp"
-#include "dogen.logical/types/meta_model/structural/visitor.hpp"
-#include "dogen.logical/types/meta_model/structural/object_template.hpp"
-#include "dogen.logical/types/meta_model/attribute.hpp"
+#include "dogen.logical/io/entities/technical_space_io.hpp"
+#include "dogen.logical/lexical_cast/entities/technical_space_lc.hpp"
+#include "dogen.logical/types/entities/structural/module.hpp"
+#include "dogen.logical/types/entities/structural/builtin.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
+#include "dogen.logical/types/entities/structural/primitive.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/exception.hpp"
+#include "dogen.logical/types/entities/structural/visitor.hpp"
+#include "dogen.logical/types/entities/structural/object_template.hpp"
+#include "dogen.logical/types/entities/attribute.hpp"
 #include "dogen.logical/types/helpers/mapping_error.hpp"
 #include "dogen.logical/io/helpers/mapping_context_io.hpp"
-#include "dogen.logical/types/meta_model/visual_studio/project.hpp"
+#include "dogen.logical/types/entities/visual_studio/project.hpp"
 #include "dogen.logical/types/helpers/visual_studio_project_type_mapper.hpp"
 #include "dogen.logical/types/helpers/mapper.hpp"
 
@@ -58,8 +58,8 @@ namespace dogen::logical::helpers {
 mapper::mapper(const mapping_set_repository& msrp)
     : mapping_set_repository_(msrp) { }
 
-meta_model::model mapper::
-clone(const meta_model::model& m) const {
+entities::model mapper::
+clone(const entities::model& m) const {
     auto r(m);
 
     /*
@@ -103,11 +103,11 @@ clone(const meta_model::model& m) const {
     return r;
 }
 
-const std::unordered_map<std::string, meta_model::name>&
+const std::unordered_map<std::string, entities::name>&
 mapper::translations_for_technical_space(const mapping_set& ms,
-    const meta_model::technical_space from,
-    const meta_model::technical_space to) const {
-    if (from == meta_model::technical_space::agnostic) {
+    const entities::technical_space from,
+    const entities::technical_space to) const {
+    if (from == entities::technical_space::agnostic) {
         const auto& blai(ms.by_agnostic_id());
         const auto i(blai.find(to));
         if (i != blai.end())
@@ -123,13 +123,13 @@ mapper::translations_for_technical_space(const mapping_set& ms,
     BOOST_THROW_EXCEPTION(mapping_error(unsupported_technical_space + s));
 }
 
-std::unordered_map<std::string, meta_model::name>
+std::unordered_map<std::string, entities::name>
 mapper::injections_for_technical_space(const mapping_set& ms,
-    const meta_model::technical_space ts,
-    const meta_model::model& m) const {
+    const entities::technical_space ts,
+    const entities::model& m) const {
 
-    std::unordered_map<std::string, meta_model::name> r;
-    const auto cpp(meta_model::technical_space::cpp);
+    std::unordered_map<std::string, entities::name> r;
+    const auto cpp(entities::technical_space::cpp);
     if (ts != cpp)
         return r;
 
@@ -165,8 +165,8 @@ mapper::injections_for_technical_space(const mapping_set& ms,
 }
 
 mapping_context mapper::create_mapping_context(const mapping_set& ms,
-    const meta_model::technical_space from,
-    const meta_model::technical_space to, const meta_model::model& m) const {
+    const entities::technical_space from,
+    const entities::technical_space to, const entities::model& m) const {
     mapping_context r;
     r.translations(translations_for_technical_space(ms, from, to));
     r.injections(injections_for_technical_space(ms, to, m));
@@ -178,8 +178,8 @@ mapping_context mapper::create_mapping_context(const mapping_set& ms,
     return r;
 }
 
-meta_model::name_tree mapper::walk_name_tree(const mapping_context& mc,
-    const meta_model::name_tree& nt, const bool skip_injection) const {
+entities::name_tree mapper::walk_name_tree(const mapping_context& mc,
+    const entities::name_tree& nt, const bool skip_injection) const {
     const auto id(nt.current().qualified().dot());
     if (mc.erasures().find(id) != mc.erasures().end()) {
         /*
@@ -207,7 +207,7 @@ meta_model::name_tree mapper::walk_name_tree(const mapping_context& mc,
      * parameter. We do not attempt injections if we are already under
      * an injection or else we would create an infinite loop.
      */
-    meta_model::name_tree r;
+    entities::name_tree r;
     if (!skip_injection) {
         const auto i(mc.injections().find(id));
         if (i != mc.injections().end()) {
@@ -243,19 +243,19 @@ meta_model::name_tree mapper::walk_name_tree(const mapping_context& mc,
 }
 
 void mapper::map_attributes(const mapping_context& mc,
-    std::list<meta_model::attribute>& attrs) const {
+    std::list<entities::attribute>& attrs) const {
     for (auto& attr : attrs)
         attr.parsed_type(walk_name_tree(mc, attr.parsed_type()));
 }
 
-bool mapper::is_mappable(const meta_model::technical_space from,
-    const meta_model::technical_space to) {
-    return from == to || from == meta_model::technical_space::agnostic;
+bool mapper::is_mappable(const entities::technical_space from,
+    const entities::technical_space to) {
+    return from == to || from == entities::technical_space::agnostic;
 }
 
-meta_model::model mapper::map(const meta_model::technical_space from,
-    const meta_model::technical_space to,
-    const meta_model::model& m) const {
+entities::model mapper::map(const entities::technical_space from,
+    const entities::technical_space to,
+    const entities::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started mapping. Model: "
                              << m.name().qualified().dot();
     BOOST_LOG_SEV(lg, debug) << "Mapping from: "

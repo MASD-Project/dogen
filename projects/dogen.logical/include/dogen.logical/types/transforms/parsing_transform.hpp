@@ -26,13 +26,13 @@
 #endif
 
 #include <string>
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/technical_space.hpp"
-#include "dogen.logical/types/meta_model/attribute.hpp"
-#include "dogen.logical/types/meta_model/name_tree.hpp"
-#include "dogen.logical/types/meta_model/structural/primitive.hpp"
-#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
-#include "dogen.logical/types/meta_model/model.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.logical/types/entities/attribute.hpp"
+#include "dogen.logical/types/entities/name_tree.hpp"
+#include "dogen.logical/types/entities/structural/primitive.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
+#include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
@@ -55,20 +55,20 @@ private:
     /**
      * @brief Parses all attributes in the supplied attribute list..
      */
-    static void parse_attributes(const meta_model::technical_space ts,
-        std::list<meta_model::attribute>& attrs);
+    static void parse_attributes(const entities::technical_space ts,
+        std::list<entities::attribute>& attrs);
 
     /**
      * @brief Parses underlying element in the supplied primitive.
      */
-    static void parse_underlying_element(const meta_model::technical_space ts,
-        meta_model::structural::primitive& p);
+    static void parse_underlying_element(const entities::technical_space ts,
+        entities::structural::primitive& p);
 
 public:
     /**
      * Execute the property expansion against the model.
      */
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

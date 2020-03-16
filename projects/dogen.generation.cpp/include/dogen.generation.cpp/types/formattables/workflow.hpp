@@ -27,8 +27,8 @@
 
 #include <string>
 #include <unordered_set>
-#include "dogen.generation/types/meta_model/model.hpp"
-#include "dogen.generation/types/meta_model/element_archetype.hpp"
+#include "dogen.generation/types/entities/model.hpp"
+#include "dogen.generation/types/entities/element_archetype.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
 #include "dogen.generation.cpp/types/formatters/repository.hpp"
@@ -39,22 +39,22 @@ namespace dogen::generation::cpp::formattables {
 class workflow {
 private:
     model make_model(const formatters::repository& frp,
-        const generation::meta_model::model& m) const;
+        const generation::entities::model& m) const;
 
     void expand_model(
-        const variability::meta_model::feature_model& feature_model,
-        const variability::meta_model::configuration& rcfg,
-        const std::unordered_set<generation::meta_model::element_archetype>&
+        const variability::entities::feature_model& feature_model,
+        const variability::entities::configuration& rcfg,
+        const std::unordered_set<generation::entities::element_archetype>&
         enabled_archetype_for_element,
         const formatters::repository& frp, const locator& l,
         model& fm) const;
 
 public:
     model execute(
-        const variability::meta_model::feature_model& feature_model,
-        const variability::meta_model::configuration& rcfg,
+        const variability::entities::feature_model& feature_model,
+        const variability::entities::configuration& rcfg,
         const locator& l, const formatters::repository& frp,
-        const generation::meta_model::model& m) const;
+        const generation::entities::model& m) const;
 };
 
 }

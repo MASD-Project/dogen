@@ -52,7 +52,7 @@ namespace dogen::templating::stitch {
 
 instantiator::
 instantiator(const boost::filesystem::path& wale_templates_directory,
-    const variability::meta_model::feature_model& fm,
+    const variability::entities::feature_model& fm,
     const variability::helpers::configuration_factory& cf)
     : wale_templates_directory_(wale_templates_directory),
       configuration_factory_(cf), feature_model_(fm) {}
@@ -156,7 +156,7 @@ void instantiator::validate_kvps(text_template& tt) const {
 }
 
 properties instantiator::create_properties(
-    const variability::meta_model::configuration& cfg) const {
+    const variability::entities::configuration& cfg) const {
     const auto fg(features::make_feature_group(feature_model_));
     const auto scfg(features::make_static_configuration(fg, cfg));
 
@@ -221,7 +221,7 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
          */
         const auto& tv(r.body().tagged_values());
         const std::list<std::pair<std::string, std::string>> otv;
-        const auto bp(variability::meta_model::binding_point::global);
+        const auto bp(variability::entities::binding_point::global);
         const auto cfg(configuration_factory_.make(tv, otv, bp));
         r.properties(create_properties(cfg));
 
@@ -250,14 +250,14 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
     }
 }
 
-extraction::meta_model::artefact
+extraction::entities::artefact
 instantiator::format_text_template(const text_template& tt) const {
     formatter fmt;
     const auto r(fmt.format(tt));
     return r;
 }
 
-extraction::meta_model::artefact
+extraction::entities::artefact
 instantiator::instantiate(const boost::filesystem::path& input_path,
     const std::unordered_map<std::string, std::string>& kvps) const {
     BOOST_LOG_SEV(lg, debug) << "Instantiating: "

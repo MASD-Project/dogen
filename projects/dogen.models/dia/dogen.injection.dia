@@ -347,7 +347,7 @@
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model#</dia:string>
+                <dia:string>#entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -1157,7 +1157,7 @@ manage it.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::model#</dia:string>
+            <dia:string>#entities::model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1450,7 +1450,7 @@ manage it.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#meta_model#</dia:string>
+        <dia:string>#entities#</dia:string>
       </dia:attribute>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O10">
@@ -2977,7 +2977,7 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
             <dia:string>#feature_model#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;variability::meta_model::feature_model&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;variability::entities::feature_model&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -4366,7 +4366,7 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::model_set#</dia:string>
+            <dia:string>#entities::model_set#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4586,7 +4586,7 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model#</dia:string>
+                <dia:string>#entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -4763,7 +4763,7 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model#</dia:string>
+                <dia:string>#entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6026,7 +6026,7 @@ and, if so, ignore it.#</dia:string>
             <dia:string>#configuration#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;variability::meta_model::configuration&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;variability::entities::configuration&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -6250,7 +6250,7 @@ and, if so, ignore it.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model#</dia:string>
+                <dia:string>#entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -7105,7 +7105,7 @@ If the containing package is the model itself, it is linked to the model's modul
                 <dia:string>#ms#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model_set#</dia:string>
+                <dia:string>#entities::model_set#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -7679,7 +7679,7 @@ graph.#</dia:string>
                 <dia:string>#ms#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model_set#</dia:string>
+                <dia:string>#entities::model_set#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -7928,7 +7928,7 @@ graph.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model#</dia:string>
+                <dia:string>#entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8394,7 +8394,7 @@ graph.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model#</dia:string>
+                <dia:string>#entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

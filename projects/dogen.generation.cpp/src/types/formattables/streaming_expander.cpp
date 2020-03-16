@@ -23,7 +23,7 @@
 #include "dogen.generation.cpp/types/traits.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
-#include "dogen.logical/types/meta_model/element.hpp"
+#include "dogen.logical/types/entities/element.hpp"
 #include "dogen.generation.cpp/io/formattables/streaming_properties_io.hpp"
 #include "dogen.generation.cpp/types/formattables/streaming_expander.hpp"
 
@@ -39,7 +39,7 @@ namespace dogen::generation::cpp::formattables {
 
 streaming_expander::feature_group
 streaming_expander::make_feature_group(
-    const variability::meta_model::feature_model& fm) const {
+    const variability::entities::feature_model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Creating feature group.";
 
     feature_group r;
@@ -62,7 +62,7 @@ streaming_expander::make_feature_group(
 boost::optional<streaming_properties>
 streaming_expander::
 make_streaming_properties(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) const {
+    const variability::entities::configuration& cfg) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating streaming properties.";
     bool found_any(false);
@@ -97,7 +97,7 @@ make_streaming_properties(const feature_group& fg,
 
 
 void streaming_expander::
-expand(const variability::meta_model::feature_model& feature_model,
+expand(const variability::entities::feature_model& feature_model,
     model& fm) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started expanding streaming properties.";

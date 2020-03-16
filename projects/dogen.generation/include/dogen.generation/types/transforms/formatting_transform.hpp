@@ -26,42 +26,42 @@
 #endif
 
 #include <string>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
-#include "dogen.generation/types/meta_model/model.hpp"
+#include "dogen.generation/types/entities/model.hpp"
 #include "dogen.generation/types/features/formatting.hpp"
-#include "dogen.logical/types/meta_model/formatting_styles.hpp"
+#include "dogen.logical/types/entities/formatting_styles.hpp"
 #include "dogen.generation/types/transforms/formatting_configuration.hpp"
 
 namespace dogen::generation::transforms {
 
 class formatting_transform final {
 private:
-    static meta_model::formatting_styles
+    static entities::formatting_styles
     to_formatting_style(const std::string& s);
 
 private:
     struct feature_group {
-        variability::meta_model::feature formatting_style;
-        variability::meta_model::feature formatting_input;
+        variability::entities::feature formatting_style;
+        variability::entities::feature formatting_input;
     };
 
     static std::unordered_map<std::string, feature_group>
-    make_feature_groups(const variability::meta_model::feature_model& fm,
+    make_feature_groups(const variability::entities::feature_model& fm,
         const std::list<physical::location>& als);
 
     static std::unordered_map<std::string, formatting_configuration>
     make_formatting_configuration(
         const std::unordered_map<std::string, feature_group>& fgs,
-        const variability::meta_model::configuration& cfg);
+        const variability::entities::configuration& cfg);
 
     static void apply(const std::unordered_map<std::string, feature_group> fgs,
-        logical::meta_model::element& e);
+        logical::entities::element& e);
 
 public:
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

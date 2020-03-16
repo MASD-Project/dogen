@@ -23,8 +23,8 @@
 namespace dogen::variability::transforms {
 
 profile_repository_inputs::profile_repository_inputs(
-    const std::list<dogen::variability::meta_model::profile>& profiles,
-    const std::list<dogen::variability::meta_model::profile_template>& templates)
+    const std::list<dogen::variability::entities::profile>& profiles,
+    const std::list<dogen::variability::entities::profile_template>& templates)
     : profiles_(profiles),
       templates_(templates) { }
 
@@ -45,35 +45,35 @@ profile_repository_inputs& profile_repository_inputs::operator=(profile_reposito
     return *this;
 }
 
-const std::list<dogen::variability::meta_model::profile>& profile_repository_inputs::profiles() const {
+const std::list<dogen::variability::entities::profile>& profile_repository_inputs::profiles() const {
     return profiles_;
 }
 
-std::list<dogen::variability::meta_model::profile>& profile_repository_inputs::profiles() {
+std::list<dogen::variability::entities::profile>& profile_repository_inputs::profiles() {
     return profiles_;
 }
 
-void profile_repository_inputs::profiles(const std::list<dogen::variability::meta_model::profile>& v) {
+void profile_repository_inputs::profiles(const std::list<dogen::variability::entities::profile>& v) {
     profiles_ = v;
 }
 
-void profile_repository_inputs::profiles(const std::list<dogen::variability::meta_model::profile>&& v) {
+void profile_repository_inputs::profiles(const std::list<dogen::variability::entities::profile>&& v) {
     profiles_ = std::move(v);
 }
 
-const std::list<dogen::variability::meta_model::profile_template>& profile_repository_inputs::templates() const {
+const std::list<dogen::variability::entities::profile_template>& profile_repository_inputs::templates() const {
     return templates_;
 }
 
-std::list<dogen::variability::meta_model::profile_template>& profile_repository_inputs::templates() {
+std::list<dogen::variability::entities::profile_template>& profile_repository_inputs::templates() {
     return templates_;
 }
 
-void profile_repository_inputs::templates(const std::list<dogen::variability::meta_model::profile_template>& v) {
+void profile_repository_inputs::templates(const std::list<dogen::variability::entities::profile_template>& v) {
     templates_ = v;
 }
 
-void profile_repository_inputs::templates(const std::list<dogen::variability::meta_model::profile_template>&& v) {
+void profile_repository_inputs::templates(const std::list<dogen::variability::entities::profile_template>&& v) {
     templates_ = std::move(v);
 }
 

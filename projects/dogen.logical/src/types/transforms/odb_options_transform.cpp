@@ -22,10 +22,10 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
-#include "dogen.logical/io/meta_model/orm/letter_case_io.hpp"
-#include "dogen.logical/io/meta_model/orm/database_system_io.hpp"
-#include "dogen.logical/types/meta_model/orm/common_odb_options.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/io/entities/orm/letter_case_io.hpp"
+#include "dogen.logical/io/entities/orm/database_system_io.hpp"
+#include "dogen.logical/types/entities/orm/common_odb_options.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/odb_options_transform.hpp"
 
@@ -57,8 +57,8 @@ const std::string invalid_case("Letter case is invalid or unsupported: ");
 namespace dogen::logical::transforms {
 
 std::string odb_options_transform::
-to_odb_database(const logical::meta_model::orm::database_system ds) {
-    using logical::meta_model::orm::database_system;
+to_odb_database(const logical::entities::orm::database_system ds) {
+    using logical::entities::orm::database_system;
 
     switch (ds) {
     case database_system::mysql: return mysql;
@@ -75,8 +75,8 @@ to_odb_database(const logical::meta_model::orm::database_system ds) {
 }
 
 std::string odb_options_transform::
-to_odb_sql_name_case(const logical::meta_model::orm::letter_case lc) {
-    using logical::meta_model::orm::letter_case;
+to_odb_sql_name_case(const logical::entities::orm::letter_case lc) {
+    using logical::entities::orm::letter_case;
 
     switch (lc) {
     case letter_case::upper_case: return upper_case;
@@ -89,7 +89,7 @@ to_odb_sql_name_case(const logical::meta_model::orm::letter_case lc) {
 }
 
 std::list<std::string> odb_options_transform::
-make_databases(const logical::meta_model::orm::model_properties& omp) {
+make_databases(const logical::entities::orm::model_properties& omp) {
     std::list<std::string> r;
 
     if (omp.database_systems().size() > 1)
@@ -101,7 +101,7 @@ make_databases(const logical::meta_model::orm::model_properties& omp) {
     return r;
 }
 
-void odb_options_transform::apply(const context& ctx, meta_model::model& m) {
+void odb_options_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "ODB options transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 

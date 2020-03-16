@@ -27,7 +27,7 @@
 
 #include <unordered_set>
 #include <boost/filesystem/path.hpp>
-#include "dogen.injection/types/meta_model/model_set.hpp"
+#include "dogen.injection/types/entities/model_set.hpp"
 #include "dogen.injection/types/transforms/context_fwd.hpp"
 #include "dogen.injection/types/helpers/references_resolver.hpp"
 
@@ -42,13 +42,13 @@ private:
     obtain_directory_list(const context& ctx,
         const boost::filesystem::path& target_path);
 
-    static std::list<meta_model::model>
+    static std::list<entities::model>
     transform(const context& ctx, const helpers::references_resolver& res,
         const boost::filesystem::path& p,
         std::unordered_set<std::string>& processed_models);
 
 public:
-    static meta_model::model_set
+    static entities::model_set
     apply(const context& ctx, const boost::filesystem::path& p);
 };
 

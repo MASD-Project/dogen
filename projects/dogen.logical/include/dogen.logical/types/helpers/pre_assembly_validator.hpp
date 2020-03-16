@@ -25,13 +25,13 @@
 #pragma once
 #endif
 
-#include "dogen.logical/types/meta_model/model.hpp"
+#include "dogen.logical/types/entities/model.hpp"
 
 namespace dogen::logical::helpers {
 
 class pre_assembly_validator final {
 public:
-    static void validate(const meta_model::model& m);
+    static void validate(const entities::model& m);
 };
 
 }

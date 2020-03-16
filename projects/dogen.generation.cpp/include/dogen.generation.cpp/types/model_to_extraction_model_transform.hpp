@@ -32,10 +32,10 @@
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen.variability/types/helpers/configuration_factory.hpp"
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.generation/types/meta_model/model.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.generation/types/entities/model.hpp"
 #include "dogen.generation/types/transforms/model_to_extraction_model_transform_interface.hpp"
 #include "dogen.generation.cpp/types/formatters/repository.hpp"
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
@@ -69,29 +69,29 @@ private:
      * @brief Create the formattables representation of the yarn model.
      */
     formattables::model create_formattables_model(
-        const variability::meta_model::feature_model& feature_model,
-        const variability::meta_model::configuration& rcfg,
+        const variability::entities::feature_model& feature_model,
+        const variability::entities::configuration& rcfg,
         const formatters::repository& frp, const formattables::locator& l,
-        const generation::meta_model::model& m) const;
+        const generation::entities::model& m) const;
 
     /**
      * @brief Creates a file locator.
      */
     formattables::locator make_locator(
         const boost::filesystem::path& output_directory_path,
-        const variability::meta_model::feature_model& fm,
-        const variability::meta_model::configuration& cfg,
+        const variability::entities::feature_model& fm,
+        const variability::entities::configuration& cfg,
         const formatters::repository& frp,
         const bool enable_backend_directories,
-        const generation::meta_model::model& m) const;
+        const generation::entities::model& m) const;
 
     /**
      * @brief Create the files representation of the formattables model.
      */
-    std::list<extraction::meta_model::artefact>
-    format(const std::unordered_set<generation::meta_model::element_archetype>&
+    std::list<extraction::entities::artefact>
+    format(const std::unordered_set<generation::entities::element_archetype>&
         enabled_archetype_for_element, const formattables::locator& l,
-        const variability::meta_model::feature_model& feature_model,
+        const variability::entities::feature_model& feature_model,
         const variability::helpers::configuration_factory& cf,
         const formattables::model& fm) const;
 
@@ -119,16 +119,16 @@ public:
     const physical::location_repository_parts&
     archetype_location_repository_parts() const override;
 
-    logical::meta_model::technical_space technical_space() const override;
+    logical::entities::technical_space technical_space() const override;
 
     std::unordered_map<std::string,
-                       generation::meta_model::intra_backend_segment_properties>
+                       generation::entities::intra_backend_segment_properties>
     intra_backend_segment_properties() const override;
 
-    extraction::meta_model::model
+    extraction::entities::model
     apply(const generation::transforms::context& ctx,
         const bool enable_backend_directories,
-        const generation::meta_model::model& m) const override;
+        const generation::entities::model& m) const override;
 };
 
 }

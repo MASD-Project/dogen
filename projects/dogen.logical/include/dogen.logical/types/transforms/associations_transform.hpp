@@ -27,12 +27,12 @@
 
 #include <list>
 #include <unordered_set>
-#include "dogen.logical/types/meta_model/name.hpp"
-#include "dogen.logical/types/meta_model/model.hpp"
-#include "dogen.logical/hash/meta_model/name_hash.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/variability/feature_bundle.hpp"
-#include "dogen.logical/types/meta_model/variability/feature_template_bundle.hpp"
+#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/hash/entities/name_hash.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/variability/feature_bundle.hpp"
+#include "dogen.logical/types/entities/variability/feature_template_bundle.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 
 namespace dogen::logical::transforms {
@@ -64,26 +64,26 @@ private:
     /**
      * @brief Processes a specific object.
      */
-    static void process_object(const meta_model::model& m,
-        meta_model::structural::object& o);
+    static void process_object(const entities::model& m,
+        entities::structural::object& o);
 
     /**
      * @brief Processes a feature template bundle.
      */
-    static void process_feature_template_bundle(const meta_model::model& m,
-        meta_model::variability::feature_template_bundle& fb);
+    static void process_feature_template_bundle(const entities::model& m,
+        entities::variability::feature_template_bundle& fb);
 
         /**
      * @brief Processes a feature bundle.
      */
-    static void process_feature_bundle(const meta_model::model& m,
-        meta_model::variability::feature_bundle& fb);
+    static void process_feature_bundle(const entities::model& m,
+        entities::variability::feature_bundle& fb);
 
 public:
     /**
      * @brief Transforms all association relationships on all objects.
      */
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

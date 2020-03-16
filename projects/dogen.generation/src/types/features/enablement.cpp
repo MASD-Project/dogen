@@ -25,9 +25,9 @@ namespace dogen::generation::features {
 
 namespace {
 
-dogen::variability::meta_model::feature_template
+dogen::variability::entities::feature_template
 make_enabled() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature_template r;
     r.name().simple("enabled");
     r.description(R"(If true, decorations are enabled on this modeling element.
@@ -45,10 +45,10 @@ make_enabled() {
 }
 
 
-std::list<dogen::variability::meta_model::feature_template>
+std::list<dogen::variability::entities::feature_template>
 enablement::make_templates() {
-    using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature_template> r;
     r.push_back(make_enabled());
     return r;
 }

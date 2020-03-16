@@ -26,9 +26,9 @@
 #endif
 
 #include <boost/optional.hpp>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.generation.csharp/types/formattables/model.hpp"
 #include "dogen.generation.csharp/types/formattables/assistant_properties.hpp"
 
@@ -37,19 +37,19 @@ namespace dogen::generation::csharp::formattables {
 class assistant_expander final {
 private:
     struct feature_group {
-        variability::meta_model::feature requires_assistance;
-        variability::meta_model::feature method_postfix;
+        variability::entities::feature requires_assistance;
+        variability::entities::feature method_postfix;
     };
 
     feature_group make_feature_group(
-        const variability::meta_model::feature_model& fm) const;
+        const variability::entities::feature_model& fm) const;
 
     boost::optional<assistant_properties>
     make_assistant_properties(const feature_group& fg,
-        const variability::meta_model::configuration& cfg) const;
+        const variability::entities::configuration& cfg) const;
 
 public:
-    void expand(const variability::meta_model::feature_model& feature_model,
+    void expand(const variability::entities::feature_model& feature_model,
         model& fm) const;
 };
 

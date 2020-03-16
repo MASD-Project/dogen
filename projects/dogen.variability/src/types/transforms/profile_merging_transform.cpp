@@ -22,10 +22,10 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.variability/io/meta_model/profile_io.hpp"
+#include "dogen.variability/io/entities/profile_io.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
-#include "dogen.variability/io/meta_model/profile_repository_io.hpp"
+#include "dogen.variability/io/entities/profile_repository_io.hpp"
 #include "dogen.variability/types/helpers/configuration_point_merger.hpp"
 #include "dogen.variability/types/transforms/transformation_error.hpp"
 #include "dogen.variability/types/transforms/profile_merging_transform.hpp"
@@ -52,7 +52,7 @@ const std::string profile_field("masd.variability.profile");
 namespace dogen::variability::transforms {
 
 profile_merging_transform::feature_group profile_merging_transform::
-make_feature_group(const meta_model::feature_model& fm) {
+make_feature_group(const entities::feature_model& fm) {
     BOOST_LOG_SEV(lg, debug) << "Creating feature group.";
 
     feature_group r;
@@ -65,7 +65,7 @@ make_feature_group(const meta_model::feature_model& fm) {
 
 std::string
 profile_merging_transform::obtain_profile_name(const feature_group& fg,
-    const meta_model::configuration& cfg) {
+    const entities::configuration& cfg) {
 
     BOOST_LOG_SEV(lg, debug) << "Reading profile name.";
     const helpers::configuration_selector s(cfg);
@@ -78,9 +78,9 @@ profile_merging_transform::obtain_profile_name(const feature_group& fg,
 }
 
 
-const meta_model::profile& profile_merging_transform::
+const entities::profile& profile_merging_transform::
 walk_up_parent_tree_and_merge(const std::string& current,
-    std::unordered_map<std::string, meta_model::profile>& pm) {
+    std::unordered_map<std::string, entities::profile>& pm) {
     BOOST_LOG_SEV(lg, debug) << "Merging profile: " << current;
 
     /*
@@ -132,9 +132,9 @@ walk_up_parent_tree_and_merge(const std::string& current,
     return i->second;
 }
 
-std::unordered_map<std::string, meta_model::profile> profile_merging_transform::
-create_profile_map(const std::list<meta_model::profile>& profiles) {
-    std::unordered_map<std::string, meta_model::profile> r;
+std::unordered_map<std::string, entities::profile> profile_merging_transform::
+create_profile_map(const std::list<entities::profile>& profiles) {
+    std::unordered_map<std::string, entities::profile> r;
     for (const auto& prf : profiles) {
         const auto prfn(prf.name().qualified());
         const auto pair(std::make_pair(prfn, prf));
@@ -154,7 +154,7 @@ create_profile_map(const std::list<meta_model::profile>& profiles) {
 }
 
 void profile_merging_transform::
-validate(const std::unordered_map<std::string, meta_model::profile>& pm) {
+validate(const std::unordered_map<std::string, entities::profile>& pm) {
     BOOST_LOG_SEV(lg, debug) << "Validating profiles.";
     /*
      * We expect at least one profile. If there are no profiles, there
@@ -206,7 +206,7 @@ validate(const std::unordered_map<std::string, meta_model::profile>& pm) {
 }
 
 void profile_merging_transform::
-merge(std::unordered_map<std::string, meta_model::profile>& pm) {
+merge(std::unordered_map<std::string, entities::profile>& pm) {
     BOOST_LOG_SEV(lg, debug) << "Merging profiles. Total: " << pm.size();
     for (const auto& pair : pm) {
         const auto current(pair.first);
@@ -216,8 +216,8 @@ merge(std::unordered_map<std::string, meta_model::profile>& pm) {
 }
 
 void profile_merging_transform::
-populate_base_layer(const meta_model::feature_model& fm,
-    std::unordered_map<std::string, meta_model::profile>& pm) {
+populate_base_layer(const entities::feature_model& fm,
+    std::unordered_map<std::string, entities::profile>& pm) {
 
     const auto fg(make_feature_group(fm));
     for (auto& pair : pm) {
@@ -227,7 +227,7 @@ populate_base_layer(const meta_model::feature_model& fm,
          * FIXME: big hack. Create a temporary configuration just so
          * we can read the base profile name from the profile.
          */
-        meta_model::configuration cfg;
+        entities::configuration cfg;
         cfg.configuration_points(profile.configuration_points());
         const auto bl(obtain_profile_name(fg, cfg));
         if (!bl.empty()) {
@@ -237,13 +237,13 @@ populate_base_layer(const meta_model::feature_model& fm,
     }
 }
 
-meta_model::profile_repository profile_merging_transform::create_repository(
-    const std::unordered_map<std::string, meta_model::profile>& pm) {
+entities::profile_repository profile_merging_transform::create_repository(
+    const std::unordered_map<std::string, entities::profile>& pm) {
     /*
      * First we insert the profile against its name. This is just a
      * copy of the map as it already exists.
      */
-    meta_model::profile_repository r;
+    entities::profile_repository r;
     r.by_name(pm);
 
     /*
@@ -273,10 +273,10 @@ meta_model::profile_repository profile_merging_transform::create_repository(
     return r;
 }
 
-meta_model::profile_repository
+entities::profile_repository
 profile_merging_transform::apply(const context& ctx,
-    const meta_model::feature_model& fm,
-    const std::list<meta_model::profile>& profiles) {
+    const entities::feature_model& fm,
+    const std::list<entities::profile>& profiles) {
     tracing::scoped_transform_tracer stp(lg, "profile merging transform",
         transform_id, transform_id, *ctx.tracer(), profiles);
 

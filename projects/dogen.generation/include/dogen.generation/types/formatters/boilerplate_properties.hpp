@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include "dogen.logical/types/meta_model/technical_space.hpp"
+#include "dogen.logical/types/entities/technical_space.hpp"
 
 namespace dogen::generation::formatters {
 
@@ -47,7 +47,7 @@ public:
         const std::string& postamble,
         const std::list<std::string>& dependencies,
         const std::string& header_guard,
-        const dogen::logical::meta_model::technical_space technical_space,
+        const dogen::logical::entities::technical_space technical_space,
         const bool generate_preamble,
         const bool generate_header_guards);
 
@@ -72,8 +72,8 @@ public:
     void header_guard(const std::string& v);
     void header_guard(const std::string&& v);
 
-    dogen::logical::meta_model::technical_space technical_space() const;
-    void technical_space(const dogen::logical::meta_model::technical_space v);
+    dogen::logical::entities::technical_space technical_space() const;
+    void technical_space(const dogen::logical::entities::technical_space v);
 
     bool generate_preamble() const;
     void generate_preamble(const bool v);
@@ -96,7 +96,7 @@ private:
     std::string postamble_;
     std::list<std::string> dependencies_;
     std::string header_guard_;
-    dogen::logical::meta_model::technical_space technical_space_;
+    dogen::logical::entities::technical_space technical_space_;
     bool generate_preamble_;
     bool generate_header_guards_;
 };

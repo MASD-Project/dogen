@@ -26,7 +26,7 @@
 #endif
 
 #include <list>
-#include "dogen.variability/types/meta_model/feature_template.hpp"
+#include "dogen.variability/types/entities/feature_template.hpp"
 
 namespace dogen::generation::features {
 
@@ -36,7 +36,7 @@ namespace dogen::generation::features {
 class enablement final {
 
 public:
-    static std::list<dogen::variability::meta_model::feature_template>
+    static std::list<dogen::variability::entities::feature_template>
     make_templates();
 };
 

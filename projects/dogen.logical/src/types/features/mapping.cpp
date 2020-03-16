@@ -27,9 +27,9 @@ namespace dogen::logical::features {
 
 namespace {
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_mapping_target() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("target");
     r.name().qualified("masd.mapping.target");
@@ -42,9 +42,9 @@ make_masd_mapping_target() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_mapping_destination() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("destination");
     r.name().qualified("masd.mapping.destination");
@@ -60,7 +60,7 @@ make_masd_mapping_destination() {
 }
 
 mapping::feature_group
-mapping::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+mapping::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
@@ -72,7 +72,7 @@ mapping::make_feature_group(const dogen::variability::meta_model::feature_model&
 
 mapping::static_configuration mapping::make_static_configuration(
     const feature_group& fg,
-    const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::entities::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
@@ -83,10 +83,10 @@ mapping::static_configuration mapping::make_static_configuration(
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature>
+std::list<dogen::variability::entities::feature>
 mapping::make_features() {
-    using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature> r;
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature> r;
     r.push_back(make_masd_mapping_target());
     r.push_back(make_masd_mapping_destination());
     return r;

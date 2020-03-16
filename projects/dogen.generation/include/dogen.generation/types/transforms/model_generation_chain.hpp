@@ -26,14 +26,14 @@
 #endif
 
 #include <list>
-#include "dogen.generation/types/meta_model/model.hpp"
+#include "dogen.generation/types/entities/model.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
 
 namespace dogen::generation::transforms {
 
 class model_generation_chain final {
 public:
-    static void apply(const context& ctx, std::list<meta_model::model>& ms);
+    static void apply(const context& ctx, std::list<entities::model>& ms);
 };
 
 }

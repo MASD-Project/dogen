@@ -195,7 +195,7 @@ case.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#meta_model#</dia:string>
+        <dia:string>#entities#</dia:string>
       </dia:attribute>
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O2">
@@ -4577,7 +4577,7 @@ elements.#</dia:string>
                 <dia:string>#fm#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::feature_model#</dia:string>
+                <dia:string>#entities::feature_model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -4599,7 +4599,7 @@ elements.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;meta_model::feature&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;entities::feature&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4647,7 +4647,7 @@ elements.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::optional&lt;meta_model::feature&gt;#</dia:string>
+            <dia:string>#boost::optional&lt;entities::feature&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4712,7 +4712,7 @@ elements.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::feature#</dia:string>
+            <dia:string>#entities::feature#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4760,7 +4760,7 @@ elements.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::feature#</dia:string>
+            <dia:string>#entities::feature#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4937,7 +4937,7 @@ elements.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::feature_model#</dia:string>
+            <dia:string>#entities::feature_model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5097,7 +5097,7 @@ elements.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;meta_model::feature&gt;#</dia:string>
+            <dia:string>#std::list&lt;entities::feature&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5274,7 +5274,7 @@ elements.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::feature_model#</dia:string>
+            <dia:string>#entities::feature_model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5300,7 +5300,7 @@ elements.#</dia:string>
                 <dia:string>#fs#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::list&lt;meta_model::feature&gt;#</dia:string>
+                <dia:string>#std::list&lt;entities::feature&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -5434,7 +5434,7 @@ elements.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::profile_repository#</dia:string>
+            <dia:string>#entities::profile_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5477,7 +5477,7 @@ elements.#</dia:string>
                 <dia:string>#fm#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::feature_model#</dia:string>
+                <dia:string>#entities::feature_model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -5848,7 +5848,7 @@ elements.#</dia:string>
                 <dia:string>#fm#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::feature_model#</dia:string>
+                <dia:string>#entities::feature_model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -5887,7 +5887,7 @@ elements.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::configuration#</dia:string>
+            <dia:string>#entities::configuration#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5930,7 +5930,7 @@ elements.#</dia:string>
                 <dia:string>#bt#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::binding_type#</dia:string>
+                <dia:string>#entities::binding_type#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -5995,7 +5995,7 @@ elements.#</dia:string>
                 <dia:string>#bt#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::binding_type#</dia:string>
+                <dia:string>#entities::binding_type#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6129,7 +6129,7 @@ elements.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::configuration#</dia:string>
+            <dia:string>#entities::configuration#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6172,7 +6172,7 @@ elements.#</dia:string>
                 <dia:string>#prp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::profile_repository#</dia:string>
+                <dia:string>#entities::profile_repository#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6189,7 +6189,7 @@ elements.#</dia:string>
                 <dia:string>#fm#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::feature_model#</dia:string>
+                <dia:string>#entities::feature_model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6206,7 +6206,7 @@ elements.#</dia:string>
                 <dia:string>#cm#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::configuration_model_set#</dia:string>
+                <dia:string>#entities::configuration_model_set#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6340,7 +6340,7 @@ elements.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::configuration#</dia:string>
+            <dia:string>#entities::configuration#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6366,7 +6366,7 @@ elements.#</dia:string>
                 <dia:string>#lhs#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::unordered_map&lt;std::string, meta_model::configuration_point&gt;#</dia:string>
+                <dia:string>#std::unordered_map&lt;std::string, entities::configuration_point&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6383,7 +6383,7 @@ elements.#</dia:string>
                 <dia:string>#rhs#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::unordered_map&lt;std::string, meta_model::configuration_point&gt;#</dia:string>
+                <dia:string>#std::unordered_map&lt;std::string, entities::configuration_point&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6889,7 +6889,7 @@ user choices.#</dia:string>
                 <dia:string>#prp#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::profile_repository#</dia:string>
+                <dia:string>#entities::profile_repository#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -7167,7 +7167,7 @@ user choices.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;meta_model::value&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;entities::value&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7215,7 +7215,7 @@ user choices.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;meta_model::value&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;entities::value&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7263,7 +7263,7 @@ user choices.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;meta_model::value&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;entities::value&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7311,7 +7311,7 @@ user choices.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;meta_model::value&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;entities::value&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7359,7 +7359,7 @@ user choices.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;meta_model::value&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;entities::value&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7407,7 +7407,7 @@ user choices.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;meta_model::value&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;entities::value&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7455,7 +7455,7 @@ user choices.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;meta_model::value&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;entities::value&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7503,7 +7503,7 @@ user choices.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;meta_model::value&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;entities::value&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7529,7 +7529,7 @@ user choices.#</dia:string>
                 <dia:string>#f#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::feature#</dia:string>
+                <dia:string>#entities::feature#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -7568,7 +7568,7 @@ user choices.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;meta_model::value&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;entities::value&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7594,7 +7594,7 @@ user choices.#</dia:string>
                 <dia:string>#f#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::feature&gt;#</dia:string>
+                <dia:string>#entities::feature&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8847,7 +8847,7 @@ with Masd.
                 <dia:string>#c#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::configuration#</dia:string>
+                <dia:string>#entities::configuration#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8943,7 +8943,7 @@ with Masd.
                 <dia:string>#f#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::feature#</dia:string>
+                <dia:string>#entities::feature#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9039,7 +9039,7 @@ with Masd.
                 <dia:string>#v#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::value#</dia:string>
+                <dia:string>#entities::value#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9135,7 +9135,7 @@ with Masd.
                 <dia:string>#f#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::feature#</dia:string>
+                <dia:string>#entities::feature#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9183,7 +9183,7 @@ with Masd.
                 <dia:string>#f#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::feature#</dia:string>
+                <dia:string>#entities::feature#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9231,7 +9231,7 @@ with Masd.
                 <dia:string>#v#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::value#</dia:string>
+                <dia:string>#entities::value#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9327,7 +9327,7 @@ with Masd.
                 <dia:string>#f#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::feature#</dia:string>
+                <dia:string>#entities::feature#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9375,7 +9375,7 @@ with Masd.
                 <dia:string>#f#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::feature#</dia:string>
+                <dia:string>#entities::feature#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9423,7 +9423,7 @@ with Masd.
                 <dia:string>#v#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::value#</dia:string>
+                <dia:string>#entities::value#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9519,7 +9519,7 @@ with Masd.
                 <dia:string>#f#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::feature#</dia:string>
+                <dia:string>#entities::feature#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9567,7 +9567,7 @@ with Masd.
                 <dia:string>#f#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::feature#</dia:string>
+                <dia:string>#entities::feature#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9615,7 +9615,7 @@ with Masd.
                 <dia:string>#v#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::value#</dia:string>
+                <dia:string>#entities::value#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9711,7 +9711,7 @@ with Masd.
                 <dia:string>#f#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::feature#</dia:string>
+                <dia:string>#entities::feature#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9759,7 +9759,7 @@ with Masd.
                 <dia:string>#f#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::feature#</dia:string>
+                <dia:string>#entities::feature#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9807,7 +9807,7 @@ with Masd.
                 <dia:string>#v#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::value#</dia:string>
+                <dia:string>#entities::value#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9903,7 +9903,7 @@ with Masd.
                 <dia:string>#f#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::feature#</dia:string>
+                <dia:string>#entities::feature#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -10183,7 +10183,7 @@ with Masd.
                 <dia:string>#ft#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::feature_template#</dia:string>
+                <dia:string>#entities::feature_template#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -10205,7 +10205,7 @@ with Masd.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::profile#</dia:string>
+            <dia:string>#entities::profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -10231,7 +10231,7 @@ with Masd.
                 <dia:string>#pt#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::profile_template#</dia:string>
+                <dia:string>#entities::profile_template#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13148,7 +13148,7 @@ with Masd.
                 <dia:string>#cms#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::configuration_model_set#</dia:string>
+                <dia:string>#entities::configuration_model_set#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13716,7 +13716,7 @@ alias.#</dia:string>
             <dia:string>#templates_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::feature_template_repository#</dia:string>
+            <dia:string>#entities::feature_template_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -13739,7 +13739,7 @@ alias.#</dia:string>
             <dia:string>#features_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::feature_repository#</dia:string>
+            <dia:string>#entities::feature_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -13793,7 +13793,7 @@ alias.#</dia:string>
                 <dia:string>#fts#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::list&lt;meta_model::feature_template&gt;#</dia:string>
+                <dia:string>#std::list&lt;entities::feature_template&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13841,7 +13841,7 @@ alias.#</dia:string>
                 <dia:string>#fs#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::list&lt;meta_model::feature&gt;#</dia:string>
+                <dia:string>#std::list&lt;entities::feature&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13863,7 +13863,7 @@ alias.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::feature_template_repository#</dia:string>
+            <dia:string>#entities::feature_template_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -13893,7 +13893,7 @@ alias.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::feature_repository#</dia:string>
+            <dia:string>#entities::feature_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14035,7 +14035,7 @@ alias.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::value_type#</dia:string>
+            <dia:string>#entities::value_type#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14083,7 +14083,7 @@ alias.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::binding_point#</dia:string>
+            <dia:string>#entities::binding_point#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14131,7 +14131,7 @@ alias.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::template_kind#</dia:string>
+            <dia:string>#entities::template_kind#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -14205,7 +14205,7 @@ alias.#</dia:string>
                 <dia:string>#v#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::value_type#</dia:string>
+                <dia:string>#entities::value_type#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14253,7 +14253,7 @@ alias.#</dia:string>
                 <dia:string>#v#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::binding_point#</dia:string>
+                <dia:string>#entities::binding_point#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14301,7 +14301,7 @@ alias.#</dia:string>
                 <dia:string>#v#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::template_kind#</dia:string>
+                <dia:string>#entities::template_kind#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14985,7 +14985,7 @@ alias.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::feature_model#</dia:string>
+                <dia:string>#entities::feature_model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -15033,7 +15033,7 @@ alias.#</dia:string>
                 <dia:string>#cfg#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::configuration#</dia:string>
+                <dia:string>#entities::configuration#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -15081,7 +15081,7 @@ alias.#</dia:string>
                 <dia:string>#ftr#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::feature_template_repository#</dia:string>
+                <dia:string>#entities::feature_template_repository#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -15177,7 +15177,7 @@ alias.#</dia:string>
                 <dia:string>#features#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::list&lt;meta_model::feature&gt;#</dia:string>
+                <dia:string>#std::list&lt;entities::feature&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -16027,7 +16027,7 @@ alias.#</dia:string>
             <dia:string>#profiles#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;meta_model::profile&gt;#</dia:string>
+            <dia:string>#std::list&lt;entities::profile&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -16050,7 +16050,7 @@ alias.#</dia:string>
             <dia:string>#templates#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;meta_model::profile_template&gt;#</dia:string>
+            <dia:string>#std::list&lt;entities::profile_template&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

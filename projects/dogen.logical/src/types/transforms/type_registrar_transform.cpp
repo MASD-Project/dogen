@@ -21,12 +21,12 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/io/meta_model/origin_types_io.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/io/entities/origin_types_io.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
-#include "dogen.logical/types/meta_model/serialization/type_registrar.hpp"
+#include "dogen.logical/types/entities/serialization/type_registrar.hpp"
 #include "dogen.logical/types/transforms/type_registrar_transform.hpp"
 
 namespace {
@@ -43,7 +43,7 @@ const std::string missing_leaf("Could not locate leaf: ");
 
 namespace dogen::logical::transforms {
 
-void type_registrar_transform::apply(const context& ctx, meta_model::model& m) {
+void type_registrar_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "type registrar transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
@@ -55,10 +55,10 @@ void type_registrar_transform::apply(const context& ctx, meta_model::model& m) {
         return;
     }
 
-    using meta_model::name;
-    using meta_model::origin_types;
+    using entities::name;
+    using entities::origin_types;
     std::list<name> registrar_dependencies;
-    using meta_model::serialization::type_registrar;
+    using entities::serialization::type_registrar;
     boost::shared_ptr<type_registrar> target_registrar;
     for (auto& pair : m.serialization_elements().type_registrars()) {
         auto& rg(*pair.second);

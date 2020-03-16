@@ -27,7 +27,7 @@
 
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen.logical/types/meta_model/name.hpp"
+#include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/helpers/mapping_actions.hpp"
 
 namespace dogen::logical::helpers {
@@ -49,16 +49,16 @@ public:
 public:
     mapping_value(
         const dogen::logical::helpers::mapping_actions mapping_action,
-        const boost::optional<dogen::logical::meta_model::name>& default_name);
+        const boost::optional<dogen::logical::entities::name>& default_name);
 
 public:
     dogen::logical::helpers::mapping_actions mapping_action() const;
     void mapping_action(const dogen::logical::helpers::mapping_actions v);
 
-    const boost::optional<dogen::logical::meta_model::name>& default_name() const;
-    boost::optional<dogen::logical::meta_model::name>& default_name();
-    void default_name(const boost::optional<dogen::logical::meta_model::name>& v);
-    void default_name(const boost::optional<dogen::logical::meta_model::name>&& v);
+    const boost::optional<dogen::logical::entities::name>& default_name() const;
+    boost::optional<dogen::logical::entities::name>& default_name();
+    void default_name(const boost::optional<dogen::logical::entities::name>& v);
+    void default_name(const boost::optional<dogen::logical::entities::name>&& v);
 
 public:
     bool operator==(const mapping_value& rhs) const;
@@ -72,7 +72,7 @@ public:
 
 private:
     dogen::logical::helpers::mapping_actions mapping_action_;
-    boost::optional<dogen::logical::meta_model::name> default_name_;
+    boost::optional<dogen::logical::entities::name> default_name_;
 };
 
 }

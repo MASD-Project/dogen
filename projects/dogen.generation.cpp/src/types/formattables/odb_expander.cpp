@@ -24,10 +24,10 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
-#include "dogen.logical/types/meta_model/orm/odb_options.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/structural/primitive.hpp"
-#include "dogen.logical/types/meta_model/element_visitor.hpp"
+#include "dogen.logical/types/entities/orm/odb_options.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/primitive.hpp"
+#include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.generation.cpp/types/formattables/adapter.hpp"
 #include "dogen.generation.cpp/types/formattables/header_guard_factory.hpp"
 #include "dogen.generation.cpp/types/formatters/odb/traits.hpp"
@@ -51,20 +51,20 @@ const std::string value_pragma("value");
 
 namespace dogen::generation::cpp::formattables {
 
-using dogen::logical::meta_model::element_visitor;
+using dogen::logical::entities::element_visitor;
 
 class updator : public element_visitor {
 public:
     explicit updator(const locator& l);
 
 private:
-    logical::meta_model::orm::odb_options
-    make_options(const logical::meta_model::name& n);
+    logical::entities::orm::odb_options
+    make_options(const logical::entities::name& n);
 
 public:
     using element_visitor::visit;
-    void visit(logical::meta_model::structural::object& o);
-    void visit(logical::meta_model::structural::primitive& p);
+    void visit(logical::entities::structural::object& o);
+    void visit(logical::entities::structural::primitive& p);
 
 private:
     const locator locator_;
@@ -72,9 +72,9 @@ private:
 
 updator::updator(const locator& l) : locator_(l) {}
 
-logical::meta_model::orm::odb_options
-updator::make_options(const logical::meta_model::name& n) {
-    logical::meta_model::orm::odb_options r;
+logical::entities::orm::odb_options
+updator::make_options(const logical::entities::name& n) {
+    logical::entities::orm::odb_options r;
     const auto odb_arch(formatters::odb::traits::class_header_archetype());
     const auto odb_rp(locator_.make_inclusion_path_for_cpp_header(n, odb_arch));
 
@@ -103,12 +103,12 @@ updator::make_options(const logical::meta_model::name& n) {
     return r;
 }
 
-void updator::visit(logical::meta_model::structural::object& o) {
+void updator::visit(logical::entities::structural::object& o) {
     if (o.orm_properties())
         o.orm_properties()->odb_options(make_options(o.name()));
 }
 
-void updator::visit(logical::meta_model::structural::primitive& p) {
+void updator::visit(logical::entities::structural::primitive& p) {
     if (p.orm_properties())
         p.orm_properties()->odb_options(make_options(p.name()));
 }
@@ -130,7 +130,7 @@ void odb_expander::expand(const locator& l, model& m) const {
          * for referenced models.
          */
         auto& e(*formattable.element());
-        if (e.origin_type() != logical::meta_model::origin_types::target)
+        if (e.origin_type() != logical::entities::origin_types::target)
             continue;
 
         updator g(l);

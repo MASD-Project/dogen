@@ -22,15 +22,15 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/helpers/enum_mapper.hpp"
-#include "dogen.variability/lexical_cast/meta_model/binding_point_lc.hpp"
+#include "dogen.variability/lexical_cast/entities/binding_point_lc.hpp"
 #include "dogen.logical/types/traits.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
-#include "dogen.logical/types/meta_model/attribute.hpp"
-#include "dogen.logical/types/meta_model/variability/initializer.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/types/entities/attribute.hpp"
+#include "dogen.logical/types/entities/variability/initializer.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/helpers/string_processor.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
-#include "dogen.logical/types/meta_model/variability/abstract_feature.hpp"
+#include "dogen.logical/types/entities/variability/abstract_feature.hpp"
 #include "dogen.logical/types/transforms/variability_features_transform.hpp"
 
 namespace {
@@ -55,7 +55,7 @@ const std::string  bundle_generates_nothing(
 
 }
 
-namespace dogen::logical::meta_model {
+namespace dogen::logical::entities {
 
 inline bool operator<(const name& lhs, const name& rhs) {
     return lhs.qualified().dot() < rhs.qualified().dot();
@@ -67,16 +67,16 @@ namespace dogen::logical::transforms {
 
 void variability_features_transform::update(
     const features::variability_templates::feature_group& fg,
-    meta_model::variability::abstract_feature& af) {
+    entities::variability::abstract_feature& af) {
 
     using features::variability_templates;
     const auto scfg(variability_templates::make_static_configuration(fg, af));
     af.is_optional(scfg.is_optional);
 
-    auto ft(dynamic_cast<meta_model::variability::feature_template*>(&af));
+    auto ft(dynamic_cast<entities::variability::feature_template*>(&af));
     if (ft) {
         for (const auto& pair : scfg.default_value_override) {
-            meta_model::variability::default_value_override dvo;
+            entities::variability::default_value_override dvo;
             dvo.key_ends_with(pair.first);
             dvo.default_value(pair.second);
             ft->default_value_overrides().push_back(dvo);
@@ -84,14 +84,14 @@ void variability_features_transform::update(
     }
 
     using boost::lexical_cast;
-    using variability::meta_model::binding_point;
+    using variability::entities::binding_point;
     if (!scfg.binding_point.empty())
         af.binding_point(lexical_cast<binding_point>(scfg.binding_point));
 }
 
 void variability_features_transform::
 update(const features::variability_bundle::feature_group& fg,
-    meta_model::variability::abstract_bundle& fb) {
+    entities::variability::abstract_bundle& fb) {
 
     using features::variability_bundle;
     const auto scfg(variability_bundle::make_static_configuration(fg, fb));
@@ -100,7 +100,7 @@ update(const features::variability_bundle::feature_group& fg,
     fb.generate_static_configuration(scfg.generate_static_configuration);
 
     using boost::lexical_cast;
-    using meta_model::variability::feature_template_bundle;
+    using entities::variability::feature_template_bundle;
     auto ftb(dynamic_cast<feature_template_bundle*>(&fb));
     if (ftb) {
         if (scfg.instantiation_domain_name.empty()) {
@@ -112,7 +112,7 @@ update(const features::variability_bundle::feature_group& fg,
     }
 
     using boost::lexical_cast;
-    using variability::meta_model::binding_point;
+    using variability::entities::binding_point;
     if (!scfg.default_binding_point.empty()) {
         fb.default_binding_point(lexical_cast<binding_point>(
                 scfg.default_binding_point));
@@ -122,9 +122,9 @@ update(const features::variability_bundle::feature_group& fg,
 void variability_features_transform::process_abstract_feature(
     const features::variability_templates::feature_group& fg1,
     const std::unordered_map<std::string, std::string>& fixed_mappings,
-    const boost::optional<variability::meta_model::binding_point>&
+    const boost::optional<variability::entities::binding_point>&
     default_binding_point, const std::string& key_prefix,
-    meta_model::variability::abstract_feature& af) {
+    entities::variability::abstract_feature& af) {
 
     update(fg1, af);
 
@@ -187,7 +187,7 @@ void variability_features_transform::process_abstract_feature(
      * since it has not default) c) supplied and set to a value.
      */
     const bool has_default(!af.default_value().empty());
-    using variability::meta_model::value_type;
+    using variability::entities::value_type;
     const bool type_without_empty(
         af.value_type() == value_type::boolean ||
         af.value_type() == value_type::number);
@@ -221,9 +221,9 @@ void variability_features_transform::process_abstract_feature(
 
 void variability_features_transform::
 process_feature_template_bundles(
-    const variability::meta_model::feature_model& fm,
+    const variability::entities::feature_model& fm,
     const std::unordered_map<std::string, std::string>& fixed_mappings,
-    meta_model::model& m) {
+    entities::model& m) {
     /*
      * If there are no bundles, there is no work to do.
      */
@@ -267,9 +267,9 @@ process_feature_template_bundles(
 }
 
 void variability_features_transform::
-process_feature_bundles(const variability::meta_model::feature_model& fm,
+process_feature_bundles(const variability::entities::feature_model& fm,
     const std::unordered_map<std::string, std::string>& fixed_mappings,
-    meta_model::model& m) {
+    entities::model& m) {
     /*
      * If there are no bundles, there is no work to do.
      */
@@ -312,7 +312,7 @@ process_feature_bundles(const variability::meta_model::feature_model& fm,
     }
 }
 
-void variability_features_transform::process_initialiser(meta_model::model& m) {
+void variability_features_transform::process_initialiser(entities::model& m) {
     /*
      * If the user did not add an initialiser to the model, there is
      * nothing to be done.
@@ -356,7 +356,7 @@ void variability_features_transform::process_initialiser(meta_model::model& m) {
 
 void variability_features_transform::apply(const context& ctx,
     const std::unordered_map<std::string, std::string>& fixed_mappings,
-    meta_model::model& m) {
+    entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "variability entities transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 

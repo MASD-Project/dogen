@@ -23,10 +23,10 @@
 #include "dogen.logical/types/helpers/mapping_value.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/lexical_cast/meta_model/technical_space_lc.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
-#include "dogen.logical/io/meta_model/model_set_io.hpp"
-#include "dogen.logical/types/meta_model/mapping/extensible_mappable.hpp"
+#include "dogen.logical/lexical_cast/entities/technical_space_lc.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/io/entities/model_set_io.hpp"
+#include "dogen.logical/types/entities/mapping/extensible_mappable.hpp"
 #include "dogen.logical/io/helpers/mapping_io.hpp"
 #include "dogen.logical/io/helpers/mapping_set_io.hpp"
 #include "dogen.logical/io/helpers/mapping_actions_io.hpp"
@@ -56,10 +56,10 @@ namespace dogen::logical::transforms {
 
 std::unordered_map<std::string,
                    boost::shared_ptr<
-                       meta_model::mapping::extensible_mappable>
+                       entities::mapping::extensible_mappable>
                    >
 extensible_mapping_transform::
-obtain_mappables(const logical::meta_model::model_set& ms) {
+obtain_mappables(const logical::entities::model_set& ms) {
     auto r(ms.target().mapping_elements().extensible_mappables());
     for (const auto& ref : ms.references()) {
         for (const auto& pair : ref.mapping_elements().extensible_mappables()) {
@@ -77,7 +77,7 @@ obtain_mappables(const logical::meta_model::model_set& ms) {
 
 std::unordered_map<std::string, std::list<helpers::mapping>>
 extensible_mapping_transform::create_mappings(const std::unordered_map<
-    std::string, boost::shared_ptr<meta_model::mapping::extensible_mappable>>&
+    std::string, boost::shared_ptr<entities::mapping::extensible_mappable>>&
     mappables) {
 
     std::unordered_map<std::string, std::list<helpers::mapping>> r;
@@ -116,9 +116,9 @@ void extensible_mapping_transform::validate_mappings(const std::unordered_map<
 }
 
 void extensible_mapping_transform::insert(const std::string& agnostic_id,
-    const meta_model::name& n, const meta_model::technical_space ts,
-    std::unordered_map<meta_model::technical_space,
-    std::unordered_map<std::string, meta_model::name>>& map) {
+    const entities::name& n, const entities::technical_space ts,
+    std::unordered_map<entities::technical_space,
+    std::unordered_map<std::string, entities::name>>& map) {
 
     auto& by_id(map[ts]);
     const auto pair(std::make_pair(agnostic_id, n));
@@ -191,19 +191,19 @@ create_repository(const std::unordered_map<std::string,
     return r;
 }
 
-meta_model::model
+entities::model
 extensible_mapping_transform::map(const helpers::mapping_set_repository& msrp,
-    const meta_model::model& src, const meta_model::technical_space to) {
+    const entities::model& src, const entities::technical_space to) {
 
     const helpers::mapper mp(msrp);
     auto r(mp.map(src.input_technical_space(), to, src));
     return r;
 }
 
-logical::meta_model::model_set
+logical::entities::model_set
 extensible_mapping_transform::apply(const context& ctx,
-    const logical::meta_model::model_set& src,
-    const meta_model::technical_space to) {
+    const logical::entities::model_set& src,
+    const entities::technical_space to) {
     const auto id(src.target().name().qualified().dot());
     tracing::scoped_transform_tracer stp(lg, "mapping transform", transform_id,
         id, *ctx.tracer(), src);
@@ -232,13 +232,13 @@ extensible_mapping_transform::apply(const context& ctx,
      * Perform all the technical space mapping required for the target
      * model.
      */
-    logical::meta_model::model_set r;
+    logical::entities::model_set r;
     r.target(map(msrp, src.target(), to));
 
     /*
      * Now do the same for the references.
      */
-    std::list<meta_model::model> mapped_refs;
+    std::list<entities::model> mapped_refs;
     for (const auto& ref : src.references()) {
         /*
          * Note that we have all references for all the output

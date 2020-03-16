@@ -1,6 +1,6 @@
 <#@ masd.stitch.stream_variable_name=a.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::generation::csharp::formatters::types #>
-<#@ masd.stitch.inclusion_dependency="dogen.logical/types/meta_model/structural/builtin.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/builtin.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/formatters/types/traits.hpp" #>
@@ -9,15 +9,15 @@
 <#@ masd.stitch.wale.text_template=csharp_formatter_implementation.wale #>
 <#@ masd.stitch.wale.kvp.class.simple_name=builtin_formatter #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=builtin #>
-<#@ masd.stitch.wale.kvp.yarn_element=logical::meta_model::structural::builtin #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::builtin #>
 <#@ masd.stitch.wale.kvp.meta_element=builtin #>
 <#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-extraction::meta_model::artefact builtin_formatter::
-format(const context& /*ctx*/, const logical::meta_model::element& /*e*/) const {
-    extraction::meta_model::artefact r;
+extraction::entities::artefact builtin_formatter::
+format(const context& /*ctx*/, const logical::entities::element& /*e*/) const {
+    extraction::entities::artefact r;
     return r;
 }
 

@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/case_conv.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.logical/types/meta_model/orm/common_odb_options.hpp"
+#include "dogen.logical/types/entities/orm/common_odb_options.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
@@ -53,7 +53,7 @@ common_odb_options_formatter::archetype_location() const {
     return r;
 }
 
-const logical::meta_model::name& common_odb_options_formatter::meta_name() const {
+const logical::entities::name& common_odb_options_formatter::meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_orm_common_odb_options_name());
     return r;
@@ -69,7 +69,7 @@ common_odb_options_formatter::inclusion_support_type() const {
 }
 
 boost::filesystem::path common_odb_options_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const logical::meta_model::name& n) const {
+    const formattables::locator& /*l*/, const logical::entities::name& n) const {
     using namespace dogen::utility::log;
     static logger
         lg(logger_factory("generation.cpp.formatters.odb.common_odb_options_formatter"));
@@ -81,25 +81,25 @@ boost::filesystem::path common_odb_options_formatter::inclusion_path(
 }
 
 boost::filesystem::path common_odb_options_formatter::full_path(
-    const formattables::locator& l, const logical::meta_model::name& n) const {
+    const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_full_path_for_odb_options(n, static_id());
 }
 
 std::list<std::string> common_odb_options_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
-    const logical::meta_model::element& /*e*/) const {
+    const logical::entities::element& /*e*/) const {
     static std::list<std::string> r;
     return r;
 }
 
-extraction::meta_model::artefact common_odb_options_formatter::
-format(const context& ctx, const logical::meta_model::element& e) const {
+extraction::entities::artefact common_odb_options_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    using logical::meta_model::orm::common_odb_options;
+    using logical::entities::orm::common_odb_options;
     const auto& o(a.as<common_odb_options>(e));
 
     {
-        const auto ts(logical::meta_model::technical_space::odb);
+        const auto ts(logical::entities::technical_space::odb);
         a.make_decoration_preamble(e, ts);
 
         if (!a.is_cpp_standard_98()) {

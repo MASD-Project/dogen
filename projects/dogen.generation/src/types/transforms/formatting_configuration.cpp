@@ -23,10 +23,10 @@
 namespace dogen::generation::transforms {
 
 formatting_configuration::formatting_configuration()
-    : style_(static_cast<dogen::generation::meta_model::formatting_styles>(0)) { }
+    : style_(static_cast<dogen::generation::entities::formatting_styles>(0)) { }
 
 formatting_configuration::formatting_configuration(
-    const dogen::generation::meta_model::formatting_styles style,
+    const dogen::generation::entities::formatting_styles style,
     const std::string& input)
     : style_(style),
       input_(input) { }
@@ -48,11 +48,11 @@ formatting_configuration& formatting_configuration::operator=(formatting_configu
     return *this;
 }
 
-dogen::generation::meta_model::formatting_styles formatting_configuration::style() const {
+dogen::generation::entities::formatting_styles formatting_configuration::style() const {
     return style_;
 }
 
-void formatting_configuration::style(const dogen::generation::meta_model::formatting_styles v) {
+void formatting_configuration::style(const dogen::generation::entities::formatting_styles v) {
     style_ = v;
 }
 

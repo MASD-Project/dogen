@@ -27,7 +27,7 @@
 
 #include <string>
 #include <boost/filesystem/path.hpp>
-#include "dogen.injection/types/meta_model/model.hpp"
+#include "dogen.injection/types/entities/model.hpp"
 #include "dogen.injection/types/transforms/context_fwd.hpp"
 
 namespace dogen::injection::transforms {
@@ -74,7 +74,7 @@ public:
      * cannot cope with string processing. In the future this will
      * change to returning a string.
      */
-    virtual void apply(const context& ctx, const meta_model::model& m,
+    virtual void apply(const context& ctx, const entities::model& m,
         const boost::filesystem::path& p) = 0;
 };
 

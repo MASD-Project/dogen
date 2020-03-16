@@ -36,7 +36,7 @@ const std::string empty_internal_modules("Internal modules cannot be empty.");
 
 namespace dogen::logical::helpers {
 
-meta_model::name name_factory::build_model_name(const std::string& model_name,
+entities::name name_factory::build_model_name(const std::string& model_name,
     const std::string& external_modules) const {
     name_builder b(true/*model_name_mode*/);
     b.model_name(model_name);
@@ -44,14 +44,14 @@ meta_model::name name_factory::build_model_name(const std::string& model_name,
     return b.build();
 }
 
-meta_model::name name_factory::build_element_name(
+entities::name name_factory::build_element_name(
     const std::string& simple_name) const {
     name_builder b;
     b.simple_name(simple_name);
     return b.build();
 }
 
-meta_model::name name_factory::build_element_name(const std::string& model_name,
+entities::name name_factory::build_element_name(const std::string& model_name,
     const std::string& simple_name) const {
     name_builder b;
     b.simple_name(simple_name);
@@ -60,7 +60,7 @@ meta_model::name name_factory::build_element_name(const std::string& model_name,
     return b.build();
 }
 
-meta_model::name name_factory::build_element_name(
+entities::name name_factory::build_element_name(
     const std::string& simple_name,
     const std::list<std::string>& internal_modules) const {
 
@@ -71,8 +71,8 @@ meta_model::name name_factory::build_element_name(
     return b.build();
 }
 
-meta_model::name name_factory::build_element_in_model(
-    const meta_model::name& model_name,
+entities::name name_factory::build_element_in_model(
+    const entities::name& model_name,
     const std::string& simple_name) const {
 
     name_builder b;
@@ -84,8 +84,8 @@ meta_model::name name_factory::build_element_in_model(
     return b.build();
 }
 
-meta_model::name name_factory::build_element_in_model(
-    const meta_model::name& model_name,
+entities::name name_factory::build_element_in_model(
+    const entities::name& model_name,
     const std::string& simple_name,
     const std::list<std::string>& internal_modules) const {
 
@@ -100,8 +100,8 @@ meta_model::name name_factory::build_element_in_model(
     return b.build();
 }
 
-meta_model::name name_factory::build_element_in_module(
-    const meta_model::name& module_name,
+entities::name name_factory::build_element_in_module(
+    const entities::name& module_name,
     const std::string& simple_name) const {
     name_builder b;
     b.simple_name(simple_name);
@@ -117,8 +117,8 @@ meta_model::name name_factory::build_element_in_module(
     return b.build();
 }
 
-meta_model::name name_factory::build_module_name(
-    const meta_model::name& model_name,
+entities::name name_factory::build_module_name(
+    const entities::name& model_name,
     const std::list<std::string>& internal_modules) const {
 
     if (internal_modules.empty()) {
@@ -140,8 +140,8 @@ meta_model::name name_factory::build_module_name(
     return b.build();
 }
 
-meta_model::name name_factory::build_module_name(
-    const meta_model::name& model_name,
+entities::name name_factory::build_module_name(
+    const entities::name& model_name,
     const std::string& module_name,
     const std::list<std::string>& internal_modules) const {
 
@@ -156,9 +156,9 @@ meta_model::name name_factory::build_module_name(
     return b.build();
 }
 
-meta_model::name name_factory::build_combined_element_name(
-    const meta_model::name& model_name,
-    const meta_model::name& partial_element_name,
+entities::name name_factory::build_combined_element_name(
+    const entities::name& model_name,
+    const entities::name& partial_element_name,
     const bool populate_model_modules_if_blank,
     const bool populate_internal_modules_if_blank,
     const bool combine_internal_modules) const {
@@ -189,9 +189,9 @@ meta_model::name name_factory::build_combined_element_name(
     return b.build();
 }
 
-meta_model::name name_factory::build_hacked_combined_element_name(
-    const meta_model::name& model_name,
-    const meta_model::name& partial_element_name) const {
+entities::name name_factory::build_hacked_combined_element_name(
+    const entities::name& model_name,
+    const entities::name& partial_element_name) const {
 
     name_builder b;
     b.simple_name(partial_element_name.simple());
@@ -218,8 +218,8 @@ meta_model::name name_factory::build_hacked_combined_element_name(
     return b.build();
 }
 
-meta_model::name name_factory::
-build_promoted_module_name(const meta_model::name& element_name) const {
+entities::name name_factory::
+build_promoted_module_name(const entities::name& element_name) const {
     name_builder b;
     b.simple_name(element_name.simple());
 
@@ -238,9 +238,9 @@ build_promoted_module_name(const meta_model::name& element_name) const {
     return b.build();
 }
 
-meta_model::name name_factory::build_promoted_module_name(
-    const meta_model::name& model_name,
-    const meta_model::name& element_name) const {
+entities::name name_factory::build_promoted_module_name(
+    const entities::name& model_name,
+    const entities::name& element_name) const {
     name_builder b;
     b.simple_name(element_name.simple());
 
@@ -257,8 +257,8 @@ meta_model::name name_factory::build_promoted_module_name(
     return b.build();
 }
 
-meta_model::name name_factory::build_attribute_name(
-    const meta_model::name& owner_name,
+entities::name name_factory::build_attribute_name(
+    const entities::name& owner_name,
     const std::string& simple_name) const {
 
     name_builder b;

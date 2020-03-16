@@ -33,7 +33,7 @@ namespace dogen::logical::helpers {
 
 node::node(
     const boost::shared_ptr<dogen::logical::helpers::node>& parent,
-    const dogen::logical::meta_model::name& data,
+    const dogen::logical::entities::name& data,
     const std::list<boost::shared_ptr<dogen::logical::helpers::node> >& children)
     : parent_(parent),
       data_(data),
@@ -74,19 +74,19 @@ void node::parent(const boost::shared_ptr<dogen::logical::helpers::node>&& v) {
     parent_ = std::move(v);
 }
 
-const dogen::logical::meta_model::name& node::data() const {
+const dogen::logical::entities::name& node::data() const {
     return data_;
 }
 
-dogen::logical::meta_model::name& node::data() {
+dogen::logical::entities::name& node::data() {
     return data_;
 }
 
-void node::data(const dogen::logical::meta_model::name& v) {
+void node::data(const dogen::logical::entities::name& v) {
     data_ = v;
 }
 
-void node::data(const dogen::logical::meta_model::name&& v) {
+void node::data(const dogen::logical::entities::name&& v) {
     data_ = std::move(v);
 }
 

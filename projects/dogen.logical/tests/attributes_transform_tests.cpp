@@ -24,11 +24,11 @@
 #include "dogen.utility/types/test/asserter.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.utility/types/test/exception_checkers.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/structural/object_template.hpp"
-#include "dogen.logical/types/meta_model/model.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
-#include "dogen.logical/io/meta_model/structural/object_io.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/object_template.hpp"
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/io/entities/structural/object_io.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/test/mock_context_factory.hpp"
 #include "dogen.logical/test/mock_model_factory.hpp"
@@ -94,7 +94,7 @@ using dogen::utility::test::contains_checker;
 using dogen::logical::transforms::transformation_error;
 using dogen::utility::test::asserter;
 using dogen::logical::transforms::attributes_transform;
-using dogen::logical::meta_model::origin_types;
+using dogen::logical::entities::origin_types;
 using object_types = dogen::logical::test::mock_model_factory::
 object_types;
 using attribute_types = dogen::logical::test::mock_model_factory::

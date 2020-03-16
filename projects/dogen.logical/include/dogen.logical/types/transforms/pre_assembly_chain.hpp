@@ -27,8 +27,8 @@
 
 #include <string>
 #include <unordered_map>
-#include "dogen.logical/types/meta_model/model.hpp"
-#include "dogen.logical/types/meta_model/model_set.hpp"
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/entities/model_set.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
@@ -45,13 +45,13 @@ private:
      */
     static void apply(const context& ctx,
         const std::unordered_map<std::string, std::string>& fixed_mappings,
-        meta_model::model& m);
+        entities::model& m);
 
 public:
     /**
      * @brief Transform the supplied model set.
      */
-    static void apply(const context& ctx, meta_model::model_set& ms);
+    static void apply(const context& ctx, entities::model_set& ms);
 };
 
 }

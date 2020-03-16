@@ -4,7 +4,7 @@
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/string/splitter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.variability/types/helpers/enum_mapper.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.logical/types/meta_model/variability/feature_template_bundle.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/variability/feature_template_bundle.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
@@ -19,7 +19,7 @@
 <#@ masd.stitch.wale.text_template=cpp_artefact_formatter_implementation.wale #>
 <#@ masd.stitch.wale.kvp.class.simple_name=feature_template_bundle_implementation_formatter #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=feature_template_bundle_implementation #>
-<#@ masd.stitch.wale.kvp.yarn_element=logical::meta_model::variability::feature_template_bundle #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::variability::feature_template_bundle #>
 <#@ masd.stitch.wale.kvp.meta_element=variability_feature_template_bundle #>
 <#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
@@ -27,8 +27,8 @@
 
 std::list<std::string> feature_template_bundle_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const logical::meta_model::element& e) const {
-    using logical::meta_model::variability::feature_template_bundle;
+    const logical::entities::element& e) const {
+    using logical::entities::variability::feature_template_bundle;
     const auto& fb(assistant::as<feature_template_bundle>(e));
     auto builder(f.make());
 
@@ -44,10 +44,10 @@ std::list<std::string> feature_template_bundle_implementation_formatter::inclusi
     return builder.build();
 }
 
-extraction::meta_model::artefact feature_template_bundle_implementation_formatter::
-format(const context& ctx, const logical::meta_model::element& e) const {
+extraction::entities::artefact feature_template_bundle_implementation_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& ftb(a.as<logical::meta_model::variability::feature_template_bundle>(e));
+    const auto& ftb(a.as<logical::entities::variability::feature_template_bundle>(e));
 
     {
         const auto sn(ftb.name().simple());
@@ -71,9 +71,9 @@ namespace {
                     const bool has_qualified_name(simple_key != ft.key());
 #>
 
-dogen::variability::meta_model::feature_template
+dogen::variability::entities::feature_template
 make_<#= ft.identifiable_key() #>() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature_template r;
     r.name().simple("<#= simple_key #>");
 <#+
@@ -119,7 +119,7 @@ make_<#= ft.identifiable_key() #>() {
             if (ftb.generate_static_configuration()) {
 #>
 <#= sn #>::feature_group
-<#= sn #>::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+<#= sn #>::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
@@ -137,7 +137,7 @@ make_<#= ft.identifiable_key() #>() {
 
 <#= sn #>::static_configuration <#= sn #>::make_static_configuration(
     const feature_group& fg,
-    const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::entities::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
@@ -171,10 +171,10 @@ make_<#= ft.identifiable_key() #>() {
 
 #>
 
-std::list<dogen::variability::meta_model::feature_template>
+std::list<dogen::variability::entities::feature_template>
 <#= sn #>::make_templates() {
-    using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature_template> r;
 <#+
 
                 for (const auto& ft : ftb.feature_templates()) {

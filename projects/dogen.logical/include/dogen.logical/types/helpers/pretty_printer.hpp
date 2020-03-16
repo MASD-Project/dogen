@@ -28,7 +28,7 @@
 #include <string>
 #include <sstream>
 #include <string_view>
-#include "dogen.logical/types/meta_model/name.hpp"
+#include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/helpers/separators.hpp"
 
 namespace dogen::logical::helpers {
@@ -39,7 +39,7 @@ public:
     explicit pretty_printer(const separators s);
 
 private:
-    std::list<std::string> to_list(const meta_model::name& n,
+    std::list<std::string> to_list(const entities::name& n,
         const bool model_name_mode) const;
 
 private:
@@ -48,7 +48,7 @@ private:
     void print_enclosed(const std::list<std::string>& l);
 
 public:
-    void add(const meta_model::name& n, const bool model_name_mode = false);
+    void add(const entities::name& n, const bool model_name_mode = false);
     void add(const std::string& c);
     void add_child(const std::string& c);
 

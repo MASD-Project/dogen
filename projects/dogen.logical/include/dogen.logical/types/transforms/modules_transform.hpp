@@ -27,7 +27,7 @@
 
 #include <list>
 #include <string>
-#include "dogen.logical/types/meta_model/model.hpp"
+#include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 
 namespace dogen::logical::transforms {
@@ -42,7 +42,7 @@ private:
      * elements.
      */
     static std::unordered_map<std::string, std::list<std::string>>
-    gather_internal_modules(meta_model::model& m);
+    gather_internal_modules(entities::model& m);
 
     /**
      * @brief Creates modules for the internal modules which are not
@@ -50,10 +50,10 @@ private:
      */
     static void create_modules(const std::unordered_map<std::string,
         std::list<std::string>>& internal_modules,
-        meta_model::model& m);
+        entities::model& m);
 
 public:
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

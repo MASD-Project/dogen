@@ -115,9 +115,9 @@ hydrator::read_parents(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-injection::meta_model::attribute hydrator::
+injection::entities::attribute hydrator::
 read_attribute(const boost::property_tree::ptree& pt) const {
-    injection::meta_model::attribute r;
+    injection::entities::attribute r;
     r.name(pt.get<std::string>(name_key));
     r.type(pt.get<std::string>(type_key));
     r.value(pt.get<std::string>(value_key, empty));
@@ -128,9 +128,9 @@ read_attribute(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-injection::meta_model::element hydrator::read_element(
+injection::entities::element hydrator::read_element(
     const boost::property_tree::ptree& pt, const std::string& id) const {
-    injection::meta_model::element r;
+    injection::entities::element r;
     r.name(pt.get<std::string>(name_key));
     r.documentation(read_documentation(pt));
     r.parents(read_parents(pt));
@@ -163,12 +163,12 @@ injection::meta_model::element hydrator::read_element(
     return r;
 }
 
-injection::meta_model::model
+injection::entities::model
 hydrator::read_stream(std::istream& s) const {
     boost::property_tree::ptree pt;
     read_json(s, pt);
 
-    injection::meta_model::model r;
+    injection::entities::model r;
     r.documentation(read_documentation(pt));
     r.tagged_values(read_tagged_values(pt));
     r.stereotypes(read_stereotypes(pt));
@@ -196,7 +196,7 @@ hydrator::read_stream(std::istream& s) const {
     return r;
 }
 
-injection::meta_model::model hydrator::hydrate(std::istream& s) const {
+injection::entities::model hydrator::hydrate(std::istream& s) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON stream.";
     using namespace boost::property_tree;
     try {
@@ -216,7 +216,7 @@ injection::meta_model::model hydrator::hydrate(std::istream& s) const {
     }
 }
 
-injection::meta_model::model
+injection::entities::model
 hydrator::hydrate(const boost::filesystem::path& p) const {
     const auto gs(p.generic_string());
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << gs;

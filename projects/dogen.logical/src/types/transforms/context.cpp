@@ -21,13 +21,13 @@
 #include "dogen.tracing/types/tracer.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.physical/types/location_repository.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.logical/types/helpers/mapping_set_repository.hpp"
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::variability::meta_model::feature_model>& lhs,
-const boost::shared_ptr<dogen::variability::meta_model::feature_model>& rhs) {
+inline bool operator==(const boost::shared_ptr<dogen::variability::entities::feature_model>& lhs,
+const boost::shared_ptr<dogen::variability::entities::feature_model>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -67,7 +67,7 @@ context::context()
 
 context::context(
     const bool compatibility_mode,
-    const boost::shared_ptr<dogen::variability::meta_model::feature_model>& feature_model,
+    const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
     const boost::shared_ptr<dogen::physical::location_repository>& archetype_location_repository,
     const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains,
     const boost::shared_ptr<dogen::logical::helpers::mapping_set_repository>& mapping_repository,
@@ -112,19 +112,19 @@ void context::compatibility_mode(const bool v) {
     compatibility_mode_ = v;
 }
 
-const boost::shared_ptr<dogen::variability::meta_model::feature_model>& context::feature_model() const {
+const boost::shared_ptr<dogen::variability::entities::feature_model>& context::feature_model() const {
     return feature_model_;
 }
 
-boost::shared_ptr<dogen::variability::meta_model::feature_model>& context::feature_model() {
+boost::shared_ptr<dogen::variability::entities::feature_model>& context::feature_model() {
     return feature_model_;
 }
 
-void context::feature_model(const boost::shared_ptr<dogen::variability::meta_model::feature_model>& v) {
+void context::feature_model(const boost::shared_ptr<dogen::variability::entities::feature_model>& v) {
     feature_model_ = v;
 }
 
-void context::feature_model(const boost::shared_ptr<dogen::variability::meta_model::feature_model>&& v) {
+void context::feature_model(const boost::shared_ptr<dogen::variability::entities::feature_model>&& v) {
     feature_model_ = std::move(v);
 }
 

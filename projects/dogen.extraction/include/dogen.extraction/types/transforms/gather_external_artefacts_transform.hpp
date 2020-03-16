@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen.extraction/types/transforms/context.hpp"
-#include "dogen.extraction/types/meta_model/model.hpp"
+#include "dogen.extraction/types/entities/model.hpp"
 
 namespace dogen::extraction::transforms {
 
@@ -35,12 +35,12 @@ namespace dogen::extraction::transforms {
  */
 class gather_external_artefacts_transform final {
 private:
-    static meta_model::artefact make_artefact(const boost::filesystem::path& p,
-        const meta_model::operation_type ot,
-        const meta_model::operation_reason rsn);
+    static entities::artefact make_artefact(const boost::filesystem::path& p,
+        const entities::operation_type ot,
+        const entities::operation_reason rsn);
 
 public:
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

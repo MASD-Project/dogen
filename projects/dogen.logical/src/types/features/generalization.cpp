@@ -27,9 +27,9 @@ namespace dogen::logical::features {
 
 namespace {
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generalization_is_final() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("is_final");
     r.name().qualified("masd.generalization.is_final");
@@ -42,9 +42,9 @@ make_masd_generalization_is_final() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_generalization_parent() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("parent");
     r.name().qualified("masd.generalization.parent");
@@ -60,7 +60,7 @@ make_masd_generalization_parent() {
 }
 
 generalization::feature_group
-generalization::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+generalization::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
@@ -72,7 +72,7 @@ generalization::make_feature_group(const dogen::variability::meta_model::feature
 
 generalization::static_configuration generalization::make_static_configuration(
     const feature_group& fg,
-    const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::entities::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
@@ -83,10 +83,10 @@ generalization::static_configuration generalization::make_static_configuration(
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature>
+std::list<dogen::variability::entities::feature>
 generalization::make_features() {
-    using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature> r;
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature> r;
     r.push_back(make_masd_generalization_is_final());
     r.push_back(make_masd_generalization_parent());
     return r;

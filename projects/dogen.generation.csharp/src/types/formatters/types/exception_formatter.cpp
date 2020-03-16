@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.logical/types/meta_model/structural/exception.hpp"
+#include "dogen.logical/types/entities/structural/exception.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.csharp/types/traits.hpp"
@@ -44,7 +44,7 @@ physical::location exception_formatter::archetype_location() const {
     return r;
 }
 
-const logical::meta_model::name& exception_formatter::meta_name() const {
+const logical::entities::name& exception_formatter::meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_exception_name());
     return r;
@@ -55,18 +55,18 @@ std::string exception_formatter::family() const {
 }
 
 boost::filesystem::path exception_formatter::full_path(
-    const formattables::locator& l, const logical::meta_model::name& n) const {
+    const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_full_path(n, static_id());
 }
 
 std::list<std::string> exception_formatter::
-inclusion_dependencies(const logical::meta_model::element& /*e*/) const {
+inclusion_dependencies(const logical::entities::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
-extraction::meta_model::artefact exception_formatter::
-format(const context& ctx, const logical::meta_model::element& e) const {
+extraction::entities::artefact exception_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location());
     {
         const auto sn(e.name().simple());

@@ -25,8 +25,8 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
 #include "dogen.utility/types/exception/invalid_enum_value.hpp"
-#include "dogen.logical/io/meta_model/static_stereotypes_io.hpp"
-#include "dogen.logical/types/meta_model/static_stereotypes.hpp"
+#include "dogen.logical/io/entities/static_stereotypes_io.hpp"
+#include "dogen.logical/types/entities/static_stereotypes.hpp"
 #include "dogen.engine/types/helpers/stereotypes_helper.hpp"
 
 namespace {
@@ -91,7 +91,7 @@ const std::string unsupported_stereotype("Invalid or unsupported stereotype: ");
 
 namespace dogen::engine::helpers {
 
-using logical::meta_model::static_stereotypes;
+using logical::entities::static_stereotypes;
 
 static_stereotypes stereotypes_helper::from_string(const std::string& s) const {
     BOOST_LOG_SEV(lg, debug) << "Converting stereotype: " << s;

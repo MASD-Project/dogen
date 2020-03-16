@@ -29,11 +29,11 @@
 #include <string>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.logical/types/meta_model/name_tree.hpp"
-#include "dogen.logical/types/meta_model/attribute.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.logical/types/entities/name_tree.hpp"
+#include "dogen.logical/types/entities/attribute.hpp"
 #include "dogen.generation.cpp/types/formattables/formattable.hpp"
 #include "dogen.generation.cpp/types/formattables/aspect_properties.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
@@ -43,17 +43,17 @@ namespace dogen::generation::cpp::formattables {
 class aspect_expander {
 private:
     struct feature_group {
-        variability::meta_model::feature requires_manual_default_constructor;
-        variability::meta_model::feature requires_manual_move_constructor;
-        variability::meta_model::feature requires_stream_manipulators;
+        variability::entities::feature requires_manual_default_constructor;
+        variability::entities::feature requires_manual_move_constructor;
+        variability::entities::feature requires_stream_manipulators;
     };
 
     feature_group make_feature_group(
-        const variability::meta_model::feature_model& fm) const;
+        const variability::entities::feature_model& fm) const;
 
     boost::optional<aspect_properties>
     make_aspect_properties(const feature_group& fg,
-        const variability::meta_model::configuration& cfg) const;
+        const variability::entities::configuration& cfg) const;
 
 private:
     typedef std::unordered_map<std::string, aspect_properties>
@@ -61,17 +61,17 @@ private:
 
     aspect_properties_type
     obtain_aspect_properties(
-        const variability::meta_model::feature_model& feature_model,
+        const variability::entities::feature_model& feature_model,
         const std::unordered_map<std::string, formattable>& formattables) const;
 
 private:
-    void walk_name_tree(const logical::meta_model::name_tree& nt,
+    void walk_name_tree(const logical::entities::name_tree& nt,
         const bool is_top_level, const aspect_properties_type& element_aps,
         aspect_properties& ap) const;
 
     aspect_properties compute_aspect_properties(
         const aspect_properties_type& element_aps,
-        const std::list<logical::meta_model::attribute>& attrs) const;
+        const std::list<logical::entities::attribute>& attrs) const;
 
     void populate_aspect_properties(const std::string& element_id,
         const aspect_properties_type& element_aps,
@@ -82,7 +82,7 @@ private:
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
-    void expand(const variability::meta_model::feature_model& feature_model,
+    void expand(const variability::entities::feature_model& feature_model,
         model& fm) const;
 };
 

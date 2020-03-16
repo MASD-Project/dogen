@@ -571,7 +571,7 @@ is fixed) remove this configuration.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#injection::meta_model::model#</dia:string>
+            <dia:string>#injection::entities::model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -619,7 +619,7 @@ is fixed) remove this configuration.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#injection::meta_model::model#</dia:string>
+            <dia:string>#injection::entities::model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1024,7 +1024,7 @@ is fixed) remove this configuration.
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const injection::meta_model::model&amp;#</dia:string>
+                <dia:string>#const injection::entities::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -1072,7 +1072,7 @@ is fixed) remove this configuration.
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const injection::meta_model::model&amp;#</dia:string>
+                <dia:string>#const injection::entities::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

@@ -25,13 +25,13 @@
 #pragma once
 #endif
 
-#include "dogen.variability/types/meta_model/profile.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.variability/types/meta_model/profile_template.hpp"
+#include "dogen.variability/types/entities/profile.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.variability/types/entities/profile_template.hpp"
 #include "dogen.variability/types/transforms/profile_repository_inputs.hpp"
-#include "dogen.logical/types/meta_model/model_set.hpp"
-#include "dogen.logical/types/meta_model/variability/profile.hpp"
-#include "dogen.logical/types/meta_model/variability/profile_template.hpp"
+#include "dogen.logical/types/entities/model_set.hpp"
+#include "dogen.logical/types/entities/variability/profile.hpp"
+#include "dogen.logical/types/entities/variability/profile_template.hpp"
 
 namespace dogen::logical::helpers {
 
@@ -45,38 +45,38 @@ private:
      * @brief Adapts an assets profile template into its variability
      * counterpart.
      */
-    static variability::meta_model::profile_template
-    adapt(const meta_model::variability::profile_template& pt);
+    static variability::entities::profile_template
+    adapt(const entities::variability::profile_template& pt);
 
     /**
      * @brief Adapts an assets profile into its variability
      * counterpart.
      */
-    static variability::meta_model::profile
-    adapt(const variability::meta_model::feature_model& fm,
-        const meta_model::variability::profile& p);
+    static variability::entities::profile
+    adapt(const variability::entities::feature_model& fm,
+        const entities::variability::profile& p);
 
 public:
     /**
      * @brief Adapt all profile templates.
      */
-    static std::list<variability::meta_model::profile_template>
-    adapt_profile_templates(const meta_model::model_set& ms);
+    static std::list<variability::entities::profile_template>
+    adapt_profile_templates(const entities::model_set& ms);
 
     /**
      * @brief Adapt all profiles.
      */
-    static std::list<variability::meta_model::profile>
-    adapt_profiles(const variability::meta_model::feature_model& fm,
-        const meta_model::model_set& ms);
+    static std::list<variability::entities::profile>
+    adapt_profiles(const variability::entities::feature_model& fm,
+        const entities::model_set& ms);
 
     /**
      * @brief Adapts a model set into the inputs required to build a
      * profile repository.
      */
     static variability::transforms::profile_repository_inputs
-    adapt(const variability::meta_model::feature_model& fm,
-        const meta_model::model_set& ms);
+    adapt(const variability::entities::feature_model& fm,
+        const entities::model_set& ms);
 };
 
 }

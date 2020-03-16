@@ -15,7 +15,7 @@ physical::location {{class.simple_name}}::archetype_location() const {
     return r;
 }
 
-const logical::meta_model::name& {{class.simple_name}}::meta_name() const {
+const logical::entities::name& {{class.simple_name}}::meta_name() const {
     using {{meta_name_factory}};
     static auto r(meta_name_factory::make_{{meta_element}}_name());
     return r;
@@ -26,12 +26,12 @@ std::string {{class.simple_name}}::family() const {
 }
 
 boost::filesystem::path {{class.simple_name}}::full_path(
-    const formattables::locator& l, const logical::meta_model::name& n) const {
+    const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_full_path(n, static_id());
 }
 
 std::list<std::string> {{class.simple_name}}::
-inclusion_dependencies(const logical::meta_model::element& /*e*/) const {
+inclusion_dependencies(const logical::entities::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }

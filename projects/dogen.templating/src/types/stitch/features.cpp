@@ -27,9 +27,9 @@ namespace dogen::templating::stitch {
 
 namespace {
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_stitch_stream_variable_name() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("stream_variable_name");
     r.name().qualified("masd.stitch.stream_variable_name");
@@ -44,9 +44,9 @@ make_masd_stitch_stream_variable_name() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_stitch_relative_output_directory() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("relative_output_directory");
     r.name().qualified("masd.stitch.relative_output_directory");
@@ -59,9 +59,9 @@ make_masd_stitch_relative_output_directory() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_stitch_inclusion_dependency() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("inclusion_dependency");
     r.name().qualified("masd.stitch.inclusion_dependency");
@@ -74,9 +74,9 @@ make_masd_stitch_inclusion_dependency() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_stitch_containing_namespaces() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("containing_namespaces");
     r.name().qualified("masd.stitch.containing_namespaces");
@@ -89,9 +89,9 @@ make_masd_stitch_containing_namespaces() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_stitch_wale_text_template() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("text_template");
     r.name().qualified("masd.stitch.wale.text_template");
@@ -104,9 +104,9 @@ make_masd_stitch_wale_text_template() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_stitch_wale_kvp() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("kvp");
     r.name().qualified("masd.stitch.wale.kvp");
@@ -123,7 +123,7 @@ make_masd_stitch_wale_kvp() {
 }
 
 features::feature_group
-features::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+features::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
@@ -139,7 +139,7 @@ features::make_feature_group(const dogen::variability::meta_model::feature_model
 
 features::static_configuration features::make_static_configuration(
     const feature_group& fg,
-    const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::entities::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
@@ -156,10 +156,10 @@ features::static_configuration features::make_static_configuration(
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature>
+std::list<dogen::variability::entities::feature>
 features::make_features() {
-    using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature> r;
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature> r;
     r.push_back(make_masd_stitch_stream_variable_name());
     r.push_back(make_masd_stitch_relative_output_directory());
     r.push_back(make_masd_stitch_inclusion_dependency());

@@ -27,7 +27,7 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen.generation/types/meta_model/formatting_styles.hpp"
+#include "dogen.generation/types/entities/formatting_styles.hpp"
 
 namespace dogen::generation::transforms {
 
@@ -42,12 +42,12 @@ public:
 
 public:
     formatting_configuration(
-        const dogen::generation::meta_model::formatting_styles style,
+        const dogen::generation::entities::formatting_styles style,
         const std::string& input);
 
 public:
-    dogen::generation::meta_model::formatting_styles style() const;
-    void style(const dogen::generation::meta_model::formatting_styles v);
+    dogen::generation::entities::formatting_styles style() const;
+    void style(const dogen::generation::entities::formatting_styles v);
 
     const std::string& input() const;
     std::string& input();
@@ -65,7 +65,7 @@ public:
     formatting_configuration& operator=(formatting_configuration other);
 
 private:
-    dogen::generation::meta_model::formatting_styles style_;
+    dogen::generation::entities::formatting_styles style_;
     std::string input_;
 };
 

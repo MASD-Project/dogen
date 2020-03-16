@@ -27,9 +27,9 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/structural/object_template.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/object_template.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/helpers/name_factory.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/attributes_transform.hpp"
@@ -51,8 +51,8 @@ const std::string object_template_not_found(
 
 namespace dogen::logical::transforms {
 
-meta_model::structural::object& attributes_transform::
-find_object(const meta_model::name& n, meta_model::model& m) {
+entities::structural::object& attributes_transform::
+find_object(const entities::name& n, entities::model& m) {
     const auto id(n.qualified().dot());
     auto i(m.structural_elements().objects().find(id));
     if (i == m.structural_elements().objects().end()) {
@@ -62,8 +62,8 @@ find_object(const meta_model::name& n, meta_model::model& m) {
     return *i->second;
 }
 
-meta_model::structural::object_template& attributes_transform::
-find_object_template(const meta_model::name& n, meta_model::model& m) {
+entities::structural::object_template& attributes_transform::
+find_object_template(const entities::name& n, entities::model& m) {
     const auto& id(n.qualified().dot());
     auto i(m.structural_elements().object_templates().find(id));
     if (i == m.structural_elements().object_templates().end()) {
@@ -74,8 +74,8 @@ find_object_template(const meta_model::name& n, meta_model::model& m) {
     return *i->second;
 }
 
-void attributes_transform::expand_object(meta_model::structural::object& o,
-    meta_model::model& m, std::unordered_set<std::string>& processed_ids) {
+void attributes_transform::expand_object(entities::structural::object& o,
+    entities::model& m, std::unordered_set<std::string>& processed_ids) {
     const auto id(o.name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Expanding object: " << id;
 
@@ -88,7 +88,7 @@ void attributes_transform::expand_object(meta_model::structural::object& o,
      * Grab all attributes from all of the object templates this
      * object is associated with, in one go.
      */
-    std::list<meta_model::attribute> object_template_attributes;
+    std::list<entities::attribute> object_template_attributes;
     for (const auto& otn : o.object_templates()) {
         auto& ot(find_object_template(otn, m));
         const auto& p(ot.local_attributes());
@@ -173,7 +173,7 @@ void attributes_transform::expand_object(meta_model::structural::object& o,
     processed_ids.insert(id);
 }
 
-void attributes_transform::expand_objects(meta_model::model& m) {
+void attributes_transform::expand_objects(entities::model& m) {
     auto& objs(m.structural_elements().objects());
     BOOST_LOG_SEV(lg, debug) << "Expanding objects. Count: "
                              << objs.size();
@@ -186,7 +186,7 @@ void attributes_transform::expand_objects(meta_model::model& m) {
 }
 
 void attributes_transform::expand_object_template(
-    meta_model::structural::object_template& ot, meta_model::model& m,
+    entities::structural::object_template& ot, entities::model& m,
     std::unordered_set<std::string>& processed_ids) {
     const auto id(ot.name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Expanding object template:" << id;
@@ -215,7 +215,7 @@ void attributes_transform::expand_object_template(
     processed_ids.insert(id);
 }
 
-void attributes_transform::expand_object_templates(meta_model::model& m) {
+void attributes_transform::expand_object_templates(entities::model& m) {
     auto& tpl(m.structural_elements().object_templates());
     BOOST_LOG_SEV(lg, debug) << "Expanding object templates. Count: "
                              << tpl.size();
@@ -228,7 +228,7 @@ void attributes_transform::expand_object_templates(meta_model::model& m) {
 }
 
 void attributes_transform::
-apply(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "attributes transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 

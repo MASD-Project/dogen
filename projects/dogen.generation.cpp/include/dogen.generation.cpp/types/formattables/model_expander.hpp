@@ -26,10 +26,10 @@
 #endif
 
 #include <unordered_set>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.generation/types/meta_model/element_archetype.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.generation/types/entities/element_archetype.hpp"
 #include "dogen.generation.cpp/types/formatters/repository.hpp"
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
@@ -39,22 +39,22 @@ namespace dogen::generation::cpp::formattables {
 class model_expander {
 private:
     void expand_streaming(
-        const variability::meta_model::feature_model& feature_model,
+        const variability::entities::feature_model& feature_model,
         model& fm) const;
 
     void expand_canonical_archetypes(const formatters::repository& frp,
         model& fm) const;
 
     void expand_inclusion(
-        const variability::meta_model::feature_model& feature_model,
-        const std::unordered_set<generation::meta_model::element_archetype>&
+        const variability::entities::feature_model& feature_model,
+        const std::unordered_set<generation::entities::element_archetype>&
         enabled_archetype_for_element,
         const formatters::repository& frp, const locator& l, model& fm) const;
 
-    void expand_aspects(const variability::meta_model::feature_model& feature_model,
+    void expand_aspects(const variability::entities::feature_model& feature_model,
         model& fm) const;
 
-    void expand_helpers(const variability::meta_model::feature_model& feature_model,
+    void expand_helpers(const variability::entities::feature_model& feature_model,
         const formatters::repository& frp, model& fm) const;
 
     void reduce(model& fm) const;
@@ -69,13 +69,13 @@ private:
     void expand_build_files(const locator& l, model& fm) const;
 
     void expand_cpp_standard(
-        const variability::meta_model::feature_model& feature_model,
-        const variability::meta_model::configuration& rcfg, model& fm) const;
+        const variability::entities::feature_model& feature_model,
+        const variability::entities::configuration& rcfg, model& fm) const;
 
 public:
-    void expand(const variability::meta_model::feature_model& feature_model,
-        const variability::meta_model::configuration& rcfg,
-        const std::unordered_set<generation::meta_model::element_archetype>&
+    void expand(const variability::entities::feature_model& feature_model,
+        const variability::entities::configuration& rcfg,
+        const std::unordered_set<generation::entities::element_archetype>&
         enabled_archetype_for_element,
         const formatters::repository& frp, const locator& l, model& fm) const;
 };

@@ -26,12 +26,12 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/exception/utility_exception.hpp"
-#include "dogen.logical/types/meta_model/structural/exception.hpp"
-#include "dogen.logical/types/meta_model/structural/object_template.hpp"
-#include "dogen.logical/types/meta_model/structural/module.hpp"
-#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/structural/builtin.hpp"
+#include "dogen.logical/types/entities/structural/exception.hpp"
+#include "dogen.logical/types/entities/structural/object_template.hpp"
+#include "dogen.logical/types/entities/structural/module.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/builtin.hpp"
 #include "dogen.logical/types/helpers/name_builder.hpp"
 #include "dogen.logical/types/helpers/name_factory.hpp"
 #include "dogen.logical/types/helpers/building_error.hpp"
@@ -117,31 +117,31 @@ namespace dogen::logical::test {
 
 namespace {
 
-meta_model::name mock_model_name(unsigned int i) {
+entities::name mock_model_name(unsigned int i) {
     helpers::name_factory nf;
     return nf.build_model_name(model_name(i));
 }
 
-meta_model::name_tree mock_name_tree(const meta_model::name& n) {
-    meta_model::name_tree r;
+entities::name_tree mock_name_tree(const entities::name& n) {
+    entities::name_tree r;
     r.current(n);
     return r;
 }
 
-meta_model::name_tree mock_name_tree_shared_ptr(const meta_model::name& n) {
-    meta_model::name_tree r;
+entities::name_tree mock_name_tree_shared_ptr(const entities::name& n) {
+    entities::name_tree r;
     helpers::name_factory nf;
     r.current(nf.build_element_name("boost", "shared_ptr"));
     r.are_children_opaque(true);
 
-    meta_model::name_tree c;
+    entities::name_tree c;
     c.current(n);
-    r.children(std::list<meta_model::name_tree> { c });
+    r.children(std::list<entities::name_tree> { c });
 
     return r;
 }
 
-std::string mock_unparsed_type(const meta_model::name& n) {
+std::string mock_unparsed_type(const entities::name& n) {
     std::string r;
     for (const auto& mm : n.location().model_modules())
         r += mm + "::";
@@ -153,16 +153,16 @@ std::string mock_unparsed_type(const meta_model::name& n) {
     return r;
 }
 
-std::string mock_unparsed_type_shared_ptr(const meta_model::name& n) {
+std::string mock_unparsed_type_shared_ptr(const entities::name& n) {
     std::string r("boost::shared_ptr<");
     r += mock_unparsed_type(n);
     r += ">";
     return r;
 }
 
-meta_model::name_tree
+entities::name_tree
 mock_name_tree(mock_model_factory::attribute_types pt) {
-    meta_model::name_tree r;
+    entities::name_tree r;
     helpers::name_factory nf;
     using test::mock_model_factory;
     using attribute_types = mock_model_factory::attribute_types;
@@ -176,7 +176,7 @@ mock_name_tree(mock_model_factory::attribute_types pt) {
         break;
     case attribute_types::boost_variant: {
         r.current(nf.build_element_name("boost", "variant"));
-        r.children(std::list<meta_model::name_tree> {
+        r.children(std::list<entities::name_tree> {
                 mock_name_tree(nf.build_element_name(boolean)),
                 mock_name_tree(nf.build_element_name(unsigned_int))
         });
@@ -187,7 +187,7 @@ mock_name_tree(mock_model_factory::attribute_types pt) {
         break;
     case attribute_types::std_pair: {
         r.current(nf.build_element_name("std", "pair"));
-        r.children(std::list<meta_model::name_tree> {
+        r.children(std::list<entities::name_tree> {
                 mock_name_tree(nf.build_element_name(boolean)),
                 mock_name_tree(nf.build_element_name(boolean))
         });
@@ -247,51 +247,51 @@ std::list<std::string> make_internal_modules(const unsigned int module_n) {
     return r;
 }
 
-boost::shared_ptr<meta_model::structural::builtin>
+boost::shared_ptr<entities::structural::builtin>
 make_builtin(const std::string& simple_name) {
     helpers::name_builder b;
     b.simple_name(simple_name);
 
-    auto r(boost::make_shared<meta_model::structural::builtin>());
+    auto r(boost::make_shared<entities::structural::builtin>());
     r->name(b.build());
     return r;
 }
 
-void populate_object(meta_model::structural::object& o, const unsigned int i,
-    const meta_model::name& model_name,
+void populate_object(entities::structural::object& o, const unsigned int i,
+    const entities::name& model_name,
     const unsigned int module_n,
-    const meta_model::origin_types ot) {
+    const entities::origin_types ot) {
 
     const auto sn(type_name(i));
     const auto ipp(make_internal_modules(module_n));
 
     helpers::name_factory nf;
-    meta_model::name n(nf.build_element_in_model(model_name, sn, ipp));
+    entities::name n(nf.build_element_in_model(model_name, sn, ipp));
 
     o.name(n);
     o.documentation(documentation);
     o.origin_type(ot);
 }
 
-void populate_simple_model_attributes(meta_model::model& m,
-    const unsigned int n, const meta_model::origin_types ot) {
+void populate_simple_model_attributes(entities::model& m,
+    const unsigned int n, const entities::origin_types ot) {
     m.name(mock_model_name(n));
     m.origin_type(ot);
 }
 
-meta_model::attribute mock_attribute(const meta_model::name& owning_element,
+entities::attribute mock_attribute(const entities::name& owning_element,
     const bool types_parsed, const unsigned int n = 0,
     const test::mock_model_factory::
     attribute_types pt =
     test::mock_model_factory::attribute_types::
     unsigned_int,
-    boost::optional<meta_model::name> name =
-    boost::optional<meta_model::name>()) {
+    boost::optional<entities::name> name =
+    boost::optional<entities::name>()) {
 
     helpers::name_factory f;
     const auto pn(f.build_attribute_name(owning_element, attribute_name(n)));
 
-    meta_model::attribute r;
+    entities::attribute r;
     r.name(pn);
     r.documentation(documentation);
 
@@ -326,8 +326,8 @@ void add_attribute(StatefulAndNameable& sn,
     attribute_types pt =
     test::mock_model_factory::attribute_types::
     unsigned_int,
-    boost::optional<meta_model::name> name =
-    boost::optional<meta_model::name>()) {
+    boost::optional<entities::name> name =
+    boost::optional<entities::name>()) {
 
     const auto p(mock_attribute(sn.name(), types_parsed, n, pt, name));
     sn.local_attributes().push_back(p);
@@ -337,8 +337,8 @@ void add_attribute(StatefulAndNameable& sn,
 }
 
 void instantiate_object_template(const bool attributes_indexed,
-    meta_model::structural::object& o,
-    const meta_model::structural::object_template& otp) {
+    entities::structural::object& o,
+    const entities::structural::object_template& otp) {
 
     o.object_templates().push_back(otp.name());
     if (attributes_indexed) {
@@ -350,9 +350,9 @@ void instantiate_object_template(const bool attributes_indexed,
 }
 
 void parent_to_child(const bool attributes_indexed,
-    meta_model::structural::object& parent,
-    meta_model::structural::object& child,
-    meta_model::structural::object& root_parent,
+    entities::structural::object& parent,
+    entities::structural::object& child,
+    entities::structural::object& root_parent,
     const bool add_leaf_relationship = true) {
 
     child.parents().push_back(parent.name());
@@ -377,8 +377,8 @@ void parent_to_child(const bool attributes_indexed,
 }
 
 void parent_to_child(const bool attributes_indexed,
-    meta_model::structural::object& parent,
-    meta_model::structural::object& child,
+    entities::structural::object& parent,
+    entities::structural::object& child,
     const bool add_leaf_relationship = true) {
     parent_to_child(attributes_indexed, parent, child, parent,
         add_leaf_relationship);
@@ -390,8 +390,8 @@ void insert_nameable(std::unordered_map<std::string, Nameable>& map,
     map.insert(std::make_pair(n->name().qualified().dot(), n));
 }
 
-void insert_object(meta_model::model& m,
-    const boost::shared_ptr<meta_model::structural::object>& o) {
+void insert_object(entities::model& m,
+    const boost::shared_ptr<entities::structural::object>& o) {
     m.structural_elements().objects().insert(std::make_pair(o->name().qualified().dot(), o));
 }
 
@@ -491,13 +491,13 @@ simple_attribute_name(const unsigned int n) const {
     return ::attribute_name(n);
 }
 
-meta_model::name mock_model_factory::
+entities::name mock_model_factory::
 model_name(const unsigned int n) const {
     return mock_model_name(n);
 }
 
 bool mock_model_factory::
-is_model_n(const unsigned int n, const meta_model::name& name) const {
+is_model_n(const unsigned int n, const entities::name& name) const {
     const auto mmp(name.location().model_modules());
     if (mmp.empty())
         return false;
@@ -512,12 +512,12 @@ is_model_n(const unsigned int n, const std::string& name) const {
 }
 
 bool mock_model_factory::
-is_type_name_n(const unsigned int n, const meta_model::name& name) const {
+is_type_name_n(const unsigned int n, const entities::name& name) const {
     return is_type_name_n(n, name.simple());
 }
 
 bool mock_model_factory::is_object_template_name_n(
-    const unsigned int n, const meta_model::name& name) const {
+    const unsigned int n, const entities::name& name) const {
     return object_template_name(n) == name.simple();
 }
 
@@ -532,14 +532,14 @@ is_module_n(const unsigned int n, const std::string& name) const {
 }
 
 bool mock_model_factory::is_type_name_n_visitor(
-    const unsigned int n, const meta_model::name& name) const {
+    const unsigned int n, const entities::name& name) const {
     return
         boost::contains(name.simple(), type_name(n)) &&
         boost::contains(name.simple(), visitor_postfix);
 }
 
 void mock_model_factory::handle_model_module(
-    const bool add_model_module, meta_model::model& m) const {
+    const bool add_model_module, entities::model& m) const {
     if (!add_model_module)
         return;
 
@@ -547,17 +547,17 @@ void mock_model_factory::handle_model_module(
     insert_nameable(m.structural_elements().modules(), module);
 }
 
-meta_model::structural::builtin mock_model_factory::
-make_builtin(const unsigned int i, const meta_model::name& model_name,
-    const meta_model::origin_types ot, const unsigned int module_n) const {
+entities::structural::builtin mock_model_factory::
+make_builtin(const unsigned int i, const entities::name& model_name,
+    const entities::origin_types ot, const unsigned int module_n) const {
 
     const auto sn(type_name(i));
     const auto ipp(make_internal_modules(module_n));
 
     helpers::name_factory nf;
-    meta_model::name n(nf.build_element_in_model(model_name, sn, ipp));
+    entities::name n(nf.build_element_in_model(model_name, sn, ipp));
 
-    meta_model::structural::builtin r;
+    entities::structural::builtin r;
     r.name(n);
     r.documentation(documentation);
     r.origin_type(ot);
@@ -565,43 +565,43 @@ make_builtin(const unsigned int i, const meta_model::name& model_name,
     return r;
 }
 
-boost::shared_ptr<meta_model::structural::object>
+boost::shared_ptr<entities::structural::object>
 mock_model_factory::make_object(const unsigned int i,
-    const meta_model::name& model_name, const meta_model::origin_types ot,
+    const entities::name& model_name, const entities::origin_types ot,
     const unsigned int module_n) const {
 
-    auto r(boost::make_shared<meta_model::structural::object>());
+    auto r(boost::make_shared<entities::structural::object>());
     populate_object(*r, i, model_name, module_n, ot);
 
     return r;
 }
 
-boost::shared_ptr<meta_model::structural::object>
+boost::shared_ptr<entities::structural::object>
 mock_model_factory::make_object_with_attribute(
-    const unsigned int i, const meta_model::name& model_name,
-    const meta_model::origin_types ot, const unsigned int module_n) const {
+    const unsigned int i, const entities::name& model_name,
+    const entities::origin_types ot, const unsigned int module_n) const {
 
     auto r(make_object(i, model_name, ot, module_n));
     add_attribute(*r, flags_.attributes_indexed(), flags_.types_parsed());
     return r;
 }
 
-boost::shared_ptr<meta_model::structural::object>
+boost::shared_ptr<entities::structural::object>
 mock_model_factory::make_object(unsigned int i,
-    const meta_model::origin_types ot, const unsigned int module_n) const {
+    const entities::origin_types ot, const unsigned int module_n) const {
     return make_object(i, mock_model_name(i), ot, module_n);
 }
 
-boost::shared_ptr<meta_model::structural::object_template>
+boost::shared_ptr<entities::structural::object_template>
 mock_model_factory::make_object_template(const unsigned int i,
-    const meta_model::name& model_name,
-    const meta_model::origin_types ot) const {
+    const entities::name& model_name,
+    const entities::origin_types ot) const {
 
     helpers::name_factory nf;
     const auto otpn(object_template_name(i));
-    meta_model::name n(nf.build_element_in_model(model_name, otpn));
+    entities::name n(nf.build_element_in_model(model_name, otpn));
 
-    auto r(boost::make_shared<meta_model::structural::object_template>());
+    auto r(boost::make_shared<entities::structural::object_template>());
     r->name(n);
     r->documentation(documentation);
     r->origin_type(ot);
@@ -609,28 +609,28 @@ mock_model_factory::make_object_template(const unsigned int i,
     return r;
 }
 
-boost::shared_ptr<meta_model::structural::enumeration> mock_model_factory::
-make_enumeration(const unsigned int i, const meta_model::name& model_name,
-    const meta_model::origin_types ot, const unsigned int module_n) const {
+boost::shared_ptr<entities::structural::enumeration> mock_model_factory::
+make_enumeration(const unsigned int i, const entities::name& model_name,
+    const entities::origin_types ot, const unsigned int module_n) const {
 
     const auto sn(type_name(i));
     const auto ipp(make_internal_modules(module_n));
 
     helpers::name_factory nf;
-    meta_model::name n(nf.build_element_in_model(model_name, sn, ipp));
+    entities::name n(nf.build_element_in_model(model_name, sn, ipp));
 
-    auto r(boost::make_shared<meta_model::structural::enumeration>());
+    auto r(boost::make_shared<entities::structural::enumeration>());
     r->name(n);
     r->documentation(documentation);
     r->origin_type(ot);
 
-    meta_model::name ue;
+    entities::name ue;
     ue.simple(unsigned_int);
     r->underlying_element(ue);
 
     const auto lambda([&](const unsigned int pos)
-        -> meta_model::structural::enumerator {
-                          meta_model::structural::enumerator r;
+        -> entities::structural::enumerator {
+                          entities::structural::enumerator r;
             r.name(nf.build_attribute_name(n, type_name(pos)));;
             r.value(boost::lexical_cast<std::string>(pos));
             return r;
@@ -642,18 +642,18 @@ make_enumeration(const unsigned int i, const meta_model::name& model_name,
     return r;
 }
 
-boost::shared_ptr<meta_model::structural::exception>
+boost::shared_ptr<entities::structural::exception>
 mock_model_factory::make_exception(const unsigned int i,
-    const meta_model::name& model_name, const meta_model::origin_types ot,
+    const entities::name& model_name, const entities::origin_types ot,
     const unsigned int module_n) const {
 
     const auto sn(type_name(i));
     const auto ipp(make_internal_modules(module_n));
 
     helpers::name_factory nf;
-    meta_model::name n(nf.build_element_in_model(model_name, sn, ipp));
+    entities::name n(nf.build_element_in_model(model_name, sn, ipp));
 
-    auto r(boost::make_shared<meta_model::structural::exception>());
+    auto r(boost::make_shared<entities::structural::exception>());
     r->name(n);
     r->documentation(documentation);
     r->origin_type(ot);
@@ -661,10 +661,10 @@ mock_model_factory::make_exception(const unsigned int i,
     return r;
 }
 
-boost::shared_ptr<meta_model::structural::module>
-mock_model_factory::make_module(const meta_model::name& n,
-    const meta_model::origin_types ot, const std::string& documentation) const {
-    auto r(boost::make_shared<meta_model::structural::module>());
+boost::shared_ptr<entities::structural::module>
+mock_model_factory::make_module(const entities::name& n,
+    const entities::origin_types ot, const std::string& documentation) const {
+    auto r(boost::make_shared<entities::structural::module>());
     r->name(n);
     r->documentation(documentation);
     r->origin_type(ot);
@@ -672,9 +672,9 @@ mock_model_factory::make_module(const meta_model::name& n,
     return r;
 }
 
-boost::shared_ptr<meta_model::structural::module>
+boost::shared_ptr<entities::structural::module>
 mock_model_factory::make_module(const unsigned int module_n,
-    const meta_model::name& model_name, const meta_model::origin_types ot,
+    const entities::name& model_name, const entities::origin_types ot,
     const std::list<std::string>& internal_modules,
     const std::string& documentation) const {
 
@@ -684,7 +684,7 @@ mock_model_factory::make_module(const unsigned int module_n,
     return make_module(n, ot, documentation);
 }
 
-meta_model::name
+entities::name
 mock_model_factory::make_name(const unsigned int model_n,
     const unsigned int simple_n) const {
 
@@ -694,36 +694,36 @@ mock_model_factory::make_name(const unsigned int model_n,
     return b.build();
 }
 
-meta_model::model
+entities::model
 mock_model_factory::make_empty_model(
-    const meta_model::origin_types ot, const unsigned int n,
+    const entities::origin_types ot, const unsigned int n,
     const bool add_model_module) const {
-    meta_model::model r;
+    entities::model r;
     populate_simple_model_attributes(r, n, ot);
     handle_model_module(add_model_module, r);
     return r;
 }
 
-meta_model::model mock_model_factory::
-make_single_type_model(const meta_model::origin_types ot, const unsigned int n,
+entities::model mock_model_factory::
+make_single_type_model(const entities::origin_types ot, const unsigned int n,
     const object_types objt, const bool add_model_module) const {
     return make_multi_type_model(n, 1, ot, objt, 0, add_model_module);
 }
 
-meta_model::model mock_model_factory::
-make_single_type_model_in_module(const meta_model::origin_types ot,
+entities::model mock_model_factory::
+make_single_type_model_in_module(const entities::origin_types ot,
     const unsigned int n,
     const object_types objt, const unsigned int mod_n,
     const bool add_model_module) const {
     return make_multi_type_model(n, 1, ot, objt, mod_n, add_model_module);
 }
 
-meta_model::model mock_model_factory::
+entities::model mock_model_factory::
 make_multi_type_model(const unsigned int n, const unsigned int type_n,
-    const meta_model::origin_types ot, const object_types objt,
+    const entities::origin_types ot, const object_types objt,
     const unsigned int mod_n, const bool add_model_module) const {
 
-    meta_model::model r(make_empty_model(ot, n, add_model_module));
+    entities::model r(make_empty_model(ot, n, add_model_module));
 
     std::list<std::string> internal_modules;
     for (unsigned int i(0); i < mod_n; ++i) {
@@ -760,10 +760,10 @@ make_multi_type_model(const unsigned int n, const unsigned int type_n,
     return r;
 }
 
-meta_model::model mock_model_factory::
-make_single_object_template_model(const meta_model::origin_types ot,
+entities::model mock_model_factory::
+make_single_object_template_model(const entities::origin_types ot,
     const unsigned int n, const bool add_model_module) const {
-    meta_model::model r(make_empty_model(ot, n, add_model_module));
+    entities::model r(make_empty_model(ot, n, add_model_module));
 
     auto ui(test::make_builtin(unsigned_int));
     r.structural_elements().builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
@@ -781,10 +781,10 @@ make_single_object_template_model(const meta_model::origin_types ot,
     return r;
 }
 
-meta_model::model mock_model_factory::
-make_first_degree_object_templates_model(const meta_model::origin_types ot,
+entities::model mock_model_factory::
+make_first_degree_object_templates_model(const entities::origin_types ot,
     const unsigned int n, const bool add_model_module) const {
-    meta_model::model r(make_empty_model(ot, n, add_model_module));
+    entities::model r(make_empty_model(ot, n, add_model_module));
 
     auto ui(test::make_builtin(unsigned_int));
     r.structural_elements().builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
@@ -814,11 +814,11 @@ make_first_degree_object_templates_model(const meta_model::origin_types ot,
     return r;
 }
 
-meta_model::model mock_model_factory::
-make_second_degree_object_templates_model(const meta_model::origin_types ot,
+entities::model mock_model_factory::
+make_second_degree_object_templates_model(const entities::origin_types ot,
     const unsigned int n,
     const bool add_model_module) const {
-    meta_model::model r(make_empty_model(ot, n, add_model_module));
+    entities::model r(make_empty_model(ot, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
     r.structural_elements().builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
@@ -864,11 +864,11 @@ make_second_degree_object_templates_model(const meta_model::origin_types ot,
     return r;
 }
 
-meta_model::model mock_model_factory::
+entities::model mock_model_factory::
 make_multiple_inheritance_object_templates_model(
-    const meta_model::origin_types ot, const unsigned int n,
+    const entities::origin_types ot, const unsigned int n,
     const bool add_model_module) const {
-    meta_model::model r(make_empty_model(ot, n, add_model_module));
+    entities::model r(make_empty_model(ot, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
     r.structural_elements().builtins().insert(std::make_pair(ui->name().qualified().dot(), ui));
@@ -893,9 +893,9 @@ make_multiple_inheritance_object_templates_model(
     return r;
 }
 
-meta_model::model mock_model_factory::
+entities::model mock_model_factory::
 make_diamond_inheritance_object_templates_model(
-    const meta_model::origin_types ot, const unsigned int n,
+    const entities::origin_types ot, const unsigned int n,
     const bool add_model_module) const {
     auto r(make_empty_model(ot, n, add_model_module));
 
@@ -936,9 +936,9 @@ make_diamond_inheritance_object_templates_model(
     return r;
 }
 
-meta_model::model mock_model_factory::
+entities::model mock_model_factory::
 make_object_with_parent_that_instantiates_object_template(
-    const meta_model::origin_types ot,
+    const entities::origin_types ot,
     const unsigned int n, const bool add_model_module) const {
     auto r(make_empty_model(ot, n, add_model_module));
 
@@ -962,9 +962,9 @@ make_object_with_parent_that_instantiates_object_template(
     return r;
 }
 
-meta_model::model mock_model_factory::
+entities::model mock_model_factory::
 make_object_with_parent_that_instantiates_a_child_object_template(
-    const meta_model::origin_types ot,
+    const entities::origin_types ot,
     const unsigned int n, const bool add_model_module) const {
     auto r(make_empty_model(ot, n, add_model_module));
 
@@ -996,9 +996,9 @@ make_object_with_parent_that_instantiates_a_child_object_template(
     return r;
 }
 
-meta_model::model mock_model_factory::
+entities::model mock_model_factory::
 make_object_template_that_inherits_missing_object_template(
-    const meta_model::origin_types ot, const unsigned int n,
+    const entities::origin_types ot, const unsigned int n,
     const bool add_model_module) const {
     auto r(make_empty_model(ot, n, add_model_module));
     auto otp0(make_object_template(0, r.name(), ot));
@@ -1008,9 +1008,9 @@ make_object_template_that_inherits_missing_object_template(
     return r;
 }
 
-meta_model::model mock_model_factory::
+entities::model mock_model_factory::
 make_object_that_instantiates_missing_object_template(
-    const meta_model::origin_types ot, const unsigned int n,
+    const entities::origin_types ot, const unsigned int n,
     const bool add_model_module) const {
     auto r(make_empty_model(ot, n, add_model_module));
 
@@ -1027,9 +1027,9 @@ make_object_that_instantiates_missing_object_template(
     return r;
 }
 
-meta_model::model mock_model_factory::
+entities::model mock_model_factory::
 make_object_that_instantiates_object_template_with_missing_parent(
-    const meta_model::origin_types ot,
+    const entities::origin_types ot,
     const unsigned int n, const bool add_model_module) const {
     auto r(make_empty_model(ot, n, add_model_module));
 
@@ -1051,9 +1051,9 @@ make_object_that_instantiates_object_template_with_missing_parent(
     return r;
 }
 
-meta_model::model mock_model_factory::
+entities::model mock_model_factory::
 object_with_both_transparent_and_opaque_associations(
-    const meta_model::origin_types ot,
+    const entities::origin_types ot,
     const bool add_model_module) const {
     auto r(make_empty_model(ot, 0, add_model_module));
     const auto mn(mock_model_name(0));
@@ -1072,7 +1072,7 @@ object_with_both_transparent_and_opaque_associations(
         o0->transparent_associations().push_back(o1->name());
 
     helpers::name_factory nf;
-    auto o2(boost::make_shared<meta_model::structural::object>());
+    auto o2(boost::make_shared<entities::structural::object>());
     o2->name(nf.build_element_name("boost", "shared_ptr"));
     insert_object(r, o2);
 
@@ -1096,7 +1096,7 @@ object_with_both_transparent_and_opaque_associations(
     if (flags_.associations_indexed())
         o0->opaque_associations().push_back(o3->name());
 
-    auto o4(boost::make_shared<meta_model::structural::object>());
+    auto o4(boost::make_shared<entities::structural::object>());
     o4->name(nf.build_element_name("std", "string"));
     insert_object(r, o4);
 
@@ -1113,14 +1113,14 @@ object_with_both_transparent_and_opaque_associations(
     return r;
 }
 
-meta_model::model mock_model_factory::
-object_with_attribute(const meta_model::origin_types ot,
+entities::model mock_model_factory::
+object_with_attribute(const entities::origin_types ot,
     const object_types objt, const attribute_types pt,
     const bool add_model_module) const {
     const auto mn(mock_model_name(0));
     auto o1(make_object(1, mn, ot));
 
-    auto o0(boost::make_shared<meta_model::structural::object>());
+    auto o0(boost::make_shared<entities::structural::object>());
     if (objt == object_types::value_object)
         o0 = make_object(0, mn, ot);
     else {
@@ -1145,7 +1145,7 @@ object_with_attribute(const meta_model::origin_types ot,
     }
 
     if (pt == attribute_types::unsigned_int || pt == attribute_types::boolean) {
-        auto ui(boost::make_shared<meta_model::structural::builtin>());
+        auto ui(boost::make_shared<entities::structural::builtin>());
         ui->name(p.parsed_type().current());
         insert_nameable(r.structural_elements().builtins(), ui);
 
@@ -1153,7 +1153,7 @@ object_with_attribute(const meta_model::origin_types ot,
             o0->transparent_associations().push_back(ui->name());
 
     } else if (pt == attribute_types::boost_shared_ptr) {
-        auto o2(boost::make_shared<meta_model::structural::object>());
+        auto o2(boost::make_shared<entities::structural::object>());
         o2->name(nf.build_element_name("boost", "shared_ptr"));
         insert_object(r, o2);
 
@@ -1167,7 +1167,7 @@ object_with_attribute(const meta_model::origin_types ot,
         if (flags_.associations_indexed())
             o0->transparent_associations().push_back(b->name());
 
-        auto o2(boost::make_shared<meta_model::structural::object>());
+        auto o2(boost::make_shared<entities::structural::object>());
         o2->name(nf.build_element_name("std", "pair"));
 
         if (flags_.associations_indexed())
@@ -1187,7 +1187,7 @@ object_with_attribute(const meta_model::origin_types ot,
         if (flags_.associations_indexed())
             o0->transparent_associations().push_back(ui->name());
 
-        auto o2(boost::make_shared<meta_model::structural::object>());
+        auto o2(boost::make_shared<entities::structural::object>());
         o2->name(nf.build_element_name("boost", "variant"));
         insert_object(r, o2);
 
@@ -1195,7 +1195,7 @@ object_with_attribute(const meta_model::origin_types ot,
             o0->transparent_associations().push_back(o2->name());
 
     } else if (pt == attribute_types::std_string) {
-        auto o2(boost::make_shared<meta_model::structural::object>());
+        auto o2(boost::make_shared<entities::structural::object>());
         o2->name(nf.build_element_name("std", "string"));
         insert_object(r, o2);
 
@@ -1206,13 +1206,13 @@ object_with_attribute(const meta_model::origin_types ot,
     return r;
 }
 
-std::array<meta_model::model, 2>
+std::array<entities::model, 2>
 mock_model_factory::object_with_attribute_type_in_different_model(
     const bool add_model_module) const {
-    const auto tg(meta_model::origin_types::target);
+    const auto tg(entities::origin_types::target);
     auto o0(make_object(0, tg));
 
-    const auto npr(meta_model::origin_types::non_proxy_reference);
+    const auto npr(entities::origin_types::non_proxy_reference);
     auto o1(make_object(1, npr));
 
     add_attribute(*o0, flags_.attributes_indexed(), flags_.types_parsed(),
@@ -1226,13 +1226,13 @@ mock_model_factory::object_with_attribute_type_in_different_model(
     insert_object(m1, o1);
     handle_model_module(add_model_module, m1);
 
-    return std::array<meta_model::model, 2> {{ m0, m1 }};
+    return std::array<entities::model, 2> {{ m0, m1 }};
 }
 
-meta_model::model mock_model_factory::
-object_with_missing_attribute_type(const meta_model::origin_types ot,
+entities::model mock_model_factory::
+object_with_missing_attribute_type(const entities::origin_types ot,
     const bool add_model_module) const {
-    using meta_model::origin_types;
+    using entities::origin_types;
     auto o0(make_object(0, origin_types::target));
     auto o1(make_object(1, origin_types::non_proxy_reference));
 
@@ -1248,8 +1248,8 @@ object_with_missing_attribute_type(const meta_model::origin_types ot,
     return r;
 }
 
-meta_model::model mock_model_factory::
-object_with_parent_in_the_same_model(const meta_model::origin_types ot,
+entities::model mock_model_factory::
+object_with_parent_in_the_same_model(const entities::origin_types ot,
     const bool has_attribute, const bool add_model_module) const {
     const auto mn(mock_model_name(0));
 
@@ -1277,8 +1277,8 @@ object_with_parent_in_the_same_model(const meta_model::origin_types ot,
     return r;
 }
 
-meta_model::model mock_model_factory::
-object_with_missing_parent_in_the_same_model(const meta_model::origin_types ot,
+entities::model mock_model_factory::
+object_with_missing_parent_in_the_same_model(const entities::origin_types ot,
     const bool add_model_module) const {
     const auto mn(mock_model_name(0));
     auto o0(make_object(0, mn, ot));
@@ -1291,12 +1291,12 @@ object_with_missing_parent_in_the_same_model(const meta_model::origin_types ot,
     return r;
 }
 
-std::array<meta_model::model, 2> mock_model_factory::
+std::array<entities::model, 2> mock_model_factory::
 object_with_parent_in_different_models(const bool add_model_module) const {
-    const auto tg(meta_model::origin_types::target);
+    const auto tg(entities::origin_types::target);
     auto o0(make_object(0, tg));
 
-    const auto npr(meta_model::origin_types::non_proxy_reference);
+    const auto npr(entities::origin_types::non_proxy_reference);
     auto o1(make_object(1, npr));
     parent_to_child(flags_.attributes_indexed(), *o1, *o0);
     o1->is_parent(true);
@@ -1307,11 +1307,11 @@ object_with_parent_in_different_models(const bool add_model_module) const {
     auto m1(make_empty_model(npr, 1, add_model_module));
     insert_object(m1, o1);
 
-    return std::array<meta_model::model, 2> {{ m0, m1 }};
+    return std::array<entities::model, 2> {{ m0, m1 }};
 }
 
-meta_model::model mock_model_factory::
-object_with_three_children_in_same_model(const meta_model::origin_types ot,
+entities::model mock_model_factory::
+object_with_three_children_in_same_model(const entities::origin_types ot,
     const bool add_model_module) const {
     const auto mn(mock_model_name(0));
     auto o0(make_object(0, mn, ot));
@@ -1334,8 +1334,8 @@ object_with_three_children_in_same_model(const meta_model::origin_types ot,
     return r;
 }
 
-meta_model::model mock_model_factory::
-object_with_third_degree_parent_in_same_model(const meta_model::origin_types ot,
+entities::model mock_model_factory::
+object_with_third_degree_parent_in_same_model(const entities::origin_types ot,
     const bool has_attribute, const bool add_model_module) const {
     const auto mn(mock_model_name(0));
 
@@ -1389,8 +1389,8 @@ object_with_third_degree_parent_in_same_model(const meta_model::origin_types ot,
     return r;
 }
 
-meta_model::model mock_model_factory::
-object_with_third_degree_parent_missing(const meta_model::origin_types ot,
+entities::model mock_model_factory::
+object_with_third_degree_parent_missing(const entities::origin_types ot,
     const bool add_model_module) const {
     const auto mn(mock_model_name(0));
     auto o0(make_object(0, mn, ot));
@@ -1419,10 +1419,10 @@ object_with_third_degree_parent_missing(const meta_model::origin_types ot,
     return r;
 }
 
-std::array<meta_model::model, 4> mock_model_factory::
+std::array<entities::model, 4> mock_model_factory::
 object_with_third_degree_parent_in_different_models(
     const bool add_model_module) const {
-    using meta_model::origin_types;
+    using entities::origin_types;
     const auto npr(origin_types::non_proxy_reference);
     auto o0(make_object(0, origin_types::target));
     auto o1(make_object(1, npr));
@@ -1454,13 +1454,13 @@ object_with_third_degree_parent_in_different_models(
     auto m3(make_empty_model(npr, 3, add_model_module));
     insert_object(m3, o3);
 
-    return std::array<meta_model::model, 4>{{ m0, m1, m2, m3 }};
+    return std::array<entities::model, 4>{{ m0, m1, m2, m3 }};
 }
 
-std::array<meta_model::model, 4> mock_model_factory::
+std::array<entities::model, 4> mock_model_factory::
 object_with_missing_third_degree_parent_in_different_models(
     const bool add_model_module) const {
-    using meta_model::origin_types;
+    using entities::origin_types;
     const auto npr(origin_types::non_proxy_reference);
     auto o0(make_object(0, origin_types::target));
     auto o1(make_object(1, npr));
@@ -1489,18 +1489,18 @@ object_with_missing_third_degree_parent_in_different_models(
     auto m2(make_empty_model(npr, 2, add_model_module));
     insert_object(m2, o2);
 
-    return std::array<meta_model::model, 4>{{ m0, m1, m2 }};
+    return std::array<entities::model, 4>{{ m0, m1, m2 }};
 }
 
-meta_model::model mock_model_factory::
+entities::model mock_model_factory::
 object_with_group_of_attributes_of_different_types(
-    const meta_model::origin_types ot,
+    const entities::origin_types ot,
     const bool repeat_group, const bool add_model_module) const {
     auto r(make_empty_model(ot, 0, add_model_module));
     const auto mn(r.name());
 
     auto o0(make_object(0, mn, ot));
-    const auto lambda([&](const meta_model::attribute& p) {
+    const auto lambda([&](const entities::attribute& p) {
             o0->local_attributes().push_back(p);
             if (flags_.attributes_indexed())
                 o0->all_attributes().push_back(p);
@@ -1515,7 +1515,7 @@ object_with_group_of_attributes_of_different_types(
 
     auto p1(mock_attribute(o0->name(), tp, 1));
     lambda(p1);
-    auto ui(boost::make_shared<meta_model::structural::builtin>());
+    auto ui(boost::make_shared<entities::structural::builtin>());
     ui->name(p1.parsed_type().current());
     insert_nameable(r.structural_elements().builtins(), ui);
 
@@ -1525,7 +1525,7 @@ object_with_group_of_attributes_of_different_types(
     auto p2(mock_attribute(o0->name(), tp, 2, bsp, o3->name()));
     lambda(p2);
 
-    auto o2(boost::make_shared<meta_model::structural::object>());
+    auto o2(boost::make_shared<entities::structural::object>());
     logical::helpers::name_factory nf;
     o2->name(nf.build_element_name("boost", "shared_ptr"));
     insert_object(r, o2);

@@ -27,9 +27,9 @@
 
 #include <string>
 #include <iosfwd>
-#include "dogen.logical/types/meta_model/technical_space.hpp"
-#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
-#include "dogen.logical/types/meta_model/model.hpp"
+#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
+#include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
@@ -39,15 +39,15 @@ namespace dogen::logical::transforms {
  */
 class enumerations_transform final {
 private:
-    static meta_model::name obtain_enumeration_default_underlying_element_name(
-        const meta_model::model& m);
+    static entities::name obtain_enumeration_default_underlying_element_name(
+        const entities::model& m);
     static std::string obtain_invalid_enumerator_simple_name(
-        const meta_model::technical_space ts);
-    static meta_model::structural::enumerator make_invalid_enumerator(
-        const meta_model::name& n, const meta_model::technical_space ts);
+        const entities::technical_space ts);
+    static entities::structural::enumerator make_invalid_enumerator(
+        const entities::name& n, const entities::technical_space ts);
 
 public:
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

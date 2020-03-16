@@ -27,9 +27,9 @@ namespace dogen::generation::features {
 
 namespace {
 
-dogen::variability::meta_model::feature_template
+dogen::variability::entities::feature_template
 make_formatting_style() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature_template r;
     r.name().simple("formatting_style");
     r.description(R"(Style of formatting to use for this archetype.
@@ -42,9 +42,9 @@ make_formatting_style() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::entities::feature_template
 make_formatting_input() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature_template r;
     r.name().simple("formatting_input");
     r.description(R"(If the formatting style requires a template, the name of the template to use.
@@ -60,7 +60,7 @@ make_formatting_input() {
 }
 
 formatting::feature_group
-formatting::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+formatting::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
@@ -72,7 +72,7 @@ formatting::make_feature_group(const dogen::variability::meta_model::feature_mod
 
 formatting::static_configuration formatting::make_static_configuration(
     const feature_group& fg,
-    const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::entities::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
@@ -81,10 +81,10 @@ formatting::static_configuration formatting::make_static_configuration(
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature_template>
+std::list<dogen::variability::entities::feature_template>
 formatting::make_templates() {
-    using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature_template> r;
     r.push_back(make_formatting_style());
     r.push_back(make_formatting_input());
     return r;

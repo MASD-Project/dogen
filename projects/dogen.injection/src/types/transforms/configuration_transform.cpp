@@ -20,9 +20,9 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.variability/types/meta_model/binding_point.hpp"
+#include "dogen.variability/types/entities/binding_point.hpp"
 #include "dogen.variability/types/helpers/configuration_factory.hpp"
-#include "dogen.injection/io/meta_model/model_io.hpp"
+#include "dogen.injection/io/entities/model_io.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
 #include "dogen.injection/types/transforms/configuration_transform.hpp"
 
@@ -40,7 +40,7 @@ namespace dogen::injection::transforms {
 template<typename NameableAndTaggable>
 inline void create_configuration(
     const variability::helpers::configuration_factory& f,
-    const variability::meta_model::binding_point bp, NameableAndTaggable& nat) {
+    const variability::entities::binding_point bp, NameableAndTaggable& nat) {
 
     const auto& tv(nat.tagged_values());
     const auto& otv(nat.tagged_values_overrides());
@@ -49,7 +49,7 @@ inline void create_configuration(
 }
 
 void configuration_transform::
-apply(const transforms::context& ctx, meta_model::model& m) {
+apply(const transforms::context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "configuration transform",
         transform_id, m.name(), *ctx.tracer(), m);
 
@@ -60,7 +60,7 @@ apply(const transforms::context& ctx, meta_model::model& m) {
     const auto& cm(ctx.compatibility_mode());
     variability::helpers::configuration_factory f(fm, cm);
 
-    using bp = variability::meta_model::binding_point;
+    using bp = variability::entities::binding_point;
     create_configuration(f, bp::global, m);
     for (auto& e : m.elements()) {
         create_configuration(f, bp::element, e);

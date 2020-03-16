@@ -27,9 +27,9 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/unordered_set_io.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
-#include "dogen.logical/io/meta_model/name_io.hpp"
-#include "dogen.logical/io/meta_model/location_io.hpp"
-#include "dogen.logical/io/meta_model/name_tree_io.hpp"
+#include "dogen.logical/io/entities/name_io.hpp"
+#include "dogen.logical/io/entities/location_io.hpp"
+#include "dogen.logical/io/entities/name_tree_io.hpp"
 #include "dogen.logical/types/helpers/name_builder.hpp"
 #include "dogen.logical/types/helpers/building_error.hpp"
 #include "dogen.logical/types/helpers/name_tree_builder.hpp"
@@ -125,10 +125,10 @@ void name_tree_builder::end_children() {
     current_ = current_->parent();
 }
 
-meta_model::name_tree name_tree_builder::make_name_tree(const node& n) {
+entities::name_tree name_tree_builder::make_name_tree(const node& n) {
     BOOST_LOG_SEV(lg, debug) << "Node: " << n.data();
 
-    meta_model::name_tree r;
+    entities::name_tree r;
     r.current(n.data());
 
     for (const auto c : n.children()) {
@@ -139,7 +139,7 @@ meta_model::name_tree name_tree_builder::make_name_tree(const node& n) {
     return r;
 }
 
-meta_model::name_tree name_tree_builder::build() {
+entities::name_tree name_tree_builder::build() {
     BOOST_LOG_SEV(lg, debug) << "Started building.";
 
     /*

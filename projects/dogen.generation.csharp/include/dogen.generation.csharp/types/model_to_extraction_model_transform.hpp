@@ -31,7 +31,7 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen.generation/types/meta_model/model.hpp"
+#include "dogen.generation/types/entities/model.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
 #include "dogen.generation/types/transforms/model_to_extraction_model_transform_interface.hpp"
 #include "dogen.generation.csharp/types/formatters/repository.hpp"
@@ -57,11 +57,11 @@ public:
 
 private:
     formattables::model create_formattables_model(
-        const variability::meta_model::feature_model& feature_model,
+        const variability::entities::feature_model& feature_model,
         const formatters::repository& frp, const formattables::locator & l,
-        const generation::meta_model::model& m) const;
+        const generation::entities::model& m) const;
 
-    std::list<extraction::meta_model::artefact>
+    std::list<extraction::entities::artefact>
     format(const formattables::model& fm) const;
 
 public:
@@ -82,16 +82,16 @@ public:
     const physical::location_repository_parts&
     archetype_location_repository_parts() const override;
 
-    logical::meta_model::technical_space technical_space() const override;
+    logical::entities::technical_space technical_space() const override;
 
     std::unordered_map<std::string,
-                       generation::meta_model::intra_backend_segment_properties>
+                       generation::entities::intra_backend_segment_properties>
     intra_backend_segment_properties() const override;
 
-    extraction::meta_model::model
+    extraction::entities::model
     apply(const generation::transforms::context& ctx,
         const bool enable_backend_directories,
-        const generation::meta_model::model& m) const override;
+        const generation::entities::model& m) const override;
 };
 
 }

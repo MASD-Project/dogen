@@ -21,7 +21,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/types/meta_model/structural/module.hpp"
+#include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.generation.csharp/types/traits.hpp"
 #include "dogen.generation.csharp/types/formattables/workflow.hpp"
 #include "dogen.generation.csharp/types/formatters/workflow.hpp"
@@ -50,9 +50,9 @@ model_to_extraction_model_transform::
 
 formattables::model
 model_to_extraction_model_transform::create_formattables_model(
-    const variability::meta_model::feature_model& feature_model,
+    const variability::entities::feature_model& feature_model,
     const formatters::repository& frp, const formattables::locator& l,
-    const generation::meta_model::model& m) const {
+    const generation::entities::model& m) const {
     formattables::workflow fw;
     return fw.execute(feature_model, frp, l, m);
 }
@@ -65,7 +65,7 @@ std::string model_to_extraction_model_transform::description() const {
     return ::description;
 }
 
-std::list<extraction::meta_model::artefact>
+std::list<extraction::entities::artefact>
 model_to_extraction_model_transform::
 format(const formattables::model& fm) const {
     formatters::workflow wf;
@@ -99,33 +99,33 @@ archetype_location_repository_parts() const {
     return rg.archetype_location_repository_parts();
 }
 
-logical::meta_model::technical_space
+logical::entities::technical_space
 model_to_extraction_model_transform::technical_space() const {
-    return logical::meta_model::technical_space::csharp;
+    return logical::entities::technical_space::csharp;
 }
 
 std::unordered_map<std::string,
-                   generation::meta_model::intra_backend_segment_properties>
+                   generation::entities::intra_backend_segment_properties>
 model_to_extraction_model_transform::intra_backend_segment_properties() const {
-    using namespace logical::meta_model;
-    generation::meta_model::intra_backend_segment_properties project;
+    using namespace logical::entities;
+    generation::entities::intra_backend_segment_properties project;
 
-    using generation::meta_model::path_contribution_types;
+    using generation::entities::path_contribution_types;
     project.internal_modules(path_contribution_types::as_folders);
     project.facet(path_contribution_types::as_folders);
 
     std::unordered_map<
         std::string,
-        generation::meta_model::intra_backend_segment_properties> r;
+        generation::entities::intra_backend_segment_properties> r;
     r["project"] = project;
     return r;
 }
 
-extraction::meta_model::model
+extraction::entities::model
 model_to_extraction_model_transform::apply(
     const generation::transforms::context& ctx,
     const bool enable_backend_directories,
-    const generation::meta_model::model& m) const {
+    const generation::entities::model& m) const {
     tracing::scoped_transform_tracer stp(lg,
         "C# model to text transform", transform_id, m.name().qualified().dot(),
         *ctx.tracer());
@@ -152,7 +152,7 @@ model_to_extraction_model_transform::apply(
     /*
      * Code-generate all artefacts.
      */
-    extraction::meta_model::model r;
+    extraction::entities::model r;
     r.artefacts(format(fm));
     r.managed_directories().push_back(l.project_path());
 

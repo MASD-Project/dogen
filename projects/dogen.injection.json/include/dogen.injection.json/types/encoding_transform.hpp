@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen.injection/types/meta_model/model.hpp"
+#include "dogen.injection/types/entities/model.hpp"
 #include "dogen.injection/types/transforms/encoding_transform.hpp"
 
 namespace dogen::injection::json {
@@ -42,7 +42,7 @@ public:
     std::string extension() const override;
 
     void apply(const transforms::context& ctx,
-        const meta_model::model& m, const boost::filesystem::path& p) override;
+        const entities::model& m, const boost::filesystem::path& p) override;
 };
 
 }

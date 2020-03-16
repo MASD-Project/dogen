@@ -29,7 +29,7 @@
 #include <functional>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.logical/types/meta_model/model.hpp"
+#include "dogen.logical/types/entities/model.hpp"
 
 namespace dogen::logical::test {
 
@@ -188,7 +188,7 @@ public:
     /**
      * @brief Returns the model name derived from n.
      */
-    meta_model::name model_name(const unsigned int n = 0) const;
+    entities::name model_name(const unsigned int n = 0) const;
 
 public:
     /**
@@ -196,7 +196,7 @@ public:
      * naming convention for model @e n.
      */
     /**@{*/
-    bool is_model_n(const unsigned int n, const meta_model::name& name) const;
+    bool is_model_n(const unsigned int n, const entities::name& name) const;
     bool is_model_n(const unsigned int n, const std::string& name) const;
     /**@}*/
 
@@ -206,7 +206,7 @@ public:
      */
     /**@{*/
     bool is_type_name_n(const unsigned int n,
-        const meta_model::name& name) const;
+        const entities::name& name) const;
     bool is_type_name_n(const unsigned int n, const std::string& name) const;
     /**@}*/
 
@@ -215,7 +215,7 @@ public:
      * naming convention for module @e n.
      */
     bool is_object_template_name_n(const unsigned int n,
-        const meta_model::name& name) const;
+        const entities::name& name) const;
 
     /**
      * @brief Returns true if the name matches the mock model factory
@@ -229,83 +229,83 @@ public:
      * for visitors.
      */
     bool is_type_name_n_visitor(const unsigned int n,
-        const meta_model::name& name) const;
+        const entities::name& name) const;
 
     /**
      * @brief If required, adds a module for the model.
      */
     void handle_model_module(const bool add_model_module,
-        meta_model::model& m) const;
+        entities::model& m) const;
 
 public:
     /**
      * @brief Creates a built-in.
      */
-    meta_model::structural::builtin make_builtin(const unsigned int i,
-        const meta_model::name& model_name, const meta_model::origin_types ot,
+    entities::structural::builtin make_builtin(const unsigned int i,
+        const entities::name& model_name, const entities::origin_types ot,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create a value object.
      */
-    boost::shared_ptr<meta_model::structural::object>
-    make_object(const unsigned int i, const meta_model::name& model_name,
-        const meta_model::origin_types ot,
+    boost::shared_ptr<entities::structural::object>
+    make_object(const unsigned int i, const entities::name& model_name,
+        const entities::origin_types ot,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create a value object with an attribute
      */
-    boost::shared_ptr<meta_model::structural::object>
+    boost::shared_ptr<entities::structural::object>
     make_object_with_attribute(const unsigned int i,
-        const meta_model::name& model_name,
-        const meta_model::origin_types ot,
+        const entities::name& model_name,
+        const entities::origin_types ot,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create a value object with a model name based on @e i.
      */
-    boost::shared_ptr<meta_model::structural::object> make_object(unsigned int i,
-        const meta_model::origin_types ot,
+    boost::shared_ptr<entities::structural::object> make_object(unsigned int i,
+        const entities::origin_types ot,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create an object template.
      */
-    boost::shared_ptr<meta_model::structural::object_template>
+    boost::shared_ptr<entities::structural::object_template>
     make_object_template(const unsigned int i,
-        const meta_model::name& model_name,
-        const meta_model::origin_types ot) const;
+        const entities::name& model_name,
+        const entities::origin_types ot) const;
 
     /**
      * @brief Create an enumeration.
      */
-    boost::shared_ptr<meta_model::structural::enumeration>
-    make_enumeration(const unsigned int i, const meta_model::name& model_name,
-        const meta_model::origin_types ot,
+    boost::shared_ptr<entities::structural::enumeration>
+    make_enumeration(const unsigned int i, const entities::name& model_name,
+        const entities::origin_types ot,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create an exception.
      */
-    boost::shared_ptr<meta_model::structural::exception>
-    make_exception(const unsigned int i, const meta_model::name& model_name,
-        const meta_model::origin_types ot,
+    boost::shared_ptr<entities::structural::exception>
+    make_exception(const unsigned int i, const entities::name& model_name,
+        const entities::origin_types ot,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create a module from a name.
      */
-    boost::shared_ptr<meta_model::structural::module> make_module(
-        const meta_model::name& n, const meta_model::origin_types ot,
+    boost::shared_ptr<entities::structural::module> make_module(
+        const entities::name& n, const entities::origin_types ot,
         const std::string& documentation = std::string()) const;
 
     /**
      * @brief Create a module from its components.
      */
-    boost::shared_ptr<meta_model::structural::module>
-    make_module(const unsigned int module_n, const meta_model::name& model_name,
-        const meta_model::origin_types ot,
+    boost::shared_ptr<entities::structural::module>
+    make_module(const unsigned int module_n, const entities::name& model_name,
+        const entities::origin_types ot,
         const std::list<std::string>& internal_modules,
         const std::string& documentation) const;
 
@@ -313,22 +313,22 @@ public:
     /**
      * @brief Returns a name derived from the input parameters
      */
-    meta_model::name make_name(const unsigned int model_n = 0,
+    entities::name make_name(const unsigned int model_n = 0,
         const unsigned int simple_n = 0) const;
 
     /**
      * @brief Builds a model with no elements.
      */
-    meta_model::model make_empty_model(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+    entities::model make_empty_model(
+        const entities::origin_types ot = entities::origin_types::target,
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a name derived from n, containing a
      * single type with a name also deriving from n.
      */
-    meta_model::model make_single_type_model(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+    entities::model make_single_type_model(
+        const entities::origin_types ot = entities::origin_types::target,
         const unsigned int n = 0,
         const object_types objt = object_types::value_object,
         const bool add_model_module = false) const;
@@ -337,8 +337,8 @@ public:
      * @brief Builds a model with a name derived from n, containing a
      * single type with a name also deriving from n, inside mod_n modules.
      */
-    meta_model::model make_single_type_model_in_module(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+    entities::model make_single_type_model_in_module(
+        const entities::origin_types ot = entities::origin_types::target,
         const unsigned int n = 0,
         const object_types objt = object_types::value_object,
         const unsigned int mod_n = 0,
@@ -348,10 +348,10 @@ public:
      * @brief Builds a model with a name derived from n, and a number
      * of types determined by type_n, inside mod_n module.
      */
-    meta_model::model make_multi_type_model(
+    entities::model make_multi_type_model(
         const unsigned int n,
         const unsigned int type_n,
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+        const entities::origin_types ot = entities::origin_types::target,
         const object_types objt = object_types::value_object,
         const unsigned int mod_n = 0,
         const bool add_model_module = false) const;
@@ -361,8 +361,8 @@ public:
      * @brief Builds a model with an object template, and an object
      * that instantiates it.
      */
-    meta_model::model make_single_object_template_model(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+    entities::model make_single_object_template_model(
+        const entities::origin_types ot = entities::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
 
@@ -371,23 +371,23 @@ public:
      * another object template, and two types that instantiate each
      * object template.
      */
-    meta_model::model make_first_degree_object_templates_model(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+    entities::model make_first_degree_object_templates_model(
+        const entities::origin_types ot = entities::origin_types::target,
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Same as first degree but with 2 levels of inheritance.
      */
-    meta_model::model make_second_degree_object_templates_model(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+    entities::model make_second_degree_object_templates_model(
+        const entities::origin_types ot = entities::origin_types::target,
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with two base object templates and an
      * object template that inherits from both.
      */
-    meta_model::model make_multiple_inheritance_object_templates_model(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+    entities::model make_multiple_inheritance_object_templates_model(
+        const entities::origin_types ot = entities::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
 
@@ -397,8 +397,8 @@ public:
      * refines both of these. Finally, an object that instantiates the
      * last object template.
      */
-    meta_model::model make_diamond_inheritance_object_templates_model(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+    entities::model make_diamond_inheritance_object_templates_model(
+        const entities::origin_types ot = entities::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
 
@@ -406,9 +406,9 @@ public:
      * @brief Builds a model with a child object with a parent that
      * instantiates an object template.
      */
-    meta_model::model
+    entities::model
     make_object_with_parent_that_instantiates_object_template(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+        const entities::origin_types ot = entities::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
 
@@ -417,9 +417,9 @@ public:
      * instantiates an object template, which inherits from another
      * object template.
      */
-    meta_model::model
+    entities::model
     make_object_with_parent_that_instantiates_a_child_object_template(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+        const entities::origin_types ot = entities::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
 
@@ -427,9 +427,9 @@ public:
      * @brief Builds a model with an object template that inherits
      * from a non-existing object template.
      */
-    meta_model::model
+    entities::model
     make_object_template_that_inherits_missing_object_template(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+        const entities::origin_types ot = entities::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
 
@@ -437,8 +437,8 @@ public:
      * @brief Builds a model with an object that instantiates a
      * non-existing object template.
      */
-    meta_model::model make_object_that_instantiates_missing_object_template(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+    entities::model make_object_that_instantiates_missing_object_template(
+        const entities::origin_types ot = entities::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
 
@@ -446,9 +446,9 @@ public:
      * @brief Object that instantiates object template with missing
      * parent.
      */
-    meta_model::model
+    entities::model
     make_object_that_instantiates_object_template_with_missing_parent(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+        const entities::origin_types ot = entities::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
 
@@ -457,17 +457,17 @@ public:
      * @brief Scenario: object that exercises both weak and regular
      * associations.
      */
-    meta_model::model
+    entities::model
     object_with_both_transparent_and_opaque_associations(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+        const entities::origin_types ot = entities::origin_types::target,
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with single attribute of a type existent in
      * current model.
      */
-    meta_model::model object_with_attribute(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+    entities::model object_with_attribute(
+        const entities::origin_types ot = entities::origin_types::target,
         const object_types objt = object_types::value_object,
         const attribute_types pt = attribute_types::value_object,
         const bool add_model_module = false) const;
@@ -476,53 +476,53 @@ public:
      * @brief Scenario: object with single attribute of a type existent in
      * a second model.
      */
-    std::array<meta_model::model, 2>
+    std::array<entities::model, 2>
     object_with_attribute_type_in_different_model(
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with attribute of missing type.
      */
-    meta_model::model object_with_missing_attribute_type(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+    entities::model object_with_missing_attribute_type(
+        const entities::origin_types ot = entities::origin_types::target,
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with parent in current model.
      */
-    meta_model::model object_with_parent_in_the_same_model(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+    entities::model object_with_parent_in_the_same_model(
+        const entities::origin_types ot = entities::origin_types::target,
         const bool has_attribute = false,
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with missing parent in current model.
      */
-    meta_model::model object_with_missing_parent_in_the_same_model(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+    entities::model object_with_missing_parent_in_the_same_model(
+        const entities::origin_types ot = entities::origin_types::target,
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with a parent in a second model.
      */
-    std::array<meta_model::model, 2>
+    std::array<entities::model, 2>
     object_with_parent_in_different_models(
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with three children.
      */
-    meta_model::model object_with_three_children_in_same_model(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+    entities::model object_with_three_children_in_same_model(
+        const entities::origin_types ot = entities::origin_types::target,
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with three levels deep in inheritance tree
      * in current model.
      */
-    meta_model::model
+    entities::model
     object_with_third_degree_parent_in_same_model(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+        const entities::origin_types ot = entities::origin_types::target,
         const bool has_attribute = false,
         const bool add_model_module = false) const;
 
@@ -530,15 +530,15 @@ public:
      * @brief Scenario: object with three levels deep in inheritance tree
      * has missing parent.
      */
-    meta_model::model object_with_third_degree_parent_missing(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+    entities::model object_with_third_degree_parent_missing(
+        const entities::origin_types ot = entities::origin_types::target,
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object three levels deep in inheritance tree,
      * with parents in different models.
      */
-    std::array<meta_model::model, 4>
+    std::array<entities::model, 4>
     object_with_third_degree_parent_in_different_models(
         const bool add_model_module = false) const;
 
@@ -547,7 +547,7 @@ public:
      * with parents in different models and a missing top-level
      * parent.
      */
-    std::array<meta_model::model, 4>
+    std::array<entities::model, 4>
     object_with_missing_third_degree_parent_in_different_models(
         const bool add_model_module = false) const;
 
@@ -559,9 +559,9 @@ public:
      * @param repeat_group if true, adds two instances of the group,
      * otherwise just one.
      */
-    meta_model::model
+    entities::model
     object_with_group_of_attributes_of_different_types(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
+        const entities::origin_types ot = entities::origin_types::target,
         const bool repeat_group = false,
         const bool add_model_module = false) const;
 

@@ -27,9 +27,9 @@ namespace dogen::extraction::features {
 
 namespace {
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_extraction_force_write() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("force_write");
     r.name().qualified("masd.extraction.force_write");
@@ -47,9 +47,9 @@ diff. If no changes are detected, no writting is performed.
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_extraction_delete_extra_files() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("delete_extra_files");
     r.name().qualified("masd.extraction.delete_extra_files");
@@ -66,9 +66,9 @@ If you'd like to skip the deletion of certain files, set  "ignore_files_matching
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_extraction_ignore_files_matching_regex() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("ignore_files_matching_regex");
     r.name().qualified("masd.extraction.ignore_files_matching_regex");
@@ -83,9 +83,9 @@ Only applicable if "delete_extra_files" is enabled.
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_extraction_delete_empty_directories() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("delete_empty_directories");
     r.name().qualified("masd.extraction.delete_empty_directories");
@@ -103,9 +103,9 @@ are themselves empty, the entire directory tree is deleted.
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_extraction_enable_backend_directories() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("enable_backend_directories");
     r.name().qualified("masd.extraction.enable_backend_directories");
@@ -126,7 +126,7 @@ space. If you are targetting more than one, it will automatically be set to true
 }
 
 filesystem::feature_group
-filesystem::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+filesystem::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
@@ -141,7 +141,7 @@ filesystem::make_feature_group(const dogen::variability::meta_model::feature_mod
 
 filesystem::static_configuration filesystem::make_static_configuration(
     const feature_group& fg,
-    const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::entities::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
@@ -154,10 +154,10 @@ filesystem::static_configuration filesystem::make_static_configuration(
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature>
+std::list<dogen::variability::entities::feature>
 filesystem::make_features() {
-    using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature> r;
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature> r;
     r.push_back(make_masd_extraction_force_write());
     r.push_back(make_masd_extraction_delete_extra_files());
     r.push_back(make_masd_extraction_ignore_files_matching_regex());

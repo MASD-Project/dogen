@@ -27,10 +27,10 @@
 
 #include <string>
 #include <iosfwd>
-#include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.logical/types/meta_model/model.hpp"
-#include "dogen.logical/types/meta_model/attribute.hpp"
-#include "dogen.logical/types/meta_model/structural/primitive.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/entities/attribute.hpp"
+#include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
@@ -41,14 +41,14 @@ namespace dogen::logical::transforms {
 class primitives_transform final {
 private:
     static std::string obtain_value_attribute_simple_name(
-        const meta_model::technical_space ts);
+        const entities::technical_space ts);
 
-    static meta_model::attribute create_attribute_for_underlying_element(
-        const meta_model::name& owner, const meta_model::technical_space ts,
+    static entities::attribute create_attribute_for_underlying_element(
+        const entities::name& owner, const entities::technical_space ts,
         std::string underlying_element);
 
 public:
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

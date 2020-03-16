@@ -24,11 +24,11 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
-#include "dogen.logical/io/meta_model/technical_space_io.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
-#include "dogen.logical/types/meta_model/elements_traversal.hpp"
-#include "dogen.generation/io/meta_model/model_io.hpp"
+#include "dogen.logical/types/entities/elements_traversal.hpp"
+#include "dogen.generation/io/entities/model_io.hpp"
 #include "dogen.engine/types/transforms/transform_exception.hpp"
 #include "dogen.engine/types/transforms/assets_model_to_generation_model_transform.hpp"
 
@@ -52,7 +52,7 @@ namespace {
 
 class model_populator {
 public:
-    explicit model_populator(generation::meta_model::model& m) : result_(m) { }
+    explicit model_populator(generation::entities::model& m) : result_(m) { }
 
 private:
     void ensure_not_yet_processed(const std::string& id) {
@@ -64,7 +64,7 @@ private:
         }
     }
 
-    void add(boost::shared_ptr<logical::meta_model::element> e) {
+    void add(boost::shared_ptr<logical::entities::element> e) {
         const auto id(e->name().qualified().dot());
         ensure_not_yet_processed(id);
         processed_ids_.insert(id);
@@ -72,34 +72,34 @@ private:
     }
 
 public:
-    void operator()(boost::shared_ptr<logical::meta_model::element> e) {
+    void operator()(boost::shared_ptr<logical::entities::element> e) {
         add(e);
     }
     void operator()
-    (boost::shared_ptr<logical::meta_model::structural::module> m) {
+    (boost::shared_ptr<logical::entities::structural::module> m) {
         result_.module_ids().insert(m->name().qualified().dot());
         add(m);
     }
 
 public:
     void add(
-        const std::list<boost::shared_ptr<logical::meta_model::element>>& ie) {
+        const std::list<boost::shared_ptr<logical::entities::element>>& ie) {
         for (const auto& e : ie)
             add(e);
     }
 
 public:
-    const generation::meta_model::model& result() const { return result_; }
+    const generation::entities::model& result() const { return result_; }
 
 private:
-    generation::meta_model::model& result_;
+    generation::entities::model& result_;
     std::unordered_set<std::string> processed_ids_;
 };
 
 }
 
 std::size_t assets_model_to_generation_model_transform::
-compute_total_size(const logical::meta_model::model& m) {
+compute_total_size(const logical::entities::model& m) {
     std::size_t r;
     r = m.structural_elements().modules().size();
     r += m.structural_elements().object_templates().size();
@@ -124,9 +124,9 @@ compute_total_size(const logical::meta_model::model& m) {
     return r;
 }
 
-generation::meta_model::model assets_model_to_generation_model_transform::
-apply(const logical::meta_model::model& m) {
-    generation::meta_model::model r;
+generation::entities::model assets_model_to_generation_model_transform::
+apply(const logical::entities::model& m) {
+    generation::entities::model r;
     r.name(m.name());
     r.meta_name(logical::helpers::meta_name_factory::make_model_name());
 
@@ -153,20 +153,20 @@ apply(const logical::meta_model::model& m) {
     r.elements().reserve(size);
 
     model_populator mp(r);
-    logical::meta_model::shared_elements_traversal(m, mp);
+    logical::entities::shared_elements_traversal(m, mp);
 
     return r;
 }
 
-std::list<generation::meta_model::model>
+std::list<generation::entities::model>
 assets_model_to_generation_model_transform::
 apply(const generation::transforms::context& ctx,
-    const std::list<logical::meta_model::model>& ms) {
+    const std::list<logical::entities::model>& ms) {
     tracing::scoped_transform_tracer stp(lg,
         "assets model to generation model transform",
         transform_id, *ctx.tracer(), ms);
 
-    std::list<generation::meta_model::model> r;
+    std::list<generation::entities::model> r;
     for(const auto& m : ms)
         r.push_back(apply(m));
 

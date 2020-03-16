@@ -23,10 +23,10 @@
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/traits.hpp"
 #include "dogen.logical/types/features/origin.hpp"
-#include "dogen.logical/types/meta_model/elements_traversal.hpp"
+#include "dogen.logical/types/entities/elements_traversal.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/origin_transform.hpp"
@@ -47,33 +47,33 @@ namespace dogen::logical::transforms {
 
 namespace {
 
-using namespace meta_model::structural;
-using namespace meta_model::decoration;
-using namespace meta_model::variability;
-using namespace meta_model::templating;
-using namespace meta_model::serialization;
-using namespace meta_model::visual_studio;
+using namespace entities::structural;
+using namespace entities::decoration;
+using namespace entities::variability;
+using namespace entities::templating;
+using namespace entities::serialization;
+using namespace entities::visual_studio;
 
 class updater {
 public:
-    explicit updater(const meta_model::origin_types ot) : origin_types_(ot) {}
+    explicit updater(const entities::origin_types ot) : origin_types_(ot) {}
 
 public:
     template<typename DeterminableOrigin>
     void update(DeterminableOrigin& d) { d.origin_type(origin_types_); }
 
 public:
-    void operator()(meta_model::element& v) { update(v); }
+    void operator()(entities::element& v) { update(v); }
 
 private:
-    const meta_model::origin_types origin_types_;
+    const entities::origin_types origin_types_;
 };
 
 }
 
-meta_model::origin_types origin_transform::
-compute_origin_types(const meta_model::model& m, const bool is_proxy_model) {
-    using meta_model::origin_types;
+entities::origin_types origin_transform::
+compute_origin_types(const entities::model& m, const bool is_proxy_model) {
+    using entities::origin_types;
     if (is_proxy_model && m.origin_type() == origin_types::target) {
         const auto& id(m.name().qualified().dot());
         BOOST_LOG_SEV(lg, error) << target_cannot_be_proxy << id;
@@ -90,7 +90,7 @@ compute_origin_types(const meta_model::model& m, const bool is_proxy_model) {
 }
 
 void origin_transform::
-apply(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "origin transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
@@ -121,7 +121,7 @@ apply(const context& ctx, meta_model::model& m) {
      * non-target elements.
      */
     updater g(ot);
-    meta_model::elements_traversal(m, g);
+    entities::elements_traversal(m, g);
 
     stp.end_transform(m);
 }

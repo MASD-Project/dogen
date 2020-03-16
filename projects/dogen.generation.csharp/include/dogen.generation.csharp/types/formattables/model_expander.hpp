@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.generation.csharp/types/formatters/repository.hpp"
 #include "dogen.generation.csharp/types/formattables/locator.hpp"
 #include "dogen.generation.csharp/types/formattables/model.hpp"
@@ -38,22 +38,22 @@ private:
         const locator& l, model& fm) const;
 
     void expand_aspect_properties(
-        const variability::meta_model::feature_model& feature_model,
+        const variability::entities::feature_model& feature_model,
         model& fm) const;
 
     void expand_assistant_properties(
-        const variability::meta_model::feature_model& feature_model,
+        const variability::entities::feature_model& feature_model,
         model& fm) const;
 
     void reduce(model& fm) const;
 
     void expand_project_items(model& fm) const;
     void expand_helpers(
-        const variability::meta_model::feature_model& feature_model,
+        const variability::entities::feature_model& feature_model,
         const formatters::repository& frp, model& fm) const;
 
 public:
-    void expand(const variability::meta_model::feature_model& feature_model,
+    void expand(const variability::entities::feature_model& feature_model,
         const formatters::repository& frp, const locator& l, model& fm) const;
 };
 

@@ -26,9 +26,9 @@
 #endif
 
 #include <boost/shared_ptr.hpp>
-#include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.variability/types/meta_model/feature_template_repository.hpp"
-#include "dogen.variability/types/meta_model/feature_repository.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.variability/types/entities/feature_template_repository.hpp"
+#include "dogen.variability/types/entities/feature_repository.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
 
 namespace dogen::variability::transforms {
@@ -39,10 +39,10 @@ namespace dogen::variability::transforms {
  */
 class feature_model_production_chain final {
 public:
-    static boost::shared_ptr<meta_model::feature_model>
+    static boost::shared_ptr<entities::feature_model>
     apply(const context& ctx,
-        const meta_model::feature_template_repository& ftrp,
-        const meta_model::feature_repository& frp);
+        const entities::feature_template_repository& ftrp,
+        const entities::feature_repository& frp);
 };
 
 }

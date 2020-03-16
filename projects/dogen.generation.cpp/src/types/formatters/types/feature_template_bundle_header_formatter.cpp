@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
-#include "dogen.logical/types/meta_model/variability/feature_template_bundle.hpp"
+#include "dogen.logical/types/entities/variability/feature_template_bundle.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
@@ -53,7 +53,7 @@ feature_template_bundle_header_formatter::archetype_location() const {
     return r;
 }
 
-const logical::meta_model::name& feature_template_bundle_header_formatter::meta_name() const {
+const logical::entities::name& feature_template_bundle_header_formatter::meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_variability_feature_template_bundle_name());
     return r;
@@ -68,30 +68,30 @@ inclusion_support_types feature_template_bundle_header_formatter::inclusion_supp
 }
 
 boost::filesystem::path feature_template_bundle_header_formatter::inclusion_path(
-    const formattables::locator& l, const logical::meta_model::name& n) const {
+    const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_id());
 }
 
 boost::filesystem::path feature_template_bundle_header_formatter::full_path(
-    const formattables::locator& l, const logical::meta_model::name& n) const {
+    const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_id());
 }
 
 std::list<std::string> feature_template_bundle_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const logical::meta_model::element& e) const {
-    using logical::meta_model::variability::feature_template_bundle;
+    const logical::entities::element& e) const {
+    using logical::entities::variability::feature_template_bundle;
 
     const auto& fb(assistant::as<feature_template_bundle>(e));
     auto builder(f.make());
 
     builder.add(inclusion_constants::std::list());
-    builder.add("\"dogen.variability/types/meta_model/feature_template.hpp\"");
+    builder.add("\"dogen.variability/types/entities/feature_template.hpp\"");
 
     if (fb.generate_static_configuration()) {
-        builder.add("\"dogen.variability/types/meta_model/feature_model.hpp\"");
-        builder.add("\"dogen.variability/types/meta_model/configuration.hpp\"");
-        builder.add("\"dogen.variability/types/meta_model/feature.hpp\"");
+        builder.add("\"dogen.variability/types/entities/feature_model.hpp\"");
+        builder.add("\"dogen.variability/types/entities/configuration.hpp\"");
+        builder.add("\"dogen.variability/types/entities/feature.hpp\"");
 
         const auto ch_arch(traits::class_header_archetype());
         builder.add(fb.transparent_associations(), ch_arch);
@@ -103,10 +103,10 @@ std::list<std::string> feature_template_bundle_header_formatter::inclusion_depen
     return builder.build();
 }
 
-extraction::meta_model::artefact feature_template_bundle_header_formatter::
-format(const context& ctx, const logical::meta_model::element& e) const {
+extraction::entities::artefact feature_template_bundle_header_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& fb(a.as<logical::meta_model::variability::feature_template_bundle>(e));
+    const auto& fb(a.as<logical::entities::variability::feature_template_bundle>(e));
 
     {
         const auto sn(fb.name().simple());
@@ -126,12 +126,12 @@ a.stream() << "public:" << std::endl;
 a.stream() << "    struct feature_group {" << std::endl;
                 for (const auto& fb_ft : fb.feature_templates()) {
                     const auto simple_key(splitter::split_scoped(fb_ft.key()).back());
-a.stream() << "        variability::meta_model::feature " << simple_key << ";" << std::endl;
+a.stream() << "        variability::entities::feature " << simple_key << ";" << std::endl;
                 }
 a.stream() << "    };" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    static feature_group" << std::endl;
-a.stream() << "    make_feature_group(const variability::meta_model::feature_model& fm);" << std::endl;
+a.stream() << "    make_feature_group(const variability::entities::feature_model& fm);" << std::endl;
 a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
 a.stream() << "    struct static_configuration {" << std::endl;
@@ -163,7 +163,7 @@ a.stream() << "    };" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    static static_configuration make_static_configuration(" << std::endl;
 a.stream() << "        const feature_group& fg," << std::endl;
-a.stream() << "        const variability::meta_model::configuration& cfg);" << std::endl;
+a.stream() << "        const variability::entities::configuration& cfg);" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    template<typename Configurable>" << std::endl;
 a.stream() << "    static static_configuration make_static_configuration(" << std::endl;
@@ -175,7 +175,7 @@ a.stream() << "    }" << std::endl;
             if (fb.generate_registration()) {
 a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
-a.stream() << "    static std::list<dogen::variability::meta_model::feature_template>" << std::endl;
+a.stream() << "    static std::list<dogen::variability::entities::feature_template>" << std::endl;
 a.stream() << "    make_templates();" << std::endl;
             }
 a.stream() << "};" << std::endl;

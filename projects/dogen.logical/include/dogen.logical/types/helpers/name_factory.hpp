@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen.logical/types/meta_model/name.hpp"
+#include "dogen.logical/types/entities/name.hpp"
 
 namespace dogen::logical::helpers {
 
@@ -43,7 +43,7 @@ public:
      *
      * @pre @e model_name must not be empty.
      */
-    meta_model::name build_model_name(const std::string& model_name,
+    entities::name build_model_name(const std::string& model_name,
         const std::string& external_modules = std::string()) const;
 
     /**
@@ -51,10 +51,10 @@ public:
      * the element name.
      */
     /**@{*/
-    meta_model::name build_element_name(const std::string& simple_name) const;
-    meta_model::name build_element_name(const std::string& model_name,
+    entities::name build_element_name(const std::string& simple_name) const;
+    entities::name build_element_name(const std::string& model_name,
         const std::string& simple_name) const;
-    meta_model::name build_element_name(const std::string& simple_name,
+    entities::name build_element_name(const std::string& simple_name,
         const std::list<std::string>& internal_modules) const;
     /**@}*/
 
@@ -63,9 +63,9 @@ public:
      * model it is located in, creates the element name.
      */
     /**@{*/
-    meta_model::name build_element_in_model(const meta_model::name& model_name,
+    entities::name build_element_in_model(const entities::name& model_name,
         const std::string& simple_name) const;
-    meta_model::name build_element_in_model(const meta_model::name& model_name,
+    entities::name build_element_in_model(const entities::name& model_name,
         const std::string& simple_name,
         const std::list<std::string>& internal_modules) const;
     /**@}*/
@@ -74,8 +74,8 @@ public:
      * @brief Given a simple name for an element and the name of the
      * module it is located in, creates the element name.
      */
-    meta_model::name build_element_in_module(
-        const meta_model::name& module_name,
+    entities::name build_element_in_module(
+        const entities::name& module_name,
         const std::string& simple_name) const;
 
     /**
@@ -84,9 +84,9 @@ public:
      * the module.
      */
     /**@{*/
-    meta_model::name build_module_name(const meta_model::name& model_name,
+    entities::name build_module_name(const entities::name& model_name,
         const std::list<std::string>& internal_modules) const;
-    meta_model::name build_module_name(const meta_model::name& model_name,
+    entities::name build_module_name(const entities::name& model_name,
         const std::string& module_name,
         const std::list<std::string>& internal_modules) const;
     /**@}*/
@@ -94,33 +94,33 @@ public:
     /**
      * @brief Combines element name with model name.
      */
-    meta_model::name build_combined_element_name(
-        const meta_model::name& model_name,
-        const meta_model::name& partial_element_name,
+    entities::name build_combined_element_name(
+        const entities::name& model_name,
+        const entities::name& partial_element_name,
         const bool populate_model_modules_if_blank = false,
         const bool populate_internal_modules_if_blank = false,
         const bool combine_internal_modules = false) const;
 
-    meta_model::name build_hacked_combined_element_name(
-        const meta_model::name& model_name,
-        const meta_model::name& partial_element_name) const;
+    entities::name build_hacked_combined_element_name(
+        const entities::name& model_name,
+        const entities::name& partial_element_name) const;
 
     /**
      * @brief Promotes the first name of the internal module path to
      * become the model name.
      */
     /**@{*/
-    meta_model::name build_promoted_module_name(
-        const meta_model::name& element_name) const;
-    meta_model::name build_promoted_module_name(
-        const meta_model::name& model_name,
-        const meta_model::name& element_name) const;
+    entities::name build_promoted_module_name(
+        const entities::name& element_name) const;
+    entities::name build_promoted_module_name(
+        const entities::name& model_name,
+        const entities::name& element_name) const;
     /**@}*/
 
     /**
      * @brief Builds an attribute name.
      */
-    meta_model::name build_attribute_name(const meta_model::name& owner_name,
+    entities::name build_attribute_name(const entities::name& owner_name,
         const std::string& simple_name) const;
 };
 

@@ -21,19 +21,19 @@
 #ifndef DOGEN_LOGICAL_TYPES_TRANSFORMS_VARIABILITY_FEATURES_TRANSFORM_HPP
 #define DOGEN_LOGICAL_TYPES_TRANSFORMS_VARIABILITY_FEATURES_TRANSFORM_HPP
 
-#include "dogen.variability/types/meta_model/feature_template.hpp"
+#include "dogen.variability/types/entities/feature_template.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
 #include <unordered_map>
-#include "dogen.logical/types/meta_model/model.hpp"
+#include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/features/variability_templates.hpp"
 #include "dogen.logical/types/features/variability_bundle.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
-#include "dogen.logical/types/meta_model/variability/feature_bundle.hpp"
-#include "dogen.logical/types/meta_model/variability/feature_template_bundle.hpp"
+#include "dogen.logical/types/entities/variability/feature_bundle.hpp"
+#include "dogen.logical/types/entities/variability/feature_template_bundle.hpp"
 
 namespace dogen::logical::transforms {
 
@@ -58,13 +58,13 @@ private:
      * @brief Reads configuration related to variability templates.
      */
     static void update(const features::variability_templates::feature_group& fg,
-        meta_model::variability::abstract_feature& af);
+        entities::variability::abstract_feature& af);
 
     /**
      * @brief Reads configuration related to feature bundles.
      */
     static void update(const features::variability_bundle::feature_group& fg,
-        meta_model::variability::abstract_bundle& ab);
+        entities::variability::abstract_bundle& ab);
 
 private:
     /**
@@ -74,9 +74,9 @@ private:
     static void process_abstract_feature(
         const features::variability_templates::feature_group& fg1,
         const std::unordered_map<std::string, std::string>& fixed_mappings,
-        const boost::optional<variability::meta_model::binding_point>&
+        const boost::optional<variability::entities::binding_point>&
         default_binding_point, const std::string& key_prefix,
-        meta_model::variability::abstract_feature& af);
+        entities::variability::abstract_feature& af);
 
 private:
     /**
@@ -84,23 +84,23 @@ private:
      * bundles.
      */
     static void process_feature_bundles(
-        const variability::meta_model::feature_model& fm,
+        const variability::entities::feature_model& fm,
         const std::unordered_map<std::string, std::string>& fixed_mappings,
-        meta_model::model& m);
+        entities::model& m);
 
     /**
      * @brief Processes the meta-model element representing feature
      * template bundles.
      */
     static void process_feature_template_bundles(
-        const variability::meta_model::feature_model& fm,
+        const variability::entities::feature_model& fm,
         const std::unordered_map<std::string, std::string>& fixed_mappings,
-        meta_model::model& m);
+        entities::model& m);
 
     /**
      * @brief Processes the variability initialiser meta-model element.
      */
-    static void process_initialiser(meta_model::model& m);
+    static void process_initialiser(entities::model& m);
 
 public:
     /**
@@ -109,7 +109,7 @@ public:
      */
     static void apply(const context& ctx,
         const std::unordered_map<std::string, std::string>& fixed_mappings,
-        meta_model::model& m);
+        entities::model& m);
 };
 
 }

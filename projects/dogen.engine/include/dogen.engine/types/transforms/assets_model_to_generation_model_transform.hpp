@@ -26,8 +26,8 @@
 #endif
 
 #include <list>
-#include "dogen.logical/types/meta_model/model.hpp"
-#include "dogen.generation/types/meta_model/model.hpp"
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.generation/types/entities/model.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
 
 namespace dogen::engine::transforms {
@@ -35,15 +35,15 @@ namespace dogen::engine::transforms {
 class assets_model_to_generation_model_transform final {
 private:
     static std::size_t
-    compute_total_size(const logical::meta_model::model& em);
+    compute_total_size(const logical::entities::model& em);
 
-    static generation::meta_model::model
-    apply(const logical::meta_model::model& m);
+    static generation::entities::model
+    apply(const logical::entities::model& m);
 
 public:
-    static std::list<generation::meta_model::model>
+    static std::list<generation::entities::model>
     apply(const generation::transforms::context& ctx,
-        const std::list<logical::meta_model::model>& cms);
+        const std::list<logical::entities::model>& cms);
 };
 
 }

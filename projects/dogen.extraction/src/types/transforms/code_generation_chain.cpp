@@ -20,7 +20,7 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.extraction/io/meta_model/model_io.hpp"
+#include "dogen.extraction/io/entities/model_io.hpp"
 #include "dogen.extraction/types/transforms/write_artefacts_transform.hpp"
 #include "dogen.extraction/types/transforms/remove_files_transform.hpp"
 #include "dogen.extraction/types/transforms/code_generation_chain.hpp"
@@ -37,7 +37,7 @@ auto lg(logger_factory(transform_id));
 namespace dogen::extraction::transforms {
 
 void code_generation_chain::
-apply(const context& ctx, const meta_model::model& m) {
+apply(const context& ctx, const entities::model& m) {
     tracing::scoped_chain_tracer stp(lg, "code generation chain",
         transform_id, m.name(), *ctx.tracer(), m);
 

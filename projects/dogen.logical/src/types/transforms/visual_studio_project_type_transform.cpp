@@ -21,10 +21,10 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
-#include "dogen.logical/types/meta_model/visual_studio/project.hpp"
-#include "dogen.logical/types/meta_model/visual_studio/solution.hpp"
+#include "dogen.logical/types/entities/visual_studio/project.hpp"
+#include "dogen.logical/types/entities/visual_studio/solution.hpp"
 #include "dogen.logical/types/helpers/visual_studio_project_type_mapper.hpp"
 #include "dogen.logical/types/transforms/visual_studio_project_type_transform.hpp"
 
@@ -40,7 +40,7 @@ static logger lg(logger_factory(transform_id));
 namespace dogen::logical::transforms {
 
 void visual_studio_project_type_transform::
-apply(const context& ctx, const logical::meta_model::model& m) {
+apply(const context& ctx, const logical::entities::model& m) {
     const auto id(m.name().qualified().dot());
     tracing::scoped_transform_tracer stp(lg,
         "visual studio project type transform", transform_id, id,

@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen.extraction/types/transforms/context.hpp"
-#include "dogen.extraction/types/meta_model/model.hpp"
+#include "dogen.extraction/types/entities/model.hpp"
 
 namespace dogen::extraction::transforms {
 
@@ -36,11 +36,11 @@ namespace dogen::extraction::transforms {
  */
 class remove_files_transform final {
 private:
-    static void delete_extra_files(const meta_model::model& m);
-    static void delete_empty_directories(const meta_model::model& m);
+    static void delete_extra_files(const entities::model& m);
+    static void delete_empty_directories(const entities::model& m);
 
 public:
-    static void apply(const context& ctx, const meta_model::model& m);
+    static void apply(const context& ctx, const entities::model& m);
 };
 
 }

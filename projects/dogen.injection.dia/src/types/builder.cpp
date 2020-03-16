@@ -208,7 +208,7 @@ void builder::add(const processed_object& po) {
     BOOST_LOG_SEV(lg, debug) << "Finished processing: " << po.name();
 }
 
-injection::meta_model::model builder::build() {
+injection::entities::model builder::build() {
     return model_;
 }
 

@@ -25,9 +25,9 @@
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/types/meta_model/element.hpp"
-#include "dogen.generation/io/meta_model/model_io.hpp"
-#include "dogen.logical/io/meta_model/formatting_styles_io.hpp"
+#include "dogen.logical/types/entities/element.hpp"
+#include "dogen.generation/io/entities/model_io.hpp"
+#include "dogen.logical/io/entities/formatting_styles_io.hpp"
 #include "dogen.generation/types/transforms/transformation_error.hpp"
 #include "dogen.generation/types/transforms/formatting_transform.hpp"
 
@@ -50,14 +50,14 @@ const std::string invalid_style("Formatting style is not valid:");
 
 namespace dogen::generation::transforms {
 
-meta_model::formatting_styles
+entities::formatting_styles
 formatting_transform::to_formatting_style(const std::string& s) {
     if (s == stock_style)
-        return meta_model::formatting_styles::stock;
+        return entities::formatting_styles::stock;
     else if (s == wale_style)
-        return meta_model::formatting_styles::wale;
+        return entities::formatting_styles::wale;
     else if (s == stitch_style)
-        return meta_model::formatting_styles::stitch;
+        return entities::formatting_styles::stitch;
 
     BOOST_LOG_SEV(lg, error) << invalid_style << s;
     BOOST_THROW_EXCEPTION(transformation_error(invalid_style + s));
@@ -65,7 +65,7 @@ formatting_transform::to_formatting_style(const std::string& s) {
 
 std::unordered_map<std::string, formatting_transform::feature_group>
 formatting_transform::make_feature_groups(
-    const variability::meta_model::feature_model& fm,
+    const variability::entities::feature_model& fm,
     const std::list<physical::location>& als) {
 
     BOOST_LOG_SEV(lg, debug) << "Creating feature groups.";
@@ -92,7 +92,7 @@ formatting_transform::make_feature_groups(
 std::unordered_map<std::string, formatting_configuration>
 formatting_transform::make_formatting_configuration(
     const std::unordered_map<std::string, feature_group>& fgs,
-    const variability::meta_model::configuration& cfg) {
+    const variability::entities::configuration& cfg) {
     std::unordered_map<std::string, formatting_configuration> r;
 
     const variability::helpers::configuration_selector s(cfg);
@@ -122,7 +122,7 @@ formatting_transform::make_formatting_configuration(
 
 void formatting_transform::
 apply(const std::unordered_map<std::string, feature_group> fgs,
-    logical::meta_model::element& e) {
+    logical::entities::element& e) {
     BOOST_LOG_SEV(lg, trace) << "Transforming element: "
                              << e.name().qualified().dot();
 
@@ -133,7 +133,7 @@ apply(const std::unordered_map<std::string, feature_group> fgs,
         auto& art_prop(pair.second);
         const auto i(cfgs.find(arch));
         if (i == cfgs.end()) {
-            using logical::meta_model::formatting_styles;
+            using logical::entities::formatting_styles;
             art_prop.formatting_style(formatting_styles::stock);
             BOOST_LOG_SEV(lg,trace) << "Element has a stock formatter.";
             continue;
@@ -143,16 +143,16 @@ apply(const std::unordered_map<std::string, feature_group> fgs,
         // FIXME: mega hack until we move artefact stuff into
         // generation
         auto lambda(
-            [](meta_model::formatting_styles fs) {
-                using meta_model::formatting_styles;
-                if (fs == meta_model::formatting_styles::wale)
-                    return logical::meta_model::formatting_styles::wale;
-                else if (fs == meta_model::formatting_styles::stitch)
-                    return logical::meta_model::formatting_styles::stitch;
-                else if (fs == meta_model::formatting_styles::stock)
-                    return logical::meta_model::formatting_styles::stock;
+            [](entities::formatting_styles fs) {
+                using entities::formatting_styles;
+                if (fs == entities::formatting_styles::wale)
+                    return logical::entities::formatting_styles::wale;
+                else if (fs == entities::formatting_styles::stitch)
+                    return logical::entities::formatting_styles::stitch;
+                else if (fs == entities::formatting_styles::stock)
+                    return logical::entities::formatting_styles::stock;
                 else
-                    return logical::meta_model::formatting_styles::invalid;
+                    return logical::entities::formatting_styles::invalid;
             });
         art_prop.formatting_style(lambda(cfg.style()));
         art_prop.formatting_input(cfg.input());
@@ -161,7 +161,7 @@ apply(const std::unordered_map<std::string, feature_group> fgs,
     BOOST_LOG_SEV(lg, debug) << "Finished transforming element";
 }
 
-void formatting_transform::apply(const context& ctx, meta_model::model& m) {
+void formatting_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "formatting transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 

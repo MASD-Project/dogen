@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen.logical/types/meta_model/model_fwd.hpp"
+#include "dogen.logical/types/entities/model_fwd.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 
 namespace dogen::logical::transforms {
@@ -44,7 +44,7 @@ public:
      * internally as they are generated. We only concern ourselves
      * with well-known meta-model elements from assets.
      */
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

@@ -27,10 +27,10 @@
 
 #include<list>
 #include <string>
-#include "dogen.logical/types/meta_model/orm/letter_case.hpp"
-#include "dogen.logical/types/meta_model/orm/database_system.hpp"
-#include "dogen.logical/types/meta_model/orm/model_properties.hpp"
-#include "dogen.logical/types/meta_model/model.hpp"
+#include "dogen.logical/types/entities/orm/letter_case.hpp"
+#include "dogen.logical/types/entities/orm/database_system.hpp"
+#include "dogen.logical/types/entities/orm/model_properties.hpp"
+#include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 
 namespace dogen::logical::transforms {
@@ -41,16 +41,16 @@ namespace dogen::logical::transforms {
 class odb_options_transform final {
 public:
     static std::string
-    to_odb_database(const logical::meta_model::orm::database_system ds);
+    to_odb_database(const logical::entities::orm::database_system ds);
 
     static std::string
-    to_odb_sql_name_case(const logical::meta_model::orm::letter_case lc);
+    to_odb_sql_name_case(const logical::entities::orm::letter_case lc);
 
     static std::list<std::string>
-    make_databases(const logical::meta_model::orm::model_properties& omp);
+    make_databases(const logical::entities::orm::model_properties& omp);
 
 public:
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen.generation/types/meta_model/model.hpp"
+#include "dogen.generation/types/entities/model.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
 
 namespace dogen::generation::transforms {
@@ -35,7 +35,7 @@ namespace dogen::generation::transforms {
  */
 class technical_space_transform final {
 public:
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

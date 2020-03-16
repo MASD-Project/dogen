@@ -22,7 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
-#include "dogen.injection/io/meta_model/model_io.hpp"
+#include "dogen.injection/io/entities/model_io.hpp"
 #include "dogen.injection/types/transforms/transformation_error.hpp"
 #include "dogen.injection.json/types/hydrator.hpp"
 #include "dogen.injection.json/types/decoding_transform.hpp"
@@ -55,7 +55,7 @@ std::string decoding_transform::extension() const {
     return ::extension;
 }
 
-meta_model::model decoding_transform::apply(const transforms::context& ctx,
+entities::model decoding_transform::apply(const transforms::context& ctx,
     const boost::filesystem::path& p) {
     const auto model_name(p.filename().string());
     tracing::scoped_transform_tracer stp(lg, "JSON decoding transform",

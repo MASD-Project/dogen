@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.logical/types/meta_model/element.hpp"
+#include "dogen.logical/types/entities/element.hpp"
 #include "dogen.generation.cpp/types/formattables/formattable.hpp"
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::logical::meta_model::element>& lhs,
-const boost::shared_ptr<dogen::logical::meta_model::element>& rhs) {
+inline bool operator==(const boost::shared_ptr<dogen::logical::entities::element>& lhs,
+const boost::shared_ptr<dogen::logical::entities::element>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -33,7 +33,7 @@ const boost::shared_ptr<dogen::logical::meta_model::element>& rhs) {
 namespace dogen::generation::cpp::formattables {
 
 formattable::formattable(
-    const boost::shared_ptr<dogen::logical::meta_model::element>& element,
+    const boost::shared_ptr<dogen::logical::entities::element>& element,
     const dogen::generation::cpp::formattables::element_properties& element_properties)
     : element_(element),
       element_properties_(element_properties) { }
@@ -55,19 +55,19 @@ formattable& formattable::operator=(formattable other) {
     return *this;
 }
 
-const boost::shared_ptr<dogen::logical::meta_model::element>& formattable::element() const {
+const boost::shared_ptr<dogen::logical::entities::element>& formattable::element() const {
     return element_;
 }
 
-boost::shared_ptr<dogen::logical::meta_model::element>& formattable::element() {
+boost::shared_ptr<dogen::logical::entities::element>& formattable::element() {
     return element_;
 }
 
-void formattable::element(const boost::shared_ptr<dogen::logical::meta_model::element>& v) {
+void formattable::element(const boost::shared_ptr<dogen::logical::entities::element>& v) {
     element_ = v;
 }
 
-void formattable::element(const boost::shared_ptr<dogen::logical::meta_model::element>&& v) {
+void formattable::element(const boost::shared_ptr<dogen::logical::entities::element>&& v) {
     element_ = std::move(v);
 }
 

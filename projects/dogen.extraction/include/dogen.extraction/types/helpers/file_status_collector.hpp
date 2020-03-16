@@ -30,7 +30,7 @@
 #include <vector>
 #include <boost/filesystem/path.hpp>
 #include "dogen.extraction/types/helpers/files_by_status.hpp"
-#include "dogen.extraction/types/meta_model/model.hpp"
+#include "dogen.extraction/types/entities/model.hpp"
 
 namespace dogen::extraction::helpers {
 
@@ -44,7 +44,7 @@ private:
      * @brief Obtains a list of expected files for the supplied model.
      */
     static std::set<boost::filesystem::path>
-    obtain_expected_files(const meta_model::model& m);
+    obtain_expected_files(const entities::model& m);
 
     /**
      * @brief Filters the directories to only those that exist at
@@ -77,7 +77,7 @@ private:
         const std::list<boost::filesystem::path>& files);
 
 public:
-    static files_by_status collect(const meta_model::model& m);
+    static files_by_status collect(const entities::model& m);
 };
 
 }

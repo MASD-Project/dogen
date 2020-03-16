@@ -23,8 +23,8 @@
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/types/traits.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/type_params_transform.hpp"
 
@@ -41,7 +41,7 @@ namespace dogen::logical::transforms {
 
 void type_params_transform::populate_type_parameters(
     const features::type_parameters::feature_group& fg,
-    meta_model::structural::object& o) {
+    entities::structural::object& o) {
     using features::type_parameters;
     const auto scfg(type_parameters::make_static_configuration(fg, o));
     auto& tp(o.type_parameters());
@@ -50,7 +50,7 @@ void type_params_transform::populate_type_parameters(
     tp.always_in_heap(scfg.always_in_heap);
 }
 
-void type_params_transform::apply(const context& ctx, meta_model::model& m) {
+void type_params_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "type params transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 

@@ -26,8 +26,8 @@
 #endif
 
 #include <string>
-#include "dogen.logical/types/meta_model/name.hpp"
-#include "dogen.logical/types/meta_model/model.hpp"
+#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/helpers/indices.hpp"
 
@@ -36,7 +36,7 @@ namespace dogen::logical::transforms {
 class resolver_transform final {
 public:
     static void apply(const context& ctx, const helpers::indices& idx,
-        meta_model::model& m);
+        entities::model& m);
 };
 
 }

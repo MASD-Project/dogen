@@ -24,7 +24,7 @@
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
-#include "dogen.logical/types/meta_model/visual_studio/project.hpp"
+#include "dogen.logical/types/entities/visual_studio/project.hpp"
 #include "dogen.generation.cpp/types/formatters/visual_studio/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/types/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
@@ -51,7 +51,7 @@ project_formatter::archetype_location() const {
     return r;
 }
 
-const logical::meta_model::name&
+const logical::entities::name&
 project_formatter::meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_visual_studio_project_name());
@@ -68,7 +68,7 @@ project_formatter::inclusion_support_type() const {
 }
 
 boost::filesystem::path project_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const logical::meta_model::name& n) const {
+    const formattables::locator& /*l*/, const logical::entities::name& n) const {
 
     using namespace dogen::utility::log;
     using namespace dogen::generation::cpp::formatters;
@@ -81,7 +81,7 @@ boost::filesystem::path project_formatter::inclusion_path(
 }
 
 boost::filesystem::path project_formatter::
-full_path(const formattables::locator& l, const logical::meta_model::name& n) const {
+full_path(const formattables::locator& l, const logical::entities::name& n) const {
     auto temp(n);
     temp.simple(boost::algorithm::join(n.location().model_modules(), ".") + ".vcxproj");
     return l.make_full_path_for_project(temp, static_id());
@@ -89,15 +89,15 @@ full_path(const formattables::locator& l, const logical::meta_model::name& n) co
 
 std::list<std::string> project_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
-    const logical::meta_model::element& /*e*/) const {
+    const logical::entities::element& /*e*/) const {
     static std::list<std::string> r;
     return r;
 }
 
-extraction::meta_model::artefact project_formatter::
-format(const context& ctx, const logical::meta_model::element& e) const {
+extraction::entities::artefact project_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    using logical::meta_model::visual_studio::project;
+    using logical::entities::visual_studio::project;
     const auto& proj(a.as<project>(e));
 
 a.stream() << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << std::endl;

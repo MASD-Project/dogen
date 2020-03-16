@@ -157,7 +157,7 @@ physical::location formatter::archetype_location() const {
     return r;
 }
 
-extraction::meta_model::artefact
+extraction::entities::artefact
 formatter::format(const text_template& tt) const {
     BOOST_LOG_SEV(lg, debug) << "Formatting text template.";
 
@@ -206,7 +206,7 @@ formatter::format(const text_template& tt) const {
             s << "}" << std::endl;
     }
 
-    extraction::meta_model::artefact r;
+    extraction::entities::artefact r;
     r.overwrite(true);
     r.content(s.str());
     if (!tt.output_path().empty())

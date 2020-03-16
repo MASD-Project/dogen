@@ -27,8 +27,8 @@
 
 #include <list>
 #include <string>
-#include "dogen.logical/types/meta_model/name.hpp"
-#include "dogen.logical/types/meta_model/location.hpp"
+#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.logical/types/entities/location.hpp"
 #include "dogen.logical/types/helpers/location_builder.hpp"
 
 namespace dogen::logical::helpers {
@@ -49,17 +49,17 @@ public:
 public:
     void simple_name(const std::string& sn);
     void model_name(const std::string& mn);
-    void model_name(const meta_model::location& l);
+    void model_name(const entities::location& l);
     void external_modules(const std::string& em);
     void external_modules(const std::list<std::string>& em);
     void model_modules(const std::string& mm);
     void model_modules(const std::list<std::string>& mm);
     void internal_modules(const std::string& im);
     void internal_modules(const std::list<std::string>& im);
-    void location(const meta_model::location& l);
+    void location(const entities::location& l);
 
 public:
-    meta_model::name build();
+    entities::name build();
 
 public:
     /**
@@ -68,7 +68,7 @@ public:
      *
      * @param names List of names. By copy non-const by design.
      */
-    static meta_model::name build(std::list<std::string> names);
+    static entities::name build(std::list<std::string> names);
 
     /**
      * @brief One shot-builder method that, given a string encoded
@@ -77,11 +77,11 @@ public:
      *
      * @param names String encodes a list of names.
      */
-    static meta_model::name build(const std::string& names);
+    static entities::name build(const std::string& names);
 
 private:
     const bool model_name_mode_;
-    meta_model::name name_;
+    entities::name name_;
     location_builder location_builder_;
 };
 

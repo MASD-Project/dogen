@@ -22,8 +22,8 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.extraction/io/meta_model/model_io.hpp"
-#include "dogen.extraction/io/meta_model/operation_type_io.hpp"
+#include "dogen.extraction/io/entities/model_io.hpp"
+#include "dogen.extraction/io/entities/operation_type_io.hpp"
 #include "dogen.extraction/types/transforms/write_artefacts_transform.hpp"
 
 namespace {
@@ -54,7 +54,7 @@ void write_artefacts_transform::create_directories(
 }
 
 void write_artefacts_transform::
-apply(const context& ctx, const meta_model::model& m) {
+apply(const context& ctx, const entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "writting transform",
         transform_id, m.name(), *ctx.tracer(), m);
 
@@ -89,7 +89,7 @@ apply(const context& ctx, const meta_model::model& m) {
             continue;
         }
 
-        using extraction::meta_model::operation_type;
+        using extraction::entities::operation_type;
         const auto ot(a.operation().type());
         if (ot != operation_type::write) {
             BOOST_LOG_SEV(lg, trace) << "Ignoring operation: " << ot;

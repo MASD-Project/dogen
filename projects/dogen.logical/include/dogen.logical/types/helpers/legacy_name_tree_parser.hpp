@@ -28,9 +28,9 @@
 #include <list>
 #include <string>
 #include <unordered_set>
-#include "dogen.logical/types/meta_model/technical_space.hpp"
-#include "dogen.logical/types/meta_model/location.hpp"
-#include "dogen.logical/types/meta_model/name_tree.hpp"
+#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.logical/types/entities/location.hpp"
+#include "dogen.logical/types/entities/name_tree.hpp"
 
 namespace dogen::logical::helpers {
 
@@ -45,16 +45,16 @@ public:
      *
      * @param ts what technical space syntax to use.
      */
-    explicit legacy_name_tree_parser(const meta_model::technical_space ts);
+    explicit legacy_name_tree_parser(const entities::technical_space ts);
 
 public:
     /**
      * @brief Parse the string into a name tree.
      */
-    meta_model::name_tree parse(const std::string& s) const;
+    entities::name_tree parse(const std::string& s) const;
 
 private:
-    const meta_model::technical_space technical_space_;
+    const entities::technical_space technical_space_;
 };
 
 }

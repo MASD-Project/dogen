@@ -21,7 +21,7 @@
 #include "dogen.tracing/types/tracer.hpp"
 #include "dogen.physical/types/location_repository.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
 
 namespace boost {
 
@@ -34,8 +34,8 @@ const boost::shared_ptr<dogen::physical::location_repository>& rhs) {
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::variability::meta_model::feature_model>& lhs,
-const boost::shared_ptr<dogen::variability::meta_model::feature_model>& rhs) {
+inline bool operator==(const boost::shared_ptr<dogen::variability::entities::feature_model>& lhs,
+const boost::shared_ptr<dogen::variability::entities::feature_model>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -62,9 +62,9 @@ context::context(context&& rhs)
 
 context::context(
     const boost::shared_ptr<dogen::physical::location_repository>& archetype_location_repository,
-    const std::unordered_map<std::string, dogen::generation::meta_model::intra_backend_segment_properties>& intra_backend_segment_properties,
+    const std::unordered_map<std::string, dogen::generation::entities::intra_backend_segment_properties>& intra_backend_segment_properties,
     const boost::filesystem::path& output_directory_path,
-    const boost::shared_ptr<dogen::variability::meta_model::feature_model>& feature_model,
+    const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
     const boost::shared_ptr<dogen::tracing::tracer>& tracer,
     const std::string& generation_timestamp)
     : archetype_location_repository_(archetype_location_repository),
@@ -115,19 +115,19 @@ void context::archetype_location_repository(const boost::shared_ptr<dogen::physi
     archetype_location_repository_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::generation::meta_model::intra_backend_segment_properties>& context::intra_backend_segment_properties() const {
+const std::unordered_map<std::string, dogen::generation::entities::intra_backend_segment_properties>& context::intra_backend_segment_properties() const {
     return intra_backend_segment_properties_;
 }
 
-std::unordered_map<std::string, dogen::generation::meta_model::intra_backend_segment_properties>& context::intra_backend_segment_properties() {
+std::unordered_map<std::string, dogen::generation::entities::intra_backend_segment_properties>& context::intra_backend_segment_properties() {
     return intra_backend_segment_properties_;
 }
 
-void context::intra_backend_segment_properties(const std::unordered_map<std::string, dogen::generation::meta_model::intra_backend_segment_properties>& v) {
+void context::intra_backend_segment_properties(const std::unordered_map<std::string, dogen::generation::entities::intra_backend_segment_properties>& v) {
     intra_backend_segment_properties_ = v;
 }
 
-void context::intra_backend_segment_properties(const std::unordered_map<std::string, dogen::generation::meta_model::intra_backend_segment_properties>&& v) {
+void context::intra_backend_segment_properties(const std::unordered_map<std::string, dogen::generation::entities::intra_backend_segment_properties>&& v) {
     intra_backend_segment_properties_ = std::move(v);
 }
 
@@ -147,19 +147,19 @@ void context::output_directory_path(const boost::filesystem::path&& v) {
     output_directory_path_ = std::move(v);
 }
 
-const boost::shared_ptr<dogen::variability::meta_model::feature_model>& context::feature_model() const {
+const boost::shared_ptr<dogen::variability::entities::feature_model>& context::feature_model() const {
     return feature_model_;
 }
 
-boost::shared_ptr<dogen::variability::meta_model::feature_model>& context::feature_model() {
+boost::shared_ptr<dogen::variability::entities::feature_model>& context::feature_model() {
     return feature_model_;
 }
 
-void context::feature_model(const boost::shared_ptr<dogen::variability::meta_model::feature_model>& v) {
+void context::feature_model(const boost::shared_ptr<dogen::variability::entities::feature_model>& v) {
     feature_model_ = v;
 }
 
-void context::feature_model(const boost::shared_ptr<dogen::variability::meta_model::feature_model>&& v) {
+void context::feature_model(const boost::shared_ptr<dogen::variability::entities::feature_model>&& v) {
     feature_model_ = std::move(v);
 }
 

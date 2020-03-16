@@ -62,7 +62,7 @@ namespace dogen::generation::cpp::formattables {
 
 directive_group_repository_factory::feature_group
 directive_group_repository_factory::make_feature_group(
-    const variability::meta_model::feature_model& fm,
+    const variability::entities::feature_model& fm,
     const formatters::repository& frp) const {
     BOOST_LOG_SEV(lg, debug) << "Creating feature group.";
 
@@ -98,7 +98,7 @@ directive_group_repository_factory::make_feature_group(
 
 bool directive_group_repository_factory::
 make_top_level_inclusion_required(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) const {
+    const variability::entities::configuration& cfg) const {
     const variability::helpers::configuration_selector s(cfg);
     return s.get_boolean_content_or_default(fg.inclusion_required);
 }
@@ -106,7 +106,7 @@ make_top_level_inclusion_required(const feature_group& fg,
 boost::optional<directive_group>
 directive_group_repository_factory::make_directive_group(
     const feature_group& fg,const std::string& archetype,
-    const variability::meta_model::configuration& cfg) const {
+    const variability::entities::configuration& cfg) const {
 
     if (archetype.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_archetype;
@@ -148,7 +148,7 @@ directive_group_repository_factory::make_directive_group(
 }
 
 bool directive_group_repository_factory::has_inclusion_directive_overrides(
-    const variability::meta_model::configuration& cfg) const {
+    const variability::entities::configuration& cfg) const {
     const variability::helpers::configuration_selector s(cfg);
     const auto r(s.has_configuration_point_ending_with((override_postfix)));
     BOOST_LOG_SEV(lg, debug) << "Found entries with keys ending with "
@@ -215,7 +215,7 @@ insert_inclusion_directive(const std::string& id, const std::string& archetype,
 
 void directive_group_repository_factory::
 compute_directives(const feature_group& fg,
-    const logical::meta_model::element& e,
+    const logical::entities::element& e,
     const artefact_formatters_type& formatters, const locator& l,
     directive_group_repository& dgrp) const {
 
@@ -359,7 +359,7 @@ directive_group_repository_factory::make(const feature_group& fg,
 
 directive_group_repository
 directive_group_repository_factory::
-make(const variability::meta_model::feature_model& feature_model,
+make(const variability::entities::feature_model& feature_model,
     const formatters::repository& frp, const locator& l,
     const std::unordered_map<std::string, formattable>& formattables) const {
 

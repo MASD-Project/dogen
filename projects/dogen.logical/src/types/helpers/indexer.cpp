@@ -21,8 +21,8 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/unordered_set_io.hpp"
 #include "dogen.logical/io/helpers/indices_io.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/structural/builtin.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/builtin.hpp"
 #include "dogen.logical/types/helpers/indexer.hpp"
 
 namespace {
@@ -34,7 +34,7 @@ auto lg(logger_factory("assets.helpers.indexer"));
 
 namespace dogen::logical::helpers {
 
-indices indexer::index(meta_model::model& m) {
+indices indexer::index(entities::model& m) {
     indices r;
 
     for (const auto& pair : m.structural_elements().builtins()) {

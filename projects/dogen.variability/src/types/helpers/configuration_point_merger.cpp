@@ -20,7 +20,7 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
-#include "dogen.variability/io/meta_model/configuration_point_io.hpp"
+#include "dogen.variability/io/entities/configuration_point_io.hpp"
 #include "dogen.variability/types/helpers/configuration_point_merger.hpp"
 
 namespace {
@@ -33,19 +33,19 @@ static logger lg(logger_factory(
 
 namespace dogen::variability::helpers {
 
-std::unordered_map<std::string, meta_model::configuration_point>
+std::unordered_map<std::string, entities::configuration_point>
 configuration_point_merger::merge(
     const std::string& lhs_name, const std::unordered_map<std::string,
-    meta_model::configuration_point>& lhs, const std::string& rhs_name,
+    entities::configuration_point>& lhs, const std::string& rhs_name,
     const std::unordered_map<std::string,
-    meta_model::configuration_point>& rhs) const {
+    entities::configuration_point>& rhs) const {
     BOOST_LOG_SEV(lg, debug) << "Merging configurations."
                              << " lhs: " << lhs_name
                              << " rhs: " << rhs_name;
     BOOST_LOG_SEV(lg, trace) << "lhs: " << lhs;
     BOOST_LOG_SEV(lg, trace) << "rhs: " << rhs;
 
-    std::unordered_map<std::string, meta_model::configuration_point> r(lhs);
+    std::unordered_map<std::string, entities::configuration_point> r(lhs);
     for (const auto& pair : rhs)
         r.insert(pair);
 

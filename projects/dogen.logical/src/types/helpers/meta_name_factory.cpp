@@ -23,15 +23,15 @@
 
 namespace dogen::logical::helpers {
 
-meta_model::location meta_name_factory::make_location() {
-    meta_model::location r;
+entities::location meta_name_factory::make_location() {
+    entities::location r;
     r.external_modules().push_back("dogen");
     r.model_modules().push_back("assets");
-    r.internal_modules().push_back("meta_model");
+    r.internal_modules().push_back("entities");
     return r;
 }
 
-meta_model::name meta_name_factory::make_name(const std::string& sn) {
+entities::name meta_name_factory::make_name(const std::string& sn) {
     static const auto l(make_location());
     name_builder b;
     b.location(l);
@@ -39,147 +39,147 @@ meta_model::name meta_name_factory::make_name(const std::string& sn) {
     return b.build();
 }
 
-meta_model::name meta_name_factory::make_model_name() {
+entities::name meta_name_factory::make_model_name() {
     static const auto r(make_name("model"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_module_name() {
+entities::name meta_name_factory::make_module_name() {
     static const auto r(make_name("module"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_object_template_name() {
+entities::name meta_name_factory::make_object_template_name() {
     static const auto r(make_name("object_template"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_builtin_name() {
+entities::name meta_name_factory::make_builtin_name() {
     static const auto r(make_name("builtin"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_enumeration_name() {
+entities::name meta_name_factory::make_enumeration_name() {
     static const auto r(make_name("enumeration"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_primitive_name() {
+entities::name meta_name_factory::make_primitive_name() {
     static const auto r(make_name("primitive"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_object_name() {
+entities::name meta_name_factory::make_object_name() {
     static const auto r(make_name("object"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_exception_name() {
+entities::name meta_name_factory::make_exception_name() {
     static const auto r(make_name("exception"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_visitor_name() {
+entities::name meta_name_factory::make_visitor_name() {
     static const auto r(make_name("visitor"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_entry_point_name() {
+entities::name meta_name_factory::make_entry_point_name() {
     static const auto r(make_name("entry_point"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_assistant_name() {
+entities::name meta_name_factory::make_assistant_name() {
     static const auto r(make_name("assistant"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_licence_name() {
+entities::name meta_name_factory::make_licence_name() {
     static const auto r(make_name("licence"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_modeline_name() {
+entities::name meta_name_factory::make_modeline_name() {
     static const auto r(make_name("modeline"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_modeline_group_name() {
+entities::name meta_name_factory::make_modeline_group_name() {
     static const auto r(make_name("modeline_group"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_generation_marker_name() {
+entities::name meta_name_factory::make_generation_marker_name() {
     static const auto r(make_name("generation_marker"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_variability_profile_name() {
+entities::name meta_name_factory::make_variability_profile_name() {
     static const auto r(make_name("variability_profile"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_variability_profile_template_name() {
+entities::name meta_name_factory::make_variability_profile_template_name() {
     static const auto r(make_name("variability_profile_template"));
     return r;
 }
 
-meta_model::name meta_name_factory::
+entities::name meta_name_factory::
 make_variability_feature_template_bundle_name() {
     static const auto r(make_name("variability_feature_template_bundle"));
     return r;
 }
 
-meta_model::name meta_name_factory::
+entities::name meta_name_factory::
 make_variability_feature_bundle_name() {
     static const auto r(make_name("variability_feature_bundle"));
     return r;
 }
 
-meta_model::name meta_name_factory::
+entities::name meta_name_factory::
 make_variability_initializer_name() {
     static const auto r(make_name("variability_initializer"));
     return r;
 }
 
-meta_model::name meta_name_factory::
+entities::name meta_name_factory::
 make_templating_logic_less_templates_name() {
     static const auto r(
         make_name("templating_logic_less_templates"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_serialization_type_registrar_name() {
+entities::name meta_name_factory::make_serialization_type_registrar_name() {
     static const auto r(
         make_name("serialization_type_registrar"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_visual_studio_solution_name() {
+entities::name meta_name_factory::make_visual_studio_solution_name() {
     static const auto r(
         make_name("visual_studio_solution"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_visual_studio_project_name() {
+entities::name meta_name_factory::make_visual_studio_project_name() {
     static const auto r(
         make_name("visual_studio_project"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_visual_studio_msbuild_targets_name() {
+entities::name meta_name_factory::make_visual_studio_msbuild_targets_name() {
     static const auto r(
         make_name("visual_studio_msbuild_targets"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_orm_common_odb_options_name() {
+entities::name meta_name_factory::make_orm_common_odb_options_name() {
     static const auto r(
         make_name("orm_common_odb_options"));
     return r;
 }
 
-meta_model::name meta_name_factory::make_build_cmakelists_name() {
+entities::name meta_name_factory::make_build_cmakelists_name() {
     static const auto r(
         make_name("build_cmakelists"));
     return r;

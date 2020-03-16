@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.csharp/types/traits.hpp"
@@ -44,7 +44,7 @@ physical::location enum_formatter::archetype_location() const {
     return r;
 }
 
-const logical::meta_model::name& enum_formatter::meta_name() const {
+const logical::entities::name& enum_formatter::meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_enumeration_name());
     return r;
@@ -55,20 +55,20 @@ std::string enum_formatter::family() const {
 }
 
 boost::filesystem::path enum_formatter::full_path(
-    const formattables::locator& l, const logical::meta_model::name& n) const {
+    const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_full_path(n, static_id());
 }
 
 std::list<std::string> enum_formatter::
-inclusion_dependencies(const logical::meta_model::element& /*e*/) const {
+inclusion_dependencies(const logical::entities::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
-extraction::meta_model::artefact enum_formatter::format(
-    const context& ctx, const logical::meta_model::element& e) const {
+extraction::entities::artefact enum_formatter::format(
+    const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location());
-    const auto& ye(a.as<logical::meta_model::structural::enumeration>(static_id(), e));
+    const auto& ye(a.as<logical::entities::structural::enumeration>(static_id(), e));
     {
         const auto sn(e.name().simple());
         auto sbf(a.make_scoped_boilerplate_formatter(e));

@@ -23,11 +23,11 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
-#include "dogen.logical/types/meta_model/structural/module.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/elements_traversal.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/types/entities/structural/module.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/elements_traversal.hpp"
 #include "dogen.logical/types/helpers/name_factory.hpp"
 #include "dogen.logical/types/helpers/name_builder.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
@@ -52,32 +52,32 @@ namespace {
 
 class internal_modules_gatherer {
 private:
-    void process(const meta_model::name& n);
+    void process(const entities::name& n);
 
 public:
-    void operator()(meta_model::element&) { }
-    void operator()(meta_model::structural::module& m) {
+    void operator()(entities::element&) { }
+    void operator()(entities::structural::module& m) {
         process(m.name());
     }
-    void operator()(meta_model::structural::object_template& ot) {
+    void operator()(entities::structural::object_template& ot) {
         process(ot.name());
     }
-    void operator()(meta_model::structural::builtin& b) {
+    void operator()(entities::structural::builtin& b) {
         process(b.name());
     }
-    void operator()(meta_model::structural::enumeration& e) {
+    void operator()(entities::structural::enumeration& e) {
         process(e.name());
     }
-    void operator()(meta_model::structural::primitive& p) {
+    void operator()(entities::structural::primitive& p) {
         process(p.name());
     }
-    void operator()(meta_model::structural::object& o) {
+    void operator()(entities::structural::object& o) {
         process(o.name());
     }
-    void operator()(meta_model::structural::exception& e) {
+    void operator()(entities::structural::exception& e) {
         process(e.name());
     }
-    void operator()(meta_model::structural::visitor& v) {
+    void operator()(entities::structural::visitor& v) {
         process(v.name());
     }
 
@@ -91,7 +91,7 @@ private:
     > distinct_internal_moduless_;
 };
 
-void internal_modules_gatherer::process(const meta_model::name& n) {
+void internal_modules_gatherer::process(const entities::name& n) {
     auto im(n.location().internal_modules());
     while (!im.empty()) {
         const std::string key(boost::join(im, separator));
@@ -108,14 +108,14 @@ const std::unordered_map<std::string, std::list<std::string>>&
 }
 
 std::unordered_map<std::string, std::list<std::string>>  modules_transform::
-gather_internal_modules(meta_model::model& m) {
+gather_internal_modules(entities::model& m) {
     internal_modules_gatherer img;
-    meta_model::elements_traversal(m, img);
+    entities::elements_traversal(m, img);
     return img.result();
 }
 
 void modules_transform::create_modules(const std::unordered_map<std::string,
-    std::list<std::string>>& internal_modules, meta_model::model& m) {
+    std::list<std::string>>& internal_modules, entities::model& m) {
 
     helpers::name_factory f;
     for (const auto& pair : internal_modules) {
@@ -124,11 +124,11 @@ void modules_transform::create_modules(const std::unordered_map<std::string,
         const auto i(m.structural_elements().modules().find(
                 n.qualified().dot()));
         if (i == m.structural_elements().modules().end()) {
-            auto mod(boost::make_shared<meta_model::structural::module>());
+            auto mod(boost::make_shared<entities::structural::module>());
             mod->name(n);
             mod->origin_type(m.origin_type());
             mod->configuration(
-                boost::make_shared<variability::meta_model::configuration>());
+                boost::make_shared<variability::entities::configuration>());
             mod->configuration()->name().simple(n.simple());
             mod->configuration()->name().qualified(n.qualified().dot());
             m.structural_elements().modules().insert(
@@ -137,7 +137,7 @@ void modules_transform::create_modules(const std::unordered_map<std::string,
     }
 }
 
-void modules_transform::apply(const context& ctx, meta_model::model& m) {
+void modules_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "modules transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 

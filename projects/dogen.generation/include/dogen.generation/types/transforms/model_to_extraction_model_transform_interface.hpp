@@ -32,11 +32,11 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.physical/types/locations_group.hpp"
 #include "dogen.physical/types/location_repository_parts.hpp"
-#include "dogen.logical/types/meta_model/technical_space.hpp"
-#include "dogen.generation/types/meta_model/intra_backend_segment_properties.hpp"
+#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.generation/types/entities/intra_backend_segment_properties.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
-#include "dogen.generation/types/meta_model/model.hpp"
-#include "dogen.extraction/types/meta_model/model.hpp"
+#include "dogen.generation/types/entities/model.hpp"
+#include "dogen.extraction/types/entities/model.hpp"
 
 namespace dogen::generation::transforms {
 
@@ -97,24 +97,24 @@ public:
     /**
      * @brief Technical space supported by this transform.
      */
-    virtual logical::meta_model::technical_space technical_space() const = 0;
+    virtual logical::entities::technical_space technical_space() const = 0;
 
     /**
      * @brief Returns all intra-backend segment properties.
      */
     virtual std::unordered_map<
         std::string,
-        generation::meta_model::intra_backend_segment_properties>
+        generation::entities::intra_backend_segment_properties>
     intra_backend_segment_properties() const = 0;
 
     /**
      * @brief Generates the text model representation for this
      * transform.
      */
-    virtual extraction::meta_model::model
+    virtual extraction::entities::model
     apply(const generation::transforms::context& ctx,
         const bool requires_backend_directory,
-        const generation::meta_model::model& m) const = 0;
+        const generation::entities::model& m) const = 0;
 };
 
 }

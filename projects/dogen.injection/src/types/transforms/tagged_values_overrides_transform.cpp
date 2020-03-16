@@ -25,7 +25,7 @@
 #include "dogen.utility/types/string/splitter.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
-#include "dogen.injection/io/meta_model/model_io.hpp"
+#include "dogen.injection/io/entities/model_io.hpp"
 #include "dogen.injection/types/transforms/transformation_error.hpp"
 #include "dogen.injection/types/transforms/tagged_values_overrides_transform.hpp"
 
@@ -51,7 +51,7 @@ const std::string override_not_applied("Override could not be applied: ");
 namespace dogen::injection::transforms {
 
 void tagged_values_overrides_transform::
-apply(const transforms::context& ctx, meta_model::model& m) {
+apply(const transforms::context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "tagged values overrides transform", transform_id, m.name(),
         *ctx.tracer(), m);

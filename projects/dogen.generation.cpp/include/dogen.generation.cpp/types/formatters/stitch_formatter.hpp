@@ -26,8 +26,8 @@
 #endif
 
 #include "dogen.variability/types/helpers/configuration_factory.hpp"
-#include "dogen.extraction/types/meta_model/artefact.hpp"
-#include "dogen.logical/types/meta_model/element_fwd.hpp"
+#include "dogen.extraction/types/entities/artefact.hpp"
+#include "dogen.logical/types/entities/element_fwd.hpp"
 #include "dogen.templating/types/stitch/instantiator.hpp"
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
 #include "dogen.generation.cpp/types/formattables/artefact_properties.hpp"
@@ -38,16 +38,16 @@ namespace dogen::generation::cpp::formatters {
 class stitch_formatter final {
 public:
     stitch_formatter(const formattables::locator& l,
-        const variability::meta_model::feature_model& fm,
+        const variability::entities::feature_model& fm,
         const variability::helpers::configuration_factory& cf);
 
 private:
     bool is_header(const inclusion_support_types ist) const;
 
 public:
-    extraction::meta_model::artefact
+    extraction::entities::artefact
     format(const artefact_formatter_interface& stock_formatter,
-        const context& ctx, const logical::meta_model::element& e) const;
+        const context& ctx, const logical::entities::element& e) const;
 
 private:
     const templating::stitch::instantiator instantiator_;

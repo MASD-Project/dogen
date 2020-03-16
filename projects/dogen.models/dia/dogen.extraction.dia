@@ -206,7 +206,7 @@ not technical space specific.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#meta_model#</dia:string>
+        <dia:string>#entities#</dia:string>
       </dia:attribute>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O3">
@@ -900,7 +900,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model#</dia:string>
+                <dia:string>#entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -1202,7 +1202,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model#</dia:string>
+                <dia:string>#entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -1362,7 +1362,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model#</dia:string>
+                <dia:string>#entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -1522,7 +1522,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model#</dia:string>
+                <dia:string>#entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -1682,7 +1682,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model#</dia:string>
+                <dia:string>#entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -2097,7 +2097,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
             <dia:string>#feature_model#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;variability::meta_model::feature_model&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;variability::entities::feature_model&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -3185,7 +3185,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model#</dia:string>
+                <dia:string>#entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -3345,7 +3345,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model#</dia:string>
+                <dia:string>#entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -3649,7 +3649,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model#</dia:string>
+                <dia:string>#entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -3881,7 +3881,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model#</dia:string>
+                <dia:string>#entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -4698,7 +4698,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model#</dia:string>
+                <dia:string>#entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -4904,7 +4904,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#meta_model::model#</dia:string>
+            <dia:string>#entities::model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4947,7 +4947,7 @@ only be written to the filesystem if it does not exist.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model#</dia:string>
+                <dia:string>#entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -5180,7 +5180,7 @@ external technical spaces.
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#meta_model::model#</dia:string>
+                <dia:string>#entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -5658,7 +5658,7 @@ external technical spaces.
             <dia:string>#configuration#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;variability::meta_model::configuration&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;variability::entities::configuration&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

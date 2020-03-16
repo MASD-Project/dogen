@@ -26,14 +26,14 @@
 #endif
 
 #include <unordered_set>
-#include "dogen.logical/types/meta_model/model.hpp"
+#include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/helpers/indices.hpp"
 
 namespace dogen::logical::helpers {
 
 class indexer final {
 public:
-    static indices index(meta_model::model& m);
+    static indices index(entities::model& m);
 };
 
 }

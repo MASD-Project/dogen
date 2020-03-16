@@ -27,9 +27,9 @@ namespace dogen::logical::features {
 
 namespace {
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_extraction_output_technical_space() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("output_technical_space");
     r.name().qualified("masd.extraction.output_technical_space");
@@ -45,7 +45,7 @@ make_masd_extraction_output_technical_space() {
 }
 
 output_technical_space::feature_group
-output_technical_space::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+output_technical_space::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
@@ -56,7 +56,7 @@ output_technical_space::make_feature_group(const dogen::variability::meta_model:
 
 output_technical_space::static_configuration output_technical_space::make_static_configuration(
     const feature_group& fg,
-    const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::entities::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
@@ -65,10 +65,10 @@ output_technical_space::static_configuration output_technical_space::make_static
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature>
+std::list<dogen::variability::entities::feature>
 output_technical_space::make_features() {
-    using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature> r;
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature> r;
     r.push_back(make_masd_extraction_output_technical_space());
     return r;
 }

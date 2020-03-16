@@ -21,7 +21,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.extraction/io/meta_model/model_io.hpp"
+#include "dogen.extraction/io/entities/model_io.hpp"
 #include "dogen.extraction/types/transforms/remove_files_transform.hpp"
 
 namespace {
@@ -35,7 +35,7 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::extraction::transforms {
 
-void remove_files_transform::delete_extra_files(const meta_model::model& m) {
+void remove_files_transform::delete_extra_files(const entities::model& m) {
     /*
      * If the user did not ask to delete extra files, do nothing.
      */
@@ -49,7 +49,7 @@ void remove_files_transform::delete_extra_files(const meta_model::model& m) {
      */
     std::list<boost::filesystem::path> unexpected;
     for (const auto& a : m.artefacts()) {
-        using extraction::meta_model::operation_type;
+        using extraction::entities::operation_type;
         if (a.operation().type() == operation_type::remove)
             unexpected.push_back(a.path());
     }
@@ -68,7 +68,7 @@ void remove_files_transform::delete_extra_files(const meta_model::model& m) {
 }
 
 void remove_files_transform::
-delete_empty_directories(const meta_model::model& m) {
+delete_empty_directories(const entities::model& m) {
     if (!m.outputting_properties().delete_empty_directories()) {
         BOOST_LOG_SEV(lg, debug) << "Delete empty directories is off.";
         return;
@@ -92,7 +92,7 @@ delete_empty_directories(const meta_model::model& m) {
 }
 
 void remove_files_transform::
-apply(const context& ctx, const meta_model::model& m) {
+apply(const context& ctx, const entities::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "remove files transform", transform_id, m.name(), *ctx.tracer());
 

@@ -27,9 +27,9 @@ namespace dogen::logical::features {
 
 namespace {
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_variability_generate_registration() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("generate_registration");
     r.name().qualified("masd.variability.generate_registration");
@@ -46,9 +46,9 @@ make_masd_variability_generate_registration() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_variability_generate_static_configuration() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("generate_static_configuration");
     r.name().qualified("masd.variability.generate_static_configuration");
@@ -63,9 +63,9 @@ make_masd_variability_generate_static_configuration() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_variability_default_binding_point() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("default_binding_point");
     r.name().qualified("masd.variability.default_binding_point");
@@ -78,9 +78,9 @@ make_masd_variability_default_binding_point() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_variability_instantiation_domain_name() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("instantiation_domain_name");
     r.name().qualified("masd.variability.instantiation_domain_name");
@@ -93,9 +93,9 @@ make_masd_variability_instantiation_domain_name() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_variability_key_prefix() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("key_prefix");
     r.name().qualified("masd.variability.key_prefix");
@@ -111,7 +111,7 @@ make_masd_variability_key_prefix() {
 }
 
 variability_bundle::feature_group
-variability_bundle::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+variability_bundle::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
@@ -126,7 +126,7 @@ variability_bundle::make_feature_group(const dogen::variability::meta_model::fea
 
 variability_bundle::static_configuration variability_bundle::make_static_configuration(
     const feature_group& fg,
-    const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::entities::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
@@ -141,10 +141,10 @@ variability_bundle::static_configuration variability_bundle::make_static_configu
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature>
+std::list<dogen::variability::entities::feature>
 variability_bundle::make_features() {
-    using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature> r;
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature> r;
     r.push_back(make_masd_variability_generate_registration());
     r.push_back(make_masd_variability_generate_static_configuration());
     r.push_back(make_masd_variability_default_binding_point());

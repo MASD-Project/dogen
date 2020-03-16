@@ -20,7 +20,7 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/meta_model/model_set_io.hpp"
+#include "dogen.logical/io/entities/model_set_io.hpp"
 #include "dogen.logical/types/helpers/pre_assembly_validator.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/modelines_transform.hpp"
@@ -52,7 +52,7 @@ namespace dogen::logical::transforms {
 
 void pre_assembly_chain::apply(const context& ctx,
     const std::unordered_map<std::string, std::string>& fixed_mappings,
-    meta_model::model& m) {
+    entities::model& m) {
     /*
      * Module transform must be done before origin and technical space
      * transforms to get these properties populated on the new
@@ -97,7 +97,7 @@ void pre_assembly_chain::apply(const context& ctx,
     helpers::pre_assembly_validator::validate(m);
 }
 
-void pre_assembly_chain::apply(const context& ctx, meta_model::model_set& ms) {
+void pre_assembly_chain::apply(const context& ctx, entities::model_set& ms) {
     tracing::scoped_chain_tracer stp(lg, "pre-assembly chain",
         transform_id, ms.target().name().qualified().dot(), *ctx.tracer(), ms);
 

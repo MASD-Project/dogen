@@ -33,15 +33,15 @@ static logger lg(logger_factory("generation.cpp.formattables.workflow"));
 namespace dogen::generation::cpp::formattables {
 
 model workflow::make_model(const formatters::repository& frp,
-    const generation::meta_model::model& m) const {
+    const generation::entities::model& m) const {
     adapter a;
     return a.adapt(frp, m);
 }
 
 void workflow::expand_model(
-    const variability::meta_model::feature_model& feature_model,
-    const variability::meta_model::configuration& rcfg,
-    const std::unordered_set<generation::meta_model::element_archetype>&
+    const variability::entities::feature_model& feature_model,
+    const variability::entities::configuration& rcfg,
+    const std::unordered_set<generation::entities::element_archetype>&
     enabled_archetype_for_element,
     const formatters::repository& frp, const locator& l,
     model& fm) const {
@@ -50,10 +50,10 @@ void workflow::expand_model(
 }
 
 model workflow::execute(
-    const variability::meta_model::feature_model& feature_model,
-    const variability::meta_model::configuration& rcfg,
+    const variability::entities::feature_model& feature_model,
+    const variability::entities::configuration& rcfg,
     const locator& l, const formatters::repository& frp,
-    const generation::meta_model::model& m) const {
+    const generation::entities::model& m) const {
 
     auto r(make_model(frp, m));
     expand_model(feature_model, rcfg,

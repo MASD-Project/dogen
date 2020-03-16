@@ -27,9 +27,9 @@
 
 #include <list>
 #include <string>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
 
 namespace dogen::extraction::features {
 
@@ -39,15 +39,15 @@ namespace dogen::extraction::features {
 class filesystem final {
 public:
     struct feature_group {
-        variability::meta_model::feature force_write;
-        variability::meta_model::feature delete_extra_files;
-        variability::meta_model::feature ignore_files_matching_regex;
-        variability::meta_model::feature delete_empty_directories;
-        variability::meta_model::feature enable_backend_directories;
+        variability::entities::feature force_write;
+        variability::entities::feature delete_extra_files;
+        variability::entities::feature ignore_files_matching_regex;
+        variability::entities::feature delete_empty_directories;
+        variability::entities::feature enable_backend_directories;
     };
 
     static feature_group
-    make_feature_group(const variability::meta_model::feature_model& fm);
+    make_feature_group(const variability::entities::feature_model& fm);
 
 public:
     struct static_configuration {
@@ -66,7 +66,7 @@ public:
 
     static static_configuration make_static_configuration(
         const feature_group& fg,
-        const variability::meta_model::configuration& cfg);
+        const variability::entities::configuration& cfg);
 
     template<typename Configurable>
     static static_configuration make_static_configuration(
@@ -75,7 +75,7 @@ public:
     }
 
 public:
-    static std::list<dogen::variability::meta_model::feature>
+    static std::list<dogen::variability::entities::feature>
     make_features();
 };
 

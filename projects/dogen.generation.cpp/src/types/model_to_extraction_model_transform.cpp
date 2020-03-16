@@ -22,7 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/types/meta_model/structural/module.hpp"
+#include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
 #include "dogen.generation.cpp/types/formatters/workflow.hpp"
 #include "dogen.generation.cpp/types/formattables/workflow.hpp"
@@ -56,20 +56,20 @@ model_to_extraction_model_transform::formatters_repository() const {
 
 formattables::model
 model_to_extraction_model_transform::create_formattables_model(
-    const variability::meta_model::feature_model& feature_model,
-    const variability::meta_model::configuration& rcfg,
+    const variability::entities::feature_model& feature_model,
+    const variability::entities::configuration& rcfg,
     const formatters::repository& frp, const formattables::locator& l,
-    const generation::meta_model::model& m) const {
+    const generation::entities::model& m) const {
     formattables::workflow fw;
     return fw.execute(feature_model, rcfg, l, frp, m);
 }
 
 formattables::locator model_to_extraction_model_transform::make_locator(
     const boost::filesystem::path& output_directory_path,
-    const variability::meta_model::feature_model& fm,
-    const variability::meta_model::configuration& cfg,
+    const variability::entities::feature_model& fm,
+    const variability::entities::configuration& cfg,
     const formatters::repository& frp, const bool enable_backend_directories,
-    const generation::meta_model::model& m) const {
+    const generation::entities::model& m) const {
 
     const auto& mn(m.name());
     const auto odp(output_directory_path);
@@ -89,11 +89,11 @@ std::string model_to_extraction_model_transform::description() const {
     return ::description;
 }
 
-std::list<extraction::meta_model::artefact>
+std::list<extraction::entities::artefact>
 model_to_extraction_model_transform::
-format(const std::unordered_set<generation::meta_model::element_archetype>&
+format(const std::unordered_set<generation::entities::element_archetype>&
     enabled_archetype_for_element, const formattables::locator& l,
-    const variability::meta_model::feature_model& feature_model,
+    const variability::entities::feature_model& feature_model,
     const variability::helpers::configuration_factory& cf,
     const formattables::model& fm) const {
     formatters::workflow wf(l, feature_model, cf);
@@ -137,25 +137,25 @@ archetype_location_repository_parts() const {
     return rg.archetype_location_repository_parts();
 }
 
-logical::meta_model::technical_space
+logical::entities::technical_space
 model_to_extraction_model_transform::technical_space() const {
-    return logical::meta_model::technical_space::cpp;
+    return logical::entities::technical_space::cpp;
 }
 
 std::unordered_map<std::string,
-                   generation::meta_model::intra_backend_segment_properties>
+                   generation::entities::intra_backend_segment_properties>
 model_to_extraction_model_transform::
 intra_backend_segment_properties() const {
     std::unordered_map<
         std::string,
-        generation::meta_model::intra_backend_segment_properties> r;
+        generation::entities::intra_backend_segment_properties> r;
     return r;
 }
 
-extraction::meta_model::model model_to_extraction_model_transform::apply(
+extraction::entities::model model_to_extraction_model_transform::apply(
     const generation::transforms::context& ctx,
     const bool enable_backend_directories,
-    const generation::meta_model::model& m) const {
+    const generation::entities::model& m) const {
     tracing::scoped_transform_tracer stp(lg,
         "C++ model to text transform", transform_id, m.name().qualified().dot(),
         *ctx.tracer());
@@ -180,7 +180,7 @@ extraction::meta_model::model model_to_extraction_model_transform::apply(
     /*
      * Code-generate all artefacts.
      */
-    extraction::meta_model::model r;
+    extraction::entities::model r;
     const auto& eafe(m.enabled_archetype_for_element());
     using variability::helpers::configuration_factory;
     const configuration_factory cf(feature_model, false/*compatibility_model*/);

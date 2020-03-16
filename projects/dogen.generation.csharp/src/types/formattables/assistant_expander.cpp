@@ -20,14 +20,14 @@
  */
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
-#include "dogen.logical/types/meta_model/element.hpp"
+#include "dogen.logical/types/entities/element.hpp"
 #include "dogen.generation.csharp/types/traits.hpp"
 #include "dogen.generation.csharp/types/formattables/assistant_expander.hpp"
 
 namespace dogen::generation::csharp::formattables {
 
 assistant_expander::feature_group assistant_expander::
-make_feature_group(const variability::meta_model::feature_model& fm) const {
+make_feature_group(const variability::entities::feature_model& fm) const {
     feature_group r;
     const variability::helpers::feature_selector s(fm);
 
@@ -42,7 +42,7 @@ make_feature_group(const variability::meta_model::feature_model& fm) const {
 
 boost::optional<assistant_properties>
 assistant_expander::make_assistant_properties(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) const {
+    const variability::entities::configuration& cfg) const {
 
     assistant_properties r;
     bool has_properties(false);
@@ -67,7 +67,7 @@ assistant_expander::make_assistant_properties(const feature_group& fg,
 }
 
 void assistant_expander::
-expand(const variability::meta_model::feature_model& feature_model,
+expand(const variability::entities::feature_model& feature_model,
     model& fm) const {
     const auto fg(make_feature_group(feature_model));
 

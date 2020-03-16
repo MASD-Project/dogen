@@ -29,12 +29,12 @@
 #include <iosfwd>
 #include <vector>
 #include <unordered_map>
-#include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.injection/types/meta_model/model.hpp"
-#include "dogen.logical/types/meta_model/element.hpp"
-#include "dogen.logical/types/meta_model/location.hpp"
-#include "dogen.logical/types/meta_model/attribute.hpp"
-#include "dogen.logical/types/meta_model/model.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.injection/types/entities/model.hpp"
+#include "dogen.logical/types/entities/element.hpp"
+#include "dogen.logical/types/entities/location.hpp"
+#include "dogen.logical/types/entities/attribute.hpp"
+#include "dogen.logical/types/entities/model.hpp"
 #include "dogen.engine/types/transforms/context_fwd.hpp"
 #include "dogen.engine/types/helpers/adapter.hpp"
 
@@ -45,21 +45,21 @@ namespace dogen::engine::transforms {
  */
 class injection_model_to_assets_model_transform final {
 private:
-    static logical::meta_model::location
-    create_location(const context& ctx, const injection::meta_model::model& m);
+    static logical::entities::location
+    create_location(const context& ctx, const injection::entities::model& m);
 
-    static logical::meta_model::static_stereotypes compute_element_type(
-        const std::list<logical::meta_model::static_stereotypes>& st,
+    static logical::entities::static_stereotypes compute_element_type(
+        const std::list<logical::entities::static_stereotypes>& st,
         const std::string& fallback_element_type);
 
     static void process_element(const helpers::adapter& ad,
-        const logical::meta_model::location& l,
-        const injection::meta_model::element& ie,
-        logical::meta_model::model& m);
+        const logical::entities::location& l,
+        const injection::entities::element& ie,
+        logical::entities::model& m);
 
 public:
-    static logical::meta_model::model
-    apply(const context& ctx, const injection::meta_model::model& m);
+    static logical::entities::model
+    apply(const context& ctx, const injection::entities::model& m);
 };
 
 }

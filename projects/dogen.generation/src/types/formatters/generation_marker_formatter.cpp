@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/config.hpp"
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.logical/io/meta_model/decoration/generation_marker_io.hpp"
+#include "dogen.logical/io/entities/decoration/generation_marker_io.hpp"
 #include "dogen.generation/types/formatters/formatting_error.hpp"
 #include "dogen.generation/types/formatters/generation_marker_formatter.hpp"
 
@@ -44,7 +44,7 @@ namespace dogen::generation::formatters {
 void generation_marker_formatter::format(std::ostream& s,
     const std::string& generation_timestamp,
     const std::string& origin_shah1_hash,
-    const logical::meta_model::decoration::generation_marker& gm) const {
+    const logical::entities::decoration::generation_marker& gm) const {
     BOOST_LOG_SEV(lg, trace) << "Marker: " << gm;
 
     if (gm.message().empty())

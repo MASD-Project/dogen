@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen.injection/types/meta_model/model_set.hpp"
-#include "dogen.logical/types/meta_model/model_set.hpp"
+#include "dogen.injection/types/entities/model_set.hpp"
+#include "dogen.logical/types/entities/model_set.hpp"
 #include "dogen.engine/types/transforms/context_fwd.hpp"
 
 namespace dogen::engine::transforms {
@@ -39,8 +39,8 @@ namespace dogen::engine::transforms {
  */
 class injection_model_set_to_assets_model_set_chain final {
 public:
-    static logical::meta_model::model_set
-    apply(const context& ctx, const injection::meta_model::model_set& ms);
+    static logical::entities::model_set
+    apply(const context& ctx, const injection::entities::model_set& ms);
 };
 
 }

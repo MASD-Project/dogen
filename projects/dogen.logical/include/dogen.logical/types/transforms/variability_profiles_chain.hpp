@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen.variability/types/transforms/context_fwd.hpp"
-#include "dogen.logical/types/meta_model/model_set.hpp"
+#include "dogen.logical/types/entities/model_set.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
@@ -60,7 +60,7 @@ public:
     /**
      * @brief Applies the transform to the entire model set.
      */
-    static void apply(const context& ctx, meta_model::model_set& ms);
+    static void apply(const context& ctx, entities::model_set& ms);
 };
 
 }

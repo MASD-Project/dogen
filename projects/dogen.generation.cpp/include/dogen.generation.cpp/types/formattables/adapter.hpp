@@ -27,10 +27,10 @@
 
 #include <string>
 #include <unordered_map>
-#include "dogen.logical/types/meta_model/orm/letter_case.hpp"
-#include "dogen.logical/types/meta_model/orm/database_system.hpp"
-#include "dogen.logical/types/meta_model/orm/model_properties.hpp"
-#include "dogen.generation/types/meta_model/model.hpp"
+#include "dogen.logical/types/entities/orm/letter_case.hpp"
+#include "dogen.logical/types/entities/orm/database_system.hpp"
+#include "dogen.logical/types/entities/orm/model_properties.hpp"
+#include "dogen.generation/types/entities/model.hpp"
 #include "dogen.generation.cpp/types/formatters/repository.hpp"
 #include "dogen.generation.cpp/types/formattables/formattable.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
@@ -44,21 +44,21 @@ namespace dogen::generation::cpp::formattables {
 class adapter {
 public:
     static std::string
-    to_odb_database(const logical::meta_model::orm::database_system ds);
+    to_odb_database(const logical::entities::orm::database_system ds);
 
 private:
     std::string
-    to_odb_sql_name_case(const logical::meta_model::orm::letter_case lc) const;
+    to_odb_sql_name_case(const logical::entities::orm::letter_case lc) const;
 
     std::list<std::string>
-    make_databases(const logical::meta_model::orm::model_properties& omp) const;
+    make_databases(const logical::entities::orm::model_properties& omp) const;
 
 public:
     /**
      * @brief Given a yarn model, produces the corresponding formattables.
      */
     model adapt(const formatters::repository& frp,
-        const generation::meta_model::model& m) const;
+        const generation::entities::model& m) const;
 };
 
 }

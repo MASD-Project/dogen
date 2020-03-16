@@ -41,14 +41,14 @@ const std::string duplicate_configuration_point(
 
 namespace dogen::logical::helpers {
 
-variability::meta_model::profile_template
-profile_adapter::adapt(const meta_model::variability::profile_template& pt) {
+variability::entities::profile_template
+profile_adapter::adapt(const entities::variability::profile_template& pt) {
     const auto sn(pt.name().simple());
     const auto qn(pt.name().qualified().dot());
     BOOST_LOG_SEV(lg, trace) << "Adapting profile template: "
                              << sn << " (" << qn << ")";
 
-    variability::meta_model::profile_template r;
+    variability::entities::profile_template r;
     r.name().simple(sn);
     r.name().qualified(qn);
     r.stereotype(pt.stereotype());
@@ -60,7 +60,7 @@ profile_adapter::adapt(const meta_model::variability::profile_template& pt) {
         const auto& k(e.key());
         BOOST_LOG_SEV(lg, trace) << "Adapting entry: " << k;
 
-        variability::meta_model::configuration_point_template cpt;
+        variability::entities::configuration_point_template cpt;
         cpt.name().simple(k);
         cpt.instantiation_domain_name(e.instantiation_domain_name());
         cpt.untyped_value(e.value());
@@ -70,14 +70,14 @@ profile_adapter::adapt(const meta_model::variability::profile_template& pt) {
     return r;
 }
 
-variability::meta_model::profile
-profile_adapter::adapt(const variability::meta_model::feature_model& fm,
-    const meta_model::variability::profile& p) {
+variability::entities::profile
+profile_adapter::adapt(const variability::entities::feature_model& fm,
+    const entities::variability::profile& p) {
     const auto sn(p.name().simple());
     const auto qn(p.name().qualified().dot());
     BOOST_LOG_SEV(lg, trace) << "Adapting profile: " << sn << " (" << qn << ")";
 
-    variability::meta_model::profile r;
+    variability::entities::profile r;
     r.name().simple(sn);
     r.name().qualified(qn);
     r.stereotype(p.stereotype());
@@ -105,7 +105,7 @@ profile_adapter::adapt(const variability::meta_model::feature_model& fm,
          * template's associated feature, and, if supplied, the owner.
          */
         const auto& feature(i->second);
-        variability::meta_model::configuration_point cp;
+        variability::entities::configuration_point cp;
         cp.name().simple(feature.name().simple());
         cp.name().qualified(feature.name().qualified());
 
@@ -127,9 +127,9 @@ profile_adapter::adapt(const variability::meta_model::feature_model& fm,
     return r;
 }
 
-std::list<variability::meta_model::profile_template> profile_adapter::
-adapt_profile_templates(const logical::meta_model::model_set& ms) {
-    std::list<variability::meta_model::profile_template> r;
+std::list<variability::entities::profile_template> profile_adapter::
+adapt_profile_templates(const logical::entities::model_set& ms) {
+    std::list<variability::entities::profile_template> r;
 
     const auto lambda(
         [&](auto& map) {
@@ -144,10 +144,10 @@ adapt_profile_templates(const logical::meta_model::model_set& ms) {
     return r;
 }
 
-std::list<variability::meta_model::profile> profile_adapter::
-adapt_profiles(const variability::meta_model::feature_model& fm,
-    const logical::meta_model::model_set& ms) {
-    std::list<variability::meta_model::profile> r;
+std::list<variability::entities::profile> profile_adapter::
+adapt_profiles(const variability::entities::feature_model& fm,
+    const logical::entities::model_set& ms) {
+    std::list<variability::entities::profile> r;
 
     const auto lambda(
         [&](auto& map) {
@@ -163,8 +163,8 @@ adapt_profiles(const variability::meta_model::feature_model& fm,
 }
 
 variability::transforms::profile_repository_inputs
-profile_adapter::adapt(const variability::meta_model::feature_model& fm,
-    const meta_model::model_set& ms) {
+profile_adapter::adapt(const variability::entities::feature_model& fm,
+    const entities::model_set& ms) {
     variability::transforms::profile_repository_inputs r;
     r.profiles(adapt_profiles(fm, ms));
     r.templates(adapt_profile_templates(ms));

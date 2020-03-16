@@ -4733,7 +4733,7 @@ manageable format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#external::meta_model::model#</dia:string>
+            <dia:string>#external::entities::model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4874,7 +4874,7 @@ manageable format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#external::meta_model::element#</dia:string>
+            <dia:string>#external::entities::element#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

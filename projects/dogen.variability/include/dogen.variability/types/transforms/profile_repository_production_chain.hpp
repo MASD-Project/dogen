@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen.variability/types/meta_model/profile_repository.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/entities/profile_repository.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.variability/types/transforms/profile_repository_inputs.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
 
@@ -37,8 +37,8 @@ namespace dogen::variability::transforms {
  */
 class profile_repository_production_chain final {
 public:
-    static meta_model::profile_repository
-    apply(const context& ctx, const meta_model::feature_model& fm,
+    static entities::profile_repository
+    apply(const context& ctx, const entities::feature_model& fm,
         const profile_repository_inputs& inputs);
 };
 

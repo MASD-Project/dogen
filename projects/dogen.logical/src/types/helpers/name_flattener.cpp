@@ -26,7 +26,7 @@ name_flattener::name_flattener(const bool detect_model_name)
     : detect_model_name_(detect_model_name) {}
 
 std::list<std::string>
-name_flattener::flatten(const meta_model::name& n) const {
+name_flattener::flatten(const entities::name& n) const {
     const auto& l(n.location());
     std::list<std::string> r(l.external_modules());
 

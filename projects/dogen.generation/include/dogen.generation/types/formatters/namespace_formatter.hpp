@@ -28,7 +28,7 @@
 #include <list>
 #include <iosfwd>
 #include <string>
-#include "dogen.logical/types/meta_model/technical_space.hpp"
+#include "dogen.logical/types/entities/technical_space.hpp"
 
 namespace dogen::generation::formatters {
 
@@ -50,15 +50,15 @@ public:
      */
     /**@{*/
     namespace_formatter(std::ostream& s,
-        const logical::meta_model::technical_space ts,
+        const logical::entities::technical_space ts,
         const std::list<std::string>& ns,
         const bool add_new_line = false,  const bool use_nesting = false);
     namespace_formatter(std::ostream& s,
-        const logical::meta_model::technical_space ts,
+        const logical::entities::technical_space ts,
         const std::string& ns,
         const bool add_new_line = false,  const bool use_nesting = false);
     namespace_formatter(std::ostream& s,
-        const logical::meta_model::technical_space ts,
+        const logical::entities::technical_space ts,
         const bool add_new_line = false,  const bool use_nesting = false);
     /**@}*/
 
@@ -81,7 +81,7 @@ public:
 
 private:
     std::ostream& stream_;
-    const logical::meta_model::technical_space technical_space_;
+    const logical::entities::technical_space technical_space_;
     const std::list<std::string> namespaces_;
     const bool add_new_line_;
     const bool use_nesting_;

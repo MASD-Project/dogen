@@ -27,9 +27,9 @@ namespace dogen::logical::features {
 
 namespace {
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_enumeration_use_implementation_defined_underlying_element() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("use_implementation_defined_underlying_element");
     r.name().qualified("masd.enumeration.use_implementation_defined_underlying_element");
@@ -45,9 +45,9 @@ technical space targeted.
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_enumeration_underlying_element() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("underlying_element");
     r.name().qualified("masd.enumeration.underlying_element");
@@ -60,9 +60,9 @@ make_masd_enumeration_underlying_element() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_enumeration_use_implementation_defined_enumerator_values() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("use_implementation_defined_enumerator_values");
     r.name().qualified("masd.enumeration.use_implementation_defined_enumerator_values");
@@ -77,9 +77,9 @@ make_masd_enumeration_use_implementation_defined_enumerator_values() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_enumeration_add_invalid_enumerator() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("add_invalid_enumerator");
     r.name().qualified("masd.enumeration.add_invalid_enumerator");
@@ -97,7 +97,7 @@ make_masd_enumeration_add_invalid_enumerator() {
 }
 
 enumeration::feature_group
-enumeration::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+enumeration::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
@@ -111,7 +111,7 @@ enumeration::make_feature_group(const dogen::variability::meta_model::feature_mo
 
 enumeration::static_configuration enumeration::make_static_configuration(
     const feature_group& fg,
-    const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::entities::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
@@ -123,10 +123,10 @@ enumeration::static_configuration enumeration::make_static_configuration(
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature>
+std::list<dogen::variability::entities::feature>
 enumeration::make_features() {
-    using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature> r;
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature> r;
     r.push_back(make_masd_enumeration_use_implementation_defined_underlying_element());
     r.push_back(make_masd_enumeration_underlying_element());
     r.push_back(make_masd_enumeration_use_implementation_defined_enumerator_values());

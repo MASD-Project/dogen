@@ -1,7 +1,7 @@
 <#@ masd.stitch.stream_variable_name=a.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::generation::cpp::formatters::odb #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.logical/types/meta_model/structural/enumeration.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
@@ -14,7 +14,7 @@
 <#@ masd.stitch.wale.kvp.class.simple_name=enum_header_formatter #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=enum_header #>
 <#@ masd.stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
-<#@ masd.stitch.wale.kvp.yarn_element=logical::meta_model::structural::enumeration #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::enumeration #>
 <#@ masd.stitch.wale.kvp.meta_element=enumeration #>
 <#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
@@ -22,16 +22,16 @@
 
 std::list<std::string> enum_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const logical::meta_model::element& e) const {
+    const logical::entities::element& e) const {
     auto builder(f.make());
     builder.add(e.name(), types::traits::enum_header_archetype());
     return builder.build();
 }
 
-extraction::meta_model::artefact
-enum_header_formatter::format(const context& ctx, const logical::meta_model::element& e) const {
+extraction::entities::artefact
+enum_header_formatter::format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& ye(a.as<logical::meta_model::structural::enumeration>(e));
+    const auto& ye(a.as<logical::entities::structural::enumeration>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

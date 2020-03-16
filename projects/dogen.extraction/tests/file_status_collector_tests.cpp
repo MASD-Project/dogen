@@ -43,17 +43,17 @@ const std::list<boost::filesystem::path> managed_directories() {
     return r;
 }
 
-const dogen::extraction::meta_model::artefact
+const dogen::extraction::entities::artefact
 to_artefact(const boost::filesystem::path& p) {
-    dogen::extraction::meta_model::artefact r;
+    dogen::extraction::entities::artefact r;
     r.path(p);
     return r;
 }
 
-const dogen::extraction::meta_model::model
+const dogen::extraction::entities::model
 create_model(const std::list<boost::filesystem::path>& files,
     const std::vector<std::string>& ignored_files) {
-    dogen::extraction::meta_model::model r;
+    dogen::extraction::entities::model r;
     r.outputting_properties().ignore_files_matching_regex(ignored_files);
     r.managed_directories(managed_directories());
     for(const auto& f : files)

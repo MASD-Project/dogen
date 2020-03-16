@@ -21,7 +21,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/types/helpers/resolver.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/transforms/resolver_transform.hpp"
 
 namespace {
@@ -36,7 +36,7 @@ static logger lg(logger_factory(transform_id));
 namespace dogen::logical::transforms {
 
 void resolver_transform::apply(const context& ctx,
-    const helpers::indices& idx, meta_model::model& m) {
+    const helpers::indices& idx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "resolver transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
     helpers::resolver::resolve(idx, m);

@@ -22,8 +22,8 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
-#include "dogen.logical/types/meta_model/element.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
+#include "dogen.logical/types/entities/element.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
 #include "dogen.generation.cpp/io/formattables/aspect_properties_io.hpp"
 #include "dogen.generation.cpp/types/formattables/aspect_expander.hpp"
@@ -38,7 +38,7 @@ static logger lg(logger_factory("generation.cpp.formattables.aspect_expander"));
 namespace dogen::generation::cpp::formattables {
 
 aspect_expander::feature_group aspect_expander::
-make_feature_group(const variability::meta_model::feature_model& fm) const {
+make_feature_group(const variability::entities::feature_model& fm) const {
     feature_group r;
 
     const variability::helpers::feature_selector s(fm);
@@ -58,7 +58,7 @@ make_feature_group(const variability::meta_model::feature_model& fm) const {
 
 boost::optional<aspect_properties> aspect_expander::
 make_aspect_properties(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) const {
+    const variability::entities::configuration& cfg) const {
     aspect_properties r;
 
     const variability::helpers::configuration_selector s(cfg);
@@ -93,7 +93,7 @@ make_aspect_properties(const feature_group& fg,
 
 aspect_expander::aspect_properties_type aspect_expander::
 obtain_aspect_properties(
-    const variability::meta_model::feature_model& feature_model,
+    const variability::entities::feature_model& feature_model,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating aspect configuration.";
@@ -117,7 +117,7 @@ obtain_aspect_properties(
     return r;
 }
 
-void aspect_expander::walk_name_tree(const logical::meta_model::name_tree& nt,
+void aspect_expander::walk_name_tree(const logical::entities::name_tree& nt,
     const bool is_top_level, const aspect_properties_type& element_aps,
     aspect_properties& ap) const {
 
@@ -147,7 +147,7 @@ void aspect_expander::walk_name_tree(const logical::meta_model::name_tree& nt,
 
 aspect_properties aspect_expander::compute_aspect_properties(
     const aspect_properties_type& element_aps,
-    const std::list<logical::meta_model::attribute>& attrs) const {
+    const std::list<logical::entities::attribute>& attrs) const {
 
     aspect_properties r;
     for (const auto attr : attrs) {
@@ -177,14 +177,14 @@ void aspect_expander::populate_aspect_properties(const std::string& element_id,
      * be build prior to reduction or else we will not get aspects
      * for referenced models.
      */
-    if (ms->origin_type() != logical::meta_model::origin_types::target)
+    if (ms->origin_type() != logical::entities::origin_types::target)
         return;
 
     /*
      * We are only interested in yarn objects; all other element
      * types do not need helpers.
      */
-    const auto ptr(dynamic_cast<const logical::meta_model::structural::object*>(ms.get()));
+    const auto ptr(dynamic_cast<const logical::entities::structural::object*>(ms.get()));
     if (ptr == nullptr)
         return;
 
@@ -210,7 +210,7 @@ populate_aspect_properties(const aspect_properties_type& element_aps,
 }
 
 void aspect_expander::
-expand(const variability::meta_model::feature_model& feature_model,
+expand(const variability::entities::feature_model& feature_model,
     model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started expansion.";
     const auto element_aps(

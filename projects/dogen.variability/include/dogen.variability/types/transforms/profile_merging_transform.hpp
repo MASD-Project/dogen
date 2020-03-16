@@ -25,11 +25,11 @@
 #pragma once
 #endif
 
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/profile.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.variability/types/meta_model/profile_repository.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/profile.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.variability/types/entities/profile_repository.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
 
 namespace dogen::variability::transforms {
@@ -59,59 +59,59 @@ namespace dogen::variability::transforms {
 class profile_merging_transform final {
 private:
     struct feature_group {
-        meta_model::feature profile;
+        entities::feature profile;
     };
 
     static feature_group
-    make_feature_group(const meta_model::feature_model& fm);
+    make_feature_group(const entities::feature_model& fm);
 
     static std::string obtain_profile_name(const feature_group& fg,
-        const meta_model::configuration& cfg);
+        const entities::configuration& cfg);
 
 private:
     /**
      * @brief Recurses up the profile tree and merges children with
      * their parents.
      */
-    static const meta_model::profile& walk_up_parent_tree_and_merge(
+    static const entities::profile& walk_up_parent_tree_and_merge(
         const std::string& current,
-        std::unordered_map<std::string, meta_model::profile>& pm);
+        std::unordered_map<std::string, entities::profile>& pm);
 
 private:
     /**
      * @brief Organises profiles into a map, by qualified name.
      */
-    static std::unordered_map<std::string, meta_model::profile>
-    create_profile_map(const std::list<meta_model::profile>& profiles);
+    static std::unordered_map<std::string, entities::profile>
+    create_profile_map(const std::list<entities::profile>& profiles);
 
     /**
      * @brief Performs a number of sanity checks on a profile.
      */
     static void validate(
-        const std::unordered_map<std::string, meta_model::profile>& pm);
+        const std::unordered_map<std::string, entities::profile>& pm);
 
     /**
      * @brief Merges all profiles.
      */
-    static void merge(std::unordered_map<std::string, meta_model::profile>& pm);
+    static void merge(std::unordered_map<std::string, entities::profile>& pm);
 
     /**
      * @brief Populates the base layer field.
      */
     static void populate_base_layer(
-        const meta_model::feature_model& fm,
-        std::unordered_map<std::string, meta_model::profile>& pm);
+        const entities::feature_model& fm,
+        std::unordered_map<std::string, entities::profile>& pm);
 
     /**
      * @brief Generates a profile repository.
      */
-    static meta_model::profile_repository create_repository(
-        const std::unordered_map<std::string, meta_model::profile>& pm);
+    static entities::profile_repository create_repository(
+        const std::unordered_map<std::string, entities::profile>& pm);
 
 public:
-    static meta_model::profile_repository apply(const context& ctx,
-        const meta_model::feature_model& fm,
-        const std::list<meta_model::profile>& profiles);
+    static entities::profile_repository apply(const context& ctx,
+        const entities::feature_model& fm,
+        const std::list<entities::profile>& profiles);
 };
 
 }

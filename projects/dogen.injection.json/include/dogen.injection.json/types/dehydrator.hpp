@@ -31,9 +31,9 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.injection/types/meta_model/element.hpp"
-#include "dogen.injection/types/meta_model/attribute.hpp"
-#include "dogen.injection/types/meta_model/model.hpp"
+#include "dogen.injection/types/entities/element.hpp"
+#include "dogen.injection/types/entities/attribute.hpp"
+#include "dogen.injection/types/entities/model.hpp"
 
 namespace dogen::injection::json {
 
@@ -50,13 +50,13 @@ private:
     static void insert_parents(std::ostream& s,
         const std::list<std::string>& parents);
     static void insert_attribute(std::ostream& s,
-        const injection::meta_model::attribute& a);
+        const injection::entities::attribute& a);
     static void insert_element(std::ostream& s,
-        const injection::meta_model::element& e);
+        const injection::entities::element& e);
 
 public:
-    static std::string dehydrate(const injection::meta_model::model& m);
-    static void dehydrate(const injection::meta_model::model& m,
+    static std::string dehydrate(const injection::entities::model& m);
+    static void dehydrate(const injection::entities::model& m,
         const boost::filesystem::path& p);
 };
 

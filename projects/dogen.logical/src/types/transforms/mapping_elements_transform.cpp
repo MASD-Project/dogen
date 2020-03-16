@@ -22,17 +22,17 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/types/traits.hpp"
-#include "dogen.logical/io/meta_model/model_set_io.hpp"
+#include "dogen.logical/io/entities/model_set_io.hpp"
 #include "dogen.logical/types/features/mapping.hpp"
-#include "dogen.logical/types/meta_model/technical_space.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/structural/builtin.hpp"
-#include "dogen.logical/types/meta_model/structural/primitive.hpp"
-#include "dogen.logical/types/meta_model/structural/exception.hpp"
-#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
-#include "dogen.logical/types/meta_model/mapping/fixed_mappable.hpp"
-#include "dogen.logical/types/meta_model/mapping/extensible_mappable.hpp"
-#include "dogen.logical/types/meta_model/elements_traversal.hpp"
+#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/builtin.hpp"
+#include "dogen.logical/types/entities/structural/primitive.hpp"
+#include "dogen.logical/types/entities/structural/exception.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
+#include "dogen.logical/types/entities/mapping/fixed_mappable.hpp"
+#include "dogen.logical/types/entities/mapping/extensible_mappable.hpp"
+#include "dogen.logical/types/entities/elements_traversal.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/mapping_elements_transform.hpp"
@@ -63,27 +63,27 @@ public:
         : feature_group_(fg), technical_space_() {}
 
 public:
-    void technical_space(const logical::meta_model::technical_space ts) {
+    void technical_space(const logical::entities::technical_space ts) {
         technical_space_ = ts;
     }
 
 private:
-    void gather(logical::meta_model::element& e);
+    void gather(logical::entities::element& e);
 
 public:
-    void operator()(logical::meta_model::element&) { }
-    void operator()(logical::meta_model::structural::builtin& b) { gather(b); }
-    void operator()(logical::meta_model::structural::enumeration& e) {
+    void operator()(logical::entities::element&) { }
+    void operator()(logical::entities::structural::builtin& b) { gather(b); }
+    void operator()(logical::entities::structural::enumeration& e) {
         gather(e);
     }
-    void operator()(logical::meta_model::structural::primitive& p) { gather(p); }
-    void operator()(logical::meta_model::structural::object& o) { gather(o); }
-    void operator()(logical::meta_model::structural::exception& e) { gather(e); }
+    void operator()(logical::entities::structural::primitive& p) { gather(p); }
+    void operator()(logical::entities::structural::object& o) { gather(o); }
+    void operator()(logical::entities::structural::exception& e) { gather(e); }
 
 public:
     const std::unordered_map<std::string,
                               std::list<
-                                  logical::meta_model::mapping::destination>
+                                  logical::entities::mapping::destination>
                               >&
     result() const {
         return result_;
@@ -91,15 +91,15 @@ public:
 
 public:
     const features::mapping::feature_group& feature_group_;
-    logical::meta_model::technical_space technical_space_;
+    logical::entities::technical_space technical_space_;
     std::unordered_map<std::string,
                        std::list<
-                           logical::meta_model::mapping::destination>
+                           logical::entities::mapping::destination>
                        >
     result_;
 };
 
-void destination_gatherer::gather(logical::meta_model::element &e) {
+void destination_gatherer::gather(logical::entities::element &e) {
     const auto id(e.name().qualified().dot());
     BOOST_LOG_SEV(lg, trace) << "Processing element: " << id;
 
@@ -107,7 +107,7 @@ void destination_gatherer::gather(logical::meta_model::element &e) {
     const auto scfg(mapping::make_static_configuration(feature_group_, e));
     BOOST_LOG_SEV(lg, trace) << "Read target: " << scfg.target;
 
-    using logical::meta_model::mapping::destination;
+    using logical::entities::mapping::destination;
     const destination dst(e.name(), technical_space_);
     result_[scfg.target].push_back(dst);
 }
@@ -116,16 +116,16 @@ void destination_gatherer::gather(logical::meta_model::element &e) {
 
 std::unordered_map<std::string,
                    std::list<
-                       logical::meta_model::mapping::destination>
+                       logical::entities::mapping::destination>
                    >
 mapping_elements_transform::
-make_destinations(const variability::meta_model::feature_model &fm,
-    const logical::meta_model::model_set &ms) {
+make_destinations(const variability::entities::feature_model &fm,
+    const logical::entities::model_set &ms) {
     const auto fg(features::mapping::make_feature_group(fm));
     destination_gatherer dg(fg);
     dg.technical_space(ms.target().input_technical_space());
 
-    using  logical::meta_model::elements_traversal;
+    using  logical::entities::elements_traversal;
     elements_traversal(ms.target(), dg);
 
     for (const auto &m : ms.references()) {
@@ -138,13 +138,13 @@ make_destinations(const variability::meta_model::feature_model &fm,
 
 void mapping_elements_transform::populate_extensible_mappables(
     const std::unordered_map<std::string,
-    std::list<logical::meta_model::mapping::destination>>&
-    destinations_for_target, logical::meta_model::model_set& ms) {
+    std::list<logical::entities::mapping::destination>>&
+    destinations_for_target, logical::entities::model_set& ms) {
 
-    using logical::meta_model::mapping::destination;
+    using logical::entities::mapping::destination;
     const auto lambda(
         [&](const std::string& target, const std::list<destination>& dsts,
-            logical::meta_model::model& m) {
+            logical::entities::model& m) {
             auto& em(m.mapping_elements().extensible_mappables());
             const auto i(em.find(target));
             if (i == em.end())
@@ -165,11 +165,11 @@ void mapping_elements_transform::populate_extensible_mappables(
 }
 
 void mapping_elements_transform::
-populate_fixed_mappables(const variability::meta_model::feature_model& fm,
-    logical::meta_model::model_set& ms) {
+populate_fixed_mappables(const variability::entities::feature_model& fm,
+    logical::entities::model_set& ms) {
     const auto fg(features::mapping::make_feature_group(fm));
     const auto lambda(
-        [&](logical::meta_model::model& m) {
+        [&](logical::entities::model& m) {
             auto& maps(m.mapping_elements().fixed_mappables());
             for (auto& pair : maps) {
                 auto& fm(*pair.second);
@@ -194,7 +194,7 @@ populate_fixed_mappables(const variability::meta_model::feature_model& fm,
 }
 
 void mapping_elements_transform::
-apply(const context& ctx, logical::meta_model::model_set& ms) {
+apply(const context& ctx, logical::entities::model_set& ms) {
     const auto& id(ms.target().name().qualified().dot());
     tracing::scoped_transform_tracer stp(lg, "mapping elements transform",
         transform_id, id, *ctx.tracer(), ms);

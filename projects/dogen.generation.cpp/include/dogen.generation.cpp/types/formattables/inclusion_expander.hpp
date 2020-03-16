@@ -27,10 +27,10 @@
 
 #include <string>
 #include <unordered_set>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.generation/types/meta_model/element_archetype.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.generation/types/entities/element_archetype.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
 #include "dogen.generation.cpp/types/formatters/repository.hpp"
@@ -69,7 +69,7 @@ namespace dogen::generation::cpp::formattables {
 class inclusion_expander {
 private:
     directive_group_repository create_directive_groups(
-        const variability::meta_model::feature_model& feature_model,
+        const variability::entities::feature_model& feature_model,
         const formatters::repository& frp, const locator& l,
         const std::unordered_map<std::string, formattable>& formattables) const;
 
@@ -80,15 +80,15 @@ public:
     element_inclusion_dependencies_type compute_inclusion_dependencies(
         const formatters::repository& frp,
         const dependencies_builder_factory& f,
-        const logical::meta_model::element& e) const;
+        const logical::entities::element& e) const;
 
     void populate_inclusion_dependencies(const formatters::repository& frp,
         const dependencies_builder_factory& df,
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
-    void expand(const variability::meta_model::feature_model& feature_model,
-        const std::unordered_set<generation::meta_model::element_archetype>&
+    void expand(const variability::entities::feature_model& feature_model,
+        const std::unordered_set<generation::entities::element_archetype>&
         enabled_archetype_for_element,
         const formatters::repository& frp, const locator& l, model& fm) const;
 };

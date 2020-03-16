@@ -27,9 +27,9 @@ namespace dogen::injection::features {
 
 namespace {
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_injection_reference() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("reference");
     r.name().qualified("masd.injection.reference");
@@ -45,7 +45,7 @@ make_masd_injection_reference() {
 }
 
 reference::feature_group
-reference::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+reference::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
@@ -56,7 +56,7 @@ reference::make_feature_group(const dogen::variability::meta_model::feature_mode
 
 reference::static_configuration reference::make_static_configuration(
     const feature_group& fg,
-    const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::entities::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
@@ -65,10 +65,10 @@ reference::static_configuration reference::make_static_configuration(
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature>
+std::list<dogen::variability::entities::feature>
 reference::make_features() {
-    using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature> r;
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature> r;
     r.push_back(make_masd_injection_reference());
     return r;
 }

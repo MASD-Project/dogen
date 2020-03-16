@@ -32,9 +32,9 @@
 #include "dogen.logical/types/helpers/mapping_set.hpp"
 #include "dogen.logical/types/helpers/mapping_value.hpp"
 #include "dogen.logical/types/helpers/mapping_set_repository.hpp"
-#include "dogen.logical/types/meta_model/model.hpp"
-#include "dogen.logical/types/meta_model/model_set.hpp"
-#include "dogen.logical/types/meta_model/technical_space.hpp"
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/entities/model_set.hpp"
+#include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
@@ -46,9 +46,9 @@ private:
      */
     static std::unordered_map<std::string,
                        boost::shared_ptr<
-                           meta_model::mapping::extensible_mappable>
+                           entities::mapping::extensible_mappable>
                        >
-    obtain_mappables(const logical::meta_model::model_set& ms);
+    obtain_mappables(const logical::entities::model_set& ms);
 
     /**
      * @brief Creates all of the element id mappings from the
@@ -56,7 +56,7 @@ private:
      */
     static std::unordered_map<std::string, std::list<helpers::mapping>>
     create_mappings(const std::unordered_map<std::string,
-        boost::shared_ptr<meta_model::mapping::extensible_mappable>>&
+        boost::shared_ptr<entities::mapping::extensible_mappable>>&
         mappables);
 
     /**
@@ -66,10 +66,10 @@ private:
         std::list<helpers::mapping>>& mappings);
 
 private:
-    static void insert(const std::string& lam_id, const meta_model::name& n,
-        const meta_model::technical_space ts,
-        std::unordered_map<meta_model::technical_space,
-        std::unordered_map<std::string, meta_model::name>>& map);
+    static void insert(const std::string& lam_id, const entities::name& n,
+        const entities::technical_space ts,
+        std::unordered_map<entities::technical_space,
+        std::unordered_map<std::string, entities::name>>& map);
 
     static void populate_mapping_set(
         const std::list<helpers::mapping>& mappings,
@@ -80,13 +80,13 @@ private:
         std::list<helpers::mapping>>& mappings_by_set_name);
 
 private:
-    static meta_model::model map(const helpers::mapping_set_repository& msrp,
-        const meta_model::model& src, const meta_model::technical_space to);
+    static entities::model map(const helpers::mapping_set_repository& msrp,
+        const entities::model& src, const entities::technical_space to);
 
 public:
-    static logical::meta_model::model_set apply(const context& ctx,
-        const logical::meta_model::model_set& src,
-        const meta_model::technical_space to);
+    static logical::entities::model_set apply(const context& ctx,
+        const logical::entities::model_set& src,
+        const entities::technical_space to);
 };
 
 }

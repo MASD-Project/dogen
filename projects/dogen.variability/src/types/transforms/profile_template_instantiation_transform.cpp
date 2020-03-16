@@ -21,9 +21,9 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.variability/io/meta_model/profile_io.hpp"
+#include "dogen.variability/io/entities/profile_io.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
-#include "dogen.variability/io/meta_model/profile_template_io.hpp"
+#include "dogen.variability/io/entities/profile_template_io.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.variability/types/helpers/template_instantiator.hpp"
 #include "dogen.variability/types/transforms/profile_template_instantiation_transform.hpp"
@@ -40,14 +40,14 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::variability::transforms {
 
-std::list<meta_model::profile> profile_template_instantiation_transform::
-apply(const context& ctx, const meta_model::feature_model& fm,
-    const std::list<meta_model::profile_template>& pts) {
+std::list<entities::profile> profile_template_instantiation_transform::
+apply(const context& ctx, const entities::feature_model& fm,
+    const std::list<entities::profile_template>& pts) {
     tracing::scoped_transform_tracer stp(lg,
         "profile template instantiation transform",
         transform_id, transform_id, *ctx.tracer(), pts);
 
-    std::list<meta_model::profile> r;
+    std::list<entities::profile> r;
     const auto& tids(ctx.template_instantiation_domains());
     helpers::template_instantiator ti(ctx.compatibility_mode());
     for (const auto& pt : pts) {

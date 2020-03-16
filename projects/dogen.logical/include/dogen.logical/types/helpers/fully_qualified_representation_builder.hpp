@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
-#include "dogen.logical/types/meta_model/name.hpp"
-#include "dogen.logical/types/meta_model/name_tree.hpp"
+#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.logical/types/entities/name_tree.hpp"
 #include "dogen.logical/types/helpers/pretty_printer.hpp"
-#include "dogen.logical/types/meta_model/fully_qualified_representation.hpp"
+#include "dogen.logical/types/entities/fully_qualified_representation.hpp"
 
 namespace dogen::logical::helpers {
 
@@ -45,8 +45,8 @@ public:
      * @brief Adds the qualifiable model element to the pretty printers.
      */
     /**@{*/
-    void add(const meta_model::name& n);
-    void add(const meta_model::name_tree& nt);
+    void add(const entities::name& n);
+    void add(const entities::name_tree& nt);
     /**@}*/
 
 public:
@@ -55,13 +55,13 @@ public:
      *
      * @pre Add must have been called at least once.
      */
-    meta_model::fully_qualified_representation build();
+    entities::fully_qualified_representation build();
 
     /**
      * @brief Builds the representation for the supplied name.
      */
-    meta_model::fully_qualified_representation
-    build(const meta_model::name& n, const bool model_name_mode);
+    entities::fully_qualified_representation
+    build(const entities::name& n, const bool model_name_mode);
 
 private:
     pretty_printer dot_printer_;

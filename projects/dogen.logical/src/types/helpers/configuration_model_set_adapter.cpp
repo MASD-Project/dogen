@@ -20,10 +20,10 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/io/meta_model/configuration_model_set_io.hpp"
-#include "dogen.logical/types/meta_model/structural/module.hpp"
-#include "dogen.logical/types/meta_model/elements_traversal.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/io/entities/configuration_model_set_io.hpp"
+#include "dogen.logical/types/entities/structural/module.hpp"
+#include "dogen.logical/types/entities/elements_traversal.hpp"
 #include "dogen.logical/types/helpers/adaptation_exception.hpp"
 #include "dogen.logical/types/helpers/configuration_model_set_adapter.hpp"
 
@@ -65,50 +65,50 @@ private:
     }
 
 public:
-    void operator()(meta_model::element& e) { extract(e); }
-    void operator()(meta_model::structural::module& m) {
+    void operator()(entities::element& e) { extract(e); }
+    void operator()(entities::structural::module& m) {
         if (m.is_root())
             model_.global(m.configuration());
         else
             extract(m);
     }
-    void operator()(meta_model::structural::object_template& ot) {
+    void operator()(entities::structural::object_template& ot) {
         extract(ot);
         for (auto& attr : ot.local_attributes())
             extract(attr);
     }
-    void operator()(meta_model::structural::enumeration& e) {
+    void operator()(entities::structural::enumeration& e) {
         extract(e);
         for (auto& enm : e.enumerators())
             extract(enm);
     }
-    void operator()(meta_model::structural::object& o) {
+    void operator()(entities::structural::object& o) {
         extract(o);
         for (auto& attr : o.local_attributes())
             extract(attr);
     }
 
 public:
-    variability::meta_model::configuration_model& result() {
+    variability::entities::configuration_model& result() {
         return model_;
     }
 
 private:
-    variability::meta_model::configuration_model model_;
+    variability::entities::configuration_model model_;
 };
 
 }
 
-variability::meta_model::configuration_model
-configuration_model_set_adapter::adapt(const meta_model::model& m) {
+variability::entities::configuration_model
+configuration_model_set_adapter::adapt(const entities::model& m) {
     populator e;
-    meta_model::elements_traversal(m, e);
+    entities::elements_traversal(m, e);
     return e.result();
 }
 
-variability::meta_model::configuration_model_set
-configuration_model_set_adapter::adapt(const meta_model::model_set& ms) {
-    variability::meta_model::configuration_model_set r;
+variability::entities::configuration_model_set
+configuration_model_set_adapter::adapt(const entities::model_set& ms) {
+    variability::entities::configuration_model_set r;
     r.models().push_back(adapt(ms.target()));
 
     for (const auto& m : ms.references())

@@ -55,7 +55,7 @@ const std::string attribute_with_no_simple_name(
 namespace dogen::generation::csharp::formatters {
 
 assistant::
-assistant(const context& ctx, const logical::meta_model::element& e,
+assistant(const context& ctx, const logical::entities::element& e,
     const physical::location& al) :
     element_id_(e.name().qualified().dot()), element_(e), context_(ctx),
     artefact_properties_(obtain_artefact_properties(al.archetype())),
@@ -69,17 +69,17 @@ assistant(const context& ctx, const logical::meta_model::element& e,
 }
 
 std::string
-assistant::get_qualified_name(const logical::meta_model::name& n) const {
+assistant::get_qualified_name(const logical::entities::name& n) const {
     return n.qualified().dot();
 }
 
 std::string
-assistant::get_qualified_name(const logical::meta_model::name_tree& nt) const {
+assistant::get_qualified_name(const logical::entities::name_tree& nt) const {
     return nt.qualified().dot();
 }
 
 std::string
-assistant::make_inheritance_keyword_text(const logical::meta_model::structural::object& o) {
+assistant::make_inheritance_keyword_text(const logical::entities::structural::object& o) {
     if (o.is_parent())
         return abstract_keyword_text;
 
@@ -100,8 +100,8 @@ obtain_artefact_properties(const std::string& archetype) const {
 }
 
 generation::formatters::scoped_boilerplate_formatter assistant::
-make_scoped_boilerplate_formatter(const logical::meta_model::element& e,
-    const logical::meta_model::technical_space ts) {
+make_scoped_boilerplate_formatter(const logical::entities::element& e,
+    const logical::entities::technical_space ts) {
     generation::formatters::boilerplate_properties bp;
 
     const auto& art_props(artefact_properties_);
@@ -123,18 +123,18 @@ make_scoped_boilerplate_formatter(const logical::meta_model::element& e,
 generation::formatters::scoped_namespace_formatter
 assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
     return generation::formatters::scoped_namespace_formatter(
-        stream(), logical::meta_model::technical_space::csharp, ns,
+        stream(), logical::entities::technical_space::csharp, ns,
         true/*add_new_line*/);
 }
 
 std::list<std::string>
-assistant::make_namespaces(const logical::meta_model::name& n) const {
+assistant::make_namespaces(const logical::entities::name& n) const {
     logical::helpers::name_flattener nf;
     return nf.flatten(n);
 }
 
 std::string
-assistant::reference_equals(const logical::meta_model::attribute& attr) const {
+assistant::reference_equals(const logical::entities::attribute& attr) const {
     const auto& c(context_.model().aspect_properties());
     const auto n(attr.parsed_type().current());
     const auto i(c.find(n.qualified().dot()));
@@ -186,7 +186,7 @@ std::string assistant::comment_inline(const std::string& c) const {
 }
 
 std::string assistant::
-make_argument_name(const logical::meta_model::attribute& attr) const {
+make_argument_name(const logical::entities::attribute& attr) const {
     auto r(attr.name().simple());
     if (r.empty()) {
         BOOST_LOG_SEV(lg, error) << attribute_with_no_simple_name;
@@ -237,7 +237,7 @@ assistant::get_helpers(const formattables::helper_properties& hp) const {
 }
 
 boost::optional<formattables::assistant_properties> assistant::
-get_assistant_properties(const logical::meta_model::attribute& attr) const {
+get_assistant_properties(const logical::entities::attribute& attr) const {
 
     const auto& ap(context_.model().assistant_properties());
     const auto i(ap.find(attr.parsed_type().current().qualified().dot()));
@@ -283,8 +283,8 @@ std::ostream& assistant::stream() {
     return filtering_stream_;
 }
 
-extraction::meta_model::artefact assistant::make_artefact() const {
-    extraction::meta_model::artefact r;
+extraction::entities::artefact assistant::make_artefact() const {
+    extraction::entities::artefact r;
     r.content(stream_.str());
     r.path(artefact_properties_.file_path());
 
@@ -298,8 +298,8 @@ extraction::meta_model::artefact assistant::make_artefact() const {
     }
     r.overwrite(i->second.overwrite());
 
-    extraction::meta_model::operation op;
-    using ot = extraction::meta_model::operation_type;
+    extraction::entities::operation op;
+    using ot = extraction::entities::operation_type;
     op.type(r.overwrite() ? ot::write : ot::create_only);
     r.operation(op);
 

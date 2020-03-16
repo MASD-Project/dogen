@@ -742,7 +742,7 @@
       "attributes": [
         {
           "name": "element",
-          "type": "boost::shared_ptr<logical::meta_model::element>"
+          "type": "boost::shared_ptr<logical::entities::element>"
         },
         {
           "name": "element_properties",
@@ -827,7 +827,7 @@
       "attributes": [
         {
           "name": "name",
-          "type": "logical::meta_model::name"
+          "type": "logical::entities::name"
         },
         {
           "name": "streaming_properties",

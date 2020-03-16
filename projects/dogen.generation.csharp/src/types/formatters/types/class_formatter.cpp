@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.logical/types/meta_model/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.csharp/types/traits.hpp"
@@ -44,7 +44,7 @@ physical::location class_formatter::archetype_location() const {
     return r;
 }
 
-const logical::meta_model::name& class_formatter::meta_name() const {
+const logical::entities::name& class_formatter::meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_object_name());
     return r;
@@ -55,21 +55,21 @@ std::string class_formatter::family() const {
 }
 
 boost::filesystem::path class_formatter::full_path(
-    const formattables::locator& l, const logical::meta_model::name& n) const {
+    const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_full_path(n, static_id());
 }
 
 std::list<std::string> class_formatter::
-inclusion_dependencies(const logical::meta_model::element& /*e*/) const {
+inclusion_dependencies(const logical::entities::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
-extraction::meta_model::artefact class_formatter::
-format(const context& ctx, const logical::meta_model::element& e) const {
+extraction::entities::artefact class_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
     const auto id(e.name().qualified().dot());
     assistant a(ctx, e, archetype_location());
-    const auto& o(a.as<logical::meta_model::structural::object>(static_id(), e));
+    const auto& o(a.as<logical::entities::structural::object>(static_id(), e));
     {
         const auto sn(e.name().simple());
         auto sbf(a.make_scoped_boilerplate_formatter(e));

@@ -21,8 +21,8 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.logical/io/meta_model/orm/letter_case_io.hpp"
-#include "dogen.logical/io/meta_model/orm/database_system_io.hpp"
+#include "dogen.logical/io/entities/orm/letter_case_io.hpp"
+#include "dogen.logical/io/entities/orm/database_system_io.hpp"
 #include "dogen.generation.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen.generation.cpp/types/formattables/adaptation_error.hpp"
 #include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
@@ -54,8 +54,8 @@ const std::string invalid_case("Letter case is invalid or unsupported: ");
 namespace dogen::generation::cpp::formattables {
 
 std::string
-adapter::to_odb_database(const logical::meta_model::orm::database_system ds) {
-    using logical::meta_model::orm::database_system;
+adapter::to_odb_database(const logical::entities::orm::database_system ds) {
+    using logical::entities::orm::database_system;
 
     switch (ds) {
     case database_system::mysql: return mysql;
@@ -71,8 +71,8 @@ adapter::to_odb_database(const logical::meta_model::orm::database_system ds) {
 }
 
 std::string adapter::
-to_odb_sql_name_case(const logical::meta_model::orm::letter_case lc) const {
-    using logical::meta_model::orm::letter_case;
+to_odb_sql_name_case(const logical::entities::orm::letter_case lc) const {
+    using logical::entities::orm::letter_case;
 
     switch (lc) {
     case letter_case::upper_case: return upper_case;
@@ -85,7 +85,7 @@ to_odb_sql_name_case(const logical::meta_model::orm::letter_case lc) const {
 }
 
 std::list<std::string> adapter::
-make_databases(const logical::meta_model::orm::model_properties& omp) const {
+make_databases(const logical::entities::orm::model_properties& omp) const {
     std::list<std::string> r;
 
     if (omp.database_systems().size() > 1)
@@ -98,7 +98,7 @@ make_databases(const logical::meta_model::orm::model_properties& omp) const {
 }
 
 model adapter::adapt(const formatters::repository& frp,
-    const generation::meta_model::model& m) const {
+    const generation::entities::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Adapting assets to formattables."
                              << " Elements in model: " << m.elements().size();
 

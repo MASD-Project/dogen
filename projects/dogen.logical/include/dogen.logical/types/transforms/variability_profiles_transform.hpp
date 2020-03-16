@@ -27,10 +27,10 @@
 
 #include "dogen.logical/types/features/variability_entry.hpp"
 #include "dogen.logical/types/features/variability_profile.hpp"
-#include "dogen.logical/types/meta_model/model_set.hpp"
+#include "dogen.logical/types/entities/model_set.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
-#include "dogen.logical/types/meta_model/variability/abstract_profile.hpp"
-#include "dogen.logical/types/meta_model/variability/abstract_profile_entry.hpp"
+#include "dogen.logical/types/entities/variability/abstract_profile.hpp"
+#include "dogen.logical/types/entities/variability/abstract_profile_entry.hpp"
 
 namespace dogen::logical::transforms {
 
@@ -51,32 +51,32 @@ private:
      * @brief Reads configuration related to profiles.
      */
     static void update(const features::variability_profile::feature_group& fg,
-        meta_model::variability::abstract_profile& ap);
+        entities::variability::abstract_profile& ap);
 
     /**
      * @brief Reads configuration related to profile entries.
      */
     static void update(const features::variability_entry::feature_group& fg,
-        meta_model::variability::abstract_profile_entry& ape);
+        entities::variability::abstract_profile_entry& ape);
 
 private:
     /**
      * @brief Processes all profile templates in model.
      */
     static void process_profile_templates(
-        const variability::meta_model::feature_model& fm, meta_model::model& m);
+        const variability::entities::feature_model& fm, entities::model& m);
 
     /**
      * @brief Processes all profiles in model.
      */
     static void process_profiles(
-        const variability::meta_model::feature_model& fm, meta_model::model& m);
+        const variability::entities::feature_model& fm, entities::model& m);
 
 public:
     /**
      * @brief Applies the transform to the entire model set.
      */
-    static void apply(const context& ctx, meta_model::model_set& ms);
+    static void apply(const context& ctx, entities::model_set& ms);
 };
 
 }

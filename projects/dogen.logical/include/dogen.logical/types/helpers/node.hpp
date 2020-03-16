@@ -28,7 +28,7 @@
 #include <list>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "dogen.logical/types/meta_model/name.hpp"
+#include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/helpers/node_fwd.hpp"
 
 namespace dogen::logical::helpers {
@@ -48,7 +48,7 @@ public:
 public:
     node(
         const boost::shared_ptr<dogen::logical::helpers::node>& parent,
-        const dogen::logical::meta_model::name& data,
+        const dogen::logical::entities::name& data,
         const std::list<boost::shared_ptr<dogen::logical::helpers::node> >& children);
 
 public:
@@ -66,10 +66,10 @@ public:
      * @brief Current node.
      */
     /**@{*/
-    const dogen::logical::meta_model::name& data() const;
-    dogen::logical::meta_model::name& data();
-    void data(const dogen::logical::meta_model::name& v);
-    void data(const dogen::logical::meta_model::name&& v);
+    const dogen::logical::entities::name& data() const;
+    dogen::logical::entities::name& data();
+    void data(const dogen::logical::entities::name& v);
+    void data(const dogen::logical::entities::name&& v);
     /**@}*/
 
     /**
@@ -94,7 +94,7 @@ public:
 
 private:
     boost::shared_ptr<dogen::logical::helpers::node> parent_;
-    dogen::logical::meta_model::name data_;
+    dogen::logical::entities::name data_;
     std::list<boost::shared_ptr<dogen::logical::helpers::node> > children_;
 };
 

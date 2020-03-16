@@ -23,7 +23,7 @@
 namespace dogen::generation::formatters {
 
 scoped_namespace_formatter::scoped_namespace_formatter(
-    std::ostream& s, const logical::meta_model::technical_space ts,
+    std::ostream& s, const logical::entities::technical_space ts,
     const std::list<std::string>& ns,
     const bool add_new_line,
     const bool nested_namespace) :

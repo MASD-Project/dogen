@@ -26,17 +26,17 @@
 #endif
 
 #include "dogen.generation/types/transforms/context.hpp"
-#include "dogen.generation/types/meta_model/model.hpp"
+#include "dogen.generation/types/entities/model.hpp"
 
 namespace dogen::generation::transforms {
 
 class generability_transform final {
 private:
-    static bool is_generatable(const logical::meta_model::element& e);
-    static bool has_generatable_types(const meta_model::model& m);
+    static bool is_generatable(const logical::entities::element& e);
+    static bool has_generatable_types(const entities::model& m);
 
 public:
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

@@ -21,9 +21,9 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/meta_model/technical_space_io.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
-#include "dogen.logical/io/meta_model/model_set_io.hpp"
+#include "dogen.logical/io/entities/technical_space_io.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/io/entities/model_set_io.hpp"
 #include "dogen.logical/types/transforms/merge_transform.hpp"
 
 namespace {
@@ -48,7 +48,7 @@ void copy(const ElementAssociativeContainer& src,
 namespace dogen::logical::transforms {
 
 void
-merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
+merge_transform::merge(const entities::model& src, entities::model& dst) {
     /*
      * Skip any reference models for which the input technical_space
      * does not match.
@@ -153,8 +153,8 @@ merge_transform::merge(const meta_model::model& src, meta_model::model& dst) {
     dst.references().insert(p);
 }
 
-meta_model::model merge_transform::merge(const meta_model::model& target,
-    const std::list<meta_model::model>& refs) {
+entities::model merge_transform::merge(const entities::model& target,
+    const std::list<entities::model>& refs) {
     /*
      * We start by making a complete copy of the target model, which
      * initialises all of the relevant parts of the merged model such
@@ -171,8 +171,8 @@ meta_model::model merge_transform::merge(const meta_model::model& target,
     return r;
 }
 
-meta_model::model merge_transform::apply(const context &ctx,
-    const logical::meta_model::model_set &ms) {
+entities::model merge_transform::apply(const context &ctx,
+    const logical::entities::model_set &ms) {
     const auto id(ms.target().name().qualified().dot());
     tracing::scoped_transform_tracer stp(lg, "merge transform",
         transform_id, id, *ctx.tracer(), ms);

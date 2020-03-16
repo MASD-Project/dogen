@@ -25,9 +25,9 @@
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/types/location_repository.hpp"
-#include "dogen.logical/types/meta_model/structural/module.hpp"
-#include "dogen.generation/io/meta_model/model_io.hpp"
-#include "dogen.generation/io/meta_model/facet_properties_io.hpp"
+#include "dogen.logical/types/entities/structural/module.hpp"
+#include "dogen.generation/io/entities/model_io.hpp"
+#include "dogen.generation/io/entities/facet_properties_io.hpp"
 #include "dogen.generation/types/transforms/transformation_error.hpp"
 #include "dogen.generation/types/transforms/enablement_transform.hpp"
 
@@ -59,12 +59,12 @@ scope_exit<T> make_scope_exit(T &&t) {
 namespace dogen::generation::transforms {
 
 bool enablement_transform::
-is_element_disabled(const logical::meta_model::element& e) {
+is_element_disabled(const logical::entities::element& e) {
     /*
      * We're only interested in modules as these are the only elements
      * that can be enabled/disabled based on their state.
      */
-    using logical::meta_model::structural::module;
+    using logical::entities::structural::module;
     const auto ptr(dynamic_cast<const module*>(&e));
     if (!ptr)
         return false;
@@ -94,13 +94,13 @@ is_element_disabled(const logical::meta_model::element& e) {
 
 void enablement_transform::compute_enablement_for_artefact_properties(
     const std::unordered_map<std::string,
-    meta_model::denormalised_archetype_properties>&
+    entities::denormalised_archetype_properties>&
     global_archetype_location_properties,
     const std::unordered_map<std::string,
-    logical::meta_model::local_archetype_location_properties>&
+    logical::entities::local_archetype_location_properties>&
     local_archetype_location_properties,
     const std::string& archetype,
-    logical::meta_model::artefact_properties& ap) {
+    logical::entities::artefact_properties& ap) {
 
     const auto& galp(global_archetype_location_properties);
     const auto& lalp(local_archetype_location_properties);
@@ -255,10 +255,10 @@ void enablement_transform::compute_enablement_for_element(
     const std::unordered_map<std::string,
     physical::locations_group>& archetype_locations_by_meta_name,
     const std::unordered_map<std::string,
-    meta_model::denormalised_archetype_properties>&
+    entities::denormalised_archetype_properties>&
     global_archetype_location_properties,
-    std::unordered_set<meta_model::element_archetype>&
-    enabled_archetype_for_element, logical::meta_model::element& e) {
+    std::unordered_set<entities::element_archetype>&
+    enabled_archetype_for_element, logical::entities::element& e) {
 
     const auto id(e.name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Started computing enablement: " << id;
@@ -327,7 +327,7 @@ void enablement_transform::compute_enablement_for_element(
          * If we are enabled, we need to update the enablement
          * index. First, we update it with the concrete archetype.
          */
-        using meta_model::element_archetype;
+        using entities::element_archetype;
         auto inserted(eafe.insert(element_archetype(id, arch)).second);
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_element_archetype << arch
@@ -357,7 +357,7 @@ void enablement_transform::compute_enablement_for_element(
 }
 
 void enablement_transform::
-apply(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "enablement new_transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
@@ -365,7 +365,7 @@ apply(const context& ctx, meta_model::model& m) {
     const auto& albmn(alrp.by_meta_name());
     const auto& galp(m.global_archetype_location_properties()
         .denormalised_archetype_properties());
-    std::unordered_set<meta_model::element_archetype> eafe;
+    std::unordered_set<entities::element_archetype> eafe;
     for(auto& ptr : m.elements()) {
         auto& e(*ptr);
         compute_enablement_for_element(albmn, galp, eafe, e);

@@ -27,7 +27,7 @@
 
 #include <string>
 #include <unordered_map>
-#include "dogen.generation/types/meta_model/model.hpp"
+#include "dogen.generation/types/entities/model.hpp"
 #include "dogen.generation.csharp/types/formatters/repository.hpp"
 #include "dogen.generation.csharp/types/formattables/formattable.hpp"
 
@@ -44,7 +44,7 @@ public:
      */
     std::unordered_map<std::string, formattable>
     adapt(const formatters::repository& frp,
-        const generation::meta_model::model& m) const;
+        const generation::entities::model& m) const;
 };
 
 }

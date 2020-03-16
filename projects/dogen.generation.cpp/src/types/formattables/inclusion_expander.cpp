@@ -98,7 +98,7 @@ namespace dogen::generation::cpp::formattables {
 
 directive_group_repository inclusion_expander::
 create_directive_groups(
-    const variability::meta_model::feature_model& feature_model,
+    const variability::entities::feature_model& feature_model,
     const formatters::repository& frp, const locator& l,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
@@ -110,7 +110,7 @@ inclusion_expander::element_inclusion_dependencies_type
 inclusion_expander::compute_inclusion_dependencies(
     const formatters::repository& frp,
     const dependencies_builder_factory& df,
-    const logical::meta_model::element& e) const {
+    const logical::entities::element& e) const {
 
     const auto id(e.name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Creating inclusion dependencies for: " << id;
@@ -201,7 +201,7 @@ void inclusion_expander::populate_inclusion_dependencies(
          * model. However, we do need them around for inclusion
          * directives, so we can't rely on reduction.
          */
-        if (e.origin_type() != logical::meta_model::origin_types::target)
+        if (e.origin_type() != logical::entities::origin_types::target)
             continue;
 
         /*
@@ -238,8 +238,8 @@ void inclusion_expander::populate_inclusion_dependencies(
 }
 
 void inclusion_expander::expand(
-    const variability::meta_model::feature_model& feature_model,
-    const std::unordered_set<generation::meta_model::element_archetype>&
+    const variability::entities::feature_model& feature_model,
+    const std::unordered_set<generation::entities::element_archetype>&
     enabled_archetype_for_element, const formatters::repository& frp,
     const locator& l, model& fm) const {
 

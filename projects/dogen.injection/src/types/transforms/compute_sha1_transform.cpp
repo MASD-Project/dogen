@@ -21,7 +21,7 @@
 #include "dogen.utility/types/hash/sha1_hash.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.injection/io/meta_model/model_io.hpp"
+#include "dogen.injection/io/entities/model_io.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
 #include "dogen.injection/types/transforms/compute_sha1_transform.hpp"
 
@@ -38,7 +38,7 @@ namespace dogen::injection::transforms {
 
 void compute_sha1_transform::apply(const transforms::context& ctx,
         const boost::filesystem::path& p,
-    meta_model::model& m) {
+    entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "compute sha1 transform",
         transform_id, m.name(), *ctx.tracer(), m);
 

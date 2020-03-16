@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
-#include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.extraction/types/meta_model/model.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.extraction/types/entities/model.hpp"
 #include "dogen.extraction/types/transforms/context.hpp"
-#include "dogen.extraction/types/meta_model/outputting_properties.hpp"
+#include "dogen.extraction/types/entities/outputting_properties.hpp"
 
 namespace dogen::extraction::transforms {
 
@@ -37,7 +37,7 @@ namespace dogen::extraction::transforms {
  */
 class update_outputting_properties_transform final {
 public:
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

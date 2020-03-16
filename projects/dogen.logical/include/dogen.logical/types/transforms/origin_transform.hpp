@@ -25,18 +25,18 @@
 #pragma once
 #endif
 
-#include "dogen.logical/types/meta_model/model.hpp"
+#include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
 
 class origin_transform final {
 private:
-    static meta_model::origin_types compute_origin_types(
-        const meta_model::model& m, const bool is_proxy_model);
+    static entities::origin_types compute_origin_types(
+        const entities::model& m, const bool is_proxy_model);
 
 public:
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

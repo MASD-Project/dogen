@@ -59,11 +59,11 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model",
+      "name": "entities",
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "meta_model::model",
+      "name": "entities::model",
       "documentation": "Represents an external model.\n",
       "stereotypes": [
         "Element"
@@ -91,7 +91,7 @@
       ]
     },
     {
-      "name": "meta_model::element",
+      "name": "entities::element",
       "documentation": "Represents an element from an external model.\n",
       "stereotypes": [
         "Element"
@@ -138,7 +138,7 @@
       ]
     },
     {
-      "name": "meta_model::attribute",
+      "name": "entities::attribute",
       "stereotypes": [
         "Element"
       ],
@@ -172,7 +172,7 @@
         },
         {
           "name": "feature_model",
-          "type": "boost::shared_ptr<variability::meta_model::feature_model>"
+          "type": "boost::shared_ptr<variability::entities::feature_model>"
         },
         {
           "name": "archetype_location_repository",
@@ -208,7 +208,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::model_set",
+      "name": "entities::model_set",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -266,7 +266,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::Taggable",
+      "name": "entities::Taggable",
       "documentation": "Ability to contain tagged values.\n",
       "stereotypes": [
         "masd::object_template"
@@ -285,7 +285,7 @@
       ]
     },
     {
-      "name": "meta_model::Stereotypable",
+      "name": "entities::Stereotypable",
       "documentation": "Ability to have stereotypes.\n",
       "stereotypes": [
         "masd::object_template"
@@ -299,7 +299,7 @@
       ]
     },
     {
-      "name": "meta_model::Documentable",
+      "name": "entities::Documentable",
       "documentation": "Ability to provide documentation.\n",
       "stereotypes": [
         "masd::object_template"
@@ -314,7 +314,7 @@
       ]
     },
     {
-      "name": "meta_model::Nameable",
+      "name": "entities::Nameable",
       "documentation": "Ability to have a name.\n",
       "stereotypes": [
         "masd::object_template"
@@ -328,7 +328,7 @@
       ]
     },
     {
-      "name": "meta_model::Configurable",
+      "name": "entities::Configurable",
       "documentation": "Ability to have meta-data associated.\n",
       "stereotypes": [
         "masd::object_template"
@@ -337,13 +337,13 @@
       "attributes": [
         {
           "name": "configuration",
-          "type": "boost::shared_ptr<variability::meta_model::configuration>",
+          "type": "boost::shared_ptr<variability::entities::configuration>",
           "documentation": "Configuration for this element.\n"
         }
       ]
     },
     {
-      "name": "meta_model::DeterminableOrigin",
+      "name": "entities::DeterminableOrigin",
       "documentation": "Properties related to the origin of the modeling element.\n",
       "stereotypes": [
         "masd::object_template"
@@ -363,14 +363,14 @@
       ]
     },
     {
-      "name": "meta_model::Element",
+      "name": "entities::Element",
       "parents": [
-        "meta_model::Taggable",
-        "meta_model::Stereotypable",
-        "meta_model::Documentable",
-        "meta_model::Nameable",
-        "meta_model::Configurable",
-        "meta_model::DeterminableOrigin"
+        "entities::Taggable",
+        "entities::Stereotypable",
+        "entities::Documentable",
+        "entities::Nameable",
+        "entities::Configurable",
+        "entities::DeterminableOrigin"
       ],
       "documentation": "Consolidates a number of related object templates.\n",
       "stereotypes": [
@@ -478,7 +478,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::reference_graph_data",
+      "name": "entities::reference_graph_data",
       "documentation": "Contains all the data required to build the graph of references.\n",
       "fallback_element_type": "masd::object",
       "attributes": [

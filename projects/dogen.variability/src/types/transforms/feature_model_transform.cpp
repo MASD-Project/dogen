@@ -23,8 +23,8 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/shared_ptr_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.variability/io/meta_model/feature_io.hpp"
-#include "dogen.variability/io/meta_model/feature_model_io.hpp"
+#include "dogen.variability/io/entities/feature_io.hpp"
+#include "dogen.variability/io/entities/feature_model_io.hpp"
 #include "dogen.variability/types/transforms/transformation_error.hpp"
 #include "dogen.variability/types/transforms/feature_model_transform.hpp"
 
@@ -43,12 +43,12 @@ const std::string duplicate_qualified_name(
 
 namespace dogen::variability::transforms {
 
-boost::shared_ptr<meta_model::feature_model> feature_model_transform::
-apply(const context& ctx, const std::list<meta_model::feature>& features) {
+boost::shared_ptr<entities::feature_model> feature_model_transform::
+apply(const context& ctx, const std::list<entities::feature>& features) {
     tracing::scoped_transform_tracer stp(lg, "feature model transform",
         transform_id, transform_id, *ctx.tracer(), features);
 
-    auto r(boost::make_shared<meta_model::feature_model>());
+    auto r(boost::make_shared<entities::feature_model>());
     r->all(features);
 
     for (const auto& f : features) {

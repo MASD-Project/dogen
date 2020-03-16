@@ -20,10 +20,10 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
-#include "dogen.logical/io/meta_model/model_set_io.hpp"
-#include "dogen.logical/types/meta_model/elements_traversal.hpp"
+#include "dogen.logical/io/entities/model_set_io.hpp"
+#include "dogen.logical/types/entities/elements_traversal.hpp"
 #include "dogen.logical/types/transforms/dynamic_stereotypes_transform.hpp"
 
 namespace {
@@ -58,23 +58,23 @@ private:
         return r;
     }
 
-    void update(logical::meta_model::element& e) {
+    void update(logical::entities::element& e) {
         e.dynamic_stereotypes(extract(e));
     }
 
 public:
-    void operator()(logical::meta_model::element& e) { update(e); }
-    void operator()(logical::meta_model::structural::object_template &ot) {
+    void operator()(logical::entities::element& e) { update(e); }
+    void operator()(logical::entities::structural::object_template &ot) {
         update(ot);
         for (auto& attr : ot.local_attributes())
             attr.dynamic_stereotypes(extract(attr));
     }
-    void operator()(logical::meta_model::structural::enumeration& e) {
+    void operator()(logical::entities::structural::enumeration& e) {
         update(e);
         for (auto& enm : e.enumerators())
             enm.dynamic_stereotypes(extract(enm));
     }
-    void operator()(logical::meta_model::structural::object& o) {
+    void operator()(logical::entities::structural::object& o) {
         update(o);
         for (auto& attr : o.local_attributes())
             attr.dynamic_stereotypes(extract(attr));
@@ -85,12 +85,12 @@ public:
 
 void
 dynamic_stereotypes_transform::apply(const logical::transforms::context& ctx,
-    logical::meta_model::model_set& ms) {
+    logical::entities::model_set& ms) {
     tracing::scoped_transform_tracer stp(lg, "dynamic stereotypes transform",
         transform_id, *ctx.tracer(), ms);
 
     updater u;
-    using logical::meta_model::elements_traversal;
+    using logical::entities::elements_traversal;
     elements_traversal(ms.target(), u);
     for (auto& m : ms.references())
         elements_traversal(m, u);

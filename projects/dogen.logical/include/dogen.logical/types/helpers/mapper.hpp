@@ -29,11 +29,11 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
-#include "dogen.logical/types/meta_model/name.hpp"
-#include "dogen.logical/types/meta_model/name_tree.hpp"
-#include "dogen.logical/types/meta_model/attribute.hpp"
-#include "dogen.logical/types/meta_model/technical_space.hpp"
-#include "dogen.logical/types/meta_model/model.hpp"
+#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.logical/types/entities/name_tree.hpp"
+#include "dogen.logical/types/entities/attribute.hpp"
+#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/helpers/mapping_context.hpp"
 #include "dogen.logical/types/helpers/mapping_set_repository.hpp"
 
@@ -58,38 +58,38 @@ private:
         return r;
     }
 
-    meta_model::model
-    clone(const meta_model::model& m) const;
+    entities::model
+    clone(const entities::model& m) const;
 
 private:
-    const std::unordered_map<std::string, meta_model::name>&
+    const std::unordered_map<std::string, entities::name>&
     translations_for_technical_space(const mapping_set& ms,
-        const meta_model::technical_space from,
-        const meta_model::technical_space to) const;
+        const entities::technical_space from,
+        const entities::technical_space to) const;
 
-    std::unordered_map<std::string, meta_model::name>
+    std::unordered_map<std::string, entities::name>
     injections_for_technical_space(const mapping_set& ms,
-        const meta_model::technical_space ts,
-        const meta_model::model& m) const;
+        const entities::technical_space ts,
+        const entities::model& m) const;
 
     mapping_context create_mapping_context(const mapping_set& ms,
-        const meta_model::technical_space from,
-        const meta_model::technical_space to,
-        const meta_model::model& m) const;
+        const entities::technical_space from,
+        const entities::technical_space to,
+        const entities::model& m) const;
 
 private:
-    meta_model::name_tree walk_name_tree(const mapping_context& mc,
-        const meta_model::name_tree& nt,
+    entities::name_tree walk_name_tree(const mapping_context& mc,
+        const entities::name_tree& nt,
         const bool skip_injection = false) const;
     void map_attributes(const mapping_context& mc,
-        std::list<meta_model::attribute>& attrs) const;
+        std::list<entities::attribute>& attrs) const;
 
 public:
-    static bool is_mappable(const meta_model::technical_space from,
-        const meta_model::technical_space to);
-    meta_model::model map(const meta_model::technical_space from,
-        const meta_model::technical_space to,
-        const meta_model::model& m) const;
+    static bool is_mappable(const entities::technical_space from,
+        const entities::technical_space to);
+    entities::model map(const entities::technical_space from,
+        const entities::technical_space to,
+        const entities::model& m) const;
 
 private:
     const mapping_set_repository& mapping_set_repository_;

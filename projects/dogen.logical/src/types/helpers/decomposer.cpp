@@ -19,7 +19,7 @@
  *
  */
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.logical/types/meta_model/elements_traversal.hpp"
+#include "dogen.logical/types/entities/elements_traversal.hpp"
 #include "dogen.logical/io/helpers/decomposition_result_io.hpp"
 #include "dogen.logical/types/helpers/decomposer.hpp"
 
@@ -32,44 +32,44 @@ auto lg(logger_factory("assets.helpers.decomposer"));
 
 namespace dogen::logical::helpers {
 
-void decomposer::add_name(const std::string& owner, const meta_model::name& n) {
+void decomposer::add_name(const std::string& owner, const entities::name& n) {
     result_.names().push_back(std::make_pair(owner, n));
 }
 
 void decomposer::
-add_meta_name(const std::string& owner, const meta_model::name& n) {
+add_meta_name(const std::string& owner, const entities::name& n) {
     result_.meta_names().push_back(std::make_pair(owner, n));
 }
 
 void decomposer::
-add_name_tree(const std::string& owner, const meta_model::name_tree& nt) {
+add_name_tree(const std::string& owner, const entities::name_tree& nt) {
     result_.name_trees().push_back(std::make_pair(owner, nt));
 }
 
 void decomposer::
-add_names(const std::string& owner, const std::list<meta_model::name>& names) {
+add_names(const std::string& owner, const std::list<entities::name>& names) {
     for (const auto& n : names)
         add_name(owner, n);
 }
 
 void decomposer::decompose_attributes(const std::string& owner,
-    const std::list<meta_model::attribute>& attrs) {
+    const std::list<entities::attribute>& attrs) {
     for (const auto& attr : attrs) {
         add_name(owner, attr.name());
         add_name_tree(owner, attr.parsed_type());
     }
 }
 
-void decomposer::decompose_element(const meta_model::element& e) {
+void decomposer::decompose_element(const entities::element& e) {
     add_name(e.name().qualified().dot(), e.name());
     add_meta_name(e.name().qualified().dot(), e.meta_name());
 }
 
-void decomposer::operator()(const meta_model::element& e) {
+void decomposer::operator()(const entities::element& e) {
     decompose_element(e);
 }
 
-void decomposer::operator()(const meta_model::structural::module& m) {
+void decomposer::operator()(const entities::structural::module& m) {
     /*
      * The global module represents the unnamed global
      * namespace. There can only be one of these and it is generated
@@ -81,35 +81,35 @@ void decomposer::operator()(const meta_model::structural::module& m) {
     decompose_element(m);
 }
 
-void decomposer::operator()(const meta_model::structural::object_template& ot) {
+void decomposer::operator()(const entities::structural::object_template& ot) {
     decompose_element(ot);
     decompose_attributes(ot.name().qualified().dot(), ot.local_attributes());
 }
 
-void decomposer::operator()(const meta_model::structural::builtin& b) {
+void decomposer::operator()(const entities::structural::builtin& b) {
     decompose_element(b);
 }
 
-void decomposer::operator()(const meta_model::structural::enumeration& e) {
+void decomposer::operator()(const entities::structural::enumeration& e) {
     decompose_element(e);
     for (const auto& en : e.enumerators())
         add_name(e.name().qualified().dot(), en.name());
 }
 
-void decomposer::operator()(const meta_model::structural::primitive& p) {
+void decomposer::operator()(const entities::structural::primitive& p) {
     decompose_element(p);
 }
 
-void decomposer::operator()(const meta_model::structural::object& o) {
+void decomposer::operator()(const entities::structural::object& o) {
     decompose_element(o);
     decompose_attributes(o.name().qualified().dot(), o.local_attributes());
 }
 
-void decomposer::operator()(const meta_model::structural::exception& e) {
+void decomposer::operator()(const entities::structural::exception& e) {
     decompose_element(e);
 }
 
-void decomposer::operator()(const meta_model::structural::visitor& v) {
+void decomposer::operator()(const entities::structural::visitor& v) {
     decompose_element(v);
 }
 
@@ -118,12 +118,12 @@ const decomposition_result& decomposer::result() const {
 }
 
 decomposition_result
-decomposer::decompose(const meta_model::model& em) {
+decomposer::decompose(const entities::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Decomposing model: "
                              << em.name().qualified().dot();
 
     decomposer dc;
-    meta_model::elements_traversal(em, dc);
+    entities::elements_traversal(em, dc);
 
     BOOST_LOG_SEV(lg, debug) << "Finished decomposing model. Result: "
                              << dc.result();;

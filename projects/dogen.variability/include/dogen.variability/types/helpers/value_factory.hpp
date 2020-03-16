@@ -29,9 +29,9 @@
 #include <string>
 #include <utility>
 #include <boost/shared_ptr.hpp>
-#include "dogen.variability/types/meta_model/value.hpp"
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/value_type.hpp"
+#include "dogen.variability/types/entities/value.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/value_type.hpp"
 
 namespace dogen::variability::helpers {
 
@@ -68,49 +68,49 @@ private:
     /**
      * @brief Returns true if the value type refers to a collection.
      */
-    bool is_collection(const meta_model::value_type vt) const;
+    bool is_collection(const entities::value_type vt) const;
 
 public:
     /**
      * @brief Creates a stand alone text value.
      */
-    boost::shared_ptr<meta_model::value> make_text(const std::string& v) const;
+    boost::shared_ptr<entities::value> make_text(const std::string& v) const;
 
     /**
      * @brief Creates a collection of text values.
      */
-    boost::shared_ptr<meta_model::value>
+    boost::shared_ptr<entities::value>
     make_text_collection(const std::list<std::string>& v) const;
 
     /**
      * @brief Creates a stand alone boolean value.
      */
     /**@{*/
-    boost::shared_ptr<meta_model::value>
+    boost::shared_ptr<entities::value>
     make_boolean(const std::string& v) const;
-    boost::shared_ptr<meta_model::value> make_boolean(const bool v) const;
+    boost::shared_ptr<entities::value> make_boolean(const bool v) const;
     /**@}*/
 
     /**
      * @brief Creates a stand alone numeric value.
      */
     /**@{*/
-    boost::shared_ptr<meta_model::value>
+    boost::shared_ptr<entities::value>
     make_number(const std::string& v) const;
-    boost::shared_ptr<meta_model::value> make_number(const int v) const;
+    boost::shared_ptr<entities::value> make_number(const int v) const;
     /**@}*/
 
     /**
      * @brief Creates a stand alone kvp value.
      */
-    boost::shared_ptr<meta_model::value>
+    boost::shared_ptr<entities::value>
     make_kvp(const std::list<std::pair<std::string, std::string>>& v) const;
 
 public:
     /**
      * @brief Creates a value using the supplied enum.
      */
-    boost::shared_ptr<meta_model::value> make(const meta_model::value_type& vt,
+    boost::shared_ptr<entities::value> make(const entities::value_type& vt,
         const std::list<std::string>& v) const;
 
 public:
@@ -123,14 +123,14 @@ public:
      *
      * @pre the raw values must be valid according to the value type.
      */
-    boost::shared_ptr<meta_model::value>
-    make(const meta_model::feature& f, const std::list<std::string>& v) const;
+    boost::shared_ptr<entities::value>
+    make(const entities::feature& f, const std::list<std::string>& v) const;
 
     /**
      * @brief Creates a value given a feature, with the expectation
      * that it is of kvp type.
      */
-    boost::shared_ptr<meta_model::value> make(const meta_model::feature& f,
+    boost::shared_ptr<entities::value> make(const entities::feature& f,
         const std::list<std::pair<std::string, std::string>>& v) const;
 };
 

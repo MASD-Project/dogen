@@ -27,9 +27,9 @@ namespace dogen::logical::features {
 
 namespace {
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_decoration_modeline_editor() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("editor");
     r.name().qualified("masd.decoration.modeline.editor");
@@ -42,9 +42,9 @@ make_masd_decoration_modeline_editor() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_decoration_modeline_location() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("location");
     r.name().qualified("masd.decoration.modeline.location");
@@ -57,9 +57,9 @@ make_masd_decoration_modeline_location() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_decoration_modeline_technical_space() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("technical_space");
     r.name().qualified("masd.decoration.modeline.technical_space");
@@ -75,7 +75,7 @@ make_masd_decoration_modeline_technical_space() {
 }
 
 decoration_modeline::feature_group
-decoration_modeline::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+decoration_modeline::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
@@ -88,7 +88,7 @@ decoration_modeline::make_feature_group(const dogen::variability::meta_model::fe
 
 decoration_modeline::static_configuration decoration_modeline::make_static_configuration(
     const feature_group& fg,
-    const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::entities::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
@@ -101,10 +101,10 @@ decoration_modeline::static_configuration decoration_modeline::make_static_confi
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature>
+std::list<dogen::variability::entities::feature>
 decoration_modeline::make_features() {
-    using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature> r;
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature> r;
     r.push_back(make_masd_decoration_modeline_editor());
     r.push_back(make_masd_decoration_modeline_location());
     r.push_back(make_masd_decoration_modeline_technical_space());

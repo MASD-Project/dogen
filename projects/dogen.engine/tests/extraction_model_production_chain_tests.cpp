@@ -28,8 +28,8 @@
 #include "dogen.utility/types/test_data/dogen_generation.hpp"
 #include "dogen.utility/types/test_data/cpp_ref_impl_generation.hpp"
 #include "dogen.utility/types/test_data/csharp_ref_impl_generation.hpp"
-#include "dogen.extraction/io/meta_model/operation_io.hpp"
-#include "dogen.extraction/io/meta_model/operation_reason_io.hpp"
+#include "dogen.extraction/io/entities/operation_io.hpp"
+#include "dogen.extraction/io/entities/operation_reason_io.hpp"
 #include "dogen.engine/types/transforms/scoped_context_manager.hpp"
 #include "dogen.engine/types/transforms/extraction_model_production_chain.hpp"
 
@@ -70,7 +70,7 @@ void print_lines(const std::string& content, const unsigned int total,
     }
 }
 
-dogen::extraction::meta_model::model
+dogen::extraction::entities::model
 apply_extraction_model_production(const boost::filesystem::path& target,
     const boost::filesystem::path& output_dir,
     const bool enable_tracing_locally = false,
@@ -109,11 +109,11 @@ apply_extraction_model_production(const boost::filesystem::path& target,
  * output to show up in CDash.
  */
 bool check_for_differences(const boost::filesystem::path& output_dir,
-    const dogen::extraction::meta_model::model& m) {
+    const dogen::extraction::entities::model& m) {
 
     unsigned int diffs_found(0);
     for (const auto& a : m.artefacts()) {
-        using namespace dogen::extraction::meta_model;
+        using namespace dogen::extraction::entities;
         /*
          * FIXME: we seem to be generating empty paths. Needs to be
          * investigated. Hack for now
@@ -177,7 +177,7 @@ bool check_for_differences(const boost::filesystem::path& output_dir,
  * @brief Performs a set of checks for the delete extra scenario.
  */
 bool check_for_delete_extra(const boost::filesystem::path& output_dir,
-    const dogen::extraction::meta_model::model& m) {
+    const dogen::extraction::entities::model& m) {
     unsigned int diffs_found(0);
     for (const auto& a : m.artefacts()) {
         /*
@@ -196,7 +196,7 @@ bool check_for_delete_extra(const boost::filesystem::path& output_dir,
         const auto rel(a.path().lexically_relative(output_dir));
         const auto gs(rel.generic_string());
 
-        using namespace dogen::extraction::meta_model;
+        using namespace dogen::extraction::entities;
         if (fn == unexpected_ignore_fn) {
             /*
              * File should be removed because it is unexpected and
@@ -238,7 +238,7 @@ bool check_for_delete_extra(const boost::filesystem::path& output_dir,
  * @brief Performs a set of checks for the delete extra scenario.
  */
 bool check_for_ignore_extra(const boost::filesystem::path& output_dir,
-    const dogen::extraction::meta_model::model& m) {
+    const dogen::extraction::entities::model& m) {
     unsigned int diffs_found(0);
     for (const auto& a : m.artefacts()) {
         /*
@@ -257,7 +257,7 @@ bool check_for_ignore_extra(const boost::filesystem::path& output_dir,
         const auto rel(a.path().lexically_relative(output_dir));
         const auto gs(rel.generic_string());
 
-        using namespace dogen::extraction::meta_model;
+        using namespace dogen::extraction::entities;
         if (fn == unexpected_ignore_fn) {
             /*
              * File should not be removed because whilst it is
@@ -299,7 +299,7 @@ bool check_for_ignore_extra(const boost::filesystem::path& output_dir,
  * @brief Performs a set of checks for the delete extra scenario.
  */
 bool check_for_force_write(const boost::filesystem::path& output_dir,
-    const dogen::extraction::meta_model::model& m) {
+    const dogen::extraction::entities::model& m) {
     unsigned int diffs_found(0);
     for (const auto& a : m.artefacts()) {
         /*
@@ -318,7 +318,7 @@ bool check_for_force_write(const boost::filesystem::path& output_dir,
         const auto rel(a.path().lexically_relative(output_dir));
         const auto gs(rel.generic_string());
 
-        using namespace dogen::extraction::meta_model;
+        using namespace dogen::extraction::entities;
         if (fn == changed_handcrafted_hpp_fn ||
             fn == changed_handcrafted_cpp_fn) {
             /*
@@ -351,7 +351,7 @@ bool check_for_force_write(const boost::filesystem::path& output_dir,
  * @brief Performs a set of checks for the model out of sync scenario.
  */
 bool check_out_of_sync(const boost::filesystem::path& output_dir,
-    const dogen::extraction::meta_model::model& m) {
+    const dogen::extraction::entities::model& m) {
     unsigned int diffs_found(0);
     for (const auto& a : m.artefacts()) {
         /*
@@ -369,7 +369,7 @@ bool check_out_of_sync(const boost::filesystem::path& output_dir,
         const auto rel(a.path().lexically_relative(output_dir /
                 "cpp_ref_impl.out_of_sync"));
         const auto gs(rel.generic_string());
-        using namespace dogen::extraction::meta_model;
+        using namespace dogen::extraction::entities;
         if (gs == "include/cpp_ref_impl.out_of_sync/types/all.hpp" ||
             gs == "include/cpp_ref_impl.out_of_sync/types/changed_generated.hpp" ||
             gs == "src/hash/changed_generated_hash.cpp" ||

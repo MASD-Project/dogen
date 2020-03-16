@@ -23,23 +23,23 @@
 namespace dogen::variability::helpers {
 
 void registrar::
-register_templates(const std::list<meta_model::feature_template>& fts) {
+register_templates(const std::list<entities::feature_template>& fts) {
     for (const auto& ft : fts)
         feature_template_repository_.templates().push_back(ft);
 }
 
 void registrar::
-register_features(const std::list<meta_model::feature>& fs) {
+register_features(const std::list<entities::feature>& fs) {
     for (const auto& f : fs)
         feature_repository_.features().push_back(f);
 }
 
-const meta_model::feature_template_repository&
+const entities::feature_template_repository&
 registrar::feature_template_repository() {
     return feature_template_repository_;
 }
 
-const meta_model::feature_repository&
+const entities::feature_repository&
 registrar::feature_repository() {
     return feature_repository_;
 }

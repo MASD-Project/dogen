@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include "dogen.dia/types/diagram_fwd.hpp"
-#include "dogen.injection/types/meta_model/model.hpp"
+#include "dogen.injection/types/entities/model.hpp"
 #include "dogen.injection.dia/types/grapher.hpp"
 #include "dogen.injection.dia/types/validator.hpp"
 #include "dogen.injection.dia/types/processed_object.hpp"
@@ -55,7 +55,7 @@ private:
      * @brief Transforms the entire graph of processed objects into an
      * injection model.
      */
-    meta_model::model obtain_model(const std::string& name,
+    entities::model obtain_model(const std::string& name,
         const std::list<processed_object>& pos) const;
 
 public:
@@ -63,7 +63,7 @@ public:
     virtual std::string description() const override;
     virtual std::string extension() const override;
 
-    meta_model::model apply(const transforms::context& ctx,
+    entities::model apply(const transforms::context& ctx,
         const boost::filesystem::path& p) override;
 };
 

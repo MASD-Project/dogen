@@ -20,12 +20,12 @@
  */
 #include "dogen.tracing/types/tracer.hpp"
 #include "dogen.extraction/types/transforms/context.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::variability::meta_model::feature_model>& lhs,
-const boost::shared_ptr<dogen::variability::meta_model::feature_model>& rhs) {
+inline bool operator==(const boost::shared_ptr<dogen::variability::entities::feature_model>& lhs,
+const boost::shared_ptr<dogen::variability::entities::feature_model>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -56,7 +56,7 @@ context::context(
     const boost::optional<dogen::diffing_configuration>& diffing_configuration,
     const boost::optional<dogen::reporting_configuration>& reporting_configuration,
     const bool dry_run_mode_enabled,
-    const boost::shared_ptr<dogen::variability::meta_model::feature_model>& feature_model,
+    const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
     const boost::shared_ptr<dogen::tracing::tracer>& tracer)
     : diffing_configuration_(diffing_configuration),
       reporting_configuration_(reporting_configuration),
@@ -127,19 +127,19 @@ void context::dry_run_mode_enabled(const bool v) {
     dry_run_mode_enabled_ = v;
 }
 
-const boost::shared_ptr<dogen::variability::meta_model::feature_model>& context::feature_model() const {
+const boost::shared_ptr<dogen::variability::entities::feature_model>& context::feature_model() const {
     return feature_model_;
 }
 
-boost::shared_ptr<dogen::variability::meta_model::feature_model>& context::feature_model() {
+boost::shared_ptr<dogen::variability::entities::feature_model>& context::feature_model() {
     return feature_model_;
 }
 
-void context::feature_model(const boost::shared_ptr<dogen::variability::meta_model::feature_model>& v) {
+void context::feature_model(const boost::shared_ptr<dogen::variability::entities::feature_model>& v) {
     feature_model_ = v;
 }
 
-void context::feature_model(const boost::shared_ptr<dogen::variability::meta_model::feature_model>&& v) {
+void context::feature_model(const boost::shared_ptr<dogen::variability::entities::feature_model>&& v) {
     feature_model_ = std::move(v);
 }
 

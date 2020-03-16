@@ -26,9 +26,9 @@
 #endif
 
 #include <boost/shared_ptr.hpp>
-#include "dogen.logical/types/meta_model/model.hpp"
-#include "dogen.logical/types/meta_model/structural/module.hpp"
-#include "dogen.logical/types/meta_model/origin_types.hpp"
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/entities/structural/module.hpp"
+#include "dogen.logical/types/entities/origin_types.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 
 namespace dogen::logical::transforms {
@@ -43,27 +43,27 @@ private:
     /**
      * @brief Creates the module to represent the global namespace.
      */
-    static boost::shared_ptr<meta_model::structural::module>
-    create_global_module(const meta_model::origin_types ot);
+    static boost::shared_ptr<entities::structural::module>
+    create_global_module(const entities::origin_types ot);
 
     /**
      * @brief Injects the global module, and makes all modules that do
      * not have a containing namespace be contained by it.
      */
-    static meta_model::name inject_global_module(meta_model::model& m);
+    static entities::name inject_global_module(entities::model& m);
 
     /**
      * @brief Updates the containment relationships in the model
      * related to the global module.
      */
     static void update_element_containment(
-        const meta_model::name& global_module_name, meta_model::model& m);
+        const entities::name& global_module_name, entities::model& m);
 
 public:
     /**
      * @brief Applies the transform.
      */
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

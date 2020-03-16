@@ -39,7 +39,7 @@ boilerplate_formatter::
 boilerplate_formatter(std::ostream& s, const boilerplate_properties& bp)
     : stream_(s), boilerplate_properties_(bp),
       supports_header_guards_(
-          bp.technical_space() == logical::meta_model::technical_space::cpp) {
+          bp.technical_space() == logical::entities::technical_space::cpp) {
 
     BOOST_LOG_SEV(lg, trace) << "Boilerplate properties: " << bp;
 }

@@ -24,8 +24,8 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/meta_model/name_io.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
+#include "dogen.logical/io/entities/name_io.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/associations_transform.hpp"
 
@@ -48,9 +48,9 @@ namespace dogen::logical::transforms {
  * @param processed list of names that have already been processed
  * somewhere else, if any.
  */
-void remove_duplicates(std::list<meta_model::name>& names,
-    std::unordered_set<meta_model::name> processed =
-    std::unordered_set<meta_model::name>()) {
+void remove_duplicates(std::list<entities::name>& names,
+    std::unordered_set<entities::name> processed =
+    std::unordered_set<entities::name>()) {
     BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
                              << names.size() << ". Processed starts with size: "
                              << processed.size();
@@ -81,8 +81,8 @@ void remove_duplicates(std::list<meta_model::name>& names,
  * goes along.
  */
 template<typename Associatable>
-void update_associations(const meta_model::model& m, Associatable& a,
-    const meta_model::name_tree& nt,
+void update_associations(const entities::model& m, Associatable& a,
+    const entities::name_tree& nt,
     const bool inherit_opaqueness_from_parent) {
 
     const auto n(nt.current());
@@ -121,7 +121,7 @@ void update_associations(const meta_model::model& m, Associatable& a,
 
 template<typename Associatable>
 void process(Associatable& a) {
-    std::unordered_set<meta_model::name> transparent_associations;
+    std::unordered_set<entities::name> transparent_associations;
     remove_duplicates(a.transparent_associations());
     for (const auto n : a.transparent_associations())
         transparent_associations.insert(n);
@@ -134,7 +134,7 @@ void process(Associatable& a) {
 }
 
 void associations_transform::
-process_object(const meta_model::model& m, meta_model::structural::object& o) {
+process_object(const entities::model& m, entities::structural::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Expand object: " << o.name().qualified().dot();
 
     for (const auto& p : o.local_attributes()) {
@@ -145,8 +145,8 @@ process_object(const meta_model::model& m, meta_model::structural::object& o) {
 }
 
 void associations_transform::
-process_feature_template_bundle(const meta_model::model& m,
-    meta_model::variability::feature_template_bundle& fb) {
+process_feature_template_bundle(const entities::model& m,
+    entities::variability::feature_template_bundle& fb) {
 
     for (const auto& ft : fb.feature_templates()) {
         const auto& nt(ft.parsed_type());
@@ -155,8 +155,8 @@ process_feature_template_bundle(const meta_model::model& m,
     process(fb);
 }
 
-void associations_transform::process_feature_bundle(const meta_model::model& m,
-    meta_model::variability::feature_bundle& fb) {
+void associations_transform::process_feature_bundle(const entities::model& m,
+    entities::variability::feature_bundle& fb) {
 
     for (const auto& f : fb.features()) {
         const auto& nt(f.parsed_type());
@@ -165,7 +165,7 @@ void associations_transform::process_feature_bundle(const meta_model::model& m,
     process(fb);
 }
 
-void associations_transform::apply(const context& ctx, meta_model::model& m) {
+void associations_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "associations transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 

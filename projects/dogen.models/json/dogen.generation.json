@@ -20,11 +20,11 @@
   },
   "elements": [
     {
-      "name": "meta_model",
+      "name": "entities",
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "meta_model::model",
+      "name": "entities::model",
       "documentation": "Yarn model.\n",
       "stereotypes": [
         "Nameable",
@@ -35,21 +35,21 @@
       "attributes": [
         {
           "name": "references",
-          "type": "std::unordered_map<logical::meta_model::name, logical::meta_model::origin_types>",
+          "type": "std::unordered_map<logical::entities::name, logical::entities::origin_types>",
           "documentation": "All other models that this model depends on, mapped to their origin.\n"
         },
         {
           "name": "leaves",
-          "type": "std::unordered_set<logical::meta_model::name>",
+          "type": "std::unordered_set<logical::entities::name>",
           "documentation": "All leaf types in this model.\n\nLeaves are types concrete types which have a parent.\n"
         },
         {
           "name": "elements",
-          "type": "std::vector<boost::shared_ptr<logical::meta_model::element>>"
+          "type": "std::vector<boost::shared_ptr<logical::entities::element>>"
         },
         {
           "name": "root_module",
-          "type": "boost::shared_ptr<logical::meta_model::structural::module>",
+          "type": "boost::shared_ptr<logical::entities::structural::module>",
           "documentation": "The module that represents the model.\n"
         },
         {
@@ -64,22 +64,22 @@
         },
         {
           "name": "input_technical_space",
-          "type": "logical::meta_model::technical_space",
+          "type": "logical::entities::technical_space",
           "documentation": "Technical space which this model used originally.\n"
         },
         {
           "name": "output_technical_space",
-          "type": "logical::meta_model::technical_space",
+          "type": "logical::entities::technical_space",
           "documentation": "Technical space into which to output the model.\n"
         },
         {
           "name": "all_technical_spaces",
-          "type": "std::unordered_set<logical::meta_model::technical_space>",
+          "type": "std::unordered_set<logical::entities::technical_space>",
           "documentation": "Set of all technical concrete spaces involved in generating this model.\n\nIncludes the primary technical space (e.g. the output technical space) as well as\nall of the secondary technical spaces. Does not include any abstract technical\nspaces.\n"
         },
         {
           "name": "orm_properties",
-          "type": "boost::optional<logical::meta_model::orm::model_properties>"
+          "type": "boost::optional<logical::entities::orm::model_properties>"
         },
         {
           "name": "enabled_archetype_for_element",
@@ -95,12 +95,12 @@
         },
         {
           "name": "extraction_properties",
-          "type": "logical::meta_model::extraction_properties"
+          "type": "logical::entities::extraction_properties"
         }
       ]
     },
     {
-      "name": "meta_model::artefact_properties",
+      "name": "entities::artefact_properties",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -130,7 +130,7 @@
       ]
     },
     {
-      "name": "meta_model::formatting_styles",
+      "name": "entities::formatting_styles",
       "stereotypes": [
         "masd::enumeration"
       ],
@@ -151,7 +151,7 @@
       ]
     },
     {
-      "name": "meta_model::element_archetype",
+      "name": "entities::element_archetype",
       "tagged_values": {
         "masd.generation.cpp.hash.enabled": "true"
       },
@@ -168,7 +168,7 @@
       ]
     },
     {
-      "name": "meta_model::locator_properties",
+      "name": "entities::locator_properties",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -205,7 +205,7 @@
       ]
     },
     {
-      "name": "meta_model::directory_structure_styles",
+      "name": "entities::directory_structure_styles",
       "stereotypes": [
         "masd::enumeration"
       ],
@@ -229,7 +229,7 @@
       ]
     },
     {
-      "name": "meta_model::model_segment_properties",
+      "name": "entities::model_segment_properties",
       "documentation": "Properties related to the model segment of the path.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -251,7 +251,7 @@
       ]
     },
     {
-      "name": "meta_model::path_contribution_types",
+      "name": "entities::path_contribution_types",
       "documentation": "Different kinds of contributions that can be made to the final path computation.\n",
       "stereotypes": [
         "masd::enumeration"
@@ -276,7 +276,7 @@
       ]
     },
     {
-      "name": "meta_model::backend_properties",
+      "name": "entities::backend_properties",
       "documentation": "Properties related to the backend.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -293,7 +293,7 @@
       ]
     },
     {
-      "name": "meta_model::intra_backend_segment_properties",
+      "name": "entities::intra_backend_segment_properties",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -329,7 +329,7 @@
       ]
     },
     {
-      "name": "meta_model::archetype_family_properties",
+      "name": "entities::archetype_family_properties",
       "documentation": "Properties pertaining to families of archetypes, related to the path computation.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -341,7 +341,7 @@
       ]
     },
     {
-      "name": "meta_model::global_archetype_location_properties",
+      "name": "entities::global_archetype_location_properties",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -363,7 +363,7 @@
       ]
     },
     {
-      "name": "meta_model::local_archetype_location_properties",
+      "name": "entities::local_archetype_location_properties",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -385,7 +385,7 @@
       ]
     },
     {
-      "name": "meta_model::denormalised_archetype_properties",
+      "name": "entities::denormalised_archetype_properties",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -427,7 +427,7 @@
       ]
     },
     {
-      "name": "meta_model::facet_properties",
+      "name": "entities::facet_properties",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -452,7 +452,7 @@
       ]
     },
     {
-      "name": "meta_model::archetype_properties",
+      "name": "entities::archetype_properties",
       "documentation": "Archetype level properties, applicable to all instances of this archetype.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -473,7 +473,7 @@
       ]
     },
     {
-      "name": "meta_model::Nameable",
+      "name": "entities::Nameable",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -481,12 +481,12 @@
       "attributes": [
         {
           "name": "name",
-          "type": "logical::meta_model::name"
+          "type": "logical::entities::name"
         }
       ]
     },
     {
-      "name": "meta_model::MetaNameable",
+      "name": "entities::MetaNameable",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -494,12 +494,12 @@
       "attributes": [
         {
           "name": "meta_name",
-          "type": "logical::meta_model::name"
+          "type": "logical::entities::name"
         }
       ]
     },
     {
-      "name": "meta_model::generatable_properties",
+      "name": "entities::generatable_properties",
       "documentation": "Element properties related to code generation.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -553,7 +553,7 @@
       "attributes": [
         {
           "name": "transforms_by_technical_space_",
-          "type": "std::unordered_map<logical::meta_model::technical_space, std::shared_ptr<model_to_extraction_model_transform_interface>>"
+          "type": "std::unordered_map<logical::entities::technical_space, std::shared_ptr<model_to_extraction_model_transform_interface>>"
         }
       ]
     },
@@ -584,7 +584,7 @@
       "attributes": [
         {
           "name": "style",
-          "type": "meta_model::formatting_styles"
+          "type": "entities::formatting_styles"
         },
         {
           "name": "input",
@@ -630,7 +630,7 @@
         },
         {
           "name": "intra_backend_segment_properties",
-          "type": "std::unordered_map<std::string, generation::meta_model::intra_backend_segment_properties>"
+          "type": "std::unordered_map<std::string, generation::entities::intra_backend_segment_properties>"
         },
         {
           "name": "output_directory_path",
@@ -639,7 +639,7 @@
         },
         {
           "name": "feature_model",
-          "type": "boost::shared_ptr<variability::meta_model::feature_model>"
+          "type": "boost::shared_ptr<variability::entities::feature_model>"
         },
         {
           "name": "tracer",
@@ -769,15 +769,15 @@
       "attributes": [
         {
           "name": "modelines_by_modeline_group_by_technical_space",
-          "type": "std::unordered_map<std::string, std::unordered_map<logical::meta_model::technical_space, boost::shared_ptr<logical::meta_model::decoration::modeline>>>"
+          "type": "std::unordered_map<std::string, std::unordered_map<logical::entities::technical_space, boost::shared_ptr<logical::entities::decoration::modeline>>>"
         },
         {
           "name": "licences_by_name",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<logical::meta_model::decoration::licence>>"
+          "type": "std::unordered_map<std::string, boost::shared_ptr<logical::entities::decoration::licence>>"
         },
         {
           "name": "generation_markers_by_name",
-          "type": "std::unordered_map<std::string, boost::shared_ptr<logical::meta_model::decoration::generation_marker>>"
+          "type": "std::unordered_map<std::string, boost::shared_ptr<logical::entities::decoration::generation_marker>>"
         }
       ]
     },
@@ -931,7 +931,7 @@
         },
         {
           "name": "technical_space",
-          "type": "logical::meta_model::technical_space"
+          "type": "logical::entities::technical_space"
         },
         {
           "name": "generate_preamble",
@@ -1036,7 +1036,7 @@
       ]
     },
     {
-      "name": "meta_model::DeterminableOrigin",
+      "name": "entities::DeterminableOrigin",
       "documentation": "A unit of assets that can be code generated.\n",
       "stereotypes": [
         "masd::object_template"

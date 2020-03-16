@@ -20,7 +20,7 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/helpers/indexer.hpp"
 #include "dogen.logical/types/helpers/post_assembly_validator.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
@@ -51,7 +51,7 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::logical::transforms {
 
-void post_assembly_chain::apply(const context& ctx, meta_model::model& m) {
+void post_assembly_chain::apply(const context& ctx, entities::model& m) {
     tracing::scoped_chain_tracer stp(lg, "model post-processing chain",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 

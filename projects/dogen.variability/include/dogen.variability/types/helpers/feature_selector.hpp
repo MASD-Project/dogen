@@ -27,8 +27,8 @@
 
 #include <string>
 #include <boost/optional.hpp>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
 
 namespace dogen::variability::helpers {
 
@@ -37,7 +37,7 @@ namespace dogen::variability::helpers {
  */
 class feature_selector final {
 public:
-    explicit feature_selector(const meta_model::feature_model& fm);
+    explicit feature_selector(const entities::feature_model& fm);
 
 private:
     /**
@@ -53,7 +53,7 @@ public:
      *
      * @return if one exists, returns it. Returns null otherwise.
      */
-    boost::optional<const meta_model::feature&>
+    boost::optional<const entities::feature&>
     try_get_by_name(const std::string& n) const;
 
     /**
@@ -64,7 +64,7 @@ public:
      *
      * @return if one exists, returns it. Returns Null otherwise.
      */
-    boost::optional<const meta_model::feature&>
+    boost::optional<const entities::feature&>
     try_get_by_name(const std::string& prefix,
         const std::string& simple_name) const;
 
@@ -75,7 +75,7 @@ public:
      *
      * @pre name must exist.
      */
-    const meta_model::feature&
+    const entities::feature&
     get_by_name(const std::string& n) const;
 
     /**
@@ -86,11 +86,11 @@ public:
      *
      * @pre qualified field name must exist.
      */
-    const meta_model::feature& get_by_name(
+    const entities::feature& get_by_name(
         const std::string& prefix, const std::string& simple_name) const;
 
 private:
-    const meta_model::feature_model& model_;
+    const entities::feature_model& model_;
 };
 
 }

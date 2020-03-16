@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include "dogen.injection/types/meta_model/model.hpp"
+#include "dogen.injection/types/entities/model.hpp"
 #include "dogen.injection/types/transforms/context_fwd.hpp"
 
 namespace dogen::injection::transforms {
@@ -39,7 +39,7 @@ class compute_sha1_transform final {
 public:
     static void apply(const transforms::context& ctx,
         const boost::filesystem::path& p,
-        meta_model::model& m);
+        entities::model& m);
 };
 
 }

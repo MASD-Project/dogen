@@ -29,9 +29,9 @@
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
-#include "dogen.injection/types/meta_model/model.hpp"
-#include "dogen.injection/types/meta_model/element.hpp"
-#include "dogen.injection/types/meta_model/attribute.hpp"
+#include "dogen.injection/types/entities/model.hpp"
+#include "dogen.injection/types/entities/element.hpp"
+#include "dogen.injection/types/entities/attribute.hpp"
 
 namespace dogen::injection::json {
 
@@ -70,32 +70,32 @@ private:
     /**
      * @brief Reads the attributes, if any.
      */
-    injection::meta_model::attribute
+    injection::entities::attribute
     read_attribute(const boost::property_tree::ptree& pt) const;
 
     /**
      * @brief Reads an element according to its meta-type by
      * dispatching to the correct read functions.
      */
-    injection::meta_model::element read_element(
+    injection::entities::element read_element(
         const boost::property_tree::ptree& pt, const std::string& id) const;
 
     /**
      * @brief Reads the entire stream as a property tree.
      */
-    injection::meta_model::model read_stream(std::istream& s) const;
+    injection::entities::model read_stream(std::istream& s) const;
 
 public:
     /**
      * @brief Hydrates the model from the JSON stream.
      */
-    injection::meta_model::model hydrate(std::istream& s) const;
+    injection::entities::model hydrate(std::istream& s) const;
 
     /**
      * @brief Opens up the file at path and then hydrates the model
      * from the JSON stream.
      */
-    injection::meta_model::model hydrate(const boost::filesystem::path& p) const;
+    injection::entities::model hydrate(const boost::filesystem::path& p) const;
 };
 
 }

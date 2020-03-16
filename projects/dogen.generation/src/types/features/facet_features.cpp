@@ -27,9 +27,9 @@ namespace dogen::generation::features {
 
 namespace {
 
-dogen::variability::meta_model::feature_template
+dogen::variability::entities::feature_template
 make_directory() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature_template r;
     r.name().simple("directory");
     r.description(R"(Directory in which to place this facet.
@@ -80,9 +80,9 @@ make_directory() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::entities::feature_template
 make_postfix() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature_template r;
     r.name().simple("postfix");
     r.description(R"(Postfix to use for all files that belong to this facet.
@@ -124,9 +124,9 @@ make_postfix() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::entities::feature_template
 make_overwrite() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature_template r;
     r.name().simple("overwrite");
     r.description(R"(If true, the generated files will overwrite existing files. 
@@ -144,7 +144,7 @@ make_overwrite() {
 }
 
 facet_features::feature_group
-facet_features::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+facet_features::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
@@ -157,7 +157,7 @@ facet_features::make_feature_group(const dogen::variability::meta_model::feature
 
 facet_features::static_configuration facet_features::make_static_configuration(
     const feature_group& fg,
-    const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::entities::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
@@ -167,10 +167,10 @@ facet_features::static_configuration facet_features::make_static_configuration(
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature_template>
+std::list<dogen::variability::entities::feature_template>
 facet_features::make_templates() {
-    using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature_template> r;
     r.push_back(make_directory());
     r.push_back(make_postfix());
     r.push_back(make_overwrite());

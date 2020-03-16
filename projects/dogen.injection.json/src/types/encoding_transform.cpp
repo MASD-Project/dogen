@@ -53,7 +53,7 @@ std::string encoding_transform::extension() const {
 }
 
 void encoding_transform::
-apply(const transforms::context& ctx, const meta_model::model& m,
+apply(const transforms::context& ctx, const entities::model& m,
     const boost::filesystem::path& p) {
     tracing::scoped_transform_tracer stp(lg, "JSON encoding transform",
         transform_id, m.name(), *ctx.tracer());

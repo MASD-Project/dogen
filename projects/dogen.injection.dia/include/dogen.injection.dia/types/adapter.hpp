@@ -26,8 +26,8 @@
 #endif
 
 #include <string>
-#include "dogen.injection/types/meta_model/element.hpp"
-#include "dogen.injection/types/meta_model/attribute.hpp"
+#include "dogen.injection/types/entities/element.hpp"
+#include "dogen.injection/types/entities/attribute.hpp"
 #include "dogen.injection.dia/types/processed_object.hpp"
 #include "dogen.injection.dia/types/processed_attribute.hpp"
 
@@ -54,19 +54,19 @@ private:
      * @brief Processes the stereotypes field.
      */
     static void process_stereotypes(const processed_object& po,
-        injection::meta_model::element& e);
+        injection::entities::element& e);
 
 private:
     /**
      * @brief Adapts a processed attribute into a injection exoattribute.
      */
-    static injection::meta_model::attribute adapt(const processed_attribute& a);
+    static injection::entities::attribute adapt(const processed_attribute& a);
 
 public:
     /**
      * @brief Adapts a processed object into a injection exoelement.
      */
-    static injection::meta_model::element
+    static injection::entities::element
     adapt(const processed_object& po, const std::string& contained_by,
         const std::list<std::string>& parents);
 };

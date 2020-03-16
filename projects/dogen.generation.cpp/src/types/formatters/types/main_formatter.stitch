@@ -2,7 +2,7 @@
 <#@ masd.stitch.containing_namespaces=dogen::generation::cpp::formatters::types #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.logical/types/meta_model/structural/entry_point.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/entry_point.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/formatters/assistant.hpp" #>
 <#@ masd.stitch.wale.text_template=cpp_artefact_formatter_implementation.wale #>
@@ -13,7 +13,7 @@
 <#@ masd.stitch.wale.kvp.class.simple_name=main_formatter #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=main #>
 <#@ masd.stitch.wale.kvp.class.inclusion_support_type=regular_support #>
-<#@ masd.stitch.wale.kvp.yarn_element=logical::meta_model::structural::entry_point #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::entry_point #>
 <#@ masd.stitch.wale.kvp.meta_element=entry_point #>
 <#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
@@ -21,15 +21,15 @@
 
 std::list<std::string> main_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
-    const logical::meta_model::element& /*e*/) const {
+    const logical::entities::element& /*e*/) const {
     static std::list<std::string> r;
     return r;
 }
 
-extraction::meta_model::artefact main_formatter::
-format(const context& ctx, const logical::meta_model::element& e) const {
+extraction::entities::artefact main_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& o(a.as<logical::meta_model::structural::entry_point>(e));
+    const auto& o(a.as<logical::entities::structural::entry_point>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(o));

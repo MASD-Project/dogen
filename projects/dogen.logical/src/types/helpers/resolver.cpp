@@ -26,16 +26,16 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/unordered_set_io.hpp"
-#include "dogen.logical/types/meta_model/structural/builtin.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/structural/primitive.hpp"
-#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
-#include "dogen.logical/types/meta_model/variability/feature_bundle.hpp"
-#include "dogen.logical/types/meta_model/variability/feature_template_bundle.hpp"
-#include "dogen.logical/io/meta_model/name_io.hpp"
-#include "dogen.logical/io/meta_model/name_tree_io.hpp"
-#include "dogen.logical/io/meta_model/attribute_io.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
+#include "dogen.logical/types/entities/structural/builtin.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/primitive.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
+#include "dogen.logical/types/entities/variability/feature_bundle.hpp"
+#include "dogen.logical/types/entities/variability/feature_template_bundle.hpp"
+#include "dogen.logical/io/entities/name_io.hpp"
+#include "dogen.logical/io/entities/name_tree_io.hpp"
+#include "dogen.logical/io/entities/attribute_io.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/helpers/name_factory.hpp"
 #include "dogen.logical/types/helpers/fully_qualified_representation_builder.hpp"
 #include "dogen.logical/types/helpers/resolution_error.hpp"
@@ -59,14 +59,14 @@ typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 namespace dogen::logical::helpers {
 
 bool resolver::
-is_floating_point(const meta_model::model& m, const meta_model::name& n) {
+is_floating_point(const entities::model& m, const entities::name& n) {
     auto i(m.structural_elements().builtins().find(n.qualified().dot()));
     return i != m.structural_elements().builtins().end() &&
         i->second->is_floating_point();
 }
 
 bool resolver::
-is_builtin(const meta_model::model& m, const meta_model::name& n) {
+is_builtin(const entities::model& m, const entities::name& n) {
 
     auto i(m.structural_elements().builtins().find(n.qualified().dot()));
     if (i != m.structural_elements().builtins().end()) {
@@ -77,7 +77,7 @@ is_builtin(const meta_model::model& m, const meta_model::name& n) {
 }
 
 bool resolver::
-is_primitive(const meta_model::model& m, const meta_model::name& n) {
+is_primitive(const entities::model& m, const entities::name& n) {
 
     auto i(m.structural_elements().primitives().find(n.qualified().dot()));
     if (i != m.structural_elements().primitives().end()) {
@@ -88,7 +88,7 @@ is_primitive(const meta_model::model& m, const meta_model::name& n) {
 }
 
 bool resolver::
-is_enumeration(const meta_model::model& m, const meta_model::name& n) {
+is_enumeration(const entities::model& m, const entities::name& n) {
 
     auto i(m.structural_elements().enumerations().find(n.qualified().dot()));
     if (i != m.structural_elements().enumerations().end()) {
@@ -99,7 +99,7 @@ is_enumeration(const meta_model::model& m, const meta_model::name& n) {
 }
 
 bool resolver::
-is_object(const meta_model::model& m, const meta_model::name& n) {
+is_object(const entities::model& m, const entities::name& n) {
 
     auto i(m.structural_elements().objects().find(n.qualified().dot()));
     if (i != m.structural_elements().objects().end()) {
@@ -110,7 +110,7 @@ is_object(const meta_model::model& m, const meta_model::name& n) {
 }
 
 bool resolver::
-is_object_template(const meta_model::model& m, const meta_model::name& n) {
+is_object_template(const entities::model& m, const entities::name& n) {
     const auto id(n.qualified().dot());
     auto i(m.structural_elements().object_templates().find(id));
     if (i != m.structural_elements().object_templates().end()) {
@@ -121,7 +121,7 @@ is_object_template(const meta_model::model& m, const meta_model::name& n) {
 }
 
 bool resolver::
-is_name_referable(const indices& idx, const meta_model::name& n) {
+is_name_referable(const indices& idx, const entities::name& n) {
     const auto& id(n.qualified().dot());
     BOOST_LOG_SEV(lg, trace) << "Checking to see if name is referable: "
                              << id << " Full name: " << n;
@@ -135,9 +135,9 @@ is_name_referable(const indices& idx, const meta_model::name& n) {
     return false;
 }
 
-meta_model::name resolver::resolve_name_with_internal_modules(
-    const meta_model::model& m, const indices& idx,
-    const meta_model::name& ctx, const meta_model::name& n) {
+entities::name resolver::resolve_name_with_internal_modules(
+    const entities::model& m, const indices& idx,
+    const entities::name& ctx, const entities::name& n) {
 
     /*
      * Since the user has bothered to provide an internal module path,
@@ -275,9 +275,9 @@ meta_model::name resolver::resolve_name_with_internal_modules(
     BOOST_THROW_EXCEPTION(resolution_error(undefined_type + id));
 }
 
-boost::optional<meta_model::name> resolver::
+boost::optional<entities::name> resolver::
 try_resolve_name_with_context_internal_modules(const indices& idx,
-    meta_model::name ctx, const meta_model::name& n) {
+    entities::name ctx, const entities::name& n) {
 
     BOOST_LOG_SEV(lg, trace) << "Context has internal modules.";
 
@@ -322,12 +322,12 @@ try_resolve_name_with_context_internal_modules(const indices& idx,
      * If we didn't find anything, we should not throw as there still
      * are other possibilities left to try.
      */
-    return boost::optional<meta_model::name>();
+    return boost::optional<entities::name>();
 }
 
-boost::optional<meta_model::name> resolver::
+boost::optional<entities::name> resolver::
 try_resolve_name_with_context_model_modules(const indices& idx,
-    meta_model::name ctx, const meta_model::name& n) {
+    entities::name ctx, const entities::name& n) {
 
     BOOST_LOG_SEV(lg, trace) << "Context has model modules.";
 
@@ -372,12 +372,12 @@ try_resolve_name_with_context_model_modules(const indices& idx,
      * If we didn't find anything, we should not throw as there still
      * are other possibilities left to try.
      */
-    return boost::optional<meta_model::name>();
+    return boost::optional<entities::name>();
 }
 
-meta_model::name resolver::
-resolve_name(const meta_model::model& m, const indices& idx,
-    const meta_model::name& ctx, const meta_model::name& n) {
+entities::name resolver::
+resolve_name(const entities::model& m, const indices& idx,
+    const entities::name& ctx, const entities::name& n) {
 
     BOOST_LOG_SEV(lg, trace) << "Resolving name: " << n.qualified().dot();
     BOOST_LOG_SEV(lg, trace) << "Initial state: " << n;
@@ -457,11 +457,11 @@ resolve_name(const meta_model::model& m, const indices& idx,
     BOOST_THROW_EXCEPTION(resolution_error(undefined_type + id));
 }
 
-void resolver::resolve_name_tree(const meta_model::model& m,
-    const indices& idx, const meta_model::name& owner,
-    meta_model::name_tree& nt) {
+void resolver::resolve_name_tree(const entities::model& m,
+    const indices& idx, const entities::name& owner,
+    entities::name_tree& nt) {
 
-    const meta_model::name n(resolve_name(m, idx, owner, nt.current()));
+    const entities::name n(resolve_name(m, idx, owner, nt.current()));
     BOOST_LOG_SEV(lg, debug) << "Resolved name: "
                              << nt.current().qualified().dot()
                              << " to: " << n.qualified().dot();
@@ -499,9 +499,9 @@ void resolver::resolve_name_tree(const meta_model::model& m,
     nt.qualified(fqr);
 }
 
-void resolver::resolve_attribute(const meta_model::model& m,
-    const indices& idx, const meta_model::name& owner,
-    meta_model::attribute& attr) {
+void resolver::resolve_attribute(const entities::model& m,
+    const indices& idx, const entities::name& owner,
+    entities::attribute& attr) {
 
     try {
         resolve_name_tree(m, idx, owner, attr.parsed_type());
@@ -522,16 +522,16 @@ void resolver::resolve_attribute(const meta_model::model& m,
     }
 }
 
-void resolver::resolve_attributes(const meta_model::model& m,
-    const indices& idx, const meta_model::name& owner,
-    std::list<meta_model::attribute>& attributes) {
+void resolver::resolve_attributes(const entities::model& m,
+    const indices& idx, const entities::name& owner,
+    std::list<entities::attribute>& attributes) {
 
     for (auto& attr : attributes)
         resolve_attribute(m, idx, owner, attr);
 }
 
-void resolver::validate_inheritance_graph(const meta_model::model& m,
-    const meta_model::structural::object& o) {
+void resolver::validate_inheritance_graph(const entities::model& m,
+    const entities::structural::object& o) {
     /*
      * Ensure that all parents and original parents exist as objects.
      */
@@ -562,8 +562,8 @@ void resolver::validate_inheritance_graph(const meta_model::model& m,
 }
 
 void
-resolver::validate_object_template_inheritance(const meta_model::model& m,
-const meta_model::structural::object_template& otp) {
+resolver::validate_object_template_inheritance(const entities::model& m,
+const entities::structural::object_template& otp) {
 
     const auto id(otp.name().qualified().dot());
     for (const auto& n : otp.parents()) {
@@ -580,7 +580,7 @@ const meta_model::structural::object_template& otp) {
 }
 
 void resolver::
-resolve_object_templates(const indices& idx, meta_model::model& m) {
+resolve_object_templates(const indices& idx, entities::model& m) {
     auto& ots(m.structural_elements().object_templates());
     BOOST_LOG_SEV(lg, debug) << "Resolving object templates. Size: "
                              << ots.size();
@@ -598,7 +598,7 @@ resolve_object_templates(const indices& idx, meta_model::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Resolved object templates.";
 }
 
-void resolver::resolve_objects(const indices& idx, meta_model::model& m) {
+void resolver::resolve_objects(const indices& idx, entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Resolving objects. Size: "
                              << m.structural_elements().objects().size();
 
@@ -616,7 +616,7 @@ void resolver::resolve_objects(const indices& idx, meta_model::model& m) {
 }
 
 void resolver::
-resolve_enumerations(const indices& idx, meta_model::model& m) {
+resolve_enumerations(const indices& idx, entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Resolving enumerations. Size: "
                              << m.structural_elements().enumerations().size();
 
@@ -652,7 +652,7 @@ resolve_enumerations(const indices& idx, meta_model::model& m) {
 }
 
 void resolver::
-resolve_primitives(const indices& idx, meta_model::model& m) {
+resolve_primitives(const indices& idx, entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Resolving primitives. Size: "
                              << m.structural_elements().primitives().size();
 
@@ -686,7 +686,7 @@ resolve_primitives(const indices& idx, meta_model::model& m) {
 }
 
 void resolver::resolve_feature_template_bundles(const indices& idx,
-    meta_model::model& m) {
+    entities::model& m) {
     for (auto& pair : m.variability_elements().feature_template_bundles()) {
         auto& fb(*pair.second);
         for (auto& ft : fb.feature_templates()) {
@@ -698,7 +698,7 @@ void resolver::resolve_feature_template_bundles(const indices& idx,
 }
 
 void resolver::resolve_feature_bundles(const indices& idx,
-    meta_model::model& m) {
+    entities::model& m) {
     for (auto& pair : m.variability_elements().feature_bundles()) {
         auto& fb(*pair.second);
         for (auto& ft : fb.features()) {
@@ -709,9 +709,9 @@ void resolver::resolve_feature_bundles(const indices& idx,
     }
 }
 
-meta_model::name resolver::
-resolve(const meta_model::model& m, const indices& idx,
-    const meta_model::name& ctx, const meta_model::name& n) {
+entities::name resolver::
+resolve(const entities::model& m, const indices& idx,
+    const entities::name& ctx, const entities::name& n) {
 
     const auto r(resolve_name(m, idx, ctx, n));
     BOOST_LOG_SEV(lg, trace) << "Resolved name: " << n.qualified().dot()
@@ -719,9 +719,9 @@ resolve(const meta_model::model& m, const indices& idx,
     return r;
 }
 
-boost::optional<meta_model::name> resolver::
-try_resolve_object_template_name(meta_model::name ctx, const std::string& s,
-    const meta_model::model& m) {
+boost::optional<entities::name> resolver::
+try_resolve_object_template_name(entities::name ctx, const std::string& s,
+    const entities::model& m) {
 
     BOOST_LOG_SEV(lg, trace) << "Resolving object template name: " << s;
 
@@ -729,7 +729,7 @@ try_resolve_object_template_name(meta_model::name ctx, const std::string& s,
      * We first start at the same level as the context, including any
      * internal modules.
      */
-    meta_model::name n;
+    entities::name n;
     n.simple(s);
 
     name_factory nf;
@@ -775,18 +775,18 @@ try_resolve_object_template_name(meta_model::name ctx, const std::string& s,
      * stereotype name.
      */
     BOOST_LOG_SEV(lg, warn) << "Could not find object template: " << s;
-    return boost::optional<meta_model::name>();
+    return boost::optional<entities::name>();
 }
 
-boost::optional<meta_model::name>
-resolver::try_resolve_object_template_name(const meta_model::name& ctx,
-    const meta_model::name& n, const meta_model::model& m) {
+boost::optional<entities::name>
+resolver::try_resolve_object_template_name(const entities::name& ctx,
+    const entities::name& n, const entities::model& m) {
     // FIXME: hack for now, just take simple name. Requires a bit more
     // thinking.
     return try_resolve_object_template_name(ctx, n.simple(), m);
 }
 
-void resolver::resolve(const indices& idx, meta_model::model& m) {
+void resolver::resolve(const indices& idx, entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Resolving model: "
                              << m.name().qualified().dot();
 

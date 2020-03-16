@@ -154,7 +154,7 @@
       "attributes": [
         {
           "name": "static_stereotypes",
-          "type": "std::list<logical::meta_model::static_stereotypes>"
+          "type": "std::list<logical::entities::static_stereotypes>"
         },
         {
           "name": "dynamic_stereotypes",

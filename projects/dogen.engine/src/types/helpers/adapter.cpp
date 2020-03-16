@@ -23,8 +23,8 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
 #include "dogen.variability/types/helpers/enum_mapper.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.logical/io/meta_model/location_io.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.logical/io/entities/location_io.hpp"
 #include "dogen.logical/types/helpers/name_builder.hpp"
 #include "dogen.logical/types/helpers/name_factory.hpp"
 #include "dogen.engine/types/helpers/adaptation_exception.hpp"
@@ -62,11 +62,11 @@ const std::string unsupported_value("Unsupported attribute value: ");
 
 namespace dogen::engine::helpers {
 
-using logical::meta_model::decoration::modeline_field;
-using logical::meta_model::decoration::modeline_group;
-using logical::meta_model::decoration::modeline;
-using logical::meta_model::decoration::generation_marker;
-using logical::meta_model::decoration::licence;
+using logical::entities::decoration::modeline_field;
+using logical::entities::decoration::modeline_group;
+using logical::entities::decoration::modeline;
+using logical::entities::decoration::generation_marker;
+using logical::entities::decoration::licence;
 
 
 void adapter::ensure_not_empty(const std::string& s) const {
@@ -83,11 +83,11 @@ void adapter::ensure_empty(const std::string& s) const {
     }
 }
 
-std::list<variability::meta_model::potential_binding> adapter::
+std::list<variability::entities::potential_binding> adapter::
 to_potential_binding(const std::list<std::string>& stereotypes) const {
-    std::list<variability::meta_model::potential_binding> r;
+    std::list<variability::entities::potential_binding> r;
     for (const auto& s : stereotypes) {
-        variability::meta_model::potential_binding pb;
+        variability::entities::potential_binding pb;
         pb.name(s);
         pb.realized(false);
         r.push_back(pb);
@@ -95,7 +95,7 @@ to_potential_binding(const std::list<std::string>& stereotypes) const {
     return r;
 }
 
-logical::meta_model::name adapter::to_name(const logical::meta_model::location& l,
+logical::entities::name adapter::to_name(const logical::entities::location& l,
     const std::string& n) const {
     BOOST_LOG_SEV(lg, debug) << "Location: " << l;
     /*
@@ -118,7 +118,7 @@ logical::meta_model::name adapter::to_name(const logical::meta_model::location& 
 }
 
 modeline_field
-adapter::to_modeline_field(const injection::meta_model::attribute& ia) const {
+adapter::to_modeline_field(const injection::entities::attribute& ia) const {
     ensure_not_empty(ia.name());
 
     modeline_field r;
@@ -127,13 +127,13 @@ adapter::to_modeline_field(const injection::meta_model::attribute& ia) const {
     return r;
 }
 
-logical::meta_model::attribute
-adapter::to_attribute(const logical::meta_model::name& owner,
-    const injection::meta_model::attribute& ia) const {
+logical::entities::attribute
+adapter::to_attribute(const logical::entities::name& owner,
+    const injection::entities::attribute& ia) const {
     ensure_not_empty(ia.name());
 
     logical::helpers::name_factory f;
-    logical::meta_model::attribute r;
+    logical::entities::attribute r;
     r.name(f.build_attribute_name(owner, ia.name()));
     r.member_variable_name(r.name().simple() + member_variable_postfix);
     r.getter_setter_name(r.name().simple());
@@ -152,9 +152,9 @@ adapter::to_attribute(const logical::meta_model::name& owner,
     return r;
 }
 
-logical::meta_model::structural::enumerator
-adapter::to_enumerator(const logical::meta_model::name& owner,
-    const injection::meta_model::attribute& ia) const {
+logical::entities::structural::enumerator
+adapter::to_enumerator(const logical::entities::name& owner,
+    const injection::entities::attribute& ia) const {
     ensure_not_empty(ia.name());
 
     if (!ia.type().empty()) {
@@ -164,7 +164,7 @@ adapter::to_enumerator(const logical::meta_model::name& owner,
     }
 
     logical::helpers::name_factory f;
-    logical::meta_model::structural::enumerator r;
+    logical::entities::structural::enumerator r;
     r.name(f.build_attribute_name(owner, ia.name()));
     r.documentation(ia.documentation());
 
@@ -179,10 +179,10 @@ adapter::to_enumerator(const logical::meta_model::name& owner,
     return r;
 }
 
-void adapter::populate_element(const logical::meta_model::location& l,
+void adapter::populate_element(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie,
-    logical::meta_model::element& e) const {
+    const injection::entities::element& ie,
+    logical::entities::element& e) const {
 
     /*
      * Ensure we populate the configuration before we attempt to read
@@ -197,7 +197,7 @@ void adapter::populate_element(const logical::meta_model::location& l,
     /*
      * Finally, populate all other attributes.
      */
-    e.origin_type(logical::meta_model::origin_types::not_yet_determined);
+    e.origin_type(logical::entities::origin_types::not_yet_determined);
     e.documentation(ie.documentation());
     e.static_stereotypes(scr.static_stereotypes());
 
@@ -207,14 +207,14 @@ void adapter::populate_element(const logical::meta_model::location& l,
         l.external_modules().empty() && l.model_modules().empty());
 }
 
-boost::shared_ptr<logical::meta_model::structural::object>
-adapter::to_object(const logical::meta_model::location& l,
+boost::shared_ptr<logical::entities::structural::object>
+adapter::to_object(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
+    const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to object: "
                              << ie.name();
 
-    auto r(boost::make_shared<logical::meta_model::structural::object>());
+    auto r(boost::make_shared<logical::entities::structural::object>());
     populate_element(l, scr, ie, *r);
     r->is_associative_container(ie.is_associative_container());
     r->can_be_primitive_underlier(ie.can_be_primitive_underlier());
@@ -228,14 +228,14 @@ adapter::to_object(const logical::meta_model::location& l,
     return r;
 }
 
-boost::shared_ptr<logical::meta_model::structural::object_template>
-adapter::to_object_template(const logical::meta_model::location& l,
+boost::shared_ptr<logical::entities::structural::object_template>
+adapter::to_object_template(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
+    const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element "
                              << "to object template: " << ie.name();
 
-    auto r(boost::make_shared<logical::meta_model::structural::object_template>());
+    auto r(boost::make_shared<logical::entities::structural::object_template>());
     populate_element(l, scr, ie, *r);
 
     for (const auto& attr : ie.attributes())
@@ -247,38 +247,38 @@ adapter::to_object_template(const logical::meta_model::location& l,
     return r;
 }
 
-boost::shared_ptr<logical::meta_model::structural::exception>
-adapter::to_exception(const logical::meta_model::location& l,
+boost::shared_ptr<logical::entities::structural::exception>
+adapter::to_exception(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
+    const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to exception: "
                              << ie.name();
 
-    auto r(boost::make_shared<logical::meta_model::structural::exception>());
+    auto r(boost::make_shared<logical::entities::structural::exception>());
     populate_element(l, scr, ie, *r);
     return r;
 }
 
-boost::shared_ptr<logical::meta_model::structural::primitive>
-adapter::to_primitive(const logical::meta_model::location& l,
+boost::shared_ptr<logical::entities::structural::primitive>
+adapter::to_primitive(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
+    const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to primitive: "
                              << ie.name();
 
-    auto r(boost::make_shared<logical::meta_model::structural::primitive>());
+    auto r(boost::make_shared<logical::entities::structural::primitive>());
     populate_element(l, scr, ie, *r);
     return r;
 }
 
-boost::shared_ptr<logical::meta_model::structural::enumeration>
-adapter::to_enumeration(const logical::meta_model::location& l,
+boost::shared_ptr<logical::entities::structural::enumeration>
+adapter::to_enumeration(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
+    const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to enumeration: "
                              << ie.name();
 
-    auto r(boost::make_shared<logical::meta_model::structural::enumeration>());
+    auto r(boost::make_shared<logical::entities::structural::enumeration>());
     populate_element(l, scr, ie, *r);
 
     for (const auto& attr : ie.attributes())
@@ -287,26 +287,26 @@ adapter::to_enumeration(const logical::meta_model::location& l,
     return r;
 }
 
-boost::shared_ptr<logical::meta_model::structural::module> adapter::
-to_module(const logical::meta_model::location& l,
+boost::shared_ptr<logical::entities::structural::module> adapter::
+to_module(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
+    const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to module: "
                              << ie.name();
 
-    auto r(boost::make_shared<logical::meta_model::structural::module>());
+    auto r(boost::make_shared<logical::entities::structural::module>());
     populate_element(l, scr, ie, *r);
     return r;
 }
 
-boost::shared_ptr<logical::meta_model::structural::builtin>
-adapter::to_builtin(const logical::meta_model::location& l,
+boost::shared_ptr<logical::entities::structural::builtin>
+adapter::to_builtin(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
+    const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to builtin: "
                              << ie.name();
 
-    auto r(boost::make_shared<logical::meta_model::structural::builtin>());
+    auto r(boost::make_shared<logical::entities::structural::builtin>());
     populate_element(l, scr, ie, *r);
 
     r->can_be_primitive_underlier(ie.can_be_primitive_underlier());
@@ -317,43 +317,43 @@ adapter::to_builtin(const logical::meta_model::location& l,
     return r;
 }
 
-boost::shared_ptr<logical::meta_model::structural::entry_point>
-adapter::to_entry_point(const logical::meta_model::location& l,
+boost::shared_ptr<logical::entities::structural::entry_point>
+adapter::to_entry_point(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
+    const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to exception: "
                              << ie.name();
 
-    auto r(boost::make_shared<logical::meta_model::structural::entry_point>());
+    auto r(boost::make_shared<logical::entities::structural::entry_point>());
     populate_element(l, scr, ie, *r);
     return r;
 }
 
-boost::shared_ptr<logical::meta_model::structural::assistant>
-adapter::to_assistant(const logical::meta_model::location& l,
+boost::shared_ptr<logical::entities::structural::assistant>
+adapter::to_assistant(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
+    const injection::entities::element& ie) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming injection element to assistant: "
                              << ie.name();
 
-    auto r(boost::make_shared<logical::meta_model::structural::assistant>());
+    auto r(boost::make_shared<logical::entities::structural::assistant>());
     populate_element(l, scr, ie, *r);
     return r;
 }
 
 boost::shared_ptr<modeline_group>
-adapter::to_modeline_group(const logical::meta_model::location& l,
+adapter::to_modeline_group(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
+    const injection::entities::element& ie) const {
     auto r(boost::make_shared<modeline_group>());
     populate_element(l, scr, ie, *r);
     return r;
 }
 
 boost::shared_ptr<modeline>
-adapter::to_modeline(const logical::meta_model::location& l,
+adapter::to_modeline(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
+    const injection::entities::element& ie) const {
     auto r(boost::make_shared<modeline>());
     populate_element(l, scr, ie, *r);
 
@@ -364,9 +364,9 @@ adapter::to_modeline(const logical::meta_model::location& l,
 }
 
 boost::shared_ptr<generation_marker>
-adapter::to_generation_marker(const logical::meta_model::location& l,
+adapter::to_generation_marker(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
+    const injection::entities::element& ie) const {
     auto r(boost::make_shared<generation_marker>());
     populate_element(l, scr, ie, *r);
 
@@ -406,9 +406,9 @@ adapter::to_generation_marker(const logical::meta_model::location& l,
 }
 
 boost::shared_ptr<licence>
-adapter::to_licence(const logical::meta_model::location& l,
+adapter::to_licence(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
+    const injection::entities::element& ie) const {
     auto r(boost::make_shared<licence>());
     populate_element(l, scr, ie, *r);
 
@@ -430,17 +430,17 @@ adapter::to_licence(const logical::meta_model::location& l,
     return r;
 }
 
-void adapter::populate_abstract_profile(const logical::meta_model::location& l,
-    const injection::meta_model::element& ie,
-    logical::meta_model::variability::abstract_profile& ap) const {
+void adapter::populate_abstract_profile(const logical::entities::location& l,
+    const injection::entities::element& ie,
+    logical::entities::variability::abstract_profile& ap) const {
     for (const auto& p : ie.parents())
         ap.parents().push_back(to_name(l, p));
 }
 
 void adapter::populate_abstract_feature(
-    const logical::meta_model::name& bundle_name,
-    const injection::meta_model::attribute& ia,
-    logical::meta_model::variability::abstract_feature& af) const {
+    const logical::entities::name& bundle_name,
+    const injection::entities::attribute& ia,
+    logical::entities::variability::abstract_feature& af) const {
     const auto n(ia.name());
     ensure_not_empty(n);
 
@@ -457,9 +457,9 @@ void adapter::populate_abstract_feature(
     af.configuration()->name().qualified(af.name().qualified().dot());
 }
 
-void adapter::populate_abstract_profile_entry(const logical::meta_model::name& pn,
-    const injection::meta_model::attribute& attr,
-    logical::meta_model::variability::abstract_profile_entry& ape) const {
+void adapter::populate_abstract_profile_entry(const logical::entities::name& pn,
+    const injection::entities::attribute& attr,
+    logical::entities::variability::abstract_profile_entry& ape) const {
     logical::helpers::name_factory f;
 
     const auto n(attr.name());
@@ -497,34 +497,34 @@ void adapter::populate_abstract_profile_entry(const logical::meta_model::name& p
         ape.value().push_back(attr.value());
 }
 
-boost::shared_ptr<logical::meta_model::variability::profile>
-adapter::to_variability_profile(const logical::meta_model::location& l,
+boost::shared_ptr<logical::entities::variability::profile>
+adapter::to_variability_profile(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
-    using logical::meta_model::variability::profile;
+    const injection::entities::element& ie) const {
+    using logical::entities::variability::profile;
     auto r(boost::make_shared<profile>());
     populate_element(l, scr, ie, *r);
     populate_abstract_profile(l, ie, *r);
 
     for (const auto& attr : ie.attributes()) {
-        logical::meta_model::variability::profile_entry e;
+        logical::entities::variability::profile_entry e;
         populate_abstract_profile_entry(r->name(), attr, e);
         r->entries().push_back(e);
     }
     return r;
 }
 
-boost::shared_ptr<logical::meta_model::variability::profile_template>
-adapter::to_variability_profile_template(const logical::meta_model::location& l,
+boost::shared_ptr<logical::entities::variability::profile_template>
+adapter::to_variability_profile_template(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
-    using logical::meta_model::variability::profile_template;
+    const injection::entities::element& ie) const {
+    using logical::entities::variability::profile_template;
     auto r(boost::make_shared<profile_template>());
     populate_element(l, scr, ie, *r);
     populate_abstract_profile(l, ie, *r);
 
     for (const auto& attr : ie.attributes()) {
-        logical::meta_model::variability::profile_template_entry e;
+        logical::entities::variability::profile_template_entry e;
         populate_abstract_profile_entry(r->name(), attr, e);
         r->entries().push_back(e);
     }
@@ -532,17 +532,17 @@ adapter::to_variability_profile_template(const logical::meta_model::location& l,
     return r;
 }
 
-boost::shared_ptr<logical::meta_model::variability::feature_template_bundle>
+boost::shared_ptr<logical::entities::variability::feature_template_bundle>
 adapter::to_variability_feature_template_bundle(
-    const logical::meta_model::location &l,
+    const logical::entities::location &l,
     const stereotypes_conversion_result &scr,
-    const injection::meta_model::element &ie) const {
-    using logical::meta_model::variability::feature_template_bundle;
+    const injection::entities::element &ie) const {
+    using logical::entities::variability::feature_template_bundle;
     auto r(boost::make_shared<feature_template_bundle>());
     populate_element(l, scr, ie, *r);
 
     for (const auto& ia : ie.attributes()) {
-        logical::meta_model::variability::feature_template ft;
+        logical::entities::variability::feature_template ft;
         populate_abstract_feature(r->name(), ia, ft);
         r->feature_templates().push_back(ft);
     }
@@ -550,16 +550,16 @@ adapter::to_variability_feature_template_bundle(
     return r;
 }
 
-boost::shared_ptr<logical::meta_model::variability::feature_bundle>
-adapter::to_variability_feature_bundle(const logical::meta_model::location &l,
+boost::shared_ptr<logical::entities::variability::feature_bundle>
+adapter::to_variability_feature_bundle(const logical::entities::location &l,
     const stereotypes_conversion_result &scr,
-    const injection::meta_model::element &ie) const {
-    using logical::meta_model::variability::feature_bundle;
+    const injection::entities::element &ie) const {
+    using logical::entities::variability::feature_bundle;
     auto r(boost::make_shared<feature_bundle>());
     populate_element(l, scr, ie, *r);
 
     for (const auto& ia : ie.attributes()) {
-        logical::meta_model::variability::feature f;
+        logical::entities::variability::feature f;
         populate_abstract_feature(r->name(), ia, f);
         r->features().push_back(f);
     }
@@ -568,62 +568,62 @@ adapter::to_variability_feature_bundle(const logical::meta_model::location &l,
 }
 
 boost::shared_ptr<
-    logical::meta_model::variability::initializer
+    logical::entities::variability::initializer
     >
-adapter::to_variability_initializer(const logical::meta_model::location &l,
+adapter::to_variability_initializer(const logical::entities::location &l,
     const stereotypes_conversion_result &scr,
-    const injection::meta_model::element &ie) const {
-    using logical::meta_model::variability::initializer;
+    const injection::entities::element &ie) const {
+    using logical::entities::variability::initializer;
     auto r(boost::make_shared<initializer>());
     populate_element(l, scr, ie, *r);
     return r;
 }
 
-boost::shared_ptr<logical::meta_model::mapping::fixed_mappable>
-adapter::to_fixed_mappable(const logical::meta_model::location& l,
+boost::shared_ptr<logical::entities::mapping::fixed_mappable>
+adapter::to_fixed_mappable(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
-    using logical::meta_model::mapping::fixed_mappable;
+    const injection::entities::element& ie) const {
+    using logical::entities::mapping::fixed_mappable;
     auto r(boost::make_shared<fixed_mappable>());
     populate_element(l, scr, ie, *r);
     return r;
 }
 
-boost::shared_ptr<logical::meta_model::mapping::extensible_mappable>
-adapter::to_extensible_mappable(const logical::meta_model::location& l,
+boost::shared_ptr<logical::entities::mapping::extensible_mappable>
+adapter::to_extensible_mappable(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
-    using logical::meta_model::mapping::extensible_mappable;
+    const injection::entities::element& ie) const {
+    using logical::entities::mapping::extensible_mappable;
     auto r(boost::make_shared<extensible_mappable>());
     populate_element(l, scr, ie, *r);
     return r;
 }
 
-boost::shared_ptr<logical::meta_model::templating::logic_less_template>
-adapter::to_logic_less_template(const logical::meta_model::location& l,
+boost::shared_ptr<logical::entities::templating::logic_less_template>
+adapter::to_logic_less_template(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
-    using logical::meta_model::templating::logic_less_template;
+    const injection::entities::element& ie) const {
+    using logical::entities::templating::logic_less_template;
     auto r(boost::make_shared<logic_less_template>());
     populate_element(l, scr, ie, *r);
     return r;
 }
 
-boost::shared_ptr<logical::meta_model::serialization::type_registrar>
-adapter::to_type_registrar(const logical::meta_model::location& l,
+boost::shared_ptr<logical::entities::serialization::type_registrar>
+adapter::to_type_registrar(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
-    using logical::meta_model::serialization::type_registrar;
+    const injection::entities::element& ie) const {
+    using logical::entities::serialization::type_registrar;
     auto r(boost::make_shared<type_registrar>());
     populate_element(l, scr, ie, *r);
     return r;
 }
 
-boost::shared_ptr<logical::meta_model::visual_studio::solution>
-adapter::to_visual_studio_solution(const logical::meta_model::location& l,
+boost::shared_ptr<logical::entities::visual_studio::solution>
+adapter::to_visual_studio_solution(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
-    using logical::meta_model::visual_studio::solution;
+    const injection::entities::element& ie) const {
+    using logical::entities::visual_studio::solution;
     auto r(boost::make_shared<solution>());
     populate_element(l, scr, ie, *r);
 
@@ -644,11 +644,11 @@ adapter::to_visual_studio_solution(const logical::meta_model::location& l,
     return r;
 }
 
-boost::shared_ptr<logical::meta_model::visual_studio::project>
-adapter::to_visual_studio_project(const logical::meta_model::location& l,
+boost::shared_ptr<logical::entities::visual_studio::project>
+adapter::to_visual_studio_project(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
-    using logical::meta_model::visual_studio::project;
+    const injection::entities::element& ie) const {
+    using logical::entities::visual_studio::project;
     auto r(boost::make_shared<project>());
     populate_element(l, scr, ie, *r);
 
@@ -669,31 +669,31 @@ adapter::to_visual_studio_project(const logical::meta_model::location& l,
     return r;
 }
 
-boost::shared_ptr<logical::meta_model::visual_studio::msbuild_targets>
-adapter::to_visual_studio_msbuild_targets(const logical::meta_model::location& l,
+boost::shared_ptr<logical::entities::visual_studio::msbuild_targets>
+adapter::to_visual_studio_msbuild_targets(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
-    using logical::meta_model::visual_studio::msbuild_targets;
+    const injection::entities::element& ie) const {
+    using logical::entities::visual_studio::msbuild_targets;
     auto r(boost::make_shared<msbuild_targets>());
     populate_element(l, scr, ie, *r);
     return r;
 }
 
-boost::shared_ptr<logical::meta_model::orm::common_odb_options>
-adapter::to_orm_common_odb_options(const logical::meta_model::location& l,
+boost::shared_ptr<logical::entities::orm::common_odb_options>
+adapter::to_orm_common_odb_options(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
-    using logical::meta_model::orm::common_odb_options;
+    const injection::entities::element& ie) const {
+    using logical::entities::orm::common_odb_options;
     auto r(boost::make_shared<common_odb_options>());
     populate_element(l, scr, ie, *r);
     return r;
 }
 
-boost::shared_ptr<logical::meta_model::build::cmakelists>
-adapter::to_build_cmakelists(const logical::meta_model::location& l,
+boost::shared_ptr<logical::entities::build::cmakelists>
+adapter::to_build_cmakelists(const logical::entities::location& l,
     const stereotypes_conversion_result& scr,
-    const injection::meta_model::element& ie) const {
-    using logical::meta_model::build::cmakelists;
+    const injection::entities::element& ie) const {
+    using logical::entities::build::cmakelists;
     auto r(boost::make_shared<cmakelists>());
     populate_element(l, scr, ie, *r);
     return r;

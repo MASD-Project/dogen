@@ -21,7 +21,7 @@
 #include <sstream>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.injection/io/meta_model/reference_graph_data_io.hpp"
+#include "dogen.injection/io/entities/reference_graph_data_io.hpp"
 #include "dogen.injection/types/helpers/reference_validation_error.hpp"
 #include "dogen.injection/types/helpers/references_validator.hpp"
 
@@ -129,7 +129,7 @@ void references_validator::dfs_visit(const std::string& vertex,
 }
 
 void references_validator::
-    validate(const meta_model::reference_graph_data& rgd) {
+    validate(const entities::reference_graph_data& rgd) {
     BOOST_LOG_SEV(lg, debug) << "Checking reference cycles for " << rgd.root();
     BOOST_LOG_SEV(lg, trace) << "Graph data: " << rgd;
 

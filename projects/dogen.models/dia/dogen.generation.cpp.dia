@@ -665,7 +665,7 @@
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const logical::meta_model::name&amp;#</dia:string>
+                <dia:string>#const logical::entities::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -730,7 +730,7 @@
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const logical::meta_model::name&amp;#</dia:string>
+                <dia:string>#const logical::entities::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -795,7 +795,7 @@
                 <dia:string>#e#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const logical::meta_model::element&amp;#</dia:string>
+                <dia:string>#const logical::entities::element&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -860,7 +860,7 @@
                 <dia:string>#e#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const logical::meta_model::element&amp;#</dia:string>
+                <dia:string>#const logical::entities::element&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -1054,7 +1054,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#logical::meta_model::technical_space#</dia:string>
+            <dia:string>#logical::entities::technical_space#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1084,7 +1084,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#extraction::meta_model::model#</dia:string>
+            <dia:string>#extraction::entities::model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -1144,7 +1144,7 @@
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#logical::meta_model::model#</dia:string>
+                <dia:string>#logical::entities::model#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6163,7 +6163,7 @@ for a given C++ entity.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const logical::meta_model::model&amp;#</dia:string>
+                <dia:string>#const logical::entities::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -7955,7 +7955,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#model_name#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const logical::meta_model::name&amp;#</dia:string>
+                <dia:string>#const logical::entities::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8037,7 +8037,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const logical::meta_model::name&amp;#</dia:string>
+                <dia:string>#const logical::entities::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8102,7 +8102,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const logical::meta_model::name&amp;#</dia:string>
+                <dia:string>#const logical::entities::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8167,7 +8167,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const logical::meta_model::name&amp;#</dia:string>
+                <dia:string>#const logical::entities::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8232,7 +8232,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const logical::meta_model::name&amp;#</dia:string>
+                <dia:string>#const logical::entities::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8297,7 +8297,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const logical::meta_model::name&amp;#</dia:string>
+                <dia:string>#const logical::entities::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8362,7 +8362,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const logical::meta_model::name&amp;#</dia:string>
+                <dia:string>#const logical::entities::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8652,7 +8652,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const logical::meta_model::name&amp;#</dia:string>
+                <dia:string>#const logical::entities::name&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8717,7 +8717,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#n#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::list&lt;logical::meta_model::name&gt;&amp;#</dia:string>
+                <dia:string>#const std::list&lt;logical::entities::name&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -8782,7 +8782,7 @@ main, or from another initialiser.#</dia:string>
                 <dia:string>#names#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::list&lt;logical::meta_model::name&gt;&amp;#</dia:string>
+                <dia:string>#const std::list&lt;logical::entities::name&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -13194,7 +13194,7 @@ and element.#</dia:string>
             <dia:string>#element#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;logical::meta_model::element&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;logical::entities::element&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -13759,7 +13759,7 @@ and element.#</dia:string>
                 <dia:string>#m#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const logical::meta_model::model&amp;#</dia:string>
+                <dia:string>#const logical::entities::model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -15994,7 +15994,7 @@ and element.#</dia:string>
             <dia:string>#name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#logical::meta_model::name#</dia:string>
+            <dia:string>#logical::entities::name#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -19611,7 +19611,7 @@ and element.#</dia:string>
                 <dia:string>#e#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const logical::meta_model::element&amp;#</dia:string>
+                <dia:string>#const logical::entities::element&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -19805,7 +19805,7 @@ and element.#</dia:string>
                 <dia:string>#e#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const logical::meta_model::element&amp;#</dia:string>
+                <dia:string>#const logical::entities::element&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

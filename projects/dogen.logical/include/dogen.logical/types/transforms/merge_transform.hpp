@@ -28,8 +28,8 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include "dogen.logical/types/meta_model/model.hpp"
-#include "dogen.logical/types/meta_model/model_set.hpp"
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/entities/model_set.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 
 namespace dogen::logical::transforms {
@@ -57,16 +57,16 @@ namespace dogen::logical::transforms {
  */
 class merge_transform final {
 private:
-    static void merge(const meta_model::model& src,
-        meta_model::model& dst);
+    static void merge(const entities::model& src,
+        entities::model& dst);
 
 private:
-    static meta_model::model merge(const meta_model::model& target,
-        const std::list<meta_model::model>& refs);
+    static entities::model merge(const entities::model& target,
+        const std::list<entities::model>& refs);
 
 public:
-    static meta_model::model apply(const context& ctx,
-        const logical::meta_model::model_set& ms);
+    static entities::model apply(const context& ctx,
+        const logical::entities::model_set& ms);
 };
 
 }

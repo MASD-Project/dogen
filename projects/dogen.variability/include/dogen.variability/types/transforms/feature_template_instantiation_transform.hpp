@@ -26,8 +26,8 @@
 #endif
 
 #include <list>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/feature_template_repository.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/feature_template_repository.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
 
 namespace dogen::variability::transforms {
@@ -37,9 +37,9 @@ namespace dogen::variability::transforms {
  */
 class feature_template_instantiation_transform final {
 public:
-    static std::list<meta_model::feature>
+    static std::list<entities::feature>
     apply(const context& ctx,
-        const meta_model::feature_template_repository& fts);
+        const entities::feature_template_repository& fts);
 };
 
 }

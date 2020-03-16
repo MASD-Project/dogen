@@ -24,8 +24,8 @@
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
-#include "dogen.injection/types/meta_model/model.hpp"
-#include "dogen.injection/io/meta_model/model_io.hpp"
+#include "dogen.injection/types/entities/model.hpp"
+#include "dogen.injection/io/entities/model_io.hpp"
 #include "dogen.injection.json/types/hydration_error.hpp"
 #include "dogen.injection.json/types/hydrator.hpp"
 #include "dogen.utility/types/test/exception_checkers.hpp"
@@ -102,12 +102,12 @@ const std::string empty_elements_model(R"({
 }
 )");
 
-dogen::injection::meta_model::model hydrate(std::istream& s) {
+dogen::injection::entities::model hydrate(std::istream& s) {
     dogen::injection::json::hydrator h;
     return h.hydrate(s);
 }
 
-dogen::injection::meta_model::model
+dogen::injection::entities::model
 hydrate(const std::string& content) {
     std::istringstream s(content);
     return hydrate(s);

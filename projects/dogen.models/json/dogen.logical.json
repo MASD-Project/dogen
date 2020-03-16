@@ -21,11 +21,11 @@
   },
   "elements": [
     {
-      "name": "meta_model",
+      "name": "entities",
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "meta_model::attribute",
+      "name": "entities::attribute",
       "documentation": "Represents an attribute in an object.\n",
       "stereotypes": [
         "Documentable",
@@ -72,7 +72,7 @@
       ]
     },
     {
-      "name": "meta_model::name_tree",
+      "name": "entities::name_tree",
       "documentation": "Adds support for name composition as a tree-like structure.\n\nA name tree has the responsibility of representing an instantiation of a generic\ntype with all of its type parameters, which themselves can also be generic types\nand so on. It may also represent the simpler case of a non-generic type, in which\ncase only the parent name is populated and there are no children.\n",
       "stereotypes": [
         "Qualifiable"
@@ -112,7 +112,7 @@
       ]
     },
     {
-      "name": "meta_model::Nameable",
+      "name": "entities::Nameable",
       "documentation": "Ability to have a name.\n",
       "stereotypes": [
         "masd::object_template"
@@ -127,7 +127,7 @@
       ]
     },
     {
-      "name": "meta_model::Documentable",
+      "name": "entities::Documentable",
       "documentation": "Ability to provide documentation.\n",
       "stereotypes": [
         "masd::object_template"
@@ -142,7 +142,7 @@
       ]
     },
     {
-      "name": "meta_model::DeterminableOrigin",
+      "name": "entities::DeterminableOrigin",
       "documentation": "A unit of assets that can be code generated.\n",
       "stereotypes": [
         "masd::object_template"
@@ -167,7 +167,7 @@
       ]
     },
     {
-      "name": "meta_model::Containable",
+      "name": "entities::Containable",
       "documentation": "The ability to be contained inside a module.\n",
       "stereotypes": [
         "masd::object_template"
@@ -187,7 +187,7 @@
       ]
     },
     {
-      "name": "meta_model::Stereotypable",
+      "name": "entities::Stereotypable",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -206,7 +206,7 @@
       ]
     },
     {
-      "name": "meta_model::MetaNameable",
+      "name": "entities::MetaNameable",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -220,7 +220,7 @@
       ]
     },
     {
-      "name": "meta_model::TechnicalSpaceRelationship",
+      "name": "entities::TechnicalSpaceRelationship",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -234,7 +234,7 @@
       ]
     },
     {
-      "name": "meta_model::Configurable",
+      "name": "entities::Configurable",
       "documentation": "Ability to have meta-data associated.\n",
       "stereotypes": [
         "masd::object_template"
@@ -243,22 +243,22 @@
       "attributes": [
         {
           "name": "configuration",
-          "type": "boost::shared_ptr<variability::meta_model::configuration>",
+          "type": "boost::shared_ptr<variability::entities::configuration>",
           "documentation": "Configuration for this element.\n"
         }
       ]
     },
     {
-      "name": "meta_model::Element",
+      "name": "entities::Element",
       "parents": [
-        "meta_model::Nameable",
-        "meta_model::Documentable",
-        "meta_model::DeterminableOrigin",
-        "meta_model::Containable",
-        "meta_model::Stereotypable",
-        "meta_model::MetaNameable",
-        "meta_model::TechnicalSpaceRelationship",
-        "meta_model::Configurable"
+        "entities::Nameable",
+        "entities::Documentable",
+        "entities::DeterminableOrigin",
+        "entities::Containable",
+        "entities::Stereotypable",
+        "entities::MetaNameable",
+        "entities::TechnicalSpaceRelationship",
+        "entities::Configurable"
       ],
       "documentation": "A unit of coding that can be code generated.\n\nWe define the Element object template purely to make our life easier\nwhen creating the element class. It is not required for any other\npurpose.\n",
       "stereotypes": [
@@ -267,7 +267,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::name",
+      "name": "entities::name",
       "documentation": "Name of an element in asset space.\n\nA name represents a point in asset space, and this point can only be\nused by one asset element. Names can be uniquely identified by their\nqualified ID.\n\nName has the following properties: a) two different points in element space\ncannot have the same name and b) the same point in element space can only\nhave one and only one name.\n\nNames are required in addition to just using the qualfied ID representation\nbecause we use them to infer all sorts of properties for an element (namespaces,\nnaming files, etc).\n",
       "stereotypes": [
         "dogen::hashable",
@@ -288,7 +288,7 @@
       ]
     },
     {
-      "name": "meta_model::origin_types",
+      "name": "entities::origin_types",
       "documentation": "What originated the model element.\n",
       "stereotypes": [
         "masd::enumeration"
@@ -318,7 +318,7 @@
       ]
     },
     {
-      "name": "meta_model::Stateful",
+      "name": "entities::Stateful",
       "documentation": "Ability to have a state.\n",
       "stereotypes": [
         "masd::object_template"
@@ -353,7 +353,7 @@
       ]
     },
     {
-      "name": "meta_model::location",
+      "name": "entities::location",
       "documentation": "Identifies a hierarchy of containment within the asset space.\n\nElements exist at unique points within the asset space called @e\naddresses.  However, certain elements have the ability to contain\nother elements, creating in effect new dimensions in assets space. The\nlocation class keeps track of these dimensions. Note that the\nattributes of this class are hierarchical, i.e.  external modules\ncontain model modules and so forth. These attributes are best thought\nof as a single linked list, where segments of that linked list have\ndifferent meaning. However, because we care about these meanings, we\nimplemented the type with a number of linked lists, one per meaning.\n\nA location is not necessarily connected to modules, although these are\nthe main model elements that provide containment. For example, inner\nclasses are contained within classes; in assets terms it means a\nlocation should also have an \"object\" attribute to represent this\nrelationship.\n\nAlso, note that the location class itself encodes the address of the\nelement that owns that location; returning to the linked list idea,\nthe tail of the linked list is the name of the element, and the\nremaining linked list provides the location of the element.\n",
       "stereotypes": [
         "dogen::hashable"
@@ -383,7 +383,7 @@
       ]
     },
     {
-      "name": "meta_model::element",
+      "name": "entities::element",
       "documentation": "Represents a generic assets construct.\n\nAn element is anything of interest in a problem domain which needs to be\nexpressed in code generation. It covers both types (objects, enumerations, etc),\nmeta-types (object templates) and non-types (modules and backend specific entities).\n",
       "stereotypes": [
         "masd::visitable",
@@ -407,7 +407,7 @@
       ]
     },
     {
-      "name": "meta_model::model",
+      "name": "entities::model",
       "documentation": "Intermediate representation of a masd model.\n",
       "stereotypes": [
         "Nameable",
@@ -493,21 +493,21 @@
       ]
     },
     {
-      "name": "meta_model::elements_traversal",
+      "name": "entities::elements_traversal",
       "stereotypes": [
         "dogen::handcrafted::typeable::header_only"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::TraversalVisitor",
+      "name": "entities::TraversalVisitor",
       "stereotypes": [
         "masd::object_template"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::Visitable",
+      "name": "entities::Visitable",
       "documentation": "The ability to handle visitation.\n",
       "stereotypes": [
         "masd::object_template"
@@ -535,7 +535,7 @@
       ]
     },
     {
-      "name": "meta_model::Associatable",
+      "name": "entities::Associatable",
       "documentation": "The element has the ability to associate itself with other elements.\n",
       "stereotypes": [
         "masd::object_template"
@@ -560,7 +560,7 @@
       ]
     },
     {
-      "name": "meta_model::Generalizable",
+      "name": "entities::Generalizable",
       "documentation": "The element has the ability to be part of a generalization relationship.\n",
       "stereotypes": [
         "masd::object_template"
@@ -624,12 +624,12 @@
       ]
     },
     {
-      "name": "meta_model::Relatable",
+      "name": "entities::Relatable",
       "parents": [
-        "meta_model::Containable",
-        "meta_model::Visitable",
-        "meta_model::Associatable",
-        "meta_model::Generalizable"
+        "entities::Containable",
+        "entities::Visitable",
+        "entities::Associatable",
+        "entities::Generalizable"
       ],
       "documentation": "Element has the ability to have relationships with other elements.\n",
       "stereotypes": [
@@ -638,7 +638,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::Parameterisable",
+      "name": "entities::Parameterisable",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -651,7 +651,7 @@
       ]
     },
     {
-      "name": "meta_model::type_parameters",
+      "name": "entities::type_parameters",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -676,7 +676,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::technical_space",
+      "name": "entities::technical_space",
       "documentation": "Models need to declare upfront the technical space they will target.\n",
       "stereotypes": [
         "masd::enumeration",
@@ -725,7 +725,7 @@
       ]
     },
     {
-      "name": "meta_model::artefact_properties",
+      "name": "entities::artefact_properties",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -751,7 +751,7 @@
       ]
     },
     {
-      "name": "meta_model::formatting_styles",
+      "name": "entities::formatting_styles",
       "stereotypes": [
         "masd::enumeration"
       ],
@@ -797,7 +797,7 @@
         },
         {
           "name": "feature_model",
-          "type": "boost::shared_ptr<variability::meta_model::feature_model>"
+          "type": "boost::shared_ptr<variability::entities::feature_model>"
         },
         {
           "name": "archetype_location_repository",
@@ -976,15 +976,15 @@
       "attributes": [
         {
           "name": "names",
-          "type": "std::list<std::pair<std::string, meta_model::name>>"
+          "type": "std::list<std::pair<std::string, entities::name>>"
         },
         {
           "name": "meta_names",
-          "type": "std::list<std::pair<std::string, meta_model::name>>"
+          "type": "std::list<std::pair<std::string, entities::name>>"
         },
         {
           "name": "name_trees",
-          "type": "std::list<std::pair<std::string, meta_model::name_tree>>"
+          "type": "std::list<std::pair<std::string, entities::name_tree>>"
         }
       ]
     },
@@ -1094,7 +1094,7 @@
       "attributes": [
         {
           "name": "translations",
-          "type": "std::unordered_map<std::string, meta_model::name>"
+          "type": "std::unordered_map<std::string, entities::name>"
         },
         {
           "name": "erasures",
@@ -1102,7 +1102,7 @@
         },
         {
           "name": "injections",
-          "type": "std::unordered_map<std::string, meta_model::name>"
+          "type": "std::unordered_map<std::string, entities::name>"
         }
       ]
     },
@@ -1117,11 +1117,11 @@
         },
         {
           "name": "by_agnostic_id",
-          "type": "std::unordered_map<meta_model::technical_space, std::unordered_map<std::string, meta_model::name>>"
+          "type": "std::unordered_map<entities::technical_space, std::unordered_map<std::string, entities::name>>"
         },
         {
           "name": "erasures_by_technical_space",
-          "type": "std::unordered_map<meta_model::technical_space, std::unordered_set<std::string>>"
+          "type": "std::unordered_map<entities::technical_space, std::unordered_set<std::string>>"
         }
       ]
     },
@@ -1159,7 +1159,7 @@
         },
         {
           "name": "by_technical_space",
-          "type": "std::unordered_map<meta_model::technical_space, mapping_value>",
+          "type": "std::unordered_map<entities::technical_space, mapping_value>",
           "documentation": "Values of the mapping, by technical space.\n"
         }
       ]
@@ -1175,7 +1175,7 @@
         },
         {
           "name": "default_name",
-          "type": "boost::optional<meta_model::name>"
+          "type": "boost::optional<entities::name>"
         }
       ]
     },
@@ -1258,7 +1258,7 @@
         },
         {
           "name": "data",
-          "type": "meta_model::name",
+          "type": "entities::name",
           "documentation": "Current node.\n"
         },
         {
@@ -1296,7 +1296,7 @@
         },
         {
           "name": "model_location_",
-          "type": "meta_model::location"
+          "type": "entities::location"
         },
         {
           "name": "names",
@@ -1371,7 +1371,7 @@
       "attributes": [
         {
           "name": "name_",
-          "type": "meta_model::name"
+          "type": "entities::name"
         }
       ]
     },
@@ -1405,12 +1405,12 @@
       "attributes": [
         {
           "name": "location_",
-          "type": "meta_model::location"
+          "type": "entities::location"
         }
       ]
     },
     {
-      "name": "meta_model::local_archetype_location_properties",
+      "name": "entities::local_archetype_location_properties",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -1432,7 +1432,7 @@
       ]
     },
     {
-      "name": "meta_model::static_stereotypes",
+      "name": "entities::static_stereotypes",
       "documentation": "Lists all stereotypes defined in the masd UML profile.\n",
       "stereotypes": [
         "masd::enumeration"
@@ -1570,7 +1570,7 @@
       ]
     },
     {
-      "name": "meta_model::extraction_properties",
+      "name": "entities::extraction_properties",
       "documentation": "Properties related to extraction.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1597,7 +1597,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::model_set",
+      "name": "entities::model_set",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -1623,7 +1623,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::fully_qualified_representation",
+      "name": "entities::fully_qualified_representation",
       "documentation": "Fully qualified representation for a assets identifier such as a name or name tree.\n",
       "stereotypes": [
         "dogen::hashable"
@@ -1648,7 +1648,7 @@
       ]
     },
     {
-      "name": "meta_model::Qualifiable",
+      "name": "entities::Qualifiable",
       "documentation": "The model entity can have a qualified representation.\n",
       "stereotypes": [
         "masd::object_template"
@@ -1669,7 +1669,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::Container",
+      "name": "entities::Container",
       "documentation": "Has the ability to contain other elements.\n",
       "stereotypes": [
         "masd::object_template"
@@ -1690,7 +1690,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::decoration",
+      "name": "entities::decoration",
       "documentation": "Houses all of the meta-modeling elements and\nproperties related to decorations.\n",
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -1698,7 +1698,7 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "meta_model::decoration::licence",
+      "name": "entities::decoration::licence",
       "documentation": "Represents legal licence for software projects.\n",
       "stereotypes": [
         "logical::meta_element"
@@ -1718,7 +1718,7 @@
       ]
     },
     {
-      "name": "meta_model::meta_element",
+      "name": "entities::meta_element",
       "stereotypes": [
         "masd::variability::profile"
       ],
@@ -1731,12 +1731,12 @@
         {
           "name": "masd.generalization.parent",
           "type": "",
-          "value": "dogen::logical::meta_model::element"
+          "value": "dogen::logical::entities::element"
         }
       ]
     },
     {
-      "name": "meta_model::decoration::modeline_group",
+      "name": "entities::decoration::modeline_group",
       "documentation": "Group of modelines, logically associated.\n\nFor example, one may choose to have a set of modelines for @e emacs , or for\n@e vi, etc.\n",
       "stereotypes": [
         "logical::meta_element",
@@ -1752,7 +1752,7 @@
       ]
     },
     {
-      "name": "meta_model::decoration::modeline",
+      "name": "entities::decoration::modeline",
       "documentation": "Groups all the fields representing editor variables for emacs, vi, etc.\n\nA field is a key-value pair (KVP), where name is the first element and its value\nthe second.\n\nExample: -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-\n\nIn this particular case, both prefix and postfix are @e -*-; @e mode is the first\nfield name and its value is @e c++; the KVP separator is @e : and the field\nseparator is @e ;.\n",
       "stereotypes": [
         "logical::meta_element"
@@ -1782,7 +1782,7 @@
       ]
     },
     {
-      "name": "meta_model::decoration::editor",
+      "name": "entities::decoration::editor",
       "documentation": "Supported editors for modelines.\n",
       "stereotypes": [
         "masd::enumeration",
@@ -1813,7 +1813,7 @@
       ]
     },
     {
-      "name": "meta_model::decoration::modeline_field",
+      "name": "entities::decoration::modeline_field",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -1829,7 +1829,7 @@
       ]
     },
     {
-      "name": "meta_model::decoration::modeline_location",
+      "name": "entities::decoration::modeline_location",
       "documentation": "Location in the file to place the modeline.\n",
       "stereotypes": [
         "masd::enumeration",
@@ -1850,7 +1850,7 @@
       ]
     },
     {
-      "name": "meta_model::decoration::generation_marker",
+      "name": "entities::decoration::generation_marker",
       "documentation": "Properties of the \"generation marker\" to add to generated files.\n\nThese are also known as \"location strings\".\n",
       "stereotypes": [
         "logical::meta_element"
@@ -1890,7 +1890,7 @@
       ]
     },
     {
-      "name": "meta_model::variability",
+      "name": "entities::variability",
       "documentation": "Houses all of the meta-modeling elements related to variability.\n\nThere are two \"kinds\" of entities in this namespace:\n\n@li those that are used to model the data required to code-generate\ndogen's implementation of variability. That is to say, none of these\nelements are directly involved in the processing of variability model\ndata (i.e. the current user model we are processing), but instead they\ngenerate code that injects variability data once compiled and\nintegrated into dogen. These types setup the geometry of variability\nspace: feature bundle and feature bundle templates and related\ntypes.\n\n@li those that inject variability data as part of the processing of\nthe current user model. These types are responsible for instantiating\nconfigurations, within the prevailing geometry of variability\nspace. Example: profile and profile templates.\n\nNow, it is a bit confusing how variability interacts with the\nvariability meta-model elements, and it may appear that we repat\nourselves quite a bit when declaring the variability feature\nbundles. This is a consequence of the two types of uses for\nvariability types described above. Lets explore this in more detail.\n\nIn general, we tend to declare (register) features and create the\nstatic configuration in the same place. This works for almost all\ncases because we normally declare the features where we consume\nthem. Profiles are _different_: a profile is making use of a feature\ndeclared for a feature (simplifying somewhat). That is, at run time, a\nprofile is the instantiation of a feature defined elsewhere. Remember\nthat features are nothing more than a type system designed to give a\n\"strongly typed\" feel to the meta-data. Profiles are just an\ninstantiation of those strong types.\n\nIn theory, profile meta-data should already exist and match exactly\nwhat was defined for features; in practice there is a mismatch, and\nthis is due to how we modeled features and feature bundles: to avoid\nrepetition, we placed some features at the top-level and others in the\nfeatures themselves. This approach does not match the shape required\nfor profiles, so we need to redefine the bundle. However, of course,\nwe do not want to register the features this time around (after all,\nthey already exist) so we need to disable feature registration. In the\nfuture we hope to simplify this by making the shapes align - though\nperhaps it will have the underisable side-effect of hiding all of this\ncomplexity.\n",
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -1898,7 +1898,7 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "meta_model::variability::abstract_feature",
+      "name": "entities::variability::abstract_feature",
       "documentation": "Contains all of the common attributes between features and feature templates.\n",
       "stereotypes": [
         "Documentable",
@@ -1944,12 +1944,12 @@
         },
         {
           "name": "value_type",
-          "type": "variability::meta_model::value_type",
+          "type": "variability::entities::value_type",
           "documentation": "Type of the value pointed to by the feature.\n\nBy implication, this also determines the type of the default value.\n"
         },
         {
           "name": "binding_point",
-          "type": "boost::optional<variability::meta_model::binding_point>",
+          "type": "boost::optional<variability::entities::binding_point>",
           "documentation": "Override binding point for this feature.\n\nIf the default binding point is supplied for a bundle, the features cannot\nsupply individual binding points. Conversely, if not supplied, they must supply\ntheir individual binding points.\n"
         },
         {
@@ -1965,9 +1965,9 @@
       ]
     },
     {
-      "name": "meta_model::variability::feature_template",
+      "name": "entities::variability::feature_template",
       "parents": [
-        "meta_model::variability::abstract_feature"
+        "entities::variability::abstract_feature"
       ],
       "documentation": "Represents a feature template in variability space.\n\nFeature templates are expanded into features within the variability model.\n",
       "fallback_element_type": "masd::object",
@@ -1979,7 +1979,7 @@
       ]
     },
     {
-      "name": "meta_model::variability::initializer",
+      "name": "entities::variability::initializer",
       "documentation": "Responsible for initialising features and feature templates.\n",
       "stereotypes": [
         "logical::meta_element"
@@ -1999,7 +1999,7 @@
       ]
     },
     {
-      "name": "meta_model::orm",
+      "name": "entities::orm",
       "documentation": "Houses all of the properties related to ORM\nsupport in Dogen.\n",
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -2007,7 +2007,7 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "meta_model::orm::model_properties",
+      "name": "entities::orm::model_properties",
       "stereotypes": [
         "Schemable",
         "Caseable"
@@ -2021,7 +2021,7 @@
       ]
     },
     {
-      "name": "meta_model::orm::database_system",
+      "name": "entities::orm::database_system",
       "stereotypes": [
         "masd::enumeration",
         "dogen::hashable",
@@ -2052,7 +2052,7 @@
       ]
     },
     {
-      "name": "meta_model::orm::letter_case",
+      "name": "entities::orm::letter_case",
       "stereotypes": [
         "masd::enumeration",
         "dogen::convertible"
@@ -2070,7 +2070,7 @@
       ]
     },
     {
-      "name": "meta_model::orm::object_properties",
+      "name": "entities::orm::object_properties",
       "stereotypes": [
         "OrmElement"
       ],
@@ -2094,7 +2094,7 @@
       ]
     },
     {
-      "name": "meta_model::orm::primitive_properties",
+      "name": "entities::orm::primitive_properties",
       "stereotypes": [
         "OrmElement",
         "Overridable"
@@ -2102,7 +2102,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::orm::module_properties",
+      "name": "entities::orm::module_properties",
       "stereotypes": [
         "Schemable",
         "Caseable"
@@ -2110,7 +2110,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::orm::attribute_properties",
+      "name": "entities::orm::attribute_properties",
       "stereotypes": [
         "Overridable",
         "OdbPragmable"
@@ -2140,7 +2140,7 @@
       ]
     },
     {
-      "name": "meta_model::decoration::element_properties",
+      "name": "entities::decoration::element_properties",
       "documentation": "Decoration for this element.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -2157,7 +2157,7 @@
       ]
     },
     {
-      "name": "meta_model::structural",
+      "name": "entities::structural",
       "documentation": "Houses all of the meta-modeling elements related\nto structural modeling.\n",
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -2165,7 +2165,7 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "meta_model::structural::object_template",
+      "name": "entities::structural::object_template",
       "documentation": "Represents a structural template for masd objects.\n",
       "stereotypes": [
         "logical::meta_element",
@@ -2186,7 +2186,7 @@
       ]
     },
     {
-      "name": "meta_model::structural::object",
+      "name": "entities::structural::object",
       "documentation": "Representation of the class notion in the OOP paradigm.\n\nThe @e object is equivalent to a meta-class, but we decided against this\nname because all elements should also have the prefix meta - after all, assets\nis ameta-model. Since the word class cannot be used in c++ to name types, we\ndecided instead to use the word object.\n",
       "stereotypes": [
         "logical::meta_element",
@@ -2218,12 +2218,12 @@
         },
         {
           "name": "orm_properties",
-          "type": "boost::optional<dogen::logical::meta_model::orm::object_properties>"
+          "type": "boost::optional<dogen::logical::entities::orm::object_properties>"
         }
       ]
     },
     {
-      "name": "meta_model::structural::builtin",
+      "name": "entities::structural::builtin",
       "documentation": "Represents a value type that is built-in at the hardware level.\n",
       "stereotypes": [
         "logical::meta_element"
@@ -2253,7 +2253,7 @@
       ]
     },
     {
-      "name": "meta_model::structural::exception",
+      "name": "entities::structural::exception",
       "documentation": "Represents an exception which can be thrown.\n",
       "stereotypes": [
         "logical::meta_element"
@@ -2261,7 +2261,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::structural::visitor",
+      "name": "entities::structural::visitor",
       "stereotypes": [
         "logical::meta_element"
       ],
@@ -2279,7 +2279,7 @@
       ]
     },
     {
-      "name": "meta_model::structural::primitive",
+      "name": "entities::structural::primitive",
       "documentation": "Defines an element created by the user to wrap another element, most likely a built-in.\n",
       "stereotypes": [
         "logical::meta_element"
@@ -2308,12 +2308,12 @@
         },
         {
           "name": "orm_properties",
-          "type": "boost::optional<dogen::logical::meta_model::orm::primitive_properties>"
+          "type": "boost::optional<dogen::logical::entities::orm::primitive_properties>"
         }
       ]
     },
     {
-      "name": "meta_model::structural::module",
+      "name": "entities::structural::module",
       "documentation": "Container for other assets elements.\n\nAggregates a group of logically related elements into a unit.\n",
       "stereotypes": [
         "logical::meta_element",
@@ -2333,12 +2333,12 @@
         },
         {
           "name": "orm_properties",
-          "type": "boost::optional<dogen::logical::meta_model::orm::module_properties>"
+          "type": "boost::optional<dogen::logical::entities::orm::module_properties>"
         }
       ]
     },
     {
-      "name": "meta_model::structural::enumeration",
+      "name": "entities::structural::enumeration",
       "documentation": "Defines a bounded set of logically related values for a built-in type\nor a string.\n",
       "stereotypes": [
         "logical::meta_element"
@@ -2373,7 +2373,7 @@
       ]
     },
     {
-      "name": "meta_model::structural::enumerator",
+      "name": "entities::structural::enumerator",
       "documentation": "One of a set of valid values that an enumeration can assume.\n\nThe enumerator defines an element in the domain of the enumeration.\n",
       "stereotypes": [
         "Documentable",
@@ -2391,7 +2391,7 @@
       ]
     },
     {
-      "name": "meta_model::decoration::element_repository",
+      "name": "entities::decoration::element_repository",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2413,7 +2413,7 @@
       ]
     },
     {
-      "name": "meta_model::variability::element_repository",
+      "name": "entities::variability::element_repository",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2439,7 +2439,7 @@
       ]
     },
     {
-      "name": "meta_model::structural::element_repository",
+      "name": "entities::structural::element_repository",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2902,7 +2902,7 @@
       ]
     },
     {
-      "name": "meta_model::mapping",
+      "name": "entities::mapping",
       "documentation": "Meta-model elements related to mapping domains.\n",
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -2910,7 +2910,7 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "meta_model::mapping::extensible_mappable",
+      "name": "entities::mapping::extensible_mappable",
       "documentation": "A mappable meta-model element for the general purpose of mapping.\n\nMappables can be used to create a Platform Independent Model (PIM), which is then\nmapped to concrete types to form a Platform Specific Model (PSM). Users can\nextend the mappings as required.\n",
       "stereotypes": [
         "logical::meta_element"
@@ -2925,7 +2925,7 @@
       ]
     },
     {
-      "name": "meta_model::mapping::element_repository",
+      "name": "entities::mapping::element_repository",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2939,7 +2939,7 @@
       ]
     },
     {
-      "name": "meta_model::mapping::destination",
+      "name": "entities::mapping::destination",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -2983,7 +2983,7 @@
       ]
     },
     {
-      "name": "meta_model::mapping::fixed_mappable",
+      "name": "entities::mapping::fixed_mappable",
       "documentation": "A mappable meta-model element for a special purpose.\n\nAt present, the only fixed mappables used by Dogen are related to the mapping of\nvariability types.\n",
       "stereotypes": [
         "logical::meta_element"
@@ -2997,7 +2997,7 @@
       ]
     },
     {
-      "name": "meta_model::templating",
+      "name": "entities::templating",
       "documentation": "Meta-model elements related to templating .\n",
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -3005,7 +3005,7 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "meta_model::templating::logic_less_template",
+      "name": "entities::templating::logic_less_template",
       "documentation": "Represents a logic-less template.\n\nAt present the system only supports wale templates.\n",
       "stereotypes": [
         "logical::meta_element"
@@ -3013,7 +3013,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::templating::element_repository",
+      "name": "entities::templating::element_repository",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -3088,7 +3088,7 @@
       ]
     },
     {
-      "name": "meta_model::serialization",
+      "name": "entities::serialization",
       "documentation": "Houses all of the meta-modeling elements related\nto serialisation.\n",
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -3096,7 +3096,7 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "meta_model::serialization::type_registrar",
+      "name": "entities::serialization::type_registrar",
       "documentation": "Responsible for registering types for serialisation purposes.\n\nCertain libraries in certain technical spaces - such as Boost Serialisation, in C++ -\nrequire types that are in an inheritance relationship to be made known to the\nserialisation infrastructure in order for the deserialisation of base and derived\ntypes to work. The type registrar is aware of all types with such requirements and\ngenerates the registration code as needed.\n",
       "stereotypes": [
         "logical::meta_element"
@@ -3105,12 +3105,12 @@
       "attributes": [
         {
           "name": "leaves",
-          "type": "std::list<logical::meta_model::name>",
+          "type": "std::list<logical::entities::name>",
           "documentation": "List of all concrete classes which are part of an inheritance tree.\n"
         },
         {
           "name": "registrar_dependencies",
-          "type": "std::list<logical::meta_model::name>",
+          "type": "std::list<logical::entities::name>",
           "documentation": "Registrars on other models this registrar depends on.\n"
         }
       ]
@@ -3123,7 +3123,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::serialization::element_repository",
+      "name": "entities::serialization::element_repository",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -3133,7 +3133,7 @@
       ]
     },
     {
-      "name": "meta_model::orm::Schemable",
+      "name": "entities::orm::Schemable",
       "documentation": "Model element can belong to a relational database schema.\n",
       "stereotypes": [
         "masd::object_template"
@@ -3153,7 +3153,7 @@
       ]
     },
     {
-      "name": "meta_model::orm::Caseable",
+      "name": "entities::orm::Caseable",
       "documentation": "The model element supports configuration related to casing.\n",
       "stereotypes": [
         "masd::object_template"
@@ -3168,7 +3168,7 @@
       ]
     },
     {
-      "name": "meta_model::orm::Mappeable",
+      "name": "entities::orm::Mappeable",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -3182,7 +3182,7 @@
       ]
     },
     {
-      "name": "meta_model::orm::TypeMappable",
+      "name": "entities::orm::TypeMappable",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -3196,7 +3196,7 @@
       ]
     },
     {
-      "name": "meta_model::orm::OdbPragmable",
+      "name": "entities::orm::OdbPragmable",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -3210,13 +3210,13 @@
       ]
     },
     {
-      "name": "meta_model::orm::OrmElement",
+      "name": "entities::orm::OrmElement",
       "parents": [
-        "meta_model::orm::Schemable",
-        "meta_model::orm::Caseable",
-        "meta_model::orm::Mappeable",
-        "meta_model::orm::TypeMappable",
-        "meta_model::orm::OdbPragmable"
+        "entities::orm::Schemable",
+        "entities::orm::Caseable",
+        "entities::orm::Mappeable",
+        "entities::orm::TypeMappable",
+        "entities::orm::OdbPragmable"
       ],
       "stereotypes": [
         "masd::object_template"
@@ -3230,7 +3230,7 @@
       ]
     },
     {
-      "name": "meta_model::orm::Overridable",
+      "name": "entities::orm::Overridable",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -3244,7 +3244,7 @@
       ]
     },
     {
-      "name": "meta_model::orm::type_mapping",
+      "name": "entities::orm::type_mapping",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -3282,7 +3282,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::visual_studio",
+      "name": "entities::visual_studio",
       "documentation": "Houses meta-model elements related to\nbuild systems.\n",
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -3290,7 +3290,7 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "meta_model::visual_studio::project",
+      "name": "entities::visual_studio::project",
       "documentation": "Represents a Visual Studio project.\n",
       "stereotypes": [
         "logical::meta_element",
@@ -3316,7 +3316,7 @@
       ]
     },
     {
-      "name": "meta_model::visual_studio::element_repository",
+      "name": "entities::visual_studio::element_repository",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -3336,7 +3336,7 @@
       ]
     },
     {
-      "name": "meta_model::visual_studio::item_group",
+      "name": "entities::visual_studio::item_group",
       "documentation": "Represents an MSBuild ItemGroup.\n\nDocumented as follows: Contains a set of user-defined Item elements. Every item\nused in a MSBuild project must be specified as a child of an ItemGroup element.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3348,7 +3348,7 @@
       ]
     },
     {
-      "name": "meta_model::visual_studio::item",
+      "name": "entities::visual_studio::item",
       "documentation": "Represents an MSBuild Item, used in Visual Studio projects.\n\nDocumentation:  Contains a user-defined item and its metadata. Every item that is\nused in a MSBuild project must be specified as a child of an ItemGroup element.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3365,7 +3365,7 @@
       ]
     },
     {
-      "name": "meta_model::visual_studio::solution",
+      "name": "entities::visual_studio::solution",
       "stereotypes": [
         "logical::meta_element",
         "UniquelyIdentifiable"
@@ -3380,7 +3380,7 @@
       ]
     },
     {
-      "name": "meta_model::visual_studio::project_persistence_block",
+      "name": "entities::visual_studio::project_persistence_block",
       "stereotypes": [
         "UniquelyIdentifiable"
       ],
@@ -3404,7 +3404,7 @@
       ]
     },
     {
-      "name": "meta_model::visual_studio::UniquelyIdentifiable",
+      "name": "entities::visual_studio::UniquelyIdentifiable",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -3439,7 +3439,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::structural::entry_point",
+      "name": "entities::structural::entry_point",
       "documentation": "Represents an entry point to a binary.\n",
       "stereotypes": [
         "logical::meta_element"
@@ -3447,7 +3447,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::orm::odb_options",
+      "name": "entities::orm::odb_options",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -3473,7 +3473,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::orm::common_odb_options",
+      "name": "entities::orm::common_odb_options",
       "stereotypes": [
         "logical::meta_element"
       ],
@@ -3490,7 +3490,7 @@
       ]
     },
     {
-      "name": "meta_model::orm::element_repository",
+      "name": "entities::orm::element_repository",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -3507,7 +3507,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::orm::odb_targets",
+      "name": "entities::orm::odb_targets",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -3525,7 +3525,7 @@
       ]
     },
     {
-      "name": "meta_model::orm::odb_target",
+      "name": "entities::orm::odb_target",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -3555,7 +3555,7 @@
       ]
     },
     {
-      "name": "meta_model::visual_studio::msbuild_targets",
+      "name": "entities::visual_studio::msbuild_targets",
       "stereotypes": [
         "logical::meta_element"
       ],
@@ -3563,12 +3563,12 @@
       "attributes": [
         {
           "name": "odb_targets",
-          "type": "dogen::logical::meta_model::orm::odb_targets"
+          "type": "dogen::logical::entities::orm::odb_targets"
         }
       ]
     },
     {
-      "name": "meta_model::build",
+      "name": "entities::build",
       "documentation": "Houses all of the meta-modeling elements related\nto building, which don't have their own containing\nnamespace.\n",
       "tagged_values": {
         "masd.injection.dia.comment": "true"
@@ -3576,7 +3576,7 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "meta_model::build::element_repository",
+      "name": "entities::build::element_repository",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -3586,7 +3586,7 @@
       ]
     },
     {
-      "name": "meta_model::build::cmakelists",
+      "name": "entities::build::cmakelists",
       "documentation": "Represents build CMakeLists files.\n",
       "stereotypes": [
         "logical::meta_element"
@@ -3611,7 +3611,7 @@
         },
         {
           "name": "odb_targets",
-          "type": "dogen::logical::meta_model::orm::odb_targets"
+          "type": "dogen::logical::entities::orm::odb_targets"
         },
         {
           "name": "tests_directory_name",
@@ -3620,7 +3620,7 @@
       ]
     },
     {
-      "name": "meta_model::structural::assistant",
+      "name": "entities::structural::assistant",
       "documentation": "General type to provide helpers.\n",
       "stereotypes": [
         "logical::meta_element"
@@ -3636,7 +3636,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::variability::abstract_bundle",
+      "name": "entities::variability::abstract_bundle",
       "documentation": "A feature template bundle represents an aggregation of feature templates in a\nmodel.\n\nThe feature templates should be \"semantically related\", that is, belong to a related\ntopic. A feature template bundle is used by code generation to generate\ninfrastructural code to ease the creation and subsequent processing of features.\n\nGenerated code comprises of two aspects:\n\n@li the registration of the feature template for the dynamic part of the processing;\n@li the generation of a static configuration class to  represent the feature once\n read out from the dynamic configuration - if requested.\n",
       "stereotypes": [
         "logical::meta_element",
@@ -3666,15 +3666,15 @@
         },
         {
           "name": "default_binding_point",
-          "type": "boost::optional<variability::meta_model::binding_point>",
+          "type": "boost::optional<variability::entities::binding_point>",
           "documentation": "Default binding point for all feature templates in this bundle.\n\nThe binding point indicates where the feature will bind when instantiated in a\nmodel. If the default binding point is supplied for a bundle, the templates cannot\nsupply individual binding points. Conversely, if not supplied, they must supply\ntheir individual binding points.\n"
         }
       ]
     },
     {
-      "name": "meta_model::variability::feature_bundle",
+      "name": "entities::variability::feature_bundle",
       "parents": [
-        "meta_model::variability::abstract_bundle"
+        "entities::variability::abstract_bundle"
       ],
       "documentation": "A feature bundle represents an aggregation of features in a model.\n\nThe features should be \"semantically related\", that is, belong to a related\ntopic. A feature bundle is used by code generation to generate infrastructural code\nto ease the creation and subsequent processing of features.\n\nGenerated code comprises of two aspects:\n\n@li the registration of the feature for the dynamic part of the processing;\n@li the generation of a static configuration class to  represent the feature once\n read out from the dynamic configuration.\n\nBoth of these aspects are optional, but at least one must be chosen.\n",
       "fallback_element_type": "masd::object",
@@ -3687,17 +3687,17 @@
       ]
     },
     {
-      "name": "meta_model::variability::feature",
+      "name": "entities::variability::feature",
       "parents": [
-        "meta_model::variability::abstract_feature"
+        "entities::variability::abstract_feature"
       ],
       "documentation": "Represents a feature in variability space.\n",
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::variability::feature_template_bundle",
+      "name": "entities::variability::feature_template_bundle",
       "parents": [
-        "meta_model::variability::abstract_bundle"
+        "entities::variability::abstract_bundle"
       ],
       "documentation": "A feature template bundle represents an aggregation of feature templates in a\nmodel.\n\nThe feature templates should be \"semantically related\", that is, belong to a related\ntopic. A feature template bundle is used by code generation to generate\ninfrastructural code to ease the creation and subsequent processing of features.\n\nGenerated code comprises of two aspects:\n\n@li the registration of the feature template for the dynamic part of the processing;\n@li the generation of a static configuration class to  represent the feature once\n read out from the dynamic configuration.\n\nBoth of these aspects are optional, but at least one must be chosen.\n",
       "fallback_element_type": "masd::object",
@@ -3714,7 +3714,7 @@
       ]
     },
     {
-      "name": "meta_model::variability::abstract_profile",
+      "name": "entities::variability::abstract_profile",
       "stereotypes": [
         "logical::meta_element"
       ],
@@ -3737,9 +3737,9 @@
       ]
     },
     {
-      "name": "meta_model::variability::profile_template",
+      "name": "entities::variability::profile_template",
       "parents": [
-        "meta_model::variability::abstract_profile"
+        "entities::variability::abstract_profile"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3750,9 +3750,9 @@
       ]
     },
     {
-      "name": "meta_model::variability::profile",
+      "name": "entities::variability::profile",
       "parents": [
-        "meta_model::variability::abstract_profile"
+        "entities::variability::abstract_profile"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3836,7 +3836,7 @@
       ]
     },
     {
-      "name": "meta_model::variability::abstract_profile_entry",
+      "name": "entities::variability::abstract_profile_entry",
       "stereotypes": [
         "Documentable",
         "Configurable",
@@ -3860,16 +3860,16 @@
       ]
     },
     {
-      "name": "meta_model::variability::profile_entry",
+      "name": "entities::variability::profile_entry",
       "parents": [
-        "meta_model::variability::abstract_profile_entry"
+        "entities::variability::abstract_profile_entry"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::variability::profile_template_entry",
+      "name": "entities::variability::profile_template_entry",
       "parents": [
-        "meta_model::variability::abstract_profile_entry"
+        "entities::variability::abstract_profile_entry"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -3922,7 +3922,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "meta_model::variability::default_value_override",
+      "name": "entities::variability::default_value_override",
       "fallback_element_type": "masd::object",
       "attributes": [
         {

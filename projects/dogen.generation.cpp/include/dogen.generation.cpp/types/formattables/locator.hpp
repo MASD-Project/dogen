@@ -30,10 +30,10 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.logical/types/meta_model/name.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.logical/types/entities/name.hpp"
 #include "dogen.generation.cpp/types/formatters/repository.hpp"
 #include "dogen.generation.cpp/types/formattables/locator_configuration.hpp"
 
@@ -47,23 +47,23 @@ public:
     locator(
         const boost::filesystem::path& output_directory_path,
         const boost::filesystem::path& cpp_headers_output_directory_path,
-        const variability::meta_model::feature_model& fm,
+        const variability::entities::feature_model& fm,
         const formatters::repository& frp,
-        const variability::meta_model::configuration& rcfg,
-        const logical::meta_model::name& model_name,
+        const variability::entities::configuration& rcfg,
+        const logical::entities::name& model_name,
         const std::unordered_set<std::string>& module_ids,
         const bool enable_backend_directories);
 
 private:
     struct facet_feature_group {
-        variability::meta_model::feature directory;
-        variability::meta_model::feature postfix;
+        variability::entities::feature directory;
+        variability::entities::feature postfix;
     };
 
     struct formatter_feature_group {
-        boost::optional<variability::meta_model::feature> facet_directory;
-        boost::optional<variability::meta_model::feature> facet_postfix;
-        variability::meta_model::feature archetype_postfix;
+        boost::optional<variability::entities::feature> facet_directory;
+        boost::optional<variability::entities::feature> facet_postfix;
+        variability::entities::feature archetype_postfix;
     };
 
     struct feature_group {
@@ -71,28 +71,28 @@ private:
         facets_feature_group;
         std::unordered_map<std::string, formatter_feature_group>
         formatters_feature_group;
-        variability::meta_model::feature header_file_extension;
-        variability::meta_model::feature implementation_file_extension;
-        variability::meta_model::feature include_directory_name;
-        variability::meta_model::feature source_directory_name;
-        variability::meta_model::feature tests_directory_name;
-        variability::meta_model::feature templates_directory_name;
-        variability::meta_model::feature disable_facet_directories;
-        variability::meta_model::feature backend_directory_name;
-        variability::meta_model::feature templates_file_extension;
+        variability::entities::feature header_file_extension;
+        variability::entities::feature implementation_file_extension;
+        variability::entities::feature include_directory_name;
+        variability::entities::feature source_directory_name;
+        variability::entities::feature tests_directory_name;
+        variability::entities::feature templates_directory_name;
+        variability::entities::feature disable_facet_directories;
+        variability::entities::feature backend_directory_name;
+        variability::entities::feature templates_file_extension;
     };
 
     feature_group make_feature_group(
-        const variability::meta_model::feature_model& fm,
+        const variability::entities::feature_model& fm,
         const formatters::repository& frp) const;
 
     locator_configuration make_configuration(const feature_group& fg,
-        const variability::meta_model::configuration& cfg) const;
+        const variability::entities::configuration& cfg) const;
 
     locator_configuration
-    make_configuration(const variability::meta_model::feature_model& fm,
+    make_configuration(const variability::entities::feature_model& fm,
         const formatters::repository& frp,
-        const variability::meta_model::configuration& cfg);
+        const variability::entities::configuration& cfg);
 
 private:
     boost::filesystem::path compute_headers_path(
@@ -141,7 +141,7 @@ private:
      */
     boost::filesystem::path make_project_path(
         const boost::filesystem::path& output_directory_path,
-        const logical::meta_model::name& model_name,
+        const logical::entities::name& model_name,
         const locator_configuration& lc,
         const bool enable_backend_directories) const;
 
@@ -152,22 +152,22 @@ private:
      * folders; it starts at the facet and includes the file name.
      */
     boost::filesystem::path make_facet_path(const std::string& archetype,
-        const std::string& extension, const logical::meta_model::name& n) const;
+        const std::string& extension, const logical::entities::name& n) const;
     boost::filesystem::path make_facet_path_temp(const std::string& archetype,
-        const std::string& file_name, const logical::meta_model::name& n) const;
+        const std::string& file_name, const logical::entities::name& n) const;
 
     /**
      * @brief Makes the first part of the inclusion path.
      */
     boost::filesystem::path
-    make_inclusion_path_prefix(const logical::meta_model::name& n) const;
+    make_inclusion_path_prefix(const logical::entities::name& n) const;
 
     /**
      * @brief Builds a relative path from the top-level include
      * directory for the supplied qualified name.
      */
     boost::filesystem::path make_inclusion_path(const std::string& archetype,
-        const std::string& extension, const logical::meta_model::name& n) const;
+        const std::string& extension, const logical::entities::name& n) const;
 
 public:
     /**
@@ -229,7 +229,7 @@ public:
      * @brief Generate the inclusion path for C++ headers.
      */
     boost::filesystem::path make_inclusion_path_for_cpp_header(
-        const logical::meta_model::name& n, const std::string& archetype) const;
+        const logical::entities::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path to the include directory
@@ -251,7 +251,7 @@ public:
      * @brief Generate the full path for C++ headers.
      */
     boost::filesystem::path make_full_path_for_cpp_header(
-        const logical::meta_model::name& n, const std::string& archetype) const;
+        const logical::entities::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the relative implementation path for a facet.
@@ -263,74 +263,74 @@ public:
      * @brief Generate the full path for templates.
      */
     boost::filesystem::path make_full_path_for_templates(
-        const logical::meta_model::name& n, const std::string& archetype) const;
+        const logical::entities::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for C++ implementation for tests
      */
     boost::filesystem::path make_full_path_for_tests_cpp_implementation(
-        const logical::meta_model::name& n, const std::string& archetype) const;
+        const logical::entities::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for entry point under tests.
      */
     boost::filesystem::path make_full_path_for_tests_cpp_main(
-        const logical::meta_model::name& n, const std::string& archetype) const;
+        const logical::entities::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for C++ implementation.
      */
     boost::filesystem::path make_full_path_for_cpp_implementation(
-        const logical::meta_model::name& n, const std::string& archetype) const;
+        const logical::entities::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for cmakelists in include.
      */
     boost::filesystem::path make_full_path_for_include_cmakelists(
-        const logical::meta_model::name& n, const std::string& archetype) const;
+        const logical::entities::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for cmakelists in source.
      */
     boost::filesystem::path make_full_path_for_source_cmakelists(
-        const logical::meta_model::name& n, const std::string& archetype) const;
+        const logical::entities::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for cmakelists in tests.
      */
     boost::filesystem::path make_full_path_for_tests_cmakelists(
-        const logical::meta_model::name& n, const std::string& archetype) const;
+        const logical::entities::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for cmakelists in source.
      */
     boost::filesystem::path make_full_path_for_msbuild_targets(
-        const logical::meta_model::name& n, const std::string& archetype) const;
+        const logical::entities::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the relatvie path for odb options.
      */
     boost::filesystem::path make_relative_path_for_odb_options(
-        const logical::meta_model::name& n, const std::string& archetype,
+        const logical::entities::name& n, const std::string& archetype,
         bool include_source_directory = true) const;
 
     /**
      * @brief Generate the full path for odb options.
      */
     boost::filesystem::path make_full_path_for_odb_options(
-        const logical::meta_model::name& n, const std::string& archetype) const;
+        const logical::entities::name& n, const std::string& archetype) const;
 
     boost::filesystem::path make_full_path_for_project(
-        const logical::meta_model::name& n, const std::string& archetype) const;
+        const logical::entities::name& n, const std::string& archetype) const;
 
     boost::filesystem::path make_full_path_for_solution(
-        const logical::meta_model::name& n, const std::string& archetype) const;
+        const logical::entities::name& n, const std::string& archetype) const;
 
 public:
     std::unordered_map<std::string, std::string> facet_directories() const;
 
 private:
-    const logical::meta_model::name& model_name_;
+    const logical::entities::name& model_name_;
     const locator_configuration configuration_;
     const std::unordered_set<std::string> module_ids_;
     const boost::filesystem::path project_path_;

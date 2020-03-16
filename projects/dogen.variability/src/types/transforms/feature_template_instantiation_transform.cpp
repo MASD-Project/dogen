@@ -21,9 +21,9 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.variability/io/meta_model/feature_io.hpp"
+#include "dogen.variability/io/entities/feature_io.hpp"
 #include "dogen.variability/types/helpers/template_instantiator.hpp"
-#include "dogen.variability/io/meta_model/feature_template_repository_io.hpp"
+#include "dogen.variability/io/entities/feature_template_repository_io.hpp"
 #include "dogen.variability/types/transforms/feature_template_instantiation_transform.hpp"
 
 namespace {
@@ -38,16 +38,16 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::variability::transforms {
 
-std::list<meta_model::feature>
+std::list<entities::feature>
 feature_template_instantiation_transform::apply(const context& ctx,
-    const meta_model::feature_template_repository& ftrp) {
+    const entities::feature_template_repository& ftrp) {
     tracing::scoped_transform_tracer stp(lg,
         "feature template instantiation transform",
         transform_id, transform_id, *ctx.tracer(), ftrp);
 
 
     unsigned int counter(0);
-    std::list<meta_model::feature> r;
+    std::list<entities::feature> r;
     const auto& tids(ctx.template_instantiation_domains());
     helpers::template_instantiator ti(ctx.compatibility_mode());
     for (const auto& ft : ftrp.templates()) {

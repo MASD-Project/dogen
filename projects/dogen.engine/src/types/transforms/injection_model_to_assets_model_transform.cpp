@@ -22,24 +22,24 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.injection/io/meta_model/model_io.hpp"
+#include "dogen.injection/io/entities/model_io.hpp"
 #include "dogen.logical/types/traits.hpp"
-#include "dogen.logical/types/meta_model/structural/module.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/structural/builtin.hpp"
-#include "dogen.logical/types/meta_model/element.hpp"
-#include "dogen.logical/types/meta_model/structural/visitor.hpp"
-#include "dogen.logical/types/meta_model/structural/exception.hpp"
-#include "dogen.logical/types/meta_model/structural/primitive.hpp"
-#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
-#include "dogen.logical/types/meta_model/structural/object_template.hpp"
-#include "dogen.logical/types/meta_model/structural/assistant.hpp"
-#include "dogen.logical/io/meta_model/name_io.hpp"
-#include "dogen.logical/io/meta_model/location_io.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
-#include "dogen.logical/io/meta_model/static_stereotypes_io.hpp"
+#include "dogen.logical/types/entities/structural/module.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/builtin.hpp"
+#include "dogen.logical/types/entities/element.hpp"
+#include "dogen.logical/types/entities/structural/visitor.hpp"
+#include "dogen.logical/types/entities/structural/exception.hpp"
+#include "dogen.logical/types/entities/structural/primitive.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
+#include "dogen.logical/types/entities/structural/object_template.hpp"
+#include "dogen.logical/types/entities/structural/assistant.hpp"
+#include "dogen.logical/io/entities/name_io.hpp"
+#include "dogen.logical/io/entities/location_io.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/io/entities/static_stereotypes_io.hpp"
 #include "dogen.logical/types/helpers/name_builder.hpp"
 #include "dogen.logical/types/helpers/location_builder.hpp"
 #include "dogen.engine/io/helpers/stereotypes_conversion_result_io.hpp"
@@ -73,7 +73,7 @@ const std::string unsupported_technical_space(
 const std::string too_many_initializers(
     "Found more than one feature template initializer in model.");
 
-using dogen::logical::meta_model::location;
+using dogen::logical::entities::location;
 const location empty_location = location();
 
 }
@@ -92,8 +92,8 @@ insert(const boost::shared_ptr<Element>& e,
     }
 }
 
-logical::meta_model::technical_space to_technical_space(const std::string& s) {
-    using logical::meta_model::technical_space;
+logical::entities::technical_space to_technical_space(const std::string& s) {
+    using logical::entities::technical_space;
     if (s == cpp_technical_space)
         return technical_space::cpp;
     else if (s == csharp_technical_space)
@@ -105,9 +105,9 @@ logical::meta_model::technical_space to_technical_space(const std::string& s) {
     BOOST_THROW_EXCEPTION(transform_exception(unsupported_technical_space + s));
 }
 
-logical::meta_model::location
+logical::entities::location
 injection_model_to_assets_model_transform::
-create_location(const context& ctx, const injection::meta_model::model& m) {
+create_location(const context& ctx, const injection::entities::model& m) {
     const auto& fm(*ctx.assets_context().feature_model());
     const auto fg(features::model_location::make_feature_group(fm));
     const auto scfg(features::model_location::make_static_configuration(fg, m));
@@ -121,10 +121,10 @@ create_location(const context& ctx, const injection::meta_model::model& m) {
     return r;
 }
 
-logical::meta_model::static_stereotypes
+logical::entities::static_stereotypes
 injection_model_to_assets_model_transform::
 compute_element_type(
-    const std::list<logical::meta_model::static_stereotypes>& st,
+    const std::list<logical::entities::static_stereotypes>& st,
     const std::string& fallback_element_type) {
 
     /*
@@ -151,22 +151,22 @@ compute_element_type(
      * just return invalid.
      */
     if (fallback_element_type.empty())
-        return logical::meta_model::static_stereotypes::invalid;
+        return logical::entities::static_stereotypes::invalid;
 
     return h.from_string(fallback_element_type);
 }
 
 void injection_model_to_assets_model_transform::
 process_element(const helpers::adapter& ad,
-    const logical::meta_model::location& l,
-    const injection::meta_model::element& e, logical::meta_model::model& m) {
+    const logical::entities::location& l,
+    const injection::entities::element& e, logical::entities::model& m) {
 
     helpers::stereotypes_helper h;
     const auto scr(h.from_string(e.stereotypes()));
     const auto& st(scr.static_stereotypes());
     const auto et(compute_element_type(st, e.fallback_element_type()));
 
-    using logical::meta_model::static_stereotypes;
+    using logical::entities::static_stereotypes;
     switch (et) {
     case static_stereotypes::structural_object:
         insert(ad.to_object(l, scr, e),
@@ -292,8 +292,8 @@ process_element(const helpers::adapter& ad,
     } }
 }
 
-logical::meta_model::model injection_model_to_assets_model_transform::
-apply(const context& ctx, const injection::meta_model::model& m) {
+logical::entities::model injection_model_to_assets_model_transform::
+apply(const context& ctx, const injection::entities::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "injection model to assets model transform", transform_id, m.name(),
         *ctx.assets_context().tracer(), m);
@@ -302,7 +302,7 @@ apply(const context& ctx, const injection::meta_model::model& m) {
      * First we compute the model name and technical space by reading
      * data from configuration.
      */
-    logical::meta_model::model r;
+    logical::entities::model r;
     logical::helpers::name_builder b(true/*model_name_mode*/);
     const auto model_location(create_location(ctx, m));
     b.external_modules(model_location.external_modules());
@@ -330,7 +330,7 @@ apply(const context& ctx, const injection::meta_model::model& m) {
      * of the root module: its not an element from an injection
      * perspective, etc.
      */
-    r.root_module(boost::make_shared<logical::meta_model::structural::module>());
+    r.root_module(boost::make_shared<logical::entities::structural::module>());
     auto& rm(*r.root_module());
     rm.name(r.name());
     rm.configuration(m.configuration());

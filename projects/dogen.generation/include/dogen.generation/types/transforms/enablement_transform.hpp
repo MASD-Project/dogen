@@ -28,43 +28,43 @@
 #include <string>
 #include <unordered_map>
 #include "dogen.physical/types/locations_group.hpp"
-#include "dogen.logical/types/meta_model/element.hpp"
-#include "dogen.generation/types/meta_model/element_archetype.hpp"
-#include "dogen.logical/types/meta_model/artefact_properties.hpp"
-#include "dogen.logical/types/meta_model/local_archetype_location_properties.hpp"
-#include "dogen.generation/types/meta_model/denormalised_archetype_properties.hpp"
+#include "dogen.logical/types/entities/element.hpp"
+#include "dogen.generation/types/entities/element_archetype.hpp"
+#include "dogen.logical/types/entities/artefact_properties.hpp"
+#include "dogen.logical/types/entities/local_archetype_location_properties.hpp"
+#include "dogen.generation/types/entities/denormalised_archetype_properties.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
-#include "dogen.generation/types/meta_model/model.hpp"
+#include "dogen.generation/types/entities/model.hpp"
 
 namespace dogen::generation::transforms {
 
 class enablement_transform final {
 private:
     static bool is_element_disabled(
-        const logical::meta_model::element& e);
+        const logical::entities::element& e);
 
     static void compute_enablement_for_artefact_properties(
         const std::unordered_map<std::string,
-        meta_model::denormalised_archetype_properties>&
+        entities::denormalised_archetype_properties>&
         global_archetype_location_properties,
         const std::unordered_map<std::string,
-        logical::meta_model::local_archetype_location_properties>&
+        logical::entities::local_archetype_location_properties>&
         local_archetype_location_properties,
         const std::string& archetype,
-        logical::meta_model::artefact_properties& ap);
+        logical::entities::artefact_properties& ap);
 
     static void compute_enablement_for_element(
         const std::unordered_map<std::string,
         physical::locations_group>&
         archetype_locations_by_meta_name,
         const std::unordered_map<std::string,
-        meta_model::denormalised_archetype_properties>&
+        entities::denormalised_archetype_properties>&
         global_archetype_location_properties,
-        std::unordered_set<meta_model::element_archetype>&
-        enabled_archetype_for_element, logical::meta_model::element& e);
+        std::unordered_set<entities::element_archetype>&
+        enabled_archetype_for_element, logical::entities::element& e);
 
 public:
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

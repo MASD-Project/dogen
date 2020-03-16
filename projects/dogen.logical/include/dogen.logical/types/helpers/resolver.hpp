@@ -27,9 +27,9 @@
 
 #include <list>
 #include <boost/optional.hpp>
-#include "dogen.logical/types/meta_model/name.hpp"
-#include "dogen.logical/types/meta_model/structural/object_template.hpp"
-#include "dogen.logical/types/meta_model/model.hpp"
+#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.logical/types/entities/structural/object_template.hpp"
+#include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/helpers/indices.hpp"
 
 namespace dogen::logical::helpers {
@@ -47,18 +47,18 @@ namespace dogen::logical::helpers {
  */
 class resolver final {
 private:
-    static bool is_floating_point(const meta_model::model& m,
-        const meta_model::name& n);
-    static bool is_builtin(const meta_model::model& m,
-        const meta_model::name& n);
-    static bool is_primitive(const meta_model::model& m,
-        const meta_model::name& n);
-    static bool is_object(const meta_model::model& m,
-        const meta_model::name& n);
-    static bool is_enumeration(const meta_model::model& m,
-        const meta_model::name& n);
-    static bool is_object_template(const meta_model::model& m,
-        const meta_model::name& n);
+    static bool is_floating_point(const entities::model& m,
+        const entities::name& n);
+    static bool is_builtin(const entities::model& m,
+        const entities::name& n);
+    static bool is_primitive(const entities::model& m,
+        const entities::name& n);
+    static bool is_object(const entities::model& m,
+        const entities::name& n);
+    static bool is_enumeration(const entities::model& m,
+        const entities::name& n);
+    static bool is_object_template(const entities::model& m,
+        const entities::name& n);
 
 private:
     /**
@@ -66,56 +66,56 @@ private:
      * referred to from an attribute, false otherwise.
      */
     static bool is_name_referable(const indices& idx,
-        const meta_model::name& n);
+        const entities::name& n);
 
     /**
      * @brief Resolves a name that has internal modules set.
      */
-    static meta_model::name resolve_name_with_internal_modules(
-        const meta_model::model& m, const indices& idx,
-        const meta_model::name& ctx, const meta_model::name& n);
+    static entities::name resolve_name_with_internal_modules(
+        const entities::model& m, const indices& idx,
+        const entities::name& ctx, const entities::name& n);
 
     /**
      * @brief Resolves a name where the ctx has internal modules.
      */
-    static boost::optional<meta_model::name>
+    static boost::optional<entities::name>
     try_resolve_name_with_context_internal_modules(
-        const indices& idx, meta_model::name ctx, const meta_model::name& n);
+        const indices& idx, entities::name ctx, const entities::name& n);
 
     /**
      * @brief Resolves a name where the ctx has model modules.
      */
-    static boost::optional<meta_model::name>
+    static boost::optional<entities::name>
     try_resolve_name_with_context_model_modules(
-        const indices& idx, meta_model::name ctx, const meta_model::name& n);
+        const indices& idx, entities::name ctx, const entities::name& n);
 
     /**
      * @brief Resolves a partially formed name into a full name.
      */
-    static meta_model::name resolve_name(
-        const meta_model::model& m, const indices& idx,
-        const meta_model::name& ctx, const meta_model::name& n);
+    static entities::name resolve_name(
+        const entities::model& m, const indices& idx,
+        const entities::name& ctx, const entities::name& n);
 
     /**
      * @brief Resolves all references contained in a name tree.
      */
-    static void resolve_name_tree(const meta_model::model& m,
-        const indices& idx, const meta_model::name& owner,
-        meta_model::name_tree& nt);
+    static void resolve_name_tree(const entities::model& m,
+        const indices& idx, const entities::name& owner,
+        entities::name_tree& nt);
 
     /**
      * @brief Resolves all references to types in the supplied attribute.
      */
-    static void resolve_attribute(const meta_model::model& m,
-        const indices& idx, const meta_model::name& owner,
-        meta_model::attribute& attr);
+    static void resolve_attribute(const entities::model& m,
+        const indices& idx, const entities::name& owner,
+        entities::attribute& attr);
 
     /**
      * @brief Resolves all references to types in the supplied attributes.
      */
-    static void resolve_attributes(const meta_model::model& m,
-        const indices& idx, const meta_model::name& owner,
-        std::list<meta_model::attribute>& attributes);
+    static void resolve_attributes(const entities::model& m,
+        const indices& idx, const entities::name& owner,
+        std::list<entities::attribute>& attributes);
 
     /**
      * @brief Validates the inheritance graph for the object.
@@ -123,8 +123,8 @@ private:
      * @note should really be moved to validator.
      */
     static void validate_inheritance_graph(
-        const meta_model::model& m,
-        const meta_model::structural::object& o);
+        const entities::model& m,
+        const entities::structural::object& o);
 
     /**
      * @brief Ensures that all object templates that are parents of
@@ -133,70 +133,70 @@ private:
      * @note should really be moved to validator.
      */
     static void validate_object_template_inheritance(
-        const meta_model::model& m,
-        const meta_model::structural::object_template& ot);
+        const entities::model& m,
+        const entities::structural::object_template& ot);
 
     /**
      * @brief Resolve all object templates.
      */
     static void resolve_object_templates(const indices& idx,
-        meta_model::model& m);
+        entities::model& m);
 
     /**
      * @brief Resolve all objects.
      */
     static void resolve_objects(const indices& idx,
-        meta_model::model& m);
+        entities::model& m);
 
     /**
      * @brief Resolve all enumerations.
      */
     static void resolve_enumerations(const indices& idx,
-        meta_model::model& m);
+        entities::model& m);
 
     /**
      * @brief Resolve all primitives.
      */
     static void resolve_primitives(const indices& idx,
-        meta_model::model& m);
+        entities::model& m);
 
     /**
      * @brief Resolve all feature template bundles.
      */
     static void resolve_feature_template_bundles(const indices& idx,
-        meta_model::model& m);
+        entities::model& m);
 
     /**
      * @brief Resolve all feature bundles.
      */
     static void resolve_feature_bundles(const indices& idx,
-        meta_model::model& m);
+        entities::model& m);
 
 public:
     /**
      * @brief Resolves the name against the supplied model.
      */
-    static meta_model::name resolve(const meta_model::model& m,
-        const indices& idx, const meta_model::name& ctx,
-        const meta_model::name& n);
+    static entities::name resolve(const entities::model& m,
+        const indices& idx, const entities::name& ctx,
+        const entities::name& n);
 
     /**
      * @brief Resolves the name as an object template name.
      */
     /**@{*/
-    static boost::optional<meta_model::name>
-    try_resolve_object_template_name(meta_model::name ctx,
-        const std::string& s, const meta_model::model& m);
-    static boost::optional<meta_model::name>
-    try_resolve_object_template_name(const meta_model::name& ctx,
-        const meta_model::name& n, const meta_model::model& m);
+    static boost::optional<entities::name>
+    try_resolve_object_template_name(entities::name ctx,
+        const std::string& s, const entities::model& m);
+    static boost::optional<entities::name>
+    try_resolve_object_template_name(const entities::name& ctx,
+        const entities::name& n, const entities::model& m);
     /**@}*/
 
 public:
     /**
      * @brief Resolve all references to types within model.
      */
-    static void resolve(const indices& idx, meta_model::model& m);
+    static void resolve(const indices& idx, entities::model& m);
 };
 
 }

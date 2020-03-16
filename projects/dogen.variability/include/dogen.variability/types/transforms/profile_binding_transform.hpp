@@ -28,12 +28,12 @@
 #include <list>
 #include <string>
 #include <unordered_set>
-#include "dogen.variability/types/meta_model/binding_point.hpp"
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.variability/types/meta_model/profile_repository.hpp"
-#include "dogen.variability/types/meta_model/configuration_model.hpp"
-#include "dogen.variability/types/meta_model/configuration_model_set.hpp"
+#include "dogen.variability/types/entities/binding_point.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.variability/types/entities/profile_repository.hpp"
+#include "dogen.variability/types/entities/configuration_model.hpp"
+#include "dogen.variability/types/entities/configuration_model_set.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
 
 namespace dogen::variability::transforms {
@@ -44,14 +44,14 @@ namespace dogen::variability::transforms {
 class profile_binding_transform final {
 private:
     struct feature_group {
-        meta_model::feature profile;
+        entities::feature profile;
     };
 
     static feature_group
-    make_feature_group(const meta_model::feature_model& fm);
+    make_feature_group(const entities::feature_model& fm);
 
     static std::string obtain_profile_name(const feature_group& fg,
-        const meta_model::configuration& cfg);
+        const entities::configuration& cfg);
 
 private:
     /**
@@ -59,7 +59,7 @@ private:
      * its the default profile.
      */
     static std::string get_default_profile_name_for_binding_point(
-        const meta_model::binding_point bp);
+        const entities::binding_point bp);
 
 private:
     /**
@@ -68,31 +68,31 @@ private:
      */
     static void handle_potential_bindings(
         const bool has_base_layer,
-        const meta_model::profile_repository& prp,
-        meta_model::configuration& cfg);
+        const entities::profile_repository& prp,
+        entities::configuration& cfg);
 
     /**
      * @brief Binds profiles to the supplied configuration.
      */
-    static void bind(const meta_model::profile_repository& prp,
-        const feature_group& fg, meta_model::configuration& cfg);
+    static void bind(const entities::profile_repository& prp,
+        const feature_group& fg, entities::configuration& cfg);
 
 private:
     /**
      * @brief Runs the transform on a single configuration model.
      */
-    static void apply(const meta_model::profile_repository& prp,
-        const meta_model::feature_model& fm,
-        meta_model::configuration_model& cm);
+    static void apply(const entities::profile_repository& prp,
+        const entities::feature_model& fm,
+        entities::configuration_model& cm);
 
 public:
     /**
      * @brief Runs the transform on an entire configuration model set.
      */
     static void apply(const context& ctx,
-        const meta_model::feature_model& fm,
-        const meta_model::profile_repository& prp,
-        meta_model::configuration_model_set& cms);
+        const entities::feature_model& fm,
+        const entities::profile_repository& prp,
+        entities::configuration_model_set& cms);
 };
 
 }

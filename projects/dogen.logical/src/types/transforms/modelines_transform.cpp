@@ -22,13 +22,13 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
-#include "dogen.logical/lexical_cast/meta_model/technical_space_lc.hpp"
-#include "dogen.logical/lexical_cast/meta_model/decoration/editor_lc.hpp"
-#include "dogen.logical/lexical_cast/meta_model/decoration/modeline_location_lc.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/lexical_cast/entities/technical_space_lc.hpp"
+#include "dogen.logical/lexical_cast/entities/decoration/editor_lc.hpp"
+#include "dogen.logical/lexical_cast/entities/decoration/modeline_location_lc.hpp"
 #include "dogen.logical/types/features/decoration_modeline.hpp"
-#include "dogen.logical/types/meta_model/decoration/modeline.hpp"
-#include "dogen.logical/types/meta_model/decoration/modeline_group.hpp"
+#include "dogen.logical/types/entities/decoration/modeline.hpp"
+#include "dogen.logical/types/entities/decoration/modeline_group.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/modelines_transform.hpp"
@@ -47,7 +47,7 @@ const std::string missing_group("Cannot find modeline group: ");
 
 namespace dogen::logical::transforms {
 
-void modelines_transform::apply(const context& ctx, meta_model::model& m) {
+void modelines_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "modelines transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
@@ -73,13 +73,13 @@ void modelines_transform::apply(const context& ctx, meta_model::model& m) {
         const auto scfg(decoration_modeline::make_static_configuration(fg, ml));
 
         using boost::lexical_cast;
-        using meta_model::decoration::editor;
+        using entities::decoration::editor;
         ml.editor(lexical_cast<editor>(scfg.editor));
 
-        using meta_model::decoration::modeline_location;
+        using entities::decoration::modeline_location;
         ml.location(lexical_cast<modeline_location>(scfg.location));
 
-        using meta_model::technical_space;
+        using entities::technical_space;
         ml.technical_space(lexical_cast<technical_space>(scfg.technical_space));
 
         /*

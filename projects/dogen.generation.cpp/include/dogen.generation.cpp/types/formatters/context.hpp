@@ -30,7 +30,7 @@
 #include <algorithm>
 #include <unordered_set>
 #include <unordered_map>
-#include "dogen.generation/types/meta_model/element_archetype.hpp"
+#include "dogen.generation/types/entities/element_archetype.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 #include "dogen.generation.cpp/types/formattables/element_properties.hpp"
 #include "dogen.generation.cpp/types/formatters/helper_formatter_interface.hpp"
@@ -42,7 +42,7 @@ namespace dogen::generation::cpp::formatters {
  */
 class context final {
 public:
-    context(const std::unordered_set<generation::meta_model::element_archetype>&
+    context(const std::unordered_set<generation::entities::element_archetype>&
         enabled_archetype_for_element,
         const formattables::element_properties& element_properties,
         const formattables::model& fm, const std::unordered_map<std::string,
@@ -50,7 +50,7 @@ public:
         helper_formatter_interface>>>>& helpers);
 
 public:
-    const std::unordered_set<generation::meta_model::element_archetype>&
+    const std::unordered_set<generation::entities::element_archetype>&
     enabled_archetype_for_element() const;
 
     const formattables::element_properties& element_properties() const;
@@ -65,7 +65,7 @@ public:
         helpers() const;
 
 private:
-    const std::unordered_set<generation::meta_model::element_archetype>&
+    const std::unordered_set<generation::entities::element_archetype>&
     enabled_archetype_for_element_;
     const formattables::element_properties& element_properties_;
     const formattables::model& model_;

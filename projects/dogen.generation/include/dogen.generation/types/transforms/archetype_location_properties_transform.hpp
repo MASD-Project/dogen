@@ -27,17 +27,17 @@
 
 #include <string>
 #include <boost/optional.hpp>
-#include "dogen.variability/types/meta_model/feature.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.physical/types/location_repository.hpp"
-#include "dogen.logical/types/meta_model/element.hpp"
-#include "dogen.generation/types/meta_model/element_archetype.hpp"
-#include "dogen.generation/types/meta_model/backend_properties.hpp"
-#include "dogen.generation/types/meta_model/facet_properties.hpp"
-#include "dogen.generation/types/meta_model/archetype_properties.hpp"
+#include "dogen.logical/types/entities/element.hpp"
+#include "dogen.generation/types/entities/element_archetype.hpp"
+#include "dogen.generation/types/entities/backend_properties.hpp"
+#include "dogen.generation/types/entities/facet_properties.hpp"
+#include "dogen.generation/types/entities/archetype_properties.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
-#include "dogen.generation/types/meta_model/model.hpp"
+#include "dogen.generation/types/entities/model.hpp"
 
 
 namespace dogen::generation::transforms {
@@ -45,87 +45,87 @@ namespace dogen::generation::transforms {
 class archetype_location_properties_transform final {
 private:
     struct backend_feature_group {
-        variability::meta_model::feature enabled;
-        variability::meta_model::feature directory;
+        variability::entities::feature enabled;
+        variability::entities::feature directory;
     };
 
     struct facet_feature_group {
-        variability::meta_model::feature enabled;
-        variability::meta_model::feature overwrite;
-        boost::optional<variability::meta_model::feature> directory;
-        boost::optional<variability::meta_model::feature> postfix;
+        variability::entities::feature enabled;
+        variability::entities::feature overwrite;
+        boost::optional<variability::entities::feature> directory;
+        boost::optional<variability::entities::feature> postfix;
     };
 
     struct global_archetype_feature_group {
-        variability::meta_model::feature enabled;
-        variability::meta_model::feature overwrite;
-        variability::meta_model::feature postfix;
+        variability::entities::feature enabled;
+        variability::entities::feature overwrite;
+        variability::entities::feature postfix;
     };
 
     struct local_archetype_feature_group {
-        variability::meta_model::feature facet_enabled;
-        variability::meta_model::feature archetype_enabled;
-        variability::meta_model::feature facet_overwrite;
-        variability::meta_model::feature archetype_overwrite;
+        variability::entities::feature facet_enabled;
+        variability::entities::feature archetype_enabled;
+        variability::entities::feature facet_overwrite;
+        variability::entities::feature archetype_overwrite;
     };
 
 private:
     static std::unordered_map<std::string, backend_feature_group>
-    make_backend_feature_group(const variability::meta_model::feature_model& fm,
+    make_backend_feature_group(const variability::entities::feature_model& fm,
         const physical::location_repository& alrp);
 
     static std::unordered_map<std::string, facet_feature_group>
-    make_facet_feature_group(const variability::meta_model::feature_model& fm,
+    make_facet_feature_group(const variability::entities::feature_model& fm,
         const physical::location_repository& alrp);
 
     static std::unordered_map<std::string, global_archetype_feature_group>
     make_global_archetype_feature_group(
-        const variability::meta_model::feature_model& fm,
+        const variability::entities::feature_model& fm,
         const physical::location_repository& alrp);
 
     static std::unordered_map<std::string, local_archetype_feature_group>
     make_local_archetype_feature_group(
-        const variability::meta_model::feature_model& fm,
+        const variability::entities::feature_model& fm,
         const physical::location_repository& alrp);
 
 private:
-    static std::unordered_map<std::string, meta_model::backend_properties>
+    static std::unordered_map<std::string, entities::backend_properties>
     obtain_backend_properties(
         const std::unordered_map<std::string, backend_feature_group>& fgs,
-        const variability::meta_model::configuration& cfg);
+        const variability::entities::configuration& cfg);
 
-    static std::unordered_map<std::string, meta_model::facet_properties>
+    static std::unordered_map<std::string, entities::facet_properties>
     obtain_facet_properties(
         const std::unordered_map<std::string, facet_feature_group>& fgs,
-        const variability::meta_model::configuration& cfg);
+        const variability::entities::configuration& cfg);
 
-    static std::unordered_map<std::string, meta_model::archetype_properties>
+    static std::unordered_map<std::string, entities::archetype_properties>
     obtain_archetype_properties(
         const std::unordered_map<std::string,
         global_archetype_feature_group>& fgs,
-        const variability::meta_model::configuration& cfg);
+        const variability::entities::configuration& cfg);
 
     static void populate_global_archetype_location_properties(
-        const variability::meta_model::feature_model& fm,
+        const variability::entities::feature_model& fm,
         const physical::location_repository& alrp,
-        meta_model::model& m);
+        entities::model& m);
 
     static std::unordered_map<
         std::string,
-        logical::meta_model::local_archetype_location_properties>
+        logical::entities::local_archetype_location_properties>
     obtain_local_archetype_location_properties(
         const std::unordered_map<std::string,
         local_archetype_feature_group>& fgs,
         const std::list<physical::location>& als,
-        const variability::meta_model::configuration& cfg);
+        const variability::entities::configuration& cfg);
 
     static void populate_local_archetype_location_properties(
-        const variability::meta_model::feature_model& fm,
+        const variability::entities::feature_model& fm,
         const physical::location_repository& alrp,
-        meta_model::model& m);
+        entities::model& m);
 
 public:
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

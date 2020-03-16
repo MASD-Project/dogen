@@ -29,7 +29,7 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
-#include "dogen.generation/types/meta_model/element_archetype.hpp"
+#include "dogen.generation/types/entities/element_archetype.hpp"
 #include "dogen.generation.cpp/types/formattables/formattable.hpp"
 #include "dogen.generation.cpp/types/formattables/dependencies_builder.hpp"
 #include "dogen.generation.cpp/types/formattables/directive_group_repository.hpp"
@@ -52,7 +52,7 @@ class dependencies_builder_factory final {
 public:
     dependencies_builder_factory(
         const directive_group_repository& dgrp,
-        const std::unordered_set<generation::meta_model::element_archetype>&
+        const std::unordered_set<generation::entities::element_archetype>&
         enabled_archetype_for_element);
 
 public:
@@ -63,7 +63,7 @@ public:
 
 private:
     const directive_group_repository& inclusion_directives_;
-    const std::unordered_set<generation::meta_model::element_archetype>&
+    const std::unordered_set<generation::entities::element_archetype>&
     enabled_archetype_for_element_;
 };
 

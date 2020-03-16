@@ -27,16 +27,16 @@
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/lexical_cast/meta_model/technical_space_lc.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
+#include "dogen.logical/lexical_cast/entities/technical_space_lc.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/traits.hpp"
 #include "dogen.logical/types/helpers/name_factory.hpp"
 #include "dogen.logical/types/helpers/name_builder.hpp"
 #include "dogen.logical/types/features/enumeration.hpp"
 #include "dogen.logical/types/features/enumerator.hpp"
-#include "dogen.logical/types/meta_model/structural/builtin.hpp"
-#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
-#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
+#include "dogen.logical/types/entities/structural/builtin.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/enumerations_transform.hpp"
@@ -65,8 +65,8 @@ namespace dogen::logical::transforms {
 namespace {
 
 void populate_enumeration(const features::enumeration::feature_group& fg,
-    const meta_model::name& default_underlying_element_name,
-    meta_model::structural::enumeration& e) {
+    const entities::name& default_underlying_element_name,
+    entities::structural::enumeration& e) {
 
     /*
      * Create the static configuration from its dynamic counterpart
@@ -107,7 +107,7 @@ void populate_enumeration(const features::enumeration::feature_group& fg,
 
 void populate_enumerator(const features::enumerator::feature_group &fg,
                          const unsigned int position,
-                         meta_model::structural::enumerator &e) {
+                         entities::structural::enumerator &e) {
 
   /*
    * We try to read the value from variability's configuration. If
@@ -125,8 +125,8 @@ void populate_enumerator(const features::enumerator::feature_group &fg,
 
 }
 
-meta_model::name enumerations_transform::
-obtain_enumeration_default_underlying_element_name(const meta_model::model& m) {
+entities::name enumerations_transform::
+obtain_enumeration_default_underlying_element_name(const entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Obtaining default enumeration underlying "
                              << "element name for model: "
                              << m.name().qualified().dot();
@@ -136,7 +136,7 @@ obtain_enumeration_default_underlying_element_name(const meta_model::model& m) {
      * be the default type to use for enumerations. We expect one and
      * only type to have been assigned this role.
      */
-    meta_model::name r;
+    entities::name r;
     bool found(false);
     for (const auto& pair : m.structural_elements().builtins()) {
         const auto& b(*pair.second);
@@ -167,10 +167,10 @@ obtain_enumeration_default_underlying_element_name(const meta_model::model& m) {
 }
 
 std::string enumerations_transform::
-obtain_invalid_enumerator_simple_name(const meta_model::technical_space ts) {
+obtain_invalid_enumerator_simple_name(const entities::technical_space ts) {
     switch(ts) {
-    case meta_model::technical_space::csharp: return csharp_invalid;
-    case meta_model::technical_space::cpp: return cpp_invalid;
+    case entities::technical_space::csharp: return csharp_invalid;
+    case entities::technical_space::cpp: return cpp_invalid;
     default: {
         const auto s(boost::lexical_cast<std::string>(ts));
         BOOST_LOG_SEV(lg, error) << unsupported_technical_space << s;
@@ -179,10 +179,10 @@ obtain_invalid_enumerator_simple_name(const meta_model::technical_space ts) {
     } }
 }
 
-meta_model::structural::enumerator
-enumerations_transform::make_invalid_enumerator(const meta_model::name& n,
-    const meta_model::technical_space ts) {
-    meta_model::structural::enumerator r;
+entities::structural::enumerator
+enumerations_transform::make_invalid_enumerator(const entities::name& n,
+    const entities::technical_space ts) {
+    entities::structural::enumerator r;
     r.documentation("Represents an uninitialised enum");
     r.value("0");
 
@@ -190,13 +190,13 @@ enumerations_transform::make_invalid_enumerator(const meta_model::name& n,
     const auto sn(obtain_invalid_enumerator_simple_name(ts));
     r.name(nf.build_attribute_name(n, sn));
 
-    using variability::meta_model::configuration;
+    using variability::entities::configuration;
     r.configuration(boost::make_shared<configuration>());
 
     return r;
 }
 
-void enumerations_transform::apply(const context& ctx, meta_model::model& m) {
+void enumerations_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "enumerations transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 

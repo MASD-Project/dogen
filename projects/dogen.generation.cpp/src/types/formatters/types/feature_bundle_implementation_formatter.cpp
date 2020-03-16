@@ -22,7 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
 #include "dogen.variability/types/helpers/enum_mapper.hpp"
-#include "dogen.logical/types/meta_model/variability/feature_bundle.hpp"
+#include "dogen.logical/types/entities/variability/feature_bundle.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
@@ -54,7 +54,7 @@ feature_bundle_implementation_formatter::archetype_location() const {
     return r;
 }
 
-const logical::meta_model::name& feature_bundle_implementation_formatter::meta_name() const {
+const logical::entities::name& feature_bundle_implementation_formatter::meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_variability_feature_bundle_name());
     return r;
@@ -69,7 +69,7 @@ inclusion_support_types feature_bundle_implementation_formatter::inclusion_suppo
 }
 
 boost::filesystem::path feature_bundle_implementation_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const logical::meta_model::name& n) const {
+    const formattables::locator& /*l*/, const logical::entities::name& n) const {
 
     using namespace dogen::utility::log;
     static logger lg(
@@ -81,14 +81,14 @@ boost::filesystem::path feature_bundle_implementation_formatter::inclusion_path(
 }
 
 boost::filesystem::path feature_bundle_implementation_formatter::full_path(
-    const formattables::locator& l, const logical::meta_model::name& n) const {
+    const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_full_path_for_cpp_implementation(n, static_id());
 }
 
 std::list<std::string> feature_bundle_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const logical::meta_model::element& e) const {
-    using logical::meta_model::variability::feature_bundle;
+    const logical::entities::element& e) const {
+    using logical::entities::variability::feature_bundle;
     const auto& fb(assistant::as<feature_bundle>(e));
     auto builder(f.make());
 
@@ -104,10 +104,10 @@ std::list<std::string> feature_bundle_implementation_formatter::inclusion_depend
     return builder.build();
 }
 
-extraction::meta_model::artefact feature_bundle_implementation_formatter::
-format(const context& ctx, const logical::meta_model::element& e) const {
+extraction::entities::artefact feature_bundle_implementation_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& fb(a.as<logical::meta_model::variability::feature_bundle>(e));
+    const auto& fb(a.as<logical::entities::variability::feature_bundle>(e));
 
     {
         const auto sn(fb.name().simple());
@@ -128,9 +128,9 @@ a.stream() << "namespace {" << std::endl;
                     const auto simple_key(splitter::split_scoped(f.key()).back());
                     const bool has_qualified_name(simple_key != f.key());
 a.stream() << std::endl;
-a.stream() << "dogen::variability::meta_model::feature" << std::endl;
+a.stream() << "dogen::variability::entities::feature" << std::endl;
 a.stream() << "make_" << f.identifiable_key() << "() {" << std::endl;
-a.stream() << "    using namespace dogen::variability::meta_model;" << std::endl;
+a.stream() << "    using namespace dogen::variability::entities;" << std::endl;
 a.stream() << "    feature r;" << std::endl;
 a.stream() << "    r.name().simple(\"" << simple_key << "\");" << std::endl;
                    if (has_qualified_name) {
@@ -158,7 +158,7 @@ a.stream() << std::endl;
 
             if (fb.generate_static_configuration()) {
 a.stream() << sn << "::feature_group" << std::endl;
-a.stream() << sn << "::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {" << std::endl;
+a.stream() << sn << "::make_feature_group(const dogen::variability::entities::feature_model& fm) {" << std::endl;
 a.stream() << "    feature_group r;" << std::endl;
 a.stream() << "    const dogen::variability::helpers::feature_selector s(fm);" << std::endl;
 a.stream() << std::endl;
@@ -172,7 +172,7 @@ a.stream() << "}" << std::endl;
 a.stream() << std::endl;
 a.stream() << sn << "::static_configuration " << sn << "::make_static_configuration(" << std::endl;
 a.stream() << "    const feature_group& fg," << std::endl;
-a.stream() << "    const dogen::variability::meta_model::configuration& cfg) {" << std::endl;
+a.stream() << "    const dogen::variability::entities::configuration& cfg) {" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    static_configuration r;" << std::endl;
 a.stream() << "    const dogen::variability::helpers::configuration_selector s(cfg);" << std::endl;
@@ -195,10 +195,10 @@ a.stream() << "}" << std::endl;
 
             if (fb.generate_registration()) {
 a.stream() << std::endl;
-a.stream() << "std::list<dogen::variability::meta_model::feature>" << std::endl;
+a.stream() << "std::list<dogen::variability::entities::feature>" << std::endl;
 a.stream() << sn << "::make_features() {" << std::endl;
-a.stream() << "    using namespace dogen::variability::meta_model;" << std::endl;
-a.stream() << "    std::list<dogen::variability::meta_model::feature> r;" << std::endl;
+a.stream() << "    using namespace dogen::variability::entities;" << std::endl;
+a.stream() << "    std::list<dogen::variability::entities::feature> r;" << std::endl;
 
                 for (const auto& f : fb.features()) {
 a.stream() << "    r.push_back(make_" << f.identifiable_key() << "());" << std::endl;

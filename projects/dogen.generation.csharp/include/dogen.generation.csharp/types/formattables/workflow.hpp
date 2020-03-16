@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen.generation/types/meta_model/model.hpp"
+#include "dogen.generation/types/entities/model.hpp"
 #include "dogen.generation.csharp/types/formattables/model.hpp"
 #include "dogen.generation.csharp/types/formattables/locator.hpp"
 #include "dogen.generation.csharp/types/formatters/repository.hpp"
@@ -39,17 +39,17 @@ private:
      * @brief Retrieves the ids of all the modules in the model.
      */
     model make_model(const formatters::repository& frp,
-        const generation::meta_model::model& m) const;
+        const generation::entities::model& m) const;
 
     void expand_model(
-        const variability::meta_model::feature_model& feature_model,
+        const variability::entities::feature_model& feature_model,
         const formatters::repository& frp, const locator& l, model& fm) const;
 
 public:
     model execute(
-        const variability::meta_model::feature_model& feature_model,
+        const variability::entities::feature_model& feature_model,
         const formatters::repository& frp, const locator& l,
-        const generation::meta_model::model& m) const;
+        const generation::entities::model& m) const;
 };
 
 }

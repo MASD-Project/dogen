@@ -35,7 +35,7 @@ const std::string feature_not_found("Could not find expected feature: ");
 
 namespace dogen::variability::helpers {
 
-feature_selector::feature_selector(const meta_model::feature_model& fm)
+feature_selector::feature_selector(const entities::feature_model& fm)
     : model_(fm) {}
 
 std::string feature_selector::
@@ -43,23 +43,23 @@ qualify(const std::string& prefix, const std::string& feature_name) const {
     return prefix + dot + feature_name;
 }
 
-boost::optional<const meta_model::feature&>
+boost::optional<const entities::feature&>
 feature_selector::try_get_by_name(const std::string& n) const {
     const auto& c(model_.by_name());
     const auto i(c.find(n));
     if (i == c.end())
-        return boost::optional<const meta_model::feature&>();
+        return boost::optional<const entities::feature&>();
 
     return i->second;
 }
 
-boost::optional<const meta_model::feature&>
+boost::optional<const entities::feature&>
 feature_selector::try_get_by_name(const std::string& prefix,
     const std::string& simple_name) const {
     return try_get_by_name(qualify(prefix, simple_name));
 }
 
-const meta_model::feature&
+const entities::feature&
 feature_selector::get_by_name(const std::string& n) const {
     const auto r(try_get_by_name(n));
     if (!r) {
@@ -69,7 +69,7 @@ feature_selector::get_by_name(const std::string& n) const {
     return *r;
 }
 
-const meta_model::feature& feature_selector::get_by_name(
+const entities::feature& feature_selector::get_by_name(
     const std::string& prefix, const std::string& simple_name) const {
     return get_by_name(qualify(prefix, simple_name));
 }

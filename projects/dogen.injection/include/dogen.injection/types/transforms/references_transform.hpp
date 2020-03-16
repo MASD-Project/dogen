@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.injection/types/meta_model/model.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.injection/types/entities/model.hpp"
 #include "dogen.injection/types/transforms/context_fwd.hpp"
 
 namespace dogen::injection::transforms {
@@ -36,7 +36,7 @@ namespace dogen::injection::transforms {
  */
 class references_transform final {
 public:
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

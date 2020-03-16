@@ -23,7 +23,7 @@
 namespace dogen::generation::formatters {
 
 boilerplate_properties::boilerplate_properties()
-    : technical_space_(static_cast<dogen::logical::meta_model::technical_space>(0)),
+    : technical_space_(static_cast<dogen::logical::entities::technical_space>(0)),
       generate_preamble_(static_cast<bool>(0)),
       generate_header_guards_(static_cast<bool>(0)) { }
 
@@ -32,7 +32,7 @@ boilerplate_properties::boilerplate_properties(
     const std::string& postamble,
     const std::list<std::string>& dependencies,
     const std::string& header_guard,
-    const dogen::logical::meta_model::technical_space technical_space,
+    const dogen::logical::entities::technical_space technical_space,
     const bool generate_preamble,
     const bool generate_header_guards)
     : preamble_(preamble),
@@ -134,11 +134,11 @@ void boilerplate_properties::header_guard(const std::string&& v) {
     header_guard_ = std::move(v);
 }
 
-dogen::logical::meta_model::technical_space boilerplate_properties::technical_space() const {
+dogen::logical::entities::technical_space boilerplate_properties::technical_space() const {
     return technical_space_;
 }
 
-void boilerplate_properties::technical_space(const dogen::logical::meta_model::technical_space v) {
+void boilerplate_properties::technical_space(const dogen::logical::entities::technical_space v) {
     technical_space_ = v;
 }
 

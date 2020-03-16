@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen.logical/types/features/type_parameters.hpp"
-#include "dogen.logical/types/meta_model/model.hpp"
+#include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
@@ -38,10 +38,10 @@ class type_params_transform final {
 private:
     static void populate_type_parameters(
         const features::type_parameters::feature_group& fg,
-        meta_model::structural::object& o);
+        entities::structural::object& o);
 
 public:
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

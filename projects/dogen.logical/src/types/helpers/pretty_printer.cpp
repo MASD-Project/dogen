@@ -51,7 +51,7 @@ pretty_printer::pretty_printer(const separators s)
       separator_(s) { }
 
 std::list<std::string> pretty_printer::
-to_list(const meta_model::name& n, const bool model_name_mode) const {
+to_list(const entities::name& n, const bool model_name_mode) const {
     std::list<std::string> r;
     auto lambda([&](const std::string& s) {
             if (!s.empty())
@@ -99,7 +99,7 @@ print_scoped(std::string_view separator, const std::list<std::string>& l) {
 }
 
 void pretty_printer::
-add(const meta_model::name& n, const bool model_name_mode) {
+add(const entities::name& n, const bool model_name_mode) {
     const auto l(to_list(n, model_name_mode));
 
     switch (separator_) {

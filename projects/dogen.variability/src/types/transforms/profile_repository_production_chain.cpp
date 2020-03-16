@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.variability/io/meta_model/profile_repository_io.hpp"
+#include "dogen.variability/io/entities/profile_repository_io.hpp"
 #include "dogen.variability/io/transforms/profile_repository_inputs_io.hpp"
 #include "dogen.variability/types/transforms/profile_merging_transform.hpp"
 #include "dogen.variability/types/transforms/transformation_error.hpp"
@@ -40,9 +40,9 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::variability::transforms {
 
-meta_model::profile_repository
+entities::profile_repository
 profile_repository_production_chain::
-apply(const context& ctx, const meta_model::feature_model& fm,
+apply(const context& ctx, const entities::feature_model& fm,
     const profile_repository_inputs& inputs) {
     tracing::scoped_chain_tracer stp(lg, "profile repository production chain",
         transform_id, transform_id, *ctx.tracer(), inputs);

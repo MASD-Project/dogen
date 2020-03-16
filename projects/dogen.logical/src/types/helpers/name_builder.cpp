@@ -23,8 +23,8 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
-#include "dogen.logical/io/meta_model/name_io.hpp"
-#include "dogen.logical/io/meta_model/location_io.hpp"
+#include "dogen.logical/io/entities/name_io.hpp"
+#include "dogen.logical/io/entities/location_io.hpp"
 #include "dogen.logical/types/helpers/separators.hpp"
 #include "dogen.logical/types/helpers/building_error.hpp"
 #include "dogen.logical/types/helpers/string_processor.hpp"
@@ -67,7 +67,7 @@ void name_builder::model_name(const std::string& mn) {
     BOOST_LOG_SEV(lg, debug) << "Added model name: " << mn;
 }
 
-void name_builder::model_name(const meta_model::location& l) {
+void name_builder::model_name(const entities::location& l) {
     location_builder_.model_modules(l.model_modules());
     BOOST_LOG_SEV(lg, debug) << "Added model name from location: " << l;
 }
@@ -97,11 +97,11 @@ void name_builder::internal_modules(const std::list<std::string>& im) {
     location_builder_.internal_modules(im);
 }
 
-void name_builder::location(const meta_model::location& l) {
+void name_builder::location(const entities::location& l) {
     location_builder_.location(l);
 }
 
-meta_model::name name_builder::build() {
+entities::name name_builder::build() {
     name_.location(location_builder_.build());
     if (model_name_mode_)
         name_.simple(*name_.location().model_modules().rbegin());
@@ -114,7 +114,7 @@ meta_model::name name_builder::build() {
     return name_;
 }
 
-meta_model::name name_builder::build(std::list<std::string> names) {
+entities::name name_builder::build(std::list<std::string> names) {
     /*
      * If we have a single name, we are either referencing a type
      * defined in the global namespace (possibly in a different
@@ -150,7 +150,7 @@ meta_model::name name_builder::build(std::list<std::string> names) {
     return b.build();
 }
 
-meta_model::name name_builder::build(const std::string& names) {
+entities::name name_builder::build(const std::string& names) {
     using utility::string::splitter;
     const auto names_as_list(splitter::split_scoped(names));
     return build(names_as_list);

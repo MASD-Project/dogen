@@ -21,7 +21,7 @@
 #ifndef DOGEN_TEMPLATING_TYPES_STITCH_INSTANTIATOR_HPP
 #define DOGEN_TEMPLATING_TYPES_STITCH_INSTANTIATOR_HPP
 
-#include "dogen.variability/types/meta_model/configuration.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -30,8 +30,8 @@
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen.variability/types/helpers/configuration_factory.hpp"
-#include "dogen.variability/types/meta_model/feature_model.hpp"
-#include "dogen.extraction/types/meta_model/artefact.hpp"
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.extraction/types/entities/artefact.hpp"
 #include "dogen.templating/types/stitch/text_template.hpp"
 
 namespace dogen::templating::stitch {
@@ -44,7 +44,7 @@ typedef boost::error_info<struct tag_file_name, std::string> error_in_file;
 class instantiator final {
 public:
     instantiator(const boost::filesystem::path& wale_templates_directory,
-        const variability::meta_model::feature_model& fm,
+        const variability::entities::feature_model& fm,
         const variability::helpers::configuration_factory& cf);
 
 private:
@@ -87,7 +87,7 @@ private:
      * @brief Creates the properties.
      */
     properties create_properties(
-        const variability::meta_model::configuration& cfg) const;
+        const variability::entities::configuration& cfg) const;
 
     /**
      * @brief Creates the text template.
@@ -100,18 +100,18 @@ private:
     /**
      * @brief Formats the supplied text template.
      */
-    extraction::meta_model::artefact
+    extraction::entities::artefact
     format_text_template(const text_template& tt) const;
 
 public:
-    extraction::meta_model::artefact
+    extraction::entities::artefact
     instantiate(const boost::filesystem::path& input_path,
         const std::unordered_map<std::string, std::string>& kvps) const;
 
 private:
     const boost::filesystem::path wale_templates_directory_;
     const variability::helpers::configuration_factory& configuration_factory_;
-    const variability::meta_model::feature_model& feature_model_;
+    const variability::entities::feature_model& feature_model_;
 };
 
 }

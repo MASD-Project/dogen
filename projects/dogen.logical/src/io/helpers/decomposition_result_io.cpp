@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.logical/io/meta_model/name_io.hpp"
-#include "dogen.logical/io/meta_model/name_tree_io.hpp"
+#include "dogen.logical/io/entities/name_io.hpp"
+#include "dogen.logical/io/entities/name_tree_io.hpp"
 #include "dogen.logical/io/helpers/decomposition_result_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -34,7 +34,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, dogen::logical::meta_model::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, dogen::logical::entities::name>& v) {
     s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
 
     s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
@@ -47,7 +47,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, do
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::string, dogen::logical::meta_model::name> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::string, dogen::logical::entities::name> >& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -61,7 +61,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, dogen::logical::meta_model::name_tree>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, dogen::logical::entities::name_tree>& v) {
     s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
 
     s << "\"first\": " << "\"" << tidy_up_string(v.first) << "\"" << ", ";
@@ -74,7 +74,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, do
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::string, dogen::logical::meta_model::name_tree> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::string, dogen::logical::entities::name_tree> >& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

@@ -42,7 +42,7 @@ namespace dogen::generation::cpp::formatters {
 
 stitch_formatter::stitch_formatter(
     const formattables::locator& l,
-    const variability::meta_model::feature_model& fm,
+    const variability::entities::feature_model& fm,
     const variability::helpers::configuration_factory& cf)
     : instantiator_(l.templates_project_path(), fm, cf) {}
 
@@ -52,9 +52,9 @@ bool stitch_formatter::is_header(const inclusion_support_types ist) const {
         ist == inclusion_support_types::canonical_support;
 }
 
-extraction::meta_model::artefact stitch_formatter::
+extraction::entities::artefact stitch_formatter::
 format(const artefact_formatter_interface& stock_formatter, const context& ctx,
-    const logical::meta_model::element& e) const {
+    const logical::entities::element& e) const {
     const auto al(stock_formatter.archetype_location());
     const auto needs_guard(is_header(stock_formatter.inclusion_support_type()));
 
@@ -74,13 +74,13 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
         BOOST_LOG_SEV(lg, debug) << "Stitch template not found: "
                                  << fp.generic_string();
 
-        extraction::meta_model::artefact r;
+        extraction::entities::artefact r;
         // FIXME: what is the name/path for the artefact?! This may
         // FIXME: explain empty artefacts!
         r.overwrite(a.new_artefact_properties().overwrite());
 
-        extraction::meta_model::operation op;
-        using ot = extraction::meta_model::operation_type;
+        extraction::entities::operation op;
+        using ot = extraction::entities::operation_type;
         op.type(r.overwrite() ? ot::write : ot::create_only);
         r.operation(op);
 
@@ -90,7 +90,7 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
     /*
      * Since the template exists, we can instantiate it.
      */
-    const auto ts(logical::meta_model::technical_space::cpp);
+    const auto ts(logical::entities::technical_space::cpp);
     const auto i(e.decoration().find(ts));
     auto dec(i->second);
     const auto external_keys = std::unordered_map<std::string, std::string> {
@@ -105,8 +105,8 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
     auto r(instantiator_.instantiate(stitch_template, external_keys));
     r.overwrite(a.new_artefact_properties().overwrite());
 
-    extraction::meta_model::operation op;
-    using ot = extraction::meta_model::operation_type;
+    extraction::entities::operation op;
+    using ot = extraction::entities::operation_type;
     op.type(r.overwrite() ? ot::write : ot::create_only);
     r.operation(op);
 

@@ -22,12 +22,12 @@
 #include <sstream>
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string/replace.hpp>
-#include "dogen.variability/types/meta_model/text.hpp"
-#include "dogen.variability/types/meta_model/boolean.hpp"
-#include "dogen.variability/types/meta_model/number.hpp"
-#include "dogen.variability/types/meta_model/value_visitor.hpp"
-#include "dogen.variability/lexical_cast/meta_model/value_type_lc.hpp"
-#include "dogen.variability/lexical_cast/meta_model/binding_point_lc.hpp"
+#include "dogen.variability/types/entities/text.hpp"
+#include "dogen.variability/types/entities/boolean.hpp"
+#include "dogen.variability/types/entities/number.hpp"
+#include "dogen.variability/types/entities/value_visitor.hpp"
+#include "dogen.variability/lexical_cast/entities/value_type_lc.hpp"
+#include "dogen.variability/lexical_cast/entities/binding_point_lc.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.injection/types/transforms/model_production_chain.hpp"
 #include "dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
@@ -44,7 +44,7 @@ auto lg(logger_factory("engine.spec_dumper"));
 const std::string empty_output_directory;
 const std::string activity("dumpspecs");
 
-using namespace dogen::variability::meta_model;
+using namespace dogen::variability::entities;
 class visitor : public value_visitor {
 public:
     using value_visitor::visit;
@@ -81,7 +81,7 @@ std::string spec_dumper::preprocess(std::string s) const {
 }
 
 std::string spec_dumper::
-process_binding_point(const variability::meta_model::binding_point bp) const {
+process_binding_point(const variability::entities::binding_point bp) const {
     std::string r(" Binding point: '");
     r += boost::lexical_cast<std::string>(bp) + "'.";
     boost::replace_all(r, "binding_point::", "");
@@ -89,7 +89,7 @@ process_binding_point(const variability::meta_model::binding_point bp) const {
 }
 
 std::string spec_dumper::process_value(
-    const boost::shared_ptr<variability::meta_model::value> v) const {
+    const boost::shared_ptr<variability::entities::value> v) const {
     visitor vis;
     std::string r;
     if (v) {
@@ -104,7 +104,7 @@ std::string spec_dumper::process_value(
 }
 
 std::string spec_dumper::process_value_type(
-    const variability::meta_model::value_type vt) const {
+    const variability::entities::value_type vt) const {
     std::string r(" Value type: '");
     r += boost::lexical_cast<std::string>(vt) + "'.";
     boost::replace_all(r, "value_type::", "masd::variability::");
@@ -171,7 +171,7 @@ spec_group spec_dumper::create_generation_group() const {
 }
 
 spec_group spec_dumper::
-create_features_group(const variability::meta_model::feature_model& fm) const {
+create_features_group(const variability::entities::feature_model& fm) const {
     spec_group r;
     r.name("Features");
     r.description("Available features for configuration.");

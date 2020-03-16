@@ -25,15 +25,15 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/vector_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.variability/types/meta_model/configuration.hpp"
-#include "dogen.logical/io/meta_model/name_io.hpp"
-#include "dogen.logical/io/meta_model/static_stereotypes_io.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+#include "dogen.logical/io/entities/name_io.hpp"
+#include "dogen.logical/io/entities/static_stereotypes_io.hpp"
 #include "dogen.logical/types/helpers/resolver.hpp"
 #include "dogen.logical/types/helpers/name_builder.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
-#include "dogen.logical/types/meta_model/orm/object_properties.hpp"
-#include "dogen.logical/types/meta_model/orm/primitive_properties.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/types/entities/orm/object_properties.hpp"
+#include "dogen.logical/types/entities/orm/primitive_properties.hpp"
 #include "dogen.logical/types/transforms/stereotypes_transform.hpp"
 
 namespace {
@@ -61,16 +61,16 @@ const std::string invalid_stereotypes("Stereotypes are not valid: ");
 
 namespace dogen::logical::transforms {
 
-meta_model::location stereotypes_transform::
-strip_internal_modules(const meta_model::location& l) {
+entities::location stereotypes_transform::
+strip_internal_modules(const entities::location& l) {
     auto r(l);
     r.internal_modules().clear();
     return r;
 }
 
 bool stereotypes_transform::
-is_element_type(const meta_model::static_stereotypes ss) {
-    using meta_model::static_stereotypes;
+is_element_type(const entities::static_stereotypes ss) {
+    using entities::static_stereotypes;
     return
         ss == static_stereotypes::structural_object ||
         ss == static_stereotypes::structural_object_template ||
@@ -82,7 +82,7 @@ is_element_type(const meta_model::static_stereotypes ss) {
 }
 
 void stereotypes_transform::transform_static_stereotypes(
-    meta_model::structural::object& o, meta_model::model& m) {
+    entities::structural::object& o, entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Static  stereotypes: "
                              << o.static_stereotypes();
 
@@ -90,7 +90,7 @@ void stereotypes_transform::transform_static_stereotypes(
      * First we process all of the well-known stereotypes, collecting
      * any invalid ones as we go along.
      */
-    using meta_model::static_stereotypes;
+    using entities::static_stereotypes;
     std::list<static_stereotypes> unknown_stereotypes;
     for (const auto ss : o.static_stereotypes()) {
         if (is_element_type(ss)) {
@@ -107,11 +107,11 @@ void stereotypes_transform::transform_static_stereotypes(
         else if (ss == static_stereotypes::immutable)
             o.is_immutable(true);
         else if (ss == static_stereotypes::orm_object) {
-            meta_model::orm::object_properties cfg;
+            entities::orm::object_properties cfg;
             cfg.generate_mapping(true);
             o.orm_properties(cfg);
         } else if (ss == static_stereotypes::orm_value) {
-            meta_model::orm::object_properties cfg;
+            entities::orm::object_properties cfg;
             cfg.generate_mapping(true);
             cfg.is_value(true);
             o.orm_properties(cfg);
@@ -132,7 +132,7 @@ void stereotypes_transform::transform_static_stereotypes(
 }
 
 void stereotypes_transform::transform_dynamic_stereotypes(
-    meta_model::structural::object& o, const meta_model::model& em) {
+    entities::structural::object& o, const entities::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Dynamic stereotypes: "
                              << o.dynamic_stereotypes();
 
@@ -162,10 +162,10 @@ void stereotypes_transform::transform_dynamic_stereotypes(
     }
 }
 
-std::unordered_map<meta_model::location,
-                   std::list<meta_model::name>> stereotypes_transform::
-bucket_leaves_by_location(const std::list<meta_model::name>& leaves) {
-    std::unordered_map<meta_model::location, std::list<meta_model::name>>  r;
+std::unordered_map<entities::location,
+                   std::list<entities::name>> stereotypes_transform::
+bucket_leaves_by_location(const std::list<entities::name>& leaves) {
+    std::unordered_map<entities::location, std::list<entities::name>>  r;
 
     for (auto l : leaves) {
         /*
@@ -179,10 +179,10 @@ bucket_leaves_by_location(const std::list<meta_model::name>& leaves) {
     return r;
 }
 
-boost::shared_ptr<meta_model::structural::visitor>
-stereotypes_transform::create_visitor(const meta_model::structural::object& o,
-    const meta_model::location& l, const meta_model::origin_types ot,
-    const std::list<meta_model::name>& leaves) {
+boost::shared_ptr<entities::structural::visitor>
+stereotypes_transform::create_visitor(const entities::structural::object& o,
+    const entities::location& l, const entities::origin_types ot,
+    const std::list<entities::name>& leaves) {
     helpers::name_builder b;
     b.simple_name(o.name().simple() + "_" + visitor_name);
     b.location(l);
@@ -190,13 +190,13 @@ stereotypes_transform::create_visitor(const meta_model::structural::object& o,
     const auto n(b.build());
     BOOST_LOG_SEV(lg, debug) << "Creating visitor: " << n.qualified().dot();
 
-    auto r(boost::make_shared<meta_model::structural::visitor>());
+    auto r(boost::make_shared<entities::structural::visitor>());
     r->name(n);
     r->origin_type(ot);
     r->documentation(visitor_doc + o.name().simple());
-    r->intrinsic_technical_space(meta_model::technical_space::cpp);
+    r->intrinsic_technical_space(entities::technical_space::cpp);
     r->configuration(
-        boost::make_shared<variability::meta_model::configuration>());
+        boost::make_shared<variability::entities::configuration>());
     r->configuration()->name().simple(r->name().simple());
     r->configuration()->name().qualified(r->name().qualified().dot());
 
@@ -214,8 +214,8 @@ stereotypes_transform::create_visitor(const meta_model::structural::object& o,
 }
 
 void stereotypes_transform::
-update_visited_leaves(const std::list<meta_model::name>& leaves,
-    const visitor_details& vd, meta_model::model& m) {
+update_visited_leaves(const std::list<entities::name>& leaves,
+    const visitor_details& vd, entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Updating leaves for: "
                              << vd.base.qualified().dot();
 
@@ -237,8 +237,8 @@ update_visited_leaves(const std::list<meta_model::name>& leaves,
 }
 
 void stereotypes_transform::
-add_visitor_to_model(const boost::shared_ptr<meta_model::structural::visitor> v,
-    meta_model::model& em) {
+add_visitor_to_model(const boost::shared_ptr<entities::structural::visitor> v,
+    entities::model& em) {
     const auto id(v->name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Adding visitor: " << id;
 
@@ -252,7 +252,7 @@ add_visitor_to_model(const boost::shared_ptr<meta_model::structural::visitor> v,
 }
 
 void stereotypes_transform::
-expand_visitable(meta_model::structural::object& o, meta_model::model& em) {
+expand_visitable(entities::structural::object& o, entities::model& em) {
     BOOST_LOG_SEV(lg, debug) << "Expanding visitable for: "
                              << o.name().qualified().dot();
 
@@ -352,7 +352,7 @@ expand_visitable(meta_model::structural::object& o, meta_model::model& em) {
         const auto emmm(em.name().location().model_modules());
         const bool in_target_model(emmm == dv_location.model_modules());
         const auto ot(in_target_model ?
-            meta_model::origin_types::target : o.origin_type());
+            entities::origin_types::target : o.origin_type());
 
         /*
          * Generate the derived visitor and update its leaves.
@@ -369,7 +369,7 @@ expand_visitable(meta_model::structural::object& o, meta_model::model& em) {
 }
 
 bool stereotypes_transform::try_as_object_template(const std::string& s,
-    meta_model::structural::object& o, const meta_model::model& m) {
+    entities::structural::object& o, const entities::model& m) {
 
     using helpers::resolver;
     const auto oot(resolver::try_resolve_object_template_name(o.name(), s, m));
@@ -381,7 +381,7 @@ bool stereotypes_transform::try_as_object_template(const std::string& s,
 }
 
 void stereotypes_transform::
-apply(meta_model::structural::object& o, meta_model::model& m) {
+apply(entities::structural::object& o, entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: "
                              << o.name().qualified().dot();
 
@@ -398,7 +398,7 @@ apply(meta_model::structural::object& o, meta_model::model& m) {
     transform_dynamic_stereotypes(o, m);
 }
 
-void stereotypes_transform::apply(meta_model::structural::primitive& p) {
+void stereotypes_transform::apply(entities::structural::primitive& p) {
     const auto id(p.name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << id;
 
@@ -424,7 +424,7 @@ void stereotypes_transform::apply(meta_model::structural::primitive& p) {
      * Process all of the well-known stereotypes, collecting any
      * invalid ones as we go along.
      */
-    using meta_model::static_stereotypes;
+    using entities::static_stereotypes;
     std::list<static_stereotypes> unknown_static_stereotypes;
     for (const auto st : p.static_stereotypes()) {
         if (is_element_type(st)) {
@@ -437,7 +437,7 @@ void stereotypes_transform::apply(meta_model::structural::primitive& p) {
         } else if (st == static_stereotypes::immutable)
             p.is_immutable(true);
         else if (st == static_stereotypes::orm_value) {
-            meta_model::orm::primitive_properties cfg;
+            entities::orm::primitive_properties cfg;
             cfg.generate_mapping(true);
             p.orm_properties(cfg);
         } else
@@ -457,7 +457,7 @@ void stereotypes_transform::apply(meta_model::structural::primitive& p) {
     }
 }
 
-void stereotypes_transform::apply(const context& ctx, meta_model::model& m) {
+void stereotypes_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "stereotypes transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 

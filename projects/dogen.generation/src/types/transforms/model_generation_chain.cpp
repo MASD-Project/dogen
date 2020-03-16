@@ -21,7 +21,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.generation/io/meta_model/model_io.hpp"
+#include "dogen.generation/io/entities/model_io.hpp"
 #include "dogen.generation/types/transforms/generability_transform.hpp"
 #include "dogen.generation/types/transforms/artefact_properties_transform.hpp"
 #include "dogen.generation/types/transforms/enablement_transform.hpp"
@@ -44,7 +44,7 @@ static logger lg(logger_factory(transform_id));
 namespace dogen::generation::transforms {
 
 void model_generation_chain::apply(const context& ctx,
-    std::list<meta_model::model>& ms) {
+    std::list<entities::model>& ms) {
 
     /*
      * If we don't have any models in the set, there is nothing to

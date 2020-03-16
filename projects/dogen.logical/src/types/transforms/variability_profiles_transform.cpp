@@ -24,11 +24,11 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
-#include "dogen.variability/lexical_cast/meta_model/binding_point_lc.hpp"
-#include "dogen.logical/io/meta_model/model_set_io.hpp"
-#include "dogen.logical/types/meta_model/variability/profile.hpp"
+#include "dogen.variability/lexical_cast/entities/binding_point_lc.hpp"
+#include "dogen.logical/io/entities/model_set_io.hpp"
+#include "dogen.logical/types/entities/variability/profile.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
-#include "dogen.logical/types/meta_model/variability/profile_template.hpp"
+#include "dogen.logical/types/entities/variability/profile_template.hpp"
 #include "dogen.logical/types/transforms/variability_profiles_transform.hpp"
 
 namespace {
@@ -64,7 +64,7 @@ compute_key(const std::string& key_prefix, const std::string& original_key) {
 
 void variability_profiles_transform::
 update(const features::variability_profile::feature_group& fg,
-    meta_model::variability::abstract_profile& ap) {
+    entities::variability::abstract_profile& ap) {
     using vp = logical::features::variability_profile;
     const auto scfg(vp::make_static_configuration(fg, ap));
     ap.stereotype(scfg.stereotype);
@@ -73,7 +73,7 @@ update(const features::variability_profile::feature_group& fg,
 
 void variability_profiles_transform::
 update(const features::variability_entry::feature_group& fg,
-    meta_model::variability::abstract_profile_entry& ape) {
+    entities::variability::abstract_profile_entry& ape) {
     const auto& k(ape.key());
     BOOST_LOG_SEV(lg, trace) << "Adapting entry: " << k;
 
@@ -81,7 +81,7 @@ update(const features::variability_entry::feature_group& fg,
     const auto scfg(variability_entry::make_static_configuration(fg, ape));
 
     using boost::lexical_cast;
-    using meta_model::variability::profile_template_entry;
+    using entities::variability::profile_template_entry;
     auto pte(dynamic_cast<profile_template_entry*>(&ape));
     if (pte) {
         if (scfg.instantiation_domain_name.empty()) {
@@ -111,7 +111,7 @@ update(const features::variability_entry::feature_group& fg,
 }
 
 void variability_profiles_transform::process_profile_templates(
-    const variability::meta_model::feature_model& fm, meta_model::model& m) {
+    const variability::entities::feature_model& fm, entities::model& m) {
     /*
      * If there are no profile templates, there is no work to do.
      */
@@ -143,7 +143,7 @@ void variability_profiles_transform::process_profile_templates(
 }
 
 void variability_profiles_transform::process_profiles(
-    const variability::meta_model::feature_model& fm, meta_model::model& m) {
+    const variability::entities::feature_model& fm, entities::model& m) {
     /*
      * If there are no profiles, there is no work to do.
      */
@@ -175,7 +175,7 @@ void variability_profiles_transform::process_profiles(
 }
 
 void variability_profiles_transform::
-apply(const context& ctx, logical::meta_model::model_set& ms) {
+apply(const context& ctx, logical::entities::model_set& ms) {
     const auto model_name(ms.target().name().qualified().dot());
     tracing::scoped_transform_tracer stp(lg, "variability profiles",
         transform_id, model_name, *ctx.tracer());

@@ -19,13 +19,13 @@
  *
  */
 #include <ostream>
-#include "dogen.logical/io/meta_model/element_io.hpp"
+#include "dogen.logical/io/entities/element_io.hpp"
 #include "dogen.generation.csharp/io/formattables/formattable_io.hpp"
 #include "dogen.generation.csharp/io/formattables/element_properties_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::logical::meta_model::element>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::logical::entities::element>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 

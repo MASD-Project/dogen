@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen.logical/types/meta_model/model.hpp"
+#include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 
 namespace dogen::logical::transforms {
@@ -35,7 +35,7 @@ namespace dogen::logical::transforms {
  */
 class containment_transform final {
 public:
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

@@ -22,11 +22,11 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.variability/types/meta_model/text.hpp"
-#include "dogen.variability/types/meta_model/number.hpp"
-#include "dogen.variability/types/meta_model/boolean.hpp"
-#include "dogen.variability/types/meta_model/key_value_pair.hpp"
-#include "dogen.variability/types/meta_model/text_collection.hpp"
+#include "dogen.variability/types/entities/text.hpp"
+#include "dogen.variability/types/entities/number.hpp"
+#include "dogen.variability/types/entities/boolean.hpp"
+#include "dogen.variability/types/entities/key_value_pair.hpp"
+#include "dogen.variability/types/entities/text_collection.hpp"
 #include "dogen.variability/types/helpers/selection_exception.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 
@@ -59,11 +59,11 @@ const std::string duplicate_key("Duplicate key in kvp: ");
 namespace dogen::variability::helpers {
 
 configuration_selector::
-configuration_selector(const meta_model::configuration& c)
+configuration_selector(const entities::configuration& c)
     : configuration_(c) { }
 
 void configuration_selector::
-ensure_default_value(const meta_model::feature& f) const {
+ensure_default_value(const entities::feature& f) const {
     if (!f.default_value()) {
         const auto& n(f.name().qualified());
         BOOST_LOG_SEV(lg, error) << no_default_value << "'" << n << "'";
@@ -79,7 +79,7 @@ has_configuration_point(const std::string& qn) const {
 }
 
 bool configuration_selector::
-has_configuration_point(const meta_model::feature& f) const {
+has_configuration_point(const entities::feature& f) const {
     return has_configuration_point(f.name().qualified());
 }
 
@@ -98,7 +98,7 @@ has_configuration_point_ending_with(const std::string& s) const {
     return false;
 }
 
-const meta_model::value& configuration_selector::
+const entities::value& configuration_selector::
 get_configuration_point_value(const std::string& qn) const {
     const auto& cps(configuration_.configuration_points());
     const auto i(cps.find(qn));
@@ -109,15 +109,15 @@ get_configuration_point_value(const std::string& qn) const {
     BOOST_THROW_EXCEPTION(selection_exception(configuration_point_not_found + qn));
 }
 
-const meta_model::value& configuration_selector::
-get_configuration_point_value(const meta_model::feature& f) const {
+const entities::value& configuration_selector::
+get_configuration_point_value(const entities::feature& f) const {
     return get_configuration_point_value(f.name().qualified());
 }
 
 std::string
-configuration_selector::get_text_content(const meta_model::value& v) {
+configuration_selector::get_text_content(const entities::value& v) {
     try {
-        const auto& b(dynamic_cast<const meta_model::text&>(v));
+        const auto& b(dynamic_cast<const entities::text&>(v));
         return b.content();
     } catch(const std::bad_cast& /*e*/) {
         BOOST_LOG_SEV(lg, error) << unexpected_value_type;
@@ -139,7 +139,7 @@ get_text_content(const std::string& qn) const {
 }
 
 std::string configuration_selector::
-get_text_content_or_default(const meta_model::feature& f) const {
+get_text_content_or_default(const entities::feature& f) const {
     if (has_configuration_point(f))
         return get_text_content(f);
 
@@ -157,9 +157,9 @@ get_text_content_or_default(const meta_model::feature& f) const {
 }
 
 std::list<std::string> configuration_selector::
-get_text_collection_content(const meta_model::value& v) {
+get_text_collection_content(const entities::value& v) {
     try {
-        const auto& b(dynamic_cast<const meta_model::text_collection&>(v));
+        const auto& b(dynamic_cast<const entities::text_collection&>(v));
         return b.content();
     } catch(const std::bad_cast& /*e*/) {
         BOOST_LOG_SEV(lg, error) << unexpected_value_type;
@@ -168,7 +168,7 @@ get_text_collection_content(const meta_model::value& v) {
 }
 
 std::string configuration_selector::
-get_text_content(const meta_model::feature& f) const {
+get_text_content(const entities::feature& f) const {
     return get_text_content(f.name().qualified());
 }
 
@@ -177,7 +177,7 @@ get_text_collection_content(const std::string& qn) const {
     const auto& v(get_configuration_point_value(qn));
 
     try {
-        const auto& tc(dynamic_cast<const meta_model::text_collection&>(v));
+        const auto& tc(dynamic_cast<const entities::text_collection&>(v));
         return tc.content();
     } catch(const std::bad_cast& /*e*/) {
         BOOST_LOG_SEV(lg, error) << unexpected_type
@@ -187,12 +187,12 @@ get_text_collection_content(const std::string& qn) const {
 }
 
 std::list<std::string> configuration_selector::
-get_text_collection_content(const meta_model::feature& f) const {
+get_text_collection_content(const entities::feature& f) const {
     return get_text_collection_content(f.name().qualified());
 }
 
 std::list<std::string> configuration_selector::
-get_text_collection_content_or_default(const meta_model::feature& f) const {
+get_text_collection_content_or_default(const entities::feature& f) const {
     if (has_configuration_point(f))
         return get_text_collection_content(f);
 
@@ -209,9 +209,9 @@ get_text_collection_content_or_default(const meta_model::feature& f) const {
     }
 }
 
-bool configuration_selector::get_boolean_content(const meta_model::value& v) {
+bool configuration_selector::get_boolean_content(const entities::value& v) {
     try {
-        const auto& b(dynamic_cast<const meta_model::boolean&>(v));
+        const auto& b(dynamic_cast<const entities::boolean&>(v));
         return b.content();
     } catch(const std::bad_cast& /*e*/) {
         BOOST_LOG_SEV(lg, error) << unexpected_value_type;
@@ -233,12 +233,12 @@ get_boolean_content(const std::string& qn) const {
 }
 
 bool configuration_selector::
-get_boolean_content(const meta_model::feature& f) const {
+get_boolean_content(const entities::feature& f) const {
     return get_boolean_content(f.name().qualified());
 }
 
 bool configuration_selector::
-get_boolean_content_or_default(const meta_model::feature& f) const {
+get_boolean_content_or_default(const entities::feature& f) const {
     if (has_configuration_point(f))
         return get_boolean_content(f);
 
@@ -255,9 +255,9 @@ get_boolean_content_or_default(const meta_model::feature& f) const {
     }
 }
 
-int configuration_selector::get_number_content(const meta_model::value& v) {
+int configuration_selector::get_number_content(const entities::value& v) {
     try {
-        const auto& b(dynamic_cast<const meta_model::number&>(v));
+        const auto& b(dynamic_cast<const entities::number&>(v));
         return b.content();
     } catch(const std::bad_cast& /*e*/) {
         BOOST_LOG_SEV(lg, error) << unexpected_value_type;
@@ -279,12 +279,12 @@ get_number_content(const std::string& qn) const {
 }
 
 int configuration_selector::
-get_number_content(const meta_model::feature& f) const {
+get_number_content(const entities::feature& f) const {
     return get_number_content(f.name().qualified());
 }
 
 int configuration_selector::
-get_number_content_or_default(const meta_model::feature& f) const {
+get_number_content_or_default(const entities::feature& f) const {
     if (has_configuration_point(f))
         return get_number_content(f);
 
@@ -302,9 +302,9 @@ get_number_content_or_default(const meta_model::feature& f) const {
 }
 
 const std::list<std::pair<std::string, std::string>>&
-configuration_selector::get_key_value_pair_content(const meta_model::value& v) {
+configuration_selector::get_key_value_pair_content(const entities::value& v) {
     try {
-        const auto& b(dynamic_cast<const meta_model::key_value_pair&>(v));
+        const auto& b(dynamic_cast<const entities::key_value_pair&>(v));
         return b.content();
     } catch(const std::bad_cast& /*e*/) {
         BOOST_LOG_SEV(lg, error) << unexpected_value_type;
@@ -326,7 +326,7 @@ configuration_selector::get_key_value_pair_content(const std::string& qn) const 
 }
 
 const std::list<std::pair<std::string, std::string>>& configuration_selector::
-get_key_value_pair_content(const meta_model::feature& f) const {
+get_key_value_pair_content(const entities::feature& f) const {
     return get_key_value_pair_content(f.name().qualified());
 }
 

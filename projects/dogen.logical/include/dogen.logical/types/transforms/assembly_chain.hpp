@@ -26,9 +26,9 @@
 #endif
 
 #include <list>
-#include "dogen.logical/types/meta_model/technical_space.hpp"
-#include "dogen.logical/types/meta_model/model.hpp"
-#include "dogen.logical/types/meta_model/model_set.hpp"
+#include "dogen.logical/types/entities/technical_space.hpp"
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.logical/types/entities/model_set.hpp"
 #include "dogen.logical/types/transforms/context_fwd.hpp"
 
 namespace dogen::logical::transforms {
@@ -38,9 +38,9 @@ namespace dogen::logical::transforms {
  */
 class assembly_chain final {
 public:
-    static meta_model::model apply(const context& ctx,
-        const meta_model::technical_space ts,
-        logical::meta_model::model_set ms);
+    static entities::model apply(const context& ctx,
+        const entities::technical_space ts,
+        logical::entities::model_set ms);
 };
 
 }

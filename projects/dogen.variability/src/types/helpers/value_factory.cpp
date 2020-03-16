@@ -22,12 +22,12 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.variability/io/meta_model/value_type_io.hpp"
-#include "dogen.variability/types/meta_model/text.hpp"
-#include "dogen.variability/types/meta_model/text_collection.hpp"
-#include "dogen.variability/types/meta_model/boolean.hpp"
-#include "dogen.variability/types/meta_model/number.hpp"
-#include "dogen.variability/types/meta_model/key_value_pair.hpp"
+#include "dogen.variability/io/entities/value_type_io.hpp"
+#include "dogen.variability/types/entities/text.hpp"
+#include "dogen.variability/types/entities/text_collection.hpp"
+#include "dogen.variability/types/entities/boolean.hpp"
+#include "dogen.variability/types/entities/number.hpp"
+#include "dogen.variability/types/entities/key_value_pair.hpp"
 #include "dogen.variability/types/helpers/building_exception.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
 
@@ -107,51 +107,51 @@ ensure_non_empty(const std::list<std::string>& raw_values) const {
     }
 }
 
-bool value_factory::is_collection(const meta_model::value_type vt) const {
-    return vt == meta_model::value_type::text_collection;
+bool value_factory::is_collection(const entities::value_type vt) const {
+    return vt == entities::value_type::text_collection;
 }
 
-boost::shared_ptr<meta_model::value>
+boost::shared_ptr<entities::value>
 value_factory::make_text(const std::string& v) const {
-    return boost::make_shared<meta_model::text>(v);
+    return boost::make_shared<entities::text>(v);
 }
 
-boost::shared_ptr<meta_model::value> value_factory::make_text_collection(
+boost::shared_ptr<entities::value> value_factory::make_text_collection(
     const std::list<std::string>& v) const {
-    auto r(boost::make_shared<meta_model::text_collection>(v));
+    auto r(boost::make_shared<entities::text_collection>(v));
     return r;
 }
 
-boost::shared_ptr<meta_model::value>
+boost::shared_ptr<entities::value>
 value_factory::make_boolean(const std::string& v) const {
-    return boost::make_shared<meta_model::boolean>(to_bool(v));
+    return boost::make_shared<entities::boolean>(to_bool(v));
 }
 
-boost::shared_ptr<meta_model::value>
+boost::shared_ptr<entities::value>
 value_factory::make_boolean(const bool v) const {
-    return boost::make_shared<meta_model::boolean>(v);
+    return boost::make_shared<entities::boolean>(v);
 }
 
-boost::shared_ptr<meta_model::value>
+boost::shared_ptr<entities::value>
 value_factory::make_number(const std::string& v) const {
-    return boost::make_shared<meta_model::number>(to_int(v));
+    return boost::make_shared<entities::number>(to_int(v));
 }
 
-boost::shared_ptr<meta_model::value>
+boost::shared_ptr<entities::value>
 value_factory::make_number(const int v) const {
-    return boost::make_shared<meta_model::number>(v);
+    return boost::make_shared<entities::number>(v);
 }
 
-boost::shared_ptr<meta_model::value> value_factory::
+boost::shared_ptr<entities::value> value_factory::
 make_kvp(const std::list<std::pair<std::string, std::string>>& v) const {
-    return boost::make_shared<meta_model::key_value_pair>(v);
+    return boost::make_shared<entities::key_value_pair>(v);
 }
 
-boost::shared_ptr<meta_model::value> value_factory::
-make(const meta_model::value_type& vt, const std::list<std::string>& v) const {
+boost::shared_ptr<entities::value> value_factory::
+make(const entities::value_type& vt, const std::list<std::string>& v) const {
     ensure_non_empty(v);
 
-    using meta_model::value_type;
+    using entities::value_type;
     switch (vt) {
     case value_type::text:
         return make_text(v.front());
@@ -170,8 +170,8 @@ make(const meta_model::value_type& vt, const std::list<std::string>& v) const {
     BOOST_THROW_EXCEPTION(building_exception(value_type_not_supported + s));
 }
 
-boost::shared_ptr<meta_model::value> value_factory::
-make(const meta_model::feature& f, const std::list<std::string>& v) const {
+boost::shared_ptr<entities::value> value_factory::
+make(const entities::feature& f, const std::list<std::string>& v) const {
     ensure_non_empty(v);
     if (!is_collection(f.value_type()))
         ensure_at_most_one_element(v);
@@ -179,10 +179,10 @@ make(const meta_model::feature& f, const std::list<std::string>& v) const {
     return make(f.value_type(), v);
 }
 
-boost::shared_ptr<meta_model::value>
-value_factory::make(const meta_model::feature& f,
+boost::shared_ptr<entities::value>
+value_factory::make(const entities::feature& f,
     const std::list<std::pair<std::string, std::string>>& v) const {
-    if (f.value_type() != meta_model::value_type::key_value_pair) {
+    if (f.value_type() != entities::value_type::key_value_pair) {
         const auto s(boost::lexical_cast<std::string>(f.value_type()));
         BOOST_LOG_SEV(lg, error) << value_type_not_supported << s;
         BOOST_THROW_EXCEPTION(building_exception(value_type_not_supported + s));;

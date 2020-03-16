@@ -31,7 +31,7 @@ mapping_value::mapping_value(mapping_value&& rhs)
 
 mapping_value::mapping_value(
     const dogen::logical::helpers::mapping_actions mapping_action,
-    const boost::optional<dogen::logical::meta_model::name>& default_name)
+    const boost::optional<dogen::logical::entities::name>& default_name)
     : mapping_action_(mapping_action),
       default_name_(default_name) { }
 
@@ -60,19 +60,19 @@ void mapping_value::mapping_action(const dogen::logical::helpers::mapping_action
     mapping_action_ = v;
 }
 
-const boost::optional<dogen::logical::meta_model::name>& mapping_value::default_name() const {
+const boost::optional<dogen::logical::entities::name>& mapping_value::default_name() const {
     return default_name_;
 }
 
-boost::optional<dogen::logical::meta_model::name>& mapping_value::default_name() {
+boost::optional<dogen::logical::entities::name>& mapping_value::default_name() {
     return default_name_;
 }
 
-void mapping_value::default_name(const boost::optional<dogen::logical::meta_model::name>& v) {
+void mapping_value::default_name(const boost::optional<dogen::logical::entities::name>& v) {
     default_name_ = v;
 }
 
-void mapping_value::default_name(const boost::optional<dogen::logical::meta_model::name>&& v) {
+void mapping_value::default_name(const boost::optional<dogen::logical::entities::name>&& v) {
     default_name_ = std::move(v);
 }
 

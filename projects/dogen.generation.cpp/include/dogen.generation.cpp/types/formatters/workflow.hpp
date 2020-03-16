@@ -33,9 +33,9 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "dogen.variability/types/helpers/configuration_factory.hpp"
-#include "dogen.extraction/types/meta_model/artefact.hpp"
-#include "dogen.logical/types/meta_model/element.hpp"
-#include "dogen.generation/types/meta_model/element_archetype.hpp"
+#include "dogen.extraction/types/entities/artefact.hpp"
+#include "dogen.logical/types/entities/element.hpp"
+#include "dogen.generation/types/entities/element_archetype.hpp"
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
 #include "dogen.generation.cpp/types/formatters/registrar.hpp"
@@ -49,7 +49,7 @@ namespace dogen::generation::cpp::formatters {
 class workflow final {
 public:
     workflow(const formattables::locator& l,
-        const variability::meta_model::feature_model& fm,
+        const variability::entities::feature_model& fm,
         const variability::helpers::configuration_factory& cf);
 
 public:
@@ -60,20 +60,20 @@ public:
     static cpp::formatters::registrar& registrar();
 
 private:
-    const logical::meta_model::artefact_properties&
-    get_artefact_properties(const logical::meta_model::element& e,
+    const logical::entities::artefact_properties&
+    get_artefact_properties(const logical::entities::element& e,
         const std::string& archetype) const;
 
 private:
-    std::list<extraction::meta_model::artefact>
-    format(const std::unordered_set<generation::meta_model::element_archetype>&
+    std::list<extraction::entities::artefact>
+    format(const std::unordered_set<generation::entities::element_archetype>&
         enabled_archetype_for_element, const formattables::model& fm,
-        const logical::meta_model::element& e,
+        const logical::entities::element& e,
         const formattables::element_properties& ep) const;
 
 public:
-    std::list<extraction::meta_model::artefact>
-    execute(const std::unordered_set<generation::meta_model::element_archetype>&
+    std::list<extraction::entities::artefact>
+    execute(const std::unordered_set<generation::entities::element_archetype>&
         enabled_archetype_for_element, const formattables::model& fm) const;
 
 private:

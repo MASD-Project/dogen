@@ -27,9 +27,9 @@ namespace dogen::logical::features {
 
 namespace {
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_injection_is_proxy_model() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("is_proxy_model");
     r.name().qualified("masd.injection.is_proxy_model");
@@ -47,7 +47,7 @@ make_masd_injection_is_proxy_model() {
 }
 
 origin::feature_group
-origin::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+origin::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
@@ -58,7 +58,7 @@ origin::make_feature_group(const dogen::variability::meta_model::feature_model& 
 
 origin::static_configuration origin::make_static_configuration(
     const feature_group& fg,
-    const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::entities::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
@@ -66,10 +66,10 @@ origin::static_configuration origin::make_static_configuration(
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature>
+std::list<dogen::variability::entities::feature>
 origin::make_features() {
-    using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature> r;
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature> r;
     r.push_back(make_masd_injection_is_proxy_model());
     return r;
 }

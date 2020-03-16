@@ -64,7 +64,7 @@ const std::string cpp_includes_with_top_modeline(
 #include <win32/system_inc_1>
 )");
 
-using dogen::logical::meta_model::technical_space;
+using dogen::logical::entities::technical_space;
 using dogen::generation::formatters::dependencies_formatter;
 using dogen::generation::formatters::indent_filter;
 std::string format(const technical_space ts,

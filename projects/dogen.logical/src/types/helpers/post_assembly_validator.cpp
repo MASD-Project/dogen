@@ -26,7 +26,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
-#include "dogen.logical/io/meta_model/name_io.hpp"
+#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/types/helpers/decomposer.hpp"
 #include "dogen.logical/types/helpers/validation_error.hpp"
 #include "dogen.logical/types/helpers/post_assembly_validator.hpp"
@@ -131,8 +131,8 @@ inline void check_not_in_container(const Container& c, const std::string& str,
 }
 
 bool post_assembly_validator::
-allow_spaces_in_built_in_types(const meta_model::technical_space l) {
-    return l == meta_model::technical_space::cpp;
+allow_spaces_in_built_in_types(const entities::technical_space l) {
+    return l == entities::technical_space::cpp;
 }
 
 void post_assembly_validator::validate_string(const std::string& s,
@@ -179,7 +179,7 @@ void post_assembly_validator::validate_strings(
         validate_string(s, regex);
 }
 
-void post_assembly_validator::validate_name(const meta_model::name& n,
+void post_assembly_validator::validate_name(const entities::name& n,
     const std::regex& regex, const bool allow_spaces_in_built_in_types) {
     /*
      * All names must have a non-empty id.
@@ -230,8 +230,8 @@ void post_assembly_validator::validate_name(const meta_model::name& n,
 }
 
 void post_assembly_validator::
-validate_names(const std::list<std::pair<std::string, meta_model::name>>& names,
-    const meta_model::technical_space l) {
+validate_names(const std::list<std::pair<std::string, entities::name>>& names,
+    const entities::technical_space l) {
     BOOST_LOG_SEV(lg, debug) << "Validating names.";
     std::unordered_set<std::string> ids_done;
 
@@ -269,7 +269,7 @@ validate_names(const std::list<std::pair<std::string, meta_model::name>>& names,
 }
 
 void post_assembly_validator::validate_meta_names(
-    const std::list<std::pair<std::string, meta_model::name>>& meta_names) {
+    const std::list<std::pair<std::string, entities::name>>& meta_names) {
     BOOST_LOG_SEV(lg, debug) << "Validating all meta-names.";
 
     /*
@@ -301,7 +301,7 @@ void post_assembly_validator::validate_meta_names(
 
 void post_assembly_validator::
 validate_name_tree(const std::unordered_set<std::string>& abstract_elements,
-    const meta_model::technical_space ts, const meta_model::name_tree& nt,
+    const entities::technical_space ts, const entities::name_tree& nt,
     const bool inherit_opaqueness_from_parent) {
     const auto& ae(abstract_elements);
     const auto id(nt.current().qualified().dot());
@@ -317,8 +317,8 @@ validate_name_tree(const std::unordered_set<std::string>& abstract_elements,
 
 void post_assembly_validator::validate_name_trees(
     const std::unordered_set<std::string>& abstract_elements,
-    const meta_model::technical_space ts,
-    const std::list<std::pair<std::string, meta_model::name_tree>>& nts) {
+    const entities::technical_space ts,
+    const std::list<std::pair<std::string, entities::name_tree>>& nts) {
     BOOST_LOG_SEV(lg, debug) << "Validating name trees.";
 
     /*
@@ -328,7 +328,7 @@ void post_assembly_validator::validate_name_trees(
      * know they are valid. These are just additional checks we
      * perform on these names.
      */
-    if (ts != meta_model::technical_space::cpp)
+    if (ts != entities::technical_space::cpp)
         return;
 
     for (const auto& pair : nts) {
@@ -348,7 +348,7 @@ void post_assembly_validator::validate_name_trees(
 }
 
 void post_assembly_validator::
-validate(const indices& idx, const meta_model::model& m) {
+validate(const indices& idx, const entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: "
                              << m.name().qualified().dot();
 

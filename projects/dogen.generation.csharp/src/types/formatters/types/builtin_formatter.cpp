@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.logical/types/meta_model/structural/builtin.hpp"
+#include "dogen.logical/types/entities/structural/builtin.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation.csharp/types/traits.hpp"
 #include "dogen.generation.csharp/types/formatters/types/traits.hpp"
@@ -43,7 +43,7 @@ physical::location builtin_formatter::archetype_location() const {
     return r;
 }
 
-const logical::meta_model::name& builtin_formatter::meta_name() const {
+const logical::entities::name& builtin_formatter::meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_builtin_name());
     return r;
@@ -54,19 +54,19 @@ std::string builtin_formatter::family() const {
 }
 
 boost::filesystem::path builtin_formatter::full_path(
-    const formattables::locator& l, const logical::meta_model::name& n) const {
+    const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_full_path(n, static_id());
 }
 
 std::list<std::string> builtin_formatter::
-inclusion_dependencies(const logical::meta_model::element& /*e*/) const {
+inclusion_dependencies(const logical::entities::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
-extraction::meta_model::artefact builtin_formatter::
-format(const context& /*ctx*/, const logical::meta_model::element& /*e*/) const {
-    extraction::meta_model::artefact r;
+extraction::entities::artefact builtin_formatter::
+format(const context& /*ctx*/, const logical::entities::element& /*e*/) const {
+    extraction::entities::artefact r;
     return r;
 }
 

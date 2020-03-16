@@ -27,7 +27,7 @@
 
 #include <list>
 #include <string>
-#include "dogen.logical/types/meta_model/name.hpp"
+#include "dogen.logical/types/entities/name.hpp"
 
 namespace dogen::logical::helpers {
 
@@ -36,7 +36,7 @@ public:
     explicit name_flattener(const bool detect_model_name = true);
 
 public:
-    std::list<std::string> flatten(const meta_model::name& n) const;
+    std::list<std::string> flatten(const entities::name& n) const;
 
 private:
     const bool detect_model_name_;

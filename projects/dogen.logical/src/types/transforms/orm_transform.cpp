@@ -28,25 +28,25 @@
 #include "dogen.utility/types/string/splitter.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/types/traits.hpp"
-#include "dogen.logical/types/meta_model/orm/letter_case.hpp"
+#include "dogen.logical/types/entities/orm/letter_case.hpp"
 #include "dogen.logical/types/features/orm.hpp"
-#include "dogen.logical/lexical_cast/meta_model/orm/letter_case_lc.hpp"
-#include "dogen.logical/lexical_cast/meta_model/orm/database_system_lc.hpp"
-#include "dogen.logical/types/meta_model/structural/module.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/structural/builtin.hpp"
-#include "dogen.logical/types/meta_model/element.hpp"
-#include "dogen.logical/types/meta_model/structural/visitor.hpp"
-#include "dogen.logical/types/meta_model/structural/exception.hpp"
-#include "dogen.logical/types/meta_model/structural/primitive.hpp"
-#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
-#include "dogen.logical/types/meta_model/structural/object_template.hpp"
-#include "dogen.logical/io/meta_model/orm/database_system_io.hpp"
-#include "dogen.logical/io/meta_model/orm/model_properties_io.hpp"
-#include "dogen.logical/io/meta_model/orm/object_properties_io.hpp"
-#include "dogen.logical/io/meta_model/orm/primitive_properties_io.hpp"
-#include "dogen.logical/io/meta_model/orm/type_mapping_io.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
+#include "dogen.logical/lexical_cast/entities/orm/letter_case_lc.hpp"
+#include "dogen.logical/lexical_cast/entities/orm/database_system_lc.hpp"
+#include "dogen.logical/types/entities/structural/module.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/builtin.hpp"
+#include "dogen.logical/types/entities/element.hpp"
+#include "dogen.logical/types/entities/structural/visitor.hpp"
+#include "dogen.logical/types/entities/structural/exception.hpp"
+#include "dogen.logical/types/entities/structural/primitive.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
+#include "dogen.logical/types/entities/structural/object_template.hpp"
+#include "dogen.logical/io/entities/orm/database_system_io.hpp"
+#include "dogen.logical/io/entities/orm/model_properties_io.hpp"
+#include "dogen.logical/io/entities/orm/object_properties_io.hpp"
+#include "dogen.logical/io/entities/orm/primitive_properties_io.hpp"
+#include "dogen.logical/io/entities/orm/type_mapping_io.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/types/transforms/orm_transform.hpp"
@@ -86,8 +86,8 @@ const std::string invalid_daatabase_system(
 namespace dogen::logical::transforms {
 
 std::string orm_transform::
-to_odb_database(const logical::meta_model::orm::database_system ds) {
-    using logical::meta_model::orm::database_system;
+to_odb_database(const logical::entities::orm::database_system ds) {
+    using logical::entities::orm::database_system;
 
     switch (ds) {
     case database_system::mysql: return mysql;
@@ -105,7 +105,7 @@ to_odb_database(const logical::meta_model::orm::database_system ds) {
 
 std::string
 orm_transform::capitalise_schema_name(const std::string& schema_name,
-    const boost::optional<meta_model::orm::letter_case>& lc) {
+    const boost::optional<entities::orm::letter_case>& lc) {
     /*
      * If we do not have a schema name, there is nothing to be
      * done. Similarly, If the user did not supply a letter case
@@ -118,7 +118,7 @@ orm_transform::capitalise_schema_name(const std::string& schema_name,
      * Populate the capitalised schema name according to the
      * configuration requested by the user.
      */
-    using meta_model::orm::letter_case;
+    using entities::orm::letter_case;
     if (*lc == letter_case::upper_case)
         return boost::to_upper_copy(schema_name);
     else if (*lc == letter_case::lower_case)
@@ -129,9 +129,9 @@ orm_transform::capitalise_schema_name(const std::string& schema_name,
     BOOST_THROW_EXCEPTION(transformation_error(invalid_case + s));
 }
 
-std::vector<meta_model::orm::database_system>
+std::vector<entities::orm::database_system>
 orm_transform::to_orm_database_system(const std::list<std::string>& vs) {
-    using meta_model::orm::database_system;
+    using entities::orm::database_system;
     std::vector<database_system> r;
     r.reserve(vs.size());
 
@@ -141,10 +141,10 @@ orm_transform::to_orm_database_system(const std::list<std::string>& vs) {
     return r;
 }
 
-std::unordered_map<meta_model::orm::database_system, std::string>
+std::unordered_map<entities::orm::database_system, std::string>
 orm_transform::make_type_overrides(const std::list<std::string> ls) {
     BOOST_LOG_SEV(lg, debug) << "Reading type overrides.";
-    std::unordered_map<meta_model::orm::database_system, std::string> r;
+    std::unordered_map<entities::orm::database_system, std::string> r;
     if (ls.empty()) {
         BOOST_LOG_SEV(lg, debug) << "No type overrides found.";
         return r;
@@ -160,7 +160,7 @@ orm_transform::make_type_overrides(const std::list<std::string> ls) {
         }
 
         const auto ds(tokens.front());
-        using meta_model::orm::database_system;
+        using entities::orm::database_system;
         const auto first(boost::lexical_cast<database_system>(ds));
         const auto second(tokens.back());
         const auto pair(std::make_pair(first, second));
@@ -178,7 +178,7 @@ orm_transform::make_type_overrides(const std::list<std::string> ls) {
 
 std::string orm_transform::
 make_odb_pragmas_for_type_overrides(const std::unordered_map<
-    logical::meta_model::orm::database_system, std::string>& type_overrides) {
+    logical::entities::orm::database_system, std::string>& type_overrides) {
     if (type_overrides.empty())
         return std::string();
 
@@ -197,10 +197,10 @@ make_odb_pragmas_for_type_overrides(const std::unordered_map<
     return s.str();
 }
 
-std::list<meta_model::orm::type_mapping>
+std::list<entities::orm::type_mapping>
 orm_transform::make_type_mappings(const std::list<std::string> ls) {
     BOOST_LOG_SEV(lg, debug) << "Reading type mappings.";
-    using meta_model::orm::type_mapping;
+    using entities::orm::type_mapping;
     std::list<type_mapping> r;
 
     if (ls.empty()) {
@@ -238,7 +238,7 @@ orm_transform::make_type_mappings(const std::list<std::string> ls) {
          * support for non-throwing lexical casts.
          */
         auto i(tokens.begin());
-        using meta_model::orm::database_system;
+        using entities::orm::database_system;
         try {
             /*
              * If the first field is a valid database system, then the
@@ -291,7 +291,7 @@ orm_transform::make_type_mappings(const std::list<std::string> ls) {
 
 std::list<std::string>
 orm_transform::make_odb_pragmas_for_type_mappings(const
-    std::list<meta_model::orm::type_mapping>& tms) {
+    std::list<entities::orm::type_mapping>& tms) {
 
     std::list<std::string> r;
     for (const auto& tm: tms) {
@@ -314,15 +314,15 @@ orm_transform::make_odb_pragmas_for_type_mappings(const
     return r;
 }
 
-boost::optional<meta_model::orm::model_properties>
+boost::optional<entities::orm::model_properties>
 orm_transform::make_model_properties(const features::orm::feature_group& fg,
-    const variability::meta_model::configuration& cfg) {
+    const variability::entities::configuration& cfg) {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating model configuration.";
     const auto scfg(features::orm::make_static_configuration(fg, cfg));
     bool found(false);
 
-    meta_model::orm::model_properties r;
+    entities::orm::model_properties r;
     if (!scfg.database_system.empty()) {
         found = true;
         r.database_systems(to_orm_database_system(scfg.database_system));
@@ -330,7 +330,7 @@ orm_transform::make_model_properties(const features::orm::feature_group& fg,
 
     if (!scfg.letter_case.empty()) {
         found = true;
-        using logical::meta_model::orm::letter_case;
+        using logical::entities::orm::letter_case;
         const auto lc(boost::lexical_cast<letter_case>(scfg.letter_case));
         r.letter_case(lc);
     }
@@ -348,15 +348,15 @@ orm_transform::make_model_properties(const features::orm::feature_group& fg,
     }
 
     BOOST_LOG_SEV(lg, debug) << "Model configuration is empty.";
-    return boost::optional<meta_model::orm::model_properties>();
+    return boost::optional<entities::orm::model_properties>();
 }
 
 void orm_transform::update_object_properties(
     const features::orm::feature_group& fg,
-    const variability::meta_model::configuration& cfg,
-    const boost::optional<meta_model::orm::letter_case>& lc,
+    const variability::entities::configuration& cfg,
+    const boost::optional<entities::orm::letter_case>& lc,
     const std::string& simple_name,
-    meta_model::orm::object_properties& oop) {
+    entities::orm::object_properties& oop) {
 
     const auto pragma_prefix(
         [&]() {
@@ -404,10 +404,10 @@ void orm_transform::update_object_properties(
         oop.odb_pragmas().push_back(pragma_prefix + odb_no_id);
 }
 
-boost::optional<meta_model::orm::attribute_properties>
+boost::optional<entities::orm::attribute_properties>
 orm_transform::make_attribute_properties(const features::orm::feature_group& fg,
-    const variability::meta_model::configuration& cfg,
-    const std::string& simple_name, const meta_model::attribute& attr) {
+    const variability::entities::configuration& cfg,
+    const std::string& simple_name, const entities::attribute& attr) {
 
     const auto pragma_prefix(
         [&]() {
@@ -420,7 +420,7 @@ orm_transform::make_attribute_properties(const features::orm::feature_group& fg,
 
     bool found(false);
     const auto scfg(features::orm::make_static_configuration(fg, cfg));
-    using meta_model::orm::attribute_properties;
+    using entities::orm::attribute_properties;
     attribute_properties r;
     for (const auto& pg : scfg.odb_pragma)
         r.odb_pragmas().push_back(pragma_prefix + pg);
@@ -472,10 +472,10 @@ orm_transform::make_attribute_properties(const features::orm::feature_group& fg,
 
 void orm_transform::update_primitive_properties(
     const features::orm::feature_group& fg,
-    const variability::meta_model::configuration& cfg,
-    const boost::optional<meta_model::orm::letter_case>& lc,
+    const variability::entities::configuration& cfg,
+    const boost::optional<entities::orm::letter_case>& lc,
     const std::string& simple_name,
-    meta_model::orm::primitive_properties& opp) {
+    entities::orm::primitive_properties& opp) {
     const auto scfg(features::orm::make_static_configuration(fg, cfg));
 
     /*
@@ -533,12 +533,12 @@ void orm_transform::update_primitive_properties(
         BOOST_LOG_SEV(lg, debug) << "Primitive has no type mappings.";
 }
 
-boost::optional<meta_model::orm::module_properties>
+boost::optional<entities::orm::module_properties>
 orm_transform::make_module_properties(const features::orm::feature_group& fg,
-    const variability::meta_model::configuration& cfg,
-    const boost::optional<meta_model::orm::letter_case>& lc) {
+    const variability::entities::configuration& cfg,
+    const boost::optional<entities::orm::letter_case>& lc) {
 
-    using meta_model::orm::module_properties;
+    using entities::orm::module_properties;
 
     const auto scfg(features::orm::make_static_configuration(fg, cfg));
     if (scfg.schema_name.empty())
@@ -551,10 +551,10 @@ orm_transform::make_module_properties(const features::orm::feature_group& fg,
 }
 
 void orm_transform::transform_objects(
-    const features::orm::feature_group& fg, meta_model::model& m) {
+    const features::orm::feature_group& fg, entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Started transforming objects.";
 
-    boost::optional<meta_model::orm::letter_case> lc;
+    boost::optional<entities::orm::letter_case> lc;
     if (m.orm_properties())
         lc = m.orm_properties()->letter_case();
 
@@ -606,11 +606,11 @@ void orm_transform::transform_objects(
 }
 
 void orm_transform::transform_primitives(
-    const features::orm::feature_group& fg, meta_model::model& m) {
+    const features::orm::feature_group& fg, entities::model& m) {
 
     BOOST_LOG_SEV(lg, debug) << "Started transforming primitives.";
 
-    boost::optional<meta_model::orm::letter_case> lc;
+    boost::optional<entities::orm::letter_case> lc;
     if (m.orm_properties())
         lc = m.orm_properties()->letter_case();
 
@@ -670,7 +670,7 @@ void orm_transform::transform_primitives(
         std::ostringstream s;
         s << pragma_prefix << odb_empty_column_attribute;
 
-        meta_model::orm::attribute_properties ap;
+        entities::orm::attribute_properties ap;
         const auto& to(op.type_overrides());
         if (!to.empty())
             s << " " << make_odb_pragmas_for_type_overrides(to);
@@ -683,10 +683,10 @@ void orm_transform::transform_primitives(
 }
 
 void orm_transform::transform_modules(
-    const features::orm::feature_group& fg, meta_model::model& m) {
+    const features::orm::feature_group& fg, entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Started transforming modules.";
 
-    boost::optional<meta_model::orm::letter_case> lc;
+    boost::optional<entities::orm::letter_case> lc;
     if (m.orm_properties())
         lc = m.orm_properties()->letter_case();
 
@@ -761,7 +761,7 @@ void orm_transform::transform_modules(
     BOOST_LOG_SEV(lg, debug) << "Finished transforming modules.";
 }
 
-void orm_transform::apply(const context& ctx, meta_model::model& m) {
+void orm_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "orm transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 

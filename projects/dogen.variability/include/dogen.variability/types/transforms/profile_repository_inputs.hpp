@@ -27,8 +27,8 @@
 
 #include <list>
 #include <algorithm>
-#include "dogen.variability/types/meta_model/profile.hpp"
-#include "dogen.variability/types/meta_model/profile_template.hpp"
+#include "dogen.variability/types/entities/profile.hpp"
+#include "dogen.variability/types/entities/profile_template.hpp"
 
 namespace dogen::variability::transforms {
 
@@ -41,19 +41,19 @@ public:
 
 public:
     profile_repository_inputs(
-        const std::list<dogen::variability::meta_model::profile>& profiles,
-        const std::list<dogen::variability::meta_model::profile_template>& templates);
+        const std::list<dogen::variability::entities::profile>& profiles,
+        const std::list<dogen::variability::entities::profile_template>& templates);
 
 public:
-    const std::list<dogen::variability::meta_model::profile>& profiles() const;
-    std::list<dogen::variability::meta_model::profile>& profiles();
-    void profiles(const std::list<dogen::variability::meta_model::profile>& v);
-    void profiles(const std::list<dogen::variability::meta_model::profile>&& v);
+    const std::list<dogen::variability::entities::profile>& profiles() const;
+    std::list<dogen::variability::entities::profile>& profiles();
+    void profiles(const std::list<dogen::variability::entities::profile>& v);
+    void profiles(const std::list<dogen::variability::entities::profile>&& v);
 
-    const std::list<dogen::variability::meta_model::profile_template>& templates() const;
-    std::list<dogen::variability::meta_model::profile_template>& templates();
-    void templates(const std::list<dogen::variability::meta_model::profile_template>& v);
-    void templates(const std::list<dogen::variability::meta_model::profile_template>&& v);
+    const std::list<dogen::variability::entities::profile_template>& templates() const;
+    std::list<dogen::variability::entities::profile_template>& templates();
+    void templates(const std::list<dogen::variability::entities::profile_template>& v);
+    void templates(const std::list<dogen::variability::entities::profile_template>&& v);
 
 public:
     bool operator==(const profile_repository_inputs& rhs) const;
@@ -66,8 +66,8 @@ public:
     profile_repository_inputs& operator=(profile_repository_inputs other);
 
 private:
-    std::list<dogen::variability::meta_model::profile> profiles_;
-    std::list<dogen::variability::meta_model::profile_template> templates_;
+    std::list<dogen::variability::entities::profile> profiles_;
+    std::list<dogen::variability::entities::profile_template> templates_;
 };
 
 }

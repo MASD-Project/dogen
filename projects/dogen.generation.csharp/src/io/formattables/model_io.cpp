@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.logical/io/meta_model/name_io.hpp"
+#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.generation.csharp/io/formattables/model_io.hpp"
 #include "dogen.generation.csharp/io/formattables/formattable_io.hpp"
 #include "dogen.generation.csharp/io/formattables/aspect_properties_io.hpp"

@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen.injection/types/meta_model/model.hpp"
+#include "dogen.injection/types/entities/model.hpp"
 #include "dogen.injection/types/transforms/decoding_transform.hpp"
 
 namespace dogen::injection::json {
@@ -42,7 +42,7 @@ public:
     virtual std::string description() const override;
     std::string extension() const override;
 
-    meta_model::model apply(const transforms::context& ctx,
+    entities::model apply(const transforms::context& ctx,
         const boost::filesystem::path& p) override;
 };
 

@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.generation/io/meta_model/formatting_styles_io.hpp"
+#include "dogen.generation/io/entities/formatting_styles_io.hpp"
 #include "dogen.generation/io/transforms/formatting_configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {

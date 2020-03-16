@@ -21,7 +21,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
-#include "dogen.injection/io/meta_model/model_set_io.hpp"
+#include "dogen.injection/io/entities/model_set_io.hpp"
 #include "dogen.injection/types/transforms/reference_graph_data_transform.hpp"
 
 namespace {
@@ -36,9 +36,9 @@ static logger lg(logger_factory(transform_id));
 
 namespace dogen::injection::transforms {
 
-meta_model::reference_graph_data reference_graph_data_transform::
-obtain_references_for_model(const meta_model::model_set& ms) {
-    meta_model::reference_graph_data r;
+entities::reference_graph_data reference_graph_data_transform::
+obtain_references_for_model(const entities::model_set& ms) {
+    entities::reference_graph_data r;
     r.root(ms.target().name());
     r.edges_per_model()[ms.target().name()] = ms.target().references();
     for (const auto& m : ms.references())
@@ -48,7 +48,7 @@ obtain_references_for_model(const meta_model::model_set& ms) {
 }
 
 void reference_graph_data_transform::
-apply(const context& ctx, meta_model::model_set& ms) {
+apply(const context& ctx, entities::model_set& ms) {
     const auto mn(ms.target().name());
     tracing::scoped_transform_tracer stp(lg, "reference graph data transform",
         transform_id, mn, *ctx.tracer());

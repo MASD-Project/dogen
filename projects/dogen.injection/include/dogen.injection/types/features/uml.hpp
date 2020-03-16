@@ -26,7 +26,7 @@
 #endif
 
 #include <list>
-#include "dogen.variability/types/meta_model/feature.hpp"
+#include "dogen.variability/types/entities/feature.hpp"
 
 namespace dogen::injection::features {
 
@@ -36,7 +36,7 @@ namespace dogen::injection::features {
 class uml final {
 
 public:
-    static std::list<dogen::variability::meta_model::feature>
+    static std::list<dogen::variability::entities::feature>
     make_features();
 };
 

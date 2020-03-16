@@ -24,12 +24,12 @@
 #include "dogen.tracing/io/tracer_io.hpp"
 #include "dogen.logical/io/transforms/context_io.hpp"
 #include "dogen.physical/io/location_repository_io.hpp"
-#include "dogen.variability/io/meta_model/feature_model_io.hpp"
+#include "dogen.variability/io/entities/feature_model_io.hpp"
 #include "dogen.logical/io/helpers/mapping_set_repository_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::variability::meta_model::feature_model>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::variability::entities::feature_model>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 

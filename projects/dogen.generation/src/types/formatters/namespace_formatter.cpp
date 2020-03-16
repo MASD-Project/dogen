@@ -24,7 +24,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
-#include "dogen.logical/io/meta_model/technical_space_io.hpp"
+#include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.generation/types/formatters/formatting_error.hpp"
 #include "dogen.generation/types/formatters/namespace_formatter.hpp"
 
@@ -49,7 +49,7 @@ const std::string invalid_technical_space(
 namespace dogen::generation::formatters {
 
 namespace_formatter::namespace_formatter(std::ostream& s,
-    const logical::meta_model::technical_space ts,
+    const logical::entities::technical_space ts,
     const std::list<std::string>& ns,
     const bool add_new_line, const bool use_nesting)
     : stream_(s), technical_space_(ts), namespaces_(ns),
@@ -64,7 +64,7 @@ namespace_formatter::namespace_formatter(std::ostream& s,
 }
 
 namespace_formatter::namespace_formatter(std::ostream& s,
-    const logical::meta_model::technical_space ts,
+    const logical::entities::technical_space ts,
     const std::string& ns,
     const bool add_new_line, const bool use_nesting)
     : namespace_formatter(s, ts,
@@ -72,7 +72,7 @@ namespace_formatter::namespace_formatter(std::ostream& s,
         add_new_line, use_nesting) {}
 
 namespace_formatter::namespace_formatter(std::ostream& s,
-    const logical::meta_model::technical_space ts,
+    const logical::entities::technical_space ts,
     const bool add_new_line, const bool use_nesting)
     : namespace_formatter(s, ts, std::list<std::string> { },
         add_new_line, use_nesting) {}
@@ -153,7 +153,7 @@ void namespace_formatter::format_csharp_end() {
 
 void namespace_formatter::format_begin() {
     BOOST_LOG_SEV(lg, trace) << "Beginning namespace.";
-    using logical::meta_model::technical_space;
+    using logical::entities::technical_space;
     switch(technical_space_) {
     case technical_space::cpp:
         format_cpp_begin();
@@ -170,7 +170,7 @@ void namespace_formatter::format_begin() {
 
 void namespace_formatter::format_end() {
     BOOST_LOG_SEV(lg, trace) << "Ending namespace.";
-    using logical::meta_model::technical_space;
+    using logical::entities::technical_space;
     switch(technical_space_) {
     case technical_space::cpp:
         format_cpp_end();

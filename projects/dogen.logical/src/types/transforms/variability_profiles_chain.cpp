@@ -24,7 +24,7 @@
 #include "dogen.variability/types/transforms/profile_binding_transform.hpp"
 #include "dogen.variability/types/transforms/profile_repository_production_chain.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
-#include "dogen.logical/io/meta_model/model_set_io.hpp"
+#include "dogen.logical/io/entities/model_set_io.hpp"
 #include "dogen.logical/types/helpers/profile_adapter.hpp"
 #include "dogen.logical/types/helpers/configuration_model_set_adapter.hpp"
 #include "dogen.logical/types/transforms/variability_profiles_transform.hpp"
@@ -51,7 +51,7 @@ variability_profiles_chain::adapt(const context& ctx) {
 }
 
 void variability_profiles_chain::
-apply(const context& ctx, logical::meta_model::model_set& ms) {
+apply(const context& ctx, logical::entities::model_set& ms) {
     const auto model_name(ms.target().name().qualified().dot());
     tracing::scoped_chain_tracer stp(lg, "variability profiles",
         transform_id, model_name, *ctx.tracer());

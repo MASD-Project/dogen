@@ -21,8 +21,8 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.variability/io/meta_model/value_type_io.hpp"
-#include "dogen.variability/io/meta_model/binding_point_io.hpp"
+#include "dogen.variability/io/entities/value_type_io.hpp"
+#include "dogen.variability/io/entities/binding_point_io.hpp"
 #include "dogen.variability/types/helpers/enum_mapping_exception.hpp"
 #include "dogen.variability/types/helpers/enum_mapper.hpp"
 
@@ -71,9 +71,9 @@ const std::string invalid_value_type("Invalid or unsupported value type: ");
 
 namespace dogen::variability::helpers {
 
-meta_model::value_type
+entities::value_type
 enum_mapper::to_value_type(const std::string& s) {
-    using meta_model::value_type;
+    using entities::value_type;
     if (s == input_value_type_text)
         return value_type::text;
     else if (s == input_value_type_text_collection)
@@ -89,8 +89,8 @@ enum_mapper::to_value_type(const std::string& s) {
     BOOST_THROW_EXCEPTION(enum_mapping_exception(invalid_value_type + s));
 }
 
-meta_model::binding_point enum_mapper::to_binding_point(const std::string& s) {
-    using meta_model::binding_point;
+entities::binding_point enum_mapper::to_binding_point(const std::string& s) {
+    using entities::binding_point;
     if (s == input_binding_point_any)
         return binding_point::any;
     else if (s == input_binding_point_global)
@@ -106,9 +106,9 @@ meta_model::binding_point enum_mapper::to_binding_point(const std::string& s) {
     BOOST_THROW_EXCEPTION(enum_mapping_exception(invalid_scope + s));
 }
 
-std::string enum_mapper::from_value_type(const meta_model::value_type v,
+std::string enum_mapper::from_value_type(const entities::value_type v,
     const bool qualified) {
-    using meta_model::value_type;
+    using entities::value_type;
     switch(v) {
     case value_type::text:
         return qualified ?
@@ -133,8 +133,8 @@ std::string enum_mapper::from_value_type(const meta_model::value_type v,
     } }
 }
 
-std::string enum_mapper::from_binding_point(const meta_model::binding_point v) {
-    using meta_model::binding_point;
+std::string enum_mapper::from_binding_point(const entities::binding_point v) {
+    using entities::binding_point;
     switch(v) {
     case binding_point::any: return output_binding_point_any;
     case binding_point::global: return output_binding_point_global;

@@ -28,7 +28,7 @@
 #include <list>
 #include <unordered_set>
 #include "dogen.logical/types/transforms/context.hpp"
-#include "dogen.logical/types/meta_model/model.hpp"
+#include "dogen.logical/types/entities/model.hpp"
 
 namespace dogen::logical::transforms {
 
@@ -103,55 +103,55 @@ private:
     /**
      * @brief Returns the object with the given name, or throws.
      */
-    static  meta_model::structural::object&
-    find_object(const meta_model::name& n, meta_model::model& m);
+    static  entities::structural::object&
+    find_object(const entities::name& n, entities::model& m);
 
     /**
      * @brief Returns the object template with the given name, or
      * throws.
      */
-    static meta_model::structural::object_template& resolve_object_template(
-        const meta_model::name& owner,
-        const meta_model::name& object_template_name,
-        meta_model::model& m);
+    static entities::structural::object_template& resolve_object_template(
+        const entities::name& owner,
+        const entities::name& object_template_name,
+        entities::model& m);
 
     /**
      * @brief Removes duplicate names, preserving the original order
      * of elements in the list.
      */
-    static void remove_duplicates(std::list<meta_model::name>& names);
+    static void remove_duplicates(std::list<entities::name>& names);
 
 private:
     /**
      * @brief Expands a specific object.
      */
-    static void expand_object(meta_model::structural::object& o,
-        meta_model::model& m,
-        std::unordered_set<meta_model::name>& processed_names);
+    static void expand_object(entities::structural::object& o,
+        entities::model& m,
+        std::unordered_set<entities::name>& processed_names);
 
     /**
      * @brief Expands all objects in the model.
      */
-    static void expand_objects(meta_model::model& m);
+    static void expand_objects(entities::model& m);
 
     /**
      * @brief Expands an object template.
      */
     static void
-    expand_object_template(meta_model::structural::object_template& otp,
-        meta_model::model& m,
-        std::unordered_set<meta_model::name>& processed_names);
+    expand_object_template(entities::structural::object_template& otp,
+        entities::model& m,
+        std::unordered_set<entities::name>& processed_names);
 
     /**
      * @brief Expands all object templates in the model.
      */
-    static void expand_object_templates(meta_model::model& m);
+    static void expand_object_templates(entities::model& m);
 
 public:
     /**
      * @brief Transforms the object templates the supplied model.
      */
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

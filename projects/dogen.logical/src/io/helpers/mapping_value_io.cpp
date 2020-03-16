@@ -19,13 +19,13 @@
  *
  */
 #include <ostream>
-#include "dogen.logical/io/meta_model/name_io.hpp"
+#include "dogen.logical/io/entities/name_io.hpp"
 #include "dogen.logical/io/helpers/mapping_value_io.hpp"
 #include "dogen.logical/io/helpers/mapping_actions_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::logical::meta_model::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::logical::entities::name>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)

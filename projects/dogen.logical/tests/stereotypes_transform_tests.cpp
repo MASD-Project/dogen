@@ -24,14 +24,14 @@
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/test/asserter.hpp"
 #include "dogen.utility/types/test/exception_checkers.hpp"
-#include "dogen.logical/io/meta_model/model_io.hpp"
-#include "dogen.logical/io/meta_model/structural/object_io.hpp"
+#include "dogen.logical/io/entities/model_io.hpp"
+#include "dogen.logical/io/entities/structural/object_io.hpp"
 #include "dogen.logical/test/mock_context_factory.hpp"
 #include "dogen.logical/test/mock_model_factory.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/model.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/transforms/transformation_error.hpp"
-#include "dogen.logical/types/meta_model/static_stereotypes.hpp"
+#include "dogen.logical/types/entities/static_stereotypes.hpp"
 #include "dogen.logical/types/transforms/stereotypes_transform.hpp"
 
 namespace {
@@ -48,7 +48,7 @@ const std::string no_leaves("Type marked as visitable but has no leaves");
 
 }
 
-using dogen::logical::meta_model::static_stereotypes;
+using dogen::logical::entities::static_stereotypes;
 using dogen::utility::test::contains_checker;
 using dogen::logical::transforms::transformation_error;
 using dogen::utility::test::asserter;

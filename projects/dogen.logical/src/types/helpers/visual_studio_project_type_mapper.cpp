@@ -20,7 +20,7 @@
  */
 #include <boost/lexical_cast.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.logical/lexical_cast/meta_model/technical_space_lc.hpp"
+#include "dogen.logical/lexical_cast/entities/technical_space_lc.hpp"
 #include "dogen.logical/types/helpers/mapping_error.hpp"
 #include "dogen.logical/types/helpers/visual_studio_project_type_mapper.hpp"
 
@@ -158,8 +158,8 @@ const std::string xna_zune_project_guid("D399B71A-8929-442a-A9AC-8BEC78BB2433");
 namespace dogen::logical::helpers {
 
 std::string visual_studio_project_type_mapper::
-from_technical_space(const meta_model::technical_space ts) {
-    using meta_model::technical_space;
+from_technical_space(const entities::technical_space ts) {
+    using entities::technical_space;
     switch(ts) {
     case technical_space::cpp: return cpp_project_guid;
     case technical_space::csharp: return csharp_project_guid;

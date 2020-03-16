@@ -45,10 +45,10 @@ const std::string missing_archetype_configuration(
 namespace dogen::generation::csharp::formattables {
 
 locator::locator(const boost::filesystem::path& output_directory_path,
-    const variability::meta_model::feature_model& fm,
+    const variability::entities::feature_model& fm,
     const formatters::repository& frp,
-    const variability::meta_model::configuration& rcfg,
-    const logical::meta_model::name& model_name,
+    const variability::entities::configuration& rcfg,
+    const logical::entities::name& model_name,
     const std::unordered_set<std::string>& module_ids,
     const bool enable_backend_directories)
     : model_name_(model_name),
@@ -58,7 +58,7 @@ locator::locator(const boost::filesystem::path& output_directory_path,
               configuration_, enable_backend_directories)) {}
 
 locator::feature_group locator::make_feature_group(
-    const variability::meta_model::feature_model& feature_model,
+    const variability::entities::feature_model& feature_model,
     const formatters::repository& frp) const {
 
     feature_group r;
@@ -104,7 +104,7 @@ locator::feature_group locator::make_feature_group(
 }
 
 locator_configuration locator::make_configuration(const feature_group& fg,
-    const variability::meta_model::configuration& cfg) const {
+    const variability::entities::configuration& cfg) const {
 
     locator_configuration r;
     const variability::helpers::configuration_selector s(cfg);
@@ -147,9 +147,9 @@ locator_configuration locator::make_configuration(const feature_group& fg,
 }
 
 locator_configuration locator::make_configuration(
-    const variability::meta_model::feature_model& fm,
+    const variability::entities::feature_model& fm,
     const formatters::repository& frp,
-    const variability::meta_model::configuration& cfg) {
+    const variability::entities::configuration& cfg) {
 
     const auto fg(make_feature_group (fm, frp));
     const auto r(make_configuration(fg, cfg));
@@ -170,7 +170,7 @@ configuration_for_archetype(const std::string& archetype) const {
 
 boost::filesystem::path locator::make_project_path(
     const boost::filesystem::path& output_directory_path,
-    const logical::meta_model::name& model_name, const locator_configuration& lc,
+    const logical::entities::name& model_name, const locator_configuration& lc,
     const bool enable_backend_directories) const {
 
     boost::filesystem::path r;
@@ -187,7 +187,7 @@ boost::filesystem::path locator::make_project_path(
 
 boost::filesystem::path locator::make_facet_path(
     const std::string& archetype, const std::string& extension,
-    const logical::meta_model::name& n) const {
+    const logical::entities::name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Making facet path for: "
                              << n.qualified().dot();
 
@@ -254,7 +254,7 @@ boost::filesystem::path locator::make_relative_path(
 }
 
 boost::filesystem::path locator::make_full_path(
-    const logical::meta_model::name& n, const std::string& archetype) const {
+    const logical::entities::name& n, const std::string& archetype) const {
 
     auto r(project_path_);
     const auto facet_path(make_facet_path(archetype, extension, n));
@@ -263,7 +263,7 @@ boost::filesystem::path locator::make_full_path(
 }
 
 boost::filesystem::path locator::make_full_path_for_project(
-    const logical::meta_model::name& n, const std::string& archetype) const {
+    const logical::entities::name& n, const std::string& archetype) const {
     auto r(project_path_);
     const auto facet_path(make_facet_path(archetype, empty, n));
     r /= facet_path;
@@ -271,7 +271,7 @@ boost::filesystem::path locator::make_full_path_for_project(
 }
 
 boost::filesystem::path locator::make_full_path_for_solution(
-    const logical::meta_model::name& n, const std::string& archetype) const {
+    const logical::entities::name& n, const std::string& archetype) const {
     auto r(project_path_);
     const auto facet_path(make_facet_path(archetype, empty, n));
     r /= facet_path;

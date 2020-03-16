@@ -29,7 +29,7 @@
 #include "dogen.physical/types/template_instantiation_domains_factory.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
 #include "dogen.variability/types/features/initializer.hpp"
-#include "dogen.variability/types/meta_model/feature_template_repository.hpp"
+#include "dogen.variability/types/entities/feature_template_repository.hpp"
 #include "dogen.variability/types/transforms/feature_model_production_chain.hpp"
 #include "dogen.templating/types/initializer.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
@@ -63,12 +63,12 @@ namespace dogen::engine::transforms {
 using generation::transforms::model_to_extraction_model_transform_registrar;
 
 std::unordered_map<std::string,
-                   generation::meta_model::intra_backend_segment_properties>
+                   generation::entities::intra_backend_segment_properties>
 create_intra_backend_segment_properties(
     const model_to_extraction_model_transform_registrar& rg) {
     std::unordered_map<
         std::string,
-        generation::meta_model::intra_backend_segment_properties> r;
+        generation::entities::intra_backend_segment_properties> r;
 
     /*
      * Obtain the intra-backend segment properties of each registered

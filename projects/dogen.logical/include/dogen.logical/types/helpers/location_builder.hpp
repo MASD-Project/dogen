@@ -27,7 +27,7 @@
 
 #include <list>
 #include <string>
-#include "dogen.logical/types/meta_model/location.hpp"
+#include "dogen.logical/types/entities/location.hpp"
 
 namespace dogen::logical::helpers {
 
@@ -43,13 +43,13 @@ public:
     void internal_modules(const std::string& im);
     void internal_modules(const std::list<std::string>& im);
 
-    void location(const meta_model::location& l);
+    void location(const entities::location& l);
 
 public:
-    meta_model::location build();
+    entities::location build();
 
 private:
-    meta_model::location location_;
+    entities::location location_;
 };
 
 }

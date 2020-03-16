@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen.extraction/types/meta_model/model.hpp"
+#include "dogen.extraction/types/entities/model.hpp"
 #include "dogen.extraction/types/transforms/context.hpp"
 
 namespace dogen::extraction::transforms {
@@ -40,7 +40,7 @@ private:
     create_directories(const boost::filesystem::path& file_path);
 
 public:
-    static void apply(const context& ctx, const meta_model::model& m);
+    static void apply(const context& ctx, const entities::model& m);
 };
 
 }

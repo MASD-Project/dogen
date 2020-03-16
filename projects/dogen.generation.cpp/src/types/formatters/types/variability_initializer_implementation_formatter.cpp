@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.logical/types/meta_model/variability/initializer.hpp"
+#include "dogen.logical/types/entities/variability/initializer.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
@@ -52,7 +52,7 @@ variability_initializer_implementation_formatter::archetype_location() const {
     return r;
 }
 
-const logical::meta_model::name& variability_initializer_implementation_formatter::meta_name() const {
+const logical::entities::name& variability_initializer_implementation_formatter::meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_variability_initializer_name());
     return r;
@@ -67,7 +67,7 @@ inclusion_support_types variability_initializer_implementation_formatter::inclus
 }
 
 boost::filesystem::path variability_initializer_implementation_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const logical::meta_model::name& n) const {
+    const formattables::locator& /*l*/, const logical::entities::name& n) const {
 
     using namespace dogen::utility::log;
     static logger lg(
@@ -79,14 +79,14 @@ boost::filesystem::path variability_initializer_implementation_formatter::inclus
 }
 
 boost::filesystem::path variability_initializer_implementation_formatter::full_path(
-    const formattables::locator& l, const logical::meta_model::name& n) const {
+    const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_full_path_for_cpp_implementation(n, static_id());
 }
 
 std::list<std::string> variability_initializer_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const logical::meta_model::element& e) const {
-    using logical::meta_model::variability::initializer;
+    const logical::entities::element& e) const {
+    using logical::entities::variability::initializer;
     const auto& o(assistant::as<initializer>(e));
     auto builder(f.make());
 
@@ -102,10 +102,10 @@ std::list<std::string> variability_initializer_implementation_formatter::inclusi
     return builder.build();
 }
 
-extraction::meta_model::artefact variability_initializer_implementation_formatter::
-format(const context& ctx, const logical::meta_model::element& e) const {
+extraction::entities::artefact variability_initializer_implementation_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& o(a.as<logical::meta_model::variability::initializer>(e));
+    const auto& o(a.as<logical::entities::variability::initializer>(e));
 
     {
         const auto sn(o.name().simple());

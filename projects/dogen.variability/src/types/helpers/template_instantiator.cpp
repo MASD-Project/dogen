@@ -23,12 +23,12 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
-#include "dogen.variability/io/meta_model/profile_io.hpp"
-#include "dogen.variability/io/meta_model/feature_io.hpp"
-#include "dogen.variability/io/meta_model/feature_template_io.hpp"
-#include "dogen.variability/io/meta_model/profile_template_io.hpp"
-#include "dogen.variability/io/meta_model/configuration_point_io.hpp"
-#include "dogen.variability/io/meta_model/configuration_point_template_io.hpp"
+#include "dogen.variability/io/entities/profile_io.hpp"
+#include "dogen.variability/io/entities/feature_io.hpp"
+#include "dogen.variability/io/entities/feature_template_io.hpp"
+#include "dogen.variability/io/entities/profile_template_io.hpp"
+#include "dogen.variability/io/entities/configuration_point_io.hpp"
+#include "dogen.variability/io/entities/configuration_point_template_io.hpp"
 #include "dogen.variability/types/helpers/value_factory.hpp"
 #include "dogen.variability/types/helpers/instantiation_exception.hpp"
 #include "dogen.variability/types/helpers/template_instantiator.hpp"
@@ -68,13 +68,13 @@ template_instantiator::template_instantiator(const bool compatibility_mode)
 }
 
 bool template_instantiator::
-is_partially_mathcable(const meta_model::value_type vt) const {
-    return vt == meta_model::value_type::key_value_pair;
+is_partially_mathcable(const entities::value_type vt) const {
+    return vt == entities::value_type::key_value_pair;
 }
 
-meta_model::configuration_point template_instantiator::to_configuration_point(
-    const meta_model::feature_model& fm, const std::string& owner,
-    const meta_model::configuration_point_template& cpt) const {
+entities::configuration_point template_instantiator::to_configuration_point(
+    const entities::feature_model& fm, const std::string& owner,
+    const entities::configuration_point_template& cpt) const {
     /*
      * Non-instance templates must have a owner.
      */
@@ -100,7 +100,7 @@ meta_model::configuration_point template_instantiator::to_configuration_point(
      * template's associated feature, and, if supplied, the owner.
      */
     const auto& feature(i->second);
-    meta_model::configuration_point r;
+    entities::configuration_point r;
     r.name().simple(feature.name().simple());
     r.name().qualified(feature.name().qualified());
 
@@ -112,12 +112,12 @@ meta_model::configuration_point template_instantiator::to_configuration_point(
     return r;
 }
 
-meta_model::feature template_instantiator::to_feature(const std::string& domain,
-    const meta_model::feature_template& ft) const {
+entities::feature template_instantiator::to_feature(const std::string& domain,
+    const entities::feature_template& ft) const {
     BOOST_LOG_SEV(lg, trace) << "Expanding feature for domain: "
                              << domain;
 
-    meta_model::feature r;
+    entities::feature r;
 
     const auto sn(ft.name().simple());
     r.name().simple(sn);
@@ -159,10 +159,10 @@ meta_model::feature template_instantiator::to_feature(const std::string& domain,
     return r;
 }
 
-std::list<meta_model::feature> template_instantiator::
+std::list<entities::feature> template_instantiator::
 instantiate(const std::unordered_map<std::string, std::vector<std::string>>&
     template_instantiation_domains,
-    const meta_model::feature_template& ft) const {
+    const entities::feature_template& ft) const {
     /*
      * Domain names should never be empty.
      */
@@ -208,17 +208,17 @@ instantiate(const std::unordered_map<std::string, std::vector<std::string>>&
      * Perform the template expansion across the domain.
      */
     const auto& domain(i->second);
-    std::list<meta_model::feature> r;
+    std::list<entities::feature> r;
     for (const auto& e : domain)
         r.push_back(to_feature(e, ft));
 
     return r;
 }
 
-std::list<meta_model::configuration_point> template_instantiator::instantiate(
+std::list<entities::configuration_point> template_instantiator::instantiate(
     const std::unordered_map<std::string, std::vector<std::string>>&
-    template_instantiation_domains, const meta_model::feature_model& fm,
-    const meta_model::configuration_point_template& cpt) const {
+    template_instantiation_domains, const entities::feature_model& fm,
+    const entities::configuration_point_template& cpt) const {
     const auto cptqn(cpt.name().qualified());
     BOOST_LOG_SEV(lg, debug) << "Configuration point template: "
                              << cpt.name().simple() << " ('"
@@ -263,17 +263,17 @@ std::list<meta_model::configuration_point> template_instantiator::instantiate(
      * Perform the template expansion across the domain.
      */
     const auto& domain(i->second);
-    std::list<meta_model::configuration_point> r;
+    std::list<entities::configuration_point> r;
     for (const auto& e : domain)
         r.push_back(to_configuration_point(fm, e, cpt));
 
     return r;
 }
 
-meta_model::profile template_instantiator::instantiate(
+entities::profile template_instantiator::instantiate(
     const std::unordered_map<std::string, std::vector<std::string>>&
-    template_instantiation_domains, const meta_model::feature_model& fm,
-    const meta_model::profile_template& pt) const {
+    template_instantiation_domains, const entities::feature_model& fm,
+    const entities::profile_template& pt) const {
 
     const auto ptqn(pt.name().qualified());
     BOOST_LOG_SEV(lg, debug) << "Instantiating profile template: " << ptqn;
@@ -288,7 +288,7 @@ meta_model::profile template_instantiator::instantiate(
 
     }
 
-    meta_model::profile r;
+    entities::profile r;
     r.name(pt.name());
     r.stereotype(pt.stereotype());
     r.parents(pt.parents());
@@ -299,7 +299,7 @@ meta_model::profile template_instantiator::instantiate(
                                  << cpt.name().simple() << " ('"
                                  << (cptqn.empty() ? empty_msg : cptqn)
                                  << "')" ;
-        std::list<meta_model::configuration_point> cps;
+        std::list<entities::configuration_point> cps;
 
         /*
          * Try to instantiate the template.

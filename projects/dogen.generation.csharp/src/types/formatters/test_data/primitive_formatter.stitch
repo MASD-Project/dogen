@@ -1,6 +1,6 @@
 <#@ masd.stitch.stream_variable_name=a.stream() #>
 <#@ masd.stitch.containing_namespaces=dogen::generation::csharp::formatters::test_data #>
-<#@ masd.stitch.inclusion_dependency="dogen.logical/types/meta_model/structural/primitive.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.csharp/types/traits.hpp" #>
@@ -10,16 +10,16 @@
 <#@ masd.stitch.wale.text_template=csharp_formatter_implementation.wale #>
 <#@ masd.stitch.wale.kvp.class.simple_name=primitive_formatter #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=primitive #>
-<#@ masd.stitch.wale.kvp.yarn_element=logical::meta_model::structural::primitive #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::primitive #>
 <#@ masd.stitch.wale.kvp.meta_element=primitive #>
 <#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-extraction::meta_model::artefact primitive_formatter::
-format(const context& ctx, const logical::meta_model::element& e) const {
+extraction::entities::artefact primitive_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location());
-    const auto& p(a.as<logical::meta_model::structural::primitive>(static_id(), e));
+    const auto& p(a.as<logical::entities::structural::primitive>(static_id(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(a.get_qualified_name(e.name()));

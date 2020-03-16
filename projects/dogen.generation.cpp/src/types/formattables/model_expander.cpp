@@ -34,7 +34,7 @@
 namespace dogen::generation::cpp::formattables {
 
 void model_expander::
-expand_streaming(const variability::meta_model::feature_model& feature_model,
+expand_streaming(const variability::entities::feature_model& feature_model,
     model& fm) const {
     streaming_expander ex;
     ex.expand(feature_model, fm);
@@ -47,8 +47,8 @@ void model_expander::expand_canonical_archetypes(
 }
 
 void model_expander::expand_inclusion(
-    const variability::meta_model::feature_model& feature_model,
-    const std::unordered_set<generation::meta_model::element_archetype>&
+    const variability::entities::feature_model& feature_model,
+    const std::unordered_set<generation::entities::element_archetype>&
     enabled_archetype_for_element, const formatters::repository& frp,
     const locator& l, model& fm) const {
     inclusion_expander ex;
@@ -56,14 +56,14 @@ void model_expander::expand_inclusion(
 }
 
 void model_expander::expand_aspects(
-    const variability::meta_model::feature_model& feature_model,
+    const variability::entities::feature_model& feature_model,
     model& fm) const {
     aspect_expander ex;
     ex.expand(feature_model, fm);
 }
 
 void model_expander::expand_helpers(
-    const variability::meta_model::feature_model& feature_model,
+    const variability::entities::feature_model& feature_model,
     const formatters::repository& frp, model& fm) const {
     helper_expander ex;
     ex.expand(feature_model, frp, fm);
@@ -98,16 +98,16 @@ void model_expander::expand_build_files(const locator& l, model& fm) const {
 
 void
 model_expander::expand_cpp_standard(
-    const variability::meta_model::feature_model& feature_model,
-    const variability::meta_model::configuration& rcfg, model& fm) const {
+    const variability::entities::feature_model& feature_model,
+    const variability::entities::configuration& rcfg, model& fm) const {
     cpp_standard_expander ex;
     ex.expand(feature_model, rcfg, fm);
 }
 
 void model_expander::expand(
-    const variability::meta_model::feature_model& feature_model,
-    const variability::meta_model::configuration& rcfg,
-    const std::unordered_set<generation::meta_model::element_archetype>&
+    const variability::entities::feature_model& feature_model,
+    const variability::entities::configuration& rcfg,
+    const std::unordered_set<generation::entities::element_archetype>&
     enabled_archetype_for_element,
     const formatters::repository& frp, const locator& l, model& fm) const {
 

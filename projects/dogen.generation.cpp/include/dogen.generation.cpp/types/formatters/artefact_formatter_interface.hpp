@@ -28,9 +28,9 @@
 #include <string>
 #include <boost/filesystem/path.hpp>
 #include "dogen.physical/types/location.hpp"
-#include "dogen.logical/types/meta_model/name.hpp"
-#include "dogen.logical/types/meta_model/element.hpp"
-#include "dogen.extraction/types/meta_model/artefact.hpp"
+#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.logical/types/entities/element.hpp"
+#include "dogen.extraction/types/entities/artefact.hpp"
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
 #include "dogen.generation.cpp/types/formattables/dependencies_builder_factory.hpp"
 #include "dogen.generation.cpp/types/formatters/inclusion_support_types.hpp"
@@ -60,7 +60,7 @@ public:
      * @brief Returns name of the meta-model element that this
      * formatter supports.
      */
-    virtual const logical::meta_model::name& meta_name() const = 0;
+    virtual const logical::entities::name& meta_name() const = 0;
 
     /**
      * @brief Family to which this formatter belongs.
@@ -81,13 +81,13 @@ public:
      */
     virtual boost::filesystem::path inclusion_path(
         const formattables::locator& l,
-        const logical::meta_model::name& n) const = 0;
+        const logical::entities::name& n) const = 0;
 
     /**
      * @brief Provides the full path.
      */
     virtual boost::filesystem::path full_path(const formattables::locator& l,
-        const logical::meta_model::name& n) const = 0;
+        const logical::entities::name& n) const = 0;
 
     /**
      * @brief Creates the inclusion dependencies for this formatter
@@ -95,14 +95,14 @@ public:
      */
     virtual std::list<std::string> inclusion_dependencies(
         const formattables::dependencies_builder_factory& f,
-        const logical::meta_model::element& e) const = 0;
+        const logical::entities::element& e) const = 0;
 
 public:
     /**
      * @brief Generate a file representation for the element.
      */
-    virtual extraction::meta_model::artefact
-    format(const context& ctx, const logical::meta_model::element& e) const = 0;
+    virtual extraction::entities::artefact
+    format(const context& ctx, const logical::entities::element& e) const = 0;
 };
 
 }

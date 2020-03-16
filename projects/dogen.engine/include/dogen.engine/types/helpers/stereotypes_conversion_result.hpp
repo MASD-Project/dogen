@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include "dogen.logical/types/meta_model/static_stereotypes.hpp"
+#include "dogen.logical/types/entities/static_stereotypes.hpp"
 
 namespace dogen::engine::helpers {
 
@@ -45,14 +45,14 @@ public:
 
 public:
     stereotypes_conversion_result(
-        const std::list<dogen::logical::meta_model::static_stereotypes>& static_stereotypes,
+        const std::list<dogen::logical::entities::static_stereotypes>& static_stereotypes,
         const std::list<std::string>& dynamic_stereotypes);
 
 public:
-    const std::list<dogen::logical::meta_model::static_stereotypes>& static_stereotypes() const;
-    std::list<dogen::logical::meta_model::static_stereotypes>& static_stereotypes();
-    void static_stereotypes(const std::list<dogen::logical::meta_model::static_stereotypes>& v);
-    void static_stereotypes(const std::list<dogen::logical::meta_model::static_stereotypes>&& v);
+    const std::list<dogen::logical::entities::static_stereotypes>& static_stereotypes() const;
+    std::list<dogen::logical::entities::static_stereotypes>& static_stereotypes();
+    void static_stereotypes(const std::list<dogen::logical::entities::static_stereotypes>& v);
+    void static_stereotypes(const std::list<dogen::logical::entities::static_stereotypes>&& v);
 
     const std::list<std::string>& dynamic_stereotypes() const;
     std::list<std::string>& dynamic_stereotypes();
@@ -70,7 +70,7 @@ public:
     stereotypes_conversion_result& operator=(stereotypes_conversion_result other);
 
 private:
-    std::list<dogen::logical::meta_model::static_stereotypes> static_stereotypes_;
+    std::list<dogen::logical::entities::static_stereotypes> static_stereotypes_;
     std::list<std::string> dynamic_stereotypes_;
 };
 

@@ -27,7 +27,7 @@
 
 #include <string>
 #include <unordered_map>
-#include "dogen.variability/types/meta_model/configuration_point.hpp"
+#include "dogen.variability/types/entities/configuration_point.hpp"
 
 namespace dogen::variability::helpers {
 
@@ -45,11 +45,11 @@ public:
      * @brief Merges the two configurations according to the merging
      * rules,
      */
-    std::unordered_map<std::string, meta_model::configuration_point> merge(
+    std::unordered_map<std::string, entities::configuration_point> merge(
         const std::string& lhs_name, const std::unordered_map<std::string,
-        meta_model::configuration_point>& lhs,
+        entities::configuration_point>& lhs,
         const std::string& rhs_name, const std::unordered_map<std::string,
-        meta_model::configuration_point>& rhs) const;
+        entities::configuration_point>& rhs) const;
 };
 
 }

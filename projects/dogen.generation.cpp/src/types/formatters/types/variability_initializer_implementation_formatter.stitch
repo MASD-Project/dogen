@@ -2,7 +2,7 @@
 <#@ masd.stitch.containing_namespaces=dogen::generation::cpp::formatters::types #>
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
-<#@ masd.stitch.inclusion_dependency="dogen.logical/types/meta_model/variability/initializer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/variability/initializer.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.generation.cpp/types/traits.hpp" #>
@@ -17,7 +17,7 @@
 <#@ masd.stitch.wale.text_template=cpp_artefact_formatter_implementation.wale #>
 <#@ masd.stitch.wale.kvp.class.simple_name=variability_initializer_implementation_formatter #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=variability_initializer_implementation #>
-<#@ masd.stitch.wale.kvp.yarn_element=logical::meta_model::variability::initializer #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::variability::initializer #>
 <#@ masd.stitch.wale.kvp.meta_element=variability_initializer #>
 <#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
@@ -25,8 +25,8 @@
 
 std::list<std::string> variability_initializer_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const logical::meta_model::element& e) const {
-    using logical::meta_model::variability::initializer;
+    const logical::entities::element& e) const {
+    using logical::entities::variability::initializer;
     const auto& o(assistant::as<initializer>(e));
     auto builder(f.make());
 
@@ -42,10 +42,10 @@ std::list<std::string> variability_initializer_implementation_formatter::inclusi
     return builder.build();
 }
 
-extraction::meta_model::artefact variability_initializer_implementation_formatter::
-format(const context& ctx, const logical::meta_model::element& e) const {
+extraction::entities::artefact variability_initializer_implementation_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    const auto& o(a.as<logical::meta_model::variability::initializer>(e));
+    const auto& o(a.as<logical::entities::variability::initializer>(e));
 
     {
         const auto sn(o.name().simple());

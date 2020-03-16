@@ -29,9 +29,9 @@
 #include <string>
 #include <unordered_set>
 #include <boost/shared_ptr.hpp>
-#include "dogen.logical/types/meta_model/name.hpp"
-#include "dogen.logical/types/meta_model/location.hpp"
-#include "dogen.logical/types/meta_model/name_tree.hpp"
+#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.logical/types/entities/location.hpp"
+#include "dogen.logical/types/entities/name_tree.hpp"
 #include "dogen.logical/types/helpers/node.hpp"
 
 namespace dogen::logical::helpers {
@@ -93,14 +93,14 @@ private:
      * @brief Generate the name tree for the given node
      * representation.
      */
-    meta_model::name_tree make_name_tree(const node& n);
+    entities::name_tree make_name_tree(const node& n);
 
 public:
     /**
      * @brief Generate the name tree representation for the current
      * node representation.
      */
-    meta_model::name_tree build();
+    entities::name_tree build();
 
 private:
     std::list<std::string> names_;

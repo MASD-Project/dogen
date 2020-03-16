@@ -27,9 +27,9 @@
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.extraction/io/meta_model/model_io.hpp"
-#include "dogen.extraction/hash/meta_model/operation_type_hash.hpp"
-#include "dogen.extraction/hash/meta_model/operation_reason_hash.hpp"
+#include "dogen.extraction/io/entities/model_io.hpp"
+#include "dogen.extraction/hash/entities/operation_type_hash.hpp"
+#include "dogen.extraction/hash/entities/operation_reason_hash.hpp"
 #include "dogen.extraction/types/transforms/transform_exception.hpp"
 #include "dogen.extraction/types/transforms/generate_report_transform.hpp"
 
@@ -71,7 +71,7 @@ using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
 
 using dogen::extraction::transforms::transform_exception;
-using dogen::extraction::meta_model::operation_type;
+using dogen::extraction::entities::operation_type;
 void print_operation_type(const bool add_brackets,
     const operation_type ot, std::ostream& s) {
     if (add_brackets)
@@ -102,7 +102,7 @@ void print_operation_type(const bool add_brackets,
         s << "] ";
 }
 
-using dogen::extraction::meta_model::operation_reason;
+using dogen::extraction::entities::operation_reason;
 void print_operation_reason(const bool add_brackets,
     const operation_reason reason, std::ostream& s) {
     if (add_brackets)
@@ -149,7 +149,7 @@ void print_operation_reason(const bool add_brackets,
 }
 
 void print_plain_report(std::ostream& s,
-    const dogen::extraction::meta_model::model& m) {
+    const dogen::extraction::entities::model& m) {
     const auto base(m.managed_directories().front());
     for (auto& a : m.artefacts()) {
         // FIXME: HACK: we seemt to have some blank artefacts atm.
@@ -169,7 +169,7 @@ void print_plain_report(std::ostream& s,
 }
 
 void print_org_mode_report(std::ostream& s,
-    const dogen::extraction::meta_model::model& m) {
+    const dogen::extraction::entities::model& m) {
 
     using namespace dogen::extraction;
     std::unordered_map<operation_type,
@@ -237,7 +237,7 @@ void write_report(const std::string& contents, const std::string& model_name,
 namespace dogen::extraction::transforms {
 
 void generate_report_transform::
-apply(const context& ctx, const meta_model::model& m) {
+apply(const context& ctx, const entities::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "generate operation report transform", transform_id, m.name(),
         *ctx.tracer(), m);

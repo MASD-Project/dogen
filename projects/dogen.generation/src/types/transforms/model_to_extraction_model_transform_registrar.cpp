@@ -21,7 +21,7 @@
 #include <sstream>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.logical/io/meta_model/technical_space_io.hpp"
+#include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.generation/types/transforms/registrar_error.hpp"
 #include "dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
 
@@ -29,7 +29,7 @@ namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(
-        "generation.meta_model.model_to_extraction_model_transform_registrar"));
+        "generation.entities.model_to_extraction_model_transform_registrar"));
 
 const std::string no_transforms("No model to text transforms provided.");
 const std::string null_transform("Transform supplied is null.");
@@ -73,7 +73,7 @@ void model_to_extraction_model_transform_registrar::validate() const {
 std::shared_ptr<model_to_extraction_model_transform_interface>
 model_to_extraction_model_transform_registrar::
 transform_for_technical_space(
-    const logical::meta_model::technical_space ts) const {
+    const logical::entities::technical_space ts) const {
     const auto i(transforms_by_technical_space_.find(ts));
     if (i == transforms_by_technical_space_.end())
         return std::shared_ptr<model_to_extraction_model_transform_interface>();
@@ -82,7 +82,7 @@ transform_for_technical_space(
 }
 
 const std::unordered_map<
-    logical::meta_model::technical_space,
+    logical::entities::technical_space,
     std::shared_ptr<model_to_extraction_model_transform_interface>>&
 model_to_extraction_model_transform_registrar::
 transforms_by_technical_space() const {

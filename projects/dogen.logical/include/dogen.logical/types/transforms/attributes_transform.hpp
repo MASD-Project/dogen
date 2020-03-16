@@ -27,7 +27,7 @@
 
 #include <string>
 #include <unordered_set>
-#include "dogen.logical/types/meta_model/model.hpp"
+#include "dogen.logical/types/entities/model.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 
 namespace dogen::logical::transforms {
@@ -107,45 +107,45 @@ private:
     /**
      * @brief Returns the object with the given name, or throws.
      */
-    static meta_model::structural::object&
-    find_object(const meta_model::name& n, meta_model::model& m);
+    static entities::structural::object&
+    find_object(const entities::name& n, entities::model& m);
 
     /**
      * @brief Returns the object template with the given name, or
      * throws.
      */
-    static meta_model::structural::object_template&
-    find_object_template(const meta_model::name& n, meta_model::model& m);
+    static entities::structural::object_template&
+    find_object_template(const entities::name& n, entities::model& m);
 
 private:
     /**
      * @brief Expands a specific object.
      */
-    static void expand_object(meta_model::structural::object& o,
-        meta_model::model& m, std::unordered_set<std::string>& processed_ids);
+    static void expand_object(entities::structural::object& o,
+        entities::model& m, std::unordered_set<std::string>& processed_ids);
 
     /**
      * @brief Expands all objects in the model.
      */
-    static void expand_objects(meta_model::model& m);
+    static void expand_objects(entities::model& m);
 
     /**
      * @brief Expands a specific object template
      */
     static void expand_object_template(
-        meta_model::structural::object_template& ot, meta_model::model& m,
+        entities::structural::object_template& ot, entities::model& m,
         std::unordered_set<std::string>& processed_ids);
 
     /**
      * @brief Expands all object templates in the model.
      */
-    static void expand_object_templates(meta_model::model& m);
+    static void expand_object_templates(entities::model& m);
 
 public:
     /**
      * @brief Indexes the supplied model.
      */
-    static void apply(const context& ctx, meta_model::model& m);
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

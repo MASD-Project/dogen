@@ -23,7 +23,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.generation.cpp/types/workflow_error.hpp"
-#include "dogen.logical/io/meta_model/formatting_styles_io.hpp"
+#include "dogen.logical/io/entities/formatting_styles_io.hpp"
 #include "dogen.generation.cpp/io/formattables/artefact_properties_io.hpp"
 #include "dogen.generation.cpp/types/formatters/context.hpp"
 #include "dogen.generation.cpp/types/formatters/wale_formatter.hpp"
@@ -45,7 +45,7 @@ namespace dogen::generation::cpp::formatters {
 std::shared_ptr<cpp::formatters::registrar> workflow::registrar_;
 
 workflow::workflow(const formattables::locator& l,
-    const variability::meta_model::feature_model& fm,
+    const variability::entities::feature_model& fm,
     const variability::helpers::configuration_factory& cf)
     : stitch_formatter_(l, fm, cf), locator_(l) { }
 
@@ -56,8 +56,8 @@ cpp::formatters::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-const logical::meta_model::artefact_properties&
-workflow::get_artefact_properties(const logical::meta_model::element& e,
+const logical::entities::artefact_properties&
+workflow::get_artefact_properties(const logical::entities::element& e,
     const std::string& archetype) const {
 
     const auto& ap(e.artefact_properties());
@@ -69,11 +69,11 @@ workflow::get_artefact_properties(const logical::meta_model::element& e,
     return i->second;
 }
 
-std::list<extraction::meta_model::artefact>
+std::list<extraction::entities::artefact>
 workflow::format(
-    const std::unordered_set<generation::meta_model::element_archetype>&
+    const std::unordered_set<generation::entities::element_archetype>&
     enabled_archetype_for_element, const formattables::model& fm,
-    const logical::meta_model::element& e,
+    const logical::entities::element& e,
     const formattables::element_properties& ep) const {
 
     const auto id(e.name().qualified().dot());
@@ -82,7 +82,7 @@ workflow::format(
     const auto mn(e.meta_name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Meta name: " << mn;
 
-    std::list<extraction::meta_model::artefact> r;
+    std::list<extraction::entities::artefact> r;
     const auto& frp(registrar().formatter_repository());
     const auto i(frp.stock_artefact_formatters_by_meta_name().find(mn));
     if (i == frp.stock_artefact_formatters_by_meta_name().end()) {
@@ -101,7 +101,7 @@ workflow::format(
             continue;
         }
 
-        using logical::meta_model::formatting_styles;
+        using logical::entities::formatting_styles;
         const auto& frp(registrar().formatter_repository());
         context ctx(enabled_archetype_for_element, ep, fm,
             frp.helper_formatters());
@@ -141,12 +141,12 @@ workflow::format(
     return r;
 }
 
-std::list<extraction::meta_model::artefact> workflow::
-execute(const std::unordered_set<generation::meta_model::element_archetype>&
+std::list<extraction::entities::artefact> workflow::
+execute(const std::unordered_set<generation::entities::element_archetype>&
     enabled_archetype_for_element, const formattables::model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started formatting. Model "
                              << fm.name().qualified().dot();
-    std::list<extraction::meta_model::artefact> r;
+    std::list<extraction::entities::artefact> r;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
         const auto& eprops(formattable.element_properties());

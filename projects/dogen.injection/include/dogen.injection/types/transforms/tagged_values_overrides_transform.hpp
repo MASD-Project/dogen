@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen.injection/types/meta_model/model.hpp"
+#include "dogen.injection/types/entities/model.hpp"
 #include "dogen.injection/types/transforms/context_fwd.hpp"
 
 namespace dogen::injection::transforms {
@@ -36,7 +36,7 @@ namespace dogen::injection::transforms {
  */
 class tagged_values_overrides_transform final {
 public:
-    static void apply(const transforms::context& ctx, meta_model::model& m);
+    static void apply(const transforms::context& ctx, entities::model& m);
 };
 
 }

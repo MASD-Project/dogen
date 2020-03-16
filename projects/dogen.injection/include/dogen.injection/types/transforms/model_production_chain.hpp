@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include "dogen.injection/types/meta_model/model.hpp"
+#include "dogen.injection/types/entities/model.hpp"
 #include "dogen.injection/types/transforms/registrar.hpp"
 #include "dogen.injection/types/transforms/context_fwd.hpp"
 
@@ -59,7 +59,7 @@ public:
      * @pre @e p must point to a valid file, and contain a supported
      * external model.
      */
-    static meta_model::model
+    static entities::model
     apply(const context& ctx, const boost::filesystem::path& p);
 
 private:

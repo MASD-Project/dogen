@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.logical/types/meta_model/structural/entry_point.hpp"
+#include "dogen.logical/types/entities/structural/entry_point.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation/types/formatters/sequence_formatter.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
@@ -52,7 +52,7 @@ main_formatter::archetype_location() const {
     return r;
 }
 
-const logical::meta_model::name& main_formatter::meta_name() const {
+const logical::entities::name& main_formatter::meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_entry_point_name());
     return r;
@@ -67,7 +67,7 @@ inclusion_support_types main_formatter::inclusion_support_type() const {
 }
 
 boost::filesystem::path main_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const logical::meta_model::name& n) const {
+    const formattables::locator& /*l*/, const logical::entities::name& n) const {
 
     using namespace dogen::utility::log;
     static logger lg(
@@ -79,15 +79,15 @@ boost::filesystem::path main_formatter::inclusion_path(
 }
 
 boost::filesystem::path main_formatter::full_path(
-    const formattables::locator& l, const logical::meta_model::name& n) const {
+    const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_full_path_for_tests_cpp_implementation(n, static_id());
 }
 
 std::list<std::string> main_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const logical::meta_model::element& /*e*/) const {
+    const logical::entities::element& /*e*/) const {
 
-    using logical::meta_model::structural::object;
+    using logical::entities::structural::object;
     auto builder(f.make());
 
     using ic = inclusion_constants;
@@ -100,10 +100,10 @@ std::list<std::string> main_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-extraction::meta_model::artefact main_formatter::
-format(const context& ctx, const logical::meta_model::element& e) const {
+extraction::entities::artefact main_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
-    using logical::meta_model::structural::entry_point;
+    using logical::entities::structural::entry_point;
     const auto& ep(a.as<entry_point>(e));
     const auto qn(a.get_qualified_name(ep.name()));
 a.stream() << "#define BOOST_TEST_MODULE " << qn << std::endl;

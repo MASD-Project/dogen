@@ -40,20 +40,20 @@ fully_qualified_representation_builder()
     : dot_printer_(separators::dots),
       colon_printer_(separators::double_colons) {}
 
-void fully_qualified_representation_builder::add(const meta_model::name& n) {
+void fully_qualified_representation_builder::add(const entities::name& n) {
     dot_printer_.add(n.qualified().dot());
     colon_printer_.add(n.qualified().colon());
 }
 
 void fully_qualified_representation_builder::
-add(const meta_model::name_tree& nt) {
+add(const entities::name_tree& nt) {
     dot_printer_.add_child(nt.qualified().dot());
     colon_printer_.add_child(nt.qualified().colon());
 }
 
-meta_model::fully_qualified_representation
+entities::fully_qualified_representation
 fully_qualified_representation_builder::build() {
-    meta_model::fully_qualified_representation r;
+    entities::fully_qualified_representation r;
 
     r.dot(dot_printer_.print());
     r.colon(colon_printer_.print());
@@ -63,9 +63,9 @@ fully_qualified_representation_builder::build() {
     return r;
 }
 
-meta_model::fully_qualified_representation
+entities::fully_qualified_representation
 fully_qualified_representation_builder::
-build(const meta_model::name& n, const bool model_name_mode) {
+build(const entities::name& n, const bool model_name_mode) {
     dot_printer_.add(n, model_name_mode);
     colon_printer_.add(n, model_name_mode);
     return build();

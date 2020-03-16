@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <iosfwd>
-#include "dogen.logical/types/meta_model/technical_space.hpp"
+#include "dogen.logical/types/entities/technical_space.hpp"
 
 namespace dogen::generation::formatters {
 
@@ -51,7 +51,7 @@ private:
         const std::list<std::string>& dependencies) const;
 
 public:
-    void format(std::ostream& s, const logical::meta_model::technical_space ts,
+    void format(std::ostream& s, const logical::entities::technical_space ts,
         const std::list<std::string>& dependencies) const;
 };
 

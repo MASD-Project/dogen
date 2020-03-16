@@ -27,9 +27,9 @@ namespace dogen::logical::features {
 
 namespace {
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_variability_binding_point() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("binding_point");
     r.name().qualified("masd.variability.binding_point");
@@ -42,9 +42,9 @@ make_masd_variability_binding_point() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_variability_stereotype() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("stereotype");
     r.name().qualified("masd.variability.stereotype");
@@ -57,9 +57,9 @@ make_masd_variability_stereotype() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_variability_value() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("value");
     r.name().qualified("masd.variability.value");
@@ -75,9 +75,9 @@ the default value field if available.
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_variability_is_optional() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("is_optional");
     r.name().qualified("masd.variability.is_optional");
@@ -92,9 +92,9 @@ make_masd_variability_is_optional() {
     return r;
 }
 
-dogen::variability::meta_model::feature
+dogen::variability::entities::feature
 make_masd_variability_default_value_override() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature r;
     r.name().simple("default_value_override");
     r.name().qualified("masd.variability.default_value_override");
@@ -113,7 +113,7 @@ These match on keys ending with the specified string.
 }
 
 variability_templates::feature_group
-variability_templates::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+variability_templates::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
@@ -128,7 +128,7 @@ variability_templates::make_feature_group(const dogen::variability::meta_model::
 
 variability_templates::static_configuration variability_templates::make_static_configuration(
     const feature_group& fg,
-    const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::entities::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
@@ -144,10 +144,10 @@ variability_templates::static_configuration variability_templates::make_static_c
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature>
+std::list<dogen::variability::entities::feature>
 variability_templates::make_features() {
-    using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature> r;
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature> r;
     r.push_back(make_masd_variability_binding_point());
     r.push_back(make_masd_variability_stereotype());
     r.push_back(make_masd_variability_value());

@@ -20,15 +20,15 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.logical/types/meta_model/structural/module.hpp"
-#include "dogen.logical/types/meta_model/structural/object.hpp"
-#include "dogen.logical/types/meta_model/structural/builtin.hpp"
-#include "dogen.logical/types/meta_model/element.hpp"
-#include "dogen.logical/types/meta_model/structural/exception.hpp"
-#include "dogen.logical/types/meta_model/structural/primitive.hpp"
-#include "dogen.logical/types/meta_model/structural/enumeration.hpp"
-#include "dogen.logical/types/meta_model/structural/object_template.hpp"
-#include "dogen.generation/io/meta_model/model_io.hpp"
+#include "dogen.logical/types/entities/structural/module.hpp"
+#include "dogen.logical/types/entities/structural/object.hpp"
+#include "dogen.logical/types/entities/structural/builtin.hpp"
+#include "dogen.logical/types/entities/element.hpp"
+#include "dogen.logical/types/entities/structural/exception.hpp"
+#include "dogen.logical/types/entities/structural/primitive.hpp"
+#include "dogen.logical/types/entities/structural/enumeration.hpp"
+#include "dogen.logical/types/entities/structural/object_template.hpp"
+#include "dogen.generation/io/entities/model_io.hpp"
 #include "dogen.generation/types/transforms/generability_transform.hpp"
 
 namespace {
@@ -44,13 +44,13 @@ auto lg(logger_factory(transform_id));
 namespace dogen::generation::transforms {
 
 bool generability_transform::
-is_generatable(const logical::meta_model::element& e) {
+is_generatable(const logical::entities::element& e) {
     const auto ot(e.origin_type());
-    return ot == logical::meta_model::origin_types::target;
+    return ot == logical::entities::origin_types::target;
 }
 
 bool generability_transform::
-has_generatable_types(const meta_model::model& m) {
+has_generatable_types(const entities::model& m) {
     for (const auto ptr : m.elements()) {
         if (is_generatable(*ptr))
             return true;
@@ -60,7 +60,7 @@ has_generatable_types(const meta_model::model& m) {
 }
 
 void generability_transform::
-apply(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "generability transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
     m.has_generatable_types(has_generatable_types(m));

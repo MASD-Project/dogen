@@ -25,8 +25,8 @@
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.extraction/io/meta_model/model_io.hpp"
-#include "dogen.extraction/io/meta_model/operation_type_io.hpp"
+#include "dogen.extraction/io/entities/model_io.hpp"
+#include "dogen.extraction/io/entities/operation_type_io.hpp"
 #include "dogen.extraction/io/helpers/files_by_status_io.hpp"
 #include "dogen.extraction/types/helpers/file_status_collector.hpp"
 #include "dogen.extraction/types/transforms/transform_exception.hpp"
@@ -48,7 +48,7 @@ const std::string unexpected_operation(
 namespace dogen::extraction::transforms {
 
 void operation_transform::
-apply(meta_model::artefact& a, const bool force_write) {
+apply(entities::artefact& a, const bool force_write) {
     const auto gs(a.path().generic());
     BOOST_LOG_SEV(lg, trace) << "Processing: " << gs;
 
@@ -60,7 +60,7 @@ apply(meta_model::artefact& a, const bool force_write) {
      * We only expect artefacts with a limited range of operation
      * types. If this artefact is aksing for anything else, throw.
      */
-    using extraction::meta_model::operation_type;
+    using extraction::entities::operation_type;
     const auto ot(a.operation().type());
     if (ot != operation_type::create_only && ot != operation_type::write) {
         const auto s(boost::lexical_cast<std::string>(ot));
@@ -74,7 +74,7 @@ apply(meta_model::artefact& a, const bool force_write) {
      * generated file. If the user requested create only, we can
      * safely bump it to write.
      */
-    using extraction::meta_model::operation_reason;
+    using extraction::entities::operation_reason;
     if (!boost::filesystem::exists(a.path())) {
         a.operation().type(operation_type::write);
         a.operation().reason(operation_reason::newly_generated);
@@ -128,7 +128,7 @@ apply(meta_model::artefact& a, const bool force_write) {
 
 }
 
-void operation_transform::apply(const context& ctx, meta_model::model& m) {
+void operation_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "operation transform", transform_id, m.name(),
         *ctx.tracer(), m);

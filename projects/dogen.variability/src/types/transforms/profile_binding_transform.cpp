@@ -25,9 +25,9 @@
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_point_merger.hpp"
-#include "dogen.variability/io/meta_model/configuration_io.hpp"
-#include "dogen.variability/io/meta_model/configuration_model_io.hpp"
-#include "dogen.variability/io/meta_model/configuration_model_set_io.hpp"
+#include "dogen.variability/io/entities/configuration_io.hpp"
+#include "dogen.variability/io/entities/configuration_model_io.hpp"
+#include "dogen.variability/io/entities/configuration_model_set_io.hpp"
 #include "dogen.variability/types/transforms/transformation_error.hpp"
 #include "dogen.variability/types/transforms/profile_binding_transform.hpp"
 
@@ -60,7 +60,7 @@ const std::string inconsistent_configuration(
 namespace dogen::variability::transforms {
 
 profile_binding_transform::feature_group profile_binding_transform::
-make_feature_group(const meta_model::feature_model& fm) {
+make_feature_group(const entities::feature_model& fm) {
     BOOST_LOG_SEV(lg, debug) << "Creating feature group.";
 
     feature_group r;
@@ -73,7 +73,7 @@ make_feature_group(const meta_model::feature_model& fm) {
 
 std::string profile_binding_transform::
 obtain_profile_name(const feature_group& fg,
-    const meta_model::configuration& cfg) {
+    const entities::configuration& cfg) {
 
     BOOST_LOG_SEV(lg, debug) << "Reading profile name.";
     const helpers::configuration_selector s(cfg);
@@ -87,16 +87,16 @@ obtain_profile_name(const feature_group& fg,
 
 std::string
 profile_binding_transform::get_default_profile_name_for_binding_point(
-    const meta_model::binding_point bp) {
-    if (bp == meta_model::binding_point::global)
+    const entities::binding_point bp) {
+    if (bp == entities::binding_point::global)
         return default_root;
 
     return empty;
 }
 
 void profile_binding_transform::handle_potential_bindings(
-    const bool has_base_layer, const meta_model::profile_repository& prp,
-    meta_model::configuration& cfg) {
+    const bool has_base_layer, const entities::profile_repository& prp,
+    entities::configuration& cfg) {
 
     /*
      * This method manages the merging against a set of potential
@@ -124,7 +124,7 @@ void profile_binding_transform::handle_potential_bindings(
     unsigned int bind_count(0);
     std::string base_layer_name;
     helpers::configuration_point_merger mg;
-    meta_model::profile accumulating_profile;
+    entities::profile accumulating_profile;
     accumulating_profile.name().simple("accumulating_profile");
     accumulating_profile.name().qualified("accumulating_profile");
     for (auto& pb : cfg.profile_bindings()) {
@@ -250,8 +250,8 @@ void profile_binding_transform::handle_potential_bindings(
         BOOST_LOG_SEV(lg, trace) << "No base layer found on all profiles.";
 }
 
-void profile_binding_transform::bind(const meta_model::profile_repository& prp,
-    const feature_group& fg, meta_model::configuration& cfg) {
+void profile_binding_transform::bind(const entities::profile_repository& prp,
+    const feature_group& fg, entities::configuration& cfg) {
     BOOST_LOG_SEV(lg, debug) << "Started binding profiles for configuration: "
                              << cfg.name().qualified();
 
@@ -325,8 +325,8 @@ void profile_binding_transform::bind(const meta_model::profile_repository& prp,
     // BOOST_LOG_SEV(lg, debug) << "No profiles found, using original.";
 }
 
-void profile_binding_transform::apply(const meta_model::profile_repository& prp,
-    const meta_model::feature_model& fm, meta_model::configuration_model& cm) {
+void profile_binding_transform::apply(const entities::profile_repository& prp,
+    const entities::feature_model& fm, entities::configuration_model& cm) {
     /*
      * All configuration models must have a global configuration set.
      */
@@ -353,9 +353,9 @@ void profile_binding_transform::apply(const meta_model::profile_repository& prp,
 }
 
 void profile_binding_transform::apply(const context& ctx,
-    const meta_model::feature_model& fm,
-    const meta_model::profile_repository& prp,
-    meta_model::configuration_model_set& cms) {
+    const entities::feature_model& fm,
+    const entities::profile_repository& prp,
+    entities::configuration_model_set& cms) {
     tracing::scoped_transform_tracer stp(lg,  "profile binding transform",
         transform_id, *ctx.tracer(), cms);
 

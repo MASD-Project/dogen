@@ -27,9 +27,9 @@ namespace dogen::generation::cpp::formatters {
 
 namespace {
 
-dogen::variability::meta_model::feature_template
+dogen::variability::entities::feature_template
 make_primary_inclusion_directive() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature_template r;
     r.name().simple("primary_inclusion_directive");
     r.description(R"(
@@ -41,9 +41,9 @@ make_primary_inclusion_directive() {
     return r;
 }
 
-dogen::variability::meta_model::feature_template
+dogen::variability::entities::feature_template
 make_secondary_inclusion_directive() {
-    using namespace dogen::variability::meta_model;
+    using namespace dogen::variability::entities;
     feature_template r;
     r.name().simple("secondary_inclusion_directive");
     r.description(R"(
@@ -58,7 +58,7 @@ make_secondary_inclusion_directive() {
 }
 
 archetype_features::feature_group
-archetype_features::make_feature_group(const dogen::variability::meta_model::feature_model& fm) {
+archetype_features::make_feature_group(const dogen::variability::entities::feature_model& fm) {
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
@@ -70,7 +70,7 @@ archetype_features::make_feature_group(const dogen::variability::meta_model::fea
 
 archetype_features::static_configuration archetype_features::make_static_configuration(
     const feature_group& fg,
-    const dogen::variability::meta_model::configuration& cfg) {
+    const dogen::variability::entities::configuration& cfg) {
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
@@ -79,10 +79,10 @@ archetype_features::static_configuration archetype_features::make_static_configu
     return r;
 }
 
-std::list<dogen::variability::meta_model::feature_template>
+std::list<dogen::variability::entities::feature_template>
 archetype_features::make_templates() {
-    using namespace dogen::variability::meta_model;
-    std::list<dogen::variability::meta_model::feature_template> r;
+    using namespace dogen::variability::entities;
+    std::list<dogen::variability::entities::feature_template> r;
     r.push_back(make_primary_inclusion_directive());
     r.push_back(make_secondary_inclusion_directive());
     return r;

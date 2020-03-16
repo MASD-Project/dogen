@@ -25,24 +25,24 @@
 #pragma once
 #endif
 
-#include "dogen.logical/types/meta_model/name.hpp"
-#include "dogen.logical/types/meta_model/element.hpp"
-#include "dogen.generation/types/meta_model/model.hpp"
+#include "dogen.logical/types/entities/name.hpp"
+#include "dogen.logical/types/entities/element.hpp"
+#include "dogen.generation/types/entities/model.hpp"
 #include "dogen.generation/types/helpers/decoration_repository.hpp"
 
 namespace dogen::generation::helpers {
 
 class decoration_repository_factory final {
 private:
-    bool is_meta_element(const logical::meta_model::name& me,
-        const logical::meta_model::element& e) const;
+    bool is_meta_element(const logical::entities::name& me,
+        const logical::entities::element& e) const;
 
 private:
     void handle_licence(
-        const boost::shared_ptr<logical::meta_model::element> e,
+        const boost::shared_ptr<logical::entities::element> e,
         decoration_repository& drp) const;
     void handle_generation_marker(
-        const boost::shared_ptr<logical::meta_model::element> e,
+        const boost::shared_ptr<logical::entities::element> e,
         decoration_repository& drp) const;
 
     /**
@@ -50,11 +50,11 @@ private:
      * technical space.
      */
     void handle_modeline_group(
-        const boost::shared_ptr<logical::meta_model::element> e,
+        const boost::shared_ptr<logical::entities::element> e,
         decoration_repository& drp) const;
 
 public:
-    decoration_repository make(const meta_model::model& m) const;
+    decoration_repository make(const entities::model& m) const;
 };
 
 }

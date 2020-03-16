@@ -23,8 +23,8 @@
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.extraction/io/meta_model/model_io.hpp"
-#include "dogen.extraction/io/meta_model/operation_io.hpp"
+#include "dogen.extraction/io/entities/model_io.hpp"
+#include "dogen.extraction/io/entities/operation_io.hpp"
 #include "dogen.extraction/io/helpers/files_by_status_io.hpp"
 #include "dogen.extraction/types/helpers/file_status_collector.hpp"
 #include "dogen.extraction/types/helpers/unified_differ.hpp"
@@ -50,7 +50,7 @@ const std::string reason_other("Reason: Other.");
 namespace dogen::extraction::transforms {
 
 void generate_diffs_transform::
-apply(const context& ctx, meta_model::model& m) {
+apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "generate diffs transform", transform_id, m.name(),
         *ctx.tracer(), m);
@@ -83,7 +83,7 @@ apply(const context& ctx, meta_model::model& m) {
          * Ensure the artefact can contribute to the diff.
          */
         const auto ot(a.operation().type());
-        using extraction::meta_model::operation_type;
+        using extraction::entities::operation_type;
         if (ot != operation_type::write && ot != operation_type::remove) {
             BOOST_LOG_SEV(lg, trace) << "Operation will not produce diffs.";
             continue;
@@ -95,7 +95,7 @@ apply(const context& ctx, meta_model::model& m) {
         /*
          * If the file already exists, obtain its current content.
          */
-        using extraction::meta_model::operation_reason;
+        using extraction::entities::operation_reason;
         const auto reason(a.operation().reason());
         using dogen::utility::filesystem::read_file_content;
         const std::string c(reason == operation_reason::newly_generated ?

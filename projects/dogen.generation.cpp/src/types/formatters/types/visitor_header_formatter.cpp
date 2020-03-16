@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.logical/types/meta_model/structural/visitor.hpp"
+#include "dogen.logical/types/entities/structural/visitor.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.generation.cpp/types/formatters/assistant.hpp"
 #include "dogen.generation.cpp/types/traits.hpp"
@@ -49,7 +49,7 @@ visitor_header_formatter::archetype_location() const {
     return r;
 }
 
-const logical::meta_model::name& visitor_header_formatter::meta_name() const {
+const logical::entities::name& visitor_header_formatter::meta_name() const {
     using logical::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_visitor_name());
     return r;
@@ -64,19 +64,19 @@ inclusion_support_types visitor_header_formatter::inclusion_support_type() const
 }
 
 boost::filesystem::path visitor_header_formatter::inclusion_path(
-    const formattables::locator& l, const logical::meta_model::name& n) const {
+    const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_id());
 }
 
 boost::filesystem::path visitor_header_formatter::full_path(
-    const formattables::locator& l, const logical::meta_model::name& n) const {
+    const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_id());
 }
 
 std::list<std::string> visitor_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const logical::meta_model::element& e) const {
-    using logical::meta_model::structural::visitor;
+    const logical::entities::element& e) const {
+    using logical::entities::structural::visitor;
     const auto& v(assistant::as<visitor>(e));
     auto builder(f.make());
     builder.add(v.visits(), traits::class_forward_declarations_archetype());
@@ -87,10 +87,10 @@ std::list<std::string> visitor_header_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-extraction::meta_model::artefact visitor_header_formatter::
-format(const context& ctx, const logical::meta_model::element& e) const {
+extraction::entities::artefact visitor_header_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
-    const auto& v(a.as<logical::meta_model::structural::visitor>(e));
+    const auto& v(a.as<logical::entities::structural::visitor>(e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));
