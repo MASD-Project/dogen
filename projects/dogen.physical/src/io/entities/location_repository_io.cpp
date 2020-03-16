@@ -174,8 +174,7 @@ std::ostream& operator<<(std::ostream& s, const location_repository& v) {
       << "\"formatter_names_by_backend_name\": " << v.formatter_names_by_backend_name() << ", "
       << "\"by_meta_name\": " << v.by_meta_name() << ", "
       << "\"by_family\": " << v.by_family() << ", "
-      << "\"by_backend_by_facet\": " << v.by_backend_by_facet() << ", "
-      << "\"by_intra_backend_segment\": " << v.by_intra_backend_segment()
+      << "\"by_backend_by_facet\": " << v.by_backend_by_facet()
       << " }";
     return(s);
 }

@@ -111,11 +111,6 @@
         {
           "name": "by_backend_by_facet",
           "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string>>>"
-        },
-        {
-          "name": "by_intra_backend_segment",
-          "type": "std::unordered_map<std::string, std::list<location>>",
-          "documentation": "All archetype locations for a given intra-backend segment.\n\nIntra-backend segments are backend specific sets of archetype locations, with\nassociated properties.\n"
         }
       ]
     },

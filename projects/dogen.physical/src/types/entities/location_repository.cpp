@@ -28,15 +28,13 @@ location_repository::location_repository(
     const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name,
     const std::unordered_map<std::string, dogen::physical::entities::locations_group>& by_meta_name,
     const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_family,
-    const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& by_backend_by_facet,
-    const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_intra_backend_segment)
+    const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& by_backend_by_facet)
     : all_(all),
       facet_names_by_backend_name_(facet_names_by_backend_name),
       formatter_names_by_backend_name_(formatter_names_by_backend_name),
       by_meta_name_(by_meta_name),
       by_family_(by_family),
-      by_backend_by_facet_(by_backend_by_facet),
-      by_intra_backend_segment_(by_intra_backend_segment) { }
+      by_backend_by_facet_(by_backend_by_facet) { }
 
 void location_repository::swap(location_repository& other) noexcept {
     using std::swap;
@@ -46,7 +44,6 @@ void location_repository::swap(location_repository& other) noexcept {
     swap(by_meta_name_, other.by_meta_name_);
     swap(by_family_, other.by_family_);
     swap(by_backend_by_facet_, other.by_backend_by_facet_);
-    swap(by_intra_backend_segment_, other.by_intra_backend_segment_);
 }
 
 bool location_repository::operator==(const location_repository& rhs) const {
@@ -55,8 +52,7 @@ bool location_repository::operator==(const location_repository& rhs) const {
         formatter_names_by_backend_name_ == rhs.formatter_names_by_backend_name_ &&
         by_meta_name_ == rhs.by_meta_name_ &&
         by_family_ == rhs.by_family_ &&
-        by_backend_by_facet_ == rhs.by_backend_by_facet_ &&
-        by_intra_backend_segment_ == rhs.by_intra_backend_segment_;
+        by_backend_by_facet_ == rhs.by_backend_by_facet_;
 }
 
 location_repository& location_repository::operator=(location_repository other) {
@@ -159,22 +155,6 @@ void location_repository::by_backend_by_facet(const std::unordered_map<std::stri
 
 void location_repository::by_backend_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >&& v) {
     by_backend_by_facet_ = std::move(v);
-}
-
-const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& location_repository::by_intra_backend_segment() const {
-    return by_intra_backend_segment_;
-}
-
-std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& location_repository::by_intra_backend_segment() {
-    return by_intra_backend_segment_;
-}
-
-void location_repository::by_intra_backend_segment(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& v) {
-    by_intra_backend_segment_ = v;
-}
-
-void location_repository::by_intra_backend_segment(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >&& v) {
-    by_intra_backend_segment_ = std::move(v);
 }
 
 }

@@ -49,8 +49,7 @@ public:
         const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name,
         const std::unordered_map<std::string, dogen::physical::entities::locations_group>& by_meta_name,
         const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_family,
-        const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& by_backend_by_facet,
-        const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_intra_backend_segment);
+        const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& by_backend_by_facet);
 
 public:
     const std::list<dogen::physical::entities::location>& all() const;
@@ -91,19 +90,6 @@ public:
     void by_backend_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& v);
     void by_backend_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >&& v);
 
-    /**
-     * @brief All archetype locations for a given intra-backend segment.
-     *
-     * Intra-backend segments are backend specific sets of archetype locations, with
-     * associated properties.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_intra_backend_segment() const;
-    std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_intra_backend_segment();
-    void by_intra_backend_segment(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& v);
-    void by_intra_backend_segment(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >&& v);
-    /**@}*/
-
 public:
     bool operator==(const location_repository& rhs) const;
     bool operator!=(const location_repository& rhs) const {
@@ -121,7 +107,6 @@ private:
     std::unordered_map<std::string, dogen::physical::entities::locations_group> by_meta_name_;
     std::unordered_map<std::string, std::list<dogen::physical::entities::location> > by_family_;
     std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > > by_backend_by_facet_;
-    std::unordered_map<std::string, std::list<dogen::physical::entities::location> > by_intra_backend_segment_;
 };
 
 }
