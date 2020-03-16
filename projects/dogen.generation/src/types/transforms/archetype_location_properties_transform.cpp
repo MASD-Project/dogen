@@ -69,9 +69,6 @@ make_backend_feature_group(const variability::entities::feature_model& fm,
         const auto ebl(logical::traits::enabled());
         btg.enabled = s.get_by_name(backend, ebl);
 
-        const auto dir(logical::traits::directory());
-        btg.directory = s.get_by_name(backend, dir);
-
         r.insert(std::make_pair(backend, btg));
     }
     return r;
@@ -95,11 +92,6 @@ make_facet_feature_group(const variability::entities::feature_model& fm,
             const auto ow(logical::traits::overwrite());
             ftg.overwrite = s.get_by_name(fct, ow);
 
-            ftg.directory = s.try_get_by_name(fct,
-                logical::traits::directory());
-            ftg.postfix = s.try_get_by_name(fct,
-                logical::traits::postfix());
-
             r.insert(std::make_pair(fct, ftg));
         }
     }
@@ -122,9 +114,6 @@ archetype_location_properties_transform::make_global_archetype_feature_group(
 
         const auto ow(logical::traits::overwrite());
         gatg.overwrite = s.get_by_name(al.archetype(), ow);
-
-        const auto postfix(logical::traits::postfix());
-        gatg.postfix = s.get_by_name(al.archetype(), postfix);
 
         r.insert(std::make_pair(al.archetype(), gatg));
     }
@@ -170,8 +159,6 @@ archetype_location_properties_transform::obtain_backend_properties(
 
         entities::backend_properties bp;
         bp.enabled(s.get_boolean_content_or_default(tg.enabled));
-        bp.directory(s.get_text_content_or_default(tg.directory));
-
         r[backend] = bp;
     }
 
@@ -195,11 +182,6 @@ archetype_location_properties_transform::obtain_facet_properties(
         entities::facet_properties fp;
         fp.enabled(s.get_boolean_content_or_default(tg.enabled));
         fp.overwrite(s.get_boolean_content_or_default(tg.overwrite));
-        if (tg.directory)
-            fp.directory(s.get_text_content_or_default(*tg.directory));
-
-        if (tg.postfix)
-            fp.postfix(s.get_text_content_or_default(*tg.postfix));
 
         r[facet] = fp;
     }
@@ -225,8 +207,6 @@ archetype_location_properties_transform::obtain_archetype_properties(
         ap.enabled(s.get_boolean_content_or_default(tg.enabled));
         if (s.has_configuration_point(tg.overwrite))
             ap.overwrite(s.get_boolean_content(tg.overwrite));
-
-        ap.postfix(s.get_text_content_or_default(tg.postfix));
 
         r[archetype] = ap;
     }
@@ -289,11 +269,8 @@ populate_global_archetype_location_properties(
             for (const auto& an : facet_pair.second) {
                 entities::denormalised_archetype_properties dap;
                 dap.backend_enabled(backend.enabled());
-                dap.backend_directory(backend.directory());
                 dap.facet_enabled(facet.enabled());
                 dap.facet_overwrite(facet.overwrite());
-                dap.facet_directory(facet.directory());
-                dap.facet_postfix(facet.postfix());
 
                 const auto k(galp.archetype_properties().find(an));
                 if (k == galp.archetype_properties().end()) {
@@ -304,7 +281,6 @@ populate_global_archetype_location_properties(
                 const auto& archetype(k->second);
                 dap.archetype_enabled(archetype.enabled());
                 dap.archetype_overwrite(archetype.overwrite());
-                dap.archetype_postfix(archetype.postfix());
                 galp.denormalised_archetype_properties()
                     .insert(std::make_pair(an, dap));
             }

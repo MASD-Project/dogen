@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
 
 namespace dogen::generation::entities {
@@ -42,9 +41,7 @@ public:
 public:
     facet_properties(
         const bool enabled,
-        const bool overwrite,
-        const std::string& directory,
-        const std::string& postfix);
+        const bool overwrite);
 
 public:
     /**
@@ -57,26 +54,6 @@ public:
 
     bool overwrite() const;
     void overwrite(const bool v);
-
-    /**
-     * @brief Directory in which to place artefacts that belong to this facet.
-     */
-    /**@{*/
-    const std::string& directory() const;
-    std::string& directory();
-    void directory(const std::string& v);
-    void directory(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Postfix to use in file names of artefacts that belong to this facet.
-     */
-    /**@{*/
-    const std::string& postfix() const;
-    std::string& postfix();
-    void postfix(const std::string& v);
-    void postfix(const std::string&& v);
-    /**@}*/
 
 public:
     bool operator==(const facet_properties& rhs) const;
@@ -91,8 +68,6 @@ public:
 private:
     bool enabled_;
     bool overwrite_;
-    std::string directory_;
-    std::string postfix_;
 };
 
 }

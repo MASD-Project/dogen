@@ -27,28 +27,23 @@ archetype_properties::archetype_properties()
 
 archetype_properties::archetype_properties(archetype_properties&& rhs)
     : enabled_(std::move(rhs.enabled_)),
-      overwrite_(std::move(rhs.overwrite_)),
-      postfix_(std::move(rhs.postfix_)) { }
+      overwrite_(std::move(rhs.overwrite_)) { }
 
 archetype_properties::archetype_properties(
     const bool enabled,
-    const boost::optional<bool>& overwrite,
-    const std::string& postfix)
+    const boost::optional<bool>& overwrite)
     : enabled_(enabled),
-      overwrite_(overwrite),
-      postfix_(postfix) { }
+      overwrite_(overwrite) { }
 
 void archetype_properties::swap(archetype_properties& other) noexcept {
     using std::swap;
     swap(enabled_, other.enabled_);
     swap(overwrite_, other.overwrite_);
-    swap(postfix_, other.postfix_);
 }
 
 bool archetype_properties::operator==(const archetype_properties& rhs) const {
     return enabled_ == rhs.enabled_ &&
-        overwrite_ == rhs.overwrite_ &&
-        postfix_ == rhs.postfix_;
+        overwrite_ == rhs.overwrite_;
 }
 
 archetype_properties& archetype_properties::operator=(archetype_properties other) {
@@ -79,22 +74,6 @@ void archetype_properties::overwrite(const boost::optional<bool>& v) {
 
 void archetype_properties::overwrite(const boost::optional<bool>&& v) {
     overwrite_ = std::move(v);
-}
-
-const std::string& archetype_properties::postfix() const {
-    return postfix_;
-}
-
-std::string& archetype_properties::postfix() {
-    return postfix_;
-}
-
-void archetype_properties::postfix(const std::string& v) {
-    postfix_ = v;
-}
-
-void archetype_properties::postfix(const std::string&& v) {
-    postfix_ = std::move(v);
 }
 
 }

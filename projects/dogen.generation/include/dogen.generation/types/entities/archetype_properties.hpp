@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
 
@@ -48,8 +47,7 @@ public:
 public:
     archetype_properties(
         const bool enabled,
-        const boost::optional<bool>& overwrite,
-        const std::string& postfix);
+        const boost::optional<bool>& overwrite);
 
 public:
     /**
@@ -65,16 +63,6 @@ public:
     void overwrite(const boost::optional<bool>& v);
     void overwrite(const boost::optional<bool>&& v);
 
-    /**
-     * @brief Postfix to use for artefacts of this archetype.
-     */
-    /**@{*/
-    const std::string& postfix() const;
-    std::string& postfix();
-    void postfix(const std::string& v);
-    void postfix(const std::string&& v);
-    /**@}*/
-
 public:
     bool operator==(const archetype_properties& rhs) const;
     bool operator!=(const archetype_properties& rhs) const {
@@ -88,7 +76,6 @@ public:
 private:
     bool enabled_;
     boost::optional<bool> overwrite_;
-    std::string postfix_;
 };
 
 }

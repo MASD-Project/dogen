@@ -142,11 +142,6 @@
           "name": "enabled",
           "type": "bool",
           "documentation": "If true, this backend is enabled.\n"
-        },
-        {
-          "name": "directory",
-          "type": "std::string",
-          "documentation": "Backend specific directory name, if any.\n"
         }
       ]
     },
@@ -181,10 +176,6 @@
           "type": "bool"
         },
         {
-          "name": "backend_directory",
-          "type": "std::string"
-        },
-        {
           "name": "facet_enabled",
           "type": "bool"
         },
@@ -193,24 +184,12 @@
           "type": "bool"
         },
         {
-          "name": "facet_directory",
-          "type": "std::string"
-        },
-        {
-          "name": "facet_postfix",
-          "type": "std::string"
-        },
-        {
           "name": "archetype_enabled",
           "type": "bool"
         },
         {
           "name": "archetype_overwrite",
           "type": "boost::optional<bool>"
-        },
-        {
-          "name": "archetype_postfix",
-          "type": "std::string"
         }
       ]
     },
@@ -226,16 +205,6 @@
         {
           "name": "overwrite",
           "type": "bool"
-        },
-        {
-          "name": "directory",
-          "type": "std::string",
-          "documentation": "Directory in which to place artefacts that belong to this facet.\n"
-        },
-        {
-          "name": "postfix",
-          "type": "std::string",
-          "documentation": "Postfix to use in file names of artefacts that belong to this facet.\n"
         }
       ]
     },
@@ -252,11 +221,6 @@
         {
           "name": "overwrite",
           "type": "boost::optional<bool>"
-        },
-        {
-          "name": "postfix",
-          "type": "std::string",
-          "documentation": "Postfix to use for artefacts of this archetype.\n"
         }
       ]
     },

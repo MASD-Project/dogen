@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
 
@@ -45,39 +44,20 @@ public:
 public:
     denormalised_archetype_properties(
         const bool backend_enabled,
-        const std::string& backend_directory,
         const bool facet_enabled,
         const bool facet_overwrite,
-        const std::string& facet_directory,
-        const std::string& facet_postfix,
         const bool archetype_enabled,
-        const boost::optional<bool>& archetype_overwrite,
-        const std::string& archetype_postfix);
+        const boost::optional<bool>& archetype_overwrite);
 
 public:
     bool backend_enabled() const;
     void backend_enabled(const bool v);
-
-    const std::string& backend_directory() const;
-    std::string& backend_directory();
-    void backend_directory(const std::string& v);
-    void backend_directory(const std::string&& v);
 
     bool facet_enabled() const;
     void facet_enabled(const bool v);
 
     bool facet_overwrite() const;
     void facet_overwrite(const bool v);
-
-    const std::string& facet_directory() const;
-    std::string& facet_directory();
-    void facet_directory(const std::string& v);
-    void facet_directory(const std::string&& v);
-
-    const std::string& facet_postfix() const;
-    std::string& facet_postfix();
-    void facet_postfix(const std::string& v);
-    void facet_postfix(const std::string&& v);
 
     bool archetype_enabled() const;
     void archetype_enabled(const bool v);
@@ -86,11 +66,6 @@ public:
     boost::optional<bool>& archetype_overwrite();
     void archetype_overwrite(const boost::optional<bool>& v);
     void archetype_overwrite(const boost::optional<bool>&& v);
-
-    const std::string& archetype_postfix() const;
-    std::string& archetype_postfix();
-    void archetype_postfix(const std::string& v);
-    void archetype_postfix(const std::string&& v);
 
 public:
     bool operator==(const denormalised_archetype_properties& rhs) const;
@@ -104,14 +79,10 @@ public:
 
 private:
     bool backend_enabled_;
-    std::string backend_directory_;
     bool facet_enabled_;
     bool facet_overwrite_;
-    std::string facet_directory_;
-    std::string facet_postfix_;
     bool archetype_enabled_;
     boost::optional<bool> archetype_overwrite_;
-    std::string archetype_postfix_;
 };
 
 }

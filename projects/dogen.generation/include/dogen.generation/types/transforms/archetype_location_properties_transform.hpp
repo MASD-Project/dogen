@@ -46,20 +46,16 @@ class archetype_location_properties_transform final {
 private:
     struct backend_feature_group {
         variability::entities::feature enabled;
-        variability::entities::feature directory;
     };
 
     struct facet_feature_group {
         variability::entities::feature enabled;
         variability::entities::feature overwrite;
-        boost::optional<variability::entities::feature> directory;
-        boost::optional<variability::entities::feature> postfix;
     };
 
     struct global_archetype_feature_group {
         variability::entities::feature enabled;
         variability::entities::feature overwrite;
-        variability::entities::feature postfix;
     };
 
     struct local_archetype_feature_group {

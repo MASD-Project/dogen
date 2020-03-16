@@ -20,16 +20,7 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
 #include "dogen.generation/io/entities/denormalised_archetype_properties_io.hpp"
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
 
 namespace boost {
 
@@ -58,14 +49,10 @@ std::ostream& operator<<(std::ostream& s, const denormalised_archetype_propertie
     s << " { "
       << "\"__type__\": " << "\"dogen::generation::entities::denormalised_archetype_properties\"" << ", "
       << "\"backend_enabled\": " << v.backend_enabled() << ", "
-      << "\"backend_directory\": " << "\"" << tidy_up_string(v.backend_directory()) << "\"" << ", "
       << "\"facet_enabled\": " << v.facet_enabled() << ", "
       << "\"facet_overwrite\": " << v.facet_overwrite() << ", "
-      << "\"facet_directory\": " << "\"" << tidy_up_string(v.facet_directory()) << "\"" << ", "
-      << "\"facet_postfix\": " << "\"" << tidy_up_string(v.facet_postfix()) << "\"" << ", "
       << "\"archetype_enabled\": " << v.archetype_enabled() << ", "
-      << "\"archetype_overwrite\": " << v.archetype_overwrite() << ", "
-      << "\"archetype_postfix\": " << "\"" << tidy_up_string(v.archetype_postfix()) << "\""
+      << "\"archetype_overwrite\": " << v.archetype_overwrite()
       << " }";
     return(s);
 }

@@ -20,16 +20,7 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
 #include "dogen.generation/io/entities/facet_properties_io.hpp"
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
 
 namespace dogen::generation::entities {
 
@@ -43,9 +34,7 @@ std::ostream& operator<<(std::ostream& s, const facet_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::generation::entities::facet_properties\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "
-      << "\"overwrite\": " << v.overwrite() << ", "
-      << "\"directory\": " << "\"" << tidy_up_string(v.directory()) << "\"" << ", "
-      << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\""
+      << "\"overwrite\": " << v.overwrite()
       << " }";
     return(s);
 }

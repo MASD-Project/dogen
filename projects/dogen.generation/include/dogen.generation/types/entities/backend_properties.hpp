@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
 
 namespace dogen::generation::entities {
@@ -43,9 +42,7 @@ public:
     backend_properties();
 
 public:
-    backend_properties(
-        const bool enabled,
-        const std::string& directory);
+    explicit backend_properties(const bool enabled);
 
 public:
     /**
@@ -54,16 +51,6 @@ public:
     /**@{*/
     bool enabled() const;
     void enabled(const bool v);
-    /**@}*/
-
-    /**
-     * @brief Backend specific directory name, if any.
-     */
-    /**@{*/
-    const std::string& directory() const;
-    std::string& directory();
-    void directory(const std::string& v);
-    void directory(const std::string&& v);
     /**@}*/
 
 public:
@@ -78,7 +65,6 @@ public:
 
 private:
     bool enabled_;
-    std::string directory_;
 };
 
 }

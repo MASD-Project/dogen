@@ -25,21 +25,16 @@ namespace dogen::generation::entities {
 backend_properties::backend_properties()
     : enabled_(static_cast<bool>(0)) { }
 
-backend_properties::backend_properties(
-    const bool enabled,
-    const std::string& directory)
-    : enabled_(enabled),
-      directory_(directory) { }
+backend_properties::backend_properties(const bool enabled)
+    : enabled_(enabled) { }
 
 void backend_properties::swap(backend_properties& other) noexcept {
     using std::swap;
     swap(enabled_, other.enabled_);
-    swap(directory_, other.directory_);
 }
 
 bool backend_properties::operator==(const backend_properties& rhs) const {
-    return enabled_ == rhs.enabled_ &&
-        directory_ == rhs.directory_;
+    return enabled_ == rhs.enabled_;
 }
 
 backend_properties& backend_properties::operator=(backend_properties other) {
@@ -54,22 +49,6 @@ bool backend_properties::enabled() const {
 
 void backend_properties::enabled(const bool v) {
     enabled_ = v;
-}
-
-const std::string& backend_properties::directory() const {
-    return directory_;
-}
-
-std::string& backend_properties::directory() {
-    return directory_;
-}
-
-void backend_properties::directory(const std::string& v) {
-    directory_ = v;
-}
-
-void backend_properties::directory(const std::string&& v) {
-    directory_ = std::move(v);
 }
 
 }
