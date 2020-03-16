@@ -16501,7 +16501,9 @@ code: identation and dividers.#</dia:string>
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=global
+            <dia:string>#Directory in which to place this facet.
+
+#DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.default_value_override.cpp.types="types"
 #DOGEN masd.variability.default_value_override.cpp.hash="hash"
 #DOGEN masd.variability.default_value_override.cpp.tests="generated_tests"
@@ -16536,7 +16538,9 @@ code: identation and dividers.#</dia:string>
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=global
+            <dia:string>#Postfix to use for all files that belong to this facet.
+
+#DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.default_value_override.cpp.tests="tests"
 #DOGEN masd.variability.default_value_override.cpp.hash="hash"
 #DOGEN masd.variability.default_value_override.cpp.lexical_cast="lc"
@@ -16707,7 +16711,9 @@ code: identation and dividers.#</dia:string>
             <dia:string>#""#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=global
+            <dia:string>#Postfix to use for all files that belong to this facet.
+
+#DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.default_value_override.forward_declarations="fwd"
 #</dia:string>
           </dia:attribute>
@@ -16732,7 +16738,9 @@ code: identation and dividers.#</dia:string>
             <dia:string>#"true"#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN masd.variability.binding_point=element#</dia:string>
+            <dia:string>#If true, the generated files will overwrite existing files. 
+
+#DOGEN masd.variability.binding_point=element#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

@@ -32,7 +32,8 @@ make_directory() {
     using namespace dogen::variability::meta_model;
     feature_template r;
     r.name().simple("directory");
-    r.description(R"(
+    r.description(R"(Directory in which to place this facet.
+
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
@@ -84,7 +85,8 @@ make_postfix() {
     using namespace dogen::variability::meta_model;
     feature_template r;
     r.name().simple("postfix");
-    r.description(R"(
+    r.description(R"(Postfix to use for all files that belong to this facet.
+
 )");
     const auto vt(value_type::text);
     r.value_type(vt);
