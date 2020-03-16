@@ -18,29 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
-#define DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
+#ifndef DOGEN_ORCHESTRATION_TYPES_FEATURES_INITIALIZER_HPP
+#define DOGEN_ORCHESTRATION_TYPES_FEATURES_INITIALIZER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/di.hpp>
-#include "dogen.cli/types/command_line_parser.hpp"
-#include "dogen.cli/types/program_options_parser.hpp"
-#include "dogen.orchestration/types/injector_factory.hpp"
+#include "dogen.variability/types/helpers/registrar.hpp"
+#include "dogen.variability/types/entities/feature_template.hpp"
 
-namespace dogen::cli {
+namespace dogen::orchestration::features {
 
-class injector_factory final {
+/**
+ * @brief Registers all of the available feature templates with registrar.
+ */
+class initializer final {
 public:
-    static auto make_injector() {
-        using boost::di::bind;
-        using boost::di::make_injector;
-        return make_injector(
-            dogen::orchestration::injector_factory::make_injector(),
-            bind<command_line_parser>.to<program_options_parser>());
-    }
+    static void register_entities(variability::helpers::registrar& rg);
 };
 
 }

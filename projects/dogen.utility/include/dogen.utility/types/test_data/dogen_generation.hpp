@@ -60,7 +60,7 @@ public:
     static boost::filesystem::path input_dogen_injection_dia();
     static boost::filesystem::path input_dogen_injection_dia_dia();
     static boost::filesystem::path input_dogen_injection_json_dia();
-    static boost::filesystem::path input_dogen_engine_dia();
+    static boost::filesystem::path input_dogen_orchestration_dia();
     static boost::filesystem::path input_dogen_templating_dia();
     static boost::filesystem::path input_dogen_tracing_dia();
     static boost::filesystem::path input_dogen_utility_dia();
@@ -78,7 +78,7 @@ public:
     static boost::filesystem::path input_dogen_injection_json();
     static boost::filesystem::path input_dogen_injection_dia_json();
     static boost::filesystem::path input_dogen_injection_json_json();
-    static boost::filesystem::path input_dogen_engine_json();
+    static boost::filesystem::path input_dogen_orchestration_json();
     static boost::filesystem::path input_dogen_templating_json();
     static boost::filesystem::path input_dogen_tracing_json();
     static boost::filesystem::path input_dogen_utility_json();

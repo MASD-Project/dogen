@@ -1,0 +1,262 @@
+{
+  "documentation": "Orchestration-based imlementation of the Dogen product API.\n",
+  "tagged_values": {
+    "masd.injection.dia.comment": "true",
+    "masd.injection.model_modules": "dogen.orchestration",
+    "masd.injection.reference": "cpp.builtins",
+    "masd.injection.reference": "cpp.boost",
+    "masd.injection.reference": "cpp.std",
+    "masd.injection.reference": "dogen",
+    "masd.injection.reference": "dogen.variability",
+    "masd.injection.reference": "dogen.tracing",
+    "masd.injection.reference": "dogen.injection",
+    "masd.injection.reference": "dogen.logical",
+    "masd.injection.reference": "dogen.generation",
+    "masd.injection.reference": "dogen.extraction",
+    "masd.injection.reference": "masd",
+    "masd.injection.reference": "masd.variability",
+    "masd.injection.reference": "dogen.profiles",
+    "masd.injection.input_technical_space": "cpp",
+    "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
+    "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
+    "masd.variability.profile": "dogen.profiles.base.default_profile"
+  },
+  "elements": [
+    {
+      "name": "transforms",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "transforms::code_generation_chain",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "generator",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "tagged_values": {
+        "masd.generalization.parent": "dogen::generator"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "converter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "tagged_values": {
+        "masd.generalization.parent": "dogen::converter"
+      },
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "injector_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable::header_only"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::context",
+      "stereotypes": [
+        "dogen::typeable",
+        "dogen::pretty_printable"
+      ],
+      "tagged_values": {
+        "masd.generation.cpp.types.class_forward_declarations.enabled": "true"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "variability_context",
+          "type": "variability::transforms::context"
+        },
+        {
+          "name": "injection_context",
+          "type": "injection::transforms::context"
+        },
+        {
+          "name": "assets_context",
+          "type": "logical::transforms::context"
+        },
+        {
+          "name": "generation_context",
+          "type": "generation::transforms::context"
+        },
+        {
+          "name": "extraction_context",
+          "type": "extraction::transforms::context"
+        }
+      ]
+    },
+    {
+      "name": "transforms::context_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::factory_exception",
+      "documentation": "An error occurred in the factory whilst making.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::injection_model_to_assets_model_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::injection_model_set_to_assets_model_set_chain",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "helpers::adaptation_exception",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::adapter",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::stereotypes_helper",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::stereotypes_conversion_result",
+      "documentation": "Aggregates the result of parsing a CSV string with well-known stereotypes and\nuser defined stereotypes.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "static_stereotypes",
+          "type": "std::list<logical::entities::static_stereotypes>"
+        },
+        {
+          "name": "dynamic_stereotypes",
+          "type": "std::list<std::string>"
+        }
+      ]
+    },
+    {
+      "name": "transforms::transform_exception",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::assets_model_to_generation_model_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::scoped_context_manager",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::extraction_model_production_chain",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features",
+      "documentation": "Features for the engine model.\n",
+      "tagged_values": {
+        "masd.injection.dia.comment": "true"
+      },
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "features::model_location",
+      "documentation": "Feature group for model location related features.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "global",
+        "masd.variability.key_prefix": "masd.injection"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "external_modules",
+          "type": "masd::variability::text",
+          "documentation": "External modules containing this model.\n\nExternal modules contribute to the namespace of the model but not the model\nname.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "model_modules",
+          "type": "masd::variability::text",
+          "documentation": "Model modules containing this model.\n\nThe model modules result in a top-level name separated by dots, e.g. a.b.c.\n"
+        }
+      ]
+    },
+    {
+      "name": "features::initializer",
+      "stereotypes": [
+        "masd::variability::initializer"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "main",
+      "stereotypes": [
+        "masd::entry_point",
+        "dogen::untypable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "CMakeLists",
+      "stereotypes": [
+        "masd::build::cmakelists",
+        "dogen::handcrafted::cmake"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "spec_dumper",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "tagged_values": {
+        "masd.generalization.parent": "dogen::spec_dumper"
+      },
+      "fallback_element_type": "masd::object"
+    }
+  ]
+}

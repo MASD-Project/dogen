@@ -18,30 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
-#define DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
+#ifndef DOGEN_ORCHESTRATION_IO_TRANSFORMS_CONTEXT_IO_HPP
+#define DOGEN_ORCHESTRATION_IO_TRANSFORMS_CONTEXT_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/di.hpp>
-#include "dogen.cli/types/command_line_parser.hpp"
-#include "dogen.cli/types/program_options_parser.hpp"
-#include "dogen.orchestration/types/injector_factory.hpp"
+#include <iosfwd>
+#include "dogen.orchestration/types/transforms/context.hpp"
 
-namespace dogen::cli {
+namespace dogen::orchestration::transforms {
 
-class injector_factory final {
-public:
-    static auto make_injector() {
-        using boost::di::bind;
-        using boost::di::make_injector;
-        return make_injector(
-            dogen::orchestration::injector_factory::make_injector(),
-            bind<command_line_parser>.to<program_options_parser>());
-    }
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::orchestration::transforms::context& v);
 
 }
 

@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
-#define DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
+#ifndef DOGEN_ORCHESTRATION_TYPES_INJECTOR_FACTORY_HPP
+#define DOGEN_ORCHESTRATION_TYPES_INJECTOR_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/di.hpp>
-#include "dogen.cli/types/command_line_parser.hpp"
-#include "dogen.cli/types/program_options_parser.hpp"
-#include "dogen.orchestration/types/injector_factory.hpp"
+#include "dogen.orchestration/types/converter.hpp"
+#include "dogen.orchestration/types/generator.hpp"
+#include "dogen.orchestration/types/spec_dumper.hpp"
 
-namespace dogen::cli {
+namespace dogen::orchestration {
 
 class injector_factory final {
 public:
@@ -38,8 +38,12 @@ public:
         using boost::di::bind;
         using boost::di::make_injector;
         return make_injector(
-            dogen::orchestration::injector_factory::make_injector(),
-            bind<command_line_parser>.to<program_options_parser>());
+            bind<dogen::converter>
+            .to<dogen::orchestration::converter>(),
+            bind<dogen::generator>
+            .to<dogen::orchestration::generator>(),
+            bind<dogen::spec_dumper>
+            .to<dogen::orchestration::spec_dumper>());
     }
 };
 

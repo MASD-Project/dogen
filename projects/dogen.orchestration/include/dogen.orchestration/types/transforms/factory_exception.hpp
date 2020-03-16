@@ -18,29 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
-#define DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
+#ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_FACTORY_EXCEPTION_HPP
+#define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_FACTORY_EXCEPTION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/di.hpp>
-#include "dogen.cli/types/command_line_parser.hpp"
-#include "dogen.cli/types/program_options_parser.hpp"
-#include "dogen.orchestration/types/injector_factory.hpp"
+#include <string>
+#include <boost/exception/info.hpp>
 
-namespace dogen::cli {
+namespace dogen::orchestration::transforms {
 
-class injector_factory final {
+/**
+ * @brief An error occurred in the factory whilst making.
+ */
+class factory_exception : public virtual std::exception, public virtual boost::exception {
 public:
-    static auto make_injector() {
-        using boost::di::bind;
-        using boost::di::make_injector;
-        return make_injector(
-            dogen::orchestration::injector_factory::make_injector(),
-            bind<command_line_parser>.to<program_options_parser>());
-    }
+    factory_exception() = default;
+    ~factory_exception() noexcept = default;
+
+public:
+    explicit factory_exception(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
 };
 
 }

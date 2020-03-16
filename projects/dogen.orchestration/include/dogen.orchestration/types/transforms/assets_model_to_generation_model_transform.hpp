@@ -18,29 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
-#define DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
+#ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_ASSETS_MODEL_TO_GENERATION_MODEL_TRANSFORM_HPP
+#define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_ASSETS_MODEL_TO_GENERATION_MODEL_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/di.hpp>
-#include "dogen.cli/types/command_line_parser.hpp"
-#include "dogen.cli/types/program_options_parser.hpp"
-#include "dogen.orchestration/types/injector_factory.hpp"
+#include <list>
+#include "dogen.logical/types/entities/model.hpp"
+#include "dogen.generation/types/entities/model.hpp"
+#include "dogen.generation/types/transforms/context.hpp"
 
-namespace dogen::cli {
+namespace dogen::orchestration::transforms {
 
-class injector_factory final {
+class assets_model_to_generation_model_transform final {
+private:
+    static std::size_t
+    compute_total_size(const logical::entities::model& em);
+
+    static generation::entities::model
+    apply(const logical::entities::model& m);
+
 public:
-    static auto make_injector() {
-        using boost::di::bind;
-        using boost::di::make_injector;
-        return make_injector(
-            dogen::orchestration::injector_factory::make_injector(),
-            bind<command_line_parser>.to<program_options_parser>());
-    }
+    static std::list<generation::entities::model>
+    apply(const generation::transforms::context& ctx,
+        const std::list<logical::entities::model>& cms);
 };
 
 }

@@ -18,31 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
-#define DOGEN_CLI_TYPES_INJECTOR_FACTORY_HPP
+#include "dogen.orchestration/types/features/initializer.hpp"
+#include "dogen.orchestration/types/features/model_location.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen::orchestration::features {
 
-#include <boost/di.hpp>
-#include "dogen.cli/types/command_line_parser.hpp"
-#include "dogen.cli/types/program_options_parser.hpp"
-#include "dogen.orchestration/types/injector_factory.hpp"
-
-namespace dogen::cli {
-
-class injector_factory final {
-public:
-    static auto make_injector() {
-        using boost::di::bind;
-        using boost::di::make_injector;
-        return make_injector(
-            dogen::orchestration::injector_factory::make_injector(),
-            bind<command_line_parser>.to<program_options_parser>());
-    }
-};
-
+void initializer::
+register_entities(variability::helpers::registrar& rg) {
+    rg.register_features(dogen::orchestration::features::model_location::make_features());
 }
 
-#endif
+}

@@ -17,7 +17,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(name "dogen.cli")
+set(name "dogen.orchestration")
 set(lib_binary_name ${name})
 set(lib_target_name ${name}.lib)
 
@@ -35,28 +35,21 @@ set_target_properties(${lib_target_name} PROPERTIES
 set_target_properties(${lib_target_name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_VERSION_MAJOR})
 
+if (WITH_RELATIONAL_SUPPORT)
+    list(APPEND relational_lib
+        -Wl,--whole-archive dogen.relational.lib  -Wl,--no-whole-archive)
+    list(APPEND relational_lib Boost::date_time)
+    list(APPEND relational_lib odb::libodb)
+    list(APPEND relational_lib odb::libodb-boost)
+    list(APPEND relational_lib odb::libodb-pgsql)
+    list(APPEND relational_lib odb::libodb-sqlite)
+    list(APPEND relational_lib OpenSSL::SSL)
+    list(APPEND relational_lib OpenSSL::Crypto)
+endif()
+
 target_link_libraries(${lib_target_name}
-    dogen.lib
-    dogen.utility.lib
-    ${Boost_LIBRARIES})
-
-install(TARGETS ${lib_target_name}
-    ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib
-    COMPONENT libraries)
-
-set(exe_binary_name ${name})
-set(exe_target_name ${name}.exe)
-
-set(exe_files ${files})
-list(FILTER exe_files INCLUDE REGEX "main.cpp")
-
-add_executable(${exe_target_name} ${exe_files})
-set_target_properties(${exe_target_name} PROPERTIES
-    OUTPUT_NAME ${exe_binary_name})
-
-target_link_libraries(${exe_target_name}
-    ${lib_target_name}
+    dogen.physical.lib
+    dogen.variability.lib
     dogen.dia.lib
     dogen.extraction.lib
     dogen.injection.lib
@@ -65,12 +58,17 @@ target_link_libraries(${exe_target_name}
     dogen.logical.lib
     dogen.generation.cpp.lib
     dogen.generation.csharp.lib
+    dogen.generation.lib
+    ${relational_lib}
     dogen.lib
-    dogen.orchestration.lib
+    dogen.tracing.lib
+    dogen.utility.lib
+    Boost::serialization
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
-    ${CMAKE_REQUIRED_LIBRARIES}
-    ${CMAKE_THREAD_LIBS_INIT})
+    ${CMAKE_REQUIRED_LIBRARIES})
 
-install(TARGETS ${exe_target_name} RUNTIME DESTINATION bin
-    COMPONENT applications)
+install(TARGETS ${lib_target_name}
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    COMPONENT libraries)

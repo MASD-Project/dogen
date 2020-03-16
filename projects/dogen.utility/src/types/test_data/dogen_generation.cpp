@@ -55,7 +55,7 @@ const std::string path_dogen_generation_dia("dogen.generation.dia");
 const std::string path_dogen_injection_dia("dogen.injection.dia");
 const std::string path_dogen_injection_dia_dia("dogen.injection.dia.dia");
 const std::string path_dogen_injection_json_dia("dogen.injection.json.dia");
-const std::string path_dogen_engine_dia("dogen.engine.dia");
+const std::string path_dogen_orchestration_dia("dogen.orchestration.dia");
 const std::string path_dogen_templating_dia("dogen.templating.dia");
 const std::string path_dogen_tracing_dia("dogen.tracing.dia");
 const std::string path_dogen_utility_dia("dogen.utility.dia");
@@ -72,7 +72,7 @@ const std::string path_dogen_generation_json("dogen.generation.json");
 const std::string path_dogen_injection_json("dogen.injection.json");
 const std::string path_dogen_injection_dia_json("dogen.injection.dia.json");
 const std::string path_dogen_injection_json_json("dogen.injection.json.json");
-const std::string path_dogen_engine_json("dogen.engine.json");
+const std::string path_dogen_orchestration_json("dogen.orchestration.json");
 const std::string path_dogen_templating_json("dogen.templating.json");
 const std::string path_dogen_tracing_json("dogen.tracing.json");
 const std::string path_dogen_utility_json("dogen.utility.json");
@@ -204,9 +204,9 @@ path dogen_generation::input_dogen_injection_json_dia() {
     return dia_models_directory_ / path_dogen_injection_json_dia;
 }
 
-path dogen_generation::input_dogen_engine_dia() {
+path dogen_generation::input_dogen_orchestration_dia() {
     ensure_initialized();
-    return dia_models_directory_ / path_dogen_engine_dia;
+    return dia_models_directory_ / path_dogen_orchestration_dia;
 }
 
 path dogen_generation::input_dogen_templating_dia() {
@@ -284,9 +284,9 @@ path dogen_generation::input_dogen_injection_json_json() {
     return json_models_directory_ / path_dogen_injection_json_json;
 }
 
-path dogen_generation::input_dogen_engine_json() {
+path dogen_generation::input_dogen_orchestration_json() {
     ensure_initialized();
-    return json_models_directory_ / path_dogen_engine_json;
+    return json_models_directory_ / path_dogen_orchestration_json;
 }
 
 path dogen_generation::input_dogen_templating_json() {
