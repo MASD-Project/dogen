@@ -131,7 +131,6 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"origin_type\": " << v.origin_type() << ", "
       << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(v.origin_sha1_hash()) << "\"" << ", "
-      << "\"origin_element_id\": " << "\"" << tidy_up_string(v.origin_element_id()) << "\"" << ", "
       << "\"references\": " << v.references() << ", "
       << "\"leaves\": " << v.leaves() << ", "
       << "\"root_module\": " << v.root_module() << ", "

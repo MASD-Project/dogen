@@ -1,5 +1,5 @@
 {
-"documentation": "The logcal model defines the core entities that live in the logical\ndimension of MASD's conceptual model.\n\n@section assets_0 Overview\n\nThe logical model strives to provide a technical-space agnostic\nelement representation, designed for code generation. Injection models\nare obtained via frontends and transformed into \"bare\" logical models,\nat which point they can enter its pipeline. Within it, they are \nprocessed until they form a cohesive whole. They are then in a suitable\nstate for code generation.\n\n@section asset_1 Mission\n\nThe objectives of the logical model are:\n\n@li to represent all high-level entities that exist across a number\nof technical spaces used in software engineering. These entities\nare not necessarily limited to programming entities, though, of course,\nthese form the core set of elements we're interested in. Additional\nentities such as build sytems and high-level patterns such as GoF\nand others are also captured.\n\n@li to provide the tooling required to combine multiple models\ntogether into a bigger model - called the @e merged model.\n\n@li to ensure the consistency of the merged model via validation\nrules (such as verifying that all types have a definitions,\netc.).\n",
+  "documentation": "The logcal model defines the core entities that live in the logical\ndimension of MASD's conceptual model.\n\n@section assets_0 Overview\n\nThe logical model strives to provide a technical-space agnostic\nelement representation, designed for code generation. Injection models\nare obtained via frontends and transformed into \"bare\" logical models,\nat which point they can enter its pipeline. Within it, they are\nprocessed until they form a cohesive whole. They are then in a suitable\nstate for code generation.\n\n@section asset_1 Mission\n\nThe objectives of the logical model are:\n\n@li to represent all high-level entities that exist across a number\nof technical spaces used in software engineering. These entities\nare not necessarily limited to programming entities, though, of course,\nthese form the core set of elements we're interested in. Additional\nentities such as build sytems and high-level patterns such as GoF\nand others are also captured.\n\n@li to provide the tooling required to combine multiple models\ntogether into a bigger model - called the @e merged model.\n\n@li to ensure the consistency of the merged model via validation\nrules (such as verifying that all types have a definitions,\netc.).\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "dogen.logical",
@@ -157,11 +157,6 @@
           "name": "origin_sha1_hash",
           "type": "std::string",
           "documentation": "SHA1 key of the original injection model.\n"
-        },
-        {
-          "name": "origin_element_id",
-          "type": "std::string",
-          "documentation": "Unique identifier within the originan injection model for this modeling element.\n"
         }
       ]
     },
@@ -805,7 +800,7 @@
         {
           "name": "template_instantiation_domains",
           "type": "std::unordered_map<std::string, std::vector<std::string>>",
-          "documentation": "Provides all of the domains to be used for template instantiation.\n\nExample of a domain is \"masd.facet\" which contains the list of all available facets.\nTemplates (facet and profile) are then instantiated over this range, depending on \nuser choices.\n"
+          "documentation": "Provides all of the domains to be used for template instantiation.\n\nExample of a domain is \"masd.facet\" which contains the list of all available facets.\nTemplates (facet and profile) are then instantiated over this range, depending on\nuser choices.\n"
         },
         {
           "name": "mapping_repository",

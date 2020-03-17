@@ -41,7 +41,6 @@ model::model(model&& rhs)
       meta_name_(std::move(rhs.meta_name_)),
       origin_type_(std::move(rhs.origin_type_)),
       origin_sha1_hash_(std::move(rhs.origin_sha1_hash_)),
-      origin_element_id_(std::move(rhs.origin_element_id_)),
       references_(std::move(rhs.references_)),
       leaves_(std::move(rhs.leaves_)),
       root_module_(std::move(rhs.root_module_)),
@@ -64,7 +63,6 @@ model::model(
     const dogen::logical::entities::name& meta_name,
     const dogen::logical::entities::origin_types origin_type,
     const std::string& origin_sha1_hash,
-    const std::string& origin_element_id,
     const std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>& references,
     const std::unordered_set<dogen::logical::entities::name>& leaves,
     const boost::shared_ptr<dogen::logical::entities::structural::module>& root_module,
@@ -85,7 +83,6 @@ model::model(
       meta_name_(meta_name),
       origin_type_(origin_type),
       origin_sha1_hash_(origin_sha1_hash),
-      origin_element_id_(origin_element_id),
       references_(references),
       leaves_(leaves),
       root_module_(root_module),
@@ -109,7 +106,6 @@ void model::swap(model& other) noexcept {
     swap(meta_name_, other.meta_name_);
     swap(origin_type_, other.origin_type_);
     swap(origin_sha1_hash_, other.origin_sha1_hash_);
-    swap(origin_element_id_, other.origin_element_id_);
     swap(references_, other.references_);
     swap(leaves_, other.leaves_);
     swap(root_module_, other.root_module_);
@@ -133,7 +129,6 @@ bool model::operator==(const model& rhs) const {
         meta_name_ == rhs.meta_name_ &&
         origin_type_ == rhs.origin_type_ &&
         origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
-        origin_element_id_ == rhs.origin_element_id_ &&
         references_ == rhs.references_ &&
         leaves_ == rhs.leaves_ &&
         root_module_ == rhs.root_module_ &&
@@ -212,22 +207,6 @@ void model::origin_sha1_hash(const std::string& v) {
 
 void model::origin_sha1_hash(const std::string&& v) {
     origin_sha1_hash_ = std::move(v);
-}
-
-const std::string& model::origin_element_id() const {
-    return origin_element_id_;
-}
-
-std::string& model::origin_element_id() {
-    return origin_element_id_;
-}
-
-void model::origin_element_id(const std::string& v) {
-    origin_element_id_ = v;
-}
-
-void model::origin_element_id(const std::string&& v) {
-    origin_element_id_ = std::move(v);
 }
 
 const std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>& model::references() const {
