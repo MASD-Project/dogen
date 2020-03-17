@@ -18,12 +18,49 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.physical/io/entities/model_io.hpp"
+#include "dogen.physical/types/features/filesystem.hpp"
 #include "dogen.physical/types/transforms/update_outputting_properties_transform.hpp"
+
+namespace {
+
+const std::string transform_id(
+    "physical.transforms.update_outputting_properties_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::physical::transforms {
 
-bool update_outputting_properties_transform::operator==(const update_outputting_properties_transform& /*rhs*/) const {
-    return true;
+void update_outputting_properties_transform::
+apply(const context& ctx, entities::model& m) {
+    tracing::scoped_transform_tracer stp(lg,
+        "gather external artefacts transform", transform_id, m.name(),
+        *ctx.tracer(), m);
+
+    const auto fm(*ctx.feature_model());
+    const auto fg(features::filesystem::make_feature_group(fm));
+    const auto scfg(features::filesystem::make_static_configuration(fg, m));
+
+    auto& op(m.outputting_properties());
+    op.force_write(scfg.force_write);
+    op.delete_extra_files(scfg.delete_extra_files);
+    op.delete_empty_directories(scfg.delete_empty_directories);
+
+    if (!scfg.ignore_files_matching_regex.empty()) {
+        auto& ifmr(op.ignore_files_matching_regex());
+        const auto& c(scfg.ignore_files_matching_regex);
+
+        ifmr.reserve(c.size());
+        for (const auto& e : c)
+            ifmr.push_back(e);
+    }
+
+    stp.end_transform(m);
 }
 
 }

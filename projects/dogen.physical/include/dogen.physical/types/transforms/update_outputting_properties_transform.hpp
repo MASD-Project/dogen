@@ -25,24 +25,19 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.variability/types/entities/feature_model.hpp"
+#include "dogen.physical/types/entities/model.hpp"
+#include "dogen.physical/types/transforms/context.hpp"
+#include "dogen.physical/types/entities/outputting_properties.hpp"
 
 namespace dogen::physical::transforms {
 
+/**
+ * @brief Populates the outputting properties of the model.
+ */
 class update_outputting_properties_transform final {
 public:
-    update_outputting_properties_transform() = default;
-    update_outputting_properties_transform(const update_outputting_properties_transform&) = default;
-    update_outputting_properties_transform(update_outputting_properties_transform&&) = default;
-    ~update_outputting_properties_transform() = default;
-    update_outputting_properties_transform& operator=(const update_outputting_properties_transform&) = default;
-
-public:
-    bool operator==(const update_outputting_properties_transform& rhs) const;
-    bool operator!=(const update_outputting_properties_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }
