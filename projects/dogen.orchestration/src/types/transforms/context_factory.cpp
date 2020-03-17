@@ -41,7 +41,6 @@
 #include "dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
 #include "dogen.generation.cpp/types/feature_initializer.hpp"
 #include "dogen.generation.csharp/types/feature_initializer.hpp"
-#include "dogen.extraction/types/features/initializer.hpp"
 #include "dogen.orchestration/io/transforms/context_io.hpp"
 #include "dogen.orchestration/types/features/initializer.hpp"
 #include "dogen.orchestration/types/transforms/factory_exception.hpp"
@@ -85,7 +84,6 @@ register_variability_entities(variability::helpers::registrar& rg) {
     generation::features::initializer::register_entities(rg);
     templating::initializer::register_entities(rg);
     variability::features::initializer::register_entities(rg);
-    extraction::features::initializer::register_entities(rg);
     generation::cpp::feature_initializer::register_entities(rg);
     generation::csharp::feature_initializer::register_entities(rg);
     features::initializer::register_entities(rg);

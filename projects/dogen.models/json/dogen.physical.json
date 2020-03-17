@@ -867,8 +867,7 @@
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "global",
-        "masd.variability.key_prefix": "masd.extraction",
-        "masd.variability.generate_registration": "false"
+        "masd.variability.key_prefix": "masd.extraction"
       },
       "fallback_element_type": "masd::object",
       "attributes": [

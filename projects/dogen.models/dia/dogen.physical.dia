@@ -9933,8 +9933,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:string>#Features related to filesystem operations.
 
 #DOGEN masd.variability.default_binding_point=global
-#DOGEN masd.variability.key_prefix=masd.extraction
-#DOGEN masd.variability.generate_registration=false#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.extraction#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
