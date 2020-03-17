@@ -25,22 +25,26 @@ namespace dogen::physical::entities {
 kernel::kernel(
     const dogen::physical::entities::location& location,
     const std::string& description,
-    const std::list<dogen::physical::entities::backend>& backends)
+    const std::list<dogen::physical::entities::backend>& backends,
+    const dogen::physical::entities::location_repository& locations)
     : location_(location),
       description_(description),
-      backends_(backends) { }
+      backends_(backends),
+      locations_(locations) { }
 
 void kernel::swap(kernel& other) noexcept {
     using std::swap;
     swap(location_, other.location_);
     swap(description_, other.description_);
     swap(backends_, other.backends_);
+    swap(locations_, other.locations_);
 }
 
 bool kernel::operator==(const kernel& rhs) const {
     return location_ == rhs.location_ &&
         description_ == rhs.description_ &&
-        backends_ == rhs.backends_;
+        backends_ == rhs.backends_ &&
+        locations_ == rhs.locations_;
 }
 
 kernel& kernel::operator=(kernel other) {
@@ -95,6 +99,22 @@ void kernel::backends(const std::list<dogen::physical::entities::backend>& v) {
 
 void kernel::backends(const std::list<dogen::physical::entities::backend>&& v) {
     backends_ = std::move(v);
+}
+
+const dogen::physical::entities::location_repository& kernel::locations() const {
+    return locations_;
+}
+
+dogen::physical::entities::location_repository& kernel::locations() {
+    return locations_;
+}
+
+void kernel::locations(const dogen::physical::entities::location_repository& v) {
+    locations_ = v;
+}
+
+void kernel::locations(const dogen::physical::entities::location_repository&& v) {
+    locations_ = std::move(v);
 }
 
 }

@@ -23,6 +23,7 @@
 #include "dogen.physical/io/entities/kernel_io.hpp"
 #include "dogen.physical/io/entities/backend_io.hpp"
 #include "dogen.physical/io/entities/location_io.hpp"
+#include "dogen.physical/io/entities/location_repository_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -53,7 +54,8 @@ std::ostream& operator<<(std::ostream& s, const kernel& v) {
       << "\"__type__\": " << "\"dogen::physical::entities::kernel\"" << ", "
       << "\"location\": " << v.location() << ", "
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
-      << "\"backends\": " << v.backends()
+      << "\"backends\": " << v.backends() << ", "
+      << "\"locations\": " << v.locations()
       << " }";
     return(s);
 }
