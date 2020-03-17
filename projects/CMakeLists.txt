@@ -261,7 +261,6 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/dogen.injection.dia/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.injection.json/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.tracing/include
-    ${CMAKE_SOURCE_DIR}/projects/dogen.extraction/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.logical/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.orchestration/include
     ${CMAKE_SOURCE_DIR}/projects/dogen.templating/include
@@ -296,7 +295,6 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.injection)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.injection.dia)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.injection.json)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.tracing)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.extraction)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.logical)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.orchestration)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dogen.models)

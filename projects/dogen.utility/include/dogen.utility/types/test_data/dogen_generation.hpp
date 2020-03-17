@@ -53,7 +53,7 @@ public:
     static boost::filesystem::path input_dogen_logical_dia();
     static boost::filesystem::path input_dogen_dia();
     static boost::filesystem::path input_dogen_dia_dia();
-    static boost::filesystem::path input_dogen_extraction_dia();
+    static boost::filesystem::path input_dogen_physical_dia();
     static boost::filesystem::path input_dogen_generation_cpp_dia();
     static boost::filesystem::path input_dogen_generation_csharp_dia();
     static boost::filesystem::path input_dogen_generation_dia();
@@ -71,7 +71,7 @@ public:
     static boost::filesystem::path input_dogen_logical_json();
     static boost::filesystem::path input_dogen_json();
     static boost::filesystem::path input_dogen_dia_json();
-    static boost::filesystem::path input_dogen_extraction_json();
+    static boost::filesystem::path input_dogen_physical_json();
     static boost::filesystem::path input_dogen_generation_cpp_json();
     static boost::filesystem::path input_dogen_generation_csharp_json();
     static boost::filesystem::path input_dogen_generation_json();

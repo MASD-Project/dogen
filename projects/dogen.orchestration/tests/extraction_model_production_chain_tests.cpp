@@ -484,10 +484,10 @@ BOOST_AUTO_TEST_CASE(dogen_dia_dia_produces_expected_model) {
     BOOST_CHECK(check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(dogen_extraction_dia_produces_expected_model) {
-    SETUP_TEST_LOG("dogen_extraction_dia_produces_expected_model");
+BOOST_AUTO_TEST_CASE(dogen_physical_dia_produces_expected_model) {
+    SETUP_TEST_LOG("dogen_physical_dia_produces_expected_model");
     using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_extraction_dia());
+    const auto t(dogen_generation::input_dogen_physical_dia());
     const auto od(dogen_generation::project_directory());
     const auto m(apply_extraction_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
@@ -863,7 +863,7 @@ BOOST_AUTO_TEST_CASE(dogen_dia_json_produces_expected_model) {
 BOOST_AUTO_TEST_CASE(dogen_extraction_json_produces_expected_model) {
     SETUP_TEST_LOG("dogen_extraction_json_produces_expected_model");
     using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_extraction_json());
+    const auto t(dogen_generation::input_dogen_physical_json());
     const auto od(dogen_generation::project_directory());
     const auto m(apply_extraction_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));

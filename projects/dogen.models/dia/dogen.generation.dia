@@ -2067,7 +2067,6 @@ spaces.#</dia:string>
 #DOGEN masd.injection.reference=dogen.variability
 #DOGEN masd.injection.reference=dogen.tracing
 #DOGEN masd.injection.reference=dogen.logical
-#DOGEN masd.injection.reference=dogen.extraction
 #DOGEN masd.injection.reference=masd
 #DOGEN masd.injection.reference=masd.variability
 #DOGEN masd.injection.reference=dogen.profiles

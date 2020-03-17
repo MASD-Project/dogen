@@ -48,7 +48,7 @@ const std::string path_dogen_cli_dia("dogen.cli.dia");
 const std::string path_dogen_logical_dia("dogen.logical.dia");
 const std::string path_dogen_dia("dogen.dia");
 const std::string path_dogen_dia_dia("dogen.dia.dia");
-const std::string path_dogen_extraction_dia("dogen.extraction.dia");
+const std::string path_dogen_physical_dia("dogen.physical.dia");
 const std::string path_dogen_generation_cpp_dia("dogen.generation.cpp.dia");
 const std::string path_dogen_generation_csharp_dia("dogen.generation.csharp.dia");
 const std::string path_dogen_generation_dia("dogen.generation.dia");
@@ -65,9 +65,10 @@ const std::string path_dogen_variability_json("dogen.variability.json");
 const std::string path_dogen_logical_json("dogen.logical.json");
 const std::string path_dogen_json("dogen.json");
 const std::string path_dogen_dia_json("dogen.dia.json");
-const std::string path_dogen_extraction_json("dogen.extraction.json");
+const std::string path_dogen_physical_json("dogen.physical.json");
 const std::string path_dogen_generation_cpp_json("dogen.generation.cpp.json");
-const std::string path_dogen_generation_csharp_json("dogen.generation.csharp.json");
+const std::string path_dogen_generation_csharp_json(
+    "dogen.generation.csharp.json");
 const std::string path_dogen_generation_json("dogen.generation.json");
 const std::string path_dogen_injection_json("dogen.injection.json");
 const std::string path_dogen_injection_dia_json("dogen.injection.dia.json");
@@ -169,9 +170,9 @@ path dogen_generation::input_dogen_dia_dia() {
     return dia_models_directory_ / path_dogen_dia_dia;
 }
 
-path dogen_generation::input_dogen_extraction_dia() {
+path dogen_generation::input_dogen_physical_dia() {
     ensure_initialized();
-    return dia_models_directory_ / path_dogen_extraction_dia;
+    return dia_models_directory_ / path_dogen_physical_dia;
 }
 
 path dogen_generation::input_dogen_generation_cpp_dia() {
@@ -249,9 +250,9 @@ path dogen_generation::input_dogen_dia_json() {
     return json_models_directory_ / path_dogen_dia_json;
 }
 
-path dogen_generation::input_dogen_extraction_json() {
+path dogen_generation::input_dogen_physical_json() {
     ensure_initialized();
-    return json_models_directory_ / path_dogen_extraction_json;
+    return json_models_directory_ / path_dogen_physical_json;
 }
 
 path dogen_generation::input_dogen_generation_cpp_json() {

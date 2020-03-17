@@ -35,7 +35,6 @@ set_target_properties(${lib_target_name}
 
 target_link_libraries(${lib_target_name}
     dogen.physical.lib
-    dogen.extraction.lib
     dogen.lib
     dogen.utility.lib
     dogen.tracing.lib

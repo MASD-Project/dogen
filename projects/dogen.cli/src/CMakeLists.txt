@@ -58,7 +58,6 @@ set_target_properties(${exe_target_name} PROPERTIES
 target_link_libraries(${exe_target_name}
     ${lib_target_name}
     dogen.dia.lib
-    dogen.extraction.lib
     dogen.injection.lib
     dogen.injection.json.lib
     dogen.injection.dia.lib

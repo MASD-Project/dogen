@@ -34,15 +34,7 @@ set_target_properties(${tests_target_name}
 
 target_link_libraries(${tests_target_name}
     ${lib_target_name}
-    dogen.utility.lib
-    dogen.dia.lib
-    dogen.extraction.lib
-    dogen.injection.lib
-    dogen.injection.json.lib
-    dogen.injection.dia.lib
-    dogen.logical.lib
-    dogen.generation.cpp.lib
-    dogen.generation.csharp.lib
+    dogen.cli.lib
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     ${PQXX_LIBRARIES}

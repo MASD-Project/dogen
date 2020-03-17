@@ -137,7 +137,6 @@
 #DOGEN masd.injection.reference=cpp.builtins
 #DOGEN masd.injection.reference=cpp.boost
 #DOGEN masd.injection.reference=cpp.std
-#DOGEN masd.injection.reference=dogen.extraction
 #DOGEN masd.injection.reference=masd
 #DOGEN masd.injection.reference=masd.variability
 #DOGEN masd.injection.reference=dogen.profiles

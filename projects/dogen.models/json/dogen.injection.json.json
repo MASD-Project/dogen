@@ -8,7 +8,6 @@
     "masd.injection.reference": "cpp.boost",
     "masd.injection.reference": "dogen.variability",
     "masd.injection.reference": "dogen.tracing",
-    "masd.injection.reference": "dogen.extraction",
     "masd.injection.reference": "dogen.injection",
     "masd.injection.reference": "masd",
     "masd.injection.reference": "masd.variability",
