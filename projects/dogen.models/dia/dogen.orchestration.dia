@@ -3462,7 +3462,7 @@ user defined stereotypes.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#extraction_model_production_chain#</dia:string>
+        <dia:string>#physical_model_production_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -4827,7 +4827,7 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.#</di
         <dia:point val="118.222,32.4498"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="117.472,31.6998;119.469,37.8"/>
+        <dia:rectangle val="117.472,31.6997;119.469,37.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5112,7 +5112,7 @@ The model modules result in a top-level name separated by dots, e.g. a.b.c.#</di
         <dia:point val="94.41,9.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="93.66,8.85;100.155,18.6"/>
+        <dia:rectangle val="93.66,8.85;100.155,17.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

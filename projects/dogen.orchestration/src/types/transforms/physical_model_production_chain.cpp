@@ -29,12 +29,12 @@
 #include "dogen.orchestration/types/transforms/injection_model_set_to_assets_model_set_chain.hpp"
 #include "dogen.orchestration/types/transforms/assets_model_to_generation_model_transform.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
-#include "dogen.orchestration/types/transforms/extraction_model_production_chain.hpp"
+#include "dogen.orchestration/types/transforms/physical_model_production_chain.hpp"
 
 namespace {
 
 const std::string
-transform_id("engine.transforms.extraction_model_production_chain");
+transform_id("engine.transforms.physical_model_production_chain");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));
@@ -44,14 +44,14 @@ auto lg(logger_factory(transform_id));
 namespace dogen::orchestration::transforms {
 
 physical::entities::model
-extraction_model_production_chain::apply(const context& ctx,
+physical_model_production_chain::apply(const context& ctx,
     const boost::filesystem::path& target) {
-    BOOST_LOG_SEV(lg, info) << "Starting extraction model production.";
+    BOOST_LOG_SEV(lg, info) << "Starting physical model production.";
     BOOST_LOG_SEV(lg, debug) << "Target: " << target.generic();
 
     const auto model_name(target.filename().string());
     const auto& tracer(*ctx.injection_context().tracer());
-    tracing::scoped_chain_tracer stp(lg, "extraction model production chain",
+    tracing::scoped_chain_tracer stp(lg, "physical model production chain",
         transform_id, model_name, tracer);
 
     /*
@@ -86,20 +86,20 @@ extraction_model_production_chain::apply(const context& ctx,
         apply(ctx.generation_context(), gms);
 
     /*
-     * Obtain the extraction models.
+     * Obtain the physical models.
      */
     using generation::transforms::model_to_extraction_model_chain;
     auto r(model_to_extraction_model_chain::apply(
             ctx.generation_context(), gms));
 
     /*
-     * Runn all of the extraction transforms against the extraction models.
+     * Runn all of the physical transforms against the physical models.
      */
     physical::transforms::model_production_chain::
         apply(ctx.extraction_context(), r);
 
     stp.end_chain(r);
-    BOOST_LOG_SEV(lg, info) << "Finished extraction model production.";
+    BOOST_LOG_SEV(lg, info) << "Finished physical model production.";
 
     return r;
 }

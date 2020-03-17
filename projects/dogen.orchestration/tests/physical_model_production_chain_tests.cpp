@@ -31,7 +31,7 @@
 #include "dogen.physical/io/entities/operation_io.hpp"
 #include "dogen.physical/io/entities/operation_reason_io.hpp"
 #include "dogen.orchestration/types/transforms/scoped_context_manager.hpp"
-#include "dogen.orchestration/types/transforms/extraction_model_production_chain.hpp"
+#include "dogen.orchestration/types/transforms/physical_model_production_chain.hpp"
 
 namespace  {
 
@@ -97,7 +97,7 @@ apply_physical_model_production(const boost::filesystem::path& target,
     /*
      * Produce the physical model.
      */
-    const auto r(extraction_model_production_chain::apply(ctx, target));
+    const auto r(physical_model_production_chain::apply(ctx, target));
     return r;
 }
 

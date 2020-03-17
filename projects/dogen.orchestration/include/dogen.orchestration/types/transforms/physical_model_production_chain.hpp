@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_EXTRACTION_MODEL_PRODUCTION_CHAIN_HPP
-#define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_EXTRACTION_MODEL_PRODUCTION_CHAIN_HPP
+#ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_PHYSICAL_MODEL_PRODUCTION_CHAIN_HPP
+#define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_PHYSICAL_MODEL_PRODUCTION_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,7 +31,7 @@
 
 namespace dogen::orchestration::transforms {
 
-class extraction_model_production_chain final {
+class physical_model_production_chain final {
 public:
     static physical::entities::model apply(const context& ctx,
         const boost::filesystem::path& target);

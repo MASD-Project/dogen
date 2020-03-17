@@ -11,7 +11,7 @@
 #include "dogen.utility/types/test_data/dogen_generation.hpp"
 #include "dogen.physical/io/entities/operation_io.hpp"
 #include "dogen.orchestration/types/transforms/scoped_context_manager.hpp"
-#include "dogen.orchestration/types/transforms/extraction_model_production_chain.hpp"
+#include "dogen.orchestration/types/transforms/physical_model_production_chain.hpp"
 #include "dogen/types/tracing_backend.hpp"
 
 namespace  {
@@ -131,9 +131,9 @@ void apply_transforms(const configuration& cfg, const path& output_dir,
     const auto ctx(sco.context());
 
     /*
-     * Produce the extraction model.
+     * Produce the physical model.
      */
-    const auto m(extraction_model_production_chain::apply(ctx, target));
+    const auto m(physical_model_production_chain::apply(ctx, target));
 }
 
 bool are_tracing_files_healthy(const configuration& cfg,

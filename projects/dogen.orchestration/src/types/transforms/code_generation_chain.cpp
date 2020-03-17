@@ -23,7 +23,7 @@
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/types/transforms/code_generation_chain.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
-#include "dogen.orchestration/types/transforms/extraction_model_production_chain.hpp"
+#include "dogen.orchestration/types/transforms/physical_model_production_chain.hpp"
 #include "dogen.orchestration/types/transforms/code_generation_chain.hpp"
 
 namespace {
@@ -48,13 +48,13 @@ void code_generation_chain::apply(const context& ctx,
         transform_id, model_name, *ctx.injection_context().tracer());
 
     /*
-     * Obtain the extraction model.
+     * Obtain the physical model.
      */
-    using transforms::extraction_model_production_chain;
-    const auto m(extraction_model_production_chain::apply(ctx, target));
+    using transforms::physical_model_production_chain;
+    const auto m(physical_model_production_chain::apply(ctx, target));
 
     /*
-     * Runn all of the extraction transforms against the extraction models.
+     * Runn all of the physical transforms against the physical models.
      */
     using physical::transforms::code_generation_chain;
     code_generation_chain::apply(ctx.extraction_context(), m);
