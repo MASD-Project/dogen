@@ -25,24 +25,14 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.physical/types/entities/model.hpp"
+#include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
 
 class model_production_chain final {
 public:
-    model_production_chain() = default;
-    model_production_chain(const model_production_chain&) = default;
-    model_production_chain(model_production_chain&&) = default;
-    ~model_production_chain() = default;
-    model_production_chain& operator=(const model_production_chain&) = default;
-
-public:
-    bool operator==(const model_production_chain& rhs) const;
-    bool operator!=(const model_production_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }
