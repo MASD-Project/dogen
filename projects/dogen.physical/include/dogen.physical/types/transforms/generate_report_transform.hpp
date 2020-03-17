@@ -25,24 +25,18 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.physical/types/transforms/context.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 
 namespace dogen::physical::transforms {
 
+/**
+ * @brief Generates a report with all of the intended operations on
+ * artefacts.
+ */
 class generate_report_transform final {
 public:
-    generate_report_transform() = default;
-    generate_report_transform(const generate_report_transform&) = default;
-    generate_report_transform(generate_report_transform&&) = default;
-    ~generate_report_transform() = default;
-    generate_report_transform& operator=(const generate_report_transform&) = default;
-
-public:
-    bool operator==(const generate_report_transform& rhs) const;
-    bool operator!=(const generate_report_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, const entities::model& m);
 };
 
 }
