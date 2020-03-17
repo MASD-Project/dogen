@@ -25,24 +25,18 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.physical/types/transforms/context.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 
 namespace dogen::physical::transforms {
 
+/**
+ * @brief Creates a patch file that, if applied to the current state
+ * of the filesystem, would make it the same as the generated model.
+ */
 class generate_patch_transform final {
 public:
-    generate_patch_transform() = default;
-    generate_patch_transform(const generate_patch_transform&) = default;
-    generate_patch_transform(generate_patch_transform&&) = default;
-    ~generate_patch_transform() = default;
-    generate_patch_transform& operator=(const generate_patch_transform&) = default;
-
-public:
-    bool operator==(const generate_patch_transform& rhs) const;
-    bool operator!=(const generate_patch_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, const entities::model& m);
 };
 
 }
