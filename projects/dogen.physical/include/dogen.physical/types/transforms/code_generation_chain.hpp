@@ -25,24 +25,20 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.physical/types/entities/model.hpp"
+#include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
 
+/**
+ * @brief Generates code for an physical model.
+ *
+ * @pre Physical model must have already been through the production
+ * chain.
+ */
 class code_generation_chain final {
 public:
-    code_generation_chain() = default;
-    code_generation_chain(const code_generation_chain&) = default;
-    code_generation_chain(code_generation_chain&&) = default;
-    ~code_generation_chain() = default;
-    code_generation_chain& operator=(const code_generation_chain&) = default;
-
-public:
-    bool operator==(const code_generation_chain& rhs) const;
-    bool operator!=(const code_generation_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, const entities::model& m);
 };
 
 }

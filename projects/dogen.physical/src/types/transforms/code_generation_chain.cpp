@@ -18,12 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.physical/io/entities/model_io.hpp"
+#include "dogen.physical/types/transforms/write_artefacts_transform.hpp"
+#include "dogen.physical/types/transforms/remove_files_transform.hpp"
 #include "dogen.physical/types/transforms/code_generation_chain.hpp"
+
+namespace {
+
+const std::string transform_id("physical.transforms.code_generation_chain");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::physical::transforms {
 
-bool code_generation_chain::operator==(const code_generation_chain& /*rhs*/) const {
-    return true;
+void code_generation_chain::
+apply(const context& ctx, const entities::model& m) {
+    tracing::scoped_chain_tracer stp(lg, "code generation chain",
+        transform_id, m.name(), *ctx.tracer(), m);
+
+    /*
+     * Write all of the artefacts that require writing.
+     */
+    write_artefacts_transform::apply(ctx, m);
+
+    /*
+     * Remove all of the unexpected files.
+     */
+    remove_files_transform::apply(ctx, m);
 }
 
 }
