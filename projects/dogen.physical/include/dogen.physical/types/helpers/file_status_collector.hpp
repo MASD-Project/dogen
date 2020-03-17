@@ -25,24 +25,59 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <set>
+#include <list>
+#include <vector>
+#include <boost/filesystem/path.hpp>
+#include "dogen.physical/types/helpers/files_by_status.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 
 namespace dogen::physical::helpers {
 
+/**
+ * @brief Creates a list of all the lint on a model, bucketed by
+ * status.
+ */
 class file_status_collector final {
-public:
-    file_status_collector() = default;
-    file_status_collector(const file_status_collector&) = default;
-    file_status_collector(file_status_collector&&) = default;
-    ~file_status_collector() = default;
-    file_status_collector& operator=(const file_status_collector&) = default;
+private:
+    /**
+     * @brief Obtains a list of expected files for the supplied model.
+     */
+    static std::set<boost::filesystem::path>
+    obtain_expected_files(const entities::model& m);
+
+    /**
+     * @brief Filters the directories to only those that exist at
+     * present.
+     */
+    static std::list<boost::filesystem::path>
+    filter_by_existence(const std::list<boost::filesystem::path>& dirs);
+
+    /**
+     * @brief Returns all files in all the supplied directories.
+     */
+    static std::set<boost::filesystem::path> obtain_actual_files(
+        const std::list<boost::filesystem::path>& dirs);
+
+    /**
+     * @brief Returns all files that are not expected.
+     */
+    static std::list<boost::filesystem::path> diff_expected_with_actual(
+        const std::set<boost::filesystem::path>& expected,
+        const std::set<boost::filesystem::path>& actual);
+
+    /**
+     * @brief Buckets all files by their status as either ignored or
+     * unexpected.
+     *
+     * @pre Ignore patterns must be valid regular expressions.
+     */
+    static files_by_status bucket_by_status(
+        const std::vector<std::string>& patterns,
+        const std::list<boost::filesystem::path>& files);
 
 public:
-    bool operator==(const file_status_collector& rhs) const;
-    bool operator!=(const file_status_collector& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static files_by_status collect(const entities::model& m);
 };
 
 }
