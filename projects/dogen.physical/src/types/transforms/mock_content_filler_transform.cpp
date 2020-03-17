@@ -18,12 +18,51 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string/predicate.hpp>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.physical/types/transforms/mock_content_filler_transform.hpp"
+
+namespace {
+
+const std::string transform_id(
+    "physical.transforms.mock_content_filler_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+std::string create_hacked_contents(const std::string file_name) {
+    std::ostringstream ss;
+
+    ss << "// dummy function to suppress ranlib warnings" << std::endl
+       << "void " << file_name << "() { }"
+       << std::endl;
+
+    return ss.str();
+}
+
+}
 
 namespace dogen::physical::transforms {
 
-bool mock_content_filler_transform::operator==(const mock_content_filler_transform& /*rhs*/) const {
-    return true;
+void mock_content_filler_transform::
+apply(const context& ctx, entities::model& m) {
+    tracing::scoped_transform_tracer stp(lg,
+        "mock content filler transform", transform_id, m.name(), *ctx.tracer());
+
+    for (auto& a : m.artefacts()) {
+        if (!a.content().empty())
+            continue;
+
+        const auto p(a.paths().absolute());
+        const auto gs(p.generic_string());
+        if (!boost::ends_with(gs, ".cpp"))
+            continue;
+
+        // FIXME: massive hack to deal with ranlib warnings on OSX
+        const auto fn(p.stem().generic_string());
+        a.content(create_hacked_contents(fn));
+    }
 }
 
 }
