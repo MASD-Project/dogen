@@ -25,24 +25,22 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.physical/types/transforms/context.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 
 namespace dogen::physical::transforms {
 
+/**
+ * @brief Handles any extraneous files which should be removed.
+ */
 class gather_external_artefacts_transform final {
-public:
-    gather_external_artefacts_transform() = default;
-    gather_external_artefacts_transform(const gather_external_artefacts_transform&) = default;
-    gather_external_artefacts_transform(gather_external_artefacts_transform&&) = default;
-    ~gather_external_artefacts_transform() = default;
-    gather_external_artefacts_transform& operator=(const gather_external_artefacts_transform&) = default;
+private:
+    static entities::artefact make_artefact(const boost::filesystem::path& p,
+        const entities::operation_type ot,
+        const entities::operation_reason rsn);
 
 public:
-    bool operator==(const gather_external_artefacts_transform& rhs) const;
-    bool operator!=(const gather_external_artefacts_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }
