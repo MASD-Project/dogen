@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_ELEMENT_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_ELEMENT_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_LOGICAL_LOCATION_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_LOGICAL_LOCATION_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,29 +28,26 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include <unordered_map>
-#include "dogen.physical/types/entities/paths.hpp"
 
 namespace dogen::physical::entities {
 
 /**
- * @brief Represents an entity which we would like to place in physical space.
+ * @brief Represents a point in logical space.
  */
-class element final {
+class logical_location final {
 public:
-    element() = default;
-    element(const element&) = default;
-    element(element&&) = default;
-    ~element() = default;
+    logical_location() = default;
+    logical_location(const logical_location&) = default;
+    logical_location(logical_location&&) = default;
+    ~logical_location() = default;
 
 public:
-    element(
+    logical_location(
         const std::string& simple_name,
         const std::string& qualified_name,
         const std::list<std::string>& external_modules,
         const std::list<std::string>& model_modules,
-        const std::list<std::string>& internal_modules,
-        const std::unordered_map<std::string, dogen::physical::entities::paths>& paths);
+        const std::list<std::string>& internal_modules);
 
 public:
     const std::string& simple_name() const;
@@ -78,20 +75,15 @@ public:
     void internal_modules(const std::list<std::string>& v);
     void internal_modules(const std::list<std::string>&& v);
 
-    const std::unordered_map<std::string, dogen::physical::entities::paths>& paths() const;
-    std::unordered_map<std::string, dogen::physical::entities::paths>& paths();
-    void paths(const std::unordered_map<std::string, dogen::physical::entities::paths>& v);
-    void paths(const std::unordered_map<std::string, dogen::physical::entities::paths>&& v);
-
 public:
-    bool operator==(const element& rhs) const;
-    bool operator!=(const element& rhs) const {
+    bool operator==(const logical_location& rhs) const;
+    bool operator!=(const logical_location& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(element& other) noexcept;
-    element& operator=(element other);
+    void swap(logical_location& other) noexcept;
+    logical_location& operator=(logical_location other);
 
 private:
     std::string simple_name_;
@@ -99,7 +91,6 @@ private:
     std::list<std::string> external_modules_;
     std::list<std::string> model_modules_;
     std::list<std::string> internal_modules_;
-    std::unordered_map<std::string, dogen::physical::entities::paths> paths_;
 };
 
 }
@@ -108,8 +99,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::physical::entities::element& lhs,
-    dogen::physical::entities::element& rhs) {
+    dogen::physical::entities::logical_location& lhs,
+    dogen::physical::entities::logical_location& rhs) {
     lhs.swap(rhs);
 }
 

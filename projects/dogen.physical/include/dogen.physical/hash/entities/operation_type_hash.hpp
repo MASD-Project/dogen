@@ -18,21 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_IO_ENTITIES_ELEMENT_IO_HPP
-#define DOGEN_PHYSICAL_IO_ENTITIES_ELEMENT_IO_HPP
+#ifndef DOGEN_PHYSICAL_HASH_ENTITIES_OPERATION_TYPE_HASH_HPP
+#define DOGEN_PHYSICAL_HASH_ENTITIES_OPERATION_TYPE_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen.physical/types/entities/element.hpp"
+#include <functional>
+#include "dogen.physical/types/entities/operation_type.hpp"
 
-namespace dogen::physical::entities {
+namespace std {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::physical::entities::element& v);
+template<>
+struct hash<dogen::physical::entities::operation_type> {
+public:
+    size_t operator()(const dogen::physical::entities::operation_type& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    }
+};
 
 }
 

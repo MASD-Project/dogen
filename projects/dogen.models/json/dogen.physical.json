@@ -4,6 +4,14 @@
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "dogen.physical",
     "masd.injection.input_technical_space": "cpp",
+    "masd.injection.reference": "cpp.builtins",
+    "masd.injection.reference": "cpp.std",
+    "masd.injection.reference": "cpp.boost",
+    "masd.injection.reference": "dogen.tracing",
+    "masd.injection.reference": "dogen.variability",
+    "masd.injection.reference": "dogen",
+    "masd.injection.reference": "masd",
+    "masd.injection.reference": "masd.variability",
     "masd.injection.reference": "dogen.profiles",
     "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
     "masd.variability.profile": "dogen.profiles.base.default_profile"
@@ -158,21 +166,26 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "entities::model",
-      "documentation": "Describes the kernels available in the current instance of Dogen.\n",
+      "name": "entities::meta_model",
+      "documentation": "Describes the geomtry of physical space.\n\nProvides details of the kernels available in the current instance of Dogen.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
           "name": "kernels",
           "type": "std::unordered_map<std::string, kernel>",
           "documentation": "Lists all available kernels, by kernel id.\n"
+        },
+        {
+          "name": "enablement_flags",
+          "type": "std::unordered_map<std::string, enablement_flags>",
+          "documentation": "Global enablement flags\n"
         }
       ]
     },
     {
       "name": "entities::kernel",
       "stereotypes": [
-        "Element"
+        "MetaElement"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -186,7 +199,7 @@
       "name": "entities::backend",
       "documentation": "Code generation backend, targeting a given technical space.\n",
       "stereotypes": [
-        "ContainingElement"
+        "ContainingMetaElement"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -211,7 +224,7 @@
     {
       "name": "entities::part",
       "stereotypes": [
-        "ContainingElement"
+        "ContainingMetaElement"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -287,7 +300,7 @@
     {
       "name": "entities::facet",
       "stereotypes": [
-        "ContainingElement",
+        "ContainingMetaElement",
         "Postfixable"
       ],
       "fallback_element_type": "masd::object",
@@ -301,7 +314,7 @@
     {
       "name": "entities::archetype",
       "stereotypes": [
-        "Element",
+        "MetaElement",
         "Postfixable"
       ],
       "fallback_element_type": "masd::object",
@@ -335,8 +348,8 @@
       ]
     },
     {
-      "name": "entities::element",
-      "documentation": "Represents an entity which we would like to place in physical space.\n",
+      "name": "entities::logical_location",
+      "documentation": "Represents a point in logical space.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -358,21 +371,37 @@
         {
           "name": "internal_modules",
           "type": "std::list<std::string>"
-        },
-        {
-          "name": "paths",
-          "type": "std::unordered_map<std::string, paths>"
         }
       ]
     },
     {
-      "name": "entities::element_model",
+      "name": "entities::model",
       "documentation": "Collection of entities that need placing in physical space.\n",
+      "stereotypes": [
+        "Element"
+      ],
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "elements",
-          "type": "std::unordered_map<std::string, element>"
+          "name": "name",
+          "type": "std::string"
+        },
+        {
+          "name": "technical_space",
+          "type": "std::string",
+          "documentation": "Primary technical space that this model belongs to.\n"
+        },
+        {
+          "name": "artefacts",
+          "type": "std::unordered_map<std::string, artefact>"
+        },
+        {
+          "name": "managed_directories",
+          "type": "std::list<boost::filesystem::path>"
+        },
+        {
+          "name": "outputting_properties",
+          "type": "outputting_properties"
         }
       ]
     },
@@ -383,7 +412,8 @@
       "attributes": [
         {
           "name": "absolute",
-          "type": "boost::filesystem::path"
+          "type": "boost::filesystem::path",
+          "documentation": "Absolute path to the file, indicating the location in the filesystem where it will be\n written.\n"
         },
         {
           "name": "relative",
@@ -421,7 +451,7 @@
       ]
     },
     {
-      "name": "entities::Element",
+      "name": "entities::MetaElement",
       "parents": [
         "entities::Locatable",
         "entities::Describable"
@@ -432,9 +462,9 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "entities::ContainingElement",
+      "name": "entities::ContainingMetaElement",
       "parents": [
-        "entities::Element"
+        "entities::MetaElement"
       ],
       "stereotypes": [
         "masd::object_template"
@@ -544,6 +574,456 @@
       "name": "features::initializer",
       "stereotypes": [
         "masd::variability::initializer"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::path_generator",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::artefact",
+      "documentation": "Represents an entity in physical space.\n",
+      "stereotypes": [
+        "Element"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "paths",
+          "type": "std::unordered_map<std::string, paths>"
+        },
+        {
+          "name": "content",
+          "type": "std::string",
+          "documentation": "Content of the file.\n"
+        },
+        {
+          "name": "enabled",
+          "type": "bool"
+        },
+        {
+          "name": "overwrite",
+          "type": "bool"
+        },
+        {
+          "name": "dependencies",
+          "type": "std::vector<boost::filesystem::path>",
+          "documentation": "Files in the project directory that this file depends on, but which are not generated.\n"
+        },
+        {
+          "name": "unified_diff",
+          "type": "std::string",
+          "documentation": "Unified diff between the in-memory artefact and the file in the filesystem.\n"
+        },
+        {
+          "name": "operation",
+          "type": "operation"
+        },
+        {
+          "name": "enablement_flags",
+          "type": "enablement_flags",
+          "documentation": "Local enablement flags.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::Configurable",
+      "documentation": "Ability to have meta-data associated.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "configuration",
+          "type": "boost::shared_ptr<variability::entities::configuration>",
+          "documentation": "Configuration for this element.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::DeterminableOrigin",
+      "documentation": "Properties related to the origin of the modeling element.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "origin_sha1_hash",
+          "type": "std::string",
+          "documentation": "SHA1 hash of the original model that contained the element.\n"
+        },
+        {
+          "name": "logical_location",
+          "type": "logical_location",
+          "documentation": "Logical model details of the element that originated this physical element.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::Element",
+      "parents": [
+        "entities::Configurable",
+        "entities::DeterminableOrigin"
+      ],
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "entities::outputting_properties",
+      "documentation": "Properties related to outputting.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "force_write",
+          "type": "bool"
+        },
+        {
+          "name": "delete_extra_files",
+          "type": "bool"
+        },
+        {
+          "name": "ignore_files_matching_regex",
+          "type": "std::vector<std::string>"
+        },
+        {
+          "name": "delete_empty_directories",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "entities::operation",
+      "documentation": "Operation to apply to an artefact.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "type",
+          "type": "operation_type"
+        },
+        {
+          "name": "reason",
+          "type": "operation_reason"
+        }
+      ]
+    },
+    {
+      "name": "entities::operation_type",
+      "documentation": "Operation to perform to a given artefact.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "tagged_values": {
+        "masd.generation.cpp.hash.enabled": "true"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "create_only",
+          "type": "",
+          "documentation": "Creates a file from an artefact only if it does not yet exist.\n"
+        },
+        {
+          "name": "write",
+          "type": "",
+          "documentation": "Unconditionally writes an artefact into file.\n"
+        },
+        {
+          "name": "ignore",
+          "type": "",
+          "documentation": "Ingores an artefact.\n"
+        },
+        {
+          "name": "remove",
+          "type": "",
+          "documentation": "Deletes a file.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::operation_reason",
+      "documentation": "Reasons for performing an operation.\n",
+      "stereotypes": [
+        "masd::enumeration"
+      ],
+      "tagged_values": {
+        "masd.generation.cpp.hash.enabled": "true"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "newly_generated",
+          "type": "",
+          "documentation": "Artefact will produce a new generated file.\n"
+        },
+        {
+          "name": "changed_generated",
+          "type": "",
+          "documentation": "Artefact will produce a changed generated file.\n"
+        },
+        {
+          "name": "unchanged_generated",
+          "type": "",
+          "documentation": "Generated artefact contents match file contents.\n"
+        },
+        {
+          "name": "already_exists",
+          "type": "",
+          "documentation": "The file already exists and we we're asked to create only.\n"
+        },
+        {
+          "name": "ignore_generated",
+          "type": "",
+          "documentation": "User requested artefact to be ignored.\n"
+        },
+        {
+          "name": "force_write",
+          "type": "",
+          "documentation": "User requested to always write generated artefacts.\n"
+        },
+        {
+          "name": "unexpected",
+          "type": "",
+          "documentation": "Artefact represents an unexpected file in project.\n"
+        },
+        {
+          "name": "ignore_unexpected",
+          "type": "",
+          "documentation": "File is unexpected but the user asked us not to delete it.\n"
+        },
+        {
+          "name": "ignore_regex",
+          "type": "",
+          "documentation": "File is unexpected but the user asked us to ignore it via regexes.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::enablement_flags",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "backend_enabled",
+          "type": "bool"
+        },
+        {
+          "name": "facet_enabled",
+          "type": "bool"
+        },
+        {
+          "name": "facet_overwrite",
+          "type": "bool"
+        },
+        {
+          "name": "archetype_enabled",
+          "type": "bool"
+        },
+        {
+          "name": "archetype_overwrite",
+          "type": "boost::optional<bool>"
+        }
+      ]
+    },
+    {
+      "name": "helpers::file_status_collector",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::files_by_status",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "unexpected",
+          "type": "std::list<boost::filesystem::path>"
+        },
+        {
+          "name": "ignored",
+          "type": "std::list<boost::filesystem::path>"
+        }
+      ]
+    },
+    {
+      "name": "helpers::unified_differ",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "features::filesystem",
+      "documentation": "Features related to filesystem operations.\n",
+      "stereotypes": [
+        "masd::variability::feature_bundle"
+      ],
+      "tagged_values": {
+        "masd.variability.default_binding_point": "global",
+        "masd.variability.key_prefix": "masd.extraction",
+        "masd.variability.generate_registration": "false"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "force_write",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "documentation": "If true, artefacts are always written to the filesystem.\n\nIf false, the system will check to see if writing is needed by performing a binary\ndiff. If no changes are detected, no writting is performed.\n"
+        },
+        {
+          "name": "delete_extra_files",
+          "type": "masd::variability::boolean",
+          "value": "\"true\"",
+          "documentation": "If true, any files the code generator is not aware of are deleted.\n\nIf you'd like to skip the deletion of certain files, set  \"ignore_files_matching_regex\" accordingly.\n"
+        },
+        {
+          "name": "ignore_files_matching_regex",
+          "type": "masd::variability::text_collection",
+          "documentation": "Regular expressions to filter files prior to deletion.\n\nOnly applicable if \"delete_extra_files\" is enabled.\n",
+          "tagged_values": {
+            "masd.variability.is_optional": "true"
+          }
+        },
+        {
+          "name": "delete_empty_directories",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "documentation": "If true, all directories without any files will be deleted.\n\nThis setting is recursive: if a directory is composed of one or more directories that\nare themselves empty, the entire directory tree is deleted.\n"
+        },
+        {
+          "name": "enable_backend_directories",
+          "type": "masd::variability::boolean",
+          "value": "\"false\"",
+          "documentation": "If true, a directory is created for each technical space targeted.\n\nNote that this setting is only relevant if you are targetting a single output technical\nspace. If you are targetting more than one, it will automatically be set to true.\n"
+        }
+      ]
+    },
+    {
+      "name": "transforms",
+      "fallback_element_type": "masd::module"
+    },
+    {
+      "name": "transforms::context",
+      "stereotypes": [
+        "dogen::typeable",
+        "dogen::pretty_printable"
+      ],
+      "tagged_values": {
+        "masd.generation.cpp.types.class_forward_declarations.enabled": "true"
+      },
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "diffing_configuration",
+          "type": "boost::optional<diffing_configuration>"
+        },
+        {
+          "name": "reporting_configuration",
+          "type": "boost::optional<reporting_configuration>"
+        },
+        {
+          "name": "dry_run_mode_enabled",
+          "type": "bool"
+        },
+        {
+          "name": "feature_model",
+          "type": "boost::shared_ptr<variability::entities::feature_model>"
+        },
+        {
+          "name": "tracer",
+          "type": "boost::shared_ptr<tracing::tracer>"
+        }
+      ]
+    },
+    {
+      "name": "transforms::transform_exception",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::code_generation_chain",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::write_artefacts_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::update_outputting_properties_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::remove_files_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::generate_report_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::model_production_chain",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::generate_diffs_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::gather_external_artefacts_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::generate_patch_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::mock_content_filler_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "transforms::operation_transform",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     }

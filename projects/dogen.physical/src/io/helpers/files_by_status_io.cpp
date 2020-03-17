@@ -19,42 +19,29 @@
  *
  */
 #include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen.physical/io/entities/element_io.hpp"
-#include "dogen.physical/io/entities/element_model_io.hpp"
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
+#include "dogen.physical/io/helpers/files_by_status_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::element>& v) {
-    s << "[";
+inline std::ostream& operator<<(std::ostream& s, const std::list<boost::filesystem::path>& v) {
+    s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
+        s << "\"" << (*i).generic_string() << "\"";
     }
-    s << " ] ";
+    s << "] ";
     return s;
 }
 
 }
 
-namespace dogen::physical::entities {
+namespace dogen::physical::helpers {
 
-std::ostream& operator<<(std::ostream& s, const element_model& v) {
+std::ostream& operator<<(std::ostream& s, const files_by_status& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::physical::entities::element_model\"" << ", "
-      << "\"elements\": " << v.elements()
+      << "\"__type__\": " << "\"dogen::physical::helpers::files_by_status\"" << ", "
+      << "\"unexpected\": " << v.unexpected() << ", "
+      << "\"ignored\": " << v.ignored()
       << " }";
     return(s);
 }

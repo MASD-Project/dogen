@@ -50,10 +50,16 @@ public:
         const std::unordered_map<std::string, boost::filesystem::path>& relative);
 
 public:
+    /**
+     * @brief Absolute path to the file, indicating the location in the filesystem where it will be
+     *  written.
+     */
+    /**@{*/
     const boost::filesystem::path& absolute() const;
     boost::filesystem::path& absolute();
     void absolute(const boost::filesystem::path& v);
     void absolute(const boost::filesystem::path&& v);
+    /**@}*/
 
     /**
      * @brief Path relative to parts, which required it.

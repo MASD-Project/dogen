@@ -25,15 +25,21 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.physical/types/entities/kernel.hpp"
+#include <boost/shared_ptr.hpp>
+#include <boost/filesystem/path.hpp>
+#include "dogen.physical/types/entities/artefact.hpp"
+#include "dogen.physical/types/entities/logical_location.hpp"
+#include "dogen.variability/types/entities/configuration_fwd.hpp"
+#include "dogen.physical/types/entities/outputting_properties.hpp"
 
 namespace dogen::physical::entities {
 
 /**
- * @brief Describes the kernels available in the current instance of Dogen.
+ * @brief Collection of entities that need placing in physical space.
  */
 class model final {
 public:
@@ -43,18 +49,76 @@ public:
     ~model() = default;
 
 public:
-    explicit model(const std::unordered_map<std::string, dogen::physical::entities::kernel>& kernels);
+    model(
+        const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
+        const std::string& origin_sha1_hash,
+        const dogen::physical::entities::logical_location& logical_location,
+        const std::string& name,
+        const std::string& technical_space,
+        const std::unordered_map<std::string, dogen::physical::entities::artefact>& artefacts,
+        const std::list<boost::filesystem::path>& managed_directories,
+        const dogen::physical::entities::outputting_properties& outputting_properties);
 
 public:
     /**
-     * @brief Lists all available kernels, by kernel id.
+     * @brief Configuration for this element.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::physical::entities::kernel>& kernels() const;
-    std::unordered_map<std::string, dogen::physical::entities::kernel>& kernels();
-    void kernels(const std::unordered_map<std::string, dogen::physical::entities::kernel>& v);
-    void kernels(const std::unordered_map<std::string, dogen::physical::entities::kernel>&& v);
+    const boost::shared_ptr<dogen::variability::entities::configuration>& configuration() const;
+    boost::shared_ptr<dogen::variability::entities::configuration>& configuration();
+    void configuration(const boost::shared_ptr<dogen::variability::entities::configuration>& v);
+    void configuration(const boost::shared_ptr<dogen::variability::entities::configuration>&& v);
     /**@}*/
+
+    /**
+     * @brief SHA1 hash of the original model that contained the element.
+     */
+    /**@{*/
+    const std::string& origin_sha1_hash() const;
+    std::string& origin_sha1_hash();
+    void origin_sha1_hash(const std::string& v);
+    void origin_sha1_hash(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Logical model details of the element that originated this physical element.
+     */
+    /**@{*/
+    const dogen::physical::entities::logical_location& logical_location() const;
+    dogen::physical::entities::logical_location& logical_location();
+    void logical_location(const dogen::physical::entities::logical_location& v);
+    void logical_location(const dogen::physical::entities::logical_location&& v);
+    /**@}*/
+
+    const std::string& name() const;
+    std::string& name();
+    void name(const std::string& v);
+    void name(const std::string&& v);
+
+    /**
+     * @brief Primary technical space that this model belongs to.
+     */
+    /**@{*/
+    const std::string& technical_space() const;
+    std::string& technical_space();
+    void technical_space(const std::string& v);
+    void technical_space(const std::string&& v);
+    /**@}*/
+
+    const std::unordered_map<std::string, dogen::physical::entities::artefact>& artefacts() const;
+    std::unordered_map<std::string, dogen::physical::entities::artefact>& artefacts();
+    void artefacts(const std::unordered_map<std::string, dogen::physical::entities::artefact>& v);
+    void artefacts(const std::unordered_map<std::string, dogen::physical::entities::artefact>&& v);
+
+    const std::list<boost::filesystem::path>& managed_directories() const;
+    std::list<boost::filesystem::path>& managed_directories();
+    void managed_directories(const std::list<boost::filesystem::path>& v);
+    void managed_directories(const std::list<boost::filesystem::path>&& v);
+
+    const dogen::physical::entities::outputting_properties& outputting_properties() const;
+    dogen::physical::entities::outputting_properties& outputting_properties();
+    void outputting_properties(const dogen::physical::entities::outputting_properties& v);
+    void outputting_properties(const dogen::physical::entities::outputting_properties&& v);
 
 public:
     bool operator==(const model& rhs) const;
@@ -67,7 +131,14 @@ public:
     model& operator=(model other);
 
 private:
-    std::unordered_map<std::string, dogen::physical::entities::kernel> kernels_;
+    boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
+    std::string origin_sha1_hash_;
+    dogen::physical::entities::logical_location logical_location_;
+    std::string name_;
+    std::string technical_space_;
+    std::unordered_map<std::string, dogen::physical::entities::artefact> artefacts_;
+    std::list<boost::filesystem::path> managed_directories_;
+    dogen::physical::entities::outputting_properties outputting_properties_;
 };
 
 }

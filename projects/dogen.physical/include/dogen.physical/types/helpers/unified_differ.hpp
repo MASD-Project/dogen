@@ -18,16 +18,32 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_ELEMENT_FWD_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_ELEMENT_FWD_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_HELPERS_UNIFIED_DIFFER_HPP
+#define DOGEN_PHYSICAL_TYPES_HELPERS_UNIFIED_DIFFER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen::physical::entities {
+#include <algorithm>
 
-class element;
+namespace dogen::physical::helpers {
+
+class unified_differ final {
+public:
+    unified_differ() = default;
+    unified_differ(const unified_differ&) = default;
+    unified_differ(unified_differ&&) = default;
+    ~unified_differ() = default;
+    unified_differ& operator=(const unified_differ&) = default;
+
+public:
+    bool operator==(const unified_differ& rhs) const;
+    bool operator!=(const unified_differ& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
 
 }
 

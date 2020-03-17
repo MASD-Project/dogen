@@ -20,8 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.physical/io/entities/paths_io.hpp"
-#include "dogen.physical/io/entities/element_io.hpp"
+#include "dogen.physical/io/entities/kernel_io.hpp"
+#include "dogen.physical/io/entities/meta_model_io.hpp"
+#include "dogen.physical/io/entities/enablement_flags_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -33,13 +34,17 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::kernel>& v) {
+    s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
     }
-    s << "] ";
+    s << " ] ";
     return s;
 }
 
@@ -47,7 +52,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::paths>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -65,15 +70,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace dogen::physical::entities {
 
-std::ostream& operator<<(std::ostream& s, const element& v) {
+std::ostream& operator<<(std::ostream& s, const meta_model& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::physical::entities::element\"" << ", "
-      << "\"simple_name\": " << "\"" << tidy_up_string(v.simple_name()) << "\"" << ", "
-      << "\"qualified_name\": " << "\"" << tidy_up_string(v.qualified_name()) << "\"" << ", "
-      << "\"external_modules\": " << v.external_modules() << ", "
-      << "\"model_modules\": " << v.model_modules() << ", "
-      << "\"internal_modules\": " << v.internal_modules() << ", "
-      << "\"paths\": " << v.paths()
+      << "\"__type__\": " << "\"dogen::physical::entities::meta_model\"" << ", "
+      << "\"kernels\": " << v.kernels() << ", "
+      << "\"enablement_flags\": " << v.enablement_flags()
       << " }";
     return(s);
 }

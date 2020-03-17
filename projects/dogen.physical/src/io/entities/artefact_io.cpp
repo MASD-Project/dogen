@@ -19,12 +19,14 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen.physical/io/entities/model_io.hpp"
+#include "dogen.physical/io/entities/paths_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
+#include "dogen.physical/io/entities/operation_io.hpp"
+#include "dogen.physical/io/entities/enablement_flags_io.hpp"
 #include "dogen.physical/io/entities/logical_location_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
-#include "dogen.physical/io/entities/outputting_properties_io.hpp"
 
 namespace boost {
 
@@ -52,7 +54,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::artefact>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::paths>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -70,7 +72,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<boost::filesystem::path>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::vector<boost::filesystem::path>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -84,17 +86,26 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<boost::filesyst
 
 namespace dogen::physical::entities {
 
-std::ostream& operator<<(std::ostream& s, const model& v) {
+std::ostream& operator<<(std::ostream& s, const artefact& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
-      << "\"__type__\": " << "\"dogen::physical::entities::model\"" << ", "
+      << "\"__type__\": " << "\"dogen::physical::entities::artefact\"" << ", "
       << "\"configuration\": " << v.configuration() << ", "
       << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(v.origin_sha1_hash()) << "\"" << ", "
       << "\"logical_location\": " << v.logical_location() << ", "
-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"technical_space\": " << "\"" << tidy_up_string(v.technical_space()) << "\"" << ", "
-      << "\"artefacts\": " << v.artefacts() << ", "
-      << "\"managed_directories\": " << v.managed_directories() << ", "
-      << "\"outputting_properties\": " << v.outputting_properties()
+      << "\"paths\": " << v.paths() << ", "
+      << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\"" << ", "
+      << "\"enabled\": " << v.enabled() << ", "
+      << "\"overwrite\": " << v.overwrite() << ", "
+      << "\"dependencies\": " << v.dependencies() << ", "
+      << "\"unified_diff\": " << "\"" << tidy_up_string(v.unified_diff()) << "\"" << ", "
+      << "\"operation\": " << v.operation() << ", "
+      << "\"enablement_flags\": " << v.enablement_flags()
       << " }";
     return(s);
 }

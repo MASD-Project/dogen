@@ -19,19 +19,58 @@
  *
  */
 #include "dogen.physical/types/entities/model.hpp"
+#include "dogen.variability/types/entities/configuration.hpp"
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::variability::entities::configuration>& lhs,
+const boost::shared_ptr<dogen::variability::entities::configuration>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
 
 namespace dogen::physical::entities {
 
-model::model(const std::unordered_map<std::string, dogen::physical::entities::kernel>& kernels)
-    : kernels_(kernels) { }
+model::model(
+    const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
+    const std::string& origin_sha1_hash,
+    const dogen::physical::entities::logical_location& logical_location,
+    const std::string& name,
+    const std::string& technical_space,
+    const std::unordered_map<std::string, dogen::physical::entities::artefact>& artefacts,
+    const std::list<boost::filesystem::path>& managed_directories,
+    const dogen::physical::entities::outputting_properties& outputting_properties)
+    : configuration_(configuration),
+      origin_sha1_hash_(origin_sha1_hash),
+      logical_location_(logical_location),
+      name_(name),
+      technical_space_(technical_space),
+      artefacts_(artefacts),
+      managed_directories_(managed_directories),
+      outputting_properties_(outputting_properties) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
-    swap(kernels_, other.kernels_);
+    swap(configuration_, other.configuration_);
+    swap(origin_sha1_hash_, other.origin_sha1_hash_);
+    swap(logical_location_, other.logical_location_);
+    swap(name_, other.name_);
+    swap(technical_space_, other.technical_space_);
+    swap(artefacts_, other.artefacts_);
+    swap(managed_directories_, other.managed_directories_);
+    swap(outputting_properties_, other.outputting_properties_);
 }
 
 bool model::operator==(const model& rhs) const {
-    return kernels_ == rhs.kernels_;
+    return configuration_ == rhs.configuration_ &&
+        origin_sha1_hash_ == rhs.origin_sha1_hash_ &&
+        logical_location_ == rhs.logical_location_ &&
+        name_ == rhs.name_ &&
+        technical_space_ == rhs.technical_space_ &&
+        artefacts_ == rhs.artefacts_ &&
+        managed_directories_ == rhs.managed_directories_ &&
+        outputting_properties_ == rhs.outputting_properties_;
 }
 
 model& model::operator=(model other) {
@@ -40,20 +79,132 @@ model& model::operator=(model other) {
     return *this;
 }
 
-const std::unordered_map<std::string, dogen::physical::entities::kernel>& model::kernels() const {
-    return kernels_;
+const boost::shared_ptr<dogen::variability::entities::configuration>& model::configuration() const {
+    return configuration_;
 }
 
-std::unordered_map<std::string, dogen::physical::entities::kernel>& model::kernels() {
-    return kernels_;
+boost::shared_ptr<dogen::variability::entities::configuration>& model::configuration() {
+    return configuration_;
 }
 
-void model::kernels(const std::unordered_map<std::string, dogen::physical::entities::kernel>& v) {
-    kernels_ = v;
+void model::configuration(const boost::shared_ptr<dogen::variability::entities::configuration>& v) {
+    configuration_ = v;
 }
 
-void model::kernels(const std::unordered_map<std::string, dogen::physical::entities::kernel>&& v) {
-    kernels_ = std::move(v);
+void model::configuration(const boost::shared_ptr<dogen::variability::entities::configuration>&& v) {
+    configuration_ = std::move(v);
+}
+
+const std::string& model::origin_sha1_hash() const {
+    return origin_sha1_hash_;
+}
+
+std::string& model::origin_sha1_hash() {
+    return origin_sha1_hash_;
+}
+
+void model::origin_sha1_hash(const std::string& v) {
+    origin_sha1_hash_ = v;
+}
+
+void model::origin_sha1_hash(const std::string&& v) {
+    origin_sha1_hash_ = std::move(v);
+}
+
+const dogen::physical::entities::logical_location& model::logical_location() const {
+    return logical_location_;
+}
+
+dogen::physical::entities::logical_location& model::logical_location() {
+    return logical_location_;
+}
+
+void model::logical_location(const dogen::physical::entities::logical_location& v) {
+    logical_location_ = v;
+}
+
+void model::logical_location(const dogen::physical::entities::logical_location&& v) {
+    logical_location_ = std::move(v);
+}
+
+const std::string& model::name() const {
+    return name_;
+}
+
+std::string& model::name() {
+    return name_;
+}
+
+void model::name(const std::string& v) {
+    name_ = v;
+}
+
+void model::name(const std::string&& v) {
+    name_ = std::move(v);
+}
+
+const std::string& model::technical_space() const {
+    return technical_space_;
+}
+
+std::string& model::technical_space() {
+    return technical_space_;
+}
+
+void model::technical_space(const std::string& v) {
+    technical_space_ = v;
+}
+
+void model::technical_space(const std::string&& v) {
+    technical_space_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::physical::entities::artefact>& model::artefacts() const {
+    return artefacts_;
+}
+
+std::unordered_map<std::string, dogen::physical::entities::artefact>& model::artefacts() {
+    return artefacts_;
+}
+
+void model::artefacts(const std::unordered_map<std::string, dogen::physical::entities::artefact>& v) {
+    artefacts_ = v;
+}
+
+void model::artefacts(const std::unordered_map<std::string, dogen::physical::entities::artefact>&& v) {
+    artefacts_ = std::move(v);
+}
+
+const std::list<boost::filesystem::path>& model::managed_directories() const {
+    return managed_directories_;
+}
+
+std::list<boost::filesystem::path>& model::managed_directories() {
+    return managed_directories_;
+}
+
+void model::managed_directories(const std::list<boost::filesystem::path>& v) {
+    managed_directories_ = v;
+}
+
+void model::managed_directories(const std::list<boost::filesystem::path>&& v) {
+    managed_directories_ = std::move(v);
+}
+
+const dogen::physical::entities::outputting_properties& model::outputting_properties() const {
+    return outputting_properties_;
+}
+
+dogen::physical::entities::outputting_properties& model::outputting_properties() {
+    return outputting_properties_;
+}
+
+void model::outputting_properties(const dogen::physical::entities::outputting_properties& v) {
+    outputting_properties_ = v;
+}
+
+void model::outputting_properties(const dogen::physical::entities::outputting_properties&& v) {
+    outputting_properties_ = std::move(v);
 }
 
 }
