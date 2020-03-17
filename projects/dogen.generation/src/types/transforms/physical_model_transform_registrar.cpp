@@ -23,13 +23,13 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.generation/types/transforms/registrar_error.hpp"
-#include "dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
+#include "dogen.generation/types/transforms/physical_model_transform_registrar.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(
-        "generation.entities.model_to_extraction_model_transform_registrar"));
+        "generation.entities.physical_model_transform_registrar"));
 
 const std::string no_transforms("No model to text transforms provided.");
 const std::string null_transform("Transform supplied is null.");
@@ -40,9 +40,9 @@ const std::string technical_space_taken(
 
 namespace dogen::generation::transforms {
 
-void model_to_extraction_model_transform_registrar::
+void physical_model_transform_registrar::
 register_transform(
-    std::shared_ptr<model_to_extraction_model_transform_interface> t) {
+    std::shared_ptr<physical_model_transform_interface> t) {
     if (!t) {
         BOOST_LOG_SEV(lg, error) << null_transform;
         BOOST_THROW_EXCEPTION(registrar_error(null_transform));
@@ -62,7 +62,7 @@ register_transform(
     BOOST_LOG_SEV(lg, debug) << "Registered transform: " << t->id();
 }
 
-void model_to_extraction_model_transform_registrar::validate() const {
+void physical_model_transform_registrar::validate() const {
     if (transforms_by_technical_space_.empty()) {
         BOOST_LOG_SEV(lg, error) << no_transforms;
         BOOST_THROW_EXCEPTION(registrar_error(no_transforms));
@@ -70,21 +70,21 @@ void model_to_extraction_model_transform_registrar::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
 }
 
-std::shared_ptr<model_to_extraction_model_transform_interface>
-model_to_extraction_model_transform_registrar::
+std::shared_ptr<physical_model_transform_interface>
+physical_model_transform_registrar::
 transform_for_technical_space(
     const logical::entities::technical_space ts) const {
     const auto i(transforms_by_technical_space_.find(ts));
     if (i == transforms_by_technical_space_.end())
-        return std::shared_ptr<model_to_extraction_model_transform_interface>();
+        return std::shared_ptr<physical_model_transform_interface>();
 
     return i->second;
 }
 
 const std::unordered_map<
     logical::entities::technical_space,
-    std::shared_ptr<model_to_extraction_model_transform_interface>>&
-model_to_extraction_model_transform_registrar::
+    std::shared_ptr<physical_model_transform_interface>>&
+physical_model_transform_registrar::
 transforms_by_technical_space() const {
     return transforms_by_technical_space_;
 }

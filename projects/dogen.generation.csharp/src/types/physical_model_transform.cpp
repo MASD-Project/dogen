@@ -26,7 +26,7 @@
 #include "dogen.generation.csharp/types/formattables/workflow.hpp"
 #include "dogen.generation.csharp/types/formatters/workflow.hpp"
 #include "dogen.generation.csharp/types/formattables/locator.hpp"
-#include "dogen.generation.csharp/types/model_to_extraction_model_transform.hpp"
+#include "dogen.generation.csharp/types/physical_model_transform.hpp"
 
 namespace {
 
@@ -45,11 +45,11 @@ const std::string description(
 
 namespace dogen::generation::csharp {
 
-model_to_extraction_model_transform::
-~model_to_extraction_model_transform() noexcept { }
+physical_model_transform::
+~physical_model_transform() noexcept { }
 
 formattables::model
-model_to_extraction_model_transform::create_formattables_model(
+physical_model_transform::create_formattables_model(
     const variability::entities::feature_model& feature_model,
     const formatters::repository& frp, const formattables::locator& l,
     const generation::entities::model& m) const {
@@ -57,55 +57,55 @@ model_to_extraction_model_transform::create_formattables_model(
     return fw.execute(feature_model, frp, l, m);
 }
 
-std::string model_to_extraction_model_transform::id() const {
+std::string physical_model_transform::id() const {
     return traits::backend();
 }
 
-std::string model_to_extraction_model_transform::description() const {
+std::string physical_model_transform::description() const {
     return ::description;
 }
 
 std::list<physical::entities::artefact>
-model_to_extraction_model_transform::
+physical_model_transform::
 format(const formattables::model& fm) const {
     formatters::workflow wf;
     return wf.execute(fm);
 }
 
 const std::forward_list<physical::entities::location>&
-model_to_extraction_model_transform::archetype_locations() const {
+physical_model_transform::archetype_locations() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations();
 }
 
 const std::unordered_map<std::string,
                          physical::entities::locations_group>&
-model_to_extraction_model_transform::archetype_locations_by_meta_name() const {
+physical_model_transform::archetype_locations_by_meta_name() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations_by_meta_name();
 }
 
 const std::unordered_map<std::string,
                          std::list<physical::entities::location>>&
-model_to_extraction_model_transform::archetype_locations_by_family() const {
+physical_model_transform::archetype_locations_by_family() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations_by_family();
 }
 
 const physical::entities::location_repository_parts&
-model_to_extraction_model_transform::
+physical_model_transform::
 archetype_location_repository_parts() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_location_repository_parts();
 }
 
 logical::entities::technical_space
-model_to_extraction_model_transform::technical_space() const {
+physical_model_transform::technical_space() const {
     return logical::entities::technical_space::csharp;
 }
 
 physical::entities::model
-model_to_extraction_model_transform::apply(
+physical_model_transform::apply(
     const generation::transforms::context& ctx,
     const bool enable_backend_directories,
     const generation::entities::model& m) const {

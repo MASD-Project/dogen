@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
+#include "dogen.generation/types/transforms/physical_model_chain.hpp"
 #include "dogen.generation.cpp/types/formatters/workflow.hpp"
 #include "dogen.generation.cpp/types/formattables/workflow.hpp"
 #include "dogen.generation.cpp/types/formatters/initializer.hpp"
-#include "dogen.generation.cpp/types/model_to_extraction_model_transform.hpp"
+#include "dogen.generation.cpp/types/physical_model_transform.hpp"
 #include "dogen.generation.cpp/types/initializer.hpp"
 
 namespace dogen::generation::cpp {
@@ -30,7 +30,7 @@ namespace dogen::generation::cpp {
 void initializer::initialize() {
     formatters::initializer::initialize(formatters::workflow::registrar());
     using generation::transforms::register_transform;
-    register_transform<model_to_extraction_model_transform>();
+    register_transform<physical_model_transform>();
 }
 
 }

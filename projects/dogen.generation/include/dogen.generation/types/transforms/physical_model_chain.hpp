@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_EXTRACTION_MODEL_CHAIN_HPP
-#define DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_EXTRACTION_MODEL_CHAIN_HPP
+#ifndef DOGEN_GENERATION_TYPES_TRANSFORMS_PHYSICAL_MODEL_CHAIN_HPP
+#define DOGEN_GENERATION_TYPES_TRANSFORMS_PHYSICAL_MODEL_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,16 +30,16 @@
 #include <unordered_set>
 #include "dogen.generation/types/transforms/context_fwd.hpp"
 #include "dogen.physical/types/entities/model.hpp"
-#include "dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
+#include "dogen.generation/types/transforms/physical_model_transform_registrar.hpp"
 
 namespace dogen::generation::transforms {
 
-class model_to_extraction_model_chain final {
+class physical_model_chain final {
 public:
     /**
      * @brief Registrar that keeps track of the available transforms.
      */
-    static model_to_extraction_model_transform_registrar& registrar();
+    static physical_model_transform_registrar& registrar();
 
 private:
     /*
@@ -57,7 +57,7 @@ public:
         const std::list<generation::entities::model>& ms);
 
 private:
-    static std::shared_ptr<model_to_extraction_model_transform_registrar>
+    static std::shared_ptr<physical_model_transform_registrar>
     registrar_;
 };
 
@@ -67,7 +67,7 @@ private:
 template<typename Transform>
 inline void register_transform() {
     auto t(std::make_shared<Transform>());
-    auto& rg(model_to_extraction_model_chain::registrar());
+    auto& rg(physical_model_chain::registrar());
     rg.register_transform(t);
 }
 

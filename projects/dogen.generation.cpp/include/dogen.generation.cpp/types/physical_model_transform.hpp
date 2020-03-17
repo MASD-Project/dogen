@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_CPP_TYPES_MODEL_TO_EXTRACTION_MODEL_TRANSFORM_HPP
-#define DOGEN_GENERATION_CPP_TYPES_MODEL_TO_EXTRACTION_MODEL_TRANSFORM_HPP
+#ifndef DOGEN_GENERATION_CPP_TYPES_PHYSICAL_MODEL_TRANSFORM_HPP
+#define DOGEN_GENERATION_CPP_TYPES_PHYSICAL_MODEL_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,7 +36,7 @@
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.generation/types/entities/model.hpp"
-#include "dogen.generation/types/transforms/model_to_extraction_model_transform_interface.hpp"
+#include "dogen.generation/types/transforms/physical_model_transform_interface.hpp"
 #include "dogen.generation.cpp/types/formatters/repository.hpp"
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
 #include "dogen.generation.cpp/types/formattables/model.hpp"
@@ -46,18 +46,18 @@ namespace dogen::generation::cpp {
 /**
  * @brief Implements a C++ model to text transform.
  */
-class model_to_extraction_model_transform final
-    : public generation::transforms::model_to_extraction_model_transform_interface {
+class physical_model_transform final
+    : public generation::transforms::physical_model_transform_interface {
 public:
-    model_to_extraction_model_transform() = default;
-    model_to_extraction_model_transform(
-        const model_to_extraction_model_transform&) = delete;
-    model_to_extraction_model_transform(
-        model_to_extraction_model_transform&&) = default;
+    physical_model_transform() = default;
+    physical_model_transform(
+        const physical_model_transform&) = delete;
+    physical_model_transform(
+        physical_model_transform&&) = default;
 
 public:
 
-    ~model_to_extraction_model_transform() noexcept;
+    ~physical_model_transform() noexcept;
 
 private:
     /**

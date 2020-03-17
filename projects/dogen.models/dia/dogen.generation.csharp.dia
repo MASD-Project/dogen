@@ -68,7 +68,7 @@
         <dia:point val="-17,-124"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.05,-124.05;9.745,-107.85"/>
+        <dia:rectangle val="-17.05,-124.05;9.745,-108.65"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="26.695"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="16.100000000000001"/>
+        <dia:real val="15.300000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -186,7 +186,7 @@
         <dia:real val="7.5999999999999996"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#model_to_extraction_model_transform#</dia:string>
+        <dia:string>#physical_model_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -955,17 +955,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="70.495,-4.4"/>
+        <dia:point val="69.9175,-4.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="69.745,-5.15;86.535,9.8"/>
+        <dia:rectangle val="69.1675,-5.15;86.535,9.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="70.495,-4.4"/>
-        <dia:point val="70.495,2"/>
+        <dia:point val="69.9175,-4.4"/>
+        <dia:point val="69.9175,2"/>
         <dia:point val="86.335,2"/>
         <dia:point val="86.335,9"/>
       </dia:attribute>
@@ -3877,14 +3877,14 @@
         <dia:point val="76.61,-16.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="70.224,-16.3697;76.6797,-11.644"/>
+        <dia:rectangle val="69.6592,-16.3691;76.6791,-11.6364"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
         <dia:point val="76.61,-16.3"/>
-        <dia:point val="70.495,-12"/>
+        <dia:point val="69.9175,-12"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -3899,7 +3899,7 @@
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="73.5529,-13.6505"/>
+        <dia:point val="73.2641,-13.6505"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O31" connection="6"/>

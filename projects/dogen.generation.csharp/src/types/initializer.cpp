@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
+#include "dogen.generation/types/transforms/physical_model_chain.hpp"
 #include "dogen.generation.csharp/types/formatters/workflow.hpp"
 #include "dogen.generation.csharp/types/formatters/initializer.hpp"
-#include "dogen.generation.csharp/types/model_to_extraction_model_transform.hpp"
+#include "dogen.generation.csharp/types/physical_model_transform.hpp"
 #include "dogen.generation.csharp/types/initializer.hpp"
 
 namespace dogen::generation::csharp {
@@ -29,7 +29,7 @@ namespace dogen::generation::csharp {
 void initializer::initialize() {
     formatters::initializer::initialize(formatters::workflow::registrar());
     using generation::transforms::register_transform;
-    register_transform<model_to_extraction_model_transform>();
+    register_transform<physical_model_transform>();
 }
 
 }

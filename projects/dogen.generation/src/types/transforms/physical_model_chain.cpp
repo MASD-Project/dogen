@@ -27,12 +27,11 @@
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.generation/io/entities/model_io.hpp"
 #include "dogen.generation/types/transforms/transformation_error.hpp"
-#include "dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
+#include "dogen.generation/types/transforms/physical_model_chain.hpp"
 
 namespace {
 
-const std::string transform_id(
-    "generation.transforms.model_to_extraction_model_chain");
+const std::string transform_id("generation.transforms.physical_model_chain");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
@@ -46,19 +45,19 @@ const std::string disabled_transform(
 namespace dogen::generation::transforms {
 
 std::shared_ptr<
-    model_to_extraction_model_transform_registrar>
-model_to_extraction_model_chain::registrar_;
-model_to_extraction_model_transform_registrar&
-model_to_extraction_model_chain::registrar() {
+    physical_model_transform_registrar>
+physical_model_chain::registrar_;
+physical_model_transform_registrar&
+physical_model_chain::registrar() {
     if (!registrar_) {
         registrar_ = std::make_shared<
-            model_to_extraction_model_transform_registrar>();
+            physical_model_transform_registrar>();
     }
 
     return *registrar_;
 }
 
-void model_to_extraction_model_chain::
+void physical_model_chain::
 merge(physical::entities::model&& src, physical::entities::model& dst) {
     dst.logical_location().qualified_name(
         src.logical_location().qualified_name());
@@ -68,7 +67,7 @@ merge(physical::entities::model&& src, physical::entities::model& dst) {
         src.managed_directories());
 }
 
-physical::entities::model model_to_extraction_model_chain::
+physical::entities::model physical_model_chain::
 apply(const generation::transforms::context& ctx,
     const generation::entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Transforming model: "
@@ -132,7 +131,7 @@ apply(const generation::transforms::context& ctx,
     return r;
 }
 
-physical::entities::model model_to_extraction_model_chain::
+physical::entities::model physical_model_chain::
 apply(const generation::transforms::context& ctx,
     const std::list<generation::entities::model>& ms) {
     tracing::scoped_chain_tracer stp(lg, "model to extraction model chain",

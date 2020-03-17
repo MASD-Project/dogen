@@ -1680,7 +1680,7 @@ spaces.#</dia:string>
         <dia:point val="145.77,40.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="139.477,39.45;146.52,44.8"/>
+        <dia:rectangle val="139.478,39.45;146.52,44.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2955,7 +2955,7 @@ spaces.#</dia:string>
         <dia:real val="5.2000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#model_to_extraction_model_chain#</dia:string>
+        <dia:string>#physical_model_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -3162,7 +3162,7 @@ spaces.#</dia:string>
         <dia:real val="9.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#model_to_extraction_model_transform_interface#</dia:string>
+        <dia:string>#physical_model_transform_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable::header_only#</dia:string>
@@ -3494,19 +3494,19 @@ spaces.#</dia:string>
         <dia:point val="135,135"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="134.95,134.95;193.685,142.45"/>
+        <dia:rectangle val="134.95,134.95;189.45,142.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="135,135"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="58.635000000000005"/>
+        <dia:real val="54.399999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#model_to_extraction_model_transform_registrar#</dia:string>
+        <dia:string>#physical_model_transform_registrar#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -3598,7 +3598,7 @@ spaces.#</dia:string>
             <dia:string>#transforms_by_technical_space_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;logical::entities::technical_space, std::shared_ptr&lt;model_to_extraction_model_transform_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;logical::entities::technical_space, std::shared_ptr&lt;physical_model_transform_interface&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -3652,7 +3652,7 @@ spaces.#</dia:string>
                 <dia:string>#t#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;model_to_extraction_model_transform_interface&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;physical_model_transform_interface&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -3704,7 +3704,7 @@ spaces.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;model_to_extraction_model_transform_interface&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;physical_model_transform_interface&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3752,7 +3752,7 @@ spaces.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;logical::entities::technical_space, std::shared_ptr&lt;model_to_extraction_model_transform_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;logical::entities::technical_space, std::shared_ptr&lt;physical_model_transform_interface&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3891,17 +3891,17 @@ spaces.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="193.635,142.4"/>
+        <dia:point val="189.4,142.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="192.885,141.65;195.425,147.8"/>
+        <dia:rectangle val="188.65,141.65;195.425,147.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="193.635,142.4"/>
-        <dia:point val="193.635,145"/>
+        <dia:point val="189.4,142.4"/>
+        <dia:point val="189.4,145"/>
         <dia:point val="195.225,145"/>
         <dia:point val="195.225,147"/>
       </dia:attribute>
@@ -4799,7 +4799,7 @@ spaces.#</dia:string>
         <dia:point val="119.105,128"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="114.938,124.55;119.855,128.8"/>
+        <dia:rectangle val="114.937,124.55;119.855,128.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

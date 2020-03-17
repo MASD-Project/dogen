@@ -23,7 +23,7 @@
 #include "dogen.injection/types/transforms/model_set_production_chain.hpp"
 #include "dogen.logical/types/transforms/model_production_chain.hpp"
 #include "dogen.generation/types/transforms/model_generation_chain.hpp"
-#include "dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
+#include "dogen.generation/types/transforms/physical_model_chain.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/types/transforms/model_production_chain.hpp"
 #include "dogen.orchestration/types/transforms/injection_model_set_to_assets_model_set_chain.hpp"
@@ -88,8 +88,8 @@ physical_model_production_chain::apply(const context& ctx,
     /*
      * Obtain the physical models.
      */
-    using generation::transforms::model_to_extraction_model_chain;
-    auto r(model_to_extraction_model_chain::apply(
+    using generation::transforms::physical_model_chain;
+    auto r(physical_model_chain::apply(
             ctx.generation_context(), gms));
 
     /*

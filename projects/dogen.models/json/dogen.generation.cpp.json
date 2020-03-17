@@ -54,7 +54,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "model_to_extraction_model_transform",
+      "name": "physical_model_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

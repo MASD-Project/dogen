@@ -37,8 +37,8 @@
 #include "dogen.injection/types/features/initializer.hpp"
 #include "dogen.logical/types/features/initializer.hpp"
 #include "dogen.generation/types/features/initializer.hpp"
-#include "dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
-#include "dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
+#include "dogen.generation/types/transforms/physical_model_chain.hpp"
+#include "dogen.generation/types/transforms/physical_model_transform_registrar.hpp"
 #include "dogen.generation.cpp/types/feature_initializer.hpp"
 #include "dogen.generation.csharp/types/feature_initializer.hpp"
 #include "dogen.orchestration/io/transforms/context_io.hpp"
@@ -60,11 +60,11 @@ const std::string duplicate_segment("Duplicat segment: ");
 
 namespace dogen::orchestration::transforms {
 
-using generation::transforms::model_to_extraction_model_transform_registrar;
+using generation::transforms::physical_model_transform_registrar;
 
 boost::shared_ptr<physical::entities::location_repository>
 create_archetype_location_repository(
-    const model_to_extraction_model_transform_registrar& rg) {
+    const physical_model_transform_registrar& rg) {
 
     physical::helpers::location_repository_builder b;
     for (const auto& pair : rg.transforms_by_technical_space()) {
@@ -97,8 +97,8 @@ make_injection_context(const configuration& cfg,
     /*
      * Obtain the transform registrar and ensure it has been setup.
      */
-    using generation::transforms::model_to_extraction_model_chain;
-    const auto& rg = model_to_extraction_model_chain::registrar();
+    using generation::transforms::physical_model_chain;
+    const auto& rg = physical_model_chain::registrar();
     rg.validate();
 
     /*
@@ -141,8 +141,8 @@ make_context(const configuration& cfg, const std::string& activity,
     /*
      * Obtain the transform registrar and ensure it has been setup.
      */
-    using generation::transforms::model_to_extraction_model_chain;
-    const auto& rg = model_to_extraction_model_chain::registrar();
+    using generation::transforms::physical_model_chain;
+    const auto& rg = physical_model_chain::registrar();
     rg.validate();
 
     /*

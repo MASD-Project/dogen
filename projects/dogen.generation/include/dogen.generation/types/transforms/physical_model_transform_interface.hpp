@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_EXTRACTION_MODEL_TRANSFORM_INTERFACE_HPP
-#define DOGEN_GENERATION_TYPES_TRANSFORMS_MODEL_TO_EXTRACTION_MODEL_TRANSFORM_INTERFACE_HPP
+#ifndef DOGEN_GENERATION_TYPES_TRANSFORMS_PHYSICAL_MODEL_TRANSFORM_INTERFACE_HPP
+#define DOGEN_GENERATION_TYPES_TRANSFORMS_PHYSICAL_MODEL_TRANSFORM_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -43,14 +43,14 @@ namespace dogen::generation::transforms {
  * @brief Performs a model to text transformation of a meta-model,
  * into its supported technical space.
  */
-class model_to_extraction_model_transform_interface {
+class physical_model_transform_interface {
 public:
-    model_to_extraction_model_transform_interface() = default;
-    model_to_extraction_model_transform_interface(
-        const model_to_extraction_model_transform_interface&) = delete;
-    model_to_extraction_model_transform_interface(
-        model_to_extraction_model_transform_interface&&) = default;
-    virtual ~model_to_extraction_model_transform_interface() noexcept = default;
+    physical_model_transform_interface() = default;
+    physical_model_transform_interface(
+        const physical_model_transform_interface&) = delete;
+    physical_model_transform_interface(
+        physical_model_transform_interface&&) = default;
+    virtual ~physical_model_transform_interface() noexcept = default;
 
 public:
     /**
