@@ -66,7 +66,6 @@ public:
         const dogen::logical::entities::name& name,
         const dogen::logical::entities::name& meta_name,
         const std::string& origin_sha1_hash,
-        const std::string& origin_element_id,
         const std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types>& references,
         const std::unordered_set<dogen::logical::entities::name>& leaves,
         const std::vector<boost::shared_ptr<dogen::logical::entities::element> >& elements,
@@ -100,16 +99,6 @@ public:
     std::string& origin_sha1_hash();
     void origin_sha1_hash(const std::string& v);
     void origin_sha1_hash(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Unique identifier within the originan injection model for this modeling element.
-     */
-    /**@{*/
-    const std::string& origin_element_id() const;
-    std::string& origin_element_id();
-    void origin_element_id(const std::string& v);
-    void origin_element_id(const std::string&& v);
     /**@}*/
 
     /**
@@ -231,7 +220,6 @@ private:
     dogen::logical::entities::name name_;
     dogen::logical::entities::name meta_name_;
     std::string origin_sha1_hash_;
-    std::string origin_element_id_;
     std::unordered_map<dogen::logical::entities::name, dogen::logical::entities::origin_types> references_;
     std::unordered_set<dogen::logical::entities::name> leaves_;
     std::vector<boost::shared_ptr<dogen::logical::entities::element> > elements_;

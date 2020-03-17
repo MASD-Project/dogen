@@ -2032,7 +2032,7 @@ spaces.#</dia:string>
         <dia:point val="31,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="30.95,21.95;57.745,36.55"/>
+        <dia:rectangle val="30.95,21.95;57.745,35.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2044,7 +2044,7 @@ spaces.#</dia:string>
         <dia:real val="26.695"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="14.500000000000002"/>
+        <dia:real val="13.700000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -12710,19 +12710,19 @@ code: identation and dividers.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O90">
       <dia:attribute name="obj_pos">
-        <dia:point val="78,52"/>
+        <dia:point val="93,52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="77.95,51.95;90.485,56.45"/>
+        <dia:rectangle val="92.95,51.95;105.1,55.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="78,52"/>
+        <dia:point val="93,52"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.434999999999999"/>
+        <dia:real val="12.050000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#DeterminableOrigin#</dia:string>
@@ -12835,29 +12835,6 @@ code: identation and dividers.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#origin_element_id#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Unique identifier within the originan injection model for this modeling element.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -12904,19 +12881,19 @@ code: identation and dividers.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="84.2175,52"/>
+        <dia:point val="99.025,52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="83.4675,48.15;85.5825,52.8"/>
+        <dia:rectangle val="98.275,48.15;102.965,52.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="84.2175,52"/>
-        <dia:point val="84.2175,50"/>
-        <dia:point val="85.3825,50"/>
-        <dia:point val="85.3825,48.2"/>
+        <dia:point val="99.025,52"/>
+        <dia:point val="99.025,50"/>
+        <dia:point val="102.765,50"/>
+        <dia:point val="102.765,48.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -12934,7 +12911,7 @@ code: identation and dividers.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O90" connection="1"/>
-        <dia:connection handle="1" to="O1" connection="6"/>
+        <dia:connection handle="1" to="O1" connection="7"/>
       </dia:connections>
       <dia:childnode parent="O0"/>
     </dia:object>
