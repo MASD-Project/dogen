@@ -25,24 +25,22 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.physical/types/transforms/context.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 
 namespace dogen::physical::transforms {
 
+/**
+ * @brief Removes all files that are associated with artefacts marked
+ * with an operation of "remove".
+ */
 class remove_files_transform final {
-public:
-    remove_files_transform() = default;
-    remove_files_transform(const remove_files_transform&) = default;
-    remove_files_transform(remove_files_transform&&) = default;
-    ~remove_files_transform() = default;
-    remove_files_transform& operator=(const remove_files_transform&) = default;
+private:
+    static void delete_extra_files(const entities::model& m);
+    static void delete_empty_directories(const entities::model& m);
 
 public:
-    bool operator==(const remove_files_transform& rhs) const;
-    bool operator!=(const remove_files_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, const entities::model& m);
 };
 
 }

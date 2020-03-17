@@ -18,12 +18,105 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/filesystem/file.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/types/transforms/remove_files_transform.hpp"
+
+namespace {
+
+const std::string transform_id("physical.transforms.remove_files_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+}
 
 namespace dogen::physical::transforms {
 
-bool remove_files_transform::operator==(const remove_files_transform& /*rhs*/) const {
-    return true;
+void remove_files_transform::delete_extra_files(const entities::model& m) {
+    /*
+     * If the user did not ask to delete extra files, do nothing.
+     */
+    if (!m.outputting_properties().delete_extra_files()) {
+        BOOST_LOG_SEV(lg, debug) << "Delete extra files is off.";
+        return;
+    }
+
+    /*
+     * Collect all the files to remove across the model.
+     */
+    std::list<boost::filesystem::path> unexpected;
+    for (const auto& a : m.artefacts()) {
+        using physical::entities::operation_type;
+        if (a.operation().type() == operation_type::remove)
+            unexpected.push_back(a.paths().absolute());
+    }
+
+    /*
+     * Remove all unwanted files
+     */
+    if (unexpected.empty()) {
+        BOOST_LOG_SEV(lg, debug) << "No files found to remove.";
+        return;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Starting to remove files.";
+    utility::filesystem::remove(unexpected);
+    BOOST_LOG_SEV(lg, debug) << "Removed files.";
+}
+
+void remove_files_transform::
+delete_empty_directories(const entities::model& m) {
+    if (!m.outputting_properties().delete_empty_directories()) {
+        BOOST_LOG_SEV(lg, debug) << "Delete empty directories is off.";
+        return;
+    }
+
+    /*
+     * Get rid of any empty directories. Note that this is implemented
+     * in a bit of an optimistic way:
+     *
+     * - we can remove empty directories created by the user that are
+     *   not related to code generation.
+     *
+     * - we are not honouring ignore regexes. We probably should not
+     *   remove a directory if it matches a ignore regex.
+     *
+     * For now this approach is good enough.
+     */
+    BOOST_LOG_SEV(lg, debug) << "Starting to remove empty directories.";
+    utility::filesystem::remove_empty_directories(m.managed_directories());
+    BOOST_LOG_SEV(lg, debug) << "Removed empty directories.";
+}
+
+void remove_files_transform::
+apply(const context& ctx, const entities::model& m) {
+    tracing::scoped_transform_tracer stp(lg,
+        "remove files transform", transform_id, m.name(), *ctx.tracer());
+
+    /*
+     * If we don't have any artefacts then we're done.
+     */
+    if (m.artefacts().empty()) {
+        BOOST_LOG_SEV(lg, info) << "No artefacts were generated.";
+        return;
+    }
+
+    /*
+     * If the user requested a dry run, do nothng.
+     */
+    if (ctx.dry_run_mode_enabled()) {
+        BOOST_LOG_SEV(lg, info) << "Dry run mode is enabled, not executing.";
+        return;
+    }
+
+    /*
+     * Execute the transform.
+     */
+    delete_extra_files(m);
+    delete_empty_directories(m);
 }
 
 }
