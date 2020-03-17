@@ -2516,8 +2516,8 @@ For details on the stereotypes see the MASD UML profile.
 #DOGEN masd.injection.reference=masd.variability
 #DOGEN masd.injection.reference=dogen.profiles
 #DOGEN masd.injection.input_technical_space=cpp
-#DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
-#DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
+#DOGEN masd.physical.ignore_files_matching_regex=.*/test/.*
+#DOGEN masd.physical.ignore_files_matching_regex=.*/tests/.*
 #DOGEN masd.variability.profile=dogen.profiles.base.default_profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

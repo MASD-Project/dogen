@@ -104,10 +104,10 @@
 #DOGEN masd.injection.reference=masd
 #DOGEN masd.injection.reference=masd.variability
 #DOGEN masd.injection.reference=dogen.profiles
-#DOGEN masd.extraction.ignore_files_matching_regex=.*-odb.*
-#DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
-#DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
-#DOGEN masd.extraction.ignore_files_matching_regex=.*/sql/.*
+#DOGEN masd.physical.ignore_files_matching_regex=.*-odb.*
+#DOGEN masd.physical.ignore_files_matching_regex=.*/test/.*
+#DOGEN masd.physical.ignore_files_matching_regex=.*/tests/.*
+#DOGEN masd.physical.ignore_files_matching_regex=.*/sql/.*
 #DOGEN masd.variability.profile=dogen.profiles.base.relational_profile
 #DOGEN masd.orm.database_system=postgresql
 #DOGEN masd.orm.database_system=sqlite

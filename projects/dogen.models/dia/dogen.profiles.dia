@@ -5270,7 +5270,7 @@ for the element.
       <dia:attribute name="comment">
         <dia:string>#Configuration for extraction.
 
-#DOGEN masd.variability.key_prefix=masd.extraction#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.physical#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="true"/>

@@ -821,7 +821,7 @@ dimension of MASD's conceptual model.
 The logical model strives to provide a technical-space agnostic
 element representation, designed for code generation. Injection models
 are obtained via frontends and transformed into "bare" logical models,
-at which point they can enter its pipeline. Within it, they are 
+at which point they can enter its pipeline. Within it, they are
 processed until they form a cohesive whole. They are then in a suitable
 state for code generation.
 
@@ -856,8 +856,8 @@ etc.).
 #DOGEN masd.injection.reference=dogen.profiles
 #DOGEN masd.injection.reference=dogen.physical
 #DOGEN masd.injection.input_technical_space=cpp
-#DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
-#DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
+#DOGEN masd.physical.ignore_files_matching_regex=.*/test/.*
+#DOGEN masd.physical.ignore_files_matching_regex=.*/tests/.*
 #DOGEN masd.variability.profile=dogen.profiles.base.default_profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -7068,7 +7068,7 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
             <dia:string>#Provides all of the domains to be used for template instantiation.
 
 Example of a domain is "masd.facet" which contains the list of all available facets.
-Templates (facet and profile) are then instantiated over this range, depending on 
+Templates (facet and profile) are then instantiated over this range, depending on
 user choices.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -34963,7 +34963,7 @@ technical space targeted.#</dia:string>
         <dia:string>#Features related to the output technical space.
 
 #DOGEN masd.variability.default_binding_point=global
-#DOGEN masd.variability.key_prefix=masd.extraction#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.physical#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -48455,7 +48455,7 @@ templates. These features are now in an extremely messy state:
 
 - the names don't make any sense. variability bundle applies to both
 feature bundles and template bundles, but we don't have a good name for
-that. "variability templates" is a bit of a random name but captures 
+that. "variability templates" is a bit of a random name but captures
 the notion that the properties are common to both feature bundle templates
 and profile templates. Note however, that we are not using (some of) the
 properties directly from the variability templates feature bundle; instead

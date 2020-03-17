@@ -12,8 +12,8 @@
     "masd.injection.reference": "masd",
     "masd.injection.reference": "masd.variability",
     "masd.injection.reference": "dogen.profiles",
-    "masd.extraction.ignore_files_matching_regex": ".*/test/.*",
-    "masd.extraction.ignore_files_matching_regex": ".*/tests/.*",
+    "masd.physical.ignore_files_matching_regex": ".*/test/.*",
+    "masd.physical.ignore_files_matching_regex": ".*/tests/.*",
     "masd.variability.profile": "dogen.profiles.base.default_profile"
   },
   "elements": [

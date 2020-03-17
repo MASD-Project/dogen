@@ -53,12 +53,12 @@ std::string traits::extraction::cpp_headers_output_directory() {
 }
 
 std::string traits::extraction::enable_backend_directories() {
-    static std::string r("masd.extraction.enable_backend_directories");
+    static std::string r("masd.physical.enable_backend_directories");
     return r;
 }
 
 std::string traits::enable_backend_directories() {
-    static std::string r("masd.extraction.enable_backend_directories");
+    static std::string r("masd.physical.enable_backend_directories");
     return r;
 }
 

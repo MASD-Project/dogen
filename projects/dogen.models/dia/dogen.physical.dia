@@ -109,8 +109,8 @@ physical dimension of MASD conceptual space.
 #DOGEN masd.injection.reference=masd
 #DOGEN masd.injection.reference=masd.variability
 #DOGEN masd.injection.reference=dogen.profiles
-#DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
-#DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
+#DOGEN masd.physical.ignore_files_matching_regex=.*/test/.*
+#DOGEN masd.physical.ignore_files_matching_regex=.*/tests/.*
 #DOGEN masd.variability.profile=dogen.profiles.base.default_profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -5068,7 +5068,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="128.062,-90.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.013,-90.45;128.912,-86.95"/>
+        <dia:rectangle val="121.012,-90.45;128.912,-86.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7054,7 +7054,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="131.988,-98.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="131.138,-98.65;145.113,-93.95"/>
+        <dia:rectangle val="131.138,-98.65;145.112,-93.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7174,7 +7174,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="131.988,-103"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="131.238,-106.05;148.343,-101.4"/>
+        <dia:rectangle val="131.238,-106.05;148.343,-102.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7450,7 +7450,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="143.03,-78"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="142.28,-81.85;152.845,-76.4"/>
+        <dia:rectangle val="142.28,-81.85;152.845,-77.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8207,7 +8207,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="159,-67"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="158.25,-71.9998;160.492,-65.4"/>
+        <dia:rectangle val="158.25,-71.9998;160.492,-66.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8279,7 +8279,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="169.125,-67"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="168.375,-77.05;170.492,-65.4"/>
+        <dia:rectangle val="168.375,-77.05;170.492,-66.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8351,7 +8351,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="67,-72"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="64.95,-72.75;67.75,-65.4"/>
+        <dia:rectangle val="64.95,-72.75;67.75,-66.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8423,7 +8423,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="125.57,-107.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.305,-108.35;126.32,-101.4"/>
+        <dia:rectangle val="121.305,-108.35;126.32,-102.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8495,7 +8495,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="115.062,-94"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="114.312,-97.85;116.877,-92.4"/>
+        <dia:rectangle val="114.312,-97.85;116.877,-93.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8567,7 +8567,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="108.85,-100.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="108.1,-101.05;112.05,-97.9"/>
+        <dia:rectangle val="108.1,-101.1;112.05,-98.7"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8639,7 +8639,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="116.525,-78"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="108.59,-82.65;117.275,-76.4"/>
+        <dia:rectangle val="108.59,-82.65;117.275,-77.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8711,7 +8711,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="156.135,-62.7"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="155.385,-65.15;159.05,-61.1"/>
+        <dia:rectangle val="155.385,-65.9;159.05,-61.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8783,7 +8783,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="136,-61.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="132.245,-61.85;136.75,-57.5"/>
+        <dia:rectangle val="132.245,-61.9;136.75,-58.3"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9082,7 +9082,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="73,-90.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.25,-91.15;78.7275,-85.4"/>
+        <dia:rectangle val="72.25,-91.15;78.7275,-86.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9154,7 +9154,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="81.285,-67"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="80.535,-69.05;84.2,-65.4"/>
+        <dia:rectangle val="80.535,-69.8;84.2,-66.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9419,7 +9419,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="197.845,-113.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="197.776,-113.369;201.494,-110.641"/>
+        <dia:rectangle val="197.776,-113.369;201.493,-110.641"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9876,7 +9876,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="201.227,-107.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="198.248,-108.15;201.977,-101.4"/>
+        <dia:rectangle val="198.248,-108.15;201.977,-102.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9933,7 +9933,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:string>#Features related to filesystem operations.
 
 #DOGEN masd.variability.default_binding_point=global
-#DOGEN masd.variability.key_prefix=masd.extraction#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.physical#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -12090,7 +12090,7 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:point val="145,-35.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="142.36,-36.15;145.75,-30.4"/>
+        <dia:rectangle val="142.36,-36.15;145.75,-31.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12162,7 +12162,7 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:point val="163.21,-35.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="162.46,-36.15;166.188,-30.4"/>
+        <dia:rectangle val="162.46,-36.15;166.188,-31.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12588,7 +12588,7 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:point val="103.105,-32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="102.355,-35.3996;104.305,-30.4"/>
+        <dia:rectangle val="102.355,-35.3996;104.305,-31.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12660,7 +12660,7 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:point val="94,-32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="83.3988,-35.45;94.75,-30.4"/>
+        <dia:rectangle val="83.3988,-35.45;94.75,-31.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12732,7 +12732,7 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:point val="112.21,-32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="111.46,-35.45;124.305,-30.4"/>
+        <dia:rectangle val="111.46,-35.45;124.305,-31.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12804,7 +12804,7 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:point val="94,-30.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="91.16,-31.65;94.75,-27.3"/>
+        <dia:rectangle val="91.16,-31.7;94.75,-28.1"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12876,7 +12876,7 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:point val="94,-28.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="89.055,-29.15;94.75,-22.4"/>
+        <dia:rectangle val="89.055,-29.15;94.75,-23.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12948,7 +12948,7 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:point val="112.21,-28.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="111.46,-29.15;117.305,-22.4"/>
+        <dia:rectangle val="111.46,-29.15;117.305,-23.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13020,7 +13020,7 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:point val="112.21,-30.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="111.46,-31.65;115.05,-27.3"/>
+        <dia:rectangle val="111.46,-31.7;115.05,-28.1"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

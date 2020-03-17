@@ -28,11 +28,11 @@ namespace dogen::physical::features {
 namespace {
 
 dogen::variability::entities::feature
-make_masd_extraction_force_write() {
+make_masd_physical_force_write() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("force_write");
-    r.name().qualified("masd.extraction.force_write");
+    r.name().qualified("masd.physical.force_write");
     r.description(R"(If true, artefacts are always written to the filesystem.
 
 If false, the system will check to see if writing is needed by performing a binary
@@ -48,11 +48,11 @@ diff. If no changes are detected, no writting is performed.
 }
 
 dogen::variability::entities::feature
-make_masd_extraction_delete_extra_files() {
+make_masd_physical_delete_extra_files() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("delete_extra_files");
-    r.name().qualified("masd.extraction.delete_extra_files");
+    r.name().qualified("masd.physical.delete_extra_files");
     r.description(R"(If true, any files the code generator is not aware of are deleted.
 
 If you'd like to skip the deletion of certain files, set  "ignore_files_matching_regex" accordingly.
@@ -67,11 +67,11 @@ If you'd like to skip the deletion of certain files, set  "ignore_files_matching
 }
 
 dogen::variability::entities::feature
-make_masd_extraction_ignore_files_matching_regex() {
+make_masd_physical_ignore_files_matching_regex() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("ignore_files_matching_regex");
-    r.name().qualified("masd.extraction.ignore_files_matching_regex");
+    r.name().qualified("masd.physical.ignore_files_matching_regex");
     r.description(R"(Regular expressions to filter files prior to deletion.
 
 Only applicable if "delete_extra_files" is enabled.
@@ -84,11 +84,11 @@ Only applicable if "delete_extra_files" is enabled.
 }
 
 dogen::variability::entities::feature
-make_masd_extraction_delete_empty_directories() {
+make_masd_physical_delete_empty_directories() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("delete_empty_directories");
-    r.name().qualified("masd.extraction.delete_empty_directories");
+    r.name().qualified("masd.physical.delete_empty_directories");
     r.description(R"(If true, all directories without any files will be deleted.
 
 This setting is recursive: if a directory is composed of one or more directories that
@@ -104,11 +104,11 @@ are themselves empty, the entire directory tree is deleted.
 }
 
 dogen::variability::entities::feature
-make_masd_extraction_enable_backend_directories() {
+make_masd_physical_enable_backend_directories() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("enable_backend_directories");
-    r.name().qualified("masd.extraction.enable_backend_directories");
+    r.name().qualified("masd.physical.enable_backend_directories");
     r.description(R"(If true, a directory is created for each technical space targeted.
 
 Note that this setting is only relevant if you are targetting a single output technical
@@ -130,11 +130,11 @@ filesystem::make_feature_group(const dogen::variability::entities::feature_model
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
-    r.force_write = s.get_by_name("masd.extraction.force_write");
-    r.delete_extra_files = s.get_by_name("masd.extraction.delete_extra_files");
-    r.ignore_files_matching_regex = s.get_by_name("masd.extraction.ignore_files_matching_regex");
-    r.delete_empty_directories = s.get_by_name("masd.extraction.delete_empty_directories");
-    r.enable_backend_directories = s.get_by_name("masd.extraction.enable_backend_directories");
+    r.force_write = s.get_by_name("masd.physical.force_write");
+    r.delete_extra_files = s.get_by_name("masd.physical.delete_extra_files");
+    r.ignore_files_matching_regex = s.get_by_name("masd.physical.ignore_files_matching_regex");
+    r.delete_empty_directories = s.get_by_name("masd.physical.delete_empty_directories");
+    r.enable_backend_directories = s.get_by_name("masd.physical.enable_backend_directories");
 
     return r;
 }
@@ -158,11 +158,11 @@ std::list<dogen::variability::entities::feature>
 filesystem::make_features() {
     using namespace dogen::variability::entities;
     std::list<dogen::variability::entities::feature> r;
-    r.push_back(make_masd_extraction_force_write());
-    r.push_back(make_masd_extraction_delete_extra_files());
-    r.push_back(make_masd_extraction_ignore_files_matching_regex());
-    r.push_back(make_masd_extraction_delete_empty_directories());
-    r.push_back(make_masd_extraction_enable_backend_directories());
+    r.push_back(make_masd_physical_force_write());
+    r.push_back(make_masd_physical_delete_extra_files());
+    r.push_back(make_masd_physical_ignore_files_matching_regex());
+    r.push_back(make_masd_physical_delete_empty_directories());
+    r.push_back(make_masd_physical_enable_backend_directories());
     return r;
 }
 

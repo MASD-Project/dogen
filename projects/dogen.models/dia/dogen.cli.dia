@@ -107,8 +107,8 @@
 #DOGEN masd.injection.reference=masd
 #DOGEN masd.injection.reference=masd.variability
 #DOGEN masd.injection.reference=dogen.profiles
-#DOGEN masd.extraction.ignore_files_matching_regex=.*/test/.*
-#DOGEN masd.extraction.ignore_files_matching_regex=.*/tests/.*
+#DOGEN masd.physical.ignore_files_matching_regex=.*/test/.*
+#DOGEN masd.physical.ignore_files_matching_regex=.*/tests/.*
 #DOGEN masd.variability.profile=dogen.profiles.base.default_profile#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

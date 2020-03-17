@@ -28,11 +28,11 @@ namespace dogen::logical::features {
 namespace {
 
 dogen::variability::entities::feature
-make_masd_extraction_output_technical_space() {
+make_masd_physical_output_technical_space() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("output_technical_space");
-    r.name().qualified("masd.extraction.output_technical_space");
+    r.name().qualified("masd.physical.output_technical_space");
     r.description(R"(Set of output technical spaces that this model targets.
 
 )");
@@ -49,7 +49,7 @@ output_technical_space::make_feature_group(const dogen::variability::entities::f
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
-    r.output_technical_space = s.get_by_name("masd.extraction.output_technical_space");
+    r.output_technical_space = s.get_by_name("masd.physical.output_technical_space");
 
     return r;
 }
@@ -69,7 +69,7 @@ std::list<dogen::variability::entities::feature>
 output_technical_space::make_features() {
     using namespace dogen::variability::entities;
     std::list<dogen::variability::entities::feature> r;
-    r.push_back(make_masd_extraction_output_technical_space());
+    r.push_back(make_masd_physical_output_technical_space());
     return r;
 }
 

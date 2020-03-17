@@ -239,8 +239,8 @@ level.
 #DOGEN masd.injection.input_technical_space=cpp
 #DOGEN masd.injection.reference=cpp.std
 #DOGEN masd.injection.reference=masd
-#DOGEN masd.extraction.delete_extra_files=true
-#DOGEN masd.extraction.delete_empty_directories=true
+#DOGEN masd.physical.delete_extra_files=true
+#DOGEN masd.physical.delete_empty_directories=true
 #DOGEN masd.generation.cpp.enabled=true
 #DOGEN masd.generation.cpp.standard=c++-17
 #DOGEN masd.generation.cpp.msbuild.enabled=false

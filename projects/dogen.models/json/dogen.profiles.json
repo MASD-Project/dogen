@@ -61,7 +61,7 @@
         "masd::variability::profile"
       ],
       "tagged_values": {
-        "masd.variability.key_prefix": "masd.extraction"
+        "masd.variability.key_prefix": "masd.physical"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
