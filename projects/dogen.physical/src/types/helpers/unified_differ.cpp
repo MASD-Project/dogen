@@ -18,12 +18,55 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/string/differ.hpp"
 #include "dogen.physical/types/helpers/unified_differ.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("physical.helpers.unified_differ"));
+
+const std::string empty;
+
+/**
+ * @brief Creates the unified diff header.
+ */
+void compose_header(const boost::filesystem::path& base,
+    const boost::filesystem::path& a_path, const std::string&  info,
+    std::ostream& s) {
+
+    auto rp(a_path.lexically_relative(base));
+    const auto gs(rp.generic().generic_string());
+    s << "diff -u " << gs << " " << gs << std::endl
+      << info << std::endl
+      << "---  " << gs << std::endl
+      << "+++  " << gs << std::endl;
+}
+
+}
 
 namespace dogen::physical::helpers {
 
-bool unified_differ::operator==(const unified_differ& /*rhs*/) const {
-    return true;
+std::string unified_differ::diff(const std::string& a, const std::string& b,
+    const boost::filesystem::path& base,
+    const boost::filesystem::path& a_path,
+    const std::string& info) {
+
+    BOOST_LOG_SEV(lg, debug) << "Diffing: " << a_path.generic();
+
+    std::ostringstream s;
+    compose_header(base, a_path, info, s);
+    const auto has_diffs(utility::string::differ::diff(a, b, s));
+    if (has_diffs) {
+        const auto r(s.str());
+        BOOST_LOG_SEV(lg, debug) << "Diff: " << r;
+        return r;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "No diffs found.";
+    return empty;
 }
 
 }

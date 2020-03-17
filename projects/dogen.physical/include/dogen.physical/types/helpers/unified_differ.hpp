@@ -25,24 +25,17 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <boost/filesystem/path.hpp>
 
 namespace dogen::physical::helpers {
 
 class unified_differ final {
 public:
-    unified_differ() = default;
-    unified_differ(const unified_differ&) = default;
-    unified_differ(unified_differ&&) = default;
-    ~unified_differ() = default;
-    unified_differ& operator=(const unified_differ&) = default;
-
-public:
-    bool operator==(const unified_differ& rhs) const;
-    bool operator!=(const unified_differ& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static std::string diff(const std::string& a, const std::string& b,
+        const boost::filesystem::path& base,
+        const boost::filesystem::path& a_path,
+        const std::string& info);
 };
 
 }
