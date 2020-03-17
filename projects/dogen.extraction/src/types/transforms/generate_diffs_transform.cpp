@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <dtl/dtl.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"

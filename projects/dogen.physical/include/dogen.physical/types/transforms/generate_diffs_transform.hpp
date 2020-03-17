@@ -25,24 +25,18 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.physical/types/transforms/context.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 
 namespace dogen::physical::transforms {
 
+/**
+ * @brief Populates artefacts with a unified diff representation
+ * between files in the filesystem and the generated content.
+ */
 class generate_diffs_transform final {
 public:
-    generate_diffs_transform() = default;
-    generate_diffs_transform(const generate_diffs_transform&) = default;
-    generate_diffs_transform(generate_diffs_transform&&) = default;
-    ~generate_diffs_transform() = default;
-    generate_diffs_transform& operator=(const generate_diffs_transform&) = default;
-
-public:
-    bool operator==(const generate_diffs_transform& rhs) const;
-    bool operator!=(const generate_diffs_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }
