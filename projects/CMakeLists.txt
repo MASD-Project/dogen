@@ -275,7 +275,6 @@ if (WITH_RELATIONAL_SUPPORT)
         )
 endif()
 
-
 get_directory_property(dirs INCLUDE_DIRECTORIES)
 set(global_includes "")
 foreach(dir IN LISTS dirs)

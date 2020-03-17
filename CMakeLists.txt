@@ -435,6 +435,19 @@ if (WITH_RELATIONAL_SUPPORT)
 endif()
 
 #
+# Determine if MSVC-specific libraries are required.
+#
+set(USE_MSVC_LIBS OFF)
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+    if ("${CMAKE_CXX_SIMULATE_ID}" STREQUAL "MSVC")
+        set(USE_MSVC_LIBS ON)
+    endif ()
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
+    set(USE_MSVC_LIBS ON)
+endif ()
+message(STATUS "MSVC-specific libraries: ${USE_MSVC_LIBS}")
+
+#
 # Dogen
 #
 

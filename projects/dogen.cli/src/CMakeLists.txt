@@ -38,6 +38,8 @@ set_target_properties(${lib_target_name}
 target_link_libraries(${lib_target_name}
     dogen.lib
     dogen.utility.lib
+    dogen.orchestration.lib
+    $<$<BOOL:${USE_MSVC_LIBS}>:bcrypt>
     ${Boost_LIBRARIES})
 
 install(TARGETS ${lib_target_name}
@@ -55,20 +57,8 @@ add_executable(${exe_target_name} ${exe_files})
 set_target_properties(${exe_target_name} PROPERTIES
     OUTPUT_NAME ${exe_binary_name})
 
-set(use_msvc_libs OFF)
-if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-    if ("${CMAKE_CXX_SIMULATE_ID}" STREQUAL "MSVC")
-        set(use_msvc_libs ON)
-    endif ()
-elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC")
-    set(use_msvc_libs ON)
-endif ()
-
 target_link_libraries(${exe_target_name}
     ${lib_target_name}
-    dogen.lib
-    dogen.orchestration.lib
-    $<$<BOOL:${use_msvc_libs}>:bcrypt>
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES}
