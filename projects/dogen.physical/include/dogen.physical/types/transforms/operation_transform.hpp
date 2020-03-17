@@ -25,24 +25,20 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.physical/types/transforms/context.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 
 namespace dogen::physical::transforms {
 
+/**
+ * @brief Updates the operation property of the artefacts.
+ */
 class operation_transform final {
-public:
-    operation_transform() = default;
-    operation_transform(const operation_transform&) = default;
-    operation_transform(operation_transform&&) = default;
-    ~operation_transform() = default;
-    operation_transform& operator=(const operation_transform&) = default;
+private:
+    static void apply(entities::artefact& a, const bool force_write);
 
 public:
-    bool operator==(const operation_transform& rhs) const;
-    bool operator!=(const operation_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, entities::model& m);
 };
 
 }

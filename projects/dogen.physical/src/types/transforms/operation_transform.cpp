@@ -18,12 +18,126 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/filesystem.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/filesystem/path.hpp"
+#include "dogen.utility/types/filesystem/file.hpp"
+#include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.physical/io/entities/model_io.hpp"
+#include "dogen.physical/io/entities/operation_type_io.hpp"
+#include "dogen.physical/io/helpers/files_by_status_io.hpp"
+#include "dogen.physical/types/helpers/file_status_collector.hpp"
+#include "dogen.physical/types/transforms/transform_exception.hpp"
 #include "dogen.physical/types/transforms/operation_transform.hpp"
+
+namespace {
+
+const std::string transform_id(
+    "physical.transforms.operation_transform");
+
+using namespace dogen::utility::log;
+auto lg(logger_factory(transform_id));
+
+const std::string unexpected_operation(
+    "Operation not expected by transform: ");
+
+}
 
 namespace dogen::physical::transforms {
 
-bool operation_transform::operator==(const operation_transform& /*rhs*/) const {
-    return true;
+void operation_transform::
+apply(entities::artefact& a, const bool force_write) {
+    const auto p(a.paths().absolute());
+    const auto gs(p.generic());
+    BOOST_LOG_SEV(lg, trace) << "Processing: " << gs;
+
+    // FIXME: HACK: we seemt to have some blank artefacts atm.
+    if (p.empty())
+        return;
+
+    /*
+     * We only expect artefacts with a limited range of operation
+     * types. If this artefact is aksing for anything else, throw.
+     */
+    using physical::entities::operation_type;
+    const auto ot(a.operation().type());
+    if (ot != operation_type::create_only && ot != operation_type::write) {
+        const auto s(boost::lexical_cast<std::string>(ot));
+        BOOST_LOG_SEV(lg, error) << unexpected_operation << ot;
+        BOOST_THROW_EXCEPTION(
+            transform_exception(unexpected_operation + s));
+    }
+
+    /*
+     * If the file does not yet exist, it must be a newly
+     * generated file. If the user requested create only, we can
+     * safely bump it to write.
+     */
+    using physical::entities::operation_reason;
+    if (!boost::filesystem::exists(p)) {
+        a.operation().type(operation_type::write);
+        a.operation().reason(operation_reason::newly_generated);
+        BOOST_LOG_SEV(lg, trace) << "File does not yet exist for artefact.";
+        return;
+    }
+
+    /*
+     * The file already exists. Check to see if the user requested
+     * to create it only if it doesn't yet exist; if so, we are
+     * now safe to ignore it.
+     */
+    if (ot == operation_type::create_only) {
+        a.operation().type(operation_type::ignore);
+        a.operation().reason(operation_reason::already_exists);
+        BOOST_LOG_SEV(lg, trace) << "Ignoring file as it is create only.";
+        return;
+    }
+
+    /*
+     * If the user requested force write, we should always write
+     * regardlesss of contents. However, note that this does not
+     * apply to create only, which has already been handled above.
+     */
+    if (force_write) {
+        a.operation().reason(operation_reason::force_write);
+        BOOST_LOG_SEV(lg, trace) << "Force write is on so writing.";
+        return;
+    }
+
+    /*
+     * Check if there is a need to write or not. For this we
+     * perform a binary diff of the file content; if it has
+     * changed, we need to write.
+     */
+    using dogen::utility::filesystem::read_file_content;
+    const std::string c(read_file_content(p));
+    if (c == a.content()) {
+        a.operation().type(operation_type::ignore);
+        a.operation().reason(operation_reason::unchanged_generated);
+        BOOST_LOG_SEV(lg, trace) << "File contents have not changed.";
+        return;
+    }
+
+    /*
+     * The last scenario is a generated file which has been
+     * changed.
+     */
+    BOOST_LOG_SEV(lg, trace) << "File contents have changed.";
+    a.operation().reason(operation_reason::changed_generated);
+
+}
+
+void operation_transform::apply(const context& ctx, entities::model& m) {
+    tracing::scoped_transform_tracer stp(lg,
+        "operation transform", transform_id, m.name(),
+        *ctx.tracer(), m);
+
+    for (auto& a : m.artefacts())
+        apply(a, m.outputting_properties().force_write());
+
+    stp.end_transform(m);
 }
 
 }
