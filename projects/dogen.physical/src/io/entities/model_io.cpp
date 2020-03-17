@@ -52,17 +52,13 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::artefact>& v) {
-    s << "[";
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::physical::entities::artefact>& v) {
+    s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
+        s << *i;
     }
-    s << " ] ";
+    s << "] ";
     return s;
 }
 

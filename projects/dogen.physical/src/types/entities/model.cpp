@@ -38,7 +38,7 @@ model::model(
     const dogen::physical::entities::logical_location& logical_location,
     const std::string& name,
     const std::string& technical_space,
-    const std::unordered_map<std::string, dogen::physical::entities::artefact>& artefacts,
+    const std::list<dogen::physical::entities::artefact>& artefacts,
     const std::list<boost::filesystem::path>& managed_directories,
     const dogen::physical::entities::outputting_properties& outputting_properties)
     : configuration_(configuration),
@@ -159,19 +159,19 @@ void model::technical_space(const std::string&& v) {
     technical_space_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::physical::entities::artefact>& model::artefacts() const {
+const std::list<dogen::physical::entities::artefact>& model::artefacts() const {
     return artefacts_;
 }
 
-std::unordered_map<std::string, dogen::physical::entities::artefact>& model::artefacts() {
+std::list<dogen::physical::entities::artefact>& model::artefacts() {
     return artefacts_;
 }
 
-void model::artefacts(const std::unordered_map<std::string, dogen::physical::entities::artefact>& v) {
+void model::artefacts(const std::list<dogen::physical::entities::artefact>& v) {
     artefacts_ = v;
 }
 
-void model::artefacts(const std::unordered_map<std::string, dogen::physical::entities::artefact>&& v) {
+void model::artefacts(const std::list<dogen::physical::entities::artefact>&& v) {
     artefacts_ = std::move(v);
 }
 

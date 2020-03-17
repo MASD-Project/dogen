@@ -4202,7 +4202,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
             <dia:string>#artefacts#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, artefact&gt;#</dia:string>
+            <dia:string>#std::list&lt;artefact&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -6458,7 +6458,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
             <dia:string>#paths#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, paths&gt;#</dia:string>
+            <dia:string>#paths#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

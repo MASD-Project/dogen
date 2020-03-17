@@ -28,7 +28,6 @@
 #include <list>
 #include <string>
 #include <algorithm>
-#include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen.physical/types/entities/artefact.hpp"
@@ -55,7 +54,7 @@ public:
         const dogen::physical::entities::logical_location& logical_location,
         const std::string& name,
         const std::string& technical_space,
-        const std::unordered_map<std::string, dogen::physical::entities::artefact>& artefacts,
+        const std::list<dogen::physical::entities::artefact>& artefacts,
         const std::list<boost::filesystem::path>& managed_directories,
         const dogen::physical::entities::outputting_properties& outputting_properties);
 
@@ -105,10 +104,10 @@ public:
     void technical_space(const std::string&& v);
     /**@}*/
 
-    const std::unordered_map<std::string, dogen::physical::entities::artefact>& artefacts() const;
-    std::unordered_map<std::string, dogen::physical::entities::artefact>& artefacts();
-    void artefacts(const std::unordered_map<std::string, dogen::physical::entities::artefact>& v);
-    void artefacts(const std::unordered_map<std::string, dogen::physical::entities::artefact>&& v);
+    const std::list<dogen::physical::entities::artefact>& artefacts() const;
+    std::list<dogen::physical::entities::artefact>& artefacts();
+    void artefacts(const std::list<dogen::physical::entities::artefact>& v);
+    void artefacts(const std::list<dogen::physical::entities::artefact>&& v);
 
     const std::list<boost::filesystem::path>& managed_directories() const;
     std::list<boost::filesystem::path>& managed_directories();
@@ -136,7 +135,7 @@ private:
     dogen::physical::entities::logical_location logical_location_;
     std::string name_;
     std::string technical_space_;
-    std::unordered_map<std::string, dogen::physical::entities::artefact> artefacts_;
+    std::list<dogen::physical::entities::artefact> artefacts_;
     std::list<boost::filesystem::path> managed_directories_;
     dogen::physical::entities::outputting_properties outputting_properties_;
 };

@@ -40,7 +40,7 @@ artefact::artefact(
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::string& origin_sha1_hash,
     const dogen::physical::entities::logical_location& logical_location,
-    const std::unordered_map<std::string, dogen::physical::entities::paths>& paths,
+    const dogen::physical::entities::paths& paths,
     const std::string& content,
     const bool enabled,
     const bool overwrite,
@@ -143,19 +143,19 @@ void artefact::logical_location(const dogen::physical::entities::logical_locatio
     logical_location_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::physical::entities::paths>& artefact::paths() const {
+const dogen::physical::entities::paths& artefact::paths() const {
     return paths_;
 }
 
-std::unordered_map<std::string, dogen::physical::entities::paths>& artefact::paths() {
+dogen::physical::entities::paths& artefact::paths() {
     return paths_;
 }
 
-void artefact::paths(const std::unordered_map<std::string, dogen::physical::entities::paths>& v) {
+void artefact::paths(const dogen::physical::entities::paths& v) {
     paths_ = v;
 }
 
-void artefact::paths(const std::unordered_map<std::string, dogen::physical::entities::paths>&& v) {
+void artefact::paths(const dogen::physical::entities::paths&& v) {
     paths_ = std::move(v);
 }
 

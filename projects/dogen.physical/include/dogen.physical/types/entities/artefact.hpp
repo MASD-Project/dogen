@@ -28,7 +28,6 @@
 #include <string>
 #include <vector>
 #include <algorithm>
-#include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen.physical/types/entities/paths.hpp"
@@ -56,7 +55,7 @@ public:
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::string& origin_sha1_hash,
         const dogen::physical::entities::logical_location& logical_location,
-        const std::unordered_map<std::string, dogen::physical::entities::paths>& paths,
+        const dogen::physical::entities::paths& paths,
         const std::string& content,
         const bool enabled,
         const bool overwrite,
@@ -96,10 +95,10 @@ public:
     void logical_location(const dogen::physical::entities::logical_location&& v);
     /**@}*/
 
-    const std::unordered_map<std::string, dogen::physical::entities::paths>& paths() const;
-    std::unordered_map<std::string, dogen::physical::entities::paths>& paths();
-    void paths(const std::unordered_map<std::string, dogen::physical::entities::paths>& v);
-    void paths(const std::unordered_map<std::string, dogen::physical::entities::paths>&& v);
+    const dogen::physical::entities::paths& paths() const;
+    dogen::physical::entities::paths& paths();
+    void paths(const dogen::physical::entities::paths& v);
+    void paths(const dogen::physical::entities::paths&& v);
 
     /**
      * @brief Content of the file.
@@ -166,7 +165,7 @@ private:
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     std::string origin_sha1_hash_;
     dogen::physical::entities::logical_location logical_location_;
-    std::unordered_map<std::string, dogen::physical::entities::paths> paths_;
+    dogen::physical::entities::paths paths_;
     std::string content_;
     bool enabled_;
     bool overwrite_;

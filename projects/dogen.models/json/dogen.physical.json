@@ -393,7 +393,7 @@
         },
         {
           "name": "artefacts",
-          "type": "std::unordered_map<std::string, artefact>"
+          "type": "std::list<artefact>"
         },
         {
           "name": "managed_directories",
@@ -594,7 +594,7 @@
       "attributes": [
         {
           "name": "paths",
-          "type": "std::unordered_map<std::string, paths>"
+          "type": "paths"
         },
         {
           "name": "content",
