@@ -51,7 +51,7 @@ target_link_libraries(${lib_target_name}
     dogen.physical.lib
     dogen.variability.lib
     dogen.dia.lib
-    dogen.extraction.lib
+    dogen.physical.lib
     dogen.injection.lib
     dogen.injection.json.lib
     dogen.injection.dia.lib

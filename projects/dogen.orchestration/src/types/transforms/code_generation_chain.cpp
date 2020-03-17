@@ -20,8 +20,8 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.extraction/io/entities/model_io.hpp"
-#include "dogen.extraction/types/transforms/code_generation_chain.hpp"
+#include "dogen.physical/io/entities/model_io.hpp"
+#include "dogen.physical/types/transforms/code_generation_chain.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
 #include "dogen.orchestration/types/transforms/extraction_model_production_chain.hpp"
 #include "dogen.orchestration/types/transforms/code_generation_chain.hpp"
@@ -56,7 +56,7 @@ void code_generation_chain::apply(const context& ctx,
     /*
      * Runn all of the extraction transforms against the extraction models.
      */
-    using extraction::transforms::code_generation_chain;
+    using physical::transforms::code_generation_chain;
     code_generation_chain::apply(ctx.extraction_context(), m);
 
     stp.end_chain(m);

@@ -82,7 +82,7 @@ std::list<std::string> exception_header_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-extraction::entities::artefact exception_header_formatter::
+physical::entities::artefact exception_header_formatter::
 format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
     const auto& ye(a.as<logical::entities::structural::exception>(e));

@@ -52,7 +52,7 @@ inclusion_dependencies(
     return builder.build();
 }
 
-extraction::entities::artefact type_registrar_implementation_formatter::
+physical::entities::artefact type_registrar_implementation_formatter::
 format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& rg(a.as<logical::entities::serialization::type_registrar>(e));

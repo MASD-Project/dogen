@@ -107,7 +107,7 @@
 #DOGEN masd.injection.reference=dogen.injection
 #DOGEN masd.injection.reference=dogen.logical
 #DOGEN masd.injection.reference=dogen.generation
-#DOGEN masd.injection.reference=dogen.extraction
+#DOGEN masd.injection.reference=dogen.physical
 #DOGEN masd.injection.reference=masd
 #DOGEN masd.injection.reference=masd.variability
 #DOGEN masd.injection.reference=dogen.profiles
@@ -1060,7 +1060,7 @@
             <dia:string>#extraction_context#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#extraction::transforms::context#</dia:string>
+            <dia:string>#physical::transforms::context#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

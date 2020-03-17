@@ -65,7 +65,7 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
     return r;
 }
 
-extraction::entities::artefact class_formatter::
+physical::entities::artefact class_formatter::
 format(const context& ctx, const logical::entities::element& e) const {
     const auto id(e.name().qualified().dot());
     assistant a(ctx, e, archetype_location());

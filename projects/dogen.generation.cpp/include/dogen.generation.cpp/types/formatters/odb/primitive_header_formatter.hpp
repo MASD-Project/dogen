@@ -56,7 +56,7 @@ public:
         const logical::entities::name& n) const override;
 
 public:
-    extraction::entities::artefact format(const context& ctx,
+    physical::entities::artefact format(const context& ctx,
         const logical::entities::element& e) const override;
 };
 

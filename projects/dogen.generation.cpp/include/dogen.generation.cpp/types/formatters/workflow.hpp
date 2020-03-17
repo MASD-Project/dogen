@@ -33,7 +33,7 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "dogen.variability/types/helpers/configuration_factory.hpp"
-#include "dogen.extraction/types/entities/artefact.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.generation/types/entities/element_archetype.hpp"
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
@@ -65,14 +65,14 @@ private:
         const std::string& archetype) const;
 
 private:
-    std::list<extraction::entities::artefact>
+    std::list<physical::entities::artefact>
     format(const std::unordered_set<generation::entities::element_archetype>&
         enabled_archetype_for_element, const formattables::model& fm,
         const logical::entities::element& e,
         const formattables::element_properties& ep) const;
 
 public:
-    std::list<extraction::entities::artefact>
+    std::list<physical::entities::artefact>
     execute(const std::unordered_set<generation::entities::element_archetype>&
         enabled_archetype_for_element, const formattables::model& fm) const;
 

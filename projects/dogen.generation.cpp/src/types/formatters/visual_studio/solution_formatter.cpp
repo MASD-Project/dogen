@@ -93,7 +93,7 @@ std::list<std::string> solution_formatter::inclusion_dependencies(
     return r;
 }
 
-extraction::entities::artefact solution_formatter::
+physical::entities::artefact solution_formatter::
 format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     using logical::entities::visual_studio::solution;

@@ -89,7 +89,7 @@ std::string model_to_extraction_model_transform::description() const {
     return ::description;
 }
 
-std::list<extraction::entities::artefact>
+std::list<physical::entities::artefact>
 model_to_extraction_model_transform::
 format(const std::unordered_set<generation::entities::element_archetype>&
     enabled_archetype_for_element, const formattables::locator& l,
@@ -142,7 +142,7 @@ model_to_extraction_model_transform::technical_space() const {
     return logical::entities::technical_space::cpp;
 }
 
-extraction::entities::model model_to_extraction_model_transform::apply(
+physical::entities::model model_to_extraction_model_transform::apply(
     const generation::transforms::context& ctx,
     const bool enable_backend_directories,
     const generation::entities::model& m) const {
@@ -170,7 +170,7 @@ extraction::entities::model model_to_extraction_model_transform::apply(
     /*
      * Code-generate all artefacts.
      */
-    extraction::entities::model r;
+    physical::entities::model r;
     const auto& eafe(m.enabled_archetype_for_element());
     using variability::helpers::configuration_factory;
     const configuration_factory cf(feature_model, false/*compatibility_model*/);

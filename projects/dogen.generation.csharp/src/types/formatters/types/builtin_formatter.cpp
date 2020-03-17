@@ -64,9 +64,9 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
     return r;
 }
 
-extraction::entities::artefact builtin_formatter::
+physical::entities::artefact builtin_formatter::
 format(const context& /*ctx*/, const logical::entities::element& /*e*/) const {
-    extraction::entities::artefact r;
+    physical::entities::artefact r;
     return r;
 }
 

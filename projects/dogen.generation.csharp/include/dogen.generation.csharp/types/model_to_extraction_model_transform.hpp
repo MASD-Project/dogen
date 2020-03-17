@@ -61,7 +61,7 @@ private:
         const formatters::repository& frp, const formattables::locator & l,
         const generation::entities::model& m) const;
 
-    std::list<extraction::entities::artefact>
+    std::list<physical::entities::artefact>
     format(const formattables::model& fm) const;
 
 public:
@@ -84,7 +84,7 @@ public:
 
     logical::entities::technical_space technical_space() const override;
 
-    extraction::entities::model
+    physical::entities::model
     apply(const generation::transforms::context& ctx,
         const bool enable_backend_directories,
         const generation::entities::model& m) const override;

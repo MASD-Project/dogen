@@ -35,7 +35,7 @@
 #include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
 #include "dogen.generation/types/entities/model.hpp"
-#include "dogen.extraction/types/entities/model.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 
 namespace dogen::generation::transforms {
 
@@ -102,7 +102,7 @@ public:
      * @brief Generates the text model representation for this
      * transform.
      */
-    virtual extraction::entities::model
+    virtual physical::entities::model
     apply(const generation::transforms::context& ctx,
         const bool requires_backend_directory,
         const generation::entities::model& m) const = 0;

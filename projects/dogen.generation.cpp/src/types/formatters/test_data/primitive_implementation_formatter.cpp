@@ -96,7 +96,7 @@ std::list<std::string> primitive_implementation_formatter::inclusion_dependencie
     return builder.build();
 }
 
-extraction::entities::artefact primitive_implementation_formatter::
+physical::entities::artefact primitive_implementation_formatter::
 format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& p(a.as<logical::entities::structural::primitive>(e));

@@ -88,7 +88,7 @@ private:
     /**
      * @brief Create the files representation of the formattables model.
      */
-    std::list<extraction::entities::artefact>
+    std::list<physical::entities::artefact>
     format(const std::unordered_set<generation::entities::element_archetype>&
         enabled_archetype_for_element, const formattables::locator& l,
         const variability::entities::feature_model& feature_model,
@@ -121,7 +121,7 @@ public:
 
     logical::entities::technical_space technical_space() const override;
 
-    extraction::entities::model
+    physical::entities::model
     apply(const generation::transforms::context& ctx,
         const bool enable_backend_directories,
         const generation::entities::model& m) const override;

@@ -100,7 +100,7 @@ std::list<std::string> main_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-extraction::entities::artefact main_formatter::
+physical::entities::artefact main_formatter::
 format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     using logical::entities::structural::entry_point;

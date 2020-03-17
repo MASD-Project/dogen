@@ -250,14 +250,14 @@ instantiator::create_text_template(const boost::filesystem::path& input_path,
     }
 }
 
-extraction::entities::artefact
+physical::entities::artefact
 instantiator::format_text_template(const text_template& tt) const {
     formatter fmt;
     const auto r(fmt.format(tt));
     return r;
 }
 
-extraction::entities::artefact
+physical::entities::artefact
 instantiator::instantiate(const boost::filesystem::path& input_path,
     const std::unordered_map<std::string, std::string>& kvps) const {
     BOOST_LOG_SEV(lg, debug) << "Instantiating: "

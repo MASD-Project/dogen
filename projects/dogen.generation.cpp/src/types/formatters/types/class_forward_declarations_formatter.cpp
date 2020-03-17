@@ -75,7 +75,7 @@ std::list<std::string> class_forward_declarations_formatter::inclusion_dependenc
     return r;
 }
 
-extraction::entities::artefact class_forward_declarations_formatter::
+physical::entities::artefact class_forward_declarations_formatter::
 format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
     const auto& o(a.as<logical::entities::structural::object>(e));

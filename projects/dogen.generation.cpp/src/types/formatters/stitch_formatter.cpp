@@ -52,7 +52,7 @@ bool stitch_formatter::is_header(const inclusion_support_types ist) const {
         ist == inclusion_support_types::canonical_support;
 }
 
-extraction::entities::artefact stitch_formatter::
+physical::entities::artefact stitch_formatter::
 format(const artefact_formatter_interface& stock_formatter, const context& ctx,
     const logical::entities::element& e) const {
     const auto al(stock_formatter.archetype_location());
@@ -74,13 +74,13 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
         BOOST_LOG_SEV(lg, debug) << "Stitch template not found: "
                                  << fp.generic_string();
 
-        extraction::entities::artefact r;
+        physical::entities::artefact r;
         // FIXME: what is the name/path for the artefact?! This may
         // FIXME: explain empty artefacts!
         r.overwrite(a.new_artefact_properties().overwrite());
 
-        extraction::entities::operation op;
-        using ot = extraction::entities::operation_type;
+        physical::entities::operation op;
+        using ot = physical::entities::operation_type;
         op.type(r.overwrite() ? ot::write : ot::create_only);
         r.operation(op);
 
@@ -105,8 +105,8 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
     auto r(instantiator_.instantiate(stitch_template, external_keys));
     r.overwrite(a.new_artefact_properties().overwrite());
 
-    extraction::entities::operation op;
-    using ot = extraction::entities::operation_type;
+    physical::entities::operation op;
+    using ot = physical::entities::operation_type;
     op.type(r.overwrite() ? ot::write : ot::create_only);
     r.operation(op);
 

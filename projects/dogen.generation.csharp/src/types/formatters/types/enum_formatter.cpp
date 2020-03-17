@@ -65,7 +65,7 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
     return r;
 }
 
-extraction::entities::artefact enum_formatter::
+physical::entities::artefact enum_formatter::
 format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location());
     const auto& ye(a.as<logical::entities::structural::enumeration>(static_id(), e));

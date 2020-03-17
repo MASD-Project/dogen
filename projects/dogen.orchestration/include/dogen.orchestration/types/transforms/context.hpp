@@ -27,8 +27,8 @@
 
 #include <algorithm>
 #include "dogen.logical/types/transforms/context.hpp"
+#include "dogen.physical/types/transforms/context.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
-#include "dogen.extraction/types/transforms/context.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
 
@@ -47,7 +47,7 @@ public:
         const dogen::injection::transforms::context& injection_context,
         const dogen::logical::transforms::context& assets_context,
         const dogen::generation::transforms::context& generation_context,
-        const dogen::extraction::transforms::context& extraction_context);
+        const dogen::physical::transforms::context& extraction_context);
 
 public:
     const dogen::variability::transforms::context& variability_context() const;
@@ -70,10 +70,10 @@ public:
     void generation_context(const dogen::generation::transforms::context& v);
     void generation_context(const dogen::generation::transforms::context&& v);
 
-    const dogen::extraction::transforms::context& extraction_context() const;
-    dogen::extraction::transforms::context& extraction_context();
-    void extraction_context(const dogen::extraction::transforms::context& v);
-    void extraction_context(const dogen::extraction::transforms::context&& v);
+    const dogen::physical::transforms::context& extraction_context() const;
+    dogen::physical::transforms::context& extraction_context();
+    void extraction_context(const dogen::physical::transforms::context& v);
+    void extraction_context(const dogen::physical::transforms::context&& v);
 
 public:
     bool operator==(const context& rhs) const;
@@ -90,7 +90,7 @@ private:
     dogen::injection::transforms::context injection_context_;
     dogen::logical::transforms::context assets_context_;
     dogen::generation::transforms::context generation_context_;
-    dogen::extraction::transforms::context extraction_context_;
+    dogen::physical::transforms::context extraction_context_;
 };
 
 }

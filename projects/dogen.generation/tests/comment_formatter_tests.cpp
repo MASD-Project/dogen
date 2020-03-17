@@ -28,7 +28,7 @@
 namespace {
 
 const std::string empty;
-const std::string test_module("dogen.extraction.tests");
+const std::string test_module("dogen.physical.tests");
 const std::string test_suite("comment_formatter_tests");
 
 const std::string c_style_empty(R"(/*

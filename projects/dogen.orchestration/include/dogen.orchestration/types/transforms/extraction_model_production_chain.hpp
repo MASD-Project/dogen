@@ -26,14 +26,14 @@
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include "dogen.extraction/types/entities/model.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 #include "dogen.orchestration/types/transforms/context_fwd.hpp"
 
 namespace dogen::orchestration::transforms {
 
 class extraction_model_production_chain final {
 public:
-    static extraction::entities::model apply(const context& ctx,
+    static physical::entities::model apply(const context& ctx,
         const boost::filesystem::path& target);
 };
 

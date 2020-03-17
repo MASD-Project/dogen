@@ -77,10 +77,10 @@ std::list<std::string> builtin_header_formatter::inclusion_dependencies(
     return r;
 }
 
-extraction::entities::artefact builtin_header_formatter::
+physical::entities::artefact builtin_header_formatter::
 format(const context& /*ctx*/, const logical::entities::element& e) const {
-    extraction::entities::artefact r;
-    r.origin_element_id(e.origin_element_id());
+    physical::entities::artefact r;
+    r.logical_location().qualified_name(e.name().qualified().dot());
     r.origin_sha1_hash(e.origin_sha1_hash());
     return r;
 }

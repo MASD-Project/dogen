@@ -29,7 +29,7 @@
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.utility/types/test_data/dogen_generation.hpp"
 #include "dogen.utility/types/test_data/cpp_ref_impl_generation.hpp"
-#include "dogen.extraction/io/entities/operation_io.hpp"
+#include "dogen.physical/io/entities/operation_io.hpp"
 #include "dogen.orchestration/types/transforms/scoped_context_manager.hpp"
 #include "dogen.orchestration/types/transforms/code_generation_chain.hpp"
 
@@ -124,7 +124,7 @@ void execute_code_generation_transform(const boost::filesystem::path& target,
     /*
      * Execute the code generation transform.
      */
-    using namespace dogen::extraction::transforms;
+    using namespace dogen::physical::transforms;
     code_generation_chain::apply(ctx, target);
 }
 

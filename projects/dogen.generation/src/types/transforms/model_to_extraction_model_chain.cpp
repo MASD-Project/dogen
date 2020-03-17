@@ -24,7 +24,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.logical/io/entities/technical_space_io.hpp"
-#include "dogen.extraction/io/entities/model_io.hpp"
+#include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.generation/io/entities/model_io.hpp"
 #include "dogen.generation/types/transforms/transformation_error.hpp"
 #include "dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
@@ -59,15 +59,16 @@ model_to_extraction_model_chain::registrar() {
 }
 
 void model_to_extraction_model_chain::
-merge(extraction::entities::model&& src, extraction::entities::model& dst) {
-    dst.origin_element_id(src.origin_element_id());
+merge(physical::entities::model&& src, physical::entities::model& dst) {
+    dst.logical_location().qualified_name(
+        src.logical_location().qualified_name());
     dst.origin_sha1_hash(src.origin_sha1_hash());
     dst.artefacts().splice(dst.artefacts().end(), src.artefacts());
     dst.managed_directories().splice(dst.managed_directories().end(),
         src.managed_directories());
 }
 
-extraction::entities::model model_to_extraction_model_chain::
+physical::entities::model model_to_extraction_model_chain::
 apply(const generation::transforms::context& ctx,
     const generation::entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Transforming model: "
@@ -79,7 +80,7 @@ apply(const generation::transforms::context& ctx,
      */
     if (!m.has_generatable_types()) {
         BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
-        return extraction::entities::model();
+        return physical::entities::model();
     }
 
     /*
@@ -121,7 +122,7 @@ apply(const generation::transforms::context& ctx,
      */
     const bool ekd(m.extraction_properties().enable_backend_directories());
     auto r(t.apply(ctx, ekd, m));
-    r.origin_element_id(m.origin_element_id());
+    r.logical_location().qualified_name(m.name().qualified().dot());
     r.origin_sha1_hash(m.origin_sha1_hash());
 
     BOOST_LOG_SEV(lg, debug) << "Generated artefacts for : " << id
@@ -131,7 +132,7 @@ apply(const generation::transforms::context& ctx,
     return r;
 }
 
-extraction::entities::model model_to_extraction_model_chain::
+physical::entities::model model_to_extraction_model_chain::
 apply(const generation::transforms::context& ctx,
     const std::list<generation::entities::model>& ms) {
     tracing::scoped_chain_tracer stp(lg, "model to extraction model chain",
@@ -139,7 +140,7 @@ apply(const generation::transforms::context& ctx,
 
     BOOST_LOG_SEV(lg, debug) << "Transforming models: " << ms.size();
 
-    extraction::entities::model r;
+    physical::entities::model r;
     if (ms.empty())
         return r;
 

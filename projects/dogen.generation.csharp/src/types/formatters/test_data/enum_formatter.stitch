@@ -16,7 +16,7 @@
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-extraction::entities::artefact enum_formatter::format(
+physical::entities::artefact enum_formatter::format(
     const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location());
     const auto& ye(a.as<logical::entities::structural::enumeration>(static_id(), e));

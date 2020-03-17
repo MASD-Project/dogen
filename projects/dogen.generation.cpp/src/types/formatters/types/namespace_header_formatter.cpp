@@ -76,7 +76,7 @@ std::list<std::string> namespace_header_formatter::inclusion_dependencies(
     return r;
 }
 
-extraction::entities::artefact namespace_header_formatter::
+physical::entities::artefact namespace_header_formatter::
 format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
     const auto& m(a.as<logical::entities::structural::module>(e));

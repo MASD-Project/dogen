@@ -69,7 +69,7 @@ workflow::get_artefact_properties(const logical::entities::element& e,
     return i->second;
 }
 
-std::list<extraction::entities::artefact>
+std::list<physical::entities::artefact>
 workflow::format(
     const std::unordered_set<generation::entities::element_archetype>&
     enabled_archetype_for_element, const formattables::model& fm,
@@ -82,7 +82,7 @@ workflow::format(
     const auto mn(e.meta_name().qualified().dot());
     BOOST_LOG_SEV(lg, debug) << "Meta name: " << mn;
 
-    std::list<extraction::entities::artefact> r;
+    std::list<physical::entities::artefact> r;
     const auto& frp(registrar().formatter_repository());
     const auto i(frp.stock_artefact_formatters_by_meta_name().find(mn));
     if (i == frp.stock_artefact_formatters_by_meta_name().end()) {
@@ -112,7 +112,7 @@ workflow::format(
             BOOST_LOG_SEV(lg, debug) << "Using the stock formatter: " << id;
 
             const auto artefact(fmt.format(ctx, e));
-            const auto& p(artefact.path());
+            const auto& p(artefact.paths().absolute());
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
             r.push_back(artefact);
@@ -121,7 +121,7 @@ workflow::format(
 
             wale_formatter f;
             const auto artefact(f.format(locator_, fmt, ctx, e));
-            const auto& p(artefact.path());
+            const auto& p(artefact.paths().absolute());
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
             r.push_back(artefact);
@@ -129,7 +129,7 @@ workflow::format(
             BOOST_LOG_SEV(lg, debug) << "Using the stitch formatter.";
 
             const auto artefact(stitch_formatter_.format(fmt, ctx, e));
-            const auto& p(artefact.path());
+            const auto& p(artefact.paths().absolute());
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
             r.push_back(artefact);
@@ -141,12 +141,12 @@ workflow::format(
     return r;
 }
 
-std::list<extraction::entities::artefact> workflow::
+std::list<physical::entities::artefact> workflow::
 execute(const std::unordered_set<generation::entities::element_archetype>&
     enabled_archetype_for_element, const formattables::model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started formatting. Model "
                              << fm.name().qualified().dot();
-    std::list<extraction::entities::artefact> r;
+    std::list<physical::entities::artefact> r;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
         const auto& eprops(formattable.element_properties());

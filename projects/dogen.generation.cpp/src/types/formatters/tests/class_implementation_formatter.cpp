@@ -146,7 +146,7 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-extraction::entities::artefact class_implementation_formatter::
+physical::entities::artefact class_implementation_formatter::
 format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& o(a.as<logical::entities::structural::object>(e));

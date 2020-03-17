@@ -676,11 +676,11 @@ std::ostream& assistant::stream() {
     return filtering_stream_;
 }
 
-extraction::entities::artefact assistant::make_artefact() const {
-    extraction::entities::artefact r;
+physical::entities::artefact assistant::make_artefact() const {
+    physical::entities::artefact r;
     r.content(stream_.str());
-    r.path(artefact_properties_.file_path());
-    r.origin_element_id(element_.origin_element_id());
+    r.paths().absolute(artefact_properties_.file_path());
+    r.logical_location().qualified_name(element_.name().qualified().dot());
     r.origin_sha1_hash(element_.origin_sha1_hash());
 
     const auto& ap(element_.artefact_properties());
@@ -693,8 +693,8 @@ extraction::entities::artefact assistant::make_artefact() const {
     }
     r.overwrite(i->second.overwrite());
 
-    extraction::entities::operation op;
-    using ot = extraction::entities::operation_type;
+    physical::entities::operation op;
+    using ot = physical::entities::operation_type;
     op.type(r.overwrite() ? ot::write : ot::create_only);
     r.operation(op);
 

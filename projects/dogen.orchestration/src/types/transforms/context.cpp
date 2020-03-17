@@ -27,7 +27,7 @@ context::context(
     const dogen::injection::transforms::context& injection_context,
     const dogen::logical::transforms::context& assets_context,
     const dogen::generation::transforms::context& generation_context,
-    const dogen::extraction::transforms::context& extraction_context)
+    const dogen::physical::transforms::context& extraction_context)
     : variability_context_(variability_context),
       injection_context_(injection_context),
       assets_context_(assets_context),
@@ -121,19 +121,19 @@ void context::generation_context(const dogen::generation::transforms::context&& 
     generation_context_ = std::move(v);
 }
 
-const dogen::extraction::transforms::context& context::extraction_context() const {
+const dogen::physical::transforms::context& context::extraction_context() const {
     return extraction_context_;
 }
 
-dogen::extraction::transforms::context& context::extraction_context() {
+dogen::physical::transforms::context& context::extraction_context() {
     return extraction_context_;
 }
 
-void context::extraction_context(const dogen::extraction::transforms::context& v) {
+void context::extraction_context(const dogen::physical::transforms::context& v) {
     extraction_context_ = v;
 }
 
-void context::extraction_context(const dogen::extraction::transforms::context&& v) {
+void context::extraction_context(const dogen::physical::transforms::context&& v) {
     extraction_context_ = std::move(v);
 }
 

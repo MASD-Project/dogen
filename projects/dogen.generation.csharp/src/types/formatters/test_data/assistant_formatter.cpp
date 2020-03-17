@@ -65,7 +65,7 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
     return r;
 }
 
-extraction::entities::artefact assistant_formatter::format(
+physical::entities::artefact assistant_formatter::format(
     const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location());
     {

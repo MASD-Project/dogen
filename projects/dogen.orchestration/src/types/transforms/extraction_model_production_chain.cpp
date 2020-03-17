@@ -24,8 +24,8 @@
 #include "dogen.logical/types/transforms/model_production_chain.hpp"
 #include "dogen.generation/types/transforms/model_generation_chain.hpp"
 #include "dogen.generation/types/transforms/model_to_extraction_model_chain.hpp"
-#include "dogen.extraction/io/entities/model_io.hpp"
-#include "dogen.extraction/types/transforms/model_production_chain.hpp"
+#include "dogen.physical/io/entities/model_io.hpp"
+#include "dogen.physical/types/transforms/model_production_chain.hpp"
 #include "dogen.orchestration/types/transforms/injection_model_set_to_assets_model_set_chain.hpp"
 #include "dogen.orchestration/types/transforms/assets_model_to_generation_model_transform.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
@@ -43,7 +43,7 @@ auto lg(logger_factory(transform_id));
 
 namespace dogen::orchestration::transforms {
 
-extraction::entities::model
+physical::entities::model
 extraction_model_production_chain::apply(const context& ctx,
     const boost::filesystem::path& target) {
     BOOST_LOG_SEV(lg, info) << "Starting extraction model production.";
@@ -95,7 +95,7 @@ extraction_model_production_chain::apply(const context& ctx,
     /*
      * Runn all of the extraction transforms against the extraction models.
      */
-    extraction::transforms::model_production_chain::
+    physical::transforms::model_production_chain::
         apply(ctx.extraction_context(), r);
 
     stp.end_chain(r);

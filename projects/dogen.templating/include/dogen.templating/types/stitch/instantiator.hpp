@@ -21,7 +21,6 @@
 #ifndef DOGEN_TEMPLATING_TYPES_STITCH_INSTANTIATOR_HPP
 #define DOGEN_TEMPLATING_TYPES_STITCH_INSTANTIATOR_HPP
 
-#include "dogen.variability/types/entities/configuration.hpp"
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
@@ -29,9 +28,10 @@
 #include <string>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
+#include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/helpers/configuration_factory.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
-#include "dogen.extraction/types/entities/artefact.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.templating/types/stitch/text_template.hpp"
 
 namespace dogen::templating::stitch {
@@ -100,11 +100,11 @@ private:
     /**
      * @brief Formats the supplied text template.
      */
-    extraction::entities::artefact
+    physical::entities::artefact
     format_text_template(const text_template& tt) const;
 
 public:
-    extraction::entities::artefact
+    physical::entities::artefact
     instantiate(const boost::filesystem::path& input_path,
         const std::unordered_map<std::string, std::string>& kvps) const;
 

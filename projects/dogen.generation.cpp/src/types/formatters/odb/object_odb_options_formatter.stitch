@@ -73,7 +73,7 @@ std::list<std::string> object_odb_options_formatter::inclusion_dependencies(
     return r;
 }
 
-extraction::entities::artefact object_odb_options_formatter::
+physical::entities::artefact object_odb_options_formatter::
 format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& o(a.as<logical::entities::structural::object>(e));

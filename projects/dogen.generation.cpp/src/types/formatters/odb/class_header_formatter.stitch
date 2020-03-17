@@ -38,7 +38,7 @@ std::list<std::string> class_header_formatter::inclusion_dependencies(
     return builder.build();
 }
 
-extraction::entities::artefact
+physical::entities::artefact
 class_header_formatter::
 format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);

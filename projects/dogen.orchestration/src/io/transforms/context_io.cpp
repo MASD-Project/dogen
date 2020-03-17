@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include "dogen.logical/io/transforms/context_io.hpp"
+#include "dogen.physical/io/transforms/context_io.hpp"
 #include "dogen.injection/io/transforms/context_io.hpp"
-#include "dogen.extraction/io/transforms/context_io.hpp"
 #include "dogen.generation/io/transforms/context_io.hpp"
 #include "dogen.variability/io/transforms/context_io.hpp"
 #include "dogen.orchestration/io/transforms/context_io.hpp"

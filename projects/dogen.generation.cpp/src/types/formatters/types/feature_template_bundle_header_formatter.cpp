@@ -103,7 +103,7 @@ std::list<std::string> feature_template_bundle_header_formatter::inclusion_depen
     return builder.build();
 }
 
-extraction::entities::artefact feature_template_bundle_header_formatter::
+physical::entities::artefact feature_template_bundle_header_formatter::
 format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& fb(a.as<logical::entities::variability::feature_template_bundle>(e));

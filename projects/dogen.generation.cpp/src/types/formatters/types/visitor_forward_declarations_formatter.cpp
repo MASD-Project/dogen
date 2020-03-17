@@ -75,7 +75,7 @@ std::list<std::string> visitor_forward_declarations_formatter::inclusion_depende
     return r;
 }
 
-extraction::entities::artefact visitor_forward_declarations_formatter::
+physical::entities::artefact visitor_forward_declarations_formatter::
 format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
     const auto& o(a.as<logical::entities::structural::visitor>(e));

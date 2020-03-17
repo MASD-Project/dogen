@@ -94,7 +94,7 @@ std::list<std::string> project_formatter::inclusion_dependencies(
     return r;
 }
 
-extraction::entities::artefact project_formatter::
+physical::entities::artefact project_formatter::
 format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     using logical::entities::visual_studio::project;

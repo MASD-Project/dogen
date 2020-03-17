@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen.variability/types/helpers/configuration_factory.hpp"
-#include "dogen.extraction/types/entities/artefact.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/element_fwd.hpp"
 #include "dogen.templating/types/stitch/instantiator.hpp"
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
@@ -45,7 +45,7 @@ private:
     bool is_header(const inclusion_support_types ist) const;
 
 public:
-    extraction::entities::artefact
+    physical::entities::artefact
     format(const artefact_formatter_interface& stock_formatter,
         const context& ctx, const logical::entities::element& e) const;
 

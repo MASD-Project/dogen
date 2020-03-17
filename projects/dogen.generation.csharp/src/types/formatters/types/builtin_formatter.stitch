@@ -15,9 +15,9 @@
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-extraction::entities::artefact builtin_formatter::
+physical::entities::artefact builtin_formatter::
 format(const context& /*ctx*/, const logical::entities::element& /*e*/) const {
-    extraction::entities::artefact r;
+    physical::entities::artefact r;
     return r;
 }
 

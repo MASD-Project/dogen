@@ -9,7 +9,7 @@
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.utility/types/test_data/dogen_generation.hpp"
-#include "dogen.extraction/io/entities/operation_io.hpp"
+#include "dogen.physical/io/entities/operation_io.hpp"
 #include "dogen.orchestration/types/transforms/scoped_context_manager.hpp"
 #include "dogen.orchestration/types/transforms/extraction_model_production_chain.hpp"
 #include "dogen/types/tracing_backend.hpp"

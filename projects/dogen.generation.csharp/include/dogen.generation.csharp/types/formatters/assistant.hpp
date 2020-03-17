@@ -29,7 +29,7 @@
 #include <boost/optional.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
 #include "dogen.physical/types/entities/location.hpp"
-#include "dogen.extraction/types/entities/artefact.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.generation/types/formatters/scoped_boilerplate_formatter.hpp"
 #include "dogen.generation/types/formatters/scoped_namespace_formatter.hpp"
 #include "dogen.logical/types/entities/name.hpp"
@@ -144,7 +144,7 @@ public:
      * @brief Generates a file with the current contents of the
      * stream.
      */
-    extraction::entities::artefact make_artefact() const;
+    physical::entities::artefact make_artefact() const;
 
 private:
     std::ostringstream stream_;

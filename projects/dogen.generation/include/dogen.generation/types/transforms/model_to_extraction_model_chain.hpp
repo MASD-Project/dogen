@@ -29,7 +29,7 @@
 #include <string>
 #include <unordered_set>
 #include "dogen.generation/types/transforms/context_fwd.hpp"
-#include "dogen.extraction/types/entities/model.hpp"
+#include "dogen.physical/types/entities/model.hpp"
 #include "dogen.generation/types/transforms/model_to_extraction_model_transform_registrar.hpp"
 
 namespace dogen::generation::transforms {
@@ -45,14 +45,14 @@ private:
     /*
      * Merges source into destination.
      */
-    static void merge(extraction::entities::model&& src,
-        extraction::entities::model& dst);
+    static void merge(physical::entities::model&& src,
+        physical::entities::model& dst);
 
 public:
-    static extraction::entities::model
+    static physical::entities::model
     apply(const generation::transforms::context& ctx,
         const generation::entities::model& m);
-    static extraction::entities::model
+    static physical::entities::model
     apply(const generation::transforms::context& ctx,
         const std::list<generation::entities::model>& ms);
 

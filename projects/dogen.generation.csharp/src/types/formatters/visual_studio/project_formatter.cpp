@@ -73,7 +73,7 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
     return r;
 }
 
-extraction::entities::artefact project_formatter::
+physical::entities::artefact project_formatter::
 format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location());
     using logical::entities::visual_studio::project;

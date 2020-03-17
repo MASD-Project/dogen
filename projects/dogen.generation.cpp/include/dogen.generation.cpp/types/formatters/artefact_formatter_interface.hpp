@@ -30,7 +30,7 @@
 #include "dogen.physical/types/entities/location.hpp"
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
-#include "dogen.extraction/types/entities/artefact.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
 #include "dogen.generation.cpp/types/formattables/dependencies_builder_factory.hpp"
 #include "dogen.generation.cpp/types/formatters/inclusion_support_types.hpp"
@@ -101,7 +101,7 @@ public:
     /**
      * @brief Generate a file representation for the element.
      */
-    virtual extraction::entities::artefact
+    virtual physical::entities::artefact
     format(const context& ctx, const logical::entities::element& e) const = 0;
 };
 

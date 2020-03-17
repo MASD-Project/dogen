@@ -69,7 +69,7 @@ std::list<std::string> logic_less_template_formatter::inclusion_dependencies(
     return r;
 }
 
-extraction::entities::artefact logic_less_template_formatter::
+physical::entities::artefact logic_less_template_formatter::
 format(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     auto r(a.make_artefact());

@@ -44,13 +44,13 @@ csharp::formatters::registrar& workflow::registrar() {
     return *registrar_;
 }
 
-std::list<extraction::entities::artefact>
+std::list<physical::entities::artefact>
 workflow::execute(const formattables::model& fm) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started formatting. Model "
                              << fm.name().qualified().dot();
 
-    std::list<extraction::entities::artefact> r;
+    std::list<physical::entities::artefact> r;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
 
@@ -77,7 +77,7 @@ workflow::execute(const formattables::model& fm) const {
             BOOST_LOG_SEV(lg, debug) << "Using formatter: " << fmt.id();
 
             const auto artefact(fmt.format(ctx, e));
-            const auto& p(artefact.path());
+            const auto& p(artefact.paths().absolute());
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
             r.push_back(artefact);

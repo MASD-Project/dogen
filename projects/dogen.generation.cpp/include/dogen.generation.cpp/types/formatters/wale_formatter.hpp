@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen.extraction/types/entities/artefact.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/element_fwd.hpp"
 #include "dogen.generation.cpp/types/formattables/locator.hpp"
 #include "dogen.generation.cpp/types/formatters/artefact_formatter_interface.hpp"
@@ -37,7 +37,7 @@ private:
     bool is_header(const inclusion_support_types ist) const;
 
 public:
-    extraction::entities::artefact format(
+    physical::entities::artefact format(
         const formattables::locator& l,
         const artefact_formatter_interface& stock_formatter,
         const context& ctx, const logical::entities::element& e) const;

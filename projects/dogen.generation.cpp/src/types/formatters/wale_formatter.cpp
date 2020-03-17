@@ -44,7 +44,7 @@ bool wale_formatter::is_header(const inclusion_support_types ist) const {
         ist == inclusion_support_types::canonical_support;
 }
 
-extraction::entities::artefact wale_formatter::
+physical::entities::artefact wale_formatter::
 format(const formattables::locator& l,
     const artefact_formatter_interface& stock_formatter, const context& ctx,
     const logical::entities::element& e) const {
