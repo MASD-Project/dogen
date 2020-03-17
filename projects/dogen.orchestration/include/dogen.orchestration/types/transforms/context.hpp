@@ -47,7 +47,7 @@ public:
         const dogen::injection::transforms::context& injection_context,
         const dogen::logical::transforms::context& assets_context,
         const dogen::generation::transforms::context& generation_context,
-        const dogen::physical::transforms::context& extraction_context);
+        const dogen::physical::transforms::context& physical_context);
 
 public:
     const dogen::variability::transforms::context& variability_context() const;
@@ -70,10 +70,10 @@ public:
     void generation_context(const dogen::generation::transforms::context& v);
     void generation_context(const dogen::generation::transforms::context&& v);
 
-    const dogen::physical::transforms::context& extraction_context() const;
-    dogen::physical::transforms::context& extraction_context();
-    void extraction_context(const dogen::physical::transforms::context& v);
-    void extraction_context(const dogen::physical::transforms::context&& v);
+    const dogen::physical::transforms::context& physical_context() const;
+    dogen::physical::transforms::context& physical_context();
+    void physical_context(const dogen::physical::transforms::context& v);
+    void physical_context(const dogen::physical::transforms::context&& v);
 
 public:
     bool operator==(const context& rhs) const;
@@ -90,7 +90,7 @@ private:
     dogen::injection::transforms::context injection_context_;
     dogen::logical::transforms::context assets_context_;
     dogen::generation::transforms::context generation_context_;
-    dogen::physical::transforms::context extraction_context_;
+    dogen::physical::transforms::context physical_context_;
 };
 
 }

@@ -96,7 +96,7 @@ physical_model_production_chain::apply(const context& ctx,
      * Runn all of the physical transforms against the physical models.
      */
     physical::transforms::model_production_chain::
-        apply(ctx.extraction_context(), r);
+        apply(ctx.physical_context(), r);
 
     stp.end_chain(r);
     BOOST_LOG_SEV(lg, info) << "Finished physical model production.";

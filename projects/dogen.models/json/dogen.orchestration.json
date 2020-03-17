@@ -88,7 +88,7 @@
           "type": "generation::transforms::context"
         },
         {
-          "name": "extraction_context",
+          "name": "physical_context",
           "type": "physical::transforms::context"
         }
       ]

@@ -27,12 +27,12 @@ context::context(
     const dogen::injection::transforms::context& injection_context,
     const dogen::logical::transforms::context& assets_context,
     const dogen::generation::transforms::context& generation_context,
-    const dogen::physical::transforms::context& extraction_context)
+    const dogen::physical::transforms::context& physical_context)
     : variability_context_(variability_context),
       injection_context_(injection_context),
       assets_context_(assets_context),
       generation_context_(generation_context),
-      extraction_context_(extraction_context) { }
+      physical_context_(physical_context) { }
 
 void context::swap(context& other) noexcept {
     using std::swap;
@@ -40,7 +40,7 @@ void context::swap(context& other) noexcept {
     swap(injection_context_, other.injection_context_);
     swap(assets_context_, other.assets_context_);
     swap(generation_context_, other.generation_context_);
-    swap(extraction_context_, other.extraction_context_);
+    swap(physical_context_, other.physical_context_);
 }
 
 bool context::operator==(const context& rhs) const {
@@ -48,7 +48,7 @@ bool context::operator==(const context& rhs) const {
         injection_context_ == rhs.injection_context_ &&
         assets_context_ == rhs.assets_context_ &&
         generation_context_ == rhs.generation_context_ &&
-        extraction_context_ == rhs.extraction_context_;
+        physical_context_ == rhs.physical_context_;
 }
 
 context& context::operator=(context other) {
@@ -121,20 +121,20 @@ void context::generation_context(const dogen::generation::transforms::context&& 
     generation_context_ = std::move(v);
 }
 
-const dogen::physical::transforms::context& context::extraction_context() const {
-    return extraction_context_;
+const dogen::physical::transforms::context& context::physical_context() const {
+    return physical_context_;
 }
 
-dogen::physical::transforms::context& context::extraction_context() {
-    return extraction_context_;
+dogen::physical::transforms::context& context::physical_context() {
+    return physical_context_;
 }
 
-void context::extraction_context(const dogen::physical::transforms::context& v) {
-    extraction_context_ = v;
+void context::physical_context(const dogen::physical::transforms::context& v) {
+    physical_context_ = v;
 }
 
-void context::extraction_context(const dogen::physical::transforms::context&& v) {
-    extraction_context_ = std::move(v);
+void context::physical_context(const dogen::physical::transforms::context&& v) {
+    physical_context_ = std::move(v);
 }
 
 }

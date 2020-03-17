@@ -1057,7 +1057,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#extraction_context#</dia:string>
+            <dia:string>#physical_context#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#physical::transforms::context#</dia:string>

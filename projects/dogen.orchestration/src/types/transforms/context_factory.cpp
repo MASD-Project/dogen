@@ -203,7 +203,7 @@ make_context(const configuration& cfg, const std::string& activity,
     r.injection_context().feature_model(fm);
     r.assets_context().feature_model(fm);
     r.generation_context().feature_model(fm);
-    r.extraction_context().feature_model(fm);
+    r.physical_context().feature_model(fm);
 
     /*
      * Handle the compatibility mode for all other contexts.
@@ -228,19 +228,19 @@ make_context(const configuration& cfg, const std::string& activity,
     r.injection_context().tracer(tracer);
     r.assets_context().tracer(tracer);
     r.generation_context().tracer(tracer);
-    r.extraction_context().tracer(tracer);
+    r.physical_context().tracer(tracer);
 
     /*
      * Setup the diffing and operational reporting configuration.
      */
-    r.extraction_context().diffing_configuration(cfg.diffing());
-    r.extraction_context().reporting_configuration(cfg.reporting());
+    r.physical_context().diffing_configuration(cfg.diffing());
+    r.physical_context().reporting_configuration(cfg.reporting());
 
     /*
      * Populate dry run mode.
      */
     const auto drm(cfg.model_processing().dry_run_mode_enabled());
-    r.extraction_context().dry_run_mode_enabled(drm);
+    r.physical_context().dry_run_mode_enabled(drm);
 
     /*
      * Populate the variability overrides.

@@ -57,7 +57,7 @@ void code_generation_chain::apply(const context& ctx,
      * Runn all of the physical transforms against the physical models.
      */
     using physical::transforms::code_generation_chain;
-    code_generation_chain::apply(ctx.extraction_context(), m);
+    code_generation_chain::apply(ctx.physical_context(), m);
 
     stp.end_chain(m);
 
