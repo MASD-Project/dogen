@@ -25,24 +25,25 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.physical/types/entities/model.hpp"
+#include "dogen.physical/types/transforms/context.hpp"
 
 namespace dogen::physical::transforms {
 
+/**
+ * @brief Writes artefacts in a model to the filesystem.
+ */
 class write_artefacts_transform final {
-public:
-    write_artefacts_transform() = default;
-    write_artefacts_transform(const write_artefacts_transform&) = default;
-    write_artefacts_transform(write_artefacts_transform&&) = default;
-    ~write_artefacts_transform() = default;
-    write_artefacts_transform& operator=(const write_artefacts_transform&) = default;
+private:
+    /**
+     * @brief Creates directories to house the file, if they do not
+     * yet exist.
+     */
+    static void
+    create_directories(const boost::filesystem::path& file_path);
 
 public:
-    bool operator==(const write_artefacts_transform& rhs) const;
-    bool operator!=(const write_artefacts_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void apply(const context& ctx, const entities::model& m);
 };
 
 }
