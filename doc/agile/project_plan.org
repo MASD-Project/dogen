@@ -21,7 +21,7 @@ task juggler installed:
    :PROPERTIES:
    :EFFORT:   12d
    :BLOCKER:  previous-sibling
-   :allocate: s22
+   :allocate: s23
    :END:
 
 - remove all types that are in coding but are related to generation
@@ -31,7 +31,7 @@ task juggler installed:
    :PROPERTIES:
    :EFFORT:   12d
    :BLOCKER:  previous-sibling
-   :allocate: s23
+   :allocate: s24
    :END:
 
 - move formattables concepts into generation, generalising them. This
@@ -41,7 +41,7 @@ task juggler installed:
    :PROPERTIES:
    :EFFORT:   8d
    :BLOCKER:  previous-sibling
-   :allocate: s24
+   :allocate: s25
    :END:
 
 - when C++ and C# models only have formatters, merge them into one
@@ -51,7 +51,7 @@ task juggler installed:
    :PROPERTIES:
    :EFFORT:   5d
    :BLOCKER:  previous-sibling
-   :allocate: s24
+   :allocate: s26
    :END:
 
 - update all CMake templates with latest layout from hand-crafted
@@ -61,7 +61,7 @@ task juggler installed:
    :PROPERTIES:
    :EFFORT:   12d
    :BLOCKER:  previous-sibling
-   :allocate: s25
+   :allocate: s27
    :END:
 
 - add proudct and product family level entities to coding.
@@ -70,7 +70,7 @@ task juggler installed:
    :PROPERTIES:
    :EFFORT:   12d
    :BLOCKER:  previous-sibling
-   :allocate: s26
+   :allocate: s28
    :END:
 
 - create PDMs
@@ -80,17 +80,13 @@ task juggler installed:
 *** Project start
     :PROPERTIES:
     :task_id: start
-    :start: 2020-02-18
+    :start: 2020-03-19
     :END:
 
 * Sprints                                              :taskjuggler_resource:
 
 Sprints for the project plan.
 
-** Sprint 22
-   :PROPERTIES:
-   :resource_id: s22
-   :END:
 ** Sprint 23
    :PROPERTIES:
    :resource_id: s23
@@ -106,4 +102,16 @@ Sprints for the project plan.
 ** Sprint 26
    :PROPERTIES:
    :resource_id: s26
+   :END:
+** Sprint 27
+   :PROPERTIES:
+   :resource_id: s27
+   :END:
+** Sprint 28
+   :PROPERTIES:
+   :resource_id: s28
+   :END:
+** Sprint 29
+   :PROPERTIES:
+   :resource_id: s29
    :END:

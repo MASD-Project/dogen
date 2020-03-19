@@ -1,0 +1,57 @@
+\documentclass{beamer}
+\mode<presentation>
+{ \usetheme{boxes} }
+
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{csquotes}
+\usepackage[backend=bibtex]{biblatex}
+
+\title{Dogen v1.0.22, \enquote{Cine Teatro Namibe}}
+
+\author{Marco Craveiro \\
+  Domain Driven Development
+}
+\date{\today}
+
+\AtBeginSection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+\bibliography{sprint_22_features}
+\begin{document}
+
+\begin{frame}
+\titlepage{}
+\end{frame}
+
+\begin{frame}
+\frametitle{User Visible Changes}
+
+\begin{itemize}
+  \pause{}
+\item Split templatised from non-templatised variability meta-model elements
+  \pause{}
+\item Introduce \enquote{Domains} for Template Instantiation
+  \pause{}
+\item Remove name duplication from feature bundles and profiles
+  \pause{}
+\item Mapped default values for feature templates
+  \pause{}
+\item Add command line option to dump all specs
+  \pause{}
+\item Add command line option to dump all specs
+  \pause{}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Fin}
+\end{frame}
+
+\end{document}
