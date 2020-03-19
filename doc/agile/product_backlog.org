@@ -2158,6 +2158,41 @@ Time spent reading the literature on variability. We should do a
 New features for this release. These are more nice to haves rather
 than mandatory work.
 
+*** Licence compatibility errors                                      :story:
+
+If we correctly annotate all PDMs with a licence, as well as all model
+code, we could define "compatibility relationships" between
+licences. For example we could say that a model M with a proprietary
+licence including a PDM P with GPL licence is an error. This could
+come up as any other error would. We could have a "compatible with"
+field in licences for this.
+
+*** Consider generating the colour script                             :story:
+
+At present we have to manually update the colour script every time we
+add a new modeling element. In an ideal world, we should associate the
+colour with the modeling element and/or profile as part of the model
+itself. Dogen could then generate the script. Even more ideal would be
+if the script could include the "package" version of the script -
+e.g. run the MASD script first then run the local one. This requires a
+little bit of thinking because the script would be generated from the
+profiles and the profiles model is not expressed as code.
+
+A simpler version of this is to just go through the dia palette models
+and associate stereotypes with colours. Then use it to build the
+script. The user supplies one or more models as input. It would be a
+new "command" in dogen.
+
+Actually we should just create a meta-element for the colouring
+script. It is populated by looking at the static properties of each
+meta-element (once they are modeled correctly). If [[*Add support for "colour themes" to dogen][there are themes]],
+we should make it a function that takes in an argument with the theme
+name. Note also that we should take into account user-defined
+colouring schemes. This is mainly associated with profiles. For this
+we just need to have a colour property in the profile and use it in
+exactly the same fashion as we do for meta-elements. For good measure,
+once we start [[*Colouring script should be included as part of package][distributing the colouring script with dogen]], we can
+simply call the main script from the user script.
 
 *** Add support for operations                                        :story:
 
@@ -3398,12 +3433,13 @@ At present we have:
 In reality, the test module name should be more something reflective
 of the model itself, such as cpp_ref_impl::boost_model::tests.
 
-*** Use profile overrides to test facets                    :reviewing:story:
+*** Use profile overrides reduce the number of test models            :story:
 
-At present we have a number of models that are variations on the same
-theme: testing the enablement of a single facet. However, this could
-easily be achieved if we had a single model and used the new profile
-override machinery that was developed for nightlies.
+At present we have a number of test models in C++ reference
+implementation that are variations on the same theme: testing the
+enablement of a single facet. This could easily be achieved with a
+single model by using the new profile override machinery that was
+developed for nightlies.
 
 Notes:
 
@@ -3460,20 +3496,6 @@ At present all masd stereotypes are namespaced correctly, according to
 the matching meta-model elements, except for the structural ones. That
 is, we do =masd::entry_point= instead of
 =masd::structural::entry_point= etc.
-
-*** Consider adding =artefact_set= to extraction model                :story:
-
-We are using collections of artefacts quite a bit, and it makes sense
-to create an abstraction for it such as a =artefact_set=. However, for
-this to work properly we need to add at least one basic behaviour: the
-ability to merge two artefact sets. Or else we will end up having to
-unpack the artefacts, then merging them, then creating a new artefact
-set.
-
-Problem is, we either create the artefact set as a non-generatable
-type - not ideal - or we create it as generatable and need to add this
-as a free function. We need to wait until dogen has support for
-merging code generation.
 
 *** Move hello world model from models directory                      :story:
 
@@ -3614,22 +3636,6 @@ We should update the MASD profile only after we have moved all
 entities into the assets meta-model and finished refactoring
 generation.
 
-*** Create some basic naming guidelines                               :story:
-
-As per Framework Design Guidelines, we need some basic guidelines for
-naming in Dogen. We don't need to go overboard, we just need something
-to get us started and evolve it as we go along.
-
-Links:
-
-- [[https://isocpp.org/wiki/faq/coding-standards][C++ Coding Standards]]
-- [[http://wiki.c2.com/?CapitalizationRules][Capitalization Rules]]
-- [[https://en.wikipedia.org/wiki/Snake_case][Snake Case]]
-- [[http://cs.smu.ca/~porter/csc/ref/stl/naming_conventions.html][Naming Conventions for these STL Reference Pages]]
-- [[https://style-guides.readthedocs.io/en/latest/cpp.html][C++ coding style guide]]
-- [[https://stxxl.org/tags/1.4.1/coding_style.html][Coding Style Guidelines]]
-- [[https://www.fluentcpp.com/2018/04/24/following-conventions-stl/][Make Your Containers Follow the Conventions of the STL]]
-
 *** Update all exception names to match framework guiidelines         :story:
 
 Exceptions should end with "exception".
@@ -3746,8 +3752,10 @@ Ideally we should have:
 
 *** Single reporting format option                                    :story:
 
-- use org-mode for tracing and reporting etc
-- byproducts dir does not have =cli=
+At present we have different options for report format for each
+format. It makes more sense to have a single option, so that for
+example we use org-mode for tracing and reporting. Note also that the
+byproducts dir does not have =cli=.
 
 *** Clean up injection element properties                             :story:
 
@@ -3863,12 +3871,6 @@ This error has been picked up by codacy too:
 When we moved the kernel logic into yarn from quilt, we did not rename
 the traits.
 
-*** Consider making editor a meta-data element                        :story:
-
-When we create meta-data elements for technical space, facet, etc we
-should also consider making one for editors. We probably only need a
-few properties such as start of modeline, etc.
-
 *** Add additional checks in generation formatters                    :story:
 
 We are not validating very much in the formatters. Checks we could be
@@ -3934,33 +3936,6 @@ based builder for element that takes care of these:
   populated straight on adaption. We just need a flag to be supplied
   to the injection to coding transform (is target?), if we don't have
   one already.
-
-*** Consider generating the colour script                             :story:
-
-At present we have to manually update the colour script every time we
-add a new modeling element. In an ideal world, we should associate the
-colour with the modeling element and/or profile as part of the model
-itself. Dogen could then generate the script. Even more ideal would be
-if the script could include the "package" version of the script -
-e.g. run the MASD script first then run the local one. This requires a
-little bit of thinking because the script would be generated from the
-profiles and the profiles model is not expressed as code.
-
-A simpler version of this is to just go through the dia palette models
-and associate stereotypes with colours. Then use it to build the
-script. The user supplies one or more models as input. It would be a
-new "command" in dogen.
-
-Actually we should just create a meta-element for the colouring
-script. It is populated by looking at the static properties of each
-meta-element (once they are modeled correctly). If [[*Add support for "colour themes" to dogen][there are themes]],
-we should make it a function that takes in an argument with the theme
-name. Note also that we should take into account user-defined
-colouring schemes. This is mainly associated with profiles. For this
-we just need to have a colour property in the profile and use it in
-exactly the same fashion as we do for meta-elements. For good measure,
-once we start [[*Colouring script should be included as part of package][distributing the colouring script with dogen]], we can
-simply call the main script from the user script.
 
 *** Improve model mapping support                                     :story:
 
@@ -4117,15 +4092,6 @@ nature. Names: =masd::lannguage_agnostic=, =masd::la= or maybe
 Actually, now that we are moving towards Technical Spaces, the name
 should reflect the fact that it belongs to an abstract TS.
 
-*** Licence compatibility errors                                      :story:
-
-If we correctly annotate all PDMs with a licence, as well as all model
-code, we could define "compatibility relationships" between
-licences. For example we could say that a model M with a proprietary
-licence including a PDM P with GPL licence is an error. This could
-come up as any other error would. We could have a "compatible with"
-field in licences for this.
-
 *** Remove empty types in ==injection.json= models                    :story:
 
 At present we are adding type to the converted model, even when its
@@ -4160,11 +4126,12 @@ need to check that the hydrator is not expecting this field.
 There are a number of exceptions that have been repeated across
 projects. For example:
 
--  transform error
+- transform error
 - building error
 
 We should consider having these in the dogen API and removing them
-from each project.
+from each project. However, we need to consider if end users should
+necessary know about these exceptions.
 
 *** Consider renaming logic-less templates                            :story:
 
@@ -4204,12 +4171,17 @@ profiles on profiles probably. This requires some thinking.
 
 *** Profile overriding may cause link errors                          :story:
 
-In the previous sprint we've addressed the issue of generating all
-facets by using profile overriding. This worked, but relied on
-something we didn't notice: the code must always link against all
-libraries required by the full code generation. We subsequently
-removed boost serialisation from our list of libraries and now the
-nightly is failing to link with lots of errors like these:
+We've added profile overriding to solve the nightlies problem:
+generating all facets. However, there was a consequence we didn't
+notice at the time: the code must always link against *all* the
+libraries required by full code generation. That is, if any facet
+requires a third-party library, and that facet is normally disabled
+but it is enabled on the nightly, we need to link against the library
+even when not using the facet.
+
+How we noticed this problem: we removed boost serialisation from our
+list of libraries and now the nightly is failing to link with lots of
+errors like these:
 
 : /work/DomainDrivenConsulting/masd/vcpkg/masd/installed/x64-linux/include/boost/archive/basic_xml_oarchive.hpp:99: error: undefined reference to 'boost::archive::basic_xml_oarchive<boost::archive::xml_oarchive>::save_start(char const*)'
 
@@ -4340,12 +4312,6 @@ We should probably generate this model; at the moment, we have many
 missing elements/meta-data, causing dogen to choke. However we need a way
 to make the model generate nothing.
 
-*** Make extraction model name a qualified name                       :story:
-
-At present we are setting up the extraction model name from the simple
-name of the model. It should really be the qualified name. Hopefully
-this will only affect tracing and diffing.
-
 *** Copyright holders is scalar when it should be an array            :story:
 
 At present its only possible to specify a single copyright holder. It
@@ -4366,7 +4332,7 @@ to be able to override them all though.
 This functionality has been implemented but requires tests in the test
 model.
 
-*** Location of =--byproduct-directory= not respected                 :story:
+*** Location of =--byproduct-directory= not respected on conversion   :story:
 
 It seems that at present we are not honouring the directory supplied
 by the user. This seems to only happen on convert mode.
@@ -4412,10 +4378,6 @@ The current workaround is to disable generated tests whilst there are
 no types to test. This is not ideal because if we introduce testable
 types we will probably forget to remove the disabling, but its
 arguably better than adding a fake type.
-
-*** Validate feature template names                                   :story:
-
-We need to ensure the template names are valid identifiers in C++.
 
 *** Add meta-data to "force" parent                                   :story:
 
@@ -4468,7 +4430,7 @@ presence of any members which do not have support for it.
 
 *** Detect unqualified stereotypes                                    :story:
 
-If a user enters say =enumeration= instead of =yarn::enumeration= we
+If a user enters say =enumeration= instead of =masd::enumeration= we
 are providing an unhelpful error message:
 
 : Error: Attribute type is empty: structured
@@ -4484,12 +4446,6 @@ enumeration?").
 
 - for extra bonus points use the [[http://en.wikipedia.org/wiki/levenshtein_distance][Levenshtein distance]] for spelling
   suggestions. See stories on this by searching for Levenshtein.
-
-*** Logging at info is very messy                                     :story:
-
-Ideally when logging at info we want to see the spine of the program,
-showing all transforms with their start and finishes and some
-information about what they are processing (e.g. model).
 
 *** Using =std::set<std::string>= causes compilation errors           :story:
 
@@ -4719,7 +4675,7 @@ vectors:
 :    return r;
 :}
 
-*** Test data generator with immutability looks wrong                 :story:
+*** Test data generator with immutability looks wrong       :reviewing:story:
 
 We are using the full constructor for immutability, but its not clear
 how that would work on a inheritance tree. Ensure we have test cases
@@ -5295,6 +5251,8 @@ ideas into stories and add them as we go along.
 
 *Intermediate model checks*:
 
+- validate feature template names: We need to ensure the template
+  names are valid identifiers in C++.
 - ensure all models part of a model set have compatible versions. For
   example, referencing a C++ 98 model from a C++ 11 model (or
   vice-versa) should result in an error.
@@ -5807,6 +5765,13 @@ check that an invalid type doesn't work.
 Stories related to infrastructure improvements that we may or may not
 achieve.
 
+*** Consider moving CI to GitHub Actions                              :story:
+
+At present we are using Travis and AppVeyor for our CI. However, it
+would be nice to have a single place with all of the CI (and even more
+ideally, packaging as well). GitHub seems to offer some kind of CI
+support via GitHub actions.
+
 *** Run ODB on nightlies                                              :story:
 
 At present we are code-generating all code on dogen nightlies but we
@@ -6044,6 +6009,12 @@ Stories that will not be handled on the current major release.
 ** Technical debt
 
 Ideas to improve the code base.
+
+*** Logging at info is very messy                                     :story:
+
+Ideally when logging at info we want to see the spine of the program,
+showing all transforms with their start and finishes and some
+information about what they are processing (e.g. model).
 
 *** Check all of the warnings in lgtm                                 :story:
 
@@ -7350,6 +7321,12 @@ Links:
 Features for which there is no urgency but we'd like to see them
 implemented at some point. They may require some alterations to the
 core, but not fundamental rethinking.
+
+*** Consider making editor a meta-data element                        :story:
+
+When we create meta-data elements for technical space, facet, etc we
+should also consider making one for editors. We probably only need a
+few properties such as start of modeline, etc.
 
 *** Add support for multiple profile binds per modeling element       :story:
 
@@ -12643,6 +12620,22 @@ itself. What we also need is to dump stats on the model such as number
 of objects, whether the generated code is up-to-date, etc. We could
 also link this story with [[*Add support for dependency graphs and complexity data][measurements of complexity]].
 
+*** Create some basic naming guidelines                               :story:
+
+As per Framework Design Guidelines, we need some basic guidelines for
+naming in Dogen. We don't need to go overboard, we just need something
+to get us started and evolve it as we go along.
+
+Links:
+
+- [[https://isocpp.org/wiki/faq/coding-standards][C++ Coding Standards]]
+- [[http://wiki.c2.com/?CapitalizationRules][Capitalization Rules]]
+- [[https://en.wikipedia.org/wiki/Snake_case][Snake Case]]
+- [[http://cs.smu.ca/~porter/csc/ref/stl/naming_conventions.html][Naming Conventions for these STL Reference Pages]]
+- [[https://style-guides.readthedocs.io/en/latest/cpp.html][C++ coding style guide]]
+- [[https://stxxl.org/tags/1.4.1/coding_style.html][Coding Style Guidelines]]
+- [[https://www.fluentcpp.com/2018/04/24/following-conventions-stl/][Make Your Containers Follow the Conventions of the STL]]
+
 *** Add Levenshtein distance to enums when converting from string     :story:
 
 When we fail to convert a string to an enum, it would be nice if the
@@ -13369,6 +13362,11 @@ Notes:
   with formatters. We then generate code to bind these to the API. The
   objective is to make an interactive view of the API, not to replace
   Wt.
+- we should generate the swagger interactive interface as they do for
+  the [[https://petstore.swagger.io/][petstore]].
+- we should also allow users to add documentation for the API,
+  including introduction, examples etc. This should be done in
+  Markdown format and follow the same layout as for [[https://www.consul.io/api/index.html][Hashicorp]].
 
 Links:
 
