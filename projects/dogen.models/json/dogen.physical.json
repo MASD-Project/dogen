@@ -1029,6 +1029,13 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "registrar",
+      "stereotypes": [
+        "masd::serialization::type_registrar"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
