@@ -61,7 +61,7 @@
 
  Add github release notes for previous sprint.
 
- Title: Dogen v1.0.10, "Lucira"
+Title: Dogen v1.0.10, "Lucira"
 
 #+begin_src markdown
 ![Lucira](http://www.redeangola.info/wp-content/uploads/2016/06/roteiro_lucira_pedro-carreno_5-580x361.jpg)

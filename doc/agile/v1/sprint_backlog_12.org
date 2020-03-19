@@ -59,7 +59,7 @@
 
  Add github release notes for previous sprint.
 
- Title: Dogen v1.0.11, "Moçamedes"
+Title: Dogen v1.0.11, "Moçamedes"
 
 #+begin_src markdown
 ![Moçamedes](https://www.portaldeangola.com/wp-content/uploads/2018/02/namibe.jpg)

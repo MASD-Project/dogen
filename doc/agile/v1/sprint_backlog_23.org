@@ -12,28 +12,31 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-17 Tue 17:24]
-| <75>                                       |         |       |      |       |
-| Headline                                   | Time    |       |      |     % |
-|--------------------------------------------+---------+-------+------+-------|
-| *Total time*                               | *14:38* |       |      | 100.0 |
-|--------------------------------------------+---------+-------+------+-------|
-| Stories                                    | 14:38   |       |      | 100.0 |
-| Active                                     |         | 14:38 |      | 100.0 |
-| Edit release notes for previous sprint     |         |       | 0:15 |   1.7 |
-| Sprint and product backlog grooming        |         |       | 0:18 |   2.1 |
-| Rename archetypes model to physical model  |         |       | 0:28 |   3.2 |
-| Rename assets model to logical model       |         |       | 0:29 |   3.3 |
-| Consider renaming "meta-model" namespace   |         |       | 0:37 |   4.2 |
-| Rename engine to orchestration             |         |       | 1:04 |   7.3 |
-| Merge extraction model with physical model |         |       | 4:35 |  31.3 |
-| Design and implement new physical types    |         |       | 5:39 |  38.6 |
-| Implement the physical meta-model          |         |       | 1:13 |   8.3 |
+#+CAPTION: Clock summary at [2020-03-19 Thu 18:30]
+| <75>                                               |         |       |      |       |
+| Headline                                           | Time    |       |      |     % |
+|----------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                       | *20:15* |       |      | 100.0 |
+|----------------------------------------------------+---------+-------+------+-------|
+| Stories                                            | 20:15   |       |      | 100.0 |
+| Active                                             |         | 20:15 |      | 100.0 |
+| Edit release notes for previous sprint             |         |       | 4:41 |  23.1 |
+| Create a demo and presentation for previous sprint |         |       | 0:28 |   2.3 |
+| Sprint and product backlog grooming                |         |       | 1:01 |   5.0 |
+| Rename archetypes model to physical model          |         |       | 0:28 |   2.3 |
+| Rename assets model to logical model               |         |       | 0:29 |   2.4 |
+| Consider renaming "meta-model" namespace           |         |       | 0:37 |   3.0 |
+| Rename engine to orchestration                     |         |       | 1:04 |   5.3 |
+| Merge extraction model with physical model         |         |       | 4:35 |  22.6 |
+| Design and implement new physical types            |         |       | 5:39 |  27.9 |
+| Implement the physical meta-model                  |         |       | 1:13 |   6.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Edit release notes for previous sprint                    :story:
     :LOGBOOK:
+    CLOCK: [2020-03-18 Wed 20:05]--[2020-03-18 Wed 23:59] =>  3:54
+    CLOCK: [2020-03-18 Wed 19:01]--[2020-03-18 Wed 19:33] =>  0:32
     CLOCK: [2020-03-16 Mon 08:51]--[2020-03-16 Mon 09:06] =>  0:15
     :END:
 
@@ -42,18 +45,241 @@ Add github release notes for previous sprint.
 Title: Dogen v1.0.22, "Cine Teatro Namibe"
 
 #+BEGIN_SRC markdown
+![Cine Teatro Namibe](https://i.pinimg.com/originals/8c/09/18/8c091838ed68d58681fd1beb6e619945.jpg)
+_Cine Teatro Namibe, Moçamedes, Angola. (C) 2015 [MESSYNESSY](https://www.messynessychic.com/2015/06/17/documenting-africas-old-cinemas)._
+
+**DRAFT: Release notes under construction**
+
+# Introduction
+
+Welcome to yet another busy Dogen sprint! Somewhat unexpectedly, we ended up working full time during a large part of the sprint, allowing us to work on difficult parts of the core with undivided attention. Originally, we had intended to focus on the fabled "generation refactor" but, alas, it was not to be yet again. During analysis, we spotted some fundamental deficiencies on how variability was implemented and, before you knew it, we were stuck wading in the guts of the variability subsystem for the entirety of the sprint. Nonetheless, the end product was a much better designed subsystem, free of unwanted dependencies, and a newly found clarity in the conceptual model with regards to both logical and physical dimensions. Sadly, the refactor also produced a lot of churn with regards to feature names, resulting in a fair bit of breakage on user diagrams. All and all, a rather eventful sprint. Let's see how we fared in more detail.
+
+# User visible changes
+
+This section covers stories that affect end users, with the video providing a quick demonstration of the new features, and the sections below describing them in more detail. There have been a number of breaking changes, which have been highlighted with the :warning: symbol.
+
+[![Sprint 1.0.21 Demo](https://img.youtube.com/vi/J5duq-gw-nI/0.jpg)](https://youtu.be/J5duq-gw-nI)
+_Video 1: Sprint 22 Demo._
+
+## Split templatised from non-templatised variability meta-model elements
+
+A pet peeve of ours, pretty much since [profiles were introduced to the meta-model](https://github.com/MASD-Project/dogen/releases/tag/v1.0.16), was the name chosen for the stereotype: ```masd::variability::profile_template```. The postfix ```_template``` was a glaring leak from the implementation; a result of trying to be "too clever by half" in generalising all profiles to be "profile templates", when, in reality, there were only 2 or 3 cases of _actual_ profile template instantiation across the code base. As it was, with this story we finally tackled this annoyance. However, before we proceed, a word is probably required on what we mean by "templates" and "instantiation" in this context. This will also be helpful in understanding much of the remaining work carried out in the release.
+
+### Setting the Scene: Quick Primer on Variability Templates
+
+As with many other modeling approaches, MASD divides the modeling of software products into two distinct dimensions: the logical dimension and the physical dimension. The logical dimension is pretty much what you are used to when creating UML class diagrams: the structural world of classes and their relationships (though, of course, in MASD there is a twist to it, but we need to leave that for another time). The physical dimension is, predictably, the world of files and directories. So far, so similar to UML and the like. What MASD does differently, however, is to impose a _well-defined shape_ into the entities that live in the physical dimension as well as a process by which these instances are derived. That shape is governed by the physical model's _meta-model_, which has existed since the early days of Dogen, albeit in an implicit manner. It is composed of vocabulary such as kernel (_e.g._, "masd"), backend  (_e.g._, C++, C#), facet  (_e.g._, types, hashing, serialisation and so forth) and archetype  (_e.g._, class header, class implementation, _etc._).
+
+![Feature bundles](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/dogen_coding_features.png)
+_Figure 1_: Examples of Dogen feature bundles prior to the refactor.
+
+The shape of the physical dimension is a function of the implementation; that is, as we add formatters (model to text transforms)  to generate new kinds of output, these inject archetypes and facets and so on, augmenting the physical dimension. It became clear very early on that manually adding features needed by each formatter was rather painful. For example, we need to know if a kernel, backend, facet or archetype is enabled or disabled by the users. Thus a feature called ```enabled``` must exist for every element of the physical meta-model. We started by doing this manually, but it soon became obvious that what we were after was a generic way of saying that a feature with a given name ```n``` applies to every registered ```x``` - with ```x``` being an element of a set ```X```, composed of kernels, backends, facets or archetypes. And so it was that variability templates were born. These were subsequently modeled within the logical model as both "feature bundles" (_i.e._, providing _feature definitions_, as per _Figure 1_) or "profile templates" (_i.e._, groups of configurations created by users for reuse purposes, performing _feature selection_; see _Figure 2_). In both cases we had the notion of an "instance template":
+
+```
+#DOGEN masd.variability.template_kind=instance
+```
+
+This was a "pseudo" or "identity" template, which does not really get instantiated but is instead copied across. We also had "real templates", associated with one of the "levels" in physical space (_e.g._, all, backend, facet, archetype):
+
+```
+#DOGEN masd.variability.template_kind=archetype
+```
+
+An additional modeling error was that, whilst profile templates only allowed a template kind at the profile level (that is, all attributes in the profile are of the same ```template_kind```), we did not take the same approach for feature bundles, opening the gates for all sorts of weird and wonderful permutations: one attribute could be a template of kind ```instance``` whereas another could be a template of kind ```archetype```. In practice, we were disciplined and avoided doing such crazy stunts, but as they always say, a good domain model should "make invalid states unrepresentable".
+
+![Dogen's profiles Model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/profiles_model.png)
+_Figure 2_: Dogen's Profiles model before the refactor.
+
+One final word on the dependency between the variability model and the physical model. Though its clear that there is a _connection_ between the two models - at the end of the day, templates can only be initialised when we know the lay of the physical land - it is not ideal that the coupling is made in terms of "direct dependencies" (_i.e._ using a type from the physical model), because it comes at a cost: the graph of dependencies is made more complex because variability is used by many models and these are then coupled to the physical model by way of this small connection. In truth, these models were joined more due to expediency than thought, for, as we mentioned, most features do not actually need template instantiation. Therefore, our core objective was to _decouple_ the physical model from the variability model.
+
+### The tidy-up
+
+One of the side-effects of the decoupling was to make us focus on creating a clear separation between the templatised and non-templatised elements of the logical model modeling variability. This was mainly to avoid increasing the end users cognitive load for no good reason ("why is this a 'template'? what's an 'instance template'?", _etc._). As a result, the stereotypes are now as follows:
+
+> :warning: **Breaking change**: the names and meaning of these stereotypes have changed. User diagrams must be updated.
+
+|Stereotype|Description|
+|--------------|----------------|
+|```masd::variability::profile_template```| Meta-model element defining a profile template. The template is instantiated over a _domain_, as we shall explain below.|
+|```masd::variability::profile```|Meta-model element defining a non-templatised profile. This is equivalent to template kind of ```instance```.|
+|```masd::variability::feature_template_bundle```|Meta-model element defining a feature bundle template. As with profile templates, The template is instantiated over a domain. Note that all features belong to the same domain and are all templates, cleaning up the previous modeling mistake|
+|```masd::variability::feature_bundle```|Meta-model element defining a non-templatised feature bundle.|
+|```masd::variability::initializer```|Replaces the previous ```masd::variability::feature_template_initializer```, providing initialisation for both feature templates and features.|
+
+_Table 1_: Stereotypes related to features and feature templates.
+
+While we were at it, we took the opportunity to update the colour theme, making the distinction between these elements more obvious:
+
+![Dogen's profiles Model](https://github.com/MASD-Project/dogen/raw/master/doc/blog/images/dogen_variability_palette.png)
+_Figure 3_: Colour theme for all variability meta-model elements.
+
+In addition to the stereotype changes, we also modified the approach to template instantiation, as explained on the next story.
+
+## Introduce "Domains" for Template Instantiation
+
+The concept of _domains_ was introduced as a way to achieve the before mentioned decoupling of the variability model from the physical model. Domains are simple sets of strings that can be used as the basis for template instantiation. When users declare templates (_e.g._, profile templates or feature bundle templates), they must now also provide the domain under which instantiation will take place:
+
+```#DOGEN masd.variability.instantiation_domain_name=masd```
+
+This is of course a breaking change:
+
+> :warning: **Breaking change**: ```masd.variability.template_kind``` is no longer supported and must be replaced with ```masd.variability.instantiation_domain_name```. This feature can only be used at the top level with ```masd::variability::profile_template``` and ```masd::variability::feature_template_bundle```.
+
+The following domains are available:
+
+|Domain name|Sample Value|Description|
+|------------------|----------------|---------------|
+|kernel|```masd```|The only supported kernel at present. All backends, facets, and archetypes are part of it.|
+|kernel.backend|```masd.backend```|All backends in the MASD kernel. At present C++ and C#.|
+|kernel.facet|```masd.facet```| All facets in the MASD kernel, across all backends.|
+|kernel.archetype|```masd.archetype```|All archetypes in the MASD kernel, across all backends and facets.|
+|backend.facet|```masd.generation.cpp.facet```|All facets in the C++ backend of the MASD kernel.|
+|backend.archetype|```masd.generation.cpp.archetype```|All archetypes in the C++ backend of the MASD kernel.|
+|facet.archetype|```masd.generation.cpp.types.archetype```|All archetypes in the ```types``` facet, in the C++ backend of the MASD kernel.|
+
+_Table 2_: List of domains available out of the box.
+
+Not all of these domains are being used at present, mind you, but for completeness we created a simple combinatorial function over the existing physical type. With this very simple approach we get all of the functionality we had previously, without any dependencies between variability and physical models, and also with a much clearer set of stereotypes for end users.
+
+## Remove name duplication from feature bundles and profiles
+
+As you can clearly see from both _Figure 1_ and _Figure 2_, defining a profile or a feature bundle often resulted in a great deal of duplication of feature name prefixes, _e.g._, ```masd.generation.decoration``` in the case of the ```decoration``` profile:
+
+```
+masd.generation.decoration.enabled
+masd.generation.decoration.licence_name
+masd.generation.decoration.modeline_group_name
+...
+```
+
+This release introduces a new feature that allows setting a prefix for all features in the bundle or profile:
+
+```
+#DOGEN masd.variability.key_prefix=masd.generation.decoration
+```
+
+Given a sensible profile or feature bundle name, the individual attributes should be meaningful enough to determine what they are about, without minimal repetition. For cases where mixing and matching is required, the old behaviour is still available.
+
+## Mapped default values for feature templates
+
+In the past we found certain weird cases of feature templates where we needed the feature to expand over a domain, but we required different defaults for certain elements of the domain. For example, take the ```postfix``` feature. Ideally, each facet should have the postfix set to a string that correlates with a facet name (say ```hash```) but sometimes to a smaller string (say ```lc``` for ```lexical_cast```) or sometimes to the empty string (say for ```types```). This setup was so complicated we just decided to create these features manually. With this release we found a solution for this problem in the form of mapped default values. These are KVPs as follows:
+
+```
+#DOGEN masd.variability.default_value_override.cpp.tests="tests"
+#DOGEN masd.variability.default_value_override.cpp.hash="hash"
+#DOGEN masd.variability.default_value_override.cpp.lexical_cast="lc"
+#DOGEN masd.variability.default_value_override.cpp.io="io"
+...
+```
+
+With this new feature, we managed to model with one single feature template features that previously required tens of instances.
+
+## Add command line option to dump all specs
+
+Dogen relies heavily on dynamic registration for a lot of its functionality, be it for injectors, features, backends and so forth. To top it all off, we keep changing names of things in our quest for tidying up the conceptual model. As a result, we found ourselves often grepping the code base to figure out what is available - an option that is not exactly practical for end users. With this release we've added a new activity to the command line client: ```dumpspecs```. It works like so:
+
+```
+$ ./dogen.cli dumpspecs
+Group: Injection
+Purpose: Read external formats into Dogen.
+    injection.dia: Decodes Dia diagrams. Extension: '.dia'
+    injection.json: Decodes diagrams in JSON format. Extension: '.json'
+
+Group: Conversion
+Purpose: Output to an external format from a Dogen model.
+    injection.dia: Encodes diagrams as JSON documents. Extension: '.json'
+
+Group: Generators
+Purpose: Available backends for code generation.
+    masd.generation.cpp: Generates C++ code according to the MASD generative model.
+    masd.generation.csharp: Generates C# code according to the MASD generative model.
+
+Group: Features
+Purpose: Available features for configuration.
+    masd.decoration.modeline.editor: Editor to use in this modeline. Binding point: 'any'. Value type: 'masd::variability::text'.
+    masd.decoration.modeline.location: Where to place the modeline. Binding point: 'any'. Value type: 'masd::variability::text'.
+    masd.decoration.modeline.technical_space: Technical space targeted by the modeline. Binding point: 'any'. Value type: 'masd::variability::text'.
+    masd.enumeration.add_invalid_enumerator: If true, adds an enumerator to represent an invalid choice. Binding point: 'element'. Default value: ''. Value type: 'masd::variability::boolean'.
+    masd.enumeration.underlying_element: Name of the underlying element to use for the enumeration. Binding point: 'element'. Value type: 'masd::variability::text'.
+...
+```
+
+Though the documentation may not be the best, we did go through all features and provided some kind of text. Note that for feature templates, all instances share the same comment.
+
+# Development Matters
+
+In this section we cover topics that are mainly of interest if you follow Dogen development, such as details on internal stories that consumed significant resources, important events, etc. As usual, for all the gory details of the work carried out this sprint, see the [sprint log](https://github.com/MASD-Project/dogen/blob/master/doc/agile/v1/sprint_backlog_22.org).
+
+## Significant Internal Stories
+
+The sprint was mostly dominated by a large number of small refactors that changed the internals of Dogen dramatically - though in many cases, mainly with regards to naming and location of classes. We've aggregated all of these stories under two themes.
+
+### The Variability Model Refactor
+
+The majority of the work in refactoring the variability model had user facing consequences, and so is described in great detail above. The main consequences internally was a dramatic reduction on the number of features required, due to an increased use of feature templates now that we can default them correctly. There were other smaller tasks related to this work:
+
+- dramatic simplification of the template instantiation code, which now merely loops through the list of elements in the domain when instantiating feature templates and profile templates.
+- ensure lists and key value pairs within variability are stable sorted. In the past we had used unordered maps in the processing of variability data, resulting on tests breaking across operative systems due to re-ordering. We ended up having to make a fairly difficult surgical intervention, which resulted in a fair amount of breakage.
+
+> :warning: **Breaking change**: Order of header files may change with this release. Other values dependent of order of lists and KVPs may also change such as order of database systems in ORM, and so forth.
+
+### The Physical Model Refactor
+
+The second largest refactor this sprint was related to the physical model. This was comprised of a number of tasks:
+
+- rename the ```assets``` model to ```logical```. In truth, assets has always been the model housing all of the meta-modeling elements for the logical model, so it makes sense to name it after its function.
+- rename the ```archetypes``` model ```physical``` model, and merge it with the extraction model. It took us a long time to understand that the extraction model was really the physical model in disguise. Originally, we had only used it to write files into the filesystem, but now it has taken on additional responsibilities such as defining the types in the physical meta-model.
+- move features related to physical aspects to physical model. This task was started but has not yet been completed.
+- rename the namespace ```meta-model``` used in a number of models to ```entities```. The name was more or less meaningless the way it was being used. In addition, now that we need a meta-model for the physical model, it was becoming confusing. The "blander" name entities should avoid this confusion.
+- deletion of unused types in the generation model, as well as the removal of the partially implemented support for RapidJSON in the C++ model.
+
+## Resourcing
+
+All and all, it was a very successful sprint from a resourcing perspective. At  51%, our utilisation rate was high but not quite the highest it's ever been (the previous sprint wins on that front at 56%). The high utilisation rate was a reflection of the fact that we worked full time for a big portion of the sprint. Sadly, this indicator is scheduled for a massive drop next sprint as we resume part-time work on Dogen proper, but hey-ho, we should celebrate the wins and this sprint was surely one on this front. Additionally, due to the undivided focus we managed to allocate over 82% of the commitment to stories directly related to the sprint's mission, including a couple of spikes (6.8% on unexpected tests breakage). We spent 17.5% on process, with a solid 10% on backlog grooming. Over half of the product backlog was reviewed this sprint, which we consider to be a task of vital importance. In addition, the cost of the demo has gone down dramatically since we started doing "one take demos", and we achieved a new low this sprint of 0.5%. The quality may not be quite what it used to be, but given the [worse is better](https://en.wikipedia.org/wiki/Worse_is_better) approach we favour so much, we deem it to be "good enough". A final note on Emacs, which had some minor blips but was overall fairly well behaved, costing us around 1.3%.
+
+![Story Pie Chart](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_22_pie_chart.jpg)
+_Figure 4: Cost of stories for sprint 22._
+
+## Roadmap
+
+The road map continues to work rather like a Delphic oracle, and we keep trying to devine some kind of prediction that makes sense in terms of the current work. It has, thus far, failed to provide any such information, but somehow, the visualisation of the gantt chart seems to be reassuring us that there is an end in sight - even though, like the proverbial carrot, it keeps moving forwards.
+
+![Project Plan](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_22_project_plan.png)
+
+![Resource Allocation Graph](https://github.com/MASD-Project/dogen/raw/master/doc/agile/v1/sprint_22_resource_allocation_graph.png)
+
+# Next Sprint
+
+We finally started the generation refactor this sprint, though, to be fair, we just about scratched the surface. Next sprint we are hopeful that we will proceed in anger onto the generation breach, and finally make a dent on it.
+
+# Binaries
+
+You can download binaries from [Bintray](https://bintray.com/masd-project/main/dogen) for OSX, Linux and Windows (all 64-bit):
+
+- [dogen_1.0.22_amd64-applications.deb](https://dl.bintray.com/masd-project/main/1.0.22/dogen_1.0.22_amd64-applications.deb)
+- [dogen-1.0.22-Darwin-x86_64.dmg](https://dl.bintray.com/masd-project/main/1.0.22/DOGEN-1.0.22-Darwin-x86_64.dmg)
+- [dogen-1.0.22-Windows-AMD64.msi](https://dl.bintray.com/masd-project/main/DOGEN-1.0.22-Windows-AMD64.msi)
+
+**Note:** The OSX and Linux binaries are not stripped at present and so are larger than they should be. We have [an outstanding story](https://github.com/MASD-Project/dogen/blob/master/doc/agile/product_backlog.org#linux-and-osx-binaries-are-not-stripped) to address this issue, but sadly CMake does not make this trivial.
+
+For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
+
+Happy Modeling!
 #+END_SRC markdown
 
 - [[https://twitter.com/MarcoCraveiro/status/1229849866416816129][twitter]]
 - [[https://www.linkedin.com/posts/marco-craveiro-31558919_masd-projectdogen-activity-6635632094846476289-oXZM][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
-*** Create a demo and presentation for previous sprint                :story:
+*** STARTED Create a demo and presentation for previous sprint        :story:
+    :LOGBOOK:
+    CLOCK: [2020-03-19 Thu 18:02]--[2020-03-19 Thu 18:30] =>  0:28
+    :END:
 
 Time spent creating the demo and presentation. Use the demo project:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-03-18 Wed 19:01]--[2020-03-18 Wed 19:44] =>  0:43
     CLOCK: [2020-03-16 Mon 09:07]--[2020-03-16 Mon 09:16] =>  0:09
     CLOCK: [2020-03-16 Mon 08:41]--[2020-03-16 Mon 08:50] =>  0:09
     :END:
@@ -182,11 +408,22 @@ Notes:
 - formatters should add their data to a registrar that lives in the
   physical model rather than expose it via an interface.
 
+*** Dimension vs view vs perspective                                  :story:
+
+We need to find the definition for how these terms are used within
+UML and see which one is more appropriate for MASD.
+
 *** Replace traits with calls to the formatters                       :story:
 
 Where we are using these traits classes, we should really be including
 the formatter and calling for its static name - at least within each
 backend.
+
+*** Make physical model name a qualified name                         :story:
+
+At present we are setting up the extraction model name from the simple
+name of the model. It should really be the qualified name. Hopefully
+this will only affect tracing and diffing.
 
 *** Refactor enablement types                                         :story:
 
@@ -1189,3 +1426,28 @@ Links:
 - [[https://mariuszbartosik.com/directory-structure-for-a-c-project/][Directory Structure for a C++ Project]]
 
 ** Deprecated
+*** CANCELLED Consider adding =artefact_set= to extraction model      :story:
+    CLOSED: [2020-03-18 Wed 08:16]
+
+*Rationale*: with the recent merge of the physical model, this is no
+longer required.
+
+We are using collections of artefacts quite a bit, and it makes sense
+to create an abstraction for it such as a =artefact_set=. However, for
+this to work properly we need to add at least one basic behaviour: the
+ability to merge two artefact sets. Or else we will end up having to
+unpack the artefacts, then merging them, then creating a new artefact
+set.
+
+Problem is, we either create the artefact set as a non-generatable
+type - not ideal - or we create it as generatable and need to add this
+as a free function. We need to wait until dogen has support for
+merging code generation.
+
+*** CANCELLED Check if enable kernel directories is on extraction     :story:
+    CLOSED: [2020-03-18 Wed 08:28]
+
+*Rationale*: this story has bit-rotted.
+
+When we moved the kernel logic into yarn from quilt, we did not rename
+the traits.
