@@ -12,29 +12,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-19 Thu 18:30]
+#+CAPTION: Clock summary at [2020-03-19 Thu 20:03]
 | <75>                                               |         |       |      |       |
 | Headline                                           | Time    |       |      |     % |
 |----------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                       | *20:15* |       |      | 100.0 |
+| *Total time*                                       | *21:14* |       |      | 100.0 |
 |----------------------------------------------------+---------+-------+------+-------|
-| Stories                                            | 20:15   |       |      | 100.0 |
-| Active                                             |         | 20:15 |      | 100.0 |
-| Edit release notes for previous sprint             |         |       | 4:41 |  23.1 |
-| Create a demo and presentation for previous sprint |         |       | 0:28 |   2.3 |
-| Sprint and product backlog grooming                |         |       | 1:01 |   5.0 |
-| Rename archetypes model to physical model          |         |       | 0:28 |   2.3 |
-| Rename assets model to logical model               |         |       | 0:29 |   2.4 |
-| Consider renaming "meta-model" namespace           |         |       | 0:37 |   3.0 |
-| Rename engine to orchestration                     |         |       | 1:04 |   5.3 |
-| Merge extraction model with physical model         |         |       | 4:35 |  22.6 |
-| Design and implement new physical types            |         |       | 5:39 |  27.9 |
-| Implement the physical meta-model                  |         |       | 1:13 |   6.0 |
+| Stories                                            | 21:14   |       |      | 100.0 |
+| Active                                             |         | 21:14 |      | 100.0 |
+| Edit release notes for previous sprint             |         |       | 5:40 |  26.7 |
+| Create a demo and presentation for previous sprint |         |       | 0:28 |   2.2 |
+| Sprint and product backlog grooming                |         |       | 1:01 |   4.8 |
+| Rename archetypes model to physical model          |         |       | 0:28 |   2.2 |
+| Rename assets model to logical model               |         |       | 0:29 |   2.3 |
+| Consider renaming "meta-model" namespace           |         |       | 0:37 |   2.9 |
+| Rename engine to orchestration                     |         |       | 1:04 |   5.0 |
+| Merge extraction model with physical model         |         |       | 4:35 |  21.6 |
+| Design and implement new physical types            |         |       | 5:39 |  26.6 |
+| Implement the physical meta-model                  |         |       | 1:13 |   5.7 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
-*** STARTED Edit release notes for previous sprint                    :story:
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2020-03-19 Thu 19:47]
     :LOGBOOK:
+    CLOCK: [2020-03-19 Thu 20:00]--[2020-03-19 Thu 20:03] =>  0:03
+    CLOCK: [2020-03-19 Thu 19:48]--[2020-03-19 Thu 19:59] =>  0:11
+    CLOCK: [2020-03-19 Thu 19:02]--[2020-03-19 Thu 19:47] =>  0:45
     CLOCK: [2020-03-18 Wed 20:05]--[2020-03-18 Wed 23:59] =>  3:54
     CLOCK: [2020-03-18 Wed 19:01]--[2020-03-18 Wed 19:33] =>  0:32
     CLOCK: [2020-03-16 Mon 08:51]--[2020-03-16 Mon 09:06] =>  0:15
@@ -266,11 +270,12 @@ For all other architectures and/or operative systems, you will need to build Dog
 Happy Modeling!
 #+END_SRC markdown
 
-- [[https://twitter.com/MarcoCraveiro/status/1229849866416816129][twitter]]
-- [[https://www.linkedin.com/posts/marco-craveiro-31558919_masd-projectdogen-activity-6635632094846476289-oXZM][linkedin]]
+- [[https://twitter.com/MarcoCraveiro/status/1240728672128172033][twitter]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6646494675207278592/][linkedin]]
 - [[https://gitter.im/MASD-Project/Lobby][Gitter]]
 
-*** STARTED Create a demo and presentation for previous sprint        :story:
+*** COMPLETED Create a demo and presentation for previous sprint      :story:
+    CLOSED: [2020-03-19 Thu 19:47]
     :LOGBOOK:
     CLOCK: [2020-03-19 Thu 18:02]--[2020-03-19 Thu 18:30] =>  0:28
     :END:
