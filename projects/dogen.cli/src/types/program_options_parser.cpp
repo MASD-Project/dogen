@@ -308,6 +308,18 @@ options_description make_convert_options_description() {
 }
 
 /**
+ * @brief Creates the options related to dumping specs.
+ */
+options_description make_dumpspecs_options_description() {
+    options_description r("Dumping specs");
+    r.add_options()
+        ("reporting-format", value<std::string>(), "Format to use for dumping"
+            " specs. Valid values: plain, org-mode. Defaults to org-mode.");
+
+    return r;
+}
+
+/**
  * @brief ensures the supplied command is a valid command. If not,
  * reports the erros into stream and throws.
  */
@@ -580,9 +592,8 @@ read_reporting_configuration(const variables_map& vm,
     if (!enabled)
         return boost::optional<reporting_configuration>();
 
-    using dogen::reporting_style;
     reporting_configuration r;
-
+    using dogen::reporting_style;
     if (vm.count(reporting_style_arg)) {
         const auto s(vm[reporting_style_arg].as<std::string>());
 
@@ -749,6 +760,26 @@ read_conversion_configuration(const variables_map& vm) {
     return r;
 }
 
+dumpspecs_configuration
+read_dumpspecs_configuration(const variables_map& vm) {
+    dumpspecs_configuration r;
+
+    using dogen::reporting_style;
+    if (vm.count(reporting_style_arg)) {
+        const auto s(vm[reporting_style_arg].as<std::string>());
+
+        if (s == reporting_style_org_mode)
+            r.style(reporting_style::org_mode);
+        else if (s == reporting_style_plain)
+            r.style(reporting_style::plain);
+        else
+            BOOST_THROW_EXCEPTION(parser_exception(
+                    invalid_reporting_style + s));
+    }
+    r.style(reporting_style::org_mode);
+    return r;
+}
+
 boost::filesystem::path read_byproduct_directory(
     const variables_map& vm, const std::string& run_identifier) {
 
@@ -802,30 +833,36 @@ handle_command(const std::string& command_name, const bool has_help,
     using boost::program_options::command_line_parser;
     typedef boost::optional<configuration> empty_config;
     if (command_name == generate_command_name) {
-        const auto god(make_generate_options_description());
+        const auto d(make_generate_options_description());
         if (has_help) {
-            print_help_command(generate_command_name, god, info);
+            print_help_command(generate_command_name, d, info);
             return empty_config();
         }
 
-        store(command_line_parser(options).options(god).run(), vm);
-        const auto gc(read_generation_configuration(vm));
-        target = gc.target();
-        r.cli().activity(gc);
+        store(command_line_parser(options).options(d).run(), vm);
+        const auto c(read_generation_configuration(vm));
+        target = c.target();
+        r.cli().activity(c);
     } else if (command_name == convert_command_name) {
-        const auto cod(make_convert_options_description());
+        const auto d(make_convert_options_description());
         if (has_help) {
-            print_help_command(convert_command_name, cod, info);
+            print_help_command(convert_command_name, d, info);
             return empty_config();
         }
 
-        store(command_line_parser(options).options(cod).run(), vm);
-        const auto cc(read_conversion_configuration(vm));
-        target = cc.source();
-        r.cli().activity(cc);
+        store(command_line_parser(options).options(d).run(), vm);
+        const auto c(read_conversion_configuration(vm));
+        target = c.source();
+        r.cli().activity(c);
     } else if (command_name == dumpspecs_command_name) {
-        dumpspecs_configuration dc;
-        r.cli().activity(dc);
+        const auto d(make_dumpspecs_options_description());
+        if (has_help) {
+            print_help_command(convert_command_name, d, info);
+            return empty_config();
+        }
+        store(command_line_parser(options).options(d).run(), vm);
+        const auto c(read_dumpspecs_configuration(vm));
+        r.cli().activity(c);
     }
 
     /*
@@ -833,19 +870,19 @@ handle_command(const std::string& command_name, const bool has_help,
      * related stuff will be placed.
      */
     const auto run_id(compute_run_identifier(command_name, target));
-    const auto bp(read_byproduct_directory(vm, run_id));
-    r.api().byproduct_directory(bp);
+    const auto bd(read_byproduct_directory(vm, run_id));
+    r.api().byproduct_directory(bd);
 
     /*
      * Now process the common options. We must do this at the end
      * because we require the model name.
      */
-    r.logging(read_logging_configuration(run_id, vm, bp));
+    r.logging(read_logging_configuration(run_id, vm, bd));
     const auto li(compute_logging_impact(r.logging()));
     auto& a(r.api());
-    a.tracing(read_tracing_configuration(vm, li, bp));
-    a.reporting(read_reporting_configuration(vm, bp));
-    a.diffing(read_diffing_configuration(vm, bp));
+    a.tracing(read_tracing_configuration(vm, li, bd));
+    a.reporting(read_reporting_configuration(vm, bd));
+    a.diffing(read_diffing_configuration(vm, bd));
     a.model_processing(read_model_processing_configuration(vm));
     a.database(read_database_configuration(vm));
 
