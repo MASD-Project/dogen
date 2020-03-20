@@ -281,7 +281,8 @@
       "name": "reporting_style",
       "documentation": "Available formats for operational reports.\n",
       "stereotypes": [
-        "masd::enumeration"
+        "masd::enumeration",
+        "dogen::convertible"
       ],
       "fallback_element_type": "masd::object",
       "attributes": [
