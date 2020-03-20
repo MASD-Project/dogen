@@ -12,28 +12,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-20 Fri 11:55]
+#+CAPTION: Clock summary at [2020-03-20 Fri 14:30]
 | <75>                                                          |         |       |      |       |
 | Headline                                                      | Time    |       |      |     % |
 |---------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                  | *25:58* |       |      | 100.0 |
+| *Total time*                                                  | *27:26* |       |      | 100.0 |
 |---------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                       | 25:58   |       |      | 100.0 |
-| Active                                                        |         | 25:58 |      | 100.0 |
-| Edit release notes for previous sprint                        |         |       | 7:27 |  28.7 |
-| Create a demo and presentation for previous sprint            |         |       | 0:28 |   1.8 |
-| Sprint and product backlog grooming                           |         |       | 1:30 |   5.8 |
-| Rename archetypes model to physical model                     |         |       | 0:28 |   1.8 |
-| Rename assets model to logical model                          |         |       | 0:29 |   1.9 |
-| Consider renaming "meta-model" namespace                      |         |       | 0:37 |   2.4 |
-| Rename engine to orchestration                                |         |       | 1:04 |   4.1 |
-| Merge extraction model with physical model                    |         |       | 4:35 |  17.7 |
+| Stories                                                       | 27:26   |       |      | 100.0 |
+| Active                                                        |         | 27:26 |      | 100.0 |
+| Edit release notes for previous sprint                        |         |       | 7:27 |  27.2 |
+| Create a demo and presentation for previous sprint            |         |       | 0:28 |   1.7 |
+| Sprint and product backlog grooming                           |         |       | 1:43 |   6.3 |
+| Rename archetypes model to physical model                     |         |       | 0:28 |   1.7 |
+| Rename assets model to logical model                          |         |       | 0:29 |   1.8 |
+| Consider renaming "meta-model" namespace                      |         |       | 0:37 |   2.2 |
+| Rename engine to orchestration                                |         |       | 1:04 |   3.9 |
+| Merge extraction model with physical model                    |         |       | 4:35 |  16.7 |
 | Remove manual feature in profile merge transform              |         |       | 0:08 |   0.5 |
-| Add variability domains to the dumpspecs activity             |         |       | 0:12 |   0.8 |
-| Add org-mode option to dumpspacs                              |         |       | 0:53 |   3.4 |
-| Analysis on designing and implement physical types            |         |       | 6:52 |  26.4 |
+| Add variability domains to the dumpspecs activity             |         |       | 0:12 |   0.7 |
+| Add org-mode option to dumpspacs                              |         |       | 0:53 |   3.2 |
+| Analysis on designing and implement physical types            |         |       | 6:52 |  25.0 |
 | Remove =element= from the modeling location                   |         |       | 0:02 |   0.1 |
-| Implement archetype locations in terms of physical meta-model |         |       | 1:13 |   4.7 |
+| Implement archetype locations in terms of physical meta-model |         |       | 2:28 |   9.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -306,6 +306,7 @@ Time spent creating the demo and presentation. Use the demo project:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-03-20 Fri 14:17]--[2020-03-20 Fri 14:30] =>  0:13
     CLOCK: [2020-03-20 Fri 11:23]--[2020-03-20 Fri 11:52] =>  0:29
     CLOCK: [2020-03-18 Wed 19:01]--[2020-03-18 Wed 19:44] =>  0:43
     CLOCK: [2020-03-16 Mon 09:07]--[2020-03-16 Mon 09:16] =>  0:09
@@ -468,8 +469,9 @@ We introduced this for inner classes, but its (probably) not being
 used. If so, remove it and add a story for inner classes, if one does
 not yet exist.
 
-*** Implement archetype locations in terms of physical meta-model     :story:
+*** STARTED Implement archetype locations in terms of physical meta-model :story:
     :LOGBOOK:
+    CLOCK: [2020-03-20 Fri 13:01]--[2020-03-20 Fri 14:16] =>  1:15
     CLOCK: [2020-03-17 Tue 17:15]--[2020-03-17 Tue 17:24] =>  0:09
     CLOCK: [2020-03-17 Tue 15:25]--[2020-03-17 Tue 16:29] =>  1:04
     :END:
@@ -788,6 +790,39 @@ At present these transforms are in generation, but we don't think
 that's the right place. We need some analysis to understand what they
 do and why they are not in the logical model.
 
+*** Use static registration with initialisers                         :story:
+
+Since the start, we avoided using static registration for
+initialisation due to the static initialisation order fiasco. Its much
+better to manually determine the order of initialisation and do it
+under programatic control rather than depend on the linker. However,
+the downside is that we now have lots of code that needs to be called,
+and every so often we forget to join all the dots. Perhaps we need
+something in between complete "manual registration" and static
+registration. Instead of supplying the registrars from the top-level,
+we could instead:
+
+- use static registration for a top-level initialiser. This is a very
+  simple interface that has only one method: initialise. It uses
+  regular static registration, but it merely adds itself to a
+  list. Nothing else happens during static initialisation.
+- when program starts, we call =initialise()= on all initialisers.
+- within a given component, the top-level initialiser calls other
+  initialisers. Internally, it obtains references to static registrars
+  as required (e.g. features, etc). All of this happens during normal
+  program execution, so we can log.
+- DLLs can register initialisers on load. However, we are expected to
+  load them prior to calling initialisation.
+- all registrars should have a "validate" method. We should check that
+  they are not empty. This method should be called prior to use. We
+  should also have a "initialised" flag that stops
+  double-initialisation. It should be set as the last step of
+  initialisation.
+
+Links:
+
+- [[https://dxuuu.xyz/cpp-static-registration.html][C++ patterns: static registration]]
+
 *** Consider bucketing elements by meta-type in generation model      :story:
 
 At the moment we have a flat container of elements in the main
@@ -811,6 +846,11 @@ model.
 
 This can be done in the generation model, as part of the generation
 clean up.
+
+*** Dimension vs view vs perspective                                  :story:
+
+We need to find the definition for how these terms are used within
+UML and see which one is more appropriate for MASD.
 
 *** Add support for product skeleton generation                       :story:
 
@@ -1247,11 +1287,6 @@ components, each with their own primary technical space.
 Where we are using these traits classes, we should really be including
 the formatter and calling for its static name - at least within each
 backend.
-
-*** Dimension vs view vs perspective                                  :story:
-
-We need to find the definition for how these terms are used within
-UML and see which one is more appropriate for MASD.
 
 *** Make creating new facets easier                                   :story:
 
@@ -1813,3 +1848,66 @@ it to the "public" side of dogen; but it would be nice to create a
 formatter to generate them so that we don't have to do it
 manually. For these "private formatters" we would need to load a SO
 with them into a dogen binary.
+*** CANCELLED Protect against double-initialisation                   :story:
+    CLOSED: [2020-03-20 Fri 14:27]
+
+*Rationale*: we have a more comprehensive solution for this problem
+that takes this issue into account.
+
+We need to look into static initialisation and make sure the code can
+cope with it being called several times.
+
+At present it seems we would re-register fields, backends, etc so
+multiple initialisation would fail.
+
+In addition to this, we should also look into passing the registrars
+into the initialisers. At present we are calling the static methods
+directly. This is not ideal, because just like with singletons, we are
+hiding the dependencies. We should really pass the registrars in the
+initialise function so we can see the dependencies at the top-level.
+
+A second related problem is the lack of initialisation. We need to
+have some really meaningful exception that tells users when they
+forgot to initialise the framework.
+
+This story will eventually become irrelevant once we move to Boost.DI.
+
+*** CANCELLED Generate a feature initialiser for all initialisers     :story:
+    CLOSED: [2020-03-20 Fri 14:28]
+
+*Rationale*: we have a more comprehensive solution for this problem
+that takes this issue into account.
+
+At present we are code-generating the features and the initialiser for
+the features in each model. However, we then need to remember to call
+all of the initialisers. This is done, somewhat arbitrarily, in the
+context factory:
+
+: variability::meta_model::feature_template_repository
+: make_feature_template_repository() {
+:     variability::helpers::feature_template_registrar rg;
+:     injection::features::initializer::register_templates(rg);
+:     assets::features::initializer::register_templates(rg);
+:     generation::features::initializer::register_templates(rg);
+:     templating::initializer::register_templates(rg);
+:     variability::features::initializer::register_templates(rg);
+:     archetypes::features::initializer::register_templates(rg);
+:     extraction::features::initializer::register_templates(rg);
+:     generation::cpp::feature_initializer::register_templates(rg);
+:     generation::csharp::feature_initializer::register_templates(rg);
+:     features::initializer::register_templates(rg);
+:     const auto r(rg.repository());
+:     return r;
+: }
+
+It would be much better if we could just extend the initialiser to
+know of all dependent initialisers and call them. This way the
+initialiser in engine would already call all of the initialisers. This
+can probably be easily done by:
+
+- allowing more than one initialiser in the merged model
+- as part of the merge, keep track of the "dependent" models, and of
+  their initialisers. We probably already do something similar for the
+  registrar.
+- ensure the initialisers only do something the first time they are
+  called. We already have a story for this somewhere in the backlog.

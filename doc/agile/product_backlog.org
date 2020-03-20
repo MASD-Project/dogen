@@ -2226,42 +2226,6 @@ support is not there.
 When we do this we need to split relatable into "associatable" and
 "generalisable" and get exceptions to model generalisable.
 
-*** Generate a feature initialiser for all initialisers               :story:
-
-At present we are code-generating the features and the initialiser for
-the features in each model. However, we then need to remember to call
-all of the initialisers. This is done, somewhat arbitrarily, in the
-context factory:
-
-: variability::meta_model::feature_template_repository
-: make_feature_template_repository() {
-:     variability::helpers::feature_template_registrar rg;
-:     injection::features::initializer::register_templates(rg);
-:     assets::features::initializer::register_templates(rg);
-:     generation::features::initializer::register_templates(rg);
-:     templating::initializer::register_templates(rg);
-:     variability::features::initializer::register_templates(rg);
-:     archetypes::features::initializer::register_templates(rg);
-:     extraction::features::initializer::register_templates(rg);
-:     generation::cpp::feature_initializer::register_templates(rg);
-:     generation::csharp::feature_initializer::register_templates(rg);
-:     features::initializer::register_templates(rg);
-:     const auto r(rg.repository());
-:     return r;
-: }
-
-It would be much better if we could just extend the initialiser to
-know of all dependent initialisers and call them. This way the
-initialiser in engine would already call all of the initialisers. This
-can probably be easily done by:
-
-- allowing more than one initialiser in the merged model
-- as part of the merge, keep track of the "dependent" models, and of
-  their initialisers. We probably already do something similar for the
-  registrar.
-- ensure the initialisers only do something the first time they are
-  called. We already have a story for this somewhere in the backlog.
-
 *** Add ORM type mapping support to primitives                        :story:
 
 At present we can setup a type map in ORM as follows:
@@ -3575,6 +3539,36 @@ Notes:
   archive. We need to look into the boost serialisation documentation
   and see if there is a way to make the code look a bit more like the
   other instances of this pattern.
+
+*** Code generation of registrars for static registration             :story:
+
+We are using a lot of static registration and we have converged into
+what appears to be a useful pattern. It would be nice to be able to
+mark a type as registrable and to have the registrar automatically
+generated for it, with a name configurable via dynamic extensions. We
+would also need to configure the registration method (name,
+arguments - we may want to register against a string or just have a
+list of registered types).
+
+The next logical step would be to code-generate the static
+initialisers too. For this we would have to be aware of all types to
+register in a given model (perhaps by looking at inheritance across
+models) and for each of these generate the appropriate initialiser
+code. This is more tricky but it would be really useful. Actually
+given the templatisation of formatters, this is not useful any longer.
+
+Tasks:
+
+- create a registrar type in yarn and associated stereotype.
+- add keys to link types to a yarn type. This should be generic so
+  that we can use it for other model elements. We could either do it
+  the hard (static) way where we manually list the types, or in a more
+  dynamic way by providing a base class and letting yarn determine all
+  of the descendants.
+- add formatter interfaces and a stitch template for registrar.
+
+Note: the sample principles probably apply for code generating the
+container.
 
 *** Update the MASD UML profile to reflect the latest changes         :story:
 
@@ -6911,26 +6905,6 @@ The right thing to do is to throw a more sensible exception such as
 
 Once we have a use case for default values in text collections we
 should add it.
-
-*** Protect against double-initialisation                             :story:
-
-We need to look into static initialisation and make sure the code can
-cope with it being called several times.
-
-At present it seems we would re-register fields, backends, etc so
-multiple initialisation would fail.
-
-In addition to this, we should also look into passing the registrars
-into the initialisers. At present we are calling the static methods
-directly. This is not ideal, because just like with singletons, we are
-hiding the dependencies. We should really pass the registrars in the
-initialise function so we can see the dependencies at the top-level.
-
-A second related problem is the lack of initialisation. We need to
-have some really meaningful exception that tells users when they
-forgot to initialise the framework.
-
-This story will eventually become irrelevant once we move to Boost.DI.
 
 *** Perform lexical casts once only for error reporting               :story:
 
@@ -10448,36 +10422,6 @@ In addition, we could also make the namespace separators for modules
 configurable; if we didn't use underscores for modules we would not
 have a clash. However, its not clear what the separator would then be
 (double underscore?).
-
-*** Code generation of registrars for static registration             :story:
-
-We are using a lot of static registration and we have converged into
-what appears to be a useful pattern. It would be nice to be able to
-mark a type as registrable and to have the registrar automatically
-generated for it, with a name configurable via dynamic extensions. We
-would also need to configure the registration method (name,
-arguments - we may want to register against a string or just have a
-list of registered types).
-
-The next logical step would be to code-generate the static
-initialisers too. For this we would have to be aware of all types to
-register in a given model (perhaps by looking at inheritance across
-models) and for each of these generate the appropriate initialiser
-code. This is more tricky but it would be really useful. Actually
-given the templatisation of formatters, this is not useful any longer.
-
-Tasks:
-
-- create a registrar type in yarn and associated stereotype.
-- add keys to link types to a yarn type. This should be generic so
-  that we can use it for other model elements. We could either do it
-  the hard (static) way where we manually list the types, or in a more
-  dynamic way by providing a base class and letting yarn determine all
-  of the descendants.
-- add formatter interfaces and a stitch template for registrar.
-
-Note: the sample principles probably apply for code generating the
-container.
 
 *** Consider adding facet specific types                               :epic:
 
