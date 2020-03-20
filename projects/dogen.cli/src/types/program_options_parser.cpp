@@ -313,7 +313,7 @@ options_description make_convert_options_description() {
 options_description make_dumpspecs_options_description() {
     options_description r("Dumping specs");
     r.add_options()
-        ("reporting-format", value<std::string>(), "Format to use for dumping"
+        ("reporting-style", value<std::string>(), "Format to use for dumping"
             " specs. Valid values: plain, org-mode. Defaults to org-mode.");
 
     return r;
@@ -775,8 +775,9 @@ read_dumpspecs_configuration(const variables_map& vm) {
         else
             BOOST_THROW_EXCEPTION(parser_exception(
                     invalid_reporting_style + s));
-    }
-    r.style(reporting_style::org_mode);
+    } else
+        r.style(reporting_style::org_mode);
+
     return r;
 }
 
