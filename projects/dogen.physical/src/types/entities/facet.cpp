@@ -26,12 +26,14 @@ facet::facet(
     const std::string& directory_name,
     const dogen::physical::entities::location& location,
     const std::string& description,
-    const std::string& postfix,
+    const std::string& default_postfix,
+    const std::string& override_postfix,
     const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes)
     : directory_name_(directory_name),
       location_(location),
       description_(description),
-      postfix_(postfix),
+      default_postfix_(default_postfix),
+      override_postfix_(override_postfix),
       archetypes_(archetypes) { }
 
 void facet::swap(facet& other) noexcept {
@@ -39,7 +41,8 @@ void facet::swap(facet& other) noexcept {
     swap(directory_name_, other.directory_name_);
     swap(location_, other.location_);
     swap(description_, other.description_);
-    swap(postfix_, other.postfix_);
+    swap(default_postfix_, other.default_postfix_);
+    swap(override_postfix_, other.override_postfix_);
     swap(archetypes_, other.archetypes_);
 }
 
@@ -47,7 +50,8 @@ bool facet::operator==(const facet& rhs) const {
     return directory_name_ == rhs.directory_name_ &&
         location_ == rhs.location_ &&
         description_ == rhs.description_ &&
-        postfix_ == rhs.postfix_ &&
+        default_postfix_ == rhs.default_postfix_ &&
+        override_postfix_ == rhs.override_postfix_ &&
         archetypes_ == rhs.archetypes_;
 }
 
@@ -105,20 +109,36 @@ void facet::description(const std::string&& v) {
     description_ = std::move(v);
 }
 
-const std::string& facet::postfix() const {
-    return postfix_;
+const std::string& facet::default_postfix() const {
+    return default_postfix_;
 }
 
-std::string& facet::postfix() {
-    return postfix_;
+std::string& facet::default_postfix() {
+    return default_postfix_;
 }
 
-void facet::postfix(const std::string& v) {
-    postfix_ = v;
+void facet::default_postfix(const std::string& v) {
+    default_postfix_ = v;
 }
 
-void facet::postfix(const std::string&& v) {
-    postfix_ = std::move(v);
+void facet::default_postfix(const std::string&& v) {
+    default_postfix_ = std::move(v);
+}
+
+const std::string& facet::override_postfix() const {
+    return override_postfix_;
+}
+
+std::string& facet::override_postfix() {
+    return override_postfix_;
+}
+
+void facet::override_postfix(const std::string& v) {
+    override_postfix_ = v;
+}
+
+void facet::override_postfix(const std::string&& v) {
+    override_postfix_ = std::move(v);
 }
 
 const std::unordered_map<std::string, dogen::physical::entities::archetype>& facet::archetypes() const {

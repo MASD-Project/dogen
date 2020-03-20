@@ -38,7 +38,8 @@ std::ostream& operator<<(std::ostream& s, const archetype& v) {
       << "\"__type__\": " << "\"dogen::physical::entities::archetype\"" << ", "
       << "\"location\": " << v.location() << ", "
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
-      << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\"" << ", "
+      << "\"default_postfix\": " << "\"" << tidy_up_string(v.default_postfix()) << "\"" << ", "
+      << "\"override_postfix\": " << "\"" << tidy_up_string(v.override_postfix()) << "\"" << ", "
       << "\"archetype_kind_id\": " << "\"" << tidy_up_string(v.archetype_kind_id()) << "\"" << ", "
       << "\"meta_element_id\": " << "\"" << tidy_up_string(v.meta_element_id()) << "\""
       << " }";

@@ -489,9 +489,14 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "postfix",
+          "name": "default_postfix",
           "type": "std::string",
-          "documentation": "Postfix to apply to the element.\n"
+          "documentation": "Default postfix for the element.\n"
+        },
+        {
+          "name": "override_postfix",
+          "type": "std::string",
+          "documentation": "Overridden postfix, if any.\n"
         }
       ]
     },

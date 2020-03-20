@@ -5535,16 +5535,16 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="129,-87"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="128.95,-87.05;139.175,-83.35"/>
+        <dia:rectangle val="128.95,-87.05;141.1,-82.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="129,-87"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.125"/>
+        <dia:real val="12.050000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#Postfixable#</dia:string>
@@ -5636,7 +5636,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#postfix#</dia:string>
+            <dia:string>#default_postfix#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -5645,7 +5645,30 @@ Provides details of the kernels available in the current instance of Dogen.#</di
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Postfix to apply to the element.#</dia:string>
+            <dia:string>#Default postfix for the element.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#override_postfix#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Overridden postfix, if any.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7280,13 +7303,13 @@ Provides details of the kernels available in the current instance of Dogen.#</di
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O57">
       <dia:attribute name="obj_pos">
-        <dia:point val="142,-87"/>
+        <dia:point val="143,-87"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="141.95,-87.05;163.34,-81.75"/>
+        <dia:rectangle val="142.95,-87.05;164.34,-81.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="142,-87"/>
+        <dia:point val="143,-87"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="21.289999999999999"/>
@@ -7523,7 +7546,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="143.03,-78"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="142.28,-81.85;152.845,-77.2"/>
+        <dia:rectangle val="142.28,-81.85;153.845,-77.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7531,8 +7554,8 @@ Provides details of the kernels available in the current instance of Dogen.#</di
       <dia:attribute name="orth_points">
         <dia:point val="143.03,-78"/>
         <dia:point val="143.03,-80"/>
-        <dia:point val="152.645,-80"/>
-        <dia:point val="152.645,-81.8"/>
+        <dia:point val="153.645,-80"/>
+        <dia:point val="153.645,-81.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

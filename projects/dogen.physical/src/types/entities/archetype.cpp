@@ -25,12 +25,14 @@ namespace dogen::physical::entities {
 archetype::archetype(
     const dogen::physical::entities::location& location,
     const std::string& description,
-    const std::string& postfix,
+    const std::string& default_postfix,
+    const std::string& override_postfix,
     const std::string& archetype_kind_id,
     const std::string& meta_element_id)
     : location_(location),
       description_(description),
-      postfix_(postfix),
+      default_postfix_(default_postfix),
+      override_postfix_(override_postfix),
       archetype_kind_id_(archetype_kind_id),
       meta_element_id_(meta_element_id) { }
 
@@ -38,7 +40,8 @@ void archetype::swap(archetype& other) noexcept {
     using std::swap;
     swap(location_, other.location_);
     swap(description_, other.description_);
-    swap(postfix_, other.postfix_);
+    swap(default_postfix_, other.default_postfix_);
+    swap(override_postfix_, other.override_postfix_);
     swap(archetype_kind_id_, other.archetype_kind_id_);
     swap(meta_element_id_, other.meta_element_id_);
 }
@@ -46,7 +49,8 @@ void archetype::swap(archetype& other) noexcept {
 bool archetype::operator==(const archetype& rhs) const {
     return location_ == rhs.location_ &&
         description_ == rhs.description_ &&
-        postfix_ == rhs.postfix_ &&
+        default_postfix_ == rhs.default_postfix_ &&
+        override_postfix_ == rhs.override_postfix_ &&
         archetype_kind_id_ == rhs.archetype_kind_id_ &&
         meta_element_id_ == rhs.meta_element_id_;
 }
@@ -89,20 +93,36 @@ void archetype::description(const std::string&& v) {
     description_ = std::move(v);
 }
 
-const std::string& archetype::postfix() const {
-    return postfix_;
+const std::string& archetype::default_postfix() const {
+    return default_postfix_;
 }
 
-std::string& archetype::postfix() {
-    return postfix_;
+std::string& archetype::default_postfix() {
+    return default_postfix_;
 }
 
-void archetype::postfix(const std::string& v) {
-    postfix_ = v;
+void archetype::default_postfix(const std::string& v) {
+    default_postfix_ = v;
 }
 
-void archetype::postfix(const std::string&& v) {
-    postfix_ = std::move(v);
+void archetype::default_postfix(const std::string&& v) {
+    default_postfix_ = std::move(v);
+}
+
+const std::string& archetype::override_postfix() const {
+    return override_postfix_;
+}
+
+std::string& archetype::override_postfix() {
+    return override_postfix_;
+}
+
+void archetype::override_postfix(const std::string& v) {
+    override_postfix_ = v;
+}
+
+void archetype::override_postfix(const std::string&& v) {
+    override_postfix_ = std::move(v);
 }
 
 const std::string& archetype::archetype_kind_id() const {

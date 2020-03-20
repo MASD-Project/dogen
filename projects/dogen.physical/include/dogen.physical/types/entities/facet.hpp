@@ -45,7 +45,8 @@ public:
         const std::string& directory_name,
         const dogen::physical::entities::location& location,
         const std::string& description,
-        const std::string& postfix,
+        const std::string& default_postfix,
+        const std::string& override_postfix,
         const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes);
 
 public:
@@ -75,13 +76,23 @@ public:
     /**@}*/
 
     /**
-     * @brief Postfix to apply to the element.
+     * @brief Default postfix for the element.
      */
     /**@{*/
-    const std::string& postfix() const;
-    std::string& postfix();
-    void postfix(const std::string& v);
-    void postfix(const std::string&& v);
+    const std::string& default_postfix() const;
+    std::string& default_postfix();
+    void default_postfix(const std::string& v);
+    void default_postfix(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Overridden postfix, if any.
+     */
+    /**@{*/
+    const std::string& override_postfix() const;
+    std::string& override_postfix();
+    void override_postfix(const std::string& v);
+    void override_postfix(const std::string&& v);
     /**@}*/
 
     const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes() const;
@@ -103,7 +114,8 @@ private:
     std::string directory_name_;
     dogen::physical::entities::location location_;
     std::string description_;
-    std::string postfix_;
+    std::string default_postfix_;
+    std::string override_postfix_;
     std::unordered_map<std::string, dogen::physical::entities::archetype> archetypes_;
 };
 

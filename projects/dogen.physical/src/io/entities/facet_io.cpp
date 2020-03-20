@@ -58,7 +58,8 @@ std::ostream& operator<<(std::ostream& s, const facet& v) {
       << "\"directory_name\": " << "\"" << tidy_up_string(v.directory_name()) << "\"" << ", "
       << "\"location\": " << v.location() << ", "
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
-      << "\"postfix\": " << "\"" << tidy_up_string(v.postfix()) << "\"" << ", "
+      << "\"default_postfix\": " << "\"" << tidy_up_string(v.default_postfix()) << "\"" << ", "
+      << "\"override_postfix\": " << "\"" << tidy_up_string(v.override_postfix()) << "\"" << ", "
       << "\"archetypes\": " << v.archetypes()
       << " }";
     return(s);
