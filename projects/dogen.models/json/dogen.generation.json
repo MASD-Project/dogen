@@ -737,30 +737,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "features::formatting",
-      "documentation": "Features related to formatting.\n",
-      "stereotypes": [
-        "masd::variability::feature_template_bundle"
-      ],
-      "tagged_values": {
-        "masd.variability.default_binding_point": "any",
-        "masd.variability.instantiation_domain_name": "masd.archetype"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "formatting_style",
-          "type": "masd::variability::text",
-          "documentation": "Style of formatting to use for this archetype.\n"
-        },
-        {
-          "name": "formatting_input",
-          "type": "masd::variability::text",
-          "documentation": "If the formatting style requires a template, the name of the template to use.\n"
-        }
-      ]
-    },
-    {
       "name": "entities::DeterminableOrigin",
       "documentation": "A unit of assets that can be code generated.\n",
       "stereotypes": [
@@ -797,71 +773,6 @@
         "dogen::handcrafted::cmake"
       ],
       "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "features::enablement",
-      "documentation": "Enablement related properties.\n",
-      "stereotypes": [
-        "masd::variability::feature_template_bundle"
-      ],
-      "tagged_values": {
-        "masd.variability.default_binding_point": "any",
-        "masd.variability.generate_static_configuration": "false",
-        "masd.variability.instantiation_domain_name": "masd"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "enabled",
-          "type": "masd::variability::boolean",
-          "value": "\"true\"",
-          "documentation": "If true, decorations are enabled on this modeling element.\n"
-        }
-      ]
-    },
-    {
-      "name": "features::facet_features",
-      "documentation": "Features common to all facets.\n",
-      "stereotypes": [
-        "masd::variability::feature_template_bundle"
-      ],
-      "tagged_values": {
-        "masd.variability.instantiation_domain_name": "masd.facet"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "overwrite",
-          "type": "masd::variability::boolean",
-          "value": "\"true\"",
-          "documentation": "If true, the generated files will overwrite existing files. \n",
-          "tagged_values": {
-            "masd.variability.binding_point": "element"
-          }
-        }
-      ]
-    },
-    {
-      "name": "features::archetype_features",
-      "documentation": "Features common to all archetypes.\n",
-      "stereotypes": [
-        "masd::variability::feature_template_bundle"
-      ],
-      "tagged_values": {
-        "masd.variability.instantiation_domain_name": "masd.archetype"
-      },
-      "fallback_element_type": "masd::object",
-      "attributes": [
-        {
-          "name": "overwrite",
-          "type": "masd::variability::boolean",
-          "value": "\"true\"",
-          "documentation": "If true, the generated files will overwrite existing files. \n",
-          "tagged_values": {
-            "masd.variability.binding_point": "element"
-          }
-        }
-      ]
     }
   ]
 }

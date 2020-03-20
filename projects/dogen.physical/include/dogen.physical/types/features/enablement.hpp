@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_FEATURES_ENABLEMENT_HPP
-#define DOGEN_GENERATION_TYPES_FEATURES_ENABLEMENT_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_FEATURES_ENABLEMENT_HPP
+#define DOGEN_PHYSICAL_TYPES_FEATURES_ENABLEMENT_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 #include <list>
 #include "dogen.variability/types/entities/feature_template.hpp"
 
-namespace dogen::generation::features {
+namespace dogen::physical::features {
 
 /**
  * @brief Enablement related properties.

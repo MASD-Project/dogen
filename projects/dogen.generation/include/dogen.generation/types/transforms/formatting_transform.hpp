@@ -32,7 +32,6 @@
 #include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.generation/types/transforms/context.hpp"
 #include "dogen.generation/types/entities/model.hpp"
-#include "dogen.generation/types/features/formatting.hpp"
 #include "dogen.logical/types/entities/formatting_styles.hpp"
 #include "dogen.generation/types/transforms/formatting_configuration.hpp"
 

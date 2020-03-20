@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_GENERATION_TYPES_FEATURES_FORMATTING_HPP
-#define DOGEN_GENERATION_TYPES_FEATURES_FORMATTING_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_FEATURES_FORMATTING_HPP
+#define DOGEN_PHYSICAL_TYPES_FEATURES_FORMATTING_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,7 +32,7 @@
 #include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.variability/types/entities/feature_template.hpp"
 
-namespace dogen::generation::features {
+namespace dogen::physical::features {
 
 /**
  * @brief Features related to formatting.

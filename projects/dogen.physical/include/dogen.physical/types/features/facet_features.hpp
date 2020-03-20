@@ -42,6 +42,7 @@ public:
     struct feature_group {
         variability::entities::feature directory;
         variability::entities::feature postfix;
+        variability::entities::feature overwrite;
     };
 
     static feature_group
@@ -51,6 +52,10 @@ public:
     struct static_configuration {
         std::string directory;
         std::string postfix;
+        bool overwrite;
+
+        static_configuration() :
+            overwrite() {}
     };
 
     static static_configuration make_static_configuration(

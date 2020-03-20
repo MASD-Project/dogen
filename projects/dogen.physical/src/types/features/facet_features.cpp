@@ -124,6 +124,23 @@ make_postfix() {
     return r;
 }
 
+dogen::variability::entities::feature_template
+make_overwrite() {
+    using namespace dogen::variability::entities;
+    feature_template r;
+    r.name().simple("overwrite");
+    r.description(R"(If true, the generated files will overwrite existing files. 
+
+)");
+    const auto vt(value_type::boolean);
+    r.value_type(vt);
+    r.binding_point(binding_point::element);
+    r.instantiation_domain_name("masd.facet");
+    dogen::variability::helpers::value_factory f;
+    r.default_value(f.make(vt, std::list<std::string>{ "true" }));
+    return r;
+}
+
 }
 
 facet_features::feature_group
@@ -133,6 +150,7 @@ facet_features::make_feature_group(const dogen::variability::entities::feature_m
 
     r.directory = s.get_by_name("directory");
     r.postfix = s.get_by_name("postfix");
+    r.overwrite = s.get_by_name("overwrite");
 
     return r;
 }
@@ -145,6 +163,7 @@ facet_features::static_configuration facet_features::make_static_configuration(
     const dogen::variability::helpers::configuration_selector s(cfg);
     r.directory = s.get_text_content_or_default(fg.directory);
     r.postfix = s.get_text_content_or_default(fg.postfix);
+    r.overwrite = s.get_boolean_content_or_default(fg.overwrite);
     return r;
 }
 
@@ -154,6 +173,7 @@ facet_features::make_templates() {
     std::list<dogen::variability::entities::feature_template> r;
     r.push_back(make_directory());
     r.push_back(make_postfix());
+    r.push_back(make_overwrite());
     return r;
 }
 
