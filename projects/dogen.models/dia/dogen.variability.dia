@@ -14660,7 +14660,9 @@ alias.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Profile associated with this configuration.#</dia:string>
+            <dia:string>#Profile associated with this configuration.
+
+#DOGEN masd.variability.is_optional=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

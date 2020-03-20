@@ -60,7 +60,8 @@ profile::static_configuration profile::make_static_configuration(
 
     static_configuration r;
     const dogen::variability::helpers::configuration_selector s(cfg);
-    r.profile = s.get_text_content(fg.profile);
+    if (s.has_configuration_point(fg.profile))
+        r.profile = s.get_text_content(fg.profile);
     return r;
 }
 
