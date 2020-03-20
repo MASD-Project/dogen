@@ -22,8 +22,34 @@
 
 namespace dogen::cli {
 
-bool dumpspecs_configuration::operator==(const dumpspecs_configuration& /*rhs*/) const {
-    return true;
+dumpspecs_configuration::dumpspecs_configuration()
+    : style_(static_cast<dogen::reporting_style>(0)) { }
+
+dumpspecs_configuration::dumpspecs_configuration(const dogen::reporting_style style)
+    : style_(style) { }
+
+void dumpspecs_configuration::swap(dumpspecs_configuration& other) noexcept {
+    using std::swap;
+    swap(style_, other.style_);
+}
+
+bool dumpspecs_configuration::operator==(const dumpspecs_configuration& rhs) const {
+    return style_ == rhs.style_;
+}
+
+dumpspecs_configuration& dumpspecs_configuration::operator=(dumpspecs_configuration other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+dogen::reporting_style dumpspecs_configuration::style() const {
+    return style_;
+}
+
+dumpspecs_configuration& dumpspecs_configuration::style(const dogen::reporting_style v) {
+    style_ = v;
+    return *this;
 }
 
 }

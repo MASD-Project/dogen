@@ -185,7 +185,14 @@
       "stereotypes": [
         "masd::fluent"
       ],
-      "fallback_element_type": "masd::object"
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "style",
+          "type": "reporting_style",
+          "documentation": "Which style to use when dumping the specs.\n"
+        }
+      ]
     }
   ]
 }

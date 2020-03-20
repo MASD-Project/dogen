@@ -3828,13 +3828,13 @@ not as part of a profile).
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O33">
       <dia:attribute name="obj_pos">
-        <dia:point val="6,-58"/>
+        <dia:point val="5,-58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="5.95,-58.05;14.635,-53.55"/>
+        <dia:rectangle val="4.95,-58.05;13.635,-53.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="6,-58"/>
+        <dia:point val="5,-58"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.5849999999999991"/>
@@ -4024,7 +4024,7 @@ not as part of a profile).
         <dia:point val="-5.665,-58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-6.415,-60.8;10.4925,-57.2"/>
+        <dia:rectangle val="-6.415,-60.8;9.4925,-57.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4032,8 +4032,8 @@ not as part of a profile).
       <dia:attribute name="orth_points">
         <dia:point val="-5.665,-58"/>
         <dia:point val="-5.665,-60"/>
-        <dia:point val="10.2925,-60"/>
-        <dia:point val="10.2925,-58"/>
+        <dia:point val="9.2925,-60"/>
+        <dia:point val="9.2925,-58"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -5903,7 +5903,7 @@ not as part of a profile).
         <dia:point val="20.025,-53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.275,-55.65;23.4175,-51.4"/>
+        <dia:rectangle val="19.275,-55.8;23.4175,-52.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5974,7 +5974,7 @@ not as part of a profile).
         <dia:point val="23.2175,-60"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="15.0125,-63.45;23.9675,-58.4"/>
+        <dia:rectangle val="15.0125,-63.45;23.9675,-59.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6204,7 +6204,7 @@ not as part of a profile).
         <dia:point val="24.825,-46"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="19.975,-50.25;25.575,-44.4"/>
+        <dia:rectangle val="19.975,-50.25;25.575,-45.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6385,7 +6385,7 @@ not as part of a profile).
         <dia:point val="15.9125,-42.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="15.1625,-43.15;18.845,-33.4"/>
+        <dia:rectangle val="15.1625,-43.15;18.845,-34.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6456,7 +6456,7 @@ not as part of a profile).
         <dia:point val="7,-46"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.53,-50.45;7.75,-44.4"/>
+        <dia:rectangle val="-18.53,-50.45;7.75,-45.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

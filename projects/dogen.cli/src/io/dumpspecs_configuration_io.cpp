@@ -19,13 +19,16 @@
  *
  */
 #include <ostream>
+#include "dogen/io/reporting_style_io.hpp"
 #include "dogen.cli/io/dumpspecs_configuration_io.hpp"
 
 namespace dogen::cli {
 
-std::ostream& operator<<(std::ostream& s, const dumpspecs_configuration&) {
+std::ostream& operator<<(std::ostream& s, const dumpspecs_configuration& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::cli::dumpspecs_configuration\"" << " }";
+      << "\"__type__\": " << "\"dogen::cli::dumpspecs_configuration\"" << ", "
+      << "\"style\": " << v.style()
+      << " }";
     return(s);
 }
 

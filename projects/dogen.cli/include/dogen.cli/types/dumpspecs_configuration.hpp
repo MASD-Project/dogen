@@ -26,6 +26,7 @@
 #endif
 
 #include <algorithm>
+#include "dogen/types/reporting_style.hpp"
 
 namespace dogen::cli {
 
@@ -34,11 +35,24 @@ namespace dogen::cli {
  */
 class dumpspecs_configuration final {
 public:
-    dumpspecs_configuration() = default;
     dumpspecs_configuration(const dumpspecs_configuration&) = default;
     dumpspecs_configuration(dumpspecs_configuration&&) = default;
     ~dumpspecs_configuration() = default;
-    dumpspecs_configuration& operator=(const dumpspecs_configuration&) = default;
+
+public:
+    dumpspecs_configuration();
+
+public:
+    explicit dumpspecs_configuration(const dogen::reporting_style style);
+
+public:
+    /**
+     * @brief Which style to use when dumping the specs.
+     */
+    /**@{*/
+    dogen::reporting_style style() const;
+    dumpspecs_configuration& style(const dogen::reporting_style v);
+    /**@}*/
 
 public:
     bool operator==(const dumpspecs_configuration& rhs) const;
@@ -46,7 +60,24 @@ public:
         return !this->operator==(rhs);
     }
 
+public:
+    void swap(dumpspecs_configuration& other) noexcept;
+    dumpspecs_configuration& operator=(dumpspecs_configuration other);
+
+private:
+    dogen::reporting_style style_;
 };
+
+}
+
+namespace std {
+
+template<>
+inline void swap(
+    dogen::cli::dumpspecs_configuration& lhs,
+    dogen::cli::dumpspecs_configuration& rhs) {
+    lhs.swap(rhs);
+}
 
 }
 

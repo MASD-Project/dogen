@@ -3200,7 +3200,7 @@ infrastructure. To be removed.#</dia:string>
         <dia:point val="107,16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="106.95,15.95;119.08,19.05"/>
+        <dia:rectangle val="106.95,15.95;119.08,19.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="107,16"/>
@@ -3209,7 +3209,7 @@ infrastructure. To be removed.#</dia:string>
         <dia:real val="12.029999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#dumpspecs_configuration#</dia:string>
@@ -3298,7 +3298,31 @@ infrastructure. To be removed.#</dia:string>
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#style#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#reporting_style#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Which style to use when dumping the specs.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -3346,7 +3370,7 @@ infrastructure. To be removed.#</dia:string>
         <dia:point val="110.77,26"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="110.02,18.95;113.215,27.6"/>
+        <dia:rectangle val="110.02,19.55;113.215,26.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3355,7 +3379,7 @@ infrastructure. To be removed.#</dia:string>
         <dia:point val="110.77,26"/>
         <dia:point val="110.77,23"/>
         <dia:point val="113.015,23"/>
-        <dia:point val="113.015,19"/>
+        <dia:point val="113.015,19.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
