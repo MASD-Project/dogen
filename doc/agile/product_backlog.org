@@ -5144,29 +5144,6 @@ could relax the code in processor (object_types):
 We should also consider having a =strict= command line option to
 enable/disable this behaviour.
 
-*** Fix clang-cl warnings                                             :story:
-
-We also have a number of warnings left to clean up, all related to
-boost.log:
-
-: masd.dogen.utility.lib(lifecycle_manager.cpp.obj) : warning LNK4217: locally defined symbol
-: ?get_tss_data@detail@boost@@YAPEAXPEBX@Z (void * __cdecl boost::detail::get_tss_data(void const *))
-: imported in function "public: struct boost::log::v2s_mt_nt6::sinks::basic_formatting_sink_frontend<char>::formatting_context * __cdecl boost::thread_specific_ptr<struct boost::log::v2s_mt_nt6::sinks::basic_formatting_sink_frontend<char>::formatting_context>::get(void)const " (?get@?$thread_specific_ptr@Uformatting_context@?$basic_formatting_sink_frontend@D@sinks@v2s_mt_nt6@log@boost@@@boost@@QEBAPEAUformatting_context@?$basic_formatting_sink_frontend@D@sinks@v2s_mt_nt6@log@2@XZ)
-
-Notes:
-
-- opened issue: [[https://github.com/Microsoft/vcpkg/issues/5336][Building with clang-cl on windows generates warnings
-  from vcpkg-installed libraries]]
-- it seems that the log files show a lot more warnings than those
-  reported by cdash,
-- Updated issue on CDash parsing problems for clang-cl: [[https://github.com/Kitware/CDash/issues/733][Parsing of
-  errors and warnings from clang-cl]]
-- sent email to clang mailinglist:
-  [[http://lists.llvm.org/pipermail/cfe-dev/2019-February/061326.html][Clang-cl -
-  errors and warning messages slightly different from MSVC]]. Clang
-  [[http://lists.llvm.org/pipermail/cfe-dev/2019-February/061339.html][have patched]] the diffs now.
-- we are now seeing all the warnings.
-
 *** LAM name resolution should be PIM only                            :story:
 
 With the current approach, we are not resolving any names until after

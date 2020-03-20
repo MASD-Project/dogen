@@ -469,8 +469,9 @@ We introduced this for inner classes, but its (probably) not being
 used. If so, remove it and add a story for inner classes, if one does
 not yet exist.
 
-*** STARTED Implement archetype locations in terms of physical meta-model :story:
+*** STARTED Implement archetype locations from physical meta-model   :story:
     :LOGBOOK:
+    CLOCK: [2020-03-20 Fri 14:30]--[2020-03-20 Fri 14:44] =>  0:14
     CLOCK: [2020-03-20 Fri 13:01]--[2020-03-20 Fri 14:16] =>  1:15
     CLOCK: [2020-03-17 Tue 17:15]--[2020-03-17 Tue 17:24] =>  0:09
     CLOCK: [2020-03-17 Tue 15:25]--[2020-03-17 Tue 16:29] =>  1:04
@@ -513,6 +514,38 @@ Notes:
 
 - formatters should add their data to a registrar that lives in the
   physical model rather than expose it via an interface.
+
+*** STARTED Fix clang-cl warnings                                     :story:
+    :LOGBOOK:
+    CLOCK: [2020-03-20 Fri 14:44]--[2020-03-20 Fri 15:35] =>  0:51
+    :END:
+
+We also have a number of warnings left to clean up, all related to
+boost.log:
+
+: masd.dogen.utility.lib(lifecycle_manager.cpp.obj) : warning LNK4217: locally defined symbol
+: ?get_tss_data@detail@boost@@YAPEAXPEBX@Z (void * __cdecl boost::detail::get_tss_data(void const *))
+: imported in function "public: struct boost::log::v2s_mt_nt6::sinks::basic_formatting_sink_frontend<char>::formatting_context * __cdecl boost::thread_specific_ptr<struct boost::log::v2s_mt_nt6::sinks::basic_formatting_sink_frontend<char>::formatting_context>::get(void)const " (?get@?$thread_specific_ptr@Uformatting_context@?$basic_formatting_sink_frontend@D@sinks@v2s_mt_nt6@log@boost@@@boost@@QEBAPEAUformatting_context@?$basic_formatting_sink_frontend@D@sinks@v2s_mt_nt6@log@2@XZ)
+
+Since we can't get to the bottom of this, try to ignore the warnings
+instead.
+
+Notes:
+
+- opened issue: [[https://github.com/Microsoft/vcpkg/issues/5336][Building with clang-cl on windows generates warnings
+  from vcpkg-installed libraries]]
+- it seems that the log files show a lot more warnings than those
+  reported by cdash,
+- Updated issue on CDash parsing problems for clang-cl: [[https://github.com/Kitware/CDash/issues/733][Parsing of
+  errors and warnings from clang-cl]]
+- sent email to clang mailinglist:
+  [[http://lists.llvm.org/pipermail/cfe-dev/2019-February/061326.html][Clang-cl -
+  errors and warning messages slightly different from MSVC]]. Clang
+  [[http://lists.llvm.org/pipermail/cfe-dev/2019-February/061339.html][have patched]] the diffs now.
+- we are now seeing all the warnings.
+- [[https://stackoverflow.com/questions/50274547/windows-clang-hello-world-lnk4217/57788067#57788067][Windows clang Hello World lnk4217]]
+- [[https://stackoverflow.com/questions/6979491/how-to-delete-warnings-lnk4217-and-lnk4049/6979586#6979586][How to delete warnings LNK4217 and LNK4049]]
+- [[https://docs.microsoft.com/en-us/cpp/build/reference/ignore-ignore-specific-warnings?view=vs-2019][/IGNORE (Ignore Specific Warnings)]]
 
 *** Create a masd kernel model                                        :story:
 

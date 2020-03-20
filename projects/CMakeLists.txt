@@ -210,6 +210,11 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC" OR
     # because at present the code is littered with these coming out of
     # third party libraries like boost.
     if (CMAKE_COMPILER_IS_CLANGXX)
+        # Ingore the annoying "locally defined symbol imported"
+        # warning we get from boost thread on clang-cl.
+        set(CMAKE_EXE_LINKER_FLAGS
+            "${CMAKE_EXE_LINKER_FLAGS} /IGNORE:4217")
+
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xclang -Wno-unknown-pragmas")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Xclang -Wno-assume")
         set(CMAKE_CXX_FLAGS
