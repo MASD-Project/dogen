@@ -41,33 +41,22 @@ namespace dogen::variability::transforms {
  * This transform is really a mix of three separate transforms, but we
  * just can't figure out a good way of splitting them apart:
  *
- * - the recursive merging up the inheritance tree, which gives it its
- *   name.
+ * @li the recursive merging up the inheritance tree, which gives it
+ * its name.
  *
- * - the creation of a repository of profiles. This requires the data
- *   to be organised in a map, which is also needed for the previous
- *   step.
+ * @li the creation of a repository of profiles. This requires the
+ * data to be organised in a map, which is also needed for the
+ * previous step.
  *
- * - the population of the base layer profile name. This requires the
- *   data to be merged (because we want the field to populate from
- *   parent to children), but not yet in a repository (because we do
- *   not want to have to populate the copies of the profiles).
+ * @li the population of the base layer profile name. This requires
+ * the data to be merged (because we want the field to populate from
+ * parent to children), but not yet in a repository (because we do not
+ * want to have to populate the copies of the profiles).
  *
  * So, to make our life easier for now we just bundled all of these
  * responsibilities into one big transform.
  */
 class profile_merging_transform final {
-private:
-    struct feature_group {
-        entities::feature profile;
-    };
-
-    static feature_group
-    make_feature_group(const entities::feature_model& fm);
-
-    static std::string obtain_profile_name(const feature_group& fg,
-        const entities::configuration& cfg);
-
 private:
     /**
      * @brief Recurses up the profile tree and merges children with

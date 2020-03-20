@@ -22,6 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.variability/types/features/profile.hpp"
 #include "dogen.variability/io/entities/profile_io.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
@@ -45,38 +46,10 @@ const std::string parent_not_found(
     "Parent not found in profile container: ");
 const std::string duplicate_stereotype(
     "Stereotype used by more than one profile: ");
-const std::string profile_field("masd.variability.profile");
 
 }
 
 namespace dogen::variability::transforms {
-
-profile_merging_transform::feature_group profile_merging_transform::
-make_feature_group(const entities::feature_model& fm) {
-    BOOST_LOG_SEV(lg, debug) << "Creating feature group.";
-
-    feature_group r;
-    const helpers::feature_selector s(fm);
-    r.profile = s.get_by_name(profile_field);
-
-    BOOST_LOG_SEV(lg, debug) << "Created feature group.";
-    return r;
-}
-
-std::string
-profile_merging_transform::obtain_profile_name(const feature_group& fg,
-    const entities::configuration& cfg) {
-
-    BOOST_LOG_SEV(lg, debug) << "Reading profile name.";
-    const helpers::configuration_selector s(cfg);
-    std::string r;
-    if (s.has_configuration_point(fg.profile))
-        r = s.get_text_content(fg.profile);
-
-    BOOST_LOG_SEV(lg, debug) << "Profile name: '" << r << "'";
-    return r;
-}
-
 
 const entities::profile& profile_merging_transform::
 walk_up_parent_tree_and_merge(const std::string& current,
@@ -219,7 +192,7 @@ void profile_merging_transform::
 populate_base_layer(const entities::feature_model& fm,
     std::unordered_map<std::string, entities::profile>& pm) {
 
-    const auto fg(make_feature_group(fm));
+    const auto fg(features::profile::make_feature_group(fm));
     for (auto& pair : pm) {
         auto& profile(pair.second);
 
@@ -229,7 +202,8 @@ populate_base_layer(const entities::feature_model& fm,
          */
         entities::configuration cfg;
         cfg.configuration_points(profile.configuration_points());
-        const auto bl(obtain_profile_name(fg, cfg));
+        const auto scfg(features::profile::make_static_configuration(fg, cfg));
+        const auto bl(scfg.profile);
         if (!bl.empty()) {
             BOOST_LOG_SEV(lg, trace) << "Read base layer name: " << bl;
             profile.base_layer_profile(bl);
