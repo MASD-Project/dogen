@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TYPES_SPEC_GROUP_FWD_HPP
-#define DOGEN_TYPES_SPEC_GROUP_FWD_HPP
+#ifndef DOGEN_TYPES_SPEC_CATEGORY_FWD_HPP
+#define DOGEN_TYPES_SPEC_CATEGORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 namespace dogen {
 
-class spec_group;
+class spec_category;
 
 }
 

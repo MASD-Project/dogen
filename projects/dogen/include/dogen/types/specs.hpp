@@ -27,7 +27,7 @@
 
 #include <list>
 #include <algorithm>
-#include "dogen/types/spec_group.hpp"
+#include "dogen/types/spec_category.hpp"
 
 namespace dogen {
 
@@ -42,13 +42,18 @@ public:
     ~specs() = default;
 
 public:
-    explicit specs(const std::list<dogen::spec_group>& groups);
+    explicit specs(const std::list<dogen::spec_category>& categories);
 
 public:
-    const std::list<dogen::spec_group>& groups() const;
-    std::list<dogen::spec_group>& groups();
-    void groups(const std::list<dogen::spec_group>& v);
-    void groups(const std::list<dogen::spec_group>&& v);
+    /**
+     * @brief All categories of specifications.
+     */
+    /**@{*/
+    const std::list<dogen::spec_category>& categories() const;
+    std::list<dogen::spec_category>& categories();
+    void categories(const std::list<dogen::spec_category>& v);
+    void categories(const std::list<dogen::spec_category>&& v);
+    /**@}*/
 
 public:
     bool operator==(const specs& rhs) const;
@@ -61,7 +66,7 @@ public:
     specs& operator=(specs other);
 
 private:
-    std::list<dogen::spec_group> groups_;
+    std::list<dogen::spec_category> categories_;
 };
 
 }

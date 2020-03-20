@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_IO_SPEC_GROUP_IO_HPP
-#define DOGEN_IO_SPEC_GROUP_IO_HPP
+#ifndef DOGEN_IO_SPEC_CATEGORY_IO_HPP
+#define DOGEN_IO_SPEC_CATEGORY_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen/types/spec_group.hpp"
+#include "dogen/types/spec_category.hpp"
 
 namespace dogen {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::spec_group& v);
+     const dogen::spec_category& v);
 
 }
 

@@ -22,6 +22,7 @@
 #include <sstream>
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string/replace.hpp>
+#include "dogen/types/spec_entry.hpp"
 #include "dogen.variability/types/entities/text.hpp"
 #include "dogen.variability/types/entities/boolean.hpp"
 #include "dogen.variability/types/entities/number.hpp"
@@ -33,8 +34,6 @@
 #include "dogen.generation/types/transforms/physical_model_chain.hpp"
 #include "dogen.orchestration/types/transforms/scoped_context_manager.hpp"
 #include "dogen.orchestration/types/spec_dumper.hpp"
-#include "dogen/types/spec_entry.hpp"
-#include "dogen/types/spec_group.hpp"
 
 namespace {
 
@@ -111,8 +110,8 @@ std::string spec_dumper::process_value_type(
     return r;
 }
 
-spec_group spec_dumper::create_injection_group() const {
-    spec_group r;
+spec_category spec_dumper::create_injection_category() const {
+    spec_category r;
     r.name("Injection");
     r.description("Read external formats into Dogen.");
 
@@ -132,8 +131,8 @@ spec_group spec_dumper::create_injection_group() const {
     return r;
 }
 
-spec_group spec_dumper::create_conversion_group() const {
-    spec_group r;
+spec_category spec_dumper::create_conversion_category() const {
+    spec_category r;
     r.name("Conversion");
     r.description("Output to an external format from a Dogen model.");
 
@@ -154,8 +153,8 @@ spec_group spec_dumper::create_conversion_group() const {
     return r;
 }
 
-spec_group spec_dumper::create_generation_group() const {
-    spec_group r;
+spec_category spec_dumper::create_generation_category() const {
+    spec_category r;
     r.name("Generators");
     r.description("Available backends for code generation.");
     using dogen::generation::transforms::physical_model_chain;
@@ -170,9 +169,9 @@ spec_group spec_dumper::create_generation_group() const {
     return r;
 }
 
-spec_group spec_dumper::
-create_features_group(const variability::entities::feature_model& fm) const {
-    spec_group r;
+spec_category spec_dumper::
+create_features_category(const variability::entities::feature_model& fm) const {
+    spec_category r;
     r.name("Features");
     r.description("Available features for configuration.");
     std::map<std::string, std::string> map;
@@ -196,9 +195,9 @@ create_features_group(const variability::entities::feature_model& fm) const {
     return r;
 }
 
-spec_group spec_dumper::create_variability_domains_group(
+spec_category spec_dumper::create_variability_domains_category(
     const std::unordered_map<std::string, std::vector<std::string>>& ds) const {
-    spec_group r;
+    spec_category r;
     r.name("Template Instantiation Domains");
     r.description("Available domains for template instantiation.");
 
@@ -226,18 +225,18 @@ specs spec_dumper::dump(const configuration& cfg) const {
 
     {
         specs r;
-        r.groups().push_back(create_injection_group());
-        r.groups().push_back(create_conversion_group());
-        r.groups().push_back(create_generation_group());
+        r.categories().push_back(create_injection_category());
+        r.categories().push_back(create_conversion_category());
+        r.categories().push_back(create_generation_category());
 
         using namespace transforms;
         scoped_context_manager scm(cfg, activity, empty_output_directory);
         const auto& ctx(scm.context());
         const auto& fm(*ctx.assets_context().feature_model());
-        r.groups().push_back(create_features_group(fm));
+        r.categories().push_back(create_features_category(fm));
 
         const auto ds(ctx.assets_context().template_instantiation_domains());
-        r.groups().push_back(create_variability_domains_group(ds));
+        r.categories().push_back(create_variability_domains_category(ds));
         return r;
     }
 

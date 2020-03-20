@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/io/spec_entry_io.hpp"
-#include "dogen/io/spec_group_io.hpp"
+#include "dogen/io/spec_category_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -47,9 +47,9 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::spec_ent
 
 namespace dogen {
 
-std::ostream& operator<<(std::ostream& s, const spec_group& v) {
+std::ostream& operator<<(std::ostream& s, const spec_category& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::spec_group\"" << ", "
+      << "\"__type__\": " << "\"dogen::spec_category\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"entries\": " << v.entries() << ", "
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\""

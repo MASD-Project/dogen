@@ -20,11 +20,11 @@
  */
 #include <ostream>
 #include "dogen/io/specs_io.hpp"
-#include "dogen/io/spec_group_io.hpp"
+#include "dogen/io/spec_category_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::spec_group>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::spec_category>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -41,7 +41,7 @@ namespace dogen {
 std::ostream& operator<<(std::ostream& s, const specs& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::specs\"" << ", "
-      << "\"groups\": " << v.groups()
+      << "\"categories\": " << v.categories()
       << " }";
     return(s);
 }

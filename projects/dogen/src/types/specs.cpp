@@ -22,16 +22,16 @@
 
 namespace dogen {
 
-specs::specs(const std::list<dogen::spec_group>& groups)
-    : groups_(groups) { }
+specs::specs(const std::list<dogen::spec_category>& categories)
+    : categories_(categories) { }
 
 void specs::swap(specs& other) noexcept {
     using std::swap;
-    swap(groups_, other.groups_);
+    swap(categories_, other.categories_);
 }
 
 bool specs::operator==(const specs& rhs) const {
-    return groups_ == rhs.groups_;
+    return categories_ == rhs.categories_;
 }
 
 specs& specs::operator=(specs other) {
@@ -40,20 +40,20 @@ specs& specs::operator=(specs other) {
     return *this;
 }
 
-const std::list<dogen::spec_group>& specs::groups() const {
-    return groups_;
+const std::list<dogen::spec_category>& specs::categories() const {
+    return categories_;
 }
 
-std::list<dogen::spec_group>& specs::groups() {
-    return groups_;
+std::list<dogen::spec_category>& specs::categories() {
+    return categories_;
 }
 
-void specs::groups(const std::list<dogen::spec_group>& v) {
-    groups_ = v;
+void specs::categories(const std::list<dogen::spec_category>& v) {
+    categories_ = v;
 }
 
-void specs::groups(const std::list<dogen::spec_group>&& v) {
-    groups_ = std::move(v);
+void specs::categories(const std::list<dogen::spec_category>&& v) {
+    categories_ = std::move(v);
 }
 
 }

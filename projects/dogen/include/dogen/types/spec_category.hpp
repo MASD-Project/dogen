@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TYPES_SPEC_GROUP_HPP
-#define DOGEN_TYPES_SPEC_GROUP_HPP
+#ifndef DOGEN_TYPES_SPEC_CATEGORY_HPP
+#define DOGEN_TYPES_SPEC_CATEGORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,15 +32,18 @@
 
 namespace dogen {
 
-class spec_group final {
+/**
+ * @brief Describes a category of dogen specifications.
+ */
+class spec_category final {
 public:
-    spec_group() = default;
-    spec_group(const spec_group&) = default;
-    spec_group(spec_group&&) = default;
-    ~spec_group() = default;
+    spec_category() = default;
+    spec_category(const spec_category&) = default;
+    spec_category(spec_category&&) = default;
+    ~spec_category() = default;
 
 public:
-    spec_group(
+    spec_category(
         const std::string& name,
         const std::list<dogen::spec_entry>& entries,
         const std::string& description);
@@ -77,14 +80,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const spec_group& rhs) const;
-    bool operator!=(const spec_group& rhs) const {
+    bool operator==(const spec_category& rhs) const;
+    bool operator!=(const spec_category& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(spec_group& other) noexcept;
-    spec_group& operator=(spec_group other);
+    void swap(spec_category& other) noexcept;
+    spec_category& operator=(spec_category other);
 
 private:
     std::string name_;
@@ -98,8 +101,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::spec_group& lhs,
-    dogen::spec_group& rhs) {
+    dogen::spec_category& lhs,
+    dogen::spec_category& rhs) {
     lhs.swap(rhs);
 }
 

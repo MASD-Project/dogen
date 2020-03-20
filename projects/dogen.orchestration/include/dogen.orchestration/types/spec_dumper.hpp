@@ -31,7 +31,7 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include "dogen/types/spec_dumper.hpp"
-#include "dogen/types/spec_group.hpp"
+#include "dogen/types/spec_category.hpp"
 #include "dogen.variability/types/entities/value.hpp"
 #include "dogen.variability/types/entities/value_type.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
@@ -77,28 +77,28 @@ private:
     /**
      * @brief Creates specs for injection related items.
      */
-    spec_group create_injection_group() const;
+    spec_category create_injection_category() const;
 
     /**
      * @brief Creates specs for conversion related items.
      */
-    spec_group create_conversion_group() const;
+    spec_category create_conversion_category() const;
 
     /**
      * @brief Creates specs for the backends.
      */
-    spec_group create_generation_group() const;
+    spec_category create_generation_category() const;
 
     /**
      * @brief Creates specs for all features.
      */
-    spec_group create_features_group(
+    spec_category create_features_category(
         const variability::entities::feature_model& fm) const;
 
     /**
      * @brief Creates specs for all variability domains.
      */
-    spec_group create_variability_domains_group(const
+    spec_category create_variability_domains_category(const
         std::unordered_map<std::string, std::vector<std::string>>& ds) const;
 
 public:

@@ -408,13 +408,15 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "groups",
-          "type": "std::list<spec_group>"
+          "name": "categories",
+          "type": "std::list<spec_category>",
+          "documentation": "All categories of specifications.\n"
         }
       ]
     },
     {
-      "name": "spec_group",
+      "name": "spec_category",
+      "documentation": "Describes a category of dogen specifications.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {

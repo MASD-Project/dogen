@@ -73,17 +73,17 @@ std::string wrap(const char *text, size_t line_length = 72) {
 }
 
 void print_specs_plain(const dogen::specs& s, std::ostream& o) {
-    if (s.groups().empty()) {
+    if (s.categories().empty()) {
         o << "No specs found" << std::endl;
         return;
     }
 
     bool is_first(true);
-    for (const auto& g : s.groups()) {
+    for (const auto& g : s.categories()) {
         if (!is_first)
             o << std::endl;
 
-        o << "Group: " << g.name() << std::endl
+        o << "Category: " << g.name() << std::endl
           << "Purpose: " << g.description() << std::endl;
 
         for (const auto& e : g.entries()) {
@@ -98,12 +98,12 @@ void print_specs_org_mode(const dogen::specs& s, std::ostream& o) {
     o << "* All" << std::endl << std::endl
       << "Dump of all specifications for Dogen." << std::endl << std::endl;
 
-    if (s.groups().empty()) {
+    if (s.categories().empty()) {
         o << "No specs found" << std::endl;
         return;
     }
 
-    for (const auto& g : s.groups()) {
+    for (const auto& g : s.categories()) {
         o << "** " << g.name() << std::endl << std::endl
           << g.description() << std::endl << std::endl;
 

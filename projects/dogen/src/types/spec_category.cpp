@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/types/spec_group.hpp"
+#include "dogen/types/spec_category.hpp"
 
 namespace dogen {
 
-spec_group::spec_group(
+spec_category::spec_category(
     const std::string& name,
     const std::list<dogen::spec_entry>& entries,
     const std::string& description)
@@ -30,70 +30,70 @@ spec_group::spec_group(
       entries_(entries),
       description_(description) { }
 
-void spec_group::swap(spec_group& other) noexcept {
+void spec_category::swap(spec_category& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(entries_, other.entries_);
     swap(description_, other.description_);
 }
 
-bool spec_group::operator==(const spec_group& rhs) const {
+bool spec_category::operator==(const spec_category& rhs) const {
     return name_ == rhs.name_ &&
         entries_ == rhs.entries_ &&
         description_ == rhs.description_;
 }
 
-spec_group& spec_group::operator=(spec_group other) {
+spec_category& spec_category::operator=(spec_category other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::string& spec_group::name() const {
+const std::string& spec_category::name() const {
     return name_;
 }
 
-std::string& spec_group::name() {
+std::string& spec_category::name() {
     return name_;
 }
 
-void spec_group::name(const std::string& v) {
+void spec_category::name(const std::string& v) {
     name_ = v;
 }
 
-void spec_group::name(const std::string&& v) {
+void spec_category::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-const std::list<dogen::spec_entry>& spec_group::entries() const {
+const std::list<dogen::spec_entry>& spec_category::entries() const {
     return entries_;
 }
 
-std::list<dogen::spec_entry>& spec_group::entries() {
+std::list<dogen::spec_entry>& spec_category::entries() {
     return entries_;
 }
 
-void spec_group::entries(const std::list<dogen::spec_entry>& v) {
+void spec_category::entries(const std::list<dogen::spec_entry>& v) {
     entries_ = v;
 }
 
-void spec_group::entries(const std::list<dogen::spec_entry>&& v) {
+void spec_category::entries(const std::list<dogen::spec_entry>&& v) {
     entries_ = std::move(v);
 }
 
-const std::string& spec_group::description() const {
+const std::string& spec_category::description() const {
     return description_;
 }
 
-std::string& spec_group::description() {
+std::string& spec_category::description() {
     return description_;
 }
 
-void spec_group::description(const std::string& v) {
+void spec_category::description(const std::string& v) {
     description_ = v;
 }
 
-void spec_group::description(const std::string&& v) {
+void spec_category::description(const std::string&& v) {
     description_ = std::move(v);
 }
 
