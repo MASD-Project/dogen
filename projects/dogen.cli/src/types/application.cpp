@@ -18,11 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/lexical_cast.hpp>
 #include <iostream>
 #include <boost/variant.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen/types/specs.hpp"
+#include "dogen/types/reporting_style.hpp"
+#include "dogen/lexical_cast/reporting_style_lc.hpp"
 #include "dogen.cli/types/configuration_validator.hpp"
 #include "dogen.cli/types/application_exception.hpp"
 #include "dogen.cli/types/application.hpp"
@@ -31,6 +34,8 @@ namespace {
 
 using namespace dogen::utility::log;
 auto lg(logger_factory("cli.application"));
+
+const std::string unsupported_style("Reporting style is not supported: ");
 
 using dogen::generator;
 using dogen::converter;
@@ -41,25 +46,85 @@ using dogen::cli::generation_configuration;
 using dogen::cli::conversion_configuration;
 using dogen::cli::dumpspecs_configuration;
 
-void print_specs(const dogen::specs& s) {
+/**
+ * @brief Wrap text.
+ *
+ * Copied from https://www.rosettacode.org/wiki/Word_wrap#C.2B.2B
+ */
+std::string wrap(const char *text, size_t line_length = 72) {
+    std::istringstream words(text);
+    std::ostringstream wrapped;
+    std::string word;
+
+    if (words >> word) {
+        wrapped << word;
+        size_t space_left = line_length - word.length();
+        while (words >> word) {
+            if (space_left < word.length() + 1) {
+                wrapped << '\n' << word;
+                space_left = line_length - word.length();
+            } else {
+                wrapped << ' ' << word;
+                space_left -= word.length() + 1;
+            }
+        }
+    }
+    return wrapped.str();
+}
+
+void print_specs_plain(const dogen::specs& s, std::ostream& o) {
     if (s.groups().empty()) {
-        std::cout << "No specs found" << std::endl;
+        o << "No specs found" << std::endl;
         return;
     }
 
     bool is_first(true);
     for (const auto& g : s.groups()) {
         if (!is_first)
-            std::cout << std::endl;
+            o << std::endl;
 
-        std::cout << "Group: " << g.name() << std::endl
-                  << "Purpose: " << g.description() << std::endl;
+        o << "Group: " << g.name() << std::endl
+          << "Purpose: " << g.description() << std::endl;
 
         for (const auto& e : g.entries()) {
-            std::cout << "    " << e.name() << ": "
-                      << e.description() << std::endl;
+            o << "    " << e.name() << ": "
+              << e.description() << std::endl;
         }
         is_first = false;
+    }
+}
+
+void print_specs_org_mode(const dogen::specs& s, std::ostream& o) {
+    o << "* All" << std::endl << std::endl
+      << "Dump of all specifications for Dogen." << std::endl << std::endl;
+
+    if (s.groups().empty()) {
+        o << "No specs found" << std::endl;
+        return;
+    }
+
+    for (const auto& g : s.groups()) {
+        o << "** " << g.name() << std::endl << std::endl
+          << g.description() << std::endl << std::endl;
+
+        for (const auto& e : g.entries()) {
+            o << "*** " << e.name() << std::endl << std::endl
+              << wrap(e.description().c_str()) << std::endl << std::endl;
+        }
+    }
+}
+
+void print_specs(const dogen::specs& s, const dogen::reporting_style rs,
+    std::ostream& o) {
+    using dogen::reporting_style;
+    if (rs == reporting_style::plain)
+        print_specs_plain(s, o);
+    else if (rs == reporting_style::org_mode)
+        print_specs_org_mode(s, o);
+    else {
+        const auto str(boost::lexical_cast<std::string>(rs));
+        BOOST_LOG_SEV(lg, warn) << unsupported_style << str;
+        BOOST_THROW_EXCEPTION(application_exception(unsupported_style + str));
     }
 }
 
@@ -93,9 +158,9 @@ public:
     /**
      * @brief Dispatches to the spec dumper.
      */
-    void operator()(const dumpspecs_configuration&) const {
+    void operator()(const dumpspecs_configuration& cfg) const {
         const auto s(dumper_.dump(configuration_.api()));
-        print_specs(s);
+        print_specs(s, cfg.style(), std::cout);
     }
 
 private:
