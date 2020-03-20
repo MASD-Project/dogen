@@ -1147,46 +1147,6 @@ We need to make sure we don't break cross model visitation with this
 change - i.e. derived models must also explicitly create their own
 visitors.
 
-*** Formatter dependencies and model processing                       :story:
-
-At present we are manually adding the includes required by a formatter
-as part of the "inclusion_dependencies" building. There are several
-disadvantages to this approach:
-
-- we are quite far down the pipeline. We've already passed all the
-  model building checks, etc. Thus, there is no way of knowing what
-  the formatter dependencies are. At present this is not a huge
-  problem because we have so few formatters and their dependencies are
-  mainly on the standard library and a few core boost models. However,
-  as we add more formatters this will become a bigger problem. For
-  example, we've added formatters now that require access to
-  variability headers; in an ideal world, we should now need to have a
-  reference to this model (for example, so that when we integrate
-  package management we get the right dependencies, etc).
-- we are hard-coding the header files. At present this is not a big
-  problem. To be honest, we can't see when this would be a big
-  problem, short of models changing their file names and/or
-  locations. Nonetheless, it seems "unclean" to depend on the header
-  file directly.
-- the dependency is on c++ code rather than expressed via a model.
-
-In an ideal world, we would have some kind of way of declaring a
-formatter meta-model element, with a set of dependencies declared via
-meta-data. These are on the model itself. They must be declared
-against a specific archetype. We then would process these as part of
-resolution. We would then map the header files as part of the existing
-machinery for header files.
-
-However one problem with this approach is that we are generating the
-formatter code using stitch at present. For this to work we would need
-to inject a fragment of code into the stitch template somehow with the
-dependencies. Whilst this is not exactly ideal, the advantage is that
-we could piggy-back on this mechanism to inject the postfix fields as
-well, so that we don't need to define these manually in each
-model. However, this needs some thinking because the complexity of
-defining a formatter will increase yet again. When there are problems,
-it will be hard to troubleshoot.
-
 *** Modeling of dogen models themselves                               :story:
 
 *Note*: we probably already have this story in the backlog, or at
@@ -6390,26 +6350,6 @@ One slight snag: the value could be of any type:
 We can start by just supporting strings, but probably worthwhile
 having a think on how to specify the type.
 
-*** Consider renaming formatter groups and model groups to sets       :story:
-
-We should try to keep the words groups and sets to their mathematical
-as much as possible - modulus our limited understanding. As such,
-where we are using "group" we probably mean "set" since there is no
-associated operation with the set; it is merely a way of gathering
-elements.
-
-*** Consider adding support for formatter tags or labels              :story:
-
-At present there is a presumption that if a formatter belongs to say
-=types= it cannot belong to any other facet. This means facets are
-used purely for hierarchical purposes. However, in certain cases it
-may make sense to "tag" or "label" formatters. For example, we may
-need to know of all header or implementation files; or of all build
-files, or of all files that belong to the main class, and so
-forth. For this tags are more appropriate. We have started to hack
-things slightly (such as =file_types=) but a generic solution for this
-would be preferable.
-
 *** Investigate current implementation of the origin transform        :story:
 
 Do we need to have the origin expansion? can we not just supply the
@@ -6540,14 +6480,6 @@ Of course, we will not be able to remove the look-ups we have at
 present that try to figure out the meta-model element because they are
 related to resolution. But for any other cases it may result in
 slightly more performant code. We need to look at all the use cases.
-
-*** Initialise formatters in the formatter's translation unit         :story:
-
-At present we are initialising the formatters in each of the facet
-initialisers. However, it makes more sense to initialise them on the
-translation unit for each formatter. This will also make life easier
-when we move to a mustache world where there may not be a formatter
-header file at all.
 
 *** Merge properties factory with stitching factory                   :story:
 
@@ -13426,52 +13358,6 @@ data generation for them. The process would be as follows:
   data. Dogen itself can use this framework. See "Model anonymizer and
   slicer".
 
-*** Allow multiple types to go into a single formatter                :story:
-
-We have found a number of cases where it may be useful to have more
-than one type going into a formatter:
-
-- [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#add-support-for-inner-classes][inner classes]];
-- declaring all/some of the following in a single header: exceptions,
-  enumerations, built-ins.
-- typedefs ([[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#manual-typedef-generation][manual]], [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#automatic-typedef-generation][automatic]])
-- [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#include-groups][include groups]] (and to be fair, [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#consider-renaming-includers]["master" headers]] too).
-- grouping a number of forward declarations into a file.
-
-There are probably a few more in the backlog. What all these use cases
-share in common is that in some cases we want to be able to send
-several types into a given formatter. This is actually not that hard
-to do:
-
-- find a way to "label" types in yarn, perhaps for a given formatter;
-- transfer those labels across to CPP's formattables;
-- group formattables by label;
-- have a separate interface for formatters that take multiple
-  formattables; one of the methods of this interface is the label;
-- for each formatter, find all types with matching label and pass them
-  on.
-
-One thing to bear in mind though is that the labeling is done at the
-yarn level; and for a given yarn entity, we may have a number of
-formattables. Should all be passed in?
-
-Merged stories:
-
-*Types that share one file*
-
-#+begin_quote
-*Story*: As a dogen user, I want to generate a single file for a
-number of related classes so that I don't have to deal with lots of
-files when they are not needed.
-#+end_quote
-
-At present we force all types etc to have their own file. However, in
-cases it may be useful to have multiple types sharing the same
-file. For instance, one may want to have all enumerations in one file,
-or all exceptions, etc.
-
-We could implement this using dynamic extensions.
-
 *** Consider using indices rather than associative containers          :epic:
 
 Once we generate the final model the model becomes constant; this
@@ -13624,58 +13510,6 @@ Links:
 - [[http://glench.github.io/fuzzyset.js/ui/][FuzzySet]]: A Human-Readable Interactive Representation of a Code
   Library
 - [[https://github.com/QuantStack/xeus-cling][xeus-cling]]: C++ interface for Jupyter notebooks.
-
-*** Special purpose formatters                                         :epic:
-
-In the future, when the creation of formatters is made easier, we may
-start designing formatters that are totally a application specific and
-may not have any particular use for any other application. They should
-be accepted in mainline Dogen:
-
-- to make sure we don't break this code;
-- to allow other people to copy and paste to generate their own
-  formatters;
-- because sometimes what one thinks is special purpose actually much
-  more general.
-
-However, we need to make sure we don't start cluttering the code base
-with these formatters. We will also have to start to worry about
-things like defining stable interfaces:
-
-- at which point do we decide that some code has bitrot and
-  deprecated, so will have to be removed?
-- what happens when a formatter moves from version 1 to version 2 of
-  some dependent library, must we create a version 1 and version 2
-  formatter or just update the existing one? what if it breaks code
-  for people using version 1 that do not wish to move to version 2?
-- do we mandate compilation tests for all formatters? This would mean
-  our build machine would be full of third-party libraries (some
-  potentially not available in Debian), and quite hard to
-  maintain. Alternatively we could mandate that if you have a
-  formatter you must setup a CTest agent with a compilation for that
-  formatter and publish the results of the build to dashboard; if your
-  build becomes consistently red we are allowed to remove the
-  formatter.
-- for the diff tests, is it acceptable if someone refactors the code?
-  Once "your" formatter is merged in it is now owned by the community
-  and it is entirely possible that someone will improve it/extend it,
-  etc. In order for this to work they need to be very sure they have
-  not broken the original use case.
-
-We probably just need to setup a very simple policy to start off with,
-but its best to keep track of these potential pitfalls.
-
-Merged with this story:
-
-*Private formatters*
-
-We should look into code we do in dogen that is highly repetitive and
-create "private formatters" for it. For example, field definitions are
-more or less exclusive to dogen so it doesn't make it any sense to add
-it to the "public" side of dogen; but it would be nice to create a
-formatter to generate them so that we don't have to do it
-manually. For these "private formatters" we would need to load a SO
-with them into a dogen binary.
 
 *** Consider extending stitch with ideas from Xpand/Xtend              :epic:
 
