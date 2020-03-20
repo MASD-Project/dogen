@@ -82,7 +82,8 @@ std::ostream& operator<<(std::ostream& s, const part& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::part\"" << ", "
-      << "\"directory_name\": " << "\"" << tidy_up_string(v.directory_name()) << "\"" << ", "
+      << "\"default_directory_name\": " << "\"" << tidy_up_string(v.default_directory_name()) << "\"" << ", "
+      << "\"override_directory_name\": " << "\"" << tidy_up_string(v.override_directory_name()) << "\"" << ", "
       << "\"location\": " << v.location() << ", "
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
       << "\"path_configuration\": " << v.path_configuration() << ", "

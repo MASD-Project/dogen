@@ -42,7 +42,8 @@ public:
 
 public:
     facet(
-        const std::string& directory_name,
+        const std::string& default_directory_name,
+        const std::string& override_directory_name,
         const dogen::physical::entities::location& location,
         const std::string& description,
         const std::string& default_postfix,
@@ -50,10 +51,25 @@ public:
         const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes);
 
 public:
-    const std::string& directory_name() const;
-    std::string& directory_name();
-    void directory_name(const std::string& v);
-    void directory_name(const std::string&& v);
+    /**
+     * @brief Default directory name.
+     */
+    /**@{*/
+    const std::string& default_directory_name() const;
+    std::string& default_directory_name();
+    void default_directory_name(const std::string& v);
+    void default_directory_name(const std::string&& v);
+    /**@}*/
+
+    /**
+     * @brief Override directory name, if any.
+     */
+    /**@{*/
+    const std::string& override_directory_name() const;
+    std::string& override_directory_name();
+    void override_directory_name(const std::string& v);
+    void override_directory_name(const std::string&& v);
+    /**@}*/
 
     /**
      * @brief Position of this entity in physical space.
@@ -111,7 +127,8 @@ public:
     facet& operator=(facet other);
 
 private:
-    std::string directory_name_;
+    std::string default_directory_name_;
+    std::string override_directory_name_;
     dogen::physical::entities::location location_;
     std::string description_;
     std::string default_postfix_;

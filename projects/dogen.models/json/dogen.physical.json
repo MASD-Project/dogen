@@ -476,8 +476,14 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "directory_name",
-          "type": "std::string"
+          "name": "default_directory_name",
+          "type": "std::string",
+          "documentation": "Default directory name.\n"
+        },
+        {
+          "name": "override_directory_name",
+          "type": "std::string",
+          "documentation": "Override directory name, if any.\n"
         }
       ]
     },

@@ -23,13 +23,15 @@
 namespace dogen::physical::entities {
 
 facet::facet(
-    const std::string& directory_name,
+    const std::string& default_directory_name,
+    const std::string& override_directory_name,
     const dogen::physical::entities::location& location,
     const std::string& description,
     const std::string& default_postfix,
     const std::string& override_postfix,
     const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes)
-    : directory_name_(directory_name),
+    : default_directory_name_(default_directory_name),
+      override_directory_name_(override_directory_name),
       location_(location),
       description_(description),
       default_postfix_(default_postfix),
@@ -38,7 +40,8 @@ facet::facet(
 
 void facet::swap(facet& other) noexcept {
     using std::swap;
-    swap(directory_name_, other.directory_name_);
+    swap(default_directory_name_, other.default_directory_name_);
+    swap(override_directory_name_, other.override_directory_name_);
     swap(location_, other.location_);
     swap(description_, other.description_);
     swap(default_postfix_, other.default_postfix_);
@@ -47,7 +50,8 @@ void facet::swap(facet& other) noexcept {
 }
 
 bool facet::operator==(const facet& rhs) const {
-    return directory_name_ == rhs.directory_name_ &&
+    return default_directory_name_ == rhs.default_directory_name_ &&
+        override_directory_name_ == rhs.override_directory_name_ &&
         location_ == rhs.location_ &&
         description_ == rhs.description_ &&
         default_postfix_ == rhs.default_postfix_ &&
@@ -61,20 +65,36 @@ facet& facet::operator=(facet other) {
     return *this;
 }
 
-const std::string& facet::directory_name() const {
-    return directory_name_;
+const std::string& facet::default_directory_name() const {
+    return default_directory_name_;
 }
 
-std::string& facet::directory_name() {
-    return directory_name_;
+std::string& facet::default_directory_name() {
+    return default_directory_name_;
 }
 
-void facet::directory_name(const std::string& v) {
-    directory_name_ = v;
+void facet::default_directory_name(const std::string& v) {
+    default_directory_name_ = v;
 }
 
-void facet::directory_name(const std::string&& v) {
-    directory_name_ = std::move(v);
+void facet::default_directory_name(const std::string&& v) {
+    default_directory_name_ = std::move(v);
+}
+
+const std::string& facet::override_directory_name() const {
+    return override_directory_name_;
+}
+
+std::string& facet::override_directory_name() {
+    return override_directory_name_;
+}
+
+void facet::override_directory_name(const std::string& v) {
+    override_directory_name_ = v;
+}
+
+void facet::override_directory_name(const std::string&& v) {
+    override_directory_name_ = std::move(v);
 }
 
 const dogen::physical::entities::location& facet::location() const {
