@@ -21,13 +21,17 @@
 #ifndef DOGEN_ORCHESTRATION_TYPES_SPEC_DUMPER_HPP
 #define DOGEN_ORCHESTRATION_TYPES_SPEC_DUMPER_HPP
 
-#include "dogen/types/spec_group.hpp"
+
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <string>
+#include <vector>
+#include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include "dogen/types/spec_dumper.hpp"
+#include "dogen/types/spec_group.hpp"
 #include "dogen.variability/types/entities/value.hpp"
 #include "dogen.variability/types/entities/value_type.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
@@ -45,20 +49,57 @@ public:
     spec_dumper& operator=(const spec_dumper&) = delete;
 
 private:
+    /**
+     * @brief Pre-processes the string, removing new lines and adding
+     * empty string markers as required.
+     */
     std::string preprocess(std::string s) const;
+
+    /**
+     * @brief Transforms a binding point into a string description.
+     */
     std::string process_binding_point(
         const variability::entities::binding_point bp) const;
+
+    /**
+     * @brief Transforms a value into a string description.
+     */
     std::string process_value(
         const boost::shared_ptr<variability::entities::value> v) const;
+
+    /**
+     * @brief Transforms a value type into a string description.
+     */
     std::string process_value_type(
         const variability::entities::value_type vt) const;
 
 private:
+    /**
+     * @brief Creates specs for injection related items.
+     */
     spec_group create_injection_group() const;
+
+    /**
+     * @brief Creates specs for conversion related items.
+     */
     spec_group create_conversion_group() const;
+
+    /**
+     * @brief Creates specs for the backends.
+     */
     spec_group create_generation_group() const;
+
+    /**
+     * @brief Creates specs for all features.
+     */
     spec_group create_features_group(
         const variability::entities::feature_model& fm) const;
+
+    /**
+     * @brief Creates specs for all variability domains.
+     */
+    spec_group create_variability_domains_group(const
+        std::unordered_map<std::string, std::vector<std::string>>& ds) const;
 
 public:
     virtual specs dump(const dogen::configuration& cfg) const;

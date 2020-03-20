@@ -196,19 +196,48 @@ create_features_group(const variability::entities::feature_model& fm) const {
     return r;
 }
 
+spec_group spec_dumper::create_variability_domains_group(
+    const std::unordered_map<std::string, std::vector<std::string>>& ds) const {
+    spec_group r;
+    r.name("Template Instantiation Domains");
+    r.description("Available domains for template instantiation.");
+
+    for (const auto& pair : ds) {
+        spec_entry e;
+        e.name(pair.first);
+
+        std::ostringstream s;
+        s << "Values in domain: ";
+        bool first(true);
+        for (const auto& v : pair.second) {
+            if (!first)
+                s << ", ";
+            s << v;
+            first = false;
+        }
+        e.description(s.str());
+        r.entries().push_back(e);
+    }
+    return r;
+}
+
 specs spec_dumper::dump(const configuration& cfg) const {
     BOOST_LOG_SEV(lg, debug) << "Started dumping specs.";
 
     {
-        using namespace transforms;
-        scoped_context_manager scm(cfg, activity, empty_output_directory);
-        const auto& fm(*scm.context().assets_context().feature_model());
-
         specs r;
         r.groups().push_back(create_injection_group());
         r.groups().push_back(create_conversion_group());
         r.groups().push_back(create_generation_group());
+
+        using namespace transforms;
+        scoped_context_manager scm(cfg, activity, empty_output_directory);
+        const auto& ctx(scm.context());
+        const auto& fm(*ctx.assets_context().feature_model());
         r.groups().push_back(create_features_group(fm));
+
+        const auto ds(ctx.assets_context().template_instantiation_domains());
+        r.groups().push_back(create_variability_domains_group(ds));
         return r;
     }
 
