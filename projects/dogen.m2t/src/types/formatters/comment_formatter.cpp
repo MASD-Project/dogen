@@ -31,7 +31,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("generation.formatters.comment_formatter"));
+static logger lg(logger_factory("m2t.formatters.comment_formatter"));
 
 const std::string empty;
 const std::string xml_style_start("<!-- ");

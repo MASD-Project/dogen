@@ -29,7 +29,7 @@ namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(
-        "generation.cpp.formattables.file_path_and_guard_expander"));
+        "m2t.cpp.formattables.file_path_and_guard_expander"));
 
 const std::string missing_archetype("Archetype not found: ");
 

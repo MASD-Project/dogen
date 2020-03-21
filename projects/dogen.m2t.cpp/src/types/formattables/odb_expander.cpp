@@ -37,7 +37,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("generation.cpp.formattables.odb_expander"));
+static logger lg(logger_factory("m2t.cpp.formattables.odb_expander"));
 
 const std::string empty_column_attribute("column(\"\")");
 const std::string id_pragma("id");

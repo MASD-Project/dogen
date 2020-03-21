@@ -31,7 +31,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("generation.cpp.formattables.adapter"));
+static logger lg(logger_factory("m2t.cpp.formattables.adapter"));
 
 const std::string mysql("mysql");
 const std::string postgresql("pgsql");

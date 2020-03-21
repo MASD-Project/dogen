@@ -44,7 +44,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("generation.cpp.formattables.helper_expander"));
+static logger lg(logger_factory("m2t.cpp.formattables.helper_expander"));
 
 const std::string descriptor_expected(
     "Child name tree has no associated helper descriptor");

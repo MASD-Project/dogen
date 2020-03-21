@@ -38,7 +38,7 @@ namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(
-        "generation.cpp.formattables.directive_group_repository_factory"));
+        "m2t.cpp.formattables.directive_group_repository_factory"));
 
 const std::string double_quote("\"");
 const std::string boost_name("boost");

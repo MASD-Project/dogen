@@ -34,7 +34,7 @@
 namespace {
 
 const std::string
-transform_id("generation.transforms.generability_transform");
+transform_id("m2t.transforms.generability_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));

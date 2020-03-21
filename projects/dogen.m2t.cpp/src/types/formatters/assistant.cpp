@@ -47,7 +47,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("generation.cpp.formatters.assistant"));
+static logger lg(logger_factory("m2t.cpp.formatters.assistant"));
 
 const std::string empty;
 const std::string by_ref_text("&");

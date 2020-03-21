@@ -31,7 +31,7 @@ namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(
-        "generation.cpp.formattables.streaming_expander"));
+        "m2t.cpp.formattables.streaming_expander"));
 
 }
 

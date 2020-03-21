@@ -41,7 +41,7 @@ namespace {
 
 using namespace dogen::utility::log;
 static logger
-lg(logger_factory("generation.cpp.formattables.build_files_expander"));
+lg(logger_factory("m2t.cpp.formattables.build_files_expander"));
 
 const std::string separator("_");
 const std::string missing_odb_options("Could not find the ODB Options element");

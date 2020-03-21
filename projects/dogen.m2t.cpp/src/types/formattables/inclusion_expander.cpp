@@ -32,7 +32,7 @@ namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(
-        "generation.cpp.formattables.inclusion_expander"));
+        "m2t.cpp.formattables.inclusion_expander"));
 
 const char angle_bracket('<');
 const std::string double_quote("\"");

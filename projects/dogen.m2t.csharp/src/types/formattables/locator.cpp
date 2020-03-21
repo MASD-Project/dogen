@@ -31,7 +31,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("generation.csharp.formattables.locator"));
+static logger lg(logger_factory("m2t.csharp.formattables.locator"));
 
 const std::string empty;
 const std::string extension("cs");

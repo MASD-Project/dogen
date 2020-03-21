@@ -27,7 +27,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("generation.csharp.formattables.workflow"));
+static logger lg(logger_factory("m2t.csharp.formattables.workflow"));
 
 }
 

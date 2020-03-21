@@ -29,7 +29,7 @@ namespace {
 
 using namespace dogen::utility::log;
 static logger
-lg(logger_factory("generation.cpp.formattables.cpp_standard_expander"));
+lg(logger_factory("m2t.cpp.formattables.cpp_standard_expander"));
 
 const std::string cpp_98("c++-98");
 const std::string cpp_11("c++-11");

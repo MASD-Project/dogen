@@ -33,7 +33,7 @@
 
 namespace {
 
-const std::string transform_id("generation.transforms.formatting_transform");
+const std::string transform_id("m2t.transforms.formatting_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));

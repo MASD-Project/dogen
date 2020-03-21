@@ -32,7 +32,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("generation.decoration_formatter"));
+auto lg(logger_factory("m2t.decoration_formatter"));
 
 const bool start_on_first_line(true);
 const bool use_documentation_tool_markup(true);

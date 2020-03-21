@@ -31,7 +31,7 @@
 namespace {
 
 const std::string
-transform_id("generation.transforms.technical_space_transform");
+transform_id("m2t.transforms.technical_space_transform");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));

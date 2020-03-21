@@ -31,7 +31,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("generation.cpp.formattables.aspect_expander"));
+static logger lg(logger_factory("m2t.cpp.formattables.aspect_expander"));
 
 }
 

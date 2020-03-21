@@ -31,7 +31,7 @@ namespace {
 
 using namespace dogen::utility::log;
 static logger
-lg(logger_factory("generation.formatters.dependencies_formatter"));
+lg(logger_factory("m2t.formatters.dependencies_formatter"));
 
 const std::string using_keyword("using ");
 const std::string include_keyword("#include ");

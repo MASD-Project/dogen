@@ -28,7 +28,7 @@ namespace {
 
 using namespace dogen::utility::log;
 static logger
-lg(logger_factory("generation.cpp.formattables.header_guard_factory"));
+lg(logger_factory("m2t.cpp.formattables.header_guard_factory"));
 
 constexpr std::string_view empty;
 constexpr std::string_view dot(".");

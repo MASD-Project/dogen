@@ -26,7 +26,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("generation.formatters.sequence_formatter"));
+static logger lg(logger_factory("m2t.formatters.sequence_formatter"));
 
 const std::string empty;
 const std::string comma(",");

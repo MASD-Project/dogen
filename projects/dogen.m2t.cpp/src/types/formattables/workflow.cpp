@@ -26,7 +26,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("generation.cpp.formattables.workflow"));
+static logger lg(logger_factory("m2t.cpp.formattables.workflow"));
 
 }
 

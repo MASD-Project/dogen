@@ -29,7 +29,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("generation.csharp.formatters.registrar"));
+static logger lg(logger_factory("m2t.csharp.formatters.registrar"));
 
 const std::string no_file_formatters("File formatters repository is empty.");
 const std::string no_file_formatters_by_meta_name(

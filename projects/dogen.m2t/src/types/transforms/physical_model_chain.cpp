@@ -31,7 +31,7 @@
 
 namespace {
 
-const std::string transform_id("generation.transforms.physical_model_chain");
+const std::string transform_id("m2t.transforms.physical_model_chain");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 

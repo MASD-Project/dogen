@@ -29,7 +29,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("generation.formatters.boilerplate_formatter"));
+auto lg(logger_factory("m2t.formatters.boilerplate_formatter"));
 
 }
 

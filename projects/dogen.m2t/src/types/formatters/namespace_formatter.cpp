@@ -31,7 +31,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("generation.formatters.namespace_formatter"));
+auto lg(logger_factory("m2t.formatters.namespace_formatter"));
 
 const std::string empty;
 const std::string dot(".");

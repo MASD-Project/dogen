@@ -27,7 +27,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("generation.cpp.formatters.stitch_formatter"));
+static logger lg(logger_factory("m2t.cpp.formatters.stitch_formatter"));
 
 const std::string empty;
 const std::string stitch_extension(".stitch");

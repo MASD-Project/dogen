@@ -35,7 +35,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("generation.cpp.formattables.locator"));
+static logger lg(logger_factory("m2t.cpp.formattables.locator"));
 
 const std::string empty;
 const std::string underscore("_");

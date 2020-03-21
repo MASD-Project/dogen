@@ -30,7 +30,7 @@ namespace {
 
 using namespace dogen::utility::log;
 static logger
-lg(logger_factory("generation.cpp.formattables.canonical_archetype_expander"));
+lg(logger_factory("m2t.cpp.formattables.canonical_archetype_expander"));
 
 }
 

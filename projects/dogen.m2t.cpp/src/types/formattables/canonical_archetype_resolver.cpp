@@ -28,7 +28,7 @@ namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(
-        "generation.cpp.formattables.canonical_archetype_resolver"));
+        "m2t.cpp.formattables.canonical_archetype_resolver"));
 
 const auto archetype_postfix(".canonical_archetype");
 
