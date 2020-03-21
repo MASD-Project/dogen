@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.m2t.csharp/types/formatters/visual_studio/solution_formatter.hpp"
-#include "dogen.m2t.csharp/types/formatters/visual_studio/project_formatter.hpp"
+#include "dogen.m2t.csharp/types/formatters/visual_studio/solution_transform.hpp"
+#include "dogen.m2t.csharp/types/formatters/visual_studio/project_transform.hpp"
 #include "dogen.m2t.csharp/types/formatters/visual_studio/initializer.hpp"
 
 namespace dogen::m2t::csharp::formatters::visual_studio {
 
 void initializer::initialize(registrar& rg) {
-    register_formatter<solution_formatter>(rg);
-    register_formatter<project_formatter>(rg);
+    register_formatter<solution_transform>(rg);
+    register_formatter<project_transform>(rg);
 }
 
 }

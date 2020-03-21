@@ -20,19 +20,19 @@
  */
 #include "dogen.m2t.csharp/types/formatters/registrar.hpp"
 #include "dogen.m2t.csharp/types/formatters/io/enumerable_helper.hpp"
-#include "dogen.m2t.csharp/types/formatters/io/primitive_formatter.hpp"
-#include "dogen.m2t.csharp/types/formatters/io/class_formatter.hpp"
-#include "dogen.m2t.csharp/types/formatters/io/enum_formatter.hpp"
-#include "dogen.m2t.csharp/types/formatters/io/assistant_formatter.hpp"
+#include "dogen.m2t.csharp/types/formatters/io/primitive_transform.hpp"
+#include "dogen.m2t.csharp/types/formatters/io/class_transform.hpp"
+#include "dogen.m2t.csharp/types/formatters/io/enum_transform.hpp"
+#include "dogen.m2t.csharp/types/formatters/io/assistant_transform.hpp"
 #include "dogen.m2t.csharp/types/formatters/io/initializer.hpp"
 
 namespace dogen::m2t::csharp::formatters::io {
 
 void initializer::initialize(registrar& rg) {
-    register_formatter<class_formatter>(rg);
-    register_formatter<primitive_formatter>(rg);
-    register_formatter<enum_formatter>(rg);
-    register_formatter<assistant_formatter>(rg);
+    register_formatter<class_transform>(rg);
+    register_formatter<primitive_transform>(rg);
+    register_formatter<enum_transform>(rg);
+    register_formatter<assistant_transform>(rg);
     register_formatter_helper<enumerable_helper>(rg);
 }
 

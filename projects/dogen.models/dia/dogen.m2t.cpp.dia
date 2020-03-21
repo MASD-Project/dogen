@@ -264,7 +264,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_header_formatter#</dia:string>
+        <dia:string>#class_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -1219,7 +1219,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_header_formatter#</dia:string>
+        <dia:string>#class_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -1330,7 +1330,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_implementation_formatter#</dia:string>
+        <dia:string>#class_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -1441,7 +1441,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#exception_header_formatter#</dia:string>
+        <dia:string>#exception_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -1552,7 +1552,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_header_formatter#</dia:string>
+        <dia:string>#enum_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -1663,7 +1663,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#namespace_header_formatter#</dia:string>
+        <dia:string>#namespace_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -1774,7 +1774,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#visitor_header_formatter#</dia:string>
+        <dia:string>#visitor_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -1885,7 +1885,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_implementation_formatter#</dia:string>
+        <dia:string>#class_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -1996,7 +1996,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_header_formatter#</dia:string>
+        <dia:string>#enum_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -2146,7 +2146,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_header_formatter#</dia:string>
+        <dia:string>#class_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -2257,7 +2257,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_implementation_formatter#</dia:string>
+        <dia:string>#class_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -2368,7 +2368,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_header_formatter#</dia:string>
+        <dia:string>#enum_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -2479,7 +2479,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_implementation_formatter#</dia:string>
+        <dia:string>#enum_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -2629,7 +2629,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_header_formatter#</dia:string>
+        <dia:string>#class_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -2740,7 +2740,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_implementation_formatter#</dia:string>
+        <dia:string>#class_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -2890,7 +2890,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_header_formatter#</dia:string>
+        <dia:string>#class_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -3001,7 +3001,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_implementation_formatter#</dia:string>
+        <dia:string>#class_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -3112,7 +3112,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_header_formatter#</dia:string>
+        <dia:string>#enum_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -3223,7 +3223,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_implementation_formatter#</dia:string>
+        <dia:string>#enum_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -3373,7 +3373,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_header_formatter#</dia:string>
+        <dia:string>#class_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -10321,7 +10321,7 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_header_formatter#</dia:string>
+        <dia:string>#enum_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -10432,7 +10432,7 @@ main, or from another initialiser.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_header_formatter#</dia:string>
+        <dia:string>#enum_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -12435,7 +12435,7 @@ and element.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#builtin_header_formatter#</dia:string>
+        <dia:string>#builtin_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -12546,7 +12546,7 @@ and element.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#builtin_header_formatter#</dia:string>
+        <dia:string>#builtin_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -12657,7 +12657,7 @@ and element.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#builtin_header_formatter#</dia:string>
+        <dia:string>#builtin_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -12768,7 +12768,7 @@ and element.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#builtin_header_formatter#</dia:string>
+        <dia:string>#builtin_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -12879,7 +12879,7 @@ and element.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#builtin_header_formatter#</dia:string>
+        <dia:string>#builtin_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -12990,7 +12990,7 @@ and element.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#builtin_header_formatter#</dia:string>
+        <dia:string>#builtin_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -19454,7 +19454,7 @@ and element.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#wale_formatter#</dia:string>
+        <dia:string>#wale_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -19648,7 +19648,7 @@ and element.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#stitch_formatter#</dia:string>
+        <dia:string>#stitch_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -24635,7 +24635,7 @@ not a regular" helper.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_header_formatter#</dia:string>
+        <dia:string>#primitive_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -24746,7 +24746,7 @@ not a regular" helper.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_header_formatter#</dia:string>
+        <dia:string>#primitive_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -24857,7 +24857,7 @@ not a regular" helper.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_header_formatter#</dia:string>
+        <dia:string>#primitive_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -24968,7 +24968,7 @@ not a regular" helper.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_header_formatter#</dia:string>
+        <dia:string>#primitive_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -25079,7 +25079,7 @@ not a regular" helper.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_header_formatter#</dia:string>
+        <dia:string>#primitive_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -25190,7 +25190,7 @@ not a regular" helper.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_header_formatter#</dia:string>
+        <dia:string>#primitive_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -25301,7 +25301,7 @@ not a regular" helper.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_implementation_formatter#</dia:string>
+        <dia:string>#primitive_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -25412,7 +25412,7 @@ not a regular" helper.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_implementation_formatter#</dia:string>
+        <dia:string>#primitive_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -25523,7 +25523,7 @@ not a regular" helper.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_implementation_formatter#</dia:string>
+        <dia:string>#primitive_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -25634,7 +25634,7 @@ not a regular" helper.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_implementation_formatter#</dia:string>
+        <dia:string>#primitive_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -25745,7 +25745,7 @@ not a regular" helper.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_implementation_formatter#</dia:string>
+        <dia:string>#primitive_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -28748,7 +28748,7 @@ code.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_implementation_formatter#</dia:string>
+        <dia:string>#class_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -29003,7 +29003,7 @@ code.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_implementation_formatter#</dia:string>
+        <dia:string>#enum_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -29114,7 +29114,7 @@ code.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#feature_template_bundle_header_formatter#</dia:string>
+        <dia:string>#feature_template_bundle_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -29225,7 +29225,7 @@ code.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#feature_template_bundle_implementation_formatter#</dia:string>
+        <dia:string>#feature_template_bundle_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -29336,7 +29336,7 @@ code.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#variability_initializer_header_formatter#</dia:string>
+        <dia:string>#variability_initializer_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -29447,7 +29447,7 @@ code.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#variability_initializer_implementation_formatter#</dia:string>
+        <dia:string>#variability_initializer_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -30756,7 +30756,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_header_formatter#</dia:string>
+        <dia:string>#enum_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -31842,7 +31842,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#logic_less_template_formatter#</dia:string>
+        <dia:string>#logic_less_template_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -31953,7 +31953,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_forward_declarations_formatter#</dia:string>
+        <dia:string>#class_forward_declarations_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -32064,7 +32064,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#visitor_forward_declarations_formatter#</dia:string>
+        <dia:string>#visitor_forward_declarations_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -32175,7 +32175,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_forward_declarations_formatter#</dia:string>
+        <dia:string>#class_forward_declarations_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -32286,7 +32286,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_forward_declarations_formatter#</dia:string>
+        <dia:string>#primitive_forward_declarations_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -32397,7 +32397,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_forward_declarations_formatter#</dia:string>
+        <dia:string>#primitive_forward_declarations_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -32508,7 +32508,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#type_registrar_header_formatter#</dia:string>
+        <dia:string>#type_registrar_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -32619,7 +32619,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#type_registrar_implementation_formatter#</dia:string>
+        <dia:string>#type_registrar_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -33155,7 +33155,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#project_formatter#</dia:string>
+        <dia:string>#project_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -33266,7 +33266,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#solution_formatter#</dia:string>
+        <dia:string>#solution_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -33377,7 +33377,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#main_formatter#</dia:string>
+        <dia:string>#main_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -33488,7 +33488,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#object_odb_options_formatter#</dia:string>
+        <dia:string>#object_odb_options_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -33599,7 +33599,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_odb_options_formatter#</dia:string>
+        <dia:string>#primitive_odb_options_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -33710,7 +33710,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#main_formatter#</dia:string>
+        <dia:string>#main_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -33931,7 +33931,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#common_odb_options_formatter#</dia:string>
+        <dia:string>#common_odb_options_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -34042,7 +34042,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#msbuild_targets_formatter#</dia:string>
+        <dia:string>#msbuild_targets_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -34192,7 +34192,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#source_cmakelists_formatter#</dia:string>
+        <dia:string>#source_cmakelists_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -34303,7 +34303,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#include_cmakelists_formatter#</dia:string>
+        <dia:string>#include_cmakelists_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -34690,7 +34690,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#cmakelists_formatter#</dia:string>
+        <dia:string>#cmakelists_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -34911,7 +34911,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#feature_bundle_header_formatter#</dia:string>
+        <dia:string>#feature_bundle_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
@@ -35022,7 +35022,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#feature_bundle_implementation_formatter#</dia:string>
+        <dia:string>#feature_bundle_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::cpp::artefact_formatter#</dia:string>

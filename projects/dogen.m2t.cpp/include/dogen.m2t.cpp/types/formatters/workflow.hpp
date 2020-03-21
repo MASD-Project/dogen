@@ -39,7 +39,7 @@
 #include "dogen.m2t.cpp/types/formattables/locator.hpp"
 #include "dogen.m2t.cpp/types/formattables/model.hpp"
 #include "dogen.m2t.cpp/types/formatters/registrar.hpp"
-#include "dogen.m2t.cpp/types/formatters/stitch_formatter.hpp"
+#include "dogen.m2t.cpp/types/formatters/stitch_transform.hpp"
 
 namespace dogen::m2t::cpp::formatters {
 
@@ -78,7 +78,7 @@ public:
 
 private:
     static std::shared_ptr<cpp::formatters::registrar> registrar_;
-    const stitch_formatter stitch_formatter_;
+    const stitch_transform stitch_formatter_;
     const formattables::locator& locator_;
 };
 

@@ -19,25 +19,25 @@
  *
  */
 #include "dogen.m2t.cpp/types/formatters/odb/traits.hpp"
-#include "dogen.m2t.cpp/types/formatters/odb/builtin_header_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/odb/primitive_header_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/odb/class_header_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/odb/enum_header_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/odb/common_odb_options_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/odb/object_odb_options_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/odb/primitive_odb_options_formatter.hpp"
+#include "dogen.m2t.cpp/types/formatters/odb/builtin_header_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/odb/primitive_header_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/odb/class_header_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/odb/enum_header_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/odb/common_odb_options_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/odb/object_odb_options_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/odb/primitive_odb_options_transform.hpp"
 #include "dogen.m2t.cpp/types/formatters/odb/initializer.hpp"
 
 namespace dogen::m2t::cpp::formatters::odb {
 
 void initializer::initialize(registrar& rg) {
-    register_formatter<builtin_header_formatter>(rg);
-    register_formatter<primitive_header_formatter>(rg);
-    register_formatter<class_header_formatter>(rg);
-    register_formatter<enum_header_formatter>(rg);
-    register_formatter<common_odb_options_formatter>(rg);
-    register_formatter<object_odb_options_formatter>(rg);
-    register_formatter<primitive_odb_options_formatter>(rg);
+    register_formatter<builtin_header_transform>(rg);
+    register_formatter<primitive_header_transform>(rg);
+    register_formatter<class_header_transform>(rg);
+    register_formatter<enum_header_transform>(rg);
+    register_formatter<common_odb_options_transform>(rg);
+    register_formatter<object_odb_options_transform>(rg);
+    register_formatter<primitive_odb_options_transform>(rg);
 }
 
 }

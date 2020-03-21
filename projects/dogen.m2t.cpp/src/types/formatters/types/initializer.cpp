@@ -19,50 +19,50 @@
  *
  */
 #include "dogen.m2t.cpp/types/formatters/types/traits.hpp"
-#include "dogen.m2t.cpp/types/formatters/types/main_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/types/builtin_header_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/types/primitive_header_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/types/primitive_implementation_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/types/class_header_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/types/class_implementation_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/types/enum_header_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/types/exception_header_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/types/namespace_header_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/types/visitor_header_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/types/class_forward_declarations_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/types/visitor_forward_declarations_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/types/primitive_forward_declarations_formatter.hpp"
+#include "dogen.m2t.cpp/types/formatters/types/main_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/types/builtin_header_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/types/primitive_header_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/types/primitive_implementation_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/types/class_header_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/types/class_implementation_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/types/enum_header_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/types/exception_header_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/types/namespace_header_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/types/visitor_header_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/types/class_forward_declarations_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/types/visitor_forward_declarations_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/types/primitive_forward_declarations_transform.hpp"
 #include "dogen.m2t.cpp/types/formatters/types/smart_pointer_helper.hpp"
-#include "dogen.m2t.cpp/types/formatters/types/feature_template_bundle_header_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/types/feature_template_bundle_implementation_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/types/feature_bundle_header_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/types/feature_bundle_implementation_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/types/variability_initializer_header_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/types/variability_initializer_implementation_formatter.hpp"
+#include "dogen.m2t.cpp/types/formatters/types/feature_template_bundle_header_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/types/feature_template_bundle_implementation_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/types/feature_bundle_header_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/types/feature_bundle_implementation_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/types/variability_initializer_header_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/types/variability_initializer_implementation_transform.hpp"
 #include "dogen.m2t.cpp/types/formatters/types/initializer.hpp"
 
 namespace dogen::m2t::cpp::formatters::types {
 
 void initializer::initialize(registrar& rg) {
-    register_formatter<builtin_header_formatter>(rg);
-    register_formatter<primitive_header_formatter>(rg);
-    register_formatter<primitive_implementation_formatter>(rg);
-    register_formatter<class_header_formatter>(rg);
-    register_formatter<class_implementation_formatter>(rg);
-    register_formatter<enum_header_formatter>(rg);
-    register_formatter<exception_header_formatter>(rg);
-    register_formatter<namespace_header_formatter>(rg);
-    register_formatter<visitor_header_formatter>(rg);
-    register_formatter<class_forward_declarations_formatter>(rg);
-    register_formatter<visitor_forward_declarations_formatter>(rg);
-    register_formatter<primitive_forward_declarations_formatter>(rg);
-    register_formatter<feature_template_bundle_header_formatter>(rg);
-    register_formatter<feature_template_bundle_implementation_formatter>(rg);
-    register_formatter<feature_bundle_header_formatter>(rg);
-    register_formatter<feature_bundle_implementation_formatter>(rg);
-    register_formatter<variability_initializer_header_formatter>(rg);
-    register_formatter<variability_initializer_implementation_formatter>(rg);
-    register_formatter<main_formatter>(rg);
+    register_formatter<builtin_header_transform>(rg);
+    register_formatter<primitive_header_transform>(rg);
+    register_formatter<primitive_implementation_transform>(rg);
+    register_formatter<class_header_transform>(rg);
+    register_formatter<class_implementation_transform>(rg);
+    register_formatter<enum_header_transform>(rg);
+    register_formatter<exception_header_transform>(rg);
+    register_formatter<namespace_header_transform>(rg);
+    register_formatter<visitor_header_transform>(rg);
+    register_formatter<class_forward_declarations_transform>(rg);
+    register_formatter<visitor_forward_declarations_transform>(rg);
+    register_formatter<primitive_forward_declarations_transform>(rg);
+    register_formatter<feature_template_bundle_header_transform>(rg);
+    register_formatter<feature_template_bundle_implementation_transform>(rg);
+    register_formatter<feature_bundle_header_transform>(rg);
+    register_formatter<feature_bundle_implementation_transform>(rg);
+    register_formatter<variability_initializer_header_transform>(rg);
+    register_formatter<variability_initializer_implementation_transform>(rg);
+    register_formatter<main_transform>(rg);
 
     register_helper_formatter<smart_pointer_helper>(rg);
 }

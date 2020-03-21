@@ -19,19 +19,19 @@
  *
  */
 #include "dogen.m2t.csharp/types/formatters/registrar.hpp"
-#include "dogen.m2t.csharp/types/formatters/test_data/class_formatter.hpp"
-#include "dogen.m2t.csharp/types/formatters/test_data/primitive_formatter.hpp"
-#include "dogen.m2t.csharp/types/formatters/test_data/enum_formatter.hpp"
-#include "dogen.m2t.csharp/types/formatters/test_data/assistant_formatter.hpp"
+#include "dogen.m2t.csharp/types/formatters/test_data/class_transform.hpp"
+#include "dogen.m2t.csharp/types/formatters/test_data/primitive_transform.hpp"
+#include "dogen.m2t.csharp/types/formatters/test_data/enum_transform.hpp"
+#include "dogen.m2t.csharp/types/formatters/test_data/assistant_transform.hpp"
 #include "dogen.m2t.csharp/types/formatters/test_data/initializer.hpp"
 
 namespace dogen::m2t::csharp::formatters::test_data {
 
 void initializer::initialize(registrar& rg) {
-    register_formatter<class_formatter>(rg);
-    register_formatter<primitive_formatter>(rg);
-    register_formatter<enum_formatter>(rg);
-    register_formatter<assistant_formatter>(rg);
+    register_formatter<class_transform>(rg);
+    register_formatter<primitive_transform>(rg);
+    register_formatter<enum_transform>(rg);
+    register_formatter<assistant_transform>(rg);
 }
 
 }

@@ -111,28 +111,28 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "formatters::types::class_formatter",
+      "name": "formatters::types::class_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::enum_formatter",
+      "name": "formatters::types::enum_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::namespace_formatter",
+      "name": "formatters::types::namespace_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::visitor_formatter",
+      "name": "formatters::types::visitor_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
@@ -143,14 +143,14 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "formatters::io::class_formatter",
+      "name": "formatters::io::class_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::io::enum_formatter",
+      "name": "formatters::io::enum_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
@@ -161,21 +161,21 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "formatters::test_data::class_formatter",
+      "name": "formatters::test_data::class_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::test_data::enum_formatter",
+      "name": "formatters::test_data::enum_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::exception_formatter",
+      "name": "formatters::types::exception_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
@@ -625,21 +625,21 @@
       ]
     },
     {
-      "name": "formatters::types::builtin_formatter",
+      "name": "formatters::types::builtin_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::io::builtin_formatter",
+      "name": "formatters::io::builtin_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::test_data::builtin_formatter",
+      "name": "formatters::test_data::builtin_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
@@ -719,21 +719,21 @@
       ]
     },
     {
-      "name": "formatters::types::primitive_formatter",
+      "name": "formatters::types::primitive_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::test_data::primitive_formatter",
+      "name": "formatters::test_data::primitive_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::io::primitive_formatter",
+      "name": "formatters::io::primitive_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
@@ -864,14 +864,14 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::visual_studio::project_formatter",
+      "name": "formatters::visual_studio::project_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::visual_studio::solution_formatter",
+      "name": "formatters::visual_studio::solution_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
@@ -886,14 +886,14 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::io::assistant_formatter",
+      "name": "formatters::io::assistant_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::test_data::assistant_formatter",
+      "name": "formatters::test_data::assistant_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],

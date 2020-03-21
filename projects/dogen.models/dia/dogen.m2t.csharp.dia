@@ -1930,7 +1930,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_formatter#</dia:string>
+        <dia:string>#class_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
@@ -2041,7 +2041,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_formatter#</dia:string>
+        <dia:string>#enum_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
@@ -2152,7 +2152,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#namespace_formatter#</dia:string>
+        <dia:string>#namespace_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
@@ -2263,7 +2263,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#visitor_formatter#</dia:string>
+        <dia:string>#visitor_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
@@ -2413,7 +2413,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_formatter#</dia:string>
+        <dia:string>#class_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
@@ -2524,7 +2524,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_formatter#</dia:string>
+        <dia:string>#enum_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
@@ -2674,7 +2674,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#class_formatter#</dia:string>
+        <dia:string>#class_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
@@ -2785,7 +2785,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#enum_formatter#</dia:string>
+        <dia:string>#enum_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
@@ -2896,7 +2896,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#exception_formatter#</dia:string>
+        <dia:string>#exception_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
@@ -11668,7 +11668,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#builtin_formatter#</dia:string>
+        <dia:string>#builtin_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
@@ -11779,7 +11779,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#builtin_formatter#</dia:string>
+        <dia:string>#builtin_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
@@ -11890,7 +11890,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#builtin_formatter#</dia:string>
+        <dia:string>#builtin_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
@@ -13241,7 +13241,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_formatter#</dia:string>
+        <dia:string>#primitive_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
@@ -13352,7 +13352,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_formatter#</dia:string>
+        <dia:string>#primitive_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
@@ -13463,7 +13463,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_formatter#</dia:string>
+        <dia:string>#primitive_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
@@ -14797,7 +14797,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#project_formatter#</dia:string>
+        <dia:string>#project_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
@@ -14908,7 +14908,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#solution_formatter#</dia:string>
+        <dia:string>#solution_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
@@ -15129,7 +15129,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#assistant_formatter#</dia:string>
+        <dia:string>#assistant_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
@@ -15240,7 +15240,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#assistant_formatter#</dia:string>
+        <dia:string>#assistant_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::csharp::artefact_formatter#</dia:string>

@@ -26,7 +26,7 @@
 #include "dogen.logical/io/entities/formatting_styles_io.hpp"
 #include "dogen.m2t.cpp/io/formattables/artefact_properties_io.hpp"
 #include "dogen.m2t.cpp/types/formatters/context.hpp"
-#include "dogen.m2t.cpp/types/formatters/wale_formatter.hpp"
+#include "dogen.m2t.cpp/types/formatters/wale_transform.hpp"
 #include "dogen.m2t.cpp/types/formatters/formatting_error.hpp"
 #include "dogen.m2t.cpp/types/formatters/workflow.hpp"
 
@@ -119,7 +119,7 @@ workflow::format(
         } else if (fs == formatting_styles::wale) {
             BOOST_LOG_SEV(lg, debug) << "Using the wale formatter.";
 
-            wale_formatter f;
+            wale_transform f;
             const auto artefact(f.format(locator_, fmt, ctx, e));
             const auto& p(artefact.paths().absolute());
 

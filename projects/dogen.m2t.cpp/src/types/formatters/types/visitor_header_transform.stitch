@@ -1,0 +1,110 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::formatters::types #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/visitor.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/inclusion_constants.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/serialization/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/hash/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/types/visitor_header_transform.hpp" #>
+<#@ masd.stitch.wale.text_template=cpp_artefact_formatter_implementation_header.wale #>
+<#@ masd.stitch.wale.kvp.class.simple_name=visitor_header_transform #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=visitor_header #>
+<#@ masd.stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::visitor #>
+<#@ masd.stitch.wale.kvp.meta_element=visitor #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+std::list<std::string> visitor_header_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& f,
+    const logical::entities::element& e) const {
+    using logical::entities::structural::visitor;
+    const auto& v(assistant::as<visitor>(e));
+    auto builder(f.make());
+    builder.add(v.visits(), traits::class_forward_declarations_archetype());
+
+    if (v.parent())
+        builder.add(*v.parent(), traits::visitor_header_archetype());
+
+    return builder.build();
+}
+
+physical::entities::artefact visitor_header_transform::
+format(const context& ctx, const logical::entities::element& e) const {
+    assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
+    const auto& v(a.as<logical::entities::structural::visitor>(e));
+
+    {
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        {
+            const auto ns(a.make_namespaces(v.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
+#>
+
+<#+
+            a.comment(v.documentation());
+            if (!v.parent())
+#>
+class <#= v.name().simple() #> {
+<#+
+            else {
+                const auto& pn(*v.parent());
+                const auto pqn(a.get_qualified_name(pn));
+#>
+class <#= v.name().simple() #> : public <#= pqn #> {
+<#+
+            }
+#>
+public:
+    virtual ~<#= v.name().simple() #>()<#= a.make_noexcept_keyword_text() #> = 0;
+
+public:
+<#+
+            if (v.parent()) {
+                const auto& pn(*v.parent());
+                const auto pqn(a.get_qualified_name(pn));
+#>
+    using <#= pqn #>::visit;
+
+<#+
+            }
+
+            bool is_first(true);
+            for (const auto& t : v.visits()) {
+                if (!is_first)
+#>
+
+<#+
+                const auto qn(a.get_qualified_name(t));
+                const auto doc("Accept visits for type " + qn);
+                a.comment_start_method_group(doc);
+#>
+    virtual void visit(const <#= qn #>&) const { }
+    virtual void visit(const <#= qn #>&) { }
+    virtual void visit(<#= qn #>&) const { }
+    virtual void visit(<#= qn #>&) { }
+<#+
+                a.comment_end_method_group(doc);
+                is_first = false;
+            }
+#>
+};
+
+inline <#= v.name().simple() #>::~<#= v.name().simple() #>()<#= a.make_noexcept_keyword_text() #> { }
+
+<#+
+        } // snf
+#>
+
+<#+
+    } // sbf
+    return a.make_artefact();
+}
+
+#>

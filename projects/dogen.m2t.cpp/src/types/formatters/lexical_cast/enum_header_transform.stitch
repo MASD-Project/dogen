@@ -1,0 +1,111 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::formatters::lexical_cast #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/lexical_cast/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/inclusion_constants.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/lexical_cast/enum_header_transform.hpp" #>
+<#@ masd.stitch.wale.text_template=cpp_artefact_formatter_implementation_header.wale #>
+<#@ masd.stitch.wale.kvp.class.simple_name=enum_header_transform #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=enum_header #>
+<#@ masd.stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::enumeration #>
+<#@ masd.stitch.wale.kvp.meta_element=enumeration #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+std::list<std::string> enum_header_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& f,
+    const logical::entities::element& e) const {
+    auto builder(f.make());
+
+    const auto eh_fn(types::traits::enum_header_archetype());
+    builder.add(e.name(), eh_fn);
+    builder.add(inclusion_constants::boost::lexical_cast());
+
+    return builder.build();
+}
+
+physical::entities::artefact enum_header_transform::
+format(const context& ctx, const logical::entities::element& e) const {
+    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    const auto& enm(a.as<logical::entities::structural::enumeration>(e));
+
+    {
+        auto sbf(a.make_scoped_boilerplate_formatter(enm));
+        const auto qn(a.get_qualified_name(enm.name()));
+        const auto sn(enm.name().simple());
+#>
+
+namespace boost {
+
+template<>
+inline std::string lexical_cast(const <#= qn #>& v) {
+<#+
+        if (!a.is_cpp_standard_98()) {
+#>
+    using <#= qn #>;
+
+<#+
+        }
+#>
+    switch (v) {
+<#+
+        for (const auto& enu : enm.enumerators()) {
+            const auto enu_sn(enu.name().simple());
+            std::string enu_qn;
+            if (a.is_cpp_standard_98())
+                enu_qn = a.get_qualified_namespace(enm.name()) + "::" + enu_sn;
+            else
+                enu_qn = sn + "::" + enu_sn;
+#>
+    case <#= enu_qn #>:
+        return "<#= sn + "::" + enu_sn #>";
+<#+
+        }
+#>
+    default:
+        throw boost::bad_lexical_cast();
+    }
+}
+
+template<>
+inline <#= qn #> lexical_cast(const std::string & s) {
+<#+
+        if (!a.is_cpp_standard_98()) {
+#>
+    using <#= qn #>;
+
+<#+
+        }
+
+        for (const auto& enu : enm.enumerators()) {
+           const auto enu_sn(enu.name().simple());
+           std::string enu_qn;
+           if (a.is_cpp_standard_98())
+               enu_qn = a.get_qualified_namespace(enm.name()) + "::" + enu_sn;
+           else
+               enu_qn = sn + "::" + enu_sn;
+#>
+    if (s == "<#= enu_sn #>" || s == "<#= sn + "::" + enu_sn #>")
+        return <#= enu_qn #>;
+<#+
+        }
+#>
+    throw boost::bad_lexical_cast();
+}
+
+}
+
+<#+
+    } // sbf
+    return a.make_artefact();
+}
+
+#>

@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.m2t.cpp/types/formatters/build/include_cmakelists_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/build/source_cmakelists_formatter.hpp"
+#include "dogen.m2t.cpp/types/formatters/build/include_cmakelists_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/build/source_cmakelists_transform.hpp"
 #include "dogen.m2t.cpp/types/formatters/build/initializer.hpp"
 
 namespace dogen::m2t::cpp::formatters::build {
 
 void initializer::initialize(registrar& rg) {
-    register_formatter<include_cmakelists_formatter>(rg);
-    register_formatter<source_cmakelists_formatter>(rg);
+    register_formatter<include_cmakelists_transform>(rg);
+    register_formatter<source_cmakelists_transform>(rg);
 }
 
 }

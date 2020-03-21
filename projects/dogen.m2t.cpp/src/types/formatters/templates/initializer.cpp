@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.m2t.cpp/types/formatters/templates/logic_less_template_formatter.hpp"
+#include "dogen.m2t.cpp/types/formatters/templates/logic_less_template_transform.hpp"
 #include "dogen.m2t.cpp/types/formatters/templates/initializer.hpp"
 
 namespace dogen::m2t::cpp::formatters::templates {
 
 void initializer::initialize(registrar& rg) {
-    register_formatter<logic_less_template_formatter>(rg);
+    register_formatter<logic_less_template_transform>(rg);
 }
 
 }

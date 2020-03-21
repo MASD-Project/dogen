@@ -19,12 +19,12 @@
  *
  */
 #include "dogen.m2t.cpp/types/formatters/hash/traits.hpp"
-#include "dogen.m2t.cpp/types/formatters/hash/builtin_header_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/hash/primitive_header_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/hash/primitive_implementation_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/hash/class_header_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/hash/class_implementation_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/hash/enum_header_formatter.hpp"
+#include "dogen.m2t.cpp/types/formatters/hash/builtin_header_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/hash/primitive_header_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/hash/primitive_implementation_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/hash/class_header_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/hash/class_implementation_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/hash/enum_header_transform.hpp"
 #include "dogen.m2t.cpp/types/formatters/hash/associative_container_helper.hpp"
 #include "dogen.m2t.cpp/types/formatters/hash/date_helper.hpp"
 #include "dogen.m2t.cpp/types/formatters/hash/optional_helper.hpp"
@@ -41,12 +41,12 @@
 namespace dogen::m2t::cpp::formatters::hash {
 
 void initializer::initialize(registrar& rg) {
-    register_formatter<builtin_header_formatter>(rg);
-    register_formatter<primitive_header_formatter>(rg);
-    register_formatter<primitive_implementation_formatter>(rg);
-    register_formatter<class_header_formatter>(rg);
-    register_formatter<class_implementation_formatter>(rg);
-    register_formatter<enum_header_formatter>(rg);
+    register_formatter<builtin_header_transform>(rg);
+    register_formatter<primitive_header_transform>(rg);
+    register_formatter<primitive_implementation_transform>(rg);
+    register_formatter<class_header_transform>(rg);
+    register_formatter<class_implementation_transform>(rg);
+    register_formatter<enum_header_transform>(rg);
     register_helper_formatter<associative_container_helper>(rg);
     register_helper_formatter<date_helper>(rg);
     register_helper_formatter<optional_helper>(rg);

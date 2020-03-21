@@ -19,22 +19,22 @@
  *
  */
 #include "dogen.m2t.csharp/types/formatters/registrar.hpp"
-#include "dogen.m2t.csharp/types/formatters/types/class_formatter.hpp"
-#include "dogen.m2t.csharp/types/formatters/types/primitive_formatter.hpp"
-#include "dogen.m2t.csharp/types/formatters/types/enum_formatter.hpp"
-#include "dogen.m2t.csharp/types/formatters/types/exception_formatter.hpp"
-#include "dogen.m2t.csharp/types/formatters/types/builtin_formatter.hpp"
+#include "dogen.m2t.csharp/types/formatters/types/class_transform.hpp"
+#include "dogen.m2t.csharp/types/formatters/types/primitive_transform.hpp"
+#include "dogen.m2t.csharp/types/formatters/types/enum_transform.hpp"
+#include "dogen.m2t.csharp/types/formatters/types/exception_transform.hpp"
+#include "dogen.m2t.csharp/types/formatters/types/builtin_transform.hpp"
 #include "dogen.m2t.csharp/types/formatters/types/floating_point_number_helper.hpp"
 #include "dogen.m2t.csharp/types/formatters/types/initializer.hpp"
 
 namespace dogen::m2t::csharp::formatters::types {
 
 void initializer::initialize(registrar& rg) {
-    register_formatter<class_formatter>(rg);
-    register_formatter<primitive_formatter>(rg);
-    register_formatter<enum_formatter>(rg);
-    register_formatter<exception_formatter>(rg);
-    register_formatter<builtin_formatter>(rg);
+    register_formatter<class_transform>(rg);
+    register_formatter<primitive_transform>(rg);
+    register_formatter<enum_transform>(rg);
+    register_formatter<exception_transform>(rg);
+    register_formatter<builtin_transform>(rg);
     register_formatter_helper<floating_point_number_helper>(rg);
 }
 

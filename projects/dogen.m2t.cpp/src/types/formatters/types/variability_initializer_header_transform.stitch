@@ -1,0 +1,67 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::formatters::types #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/variability/initializer.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/inclusion_constants.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/serialization/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/hash/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/types/variability_initializer_header_transform.hpp" #>
+<#@ masd.stitch.wale.text_template=cpp_artefact_formatter_implementation_header.wale #>
+<#@ masd.stitch.wale.kvp.class.simple_name=variability_initializer_header_transform #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=variability_initializer_header #>
+<#@ masd.stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::variability::initializer #>
+<#@ masd.stitch.wale.kvp.meta_element=variability_initializer #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+std::list<std::string> variability_initializer_header_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& f,
+    const logical::entities::element& /*e*/) const {
+
+    using logical::entities::variability::initializer;
+    auto builder(f.make());
+    builder.add("\"dogen.variability/types/entities/feature_template.hpp\"");
+    builder.add("\"dogen.variability/types/helpers/registrar.hpp\"");
+
+    return builder.build();
+}
+
+physical::entities::artefact variability_initializer_header_transform::
+format(const context& ctx, const logical::entities::element& e) const {
+    assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
+    const auto& o(a.as<logical::entities::variability::initializer>(e));
+
+    {
+        const auto sn(o.name().simple());
+        const auto qn(a.get_qualified_name(o.name()));
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        {
+            const auto ns(a.make_namespaces(o.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
+#>
+
+/**
+ * @brief Registers all of the available feature templates with registrar.
+ */
+class <#= sn #> final {
+public:
+    static void register_entities(variability::helpers::registrar& rg);
+};
+
+<#+
+        }
+#>
+
+<#+
+    } // sbf
+    return a.make_artefact();
+}
+#>

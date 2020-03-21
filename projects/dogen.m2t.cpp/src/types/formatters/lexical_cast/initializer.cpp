@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.m2t.cpp/types/formatters/lexical_cast/enum_header_formatter.hpp"
+#include "dogen.m2t.cpp/types/formatters/lexical_cast/enum_header_transform.hpp"
 #include "dogen.m2t.cpp/types/formatters/lexical_cast/initializer.hpp"
 
 namespace dogen::m2t::cpp::formatters::lexical_cast {
 
 void initializer::initialize(registrar& rg) {
-    register_formatter<enum_header_formatter>(rg);
+    register_formatter<enum_header_transform>(rg);
 }
 
 }

@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.m2t.cpp/types/formatters/tests/class_implementation_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/tests/enum_implementation_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/tests/cmakelists_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/tests/main_formatter.hpp"
+#include "dogen.m2t.cpp/types/formatters/tests/class_implementation_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/tests/enum_implementation_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/tests/cmakelists_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/tests/main_transform.hpp"
 #include "dogen.m2t.cpp/types/formatters/tests/initializer.hpp"
 
 namespace dogen::m2t::cpp::formatters::tests {
 
 void initializer::initialize(registrar& rg) {
-    register_formatter<cmakelists_formatter>(rg);
-    register_formatter<class_implementation_formatter>(rg);
-    register_formatter<enum_implementation_formatter>(rg);
-    register_formatter<main_formatter>(rg);
+    register_formatter<cmakelists_transform>(rg);
+    register_formatter<class_implementation_transform>(rg);
+    register_formatter<enum_implementation_transform>(rg);
+    register_formatter<main_transform>(rg);
 }
 
 }

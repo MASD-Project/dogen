@@ -19,13 +19,13 @@
  *
  */
 #include "dogen.m2t.cpp/types/formatters/io/traits.hpp"
-#include "dogen.m2t.cpp/types/formatters/io/builtin_header_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/io/primitive_header_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/io/primitive_implementation_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/io/class_header_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/io/class_implementation_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/io/enum_header_formatter.hpp"
-#include "dogen.m2t.cpp/types/formatters/io/enum_implementation_formatter.hpp"
+#include "dogen.m2t.cpp/types/formatters/io/builtin_header_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/io/primitive_header_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/io/primitive_implementation_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/io/class_header_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/io/class_implementation_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/io/enum_header_transform.hpp"
+#include "dogen.m2t.cpp/types/formatters/io/enum_implementation_transform.hpp"
 #include "dogen.m2t.cpp/types/formatters/io/smart_pointer_helper.hpp"
 #include "dogen.m2t.cpp/types/formatters/io/associative_container_helper.hpp"
 #include "dogen.m2t.cpp/types/formatters/io/optional_helper.hpp"
@@ -40,13 +40,13 @@
 namespace dogen::m2t::cpp::formatters::io {
 
 void initializer::initialize(registrar& rg) {
-    register_formatter<builtin_header_formatter>(rg);
-    register_formatter<primitive_header_formatter>(rg);
-    register_formatter<primitive_implementation_formatter>(rg);
-    register_formatter<class_header_formatter>(rg);
-    register_formatter<class_implementation_formatter>(rg);
-    register_formatter<enum_header_formatter>(rg);
-    register_formatter<enum_implementation_formatter>(rg);
+    register_formatter<builtin_header_transform>(rg);
+    register_formatter<primitive_header_transform>(rg);
+    register_formatter<primitive_implementation_transform>(rg);
+    register_formatter<class_header_transform>(rg);
+    register_formatter<class_implementation_transform>(rg);
+    register_formatter<enum_header_transform>(rg);
+    register_formatter<enum_implementation_transform>(rg);
     register_helper_formatter<smart_pointer_helper>(rg);
     register_helper_formatter<associative_container_helper>(rg);
     register_helper_formatter<optional_helper>(rg);

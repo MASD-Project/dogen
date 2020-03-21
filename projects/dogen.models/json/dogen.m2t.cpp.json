@@ -37,7 +37,7 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "formatters::types::class_header_formatter",
+      "name": "formatters::types::class_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
@@ -69,56 +69,56 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "formatters::hash::class_header_formatter",
+      "name": "formatters::hash::class_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::hash::class_implementation_formatter",
+      "name": "formatters::hash::class_implementation_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::exception_header_formatter",
+      "name": "formatters::types::exception_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::enum_header_formatter",
+      "name": "formatters::types::enum_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::namespace_header_formatter",
+      "name": "formatters::types::namespace_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::visitor_header_formatter",
+      "name": "formatters::types::visitor_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::class_implementation_formatter",
+      "name": "formatters::types::class_implementation_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::hash::enum_header_formatter",
+      "name": "formatters::hash::enum_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
@@ -133,28 +133,28 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "formatters::io::class_header_formatter",
+      "name": "formatters::io::class_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::io::class_implementation_formatter",
+      "name": "formatters::io::class_implementation_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::io::enum_header_formatter",
+      "name": "formatters::io::enum_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::io::enum_implementation_formatter",
+      "name": "formatters::io::enum_implementation_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
@@ -169,14 +169,14 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "formatters::serialization::class_header_formatter",
+      "name": "formatters::serialization::class_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::serialization::class_implementation_formatter",
+      "name": "formatters::serialization::class_implementation_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
@@ -191,28 +191,28 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "formatters::test_data::class_header_formatter",
+      "name": "formatters::test_data::class_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::test_data::class_implementation_formatter",
+      "name": "formatters::test_data::class_implementation_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::test_data::enum_header_formatter",
+      "name": "formatters::test_data::enum_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::test_data::enum_implementation_formatter",
+      "name": "formatters::test_data::enum_implementation_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
@@ -227,7 +227,7 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "formatters::odb::class_header_formatter",
+      "name": "formatters::odb::class_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
@@ -503,14 +503,14 @@
       ]
     },
     {
-      "name": "formatters::serialization::enum_header_formatter",
+      "name": "formatters::serialization::enum_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::odb::enum_header_formatter",
+      "name": "formatters::odb::enum_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
@@ -694,42 +694,42 @@
       ]
     },
     {
-      "name": "formatters::types::builtin_header_formatter",
+      "name": "formatters::types::builtin_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::hash::builtin_header_formatter",
+      "name": "formatters::hash::builtin_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::test_data::builtin_header_formatter",
+      "name": "formatters::test_data::builtin_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::io::builtin_header_formatter",
+      "name": "formatters::io::builtin_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::odb::builtin_header_formatter",
+      "name": "formatters::odb::builtin_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::serialization::builtin_header_formatter",
+      "name": "formatters::serialization::builtin_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
@@ -1008,14 +1008,14 @@
       ]
     },
     {
-      "name": "formatters::wale_formatter",
+      "name": "formatters::wale_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::stitch_formatter",
+      "name": "formatters::stitch_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -1314,77 +1314,77 @@
       ]
     },
     {
-      "name": "formatters::types::primitive_header_formatter",
+      "name": "formatters::types::primitive_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::hash::primitive_header_formatter",
+      "name": "formatters::hash::primitive_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::io::primitive_header_formatter",
+      "name": "formatters::io::primitive_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::odb::primitive_header_formatter",
+      "name": "formatters::odb::primitive_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::test_data::primitive_header_formatter",
+      "name": "formatters::test_data::primitive_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::serialization::primitive_header_formatter",
+      "name": "formatters::serialization::primitive_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::primitive_implementation_formatter",
+      "name": "formatters::types::primitive_implementation_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::hash::primitive_implementation_formatter",
+      "name": "formatters::hash::primitive_implementation_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::io::primitive_implementation_formatter",
+      "name": "formatters::io::primitive_implementation_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::test_data::primitive_implementation_formatter",
+      "name": "formatters::test_data::primitive_implementation_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::serialization::primitive_implementation_formatter",
+      "name": "formatters::serialization::primitive_implementation_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
@@ -1521,42 +1521,42 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::tests::class_implementation_formatter",
+      "name": "formatters::tests::class_implementation_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::tests::enum_implementation_formatter",
+      "name": "formatters::tests::enum_implementation_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::feature_template_bundle_header_formatter",
+      "name": "formatters::types::feature_template_bundle_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::feature_template_bundle_implementation_formatter",
+      "name": "formatters::types::feature_template_bundle_implementation_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::variability_initializer_header_formatter",
+      "name": "formatters::types::variability_initializer_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::variability_initializer_implementation_formatter",
+      "name": "formatters::types::variability_initializer_implementation_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
@@ -1805,7 +1805,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::lexical_cast::enum_header_formatter",
+      "name": "formatters::lexical_cast::enum_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
@@ -1894,56 +1894,56 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::templates::logic_less_template_formatter",
+      "name": "formatters::templates::logic_less_template_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::class_forward_declarations_formatter",
+      "name": "formatters::types::class_forward_declarations_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::visitor_forward_declarations_formatter",
+      "name": "formatters::types::visitor_forward_declarations_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::serialization::class_forward_declarations_formatter",
+      "name": "formatters::serialization::class_forward_declarations_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::primitive_forward_declarations_formatter",
+      "name": "formatters::types::primitive_forward_declarations_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::serialization::primitive_forward_declarations_formatter",
+      "name": "formatters::serialization::primitive_forward_declarations_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::serialization::type_registrar_header_formatter",
+      "name": "formatters::serialization::type_registrar_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::serialization::type_registrar_implementation_formatter",
+      "name": "formatters::serialization::type_registrar_implementation_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
@@ -1979,42 +1979,42 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::visual_studio::project_formatter",
+      "name": "formatters::visual_studio::project_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::visual_studio::solution_formatter",
+      "name": "formatters::visual_studio::solution_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::tests::main_formatter",
+      "name": "formatters::tests::main_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::odb::object_odb_options_formatter",
+      "name": "formatters::odb::object_odb_options_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::odb::primitive_odb_options_formatter",
+      "name": "formatters::odb::primitive_odb_options_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::main_formatter",
+      "name": "formatters::types::main_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
@@ -2029,14 +2029,14 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::odb::common_odb_options_formatter",
+      "name": "formatters::odb::common_odb_options_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::visual_studio::msbuild_targets_formatter",
+      "name": "formatters::visual_studio::msbuild_targets_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
@@ -2051,14 +2051,14 @@
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "formatters::build::source_cmakelists_formatter",
+      "name": "formatters::build::source_cmakelists_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::build::include_cmakelists_formatter",
+      "name": "formatters::build::include_cmakelists_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
@@ -2079,7 +2079,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::tests::cmakelists_formatter",
+      "name": "formatters::tests::cmakelists_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
@@ -2094,14 +2094,14 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::feature_bundle_header_formatter",
+      "name": "formatters::types::feature_bundle_header_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::feature_bundle_implementation_formatter",
+      "name": "formatters::types::feature_bundle_implementation_transform",
       "stereotypes": [
         "dogen::cpp::artefact_formatter"
       ],
