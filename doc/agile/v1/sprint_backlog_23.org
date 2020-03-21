@@ -12,28 +12,34 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-20 Fri 14:30]
-| <75>                                                          |         |       |      |       |
-| Headline                                                      | Time    |       |      |     % |
-|---------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                  | *27:26* |       |      | 100.0 |
-|---------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                       | 27:26   |       |      | 100.0 |
-| Active                                                        |         | 27:26 |      | 100.0 |
-| Edit release notes for previous sprint                        |         |       | 7:27 |  27.2 |
-| Create a demo and presentation for previous sprint            |         |       | 0:28 |   1.7 |
-| Sprint and product backlog grooming                           |         |       | 1:43 |   6.3 |
-| Rename archetypes model to physical model                     |         |       | 0:28 |   1.7 |
-| Rename assets model to logical model                          |         |       | 0:29 |   1.8 |
-| Consider renaming "meta-model" namespace                      |         |       | 0:37 |   2.2 |
-| Rename engine to orchestration                                |         |       | 1:04 |   3.9 |
-| Merge extraction model with physical model                    |         |       | 4:35 |  16.7 |
-| Remove manual feature in profile merge transform              |         |       | 0:08 |   0.5 |
-| Add variability domains to the dumpspecs activity             |         |       | 0:12 |   0.7 |
-| Add org-mode option to dumpspacs                              |         |       | 0:53 |   3.2 |
-| Analysis on designing and implement physical types            |         |       | 6:52 |  25.0 |
-| Remove =element= from the modeling location                   |         |       | 0:02 |   0.1 |
-| Implement archetype locations in terms of physical meta-model |         |       | 2:28 |   9.0 |
+#+CAPTION: Clock summary at [2020-03-21 Sat 15:36]
+| <75>                                                   |         |       |      |       |
+| Headline                                               | Time    |       |      |     % |
+|--------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                           | *31:43* |       |      | 100.0 |
+|--------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                | 31:43   |       |      | 100.0 |
+| Active                                                 |         | 31:43 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 7:27 |  23.5 |
+| Create a demo and presentation for previous sprint     |         |       | 0:28 |   1.5 |
+| Sprint and product backlog grooming                    |         |       | 1:50 |   5.8 |
+| Rename archetypes model to physical model              |         |       | 0:28 |   1.5 |
+| Rename assets model to logical model                   |         |       | 0:29 |   1.5 |
+| Consider renaming "meta-model" namespace               |         |       | 0:37 |   1.9 |
+| Rename engine to orchestration                         |         |       | 1:04 |   3.4 |
+| Merge extraction model with physical model             |         |       | 4:35 |  14.5 |
+| Remove manual feature in profile merge transform       |         |       | 0:08 |   0.4 |
+| Add variability domains to the dumpspecs activity      |         |       | 0:12 |   0.6 |
+| Add org-mode option to dumpspacs                       |         |       | 0:53 |   2.8 |
+| Analysis on designing and implement physical types     |         |       | 6:52 |  21.7 |
+| Remove =element= from the modeling location            |         |       | 0:02 |   0.1 |
+| Fix clang-cl LNK4217 warnings                          |         |       | 0:51 |   2.7 |
+| Analysis on creating a masd kernel model               |         |       | 0:53 |   2.8 |
+| Rename generation models to =m2t=                      |         |       | 1:04 |   3.4 |
+| Move all generation features away from generation      |         |       | 0:17 |   0.9 |
+| Rename generation transforms                           |         |       | 0:07 |   0.4 |
+| Implement archetype locations from physical meta-model |         |       | 2:42 |   8.5 |
+| Rename the default MASD kernel                         |         |       | 0:44 |   2.3 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -306,6 +312,7 @@ Time spent creating the demo and presentation. Use the demo project:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-03-21 Sat 09:25]--[2020-03-21 Sat 09:32] =>  0:07
     CLOCK: [2020-03-20 Fri 14:17]--[2020-03-20 Fri 14:30] =>  0:13
     CLOCK: [2020-03-20 Fri 11:23]--[2020-03-20 Fri 11:52] =>  0:29
     CLOCK: [2020-03-18 Wed 19:01]--[2020-03-18 Wed 19:44] =>  0:43
@@ -469,7 +476,129 @@ We introduced this for inner classes, but its (probably) not being
 used. If so, remove it and add a story for inner classes, if one does
 not yet exist.
 
-*** STARTED Implement archetype locations from physical meta-model   :story:
+*** COMPLETED Fix clang-cl LNK4217 warnings                           :story:
+    CLOSED: [2020-03-20 Fri 18:26]
+    :LOGBOOK:
+    CLOCK: [2020-03-20 Fri 14:44]--[2020-03-20 Fri 15:35] =>  0:51
+    :END:
+
+We also have a number of warnings left to clean up, all related to
+boost.log:
+
+: masd.dogen.utility.lib(lifecycle_manager.cpp.obj) : warning LNK4217: locally defined symbol
+: ?get_tss_data@detail@boost@@YAPEAXPEBX@Z (void * __cdecl boost::detail::get_tss_data(void const *))
+: imported in function "public: struct boost::log::v2s_mt_nt6::sinks::basic_formatting_sink_frontend<char>::formatting_context * __cdecl boost::thread_specific_ptr<struct boost::log::v2s_mt_nt6::sinks::basic_formatting_sink_frontend<char>::formatting_context>::get(void)const " (?get@?$thread_specific_ptr@Uformatting_context@?$basic_formatting_sink_frontend@D@sinks@v2s_mt_nt6@log@boost@@@boost@@QEBAPEAUformatting_context@?$basic_formatting_sink_frontend@D@sinks@v2s_mt_nt6@log@2@XZ)
+
+Since we can't get to the bottom of this, try to ignore the warnings
+instead: /IGNORE:LNK4217
+
+Notes:
+
+- opened issue: [[https://github.com/Microsoft/vcpkg/issues/5336][Building with clang-cl on windows generates warnings
+  from vcpkg-installed libraries]]
+- it seems that the log files show a lot more warnings than those
+  reported by cdash,
+- Updated issue on CDash parsing problems for clang-cl: [[https://github.com/Kitware/CDash/issues/733][Parsing of
+  errors and warnings from clang-cl]]
+- sent email to clang mailinglist:
+  [[http://lists.llvm.org/pipermail/cfe-dev/2019-February/061326.html][Clang-cl -
+  errors and warning messages slightly different from MSVC]]. Clang
+  [[http://lists.llvm.org/pipermail/cfe-dev/2019-February/061339.html][have patched]] the diffs now.
+- we are now seeing all the warnings.
+- [[https://stackoverflow.com/questions/50274547/windows-clang-hello-world-lnk4217/57788067#57788067][Windows clang Hello World lnk4217]]
+- [[https://stackoverflow.com/questions/6979491/how-to-delete-warnings-lnk4217-and-lnk4049/6979586#6979586][How to delete warnings LNK4217 and LNK4049]]
+- [[https://docs.microsoft.com/en-us/cpp/build/reference/ignore-ignore-specific-warnings?view=vs-2019][/IGNORE (Ignore Specific Warnings)]]
+
+*** COMPLETED Analysis on creating a masd kernel model                :story:
+    CLOSED: [2020-03-21 Sat 09:24]
+    :LOGBOOK:
+    CLOCK: [2020-03-21 Sat 08:31]--[2020-03-21 Sat 09:24] =>  0:53
+    :END:
+
+Idea:
+
+- create a kernel interface and a backend interface in generation.
+- add a registrar for kernels.
+- create a new model called masd. Implement the kernel
+  interface. Return the meta-model by calling all registered backends.
+- implement the backend interface in the existing backends.
+
+Notes:
+
+- actually, we assumed the notion of a "kernel" without thinking too
+  much about it. In reality there is not need for multiple
+  kernels. This is because the logical model (and to an extent, the
+  physical model) are designed to house MASD principles. Therefore
+  they are only useful to output code that conforms to MASD
+  principles. If a user was to want to define a new kernel - say for
+  example for protobufs - then it would either:
+
+  - be fitted into the MASD logical model, as we have done thus far
+    with all facets; in which case it is part of the MASD kernel; or
+  - require a new logical model, in which case it would be outside of
+    Dogen, really.
+
+  Therefore it doesn't make a lot of sense to have more than one
+  kernel.
+- in addition, terms such as kernel, backend, formatter, generation
+  etc are not MDE terms, and we have been using them for historic
+  reasons. In reality, the generation model is the entry point of the
+  model-to-text (M2T) chain; the backend models are specialisations of
+  the M2T chain for specific technical spaces; and formatters are M2T
+  transforms.
+- in light of this we could align Dogen to MDE with a small number of
+  changes:
+  - drop kernel from archetype location, meta-model, features,
+    etc. Features become located at =masd.m2t=. Conceptually this is
+    equivalent to a kernel, but its non-optional. We could call this
+    the "prefix" and have it set in the meta-model. Or have a
+    "traits-like" class in the physical model.
+  - rename =generation= to =m2t=.
+  - rename interfaces to =m2t_chain= (top-level),
+    =m2t_technical_space_chain= (interface), =m2t_cpp_chain= (backend),
+    =m2t_transform= (formatter) and so forth.
+
+*** COMPLETED Rename generation models to =m2t=                       :story:
+    CLOSED: [2020-03-21 Sat 14:49]
+    :LOGBOOK:
+    CLOCK: [2020-03-21 Sat 15:18]--[2020-03-21 Sat 15:28] =>  0:10
+    CLOCK: [2020-03-21 Sat 14:50]--[2020-03-21 Sat 15:00] =>  0:10
+    CLOCK: [2020-03-21 Sat 14:48]--[2020-03-21 Sat 14:49] =>  0:01
+    CLOCK: [2020-03-21 Sat 14:30]--[2020-03-21 Sat 14:47] =>  0:17
+    CLOCK: [2020-03-21 Sat 09:33]--[2020-03-21 Sat 09:59] =>  0:26
+    :END:
+
+These models are really just containers of M2T transforms, so name
+them accordingly.
+
+*** COMPLETED Move all generation features away from generation      :story:
+    CLOSED: [2020-03-21 Sat 15:17]
+    :LOGBOOK:
+    CLOCK: [2020-03-21 Sat 15:00]--[2020-03-21 Sat 15:17] =>  0:17
+    :END:
+
+Rename the meta-data keys of the generation features from
+=masd.generation= to =masd.m2t=.
+
+*** STARTED Rename generation transforms                              :story:
+    :LOGBOOK:
+    CLOCK: [2020-03-21 Sat 15:29]--[2020-03-21 Sat 15:36] =>  0:07
+    :END:
+
+Renames:
+
+- top-level: =m2t_chain=
+- interface: =m2t_technical_space_chain=
+- backend: =m2t_cpp_chain=
+- formatter: =m2t_transform=
+
+*** Remove kernel from models                                         :story:
+
+We don't really need the notion of kernel in MASD, so remove
+it. However, make sure we still preserve the notion of a top-level
+container for backends - for now =masd.generation=.
+
+*** STARTED Implement archetype locations from physical meta-model    :story:
     :LOGBOOK:
     CLOCK: [2020-03-20 Fri 14:30]--[2020-03-20 Fri 14:44] =>  0:14
     CLOCK: [2020-03-20 Fri 13:01]--[2020-03-20 Fri 14:16] =>  1:15
@@ -515,45 +644,25 @@ Notes:
 - formatters should add their data to a registrar that lives in the
   physical model rather than expose it via an interface.
 
-*** STARTED Fix clang-cl warnings                                     :story:
+*** STARTED Rename the default MASD kernel                            :story:
     :LOGBOOK:
-    CLOCK: [2020-03-20 Fri 14:44]--[2020-03-20 Fri 15:35] =>  0:51
+    CLOCK: [2020-03-20 Fri 15:36]--[2020-03-20 Fri 16:20] =>  0:44
     :END:
 
-We also have a number of warnings left to clean up, all related to
-boost.log:
-
-: masd.dogen.utility.lib(lifecycle_manager.cpp.obj) : warning LNK4217: locally defined symbol
-: ?get_tss_data@detail@boost@@YAPEAXPEBX@Z (void * __cdecl boost::detail::get_tss_data(void const *))
-: imported in function "public: struct boost::log::v2s_mt_nt6::sinks::basic_formatting_sink_frontend<char>::formatting_context * __cdecl boost::thread_specific_ptr<struct boost::log::v2s_mt_nt6::sinks::basic_formatting_sink_frontend<char>::formatting_context>::get(void)const " (?get@?$thread_specific_ptr@Uformatting_context@?$basic_formatting_sink_frontend@D@sinks@v2s_mt_nt6@log@boost@@@boost@@QEBAPEAUformatting_context@?$basic_formatting_sink_frontend@D@sinks@v2s_mt_nt6@log@2@XZ)
-
-Since we can't get to the bottom of this, try to ignore the warnings
-instead.
-
-Notes:
-
-- opened issue: [[https://github.com/Microsoft/vcpkg/issues/5336][Building with clang-cl on windows generates warnings
-  from vcpkg-installed libraries]]
-- it seems that the log files show a lot more warnings than those
-  reported by cdash,
-- Updated issue on CDash parsing problems for clang-cl: [[https://github.com/Kitware/CDash/issues/733][Parsing of
-  errors and warnings from clang-cl]]
-- sent email to clang mailinglist:
-  [[http://lists.llvm.org/pipermail/cfe-dev/2019-February/061326.html][Clang-cl -
-  errors and warning messages slightly different from MSVC]]. Clang
-  [[http://lists.llvm.org/pipermail/cfe-dev/2019-February/061339.html][have patched]] the diffs now.
-- we are now seeing all the warnings.
-- [[https://stackoverflow.com/questions/50274547/windows-clang-hello-world-lnk4217/57788067#57788067][Windows clang Hello World lnk4217]]
-- [[https://stackoverflow.com/questions/6979491/how-to-delete-warnings-lnk4217-and-lnk4049/6979586#6979586][How to delete warnings LNK4217 and LNK4049]]
-- [[https://docs.microsoft.com/en-us/cpp/build/reference/ignore-ignore-specific-warnings?view=vs-2019][/IGNORE (Ignore Specific Warnings)]]
-
-*** Create a masd kernel model                                        :story:
-
-- create a kernel interface and a backend interface in generation.
-- add a registrar for kernels.
-- create a new model called masd. Implement the kernel
-  interface. Return the meta-model by calling all registered backends.
-- implement the backend interface in the existing backends.
+Up to now we have conflated the generation model with the default MASD
+kernel. The generation model is responsible for expanding the logical
+model into the physical dimension and then using all available kernels
+to populate the content of the artefacts. Given this we should really
+start to separate generation from the MASD default kernel, which is
+the current implementation of the model to text transforms. We need a
+name for the kernel because we can't keep calling it "generation" as
+its just confusing. The name needs to also be distinct from MASD since
+we use it as the prefix all all features (e.g. =masd.masd= would not
+be enlightening). We could just give it a distinctive name which is
+not particularly meaningful: =genie= (from generation, little
+generator). Then we'd have =masd.genie.enabled=, etc. It would also
+allow users to create their own kernels with distinctive names,
+e.g. =ddc.xyz.enabled=.
 
 *** Implement the generation model in terms of "formattables"         :story:
 
