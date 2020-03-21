@@ -10,7 +10,7 @@
 <#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/inclusion_constants.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/io/enum_header_transform.hpp" #>
-<#@ masd.stitch.wale.text_template=cpp_artefact_formatter_implementation_header.wale #>
+<#@ masd.stitch.wale.text_template=cpp_artefact_transform_implementation_header.wale #>
 <#@ masd.stitch.wale.kvp.class.simple_name=enum_header_transform #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=enum_header #>
 <#@ masd.stitch.wale.kvp.class.inclusion_support_type=canonical_support #>

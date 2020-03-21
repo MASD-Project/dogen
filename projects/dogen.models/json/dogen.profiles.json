@@ -487,7 +487,7 @@
         {
           "name": "class_header.formatting_input",
           "type": "",
-          "value": "cpp_artefact_formatter_header.wale"
+          "value": "cpp_artefact_transform_header.wale"
         },
         {
           "name": "class_header.overwrite",
