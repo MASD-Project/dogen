@@ -3132,7 +3132,7 @@ so we disable all facets.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#csharp_artefact_formatter_header.wale#</dia:string>
+            <dia:string>#csharp_artefact_transform_header.wale#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>

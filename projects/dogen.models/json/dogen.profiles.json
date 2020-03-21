@@ -529,7 +529,7 @@
         {
           "name": "class_header.formatting_input",
           "type": "",
-          "value": "csharp_artefact_formatter_header.wale"
+          "value": "csharp_artefact_transform_header.wale"
         },
         {
           "name": "class_header.overwrite",

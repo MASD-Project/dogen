@@ -13986,7 +13986,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#csharp_artefact_formatter_header#</dia:string>
+        <dia:string>#csharp_artefact_transform_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::templating::logic_less_templates#</dia:string>
@@ -14096,7 +14096,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#csharp_formatter_implementation#</dia:string>
+        <dia:string>#csharp_transform_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::templating::logic_less_templates#</dia:string>

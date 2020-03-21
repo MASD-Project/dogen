@@ -7,7 +7,7 @@
 <#@ masd.stitch.inclusion_dependency="dogen.m2t.csharp/types/formatters/io/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.m2t.csharp/types/formatters/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.m2t.csharp/types/formatters/io/enum_transform.hpp" #>
-<#@ masd.stitch.wale.text_template=csharp_formatter_implementation.wale #>
+<#@ masd.stitch.wale.text_template=csharp_transform_implementation.wale #>
 <#@ masd.stitch.wale.kvp.class.simple_name=enum_transform #>
 <#@ masd.stitch.wale.kvp.archetype.simple_name=enum #>
 <#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::enumeration #>
