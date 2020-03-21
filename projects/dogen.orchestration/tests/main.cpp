@@ -23,9 +23,9 @@
 #include "dogen/config.hpp"
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/test/fixture.hpp"
-#include "dogen.utility/types/test_data/dogen_m2t.hpp"
-#include "dogen.utility/types/test_data/cpp_ref_impl_generation.hpp"
-#include "dogen.utility/types/test_data/csharp_ref_impl_generation.hpp"
+#include "dogen.utility/types/test_data/dogen_product.hpp"
+#include "dogen.utility/types/test_data/cpp_ref_impl_product.hpp"
+#include "dogen.utility/types/test_data/csharp_ref_impl_product.hpp"
 #include "dogen.m2t.csharp/types/initializer.hpp"
 #include "dogen.m2t.cpp/types/initializer.hpp"
 #include "dogen.injection.json/types/initializer.hpp"
@@ -62,13 +62,13 @@ struct initializer {
         dogen::injection::dia::initializer::initialize();
         dogen::m2t::csharp::initializer::initialize();
         dogen::m2t::cpp::initializer::initialize();
-        dogen::utility::test_data::dogen_m2t::initialize();
+        dogen::utility::test_data::dogen_product::initialize();
         dogen::tracing::initializer::initialize();
 #ifdef ENABLE_CPP_REF_IMPL_TESTS
-        dogen::utility::test_data::cpp_ref_impl_generation::initialize();
+        dogen::utility::test_data::cpp_ref_impl_product::initialize();
 #endif // ENABLE_CPP_REF_IMPL_TESTS
 #ifdef ENABLE_CSHARP_REF_IMPL_TESTS
-        dogen::utility::test_data::csharp_ref_impl_generation::initialize();
+        dogen::utility::test_data::csharp_ref_impl_product::initialize();
 #endif // ENABLE_CSHARP_REF_IMPL_TESTS
 #ifdef DOGEN_HAVE_RELATIONAL_MODEL
         dogen::relational::initializer::initialize();

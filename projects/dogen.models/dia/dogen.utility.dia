@@ -7445,7 +7445,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#dogen_m2t#</dia:string>
+        <dia:string>#dogen_product#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -7556,7 +7556,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#cpp_ref_impl_generation#</dia:string>
+        <dia:string>#cpp_ref_impl_product#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -7667,7 +7667,7 @@ If empty, file logging is disabled.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#csharp_ref_impl_generation#</dia:string>
+        <dia:string>#csharp_ref_impl_product#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>

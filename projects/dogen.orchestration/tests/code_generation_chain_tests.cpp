@@ -27,8 +27,8 @@
 #include "dogen/types/mock_configuration_factory.hpp"
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
-#include "dogen.utility/types/test_data/dogen_m2t.hpp"
-#include "dogen.utility/types/test_data/cpp_ref_impl_generation.hpp"
+#include "dogen.utility/types/test_data/dogen_product.hpp"
+#include "dogen.utility/types/test_data/cpp_ref_impl_product.hpp"
 #include "dogen.physical/io/entities/operation_io.hpp"
 #include "dogen.orchestration/types/transforms/scoped_context_manager.hpp"
 #include "dogen.orchestration/types/transforms/code_generation_chain.hpp"
@@ -134,18 +134,18 @@ BOOST_AUTO_TEST_SUITE(code_generation_chain_tests)
 
 BOOST_AUTO_TEST_CASE(dogen_variability_dia_produces_expected_code) {
     SETUP_TEST_LOG("dogen_variability_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_m2t;
-    const auto t(dogen_m2t::input_dogen_variability_dia());
-    const auto od(dogen_m2t::output_directory());
+    using dogen::utility::test_data::dogen_product;
+    const auto t(dogen_product::input_dogen_variability_dia());
+    const auto od(dogen_product::output_directory());
     execute_code_generation_transform(t, od);
     BOOST_CHECK(are_generated_files_healthy(od, t));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_logical_json_produces_expected_model) {
     SETUP_TEST_LOG("dogen_logical_json_produces_expected_model");
-    using dogen::utility::test_data::dogen_m2t;
-    const auto t(dogen_m2t::input_dogen_logical_json());
-    const auto od(dogen_m2t::output_directory());
+    using dogen::utility::test_data::dogen_product;
+    const auto t(dogen_product::input_dogen_logical_json());
+    const auto od(dogen_product::output_directory());
     execute_code_generation_transform(t, od);
     BOOST_CHECK(are_generated_files_healthy(od, t));
 }
@@ -158,9 +158,9 @@ BOOST_AUTO_TEST_CASE(empty_folders_are_deleted_when_delete_empty_folders_flag_is
      * names must be small due to windows limitations so that is why
      * the test names do not match the model names.
      */
-    using dogen::utility::test_data::dogen_m2t;
-    const auto t(dogen_m2t::input_dogen_dia());
-    const auto od(dogen_m2t::output_directory());
+    using dogen::utility::test_data::dogen_product;
+    const auto t(dogen_product::input_dogen_dia());
+    const auto od(dogen_product::output_directory());
     execute_code_generation_transform(t, od);
     BOOST_REQUIRE(are_generated_files_healthy(od, t, 60/*minimum_number*/));
 
@@ -193,10 +193,10 @@ BOOST_AUTO_TEST_CASE(empty_folders_are_not_deleted_when_delete_empty_folders_fla
      * model names must be small due to windows limitations so that is
      * why the test names do not match the model names.
      */
-    using dogen::utility::test_data::cpp_ref_impl_generation;
-    const auto t(cpp_ref_impl_generation::
+    using dogen::utility::test_data::cpp_ref_impl_product;
+    const auto t(cpp_ref_impl_product::
         input_cpp_ref_impl_do_not_delete_empty_dirs_json());
-    const auto od(cpp_ref_impl_generation::output_directory());
+    const auto od(cpp_ref_impl_product::output_directory());
     execute_code_generation_transform(t, od);
     BOOST_REQUIRE(are_generated_files_healthy(od, t, 15/*minimum_number*/));
 

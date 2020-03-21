@@ -29,13 +29,13 @@
 
 namespace dogen::utility::test_data {
 
-class cpp_ref_impl_generation final {
+class cpp_ref_impl_product final {
 public:
-    cpp_ref_impl_generation() = delete;
-    cpp_ref_impl_generation(const cpp_ref_impl_generation&) = delete;
-    cpp_ref_impl_generation(cpp_ref_impl_generation&&) = delete;
-    ~cpp_ref_impl_generation() = delete;
-    cpp_ref_impl_generation& operator=(const cpp_ref_impl_generation&) = delete;
+    cpp_ref_impl_product() = delete;
+    cpp_ref_impl_product(const cpp_ref_impl_product&) = delete;
+    cpp_ref_impl_product(cpp_ref_impl_product&&) = delete;
+    ~cpp_ref_impl_product() = delete;
+    cpp_ref_impl_product& operator=(const cpp_ref_impl_product&) = delete;
 
 public:
     static void initialize();

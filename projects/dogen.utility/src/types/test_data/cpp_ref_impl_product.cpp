@@ -23,12 +23,12 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/environment/variable_reader.hpp"
 #include "dogen.utility/types/test_data/test_data_exception.hpp"
-#include "dogen.utility/types/test_data/cpp_ref_impl_generation.hpp"
+#include "dogen.utility/types/test_data/cpp_ref_impl_product.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("utility.cpp_ref_impl_generation"));
+auto lg(logger_factory("utility.cpp_ref_impl_product"));
 
 const std::string cpp_ref_impl_project_directory_env(
     "CPP_REF_IMPL_PROJECTS_DIRECTORY");
@@ -150,12 +150,12 @@ using boost::filesystem::path;
 
 namespace dogen::utility::test_data {
 
-path cpp_ref_impl_generation::project_directory_;
-path cpp_ref_impl_generation::dia_models_directory_;
-path cpp_ref_impl_generation::json_models_directory_;
-path cpp_ref_impl_generation::output_directory_;
+path cpp_ref_impl_product::project_directory_;
+path cpp_ref_impl_product::dia_models_directory_;
+path cpp_ref_impl_product::json_models_directory_;
+path cpp_ref_impl_product::output_directory_;
 
-void cpp_ref_impl_generation::initialize() {
+void cpp_ref_impl_product::initialize() {
         using environment::variable_reader;
     const std::string proj_dir_env(
         variable_reader::strict_read_environment_variable(
@@ -202,17 +202,17 @@ void cpp_ref_impl_generation::initialize() {
                              << output_directory_.generic_string();
 }
 
-void cpp_ref_impl_generation::ensure_initialized() {
+void cpp_ref_impl_product::ensure_initialized() {
     if (project_directory_.empty())
         BOOST_THROW_EXCEPTION(test_data_exception(not_initialized));
 }
 
-path cpp_ref_impl_generation::project_directory() {
+path cpp_ref_impl_product::project_directory() {
     ensure_initialized();
     return project_directory_;
 }
 
-path cpp_ref_impl_generation::output_directory() {
+path cpp_ref_impl_product::output_directory() {
     ensure_initialized();
     return output_directory_;
 }
@@ -220,119 +220,119 @@ path cpp_ref_impl_generation::output_directory() {
 /*
  * Dia
  */
-path cpp_ref_impl_generation::input_cpp_ref_impl_boost_model_dia() {
+path cpp_ref_impl_product::input_cpp_ref_impl_boost_model_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_boost_model_dia;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_colours_dia() {
+path cpp_ref_impl_product::input_cpp_ref_impl_colours_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_colours_dia;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_compressed_dia() {
+path cpp_ref_impl_product::input_cpp_ref_impl_compressed_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_compressed_dia;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_cpp_98_dia() {
+path cpp_ref_impl_product::input_cpp_ref_impl_cpp_98_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_cpp_98_dia;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_cpp_model_dia() {
+path cpp_ref_impl_product::input_cpp_ref_impl_cpp_model_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_cpp_model_dia;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_directory_settings_dia() {
+path cpp_ref_impl_product::input_cpp_ref_impl_directory_settings_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_directory_settings_dia;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_disable_cmakelists_dia() {
+path cpp_ref_impl_product::input_cpp_ref_impl_disable_cmakelists_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_disable_cmakelists_dia;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_disable_facet_folders_dia() {
+path cpp_ref_impl_product::input_cpp_ref_impl_disable_facet_folders_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_disable_facet_folders_dia;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_enable_facet_hash_dia() {
+path cpp_ref_impl_product::input_cpp_ref_impl_enable_facet_hash_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_enable_facet_hash_dia;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_enable_facet_io_dia() {
+path cpp_ref_impl_product::input_cpp_ref_impl_enable_facet_io_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_enable_facet_io_dia;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_enable_facet_serialization_dia() {
+path cpp_ref_impl_product::input_cpp_ref_impl_enable_facet_serialization_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_enable_facet_serialization_dia;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_enable_facet_types_dia() {
+path cpp_ref_impl_product::input_cpp_ref_impl_enable_facet_types_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_enable_facet_types_dia;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_flat_directory_mode_dia() {
+path cpp_ref_impl_product::input_cpp_ref_impl_flat_directory_mode_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_flat_directory_mode_dia;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_lam_model_dia() {
+path cpp_ref_impl_product::input_cpp_ref_impl_lam_model_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_lam_model_dia;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_northwind_dia() {
+path cpp_ref_impl_product::input_cpp_ref_impl_northwind_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_northwind_dia;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_split_project_dia() {
+path cpp_ref_impl_product::input_cpp_ref_impl_split_project_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_split_project_dia;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_std_model_dia() {
+path cpp_ref_impl_product::input_cpp_ref_impl_std_model_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_std_model_dia;
 }
 
-path cpp_ref_impl_generation::
+path cpp_ref_impl_product::
 input_cpp_ref_impl_two_layers_with_objects_dia() {
     ensure_initialized();
     return dia_models_directory_ /
         path_cpp_ref_impl_two_layers_with_objects_dia;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_delete_extra_dia() {
+path cpp_ref_impl_product::input_cpp_ref_impl_delete_extra_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_delete_extra_dia;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_ignore_extra_dia() {
+path cpp_ref_impl_product::input_cpp_ref_impl_ignore_extra_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_ignore_extra_dia;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_force_write_dia() {
+path cpp_ref_impl_product::input_cpp_ref_impl_force_write_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_force_write_dia;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_out_of_sync_dia() {
+path cpp_ref_impl_product::input_cpp_ref_impl_out_of_sync_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_out_of_sync_dia;
 }
 
-path cpp_ref_impl_generation::
+path cpp_ref_impl_product::
 input_cpp_ref_impl_do_not_delete_empty_dirs_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_cpp_ref_impl_do_not_delete_empty_dirs_dia;
@@ -342,119 +342,119 @@ input_cpp_ref_impl_do_not_delete_empty_dirs_dia() {
  * JSON
  */
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_boost_model_json() {
+path cpp_ref_impl_product::input_cpp_ref_impl_boost_model_json() {
     ensure_initialized();
     return json_models_directory_ / path_cpp_ref_impl_boost_model_json;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_colours_json() {
+path cpp_ref_impl_product::input_cpp_ref_impl_colours_json() {
     ensure_initialized();
     return json_models_directory_ / path_cpp_ref_impl_colours_json;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_compressed_json() {
+path cpp_ref_impl_product::input_cpp_ref_impl_compressed_json() {
     ensure_initialized();
     return json_models_directory_ / path_cpp_ref_impl_compressed_json;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_cpp_98_json() {
+path cpp_ref_impl_product::input_cpp_ref_impl_cpp_98_json() {
     ensure_initialized();
     return json_models_directory_ / path_cpp_ref_impl_cpp_98_json;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_cpp_model_json() {
+path cpp_ref_impl_product::input_cpp_ref_impl_cpp_model_json() {
     ensure_initialized();
     return json_models_directory_ / path_cpp_ref_impl_cpp_model_json;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_directory_settings_json() {
+path cpp_ref_impl_product::input_cpp_ref_impl_directory_settings_json() {
     ensure_initialized();
     return json_models_directory_ / path_cpp_ref_impl_directory_settings_json;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_disable_cmakelists_json() {
+path cpp_ref_impl_product::input_cpp_ref_impl_disable_cmakelists_json() {
     ensure_initialized();
     return json_models_directory_ / path_cpp_ref_impl_disable_cmakelists_json;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_disable_facet_folders_json() {
+path cpp_ref_impl_product::input_cpp_ref_impl_disable_facet_folders_json() {
     ensure_initialized();
     return json_models_directory_ / path_cpp_ref_impl_disable_facet_folders_json;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_enable_facet_hash_json() {
+path cpp_ref_impl_product::input_cpp_ref_impl_enable_facet_hash_json() {
     ensure_initialized();
     return json_models_directory_ / path_cpp_ref_impl_enable_facet_hash_json;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_enable_facet_io_json() {
+path cpp_ref_impl_product::input_cpp_ref_impl_enable_facet_io_json() {
     ensure_initialized();
     return json_models_directory_ / path_cpp_ref_impl_enable_facet_io_json;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_enable_facet_serialization_json() {
+path cpp_ref_impl_product::input_cpp_ref_impl_enable_facet_serialization_json() {
     ensure_initialized();
     return json_models_directory_ / path_cpp_ref_impl_enable_facet_serialization_json;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_enable_facet_types_json() {
+path cpp_ref_impl_product::input_cpp_ref_impl_enable_facet_types_json() {
     ensure_initialized();
     return json_models_directory_ / path_cpp_ref_impl_enable_facet_types_json;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_flat_directory_mode_json() {
+path cpp_ref_impl_product::input_cpp_ref_impl_flat_directory_mode_json() {
     ensure_initialized();
     return json_models_directory_ / path_cpp_ref_impl_flat_directory_mode_json;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_lam_model_json() {
+path cpp_ref_impl_product::input_cpp_ref_impl_lam_model_json() {
     ensure_initialized();
     return json_models_directory_ / path_cpp_ref_impl_lam_model_json;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_northwind_json() {
+path cpp_ref_impl_product::input_cpp_ref_impl_northwind_json() {
     ensure_initialized();
     return json_models_directory_ / path_cpp_ref_impl_northwind_json;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_split_project_json() {
+path cpp_ref_impl_product::input_cpp_ref_impl_split_project_json() {
     ensure_initialized();
     return json_models_directory_ / path_cpp_ref_impl_split_project_json;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_std_model_json() {
+path cpp_ref_impl_product::input_cpp_ref_impl_std_model_json() {
     ensure_initialized();
     return json_models_directory_ / path_cpp_ref_impl_std_model_json;
 }
 
-path cpp_ref_impl_generation::
+path cpp_ref_impl_product::
 input_cpp_ref_impl_two_layers_with_objects_json() {
     ensure_initialized();
     return json_models_directory_ /
         path_cpp_ref_impl_two_layers_with_objects_json;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_delete_extra_json() {
+path cpp_ref_impl_product::input_cpp_ref_impl_delete_extra_json() {
     ensure_initialized();
     return json_models_directory_ / path_cpp_ref_impl_delete_extra_json;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_ignore_extra_json() {
+path cpp_ref_impl_product::input_cpp_ref_impl_ignore_extra_json() {
     ensure_initialized();
     return json_models_directory_ / path_cpp_ref_impl_ignore_extra_json;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_force_write_json() {
+path cpp_ref_impl_product::input_cpp_ref_impl_force_write_json() {
     ensure_initialized();
     return json_models_directory_ / path_cpp_ref_impl_force_write_json;
 }
 
-path cpp_ref_impl_generation::input_cpp_ref_impl_out_of_sync_json() {
+path cpp_ref_impl_product::input_cpp_ref_impl_out_of_sync_json() {
     ensure_initialized();
     return json_models_directory_ / path_cpp_ref_impl_out_of_sync_json;
 }
 
-path cpp_ref_impl_generation::
+path cpp_ref_impl_product::
 input_cpp_ref_impl_do_not_delete_empty_dirs_json() {
     ensure_initialized();
     return json_models_directory_ /

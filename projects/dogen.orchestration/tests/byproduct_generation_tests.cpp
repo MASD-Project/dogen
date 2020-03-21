@@ -8,7 +8,7 @@
 #include "dogen/types/mock_configuration_factory.hpp"
 #include "dogen.utility/types/test/logging.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
-#include "dogen.utility/types/test_data/dogen_m2t.hpp"
+#include "dogen.utility/types/test_data/dogen_product.hpp"
 #include "dogen.physical/io/entities/operation_io.hpp"
 #include "dogen.orchestration/types/transforms/scoped_context_manager.hpp"
 #include "dogen.orchestration/types/transforms/physical_model_production_chain.hpp"
@@ -49,7 +49,7 @@ using dogen::tracing_format;
 using dogen::tracing_backend;
 using dogen::reporting_style;
 using dogen::mock_configuration_factory;
-using dogen::utility::test_data::dogen_m2t;
+using dogen::utility::test_data::dogen_product;
 
 /*
  * @brief Recreate the byproducts directory to ensure we start with a
@@ -288,7 +288,7 @@ BOOST_AUTO_TEST_SUITE(byproduct_generation_tests)
 BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_org_mode_results_in_expected_trace_files) {
     SETUP_TEST_LOG_SOURCE_DEBUG("enabling_detailed_tracing_with_org_mode_results_in_expected_trace_files");
 
-    const auto t(dogen_m2t::input_dogen_dia());
+    const auto t(dogen_product::input_dogen_dia());
     const std::string id("detailed_tracing_org_mode");
     const auto tl(tracing_level::detail);
     const auto tf(tracing_format::org_mode);
@@ -296,7 +296,7 @@ BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_org_mode_results_in_expected
     const auto cfg(setup_tracing_configuration(t, id, tl, tf, eg));
     remove_byproducts_directory(cfg);
 
-    const auto od(dogen_m2t::output_directory() / id);
+    const auto od(dogen_product::output_directory() / id);
     apply_transforms(cfg, od, t);
 
     BOOST_CHECK(are_tracing_files_healthy(cfg, lg));
@@ -306,14 +306,14 @@ BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_org_mode_results_in_expected
 BOOST_AUTO_TEST_CASE(enabling_summary_tracing_with_plain_text_results_in_expected_trace_files) {
     SETUP_TEST_LOG("enabling_summary_tracing_with_plain_text_results_in_expected_trace_files");
 
-    const auto t(dogen_m2t::input_dogen_dia());
+    const auto t(dogen_product::input_dogen_dia());
     const std::string id("summary_tracing_plain");
     const auto tl(tracing_level::summary);
     const auto tf(tracing_format::plain);
     const auto cfg(setup_tracing_configuration(t, id, tl, tf));
     remove_byproducts_directory(cfg);
 
-    const auto od(dogen_m2t::output_directory() / id);
+    const auto od(dogen_product::output_directory() / id);
     apply_transforms(cfg, od, t);
 
     BOOST_REQUIRE(boost::filesystem::exists(cfg.byproduct_directory()));
@@ -336,14 +336,14 @@ BOOST_AUTO_TEST_CASE(enabling_summary_tracing_with_plain_text_results_in_expecte
 BOOST_AUTO_TEST_CASE(enabling_summary_tracing_with_graphviz_results_in_expected_trace_files) {
     SETUP_TEST_LOG("enabling_summary_tracing_with_graphviz_results_in_expected_trace_files");
 
-    const auto t(dogen_m2t::input_dogen_dia());
+    const auto t(dogen_product::input_dogen_dia());
     const std::string id("summary_tracing_graphviz");
     const auto tl(tracing_level::summary);
     const auto tf(tracing_format::graphviz);
     const auto cfg(setup_tracing_configuration(t, id, tl, tf));
     remove_byproducts_directory(cfg);
 
-    const auto od(dogen_m2t::output_directory() / id);
+    const auto od(dogen_product::output_directory() / id);
     apply_transforms(cfg, od, t);
 
     BOOST_REQUIRE(boost::filesystem::exists(cfg.byproduct_directory()));
@@ -366,7 +366,7 @@ BOOST_AUTO_TEST_CASE(enabling_summary_tracing_with_graphviz_results_in_expected_
 BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_short_names_results_in_expected_trace_files) {
     SETUP_TEST_LOG_SOURCE("enabling_detailed_tracing_with_short_names_results_in_expected_trace_files");
 
-    const auto t(dogen_m2t::input_dogen_dia());
+    const auto t(dogen_product::input_dogen_dia());
     const std::string id("detail_tracing_short_names");
     const auto tl(tracing_level::detail);
     const auto tf(tracing_format::org_mode);
@@ -375,7 +375,7 @@ BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_short_names_results_in_expec
     const auto cfg(setup_tracing_configuration(t, id, tl, tf, eg, usn));
     remove_byproducts_directory(cfg);
 
-    const auto od(dogen_m2t::output_directory() / id);
+    const auto od(dogen_product::output_directory() / id);
     apply_transforms(cfg, od, t);
 
     BOOST_CHECK(are_tracing_files_healthy(cfg, lg));
@@ -384,11 +384,11 @@ BOOST_AUTO_TEST_CASE(enabling_detailed_tracing_with_short_names_results_in_expec
 BOOST_AUTO_TEST_CASE(enabling_diffing_results_in_expected_trace_files) {
     SETUP_TEST_LOG("enabling_diffing_results_in_expected_trace_files");
 
-    const auto t(dogen_m2t::input_dogen_dia());
+    const auto t(dogen_product::input_dogen_dia());
     const std::string id("diffing");
     const auto cfg(setup_diffing_configuration(t, id));
 
-    const auto od(dogen_m2t::output_directory() / id);
+    const auto od(dogen_product::output_directory() / id);
     apply_transforms(cfg, od, t);
 
     BOOST_REQUIRE(boost::filesystem::exists(cfg.byproduct_directory()));
@@ -405,12 +405,12 @@ BOOST_AUTO_TEST_CASE(enabling_diffing_results_in_expected_trace_files) {
 BOOST_AUTO_TEST_CASE(enabling_reporting_org_mode_style_results_in_expected_trace_files) {
     SETUP_TEST_LOG("enabling_reporting_org_mode_style_results_in_expected_trace_files");
 
-    const auto t(dogen_m2t::input_dogen_dia());
+    const auto t(dogen_product::input_dogen_dia());
     const std::string id("reporting_org_mode");
     const auto rs(reporting_style::org_mode);
     const auto cfg(setup_reporting_configuration(t, id, rs));
 
-    const auto od(dogen_m2t::output_directory() / id);
+    const auto od(dogen_product::output_directory() / id);
     apply_transforms(cfg, od, t);
 
     BOOST_REQUIRE(boost::filesystem::exists(cfg.byproduct_directory()));
@@ -427,12 +427,12 @@ BOOST_AUTO_TEST_CASE(enabling_reporting_org_mode_style_results_in_expected_trace
 BOOST_AUTO_TEST_CASE(enabling_reporting_plain_style_results_in_expected_trace_files) {
     SETUP_TEST_LOG("enabling_reporting_plain_style_results_in_expected_trace_files");
 
-    const auto t(dogen_m2t::input_dogen_dia());
+    const auto t(dogen_product::input_dogen_dia());
     const std::string id("reporting_plain");
     const auto rs(reporting_style::plain);
     const auto cfg(setup_reporting_configuration(t, id, rs));
 
-    const auto od(dogen_m2t::output_directory() / id);
+    const auto od(dogen_product::output_directory() / id);
     apply_transforms(cfg, od, t);
 
     BOOST_REQUIRE(boost::filesystem::exists(cfg.byproduct_directory()));

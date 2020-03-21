@@ -29,13 +29,13 @@
 
 namespace dogen::utility::test_data {
 
-class dogen_m2t final {
+class dogen_product final {
 public:
-    dogen_m2t() = delete;
-    dogen_m2t(const dogen_m2t&) = delete;
-    dogen_m2t(dogen_m2t&&) = delete;
-    ~dogen_m2t() = delete;
-    dogen_m2t& operator=(const dogen_m2t&) = delete;
+    dogen_product() = delete;
+    dogen_product(const dogen_product&) = delete;
+    dogen_product(dogen_product&&) = delete;
+    ~dogen_product() = delete;
+    dogen_product& operator=(const dogen_product&) = delete;
 
 public:
     static void initialize();
@@ -54,9 +54,9 @@ public:
     static boost::filesystem::path input_dogen_dia();
     static boost::filesystem::path input_dogen_dia_dia();
     static boost::filesystem::path input_dogen_physical_dia();
-    static boost::filesystem::path input_dogen_m2t_cpp_dia();
-    static boost::filesystem::path input_dogen_m2t_csharp_dia();
-    static boost::filesystem::path input_dogen_m2t_dia();
+    static boost::filesystem::path input_dogen_product_cpp_dia();
+    static boost::filesystem::path input_dogen_product_csharp_dia();
+    static boost::filesystem::path input_dogen_product_dia();
     static boost::filesystem::path input_dogen_injection_dia();
     static boost::filesystem::path input_dogen_injection_dia_dia();
     static boost::filesystem::path input_dogen_injection_json_dia();
@@ -72,9 +72,9 @@ public:
     static boost::filesystem::path input_dogen_json();
     static boost::filesystem::path input_dogen_dia_json();
     static boost::filesystem::path input_dogen_physical_json();
-    static boost::filesystem::path input_dogen_m2t_cpp_json();
-    static boost::filesystem::path input_dogen_m2t_csharp_json();
-    static boost::filesystem::path input_dogen_m2t_json();
+    static boost::filesystem::path input_dogen_product_cpp_json();
+    static boost::filesystem::path input_dogen_product_csharp_json();
+    static boost::filesystem::path input_dogen_product_json();
     static boost::filesystem::path input_dogen_injection_json();
     static boost::filesystem::path input_dogen_injection_dia_json();
     static boost::filesystem::path input_dogen_injection_json_json();

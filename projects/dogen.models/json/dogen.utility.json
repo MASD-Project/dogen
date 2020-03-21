@@ -477,21 +477,21 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "test_data::dogen_m2t",
+      "name": "test_data::dogen_product",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "test_data::cpp_ref_impl_generation",
+      "name": "test_data::cpp_ref_impl_product",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "test_data::csharp_ref_impl_generation",
+      "name": "test_data::csharp_ref_impl_product",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

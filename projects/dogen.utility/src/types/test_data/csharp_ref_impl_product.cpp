@@ -23,12 +23,12 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/environment/variable_reader.hpp"
 #include "dogen.utility/types/test_data/test_data_exception.hpp"
-#include "dogen.utility/types/test_data/csharp_ref_impl_generation.hpp"
+#include "dogen.utility/types/test_data/csharp_ref_impl_product.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("utility.csharp_ref_impl_generation"));
+auto lg(logger_factory("utility.csharp_ref_impl_product"));
 
 const std::string csharp_ref_impl_project_directory_env(
     "CSHARP_REF_IMPL_PROJECTS_DIRECTORY");
@@ -64,12 +64,12 @@ using boost::filesystem::path;
 
 namespace dogen::utility::test_data {
 
-path csharp_ref_impl_generation::project_directory_;
-path csharp_ref_impl_generation::dia_models_directory_;
-path csharp_ref_impl_generation::json_models_directory_;
-path csharp_ref_impl_generation::output_directory_;
+path csharp_ref_impl_product::project_directory_;
+path csharp_ref_impl_product::dia_models_directory_;
+path csharp_ref_impl_product::json_models_directory_;
+path csharp_ref_impl_product::output_directory_;
 
-void csharp_ref_impl_generation::initialize() {
+void csharp_ref_impl_product::initialize() {
         using environment::variable_reader;
     const std::string proj_dir_env(
         variable_reader::strict_read_environment_variable(
@@ -116,51 +116,51 @@ void csharp_ref_impl_generation::initialize() {
                              << output_directory_.generic_string();
 }
 
-void csharp_ref_impl_generation::ensure_initialized() {
+void csharp_ref_impl_product::ensure_initialized() {
     if (project_directory_.empty())
         BOOST_THROW_EXCEPTION(test_data_exception(not_initialized));
 }
 
-path csharp_ref_impl_generation::project_directory() {
+path csharp_ref_impl_product::project_directory() {
     ensure_initialized();
     return project_directory_;
 }
 
-path csharp_ref_impl_generation::output_directory() {
+path csharp_ref_impl_product::output_directory() {
     ensure_initialized();
     return output_directory_;
 }
 
-path csharp_ref_impl_generation::input_csharprefimpl_csharpmodel_dia() {
+path csharp_ref_impl_product::input_csharprefimpl_csharpmodel_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_csharprefimpl_csharpmodel_dia;
 }
 
-path csharp_ref_impl_generation::
+path csharp_ref_impl_product::
 input_csharprefimpl_directorysettings_dia() {
     ensure_initialized();
     return dia_models_directory_ /
         path_csharprefimpl_directorysettings_dia;
 }
 
-path csharp_ref_impl_generation::input_csharprefimpl_lammodel_dia() {
+path csharp_ref_impl_product::input_csharprefimpl_lammodel_dia() {
     ensure_initialized();
     return dia_models_directory_ / path_csharprefimpl_lammodel_dia;
 }
 
-path csharp_ref_impl_generation::input_csharprefimpl_csharpmodel_json() {
+path csharp_ref_impl_product::input_csharprefimpl_csharpmodel_json() {
     ensure_initialized();
     return json_models_directory_ / path_csharprefimpl_csharpmodel_json;
 }
 
-path csharp_ref_impl_generation::
+path csharp_ref_impl_product::
 input_csharprefimpl_directorysettings_json() {
     ensure_initialized();
     return json_models_directory_ /
         path_csharprefimpl_directorysettings_json;
 }
 
-path csharp_ref_impl_generation::input_csharprefimpl_lammodel_json() {
+path csharp_ref_impl_product::input_csharprefimpl_lammodel_json() {
     ensure_initialized();
     return json_models_directory_ / path_csharprefimpl_lammodel_json;
 }

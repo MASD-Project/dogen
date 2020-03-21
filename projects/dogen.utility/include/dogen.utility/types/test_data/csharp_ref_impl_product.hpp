@@ -29,13 +29,13 @@
 
 namespace dogen::utility::test_data {
 
-class csharp_ref_impl_generation final {
+class csharp_ref_impl_product final {
 public:
-    csharp_ref_impl_generation() = delete;
-    csharp_ref_impl_generation(const csharp_ref_impl_generation&) = delete;
-    csharp_ref_impl_generation(csharp_ref_impl_generation&&) = delete;
-    ~csharp_ref_impl_generation() = delete;
-    csharp_ref_impl_generation& operator=(const csharp_ref_impl_generation&) = delete;
+    csharp_ref_impl_product() = delete;
+    csharp_ref_impl_product(const csharp_ref_impl_product&) = delete;
+    csharp_ref_impl_product(csharp_ref_impl_product&&) = delete;
+    ~csharp_ref_impl_product() = delete;
+    csharp_ref_impl_product& operator=(const csharp_ref_impl_product&) = delete;
 
 public:
     static void initialize();
