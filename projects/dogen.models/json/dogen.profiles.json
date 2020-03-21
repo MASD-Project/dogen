@@ -465,7 +465,7 @@
       ]
     },
     {
-      "name": "composable::cpp_artefact_formatter",
+      "name": "composable::cpp_artefact_transform",
       "parents": [
         "composable::base_formatter"
       ],
@@ -474,7 +474,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
-        "masd.variability.stereotype": "dogen::cpp::artefact_formatter",
+        "masd.variability.stereotype": "dogen::cpp::artefact_transform",
         "masd.variability.key_prefix": "masd.cpp.types"
       },
       "fallback_element_type": "masd::object",
@@ -507,7 +507,7 @@
       ]
     },
     {
-      "name": "composable::csharp_artefact_formatter",
+      "name": "composable::csharp_artefact_transform",
       "parents": [
         "composable::base_formatter"
       ],
@@ -516,7 +516,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
-        "masd.variability.stereotype": "dogen::csharp::artefact_formatter",
+        "masd.variability.stereotype": "dogen::csharp::artefact_transform",
         "masd.variability.key_prefix": "masd.cpp.types"
       },
       "fallback_element_type": "masd::object",
@@ -566,7 +566,7 @@
       ]
     },
     {
-      "name": "composable::cpp_helper_formatter",
+      "name": "composable::cpp_helper_transform",
       "parents": [
         "composable::base_helper_formatter"
       ],
@@ -575,7 +575,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
-        "masd.variability.stereotype": "dogen::cpp::helper_formatter",
+        "masd.variability.stereotype": "dogen::cpp::helper_transform",
         "masd.variability.key_prefix": "masd.cpp.types"
       },
       "fallback_element_type": "masd::object",
@@ -608,7 +608,7 @@
       ]
     },
     {
-      "name": "composable::csharp_helper_formatter",
+      "name": "composable::csharp_helper_transform",
       "parents": [
         "composable::base_helper_formatter"
       ],
@@ -617,7 +617,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
-        "masd.variability.stereotype": "dogen::csharp::helper_formatter",
+        "masd.variability.stereotype": "dogen::csharp::helper_transform",
         "masd.variability.key_prefix": "masd.cpp.types"
       },
       "fallback_element_type": "masd::object",
@@ -630,7 +630,7 @@
         {
           "name": "class_header.formatting_input",
           "type": "",
-          "value": "csharp_helper_formatter_header.wale"
+          "value": "csharp_helper_transform_header.wale"
         },
         {
           "name": "class_header.overwrite",

@@ -267,7 +267,7 @@
         <dia:string>#class_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1222,7 +1222,7 @@
         <dia:string>#class_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1333,7 +1333,7 @@
         <dia:string>#class_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1444,7 +1444,7 @@
         <dia:string>#exception_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1555,7 +1555,7 @@
         <dia:string>#enum_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1666,7 +1666,7 @@
         <dia:string>#namespace_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1777,7 +1777,7 @@
         <dia:string>#visitor_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1888,7 +1888,7 @@
         <dia:string>#class_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1999,7 +1999,7 @@
         <dia:string>#enum_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2149,7 +2149,7 @@
         <dia:string>#class_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2260,7 +2260,7 @@
         <dia:string>#class_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2371,7 +2371,7 @@
         <dia:string>#enum_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2482,7 +2482,7 @@
         <dia:string>#enum_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2632,7 +2632,7 @@
         <dia:string>#class_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2743,7 +2743,7 @@
         <dia:string>#class_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2893,7 +2893,7 @@
         <dia:string>#class_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3004,7 +3004,7 @@
         <dia:string>#class_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3115,7 +3115,7 @@
         <dia:string>#enum_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3226,7 +3226,7 @@
         <dia:string>#enum_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3376,7 +3376,7 @@
         <dia:string>#class_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -10324,7 +10324,7 @@ main, or from another initialiser.#</dia:string>
         <dia:string>#enum_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -10435,7 +10435,7 @@ main, or from another initialiser.#</dia:string>
         <dia:string>#enum_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -12438,7 +12438,7 @@ and element.#</dia:string>
         <dia:string>#builtin_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -12549,7 +12549,7 @@ and element.#</dia:string>
         <dia:string>#builtin_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -12660,7 +12660,7 @@ and element.#</dia:string>
         <dia:string>#builtin_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -12771,7 +12771,7 @@ and element.#</dia:string>
         <dia:string>#builtin_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -12882,7 +12882,7 @@ and element.#</dia:string>
         <dia:string>#builtin_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -12993,7 +12993,7 @@ and element.#</dia:string>
         <dia:string>#builtin_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -19845,7 +19845,7 @@ and element.#</dia:string>
         <dia:string>#smart_pointer_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -19956,7 +19956,7 @@ and element.#</dia:string>
         <dia:string>#smart_pointer_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -20067,7 +20067,7 @@ and element.#</dia:string>
         <dia:string>#time_duration_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -20178,7 +20178,7 @@ and element.#</dia:string>
         <dia:string>#ptree_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -20289,7 +20289,7 @@ and element.#</dia:string>
         <dia:string>#associative_container_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -20400,7 +20400,7 @@ and element.#</dia:string>
         <dia:string>#date_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -20511,7 +20511,7 @@ and element.#</dia:string>
         <dia:string>#optional_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -20622,7 +20622,7 @@ and element.#</dia:string>
         <dia:string>#path_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -20733,7 +20733,7 @@ and element.#</dia:string>
         <dia:string>#pair_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -20844,7 +20844,7 @@ and element.#</dia:string>
         <dia:string>#sequence_container_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -20955,7 +20955,7 @@ and element.#</dia:string>
         <dia:string>#ptime_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -21066,7 +21066,7 @@ and element.#</dia:string>
         <dia:string>#variant_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -21177,7 +21177,7 @@ and element.#</dia:string>
         <dia:string>#associative_container_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -21288,7 +21288,7 @@ and element.#</dia:string>
         <dia:string>#smart_pointer_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -21399,7 +21399,7 @@ and element.#</dia:string>
         <dia:string>#ptree_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -21510,7 +21510,7 @@ and element.#</dia:string>
         <dia:string>#optional_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -21621,7 +21621,7 @@ and element.#</dia:string>
         <dia:string>#pair_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -21732,7 +21732,7 @@ and element.#</dia:string>
         <dia:string>#sequence_container_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -21843,7 +21843,7 @@ and element.#</dia:string>
         <dia:string>#variant_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -21954,7 +21954,7 @@ and element.#</dia:string>
         <dia:string>#string_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -22065,7 +22065,7 @@ and element.#</dia:string>
         <dia:string>#path_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -22176,7 +22176,7 @@ and element.#</dia:string>
         <dia:string>#associative_container_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -22287,7 +22287,7 @@ and element.#</dia:string>
         <dia:string>#char_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -22398,7 +22398,7 @@ and element.#</dia:string>
         <dia:string>#bool_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -22509,7 +22509,7 @@ and element.#</dia:string>
         <dia:string>#date_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -22620,7 +22620,7 @@ and element.#</dia:string>
         <dia:string>#domain_type_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -22731,7 +22731,7 @@ and element.#</dia:string>
         <dia:string>#number_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -22842,7 +22842,7 @@ and element.#</dia:string>
         <dia:string>#optional_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -22953,7 +22953,7 @@ and element.#</dia:string>
         <dia:string>#pair_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -23064,7 +23064,7 @@ and element.#</dia:string>
         <dia:string>#path_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -23175,7 +23175,7 @@ and element.#</dia:string>
         <dia:string>#ptime_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -23286,7 +23286,7 @@ and element.#</dia:string>
         <dia:string>#ptree_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -23397,7 +23397,7 @@ and element.#</dia:string>
         <dia:string>#sequence_container_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -23508,7 +23508,7 @@ and element.#</dia:string>
         <dia:string>#smart_pointer_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -23619,7 +23619,7 @@ and element.#</dia:string>
         <dia:string>#string_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -23730,7 +23730,7 @@ and element.#</dia:string>
         <dia:string>#time_duration_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -23841,7 +23841,7 @@ and element.#</dia:string>
         <dia:string>#variant_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::helper_formatter#</dia:string>
+        <dia:string>#dogen::cpp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -24638,7 +24638,7 @@ not a regular" helper.#</dia:string>
         <dia:string>#primitive_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -24749,7 +24749,7 @@ not a regular" helper.#</dia:string>
         <dia:string>#primitive_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -24860,7 +24860,7 @@ not a regular" helper.#</dia:string>
         <dia:string>#primitive_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -24971,7 +24971,7 @@ not a regular" helper.#</dia:string>
         <dia:string>#primitive_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -25082,7 +25082,7 @@ not a regular" helper.#</dia:string>
         <dia:string>#primitive_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -25193,7 +25193,7 @@ not a regular" helper.#</dia:string>
         <dia:string>#primitive_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -25304,7 +25304,7 @@ not a regular" helper.#</dia:string>
         <dia:string>#primitive_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -25415,7 +25415,7 @@ not a regular" helper.#</dia:string>
         <dia:string>#primitive_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -25526,7 +25526,7 @@ not a regular" helper.#</dia:string>
         <dia:string>#primitive_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -25637,7 +25637,7 @@ not a regular" helper.#</dia:string>
         <dia:string>#primitive_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -25748,7 +25748,7 @@ not a regular" helper.#</dia:string>
         <dia:string>#primitive_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -28751,7 +28751,7 @@ code.
         <dia:string>#class_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -29006,7 +29006,7 @@ code.
         <dia:string>#enum_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -29117,7 +29117,7 @@ code.
         <dia:string>#feature_template_bundle_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -29228,7 +29228,7 @@ code.
         <dia:string>#feature_template_bundle_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -29339,7 +29339,7 @@ code.
         <dia:string>#variability_initializer_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -29450,7 +29450,7 @@ code.
         <dia:string>#variability_initializer_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -30759,7 +30759,7 @@ string.
         <dia:string>#enum_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -31845,7 +31845,7 @@ string.
         <dia:string>#logic_less_template_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -31956,7 +31956,7 @@ string.
         <dia:string>#class_forward_declarations_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -32067,7 +32067,7 @@ string.
         <dia:string>#visitor_forward_declarations_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -32178,7 +32178,7 @@ string.
         <dia:string>#class_forward_declarations_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -32289,7 +32289,7 @@ string.
         <dia:string>#primitive_forward_declarations_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -32400,7 +32400,7 @@ string.
         <dia:string>#primitive_forward_declarations_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -32511,7 +32511,7 @@ string.
         <dia:string>#type_registrar_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -32622,7 +32622,7 @@ string.
         <dia:string>#type_registrar_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -33158,7 +33158,7 @@ string.
         <dia:string>#project_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -33269,7 +33269,7 @@ string.
         <dia:string>#solution_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -33380,7 +33380,7 @@ string.
         <dia:string>#main_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -33491,7 +33491,7 @@ string.
         <dia:string>#object_odb_options_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -33602,7 +33602,7 @@ string.
         <dia:string>#primitive_odb_options_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -33713,7 +33713,7 @@ string.
         <dia:string>#main_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -33934,7 +33934,7 @@ string.
         <dia:string>#common_odb_options_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -34045,7 +34045,7 @@ string.
         <dia:string>#msbuild_targets_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -34195,7 +34195,7 @@ string.
         <dia:string>#source_cmakelists_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -34306,7 +34306,7 @@ string.
         <dia:string>#include_cmakelists_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -34693,7 +34693,7 @@ string.
         <dia:string>#cmakelists_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -34914,7 +34914,7 @@ string.
         <dia:string>#feature_bundle_header_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -35025,7 +35025,7 @@ string.
         <dia:string>#feature_bundle_implementation_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::cpp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::cpp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

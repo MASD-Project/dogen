@@ -4,7 +4,7 @@
 <#@ masd.stitch.inclusion_dependency="dogen.m2t.csharp/types/transforms/types/traits.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.m2t.csharp/types/formattables/helper_properties.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.m2t.csharp/types/transforms/types/floating_point_number_helper.hpp" #>
-<#@ masd.stitch.wale.text_template=csharp_helper_formatter_implementation.wale #>
+<#@ masd.stitch.wale.text_template=csharp_helper_transform_implementation.wale #>
 <#@ masd.stitch.wale.kvp.helper.family=FloatingPointNumber #>
 <#@ masd.stitch.wale.kvp.class.simple_name=floating_point_number_helper #>
 <#$ stitch.wale.template_instantiation_result #>

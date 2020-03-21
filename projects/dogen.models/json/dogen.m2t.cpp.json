@@ -39,7 +39,7 @@
     {
       "name": "transforms::types::class_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -71,56 +71,56 @@
     {
       "name": "transforms::hash::class_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::hash::class_implementation_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::types::exception_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::types::enum_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::types::namespace_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::types::visitor_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::types::class_implementation_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::hash::enum_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -135,28 +135,28 @@
     {
       "name": "transforms::io::class_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::io::class_implementation_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::io::enum_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::io::enum_implementation_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -171,14 +171,14 @@
     {
       "name": "transforms::serialization::class_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::serialization::class_implementation_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -193,28 +193,28 @@
     {
       "name": "transforms::test_data::class_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::class_implementation_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::enum_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::enum_implementation_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -229,7 +229,7 @@
     {
       "name": "transforms::odb::class_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -505,14 +505,14 @@
     {
       "name": "transforms::serialization::enum_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::odb::enum_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -696,42 +696,42 @@
     {
       "name": "transforms::types::builtin_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::hash::builtin_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::builtin_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::io::builtin_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::odb::builtin_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::serialization::builtin_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1024,259 +1024,259 @@
     {
       "name": "transforms::types::smart_pointer_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::hash::smart_pointer_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::hash::time_duration_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::hash::ptree_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::hash::associative_container_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::hash::date_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::hash::optional_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::hash::path_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::hash::pair_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::hash::sequence_container_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::hash::ptime_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::hash::variant_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::io::associative_container_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::io::smart_pointer_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::io::ptree_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::io::optional_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::io::pair_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::io::sequence_container_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::io::variant_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::io::string_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::serialization::path_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::associative_container_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::char_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::bool_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::date_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::domain_type_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::number_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::optional_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::pair_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::path_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::ptime_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::ptree_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::sequence_container_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::smart_pointer_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::string_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::time_duration_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::variant_helper",
       "stereotypes": [
-        "dogen::cpp::helper_formatter"
+        "dogen::cpp::helper_transform"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1316,77 +1316,77 @@
     {
       "name": "transforms::types::primitive_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::hash::primitive_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::io::primitive_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::odb::primitive_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::primitive_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::serialization::primitive_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::types::primitive_implementation_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::hash::primitive_implementation_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::io::primitive_implementation_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::test_data::primitive_implementation_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::serialization::primitive_implementation_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1523,42 +1523,42 @@
     {
       "name": "transforms::tests::class_implementation_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::tests::enum_implementation_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::types::feature_template_bundle_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::types::feature_template_bundle_implementation_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::types::variability_initializer_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::types::variability_initializer_implementation_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1807,7 +1807,7 @@
     {
       "name": "transforms::lexical_cast::enum_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1896,56 +1896,56 @@
     {
       "name": "transforms::templates::logic_less_template_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::types::class_forward_declarations_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::types::visitor_forward_declarations_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::serialization::class_forward_declarations_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::types::primitive_forward_declarations_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::serialization::primitive_forward_declarations_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::serialization::type_registrar_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::serialization::type_registrar_implementation_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -1981,42 +1981,42 @@
     {
       "name": "transforms::visual_studio::project_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::visual_studio::solution_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::tests::main_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::odb::object_odb_options_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::odb::primitive_odb_options_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::types::main_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -2031,14 +2031,14 @@
     {
       "name": "transforms::odb::common_odb_options_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::visual_studio::msbuild_targets_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -2053,14 +2053,14 @@
     {
       "name": "transforms::build::source_cmakelists_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::build::include_cmakelists_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -2081,7 +2081,7 @@
     {
       "name": "transforms::tests::cmakelists_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
@@ -2096,14 +2096,14 @@
     {
       "name": "transforms::types::feature_bundle_header_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     },
     {
       "name": "transforms::types::feature_bundle_implementation_transform",
       "stereotypes": [
-        "dogen::cpp::artefact_formatter"
+        "dogen::cpp::artefact_transform"
       ],
       "fallback_element_type": "masd::object"
     }

@@ -474,11 +474,11 @@ void adapter::populate_abstract_profile_entry(const logical::entities::name& pn,
      * position in assets space, and as such is composed of the
      * assets element that owns the profile entry (the profile):
      *
-     *     dogen.cpp_artefact_formatter
+     *     dogen.cpp_artefact_transform
      *
      * Concatenated with the "simple" name, e.g.:
      *
-     *     dogen.cpp_artefact_formatter.masd.generalization.parent
+     *     dogen.cpp_artefact_transform.masd.generalization.parent
      *
      * Whilst this may not be exactly the most aesthetically
      * pleasing approach, it is more or less compliant with the

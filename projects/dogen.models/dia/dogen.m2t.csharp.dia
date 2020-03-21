@@ -1933,7 +1933,7 @@
         <dia:string>#class_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2044,7 +2044,7 @@
         <dia:string>#enum_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2155,7 +2155,7 @@
         <dia:string>#namespace_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2266,7 +2266,7 @@
         <dia:string>#visitor_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2416,7 +2416,7 @@
         <dia:string>#class_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2527,7 +2527,7 @@
         <dia:string>#enum_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2677,7 +2677,7 @@
         <dia:string>#class_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2788,7 +2788,7 @@
         <dia:string>#enum_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2899,7 +2899,7 @@
         <dia:string>#exception_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -11353,7 +11353,7 @@
         <dia:string>#floating_point_number_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::helper_formatter#</dia:string>
+        <dia:string>#dogen::csharp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -11671,7 +11671,7 @@
         <dia:string>#builtin_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -11782,7 +11782,7 @@
         <dia:string>#builtin_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -11893,7 +11893,7 @@
         <dia:string>#builtin_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -12466,7 +12466,7 @@
         <dia:string>#enumerable_helper#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::helper_formatter#</dia:string>
+        <dia:string>#dogen::csharp::helper_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -13244,7 +13244,7 @@
         <dia:string>#primitive_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -13355,7 +13355,7 @@
         <dia:string>#primitive_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -13466,7 +13466,7 @@
         <dia:string>#primitive_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -14206,7 +14206,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#csharp_helper_formatter_header#</dia:string>
+        <dia:string>#csharp_helper_transform_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::templating::logic_less_templates#</dia:string>
@@ -14316,7 +14316,7 @@
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#csharp_helper_formatter_implementation#</dia:string>
+        <dia:string>#csharp_helper_transform_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::templating::logic_less_templates#</dia:string>
@@ -14800,7 +14800,7 @@
         <dia:string>#project_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -14911,7 +14911,7 @@
         <dia:string>#solution_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -15132,7 +15132,7 @@
         <dia:string>#assistant_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -15243,7 +15243,7 @@
         <dia:string>#assistant_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#dogen::csharp::artefact_formatter#</dia:string>
+        <dia:string>#dogen::csharp::artefact_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
