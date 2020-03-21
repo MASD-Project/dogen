@@ -48,7 +48,7 @@ std::string traits::overwrite() {
 }
 
 std::string traits::extraction::cpp_headers_output_directory() {
-    static std::string r("masd.generation.cpp.headers_output_directory");
+    static std::string r("masd.cpp.headers_output_directory");
     return r;
 }
 

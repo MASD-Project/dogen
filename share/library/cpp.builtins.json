@@ -15,10 +15,10 @@
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "masd.mapping.target": "masd.lam.core.boolean",
-        "masd.generation.cpp.helper.family": "Boolean",
-        "masd.generation.cpp.aspect.requires_stream_manipulators": true,
-        "masd.generation.cpp.aspect.requires_manual_default_constructor": true,
-        "masd.generation.cpp.io.builtin_header.primary_inclusion_directive": "<boost/io/ios_state.hpp>"
+        "masd.cpp.helper.family": "Boolean",
+        "masd.cpp.aspect.requires_stream_manipulators": true,
+        "masd.cpp.aspect.requires_manual_default_constructor": true,
+        "masd.cpp.io.builtin_header.primary_inclusion_directive": "<boost/io/ios_state.hpp>"
       }
     },
     {
@@ -30,11 +30,11 @@
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "masd.mapping.target": "masd.lam.text.character",
-        "masd.generation.cpp.helper.family": "Character",
-        "masd.generation.cpp.streaming.remove_unprintable_characters": false,
-        "masd.generation.cpp.streaming.requires_quoting": true,
-        "masd.generation.cpp.inclusion_required": false,
-        "masd.generation.cpp.aspect.requires_manual_default_constructor": true
+        "masd.cpp.helper.family": "Character",
+        "masd.cpp.streaming.remove_unprintable_characters": false,
+        "masd.cpp.streaming.requires_quoting": true,
+        "masd.cpp.inclusion_required": false,
+        "masd.cpp.aspect.requires_manual_default_constructor": true
       }
     },
     {
@@ -46,11 +46,11 @@
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "masd.mapping.target": "masd.lam.core.byte",
-        "masd.generation.cpp.helper.family": "Character",
-        "masd.generation.cpp.streaming.remove_unprintable_characters": false,
-        "masd.generation.cpp.streaming.requires_quoting": true,
-        "masd.generation.cpp.inclusion_required": false,
-        "masd.generation.cpp.aspect.requires_manual_default_constructor": true
+        "masd.cpp.helper.family": "Character",
+        "masd.cpp.streaming.remove_unprintable_characters": false,
+        "masd.cpp.streaming.requires_quoting": true,
+        "masd.cpp.inclusion_required": false,
+        "masd.cpp.aspect.requires_manual_default_constructor": true
       }
     },
     {
@@ -63,9 +63,9 @@
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "masd.mapping.target": "masd.lam.numeric.integer",
-        "masd.generation.cpp.helper.family": "Number",
-        "masd.generation.cpp.inclusion_required": false,
-        "masd.generation.cpp.aspect.requires_manual_default_constructor": true
+        "masd.cpp.helper.family": "Number",
+        "masd.cpp.inclusion_required": false,
+        "masd.cpp.aspect.requires_manual_default_constructor": true
       }
     },
     {
@@ -78,9 +78,9 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.generation.cpp.helper.family": "Number",
-        "masd.generation.cpp.inclusion_required": false,
-        "masd.generation.cpp.aspect.requires_manual_default_constructor": true
+        "masd.cpp.helper.family": "Number",
+        "masd.cpp.inclusion_required": false,
+        "masd.cpp.aspect.requires_manual_default_constructor": true
       }
     },
     {
@@ -92,9 +92,9 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.generation.cpp.helper.family": "Number",
-        "masd.generation.cpp.inclusion_required": false,
-        "masd.generation.cpp.aspect.requires_manual_default_constructor": true
+        "masd.cpp.helper.family": "Number",
+        "masd.cpp.inclusion_required": false,
+        "masd.cpp.aspect.requires_manual_default_constructor": true
       }
     },
     {
@@ -106,9 +106,9 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.generation.cpp.helper.family": "Number",
-        "masd.generation.cpp.inclusion_required": false,
-        "masd.generation.cpp.aspect.requires_manual_default_constructor": true
+        "masd.cpp.helper.family": "Number",
+        "masd.cpp.inclusion_required": false,
+        "masd.cpp.aspect.requires_manual_default_constructor": true
       }
     },
     {
@@ -120,9 +120,9 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.generation.cpp.helper.family": "Number",
-        "masd.generation.cpp.inclusion_required": false,
-        "masd.generation.cpp.aspect.requires_manual_default_constructor": true
+        "masd.cpp.helper.family": "Number",
+        "masd.cpp.inclusion_required": false,
+        "masd.cpp.aspect.requires_manual_default_constructor": true
       }
     },
     {
@@ -134,9 +134,9 @@
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.generation.cpp.helper.family": "Number",
-        "masd.generation.cpp.inclusion_required": false,
-        "masd.generation.cpp.aspect.requires_manual_default_constructor": true
+        "masd.cpp.helper.family": "Number",
+        "masd.cpp.inclusion_required": false,
+        "masd.cpp.aspect.requires_manual_default_constructor": true
       }
     },
     {
@@ -146,9 +146,9 @@
       ],
       "in_global_module": true,
       "tagged_values": {
-        "masd.generation.cpp.helper.family": "Number",
-        "masd.generation.cpp.inclusion_required": false,
-        "masd.generation.cpp.aspect.requires_manual_default_constructor": true
+        "masd.cpp.helper.family": "Number",
+        "masd.cpp.inclusion_required": false,
+        "masd.cpp.aspect.requires_manual_default_constructor": true
       }
     },
     {
@@ -158,9 +158,9 @@
       ],
       "in_global_module": true,
       "tagged_values": {
-        "masd.generation.cpp.helper.family": "Number",
-        "masd.generation.cpp.inclusion_required": false,
-        "masd.generation.cpp.aspect.requires_manual_default_constructor": true
+        "masd.cpp.helper.family": "Number",
+        "masd.cpp.inclusion_required": false,
+        "masd.cpp.aspect.requires_manual_default_constructor": true
       }
     },
     {
@@ -173,9 +173,9 @@
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "masd.mapping.target": "masd.lam.numeric.single_float",
-        "masd.generation.cpp.helper.family": "Number",
-        "masd.generation.cpp.aspect.requires_manual_default_constructor": true,
-        "masd.generation.cpp.io.builtin_header.primary_inclusion_directive": "<boost/io/ios_state.hpp>"
+        "masd.cpp.helper.family": "Number",
+        "masd.cpp.aspect.requires_manual_default_constructor": true,
+        "masd.cpp.io.builtin_header.primary_inclusion_directive": "<boost/io/ios_state.hpp>"
       }
     },
     {
@@ -188,10 +188,10 @@
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "masd.mapping.target": "masd.lam.numeric.double_float",
-        "masd.generation.cpp.helper.family": "Number",
-        "masd.generation.cpp.aspect.requires_stream_manipulators": true,
-        "masd.generation.cpp.aspect.requires_manual_default_constructor": true,
-        "masd.generation.cpp.io.builtin_header.primary_inclusion_directive": "<boost/io/ios_state.hpp>"
+        "masd.cpp.helper.family": "Number",
+        "masd.cpp.aspect.requires_stream_manipulators": true,
+        "masd.cpp.aspect.requires_manual_default_constructor": true,
+        "masd.cpp.io.builtin_header.primary_inclusion_directive": "<boost/io/ios_state.hpp>"
       }
     },
     {
@@ -202,10 +202,10 @@
       "in_global_module": true,
       "can_be_primitive_underlier": true,
       "tagged_values": {
-        "masd.generation.cpp.helper.family": "Number",
-        "masd.generation.cpp.inclusion_required": false,
-        "masd.generation.cpp.aspect.requires_stream_manipulators": true,
-        "masd.generation.cpp.aspect.requires_manual_default_constructor": true
+        "masd.cpp.helper.family": "Number",
+        "masd.cpp.inclusion_required": false,
+        "masd.cpp.aspect.requires_stream_manipulators": true,
+        "masd.cpp.aspect.requires_manual_default_constructor": true
       }
     }
   ]

@@ -6,8 +6,8 @@
     "masd.injection.reference": "masd",
     "masd.injection.input_technical_space": "agnostic",
     "masd.injection.is_proxy_model": "true",
-    "masd.generation.cpp.enabled": "false",
-    "masd.generation.csharp.enabled": "false"
+    "masd.cpp.enabled": "false",
+    "masd.csharp.enabled": "false"
   },
   "elements": [
     {
@@ -84,7 +84,7 @@
         "masd::variability::profile"
       ],
       "tagged_values": {
-        "masd.variability.key_prefix": "masd.generation.csharp"
+        "masd.variability.key_prefix": "masd.csharp"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -108,7 +108,7 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.cpp.standard",
+          "name": "masd.cpp.standard",
           "type": "",
           "value": "c++-17"
         }
@@ -124,7 +124,7 @@
         "masd::variability::profile"
       ],
       "tagged_values": {
-        "masd.variability.key_prefix": "masd.generation.cpp"
+        "masd.variability.key_prefix": "masd.cpp"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -224,7 +224,7 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.cpp.types.enabled",
+          "name": "masd.cpp.types.enabled",
           "type": "",
           "value": "true"
         },
@@ -245,7 +245,7 @@
       "tagged_values": {
         "masd.variability.binding_point": "element",
         "masd.variability.stereotype": "dogen::pretty_printable",
-        "masd.variability.key_prefix": "masd.generation.cpp.io"
+        "masd.variability.key_prefix": "masd.cpp.io"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -265,7 +265,7 @@
       "tagged_values": {
         "masd.variability.binding_point": "element",
         "masd.variability.stereotype": "dogen::hashable",
-        "masd.variability.key_prefix": "masd.generation.cpp.hash"
+        "masd.variability.key_prefix": "masd.cpp.hash"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -284,7 +284,7 @@
       "tagged_values": {
         "masd.variability.binding_point": "element",
         "masd.variability.stereotype": "dogen::serializable",
-        "masd.variability.key_prefix": "masd.generation.cpp.serialization"
+        "masd.variability.key_prefix": "masd.cpp.serialization"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -324,7 +324,7 @@
       "tagged_values": {
         "masd.variability.binding_point": "element",
         "masd.variability.stereotype": "dogen::handcrafted::pretty_printable",
-        "masd.variability.key_prefix": "masd.generation.cpp.io"
+        "masd.variability.key_prefix": "masd.cpp.io"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -352,7 +352,7 @@
       "tagged_values": {
         "masd.variability.binding_point": "element",
         "masd.variability.stereotype": "dogen::handcrafted::typeable",
-        "masd.variability.key_prefix": "masd.generation.cpp.types"
+        "masd.variability.key_prefix": "masd.cpp.types"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -385,7 +385,7 @@
       "tagged_values": {
         "masd.variability.binding_point": "global",
         "masd.variability.stereotype": "dogen::handcrafted::typeable::header_only",
-        "masd.variability.key_prefix": "masd.generation.cpp.types"
+        "masd.variability.key_prefix": "masd.cpp.types"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -426,7 +426,7 @@
       "tagged_values": {
         "masd.variability.binding_point": "element",
         "masd.variability.stereotype": "dogen::handcrafted::typeable::implementation_only",
-        "masd.variability.key_prefix": "masd.generation.cpp.types"
+        "masd.variability.key_prefix": "masd.cpp.types"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -475,7 +475,7 @@
       "tagged_values": {
         "masd.variability.binding_point": "global",
         "masd.variability.stereotype": "dogen::cpp::artefact_formatter",
-        "masd.variability.key_prefix": "masd.generation.cpp.types"
+        "masd.variability.key_prefix": "masd.cpp.types"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -517,7 +517,7 @@
       "tagged_values": {
         "masd.variability.binding_point": "global",
         "masd.variability.stereotype": "dogen::csharp::artefact_formatter",
-        "masd.variability.key_prefix": "masd.generation.cpp.types"
+        "masd.variability.key_prefix": "masd.cpp.types"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -576,7 +576,7 @@
       "tagged_values": {
         "masd.variability.binding_point": "global",
         "masd.variability.stereotype": "dogen::cpp::helper_formatter",
-        "masd.variability.key_prefix": "masd.generation.cpp.types"
+        "masd.variability.key_prefix": "masd.cpp.types"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -618,7 +618,7 @@
       "tagged_values": {
         "masd.variability.binding_point": "global",
         "masd.variability.stereotype": "dogen::csharp::helper_formatter",
-        "masd.variability.key_prefix": "masd.generation.cpp.types"
+        "masd.variability.key_prefix": "masd.cpp.types"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -660,7 +660,7 @@
       "tagged_values": {
         "masd.variability.binding_point": "element",
         "masd.variability.stereotype": "dogen::handcrafted::serializable",
-        "masd.variability.key_prefix": "masd.generation.cpp.serialization"
+        "masd.variability.key_prefix": "masd.cpp.serialization"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -684,7 +684,7 @@
       "tagged_values": {
         "masd.variability.binding_point": "element",
         "masd.variability.stereotype": "dogen::convertible",
-        "masd.variability.key_prefix": "masd.generation.cpp.lexical_cast"
+        "masd.variability.key_prefix": "masd.cpp.lexical_cast"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -704,7 +704,7 @@
         "masd::variability::profile"
       ],
       "tagged_values": {
-        "masd.variability.key_prefix": "masd.generation.cpp"
+        "masd.variability.key_prefix": "masd.cpp"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -736,7 +736,7 @@
           "value": "dogen.profiles.test_marker"
         },
         {
-          "name": "masd.generation.cpp.tests.main.enabled",
+          "name": "masd.cpp.tests.main.enabled",
           "type": "",
           "value": "true"
         }
@@ -780,7 +780,7 @@
       "tagged_values": {
         "masd.variability.binding_point": "element",
         "masd.variability.stereotype": "dogen::untestable",
-        "masd.variability.key_prefix": "masd.generation.cpp.tests"
+        "masd.variability.key_prefix": "masd.cpp.tests"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -800,7 +800,7 @@
       "tagged_values": {
         "masd.variability.binding_point": "element",
         "masd.variability.stereotype": "dogen::untypable",
-        "masd.variability.key_prefix": "masd.generation.cpp.types"
+        "masd.variability.key_prefix": "masd.cpp.types"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -819,7 +819,7 @@
       "tagged_values": {
         "masd.variability.binding_point": "element",
         "masd.variability.stereotype": "dogen::handcrafted::cmake",
-        "masd.variability.key_prefix": "masd.generation.cpp"
+        "masd.variability.key_prefix": "masd.cpp"
       },
       "fallback_element_type": "masd::object",
       "attributes": [

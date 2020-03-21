@@ -2997,8 +2997,8 @@ infrastructure. To be removed.#</dia:string>
         <dia:string>#masd::entry_point#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generation.cpp.types.enabled=true
-#DOGEN masd.generation.cpp.types.overwrite=false#</dia:string>
+        <dia:string>##DOGEN masd.cpp.types.enabled=true
+#DOGEN masd.cpp.types.overwrite=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

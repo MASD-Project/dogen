@@ -37,7 +37,7 @@ make_primary_inclusion_directive() {
     const auto vt(value_type::text);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-    r.instantiation_domain_name("masd.generation.cpp.archetype");
+    r.instantiation_domain_name("masd.cpp.archetype");
     return r;
 }
 
@@ -51,7 +51,7 @@ make_secondary_inclusion_directive() {
     const auto vt(value_type::text_collection);
     r.value_type(vt);
     r.binding_point(binding_point::element);
-    r.instantiation_domain_name("masd.generation.cpp.archetype");
+    r.instantiation_domain_name("masd.cpp.archetype");
     return r;
 }
 

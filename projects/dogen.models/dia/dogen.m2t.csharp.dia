@@ -1195,7 +1195,7 @@
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generation.cpp.types.class_forward_declarations.enabled=true#</dia:string>
+        <dia:string>##DOGEN masd.cpp.types.class_forward_declarations.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="true"/>
@@ -1570,9 +1570,9 @@
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generation.cpp.io.enabled=true
-#DOGEN masd.generation.cpp.io.overwrite=false
-#DOGEN masd.generation.cpp.types.class_forward_declarations.enabled=true#</dia:string>
+        <dia:string>##DOGEN masd.cpp.io.enabled=true
+#DOGEN masd.cpp.io.overwrite=false
+#DOGEN masd.cpp.types.class_forward_declarations.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4222,7 +4222,7 @@
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generation.cpp.types.class_forward_declarations.enabled=true#</dia:string>
+        <dia:string>##DOGEN masd.cpp.types.class_forward_declarations.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -10958,7 +10958,7 @@
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generation.cpp.types.class_forward_declarations.enabled=true#</dia:string>
+        <dia:string>##DOGEN masd.cpp.types.class_forward_declarations.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="true"/>
@@ -13765,7 +13765,7 @@
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.generate_static_configuration=false
-#DOGEN masd.variability.key_prefix=masd.generation.csharp#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.csharp#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -13992,7 +13992,7 @@
         <dia:string>#masd::templating::logic_less_templates#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generation.cpp.templates.logic_less_template.overwrite=false#</dia:string>
+        <dia:string>##DOGEN masd.cpp.templates.logic_less_template.overwrite=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14102,7 +14102,7 @@
         <dia:string>#masd::templating::logic_less_templates#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generation.cpp.templates.logic_less_template.overwrite=false#</dia:string>
+        <dia:string>##DOGEN masd.cpp.templates.logic_less_template.overwrite=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14212,7 +14212,7 @@
         <dia:string>#masd::templating::logic_less_templates#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generation.cpp.templates.logic_less_template.overwrite=false#</dia:string>
+        <dia:string>##DOGEN masd.cpp.templates.logic_less_template.overwrite=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -14322,7 +14322,7 @@
         <dia:string>#masd::templating::logic_less_templates#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generation.cpp.templates.logic_less_template.overwrite=false#</dia:string>
+        <dia:string>##DOGEN masd.cpp.templates.logic_less_template.overwrite=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

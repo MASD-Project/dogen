@@ -2071,7 +2071,7 @@ not as part of a profile).
       <dia:attribute name="comment">
         <dia:string>#The values supplied for the configuration are not valid.
 
-#DOGEN masd.generation.cpp.types.class_forward_declarations.enabled=false#</dia:string>
+#DOGEN masd.cpp.types.class_forward_declarations.enabled=false#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

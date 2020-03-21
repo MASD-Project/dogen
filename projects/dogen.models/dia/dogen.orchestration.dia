@@ -882,7 +882,7 @@
         <dia:string>#dogen::typeable, dogen::pretty_printable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generation.cpp.types.class_forward_declarations.enabled=true#</dia:string>
+        <dia:string>##DOGEN masd.cpp.types.class_forward_declarations.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

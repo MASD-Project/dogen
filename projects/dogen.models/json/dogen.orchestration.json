@@ -67,7 +67,7 @@
         "dogen::pretty_printable"
       ],
       "tagged_values": {
-        "masd.generation.cpp.types.class_forward_declarations.enabled": "true"
+        "masd.cpp.types.class_forward_declarations.enabled": "true"
       },
       "fallback_element_type": "masd::object",
       "attributes": [

@@ -9,9 +9,9 @@
     {
       "name": "IEnumerable",
       "tagged_values": {
-        "masd.generation.csharp.aspect.requires_static_reference_equals": true,
-        "masd.generation.csharp.assistant.requires_assistance": true,
-        "masd.generation.csharp.assistant.method_postfix": "IEnumerable"
+        "masd.csharp.aspect.requires_static_reference_equals": true,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "IEnumerable"
       }
     },
     {
@@ -20,9 +20,9 @@
         "IEnumerable"
       ],
       "tagged_values": {
-        "masd.generation.csharp.aspect.requires_static_reference_equals": true,
-        "masd.generation.csharp.assistant.requires_assistance": true,
-        "masd.generation.csharp.assistant.method_postfix": "ICollection"
+        "masd.csharp.aspect.requires_static_reference_equals": true,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "ICollection"
       }
     },
     {
@@ -31,9 +31,9 @@
         "ICollection"
       ],
       "tagged_values": {
-        "masd.generation.csharp.aspect.requires_static_reference_equals": true,
-        "masd.generation.csharp.assistant.requires_assistance": true,
-        "masd.generation.csharp.assistant.method_postfix": "IList"
+        "masd.csharp.aspect.requires_static_reference_equals": true,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "IList"
       }
     },
     {
@@ -42,9 +42,9 @@
         "IList"
       ],
       "tagged_values": {
-        "masd.generation.csharp.aspect.requires_static_reference_equals": true,
-        "masd.generation.csharp.assistant.requires_assistance": true,
-        "masd.generation.csharp.assistant.method_postfix": "ArrayList"
+        "masd.csharp.aspect.requires_static_reference_equals": true,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "ArrayList"
       }
     },
     {
@@ -53,9 +53,9 @@
         "ICollection"
       ],
       "tagged_values": {
-        "masd.generation.csharp.aspect.requires_static_reference_equals": true,
-        "masd.generation.csharp.assistant.requires_assistance": true,
-        "masd.generation.csharp.assistant.method_postfix": "IDictionary"
+        "masd.csharp.aspect.requires_static_reference_equals": true,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "IDictionary"
       }
     },
     {
@@ -64,9 +64,9 @@
         "IDictionary"
       ],
       "tagged_values": {
-        "masd.generation.csharp.aspect.requires_static_reference_equals": true,
-        "masd.generation.csharp.assistant.requires_assistance": true,
-        "masd.generation.csharp.assistant.method_postfix": "Hashtable"
+        "masd.csharp.aspect.requires_static_reference_equals": true,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "Hashtable"
       }
     },
     {
@@ -75,9 +75,9 @@
         "IDictionary"
       ],
       "tagged_values": {
-        "masd.generation.csharp.aspect.requires_static_reference_equals": true,
-        "masd.generation.csharp.assistant.requires_assistance": true,
-        "masd.generation.csharp.assistant.method_postfix": "HybridDictionary"
+        "masd.csharp.aspect.requires_static_reference_equals": true,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "HybridDictionary"
       }
     },
     {
@@ -86,9 +86,9 @@
         "ICollection"
       ],
       "tagged_values": {
-        "masd.generation.csharp.aspect.requires_static_reference_equals": true,
-        "masd.generation.csharp.assistant.requires_assistance": true,
-        "masd.generation.csharp.assistant.method_postfix": "NameValueCollection"
+        "masd.csharp.aspect.requires_static_reference_equals": true,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "NameValueCollection"
       }
     },
     {
@@ -97,9 +97,9 @@
         "ICollection"
       ],
       "tagged_values": {
-        "masd.generation.csharp.aspect.requires_static_reference_equals": true,
-        "masd.generation.csharp.assistant.requires_assistance": true,
-        "masd.generation.csharp.assistant.method_postfix": "BitArray"
+        "masd.csharp.aspect.requires_static_reference_equals": true,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "BitArray"
       }
     },
     {
@@ -108,9 +108,9 @@
         "ICollection"
       ],
       "tagged_values": {
-        "masd.generation.csharp.aspect.requires_static_reference_equals": true,
-        "masd.generation.csharp.assistant.requires_assistance": true,
-        "masd.generation.csharp.assistant.method_postfix": "Queue"
+        "masd.csharp.aspect.requires_static_reference_equals": true,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "Queue"
       }
     },
     {
@@ -119,9 +119,9 @@
         "ICollection"
       ],
       "tagged_values": {
-        "masd.generation.csharp.aspect.requires_static_reference_equals": true,
-        "masd.generation.csharp.assistant.requires_assistance": true,
-        "masd.generation.csharp.assistant.method_postfix": "Stack"
+        "masd.csharp.aspect.requires_static_reference_equals": true,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "Stack"
       }
     },
     {
@@ -130,9 +130,9 @@
         "IDictionary"
       ],
       "tagged_values": {
-        "masd.generation.csharp.aspect.requires_static_reference_equals": true,
-        "masd.generation.csharp.assistant.requires_assistance": true,
-        "masd.generation.csharp.assistant.method_postfix": "SortedList"
+        "masd.csharp.aspect.requires_static_reference_equals": true,
+        "masd.csharp.assistant.requires_assistance": true,
+        "masd.csharp.assistant.method_postfix": "SortedList"
       }
     }
   ]

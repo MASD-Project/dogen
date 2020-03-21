@@ -135,7 +135,7 @@
             <dia:string>#The Language Agnostic Model (LAM) defines the base types
 that can be mapped.
 
-LAM is a Platform Independent Model (PIM) defined by MASD to 
+LAM is a Platform Independent Model (PIM) defined by MASD to
 describe the basic types that can be mapped into Platform
 Specific Models (PSMs).
 
@@ -149,8 +149,8 @@ space; keep it technical space agnostic.
 #DOGEN masd.injection.model_modules=masd.lam
 #DOGEN masd.injection.input_technical_space=agnostic
 #DOGEN masd.injection.is_proxy_model=true
-#DOGEN masd.generation.cpp.enabled=false
-#DOGEN masd.generation.csharp.enabled=false#</dia:string>
+#DOGEN masd.cpp.enabled=false
+#DOGEN masd.csharp.enabled=false#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

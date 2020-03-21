@@ -23,7 +23,7 @@
 namespace dogen::m2t::cpp::formatters::visual_studio {
 
 std::string traits::facet() {
-    static std::string r("masd.generation.cpp.visual_studio");
+    static std::string r("masd.cpp.visual_studio");
     return r;
 }
 
@@ -33,17 +33,17 @@ std::string traits::canonical_archetype() {
 }
 
 std::string traits::solution_archetype() {
-    static std::string r("masd.generation.cpp.visual_studio.solution");
+    static std::string r("masd.cpp.visual_studio.solution");
     return r;
 }
 
 std::string traits::project_archetype() {
-    static std::string r("masd.generation.cpp.visual_studio.project");
+    static std::string r("masd.cpp.visual_studio.project");
     return r;
 }
 
 std::string traits::msbuild_targets_archetype() {
-    static std::string r("masd.generation.cpp.visual_studio.msbuild_targets");
+    static std::string r("masd.cpp.visual_studio.msbuild_targets");
     return r;
 }
 

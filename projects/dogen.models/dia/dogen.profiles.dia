@@ -108,8 +108,8 @@ space; keep it technical space agnostic.
 #DOGEN masd.injection.reference=masd
 #DOGEN masd.injection.input_technical_space=agnostic
 #DOGEN masd.injection.is_proxy_model=true
-#DOGEN masd.generation.cpp.enabled=false
-#DOGEN masd.generation.csharp.enabled=false#</dia:string>
+#DOGEN masd.cpp.enabled=false
+#DOGEN masd.csharp.enabled=false#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -494,7 +494,7 @@ other layers can then configure features.
       <dia:attribute name="comment">
         <dia:string>#Configures the main options for the C++ backend.
 
-#DOGEN masd.variability.key_prefix=masd.generation.cpp#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.cpp#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="true"/>
@@ -1229,7 +1229,7 @@ Disables all facets in the C++ backend.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.types.enabled#</dia:string>
+            <dia:string>#masd.cpp.types.enabled#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -1310,7 +1310,7 @@ so we disable all facets.
 
 #DOGEN masd.variability.binding_point=element
 #DOGEN masd.variability.stereotype=dogen::pretty_printable
-#DOGEN masd.variability.key_prefix=masd.generation.cpp.io#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.cpp.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1449,7 +1449,7 @@ so we disable all facets.
 
 #DOGEN masd.variability.binding_point=element
 #DOGEN masd.variability.stereotype=dogen::hashable
-#DOGEN masd.variability.key_prefix=masd.generation.cpp.hash#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.cpp.hash#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1586,7 +1586,7 @@ so we disable all facets.
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=element
 #DOGEN masd.variability.stereotype=dogen::serializable
-#DOGEN masd.variability.key_prefix=masd.generation.cpp.serialization#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.cpp.serialization#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1725,7 +1725,7 @@ so we disable all facets.
 
 #DOGEN masd.variability.binding_point=element
 #DOGEN masd.variability.stereotype=dogen::handcrafted::typeable
-#DOGEN masd.variability.key_prefix=masd.generation.cpp.types#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.cpp.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2045,7 +2045,7 @@ so we disable all facets.
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=element
 #DOGEN masd.variability.stereotype=dogen::handcrafted::pretty_printable
-#DOGEN masd.variability.key_prefix=masd.generation.cpp.io#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.cpp.io#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2207,7 +2207,7 @@ so we disable all facets.
 
 #DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.stereotype=dogen::handcrafted::typeable::header_only
-#DOGEN masd.variability.key_prefix=masd.generation.cpp.types#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.cpp.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2608,7 +2608,7 @@ so we disable all facets.
 
 #DOGEN masd.variability.binding_point=element
 #DOGEN masd.variability.stereotype=dogen::handcrafted::typeable::implementation_only
-#DOGEN masd.variability.key_prefix=masd.generation.cpp.types#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.cpp.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2791,7 +2791,7 @@ so we disable all facets.
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.stereotype=dogen::cpp::artefact_formatter
-#DOGEN masd.variability.key_prefix=masd.generation.cpp.types#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.cpp.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3020,7 +3020,7 @@ so we disable all facets.
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.stereotype=dogen::csharp::artefact_formatter
-#DOGEN masd.variability.key_prefix=masd.generation.cpp.types#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.cpp.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3249,7 +3249,7 @@ so we disable all facets.
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.stereotype=dogen::cpp::helper_formatter
-#DOGEN masd.variability.key_prefix=masd.generation.cpp.types#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.cpp.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3520,7 +3520,7 @@ so we disable all facets.
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=global
 #DOGEN masd.variability.stereotype=dogen::csharp::helper_formatter
-#DOGEN masd.variability.key_prefix=masd.generation.cpp.types#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.cpp.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3890,7 +3890,7 @@ for the element.
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=element
 #DOGEN masd.variability.stereotype=dogen::handcrafted::serializable
-#DOGEN masd.variability.key_prefix=masd.generation.cpp.serialization#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.cpp.serialization#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4092,7 +4092,7 @@ for the element.
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=element
 #DOGEN masd.variability.stereotype=dogen::convertible
-#DOGEN masd.variability.key_prefix=masd.generation.cpp.lexical_cast#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.cpp.lexical_cast#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4227,7 +4227,7 @@ for the element.
         <dia:string>#masd::variability::profile#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.variability.key_prefix=masd.generation.cpp#</dia:string>
+        <dia:string>##DOGEN masd.variability.key_prefix=masd.cpp#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4533,7 +4533,7 @@ for the element.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.tests.main.enabled#</dia:string>
+            <dia:string>#masd.cpp.tests.main.enabled#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -4834,7 +4834,7 @@ for the element.
 
 #DOGEN masd.variability.binding_point=element
 #DOGEN masd.variability.stereotype=dogen::untestable
-#DOGEN masd.variability.key_prefix=masd.generation.cpp.tests#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.cpp.tests#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4973,7 +4973,7 @@ for the element.
 
 #DOGEN masd.variability.binding_point=element
 #DOGEN masd.variability.stereotype=dogen::untypable
-#DOGEN masd.variability.key_prefix=masd.generation.cpp.types#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.cpp.types#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5110,7 +5110,7 @@ for the element.
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.variability.binding_point=element
 #DOGEN masd.variability.stereotype=dogen::handcrafted::cmake
-#DOGEN masd.variability.key_prefix=masd.generation.cpp#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.cpp#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5511,7 +5511,7 @@ for the element.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.cpp.standard#</dia:string>
+            <dia:string>#masd.cpp.standard#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -5565,7 +5565,7 @@ for the element.
       <dia:attribute name="comment">
         <dia:string>#Configures the main options for the C# backend.
 
-#DOGEN masd.variability.key_prefix=masd.generation.csharp#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.csharp#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="true"/>

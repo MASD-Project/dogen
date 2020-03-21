@@ -26,11 +26,11 @@ namespace dogen::m2t::cpp::formatters {
 namespace {
 
 dogen::variability::entities::feature
-make_masd_generation_cpp_headers_output_directory() {
+make_masd_cpp_headers_output_directory() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("headers_output_directory");
-    r.name().qualified("masd.generation.cpp.headers_output_directory");
+    r.name().qualified("masd.cpp.headers_output_directory");
     r.description(R"(Override location of public c++ headers.
 
 )");
@@ -41,11 +41,11 @@ make_masd_generation_cpp_headers_output_directory() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_cpp_directory() {
+make_masd_cpp_directory() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("directory");
-    r.name().qualified("masd.generation.cpp.directory");
+    r.name().qualified("masd.cpp.directory");
     r.description(R"(Directory in which to place code for the C++ backend.
 
 )");
@@ -58,11 +58,11 @@ make_masd_generation_cpp_directory() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_cpp_inclusion_required() {
+make_masd_cpp_inclusion_required() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("inclusion_required");
-    r.name().qualified("masd.generation.cpp.inclusion_required");
+    r.name().qualified("masd.cpp.inclusion_required");
     r.description(R"(If true, inclusion is required for this modeling element.
 
 )");
@@ -75,11 +75,11 @@ make_masd_generation_cpp_inclusion_required() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_cpp_source_directory_name() {
+make_masd_cpp_source_directory_name() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("source_directory_name");
-    r.name().qualified("masd.generation.cpp.source_directory_name");
+    r.name().qualified("masd.cpp.source_directory_name");
     r.description(R"(Directory in which to place C++ source files.
 
 )");
@@ -92,11 +92,11 @@ make_masd_generation_cpp_source_directory_name() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_cpp_include_directory_name() {
+make_masd_cpp_include_directory_name() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("include_directory_name");
-    r.name().qualified("masd.generation.cpp.include_directory_name");
+    r.name().qualified("masd.cpp.include_directory_name");
     r.description(R"(Directory in which to place include headers.
 
 )");
@@ -109,11 +109,11 @@ make_masd_generation_cpp_include_directory_name() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_cpp_tests_directory_name() {
+make_masd_cpp_tests_directory_name() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("tests_directory_name");
-    r.name().qualified("masd.generation.cpp.tests_directory_name");
+    r.name().qualified("masd.cpp.tests_directory_name");
     r.description(R"(Directory in which to place c++ tests.
 
 )");
@@ -126,11 +126,11 @@ make_masd_generation_cpp_tests_directory_name() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_cpp_templates_directory_name() {
+make_masd_cpp_templates_directory_name() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("templates_directory_name");
-    r.name().qualified("masd.generation.cpp.templates_directory_name");
+    r.name().qualified("masd.cpp.templates_directory_name");
     r.description(R"(Directory in which to place text templates.
 
 )");
@@ -143,11 +143,11 @@ make_masd_generation_cpp_templates_directory_name() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_cpp_header_file_extension() {
+make_masd_cpp_header_file_extension() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("header_file_extension");
-    r.name().qualified("masd.generation.cpp.header_file_extension");
+    r.name().qualified("masd.cpp.header_file_extension");
     r.description(R"(Extension to use for C++ header files.
 
 )");
@@ -160,11 +160,11 @@ make_masd_generation_cpp_header_file_extension() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_cpp_implementation_file_extension() {
+make_masd_cpp_implementation_file_extension() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("implementation_file_extension");
-    r.name().qualified("masd.generation.cpp.implementation_file_extension");
+    r.name().qualified("masd.cpp.implementation_file_extension");
     r.description(R"(Extension to use for C++ implementation files.
 
 )");
@@ -177,11 +177,11 @@ make_masd_generation_cpp_implementation_file_extension() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_cpp_templates_file_extension() {
+make_masd_cpp_templates_file_extension() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("templates_file_extension");
-    r.name().qualified("masd.generation.cpp.templates_file_extension");
+    r.name().qualified("masd.cpp.templates_file_extension");
     r.description(R"(Extension to use for text templates.
 
 )");
@@ -194,11 +194,11 @@ make_masd_generation_cpp_templates_file_extension() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_cpp_enable_unique_file_names() {
+make_masd_cpp_enable_unique_file_names() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("enable_unique_file_names");
-    r.name().qualified("masd.generation.cpp.enable_unique_file_names");
+    r.name().qualified("masd.cpp.enable_unique_file_names");
     r.description(R"(If true, make all file names unique within a model.
 
 )");
@@ -211,11 +211,11 @@ make_masd_generation_cpp_enable_unique_file_names() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_cpp_aspect_requires_manual_default_constructor() {
+make_masd_cpp_aspect_requires_manual_default_constructor() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("requires_manual_default_constructor");
-    r.name().qualified("masd.generation.cpp.aspect.requires_manual_default_constructor");
+    r.name().qualified("masd.cpp.aspect.requires_manual_default_constructor");
     r.description(R"(If true, the modeling element requires a manual defaul constructor.
 
 )");
@@ -228,11 +228,11 @@ make_masd_generation_cpp_aspect_requires_manual_default_constructor() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_cpp_aspect_requires_manual_move_constructor() {
+make_masd_cpp_aspect_requires_manual_move_constructor() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("requires_manual_move_constructor");
-    r.name().qualified("masd.generation.cpp.aspect.requires_manual_move_constructor");
+    r.name().qualified("masd.cpp.aspect.requires_manual_move_constructor");
     r.description(R"(If true, the modeling element requires a manual move constructor.
 
 )");
@@ -245,11 +245,11 @@ make_masd_generation_cpp_aspect_requires_manual_move_constructor() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_cpp_aspect_requires_stream_manipulators() {
+make_masd_cpp_aspect_requires_stream_manipulators() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("requires_stream_manipulators");
-    r.name().qualified("masd.generation.cpp.aspect.requires_stream_manipulators");
+    r.name().qualified("masd.cpp.aspect.requires_stream_manipulators");
     r.description(R"(If true, the modeling element requires stream manipulators.
 
 )");
@@ -262,11 +262,11 @@ make_masd_generation_cpp_aspect_requires_stream_manipulators() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_cpp_disable_facet_directories() {
+make_masd_cpp_disable_facet_directories() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("disable_facet_directories");
-    r.name().qualified("masd.generation.cpp.disable_facet_directories");
+    r.name().qualified("masd.cpp.disable_facet_directories");
     r.description(R"(If true, facet directories will not be used.
 
 )");
@@ -279,11 +279,11 @@ make_masd_generation_cpp_disable_facet_directories() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_cpp_standard() {
+make_masd_cpp_standard() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("standard");
-    r.name().qualified("masd.generation.cpp.standard");
+    r.name().qualified("masd.cpp.standard");
     r.description(R"(Which version of C++ to use.
 
 )");
@@ -296,11 +296,11 @@ make_masd_generation_cpp_standard() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_cpp_helper_family() {
+make_masd_cpp_helper_family() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("family");
-    r.name().qualified("masd.generation.cpp.helper.family");
+    r.name().qualified("masd.cpp.helper.family");
     r.description(R"(Which family of helpers to use for this modeling element.
 
 )");
@@ -313,11 +313,11 @@ make_masd_generation_cpp_helper_family() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_cpp_streaming_string_conversion_method() {
+make_masd_cpp_streaming_string_conversion_method() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("string_conversion_method");
-    r.name().qualified("masd.generation.cpp.streaming.string_conversion_method");
+    r.name().qualified("masd.cpp.streaming.string_conversion_method");
     r.description(R"(Which conversion method to use to convert strings.
 
 )");
@@ -330,11 +330,11 @@ make_masd_generation_cpp_streaming_string_conversion_method() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_cpp_streaming_requires_quoting() {
+make_masd_cpp_streaming_requires_quoting() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("requires_quoting");
-    r.name().qualified("masd.generation.cpp.streaming.requires_quoting");
+    r.name().qualified("masd.cpp.streaming.requires_quoting");
     r.description(R"(If true, streaming this type must be preceeded by quoting.
 
 )");
@@ -347,11 +347,11 @@ make_masd_generation_cpp_streaming_requires_quoting() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_cpp_streaming_remove_unprintable_characters() {
+make_masd_cpp_streaming_remove_unprintable_characters() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("remove_unprintable_characters");
-    r.name().qualified("masd.generation.cpp.streaming.remove_unprintable_characters");
+    r.name().qualified("masd.cpp.streaming.remove_unprintable_characters");
     r.description(R"(If true, streaming this type requires removing unprintable characters.
 
 )");
@@ -370,26 +370,26 @@ std::list<dogen::variability::entities::feature>
 global_features::make_features() {
     using namespace dogen::variability::entities;
     std::list<dogen::variability::entities::feature> r;
-    r.push_back(make_masd_generation_cpp_headers_output_directory());
-    r.push_back(make_masd_generation_cpp_directory());
-    r.push_back(make_masd_generation_cpp_inclusion_required());
-    r.push_back(make_masd_generation_cpp_source_directory_name());
-    r.push_back(make_masd_generation_cpp_include_directory_name());
-    r.push_back(make_masd_generation_cpp_tests_directory_name());
-    r.push_back(make_masd_generation_cpp_templates_directory_name());
-    r.push_back(make_masd_generation_cpp_header_file_extension());
-    r.push_back(make_masd_generation_cpp_implementation_file_extension());
-    r.push_back(make_masd_generation_cpp_templates_file_extension());
-    r.push_back(make_masd_generation_cpp_enable_unique_file_names());
-    r.push_back(make_masd_generation_cpp_aspect_requires_manual_default_constructor());
-    r.push_back(make_masd_generation_cpp_aspect_requires_manual_move_constructor());
-    r.push_back(make_masd_generation_cpp_aspect_requires_stream_manipulators());
-    r.push_back(make_masd_generation_cpp_disable_facet_directories());
-    r.push_back(make_masd_generation_cpp_standard());
-    r.push_back(make_masd_generation_cpp_helper_family());
-    r.push_back(make_masd_generation_cpp_streaming_string_conversion_method());
-    r.push_back(make_masd_generation_cpp_streaming_requires_quoting());
-    r.push_back(make_masd_generation_cpp_streaming_remove_unprintable_characters());
+    r.push_back(make_masd_cpp_headers_output_directory());
+    r.push_back(make_masd_cpp_directory());
+    r.push_back(make_masd_cpp_inclusion_required());
+    r.push_back(make_masd_cpp_source_directory_name());
+    r.push_back(make_masd_cpp_include_directory_name());
+    r.push_back(make_masd_cpp_tests_directory_name());
+    r.push_back(make_masd_cpp_templates_directory_name());
+    r.push_back(make_masd_cpp_header_file_extension());
+    r.push_back(make_masd_cpp_implementation_file_extension());
+    r.push_back(make_masd_cpp_templates_file_extension());
+    r.push_back(make_masd_cpp_enable_unique_file_names());
+    r.push_back(make_masd_cpp_aspect_requires_manual_default_constructor());
+    r.push_back(make_masd_cpp_aspect_requires_manual_move_constructor());
+    r.push_back(make_masd_cpp_aspect_requires_stream_manipulators());
+    r.push_back(make_masd_cpp_disable_facet_directories());
+    r.push_back(make_masd_cpp_standard());
+    r.push_back(make_masd_cpp_helper_family());
+    r.push_back(make_masd_cpp_streaming_string_conversion_method());
+    r.push_back(make_masd_cpp_streaming_requires_quoting());
+    r.push_back(make_masd_cpp_streaming_remove_unprintable_characters());
     return r;
 }
 

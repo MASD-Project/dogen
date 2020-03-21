@@ -166,8 +166,8 @@
         "masd::entry_point"
       ],
       "tagged_values": {
-        "masd.generation.cpp.types.enabled": "true",
-        "masd.generation.cpp.types.overwrite": "false"
+        "masd.cpp.types.enabled": "true",
+        "masd.cpp.types.overwrite": "false"
       },
       "fallback_element_type": "masd::object"
     },

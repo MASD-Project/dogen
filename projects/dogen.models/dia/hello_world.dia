@@ -241,12 +241,12 @@ level.
 #DOGEN masd.injection.reference=masd
 #DOGEN masd.physical.delete_extra_files=true
 #DOGEN masd.physical.delete_empty_directories=true
-#DOGEN masd.generation.cpp.enabled=true
-#DOGEN masd.generation.cpp.standard=c++-17
-#DOGEN masd.generation.cpp.msbuild.enabled=false
-#DOGEN masd.generation.cpp.visual_studio.project.enabled=false
-#DOGEN masd.generation.cpp.visual_studio.solution.enabled=false
-#DOGEN masd.generation.csharp.enabled=false#</dia:string>
+#DOGEN masd.cpp.enabled=true
+#DOGEN masd.cpp.standard=c++-17
+#DOGEN masd.cpp.msbuild.enabled=false
+#DOGEN masd.cpp.visual_studio.project.enabled=false
+#DOGEN masd.cpp.visual_studio.solution.enabled=false
+#DOGEN masd.csharp.enabled=false#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

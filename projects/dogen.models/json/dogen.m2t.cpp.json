@@ -49,7 +49,7 @@
         "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
-        "masd.generation.cpp.types.class_forward_declarations.enabled": "true"
+        "masd.cpp.types.class_forward_declarations.enabled": "true"
       },
       "fallback_element_type": "masd::object"
     },
@@ -311,8 +311,8 @@
         "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
-        "masd.generation.cpp.io.enabled": "true",
-        "masd.generation.cpp.io.overwrite": "false"
+        "masd.cpp.io.enabled": "true",
+        "masd.cpp.io.overwrite": "false"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -492,7 +492,7 @@
         "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
-        "masd.generation.cpp.types.class_forward_declarations.enabled": "true"
+        "masd.cpp.types.class_forward_declarations.enabled": "true"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -544,7 +544,7 @@
         "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
-        "masd.generation.cpp.types.class_forward_declarations.enabled": "true"
+        "masd.cpp.types.class_forward_declarations.enabled": "true"
       },
       "fallback_element_type": "masd::object"
     },
@@ -1286,8 +1286,8 @@
         "dogen::handcrafted::typeable"
       ],
       "tagged_values": {
-        "masd.generation.cpp.types.class_implementation.formatting_style": "stitch",
-        "masd.generation.cpp.types.class_implementation.overwrite": "true"
+        "masd.cpp.types.class_implementation.formatting_style": "stitch",
+        "masd.cpp.types.class_implementation.overwrite": "true"
       },
       "fallback_element_type": "masd::object"
     },
@@ -1576,7 +1576,7 @@
       ],
       "tagged_values": {
         "masd.variability.generate_static_configuration": "false",
-        "masd.variability.key_prefix": "masd.generation.cpp"
+        "masd.variability.key_prefix": "masd.cpp"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1768,7 +1768,7 @@
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "element",
-        "masd.variability.instantiation_domain_name": "masd.generation.cpp.archetype"
+        "masd.variability.instantiation_domain_name": "masd.cpp.archetype"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -1817,7 +1817,7 @@
         "masd::templating::logic_less_templates"
       ],
       "tagged_values": {
-        "masd.generation.cpp.templates.logic_less_template.overwrite": "false"
+        "masd.cpp.templates.logic_less_template.overwrite": "false"
       },
       "fallback_element_type": "masd::object"
     },
@@ -1827,7 +1827,7 @@
         "masd::templating::logic_less_templates"
       ],
       "tagged_values": {
-        "masd.generation.cpp.templates.logic_less_template.overwrite": "false"
+        "masd.cpp.templates.logic_less_template.overwrite": "false"
       },
       "fallback_element_type": "masd::object"
     },
@@ -1837,7 +1837,7 @@
         "masd::templating::logic_less_templates"
       ],
       "tagged_values": {
-        "masd.generation.cpp.templates.logic_less_template.overwrite": "false"
+        "masd.cpp.templates.logic_less_template.overwrite": "false"
       },
       "fallback_element_type": "masd::object"
     },
@@ -1847,7 +1847,7 @@
         "masd::templating::logic_less_templates"
       ],
       "tagged_values": {
-        "masd.generation.cpp.templates.logic_less_template.overwrite": "false"
+        "masd.cpp.templates.logic_less_template.overwrite": "false"
       },
       "fallback_element_type": "masd::object"
     },
@@ -1857,7 +1857,7 @@
         "masd::templating::logic_less_templates"
       ],
       "tagged_values": {
-        "masd.generation.cpp.templates.logic_less_template.overwrite": "false"
+        "masd.cpp.templates.logic_less_template.overwrite": "false"
       },
       "fallback_element_type": "masd::object"
     },
@@ -1867,7 +1867,7 @@
         "masd::templating::logic_less_templates"
       ],
       "tagged_values": {
-        "masd.generation.cpp.templates.logic_less_template.overwrite": "false"
+        "masd.cpp.templates.logic_less_template.overwrite": "false"
       },
       "fallback_element_type": "masd::object"
     },

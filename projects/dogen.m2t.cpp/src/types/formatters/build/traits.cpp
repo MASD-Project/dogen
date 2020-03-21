@@ -23,7 +23,7 @@
 namespace dogen::m2t::cpp::formatters::build {
 
 std::string traits::facet() {
-    static std::string r("masd.generation.cpp.build");
+    static std::string r("masd.cpp.build");
     return r;
 }
 
@@ -33,12 +33,12 @@ std::string traits::canonical_archetype() {
 }
 
 std::string traits::include_cmakelists_archetype() {
-    static std::string r("masd.generation.cpp.build.include_cmakelists");
+    static std::string r("masd.cpp.build.include_cmakelists");
     return r;
 }
 
 std::string traits::source_cmakelists_archetype() {
-    static std::string r("masd.generation.cpp.build.source_cmakelists");
+    static std::string r("masd.cpp.build.source_cmakelists");
     return r;
 }
 

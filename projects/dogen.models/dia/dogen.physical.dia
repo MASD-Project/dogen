@@ -7783,7 +7783,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
       <dia:attribute name="comment">
         <dia:string>#Operation to perform to a given artefact.
 
-#DOGEN masd.generation.cpp.hash.enabled=true#</dia:string>
+#DOGEN masd.cpp.hash.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -7989,7 +7989,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
       <dia:attribute name="comment">
         <dia:string>#Reasons for performing an operation.
 
-#DOGEN masd.generation.cpp.hash.enabled=true#</dia:string>
+#DOGEN masd.cpp.hash.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -10294,7 +10294,7 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:string>#dogen::typeable, dogen::pretty_printable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN masd.generation.cpp.types.class_forward_declarations.enabled=true#</dia:string>
+        <dia:string>##DOGEN masd.cpp.types.class_forward_declarations.enabled=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

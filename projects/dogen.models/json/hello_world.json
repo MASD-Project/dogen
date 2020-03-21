@@ -8,12 +8,12 @@
     "masd.injection.reference": "masd",
     "masd.physical.delete_extra_files": "true",
     "masd.physical.delete_empty_directories": "true",
-    "masd.generation.cpp.enabled": "true",
-    "masd.generation.cpp.standard": "c++-17",
-    "masd.generation.cpp.msbuild.enabled": "false",
-    "masd.generation.cpp.visual_studio.project.enabled": "false",
-    "masd.generation.cpp.visual_studio.solution.enabled": "false",
-    "masd.generation.csharp.enabled": "false"
+    "masd.cpp.enabled": "true",
+    "masd.cpp.standard": "c++-17",
+    "masd.cpp.msbuild.enabled": "false",
+    "masd.cpp.visual_studio.project.enabled": "false",
+    "masd.cpp.visual_studio.solution.enabled": "false",
+    "masd.csharp.enabled": "false"
   },
   "elements": [
     {

@@ -2288,9 +2288,9 @@ space; keep it technical space agnostic.
 #DOGEN masd.injection.model_modules=masd
 #DOGEN masd.injection.input_technical_space=agnostic
 #DOGEN masd.injection.is_proxy_model=true
-#DOGEN masd.generation.cpp.enabled=false
-#DOGEN masd.generation.cpp.serialization.enabled=false
-#DOGEN masd.generation.csharp.enabled=false#</dia:string>
+#DOGEN masd.cpp.enabled=false
+#DOGEN masd.cpp.serialization.enabled=false
+#DOGEN masd.csharp.enabled=false#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

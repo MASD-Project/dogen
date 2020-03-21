@@ -210,7 +210,7 @@
         "masd::exception"
       ],
       "tagged_values": {
-        "masd.generation.cpp.types.class_forward_declarations.enabled": "false"
+        "masd.cpp.types.class_forward_declarations.enabled": "false"
       },
       "fallback_element_type": "masd::object"
     },

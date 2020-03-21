@@ -10,99 +10,99 @@
       "name": "shared_ptr",
       "tagged_values": {
         "masd.mapping.target": "masd.lam.core.pointer",
-        "masd.generation.cpp.helper.family": "SmartPointer",
+        "masd.cpp.helper.family": "SmartPointer",
         "masd.type_parameters.count": 1,
         "masd.type_parameters.always_in_heap": true,
-        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<boost/shared_ptr.hpp>",
-        "masd.generation.cpp.types.primitive_header.primary_inclusion_directive": "<boost/shared_ptr.hpp>",
-        "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/shared_ptr.hpp>",
-        "masd.generation.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/serialization/shared_ptr.hpp>"
+        "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/shared_ptr.hpp>",
+        "masd.cpp.types.primitive_header.primary_inclusion_directive": "<boost/shared_ptr.hpp>",
+        "masd.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/shared_ptr.hpp>",
+        "masd.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/serialization/shared_ptr.hpp>"
       }
     },
     {
       "name": "weak_ptr",
       "tagged_values": {
-        "masd.generation.cpp.helper.family": "SmartPointer",
+        "masd.cpp.helper.family": "SmartPointer",
         "masd.type_parameters.count": 1,
         "masd.type_parameters.always_in_heap": true,
-        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<boost/weak_ptr.hpp>",
-        "masd.generation.cpp.types.primitive_header.primary_inclusion_directive": "<boost/weak_ptr.hpp>",
-        "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/weak_ptr.hpp>",
-        "masd.generation.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/serialization/weak_ptr.hpp>"
+        "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/weak_ptr.hpp>",
+        "masd.cpp.types.primitive_header.primary_inclusion_directive": "<boost/weak_ptr.hpp>",
+        "masd.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/weak_ptr.hpp>",
+        "masd.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/serialization/weak_ptr.hpp>"
       }
     },
     {
       "name": "scoped_ptr",
       "tagged_values": {
-        "masd.generation.cpp.helper.family": "SmartPointer",
+        "masd.cpp.helper.family": "SmartPointer",
         "masd.type_parameters.count": 1,
         "masd.type_parameters.always_in_heap": true,
-        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<boost/scoped_ptr.hpp>",
-        "masd.generation.cpp.types.primitive_header.primary_inclusion_directive": "<boost/scoped_ptr.hpp>",
-        "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/scoped_ptr.hpp>",
-        "masd.generation.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/serialization/scoped_ptr.hpp>"
+        "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/scoped_ptr.hpp>",
+        "masd.cpp.types.primitive_header.primary_inclusion_directive": "<boost/scoped_ptr.hpp>",
+        "masd.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/scoped_ptr.hpp>",
+        "masd.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/serialization/scoped_ptr.hpp>"
       }
     },
     {
       "name": "optional",
       "tagged_values": {
-        "masd.generation.cpp.helper.family": "Optional",
+        "masd.cpp.helper.family": "Optional",
         "masd.type_parameters.count": 1,
         "masd.type_parameters.always_in_heap": false,
-        "masd.generation.cpp.aspect.requires_manual_move_constructor": true,
-        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<boost/optional.hpp>",
-        "masd.generation.cpp.types.primitive_header.primary_inclusion_directive": "<boost/optional.hpp>",
-        "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/optional.hpp>",
-        "masd.generation.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/serialization/optional.hpp>"
+        "masd.cpp.aspect.requires_manual_move_constructor": true,
+        "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/optional.hpp>",
+        "masd.cpp.types.primitive_header.primary_inclusion_directive": "<boost/optional.hpp>",
+        "masd.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/optional.hpp>",
+        "masd.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/serialization/optional.hpp>"
       }
     },
     {
       "name": "variant",
       "tagged_values": {
-        "masd.generation.cpp.helper.family": "BoostVariant",
+        "masd.cpp.helper.family": "BoostVariant",
         "masd.type_parameters.variable_number_of_parameters": true,
-        "masd.generation.cpp.aspect.requires_manual_move_constructor": true,
-        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<boost/variant.hpp>",
-        "masd.generation.cpp.types.primitive_header.primary_inclusion_directive": "<boost/variant.hpp>",
-        "masd.generation.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/serialization/variant.hpp>",
-        "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/variant.hpp>",
-        "masd.generation.cpp.io.class_header.primary_inclusion_directive": "<boost/variant/apply_visitor.hpp>",
-        "masd.generation.cpp.io.primitive_header.primary_inclusion_directive": "<boost/variant/apply_visitor.hpp>",
-        "masd.generation.cpp.hash.class_header.primary_inclusion_directive": "<boost/variant/apply_visitor.hpp>",
-        "masd.generation.cpp.hash.primitive_header.primary_inclusion_directive": "<boost/variant/apply_visitor.hpp>"
+        "masd.cpp.aspect.requires_manual_move_constructor": true,
+        "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/variant.hpp>",
+        "masd.cpp.types.primitive_header.primary_inclusion_directive": "<boost/variant.hpp>",
+        "masd.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/serialization/variant.hpp>",
+        "masd.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/variant.hpp>",
+        "masd.cpp.io.class_header.primary_inclusion_directive": "<boost/variant/apply_visitor.hpp>",
+        "masd.cpp.io.primitive_header.primary_inclusion_directive": "<boost/variant/apply_visitor.hpp>",
+        "masd.cpp.hash.class_header.primary_inclusion_directive": "<boost/variant/apply_visitor.hpp>",
+        "masd.cpp.hash.primitive_header.primary_inclusion_directive": "<boost/variant/apply_visitor.hpp>"
       }
     },
     {
       "name": "asio::io_service",
       "tagged_values": {
-        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<boost/asio/io_service.hpp>",
-        "masd.generation.cpp.types.primitive_header.primary_inclusion_directive": "<boost/asio/io_service.hpp>"
+        "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/asio/io_service.hpp>",
+        "masd.cpp.types.primitive_header.primary_inclusion_directive": "<boost/asio/io_service.hpp>"
       }
     },
     {
       "name": "asio::ip::tcp::socket",
       "tagged_values": {
-        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>",
-        "masd.generation.cpp.types.primitive_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>"
+        "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>",
+        "masd.cpp.types.primitive_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>"
       }
     },
     {
       "name": "asio::ip::tcp::acceptor",
       "tagged_values": {
-        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>",
-        "masd.generation.cpp.types.primitive_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>"
+        "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>",
+        "masd.cpp.types.primitive_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>"
       }
     },
     {
       "name": "filesystem::path",
       "tagged_values": {
-        "masd.generation.cpp.helper.family": "BoostPath",
-        "masd.generation.cpp.streaming.string_conversion_method": "generic_string()",
-        "masd.generation.cpp.aspect.requires_manual_move_constructor": true,
-        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<boost/filesystem/path.hpp>",
-        "masd.generation.cpp.types.primitive_header.primary_inclusion_directive": "<boost/filesystem/path.hpp>",
-        "masd.generation.cpp.test_data.class_header.primary_inclusion_directive": "<sstream>",
-        "masd.generation.cpp.test_data.primitive_header.primary_inclusion_directive": "<sstream>"
+        "masd.cpp.helper.family": "BoostPath",
+        "masd.cpp.streaming.string_conversion_method": "generic_string()",
+        "masd.cpp.aspect.requires_manual_move_constructor": true,
+        "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/filesystem/path.hpp>",
+        "masd.cpp.types.primitive_header.primary_inclusion_directive": "<boost/filesystem/path.hpp>",
+        "masd.cpp.test_data.class_header.primary_inclusion_directive": "<sstream>",
+        "masd.cpp.test_data.primitive_header.primary_inclusion_directive": "<sstream>"
       }
     },
     {
@@ -110,16 +110,16 @@
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "masd.mapping.target": "masd.lam.chrono.date",
-        "masd.generation.cpp.helper.family": "BoostDate",
-        "masd.generation.cpp.streaming.requires_quoting": true,
-        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<boost/date_time/gregorian/gregorian_types.hpp>",
-        "masd.generation.cpp.types.primitive_header.primary_inclusion_directive": "<boost/date_time/gregorian/gregorian_types.hpp>",
-        "masd.generation.cpp.io.class_header.primary_inclusion_directive": "<boost/date_time/gregorian/gregorian.hpp>",
-        "masd.generation.cpp.io.primitive_header.primary_inclusion_directive": "<boost/date_time/gregorian/gregorian.hpp>",
-        "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/date_time/gregorian/greg_serialize.hpp>",
-        "masd.generation.cpp.serialization.class_header.secondary_inclusion_directive": "<boost/date_time/gregorian/gregorian.hpp>",
-        "masd.generation.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/date_time/gregorian/greg_serialize.hpp>",
-        "masd.generation.cpp.serialization.primitive_header.secondary_inclusion_directive": "<boost/date_time/gregorian/gregorian.hpp>"
+        "masd.cpp.helper.family": "BoostDate",
+        "masd.cpp.streaming.requires_quoting": true,
+        "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/date_time/gregorian/gregorian_types.hpp>",
+        "masd.cpp.types.primitive_header.primary_inclusion_directive": "<boost/date_time/gregorian/gregorian_types.hpp>",
+        "masd.cpp.io.class_header.primary_inclusion_directive": "<boost/date_time/gregorian/gregorian.hpp>",
+        "masd.cpp.io.primitive_header.primary_inclusion_directive": "<boost/date_time/gregorian/gregorian.hpp>",
+        "masd.cpp.serialization.class_header.primary_inclusion_directive": "<boost/date_time/gregorian/greg_serialize.hpp>",
+        "masd.cpp.serialization.class_header.secondary_inclusion_directive": "<boost/date_time/gregorian/gregorian.hpp>",
+        "masd.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/date_time/gregorian/greg_serialize.hpp>",
+        "masd.cpp.serialization.primitive_header.secondary_inclusion_directive": "<boost/date_time/gregorian/gregorian.hpp>"
       }
     },
     {
@@ -127,16 +127,16 @@
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "masd.mapping.target": "masd.lam.chrono.date_time",
-        "masd.generation.cpp.helper.family": "BoostPTime",
-        "masd.generation.cpp.streaming.requires_quoting": true,
-        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time_types.hpp>",
-        "masd.generation.cpp.types.primitive_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time_types.hpp>",
-        "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/time_serialize.hpp>",
-        "masd.generation.cpp.serialization.class_header.secondary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>",
-        "masd.generation.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/date_time/posix_time/time_serialize.hpp>",
-        "masd.generation.cpp.serialization.primitive_header.secondary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>",
-        "masd.generation.cpp.io.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>",
-        "masd.generation.cpp.io.primitive_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>"
+        "masd.cpp.helper.family": "BoostPTime",
+        "masd.cpp.streaming.requires_quoting": true,
+        "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time_types.hpp>",
+        "masd.cpp.types.primitive_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time_types.hpp>",
+        "masd.cpp.serialization.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/time_serialize.hpp>",
+        "masd.cpp.serialization.class_header.secondary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>",
+        "masd.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/date_time/posix_time/time_serialize.hpp>",
+        "masd.cpp.serialization.primitive_header.secondary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>",
+        "masd.cpp.io.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>",
+        "masd.cpp.io.primitive_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>"
       }
     },
     {
@@ -144,30 +144,30 @@
       "can_be_primitive_underlier": true,
       "tagged_values": {
         "masd.mapping.target": "masd.lam.chrono.time",
-        "masd.generation.cpp.helper.family": "BoostTimeDuration",
-        "masd.generation.cpp.streaming.requires_quoting": true,
-        "masd.generation.cpp.aspect.requires_manual_move_constructor": true,
-        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time_types.hpp>",
-        "masd.generation.cpp.types.primitive_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time_types.hpp>",
-        "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/time_serialize.hpp>",
-        "masd.generation.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/date_time/posix_time/time_serialize.hpp>",
-        "masd.generation.cpp.io.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>",
-        "masd.generation.cpp.io.primitive_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>"
+        "masd.cpp.helper.family": "BoostTimeDuration",
+        "masd.cpp.streaming.requires_quoting": true,
+        "masd.cpp.aspect.requires_manual_move_constructor": true,
+        "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time_types.hpp>",
+        "masd.cpp.types.primitive_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time_types.hpp>",
+        "masd.cpp.serialization.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/time_serialize.hpp>",
+        "masd.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/date_time/posix_time/time_serialize.hpp>",
+        "masd.cpp.io.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>",
+        "masd.cpp.io.primitive_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>"
       }
     },
     {
       "name": "property_tree::ptree",
       "tagged_values": {
-        "masd.generation.cpp.helper.family": "BoostPTree",
-        "masd.generation.cpp.aspect.requires_manual_move_constructor": true,
-        "masd.generation.cpp.types.class_header.primary_inclusion_directive": "<boost/property_tree/ptree.hpp>",
-        "masd.generation.cpp.types.primitive_header.primary_inclusion_directive": "<boost/property_tree/ptree.hpp>",
-        "masd.generation.cpp.serialization.class_header.primary_inclusion_directive": "<boost/property_tree/ptree_serialization.hpp>",
-        "masd.generation.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/property_tree/ptree_serialization.hpp>",
-        "masd.generation.cpp.io.class_header.primary_inclusion_directive": "<boost/property_tree/json_parser.hpp>",
-        "masd.generation.cpp.io.class_header.secondary_inclusion_directive": "<boost/algorithm/string.hpp>",
-        "masd.generation.cpp.io.primitive_header.primary_inclusion_directive": "<boost/property_tree/json_parser.hpp>",
-        "masd.generation.cpp.io.primitive_header.secondary_inclusion_directive": "<boost/algorithm/string.hpp>"
+        "masd.cpp.helper.family": "BoostPTree",
+        "masd.cpp.aspect.requires_manual_move_constructor": true,
+        "masd.cpp.types.class_header.primary_inclusion_directive": "<boost/property_tree/ptree.hpp>",
+        "masd.cpp.types.primitive_header.primary_inclusion_directive": "<boost/property_tree/ptree.hpp>",
+        "masd.cpp.serialization.class_header.primary_inclusion_directive": "<boost/property_tree/ptree_serialization.hpp>",
+        "masd.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/property_tree/ptree_serialization.hpp>",
+        "masd.cpp.io.class_header.primary_inclusion_directive": "<boost/property_tree/json_parser.hpp>",
+        "masd.cpp.io.class_header.secondary_inclusion_directive": "<boost/algorithm/string.hpp>",
+        "masd.cpp.io.primitive_header.primary_inclusion_directive": "<boost/property_tree/json_parser.hpp>",
+        "masd.cpp.io.primitive_header.secondary_inclusion_directive": "<boost/algorithm/string.hpp>"
       }
     }
   ]

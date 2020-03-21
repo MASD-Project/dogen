@@ -26,11 +26,11 @@ namespace dogen::m2t::csharp::formatters {
 namespace {
 
 dogen::variability::entities::feature
-make_masd_generation_csharp_directory() {
+make_masd_csharp_directory() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("directory");
-    r.name().qualified("masd.generation.csharp.directory");
+    r.name().qualified("masd.csharp.directory");
     r.description(R"(
 )");
     const auto vt(value_type::text);
@@ -42,11 +42,11 @@ make_masd_generation_csharp_directory() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_csharp_aspect_requires_static_reference_equals() {
+make_masd_csharp_aspect_requires_static_reference_equals() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("requires_static_reference_equals");
-    r.name().qualified("masd.generation.csharp.aspect.requires_static_reference_equals");
+    r.name().qualified("masd.csharp.aspect.requires_static_reference_equals");
     r.description(R"(
 )");
     const auto vt(value_type::boolean);
@@ -58,11 +58,11 @@ make_masd_generation_csharp_aspect_requires_static_reference_equals() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_csharp_helper_family() {
+make_masd_csharp_helper_family() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("family");
-    r.name().qualified("masd.generation.csharp.helper.family");
+    r.name().qualified("masd.csharp.helper.family");
     r.description(R"(
 )");
     const auto vt(value_type::text);
@@ -74,11 +74,11 @@ make_masd_generation_csharp_helper_family() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_csharp_assistant_requires_assistance() {
+make_masd_csharp_assistant_requires_assistance() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("requires_assistance");
-    r.name().qualified("masd.generation.csharp.assistant.requires_assistance");
+    r.name().qualified("masd.csharp.assistant.requires_assistance");
     r.description(R"(
 )");
     const auto vt(value_type::boolean);
@@ -90,11 +90,11 @@ make_masd_generation_csharp_assistant_requires_assistance() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_csharp_assistant_method_postfix() {
+make_masd_csharp_assistant_method_postfix() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("method_postfix");
-    r.name().qualified("masd.generation.csharp.assistant.method_postfix");
+    r.name().qualified("masd.csharp.assistant.method_postfix");
     r.description(R"(
 )");
     const auto vt(value_type::text);
@@ -110,11 +110,11 @@ std::list<dogen::variability::entities::feature>
 global_features::make_features() {
     using namespace dogen::variability::entities;
     std::list<dogen::variability::entities::feature> r;
-    r.push_back(make_masd_generation_csharp_directory());
-    r.push_back(make_masd_generation_csharp_aspect_requires_static_reference_equals());
-    r.push_back(make_masd_generation_csharp_helper_family());
-    r.push_back(make_masd_generation_csharp_assistant_requires_assistance());
-    r.push_back(make_masd_generation_csharp_assistant_method_postfix());
+    r.push_back(make_masd_csharp_directory());
+    r.push_back(make_masd_csharp_aspect_requires_static_reference_equals());
+    r.push_back(make_masd_csharp_helper_family());
+    r.push_back(make_masd_csharp_assistant_requires_assistance());
+    r.push_back(make_masd_csharp_assistant_method_postfix());
     return r;
 }
 
