@@ -28,7 +28,7 @@ context::context(
     const formattables::element_properties& element_properties,
     const formattables::model& fm,
     const std::unordered_map<std::string, std::unordered_map<std::string,
-    std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers)
+    std::list<std::shared_ptr<helper_transform>>>>& helpers)
     : enabled_archetype_for_element_(enabled_archetype_for_element),
       element_properties_(element_properties), model_(fm),
       helpers_(helpers) { }
@@ -50,7 +50,7 @@ const formattables::model& context::model() const {
 const std::unordered_map<
     std::string,
     std::unordered_map<
-        std::string, std::list<std::shared_ptr<helper_formatter_interface>>>>&
+        std::string, std::list<std::shared_ptr<helper_transform>>>>&
 context::helpers() const {
     return helpers_;
 }

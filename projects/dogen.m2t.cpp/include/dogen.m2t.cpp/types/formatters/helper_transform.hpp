@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_M2T_CPP_TYPES_FORMATTERS_HELPER_FORMATTER_INTERFACE_HPP
-#define DOGEN_M2T_CPP_TYPES_FORMATTERS_HELPER_FORMATTER_INTERFACE_HPP
+#ifndef DOGEN_M2T_CPP_TYPES_FORMATTERS_HELPER_TRANSFORM_HPP
+#define DOGEN_M2T_CPP_TYPES_FORMATTERS_HELPER_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,12 +32,12 @@
 
 namespace dogen::m2t::cpp::formatters {
 
-class helper_formatter_interface {
+class helper_transform {
 public:
-    helper_formatter_interface() = default;
-    helper_formatter_interface(const helper_formatter_interface&) = delete;
-    helper_formatter_interface(helper_formatter_interface&&) = default;
-    virtual ~helper_formatter_interface() noexcept = 0;
+    helper_transform() = default;
+    helper_transform(const helper_transform&) = delete;
+    helper_transform(helper_transform&&) = default;
+    virtual ~helper_transform() noexcept = 0;
 
 public:
     virtual std::string id() const = 0;

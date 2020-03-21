@@ -19,7 +19,7 @@
  *
  */
 #include "dogen.m2t.cpp/types/formatters/model_to_text_transform.hpp"
-#include "dogen.m2t.cpp/types/formatters/helper_formatter_interface.hpp"
+#include "dogen.m2t.cpp/types/formatters/helper_transform.hpp"
 #include "dogen.m2t.cpp/types/formatters/repository.hpp"
 
 namespace dogen::m2t::cpp::formatters {
@@ -52,7 +52,7 @@ std::unordered_map<
     std::string, std::unordered_map<
                      std::string,
                      std::list<
-                         std::shared_ptr<helper_formatter_interface>>>>&
+                         std::shared_ptr<helper_transform>>>>&
     repository::helper_formatters() {
     return helper_formatters_;
 }
@@ -72,7 +72,7 @@ const std::unordered_map<
     std::string, std::unordered_map<
                      std::string,
                      std::list<
-                         std::shared_ptr<helper_formatter_interface>>>>&
+                         std::shared_ptr<helper_transform>>>>&
     repository::helper_formatters() const {
     return helper_formatters_;
 }

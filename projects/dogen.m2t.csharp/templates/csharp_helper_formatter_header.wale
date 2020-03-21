@@ -1,4 +1,4 @@
-class {{class.simple_name}} : public helper_formatter_interface {
+class {{class.simple_name}} : public helper_transform {
 public:
     std::string id() const override;
     std::string family() const override;

@@ -18,10 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.m2t.cpp/types/formatters/helper_formatter_interface.hpp"
+#ifndef DOGEN_M2T_CPP_TYPES_FORMATTERS_HELPER_TRANSFORM_FWD_HPP
+#define DOGEN_M2T_CPP_TYPES_FORMATTERS_HELPER_TRANSFORM_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen::m2t::cpp::formatters {
 
-helper_formatter_interface::~helper_formatter_interface() noexcept { }
+class helper_transform;
 
 }
+
+#endif

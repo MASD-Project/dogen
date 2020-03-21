@@ -334,7 +334,7 @@ public:
     std::string comment_inline(const std::string& c) const;
 
 private:
-    std::list<std::shared_ptr<formatters::helper_formatter_interface>>
+    std::list<std::shared_ptr<formatters::helper_transform>>
     get_helpers(const formattables::helper_properties& hp) const;
 
     std::string streaming_for_type(const formattables::streaming_properties& sp,

@@ -130,7 +130,7 @@ register_formatter(std::shared_ptr<model_to_text_transform> f) {
 }
 
 void registrar::register_formatter_helper(
-    std::shared_ptr<helper_formatter_interface> fh) {
+    std::shared_ptr<helper_transform> fh) {
 
     // note: not logging by design
     if (!fh) {

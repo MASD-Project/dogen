@@ -37,7 +37,7 @@
 #include "dogen.m2t.cpp/io/formattables/helper_properties_io.hpp"
 #include "dogen.m2t.cpp/types/formatters/hash/traits.hpp"
 #include "dogen.m2t.cpp/types/formatters/model_to_text_transform.hpp"
-#include "dogen.m2t.cpp/types/formatters/helper_formatter_interface.hpp"
+#include "dogen.m2t.cpp/types/formatters/helper_transform.hpp"
 #include "dogen.m2t.cpp/types/formattables/expansion_error.hpp"
 #include "dogen.m2t.cpp/types/formattables/helper_expander.hpp"
 

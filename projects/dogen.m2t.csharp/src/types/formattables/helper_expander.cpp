@@ -33,7 +33,7 @@
 #include "dogen.m2t.csharp/io/formattables/helper_properties_io.hpp"
 #include "dogen.m2t.csharp/io/formattables/helper_configuration_io.hpp"
 #include "dogen.m2t.csharp/types/formattables/expansion_error.hpp"
-#include "dogen.m2t.csharp/types/formatters/helper_formatter_interface.hpp"
+#include "dogen.m2t.csharp/types/formatters/helper_transform.hpp"
 #include "dogen.m2t.csharp/types/formattables/helper_expander.hpp"
 
 namespace {

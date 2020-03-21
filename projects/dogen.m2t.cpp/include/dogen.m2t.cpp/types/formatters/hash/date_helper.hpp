@@ -26,11 +26,11 @@
 #endif
 
 #include <algorithm>
-#include "dogen.m2t.cpp/types/formatters/helper_formatter_interface.hpp"
+#include "dogen.m2t.cpp/types/formatters/helper_transform.hpp"
 
 namespace dogen::m2t::cpp::formatters::hash {
 
-class date_helper : public helper_formatter_interface {
+class date_helper : public helper_transform {
 public:
     std::string id() const override;
     std::string family() const override;

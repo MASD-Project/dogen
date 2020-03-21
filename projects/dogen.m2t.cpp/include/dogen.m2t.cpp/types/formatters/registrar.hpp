@@ -34,7 +34,7 @@
 #include "dogen.physical/types/entities/locations_group.hpp"
 #include "dogen.physical/types/entities/location_repository_parts.hpp"
 #include "dogen.m2t.cpp/types/formatters/repository.hpp"
-#include "dogen.m2t.cpp/types/formatters/helper_formatter_interface.hpp"
+#include "dogen.m2t.cpp/types/formatters/helper_transform.hpp"
 #include "dogen.m2t.cpp/types/formatters/model_to_text_transform.hpp"
 
 
@@ -50,7 +50,7 @@ private:
      */
     /**@{*/
     void validate(std::shared_ptr<model_to_text_transform> f) const;
-    void validate(std::shared_ptr<helper_formatter_interface> hf) const;
+    void validate(std::shared_ptr<helper_transform> hf) const;
     /**@{*/
 
 public:
@@ -69,7 +69,7 @@ public:
      * @brief Registers a helper formatter.
      */
     void register_helper_formatter(
-        std::shared_ptr<helper_formatter_interface> hf);
+        std::shared_ptr<helper_transform> hf);
 
 public:
     /**
@@ -108,7 +108,7 @@ public:
         std::string,
         std::unordered_map<std::string,
                            std::list<
-                               std::shared_ptr<helper_formatter_interface>>>>&
+                               std::shared_ptr<helper_transform>>>>&
     helper_formatters() const;
 
 private:

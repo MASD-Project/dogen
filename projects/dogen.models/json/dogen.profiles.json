@@ -561,7 +561,7 @@
         {
           "name": "masd.generalization.parent",
           "type": "",
-          "value": "formatters::helper_formatter_interface"
+          "value": "formatters::helper_transform"
         }
       ]
     },

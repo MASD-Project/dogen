@@ -22,7 +22,7 @@
 #include <ostream>
 #include <forward_list>
 #include "dogen.m2t.csharp/types/formatters/model_to_text_transform.hpp"
-#include "dogen.m2t.csharp/types/formatters/helper_formatter_interface.hpp"
+#include "dogen.m2t.csharp/types/formatters/helper_transform.hpp"
 #include "dogen.m2t.csharp/io/formatters/repository_io.hpp"
 
 namespace dogen::m2t::csharp::formatters {
@@ -42,7 +42,7 @@ inline std::ostream& to_stream(std::ostream& s, const std::string& key,
 
 inline std::ostream& to_stream(std::ostream& s,
     const std::unordered_map<std::string, std::unordered_map<std::string,
-    std::list<std::shared_ptr<helper_formatter_interface>>>>& helpers) {
+    std::list<std::shared_ptr<helper_transform>>>>& helpers) {
     s << "\"helper_formatters\": " << "[ ";
 
     for(auto i(helpers.begin()); i != helpers.end(); ++i) {

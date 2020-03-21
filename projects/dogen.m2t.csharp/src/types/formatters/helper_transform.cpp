@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.m2t.csharp/types/formatters/helper_formatter_interface.hpp"
+#include "dogen.m2t.csharp/types/formatters/helper_transform.hpp"
 
 namespace dogen::m2t::csharp::formatters {
 
-helper_formatter_interface::~helper_formatter_interface() noexcept { }
+helper_transform::~helper_transform() noexcept { }
 
 }

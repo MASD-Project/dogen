@@ -490,7 +490,7 @@ std::string assistant::comment_inline(const std::string& c) const {
     return s.str();
 }
 
-std::list<std::shared_ptr<formatters::helper_formatter_interface>>
+std::list<std::shared_ptr<formatters::helper_transform>>
 assistant::get_helpers(const formattables::helper_properties& hp) const {
     /*
      * A family must have at least one helper registered. This is a
@@ -517,7 +517,7 @@ assistant::get_helpers(const formattables::helper_properties& hp) const {
 
     BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
                              << archetype_location_.archetype();
-    return std::list<std::shared_ptr<formatters::helper_formatter_interface>>();
+    return std::list<std::shared_ptr<formatters::helper_transform>>();
 }
 
 bool assistant::is_io() const {

@@ -197,7 +197,7 @@ make_argument_name(const logical::entities::attribute& attr) const {
     return r;
 }
 
-std::list<std::shared_ptr<formatters::helper_formatter_interface>>
+std::list<std::shared_ptr<formatters::helper_transform>>
 assistant::get_helpers(const formattables::helper_properties& hp) const {
     const auto fam(hp.current().family());
 
@@ -233,7 +233,7 @@ assistant::get_helpers(const formattables::helper_properties& hp) const {
 
     BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
                              << archetype_location_.archetype();
-    return std::list<std::shared_ptr<formatters::helper_formatter_interface>>();
+    return std::list<std::shared_ptr<formatters::helper_transform>>();
 }
 
 boost::optional<formattables::assistant_properties> assistant::

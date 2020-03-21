@@ -44,7 +44,7 @@ std::unordered_map<
     std::string, std::unordered_map<
                      std::string,
                      std::list<
-                         std::shared_ptr<helper_formatter_interface>>>>&
+                         std::shared_ptr<helper_transform>>>>&
     repository::helper_formatters() {
     return helper_formatters_;
 }
@@ -71,7 +71,7 @@ const std::unordered_map<
     std::string, std::unordered_map<
                      std::string,
                      std::list<
-                         std::shared_ptr<helper_formatter_interface>>>>&
+                         std::shared_ptr<helper_transform>>>>&
     repository::helper_formatters() const {
     return helper_formatters_;
 }

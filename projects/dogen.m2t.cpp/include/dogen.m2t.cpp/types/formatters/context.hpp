@@ -33,7 +33,7 @@
 #include "dogen.m2t/types/entities/element_archetype.hpp"
 #include "dogen.m2t.cpp/types/formattables/model.hpp"
 #include "dogen.m2t.cpp/types/formattables/element_properties.hpp"
-#include "dogen.m2t.cpp/types/formatters/helper_formatter_interface.hpp"
+#include "dogen.m2t.cpp/types/formatters/helper_transform.hpp"
 
 namespace dogen::m2t::cpp::formatters {
 
@@ -47,7 +47,7 @@ public:
         const formattables::element_properties& element_properties,
         const formattables::model& fm, const std::unordered_map<std::string,
         std::unordered_map<std::string, std::list<std::shared_ptr<
-        helper_formatter_interface>>>>& helpers);
+        helper_transform>>>>& helpers);
 
 public:
     const std::unordered_set<m2t::entities::element_archetype>&
@@ -61,7 +61,7 @@ public:
         std::string,
         std::unordered_map<
             std::string,
-            std::list<std::shared_ptr<helper_formatter_interface>>>>&
+            std::list<std::shared_ptr<helper_transform>>>>&
         helpers() const;
 
 private:
@@ -73,7 +73,7 @@ private:
         std::string,
         std::unordered_map<
             std::string, std::list<
-                             std::shared_ptr<helper_formatter_interface>>>>&
+                             std::shared_ptr<helper_transform>>>>&
     helpers_;
 };
 

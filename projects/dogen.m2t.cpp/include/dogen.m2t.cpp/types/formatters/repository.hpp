@@ -30,7 +30,7 @@
 #include <string>
 #include <forward_list>
 #include <unordered_map>
-#include "dogen.m2t.cpp/types/formatters/helper_formatter_interface_fwd.hpp"
+#include "dogen.m2t.cpp/types/formatters/helper_transform_fwd.hpp"
 #include "dogen.m2t.cpp/types/formatters/model_to_text_transform_fwd.hpp"
 
 namespace dogen::m2t::cpp::formatters {
@@ -74,7 +74,7 @@ private:
         std::string,
         std::unordered_map<std::string,
                            std::list<
-                               std::shared_ptr<helper_formatter_interface>>>>&
+                               std::shared_ptr<helper_transform>>>>&
     helper_formatters();
 
 public:
@@ -106,7 +106,7 @@ public:
     std::string,
     std::unordered_map<std::string,
                        std::list<
-                           std::shared_ptr<helper_formatter_interface>>>>&
+                           std::shared_ptr<helper_transform>>>>&
     helper_formatters() const;
 
 private:
@@ -123,7 +123,7 @@ private:
         std::string,
         std::unordered_map<std::string,
                            std::list<
-                               std::shared_ptr<helper_formatter_interface>>>>
+                               std::shared_ptr<helper_transform>>>>
     helper_formatters_;
 };
 

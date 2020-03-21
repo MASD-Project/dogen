@@ -40,7 +40,7 @@
 #include "dogen.m2t.csharp/types/formatters/context.hpp"
 #include "dogen.m2t.csharp/types/formattables/helper_properties.hpp"
 #include "dogen.m2t.csharp/types/formattables/assistant_properties.hpp"
-#include "dogen.m2t.csharp/types/formatters/helper_formatter_interface.hpp"
+#include "dogen.m2t.csharp/types/formatters/helper_transform.hpp"
 
 namespace dogen::m2t::csharp::formatters {
 
@@ -120,7 +120,7 @@ public:
     make_argument_name(const logical::entities::attribute& attr) const;
 
 private:
-    std::list<std::shared_ptr<formatters::helper_formatter_interface>>
+    std::list<std::shared_ptr<formatters::helper_transform>>
     get_helpers(const formattables::helper_properties& hp) const;
 
 public:

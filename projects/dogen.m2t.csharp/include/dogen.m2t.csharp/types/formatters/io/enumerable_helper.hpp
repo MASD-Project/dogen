@@ -26,11 +26,11 @@
 #endif
 
 #include <algorithm>
-#include "dogen.m2t.csharp/types/formatters/helper_formatter_interface.hpp"
+#include "dogen.m2t.csharp/types/formatters/helper_transform.hpp"
 
 namespace dogen::m2t::csharp::formatters::io {
 
-class enumerable_helper : public helper_formatter_interface {
+class enumerable_helper : public helper_transform {
 public:
     std::string id() const override;
     std::string family() const override;

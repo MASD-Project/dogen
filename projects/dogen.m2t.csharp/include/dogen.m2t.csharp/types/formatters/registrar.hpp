@@ -33,7 +33,7 @@
 #include "dogen.physical/types/entities/locations_group.hpp"
 #include "dogen.physical/types/entities/location_repository_parts.hpp"
 #include "dogen.m2t.csharp/types/formatters/repository.hpp"
-#include "dogen.m2t.csharp/types/formatters/helper_formatter_interface.hpp"
+#include "dogen.m2t.csharp/types/formatters/helper_transform.hpp"
 #include "dogen.m2t.csharp/types/formatters/model_to_text_transform.hpp"
 
 namespace dogen::m2t::csharp::formatters {
@@ -55,7 +55,7 @@ public:
     void register_formatter(std::shared_ptr<model_to_text_transform> f);
 
     void register_formatter_helper(
-        std::shared_ptr<helper_formatter_interface> fh);
+        std::shared_ptr<helper_transform> fh);
 
 public:
     /**

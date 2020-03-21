@@ -81,7 +81,7 @@ validate(std::shared_ptr<model_to_text_transform> f) const {
     }
 }
 
-void registrar::validate(std::shared_ptr<helper_formatter_interface> hf) const {
+void registrar::validate(std::shared_ptr<helper_transform> hf) const {
     if (!hf) {
         BOOST_LOG_SEV(lg, error) << null_helper_formatter;
         BOOST_THROW_EXCEPTION(registrar_error(null_helper_formatter));
@@ -243,7 +243,7 @@ register_formatter(std::shared_ptr<model_to_text_transform> f) {
 }
 
 void registrar::
-register_helper_formatter(std::shared_ptr<helper_formatter_interface> fh) {
+register_helper_formatter(std::shared_ptr<helper_transform> fh) {
     validate(fh);
     auto& frp(formatter_repository_);
     auto& f(frp.helper_formatters_[fh->family()]);
@@ -284,7 +284,7 @@ const std::unordered_map<
     std::string, std::unordered_map<
                      std::string,
                      std::list<
-                         std::shared_ptr<helper_formatter_interface>>>>&
+                         std::shared_ptr<helper_transform>>>>&
 registrar::helper_formatters() const {
     return formatter_repository_.helper_formatters();
 }
