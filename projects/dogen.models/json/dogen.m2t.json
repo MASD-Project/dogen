@@ -683,7 +683,7 @@
       ],
       "tagged_values": {
         "masd.variability.default_binding_point": "any",
-        "masd.variability.key_prefix": "masd.generation.decoration"
+        "masd.variability.key_prefix": "masd.decoration"
       },
       "fallback_element_type": "masd::object",
       "attributes": [

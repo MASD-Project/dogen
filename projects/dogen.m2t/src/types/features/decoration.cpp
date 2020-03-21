@@ -28,11 +28,11 @@ namespace dogen::m2t::features {
 namespace {
 
 dogen::variability::entities::feature
-make_masd_generation_decoration_enabled() {
+make_masd_decoration_enabled() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("enabled");
-    r.name().qualified("masd.generation.decoration.enabled");
+    r.name().qualified("masd.decoration.enabled");
     r.description(R"(If true, decorations are enabled on this modeling element.
 
 )");
@@ -43,11 +43,11 @@ make_masd_generation_decoration_enabled() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_decoration_copyright_notice() {
+make_masd_decoration_copyright_notice() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("copyright_notice");
-    r.name().qualified("masd.generation.decoration.copyright_notice");
+    r.name().qualified("masd.decoration.copyright_notice");
     r.description(R"(Copyright notices for this modeling element.
 
 )");
@@ -58,11 +58,11 @@ make_masd_generation_decoration_copyright_notice() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_decoration_licence_name() {
+make_masd_decoration_licence_name() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("licence_name");
-    r.name().qualified("masd.generation.decoration.licence_name");
+    r.name().qualified("masd.decoration.licence_name");
     r.description(R"(Name of the licence to use for this modeling element.
 
 )");
@@ -73,11 +73,11 @@ make_masd_generation_decoration_licence_name() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_decoration_modeline_group_name() {
+make_masd_decoration_modeline_group_name() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("modeline_group_name");
-    r.name().qualified("masd.generation.decoration.modeline_group_name");
+    r.name().qualified("masd.decoration.modeline_group_name");
     r.description(R"(Name of the modeline group for this modeling element.
 
 )");
@@ -88,11 +88,11 @@ make_masd_generation_decoration_modeline_group_name() {
 }
 
 dogen::variability::entities::feature
-make_masd_generation_decoration_marker_name() {
+make_masd_decoration_marker_name() {
     using namespace dogen::variability::entities;
     feature r;
     r.name().simple("marker_name");
-    r.name().qualified("masd.generation.decoration.marker_name");
+    r.name().qualified("masd.decoration.marker_name");
     r.description(R"(Name of the decoration marker to use for this modeling element.
 
 )");
@@ -109,11 +109,11 @@ decoration::make_feature_group(const dogen::variability::entities::feature_model
     feature_group r;
     const dogen::variability::helpers::feature_selector s(fm);
 
-    r.enabled = s.get_by_name("masd.generation.decoration.enabled");
-    r.copyright_notice = s.get_by_name("masd.generation.decoration.copyright_notice");
-    r.licence_name = s.get_by_name("masd.generation.decoration.licence_name");
-    r.modeline_group_name = s.get_by_name("masd.generation.decoration.modeline_group_name");
-    r.marker_name = s.get_by_name("masd.generation.decoration.marker_name");
+    r.enabled = s.get_by_name("masd.decoration.enabled");
+    r.copyright_notice = s.get_by_name("masd.decoration.copyright_notice");
+    r.licence_name = s.get_by_name("masd.decoration.licence_name");
+    r.modeline_group_name = s.get_by_name("masd.decoration.modeline_group_name");
+    r.marker_name = s.get_by_name("masd.decoration.marker_name");
 
     return r;
 }
@@ -141,11 +141,11 @@ std::list<dogen::variability::entities::feature>
 decoration::make_features() {
     using namespace dogen::variability::entities;
     std::list<dogen::variability::entities::feature> r;
-    r.push_back(make_masd_generation_decoration_enabled());
-    r.push_back(make_masd_generation_decoration_copyright_notice());
-    r.push_back(make_masd_generation_decoration_licence_name());
-    r.push_back(make_masd_generation_decoration_modeline_group_name());
-    r.push_back(make_masd_generation_decoration_marker_name());
+    r.push_back(make_masd_decoration_enabled());
+    r.push_back(make_masd_decoration_copyright_notice());
+    r.push_back(make_masd_decoration_licence_name());
+    r.push_back(make_masd_decoration_modeline_group_name());
+    r.push_back(make_masd_decoration_marker_name());
     return r;
 }
 

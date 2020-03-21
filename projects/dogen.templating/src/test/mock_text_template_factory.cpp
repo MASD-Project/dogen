@@ -36,9 +36,9 @@ const std::string expression_block("some_function()");
 const std::string standard_control_block("unsigned int i");
 
 const std::string decoration_preamble_key(
-    "masd.generation.decoration.preamble");
+    "masd.decoration.preamble");
 const std::string decoration_postamble_key(
-    "masd.generation.decoration.postamble");
+    "masd.decoration.postamble");
 const auto external_keys = std::unordered_map<std::string, std::string> {
     { decoration_preamble_key, empty },
     { decoration_postamble_key, empty }

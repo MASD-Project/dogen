@@ -26,7 +26,7 @@
       ],
       "tagged_values": {
         "masd.variability.binding_point": "global",
-        "masd.variability.key_prefix": "masd.generation.decoration"
+        "masd.variability.key_prefix": "masd.decoration"
       },
       "fallback_element_type": "masd::object",
       "attributes": [
@@ -731,7 +731,7 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "masd.generation.decoration.marker_name",
+          "name": "masd.decoration.marker_name",
           "type": "",
           "value": "dogen.profiles.test_marker"
         },

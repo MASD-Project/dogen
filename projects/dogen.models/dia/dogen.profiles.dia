@@ -288,7 +288,7 @@ other layers can then configure features.
         <dia:string>#Configuration for the decoration elements.
 
 #DOGEN masd.variability.binding_point=global
-#DOGEN masd.variability.key_prefix=masd.generation.decoration#</dia:string>
+#DOGEN masd.variability.key_prefix=masd.decoration#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="true"/>
@@ -4510,7 +4510,7 @@ for the element.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#masd.generation.decoration.marker_name#</dia:string>
+            <dia:string>#masd.decoration.marker_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>

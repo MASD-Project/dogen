@@ -32,9 +32,9 @@ static logger lg(logger_factory("m2t.cpp.formatters.stitch_formatter"));
 const std::string empty;
 const std::string stitch_extension(".stitch");
 const std::string decoration_preamble_key(
-    "masd.generation.decoration.preamble");
+    "masd.decoration.preamble");
 const std::string decoration_postamble_key(
-    "masd.generation.decoration.postamble");
+    "masd.decoration.postamble");
 
 }
 

@@ -53,9 +53,9 @@ const std::string unsupported_block_type("Block type is unsupported: ");
 // FIXME: hacks for now
 const std::string include("#include ");
 const std::string decoration_preamble_key(
-    "masd.generation.decoration.preamble");
+    "masd.decoration.preamble");
 const std::string decoration_postamble_key(
-    "masd.generation.decoration.postamble");
+    "masd.decoration.postamble");
 
 }
 
