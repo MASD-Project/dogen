@@ -71,7 +71,7 @@
       ]
     },
     {
-      "name": "formatters::artefact_formatter_interface",
+      "name": "formatters::model_to_text_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -94,15 +94,15 @@
       "attributes": [
         {
           "name": "stock_artefact_formatters_by_meta_name",
-          "type": "std::unordered_map<std::string, std::forward_list<std::shared_ptr<formatters::artefact_formatter_interface>>>"
+          "type": "std::unordered_map<std::string, std::forward_list<std::shared_ptr<formatters::model_to_text_transform>>>"
         },
         {
           "name": "stock_artefact_formatters",
-          "type": "std::forward_list<std::shared_ptr<formatters::artefact_formatter_interface>>"
+          "type": "std::forward_list<std::shared_ptr<formatters::model_to_text_transform>>"
         },
         {
           "name": "stock_artefact_formatters_by_archetype",
-          "type": "std::unordered_map<std::string, std::shared_ptr<formatters::artefact_formatter_interface>>"
+          "type": "std::unordered_map<std::string, std::shared_ptr<formatters::model_to_text_transform>>"
         }
       ]
     },

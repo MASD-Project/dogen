@@ -24,7 +24,7 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.m2t.cpp/types/formattables/expansion_error.hpp"
-#include "dogen.m2t.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.m2t.cpp/types/formatters/model_to_text_transform.hpp"
 #include "dogen.m2t.cpp/types/formattables/directive_group_repository_factory.hpp"
 #include "dogen.m2t.cpp/types/formattables/inclusion_expander.hpp"
 

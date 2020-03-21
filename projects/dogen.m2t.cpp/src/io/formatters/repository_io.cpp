@@ -21,7 +21,7 @@
 #include <string>
 #include <ostream>
 #include <forward_list>
-#include "dogen.m2t.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.m2t.cpp/types/formatters/model_to_text_transform.hpp"
 #include "dogen.m2t.cpp/types/formatters/helper_formatter_interface.hpp"
 #include "dogen.m2t.cpp/io/formatters/repository_io.hpp"
 
@@ -66,7 +66,7 @@ inline std::ostream& to_stream(std::ostream& s,
 
 inline std::ostream& to_stream(std::ostream& s,
     const std::unordered_map<std::string,
-    std::forward_list<std::shared_ptr<artefact_formatter_interface>>>& safmt) {
+    std::forward_list<std::shared_ptr<model_to_text_transform>>>& safmt) {
     s << "\"stock_artefact_formatters_by_meta_name\": " << "[ ";
 
     for(auto i(safmt.begin()); i != safmt.end(); ++i) {

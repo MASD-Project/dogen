@@ -375,7 +375,7 @@
         <dia:real val="12.4"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#artefact_formatter_interface#</dia:string>
+        <dia:string>#model_to_text_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -4660,7 +4660,7 @@ facet of the C++ technical space.
                 <dia:string>#f#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::shared_ptr&lt;artefact_formatter_interface&gt;#</dia:string>
+                <dia:string>#std::shared_ptr&lt;model_to_text_transform&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -4730,7 +4730,7 @@ facet of the C++ technical space.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;std::shared_ptr&lt;artefact_formatter_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::list&lt;std::shared_ptr&lt;model_to_text_transform&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5232,7 +5232,7 @@ facet of the C++ technical space.
             <dia:string>#stock_artefact_formatters_by_meta_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::forward_list&lt;std::shared_ptr&lt;formatters::artefact_formatter_interface&gt;&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::forward_list&lt;std::shared_ptr&lt;formatters::model_to_text_transform&gt;&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -5255,7 +5255,7 @@ facet of the C++ technical space.
             <dia:string>#stock_artefact_formatters_by_archetype#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::shared_ptr&lt;formatters::artefact_formatter_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::shared_ptr&lt;formatters::model_to_text_transform&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -5278,7 +5278,7 @@ facet of the C++ technical space.
             <dia:string>#stock_artefact_formatters#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;std::shared_ptr&lt;formatters::artefact_formatter_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::forward_list&lt;std::shared_ptr&lt;formatters::model_to_text_transform&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -19576,7 +19576,7 @@ and element.#</dia:string>
                 <dia:string>#stock_formatter#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const artefact_formatter_interface&amp;#</dia:string>
+                <dia:string>#const model_to_text_transform&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -19770,7 +19770,7 @@ and element.#</dia:string>
                 <dia:string>#stock_formatter#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const artefact_formatter_interface&amp;#</dia:string>
+                <dia:string>#const model_to_text_transform&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -28202,7 +28202,7 @@ not a regular" helper.#</dia:string>
                 <dia:string>#artefact_formatters#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const std::list&lt;std::shared_ptr&lt;artefact_formatter_interface&gt;&gt;&amp;#</dia:string>
+                <dia:string>#const std::list&lt;std::shared_ptr&lt;model_to_text_transform&gt;&gt;&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

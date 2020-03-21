@@ -26,11 +26,11 @@
 #endif
 
 #include <algorithm>
-#include "dogen.m2t.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.m2t.cpp/types/formatters/model_to_text_transform.hpp"
 
 namespace dogen::m2t::cpp::formatters::types {
 
-class exception_header_formatter final : public artefact_formatter_interface {
+class exception_header_formatter final : public model_to_text_transform {
 public:
     static std::string static_id();
 

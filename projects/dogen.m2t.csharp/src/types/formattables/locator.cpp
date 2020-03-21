@@ -25,7 +25,7 @@
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.m2t.csharp/types/traits.hpp"
 #include "dogen.m2t.csharp/types/formattables/location_error.hpp"
-#include "dogen.m2t.csharp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.m2t.csharp/types/formatters/model_to_text_transform.hpp"
 #include "dogen.m2t.csharp/types/formattables/locator.hpp"
 
 namespace {

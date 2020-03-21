@@ -72,7 +72,7 @@ private:
 
 public:
     typedef std::forward_list<
-    std::shared_ptr<formatters::artefact_formatter_interface>
+    std::shared_ptr<formatters::model_to_text_transform>
     > artefact_formatters_type;
 
     artefact_formatters_type remove_non_includible_formatters(

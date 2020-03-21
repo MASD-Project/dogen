@@ -18,32 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_M2T_CPP_TYPES_FORMATTERS_ARTEFACT_FORMATTER_INTERFACE_HPP
-#define DOGEN_M2T_CPP_TYPES_FORMATTERS_ARTEFACT_FORMATTER_INTERFACE_HPP
+#ifndef DOGEN_M2T_CSHARP_TYPES_FORMATTERS_ARTEFACT_FORMATTER_INTERFACE_HPP
+#define DOGEN_M2T_CSHARP_TYPES_FORMATTERS_ARTEFACT_FORMATTER_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
+#include <typeindex>
 #include <boost/filesystem/path.hpp>
 #include "dogen.physical/types/entities/location.hpp"
+#include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
-#include "dogen.physical/types/entities/artefact.hpp"
-#include "dogen.m2t.cpp/types/formattables/locator.hpp"
-#include "dogen.m2t.cpp/types/formattables/dependencies_builder_factory.hpp"
-#include "dogen.m2t.cpp/types/formatters/inclusion_support_types.hpp"
-#include "dogen.m2t.cpp/types/formatters/context.hpp"
+#include "dogen.m2t.csharp/types/formattables/locator.hpp"
+#include "dogen.m2t.csharp/types/formatters/context.hpp"
 
-namespace dogen::m2t::cpp::formatters {
+namespace dogen::m2t::csharp::formatters {
 
-class artefact_formatter_interface {
+class model_to_text_transform {
 public:
-    artefact_formatter_interface() = default;
-    artefact_formatter_interface(artefact_formatter_interface&&) = default;
-    artefact_formatter_interface(const artefact_formatter_interface&) = delete;
-    virtual ~artefact_formatter_interface() noexcept = 0;
+    model_to_text_transform() = default;
+    model_to_text_transform(model_to_text_transform&&) = default;
+    model_to_text_transform(const model_to_text_transform&) = delete;
+    virtual ~model_to_text_transform() noexcept = 0;
 
 public:
     /**
@@ -69,21 +68,6 @@ public:
 
 public:
     /**
-     * @brief Returns the level of support of inclusions by this
-     * formatter.
-     */
-    virtual inclusion_support_types inclusion_support_type() const = 0;
-
-    /**
-     * @brief Provide the inclusion path.
-     *
-     * @pre supports_inclusion must be true.
-     */
-    virtual boost::filesystem::path inclusion_path(
-        const formattables::locator& l,
-        const logical::entities::name& n) const = 0;
-
-    /**
      * @brief Provides the full path.
      */
     virtual boost::filesystem::path full_path(const formattables::locator& l,
@@ -93,9 +77,8 @@ public:
      * @brief Creates the inclusion dependencies for this formatter
      * against the supplied element.
      */
-    virtual std::list<std::string> inclusion_dependencies(
-        const formattables::dependencies_builder_factory& f,
-        const logical::entities::element& e) const = 0;
+    virtual std::list<std::string>
+    inclusion_dependencies(const logical::entities::element& e) const = 0;
 
 public:
     /**

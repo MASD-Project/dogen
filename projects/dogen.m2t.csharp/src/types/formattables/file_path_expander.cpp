@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.m2t.csharp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.m2t.csharp/types/formatters/model_to_text_transform.hpp"
 #include "dogen.m2t.csharp/types/formattables/expansion_error.hpp"
 #include "dogen.m2t.csharp/types/formattables/file_path_expander.hpp"
 

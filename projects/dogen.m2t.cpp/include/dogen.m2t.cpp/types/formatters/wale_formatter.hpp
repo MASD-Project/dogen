@@ -28,7 +28,7 @@
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.logical/types/entities/element_fwd.hpp"
 #include "dogen.m2t.cpp/types/formattables/locator.hpp"
-#include "dogen.m2t.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.m2t.cpp/types/formatters/model_to_text_transform.hpp"
 
 namespace dogen::m2t::cpp::formatters {
 
@@ -39,7 +39,7 @@ private:
 public:
     physical::entities::artefact format(
         const formattables::locator& l,
-        const artefact_formatter_interface& stock_formatter,
+        const model_to_text_transform& stock_formatter,
         const context& ctx, const logical::entities::element& e) const;
 };
 

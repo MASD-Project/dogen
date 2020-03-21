@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.m2t.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.m2t.cpp/types/formatters/model_to_text_transform.hpp"
 
 namespace dogen::m2t::cpp::formatters {
 
-artefact_formatter_interface::~artefact_formatter_interface() noexcept { }
+model_to_text_transform::~model_to_text_transform() noexcept { }
 
 }

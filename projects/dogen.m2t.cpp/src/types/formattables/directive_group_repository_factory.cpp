@@ -28,7 +28,7 @@
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.m2t.cpp/types/traits.hpp"
 #include "dogen.m2t.cpp/types/formatters/traits.hpp"
-#include "dogen.m2t.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.m2t.cpp/types/formatters/model_to_text_transform.hpp"
 #include "dogen.m2t.cpp/types/formattables/expansion_error.hpp"
 #include "dogen.m2t.cpp/types/formattables/directive_group.hpp"
 #include "dogen.m2t.cpp/io/formattables/directive_group_io.hpp"

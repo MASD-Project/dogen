@@ -1,4 +1,4 @@
-class {{class.simple_name}} final : public artefact_formatter_interface {
+class {{class.simple_name}} final : public model_to_text_transform {
 public:
     static std::string static_id();
 

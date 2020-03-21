@@ -26,11 +26,11 @@
 #endif
 
 #include <algorithm>
-#include "dogen.m2t.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.m2t.cpp/types/formatters/model_to_text_transform.hpp"
 
 namespace dogen::m2t::cpp::formatters::odb {
 
-class primitive_odb_options_formatter final : public artefact_formatter_interface {
+class primitive_odb_options_formatter final : public model_to_text_transform {
 public:
     static std::string static_id();
 

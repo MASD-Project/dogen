@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.m2t.csharp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.m2t.csharp/types/formatters/model_to_text_transform.hpp"
 #include "dogen.m2t.csharp/types/formatters/repository.hpp"
 
 namespace dogen::m2t::csharp::formatters {
 
 std::unordered_map<
     std::string,
-    std::forward_list<std::shared_ptr<artefact_formatter_interface>>>&
+    std::forward_list<std::shared_ptr<model_to_text_transform>>>&
 repository::stock_artefact_formatters_by_meta_name() {
     return stock_artefact_formatters_by_meta_name_;
 }
 
-std::unordered_map<std::string, std::shared_ptr<artefact_formatter_interface>>&
+std::unordered_map<std::string, std::shared_ptr<model_to_text_transform>>&
 repository::stock_artefact_formatters_by_archetype() {
     return stock_artefact_formatters_by_archetype_;
 }
 
-std::forward_list<std::shared_ptr<artefact_formatter_interface>>&
+std::forward_list<std::shared_ptr<model_to_text_transform>>&
 repository::stock_artefact_formatters() {
     return stock_artefact_formatters_;
 }
@@ -51,18 +51,18 @@ std::unordered_map<
 
 const std::unordered_map<
     std::string,
-    std::forward_list<std::shared_ptr<artefact_formatter_interface>>>&
+    std::forward_list<std::shared_ptr<model_to_text_transform>>>&
 repository::stock_artefact_formatters_by_meta_name() const {
     return stock_artefact_formatters_by_meta_name_;
 }
 
 const std::unordered_map<std::string,
-                         std::shared_ptr<artefact_formatter_interface>>&
+                         std::shared_ptr<model_to_text_transform>>&
 repository::stock_artefact_formatters_by_archetype() const {
     return stock_artefact_formatters_by_archetype_;
 }
 
-const std::forward_list<std::shared_ptr<artefact_formatter_interface>>&
+const std::forward_list<std::shared_ptr<model_to_text_transform>>&
 repository::stock_artefact_formatters() const {
     return stock_artefact_formatters_;
 }

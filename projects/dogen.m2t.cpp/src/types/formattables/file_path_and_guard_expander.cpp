@@ -22,7 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.m2t.cpp/types/formattables/header_guard_factory.hpp"
 #include "dogen.m2t.cpp/types/formattables/expansion_error.hpp"
-#include "dogen.m2t.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.m2t.cpp/types/formatters/model_to_text_transform.hpp"
 #include "dogen.m2t.cpp/types/formattables/file_path_and_guard_expander.hpp"
 
 namespace {

@@ -69,7 +69,7 @@ void registrar::validate() const {
 }
 
 void registrar::
-register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
+register_formatter(std::shared_ptr<model_to_text_transform> f) {
     if (!f) {
         BOOST_LOG_SEV(lg, error) << null_formatter;
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));

@@ -22,7 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.m2t.csharp/types/formattables/artefact_properties.hpp"
 #include "dogen.m2t.csharp/types/formattables/adaptation_error.hpp"
-#include "dogen.m2t.csharp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.m2t.csharp/types/formatters/model_to_text_transform.hpp"
 #include "dogen.m2t.csharp/types/formattables/adapter.hpp"
 
 namespace {

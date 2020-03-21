@@ -58,7 +58,7 @@ const std::string null_helper_formatter("Formatter helper supplied is null");
 namespace dogen::m2t::cpp::formatters {
 
 void registrar::
-validate(std::shared_ptr<artefact_formatter_interface> f) const {
+validate(std::shared_ptr<model_to_text_transform> f) const {
     if (!f) {
         BOOST_LOG_SEV(lg, error) << null_formatter;
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
@@ -175,7 +175,7 @@ void registrar::validate() const {
 }
 
 void registrar::
-register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
+register_formatter(std::shared_ptr<model_to_text_transform> f) {
     /*
      * First we ensure the formatter is vaguely valid and insert it
      * into the main collection of stock formatters.

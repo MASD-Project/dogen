@@ -29,7 +29,7 @@
 #include "dogen.m2t.cpp/types/traits.hpp"
 #include "dogen.m2t.cpp/io/formattables/locator_configuration_io.hpp"
 #include "dogen.m2t.cpp/types/formattables/location_error.hpp"
-#include "dogen.m2t.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.m2t.cpp/types/formatters/model_to_text_transform.hpp"
 #include "dogen.m2t.cpp/types/formattables/locator.hpp"
 
 namespace {

@@ -31,7 +31,7 @@
 #include <forward_list>
 #include <unordered_map>
 #include "dogen.m2t.csharp/types/formatters/helper_formatter_interface_fwd.hpp"
-#include "dogen.m2t.csharp/types/formatters/artefact_formatter_interface_fwd.hpp"
+#include "dogen.m2t.csharp/types/formatters/model_to_text_transform_fwd.hpp"
 
 namespace dogen::m2t::csharp::formatters {
 
@@ -48,7 +48,7 @@ private:
      */
     std::unordered_map<
         std::string,
-        std::forward_list<std::shared_ptr<artefact_formatter_interface>>
+        std::forward_list<std::shared_ptr<model_to_text_transform>>
     >&
     stock_artefact_formatters_by_meta_name();
 
@@ -56,13 +56,13 @@ private:
      * @brief Returns all available file formatters by archetype name.
      */
     std::unordered_map<std::string,
-                       std::shared_ptr<artefact_formatter_interface>>&
+                       std::shared_ptr<model_to_text_transform>>&
     stock_artefact_formatters_by_archetype();
 
     /**
      * @brief Returns all available file formatters.
      */
-    std::forward_list<std::shared_ptr<artefact_formatter_interface>>&
+    std::forward_list<std::shared_ptr<model_to_text_transform>>&
     stock_artefact_formatters();
 
     /**
@@ -81,20 +81,20 @@ public:
      */
     const std::unordered_map<
     std::string,
-    std::forward_list<std::shared_ptr<artefact_formatter_interface>>>&
+    std::forward_list<std::shared_ptr<model_to_text_transform>>>&
     stock_artefact_formatters_by_meta_name() const;
 
     /**
      * @brief Returns all available file formatters by formatter name.
      */
     const std::unordered_map<std::string,
-                             std::shared_ptr<artefact_formatter_interface>>&
+                             std::shared_ptr<model_to_text_transform>>&
     stock_artefact_formatters_by_archetype() const;
 
     /**
      * @brief Returns all available file formatters.
      */
-    const std::forward_list<std::shared_ptr<artefact_formatter_interface>>&
+    const std::forward_list<std::shared_ptr<model_to_text_transform>>&
     stock_artefact_formatters() const;
 
     /**
@@ -110,12 +110,12 @@ public:
 private:
     std::unordered_map<
         std::string,
-        std::forward_list<std::shared_ptr<artefact_formatter_interface>>>
+        std::forward_list<std::shared_ptr<model_to_text_transform>>>
     stock_artefact_formatters_by_meta_name_;
     std::unordered_map<std::string,
-                       std::shared_ptr<artefact_formatter_interface>>
+                       std::shared_ptr<model_to_text_transform>>
     stock_artefact_formatters_by_archetype_;
-    std::forward_list<std::shared_ptr<artefact_formatter_interface>>
+    std::forward_list<std::shared_ptr<model_to_text_transform>>
     stock_artefact_formatters_;
     std::unordered_map<
         std::string,

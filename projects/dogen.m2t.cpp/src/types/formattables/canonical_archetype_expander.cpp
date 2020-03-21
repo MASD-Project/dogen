@@ -23,7 +23,7 @@
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.m2t.cpp/types/formatters/traits.hpp"
 #include "dogen.m2t.cpp/types/formatters/inclusion_support_types.hpp"
-#include "dogen.m2t.cpp/types/formatters/artefact_formatter_interface.hpp"
+#include "dogen.m2t.cpp/types/formatters/model_to_text_transform.hpp"
 #include "dogen.m2t.cpp/types/formattables/canonical_archetype_expander.hpp"
 
 namespace {

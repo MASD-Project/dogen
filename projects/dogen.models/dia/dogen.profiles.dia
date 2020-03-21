@@ -5915,7 +5915,7 @@ for the element.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
-            <dia:string>#formatters::artefact_formatter_interface#</dia:string>
+            <dia:string>#formatters::model_to_text_transform#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>##</dia:string>

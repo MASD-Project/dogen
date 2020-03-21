@@ -18,10 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.m2t.csharp/types/formatters/artefact_formatter_interface.hpp"
+#ifndef DOGEN_M2T_CSHARP_TYPES_FORMATTERS_ARTEFACT_FORMATTER_INTERFACE_FWD_HPP
+#define DOGEN_M2T_CSHARP_TYPES_FORMATTERS_ARTEFACT_FORMATTER_INTERFACE_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen::m2t::csharp::formatters {
 
-artefact_formatter_interface::~artefact_formatter_interface() noexcept { }
+class model_to_text_transform;
 
 }
+
+#endif

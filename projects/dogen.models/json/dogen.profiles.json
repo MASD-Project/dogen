@@ -460,7 +460,7 @@
         {
           "name": "masd.generalization.parent",
           "type": "",
-          "value": "formatters::artefact_formatter_interface"
+          "value": "formatters::model_to_text_transform"
         }
       ]
     },
