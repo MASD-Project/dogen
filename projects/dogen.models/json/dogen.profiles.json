@@ -588,7 +588,7 @@
         {
           "name": "class_header.formatting_input",
           "type": "",
-          "value": "cpp_helper_formatter_header.wale"
+          "value": "cpp_helper_transform_header.wale"
         },
         {
           "name": "class_header.overwrite",

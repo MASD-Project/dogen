@@ -4526,13 +4526,13 @@ facet of the C++ technical space.
         <dia:point val="134,184"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="133.95,183.95;163.81,190.05"/>
+        <dia:rectangle val="133.95,183.95;163.425,190.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="134,184"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="29.760000000000002"/>
+        <dia:real val="29.375"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6"/>
@@ -5126,13 +5126,13 @@ facet of the C++ technical space.
         <dia:point val="134,206"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="133.95,205.95;193.07,212.05"/>
+        <dia:rectangle val="133.95,205.95;190.375,212.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="134,206"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="59.020000000000003"/>
+        <dia:real val="56.325000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
@@ -10531,13 +10531,13 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="38,206"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="37.95,205.95;93.22,211.25"/>
+        <dia:rectangle val="37.95,205.95;89.37,211.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="38,206"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="55.170000000000002"/>
+        <dia:real val="51.32"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -28068,13 +28068,13 @@ not a regular" helper.#</dia:string>
         <dia:point val="97,206"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="96.95,205.95;130.66,210.45"/>
+        <dia:rectangle val="96.95,205.95;130.275,210.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="97,206"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="33.609999999999999"/>
+        <dia:real val="33.225000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -31197,7 +31197,7 @@ string.
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#cpp_helper_formatter_header#</dia:string>
+        <dia:string>#cpp_helper_transform_header#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::templating::logic_less_templates#</dia:string>
@@ -31295,19 +31295,19 @@ string.
         <dia:point val="-48,164"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-48.05,163.95;-30.2225,167.05"/>
+        <dia:rectangle val="-48.05,163.95;-30.1025,167.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-48,164"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="17.727499999999999"/>
+        <dia:real val="17.8475"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#cpp_helper_formatter_implementation#</dia:string>
+        <dia:string>#cpp_helper_transform_implementation#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::templating::logic_less_templates#</dia:string>
@@ -31405,19 +31405,19 @@ string.
         <dia:point val="-28,164"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-28.05,163.95;-6.2075,167.05"/>
+        <dia:rectangle val="-28.05,163.95;-6.0875,167.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-28,164"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="21.7425"/>
+        <dia:real val="21.862500000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#cpp_helper_formatter_implementation_enabled#</dia:string>
+        <dia:string>#cpp_helper_transform_implementation_enabled#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#masd::templating::logic_less_templates#</dia:string>

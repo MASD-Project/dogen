@@ -1842,7 +1842,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "cpp_helper_formatter_header",
+      "name": "cpp_helper_transform_header",
       "stereotypes": [
         "masd::templating::logic_less_templates"
       ],
@@ -1852,7 +1852,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "cpp_helper_formatter_implementation",
+      "name": "cpp_helper_transform_implementation",
       "stereotypes": [
         "masd::templating::logic_less_templates"
       ],
@@ -1862,7 +1862,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "cpp_helper_formatter_implementation_enabled",
+      "name": "cpp_helper_transform_implementation_enabled",
       "stereotypes": [
         "masd::templating::logic_less_templates"
       ],

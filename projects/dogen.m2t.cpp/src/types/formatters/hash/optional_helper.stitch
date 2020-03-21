@@ -4,7 +4,7 @@
 <#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/assistant.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formattables/helper_properties.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/hash/optional_helper.hpp" #>
-<#@ masd.stitch.wale.text_template=cpp_helper_formatter_implementation_enabled.wale #>
+<#@ masd.stitch.wale.text_template=cpp_helper_transform_implementation_enabled.wale #>
 <#@ masd.stitch.wale.kvp.helper.family=Optional #>
 <#@ masd.stitch.wale.kvp.class.simple_name=optional_helper #>
 <#$ stitch.wale.template_instantiation_result #>
