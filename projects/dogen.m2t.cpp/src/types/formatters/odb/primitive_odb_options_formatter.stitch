@@ -1,0 +1,118 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::formatters::odb #>
+<#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+<#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/inclusion_constants.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/formatting_error.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/odb/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/odb/primitive_odb_options_formatter.hpp" #>
+<#+
+
+std::string primitive_odb_options_formatter::static_id() {
+    return traits::primitive_odb_options_archetype();
+}
+
+std::string primitive_odb_options_formatter::id() const {
+    static auto r(archetype_location().archetype());
+    return r;
+}
+
+physical::entities::location
+primitive_odb_options_formatter::archetype_location() const {
+    static physical::entities::location
+        r(cpp::traits::kernel(), cpp::traits::backend(),
+          traits::facet(), primitive_odb_options_formatter::static_id());
+    return r;
+}
+
+const logical::entities::name& primitive_odb_options_formatter::meta_name() const {
+    using logical::helpers::meta_name_factory;
+    static auto r(meta_name_factory::make_primitive_name());
+    return r;
+}
+
+std::string primitive_odb_options_formatter::family() const {
+    return cpp::traits::odb_family();
+}
+
+inclusion_support_types
+primitive_odb_options_formatter::inclusion_support_type() const {
+    return inclusion_support_types::not_supported;
+}
+
+boost::filesystem::path primitive_odb_options_formatter::inclusion_path(
+    const formattables::locator& /*l*/, const logical::entities::name& n) const {
+    using namespace dogen::utility::log;
+    static logger lg(logger_factory(
+            "generation.cpp.formatters.odb.primitive_odb_options_formatter"));
+
+        const std::string not_supported("Inclusion path is not supported: ");
+
+    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
+}
+
+boost::filesystem::path primitive_odb_options_formatter::full_path(
+    const formattables::locator& l, const logical::entities::name& n) const {
+    return l.make_full_path_for_odb_options(n, static_id());
+}
+
+std::list<std::string> primitive_odb_options_formatter::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& /*f*/,
+    const logical::entities::element& /*e*/) const {
+    static std::list<std::string> r;
+    return r;
+}
+
+physical::entities::artefact primitive_odb_options_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
+    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    const auto& p(a.as<logical::entities::structural::primitive>(e));
+
+    {
+        const auto ts(logical::entities::technical_space::odb);
+        a.make_decoration_preamble(e, ts);
+
+        if (!p.orm_properties()) {
+#>
+
+#
+# class has no ODB options defined.
+#
+<#+
+        } else {
+            const auto ooo(p.orm_properties()->odb_options());
+#>
+# epilogue
+--odb-epilogue <#= ooo.epilogue() #>
+
+<#+
+            if (!ooo.include_regexes().empty()) {
+#>
+# regexes
+<#+
+                for (const auto& regex : ooo.include_regexes())
+#>
+--include-regex <#= regex #>
+
+# debug regexes
+# --include-regex-trace
+
+# make the header guards similar to dogen ones
+--guard-prefix <#= ooo.header_guard_prefix() #>
+<#+
+            }
+        }
+    } // sbf
+    return a.make_artefact();
+}
+#>

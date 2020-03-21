@@ -25,7 +25,7 @@
 #include <boost/test/unit_test_monitor.hpp>
 #include "dogen/types/mock_configuration_factory.hpp"
 #include "dogen.utility/types/test/logging.hpp"
-#include "dogen.utility/types/test_data/dogen_generation.hpp"
+#include "dogen.utility/types/test_data/dogen_m2t.hpp"
 #include "dogen.utility/types/test_data/cpp_ref_impl_generation.hpp"
 #include "dogen.utility/types/test_data/csharp_ref_impl_generation.hpp"
 #include "dogen.physical/io/entities/operation_io.hpp"
@@ -441,144 +441,144 @@ BOOST_AUTO_TEST_SUITE(physical_model_production_chain_tests)
 
 BOOST_AUTO_TEST_CASE(dogen_variability_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_variability_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_variability_dia());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_variability_dia());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_cli_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_cli_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_cli_dia());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_cli_dia());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_logical_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_logical_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_logical_dia());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_logical_dia());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_dia());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_dia());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_dia_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_dia_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_dia_dia());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_dia_dia());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_physical_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_physical_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_physical_dia());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_physical_dia());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(dogen_generation_cpp_dia_produces_expected_model) {
-    SETUP_TEST_LOG("dogen_generation_cpp_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_generation_cpp_dia());
-    const auto od(dogen_generation::project_directory());
+BOOST_AUTO_TEST_CASE(dogen_m2t_cpp_dia_produces_expected_model) {
+    SETUP_TEST_LOG("dogen_m2t_cpp_dia_produces_expected_model");
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_m2t_cpp_dia());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(dogen_generation_csharp_dia_produces_expected_model) {
-    SETUP_TEST_LOG("dogen_generation_csharp_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_generation_csharp_dia());
-    const auto od(dogen_generation::project_directory());
+BOOST_AUTO_TEST_CASE(dogen_m2t_csharp_dia_produces_expected_model) {
+    SETUP_TEST_LOG("dogen_m2t_csharp_dia_produces_expected_model");
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_m2t_csharp_dia());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(dogen_generation_dia_produces_expected_model) {
-    SETUP_TEST_LOG("dogen_generation_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_generation_dia());
-    const auto od(dogen_generation::project_directory());
+BOOST_AUTO_TEST_CASE(dogen_m2t_dia_produces_expected_model) {
+    SETUP_TEST_LOG("dogen_m2t_dia_produces_expected_model");
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_m2t_dia());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_injection_dia_produces_expected_model) {
-    SETUP_TEST_LOG("dogen_generation_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_injection_dia());
-    const auto od(dogen_generation::project_directory());
+    SETUP_TEST_LOG("dogen_m2t_dia_produces_expected_model");
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_injection_dia());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_injection_dia_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_injection_dia_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_injection_dia_dia());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_injection_dia_dia());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_injection_json_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_injection_json_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_injection_json_dia());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_injection_json_dia());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_orchestration_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_orchestration_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_orchestration_dia());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_orchestration_dia());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_templating_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_templating_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_templating_dia());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_templating_dia());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_tracing_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_tracing_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_tracing_dia());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_tracing_dia());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_utility_dia_produces_expected_model) {
     SETUP_TEST_LOG("dogen_utility_dia_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_utility_dia());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_utility_dia());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
@@ -817,144 +817,144 @@ BOOST_AUTO_TEST_CASE(csharprefimpl_lammodel_dia_produces_expected_model) {
 
 BOOST_AUTO_TEST_CASE(dogen_variability_json_produces_expected_model) {
     SETUP_TEST_LOG("dogen_variability_json_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_variability_json());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_variability_json());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_cli_json_produces_expected_model) {
     SETUP_TEST_LOG("dogen_cli_json_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_cli_json());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_cli_json());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_logical_json_produces_expected_model) {
     SETUP_TEST_LOG("dogen_logical_json_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_logical_json());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_logical_json());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_json_produces_expected_model) {
     SETUP_TEST_LOG("dogen_json_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_json());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_json());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_dia_json_produces_expected_model) {
     SETUP_TEST_LOG("dogen_dia_json_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_dia_json());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_dia_json());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_physical_json_produces_expected_model) {
     SETUP_TEST_LOG("dogen_physical_json_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_physical_json());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_physical_json());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(dogen_generation_cpp_json_produces_expected_model) {
-    SETUP_TEST_LOG("dogen_generation_cpp_json_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_generation_cpp_json());
-    const auto od(dogen_generation::project_directory());
+BOOST_AUTO_TEST_CASE(dogen_m2t_cpp_json_produces_expected_model) {
+    SETUP_TEST_LOG("dogen_m2t_cpp_json_produces_expected_model");
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_m2t_cpp_json());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(dogen_generation_csharp_json_produces_expected_model) {
-    SETUP_TEST_LOG("dogen_generation_csharp_json_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_generation_csharp_json());
-    const auto od(dogen_generation::project_directory());
+BOOST_AUTO_TEST_CASE(dogen_m2t_csharp_json_produces_expected_model) {
+    SETUP_TEST_LOG("dogen_m2t_csharp_json_produces_expected_model");
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_m2t_csharp_json());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
-BOOST_AUTO_TEST_CASE(dogen_generation_json_produces_expected_model) {
-    SETUP_TEST_LOG("dogen_generation_json_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_generation_json());
-    const auto od(dogen_generation::project_directory());
+BOOST_AUTO_TEST_CASE(dogen_m2t_json_produces_expected_model) {
+    SETUP_TEST_LOG("dogen_m2t_json_produces_expected_model");
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_m2t_json());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_injection_json_produces_expected_model) {
-    SETUP_TEST_LOG("dogen_generation_json_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_injection_json());
-    const auto od(dogen_generation::project_directory());
+    SETUP_TEST_LOG("dogen_m2t_json_produces_expected_model");
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_injection_json());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_injection_dia_json_produces_expected_model) {
     SETUP_TEST_LOG("dogen_injection_dia_json_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_injection_dia_json());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_injection_dia_json());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_injection_json_json_produces_expected_model) {
     SETUP_TEST_LOG("dogen_injection_json_json_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_injection_json_json());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_injection_json_json());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_orchestration_json_produces_expected_model) {
     SETUP_TEST_LOG("dogen_orchestration_json_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_orchestration_json());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_orchestration_json());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_templating_json_produces_expected_model) {
     SETUP_TEST_LOG("dogen_templating_json_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_templating_json());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_templating_json());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_tracing_json_produces_expected_model) {
     SETUP_TEST_LOG("dogen_tracing_json_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_tracing_json());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_tracing_json());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }
 
 BOOST_AUTO_TEST_CASE(dogen_utility_json_produces_expected_model) {
     SETUP_TEST_LOG("dogen_utility_json_produces_expected_model");
-    using dogen::utility::test_data::dogen_generation;
-    const auto t(dogen_generation::input_dogen_utility_json());
-    const auto od(dogen_generation::project_directory());
+    using dogen::utility::test_data::dogen_m2t;
+    const auto t(dogen_m2t::input_dogen_utility_json());
+    const auto od(dogen_m2t::project_directory());
     const auto m(apply_physical_model_production(t, od));
     BOOST_CHECK(check_for_differences(od, m));
 }

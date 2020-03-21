@@ -106,7 +106,7 @@
 #DOGEN masd.injection.reference=dogen.tracing
 #DOGEN masd.injection.reference=dogen.injection
 #DOGEN masd.injection.reference=dogen.logical
-#DOGEN masd.injection.reference=dogen.generation
+#DOGEN masd.injection.reference=dogen.m2t
 #DOGEN masd.injection.reference=dogen.physical
 #DOGEN masd.injection.reference=masd
 #DOGEN masd.injection.reference=masd.variability
@@ -1037,7 +1037,7 @@
             <dia:string>#generation_context#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#generation::transforms::context#</dia:string>
+            <dia:string>#m2t::transforms::context#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -3144,7 +3144,7 @@ user defined stereotypes.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#generation::entities::model#</dia:string>
+            <dia:string>#m2t::entities::model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3170,7 +3170,7 @@ user defined stereotypes.#</dia:string>
                 <dia:string>#ctx#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#generation::transforms::context#</dia:string>
+                <dia:string>#m2t::transforms::context#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

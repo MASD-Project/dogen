@@ -27,8 +27,8 @@
 
 #include <list>
 #include "dogen.logical/types/entities/model.hpp"
-#include "dogen.generation/types/entities/model.hpp"
-#include "dogen.generation/types/transforms/context.hpp"
+#include "dogen.m2t/types/entities/model.hpp"
+#include "dogen.m2t/types/transforms/context.hpp"
 
 namespace dogen::orchestration::transforms {
 
@@ -37,12 +37,12 @@ private:
     static std::size_t
     compute_total_size(const logical::entities::model& em);
 
-    static generation::entities::model
+    static m2t::entities::model
     apply(const logical::entities::model& m);
 
 public:
-    static std::list<generation::entities::model>
-    apply(const generation::transforms::context& ctx,
+    static std::list<m2t::entities::model>
+    apply(const m2t::transforms::context& ctx,
         const std::list<logical::entities::model>& cms);
 };
 

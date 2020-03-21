@@ -1,0 +1,86 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::formatters::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/inclusion_constants.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/test_data/class_header_formatter.hpp" #>
+<#@ masd.stitch.wale.text_template=cpp_artefact_formatter_implementation_header.wale #>
+<#@ masd.stitch.wale.kvp.class.simple_name=class_header_formatter #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=class_header #>
+<#@ masd.stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::object #>
+<#@ masd.stitch.wale.kvp.meta_element=object #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+std::list<std::string> class_header_formatter::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& f,
+    const logical::entities::element& e) const {
+    auto builder(f.make());
+    builder.add(e.name(), types::traits::class_header_archetype());
+    return builder.build();
+}
+
+physical::entities::artefact class_header_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
+    assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
+    const auto& o(a.as<logical::entities::structural::object>(e));
+
+    {
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        {
+            const auto sn(o.name().simple());
+            const auto qn(a.get_qualified_name(o.name()));
+            const auto ns(a.make_namespaces(o.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
+#>
+
+class <#= sn #>_generator {
+<#+
+            if (!o.is_parent()) {
+#>
+public:
+    <#= sn #>_generator();
+
+<#+
+            }
+#>
+public:
+    typedef <#= qn #> result_type;
+
+public:
+<#+
+            if (!o.is_immutable())
+#>
+    static void populate(const unsigned int position, result_type& v);
+<#+
+            if (!o.is_parent()) {
+#>
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+<#+
+            }
+#>
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+<#+
+        } // snf
+#>
+
+<#+
+    } // sbf
+    return a.make_artefact();
+}
+#>

@@ -22,8 +22,8 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.injection/types/transforms/model_set_production_chain.hpp"
 #include "dogen.logical/types/transforms/model_production_chain.hpp"
-#include "dogen.generation/types/transforms/model_generation_chain.hpp"
-#include "dogen.generation/types/transforms/physical_model_chain.hpp"
+#include "dogen.m2t/types/transforms/model_generation_chain.hpp"
+#include "dogen.m2t/types/transforms/physical_model_chain.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/types/transforms/model_production_chain.hpp"
 #include "dogen.orchestration/types/transforms/injection_model_set_to_assets_model_set_chain.hpp"
@@ -82,13 +82,13 @@ physical_model_production_chain::apply(const context& ctx,
     /*
      * Run all the generation transforms agains the generation models.
      */
-    generation::transforms::model_generation_chain::
+    m2t::transforms::model_generation_chain::
         apply(ctx.generation_context(), gms);
 
     /*
      * Obtain the physical models.
      */
-    using generation::transforms::physical_model_chain;
+    using m2t::transforms::physical_model_chain;
     auto r(physical_model_chain::apply(
             ctx.generation_context(), gms));
 

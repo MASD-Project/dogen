@@ -1,0 +1,116 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::formatters::serialization #>
+<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/serialization/type_registrar.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/serialization/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/formatting_error.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/serialization/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/inclusion_constants.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/serialization/type_registrar_implementation_formatter.hpp" #>
+<#@ masd.stitch.wale.text_template=cpp_artefact_formatter_implementation.wale #>
+<#@ masd.stitch.wale.kvp.class.simple_name=type_registrar_implementation_formatter #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=type_registrar_implementation #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::serialization::type_registrar #>
+<#@ masd.stitch.wale.kvp.meta_element=serialization_type_registrar #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+std::list<std::string> type_registrar_implementation_formatter::
+inclusion_dependencies(
+    const formattables::dependencies_builder_factory& f,
+    const logical::entities::element& e) const {
+    const auto& rg(assistant::as<logical::entities::serialization::type_registrar>(e));
+    auto builder(f.make());
+
+    const auto rh_fn(traits::type_registrar_header_archetype());
+    builder.add(rg.name(), rh_fn);
+
+    using ic = inclusion_constants;
+    builder.add(ic::boost::archive::text_iarchive());
+    builder.add(ic::boost::archive::text_oarchive());
+    builder.add(ic::boost::archive::binary_iarchive());
+    builder.add(ic::boost::archive::binary_oarchive());
+    builder.add(ic::boost::archive::polymorphic_iarchive());
+    builder.add(ic::boost::archive::polymorphic_oarchive());
+
+    // XML serialisation
+    builder.add(ic::boost::archive::xml_iarchive());
+    builder.add(ic::boost::archive::xml_oarchive());
+
+    const auto ch_fn(traits::class_header_archetype());
+    builder.add(rg.leaves(), ch_fn);
+
+    const auto carch(traits::canonical_archetype());
+    builder.add(rg.registrar_dependencies(), carch);
+    return builder.build();
+}
+
+physical::entities::artefact type_registrar_implementation_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
+    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    const auto& rg(a.as<logical::entities::serialization::type_registrar>(e));
+
+    {
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        {
+            const auto ns(a.make_namespaces(rg.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto deps(rg.registrar_dependencies());
+            const auto carch(traits::canonical_archetype());
+            const auto leaves(a.names_with_enabled_archetype(carch, rg.leaves()));
+            const bool has_types(!deps.empty() || !leaves.empty());
+            const std::string arg_name(has_types ? " ar" : "");
+            const auto sn(e.name().simple());
+#>
+
+template<typename Archive>
+void <#= sn #>::register_types(Archive&<#= arg_name #>) {
+<#+
+            if (has_types) {
+                for (const auto& d : deps) {
+                    const auto dqn(a.get_qualified_name(d));
+#>
+    <#= dqn #>::register_types(ar);
+<#+
+                }
+
+                if (!deps.empty() && !leaves.empty())
+#>
+
+<#+
+                for (const auto l : leaves) {
+                    const auto lqn(a.get_qualified_name(l));
+#>
+    ar.template register_type<<#= lqn #>>();
+<#+
+                }
+            }
+#>
+}
+
+template void <#= sn #>::register_types(boost::archive::polymorphic_oarchive&<#= arg_name #>);
+template void <#= sn #>::register_types(boost::archive::polymorphic_iarchive&<#= arg_name #>);
+
+template void <#= sn #>::register_types(boost::archive::text_oarchive&<#= arg_name #>);
+template void <#= sn #>::register_types(boost::archive::text_iarchive&<#= arg_name #>);
+
+template void <#= sn #>::register_types(boost::archive::binary_oarchive&<#= arg_name #>);
+template void <#= sn #>::register_types(boost::archive::binary_iarchive&<#= arg_name #>);
+
+template void <#= sn #>::register_types(boost::archive::xml_oarchive&<#= arg_name #>);
+template void <#= sn #>::register_types(boost::archive::xml_iarchive&<#= arg_name #>);
+
+<#+
+        } // snf
+    } // sbf
+    return a.make_artefact();
+}
+
+#>

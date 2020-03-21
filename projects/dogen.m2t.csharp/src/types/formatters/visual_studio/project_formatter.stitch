@@ -1,0 +1,112 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::csharp::formatters::visual_studio #>
+<#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+<#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/join.hpp> #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.csharp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/project.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.csharp/types/formatters/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.csharp/types/formatters/visual_studio/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.csharp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.csharp/types/formatters/visual_studio/project_formatter.hpp" #>
+<#+
+
+std::string project_formatter::static_id() {
+    return traits::project_archetype();
+}
+
+std::string project_formatter::id() const {
+    static auto r(archetype_location().archetype());
+    return r;
+}
+
+physical::entities::location
+project_formatter::archetype_location() const {
+    static physical::entities::location
+        r(csharp::traits::kernel(), csharp::traits::backend(),
+          traits::facet(),
+          project_formatter::static_id());
+    return r;
+}
+
+const logical::entities::name&
+project_formatter::meta_name() const {
+    using logical::helpers::meta_name_factory;
+    static auto r(meta_name_factory::make_visual_studio_project_name());
+    return r;
+}
+
+std::string project_formatter::family() const {
+    return csharp::traits::visual_studio_project_family();
+}
+
+boost::filesystem::path project_formatter::
+full_path(const formattables::locator& l, const logical::entities::name& n) const {
+    auto temp(n);
+    temp.simple(boost::algorithm::join(n.location().model_modules(), ".") + ".csproj");
+    return l.make_full_path_for_project(temp, static_id());
+}
+
+std::list<std::string> project_formatter::
+inclusion_dependencies(const logical::entities::element& /*e*/) const {
+    std::list<std::string> r;
+    return r;
+}
+
+physical::entities::artefact project_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
+    assistant a(ctx, e, archetype_location());
+    using logical::entities::visual_studio::project;
+    const auto& proj(a.as<project>(static_id(), e));
+
+#>
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{<#= proj.guid() #>}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace><#= proj.project_name() #></RootNamespace>
+    <AssemblyName><#= proj.project_name() #></AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+<#+
+        for (const auto& ig : proj.item_groups()) {
+#>
+  <ItemGroup>
+<#+
+            for (const auto& i : ig.items())
+#>
+    <<#= i.name() #> Include="<#= i.include() #>" />
+  </ItemGroup>
+<#+
+        }
+#>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
+<#+
+    return a.make_artefact();
+}
+#>

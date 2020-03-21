@@ -1,0 +1,93 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::csharp::formatters::io #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.csharp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.csharp/types/formatters/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.csharp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.csharp/types/formatters/io/primitive_formatter.hpp" #>
+<#@ masd.stitch.wale.text_template=csharp_formatter_implementation.wale #>
+<#@ masd.stitch.wale.kvp.class.simple_name=primitive_formatter #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=primitive #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::primitive #>
+<#@ masd.stitch.wale.kvp.meta_element=primitive #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+physical::entities::artefact primitive_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
+    assistant a(ctx, e, archetype_location());
+    const auto& p(a.as<logical::entities::structural::primitive>(static_id(), e));
+    {
+        const auto sn(e.name().simple());
+        const auto qn(a.get_qualified_name(e.name()));
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        {
+#>
+using System;
+
+<#+
+            const auto ns(a.make_namespaces(e.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
+#>
+    /// <summary>
+    /// Generates sequences of <#= sn #>.
+    /// </summary>
+    public static class <#= sn #>Dumper
+    {
+        static internal void Dump(AssistantDumper assistant, <#= sn #> value, bool withSeparator = false)
+        {
+            assistant.IncrementDepth();
+            if (assistant.MaximumDepthExceeded())
+                return;
+
+            assistant.AddStartObject();
+            assistant.AddType("<#= qn #>", true/*withSeparator*/);
+            if (value == null)
+            {
+                assistant.Add("data", "<null>");
+                assistant.AddEndObject();
+                return;
+            }
+
+            assistant.AddKey("data");
+            assistant.AddPairSeparator();
+            assistant.AddStartObject();
+<#+
+            const auto attr(p.value_attribute());
+            const auto oap(a.get_assistant_properties(attr));
+            if (oap && oap->requires_assistance()) {
+#>
+            assistant.Add("<#= attr.name().simple() #>", value.<#= attr.name().simple() #>);
+<#+
+            } else {
+                const auto attr_qn(a.get_qualified_name(attr.parsed_type().current()));
+#>
+            assistant.AddKey("<#= attr.name().simple() #>");
+            assistant.AddPairSeparator();
+            <#= attr_qn #>Dumper.Dump(assistant, value.<#= attr.name().simple() #>;
+<#+
+            }
+#>
+            assistant.AddEndObject(); // data
+            assistant.AddEndObject(); // main object
+            assistant.HandleMemberSeparator(withSeparator);
+
+            assistant.DecrementDepth();
+        }
+
+        public static string Dump(<#= sn #> value)
+        {
+            var assistant = new AssistantDumper();
+            Dump(assistant, value);
+            return assistant.ToString();
+        }
+    }
+<#+
+        }
+    } // sbf
+    return a.make_artefact();
+}
+#>

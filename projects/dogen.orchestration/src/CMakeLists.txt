@@ -56,9 +56,9 @@ target_link_libraries(${lib_target_name}
     dogen.injection.json.lib
     dogen.injection.dia.lib
     dogen.logical.lib
-    dogen.generation.cpp.lib
-    dogen.generation.csharp.lib
-    dogen.generation.lib
+    dogen.m2t.cpp.lib
+    dogen.m2t.csharp.lib
+    dogen.m2t.lib
     ${relational_lib}
     dogen.lib
     dogen.tracing.lib

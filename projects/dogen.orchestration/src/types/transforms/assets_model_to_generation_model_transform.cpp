@@ -28,7 +28,7 @@
 #include "dogen.logical/io/entities/technical_space_io.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/elements_traversal.hpp"
-#include "dogen.generation/io/entities/model_io.hpp"
+#include "dogen.m2t/io/entities/model_io.hpp"
 #include "dogen.orchestration/types/transforms/transform_exception.hpp"
 #include "dogen.orchestration/types/transforms/assets_model_to_generation_model_transform.hpp"
 
@@ -52,7 +52,7 @@ namespace {
 
 class model_populator {
 public:
-    explicit model_populator(generation::entities::model& m) : result_(m) { }
+    explicit model_populator(m2t::entities::model& m) : result_(m) { }
 
 private:
     void ensure_not_yet_processed(const std::string& id) {
@@ -89,10 +89,10 @@ public:
     }
 
 public:
-    const generation::entities::model& result() const { return result_; }
+    const m2t::entities::model& result() const { return result_; }
 
 private:
-    generation::entities::model& result_;
+    m2t::entities::model& result_;
     std::unordered_set<std::string> processed_ids_;
 };
 
@@ -124,9 +124,9 @@ compute_total_size(const logical::entities::model& m) {
     return r;
 }
 
-generation::entities::model assets_model_to_generation_model_transform::
+m2t::entities::model assets_model_to_generation_model_transform::
 apply(const logical::entities::model& m) {
-    generation::entities::model r;
+    m2t::entities::model r;
     r.name(m.name());
     r.meta_name(logical::helpers::meta_name_factory::make_model_name());
 
@@ -157,15 +157,15 @@ apply(const logical::entities::model& m) {
     return r;
 }
 
-std::list<generation::entities::model>
+std::list<m2t::entities::model>
 assets_model_to_generation_model_transform::
-apply(const generation::transforms::context& ctx,
+apply(const m2t::transforms::context& ctx,
     const std::list<logical::entities::model>& ms) {
     tracing::scoped_transform_tracer stp(lg,
         "assets model to generation model transform",
         transform_id, *ctx.tracer(), ms);
 
-    std::list<generation::entities::model> r;
+    std::list<m2t::entities::model> r;
     for(const auto& m : ms)
         r.push_back(apply(m));
 

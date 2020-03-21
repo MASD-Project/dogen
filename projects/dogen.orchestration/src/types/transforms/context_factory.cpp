@@ -36,11 +36,11 @@
 #include "dogen.physical/types/features/initializer.hpp"
 #include "dogen.injection/types/features/initializer.hpp"
 #include "dogen.logical/types/features/initializer.hpp"
-#include "dogen.generation/types/features/initializer.hpp"
-#include "dogen.generation/types/transforms/physical_model_chain.hpp"
-#include "dogen.generation/types/transforms/physical_model_transform_registrar.hpp"
-#include "dogen.generation.cpp/types/feature_initializer.hpp"
-#include "dogen.generation.csharp/types/feature_initializer.hpp"
+#include "dogen.m2t/types/features/initializer.hpp"
+#include "dogen.m2t/types/transforms/physical_model_chain.hpp"
+#include "dogen.m2t/types/transforms/physical_model_transform_registrar.hpp"
+#include "dogen.m2t.cpp/types/feature_initializer.hpp"
+#include "dogen.m2t.csharp/types/feature_initializer.hpp"
 #include "dogen.orchestration/io/transforms/context_io.hpp"
 #include "dogen.orchestration/types/features/initializer.hpp"
 #include "dogen.orchestration/types/transforms/factory_exception.hpp"
@@ -60,7 +60,7 @@ const std::string duplicate_segment("Duplicat segment: ");
 
 namespace dogen::orchestration::transforms {
 
-using generation::transforms::physical_model_transform_registrar;
+using m2t::transforms::physical_model_transform_registrar;
 
 boost::shared_ptr<physical::entities::location_repository>
 create_archetype_location_repository(
@@ -81,11 +81,11 @@ register_variability_entities(variability::helpers::registrar& rg) {
     physical::features::initializer::register_entities(rg);
     injection::features::initializer::register_entities(rg);
     logical::features::initializer::register_entities(rg);
-    generation::features::initializer::register_entities(rg);
+    m2t::features::initializer::register_entities(rg);
     templating::initializer::register_entities(rg);
     variability::features::initializer::register_entities(rg);
-    generation::cpp::feature_initializer::register_entities(rg);
-    generation::csharp::feature_initializer::register_entities(rg);
+    m2t::cpp::feature_initializer::register_entities(rg);
+    m2t::csharp::feature_initializer::register_entities(rg);
     features::initializer::register_entities(rg);
 }
 
@@ -97,7 +97,7 @@ make_injection_context(const configuration& cfg,
     /*
      * Obtain the transform registrar and ensure it has been setup.
      */
-    using generation::transforms::physical_model_chain;
+    using m2t::transforms::physical_model_chain;
     const auto& rg = physical_model_chain::registrar();
     rg.validate();
 
@@ -141,7 +141,7 @@ make_context(const configuration& cfg, const std::string& activity,
     /*
      * Obtain the transform registrar and ensure it has been setup.
      */
-    using generation::transforms::physical_model_chain;
+    using m2t::transforms::physical_model_chain;
     const auto& rg = physical_model_chain::registrar();
     rg.validate();
 

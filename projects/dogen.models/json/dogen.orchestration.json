@@ -11,7 +11,7 @@
     "masd.injection.reference": "dogen.tracing",
     "masd.injection.reference": "dogen.injection",
     "masd.injection.reference": "dogen.logical",
-    "masd.injection.reference": "dogen.generation",
+    "masd.injection.reference": "dogen.m2t",
     "masd.injection.reference": "dogen.physical",
     "masd.injection.reference": "masd",
     "masd.injection.reference": "masd.variability",
@@ -85,7 +85,7 @@
         },
         {
           "name": "generation_context",
-          "type": "generation::transforms::context"
+          "type": "m2t::transforms::context"
         },
         {
           "name": "physical_context",

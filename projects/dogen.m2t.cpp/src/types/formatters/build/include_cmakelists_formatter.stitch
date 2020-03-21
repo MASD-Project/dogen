@@ -1,0 +1,105 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::formatters::build #>
+<#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+<#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/build/cmakelists.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/build/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/formatting_error.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/build/include_cmakelists_formatter.hpp" #>
+<#+
+
+std::string include_cmakelists_formatter::static_id() {
+    return traits::include_cmakelists_archetype();
+}
+
+std::string include_cmakelists_formatter::id() const {
+    return static_id();
+}
+
+physical::entities::location include_cmakelists_formatter::
+archetype_location() const {
+    static physical::entities::location
+        r(cpp::traits::kernel(), cpp::traits::backend(),
+          traits::facet(),
+          include_cmakelists_formatter::static_id());
+    return r;
+}
+
+const logical::entities::name& include_cmakelists_formatter::meta_name() const {
+    using logical::helpers::meta_name_factory;
+    static auto r(meta_name_factory::make_build_cmakelists_name());
+    return r;
+}
+
+std::string include_cmakelists_formatter::family() const {
+    return cpp::traits::cmake_family();
+}
+
+inclusion_support_types include_cmakelists_formatter::
+inclusion_support_type() const {
+    return inclusion_support_types::not_supported;
+}
+
+boost::filesystem::path include_cmakelists_formatter::inclusion_path(
+    const formattables::locator& /*l*/, const logical::entities::name& n) const {
+
+    using namespace dogen::utility::log;
+    using namespace dogen::m2t::cpp::formatters;
+    static logger lg(logger_factory(include_cmakelists_formatter::static_id()));
+
+    static const std::string not_supported("Inclusion path is not supported: ");
+
+    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
+}
+
+boost::filesystem::path include_cmakelists_formatter::full_path(
+    const formattables::locator& l, const logical::entities::name& n) const {
+    return l.make_full_path_for_include_cmakelists(n, static_id());
+}
+
+std::list<std::string> include_cmakelists_formatter::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& /*f*/,
+    const logical::entities::element& /*e*/) const {
+    static std::list<std::string> r;
+    return r;
+}
+
+physical::entities::artefact include_cmakelists_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
+    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    using logical::entities::build::cmakelists;
+    const auto& c(a.as<cmakelists>(e));
+
+    {
+        const auto ts(logical::entities::technical_space::cmake);
+        a.make_decoration_preamble(e, ts);
+#>
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/<#= c.source_directory_name() #>)
+<#+
+       if (a.is_tests_enabled()) {
+#>
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/<#= c.tests_directory_name() #>)
+<#+
+       }
+#>
+
+install(
+    DIRECTORY <#= c.include_directory_path() #>/
+    DESTINATION <#= c.include_directory_path() #>/
+    COMPONENT headers
+    FILES_MATCHING PATTERN "*.<#= c.header_file_extension() #>")
+<#+
+    } // sbf
+    return a.make_artefact();
+}
+#>

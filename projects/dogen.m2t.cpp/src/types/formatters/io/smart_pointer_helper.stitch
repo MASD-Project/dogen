@@ -1,0 +1,42 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::formatters::io #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/io/smart_pointer_helper.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formattables/helper_properties.hpp" #>
+<#@ masd.stitch.wale.text_template=cpp_helper_formatter_implementation.wale #>
+<#@ masd.stitch.wale.kvp.helper.family=SmartPointer #>
+<#@ masd.stitch.wale.kvp.class.simple_name=smart_pointer_helper #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void smart_pointer_helper::
+format(assistant& a, const formattables::helper_properties& hp) const {
+    {
+        const auto d(hp.current());
+        const auto nt_qn(d.name_tree_qualified());
+        const auto n_qn(d.name_qualified());
+        auto snf(a.make_scoped_namespace_formatter(d.namespaces()));
+        const auto containee(hp.direct_descendants().front());
+#>
+
+inline std::ostream& operator<<(std::ostream& s, const <#= nt_qn #>& v) {
+    s << "{ " << "\"__type__\": " << "\"<#= n_qn #>\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << <#= a.streaming_for_type(containee, "*v") #>;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+<#+
+    }
+#>
+
+<#+
+}
+#>

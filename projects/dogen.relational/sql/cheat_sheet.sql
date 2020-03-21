@@ -275,7 +275,7 @@ from (
     where "TRANSFORM_INSTANCE_ID" in (
         select "TRANSFORM_INSTANCE_ID" from "TRANSFORM_EVENT"
         where "RUN_ID" = '1e4f6480-03b4-4581-ae59-a4af4db27fb0'
-        and "PAYLOAD"->>'__type__' = 'dogen::generation::entities::model'
+        and "PAYLOAD"->>'__type__' = 'dogen::m2t::entities::model'
     )
 ) as x
 where x."NAME" = 'cpp_ref_impl.cpp_model.registrar';
@@ -330,7 +330,7 @@ where "PAYLOAD_TYPE" = 'dogen::logical::entities::model';
 select "TRANSFORM_INSTANCE_ID", "TRANSFORM_ID",
 cast("PAYLOAD"->'elements' as varchar(50)) "PAYLOAD"
 from transforms_for_run_id('1675f7b9-5ccd-4e9d-8d92-d0b7972031ba')
-where "PAYLOAD_TYPE" = 'dogen::generation::entities::model';
+where "PAYLOAD_TYPE" = 'dogen::m2t::entities::model';
 
 /*
 * All types on a generation model.
@@ -345,7 +345,7 @@ from (
     select "TRANSFORM_INSTANCE_ID", "TRANSFORM_ID",
     cast(jsonb_array_elements("PAYLOAD"->'elements')->'data'->'__parent_0__'->'name'->'qualified'->>'dot' as varchar(50)) "NAME"
     from transforms_for_run_id('1675f7b9-5ccd-4e9d-8d92-d0b7972031ba')
-    where "PAYLOAD_TYPE" = 'dogen::generation::entities::model'
+    where "PAYLOAD_TYPE" = 'dogen::m2t::entities::model'
 ) x
 where x."NAME" like '%registrar%';
 

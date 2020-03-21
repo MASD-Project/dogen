@@ -31,7 +31,7 @@
 #include "dogen.variability/lexical_cast/entities/binding_point_lc.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.injection/types/transforms/model_production_chain.hpp"
-#include "dogen.generation/types/transforms/physical_model_chain.hpp"
+#include "dogen.m2t/types/transforms/physical_model_chain.hpp"
 #include "dogen.orchestration/types/transforms/scoped_context_manager.hpp"
 #include "dogen.orchestration/types/spec_dumper.hpp"
 
@@ -157,7 +157,7 @@ spec_category spec_dumper::create_generation_category() const {
     spec_category r;
     r.name("Generators");
     r.description("Available backends for code generation.");
-    using dogen::generation::transforms::physical_model_chain;
+    using dogen::m2t::transforms::physical_model_chain;
     const auto& rg2(physical_model_chain::registrar());
     for(const auto& pair: rg2.transforms_by_technical_space()) {
         const auto& t(*pair.second);

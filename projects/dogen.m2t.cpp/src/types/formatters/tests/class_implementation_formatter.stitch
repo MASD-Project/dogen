@@ -1,0 +1,588 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::formatters::tests #>
+<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+<#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/join.hpp>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/inclusion_constants.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/formatting_error.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/hash/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/serialization/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/tests/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formatters/tests/class_implementation_formatter.hpp" #>
+<#+
+
+std::string class_implementation_formatter::static_id() {
+    return traits::class_implementation_archetype();
+}
+
+std::string class_implementation_formatter::id() const {
+    return static_id();
+}
+
+physical::entities::location
+class_implementation_formatter::archetype_location() const {
+    static physical::entities::location
+        r(cpp::traits::kernel(),  cpp::traits::backend(),
+          traits::facet(),
+          class_implementation_formatter::static_id());
+    return r;
+}
+
+const logical::entities::name& class_implementation_formatter::meta_name() const {
+    using logical::helpers::meta_name_factory;
+    static auto r(meta_name_factory::make_object_name());
+    return r;
+}
+
+std::string class_implementation_formatter::family() const {
+    return cpp::traits::implementation_family();
+}
+
+inclusion_support_types class_implementation_formatter::inclusion_support_type() const {
+    return inclusion_support_types::not_supported;
+}
+
+boost::filesystem::path class_implementation_formatter::inclusion_path(
+    const formattables::locator& /*l*/, const logical::entities::name& n) const {
+
+    using namespace dogen::utility::log;
+    static logger lg(
+        logger_factory(class_implementation_formatter::static_id()));
+    static const std::string not_supported("Inclusion path is not supported: ");
+
+    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
+}
+
+boost::filesystem::path class_implementation_formatter::full_path(
+    const formattables::locator& l, const logical::entities::name& n) const {
+    return l.make_full_path_for_tests_cpp_implementation(n, static_id());
+}
+
+std::list<std::string> class_implementation_formatter::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& f,
+    const logical::entities::element& e) const {
+
+    using logical::entities::structural::object;
+    const auto& o(assistant::as<object>(e));
+    auto builder(f.make());
+    builder.add(o.name(), types::traits::class_header_archetype());
+    builder.add(o.name(), test_data::traits::class_header_archetype());
+
+    using ic = inclusion_constants;
+    builder.add(ic::std::string());
+    builder.add(ic::boost::test::unit_test());
+
+    if (o.is_parent())
+        builder.add(ic::boost::shared_ptr());
+
+    const auto io_arch(io::traits::class_header_archetype());
+    const bool io_enabled(builder.is_enabled(o.name(), io_arch));
+    if (io_enabled) {
+        builder.add(o.name(), io_arch);
+        builder.add(ic::std::sstream());
+        builder.add(ic::boost::property_tree::ptree());
+        builder.add(ic::boost::property_tree::json_parser());
+    }
+
+    using ser = formatters::serialization::traits;
+    const auto ser_arch(ser::class_header_archetype());
+    const bool ser_enabled(builder.is_enabled(o.name(), ser_arch));
+    if (ser_enabled) {
+        builder.add(o.name(), ser_arch);
+
+        if (o.type_registrar())
+            builder.add(o.type_registrar(), ser::type_registrar_header_archetype());
+
+        builder.add(ic::boost::archive::text_iarchive());
+        builder.add(ic::boost::archive::text_oarchive());
+        builder.add(ic::boost::archive::binary_iarchive());
+        builder.add(ic::boost::archive::binary_oarchive());
+        builder.add(ic::boost::archive::polymorphic_iarchive());
+        builder.add(ic::boost::archive::polymorphic_oarchive());
+        builder.add(ic::boost::serialization::nvp());
+        builder.add(ic::boost::archive::xml_iarchive());
+        builder.add(ic::boost::archive::xml_oarchive());
+
+        if (o.is_parent())
+            builder.add(ic::boost::serialization::shared_ptr());
+    }
+
+    using hash = formatters::hash::traits;
+    const auto hash_arch(hash::class_header_archetype());
+    const bool hash_enabled(builder.is_enabled(o.name(), hash_arch));
+    if (hash_enabled)
+        builder.add(o.name(), hash_arch);
+
+    return builder.build();
+}
+
+physical::entities::artefact class_implementation_formatter::
+format(const context& ctx, const logical::entities::element& e) const {
+    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    const auto& o(a.as<logical::entities::structural::object>(e));
+    {
+        auto sbf(a.make_scoped_boilerplate_formatter(o));
+        const auto qn(a.get_qualified_name(o.name()));
+        auto list(e.name().location().internal_modules());
+        list.push_back(o.name().simple());
+        const std::string test_suite_name(boost::join(list, "_"));
+
+        std::string type_name("auto");
+        if (a.is_cpp_standard_98())
+            type_name = qn;
+
+#>
+BOOST_AUTO_TEST_SUITE(<#= test_suite_name #>_tests)
+
+<#+
+        /*
+         * If we have no attributes at all, we cannot test this
+         * type. Similarly, if test data is not enabled, none of the
+         * tests can be generated. In either case, we need to insert a
+         * fake test for now. The real solution will be to filter
+         * based on element state.
+         */
+        if (o.all_attributes().empty() || !a.is_test_data_enabled()) {
+            /*
+             * No tests.
+             */
+#>
+BOOST_AUTO_TEST_CASE(fake_test) {
+    BOOST_CHECK(true);
+}
+
+<#+
+        } else {
+            /*
+             * Types tests. These cannot be performed to parents as
+             * they are abstract.
+             */
+            if (!o.is_parent()) {
+#>
+BOOST_AUTO_TEST_CASE(identical_objects_are_equal) {
+    <#= qn #>_generator g;
+    const <#= type_name #> a(g());
+    const <#= type_name #> b(a);
+
+    BOOST_CHECK(a == b);
+    BOOST_CHECK(b == a);
+    BOOST_CHECK(!(a != b));
+}
+
+BOOST_AUTO_TEST_CASE(an_object_is_equal_to_itself) {
+    <#= qn #>_generator g;
+    const <#= type_name #> a(g());
+
+    BOOST_CHECK(a == a);
+    BOOST_CHECK(!(a != a));
+}
+
+BOOST_AUTO_TEST_CASE(distinct_objects_are_unequal) {
+    <#= qn #>_generator g;
+    const <#= type_name #> a(g());
+    const <#= type_name #> b(g());
+
+    BOOST_CHECK(!(a == b));
+    BOOST_CHECK(a != b);
+}
+
+<#+
+                if (!o.is_immutable()) {
+#>
+BOOST_AUTO_TEST_CASE(assigning_an_object_to_itself_results_in_the_same_object) {
+#if defined(__clang__) && !defined(__apple_build_version__)  && (__clang_major__ >= 7)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wself-assign-overloaded"
+#endif
+    <#= qn #>_generator g;
+    <#= type_name #> a(g());
+    const <#= type_name #> b(a);
+    const <#= type_name #> c(g());
+
+    a = a;
+    BOOST_CHECK(a == b);
+    BOOST_CHECK(a != c);
+#if defined(__clang__) && !defined(__apple_build_version__)  && (__clang_major__ >= 7)
+#pragma clang diagnostic pop
+#endif
+}
+
+<#+
+                }
+
+                // FIXME: should be 11 or greater.
+                if (!a.is_cpp_standard_98()) {
+#>
+BOOST_AUTO_TEST_CASE(moved_objects_are_equal) {
+    <#= qn #>_generator g;
+    g();
+    <#= type_name #> a(g());
+    const <#= type_name #> b = <#= qn #>();
+    const <#= type_name #> c(a);
+    BOOST_CHECK(a != b);
+    BOOST_CHECK(a == c);
+
+    const <#= type_name #> d = std::move(a);
+    BOOST_CHECK(d == c);
+    BOOST_CHECK(d != b);
+}
+
+<#+
+                }
+
+                if (!o.is_immutable()) {
+#>
+BOOST_AUTO_TEST_CASE(assigned_objects_are_equal) {
+    <#= qn #>_generator g;
+    g();
+    const <#= type_name #> a(g());
+    <#= qn #> b;
+    BOOST_CHECK(a != b);
+
+    b = a;
+    BOOST_CHECK(a == b);
+}
+
+BOOST_AUTO_TEST_CASE(copy_constructed_objects_are_equal) {
+    <#= qn #>_generator g;
+    g();
+    const <#= type_name #> a(g());
+    <#= type_name #> b(a);
+    BOOST_CHECK(a == b);
+
+    b = <#= qn #>();
+    BOOST_CHECK(a != b);
+}
+
+BOOST_AUTO_TEST_CASE(swapping_objects_results_in_the_expected_state) {
+    <#= qn #>_generator g;
+    const <#= type_name #> a(g());
+    const <#= type_name #> b(g());
+
+    <#= type_name #> c(a);
+    <#= type_name #> d(b);
+    BOOST_CHECK(c == a);
+    BOOST_CHECK(d == b);
+
+    std::swap(c, d);
+    BOOST_CHECK(c == b);
+    BOOST_CHECK(d == a);
+}
+
+<#+
+                }
+            }
+
+            if (a.is_io_enabled()) {
+                /*
+                 * IO tests.
+                 */
+#>
+BOOST_AUTO_TEST_CASE(inserter_operator_produces_valid_json) {
+<#+
+                if (o.is_parent()) {
+#>
+    <#= qn #>_generator g;
+    const boost::shared_ptr<<#= qn #>> a(g.create_ptr(1));
+    std::stringstream s;
+    s << *a;
+
+    boost::property_tree::ptree pt;
+    BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+<#+
+                } else {
+#>
+    <#= qn #>_generator g;
+    const <#= type_name #> a(g());
+    std::stringstream s;
+    s << a;
+
+    boost::property_tree::ptree pt;
+    BOOST_REQUIRE_NO_THROW(read_json(s, pt));
+<#+
+                }
+#>
+}
+
+<#+
+            }
+
+            if (a.is_serialization_enabled()) {
+                /*
+                 * Serialization tests.
+                 */
+                 const auto registrar_qn(o.type_registrar() ?
+                     a.get_qualified_name(*o.type_registrar()) : std::string());
+
+                if (o.is_parent()) {
+#>
+BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {
+    <#= qn #>_generator g;
+    const boost::shared_ptr<<#= qn #>> a(g.create_ptr(1));
+
+    using namespace boost::archive;
+    std::ostringstream os;
+    {
+        xml_oarchive oa(os);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<xml_oarchive>(oa);
+<#+
+                    }
+#>
+
+        oa << BOOST_SERIALIZATION_NVP(a);
+    }
+
+    boost::shared_ptr<<#= qn #>> b;
+    std::istringstream is(os.str());
+    {
+        xml_iarchive ia(is);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<xml_iarchive>(ia);
+<#+
+                    }
+#>
+        ia >> BOOST_SERIALIZATION_NVP(b);
+    }
+
+    BOOST_REQUIRE(a);
+    BOOST_REQUIRE(b);
+    BOOST_CHECK(*a == *b);
+}
+
+BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {
+    <#= qn #>_generator g;
+    const boost::shared_ptr<<#= qn #>> a(g.create_ptr(1));
+
+    using namespace boost::archive;
+    std::ostringstream os;
+    {
+        text_oarchive oa(os);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<text_oarchive>(oa);
+<#+
+                    }
+#>
+        oa << a;
+    }
+
+    boost::shared_ptr<<#= qn #>> b;
+    std::istringstream is(os.str());
+    {
+        text_iarchive ia(is);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<text_iarchive>(ia);
+<#+
+                    }
+#>
+        ia >> b;
+    }
+
+    BOOST_REQUIRE(a);
+    BOOST_REQUIRE(b);
+    BOOST_CHECK(*a == *b);
+}
+
+BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {
+    <#= qn #>_generator g;
+    const boost::shared_ptr<<#= qn #>> a(g.create_ptr(1));
+
+    using namespace boost::archive;
+    std::ostringstream os;
+    {
+        binary_oarchive oa(os);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<binary_oarchive>(oa);
+<#+
+                    }
+#>
+        oa << a;
+    }
+
+    boost::shared_ptr<<#= qn #>> b;
+    std::istringstream is(os.str());
+    {
+        binary_iarchive ia(is);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<binary_iarchive>(ia);
+<#+
+                    }
+#>
+        ia >> b;
+    }
+
+    BOOST_REQUIRE(a);
+    BOOST_REQUIRE(b);
+    BOOST_CHECK(*a == *b);
+}
+
+<#+
+                } else {
+
+#>
+BOOST_AUTO_TEST_CASE(xml_roundtrip_produces_the_same_entity) {
+    <#= qn #>_generator g;
+    const <#= type_name #> a(g());
+
+    using namespace boost::archive;
+    std::ostringstream os;
+    {
+        xml_oarchive oa(os);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<xml_oarchive>(oa);
+<#+
+                    }
+#>
+        oa << BOOST_SERIALIZATION_NVP(a);
+    }
+
+    <#= qn #> b = <#= qn #>();
+    std::istringstream is(os.str());
+    {
+        xml_iarchive ia(is);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<xml_iarchive>(ia);
+<#+
+                    }
+#>
+        ia >> BOOST_SERIALIZATION_NVP(b);
+    }
+
+    BOOST_CHECK(a == b);
+}
+
+BOOST_AUTO_TEST_CASE(text_roundtrip_produces_the_same_entity) {
+    <#= qn #>_generator g;
+    const <#= type_name #> a(g());
+
+    using namespace boost::archive;
+    std::ostringstream os;
+    {
+        text_oarchive oa(os);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<text_oarchive>(oa);
+<#+
+                    }
+#>
+        oa << a;
+    }
+
+    <#= qn #> b = <#= qn #>();
+    std::istringstream is(os.str());
+    {
+        text_iarchive ia(is);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<text_iarchive>(ia);
+<#+
+                    }
+#>
+        ia >> b;
+    }
+
+    BOOST_CHECK(a == b);
+}
+
+BOOST_AUTO_TEST_CASE(binary_roundtrip_produces_the_same_entity) {
+    <#= qn #>_generator g;
+    const <#= type_name #> a(g());
+
+    using namespace boost::archive;
+    std::ostringstream os;
+    {
+        binary_oarchive oa(os);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<binary_oarchive>(oa);
+<#+
+                    }
+#>
+        oa << a;
+    }
+
+    <#= qn #> b = <#= qn #>();
+    std::istringstream is(os.str());
+    {
+        binary_iarchive ia(is);
+<#+
+                    if (o.type_registrar()) {
+#>
+        <#= registrar_qn #>::register_types<binary_iarchive>(ia);
+<#+
+                    }
+#>
+        ia >> b;
+    }
+
+    BOOST_CHECK(a == b);
+}
+<#+
+                }
+            }
+
+            if (a.is_hash_enabled() && !o.is_parent()) {
+                /*
+                 * hash tests.
+                 */
+#>
+BOOST_AUTO_TEST_CASE(equal_objects_generate_the_same_hash) {
+    <#= qn #>_generator g;
+    g();
+    const <#= type_name #> a(g());
+    const <#= type_name #> b(a);
+
+    std::hash<<#= qn #>> hasher;
+    BOOST_CHECK(hasher(a) == hasher(b));
+}
+
+BOOST_AUTO_TEST_CASE(different_objects_generate_different_hashes) {
+    <#= qn #>_generator g;
+    g();
+    const <#= type_name #> a(g());
+    const <#= type_name #> b(g());
+
+    std::hash<<#= qn #>> hasher;
+    BOOST_CHECK(hasher(a) != hasher(b));
+}
+
+<#+
+            }
+        }
+#>
+BOOST_AUTO_TEST_SUITE_END()
+<#+
+    } // sbf
+    return a.make_artefact();
+}
+#>
