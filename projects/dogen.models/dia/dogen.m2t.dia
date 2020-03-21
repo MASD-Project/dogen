@@ -2955,7 +2955,7 @@ spaces.#</dia:string>
         <dia:real val="5.2000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#physical_model_chain#</dia:string>
+        <dia:string>#model_to_text_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -3162,7 +3162,7 @@ spaces.#</dia:string>
         <dia:real val="9.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#physical_model_transform_interface#</dia:string>
+        <dia:string>#model_to_text_technical_space_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable::header_only#</dia:string>
@@ -3506,7 +3506,7 @@ spaces.#</dia:string>
         <dia:real val="7.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#physical_model_transform_registrar#</dia:string>
+        <dia:string>#model_to_text_technical_space_chain_registrar#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -3598,7 +3598,7 @@ spaces.#</dia:string>
             <dia:string>#transforms_by_technical_space_#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;logical::entities::technical_space, std::shared_ptr&lt;physical_model_transform_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;logical::entities::technical_space, std::shared_ptr&lt;model_to_text_technical_space_chain&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -3652,7 +3652,7 @@ spaces.#</dia:string>
                 <dia:string>#t#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#boost::shared_ptr&lt;physical_model_transform_interface&gt;#</dia:string>
+                <dia:string>#boost::shared_ptr&lt;model_to_text_technical_space_chain&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -3704,7 +3704,7 @@ spaces.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;physical_model_transform_interface&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;model_to_text_technical_space_chain&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3752,7 +3752,7 @@ spaces.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;logical::entities::technical_space, std::shared_ptr&lt;physical_model_transform_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;logical::entities::technical_space, std::shared_ptr&lt;model_to_text_technical_space_chain&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

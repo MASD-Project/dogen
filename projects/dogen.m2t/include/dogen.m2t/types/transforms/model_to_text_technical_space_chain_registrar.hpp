@@ -32,7 +32,7 @@
 #include "dogen.physical/types/entities/location.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.logical/hash/entities/technical_space_hash.hpp"
-#include "dogen.m2t/types/transforms/physical_model_transform_interface.hpp"
+#include "dogen.m2t/types/transforms/model_to_text_technical_space_chain.hpp"
 
 namespace dogen::m2t::transforms {
 
@@ -41,13 +41,13 @@ namespace dogen::m2t::transforms {
  * transforms. These are implemented by technical space-specific
  * backends.
  */
-class physical_model_transform_registrar {
+class model_to_text_technical_space_chain_registrar {
 public:
     /**
      * @brief Registers a model to text transform.
      */
     void register_transform(
-        std::shared_ptr<physical_model_transform_interface> t);
+        std::shared_ptr<model_to_text_technical_space_chain> t);
 
 public:
     /**
@@ -60,7 +60,7 @@ public:
      * @brief Returns the transform for the supplied technical space,
      * if any exists. Otherwise returns a null shared pointer.
      */
-    std::shared_ptr<physical_model_transform_interface>
+    std::shared_ptr<model_to_text_technical_space_chain>
     transform_for_technical_space(
         const logical::entities::technical_space ts) const;
 
@@ -69,12 +69,12 @@ public:
      */
     const std::unordered_map<
         logical::entities::technical_space,
-        std::shared_ptr<physical_model_transform_interface>>&
+        std::shared_ptr<model_to_text_technical_space_chain>>&
     transforms_by_technical_space() const;
 
 private:
     std::unordered_map<logical::entities::technical_space,
-    std::shared_ptr<physical_model_transform_interface>>
+    std::shared_ptr<model_to_text_technical_space_chain>>
     transforms_by_technical_space_;
 };
 

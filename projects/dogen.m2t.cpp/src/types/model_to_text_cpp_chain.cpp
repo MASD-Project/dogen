@@ -26,7 +26,7 @@
 #include "dogen.m2t.cpp/types/traits.hpp"
 #include "dogen.m2t.cpp/types/formatters/workflow.hpp"
 #include "dogen.m2t.cpp/types/formattables/workflow.hpp"
-#include "dogen.m2t.cpp/types/physical_model_transform.hpp"
+#include "dogen.m2t.cpp/types/model_to_text_cpp_chain.hpp"
 
 namespace {
 
@@ -44,18 +44,18 @@ const std::string description(
 
 namespace dogen::m2t::cpp {
 
-physical_model_transform::
-~physical_model_transform() noexcept { }
+model_to_text_cpp_chain::
+~model_to_text_cpp_chain() noexcept { }
 
 const formatters::repository&
-physical_model_transform::formatters_repository() const {
+model_to_text_cpp_chain::formatters_repository() const {
     const auto& rg(formatters::workflow::registrar());
     rg.validate();
     return rg.formatter_repository();
 }
 
 formattables::model
-physical_model_transform::create_formattables_model(
+model_to_text_cpp_chain::create_formattables_model(
     const variability::entities::feature_model& feature_model,
     const variability::entities::configuration& rcfg,
     const formatters::repository& frp, const formattables::locator& l,
@@ -64,7 +64,7 @@ physical_model_transform::create_formattables_model(
     return fw.execute(feature_model, rcfg, l, frp, m);
 }
 
-formattables::locator physical_model_transform::make_locator(
+formattables::locator model_to_text_cpp_chain::make_locator(
     const boost::filesystem::path& output_directory_path,
     const variability::entities::feature_model& fm,
     const variability::entities::configuration& cfg,
@@ -81,16 +81,16 @@ formattables::locator physical_model_transform::make_locator(
     return r;
 }
 
-std::string physical_model_transform::id() const {
+std::string model_to_text_cpp_chain::id() const {
     return traits::backend();
 }
 
-std::string physical_model_transform::description() const {
+std::string model_to_text_cpp_chain::description() const {
     return ::description;
 }
 
 std::list<physical::entities::artefact>
-physical_model_transform::
+model_to_text_cpp_chain::
 format(const std::unordered_set<m2t::entities::element_archetype>&
     enabled_archetype_for_element, const formattables::locator& l,
     const variability::entities::feature_model& feature_model,
@@ -100,7 +100,7 @@ format(const std::unordered_set<m2t::entities::element_archetype>&
     return wf.execute(enabled_archetype_for_element, fm);
 }
 
-std::list<boost::filesystem::path> physical_model_transform::
+std::list<boost::filesystem::path> model_to_text_cpp_chain::
 managed_directories(const formattables::locator& l) const {
     std::list<boost::filesystem::path> r;
     r.push_back(l.project_path());
@@ -111,38 +111,38 @@ managed_directories(const formattables::locator& l) const {
 }
 
 const std::forward_list<physical::entities::location>&
-physical_model_transform::archetype_locations() const {
+model_to_text_cpp_chain::archetype_locations() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations();
 }
 
 const std::unordered_map<std::string,
                          physical::entities::locations_group>&
-physical_model_transform::archetype_locations_by_meta_name() const {
+model_to_text_cpp_chain::archetype_locations_by_meta_name() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations_by_meta_name();
 }
 
 const std::unordered_map<std::string,
                          std::list<physical::entities::location>>&
-physical_model_transform::archetype_locations_by_family() const {
+model_to_text_cpp_chain::archetype_locations_by_family() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations_by_family();
 }
 
 const physical::entities::location_repository_parts&
-physical_model_transform::
+model_to_text_cpp_chain::
 archetype_location_repository_parts() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_location_repository_parts();
 }
 
 logical::entities::technical_space
-physical_model_transform::technical_space() const {
+model_to_text_cpp_chain::technical_space() const {
     return logical::entities::technical_space::cpp;
 }
 
-physical::entities::model physical_model_transform::apply(
+physical::entities::model model_to_text_cpp_chain::apply(
     const m2t::transforms::context& ctx,
     const bool enable_backend_directories,
     const m2t::entities::model& m) const {

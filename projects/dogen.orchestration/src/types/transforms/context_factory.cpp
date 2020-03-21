@@ -37,8 +37,8 @@
 #include "dogen.injection/types/features/initializer.hpp"
 #include "dogen.logical/types/features/initializer.hpp"
 #include "dogen.m2t/types/features/initializer.hpp"
-#include "dogen.m2t/types/transforms/physical_model_chain.hpp"
-#include "dogen.m2t/types/transforms/physical_model_transform_registrar.hpp"
+#include "dogen.m2t/types/transforms/model_to_text_chain.hpp"
+#include "dogen.m2t/types/transforms/model_to_text_technical_space_chain_registrar.hpp"
 #include "dogen.m2t.cpp/types/feature_initializer.hpp"
 #include "dogen.m2t.csharp/types/feature_initializer.hpp"
 #include "dogen.orchestration/io/transforms/context_io.hpp"
@@ -60,11 +60,11 @@ const std::string duplicate_segment("Duplicat segment: ");
 
 namespace dogen::orchestration::transforms {
 
-using m2t::transforms::physical_model_transform_registrar;
+using m2t::transforms::model_to_text_technical_space_chain_registrar;
 
 boost::shared_ptr<physical::entities::location_repository>
 create_archetype_location_repository(
-    const physical_model_transform_registrar& rg) {
+    const model_to_text_technical_space_chain_registrar& rg) {
 
     physical::helpers::location_repository_builder b;
     for (const auto& pair : rg.transforms_by_technical_space()) {
@@ -97,8 +97,8 @@ make_injection_context(const configuration& cfg,
     /*
      * Obtain the transform registrar and ensure it has been setup.
      */
-    using m2t::transforms::physical_model_chain;
-    const auto& rg = physical_model_chain::registrar();
+    using m2t::transforms::model_to_text_chain;
+    const auto& rg = model_to_text_chain::registrar();
     rg.validate();
 
     /*
@@ -141,8 +141,8 @@ make_context(const configuration& cfg, const std::string& activity,
     /*
      * Obtain the transform registrar and ensure it has been setup.
      */
-    using m2t::transforms::physical_model_chain;
-    const auto& rg = physical_model_chain::registrar();
+    using m2t::transforms::model_to_text_chain;
+    const auto& rg = model_to_text_chain::registrar();
     rg.validate();
 
     /*

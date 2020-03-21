@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_M2T_CPP_TYPES_PHYSICAL_MODEL_TRANSFORM_HPP
-#define DOGEN_M2T_CPP_TYPES_PHYSICAL_MODEL_TRANSFORM_HPP
+#ifndef DOGEN_M2T_CPP_TYPES_MODEL_TO_TEXT_CPP_CHAIN_HPP
+#define DOGEN_M2T_CPP_TYPES_MODEL_TO_TEXT_CPP_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -36,7 +36,7 @@
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.m2t/types/entities/model.hpp"
-#include "dogen.m2t/types/transforms/physical_model_transform_interface.hpp"
+#include "dogen.m2t/types/transforms/model_to_text_technical_space_chain.hpp"
 #include "dogen.m2t.cpp/types/formatters/repository.hpp"
 #include "dogen.m2t.cpp/types/formattables/locator.hpp"
 #include "dogen.m2t.cpp/types/formattables/model.hpp"
@@ -46,18 +46,18 @@ namespace dogen::m2t::cpp {
 /**
  * @brief Implements a C++ model to text transform.
  */
-class physical_model_transform final
-    : public m2t::transforms::physical_model_transform_interface {
+class model_to_text_cpp_chain final
+    : public m2t::transforms::model_to_text_technical_space_chain {
 public:
-    physical_model_transform() = default;
-    physical_model_transform(
-        const physical_model_transform&) = delete;
-    physical_model_transform(
-        physical_model_transform&&) = default;
+    model_to_text_cpp_chain() = default;
+    model_to_text_cpp_chain(
+        const model_to_text_cpp_chain&) = delete;
+    model_to_text_cpp_chain(
+        model_to_text_cpp_chain&&) = default;
 
 public:
 
-    ~physical_model_transform() noexcept;
+    ~model_to_text_cpp_chain() noexcept;
 
 private:
     /**

@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.m2t/types/transforms/physical_model_chain.hpp"
+#include "dogen.m2t/types/transforms/model_to_text_chain.hpp"
 #include "dogen.m2t.cpp/types/formatters/workflow.hpp"
 #include "dogen.m2t.cpp/types/formattables/workflow.hpp"
 #include "dogen.m2t.cpp/types/formatters/initializer.hpp"
-#include "dogen.m2t.cpp/types/physical_model_transform.hpp"
+#include "dogen.m2t.cpp/types/model_to_text_cpp_chain.hpp"
 #include "dogen.m2t.cpp/types/initializer.hpp"
 
 namespace dogen::m2t::cpp {
@@ -30,7 +30,7 @@ namespace dogen::m2t::cpp {
 void initializer::initialize() {
     formatters::initializer::initialize(formatters::workflow::registrar());
     using m2t::transforms::register_transform;
-    register_transform<physical_model_transform>();
+    register_transform<model_to_text_cpp_chain>();
 }
 
 }

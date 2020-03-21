@@ -18,10 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.m2t/types/transforms/physical_model_chain.hpp"
+#include "dogen.m2t/types/transforms/model_to_text_chain.hpp"
 #include "dogen.m2t.csharp/types/formatters/workflow.hpp"
 #include "dogen.m2t.csharp/types/formatters/initializer.hpp"
-#include "dogen.m2t.csharp/types/physical_model_transform.hpp"
+#include "dogen.m2t.csharp/types/model_to_text_csharp_chain.hpp"
 #include "dogen.m2t.csharp/types/initializer.hpp"
 
 namespace dogen::m2t::csharp {
@@ -29,7 +29,7 @@ namespace dogen::m2t::csharp {
 void initializer::initialize() {
     formatters::initializer::initialize(formatters::workflow::registrar());
     using m2t::transforms::register_transform;
-    register_transform<physical_model_transform>();
+    register_transform<model_to_text_csharp_chain>();
 }
 
 }

@@ -261,14 +261,14 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::physical_model_chain",
+      "name": "transforms::model_to_text_chain",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::physical_model_transform_interface",
+      "name": "transforms::model_to_text_technical_space_chain",
       "stereotypes": [
         "dogen::handcrafted::typeable::header_only"
       ],
@@ -278,7 +278,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::physical_model_transform_registrar",
+      "name": "transforms::model_to_text_technical_space_chain_registrar",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -289,7 +289,7 @@
       "attributes": [
         {
           "name": "transforms_by_technical_space_",
-          "type": "std::unordered_map<logical::entities::technical_space, std::shared_ptr<physical_model_transform_interface>>"
+          "type": "std::unordered_map<logical::entities::technical_space, std::shared_ptr<model_to_text_technical_space_chain>>"
         }
       ]
     },

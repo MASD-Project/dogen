@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_M2T_TYPES_TRANSFORMS_PHYSICAL_MODEL_TRANSFORM_INTERFACE_FWD_HPP
-#define DOGEN_M2T_TYPES_TRANSFORMS_PHYSICAL_MODEL_TRANSFORM_INTERFACE_FWD_HPP
+#ifndef DOGEN_M2T_TYPES_TRANSFORMS_MODEL_TO_TEXT_TECHNICAL_SPACE_CHAIN_FWD_HPP
+#define DOGEN_M2T_TYPES_TRANSFORMS_MODEL_TO_TEXT_TECHNICAL_SPACE_CHAIN_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 namespace dogen::m2t::transforms {
 
-class physical_model_transform_interface;
+class model_to_text_technical_space_chain;
 
 }
 

@@ -20,7 +20,7 @@
   },
   "elements": [
     {
-      "name": "physical_model_transform",
+      "name": "model_to_text_csharp_chain",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

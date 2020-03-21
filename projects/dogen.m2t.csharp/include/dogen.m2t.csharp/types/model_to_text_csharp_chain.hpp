@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_M2T_CSHARP_TYPES_PHYSICAL_MODEL_TRANSFORM_HPP
-#define DOGEN_M2T_CSHARP_TYPES_PHYSICAL_MODEL_TRANSFORM_HPP
+#ifndef DOGEN_M2T_CSHARP_TYPES_MODEL_TO_TEXT_CSHARP_CHAIN_HPP
+#define DOGEN_M2T_CSHARP_TYPES_MODEL_TO_TEXT_CSHARP_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,7 +33,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen.m2t/types/entities/model.hpp"
 #include "dogen.m2t/types/transforms/context.hpp"
-#include "dogen.m2t/types/transforms/physical_model_transform_interface.hpp"
+#include "dogen.m2t/types/transforms/model_to_text_technical_space_chain.hpp"
 #include "dogen.m2t.csharp/types/formatters/repository.hpp"
 #include "dogen.m2t.csharp/types/formattables/locator.hpp"
 #include "dogen.m2t.csharp/types/formattables/model.hpp"
@@ -43,17 +43,17 @@ namespace dogen::m2t::csharp {
 /**
  * @brief Manages the c# backend.
  */
-class physical_model_transform final
-    : public m2t::transforms::physical_model_transform_interface {
+class model_to_text_csharp_chain final
+    : public m2t::transforms::model_to_text_technical_space_chain {
 public:
-    physical_model_transform() = default;
-    physical_model_transform(
-        const physical_model_transform&) = delete;
-    physical_model_transform(
-        physical_model_transform&&) = default;
+    model_to_text_csharp_chain() = default;
+    model_to_text_csharp_chain(
+        const model_to_text_csharp_chain&) = delete;
+    model_to_text_csharp_chain(
+        model_to_text_csharp_chain&&) = default;
 
 public:
-    ~physical_model_transform() noexcept;
+    ~model_to_text_csharp_chain() noexcept;
 
 private:
     formattables::model create_formattables_model(

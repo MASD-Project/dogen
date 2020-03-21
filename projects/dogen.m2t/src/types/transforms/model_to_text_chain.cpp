@@ -27,11 +27,11 @@
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.m2t/io/entities/model_io.hpp"
 #include "dogen.m2t/types/transforms/transformation_error.hpp"
-#include "dogen.m2t/types/transforms/physical_model_chain.hpp"
+#include "dogen.m2t/types/transforms/model_to_text_chain.hpp"
 
 namespace {
 
-const std::string transform_id("m2t.transforms.physical_model_chain");
+const std::string transform_id("m2t.transforms.model_to_text_chain");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
@@ -45,19 +45,19 @@ const std::string disabled_transform(
 namespace dogen::m2t::transforms {
 
 std::shared_ptr<
-    physical_model_transform_registrar>
-physical_model_chain::registrar_;
-physical_model_transform_registrar&
-physical_model_chain::registrar() {
+    model_to_text_technical_space_chain_registrar>
+model_to_text_chain::registrar_;
+model_to_text_technical_space_chain_registrar&
+model_to_text_chain::registrar() {
     if (!registrar_) {
         registrar_ = std::make_shared<
-            physical_model_transform_registrar>();
+            model_to_text_technical_space_chain_registrar>();
     }
 
     return *registrar_;
 }
 
-void physical_model_chain::
+void model_to_text_chain::
 merge(physical::entities::model&& src, physical::entities::model& dst) {
     dst.logical_location().qualified_name(
         src.logical_location().qualified_name());
@@ -67,7 +67,7 @@ merge(physical::entities::model&& src, physical::entities::model& dst) {
         src.managed_directories());
 }
 
-physical::entities::model physical_model_chain::
+physical::entities::model model_to_text_chain::
 apply(const m2t::transforms::context& ctx,
     const m2t::entities::model& m) {
     BOOST_LOG_SEV(lg, debug) << "Transforming model: "
@@ -131,7 +131,7 @@ apply(const m2t::transforms::context& ctx,
     return r;
 }
 
-physical::entities::model physical_model_chain::
+physical::entities::model model_to_text_chain::
 apply(const m2t::transforms::context& ctx,
     const std::list<m2t::entities::model>& ms) {
     tracing::scoped_chain_tracer stp(lg, "model to extraction model chain",

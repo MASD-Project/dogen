@@ -43,14 +43,14 @@ namespace dogen::m2t::transforms {
  * @brief Performs a model to text transformation of a meta-model,
  * into its supported technical space.
  */
-class physical_model_transform_interface {
+class model_to_text_technical_space_chain {
 public:
-    physical_model_transform_interface() = default;
-    physical_model_transform_interface(
-        const physical_model_transform_interface&) = delete;
-    physical_model_transform_interface(
-        physical_model_transform_interface&&) = default;
-    virtual ~physical_model_transform_interface() noexcept = default;
+    model_to_text_technical_space_chain() = default;
+    model_to_text_technical_space_chain(
+        const model_to_text_technical_space_chain&) = delete;
+    model_to_text_technical_space_chain(
+        model_to_text_technical_space_chain&&) = default;
+    virtual ~model_to_text_technical_space_chain() noexcept = default;
 
 public:
     /**

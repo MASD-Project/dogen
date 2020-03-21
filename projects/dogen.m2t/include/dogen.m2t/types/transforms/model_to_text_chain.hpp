@@ -30,16 +30,16 @@
 #include <unordered_set>
 #include "dogen.m2t/types/transforms/context_fwd.hpp"
 #include "dogen.physical/types/entities/model.hpp"
-#include "dogen.m2t/types/transforms/physical_model_transform_registrar.hpp"
+#include "dogen.m2t/types/transforms/model_to_text_technical_space_chain_registrar.hpp"
 
 namespace dogen::m2t::transforms {
 
-class physical_model_chain final {
+class model_to_text_chain final {
 public:
     /**
      * @brief Registrar that keeps track of the available transforms.
      */
-    static physical_model_transform_registrar& registrar();
+    static model_to_text_technical_space_chain_registrar& registrar();
 
 private:
     /*
@@ -57,7 +57,7 @@ public:
         const std::list<m2t::entities::model>& ms);
 
 private:
-    static std::shared_ptr<physical_model_transform_registrar>
+    static std::shared_ptr<model_to_text_technical_space_chain_registrar>
     registrar_;
 };
 
@@ -67,7 +67,7 @@ private:
 template<typename Transform>
 inline void register_transform() {
     auto t(std::make_shared<Transform>());
-    auto& rg(physical_model_chain::registrar());
+    auto& rg(model_to_text_chain::registrar());
     rg.register_transform(t);
 }
 
