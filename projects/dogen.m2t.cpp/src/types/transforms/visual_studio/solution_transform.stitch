@@ -1,0 +1,117 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::visual_studio #>
+<#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+<#@ masd.stitch.inclusion_dependency=<boost/algorithm/string/join.hpp> #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/visual_studio/solution.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/visual_studio/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/formatting_error.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/visual_studio/solution_transform.hpp" #>
+<#+
+
+std::string solution_transform::static_id() {
+    return traits::solution_archetype();
+}
+
+std::string solution_transform::id() const {
+    static auto r(archetype_location().archetype());
+    return r;
+}
+
+physical::entities::location
+solution_transform::archetype_location() const {
+    static physical::entities::location
+        r(cpp::traits::kernel(), cpp::traits::backend(),
+          traits::facet(), solution_transform::static_id());
+    return r;
+}
+
+const logical::entities::name&
+solution_transform::meta_name() const {
+    using logical::helpers::meta_name_factory;
+    static auto r(meta_name_factory::make_visual_studio_solution_name());
+    return r;
+}
+
+std::string solution_transform::family() const {
+    return cpp::traits::visual_studio_project_family();
+}
+
+inclusion_support_types
+solution_transform::inclusion_support_type() const {
+    return inclusion_support_types::not_supported;
+}
+
+boost::filesystem::path solution_transform::inclusion_path(
+    const formattables::locator& /*l*/, const logical::entities::name& n) const {
+
+    using namespace dogen::utility::log;
+    using namespace dogen::m2t::cpp::transforms;
+    static logger lg(logger_factory(static_id()));
+
+    static const std::string not_supported("Inclusion path is not supported: ");
+
+    BOOST_LOG_SEV(lg, error) << not_supported << n.qualified().dot();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.qualified().dot()));
+}
+
+boost::filesystem::path solution_transform::
+full_path(const formattables::locator& l, const logical::entities::name& n) const {
+    auto temp(n);
+    temp.simple(boost::algorithm::join(n.location().model_modules(), ".") + ".sln");
+    return l.make_full_path_for_project(temp, static_id());
+}
+
+std::list<std::string> solution_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& /*f*/,
+    const logical::entities::element& /*e*/) const {
+    static std::list<std::string> r;
+    return r;
+}
+
+physical::entities::artefact solution_transform::
+format(const context& ctx, const logical::entities::element& e) const {
+    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    using logical::entities::visual_studio::solution;
+    const auto& sln(a.as<solution>(e));
+#>
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+<#+
+    for (const auto& ppb : sln.project_persistence_blocks()) {
+#>
+Project("{<#= ppb.type_guid() #>}") = "<#= ppb.name() #>", "<#= ppb.name() #>.csproj", "{<#= ppb.guid() #>}"
+EndProject
+<#+
+    }
+#>
+Global
+    GlobalSection(SolutionConfigurationPlatforms) = preSolution
+        Debug|Any CPU = Debug|Any CPU
+        Release|Any CPU = Release|Any CPU
+    EndGlobalSection
+    GlobalSection(ProjectConfigurationPlatforms) = postSolution
+<#+
+    for (const auto& ppb : sln.project_persistence_blocks()) {
+#>
+        {<#= ppb.guid() #>}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {<#= ppb.guid() #>}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {<#= ppb.guid() #>}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {<#= ppb.guid() #>}.Release|Any CPU.Build.0 = Release|Any CPU
+<#+
+    }
+#>
+    EndGlobalSection
+    GlobalSection(MonoDevelopProperties) = preSolution
+        StartupItem = CppModel.vcxroj
+    EndGlobalSection
+EndGlobal
+<#+
+    return a.make_artefact();
+}
+#>

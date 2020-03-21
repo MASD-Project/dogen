@@ -31,7 +31,7 @@
 #include "dogen.logical/types/entities/orm/database_system.hpp"
 #include "dogen.logical/types/entities/orm/model_properties.hpp"
 #include "dogen.m2t/types/entities/model.hpp"
-#include "dogen.m2t.cpp/types/formatters/repository.hpp"
+#include "dogen.m2t.cpp/types/transforms/repository.hpp"
 #include "dogen.m2t.cpp/types/formattables/formattable.hpp"
 #include "dogen.m2t.cpp/types/formattables/model.hpp"
 
@@ -57,7 +57,7 @@ public:
     /**
      * @brief Given a yarn model, produces the corresponding formattables.
      */
-    model adapt(const formatters::repository& frp,
+    model adapt(const transforms::repository& frp,
         const m2t::entities::model& m) const;
 };
 

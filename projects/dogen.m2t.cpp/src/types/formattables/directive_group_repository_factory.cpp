@@ -27,8 +27,8 @@
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.m2t.cpp/types/traits.hpp"
-#include "dogen.m2t.cpp/types/formatters/traits.hpp"
-#include "dogen.m2t.cpp/types/formatters/model_to_text_transform.hpp"
+#include "dogen.m2t.cpp/types/transforms/traits.hpp"
+#include "dogen.m2t.cpp/types/transforms/model_to_text_transform.hpp"
 #include "dogen.m2t.cpp/types/formattables/expansion_error.hpp"
 #include "dogen.m2t.cpp/types/formattables/directive_group.hpp"
 #include "dogen.m2t.cpp/io/formattables/directive_group_io.hpp"
@@ -63,7 +63,7 @@ namespace dogen::m2t::cpp::formattables {
 directive_group_repository_factory::feature_group
 directive_group_repository_factory::make_feature_group(
     const variability::entities::feature_model& fm,
-    const formatters::repository& frp) const {
+    const transforms::repository& frp) const {
     BOOST_LOG_SEV(lg, debug) << "Creating feature group.";
 
     feature_group r;
@@ -75,7 +75,7 @@ directive_group_repository_factory::make_feature_group(
         const auto& al(f->archetype_location());
         const auto arch(al.archetype());
 
-        using formatters::inclusion_support_types;
+        using transforms::inclusion_support_types;
         static const auto ns(inclusion_support_types::not_supported);
         if (f->inclusion_support_type() == ns) {
             BOOST_LOG_SEV(lg, debug) << "Skipping archetype: " << arch;
@@ -168,7 +168,7 @@ directive_group_repository_factory::remove_non_includible_formatters(
     const artefact_formatters_type& formatters) const {
 
     artefact_formatters_type r;
-    using formatters::inclusion_support_types;
+    using transforms::inclusion_support_types;
     static const auto ns(inclusion_support_types::not_supported);
     for (const auto& fmt : formatters) {
         if (fmt->inclusion_support_type() != ns)
@@ -180,7 +180,7 @@ directive_group_repository_factory::remove_non_includible_formatters(
 std::unordered_map<std::string,
                    directive_group_repository_factory::artefact_formatters_type>
 directive_group_repository_factory::
-includible_formatters_by_meta_name(const formatters::repository& frp) const {
+includible_formatters_by_meta_name(const transforms::repository& frp) const {
     std::unordered_map<std::string, artefact_formatters_type> r;
     for (const auto& pair : frp.stock_artefact_formatters_by_meta_name()) {
         const auto& mt(pair.first);
@@ -256,7 +256,7 @@ compute_directives(const feature_group& fg,
     /*
      * Now we start working at the formatter level.
      */
-    const auto cs(formatters::inclusion_support_types::canonical_support);
+    const auto cs(transforms::inclusion_support_types::canonical_support);
     for (const auto& fmt : formatters) {
         const auto& al(fmt->archetype_location());
         const auto arch(al.archetype());
@@ -289,7 +289,7 @@ compute_directives(const feature_group& fg,
              */
             if (requires_canonical_archetype) {
                 const auto fct(al.facet());
-                const auto carch(formatters::traits::canonical_archetype(fct));
+                const auto carch(transforms::traits::canonical_archetype(fct));
                 insert_inclusion_directive(id, carch, dg, dgrp);
             }
 
@@ -319,7 +319,7 @@ compute_directives(const feature_group& fg,
              */
             if (requires_canonical_archetype) {
                 const auto fct(al.facet());
-                const auto carch(formatters::traits::canonical_archetype(fct));
+                const auto carch(transforms::traits::canonical_archetype(fct));
                 insert_inclusion_directive(id, carch, *dg, dgrp);
             }
         }
@@ -360,7 +360,7 @@ directive_group_repository_factory::make(const feature_group& fg,
 directive_group_repository
 directive_group_repository_factory::
 make(const variability::entities::feature_model& feature_model,
-    const formatters::repository& frp, const locator& l,
+    const transforms::repository& frp, const locator& l,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating inclusion dependencies "

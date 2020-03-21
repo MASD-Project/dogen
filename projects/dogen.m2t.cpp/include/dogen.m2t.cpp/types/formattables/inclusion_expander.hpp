@@ -33,7 +33,7 @@
 #include "dogen.m2t/types/entities/element_archetype.hpp"
 #include "dogen.m2t.cpp/types/formattables/model.hpp"
 #include "dogen.m2t.cpp/types/formattables/locator.hpp"
-#include "dogen.m2t.cpp/types/formatters/repository.hpp"
+#include "dogen.m2t.cpp/types/transforms/repository.hpp"
 #include "dogen.m2t.cpp/types/formattables/formattable.hpp"
 #include "dogen.m2t.cpp/types/formattables/dependencies_builder_factory.hpp"
 #include "dogen.m2t.cpp/types/formattables/directive_group_repository.hpp"
@@ -70,7 +70,7 @@ class inclusion_expander {
 private:
     directive_group_repository create_directive_groups(
         const variability::entities::feature_model& feature_model,
-        const formatters::repository& frp, const locator& l,
+        const transforms::repository& frp, const locator& l,
         const std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
@@ -78,11 +78,11 @@ public:
     element_inclusion_dependencies_type;
 
     element_inclusion_dependencies_type compute_inclusion_dependencies(
-        const formatters::repository& frp,
+        const transforms::repository& frp,
         const dependencies_builder_factory& f,
         const logical::entities::element& e) const;
 
-    void populate_inclusion_dependencies(const formatters::repository& frp,
+    void populate_inclusion_dependencies(const transforms::repository& frp,
         const dependencies_builder_factory& df,
         std::unordered_map<std::string, formattable>& formattables) const;
 
@@ -90,7 +90,7 @@ public:
     void expand(const variability::entities::feature_model& feature_model,
         const std::unordered_set<m2t::entities::element_archetype>&
         enabled_archetype_for_element,
-        const formatters::repository& frp, const locator& l, model& fm) const;
+        const transforms::repository& frp, const locator& l, model& fm) const;
 };
 
 }

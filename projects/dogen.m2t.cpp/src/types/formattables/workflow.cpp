@@ -32,7 +32,7 @@ static logger lg(logger_factory("m2t.cpp.formattables.workflow"));
 
 namespace dogen::m2t::cpp::formattables {
 
-model workflow::make_model(const formatters::repository& frp,
+model workflow::make_model(const transforms::repository& frp,
     const m2t::entities::model& m) const {
     adapter a;
     return a.adapt(frp, m);
@@ -43,7 +43,7 @@ void workflow::expand_model(
     const variability::entities::configuration& rcfg,
     const std::unordered_set<m2t::entities::element_archetype>&
     enabled_archetype_for_element,
-    const formatters::repository& frp, const locator& l,
+    const transforms::repository& frp, const locator& l,
     model& fm) const {
     model_expander ex;
     ex.expand(feature_model, rcfg, enabled_archetype_for_element, frp, l, fm);
@@ -52,7 +52,7 @@ void workflow::expand_model(
 model workflow::execute(
     const variability::entities::feature_model& feature_model,
     const variability::entities::configuration& rcfg,
-    const locator& l, const formatters::repository& frp,
+    const locator& l, const transforms::repository& frp,
     const m2t::entities::model& m) const {
 
     auto r(make_model(frp, m));

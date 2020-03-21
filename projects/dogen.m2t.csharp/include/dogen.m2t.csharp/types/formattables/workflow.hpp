@@ -28,7 +28,7 @@
 #include "dogen.m2t/types/entities/model.hpp"
 #include "dogen.m2t.csharp/types/formattables/model.hpp"
 #include "dogen.m2t.csharp/types/formattables/locator.hpp"
-#include "dogen.m2t.csharp/types/formatters/repository.hpp"
+#include "dogen.m2t.csharp/types/transforms/repository.hpp"
 #include "dogen.m2t.csharp/types/formattables/formattable.hpp"
 
 namespace dogen::m2t::csharp::formattables {
@@ -38,17 +38,17 @@ private:
     /**
      * @brief Retrieves the ids of all the modules in the model.
      */
-    model make_model(const formatters::repository& frp,
+    model make_model(const transforms::repository& frp,
         const m2t::entities::model& m) const;
 
     void expand_model(
         const variability::entities::feature_model& feature_model,
-        const formatters::repository& frp, const locator& l, model& fm) const;
+        const transforms::repository& frp, const locator& l, model& fm) const;
 
 public:
     model execute(
         const variability::entities::feature_model& feature_model,
-        const formatters::repository& frp, const locator& l,
+        const transforms::repository& frp, const locator& l,
         const m2t::entities::model& m) const;
 };
 

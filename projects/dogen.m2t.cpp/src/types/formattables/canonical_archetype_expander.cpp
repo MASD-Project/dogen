@@ -21,9 +21,9 @@
 #include <typeindex>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.logical/types/entities/element.hpp"
-#include "dogen.m2t.cpp/types/formatters/traits.hpp"
-#include "dogen.m2t.cpp/types/formatters/inclusion_support_types.hpp"
-#include "dogen.m2t.cpp/types/formatters/model_to_text_transform.hpp"
+#include "dogen.m2t.cpp/types/transforms/traits.hpp"
+#include "dogen.m2t.cpp/types/transforms/inclusion_support_types.hpp"
+#include "dogen.m2t.cpp/types/transforms/model_to_text_transform.hpp"
 #include "dogen.m2t.cpp/types/formattables/canonical_archetype_expander.hpp"
 
 namespace {
@@ -36,12 +36,12 @@ lg(logger_factory("m2t.cpp.formattables.canonical_archetype_expander"));
 
 namespace dogen::m2t::cpp::formattables {
 
-void canonical_archetype_expander::expand(const formatters::repository& frp,
+void canonical_archetype_expander::expand(const transforms::repository& frp,
     formattables::element_properties& eprops,
     const logical::entities::element& e) const {
     BOOST_LOG_SEV(lg, debug) << "Procesing element: "
                              << e.name().qualified().dot();
-    const auto cs(formatters::inclusion_support_types::canonical_support);
+    const auto cs(transforms::inclusion_support_types::canonical_support);
     const auto& safmt(frp.stock_artefact_formatters_by_meta_name());
 
     /*
@@ -74,7 +74,7 @@ void canonical_archetype_expander::expand(const formatters::repository& frp,
         const auto arch(al.archetype());
         const auto fct(al.facet());
 
-        const auto carch(formatters::traits::canonical_archetype(fct));
+        const auto carch(transforms::traits::canonical_archetype(fct));
         eprops.canonical_archetype_to_archetype()[carch] = arch;
         BOOST_LOG_SEV(lg, debug) << "Mapped " << carch << " to " << arch;
     }
@@ -82,7 +82,7 @@ void canonical_archetype_expander::expand(const formatters::repository& frp,
 }
 
 void canonical_archetype_expander::
-expand(const formatters::repository& frp, model& fm) const {
+expand(const transforms::repository& frp, model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started expansion.";
     for (auto& pair : fm.formattables()) {
         auto& formattable(pair.second);

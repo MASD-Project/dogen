@@ -28,7 +28,7 @@
 #include <string>
 #include <unordered_map>
 #include "dogen.m2t/types/entities/model.hpp"
-#include "dogen.m2t.csharp/types/formatters/repository.hpp"
+#include "dogen.m2t.csharp/types/transforms/repository.hpp"
 #include "dogen.m2t.csharp/types/formattables/formattable.hpp"
 
 namespace dogen::m2t::csharp::formattables {
@@ -43,7 +43,7 @@ public:
      * @brief Given a yarn model, produces the corresponding formattables.
      */
     std::unordered_map<std::string, formattable>
-    adapt(const formatters::repository& frp,
+    adapt(const transforms::repository& frp,
         const m2t::entities::model& m) const;
 };
 

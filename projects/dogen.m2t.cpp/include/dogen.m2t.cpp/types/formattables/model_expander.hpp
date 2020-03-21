@@ -30,7 +30,7 @@
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.m2t/types/entities/element_archetype.hpp"
-#include "dogen.m2t.cpp/types/formatters/repository.hpp"
+#include "dogen.m2t.cpp/types/transforms/repository.hpp"
 #include "dogen.m2t.cpp/types/formattables/locator.hpp"
 #include "dogen.m2t.cpp/types/formattables/model.hpp"
 
@@ -42,24 +42,24 @@ private:
         const variability::entities::feature_model& feature_model,
         model& fm) const;
 
-    void expand_canonical_archetypes(const formatters::repository& frp,
+    void expand_canonical_archetypes(const transforms::repository& frp,
         model& fm) const;
 
     void expand_inclusion(
         const variability::entities::feature_model& feature_model,
         const std::unordered_set<m2t::entities::element_archetype>&
         enabled_archetype_for_element,
-        const formatters::repository& frp, const locator& l, model& fm) const;
+        const transforms::repository& frp, const locator& l, model& fm) const;
 
     void expand_aspects(const variability::entities::feature_model& feature_model,
         model& fm) const;
 
     void expand_helpers(const variability::entities::feature_model& feature_model,
-        const formatters::repository& frp, model& fm) const;
+        const transforms::repository& frp, model& fm) const;
 
     void reduce(model& fm) const;
 
-    void expand_file_paths_and_guards(const formatters::repository& frp,
+    void expand_file_paths_and_guards(const transforms::repository& frp,
         const locator& l, model& fm) const;
 
     void expand_odb(const locator& l, model& fm) const;
@@ -77,7 +77,7 @@ public:
         const variability::entities::configuration& rcfg,
         const std::unordered_set<m2t::entities::element_archetype>&
         enabled_archetype_for_element,
-        const formatters::repository& frp, const locator& l, model& fm) const;
+        const transforms::repository& frp, const locator& l, model& fm) const;
 };
 
 }

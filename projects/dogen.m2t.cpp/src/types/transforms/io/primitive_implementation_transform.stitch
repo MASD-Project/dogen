@@ -1,0 +1,98 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::io #>
+<#@ masd.stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/inclusion_constants.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/formatting_error.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/hash/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/io/inserter_implementation_helper.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/io/primitive_implementation_transform.hpp" #>
+<#@ masd.stitch.wale.text_template=cpp_artefact_transform_implementation.wale #>
+<#@ masd.stitch.wale.kvp.class.simple_name=primitive_implementation_transform #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=primitive_implementation #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::primitive #>
+<#@ masd.stitch.wale.kvp.meta_element=primitive #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+std::list<std::string>
+primitive_implementation_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& f,
+    const logical::entities::element& e) const {
+
+    using logical::entities::structural::primitive;
+    const auto& p(assistant::as<primitive>(e));
+    auto builder(f.make());
+    const auto ph_fn(traits::primitive_header_archetype());
+    builder.add(p.name(), ph_fn);
+
+    const auto io_carch(transforms::io::traits::canonical_archetype());
+    const auto self_fn(primitive_implementation_transform::static_id());
+    const bool io_enabled(builder.is_enabled(p.name(), self_fn));
+
+    if (!io_enabled)
+        return builder.build();
+
+    const auto os(inclusion_constants::std::ostream());
+    builder.add(os);
+    builder.add(p.value_attribute().parsed_type().current(), io_carch);
+
+    return builder.build();
+}
+
+physical::entities::artefact primitive_implementation_transform::
+format(const context& ctx, const logical::entities::element& e) const {
+    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    const auto& p(a.as<logical::entities::structural::primitive>(e));
+
+    {
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        a.add_helper_methods(p.name().qualified().dot());
+
+        {
+            const auto ns(a.make_namespaces(p.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto sn(p.name().simple());
+            const auto qn(a.get_qualified_name(p.name()));
+            const auto attr(p.value_attribute());
+#>
+
+std::ostream& operator<<(std::ostream& s, const <#= sn #>& v) {
+<#+
+            if (a.requires_stream_manipulators()) {
+#>
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+<#+
+            }
+
+            const std::string variable_name = "v." + attr.getter_setter_name() + "()";
+#>
+
+    s << " { "
+      << "\"__type__\": " << "\"<#= qn #>\"" << ", "
+      << "\"<#= attr.name().simple() #>\": " << <#= a.streaming_for_type(attr.parsed_type().current(), variable_name) #>
+      << " }";
+
+    return s;
+}
+
+<#+
+        } // snf
+    } // sbf
+    return a.make_artefact();
+}
+#>

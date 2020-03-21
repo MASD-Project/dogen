@@ -1,0 +1,60 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::serialization #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/formatting_error.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/serialization/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/serialization/class_forward_declarations_transform.hpp" #>
+<#@ masd.stitch.wale.text_template=cpp_artefact_transform_implementation_header.wale #>
+<#@ masd.stitch.wale.kvp.class.simple_name=class_forward_declarations_transform #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=class_forward_declarations #>
+<#@ masd.stitch.wale.kvp.class.inclusion_support_type=regular_support #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::object #>
+<#@ masd.stitch.wale.kvp.meta_element=object #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+std::list<std::string> class_forward_declarations_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& f,
+    const logical::entities::element& e) const {
+    auto builder(f.make());
+
+    using tp = transforms::types::traits;
+    const auto tp_fn(tp::class_forward_declarations_archetype());
+    builder.add(e.name(), tp_fn);
+
+    return builder.build();
+}
+
+physical::entities::artefact class_forward_declarations_transform::
+format(const context& ctx, const logical::entities::element& e) const {
+    assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
+    const auto& o(a.as<logical::entities::structural::object>(e));
+
+    {
+        auto sbf(a.make_scoped_boilerplate_formatter(o));
+        const auto qn(a.get_qualified_name(o.name()));
+#>
+
+namespace boost {
+namespace serialization {
+
+template<class Archive>
+void save(Archive& ar, const <#= qn #>& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, <#= qn #>& v, unsigned int version);
+
+} }
+
+<#+
+    } // sbf
+    return a.make_artefact();
+}
+
+#>

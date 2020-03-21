@@ -22,7 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.m2t.csharp/types/formattables/artefact_properties.hpp"
 #include "dogen.m2t.csharp/types/formattables/adaptation_error.hpp"
-#include "dogen.m2t.csharp/types/formatters/model_to_text_transform.hpp"
+#include "dogen.m2t.csharp/types/transforms/model_to_text_transform.hpp"
 #include "dogen.m2t.csharp/types/formattables/adapter.hpp"
 
 namespace {
@@ -35,7 +35,7 @@ static logger lg(logger_factory("m2t.csharp.formattables.adapter"));
 namespace dogen::m2t::csharp::formattables {
 
 std::unordered_map<std::string, formattable>
-adapter::adapt(const formatters::repository& frp,
+adapter::adapt(const transforms::repository& frp,
     const m2t::entities::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming yarn to formattables."
                              << " Elements in model: " << m.elements().size();

@@ -30,7 +30,7 @@
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
-#include "dogen.m2t.csharp/types/formatters/repository.hpp"
+#include "dogen.m2t.csharp/types/transforms/repository.hpp"
 #include "dogen.m2t.csharp/types/formattables/helper_configuration.hpp"
 #include "dogen.m2t.csharp/types/formattables/formattable.hpp"
 #include "dogen.m2t.csharp/types/formattables/model.hpp"
@@ -55,15 +55,15 @@ public:
 
 private:
     facets_for_family_type
-        facets_for_family(const formatters::repository& frp) const;
+        facets_for_family(const transforms::repository& frp) const;
 
     void populate_helper_properties(
-        const helper_configuration& cfg, const formatters::repository& frp,
+        const helper_configuration& cfg, const transforms::repository& frp,
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
     void expand(const variability::entities::feature_model& feature_model,
-        const formatters::repository& frp, model& fm) const;
+        const transforms::repository& frp, model& fm) const;
 };
 
 }

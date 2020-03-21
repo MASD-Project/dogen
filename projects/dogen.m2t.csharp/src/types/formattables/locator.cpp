@@ -25,7 +25,7 @@
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
 #include "dogen.m2t.csharp/types/traits.hpp"
 #include "dogen.m2t.csharp/types/formattables/location_error.hpp"
-#include "dogen.m2t.csharp/types/formatters/model_to_text_transform.hpp"
+#include "dogen.m2t.csharp/types/transforms/model_to_text_transform.hpp"
 #include "dogen.m2t.csharp/types/formattables/locator.hpp"
 
 namespace {
@@ -46,7 +46,7 @@ namespace dogen::m2t::csharp::formattables {
 
 locator::locator(const boost::filesystem::path& output_directory_path,
     const variability::entities::feature_model& fm,
-    const formatters::repository& frp,
+    const transforms::repository& frp,
     const variability::entities::configuration& rcfg,
     const logical::entities::name& model_name,
     const std::unordered_set<std::string>& module_ids,
@@ -59,7 +59,7 @@ locator::locator(const boost::filesystem::path& output_directory_path,
 
 locator::feature_group locator::make_feature_group(
     const variability::entities::feature_model& feature_model,
-    const formatters::repository& frp) const {
+    const transforms::repository& frp) const {
 
     feature_group r;
     const variability::helpers::feature_selector s(feature_model);
@@ -148,7 +148,7 @@ locator_configuration locator::make_configuration(const feature_group& fg,
 
 locator_configuration locator::make_configuration(
     const variability::entities::feature_model& fm,
-    const formatters::repository& frp,
+    const transforms::repository& frp,
     const variability::entities::configuration& cfg) {
 
     const auto fg(make_feature_group (fm, frp));

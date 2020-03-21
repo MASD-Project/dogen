@@ -34,7 +34,7 @@
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.logical/types/entities/name.hpp"
-#include "dogen.m2t.csharp/types/formatters/repository.hpp"
+#include "dogen.m2t.csharp/types/transforms/repository.hpp"
 #include "dogen.m2t.csharp/types/formattables/locator_configuration.hpp"
 
 
@@ -63,14 +63,14 @@ private:
 
     feature_group make_feature_group(
         const variability::entities::feature_model& fm,
-        const formatters::repository& frp) const;
+        const transforms::repository& frp) const;
 
     locator_configuration make_configuration(const feature_group& tg,
         const variability::entities::configuration& cfg) const;
 
     locator_configuration
     make_configuration(const variability::entities::feature_model& fm,
-        const formatters::repository& frp,
+        const transforms::repository& frp,
         const variability::entities::configuration& cfg);
 
 private:
@@ -86,7 +86,7 @@ public:
     locator(
         const boost::filesystem::path& output_directory_path,
         const variability::entities::feature_model& fm,
-        const formatters::repository& frp,
+        const transforms::repository& frp,
         const variability::entities::configuration& rcfg,
         const logical::entities::name& model_name,
         const std::unordered_set<std::string>& module_ids,

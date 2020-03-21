@@ -19,13 +19,13 @@
  *
  */
 #include "dogen.m2t.csharp/types/feature_initializer.hpp"
-#include "dogen.m2t.csharp/types/formatters/global_features.hpp"
+#include "dogen.m2t.csharp/types/transforms/global_features.hpp"
 
 namespace dogen::m2t::csharp {
 
 void feature_initializer::
 register_entities(variability::helpers::registrar& rg) {
-    rg.register_features(dogen::m2t::csharp::formatters::global_features::make_features());
+    rg.register_features(dogen::m2t::csharp::transforms::global_features::make_features());
 }
 
 }

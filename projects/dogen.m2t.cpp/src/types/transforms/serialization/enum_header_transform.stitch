@@ -1,0 +1,51 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::serialization #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/inclusion_constants.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/serialization/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/serialization/enum_header_transform.hpp" #>
+<#@ masd.stitch.wale.text_template=cpp_artefact_transform_implementation_header.wale #>
+<#@ masd.stitch.wale.kvp.class.simple_name=enum_header_transform #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=enum_header #>
+<#@ masd.stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::enumeration #>
+<#@ masd.stitch.wale.kvp.meta_element=enumeration #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+std::list<std::string> enum_header_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& f,
+    const logical::entities::element& e) const {
+    auto builder(f.make());
+    builder.add(e.name(), types::traits::enum_header_archetype());
+    builder.add(inclusion_constants::boost::serialization::nvp());
+    return builder.build();
+}
+
+physical::entities::artefact enum_header_transform::
+format(const context& ctx, const logical::entities::element& e) const {
+    assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
+    const auto& ye(a.as<logical::entities::structural::enumeration>(e));
+
+    {
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
+#>
+
+template<class Archive>
+void serialize(Archive& ar, <#= a.get_qualified_name(ye.name()) #>& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("<#= ye.name().simple() #>", v);
+}
+
+<#+
+    } // sbf
+    return a.make_artefact();
+}
+#>

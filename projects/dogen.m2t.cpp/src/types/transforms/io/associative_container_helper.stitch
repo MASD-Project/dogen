@@ -1,0 +1,62 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::io #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/io/associative_container_helper.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formattables/helper_properties.hpp" #>
+<#@ masd.stitch.wale.text_template=cpp_helper_transform_implementation.wale #>
+<#@ masd.stitch.wale.kvp.helper.family=AssociativeContainer #>
+<#@ masd.stitch.wale.kvp.class.simple_name=associative_container_helper #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void associative_container_helper::
+format(assistant& a, const formattables::helper_properties& hp) const {
+    {
+        const auto d(hp.current());
+        const auto qn(d.name_tree_qualified());
+        auto snf(a.make_scoped_namespace_formatter(d.namespaces()));
+
+        if (hp.direct_descendants().size() == 2) {
+            const auto key(hp.direct_descendants().front());
+            const auto value(hp.direct_descendants().back());
+#>
+
+inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << <#= a.streaming_for_type(key, "i->first") #>;
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << <#= a.streaming_for_type(value, "i->second") #>;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+<#+
+        } else {
+        const auto containee(hp.direct_descendants().front());
+#>
+
+inline std::ostream& operator<<(std::ostream& s, const <#= qn #>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << <#= a.streaming_for_type(containee, "*i") #>;
+    }
+    s << "] ";
+    return s;
+}
+
+<#+
+        }
+    }
+#>
+
+<#+
+}
+#>

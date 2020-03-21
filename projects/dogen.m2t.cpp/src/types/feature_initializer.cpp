@@ -19,15 +19,15 @@
  *
  */
 #include "dogen.m2t.cpp/types/feature_initializer.hpp"
-#include "dogen.m2t.cpp/types/formatters/global_features.hpp"
-#include "dogen.m2t.cpp/types/formatters/archetype_features.hpp"
+#include "dogen.m2t.cpp/types/transforms/global_features.hpp"
+#include "dogen.m2t.cpp/types/transforms/archetype_features.hpp"
 
 namespace dogen::m2t::cpp {
 
 void feature_initializer::
 register_entities(variability::helpers::registrar& rg) {
-    rg.register_templates(dogen::m2t::cpp::formatters::archetype_features::make_templates());
-    rg.register_features(dogen::m2t::cpp::formatters::global_features::make_features());
+    rg.register_templates(dogen::m2t::cpp::transforms::archetype_features::make_templates());
+    rg.register_features(dogen::m2t::cpp::transforms::global_features::make_features());
 }
 
 }

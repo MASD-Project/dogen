@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include "dogen.m2t.csharp/types/formatters/repository.hpp"
+#include "dogen.m2t.csharp/types/transforms/repository.hpp"
 #include "dogen.m2t.csharp/types/formattables/locator.hpp"
 #include "dogen.m2t.csharp/types/formattables/model.hpp"
 
@@ -34,7 +34,7 @@ namespace dogen::m2t::csharp::formattables {
 
 class file_path_expander final {
 public:
-    void expand(const formatters::repository& frp, const locator& l,
+    void expand(const transforms::repository& frp, const locator& l,
         model& fm) const;
 };
 

@@ -24,7 +24,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.m2t.cpp/types/traits.hpp"
-#include "dogen.m2t.cpp/types/formatters/workflow.hpp"
+#include "dogen.m2t.cpp/types/transforms/workflow.hpp"
 #include "dogen.m2t.cpp/types/formattables/workflow.hpp"
 #include "dogen.m2t.cpp/types/model_to_text_cpp_chain.hpp"
 
@@ -47,9 +47,9 @@ namespace dogen::m2t::cpp {
 model_to_text_cpp_chain::
 ~model_to_text_cpp_chain() noexcept { }
 
-const formatters::repository&
+const transforms::repository&
 model_to_text_cpp_chain::formatters_repository() const {
-    const auto& rg(formatters::workflow::registrar());
+    const auto& rg(transforms::workflow::registrar());
     rg.validate();
     return rg.formatter_repository();
 }
@@ -58,7 +58,7 @@ formattables::model
 model_to_text_cpp_chain::create_formattables_model(
     const variability::entities::feature_model& feature_model,
     const variability::entities::configuration& rcfg,
-    const formatters::repository& frp, const formattables::locator& l,
+    const transforms::repository& frp, const formattables::locator& l,
     const m2t::entities::model& m) const {
     formattables::workflow fw;
     return fw.execute(feature_model, rcfg, l, frp, m);
@@ -68,7 +68,7 @@ formattables::locator model_to_text_cpp_chain::make_locator(
     const boost::filesystem::path& output_directory_path,
     const variability::entities::feature_model& fm,
     const variability::entities::configuration& cfg,
-    const formatters::repository& frp, const bool enable_backend_directories,
+    const transforms::repository& frp, const bool enable_backend_directories,
     const m2t::entities::model& m) const {
 
     const auto& mn(m.name());
@@ -96,7 +96,7 @@ format(const std::unordered_set<m2t::entities::element_archetype>&
     const variability::entities::feature_model& feature_model,
     const variability::helpers::configuration_factory& cf,
     const formattables::model& fm) const {
-    formatters::workflow wf(l, feature_model, cf);
+    transforms::workflow wf(l, feature_model, cf);
     return wf.execute(enabled_archetype_for_element, fm);
 }
 
@@ -112,28 +112,28 @@ managed_directories(const formattables::locator& l) const {
 
 const std::forward_list<physical::entities::location>&
 model_to_text_cpp_chain::archetype_locations() const {
-    const auto& rg(formatters::workflow::registrar());
+    const auto& rg(transforms::workflow::registrar());
     return rg.archetype_locations();
 }
 
 const std::unordered_map<std::string,
                          physical::entities::locations_group>&
 model_to_text_cpp_chain::archetype_locations_by_meta_name() const {
-    const auto& rg(formatters::workflow::registrar());
+    const auto& rg(transforms::workflow::registrar());
     return rg.archetype_locations_by_meta_name();
 }
 
 const std::unordered_map<std::string,
                          std::list<physical::entities::location>>&
 model_to_text_cpp_chain::archetype_locations_by_family() const {
-    const auto& rg(formatters::workflow::registrar());
+    const auto& rg(transforms::workflow::registrar());
     return rg.archetype_locations_by_family();
 }
 
 const physical::entities::location_repository_parts&
 model_to_text_cpp_chain::
 archetype_location_repository_parts() const {
-    const auto& rg(formatters::workflow::registrar());
+    const auto& rg(transforms::workflow::registrar());
     return rg.archetype_location_repository_parts();
 }
 

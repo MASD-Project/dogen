@@ -33,7 +33,7 @@ static logger lg(logger_factory("m2t.csharp.formattables.workflow"));
 
 namespace dogen::m2t::csharp::formattables {
 
-model workflow::make_model(const formatters::repository& frp,
+model workflow::make_model(const transforms::repository& frp,
     const m2t::entities::model& m) const {
     model r;
     r.name(m.name());
@@ -46,14 +46,14 @@ model workflow::make_model(const formatters::repository& frp,
 
 void workflow::expand_model(
     const variability::entities::feature_model& feature_model,
-    const formatters::repository& frp, const locator& l, model& fm) const {
+    const transforms::repository& frp, const locator& l, model& fm) const {
     model_expander ex;
     ex.expand(feature_model, frp, l, fm);
 }
 
 model workflow::execute(
     const variability::entities::feature_model& feature_model,
-    const formatters::repository& frp, const locator& l,
+    const transforms::repository& frp, const locator& l,
     const m2t::entities::model& m) const {
 
     auto r(make_model(frp, m));

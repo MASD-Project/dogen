@@ -460,7 +460,7 @@
         {
           "name": "masd.generalization.parent",
           "type": "",
-          "value": "formatters::model_to_text_transform"
+          "value": "transforms::model_to_text_transform"
         }
       ]
     },
@@ -561,7 +561,7 @@
         {
           "name": "masd.generalization.parent",
           "type": "",
-          "value": "formatters::helper_transform"
+          "value": "transforms::helper_transform"
         }
       ]
     },

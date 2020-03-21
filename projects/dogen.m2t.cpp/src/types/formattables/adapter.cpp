@@ -25,7 +25,7 @@
 #include "dogen.logical/io/entities/orm/database_system_io.hpp"
 #include "dogen.m2t.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen.m2t.cpp/types/formattables/adaptation_error.hpp"
-#include "dogen.m2t.cpp/types/formatters/model_to_text_transform.hpp"
+#include "dogen.m2t.cpp/types/transforms/model_to_text_transform.hpp"
 #include "dogen.m2t.cpp/types/formattables/adapter.hpp"
 
 namespace {
@@ -97,7 +97,7 @@ make_databases(const logical::entities::orm::model_properties& omp) const {
     return r;
 }
 
-model adapter::adapt(const formatters::repository& frp,
+model adapter::adapt(const transforms::repository& frp,
     const m2t::entities::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Adapting assets to formattables."
                              << " Elements in model: " << m.elements().size();

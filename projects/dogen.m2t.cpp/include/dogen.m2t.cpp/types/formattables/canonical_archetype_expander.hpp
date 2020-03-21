@@ -26,18 +26,18 @@
 #endif
 
 #include "dogen.m2t.cpp/types/formattables/model.hpp"
-#include "dogen.m2t.cpp/types/formatters/repository.hpp"
+#include "dogen.m2t.cpp/types/transforms/repository.hpp"
 
 namespace dogen::m2t::cpp::formattables {
 
 class canonical_archetype_expander {
 private:
-    void expand(const formatters::repository& frp,
+    void expand(const transforms::repository& frp,
         formattables::element_properties& eprops,
         const logical::entities::element& e) const;
 
 public:
-    void expand(const formatters::repository& frp, model& fm) const;
+    void expand(const transforms::repository& frp, model& fm) const;
 };
 
 }

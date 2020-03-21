@@ -34,7 +34,7 @@
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.logical/types/entities/name.hpp"
-#include "dogen.m2t.cpp/types/formatters/repository.hpp"
+#include "dogen.m2t.cpp/types/transforms/repository.hpp"
 #include "dogen.m2t.cpp/types/formattables/locator_configuration.hpp"
 
 namespace dogen::m2t::cpp::formattables {
@@ -48,7 +48,7 @@ public:
         const boost::filesystem::path& output_directory_path,
         const boost::filesystem::path& cpp_headers_output_directory_path,
         const variability::entities::feature_model& fm,
-        const formatters::repository& frp,
+        const transforms::repository& frp,
         const variability::entities::configuration& rcfg,
         const logical::entities::name& model_name,
         const std::unordered_set<std::string>& module_ids,
@@ -84,14 +84,14 @@ private:
 
     feature_group make_feature_group(
         const variability::entities::feature_model& fm,
-        const formatters::repository& frp) const;
+        const transforms::repository& frp) const;
 
     locator_configuration make_configuration(const feature_group& fg,
         const variability::entities::configuration& cfg) const;
 
     locator_configuration
     make_configuration(const variability::entities::feature_model& fm,
-        const formatters::repository& frp,
+        const transforms::repository& frp,
         const variability::entities::configuration& cfg);
 
 private:

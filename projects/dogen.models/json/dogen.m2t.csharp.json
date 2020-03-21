@@ -41,11 +41,11 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters",
+      "name": "transforms",
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "formatters::workflow",
+      "name": "transforms::workflow",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -53,12 +53,12 @@
       "attributes": [
         {
           "name": "registrar_",
-          "type": "formatters::registrar"
+          "type": "transforms::registrar"
         }
       ]
     },
     {
-      "name": "formatters::registrar",
+      "name": "transforms::registrar",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -66,12 +66,12 @@
       "attributes": [
         {
           "name": "formatter_repository_",
-          "type": "formatters::repository"
+          "type": "transforms::repository"
         }
       ]
     },
     {
-      "name": "formatters::model_to_text_transform",
+      "name": "transforms::model_to_text_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -81,7 +81,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::repository",
+      "name": "transforms::repository",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -94,130 +94,130 @@
       "attributes": [
         {
           "name": "stock_artefact_formatters_by_meta_name",
-          "type": "std::unordered_map<std::string, std::forward_list<std::shared_ptr<formatters::model_to_text_transform>>>"
+          "type": "std::unordered_map<std::string, std::forward_list<std::shared_ptr<transforms::model_to_text_transform>>>"
         },
         {
           "name": "stock_artefact_formatters",
-          "type": "std::forward_list<std::shared_ptr<formatters::model_to_text_transform>>"
+          "type": "std::forward_list<std::shared_ptr<transforms::model_to_text_transform>>"
         },
         {
           "name": "stock_artefact_formatters_by_archetype",
-          "type": "std::unordered_map<std::string, std::shared_ptr<formatters::model_to_text_transform>>"
+          "type": "std::unordered_map<std::string, std::shared_ptr<transforms::model_to_text_transform>>"
         }
       ]
     },
     {
-      "name": "formatters::types",
+      "name": "transforms::types",
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "formatters::types::class_transform",
+      "name": "transforms::types::class_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::enum_transform",
+      "name": "transforms::types::enum_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::namespace_transform",
+      "name": "transforms::types::namespace_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::visitor_transform",
+      "name": "transforms::types::visitor_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::io",
+      "name": "transforms::io",
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "formatters::io::class_transform",
+      "name": "transforms::io::class_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::io::enum_transform",
+      "name": "transforms::io::enum_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::test_data",
+      "name": "transforms::test_data",
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "formatters::test_data::class_transform",
+      "name": "transforms::test_data::class_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::test_data::enum_transform",
+      "name": "transforms::test_data::enum_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::exception_transform",
+      "name": "transforms::types::exception_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::initializer",
+      "name": "transforms::types::initializer",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::io::initializer",
+      "name": "transforms::io::initializer",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::test_data::initializer",
+      "name": "transforms::test_data::initializer",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::traits",
+      "name": "transforms::types::traits",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::io::traits",
+      "name": "transforms::io::traits",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::test_data::traits",
+      "name": "transforms::test_data::traits",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -231,7 +231,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::registrar_error",
+      "name": "transforms::registrar_error",
       "documentation": "There was an error in the registrar.\n",
       "stereotypes": [
         "masd::exception"
@@ -239,7 +239,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::assistant",
+      "name": "transforms::assistant",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -249,7 +249,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::initializer",
+      "name": "transforms::initializer",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -431,7 +431,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::context",
+      "name": "transforms::context",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -447,12 +447,12 @@
         },
         {
           "name": "helpers",
-          "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<formatters::helper_transform>>>>"
+          "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::shared_ptr<transforms::helper_transform>>>>"
         }
       ]
     },
     {
-      "name": "formatters::formatting_error",
+      "name": "transforms::formatting_error",
       "documentation": "An error occurred whilst formatting.\n",
       "stereotypes": [
         "masd::exception"
@@ -460,7 +460,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::traits",
+      "name": "transforms::traits",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -598,7 +598,7 @@
       ]
     },
     {
-      "name": "formatters::helper_transform",
+      "name": "transforms::helper_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -608,7 +608,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::types::floating_point_number_helper",
+      "name": "transforms::types::floating_point_number_helper",
       "stereotypes": [
         "dogen::csharp::helper_formatter"
       ],
@@ -625,21 +625,21 @@
       ]
     },
     {
-      "name": "formatters::types::builtin_transform",
+      "name": "transforms::types::builtin_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::io::builtin_transform",
+      "name": "transforms::io::builtin_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::test_data::builtin_transform",
+      "name": "transforms::test_data::builtin_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
@@ -669,7 +669,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::io::enumerable_helper",
+      "name": "transforms::io::enumerable_helper",
       "stereotypes": [
         "dogen::csharp::helper_formatter"
       ],
@@ -719,21 +719,21 @@
       ]
     },
     {
-      "name": "formatters::types::primitive_transform",
+      "name": "transforms::types::primitive_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::test_data::primitive_transform",
+      "name": "transforms::test_data::primitive_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::io::primitive_transform",
+      "name": "transforms::io::primitive_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
@@ -747,7 +747,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::global_features",
+      "name": "transforms::global_features",
       "stereotypes": [
         "masd::variability::feature_bundle"
       ],
@@ -846,32 +846,32 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::visual_studio",
+      "name": "transforms::visual_studio",
       "fallback_element_type": "masd::module"
     },
     {
-      "name": "formatters::visual_studio::initializer",
+      "name": "transforms::visual_studio::initializer",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::visual_studio::traits",
+      "name": "transforms::visual_studio::traits",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::visual_studio::project_transform",
+      "name": "transforms::visual_studio::project_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::visual_studio::solution_transform",
+      "name": "transforms::visual_studio::solution_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
@@ -886,14 +886,14 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::io::assistant_transform",
+      "name": "transforms::io::assistant_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "formatters::test_data::assistant_transform",
+      "name": "transforms::test_data::assistant_transform",
       "stereotypes": [
         "dogen::csharp::artefact_formatter"
       ],

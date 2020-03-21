@@ -24,7 +24,7 @@
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.m2t.csharp/types/traits.hpp"
 #include "dogen.m2t.csharp/types/formattables/workflow.hpp"
-#include "dogen.m2t.csharp/types/formatters/workflow.hpp"
+#include "dogen.m2t.csharp/types/transforms/workflow.hpp"
 #include "dogen.m2t.csharp/types/formattables/locator.hpp"
 #include "dogen.m2t.csharp/types/model_to_text_csharp_chain.hpp"
 
@@ -51,7 +51,7 @@ model_to_text_csharp_chain::
 formattables::model
 model_to_text_csharp_chain::create_formattables_model(
     const variability::entities::feature_model& feature_model,
-    const formatters::repository& frp, const formattables::locator& l,
+    const transforms::repository& frp, const formattables::locator& l,
     const m2t::entities::model& m) const {
     formattables::workflow fw;
     return fw.execute(feature_model, frp, l, m);
@@ -68,34 +68,34 @@ std::string model_to_text_csharp_chain::description() const {
 std::list<physical::entities::artefact>
 model_to_text_csharp_chain::
 format(const formattables::model& fm) const {
-    formatters::workflow wf;
+    transforms::workflow wf;
     return wf.execute(fm);
 }
 
 const std::forward_list<physical::entities::location>&
 model_to_text_csharp_chain::archetype_locations() const {
-    const auto& rg(formatters::workflow::registrar());
+    const auto& rg(transforms::workflow::registrar());
     return rg.archetype_locations();
 }
 
 const std::unordered_map<std::string,
                          physical::entities::locations_group>&
 model_to_text_csharp_chain::archetype_locations_by_meta_name() const {
-    const auto& rg(formatters::workflow::registrar());
+    const auto& rg(transforms::workflow::registrar());
     return rg.archetype_locations_by_meta_name();
 }
 
 const std::unordered_map<std::string,
                          std::list<physical::entities::location>>&
 model_to_text_csharp_chain::archetype_locations_by_family() const {
-    const auto& rg(formatters::workflow::registrar());
+    const auto& rg(transforms::workflow::registrar());
     return rg.archetype_locations_by_family();
 }
 
 const physical::entities::location_repository_parts&
 model_to_text_csharp_chain::
 archetype_location_repository_parts() const {
-    const auto& rg(formatters::workflow::registrar());
+    const auto& rg(transforms::workflow::registrar());
     return rg.archetype_location_repository_parts();
 }
 
@@ -122,7 +122,7 @@ model_to_text_csharp_chain::apply(
     const auto& rcfg(*m.root_module()->configuration());
     const auto& feature_model(*ctx.feature_model());
     const auto odp(ctx.output_directory_path());
-    const auto& frp(formatters::workflow::registrar().formatter_repository());
+    const auto& frp(transforms::workflow::registrar().formatter_repository());
     const bool ekd(enable_backend_directories);
     const formattables::locator l(odp, feature_model, frp, rcfg, mn, m.
         module_ids(), ekd);

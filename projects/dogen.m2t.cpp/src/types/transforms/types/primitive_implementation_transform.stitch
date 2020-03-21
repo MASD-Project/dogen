@@ -1,0 +1,158 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::types #>
+<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/inclusion_constants.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/formatting_error.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/io/inserter_implementation_helper.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/types/primitive_implementation_transform.hpp" #>
+<#@ masd.stitch.wale.text_template=cpp_artefact_transform_implementation.wale #>
+<#@ masd.stitch.wale.kvp.class.simple_name=primitive_implementation_transform #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=primitive_implementation #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::primitive #>
+<#@ masd.stitch.wale.kvp.meta_element=primitive #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+std::list<std::string>
+primitive_implementation_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& f,
+    const logical::entities::element& e) const {
+    using logical::entities::structural::primitive;
+    const auto& o(assistant::as<primitive>(e));
+    auto builder(f.make());
+
+    const auto ch_arch(traits::primitive_header_archetype());
+    builder.add(o.name(), ch_arch);
+    return builder.build();
+}
+
+physical::entities::artefact primitive_implementation_transform::
+format(const context& ctx, const logical::entities::element& e) const {
+    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    const auto& p(a.as<logical::entities::structural::primitive>(e));
+
+    const auto sn(p.name().simple());
+    const auto qn(a.get_qualified_name(p.name()));
+    {
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        {
+            const auto ns(a.make_namespaces(p.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto attr(p.value_attribute());
+
+            /*
+             * Default constructor.
+             */
+            if (a.requires_manual_default_constructor()) {
+#>
+
+<#= sn #>::<#= sn #>()
+    : <#= attr.member_variable_name() #>(static_cast<<#= a.get_qualified_name(attr.parsed_type()) #>>(0)) { }
+<#+
+            }
+
+            /*
+             * Move constructor.
+             */
+            if (a.requires_manual_move_constructor()) {
+#>
+
+<#= sn #>::<#= sn #>(<#= sn #>&& rhs)
+    : <#= attr.member_variable_name() #>(std::move(rhs.<#= attr.member_variable_name() #>)) { }
+<#+
+            }
+
+            /*
+             * Complete constructor.
+             */
+#>
+
+<#= sn #>::<#= sn #>(const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #>)
+    : <#= attr.member_variable_name() #>(<#= attr.name().simple() #>) { }
+
+<#+
+            /*
+             * Getters and setters
+             */
+             if (attr.parsed_type().is_current_simple_type()) {
+#>
+<#= a.get_qualified_name(attr.parsed_type()) #> <#= sn #>::<#= attr.name().simple() #>() const {
+    return <#= attr.member_variable_name() #>;
+}
+
+<#+
+                if (!p.is_immutable()) {
+#>
+void <#= sn #>::<#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #> v) {
+    <#= attr.member_variable_name() #> = v;
+}
+
+<#+
+                }
+            } else {
+#>
+const <#= a.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.name().simple() #>() const {
+    return <#= attr.member_variable_name() #>;
+}
+<#+
+                if (!p.is_immutable()) {
+#>
+
+<#= a.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.name().simple() #>() {
+    return <#= attr.member_variable_name() #>;
+}
+
+void <#= sn #>::<#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #>& v) {
+    <#= attr.member_variable_name() #> = v;
+}
+
+void <#= sn #>::<#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #>&& v) {
+    <#= attr.member_variable_name() #> = std::move(v);
+}
+
+<#+
+                }
+            }
+
+            /*
+             * Equality.
+             */
+#>
+bool <#= sn #>::operator==(const <#= sn #>& rhs) const {
+    return <#= attr.member_variable_name() #> == rhs.<#= attr.member_variable_name() #>;
+}
+
+<#+
+            /*
+             * Swap and assignment.
+             */
+            if (!p.is_immutable()) {
+#>
+void <#= sn #>::swap(<#= sn #>& other)<#= a.make_noexcept_keyword_text() #> {
+    using std::swap;
+    swap(<#= attr.member_variable_name() #>, other.<#= attr.member_variable_name() #>);
+}
+
+<#= sn #>& <#= sn #>::operator=(<#= sn #> other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+<#+
+            }
+        } // snf
+    } // sbf
+    return a.make_artefact();
+}
+#>

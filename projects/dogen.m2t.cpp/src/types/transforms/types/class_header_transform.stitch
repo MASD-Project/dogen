@@ -1,0 +1,464 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::types #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/object.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/inclusion_constants.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/io/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/serialization/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/hash/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/types/class_header_transform.hpp" #>
+<#@ masd.stitch.wale.text_template=cpp_artefact_transform_implementation_header.wale #>
+<#@ masd.stitch.wale.kvp.class.simple_name=class_header_transform #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=class_header #>
+<#@ masd.stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::object #>
+<#@ masd.stitch.wale.kvp.meta_element=object #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+std::list<std::string> class_header_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& f,
+    const logical::entities::element& e) const {
+
+    using logical::entities::structural::object;
+    const auto& o(assistant::as<object>(e));
+    auto builder(f.make());
+
+    // algorithm: domain headers need it for the swap function.
+    builder.add(inclusion_constants::std::algorithm());
+
+    const auto io_arch(transforms::io::traits::class_header_archetype());
+    const bool in_inheritance(o.is_parent() || o.is_child());
+    const bool io_enabled(builder.is_enabled(o.name(), io_arch));
+    const bool requires_io(io_enabled && in_inheritance);
+
+    const auto ios(inclusion_constants::std::iosfwd());
+    if (requires_io)
+        builder.add(ios);
+
+    using ser = transforms::serialization::traits;
+    const auto ser_fwd_arch(ser::class_forward_declarations_archetype());
+    builder.add(o.name(), ser_fwd_arch);
+
+    const auto carch(traits::canonical_archetype());
+    builder.add(o.transparent_associations(), carch);
+
+    const auto fwd_arch(traits::class_forward_declarations_archetype());
+    builder.add(o.opaque_associations(), fwd_arch);
+
+    const auto self_arch(class_header_transform::static_id());
+    builder.add(o.parents(), self_arch);
+
+    using hash = transforms::hash::traits;
+    const auto hash_carch(hash::traits::canonical_archetype());
+    builder.add(o.associative_container_keys(), hash_carch);
+
+    if (o.is_visitation_root()) {
+        /*
+         * On the header files of the visitation root we only care
+         * about the base visitor; as such we can get away with a
+         * forward declaration. For the visitation leaves, since we
+         * must include the parent we do not need any additional
+         * includes.
+         */
+        builder.add(o.opaque_associations(), fwd_arch);
+
+        const auto visitor_fwd_arch(traits::visitor_forward_declarations_archetype());
+        builder.add(*o.base_visitor(), visitor_fwd_arch);
+    }
+    return builder.build();
+}
+
+physical::entities::artefact class_header_transform::
+format(const context& ctx, const logical::entities::element& e) const {
+    assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
+    const auto& o(a.as<logical::entities::structural::object>(e));
+
+    {
+        const auto sn(o.name().simple());
+        const auto qn(a.get_qualified_name(o.name()));
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        {
+            const auto ns(a.make_namespaces(o.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
+#>
+
+<#+
+            a.comment(o.documentation());
+            if (o.parents().empty()) {
+#>
+class <#= sn #> <#= a.make_final_keyword_text(o) #>{
+<#+
+            } else {
+                const auto& pn(o.parents().front());
+                const auto pqn(a.get_qualified_name(pn));
+#>
+class <#= sn #> <#= a.make_final_keyword_text(o) #>: public <#= pqn #> {
+<#+
+            }
+
+            /*
+             * Compiler generated constructors and destructors.
+             */
+            if (a.supports_defaulted_functions()) {
+#>
+public:
+<#+
+                if (!a.requires_manual_default_constructor())
+#>
+    <#= sn #>() = default;
+    <#= sn #>(const <#= sn #>&) = default;
+<#+
+                if (!a.requires_manual_move_constructor())
+#>
+    <#= sn #>(<#= sn #>&&) = default;
+<#+
+                if (!o.in_inheritance_relationship())
+#>
+    ~<#= sn #>() = default;
+<#+
+                if (o.is_immutable())
+#>
+    <#= sn #>& operator=(const <#= sn #>&) = delete;
+<#+
+                else if (o.all_attributes().empty())
+#>
+    <#= sn #>& operator=(const <#= sn #>&) = default;
+
+<#+
+            }
+
+            /*
+             * Manually generated default constructor.
+             */
+            if (a.requires_manual_default_constructor()) {
+#>
+public:
+    <#= sn #>();
+
+<#+
+            }
+
+            /*
+             * Manually generated destructor.
+             *
+             * according to MEC++, item 33, base classes should always be
+             * abstract. this avoids all sorts of tricky problems with
+             * assignment and swap.
+             *
+             * incidentally, this also fixes some strange clang errors:
+             * undefined reference to `vtable.
+             */
+            if (o.is_parent()) {
+#>
+    virtual ~<#= sn #>()<#= a.make_noexcept_keyword_text() #> = 0;
+
+<#+
+            } else if (o.is_child() != 0) {
+#>
+    virtual ~<#= sn #>()<#= a.make_noexcept_keyword_text() #> { }
+
+<#+
+            }
+
+            /*
+             * Manually generated move constructor.
+             */
+            if (a.requires_manual_move_constructor()) {
+#>
+public:
+    <#= sn #>(<#= sn #>&& rhs);
+
+<#+
+            }
+
+            /*
+             * Manually generated complete constructor.
+             */
+            if (!o.all_attributes().empty()) {
+#>
+public:
+<#+
+                const auto attr_count(o.all_attributes().size());
+                if (attr_count == 1) {
+                    const auto attr(*o.all_attributes().begin());
+#>
+    explicit <#= sn #>(const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #>);
+<#+
+                } else {
+#>
+    <#= sn #>(
+<#+
+                    m2t::formatters::sequence_formatter sf(attr_count);
+                    sf.postfix_configuration().last(");");
+                    for (const auto& attr : o.all_attributes()) {
+#>
+        const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #><#= sf.postfix() #>
+<#+
+                        sf.next();
+                    }
+                }
+#>
+
+<#+
+            }
+
+            /*
+             * Serialisaton Friends
+             */
+            if (a.is_serialization_enabled()) {
+#>
+private:
+    template<typename Archive>
+    friend void boost::serialization::save(Archive& ar, const <#= qn #>& v, unsigned int version);
+
+    template<typename Archive>
+    friend void boost::serialization::load(Archive& ar, <#= qn #>& v, unsigned int version);
+
+<#+
+            }
+
+            /*
+             * Visitation.
+             */
+            if (o.is_visitation_root()) {
+                const auto vsn(o.base_visitor()->simple());
+#>
+public:
+    virtual void accept(const <#= vsn #>& v) const = 0;
+    virtual void accept(<#= vsn #>& v) const = 0;
+    virtual void accept(const <#= vsn #>& v) = 0;
+    virtual void accept(<#= vsn #>& v) = 0;
+
+<#+
+            } else if (o.is_visitation_leaf()) {
+                std::string bvn;
+                std::string rpn;
+                if (o.derived_visitor()) {
+                    bvn = a.get_qualified_name(*o.base_visitor());
+                    rpn = a.get_qualified_name(o.root_parents().front());
+                } else {
+                    bvn = o.base_visitor()->simple();
+                    rpn = o.root_parents().front().simple();
+                }
+#>
+public:
+    using <#= rpn #>::accept;
+
+    virtual void accept(const <#= bvn #>& v) const<#= a.make_override_keyword_text() #>;
+    virtual void accept(<#= bvn #>& v) const<#= a.make_override_keyword_text() #>;
+    virtual void accept(const <#= bvn #>& v)<#= a.make_override_keyword_text() #>;
+    virtual void accept(<#= bvn #>& v)<#= a.make_override_keyword_text() #>;
+<#+
+            }
+
+            /*
+             * Streaming
+             */
+            if (a.is_io_enabled()) {
+                if (o.is_parent()) {
+#>
+public:
+    virtual void to_stream(std::ostream& s) const;
+
+<#+
+                } else if (!o.parents().empty()) {
+#>
+public:
+    void to_stream(std::ostream& s) const<#= a.make_override_keyword_text() #>;
+
+<#+
+                }
+            }
+
+            /*
+             * Getters and setters.
+             */
+            if (!o.local_attributes().empty()) {
+#>
+public:
+<#+
+                for (const auto& attr : o.local_attributes()) {
+                    a.comment_start_method_group(attr.documentation(), !attr.is_immutable());
+
+                    if (attr.parsed_type().is_current_simple_type()) {
+#>
+    <#= a.get_qualified_name(attr.parsed_type()) #> <#= attr.name().simple() #>() const;
+<#+
+                        if (attr.is_immutable()) {
+#>
+
+<#+
+                            continue;
+                        }
+#>
+    <#= a.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> v);
+<#+
+                    } else {
+#>
+    const <#= a.get_qualified_name(attr.parsed_type()) #>& <#= attr.name().simple() #>() const;
+<#+
+                        if (attr.is_immutable()) {
+#>
+
+<#+
+                            continue;
+                        }
+#>
+    <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #>();
+    <#= a.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> v);
+<#+
+                        if (a.supports_move_operator()) {
+#>
+    <#= a.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #>&& v);
+<#+
+                        }
+                    }
+                    a.comment_end_method_group(attr.documentation(), !attr.is_immutable());
+#>
+
+<#+
+                }
+            }
+
+            /*
+             * Equality.
+             *
+             * Equality is only public in leaf classes - MEC++-33.
+             */
+            if (o.is_parent()) {
+#>
+protected:
+    bool compare(const <#= sn #>& rhs) const;
+<#+
+            } else {
+#>
+public:
+    bool operator==(const <#= sn #>& rhs) const;
+    bool operator!=(const <#= sn #>& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+<#+
+            }
+
+            if (o.in_inheritance_relationship()) {
+#>
+public:
+<#+
+                if (o.is_parent() && !o.is_child()) {
+#>
+    virtual bool equals(const <#= sn #>& other) const = 0;
+<#+
+                } else if (o.is_parent()) {
+                    const auto rpn(o.root_parents().front());
+#>
+    virtual bool equals(const <#= a.get_qualified_name(rpn) #>& other) const = 0;
+<#+
+                } else if (!o.root_parents().empty()) {
+                    const auto rpn(o.root_parents().front());
+#>
+    bool equals(const <#= a.get_qualified_name(rpn) #>& other) const<#= a.make_override_keyword_text() #>;
+<#+
+                }
+#>
+
+<#+
+             }
+
+            /*
+             * Swap and assignment.
+             *
+             * Swap and assignment are only public in leaf classes - MEC++-33
+             */
+            if ((!o.all_attributes().empty() || o.is_parent()) && !o.is_immutable()) {
+                if (o.is_parent()) {
+#>
+protected:
+<#+
+                } else {
+#>
+public:
+<#+
+                }
+#>
+    void swap(<#= sn #>& other)<#= a.make_noexcept_keyword_text() #>;
+<#+
+                if (!o.is_parent() && !o.is_immutable()) {
+#>
+    <#= sn #>& operator=(<#= sn #> other);
+<#+
+                }
+#>
+
+<#+
+            }
+
+            /*
+             * Member variables.
+             */
+            if (!o.local_attributes().empty()) {
+#>
+private:
+<#+
+                for (const auto& attr : o.local_attributes()) {
+#>
+    <#= a.get_qualified_name(attr.parsed_type()) #> <#= attr.member_variable_name() #>;
+<#+
+                }
+            }
+#>
+};
+
+<#+
+            /*
+             * Destructor implementation.
+             */
+            if (o.is_parent()) {
+#>
+inline <#= sn #>::~<#= sn #>()<#= a.make_noexcept_keyword_text() #> { }
+
+<#+
+            }
+
+            /*
+             * Global equality operator implementation.
+             */
+            if (o.is_parent()) {
+#>
+inline bool operator==(const <#= sn #>& lhs, const <#= sn #>& rhs) {
+    return lhs.equals(rhs);
+}
+
+<#+
+            }
+        }
+
+        if (!o.all_attributes().empty() && !o.is_parent() && !o.is_immutable()) {
+#>
+
+namespace std {
+
+template<>
+inline void swap(
+    <#= qn #>& lhs,
+    <#= qn #>& rhs) {
+    lhs.swap(rhs);
+}
+
+}
+<#+
+        }
+#>
+
+<#+
+    } // sbf
+    return a.make_artefact();
+}
+#>

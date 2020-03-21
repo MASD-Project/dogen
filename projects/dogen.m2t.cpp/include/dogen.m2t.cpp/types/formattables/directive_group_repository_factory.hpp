@@ -33,7 +33,7 @@
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.m2t.cpp/types/formattables/model.hpp"
-#include "dogen.m2t.cpp/types/formatters/repository.hpp"
+#include "dogen.m2t.cpp/types/transforms/repository.hpp"
 #include "dogen.m2t.cpp/types/formattables/locator.hpp"
 #include "dogen.m2t.cpp/types/formattables/formattable.hpp"
 #include "dogen.m2t.cpp/types/formattables/directive_group_repository.hpp"
@@ -55,7 +55,7 @@ private:
 
     feature_group make_feature_group(
         const variability::entities::feature_model& fm,
-        const formatters::repository& frp) const;
+        const transforms::repository& frp) const;
 
     bool make_top_level_inclusion_required(const feature_group& fg,
         const variability::entities::configuration& cfg) const;
@@ -72,14 +72,14 @@ private:
 
 public:
     typedef std::forward_list<
-    std::shared_ptr<formatters::model_to_text_transform>
+    std::shared_ptr<transforms::model_to_text_transform>
     > artefact_formatters_type;
 
     artefact_formatters_type remove_non_includible_formatters(
         const artefact_formatters_type& formatters) const;
 
     std::unordered_map<std::string, artefact_formatters_type>
-    includible_formatters_by_meta_name(const formatters::repository& frp) const;
+    includible_formatters_by_meta_name(const transforms::repository& frp) const;
 
 private:
     void insert_inclusion_directive(const std::string& id,
@@ -100,7 +100,7 @@ private:
 public:
     directive_group_repository
     make(const variability::entities::feature_model& feature_model,
-        const formatters::repository& frp,
+        const transforms::repository& frp,
         const locator& l,
         const std::unordered_map<std::string, formattable>& formattables) const;
 };

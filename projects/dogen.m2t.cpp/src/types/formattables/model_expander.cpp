@@ -41,7 +41,7 @@ expand_streaming(const variability::entities::feature_model& feature_model,
 }
 
 void model_expander::expand_canonical_archetypes(
-    const formatters::repository& frp, model& fm) const {
+    const transforms::repository& frp, model& fm) const {
     canonical_archetype_expander ex;
     ex.expand(frp, fm);
 }
@@ -49,7 +49,7 @@ void model_expander::expand_canonical_archetypes(
 void model_expander::expand_inclusion(
     const variability::entities::feature_model& feature_model,
     const std::unordered_set<m2t::entities::element_archetype>&
-    enabled_archetype_for_element, const formatters::repository& frp,
+    enabled_archetype_for_element, const transforms::repository& frp,
     const locator& l, model& fm) const {
     inclusion_expander ex;
     ex.expand(feature_model, enabled_archetype_for_element, frp, l, fm);
@@ -64,7 +64,7 @@ void model_expander::expand_aspects(
 
 void model_expander::expand_helpers(
     const variability::entities::feature_model& feature_model,
-    const formatters::repository& frp, model& fm) const {
+    const transforms::repository& frp, model& fm) const {
     helper_expander ex;
     ex.expand(feature_model, frp, fm);
 }
@@ -75,7 +75,7 @@ void model_expander::reduce(model& fm) const {
 }
 
 void model_expander::expand_file_paths_and_guards(
-    const formatters::repository& frp, const locator& l, model& fm) const {
+    const transforms::repository& frp, const locator& l, model& fm) const {
     file_path_and_guard_expander ex;
     ex.expand(frp, l, fm);
 }
@@ -109,7 +109,7 @@ void model_expander::expand(
     const variability::entities::configuration& rcfg,
     const std::unordered_set<m2t::entities::element_archetype>&
     enabled_archetype_for_element,
-    const formatters::repository& frp, const locator& l, model& fm) const {
+    const transforms::repository& frp, const locator& l, model& fm) const {
 
     /*
      * Streaming expansion must be done before helper expansion as the

@@ -1,0 +1,76 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/inclusion_constants.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/test_data/primitive_header_transform.hpp" #>
+<#@ masd.stitch.wale.text_template=cpp_artefact_transform_implementation_header.wale #>
+<#@ masd.stitch.wale.kvp.class.simple_name=primitive_header_transform #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=primitive_header #>
+<#@ masd.stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::primitive #>
+<#@ masd.stitch.wale.kvp.meta_element=primitive #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+std::list<std::string> primitive_header_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& f,
+    const logical::entities::element& e) const {
+    auto builder(f.make());
+    builder.add(e.name(), types::traits::primitive_header_archetype());
+    return builder.build();
+}
+
+physical::entities::artefact primitive_header_transform::
+format(const context& ctx, const logical::entities::element& e) const {
+    assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
+    const auto& p(a.as<logical::entities::structural::primitive>(e));
+
+    const auto sn(p.name().simple());
+    const auto qn(a.get_qualified_name(p.name()));
+    {
+
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        {
+            const auto ns(a.make_namespaces(p.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
+#>
+
+class <#= sn #>_generator {
+public:
+    <#= sn #>_generator();
+
+public:
+    typedef <#= qn #> result_type;
+
+public:
+<#+
+            if (!p.is_immutable())
+#>
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+<#+
+        } // snf
+#>
+
+<#+
+    } // sbf
+    return a.make_artefact();
+}
+
+#>

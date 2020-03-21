@@ -35,9 +35,9 @@
 #include "dogen.m2t.cpp/io/formattables/helper_configuration_io.hpp"
 #include "dogen.m2t.cpp/io/formattables/streaming_properties_io.hpp"
 #include "dogen.m2t.cpp/io/formattables/helper_properties_io.hpp"
-#include "dogen.m2t.cpp/types/formatters/hash/traits.hpp"
-#include "dogen.m2t.cpp/types/formatters/model_to_text_transform.hpp"
-#include "dogen.m2t.cpp/types/formatters/helper_transform.hpp"
+#include "dogen.m2t.cpp/types/transforms/hash/traits.hpp"
+#include "dogen.m2t.cpp/types/transforms/model_to_text_transform.hpp"
+#include "dogen.m2t.cpp/types/transforms/helper_transform.hpp"
 #include "dogen.m2t.cpp/types/formattables/expansion_error.hpp"
 #include "dogen.m2t.cpp/types/formattables/helper_expander.hpp"
 
@@ -127,7 +127,7 @@ requires_hashing_helper(const helper_expander::facets_for_family_type& fff,
      * If the hash facet is not present in the helpers for this family
      * then the family does not require hashing support.
      */
-    const auto j(i->second.find(formatters::hash::traits::facet()));
+    const auto j(i->second.find(transforms::hash::traits::facet()));
     return j != i->second.end();
 }
 
@@ -349,7 +349,7 @@ make_configuration(const feature_group& fg, const model& fm) const {
 
 
 helper_expander::facets_for_family_type
-helper_expander::facets_for_family(const formatters::repository& frp) const {
+helper_expander::facets_for_family(const transforms::repository& frp) const {
     BOOST_LOG_SEV(lg, debug) << "Started making facets for family.";
 
     /*
@@ -370,7 +370,7 @@ helper_expander::facets_for_family(const formatters::repository& frp) const {
 }
 
 void helper_expander::populate_helper_properties(
-    const helper_configuration& cfg, const formatters::repository& frp,
+    const helper_configuration& cfg, const transforms::repository& frp,
     std::unordered_map<std::string, formattable>& formattables) const {
 
     const auto fff(facets_for_family(frp));
@@ -414,7 +414,7 @@ void helper_expander::populate_helper_properties(
 
 void helper_expander::expand(
     const variability::entities::feature_model& feature_model,
-    const formatters::repository& frp, model& fm) const {
+    const transforms::repository& frp, model& fm) const {
     const auto fg(make_feature_group(feature_model));
     const auto cfg(make_configuration(fg, fm));
     populate_helper_properties(cfg, frp, fm.formattables());

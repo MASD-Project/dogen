@@ -1,0 +1,113 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::serialization #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t/types/formatters/sequence_formatter.hpp" #>
+<#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+<#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/formatting_error.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/inclusion_constants.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/serialization/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/serialization/primitive_implementation_transform.hpp" #>
+<#@ masd.stitch.wale.text_template=cpp_artefact_transform_implementation.wale #>
+<#@ masd.stitch.wale.kvp.class.simple_name=primitive_implementation_transform #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=primitive_implementation #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::primitive #>
+<#@ masd.stitch.wale.kvp.meta_element=primitive #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+std::list<std::string>
+primitive_implementation_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& f,
+    const logical::entities::element& e) const {
+    using logical::entities::structural::primitive;
+    const auto& p(assistant::as<primitive>(e));
+    auto builder(f.make());
+
+    const auto ph_fn(traits::primitive_header_archetype());
+    builder.add(p.name(), ph_fn);
+
+    using ic = inclusion_constants;
+    builder.add(ic::boost::archive::text_iarchive());
+    builder.add(ic::boost::archive::text_oarchive());
+    builder.add(ic::boost::archive::binary_iarchive());
+    builder.add(ic::boost::archive::binary_oarchive());
+    builder.add(ic::boost::archive::polymorphic_iarchive());
+    builder.add(ic::boost::archive::polymorphic_oarchive());
+
+    // XML serialisation
+    builder.add(ic::boost::serialization::nvp());
+    builder.add(ic::boost::archive::xml_iarchive());
+    builder.add(ic::boost::archive::xml_oarchive());
+
+    const auto carch(traits::canonical_archetype());
+    builder.add(p.value_attribute().parsed_type().current(), carch);
+
+    return builder.build();
+}
+
+physical::entities::artefact primitive_implementation_transform::
+format(const context& ctx, const logical::entities::element& e) const {
+    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    const auto& p(a.as<logical::entities::structural::primitive>(e));
+
+    const auto sn(p.name().simple());
+    const auto qn(a.get_qualified_name(p.name()));
+    {
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        const auto attr(p.value_attribute());
+#>
+
+namespace boost {
+namespace serialization {
+<#+
+
+        /*
+         * Save function
+         */
+#>
+
+template<typename Archive>
+void save(Archive& ar, const <#= qn #>& v, const unsigned int /*version*/) {
+    ar << make_nvp("<#= attr.name().simple() #>", v.<#= attr.member_variable_name() #>);
+}
+
+<#+
+        /*
+         * Load function
+         */
+#>
+template<typename Archive>
+void load(Archive& ar, <#= qn #>& v, const unsigned int /*version*/) {
+    ar >> make_nvp("<#= attr.name().simple() #>", v.<#= attr.member_variable_name() #>);
+}
+
+} }
+
+namespace boost {
+namespace serialization {
+
+template void save(archive::polymorphic_oarchive& ar, const <#= qn #>& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, <#= qn #>& v, unsigned int version);
+
+template void save(archive::text_oarchive& ar, const <#= qn #>& v, unsigned int version);
+template void load(archive::text_iarchive& ar, <#= qn #>& v, unsigned int version);
+
+template void save(archive::binary_oarchive& ar, const <#= qn #>& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, <#= qn #>& v, unsigned int version);
+
+template void save(archive::xml_oarchive& ar, const <#= qn #>& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, <#= qn #>& v, unsigned int version);
+
+} }
+<#+
+    } // sbf
+    return a.make_artefact();
+}
+
+#>

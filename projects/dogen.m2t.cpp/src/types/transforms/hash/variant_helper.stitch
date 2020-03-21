@@ -1,0 +1,51 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::hash #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/hash/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formattables/helper_properties.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/hash/variant_helper.hpp" #>
+<#@ masd.stitch.wale.text_template=cpp_helper_transform_implementation_enabled.wale #>
+<#@ masd.stitch.wale.kvp.helper.family=BoostVariant #>
+<#@ masd.stitch.wale.kvp.class.simple_name=variant_helper #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void variant_helper::
+format(assistant& a, const formattables::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+    const auto key(hp.direct_descendants().front());
+    const auto value(hp.direct_descendants().back());
+#>
+
+struct <#= ident #>_visitor : public boost::static_visitor<> {
+    <#= ident #>_visitor() : hash(0) {}
+<#+
+    for (const auto& dd : hp.direct_descendants()) {
+#>
+    void operator()(const <#= dd.name_qualified() #><#= (dd.is_simple_type() ? "" : "&") #> v) const {
+<#+
+        if (!dd.requires_hashing_helper())
+#>
+        combine(hash, v);
+<#+
+        else
+#>
+        combine(hash, hash_<#= dd.name_tree_identifiable() #>(v));
+    }
+
+<#+
+    }
+#>
+    mutable std::size_t hash;
+};
+
+inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
+    <#= ident #>_visitor vis;
+    boost::apply_visitor(vis, v);
+    return vis.hash;
+}
+<#+
+}
+#>

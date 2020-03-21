@@ -19,15 +19,15 @@
  *
  */
 #include "dogen.m2t/types/transforms/model_to_text_chain.hpp"
-#include "dogen.m2t.csharp/types/formatters/workflow.hpp"
-#include "dogen.m2t.csharp/types/formatters/initializer.hpp"
+#include "dogen.m2t.csharp/types/transforms/workflow.hpp"
+#include "dogen.m2t.csharp/types/transforms/initializer.hpp"
 #include "dogen.m2t.csharp/types/model_to_text_csharp_chain.hpp"
 #include "dogen.m2t.csharp/types/initializer.hpp"
 
 namespace dogen::m2t::csharp {
 
 void initializer::initialize() {
-    formatters::initializer::initialize(formatters::workflow::registrar());
+    transforms::initializer::initialize(transforms::workflow::registrar());
     using m2t::transforms::register_transform;
     register_transform<model_to_text_csharp_chain>();
 }

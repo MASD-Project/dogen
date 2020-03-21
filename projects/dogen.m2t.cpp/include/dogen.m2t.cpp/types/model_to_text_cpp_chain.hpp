@@ -37,7 +37,7 @@
 #include "dogen.variability/types/entities/feature_model.hpp"
 #include "dogen.m2t/types/entities/model.hpp"
 #include "dogen.m2t/types/transforms/model_to_text_technical_space_chain.hpp"
-#include "dogen.m2t.cpp/types/formatters/repository.hpp"
+#include "dogen.m2t.cpp/types/transforms/repository.hpp"
 #include "dogen.m2t.cpp/types/formattables/locator.hpp"
 #include "dogen.m2t.cpp/types/formattables/model.hpp"
 
@@ -63,7 +63,7 @@ private:
     /**
      * @brief Get the formatters repository.
      */
-    const formatters::repository& formatters_repository() const;
+    const transforms::repository& formatters_repository() const;
 
     /**
      * @brief Create the formattables representation of the yarn model.
@@ -71,7 +71,7 @@ private:
     formattables::model create_formattables_model(
         const variability::entities::feature_model& feature_model,
         const variability::entities::configuration& rcfg,
-        const formatters::repository& frp, const formattables::locator& l,
+        const transforms::repository& frp, const formattables::locator& l,
         const m2t::entities::model& m) const;
 
     /**
@@ -81,7 +81,7 @@ private:
         const boost::filesystem::path& output_directory_path,
         const variability::entities::feature_model& fm,
         const variability::entities::configuration& cfg,
-        const formatters::repository& frp,
+        const transforms::repository& frp,
         const bool enable_backend_directories,
         const m2t::entities::model& m) const;
 

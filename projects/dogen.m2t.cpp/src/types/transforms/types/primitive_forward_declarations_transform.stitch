@@ -1,0 +1,49 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::types #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/primitive.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.wale.text_template=cpp_artefact_transform_implementation_header.wale #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/types/primitive_forward_declarations_transform.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/types/traits.hpp" #>
+<#@ masd.stitch.wale.kvp.class.simple_name=primitive_forward_declarations_transform #>
+<#@ masd.stitch.wale.kvp.archetype.simple_name=primitive_forward_declarations #>
+<#@ masd.stitch.wale.kvp.class.inclusion_support_type=regular_support #>
+<#@ masd.stitch.wale.kvp.yarn_element=logical::entities::structural::primitive #>
+<#@ masd.stitch.wale.kvp.meta_element=primitive #>
+<#@ masd.stitch.wale.kvp.meta_name_factory=logical::helpers::meta_name_factory #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+std::list<std::string> primitive_forward_declarations_transform::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& /*f*/,
+    const logical::entities::element& /*e*/) const {
+    static std::list<std::string> r;
+    return r;
+}
+
+physical::entities::artefact primitive_forward_declarations_transform::
+format(const context& ctx, const logical::entities::element& e) const {
+    assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
+    const auto& p(a.as<logical::entities::structural::primitive>(e));
+
+    {
+        auto sbf(a.make_scoped_boilerplate_formatter(p));
+        {
+            const auto ns(a.make_namespaces(p.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
+#>
+
+class <#= p.name().simple() #>;
+
+<#+
+        } // snf
+#>
+
+<#+
+    } // sbf
+    return a.make_artefact();
+}
+
+#>

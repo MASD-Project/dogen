@@ -34,7 +34,7 @@
 #include "dogen.m2t/types/entities/model.hpp"
 #include "dogen.m2t/types/transforms/context.hpp"
 #include "dogen.m2t/types/transforms/model_to_text_technical_space_chain.hpp"
-#include "dogen.m2t.csharp/types/formatters/repository.hpp"
+#include "dogen.m2t.csharp/types/transforms/repository.hpp"
 #include "dogen.m2t.csharp/types/formattables/locator.hpp"
 #include "dogen.m2t.csharp/types/formattables/model.hpp"
 
@@ -58,7 +58,7 @@ public:
 private:
     formattables::model create_formattables_model(
         const variability::entities::feature_model& feature_model,
-        const formatters::repository& frp, const formattables::locator & l,
+        const transforms::repository& frp, const formattables::locator & l,
         const m2t::entities::model& m) const;
 
     std::list<physical::entities::artefact>

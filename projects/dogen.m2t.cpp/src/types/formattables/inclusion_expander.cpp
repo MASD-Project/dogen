@@ -24,7 +24,7 @@
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.m2t.cpp/types/formattables/expansion_error.hpp"
-#include "dogen.m2t.cpp/types/formatters/model_to_text_transform.hpp"
+#include "dogen.m2t.cpp/types/transforms/model_to_text_transform.hpp"
 #include "dogen.m2t.cpp/types/formattables/directive_group_repository_factory.hpp"
 #include "dogen.m2t.cpp/types/formattables/inclusion_expander.hpp"
 
@@ -99,7 +99,7 @@ namespace dogen::m2t::cpp::formattables {
 directive_group_repository inclusion_expander::
 create_directive_groups(
     const variability::entities::feature_model& feature_model,
-    const formatters::repository& frp, const locator& l,
+    const transforms::repository& frp, const locator& l,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
     directive_group_repository_factory f;
@@ -108,7 +108,7 @@ create_directive_groups(
 
 inclusion_expander::element_inclusion_dependencies_type
 inclusion_expander::compute_inclusion_dependencies(
-    const formatters::repository& frp,
+    const transforms::repository& frp,
     const dependencies_builder_factory& df,
     const logical::entities::element& e) const {
 
@@ -174,7 +174,7 @@ inclusion_expander::compute_inclusion_dependencies(
 }
 
 void inclusion_expander::populate_inclusion_dependencies(
-    const formatters::repository& frp,
+    const transforms::repository& frp,
     const dependencies_builder_factory& df,
     std::unordered_map<std::string, formattable>& formattables) const {
 
@@ -240,7 +240,7 @@ void inclusion_expander::populate_inclusion_dependencies(
 void inclusion_expander::expand(
     const variability::entities::feature_model& feature_model,
     const std::unordered_set<m2t::entities::element_archetype>&
-    enabled_archetype_for_element, const formatters::repository& frp,
+    enabled_archetype_for_element, const transforms::repository& frp,
     const locator& l, model& fm) const {
 
     auto& fbls(fm.formattables());

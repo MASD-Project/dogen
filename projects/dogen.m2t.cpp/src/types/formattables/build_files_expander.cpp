@@ -31,8 +31,8 @@
 #include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.logical/types/entities/visual_studio/msbuild_targets.hpp"
 #include "dogen.logical/types/entities/build/cmakelists.hpp"
-#include "dogen.m2t.cpp/types/formatters/odb/traits.hpp"
-#include "dogen.m2t.cpp/types/formatters/types/traits.hpp"
+#include "dogen.m2t.cpp/types/transforms/odb/traits.hpp"
+#include "dogen.m2t.cpp/types/transforms/types/traits.hpp"
 #include "dogen.m2t.cpp/types/formattables/expansion_error.hpp"
 #include "dogen.m2t.cpp/types/formattables/header_guard_factory.hpp"
 #include "dogen.m2t.cpp/types/formattables/build_files_expander.hpp"
@@ -104,14 +104,14 @@ generate_targets(const logical::entities::name& n) {
      * into the headers project directory.
      */
     const auto& l(locator_);
-    const auto odb_arch(formatters::odb::traits::class_header_archetype());
+    const auto odb_arch(transforms::odb::traits::class_header_archetype());
     const auto odb_fp(l.make_full_path_for_cpp_header(n, odb_arch)
         .parent_path());
     const auto src_dir(l.make_full_path_to_implementation_directory());
     const auto rp(odb_fp.lexically_relative(src_dir));
     r.output_directory(rp.generic_string());
 
-    const auto types_arch(formatters::types::traits::class_header_archetype());
+    const auto types_arch(transforms::types::traits::class_header_archetype());
     const auto tp(l.make_full_path_for_cpp_header(n, types_arch));
     r.types_file(tp.lexically_relative(src_dir).generic_string());
 
@@ -144,7 +144,7 @@ generate_targets(const logical::entities::name& n) {
 
 void odb_targets_factory::
 visit(const logical::entities::orm::common_odb_options& coo) {
-    const auto arch(formatters::odb::traits::common_odb_options_archetype());
+    const auto arch(transforms::odb::traits::common_odb_options_archetype());
     result_.common_odb_options(
         locator_.make_relative_path_for_odb_options(coo.name(), arch,
             false/*include_source_directory*/).generic_string()

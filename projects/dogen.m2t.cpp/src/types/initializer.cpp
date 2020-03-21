@@ -19,16 +19,16 @@
  *
  */
 #include "dogen.m2t/types/transforms/model_to_text_chain.hpp"
-#include "dogen.m2t.cpp/types/formatters/workflow.hpp"
+#include "dogen.m2t.cpp/types/transforms/workflow.hpp"
 #include "dogen.m2t.cpp/types/formattables/workflow.hpp"
-#include "dogen.m2t.cpp/types/formatters/initializer.hpp"
+#include "dogen.m2t.cpp/types/transforms/initializer.hpp"
 #include "dogen.m2t.cpp/types/model_to_text_cpp_chain.hpp"
 #include "dogen.m2t.cpp/types/initializer.hpp"
 
 namespace dogen::m2t::cpp {
 
 void initializer::initialize() {
-    formatters::initializer::initialize(formatters::workflow::registrar());
+    transforms::initializer::initialize(transforms::workflow::registrar());
     using m2t::transforms::register_transform;
     register_transform<model_to_text_cpp_chain>();
 }

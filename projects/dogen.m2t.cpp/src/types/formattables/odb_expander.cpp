@@ -30,8 +30,8 @@
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.m2t.cpp/types/formattables/adapter.hpp"
 #include "dogen.m2t.cpp/types/formattables/header_guard_factory.hpp"
-#include "dogen.m2t.cpp/types/formatters/odb/traits.hpp"
-#include "dogen.m2t.cpp/types/formatters/types/traits.hpp"
+#include "dogen.m2t.cpp/types/transforms/odb/traits.hpp"
+#include "dogen.m2t.cpp/types/transforms/types/traits.hpp"
 #include "dogen.m2t.cpp/types/formattables/odb_expander.hpp"
 
 namespace {
@@ -75,7 +75,7 @@ updator::updator(const locator& l) : locator_(l) {}
 logical::entities::orm::odb_options
 updator::make_options(const logical::entities::name& n) {
     logical::entities::orm::odb_options r;
-    const auto odb_arch(formatters::odb::traits::class_header_archetype());
+    const auto odb_arch(transforms::odb::traits::class_header_archetype());
     const auto odb_rp(locator_.make_inclusion_path_for_cpp_header(n, odb_arch));
 
     std::ostringstream os;
@@ -83,7 +83,7 @@ updator::make_options(const logical::entities::name& n) {
     r.epilogue(os.str());
     os.str("");
 
-    const auto types_arch(formatters::types::traits::class_header_archetype());
+    const auto types_arch(transforms::types::traits::class_header_archetype());
     const auto ip(locator_.make_inclusion_path_for_cpp_header(n, types_arch));
     const auto types_rp(ip.parent_path());
 

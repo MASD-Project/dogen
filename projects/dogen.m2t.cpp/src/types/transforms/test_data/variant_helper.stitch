@@ -1,0 +1,49 @@
+<#@ masd.stitch.stream_variable_name=a.stream() #>
+<#@ masd.stitch.containing_namespaces=dogen::m2t::cpp::transforms::test_data #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/test_data/variant_helper.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/assistant.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/transforms/test_data/traits.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/formattables/helper_properties.hpp" #>
+<#@ masd.stitch.wale.text_template=cpp_helper_transform_implementation_enabled.wale #>
+<#@ masd.stitch.wale.kvp.helper.family=BoostVariant #>
+<#@ masd.stitch.wale.kvp.class.simple_name=variant_helper #>
+<#$ stitch.wale.template_instantiation_result #>
+<#+
+
+void variant_helper::
+format(assistant& a, const formattables::helper_properties& hp) const {
+    const auto d(hp.current());
+    const auto qn(d.name_tree_qualified());
+    const auto ident(d.name_tree_identifiable());
+#>
+
+<#= qn #>
+create_<#= ident #>(unsigned int position) {
+    <#= qn #> r;
+
+<#+
+    unsigned int i(0);
+    const auto size(hp.direct_descendants().size());
+    for (const auto& dd : hp.direct_descendants()) {
+        if (i == 0)
+#>
+    if (position == 0 || ((position % <#= size #>) == 0))
+<#+
+        else if (i == 1)
+#>
+    else if (position == 1 || ((position % <#= size + 1 #>) == 0))
+<#+
+        else
+#>
+    else if ((position % <#= i #>) == 0)
+        r = create_<#= dd.name_tree_identifiable() #>(position);
+<#+
+        ++i;
+    }
+#>
+
+    return r;
+}
+<#+
+}
+#>

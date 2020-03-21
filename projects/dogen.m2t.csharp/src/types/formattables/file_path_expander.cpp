@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.m2t.csharp/types/formatters/model_to_text_transform.hpp"
+#include "dogen.m2t.csharp/types/transforms/model_to_text_transform.hpp"
 #include "dogen.m2t.csharp/types/formattables/expansion_error.hpp"
 #include "dogen.m2t.csharp/types/formattables/file_path_expander.hpp"
 
@@ -37,7 +37,7 @@ const std::string missing_archetype("Archetype not found: ");
 namespace dogen::m2t::csharp::formattables {
 
 void file_path_expander::
-expand(const formatters::repository& frp, const locator& l, model& fm) const {
+expand(const transforms::repository& frp, const locator& l, model& fm) const {
     const auto safba(frp.stock_artefact_formatters_by_archetype());
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);

@@ -31,14 +31,14 @@
 #include "dogen.m2t/types/entities/element_archetype.hpp"
 #include "dogen.m2t.cpp/types/formattables/model.hpp"
 #include "dogen.m2t.cpp/types/formattables/locator.hpp"
-#include "dogen.m2t.cpp/types/formatters/repository.hpp"
+#include "dogen.m2t.cpp/types/transforms/repository.hpp"
 #include "dogen.m2t.cpp/types/formattables/formattable.hpp"
 
 namespace dogen::m2t::cpp::formattables {
 
 class workflow {
 private:
-    model make_model(const formatters::repository& frp,
+    model make_model(const transforms::repository& frp,
         const m2t::entities::model& m) const;
 
     void expand_model(
@@ -46,14 +46,14 @@ private:
         const variability::entities::configuration& rcfg,
         const std::unordered_set<m2t::entities::element_archetype>&
         enabled_archetype_for_element,
-        const formatters::repository& frp, const locator& l,
+        const transforms::repository& frp, const locator& l,
         model& fm) const;
 
 public:
     model execute(
         const variability::entities::feature_model& feature_model,
         const variability::entities::configuration& rcfg,
-        const locator& l, const formatters::repository& frp,
+        const locator& l, const transforms::repository& frp,
         const m2t::entities::model& m) const;
 };
 

@@ -29,7 +29,7 @@
 namespace dogen::m2t::csharp::formattables {
 
 void model_expander::expand_file_paths(
-    const formatters::repository& frp, const locator& l, model& fm) const {
+    const transforms::repository& frp, const locator& l, model& fm) const {
     file_path_expander ex;
     ex.expand(frp, l, fm);
 }
@@ -61,14 +61,14 @@ void model_expander::expand_project_items(model& fm) const {
 
 void model_expander::
 expand_helpers(const variability::entities::feature_model& feature_model,
-    const formatters::repository& frp, model& fm) const {
+    const transforms::repository& frp, model& fm) const {
     helper_expander he;
     he.expand(feature_model, frp, fm);
 }
 
 void model_expander::expand(
     const variability::entities::feature_model& feature_model,
-    const formatters::repository& frp, const locator& l, model& fm) const {
+    const transforms::repository& frp, const locator& l, model& fm) const {
 
     /*
      * We must expand the aspect and assistant properties before

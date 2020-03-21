@@ -32,7 +32,7 @@
 #include "dogen.logical/types/entities/element_visitor.hpp"
 #include "dogen.m2t.csharp/types/traits.hpp"
 #include "dogen.m2t.csharp/types/formattables/aspect_properties.hpp"
-#include "dogen.m2t.csharp/types/formatters/model_to_text_transform.hpp"
+#include "dogen.m2t.csharp/types/transforms/model_to_text_transform.hpp"
 #include "dogen.m2t.csharp/types/formattables/expansion_error.hpp"
 #include "dogen.m2t.csharp/types/formattables/aspect_expander.hpp"
 

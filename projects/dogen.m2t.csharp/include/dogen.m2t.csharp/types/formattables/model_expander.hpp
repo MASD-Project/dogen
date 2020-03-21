@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen.variability/types/entities/feature_model.hpp"
-#include "dogen.m2t.csharp/types/formatters/repository.hpp"
+#include "dogen.m2t.csharp/types/transforms/repository.hpp"
 #include "dogen.m2t.csharp/types/formattables/locator.hpp"
 #include "dogen.m2t.csharp/types/formattables/model.hpp"
 
@@ -34,7 +34,7 @@ namespace dogen::m2t::csharp::formattables {
 
 class model_expander final {
 private:
-    void expand_file_paths(const formatters::repository& frp,
+    void expand_file_paths(const transforms::repository& frp,
         const locator& l, model& fm) const;
 
     void expand_aspect_properties(
@@ -50,11 +50,11 @@ private:
     void expand_project_items(model& fm) const;
     void expand_helpers(
         const variability::entities::feature_model& feature_model,
-        const formatters::repository& frp, model& fm) const;
+        const transforms::repository& frp, model& fm) const;
 
 public:
     void expand(const variability::entities::feature_model& feature_model,
-        const formatters::repository& frp, const locator& l, model& fm) const;
+        const transforms::repository& frp, const locator& l, model& fm) const;
 };
 
 }

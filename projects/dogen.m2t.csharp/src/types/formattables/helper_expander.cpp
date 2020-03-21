@@ -33,7 +33,7 @@
 #include "dogen.m2t.csharp/io/formattables/helper_properties_io.hpp"
 #include "dogen.m2t.csharp/io/formattables/helper_configuration_io.hpp"
 #include "dogen.m2t.csharp/types/formattables/expansion_error.hpp"
-#include "dogen.m2t.csharp/types/formatters/helper_transform.hpp"
+#include "dogen.m2t.csharp/types/transforms/helper_transform.hpp"
 #include "dogen.m2t.csharp/types/formattables/helper_expander.hpp"
 
 namespace {
@@ -287,7 +287,7 @@ make_configuration(const feature_group& fg, const model& fm) const {
 
 
 helper_expander::facets_for_family_type
-helper_expander::facets_for_family(const formatters::repository& frp) const {
+helper_expander::facets_for_family(const transforms::repository& frp) const {
     BOOST_LOG_SEV(lg, debug) << "Started making facets for family.";
 
     /*
@@ -308,7 +308,7 @@ helper_expander::facets_for_family(const formatters::repository& frp) const {
 }
 
 void helper_expander::populate_helper_properties(
-    const helper_configuration& cfg, const formatters::repository& frp,
+    const helper_configuration& cfg, const transforms::repository& frp,
     std::unordered_map<std::string, formattable>& formattables) const {
 
     const auto fff(facets_for_family(frp));
@@ -350,7 +350,7 @@ void helper_expander::populate_helper_properties(
 
 void helper_expander::
 expand(const variability::entities::feature_model& feature_model,
-    const formatters::repository& frp, model& fm) const {
+    const transforms::repository& frp, model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started helper expansion.";
 
     const auto fg(make_feature_group(feature_model));
