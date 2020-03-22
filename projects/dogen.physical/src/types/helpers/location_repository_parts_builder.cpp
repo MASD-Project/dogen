@@ -88,9 +88,6 @@ add(const std::string& meta_name, const std::string& family,
     auto& alg(parts_.by_meta_name()[meta_name]);
     alg.locations().push_back(al);
 
-    auto& albf(parts_.by_family()[family]);
-    albf.push_back(al);
-
     /*
      * If the archetype location points to a canonical archetype,
      * update the canonical archetype mapping.

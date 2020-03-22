@@ -44,8 +44,7 @@ public:
 public:
     location_repository_parts(
         const std::list<dogen::physical::entities::location>& all,
-        const std::unordered_map<std::string, dogen::physical::entities::locations_group>& by_meta_name,
-        const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_family);
+        const std::unordered_map<std::string, dogen::physical::entities::locations_group>& by_meta_name);
 
 public:
     /**
@@ -69,19 +68,6 @@ public:
     void by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::locations_group>&& v);
     /**@}*/
 
-    /**
-     * @brief All archetype locations for a given family.
-     *
-     * Families are backend specific sets of archetype locations, with associated
-     * properties such as file extensions.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_family() const;
-    std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_family();
-    void by_family(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& v);
-    void by_family(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >&& v);
-    /**@}*/
-
 public:
     bool operator==(const location_repository_parts& rhs) const;
     bool operator!=(const location_repository_parts& rhs) const {
@@ -95,7 +81,6 @@ public:
 private:
     std::list<dogen::physical::entities::location> all_;
     std::unordered_map<std::string, dogen::physical::entities::locations_group> by_meta_name_;
-    std::unordered_map<std::string, std::list<dogen::physical::entities::location> > by_family_;
 };
 
 }

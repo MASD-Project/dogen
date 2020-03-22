@@ -24,23 +24,19 @@ namespace dogen::physical::entities {
 
 location_repository_parts::location_repository_parts(
     const std::list<dogen::physical::entities::location>& all,
-    const std::unordered_map<std::string, dogen::physical::entities::locations_group>& by_meta_name,
-    const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_family)
+    const std::unordered_map<std::string, dogen::physical::entities::locations_group>& by_meta_name)
     : all_(all),
-      by_meta_name_(by_meta_name),
-      by_family_(by_family) { }
+      by_meta_name_(by_meta_name) { }
 
 void location_repository_parts::swap(location_repository_parts& other) noexcept {
     using std::swap;
     swap(all_, other.all_);
     swap(by_meta_name_, other.by_meta_name_);
-    swap(by_family_, other.by_family_);
 }
 
 bool location_repository_parts::operator==(const location_repository_parts& rhs) const {
     return all_ == rhs.all_ &&
-        by_meta_name_ == rhs.by_meta_name_ &&
-        by_family_ == rhs.by_family_;
+        by_meta_name_ == rhs.by_meta_name_;
 }
 
 location_repository_parts& location_repository_parts::operator=(location_repository_parts other) {
@@ -79,22 +75,6 @@ void location_repository_parts::by_meta_name(const std::unordered_map<std::strin
 
 void location_repository_parts::by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::locations_group>&& v) {
     by_meta_name_ = std::move(v);
-}
-
-const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& location_repository_parts::by_family() const {
-    return by_family_;
-}
-
-std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& location_repository_parts::by_family() {
-    return by_family_;
-}
-
-void location_repository_parts::by_family(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& v) {
-    by_family_ = v;
-}
-
-void location_repository_parts::by_family(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >&& v) {
-    by_family_ = std::move(v);
 }
 
 }

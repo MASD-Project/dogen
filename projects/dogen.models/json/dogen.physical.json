@@ -107,11 +107,6 @@
           "type": "std::unordered_map<std::string, locations_group>"
         },
         {
-          "name": "by_family",
-          "type": "std::unordered_map<std::string, std::list<location>>",
-          "documentation": "All archetype locations for a given family.\n\nFamilies are backend specific sets of archetype locations, with associated\nproperties such as file extensions.\n"
-        },
-        {
           "name": "by_backend_by_facet",
           "type": "std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string>>>"
         }
@@ -130,11 +125,6 @@
           "name": "by_meta_name",
           "type": "std::unordered_map<std::string, locations_group>",
           "documentation": "Returns the archetype locations for each meta name.\n"
-        },
-        {
-          "name": "by_family",
-          "type": "std::unordered_map<std::string, std::list<location>>",
-          "documentation": "All archetype locations for a given family.\n\nFamilies are backend specific sets of archetype locations, with associated\nproperties such as file extensions.\n"
         }
       ]
     },

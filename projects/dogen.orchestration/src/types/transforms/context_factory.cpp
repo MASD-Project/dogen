@@ -70,7 +70,6 @@ create_archetype_location_repository(
     for (const auto& pair : rg.transforms_by_technical_space()) {
         const auto& t(*pair.second);
         b.add(t.archetype_locations_by_meta_name());
-        b.add(t.archetype_locations_by_family());
         b.add(t.archetype_location_repository_parts());
     }
     using physical::entities::location_repository;

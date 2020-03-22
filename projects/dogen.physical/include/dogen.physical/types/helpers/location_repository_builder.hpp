@@ -45,8 +45,6 @@ public:
     void add(const std::list<entities::location>& als);
     void add(const std::unordered_map<std::string, entities::locations_group>&
         locations_by_meta_name);
-    void add(const std::unordered_map<std::string,
-        std::list<entities::location>>& locations_by_family);
 
 public:
     void add(const entities::location_repository_parts& parts);

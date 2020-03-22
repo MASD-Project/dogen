@@ -27,13 +27,11 @@ location_repository::location_repository(
     const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name,
     const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name,
     const std::unordered_map<std::string, dogen::physical::entities::locations_group>& by_meta_name,
-    const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_family,
     const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& by_backend_by_facet)
     : all_(all),
       facet_names_by_backend_name_(facet_names_by_backend_name),
       formatter_names_by_backend_name_(formatter_names_by_backend_name),
       by_meta_name_(by_meta_name),
-      by_family_(by_family),
       by_backend_by_facet_(by_backend_by_facet) { }
 
 void location_repository::swap(location_repository& other) noexcept {
@@ -42,7 +40,6 @@ void location_repository::swap(location_repository& other) noexcept {
     swap(facet_names_by_backend_name_, other.facet_names_by_backend_name_);
     swap(formatter_names_by_backend_name_, other.formatter_names_by_backend_name_);
     swap(by_meta_name_, other.by_meta_name_);
-    swap(by_family_, other.by_family_);
     swap(by_backend_by_facet_, other.by_backend_by_facet_);
 }
 
@@ -51,7 +48,6 @@ bool location_repository::operator==(const location_repository& rhs) const {
         facet_names_by_backend_name_ == rhs.facet_names_by_backend_name_ &&
         formatter_names_by_backend_name_ == rhs.formatter_names_by_backend_name_ &&
         by_meta_name_ == rhs.by_meta_name_ &&
-        by_family_ == rhs.by_family_ &&
         by_backend_by_facet_ == rhs.by_backend_by_facet_;
 }
 
@@ -123,22 +119,6 @@ void location_repository::by_meta_name(const std::unordered_map<std::string, dog
 
 void location_repository::by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::locations_group>&& v) {
     by_meta_name_ = std::move(v);
-}
-
-const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& location_repository::by_family() const {
-    return by_family_;
-}
-
-std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& location_repository::by_family() {
-    return by_family_;
-}
-
-void location_repository::by_family(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& v) {
-    by_family_ = v;
-}
-
-void location_repository::by_family(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >&& v) {
-    by_family_ = std::move(v);
 }
 
 const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& location_repository::by_backend_by_facet() const {

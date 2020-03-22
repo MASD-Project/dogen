@@ -98,24 +98,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
 inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
@@ -173,7 +155,6 @@ std::ostream& operator<<(std::ostream& s, const location_repository& v) {
       << "\"facet_names_by_backend_name\": " << v.facet_names_by_backend_name() << ", "
       << "\"formatter_names_by_backend_name\": " << v.formatter_names_by_backend_name() << ", "
       << "\"by_meta_name\": " << v.by_meta_name() << ", "
-      << "\"by_family\": " << v.by_family() << ", "
       << "\"by_backend_by_facet\": " << v.by_backend_by_facet()
       << " }";
     return(s);

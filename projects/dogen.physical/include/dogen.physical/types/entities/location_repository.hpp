@@ -48,7 +48,6 @@ public:
         const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name,
         const std::unordered_map<std::string, dogen::physical::entities::locations_group>& by_meta_name,
-        const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_family,
         const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& by_backend_by_facet);
 
 public:
@@ -72,19 +71,6 @@ public:
     void by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::locations_group>& v);
     void by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::locations_group>&& v);
 
-    /**
-     * @brief All archetype locations for a given family.
-     *
-     * Families are backend specific sets of archetype locations, with associated
-     * properties such as file extensions.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_family() const;
-    std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& by_family();
-    void by_family(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& v);
-    void by_family(const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >&& v);
-    /**@}*/
-
     const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& by_backend_by_facet() const;
     std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& by_backend_by_facet();
     void by_backend_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& v);
@@ -105,7 +91,6 @@ private:
     std::unordered_map<std::string, std::unordered_set<std::string> > facet_names_by_backend_name_;
     std::unordered_map<std::string, std::unordered_set<std::string> > formatter_names_by_backend_name_;
     std::unordered_map<std::string, dogen::physical::entities::locations_group> by_meta_name_;
-    std::unordered_map<std::string, std::list<dogen::physical::entities::location> > by_family_;
     std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > > by_backend_by_facet_;
 };
 

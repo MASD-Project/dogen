@@ -64,32 +64,13 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<dogen::physical::entities::location> >& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
 namespace dogen::physical::entities {
 
 std::ostream& operator<<(std::ostream& s, const location_repository_parts& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::physical::entities::location_repository_parts\"" << ", "
       << "\"all\": " << v.all() << ", "
-      << "\"by_meta_name\": " << v.by_meta_name() << ", "
-      << "\"by_family\": " << v.by_family()
+      << "\"by_meta_name\": " << v.by_meta_name()
       << " }";
     return(s);
 }

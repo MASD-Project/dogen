@@ -936,7 +936,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
         <dia:point val="64,-103"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="63.95,-103.05;106.9,-96.15"/>
+        <dia:rectangle val="63.95,-103.05;106.9,-96.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="64,-103"/>
@@ -945,7 +945,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
         <dia:real val="42.850000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#location_repository#</dia:string>
@@ -1129,32 +1129,6 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#by_family#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::list&lt;location&gt;&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#All archetype locations for a given family.
-
-Families are backend specific sets of archetype locations, with associated
-properties such as file extensions.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
             <dia:string>#by_backend_by_facet#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -1189,16 +1163,16 @@ properties such as file extensions.#</dia:string>
         <dia:point val="111,-112"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="110.95,-112.05;136.19,-107.55"/>
+        <dia:rectangle val="110.95,-112.05;135.805,-108.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="111,-112"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="25.140000000000001"/>
+        <dia:real val="24.755000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#location_repository_parts#</dia:string>
@@ -1324,32 +1298,6 @@ listing all available backends, facets and archetypes.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Returns the archetype locations for each meta name.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#by_family#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::list&lt;location&gt;&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#All archetype locations for a given family.
-
-Families are backend specific sets of archetype locations, with associated
-properties such as file extensions.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5091,7 +5039,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="137.062,-90.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="122.013,-90.45;137.912,-86.95"/>
+        <dia:rectangle val="122.012,-90.45;137.912,-86.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5454,17 +5402,17 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="123.57,-112"/>
+        <dia:point val="123.377,-112"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="92.905,-114.8;124.32,-111.2"/>
+        <dia:rectangle val="92.905,-114.8;124.127,-111.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="123.57,-112"/>
-        <dia:point val="123.57,-114"/>
+        <dia:point val="123.377,-112"/>
+        <dia:point val="123.377,-114"/>
         <dia:point val="92.955,-114"/>
         <dia:point val="92.955,-112"/>
       </dia:attribute>
@@ -5493,7 +5441,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="122.062,-83.9498"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.212,-83.9998;123.422,-77.95"/>
+        <dia:rectangle val="121.212,-83.9998;123.423,-77.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6256,13 +6204,13 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="228,-111"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="227.95,-111.05;251.65,-106.55"/>
+        <dia:rectangle val="227.95,-111.05;250.11,-106.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="228,-111"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="23.600000000000001"/>
+        <dia:real val="22.059999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -7173,7 +7121,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="141.025,-97.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="140.175,-97.85;152.278,-93.95"/>
+        <dia:rectangle val="140.175,-97.85;152.277,-93.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8539,17 +8487,17 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="123.57,-107.6"/>
+        <dia:point val="123.377,-108.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="119.305,-108.35;124.32,-102.2"/>
+        <dia:rectangle val="119.305,-109.15;124.127,-102.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="123.57,-107.6"/>
-        <dia:point val="123.57,-105"/>
+        <dia:point val="123.377,-108.4"/>
+        <dia:point val="123.377,-105"/>
         <dia:point val="119.355,-105"/>
         <dia:point val="119.355,-103"/>
       </dia:attribute>
@@ -9538,7 +9486,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="200.845,-113.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="200.776,-113.369;204.494,-110.641"/>
+        <dia:rectangle val="200.776,-113.369;204.493,-110.641"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13211,7 +13159,7 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:point val="98.435,-87"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="85.375,-96.25;99.185,-86.2"/>
+        <dia:rectangle val="85.375,-97.05;99.185,-86.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13220,7 +13168,7 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:point val="98.435,-87"/>
         <dia:point val="98.435,-95"/>
         <dia:point val="85.425,-95"/>
-        <dia:point val="85.425,-96.2"/>
+        <dia:point val="85.425,-97"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -14018,7 +13966,7 @@ The simple name must be unique for a given location.#</dia:string>
         <dia:point val="124.062,-94"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="123.312,-98.5997;127.877,-92.4"/>
+        <dia:rectangle val="123.312,-98.5997;127.877,-93.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14090,7 +14038,7 @@ The simple name must be unique for a given location.#</dia:string>
         <dia:point val="123,-102.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="119.305,-103.05;123.75,-98.7"/>
+        <dia:rectangle val="119.305,-103.1;123.75,-99.5"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14126,7 +14074,7 @@ The simple name must be unique for a given location.#</dia:string>
         <dia:point val="124.062,-90.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="122.013,-90.45;124.912,-86.4"/>
+        <dia:rectangle val="122.012,-90.45;124.912,-86.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
