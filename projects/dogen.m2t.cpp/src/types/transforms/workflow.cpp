@@ -120,7 +120,7 @@ workflow::format(
             BOOST_LOG_SEV(lg, debug) << "Using the wale formatter.";
 
             wale_transform f;
-            const auto artefact(f.format(locator_, fmt, ctx, e));
+            const auto artefact(f.apply(locator_, fmt, ctx, e));
             const auto& p(artefact.paths().absolute());
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;
@@ -128,7 +128,7 @@ workflow::format(
         } else if (fs == formatting_styles::stitch) {
             BOOST_LOG_SEV(lg, debug) << "Using the stitch formatter.";
 
-            const auto artefact(stitch_formatter_.format(fmt, ctx, e));
+            const auto artefact(stitch_formatter_.apply(fmt, ctx, e));
             const auto& p(artefact.paths().absolute());
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;

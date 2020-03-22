@@ -44,8 +44,8 @@ bool wale_transform::is_header(const inclusion_support_types ist) const {
         ist == inclusion_support_types::canonical_support;
 }
 
-physical::entities::artefact wale_transform::
-format(const formattables::locator& l,
+physical::entities::artefact
+wale_transform::apply(const formattables::locator& l,
     const model_to_text_transform& stock_transform, const context& ctx,
     const logical::entities::element& e) const {
     const auto al(stock_transform.archetype_location());
