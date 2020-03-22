@@ -36,10 +36,6 @@ project_transform::meta_name() const {
     return r;
 }
 
-std::string project_transform::family() const {
-    return csharp::traits::visual_studio_project_family();
-}
-
 boost::filesystem::path project_transform::
 full_path(const formattables::locator& l, const logical::entities::name& n) const {
     auto temp(n);

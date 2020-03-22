@@ -48,10 +48,6 @@ const logical::entities::name& builtin_transform::meta_name() const {
     return r;
 }
 
-std::string builtin_transform::family() const {
-    return csharp::traits::csharp_family();
-}
-
 boost::filesystem::path builtin_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_full_path(n, static_id());

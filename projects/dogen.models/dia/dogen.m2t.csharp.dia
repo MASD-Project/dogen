@@ -1177,7 +1177,7 @@
         <dia:point val="62,36"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="61.95,35.95;102.59,44.45"/>
+        <dia:rectangle val="61.95,35.95;102.59,43.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="62,36"/>
@@ -1186,7 +1186,7 @@
         <dia:real val="40.539999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.4000000000000004"/>
+        <dia:real val="7.5999999999999996"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#model_to_text_transform#</dia:string>
@@ -1280,36 +1280,6 @@
         <dia:composite type="umloperation">
           <dia:attribute name="name">
             <dia:string>#id#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="stereotype">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="true"/>
-          </dia:attribute>
-          <dia:attribute name="inheritance_type">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="query">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="parameters"/>
-        </dia:composite>
-        <dia:composite type="umloperation">
-          <dia:attribute name="name">
-            <dia:string>#family#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -4168,7 +4138,7 @@
         <dia:point val="141.762,40.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="118.858,38.95;142.512,44.05"/>
+        <dia:rectangle val="118.857,38.95;142.512,44.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14304,13 +14274,13 @@
         <dia:point val="3,-6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,-6.05;22.185,-2.95"/>
+        <dia:rectangle val="2.95,-6.05;22.305,-2.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="3,-6"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="19.134999999999998"/>
+        <dia:real val="19.255000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>

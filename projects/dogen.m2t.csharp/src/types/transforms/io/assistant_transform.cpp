@@ -49,10 +49,6 @@ const logical::entities::name& assistant_transform::meta_name() const {
     return r;
 }
 
-std::string assistant_transform::family() const {
-    return csharp::traits::csharp_family();
-}
-
 boost::filesystem::path assistant_transform::full_path(
     const formattables::locator& l, const logical::entities::name& n) const {
     return l.make_full_path(n, static_id());

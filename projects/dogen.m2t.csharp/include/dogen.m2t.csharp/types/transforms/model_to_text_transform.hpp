@@ -61,11 +61,6 @@ public:
      */
     virtual const logical::entities::name& meta_name() const = 0;
 
-    /**
-     * @brief Family to which this formatter belongs.
-     */
-    virtual std::string family() const = 0;
-
 public:
     /**
      * @brief Provides the full path.

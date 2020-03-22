@@ -36,10 +36,6 @@ solution_transform::meta_name() const {
     return r;
 }
 
-std::string solution_transform::family() const {
-    return csharp::traits::visual_studio_solution_family();
-}
-
 boost::filesystem::path solution_transform::
 full_path(const formattables::locator& l, const logical::entities::name& n) const {
     auto temp(n);
