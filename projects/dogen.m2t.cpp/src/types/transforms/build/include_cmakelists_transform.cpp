@@ -47,8 +47,7 @@ std::string include_cmakelists_transform::id() const {
 physical::entities::location include_cmakelists_transform::
 archetype_location() const {
     static physical::entities::location
-        r(cpp::traits::kernel(), cpp::traits::backend(),
-          traits::facet(),
+        r(cpp::traits::backend(), traits::facet(),
           include_cmakelists_transform::static_id());
     return r;
 }

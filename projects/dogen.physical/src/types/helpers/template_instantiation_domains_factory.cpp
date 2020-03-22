@@ -59,17 +59,18 @@ make(const std::list<entities::location>& ls) {
             }
         });
 
+    const auto masd_kernel("masd");
     for (const auto l: ls) {
         /*
          * Kernel
          */
-        sorted[l.kernel()].insert(l.backend());
-        sorted[l.kernel()].insert(l.facet());
-        sorted[l.kernel()].insert(l.archetype());
+        sorted[masd_kernel].insert(l.backend());
+        sorted[masd_kernel].insert(l.facet());
+        sorted[masd_kernel].insert(l.archetype());
 
-        sorted[l.kernel() + backend_postfix].insert(l.backend());
-        sorted[l.kernel() + facet_postfix].insert(l.facet());
-        ensure_inserted(l.kernel() + archetype_postfix, l.archetype());
+        sorted[masd_kernel + backend_postfix].insert(l.backend());
+        sorted[masd_kernel + facet_postfix].insert(l.facet());
+        ensure_inserted(masd_kernel + archetype_postfix, l.archetype());
 
         /*
          * Backend

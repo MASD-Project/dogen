@@ -48,8 +48,7 @@ std::string feature_bundle_implementation_transform::id() const {
 physical::entities::location
 feature_bundle_implementation_transform::archetype_location() const {
     static physical::entities::location
-        r(cpp::traits::kernel(),  cpp::traits::backend(),
-          traits::facet(),
+        r(cpp::traits::backend(), traits::facet(),
           feature_bundle_implementation_transform::static_id());
     return r;
 }
@@ -120,7 +119,7 @@ format(const context& ctx, const logical::entities::element& e) const {
             auto snf(a.make_scoped_namespace_formatter(ns));
             using namespace variability::helpers;
             using utility::string::splitter;
-            
+
             if (fb.generate_registration()) {
 a.stream() << std::endl;
 a.stream() << "namespace {" << std::endl;

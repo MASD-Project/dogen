@@ -60,7 +60,7 @@ format(const context& ctx, const logical::entities::element& e) const {
             auto snf(a.make_scoped_namespace_formatter(ns));
             using namespace variability::helpers;
             using utility::string::splitter;
-            
+
             if (fb.generate_registration()) {
 #>
 

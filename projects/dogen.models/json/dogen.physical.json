@@ -43,11 +43,6 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "kernel",
-          "type": "std::string",
-          "documentation": "Name of the kernel that owns this field, if any.\n"
-        },
-        {
           "name": "backend",
           "type": "std::string",
           "documentation": "Name of the backend that owns this field, if any.\n"

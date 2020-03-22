@@ -12,33 +12,34 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-21 Sat 23:57]
+#+CAPTION: Clock summary at [2020-03-22 Sun 09:33]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *35:54* |       |      | 100.0 |
+| *Total time*                                           | *36:30* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 35:54   |       |      | 100.0 |
-| Active                                                 |         | 35:54 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 7:27 |  20.8 |
+| Stories                                                | 36:30   |       |      | 100.0 |
+| Active                                                 |         | 36:30 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 7:27 |  20.4 |
 | Create a demo and presentation for previous sprint     |         |       | 0:28 |   1.3 |
-| Sprint and product backlog grooming                    |         |       | 1:50 |   5.1 |
+| Sprint and product backlog grooming                    |         |       | 1:50 |   5.0 |
 | Rename archetypes model to physical model              |         |       | 0:28 |   1.3 |
 | Rename assets model to logical model                   |         |       | 0:29 |   1.3 |
 | Consider renaming "meta-model" namespace               |         |       | 0:37 |   1.7 |
-| Rename engine to orchestration                         |         |       | 1:04 |   3.0 |
-| Merge extraction model with physical model             |         |       | 4:35 |  12.8 |
+| Rename engine to orchestration                         |         |       | 1:04 |   2.9 |
+| Merge extraction model with physical model             |         |       | 4:35 |  12.6 |
 | Remove manual feature in profile merge transform       |         |       | 0:08 |   0.4 |
-| Add variability domains to the dumpspecs activity      |         |       | 0:12 |   0.6 |
-| Add org-mode option to dumpspacs                       |         |       | 0:53 |   2.5 |
-| Analysis on designing and implement physical types     |         |       | 6:52 |  19.1 |
+| Add variability domains to the dumpspecs activity      |         |       | 0:12 |   0.5 |
+| Add org-mode option to dumpspacs                       |         |       | 0:53 |   2.4 |
+| Analysis on designing and implement physical types     |         |       | 6:52 |  18.8 |
 | Remove =element= from the modeling location            |         |       | 0:02 |   0.1 |
-| Fix clang-cl LNK4217 warnings                          |         |       | 0:51 |   2.4 |
-| Analysis on creating a masd kernel model               |         |       | 0:53 |   2.5 |
-| Rename generation models to =m2t=                      |         |       | 1:04 |   3.0 |
+| Fix clang-cl LNK4217 warnings                          |         |       | 0:51 |   2.3 |
+| Analysis on creating a masd kernel model               |         |       | 0:53 |   2.4 |
+| Rename generation models to =m2t=                      |         |       | 1:04 |   2.9 |
 | Move all generation features away from generation      |         |       | 0:17 |   0.8 |
-| Rename generation transforms                           |         |       | 4:18 |  12.0 |
-| Implement archetype locations from physical meta-model |         |       | 2:42 |   7.5 |
+| Rename generation transforms                           |         |       | 4:18 |  11.8 |
+| Remove kernel from models                              |         |       | 0:36 |   1.6 |
+| Implement archetype locations from physical meta-model |         |       | 2:42 |   7.4 |
 | Rename the default MASD kernel                         |         |       | 0:44 |   2.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -596,7 +597,11 @@ Renames:
 - formatter: =m2t_transform=
 - namespaces
 
-*** Remove kernel from models                                         :story:
+*** COMPLETED Remove kernel from models                               :story:
+    CLOSED: [2020-03-22 Sun 09:33]
+    :LOGBOOK:
+    CLOCK: [2020-03-22 Sun 08:57]--[2020-03-22 Sun 09:33] =>  0:36
+    :END:
 
 We don't really need the notion of kernel in MASD, so remove
 it. However, make sure we still preserve the notion of a top-level

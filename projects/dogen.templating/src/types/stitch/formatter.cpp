@@ -38,7 +38,6 @@ const std::string empty_header_guard;
  * through. It reality, we should just have a family and no facet or
  * backend.
  */
-const std::string family_name("stitch");
 const std::string backend_name("stitch");
 const std::string facet_name("types");
 const std::string archetype_name("stitch.formatter");
@@ -153,7 +152,7 @@ void formatter::format_line_with_single_block(const std::string& stream_name,
 
 physical::entities::location formatter::archetype_location() const {
     static physical::entities::location
-        r(family_name, backend_name, facet_name, archetype_name);
+        r(backend_name, facet_name, archetype_name);
     return r;
 }
 

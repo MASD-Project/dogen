@@ -42,8 +42,7 @@ std::string class_header_transform::id() const {
 physical::entities::location
 class_header_transform::archetype_location() const {
     static physical::entities::location
-        r(cpp::traits::kernel(), cpp::traits::backend(),
-          traits::facet(),
+        r(cpp::traits::backend(), traits::facet(),
           class_header_transform::static_id());
     return r;
 }

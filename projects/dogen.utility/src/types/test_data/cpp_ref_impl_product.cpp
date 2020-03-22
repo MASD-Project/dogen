@@ -156,7 +156,7 @@ path cpp_ref_impl_product::json_models_directory_;
 path cpp_ref_impl_product::output_directory_;
 
 void cpp_ref_impl_product::initialize() {
-        using environment::variable_reader;
+    using environment::variable_reader;
     const std::string proj_dir_env(
         variable_reader::strict_read_environment_variable(
             cpp_ref_impl_project_directory_env));

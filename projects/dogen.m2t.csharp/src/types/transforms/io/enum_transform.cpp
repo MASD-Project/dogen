@@ -38,8 +38,7 @@ std::string enum_transform::id() const {
 
 physical::entities::location enum_transform::archetype_location() const {
     static physical::entities::location
-        r(csharp::traits::kernel(), csharp::traits::backend(),
-          traits::facet(),
+        r(csharp::traits::backend(), traits::facet(),
           enum_transform::static_id());
     return r;
 }

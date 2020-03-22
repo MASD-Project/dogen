@@ -46,8 +46,7 @@ std::string main_transform::id() const {
 physical::entities::location
 main_transform::archetype_location() const {
     static physical::entities::location
-        r(cpp::traits::kernel(), cpp::traits::backend(),
-          traits::facet(),
+        r(cpp::traits::backend(), traits::facet(),
           main_transform::static_id());
     return r;
 }

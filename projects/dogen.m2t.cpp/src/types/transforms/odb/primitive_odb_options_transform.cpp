@@ -48,8 +48,8 @@ std::string primitive_odb_options_transform::id() const {
 physical::entities::location
 primitive_odb_options_transform::archetype_location() const {
     static physical::entities::location
-        r(cpp::traits::kernel(), cpp::traits::backend(),
-          traits::facet(), primitive_odb_options_transform::static_id());
+        r(cpp::traits::backend(), traits::facet(),
+          primitive_odb_options_transform::static_id());
     return r;
 }
 

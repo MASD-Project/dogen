@@ -22,11 +22,6 @@
 
 namespace dogen::m2t::cpp {
 
-std::string traits::kernel() {
-    static std::string r("masd");
-    return r;
-}
-
 std::string traits::backend() {
     static std::string r("masd.cpp");
     return r;

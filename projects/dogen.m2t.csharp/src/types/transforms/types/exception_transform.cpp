@@ -38,8 +38,7 @@ std::string exception_transform::id() const {
 
 physical::entities::location exception_transform::archetype_location() const {
     static physical::entities::location
-        r(csharp::traits::kernel(), csharp::traits::backend(),
-          traits::facet(),
+        r(csharp::traits::backend(), traits::facet(),
           exception_transform::static_id());
     return r;
 }

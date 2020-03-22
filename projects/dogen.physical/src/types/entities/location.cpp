@@ -23,26 +23,22 @@
 namespace dogen::physical::entities {
 
 location::location(
-    const std::string& kernel,
     const std::string& backend,
     const std::string& facet,
     const std::string& archetype)
-    : kernel_(kernel),
-      backend_(backend),
+    : backend_(backend),
       facet_(facet),
       archetype_(archetype) { }
 
 void location::swap(location& other) noexcept {
     using std::swap;
-    swap(kernel_, other.kernel_);
     swap(backend_, other.backend_);
     swap(facet_, other.facet_);
     swap(archetype_, other.archetype_);
 }
 
 bool location::operator==(const location& rhs) const {
-    return kernel_ == rhs.kernel_ &&
-        backend_ == rhs.backend_ &&
+    return backend_ == rhs.backend_ &&
         facet_ == rhs.facet_ &&
         archetype_ == rhs.archetype_;
 }
@@ -51,22 +47,6 @@ location& location::operator=(location other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const std::string& location::kernel() const {
-    return kernel_;
-}
-
-std::string& location::kernel() {
-    return kernel_;
-}
-
-void location::kernel(const std::string& v) {
-    kernel_ = v;
-}
-
-void location::kernel(const std::string&& v) {
-    kernel_ = std::move(v);
 }
 
 const std::string& location::backend() const {

@@ -35,11 +35,6 @@ namespace dogen::m2t::cpp {
  */
 struct traits {
     /**
-     * @brief Name of this kernel.
-     */
-    static std::string kernel();
-
-    /**
      * @brief Name of this backend.
      */
     static std::string backend();

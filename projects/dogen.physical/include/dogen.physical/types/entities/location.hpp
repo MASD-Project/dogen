@@ -46,22 +46,11 @@ public:
 
 public:
     location(
-        const std::string& kernel,
         const std::string& backend,
         const std::string& facet,
         const std::string& archetype);
 
 public:
-    /**
-     * @brief Name of the kernel that owns this field, if any.
-     */
-    /**@{*/
-    const std::string& kernel() const;
-    std::string& kernel();
-    void kernel(const std::string& v);
-    void kernel(const std::string&& v);
-    /**@}*/
-
     /**
      * @brief Name of the backend that owns this field, if any.
      */
@@ -103,7 +92,6 @@ public:
     location& operator=(location other);
 
 private:
-    std::string kernel_;
     std::string backend_;
     std::string facet_;
     std::string archetype_;
