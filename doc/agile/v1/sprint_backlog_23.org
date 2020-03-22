@@ -12,35 +12,37 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-22 Sun 09:33]
+#+CAPTION: Clock summary at [2020-03-22 Sun 12:21]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *36:30* |       |      | 100.0 |
+| *Total time*                                           | *37:38* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 36:30   |       |      | 100.0 |
-| Active                                                 |         | 36:30 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 7:27 |  20.4 |
-| Create a demo and presentation for previous sprint     |         |       | 0:28 |   1.3 |
-| Sprint and product backlog grooming                    |         |       | 1:50 |   5.0 |
-| Rename archetypes model to physical model              |         |       | 0:28 |   1.3 |
+| Stories                                                | 37:38   |       |      | 100.0 |
+| Active                                                 |         | 37:38 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 7:27 |  19.8 |
+| Create a demo and presentation for previous sprint     |         |       | 0:28 |   1.2 |
+| Sprint and product backlog grooming                    |         |       | 2:02 |   5.4 |
+| Rename archetypes model to physical model              |         |       | 0:28 |   1.2 |
 | Rename assets model to logical model                   |         |       | 0:29 |   1.3 |
-| Consider renaming "meta-model" namespace               |         |       | 0:37 |   1.7 |
-| Rename engine to orchestration                         |         |       | 1:04 |   2.9 |
-| Merge extraction model with physical model             |         |       | 4:35 |  12.6 |
+| Consider renaming "meta-model" namespace               |         |       | 0:37 |   1.6 |
+| Rename engine to orchestration                         |         |       | 1:04 |   2.8 |
+| Merge extraction model with physical model             |         |       | 4:35 |  12.2 |
 | Remove manual feature in profile merge transform       |         |       | 0:08 |   0.4 |
 | Add variability domains to the dumpspecs activity      |         |       | 0:12 |   0.5 |
-| Add org-mode option to dumpspacs                       |         |       | 0:53 |   2.4 |
-| Analysis on designing and implement physical types     |         |       | 6:52 |  18.8 |
+| Add org-mode option to dumpspacs                       |         |       | 0:53 |   2.3 |
+| Analysis on designing and implement physical types     |         |       | 6:52 |  18.2 |
 | Remove =element= from the modeling location            |         |       | 0:02 |   0.1 |
-| Fix clang-cl LNK4217 warnings                          |         |       | 0:51 |   2.3 |
-| Analysis on creating a masd kernel model               |         |       | 0:53 |   2.4 |
-| Rename generation models to =m2t=                      |         |       | 1:04 |   2.9 |
+| Fix clang-cl LNK4217 warnings                          |         |       | 1:04 |   2.8 |
+| Analysis on creating a masd kernel model               |         |       | 0:53 |   2.3 |
+| Rename generation models to =m2t=                      |         |       | 1:04 |   2.8 |
 | Move all generation features away from generation      |         |       | 0:17 |   0.8 |
-| Rename generation transforms                           |         |       | 4:18 |  11.8 |
+| Rename generation transforms                           |         |       | 4:18 |  11.4 |
 | Remove kernel from models                              |         |       | 0:36 |   1.6 |
-| Implement archetype locations from physical meta-model |         |       | 2:42 |   7.4 |
-| Rename the default MASD kernel                         |         |       | 0:44 |   2.0 |
+| Rename the default MASD kernel                         |         |       | 0:44 |   1.9 |
+| Add part to physical location                          |         |       | 0:08 |   0.4 |
+| Add names to logical model                             |         |       | 0:35 |   1.6 |
+| Implement archetype locations from physical meta-model |         |       | 2:42 |   7.2 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -313,6 +315,7 @@ Time spent creating the demo and presentation. Use the demo project:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-03-22 Sun 11:33]--[2020-03-22 Sun 11:45] =>  0:12
     CLOCK: [2020-03-21 Sat 09:25]--[2020-03-21 Sat 09:32] =>  0:07
     CLOCK: [2020-03-20 Fri 14:17]--[2020-03-20 Fri 14:30] =>  0:13
     CLOCK: [2020-03-20 Fri 11:23]--[2020-03-20 Fri 11:52] =>  0:29
@@ -480,6 +483,7 @@ not yet exist.
 *** COMPLETED Fix clang-cl LNK4217 warnings                           :story:
     CLOSED: [2020-03-20 Fri 18:26]
     :LOGBOOK:
+    CLOCK: [2020-03-22 Sun 11:10]--[2020-03-22 Sun 11:23] =>  0:13
     CLOCK: [2020-03-20 Fri 14:44]--[2020-03-20 Fri 15:35] =>  0:51
     :END:
 
@@ -607,6 +611,80 @@ We don't really need the notion of kernel in MASD, so remove
 it. However, make sure we still preserve the notion of a top-level
 container for backends - for now =masd.generation=.
 
+*** COMPLETED Rename the default MASD kernel                          :story:
+    CLOSED: [2020-03-22 Sun 11:24]
+    :LOGBOOK:
+    CLOCK: [2020-03-20 Fri 15:36]--[2020-03-20 Fri 16:20] =>  0:44
+    :END:
+
+Up to now we have conflated the generation model with the default MASD
+kernel. The generation model is responsible for expanding the logical
+model into the physical dimension and then using all available kernels
+to populate the content of the artefacts. Given this we should really
+start to separate generation from the MASD default kernel, which is
+the current implementation of the model to text transforms. We need a
+name for the kernel because we can't keep calling it "generation" as
+its just confusing. The name needs to also be distinct from MASD since
+we use it as the prefix all all features (e.g. =masd.masd= would not
+be enlightening). We could just give it a distinctive name which is
+not particularly meaningful: =genie= (from generation, little
+generator). Then we'd have =masd.genie.enabled=, etc. It would also
+allow users to create their own kernels with distinctive names,
+e.g. =ddc.xyz.enabled=.
+
+*** STARTED Add part to physical location                             :story:
+    :LOGBOOK:
+    CLOCK: [2020-03-22 Sun 11:24]--[2020-03-22 Sun 11:32] =>  0:08
+    :END:
+
+We need to express the idea that archetypes live in different parts of
+a component. Add a part to the physical location, and update all model
+to text transforms to populate it. Then, change the archetype name to
+use the part as well as the facet on the name.
+
+A slight issue is that the part name cannot be fully qualified. For
+example, say:
+
+: masd.cpp.include
+
+is not a good part name, at least inside of the location. If we do
+that, then when we add the facet, we get:
+
+: masd.cpp.types.masd.cpp.include.
+
+In truth, we have been using the fully qualified name incorrectly all
+along. We should really have a location that only denotes each
+"region":
+
+- backend: =masd.cpp=
+- facet: =types= (not =masd.cpp.types=)
+- part: =include=
+- archetype: =class_header=
+
+And then the fully qualified name for the archetype.becomes:
+
+: masd.cpp.types.include.class_header
+
+This also means we are completely symmetric with the logical model. So
+we really should have a notion of a name (simple, qualified) with a
+location. The ID is the qualified name.
+
+*** STARTED Add names to logical model                                :story:
+    :LOGBOOK:
+    CLOCK: [2020-03-22 Sun 11:46]--[2020-03-22 Sun 12:21] =>  0:35
+    :END:
+
+We need to move towards the same approach as we have in the logical
+model but for the physical model:
+
+- have a name class with =simple= and =qualified= and a
+  location. =qualified= is the location plus simple.
+- Use =qualified= as the ID on any container (e.g. archetype location
+  repository).
+- containers with facets must have a concatenation of =backend= plus
+  =facet=.
+- create a name builder that makes qualified names.
+
 *** STARTED Implement archetype locations from physical meta-model    :story:
     :LOGBOOK:
     CLOCK: [2020-03-20 Fri 14:30]--[2020-03-20 Fri 14:44] =>  0:14
@@ -652,26 +730,6 @@ Notes:
 
 - formatters should add their data to a registrar that lives in the
   physical model rather than expose it via an interface.
-
-*** STARTED Rename the default MASD kernel                            :story:
-    :LOGBOOK:
-    CLOCK: [2020-03-20 Fri 15:36]--[2020-03-20 Fri 16:20] =>  0:44
-    :END:
-
-Up to now we have conflated the generation model with the default MASD
-kernel. The generation model is responsible for expanding the logical
-model into the physical dimension and then using all available kernels
-to populate the content of the artefacts. Given this we should really
-start to separate generation from the MASD default kernel, which is
-the current implementation of the model to text transforms. We need a
-name for the kernel because we can't keep calling it "generation" as
-its just confusing. The name needs to also be distinct from MASD since
-we use it as the prefix all all features (e.g. =masd.masd= would not
-be enlightening). We could just give it a distinctive name which is
-not particularly meaningful: =genie= (from generation, little
-generator). Then we'd have =masd.genie.enabled=, etc. It would also
-allow users to create their own kernels with distinctive names,
-e.g. =ddc.xyz.enabled=.
 
 *** Implement the generation model in terms of "formattables"         :story:
 
