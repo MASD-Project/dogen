@@ -10682,13 +10682,13 @@ main, or from another initialiser.#</dia:string>
         <dia:point val="-42,206"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-42.05,205.95;-9.11,215.25"/>
+        <dia:rectangle val="-42.05,205.95;-9.495,215.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-42,206"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="32.454999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="9.1999999999999993"/>
@@ -10999,7 +10999,7 @@ main, or from another initialiser.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#format#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
