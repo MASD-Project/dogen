@@ -45,7 +45,7 @@ std::list<std::string> feature_bundle_implementation_transform::inclusion_depend
 }
 
 physical::entities::artefact feature_bundle_implementation_transform::
-format(const context& ctx, const logical::entities::element& e) const {
+apply(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& fb(a.as<logical::entities::variability::feature_bundle>(e));
 

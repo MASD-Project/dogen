@@ -111,7 +111,7 @@ workflow::format(
             const auto id(fmt.id());
             BOOST_LOG_SEV(lg, debug) << "Using the stock formatter: " << id;
 
-            const auto artefact(fmt.format(ctx, e));
+            const auto artefact(fmt.apply(ctx, e));
             const auto& p(artefact.paths().absolute());
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;

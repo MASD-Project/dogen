@@ -25,7 +25,7 @@ std::list<std::string> type_registrar_header_transform::inclusion_dependencies(
 }
 
 physical::entities::artefact type_registrar_header_transform::
-format(const context& ctx, const logical::entities::element& e) const {
+apply(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     const auto& rg(a.as<logical::entities::serialization::type_registrar>(e));
 

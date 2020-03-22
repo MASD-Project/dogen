@@ -79,7 +79,7 @@ std::list<std::string> enum_header_transform::inclusion_dependencies(
 }
 
 physical::entities::artefact enum_header_transform::
-format(const context& ctx, const logical::entities::element& e) const {
+apply(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
     const auto& ye(a.as<logical::entities::structural::enumeration>(e));
 

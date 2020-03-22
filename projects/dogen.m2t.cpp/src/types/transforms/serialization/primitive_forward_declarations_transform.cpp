@@ -79,7 +79,7 @@ std::list<std::string> primitive_forward_declarations_transform::inclusion_depen
 }
 
 physical::entities::artefact primitive_forward_declarations_transform::
-format(const context& ctx, const logical::entities::element& e) const {
+apply(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
     const auto& p(a.as<logical::entities::structural::primitive>(e));
 

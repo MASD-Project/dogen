@@ -89,7 +89,7 @@ std::list<std::string> include_cmakelists_transform::inclusion_dependencies(
 }
 
 physical::entities::artefact include_cmakelists_transform::
-format(const context& ctx, const logical::entities::element& e) const {
+apply(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
     using logical::entities::build::cmakelists;
     const auto& c(a.as<cmakelists>(e));

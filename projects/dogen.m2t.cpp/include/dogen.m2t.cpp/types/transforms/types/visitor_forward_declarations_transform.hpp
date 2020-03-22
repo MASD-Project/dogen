@@ -55,7 +55,7 @@ public:
         const logical::entities::name& n) const override;
 
 public:
-    physical::entities::artefact format(const context& ctx,
+    physical::entities::artefact apply(const context& ctx,
         const logical::entities::element& e) const override;
 };
 

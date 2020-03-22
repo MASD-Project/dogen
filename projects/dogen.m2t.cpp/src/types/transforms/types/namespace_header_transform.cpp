@@ -72,7 +72,7 @@ std::list<std::string> namespace_header_transform::inclusion_dependencies(
 }
 
 physical::entities::artefact namespace_header_transform::
-format(const context& ctx, const logical::entities::element& e) const {
+apply(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location(), true/*requires_header_guard*/);
     const auto& m(a.as<logical::entities::structural::module>(e));
 
