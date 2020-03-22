@@ -201,6 +201,7 @@
     },
     {
       "name": "entities::MetaNameable",
+      "documentation": "Ability to have a meta-name.\n",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -262,7 +263,7 @@
     },
     {
       "name": "entities::name",
-      "documentation": "Name of an element in asset space.\n\nA name represents a point in asset space, and this point can only be\nused by one asset element. Names can be uniquely identified by their\nqualified ID.\n\nName has the following properties: a) two different points in element space\ncannot have the same name and b) the same point in element space can only\nhave one and only one name.\n\nNames are required in addition to just using the qualfied ID representation\nbecause we use them to infer all sorts of properties for an element (namespaces,\nnaming files, etc).\n",
+      "documentation": "Name of an element in logical space.\n\nA name represents a point or a region in logical space, and this point or region can\nonly be used by one element. Names can be uniquely identified by their qualified ID.\n\nName has the following properties: a) two different points or regions in logical\nspace cannot have the same name and b) the same point in logical space can only\nhave one and only one name.\n\nNames are required in addition to just using the qualfied ID representation\nbecause we use them to infer all sorts of properties for an element (namespaces,\nnaming files, etc).\n",
       "stereotypes": [
         "dogen::hashable",
         "Qualifiable"

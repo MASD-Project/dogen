@@ -1518,14 +1518,13 @@ purpose.#</dia:string>
         <dia:string>#dogen::hashable, Qualifiable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Name of an element in asset space.
+        <dia:string>#Name of an element in logical space.
 
-A name represents a point in asset space, and this point can only be
-used by one asset element. Names can be uniquely identified by their
-qualified ID.
+A name represents a point or a region in logical space, and this point or region can
+only be used by one element. Names can be uniquely identified by their qualified ID.
 
-Name has the following properties: a) two different points in element space
-cannot have the same name and b) the same point in element space can only
+Name has the following properties: a) two different points or regions in logical
+space cannot have the same name and b) the same point in logical space can only
 have one and only one name.
 
 Names are required in addition to just using the qualfied ID representation
@@ -36747,7 +36746,7 @@ extend the mappings as required.#</dia:string>
         <dia:point val="-55,-83"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-55.75,-86.6004;-51.7424,-82.2"/>
+        <dia:rectangle val="-55.75,-86.6003;-51.7404,-82.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -36755,8 +36754,8 @@ extend the mappings as required.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-55,-83"/>
         <dia:point val="-55,-85"/>
-        <dia:point val="-51.9458,-85"/>
-        <dia:point val="-51.9424,-86.5502"/>
+        <dia:point val="-51.9424,-85"/>
+        <dia:point val="-51.9404,-86.5502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -38399,7 +38398,7 @@ At present the system only supports wale templates.#</dia:string>
         <dia:point val="166.345,-89.1513"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="154.011,-89.9013;167.095,-83.2492"/>
+        <dia:rectangle val="154.012,-89.9013;167.095,-83.2492"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -38407,7 +38406,7 @@ At present the system only supports wale templates.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="166.345,-89.1513"/>
         <dia:point val="166.345,-86"/>
-        <dia:point val="154.061,-86"/>
+        <dia:point val="154.062,-86"/>
         <dia:point val="154.062,-84.0492"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
@@ -39484,7 +39483,7 @@ generates the registration code as needed.#</dia:string>
         <dia:point val="118.42,-91.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="112.56,-91.95;119.17,-86.2502"/>
+        <dia:rectangle val="112.559,-91.95;119.17,-86.2502"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -39492,8 +39491,8 @@ generates the registration code as needed.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="118.42,-91.2"/>
         <dia:point val="118.42,-89"/>
-        <dia:point val="112.612,-89"/>
-        <dia:point val="112.61,-87.0502"/>
+        <dia:point val="112.61,-89"/>
+        <dia:point val="112.609,-87.0502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -45394,7 +45393,7 @@ Maps to a well known MSBuild target.#</dia:string>
         <dia:point val="104.612,-12.5497"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="100.981,-13.2997;105.362,-7.25037"/>
+        <dia:rectangle val="100.98,-13.2997;105.362,-7.25037"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -45402,8 +45401,8 @@ Maps to a well known MSBuild target.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="104.612,-12.5497"/>
         <dia:point val="104.612,-10"/>
-        <dia:point val="101.032,-10"/>
-        <dia:point val="101.031,-8.05037"/>
+        <dia:point val="101.031,-10"/>
+        <dia:point val="101.03,-8.05037"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
