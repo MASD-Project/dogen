@@ -69,15 +69,6 @@ struct traits {
      */
     static std::string postfix();
 
-    /**
-     * @brief Available families.
-     */
-    /**@{*/
-    static std::string csharp_family();
-    static std::string visual_studio_solution_family();
-    static std::string visual_studio_project_family();
-    /**@}*/
-
     struct csharp {
         struct helper {
             /**
