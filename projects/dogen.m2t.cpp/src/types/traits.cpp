@@ -82,41 +82,6 @@ std::string traits::inclusion_dependency() {
     return r;
 }
 
-std::string traits::header_family() {
-    static std::string r("cpp_headers_family");
-    return r;
-}
-
-std::string traits::implementation_family() {
-    static std::string r("cpp_implementation_family");
-    return r;
-}
-
-std::string traits::cmake_family() {
-    static std::string r("cmake_family");
-    return r;
-}
-
-std::string traits::visual_studio_solution_family() {
-    static std::string r("vistual_studio_solution_family");
-    return r;
-}
-
-std::string traits::visual_studio_project_family() {
-    static std::string r("vistual_studio_project_family");
-    return r;
-}
-
-std::string traits::msbuild_family() {
-    static std::string r("msbuild_family");
-    return r;
-}
-
-std::string traits::odb_family() {
-    static std::string r("odb_family");
-    return r;
-}
-
 std::string traits::cpp::formatting_style() {
     static std::string r("formatting_style");
     return r;

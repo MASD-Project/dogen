@@ -95,19 +95,6 @@ struct traits {
      */
     static std::string inclusion_required();
 
-    /**
-     * @brief Available families.
-     */
-    /**@{*/
-    static std::string header_family();
-    static std::string implementation_family();
-    static std::string cmake_family();
-    static std::string visual_studio_solution_family();
-    static std::string visual_studio_project_family();
-    static std::string msbuild_family();
-    static std::string odb_family();
-    /**@}*/
-
     struct cpp {
         /**
          * @brief Style of formatting.
