@@ -50,10 +50,6 @@ const logical::entities::name& namespace_header_transform::meta_name() const {
     return r;
 }
 
-std::string namespace_header_transform::family() const {
-    return cpp::traits::header_family();
-}
-
 inclusion_support_types namespace_header_transform::inclusion_support_type() const {
     return inclusion_support_types::canonical_support;
 }

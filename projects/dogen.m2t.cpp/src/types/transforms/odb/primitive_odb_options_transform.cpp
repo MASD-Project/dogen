@@ -59,10 +59,6 @@ const logical::entities::name& primitive_odb_options_transform::meta_name() cons
     return r;
 }
 
-std::string primitive_odb_options_transform::family() const {
-    return cpp::traits::odb_family();
-}
-
 inclusion_support_types
 primitive_odb_options_transform::inclusion_support_type() const {
     return inclusion_support_types::not_supported;

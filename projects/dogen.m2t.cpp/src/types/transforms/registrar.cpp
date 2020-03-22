@@ -196,8 +196,6 @@ register_formatter(std::shared_ptr<model_to_text_transform> f) {
     const auto mn(f->meta_name().qualified().dot());
     auto& alg(archetype_locations_by_meta_name_[mn]);
     alg.locations().push_back(al);
-    auto& albf(archetype_locations_by_family_[f->family()]);
-    albf.push_back(al);
 
     /*
      * If the archetype location points to a canonical archetype,

@@ -54,10 +54,6 @@ const logical::entities::name& exception_header_transform::meta_name() const {
     return r;
 }
 
-std::string exception_header_transform::family() const {
-    return cpp::traits::header_family();
-}
-
 inclusion_support_types exception_header_transform::inclusion_support_type() const {
     return inclusion_support_types::canonical_support;
 }

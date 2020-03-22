@@ -55,10 +55,6 @@ const logical::entities::name& variability_initializer_header_transform::meta_na
     return r;
 }
 
-std::string variability_initializer_header_transform::family() const {
-    return cpp::traits::header_family();
-}
-
 inclusion_support_types variability_initializer_header_transform::inclusion_support_type() const {
     return inclusion_support_types::canonical_support;
 }

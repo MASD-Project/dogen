@@ -57,10 +57,6 @@ project_transform::meta_name() const {
     return r;
 }
 
-std::string project_transform::family() const {
-    return cpp::traits::visual_studio_project_family();
-}
-
 inclusion_support_types
 project_transform::inclusion_support_type() const {
     return inclusion_support_types::not_supported;

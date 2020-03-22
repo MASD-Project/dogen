@@ -6,7 +6,6 @@ public:
     std::string id() const override;
     physical::entities::location archetype_location() const override;
     const logical::entities::name& meta_name() const override;
-    std::string family() const override;
 
 public:
     std::list<std::string> inclusion_dependencies(

@@ -49,10 +49,6 @@ const logical::entities::name& class_forward_declarations_transform::meta_name()
     return r;
 }
 
-std::string class_forward_declarations_transform::family() const {
-    return cpp::traits::header_family();
-}
-
 inclusion_support_types class_forward_declarations_transform::inclusion_support_type() const {
     return inclusion_support_types::regular_support;
 }

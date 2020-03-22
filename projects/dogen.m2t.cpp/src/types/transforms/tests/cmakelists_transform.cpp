@@ -56,10 +56,6 @@ const logical::entities::name& cmakelists_transform::meta_name() const {
     return r;
 }
 
-std::string cmakelists_transform::family() const {
-    return cpp::traits::cmake_family();
-}
-
 inclusion_support_types cmakelists_transform::
 inclusion_support_type() const {
     return inclusion_support_types::not_supported;

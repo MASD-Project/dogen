@@ -57,10 +57,6 @@ const logical::entities::name& primitive_implementation_transform::meta_name() c
     return r;
 }
 
-std::string primitive_implementation_transform::family() const {
-    return cpp::traits::implementation_family();
-}
-
 inclusion_support_types primitive_implementation_transform::inclusion_support_type() const {
     return inclusion_support_types::not_supported;
 }

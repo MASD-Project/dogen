@@ -52,10 +52,6 @@ const logical::entities::name& main_transform::meta_name() const {
     return r;
 }
 
-std::string main_transform::family() const {
-    return cpp::traits::implementation_family();
-}
-
 inclusion_support_types main_transform::inclusion_support_type() const {
     return inclusion_support_types::not_supported;
 }

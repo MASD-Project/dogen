@@ -58,10 +58,6 @@ const logical::entities::name& feature_bundle_header_transform::meta_name() cons
     return r;
 }
 
-std::string feature_bundle_header_transform::family() const {
-    return cpp::traits::header_family();
-}
-
 inclusion_support_types feature_bundle_header_transform::inclusion_support_type() const {
     return inclusion_support_types::canonical_support;
 }

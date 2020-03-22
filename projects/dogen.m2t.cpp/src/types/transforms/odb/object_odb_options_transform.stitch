@@ -40,10 +40,6 @@ const logical::entities::name& object_odb_options_transform::meta_name() const {
     return r;
 }
 
-std::string object_odb_options_transform::family() const {
-    return cpp::traits::odb_family();
-}
-
 inclusion_support_types
 object_odb_options_transform::inclusion_support_type() const {
     return inclusion_support_types::not_supported;

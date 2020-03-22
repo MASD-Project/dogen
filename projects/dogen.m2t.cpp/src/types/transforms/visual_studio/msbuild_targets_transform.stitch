@@ -37,10 +37,6 @@ const logical::entities::name& msbuild_targets_transform::meta_name() const {
     return r;
 }
 
-std::string msbuild_targets_transform::family() const {
-    return cpp::traits::msbuild_family();
-}
-
 inclusion_support_types
 msbuild_targets_transform::inclusion_support_type() const {
     return inclusion_support_types::not_supported;

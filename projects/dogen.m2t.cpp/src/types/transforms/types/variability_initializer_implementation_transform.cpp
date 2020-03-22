@@ -57,10 +57,6 @@ const logical::entities::name& variability_initializer_implementation_transform:
     return r;
 }
 
-std::string variability_initializer_implementation_transform::family() const {
-    return cpp::traits::implementation_family();
-}
-
 inclusion_support_types variability_initializer_implementation_transform::inclusion_support_type() const {
     return inclusion_support_types::not_supported;
 }
