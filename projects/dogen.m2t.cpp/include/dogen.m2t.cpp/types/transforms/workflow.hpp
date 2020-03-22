@@ -66,7 +66,7 @@ private:
 
 private:
     std::list<physical::entities::artefact>
-    format(const std::unordered_set<m2t::entities::element_archetype>&
+    execute(const std::unordered_set<m2t::entities::element_archetype>&
         enabled_archetype_for_element, const formattables::model& fm,
         const logical::entities::element& e,
         const formattables::element_properties& ep) const;

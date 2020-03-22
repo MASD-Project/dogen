@@ -69,8 +69,7 @@ workflow::get_artefact_properties(const logical::entities::element& e,
     return i->second;
 }
 
-std::list<physical::entities::artefact>
-workflow::format(
+std::list<physical::entities::artefact> workflow::execute(
     const std::unordered_set<m2t::entities::element_archetype>&
     enabled_archetype_for_element, const formattables::model& fm,
     const logical::entities::element& e,
@@ -151,7 +150,7 @@ execute(const std::unordered_set<m2t::entities::element_archetype>&
         const auto& formattable(pair.second);
         const auto& eprops(formattable.element_properties());
         const auto& e(*formattable.element());
-        r.splice(r.end(), format(enabled_archetype_for_element, fm, e, eprops));
+        r.splice(r.end(), execute(enabled_archetype_for_element, fm, e, eprops));
     }
     BOOST_LOG_SEV(lg, debug) << "Finished formatting.";
     return r;
