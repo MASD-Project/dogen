@@ -30,6 +30,7 @@ part::part(
     const std::string& override_directory_name,
     const dogen::physical::entities::location& location,
     const std::string& description,
+    const dogen::physical::entities::name& name,
     const dogen::physical::entities::path_configuration& path_configuration,
     const std::unordered_map<std::string, dogen::physical::entities::facet>& facets,
     const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes,
@@ -38,6 +39,7 @@ part::part(
       override_directory_name_(override_directory_name),
       location_(location),
       description_(description),
+      name_(name),
       path_configuration_(path_configuration),
       facets_(facets),
       archetypes_(archetypes),
@@ -49,6 +51,7 @@ void part::swap(part& other) noexcept {
     swap(override_directory_name_, other.override_directory_name_);
     swap(location_, other.location_);
     swap(description_, other.description_);
+    swap(name_, other.name_);
     swap(path_configuration_, other.path_configuration_);
     swap(facets_, other.facets_);
     swap(archetypes_, other.archetypes_);
@@ -60,6 +63,7 @@ bool part::operator==(const part& rhs) const {
         override_directory_name_ == rhs.override_directory_name_ &&
         location_ == rhs.location_ &&
         description_ == rhs.description_ &&
+        name_ == rhs.name_ &&
         path_configuration_ == rhs.path_configuration_ &&
         facets_ == rhs.facets_ &&
         archetypes_ == rhs.archetypes_ &&
@@ -134,6 +138,22 @@ void part::description(const std::string& v) {
 
 void part::description(const std::string&& v) {
     description_ = std::move(v);
+}
+
+const dogen::physical::entities::name& part::name() const {
+    return name_;
+}
+
+dogen::physical::entities::name& part::name() {
+    return name_;
+}
+
+void part::name(const dogen::physical::entities::name& v) {
+    name_ = v;
+}
+
+void part::name(const dogen::physical::entities::name&& v) {
+    name_ = std::move(v);
 }
 
 const dogen::physical::entities::path_configuration& part::path_configuration() const {

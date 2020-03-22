@@ -28,6 +28,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
+#include "dogen.physical/types/entities/name.hpp"
 #include "dogen.physical/types/entities/location.hpp"
 #include "dogen.physical/types/entities/archetype.hpp"
 
@@ -46,6 +47,7 @@ public:
         const std::string& override_directory_name,
         const dogen::physical::entities::location& location,
         const std::string& description,
+        const dogen::physical::entities::name& name,
         const std::string& default_postfix,
         const std::string& override_postfix,
         const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes);
@@ -91,6 +93,11 @@ public:
     void description(const std::string&& v);
     /**@}*/
 
+    const dogen::physical::entities::name& name() const;
+    dogen::physical::entities::name& name();
+    void name(const dogen::physical::entities::name& v);
+    void name(const dogen::physical::entities::name&& v);
+
     /**
      * @brief Default postfix for the element.
      */
@@ -131,6 +138,7 @@ private:
     std::string override_directory_name_;
     dogen::physical::entities::location location_;
     std::string description_;
+    dogen::physical::entities::name name_;
     std::string default_postfix_;
     std::string override_postfix_;
     std::unordered_map<std::string, dogen::physical::entities::archetype> archetypes_;

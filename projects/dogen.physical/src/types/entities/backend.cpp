@@ -27,6 +27,7 @@ backend::backend(
     const std::string& override_directory_name,
     const dogen::physical::entities::location& location,
     const std::string& description,
+    const dogen::physical::entities::name& name,
     const std::unordered_map<std::string, dogen::physical::entities::part>& parts,
     const std::unordered_map<std::string, dogen::physical::entities::facet>& facets,
     const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes,
@@ -35,6 +36,7 @@ backend::backend(
       override_directory_name_(override_directory_name),
       location_(location),
       description_(description),
+      name_(name),
       parts_(parts),
       facets_(facets),
       archetypes_(archetypes),
@@ -46,6 +48,7 @@ void backend::swap(backend& other) noexcept {
     swap(override_directory_name_, other.override_directory_name_);
     swap(location_, other.location_);
     swap(description_, other.description_);
+    swap(name_, other.name_);
     swap(parts_, other.parts_);
     swap(facets_, other.facets_);
     swap(archetypes_, other.archetypes_);
@@ -57,6 +60,7 @@ bool backend::operator==(const backend& rhs) const {
         override_directory_name_ == rhs.override_directory_name_ &&
         location_ == rhs.location_ &&
         description_ == rhs.description_ &&
+        name_ == rhs.name_ &&
         parts_ == rhs.parts_ &&
         facets_ == rhs.facets_ &&
         archetypes_ == rhs.archetypes_ &&
@@ -131,6 +135,22 @@ void backend::description(const std::string& v) {
 
 void backend::description(const std::string&& v) {
     description_ = std::move(v);
+}
+
+const dogen::physical::entities::name& backend::name() const {
+    return name_;
+}
+
+dogen::physical::entities::name& backend::name() {
+    return name_;
+}
+
+void backend::name(const dogen::physical::entities::name& v) {
+    name_ = v;
+}
+
+void backend::name(const dogen::physical::entities::name&& v) {
+    name_ = std::move(v);
 }
 
 const std::unordered_map<std::string, dogen::physical::entities::part>& backend::parts() const {

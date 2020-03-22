@@ -450,10 +450,25 @@
       ]
     },
     {
+      "name": "entities::Nameable",
+      "documentation": "Ability to have a name.\n",
+      "stereotypes": [
+        "masd::object_template"
+      ],
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "name"
+        }
+      ]
+    },
+    {
       "name": "entities::MetaElement",
       "parents": [
         "entities::Locatable",
-        "entities::Describable"
+        "entities::Describable",
+        "entities::Nameable"
       ],
       "stereotypes": [
         "masd::object_template"
@@ -1103,6 +1118,26 @@
           "name": "formatting_input",
           "type": "masd::variability::text",
           "documentation": "If the formatting style requires a template, the name of the template to use.\n"
+        }
+      ]
+    },
+    {
+      "name": "entities::name",
+      "documentation": "Name of an element in physical space.\n\nA name represents a point or a region in physical space. It can only be used by one\nphysical element. Names can be uniquely identified by their qualified ID.\n\nName has the following properties: a) two different points or regionsin physical\nspace cannot have the same name and b) the same point or region in physical space\ncan only have one and only one name.\n",
+      "fallback_element_type": "masd::object",
+      "attributes": [
+        {
+          "name": "simple",
+          "type": "std::string",
+          "documentation": "Simple (non-qualified) name of the physical element at this address.\n\nThe simple name must be unique for a given location.\n"
+        },
+        {
+          "name": "qualified",
+          "type": "std::string"
+        },
+        {
+          "name": "location",
+          "type": "location"
         }
       ]
     }

@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen.physical/io/entities/name_io.hpp"
 #include "dogen.physical/io/entities/part_io.hpp"
 #include "dogen.physical/io/entities/facet_io.hpp"
 #include "dogen.physical/io/entities/backend_io.hpp"
@@ -116,6 +117,7 @@ std::ostream& operator<<(std::ostream& s, const backend& v) {
       << "\"override_directory_name\": " << "\"" << tidy_up_string(v.override_directory_name()) << "\"" << ", "
       << "\"location\": " << v.location() << ", "
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
+      << "\"name\": " << v.name() << ", "
       << "\"parts\": " << v.parts() << ", "
       << "\"facets\": " << v.facets() << ", "
       << "\"archetypes\": " << v.archetypes() << ", "

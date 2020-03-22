@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen.physical/io/entities/name_io.hpp"
 #include "dogen.physical/io/entities/kernel_io.hpp"
 #include "dogen.physical/io/entities/backend_io.hpp"
 #include "dogen.physical/io/entities/location_io.hpp"
@@ -54,6 +55,7 @@ std::ostream& operator<<(std::ostream& s, const kernel& v) {
       << "\"__type__\": " << "\"dogen::physical::entities::kernel\"" << ", "
       << "\"location\": " << v.location() << ", "
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
+      << "\"name\": " << v.name() << ", "
       << "\"backends\": " << v.backends() << ", "
       << "\"locations\": " << v.locations()
       << " }";

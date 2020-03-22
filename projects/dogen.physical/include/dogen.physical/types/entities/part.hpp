@@ -28,6 +28,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
+#include "dogen.physical/types/entities/name.hpp"
 #include "dogen.physical/types/entities/facet.hpp"
 #include "dogen.physical/types/entities/location.hpp"
 #include "dogen.physical/types/entities/archetype.hpp"
@@ -50,6 +51,7 @@ public:
         const std::string& override_directory_name,
         const dogen::physical::entities::location& location,
         const std::string& description,
+        const dogen::physical::entities::name& name,
         const dogen::physical::entities::path_configuration& path_configuration,
         const std::unordered_map<std::string, dogen::physical::entities::facet>& facets,
         const std::unordered_map<std::string, dogen::physical::entities::archetype>& archetypes,
@@ -96,6 +98,11 @@ public:
     void description(const std::string&& v);
     /**@}*/
 
+    const dogen::physical::entities::name& name() const;
+    dogen::physical::entities::name& name();
+    void name(const dogen::physical::entities::name& v);
+    void name(const dogen::physical::entities::name&& v);
+
     const dogen::physical::entities::path_configuration& path_configuration() const;
     dogen::physical::entities::path_configuration& path_configuration();
     void path_configuration(const dogen::physical::entities::path_configuration& v);
@@ -134,6 +141,7 @@ private:
     std::string override_directory_name_;
     dogen::physical::entities::location location_;
     std::string description_;
+    dogen::physical::entities::name name_;
     dogen::physical::entities::path_configuration path_configuration_;
     std::unordered_map<std::string, dogen::physical::entities::facet> facets_;
     std::unordered_map<std::string, dogen::physical::entities::archetype> archetypes_;

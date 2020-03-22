@@ -5195,7 +5195,7 @@ If not present, user did not make any statements with regards to finality.#</dia
         <dia:point val="-133,-61"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-133.05,-61.05;-123.195,-57.65"/>
+        <dia:rectangle val="-133.05,-61.05;-120.5,-58.45"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5204,10 +5204,10 @@ If not present, user did not make any statements with regards to finality.#</dia
         <dia:point val="-133,-61"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.7550000000000008"/>
+        <dia:real val="12.450000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.3000000000000003"/>
+        <dia:real val="2.5"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -5221,9 +5221,8 @@ If not present, user did not make any statements with regards to finality.#</dia
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Defines positions of
-names in assets element
- space.#</dia:string>
+            <dia:string>#Defines positions of names in 
+regions of logical space.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -5246,16 +5245,16 @@ names in assets element
     </dia:object>
     <dia:object type="UML - Message" version="0" id="O35">
       <dia:attribute name="obj_pos">
-        <dia:point val="-128.123,-61"/>
+        <dia:point val="-126.775,-61"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-128.189,-63.3834;-123.643,-60.9335"/>
+        <dia:rectangle val="-126.845,-63.3582;-123.591,-60.9305"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="conn_endpoints">
-        <dia:point val="-128.123,-61"/>
+        <dia:point val="-126.775,-61"/>
         <dia:point val="-123.858,-63"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
@@ -5271,7 +5270,7 @@ names in assets element
         <dia:enum val="0"/>
       </dia:attribute>
       <dia:attribute name="text_pos">
-        <dia:point val="-125.991,-61.5"/>
+        <dia:point val="-125.317,-61.5"/>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O34" connection="1"/>
@@ -20429,7 +20428,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Ability to have a meta-name.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -36748,7 +36747,7 @@ extend the mappings as required.#</dia:string>
         <dia:point val="-55,-83"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-55.75,-86.6004;-51.7458,-82.2"/>
+        <dia:rectangle val="-55.75,-86.6004;-51.7424,-82.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -36756,8 +36755,8 @@ extend the mappings as required.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-55,-83"/>
         <dia:point val="-55,-85"/>
-        <dia:point val="-51.9515,-85"/>
-        <dia:point val="-51.9458,-86.5502"/>
+        <dia:point val="-51.9458,-85"/>
+        <dia:point val="-51.9424,-86.5502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -38400,7 +38399,7 @@ At present the system only supports wale templates.#</dia:string>
         <dia:point val="166.345,-89.1513"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="154.009,-89.9013;167.095,-83.2492"/>
+        <dia:rectangle val="154.011,-89.9013;167.095,-83.2492"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -38408,8 +38407,8 @@ At present the system only supports wale templates.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="166.345,-89.1513"/>
         <dia:point val="166.345,-86"/>
-        <dia:point val="154.059,-86"/>
-        <dia:point val="154.061,-84.0492"/>
+        <dia:point val="154.061,-86"/>
+        <dia:point val="154.062,-84.0492"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -39485,7 +39484,7 @@ generates the registration code as needed.#</dia:string>
         <dia:point val="118.42,-91.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="112.562,-91.95;119.17,-86.2502"/>
+        <dia:rectangle val="112.56,-91.95;119.17,-86.2502"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -39493,8 +39492,8 @@ generates the registration code as needed.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="118.42,-91.2"/>
         <dia:point val="118.42,-89"/>
-        <dia:point val="112.616,-89"/>
-        <dia:point val="112.612,-87.0502"/>
+        <dia:point val="112.612,-89"/>
+        <dia:point val="112.61,-87.0502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -45395,7 +45394,7 @@ Maps to a well known MSBuild target.#</dia:string>
         <dia:point val="104.612,-12.5497"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="100.983,-13.2997;105.362,-7.25037"/>
+        <dia:rectangle val="100.981,-13.2997;105.362,-7.25037"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -45403,8 +45402,8 @@ Maps to a well known MSBuild target.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="104.612,-12.5497"/>
         <dia:point val="104.612,-10"/>
-        <dia:point val="101.035,-10"/>
-        <dia:point val="101.033,-8.05037"/>
+        <dia:point val="101.032,-10"/>
+        <dia:point val="101.031,-8.05037"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

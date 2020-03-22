@@ -28,6 +28,7 @@
 #include <list>
 #include <string>
 #include <algorithm>
+#include "dogen.physical/types/entities/name.hpp"
 #include "dogen.physical/types/entities/backend.hpp"
 #include "dogen.physical/types/entities/location.hpp"
 #include "dogen.physical/types/entities/location_repository.hpp"
@@ -45,6 +46,7 @@ public:
     kernel(
         const dogen::physical::entities::location& location,
         const std::string& description,
+        const dogen::physical::entities::name& name,
         const std::list<dogen::physical::entities::backend>& backends,
         const dogen::physical::entities::location_repository& locations);
 
@@ -69,6 +71,11 @@ public:
     void description(const std::string&& v);
     /**@}*/
 
+    const dogen::physical::entities::name& name() const;
+    dogen::physical::entities::name& name();
+    void name(const dogen::physical::entities::name& v);
+    void name(const dogen::physical::entities::name&& v);
+
     const std::list<dogen::physical::entities::backend>& backends() const;
     std::list<dogen::physical::entities::backend>& backends();
     void backends(const std::list<dogen::physical::entities::backend>& v);
@@ -92,6 +99,7 @@ public:
 private:
     dogen::physical::entities::location location_;
     std::string description_;
+    dogen::physical::entities::name name_;
     std::list<dogen::physical::entities::backend> backends_;
     dogen::physical::entities::location_repository locations_;
 };
