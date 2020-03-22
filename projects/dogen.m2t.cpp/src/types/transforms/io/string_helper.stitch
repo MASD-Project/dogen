@@ -12,7 +12,7 @@
 <#+
 
 void string_helper::
-format(assistant& a, const formattables::helper_properties& /*hp*/) const {
+apply(assistant& a, const formattables::helper_properties& /*hp*/) const {
 #>
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

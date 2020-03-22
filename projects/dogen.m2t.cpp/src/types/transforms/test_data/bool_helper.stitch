@@ -11,7 +11,7 @@
 <#+
 
 void bool_helper::
-format(assistant& a, const formattables::helper_properties& /*hp*/) const {
+apply(assistant& a, const formattables::helper_properties& /*hp*/) const {
 #>
 
 bool create_bool(const unsigned int position) {

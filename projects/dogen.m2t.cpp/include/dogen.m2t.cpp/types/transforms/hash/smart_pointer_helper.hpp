@@ -39,7 +39,7 @@ public:
     std::string helper_name() const override;
     bool is_enabled(const assistant& a,
         const formattables::helper_properties& hc) const override;
-    void format(assistant& a,
+    void apply(assistant& a,
         const formattables::helper_properties& hc) const override;
 };
 

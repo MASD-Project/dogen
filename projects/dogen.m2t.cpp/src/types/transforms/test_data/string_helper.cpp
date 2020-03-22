@@ -64,7 +64,7 @@ bool string_helper::is_enabled(const assistant& /*a*/,
 }
 
 void string_helper::
-format(assistant& a, const formattables::helper_properties& /*hp*/) const {
+apply(assistant& a, const formattables::helper_properties& /*hp*/) const {
 a.stream() << std::endl;
 a.stream() << "std::string create_std_string(const unsigned int position) {" << std::endl;
 a.stream() << "    std::ostringstream s;" << std::endl;

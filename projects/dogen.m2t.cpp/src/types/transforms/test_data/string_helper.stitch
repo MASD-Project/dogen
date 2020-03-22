@@ -11,7 +11,7 @@
 <#+
 
 void string_helper::
-format(assistant& a, const formattables::helper_properties& /*hp*/) const {
+apply(assistant& a, const formattables::helper_properties& /*hp*/) const {
 #>
 
 std::string create_std_string(const unsigned int position) {

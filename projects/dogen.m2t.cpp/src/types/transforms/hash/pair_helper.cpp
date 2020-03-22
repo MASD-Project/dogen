@@ -64,7 +64,7 @@ bool pair_helper::is_enabled(const assistant& /*a*/,
 }
 
 void pair_helper::
-format(assistant& a, const formattables::helper_properties& hp) const {
+apply(assistant& a, const formattables::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
     const auto ident(d.name_tree_identifiable());

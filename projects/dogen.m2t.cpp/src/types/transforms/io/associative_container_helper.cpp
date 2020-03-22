@@ -67,7 +67,7 @@ bool associative_container_helper::is_enabled(const assistant& a,
 }
 
 void associative_container_helper::
-format(assistant& a, const formattables::helper_properties& hp) const {
+apply(assistant& a, const formattables::helper_properties& hp) const {
     {
         const auto d(hp.current());
         const auto qn(d.name_tree_qualified());

@@ -67,7 +67,7 @@ bool string_helper::is_enabled(const assistant& a,
 }
 
 void string_helper::
-format(assistant& a, const formattables::helper_properties& /*hp*/) const {
+apply(assistant& a, const formattables::helper_properties& /*hp*/) const {
 a.stream() << "inline std::string tidy_up_string(std::string s) {" << std::endl;
 a.stream() << "    boost::replace_all(s, \"\\r\\n\", \"<new_line>\");" << std::endl;
 a.stream() << "    boost::replace_all(s, \"\\n\", \"<new_line>\");" << std::endl;

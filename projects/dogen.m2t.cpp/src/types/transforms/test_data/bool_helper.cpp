@@ -64,7 +64,7 @@ bool bool_helper::is_enabled(const assistant& /*a*/,
 }
 
 void bool_helper::
-format(assistant& a, const formattables::helper_properties& /*hp*/) const {
+apply(assistant& a, const formattables::helper_properties& /*hp*/) const {
 a.stream() << std::endl;
 a.stream() << "bool create_bool(const unsigned int position) {" << std::endl;
 a.stream() << "    return (position % 2) != 0;" << std::endl;
