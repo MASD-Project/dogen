@@ -60,7 +60,7 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
 }
 
 physical::entities::artefact builtin_transform::
-format(const context& /*ctx*/, const logical::entities::element& /*e*/) const {
+apply(const context& /*ctx*/, const logical::entities::element& /*e*/) const {
     physical::entities::artefact r;
     return r;
 }

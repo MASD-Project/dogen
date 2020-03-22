@@ -76,7 +76,7 @@ workflow::execute(const formattables::model& fm) const {
             const auto& fmt(*fmt_ptr);
             BOOST_LOG_SEV(lg, debug) << "Using formatter: " << fmt.id();
 
-            const auto artefact(fmt.format(ctx, e));
+            const auto artefact(fmt.apply(ctx, e));
             const auto& p(artefact.paths().absolute());
 
             BOOST_LOG_SEV(lg, debug) << "Formatted artefact. Path: " << p;

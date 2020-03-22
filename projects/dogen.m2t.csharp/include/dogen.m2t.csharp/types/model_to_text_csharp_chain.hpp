@@ -62,7 +62,7 @@ private:
         const m2t::entities::model& m) const;
 
     std::list<physical::entities::artefact>
-    format(const formattables::model& fm) const;
+    apply(const formattables::model& fm) const;
 
 public:
     std::string description() const override;

@@ -366,7 +366,7 @@
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#transform#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -10910,13 +10910,13 @@
         <dia:point val="43.4286,9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="43.3786,8.95;76.3186,16.65"/>
+        <dia:rectangle val="43.3786,8.95;75.9336,16.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="43.4286,9"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="32.839999999999996"/>
+        <dia:real val="32.454999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.5999999999999996"/>
@@ -11162,7 +11162,7 @@
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#format#</dia:string>
+            <dia:string>#apply#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -11270,17 +11270,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="59.8486,16.6387"/>
+        <dia:point val="59.6561,16.6387"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="59.7986,16.5887;67.41,22.7497"/>
+        <dia:rectangle val="59.6061,16.5887;67.41,22.7497"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="59.8486,16.6387"/>
-        <dia:point val="59.8486,19"/>
+        <dia:point val="59.6561,16.6387"/>
+        <dia:point val="59.6561,19"/>
         <dia:point val="66.66,19"/>
         <dia:point val="66.66,21.9497"/>
       </dia:attribute>

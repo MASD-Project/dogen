@@ -80,7 +80,7 @@ public:
      * @brief Generate a file representation for the element.
      */
     virtual physical::entities::artefact
-    format(const context& ctx, const logical::entities::element& e) const = 0;
+    apply(const context& ctx, const logical::entities::element& e) const = 0;
 };
 
 }

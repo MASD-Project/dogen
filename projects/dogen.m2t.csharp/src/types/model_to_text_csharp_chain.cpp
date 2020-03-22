@@ -67,7 +67,7 @@ std::string model_to_text_csharp_chain::description() const {
 
 std::list<physical::entities::artefact>
 model_to_text_csharp_chain::
-format(const formattables::model& fm) const {
+apply(const formattables::model& fm) const {
     transforms::workflow wf;
     return wf.execute(fm);
 }
@@ -136,7 +136,7 @@ model_to_text_csharp_chain::apply(
      * Code-generate all artefacts.
      */
     physical::entities::model r;
-    r.artefacts(format(fm));
+    r.artefacts(apply(fm));
     r.managed_directories().push_back(l.project_path());
 
     BOOST_LOG_SEV(lg, debug) << "Finished backend.";

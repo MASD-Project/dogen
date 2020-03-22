@@ -267,7 +267,7 @@ void assistant::add_helper_methods(const std::string& element_id) {
             }
 
             BOOST_LOG_SEV(lg, debug) << "Formatting with helper: " << hlp->id();
-            hlp->format(*this, hlp_props);
+            hlp->apply(*this, hlp_props);
         }
     }
 

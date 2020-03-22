@@ -45,7 +45,7 @@ public:
     virtual std::list<std::string> owning_formatters() const = 0;
     virtual std::list<std::string> owning_facets() const = 0;
     virtual std::string helper_name() const = 0;
-    virtual void format(assistant& a,
+    virtual void apply(assistant& a,
         const formattables::helper_properties& hp) const = 0;
 };
 

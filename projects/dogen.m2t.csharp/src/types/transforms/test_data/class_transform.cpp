@@ -60,7 +60,7 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
     return r;
 }
 
-physical::entities::artefact class_transform::format(
+physical::entities::artefact class_transform::apply(
     const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location());
     const auto& o(a.as<logical::entities::structural::object>(static_id(), e));

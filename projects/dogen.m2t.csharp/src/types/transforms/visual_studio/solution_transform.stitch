@@ -50,7 +50,7 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
 }
 
 physical::entities::artefact solution_transform::
-format(const context& ctx, const logical::entities::element& e) const {
+apply(const context& ctx, const logical::entities::element& e) const {
     assistant a(ctx, e, archetype_location());
     using logical::entities::visual_studio::solution;
     const auto& sln(a.as<solution>(static_id(), e));

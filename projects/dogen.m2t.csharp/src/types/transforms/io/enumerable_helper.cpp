@@ -59,7 +59,7 @@ std::string enumerable_helper::helper_name() const {
 }
 
 void enumerable_helper::
-format(assistant& a, const formattables::helper_properties& hp) const {
+apply(assistant& a, const formattables::helper_properties& hp) const {
     const auto d(hp.current());
     const auto qn(d.name_tree_qualified());
 a.stream() << "        /// <summary>" << std::endl;
