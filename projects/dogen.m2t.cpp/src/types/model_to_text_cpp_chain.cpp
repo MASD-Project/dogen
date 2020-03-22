@@ -91,7 +91,7 @@ std::string model_to_text_cpp_chain::description() const {
 
 std::list<physical::entities::artefact>
 model_to_text_cpp_chain::
-format(const std::unordered_set<m2t::entities::element_archetype>&
+apply(const std::unordered_set<m2t::entities::element_archetype>&
     enabled_archetype_for_element, const formattables::locator& l,
     const variability::entities::feature_model& feature_model,
     const variability::helpers::configuration_factory& cf,
@@ -175,7 +175,7 @@ physical::entities::model model_to_text_cpp_chain::apply(
     using variability::helpers::configuration_factory;
     const configuration_factory cf(feature_model, false/*compatibility_model*/);
 
-    r.artefacts(format(eafe, l, feature_model, cf, fm));
+    r.artefacts(apply(eafe, l, feature_model, cf, fm));
     r.managed_directories(managed_directories(l));
 
     BOOST_LOG_SEV(lg, debug) << "Finished backend.";
