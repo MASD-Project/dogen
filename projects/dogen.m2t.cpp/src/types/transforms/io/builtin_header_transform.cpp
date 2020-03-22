@@ -79,7 +79,8 @@ std::list<std::string> builtin_header_transform::inclusion_dependencies(
 physical::entities::artefact builtin_header_transform::
 format(const context& /*ctx*/, const logical::entities::element& e) const {
     physical::entities::artefact r;
-    r.logical_location().qualified_name(e.name().qualified().dot());
+    r.logical_name().simple(e.name().simple());
+    r.logical_name().qualified(e.name().qualified().dot());
     r.origin_sha1_hash(e.origin_sha1_hash());
     return r;
 }

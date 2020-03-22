@@ -347,16 +347,16 @@
       ]
     },
     {
-      "name": "entities::logical_location",
+      "name": "entities::logical_name",
       "documentation": "Represents a point in logical space.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "simple_name",
+          "name": "simple",
           "type": "std::string"
         },
         {
-          "name": "qualified_name",
+          "name": "qualified",
           "type": "std::string"
         },
         {
@@ -702,9 +702,14 @@
           "documentation": "SHA1 hash of the original model that contained the element.\n"
         },
         {
-          "name": "logical_location",
-          "type": "logical_location",
+          "name": "logical_name",
+          "type": "logical_name",
           "documentation": "Logical model details of the element that originated this physical element.\n"
+        },
+        {
+          "name": "physical_name",
+          "type": "name",
+          "documentation": "Physical model details of the element that originated this physical element.\n"
         }
       ]
     },

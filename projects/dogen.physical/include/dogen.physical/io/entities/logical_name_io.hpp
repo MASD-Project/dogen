@@ -18,21 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_IO_ENTITIES_LOGICAL_LOCATION_IO_HPP
-#define DOGEN_PHYSICAL_IO_ENTITIES_LOGICAL_LOCATION_IO_HPP
+#ifndef DOGEN_PHYSICAL_IO_ENTITIES_LOGICAL_NAME_IO_HPP
+#define DOGEN_PHYSICAL_IO_ENTITIES_LOGICAL_NAME_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen.physical/types/entities/logical_location.hpp"
+#include "dogen.physical/types/entities/logical_name.hpp"
 
 namespace dogen::physical::entities {
 
 std::ostream&
 operator<<(std::ostream& s,
-     const dogen::physical::entities::logical_location& v);
+     const dogen::physical::entities::logical_name& v);
 
 }
 

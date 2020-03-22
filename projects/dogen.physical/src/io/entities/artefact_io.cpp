@@ -21,11 +21,12 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
+#include "dogen.physical/io/entities/name_io.hpp"
 #include "dogen.physical/io/entities/paths_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
 #include "dogen.physical/io/entities/operation_io.hpp"
+#include "dogen.physical/io/entities/logical_name_io.hpp"
 #include "dogen.physical/io/entities/enablement_flags_io.hpp"
-#include "dogen.physical/io/entities/logical_location_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 
 namespace boost {
@@ -79,7 +80,8 @@ std::ostream& operator<<(std::ostream& s, const artefact& v) {
       << "\"__type__\": " << "\"dogen::physical::entities::artefact\"" << ", "
       << "\"configuration\": " << v.configuration() << ", "
       << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(v.origin_sha1_hash()) << "\"" << ", "
-      << "\"logical_location\": " << v.logical_location() << ", "
+      << "\"logical_name\": " << v.logical_name() << ", "
+      << "\"physical_name\": " << v.physical_name() << ", "
       << "\"paths\": " << v.paths() << ", "
       << "\"content\": " << "\"" << tidy_up_string(v.content()) << "\"" << ", "
       << "\"enabled\": " << v.enabled() << ", "

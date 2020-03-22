@@ -59,8 +59,8 @@ model_to_text_chain::registrar() {
 
 void model_to_text_chain::
 merge(physical::entities::model&& src, physical::entities::model& dst) {
-    dst.logical_location().qualified_name(
-        src.logical_location().qualified_name());
+    dst.logical_name().simple(src.logical_name().simple());
+    dst.logical_name().qualified(src.logical_name().qualified());
     dst.origin_sha1_hash(src.origin_sha1_hash());
     dst.artefacts().splice(dst.artefacts().end(), src.artefacts());
     dst.managed_directories().splice(dst.managed_directories().end(),
@@ -121,7 +121,8 @@ apply(const m2t::transforms::context& ctx,
      */
     const bool ekd(m.extraction_properties().enable_backend_directories());
     auto r(t.apply(ctx, ekd, m));
-    r.logical_location().qualified_name(m.name().qualified().dot());
+    r.logical_name().simple(m.name().simple());
+    r.logical_name().qualified(m.name().qualified().dot());
     r.origin_sha1_hash(m.origin_sha1_hash());
 
     BOOST_LOG_SEV(lg, debug) << "Generated artefacts for : " << id

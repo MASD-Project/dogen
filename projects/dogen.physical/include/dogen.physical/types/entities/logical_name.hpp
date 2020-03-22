@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_LOGICAL_LOCATION_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_LOGICAL_LOCATION_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_LOGICAL_NAME_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_LOGICAL_NAME_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,31 +34,31 @@ namespace dogen::physical::entities {
 /**
  * @brief Represents a point in logical space.
  */
-class logical_location final {
+class logical_name final {
 public:
-    logical_location() = default;
-    logical_location(const logical_location&) = default;
-    logical_location(logical_location&&) = default;
-    ~logical_location() = default;
+    logical_name() = default;
+    logical_name(const logical_name&) = default;
+    logical_name(logical_name&&) = default;
+    ~logical_name() = default;
 
 public:
-    logical_location(
-        const std::string& simple_name,
-        const std::string& qualified_name,
+    logical_name(
+        const std::string& simple,
+        const std::string& qualified,
         const std::list<std::string>& external_modules,
         const std::list<std::string>& model_modules,
         const std::list<std::string>& internal_modules);
 
 public:
-    const std::string& simple_name() const;
-    std::string& simple_name();
-    void simple_name(const std::string& v);
-    void simple_name(const std::string&& v);
+    const std::string& simple() const;
+    std::string& simple();
+    void simple(const std::string& v);
+    void simple(const std::string&& v);
 
-    const std::string& qualified_name() const;
-    std::string& qualified_name();
-    void qualified_name(const std::string& v);
-    void qualified_name(const std::string&& v);
+    const std::string& qualified() const;
+    std::string& qualified();
+    void qualified(const std::string& v);
+    void qualified(const std::string&& v);
 
     const std::list<std::string>& external_modules() const;
     std::list<std::string>& external_modules();
@@ -76,18 +76,18 @@ public:
     void internal_modules(const std::list<std::string>&& v);
 
 public:
-    bool operator==(const logical_location& rhs) const;
-    bool operator!=(const logical_location& rhs) const {
+    bool operator==(const logical_name& rhs) const;
+    bool operator!=(const logical_name& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(logical_location& other) noexcept;
-    logical_location& operator=(logical_location other);
+    void swap(logical_name& other) noexcept;
+    logical_name& operator=(logical_name other);
 
 private:
-    std::string simple_name_;
-    std::string qualified_name_;
+    std::string simple_;
+    std::string qualified_;
     std::list<std::string> external_modules_;
     std::list<std::string> model_modules_;
     std::list<std::string> internal_modules_;
@@ -99,8 +99,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::physical::entities::logical_location& lhs,
-    dogen::physical::entities::logical_location& rhs) {
+    dogen::physical::entities::logical_name& lhs,
+    dogen::physical::entities::logical_name& rhs) {
     lhs.swap(rhs);
 }
 

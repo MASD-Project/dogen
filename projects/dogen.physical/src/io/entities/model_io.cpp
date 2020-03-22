@@ -20,9 +20,10 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen.physical/io/entities/name_io.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/io/entities/artefact_io.hpp"
-#include "dogen.physical/io/entities/logical_location_io.hpp"
+#include "dogen.physical/io/entities/logical_name_io.hpp"
 #include "dogen.variability/io/entities/configuration_io.hpp"
 #include "dogen.physical/io/entities/outputting_properties_io.hpp"
 
@@ -85,7 +86,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"__type__\": " << "\"dogen::physical::entities::model\"" << ", "
       << "\"configuration\": " << v.configuration() << ", "
       << "\"origin_sha1_hash\": " << "\"" << tidy_up_string(v.origin_sha1_hash()) << "\"" << ", "
-      << "\"logical_location\": " << v.logical_location() << ", "
+      << "\"logical_name\": " << v.logical_name() << ", "
+      << "\"physical_name\": " << v.physical_name() << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"technical_space\": " << "\"" << tidy_up_string(v.technical_space()) << "\"" << ", "
       << "\"artefacts\": " << v.artefacts() << ", "

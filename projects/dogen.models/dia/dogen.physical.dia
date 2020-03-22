@@ -3822,13 +3822,13 @@ Provides details of the kernels available in the current instance of Dogen.#</di
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O27">
       <dia:attribute name="obj_pos">
-        <dia:point val="139,-112"/>
+        <dia:point val="140,-112"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="138.95,-112.05;155.335,-105.95"/>
+        <dia:rectangle val="139.95,-112.05;156.335,-105.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="139,-112"/>
+        <dia:point val="140,-112"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.285"/>
@@ -3837,7 +3837,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#logical_location#</dia:string>
+        <dia:string>#logical_name#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -3926,7 +3926,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#simple_name#</dia:string>
+            <dia:string>#simple#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -3949,7 +3949,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#qualified_name#</dia:string>
+            <dia:string>#qualified#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -6404,10 +6404,10 @@ Provides details of the kernels available in the current instance of Dogen.#</di
             </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#ll#</dia:string>
+                <dia:string>#ln#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#logical_location#</dia:string>
+                <dia:string>#logical_name#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -6878,19 +6878,19 @@ Provides details of the kernels available in the current instance of Dogen.#</di
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O52">
       <dia:attribute name="obj_pos">
-        <dia:point val="134,-103"/>
+        <dia:point val="135,-103"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="133.95,-103.05;148.025,-98.55"/>
+        <dia:rectangle val="134.95,-103.05;147.1,-97.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="134,-103"/>
+        <dia:point val="135,-103"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="13.975"/>
+        <dia:real val="12.050000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#DeterminableOrigin#</dia:string>
@@ -7005,16 +7005,39 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#logical_location#</dia:string>
+            <dia:string>#logical_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#logical_location#</dia:string>
+            <dia:string>#logical_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Logical model details of the element that originated this physical element.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#physical_name#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#name#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Physical model details of the element that originated this physical element.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7147,17 +7170,17 @@ Provides details of the kernels available in the current instance of Dogen.#</di
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O54">
       <dia:attribute name="obj_pos">
-        <dia:point val="140.988,-98.6"/>
+        <dia:point val="141.025,-97.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="140.138,-98.65;152.278,-93.95"/>
+        <dia:rectangle val="140.175,-97.85;152.278,-93.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="140.988,-98.6"/>
-        <dia:point val="140.988,-96"/>
+        <dia:point val="141.025,-97.8"/>
+        <dia:point val="141.025,-96"/>
         <dia:point val="152.227,-96"/>
         <dia:point val="152.227,-94"/>
       </dia:attribute>
@@ -7267,19 +7290,19 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="140.988,-103"/>
+        <dia:point val="141.025,-103"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="140.238,-106.05;147.343,-102.2"/>
+        <dia:rectangle val="140.275,-106.05;148.343,-102.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="140.988,-103"/>
-        <dia:point val="140.988,-105"/>
-        <dia:point val="147.143,-105"/>
-        <dia:point val="147.143,-106"/>
+        <dia:point val="141.025,-103"/>
+        <dia:point val="141.025,-105"/>
+        <dia:point val="148.143,-105"/>
+        <dia:point val="148.143,-106"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

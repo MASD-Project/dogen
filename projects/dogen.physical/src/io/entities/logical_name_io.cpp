@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen.physical/io/entities/logical_location_io.hpp"
+#include "dogen.physical/io/entities/logical_name_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -46,11 +46,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 namespace dogen::physical::entities {
 
-std::ostream& operator<<(std::ostream& s, const logical_location& v) {
+std::ostream& operator<<(std::ostream& s, const logical_name& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::physical::entities::logical_location\"" << ", "
-      << "\"simple_name\": " << "\"" << tidy_up_string(v.simple_name()) << "\"" << ", "
-      << "\"qualified_name\": " << "\"" << tidy_up_string(v.qualified_name()) << "\"" << ", "
+      << "\"__type__\": " << "\"dogen::physical::entities::logical_name\"" << ", "
+      << "\"simple\": " << "\"" << tidy_up_string(v.simple()) << "\"" << ", "
+      << "\"qualified\": " << "\"" << tidy_up_string(v.qualified()) << "\"" << ", "
       << "\"external_modules\": " << v.external_modules() << ", "
       << "\"model_modules\": " << v.model_modules() << ", "
       << "\"internal_modules\": " << v.internal_modules()
