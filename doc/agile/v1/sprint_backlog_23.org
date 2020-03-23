@@ -12,39 +12,39 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-22 Sun 17:52]
+#+CAPTION: Clock summary at [2020-03-23 Mon 21:36]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *39:14* |       |      | 100.0 |
+| *Total time*                                           | *39:29* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 39:14   |       |      | 100.0 |
-| Active                                                 |         | 39:14 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 7:27 |  19.0 |
+| Stories                                                | 39:29   |       |      | 100.0 |
+| Active                                                 |         | 39:29 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 7:27 |  18.9 |
 | Create a demo and presentation for previous sprint     |         |       | 0:28 |   1.2 |
-| Sprint and product backlog grooming                    |         |       | 2:02 |   5.2 |
+| Sprint and product backlog grooming                    |         |       | 2:17 |   5.8 |
 | Rename archetypes model to physical model              |         |       | 0:28 |   1.2 |
 | Rename assets model to logical model                   |         |       | 0:29 |   1.2 |
 | Consider renaming "meta-model" namespace               |         |       | 0:37 |   1.6 |
 | Rename engine to orchestration                         |         |       | 1:04 |   2.7 |
-| Merge extraction model with physical model             |         |       | 4:35 |  11.7 |
+| Merge extraction model with physical model             |         |       | 4:35 |  11.6 |
 | Remove manual feature in profile merge transform       |         |       | 0:08 |   0.3 |
 | Add variability domains to the dumpspecs activity      |         |       | 0:12 |   0.5 |
-| Add org-mode option to dumpspacs                       |         |       | 0:53 |   2.3 |
-| Analysis on designing and implement physical types     |         |       | 6:52 |  17.5 |
+| Add org-mode option to dumpspacs                       |         |       | 0:53 |   2.2 |
+| Analysis on designing and implement physical types     |         |       | 6:52 |  17.4 |
 | Remove =element= from the modeling location            |         |       | 0:02 |   0.1 |
 | Fix clang-cl LNK4217 warnings                          |         |       | 1:04 |   2.7 |
-| Analysis on creating a masd kernel model               |         |       | 0:53 |   2.3 |
+| Analysis on creating a masd kernel model               |         |       | 0:53 |   2.2 |
 | Rename generation models to =m2t=                      |         |       | 1:04 |   2.7 |
 | Move all generation features away from generation      |         |       | 0:17 |   0.7 |
-| Rename generation transforms                           |         |       | 4:49 |  12.3 |
+| Rename generation transforms                           |         |       | 4:49 |  12.2 |
 | Remove kernel from models                              |         |       | 0:36 |   1.5 |
 | Rename the default MASD kernel                         |         |       | 0:44 |   1.9 |
 | Consider removing archetype location by family         |         |       | 0:40 |   1.7 |
 | Add part to physical location                          |         |       | 0:16 |   0.7 |
 | Make physical location entries simple names            |         |       | 0:11 |   0.5 |
 | Add names to logical model                             |         |       | 0:41 |   1.7 |
-| Implement archetype locations from physical meta-model |         |       | 2:42 |   6.9 |
+| Implement archetype locations from physical meta-model |         |       | 2:42 |   6.8 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -317,6 +317,7 @@ Time spent creating the demo and presentation. Use the demo project:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-03-23 Mon 08:25]--[2020-03-23 Mon 08:40] =>  0:15
     CLOCK: [2020-03-22 Sun 11:33]--[2020-03-22 Sun 11:45] =>  0:12
     CLOCK: [2020-03-21 Sat 09:25]--[2020-03-21 Sat 09:32] =>  0:07
     CLOCK: [2020-03-20 Fri 14:17]--[2020-03-20 Fri 14:30] =>  0:13

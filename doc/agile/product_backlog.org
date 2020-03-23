@@ -12465,6 +12465,33 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider visualisation like source trail                          :story:
+
+Once we move to org files, we will no longer be able to visualise the
+files easily. We had considered using graphviz. An interesting
+alternative is to see what lessons can be learned from source
+trail. We don;t necessarily need a UI exactly like source trail, but
+instead something that would work within emacs and display a
+"graphical" (e.g. text) view of the model as we are editing. We also
+need some kind of integration like org-noter, whereby as we move
+around the org document, the visualisation changes. The data being
+visualised should be like source trail. It should also be possible to
+link back to the physical model (e.g. for a given model element,
+display the files it generates). In effect we need more of a "dogen
+mode" which does a number of things at the same time:
+
+- LSP on org-mode.
+- specialised treemacs.
+- COGRE displaying UML diagram.
+- preview of file which updates when model is regenerated.
+
+Links:
+
+- [[https://www.youtube.com/watch?v=Cfu6f0uyzc8][SourceTrail demo]]
+- [[https://github.com/weirdNox/org-noter][org-noter github]]
+- [[https://www.youtube.com/watch?v=Un0ZRXTzufo][org-noter demo]]
+- [[http://cedet.sourceforge.net/uml.shtml][CEDET COGRE]]: Emacs mode for UML diagrams.
+
 *** Dump model stats and metrics                                      :story:
 
 It would be nice to be able to get some information about a model. We
