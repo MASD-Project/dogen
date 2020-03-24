@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_INJECTION_MODEL_TO_ASSETS_MODEL_TRANSFORM_HPP
-#define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_INJECTION_MODEL_TO_ASSETS_MODEL_TRANSFORM_HPP
+#ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_INJECTION_MODEL_TO_LOGICAL_MODEL_TRANSFORM_HPP
+#define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_INJECTION_MODEL_TO_LOGICAL_MODEL_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -41,9 +41,9 @@
 namespace dogen::orchestration::transforms {
 
 /**
- * @brief Converts an injection model into an assets representation.
+ * @brief Converts an injection model into an logical representation.
  */
-class injection_model_to_assets_model_transform final {
+class injection_model_to_logical_model_transform final {
 private:
     static logical::entities::location
     create_location(const context& ctx, const injection::entities::model& m);

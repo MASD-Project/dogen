@@ -66,7 +66,7 @@ public:
     void qualified(const dogen::logical::entities::fully_qualified_representation&& v);
 
     /**
-     * @brief Simple (non-qualified) name of the assets element at this address.
+     * @brief Simple (non-qualified) name of the logical element at this address.
      *
      * The simple name must be unique for a given location.
      */

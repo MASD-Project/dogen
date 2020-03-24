@@ -45,7 +45,7 @@ public:
     context(
         const dogen::variability::transforms::context& variability_context,
         const dogen::injection::transforms::context& injection_context,
-        const dogen::logical::transforms::context& assets_context,
+        const dogen::logical::transforms::context& logical_context,
         const dogen::m2t::transforms::context& generation_context,
         const dogen::physical::transforms::context& physical_context);
 
@@ -60,10 +60,10 @@ public:
     void injection_context(const dogen::injection::transforms::context& v);
     void injection_context(const dogen::injection::transforms::context&& v);
 
-    const dogen::logical::transforms::context& assets_context() const;
-    dogen::logical::transforms::context& assets_context();
-    void assets_context(const dogen::logical::transforms::context& v);
-    void assets_context(const dogen::logical::transforms::context&& v);
+    const dogen::logical::transforms::context& logical_context() const;
+    dogen::logical::transforms::context& logical_context();
+    void logical_context(const dogen::logical::transforms::context& v);
+    void logical_context(const dogen::logical::transforms::context&& v);
 
     const dogen::m2t::transforms::context& generation_context() const;
     dogen::m2t::transforms::context& generation_context();
@@ -88,7 +88,7 @@ public:
 private:
     dogen::variability::transforms::context variability_context_;
     dogen::injection::transforms::context injection_context_;
-    dogen::logical::transforms::context assets_context_;
+    dogen::logical::transforms::context logical_context_;
     dogen::m2t::transforms::context generation_context_;
     dogen::physical::transforms::context physical_context_;
 };

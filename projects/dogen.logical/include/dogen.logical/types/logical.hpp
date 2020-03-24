@@ -29,7 +29,7 @@
  * @brief The logcal model defines the core entities that live in the logical
  * dimension of MASD's conceptual model.
  *
- * @section assets_0 Overview
+ * @section logical_0 Overview
  *
  * The logical model strives to provide a technical-space agnostic
  * element representation, designed for code generation. Injection models

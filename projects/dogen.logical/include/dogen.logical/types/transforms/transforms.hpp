@@ -26,7 +26,7 @@
 #endif
 
 /**
- * @brief Houses all of the transformations supported by assets.
+ * @brief Houses all of the transformations supported by logical.
  */
 namespace dogen::logical {
 }

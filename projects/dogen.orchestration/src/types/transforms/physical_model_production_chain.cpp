@@ -26,8 +26,8 @@
 #include "dogen.m2t/types/transforms/model_to_text_chain.hpp"
 #include "dogen.physical/io/entities/model_io.hpp"
 #include "dogen.physical/types/transforms/model_production_chain.hpp"
-#include "dogen.orchestration/types/transforms/injection_model_set_to_assets_model_set_chain.hpp"
-#include "dogen.orchestration/types/transforms/assets_model_to_generation_model_transform.hpp"
+#include "dogen.orchestration/types/transforms/injection_model_set_to_logical_model_set_chain.hpp"
+#include "dogen.orchestration/types/transforms/logical_model_to_generation_model_transform.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
 #include "dogen.orchestration/types/transforms/physical_model_production_chain.hpp"
 
@@ -62,21 +62,21 @@ physical_model_production_chain::apply(const context& ctx,
             ctx.injection_context(), target));
 
     /*
-     * Convert the injection model set into a assets model set.
+     * Convert the injection model set into a logical model set.
      */
-    const auto cmset(injection_model_set_to_assets_model_set_chain::
+    const auto cmset(injection_model_set_to_logical_model_set_chain::
         apply(ctx, ims));
 
     /*
-     * Run all the assets transforms against the model set.
+     * Run all the logical transforms against the model set.
      */
     const auto cms(logical::transforms::model_production_chain::
-        apply(ctx.assets_context(), cmset));
+        apply(ctx.logical_context(), cmset));
 
     /*
      * Obtain the generation model set.
      */
-    auto gms(transforms::assets_model_to_generation_model_transform::
+    auto gms(transforms::logical_model_to_generation_model_transform::
         apply(ctx.generation_context(), cms));
 
     /*

@@ -26,7 +26,7 @@
 #endif
 
 /**
- * @brief Defines all features used by the assets model.
+ * @brief Defines all features used by the logical model.
  */
 namespace dogen::logical {
 }

@@ -1011,7 +1011,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#assets_context#</dia:string>
+            <dia:string>#logical_context#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#logical::transforms::context#</dia:string>
@@ -1528,7 +1528,7 @@
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#injection_model_to_assets_model_transform#</dia:string>
+        <dia:string>#injection_model_to_logical_model_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -1705,7 +1705,7 @@
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#injection_model_set_to_assets_model_set_chain#</dia:string>
+        <dia:string>#injection_model_set_to_logical_model_set_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -3048,7 +3048,7 @@ user defined stereotypes.#</dia:string>
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#assets_model_to_generation_model_transform#</dia:string>
+        <dia:string>#logical_model_to_generation_model_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -4139,7 +4139,7 @@ user defined stereotypes.#</dia:string>
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>#Adapts injection types into
-assets types.#</dia:string>
+logical types.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

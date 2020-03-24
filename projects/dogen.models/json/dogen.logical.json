@@ -1,5 +1,5 @@
 {
-  "documentation": "The logcal model defines the core entities that live in the logical\ndimension of MASD's conceptual model.\n\n@section assets_0 Overview\n\nThe logical model strives to provide a technical-space agnostic\nelement representation, designed for code generation. Injection models\nare obtained via frontends and transformed into \"bare\" logical models,\nat which point they can enter its pipeline. Within it, they are\nprocessed until they form a cohesive whole. They are then in a suitable\nstate for code generation.\n\n@section asset_1 Mission\n\nThe objectives of the logical model are:\n\n@li to represent all high-level entities that exist across a number\nof technical spaces used in software engineering. These entities\nare not necessarily limited to programming entities, though, of course,\nthese form the core set of elements we're interested in. Additional\nentities such as build sytems and high-level patterns such as GoF\nand others are also captured.\n\n@li to provide the tooling required to combine multiple models\ntogether into a bigger model - called the @e merged model.\n\n@li to ensure the consistency of the merged model via validation\nrules (such as verifying that all types have a definitions,\netc.).\n",
+  "documentation": "The logcal model defines the core entities that live in the logical\ndimension of MASD's conceptual model.\n\n@section logical_0 Overview\n\nThe logical model strives to provide a technical-space agnostic\nelement representation, designed for code generation. Injection models\nare obtained via frontends and transformed into \"bare\" logical models,\nat which point they can enter its pipeline. Within it, they are\nprocessed until they form a cohesive whole. They are then in a suitable\nstate for code generation.\n\n@section asset_1 Mission\n\nThe objectives of the logical model are:\n\n@li to represent all high-level entities that exist across a number\nof technical spaces used in software engineering. These entities\nare not necessarily limited to programming entities, though, of course,\nthese form the core set of elements we're interested in. Additional\nentities such as build sytems and high-level patterns such as GoF\nand others are also captured.\n\n@li to provide the tooling required to combine multiple models\ntogether into a bigger model - called the @e merged model.\n\n@li to ensure the consistency of the merged model via validation\nrules (such as verifying that all types have a definitions,\netc.).\n",
   "tagged_values": {
     "masd.injection.dia.comment": "true",
     "masd.injection.model_modules": "dogen.logical",
@@ -142,7 +142,7 @@
     },
     {
       "name": "entities::DeterminableOrigin",
-      "documentation": "A unit of assets that can be code generated.\n",
+      "documentation": "A unit of logical that can be code generated.\n",
       "stereotypes": [
         "masd::object_template"
       ],
@@ -273,7 +273,7 @@
         {
           "name": "simple",
           "type": "std::string",
-          "documentation": "Simple (non-qualified) name of the assets element at this address.\n\nThe simple name must be unique for a given location.\n"
+          "documentation": "Simple (non-qualified) name of the logical element at this address.\n\nThe simple name must be unique for a given location.\n"
         },
         {
           "name": "location",
@@ -349,7 +349,7 @@
     },
     {
       "name": "entities::location",
-      "documentation": "Identifies a hierarchy of containment within the asset space.\n\nElements exist at unique points within the asset space called @e\naddresses.  However, certain elements have the ability to contain\nother elements, creating in effect new dimensions in assets space. The\nlocation class keeps track of these dimensions. Note that the\nattributes of this class are hierarchical, i.e.  external modules\ncontain model modules and so forth. These attributes are best thought\nof as a single linked list, where segments of that linked list have\ndifferent meaning. However, because we care about these meanings, we\nimplemented the type with a number of linked lists, one per meaning.\n\nA location is not necessarily connected to modules, although these are\nthe main model elements that provide containment. For example, inner\nclasses are contained within classes; in assets terms it means a\nlocation should also have an \"object\" attribute to represent this\nrelationship.\n\nAlso, note that the location class itself encodes the address of the\nelement that owns that location; returning to the linked list idea,\nthe tail of the linked list is the name of the element, and the\nremaining linked list provides the location of the element.\n",
+      "documentation": "Identifies a hierarchy of containment within the asset space.\n\nElements exist at unique points within the asset space called @e\naddresses.  However, certain elements have the ability to contain\nother elements, creating in effect new dimensions in logical space. The\nlocation class keeps track of these dimensions. Note that the\nattributes of this class are hierarchical, i.e.  external modules\ncontain model modules and so forth. These attributes are best thought\nof as a single linked list, where segments of that linked list have\ndifferent meaning. However, because we care about these meanings, we\nimplemented the type with a number of linked lists, one per meaning.\n\nA location is not necessarily connected to modules, although these are\nthe main model elements that provide containment. For example, inner\nclasses are contained within classes; in logical terms it means a\nlocation should also have an \"object\" attribute to represent this\nrelationship.\n\nAlso, note that the location class itself encodes the address of the\nelement that owns that location; returning to the linked list idea,\nthe tail of the linked list is the name of the element, and the\nremaining linked list provides the location of the element.\n",
       "stereotypes": [
         "dogen::hashable"
       ],
@@ -373,13 +373,13 @@
         {
           "name": "element",
           "type": "std::string",
-          "documentation": "Name of the owning element, if any.\n\nFor coding elements which are located within other assets elements\nthat are not modules, such as attributes, inner classes, etc.\n"
+          "documentation": "Name of the owning element, if any.\n\nFor coding elements which are located within other logical elements\nthat are not modules, such as attributes, inner classes, etc.\n"
         }
       ]
     },
     {
       "name": "entities::element",
-      "documentation": "Represents a generic assets construct.\n\nAn element is anything of interest in a problem domain which needs to be\nexpressed in code generation. It covers both types (objects, enumerations, etc),\nmeta-types (object templates) and non-types (modules and backend specific entities).\n",
+      "documentation": "Represents a generic logical construct.\n\nAn element is anything of interest in a problem domain which needs to be\nexpressed in code generation. It covers both types (objects, enumerations, etc),\nmeta-types (object templates) and non-types (modules and backend specific entities).\n",
       "stereotypes": [
         "masd::visitable",
         "Element"
@@ -768,7 +768,7 @@
     },
     {
       "name": "transforms",
-      "documentation": "Houses all of the transformations supported by assets.\n",
+      "documentation": "Houses all of the transformations supported by logical.\n",
       "tagged_values": {
         "masd.injection.dia.comment": "true"
       },
@@ -776,7 +776,7 @@
     },
     {
       "name": "transforms::context",
-      "documentation": "\nContext for all assets transformations.\n\nContains all of the external data required for the transformations\nto execute. It's not ideal to have a huge \"global\" class, with lots\nof unrelated state; however, over time, we found that a number of\narguments were being supplied across the call graph, resulting in a\nlot of repetitive code. The context gathers together all of these.\n",
+      "documentation": "\nContext for all logical transformations.\n\nContains all of the external data required for the transformations\nto execute. It's not ideal to have a huge \"global\" class, with lots\nof unrelated state; however, over time, we found that a number of\narguments were being supplied across the call graph, resulting in a\nlot of repetitive code. The context gathers together all of these.\n",
       "stereotypes": [
         "dogen::typeable",
         "dogen::pretty_printable"
@@ -1619,7 +1619,7 @@
     },
     {
       "name": "entities::fully_qualified_representation",
-      "documentation": "Fully qualified representation for a assets identifier such as a name or name tree.\n",
+      "documentation": "Fully qualified representation for a logical identifier such as a name or name tree.\n",
       "stereotypes": [
         "dogen::hashable"
       ],
@@ -2182,7 +2182,7 @@
     },
     {
       "name": "entities::structural::object",
-      "documentation": "Representation of the class notion in the OOP paradigm.\n\nThe @e object is equivalent to a meta-class, but we decided against this\nname because all elements should also have the prefix meta - after all, assets\nis ameta-model. Since the word class cannot be used in c++ to name types, we\ndecided instead to use the word object.\n",
+      "documentation": "Representation of the class notion in the OOP paradigm.\n\nThe @e object is equivalent to a meta-class, but we decided against this\nname because all elements should also have the prefix meta - after all, logical\nis ameta-model. Since the word class cannot be used in c++ to name types, we\ndecided instead to use the word object.\n",
       "stereotypes": [
         "logical::meta_element",
         "Stateful",
@@ -2309,7 +2309,7 @@
     },
     {
       "name": "entities::structural::module",
-      "documentation": "Container for other assets elements.\n\nAggregates a group of logically related elements into a unit.\n",
+      "documentation": "Container for other logical elements.\n\nAggregates a group of logically related elements into a unit.\n",
       "stereotypes": [
         "logical::meta_element",
         "Container"
@@ -2481,7 +2481,7 @@
     },
     {
       "name": "features",
-      "documentation": "Defines all features used by the assets model.\n",
+      "documentation": "Defines all features used by the logical model.\n",
       "tagged_values": {
         "masd.injection.dia.comment": "true"
       },

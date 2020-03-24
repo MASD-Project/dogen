@@ -12570,7 +12570,7 @@ code: identation and dividers.#</dia:string>
         <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#A unit of assets that can be code generated.#</dia:string>
+        <dia:string>#A unit of logical that can be code generated.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

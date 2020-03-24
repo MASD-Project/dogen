@@ -36,7 +36,7 @@ namespace dogen::logical::entities {
  *
  * Elements exist at unique points within the asset space called @e
  * addresses.  However, certain elements have the ability to contain
- * other elements, creating in effect new dimensions in assets space. The
+ * other elements, creating in effect new dimensions in logical space. The
  * location class keeps track of these dimensions. Note that the
  * attributes of this class are hierarchical, i.e.  external modules
  * contain model modules and so forth. These attributes are best thought
@@ -46,7 +46,7 @@ namespace dogen::logical::entities {
  *
  * A location is not necessarily connected to modules, although these are
  * the main model elements that provide containment. For example, inner
- * classes are contained within classes; in assets terms it means a
+ * classes are contained within classes; in logical terms it means a
  * location should also have an "object" attribute to represent this
  * relationship.
  *
@@ -112,7 +112,7 @@ public:
     /**
      * @brief Name of the owning element, if any.
      *
-     * For coding elements which are located within other assets elements
+     * For coding elements which are located within other logical elements
      * that are not modules, such as attributes, inner classes, etc.
      */
     /**@{*/

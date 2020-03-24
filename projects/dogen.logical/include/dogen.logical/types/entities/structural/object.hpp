@@ -43,7 +43,7 @@ namespace dogen::logical::entities::structural {
  * @brief Representation of the class notion in the OOP paradigm.
  *
  * The @e object is equivalent to a meta-class, but we decided against this
- * name because all elements should also have the prefix meta - after all, assets
+ * name because all elements should also have the prefix meta - after all, logical
  * is ameta-model. Since the word class cannot be used in c++ to name types, we
  * decided instead to use the word object.
  */

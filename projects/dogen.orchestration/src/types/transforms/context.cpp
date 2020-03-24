@@ -25,12 +25,12 @@ namespace dogen::orchestration::transforms {
 context::context(
     const dogen::variability::transforms::context& variability_context,
     const dogen::injection::transforms::context& injection_context,
-    const dogen::logical::transforms::context& assets_context,
+    const dogen::logical::transforms::context& logical_context,
     const dogen::m2t::transforms::context& generation_context,
     const dogen::physical::transforms::context& physical_context)
     : variability_context_(variability_context),
       injection_context_(injection_context),
-      assets_context_(assets_context),
+      logical_context_(logical_context),
       generation_context_(generation_context),
       physical_context_(physical_context) { }
 
@@ -38,7 +38,7 @@ void context::swap(context& other) noexcept {
     using std::swap;
     swap(variability_context_, other.variability_context_);
     swap(injection_context_, other.injection_context_);
-    swap(assets_context_, other.assets_context_);
+    swap(logical_context_, other.logical_context_);
     swap(generation_context_, other.generation_context_);
     swap(physical_context_, other.physical_context_);
 }
@@ -46,7 +46,7 @@ void context::swap(context& other) noexcept {
 bool context::operator==(const context& rhs) const {
     return variability_context_ == rhs.variability_context_ &&
         injection_context_ == rhs.injection_context_ &&
-        assets_context_ == rhs.assets_context_ &&
+        logical_context_ == rhs.logical_context_ &&
         generation_context_ == rhs.generation_context_ &&
         physical_context_ == rhs.physical_context_;
 }
@@ -89,20 +89,20 @@ void context::injection_context(const dogen::injection::transforms::context&& v)
     injection_context_ = std::move(v);
 }
 
-const dogen::logical::transforms::context& context::assets_context() const {
-    return assets_context_;
+const dogen::logical::transforms::context& context::logical_context() const {
+    return logical_context_;
 }
 
-dogen::logical::transforms::context& context::assets_context() {
-    return assets_context_;
+dogen::logical::transforms::context& context::logical_context() {
+    return logical_context_;
 }
 
-void context::assets_context(const dogen::logical::transforms::context& v) {
-    assets_context_ = v;
+void context::logical_context(const dogen::logical::transforms::context& v) {
+    logical_context_ = v;
 }
 
-void context::assets_context(const dogen::logical::transforms::context&& v) {
-    assets_context_ = std::move(v);
+void context::logical_context(const dogen::logical::transforms::context&& v) {
+    logical_context_ = std::move(v);
 }
 
 const dogen::m2t::transforms::context& context::generation_context() const {

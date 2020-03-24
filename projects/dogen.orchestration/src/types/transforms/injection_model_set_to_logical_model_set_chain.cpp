@@ -21,13 +21,13 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
-#include "dogen.orchestration/types/transforms/injection_model_to_assets_model_transform.hpp"
-#include "dogen.orchestration/types/transforms/injection_model_set_to_assets_model_set_chain.hpp"
+#include "dogen.orchestration/types/transforms/injection_model_to_logical_model_transform.hpp"
+#include "dogen.orchestration/types/transforms/injection_model_set_to_logical_model_set_chain.hpp"
 
 namespace {
 
 const std::string transform_id(
-    "engine.transforms.injection_model_set_to_assets_model_set_chain");
+    "engine.transforms.injection_model_set_to_logical_model_set_chain");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
@@ -36,21 +36,21 @@ static logger lg(logger_factory(transform_id));
 namespace dogen::orchestration::transforms {
 
 logical::entities::model_set
-injection_model_set_to_assets_model_set_chain::
+injection_model_set_to_logical_model_set_chain::
 apply(const context& ctx, const injection::entities::model_set& ms) {
     const auto model_name(ms.target().name());
     tracing::scoped_chain_tracer stp(lg,
-        "injection model set to assets model set", transform_id, model_name,
-        *ctx.assets_context().tracer());
+        "injection model set to logical model set", transform_id, model_name,
+        *ctx.logical_context().tracer());
 
     /*
-     * First we convert the target injection model into an assets
+     * First we convert the target injection model into an logical
      * model. We must set the origin of the target model to target so
      * that further transforms can be applied such as the origin
      * transform.
      */
     logical::entities::model_set r;
-    using tf = injection_model_to_assets_model_transform;
+    using tf = injection_model_to_logical_model_transform;
     r.target(tf::apply(ctx, ms.target()));
     r.target().origin_type(logical::entities::origin_types::target);
 

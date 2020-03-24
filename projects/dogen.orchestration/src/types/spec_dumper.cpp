@@ -232,10 +232,10 @@ specs spec_dumper::dump(const configuration& cfg) const {
         using namespace transforms;
         scoped_context_manager scm(cfg, activity, empty_output_directory);
         const auto& ctx(scm.context());
-        const auto& fm(*ctx.assets_context().feature_model());
+        const auto& fm(*ctx.logical_context().feature_model());
         r.categories().push_back(create_features_category(fm));
 
-        const auto ds(ctx.assets_context().template_instantiation_domains());
+        const auto ds(ctx.logical_context().template_instantiation_domains());
         r.categories().push_back(create_variability_domains_category(ds));
         return r;
     }

@@ -816,7 +816,7 @@ C++ pointers, references and so on.#</dia:string>
             <dia:string>#The logcal model defines the core entities that live in the logical
 dimension of MASD's conceptual model.
 
-@section assets_0 Overview
+@section logical_0 Overview
 
 The logical model strives to provide a technical-space agnostic
 element representation, designed for code generation. Injection models
@@ -1621,7 +1621,7 @@ naming files, etc).#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Simple (non-qualified) name of the assets element at this address.
+            <dia:string>#Simple (non-qualified) name of the logical element at this address.
 
 The simple name must be unique for a given location.#</dia:string>
           </dia:attribute>
@@ -2209,7 +2209,7 @@ formatting.#</dia:string>
         <dia:string>#masd::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#A unit of assets that can be code generated.#</dia:string>
+        <dia:string>#A unit of logical that can be code generated.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2613,7 +2613,7 @@ formatting.#</dia:string>
 
 Elements exist at unique points within the asset space called @e
 addresses.  However, certain elements have the ability to contain
-other elements, creating in effect new dimensions in assets space. The
+other elements, creating in effect new dimensions in logical space. The
 location class keeps track of these dimensions. Note that the
 attributes of this class are hierarchical, i.e.  external modules
 contain model modules and so forth. These attributes are best thought
@@ -2623,7 +2623,7 @@ implemented the type with a number of linked lists, one per meaning.
 
 A location is not necessarily connected to modules, although these are
 the main model elements that provide containment. For example, inner
-classes are contained within classes; in assets terms it means a
+classes are contained within classes; in logical terms it means a
 location should also have an "object" attribute to represent this
 relationship.
 
@@ -2802,7 +2802,7 @@ that is, if the model name has multiple fields separated by dots, e.g. @ a.b.#</
           <dia:attribute name="comment">
             <dia:string>#Name of the owning element, if any.
 
-For coding elements which are located within other assets elements
+For coding elements which are located within other logical elements
 that are not modules, such as attributes, inner classes, etc.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -2846,7 +2846,7 @@ that are not modules, such as attributes, inner classes, etc.#</dia:string>
         <dia:string>#masd::visitable, Element#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Represents a generic assets construct.
+        <dia:string>#Represents a generic logical construct.
 
 An element is anything of interest in a problem domain which needs to be
 expressed in code generation. It covers both types (objects, enumerations, etc),
@@ -5220,7 +5220,7 @@ If not present, user did not make any statements with regards to finality.#</dia
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Defines positions of names in 
+            <dia:string>#Defines positions of names in
 regions of logical space.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
@@ -6873,7 +6873,7 @@ model.#</dia:string>
       <dia:attribute name="comment">
         <dia:string>##DOGEN masd.cpp.types.class_forward_declarations.enabled=true
 
-Context for all assets transformations.
+Context for all logical transformations.
 
 Contains all of the external data required for the transformations
 to execute. It's not ideal to have a huge "global" class, with lots
@@ -9376,7 +9376,7 @@ user choices.#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Houses all of the transformations supported by assets.
+            <dia:string>#Houses all of the transformations supported by logical.
 
 #DOGEN masd.injection.dia.comment=true#</dia:string>
           </dia:attribute>
@@ -24349,7 +24349,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#dogen::hashable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Fully qualified representation for a assets identifier such as a name or name tree.#</dia:string>
+        <dia:string>#Fully qualified representation for a logical identifier such as a name or name tree.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -31230,7 +31230,7 @@ as a modeline.#</dia:string>
         <dia:string>#Representation of the class notion in the OOP paradigm.
 
 The @e object is equivalent to a meta-class, but we decided against this
-name because all elements should also have the prefix meta - after all, assets
+name because all elements should also have the prefix meta - after all, logical
 is ameta-model. Since the word class cannot be used in c++ to name types, we
 decided instead to use the word object.#</dia:string>
       </dia:attribute>
@@ -32159,7 +32159,7 @@ decided instead to use the word object.#</dia:string>
         <dia:string>#logical::meta_element, Container#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Container for other assets elements.
+        <dia:string>#Container for other logical elements.
 
 Aggregates a group of logically related elements into a unit.#</dia:string>
       </dia:attribute>
@@ -34127,7 +34127,7 @@ to structural modeling.
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Defines all features used by the assets model.
+            <dia:string>#Defines all features used by the logical model.
 
 #DOGEN masd.injection.dia.comment=true#</dia:string>
           </dia:attribute>

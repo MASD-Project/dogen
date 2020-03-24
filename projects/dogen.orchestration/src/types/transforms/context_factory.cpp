@@ -175,8 +175,8 @@ make_context(const configuration& cfg, const std::string& activity,
      */
     orchestration::transforms::context r;
     r.variability_context(vctx);
-    r.assets_context().compatibility_mode(cm);
-    r.assets_context().template_instantiation_domains(
+    r.logical_context().compatibility_mode(cm);
+    r.logical_context().template_instantiation_domains(
         vctx.template_instantiation_domains());
 
     /*
@@ -200,7 +200,7 @@ make_context(const configuration& cfg, const std::string& activity,
     using variability::transforms::feature_model_production_chain;
     const auto fm(feature_model_production_chain::apply(vctx, ftrp, frp));
     r.injection_context().feature_model(fm);
-    r.assets_context().feature_model(fm);
+    r.logical_context().feature_model(fm);
     r.generation_context().feature_model(fm);
     r.physical_context().feature_model(fm);
 
@@ -218,14 +218,14 @@ make_context(const configuration& cfg, const std::string& activity,
      * Setup the archetype location repository.
      */
     r.injection_context().archetype_location_repository(alrp);
-    r.assets_context().archetype_location_repository(alrp);
+    r.logical_context().archetype_location_repository(alrp);
     r.generation_context().archetype_location_repository(alrp);
 
     /*
      * Setup the tracer.
      */
     r.injection_context().tracer(tracer);
-    r.assets_context().tracer(tracer);
+    r.logical_context().tracer(tracer);
     r.generation_context().tracer(tracer);
     r.physical_context().tracer(tracer);
 

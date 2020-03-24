@@ -31,7 +31,7 @@
 namespace dogen::logical::entities {
 
 /**
- * @brief Fully qualified representation for a assets identifier such as a name or name tree.
+ * @brief Fully qualified representation for a logical identifier such as a name or name tree.
  */
 class fully_qualified_representation final {
 public:

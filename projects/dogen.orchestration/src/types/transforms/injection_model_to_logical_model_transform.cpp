@@ -47,12 +47,12 @@
 #include "dogen.orchestration/types/helpers/stereotypes_helper.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"
 #include "dogen.orchestration/types/transforms/transform_exception.hpp"
-#include "dogen.orchestration/types/transforms/injection_model_to_assets_model_transform.hpp"
+#include "dogen.orchestration/types/transforms/injection_model_to_logical_model_transform.hpp"
 
 namespace {
 
 const std::string transform_id(
-    "engine.transforms.injection_model_to_assets_model_transform");
+    "engine.transforms.injection_model_to_logical_model_transform");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -106,9 +106,9 @@ logical::entities::technical_space to_technical_space(const std::string& s) {
 }
 
 logical::entities::location
-injection_model_to_assets_model_transform::
+injection_model_to_logical_model_transform::
 create_location(const context& ctx, const injection::entities::model& m) {
-    const auto& fm(*ctx.assets_context().feature_model());
+    const auto& fm(*ctx.logical_context().feature_model());
     const auto fg(features::model_location::make_feature_group(fm));
     const auto scfg(features::model_location::make_static_configuration(fg, m));
 
@@ -122,7 +122,7 @@ create_location(const context& ctx, const injection::entities::model& m) {
 }
 
 logical::entities::static_stereotypes
-injection_model_to_assets_model_transform::
+injection_model_to_logical_model_transform::
 compute_element_type(
     const std::list<logical::entities::static_stereotypes>& st,
     const std::string& fallback_element_type) {
@@ -156,7 +156,7 @@ compute_element_type(
     return h.from_string(fallback_element_type);
 }
 
-void injection_model_to_assets_model_transform::
+void injection_model_to_logical_model_transform::
 process_element(const helpers::adapter& ad,
     const logical::entities::location& l,
     const injection::entities::element& e, logical::entities::model& m) {
@@ -292,11 +292,11 @@ process_element(const helpers::adapter& ad,
     } }
 }
 
-logical::entities::model injection_model_to_assets_model_transform::
+logical::entities::model injection_model_to_logical_model_transform::
 apply(const context& ctx, const injection::entities::model& m) {
     tracing::scoped_transform_tracer stp(lg,
-        "injection model to assets model transform", transform_id, m.name(),
-        *ctx.assets_context().tracer(), m);
+        "injection model to logical model transform", transform_id, m.name(),
+        *ctx.logical_context().tracer(), m);
 
     /*
      * First we compute the model name and technical space by reading
@@ -315,7 +315,7 @@ apply(const context& ctx, const injection::entities::model& m) {
 
     /*
      * Then we populate all model elements by adapting the injection
-     * elements into assets elements.
+     * elements into logical elements.
      */
     const helpers::adapter ad;
     for (const auto& e : m.elements()) {

@@ -36,7 +36,7 @@
 namespace dogen::logical::entities::structural {
 
 /**
- * @brief Container for other assets elements.
+ * @brief Container for other logical elements.
  *
  * Aggregates a group of logically related elements into a unit.
  */

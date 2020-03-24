@@ -30,12 +30,12 @@
 #include "dogen.logical/types/entities/elements_traversal.hpp"
 #include "dogen.m2t/io/entities/model_io.hpp"
 #include "dogen.orchestration/types/transforms/transform_exception.hpp"
-#include "dogen.orchestration/types/transforms/assets_model_to_generation_model_transform.hpp"
+#include "dogen.orchestration/types/transforms/logical_model_to_generation_model_transform.hpp"
 
 namespace {
 
 const std::string transform_id(
-    "engine.transforms.assets_model_to_generation_model_transform");
+    "engine.transforms.logical_model_to_generation_model_transform");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 
@@ -98,7 +98,7 @@ private:
 
 }
 
-std::size_t assets_model_to_generation_model_transform::
+std::size_t logical_model_to_generation_model_transform::
 compute_total_size(const logical::entities::model& m) {
     std::size_t r;
     r = m.structural_elements().modules().size();
@@ -124,7 +124,7 @@ compute_total_size(const logical::entities::model& m) {
     return r;
 }
 
-m2t::entities::model assets_model_to_generation_model_transform::
+m2t::entities::model logical_model_to_generation_model_transform::
 apply(const logical::entities::model& m) {
     m2t::entities::model r;
     r.name(m.name());
@@ -158,11 +158,11 @@ apply(const logical::entities::model& m) {
 }
 
 std::list<m2t::entities::model>
-assets_model_to_generation_model_transform::
+logical_model_to_generation_model_transform::
 apply(const m2t::transforms::context& ctx,
     const std::list<logical::entities::model>& ms) {
     tracing::scoped_transform_tracer stp(lg,
-        "assets model to generation model transform",
+        "logical model to generation model transform",
         transform_id, *ctx.tracer(), ms);
 
     std::list<m2t::entities::model> r;

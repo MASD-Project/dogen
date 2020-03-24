@@ -80,7 +80,7 @@
           "type": "injection::transforms::context"
         },
         {
-          "name": "assets_context",
+          "name": "logical_context",
           "type": "logical::transforms::context"
         },
         {
@@ -109,14 +109,14 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::injection_model_to_assets_model_transform",
+      "name": "transforms::injection_model_to_logical_model_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::injection_model_set_to_assets_model_set_chain",
+      "name": "transforms::injection_model_set_to_logical_model_set_chain",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
@@ -170,7 +170,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::assets_model_to_generation_model_transform",
+      "name": "transforms::logical_model_to_generation_model_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

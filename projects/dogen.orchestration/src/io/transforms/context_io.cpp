@@ -33,7 +33,7 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"__type__\": " << "\"dogen::orchestration::transforms::context\"" << ", "
       << "\"variability_context\": " << v.variability_context() << ", "
       << "\"injection_context\": " << v.injection_context() << ", "
-      << "\"assets_context\": " << v.assets_context() << ", "
+      << "\"logical_context\": " << v.logical_context() << ", "
       << "\"generation_context\": " << v.generation_context() << ", "
       << "\"physical_context\": " << v.physical_context()
       << " }";

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_ASSETS_MODEL_TO_GENERATION_MODEL_TRANSFORM_HPP
-#define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_ASSETS_MODEL_TO_GENERATION_MODEL_TRANSFORM_HPP
+#ifndef DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_LOGICAL_MODEL_TO_GENERATION_MODEL_TRANSFORM_HPP
+#define DOGEN_ORCHESTRATION_TYPES_TRANSFORMS_LOGICAL_MODEL_TO_GENERATION_MODEL_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,7 +32,7 @@
 
 namespace dogen::orchestration::transforms {
 
-class assets_model_to_generation_model_transform final {
+class logical_model_to_generation_model_transform final {
 private:
     static std::size_t
     compute_total_size(const logical::entities::model& em);

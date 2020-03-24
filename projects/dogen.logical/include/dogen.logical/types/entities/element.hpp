@@ -46,7 +46,7 @@
 namespace dogen::logical::entities {
 
 /**
- * @brief Represents a generic assets construct.
+ * @brief Represents a generic logical construct.
  *
  * An element is anything of interest in a problem domain which needs to be
  * expressed in code generation. It covers both types (objects, enumerations, etc),

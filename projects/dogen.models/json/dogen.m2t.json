@@ -738,7 +738,7 @@
     },
     {
       "name": "entities::DeterminableOrigin",
-      "documentation": "A unit of assets that can be code generated.\n",
+      "documentation": "A unit of logical that can be code generated.\n",
       "stereotypes": [
         "masd::object_template"
       ],
