@@ -25,24 +25,52 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include "dogen.physical/types/entities/name.hpp"
 
 namespace dogen::physical::helpers {
 
+/**
+ * @brief Builds a physical name.
+ */
 class name_builder final {
 public:
-    name_builder() = default;
-    name_builder(const name_builder&) = default;
-    name_builder(name_builder&&) = default;
-    ~name_builder() = default;
-    name_builder& operator=(const name_builder&) = default;
+    /**
+     * @brief Adds a backend to the name.
+     */
+    name_builder& backend(const std::string& s);
+
+    /**
+     * @brief Adds a part to the name.
+     */
+    name_builder& part(const std::string& s);
+
+    /**
+     * @brief Adds a facet to the name.
+     */
+    name_builder& facet(const std::string& s);
+
+    /**
+     * @brief Adds an archetype to the name.
+     */
+    name_builder& archetype(const std::string& s);
+
+private:
+    /**
+     * @brief Ensures the current state is a valid name.
+     *
+     * Note that the components of the name are hierarchical, so
+     * archetypes require a backend, part and facet and parts require
+     * a backend. The exception is facet, which does not require a
+     * part.
+     */
+    void validate();
 
 public:
-    bool operator==(const name_builder& rhs) const;
-    bool operator!=(const name_builder& rhs) const {
-        return !this->operator==(rhs);
-    }
+    entities::name build();
 
+private:
+    entities::name name_;
 };
 
 }
