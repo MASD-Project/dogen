@@ -22,6 +22,11 @@
 
 namespace dogen::m2t::cpp {
 
+std::string traits::kernel() {
+    static std::string r("masd");
+    return r;
+}
+
 std::string traits::backend() {
     static std::string r("masd.cpp");
     return r;
@@ -64,6 +69,31 @@ std::string traits::header_guard() {
 
 std::string traits::inclusion_required() {
     static std::string r("inclusion_required");
+    return r;
+}
+
+std::string traits::empty_part() {
+    static std::string r;
+    return r;
+}
+
+std::string traits::public_headers_part() {
+    static std::string r("public_headers");
+    return r;
+}
+
+std::string traits::implementation_part() {
+    static std::string r("implementation");
+    return r;
+}
+
+std::string traits::templates_part() {
+    static std::string r("templates");
+    return r;
+}
+
+std::string traits::tests_part() {
+    static std::string r("tests");
     return r;
 }
 

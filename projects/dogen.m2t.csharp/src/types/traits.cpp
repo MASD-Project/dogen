@@ -52,6 +52,11 @@ std::string traits::postfix() {
     return r;
 }
 
+std::string traits::empty_part() {
+    static std::string r;
+    return r;
+}
+
 std::string traits::backend_directory_name() {
     static std::string r("masd.csharp.directory");
     return r;

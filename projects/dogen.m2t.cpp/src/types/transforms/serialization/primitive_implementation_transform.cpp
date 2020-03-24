@@ -44,7 +44,8 @@ std::string primitive_implementation_transform::id() const {
 physical::entities::location
 primitive_implementation_transform::archetype_location() const {
     static physical::entities::location
-        r(cpp::traits::backend(), traits::facet(),
+        r(cpp::traits::kernel(), cpp::traits::backend(),
+          cpp::traits::implementation_part(), traits::facet(),
           primitive_implementation_transform::static_id());
     return r;
 }

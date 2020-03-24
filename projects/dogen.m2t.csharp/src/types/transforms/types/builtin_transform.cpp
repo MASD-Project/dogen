@@ -37,7 +37,8 @@ std::string builtin_transform::id() const {
 
 physical::entities::location builtin_transform::archetype_location() const {
     static physical::entities::location
-        r(csharp::traits::backend(), traits::facet(),
+        r(csharp::traits::kernel(), csharp::traits::backend(),
+          csharp::traits::empty_part(), traits::facet(),
           builtin_transform::static_id());
     return r;
 }

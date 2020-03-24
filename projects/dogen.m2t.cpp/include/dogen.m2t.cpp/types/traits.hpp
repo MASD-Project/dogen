@@ -35,6 +35,11 @@ namespace dogen::m2t::cpp {
  */
 struct traits {
     /**
+     * @brief Name of the masd kernel.
+     */
+    static std::string kernel();
+
+    /**
      * @brief Name of this backend.
      */
     static std::string backend();
@@ -94,6 +99,17 @@ struct traits {
      * @brief Is inclusion required for this type and formatter.
      */
     static std::string inclusion_required();
+
+    /**
+     * @brief Parts available in this backend.
+     */
+    /**@{*/
+    static std::string empty_part();
+    static std::string public_headers_part();
+    static std::string implementation_part();
+    static std::string templates_part();
+    static std::string tests_part();
+    /**@}*/
 
     struct cpp {
         /**

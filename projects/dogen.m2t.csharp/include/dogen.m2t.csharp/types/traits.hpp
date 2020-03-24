@@ -40,7 +40,7 @@ struct traits {
     static std::string enabled();
 
     /**
-     * @brief Name of this kernel.
+     * @brief Name of the masd kernel.
      */
     static std::string kernel();
 
@@ -68,6 +68,13 @@ struct traits {
      * @brief Post-fix to apply to file names.
      */
     static std::string postfix();
+
+    /**
+     * @brief Parts available in this backend.
+     */
+    /**@{*/
+    static std::string empty_part();
+    /**@}*/
 
     struct csharp {
         struct helper {

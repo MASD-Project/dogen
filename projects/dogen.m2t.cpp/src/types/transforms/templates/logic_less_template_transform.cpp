@@ -44,7 +44,8 @@ std::string logic_less_template_transform::id() const {
 physical::entities::location
 logic_less_template_transform::archetype_location() const {
     static physical::entities::location
-        r(cpp::traits::backend(), traits::facet(),
+        r(cpp::traits::kernel(), cpp::traits::backend(),
+          cpp::traits::templates_part(), traits::facet(),
           logic_less_template_transform::static_id());
     return r;
 }

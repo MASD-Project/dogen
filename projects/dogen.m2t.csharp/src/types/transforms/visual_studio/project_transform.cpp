@@ -43,7 +43,8 @@ std::string project_transform::id() const {
 physical::entities::location
 project_transform::archetype_location() const {
     static physical::entities::location
-        r(csharp::traits::backend(), traits::facet(),
+        r(csharp::traits::kernel(), csharp::traits::backend(),
+          csharp::traits::empty_part(), traits::facet(),
           project_transform::static_id());
     return r;
 }

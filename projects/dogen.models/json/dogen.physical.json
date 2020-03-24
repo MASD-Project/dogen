@@ -43,9 +43,19 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
+          "name": "kernel",
+          "type": "std::string",
+          "documentation": "Top-most container for the physical space.\n\nThe kernel is always expected to be  @e masd.\n"
+        },
+        {
           "name": "backend",
           "type": "std::string",
           "documentation": "Name of the backend that owns this field, if any.\n"
+        },
+        {
+          "name": "part",
+          "type": "std::string",
+          "documentation": "Part in which we are located. Facets span multiple parts.\n"
         },
         {
           "name": "facet",
@@ -1135,6 +1145,20 @@
           "type": "location"
         }
       ]
+    },
+    {
+      "name": "helpers::name_factory",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::name_builder",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
