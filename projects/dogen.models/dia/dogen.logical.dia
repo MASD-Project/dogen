@@ -4361,13 +4361,13 @@ Leaves are types concrete types which have a parent.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O27">
       <dia:attribute name="obj_pos">
-        <dia:point val="-228,-56"/>
+        <dia:point val="-229,-56"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-228.05,-56.05;-210.51,-50.75"/>
+        <dia:rectangle val="-229.05,-56.05;-211.51,-50.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-228,-56"/>
+        <dia:point val="-229,-56"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.440000000000001"/>
@@ -4545,13 +4545,13 @@ This is used to break cycles where required.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O28">
       <dia:attribute name="obj_pos">
-        <dia:point val="-244,-70"/>
+        <dia:point val="-240,-70"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-244.05,-70.05;-227.28,-58.35"/>
+        <dia:rectangle val="-240.05,-70.05;-223.28,-58.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-244,-70"/>
+        <dia:point val="-240,-70"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.669999999999998"/>
@@ -4912,13 +4912,13 @@ If not present, user did not make any statements with regards to finality.#</dia
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O29">
       <dia:attribute name="obj_pos">
-        <dia:point val="-215,-46"/>
+        <dia:point val="-216,-46"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-215.05,-46.05;-204.825,-42.95"/>
+        <dia:rectangle val="-216.05,-46.05;-205.825,-42.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-215,-46"/>
+        <dia:point val="-216,-46"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.125"/>
@@ -5026,7 +5026,7 @@ If not present, user did not make any statements with regards to finality.#</dia
         <dia:point val="-207,-51.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-209.988,-51.65;-206.15,-45.9996"/>
+        <dia:rectangle val="-210.988,-51.65;-206.15,-45.9996"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5034,8 +5034,8 @@ If not present, user did not make any statements with regards to finality.#</dia
       <dia:attribute name="orth_points">
         <dia:point val="-207,-51.6"/>
         <dia:point val="-207,-49"/>
-        <dia:point val="-209.938,-49"/>
-        <dia:point val="-209.938,-46.0496"/>
+        <dia:point val="-210.938,-49"/>
+        <dia:point val="-210.938,-46.0496"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -5065,19 +5065,19 @@ If not present, user did not make any statements with regards to finality.#</dia
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O31">
       <dia:attribute name="obj_pos">
-        <dia:point val="-235.665,-58.4"/>
+        <dia:point val="-231.665,-58.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-236.515,-58.45;-209.888,-45.95"/>
+        <dia:rectangle val="-232.515,-58.45;-210.887,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-235.665,-58.4"/>
-        <dia:point val="-235.665,-49"/>
-        <dia:point val="-209.938,-49"/>
-        <dia:point val="-209.938,-46"/>
+        <dia:point val="-231.665,-58.4"/>
+        <dia:point val="-231.665,-49"/>
+        <dia:point val="-210.938,-49"/>
+        <dia:point val="-210.938,-46"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -5107,19 +5107,19 @@ If not present, user did not make any statements with regards to finality.#</dia
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O32">
       <dia:attribute name="obj_pos">
-        <dia:point val="-219.28,-50.8"/>
+        <dia:point val="-220.28,-50.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-220.13,-50.85;-209.888,-45.95"/>
+        <dia:rectangle val="-221.13,-50.85;-210.887,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-219.28,-50.8"/>
-        <dia:point val="-219.28,-49"/>
-        <dia:point val="-209.938,-49"/>
-        <dia:point val="-209.938,-46"/>
+        <dia:point val="-220.28,-50.8"/>
+        <dia:point val="-220.28,-49"/>
+        <dia:point val="-210.938,-49"/>
+        <dia:point val="-210.938,-46"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -5152,7 +5152,7 @@ If not present, user did not make any statements with regards to finality.#</dia
         <dia:point val="-209.243,-59"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-210.093,-59.05;-208.393,-45.9996"/>
+        <dia:rectangle val="-210.988,-59.05;-208.393,-45.9996"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5160,8 +5160,8 @@ If not present, user did not make any statements with regards to finality.#</dia
       <dia:attribute name="orth_points">
         <dia:point val="-209.243,-59"/>
         <dia:point val="-209.243,-49"/>
-        <dia:point val="-209.938,-49"/>
-        <dia:point val="-209.938,-46.0496"/>
+        <dia:point val="-210.938,-49"/>
+        <dia:point val="-210.938,-46.0496"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -21842,13 +21842,13 @@ Temporary data structure used to build trees of names.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O148">
       <dia:attribute name="obj_pos">
-        <dia:point val="-201,-46"/>
+        <dia:point val="-203,-46"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-201.05,-46.05;-183.895,-40.75"/>
+        <dia:rectangle val="-203.05,-46.05;-185.895,-40.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-201,-46"/>
+        <dia:point val="-203,-46"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.055"/>
@@ -23974,7 +23974,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-201.5,-34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-202.25,-40.85;-192.272,-33.2"/>
+        <dia:rectangle val="-202.25,-40.85;-194.273,-33.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23982,8 +23982,8 @@ Temporary data structure used to build trees of names.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-201.5,-34"/>
         <dia:point val="-201.5,-37"/>
-        <dia:point val="-192.472,-37"/>
-        <dia:point val="-192.472,-40.8"/>
+        <dia:point val="-194.472,-37"/>
+        <dia:point val="-194.472,-40.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
