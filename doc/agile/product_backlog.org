@@ -12465,6 +12465,27 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Consider using command line indicators                            :story:
+
+Dogen is, by design, pretty quick to execute. However, we may want to
+consider supporting a command line progress bar. This would be useful
+when we use relational dumping, for example.
+
+Links:
+
+- [[https://github.com/p-ranav/indicators][indicators]]
+
+*** Consider adding support for tabulate                              :story:
+
+This library allows dumping tables to the command line. It would be
+nice if we could have a facet that allows IO as a table for certain
+types.
+
+Links:
+
+- [[https://github.com/p-ranav/tabulate][tabulate]]
+
+
 *** Consider visualisation like source trail                          :story:
 
 Once we move to org files, we will no longer be able to visualise the
