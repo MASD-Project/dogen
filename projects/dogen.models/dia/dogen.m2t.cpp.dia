@@ -363,7 +363,7 @@
         <dia:point val="-6,206"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-6.05,205.95;29.585,217.65"/>
+        <dia:rectangle val="-6.05,205.95;29.585,218.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-6,206"/>
@@ -372,7 +372,7 @@
         <dia:real val="35.535000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="11.6"/>
+        <dia:real val="12.4"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#model_to_text_transform#</dia:string>
@@ -517,6 +517,36 @@
           </dia:attribute>
           <dia:attribute name="query">
             <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="parameters"/>
+        </dia:composite>
+        <dia:composite type="umloperation">
+          <dia:attribute name="name">
+            <dia:string>#name#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="stereotype">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#physical::entities::name#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="true"/>
+          </dia:attribute>
+          <dia:attribute name="inheritance_type">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="query">
+            <dia:boolean val="true"/>
           </dia:attribute>
           <dia:attribute name="class_scope">
             <dia:boolean val="false"/>
