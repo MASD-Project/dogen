@@ -25,24 +25,22 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include "dogen.physical/types/entities/name.hpp"
 
 namespace dogen::physical::helpers {
 
+/**
+ * @brief Constructs physical names.
+ */
 class name_factory final {
 public:
-    name_factory() = default;
-    name_factory(const name_factory&) = default;
-    name_factory(name_factory&&) = default;
-    ~name_factory() = default;
-    name_factory& operator=(const name_factory&) = default;
+    entities::name make(const std::string& backend,
+        const std::string& facet, const std::string& archetype);
 
-public:
-    bool operator==(const name_factory& rhs) const;
-    bool operator!=(const name_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    entities::name make(const std::string& backend,
+        const std::string& part, const std::string& facet,
+        const std::string& archetype);
 };
 
 }

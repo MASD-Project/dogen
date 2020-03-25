@@ -18,12 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.physical/types/helpers/name_builder.hpp"
 #include "dogen.physical/types/helpers/name_factory.hpp"
 
 namespace dogen::physical::helpers {
 
-bool name_factory::operator==(const name_factory& /*rhs*/) const {
-    return true;
+entities::name name_factory::make(const std::string& backend,
+    const std::string& facet, const std::string& archetype) {
+    name_builder b;
+    b.backend(backend);
+    b.facet(facet);
+    b.archetype(archetype);
+    return b.build();
+}
+
+entities::name name_factory::make(const std::string& backend,
+    const std::string& part, const std::string& facet,
+    const std::string& archetype) {
+    name_builder b;
+    b.backend(backend);
+    b.part(part);
+    b.facet(facet);
+    b.archetype(archetype);
+    return b.build();
 }
 
 }
