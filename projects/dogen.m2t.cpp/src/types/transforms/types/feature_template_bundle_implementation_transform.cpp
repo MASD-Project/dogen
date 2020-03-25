@@ -22,6 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/string/splitter.hpp"
 #include "dogen.variability/types/helpers/enum_mapper.hpp"
+#include "dogen.physical/types/helpers/name_factory.hpp"
 #include "dogen.logical/types/entities/variability/feature_template_bundle.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.m2t/types/formatters/sequence_formatter.hpp"
@@ -51,6 +52,15 @@ feature_template_bundle_implementation_transform::archetype_location() const {
         r(cpp::traits::kernel(), cpp::traits::backend(),
           cpp::traits::implementation_part(), traits::facet(),
           feature_template_bundle_implementation_transform::static_id());
+    return r;
+}
+
+physical::entities::name
+feature_template_bundle_implementation_transform::physical_name() const {
+    using physical::helpers::name_factory;
+    static const auto r(name_factory::make(cpp::traits::backend(),
+        cpp::traits::implementation_part(), traits::facet(),
+        feature_template_bundle_implementation_transform::static_id()));
     return r;
 }
 

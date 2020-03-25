@@ -4,6 +4,7 @@
 <#@ masd.stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ masd.stitch.inclusion_dependency="dogen.m2t/types/formatters/sequence_formatter.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.utility/types/log/logger.hpp" #>
+<#@ masd.stitch.inclusion_dependency="dogen.physical/types/helpers/name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/entities/structural/enumeration.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.logical/types/helpers/meta_name_factory.hpp" #>
 <#@ masd.stitch.inclusion_dependency="dogen.m2t.cpp/types/traits.hpp" #>
@@ -35,6 +36,15 @@ enum_implementation_transform::archetype_location() const {
         r(cpp::traits::kernel(), cpp::traits::backend(),
           cpp::traits::tests_part(), traits::facet(),
           enum_implementation_transform::static_id());
+    return r;
+}
+
+physical::entities::name
+enum_implementation_transform::physical_name() const {
+    using physical::helpers::name_factory;
+    static const auto r(name_factory::make(cpp::traits::backend(),
+        cpp::traits::tests_part(), traits::facet(),
+        enum_implementation_transform::static_id()));
     return r;
 }
 

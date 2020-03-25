@@ -22,6 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.m2t/types/formatters/sequence_formatter.hpp"
+#include "dogen.physical/types/helpers/name_factory.hpp"
 #include "dogen.logical/types/entities/structural/primitive.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.m2t.cpp/types/traits.hpp"
@@ -51,6 +52,15 @@ primitive_implementation_transform::archetype_location() const {
         r(cpp::traits::kernel(), cpp::traits::backend(),
           cpp::traits::implementation_part(), traits::facet(),
           primitive_implementation_transform::static_id());
+    return r;
+}
+
+physical::entities::name
+primitive_implementation_transform::physical_name() const {
+    using physical::helpers::name_factory;
+    static const auto r(name_factory::make(cpp::traits::backend(),
+        cpp::traits::implementation_part(), traits::facet(),
+        primitive_implementation_transform::static_id()));
     return r;
 }
 

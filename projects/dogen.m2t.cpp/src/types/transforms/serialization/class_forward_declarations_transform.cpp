@@ -20,6 +20,7 @@
  */
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.m2t.cpp/types/traits.hpp"
+#include "dogen.physical/types/helpers/name_factory.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.m2t.cpp/types/transforms/traits.hpp"
 #include "dogen.m2t.cpp/types/transforms/assistant.hpp"
@@ -44,6 +45,15 @@ class_forward_declarations_transform::archetype_location() const {
         r(cpp::traits::kernel(), cpp::traits::backend(),
           cpp::traits::public_headers_part(), traits::facet(),
           class_forward_declarations_transform::static_id());
+    return r;
+}
+
+physical::entities::name
+class_forward_declarations_transform::physical_name() const {
+    using physical::helpers::name_factory;
+    static const auto r(name_factory::make(cpp::traits::backend(),
+        cpp::traits::public_headers_part(), traits::facet(),
+        class_forward_declarations_transform::static_id()));
     return r;
 }
 

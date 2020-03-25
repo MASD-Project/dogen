@@ -25,6 +25,7 @@
 #include "dogen.m2t/types/formatters/sequence_formatter.hpp"
 #include "dogen.m2t.cpp/types/traits.hpp"
 #include "dogen.m2t.cpp/types/transforms/traits.hpp"
+#include "dogen.physical/types/helpers/name_factory.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/build/cmakelists.hpp"
 #include "dogen.m2t.cpp/types/transforms/assistant.hpp"
@@ -48,6 +49,15 @@ archetype_location() const {
         r(cpp::traits::kernel(), cpp::traits::backend(),
           cpp::traits::tests_part(), traits::facet(),
           cmakelists_transform::static_id());
+    return r;
+}
+
+physical::entities::name
+cmakelists_transform::physical_name() const {
+    using physical::helpers::name_factory;
+    static const auto r(name_factory::make(cpp::traits::backend(),
+        cpp::traits::tests_part(), traits::facet(),
+        cmakelists_transform::static_id()));
     return r;
 }
 

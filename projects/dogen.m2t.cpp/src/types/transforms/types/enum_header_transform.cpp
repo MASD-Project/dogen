@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.physical/types/helpers/name_factory.hpp"
 #include "dogen.logical/types/entities/structural/enumeration.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.m2t/types/formatters/sequence_formatter.hpp"
@@ -44,6 +45,15 @@ enum_header_transform::archetype_location() const {
         r(cpp::traits::kernel(), cpp::traits::backend(),
           cpp::traits::public_headers_part(), traits::facet(),
           enum_header_transform::static_id());
+    return r;
+}
+
+physical::entities::name
+enum_header_transform::physical_name() const {
+    using physical::helpers::name_factory;
+    static const auto r(name_factory::make(cpp::traits::backend(),
+        cpp::traits::public_headers_part(), traits::facet(),
+        enum_header_transform::static_id()));
     return r;
 }
 

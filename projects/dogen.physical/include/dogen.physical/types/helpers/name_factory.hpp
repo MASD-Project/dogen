@@ -35,10 +35,10 @@ namespace dogen::physical::helpers {
  */
 class name_factory final {
 public:
-    entities::name make(const std::string& backend,
+    static entities::name make(const std::string& backend,
         const std::string& facet, const std::string& archetype);
 
-    entities::name make(const std::string& backend,
+    static entities::name make(const std::string& backend,
         const std::string& part, const std::string& facet,
         const std::string& archetype);
 };

@@ -22,6 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/case_conv.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.physical/types/helpers/name_factory.hpp"
 #include "dogen.logical/types/entities/structural/object.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.m2t/types/formatters/sequence_formatter.hpp"
@@ -51,6 +52,15 @@ object_odb_options_transform::archetype_location() const {
         r(cpp::traits::kernel(), cpp::traits::backend(),
           cpp::traits::implementation_part(), traits::facet(),
           object_odb_options_transform::static_id());
+    return r;
+}
+
+physical::entities::name
+object_odb_options_transform::physical_name() const {
+    using physical::helpers::name_factory;
+    static const auto r(name_factory::make(cpp::traits::backend(),
+        cpp::traits::implementation_part(), traits::facet(),
+        object_odb_options_transform::static_id()));
     return r;
 }
 
