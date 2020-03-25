@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.physical/types/helpers/name_factory.hpp"
 #include "dogen.logical/types/entities/structural/builtin.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.m2t.csharp/types/traits.hpp"
@@ -40,6 +41,14 @@ physical::entities::location builtin_transform::archetype_location() const {
         r(csharp::traits::kernel(), csharp::traits::backend(),
           csharp::traits::empty_part(), traits::facet(),
           builtin_transform::static_id());
+    return r;
+}
+
+physical::entities::name
+builtin_transform::physical_name() const {
+    using physical::helpers::name_factory;
+    static const auto r(name_factory::make(csharp::traits::backend(),
+        traits::facet(), builtin_transform::static_id()));
     return r;
 }
 

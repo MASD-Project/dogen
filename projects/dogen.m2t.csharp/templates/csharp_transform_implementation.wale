@@ -15,6 +15,14 @@ physical::entities::location {{class.simple_name}}::archetype_location() const {
     return r;
 }
 
+physical::entities::name
+{{class.simple_name}}::physical_name() const {
+    using physical::helpers::name_factory;
+    static const auto r(name_factory::make(csharp::traits::backend(),
+        traits::facet(), {{class.simple_name}}::static_id()));
+    return r;
+}
+
 const logical::entities::name& {{class.simple_name}}::meta_name() const {
     using {{meta_name_factory}};
     static auto r(meta_name_factory::make_{{meta_element}}_name());

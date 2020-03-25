@@ -22,6 +22,7 @@
 #include <boost/algorithm/string/join.hpp>
 #include "dogen.m2t/types/formatters/sequence_formatter.hpp"
 #include "dogen.m2t.csharp/types/traits.hpp"
+#include "dogen.physical/types/helpers/name_factory.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/visual_studio/solution.hpp"
 #include "dogen.m2t.csharp/types/transforms/visual_studio/traits.hpp"
@@ -46,6 +47,14 @@ solution_transform::archetype_location() const {
         r(csharp::traits::kernel(), csharp::traits::backend(),
           csharp::traits::empty_part(), traits::facet(),
           solution_transform::static_id());
+    return r;
+}
+
+physical::entities::name
+solution_transform::physical_name() const {
+    using physical::helpers::name_factory;
+    static const auto r(name_factory::make(csharp::traits::backend(),
+        traits::facet(), solution_transform::static_id()));
     return r;
 }
 

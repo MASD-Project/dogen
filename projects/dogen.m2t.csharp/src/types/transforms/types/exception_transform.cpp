@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen.physical/types/helpers/name_factory.hpp"
 #include "dogen.logical/types/entities/structural/exception.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.m2t/types/formatters/sequence_formatter.hpp"
@@ -41,6 +42,14 @@ physical::entities::location exception_transform::archetype_location() const {
         r(csharp::traits::kernel(), csharp::traits::backend(),
           csharp::traits::empty_part(), traits::facet(),
           exception_transform::static_id());
+    return r;
+}
+
+physical::entities::name
+exception_transform::physical_name() const {
+    using physical::helpers::name_factory;
+    static const auto r(name_factory::make(csharp::traits::backend(),
+        traits::facet(), exception_transform::static_id()));
     return r;
 }
 
