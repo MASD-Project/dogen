@@ -155,9 +155,7 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX
     endif()
 
     # set the flags
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${optimisation_flags}")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${warning_flags}")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${profiling_flags}")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${other_flags}")
 
     # ignore fuzzy link errors
