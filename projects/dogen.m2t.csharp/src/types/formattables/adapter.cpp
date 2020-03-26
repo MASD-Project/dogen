@@ -66,7 +66,8 @@ adapter::adapt(const transforms::repository& frp,
          */
         auto& art_props(fbl.element_properties().artefact_properties());
         for (const auto& fmt : j->second) {
-            const auto arch(fmt->archetype_location().archetype());
+            const auto l(fmt->physical_name().location());
+            const auto arch(l.archetype());
             art_props[arch] = artefact_properties();
 
             BOOST_LOG_SEV(lg, debug) << "Added formatter: " << arch

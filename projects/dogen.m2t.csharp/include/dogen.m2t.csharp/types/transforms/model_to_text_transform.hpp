@@ -52,11 +52,6 @@ public:
     virtual std::string id() const = 0;
 
     /**
-     * @brief Ownership hierarchy for this formatter
-     */
-    virtual physical::entities::location archetype_location() const = 0;
-
-    /**
      * @brief Physical name linked to this formatter.
      */
     virtual physical::entities::name physical_name() const = 0;

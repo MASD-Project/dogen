@@ -7,14 +7,6 @@ std::string {{class.simple_name}}::id() const {
     return static_id();
 }
 
-physical::entities::location {{class.simple_name}}::archetype_location() const {
-    static physical::entities::location
-        r(csharp::traits::kernel(), csharp::traits::backend(),
-          csharp::traits::empty_part(), traits::facet(),
-          {{class.simple_name}}::static_id());
-    return r;
-}
-
 physical::entities::name
 {{class.simple_name}}::physical_name() const {
     using physical::helpers::name_factory;

@@ -75,7 +75,7 @@ register_formatter(std::shared_ptr<model_to_text_transform> f) {
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
     }
 
-    const auto& al(f->archetype_location());
+    const auto al(f->physical_name().location());
     if (al.archetype().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_archetype;
         BOOST_THROW_EXCEPTION(registrar_error(empty_archetype));

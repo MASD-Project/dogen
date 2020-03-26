@@ -37,14 +37,6 @@ std::string primitive_transform::id() const {
     return static_id();
 }
 
-physical::entities::location primitive_transform::archetype_location() const {
-    static physical::entities::location
-        r(csharp::traits::kernel(), csharp::traits::backend(),
-          csharp::traits::empty_part(), traits::facet(),
-          primitive_transform::static_id());
-    return r;
-}
-
 physical::entities::name
 primitive_transform::physical_name() const {
     using physical::helpers::name_factory;
@@ -72,7 +64,7 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
 
 physical::entities::artefact primitive_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, archetype_location());
+    assistant a(ctx, e, physical_name().location());
     const auto& p(a.as<logical::entities::structural::primitive>(static_id(), e));
     {
         const auto sn(e.name().simple());

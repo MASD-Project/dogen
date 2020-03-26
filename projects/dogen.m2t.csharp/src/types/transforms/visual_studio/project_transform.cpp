@@ -37,16 +37,7 @@ std::string project_transform::static_id() {
 }
 
 std::string project_transform::id() const {
-    static auto r(archetype_location().archetype());
-    return r;
-}
-
-physical::entities::location
-project_transform::archetype_location() const {
-    static physical::entities::location
-        r(csharp::traits::kernel(), csharp::traits::backend(),
-          csharp::traits::empty_part(), traits::facet(),
-          project_transform::static_id());
+    static auto r(physical_name().location().archetype());
     return r;
 }
 
@@ -80,7 +71,7 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
 
 physical::entities::artefact project_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, archetype_location());
+    assistant a(ctx, e, physical_name().location());
     using logical::entities::visual_studio::project;
     const auto& proj(a.as<project>(static_id(), e));
 

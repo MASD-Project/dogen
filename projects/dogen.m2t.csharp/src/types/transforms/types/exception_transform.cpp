@@ -37,14 +37,6 @@ std::string exception_transform::id() const {
     return static_id();
 }
 
-physical::entities::location exception_transform::archetype_location() const {
-    static physical::entities::location
-        r(csharp::traits::kernel(), csharp::traits::backend(),
-          csharp::traits::empty_part(), traits::facet(),
-          exception_transform::static_id());
-    return r;
-}
-
 physical::entities::name
 exception_transform::physical_name() const {
     using physical::helpers::name_factory;
@@ -72,7 +64,7 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
 
 physical::entities::artefact exception_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, archetype_location());
+    assistant a(ctx, e, physical_name().location());
     {
         const auto sn(e.name().simple());
         const auto qn(a.get_qualified_name(e.name()));

@@ -67,7 +67,7 @@ locator::feature_group locator::make_feature_group(
     std::unordered_set<std::string> processed_facets;
     for (const auto ptr : frp.stock_artefact_formatters()) {
         const auto& fmt(*ptr);
-        const auto& al(fmt.archetype_location());
+        const auto al(fmt.physical_name().location());
 
         const auto arch(al.archetype());
         const auto fct(al.facet());
