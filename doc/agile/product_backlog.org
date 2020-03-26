@@ -8413,6 +8413,23 @@ Links:
 - [[https://generated.photos][Generated Photos]]: AI generated realistic pictures of people. We
   could download a fixed set or use the API.
 
+*Realistic Model Generation*
+
+Another topic of interest is the generation of dogen models. If we
+could somehow capture some basic notions on the fountains such as:
+
+- class names
+- attributes related to a class
+- relationships
+
+We could generate realistic models. The models don't have to be
+realistic in the sense of "making sense" for a given domain, they just
+need to have similar characteristics to real models such as:
+
+- number of classes
+- number of attributes per class
+- diversity of those attributes
+
 **** Example Types
 
 - Animal Common Name
