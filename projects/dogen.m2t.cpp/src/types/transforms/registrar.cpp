@@ -64,7 +64,7 @@ validate(std::shared_ptr<model_to_text_transform> f) const {
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
     }
 
-    const auto& al(f->archetype_location());
+    const auto al(f->physical_name().location());
     if (al.archetype().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_archetype;
         BOOST_THROW_EXCEPTION(registrar_error(empty_archetype));
@@ -117,7 +117,7 @@ void registrar::validate() const {
         std::set<std::string> all_facets;
         for (const auto& ptr : formatters) {
             const auto& formatter(*ptr);
-            const auto& al(formatter.archetype_location());
+            const auto al(formatter.physical_name().location());
             const auto fct(al.facet());
             all_facets.insert(fct);
             if (formatter.inclusion_support_type() != cs)
@@ -187,7 +187,7 @@ register_formatter(std::shared_ptr<model_to_text_transform> f) {
     /*
      * Add the formatter to the archetype location stores.
      */
-    const auto& al(f->archetype_location());
+    const auto al(f->physical_name().location());
     archetype_locations_.push_front(al);
 
     /*

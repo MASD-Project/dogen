@@ -38,19 +38,10 @@ std::string builtin_header_transform::id() const {
     return static_id();
 }
 
-physical::entities::location
-builtin_header_transform::archetype_location() const {
-    static physical::entities::location
-        r(cpp::traits::kernel(), cpp::traits::backend(),
-          cpp::traits::public_headers_part(), traits::facet(),
-          builtin_header_transform::static_id());
-    return r;
-}
-
 physical::entities::name
 builtin_header_transform::physical_name() const {
     using physical::helpers::name_factory;
-    static const auto r(name_factory::make(cpp::traits::backend(),
+    static auto r(name_factory::make(cpp::traits::backend(),
         cpp::traits::public_headers_part(), traits::facet(),
         builtin_header_transform::static_id()));
     return r;

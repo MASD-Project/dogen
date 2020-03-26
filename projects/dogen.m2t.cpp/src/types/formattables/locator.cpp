@@ -91,8 +91,7 @@ locator::make_feature_group(const variability::entities::feature_model& fm,
     std::unordered_set<std::string> processed_facets;
     for (const auto ptr : frp.stock_artefact_formatters()) {
         const auto& fmt(*ptr);
-        const auto& al(fmt.archetype_location());
-
+        const auto al(fmt.physical_name().location());
         const auto arch(al.archetype());
         const auto fct(al.facet());
         const auto pf(traits::postfix());

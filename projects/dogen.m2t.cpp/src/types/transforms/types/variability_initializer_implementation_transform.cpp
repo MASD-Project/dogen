@@ -44,19 +44,10 @@ std::string variability_initializer_implementation_transform::id() const {
     return static_id();
 }
 
-physical::entities::location
-variability_initializer_implementation_transform::archetype_location() const {
-    static physical::entities::location
-        r(cpp::traits::kernel(), cpp::traits::backend(),
-          cpp::traits::implementation_part(), traits::facet(),
-          variability_initializer_implementation_transform::static_id());
-    return r;
-}
-
 physical::entities::name
 variability_initializer_implementation_transform::physical_name() const {
     using physical::helpers::name_factory;
-    static const auto r(name_factory::make(cpp::traits::backend(),
+    static auto r(name_factory::make(cpp::traits::backend(),
         cpp::traits::implementation_part(), traits::facet(),
         variability_initializer_implementation_transform::static_id()));
     return r;
@@ -110,7 +101,7 @@ std::list<std::string> variability_initializer_implementation_transform::inclusi
 
 physical::entities::artefact variability_initializer_implementation_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    assistant a(ctx, e, physical_name().location(), false/*requires_header_guard*/);
     const auto& o(a.as<logical::entities::variability::initializer>(e));
 
     {

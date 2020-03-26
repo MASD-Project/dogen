@@ -44,19 +44,10 @@ std::string class_implementation_transform::id() const {
     return static_id();
 }
 
-physical::entities::location
-class_implementation_transform::archetype_location() const {
-    static physical::entities::location
-        r(cpp::traits::kernel(), cpp::traits::backend(),
-          cpp::traits::implementation_part(), traits::facet(),
-          class_implementation_transform::static_id());
-    return r;
-}
-
 physical::entities::name
 class_implementation_transform::physical_name() const {
     using physical::helpers::name_factory;
-    static const auto r(name_factory::make(cpp::traits::backend(),
+    static auto r(name_factory::make(cpp::traits::backend(),
         cpp::traits::implementation_part(), traits::facet(),
         class_implementation_transform::static_id()));
     return r;
@@ -108,7 +99,7 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
 
 physical::entities::artefact class_implementation_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    assistant a(ctx, e, physical_name().location(), false/*requires_header_guard*/);
     const auto& o(a.as<logical::entities::structural::object>(e));
 
     {

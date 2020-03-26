@@ -72,7 +72,7 @@ directive_group_repository_factory::make_feature_group(
     r.inclusion_required = s.get_by_name(ir);
 
     for (const auto f : frp.stock_artefact_formatters()) {
-        const auto& al(f->archetype_location());
+        const auto al(f->physical_name().location());
         const auto arch(al.archetype());
 
         using transforms::inclusion_support_types;
@@ -258,7 +258,7 @@ compute_directives(const feature_group& fg,
      */
     const auto cs(transforms::inclusion_support_types::canonical_support);
     for (const auto& fmt : formatters) {
-        const auto& al(fmt->archetype_location());
+        const auto al(fmt->physical_name().location());
         const auto arch(al.archetype());
         BOOST_LOG_SEV(lg, trace) << "Archetype: " << arch;
 

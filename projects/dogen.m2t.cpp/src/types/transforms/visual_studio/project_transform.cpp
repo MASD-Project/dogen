@@ -39,23 +39,14 @@ std::string project_transform::static_id() {
 }
 
 std::string project_transform::id() const {
-    static auto r(archetype_location().archetype());
-    return r;
-}
-
-physical::entities::location
-project_transform::archetype_location() const {
-    static physical::entities::location
-        r(cpp::traits::kernel(), cpp::traits::backend(),
-          cpp::traits::empty_part(), traits::facet(),
-          project_transform::static_id());
+    static auto r(physical_name().location().archetype());
     return r;
 }
 
 physical::entities::name
 project_transform::physical_name() const {
     using physical::helpers::name_factory;
-    static const auto r(name_factory::make(cpp::traits::backend(),
+    static auto r(name_factory::make(cpp::traits::backend(),
         traits::facet(), project_transform::static_id()));
     return r;
 }
@@ -101,7 +92,7 @@ std::list<std::string> project_transform::inclusion_dependencies(
 
 physical::entities::artefact project_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    assistant a(ctx, e, physical_name().location(), false/*requires_header_guard*/);
     using logical::entities::visual_studio::project;
     const auto& proj(a.as<project>(e));
 

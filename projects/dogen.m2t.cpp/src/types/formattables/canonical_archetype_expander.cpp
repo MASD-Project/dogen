@@ -70,7 +70,8 @@ void canonical_archetype_expander::expand(const transforms::repository& frp,
         if (fmt.inclusion_support_type() != cs)
             continue;
 
-        const auto& al(fmt.archetype_location());
+        const auto n(fmt.physical_name());
+        const auto al(n.location());
         const auto arch(al.archetype());
         const auto fct(al.facet());
 

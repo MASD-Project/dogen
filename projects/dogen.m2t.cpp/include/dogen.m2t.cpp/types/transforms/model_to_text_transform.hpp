@@ -27,7 +27,6 @@
 
 #include <string>
 #include <boost/filesystem/path.hpp>
-#include "dogen.physical/types/entities/location.hpp"
 #include "dogen.logical/types/entities/name.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.physical/types/entities/name.hpp"
@@ -51,11 +50,6 @@ public:
      * @brief Unique identifier for the formatter in formatter space.
      */
     virtual std::string id() const = 0;
-
-    /**
-     * @brief Ownership hierarchy for this formatter
-     */
-    virtual physical::entities::location archetype_location() const = 0;
 
     /**
      * @brief Physical name associated with this transform.

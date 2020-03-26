@@ -42,23 +42,14 @@ std::string object_odb_options_transform::static_id() {
 }
 
 std::string object_odb_options_transform::id() const {
-    static auto r(archetype_location().archetype());
-    return r;
-}
-
-physical::entities::location
-object_odb_options_transform::archetype_location() const {
-    static physical::entities::location
-        r(cpp::traits::kernel(), cpp::traits::backend(),
-          cpp::traits::implementation_part(), traits::facet(),
-          object_odb_options_transform::static_id());
+    static auto r(physical_name().location().archetype());
     return r;
 }
 
 physical::entities::name
 object_odb_options_transform::physical_name() const {
     using physical::helpers::name_factory;
-    static const auto r(name_factory::make(cpp::traits::backend(),
+    static auto r(name_factory::make(cpp::traits::backend(),
         cpp::traits::implementation_part(), traits::facet(),
         object_odb_options_transform::static_id()));
     return r;
@@ -101,7 +92,7 @@ std::list<std::string> object_odb_options_transform::inclusion_dependencies(
 
 physical::entities::artefact object_odb_options_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, archetype_location(), false/*requires_header_guard*/);
+    assistant a(ctx, e, physical_name().location(), false/*requires_header_guard*/);
     const auto& o(a.as<logical::entities::structural::object>(e));
 
     {
