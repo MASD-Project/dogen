@@ -12,39 +12,39 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-26 Thu 21:00]
+#+CAPTION: Clock summary at [2020-03-26 Thu 21:42]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *45:16* |       |      | 100.0 |
+| *Total time*                                           | *45:57* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 45:16   |       |      | 100.0 |
-| Active                                                 |         | 45:16 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 7:27 |  16.5 |
+| Stories                                                | 45:57   |       |      | 100.0 |
+| Active                                                 |         | 45:57 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 7:27 |  16.2 |
 | Create a demo and presentation for previous sprint     |         |       | 0:28 |   1.0 |
-| Sprint and product backlog grooming                    |         |       | 3:01 |   6.7 |
+| Sprint and product backlog grooming                    |         |       | 3:21 |   7.3 |
 | Rename archetypes model to physical model              |         |       | 0:28 |   1.0 |
 | Rename assets model to logical model                   |         |       | 0:29 |   1.1 |
-| Consider renaming "meta-model" namespace               |         |       | 0:37 |   1.4 |
-| Rename engine to orchestration                         |         |       | 1:04 |   2.4 |
-| Merge extraction model with physical model             |         |       | 4:35 |  10.1 |
+| Consider renaming "meta-model" namespace               |         |       | 0:37 |   1.3 |
+| Rename engine to orchestration                         |         |       | 1:04 |   2.3 |
+| Merge extraction model with physical model             |         |       | 4:35 |  10.0 |
 | Remove manual feature in profile merge transform       |         |       | 0:08 |   0.3 |
 | Add variability domains to the dumpspecs activity      |         |       | 0:12 |   0.4 |
-| Add org-mode option to dumpspacs                       |         |       | 0:53 |   2.0 |
-| Analysis on designing and implement physical types     |         |       | 6:52 |  15.2 |
+| Add org-mode option to dumpspacs                       |         |       | 0:53 |   1.9 |
+| Analysis on designing and implement physical types     |         |       | 6:52 |  14.9 |
 | Remove =element= from the modeling location            |         |       | 0:02 |   0.1 |
-| Fix clang-cl LNK4217 warnings                          |         |       | 1:04 |   2.4 |
-| Analysis on creating a masd kernel model               |         |       | 0:53 |   2.0 |
-| Rename generation models to =m2t=                      |         |       | 1:04 |   2.4 |
+| Fix clang-cl LNK4217 warnings                          |         |       | 1:04 |   2.3 |
+| Analysis on creating a masd kernel model               |         |       | 0:53 |   1.9 |
+| Rename generation models to =m2t=                      |         |       | 1:04 |   2.3 |
 | Move all generation features away from generation      |         |       | 0:17 |   0.6 |
-| Rename generation transforms                           |         |       | 4:49 |  10.6 |
+| Rename generation transforms                           |         |       | 4:49 |  10.5 |
 | Remove kernel from models                              |         |       | 0:36 |   1.3 |
 | Rename the default MASD kernel                         |         |       | 0:44 |   1.6 |
 | Consider removing archetype location by family         |         |       | 0:40 |   1.5 |
 | Add part to physical location                          |         |       | 1:16 |   2.8 |
-| Make physical location entries simple names            |         |       | 3:07 |   6.9 |
-| Add names to logical model                             |         |       | 1:48 |   4.0 |
-| Implement archetype locations from physical meta-model |         |       | 2:42 |   6.0 |
+| Make physical location entries simple names            |         |       | 3:28 |   7.5 |
+| Add names to logical model                             |         |       | 1:48 |   3.9 |
+| Implement archetype locations from physical meta-model |         |       | 2:42 |   5.9 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -317,6 +317,7 @@ Time spent creating the demo and presentation. Use the demo project:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-03-26 Thu 21:22]--[2020-03-26 Thu 21:42] =>  0:20
     CLOCK: [2020-03-25 Wed 08:06]--[2020-03-25 Wed 08:50] =>  0:44
     CLOCK: [2020-03-23 Mon 08:25]--[2020-03-23 Mon 08:40] =>  0:15
     CLOCK: [2020-03-22 Sun 11:33]--[2020-03-22 Sun 11:45] =>  0:12
@@ -689,6 +690,7 @@ location. The ID is the qualified name.
 
 *** STARTED Make physical location entries simple names               :story:
     :LOGBOOK:
+    CLOCK: [2020-03-26 Thu 21:00]--[2020-03-26 Thu 21:21] =>  0:21
     CLOCK: [2020-03-26 Thu 08:01]--[2020-03-26 Thu 08:45] =>  0:44
     CLOCK: [2020-03-25 Wed 22:01]--[2020-03-26 Thu 00:13] =>  2:12
     CLOCK: [2020-03-22 Sun 17:32]--[2020-03-22 Sun 17:43] =>  0:11
@@ -1042,6 +1044,44 @@ Random notes:
 - some types support both (headers)
 - some support imports only (cpp)
 - some support neither (cmakelists, etc).
+
+*** Order of headers is hard-coded                                    :story:
+
+In inclusion expander, we have hacked the sorting:
+
+:        // FIXME: hacks for headers that must be last
+:        const bool lhs_is_gregorian(
+:            lhs.find_first_of(boost_serialization_gregorian) != npos);
+:        const bool rhs_is_gregorian(
+:            rhs.find_first_of(boost_serialization_gregorian) != npos);
+:        if (lhs_is_gregorian && !rhs_is_gregorian)
+:            return true;
+
+This could be handled via meta-data, supplying some kind of flag (sort last?).
+
+*** Top-level "inclusion required" should be "tribool"                :story:
+
+One of the most common use cases for inclusion required is to have it
+set to true for all types where we provide an override, but false for
+all other cases. This makes sense in terms of use cases:
+
+- either we need to supply some includes; in which case where we do
+  not supply includes we do not want the system to automatically
+  compute include paths;
+- or we don't supply any includes, in which case:
+  - we either don't require any includes at all (hardware built-ins);
+  - or we want all includes to be computed by the system.
+
+The problem is that we do not have a way to express this logic in the
+meta-data. The only way would be to convert the top-level
+=requires_includes= to an enumeration:
+
+- yes, compute them
+- yes, where supplied
+- no
+
+We need to figure out how to implement this. For now we are manually
+adding flags.
 
 *** Move decorations to their "final" resting place                   :story:
 
@@ -2209,3 +2249,72 @@ to build muscle memory.
 However the tests are very useful: when we are making internal
 changes, its good to see the breaks and look into the diffs to ensure
 only what we expect has changed.
+*** CANCELLED Consider renaming =coding::name=                        :story:
+    CLOSED: [2020-03-26 Thu 21:26]
+
+*Rationale*: we are happy enough with this name and the pattern has
+now propagated into the physical model so it seems its here to stay.
+
+Now that we are using the name "name" to mean a plain string (exomodel
+related classes), it raises a question as to whether name (and
+nametree) are named correctly. If we had a better name for name we
+could then make "name" the "simple" property and make =Nameable= a
+concept that is used by both exomodel entities and the "new name"
+class. However, we never managed to find a good name for this class.
+*** CANCELLED Tidy-up assistant API                                   :story:
+    CLOSED: [2020-03-26 Thu 21:31]
+
+*Rationale*: this story is superseded by the generation / physical
+model clean up.
+
+Now we have element in assistant we can start removing the need for
+element in the calls, making the templates simpler.
+
+*** CANCELLED Augment element ID with meta-model type                 :story:
+    CLOSED: [2020-03-26 Thu 21:34]
+
+*Rationale*: its not clear what we'd gain by doing this work. We can't
+use the information in the code (its supposed to be opaque) and we
+haven't had the need for it for troubleshooting thus far.
+
+The element ID is considered to be a system-level, opaque
+identifier. It could, for all intents and purposes, be a large int. We
+have decided to use a string so we can dump it to the log and figure
+out what is going on without having to map IDs to a human-readable
+value. In the same vein, we could also add another component to the ID
+that would contain the meta-model element for that ID. This
+information could be placed at the start.
+
+Of course, we will not be able to remove the look-ups we have at
+present that try to figure out the meta-model element because they are
+related to resolution. But for any other cases it may result in
+slightly more performant code. We need to look at all the use cases.
+
+*** CANCELLED Why do we need helpers and io for some types?           :story:
+    CLOSED: [2020-03-26 Thu 21:38]
+
+*Rationale*: this will be superseded by the move to PDMs.
+
+At present we have helper support for maps, sets, pairs etc. We also
+seem to have utility support for these. Originally the idea was that
+we needed utility so that users could have a map of dogen types and
+still have streaming support. This is useful. However, what is
+slightly less clear is why we don't just use the utility methods
+inside the IO subsystem to output these types, but instead use
+helpers. We should try doing that and see what breaks, there may be a
+reasons for this.
+
+In theory we just have to remove the helpers in IO for utility
+supported types and add the includes to the meta-data; regenerate and
+see what breaks. It could be related to the ordering of template
+functions or some such problem. If so we need to document this in
+manual. We should also do a quick search in backlog for this.
+
+*** CANCELLED Use dots in data files extensions                       :story:
+    CLOSED: [2020-03-26 Thu 21:41]
+
+*Rationale*: we don't really have data files any longer. If there are
+any legacy ones, they should be removed.
+
+At the moment we use extensions such as =xmlyarn=. It should really be
+=.xml.yarn= or something of the kind.

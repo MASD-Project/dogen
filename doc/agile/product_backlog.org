@@ -966,6 +966,26 @@ One way to implement this is to add a feature at the element (once we
 have a way of expressing dogen meta-elements) that lists the supported
 model types for a given element.
 
+*** Investigate current implementation of the origin transform        :story:
+
+Do we need to have the origin transform? can we not just supply the
+origin type to the adapter directly?
+
+Actually this cannot be done. The problem is we still need to
+distinguish between dogen models and non-dogen models; we need to
+register all dogen models. This is done via meta-data. We cannot use
+the meta-data until we have converted into a logical model. We could
+consider having a flag at the injection level for this - it is a
+concept at this level - but we still need to map it to origin
+types. However, it is perhaps cleaner to express this concept at the
+logical level rather than the injection level given we are saying
+there are two different kinds of injection models: proxyness is a
+fundamental property of an injection model. If we do this we can then
+do the mapping in flight as we transform from injection to logical
+model.
+
+This story is directly connected to "model types".
+
 *** Ignore ODB files automatically                                    :story:
 
 At present we are adding the following regular expressions to knitter
@@ -3202,6 +3222,161 @@ as per [[*Consider adding "deprecated feature names"][this story]].
 ** Technical debt and refactoring
 
 Stories that deal with cleaning up the code base.
+
+*** Rewrite name resolution in terms of lists                         :story:
+
+Even since we did the external modules / model modules change we broke
+code generation; this is because we do not go up the model modules
+during name resolution. We did a quick hack to fix this but it needs
+to be done properly.
+
+Let's walk through a simple example:. Name cames in as:
+
+- model module: =probing=
+- simple: =prober=
+
+We are in model:
+
+- model module: =dogen.external=
+
+Expected behaviour is to try all combinations of model modules:
+
+- =dogen.external.probing=
+- =dogen.probing
+- =probing=
+
+This highlights a fundamental problem with resolution: we view the
+{external, model, internal} modules as if they are separate entities
+but in reality, for the purposes of resolution, there is only one
+thing that is relevant: the module path. If it matches because of
+{external, model, internal} modules, well that is not relevant to
+resolution. Other users of =name= do need to know this information
+(for example to generate directories or file names) but not the
+resolver.
+
+Interestingly, because we are only looking for an id, it doesn't
+really matter how we get to it (in terms of the internal composition
+of the name), as long as it matches bitwise. This means we can look at
+the process slightly differently:
+
+- start off with the name as the user provided it. Extract all strings
+  from it to create a list, in order: external, model, internal,
+  simple. Try to resolve that. Call it user list.
+- then create a second list from model / context: external, model,
+  internal. Call it model list.
+- try concantenating model list and user list, pretty printing and
+  resolving it. If it fails, pop model list and concatenate again. Try
+  until model list is empty.
+
+Tasks:
+
+- first add a quick hack just to get the code generator working
+  again. For example, take the first model module of the model and try
+  resolving with that. Then worry about fixing this properly. This has
+  been done with a big hack.
+- split the conversion of name into list from pretty printer. Printer
+  should merely take a string or list of strings and do its thing. We
+  need to find a good location for this method, since (for now) we
+  cannot place it in the right location which is the name class
+  itself.
+- change resolver to obtain the lists as per above. The to list
+  machinery can be used for this, though we need to handle model names
+  somehow. We can copy the =model_name_mode= logic from printer.
+- drop all of the logic in resolver at present and use the list logic
+  as per above. Do not check references, etc.
+
+Notes:
+
+- there are a few useful functions here:
+  - subtraction: given a base list, subtract another list. Fro
+    example, given =masd::dogen::annotations::annotation=, subtract
+    =masd::dogen::annotations=. This is useful when determining the
+    right qualification inside a class.
+  - addition: concatenate a list with another.
+  - combination: given a base list, create all possible permutations
+    for a second list. For example: =masd::dogen::annotations= and
+    =some::type=, we want =masd::dogen::annotations::some::type=,
+    =masd::dogen::some::type=, =masd::some::type=, =some::type=. We
+    are iterating upwards the first list.
+  - make id: given a list, generate an ID. This was we don't even need
+    to go though the whole "name building" exercise, we simply go from
+    lists into ID's and check the containers.
+- we probably should introduce a type for this: =flat_location=?
+  something that can be converted from a =location= (but not the
+  opposite) and has the properties defined above. Or we could have a
+  "location flattener" that performs these actions, but this is less
+  clean as we now need a few of these helpers.
+- there are two fundamental concepts: a path (which is what we call a
+  location) and an address (which is what we call an ID). Path implies
+  an hierarchical space, which is what modeling and generation space
+  are. Address is flat and unique. There is a function to go from
+  paths to addresses but not vice-versa. Given two paths we can
+  generate all possible addresses by performing a "climb" in the
+  hierarchical space.
+- we could make addresses URIs, and preserve almost all of the
+  information: =masd://some.model.name/a/b.c=. The problem is we
+  cannot tell the difference between model modules and external
+  modules. However, we could simplify this and say model modules and
+  external modules are all the same thing; users can choose to express
+  external modules as part of the file name or not. (e.g. "express
+  full path" or some such flag). We can also choose to express
+  external modules as directories or as a dotted path. URIs may not be
+  the best of ideas because models exist in contexts (workspaces,
+  servers, users) rather than in one universal space. However, we
+  could use URLs as a way to identify resources once we clear up the
+  REST story.
+- another very interesting point is that the separation of parsing and
+  resolution may not be a great idea. At present we parse "unparsed
+  types" in attributes and create "proto-names"; these have guesses as
+  to what the different components should be (model module,
+  etc). However, a slightly different way to look at this is, we could
+  just create the lists off of the parsing and then send them to the
+  resolver; the resolver would either resolve them into a name or
+  fail. There would be no need to have this in-between state of
+  half-filled names. However, if we do want to separate parsing from
+  resolution, perhaps the right solution is to create a parallel
+  structure to the name tree which is made up of nested lists. The
+  parser populates these and the resolver uses them to create the name
+  trees. Even better: we can move all of this work into injection. The
+  parsing into lists can happen in injection and then we just need to
+  map these into model types in coding (resolution). The creation of
+  the name tree structure is resolution.
+- if we do go for the lists approach, perhaps we should also have two
+  types of name trees: a list based name tree (call these parsed
+  types) and a names based name tree (resolved types?). List trees are
+  not really name trees I guess, but they are in the right format for
+  the resolver to use. This would mean the parser could be simplified,
+  and the whole "lets guess what this scope is" could be removed. The
+  job of the parser is just to produce these lists. The resovler then
+  resolves them into actual names. If we go for this approach, this
+  should be part of injection: we'd have "value trees" in injection
+  and "name trees" in assets. Resolution is in effect the conversion
+  of these two tree types. However, the only slight problem is that,
+  at present, resolution is done in the middle of the assets pipeline,
+  after merging. For this to work, we'd need to, somehow, move it to
+  the injection to assets adaption phase. This is not entirely
+  inconceivable: we already have all elements with their correct names
+  at this stage. If we could view the entirety of the model set rather
+  than just the model when resolving, it would work. In other words,
+  if we built a single map with all of the element IDs across the
+  model set and used it to resolve, according to a well-defined set of
+  rules, it should work. However, the set of rules themselves would
+  involve some processing: we need to know about module containment
+  (external, model module and internal). Nonetheless, this is probably
+  already available at this stage - i.e. the owning element should
+  have this information as part of the adaption process. And in truth,
+  this is the only thing we should be using in resolution. That is,
+  the original lists as obtained from injection, plus the owning name;
+  we then perform a traversal/climb using the well-defined rules
+  above, and for each point in the climb, do a look-up in the map. If
+  found, use the name pointed to by the element. If not found, keep
+  climbing. The only slight problem we now have is we created a
+  circular dependency: in order to perform resolution we need access
+  to all the names in the model set, but these are only generated as
+  part of the adaption of the injection model to the asset model. We
+  need to somehow have a two pass approach: first build all the names,
+  then adapt the elements. This could be done in engine, as part of
+  the injection to assets chain.
 
 *** Replace =operator<= for sorting with lambdas                      :story:
 
@@ -5740,6 +5915,41 @@ effect, it will be symmetric with PDM packages.
 Stories related to infrastructure improvements that we may or may not
 achieve.
 
+*** Add new c++ warnings to compilation                               :story:
+
+- =-Wunused-private-field=: Seems like this warning is not part of
+  =-Wall=
+- =-Winconsistent-missing-override=: new clang warning, probably 3.6.
+- =-Wdocumentation=: clang doxygen warning.
+- =-WExtra=
+
+See also:
+
+- [[http://releases.llvm.org/5.0.0/tools/clang/docs/ReleaseNotes.html][Clang 5.0.0 Release Notes]], section "Improvements to Clang’s
+  diagnostics".
+- [[https://kristerw.blogspot.co.uk/2017/09/useful-gcc-warning-options-not-enabled.html][Useful GCC warning options not enabled by -Wall -Wextra]]
+- [[http://www.productive-cpp.com/hardening-cpp-programs-stack-protector/][Hardening C/C++ Programs: Part I – Stack Protector]]
+- [[https://developers.redhat.com/blog/2018/03/21/compiler-and-linker-flags-gcc/][Recommended compiler and linker flags for GCC]]
+
+Merged stories:
+
+*Consider enabling =-Wshadow=*
+
+We make use of shadowing on occasion so maybe this is why we disabled
+this warning. Enable it and check to see what breaks.
+
+:    # definition shadows another
+:    # FIXME: causes too many problems.
+:    # set(warning_flags "${warning_flags} -Wshadow")
+
+*Enable =maybe-uninitialized= warning*
+
+This warning caused build breaks. The main problem seems to come from
+boost variants using model types, which then rely on the variant's
+swap function. This uses the move constructor. For some reason, the
+compiler does not think the default move constructor is initialising
+the member variables correctly. Not obvious why that would be.
+
 *** Consider moving CI to GitHub Actions                              :story:
 
 At present we are using Travis and AppVeyor for our CI. However, it
@@ -5967,13 +6177,13 @@ Stories that will not be handled on the current major release.
 
 Ideas to improve the code base.
 
-*** Logging at info is very messy                           :reviewing:story:
+*** Logging at info is very messy                                     :story:
 
 Ideally when logging at info we want to see the spine of the program,
 showing all transforms with their start and finishes and some
 information about what they are processing (e.g. model).
 
-*** Check all of the warnings in lgtm                                 :story:
+*** Check all of the dogen warnings in lgtm                           :story:
 
 We have [[https://lgtm.com/projects/g/MASD-Project/dogen/context:cpp][a number of warnings in lgtm]], some of which are actually
 relevant. Even the FIXMEs should be dealt with - either create a story
@@ -5987,6 +6197,8 @@ At present the utility model has a number of hand-crafted
 exceptions. We need to convert them to dogen exceptions. We also need
 to get rid of the invalid enum exception and use the
 =std::argument...= exception instead.
+
+This should wait until the utility model is moved out of dogen.
 
 *** Change order of includes according to Lakos major design rule     :story:
 
@@ -6039,7 +6251,7 @@ objects, etc. We should not be using associations to denote the notion
 of an object instantiating an object template. Perhaps the "implements
 an interface" relationship is more appropriate. Check the UML books.
 
-*** Use DI in injection model                               :reviewing:story:
+*** Use DI in injection model                                         :story:
 
 We need to use the boost.di injector in the injector model to register
 the encoding and decoding transforms. This means we need to receive
@@ -6057,35 +6269,12 @@ functionality should be available.
 
 It seems it is now possible to serialise =std:shared_ptr= using
 regular boost serialisation. We should start to move our pointers to
-standard ones.
+standard ones. The only slight problem is that we do not have boost
+serialisation support for shared pointers.
 
 Links:
 
 - [[https://stackoverflow.com/questions/8115220/how-can-boostserialization-be-used-with-stdshared-ptr-from-c11][How can boost::serialization be used with std::shared_ptr from C++11?]]
-
-*** Create a mock factory facet                                       :story:
-
-A very common pattern we have in dogen is that for a small number of
-types we need to create a mock factory. This is normally made in a
-test folder and the file must be hand-crafted. It would be nice to
-have dogen code-generate the skeletons for the mock factories. For
-this we would need a meta-element for mock factories (with the new
-ideas on meta-model transparency, we can't just add a switch to the
-target element any longer). Ideally we would also have an associated
-walw template to give us a good head start.
-
-*** Consider adding inheritance support to modelines                  :story:
-
-Though it is probably overkill, it would be nice to be able to
-inherit from modelines; then we could define all the common fields
-on a parent.
-
-A slightly different take is that modelines, enums, etc could benefit
-greatly from templates just like objects. However the only problem is
-we can't use the exact same approach, or we'd end up with 2N
-elements. We need some kind of way of declaring a template (what we
-will in the future call traits) and associate it with a meta-model
-element.
 
 *** Consider renaming =object=                                        :story:
 
@@ -6117,32 +6306,6 @@ with the correct visibility. This also means that the code templates
 will be much easier, and support for real classes too (useful when we
 can make use of protected regions).
 
-*** Consider renaming =coding::name=                                  :story:
-
-Now that we are using the name "name" to mean a plain string (exomodel
-related classes), it raises a question as to whether name (and
-nametree) are named correctly. If we had a better name for name we
-could then make "name" the "simple" property and make =Nameable= a
-concept that is used by both exomodel entities and the "new name"
-class. However, we never managed to find a good name for this class.
-
-*** Add support for "colour themes" to dogen                          :story:
-
-At present we arbitrarily colour coded the UML elements according to
-our preferences, mapping stereotypes to colours. The extensible way to
-do this is to add a feature to a named configuration called
-colour. Then once we have a python API we could ask python to retrieve
-the mapping between stereotypes and colours and apply it (as per
-current script). If we make the colours standard RGB, they can also be
-used in other frontends. We must also include entries for metamodel
-elements such as =dogen::enumeration=.
-
-We should have a metamodel element for this. The keys could be simply:
-
-: masd.METAMODEL_ELEMENT.colour=RGB
-
-Then, we could expose the metamodel element from SWIG into python.
-
 *** Cross-model transformations                                       :story:
 
 Once we have interfaces, there are at least two very useful
@@ -6172,197 +6335,6 @@ transformations we could do:
   allowing us to invoke remote services. However, this is probably not
   important because we can either use HTTP or protobuf etc from the
   scripting languages.
-
-*** Rewrite name resolution in terms of lists                         :story:
-
-Even since we did the external modules / model modules change we broke
-code generation; this is because we do not go up the model modules
-during name resolution. We did a quick hack to fix this but it needs
-to be done properly.
-
-Let's walk through a simple example:. Name cames in as:
-
-- model module: =probing=
-- simple: =prober=
-
-We are in model:
-
-- model module: =dogen.external=
-
-Expected behaviour is to try all combinations of model modules:
-
-- =dogen.external.probing=
-- =dogen.probing
-- =probing=
-
-This highlights a fundamental problem with resolution: we view the
-{external, model, internal} modules as if they are separate entities
-but in reality, for the purposes of resolution, there is only one
-thing that is relevant: the module path. If it matches because of
-{external, model, internal} modules, well that is not relevant to
-resolution. Other users of =name= do need to know this information
-(for example to generate directories or file names) but not the
-resolver.
-
-Interestingly, because we are only looking for an id, it doesn't
-really matter how we get to it (in terms of the internal composition
-of the name), as long as it matches bitwise. This means we can look at
-the process slightly differently:
-
-- start off with the name as the user provided it. Extract all strings
-  from it to create a list, in order: external, model, internal,
-  simple. Try to resolve that. Call it user list.
-- then create a second list from model / context: external, model,
-  internal. Call it model list.
-- try concantenating model list and user list, pretty printing and
-  resolving it. If it fails, pop model list and concatenate again. Try
-  until model list is empty.
-
-Tasks:
-
-- first add a quick hack just to get the code generator working
-  again. For example, take the first model module of the model and try
-  resolving with that. Then worry about fixing this properly. This has
-  been done with a big hack.
-- split the conversion of name into list from pretty printer. Printer
-  should merely take a string or list of strings and do its thing. We
-  need to find a good location for this method, since (for now) we
-  cannot place it in the right location which is the name class
-  itself.
-- change resolver to obtain the lists as per above. The to list
-  machinery can be used for this, though we need to handle model names
-  somehow. We can copy the =model_name_mode= logic from printer.
-- drop all of the logic in resolver at present and use the list logic
-  as per above. Do not check references, etc.
-
-Notes:
-
-- there are a few useful functions here:
-  - subtraction: given a base list, subtract another list. Fro
-    example, given =masd::dogen::annotations::annotation=, subtract
-    =masd::dogen::annotations=. This is useful when determining the
-    right qualification inside a class.
-  - addition: concatenate a list with another.
-  - combination: given a base list, create all possible permutations
-    for a second list. For example: =masd::dogen::annotations= and
-    =some::type=, we want =masd::dogen::annotations::some::type=,
-    =masd::dogen::some::type=, =masd::some::type=, =some::type=. We
-    are iterating upwards the first list.
-  - make id: given a list, generate an ID. This was we don't even need
-    to go though the whole "name building" exercise, we simply go from
-    lists into ID's and check the containers.
-- we probably should introduce a type for this: =flat_location=?
-  something that can be converted from a =location= (but not the
-  opposite) and has the properties defined above. Or we could have a
-  "location flattener" that performs these actions, but this is less
-  clean as we now need a few of these helpers.
-- there are two fundamental concepts: a path (which is what we call a
-  location) and an address (which is what we call an ID). Path implies
-  an hierarchical space, which is what modeling and generation space
-  are. Address is flat and unique. There is a function to go from
-  paths to addresses but not vice-versa. Given two paths we can
-  generate all possible addresses by performing a "climb" in the
-  hierarchical space.
-- we could make addresses URIs, and preserve almost all of the
-  information: =masd://some.model.name/a/b.c=. The problem is we
-  cannot tell the difference between model modules and external
-  modules. However, we could simplify this and say model modules and
-  external modules are all the same thing; users can choose to express
-  external modules as part of the file name or not. (e.g. "express
-  full path" or some such flag). We can also choose to express
-  external modules as directories or as a dotted path. URIs may not be
-  the best of ideas because models exist in contexts (workspaces,
-  servers, users) rather than in one universal space. However, we
-  could use URLs as a way to identify resources once we clear up the
-  REST story.
-- another very interesting point is that the separation of parsing and
-  resolution may not be a great idea. At present we parse "unparsed
-  types" in attributes and create "proto-names"; these have guesses as
-  to what the different components should be (model module,
-  etc). However, a slightly different way to look at this is, we could
-  just create the lists off of the parsing and then send them to the
-  resolver; the resolver would either resolve them into a name or
-  fail. There would be no need to have this in-between state of
-  half-filled names. However, if we do want to separate parsing from
-  resolution, perhaps the right solution is to create a parallel
-  structure to the name tree which is made up of nested lists. The
-  parser populates these and the resolver uses them to create the name
-  trees. Even better: we can move all of this work into injection. The
-  parsing into lists can happen in injection and then we just need to
-  map these into model types in coding (resolution). The creation of
-  the name tree structure is resolution.
-- if we do go for the lists approach, perhaps we should also have two
-  types of name trees: a list based name tree (call these parsed
-  types) and a names based name tree (resolved types?). List trees are
-  not really name trees I guess, but they are in the right format for
-  the resolver to use. This would mean the parser could be simplified,
-  and the whole "lets guess what this scope is" could be removed. The
-  job of the parser is just to produce these lists. The resovler then
-  resolves them into actual names. If we go for this approach, this
-  should be part of injection: we'd have "value trees" in injection
-  and "name trees" in assets. Resolution is in effect the conversion
-  of these two tree types. However, the only slight problem is that,
-  at present, resolution is done in the middle of the assets pipeline,
-  after merging. For this to work, we'd need to, somehow, move it to
-  the injection to assets adaption phase. This is not entirely
-  inconceivable: we already have all elements with their correct names
-  at this stage. If we could view the entirety of the model set rather
-  than just the model when resolving, it would work. In other words,
-  if we built a single map with all of the element IDs across the
-  model set and used it to resolve, according to a well-defined set of
-  rules, it should work. However, the set of rules themselves would
-  involve some processing: we need to know about module containment
-  (external, model module and internal). Nonetheless, this is probably
-  already available at this stage - i.e. the owning element should
-  have this information as part of the adaption process. And in truth,
-  this is the only thing we should be using in resolution. That is,
-  the original lists as obtained from injection, plus the owning name;
-  we then perform a traversal/climb using the well-defined rules
-  above, and for each point in the climb, do a look-up in the map. If
-  found, use the name pointed to by the element. If not found, keep
-  climbing. The only slight problem we now have is we created a
-  circular dependency: in order to perform resolution we need access
-  to all the names in the model set, but these are only generated as
-  part of the adaption of the injection model to the asset model. We
-  need to somehow have a two pass approach: first build all the names,
-  then adapt the elements. This could be done in engine, as part of
-  the injection to assets chain.
-
-*** Add a new annotation type of "pair"                               :story:
-
-It would be nice to be able to declare a annotation type with a value
-type of "pair" or "key value pair" and have the annotations
-automatically perform the splitting. The separator should not be
-equals, since we already use that for annotations kvps, but it could
-be comma, pipe, etc. The API would be augmented to return a
-=std::pair= with key and value.
-
-One slight snag: the value could be of any type:
-
-- boolean
-- string
-- enumeration (when we support these)
-- even text collection
-
-We can start by just supporting strings, but probably worthwhile
-having a think on how to specify the type.
-
-*** Investigate current implementation of the origin transform        :story:
-
-Do we need to have the origin expansion? can we not just supply the
-origin type to the exomodel adapter directly?
-
-Actually this cannot be done. The problem is we still need to
-distinguish between dogen models and non-dogen models; we need to
-register all dogen models. This is done via meta-data. We cannot use
-the meta-data until we have converted into an endomodel. We could
-consider having a flag at the exomodel level for this - it is a
-concept at this level - but we still need to map it to origin
-types. However, it is perhaps cleaner to express this concept at the
-exomodel level rather than the endomodel level given we are saying
-there are two different kinds of exomodels: proxyness is a fundamental
-property of an exomodel. If we do this we can then do the mapping in
-flight as we transform from exomodel to endomodel.
 
 *** Add support for "ad-hoc" tracing                                  :story:
 
@@ -6420,29 +6392,6 @@ We can't do this for:
 Actually there is a reason for this: we use the names to build the
 file paths and the includes. We need to add some comments.
 
-*** Tidy-up assistant API                                             :story:
-
-Now we have element in assistant we can start removing the need for
-element in the calls, making the templates simpler.
-
-*** Dump transforms as serialisable data                              :story:
-
-Now we have detailed transform information, it would be great if we
-could also load the serialised data. At present this is not possible
-because we are using IO output so that it is easily diffable. However,
-we could either:
-
-- add rapid JSON support, so its both readable and serialisable;
-- add command-line options to determine the output format, so that we
-  can dump data as boost serialisation instead.
-
-The second is low-hanging fruit.
-
-Once we have this, we can then write simple tests that read the
-serialised data and use it to reproduce bugs, narrowed to a specific
-transform. This would be extremely useful once we have
-code-generationa as a service.
-
 *** Tidy-up "is floating point"                                       :story:
 
 We should introduce "point type" enumeration to replace "is floating
@@ -6461,22 +6410,9 @@ When we run the benchmarks for utility we get an error:
 : /home/marco/Development/DomainDrivenConsulting/dogen/projects/utility/tests/asserter_tests.cpp(141): error: in "asserter_tests/assert_directory_good_data_set_returns_true": check asserter::assert_directory(e, a) has failed
 
 Seems like the tests do not clean up after themselves. We need to add
-some clean up logic and re-enable the tests.
-
-*** Augment element ID with meta-model type                           :story:
-
-The element ID is considered to be a system-level, opaque
-identifier. It could, for all intents and purposes, be a large int. We
-have decided to use a string so we can dump it to the log and figure
-out what is going on without having to map IDs to a human-readable
-value. In the same vein, we could also add another component to the ID
-that would contain the meta-model element for that ID. This
-information could be placed at the start.
-
-Of course, we will not be able to remove the look-ups we have at
-present that try to figure out the meta-model element because they are
-related to resolution. But for any other cases it may result in
-slightly more performant code. We need to look at all the use cases.
+some clean up logic and re-enable the tests. We probably should just
+remove all of the benchmarks infrastructure, given we never use it and
+it has probably bit-rotted by now.
 
 *** Merge properties factory with stitching factory                   :story:
 
@@ -6604,21 +6540,7 @@ With the introduction of assistants in C#, we now have overloaded the
 term. We need to find another name to refer to the formatting
 assistant in C++ so avoid confusion.
 
-*** Order of headers is hard-coded                                    :story:
-
-In inclusion expander, we have hacked the sorting:
-
-:        // FIXME: hacks for headers that must be last
-:        const bool lhs_is_gregorian(
-:            lhs.find_first_of(boost_serialization_gregorian) != npos);
-:        const bool rhs_is_gregorian(
-:            rhs.find_first_of(boost_serialization_gregorian) != npos);
-:        if (lhs_is_gregorian && !rhs_is_gregorian)
-:            return true;
-
-This could be handled via meta-data, supplying some kind of flag (sort last?).
-
-*** Remove unused elements from assets' final model                   :story:
+*** Remove unused elements from logical model's final model           :story:
 
 We could mark all used elements during resolution and then during the
 transformation into the final model, we could drop all unused
@@ -6656,15 +6578,11 @@ non-target names that are in use and return those.
 
 *** Model should contain set of built-in id's                         :story:
 
-We are computing the set of all built-in id's in quilt but this should
-really be part of yarn.
+We are computing the set of all built-in id's in generation but this
+should really be part of the logical model.
 
-*** =always_in_heap= is not a very good name                          :story:
-
-What the name is trying to say is: I have a type parameter and that
-type parameter is always allocated in the heap. But it does not quite
-convey that at all - it seems like the type itself is always in heap
-the way we use it in resolver.
+We need to double-check this - we have a built-ins model. This story
+may have bit-rotted.
 
 *** Identifier parser has hard-coded built-ins                        :story:
 
@@ -6690,6 +6608,13 @@ unparsed types before merging. There is a circular dependency here.
 We somehow need a first pass to obtain all the built-ins and a second
 pass to parse.
 
+*** =always_in_heap= is not a very good name                          :story:
+
+What the name is trying to say is: I have a type parameter and that
+type parameter is always allocated in the heap. But it does not quite
+convey that at all - it seems like the type itself is always in heap
+the way we use it in resolver.
+
 *** "current" is not the best of names in name tree                   :story:
 
 We need to find a slightly more meaningful name for the "current" name
@@ -6703,41 +6628,6 @@ We could call it just "data" and drop "current" from flag.
 We have a variety of names for the methods parsing name trees
 recursively. The best one seems to be =walk_name_tree=. We should use
 this name consistently.
-
-*** Add new c++ warnings to compilation                               :story:
-
-- =-Wunused-private-field=: Seems like this warning is not part of
-  =-Wall=
-- =-Winconsistent-missing-override=: new clang warning, probably 3.6.
-- =-Wdocumentation=: clang doxygen warning.
-- =-WExtra=
-
-See also:
-
-- [[http://releases.llvm.org/5.0.0/tools/clang/docs/ReleaseNotes.html][Clang 5.0.0 Release Notes]], section "Improvements to Clang’s
-  diagnostics".
-- [[https://kristerw.blogspot.co.uk/2017/09/useful-gcc-warning-options-not-enabled.html][Useful GCC warning options not enabled by -Wall -Wextra]]
-- [[http://www.productive-cpp.com/hardening-cpp-programs-stack-protector/][Hardening C/C++ Programs: Part I – Stack Protector]]
-- [[https://developers.redhat.com/blog/2018/03/21/compiler-and-linker-flags-gcc/][Recommended compiler and linker flags for GCC]]
-
-Merged stories:
-
-*Consider enabling =-Wshadow=*
-
-We make use of shadowing on occasion so maybe this is why we disabled
-this warning. Enable it and check to see what breaks.
-
-:    # definition shadows another
-:    # FIXME: causes too many problems.
-:    # set(warning_flags "${warning_flags} -Wshadow")
-
-*Enable =maybe-uninitialized= warning*
-
-This warning caused build breaks. The main problem seems to come from
-boost variants using model types, which then rely on the variant's
-swap function. This uses the move constructor. For some reason, the
-compiler does not think the default move constructor is initialising
-the member variables correctly. Not obvious why that would be.
 
 *** Create utility methods for =__type__= etc                         :story:
 
@@ -6753,47 +6643,6 @@ hard-coded things:
 - =memory=
 - string helper variables: =<new_line>=, =<quote>=
 - =tidy_up_string=
-
-*** Why do we need helpers and io for some types?                     :story:
-
-At present we have helper support for maps, sets, pairs etc. We also
-seem to have utility support for these. Originally the idea was that
-we needed utility so that users could have a map of dogen types and
-still have streaming support. This is useful. However, what is
-slightly less clear is why we don't just use the utility methods
-inside the IO subsystem to output these types, but instead use
-helpers. We should try doing that and see what breaks, there may be a
-reasons for this.
-
-In theory we just have to remove the helpers in IO for utility
-supported types and add the includes to the meta-data; regenerate and
-see what breaks. It could be related to the ordering of template
-functions or some such problem. If so we need to document this in
-manual. We should also do a quick search in backlog for this.
-
-*** Top-level "inclusion required" should be "tribool"                :story:
-
-One of the most common use cases for inclusion required is to have it
-set to true for all types where we provide an override, but false for
-all other cases. This makes sense in terms of use cases:
-
-- either we need to supply some includes; in which case where we do
-  not supply includes we do not want the system to automatically
-  compute include paths;
-- or we don't supply any includes, in which case:
-  - we either don't require any includes at all (hardware built-ins);
-  - or we want all includes to be computed by the system.
-
-The problem is that we do not have a way to express this logic in the
-meta-data. The only way would be to convert the top-level
-=requires_includes= to an enumeration:
-
-- yes, compute them
-- yes, where supplied
-- no
-
-We need to figure out how to implement this. For now we are manually
-adding flags.
 
 *** Improve container details in JSON dump                            :story:
 
@@ -7062,11 +6911,6 @@ to stem from. For example:
 could be replaced with =has_swap=, or perhaps even =has_public_swap= /
 =has_protected_swap=.
 
-*** Use dots in data files extensions                                 :story:
-
-At the moment we use extensions such as =xmlyarn=. It should really be
-=.xml.yarn= or something of the kind.
-
 *** Investigate the integration of =boost::log= with throw exception  :story:
 
 At present we write a lot of code like this:
@@ -7088,13 +6932,6 @@ We can then create a helper in utility to throw exceptions that
 performs both the throwing and the logging. It could be a function
 that assumes lg to be in the global namespace, as that is how we
 normally use it. We just need to populate the exception up front.
-
-*** Consider computing hashes only once for immutable types           :story:
-
-if a type is immutable the hash should be computed once at
-construction and then cached. Not quite sure how this would be
-implemented though since we have hashing as a totally separate aspect
-from types.
 
 *** Change stitch's standard control block start marker to match t4   :story:
 
@@ -7166,7 +7003,7 @@ either on or off for a given class being tested. Patch:
 : +        bool add_model_module_;
 :      };
 
-*** Add a configuration class to yarn mock factory                    :story:
+*** Add a configuration class to logical model's mock factory         :story:
 
 Every time we need to extend the mock factory we are finding we need
 to modify every single function. This is particularly painful due to
@@ -7231,6 +7068,90 @@ Features for which there is no urgency but we'd like to see them
 implemented at some point. They may require some alterations to the
 core, but not fundamental rethinking.
 
+*** Consider computing hashes only once for immutable types :reviewing:story:
+
+if a type is immutable the hash should be computed once at
+construction and then cached. Not quite sure how this would be
+implemented though since we have hashing as a totally separate aspect
+from types.
+
+*** Dump transforms as serialisable data                              :story:
+
+Now we have detailed transform information, it would be great if we
+could also load the serialised data. At present this is not possible
+because we are using IO output so that it is easily diffable. However,
+we could either:
+
+- add rapid JSON support, so its both readable and serialisable;
+- add command-line options to determine the output format, so that we
+  can dump data as boost serialisation instead.
+
+The second is low-hanging fruit.
+
+Once we have this, we can then write simple tests that read the
+serialised data and use it to reproduce bugs, narrowed to a specific
+transform. This would be extremely useful once we have
+code-generationa as a service.
+
+*** Add a new annotation type of "pair"                               :story:
+
+It would be nice to be able to declare a annotation type with a value
+type of "pair" or "key value pair" and have the annotations
+automatically perform the splitting. The separator should not be
+equals, since we already use that for annotations kvps, but it could
+be comma, pipe, etc. The API would be augmented to return a
+=std::pair= with key and value.
+
+One slight snag: the value could be of any type:
+
+- boolean
+- string
+- enumeration (when we support these)
+- even text collection
+
+We can start by just supporting strings, but probably worthwhile
+having a think on how to specify the type.
+
+*** Add support for "colour themes" to dogen                          :story:
+
+At present we arbitrarily colour coded the UML elements according to
+our preferences, mapping stereotypes to colours. The extensible way to
+do this is to add a feature to a named configuration called
+colour. Then once we have a python API we could ask python to retrieve
+the mapping between stereotypes and colours and apply it (as per
+current script). If we make the colours standard RGB, they can also be
+used in other frontends. We must also include entries for metamodel
+elements such as =dogen::enumeration=.
+
+We should have a metamodel element for this. The keys could be simply:
+
+: masd.METAMODEL_ELEMENT.colour=RGB
+
+Then, we could expose the metamodel element from SWIG into python.
+
+*** Consider adding inheritance support to modelines                  :story:
+
+Though it is probably overkill, it would be nice to be able to
+inherit from modelines; then we could define all the common fields
+on a parent.
+
+A slightly different take is that modelines, enums, etc could benefit
+greatly from templates just like objects. However the only problem is
+we can't use the exact same approach, or we'd end up with 2N
+elements. We need some kind of way of declaring a template (what we
+will in the future call traits) and associate it with a meta-model
+element.
+
+*** Create a mock factory facet                                       :story:
+
+A very common pattern we have in dogen is that for a small number of
+types we need to create a mock factory. This is normally made in a
+test folder and the file must be hand-crafted. It would be nice to
+have dogen code-generate the skeletons for the mock factories. For
+this we would need a meta-element for mock factories (with the new
+ideas on meta-model transparency, we can't just add a switch to the
+target element any longer). Ideally we would also have an associated
+walw template to give us a good head start.
 *** Consider making editor a meta-data element                        :story:
 
 When we create meta-data elements for technical space, facet, etc we
