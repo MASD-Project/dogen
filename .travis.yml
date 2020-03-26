@@ -26,9 +26,6 @@ git:
   depth: 2
 
 matrix:
-  #
-  # OSX is a bit flaky at present.
-  #
   include:
     #
     # OSX Clang
