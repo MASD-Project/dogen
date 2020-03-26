@@ -96,6 +96,13 @@ It seems on engine we call them "transform exception" but on assets we
 call them "transformation error". Check all other models and them
 these consistently.
 
+Merged stories:
+
+*Rename =transformation_error= to =transform_exception=*
+
+In keeping with the framework guidelines for naming exceptions. We need to
+also look at all other exceptions.
+
 *** Add primitives to the archetypes model                            :story:
 
 Instead of using strings we should use primitives for:
@@ -4629,11 +4636,14 @@ vectors:
 :    return r;
 :}
 
-*** Test data generator with immutability looks wrong       :reviewing:story:
+*** Add tests for immutability on an inheritance tree                 :story:
 
 We are using the full constructor for immutability, but its not clear
 how that would work on a inheritance tree. Ensure we have test cases
 for this.
+
+In particular, have a look at the test data generator with
+immutability - it appeared wrong.
 
 *** Equality in floating point numbers is incorrect                   :story:
 
@@ -4703,11 +4713,15 @@ We should just output the underlying primitive.
 When we implement C# inheritance we must make sure we place the
 interfaces at the end after any base classes or else we will have
 compiler errors. This means we need to be able to distinguish
-interfaces from other types (e.g. =interface= stereotype).
+interfaces from other types (e.g. =interface= stereotype). We must
+also make sure there is only at most one base class, as multiple
+inheritance is only supported on interfaces.
 
 *** Add meta-data to trigger inclusion/generation of =stdafx=         :story:
 
-No setting to add include for precompiled headers: =stdafx.h=
+No setting to add include for precompiled headers: =stdafx.h=. In
+addition, this should be a formatter specific property. It must look
+at some model state (e.g. "generate windows files").
 
 *** Immutable types cannot be owned by mutable types                  :story:
 
@@ -4796,7 +4810,7 @@ simple heuristic that indicates problems. Example:
 - updating a given knob in more than one place at the same level of
   the hierarchy? This is a good candidate because its easy to detect.
 
-*** Reference to non-existent dynamic fields produce unhelpful errors :story:
+*** Reference to non-existent features produce unhelpful errors       :story:
 
 When renaming fields, we get the following dogen errors:
 
@@ -4829,22 +4843,24 @@ Links:
 
 *** Using =std::unordered_map<my_enum, ...>= fails equality           :story:
 
-We changed the map in =name= to an unordered map and suddenly the
-equality tests started to fail. Since we use it for strings quite a
-lot, it may be related to the fact that we used an enum? Add a test
-case on the test models and see if we can reproduce it.
+In the past we created an unordered map of an enumeration and then
+suddenly the equality tests started to fail. Since we use unordered
+maps for strings quite a lot, it may be related to the fact that we
+used an enum? Add a test case on the test models and see if we can
+reproduce it.
 
 *** Recursive structures result in crashes                            :story:
 
 If one defines a tree node with a parent and children (such as =node=
-in =yarn=) dogen generates code that recurses inifinitely. This is
-because the structure contains a parent and we loop through the parent
-back to itself and so on. To stop this from happening we need to tell
-dogen to exclude certain fields. For example, we could mark =parent=
-as a cycle. This is then interpreted by the io feature as a "do not
-follow the pointer" (just dump its memory address). We could have a
-manipulator that tells the =boost::shared_ptr= io to skip its payload,
-much like we do when the pointer is empty.
+in =logical= model's helpers) dogen generates code that recurses
+inifinitely. This is because the structure contains a parent and we
+loop through the parent back to itself and so on. To stop this from
+happening we need to tell dogen to exclude certain fields. For
+example, we could mark =parent= as a cycle. This is then interpreted
+by the io feature as a "do not follow the pointer" (just dump its
+memory address). We could have a manipulator that tells the
+=boost::shared_ptr= io to skip its payload, much like we do when the
+pointer is empty.
 
 In summary:
 
@@ -4892,11 +4908,22 @@ referenced. We should make this a bit more obvious because it would be
 very difficult for the user to figure out what type is bringing in
 this dependency. It would make more sense to say "type X requires
 model Y, which is not part of the list of reference models" or
-something along these lines.
+something along these lines. However, for this we need to load all the
+available models - however this is defined. We could also take an
+approach similar to compilers:
+
+: The type or namespace name 'Tasks' does not exist in the namespace 'System.Threading' (are you missing an assembly reference?)
+
+And for models:
+
+: Could not load file or assembly 'TreemapControl, Version=1.0.1.38, Culture=neutral, PublicKeyToken=3f6121a52ebf7c82' or one of its dependencies. The system cannot find the file specified.Could not load file or assembly 'TreemapControl, Version=1.0.1.38, Culture=neutral, PublicKeyToken=3f6121a52ebf7c82' or one of its dependencies. The system cannot find the file specified.
+
+We could also add the search path, e.g. looked in directories X, Y and
+Z.
 
 *** Improve errors in dia objects                                     :story:
 
-At present when adding blank spaces in a dia object we get the
+At present when adding blanks (spaces) in a dia object we get the
 following error:
 
 : 2014-11-09 23:05:58.936785 [ERROR] [dia_to_sml.identifier_parser] Failed to parse string: std::unordered_map<std::string, facet_settings>
@@ -4906,7 +4933,7 @@ following error:
 : [P12tag_workflow] = Code generation failure.
 
 There is no clue as to which object caused the error. Add a class name
-and dia object ID to the exception.
+and dia object ID to the exception. We should add a test for this as well.
 
 *** Improve error messages on empty meta-data                         :story:
 
@@ -5099,11 +5126,6 @@ if there is a shared pointer to built-in; if there is, put in:
 :     // serialize the underlying int
 :     ar & static_cast<int &>(ti);
 : }
-
-*** Rename =transformation_error= to =transform_exception=            :story:
-
-In keeping with the framework guidelines for naming exceptions. We need to
-also look at all other exceptions.
 
 *** Generate ORM tests                                                :story:
 
@@ -5315,6 +5337,11 @@ Existing validation code:
   sort them and unique them. If there are duplicates, we should error
   or warn.
 
+*Features*
+
+- that formatter fields are not duplicated on simple name.
+- fields are not duplicated on qualified name.
+
 Merged stories:
 
 *Add warning support for validation*
@@ -5352,8 +5379,10 @@ defined as part of the metamodel rather than command-line arguments.
 *** Check for incompatibility between input language and kernels      :story:
 
 At present it is possible to have a model with input language of say
-C++ but with the C# kernel enabled. We should throw if the input
+C++ but with the C# backend enabled. We should throw if the input
 language is incompatible with the enabled kernels.
+
+This explanation has bit rotted a bit and needs to be revisited:
 
 Sadly this is not trivial. This is because quilt only sees the mapped
 models; thus as far as knit is concerned, we ask for the input
@@ -5394,20 +5423,40 @@ reporting errors:
 
 In practice this never does anything.
 
-# Requirements
+Requirements:
 
 - get the =on_error= expression to trigger when an error occurs
 - raise an exception with the contents that we are sending to
   std::cout at present.
 
-*** Add validation for field definitions                              :story:
+*** Spirit: replace the legacy parser with the Klaus parser           :story:
 
-Perform some validation in repository workflow:
+Klaus created a new parser for us, but it was never integrated and
+replaced the legacy parser. It should handle errors a bit
+better. However, IIRC he tried to make a parser that was able to
+handle more of the C++ type definition, which is no longer a
+requirement - we just need to be able to support native arrays. We
+need to review his code and integrate it.
 
-- that formatter fields are not duplicated on simple name.
-- fields are not duplicated on qualified name.
-- instances have qualified name populated.
-- only instances are left after instantiation.
+*** Spirit: Add support for "native" arrays                           :story:
+
+At present our parser does not support arrays such as:
+
+#+begin_example
+int[50];
+#+end_example
+
+This should result on a name with a size associated with it. The
+parser cannot cope with this. Ideally one should be able to declare a
+const for the size on the class too:
+
+#+begin_example
+            static const int maxLimit = 50;
+            int objects[maxLimit];
+#+end_example
+
+So that we'd just recall the size parameter as a string in the name
+tree rather than just expect it to be an integer.
 
 *** Add test with smart pointer in base class                         :story:
 
@@ -5531,30 +5580,6 @@ Missing validation:
 - type definition cannot define the same type more than once.
 - directives cannot be used in lines with mixed content;
 - variables cannot be used in lines with mixed content;
-
-*** Consider adding tests for pipeline components                     :story:
-
-With regards to the existing injection.dia/injection.json test data
-set: this is actually not a bad idea. Basically what we are saying is
-that there is value in freezing a set of inputs in time and then use
-them to check parts of the pipeline. These are not expected to move
-(because the model contents are frozen). We could take the existing
-reference models and copy them for this. We could also extend this
-approach to the other parts of the pipeline. We would only update
-these frozen models very infrequently, at which point we'd have to
-rebaseline all data files. The only downside is that we'd need
-serialisation for all models (coding, generation, formatting). These
-models would break every time we change something in the pipeline (add
-new fields, change formatters, etc).
-
-In the past these tests were a bit painful and broke a lot. Also, it
-was not entirely clear how to rebase the data files - required a lot
-of black magic every time it happened and did not happen often enough
-to build muscle memory.
-
-However the tests are very useful: when we are making internal
-changes, its good to see the breaks and look into the diffs to ensure
-only what we expect has changed.
 
 *** Add tests for external and model modules                          :story:
 
@@ -5691,6 +5716,25 @@ become very readable.
 At present we are validating that all built-in types work but we don't
 check that an invalid type doesn't work.
 
+*** Split library into JSON and dia                                   :story:
+
+We should supply the PDMs models as both. This is a good test for PDMs
+to make sure that all functionality is available on both. Actually
+this story may be superseded by the work on the core library.
+
+*** Create or update samples folder                                   :story:
+
+We should add samples to the package. These could be organsided by
+injector (dia, json), then by language type (lam, cpp, csharp) or vice
+versa.
+
+We could also try to generate all of these models when testing the
+package.
+
+On the other hand, once we create a proper package for dogen headers,
+with SOs etc, we should really include the dogen models there. In
+effect, it will be symmetric with PDM packages.
+
 ** Infrastructure
 
 Stories related to infrastructure improvements that we may or may not
@@ -5701,7 +5745,8 @@ achieve.
 At present we are using Travis and AppVeyor for our CI. However, it
 would be nice to have a single place with all of the CI (and even more
 ideally, packaging as well). GitHub seems to offer some kind of CI
-support via GitHub actions.
+support via GitHub actions. However, we need to first move to building
+on [[*Build dogen from docker][docker]].
 
 *** Run ODB on nightlies                                              :story:
 
@@ -5803,7 +5848,7 @@ Links:
 
 *** Build dogen from docker                                           :story:
 
-- fix references to gcc6 etc
+- fix references to gcc etc
 - run:
 
 : docker exec -it zen_euclid env TERM=dumb
@@ -5855,25 +5900,6 @@ Links:
 - [[https://cloud.google.com/blog/products/devops-sre/cloud-build-brings-advanced-cicd-capabilities-to-github][Cloud Build brings advanced CI/CD capabilities to GitHub]]
 - [[https://cloud.google.com/cloud-build/docs/quickstart-docker?hl=en_GB&_ga=2.136964915.-2065564734.1572530049][Quickstart for Docker]]
 - [[https://github.com/GoogleCloudPlatform/cloud-builders/blob/master/bazel/Dockerfile][Dockerfile]]
-
-*** Split library into JSON and dia                                   :story:
-
-We should supply the PDMs models as both. This is a good test for PDMs
-to make sure that all functionality is available on both. Actually
-this story may be superseded by the work on the core library.
-
-*** Create or update samples folder                                   :story:
-
-We should add samples to the package. These could be organsided by
-injector (dia, json), then by language type (lam, cpp, csharp) or vice
-versa.
-
-We could also try to generate all of these models when testing the
-package.
-
-On the other hand, once we create a proper package for dogen headers,
-with SOs etc, we should really include the dogen models there. In
-effect, it will be symmetric with PDM packages.
 
 *** Linux and OSX binaries are not stripped                           :story:
 
@@ -5941,7 +5967,7 @@ Stories that will not be handled on the current major release.
 
 Ideas to improve the code base.
 
-*** Logging at info is very messy                                     :story:
+*** Logging at info is very messy                           :reviewing:story:
 
 Ideally when logging at info we want to see the spine of the program,
 showing all transforms with their start and finishes and some
@@ -7603,26 +7629,6 @@ this JSON mode.
 
 It seems we do not yet have a story for this. The idea is to have some
 basic JSON roundtripping support. The user can configure the backend.
-
-*** Spirit: Add support for "native" arrays                           :story:
-
-At present our parser does not support arrays such as:
-
-#+begin_example
-int[50];
-#+end_example
-
-This should result on a name with a size associated with it. The
-parser cannot cope with this. Ideally one should be able to declare a
-const for the size on the class too:
-
-#+begin_example
-            static const int maxLimit = 50;
-            int objects[maxLimit];
-#+end_example
-
-So that we'd just recall the size parameter as a string in the name
-tree rather than just expect it to be an integer.
 
 *** Finish adding support for Language Agnostic Models (LAM)          :story:
 

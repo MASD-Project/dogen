@@ -12,39 +12,39 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-24 Tue 23:07]
+#+CAPTION: Clock summary at [2020-03-26 Thu 00:13]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *41:36* |       |      | 100.0 |
+| *Total time*                                           | *44:32* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 41:36   |       |      | 100.0 |
-| Active                                                 |         | 41:36 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 7:27 |  17.9 |
-| Create a demo and presentation for previous sprint     |         |       | 0:28 |   1.1 |
-| Sprint and product backlog grooming                    |         |       | 2:17 |   5.5 |
-| Rename archetypes model to physical model              |         |       | 0:28 |   1.1 |
-| Rename assets model to logical model                   |         |       | 0:29 |   1.2 |
-| Consider renaming "meta-model" namespace               |         |       | 0:37 |   1.5 |
-| Rename engine to orchestration                         |         |       | 1:04 |   2.6 |
-| Merge extraction model with physical model             |         |       | 4:35 |  11.0 |
+| Stories                                                | 44:32   |       |      | 100.0 |
+| Active                                                 |         | 44:32 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 7:27 |  16.7 |
+| Create a demo and presentation for previous sprint     |         |       | 0:28 |   1.0 |
+| Sprint and product backlog grooming                    |         |       | 3:01 |   6.8 |
+| Rename archetypes model to physical model              |         |       | 0:28 |   1.0 |
+| Rename assets model to logical model                   |         |       | 0:29 |   1.1 |
+| Consider renaming "meta-model" namespace               |         |       | 0:37 |   1.4 |
+| Rename engine to orchestration                         |         |       | 1:04 |   2.4 |
+| Merge extraction model with physical model             |         |       | 4:35 |  10.3 |
 | Remove manual feature in profile merge transform       |         |       | 0:08 |   0.3 |
-| Add variability domains to the dumpspecs activity      |         |       | 0:12 |   0.5 |
-| Add org-mode option to dumpspacs                       |         |       | 0:53 |   2.1 |
-| Analysis on designing and implement physical types     |         |       | 6:52 |  16.5 |
+| Add variability domains to the dumpspecs activity      |         |       | 0:12 |   0.4 |
+| Add org-mode option to dumpspacs                       |         |       | 0:53 |   2.0 |
+| Analysis on designing and implement physical types     |         |       | 6:52 |  15.4 |
 | Remove =element= from the modeling location            |         |       | 0:02 |   0.1 |
-| Fix clang-cl LNK4217 warnings                          |         |       | 1:04 |   2.6 |
-| Analysis on creating a masd kernel model               |         |       | 0:53 |   2.1 |
-| Rename generation models to =m2t=                      |         |       | 1:04 |   2.6 |
-| Move all generation features away from generation      |         |       | 0:17 |   0.7 |
-| Rename generation transforms                           |         |       | 4:49 |  11.6 |
-| Remove kernel from models                              |         |       | 0:36 |   1.4 |
-| Rename the default MASD kernel                         |         |       | 0:44 |   1.8 |
-| Consider removing archetype location by family         |         |       | 0:40 |   1.6 |
-| Add part to physical location                          |         |       | 1:16 |   3.0 |
-| Make physical location entries simple names            |         |       | 0:11 |   0.4 |
-| Add names to logical model                             |         |       | 1:48 |   4.3 |
-| Implement archetype locations from physical meta-model |         |       | 2:42 |   6.5 |
+| Fix clang-cl LNK4217 warnings                          |         |       | 1:04 |   2.4 |
+| Analysis on creating a masd kernel model               |         |       | 0:53 |   2.0 |
+| Rename generation models to =m2t=                      |         |       | 1:04 |   2.4 |
+| Move all generation features away from generation      |         |       | 0:17 |   0.6 |
+| Rename generation transforms                           |         |       | 4:49 |  10.8 |
+| Remove kernel from models                              |         |       | 0:36 |   1.3 |
+| Rename the default MASD kernel                         |         |       | 0:44 |   1.6 |
+| Consider removing archetype location by family         |         |       | 0:40 |   1.5 |
+| Add part to physical location                          |         |       | 1:16 |   2.8 |
+| Make physical location entries simple names            |         |       | 2:23 |   5.4 |
+| Add names to logical model                             |         |       | 1:48 |   4.0 |
+| Implement archetype locations from physical meta-model |         |       | 2:42 |   6.1 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -317,6 +317,7 @@ Time spent creating the demo and presentation. Use the demo project:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-03-25 Wed 08:06]--[2020-03-25 Wed 08:50] =>  0:44
     CLOCK: [2020-03-23 Mon 08:25]--[2020-03-23 Mon 08:40] =>  0:15
     CLOCK: [2020-03-22 Sun 11:33]--[2020-03-22 Sun 11:45] =>  0:12
     CLOCK: [2020-03-21 Sat 09:25]--[2020-03-21 Sat 09:32] =>  0:07
@@ -688,6 +689,7 @@ location. The ID is the qualified name.
 
 *** STARTED Make physical location entries simple names               :story:
     :LOGBOOK:
+    CLOCK: [2020-03-25 Wed 22:01]--[2020-03-26 Thu 00:13] =>  2:12
     CLOCK: [2020-03-22 Sun 17:32]--[2020-03-22 Sun 17:43] =>  0:11
     :END:
 
@@ -2178,3 +2180,31 @@ can probably be easily done by:
   registrar.
 - ensure the initialisers only do something the first time they are
   called. We already have a story for this somewhere in the backlog.
+*** CANCELLED Consider adding tests for pipeline components           :story:
+    CLOSED: [2020-03-25 Wed 09:21]
+
+*Rationale*: these tests are just too high maintenance and had very
+little value. We should just stick to end-to-end tests, which break
+only when something really goes wrong.
+
+With regards to the existing injection.dia/injection.json test data
+set: this is actually not a bad idea. Basically what we are saying is
+that there is value in freezing a set of inputs in time and then use
+them to check parts of the pipeline. These are not expected to move
+(because the model contents are frozen). We could take the existing
+reference models and copy them for this. We could also extend this
+approach to the other parts of the pipeline. We would only update
+these frozen models very infrequently, at which point we'd have to
+rebaseline all data files. The only downside is that we'd need
+serialisation for all models (coding, generation, formatting). These
+models would break every time we change something in the pipeline (add
+new fields, change formatters, etc).
+
+In the past these tests were a bit painful and broke a lot. Also, it
+was not entirely clear how to rebase the data files - required a lot
+of black magic every time it happened and did not happen often enough
+to build muscle memory.
+
+However the tests are very useful: when we are making internal
+changes, its good to see the breaks and look into the diffs to ensure
+only what we expect has changed.
