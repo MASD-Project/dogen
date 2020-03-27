@@ -27,7 +27,6 @@
 
 #include <iosfwd>
 #include "dogen.physical/types/entities/artefact.hpp"
-#include "dogen.physical/types/entities/location.hpp"
 #include "dogen.templating/types/helpers/kvp_resolver.hpp"
 #include "dogen.templating/types/stitch/line.hpp"
 #include "dogen.templating/types/stitch/text_template.hpp"
@@ -79,11 +78,6 @@ private:
         const line& l, const helpers::kvp_resolver& rs, std::ostream& s) const;
 
 public:
-    /**
-     * @brief Archetype location for this formatter.
-     */
-    physical::entities::location archetype_location() const;
-
     /**
      * @brief Formats the template into an artefact.
      */

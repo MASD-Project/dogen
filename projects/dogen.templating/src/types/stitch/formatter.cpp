@@ -33,17 +33,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("templating.stitch.formatter"));
 
 const std::string empty_header_guard;
-/*
- * FIXME: humongous hackery just to get variability to let us
- * through. It reality, we should just have a family and no facet or
- * backend.
- */
-const std::string kernel_name("masd");
-const std::string backend_name("stitch");
-const std::string facet_name("types");
-const std::string part_name("");
-const std::string archetype_name("stitch.formatter");
-
 const std::string inserter("<<");
 const std::string endl("std::endl;");
 
@@ -152,14 +141,7 @@ void formatter::format_line_with_single_block(const std::string& stream_name,
     }
 }
 
-physical::entities::location formatter::archetype_location() const {
-    static physical::entities::location
-        r(kernel_name, backend_name, part_name, facet_name, archetype_name);
-    return r;
-}
-
-physical::entities::artefact
-formatter::format(const text_template& tt) const {
+physical::entities::artefact formatter::format(const text_template& tt) const {
     BOOST_LOG_SEV(lg, debug) << "Formatting text template.";
 
     const auto& props(tt.properties());
