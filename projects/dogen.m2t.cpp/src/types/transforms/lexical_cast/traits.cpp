@@ -24,7 +24,7 @@
 
 namespace dogen::m2t::cpp::transforms::lexical_cast {
 
-std::string traits::facet() {
+std::string traits::facet_qn() {
     static std::string r(cpp::traits::backend_qn() + ".lexical_cast");
     return r;
 }
@@ -35,12 +35,12 @@ std::string traits::facet_sn() {
 }
 
 std::string traits::canonical_archetype() {
-    static std::string r(traits::facet() + ".canonical_archetype");
+    static std::string r(traits::facet_qn() + ".canonical_archetype");
     return r;
 }
 
 std::string traits::enum_header_archetype() {
-    static std::string r(traits::facet() + ".enum_header");
+    static std::string r(traits::facet_qn() + ".enum_header");
     return r;
 }
 

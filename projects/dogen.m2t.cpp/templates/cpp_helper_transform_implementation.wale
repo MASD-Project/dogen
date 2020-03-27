@@ -1,6 +1,6 @@
 
 std::string {{class.simple_name}}::id() const {
-    static auto r(std::string("<") + traits::facet() + std::string(">") +
+    static auto r(std::string("<") + traits::facet_qn() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;
 }
@@ -24,7 +24,7 @@ std::list<std::string>
 std::list<std::string>
 {{class.simple_name}}::owning_facets() const {
     static auto r(std::list<std::string> {
-        io::traits::facet(), types::traits::facet()
+        io::traits::facet_qn(), types::traits::facet_qn()
     });
     return r;
 }

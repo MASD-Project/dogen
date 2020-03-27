@@ -43,7 +43,7 @@ physical::entities::name
 class_forward_declarations_transform::physical_name() const {
     using physical::helpers::name_factory;
     static auto r(name_factory::make(cpp::traits::backend_qn(),
-        cpp::traits::public_headers_part(), traits::facet(),
+        cpp::traits::public_headers_part(), traits::facet_qn(),
         class_forward_declarations_transform::static_id()));
     return r;
 }

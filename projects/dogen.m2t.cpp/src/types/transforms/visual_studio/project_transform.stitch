@@ -28,7 +28,7 @@ physical::entities::name
 project_transform::physical_name() const {
     using physical::helpers::name_factory;
     static auto r(name_factory::make(cpp::traits::backend_qn(),
-        traits::facet(), project_transform::static_id()));
+        traits::facet_qn(), project_transform::static_id()));
     return r;
 }
 

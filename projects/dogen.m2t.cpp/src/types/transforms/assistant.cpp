@@ -359,12 +359,12 @@ bool assistant::is_lexical_cast_enabled() const {
 
 bool assistant::is_odb_facet_enabled() const {
     using transforms::odb::traits;
-    return is_facet_enabled(traits::facet());
+    return is_facet_enabled(traits::facet_qn());
 }
 
 bool assistant::is_tests_enabled() const {
     using transforms::tests::traits;
-    return is_facet_enabled(traits::facet());
+    return is_facet_enabled(traits::facet_qn());
 }
 
 bool assistant::is_hash_enabled() const {
@@ -374,7 +374,7 @@ bool assistant::is_hash_enabled() const {
 
 bool assistant::is_test_data_enabled() const {
     using transforms::test_data::traits;
-    return is_facet_enabled(traits::facet());
+    return is_facet_enabled(traits::facet_qn());
 }
 
 m2t::formatters::scoped_boilerplate_formatter assistant::
@@ -522,7 +522,7 @@ assistant::get_helpers(const formattables::helper_properties& hp) const {
 
 bool assistant::is_io() const {
     const auto fn(archetype_location_.facet());
-    return transforms::io::traits::facet()  == fn;
+    return transforms::io::traits::facet_qn()  == fn;
 }
 
 bool assistant::

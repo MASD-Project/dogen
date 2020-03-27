@@ -47,7 +47,7 @@ physical::entities::name
 msbuild_targets_transform::physical_name() const {
     using physical::helpers::name_factory;
     static auto r(name_factory::make(cpp::traits::backend_qn(),
-        traits::facet(), msbuild_targets_transform::static_id()));
+        traits::facet_qn(), msbuild_targets_transform::static_id()));
     return r;
 }
 

@@ -24,7 +24,7 @@
 
 namespace dogen::m2t::cpp::transforms::types {
 
-std::string traits::facet() {
+std::string traits::facet_qn() {
     static std::string r(cpp::traits::backend_qn() + ".types");
     return r;
 }
@@ -35,12 +35,12 @@ std::string traits::facet_sn() {
 }
 
 std::string traits::canonical_archetype() {
-    static std::string r(traits::facet() + ".canonical_archetype");
+    static std::string r(traits::facet_qn() + ".canonical_archetype");
     return r;
 }
 
 std::string traits::class_header_archetype() {
-    static std::string r(traits::facet() + ".class_header");
+    static std::string r(traits::facet_qn() + ".class_header");
     return r;
 }
 
@@ -50,7 +50,7 @@ std::string traits::class_header_archetype_sn() {
 }
 
 std::string traits::class_forward_declarations_archetype() {
-    static std::string r(traits::facet() + ".class_forward_declarations");
+    static std::string r(traits::facet_qn() + ".class_forward_declarations");
     return r;
 }
 
@@ -60,7 +60,7 @@ std::string traits::class_forward_declarations_archetype_sn() {
 }
 
 std::string traits::visitor_forward_declarations_archetype() {
-    static std::string r(traits::facet() + ".visitor_forward_declarations");
+    static std::string r(traits::facet_qn() + ".visitor_forward_declarations");
     return r;
 }
 
@@ -70,7 +70,7 @@ std::string traits::visitor_forward_declarations_archetype_sn() {
 }
 
 std::string traits::primitive_forward_declarations_archetype() {
-    static std::string r(traits::facet() + ".primitive_forward_declarations");
+    static std::string r(traits::facet_qn() + ".primitive_forward_declarations");
     return r;
 }
 
@@ -80,7 +80,7 @@ std::string traits::primitive_forward_declarations_archetype_sn() {
 }
 
 std::string traits::class_implementation_archetype() {
-    static std::string r(traits::facet() + ".class_implementation");
+    static std::string r(traits::facet_qn() + ".class_implementation");
     return r;
 }
 
@@ -90,7 +90,7 @@ std::string traits::class_implementation_archetype_sn() {
 }
 
 std::string traits::enum_header_archetype() {
-    static std::string r(traits::facet() + ".enum_header");
+    static std::string r(traits::facet_qn() + ".enum_header");
     return r;
 }
 
@@ -100,7 +100,7 @@ std::string traits::enum_header_archetype_sn() {
 }
 
 std::string traits::exception_header_archetype() {
-    static std::string r(traits::facet() + ".exception_header");
+    static std::string r(traits::facet_qn() + ".exception_header");
     return r;
 }
 
@@ -110,7 +110,7 @@ std::string traits::exception_header_archetype_sn() {
 }
 
 std::string traits::namespace_header_archetype() {
-    static std::string r(traits::facet() + ".namespace_header");
+    static std::string r(traits::facet_qn() + ".namespace_header");
     return r;
 }
 
@@ -120,7 +120,7 @@ std::string traits::namespace_header_archetype_sn() {
 }
 
 std::string traits::visitor_header_archetype() {
-    static std::string r(traits::facet() + ".visitor_header");
+    static std::string r(traits::facet_qn() + ".visitor_header");
     return r;
 }
 
@@ -130,7 +130,7 @@ std::string traits::visitor_header_archetype_sn() {
 }
 
 std::string traits::builtin_header_archetype() {
-    static std::string r(traits::facet() + ".builtin_header");
+    static std::string r(traits::facet_qn() + ".builtin_header");
     return r;
 }
 
@@ -140,7 +140,7 @@ std::string traits::builtin_header_archetype_sn() {
 }
 
 std::string traits::primitive_header_archetype() {
-    static std::string r(traits::facet() + ".primitive_header");
+    static std::string r(traits::facet_qn() + ".primitive_header");
     return r;
 }
 
@@ -150,7 +150,7 @@ std::string traits::primitive_header_archetype_sn() {
 }
 
 std::string traits::primitive_implementation_archetype() {
-    static std::string r(traits::facet() + ".primitive_implementation");
+    static std::string r(traits::facet_qn() + ".primitive_implementation");
     return r;
 }
 
@@ -160,7 +160,7 @@ std::string traits::primitive_implementation_archetype_sn() {
 }
 
 std::string traits::feature_template_bundle_header_archetype() {
-    static std::string r(traits::facet() + ".feature_template_bundle_header");
+    static std::string r(traits::facet_qn() + ".feature_template_bundle_header");
     return r;
 }
 
@@ -170,7 +170,7 @@ std::string traits::feature_template_bundle_header_archetype_sn() {
 }
 
 std::string traits::feature_template_bundle_implementation_archetype() {
-    static std::string r(traits::facet() + ".feature_template_bundle_implementation");
+    static std::string r(traits::facet_qn() + ".feature_template_bundle_implementation");
     return r;
 }
 
@@ -180,7 +180,7 @@ std::string traits::feature_template_bundle_implementation_archetype_sn() {
 }
 
 std::string traits::feature_bundle_header_archetype() {
-    static std::string r(traits::facet() + ".feature_bundle_header");
+    static std::string r(traits::facet_qn() + ".feature_bundle_header");
     return r;
 }
 
@@ -190,7 +190,7 @@ std::string traits::feature_bundle_header_archetype_sn() {
 }
 
 std::string traits::feature_bundle_implementation_archetype() {
-    static std::string r(traits::facet() + ".feature_bundle_implementation");
+    static std::string r(traits::facet_qn() + ".feature_bundle_implementation");
     return r;
 }
 
@@ -200,7 +200,7 @@ std::string traits::feature_bundle_implementation_archetype_sn() {
 }
 
 std::string traits::variability_initializer_header_archetype() {
-    static std::string r(traits::facet() + ".variability_initializer_header");
+    static std::string r(traits::facet_qn() + ".variability_initializer_header");
     return r;
 }
 
@@ -210,7 +210,7 @@ std::string traits::variability_initializer_header_archetype_sn() {
 }
 
 std::string traits::variability_initializer_implementation_archetype() {
-    static std::string r(traits::facet() +
+    static std::string r(traits::facet_qn() +
         ".variability_initializer_implementation");
     return r;
 }
@@ -221,7 +221,7 @@ std::string traits::variability_initializer_implementation_archetype_sn() {
 }
 
 std::string traits::main_archetype() {
-    static std::string r(traits::facet() + ".main");
+    static std::string r(traits::facet_qn() + ".main");
     return r;
 }
 

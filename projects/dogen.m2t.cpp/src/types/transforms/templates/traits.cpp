@@ -24,7 +24,7 @@
 
 namespace dogen::m2t::cpp::transforms::templates {
 
-std::string traits::facet() {
+std::string traits::facet_qn() {
     static std::string r(cpp::traits::backend_qn() + ".templates");
     return r;
 }
@@ -35,12 +35,12 @@ std::string traits::facet_sn() {
 }
 
 std::string traits::canonical_archetype() {
-    static std::string r(traits::facet() + ".canonical_archetype");
+    static std::string r(traits::facet_qn() + ".canonical_archetype");
     return r;
 }
 
 std::string traits::logic_less_template_archetype() {
-    static std::string r(traits::facet() + ".logic_less_template");
+    static std::string r(traits::facet_qn() + ".logic_less_template");
     return r;
 }
 

@@ -24,7 +24,7 @@
 
 namespace dogen::m2t::cpp::transforms::odb {
 
-std::string traits::facet() {
+std::string traits::facet_qn() {
     static std::string r(cpp::traits::backend_qn() + ".odb");
     return r;
 }
@@ -35,12 +35,12 @@ std::string traits::facet_sn() {
 }
 
 std::string traits::canonical_archetype() {
-    static std::string r(traits::facet() + ".canonical_archetype");
+    static std::string r(traits::facet_qn() + ".canonical_archetype");
     return r;
 }
 
 std::string traits::class_header_archetype() {
-    static std::string r(traits::facet() + ".class_header");
+    static std::string r(traits::facet_qn() + ".class_header");
     return r;
 }
 
@@ -50,7 +50,7 @@ std::string traits::class_header_archetype_sn() {
 }
 
 std::string traits::enum_header_archetype() {
-    static std::string r(traits::facet() + ".enum_header");
+    static std::string r(traits::facet_qn() + ".enum_header");
     return r;
 }
 
@@ -60,7 +60,7 @@ std::string traits::enum_header_archetype_sn() {
 }
 
 std::string traits::common_odb_options_archetype() {
-    static std::string r(traits::facet() + ".common_odb_options");
+    static std::string r(traits::facet_qn() + ".common_odb_options");
     return r;
 }
 
@@ -70,7 +70,7 @@ std::string traits::common_odb_options_archetype_sn() {
 }
 
 std::string traits::object_odb_options_archetype() {
-    static std::string r(traits::facet() + ".object_odb_options");
+    static std::string r(traits::facet_qn() + ".object_odb_options");
     return r;
 }
 
@@ -80,7 +80,7 @@ std::string traits::object_odb_options_archetype_sn() {
 }
 
 std::string traits::primitive_odb_options_archetype() {
-    static std::string r(traits::facet() + ".primitive_odb_options");
+    static std::string r(traits::facet_qn() + ".primitive_odb_options");
     return r;
 }
 
@@ -90,7 +90,7 @@ std::string traits::primitive_odb_options_archetype_sn() {
 }
 
 std::string traits::builtin_header_archetype() {
-    static std::string r(traits::facet() + ".builtin_header");
+    static std::string r(traits::facet_qn() + ".builtin_header");
     return r;
 }
 
@@ -100,7 +100,7 @@ std::string traits::builtin_header_archetype_sn() {
 }
 
 std::string traits::primitive_header_archetype() {
-    static std::string r(traits::facet() + ".primitive_header");
+    static std::string r(traits::facet_qn() + ".primitive_header");
     return r;
 }
 
