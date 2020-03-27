@@ -18,16 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_LOCATION_REPOSITORY_PARTS_FWD_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_LOCATION_REPOSITORY_PARTS_FWD_HPP
+#ifndef DOGEN_PHYSICAL_IO_ENTITIES_NAME_REPOSITORY_PARTS_IO_HPP
+#define DOGEN_PHYSICAL_IO_ENTITIES_NAME_REPOSITORY_PARTS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen.physical/types/entities/name_repository_parts.hpp"
+
 namespace dogen::physical::entities {
 
-class location_repository_parts;
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::physical::entities::name_repository_parts& v);
 
 }
 

@@ -79,7 +79,7 @@ public:
                              std::list<physical::entities::location>>&
     archetype_locations_by_family() const override;
 
-    const physical::entities::location_repository_parts&
+    const physical::entities::name_repository_parts&
     archetype_location_repository_parts() const override;
 
     logical::entities::technical_space technical_space() const override;

@@ -31,7 +31,7 @@
 #include <unordered_map>
 #include "dogen.physical/types/entities/location.hpp"
 #include "dogen.physical/types/entities/name_group.hpp"
-#include "dogen.physical/types/entities/location_repository_parts.hpp"
+#include "dogen.physical/types/entities/name_repository_parts.hpp"
 #include "dogen.m2t.csharp/types/transforms/repository.hpp"
 #include "dogen.m2t.csharp/types/transforms/helper_transform.hpp"
 #include "dogen.m2t.csharp/types/transforms/model_to_text_transform.hpp"
@@ -84,7 +84,7 @@ public:
                              std::list<physical::entities::location>>&
     archetype_locations_by_family() const;
 
-    const physical::entities::location_repository_parts&
+    const physical::entities::name_repository_parts&
     archetype_location_repository_parts() const;
 
 private:
@@ -96,7 +96,7 @@ private:
     std::unordered_map<std::string,
                        std::list<physical::entities::location>>
     archetype_locations_by_family_;
-    physical::entities::location_repository_parts
+    physical::entities::name_repository_parts
     archetype_location_repository_parts_;
 };
 

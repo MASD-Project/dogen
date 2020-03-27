@@ -152,7 +152,7 @@ add(const std::unordered_map<std::string, entities::name_group>&
 }
 
 void location_repository_builder::
-add(const entities::location_repository_parts& parts) {
+add(const entities::name_repository_parts& parts) {
     add(parts.all());
     add(parts.by_meta_name());
 }

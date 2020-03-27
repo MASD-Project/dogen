@@ -124,7 +124,7 @@
       ]
     },
     {
-      "name": "entities::location_repository_parts",
+      "name": "entities::name_repository_parts",
       "fallback_element_type": "masd::object",
       "attributes": [
         {

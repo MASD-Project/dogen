@@ -106,7 +106,7 @@ add(const std::string& meta_name, const std::string& family,
     }
 }
 
-entities::location_repository_parts
+entities::name_repository_parts
 location_repository_parts_builder::build() {
     return parts_;
 }

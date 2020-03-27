@@ -27,7 +27,7 @@
 
 #include <string>
 #include "dogen.physical/types/entities/location.hpp"
-#include "dogen.physical/types/entities/location_repository_parts.hpp"
+#include "dogen.physical/types/entities/name_repository_parts.hpp"
 
 namespace dogen::physical::helpers {
 
@@ -40,10 +40,10 @@ public:
     void add(const std::string& meta_name, const std::string& family,
         const std::string& intra_backend_segment,
         const std::string& canonical_archetype, const entities::location& al);
-    entities::location_repository_parts build();
+    entities::name_repository_parts build();
 
 private:
-    entities::location_repository_parts parts_;
+    entities::name_repository_parts parts_;
 };
 
 }

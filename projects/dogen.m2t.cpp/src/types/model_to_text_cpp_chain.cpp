@@ -130,7 +130,7 @@ model_to_text_cpp_chain::archetype_locations_by_family() const {
     return rg.archetype_locations_by_family();
 }
 
-const physical::entities::location_repository_parts&
+const physical::entities::name_repository_parts&
 model_to_text_cpp_chain::
 archetype_location_repository_parts() const {
     const auto& rg(transforms::workflow::registrar());

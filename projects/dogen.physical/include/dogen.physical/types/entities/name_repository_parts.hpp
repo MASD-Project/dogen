@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_LOCATION_REPOSITORY_PARTS_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_LOCATION_REPOSITORY_PARTS_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_NAME_REPOSITORY_PARTS_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_NAME_REPOSITORY_PARTS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,15 +34,15 @@
 
 namespace dogen::physical::entities {
 
-class location_repository_parts final {
+class name_repository_parts final {
 public:
-    location_repository_parts() = default;
-    location_repository_parts(const location_repository_parts&) = default;
-    location_repository_parts(location_repository_parts&&) = default;
-    ~location_repository_parts() = default;
+    name_repository_parts() = default;
+    name_repository_parts(const name_repository_parts&) = default;
+    name_repository_parts(name_repository_parts&&) = default;
+    ~name_repository_parts() = default;
 
 public:
-    location_repository_parts(
+    name_repository_parts(
         const std::list<dogen::physical::entities::location>& all,
         const std::unordered_map<std::string, dogen::physical::entities::name_group>& by_meta_name);
 
@@ -69,14 +69,14 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const location_repository_parts& rhs) const;
-    bool operator!=(const location_repository_parts& rhs) const {
+    bool operator==(const name_repository_parts& rhs) const;
+    bool operator!=(const name_repository_parts& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(location_repository_parts& other) noexcept;
-    location_repository_parts& operator=(location_repository_parts other);
+    void swap(name_repository_parts& other) noexcept;
+    name_repository_parts& operator=(name_repository_parts other);
 
 private:
     std::list<dogen::physical::entities::location> all_;
@@ -89,8 +89,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::physical::entities::location_repository_parts& lhs,
-    dogen::physical::entities::location_repository_parts& rhs) {
+    dogen::physical::entities::name_repository_parts& lhs,
+    dogen::physical::entities::name_repository_parts& rhs) {
     lhs.swap(rhs);
 }
 

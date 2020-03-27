@@ -28,7 +28,7 @@
 #include <list>
 #include "dogen.physical/types/entities/location.hpp"
 #include "dogen.physical/types/entities/name_group.hpp"
-#include "dogen.physical/types/entities/location_repository_parts.hpp"
+#include "dogen.physical/types/entities/name_repository_parts.hpp"
 #include "dogen.physical/types/entities/name_repository.hpp"
 
 namespace dogen::physical::helpers {
@@ -47,7 +47,7 @@ public:
         locations_by_meta_name);
 
 public:
-    void add(const entities::location_repository_parts& parts);
+    void add(const entities::name_repository_parts& parts);
 
 public:
     const entities::name_repository& build();

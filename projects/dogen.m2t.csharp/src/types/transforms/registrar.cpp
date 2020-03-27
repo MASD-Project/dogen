@@ -170,7 +170,7 @@ registrar::archetype_locations_by_family() const {
     return archetype_locations_by_family_;
 }
 
-const physical::entities::location_repository_parts&
+const physical::entities::name_repository_parts&
 registrar::archetype_location_repository_parts() const {
     return archetype_location_repository_parts_;
 }

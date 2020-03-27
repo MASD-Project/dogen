@@ -31,7 +31,7 @@
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen.physical/types/entities/name_group.hpp"
-#include "dogen.physical/types/entities/location_repository_parts.hpp"
+#include "dogen.physical/types/entities/name_repository_parts.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.m2t/types/transforms/context.hpp"
 #include "dogen.m2t/types/entities/model.hpp"
@@ -90,7 +90,7 @@ public:
      * @brief Returns this backend's part of the repository of
      * archetype locations.
      */
-    virtual const physical::entities::location_repository_parts&
+    virtual const physical::entities::name_repository_parts&
     archetype_location_repository_parts() const = 0;
 
     /**
