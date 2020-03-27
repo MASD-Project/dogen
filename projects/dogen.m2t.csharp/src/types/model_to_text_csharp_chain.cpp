@@ -31,7 +31,7 @@
 namespace {
 
 const std::string
-transform_id(dogen::m2t::csharp::traits::backend());
+transform_id("m2t.csharp.model_to_text_csharp_chain");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -58,7 +58,7 @@ model_to_text_csharp_chain::create_formattables_model(
 }
 
 std::string model_to_text_csharp_chain::id() const {
-    return traits::backend();
+    return traits::backend_qn();
 }
 
 std::string model_to_text_csharp_chain::description() const {

@@ -24,7 +24,7 @@
 namespace dogen::m2t::csharp::transforms::test_data {
 
 std::string traits::facet() {
-    static std::string r(csharp::traits::backend() + ".test_data");
+    static std::string r(csharp::traits::backend_qn() + ".test_data");
     return r;
 }
 

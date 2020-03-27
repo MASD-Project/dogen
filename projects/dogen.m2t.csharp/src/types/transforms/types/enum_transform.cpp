@@ -40,7 +40,7 @@ std::string enum_transform::id() const {
 physical::entities::name
 enum_transform::physical_name() const {
     using physical::helpers::name_factory;
-    static const auto r(name_factory::make(csharp::traits::backend(),
+    static const auto r(name_factory::make(csharp::traits::backend_qn(),
         traits::facet(), enum_transform::static_id()));
     return r;
 }

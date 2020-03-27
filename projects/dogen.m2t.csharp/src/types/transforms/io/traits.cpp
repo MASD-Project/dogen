@@ -24,7 +24,7 @@
 namespace dogen::m2t::csharp::transforms::io {
 
 std::string traits::facet() {
-    static std::string r(csharp::traits::backend() + ".io");
+    static std::string r(csharp::traits::backend_qn() + ".io");
     return r;
 }
 

@@ -40,7 +40,7 @@ std::string exception_transform::id() const {
 physical::entities::name
 exception_transform::physical_name() const {
     using physical::helpers::name_factory;
-    static const auto r(name_factory::make(csharp::traits::backend(),
+    static const auto r(name_factory::make(csharp::traits::backend_qn(),
         traits::facet(), exception_transform::static_id()));
     return r;
 }
