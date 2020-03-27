@@ -274,8 +274,8 @@ registrar::archetype_locations_by_family() const {
 }
 
 const physical::entities::name_repository_parts&
-registrar::archetype_location_repository_parts() const {
-    return archetype_location_repository_parts_;
+registrar::physical_name_repository_parts() const {
+    return physical_name_repository_parts_;
 }
 
 const std::unordered_map<

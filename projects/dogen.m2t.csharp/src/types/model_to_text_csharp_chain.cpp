@@ -94,9 +94,9 @@ model_to_text_csharp_chain::archetype_locations_by_family() const {
 
 const physical::entities::name_repository_parts&
 model_to_text_csharp_chain::
-archetype_location_repository_parts() const {
+physical_name_repository_parts() const {
     const auto& rg(transforms::workflow::registrar());
-    return rg.archetype_location_repository_parts();
+    return rg.physical_name_repository_parts();
 }
 
 logical::entities::technical_space

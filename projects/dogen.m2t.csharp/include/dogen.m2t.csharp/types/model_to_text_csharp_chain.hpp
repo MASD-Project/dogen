@@ -80,7 +80,7 @@ public:
     archetype_locations_by_family() const override;
 
     const physical::entities::name_repository_parts&
-    archetype_location_repository_parts() const override;
+    physical_name_repository_parts() const override;
 
     logical::entities::technical_space technical_space() const override;
 

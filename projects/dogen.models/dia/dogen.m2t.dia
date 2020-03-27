@@ -3150,13 +3150,13 @@ spaces.#</dia:string>
         <dia:point val="162,147"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="161.95,146.95;195.275,156.25"/>
+        <dia:rectangle val="161.95,146.95;191.81,156.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="162,147"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="33.225000000000001"/>
+        <dia:real val="29.760000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="9.1999999999999993"/>
@@ -3312,13 +3312,13 @@ spaces.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#archetype_location_repository_parts#</dia:string>
+            <dia:string>#physical_name_repository_parts#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#physical::entities::location_repository_parts#</dia:string>
+            <dia:string>#physical::entities::name_repository_parts#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3894,7 +3894,7 @@ spaces.#</dia:string>
         <dia:point val="189.785,142.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="189.035,141.65;195.425,147.8"/>
+        <dia:rectangle val="189.035,141.65;191.96,147.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3902,8 +3902,8 @@ spaces.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="189.785,142.4"/>
         <dia:point val="189.785,145"/>
-        <dia:point val="195.225,145"/>
-        <dia:point val="195.225,147"/>
+        <dia:point val="191.76,145"/>
+        <dia:point val="191.76,147"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

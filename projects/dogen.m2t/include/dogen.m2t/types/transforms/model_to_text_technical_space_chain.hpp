@@ -91,7 +91,7 @@ public:
      * archetype locations.
      */
     virtual const physical::entities::name_repository_parts&
-    archetype_location_repository_parts() const = 0;
+    physical_name_repository_parts() const = 0;
 
     /**
      * @brief Technical space supported by this transform.

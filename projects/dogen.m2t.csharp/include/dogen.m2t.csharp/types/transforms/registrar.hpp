@@ -85,7 +85,7 @@ public:
     archetype_locations_by_family() const;
 
     const physical::entities::name_repository_parts&
-    archetype_location_repository_parts() const;
+    physical_name_repository_parts() const;
 
 private:
     repository formatter_repository_;
@@ -97,7 +97,7 @@ private:
                        std::list<physical::entities::location>>
     archetype_locations_by_family_;
     physical::entities::name_repository_parts
-    archetype_location_repository_parts_;
+    physical_name_repository_parts_;
 };
 
 template<typename Formatter>
