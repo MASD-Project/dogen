@@ -7150,6 +7150,41 @@ Features for which there is no urgency but we'd like to see them
 implemented at some point. They may require some alterations to the
 core, but not fundamental rethinking.
 
+*** Consider making conversions a generation concept                  :story:
+
+Strange idea, and one for which we haven't given a lot of thought, but
+captured just so we don't forget. At present we have Dia model files
+side by side with JSON model files (well, not exactly side by side but
+in proximity). Which makes one wonder: what if the conversion into
+different injection formats was supported directly in the dogen
+meta-model? That is, imagine a world where there is a meta-model
+element representing the model itself. Its not a big stretch to think
+that we could also have a second representation for the model, with
+some feature indicating a conversion is required and a pointer to the
+model (it could a meta-type specific for this, such as
+=model::conversion= or some such and with the appropriate
+"destination" injector). Then dogen would run a conversion of that
+model. This would make our life easier because every time we generated
+a model, we would automatically convert it into any of the types we
+set the model to convert to. If the tests were then clever enough to
+test all supported formats then we wouldn't even have to remember to
+add models.
+
+*** Consider generating model generation tests                        :story:
+
+At present we are manually adding model generation tests (e.g. the
+tests that check if a model's output is the same as what is currently
+in the file system). This is a bit painful and we end up forgetting to
+add new models. Ideally we want dogen to generate these tests. We also
+want dogen to automatically test all the supported injectors (e.g. if
+there are files for injection X we want the tests to pick that up
+dynamically and test them).
+
+One slight problem though is that we don't want to generate all
+generated tests on regular builds; we just want to generate these
+tests. Then, on the nightly we want to generate all tests. This
+requires some thinking.
+
 *** Consider computing hashes only once for immutable types           :story:
 
 if a type is immutable the hash should be computed once at
