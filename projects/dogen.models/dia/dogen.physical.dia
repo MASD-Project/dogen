@@ -65,16 +65,16 @@
   <dia:layer name="Background" visible="true" active="true">
     <dia:object type="UML - Note" version="0" id="O0">
       <dia:attribute name="obj_pos">
-        <dia:point val="32,-117"/>
+        <dia:point val="30,-117"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.95,-117.05;58.745,-101.65"/>
+        <dia:rectangle val="29.95,-117.05;56.745,-101.65"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="32,-117"/>
+        <dia:point val="30,-117"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="26.695"/>
@@ -120,7 +120,7 @@ physical dimension of MASD conceptual space.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="32.35,-115.755"/>
+            <dia:point val="30.35,-115.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -133,13 +133,13 @@ physical dimension of MASD conceptual space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O1">
       <dia:attribute name="obj_pos">
-        <dia:point val="34,-95"/>
+        <dia:point val="33,-95"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="33.95,-95.05;49.565,-91.95"/>
+        <dia:rectangle val="32.95,-95.05;48.565,-91.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="34,-95"/>
+        <dia:point val="33,-95"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -243,13 +243,13 @@ physical dimension of MASD conceptual space.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O2">
       <dia:attribute name="obj_pos">
-        <dia:point val="34,-90"/>
+        <dia:point val="33,-90"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="33.95,-90.05;55.34,-86.95"/>
+        <dia:rectangle val="32.95,-90.05;54.34,-86.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="34,-90"/>
+        <dia:point val="33,-90"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="21.289999999999999"/>
@@ -353,19 +353,19 @@ physical dimension of MASD conceptual space.
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O3">
       <dia:attribute name="obj_pos">
-        <dia:point val="61,-117"/>
+        <dia:point val="59,-117"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="60.95,-118.05;180.05,-53.95"/>
+        <dia:rectangle val="58.95,-118.05;180.05,-53.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="61,-117"/>
+        <dia:point val="59,-117"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="119"/>
+        <dia:real val="121"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="63"/>
@@ -981,13 +981,13 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O8">
       <dia:attribute name="obj_pos">
-        <dia:point val="64,-103"/>
+        <dia:point val="61,-103"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="63.95,-103.05;106.9,-96.95"/>
+        <dia:rectangle val="60.95,-103.05;103.9,-96.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="64,-103"/>
+        <dia:point val="61,-103"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="42.850000000000001"/>
@@ -1740,19 +1740,19 @@ backends, facets and archetypes.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="66,-94"/>
+        <dia:point val="61,-94"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="65.95,-94.05;92.73,-90.35"/>
+        <dia:rectangle val="60.95,-94.05;96.2,-89.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="66,-94"/>
+        <dia:point val="61,-94"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.68"/>
+        <dia:real val="35.149999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#meta_model#</dia:string>
@@ -1890,6 +1890,33 @@ Provides details of the kernels available in the current instance of Dogen.#</di
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#template_instantiation_domains#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::unordered_map&lt;std::string, std::vector&lt;std::string&gt;&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Provides all of the domains to be used for template instantiation.
+
+Example of a domain is "masd.facet" which contains the list of all available facets.
+Templates (facet and profile) are then instantiated over this range, depending on
+user choices.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -1900,13 +1927,13 @@ Provides details of the kernels available in the current instance of Dogen.#</di
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O14">
       <dia:attribute name="obj_pos">
-        <dia:point val="86,-87"/>
+        <dia:point val="93,-86"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="85.95,-87.05;97.715,-82.55"/>
+        <dia:rectangle val="92.95,-86.05;104.715,-81.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="86,-87"/>
+        <dia:point val="93,-86"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="11.665000000000001"/>
@@ -2298,19 +2325,19 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="92.68,-90.4"/>
+        <dia:point val="96.15,-89.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="85.95,-91.15;93.43,-86.2"/>
+        <dia:rectangle val="92.95,-90.35;96.9,-85.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="92.68,-90.4"/>
-        <dia:point val="92.68,-88"/>
-        <dia:point val="86,-88"/>
-        <dia:point val="86,-87"/>
+        <dia:point val="96.15,-89.6"/>
+        <dia:point val="96.15,-88"/>
+        <dia:point val="93,-88"/>
+        <dia:point val="93,-86"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -2370,19 +2397,19 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="91.8325,-82.5497"/>
+        <dia:point val="98.8325,-81.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="88.95,-83.2997;92.5825,-77.2"/>
+        <dia:rectangle val="98.0825,-82.35;114.725,-77.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="91.8325,-82.5497"/>
-        <dia:point val="91.8325,-80"/>
-        <dia:point val="89,-80"/>
-        <dia:point val="89,-78"/>
+        <dia:point val="98.8325,-81.6"/>
+        <dia:point val="98.8325,-80"/>
+        <dia:point val="114.525,-80"/>
+        <dia:point val="114.525,-78"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -2399,8 +2426,8 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O14" connection="12"/>
-        <dia:connection handle="1" to="O15" connection="0"/>
+        <dia:connection handle="0" to="O14" connection="6"/>
+        <dia:connection handle="1" to="O15" connection="2"/>
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
@@ -2682,13 +2709,13 @@ Provides details of the kernels available in the current instance of Dogen.#</di
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O20">
       <dia:attribute name="obj_pos">
-        <dia:point val="63,-67"/>
+        <dia:point val="61,-67"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="62.95,-67.05;79.335,-61.75"/>
+        <dia:rectangle val="60.95,-67.05;77.335,-61.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="63,-67"/>
+        <dia:point val="61,-67"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.285"/>
@@ -3360,13 +3387,13 @@ Provides details of the kernels available in the current instance of Dogen.#</di
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O24">
       <dia:attribute name="obj_pos">
-        <dia:point val="101,-87"/>
+        <dia:point val="80,-86"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="100.95,-87.05;112.33,-82.55"/>
+        <dia:rectangle val="79.95,-86.05;91.33,-81.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="101,-87"/>
+        <dia:point val="80,-86"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="11.279999999999999"/>
@@ -4131,13 +4158,13 @@ Provides details of the kernels available in the current instance of Dogen.#</di
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O28">
       <dia:attribute name="obj_pos">
-        <dia:point val="106,-94"/>
+        <dia:point val="108,-94"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="105.95,-94.05;116.175,-90.35"/>
+        <dia:rectangle val="107.95,-94.05;118.175,-90.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="106,-94"/>
+        <dia:point val="108,-94"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.125"/>
@@ -4338,13 +4365,13 @@ Provides details of the kernels available in the current instance of Dogen.#</di
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O30">
       <dia:attribute name="obj_pos">
-        <dia:point val="132,-94"/>
+        <dia:point val="134,-94"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="131.95,-94.05;142.175,-90.35"/>
+        <dia:rectangle val="133.95,-94.05;144.175,-90.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="132,-94"/>
+        <dia:point val="134,-94"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.125"/>
@@ -4631,13 +4658,13 @@ Provides details of the kernels available in the current instance of Dogen.#</di
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O32">
       <dia:attribute name="obj_pos">
-        <dia:point val="117,-87"/>
+        <dia:point val="122,-86"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="116.95,-87.05;127.175,-83.95"/>
+        <dia:rectangle val="121.95,-86.05;132.175,-82.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="117,-87"/>
+        <dia:point val="122,-86"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.125"/>
@@ -4742,19 +4769,19 @@ Provides details of the kernels available in the current instance of Dogen.#</di
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O33">
       <dia:attribute name="obj_pos">
-        <dia:point val="111.062,-90.4"/>
+        <dia:point val="113.062,-90.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="110.212,-90.45;122.112,-86.95"/>
+        <dia:rectangle val="112.212,-90.45;127.112,-85.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="111.062,-90.4"/>
-        <dia:point val="111.062,-88"/>
-        <dia:point val="122.062,-88"/>
-        <dia:point val="122.062,-87"/>
+        <dia:point val="113.062,-90.4"/>
+        <dia:point val="113.062,-88"/>
+        <dia:point val="127.062,-88"/>
+        <dia:point val="127.062,-86"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4784,19 +4811,19 @@ Provides details of the kernels available in the current instance of Dogen.#</di
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O34">
       <dia:attribute name="obj_pos">
-        <dia:point val="137.062,-90.4"/>
+        <dia:point val="139.062,-90.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="122.012,-90.45;137.912,-86.95"/>
+        <dia:rectangle val="127.013,-90.45;139.912,-85.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="137.062,-90.4"/>
-        <dia:point val="137.062,-88"/>
-        <dia:point val="122.062,-88"/>
-        <dia:point val="122.062,-87"/>
+        <dia:point val="139.062,-90.4"/>
+        <dia:point val="139.062,-88"/>
+        <dia:point val="127.062,-88"/>
+        <dia:point val="127.062,-86"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -5078,17 +5105,17 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="85.425,-103"/>
+        <dia:point val="82.425,-103"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="79.95,-108.45;86.175,-102.2"/>
+        <dia:rectangle val="79.95,-108.45;83.175,-102.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="85.425,-103"/>
-        <dia:point val="85.425,-105"/>
+        <dia:point val="82.425,-103"/>
+        <dia:point val="82.425,-105"/>
         <dia:point val="80,-105"/>
         <dia:point val="80,-108.4"/>
       </dia:attribute>
@@ -5186,17 +5213,17 @@ Provides details of the kernels available in the current instance of Dogen.#</di
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O40">
       <dia:attribute name="obj_pos">
-        <dia:point val="122.062,-83.9498"/>
+        <dia:point val="127.062,-82.9504"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.212,-83.9998;123.423,-77.95"/>
+        <dia:rectangle val="123.323,-83.0004;127.912,-77.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="122.062,-83.9498"/>
-        <dia:point val="122.062,-80"/>
+        <dia:point val="127.062,-82.9504"/>
+        <dia:point val="127.062,-80"/>
         <dia:point val="123.373,-80"/>
         <dia:point val="123.373,-78"/>
       </dia:attribute>
@@ -5228,13 +5255,13 @@ Provides details of the kernels available in the current instance of Dogen.#</di
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O41">
       <dia:attribute name="obj_pos">
-        <dia:point val="129,-87"/>
+        <dia:point val="107,-86"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="128.95,-87.05;141.1,-82.55"/>
+        <dia:rectangle val="106.95,-86.05;119.1,-81.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="129,-87"/>
+        <dia:point val="107,-86"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.050000000000001"/>
@@ -5911,19 +5938,19 @@ Provides details of the kernels available in the current instance of Dogen.#</di
     </dia:object>
     <dia:object type="UML - LargePackage" version="0" id="O46">
       <dia:attribute name="obj_pos">
-        <dia:point val="61,-51"/>
+        <dia:point val="59,-51"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="60.95,-52.05;180.05,3.05"/>
+        <dia:rectangle val="58.95,-52.05;180.05,3.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="61,-51"/>
+        <dia:point val="59,-51"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="119"/>
+        <dia:real val="121"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="54"/>
@@ -6869,7 +6896,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="141.025,-97.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="140.175,-97.85;152.277,-93.95"/>
+        <dia:rectangle val="140.175,-97.85;152.278,-93.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7022,13 +7049,13 @@ Provides details of the kernels available in the current instance of Dogen.#</di
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O55">
       <dia:attribute name="obj_pos">
-        <dia:point val="143,-87"/>
+        <dia:point val="135,-86"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="142.95,-87.05;164.34,-81.75"/>
+        <dia:rectangle val="134.95,-86.05;156.34,-80.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="143,-87"/>
+        <dia:point val="135,-86"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="21.289999999999999"/>
@@ -7265,7 +7292,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="143.03,-78"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="142.28,-81.85;153.845,-77.2"/>
+        <dia:rectangle val="142.28,-80.85;145.845,-77.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7273,8 +7300,8 @@ Provides details of the kernels available in the current instance of Dogen.#</di
       <dia:attribute name="orth_points">
         <dia:point val="143.03,-78"/>
         <dia:point val="143.03,-80"/>
-        <dia:point val="153.645,-80"/>
-        <dia:point val="153.645,-81.8"/>
+        <dia:point val="145.645,-80"/>
+        <dia:point val="145.645,-80.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -8166,7 +8193,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="65,-72"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="62.95,-72.75;65.75,-66.2"/>
+        <dia:rectangle val="60.95,-72.75;65.75,-66.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8174,8 +8201,8 @@ Provides details of the kernels available in the current instance of Dogen.#</di
       <dia:attribute name="orth_points">
         <dia:point val="65,-72"/>
         <dia:point val="65,-69"/>
-        <dia:point val="63,-69"/>
-        <dia:point val="63,-67"/>
+        <dia:point val="61,-69"/>
+        <dia:point val="61,-67"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -8307,17 +8334,17 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="111.062,-94"/>
+        <dia:point val="113.062,-94"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="110.312,-97.05;114.877,-93.2"/>
+        <dia:rectangle val="112.312,-97.05;114.877,-93.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="111.062,-94"/>
-        <dia:point val="111.062,-96"/>
+        <dia:point val="113.062,-94"/>
+        <dia:point val="113.062,-96"/>
         <dia:point val="114.677,-96"/>
         <dia:point val="114.677,-97"/>
       </dia:attribute>
@@ -8379,16 +8406,16 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="106.85,-100.3"/>
+        <dia:point val="103.85,-100.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="106.1,-103.1;110.05,-99.5"/>
+        <dia:rectangle val="103.1,-103.1;110.05,-99.5"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="106.85,-100.3"/>
+        <dia:point val="103.85,-100.3"/>
         <dia:point val="109,-100.3"/>
         <dia:point val="109,-102.3"/>
         <dia:point val="110,-102.3"/>
@@ -8451,19 +8478,19 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="114.525,-78"/>
+        <dia:point val="89,-78"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="106.59,-82.65;115.275,-77.2"/>
+        <dia:rectangle val="85.59,-81.65;89.75,-77.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="114.525,-78"/>
-        <dia:point val="114.525,-80"/>
-        <dia:point val="106.64,-80"/>
-        <dia:point val="106.64,-82.6"/>
+        <dia:point val="89,-78"/>
+        <dia:point val="89,-80"/>
+        <dia:point val="85.64,-80"/>
+        <dia:point val="85.64,-81.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -8480,7 +8507,7 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O15" connection="2"/>
+        <dia:connection handle="0" to="O15" connection="0"/>
         <dia:connection handle="1" to="O24" connection="6"/>
       </dia:connections>
       <dia:childnode parent="O3"/>
@@ -8631,13 +8658,13 @@ Provides details of the kernels available in the current instance of Dogen.#</di
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O69">
       <dia:attribute name="obj_pos">
-        <dia:point val="64,-87"/>
+        <dia:point val="61,-86"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="63.95,-87.05;81.105,-80.95"/>
+        <dia:rectangle val="60.95,-86.05;78.105,-79.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="64,-87"/>
+        <dia:point val="61,-86"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.055"/>
@@ -8894,19 +8921,19 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="66,-90.4"/>
+        <dia:point val="61,-89.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="65.25,-91.15;72.7275,-86.2"/>
+        <dia:rectangle val="60.25,-90.35;69.7275,-85.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="66,-90.4"/>
-        <dia:point val="66,-88"/>
-        <dia:point val="72.5275,-88"/>
-        <dia:point val="72.5275,-87"/>
+        <dia:point val="61,-89.6"/>
+        <dia:point val="61,-88"/>
+        <dia:point val="69.5275,-88"/>
+        <dia:point val="69.5275,-86"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -8966,17 +8993,17 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="79.285,-67"/>
+        <dia:point val="77.285,-67"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="78.535,-69.8;87.6762,-66.2"/>
+        <dia:rectangle val="76.535,-69.8;87.6762,-66.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="79.285,-67"/>
-        <dia:point val="79.285,-69"/>
+        <dia:point val="77.285,-67"/>
+        <dia:point val="77.285,-69"/>
         <dia:point val="87.4762,-69"/>
         <dia:point val="87.4762,-67"/>
       </dia:attribute>
@@ -12904,19 +12931,19 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="97.665,-87"/>
+        <dia:point val="104.665,-86"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="85.375,-97.05;98.415,-86.2"/>
+        <dia:rectangle val="82.375,-97.05;105.415,-85.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="97.665,-87"/>
-        <dia:point val="97.665,-95"/>
-        <dia:point val="85.425,-95"/>
-        <dia:point val="85.425,-97"/>
+        <dia:point val="104.665,-86"/>
+        <dia:point val="104.665,-95"/>
+        <dia:point val="82.425,-95"/>
+        <dia:point val="82.425,-97"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -12940,13 +12967,13 @@ space. If you are targetting more than one, it will automatically be set to true
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O102">
       <dia:attribute name="obj_pos">
-        <dia:point val="34,-100"/>
+        <dia:point val="33,-100"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="33.95,-100.05;49.565,-96.95"/>
+        <dia:rectangle val="32.95,-100.05;48.565,-96.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="34,-100"/>
+        <dia:point val="33,-100"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="15.515000000000001"/>
@@ -13350,13 +13377,13 @@ space. If you are targetting more than one, it will automatically be set to true
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O105">
       <dia:attribute name="obj_pos">
-        <dia:point val="119,-94"/>
+        <dia:point val="121,-94"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="118.95,-94.05;129.175,-90.35"/>
+        <dia:rectangle val="120.95,-94.05;131.175,-90.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="119,-94"/>
+        <dia:point val="121,-94"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.125"/>
@@ -13711,17 +13738,17 @@ The simple name must be unique for a given location.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="124.062,-94"/>
+        <dia:point val="126.062,-94"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="123.312,-98.5997;127.877,-93.2"/>
+        <dia:rectangle val="125.312,-98.5997;127.877,-93.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="124.062,-94"/>
-        <dia:point val="124.062,-96"/>
+        <dia:point val="126.062,-94"/>
+        <dia:point val="126.062,-96"/>
         <dia:point val="127.677,-96"/>
         <dia:point val="127.677,-98.5497"/>
       </dia:attribute>
@@ -13819,19 +13846,19 @@ The simple name must be unique for a given location.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O109">
       <dia:attribute name="obj_pos">
-        <dia:point val="124.062,-90.4"/>
+        <dia:point val="126.062,-90.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="122.012,-90.45;124.912,-86.95"/>
+        <dia:rectangle val="125.212,-90.45;127.112,-85.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="124.062,-90.4"/>
-        <dia:point val="124.062,-88"/>
-        <dia:point val="122.062,-88"/>
-        <dia:point val="122.062,-87"/>
+        <dia:point val="126.062,-90.4"/>
+        <dia:point val="126.062,-88"/>
+        <dia:point val="127.062,-88"/>
+        <dia:point val="127.062,-86"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -14924,7 +14951,7 @@ The simple name must be unique for a given location.#</dia:string>
         <dia:point val="200.875,-77.0494"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="200.825,-81.95;210.16,-75.4494"/>
+        <dia:rectangle val="200.825,-81.95;210.16,-76.2494"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

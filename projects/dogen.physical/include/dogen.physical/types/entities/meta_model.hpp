@@ -26,6 +26,7 @@
 #endif
 
 #include <string>
+#include <vector>
 #include <algorithm>
 #include <unordered_map>
 #include "dogen.physical/types/entities/kernel.hpp"
@@ -48,7 +49,8 @@ public:
 public:
     meta_model(
         const std::unordered_map<std::string, dogen::physical::entities::kernel>& kernels,
-        const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>& enablement_flags);
+        const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>& enablement_flags,
+        const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains);
 
 public:
     /**
@@ -71,6 +73,20 @@ public:
     void enablement_flags(const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>&& v);
     /**@}*/
 
+    /**
+     * @brief Provides all of the domains to be used for template instantiation.
+     *
+     * Example of a domain is "masd.facet" which contains the list of all available facets.
+     * Templates (facet and profile) are then instantiated over this range, depending on
+     * user choices.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains() const;
+    std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains();
+    void template_instantiation_domains(const std::unordered_map<std::string, std::vector<std::string> >& v);
+    void template_instantiation_domains(const std::unordered_map<std::string, std::vector<std::string> >&& v);
+    /**@}*/
+
 public:
     bool operator==(const meta_model& rhs) const;
     bool operator!=(const meta_model& rhs) const {
@@ -84,6 +100,7 @@ public:
 private:
     std::unordered_map<std::string, dogen::physical::entities::kernel> kernels_;
     std::unordered_map<std::string, dogen::physical::entities::enablement_flags> enablement_flags_;
+    std::unordered_map<std::string, std::vector<std::string> > template_instantiation_domains_;
 };
 
 }

@@ -24,19 +24,23 @@ namespace dogen::physical::entities {
 
 meta_model::meta_model(
     const std::unordered_map<std::string, dogen::physical::entities::kernel>& kernels,
-    const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>& enablement_flags)
+    const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>& enablement_flags,
+    const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains)
     : kernels_(kernels),
-      enablement_flags_(enablement_flags) { }
+      enablement_flags_(enablement_flags),
+      template_instantiation_domains_(template_instantiation_domains) { }
 
 void meta_model::swap(meta_model& other) noexcept {
     using std::swap;
     swap(kernels_, other.kernels_);
     swap(enablement_flags_, other.enablement_flags_);
+    swap(template_instantiation_domains_, other.template_instantiation_domains_);
 }
 
 bool meta_model::operator==(const meta_model& rhs) const {
     return kernels_ == rhs.kernels_ &&
-        enablement_flags_ == rhs.enablement_flags_;
+        enablement_flags_ == rhs.enablement_flags_ &&
+        template_instantiation_domains_ == rhs.template_instantiation_domains_;
 }
 
 meta_model& meta_model::operator=(meta_model other) {
@@ -75,6 +79,22 @@ void meta_model::enablement_flags(const std::unordered_map<std::string, dogen::p
 
 void meta_model::enablement_flags(const std::unordered_map<std::string, dogen::physical::entities::enablement_flags>&& v) {
     enablement_flags_ = std::move(v);
+}
+
+const std::unordered_map<std::string, std::vector<std::string> >& meta_model::template_instantiation_domains() const {
+    return template_instantiation_domains_;
+}
+
+std::unordered_map<std::string, std::vector<std::string> >& meta_model::template_instantiation_domains() {
+    return template_instantiation_domains_;
+}
+
+void meta_model::template_instantiation_domains(const std::unordered_map<std::string, std::vector<std::string> >& v) {
+    template_instantiation_domains_ = v;
+}
+
+void meta_model::template_instantiation_domains(const std::unordered_map<std::string, std::vector<std::string> >&& v) {
+    template_instantiation_domains_ = std::move(v);
 }
 
 }
