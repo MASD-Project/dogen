@@ -12,39 +12,39 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-27 Fri 08:39]
+#+CAPTION: Clock summary at [2020-03-27 Fri 12:03]
 | <75>                                                   |         |       |      |       |
 | Headline                                               | Time    |       |      |     % |
 |--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *46:35* |       |      | 100.0 |
+| *Total time*                                           | *49:40* |       |      | 100.0 |
 |--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 46:35   |       |      | 100.0 |
-| Active                                                 |         | 46:35 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 7:27 |  16.0 |
-| Create a demo and presentation for previous sprint     |         |       | 0:28 |   1.0 |
-| Sprint and product backlog grooming                    |         |       | 3:59 |   8.6 |
-| Rename archetypes model to physical model              |         |       | 0:28 |   1.0 |
+| Stories                                                | 49:40   |       |      | 100.0 |
+| Active                                                 |         | 49:40 |      | 100.0 |
+| Edit release notes for previous sprint                 |         |       | 7:27 |  15.0 |
+| Create a demo and presentation for previous sprint     |         |       | 0:28 |   0.9 |
+| Sprint and product backlog grooming                    |         |       | 3:59 |   8.0 |
+| Rename archetypes model to physical model              |         |       | 0:28 |   0.9 |
 | Rename assets model to logical model                   |         |       | 0:29 |   1.0 |
-| Consider renaming "meta-model" namespace               |         |       | 0:37 |   1.3 |
-| Rename engine to orchestration                         |         |       | 1:04 |   2.3 |
-| Merge extraction model with physical model             |         |       | 4:35 |   9.8 |
+| Consider renaming "meta-model" namespace               |         |       | 0:37 |   1.2 |
+| Rename engine to orchestration                         |         |       | 1:04 |   2.1 |
+| Merge extraction model with physical model             |         |       | 4:35 |   9.2 |
 | Remove manual feature in profile merge transform       |         |       | 0:08 |   0.3 |
 | Add variability domains to the dumpspecs activity      |         |       | 0:12 |   0.4 |
-| Add org-mode option to dumpspacs                       |         |       | 0:53 |   1.9 |
-| Analysis on designing and implement physical types     |         |       | 6:52 |  14.7 |
+| Add org-mode option to dumpspacs                       |         |       | 0:53 |   1.8 |
+| Analysis on designing and implement physical types     |         |       | 6:52 |  13.8 |
 | Remove =element= from the modeling location            |         |       | 0:02 |   0.1 |
-| Fix clang-cl LNK4217 warnings                          |         |       | 1:04 |   2.3 |
-| Analysis on creating a masd kernel model               |         |       | 0:53 |   1.9 |
-| Rename generation models to =m2t=                      |         |       | 1:04 |   2.3 |
+| Fix clang-cl LNK4217 warnings                          |         |       | 1:04 |   2.1 |
+| Analysis on creating a masd kernel model               |         |       | 0:53 |   1.8 |
+| Rename generation models to =m2t=                      |         |       | 1:04 |   2.1 |
 | Move all generation features away from generation      |         |       | 0:17 |   0.6 |
-| Rename generation transforms                           |         |       | 4:49 |  10.3 |
-| Remove kernel from models                              |         |       | 0:36 |   1.3 |
-| Rename the default MASD kernel                         |         |       | 0:44 |   1.6 |
-| Consider removing archetype location by family         |         |       | 0:40 |   1.4 |
-| Add part to physical location                          |         |       | 1:16 |   2.7 |
-| Make physical location entries simple names            |         |       | 3:28 |   7.4 |
-| Add names to logical model                             |         |       | 1:48 |   3.9 |
-| Implement archetype locations from physical meta-model |         |       | 2:42 |   5.8 |
+| Rename generation transforms                           |         |       | 4:49 |   9.7 |
+| Remove kernel from models                              |         |       | 0:36 |   1.2 |
+| Rename the default MASD kernel                         |         |       | 0:44 |   1.5 |
+| Consider removing archetype location by family         |         |       | 0:40 |   1.3 |
+| Add part to physical location                          |         |       | 1:16 |   2.6 |
+| Make physical location entries simple names            |         |       | 3:28 |   7.0 |
+| Add names to logical model                             |         |       | 1:48 |   3.6 |
+| Implement archetype locations from physical meta-model |         |       | 5:47 |  11.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -729,6 +729,8 @@ model but for the physical model:
 
 *** STARTED Implement archetype locations from physical meta-model    :story:
     :LOGBOOK:
+    CLOCK: [2020-03-27 Fri 10:28]--[2020-03-27 Fri 12:03] =>  1:35
+    CLOCK: [2020-03-27 Fri 08:40]--[2020-03-27 Fri 10:10] =>  1:48
     CLOCK: [2020-03-20 Fri 14:30]--[2020-03-20 Fri 14:44] =>  0:14
     CLOCK: [2020-03-20 Fri 13:01]--[2020-03-20 Fri 14:16] =>  1:15
     CLOCK: [2020-03-17 Tue 17:15]--[2020-03-17 Tue 17:24] =>  0:09
@@ -746,6 +748,18 @@ Tasks:
   by the current code base (archetype locations).
 - replace the existing archetype locations with a physical meta-model.
 - remove all the archetype locations data structures.
+
+Notes:
+
+- one of the problems of this work is that in some cases we do need
+  the qualified name to a facet or archetype (e.g. when building
+  dependencies, etc). However, when creating the archetype name we
+  want the simple name of all components. If we change traits we will
+  change both at the same time, which will cause everything to
+  break. The easiest thing to do for now is to create a =_sn= trait
+  for every case where we already have a qualified name and then
+  replace those that need it with the =_sn= version. This should
+  minimise breakage.
 
 Merged stories:
 
