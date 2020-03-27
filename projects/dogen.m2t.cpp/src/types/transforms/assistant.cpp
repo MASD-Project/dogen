@@ -545,7 +545,7 @@ is_streaming_enabled(const formattables::helper_properties& hp) const {
      * inheritance relationship, we'll need streaming.
      */
     using tt = transforms::types::traits;
-    const auto cifn(tt::class_implementation_archetype());
+    const auto cifn(tt::class_implementation_archetype_qn());
     const auto arch(physical_name_.location().archetype());
     bool in_types_class_implementation(arch == cifn);
     return in_types_class_implementation && hp.in_inheritance_relationship();

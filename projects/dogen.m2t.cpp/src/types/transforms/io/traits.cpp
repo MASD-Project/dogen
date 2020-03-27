@@ -39,7 +39,7 @@ std::string traits::canonical_archetype() {
     return r;
 }
 
-std::string traits::class_header_archetype() {
+std::string traits::class_header_archetype_qn() {
     static std::string r(traits::facet_qn() + ".class_header");
     return r;
 }
@@ -49,7 +49,7 @@ std::string traits::class_header_archetype_sn() {
     return r;
 }
 
-std::string traits::class_implementation_archetype() {
+std::string traits::class_implementation_archetype_qn() {
     static std::string r(traits::facet_qn() + ".class_implementation");
     return r;
 }
@@ -59,7 +59,7 @@ std::string traits::class_implementation_archetype_sn() {
     return r;
 }
 
-std::string traits::enum_header_archetype() {
+std::string traits::enum_header_archetype_qn() {
     static std::string r(traits::facet_qn() + ".enum_header");
     return r;
 }
@@ -69,7 +69,7 @@ std::string traits::enum_header_archetype_sn() {
     return r;
 }
 
-std::string traits::enum_implementation_archetype() {
+std::string traits::enum_implementation_archetype_qn() {
     static std::string r(traits::facet_qn() + ".enum_implementation");
     return r;
 }
@@ -79,7 +79,7 @@ std::string traits::enum_implementation_archetype_sn() {
     return r;
 }
 
-std::string traits::builtin_header_archetype() {
+std::string traits::builtin_header_archetype_qn() {
     static std::string r(traits::facet_qn() + ".builtin_header");
     return r;
 }
@@ -89,7 +89,7 @@ std::string traits::builtin_header_archetype_sn() {
     return r;
 }
 
-std::string traits::primitive_header_archetype() {
+std::string traits::primitive_header_archetype_qn() {
     static std::string r(traits::facet_qn() + ".primitive_header");
     return r;
 }
@@ -99,7 +99,7 @@ std::string traits::primitive_header_archetype_sn() {
     return r;
 }
 
-std::string traits::primitive_implementation_archetype() {
+std::string traits::primitive_implementation_archetype_qn() {
     static std::string r(traits::facet_qn() + ".primitive_implementation");
     return r;
 }

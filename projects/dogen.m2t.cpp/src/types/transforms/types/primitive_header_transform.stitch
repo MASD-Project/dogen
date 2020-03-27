@@ -32,7 +32,7 @@ std::list<std::string> primitive_header_transform::inclusion_dependencies(
     builder.add(inclusion_constants::std::algorithm());
 
     using ser = transforms::serialization::traits;
-    const auto ser_fwd_arch(ser::primitive_forward_declarations_archetype());
+    const auto ser_fwd_arch(ser::primitive_forward_declarations_archetype_qn());
     builder.add(p.name(), ser_fwd_arch);
 
     const auto carch(traits::canonical_archetype());

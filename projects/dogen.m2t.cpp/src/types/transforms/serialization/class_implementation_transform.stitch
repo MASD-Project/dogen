@@ -28,7 +28,7 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
     const auto& o(assistant::as<logical::entities::structural::object>(e));
     auto builder(f.make());
 
-    const auto ch_fn(traits::class_header_archetype());
+    const auto ch_fn(traits::class_header_archetype_qn());
     builder.add(o.name(), ch_fn);
 
     using ic = inclusion_constants;

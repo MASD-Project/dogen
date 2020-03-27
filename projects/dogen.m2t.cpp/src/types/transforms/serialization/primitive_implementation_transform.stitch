@@ -30,7 +30,7 @@ primitive_implementation_transform::inclusion_dependencies(
     const auto& p(assistant::as<primitive>(e));
     auto builder(f.make());
 
-    const auto ph_fn(traits::primitive_header_archetype());
+    const auto ph_fn(traits::primitive_header_archetype_qn());
     builder.add(p.name(), ph_fn);
 
     using ic = inclusion_constants;

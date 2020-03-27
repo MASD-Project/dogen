@@ -37,7 +37,7 @@ std::string traits::canonical_archetype() {
     return r;
 }
 
-std::string traits::include_cmakelists_archetype() {
+std::string traits::include_cmakelists_archetype_qn() {
     static std::string r("masd.cpp.build.include_cmakelists");
     return r;
 }
@@ -47,7 +47,7 @@ std::string traits::include_cmakelists_archetype_sn() {
     return r;
 }
 
-std::string traits::source_cmakelists_archetype() {
+std::string traits::source_cmakelists_archetype_qn() {
     static std::string r("masd.cpp.build.source_cmakelists");
     return r;
 }

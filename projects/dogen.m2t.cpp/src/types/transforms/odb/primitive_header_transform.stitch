@@ -27,7 +27,7 @@ std::list<std::string> primitive_header_transform::inclusion_dependencies(
     using logical::entities::structural::primitive;
     const auto& p(assistant::as<primitive>(e));
     auto builder(f.make());
-    builder.add(p.name(), types::traits::primitive_header_archetype());
+    builder.add(p.name(), types::traits::primitive_header_archetype_qn());
 
     return builder.build();
 }

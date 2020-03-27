@@ -37,7 +37,7 @@
 namespace dogen::m2t::cpp::transforms::test_data {
 
 std::string class_implementation_transform::static_id() {
-    return traits::class_implementation_archetype();
+    return traits::class_implementation_archetype_qn();
 }
 
 std::string class_implementation_transform::id() const {
@@ -86,7 +86,7 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
 
     const auto& o(assistant::as<logical::entities::structural::object>(e));
     auto builder(f.make());
-    builder.add(o.name(), traits::class_header_archetype());
+    builder.add(o.name(), traits::class_header_archetype_qn());
 
     const auto carch(traits::canonical_archetype());
     builder.add(o.transparent_associations(), carch);

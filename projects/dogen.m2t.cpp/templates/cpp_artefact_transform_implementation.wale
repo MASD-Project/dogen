@@ -1,6 +1,6 @@
 
 std::string {{class.simple_name}}::static_id() {
-    return traits::{{archetype.simple_name}}_archetype();
+    return traits::{{archetype.simple_name}}_archetype_qn();
 }
 
 std::string {{class.simple_name}}::id() const {

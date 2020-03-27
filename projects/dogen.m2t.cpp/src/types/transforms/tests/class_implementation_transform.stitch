@@ -23,7 +23,7 @@
 <#+
 
 std::string class_implementation_transform::static_id() {
-    return traits::class_implementation_archetype();
+    return traits::class_implementation_archetype_qn();
 }
 
 std::string class_implementation_transform::id() const {
@@ -73,8 +73,8 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
     using logical::entities::structural::object;
     const auto& o(assistant::as<object>(e));
     auto builder(f.make());
-    builder.add(o.name(), types::traits::class_header_archetype());
-    builder.add(o.name(), test_data::traits::class_header_archetype());
+    builder.add(o.name(), types::traits::class_header_archetype_qn());
+    builder.add(o.name(), test_data::traits::class_header_archetype_qn());
 
     using ic = inclusion_constants;
     builder.add(ic::std::string());
@@ -83,7 +83,7 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
     if (o.is_parent())
         builder.add(ic::boost::shared_ptr());
 
-    const auto io_arch(io::traits::class_header_archetype());
+    const auto io_arch(io::traits::class_header_archetype_qn());
     const bool io_enabled(builder.is_enabled(o.name(), io_arch));
     if (io_enabled) {
         builder.add(o.name(), io_arch);
@@ -93,13 +93,13 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
     }
 
     using ser = transforms::serialization::traits;
-    const auto ser_arch(ser::class_header_archetype());
+    const auto ser_arch(ser::class_header_archetype_qn());
     const bool ser_enabled(builder.is_enabled(o.name(), ser_arch));
     if (ser_enabled) {
         builder.add(o.name(), ser_arch);
 
         if (o.type_registrar())
-            builder.add(o.type_registrar(), ser::type_registrar_header_archetype());
+            builder.add(o.type_registrar(), ser::type_registrar_header_archetype_qn());
 
         builder.add(ic::boost::archive::text_iarchive());
         builder.add(ic::boost::archive::text_oarchive());
@@ -116,7 +116,7 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
     }
 
     using hash = transforms::hash::traits;
-    const auto hash_arch(hash::class_header_archetype());
+    const auto hash_arch(hash::class_header_archetype_qn());
     const bool hash_enabled(builder.is_enabled(o.name(), hash_arch));
     if (hash_enabled)
         builder.add(o.name(), hash_arch);

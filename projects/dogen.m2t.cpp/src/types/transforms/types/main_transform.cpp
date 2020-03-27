@@ -32,7 +32,7 @@
 namespace dogen::m2t::cpp::transforms::types {
 
 std::string main_transform::static_id() {
-    return traits::main_archetype();
+    return traits::main_archetype_qn();
 }
 
 std::string main_transform::id() const {

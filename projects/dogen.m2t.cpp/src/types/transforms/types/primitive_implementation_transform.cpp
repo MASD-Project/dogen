@@ -37,7 +37,7 @@
 namespace dogen::m2t::cpp::transforms::types {
 
 std::string primitive_implementation_transform::static_id() {
-    return traits::primitive_implementation_archetype();
+    return traits::primitive_implementation_archetype_qn();
 }
 
 std::string primitive_implementation_transform::id() const {
@@ -88,7 +88,7 @@ primitive_implementation_transform::inclusion_dependencies(
     const auto& o(assistant::as<primitive>(e));
     auto builder(f.make());
 
-    const auto ch_arch(traits::primitive_header_archetype());
+    const auto ch_arch(traits::primitive_header_archetype_qn());
     builder.add(o.name(), ch_arch);
     return builder.build();
 }

@@ -44,7 +44,7 @@ struct traits {
     /**
      * @brief Name of the enumeration header archetype.
      */
-    static std::string enum_header_archetype();
+    static std::string enum_header_archetype_qn();
     static std::string enum_header_archetype_sn();
 };
 

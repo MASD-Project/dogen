@@ -36,7 +36,7 @@
 namespace dogen::m2t::cpp::transforms::serialization {
 
 std::string type_registrar_implementation_transform::static_id() {
-    return traits::type_registrar_implementation_archetype();
+    return traits::type_registrar_implementation_archetype_qn();
 }
 
 std::string type_registrar_implementation_transform::id() const {
@@ -86,7 +86,7 @@ inclusion_dependencies(
     const auto& rg(assistant::as<logical::entities::serialization::type_registrar>(e));
     auto builder(f.make());
 
-    const auto rh_fn(traits::type_registrar_header_archetype());
+    const auto rh_fn(traits::type_registrar_header_archetype_qn());
     builder.add(rg.name(), rh_fn);
 
     using ic = inclusion_constants;
@@ -101,7 +101,7 @@ inclusion_dependencies(
     builder.add(ic::boost::archive::xml_iarchive());
     builder.add(ic::boost::archive::xml_oarchive());
 
-    const auto ch_fn(traits::class_header_archetype());
+    const auto ch_fn(traits::class_header_archetype_qn());
     builder.add(rg.leaves(), ch_fn);
 
     const auto carch(traits::canonical_archetype());

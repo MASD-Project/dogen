@@ -35,7 +35,7 @@
 namespace dogen::m2t::cpp::transforms::templates {
 
 std::string logic_less_template_transform::static_id() {
-    return traits::logic_less_template_archetype();
+    return traits::logic_less_template_archetype_qn();
 }
 
 std::string logic_less_template_transform::id() const {

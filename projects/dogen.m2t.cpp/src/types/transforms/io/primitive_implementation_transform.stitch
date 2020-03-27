@@ -34,7 +34,7 @@ primitive_implementation_transform::inclusion_dependencies(
     using logical::entities::structural::primitive;
     const auto& p(assistant::as<primitive>(e));
     auto builder(f.make());
-    const auto ph_fn(traits::primitive_header_archetype());
+    const auto ph_fn(traits::primitive_header_archetype_qn());
     builder.add(p.name(), ph_fn);
 
     const auto io_carch(transforms::io::traits::canonical_archetype());

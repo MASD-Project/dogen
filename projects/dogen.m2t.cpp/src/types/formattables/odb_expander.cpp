@@ -75,7 +75,7 @@ updator::updator(const locator& l) : locator_(l) {}
 logical::entities::orm::odb_options
 updator::make_options(const logical::entities::name& n) {
     logical::entities::orm::odb_options r;
-    const auto odb_arch(transforms::odb::traits::class_header_archetype());
+    const auto odb_arch(transforms::odb::traits::class_header_archetype_qn());
     const auto odb_rp(locator_.make_inclusion_path_for_cpp_header(n, odb_arch));
 
     std::ostringstream os;
@@ -83,7 +83,7 @@ updator::make_options(const logical::entities::name& n) {
     r.epilogue(os.str());
     os.str("");
 
-    const auto types_arch(transforms::types::traits::class_header_archetype());
+    const auto types_arch(transforms::types::traits::class_header_archetype_qn());
     const auto ip(locator_.make_inclusion_path_for_cpp_header(n, types_arch));
     const auto types_rp(ip.parent_path());
 

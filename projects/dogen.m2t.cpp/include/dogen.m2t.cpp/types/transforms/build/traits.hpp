@@ -42,9 +42,9 @@ public:
      */
     static std::string canonical_archetype();
 
-    static std::string include_cmakelists_archetype();
+    static std::string include_cmakelists_archetype_qn();
     static std::string include_cmakelists_archetype_sn();
-    static std::string source_cmakelists_archetype();
+    static std::string source_cmakelists_archetype_qn();
     static std::string source_cmakelists_archetype_sn();
 };
 

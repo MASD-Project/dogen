@@ -35,7 +35,7 @@
 namespace dogen::m2t::cpp::transforms::visual_studio {
 
 std::string msbuild_targets_transform::static_id() {
-    return traits::msbuild_targets_archetype();
+    return traits::msbuild_targets_archetype_qn();
 }
 
 std::string msbuild_targets_transform::id() const {

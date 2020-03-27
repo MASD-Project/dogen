@@ -32,7 +32,7 @@
 namespace dogen::m2t::cpp::transforms::test_data {
 
 std::string primitive_header_transform::static_id() {
-    return traits::primitive_header_archetype();
+    return traits::primitive_header_archetype_qn();
 }
 
 std::string primitive_header_transform::id() const {
@@ -72,7 +72,7 @@ std::list<std::string> primitive_header_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const logical::entities::element& e) const {
     auto builder(f.make());
-    builder.add(e.name(), types::traits::primitive_header_archetype());
+    builder.add(e.name(), types::traits::primitive_header_archetype_qn());
     return builder.build();
 }
 

@@ -32,7 +32,7 @@
 namespace dogen::m2t::cpp::transforms::types {
 
 std::string primitive_header_transform::static_id() {
-    return traits::primitive_header_archetype();
+    return traits::primitive_header_archetype_qn();
 }
 
 std::string primitive_header_transform::id() const {
@@ -80,7 +80,7 @@ std::list<std::string> primitive_header_transform::inclusion_dependencies(
     builder.add(inclusion_constants::std::algorithm());
 
     using ser = transforms::serialization::traits;
-    const auto ser_fwd_arch(ser::primitive_forward_declarations_archetype());
+    const auto ser_fwd_arch(ser::primitive_forward_declarations_archetype_qn());
     builder.add(p.name(), ser_fwd_arch);
 
     const auto carch(traits::canonical_archetype());

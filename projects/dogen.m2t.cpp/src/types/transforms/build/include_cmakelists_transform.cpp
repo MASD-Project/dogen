@@ -38,7 +38,7 @@
 namespace dogen::m2t::cpp::transforms::build {
 
 std::string include_cmakelists_transform::static_id() {
-    return traits::include_cmakelists_archetype();
+    return traits::include_cmakelists_archetype_qn();
 }
 
 std::string include_cmakelists_transform::id() const {

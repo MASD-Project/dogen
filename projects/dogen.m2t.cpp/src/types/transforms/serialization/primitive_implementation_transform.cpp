@@ -35,7 +35,7 @@
 namespace dogen::m2t::cpp::transforms::serialization {
 
 std::string primitive_implementation_transform::static_id() {
-    return traits::primitive_implementation_archetype();
+    return traits::primitive_implementation_archetype_qn();
 }
 
 std::string primitive_implementation_transform::id() const {
@@ -86,7 +86,7 @@ primitive_implementation_transform::inclusion_dependencies(
     const auto& p(assistant::as<primitive>(e));
     auto builder(f.make());
 
-    const auto ph_fn(traits::primitive_header_archetype());
+    const auto ph_fn(traits::primitive_header_archetype_qn());
     builder.add(p.name(), ph_fn);
 
     using ic = inclusion_constants;

@@ -29,7 +29,7 @@
 namespace dogen::m2t::cpp::transforms::types {
 
 std::string class_forward_declarations_transform::static_id() {
-    return traits::class_forward_declarations_archetype();
+    return traits::class_forward_declarations_archetype_qn();
 }
 
 std::string class_forward_declarations_transform::id() const {

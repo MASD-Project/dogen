@@ -39,8 +39,8 @@ std::string smart_pointer_helper::family() const {
 std::list<std::string>
 smart_pointer_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
-        traits::class_implementation_archetype(),
-        traits::primitive_implementation_archetype()
+        traits::class_implementation_archetype_qn(),
+        traits::primitive_implementation_archetype_qn()
     });
     return r;
 }

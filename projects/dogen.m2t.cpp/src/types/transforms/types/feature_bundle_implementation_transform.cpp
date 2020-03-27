@@ -39,7 +39,7 @@
 namespace dogen::m2t::cpp::transforms::types {
 
 std::string feature_bundle_implementation_transform::static_id() {
-    return traits::feature_bundle_implementation_archetype();
+    return traits::feature_bundle_implementation_archetype_qn();
 }
 
 std::string feature_bundle_implementation_transform::id() const {
@@ -89,7 +89,7 @@ std::list<std::string> feature_bundle_implementation_transform::inclusion_depend
     const auto& fb(assistant::as<feature_bundle>(e));
     auto builder(f.make());
 
-    const auto ch_arch(traits::feature_bundle_header_archetype());
+    const auto ch_arch(traits::feature_bundle_header_archetype_qn());
     builder.add(fb.name(), ch_arch);
     builder.add("\"dogen.variability/types/helpers/value_factory.hpp\"");
 

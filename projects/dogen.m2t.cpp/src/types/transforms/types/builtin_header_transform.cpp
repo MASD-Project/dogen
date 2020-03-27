@@ -31,7 +31,7 @@
 namespace dogen::m2t::cpp::transforms::types {
 
 std::string builtin_header_transform::static_id() {
-    return traits::builtin_header_archetype();
+    return traits::builtin_header_archetype_qn();
 }
 
 std::string builtin_header_transform::id() const {

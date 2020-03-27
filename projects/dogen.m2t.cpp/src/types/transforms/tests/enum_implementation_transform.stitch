@@ -23,7 +23,7 @@
 <#+
 
 std::string enum_implementation_transform::static_id() {
-    return traits::enum_implementation_archetype();
+    return traits::enum_implementation_archetype_qn();
 }
 
 std::string enum_implementation_transform::id() const {
@@ -71,15 +71,15 @@ std::list<std::string> enum_implementation_transform::inclusion_dependencies(
     const logical::entities::element& e) const {
 
     auto builder(f.make());
-    builder.add(e.name(), types::traits::enum_header_archetype());
-    builder.add(e.name(), test_data::traits::enum_header_archetype());
+    builder.add(e.name(), types::traits::enum_header_archetype_qn());
+    builder.add(e.name(), test_data::traits::enum_header_archetype_qn());
 
     using ic = inclusion_constants;
     builder.add(ic::std::string());
     builder.add(ic::boost::test::unit_test());
     builder.add(ic::boost::predef());
 
-    const auto io_arch(io::traits::enum_header_archetype());
+    const auto io_arch(io::traits::enum_header_archetype_qn());
     const bool io_enabled(builder.is_enabled(e.name(), io_arch));
     if (io_enabled) {
         builder.add(e.name(), io_arch);
@@ -88,7 +88,7 @@ std::list<std::string> enum_implementation_transform::inclusion_dependencies(
         builder.add(ic::boost::property_tree::json_parser());
     }
 
-    const auto lc_arch(lexical_cast::traits::enum_header_archetype());
+    const auto lc_arch(lexical_cast::traits::enum_header_archetype_qn());
     const bool lc_enabled(builder.is_enabled(e.name(), lc_arch));
     if (lc_enabled) {
         builder.add(e.name(), lc_arch);
@@ -96,7 +96,7 @@ std::list<std::string> enum_implementation_transform::inclusion_dependencies(
     }
 
     using ser = transforms::serialization::traits;
-    const auto ser_arch(ser::enum_header_archetype());
+    const auto ser_arch(ser::enum_header_archetype_qn());
     const bool ser_enabled(builder.is_enabled(e.name(), ser_arch));
     if (ser_enabled) {
         builder.add(e.name(), ser_arch);
@@ -113,7 +113,7 @@ std::list<std::string> enum_implementation_transform::inclusion_dependencies(
     }
 
     using hash = transforms::hash::traits;
-    const auto hash_arch(hash::enum_header_archetype());
+    const auto hash_arch(hash::enum_header_archetype_qn());
     const bool hash_enabled(builder.is_enabled(e.name(), hash_arch));
     if (hash_enabled)
         builder.add(e.name(), hash_arch);

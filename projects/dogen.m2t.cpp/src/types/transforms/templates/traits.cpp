@@ -39,7 +39,7 @@ std::string traits::canonical_archetype() {
     return r;
 }
 
-std::string traits::logic_less_template_archetype() {
+std::string traits::logic_less_template_archetype_qn() {
     static std::string r(traits::facet_qn() + ".logic_less_template");
     return r;
 }

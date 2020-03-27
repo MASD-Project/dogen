@@ -45,7 +45,7 @@ public:
     /**
      * @brief Name of the class implementation archetype.
      */
-    static std::string logic_less_template_archetype();
+    static std::string logic_less_template_archetype_qn();
     static std::string logic_less_template_archetype_sn();
 };
 

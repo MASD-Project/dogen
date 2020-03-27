@@ -37,7 +37,7 @@
 namespace dogen::m2t::cpp::transforms::types {
 
 std::string variability_initializer_implementation_transform::static_id() {
-    return traits::variability_initializer_implementation_archetype();
+    return traits::variability_initializer_implementation_archetype_qn();
 }
 
 std::string variability_initializer_implementation_transform::id() const {
@@ -87,13 +87,13 @@ std::list<std::string> variability_initializer_implementation_transform::inclusi
     const auto& o(assistant::as<initializer>(e));
     auto builder(f.make());
 
-    const auto ch_arch(traits::variability_initializer_header_archetype());
+    const auto ch_arch(traits::variability_initializer_header_archetype_qn());
     builder.add(o.name(), ch_arch);
 
-    const auto ftb_arch(traits::feature_template_bundle_header_archetype());
+    const auto ftb_arch(traits::feature_template_bundle_header_archetype_qn());
     builder.add(o.feature_template_bundles(), ftb_arch);
 
-    const auto fb_arch(traits::feature_bundle_header_archetype());
+    const auto fb_arch(traits::feature_bundle_header_archetype_qn());
     builder.add(o.feature_bundles(), fb_arch);
 
     return builder.build();

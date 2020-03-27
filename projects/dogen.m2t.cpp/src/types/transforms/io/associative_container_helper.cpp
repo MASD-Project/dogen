@@ -40,10 +40,10 @@ std::string associative_container_helper::family() const {
 std::list<std::string>
 associative_container_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
-        io::traits::class_implementation_archetype(),
-        io::traits::primitive_implementation_archetype(),
-        types::traits::class_implementation_archetype(),
-        types::traits::primitive_implementation_archetype()
+        io::traits::class_implementation_archetype_qn(),
+        io::traits::primitive_implementation_archetype_qn(),
+        types::traits::class_implementation_archetype_qn(),
+        types::traits::primitive_implementation_archetype_qn()
     });
     return r;
 }

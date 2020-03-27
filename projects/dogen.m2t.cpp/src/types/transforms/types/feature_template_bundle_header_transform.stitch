@@ -42,10 +42,10 @@ std::list<std::string> feature_template_bundle_header_transform::inclusion_depen
         builder.add("\"dogen.variability/types/entities/configuration.hpp\"");
         builder.add("\"dogen.variability/types/entities/feature.hpp\"");
 
-        const auto ch_arch(traits::class_header_archetype());
+        const auto ch_arch(traits::class_header_archetype_qn());
         builder.add(fb.transparent_associations(), ch_arch);
 
-        const auto fwd_arch(traits::class_forward_declarations_archetype());
+        const auto fwd_arch(traits::class_forward_declarations_archetype_qn());
         builder.add(fb.opaque_associations(), fwd_arch);
     }
 

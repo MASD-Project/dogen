@@ -36,7 +36,7 @@
 namespace dogen::m2t::cpp::transforms::test_data {
 
 std::string primitive_implementation_transform::static_id() {
-    return traits::primitive_implementation_archetype();
+    return traits::primitive_implementation_archetype_qn();
 }
 
 std::string primitive_implementation_transform::id() const {
@@ -85,7 +85,7 @@ std::list<std::string> primitive_implementation_transform::inclusion_dependencie
 
     const auto& p(assistant::as<logical::entities::structural::primitive>(e));
     auto builder(f.make());
-    builder.add(p.name(), traits::primitive_header_archetype());
+    builder.add(p.name(), traits::primitive_header_archetype_qn());
 
     const auto carch(traits::canonical_archetype());
     builder.add(p.value_attribute().parsed_type().current(), carch);

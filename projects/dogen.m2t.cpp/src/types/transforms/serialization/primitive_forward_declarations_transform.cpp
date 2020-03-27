@@ -32,7 +32,7 @@
 namespace dogen::m2t::cpp::transforms::serialization {
 
 std::string primitive_forward_declarations_transform::static_id() {
-    return traits::primitive_forward_declarations_archetype();
+    return traits::primitive_forward_declarations_archetype_qn();
 }
 
 std::string primitive_forward_declarations_transform::id() const {
@@ -74,7 +74,7 @@ std::list<std::string> primitive_forward_declarations_transform::inclusion_depen
     auto builder(f.make());
 
     using tp = transforms::types::traits;
-    const auto tp_fn(tp::primitive_forward_declarations_archetype());
+    const auto tp_fn(tp::primitive_forward_declarations_archetype_qn());
     builder.add(e.name(), tp_fn);
 
     return builder.build();

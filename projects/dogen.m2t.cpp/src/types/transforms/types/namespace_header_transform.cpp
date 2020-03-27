@@ -30,7 +30,7 @@
 namespace dogen::m2t::cpp::transforms::types {
 
 std::string namespace_header_transform::static_id() {
-    return traits::namespace_header_archetype();
+    return traits::namespace_header_archetype_qn();
 }
 
 std::string namespace_header_transform::id() const {

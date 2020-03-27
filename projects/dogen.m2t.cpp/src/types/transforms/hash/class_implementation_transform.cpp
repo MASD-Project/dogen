@@ -36,7 +36,7 @@
 namespace dogen::m2t::cpp::transforms::hash {
 
 std::string class_implementation_transform::static_id() {
-    return traits::class_implementation_archetype();
+    return traits::class_implementation_archetype_qn();
 }
 
 std::string class_implementation_transform::id() const {

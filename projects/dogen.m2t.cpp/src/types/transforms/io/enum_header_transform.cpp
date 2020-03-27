@@ -33,7 +33,7 @@
 namespace dogen::m2t::cpp::transforms::io {
 
 std::string enum_header_transform::static_id() {
-    return traits::enum_header_archetype();
+    return traits::enum_header_archetype_qn();
 }
 
 std::string enum_header_transform::id() const {
@@ -76,7 +76,7 @@ std::list<std::string> enum_header_transform::inclusion_dependencies(
 
     builder.add(inclusion_constants::std::iosfwd());
 
-    const auto eh_fn(types::traits::enum_header_archetype());
+    const auto eh_fn(types::traits::enum_header_archetype_qn());
     builder.add(e.name(), eh_fn);
     return builder.build();
 }

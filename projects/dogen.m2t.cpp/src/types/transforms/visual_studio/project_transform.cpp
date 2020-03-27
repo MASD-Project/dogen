@@ -35,7 +35,7 @@
 namespace dogen::m2t::cpp::transforms::visual_studio {
 
 std::string project_transform::static_id() {
-    return traits::project_archetype();
+    return traits::project_archetype_qn();
 }
 
 std::string project_transform::id() const {

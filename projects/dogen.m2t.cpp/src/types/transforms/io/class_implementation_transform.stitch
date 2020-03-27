@@ -31,7 +31,7 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
     const logical::entities::element& e) const {
     const auto& o(assistant::as<logical::entities::structural::object>(e));
     auto builder(f.make());
-    const auto ch_fn(traits::class_header_archetype());
+    const auto ch_fn(traits::class_header_archetype_qn());
     builder.add(o.name(), ch_fn);
 
     builder.add(o.opaque_associations(), ch_fn);

@@ -33,7 +33,7 @@
 namespace dogen::m2t::cpp::transforms::odb {
 
 std::string enum_header_transform::static_id() {
-    return traits::enum_header_archetype();
+    return traits::enum_header_archetype_qn();
 }
 
 std::string enum_header_transform::id() const {
@@ -73,7 +73,7 @@ std::list<std::string> enum_header_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const logical::entities::element& e) const {
     auto builder(f.make());
-    builder.add(e.name(), types::traits::enum_header_archetype());
+    builder.add(e.name(), types::traits::enum_header_archetype_qn());
     return builder.build();
 }
 

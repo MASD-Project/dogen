@@ -37,7 +37,7 @@ std::string traits::canonical_archetype() {
     return r;
 }
 
-std::string traits::solution_archetype() {
+std::string traits::solution_archetype_qn() {
     static std::string r("visual_studio.solution");
     return r;
 }
@@ -47,7 +47,7 @@ std::string traits::solution_archetype_sn() {
     return r;
 }
 
-std::string traits::project_archetype() {
+std::string traits::project_archetype_qn() {
     static std::string r("visual_studio.project");
     return r;
 }
@@ -57,7 +57,7 @@ std::string traits::project_archetype_sn() {
     return r;
 }
 
-std::string traits::msbuild_targets_archetype() {
+std::string traits::msbuild_targets_archetype_qn() {
     static std::string r("visual_studio.msbuild_targets");
     return r;
 }

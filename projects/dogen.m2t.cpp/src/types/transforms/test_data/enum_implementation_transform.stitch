@@ -28,7 +28,7 @@ std::list<std::string> enum_implementation_transform::inclusion_dependencies(
     const logical::entities::element& e) const {
     auto builder(f.make());
 
-    builder.add(e.name(), traits::enum_header_archetype());
+    builder.add(e.name(), traits::enum_header_archetype_qn());
     return builder.build();
 }
 

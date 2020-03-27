@@ -35,7 +35,7 @@
 namespace dogen::m2t::cpp::transforms::types {
 
 std::string class_header_transform::static_id() {
-    return traits::class_header_archetype();
+    return traits::class_header_archetype_qn();
 }
 
 std::string class_header_transform::id() const {
@@ -82,7 +82,7 @@ std::list<std::string> class_header_transform::inclusion_dependencies(
     // algorithm: domain headers need it for the swap function.
     builder.add(inclusion_constants::std::algorithm());
 
-    const auto io_arch(transforms::io::traits::class_header_archetype());
+    const auto io_arch(transforms::io::traits::class_header_archetype_qn());
     const bool in_inheritance(o.is_parent() || o.is_child());
     const bool io_enabled(builder.is_enabled(o.name(), io_arch));
     const bool requires_io(io_enabled && in_inheritance);
@@ -92,13 +92,13 @@ std::list<std::string> class_header_transform::inclusion_dependencies(
         builder.add(ios);
 
     using ser = transforms::serialization::traits;
-    const auto ser_fwd_arch(ser::class_forward_declarations_archetype());
+    const auto ser_fwd_arch(ser::class_forward_declarations_archetype_qn());
     builder.add(o.name(), ser_fwd_arch);
 
     const auto carch(traits::canonical_archetype());
     builder.add(o.transparent_associations(), carch);
 
-    const auto fwd_arch(traits::class_forward_declarations_archetype());
+    const auto fwd_arch(traits::class_forward_declarations_archetype_qn());
     builder.add(o.opaque_associations(), fwd_arch);
 
     const auto self_arch(class_header_transform::static_id());
@@ -118,7 +118,7 @@ std::list<std::string> class_header_transform::inclusion_dependencies(
          */
         builder.add(o.opaque_associations(), fwd_arch);
 
-        const auto visitor_fwd_arch(traits::visitor_forward_declarations_archetype());
+        const auto visitor_fwd_arch(traits::visitor_forward_declarations_archetype_qn());
         builder.add(*o.base_visitor(), visitor_fwd_arch);
     }
     return builder.build();

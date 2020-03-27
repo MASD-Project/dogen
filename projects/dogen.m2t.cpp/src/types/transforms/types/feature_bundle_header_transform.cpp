@@ -38,7 +38,7 @@
 namespace dogen::m2t::cpp::transforms::types {
 
 std::string feature_bundle_header_transform::static_id() {
-    return traits::feature_bundle_header_archetype();
+    return traits::feature_bundle_header_archetype_qn();
 }
 
 std::string feature_bundle_header_transform::id() const {
@@ -89,10 +89,10 @@ std::list<std::string> feature_bundle_header_transform::inclusion_dependencies(
         builder.add("\"dogen.variability/types/entities/feature_model.hpp\"");
         builder.add("\"dogen.variability/types/entities/configuration.hpp\"");
 
-        const auto ch_arch(traits::class_header_archetype());
+        const auto ch_arch(traits::class_header_archetype_qn());
         builder.add(fb.transparent_associations(), ch_arch);
 
-        const auto fwd_arch(traits::class_forward_declarations_archetype());
+        const auto fwd_arch(traits::class_forward_declarations_archetype_qn());
         builder.add(fb.opaque_associations(), fwd_arch);
     }
 

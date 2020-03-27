@@ -38,7 +38,7 @@
 namespace dogen::m2t::cpp::transforms::odb {
 
 std::string common_odb_options_transform::static_id() {
-    return traits::common_odb_options_archetype();
+    return traits::common_odb_options_archetype_qn();
 }
 
 std::string common_odb_options_transform::id() const {

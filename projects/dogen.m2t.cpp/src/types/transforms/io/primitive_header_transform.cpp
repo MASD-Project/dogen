@@ -32,7 +32,7 @@
 namespace dogen::m2t::cpp::transforms::io {
 
 std::string primitive_header_transform::static_id() {
-    return traits::primitive_header_archetype();
+    return traits::primitive_header_archetype_qn();
 }
 
 std::string primitive_header_transform::id() const {

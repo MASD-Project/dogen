@@ -33,7 +33,7 @@
 namespace dogen::m2t::cpp::transforms::odb {
 
 std::string class_header_transform::static_id() {
-    return traits::class_header_archetype();
+    return traits::class_header_archetype_qn();
 }
 
 std::string class_header_transform::id() const {
@@ -75,7 +75,7 @@ std::list<std::string> class_header_transform::inclusion_dependencies(
     using logical::entities::structural::object;
     const auto& o(assistant::as<object>(e));
     auto builder(f.make());
-    builder.add(o.name(), types::traits::class_header_archetype());
+    builder.add(o.name(), types::traits::class_header_archetype_qn());
 
     const auto carch(traits::canonical_archetype());
     builder.add(o.transparent_associations(), carch);

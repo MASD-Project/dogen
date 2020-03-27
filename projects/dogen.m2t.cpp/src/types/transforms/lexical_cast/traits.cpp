@@ -39,7 +39,7 @@ std::string traits::canonical_archetype() {
     return r;
 }
 
-std::string traits::enum_header_archetype() {
+std::string traits::enum_header_archetype_qn() {
     static std::string r(traits::facet_qn() + ".enum_header");
     return r;
 }

@@ -32,7 +32,7 @@
 namespace dogen::m2t::cpp::transforms::serialization {
 
 std::string class_forward_declarations_transform::static_id() {
-    return traits::class_forward_declarations_archetype();
+    return traits::class_forward_declarations_archetype_qn();
 }
 
 std::string class_forward_declarations_transform::id() const {
@@ -74,7 +74,7 @@ std::list<std::string> class_forward_declarations_transform::inclusion_dependenc
     auto builder(f.make());
 
     using tp = transforms::types::traits;
-    const auto tp_fn(tp::class_forward_declarations_archetype());
+    const auto tp_fn(tp::class_forward_declarations_archetype_qn());
     builder.add(e.name(), tp_fn);
 
     return builder.build();

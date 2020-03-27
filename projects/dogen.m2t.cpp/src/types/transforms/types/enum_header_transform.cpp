@@ -32,7 +32,7 @@
 namespace dogen::m2t::cpp::transforms::types {
 
 std::string enum_header_transform::static_id() {
-    return traits::enum_header_archetype();
+    return traits::enum_header_archetype_qn();
 }
 
 std::string enum_header_transform::id() const {

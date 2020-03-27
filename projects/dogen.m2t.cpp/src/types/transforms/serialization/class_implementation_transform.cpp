@@ -35,7 +35,7 @@
 namespace dogen::m2t::cpp::transforms::serialization {
 
 std::string class_implementation_transform::static_id() {
-    return traits::class_implementation_archetype();
+    return traits::class_implementation_archetype_qn();
 }
 
 std::string class_implementation_transform::id() const {
@@ -84,7 +84,7 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
     const auto& o(assistant::as<logical::entities::structural::object>(e));
     auto builder(f.make());
 
-    const auto ch_fn(traits::class_header_archetype());
+    const auto ch_fn(traits::class_header_archetype_qn());
     builder.add(o.name(), ch_fn);
 
     using ic = inclusion_constants;

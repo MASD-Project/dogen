@@ -35,7 +35,7 @@
 namespace dogen::m2t::cpp::transforms::types {
 
 std::string variability_initializer_header_transform::static_id() {
-    return traits::variability_initializer_header_archetype();
+    return traits::variability_initializer_header_archetype_qn();
 }
 
 std::string variability_initializer_header_transform::id() const {

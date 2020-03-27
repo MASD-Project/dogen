@@ -25,7 +25,7 @@ std::list<std::string> enum_header_transform::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
     const logical::entities::element& e) const {
     auto builder(f.make());
-    builder.add(e.name(), types::traits::enum_header_archetype());
+    builder.add(e.name(), types::traits::enum_header_archetype_qn());
     return builder.build();
 }
 

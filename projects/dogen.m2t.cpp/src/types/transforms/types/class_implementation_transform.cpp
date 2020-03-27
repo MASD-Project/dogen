@@ -37,7 +37,7 @@
 namespace dogen::m2t::cpp::transforms::types {
 
 std::string class_implementation_transform::static_id() {
-    return traits::class_implementation_archetype();
+    return traits::class_implementation_archetype_qn();
 }
 
 std::string class_implementation_transform::id() const {
@@ -87,11 +87,11 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
     const auto& o(assistant::as<object>(e));
     auto builder(f.make());
 
-    const auto ch_arch(traits::class_header_archetype());
+    const auto ch_arch(traits::class_header_archetype_qn());
     builder.add(o.name(), ch_arch);
     builder.add(o.opaque_associations(), ch_arch);
 
-    const auto io_arch(transforms::io::traits::class_header_archetype());
+    const auto io_arch(transforms::io::traits::class_header_archetype_qn());
     const bool in_inheritance(o.is_parent() || o.is_child());
     const bool io_enabled(builder.is_enabled(o.name(), io_arch));
     const bool requires_io(io_enabled && in_inheritance);
@@ -113,7 +113,7 @@ std::list<std::string> class_implementation_transform::inclusion_dependencies(
          * don't bother including the base if we are already including
          * the derived visitor.
          */
-        const auto v_arch(traits::visitor_header_archetype());
+        const auto v_arch(traits::visitor_header_archetype_qn());
         if (o.derived_visitor())
             builder.add(*o.derived_visitor(), v_arch);
         else

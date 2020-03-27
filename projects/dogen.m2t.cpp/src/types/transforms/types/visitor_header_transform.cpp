@@ -34,7 +34,7 @@
 namespace dogen::m2t::cpp::transforms::types {
 
 std::string visitor_header_transform::static_id() {
-    return traits::visitor_header_archetype();
+    return traits::visitor_header_archetype_qn();
 }
 
 std::string visitor_header_transform::id() const {
@@ -76,10 +76,10 @@ std::list<std::string> visitor_header_transform::inclusion_dependencies(
     using logical::entities::structural::visitor;
     const auto& v(assistant::as<visitor>(e));
     auto builder(f.make());
-    builder.add(v.visits(), traits::class_forward_declarations_archetype());
+    builder.add(v.visits(), traits::class_forward_declarations_archetype_qn());
 
     if (v.parent())
-        builder.add(*v.parent(), traits::visitor_header_archetype());
+        builder.add(*v.parent(), traits::visitor_header_archetype_qn());
 
     return builder.build();
 }

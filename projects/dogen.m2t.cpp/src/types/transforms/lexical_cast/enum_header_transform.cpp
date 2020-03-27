@@ -33,7 +33,7 @@
 namespace dogen::m2t::cpp::transforms::lexical_cast {
 
 std::string enum_header_transform::static_id() {
-    return traits::enum_header_archetype();
+    return traits::enum_header_archetype_qn();
 }
 
 std::string enum_header_transform::id() const {
@@ -74,7 +74,7 @@ std::list<std::string> enum_header_transform::inclusion_dependencies(
     const logical::entities::element& e) const {
     auto builder(f.make());
 
-    const auto eh_fn(types::traits::enum_header_archetype());
+    const auto eh_fn(types::traits::enum_header_archetype_qn());
     builder.add(e.name(), eh_fn);
     builder.add(inclusion_constants::boost::lexical_cast());
 

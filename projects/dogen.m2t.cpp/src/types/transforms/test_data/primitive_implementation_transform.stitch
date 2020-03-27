@@ -29,7 +29,7 @@ std::list<std::string> primitive_implementation_transform::inclusion_dependencie
 
     const auto& p(assistant::as<logical::entities::structural::primitive>(e));
     auto builder(f.make());
-    builder.add(p.name(), traits::primitive_header_archetype());
+    builder.add(p.name(), traits::primitive_header_archetype_qn());
 
     const auto carch(traits::canonical_archetype());
     builder.add(p.value_attribute().parsed_type().current(), carch);

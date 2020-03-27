@@ -30,7 +30,7 @@
 namespace dogen::m2t::cpp::transforms::serialization {
 
 std::string type_registrar_header_transform::static_id() {
-    return traits::type_registrar_header_archetype();
+    return traits::type_registrar_header_archetype_qn();
 }
 
 std::string type_registrar_header_transform::id() const {

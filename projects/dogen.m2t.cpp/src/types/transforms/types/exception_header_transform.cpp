@@ -34,7 +34,7 @@
 namespace dogen::m2t::cpp::transforms::types {
 
 std::string exception_header_transform::static_id() {
-    return traits::exception_header_archetype();
+    return traits::exception_header_archetype_qn();
 }
 
 std::string exception_header_transform::id() const {
