@@ -7008,16 +7008,16 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#physical_name_repository#</dia:string>
+            <dia:string>#physical_meta_model#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;physical::entities::name_repository&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;physical::entities::meta_model&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Meta-model for the physical dimension.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -23974,7 +23974,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-202.077,-34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-202.827,-40.85;-193.273,-33.2"/>
+        <dia:rectangle val="-202.827,-40.85;-193.272,-33.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -36746,7 +36746,7 @@ extend the mappings as required.#</dia:string>
         <dia:point val="-55,-83"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-55.75,-86.6003;-51.7392,-82.2"/>
+        <dia:rectangle val="-55.75,-86.6003;-51.7385,-82.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -36754,8 +36754,8 @@ extend the mappings as required.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-55,-83"/>
         <dia:point val="-55,-85"/>
-        <dia:point val="-51.9404,-85"/>
-        <dia:point val="-51.9392,-86.5502"/>
+        <dia:point val="-51.9392,-85"/>
+        <dia:point val="-51.9385,-86.5502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -39491,7 +39491,7 @@ generates the registration code as needed.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="118.42,-91.2"/>
         <dia:point val="118.42,-89"/>
-        <dia:point val="112.609,-89"/>
+        <dia:point val="112.608,-89"/>
         <dia:point val="112.608,-87.0502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">

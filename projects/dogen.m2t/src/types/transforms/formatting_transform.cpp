@@ -21,6 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.physical/types/entities/name_repository.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
@@ -165,7 +166,9 @@ void formatting_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "formatting transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    const auto& ns(ctx.physical_name_repository()->all());
+    const auto& pmm(*ctx.physical_meta_model());
+    const auto& nrp(pmm.kernels().cbegin()->second.names());
+    const auto& ns(nrp.all());
     const auto& fm(*ctx.feature_model());
     const auto fgs(make_feature_groups(fm, ns));
     for(auto& ptr : m.elements())

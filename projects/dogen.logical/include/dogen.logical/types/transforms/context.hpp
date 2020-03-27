@@ -31,7 +31,7 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include "dogen.tracing/types/tracer_fwd.hpp"
-#include "dogen.physical/types/entities/name_repository_fwd.hpp"
+#include "dogen.physical/types/entities/meta_model_fwd.hpp"
 #include "dogen.variability/types/entities/feature_model_fwd.hpp"
 #include "dogen.logical/types/helpers/mapping_set_repository_fwd.hpp"
 
@@ -60,7 +60,7 @@ public:
     context(
         const bool compatibility_mode,
         const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
-        const boost::shared_ptr<dogen::physical::entities::name_repository>& physical_name_repository,
+        const boost::shared_ptr<dogen::physical::entities::meta_model>& physical_meta_model,
         const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains,
         const boost::shared_ptr<dogen::logical::helpers::mapping_set_repository>& mapping_repository,
         const boost::shared_ptr<dogen::tracing::tracer>& tracer);
@@ -74,10 +74,15 @@ public:
     void feature_model(const boost::shared_ptr<dogen::variability::entities::feature_model>& v);
     void feature_model(const boost::shared_ptr<dogen::variability::entities::feature_model>&& v);
 
-    const boost::shared_ptr<dogen::physical::entities::name_repository>& physical_name_repository() const;
-    boost::shared_ptr<dogen::physical::entities::name_repository>& physical_name_repository();
-    void physical_name_repository(const boost::shared_ptr<dogen::physical::entities::name_repository>& v);
-    void physical_name_repository(const boost::shared_ptr<dogen::physical::entities::name_repository>&& v);
+    /**
+     * @brief Meta-model for the physical dimension.
+     */
+    /**@{*/
+    const boost::shared_ptr<dogen::physical::entities::meta_model>& physical_meta_model() const;
+    boost::shared_ptr<dogen::physical::entities::meta_model>& physical_meta_model();
+    void physical_meta_model(const boost::shared_ptr<dogen::physical::entities::meta_model>& v);
+    void physical_meta_model(const boost::shared_ptr<dogen::physical::entities::meta_model>&& v);
+    /**@}*/
 
     /**
      * @brief Provides all of the domains to be used for template instantiation.
@@ -116,7 +121,7 @@ public:
 private:
     bool compatibility_mode_;
     boost::shared_ptr<dogen::variability::entities::feature_model> feature_model_;
-    boost::shared_ptr<dogen::physical::entities::name_repository> physical_name_repository_;
+    boost::shared_ptr<dogen::physical::entities::meta_model> physical_meta_model_;
     std::unordered_map<std::string, std::vector<std::string> > template_instantiation_domains_;
     boost::shared_ptr<dogen::logical::helpers::mapping_set_repository> mapping_repository_;
     boost::shared_ptr<dogen::tracing::tracer> tracer_;

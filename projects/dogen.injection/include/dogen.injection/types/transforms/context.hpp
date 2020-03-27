@@ -31,7 +31,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen.tracing/types/tracer_fwd.hpp"
-#include "dogen.physical/types/entities/name_repository_fwd.hpp"
+#include "dogen.physical/types/entities/meta_model_fwd.hpp"
 #include "dogen.variability/types/entities/feature_model_fwd.hpp"
 
 namespace dogen::injection::transforms {
@@ -49,7 +49,7 @@ public:
     context(
         const std::vector<boost::filesystem::path>& data_directories,
         const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
-        const boost::shared_ptr<dogen::physical::entities::name_repository>& physical_name_repository,
+        const boost::shared_ptr<dogen::physical::entities::meta_model>& physical_meta_model,
         const boost::shared_ptr<dogen::tracing::tracer>& tracer,
         const bool compatibility_mode,
         const std::vector<std::string>& variability_overrides);
@@ -65,10 +65,15 @@ public:
     void feature_model(const boost::shared_ptr<dogen::variability::entities::feature_model>& v);
     void feature_model(const boost::shared_ptr<dogen::variability::entities::feature_model>&& v);
 
-    const boost::shared_ptr<dogen::physical::entities::name_repository>& physical_name_repository() const;
-    boost::shared_ptr<dogen::physical::entities::name_repository>& physical_name_repository();
-    void physical_name_repository(const boost::shared_ptr<dogen::physical::entities::name_repository>& v);
-    void physical_name_repository(const boost::shared_ptr<dogen::physical::entities::name_repository>&& v);
+    /**
+     * @brief Meta-model for the physical dimension.
+     */
+    /**@{*/
+    const boost::shared_ptr<dogen::physical::entities::meta_model>& physical_meta_model() const;
+    boost::shared_ptr<dogen::physical::entities::meta_model>& physical_meta_model();
+    void physical_meta_model(const boost::shared_ptr<dogen::physical::entities::meta_model>& v);
+    void physical_meta_model(const boost::shared_ptr<dogen::physical::entities::meta_model>&& v);
+    /**@}*/
 
     const boost::shared_ptr<dogen::tracing::tracer>& tracer() const;
     boost::shared_ptr<dogen::tracing::tracer>& tracer();
@@ -101,7 +106,7 @@ public:
 private:
     std::vector<boost::filesystem::path> data_directories_;
     boost::shared_ptr<dogen::variability::entities::feature_model> feature_model_;
-    boost::shared_ptr<dogen::physical::entities::name_repository> physical_name_repository_;
+    boost::shared_ptr<dogen::physical::entities::meta_model> physical_meta_model_;
     boost::shared_ptr<dogen::tracing::tracer> tracer_;
     bool compatibility_mode_;
     std::vector<std::string> variability_overrides_;

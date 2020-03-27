@@ -25,6 +25,7 @@
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.logical/types/traits.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.m2t/io/entities/model_io.hpp"
@@ -394,7 +395,8 @@ apply(const context& ctx, entities::model& m) {
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto &fm(*ctx.feature_model());
-    const auto &nrp(*ctx.physical_name_repository());
+    const auto& pmm(*ctx.physical_meta_model());
+    const auto& nrp(pmm.kernels().cbegin()->second.names());
     populate_global_enablement_properties(fm, nrp, m);
     populate_local_enablement_properties(fm, nrp, m);
 

@@ -30,7 +30,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen.tracing/types/tracer_fwd.hpp"
-#include "dogen.physical/types/entities/name_repository_fwd.hpp"
+#include "dogen.physical/types/entities/meta_model_fwd.hpp"
 #include "dogen.variability/types/entities/feature_model_fwd.hpp"
 
 namespace dogen::m2t::transforms {
@@ -46,17 +46,22 @@ public:
 
 public:
     context(
-        const boost::shared_ptr<dogen::physical::entities::name_repository>& physical_name_repository,
+        const boost::shared_ptr<dogen::physical::entities::meta_model>& physical_meta_model,
         const boost::filesystem::path& output_directory_path,
         const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
         const boost::shared_ptr<dogen::tracing::tracer>& tracer,
         const std::string& generation_timestamp);
 
 public:
-    const boost::shared_ptr<dogen::physical::entities::name_repository>& physical_name_repository() const;
-    boost::shared_ptr<dogen::physical::entities::name_repository>& physical_name_repository();
-    void physical_name_repository(const boost::shared_ptr<dogen::physical::entities::name_repository>& v);
-    void physical_name_repository(const boost::shared_ptr<dogen::physical::entities::name_repository>&& v);
+    /**
+     * @brief Meta-model for the physical dimension.
+     */
+    /**@{*/
+    const boost::shared_ptr<dogen::physical::entities::meta_model>& physical_meta_model() const;
+    boost::shared_ptr<dogen::physical::entities::meta_model>& physical_meta_model();
+    void physical_meta_model(const boost::shared_ptr<dogen::physical::entities::meta_model>& v);
+    void physical_meta_model(const boost::shared_ptr<dogen::physical::entities::meta_model>&& v);
+    /**@}*/
 
     /**
      * @brief FIXME: to be removed
@@ -99,7 +104,7 @@ public:
     context& operator=(context other);
 
 private:
-    boost::shared_ptr<dogen::physical::entities::name_repository> physical_name_repository_;
+    boost::shared_ptr<dogen::physical::entities::meta_model> physical_meta_model_;
     boost::filesystem::path output_directory_path_;
     boost::shared_ptr<dogen::variability::entities::feature_model> feature_model_;
     boost::shared_ptr<dogen::tracing::tracer> tracer_;

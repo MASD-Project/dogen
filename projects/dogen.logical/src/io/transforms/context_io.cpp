@@ -23,7 +23,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.tracing/io/tracer_io.hpp"
 #include "dogen.logical/io/transforms/context_io.hpp"
-#include "dogen.physical/io/entities/name_repository_io.hpp"
+#include "dogen.physical/io/entities/meta_model_io.hpp"
 #include "dogen.variability/io/entities/feature_model_io.hpp"
 #include "dogen.logical/io/helpers/mapping_set_repository_io.hpp"
 
@@ -45,7 +45,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::physical::entities::name_repository>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::physical::entities::meta_model>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -144,7 +144,7 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"__type__\": " << "\"dogen::logical::transforms::context\"" << ", "
       << "\"compatibility_mode\": " << v.compatibility_mode() << ", "
       << "\"feature_model\": " << v.feature_model() << ", "
-      << "\"physical_name_repository\": " << v.physical_name_repository() << ", "
+      << "\"physical_meta_model\": " << v.physical_meta_model() << ", "
       << "\"template_instantiation_domains\": " << v.template_instantiation_domains() << ", "
       << "\"mapping_repository\": " << v.mapping_repository() << ", "
       << "\"tracer\": " << v.tracer()

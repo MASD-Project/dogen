@@ -361,8 +361,9 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "physical_name_repository",
-          "type": "boost::shared_ptr<physical::entities::name_repository>"
+          "name": "physical_meta_model",
+          "type": "boost::shared_ptr<physical::entities::meta_model>",
+          "documentation": "Meta-model for the physical dimension.\n"
         },
         {
           "name": "output_directory_path",

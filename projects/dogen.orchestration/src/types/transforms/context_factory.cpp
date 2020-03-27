@@ -24,6 +24,8 @@
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/tracer.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
+#include "dogen.physical/io/entities/meta_model_io.hpp"
 #include "dogen.physical/io/entities/name_repository_io.hpp"
 #include "dogen.physical/types/helpers/name_repository_builder.hpp"
 #include "dogen.physical/types/helpers/template_instantiation_domains_factory.hpp"
@@ -62,8 +64,8 @@ namespace dogen::orchestration::transforms {
 
 using m2t::transforms::model_to_text_technical_space_chain_registrar;
 
-boost::shared_ptr<physical::entities::name_repository>
-create_physical_name_repository(
+boost::shared_ptr<physical::entities::meta_model>
+create_physical_meta_model(
     const model_to_text_technical_space_chain_registrar& rg) {
 
     physical::helpers::name_repository_builder b;
@@ -72,8 +74,13 @@ create_physical_name_repository(
         b.add(t.physical_names_by_meta_name());
         b.add(t.physical_name_repository_parts());
     }
+
+    using physical::entities::meta_model;
+    auto r(boost::make_shared<meta_model>());
+
     using physical::entities::name_repository;
-    return boost::make_shared<name_repository>(b.build());
+    r->kernels()["masd"].names(b.build());
+    return r;
 }
 void context_factory::
 register_variability_entities(variability::helpers::registrar& rg) {
@@ -111,8 +118,8 @@ make_injection_context(const configuration& cfg,
     /*
      * Setup the physical data structures.
      */
-    const auto nrp(create_physical_name_repository(rg));
-    r.physical_name_repository(nrp);
+    const auto pmm(create_physical_meta_model(rg));
+    r.physical_meta_model(pmm);
 
     /*
      * Setup the tracer. Note that we do it regardless of whether
@@ -145,15 +152,16 @@ make_context(const configuration& cfg, const std::string& activity,
     rg.validate();
 
     /*
-     * Obtain the physical location repository.
+     * Obtain the physical meta-model.
      */
-    const auto nrp(create_physical_name_repository(rg));
+    const auto pmm(create_physical_meta_model(rg));
+    const auto& nrp(pmm->kernels().begin()->second.names());
 
     /*
      * Obtain the template instantiation domains.
      */
     using tidf = physical::helpers::template_instantiation_domains_factory;
-    vctx.template_instantiation_domains(tidf::make(nrp->all()));
+    vctx.template_instantiation_domains(tidf::make(nrp.all()));
 
     /*
      * Handle the compatibility mode.
@@ -167,7 +175,7 @@ make_context(const configuration& cfg, const std::string& activity,
      */
     const auto tracer(boost::make_shared<tracing::tracer>(cfg, activity));
     vctx.tracer(tracer);
-    tracer->start_run(nrp_input_id, *nrp);
+    tracer->start_run(nrp_input_id, nrp);
 
     /*
      * Create the top-level context and all of its sub-contexts. Start
@@ -217,9 +225,9 @@ make_context(const configuration& cfg, const std::string& activity,
     /*
      * Setup the archetype location repository.
      */
-    r.injection_context().physical_name_repository(nrp);
-    r.logical_context().physical_name_repository(nrp);
-    r.generation_context().physical_name_repository(nrp);
+    r.injection_context().physical_meta_model(pmm);
+    r.logical_context().physical_meta_model(pmm);
+    r.generation_context().physical_meta_model(pmm);
 
     /*
      * Setup the tracer.

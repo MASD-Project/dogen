@@ -22,12 +22,12 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.tracing/io/tracer_io.hpp"
 #include "dogen.m2t/io/transforms/context_io.hpp"
-#include "dogen.physical/io/entities/name_repository_io.hpp"
+#include "dogen.physical/io/entities/meta_model_io.hpp"
 #include "dogen.variability/io/entities/feature_model_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::physical::entities::name_repository>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::physical::entities::meta_model>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -86,7 +86,7 @@ namespace dogen::m2t::transforms {
 std::ostream& operator<<(std::ostream& s, const context& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::m2t::transforms::context\"" << ", "
-      << "\"physical_name_repository\": " << v.physical_name_repository() << ", "
+      << "\"physical_meta_model\": " << v.physical_meta_model() << ", "
       << "\"output_directory_path\": " << "\"" << v.output_directory_path().generic_string() << "\"" << ", "
       << "\"feature_model\": " << v.feature_model() << ", "
       << "\"tracer\": " << v.tracer() << ", "

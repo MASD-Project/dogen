@@ -24,6 +24,7 @@
 #include "dogen.utility/types/io/unordered_set_io.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.physical/types/entities/name_repository.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.m2t/io/entities/model_io.hpp"
@@ -361,7 +362,8 @@ apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "enablement new_transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    const auto& nrp(*ctx.physical_name_repository());
+    const auto& pmm(*ctx.physical_meta_model());
+    const auto& nrp(pmm.kernels().cbegin()->second.names());
     const auto& albmn(nrp.by_meta_name());
     const auto& galp(m.global_enablement_properties()
         .denormalised_archetype_properties());

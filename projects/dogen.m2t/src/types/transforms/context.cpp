@@ -20,13 +20,13 @@
  */
 #include "dogen.tracing/types/tracer.hpp"
 #include "dogen.m2t/types/transforms/context.hpp"
-#include "dogen.physical/types/entities/name_repository.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::physical::entities::name_repository>& lhs,
-const boost::shared_ptr<dogen::physical::entities::name_repository>& rhs) {
+inline bool operator==(const boost::shared_ptr<dogen::physical::entities::meta_model>& lhs,
+const boost::shared_ptr<dogen::physical::entities::meta_model>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -53,19 +53,19 @@ const boost::shared_ptr<dogen::tracing::tracer>& rhs) {
 namespace dogen::m2t::transforms {
 
 context::context(context&& rhs)
-    : physical_name_repository_(std::move(rhs.physical_name_repository_)),
+    : physical_meta_model_(std::move(rhs.physical_meta_model_)),
       output_directory_path_(std::move(rhs.output_directory_path_)),
       feature_model_(std::move(rhs.feature_model_)),
       tracer_(std::move(rhs.tracer_)),
       generation_timestamp_(std::move(rhs.generation_timestamp_)) { }
 
 context::context(
-    const boost::shared_ptr<dogen::physical::entities::name_repository>& physical_name_repository,
+    const boost::shared_ptr<dogen::physical::entities::meta_model>& physical_meta_model,
     const boost::filesystem::path& output_directory_path,
     const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
     const boost::shared_ptr<dogen::tracing::tracer>& tracer,
     const std::string& generation_timestamp)
-    : physical_name_repository_(physical_name_repository),
+    : physical_meta_model_(physical_meta_model),
       output_directory_path_(output_directory_path),
       feature_model_(feature_model),
       tracer_(tracer),
@@ -73,7 +73,7 @@ context::context(
 
 void context::swap(context& other) noexcept {
     using std::swap;
-    swap(physical_name_repository_, other.physical_name_repository_);
+    swap(physical_meta_model_, other.physical_meta_model_);
     swap(output_directory_path_, other.output_directory_path_);
     swap(feature_model_, other.feature_model_);
     swap(tracer_, other.tracer_);
@@ -81,7 +81,7 @@ void context::swap(context& other) noexcept {
 }
 
 bool context::operator==(const context& rhs) const {
-    return physical_name_repository_ == rhs.physical_name_repository_ &&
+    return physical_meta_model_ == rhs.physical_meta_model_ &&
         output_directory_path_ == rhs.output_directory_path_ &&
         feature_model_ == rhs.feature_model_ &&
         tracer_ == rhs.tracer_ &&
@@ -94,20 +94,20 @@ context& context::operator=(context other) {
     return *this;
 }
 
-const boost::shared_ptr<dogen::physical::entities::name_repository>& context::physical_name_repository() const {
-    return physical_name_repository_;
+const boost::shared_ptr<dogen::physical::entities::meta_model>& context::physical_meta_model() const {
+    return physical_meta_model_;
 }
 
-boost::shared_ptr<dogen::physical::entities::name_repository>& context::physical_name_repository() {
-    return physical_name_repository_;
+boost::shared_ptr<dogen::physical::entities::meta_model>& context::physical_meta_model() {
+    return physical_meta_model_;
 }
 
-void context::physical_name_repository(const boost::shared_ptr<dogen::physical::entities::name_repository>& v) {
-    physical_name_repository_ = v;
+void context::physical_meta_model(const boost::shared_ptr<dogen::physical::entities::meta_model>& v) {
+    physical_meta_model_ = v;
 }
 
-void context::physical_name_repository(const boost::shared_ptr<dogen::physical::entities::name_repository>&& v) {
-    physical_name_repository_ = std::move(v);
+void context::physical_meta_model(const boost::shared_ptr<dogen::physical::entities::meta_model>&& v) {
+    physical_meta_model_ = std::move(v);
 }
 
 const boost::filesystem::path& context::output_directory_path() const {

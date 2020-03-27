@@ -23,6 +23,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/tracer.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.physical/types/helpers/name_repository_builder.hpp"
 #include "dogen/types/tracing_configuration.hpp"
 #include "dogen/types/database_configuration.hpp"
@@ -41,8 +42,8 @@ transforms::context mock_context_factory::make() {
     BOOST_LOG_SEV(lg, debug) << "Creating the mock context.";
 
     transforms::context r;
-    auto nrp(boost::make_shared<physical::entities::name_repository>());
-    r.physical_name_repository(nrp);
+    r.physical_meta_model(boost::make_shared<physical::entities::meta_model>());
+    r.physical_meta_model()->kernels()["masd"];
 
     configuration cfg;
     const auto activity("testing");

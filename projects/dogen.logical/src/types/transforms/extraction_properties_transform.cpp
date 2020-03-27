@@ -23,6 +23,7 @@
 #include "dogen.tracing/types/scoped_tracer.hpp"
 #include "dogen.variability/types/helpers/feature_selector.hpp"
 #include "dogen.variability/types/helpers/configuration_selector.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.physical/types/entities/name_repository.hpp"
 #include "dogen.logical/io/entities/model_io.hpp"
 #include "dogen.logical/types/traits.hpp"
@@ -137,7 +138,8 @@ void extraction_properties_transform::apply(const context& ctx,
     tracing::scoped_transform_tracer stp(lg, "feature model transform",
         transform_id, transform_id, *ctx.tracer(), m);
 
-    const auto& nrp(*ctx.physical_name_repository());
+    const auto& pmm(*ctx.physical_meta_model());
+    const auto& nrp(pmm.kernels().cbegin()->second.names());
     const auto& ns(nrp.all());
     const auto& cfg(*m.root_module()->configuration());
     const auto ep(make_extraction_properties(ctx, ns, cfg));
