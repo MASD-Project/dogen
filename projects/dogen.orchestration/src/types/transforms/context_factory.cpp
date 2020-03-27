@@ -51,7 +51,7 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("engine.transforms.context_factory"));
 
-const std::string nrp_input_id("archetype_location_repository");
+const std::string nrp_input_id("physical_name_repository");
 const std::string fm_input_id("feature_model");
 
 const std::string duplicate_segment("Duplicat segment: ");
@@ -63,7 +63,7 @@ namespace dogen::orchestration::transforms {
 using m2t::transforms::model_to_text_technical_space_chain_registrar;
 
 boost::shared_ptr<physical::entities::name_repository>
-create_archetype_location_repository(
+create_physical_name_repository(
     const model_to_text_technical_space_chain_registrar& rg) {
 
     physical::helpers::name_repository_builder b;
@@ -111,7 +111,7 @@ make_injection_context(const configuration& cfg,
     /*
      * Setup the physical data structures.
      */
-    const auto nrp(create_archetype_location_repository(rg));
+    const auto nrp(create_physical_name_repository(rg));
     r.physical_name_repository(nrp);
 
     /*
@@ -147,7 +147,7 @@ make_context(const configuration& cfg, const std::string& activity,
     /*
      * Obtain the physical location repository.
      */
-    const auto nrp(create_archetype_location_repository(rg));
+    const auto nrp(create_physical_name_repository(rg));
 
     /*
      * Obtain the template instantiation domains.

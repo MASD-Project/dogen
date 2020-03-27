@@ -26,10 +26,8 @@ const std::string transform_stats_graphviz_fn("transform_stats.dot");
 const std::string references_graph_org_fn("references_graph.org");
 const std::string references_graph_text_fn("references_graph.txt");
 const std::string references_graph_graphviz_fn("references_graph.dot");
-const std::string archetype_location_prefix(
-    "000-archetype_location_repository-");
-const std::string archetype_location_postfix(
-    "-initial_input.json");
+const std::string physical_name_prefix("000-physical_name_repository-");
+const std::string physical_name_postfix("-initial_input.json");
 const std::string injection_transform_prefix(
     "000-injection.dia.decoding_transform-");
 const std::string first_short_name("000-initial_input.json");
@@ -172,7 +170,7 @@ bool are_tracing_files_healthy(const configuration& cfg,
      */
     bool found_transform_stats(false);
     bool found_references_graph(false);
-    bool found_archetype_location(false);
+    bool found_physical_name(false);
     bool found_injection_dia_transform(false);
     for (const auto& f : files) {
         const auto gs(f.generic_string());
@@ -211,7 +209,7 @@ bool are_tracing_files_healthy(const configuration& cfg,
             else if (fn == references_graph_org_fn)
                 found_references_graph = true;
             else if (fn == first_short_name)
-                found_archetype_location = true;
+                found_physical_name = true;
             else if (fn == second_short_name)
                 found_injection_dia_transform = true;
         } else {
@@ -219,9 +217,9 @@ bool are_tracing_files_healthy(const configuration& cfg,
                 found_transform_stats = true;
             else if (fn == references_graph_org_fn)
                 found_references_graph = true;
-            else if (boost::starts_with(fn, archetype_location_prefix) &&
-                boost::ends_with(fn, archetype_location_postfix)) {
-                found_archetype_location = true;
+            else if (boost::starts_with(fn, physical_name_prefix) &&
+                boost::ends_with(fn, physical_name_postfix)) {
+                found_physical_name = true;
                 BOOST_LOG_SEV(lg, debug) << "Found archetype location: " << gs;
             } else if (boost::starts_with(fn, injection_transform_prefix) &&
                 boost::ends_with(fn, injection_transform_postfix)) {
@@ -258,14 +256,14 @@ bool are_tracing_files_healthy(const configuration& cfg,
                              << found_transform_stats
                              << " found_references_graph: "
                              << found_references_graph
-                             << " found_archetype_location: "
-                             << found_archetype_location
+                             << " found_physical_name: "
+                             << found_physical_name
                              << " found_injection_dia_transform: "
                              << found_injection_dia_transform;
 
     return
         found_transform_stats && found_references_graph &&
-        found_archetype_location && found_injection_dia_transform;
+        found_physical_name && found_injection_dia_transform;
 }
 
 }
