@@ -24,7 +24,7 @@ namespace dogen::physical::entities {
 
 location_repository_parts::location_repository_parts(
     const std::list<dogen::physical::entities::location>& all,
-    const std::unordered_map<std::string, dogen::physical::entities::locations_group>& by_meta_name)
+    const std::unordered_map<std::string, dogen::physical::entities::name_group>& by_meta_name)
     : all_(all),
       by_meta_name_(by_meta_name) { }
 
@@ -61,19 +61,19 @@ void location_repository_parts::all(const std::list<dogen::physical::entities::l
     all_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::physical::entities::locations_group>& location_repository_parts::by_meta_name() const {
+const std::unordered_map<std::string, dogen::physical::entities::name_group>& location_repository_parts::by_meta_name() const {
     return by_meta_name_;
 }
 
-std::unordered_map<std::string, dogen::physical::entities::locations_group>& location_repository_parts::by_meta_name() {
+std::unordered_map<std::string, dogen::physical::entities::name_group>& location_repository_parts::by_meta_name() {
     return by_meta_name_;
 }
 
-void location_repository_parts::by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::locations_group>& v) {
+void location_repository_parts::by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::name_group>& v) {
     by_meta_name_ = v;
 }
 
-void location_repository_parts::by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::locations_group>&& v) {
+void location_repository_parts::by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::name_group>&& v) {
     by_meta_name_ = std::move(v);
 }
 

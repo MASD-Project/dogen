@@ -81,7 +81,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "entities::locations_group",
+      "name": "entities::name_group",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -115,7 +115,7 @@
         },
         {
           "name": "by_meta_name",
-          "type": "std::unordered_map<std::string, locations_group>"
+          "type": "std::unordered_map<std::string, name_group>"
         },
         {
           "name": "by_backend_by_facet",
@@ -134,7 +134,7 @@
         },
         {
           "name": "by_meta_name",
-          "type": "std::unordered_map<std::string, locations_group>",
+          "type": "std::unordered_map<std::string, name_group>",
           "documentation": "Returns the archetype locations for each meta name.\n"
         }
       ]

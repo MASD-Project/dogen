@@ -106,7 +106,7 @@ add(const std::list<entities::location>& als) {
 }
 
 void location_repository_builder::
-add(const std::unordered_map<std::string, entities::locations_group>&
+add(const std::unordered_map<std::string, entities::name_group>&
     locations_by_meta_name) {
     auto& albmn(repository_.by_meta_name());
     for (const auto& pair : locations_by_meta_name) {

@@ -72,7 +72,7 @@ public:
         archetype_locations() const override;
 
     const std::unordered_map<std::string,
-                             physical::entities::locations_group>&
+                             physical::entities::name_group>&
     archetype_locations_by_meta_name() const override;
 
     const std::unordered_map<std::string,

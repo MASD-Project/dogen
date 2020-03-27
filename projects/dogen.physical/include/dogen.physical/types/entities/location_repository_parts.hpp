@@ -30,7 +30,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include "dogen.physical/types/entities/location.hpp"
-#include "dogen.physical/types/entities/locations_group.hpp"
+#include "dogen.physical/types/entities/name_group.hpp"
 
 namespace dogen::physical::entities {
 
@@ -44,7 +44,7 @@ public:
 public:
     location_repository_parts(
         const std::list<dogen::physical::entities::location>& all,
-        const std::unordered_map<std::string, dogen::physical::entities::locations_group>& by_meta_name);
+        const std::unordered_map<std::string, dogen::physical::entities::name_group>& by_meta_name);
 
 public:
     /**
@@ -62,10 +62,10 @@ public:
      * @brief Returns the archetype locations for each meta name.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::physical::entities::locations_group>& by_meta_name() const;
-    std::unordered_map<std::string, dogen::physical::entities::locations_group>& by_meta_name();
-    void by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::locations_group>& v);
-    void by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::locations_group>&& v);
+    const std::unordered_map<std::string, dogen::physical::entities::name_group>& by_meta_name() const;
+    std::unordered_map<std::string, dogen::physical::entities::name_group>& by_meta_name();
+    void by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::name_group>& v);
+    void by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::name_group>&& v);
     /**@}*/
 
 public:
@@ -80,7 +80,7 @@ public:
 
 private:
     std::list<dogen::physical::entities::location> all_;
-    std::unordered_map<std::string, dogen::physical::entities::locations_group> by_meta_name_;
+    std::unordered_map<std::string, dogen::physical::entities::name_group> by_meta_name_;
 };
 
 }

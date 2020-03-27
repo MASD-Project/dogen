@@ -253,7 +253,7 @@ void enablement_transform::compute_enablement_for_artefact_properties(
 
 void enablement_transform::compute_enablement_for_element(
     const std::unordered_map<std::string,
-    physical::entities::locations_group>& archetype_locations_by_meta_name,
+    physical::entities::name_group>& archetype_locations_by_meta_name,
     const std::unordered_map<std::string,
     entities::denormalised_archetype_properties>&
     global_archetype_location_properties,

@@ -18,62 +18,62 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.physical/types/entities/locations_group.hpp"
+#include "dogen.physical/types/entities/name_group.hpp"
 
 namespace dogen::physical::entities {
 
-locations_group::locations_group(
+name_group::name_group(
     const std::list<dogen::physical::entities::location>& locations,
     const std::unordered_map<std::string, std::string>& canonical_locations)
     : locations_(locations),
       canonical_locations_(canonical_locations) { }
 
-void locations_group::swap(locations_group& other) noexcept {
+void name_group::swap(name_group& other) noexcept {
     using std::swap;
     swap(locations_, other.locations_);
     swap(canonical_locations_, other.canonical_locations_);
 }
 
-bool locations_group::operator==(const locations_group& rhs) const {
+bool name_group::operator==(const name_group& rhs) const {
     return locations_ == rhs.locations_ &&
         canonical_locations_ == rhs.canonical_locations_;
 }
 
-locations_group& locations_group::operator=(locations_group other) {
+name_group& name_group::operator=(name_group other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::list<dogen::physical::entities::location>& locations_group::locations() const {
+const std::list<dogen::physical::entities::location>& name_group::locations() const {
     return locations_;
 }
 
-std::list<dogen::physical::entities::location>& locations_group::locations() {
+std::list<dogen::physical::entities::location>& name_group::locations() {
     return locations_;
 }
 
-void locations_group::locations(const std::list<dogen::physical::entities::location>& v) {
+void name_group::locations(const std::list<dogen::physical::entities::location>& v) {
     locations_ = v;
 }
 
-void locations_group::locations(const std::list<dogen::physical::entities::location>&& v) {
+void name_group::locations(const std::list<dogen::physical::entities::location>&& v) {
     locations_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::string>& locations_group::canonical_locations() const {
+const std::unordered_map<std::string, std::string>& name_group::canonical_locations() const {
     return canonical_locations_;
 }
 
-std::unordered_map<std::string, std::string>& locations_group::canonical_locations() {
+std::unordered_map<std::string, std::string>& name_group::canonical_locations() {
     return canonical_locations_;
 }
 
-void locations_group::canonical_locations(const std::unordered_map<std::string, std::string>& v) {
+void name_group::canonical_locations(const std::unordered_map<std::string, std::string>& v) {
     canonical_locations_ = v;
 }
 
-void locations_group::canonical_locations(const std::unordered_map<std::string, std::string>&& v) {
+void name_group::canonical_locations(const std::unordered_map<std::string, std::string>&& v) {
     canonical_locations_ = std::move(v);
 }
 

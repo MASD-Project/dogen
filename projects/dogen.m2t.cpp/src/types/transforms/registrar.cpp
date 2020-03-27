@@ -262,7 +262,7 @@ registrar::archetype_locations() const {
 }
 
 const std::unordered_map<std::string,
-                   physical::entities::locations_group>&
+                   physical::entities::name_group>&
 registrar::archetype_locations_by_meta_name() const {
     return archetype_locations_by_meta_name_;
 }

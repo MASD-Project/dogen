@@ -31,7 +31,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include "dogen.physical/types/entities/location.hpp"
-#include "dogen.physical/types/entities/locations_group.hpp"
+#include "dogen.physical/types/entities/name_group.hpp"
 
 namespace dogen::physical::entities {
 
@@ -50,7 +50,7 @@ public:
         const std::list<dogen::physical::entities::location>& all,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name,
-        const std::unordered_map<std::string, dogen::physical::entities::locations_group>& by_meta_name,
+        const std::unordered_map<std::string, dogen::physical::entities::name_group>& by_meta_name,
         const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& by_backend_by_facet);
 
 public:
@@ -69,10 +69,10 @@ public:
     void formatter_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >& v);
     void formatter_names_by_backend_name(const std::unordered_map<std::string, std::unordered_set<std::string> >&& v);
 
-    const std::unordered_map<std::string, dogen::physical::entities::locations_group>& by_meta_name() const;
-    std::unordered_map<std::string, dogen::physical::entities::locations_group>& by_meta_name();
-    void by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::locations_group>& v);
-    void by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::locations_group>&& v);
+    const std::unordered_map<std::string, dogen::physical::entities::name_group>& by_meta_name() const;
+    std::unordered_map<std::string, dogen::physical::entities::name_group>& by_meta_name();
+    void by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::name_group>& v);
+    void by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::name_group>&& v);
 
     const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& by_backend_by_facet() const;
     std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& by_backend_by_facet();
@@ -93,7 +93,7 @@ private:
     std::list<dogen::physical::entities::location> all_;
     std::unordered_map<std::string, std::unordered_set<std::string> > facet_names_by_backend_name_;
     std::unordered_map<std::string, std::unordered_set<std::string> > formatter_names_by_backend_name_;
-    std::unordered_map<std::string, dogen::physical::entities::locations_group> by_meta_name_;
+    std::unordered_map<std::string, dogen::physical::entities::name_group> by_meta_name_;
     std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > > by_backend_by_facet_;
 };
 

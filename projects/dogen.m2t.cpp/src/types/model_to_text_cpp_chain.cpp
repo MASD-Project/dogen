@@ -117,7 +117,7 @@ model_to_text_cpp_chain::archetype_locations() const {
 }
 
 const std::unordered_map<std::string,
-                         physical::entities::locations_group>&
+                         physical::entities::name_group>&
 model_to_text_cpp_chain::archetype_locations_by_meta_name() const {
     const auto& rg(transforms::workflow::registrar());
     return rg.archetype_locations_by_meta_name();

@@ -27,7 +27,7 @@
 
 #include <list>
 #include "dogen.physical/types/entities/location.hpp"
-#include "dogen.physical/types/entities/locations_group.hpp"
+#include "dogen.physical/types/entities/name_group.hpp"
 #include "dogen.physical/types/entities/location_repository_parts.hpp"
 #include "dogen.physical/types/entities/name_repository.hpp"
 
@@ -43,7 +43,7 @@ private:
 
 public:
     void add(const std::list<entities::location>& als);
-    void add(const std::unordered_map<std::string, entities::locations_group>&
+    void add(const std::unordered_map<std::string, entities::name_group>&
         locations_by_meta_name);
 
 public:

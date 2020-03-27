@@ -21,7 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen.physical/io/entities/location_io.hpp"
-#include "dogen.physical/io/entities/locations_group_io.hpp"
+#include "dogen.physical/io/entities/name_group_io.hpp"
 #include "dogen.physical/io/entities/name_repository_io.hpp"
 
 namespace std {
@@ -80,7 +80,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::locations_group>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::physical::entities::name_group>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

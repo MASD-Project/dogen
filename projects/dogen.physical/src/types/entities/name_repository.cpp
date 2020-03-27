@@ -26,7 +26,7 @@ name_repository::name_repository(
     const std::list<dogen::physical::entities::location>& all,
     const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name,
     const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name,
-    const std::unordered_map<std::string, dogen::physical::entities::locations_group>& by_meta_name,
+    const std::unordered_map<std::string, dogen::physical::entities::name_group>& by_meta_name,
     const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& by_backend_by_facet)
     : all_(all),
       facet_names_by_backend_name_(facet_names_by_backend_name),
@@ -105,19 +105,19 @@ void name_repository::formatter_names_by_backend_name(const std::unordered_map<s
     formatter_names_by_backend_name_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::physical::entities::locations_group>& name_repository::by_meta_name() const {
+const std::unordered_map<std::string, dogen::physical::entities::name_group>& name_repository::by_meta_name() const {
     return by_meta_name_;
 }
 
-std::unordered_map<std::string, dogen::physical::entities::locations_group>& name_repository::by_meta_name() {
+std::unordered_map<std::string, dogen::physical::entities::name_group>& name_repository::by_meta_name() {
     return by_meta_name_;
 }
 
-void name_repository::by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::locations_group>& v) {
+void name_repository::by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::name_group>& v) {
     by_meta_name_ = v;
 }
 
-void name_repository::by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::locations_group>&& v) {
+void name_repository::by_meta_name(const std::unordered_map<std::string, dogen::physical::entities::name_group>&& v) {
     by_meta_name_ = std::move(v);
 }
 

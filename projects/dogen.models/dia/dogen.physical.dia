@@ -837,7 +837,7 @@ The kernel is always expected to be  @e masd.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#locations_group#</dia:string>
+        <dia:string>#name_group#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -1157,7 +1157,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
             <dia:string>#by_meta_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, locations_group&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, name_group&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -1211,13 +1211,13 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
         <dia:point val="111,-112"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="110.95,-112.05;135.805,-108.35"/>
+        <dia:rectangle val="110.95,-112.05;133.88,-108.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="111,-112"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.755000000000003"/>
+        <dia:real val="22.830000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -1339,7 +1339,7 @@ listing all available backends, facets and archetypes.#</dia:string>
             <dia:string>#by_meta_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, locations_group&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, name_group&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -5450,17 +5450,17 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="123.377,-112"/>
+        <dia:point val="122.415,-112"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="92.905,-114.8;124.127,-111.2"/>
+        <dia:rectangle val="92.905,-114.8;123.165,-111.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="123.377,-112"/>
-        <dia:point val="123.377,-114"/>
+        <dia:point val="122.415,-112"/>
+        <dia:point val="122.415,-114"/>
         <dia:point val="92.955,-114"/>
         <dia:point val="92.955,-112"/>
       </dia:attribute>
@@ -8535,17 +8535,17 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="123.377,-108.4"/>
+        <dia:point val="122.415,-108.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="119.305,-109.15;124.127,-102.2"/>
+        <dia:rectangle val="119.305,-109.15;123.165,-102.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="123.377,-108.4"/>
-        <dia:point val="123.377,-105"/>
+        <dia:point val="122.415,-108.4"/>
+        <dia:point val="122.415,-105"/>
         <dia:point val="119.355,-105"/>
         <dia:point val="119.355,-103"/>
       </dia:attribute>

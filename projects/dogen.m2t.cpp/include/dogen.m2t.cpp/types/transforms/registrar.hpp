@@ -31,7 +31,7 @@
 #include <forward_list>
 #include <unordered_map>
 #include "dogen.physical/types/entities/location.hpp"
-#include "dogen.physical/types/entities/locations_group.hpp"
+#include "dogen.physical/types/entities/name_group.hpp"
 #include "dogen.physical/types/entities/location_repository_parts.hpp"
 #include "dogen.m2t.cpp/types/transforms/repository.hpp"
 #include "dogen.m2t.cpp/types/transforms/helper_transform.hpp"
@@ -88,7 +88,7 @@ public:
      * @brief Returns the archetype locations for each meta-type.
      */
     const std::unordered_map<std::string,
-                             physical::entities::locations_group>&
+                             physical::entities::name_group>&
     archetype_locations_by_meta_name() const;
 
     /**
@@ -115,7 +115,7 @@ private:
     repository formatter_repository_;
     std::forward_list<physical::entities::location> archetype_locations_;
     std::unordered_map<std::string,
-                       physical::entities::locations_group>
+                       physical::entities::name_group>
     archetype_locations_by_meta_name_;
     std::unordered_map<std::string,
                        std::list<physical::entities::location>>

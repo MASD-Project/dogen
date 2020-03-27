@@ -30,7 +30,7 @@
 #include <forward_list>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen.physical/types/entities/locations_group.hpp"
+#include "dogen.physical/types/entities/name_group.hpp"
 #include "dogen.physical/types/entities/location_repository_parts.hpp"
 #include "dogen.logical/types/entities/technical_space.hpp"
 #include "dogen.m2t/types/transforms/context.hpp"
@@ -75,7 +75,7 @@ public:
      * @brief Returns the archetype locations for each meta name.
      */
     virtual const std::unordered_map<std::string,
-                                     physical::entities::locations_group>&
+                                     physical::entities::name_group>&
     archetype_locations_by_meta_name() const = 0;
 
     /**
