@@ -22,13 +22,13 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.physical/types/helpers/building_error.hpp"
 #include "dogen.physical/io/entities/name_repository_io.hpp"
-#include "dogen.physical/types/helpers/location_repository_builder.hpp"
+#include "dogen.physical/types/helpers/name_repository_builder.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 static logger
-lg(logger_factory("physical.helpers.location_repository_builder"));
+lg(logger_factory("physical.helpers.name_repository_builder"));
 
 const std::string empty_backend("Backend name cannot be empty. Archetype: ");
 const std::string empty_facet("Facet name cannot be empty. Archetype: ");
@@ -40,7 +40,7 @@ const std::string duplicate_archetype("Archetype name already inserted: ");
 
 namespace dogen::physical::helpers {
 
-void location_repository_builder::
+void name_repository_builder::
 validate(const std::list<entities::location>& als) const {
     BOOST_LOG_SEV(lg, debug) << "Validating archetype locations.";
 
@@ -68,35 +68,31 @@ validate(const std::list<entities::location>& als) const {
     BOOST_LOG_SEV(lg, debug) << "Archetype locations are valid.";
 }
 
-void location_repository_builder::
+void name_repository_builder::
 populate_locations(const std::list<entities::location>& als) {
     for(const auto& al : als)
         repository_.all().push_back(al);
 }
 
-void location_repository_builder::
-populate_facet_names_by_backend_name() {
+void name_repository_builder::populate_facet_names_by_backend_name() {
     auto& fnbkn(repository_.facet_names_by_backend_name());
     for (const auto& al : repository_.all())
         fnbkn[al.backend()].insert(al.facet());
 }
 
-void location_repository_builder::
-populate_formatter_names_by_backend_name() {
+void name_repository_builder::populate_formatter_names_by_backend_name() {
     auto& fnbkn(repository_.formatter_names_by_backend_name());
     for (const auto& al : repository_.all())
         fnbkn[al.backend()].insert(al.archetype());
 }
 
-void location_repository_builder::
-populate_archetypes_by_facet_by_backend() {
+void name_repository_builder::populate_archetypes_by_facet_by_backend() {
     auto& abbbf(repository_.by_backend_by_facet());
     for (const auto& al : repository_.all())
         abbbf[al.backend()][al.facet()].push_back(al.archetype());
 }
 
-void location_repository_builder::
-add(const std::list<entities::location>& als) {
+void name_repository_builder::add(const std::list<entities::location>& als) {
     BOOST_LOG_SEV(lg, debug) << "Adding list of archetype location.";
 
     validate(als);
@@ -105,7 +101,7 @@ add(const std::list<entities::location>& als) {
     BOOST_LOG_SEV(lg, debug) << "Added archetype location list. ";
 }
 
-void location_repository_builder::
+void name_repository_builder::
 add(const std::unordered_map<std::string, entities::name_group>&
     locations_by_meta_name) {
     auto& albmn(repository_.by_meta_name());
@@ -151,14 +147,12 @@ add(const std::unordered_map<std::string, entities::name_group>&
     }
 }
 
-void location_repository_builder::
-add(const entities::name_repository_parts& parts) {
+void name_repository_builder::add(const entities::name_repository_parts& parts) {
     add(parts.all());
     add(parts.by_meta_name());
 }
 
-const entities::name_repository&
-location_repository_builder::build() {
+const entities::name_repository& name_repository_builder::build() {
     populate_facet_names_by_backend_name();
     populate_formatter_names_by_backend_name();
     populate_archetypes_by_facet_by_backend();

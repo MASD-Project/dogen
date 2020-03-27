@@ -22,8 +22,8 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
-#include "dogen.physical/types/helpers/location_repository_builder.hpp"
 #include "dogen.tracing/types/tracer.hpp"
+#include "dogen.physical/types/helpers/name_repository_builder.hpp"
 #include "dogen/types/tracing_configuration.hpp"
 #include "dogen/types/database_configuration.hpp"
 #include "dogen.logical/test/mock_context_factory.hpp"

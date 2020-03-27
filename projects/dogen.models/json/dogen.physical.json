@@ -140,7 +140,7 @@
       ]
     },
     {
-      "name": "helpers::location_repository_builder",
+      "name": "helpers::name_repository_builder",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

@@ -1367,22 +1367,22 @@ listing all available backends, facets and archetypes.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O10">
       <dia:attribute name="obj_pos">
-        <dia:point val="218,-88"/>
+        <dia:point val="219,-88"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="217.95,-88.05;237.8,-83.55"/>
+        <dia:rectangle val="218.95,-88.05;237.26,-83.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="218,-88"/>
+        <dia:point val="219,-88"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="19.75"/>
+        <dia:real val="18.210000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#location_repository_builder#</dia:string>
+        <dia:string>#name_repository_builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -1504,7 +1504,7 @@ listing all available backends, facets and archetypes.#</dia:string>
                 <dia:string>#parts#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#entities::location_repository_parts#</dia:string>
+                <dia:string>#entities::name_repository_parts#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -2034,17 +2034,17 @@ listing all available backends, facets and archetypes.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="227.875,-88"/>
+        <dia:point val="228.105,-88"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="226.857,-91.05;228.625,-87.2"/>
+        <dia:rectangle val="226.857,-91.05;228.855,-87.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="227.875,-88"/>
-        <dia:point val="227.875,-90"/>
+        <dia:point val="228.105,-88"/>
+        <dia:point val="228.105,-90"/>
         <dia:point val="226.907,-90"/>
         <dia:point val="226.907,-91"/>
       </dia:attribute>

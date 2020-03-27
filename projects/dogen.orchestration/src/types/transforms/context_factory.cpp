@@ -25,7 +25,7 @@
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/tracer.hpp"
 #include "dogen.physical/io/entities/name_repository_io.hpp"
-#include "dogen.physical/types/helpers/location_repository_builder.hpp"
+#include "dogen.physical/types/helpers/name_repository_builder.hpp"
 #include "dogen.physical/types/helpers/template_instantiation_domains_factory.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
 #include "dogen.variability/types/features/initializer.hpp"
@@ -66,7 +66,7 @@ boost::shared_ptr<physical::entities::name_repository>
 create_archetype_location_repository(
     const model_to_text_technical_space_chain_registrar& rg) {
 
-    physical::helpers::location_repository_builder b;
+    physical::helpers::name_repository_builder b;
     for (const auto& pair : rg.transforms_by_technical_space()) {
         const auto& t(*pair.second);
         b.add(t.archetype_locations_by_meta_name());

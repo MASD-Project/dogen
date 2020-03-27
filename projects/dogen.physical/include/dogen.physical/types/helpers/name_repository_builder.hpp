@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_LOGICAL_TYPES_HELPERS_LOCATION_REPOSITORY_BUILDER_HPP
-#define DOGEN_LOGICAL_TYPES_HELPERS_LOCATION_REPOSITORY_BUILDER_HPP
+#ifndef DOGEN_LOGICAL_TYPES_HELPERS_NAME_REPOSITORY_BUILDER_HPP
+#define DOGEN_LOGICAL_TYPES_HELPERS_NAME_REPOSITORY_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,7 +33,7 @@
 
 namespace dogen::physical::helpers {
 
-class location_repository_builder final {
+class name_repository_builder final {
 private:
     void validate(const std::list<entities::location>& als) const;
     void populate_locations(const std::list<entities::location>& als);
