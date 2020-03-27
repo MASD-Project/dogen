@@ -460,13 +460,6 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::traits",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
       "name": "formattables::project_items_expander",
       "stereotypes": [
         "dogen::handcrafted::typeable"

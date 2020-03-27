@@ -25,7 +25,6 @@
 #include "dogen.physical/types/helpers/name_factory.hpp"
 #include "dogen.logical/types/helpers/meta_name_factory.hpp"
 #include "dogen.logical/types/entities/visual_studio/project.hpp"
-#include "dogen.m2t.csharp/types/transforms/traits.hpp"
 #include "dogen.m2t.csharp/types/transforms/visual_studio/traits.hpp"
 #include "dogen.m2t.csharp/types/transforms/assistant.hpp"
 #include "dogen.m2t.csharp/types/transforms/visual_studio/project_transform.hpp"
