@@ -97,7 +97,8 @@
       ]
     },
     {
-      "name": "entities::location_repository",
+      "name": "entities::name_repository",
+      "documentation": "Repository containing physical names, indexed as required by use cases.\n",
       "fallback_element_type": "masd::object",
       "attributes": [
         {
@@ -189,8 +190,8 @@
           "type": "std::list<backend>"
         },
         {
-          "name": "locations",
-          "type": "location_repository"
+          "name": "names",
+          "type": "name_repository"
         }
       ]
     },

@@ -28,7 +28,7 @@
 #include "dogen.utility/types/io/optional_io.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
-#include "dogen.physical/io/entities/location_repository_io.hpp"
+#include "dogen.physical/io/entities/name_repository_io.hpp"
 #include "dogen.tracing/types/tracing_error.hpp"
 #include "dogen.tracing/types/metrics.hpp"
 #include "dogen.tracing/types/references_printer.hpp"

@@ -2850,13 +2850,13 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
         <dia:point val="14,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.95,47.95;49.2,55.65"/>
+        <dia:rectangle val="13.95,47.95;45.735,55.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="14,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="35.149999999999999"/>
+        <dia:real val="31.685000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="7.6000000000000005"/>
@@ -2997,10 +2997,10 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#archetype_location_repository#</dia:string>
+            <dia:string>#physical_name_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;physical::entities::location_repository&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;physical::entities::name_repository&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

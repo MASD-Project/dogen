@@ -29,7 +29,7 @@
 #include "dogen.physical/types/entities/location.hpp"
 #include "dogen.physical/types/entities/locations_group.hpp"
 #include "dogen.physical/types/entities/location_repository_parts.hpp"
-#include "dogen.physical/types/entities/location_repository.hpp"
+#include "dogen.physical/types/entities/name_repository.hpp"
 
 namespace dogen::physical::helpers {
 
@@ -50,10 +50,10 @@ public:
     void add(const entities::location_repository_parts& parts);
 
 public:
-    const entities::location_repository& build();
+    const entities::name_repository& build();
 
 private:
-    entities::location_repository repository_;
+    entities::name_repository repository_;
 };
 
 }

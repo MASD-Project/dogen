@@ -20,7 +20,7 @@
  */
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.physical/types/entities/location_repository.hpp"
+#include "dogen.physical/types/entities/name_repository.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.logical/types/entities/structural/builtin.hpp"
@@ -59,7 +59,7 @@ update_element(const context& ctx, logical::entities::element& e) {
     BOOST_LOG_SEV(lg, debug) << "Updating element: " << id;
 
     const auto mn(e.meta_name().qualified().dot());
-    const auto& alrp(*ctx.archetype_location_repository());
+    const auto& alrp(*ctx.physical_name_repository());
     const auto& c(alrp.by_meta_name());
     const auto i(c.find(mn));
     if (i == c.end()) {

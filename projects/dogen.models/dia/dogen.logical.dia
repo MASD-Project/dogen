@@ -5068,7 +5068,7 @@ If not present, user did not make any statements with regards to finality.#</dia
         <dia:point val="-231.665,-58.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-232.515,-58.45;-210.887,-45.95"/>
+        <dia:rectangle val="-232.515,-58.45;-210.888,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5110,7 +5110,7 @@ If not present, user did not make any statements with regards to finality.#</dia
         <dia:point val="-220.28,-50.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-221.13,-50.85;-210.887,-45.95"/>
+        <dia:rectangle val="-221.13,-50.85;-210.888,-45.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5194,7 +5194,7 @@ If not present, user did not make any statements with regards to finality.#</dia
         <dia:point val="-133,-61"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-133.05,-61.05;-120.5,-58.45"/>
+        <dia:rectangle val="-133.05,-61.05;-120.885,-58.45"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5203,7 +5203,7 @@ If not present, user did not make any statements with regards to finality.#</dia
         <dia:point val="-133,-61"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.450000000000001"/>
+        <dia:real val="12.065000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -7008,10 +7008,10 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#archetype_location_repository#</dia:string>
+            <dia:string>#physical_name_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;physical::entities::location_repository&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;physical::entities::name_repository&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9350,7 +9350,7 @@ user choices.#</dia:string>
         <dia:point val="-244,16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-244.05,15.95;-222.26,19.35"/>
+        <dia:rectangle val="-244.05,15.95;-221.875,19.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9359,7 +9359,7 @@ user choices.#</dia:string>
         <dia:point val="-244,16"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="21.690000000000001"/>
+        <dia:real val="22.075000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.3000000000000003"/>
@@ -23974,7 +23974,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-201.5,-34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-202.25,-40.85;-194.273,-33.2"/>
+        <dia:rectangle val="-202.25,-40.85;-194.272,-33.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -34101,7 +34101,7 @@ to structural modeling.
         <dia:point val="51,16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.95,15.95;69.66,19.35"/>
+        <dia:rectangle val="50.95,15.95;70.045,19.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -34110,7 +34110,7 @@ to structural modeling.
         <dia:point val="51,16"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.610000000000003"/>
+        <dia:real val="18.995000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.3000000000000003"/>
@@ -36746,7 +36746,7 @@ extend the mappings as required.#</dia:string>
         <dia:point val="-55,-83"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-55.75,-86.6003;-51.7404,-82.2"/>
+        <dia:rectangle val="-55.75,-86.6003;-51.7392,-82.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -36754,8 +36754,8 @@ extend the mappings as required.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-55,-83"/>
         <dia:point val="-55,-85"/>
-        <dia:point val="-51.9424,-85"/>
-        <dia:point val="-51.9404,-86.5502"/>
+        <dia:point val="-51.9404,-85"/>
+        <dia:point val="-51.9392,-86.5502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -39483,7 +39483,7 @@ generates the registration code as needed.#</dia:string>
         <dia:point val="118.42,-91.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="112.559,-91.95;119.17,-86.2502"/>
+        <dia:rectangle val="112.558,-91.95;119.17,-86.2502"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -39491,8 +39491,8 @@ generates the registration code as needed.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="118.42,-91.2"/>
         <dia:point val="118.42,-89"/>
-        <dia:point val="112.61,-89"/>
-        <dia:point val="112.609,-87.0502"/>
+        <dia:point val="112.609,-89"/>
+        <dia:point val="112.608,-87.0502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -45401,7 +45401,7 @@ Maps to a well known MSBuild target.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="104.612,-12.5497"/>
         <dia:point val="104.612,-10"/>
-        <dia:point val="101.031,-10"/>
+        <dia:point val="101.03,-10"/>
         <dia:point val="101.03,-8.05037"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">

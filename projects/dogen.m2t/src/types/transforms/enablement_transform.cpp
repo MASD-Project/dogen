@@ -24,7 +24,7 @@
 #include "dogen.utility/types/io/unordered_set_io.hpp"
 #include "dogen.utility/types/io/unordered_map_io.hpp"
 #include "dogen.tracing/types/scoped_tracer.hpp"
-#include "dogen.physical/types/entities/location_repository.hpp"
+#include "dogen.physical/types/entities/name_repository.hpp"
 #include "dogen.logical/types/entities/structural/module.hpp"
 #include "dogen.m2t/io/entities/model_io.hpp"
 #include "dogen.m2t/io/entities/facet_properties_io.hpp"
@@ -361,7 +361,7 @@ apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "enablement new_transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    const auto& alrp(*ctx.archetype_location_repository());
+    const auto& alrp(*ctx.physical_name_repository());
     const auto& albmn(alrp.by_meta_name());
     const auto& galp(m.global_archetype_location_properties()
         .denormalised_archetype_properties());

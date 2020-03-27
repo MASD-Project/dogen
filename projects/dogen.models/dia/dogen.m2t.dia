@@ -5582,13 +5582,13 @@ spaces.#</dia:string>
         <dia:point val="158,121"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="157.95,120.95;193.2,127.85"/>
+        <dia:rectangle val="157.95,120.95;189.735,127.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="158,121"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="35.149999999999999"/>
+        <dia:real val="31.685000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -5683,10 +5683,10 @@ spaces.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#archetype_location_repository#</dia:string>
+            <dia:string>#physical_name_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#boost::shared_ptr&lt;physical::entities::location_repository&gt;#</dia:string>
+            <dia:string>#boost::shared_ptr&lt;physical::entities::name_repository&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

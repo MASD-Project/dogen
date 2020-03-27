@@ -996,13 +996,13 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
         <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#location_repository#</dia:string>
+        <dia:string>#name_repository#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>#Repository containing physical names, indexed as required by use cases.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2203,13 +2203,13 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:point val="86,-87"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="85.95,-87.05;98.485,-82.55"/>
+        <dia:rectangle val="85.95,-87.05;97.715,-82.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="86,-87"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.434999999999999"/>
+        <dia:real val="11.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -2327,10 +2327,10 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#locations#</dia:string>
+            <dia:string>#names#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#location_repository#</dia:string>
+            <dia:string>#name_repository#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -2670,17 +2670,17 @@ Provides details of the kernels available in the current instance of Dogen.#</di
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="92.2175,-82.5497"/>
+        <dia:point val="91.8325,-82.5497"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="88.95,-83.2997;92.9675,-77.2"/>
+        <dia:rectangle val="88.95,-83.2997;92.5825,-77.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="92.2175,-82.5497"/>
-        <dia:point val="92.2175,-80"/>
+        <dia:point val="91.8325,-82.5497"/>
+        <dia:point val="91.8325,-80"/>
         <dia:point val="89,-80"/>
         <dia:point val="89,-78"/>
       </dia:attribute>
@@ -13204,17 +13204,17 @@ space. If you are targetting more than one, it will automatically be set to true
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="98.435,-87"/>
+        <dia:point val="97.665,-87"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="85.375,-97.05;99.185,-86.2"/>
+        <dia:rectangle val="85.375,-97.05;98.415,-86.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="98.435,-87"/>
-        <dia:point val="98.435,-95"/>
+        <dia:point val="97.665,-87"/>
+        <dia:point val="97.665,-95"/>
         <dia:point val="85.425,-95"/>
         <dia:point val="85.425,-97"/>
       </dia:attribute>

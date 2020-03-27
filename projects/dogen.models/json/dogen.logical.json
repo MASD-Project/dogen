@@ -795,8 +795,8 @@
           "type": "boost::shared_ptr<variability::entities::feature_model>"
         },
         {
-          "name": "archetype_location_repository",
-          "type": "boost::shared_ptr<physical::entities::location_repository>"
+          "name": "physical_name_repository",
+          "type": "boost::shared_ptr<physical::entities::name_repository>"
         },
         {
           "name": "template_instantiation_domains",

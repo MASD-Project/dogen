@@ -23,8 +23,8 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen.tracing/io/tracer_io.hpp"
 #include "dogen.injection/io/transforms/context_io.hpp"
+#include "dogen.physical/io/entities/name_repository_io.hpp"
 #include "dogen.variability/io/entities/feature_model_io.hpp"
-#include "dogen.physical/io/entities/location_repository_io.hpp"
 
 namespace std {
 
@@ -58,7 +58,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::physical::entities::location_repository>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::physical::entities::name_repository>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -123,7 +123,7 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"__type__\": " << "\"dogen::injection::transforms::context\"" << ", "
       << "\"data_directories\": " << v.data_directories() << ", "
       << "\"feature_model\": " << v.feature_model() << ", "
-      << "\"archetype_location_repository\": " << v.archetype_location_repository() << ", "
+      << "\"physical_name_repository\": " << v.physical_name_repository() << ", "
       << "\"tracer\": " << v.tracer() << ", "
       << "\"compatibility_mode\": " << v.compatibility_mode() << ", "
       << "\"variability_overrides\": " << v.variability_overrides()

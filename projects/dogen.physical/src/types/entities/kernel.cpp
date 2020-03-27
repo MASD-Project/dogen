@@ -27,12 +27,12 @@ kernel::kernel(
     const std::string& description,
     const dogen::physical::entities::name& name,
     const std::list<dogen::physical::entities::backend>& backends,
-    const dogen::physical::entities::location_repository& locations)
+    const dogen::physical::entities::name_repository& names)
     : location_(location),
       description_(description),
       name_(name),
       backends_(backends),
-      locations_(locations) { }
+      names_(names) { }
 
 void kernel::swap(kernel& other) noexcept {
     using std::swap;
@@ -40,7 +40,7 @@ void kernel::swap(kernel& other) noexcept {
     swap(description_, other.description_);
     swap(name_, other.name_);
     swap(backends_, other.backends_);
-    swap(locations_, other.locations_);
+    swap(names_, other.names_);
 }
 
 bool kernel::operator==(const kernel& rhs) const {
@@ -48,7 +48,7 @@ bool kernel::operator==(const kernel& rhs) const {
         description_ == rhs.description_ &&
         name_ == rhs.name_ &&
         backends_ == rhs.backends_ &&
-        locations_ == rhs.locations_;
+        names_ == rhs.names_;
 }
 
 kernel& kernel::operator=(kernel other) {
@@ -121,20 +121,20 @@ void kernel::backends(const std::list<dogen::physical::entities::backend>&& v) {
     backends_ = std::move(v);
 }
 
-const dogen::physical::entities::location_repository& kernel::locations() const {
-    return locations_;
+const dogen::physical::entities::name_repository& kernel::names() const {
+    return names_;
 }
 
-dogen::physical::entities::location_repository& kernel::locations() {
-    return locations_;
+dogen::physical::entities::name_repository& kernel::names() {
+    return names_;
 }
 
-void kernel::locations(const dogen::physical::entities::location_repository& v) {
-    locations_ = v;
+void kernel::names(const dogen::physical::entities::name_repository& v) {
+    names_ = v;
 }
 
-void kernel::locations(const dogen::physical::entities::location_repository&& v) {
-    locations_ = std::move(v);
+void kernel::names(const dogen::physical::entities::name_repository&& v) {
+    names_ = std::move(v);
 }
 
 }

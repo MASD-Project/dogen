@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_LOCATION_REPOSITORY_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_LOCATION_REPOSITORY_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_NAME_REPOSITORY_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_NAME_REPOSITORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,15 +35,18 @@
 
 namespace dogen::physical::entities {
 
-class location_repository final {
+/**
+ * @brief Repository containing physical names, indexed as required by use cases.
+ */
+class name_repository final {
 public:
-    location_repository() = default;
-    location_repository(const location_repository&) = default;
-    location_repository(location_repository&&) = default;
-    ~location_repository() = default;
+    name_repository() = default;
+    name_repository(const name_repository&) = default;
+    name_repository(name_repository&&) = default;
+    ~name_repository() = default;
 
 public:
-    location_repository(
+    name_repository(
         const std::list<dogen::physical::entities::location>& all,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name,
@@ -77,14 +80,14 @@ public:
     void by_backend_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >&& v);
 
 public:
-    bool operator==(const location_repository& rhs) const;
-    bool operator!=(const location_repository& rhs) const {
+    bool operator==(const name_repository& rhs) const;
+    bool operator!=(const name_repository& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(location_repository& other) noexcept;
-    location_repository& operator=(location_repository other);
+    void swap(name_repository& other) noexcept;
+    name_repository& operator=(name_repository other);
 
 private:
     std::list<dogen::physical::entities::location> all_;
@@ -100,8 +103,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::physical::entities::location_repository& lhs,
-    dogen::physical::entities::location_repository& rhs) {
+    dogen::physical::entities::name_repository& lhs,
+    dogen::physical::entities::name_repository& rhs) {
     lhs.swap(rhs);
 }
 

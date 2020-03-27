@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.physical/types/helpers/building_error.hpp"
-#include "dogen.physical/io/entities/location_repository_io.hpp"
+#include "dogen.physical/io/entities/name_repository_io.hpp"
 #include "dogen.physical/types/helpers/location_repository_builder.hpp"
 
 namespace {
@@ -157,7 +157,7 @@ add(const entities::location_repository_parts& parts) {
     add(parts.by_meta_name());
 }
 
-const entities::location_repository&
+const entities::name_repository&
 location_repository_builder::build() {
     populate_facet_names_by_backend_name();
     populate_formatter_names_by_backend_name();

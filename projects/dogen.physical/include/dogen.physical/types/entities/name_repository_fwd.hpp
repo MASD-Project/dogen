@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_LOCATION_REPOSITORY_FWD_HPP
-#define DOGEN_PHYSICAL_TYPES_ENTITIES_LOCATION_REPOSITORY_FWD_HPP
+#ifndef DOGEN_PHYSICAL_TYPES_ENTITIES_NAME_REPOSITORY_FWD_HPP
+#define DOGEN_PHYSICAL_TYPES_ENTITIES_NAME_REPOSITORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,7 +27,7 @@
 
 namespace dogen::physical::entities {
 
-class location_repository;
+class name_repository;
 
 }
 

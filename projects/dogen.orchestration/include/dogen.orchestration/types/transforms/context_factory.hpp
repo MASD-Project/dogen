@@ -27,7 +27,7 @@
 
 #include <boost/filesystem/path.hpp>
 #include "dogen/types/configuration.hpp"
-#include "dogen.physical/types/entities/location_repository.hpp"
+#include "dogen.physical/types/entities/name_repository.hpp"
 #include "dogen.variability/types/helpers/registrar.hpp"
 #include "dogen.injection/types/transforms/context.hpp"
 #include "dogen.orchestration/types/transforms/context.hpp"

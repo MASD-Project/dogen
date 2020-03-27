@@ -361,8 +361,8 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "archetype_location_repository",
-          "type": "boost::shared_ptr<physical::entities::location_repository>"
+          "name": "physical_name_repository",
+          "type": "boost::shared_ptr<physical::entities::name_repository>"
         },
         {
           "name": "output_directory_path",

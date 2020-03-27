@@ -30,7 +30,7 @@
 #include "dogen.variability/types/entities/feature.hpp"
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.variability/types/entities/feature_model.hpp"
-#include "dogen.physical/types/entities/location_repository.hpp"
+#include "dogen.physical/types/entities/name_repository.hpp"
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.m2t/types/entities/element_archetype.hpp"
 #include "dogen.m2t/types/entities/backend_properties.hpp"
@@ -68,21 +68,21 @@ private:
 private:
     static std::unordered_map<std::string, backend_feature_group>
     make_backend_feature_group(const variability::entities::feature_model& fm,
-        const physical::entities::location_repository& alrp);
+        const physical::entities::name_repository& alrp);
 
     static std::unordered_map<std::string, facet_feature_group>
     make_facet_feature_group(const variability::entities::feature_model& fm,
-        const physical::entities::location_repository& alrp);
+        const physical::entities::name_repository& alrp);
 
     static std::unordered_map<std::string, global_archetype_feature_group>
     make_global_archetype_feature_group(
         const variability::entities::feature_model& fm,
-        const physical::entities::location_repository& alrp);
+        const physical::entities::name_repository& alrp);
 
     static std::unordered_map<std::string, local_archetype_feature_group>
     make_local_archetype_feature_group(
         const variability::entities::feature_model& fm,
-        const physical::entities::location_repository& alrp);
+        const physical::entities::name_repository& alrp);
 
 private:
     static std::unordered_map<std::string, entities::backend_properties>
@@ -103,7 +103,7 @@ private:
 
     static void populate_global_archetype_location_properties(
         const variability::entities::feature_model& fm,
-        const physical::entities::location_repository& alrp,
+        const physical::entities::name_repository& alrp,
         entities::model& m);
 
     static std::unordered_map<
@@ -117,7 +117,7 @@ private:
 
     static void populate_local_archetype_location_properties(
         const variability::entities::feature_model& fm,
-        const physical::entities::location_repository& alrp,
+        const physical::entities::name_repository& alrp,
         entities::model& m);
 
 public:

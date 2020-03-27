@@ -24,7 +24,7 @@
 #include "dogen.utility/types/filesystem/path.hpp"
 #include "dogen.utility/types/filesystem/file.hpp"
 #include "dogen.tracing/types/tracer.hpp"
-#include "dogen.physical/io/entities/location_repository_io.hpp"
+#include "dogen.physical/io/entities/name_repository_io.hpp"
 #include "dogen.physical/types/helpers/location_repository_builder.hpp"
 #include "dogen.physical/types/helpers/template_instantiation_domains_factory.hpp"
 #include "dogen.variability/types/transforms/context.hpp"
@@ -62,7 +62,7 @@ namespace dogen::orchestration::transforms {
 
 using m2t::transforms::model_to_text_technical_space_chain_registrar;
 
-boost::shared_ptr<physical::entities::location_repository>
+boost::shared_ptr<physical::entities::name_repository>
 create_archetype_location_repository(
     const model_to_text_technical_space_chain_registrar& rg) {
 
@@ -72,8 +72,8 @@ create_archetype_location_repository(
         b.add(t.archetype_locations_by_meta_name());
         b.add(t.archetype_location_repository_parts());
     }
-    using physical::entities::location_repository;
-    return boost::make_shared<location_repository>(b.build());
+    using physical::entities::name_repository;
+    return boost::make_shared<name_repository>(b.build());
 }
 void context_factory::
 register_variability_entities(variability::helpers::registrar& rg) {
@@ -112,7 +112,7 @@ make_injection_context(const configuration& cfg,
      * Setup the physical data structures.
      */
     const auto alrp(create_archetype_location_repository(rg));
-    r.archetype_location_repository(alrp);
+    r.physical_name_repository(alrp);
 
     /*
      * Setup the tracer. Note that we do it regardless of whether
@@ -217,9 +217,9 @@ make_context(const configuration& cfg, const std::string& activity,
     /*
      * Setup the archetype location repository.
      */
-    r.injection_context().archetype_location_repository(alrp);
-    r.logical_context().archetype_location_repository(alrp);
-    r.generation_context().archetype_location_repository(alrp);
+    r.injection_context().physical_name_repository(alrp);
+    r.logical_context().physical_name_repository(alrp);
+    r.generation_context().physical_name_repository(alrp);
 
     /*
      * Setup the tracer.
