@@ -34,12 +34,12 @@
 #include "dogen.m2t/io/entities/archetype_properties_io.hpp"
 #include "dogen.logical/io/entities/enablement_properties_io.hpp"
 #include "dogen.m2t/types/transforms/transformation_error.hpp"
-#include "dogen.m2t/types/transforms/archetype_location_properties_transform.hpp"
+#include "dogen.m2t/types/transforms/global_enablement_transform.hpp"
 
 namespace {
 
 const std::string transform_id(
-    "generation.transforms.archetype_location_properties_transform");
+    "generation.transforms.global_enablement_transform");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -56,8 +56,8 @@ namespace dogen::m2t::transforms {
 
 std::unordered_map<
     std::string,
-    archetype_location_properties_transform::backend_feature_group>
-archetype_location_properties_transform::
+    global_enablement_transform::backend_feature_group>
+global_enablement_transform::
 make_backend_feature_group(const variability::entities::feature_model& fm,
     const physical::entities::name_repository& alrp) {
     std::unordered_map<std::string, backend_feature_group> r;
@@ -76,8 +76,8 @@ make_backend_feature_group(const variability::entities::feature_model& fm,
 
 std::unordered_map<
     std::string,
-    archetype_location_properties_transform::facet_feature_group>
-archetype_location_properties_transform::
+    global_enablement_transform::facet_feature_group>
+global_enablement_transform::
 make_facet_feature_group(const variability::entities::feature_model& fm,
     const physical::entities::name_repository& alrp) {
     std::unordered_map<std::string, facet_feature_group> r;
@@ -100,8 +100,8 @@ make_facet_feature_group(const variability::entities::feature_model& fm,
 
 std::unordered_map<
     std::string,
-    archetype_location_properties_transform::global_archetype_feature_group>
-archetype_location_properties_transform::make_global_archetype_feature_group(
+    global_enablement_transform::global_archetype_feature_group>
+global_enablement_transform::make_global_archetype_feature_group(
     const variability::entities::feature_model& fm,
     const physical::entities::name_repository& alrp) {
     std::unordered_map<std::string, global_archetype_feature_group> r;
@@ -122,8 +122,8 @@ archetype_location_properties_transform::make_global_archetype_feature_group(
 
 std::unordered_map<
     std::string,
-    archetype_location_properties_transform::local_archetype_feature_group>
-archetype_location_properties_transform::make_local_archetype_feature_group(
+    global_enablement_transform::local_archetype_feature_group>
+global_enablement_transform::make_local_archetype_feature_group(
     const variability::entities::feature_model& fm,
     const physical::entities::name_repository& alrp) {
     std::unordered_map<std::string, local_archetype_feature_group> r;
@@ -145,7 +145,7 @@ archetype_location_properties_transform::make_local_archetype_feature_group(
 }
 
 std::unordered_map<std::string, entities::backend_properties>
-archetype_location_properties_transform::obtain_backend_properties(
+global_enablement_transform::obtain_backend_properties(
     const std::unordered_map<std::string, backend_feature_group>& fgs,
     const variability::entities::configuration& cfg) {
 
@@ -167,7 +167,7 @@ archetype_location_properties_transform::obtain_backend_properties(
 }
 
 std::unordered_map<std::string, entities::facet_properties>
-archetype_location_properties_transform::obtain_facet_properties(
+global_enablement_transform::obtain_facet_properties(
     const std::unordered_map<std::string, facet_feature_group>& fgs,
     const variability::entities::configuration& cfg) {
 
@@ -191,7 +191,7 @@ archetype_location_properties_transform::obtain_facet_properties(
 }
 
 std::unordered_map<std::string, entities::archetype_properties>
-archetype_location_properties_transform::obtain_archetype_properties(
+global_enablement_transform::obtain_archetype_properties(
     const std::unordered_map<std::string, global_archetype_feature_group>& fgs,
     const variability::entities::configuration& ra) {
 
@@ -215,8 +215,7 @@ archetype_location_properties_transform::obtain_archetype_properties(
     return r;
 }
 
-void archetype_location_properties_transform::
-populate_global_archetype_location_properties(
+void global_enablement_transform::populate_global_archetype_location_properties(
     const variability::entities::feature_model& fm,
     const physical::entities::name_repository& alrp,
     entities::model& m) {
@@ -289,8 +288,7 @@ populate_global_archetype_location_properties(
 }
 
 std::unordered_map<std::string, logical::entities::enablement_properties>
-archetype_location_properties_transform::
-obtain_local_archetype_location_properties(
+global_enablement_transform::obtain_local_archetype_location_properties(
     const std::unordered_map<std::string, local_archetype_feature_group>& fgs,
     const std::list<physical::entities::location>& als,
     const variability::entities::configuration& cfg) {
@@ -336,8 +334,7 @@ obtain_local_archetype_location_properties(
     return r;
 }
 
-void archetype_location_properties_transform::
-populate_local_archetype_location_properties(
+void global_enablement_transform::populate_local_archetype_location_properties(
     const variability::entities::feature_model& fm,
     const physical::entities::name_repository& alrp,
     entities::model& m) {
@@ -388,7 +385,7 @@ populate_local_archetype_location_properties(
     }
 }
 
-void archetype_location_properties_transform::
+void global_enablement_transform::
 apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg,
         "archetype location properties transform",

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_M2T_TYPES_TRANSFORMS_ARCHETYPE_LOCATION_PROPERTIES_TRANSFORM_HPP
-#define DOGEN_M2T_TYPES_TRANSFORMS_ARCHETYPE_LOCATION_PROPERTIES_TRANSFORM_HPP
+#ifndef DOGEN_M2T_TYPES_TRANSFORMS_GLOBAL_ENABLEMENT_TRANSFORM_HPP
+#define DOGEN_M2T_TYPES_TRANSFORMS_GLOBAL_ENABLEMENT_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -42,7 +42,7 @@
 
 namespace dogen::m2t::transforms {
 
-class archetype_location_properties_transform final {
+class global_enablement_transform final {
 private:
     struct backend_feature_group {
         variability::entities::feature enabled;

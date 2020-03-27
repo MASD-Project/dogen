@@ -26,7 +26,7 @@
 #include "dogen.m2t/types/transforms/artefact_properties_transform.hpp"
 #include "dogen.m2t/types/transforms/local_enablement_transform.hpp"
 #include "dogen.m2t/types/transforms/formatting_transform.hpp"
-#include "dogen.m2t/types/transforms/archetype_location_properties_transform.hpp"
+#include "dogen.m2t/types/transforms/global_enablement_transform.hpp"
 #include "dogen.m2t/types/transforms/technical_space_transform.hpp"
 #include "dogen.m2t/types/transforms/decoration_transform.hpp"
 #include "dogen.m2t/types/transforms/model_generation_chain.hpp"
@@ -93,7 +93,7 @@ void model_generation_chain::apply(const context& ctx,
          * The archetype location properties transform must be executed
          * before the enablement transform.
          */
-        archetype_location_properties_transform::apply(ctx, m);
+        global_enablement_transform::apply(ctx, m);
 
         /*
          * Enablement transform must be applied after the dynamic

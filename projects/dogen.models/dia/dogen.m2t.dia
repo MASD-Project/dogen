@@ -5084,19 +5084,19 @@ spaces.#</dia:string>
         <dia:point val="67,128"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="66.95,127.95;86.1,131.65"/>
+        <dia:rectangle val="66.95,127.95;85.26,131.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="67,128"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="19.050000000000001"/>
+        <dia:real val="18.210000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#archetype_location_properties_transform#</dia:string>
+        <dia:string>#global_enablement_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
@@ -5297,7 +5297,7 @@ spaces.#</dia:string>
         <dia:point val="85,135"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="76.475,131.55;85.75,135.8"/>
+        <dia:rectangle val="76.055,131.55;85.75,135.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5305,8 +5305,8 @@ spaces.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="85,135"/>
         <dia:point val="85,133"/>
-        <dia:point val="76.525,133"/>
-        <dia:point val="76.525,131.6"/>
+        <dia:point val="76.105,133"/>
+        <dia:point val="76.105,131.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

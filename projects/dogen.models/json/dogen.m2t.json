@@ -336,7 +336,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "transforms::archetype_location_properties_transform",
+      "name": "transforms::global_enablement_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],
