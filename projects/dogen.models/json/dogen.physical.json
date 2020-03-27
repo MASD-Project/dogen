@@ -147,7 +147,7 @@
       "fallback_element_type": "masd::object"
     },
     {
-      "name": "helpers::location_repository_parts_builder",
+      "name": "helpers::name_repository_parts_builder",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

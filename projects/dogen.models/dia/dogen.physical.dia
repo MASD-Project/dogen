@@ -1572,7 +1572,7 @@ listing all available backends, facets and archetypes.#</dia:string>
         <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#location_repository_parts_builder#</dia:string>
+        <dia:string>#name_repository_parts_builder#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#dogen::handcrafted::typeable#</dia:string>
