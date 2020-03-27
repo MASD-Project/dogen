@@ -29,8 +29,8 @@
 #include "dogen.variability/types/entities/configuration.hpp"
 #include "dogen.logical/io/entities/static_stereotypes_io.hpp"
 #include "dogen.logical/io/entities/artefact_properties_io.hpp"
+#include "dogen.logical/io/entities/enablement_properties_io.hpp"
 #include "dogen.logical/io/entities/decoration/element_properties_io.hpp"
-#include "dogen.logical/io/entities/local_archetype_location_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -113,7 +113,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::logical::entities::local_archetype_location_properties>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -182,7 +182,7 @@ element::element(
     const dogen::logical::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, dogen::logical::entities::local_archetype_location_properties>& archetype_location_properties,
+    const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& archetype_location_properties,
     const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration)
     : name_(name),
       documentation_(documentation),
@@ -428,19 +428,19 @@ void element::artefact_properties(const std::unordered_map<std::string, dogen::l
     artefact_properties_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::logical::entities::local_archetype_location_properties>& element::archetype_location_properties() const {
+const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& element::archetype_location_properties() const {
     return archetype_location_properties_;
 }
 
-std::unordered_map<std::string, dogen::logical::entities::local_archetype_location_properties>& element::archetype_location_properties() {
+std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& element::archetype_location_properties() {
     return archetype_location_properties_;
 }
 
-void element::archetype_location_properties(const std::unordered_map<std::string, dogen::logical::entities::local_archetype_location_properties>& v) {
+void element::archetype_location_properties(const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& v) {
     archetype_location_properties_ = v;
 }
 
-void element::archetype_location_properties(const std::unordered_map<std::string, dogen::logical::entities::local_archetype_location_properties>&& v) {
+void element::archetype_location_properties(const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>&& v) {
     archetype_location_properties_ = std::move(v);
 }
 

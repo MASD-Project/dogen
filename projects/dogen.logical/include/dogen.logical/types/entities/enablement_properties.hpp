@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_LOGICAL_TYPES_ENTITIES_LOCAL_ARCHETYPE_LOCATION_PROPERTIES_HPP
-#define DOGEN_LOGICAL_TYPES_ENTITIES_LOCAL_ARCHETYPE_LOCATION_PROPERTIES_HPP
+#ifndef DOGEN_LOGICAL_TYPES_ENTITIES_ENABLEMENT_PROPERTIES_HPP
+#define DOGEN_LOGICAL_TYPES_ENTITIES_ENABLEMENT_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,17 +30,17 @@
 
 namespace dogen::logical::entities {
 
-class local_archetype_location_properties final {
+class enablement_properties final {
 public:
-    local_archetype_location_properties() = default;
-    local_archetype_location_properties(const local_archetype_location_properties&) = default;
-    ~local_archetype_location_properties() = default;
+    enablement_properties() = default;
+    enablement_properties(const enablement_properties&) = default;
+    ~enablement_properties() = default;
 
 public:
-    local_archetype_location_properties(local_archetype_location_properties&& rhs);
+    enablement_properties(enablement_properties&& rhs);
 
 public:
-    local_archetype_location_properties(
+    enablement_properties(
         const boost::optional<bool>& facet_enabled,
         const boost::optional<bool>& archetype_enabled,
         const boost::optional<bool>& facet_overwrite,
@@ -68,14 +68,14 @@ public:
     void archetype_overwrite(const boost::optional<bool>&& v);
 
 public:
-    bool operator==(const local_archetype_location_properties& rhs) const;
-    bool operator!=(const local_archetype_location_properties& rhs) const {
+    bool operator==(const enablement_properties& rhs) const;
+    bool operator!=(const enablement_properties& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(local_archetype_location_properties& other) noexcept;
-    local_archetype_location_properties& operator=(local_archetype_location_properties other);
+    void swap(enablement_properties& other) noexcept;
+    enablement_properties& operator=(enablement_properties other);
 
 private:
     boost::optional<bool> facet_enabled_;
@@ -90,8 +90,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::logical::entities::local_archetype_location_properties& lhs,
-    dogen::logical::entities::local_archetype_location_properties& rhs) {
+    dogen::logical::entities::enablement_properties& lhs,
+    dogen::logical::entities::enablement_properties& rhs) {
     lhs.swap(rhs);
 }
 

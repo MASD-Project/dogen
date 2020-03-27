@@ -18,16 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_LOGICAL_TYPES_ENTITIES_LOCAL_ARCHETYPE_LOCATION_PROPERTIES_FWD_HPP
-#define DOGEN_LOGICAL_TYPES_ENTITIES_LOCAL_ARCHETYPE_LOCATION_PROPERTIES_FWD_HPP
+#ifndef DOGEN_LOGICAL_IO_ENTITIES_ENABLEMENT_PROPERTIES_IO_HPP
+#define DOGEN_LOGICAL_IO_ENTITIES_ENABLEMENT_PROPERTIES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen.logical/types/entities/enablement_properties.hpp"
+
 namespace dogen::logical::entities {
 
-class local_archetype_location_properties;
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::logical::entities::enablement_properties& v);
 
 }
 

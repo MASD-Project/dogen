@@ -102,7 +102,7 @@ modeline_group::modeline_group(
     const dogen::logical::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, dogen::logical::entities::local_archetype_location_properties>& archetype_location_properties,
+    const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& archetype_location_properties,
     const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
     const std::unordered_set<std::string>& contains,
     const std::list<boost::shared_ptr<dogen::logical::entities::decoration::modeline> >& modelines)

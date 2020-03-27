@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen.logical/io/entities/local_archetype_location_properties_io.hpp"
+#include "dogen.logical/io/entities/enablement_properties_io.hpp"
 
 namespace boost {
 
@@ -39,7 +39,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<bool>& v)
 
 namespace dogen::logical::entities {
 
-std::ostream& operator<<(std::ostream& s, const local_archetype_location_properties& v) {
+std::ostream& operator<<(std::ostream& s, const enablement_properties& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -47,7 +47,7 @@ std::ostream& operator<<(std::ostream& s, const local_archetype_location_propert
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::logical::entities::local_archetype_location_properties\"" << ", "
+      << "\"__type__\": " << "\"dogen::logical::entities::enablement_properties\"" << ", "
       << "\"facet_enabled\": " << v.facet_enabled() << ", "
       << "\"archetype_enabled\": " << v.archetype_enabled() << ", "
       << "\"facet_overwrite\": " << v.facet_overwrite() << ", "

@@ -39,9 +39,9 @@
 #include "dogen.logical/hash/entities/technical_space_hash.hpp"
 #include "dogen.logical/types/entities/artefact_properties.hpp"
 #include "dogen.logical/types/entities/element_visitor_fwd.hpp"
+#include "dogen.logical/types/entities/enablement_properties.hpp"
 #include "dogen.variability/types/entities/configuration_fwd.hpp"
 #include "dogen.logical/types/entities/decoration/element_properties.hpp"
-#include "dogen.logical/types/entities/local_archetype_location_properties.hpp"
 
 namespace dogen::logical::entities {
 
@@ -76,7 +76,7 @@ public:
         const dogen::logical::entities::technical_space intrinsic_technical_space,
         const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
         const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
-        const std::unordered_map<std::string, dogen::logical::entities::local_archetype_location_properties>& archetype_location_properties,
+        const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& archetype_location_properties,
         const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration);
 
 public:
@@ -207,10 +207,10 @@ public:
     void artefact_properties(const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& v);
     void artefact_properties(const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>&& v);
 
-    const std::unordered_map<std::string, dogen::logical::entities::local_archetype_location_properties>& archetype_location_properties() const;
-    std::unordered_map<std::string, dogen::logical::entities::local_archetype_location_properties>& archetype_location_properties();
-    void archetype_location_properties(const std::unordered_map<std::string, dogen::logical::entities::local_archetype_location_properties>& v);
-    void archetype_location_properties(const std::unordered_map<std::string, dogen::logical::entities::local_archetype_location_properties>&& v);
+    const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& archetype_location_properties() const;
+    std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& archetype_location_properties();
+    void archetype_location_properties(const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& v);
+    void archetype_location_properties(const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>&& v);
 
     /**
      * @brief If set, decoration to be added to each generated file.
@@ -243,7 +243,7 @@ private:
     dogen::logical::entities::technical_space intrinsic_technical_space_;
     boost::shared_ptr<dogen::variability::entities::configuration> configuration_;
     std::unordered_map<std::string, dogen::logical::entities::artefact_properties> artefact_properties_;
-    std::unordered_map<std::string, dogen::logical::entities::local_archetype_location_properties> archetype_location_properties_;
+    std::unordered_map<std::string, dogen::logical::entities::enablement_properties> archetype_location_properties_;
     std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> > decoration_;
 };
 

@@ -32,7 +32,7 @@
 #include "dogen.m2t/io/entities/backend_properties_io.hpp"
 #include "dogen.m2t/io/entities/facet_properties_io.hpp"
 #include "dogen.m2t/io/entities/archetype_properties_io.hpp"
-#include "dogen.logical/io/entities/local_archetype_location_properties_io.hpp"
+#include "dogen.logical/io/entities/enablement_properties_io.hpp"
 #include "dogen.m2t/types/transforms/transformation_error.hpp"
 #include "dogen.m2t/types/transforms/archetype_location_properties_transform.hpp"
 
@@ -288,8 +288,7 @@ populate_global_archetype_location_properties(
     }
 }
 
-std::unordered_map<std::string,
-                   logical::entities::local_archetype_location_properties>
+std::unordered_map<std::string, logical::entities::enablement_properties>
 archetype_location_properties_transform::
 obtain_local_archetype_location_properties(
     const std::unordered_map<std::string, local_archetype_feature_group>& fgs,
@@ -299,8 +298,7 @@ obtain_local_archetype_location_properties(
     BOOST_LOG_SEV(lg, debug) << "Creating local archetype location properties.";
 
     std::unordered_map<
-        std::string,
-        logical::entities::local_archetype_location_properties> r;
+        std::string, logical::entities::enablement_properties> r;
     const variability::helpers::configuration_selector s(cfg);
     for (const auto& al : als) {
         const auto archetype(al.archetype());
@@ -312,7 +310,7 @@ obtain_local_archetype_location_properties(
         }
         const auto fg(i->second);
 
-        logical::entities::local_archetype_location_properties lalp;
+        logical::entities::enablement_properties lalp;
         if (s.has_configuration_point(fg.facet_enabled)) {
             lalp.facet_enabled(
                 s.get_boolean_content_or_default(fg.facet_enabled));

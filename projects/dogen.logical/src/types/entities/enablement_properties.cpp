@@ -18,17 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen.logical/types/entities/local_archetype_location_properties.hpp"
+#include "dogen.logical/types/entities/enablement_properties.hpp"
 
 namespace dogen::logical::entities {
 
-local_archetype_location_properties::local_archetype_location_properties(local_archetype_location_properties&& rhs)
+enablement_properties::enablement_properties(enablement_properties&& rhs)
     : facet_enabled_(std::move(rhs.facet_enabled_)),
       archetype_enabled_(std::move(rhs.archetype_enabled_)),
       facet_overwrite_(std::move(rhs.facet_overwrite_)),
       archetype_overwrite_(std::move(rhs.archetype_overwrite_)) { }
 
-local_archetype_location_properties::local_archetype_location_properties(
+enablement_properties::enablement_properties(
     const boost::optional<bool>& facet_enabled,
     const boost::optional<bool>& archetype_enabled,
     const boost::optional<bool>& facet_overwrite,
@@ -38,7 +38,7 @@ local_archetype_location_properties::local_archetype_location_properties(
       facet_overwrite_(facet_overwrite),
       archetype_overwrite_(archetype_overwrite) { }
 
-void local_archetype_location_properties::swap(local_archetype_location_properties& other) noexcept {
+void enablement_properties::swap(enablement_properties& other) noexcept {
     using std::swap;
     swap(facet_enabled_, other.facet_enabled_);
     swap(archetype_enabled_, other.archetype_enabled_);
@@ -46,80 +46,80 @@ void local_archetype_location_properties::swap(local_archetype_location_properti
     swap(archetype_overwrite_, other.archetype_overwrite_);
 }
 
-bool local_archetype_location_properties::operator==(const local_archetype_location_properties& rhs) const {
+bool enablement_properties::operator==(const enablement_properties& rhs) const {
     return facet_enabled_ == rhs.facet_enabled_ &&
         archetype_enabled_ == rhs.archetype_enabled_ &&
         facet_overwrite_ == rhs.facet_overwrite_ &&
         archetype_overwrite_ == rhs.archetype_overwrite_;
 }
 
-local_archetype_location_properties& local_archetype_location_properties::operator=(local_archetype_location_properties other) {
+enablement_properties& enablement_properties::operator=(enablement_properties other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const boost::optional<bool>& local_archetype_location_properties::facet_enabled() const {
+const boost::optional<bool>& enablement_properties::facet_enabled() const {
     return facet_enabled_;
 }
 
-boost::optional<bool>& local_archetype_location_properties::facet_enabled() {
+boost::optional<bool>& enablement_properties::facet_enabled() {
     return facet_enabled_;
 }
 
-void local_archetype_location_properties::facet_enabled(const boost::optional<bool>& v) {
+void enablement_properties::facet_enabled(const boost::optional<bool>& v) {
     facet_enabled_ = v;
 }
 
-void local_archetype_location_properties::facet_enabled(const boost::optional<bool>&& v) {
+void enablement_properties::facet_enabled(const boost::optional<bool>&& v) {
     facet_enabled_ = std::move(v);
 }
 
-const boost::optional<bool>& local_archetype_location_properties::archetype_enabled() const {
+const boost::optional<bool>& enablement_properties::archetype_enabled() const {
     return archetype_enabled_;
 }
 
-boost::optional<bool>& local_archetype_location_properties::archetype_enabled() {
+boost::optional<bool>& enablement_properties::archetype_enabled() {
     return archetype_enabled_;
 }
 
-void local_archetype_location_properties::archetype_enabled(const boost::optional<bool>& v) {
+void enablement_properties::archetype_enabled(const boost::optional<bool>& v) {
     archetype_enabled_ = v;
 }
 
-void local_archetype_location_properties::archetype_enabled(const boost::optional<bool>&& v) {
+void enablement_properties::archetype_enabled(const boost::optional<bool>&& v) {
     archetype_enabled_ = std::move(v);
 }
 
-const boost::optional<bool>& local_archetype_location_properties::facet_overwrite() const {
+const boost::optional<bool>& enablement_properties::facet_overwrite() const {
     return facet_overwrite_;
 }
 
-boost::optional<bool>& local_archetype_location_properties::facet_overwrite() {
+boost::optional<bool>& enablement_properties::facet_overwrite() {
     return facet_overwrite_;
 }
 
-void local_archetype_location_properties::facet_overwrite(const boost::optional<bool>& v) {
+void enablement_properties::facet_overwrite(const boost::optional<bool>& v) {
     facet_overwrite_ = v;
 }
 
-void local_archetype_location_properties::facet_overwrite(const boost::optional<bool>&& v) {
+void enablement_properties::facet_overwrite(const boost::optional<bool>&& v) {
     facet_overwrite_ = std::move(v);
 }
 
-const boost::optional<bool>& local_archetype_location_properties::archetype_overwrite() const {
+const boost::optional<bool>& enablement_properties::archetype_overwrite() const {
     return archetype_overwrite_;
 }
 
-boost::optional<bool>& local_archetype_location_properties::archetype_overwrite() {
+boost::optional<bool>& enablement_properties::archetype_overwrite() {
     return archetype_overwrite_;
 }
 
-void local_archetype_location_properties::archetype_overwrite(const boost::optional<bool>& v) {
+void enablement_properties::archetype_overwrite(const boost::optional<bool>& v) {
     archetype_overwrite_ = v;
 }
 
-void local_archetype_location_properties::archetype_overwrite(const boost::optional<bool>&& v) {
+void enablement_properties::archetype_overwrite(const boost::optional<bool>&& v) {
     archetype_overwrite_ = std::move(v);
 }
 

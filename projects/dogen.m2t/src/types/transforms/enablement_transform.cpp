@@ -97,7 +97,7 @@ void enablement_transform::compute_enablement_for_artefact_properties(
     entities::denormalised_archetype_properties>&
     global_archetype_location_properties,
     const std::unordered_map<std::string,
-    logical::entities::local_archetype_location_properties>&
+    logical::entities::enablement_properties>&
     local_archetype_location_properties,
     const std::string& archetype,
     logical::entities::artefact_properties& ap) {

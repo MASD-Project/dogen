@@ -108,7 +108,7 @@ private:
 
     static std::unordered_map<
         std::string,
-        logical::entities::local_archetype_location_properties>
+        logical::entities::enablement_properties>
     obtain_local_archetype_location_properties(
         const std::unordered_map<std::string,
         local_archetype_feature_group>& fgs,

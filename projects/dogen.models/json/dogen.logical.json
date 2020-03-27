@@ -392,7 +392,7 @@
         },
         {
           "name": "archetype_location_properties",
-          "type": "std::unordered_map<std::string, local_archetype_location_properties>"
+          "type": "std::unordered_map<std::string, enablement_properties>"
         },
         {
           "name": "decoration",
@@ -1405,7 +1405,7 @@
       ]
     },
     {
-      "name": "entities::local_archetype_location_properties",
+      "name": "entities::enablement_properties",
       "fallback_element_type": "masd::object",
       "attributes": [
         {

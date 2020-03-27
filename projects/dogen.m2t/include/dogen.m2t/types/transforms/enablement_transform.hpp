@@ -31,7 +31,7 @@
 #include "dogen.logical/types/entities/element.hpp"
 #include "dogen.m2t/types/entities/element_archetype.hpp"
 #include "dogen.logical/types/entities/artefact_properties.hpp"
-#include "dogen.logical/types/entities/local_archetype_location_properties.hpp"
+#include "dogen.logical/types/entities/enablement_properties.hpp"
 #include "dogen.m2t/types/entities/denormalised_archetype_properties.hpp"
 #include "dogen.m2t/types/transforms/context.hpp"
 #include "dogen.m2t/types/entities/model.hpp"
@@ -48,7 +48,7 @@ private:
         entities::denormalised_archetype_properties>&
         global_archetype_location_properties,
         const std::unordered_map<std::string,
-        logical::entities::local_archetype_location_properties>&
+        logical::entities::enablement_properties>&
         local_archetype_location_properties,
         const std::string& archetype,
         logical::entities::artefact_properties& ap);

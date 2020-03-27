@@ -28,8 +28,8 @@
 #include "dogen.variability/io/entities/configuration_io.hpp"
 #include "dogen.logical/io/entities/static_stereotypes_io.hpp"
 #include "dogen.logical/io/entities/artefact_properties_io.hpp"
+#include "dogen.logical/io/entities/enablement_properties_io.hpp"
 #include "dogen.logical/io/entities/decoration/element_properties_io.hpp"
-#include "dogen.logical/io/entities/local_archetype_location_properties_io.hpp"
 
 namespace dogen::logical::entities {
 
