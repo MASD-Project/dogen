@@ -3342,7 +3342,7 @@ spaces.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#archetype_family_properties#</dia:string>
+            <dia:string>#physical_names_family_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
