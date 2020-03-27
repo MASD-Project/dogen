@@ -253,7 +253,7 @@ void local_enablement_transform::compute_enablement_for_artefact_properties(
 
 void local_enablement_transform::compute_enablement_for_element(
     const std::unordered_map<std::string,
-    physical::entities::name_group>& archetype_locations_by_meta_name,
+    physical::entities::name_group>& physical_names_by_meta_name,
     const std::unordered_map<std::string,
     entities::denormalised_archetype_properties>&
     global_enablement_properties,
@@ -288,8 +288,8 @@ void local_enablement_transform::compute_enablement_for_element(
     }
 
     const auto& mn(e.meta_name());
-    const auto j(archetype_locations_by_meta_name.find(mn.qualified().dot()));
-    if (j == archetype_locations_by_meta_name.end()) {
+    const auto j(physical_names_by_meta_name.find(mn.qualified().dot()));
+    if (j == physical_names_by_meta_name.end()) {
         BOOST_LOG_SEV(lg, error) << meta_name_not_found << mn.qualified().dot();
         BOOST_THROW_EXCEPTION(
             transformation_error(meta_name_not_found + mn.qualified().dot()));

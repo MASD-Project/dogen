@@ -56,7 +56,7 @@ private:
     static void compute_enablement_for_element(
         const std::unordered_map<std::string,
         physical::entities::name_group>&
-        archetype_locations_by_meta_name,
+        physical_names_by_meta_name,
         const std::unordered_map<std::string,
         entities::denormalised_archetype_properties>&
         global_enablement_properties,
