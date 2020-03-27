@@ -34,7 +34,7 @@ public:
     /**
      * @brief Name of this facet.
      */
-    static std::string facet();
+    static std::string facet_qn();
     static std::string facet_sn();
 
     /**
