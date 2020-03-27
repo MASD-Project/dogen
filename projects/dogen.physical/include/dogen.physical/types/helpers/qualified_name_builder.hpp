@@ -25,24 +25,66 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include "dogen.physical/types/entities/name.hpp"
+#include "dogen.physical/types/entities/location.hpp"
 
 namespace dogen::physical::helpers {
 
+/**
+ * @brief Builds qualified names according to the geometry of physical
+ * space.
+ *
+ * If the names and locations are not valid for the requests in
+ * question, we throw.
+ */
 class qualified_name_builder final {
 public:
-    qualified_name_builder() = default;
-    qualified_name_builder(const qualified_name_builder&) = default;
-    qualified_name_builder(qualified_name_builder&&) = default;
-    ~qualified_name_builder() = default;
-    qualified_name_builder& operator=(const qualified_name_builder&) = default;
+    /**
+     * @brief Builds a qualified name for the kernel region in
+     * physical space.
+     */
+    /**@{*/
+    static std::string build_kernel(const entities::location& l);
+    static std::string build_kernel(const entities::name& n);
+    /**@}*/
 
-public:
-    bool operator==(const qualified_name_builder& rhs) const;
-    bool operator!=(const qualified_name_builder& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Builds a qualified name for the backend region in
+     * physical space.
+     */
+    /**@{*/
+    static std::string build_backend(const entities::location& l);
+    static std::string build_backend(const entities::name& n);
+    /**@}*/
 
+    /**
+     * @brief Builds a qualified name for the part region in physical
+     * space.
+     */
+    /**@{*/
+    static std::string build_part(const entities::location& l);
+    static std::string build_part(const entities::name& n);
+    /**@}*/
+
+    /**
+     * @brief Builds a qualified name for the facet region in physical
+     * space.
+     */
+    /**@{*/
+    static std::string build_facet(const entities::location& l,
+        const bool add_canonical = false);
+    static std::string build_facet(const entities::name& n,
+        const bool add_canonical = false);
+    /**@}*/
+
+    /**
+     * @brief Builds a qualified name for the complete archetype.
+     */
+    /**@{*/
+    static std::string build_archetype(const entities::location& l);
+    static std::string build_archetype(const entities::name& n);
+    /**@}*/
 };
 
 }

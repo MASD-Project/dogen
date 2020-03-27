@@ -18,12 +18,108 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.physical/types/helpers/building_error.hpp"
 #include "dogen.physical/types/helpers/qualified_name_builder.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("physical.helpers.qualified_name_builder"));
+
+const std::string kernel_name("masd");
+const std::string canonical_name("canonical_archetype");
+const std::string dot(".");
+
+const std::string empty_kernel("Kernel cannot be empty.");
+const std::string empty_backend("Backend cannot be empty.");
+const std::string empty_facet("Facet cannot be empty.");
+const std::string empty_archetype(
+    "Part and facet supplied but archetype is missing.");
+
+}
 
 namespace dogen::physical::helpers {
 
-bool qualified_name_builder::operator==(const qualified_name_builder& /*rhs*/) const {
-    return true;
+std::string qualified_name_builder::build_kernel(const entities::location& l) {
+    const auto& k(l.kernel());
+    if (k.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_kernel;
+        BOOST_THROW_EXCEPTION(building_error(empty_kernel));
+    }
+    return k;
+}
+
+std::string qualified_name_builder::build_kernel(const entities::name& n) {
+    return build_kernel(n.location());
+}
+
+std::string qualified_name_builder::build_backend(const entities::location& l) {
+    const auto& b(l.backend());
+    if (b.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_backend;
+        BOOST_THROW_EXCEPTION(building_error(empty_backend));
+    }
+
+    return build_kernel(l) + dot + b;
+}
+
+std::string qualified_name_builder::build_backend(const entities::name& n) {
+    return build_backend(n.location());
+}
+
+std::string qualified_name_builder::build_part(const entities::location& l) {
+    return build_backend(l) + dot + l.part();
+}
+
+std::string qualified_name_builder::build_part(const entities::name& n) {
+    return build_part(n.location());
+}
+
+std::string qualified_name_builder::build_facet(const entities::location& l,
+    const bool add_canonical) {
+
+    const auto& f(l.facet());
+    if (f.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_facet;
+        BOOST_THROW_EXCEPTION(building_error(empty_facet));
+    }
+
+    std::string r;
+    r = build_backend(l) + dot + f;
+
+    if (add_canonical)
+        r += dot + canonical_name;
+
+    return r;
+}
+
+std::string qualified_name_builder::build_facet(const entities::name& n,
+    const bool add_canonical) {
+    return build_facet(n.location(), add_canonical);
+}
+
+std::string
+qualified_name_builder::build_archetype(const entities::location& l) {
+    std::string r(build_backend(l));
+    const bool has_part(!l.part().empty());
+    if (has_part)
+        r += dot + l.part();
+
+    const bool has_facet(!l.facet().empty());
+    if (has_facet)
+        r += dot + l.facet();
+
+    const bool has_archetype(!l.archetype().empty());
+    if (has_archetype)
+        r += dot + l.archetype();
+
+    return r;
+}
+
+std::string qualified_name_builder::build_archetype(const entities::name& n) {
+    return build_archetype(n.location());
 }
 
 }
