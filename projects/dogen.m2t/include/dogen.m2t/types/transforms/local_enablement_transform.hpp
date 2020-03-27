@@ -46,10 +46,10 @@ private:
     static void compute_enablement_for_artefact_properties(
         const std::unordered_map<std::string,
         entities::denormalised_archetype_properties>&
-        global_archetype_location_properties,
+        global_enablement_properties,
         const std::unordered_map<std::string,
         logical::entities::enablement_properties>&
-        local_archetype_location_properties,
+        local_enablement_properties,
         const std::string& archetype,
         logical::entities::artefact_properties& ap);
 
@@ -59,7 +59,7 @@ private:
         archetype_locations_by_meta_name,
         const std::unordered_map<std::string,
         entities::denormalised_archetype_properties>&
-        global_archetype_location_properties,
+        global_enablement_properties,
         std::unordered_set<entities::element_archetype>&
         enabled_archetype_for_element, logical::entities::element& e);
 

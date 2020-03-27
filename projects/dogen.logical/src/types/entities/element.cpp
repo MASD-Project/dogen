@@ -182,7 +182,7 @@ element::element(
     const dogen::logical::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& archetype_location_properties,
+    const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
     const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration)
     : name_(name),
       documentation_(documentation),
@@ -196,7 +196,7 @@ element::element(
       intrinsic_technical_space_(intrinsic_technical_space),
       configuration_(configuration),
       artefact_properties_(artefact_properties),
-      archetype_location_properties_(archetype_location_properties),
+      enablement_properties_(enablement_properties),
       decoration_(decoration) { }
 
 void element::to_stream(std::ostream& s) const {
@@ -220,7 +220,7 @@ void element::to_stream(std::ostream& s) const {
       << "\"intrinsic_technical_space\": " << intrinsic_technical_space_ << ", "
       << "\"configuration\": " << configuration_ << ", "
       << "\"artefact_properties\": " << artefact_properties_ << ", "
-      << "\"archetype_location_properties\": " << archetype_location_properties_ << ", "
+      << "\"enablement_properties\": " << enablement_properties_ << ", "
       << "\"decoration\": " << decoration_
       << " }";
 }
@@ -239,7 +239,7 @@ void element::swap(element& other) noexcept {
     swap(intrinsic_technical_space_, other.intrinsic_technical_space_);
     swap(configuration_, other.configuration_);
     swap(artefact_properties_, other.artefact_properties_);
-    swap(archetype_location_properties_, other.archetype_location_properties_);
+    swap(enablement_properties_, other.enablement_properties_);
     swap(decoration_, other.decoration_);
 }
 
@@ -256,7 +256,7 @@ bool element::compare(const element& rhs) const {
         intrinsic_technical_space_ == rhs.intrinsic_technical_space_ &&
         configuration_ == rhs.configuration_ &&
         artefact_properties_ == rhs.artefact_properties_ &&
-        archetype_location_properties_ == rhs.archetype_location_properties_ &&
+        enablement_properties_ == rhs.enablement_properties_ &&
         decoration_ == rhs.decoration_;
 }
 
@@ -428,20 +428,20 @@ void element::artefact_properties(const std::unordered_map<std::string, dogen::l
     artefact_properties_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& element::archetype_location_properties() const {
-    return archetype_location_properties_;
+const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& element::enablement_properties() const {
+    return enablement_properties_;
 }
 
-std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& element::archetype_location_properties() {
-    return archetype_location_properties_;
+std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& element::enablement_properties() {
+    return enablement_properties_;
 }
 
-void element::archetype_location_properties(const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& v) {
-    archetype_location_properties_ = v;
+void element::enablement_properties(const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& v) {
+    enablement_properties_ = v;
 }
 
-void element::archetype_location_properties(const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>&& v) {
-    archetype_location_properties_ = std::move(v);
+void element::enablement_properties(const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>&& v) {
+    enablement_properties_ = std::move(v);
 }
 
 const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& element::decoration() const {

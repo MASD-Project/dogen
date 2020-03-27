@@ -2956,7 +2956,7 @@ meta-types (object templates) and non-types (modules and backend specific entiti
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#archetype_location_properties#</dia:string>
+            <dia:string>#enablement_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::unordered_map&lt;std::string, enablement_properties&gt;#</dia:string>

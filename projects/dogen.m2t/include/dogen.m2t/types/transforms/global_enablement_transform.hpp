@@ -101,7 +101,7 @@ private:
         global_archetype_feature_group>& fgs,
         const variability::entities::configuration& cfg);
 
-    static void populate_global_archetype_location_properties(
+    static void populate_global_enablement_properties(
         const variability::entities::feature_model& fm,
         const physical::entities::name_repository& nrp,
         entities::model& m);
@@ -114,7 +114,7 @@ private:
         const std::list<physical::entities::name>& ns,
         const variability::entities::configuration& cfg);
 
-    static void populate_local_archetype_location_properties(
+    static void populate_local_enablement_properties(
         const variability::entities::feature_model& fm,
         const physical::entities::name_repository& nrp,
         entities::model& m);

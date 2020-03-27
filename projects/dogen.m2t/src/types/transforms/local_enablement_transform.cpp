@@ -95,15 +95,15 @@ is_element_disabled(const logical::entities::element& e) {
 void local_enablement_transform::compute_enablement_for_artefact_properties(
     const std::unordered_map<std::string,
     entities::denormalised_archetype_properties>&
-    global_archetype_location_properties,
+    global_enablement_properties,
     const std::unordered_map<std::string,
     logical::entities::enablement_properties>&
-    local_archetype_location_properties,
+    local_enablement_properties,
     const std::string& archetype,
     logical::entities::artefact_properties& ap) {
 
-    const auto& galp(global_archetype_location_properties);
-    const auto& lalp(local_archetype_location_properties);
+    const auto& galp(global_enablement_properties);
+    const auto& lalp(local_enablement_properties);
 
     /*
      * As we may be processing a segmented entity, not all formatting
@@ -256,7 +256,7 @@ void local_enablement_transform::compute_enablement_for_element(
     physical::entities::name_group>& archetype_locations_by_meta_name,
     const std::unordered_map<std::string,
     entities::denormalised_archetype_properties>&
-    global_archetype_location_properties,
+    global_enablement_properties,
     std::unordered_set<entities::element_archetype>&
     enabled_archetype_for_element, logical::entities::element& e) {
 
@@ -281,7 +281,7 @@ void local_enablement_transform::compute_enablement_for_element(
      * of archetype locations mapped against this element. If it is
      * so, skip the element.
      */
-    if (e.archetype_location_properties().empty()) {
+    if (e.enablement_properties().empty()) {
         BOOST_LOG_SEV(lg, trace) << "Element has no formatting, "
                                  << " so nothing enable.";
         return;
@@ -300,8 +300,8 @@ void local_enablement_transform::compute_enablement_for_element(
      * Now, for each element, obtain the global and local
      * configuration.
      */
-    const auto& galp(global_archetype_location_properties);
-    const auto lalp(e.archetype_location_properties());
+    const auto& galp(global_enablement_properties);
+    const auto lalp(e.enablement_properties());
 
     /*
      * Once we got both the global and the local configuration, we can

@@ -47,7 +47,7 @@ fixed_mappable::fixed_mappable(
     const dogen::logical::entities::technical_space intrinsic_technical_space,
     const boost::shared_ptr<dogen::variability::entities::configuration>& configuration,
     const std::unordered_map<std::string, dogen::logical::entities::artefact_properties>& artefact_properties,
-    const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& archetype_location_properties,
+    const std::unordered_map<std::string, dogen::logical::entities::enablement_properties>& enablement_properties,
     const std::unordered_map<dogen::logical::entities::technical_space, boost::optional<dogen::logical::entities::decoration::element_properties> >& decoration,
     const std::string& destination)
     : dogen::logical::entities::element(
@@ -63,7 +63,7 @@ fixed_mappable::fixed_mappable(
       intrinsic_technical_space,
       configuration,
       artefact_properties,
-      archetype_location_properties,
+      enablement_properties,
       decoration),
       destination_(destination) { }
 

@@ -217,7 +217,7 @@ global_enablement_transform::obtain_archetype_properties(
     return r;
 }
 
-void global_enablement_transform::populate_global_archetype_location_properties(
+void global_enablement_transform::populate_global_enablement_properties(
     const variability::entities::feature_model& fm,
     const physical::entities::name_repository& nrp,
     entities::model& m) {
@@ -336,7 +336,7 @@ global_enablement_transform::obtain_local_enablement_properties(
     return r;
 }
 
-void global_enablement_transform::populate_local_archetype_location_properties(
+void global_enablement_transform::populate_local_enablement_properties(
     const variability::entities::feature_model& fm,
     const physical::entities::name_repository& nrp,
     entities::model& m) {
@@ -381,7 +381,7 @@ void global_enablement_transform::populate_local_archetype_location_properties(
         for (auto ptr : pair.second) {
             auto& e(*ptr);
             const auto& cfg(*e.configuration());
-            e.archetype_location_properties(
+            e.enablement_properties(
                 obtain_local_enablement_properties(fgs, ns, cfg));
         }
     }
@@ -395,8 +395,8 @@ apply(const context& ctx, entities::model& m) {
 
     const auto &fm(*ctx.feature_model());
     const auto &nrp(*ctx.physical_name_repository());
-    populate_global_archetype_location_properties(fm, nrp, m);
-    populate_local_archetype_location_properties(fm, nrp, m);
+    populate_global_enablement_properties(fm, nrp, m);
+    populate_local_enablement_properties(fm, nrp, m);
 
     stp.end_transform(m);
 }

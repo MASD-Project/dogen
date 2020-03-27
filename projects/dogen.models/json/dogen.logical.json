@@ -391,7 +391,7 @@
           "type": "std::unordered_map<std::string, artefact_properties>"
         },
         {
-          "name": "archetype_location_properties",
+          "name": "enablement_properties",
           "type": "std::unordered_map<std::string, enablement_properties>"
         },
         {

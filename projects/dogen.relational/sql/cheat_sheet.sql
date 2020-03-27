@@ -352,7 +352,7 @@ where x."NAME" like '%registrar%';
 select "NAME", jsonb_pretty("PROPS")
 from (
     select x."ELEMENT"->'data'->'__parent_0__'->'name'->'qualified'->>'dot' "NAME",
-        x."ELEMENT"->'data'->'__parent_0__'->'archetype_location_properties' "PROPS"
+        x."ELEMENT"->'data'->'__parent_0__'->'enablement_properties' "PROPS"
     from (
         select jsonb_array_elements("PAYLOAD"->'elements') "ELEMENT"
         from "TRANSFORM_EVENT"
