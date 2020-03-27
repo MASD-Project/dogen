@@ -29,6 +29,11 @@ std::string traits::facet() {
     return r;
 }
 
+std::string traits::facet_sn() {
+    static std::string r("serialization");
+    return r;
+}
+
 std::string traits::canonical_archetype() {
     static std::string r(traits::facet() + ".canonical_archetype");
     return r;
@@ -39,8 +44,18 @@ std::string traits::class_header_archetype() {
     return r;
 }
 
+std::string traits::class_header_archetype_sn() {
+    static std::string r("class_header");
+    return r;
+}
+
 std::string traits::class_implementation_archetype() {
     static std::string r(traits::facet() + ".class_implementation");
+    return r;
+}
+
+std::string traits::class_implementation_archetype_sn() {
+    static std::string r("class_implementation");
     return r;
 }
 
@@ -49,8 +64,18 @@ std::string traits::enum_header_archetype() {
     return r;
 }
 
+std::string traits::enum_header_archetype_sn() {
+    static std::string r("enum_header");
+    return r;
+}
+
 std::string traits::class_forward_declarations_archetype() {
     static std::string r(traits::facet() + ".class_forward_declarations");
+    return r;
+}
+
+std::string traits::class_forward_declarations_archetype_sn() {
+    static std::string r("class_forward_declarations");
     return r;
 }
 
@@ -59,8 +84,18 @@ std::string traits::primitive_forward_declarations_archetype() {
     return r;
 }
 
+std::string traits::primitive_forward_declarations_archetype_sn() {
+    static std::string r("primitive_forward_declarations");
+    return r;
+}
+
 std::string traits::builtin_header_archetype() {
     static std::string r(traits::facet() + ".builtin_header");
+    return r;
+}
+
+std::string traits::builtin_header_archetype_sn() {
+    static std::string r("builtin_header");
     return r;
 }
 
@@ -69,8 +104,18 @@ std::string traits::primitive_header_archetype() {
     return r;
 }
 
+std::string traits::primitive_header_archetype_sn() {
+    static std::string r("primitive_header");
+    return r;
+}
+
 std::string traits::primitive_implementation_archetype() {
     static std::string r(traits::facet() + ".primitive_implementation");
+    return r;
+}
+
+std::string traits::primitive_implementation_archetype_sn() {
+    static std::string r("primitive_implementation");
     return r;
 }
 
@@ -79,8 +124,18 @@ std::string traits::type_registrar_header_archetype() {
     return r;
 }
 
+std::string traits::type_registrar_header_archetype_sn() {
+    static std::string r("type_registrar_header");
+    return r;
+}
+
 std::string traits::type_registrar_implementation_archetype() {
     static std::string r(traits::facet() + ".type_registrar_implementation");
+    return r;
+}
+
+std::string traits::type_registrar_implementation_archetype_sn() {
+    static std::string r("type_registrar_implementation");
     return r;
 }
 

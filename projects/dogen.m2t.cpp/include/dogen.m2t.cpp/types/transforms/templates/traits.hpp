@@ -35,6 +35,7 @@ public:
      * @brief Name of this facet.
      */
     static std::string facet();
+    static std::string facet_sn();
 
     /**
      * @brief Name of the canonical archetype
@@ -45,6 +46,7 @@ public:
      * @brief Name of the class implementation archetype.
      */
     static std::string logic_less_template_archetype();
+    static std::string logic_less_template_archetype_sn();
 };
 
 }

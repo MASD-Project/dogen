@@ -29,6 +29,11 @@ std::string traits::facet() {
     return r;
 }
 
+std::string traits::facet_sn() {
+    static std::string r("lexical_cast");
+    return r;
+}
+
 std::string traits::canonical_archetype() {
     static std::string r(traits::facet() + ".canonical_archetype");
     return r;
@@ -36,6 +41,11 @@ std::string traits::canonical_archetype() {
 
 std::string traits::enum_header_archetype() {
     static std::string r(traits::facet() + ".enum_header");
+    return r;
+}
+
+std::string traits::enum_header_archetype_sn() {
+    static std::string r("enum_header");
     return r;
 }
 

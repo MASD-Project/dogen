@@ -43,6 +43,7 @@ struct traits {
      * @brief Name of this backend.
      */
     static std::string backend();
+    static std::string backend_sn();
 
     /**
      * @brief If set to false, no generation will occur.

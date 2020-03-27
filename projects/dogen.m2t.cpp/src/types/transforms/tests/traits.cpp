@@ -29,6 +29,11 @@ std::string traits::facet() {
     return r;
 }
 
+std::string traits::facet_sn() {
+    static std::string r("tests");
+    return r;
+}
+
 std::string traits::canonical_archetype() {
     static std::string r(traits::facet() + ".canonical_archetype");
     return r;
@@ -39,8 +44,18 @@ std::string traits::class_implementation_archetype() {
     return r;
 }
 
+std::string traits::class_implementation_archetype_sn() {
+    static std::string r("class_implementation");
+    return r;
+}
+
 std::string traits::enum_implementation_archetype() {
     static std::string r(traits::facet() + ".enum_implementation");
+    return r;
+}
+
+std::string traits::enum_implementation_archetype_sn() {
+    static std::string r("enum_implementation");
     return r;
 }
 
@@ -49,8 +64,18 @@ std::string traits::main_archetype() {
     return r;
 }
 
+std::string traits::main_archetype_sn() {
+    static std::string r("main");
+    return r;
+}
+
 std::string traits::cmakelists_archetype() {
     static std::string r(traits::facet() + ".cmakelists");
+    return r;
+}
+
+std::string traits::cmakelists_archetype_sn() {
+    static std::string r("cmakelists");
     return r;
 }
 

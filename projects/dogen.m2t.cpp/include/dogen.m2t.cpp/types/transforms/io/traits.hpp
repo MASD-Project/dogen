@@ -34,6 +34,7 @@ struct traits {
      * @brief Name of this facet.
      */
     static std::string facet();
+    static std::string facet_sn();
 
     /**
      * @brief Name of the canonical archetype.
@@ -44,36 +45,43 @@ struct traits {
      * @brief Name of the class header archetype.
      */
     static std::string class_header_archetype();
+    static std::string class_header_archetype_sn();
 
     /**
      * @brief Name of the class implementation archetype.
      */
     static std::string class_implementation_archetype();
+    static std::string class_implementation_archetype_sn();
 
     /**
      * @brief Name of the enumeration header archetype.
      */
     static std::string enum_header_archetype();
+    static std::string enum_header_archetype_sn();
 
     /**
      * @brief Name of the enumeration implementation archetype.
      */
     static std::string enum_implementation_archetype();
+    static std::string enum_implementation_archetype_sn();
 
     /**
      * @brief Name of the built-in header archetype.
      */
     static std::string builtin_header_archetype();
+    static std::string builtin_header_archetype_sn();
 
     /**
      * @brief Name of the built-in header archetype.
      */
     static std::string primitive_header_archetype();
+    static std::string primitive_header_archetype_sn();
 
     /**
      * @brief Name of the built-in implementation archetype.
      */
     static std::string primitive_implementation_archetype();
+    static std::string primitive_implementation_archetype_sn();
 };
 
 }

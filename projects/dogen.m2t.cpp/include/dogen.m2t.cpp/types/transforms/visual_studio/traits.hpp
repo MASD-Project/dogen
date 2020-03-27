@@ -34,6 +34,7 @@ struct traits {
      * @brief Name of this facet.
      */
     static std::string facet();
+    static std::string facet_sn();
 
     /**
      * @brief Name of the canonical archetype.
@@ -44,16 +45,19 @@ struct traits {
      * @brief Visual Studio solution.
      */
     static std::string solution_archetype();
+    static std::string solution_archetype_sn();
 
     /**
      * @brief Visual Studio project.
      */
     static std::string project_archetype();
+    static std::string project_archetype_sn();
 
     /**
      * @brief Visual Studio msbuild targets.
      */
     static std::string msbuild_targets_archetype();
+    static std::string msbuild_targets_archetype_sn();
 };
 
 }

@@ -35,6 +35,7 @@ public:
      * @brief Name of this facet.
      */
     static std::string facet();
+    static std::string facet_sn();
 
     /**
      * @brief Name of the canonical archetype.
@@ -42,7 +43,9 @@ public:
     static std::string canonical_archetype();
 
     static std::string include_cmakelists_archetype();
+    static std::string include_cmakelists_archetype_sn();
     static std::string source_cmakelists_archetype();
+    static std::string source_cmakelists_archetype_sn();
 };
 
 }

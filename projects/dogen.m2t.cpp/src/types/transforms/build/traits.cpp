@@ -27,6 +27,11 @@ std::string traits::facet() {
     return r;
 }
 
+std::string traits::facet_sn() {
+    static std::string r("build");
+    return r;
+}
+
 std::string traits::canonical_archetype() {
     static std::string r(traits::facet() + ".canonical_archetype");
     return r;
@@ -37,8 +42,18 @@ std::string traits::include_cmakelists_archetype() {
     return r;
 }
 
+std::string traits::include_cmakelists_archetype_sn() {
+    static std::string r("include_cmakelists");
+    return r;
+}
+
 std::string traits::source_cmakelists_archetype() {
     static std::string r("masd.cpp.build.source_cmakelists");
+    return r;
+}
+
+std::string traits::source_cmakelists_archetype_sn() {
+    static std::string r("source_cmakelists");
     return r;
 }
 

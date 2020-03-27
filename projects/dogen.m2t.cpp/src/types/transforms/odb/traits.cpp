@@ -29,6 +29,11 @@ std::string traits::facet() {
     return r;
 }
 
+std::string traits::facet_sn() {
+    static std::string r("odb");
+    return r;
+}
+
 std::string traits::canonical_archetype() {
     static std::string r(traits::facet() + ".canonical_archetype");
     return r;
@@ -39,8 +44,18 @@ std::string traits::class_header_archetype() {
     return r;
 }
 
+std::string traits::class_header_archetype_sn() {
+    static std::string r("class_header");
+    return r;
+}
+
 std::string traits::enum_header_archetype() {
     static std::string r(traits::facet() + ".enum_header");
+    return r;
+}
+
+std::string traits::enum_header_archetype_sn() {
+    static std::string r("enum_header");
     return r;
 }
 
@@ -49,8 +64,18 @@ std::string traits::common_odb_options_archetype() {
     return r;
 }
 
+std::string traits::common_odb_options_archetype_sn() {
+    static std::string r("common_odb_options");
+    return r;
+}
+
 std::string traits::object_odb_options_archetype() {
     static std::string r(traits::facet() + ".object_odb_options");
+    return r;
+}
+
+std::string traits::object_odb_options_archetype_sn() {
+    static std::string r("object_odb_options");
     return r;
 }
 
@@ -59,13 +84,28 @@ std::string traits::primitive_odb_options_archetype() {
     return r;
 }
 
+std::string traits::primitive_odb_options_archetype_sn() {
+    static std::string r("primitive_odb_options");
+    return r;
+}
+
 std::string traits::builtin_header_archetype() {
     static std::string r(traits::facet() + ".builtin_header");
     return r;
 }
 
+std::string traits::builtin_header_archetype_sn() {
+    static std::string r("builtin_header");
+    return r;
+}
+
 std::string traits::primitive_header_archetype() {
     static std::string r(traits::facet() + ".primitive_header");
+    return r;
+}
+
+std::string traits::primitive_header_archetype_sn() {
+    static std::string r("primitive_header");
     return r;
 }
 

@@ -32,6 +32,11 @@ std::string traits::backend() {
     return r;
 }
 
+std::string traits::backend_sn() {
+    static std::string r("cpp");
+    return r;
+}
+
 std::string traits::enabled() {
     static std::string r("enabled");
     return r;

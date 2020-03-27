@@ -29,6 +29,11 @@ std::string traits::facet() {
     return r;
 }
 
+std::string traits::facet_sn() {
+    static std::string r("templates");
+    return r;
+}
+
 std::string traits::canonical_archetype() {
     static std::string r(traits::facet() + ".canonical_archetype");
     return r;
@@ -36,6 +41,11 @@ std::string traits::canonical_archetype() {
 
 std::string traits::logic_less_template_archetype() {
     static std::string r(traits::facet() + ".logic_less_template");
+    return r;
+}
+
+std::string traits::logic_less_template_archetype_sn() {
+    static std::string r("logic_less_template");
     return r;
 }
 

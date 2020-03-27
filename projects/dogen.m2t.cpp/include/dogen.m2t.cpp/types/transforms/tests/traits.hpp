@@ -34,6 +34,7 @@ struct traits {
      * @brief Name of this facet.
      */
     static std::string facet();
+    static std::string facet_sn();
 
     /**
      * @brief Name of the canonical archetype
@@ -44,21 +45,25 @@ struct traits {
      * @brief Name of the class implementation archetype.
      */
     static std::string class_implementation_archetype();
+    static std::string class_implementation_archetype_sn();
 
     /**
      * @brief Name of the enumeration implementation archetype.
      */
     static std::string enum_implementation_archetype();
+    static std::string enum_implementation_archetype_sn();
 
     /**
      * @brief Name of the entry point.
      */
     static std::string main_archetype();
+    static std::string main_archetype_sn();
 
    /**
     * @brief Name of the cmakelists formatter.
     */
     static std::string cmakelists_archetype();
+    static std::string cmakelists_archetype_sn();
 };
 
 }
