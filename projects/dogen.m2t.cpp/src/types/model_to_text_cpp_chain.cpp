@@ -30,7 +30,7 @@
 
 namespace {
 
-const std::string transform_id(dogen::m2t::cpp::traits::backend());
+const std::string transform_id("m2t.cpp.model_to_text_cpp_chain");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -82,7 +82,7 @@ formattables::locator model_to_text_cpp_chain::make_locator(
 }
 
 std::string model_to_text_cpp_chain::id() const {
-    return traits::backend();
+    return traits::backend_qn();
 }
 
 std::string model_to_text_cpp_chain::description() const {

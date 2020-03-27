@@ -25,7 +25,7 @@
 namespace dogen::m2t::cpp::transforms::tests {
 
 std::string traits::facet() {
-    static std::string r(cpp::traits::backend() + ".tests");
+    static std::string r(cpp::traits::backend_qn() + ".tests");
     return r;
 }
 

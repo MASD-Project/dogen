@@ -27,7 +27,7 @@ std::string traits::kernel() {
     return r;
 }
 
-std::string traits::backend() {
+std::string traits::backend_qn() {
     static std::string r("masd.cpp");
     return r;
 }

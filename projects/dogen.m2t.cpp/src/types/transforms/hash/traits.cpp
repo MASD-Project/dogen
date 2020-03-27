@@ -25,7 +25,7 @@
 namespace dogen::m2t::cpp::transforms::hash {
 
 std::string traits::facet() {
-    static std::string r(cpp::traits::backend() + ".hash");
+    static std::string r(cpp::traits::backend_qn() + ".hash");
     return r;
 }
 

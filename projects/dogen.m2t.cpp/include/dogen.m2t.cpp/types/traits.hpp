@@ -42,7 +42,7 @@ struct traits {
     /**
      * @brief Name of this backend.
      */
-    static std::string backend();
+    static std::string backend_qn();
     static std::string backend_sn();
 
     /**

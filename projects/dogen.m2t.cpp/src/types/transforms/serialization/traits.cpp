@@ -25,7 +25,7 @@
 namespace dogen::m2t::cpp::transforms::serialization {
 
 std::string traits::facet() {
-    static std::string r(cpp::traits::backend() + ".serialization");
+    static std::string r(cpp::traits::backend_qn() + ".serialization");
     return r;
 }
 

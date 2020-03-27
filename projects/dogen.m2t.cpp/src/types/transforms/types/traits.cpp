@@ -25,7 +25,7 @@
 namespace dogen::m2t::cpp::transforms::types {
 
 std::string traits::facet() {
-    static std::string r(cpp::traits::backend() + ".types");
+    static std::string r(cpp::traits::backend_qn() + ".types");
     return r;
 }
 

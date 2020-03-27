@@ -25,7 +25,7 @@
 namespace dogen::m2t::cpp::transforms::odb {
 
 std::string traits::facet() {
-    static std::string r(cpp::traits::backend() + ".odb");
+    static std::string r(cpp::traits::backend_qn() + ".odb");
     return r;
 }
 

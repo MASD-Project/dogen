@@ -49,7 +49,7 @@ std::string primitive_odb_options_transform::id() const {
 physical::entities::name
 primitive_odb_options_transform::physical_name() const {
     using physical::helpers::name_factory;
-    static auto r(name_factory::make(cpp::traits::backend(),
+    static auto r(name_factory::make(cpp::traits::backend_qn(),
         cpp::traits::implementation_part(), traits::facet(),
         primitive_odb_options_transform::static_id()));
     return r;

@@ -33,7 +33,7 @@ std::string class_implementation_transform::id() const {
 physical::entities::name
 class_implementation_transform::physical_name() const {
     using physical::helpers::name_factory;
-    static auto r(name_factory::make(cpp::traits::backend(),
+    static auto r(name_factory::make(cpp::traits::backend_qn(),
         cpp::traits::tests_part(), traits::facet(),
         class_implementation_transform::static_id()));
     return r;

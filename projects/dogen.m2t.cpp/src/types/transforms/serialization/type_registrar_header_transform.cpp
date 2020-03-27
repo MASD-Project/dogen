@@ -40,7 +40,7 @@ std::string type_registrar_header_transform::id() const {
 physical::entities::name
 type_registrar_header_transform::physical_name() const {
     using physical::helpers::name_factory;
-    static auto r(name_factory::make(cpp::traits::backend(),
+    static auto r(name_factory::make(cpp::traits::backend_qn(),
         cpp::traits::public_headers_part(), traits::facet(),
         type_registrar_header_transform::static_id()));
     return r;

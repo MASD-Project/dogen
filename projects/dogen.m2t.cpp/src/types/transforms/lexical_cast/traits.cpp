@@ -25,7 +25,7 @@
 namespace dogen::m2t::cpp::transforms::lexical_cast {
 
 std::string traits::facet() {
-    static std::string r(cpp::traits::backend() + ".lexical_cast");
+    static std::string r(cpp::traits::backend_qn() + ".lexical_cast");
     return r;
 }
 

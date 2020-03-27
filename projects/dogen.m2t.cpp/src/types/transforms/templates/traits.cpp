@@ -25,7 +25,7 @@
 namespace dogen::m2t::cpp::transforms::templates {
 
 std::string traits::facet() {
-    static std::string r(cpp::traits::backend() + ".templates");
+    static std::string r(cpp::traits::backend_qn() + ".templates");
     return r;
 }
 

@@ -10,7 +10,7 @@ std::string {{class.simple_name}}::id() const {
 physical::entities::name
 {{class.simple_name}}::physical_name() const {
     using physical::helpers::name_factory;
-    static auto r(name_factory::make(cpp::traits::backend(),
+    static auto r(name_factory::make(cpp::traits::backend_qn(),
         cpp::traits::implementation_part(), traits::facet(),
         {{class.simple_name}}::static_id()));
     return r;
