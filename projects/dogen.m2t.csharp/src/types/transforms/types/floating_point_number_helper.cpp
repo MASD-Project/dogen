@@ -26,7 +26,7 @@
 namespace dogen::m2t::csharp::transforms::types {
 
 std::string floating_point_number_helper::id() const {
-    static auto r(std::string("<") + traits::facet() + std::string(">") +
+    static auto r(std::string("<") + traits::facet_qn() + std::string(">") +
         std::string("<") + helper_name() + std::string(">"));
     return r;
 }
@@ -48,7 +48,7 @@ floating_point_number_helper::owning_formatters() const {
 std::list<std::string>
 floating_point_number_helper::owning_facets() const {
     static auto r(std::list<std::string> {
-        traits::facet()
+        traits::facet_qn()
     });
     return r;
 }

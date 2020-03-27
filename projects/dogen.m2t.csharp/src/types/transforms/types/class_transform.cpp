@@ -41,7 +41,7 @@ physical::entities::name
 class_transform::physical_name() const {
     using physical::helpers::name_factory;
     static const auto r(name_factory::make(csharp::traits::backend_qn(),
-        traits::facet(), class_transform::static_id()));
+        traits::facet_qn(), class_transform::static_id()));
     return r;
 }
 

@@ -23,7 +23,7 @@
 
 namespace dogen::m2t::csharp::transforms::types {
 
-std::string traits::facet() {
+std::string traits::facet_qn() {
     static std::string r(csharp::traits::backend_qn() + ".types");
     return r;
 }
@@ -34,7 +34,7 @@ std::string traits::facet_sn() {
 }
 
 std::string traits::class_archetype() {
-    static std::string r(traits::facet() + ".class");
+    static std::string r(traits::facet_qn() + ".class");
     return r;
 }
 
@@ -44,7 +44,7 @@ std::string traits::class_archetype_sn() {
 }
 
 std::string traits::enum_archetype() {
-    static std::string r(traits::facet() + ".enum");
+    static std::string r(traits::facet_qn() + ".enum");
     return r;
 }
 
@@ -54,7 +54,7 @@ std::string traits::enum_archetype_sn() {
 }
 
 std::string traits::primitive_archetype() {
-    static std::string r(traits::facet() + ".primitive");
+    static std::string r(traits::facet_qn() + ".primitive");
     return r;
 }
 
@@ -64,7 +64,7 @@ std::string traits::primitive_archetype_sn() {
 }
 
 std::string traits::exception_archetype() {
-    static std::string r(traits::facet() + ".exception");
+    static std::string r(traits::facet_qn() + ".exception");
     return r;
 }
 
@@ -74,7 +74,7 @@ std::string traits::exception_archetype_sn() {
 }
 
 std::string traits::builtin_archetype() {
-    static std::string r(traits::facet() + ".builtin");
+    static std::string r(traits::facet_qn() + ".builtin");
     return r;
 }
 

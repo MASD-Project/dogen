@@ -22,7 +22,7 @@
 
 namespace dogen::m2t::csharp::transforms::visual_studio {
 
-std::string traits::facet() {
+std::string traits::facet_qn() {
     static std::string r("masd.csharp.visual_studio");
     return r;
 }
@@ -33,7 +33,7 @@ std::string traits::facet_sn() {
 }
 
 std::string traits::canonical_archetype() {
-    static std::string r(traits::facet() + ".canonical_archetype");
+    static std::string r(traits::facet_qn() + ".canonical_archetype");
     return r;
 }
 

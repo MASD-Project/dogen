@@ -23,7 +23,7 @@
 
 namespace dogen::m2t::csharp::transforms::test_data {
 
-std::string traits::facet() {
+std::string traits::facet_qn() {
     static std::string r(csharp::traits::backend_qn() + ".test_data");
     return r;
 }
@@ -34,7 +34,7 @@ std::string traits::facet_sn() {
 }
 
 std::string traits::class_archetype() {
-    static std::string r(traits::facet() + ".class");
+    static std::string r(traits::facet_qn() + ".class");
     return r;
 }
 
@@ -44,7 +44,7 @@ std::string traits::class_archetype_sn() {
 }
 
 std::string traits::enum_archetype() {
-    static std::string r(traits::facet() + ".enum");
+    static std::string r(traits::facet_qn() + ".enum");
     return r;
 }
 
@@ -54,7 +54,7 @@ std::string traits::enum_archetype_sn() {
 }
 
 std::string traits::primitive_archetype() {
-    static std::string r(traits::facet() + ".primitive");
+    static std::string r(traits::facet_qn() + ".primitive");
     return r;
 }
 
@@ -64,7 +64,7 @@ std::string traits::primitive_archetype_sn() {
 }
 
 std::string traits::assistant_archetype() {
-    static std::string r(traits::facet() + ".assistant");
+    static std::string r(traits::facet_qn() + ".assistant");
     return r;
 }
 
