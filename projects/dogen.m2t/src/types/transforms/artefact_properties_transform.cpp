@@ -59,8 +59,8 @@ update_element(const context& ctx, logical::entities::element& e) {
     BOOST_LOG_SEV(lg, debug) << "Updating element: " << id;
 
     const auto mn(e.meta_name().qualified().dot());
-    const auto& alrp(*ctx.physical_name_repository());
-    const auto& c(alrp.by_meta_name());
+    const auto& nrp(*ctx.physical_name_repository());
+    const auto& c(nrp.by_meta_name());
     const auto i(c.find(mn));
     if (i == c.end()) {
         BOOST_LOG_SEV(lg, debug) << "No archetypes for meta-name: " << mn;

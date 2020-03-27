@@ -361,8 +361,8 @@ apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "enablement new_transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    const auto& alrp(*ctx.physical_name_repository());
-    const auto& albmn(alrp.by_meta_name());
+    const auto& nrp(*ctx.physical_name_repository());
+    const auto& albmn(nrp.by_meta_name());
     const auto& galp(m.global_enablement_properties()
         .denormalised_archetype_properties());
     std::unordered_set<entities::element_archetype> eafe;

@@ -41,8 +41,8 @@ transforms::context mock_context_factory::make() {
     BOOST_LOG_SEV(lg, debug) << "Creating the mock context.";
 
     transforms::context r;
-    auto alrp(boost::make_shared<physical::entities::name_repository>());
-    r.physical_name_repository(alrp);
+    auto nrp(boost::make_shared<physical::entities::name_repository>());
+    r.physical_name_repository(nrp);
 
     configuration cfg;
     const auto activity("testing");
