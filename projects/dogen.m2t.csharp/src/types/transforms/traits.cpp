@@ -27,13 +27,28 @@ std::string traits::visual_studio_facet() {
     return r;
 }
 
+std::string traits::visual_studio_facet_sn() {
+    static std::string r("visual_studio");
+    return r;
+}
+
 std::string traits::visual_studio_project_archetype() {
     static std::string r("masd.csharp.visual_studio.project");
     return r;
 }
 
+std::string traits::visual_studio_project_archetype_sn() {
+    static std::string r("visual_studio.project");
+    return r;
+}
+
 std::string traits::visual_studio_solution_archetype() {
     static std::string r("masd.csharp.visual_studio.solution");
+    return r;
+}
+
+std::string traits::visual_studio_solution_archetype_sn() {
+    static std::string r("visual_studio.solution");
     return r;
 }
 

@@ -35,26 +35,31 @@ public:
      * @brief Name of this facet.
      */
     static std::string facet();
+    static std::string facet_sn();
 
     /**
      * @brief Name of the class header archetype.
      */
     static std::string class_archetype();
+    static std::string class_archetype_sn();
 
     /**
      * @brief Name of the enum header archetype.
      */
     static std::string enum_archetype();
+    static std::string enum_archetype_sn();
 
     /**
      * @brief Name of the primitive header archetype.
      */
     static std::string primitive_archetype();
+    static std::string primitive_archetype_sn();
 
     /**
      * @brief Name of the assistant archetype.
      */
     static std::string assistant_archetype();
+    static std::string assistant_archetype_sn();
 };
 
 }

@@ -31,8 +31,13 @@ namespace dogen::m2t::csharp::transforms {
 
 struct traits final {
     static std::string visual_studio_facet();
+    static std::string visual_studio_facet_sn();
+
     static std::string visual_studio_project_archetype();
+    static std::string visual_studio_project_archetype_sn();
+
     static std::string visual_studio_solution_archetype();
+    static std::string visual_studio_solution_archetype_sn();
 };
 
 }

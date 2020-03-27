@@ -27,6 +27,11 @@ std::string traits::facet() {
     return r;
 }
 
+std::string traits::facet_sn() {
+    static std::string r("visual_studio");
+    return r;
+}
+
 std::string traits::canonical_archetype() {
     static std::string r(traits::facet() + ".canonical_archetype");
     return r;
@@ -37,8 +42,18 @@ std::string traits::solution_archetype() {
     return r;
 }
 
+std::string traits::solution_archetype_sn() {
+    static std::string r("visual_studio.solution");
+    return r;
+}
+
 std::string traits::project_archetype() {
     static std::string r("masd.csharp.visual_studio.project");
+    return r;
+}
+
+std::string traits::project_archetype_sn() {
+    static std::string r("visual_studio.project");
     return r;
 }
 

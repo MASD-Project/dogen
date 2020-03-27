@@ -28,8 +28,18 @@ std::string traits::facet() {
     return r;
 }
 
+std::string traits::facet_sn() {
+    static std::string r("io");
+    return r;
+}
+
 std::string traits::class_archetype() {
     static std::string r(traits::facet() + ".class");
+    return r;
+}
+
+std::string traits::class_archetype_sn() {
+    static std::string r("class");
     return r;
 }
 
@@ -38,13 +48,28 @@ std::string traits::enum_archetype() {
     return r;
 }
 
+std::string traits::enum_archetype_sn() {
+    static std::string r("enum");
+    return r;
+}
+
 std::string traits::primitive_archetype() {
     static std::string r(traits::facet() + ".primitive");
     return r;
 }
 
+std::string traits::primitive_archetype_sn() {
+    static std::string r("primitive");
+    return r;
+}
+
 std::string traits::assistant_archetype() {
     static std::string r(traits::facet() + ".assistant");
+    return r;
+}
+
+std::string traits::assistant_archetype_sn() {
+    static std::string r("assistant");
     return r;
 }
 

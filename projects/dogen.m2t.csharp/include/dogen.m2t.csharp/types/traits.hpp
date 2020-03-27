@@ -48,6 +48,7 @@ struct traits {
      * @brief Name of this backend.
      */
     static std::string backend();
+    static std::string backend_sn();
 
     /**
      * @brief Name of the directory housing the backend.

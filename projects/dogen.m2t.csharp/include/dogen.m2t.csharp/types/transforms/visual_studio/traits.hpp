@@ -35,6 +35,7 @@ public:
      * @brief Name of this facet.
      */
     static std::string facet();
+    static std::string facet_sn();
 
     /**
      * @brief Name of the canonical archetype.
@@ -45,11 +46,13 @@ public:
      * @brief Visual Studio solution.
      */
     static std::string solution_archetype();
+    static std::string solution_archetype_sn();
 
     /**
      * @brief Visual Studio solution.
      */
     static std::string project_archetype();
+    static std::string project_archetype_sn();
 };
 
 }
