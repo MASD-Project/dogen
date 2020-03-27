@@ -86,7 +86,7 @@ std::list<std::string> logic_less_template_transform::inclusion_dependencies(
 
 physical::entities::artefact logic_less_template_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_name().location(), false/*requires_header_guard*/);
+    assistant a(ctx, e, physical_name(), false/*requires_header_guard*/);
     auto r(a.make_artefact());
     r.overwrite(false);
     return r;

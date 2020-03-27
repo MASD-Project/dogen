@@ -84,20 +84,20 @@ const std::string helpless_family("No registered helpers found for family: ");
 
 namespace dogen::m2t::cpp::transforms {
 
-assistant::
-assistant(const context& ctx, const logical::entities::element& e,
-    const physical::entities::location& al, const bool requires_header_guard)
+assistant::assistant(const context& ctx, const logical::entities::element& e,
+    const physical::entities::name& pn, const bool requires_header_guard)
     : element_(e), context_(ctx),
       artefact_properties_(
         obtain_artefact_properties(element_.name().qualified().dot(),
-            al.archetype())),
+            pn.location().archetype())),
       new_artefact_properties_(
-          obtain_new_artefact_properties(e, al.archetype())),
-    archetype_location_(al), requires_header_guard_(requires_header_guard) {
+          obtain_new_artefact_properties(e, pn.location().archetype())),
+      physical_name_(pn), requires_header_guard_(requires_header_guard) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: "
                              << element_.name().qualified().dot()
-                             << " for archetype: " << al.archetype();
+                             << " for archetype: "
+                             << physical_name_.location().archetype();
 
     m2t::formatters::indent_filter::push(filtering_stream_, 4);
     filtering_stream_.push(stream_);
@@ -106,7 +106,7 @@ assistant(const context& ctx, const logical::entities::element& e,
 }
 
 void assistant::validate() const {
-    const auto& fn(archetype_location_.archetype());
+    const auto& fn(physical_name_.location().archetype());
     const auto& fp(artefact_properties_);
     if (fp.file_path().empty()) {
         BOOST_LOG_SEV(lg, error) << file_path_not_set << fn;
@@ -508,20 +508,20 @@ assistant::get_helpers(const formattables::helper_properties& hp) const {
      * Not all formatters need help, so its fine not to have a
      * helper registered against a particular formatter.
      */
-    const auto j(i->second.find(archetype_location_.archetype()));
+    const auto j(i->second.find(physical_name_.location().archetype()));
     if (j != i->second.end()) {
         BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
-                                 << archetype_location_.archetype();
+                                 << physical_name_.location().archetype();
         return j->second;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
-                             << archetype_location_.archetype();
+                             << physical_name_.location().archetype();
     return std::list<std::shared_ptr<transforms::helper_transform>>();
 }
 
 bool assistant::is_io() const {
-    const auto fn(archetype_location_.facet());
+    const auto fn(physical_name_.location().facet());
     return transforms::io::traits::facet_qn()  == fn;
 }
 
@@ -546,7 +546,7 @@ is_streaming_enabled(const formattables::helper_properties& hp) const {
      */
     using tt = transforms::types::traits;
     const auto cifn(tt::class_implementation_archetype());
-    const auto arch(archetype_location_.archetype());
+    const auto arch(physical_name_.location().archetype());
     bool in_types_class_implementation(arch == cifn);
     return in_types_class_implementation && hp.in_inheritance_relationship();
 }
@@ -685,7 +685,7 @@ physical::entities::artefact assistant::make_artefact() const {
     r.origin_sha1_hash(element_.origin_sha1_hash());
 
     const auto& ap(element_.artefact_properties());
-    const auto arch(archetype_location_.archetype());
+    const auto arch(physical_name_.location().archetype());
     const auto i(ap.find(arch));
     if (i == ap.end()) {
         BOOST_LOG_SEV(lg, error) << artefact_properties_missing << arch;

@@ -70,7 +70,7 @@ std::list<std::string> msbuild_targets_transform::inclusion_dependencies(
 
 physical::entities::artefact msbuild_targets_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_name().location(), false/*requires_header_guard*/);
+    assistant a(ctx, e, physical_name(), false/*requires_header_guard*/);
     using logical::entities::visual_studio::msbuild_targets;
     const auto& c(a.as<msbuild_targets>(e));
 

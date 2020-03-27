@@ -92,7 +92,7 @@ std::list<std::string> class_header_transform::inclusion_dependencies(
 
 physical::entities::artefact class_header_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_name().location(), true/*requires_header_guard*/);
+    assistant a(ctx, e, physical_name(), true/*requires_header_guard*/);
     const auto& o(a.as<logical::entities::structural::object>(e));
 
     {

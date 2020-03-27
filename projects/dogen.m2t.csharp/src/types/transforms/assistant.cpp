@@ -56,13 +56,15 @@ namespace dogen::m2t::csharp::transforms {
 
 assistant::
 assistant(const context& ctx, const logical::entities::element& e,
-    const physical::entities::location& al) :
+    const physical::entities::name& n) :
     element_id_(e.name().qualified().dot()), element_(e), context_(ctx),
-    artefact_properties_(obtain_artefact_properties(al.archetype())),
-    archetype_location_(al) {
+    artefact_properties_(
+        obtain_artefact_properties(n.location().archetype())),
+    physical_name_(n) {
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << element_id_
-                             << " for archetype: " << al.archetype();
+                             << " for archetype: "
+                             << physical_name_.location().archetype();
 
     m2t::formatters::indent_filter::push(filtering_stream_, 4);
     filtering_stream_.push(stream_);
@@ -78,8 +80,8 @@ assistant::get_qualified_name(const logical::entities::name_tree& nt) const {
     return nt.qualified().dot();
 }
 
-std::string
-assistant::make_inheritance_keyword_text(const logical::entities::structural::object& o) {
+std::string assistant::
+make_inheritance_keyword_text(const logical::entities::structural::object& o) {
     if (o.is_parent())
         return abstract_keyword_text;
 
@@ -223,16 +225,16 @@ assistant::get_helpers(const formattables::helper_properties& hp) const {
          * Not all formatters need help, so its fine not to have a
          * helper registered against a particular formatter.
          */
-        const auto j(i->second.find(archetype_location_.archetype()));
+        const auto j(i->second.find(physical_name_.location().archetype()));
         if (j != i->second.end()) {
             BOOST_LOG_SEV(lg, debug) << "Found helpers for formatter: "
-                                     << archetype_location_.archetype();
+                                     << physical_name_.location().archetype();
             return j->second;
         }
     }
 
     BOOST_LOG_SEV(lg, debug) << "Could not find helpers for formatter:"
-                             << archetype_location_.archetype();
+                             << physical_name_.location().archetype();
     return std::list<std::shared_ptr<transforms::helper_transform>>();
 }
 
@@ -289,7 +291,7 @@ physical::entities::artefact assistant::make_artefact() const {
     r.paths().absolute(artefact_properties_.file_path());
 
     const auto& ap(element_.artefact_properties());
-    const auto arch(archetype_location_.archetype());
+    const auto arch(physical_name_.location().archetype());
     const auto i(ap.find(arch));
     if (i == ap.end()) {
         BOOST_LOG_SEV(lg, error) << artefact_properties_missing << arch;

@@ -52,13 +52,13 @@ bool stitch_transform::is_header(const inclusion_support_types ist) const {
         ist == inclusion_support_types::canonical_support;
 }
 
-physical::entities::artefact stitch_transform::
-apply(const model_to_text_transform& stock_transform, const context& ctx,
-    const logical::entities::element& e) const {
-    const auto al(stock_transform.physical_name().location());
+physical::entities::artefact
+stitch_transform::apply(const model_to_text_transform& stock_transform,
+    const context& ctx, const logical::entities::element& e) const {
+    const auto pn(stock_transform.physical_name());
     const auto needs_guard(is_header(stock_transform.inclusion_support_type()));
 
-    assistant a(ctx, e, al, needs_guard);
+    assistant a(ctx, e, pn, needs_guard);
     const auto& fp(a.artefact_properties().file_path());
     auto stitch_template(fp);
     stitch_template.replace_extension(stitch_extension);

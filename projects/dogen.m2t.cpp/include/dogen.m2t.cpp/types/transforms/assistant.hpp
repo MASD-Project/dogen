@@ -32,7 +32,7 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/iostreams/filtering_stream.hpp>
-#include "dogen.physical/types/entities/location.hpp"
+#include "dogen.physical/types/entities/name.hpp"
 #include "dogen.physical/types/entities/artefact.hpp"
 #include "dogen.m2t/types/formatters/scoped_namespace_formatter.hpp"
 #include "dogen.m2t/types/formatters/scoped_boilerplate_formatter.hpp"
@@ -51,8 +51,7 @@ namespace dogen::m2t::cpp::transforms {
 class assistant final {
 public:
     assistant(const context& ctx, const logical::entities::element& e,
-        const physical::entities::location& al,
-        const bool requires_header_guard);
+        const physical::entities::name& pn, const bool requires_header_guard);
 
 private:
     /**
@@ -398,7 +397,7 @@ private:
     const context& context_;
     formattables::artefact_properties artefact_properties_;
     logical::entities::artefact_properties new_artefact_properties_;
-    const physical::entities::location archetype_location_;
+    const physical::entities::name physical_name_;
     const bool requires_header_guard_;
 };
 

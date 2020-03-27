@@ -65,7 +65,7 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
 physical::entities::artefact class_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
     const auto id(e.name().qualified().dot());
-    assistant a(ctx, e, physical_name().location());
+    assistant a(ctx, e, physical_name());
     const auto& o(a.as<logical::entities::structural::object>(static_id(), e));
     {
         const auto sn(e.name().simple());

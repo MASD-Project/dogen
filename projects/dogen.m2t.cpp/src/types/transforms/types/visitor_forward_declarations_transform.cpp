@@ -74,7 +74,7 @@ std::list<std::string> visitor_forward_declarations_transform::inclusion_depende
 
 physical::entities::artefact visitor_forward_declarations_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_name().location(), true/*requires_header_guard*/);
+    assistant a(ctx, e, physical_name(), true/*requires_header_guard*/);
     const auto& o(a.as<logical::entities::structural::visitor>(e));
 
     {

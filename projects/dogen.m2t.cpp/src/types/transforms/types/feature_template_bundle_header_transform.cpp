@@ -102,7 +102,7 @@ std::list<std::string> feature_template_bundle_header_transform::inclusion_depen
 
 physical::entities::artefact feature_template_bundle_header_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_name().location(), false/*requires_header_guard*/);
+    assistant a(ctx, e, physical_name(), false/*requires_header_guard*/);
     const auto& fb(a.as<logical::entities::variability::feature_template_bundle>(e));
 
     {

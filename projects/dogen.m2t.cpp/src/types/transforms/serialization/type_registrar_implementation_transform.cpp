@@ -111,7 +111,7 @@ inclusion_dependencies(
 
 physical::entities::artefact type_registrar_implementation_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_name().location(), false/*requires_header_guard*/);
+    assistant a(ctx, e, physical_name(), false/*requires_header_guard*/);
     const auto& rg(a.as<logical::entities::serialization::type_registrar>(e));
 
     {

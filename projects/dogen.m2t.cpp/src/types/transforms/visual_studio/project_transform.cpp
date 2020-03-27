@@ -92,7 +92,7 @@ std::list<std::string> project_transform::inclusion_dependencies(
 
 physical::entities::artefact project_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_name().location(), false/*requires_header_guard*/);
+    assistant a(ctx, e, physical_name(), false/*requires_header_guard*/);
     using logical::entities::visual_studio::project;
     const auto& proj(a.as<project>(e));
 

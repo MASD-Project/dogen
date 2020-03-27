@@ -78,7 +78,7 @@ std::list<std::string> primitive_header_transform::inclusion_dependencies(
 
 physical::entities::artefact primitive_header_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_name().location(), true/*requires_header_guard*/);
+    assistant a(ctx, e, physical_name(), true/*requires_header_guard*/);
     const auto& p(a.as<logical::entities::structural::primitive>(e));
 
     const auto sn(p.name().simple());

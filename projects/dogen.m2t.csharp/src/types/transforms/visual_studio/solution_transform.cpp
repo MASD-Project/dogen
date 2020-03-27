@@ -71,7 +71,7 @@ inclusion_dependencies(const logical::entities::element& /*e*/) const {
 
 physical::entities::artefact solution_transform::
 apply(const context& ctx, const logical::entities::element& e) const {
-    assistant a(ctx, e, physical_name().location());
+    assistant a(ctx, e, physical_name());
     using logical::entities::visual_studio::solution;
     const auto& sln(a.as<solution>(static_id(), e));
 a.stream() << "Microsoft Visual Studio Solution File, Format Version 12.00" << std::endl;

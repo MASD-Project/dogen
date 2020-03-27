@@ -48,9 +48,9 @@ physical::entities::artefact
 wale_transform::apply(const formattables::locator& l,
     const model_to_text_transform& stock_transform, const context& ctx,
     const logical::entities::element& e) const {
-    const auto al(stock_transform.physical_name().location());
+    const auto pn(stock_transform.physical_name());
     const auto needs_guard(is_header(stock_transform.inclusion_support_type()));
-    assistant a(ctx, e, al, needs_guard);
+    assistant a(ctx, e, pn, needs_guard);
 
     const auto kvps = std::unordered_map<std::string, std::string> {
         { "class.simple_name", e.name().simple() }
