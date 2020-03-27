@@ -29,11 +29,11 @@
 #include "dogen.m2t/io/entities/model_io.hpp"
 #include "dogen.m2t/io/entities/facet_properties_io.hpp"
 #include "dogen.m2t/types/transforms/transformation_error.hpp"
-#include "dogen.m2t/types/transforms/enablement_transform.hpp"
+#include "dogen.m2t/types/transforms/local_enablement_transform.hpp"
 
 namespace {
 
-const std::string transform_id("m2t.transforms.enablement_transform");
+const std::string transform_id("m2t.transforms.local_enablement_transform");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
@@ -58,7 +58,7 @@ scope_exit<T> make_scope_exit(T &&t) {
 
 namespace dogen::m2t::transforms {
 
-bool enablement_transform::
+bool local_enablement_transform::
 is_element_disabled(const logical::entities::element& e) {
     /*
      * We're only interested in modules as these are the only elements
@@ -92,7 +92,7 @@ is_element_disabled(const logical::entities::element& e) {
     return false;
 }
 
-void enablement_transform::compute_enablement_for_artefact_properties(
+void local_enablement_transform::compute_enablement_for_artefact_properties(
     const std::unordered_map<std::string,
     entities::denormalised_archetype_properties>&
     global_archetype_location_properties,
@@ -251,7 +251,7 @@ void enablement_transform::compute_enablement_for_artefact_properties(
         ap.enabled(gc.facet_enabled() && gc.archetype_enabled());
 }
 
-void enablement_transform::compute_enablement_for_element(
+void local_enablement_transform::compute_enablement_for_element(
     const std::unordered_map<std::string,
     physical::entities::name_group>& archetype_locations_by_meta_name,
     const std::unordered_map<std::string,
@@ -356,7 +356,7 @@ void enablement_transform::compute_enablement_for_element(
     BOOST_LOG_SEV(lg, debug) << "Finished computing enablement.";
 }
 
-void enablement_transform::
+void local_enablement_transform::
 apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "enablement new_transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);

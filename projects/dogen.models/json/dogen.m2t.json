@@ -294,7 +294,7 @@
       ]
     },
     {
-      "name": "transforms::enablement_transform",
+      "name": "transforms::local_enablement_transform",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

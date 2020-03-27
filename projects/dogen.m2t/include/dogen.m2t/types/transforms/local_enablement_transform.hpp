@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_M2T_TYPES_TRANSFORMS_ENABLEMENT_TRANSFORM_HPP
-#define DOGEN_M2T_TYPES_TRANSFORMS_ENABLEMENT_TRANSFORM_HPP
+#ifndef DOGEN_M2T_TYPES_TRANSFORMS_LOCAL_ENABLEMENT_TRANSFORM_HPP
+#define DOGEN_M2T_TYPES_TRANSFORMS_LOCAL_ENABLEMENT_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -38,7 +38,7 @@
 
 namespace dogen::m2t::transforms {
 
-class enablement_transform final {
+class local_enablement_transform final {
 private:
     static bool is_element_disabled(
         const logical::entities::element& e);

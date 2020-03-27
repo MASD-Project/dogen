@@ -24,7 +24,7 @@
 #include "dogen.m2t/io/entities/model_io.hpp"
 #include "dogen.m2t/types/transforms/generability_transform.hpp"
 #include "dogen.m2t/types/transforms/artefact_properties_transform.hpp"
-#include "dogen.m2t/types/transforms/enablement_transform.hpp"
+#include "dogen.m2t/types/transforms/local_enablement_transform.hpp"
 #include "dogen.m2t/types/transforms/formatting_transform.hpp"
 #include "dogen.m2t/types/transforms/archetype_location_properties_transform.hpp"
 #include "dogen.m2t/types/transforms/technical_space_transform.hpp"
@@ -100,7 +100,7 @@ void model_generation_chain::apply(const context& ctx,
          * transform chain as it needs to compute enablement for any
          * backend specific types that might have been added.
          */
-        enablement_transform::apply(ctx, m);
+        local_enablement_transform::apply(ctx, m);
 
         /*
          * The formatting transform and the locator properties transform
