@@ -17,6 +17,81 @@ such as profiles, licences etc.
 The most significant stories needed by v2. These are either features
 or refactoring that must go in.
 
+*** Add additional reference directories                              :story:
+
+At present we expect the reference models to be either on the data
+directory (for system models) or on the same directory as the
+target. Presumably, users may also want to have models on other
+directories. For example, if one were to extend Dogen with a different
+project, it would be required to load models from the dogen
+directory.
+
+We could simply add a command line argument for reference directories;
+if the reference is not found in the target model directory, we would
+then try all available reference directories.
+
+We should implement this as a =-I= parameter akin to compilers. We
+should also have a command to output the current include path - check
+GCC to see what command they use for this.
+
+This will be a requirement in order to support PDMs because we shall
+have many directories with models. We will need the concept of "system
+include directories" for this. We need to look into how compilers do
+this. We must also dump these in dumpspecs.
+
+Merged Stories:
+
+*Add additional data files directories*
+
+#+begin_quote
+*Story*: As a dogen user, I want dogen to use my own private data
+libraries so that I don't have to supply them as diagrams.
+#+end_quote
+
+Users should be able to provide directories for their own JSON
+models. We just need to add a new parameter to the knitter and
+transport it all the way to OM's workflow.
+
+In the future, when everything is a model, data file directories and
+reference directories will become one and the same.
+
+
+*** Add version support                                               :story:
+
+At present we are generating the product version file as part of some
+CMake hackery. In reality, this is really a property of a MASD product
+and possibly component. We could even consider it to be a meta-model
+element.
+
+Notes:
+
+- there should be a meta-model element for version. It should be
+  usable in either product or component models. In product models, we
+  still need to figure out where the file with the details should be
+  placed.
+- version can then be used for details such as travis/appveyor
+  version, CMake version, DLL/SO version, assembly properties, etc.
+- however, we need to figure out how components will be able to see
+  product level elements.
+- this can also be used for [[*Add versioning support][serialisation versioning]].
+- the version is a property of the product itself, so perhaps we
+  should just make it a meta-data element. Then, if you would like the
+  version to come out as a header file you need to create a "product
+  version" element. This will use the product version (in a yet to be
+  defined manner). This would allow users to decide where they want
+  the header file to be created. A similar approach can be taken for
+  components as well.
+
+Merged stories:
+
+*Supply dogen version as a configuration parameter*
+
+At present we are using the =config.hpp= file in several places in
+dogen to determine the dogen version. This makes things complicated
+when we don't actually care about the particular version such as in
+tests. We should supply the version as part of the initial
+configuration and then reuse it from there.
+
 *** Allow dropping facet postfix for an element                       :story:
 
 We sometimes need to suppress the facet postfix. For example, when
@@ -6177,6 +6252,13 @@ Stories that will not be handled on the current major release.
 
 Ideas to improve the code base.
 
+*** Create a test model with SHA1 hash in generation marker           :story:
+
+At present we cannot test this feature because we are using all models
+in both JSON and Dia generation. When we do this, the original model
+produces different SHA1 hashes. We need to create a test for a model
+which has only one injection type.
+
 *** Logging at info is very messy                                     :story:
 
 Ideally when logging at info we want to see the spine of the program,
@@ -7068,7 +7150,7 @@ Features for which there is no urgency but we'd like to see them
 implemented at some point. They may require some alterations to the
 core, but not fundamental rethinking.
 
-*** Consider computing hashes only once for immutable types :reviewing:story:
+*** Consider computing hashes only once for immutable types           :story:
 
 if a type is immutable the hash should be computed once at
 construction and then cached. Not quite sure how this would be
@@ -7092,6 +7174,21 @@ Once we have this, we can then write simple tests that read the
 serialised data and use it to reproduce bugs, narrowed to a specific
 transform. This would be extremely useful once we have
 code-generationa as a service.
+
+Merged stories:
+
+*Add a file format parameter to tracing for model dumps*
+
+At present we are dumping all models in probing as JSON. It would be
+nice to be able to dump them as boost serialisation so we can plug
+them into tests or to reproduce some problem. It would be even nicer
+if we could plug that data back in to dogen but its not obvious how
+that would work; we need to have some kind of concept of "stages", and
+then supply the inputs and the stage so that dogen could continue from
+there.
+
+One slight downside of this is that we'd need serialisation support
+for all core models. But its still very useful.
 
 *** Add a new annotation type of "pair"                               :story:
 
@@ -7151,7 +7248,8 @@ have dogen code-generate the skeletons for the mock factories. For
 this we would need a meta-element for mock factories (with the new
 ideas on meta-model transparency, we can't just add a switch to the
 target element any longer). Ideally we would also have an associated
-walw template to give us a good head start.
+wale template to give us a good head start.
+
 *** Consider making editor a meta-data element                        :story:
 
 When we create meta-data elements for technical space, facet, etc we
@@ -7194,46 +7292,17 @@ Note that this is a very complex story with the potential to cause a
 lot of problems. We should only start to tackle it when there is a
 very good use case.
 
-*** Consider adding support for binary logging                        :story:
-
-Dogen logs are very large when we log at high-level such as debug and
-trace. It also takes a bit longer to run. This means its not very
-practical to enable logging all the time, only when we are
-troubleshooting. However, for "dogen as a service" we probably will
-end up using logging a lot more often so it would be nice to have a
-more efficient way of logging. One possibility is to use binary logs.
-
-Links:
-
-- [[https://github.com/Morgan-Stanley/binlog][binlog]]: A high performance C++ log library, producing structured
-  binary logs http://binlog.org
-- [[https://github.com/odygrd/quill][quill]]: Asynchronous Low Latency Logging Library
-- [[https://github.com/KjellKod/g3log][g3log]]: G3log is an asynchronous, "crash safe", logger that is easy
-  to use with default logging sinks or you can add your own.
-- [[https://github.com/PlatformLab/NanoLog][NanoLog]]: Nanolog is an extremely performant nanosecond scale logging
-  system for C++ that exposes a simple printf-like API.
-
-*** Create a test model with SHA1 hash in generation marker           :story:
-
-At present we cannot test this feature because we are using all models
-in both JSON and Dia generation. When we do this, the original model
-produces different SHA1 hashes. We need to create a test for a model
-which has only one injection type.
-
-*** Supply dogen version as a configuration parameter                 :story:
-
-At present we are using the =config.hpp= file in several places in
-dogen to determine the dogen version. This makes things complicated
-when we don't actually care about the particular version such as in
-tests. We should supply the version as part of the initial
-configuration and then reuse it from there.
-
 *** Consider adding text transform details to generation marker       :story:
 
 It would be nice if we could tell which formatter generated which
 file. We could add this to the generation marker:
 
 : add_model_to_text_transform_details
+
+In reality, since the formatter binds to the archetype, we could just
+print the fully qualified physical location. We need to understand how
+that would work in the existing boilerplate formatter - we need an
+additional field to be added.
 
 *** Add a "info" activity to dogen                                    :story:
 
@@ -7248,24 +7317,9 @@ dumps lots of details about a model:
 - whether generation would modify any files and if so which files
   (just the names).
 
-*** Message replay                                                    :story:
-
-This is a very speculative story. Once we are able to generate
-services with messages, etc., it would make sense to have a "replay"
-mode. This basically recalls a session with requests and responses so
-that users can replay a session. The messages should be stored on a
-database. We should also have an interface with an history of requests
-and responses and allow users to re-submit a request, switching on
-logging for that particular request. Logging is also written to a
-database table, allowing one to correlate the request processing with
-the logging. Even better would be if any request made to downstream
-systems would also enable those flags so that we could follow through
-with the logging.
-
-Links:
-
-- [[https://firefox-replay.com/][Firefox WebReplay]]: main site. Should give us some ideas for the UI.
-- [[https://developer.mozilla.org/en-US/docs/Mozilla/Projects/WebReplay][Firefox WebReplay]]: documentation.
+Note that we've already have a dumpspecs activity. We need to make
+sure there is a clear distinction between the two so users don't get
+confused.
 
 *** Allow user supplied enumerator values                             :story:
 
@@ -7308,7 +7362,7 @@ field instead.
 
 *** Consider adding support for JWT                                   :story:
 
-JWT are used in web apps.
+JSON Web Tokens (JWT) are used in web apps.
 
 Links:
 
@@ -7383,16 +7437,6 @@ Links:
 - [[https://awesomekling.github.io/Serenity-C++-patterns-The-Badge/][Serenity C++ patterns: The Badge]]
 - [[https://www.reddit.com/r/cpp/comments/bzjbu1/serenity_c_patterns_the_badge/][reddit discussion]]
 
-*** Consider adding a GIR/GObject injector                            :story:
-
-GIR seems to be yet another format that could be suitable for a dogen
-input.
-
-Links:
-
-- [[https://gitlab.com/mnauw/cppgir][cppgir]]
-- [[https://www.reddit.com/r/cpp/comments/bbp25s/gobjectintrospection_c_binding_wrapper_generator/][GObject-Introspection C++ binding wrapper generator]]
-
 *** Add support for =fixed_storage_arrays=                            :story:
 
 This is a library with some fixed size arrays. We need to check to see
@@ -7402,7 +7446,7 @@ Links:
 
 - [[https://github.com/recatek/fixed_storage_arrays][github]]
 
-*** Exceptions with stream to build exception message                 :story:
+*** Consider exceptions with stream to build exception message        :story:
 
 Consider adding some functionality to exceptions whereby we could
 create the exception with a stream:
@@ -7419,38 +7463,13 @@ Or maybe we need an exception builder that takes in a type T:
 
 This is a really common use case.
 
-*** Add additional reference directories                              :story:
+Actually we just need to understand boost exception better. It seems
+it already supports all of these use cases out of the box.
 
-At present we expect the reference models to be either on the data
-directory (for system models) or on the same directory as the
-target. Presumably, users may also want to have models on other
-directories. For example, if one were to extend Dogen with a different
-project, it would be required to load models from the dogen
-directory.
+Links:
 
-We could simply add a command line argument for reference directories;
-if the reference is not found in the target model directory, we would
-then try all available reference directories.
-
-We should implement this as a =-I= parameter akin to compilers. We
-should also have a command to output the current include path - check
-GCC to see what command they use for this.
-
-Merged Stories:
-
-*Add additional data files directories*
-
-#+begin_quote
-*Story*: As a dogen user, I want dogen to use my own private data
-libraries so that I don't have to supply them as diagrams.
-#+end_quote
-
-Users should be able to provide directories for their own JSON
-models. We just need to add a new parameter to the knitter and
-transport it all the way to OM's workflow.
-
-In the future, when everything is a model, data file directories and
-reference directories will become one and the same.
+- [[https://www.boost.org/doc/libs/1_72_0/libs/exception/doc/tutorial_transporting_data.html][Transporting of Arbitrary Data to the Catch Site]]
+- [[https://theboostcpplibraries.com/boost.exception][Chapter 56. Boost.Exception]]
 
 *** Add support for proper JSON serialisation in C++                  :story:
 
@@ -7671,57 +7690,16 @@ class name. We need a way of controlling all of the default
 constructors and all of the operators in one go so we can set it on
 the handcrafted profile.
 
-*** Add support for selectively disabling helpers on a family         :story:
-
-At present when a type belongs to a helper family it must provide all
-helpers across all facets. This means that we can't support the cases
-where a helper is required for one facet for one type but not for
-others. For example, we cannot create a family for =Dereferenceable=
-including both smart pointers and optionals because optional does not
-need a helper for =types=.
-
-One solution for this is to allow disabling the helper for a given
-type on a given facet. However, our templating mechanism in dynamic is
-not able to cope with this use case. Changes required:
-
-- add a "component" to ownership hierarchy. This would be "helper" in
-  our case. We should also set "type" which has been hacked via the
-  qualified name.
-- create a supported/enabled field with a component of helper and a
-  facet template. We could change this to formatter template if
-  required in the future.
-- merge the families of optional and smart pointer into
-  =Dereferenceable=.
-- disable the helper for types for optional.
-- update the helper settings to read this new field.
-- enabled method now checks the helper properties.
-
-Links:
-
-- [[https://www.sciencedirect.com/topics/computer-science/product-line-engineering][Product Line Engineering]]
-
 *** Add support for type_index                                        :story:
 
 At present we cannot create containers using =std::type_index= as a
-key because we do not have hashing, IO and serialisation support.
+key because we do not have hashing, IO and serialisation support. This
+will require PDM support.
 
 Links:
 
 - [[http://stackoverflow.com/questions/36219532/serializing-stdtype-index][Serializing `std::type_index`]]
 - [[https://www.boost.org/doc/libs/1_69_0/doc/html/boost_typeindex.html][Boost typeindex]]
-
-*** Add a file format parameter to tracing for model dumps            :story:
-
-At present we are dumping all models in probing as JSON. It would be
-nice to be able to dump them as boost serialisation so we can plug
-them into tests or to reproduce some problem. It would be even nicer
-if we could plug that data back in to dogen but its not obvious how
-that would work; we need to have some kind of concept of "stages", and
-then supply the inputs and the stage so that dogen could continue from
-there.
-
-One slight downside of this is that we'd need serialisation support
-for all core models. But its still very useful.
 
 *** Support only specific attributes for certain facets               :story:
 
@@ -7734,9 +7712,14 @@ use of it for:
 
 And so forth. For example, names and name trees don't really require
 comparing the entire state of the object. We need a way to mark
-properties against each facet in the meta-data.
+properties against each facet in the meta-data. This should ideally
+join in with the ORM concept of a primary key. We need to extract that
+notion out of ORM and generalise it. Users can then decide if they
+want to use all attributes or just the primary key. For less than we
+need to know that all attributes in the key support less than. This
+must be supplied by the PDM.
 
-*** Consider supporting non-boost exceptions                          :story:
+*** Consider supporting non-boost exceptions                :reviewing:story:
 
 It should be fairly trivial to disable the use of boost exception when
 generating exceptions. This would allow us to create a model that is
@@ -10829,31 +10812,6 @@ more accurately.
 We should have an operator that compares the state of two objects
 ignoring the version (for versioned objects).
 
-*** Add version support                                               :story:
-
-At present we are generating the product version file as part of some
-CMake hackery. In reality, this is really a property of a MASD product
-and possibly component.
-
-Notes:
-
-- there should be a meta-model element for version. It should be
-  usable in either product or component models. In product models, we
-  still need to figure out where the file with the details should be
-  placed.
-- version can then be used for details such as travis/appveyor
-  version, CMake version, DLL/SO version, assembly properties, etc.
-- however, we need to figure out how components will be able to see
-  product level elements.
-- this can also be used for [[*Add versioning support][serialisation versioning]].
-- the version is a property of the product itself, so perhaps we
-  should just make it a meta-data element. Then, if you would like the
-  version to come out as a header file you need to create a "product
-  version" element. This will use the product version (in a yet to be
-  defined manner). This would allow users to decide where they want
-  the header file to be created. A similar approach can be taken for
-  components as well.
-
 *** Add versioning support                                            :story:
 
 #+begin_quote
@@ -12409,6 +12367,73 @@ These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
 
+*** Investigate CLAFER                                                :story:
+
+As per their site:
+
+#+begin_quote
+Clafer is a general-purpose lightweight structural and behavioral
+modeling language developed by GSD Lab, University of Waterloo, and
+MODELS group at IT University of Copenhagen. Clafer can be used for
+modeling of static hierarchical structures and for modeling the change
+of the structures over time (behavior). Clafer allows for naturally
+expressing variability in both the structure and behavior. The main
+goal of Clafer is to make modeling more accessible to a wider range of
+users and domains.
+#+end_quote
+
+Links:
+
+- https://github.com/gsdlab/clafer
+
+*** Consider adding a GIR/GObject injector                            :story:
+
+GIR seems to be yet another format that could be suitable for a dogen
+injector.
+
+Links:
+
+- [[https://gitlab.com/mnauw/cppgir][cppgir]]
+- [[https://www.reddit.com/r/cpp/comments/bbp25s/gobjectintrospection_c_binding_wrapper_generator/][GObject-Introspection C++ binding wrapper generator]]
+
+*** Message replay                                                    :story:
+
+This is a very speculative story. Once we are able to generate
+services with messages, etc., it would make sense to have a "replay"
+mode. This basically recalls a session with requests and responses so
+that users can replay a session. The messages should be stored on a
+database. We should also have an interface with an history of requests
+and responses and allow users to re-submit a request, switching on
+logging for that particular request. Logging is also written to a
+database table, allowing one to correlate the request processing with
+the logging. Even better would be if any request made to downstream
+systems would also enable those flags so that we could follow through
+with the logging.
+
+Links:
+
+- [[https://firefox-replay.com/][Firefox WebReplay]]: main site. Should give us some ideas for the UI.
+- [[https://developer.mozilla.org/en-US/docs/Mozilla/Projects/WebReplay][Firefox WebReplay]]: documentation.
+
+*** Consider adding support for binary logging                        :story:
+
+Dogen logs are very large when we log at high-level such as debug and
+trace. It also takes a bit longer to run. This means its not very
+practical to enable logging all the time, only when we are
+troubleshooting. However, for "dogen as a service" we probably will
+end up using logging a lot more often so it would be nice to have a
+more efficient way of logging. One possibility is to use binary logs.
+
+Links:
+
+- [[https://github.com/Morgan-Stanley/binlog][binlog]]: A high performance C++ log library, producing structured
+  binary logs http://binlog.org
+- [[https://github.com/odygrd/quill][quill]]: Asynchronous Low Latency Logging Library
+- [[https://github.com/KjellKod/g3log][g3log]]: G3log is an asynchronous, "crash safe", logger that is easy
+  to use with default logging sinks or you can add your own.
+- [[https://github.com/PlatformLab/NanoLog][NanoLog]]: Nanolog is an extremely performant nanosecond scale logging
+  system for C++ that exposes a simple printf-like API.
+
 *** Consider using command line indicators                            :story:
 
 Dogen is, by design, pretty quick to execute. However, we may want to
@@ -12428,7 +12453,6 @@ types.
 Links:
 
 - [[https://github.com/p-ranav/tabulate][tabulate]]
-
 
 *** Consider visualisation like source trail                          :story:
 
