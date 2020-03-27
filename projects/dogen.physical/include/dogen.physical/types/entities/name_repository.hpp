@@ -30,7 +30,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
-#include "dogen.physical/types/entities/location.hpp"
+#include "dogen.physical/types/entities/name.hpp"
 #include "dogen.physical/types/entities/name_group.hpp"
 
 namespace dogen::physical::entities {
@@ -47,17 +47,17 @@ public:
 
 public:
     name_repository(
-        const std::list<dogen::physical::entities::location>& all,
+        const std::list<dogen::physical::entities::name>& all,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_backend_name,
         const std::unordered_map<std::string, dogen::physical::entities::name_group>& by_meta_name,
         const std::unordered_map<std::string, std::unordered_map<std::string, std::list<std::string> > >& by_backend_by_facet);
 
 public:
-    const std::list<dogen::physical::entities::location>& all() const;
-    std::list<dogen::physical::entities::location>& all();
-    void all(const std::list<dogen::physical::entities::location>& v);
-    void all(const std::list<dogen::physical::entities::location>&& v);
+    const std::list<dogen::physical::entities::name>& all() const;
+    std::list<dogen::physical::entities::name>& all();
+    void all(const std::list<dogen::physical::entities::name>& v);
+    void all(const std::list<dogen::physical::entities::name>&& v);
 
     const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name() const;
     std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_backend_name();
@@ -90,7 +90,7 @@ public:
     name_repository& operator=(name_repository other);
 
 private:
-    std::list<dogen::physical::entities::location> all_;
+    std::list<dogen::physical::entities::name> all_;
     std::unordered_map<std::string, std::unordered_set<std::string> > facet_names_by_backend_name_;
     std::unordered_map<std::string, std::unordered_set<std::string> > formatter_names_by_backend_name_;
     std::unordered_map<std::string, dogen::physical::entities::name_group> by_meta_name_;

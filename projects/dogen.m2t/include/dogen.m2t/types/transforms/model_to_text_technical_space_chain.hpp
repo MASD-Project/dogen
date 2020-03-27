@@ -59,12 +59,12 @@ public:
     virtual std::string id() const = 0;
 
     /**
-     * @brief All archetype locations for the archetypes owned by this
+     * @brief All physical names for the archetypes owned by this
      * transform, listing all available backends, facets and
      * archetypes.
      */
-    virtual const std::forward_list<physical::entities::location>&
-    archetype_locations() const = 0;
+    virtual const std::forward_list<physical::entities::name>&
+    physical_names() const = 0;
 
     /**
      * @brief Returns a human readable description of this transform.
@@ -72,19 +72,19 @@ public:
     virtual std::string description() const = 0;
 
     /**
-     * @brief Returns the archetype locations for each meta name.
+     * @brief Returns the physical names for each meta name.
      */
     virtual const std::unordered_map<std::string,
                                      physical::entities::name_group>&
-    archetype_locations_by_meta_name() const = 0;
+    physical_names_by_meta_name() const = 0;
 
     /**
      * @brief Returns the archetype locations for each family.
      */
     virtual const std::unordered_map<std::string,
-                                     std::list<physical::entities::location>
+                                     std::list<physical::entities::name>
                                      >&
-    archetype_locations_by_family() const = 0;
+    physical_names_by_family() const = 0;
 
     /**
      * @brief Returns this backend's part of the repository of

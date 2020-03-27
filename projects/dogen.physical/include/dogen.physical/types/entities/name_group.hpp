@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.physical/types/entities/location.hpp"
+#include "dogen.physical/types/entities/name.hpp"
 
 namespace dogen::physical::entities {
 
@@ -42,18 +42,18 @@ public:
 
 public:
     name_group(
-        const std::list<dogen::physical::entities::location>& locations,
+        const std::list<dogen::physical::entities::name>& names,
         const std::unordered_map<std::string, std::string>& canonical_locations);
 
 public:
     /**
-     * @brief All archetype locations that belong to this group.
+     * @brief All names that belong to this group.
      */
     /**@{*/
-    const std::list<dogen::physical::entities::location>& locations() const;
-    std::list<dogen::physical::entities::location>& locations();
-    void locations(const std::list<dogen::physical::entities::location>& v);
-    void locations(const std::list<dogen::physical::entities::location>&& v);
+    const std::list<dogen::physical::entities::name>& names() const;
+    std::list<dogen::physical::entities::name>& names();
+    void names(const std::list<dogen::physical::entities::name>& v);
+    void names(const std::list<dogen::physical::entities::name>&& v);
     /**@}*/
 
     /**
@@ -78,7 +78,7 @@ public:
     name_group& operator=(name_group other);
 
 private:
-    std::list<dogen::physical::entities::location> locations_;
+    std::list<dogen::physical::entities::name> names_;
     std::unordered_map<std::string, std::string> canonical_locations_;
 };
 

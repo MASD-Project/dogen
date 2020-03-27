@@ -59,11 +59,11 @@ std::unordered_map<
     global_enablement_transform::backend_feature_group>
 global_enablement_transform::
 make_backend_feature_group(const variability::entities::feature_model& fm,
-    const physical::entities::name_repository& alrp) {
+    const physical::entities::name_repository& nrp) {
     std::unordered_map<std::string, backend_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
-    for (const auto& pair : alrp.facet_names_by_backend_name()) {
+    for (const auto& pair : nrp.facet_names_by_backend_name()) {
         const auto& backend(pair.first);
         backend_feature_group btg;
         const auto ebl(logical::traits::enabled());
@@ -79,11 +79,11 @@ std::unordered_map<
     global_enablement_transform::facet_feature_group>
 global_enablement_transform::
 make_facet_feature_group(const variability::entities::feature_model& fm,
-    const physical::entities::name_repository& alrp) {
+    const physical::entities::name_repository& nrp) {
     std::unordered_map<std::string, facet_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
-    for (const auto& pair : alrp.facet_names_by_backend_name()) {
+    for (const auto& pair : nrp.facet_names_by_backend_name()) {
         for (const auto& fct : pair.second) {
             facet_feature_group ftg;
             const auto ebl(logical::traits::enabled());
@@ -103,19 +103,20 @@ std::unordered_map<
     global_enablement_transform::global_archetype_feature_group>
 global_enablement_transform::make_global_archetype_feature_group(
     const variability::entities::feature_model& fm,
-    const physical::entities::name_repository& alrp) {
+    const physical::entities::name_repository& nrp) {
     std::unordered_map<std::string, global_archetype_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
-    for (const auto& al : alrp.all()) {
+    for (const auto& n : nrp.all()) {
         global_archetype_feature_group gatg;
+        const auto l(n.location());
         const auto ebl(logical::traits::enabled());
-        gatg.enabled = s.get_by_name(al.archetype(), ebl);
+        gatg.enabled = s.get_by_name(l.archetype(), ebl);
 
         const auto ow(logical::traits::overwrite());
-        gatg.overwrite = s.get_by_name(al.archetype(), ow);
+        gatg.overwrite = s.get_by_name(l.archetype(), ow);
 
-        r.insert(std::make_pair(al.archetype(), gatg));
+        r.insert(std::make_pair(l.archetype(), gatg));
     }
     return r;
 }
@@ -125,21 +126,22 @@ std::unordered_map<
     global_enablement_transform::local_archetype_feature_group>
 global_enablement_transform::make_local_archetype_feature_group(
     const variability::entities::feature_model& fm,
-    const physical::entities::name_repository& alrp) {
+    const physical::entities::name_repository& nrp) {
     std::unordered_map<std::string, local_archetype_feature_group> r;
 
     const variability::helpers::feature_selector s(fm);
-    for (const auto& al : alrp.all()) {
+    for (const auto& n : nrp.all()) {
+        const auto l(n.location());
         local_archetype_feature_group latg;
         const auto ebl(logical::traits::enabled());
-        latg.facet_enabled = s.get_by_name(al.facet(), ebl);
-        latg.archetype_enabled = s.get_by_name(al.archetype(), ebl);
+        latg.facet_enabled = s.get_by_name(l.facet(), ebl);
+        latg.archetype_enabled = s.get_by_name(l.archetype(), ebl);
 
         const auto ow(logical::traits::overwrite());
-        latg.facet_overwrite = s.get_by_name(al.facet(), ow);
-        latg.archetype_overwrite = s.get_by_name(al.archetype(), ow);
+        latg.facet_overwrite = s.get_by_name(l.facet(), ow);
+        latg.archetype_overwrite = s.get_by_name(l.archetype(), ow);
 
-        r.insert(std::make_pair(al.archetype(), latg));
+        r.insert(std::make_pair(l.archetype(), latg));
     }
     return r;
 }
@@ -217,12 +219,12 @@ global_enablement_transform::obtain_archetype_properties(
 
 void global_enablement_transform::populate_global_archetype_location_properties(
     const variability::entities::feature_model& fm,
-    const physical::entities::name_repository& alrp,
+    const physical::entities::name_repository& nrp,
     entities::model& m) {
 
-    const auto bftg(make_backend_feature_group(fm, alrp));
-    const auto fftg(make_facet_feature_group(fm, alrp));
-    const auto aftg(make_global_archetype_feature_group(fm, alrp));
+    const auto bftg(make_backend_feature_group(fm, nrp));
+    const auto fftg(make_facet_feature_group(fm, nrp));
+    const auto aftg(make_global_archetype_feature_group(fm, nrp));
 
     const auto& cfg(*m.root_module()->configuration());
     auto& galp(m.global_enablement_properties());
@@ -234,7 +236,7 @@ void global_enablement_transform::populate_global_archetype_location_properties(
      * Now populate the denormalised archetype properties by querying
      * the containers we've already populated.
      */
-    for (const auto& backend_pair : alrp.by_backend_by_facet()) {
+    for (const auto& backend_pair : nrp.by_backend_by_facet()) {
         /*
          * First we locate the backend for the current batch of
          * artchefeature locations.
@@ -288,18 +290,18 @@ void global_enablement_transform::populate_global_archetype_location_properties(
 }
 
 std::unordered_map<std::string, logical::entities::enablement_properties>
-global_enablement_transform::obtain_local_archetype_location_properties(
+global_enablement_transform::obtain_local_enablement_properties(
     const std::unordered_map<std::string, local_archetype_feature_group>& fgs,
-    const std::list<physical::entities::location>& als,
+    const std::list<physical::entities::name>& ns,
     const variability::entities::configuration& cfg) {
 
     BOOST_LOG_SEV(lg, debug) << "Creating local archetype location properties.";
 
-    std::unordered_map<
-        std::string, logical::entities::enablement_properties> r;
+    std::unordered_map<std::string, logical::entities::enablement_properties> r;
     const variability::helpers::configuration_selector s(cfg);
-    for (const auto& al : als) {
-        const auto archetype(al.archetype());
+    for (const auto& n : ns) {
+        const auto& l(n.location());
+        const auto archetype(l.archetype());
         const auto i(fgs.find(archetype));
         if (i == fgs.end()) {
             BOOST_LOG_SEV(lg, error) << type_group_not_found << archetype;
@@ -336,14 +338,14 @@ global_enablement_transform::obtain_local_archetype_location_properties(
 
 void global_enablement_transform::populate_local_archetype_location_properties(
     const variability::entities::feature_model& fm,
-    const physical::entities::name_repository& alrp,
+    const physical::entities::name_repository& nrp,
     entities::model& m) {
     /*
      * Computes all of the possible features for every archetype
      * location. Not all of these will be of use to a given element,
      * because they may not be expressed for that element.
      */
-    const auto fgs(make_local_archetype_feature_group(fm, alrp));
+    const auto fgs(make_local_archetype_feature_group(fm, nrp));
 
     /*
      * Bucket all elements by their meta-name.
@@ -364,12 +366,12 @@ void global_enablement_transform::populate_local_archetype_location_properties(
          * wwritting).
          */
         const auto mn_id(pair.first);
-        const auto& albmn(alrp.by_meta_name());
+        const auto& albmn(nrp.by_meta_name());
         const auto i(albmn.find(mn_id));
         if (i == albmn.end())
             continue;
 
-        const auto& als(i->second.locations());
+        const auto& ns(i->second.names());
 
         /*
          * Now process each of the elements of this meta-feature, only
@@ -380,7 +382,7 @@ void global_enablement_transform::populate_local_archetype_location_properties(
             auto& e(*ptr);
             const auto& cfg(*e.configuration());
             e.archetype_location_properties(
-                obtain_local_archetype_location_properties(fgs, als, cfg));
+                obtain_local_enablement_properties(fgs, ns, cfg));
         }
     }
 }
@@ -392,9 +394,9 @@ apply(const context& ctx, entities::model& m) {
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
     const auto &fm(*ctx.feature_model());
-    const auto &alrp(*ctx.physical_name_repository());
-    populate_global_archetype_location_properties(fm, alrp, m);
-    populate_local_archetype_location_properties(fm, alrp, m);
+    const auto &nrp(*ctx.physical_name_repository());
+    populate_global_archetype_location_properties(fm, nrp, m);
+    populate_local_archetype_location_properties(fm, nrp, m);
 
     stp.end_transform(m);
 }

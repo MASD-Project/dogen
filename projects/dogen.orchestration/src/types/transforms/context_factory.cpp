@@ -51,7 +51,7 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("engine.transforms.context_factory"));
 
-const std::string alrp_input_id("archetype_location_repository");
+const std::string nrp_input_id("archetype_location_repository");
 const std::string fm_input_id("feature_model");
 
 const std::string duplicate_segment("Duplicat segment: ");
@@ -69,7 +69,7 @@ create_archetype_location_repository(
     physical::helpers::name_repository_builder b;
     for (const auto& pair : rg.transforms_by_technical_space()) {
         const auto& t(*pair.second);
-        b.add(t.archetype_locations_by_meta_name());
+        b.add(t.physical_names_by_meta_name());
         b.add(t.physical_name_repository_parts());
     }
     using physical::entities::name_repository;
@@ -111,8 +111,8 @@ make_injection_context(const configuration& cfg,
     /*
      * Setup the physical data structures.
      */
-    const auto alrp(create_archetype_location_repository(rg));
-    r.physical_name_repository(alrp);
+    const auto nrp(create_archetype_location_repository(rg));
+    r.physical_name_repository(nrp);
 
     /*
      * Setup the tracer. Note that we do it regardless of whether
@@ -147,13 +147,13 @@ make_context(const configuration& cfg, const std::string& activity,
     /*
      * Obtain the physical location repository.
      */
-    const auto alrp(create_archetype_location_repository(rg));
+    const auto nrp(create_archetype_location_repository(rg));
 
     /*
      * Obtain the template instantiation domains.
      */
     using tidf = physical::helpers::template_instantiation_domains_factory;
-    vctx.template_instantiation_domains(tidf::make(alrp->all()));
+    vctx.template_instantiation_domains(tidf::make(nrp->all()));
 
     /*
      * Handle the compatibility mode.
@@ -167,7 +167,7 @@ make_context(const configuration& cfg, const std::string& activity,
      */
     const auto tracer(boost::make_shared<tracing::tracer>(cfg, activity));
     vctx.tracer(tracer);
-    tracer->start_run(alrp_input_id, *alrp);
+    tracer->start_run(nrp_input_id, *nrp);
 
     /*
      * Create the top-level context and all of its sub-contexts. Start
@@ -217,9 +217,9 @@ make_context(const configuration& cfg, const std::string& activity,
     /*
      * Setup the archetype location repository.
      */
-    r.injection_context().physical_name_repository(alrp);
-    r.logical_context().physical_name_repository(alrp);
-    r.generation_context().physical_name_repository(alrp);
+    r.injection_context().physical_name_repository(nrp);
+    r.logical_context().physical_name_repository(nrp);
+    r.generation_context().physical_name_repository(nrp);
 
     /*
      * Setup the tracer.

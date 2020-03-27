@@ -25,7 +25,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/set_io.hpp"
 #include "dogen.utility/types/io/forward_list_io.hpp"
-#include "dogen.physical/io/entities/location_io.hpp"
+#include "dogen.physical/io/entities/name_io.hpp"
 #include "dogen.m2t.cpp/types/transforms/traits.hpp"
 #include "dogen.m2t.cpp/io/transforms/repository_io.hpp"
 #include "dogen.m2t.cpp/types/transforms/registrar_error.hpp"
@@ -171,11 +171,10 @@ void registrar::validate() const {
 
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state. Repository: "
                              << frp;
-    BOOST_LOG_SEV(lg, debug) << "Archetype locations: " << archetype_locations_;
+    BOOST_LOG_SEV(lg, debug) << "Archetype locations: " << physical_names_;
 }
 
-void registrar::
-register_formatter(std::shared_ptr<model_to_text_transform> f) {
+void registrar::register_formatter(std::shared_ptr<model_to_text_transform> f) {
     /*
      * First we ensure the formatter is vaguely valid and insert it
      * into the main collection of stock formatters.
@@ -187,25 +186,25 @@ register_formatter(std::shared_ptr<model_to_text_transform> f) {
     /*
      * Add the formatter to the archetype location stores.
      */
-    const auto al(f->physical_name().location());
-    archetype_locations_.push_front(al);
+    const auto pn(f->physical_name());
+    physical_names_.push_front(pn);
 
     /*
      * Handle the meta-type collection of archetype locations.
      */
     const auto mn(f->meta_name().qualified().dot());
-    auto& alg(archetype_locations_by_meta_name_[mn]);
-    alg.locations().push_back(al);
+    auto& g(physical_names_by_meta_name_[mn]);
+    g.names().push_back(pn);
 
     /*
      * If the archetype location points to a canonical archetype,
      * update the canonical archetype mapping.
      */
-    auto& cal(alg.canonical_locations());
+    auto& cal(g.canonical_locations());
     const auto cs(inclusion_support_types::canonical_support);
     if (f->inclusion_support_type() == cs) {
-        const auto arch(al.archetype());
-        const auto fct(al.facet());
+        const auto arch(pn.location().archetype());
+        const auto fct(pn.location().facet());
         const auto carch(transforms::traits::canonical_archetype(fct));
         const auto inserted(cal.insert(std::make_pair(arch, carch)).second);
         if (!inserted) {
@@ -227,7 +226,7 @@ register_formatter(std::shared_ptr<model_to_text_transform> f) {
      * helpful side-effect of ensuring the formatter id is unique in
      * formatter space.
      */
-    const auto arch(al.archetype());
+    const auto arch(pn.location().archetype());
     auto& fffn(frp.stock_artefact_formatters_by_archetype());
     const auto pair(std::make_pair(arch, f));
     const auto inserted(fffn.insert(pair).second);
@@ -240,8 +239,7 @@ register_formatter(std::shared_ptr<model_to_text_transform> f) {
                              << " against meta name: " << mn;
 }
 
-void registrar::
-register_helper_formatter(std::shared_ptr<helper_transform> fh) {
+void registrar::register_helper_formatter(std::shared_ptr<helper_transform> fh) {
     validate(fh);
     auto& frp(formatter_repository_);
     auto& f(frp.helper_formatters_[fh->family()]);
@@ -256,21 +254,19 @@ const repository& registrar::formatter_repository() const {
     return formatter_repository_;
 }
 
-const std::forward_list<physical::entities::location>&
-registrar::archetype_locations() const {
-    return archetype_locations_;
+const std::forward_list<physical::entities::name>&
+registrar::physical_names() const {
+    return physical_names_;
 }
 
-const std::unordered_map<std::string,
-                   physical::entities::name_group>&
-registrar::archetype_locations_by_meta_name() const {
-    return archetype_locations_by_meta_name_;
+const std::unordered_map<std::string, physical::entities::name_group>&
+registrar::physical_names_by_meta_name() const {
+    return physical_names_by_meta_name_;
 }
 
-const std::unordered_map<std::string,
-                         std::list<physical::entities::location>>&
-registrar::archetype_locations_by_family() const {
-    return archetype_locations_by_family_;
+const std::unordered_map<std::string, std::list<physical::entities::name>>&
+registrar::physical_names_by_family() const {
+    return physical_names_by_family_;
 }
 
 const physical::entities::name_repository_parts&

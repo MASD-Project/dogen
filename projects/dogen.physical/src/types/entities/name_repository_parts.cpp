@@ -23,7 +23,7 @@
 namespace dogen::physical::entities {
 
 name_repository_parts::name_repository_parts(
-    const std::list<dogen::physical::entities::location>& all,
+    const std::list<dogen::physical::entities::name>& all,
     const std::unordered_map<std::string, dogen::physical::entities::name_group>& by_meta_name)
     : all_(all),
       by_meta_name_(by_meta_name) { }
@@ -45,19 +45,19 @@ name_repository_parts& name_repository_parts::operator=(name_repository_parts ot
     return *this;
 }
 
-const std::list<dogen::physical::entities::location>& name_repository_parts::all() const {
+const std::list<dogen::physical::entities::name>& name_repository_parts::all() const {
     return all_;
 }
 
-std::list<dogen::physical::entities::location>& name_repository_parts::all() {
+std::list<dogen::physical::entities::name>& name_repository_parts::all() {
     return all_;
 }
 
-void name_repository_parts::all(const std::list<dogen::physical::entities::location>& v) {
+void name_repository_parts::all(const std::list<dogen::physical::entities::name>& v) {
     all_ = v;
 }
 
-void name_repository_parts::all(const std::list<dogen::physical::entities::location>&& v) {
+void name_repository_parts::all(const std::list<dogen::physical::entities::name>&& v) {
     all_ = std::move(v);
 }
 

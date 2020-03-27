@@ -30,7 +30,7 @@
 #include <memory>
 #include <forward_list>
 #include <unordered_map>
-#include "dogen.physical/types/entities/location.hpp"
+#include "dogen.physical/types/entities/name.hpp"
 #include "dogen.physical/types/entities/name_group.hpp"
 #include "dogen.physical/types/entities/name_repository_parts.hpp"
 #include "dogen.m2t.cpp/types/transforms/repository.hpp"
@@ -68,8 +68,7 @@ public:
     /**
      * @brief Registers a helper formatter.
      */
-    void register_helper_formatter(
-        std::shared_ptr<helper_transform> hf);
+    void register_helper_formatter(std::shared_ptr<helper_transform> hf);
 
 public:
     /**
@@ -78,25 +77,22 @@ public:
     const repository& formatter_repository() const;
 
     /**
-     * @brief Returns the archetype locations for the registered
+     * @brief Returns the physical names for the registered
      * formatters.
      */
-    const std::forward_list<physical::entities::location>&
-    archetype_locations() const;
+    const std::forward_list<physical::entities::name>& physical_names() const;
 
     /**
-     * @brief Returns the archetype locations for each meta-type.
+     * @brief Returns the physical names for each meta-type.
      */
-    const std::unordered_map<std::string,
-                             physical::entities::name_group>&
-    archetype_locations_by_meta_name() const;
+    const std::unordered_map<std::string, physical::entities::name_group>&
+    physical_names_by_meta_name() const;
 
     /**
-     * @brief Returns the archetype locations for each family.
+     * @brief Returns the physical names for each family.
      */
-    const std::unordered_map<std::string,
-                             std::list<physical::entities::location>>&
-    archetype_locations_by_family() const;
+    const std::unordered_map<std::string, std::list<physical::entities::name>>&
+    physical_names_by_family() const;
 
     const physical::entities::name_repository_parts&
     physical_name_repository_parts() const;
@@ -113,13 +109,11 @@ public:
 
 private:
     repository formatter_repository_;
-    std::forward_list<physical::entities::location> archetype_locations_;
-    std::unordered_map<std::string,
-                       physical::entities::name_group>
-    archetype_locations_by_meta_name_;
-    std::unordered_map<std::string,
-                       std::list<physical::entities::location>>
-    archetype_locations_by_family_;
+    std::forward_list<physical::entities::name> physical_names_;
+    std::unordered_map<std::string, physical::entities::name_group>
+    physical_names_by_meta_name_;
+    std::unordered_map<std::string, std::list<physical::entities::name>>
+    physical_names_by_family_;
     physical::entities::name_repository_parts
     physical_name_repository_parts_;
 };

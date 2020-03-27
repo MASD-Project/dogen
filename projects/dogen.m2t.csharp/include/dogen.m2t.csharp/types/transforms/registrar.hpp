@@ -29,7 +29,7 @@
 #include <memory>
 #include <forward_list>
 #include <unordered_map>
-#include "dogen.physical/types/entities/location.hpp"
+#include "dogen.physical/types/entities/name.hpp"
 #include "dogen.physical/types/entities/name_group.hpp"
 #include "dogen.physical/types/entities/name_repository_parts.hpp"
 #include "dogen.m2t.csharp/types/transforms/repository.hpp"
@@ -54,8 +54,7 @@ public:
      */
     void register_formatter(std::shared_ptr<model_to_text_transform> f);
 
-    void register_formatter_helper(
-        std::shared_ptr<helper_transform> fh);
+    void register_formatter_helper(std::shared_ptr<helper_transform> fh);
 
 public:
     /**
@@ -67,35 +66,32 @@ public:
      * @brief Returns the archetype locations for the registered
      * formatters.
      */
-    const std::forward_list<physical::entities::location>&
-    archetype_locations() const;
+    const std::forward_list<physical::entities::name>& physical_names() const;
 
     /**
      * @brief Returns the archetype locations for each meta name.
      */
-    const std::unordered_map<std::string,
-                             physical::entities::name_group>&
-    archetype_locations_by_meta_name() const;
+    const std::unordered_map<std::string, physical::entities::name_group>&
+    physical_names_by_meta_name() const;
 
     /**
      * @brief Returns the archetype locations for each family.
      */
-    const std::unordered_map<std::string,
-                             std::list<physical::entities::location>>&
-    archetype_locations_by_family() const;
+    const std::unordered_map<std::string, std::list<physical::entities::name>>&
+    physical_names_by_family() const;
 
     const physical::entities::name_repository_parts&
     physical_name_repository_parts() const;
 
 private:
     repository formatter_repository_;
-    std::forward_list<physical::entities::location> archetype_locations_;
+    std::forward_list<physical::entities::name> physical_names_;
     std::unordered_map<std::string,
                        physical::entities::name_group>
-    archetype_locations_by_meta_name_;
+    physical_names_by_meta_name_;
     std::unordered_map<std::string,
-                       std::list<physical::entities::location>>
-    archetype_locations_by_family_;
+                       std::list<physical::entities::name>>
+    physical_names_by_family_;
     physical::entities::name_repository_parts
     physical_name_repository_parts_;
 };

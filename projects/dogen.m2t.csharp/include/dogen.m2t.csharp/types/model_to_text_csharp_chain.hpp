@@ -68,16 +68,16 @@ public:
     std::string description() const override;
     std::string id() const override;
 
-    const std::forward_list<physical::entities::location>&
-        archetype_locations() const override;
+    const std::forward_list<physical::entities::name>&
+    physical_names() const override;
 
     const std::unordered_map<std::string,
                              physical::entities::name_group>&
-    archetype_locations_by_meta_name() const override;
+    physical_names_by_meta_name() const override;
 
     const std::unordered_map<std::string,
-                             std::list<physical::entities::location>>&
-    archetype_locations_by_family() const override;
+                             std::list<physical::entities::name>>&
+    physical_names_by_family() const override;
 
     const physical::entities::name_repository_parts&
     physical_name_repository_parts() const override;

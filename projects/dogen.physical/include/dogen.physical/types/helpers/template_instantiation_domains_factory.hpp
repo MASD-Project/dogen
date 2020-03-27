@@ -28,14 +28,14 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include "dogen.physical/types/entities/location.hpp"
+#include "dogen.physical/types/entities/name.hpp"
 
 namespace dogen::physical::helpers {
 
 class template_instantiation_domains_factory final {
 public:
     static std::unordered_map<std::string, std::vector<std::string>>
-    make(const std::list<entities::location>& ls);
+    make(const std::list<entities::name>& ns);
 };
 
 }

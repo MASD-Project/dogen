@@ -68,21 +68,21 @@ private:
 private:
     static std::unordered_map<std::string, backend_feature_group>
     make_backend_feature_group(const variability::entities::feature_model& fm,
-        const physical::entities::name_repository& alrp);
+        const physical::entities::name_repository& nrp);
 
     static std::unordered_map<std::string, facet_feature_group>
     make_facet_feature_group(const variability::entities::feature_model& fm,
-        const physical::entities::name_repository& alrp);
+        const physical::entities::name_repository& nrp);
 
     static std::unordered_map<std::string, global_archetype_feature_group>
     make_global_archetype_feature_group(
         const variability::entities::feature_model& fm,
-        const physical::entities::name_repository& alrp);
+        const physical::entities::name_repository& nrp);
 
     static std::unordered_map<std::string, local_archetype_feature_group>
     make_local_archetype_feature_group(
         const variability::entities::feature_model& fm,
-        const physical::entities::name_repository& alrp);
+        const physical::entities::name_repository& nrp);
 
 private:
     static std::unordered_map<std::string, entities::backend_properties>
@@ -103,21 +103,20 @@ private:
 
     static void populate_global_archetype_location_properties(
         const variability::entities::feature_model& fm,
-        const physical::entities::name_repository& alrp,
+        const physical::entities::name_repository& nrp,
         entities::model& m);
 
     static std::unordered_map<
-        std::string,
-        logical::entities::enablement_properties>
-    obtain_local_archetype_location_properties(
+        std::string, logical::entities::enablement_properties>
+    obtain_local_enablement_properties(
         const std::unordered_map<std::string,
         local_archetype_feature_group>& fgs,
-        const std::list<physical::entities::location>& als,
+        const std::list<physical::entities::name>& ns,
         const variability::entities::configuration& cfg);
 
     static void populate_local_archetype_location_properties(
         const variability::entities::feature_model& fm,
-        const physical::entities::name_repository& alrp,
+        const physical::entities::name_repository& nrp,
         entities::model& m);
 
 public:

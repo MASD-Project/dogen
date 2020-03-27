@@ -45,7 +45,7 @@ namespace dogen::logical::transforms {
 extraction_properties_transform::feature_group
 extraction_properties_transform::make_feature_group(
     const variability::entities::feature_model& fm,
-    const std::list<physical::entities::location>& als) {
+    const std::list<physical::entities::name>& ns) {
     feature_group r;
     const variability::helpers::feature_selector s(fm);
 
@@ -56,8 +56,9 @@ extraction_properties_transform::make_feature_group(
     r.enable_backend_directories = s.get_by_name(ekd);
 
     const auto en(traits::enabled());
-    for (const auto al : als) {
-        const auto b(al.backend());
+    for (const auto n : ns) {
+        const auto& l(n.location());
+        const auto b(l.backend());
         r.enabled[b] = s.get_by_name(b, en);
     }
 
@@ -104,12 +105,12 @@ obtain_enable_backend_directories(const feature_group& fg,
     return s.get_boolean_content_or_default(fg.enable_backend_directories);
 }
 
-entities::extraction_properties extraction_properties_transform::
-make_extraction_properties(const context& ctx,
-    const std::list<physical::entities::location>& als,
+entities::extraction_properties
+extraction_properties_transform::make_extraction_properties(const context& ctx,
+    const std::list<physical::entities::name>& ns,
     const variability::entities::configuration& cfg) {
 
-    const auto fg(make_feature_group(*ctx.feature_model(), als));
+    const auto fg(make_feature_group(*ctx.feature_model(), ns));
     entities::extraction_properties r;
     r.cpp_headers_output_directory(
         obtain_cpp_headers_output_directory(fg, cfg));
@@ -136,10 +137,10 @@ void extraction_properties_transform::apply(const context& ctx,
     tracing::scoped_transform_tracer stp(lg, "feature model transform",
         transform_id, transform_id, *ctx.tracer(), m);
 
-    const auto& alrp(*ctx.physical_name_repository());
-    const auto& als(alrp.all());
+    const auto& nrp(*ctx.physical_name_repository());
+    const auto& ns(nrp.all());
     const auto& cfg(*m.root_module()->configuration());
-    const auto ep(make_extraction_properties(ctx, als, cfg));
+    const auto ep(make_extraction_properties(ctx, ns, cfg));
     m.extraction_properties(ep);
 
     stp.end_transform(m);

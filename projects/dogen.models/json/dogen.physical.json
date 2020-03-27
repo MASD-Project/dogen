@@ -85,9 +85,9 @@
       "fallback_element_type": "masd::object",
       "attributes": [
         {
-          "name": "locations",
-          "type": "std::list<location>",
-          "documentation": "All archetype locations that belong to this group.\n"
+          "name": "names",
+          "type": "std::list<name>",
+          "documentation": "All names that belong to this group.\n"
         },
         {
           "name": "canonical_locations",
@@ -103,7 +103,7 @@
       "attributes": [
         {
           "name": "all",
-          "type": "std::list<location>"
+          "type": "std::list<name>"
         },
         {
           "name": "facet_names_by_backend_name",
@@ -129,8 +129,8 @@
       "attributes": [
         {
           "name": "all",
-          "type": "std::list<location>",
-          "documentation": "All archetype locations for the archetypes owned by this transform,\nlisting all available backends, facets and archetypes.\n"
+          "type": "std::list<name>",
+          "documentation": "All physical names for the archetypes owned by this part, listing all available\nbackends, facets and archetypes.\n"
         },
         {
           "name": "by_meta_name",
@@ -141,13 +141,6 @@
     },
     {
       "name": "helpers::name_repository_builder",
-      "stereotypes": [
-        "dogen::handcrafted::typeable"
-      ],
-      "fallback_element_type": "masd::object"
-    },
-    {
-      "name": "helpers::name_repository_parts_builder",
       "stereotypes": [
         "dogen::handcrafted::typeable"
       ],

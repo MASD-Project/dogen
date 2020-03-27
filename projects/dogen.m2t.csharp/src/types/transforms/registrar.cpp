@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/forward_list_io.hpp"
-#include "dogen.physical/io/entities/location_io.hpp"
+#include "dogen.physical/io/entities/name_io.hpp"
 #include "dogen.m2t.csharp/io/transforms/repository_io.hpp"
 #include "dogen.m2t.csharp/types/transforms/registrar_error.hpp"
 #include "dogen.m2t.csharp/types/transforms/registrar.hpp"
@@ -65,28 +65,29 @@ void registrar::validate() const {
 
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state. Repository: "
                              << frp;
-    BOOST_LOG_SEV(lg, debug) << "Archetype locations: " << archetype_locations_;
+
+    BOOST_LOG_SEV(lg, debug) << "Archetype locations: " << physical_names_;
 }
 
-void registrar::
-register_formatter(std::shared_ptr<model_to_text_transform> f) {
+void registrar::register_formatter(std::shared_ptr<model_to_text_transform> f) {
     if (!f) {
         BOOST_LOG_SEV(lg, error) << null_formatter;
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
     }
 
-    const auto al(f->physical_name().location());
-    if (al.archetype().empty()) {
+    const auto n(f->physical_name());
+    const auto l(n.location());
+    if (l.archetype().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_archetype;
         BOOST_THROW_EXCEPTION(registrar_error(empty_archetype));
     }
 
-    if (al.facet().empty()) {
+    if (l.facet().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_facet_name;
         BOOST_THROW_EXCEPTION(registrar_error(empty_facet_name));
     }
 
-    if (al.backend().empty()) {
+    if (l.backend().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_model_name;
         BOOST_THROW_EXCEPTION(registrar_error(empty_model_name));
     }
@@ -98,10 +99,10 @@ register_formatter(std::shared_ptr<model_to_text_transform> f) {
      * we need not worry about canonical archetypes since this backend
      * does not have them.
      */
-    archetype_locations_.push_front(al);
+    physical_names_.push_front(n);
     const auto mn(f->meta_name().qualified().dot());
-    auto& alg(archetype_locations_by_meta_name_[mn]);
-    alg.locations().push_back(al);
+    auto& alg(physical_names_by_meta_name_[mn]);
+    alg.names().push_back(n);
 
     /*
      * Add the formatter to the index by meta-name.
@@ -114,7 +115,7 @@ register_formatter(std::shared_ptr<model_to_text_transform> f) {
      * formatter into this repository has the helpful side-effect of
      * ensuring the formatter id is unique in formatter space.
      */
-    const auto arch(al.archetype());
+    const auto arch(l.archetype());
     auto& fffn(formatter_repository_.stock_artefact_formatters_by_archetype());
     const auto pair(std::make_pair(arch, f));
     const auto inserted(fffn.insert(pair).second);
@@ -153,21 +154,19 @@ const repository& registrar::formatter_repository() const {
     return formatter_repository_;
 }
 
-const std::forward_list<physical::entities::location>&
-registrar::archetype_locations() const {
-    return archetype_locations_;
+const std::forward_list<physical::entities::name>&
+registrar::physical_names() const {
+    return physical_names_;
 }
 
-const std::unordered_map<std::string,
-                         physical::entities::name_group>&
-registrar::archetype_locations_by_meta_name() const {
-    return archetype_locations_by_meta_name_;
+const std::unordered_map<std::string, physical::entities::name_group>&
+registrar::physical_names_by_meta_name() const {
+    return physical_names_by_meta_name_;
 }
 
-const std::unordered_map<std::string,
-                         std::list<physical::entities::location>>&
-registrar::archetype_locations_by_family() const {
-    return archetype_locations_by_family_;
+const std::unordered_map<std::string, std::list<physical::entities::name>>&
+registrar::physical_names_by_family() const {
+    return physical_names_by_family_;
 }
 
 const physical::entities::name_repository_parts&

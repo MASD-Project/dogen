@@ -43,7 +43,7 @@ namespace dogen::physical::helpers {
 
 std::unordered_map<std::string, std::vector<std::string>>
 template_instantiation_domains_factory::
-make(const std::list<entities::location>& ls) {
+make(const std::list<entities::name>& ns) {
     /*
      * First we gather all of the information in sorted form, and
      * filter out any duplicate backends of facets. We are however not
@@ -60,7 +60,9 @@ make(const std::list<entities::location>& ls) {
         });
 
     const auto masd_kernel("masd");
-    for (const auto l: ls) {
+    for (const auto n: ns) {
+        const auto& l(n.location());
+
         /*
          * Kernel
          */

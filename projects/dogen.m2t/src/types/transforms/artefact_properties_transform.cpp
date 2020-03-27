@@ -74,8 +74,8 @@ update_element(const context& ctx, logical::entities::element& e) {
      * sourced from the formatting available in each backend.
      */
     auto& ap(e.artefact_properties());
-    for (const auto& al : i->second.locations()) {
-        const auto a(al.archetype());
+    for (const auto& n : i->second.names()) {
+        const auto a(n.location().archetype());
         using logical::entities::artefact_properties;
         const auto pair(std::make_pair(a, artefact_properties()));
         const auto inserted(ap.insert(pair).second);

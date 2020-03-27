@@ -26,7 +26,7 @@
 #endif
 
 #include <list>
-#include "dogen.physical/types/entities/location.hpp"
+#include "dogen.physical/types/entities/name.hpp"
 #include "dogen.physical/types/entities/name_group.hpp"
 #include "dogen.physical/types/entities/name_repository_parts.hpp"
 #include "dogen.physical/types/entities/name_repository.hpp"
@@ -35,16 +35,16 @@ namespace dogen::physical::helpers {
 
 class name_repository_builder final {
 private:
-    void validate(const std::list<entities::location>& als) const;
-    void populate_locations(const std::list<entities::location>& als);
+    void validate(const std::list<entities::name>& ns) const;
+    void populate_names(const std::list<entities::name>& ns);
     void populate_archetypes_by_facet_by_backend();
     void populate_facet_names_by_backend_name();
     void populate_formatter_names_by_backend_name();
 
 public:
-    void add(const std::list<entities::location>& als);
-    void add(const std::unordered_map<std::string, entities::name_group>&
-        locations_by_meta_name);
+    void add(const std::list<entities::name>& ns);
+    void add(const std::unordered_map<std::string,
+        entities::name_group>& by_meta_name);
 
 public:
     void add(const entities::name_repository_parts& parts);

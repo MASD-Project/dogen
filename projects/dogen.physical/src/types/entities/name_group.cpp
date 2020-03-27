@@ -23,19 +23,19 @@
 namespace dogen::physical::entities {
 
 name_group::name_group(
-    const std::list<dogen::physical::entities::location>& locations,
+    const std::list<dogen::physical::entities::name>& names,
     const std::unordered_map<std::string, std::string>& canonical_locations)
-    : locations_(locations),
+    : names_(names),
       canonical_locations_(canonical_locations) { }
 
 void name_group::swap(name_group& other) noexcept {
     using std::swap;
-    swap(locations_, other.locations_);
+    swap(names_, other.names_);
     swap(canonical_locations_, other.canonical_locations_);
 }
 
 bool name_group::operator==(const name_group& rhs) const {
-    return locations_ == rhs.locations_ &&
+    return names_ == rhs.names_ &&
         canonical_locations_ == rhs.canonical_locations_;
 }
 
@@ -45,20 +45,20 @@ name_group& name_group::operator=(name_group other) {
     return *this;
 }
 
-const std::list<dogen::physical::entities::location>& name_group::locations() const {
-    return locations_;
+const std::list<dogen::physical::entities::name>& name_group::names() const {
+    return names_;
 }
 
-std::list<dogen::physical::entities::location>& name_group::locations() {
-    return locations_;
+std::list<dogen::physical::entities::name>& name_group::names() {
+    return names_;
 }
 
-void name_group::locations(const std::list<dogen::physical::entities::location>& v) {
-    locations_ = v;
+void name_group::names(const std::list<dogen::physical::entities::name>& v) {
+    names_ = v;
 }
 
-void name_group::locations(const std::list<dogen::physical::entities::location>&& v) {
-    locations_ = std::move(v);
+void name_group::names(const std::list<dogen::physical::entities::name>&& v) {
+    names_ = std::move(v);
 }
 
 const std::unordered_map<std::string, std::string>& name_group::canonical_locations() const {

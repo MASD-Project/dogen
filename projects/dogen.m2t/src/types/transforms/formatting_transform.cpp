@@ -66,13 +66,13 @@ formatting_transform::to_formatting_style(const std::string& s) {
 std::unordered_map<std::string, formatting_transform::feature_group>
 formatting_transform::make_feature_groups(
     const variability::entities::feature_model& fm,
-    const std::list<physical::entities::location>& als) {
+    const std::list<physical::entities::name>& ns) {
 
     BOOST_LOG_SEV(lg, debug) << "Creating feature groups.";
 
     std::unordered_map<std::string, formatting_transform::feature_group> r;
-    for (const auto al : als) {
-        const auto arch(al.archetype());
+    for (const auto n : ns) {
+        const auto arch(n.location().archetype());
 
         feature_group fg;
         const variability::helpers::feature_selector s(fm);
@@ -165,9 +165,9 @@ void formatting_transform::apply(const context& ctx, entities::model& m) {
     tracing::scoped_transform_tracer stp(lg, "formatting transform",
         transform_id, m.name().qualified().dot(), *ctx.tracer(), m);
 
-    const auto& als(ctx.physical_name_repository()->all());
+    const auto& ns(ctx.physical_name_repository()->all());
     const auto& fm(*ctx.feature_model());
-    const auto fgs(make_feature_groups(fm, als));
+    const auto fgs(make_feature_groups(fm, ns));
     for(auto& ptr : m.elements())
         apply(fgs, *ptr);
 

@@ -72,24 +72,24 @@ apply(const formattables::model& fm) const {
     return wf.execute(fm);
 }
 
-const std::forward_list<physical::entities::location>&
-model_to_text_csharp_chain::archetype_locations() const {
+const std::forward_list<physical::entities::name>&
+model_to_text_csharp_chain::physical_names() const {
     const auto& rg(transforms::workflow::registrar());
-    return rg.archetype_locations();
+    return rg.physical_names();
 }
 
 const std::unordered_map<std::string,
                          physical::entities::name_group>&
-model_to_text_csharp_chain::archetype_locations_by_meta_name() const {
+model_to_text_csharp_chain::physical_names_by_meta_name() const {
     const auto& rg(transforms::workflow::registrar());
-    return rg.archetype_locations_by_meta_name();
+    return rg.physical_names_by_meta_name();
 }
 
 const std::unordered_map<std::string,
-                         std::list<physical::entities::location>>&
-model_to_text_csharp_chain::archetype_locations_by_family() const {
+                         std::list<physical::entities::name>>&
+model_to_text_csharp_chain::physical_names_by_family() const {
     const auto& rg(transforms::workflow::registrar());
-    return rg.archetype_locations_by_family();
+    return rg.physical_names_by_family();
 }
 
 const physical::entities::name_repository_parts&

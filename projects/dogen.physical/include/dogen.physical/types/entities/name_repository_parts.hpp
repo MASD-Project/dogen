@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen.physical/types/entities/location.hpp"
+#include "dogen.physical/types/entities/name.hpp"
 #include "dogen.physical/types/entities/name_group.hpp"
 
 namespace dogen::physical::entities {
@@ -43,19 +43,19 @@ public:
 
 public:
     name_repository_parts(
-        const std::list<dogen::physical::entities::location>& all,
+        const std::list<dogen::physical::entities::name>& all,
         const std::unordered_map<std::string, dogen::physical::entities::name_group>& by_meta_name);
 
 public:
     /**
-     * @brief All archetype locations for the archetypes owned by this transform,
-     * listing all available backends, facets and archetypes.
+     * @brief All physical names for the archetypes owned by this part, listing all available
+     * backends, facets and archetypes.
      */
     /**@{*/
-    const std::list<dogen::physical::entities::location>& all() const;
-    std::list<dogen::physical::entities::location>& all();
-    void all(const std::list<dogen::physical::entities::location>& v);
-    void all(const std::list<dogen::physical::entities::location>&& v);
+    const std::list<dogen::physical::entities::name>& all() const;
+    std::list<dogen::physical::entities::name>& all();
+    void all(const std::list<dogen::physical::entities::name>& v);
+    void all(const std::list<dogen::physical::entities::name>&& v);
     /**@}*/
 
     /**
@@ -79,7 +79,7 @@ public:
     name_repository_parts& operator=(name_repository_parts other);
 
 private:
-    std::list<dogen::physical::entities::location> all_;
+    std::list<dogen::physical::entities::name> all_;
     std::unordered_map<std::string, dogen::physical::entities::name_group> by_meta_name_;
 };
 

@@ -41,78 +41,84 @@ const std::string duplicate_archetype("Archetype name already inserted: ");
 namespace dogen::physical::helpers {
 
 void name_repository_builder::
-validate(const std::list<entities::location>& als) const {
-    BOOST_LOG_SEV(lg, debug) << "Validating archetype locations.";
+validate(const std::list<entities::name>& ns) const {
+    BOOST_LOG_SEV(lg, debug) << "Validating physical names.";
 
-    for (const auto& al : als) {
+    for (const auto& n : ns) {
         /*
          * We expect all three key coordinates of the location to be
          * populated.
          */
-        if (al.archetype().empty()) {
+        const auto& l(n.location());
+        if (l.archetype().empty()) {
             BOOST_LOG_SEV(lg, error) << empty_archetype;
             BOOST_THROW_EXCEPTION(building_error(empty_archetype));
         }
 
-        if (al.backend().empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_backend << al.archetype();
+        if (l.backend().empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_backend << l.archetype();
             BOOST_THROW_EXCEPTION(
-                building_error(empty_backend + al.archetype()));
+                building_error(empty_backend + l.archetype()));
         }
 
-        if (al.facet().empty()) {
-            BOOST_LOG_SEV(lg, error) << empty_facet << al.archetype();
-            BOOST_THROW_EXCEPTION(building_error(empty_facet + al.archetype()));
+        if (l.facet().empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_facet << l.archetype();
+            BOOST_THROW_EXCEPTION(building_error(empty_facet + l.archetype()));
         }
     }
-    BOOST_LOG_SEV(lg, debug) << "Archetype locations are valid.";
+    BOOST_LOG_SEV(lg, debug) << "Physical names are valid.";
 }
 
 void name_repository_builder::
-populate_locations(const std::list<entities::location>& als) {
-    for(const auto& al : als)
-        repository_.all().push_back(al);
+populate_names(const std::list<entities::name>& ns) {
+    for(const auto& n : ns)
+        repository_.all().push_back(n);
 }
 
 void name_repository_builder::populate_facet_names_by_backend_name() {
     auto& fnbkn(repository_.facet_names_by_backend_name());
-    for (const auto& al : repository_.all())
-        fnbkn[al.backend()].insert(al.facet());
+    for (const auto& n : repository_.all()) {
+        const auto& l(n.location());
+        fnbkn[l.backend()].insert(l.facet());
+    }
 }
 
 void name_repository_builder::populate_formatter_names_by_backend_name() {
     auto& fnbkn(repository_.formatter_names_by_backend_name());
-    for (const auto& al : repository_.all())
-        fnbkn[al.backend()].insert(al.archetype());
+    for (const auto& n : repository_.all()) {
+        const auto& l(n.location());
+        fnbkn[l.backend()].insert(l.archetype());
+    }
 }
 
 void name_repository_builder::populate_archetypes_by_facet_by_backend() {
     auto& abbbf(repository_.by_backend_by_facet());
-    for (const auto& al : repository_.all())
-        abbbf[al.backend()][al.facet()].push_back(al.archetype());
+    for (const auto& n : repository_.all()) {
+        const auto& l(n.location());
+        abbbf[l.backend()][l.facet()].push_back(l.archetype());
+    }
 }
 
-void name_repository_builder::add(const std::list<entities::location>& als) {
-    BOOST_LOG_SEV(lg, debug) << "Adding list of archetype location.";
+void name_repository_builder::add(const std::list<entities::name>& ns) {
+    BOOST_LOG_SEV(lg, debug) << "Adding list of physical names.";
 
-    validate(als);
-    populate_locations(als);
+    validate(ns);
+    populate_names(ns);
 
-    BOOST_LOG_SEV(lg, debug) << "Added archetype location list. ";
+    BOOST_LOG_SEV(lg, debug) << "Added list of physical names. ";
 }
 
 void name_repository_builder::
-add(const std::unordered_map<std::string, entities::name_group>&
-    locations_by_meta_name) {
+add(const std::unordered_map<std::string, entities::name_group>& by_meta_name) {
     auto& albmn(repository_.by_meta_name());
-    for (const auto& pair : locations_by_meta_name) {
+    for (const auto& pair : by_meta_name) {
         /*
          * We start by inserting the archetype locations into the
          * overall container with all archetype locations across all
          * backends.
          */
         const auto& src(pair.second);
-        add(src.locations());
+        add(src.names());
 
         /*
          * Now lets populate the meta-name specific container.
@@ -125,8 +131,8 @@ add(const std::unordered_map<std::string, entities::name_group>&
          * level because each backend is reusing the same yarn
          * meta-types.
          */
-        for (const auto& al : src.locations())
-            dst.locations().push_back(al);
+        for (const auto& n : src.names())
+            dst.names().push_back(n);
 
         /*
          * However, when it comes down to the canonical archetype
