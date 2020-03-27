@@ -18,21 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_M2T_IO_ENTITIES_GLOBAL_ARCHETYPE_LOCATION_PROPERTIES_IO_HPP
-#define DOGEN_M2T_IO_ENTITIES_GLOBAL_ARCHETYPE_LOCATION_PROPERTIES_IO_HPP
+#ifndef DOGEN_M2T_TYPES_ENTITIES_GLOBAL_ENABLEMENT_PROPERTIES_FWD_HPP
+#define DOGEN_M2T_TYPES_ENTITIES_GLOBAL_ENABLEMENT_PROPERTIES_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen.m2t/types/entities/global_archetype_location_properties.hpp"
-
 namespace dogen::m2t::entities {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::m2t::entities::global_archetype_location_properties& v);
+class global_enablement_properties;
 
 }
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_M2T_TYPES_ENTITIES_GLOBAL_ARCHETYPE_LOCATION_PROPERTIES_HPP
-#define DOGEN_M2T_TYPES_ENTITIES_GLOBAL_ARCHETYPE_LOCATION_PROPERTIES_HPP
+#ifndef DOGEN_M2T_TYPES_ENTITIES_GLOBAL_ENABLEMENT_PROPERTIES_HPP
+#define DOGEN_M2T_TYPES_ENTITIES_GLOBAL_ENABLEMENT_PROPERTIES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,15 +35,15 @@
 
 namespace dogen::m2t::entities {
 
-class global_archetype_location_properties final {
+class global_enablement_properties final {
 public:
-    global_archetype_location_properties() = default;
-    global_archetype_location_properties(const global_archetype_location_properties&) = default;
-    global_archetype_location_properties(global_archetype_location_properties&&) = default;
-    ~global_archetype_location_properties() = default;
+    global_enablement_properties() = default;
+    global_enablement_properties(const global_enablement_properties&) = default;
+    global_enablement_properties(global_enablement_properties&&) = default;
+    ~global_enablement_properties() = default;
 
 public:
-    global_archetype_location_properties(
+    global_enablement_properties(
         const std::unordered_map<std::string, dogen::m2t::entities::backend_properties>& backend_properties,
         const std::unordered_map<std::string, dogen::m2t::entities::facet_properties>& facet_properties,
         const std::unordered_map<std::string, dogen::m2t::entities::archetype_properties>& archetype_properties,
@@ -71,14 +71,14 @@ public:
     void denormalised_archetype_properties(const std::unordered_map<std::string, dogen::m2t::entities::denormalised_archetype_properties>&& v);
 
 public:
-    bool operator==(const global_archetype_location_properties& rhs) const;
-    bool operator!=(const global_archetype_location_properties& rhs) const {
+    bool operator==(const global_enablement_properties& rhs) const;
+    bool operator!=(const global_enablement_properties& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(global_archetype_location_properties& other) noexcept;
-    global_archetype_location_properties& operator=(global_archetype_location_properties other);
+    void swap(global_enablement_properties& other) noexcept;
+    global_enablement_properties& operator=(global_enablement_properties other);
 
 private:
     std::unordered_map<std::string, dogen::m2t::entities::backend_properties> backend_properties_;
@@ -93,8 +93,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::m2t::entities::global_archetype_location_properties& lhs,
-    dogen::m2t::entities::global_archetype_location_properties& rhs) {
+    dogen::m2t::entities::global_enablement_properties& lhs,
+    dogen::m2t::entities::global_enablement_properties& rhs) {
     lhs.swap(rhs);
 }
 

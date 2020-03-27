@@ -43,7 +43,7 @@
 #include "dogen.logical/types/entities/orm/model_properties.hpp"
 #include "dogen.logical/types/entities/extraction_properties.hpp"
 #include "dogen.logical/types/entities/structural/module_fwd.hpp"
-#include "dogen.m2t/types/entities/global_archetype_location_properties.hpp"
+#include "dogen.m2t/types/entities/global_enablement_properties.hpp"
 
 namespace dogen::m2t::entities {
 
@@ -77,7 +77,7 @@ public:
         const std::unordered_set<dogen::logical::entities::technical_space>& all_technical_spaces,
         const boost::optional<dogen::logical::entities::orm::model_properties>& orm_properties,
         const std::unordered_set<dogen::m2t::entities::element_archetype>& enabled_archetype_for_element,
-        const dogen::m2t::entities::global_archetype_location_properties& global_archetype_location_properties,
+        const dogen::m2t::entities::global_enablement_properties& global_enablement_properties,
         const dogen::logical::entities::extraction_properties& extraction_properties);
 
 public:
@@ -196,10 +196,10 @@ public:
     void enabled_archetype_for_element(const std::unordered_set<dogen::m2t::entities::element_archetype>& v);
     void enabled_archetype_for_element(const std::unordered_set<dogen::m2t::entities::element_archetype>&& v);
 
-    const dogen::m2t::entities::global_archetype_location_properties& global_archetype_location_properties() const;
-    dogen::m2t::entities::global_archetype_location_properties& global_archetype_location_properties();
-    void global_archetype_location_properties(const dogen::m2t::entities::global_archetype_location_properties& v);
-    void global_archetype_location_properties(const dogen::m2t::entities::global_archetype_location_properties&& v);
+    const dogen::m2t::entities::global_enablement_properties& global_enablement_properties() const;
+    dogen::m2t::entities::global_enablement_properties& global_enablement_properties();
+    void global_enablement_properties(const dogen::m2t::entities::global_enablement_properties& v);
+    void global_enablement_properties(const dogen::m2t::entities::global_enablement_properties&& v);
 
     const dogen::logical::entities::extraction_properties& extraction_properties() const;
     dogen::logical::entities::extraction_properties& extraction_properties();
@@ -231,7 +231,7 @@ private:
     std::unordered_set<dogen::logical::entities::technical_space> all_technical_spaces_;
     boost::optional<dogen::logical::entities::orm::model_properties> orm_properties_;
     std::unordered_set<dogen::m2t::entities::element_archetype> enabled_archetype_for_element_;
-    dogen::m2t::entities::global_archetype_location_properties global_archetype_location_properties_;
+    dogen::m2t::entities::global_enablement_properties global_enablement_properties_;
     dogen::logical::entities::extraction_properties extraction_properties_;
 };
 

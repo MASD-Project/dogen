@@ -23,8 +23,8 @@
 #include "dogen.m2t/io/entities/facet_properties_io.hpp"
 #include "dogen.m2t/io/entities/backend_properties_io.hpp"
 #include "dogen.m2t/io/entities/archetype_properties_io.hpp"
+#include "dogen.m2t/io/entities/global_enablement_properties_io.hpp"
 #include "dogen.m2t/io/entities/denormalised_archetype_properties_io.hpp"
-#include "dogen.m2t/io/entities/global_archetype_location_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -108,9 +108,9 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace dogen::m2t::entities {
 
-std::ostream& operator<<(std::ostream& s, const global_archetype_location_properties& v) {
+std::ostream& operator<<(std::ostream& s, const global_enablement_properties& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::m2t::entities::global_archetype_location_properties\"" << ", "
+      << "\"__type__\": " << "\"dogen::m2t::entities::global_enablement_properties\"" << ", "
       << "\"backend_properties\": " << v.backend_properties() << ", "
       << "\"facet_properties\": " << v.facet_properties() << ", "
       << "\"archetype_properties\": " << v.archetype_properties() << ", "

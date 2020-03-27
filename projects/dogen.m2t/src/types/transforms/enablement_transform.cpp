@@ -363,7 +363,7 @@ apply(const context& ctx, entities::model& m) {
 
     const auto& alrp(*ctx.physical_name_repository());
     const auto& albmn(alrp.by_meta_name());
-    const auto& galp(m.global_archetype_location_properties()
+    const auto& galp(m.global_enablement_properties()
         .denormalised_archetype_properties());
     std::unordered_set<entities::element_archetype> eafe;
     for(auto& ptr : m.elements()) {

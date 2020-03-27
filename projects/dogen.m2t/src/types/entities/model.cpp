@@ -62,7 +62,7 @@ model::model(model&& rhs)
       all_technical_spaces_(std::move(rhs.all_technical_spaces_)),
       orm_properties_(std::move(rhs.orm_properties_)),
       enabled_archetype_for_element_(std::move(rhs.enabled_archetype_for_element_)),
-      global_archetype_location_properties_(std::move(rhs.global_archetype_location_properties_)),
+      global_enablement_properties_(std::move(rhs.global_enablement_properties_)),
       extraction_properties_(std::move(rhs.extraction_properties_)) { }
 
 model::model(
@@ -80,7 +80,7 @@ model::model(
     const std::unordered_set<dogen::logical::entities::technical_space>& all_technical_spaces,
     const boost::optional<dogen::logical::entities::orm::model_properties>& orm_properties,
     const std::unordered_set<dogen::m2t::entities::element_archetype>& enabled_archetype_for_element,
-    const dogen::m2t::entities::global_archetype_location_properties& global_archetype_location_properties,
+    const dogen::m2t::entities::global_enablement_properties& global_enablement_properties,
     const dogen::logical::entities::extraction_properties& extraction_properties)
     : name_(name),
       meta_name_(meta_name),
@@ -96,7 +96,7 @@ model::model(
       all_technical_spaces_(all_technical_spaces),
       orm_properties_(orm_properties),
       enabled_archetype_for_element_(enabled_archetype_for_element),
-      global_archetype_location_properties_(global_archetype_location_properties),
+      global_enablement_properties_(global_enablement_properties),
       extraction_properties_(extraction_properties) { }
 
 void model::swap(model& other) noexcept {
@@ -115,7 +115,7 @@ void model::swap(model& other) noexcept {
     swap(all_technical_spaces_, other.all_technical_spaces_);
     swap(orm_properties_, other.orm_properties_);
     swap(enabled_archetype_for_element_, other.enabled_archetype_for_element_);
-    swap(global_archetype_location_properties_, other.global_archetype_location_properties_);
+    swap(global_enablement_properties_, other.global_enablement_properties_);
     swap(extraction_properties_, other.extraction_properties_);
 }
 
@@ -134,7 +134,7 @@ bool model::operator==(const model& rhs) const {
         all_technical_spaces_ == rhs.all_technical_spaces_ &&
         orm_properties_ == rhs.orm_properties_ &&
         enabled_archetype_for_element_ == rhs.enabled_archetype_for_element_ &&
-        global_archetype_location_properties_ == rhs.global_archetype_location_properties_ &&
+        global_enablement_properties_ == rhs.global_enablement_properties_ &&
         extraction_properties_ == rhs.extraction_properties_;
 }
 
@@ -344,20 +344,20 @@ void model::enabled_archetype_for_element(const std::unordered_set<dogen::m2t::e
     enabled_archetype_for_element_ = std::move(v);
 }
 
-const dogen::m2t::entities::global_archetype_location_properties& model::global_archetype_location_properties() const {
-    return global_archetype_location_properties_;
+const dogen::m2t::entities::global_enablement_properties& model::global_enablement_properties() const {
+    return global_enablement_properties_;
 }
 
-dogen::m2t::entities::global_archetype_location_properties& model::global_archetype_location_properties() {
-    return global_archetype_location_properties_;
+dogen::m2t::entities::global_enablement_properties& model::global_enablement_properties() {
+    return global_enablement_properties_;
 }
 
-void model::global_archetype_location_properties(const dogen::m2t::entities::global_archetype_location_properties& v) {
-    global_archetype_location_properties_ = v;
+void model::global_enablement_properties(const dogen::m2t::entities::global_enablement_properties& v) {
+    global_enablement_properties_ = v;
 }
 
-void model::global_archetype_location_properties(const dogen::m2t::entities::global_archetype_location_properties&& v) {
-    global_archetype_location_properties_ = std::move(v);
+void model::global_enablement_properties(const dogen::m2t::entities::global_enablement_properties&& v) {
+    global_enablement_properties_ = std::move(v);
 }
 
 const dogen::logical::entities::extraction_properties& model::extraction_properties() const {

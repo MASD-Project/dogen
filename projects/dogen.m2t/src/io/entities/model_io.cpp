@@ -30,7 +30,7 @@
 #include "dogen.logical/io/entities/structural/module_io.hpp"
 #include "dogen.logical/io/entities/orm/model_properties_io.hpp"
 #include "dogen.logical/io/entities/extraction_properties_io.hpp"
-#include "dogen.m2t/io/entities/global_archetype_location_properties_io.hpp"
+#include "dogen.m2t/io/entities/global_enablement_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -200,7 +200,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"all_technical_spaces\": " << v.all_technical_spaces() << ", "
       << "\"orm_properties\": " << v.orm_properties() << ", "
       << "\"enabled_archetype_for_element\": " << v.enabled_archetype_for_element() << ", "
-      << "\"global_archetype_location_properties\": " << v.global_archetype_location_properties() << ", "
+      << "\"global_enablement_properties\": " << v.global_enablement_properties() << ", "
       << "\"extraction_properties\": " << v.extraction_properties()
       << " }";
     return(s);

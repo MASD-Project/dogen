@@ -226,7 +226,7 @@ populate_global_archetype_location_properties(
     const auto aftg(make_global_archetype_feature_group(fm, alrp));
 
     const auto& cfg(*m.root_module()->configuration());
-    auto& galp(m.global_archetype_location_properties());
+    auto& galp(m.global_enablement_properties());
     galp.backend_properties(obtain_backend_properties(bftg, cfg));
     galp.facet_properties(obtain_facet_properties(fftg, cfg));
     galp.archetype_properties(obtain_archetype_properties(aftg, cfg));

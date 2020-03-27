@@ -105,7 +105,7 @@ model adapter::adapt(const transforms::repository& frp,
     model r;
     r.name(m.name());
 
-    const auto& fp(m.global_archetype_location_properties().facet_properties());
+    const auto& fp(m.global_enablement_properties().facet_properties());
     for (const auto& pair : fp) {
         facet_properties fp;
         fp.enabled(pair.second.enabled());

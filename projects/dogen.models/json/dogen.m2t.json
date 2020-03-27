@@ -85,8 +85,8 @@
           "type": "std::unordered_set<element_archetype>"
         },
         {
-          "name": "global_archetype_location_properties",
-          "type": "global_archetype_location_properties"
+          "name": "global_enablement_properties",
+          "type": "global_enablement_properties"
         },
         {
           "name": "extraction_properties",
@@ -145,7 +145,7 @@
       ]
     },
     {
-      "name": "entities::global_archetype_location_properties",
+      "name": "entities::global_enablement_properties",
       "fallback_element_type": "masd::object",
       "attributes": [
         {

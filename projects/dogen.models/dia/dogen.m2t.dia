@@ -466,10 +466,10 @@ spaces.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#global_archetype_location_properties#</dia:string>
+            <dia:string>#global_enablement_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#global_archetype_location_properties#</dia:string>
+            <dia:string>#global_enablement_properties#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -1081,7 +1081,7 @@ spaces.#</dia:string>
         <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#global_archetype_location_properties#</dia:string>
+        <dia:string>#global_enablement_properties#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
