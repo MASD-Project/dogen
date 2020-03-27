@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.physical/types/helpers/qualified_name_builder.hpp"
 #include "dogen.physical/types/helpers/building_error.hpp"
 #include "dogen.physical/types/helpers/name_builder.hpp"
 
@@ -29,7 +30,6 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("physical.helpers.name_builder"));
 
 const std::string kernel_name("masd");
-const std::string dot(".");
 
 const std::string empty_backend("Backend cannot be empty.");
 const std::string empty_facet("Facet cannot be empty.");
@@ -94,31 +94,36 @@ void name_builder::validate() {
 }
 
 entities::name name_builder::build() {
+    /*
+     * Ensure what has been filled in thus far is valid
+     */
     validate();
 
+    /*
+     * Kernel is always hard-coded to MASD.
+     */
     auto& l(name_.location());
     l.kernel(kernel_name);
-    std::string qn(kernel_name + dot + l.backend());
 
+    /*
+     * Simple and qualified names depend on what has been filled in.
+     */
     const bool has_part(!l.part().empty());
-    if (has_part)
-        qn += dot + l.part();
-
     const bool has_facet(!l.facet().empty());
-    if (has_facet)
-        qn += dot + l.facet();
-
     const bool has_archetype(!l.archetype().empty());
-    if (has_archetype)
-        qn += dot + l.archetype();
-
-    name_.qualified(qn);
-    if (has_archetype)
+    if (has_archetype) {
         name_.simple(l.archetype());
-    else if (has_facet)
+        name_.qualified(qualified_name_builder::build_archetype(l));
+    } else if (has_facet) {
         name_.simple(l.facet());
-    else if (has_part)
+        name_.qualified(qualified_name_builder::build_facet(l));
+    } else if (has_part) {
         name_.simple(l.part());
+        name_.qualified(qualified_name_builder::build_part(l));
+    } else {
+        name_.simple(l.backend());
+        name_.qualified(qualified_name_builder::build_backend(l));
+    }
 
     return name_;
 }
