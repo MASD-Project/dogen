@@ -39,8 +39,8 @@ std::string enumerable_helper::family() const {
 std::list<std::string>
 enumerable_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
-        traits::class_archetype(),
-        traits::primitive_archetype()
+        traits::class_archetype_qn(),
+        traits::primitive_archetype_qn()
     });
     return r;
 }

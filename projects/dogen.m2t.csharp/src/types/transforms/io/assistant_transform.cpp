@@ -30,7 +30,7 @@
 namespace dogen::m2t::csharp::transforms::io {
 
 std::string assistant_transform::static_id() {
-    return traits::assistant_archetype();
+    return traits::assistant_archetype_qn();
 }
 
 std::string assistant_transform::id() const {

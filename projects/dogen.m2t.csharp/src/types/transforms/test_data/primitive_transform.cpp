@@ -30,7 +30,7 @@
 namespace dogen::m2t::csharp::transforms::test_data {
 
 std::string primitive_transform::static_id() {
-    return traits::primitive_archetype();
+    return traits::primitive_archetype_qn();
 }
 
 std::string primitive_transform::id() const {

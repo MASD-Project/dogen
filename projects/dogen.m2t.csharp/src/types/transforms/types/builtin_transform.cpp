@@ -29,7 +29,7 @@
 namespace dogen::m2t::csharp::transforms::types {
 
 std::string builtin_transform::static_id() {
-    return traits::builtin_archetype();
+    return traits::builtin_archetype_qn();
 }
 
 std::string builtin_transform::id() const {

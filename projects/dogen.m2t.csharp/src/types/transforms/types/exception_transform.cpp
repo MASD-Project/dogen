@@ -30,7 +30,7 @@
 namespace dogen::m2t::csharp::transforms::types {
 
 std::string exception_transform::static_id() {
-    return traits::exception_archetype();
+    return traits::exception_archetype_qn();
 }
 
 std::string exception_transform::id() const {

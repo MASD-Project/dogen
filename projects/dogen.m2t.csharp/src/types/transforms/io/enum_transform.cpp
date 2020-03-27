@@ -30,7 +30,7 @@
 namespace dogen::m2t::csharp::transforms::io {
 
 std::string enum_transform::static_id() {
-    return traits::enum_archetype();
+    return traits::enum_archetype_qn();
 }
 
 std::string enum_transform::id() const {

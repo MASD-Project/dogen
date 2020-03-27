@@ -33,7 +33,7 @@
 namespace dogen::m2t::csharp::transforms::visual_studio {
 
 std::string solution_transform::static_id() {
-    return traits::solution_archetype();
+    return traits::solution_archetype_qn();
 }
 
 std::string solution_transform::id() const {
