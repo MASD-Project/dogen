@@ -42,7 +42,8 @@ const std::string test_module("dogen.orchestration.tests");
 
 struct initializer {
     initializer() {
-        SETUP_TEST_LOG("initializer");
+        SETUP_TEST_LOG_SOURCE("initializer");
+        BOOST_LOG_SEV(lg, debug) << "Started initialisation.";
 
 #if defined (_WIN32)
 #if defined(DEBUG) || defined(_DEBUG)
@@ -73,6 +74,7 @@ struct initializer {
 #ifdef DOGEN_HAVE_RELATIONAL_MODEL
         dogen::relational::initializer::initialize();
 #endif // DOGEN_HAVE_RELATIONAL_MODEL
+        BOOST_LOG_SEV(lg, debug) << "Finished initialisation.";
     }
 };
 
