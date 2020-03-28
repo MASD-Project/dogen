@@ -26,7 +26,7 @@ namespace dogen::logical::helpers {
 entities::location meta_name_factory::make_location() {
     entities::location r;
     r.external_modules().push_back("dogen");
-    r.model_modules().push_back("assets");
+    r.model_modules().push_back("logical");
     r.internal_modules().push_back("entities");
     return r;
 }
