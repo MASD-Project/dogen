@@ -36,12 +36,12 @@ namespace dogen::logical::transforms {
  * @brief Transformation that specialises in expanding attributes
  * across the model.
  *
- * @section assets_attributes_transform_0 Model requirements
+ * @section logical_attributes_transform_0 Model requirements
  *
  * The basic expansion of local attributes and of object templates is
  * expected to have taken place.
  *
- * @section assets_attributes_transform_1 Types of attributes
+ * @section logical_attributes_transform_1 Types of attributes
  *
  * There are three sets of attributes the expander is interested in:
  *
@@ -51,7 +51,7 @@ namespace dogen::logical::transforms {
  *
  * Lets cover each of these in more details.
  *
- * @subsection assets_attributes_transform_11 Local attributes
+ * @subsection logical_attributes_transform_11 Local attributes
  *
  * On a natural, pre-expanded state, local attributes encompass only
  * the attributes defined on the class directly. The transform behaves
@@ -81,7 +81,7 @@ namespace dogen::logical::transforms {
  * source code - say as C++ concepts - all we require is the set of
  * all attributes for that object template (see below).
  *
- * @subsection assets_attributes_transform_12 Inherited attributes
+ * @subsection logical_attributes_transform_12 Inherited attributes
  *
  * These provide an easy way to look-up which attributes one has
  * inherited and from whom. For objects, the inherited attributes are
@@ -93,7 +93,7 @@ namespace dogen::logical::transforms {
  * attributes of the parent. However, we haven't yet found a good use
  * case for them.
  *
- * @subsection assets_attributes_transform_13 All attributes
+ * @subsection logical_attributes_transform_13 All attributes
  *
  * The "all attribute" set contains every single attribute. It is the
  * sum all the local attributes with all of the inherited

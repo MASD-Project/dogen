@@ -41,11 +41,11 @@ namespace dogen::logical::transforms {
  * @brief Transform that specialises in indexing associations for
  * objects.
  *
- * @section assets_associations_transform_0 Requirements
+ * @section logical_associations_transform_0 Requirements
  *
  * The transform of local attributes is expected to have taken place.
  *
- * @section assets_associations_transform_1 Indexing Process
+ * @section logical_associations_transform_1 Indexing Process
  *
  * The transform goes through all attributes in objects and, for every
  * name tree, unpacks all the associations implied by their presence.

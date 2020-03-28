@@ -36,20 +36,20 @@ namespace dogen::logical::transforms {
  * @brief Transform that specialises in indexing
  * object-template-related relationships across the model.
  *
- * @section assets_object_templates_transform_0 Model requirements
+ * @section logical_object_templates_transform_0 Model requirements
  *
  * The object templates transform expects to receive a merged
  * endmodel, but in practice it makes no requirements in terms of any
  * dependent transforms.
  *
- * @section assets_object_templates_transform_1 Transformation
+ * @section logical_object_templates_transform_1 Transformation
  *
  * The object templates expander only touches two types of model
  * elements: object templates and objects. This is because these are
  * the only two elements involved in relationships that deal with
  * object templates. Each of these are processed differently.
  *
- * @subsection assets_object_templates_transform_11 First stage: expanding object templates
+ * @subsection logical_object_templates_transform_11 First stage: expanding object templates
   *
  * The object templates transform starts by processing all object
  * templates. Each object template goes through two steps: @e
@@ -71,7 +71,7 @@ namespace dogen::logical::transforms {
  * every time any alteration is done to the object templates
  * hierarchy.
  *
- * @subsection assets_object_templates_transform_12 Second stage: expand objects
+ * @subsection logical_object_templates_transform_12 Second stage: expand objects
  *
  * The object templates expander is also responsible for updating the
  * instantiated object templates in an object - if any. Thus, only
