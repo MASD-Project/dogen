@@ -11651,6 +11651,8 @@ Links:
   based.
 - [[https://github.com/tcbrindle/pretty_print.hpp][pretty_print.hpp]]: another single-header C++14 library for printing
   STL-compatible container types to IO streams.
+- [[https://lwn.net/Articles/815265/][Improving pretty-printing in Python]]: some ideas on the problem but
+  for python.
 
 ** Miscellaneous
 

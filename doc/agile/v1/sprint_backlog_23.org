@@ -12,39 +12,39 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-27 Fri 17:21]
-| <75>                                                   |         |       |      |       |
-| Headline                                               | Time    |       |      |     % |
-|--------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                           | *53:54* |       |      | 100.0 |
-|--------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                | 53:54   |       |      | 100.0 |
-| Active                                                 |         | 53:54 |      | 100.0 |
-| Edit release notes for previous sprint                 |         |       | 7:27 |  13.8 |
-| Create a demo and presentation for previous sprint     |         |       | 0:28 |   0.9 |
-| Sprint and product backlog grooming                    |         |       | 4:11 |   7.8 |
-| Rename archetypes model to physical model              |         |       | 0:28 |   0.9 |
-| Rename assets model to logical model                   |         |       | 0:29 |   0.9 |
-| Consider renaming "meta-model" namespace               |         |       | 0:37 |   1.1 |
-| Rename engine to orchestration                         |         |       | 1:04 |   2.0 |
-| Merge extraction model with physical model             |         |       | 4:35 |   8.5 |
-| Remove manual feature in profile merge transform       |         |       | 0:08 |   0.2 |
-| Add variability domains to the dumpspecs activity      |         |       | 0:12 |   0.4 |
-| Add org-mode option to dumpspacs                       |         |       | 0:53 |   1.6 |
-| Analysis on designing and implement physical types     |         |       | 6:52 |  12.7 |
-| Remove =element= from the modeling location            |         |       | 0:02 |   0.1 |
-| Fix clang-cl LNK4217 warnings                          |         |       | 1:04 |   2.0 |
-| Analysis on creating a masd kernel model               |         |       | 0:53 |   1.6 |
-| Rename generation models to =m2t=                      |         |       | 1:04 |   2.0 |
-| Move all generation features away from generation      |         |       | 0:17 |   0.5 |
-| Rename generation transforms                           |         |       | 4:49 |   8.9 |
-| Remove kernel from models                              |         |       | 0:36 |   1.1 |
-| Rename the default MASD kernel                         |         |       | 0:44 |   1.4 |
-| Consider removing archetype location by family         |         |       | 0:40 |   1.2 |
-| Add part to physical location                          |         |       | 1:16 |   2.4 |
-| Make physical location entries simple names            |         |       | 3:28 |   6.4 |
-| Add names to logical model                             |         |       | 1:48 |   3.3 |
-| Implement archetype locations from physical meta-model |         |       | 9:49 |  18.2 |
+#+CAPTION: Clock summary at [2020-03-28 Sat 16:14]
+| <75>                                                   |         |       |       |       |
+| Headline                                               | Time    |       |       |     % |
+|--------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                           | *55:23* |       |       | 100.0 |
+|--------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                | 55:23   |       |       | 100.0 |
+| Active                                                 |         | 55:23 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  7:27 |  13.5 |
+| Create a demo and presentation for previous sprint     |         |       |  0:28 |   0.8 |
+| Sprint and product backlog grooming                    |         |       |  4:11 |   7.6 |
+| Rename archetypes model to physical model              |         |       |  0:28 |   0.8 |
+| Rename assets model to logical model                   |         |       |  0:29 |   0.9 |
+| Consider renaming "meta-model" namespace               |         |       |  0:37 |   1.1 |
+| Rename engine to orchestration                         |         |       |  1:04 |   1.9 |
+| Merge extraction model with physical model             |         |       |  4:35 |   8.3 |
+| Remove manual feature in profile merge transform       |         |       |  0:08 |   0.2 |
+| Add variability domains to the dumpspecs activity      |         |       |  0:12 |   0.4 |
+| Add org-mode option to dumpspacs                       |         |       |  0:53 |   1.6 |
+| Analysis on designing and implement physical types     |         |       |  6:52 |  12.4 |
+| Remove =element= from the modeling location            |         |       |  0:02 |   0.1 |
+| Fix clang-cl LNK4217 warnings                          |         |       |  1:04 |   1.9 |
+| Analysis on creating a masd kernel model               |         |       |  0:53 |   1.6 |
+| Rename generation models to =m2t=                      |         |       |  1:04 |   1.9 |
+| Move all generation features away from generation      |         |       |  0:17 |   0.5 |
+| Rename generation transforms                           |         |       |  4:49 |   8.7 |
+| Remove kernel from models                              |         |       |  0:36 |   1.1 |
+| Rename the default MASD kernel                         |         |       |  0:44 |   1.3 |
+| Consider removing archetype location by family         |         |       |  0:40 |   1.2 |
+| Add part to physical location                          |         |       |  1:16 |   2.3 |
+| Add names to logical model                             |         |       |  1:48 |   3.3 |
+| Make physical location entries simple names            |         |       | 12:12 |  22.0 |
+| Implement archetype locations from physical meta-model |         |       |  2:34 |   4.6 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -690,8 +690,34 @@ This also means we are completely symmetric with the logical model. So
 we really should have a notion of a name (simple, qualified) with a
 location. The ID is the qualified name.
 
+*** COMPLETED Add names to logical model                              :story:
+    CLOSED: [2020-03-27 Fri 22:06]
+    :LOGBOOK:
+    CLOCK: [2020-03-24 Tue 21:59]--[2020-03-24 Tue 23:06] =>  0:47
+    CLOCK: [2020-03-22 Sun 17:22]--[2020-03-22 Sun 17:28] =>  0:06
+    CLOCK: [2020-03-22 Sun 11:46]--[2020-03-22 Sun 12:21] =>  0:35
+    :END:
+
+We need to move towards the same approach as we have in the logical
+model but for the physical model:
+
+- have a name class with =simple= and =qualified= and a
+  location. =qualified= is the location plus simple.
+- Use =qualified= as the ID on any container (e.g. archetype location
+  repository).
+- containers with facets must have a concatenation of =backend= plus
+  =facet=.
+- create a name builder and/or name factory that make qualified names.
+
 *** STARTED Make physical location entries simple names               :story:
     :LOGBOOK:
+    CLOCK: [2020-03-27 Fri 17:35]--[2020-03-27 Fri 17:43] =>  0:08
+    CLOCK: [2020-03-27 Fri 14:10]--[2020-03-27 Fri 17:21] =>  3:11
+    CLOCK: [2020-03-27 Fri 13:06]--[2020-03-27 Fri 13:57] =>  0:59
+    CLOCK: [2020-03-27 Fri 10:28]--[2020-03-27 Fri 12:03] =>  1:35
+    CLOCK: [2020-03-27 Fri 08:40]--[2020-03-27 Fri 10:10] =>  1:48
+    CLOCK: [2020-03-20 Fri 14:30]--[2020-03-20 Fri 14:44] =>  0:14
+    CLOCK: [2020-03-20 Fri 13:01]--[2020-03-20 Fri 14:16] =>  1:15
     CLOCK: [2020-03-26 Thu 21:00]--[2020-03-26 Thu 21:21] =>  0:21
     CLOCK: [2020-03-26 Thu 08:01]--[2020-03-26 Thu 08:45] =>  0:44
     CLOCK: [2020-03-25 Wed 22:01]--[2020-03-26 Thu 00:13] =>  2:12
@@ -710,32 +736,27 @@ to populate the logical name with the correct qualified name, then
 replace calls to archetype with calls to qualified name, then do this
 change.
 
-*** STARTED Add names to logical model                                :story:
-    :LOGBOOK:
-    CLOCK: [2020-03-24 Tue 21:59]--[2020-03-24 Tue 23:06] =>  0:47
-    CLOCK: [2020-03-22 Sun 17:22]--[2020-03-22 Sun 17:28] =>  0:06
-    CLOCK: [2020-03-22 Sun 11:46]--[2020-03-22 Sun 12:21] =>  0:35
-    :END:
+Notes:
 
-We need to move towards the same approach as we have in the logical
-model but for the physical model:
-
-- have a name class with =simple= and =qualified= and a
-  location. =qualified= is the location plus simple.
-- Use =qualified= as the ID on any container (e.g. archetype location
-  repository).
-- containers with facets must have a concatenation of =backend= plus
-  =facet=.
-- create a name builder and/or name factory that make qualified names.
+- one of the problems of this work is that in some cases we do need
+  the qualified name to a facet or archetype (e.g. when building
+  dependencies, etc). However, when creating the archetype name we
+  want the simple name of all components. If we change traits we will
+  change both at the same time, which will cause everything to
+  break. The easiest thing to do for now is to create a =_sn= trait
+  for every case where we already have a qualified name and then
+  replace those that need it with the =_sn= version. This should
+  minimise breakage.
+- we can easily add the physical meta-model to all contexts; we just
+  need to create a transform based on the work in context factory,
+  then call the transform from context factory for now. The model can
+  be mostly empty at the start. Then we just unpack the name
+  repository as we do now.
 
 *** STARTED Implement archetype locations from physical meta-model    :story:
     :LOGBOOK:
-    CLOCK: [2020-03-27 Fri 14:10]--[2020-03-27 Fri 17:21] =>  3:11
-    CLOCK: [2020-03-27 Fri 13:06]--[2020-03-27 Fri 13:57] =>  0:59
-    CLOCK: [2020-03-27 Fri 10:28]--[2020-03-27 Fri 12:03] =>  1:35
-    CLOCK: [2020-03-27 Fri 08:40]--[2020-03-27 Fri 10:10] =>  1:48
-    CLOCK: [2020-03-20 Fri 14:30]--[2020-03-20 Fri 14:44] =>  0:14
-    CLOCK: [2020-03-20 Fri 13:01]--[2020-03-20 Fri 14:16] =>  1:15
+    CLOCK: [2020-03-28 Sat 15:50]--[2020-03-28 Sat 16:14] =>  0:24
+    CLOCK: [2020-03-27 Fri 22:01]--[2020-03-27 Fri 22:58] =>  0:57
     CLOCK: [2020-03-17 Tue 17:15]--[2020-03-17 Tue 17:24] =>  0:09
     CLOCK: [2020-03-17 Tue 15:25]--[2020-03-17 Tue 16:29] =>  1:04
     :END:
@@ -754,19 +775,8 @@ Tasks:
 
 Notes:
 
-- one of the problems of this work is that in some cases we do need
-  the qualified name to a facet or archetype (e.g. when building
-  dependencies, etc). However, when creating the archetype name we
-  want the simple name of all components. If we change traits we will
-  change both at the same time, which will cause everything to
-  break. The easiest thing to do for now is to create a =_sn= trait
-  for every case where we already have a qualified name and then
-  replace those that need it with the =_sn= version. This should
-  minimise breakage.
-
-:    virtual const physical::entities::name_repository_parts&
-:    archetype_location_repository_parts() const = 0;
-
+- template instantiation domains should be a part of the physical
+  meta-model. Create a transform to compute these.
 
 Merged stories:
 
@@ -793,6 +803,11 @@ Notes:
 
 - formatters should add their data to a registrar that lives in the
   physical model rather than expose it via an interface.
+
+*** Consider moving compatibility mode to feature mode                :story:
+
+Given that compatibility mode only really applies to features, we
+should just have the flag in the feature model itself?
 
 *** Model SQL scripts as meta-model entities                          :story:
 
