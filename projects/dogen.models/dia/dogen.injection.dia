@@ -2847,13 +2847,13 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O19">
       <dia:attribute name="obj_pos">
-        <dia:point val="14,48"/>
+        <dia:point val="69,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.95,47.95;41.885,55.65"/>
+        <dia:rectangle val="68.95,47.95;96.885,55.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="14,48"/>
+        <dia:point val="69,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="27.835000000000001"/>
@@ -3097,13 +3097,13 @@ of the technical space in question, e.g. Doxygen for C++, JavaDoc for Java, etc.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O20">
       <dia:attribute name="obj_pos">
-        <dia:point val="84,48"/>
+        <dia:point val="15,48"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="83.95,47.95;94.0325,51.05"/>
+        <dia:rectangle val="14.95,47.95;25.0325,51.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="84,48"/>
+        <dia:point val="15,48"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="9.9824999999999999"/>
