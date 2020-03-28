@@ -22,6 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.physical/types/helpers/qualified_name_builder.hpp"
 #include "dogen.physical/types/helpers/building_error.hpp"
+#include "dogen.physical/types/helpers/name_validator.hpp"
 #include "dogen.physical/types/helpers/name_builder.hpp"
 
 namespace {
@@ -60,45 +61,7 @@ name_builder& name_builder::archetype(const std::string& s) {
     return *this;
 }
 
-void name_builder::validate() {
-    /*
-     * Backend must never by empty.
-     */
-    auto& l(name_.location());
-    const bool has_backend(!l.backend().empty());
-    if (!has_backend) {
-        BOOST_LOG_SEV(lg, error) << empty_backend;
-        BOOST_THROW_EXCEPTION(building_error(empty_backend));
-    }
-
-    /*
-     * Archetypes must always have a facet, but part is optional.
-     */
-    const bool has_facet(!l.facet().empty());
-    const bool has_archetype(!l.archetype().empty());
-    if (has_archetype && !has_facet) {
-        BOOST_LOG_SEV(lg, error) << empty_facet;
-        BOOST_THROW_EXCEPTION(building_error(empty_facet));
-    }
-
-    /*
-     * If you have a facet and a part then you must also have an
-     * archetype; if you have no archetype, you can either have a part
-     * or a facet or neither, but not both at the same time.
-     */
-    const bool has_part(!l.part().empty());
-    if (has_facet && has_part && !has_archetype) {
-        BOOST_LOG_SEV(lg, error) << empty_archetype;
-        BOOST_THROW_EXCEPTION(building_error(empty_archetype));
-    }
-}
-
 entities::name name_builder::build() {
-    /*
-     * Ensure what has been filled in thus far is valid
-     */
-    validate();
-
     /*
      * Kernel is always hard-coded to MASD.
      */
@@ -114,15 +77,19 @@ entities::name name_builder::build() {
     if (has_archetype) {
         name_.simple(l.archetype());
         name_.qualified(qualified_name_builder::build_archetype(l));
+        name_validator::validate_archetype_name(name_);
     } else if (has_facet) {
         name_.simple(l.facet());
         name_.qualified(qualified_name_builder::build_facet(l));
+        name_validator::validate_facet_name(name_);
     } else if (has_part) {
         name_.simple(l.part());
         name_.qualified(qualified_name_builder::build_part(l));
+        name_validator::validate_part_name(name_);
     } else {
         name_.simple(l.backend());
         name_.qualified(qualified_name_builder::build_backend(l));
+        name_validator::validate_backend_name(name_);
     }
 
     return name_;

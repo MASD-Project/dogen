@@ -55,17 +55,6 @@ public:
      */
     name_builder& archetype(const std::string& s);
 
-private:
-    /**
-     * @brief Ensures the current state is a valid name.
-     *
-     * Note that the components of the name are hierarchical, so
-     * archetypes require a backend, part and facet and parts require
-     * a backend. The exception is facet, which does not require a
-     * part.
-     */
-    void validate();
-
 public:
     entities::name build();
 
