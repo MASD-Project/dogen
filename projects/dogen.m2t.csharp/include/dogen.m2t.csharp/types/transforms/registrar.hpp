@@ -39,7 +39,7 @@
 namespace dogen::m2t::csharp::transforms {
 
 /**
- * @brief Manages formatter registration.
+ * @brief Manages model-to-text transform registration.
  */
 class registrar final {
 public:
@@ -50,26 +50,29 @@ public:
 
 public:
     /**
-     * @brief Registers a file formatter.
+     * @brief Registers a transform.
      */
-    void register_formatter(std::shared_ptr<model_to_text_transform> f);
+    void register_transform(std::shared_ptr<model_to_text_transform> f);
 
-    void register_formatter_helper(std::shared_ptr<helper_transform> fh);
+    /**
+     * @brief Registers a helper transform.
+     */
+    void register_helper_transform(std::shared_ptr<helper_transform> fh);
 
 public:
     /**
-     * @brief Returns all available formatters.
+     * @brief Returns all available transforms.
      */
     const repository& formatter_repository() const;
 
     /**
-     * @brief Returns the archetype locations for the registered
-     * formatters.
+     * @brief Returns the physical names for the registered
+     * transforms.
      */
     const std::forward_list<physical::entities::name>& physical_names() const;
 
     /**
-     * @brief Returns the archetype locations for each meta name.
+     * @brief Returns the physical names for each meta-type.
      */
     const std::unordered_map<std::string, physical::entities::name_group>&
     physical_names_by_meta_name() const;
@@ -77,14 +80,17 @@ public:
     /**
      * @brief Returns the archetype locations for each family.
      */
-    const std::unordered_map<std::string, std::list<physical::entities::name>>&
+   const std::unordered_map<std::string, std::list<physical::entities::name>>&
     physical_names_by_family() const;
 
+    /**
+     * @brief Returns the repository parts for the physical names.
+     */
     const physical::entities::name_repository_parts&
     physical_name_repository_parts() const;
 
 private:
-    repository formatter_repository_;
+    repository transform_repository_;
     std::forward_list<physical::entities::name> physical_names_;
     std::unordered_map<std::string,
                        physical::entities::name_group>
@@ -96,16 +102,16 @@ private:
     physical_name_repository_parts_;
 };
 
-template<typename Formatter>
+template<typename Transform>
 inline void register_formatter(registrar& rg) {
-    const auto f(std::make_shared<Formatter>());
-    rg.register_formatter(f);
+    const auto t(std::make_shared<Transform>());
+    rg.register_transform(t);
 }
 
-template<typename Formatter>
+template<typename Transform>
 inline void register_formatter_helper(registrar& rg) {
-    const auto f(std::make_shared<Formatter>());
-    rg.register_formatter_helper(f);
+    const auto t(std::make_shared<Transform>());
+    rg.register_helper_transform(t);
 }
 
 }

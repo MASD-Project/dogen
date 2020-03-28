@@ -41,16 +41,16 @@
 namespace dogen::m2t::cpp::transforms {
 
 /**
- * @brief Manages formatter registration.
+ * @brief Manages model-to-text transform registration.
  */
 class registrar final {
 private:
     /**
-     * @brief Ensures the formatter passes a modicum of sanity checks.
+     * @brief Ensures the transform passes a modicum of sanity checks.
      */
     /**@{*/
-    void validate(std::shared_ptr<model_to_text_transform> f) const;
-    void validate(std::shared_ptr<helper_transform> hf) const;
+    void validate(std::shared_ptr<model_to_text_transform> t) const;
+    void validate(std::shared_ptr<helper_transform> ht) const;
     /**@{*/
 
 public:
@@ -61,24 +61,24 @@ public:
 
 public:
     /**
-     * @brief Registers an artefact formatter.
+     * @brief Registers a transform.
      */
-    void register_formatter(std::shared_ptr<model_to_text_transform> f);
+    void register_transform(std::shared_ptr<model_to_text_transform> t);
 
     /**
-     * @brief Registers a helper formatter.
+     * @brief Registers a helper transform.
      */
-    void register_helper_formatter(std::shared_ptr<helper_transform> hf);
+    void register_helper_transform(std::shared_ptr<helper_transform> ht);
 
 public:
     /**
-     * @brief Returns all available formatters.
+     * @brief Returns all available transforms.
      */
     const repository& formatter_repository() const;
 
     /**
      * @brief Returns the physical names for the registered
-     * formatters.
+     * transforms.
      */
     const std::forward_list<physical::entities::name>& physical_names() const;
 
@@ -94,11 +94,14 @@ public:
     const std::unordered_map<std::string, std::list<physical::entities::name>>&
     physical_names_by_family() const;
 
+    /**
+     * @brief Returns the repository parts for the physical names.
+     */
     const physical::entities::name_repository_parts&
     physical_name_repository_parts() const;
 
     /**
-     * @brief Returns all of the available helper formatters.
+     * @brief Returns all of the available helper transforms.
      */
     const std::unordered_map<
         std::string,
@@ -108,7 +111,7 @@ public:
     helper_formatters() const;
 
 private:
-    repository formatter_repository_;
+    repository transform_repository_;
     std::forward_list<physical::entities::name> physical_names_;
     std::unordered_map<std::string, physical::entities::name_group>
     physical_names_by_meta_name_;
@@ -118,22 +121,22 @@ private:
     physical_name_repository_parts_;
 };
 
-template<typename Formatter>
+template<typename Transform>
 inline void register_formatter(registrar& rg) {
-    const auto f(std::make_shared<Formatter>());
-    rg.register_formatter(f);
+    const auto t(std::make_shared<Transform>());
+    rg.register_transform(t);
 }
 
-template<typename Formatter>
+template<typename Transform>
 inline void register_formatter(registrar& rg, const std::string& facet_name) {
-    const auto f(std::make_shared<Formatter>(facet_name));
-    rg.register_formatter(f);
+    const auto t(std::make_shared<Transform>(facet_name));
+    rg.register_transform(t);
 }
 
 template<typename Formatter>
 inline void register_helper_formatter(registrar& rg) {
     const auto f(std::make_shared<Formatter>());
-    rg.register_helper_formatter(f);
+    rg.register_helper_transform(f);
 }
 
 }

@@ -31,15 +31,18 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("m2t.csharp.formatters.registrar"));
 
-const std::string no_file_formatters("File formatters repository is empty.");
-const std::string no_file_formatters_by_meta_name(
-    "No file formatters by meta name provided.");
+const std::string no_transforms("Transform repository is empty.");
+const std::string no_transforms_by_meta_name(
+    "No transforms by meta name provided.");
 
-const std::string null_formatter_helper("Formatter helper supplied is null");
-const std::string null_formatter("Formatter supplied is null.");
-const std::string empty_archetype("Formatter name is empty.");
+const std::string null_transform_helper("Helper transform supplied is null");
+const std::string null_transform("Transform supplied is null.");
+const std::string empty_simple_name("Simple name is empty.");
+const std::string empty_qualified_name("Qualified name is empty.");
+const std::string empty_kernel_name("Model name is empty.");
+const std::string empty_backend_name("Backend name is empty.");
 const std::string empty_facet_name("Facet name is empty.");
-const std::string empty_model_name("Model name is empty.");
+const std::string empty_archetype("Archetype is empty.");
 const std::string duplicate_archetype("Duplicate formatter name: ");
 const std::string empty_family("Family cannot be empty.");
 
@@ -52,15 +55,15 @@ void registrar::validate() const {
      * We must have at least one registered formatter. This is a quick
      * way of troubleshooting validation errors.
      */
-    const auto& frp(formatter_repository_);
+    const auto& frp(transform_repository_);
     if (frp.stock_artefact_formatters_by_meta_name().empty()) {
-        BOOST_LOG_SEV(lg, error) << no_file_formatters_by_meta_name;
-        BOOST_THROW_EXCEPTION(registrar_error(no_file_formatters_by_meta_name));
+        BOOST_LOG_SEV(lg, error) << no_transforms_by_meta_name;
+        BOOST_THROW_EXCEPTION(registrar_error(no_transforms_by_meta_name));
     }
 
     if (frp.stock_artefact_formatters().empty()) {
-        BOOST_LOG_SEV(lg, error) << no_file_formatters;
-        BOOST_THROW_EXCEPTION(registrar_error(no_file_formatters));
+        BOOST_LOG_SEV(lg, error) << no_transforms;
+        BOOST_THROW_EXCEPTION(registrar_error(no_transforms));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state. Repository: "
@@ -69,13 +72,13 @@ void registrar::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Archetype locations: " << physical_names_;
 }
 
-void registrar::register_formatter(std::shared_ptr<model_to_text_transform> f) {
-    if (!f) {
-        BOOST_LOG_SEV(lg, error) << null_formatter;
-        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
+void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
+    if (!t) {
+        BOOST_LOG_SEV(lg, error) << null_transform;
+        BOOST_THROW_EXCEPTION(registrar_error(null_transform));
     }
 
-    const auto n(f->physical_name());
+    const auto n(t->physical_name());
     const auto l(n.location());
     if (l.archetype().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_archetype;
@@ -88,11 +91,11 @@ void registrar::register_formatter(std::shared_ptr<model_to_text_transform> f) {
     }
 
     if (l.backend().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_model_name;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_model_name));
+        BOOST_LOG_SEV(lg, error) << empty_backend_name;
+        BOOST_THROW_EXCEPTION(registrar_error(empty_backend_name));
     }
 
-    formatter_repository_.stock_artefact_formatters_.push_front(f);
+    transform_repository_.stock_artefact_formatters_.push_front(t);
 
     /*
      * Add the formatter to the archetype location stores. Note that
@@ -100,15 +103,15 @@ void registrar::register_formatter(std::shared_ptr<model_to_text_transform> f) {
      * does not have them.
      */
     physical_names_.push_front(n);
-    const auto mn(f->meta_name().qualified().dot());
+    const auto mn(t->meta_name().qualified().dot());
     auto& alg(physical_names_by_meta_name_[mn]);
     alg.names().push_back(n);
 
     /*
      * Add the formatter to the index by meta-name.
      */
-    auto& safmt(formatter_repository_.stock_artefact_formatters_by_meta_name());
-    safmt[mn].push_front(f);
+    auto& safmt(transform_repository_.stock_artefact_formatters_by_meta_name());
+    safmt[mn].push_front(t);
 
     /*
      * Add formatter to the index by archetype name. Inserting the
@@ -116,42 +119,42 @@ void registrar::register_formatter(std::shared_ptr<model_to_text_transform> f) {
      * ensuring the formatter id is unique in formatter space.
      */
     const auto arch(l.archetype());
-    auto& fffn(formatter_repository_.stock_artefact_formatters_by_archetype());
-    const auto pair(std::make_pair(arch, f));
+    auto& fffn(transform_repository_.stock_artefact_formatters_by_archetype());
+    const auto pair(std::make_pair(arch, t));
     const auto inserted(fffn.insert(pair).second);
     if (!inserted) {
         BOOST_LOG_SEV(lg, error) << duplicate_archetype << arch;
         BOOST_THROW_EXCEPTION(registrar_error(duplicate_archetype + arch));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Registrered formatter: " << f->id()
+    BOOST_LOG_SEV(lg, debug) << "Registrered formatter: " << t->id()
                              << " against meta name: " << mn;
 }
 
-void registrar::register_formatter_helper(
-    std::shared_ptr<helper_transform> fh) {
+void registrar::
+register_helper_transform(std::shared_ptr<helper_transform> ht) {
 
     // note: not logging by design
-    if (!fh) {
-        BOOST_LOG_SEV(lg, error) << null_formatter_helper;
-        BOOST_THROW_EXCEPTION(registrar_error(null_formatter_helper));
+    if (!ht) {
+        BOOST_LOG_SEV(lg, error) << null_transform_helper;
+        BOOST_THROW_EXCEPTION(registrar_error(null_transform_helper));
     }
 
-    if(fh->family().empty()) {
+    if(ht->family().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_family;
         BOOST_THROW_EXCEPTION(registrar_error(empty_family));
     }
 
-    auto& f(formatter_repository_.helper_formatters_[fh->family()]);
-    for (const auto& of : fh->owning_formatters())
-        f[of].push_back(fh);
+    auto& f(transform_repository_.helper_formatters_[ht->family()]);
+    for (const auto& of : ht->owning_formatters())
+        f[of].push_back(ht);
 
     BOOST_LOG_SEV(lg, debug) << "Registrered formatter helper: "
-                             << fh->helper_name();
+                             << ht->helper_name();
 }
 
 const repository& registrar::formatter_repository() const {
-    return formatter_repository_;
+    return transform_repository_;
 }
 
 const std::forward_list<physical::entities::name>&
