@@ -25,24 +25,44 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen.physical/types/entities/name.hpp"
 
 namespace dogen::physical::helpers {
 
+/**
+ * @brief Checks the validity of physical names.
+ *
+ * Note that the components of the name are hierarchical, so
+ * archetypes require a backend, part and facet and parts require a
+ * backend. The exception is facet, which does not require a part.
+ */
 class name_validator final {
-public:
-    name_validator() = default;
-    name_validator(const name_validator&) = default;
-    name_validator(name_validator&&) = default;
-    ~name_validator() = default;
-    name_validator& operator=(const name_validator&) = default;
+private:
+    /**
+     * @brief Validation rules that are common to all types of names.
+     */
+    static void common_validation(const entities::name& n);
 
 public:
-    bool operator==(const name_validator& rhs) const;
-    bool operator!=(const name_validator& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Checks if the name is valid as a backend name.
+     */
+    static void validate_backend_name(const entities::name& n);
 
+    /**
+     * @brief Checks if the name is valid as a part name.
+     */
+    static void validate_part_name(const entities::name& n);
+
+    /**
+     * @brief Checks if the name is valid as a facet name.
+     */
+    static void validate_facet_name(const entities::name& n);
+
+    /**
+     * @brief Checks if the name is valid as an archetype name.
+     */
+    static void validate_archetype_name(const entities::name& n);
 };
 
 }

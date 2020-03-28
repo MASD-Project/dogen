@@ -18,12 +18,163 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen.utility/types/log/logger.hpp"
+#include "dogen.physical/types/helpers/validation_error.hpp"
 #include "dogen.physical/types/helpers/name_validator.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("physical.helpers.name_validator"));
+
+const std::string empty_simple("Simple name is empty.");
+const std::string empty_qualified("Qualified name is empty.");
+const std::string empty_kernel("Model name is empty.");
+const std::string empty_backend("Backend name is empty.");
+const std::string empty_part("Part name is empty.");
+const std::string non_empty_part("Part name is not empty.");
+const std::string empty_facet("Facet name is empty.");
+const std::string non_empty_facet("Facet name is not empty.");
+const std::string empty_archetype("Archetype is empty.");
+const std::string non_empty_archetype("Archetype is not empty.");
+
+}
 
 namespace dogen::physical::helpers {
 
-bool name_validator::operator==(const name_validator& /*rhs*/) const {
-    return true;
+void name_validator::common_validation(const entities::name& n) {
+    /*
+     * Simple name must be populated.
+     */
+    if (n.simple().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_simple;
+        BOOST_THROW_EXCEPTION(validation_error(empty_simple));
+    }
+
+    /*
+     * Qualified name must be populated.
+     */
+    if (n.qualified().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_qualified;
+        BOOST_THROW_EXCEPTION(validation_error(empty_qualified));
+    }
+
+    /*
+     * All locations must belong to a kernel.
+     */
+    const auto& l(n.location());
+    if (l.kernel().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_kernel;
+        BOOST_THROW_EXCEPTION(validation_error(empty_kernel));
+    }
+
+    /*
+     * All locations must belong to a backend.
+     */
+    if (l.backend().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_backend;
+        BOOST_THROW_EXCEPTION(validation_error(empty_backend));
+    }
+}
+
+void name_validator::validate_backend_name(const entities::name& n) {
+    common_validation(n);
+
+    /*
+     * Facet must not be populated.
+     */
+    const auto& l(n.location());
+    if (!l.facet().empty()) {
+        BOOST_LOG_SEV(lg, error) << non_empty_facet;
+        BOOST_THROW_EXCEPTION(validation_error(non_empty_facet));
+    }
+
+    /*
+     * Archetype must not be populated.
+     */
+    if (!l.archetype().empty()) {
+        BOOST_LOG_SEV(lg, error) << non_empty_archetype;
+        BOOST_THROW_EXCEPTION(validation_error(non_empty_archetype));
+    }
+}
+
+void name_validator::validate_part_name(const entities::name& n) {
+    common_validation(n);
+
+    /*
+     * Part must be populated.
+     */
+    const auto& l(n.location());
+    if (l.part().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_part;
+        BOOST_THROW_EXCEPTION(validation_error(empty_part));
+    }
+
+    /*
+     * Facet must not be populated.
+     */
+    if (!l.facet().empty()) {
+        BOOST_LOG_SEV(lg, error) << non_empty_facet;
+        BOOST_THROW_EXCEPTION(validation_error(non_empty_facet));
+    }
+
+    /*
+     * Archetype must not be populated.
+     */
+    if (!l.archetype().empty()) {
+        BOOST_LOG_SEV(lg, error) << non_empty_archetype;
+        BOOST_THROW_EXCEPTION(validation_error(non_empty_archetype));
+    }
+}
+
+void name_validator::validate_facet_name(const entities::name& n) {
+    common_validation(n);
+    /*
+     * Facet must be populated.
+     */
+    const auto& l(n.location());
+    if (l.facet().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_facet;
+        BOOST_THROW_EXCEPTION(validation_error(empty_facet));
+    }
+
+    /*
+     * Part must not be populated.
+     */
+    if (!l.part().empty()) {
+        BOOST_LOG_SEV(lg, error) << non_empty_part;
+        BOOST_THROW_EXCEPTION(validation_error(non_empty_part));
+    }
+
+    /*
+     * Archetype must not be populated.
+     */
+    if (!l.archetype().empty()) {
+        BOOST_LOG_SEV(lg, error) << non_empty_archetype;
+        BOOST_THROW_EXCEPTION(validation_error(non_empty_archetype));
+    }
+}
+
+void name_validator::validate_archetype_name(const entities::name& n) {
+    common_validation(n);
+
+    /*
+     * All locations must belong to a facet.
+     */
+    const auto& l(n.location());
+    if (l.facet().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_facet;
+        BOOST_THROW_EXCEPTION(validation_error(empty_facet));
+    }
+
+    /*
+     * Archetype must be populated
+     */
+    if (l.archetype().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_archetype;
+        BOOST_THROW_EXCEPTION(validation_error(empty_archetype));
+    }
 }
 
 }
