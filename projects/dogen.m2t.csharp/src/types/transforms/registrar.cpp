@@ -88,14 +88,14 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
     transform_repository_.stock_artefact_formatters_.push_front(t);
 
     /*
-     * Add the transform to the archetype location stores. Note that
-     * we need not worry about canonical archetypes since this backend
-     * does not have them.
+     * Add the transform to the physical names stores. Note that we
+     * need not worry about canonical archetypes since this backend
+     * does not require them.
      */
     physical_names_.push_front(n);
     const auto mn(t->meta_name().qualified().dot());
-    auto& alg(physical_names_by_meta_name_[mn]);
-    alg.names().push_back(n);
+    auto& g(physical_names_by_meta_name_[mn]);
+    g.names().push_back(n);
 
     /*
      * Add the transform to the index by meta-name.

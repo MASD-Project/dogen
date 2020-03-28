@@ -137,12 +137,10 @@ void registrar::validate() const {
         BOOST_LOG_SEV(lg, debug) << "Facets found: " << facets_found;
 
         /*
-         * We must have one canonical transform per type per facet.
-         * FIXME: this check is broken at the moment because this is
-         * only applicable to yarn types, not fabric types. It is also
-         * not applicable to forward declarations. We need some
-         * additional information from yarn to be able to figure out
-         * which types must have a canonical archetype.
+         * We should have one canonical transform per type per
+         * facet. However, there are certain facet such as build and
+         * visual studio where we don't actually require canonical
+         * archetypes so we just warn.
          */
         std::set<std::string> result;
         std::set_difference(all_facets.begin(), all_facets.end(),
@@ -150,11 +148,7 @@ void registrar::validate() const {
             std::inserter(result, result.end()));
         if (!result.empty()) {
             BOOST_LOG_SEV(lg, warn) << facets_missing_canonical_archetype
-                                    << " : " << result;
-
-            // FIXME: broken at present.
-            // BOOST_THROW_EXCEPTION(
-            //     registrar_error(facets_missing_canonical_archetype));
+                                     << " : " << result;
         }
     }
 
