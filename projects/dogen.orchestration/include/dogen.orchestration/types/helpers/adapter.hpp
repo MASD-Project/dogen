@@ -69,7 +69,7 @@
 namespace dogen::orchestration::helpers {
 
 /**
- * @brief Adapts types from the injection model into the assets model.
+ * @brief Adapts types from the injection model into the logical model.
  */
 class adapter final {
 private:
@@ -92,7 +92,7 @@ private:
 
 private:
     /**
-     * @brief Creates a assets name using the element name provided, and
+     * @brief Creates a logical name using the element name provided, and
      * places it in the location provided.
      *
      * @param l location for the name.
@@ -115,7 +115,7 @@ private:
     to_modeline_field(const injection::entities::attribute& ia) const;
 
     /**
-     * @brief Converts an injection attribute to an assets attribute.
+     * @brief Converts an injection attribute to an logical attribute.
      *
      * @pre name of the injector attribute must not be empty.
      */
@@ -124,7 +124,7 @@ private:
         const injection::entities::attribute& ia) const;
 
     /**
-     * @brief Converts an injector attribute to an assets enumerator.
+     * @brief Converts an injector attribute to an logical enumerator.
      *
      * @pre name of the injector attribute must not be empty.
      * @pre type and value of the injector attribute must be empty.
@@ -146,7 +146,7 @@ private:
 public:
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::object to a assets object.
+     * masd::object to a logical object.
      */
     boost::shared_ptr<logical::entities::structural::object>
     to_object(const logical::entities::location& l,
@@ -155,7 +155,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::object_template to a assets object template.
+     * masd::object_template to a logical object template.
      */
     boost::shared_ptr<logical::entities::structural::object_template>
     to_object_template(const logical::entities::location& l,
@@ -164,7 +164,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::exception to a assets exception.
+     * masd::exception to a logical exception.
      */
     boost::shared_ptr<logical::entities::structural::exception>
     to_exception(const logical::entities::location& l,
@@ -173,7 +173,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::primitive to a assets primitive.
+     * masd::primitive to a logical primitive.
      */
     boost::shared_ptr<logical::entities::structural::primitive>
     to_primitive(const logical::entities::location& l,
@@ -182,7 +182,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::enumeration to a assets enumeration.
+     * masd::enumeration to a logical enumeration.
      */
     boost::shared_ptr<logical::entities::structural::enumeration>
     to_enumeration(const logical::entities::location& l,
@@ -191,7 +191,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::module to a assets module.
+     * masd::module to a logical module.
      */
     boost::shared_ptr<logical::entities::structural::module>
     to_module(const logical::entities::location& l,
@@ -200,7 +200,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::builtin to a assets builtin.
+     * masd::builtin to a logical builtin.
      */
     boost::shared_ptr<logical::entities::structural::builtin>
     to_builtin(const logical::entities::location& l,
@@ -209,7 +209,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * @e masd::entry_point to a assets entry_point.
+     * @e masd::entry_point to a logical entry_point.
      */
     boost::shared_ptr<logical::entities::structural::entry_point>
     to_entry_point(const logical::entities::location& l,
@@ -218,7 +218,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * @e masd::assistant to a assets entry_point.
+     * @e masd::assistant to a logical entry_point.
      */
     boost::shared_ptr<logical::entities::structural::assistant>
     to_assistant(const logical::entities::location& l,
@@ -228,7 +228,7 @@ public:
 public:
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::modeline_group to a assets modeline group.
+     * masd::modeline_group to a logical modeline group.
      */
     boost::shared_ptr<logical::entities::decoration::modeline_group>
     to_modeline_group(const logical::entities::location& l,
@@ -237,7 +237,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::modeline to a assets modeline.
+     * masd::modeline to a logical modeline.
      */
     boost::shared_ptr<logical::entities::decoration::modeline>
     to_modeline(const logical::entities::location& l,
@@ -246,7 +246,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::generation_marker to a assets generation marker.
+     * masd::generation_marker to a logical generation marker.
      */
     boost::shared_ptr<logical::entities::decoration::generation_marker>
     to_generation_marker(const logical::entities::location& l,
@@ -255,7 +255,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::licence to a assets licence.
+     * masd::licence to a logical licence.
      */
     boost::shared_ptr<logical::entities::decoration::licence>
     to_licence(const logical::entities::location& l,
@@ -328,7 +328,7 @@ public:
 
     /**
      * @brief Converts an injection element with a stereotype of
-     * masd::variability::initializer to a assets
+     * masd::variability::initializer to a logical
      * variability feature template group registrar.
      */
     boost::shared_ptr<logical::entities::variability::initializer>

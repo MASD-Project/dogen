@@ -93,7 +93,7 @@ apply(const context& ctx, logical::entities::model_set& ms) {
 
     /*
      * Then we need to extract the configuration models from the
-     * assets model set. It is against these that the binding will
+     * logical model set. It is against these that the binding will
      * take place.
      */
     using logical::helpers::configuration_model_set_adapter;

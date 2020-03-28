@@ -42,14 +42,14 @@ namespace dogen::logical::helpers {
 class profile_adapter final {
 private:
     /**
-     * @brief Adapts an assets profile template into its variability
+     * @brief Adapts a logical profile template into its variability
      * counterpart.
      */
     static variability::entities::profile_template
     adapt(const entities::variability::profile_template& pt);
 
     /**
-     * @brief Adapts an assets profile into its variability
+     * @brief Adapts a logical profile into its variability
      * counterpart.
      */
     static variability::entities::profile

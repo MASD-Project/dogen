@@ -47,7 +47,7 @@ namespace dogen::logical::transforms {
 std::list<entities::model>
 model_production_chain::apply(const context& ctx,
     logical::entities::model_set ms) {
-    tracing::scoped_chain_tracer stp(lg, "assets model production chain",
+    tracing::scoped_chain_tracer stp(lg, "logical model production chain",
         transform_id, ms.target().name().qualified().dot(), *ctx.tracer(), ms);
 
     /*

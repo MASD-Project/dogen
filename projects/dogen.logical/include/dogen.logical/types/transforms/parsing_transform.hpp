@@ -39,7 +39,7 @@ namespace dogen::logical::transforms {
 
 /**
  * @brief Expands all encoded representations that require parsing
- * into their assets form.
+ * into their logical form.
  *
  * As an example, all local attributes have unparsed types - strings
  * following a well defined notation - that need to be parsed into

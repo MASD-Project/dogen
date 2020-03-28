@@ -100,7 +100,7 @@ void post_assembly_chain::apply(const context& ctx, entities::model& m) {
 
     /*
      * Meta-name transform must be applied after all transforms that
-     * inject new meta-model types for the assets model. At present that
+     * inject new meta-model types for the logical model. At present that
      * is stereotypes and containment transforms. This is also why we
      * cannot apply this transform at the model level.
      */

@@ -35,8 +35,8 @@
 namespace dogen::logical::transforms {
 
 /**
- * @brief Updates the meta-elements in assets that are model
- * variability profiles and profile templates.
+ * @brief Updates the meta-elements in the logical model that are
+ * model variability profiles and profile templates.
  */
 class variability_profiles_transform final {
 private:

@@ -34,7 +34,7 @@ namespace dogen::logical::transforms {
 
 /**
  * @brief Top-level transformation responsible for converting a raw
- * model set into a group of models with all assets transforms
+ * model set into a group of models with all logical transforms
  * applied.
  */
 class model_production_chain final {

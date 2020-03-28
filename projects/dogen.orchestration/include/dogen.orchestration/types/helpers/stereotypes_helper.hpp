@@ -44,7 +44,7 @@ public:
      *
      * @note The string must not have any leading or trailing spaces
      * or other artefacts and must match exactly the definition of a
-     * well-known assets stereotype, e.g. 'logical::object', etc.
+     * well-known logical stereotype, e.g. 'logical::object', etc.
      */
     logical::entities::static_stereotypes
     from_string(const std::string& s) const;
@@ -71,7 +71,7 @@ public:
 
 public:
     /**
-     * @brief Returns true if the well-known stereotype denotes a assets
+     * @brief Returns true if the well-known stereotype denotes a logical
      * element type, false otherwise.
      */
     bool

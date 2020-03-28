@@ -31,7 +31,7 @@
 namespace dogen::logical::transforms {
 
 /**
- * @brief Populates the dynamic stereotypes of the assets model.
+ * @brief Populates the dynamic stereotypes of the logical model.
  *
  * Users add a number of stereotypes to their models. Some refer to
  * meta-model elements (e.g. static stereotypes), and some refer to

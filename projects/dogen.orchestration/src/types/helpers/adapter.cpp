@@ -471,8 +471,8 @@ void adapter::populate_abstract_profile_entry(const logical::entities::name& pn,
      *     masd.generalization.parent
      *
      * The "qualified" name of the profile entry reflects its
-     * position in assets space, and as such is composed of the
-     * assets element that owns the profile entry (the profile):
+     * position in logical space, and as such is composed of the
+     * logical element that owns the profile entry (the profile):
      *
      *     dogen.cpp_artefact_transform
      *
@@ -482,7 +482,7 @@ void adapter::populate_abstract_profile_entry(const logical::entities::name& pn,
      *
      * Whilst this may not be exactly the most aesthetically
      * pleasing approach, it is more or less compliant with the
-     * conceptual model for the assets space. It also makes it
+     * conceptual model for the logical space. It also makes it
      * really easy to find out where a configuration came from,
      * when we are looking at a configuration model
      * representation.

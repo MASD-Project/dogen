@@ -87,7 +87,7 @@ void populate_enumeration(const features::enumeration::feature_group& fg,
      */
     if (!scfg.underlying_element.empty()) {
         /*
-         * Convert the string obtained via meta-data into a assets name and
+         * Convert the string obtained via meta-data into a logical name and
          * set it as our underlying element name.
          */
         const auto ue(helpers::name_builder::build(scfg.underlying_element));

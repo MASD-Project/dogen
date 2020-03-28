@@ -320,7 +320,7 @@ from transforms_for_run_id('5036d5a6-d10c-4de8-a83a-25f15347fa40')
 where "PAYLOAD_TYPE" = 'dogen::injection::entities::model';
 
 /*
- * Find registrars in assets model.
+ * Find registrars in logical model.
  */
 select "TRANSFORM_INSTANCE_ID", "TRANSFORM_ID",
 cast("PAYLOAD"->'serialization_elements'->'type_registrars' as varchar(50)) "PAYLOAD"

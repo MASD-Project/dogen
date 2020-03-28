@@ -50,8 +50,8 @@ private:
     strip_internal_modules(const entities::location& l);
 
     /**
-     * @brief Returns true if the well-known stereotype denotes a assets
-     * element type, false otherwise.
+     * @brief Returns true if the well-known stereotype denotes a
+     * logical element type, false otherwise.
      */
     static bool is_element_type(const entities::static_stereotypes ss);
 

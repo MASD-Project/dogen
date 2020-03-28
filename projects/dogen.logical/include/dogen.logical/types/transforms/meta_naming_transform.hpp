@@ -31,18 +31,12 @@
 namespace dogen::logical::transforms {
 
 /**
- * @brief Updates the meta-names of all of the assets meta-model
- * elements.
+ * @brief Updates the meta-names of all of the logical model elements.
  */
 class meta_naming_transform final {
 public:
     /**
      * @brief Performs the transform on the model.
-     *
-     * Note that any injected meta-model elements are not updated as
-     * part of this transform; these are expected to be handled
-     * internally as they are generated. We only concern ourselves
-     * with well-known meta-model elements from assets.
      */
     static void apply(const context& ctx, entities::model& m);
 };

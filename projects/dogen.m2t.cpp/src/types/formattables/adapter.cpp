@@ -99,7 +99,7 @@ make_databases(const logical::entities::orm::model_properties& omp) const {
 
 model adapter::adapt(const transforms::repository& frp,
     const m2t::entities::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Adapting assets to formattables."
+    BOOST_LOG_SEV(lg, debug) << "Adapting logical to formattables."
                              << " Elements in model: " << m.elements().size();
 
     model r;
@@ -186,7 +186,7 @@ model adapter::adapt(const transforms::repository& frp,
         }
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished adapting assets to formattables."
+    BOOST_LOG_SEV(lg, debug) << "Finished adapting logical to formattables."
                              << "Size: " << r.formattables().size();
     return r;
 }

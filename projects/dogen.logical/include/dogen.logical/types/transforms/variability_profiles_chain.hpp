@@ -51,7 +51,7 @@ namespace dogen::logical::transforms {
 class variability_profiles_chain final {
 private:
     /**
-     * @brief Converts the assets transform context into a variability
+     * @brief Converts the logical transform context into a variability
      * context.
      */
     static variability::transforms::context adapt(const context& ctx);

@@ -46,7 +46,7 @@ class updater {
 public:
     void operator()(entities::element&) {
         /*
-         * Element ignored on purpose; we cannot update non-assets
+         * Element ignored on purpose; we cannot update non-logical
          * meta-model elements.
          */
     }

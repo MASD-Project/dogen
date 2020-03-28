@@ -42,7 +42,7 @@ namespace dogen::logical::helpers {
 namespace {
 
 /**
- * @brief Extracts variability data from assets meta-model types, and
+ * @brief Extracts variability data from logical model types, and
  * inserts it into a configuration model.
  */
 class populator {

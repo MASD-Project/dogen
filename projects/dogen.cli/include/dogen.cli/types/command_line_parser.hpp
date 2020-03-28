@@ -46,8 +46,8 @@ public:
 
 public:
     /**
-     * Transforms the supplied command line arguments into the
-     * assets options, if valid.
+     * Transforms the supplied command line arguments into a dogen
+     * configuration, if valid.
      *
      * @param arguments Command line arguments supplied by the user.
      * @param info stream in which to place informative text.

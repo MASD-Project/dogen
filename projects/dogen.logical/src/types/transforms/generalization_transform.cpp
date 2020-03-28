@@ -109,7 +109,7 @@ update_and_collect_parent_ids(const helpers::indices& idx,
             }
 
             /*
-             * Convert the string obtained via meta-data into a assets
+             * Convert the string obtained via meta-data into a logical
              * name and set it as our parent name.
              */
             const auto pn(helpers::name_builder::build(scfg.parent));

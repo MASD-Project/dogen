@@ -154,7 +154,7 @@ public:
 public:
     /**
      * @brief Initialises a new mock factory at a given stage in the
-     * assets pipeline, as given by the flags supplied.
+     * logical pipeline, as given by the flags supplied.
      */
     explicit mock_model_factory(const flags& f);
 
@@ -225,7 +225,7 @@ public:
 
     /**
      * @brief Returns true if the name matches the mock model factory
-     * naming convention for type @e n, and the assets naming convention
+     * naming convention for type @e n, and the logical naming convention
      * for visitors.
      */
     bool is_type_name_n_visitor(const unsigned int n,

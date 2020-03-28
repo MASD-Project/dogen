@@ -31,7 +31,7 @@
 namespace dogen::logical::helpers {
 
 /**
- * @brief Adapts an assets model set into its counterpart in
+ * @brief Adapts a logical model set into its counterpart in
  * variability, extracting all of the configuration information.
  */
 class configuration_model_set_adapter final {
