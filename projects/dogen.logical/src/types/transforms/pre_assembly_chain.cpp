@@ -41,7 +41,7 @@
 
 namespace {
 
-const std::string transform_id("assets.transforms.pre_assembly_chain");
+const std::string transform_id("logical.transforms.pre_assembly_chain");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));

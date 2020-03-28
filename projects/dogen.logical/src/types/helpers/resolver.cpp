@@ -44,7 +44,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("assets.helpers.resolver"));
+auto lg(logger_factory("logical.helpers.resolver"));
 
 const std::string orphan_object("Object's parent could not be located: ");
 const std::string orphan_object_template(

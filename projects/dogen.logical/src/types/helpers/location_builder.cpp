@@ -30,7 +30,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("assets.helpers.location_builder"));
+auto lg(logger_factory("logical.helpers.location_builder"));
 
 const std::string empty_model_modules("Model modules are empty.");
 const std::string empty_internal_modules("Internal modules are empty.");

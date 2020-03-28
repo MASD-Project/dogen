@@ -26,7 +26,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("assets.helpers.decomposer"));
+auto lg(logger_factory("logical.helpers.decomposer"));
 
 }
 

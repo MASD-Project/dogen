@@ -28,7 +28,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("assets.helpers.name_factory"));
+auto lg(logger_factory("logical.helpers.name_factory"));
 
 const std::string empty_internal_modules("Internal modules cannot be empty.");
 

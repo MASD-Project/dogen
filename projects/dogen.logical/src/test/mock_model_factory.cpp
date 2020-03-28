@@ -40,7 +40,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("assets.mock_model_factory"));
+static logger lg(logger_factory("logical.mock_model_factory"));
 
 const std::string model_name_prefix("some_model_");
 const std::string type_name_prefix("some_type_");

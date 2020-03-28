@@ -36,7 +36,7 @@
 
 namespace {
 
-const std::string transform_id("assets.transforms.object_templates_transform");
+const std::string transform_id("logical.transforms.object_templates_transform");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));

@@ -29,7 +29,7 @@
 
 namespace {
 
-const std::string transform_id("assets.helpers.configuration_model_set_adapter");
+const std::string transform_id("logical.helpers.configuration_model_set_adapter");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 

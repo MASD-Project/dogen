@@ -26,7 +26,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("assets.helpers.pretty_printer"));
+auto lg(logger_factory("logical.helpers.pretty_printer"));
 
 constexpr char space(' ');
 constexpr std::string_view comma_space(", ");

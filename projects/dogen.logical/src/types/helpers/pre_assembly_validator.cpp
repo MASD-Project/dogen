@@ -33,7 +33,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("assets.helpers.pre_assembly_validator"));
+auto lg(logger_factory("logical.helpers.pre_assembly_validator"));
 
 const std::string multiple_inheritance_not_supported(
     "Multiple inheritance is not supported on target models: ");

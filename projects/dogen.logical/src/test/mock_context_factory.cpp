@@ -32,7 +32,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("assets.transforms.mock_context_factory"));
+auto lg(logger_factory("logical.transforms.mock_context_factory"));
 
 }
 

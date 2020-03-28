@@ -40,7 +40,7 @@
 namespace {
 
 const std::string
-transform_id("assets.transforms.mapping_elements_transform");
+transform_id("logical.transforms.mapping_elements_transform");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));

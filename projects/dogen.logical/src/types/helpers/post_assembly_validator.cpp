@@ -37,7 +37,7 @@ errmsg_validation_owner;
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("assets.helpers.post_assembly_validator"));
+auto lg(logger_factory("logical.helpers.post_assembly_validator"));
 
 const std::string space(" ");
 const std::regex strict_name_regex("^[a-zA-Z_][a-zA-Z0-9_]*$");

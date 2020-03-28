@@ -29,7 +29,7 @@ namespace {
 using namespace dogen::utility::log;
 
 auto
-lg(logger_factory("assets.helpers.fully_qualified_representation_builder"));
+lg(logger_factory("logical.helpers.fully_qualified_representation_builder"));
 
 }
 

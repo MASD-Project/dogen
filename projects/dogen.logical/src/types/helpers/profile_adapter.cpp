@@ -27,7 +27,7 @@
 
 namespace {
 
-const std::string transform_id("assets.helpers.profile_adapter");
+const std::string transform_id("logical.helpers.profile_adapter");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));

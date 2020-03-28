@@ -33,7 +33,7 @@
 
 namespace {
 
-const std::string transform_id("assets.helpers.decoration_repository_factory");
+const std::string transform_id("logical.helpers.decoration_repository_factory");
 
 using namespace dogen::utility::log;
 auto lg(logger_factory(transform_id));

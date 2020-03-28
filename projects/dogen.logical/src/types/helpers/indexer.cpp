@@ -28,7 +28,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("assets.helpers.indexer"));
+auto lg(logger_factory("logical.helpers.indexer"));
 
 }
 

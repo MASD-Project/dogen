@@ -47,7 +47,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg = logger_factory("assets.new_name_tree_parser");
+auto lg = logger_factory("logical.new_name_tree_parser");
 
 const std::string unsupported_technical_space(
     "Invalid or unsupported technical space: ");

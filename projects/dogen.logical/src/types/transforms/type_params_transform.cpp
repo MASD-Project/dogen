@@ -30,7 +30,7 @@
 
 namespace {
 
-const std::string transform_id("assets.transforms.type_params_transform");
+const std::string transform_id("logical.transforms.type_params_transform");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));

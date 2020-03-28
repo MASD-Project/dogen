@@ -27,7 +27,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("assets.helpers.mappings_validator"));
+auto lg(logger_factory("logical.helpers.mappings_validator"));
 
 const std::string default_mapping_set_name("default.mapping_set");
 

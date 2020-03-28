@@ -26,7 +26,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("assets.helpers.string_processor"));
+auto lg(logger_factory("logical.helpers.string_processor"));
 
 constexpr std::string_view empty;
 constexpr std::string_view comma(",");

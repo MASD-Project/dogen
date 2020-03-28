@@ -24,6 +24,6 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg2(logger_factory("assets.helpers.new_name_tree_parser"));
+auto lg2(logger_factory("logical.helpers.new_name_tree_parser"));
 
 }

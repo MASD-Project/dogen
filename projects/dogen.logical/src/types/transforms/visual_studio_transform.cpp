@@ -38,7 +38,7 @@
 
 namespace {
 
-const std::string transform_id("assets.transforms.visual_studio_transform");
+const std::string transform_id("logical.transforms.visual_studio_transform");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(transform_id));
 

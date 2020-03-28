@@ -35,7 +35,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("assets.helpers.name_builder"));
+auto lg(logger_factory("logical.helpers.name_builder"));
 
 const std::string empty_model_name("Model name is empty.");
 const std::string unexpected_simple_name("Simple name is not expected.");

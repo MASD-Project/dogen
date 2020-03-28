@@ -37,7 +37,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("assets.helpers.name_tree_builder"));
+auto lg(logger_factory("logical.helpers.name_tree_builder"));
 
 }
 

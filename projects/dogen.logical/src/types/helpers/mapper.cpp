@@ -41,7 +41,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("assets.helpers.mapper"));
+auto lg(logger_factory("logical.helpers.mapper"));
 
 const std::string lam_pointer("lam.pointer");
 
