@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
 #include "dogen.tracing/io/tracer_io.hpp"
 #include "dogen.logical/io/transforms/context_io.hpp"
 #include "dogen.physical/io/entities/meta_model_io.hpp"
@@ -54,46 +53,6 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
     else
         s << "\"data\": ""\"<null>\"";
     s << " }";
-    return s;
-}
-
-}
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    boost::replace_all(s, "\\", "<backslash>");
-    return s;
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::vector<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::vector<std::string> >& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
     return s;
 }
 
@@ -145,7 +104,6 @@ std::ostream& operator<<(std::ostream& s, const context& v) {
       << "\"compatibility_mode\": " << v.compatibility_mode() << ", "
       << "\"feature_model\": " << v.feature_model() << ", "
       << "\"physical_meta_model\": " << v.physical_meta_model() << ", "
-      << "\"template_instantiation_domains\": " << v.template_instantiation_domains() << ", "
       << "\"mapping_repository\": " << v.mapping_repository() << ", "
       << "\"tracer\": " << v.tracer()
       << " }";

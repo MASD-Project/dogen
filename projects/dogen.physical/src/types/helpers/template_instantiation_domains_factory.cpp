@@ -20,6 +20,8 @@
  */
 #include <set>
 #include "dogen.utility/types/log/logger.hpp"
+#include "dogen.utility/types/io/unordered_map_io.hpp"
+#include "dogen.utility/types/io/vector_io.hpp"
 #include "dogen.utility/types/io/list_io.hpp"
 #include "dogen.utility/types/io/unordered_set_io.hpp"
 #include "dogen.physical/types/helpers/building_error.hpp"
@@ -44,6 +46,8 @@ namespace dogen::physical::helpers {
 std::unordered_map<std::string, std::vector<std::string>>
 template_instantiation_domains_factory::
 make(const std::list<entities::name>& ns) {
+    BOOST_LOG_SEV(lg, debug) << "Building instantiation domains.";
+
     /*
      * First we gather all of the information in sorted form, and
      * filter out any duplicate backends of facets. We are however not
@@ -102,6 +106,8 @@ make(const std::list<entities::name>& ns) {
         for (const auto& s : v)
             vec.push_back(s);
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Built instantiation domains: " << r;
 
     return r;
 }

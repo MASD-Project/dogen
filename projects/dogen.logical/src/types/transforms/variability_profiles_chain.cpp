@@ -23,6 +23,7 @@
 #include "dogen.variability/types/transforms/context.hpp"
 #include "dogen.variability/types/transforms/profile_binding_transform.hpp"
 #include "dogen.variability/types/transforms/profile_repository_production_chain.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.logical/types/transforms/context.hpp"
 #include "dogen.logical/io/entities/model_set_io.hpp"
 #include "dogen.logical/types/helpers/profile_adapter.hpp"
@@ -46,7 +47,9 @@ variability_profiles_chain::adapt(const context& ctx) {
     variability::transforms::context r;
     r.tracer(ctx.tracer());
     r.compatibility_mode(ctx.compatibility_mode());
-    r.template_instantiation_domains(ctx.template_instantiation_domains());
+
+    const auto& pmm(*ctx.physical_meta_model());
+    r.template_instantiation_domains(pmm.template_instantiation_domains());
     return r;
 }
 

@@ -29,6 +29,7 @@
 #include "dogen.variability/types/entities/value_visitor.hpp"
 #include "dogen.variability/lexical_cast/entities/value_type_lc.hpp"
 #include "dogen.variability/lexical_cast/entities/binding_point_lc.hpp"
+#include "dogen.physical/types/entities/meta_model.hpp"
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.injection/types/transforms/model_production_chain.hpp"
 #include "dogen.m2t/types/transforms/model_to_text_chain.hpp"
@@ -235,8 +236,9 @@ specs spec_dumper::dump(const configuration& cfg) const {
         const auto& fm(*ctx.logical_context().feature_model());
         r.categories().push_back(create_features_category(fm));
 
-        const auto ds(ctx.logical_context().template_instantiation_domains());
-        r.categories().push_back(create_variability_domains_category(ds));
+        const auto& pmm(*ctx.logical_context().physical_meta_model());
+        const auto tid(pmm.template_instantiation_domains());
+        r.categories().push_back(create_variability_domains_category(tid));
         return r;
     }
 

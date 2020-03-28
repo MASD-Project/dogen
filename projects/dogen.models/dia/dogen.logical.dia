@@ -6850,19 +6850,19 @@ model.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O46">
       <dia:attribute name="obj_pos">
-        <dia:point val="-172,16"/>
+        <dia:point val="-169,16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-172.05,15.95;-136.8,23.65"/>
+        <dia:rectangle val="-169.05,15.95;-141.115,22.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-172,16"/>
+        <dia:point val="-169,16"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="35.149999999999999"/>
+        <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.6000000000000005"/>
+        <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#context#</dia:string>
@@ -7018,33 +7018,6 @@ lot of repetitive code. The context gathers together all of these.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Meta-model for the physical dimension.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#template_instantiation_domains#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, std::vector&lt;std::string&gt;&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Provides all of the domains to be used for template instantiation.
-
-Example of a domain is "masd.facet" which contains the list of all available facets.
-Templates (facet and profile) are then instantiated over this range, depending on
-user choices.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -11033,13 +11006,13 @@ user choices.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O74">
       <dia:attribute name="obj_pos">
-        <dia:point val="-185,16"/>
+        <dia:point val="-184,16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-185.05,15.95;-174.968,19.05"/>
+        <dia:rectangle val="-184.05,15.95;-173.968,19.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-185,16"/>
+        <dia:point val="-184,16"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="9.9824999999999999"/>

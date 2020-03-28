@@ -69,13 +69,11 @@ context::context(
     const bool compatibility_mode,
     const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
     const boost::shared_ptr<dogen::physical::entities::meta_model>& physical_meta_model,
-    const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains,
     const boost::shared_ptr<dogen::logical::helpers::mapping_set_repository>& mapping_repository,
     const boost::shared_ptr<dogen::tracing::tracer>& tracer)
     : compatibility_mode_(compatibility_mode),
       feature_model_(feature_model),
       physical_meta_model_(physical_meta_model),
-      template_instantiation_domains_(template_instantiation_domains),
       mapping_repository_(mapping_repository),
       tracer_(tracer) { }
 
@@ -84,7 +82,6 @@ void context::swap(context& other) noexcept {
     swap(compatibility_mode_, other.compatibility_mode_);
     swap(feature_model_, other.feature_model_);
     swap(physical_meta_model_, other.physical_meta_model_);
-    swap(template_instantiation_domains_, other.template_instantiation_domains_);
     swap(mapping_repository_, other.mapping_repository_);
     swap(tracer_, other.tracer_);
 }
@@ -93,7 +90,6 @@ bool context::operator==(const context& rhs) const {
     return compatibility_mode_ == rhs.compatibility_mode_ &&
         feature_model_ == rhs.feature_model_ &&
         physical_meta_model_ == rhs.physical_meta_model_ &&
-        template_instantiation_domains_ == rhs.template_instantiation_domains_ &&
         mapping_repository_ == rhs.mapping_repository_ &&
         tracer_ == rhs.tracer_;
 }
@@ -142,22 +138,6 @@ void context::physical_meta_model(const boost::shared_ptr<dogen::physical::entit
 
 void context::physical_meta_model(const boost::shared_ptr<dogen::physical::entities::meta_model>&& v) {
     physical_meta_model_ = std::move(v);
-}
-
-const std::unordered_map<std::string, std::vector<std::string> >& context::template_instantiation_domains() const {
-    return template_instantiation_domains_;
-}
-
-std::unordered_map<std::string, std::vector<std::string> >& context::template_instantiation_domains() {
-    return template_instantiation_domains_;
-}
-
-void context::template_instantiation_domains(const std::unordered_map<std::string, std::vector<std::string> >& v) {
-    template_instantiation_domains_ = v;
-}
-
-void context::template_instantiation_domains(const std::unordered_map<std::string, std::vector<std::string> >&& v) {
-    template_instantiation_domains_ = std::move(v);
 }
 
 const boost::shared_ptr<dogen::logical::helpers::mapping_set_repository>& context::mapping_repository() const {

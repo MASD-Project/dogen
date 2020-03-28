@@ -25,10 +25,7 @@
 #pragma once
 #endif
 
-#include <string>
-#include <vector>
 #include <algorithm>
-#include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include "dogen.tracing/types/tracer_fwd.hpp"
 #include "dogen.physical/types/entities/meta_model_fwd.hpp"
@@ -61,7 +58,6 @@ public:
         const bool compatibility_mode,
         const boost::shared_ptr<dogen::variability::entities::feature_model>& feature_model,
         const boost::shared_ptr<dogen::physical::entities::meta_model>& physical_meta_model,
-        const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains,
         const boost::shared_ptr<dogen::logical::helpers::mapping_set_repository>& mapping_repository,
         const boost::shared_ptr<dogen::tracing::tracer>& tracer);
 
@@ -82,20 +78,6 @@ public:
     boost::shared_ptr<dogen::physical::entities::meta_model>& physical_meta_model();
     void physical_meta_model(const boost::shared_ptr<dogen::physical::entities::meta_model>& v);
     void physical_meta_model(const boost::shared_ptr<dogen::physical::entities::meta_model>&& v);
-    /**@}*/
-
-    /**
-     * @brief Provides all of the domains to be used for template instantiation.
-     *
-     * Example of a domain is "masd.facet" which contains the list of all available facets.
-     * Templates (facet and profile) are then instantiated over this range, depending on
-     * user choices.
-     */
-    /**@{*/
-    const std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains() const;
-    std::unordered_map<std::string, std::vector<std::string> >& template_instantiation_domains();
-    void template_instantiation_domains(const std::unordered_map<std::string, std::vector<std::string> >& v);
-    void template_instantiation_domains(const std::unordered_map<std::string, std::vector<std::string> >&& v);
     /**@}*/
 
     const boost::shared_ptr<dogen::logical::helpers::mapping_set_repository>& mapping_repository() const;
@@ -122,7 +104,6 @@ private:
     bool compatibility_mode_;
     boost::shared_ptr<dogen::variability::entities::feature_model> feature_model_;
     boost::shared_ptr<dogen::physical::entities::meta_model> physical_meta_model_;
-    std::unordered_map<std::string, std::vector<std::string> > template_instantiation_domains_;
     boost::shared_ptr<dogen::logical::helpers::mapping_set_repository> mapping_repository_;
     boost::shared_ptr<dogen::tracing::tracer> tracer_;
 };

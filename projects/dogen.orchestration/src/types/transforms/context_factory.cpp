@@ -78,8 +78,14 @@ create_physical_meta_model(
     using physical::entities::meta_model;
     auto r(boost::make_shared<meta_model>());
 
-    using physical::entities::name_repository;
-    r->kernels()["masd"].names(b.build());
+    const auto nrp(b.build());
+    r->kernels()["masd"].names(nrp);
+
+    /*
+     * Obtain the template instantiation domains.
+     */
+    using tidf = physical::helpers::template_instantiation_domains_factory;
+    r->template_instantiation_domains(tidf::make(nrp.all()));
     return r;
 }
 void context_factory::
@@ -156,12 +162,7 @@ make_context(const configuration& cfg, const std::string& activity,
      */
     const auto pmm(create_physical_meta_model(rg));
     const auto& nrp(pmm->kernels().begin()->second.names());
-
-    /*
-     * Obtain the template instantiation domains.
-     */
-    using tidf = physical::helpers::template_instantiation_domains_factory;
-    vctx.template_instantiation_domains(tidf::make(nrp.all()));
+    vctx.template_instantiation_domains(pmm->template_instantiation_domains());
 
     /*
      * Handle the compatibility mode.
@@ -184,8 +185,6 @@ make_context(const configuration& cfg, const std::string& activity,
     orchestration::transforms::context r;
     r.variability_context(vctx);
     r.logical_context().compatibility_mode(cm);
-    r.logical_context().template_instantiation_domains(
-        vctx.template_instantiation_domains());
 
     /*
      * Obtain the data directories.
