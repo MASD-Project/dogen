@@ -26,6 +26,7 @@
 #include "dogen.utility/types/io/set_io.hpp"
 #include "dogen.utility/types/io/forward_list_io.hpp"
 #include "dogen.physical/io/entities/name_io.hpp"
+#include "dogen.physical/types/helpers/name_validator.hpp"
 #include "dogen.m2t.cpp/types/transforms/traits.hpp"
 #include "dogen.m2t.cpp/io/transforms/repository_io.hpp"
 #include "dogen.m2t.cpp/types/transforms/registrar_error.hpp"
@@ -44,12 +45,6 @@ const std::string facets_missing_canonical_archetype(
     "One or more facets have been declared without a canonical archetype");
 const std::string more_than_one_canonical_archetype(
     "Found more than one canonical transform for a facet: ");
-const std::string empty_simple_name("Simple name is empty.");
-const std::string empty_qualified_name("Qualified name is empty.");
-const std::string empty_kernel_name("Model name is empty.");
-const std::string empty_backend_name("Backend name is empty.");
-const std::string empty_facet_name("Facet name is empty.");
-const std::string empty_archetype("Archetype is empty.");
 const std::string duplicate_archetype("Duplicate formatter id: ");
 const std::string empty_family("Family cannot be empty.");
 const std::string null_helper_transform("Helper transform supplied is null");
@@ -68,54 +63,10 @@ void registrar::validate(std::shared_ptr<model_to_text_transform> t) const {
     }
 
     /*
-     * Simple name must be populated.
+     * Validate the physical name.
      */
     const auto& n(t->physical_name());
-    if (n.simple().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_simple_name;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_simple_name));
-    }
-
-    /*
-     * Qualified name must be populated.
-     */
-    if (n.qualified().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_qualified_name;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_qualified_name));
-    }
-
-    /*
-     * All locations must belong to a kernel.
-     */
-    const auto l(n.location());
-    if (l.kernel().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_kernel_name;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_kernel_name));
-    }
-
-    /*
-     * All locations must belong to a backend.
-     */
-    if (l.backend().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_backend_name;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_backend_name));
-    }
-
-    /*
-     * All locations must belong to a facet.
-     */
-    if (l.facet().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_facet_name;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_facet_name));
-    }
-
-    /*
-     * Transform must have an archetype.
-     */
-    if (l.archetype().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_archetype;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_archetype));
-    }
+    physical::helpers::name_validator::validate_archetype_name(n);
 }
 
 void registrar::validate(std::shared_ptr<helper_transform> ht) const {

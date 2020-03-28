@@ -22,6 +22,7 @@
 #include "dogen.utility/types/log/logger.hpp"
 #include "dogen.utility/types/io/forward_list_io.hpp"
 #include "dogen.physical/io/entities/name_io.hpp"
+#include "dogen.physical/types/helpers/name_validator.hpp"
 #include "dogen.m2t.csharp/io/transforms/repository_io.hpp"
 #include "dogen.m2t.csharp/types/transforms/registrar_error.hpp"
 #include "dogen.m2t.csharp/types/transforms/registrar.hpp"
@@ -37,12 +38,6 @@ const std::string no_transforms_by_meta_name(
 
 const std::string null_transform_helper("Helper transform supplied is null");
 const std::string null_transform("Transform supplied is null.");
-const std::string empty_simple_name("Simple name is empty.");
-const std::string empty_qualified_name("Qualified name is empty.");
-const std::string empty_kernel_name("Model name is empty.");
-const std::string empty_backend_name("Backend name is empty.");
-const std::string empty_facet_name("Facet name is empty.");
-const std::string empty_archetype("Archetype is empty.");
 const std::string duplicate_archetype("Duplicate formatter name: ");
 const std::string empty_family("Family cannot be empty.");
 
@@ -73,32 +68,27 @@ void registrar::validate() const {
 }
 
 void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
+    /*
+     * Must be pointing to a valid object.
+     */
     if (!t) {
         BOOST_LOG_SEV(lg, error) << null_transform;
         BOOST_THROW_EXCEPTION(registrar_error(null_transform));
     }
 
-    const auto n(t->physical_name());
-    const auto l(n.location());
-    if (l.archetype().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_archetype;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_archetype));
-    }
+    /*
+     * Validate the physical name.
+     */
+    const auto& n(t->physical_name());
+    physical::helpers::name_validator::validate_archetype_name(n);
 
-    if (l.facet().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_facet_name;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_facet_name));
-    }
-
-    if (l.backend().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_backend_name;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_backend_name));
-    }
-
+    /*
+     * Insert it into the main collection of stock transforms.
+     */
     transform_repository_.stock_artefact_formatters_.push_front(t);
 
     /*
-     * Add the formatter to the archetype location stores. Note that
+     * Add the transform to the archetype location stores. Note that
      * we need not worry about canonical archetypes since this backend
      * does not have them.
      */
@@ -108,16 +98,17 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
     alg.names().push_back(n);
 
     /*
-     * Add the formatter to the index by meta-name.
+     * Add the transform to the index by meta-name.
      */
     auto& safmt(transform_repository_.stock_artefact_formatters_by_meta_name());
     safmt[mn].push_front(t);
 
     /*
-     * Add formatter to the index by archetype name. Inserting the
-     * formatter into this repository has the helpful side-effect of
-     * ensuring the formatter id is unique in formatter space.
+     * Add transform to the index by archetype name. Inserting the
+     * transform into this repository has the helpful side-effect of
+     * ensuring the id is unique in physical space.
      */
+    const auto& l(n.location());
     const auto arch(l.archetype());
     auto& fffn(transform_repository_.stock_artefact_formatters_by_archetype());
     const auto pair(std::make_pair(arch, t));
@@ -127,14 +118,12 @@ void registrar::register_transform(std::shared_ptr<model_to_text_transform> t) {
         BOOST_THROW_EXCEPTION(registrar_error(duplicate_archetype + arch));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Registrered formatter: " << t->id()
+    BOOST_LOG_SEV(lg, debug) << "Registrered transform: " << t->id()
                              << " against meta name: " << mn;
 }
 
 void registrar::
 register_helper_transform(std::shared_ptr<helper_transform> ht) {
-
-    // note: not logging by design
     if (!ht) {
         BOOST_LOG_SEV(lg, error) << null_transform_helper;
         BOOST_THROW_EXCEPTION(registrar_error(null_transform_helper));
