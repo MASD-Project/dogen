@@ -1165,6 +1165,21 @@
         "dogen::handcrafted::typeable"
       ],
       "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::name_validator",
+      "stereotypes": [
+        "dogen::handcrafted::typeable"
+      ],
+      "fallback_element_type": "masd::object"
+    },
+    {
+      "name": "helpers::validation_error",
+      "documentation": "An error occurred during validation.\n",
+      "stereotypes": [
+        "masd::exception"
+      ],
+      "fallback_element_type": "masd::object"
     }
   ]
 }
