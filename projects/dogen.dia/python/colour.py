@@ -17,6 +17,19 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
+note_palette =  ['#fcfae8', '#f0e68c']
+package_palette =  ['#f2f2f2', '#ececec', '#e7e7e7', '#e0e0e0', '#dbdbdb', '#d4d4d4', '#cecece', '#c8c8c8', '#c2c2c2', '#bcbcbc']
+manually_gen_palette =  ['#e5e8ff', '#d6daff', '#c6ccff', '#b6bdff', '#a6afff', '#96a1ff', '#8693ff', '#7684ff', '#6776ff', '#5768ff']
+testing_palette =  ['#fee7e7']
+orm_palette =  ['#e5fff2', '#ccffe6', '#b3ffd9', '#99ffcc', '#80ffbf', '#66ffb2', '#4dffa5', '#32ff98', '#19ff8c', '#00ff7f']
+decoration_palette =  ['#f9f0eb', '#e8d0c5', '#d6b19f', '#c49179', '#b27253', '#a0522d']
+variability_palette =  ['#eef6f6', '#ddecec', '#cce2e2', '#bad7d7', '#a9cdcd', '#97c2c2', '#86b8b8', '#74adad', '#63a3a3', '#529999']
+mapping_palette =  ['#ffffe5', '#ffffac', '#ffff72', '#ffff39', '#ffff00']
+templating_palette =  ['#fff3e5', '#ffc072', '#ff8c00']
+serialization_palette =  ['#e5ffe5', '#00ff00']
+visual_studio_palette =  ['#e5ffe5', '#cceecc', '#b3ddb3', '#99cb99', '#80ba80', '#66a966', '#4d984d', '#328632', '#197519', '#006400']
+core_palette =  ['#f7e5ff', '#f2dafd', '#edcefb', '#e8c2f8', '#e3b6f6', '#dda9f3', '#d89ef1', '#d391ef', '#ce85ed', '#c879ea', '#c36de8', '#be60e5', '#b955e3', '#b348e1', '#ae3cdf', '#a930dc', '#a424da', '#9e17d7', '#990cd5', '#9400d3']
+
 for layer in dia.active_display().diagram.data.layers:
     for object in layer.objects:
         #
@@ -28,15 +41,15 @@ for layer in dia.active_display().diagram.data.layers:
         # Theme: UML elements
         #
         if object.type.name == "UML - Note":
-            object.properties["fill_colour"] = "#F0E68C"
+            object.properties["fill_colour"] = note_palette[1]
             continue;
 
         if object.type.name == "UML - LargePackage":
             stereotype = object.properties["stereotype"].value
             if "masd::decoration::modeline_group" in stereotype:
-                object.properties["fill_colour"] = "#FFEFFE"
+                object.properties["fill_colour"] = package_palette[6]
             else:
-                object.properties["fill_colour"] = "#F5F5F5"
+                object.properties["fill_colour"] = package_palette[0]
             continue;
 
         if object.type.name != "UML - Class":
@@ -53,18 +66,18 @@ for layer in dia.active_display().diagram.data.layers:
         #
         # Theme: Manually generated
         #
-        if "dogen::handcrafted::typeable" in stereotype:
-            object.properties["fill_colour"] = "#FFFACD"
-        elif "dogen::handcrafted::typeable::header_only" in stereotype:
-            object.properties["fill_colour"] = "#FFFACD"
+        if "dogen::handcrafted::typeable::header_only" in stereotype:
+            object.properties["fill_colour"] = manually_gen_palette[2]
         elif "dogen::handcrafted::typeable::implementation_only" in stereotype:
-            object.properties["fill_colour"] = "#EEFACD"
+            object.properties["fill_colour"] = manually_gen_palette[1]
+        elif "dogen::handcrafted::typeable" in stereotype:
+            object.properties["fill_colour"] = manually_gen_palette[0]
 
         #
         # Theme: Testing
         #
         elif "dogen::untestable" in stereotype:
-            object.properties["fill_colour"] = "#FBA5A5"
+            object.properties["fill_colour"] = testing_palette[0]
 
         #
         # C++ Reference Implementation specific stereorypes.
@@ -74,13 +87,12 @@ for layer in dia.active_display().diagram.data.layers:
         #
         # Theme: Manually generated
         #
-        elif "cpp_ref_impl::handcrafted::typeable" in stereotype:
-            object.properties["fill_colour"] = "#FFFACD"
         elif "cpp_ref_impl::cpp::header_only" in stereotype:
-            object.properties["fill_colour"] = "#FFFACD"
+            object.properties["fill_colour"] = manually_gen_palette[2]
         elif "cpp_ref_impl::cpp::implementation_only" in stereotype:
-            object.properties["fill_colour"] = "#EEFACD"
-
+            object.properties["fill_colour"] = manually_gen_palette[1]
+        elif "cpp_ref_impl::handcrafted::typeable" in stereotype:
+            object.properties["fill_colour"] = manually_gen_palette[0]
 
         #
         # MASD specific stereorypes.
@@ -91,88 +103,88 @@ for layer in dia.active_display().diagram.data.layers:
         # Theme: ORM
         #
         elif "masd::orm::object" in stereotype:
-            object.properties["fill_colour"] = "#98FB98"
+            object.properties["fill_colour"] = orm_palette[1]
         elif "masd::orm::value" in stereotype:
-            object.properties["fill_colour"] = "#DDA0DD"
+            object.properties["fill_colour"] = orm_palette[2]
         elif "masd::orm::common_odb_options" in stereotype:
-            object.properties["fill_colour"] = "#C278C2"
+            object.properties["fill_colour"] = orm_palette[4]
 
         #
         # Theme: Decorations
         #
-        elif "masd::decoration::modeline" in stereotype:
-            object.properties["fill_colour"] = "#DDB7B7"
         elif "masd::decoration::licence" in stereotype:
-            object.properties["fill_colour"] = "#DDB7DD"
+            object.properties["fill_colour"] = decoration_palette[0]
         elif "masd::decoration::generation_marker" in stereotype:
-            object.properties["fill_colour"] = "#ACACBB"
+            object.properties["fill_colour"] = decoration_palette[1]
+        elif "masd::decoration::modeline" in stereotype:
+            object.properties["fill_colour"] = decoration_palette[2]
 
         #
-        # Theme: variability
+        # Theme: Variability
         #
         elif "masd::variability::profile_template" in stereotype:
-            object.properties["fill_colour"] = "#DBEEEE"
+            object.properties["fill_colour"] = variability_palette[0]
         elif "masd::variability::profile" in stereotype:
-            object.properties["fill_colour"] = "#B8F1F1"
+            object.properties["fill_colour"] = variability_palette[1]
         elif "masd::variability::feature_template_bundle" in stereotype:
-            object.properties["fill_colour"] = "#7BB6B6"
+            object.properties["fill_colour"] = variability_palette[2]
         elif "masd::variability::feature_bundle" in stereotype:
-            object.properties["fill_colour"] = "#B2E2E2"
+            object.properties["fill_colour"] = variability_palette[3]
         elif "masd::variability::initializer" in stereotype:
-            object.properties["fill_colour"] = "#529999"
+            object.properties["fill_colour"] = variability_palette[4]
 
         #
         # Theme: Mapping
         #
         elif "masd::mapping::fixed_mappable" in stereotype:
-            object.properties["fill_colour"] = "#DEE463"
+            object.properties["fill_colour"] = mapping_palette[1]
         elif "masd::mapping::extensible_mappable" in stereotype:
-            object.properties["fill_colour"] = "#F9FF7C"
+            object.properties["fill_colour"] = mapping_palette[2]
 
         #
         # Theme: Templating
         #
         elif "masd::templating::logic_less_templates" in stereotype:
-            object.properties["fill_colour"] = "#5EB55E"
+            object.properties["fill_colour"] = templating_palette[1]
 
         #
         # Theme: Serialization
         #
         elif "masd::serialization::type_registrar" in stereotype:
-            object.properties["fill_colour"] = "#00FF00"
+            object.properties["fill_colour"] = serialization_palette[1]
 
         #
         # Theme: Visual Studio
         #
         elif "masd::visual_studio::solution" in stereotype:
-            object.properties["fill_colour"] = "#5768FF"
+            object.properties["fill_colour"] = visual_studio_palette[0]
         elif "masd::visual_studio::project" in stereotype:
-            object.properties["fill_colour"] = "#909BFF"
+            object.properties["fill_colour"] = visual_studio_palette[1]
         elif "masd::visual_studio::msbuild_targets" in stereotype:
-            object.properties["fill_colour"] = "#535A99"
+            object.properties["fill_colour"] = visual_studio_palette[2]
 
         #
         # Theme: Build
         #
         elif "masd::build::cmakelists" in stereotype:
-            object.properties["fill_colour"] = "#C0CE42"
+            object.properties["fill_colour"] = visual_studio_palette[3]
 
         #
         # Theme: Core meta-elements
         #
         elif "masd::enumeration" in stereotype:
-            object.properties["fill_colour"] = "#FFEFD5"
+            object.properties["fill_colour"] = core_palette[1]
         elif "masd::primitive" in stereotype:
-            object.properties["fill_colour"] = "#B0C4DE"
+            object.properties["fill_colour"] = core_palette[2]
         elif "masd::exception" in stereotype:
-            object.properties["fill_colour"] = "#FFDAB9"
+            object.properties["fill_colour"] = core_palette[3]
         elif "masd::object_template" in stereotype:
-            object.properties["fill_colour"] = "#EED2DE"
-        elif "masd::object_template" in stereotype:
-            object.properties["fill_colour"] = "#EED2DE"
+            object.properties["fill_colour"] = core_palette[4]
+        elif "masd::object" in stereotype:
+            object.properties["fill_colour"] = core_palette[1]
         elif "masd::entry_point" in stereotype:
-            object.properties["fill_colour"] = "#A8EAFF"
+            object.properties["fill_colour"] = core_palette[5]
         elif "masd::assistant" in stereotype:
-            object.properties["fill_colour"] = "#A09D9D"
+            object.properties["fill_colour"] = core_palette[6]
         else:
-            object.properties["fill_colour"] = "#F5FFFA"
+            object.properties["fill_colour"] = core_palette[0]
