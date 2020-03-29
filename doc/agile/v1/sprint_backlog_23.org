@@ -12,40 +12,40 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-29 Sun 16:45]
+#+CAPTION: Clock summary at [2020-03-29 Sun 23:11]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *59:16* |       |       | 100.0 |
+| *Total time*                                           | *61:35* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 59:16   |       |       | 100.0 |
-| Active                                                 |         | 59:16 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  7:27 |  12.6 |
+| Stories                                                | 61:35   |       |       | 100.0 |
+| Active                                                 |         | 61:35 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  7:27 |  12.1 |
 | Create a demo and presentation for previous sprint     |         |       |  0:28 |   0.8 |
-| Sprint and product backlog grooming                    |         |       |  4:25 |   7.5 |
+| Sprint and product backlog grooming                    |         |       |  4:25 |   7.2 |
 | Rename archetypes model to physical model              |         |       |  0:28 |   0.8 |
 | Rename assets model to logical model                   |         |       |  0:29 |   0.8 |
 | Consider renaming "meta-model" namespace               |         |       |  0:37 |   1.0 |
-| Rename engine to orchestration                         |         |       |  1:04 |   1.8 |
-| Merge extraction model with physical model             |         |       |  4:35 |   7.7 |
+| Rename engine to orchestration                         |         |       |  1:04 |   1.7 |
+| Merge extraction model with physical model             |         |       |  4:35 |   7.4 |
 | Remove manual feature in profile merge transform       |         |       |  0:08 |   0.2 |
 | Add variability domains to the dumpspecs activity      |         |       |  0:12 |   0.3 |
-| Add org-mode option to dumpspacs                       |         |       |  0:53 |   1.5 |
-| Analysis on designing and implement physical types     |         |       |  6:52 |  11.6 |
+| Add org-mode option to dumpspacs                       |         |       |  0:53 |   1.4 |
+| Analysis on designing and implement physical types     |         |       |  6:52 |  11.2 |
 | Remove =element= from the modeling location            |         |       |  0:02 |   0.1 |
-| Fix clang-cl LNK4217 warnings                          |         |       |  1:04 |   1.8 |
-| Analysis on creating a masd kernel model               |         |       |  0:53 |   1.5 |
-| Rename generation models to =m2t=                      |         |       |  1:04 |   1.8 |
+| Fix clang-cl LNK4217 warnings                          |         |       |  1:04 |   1.7 |
+| Analysis on creating a masd kernel model               |         |       |  0:53 |   1.4 |
+| Rename generation models to =m2t=                      |         |       |  1:04 |   1.7 |
 | Move all generation features away from generation      |         |       |  0:17 |   0.5 |
-| Rename generation transforms                           |         |       |  4:49 |   8.1 |
+| Rename generation transforms                           |         |       |  4:49 |   7.8 |
 | Remove kernel from models                              |         |       |  0:36 |   1.0 |
 | Rename the default MASD kernel                         |         |       |  0:44 |   1.2 |
 | Consider removing archetype location by family         |         |       |  0:40 |   1.1 |
 | Add part to physical location                          |         |       |  1:16 |   2.1 |
-| Add names to logical model                             |         |       |  1:48 |   3.0 |
-| Make physical location entries simple names            |         |       | 15:09 |  25.6 |
-| Implement archetype locations from physical meta-model |         |       |  2:47 |   4.7 |
-| Consider generating a colour palette procedurally      |         |       |  0:29 |   0.8 |
+| Add names to logical model                             |         |       |  1:48 |   2.9 |
+| Consider generating a colour palette procedurally      |         |       |  2:48 |   4.5 |
+| Make physical location entries simple names            |         |       | 15:09 |  24.6 |
+| Implement archetype locations from physical meta-model |         |       |  2:47 |   4.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -711,6 +711,23 @@ model but for the physical model:
   =facet=.
 - create a name builder and/or name factory that make qualified names.
 
+*** COMPLETED Consider generating a colour palette procedurally       :story:
+    CLOSED: [2020-03-29 Sun 23:11]
+    :LOGBOOK:
+    CLOCK: [2020-03-29 Sun 22:53]--[2020-03-29 Sun 23:11] =>  0:18
+    CLOCK: [2020-03-29 Sun 20:51]--[2020-03-29 Sun 22:52] =>  2:01
+    CLOCK: [2020-03-29 Sun 16:15]--[2020-03-29 Sun 16:44] =>  0:29
+    :END:
+
+See if we can create a colour palette using a script. This can be done
+manually and then pasted into the existing script.
+
+Links:
+
+- [[https://seaborn.pydata.org/tutorial/color_palettes.html][seaborn: Choosing color palettes]]
+- [[https://seaborn.pydata.org/installing.html][seaborn: Installing and getting started]]
+- [[https://stackoverflow.com/questions/38249454/extract-rgb-or-6-digit-code-from-seaborn-palette][SO: Extract RGB or 6 digit code from Seaborn palette]]
+
 *** STARTED Make physical location entries simple names               :story:
     :LOGBOOK:
     CLOCK: [2020-03-28 Sat 21:21]--[2020-03-29 Sun 00:18] =>  2:57
@@ -818,20 +835,6 @@ Notes:
 
 - formatters should add their data to a registrar that lives in the
   physical model rather than expose it via an interface.
-
-*** STARTED Consider generating a colour palette procedurally         :story:
-    :LOGBOOK:
-    CLOCK: [2020-03-29 Sun 16:15]--[2020-03-29 Sun 16:44] =>  0:29
-    :END:
-
-See if we can create a colour palette using a script. This can be done
-manually and then pasted into the existing script.
-
-Links:
-
-- [[https://seaborn.pydata.org/tutorial/color_palettes.html][seaborn: Choosing color palettes]]
-- [[https://seaborn.pydata.org/installing.html][seaborn: Installing and getting started]]
-- [[https://stackoverflow.com/questions/38249454/extract-rgb-or-6-digit-code-from-seaborn-palette][SO: Extract RGB or 6 digit code from Seaborn palette]]
 
 *** Consider moving compatibility mode to feature mode                :story:
 
