@@ -2255,6 +2255,12 @@ exactly the same fashion as we do for meta-elements. For good measure,
 once we start [[*Colouring script should be included as part of package][distributing the colouring script with dogen]], we can
 simply call the main script from the user script.
 
+Links:
+
+- [[https://seaborn.pydata.org/tutorial/color_palettes.html][seaborn: Choosing color palettes]]
+- [[https://seaborn.pydata.org/installing.html][seaborn: Installing and getting started]]
+- [[https://stackoverflow.com/questions/38249454/extract-rgb-or-6-digit-code-from-seaborn-palette][SO: Extract RGB or 6 digit code from Seaborn palette]]
+
 *** Add support for operations                                        :story:
 
 #+begin_quote
