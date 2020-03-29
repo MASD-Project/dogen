@@ -192,7 +192,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#98fb98"/>
+        <dia:color val="#ccffe6"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -302,7 +302,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dda0dd"/>
+        <dia:color val="#b3ffd9"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -412,7 +412,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f5fffa"/>
+        <dia:color val="#f2dafd"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -522,7 +522,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#b0c4de"/>
+        <dia:color val="#edcefb"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -596,7 +596,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#f5f5f5"/>
+        <dia:color val="#f2f2f2"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -670,7 +670,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f5fffa"/>
+        <dia:color val="#f7e5ff"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -781,7 +781,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ffefd5"/>
+        <dia:color val="#f2dafd"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -891,7 +891,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ffdab9"/>
+        <dia:color val="#e8c2f8"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -1001,7 +1001,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f5fffa"/>
+        <dia:color val="#f7e5ff"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -1111,7 +1111,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f5fffa"/>
+        <dia:color val="#f2dafd"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -1222,7 +1222,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#b0c4de"/>
+        <dia:color val="#edcefb"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -1333,7 +1333,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ffefd5"/>
+        <dia:color val="#f2dafd"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -1444,7 +1444,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ffdab9"/>
+        <dia:color val="#e8c2f8"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -1555,7 +1555,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#98fb98"/>
+        <dia:color val="#ccffe6"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -1666,7 +1666,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dda0dd"/>
+        <dia:color val="#b3ffd9"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2033,7 +2033,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#eed2de"/>
+        <dia:color val="#e3b6f6"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2143,7 +2143,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#eed2de"/>
+        <dia:color val="#e3b6f6"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2254,7 +2254,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#529999"/>
+        <dia:color val="#a9cdcd"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2364,7 +2364,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#529999"/>
+        <dia:color val="#a9cdcd"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2439,7 +2439,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffeffe"/>
+        <dia:color val="#cecece"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -2513,7 +2513,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ddb7b7"/>
+        <dia:color val="#d6b19f"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2624,7 +2624,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ddb7dd"/>
+        <dia:color val="#f9f0eb"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2734,7 +2734,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ddb7dd"/>
+        <dia:color val="#f9f0eb"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2845,7 +2845,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#acacbb"/>
+        <dia:color val="#e8d0c5"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -2955,7 +2955,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#acacbb"/>
+        <dia:color val="#e8d0c5"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -3066,7 +3066,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#eef6f6"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -3176,7 +3176,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dbeeee"/>
+        <dia:color val="#eef6f6"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -3353,7 +3353,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_colour">
-        <dia:color val="#ffeffe"/>
+        <dia:color val="#cecece"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -3428,7 +3428,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#ddb7b7"/>
+        <dia:color val="#d6b19f"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -3539,7 +3539,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#7bb6b6"/>
+        <dia:color val="#cce2e2"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -3649,7 +3649,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#7bb6b6"/>
+        <dia:color val="#cce2e2"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -3811,7 +3811,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dee463"/>
+        <dia:color val="#ffffac"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -3921,7 +3921,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f9ff7c"/>
+        <dia:color val="#ffff72"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -4031,7 +4031,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#dee463"/>
+        <dia:color val="#ffffac"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -4142,7 +4142,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#f9ff7c"/>
+        <dia:color val="#ffff72"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -4253,7 +4253,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#5eb55e"/>
+        <dia:color val="#ffc072"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -4363,7 +4363,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#5eb55e"/>
+        <dia:color val="#ffc072"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -4848,7 +4848,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#5768ff"/>
+        <dia:color val="#c6ccff"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -4958,7 +4958,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#5768ff"/>
+        <dia:color val="#c6ccff"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -5069,7 +5069,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#909bff"/>
+        <dia:color val="#b6bdff"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -5179,7 +5179,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#909bff"/>
+        <dia:color val="#b6bdff"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -5290,7 +5290,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#a8eaff"/>
+        <dia:color val="#dda9f3"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -5400,7 +5400,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#a8eaff"/>
+        <dia:color val="#dda9f3"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -5511,7 +5511,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#c278c2"/>
+        <dia:color val="#80ffbf"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -5621,7 +5621,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#c278c2"/>
+        <dia:color val="#80ffbf"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -5732,7 +5732,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#535a99"/>
+        <dia:color val="#a6afff"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -5842,7 +5842,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#535a99"/>
+        <dia:color val="#a6afff"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -6004,7 +6004,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#c0ce42"/>
+        <dia:color val="#8693ff"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -6114,7 +6114,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#c0ce42"/>
+        <dia:color val="#8693ff"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -6225,7 +6225,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#a09d9d"/>
+        <dia:color val="#d89ef1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -6335,7 +6335,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#a09d9d"/>
+        <dia:color val="#d89ef1"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -6446,7 +6446,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#b2e2e2"/>
+        <dia:color val="#bad7d7"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -6556,7 +6556,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#b2e2e2"/>
+        <dia:color val="#bad7d7"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -6667,7 +6667,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#b8f1f1"/>
+        <dia:color val="#ddecec"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -6777,7 +6777,7 @@ as possible, so we can evaluate how they work together.
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:attribute name="fill_color">
-        <dia:color val="#b8f1f1"/>
+        <dia:color val="#ddecec"/>
       </dia:attribute>
       <dia:attribute name="text_color">
         <dia:color val="#000000"/>
@@ -6825,6 +6825,73 @@ as possible, so we can evaluate how they work together.
       </dia:attribute>
       <dia:attribute name="templates"/>
       <dia:childnode parent="O5"/>
+    </dia:object>
+    <dia:object type="UML - Association" version="2" id="O70">
+      <dia:attribute name="name">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="direction">
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="show_direction">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="assoc_type">
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="role_a">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="multipicity_a">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="visibility_a">
+        <dia:enum val="3"/>
+      </dia:attribute>
+      <dia:attribute name="show_arrow_a">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="role_b">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="multipicity_b">
+        <dia:string>##</dia:string>
+      </dia:attribute>
+      <dia:attribute name="visibility_b">
+        <dia:enum val="3"/>
+      </dia:attribute>
+      <dia:attribute name="show_arrow_b">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="obj_pos">
+        <dia:point val="-5.665,-58"/>
+      </dia:attribute>
+      <dia:attribute name="obj_bb">
+        <dia:rectangle val="-6.415,-60.05;13.3425,-57.2"/>
+      </dia:attribute>
+      <dia:attribute name="meta">
+        <dia:composite type="dict"/>
+      </dia:attribute>
+      <dia:attribute name="orth_points">
+        <dia:point val="-5.665,-58"/>
+        <dia:point val="-5.665,-60"/>
+        <dia:point val="13.1425,-60"/>
+        <dia:point val="13.1425,-58"/>
+      </dia:attribute>
+      <dia:attribute name="orth_orient">
+        <dia:enum val="1"/>
+        <dia:enum val="0"/>
+        <dia:enum val="1"/>
+      </dia:attribute>
+      <dia:attribute name="orth_autoroute">
+        <dia:boolean val="false"/>
+      </dia:attribute>
+      <dia:attribute name="text_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
+      <dia:attribute name="line_colour">
+        <dia:color val="#000000"/>
+      </dia:attribute>
     </dia:object>
   </dia:layer>
 </dia:diagram>
