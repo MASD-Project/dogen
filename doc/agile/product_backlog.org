@@ -55,7 +55,6 @@ transport it all the way to OM's workflow.
 In the future, when everything is a model, data file directories and
 reference directories will become one and the same.
 
-
 *** Add version support                                               :story:
 
 At present we are generating the product version file as part of some
@@ -5614,9 +5613,7 @@ use a similar scheme as GCC: =-Wname= and =-Wno-name=.
 We should issue a warning if a user defines methods in value or entity
 objects as its most likely by mistake.
 
-Merged stories:
-
-*Report validation errors like compilers do*
+*** Report validation errors like compilers do
 
 It would be very useful to output validation errors like a compiler,
 referencing the original file from where the meta-element was defined
@@ -5625,6 +5622,9 @@ could also have "reporting themes" such as visual studio or
 GCC. Finally, we should support validation warnings, using the same
 conventions as compilers (-Wall, etc). Though perhaps these are better
 defined as part of the metamodel rather than command-line arguments.
+
+We should implement this via =boost::error_info=, by adding file name,
+line and column everywhere for all validation rules.
 
 *** Check for incompatibility between input language and kernels      :story:
 
@@ -7754,13 +7754,20 @@ want to use all attributes or just the primary key. For less than we
 need to know that all attributes in the key support less than. This
 must be supplied by the PDM.
 
-*** Consider supporting non-boost exceptions                :reviewing:story:
+*** Consider supporting non-boost exceptions                          :story:
 
 It should be fairly trivial to disable the use of boost exception when
 generating exceptions. This would allow us to create a model that is
-totally independent of boost.
+totally independent of boost. We could do this via meta-data flags. We
+probably should have several "types" of exceptions:
 
-*** Consider supporting user supplied exception base class            :story:
+- user defined (no dependencies)
+- inherits =std::exception=
+- inherits =boost::exception=
+
+Merged stories:
+
+*Consider supporting user supplied exception base class*
 
 For models that interface with other models, it may make sense to have
 an exception class that is derived from a user defined class. We could
@@ -7786,7 +7793,7 @@ types. We haven't got a use case for it yet though.
 *** Use error codes in exceptions                                     :story:
 
 Avoid breaking tests every time the exception text changes by creating
-a error code property in kitanda exceptions.
+a error code property in exceptions.
 
 After some investigation it was found that boost already supports this
 approach in =system=, as per [[http://en.highscore.de/cpp/boost/errorhandling.html][boost book]]. We could define a new
@@ -7808,7 +7815,7 @@ codes. This would allow us to code generate them. The only problem is
 if multiple exceptions share an error code, but this should probably
 not happen?
 
-*** Control the emission of pragma once with dynamic extensions       :story:
+*** Control the emission of pragma once with meta-data                :story:
 
 At present we are always adding =#pragrma once= to the header guard:
 
@@ -7818,16 +7825,6 @@ At present we are always adding =#pragrma once= to the header guard:
 
 This should really be optional and controlled via dynamic extensions,
 probably at the c++ model level.
-
-*** Add the the EMF purchase order examples to manual                 :story:
-
-We should make use of the examples for eCore to demo Dogen. We could
-make a similar chapter flow in the manual, starting with a simpler
-model and then evolving it to the most complicated one. It would
-require a little bit of an adaptation since Dogen does not support all
-of the features that EMF has, but it seems a better way to demo Dogen
-rather than just talk about the code structure. We could add this
-after the section on authoring diagrams.
 
 *** Consider adding include directive to stitch                       :story:
 
@@ -8139,7 +8136,7 @@ Links:
 - [[https://github.com/qicosmos/cinatra][cinatra]]: another HTTP framework. Example site: http://purecpp.org/
 - OpenApi code generator examples: [[https://github.com/OpenAPITools/openapi-generator/tree/master/samples/server/petstore/cpp-pistache][petstore/cpp-pistache]], [[https://github.com/OpenAPITools/openapi-generator/tree/master/samples/server/petstore/cpp-restbed][cpp-restbed]]
 
-*** Factory method instead of complete constructor                    :story:
+*** Factory method instead of complete constructor          :reviewing:story:
 
 Perhaps it is useful to give users the option to create a static
 factory method on a class instead of (in addition to?) a complete
@@ -12403,6 +12400,16 @@ It seems this paper has a lot of useful information for meta-modeling:
 These stories are far in the future or just plain crazy: visionary
 work and random ideas. They are require fundamental rethinking of the
 core, or are not obviously related to dogen's current vision.
+
+*** Add the the EMF purchase order examples to manual                 :story:
+
+We should make use of the examples for eCore to demo Dogen. We could
+make a similar chapter flow in the manual, starting with a simpler
+model and then evolving it to the most complicated one. It would
+require a little bit of an adaptation since Dogen does not support all
+of the features that EMF has, but it seems a better way to demo Dogen
+rather than just talk about the code structure. We could add this
+after the section on authoring diagrams.
 
 *** Investigate CLAFER                                                :story:
 
