@@ -8142,7 +8142,7 @@ Links:
 - [[https://github.com/qicosmos/cinatra][cinatra]]: another HTTP framework. Example site: http://purecpp.org/
 - OpenApi code generator examples: [[https://github.com/OpenAPITools/openapi-generator/tree/master/samples/server/petstore/cpp-pistache][petstore/cpp-pistache]], [[https://github.com/OpenAPITools/openapi-generator/tree/master/samples/server/petstore/cpp-restbed][cpp-restbed]]
 
-*** Factory method instead of complete constructor          :reviewing:story:
+*** Factory method instead of complete constructor                    :story:
 
 Perhaps it is useful to give users the option to create a static
 factory method on a class instead of (in addition to?) a complete
@@ -8507,7 +8507,7 @@ need to have similar characteristics to real models such as:
 - Username. jdoe, twilliams, jfang
 - Words. Chosen randomly from lorem ipsum
 
-*** Add support for RPC                                                :epic:
+*** Add support for RPC                                      :reviewing:epic:
 
 It would be nice to be able to mark a type as a service and then have
 dogen generate all the comms for it:

@@ -12,39 +12,39 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-03-29 Sun 23:11]
+#+CAPTION: Clock summary at [2020-03-31 Tue 22:31]
 | <75>                                                   |         |       |       |       |
 | Headline                                               | Time    |       |       |     % |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *61:35* |       |       | 100.0 |
+| *Total time*                                           | *62:32* |       |       | 100.0 |
 |--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 61:35   |       |       | 100.0 |
-| Active                                                 |         | 61:35 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  7:27 |  12.1 |
-| Create a demo and presentation for previous sprint     |         |       |  0:28 |   0.8 |
-| Sprint and product backlog grooming                    |         |       |  4:25 |   7.2 |
-| Rename archetypes model to physical model              |         |       |  0:28 |   0.8 |
+| Stories                                                | 62:32   |       |       | 100.0 |
+| Active                                                 |         | 62:32 |       | 100.0 |
+| Edit release notes for previous sprint                 |         |       |  7:27 |  11.9 |
+| Create a demo and presentation for previous sprint     |         |       |  0:28 |   0.7 |
+| Sprint and product backlog grooming                    |         |       |  4:29 |   7.2 |
+| Rename archetypes model to physical model              |         |       |  0:28 |   0.7 |
 | Rename assets model to logical model                   |         |       |  0:29 |   0.8 |
 | Consider renaming "meta-model" namespace               |         |       |  0:37 |   1.0 |
 | Rename engine to orchestration                         |         |       |  1:04 |   1.7 |
-| Merge extraction model with physical model             |         |       |  4:35 |   7.4 |
+| Merge extraction model with physical model             |         |       |  4:35 |   7.3 |
 | Remove manual feature in profile merge transform       |         |       |  0:08 |   0.2 |
 | Add variability domains to the dumpspecs activity      |         |       |  0:12 |   0.3 |
 | Add org-mode option to dumpspacs                       |         |       |  0:53 |   1.4 |
-| Analysis on designing and implement physical types     |         |       |  6:52 |  11.2 |
+| Analysis on designing and implement physical types     |         |       |  6:52 |  11.0 |
 | Remove =element= from the modeling location            |         |       |  0:02 |   0.1 |
 | Fix clang-cl LNK4217 warnings                          |         |       |  1:04 |   1.7 |
 | Analysis on creating a masd kernel model               |         |       |  0:53 |   1.4 |
 | Rename generation models to =m2t=                      |         |       |  1:04 |   1.7 |
 | Move all generation features away from generation      |         |       |  0:17 |   0.5 |
-| Rename generation transforms                           |         |       |  4:49 |   7.8 |
+| Rename generation transforms                           |         |       |  4:49 |   7.7 |
 | Remove kernel from models                              |         |       |  0:36 |   1.0 |
 | Rename the default MASD kernel                         |         |       |  0:44 |   1.2 |
 | Consider removing archetype location by family         |         |       |  0:40 |   1.1 |
-| Add part to physical location                          |         |       |  1:16 |   2.1 |
+| Add part to physical location                          |         |       |  1:16 |   2.0 |
 | Add names to logical model                             |         |       |  1:48 |   2.9 |
 | Consider generating a colour palette procedurally      |         |       |  2:48 |   4.5 |
-| Make physical location entries simple names            |         |       | 15:09 |  24.6 |
+| Make physical location entries simple names            |         |       | 16:02 |  25.6 |
 | Implement archetype locations from physical meta-model |         |       |  2:47 |   4.5 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
@@ -318,6 +318,7 @@ Time spent creating the demo and presentation. Use the demo project:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-03-31 Tue 21:31]--[2020-03-31 Tue 21:35] =>  0:10
     CLOCK: [2020-03-29 Sun 13:41]--[2020-03-29 Sun 13:55] =>  0:14
     CLOCK: [2020-03-27 Fri 13:58]--[2020-03-27 Fri 14:10] =>  0:12
     CLOCK: [2020-03-27 Fri 08:01]--[2020-03-27 Fri 08:39] =>  0:38
@@ -730,6 +731,8 @@ Links:
 
 *** STARTED Make physical location entries simple names               :story:
     :LOGBOOK:
+    CLOCK: [2020-03-31 Tue 21:58]--[2020-03-31 Tue 22:30] =>  0:32
+    CLOCK: [2020-03-31 Tue 21:36]--[2020-03-31 Tue 21:57] =>  0:21
     CLOCK: [2020-03-28 Sat 21:21]--[2020-03-29 Sun 00:18] =>  2:57
     CLOCK: [2020-03-27 Fri 17:35]--[2020-03-27 Fri 17:43] =>  0:08
     CLOCK: [2020-03-27 Fri 14:10]--[2020-03-27 Fri 17:21] =>  3:11
