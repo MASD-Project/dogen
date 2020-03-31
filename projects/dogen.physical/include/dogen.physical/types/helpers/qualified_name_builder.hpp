@@ -59,15 +59,6 @@ public:
     /**@}*/
 
     /**
-     * @brief Builds a qualified name for the part region in physical
-     * space.
-     */
-    /**@{*/
-    static std::string build_part(const entities::location& l);
-    static std::string build_part(const entities::name& n);
-    /**@}*/
-
-    /**
      * @brief Builds a qualified name for the facet region in physical
      * space.
      */

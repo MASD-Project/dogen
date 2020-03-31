@@ -50,11 +50,6 @@ public:
     static void validate_backend_name(const entities::name& n);
 
     /**
-     * @brief Checks if the name is valid as a part name.
-     */
-    static void validate_part_name(const entities::name& n);
-
-    /**
      * @brief Checks if the name is valid as a facet name.
      */
     static void validate_facet_name(const entities::name& n);

@@ -69,14 +69,6 @@ std::string qualified_name_builder::build_backend(const entities::name& n) {
     return build_backend(n.location());
 }
 
-std::string qualified_name_builder::build_part(const entities::location& l) {
-    return build_backend(l) + dot + l.part();
-}
-
-std::string qualified_name_builder::build_part(const entities::name& n) {
-    return build_part(n.location());
-}
-
 std::string qualified_name_builder::build_facet(const entities::location& l,
     const bool add_canonical) {
 
@@ -103,10 +95,6 @@ std::string qualified_name_builder::build_facet(const entities::name& n,
 std::string
 qualified_name_builder::build_archetype(const entities::location& l) {
     std::string r(build_backend(l));
-    const bool has_part(!l.part().empty());
-    if (has_part)
-        r += dot + l.part();
-
     const bool has_facet(!l.facet().empty());
     if (has_facet)
         r += dot + l.facet();

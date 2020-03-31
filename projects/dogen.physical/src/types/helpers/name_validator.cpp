@@ -32,8 +32,6 @@ const std::string empty_simple("Simple name is empty.");
 const std::string empty_qualified("Qualified name is empty.");
 const std::string empty_kernel("Model name is empty.");
 const std::string empty_backend("Backend name is empty.");
-const std::string empty_part("Part name is empty.");
-const std::string non_empty_part("Part name is not empty.");
 const std::string empty_facet("Facet name is empty.");
 const std::string non_empty_facet("Facet name is not empty.");
 const std::string empty_archetype("Archetype is empty.");
@@ -99,35 +97,6 @@ void name_validator::validate_backend_name(const entities::name& n) {
     }
 }
 
-void name_validator::validate_part_name(const entities::name& n) {
-    common_validation(n);
-
-    /*
-     * Part must be populated.
-     */
-    const auto& l(n.location());
-    if (l.part().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_part;
-        BOOST_THROW_EXCEPTION(validation_error(empty_part));
-    }
-
-    /*
-     * Facet must not be populated.
-     */
-    if (!l.facet().empty()) {
-        BOOST_LOG_SEV(lg, error) << non_empty_facet;
-        BOOST_THROW_EXCEPTION(validation_error(non_empty_facet));
-    }
-
-    /*
-     * Archetype must not be populated.
-     */
-    if (!l.archetype().empty()) {
-        BOOST_LOG_SEV(lg, error) << non_empty_archetype;
-        BOOST_THROW_EXCEPTION(validation_error(non_empty_archetype));
-    }
-}
-
 void name_validator::validate_facet_name(const entities::name& n) {
     common_validation(n);
     /*
@@ -137,14 +106,6 @@ void name_validator::validate_facet_name(const entities::name& n) {
     if (l.facet().empty()) {
         BOOST_LOG_SEV(lg, error) << empty_facet;
         BOOST_THROW_EXCEPTION(validation_error(empty_facet));
-    }
-
-    /*
-     * Part must not be populated.
-     */
-    if (!l.part().empty()) {
-        BOOST_LOG_SEV(lg, error) << non_empty_part;
-        BOOST_THROW_EXCEPTION(validation_error(non_empty_part));
     }
 
     /*

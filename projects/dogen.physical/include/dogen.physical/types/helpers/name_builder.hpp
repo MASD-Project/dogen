@@ -41,11 +41,6 @@ public:
     name_builder& backend(const std::string& s);
 
     /**
-     * @brief Adds a part to the name.
-     */
-    name_builder& part(const std::string& s);
-
-    /**
      * @brief Adds a facet to the name.
      */
     name_builder& facet(const std::string& s);

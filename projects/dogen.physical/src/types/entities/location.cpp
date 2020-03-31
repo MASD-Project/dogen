@@ -25,12 +25,10 @@ namespace dogen::physical::entities {
 location::location(
     const std::string& kernel,
     const std::string& backend,
-    const std::string& part,
     const std::string& facet,
     const std::string& archetype)
     : kernel_(kernel),
       backend_(backend),
-      part_(part),
       facet_(facet),
       archetype_(archetype) { }
 
@@ -38,7 +36,6 @@ void location::swap(location& other) noexcept {
     using std::swap;
     swap(kernel_, other.kernel_);
     swap(backend_, other.backend_);
-    swap(part_, other.part_);
     swap(facet_, other.facet_);
     swap(archetype_, other.archetype_);
 }
@@ -46,7 +43,6 @@ void location::swap(location& other) noexcept {
 bool location::operator==(const location& rhs) const {
     return kernel_ == rhs.kernel_ &&
         backend_ == rhs.backend_ &&
-        part_ == rhs.part_ &&
         facet_ == rhs.facet_ &&
         archetype_ == rhs.archetype_;
 }
@@ -87,22 +83,6 @@ void location::backend(const std::string& v) {
 
 void location::backend(const std::string&& v) {
     backend_ = std::move(v);
-}
-
-const std::string& location::part() const {
-    return part_;
-}
-
-std::string& location::part() {
-    return part_;
-}
-
-void location::part(const std::string& v) {
-    part_ = v;
-}
-
-void location::part(const std::string&& v) {
-    part_ = std::move(v);
 }
 
 const std::string& location::facet() const {

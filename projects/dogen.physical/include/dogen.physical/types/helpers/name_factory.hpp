@@ -37,10 +37,6 @@ class name_factory final {
 public:
     static entities::name make(const std::string& backend,
         const std::string& facet, const std::string& archetype);
-
-    static entities::name make(const std::string& backend,
-        const std::string& part, const std::string& facet,
-        const std::string& archetype);
 };
 
 }

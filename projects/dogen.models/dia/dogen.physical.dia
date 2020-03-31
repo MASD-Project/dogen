@@ -394,7 +394,7 @@ physical dimension of MASD conceptual space.
         <dia:point val="107,-103"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="106.95,-103.05;116.405,-96.95"/>
+        <dia:rectangle val="106.95,-103.05;116.405,-97.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="107,-103"/>
@@ -403,7 +403,7 @@ physical dimension of MASD conceptual space.
         <dia:real val="9.3550000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#location#</dia:string>
@@ -534,29 +534,6 @@ The kernel is always expected to be  @e masd.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Name of the backend that owns this field, if any.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#part#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Part in which we are located. Facets span multiple parts.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -8360,7 +8337,7 @@ user choices.#</dia:string>
         <dia:point val="111.062,-94"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="110.312,-97.05;111.877,-93.2"/>
+        <dia:rectangle val="110.312,-97.85;111.877,-93.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8369,7 +8346,7 @@ user choices.#</dia:string>
         <dia:point val="111.062,-94"/>
         <dia:point val="111.062,-96"/>
         <dia:point val="111.677,-96"/>
-        <dia:point val="111.677,-97"/>
+        <dia:point val="111.677,-97.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -13836,7 +13813,7 @@ The simple name must be unique for a given location.#</dia:string>
         <dia:point val="120,-102.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="116.305,-103.1;120.75,-97.9"/>
+        <dia:rectangle val="116.305,-103.1;120.75,-98.7"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13844,8 +13821,8 @@ The simple name must be unique for a given location.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="120,-102.3"/>
         <dia:point val="118,-102.3"/>
-        <dia:point val="118,-98.7"/>
-        <dia:point val="116.355,-98.7"/>
+        <dia:point val="118,-99.5"/>
+        <dia:point val="116.355,-99.5"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -13863,7 +13840,7 @@ The simple name must be unique for a given location.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O106" connection="3"/>
-        <dia:connection handle="1" to="O4" connection="15"/>
+        <dia:connection handle="1" to="O4" connection="13"/>
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>

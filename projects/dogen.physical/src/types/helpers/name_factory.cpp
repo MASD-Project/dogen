@@ -32,15 +32,4 @@ entities::name name_factory::make(const std::string& backend,
     return b.build();
 }
 
-entities::name name_factory::make(const std::string& backend,
-    const std::string& part, const std::string& facet,
-    const std::string& archetype) {
-    name_builder b;
-    b.backend(backend);
-    b.part(part);
-    b.facet(facet);
-    b.archetype(archetype);
-    return b.build();
-}
-
 }

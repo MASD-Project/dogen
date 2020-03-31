@@ -53,11 +53,6 @@
           "documentation": "Name of the backend that owns this field, if any.\n"
         },
         {
-          "name": "part",
-          "type": "std::string",
-          "documentation": "Part in which we are located. Facets span multiple parts.\n"
-        },
-        {
           "name": "facet",
           "type": "std::string",
           "documentation": "Name of the facet that owns this field, if any.\n"

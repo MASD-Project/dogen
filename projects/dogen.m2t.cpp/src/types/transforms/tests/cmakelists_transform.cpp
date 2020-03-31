@@ -47,8 +47,7 @@ physical::entities::name
 cmakelists_transform::physical_name() const {
     using physical::helpers::name_factory;
     static auto r(name_factory::make(cpp::traits::backend_qn(),
-        cpp::traits::tests_part(), traits::facet_qn(),
-        cmakelists_transform::static_id()));
+        traits::facet_qn(), cmakelists_transform::static_id()));
     return r;
 }
 

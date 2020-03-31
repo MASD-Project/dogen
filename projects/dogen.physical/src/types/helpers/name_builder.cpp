@@ -46,11 +46,6 @@ name_builder& name_builder::backend(const std::string& s) {
     return *this;
 }
 
-name_builder& name_builder::part(const std::string& s) {
-    name_.location().part(s);
-    return *this;
-}
-
 name_builder& name_builder::facet(const std::string& s) {
     name_.location().facet(s);
     return *this;
@@ -71,7 +66,6 @@ entities::name name_builder::build() {
     /*
      * Simple and qualified names depend on what has been filled in.
      */
-    const bool has_part(!l.part().empty());
     const bool has_facet(!l.facet().empty());
     const bool has_archetype(!l.archetype().empty());
     if (has_archetype) {
@@ -82,10 +76,6 @@ entities::name name_builder::build() {
         name_.simple(l.facet());
         name_.qualified(qualified_name_builder::build_facet(l));
         name_validator::validate_facet_name(name_);
-    } else if (has_part) {
-        name_.simple(l.part());
-        name_.qualified(qualified_name_builder::build_part(l));
-        name_validator::validate_part_name(name_);
     } else {
         name_.simple(l.backend());
         name_.qualified(qualified_name_builder::build_backend(l));

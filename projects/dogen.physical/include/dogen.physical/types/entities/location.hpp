@@ -48,7 +48,6 @@ public:
     location(
         const std::string& kernel,
         const std::string& backend,
-        const std::string& part,
         const std::string& facet,
         const std::string& archetype);
 
@@ -73,16 +72,6 @@ public:
     std::string& backend();
     void backend(const std::string& v);
     void backend(const std::string&& v);
-    /**@}*/
-
-    /**
-     * @brief Part in which we are located. Facets span multiple parts.
-     */
-    /**@{*/
-    const std::string& part() const;
-    std::string& part();
-    void part(const std::string& v);
-    void part(const std::string&& v);
     /**@}*/
 
     /**
@@ -118,7 +107,6 @@ public:
 private:
     std::string kernel_;
     std::string backend_;
-    std::string part_;
     std::string facet_;
     std::string archetype_;
 };
