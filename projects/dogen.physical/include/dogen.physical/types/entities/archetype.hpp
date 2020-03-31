@@ -47,7 +47,8 @@ public:
         const std::string& default_postfix,
         const std::string& override_postfix,
         const std::string& archetype_kind_id,
-        const std::string& meta_element_id);
+        const std::string& meta_element_id,
+        const std::string& part);
 
 public:
     /**
@@ -110,6 +111,16 @@ public:
     void meta_element_id(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Part in which we are located.
+     */
+    /**@{*/
+    const std::string& part() const;
+    std::string& part();
+    void part(const std::string& v);
+    void part(const std::string&& v);
+    /**@}*/
+
 public:
     bool operator==(const archetype& rhs) const;
     bool operator!=(const archetype& rhs) const {
@@ -128,6 +139,7 @@ private:
     std::string override_postfix_;
     std::string archetype_kind_id_;
     std::string meta_element_id_;
+    std::string part_;
 };
 
 }

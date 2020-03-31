@@ -29,14 +29,16 @@ archetype::archetype(
     const std::string& default_postfix,
     const std::string& override_postfix,
     const std::string& archetype_kind_id,
-    const std::string& meta_element_id)
+    const std::string& meta_element_id,
+    const std::string& part)
     : location_(location),
       description_(description),
       name_(name),
       default_postfix_(default_postfix),
       override_postfix_(override_postfix),
       archetype_kind_id_(archetype_kind_id),
-      meta_element_id_(meta_element_id) { }
+      meta_element_id_(meta_element_id),
+      part_(part) { }
 
 void archetype::swap(archetype& other) noexcept {
     using std::swap;
@@ -47,6 +49,7 @@ void archetype::swap(archetype& other) noexcept {
     swap(override_postfix_, other.override_postfix_);
     swap(archetype_kind_id_, other.archetype_kind_id_);
     swap(meta_element_id_, other.meta_element_id_);
+    swap(part_, other.part_);
 }
 
 bool archetype::operator==(const archetype& rhs) const {
@@ -56,7 +59,8 @@ bool archetype::operator==(const archetype& rhs) const {
         default_postfix_ == rhs.default_postfix_ &&
         override_postfix_ == rhs.override_postfix_ &&
         archetype_kind_id_ == rhs.archetype_kind_id_ &&
-        meta_element_id_ == rhs.meta_element_id_;
+        meta_element_id_ == rhs.meta_element_id_ &&
+        part_ == rhs.part_;
 }
 
 archetype& archetype::operator=(archetype other) {
@@ -175,6 +179,22 @@ void archetype::meta_element_id(const std::string& v) {
 
 void archetype::meta_element_id(const std::string&& v) {
     meta_element_id_ = std::move(v);
+}
+
+const std::string& archetype::part() const {
+    return part_;
+}
+
+std::string& archetype::part() {
+    return part_;
+}
+
+void archetype::part(const std::string& v) {
+    part_ = v;
+}
+
+void archetype::part(const std::string&& v) {
+    part_ = std::move(v);
 }
 
 }

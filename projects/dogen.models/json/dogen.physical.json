@@ -325,6 +325,11 @@
           "name": "meta_element_id",
           "type": "std::string",
           "documentation": "Which types of the logical model this archetype supports.\n"
+        },
+        {
+          "name": "part",
+          "type": "std::string",
+          "documentation": "Part in which we are located.\n"
         }
       ]
     },

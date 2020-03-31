@@ -3232,7 +3232,7 @@ user choices.#</dia:string>
         <dia:point val="119,-67"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="118.95,-67.05;131.485,-62.55"/>
+        <dia:rectangle val="118.95,-67.05;131.485,-61.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="119,-67"/>
@@ -3241,7 +3241,7 @@ user choices.#</dia:string>
         <dia:real val="12.434999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#archetype#</dia:string>
@@ -3366,6 +3366,29 @@ user choices.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Which types of the logical model this archetype supports.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#part#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Part in which we are located.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3999,13 +4022,13 @@ user choices.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O27">
       <dia:attribute name="obj_pos">
-        <dia:point val="104,-61"/>
+        <dia:point val="105,-60"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="103.95,-61.05;130.345,-57.35"/>
+        <dia:rectangle val="104.95,-60.05;131.345,-56.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="104,-61"/>
+        <dia:point val="105,-60"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="26.294999999999998"/>
@@ -4964,7 +4987,7 @@ user choices.#</dia:string>
         <dia:point val="114.525,-72"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="113.775,-72.75;125.418,-66.2502"/>
+        <dia:rectangle val="113.775,-72.75;125.418,-66.2459"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4973,7 +4996,7 @@ user choices.#</dia:string>
         <dia:point val="114.525,-72"/>
         <dia:point val="114.525,-69"/>
         <dia:point val="125.218,-69"/>
-        <dia:point val="125.218,-67.0502"/>
+        <dia:point val="125.218,-67.0459"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -4991,7 +5014,7 @@ user choices.#</dia:string>
       </dia:attribute>
       <dia:connections>
         <dia:connection handle="0" to="O15" connection="7"/>
-        <dia:connection handle="1" to="O23" connection="12"/>
+        <dia:connection handle="1" to="O23" connection="14"/>
       </dia:connections>
       <dia:childnode parent="O3"/>
     </dia:object>
@@ -8625,7 +8648,7 @@ user choices.#</dia:string>
         <dia:point val="134,-61.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="130.245,-61.9;134.75,-58.3"/>
+        <dia:rectangle val="131.245,-61.9;134.75,-57.3"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8633,8 +8656,8 @@ user choices.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="134,-61.1"/>
         <dia:point val="132,-61.1"/>
-        <dia:point val="132,-59.1"/>
-        <dia:point val="130.295,-59.1"/>
+        <dia:point val="132,-58.1"/>
+        <dia:point val="131.295,-58.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
