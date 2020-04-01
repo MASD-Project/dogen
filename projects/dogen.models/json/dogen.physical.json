@@ -1137,11 +1137,13 @@
         },
         {
           "name": "qualified",
-          "type": "std::string"
+          "type": "std::string",
+          "documentation": "Qualified name for a physical element.\n"
         },
         {
           "name": "location",
-          "type": "location"
+          "type": "location",
+          "documentation": "Location for a name in physical space.\n"
         }
       ]
     },

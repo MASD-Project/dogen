@@ -67,15 +67,25 @@ public:
     void simple(const std::string&& v);
     /**@}*/
 
+    /**
+     * @brief Qualified name for a physical element.
+     */
+    /**@{*/
     const std::string& qualified() const;
     std::string& qualified();
     void qualified(const std::string& v);
     void qualified(const std::string&& v);
+    /**@}*/
 
+    /**
+     * @brief Location for a name in physical space.
+     */
+    /**@{*/
     const dogen::physical::entities::location& location() const;
     dogen::physical::entities::location& location();
     void location(const dogen::physical::entities::location& v);
     void location(const dogen::physical::entities::location&& v);
+    /**@}*/
 
 public:
     bool operator==(const name& rhs) const;
