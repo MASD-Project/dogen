@@ -5619,7 +5619,7 @@ use a similar scheme as GCC: =-Wname= and =-Wno-name=.
 We should issue a warning if a user defines methods in value or entity
 objects as its most likely by mistake.
 
-*** Report validation errors like compilers do
+*** Report validation errors like compilers do                        :story:
 
 It would be very useful to output validation errors like a compiler,
 referencing the original file from where the meta-element was defined
@@ -5995,6 +5995,23 @@ effect, it will be symmetric with PDM packages.
 
 Stories related to infrastructure improvements that we may or may not
 achieve.
+
+*** Consider adding =ClangBuildAnalyzer=                              :story:
+
+Interesting clang tool:
+
+#+begin_quote
+Clang C/C++ build analysis tool when using Clang 9+ -ftime-trace. The
+-ftime-trace compiler flag (see Aras' blog post or Clang 9 release
+notes) can be useful to figure out what takes time during compilation
+of one source file. This tool helps to aggregate time trace reports
+from multiple compilations, and output "what took the most time"
+summary[.]
+#+end_quote
+
+Links:
+
+- https://github.com/aras-p/ClangBuildAnalyzer
 
 *** Add new c++ warnings to compilation                               :story:
 
@@ -7584,6 +7601,8 @@ Links:
 - [[https://github.com/dropbox/json11][Json11]]
 - [[https://github.com/beached/daw_json_link][daw_json_link]]: more "static" JSON library. Also has its own code
   generator: [[https://github.com/beached/json_to_cpp][json_to_cpp]].
+- [[https://github.com/simdjson/simdjson][simdjson]]: parsing gigabytes of JSON per second
+  https://simdjson.org. See also [[https://lemire.me/blog/2020/03/31/we-released-simdjson-0-3-the-fastest-json-parser-in-the-world-is-even-better/][this post]].
 
 Merged stories:
 
@@ -8507,7 +8526,7 @@ need to have similar characteristics to real models such as:
 - Username. jdoe, twilliams, jfang
 - Words. Chosen randomly from lorem ipsum
 
-*** Add support for RPC                                      :reviewing:epic:
+*** Add support for RPC                                               :story:
 
 It would be nice to be able to mark a type as a service and then have
 dogen generate all the comms for it:
@@ -8984,7 +9003,14 @@ Links:
 If dogen had a way to parse OCL, we could allow users to specify OCL
 constraints on operations. These could then be used to code-generate
 design by contract code. For C++ we could use [[https://www.boost.org/doc/libs/develop/libs/contract/doc/html/index.html][Boost.Contract]]. This
-appears to be a very difficult thing to do.
+appears to be a very difficult thing to do. There is also C++ 20
+support for contracts.
+
+Links:
+
+- [[https://www.reddit.com/r/cpp/comments/cmk7ek/what_happened_to_c20_contracts/][What Happened to C++20 Contracts?]] Contracts didn't make it to
+  C++ 20.
+- [[https://www.modernescpp.com/index.php/c-core-guidelines-a-detour-to-contracts][C++ Core Guidelines: A Short Detour to Contracts in C++20]]
 
 *** Add support for units                                             :story:
 
