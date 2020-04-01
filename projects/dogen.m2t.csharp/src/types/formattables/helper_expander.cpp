@@ -173,7 +173,7 @@ helper_properties_generator::walk_name_tree(const helper_configuration& cfg,
      * there may be nodes which do not require helpers followed by
      * nodes that do.
      */
-    for (const auto c : nt.children()) {
+    for (const auto& c : nt.children()) {
         /*
          * We need to remember the descriptors of the direct
          * descendants - and just the direct descendants, not its
@@ -241,7 +241,7 @@ compute_helper_properties(const helper_configuration& cfg,
 
     std::unordered_set<std::string> done;
     const bool iir(in_inheritance_relationship);
-    for (const auto attr : attrs) {
+    for (const auto& attr : attrs) {
         const auto& nt(attr.parsed_type());
         walk_name_tree(cfg, fff, iir, nt, done, r);
     }

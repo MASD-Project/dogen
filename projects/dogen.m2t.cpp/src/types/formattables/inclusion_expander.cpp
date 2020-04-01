@@ -136,7 +136,7 @@ inclusion_expander::compute_inclusion_dependencies(
         return r;
     }
 
-    for (const auto fmt : i->second) {
+    for (const auto& fmt : i->second) {
         const auto l(fmt->physical_name().location());
         const auto arch(l.archetype());
         BOOST_LOG_SEV(lg, debug) << "Providing for: " << arch

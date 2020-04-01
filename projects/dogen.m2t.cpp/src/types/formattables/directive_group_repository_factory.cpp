@@ -71,7 +71,7 @@ directive_group_repository_factory::make_feature_group(
     const auto ir(traits::cpp::inclusion_required());
     r.inclusion_required = s.get_by_name(ir);
 
-    for (const auto f : frp.stock_artefact_formatters()) {
+    for (const auto& f : frp.stock_artefact_formatters()) {
         const auto al(f->physical_name().location());
         const auto arch(al.archetype());
 

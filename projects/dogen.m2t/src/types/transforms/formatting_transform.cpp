@@ -72,7 +72,7 @@ formatting_transform::make_feature_groups(
     BOOST_LOG_SEV(lg, debug) << "Creating feature groups.";
 
     std::unordered_map<std::string, formatting_transform::feature_group> r;
-    for (const auto n : ns) {
+    for (const auto& n : ns) {
         const auto arch(n.location().archetype());
 
         feature_group fg;

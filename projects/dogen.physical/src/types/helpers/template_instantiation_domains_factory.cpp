@@ -64,7 +64,7 @@ make(const std::list<entities::name>& ns) {
         });
 
     const auto masd_kernel("masd");
-    for (const auto n: ns) {
+    for (const auto& n: ns) {
         const auto& l(n.location());
 
         /*

@@ -135,7 +135,7 @@ a.stream() << "    " << dqn << "::register_types(ar);" << std::endl;
 
                 if (!deps.empty() && !leaves.empty())
 a.stream() << std::endl;
-                for (const auto l : leaves) {
+                for (const auto& l : leaves) {
                     const auto lqn(a.get_qualified_name(l));
 a.stream() << "    ar.template register_type<" << lqn << ">();" << std::endl;
                 }

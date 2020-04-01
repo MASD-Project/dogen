@@ -230,7 +230,7 @@ parse_as_dia_text(const dogen::dia::attribute a, processed_object& po) {
 
     BOOST_LOG_SEV(lg, debug) << "Found composite of type " << c->type();
 
-    for (const auto a : c->value()) {
+    for (const auto& a : c->value()) {
         if (a->name() == dia_string)
             po.comment(create_processed_comment(*a));
         else
@@ -260,7 +260,7 @@ void  processed_object_factory::parse_as_class_attributes(
         BOOST_LOG_SEV(lg, debug) << "Found composite of type " << c.type();
 
         processed_attribute pa;
-        for (const auto a : c.value()) {
+        for (const auto& a : c.value()) {
             if (a->name() == dia_name)
                 pa.name(parse_string_attribute(*a));
             else if (a->name() == dia_type)

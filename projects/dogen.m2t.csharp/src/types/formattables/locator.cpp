@@ -65,7 +65,7 @@ locator::feature_group locator::make_feature_group(
     const variability::helpers::feature_selector s(feature_model);
 
     std::unordered_set<std::string> processed_facets;
-    for (const auto ptr : frp.stock_artefact_formatters()) {
+    for (const auto& ptr : frp.stock_artefact_formatters()) {
         const auto& fmt(*ptr);
         const auto al(fmt.physical_name().location());
 

@@ -75,7 +75,7 @@ apply(assistant& a, const formattables::helper_properties& hp) const {
 a.stream() << std::endl;
 a.stream() << "inline std::size_t hash_" << ident << "(const " << qn << "& v) {" << std::endl;
 a.stream() << "    std::size_t seed(0);" << std::endl;
-a.stream() << "    for (const auto i : v) {" << std::endl;
+a.stream() << "    for (const auto& i : v) {" << std::endl;
         if (!key.requires_hashing_helper())
 a.stream() << "        combine(seed, i.first);" << std::endl;
         else
@@ -93,7 +93,7 @@ a.stream() << "}" << std::endl;
 a.stream() << std::endl;
 a.stream() << "inline std::size_t hash_" << ident << "(const " << qn << "& v) {" << std::endl;
 a.stream() << "    std::size_t seed(0);" << std::endl;
-a.stream() << "    for (const auto i : v) {" << std::endl;
+a.stream() << "    for (const auto& i : v) {" << std::endl;
     if (!containee.requires_hashing_helper())
 a.stream() << "        combine(seed, i);" << std::endl;
     else

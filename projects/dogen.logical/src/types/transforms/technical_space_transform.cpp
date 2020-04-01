@@ -106,7 +106,7 @@ apply(const context& ctx, entities::model& m) {
                                  << m.output_technical_spaces();
     } else {
         std::list<entities::technical_space> ots;
-        for (const auto s : scfg.output_technical_space)
+        for (const auto& s : scfg.output_technical_space)
             ots.push_back(boost::lexical_cast<entities::technical_space>(s));
 
         m.output_technical_spaces(ots);

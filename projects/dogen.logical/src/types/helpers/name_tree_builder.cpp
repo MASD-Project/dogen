@@ -131,7 +131,7 @@ entities::name_tree name_tree_builder::make_name_tree(const node& n) {
     entities::name_tree r;
     r.current(n.data());
 
-    for (const auto c : n.children()) {
+    for (const auto& c : n.children()) {
         const auto cnt(make_name_tree(*c));
         r.children().push_back(cnt);
     }

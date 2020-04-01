@@ -57,7 +57,7 @@ extraction_properties_transform::make_feature_group(
     r.enable_backend_directories = s.get_by_name(ekd);
 
     const auto en(traits::enabled());
-    for (const auto n : ns) {
+    for (const auto& n : ns) {
         const auto& l(n.location());
         const auto b(l.backend());
         r.enabled[b] = s.get_by_name(b, en);

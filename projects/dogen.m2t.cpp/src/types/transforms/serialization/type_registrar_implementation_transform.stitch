@@ -86,7 +86,7 @@ void <#= sn #>::register_types(Archive&<#= arg_name #>) {
 #>
 
 <#+
-                for (const auto l : leaves) {
+                for (const auto& l : leaves) {
                     const auto lqn(a.get_qualified_name(l));
 #>
     ar.template register_type<<#= lqn #>>();

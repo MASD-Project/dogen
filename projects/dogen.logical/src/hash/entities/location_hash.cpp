@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 
 inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     std::size_t seed(0);
-    for (const auto i : v) {
+    for (const auto& i : v) {
         combine(seed, i);
     }
     return seed;

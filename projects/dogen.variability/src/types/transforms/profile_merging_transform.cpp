@@ -89,7 +89,7 @@ walk_up_parent_tree_and_merge(const std::string& current,
      * Merge current with each of its parents. If they haven't been
      * merged yet, recursion will take care of it.
      */
-    for (const auto parent_name : prf.parents()) {
+    for (const auto& parent_name : prf.parents()) {
         BOOST_LOG_SEV(lg, debug) << "Parent: " << parent_name;
         const auto parent(walk_up_parent_tree_and_merge(parent_name, pm));
         helpers::configuration_point_merger mg;
@@ -146,7 +146,7 @@ validate(const std::unordered_map<std::string, entities::profile>& pm) {
          * All parents must exist in the container.
          */
         const auto& prf(pair.second);
-        for (const auto parent : prf.parents()) {
+        for (const auto& parent : prf.parents()) {
             const auto i(pm.find(parent));
             if (i == pm.end()) {
                 BOOST_LOG_SEV(lg, error) << parent_not_found << parent;

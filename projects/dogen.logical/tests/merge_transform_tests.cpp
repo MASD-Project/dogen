@@ -89,7 +89,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     BOOST_CHECK(combined.structural_elements().modules().empty());
     BOOST_CHECK(combined.references().size() == 4);
 
-    for (const auto pair : combined.references())
+    for (const auto& pair : combined.references())
         BOOST_CHECK(pair.second == npr);
 
     std::set<std::string> object_names;

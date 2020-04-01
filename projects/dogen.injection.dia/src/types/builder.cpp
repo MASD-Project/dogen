@@ -60,7 +60,7 @@ void builder::update_parentage(const std::string& id, const std::string& n) {
      * this container is fully populated by the time the child reads
      * it.
      */
-    for (const auto c : i->second)
+    for (const auto& c : i->second)
         child_id_to_parent_names_[c].push_back(n);
 }
 

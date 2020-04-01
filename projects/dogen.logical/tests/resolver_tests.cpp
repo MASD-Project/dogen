@@ -118,7 +118,7 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_the_same_model_resolves_succe
     BOOST_CHECK(m != original);
 
     bool found(false);
-    for (const auto pair : m.structural_elements().objects()) {
+    for (const auto& pair : m.structural_elements().objects()) {
         const auto& n(pair.second->name());
         if (factory.is_type_name_n(0, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified().dot();
@@ -151,7 +151,7 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_different_model_results_in_su
     resolver::resolve(idx, combined);
 
     bool found(false);
-    for (const auto pair : combined.structural_elements().objects()) {
+    for (const auto& pair : combined.structural_elements().objects()) {
         const auto& n(pair.second->name());
         if (factory.is_type_name_n(0, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified().dot();
@@ -190,7 +190,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
     resolver::resolve(idx, combined);
 
     bool found(false);
-    for (const auto pair : combined.structural_elements().objects()) {
+    for (const auto& pair : combined.structural_elements().objects()) {
         const auto& n(pair.second->name());
         if (factory.is_type_name_n(0, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified().dot();
@@ -222,7 +222,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
     resolver::resolve(idx, combined);
 
     bool found(false);
-    for (const auto pair : combined.structural_elements().objects()) {
+    for (const auto& pair : combined.structural_elements().objects()) {
         const auto& n(pair.second->name());
         if (factory.is_type_name_n(0, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified().dot();
@@ -253,7 +253,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
 
     bool found_one(false);
     bool found_two(false);
-    for (const auto pair : combined.structural_elements().objects()) {
+    for (const auto& pair : combined.structural_elements().objects()) {
         const auto& n(pair.second->name());
         if (factory.is_type_name_n(0, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified().dot();
@@ -307,7 +307,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
     resolver::resolve(idx, combined);
 
     bool found(false);
-    for (const auto pair : combined.structural_elements().objects()) {
+    for (const auto& pair : combined.structural_elements().objects()) {
         const auto& n(pair.second->name());
         if (factory.is_type_name_n(0, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.qualified().dot();

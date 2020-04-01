@@ -148,7 +148,7 @@ a.stream() << sn << "::" << sn << "()" << std::endl;
                 std::ostringstream ss;
                 bool is_first(true);
                 bool found(false);
-                for (const auto attr : o.local_attributes()) {
+                for (const auto& attr : o.local_attributes()) {
                     if (!attr.parsed_type().is_current_simple_type())
                         continue;
 
@@ -186,7 +186,7 @@ a.stream() << "        std::forward<" << pqn << ">(rhs))" << sf.postfix() << std
                     sf.next();
                 }
 
-                for (const auto attr : o.local_attributes()) {
+                for (const auto& attr : o.local_attributes()) {
 a.stream() << "    " << sf.prefix() << attr.member_variable_name() << "(std::move(rhs." << attr.member_variable_name() << "))" << sf.postfix() << std::endl;
                     sf.next();
                 }
@@ -207,14 +207,14 @@ a.stream() << sn << "::" << sn << "(" << std::endl;
 
                     m2t::formatters::sequence_formatter sf(attr_count);
                     sf.postfix_configuration().last(")");
-                    for (const auto attr : o.all_attributes()) {
+                    for (const auto& attr : o.all_attributes()) {
 a.stream() << "    const " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " " << attr.name().simple() << sf.postfix() << std::endl;
                         sf.next();
                     }
                 }
 
                 auto sequence_size(o.local_attributes().size() + o.parents().size());
-                for (const auto pair : o.inherited_attributes()) {
+                for (const auto& pair : o.inherited_attributes()) {
                     const auto& pattrs(pair.second);
                     sequence_size += (pattrs.size() > 1 ? pattrs.size() : 0);
                 }
@@ -222,7 +222,7 @@ a.stream() << "    const " << a.get_qualified_name(attr.parsed_type()) << a.make
                 m2t::formatters::sequence_formatter sf(sequence_size);
                 sf.postfix_configuration().last(" { }");
                 sf.prefix_configuration().first(": ").not_first("  ");
-                for (const auto pair : o.inherited_attributes()) {
+                for (const auto& pair : o.inherited_attributes()) {
                     const auto pqn(a.get_qualified_name(pair.first));
                     const auto& pattrs(pair.second);
                     if (pattrs.size() <= 1) {
@@ -236,7 +236,7 @@ a.stream() << "    " << sf.prefix() << pqn << "(" << sf.postfix(true/*skip*/) <<
 
                         sf2.prefix_configuration().first("  ").not_first("  ");
                         sf2.postfix_configuration().last(")");
-                        for (const auto attr : pattrs) {
+                        for (const auto& attr : pattrs) {
 a.stream() << "    " << sf2.prefix() << attr.name().simple() << sf2.postfix() << sf.postfix() << std::endl;
                             sf2.next();
                             sf.next();
@@ -244,7 +244,7 @@ a.stream() << "    " << sf2.prefix() << attr.name().simple() << sf2.postfix() <<
                     }
                 }
 
-                for (const auto attr : o.local_attributes()) {
+                for (const auto& attr : o.local_attributes()) {
 a.stream() << "    " << sf.prefix() << attr.member_variable_name() << "(" << attr.name().simple() << ")" << sf.postfix() << std::endl;
                     sf.next();
                 }
@@ -340,7 +340,7 @@ a.stream() << std::endl;
 
                if (!o.local_attributes().empty()) {
 a.stream() << "    using std::swap;" << std::endl;
-                   for (const auto attr : o.local_attributes())
+                   for (const auto& attr : o.local_attributes())
 a.stream() << "    swap(" << attr.member_variable_name() << ", other." << attr.member_variable_name() << ");" << std::endl;
                }
 a.stream() << "}" << std::endl;
@@ -398,7 +398,7 @@ a.stream() << "    " << sf.prefix() << pqn << "::compare(rhs)" << sf.postfix() <
                    sf.prefix_configuration().first("    ");
                 sf.prefix_configuration().not_first("    ");
                 sf.postfix_configuration().last(";").not_last(" &&");
-                for (const auto attr : o.local_attributes()) {
+                for (const auto& attr : o.local_attributes()) {
 a.stream() << "    " << sf.prefix() << attr.member_variable_name() << " == rhs." << attr.member_variable_name() << sf.postfix() << std::endl;
                     sf.next();
                 }
@@ -420,7 +420,7 @@ a.stream() << "}" << std::endl;
             /*
              * Getters and setters
              */
-             for (const auto attr : o.local_attributes()) {
+             for (const auto& attr : o.local_attributes()) {
                  if (attr.parsed_type().is_current_simple_type()) {
 a.stream() << std::endl;
 a.stream() << a.get_qualified_name(attr.parsed_type()) << " " << sn << "::" << attr.name().simple() << "() const {" << std::endl;

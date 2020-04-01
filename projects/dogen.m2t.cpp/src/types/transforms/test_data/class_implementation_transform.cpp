@@ -146,7 +146,7 @@ a.stream() << "populate(const unsigned int position, result_type& v) {" << std::
 a.stream() << "    " << pqn << "_generator::populate(position, v);" << std::endl;
                 }
                 unsigned int i(0);
-                for (const auto attr : o.local_attributes()) {
+                for (const auto& attr : o.local_attributes()) {
 a.stream() << "    v." << attr.name().simple() << "(create_" << attr.parsed_type().qualified().identifiable() << "(position + " << i << "));" << std::endl;
                     ++i;
                 }
@@ -167,7 +167,7 @@ a.stream() << "    return " << sn << "(" << std::endl;
 a.stream() << std::endl;
                     else {
                         m2t::formatters::sequence_formatter sf(o.local_attributes().size());
-                        for (const auto attr : o.local_attributes()) {
+                        for (const auto& attr : o.local_attributes()) {
 a.stream() << "        create_" << attr.parsed_type().qualified().identifiable() << "(position + " << sf.current_position() << ")" << sf.postfix() << std::endl;
                             sf.next();
                         }

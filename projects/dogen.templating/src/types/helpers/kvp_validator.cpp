@@ -50,7 +50,7 @@ validate(const std::unordered_set<std::string>& expected_keys,
      * Ensure that all expected keys have been supplied. We may have
      * received additional keys, but we don't care about those.
      */
-    for (const auto ek : expected_keys) {
+    for (const auto& ek : expected_keys) {
         const auto i(s.find(ek));
         if (i == s.end()) {
             BOOST_LOG_SEV(lg, error) << key_error + ek;

@@ -171,7 +171,7 @@ boost::filesystem::path find_file_recursively_upwards(
 }
 
 void remove(const std::list<boost::filesystem::path>& files) {
-    for (const auto f : files) {
+    for (const auto& f : files) {
         BOOST_LOG_SEV(lg, debug) << "Removing file: " << f.generic_string();
         boost::filesystem::remove(f);
     }

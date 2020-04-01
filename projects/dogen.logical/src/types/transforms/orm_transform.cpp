@@ -184,7 +184,7 @@ make_odb_pragmas_for_type_overrides(const std::unordered_map<
 
     std::ostringstream s;
     bool is_first(true);
-    for (const auto pair : type_overrides) {
+    for (const auto& pair : type_overrides) {
         if (!is_first)
             s << " ";
 

@@ -93,7 +93,7 @@ std::size_t <#= sn #>_hasher::hash(const <#= sn #>&<#= ((o.local_attributes().em
 #>
 
 <#+
-                for (const auto attr : o.local_attributes()) {
+                for (const auto& attr : o.local_attributes()) {
                     if (a.requires_hashing_helper_method(attr))
 #>
     combine(seed, hash_<#= attr.parsed_type().qualified().identifiable() #>(v.<#= attr.name().simple() #>()));

@@ -107,7 +107,7 @@ void update_associations(const entities::model& m, Associatable& a,
     const auto is_associative_container(i != objs.end() &&
         i->second->is_associative_container());
 
-    for (const auto c : nt.children()) {
+    for (const auto& c : nt.children()) {
         if (is_first && is_associative_container)
             a.associative_container_keys().push_back(c.current());
 

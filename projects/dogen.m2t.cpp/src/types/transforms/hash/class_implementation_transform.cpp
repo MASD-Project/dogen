@@ -134,7 +134,7 @@ a.stream() << "    combine(seed, dynamic_cast<const " << pqn << "&>(v));" << std
 
             if (!o.local_attributes().empty()) {
 a.stream() << std::endl;
-                for (const auto attr : o.local_attributes()) {
+                for (const auto& attr : o.local_attributes()) {
                     if (a.requires_hashing_helper_method(attr))
 a.stream() << "    combine(seed, hash_" << attr.parsed_type().qualified().identifiable() << "(v." << attr.name().simple() << "()));" << std::endl;
                     else

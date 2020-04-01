@@ -63,7 +63,7 @@ a.stream() << "    " << pqn << "::to_stream(s);" << std::endl;
     sf.postfix_configuration().not_last(" << \", \"");
     sf.element_separator("");
 
-    for (const auto attr : o.local_attributes()) {
+    for (const auto& attr : o.local_attributes()) {
         std::string variable_name;
         if (inside_class)
             variable_name = attr.member_variable_name();

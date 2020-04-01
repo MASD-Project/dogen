@@ -23,7 +23,7 @@ apply(assistant& a, const formattables::helper_properties& hp) const {
 
 inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
     std::size_t seed(0);
-    for (const auto i : v) {
+    for (const auto& i : v) {
 <#+
         if (!key.requires_hashing_helper())
 #>
@@ -51,7 +51,7 @@ inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
 
 inline std::size_t hash_<#= ident #>(const <#= qn #>& v) {
     std::size_t seed(0);
-    for (const auto i : v) {
+    for (const auto& i : v) {
 <#+
     if (!containee.requires_hashing_helper())
 #>

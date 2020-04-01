@@ -137,7 +137,7 @@ void stereotypes_transform::transform_dynamic_stereotypes(
                              << o.dynamic_stereotypes();
 
     std::list<std::string> unknown_stereotypes;
-    for (const auto us : o.dynamic_stereotypes()) {
+    for (const auto& us : o.dynamic_stereotypes()) {
         /*
          * Attempt to process the stereotype as an object template. If
          * it isn't then is definitely not one of ours. This is

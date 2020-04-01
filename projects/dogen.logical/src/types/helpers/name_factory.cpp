@@ -178,7 +178,7 @@ entities::name name_factory::build_combined_element_name(
         b.internal_modules(l.internal_modules());
     } else if (combine_internal_modules) {
         auto im(model_name.location().internal_modules());
-        for (const auto m : partial_element_name.location().internal_modules())
+        for (const auto& m : partial_element_name.location().internal_modules())
             im.push_back(m);
         b.internal_modules(im);
     } else

@@ -103,7 +103,7 @@ void save(Archive& <#= (has_attributes_or_parent ? "ar" : "/*ar*/") #>,
 #>
 
 <#+
-        for (const auto attr : o.local_attributes()) {
+        for (const auto& attr : o.local_attributes()) {
 #>
     ar << make_nvp("<#= attr.name().simple() #>", v.<#= attr.member_variable_name() #>);
 <#+
@@ -133,7 +133,7 @@ void load(Archive& <#= (has_attributes_or_parent ? "ar," : "/*ar*/,") #>
 <#+
         }
 
-        for (const auto attr : o.local_attributes()) {
+        for (const auto& attr : o.local_attributes()) {
 #>
     ar >> make_nvp("<#= attr.name().simple() #>", v.<#= attr.member_variable_name() #>);
 <#+

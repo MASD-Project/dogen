@@ -150,7 +150,7 @@ aspect_properties aspect_expander::compute_aspect_properties(
     const std::list<logical::entities::attribute>& attrs) const {
 
     aspect_properties r;
-    for (const auto attr : attrs) {
+    for (const auto& attr : attrs) {
         const auto& nt(attr.parsed_type());
         walk_name_tree(nt, true/*is_top_level*/, element_aps, r);
     }

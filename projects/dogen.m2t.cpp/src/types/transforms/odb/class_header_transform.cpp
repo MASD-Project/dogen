@@ -117,7 +117,7 @@ a.stream() << pg << std::endl;
                         continue;
 
                     const auto attr_level_pragmas(attr.orm_properties()->odb_pragmas());
-                    for (const auto pg : attr_level_pragmas) {
+                    for (const auto& pg : attr_level_pragmas) {
                         if (is_first)
 a.stream() << std::endl;
                         is_first = false;

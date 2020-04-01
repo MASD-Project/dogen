@@ -115,7 +115,7 @@ a.stream() << std::endl;
 a.stream() << "        public " << sn << "(" << std::endl;
                     m2t::formatters::sequence_formatter sf(attr_count);
                     sf.postfix_configuration().last(")");
-                    for (const auto attr : o.all_attributes()) {
+                    for (const auto& attr : o.all_attributes()) {
 a.stream() << "            " << a.get_qualified_name(attr.parsed_type()) << " " << a.make_argument_name(attr) << sf.postfix() << std::endl;
                         sf.next();
                     }

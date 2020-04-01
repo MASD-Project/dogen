@@ -154,7 +154,7 @@ bool asserter::assert_directory(const boost::filesystem::path& expected_path,
             BOOST_LOG_SEV(lg_, debug) << "actual:" << a;
 
             bool asserter_found(false);
-            for (const auto fa : file_asserters) {
+            for (const auto& fa : file_asserters) {
                 if (fa->is_assertable(e) && fa->is_assertable(a)) {
                     asserter_found = true;
                     if (!assert_file(e, a, *fa)) {

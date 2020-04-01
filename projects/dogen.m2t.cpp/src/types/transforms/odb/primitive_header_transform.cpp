@@ -106,7 +106,7 @@ a.stream() << pg << std::endl;
                 bool is_first(true);
                 if (p.value_attribute().orm_properties() &&
                     !p.value_attribute().orm_properties()->odb_pragmas().empty()) {
-                    for (const auto pg : p.value_attribute().orm_properties()->odb_pragmas()) {
+                    for (const auto& pg : p.value_attribute().orm_properties()->odb_pragmas()) {
                         if (is_first)
 a.stream() << std::endl;
                             is_first = false;

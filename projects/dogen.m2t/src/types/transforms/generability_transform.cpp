@@ -51,7 +51,7 @@ is_generatable(const logical::entities::element& e) {
 
 bool generability_transform::
 has_generatable_types(const entities::model& m) {
-    for (const auto ptr : m.elements()) {
+    for (const auto& ptr : m.elements()) {
         if (is_generatable(*ptr))
             return true;
     }
