@@ -8374,6 +8374,14 @@ Links:
 - [[https://generated.photos][Generated Photos]]: AI generated realistic pictures of people. We
   could download a fixed set or use the API.
 
+Fantasy:
+
+- [[https://www.mithrilandmages.com/utilities/StreetNames.php][Street and Road Name Generator]]
+- [[https://www.mithrilandmages.com/utilities/ModernBrowse.php][List of Modern Names]]
+- [[https://www.mithrilandmages.com/utilities/BankNames.php][Bank and Financial Services Name Generator]]
+- [[https://www.mithrilandmages.com/utilities/CityNames.php][City & Town Name Generator]]
+- [[https://www.namegenerator2.com/country-name-generator.php#generator-bookmark][Country Name Generator]]
+
 *Realistic Model Generation*
 
 Another topic of interest is the generation of dogen models. If we
@@ -15205,6 +15213,26 @@ an interface. Dogen is basically responsible for:
   interface is used. The binary creates the container and supplies it
   to whomever needs to resolve an interface.
 
+Actually, another way to think of this is that DI is a meta-pattern
+and not a pattern; one of the biggest problems with Castle is the
+amount of run-time trickery it does, making it really difficult to
+understand what is happening behind the scenes and why things are not
+working. For the vast majority of use cases, we know all of the
+information at compile time and all we want to avoid is to manually
+generate the code wiring things up. It would be a much better approach
+if dogen generated this code, making it look just like regular code
+which can be inspected and debugged, and move the DI to a compile time
+phenomenon. We would still require all of the elements of castle, but
+now they become meta-entities describing the relationships between
+types. We then generate code that instantiates types in the correct
+order. We could simply create factories that call the appropriate
+constructors and have these factories be completely
+code-generated. This also means that users must declare the
+constructors correctly in dogen models in order to get the factory to
+work; note that we will be doing this mostly for hand-crafted code. We
+need to do an analysis of the different components in Castle in order
+to model them.
+
 Links:
 
 - [[https://github.com/boost-experimental/di][Boost.DI]]: not part of boost yet [[https://github.com/boost-experimental/di/issues/229][and not clear when it will be.]]
@@ -15212,6 +15240,7 @@ Links:
 - [[https://github.com/google/fruit][fruit]] (tutorial [[https://github.com/google/fruit/wiki/tutorial:-getting-started][here]])
 - [[https://gpfault.net/posts/dependency-injection-cpp.txt.html][Dependency Injection in C++ Using Variadic Templates]]
 - [[https://github.com/ybainier/hypodermic][hypodermic]] (more run-time DI)
+- [[https://riptutorial.com/Download/castle-windsor.pdf][Castle Windsor tutorial]]
 
 *** Use =observer_ptr= in factory methods                             :story:
 
