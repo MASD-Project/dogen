@@ -12,41 +12,42 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2020-04-02 Thu 22:17]
-| <75>                                                   |         |       |       |       |
-| Headline                                               | Time    |       |       |     % |
-|--------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                           | *64:43* |       |       | 100.0 |
-|--------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                | 64:43   |       |       | 100.0 |
-| Active                                                 |         | 64:43 |       | 100.0 |
-| Edit release notes for previous sprint                 |         |       |  7:27 |  11.5 |
-| Create a demo and presentation for previous sprint     |         |       |  0:28 |   0.7 |
-| Sprint and product backlog grooming                    |         |       |  5:04 |   7.8 |
-| Rename archetypes model to physical model              |         |       |  0:28 |   0.7 |
-| Rename assets model to logical model                   |         |       |  0:29 |   0.7 |
-| Consider renaming "meta-model" namespace               |         |       |  0:37 |   1.0 |
-| Rename engine to orchestration                         |         |       |  1:04 |   1.6 |
-| Merge extraction model with physical model             |         |       |  4:35 |   7.1 |
-| Remove manual feature in profile merge transform       |         |       |  0:08 |   0.2 |
-| Add variability domains to the dumpspecs activity      |         |       |  0:12 |   0.3 |
-| Add org-mode option to dumpspacs                       |         |       |  0:53 |   1.4 |
-| Analysis on designing and implement physical types     |         |       |  6:52 |  10.6 |
-| Remove =element= from the modeling location            |         |       |  0:02 |   0.1 |
-| Fix clang-cl LNK4217 warnings                          |         |       |  1:04 |   1.6 |
-| Analysis on creating a masd kernel model               |         |       |  0:53 |   1.4 |
-| Rename generation models to =m2t=                      |         |       |  1:04 |   1.6 |
-| Move all generation features away from generation      |         |       |  0:17 |   0.4 |
-| Rename generation transforms                           |         |       |  4:49 |   7.4 |
-| Remove kernel from models                              |         |       |  0:36 |   0.9 |
-| Rename the default MASD kernel                         |         |       |  0:44 |   1.1 |
-| Consider removing archetype location by family         |         |       |  0:40 |   1.0 |
-| Add part to physical location                          |         |       |  1:16 |   2.0 |
-| Add names to logical model                             |         |       |  1:48 |   2.8 |
-| Consider generating a colour palette procedurally      |         |       |  2:48 |   4.3 |
-| Add support for clang-10                               |         |       |  0:44 |   1.1 |
-| Make physical location entries simple names            |         |       | 16:54 |  26.1 |
-| Implement archetype locations from physical meta-model |         |       |  2:47 |   4.3 |
+#+CAPTION: Clock summary at [2020-04-03 Fri 21:09]
+| <75>                                                      |         |       |       |       |
+| Headline                                                  | Time    |       |       |     % |
+|-----------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                              | *70:00* |       |       | 100.0 |
+|-----------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                   | 70:00   |       |       | 100.0 |
+| Active                                                    |         | 70:00 |       | 100.0 |
+| Edit release notes for previous sprint                    |         |       |  7:27 |  10.6 |
+| Create a demo and presentation for previous sprint        |         |       |  0:28 |   0.7 |
+| Sprint and product backlog grooming                       |         |       |  5:56 |   8.5 |
+| Rename archetypes model to physical model                 |         |       |  0:28 |   0.7 |
+| Rename assets model to logical model                      |         |       |  0:29 |   0.7 |
+| Consider renaming "meta-model" namespace                  |         |       |  0:37 |   0.9 |
+| Rename engine to orchestration                            |         |       |  1:04 |   1.5 |
+| Merge extraction model with physical model                |         |       |  4:35 |   6.5 |
+| Remove manual feature in profile merge transform          |         |       |  0:08 |   0.2 |
+| Add variability domains to the dumpspecs activity         |         |       |  0:12 |   0.3 |
+| Add org-mode option to dumpspacs                          |         |       |  0:53 |   1.3 |
+| Analysis on designing and implement physical types        |         |       |  6:52 |   9.8 |
+| Remove =element= from the modeling location               |         |       |  0:02 |   0.0 |
+| Fix clang-cl LNK4217 warnings                             |         |       |  1:04 |   1.5 |
+| Analysis on creating a masd kernel model                  |         |       |  0:53 |   1.3 |
+| Rename generation models to =m2t=                         |         |       |  1:04 |   1.5 |
+| Move all generation features away from generation         |         |       |  0:17 |   0.4 |
+| Rename generation transforms                              |         |       |  4:49 |   6.9 |
+| Remove kernel from models                                 |         |       |  0:36 |   0.9 |
+| Rename the default MASD kernel                            |         |       |  0:44 |   1.0 |
+| Consider removing archetype location by family            |         |       |  0:40 |   1.0 |
+| Add part to physical location                             |         |       |  1:16 |   1.8 |
+| Add names to logical model                                |         |       |  1:48 |   2.6 |
+| Consider generating a colour palette procedurally         |         |       |  2:48 |   4.0 |
+| Add support for clang-10                                  |         |       |  0:44 |   1.0 |
+| Make physical location entries simple names               |         |       | 20:37 |  29.5 |
+| Implement the generation model in terms of "formattables" |         |       |  0:42 |   1.0 |
+| Implement archetype locations from physical meta-model    |         |       |  2:47 |   4.0 |
 #+TBLFM: $5='(org-clock-time%-mod @3$2 $2..$4);%.1f
 #+end:
 
@@ -319,6 +320,8 @@ Time spent creating the demo and presentation. Use the demo project:
 
 *** STARTED Sprint and product backlog grooming                       :story:
     :LOGBOOK:
+    CLOCK: [2020-04-03 Fri 20:05]--[2020-04-03 Fri 20:25] =>  0:20
+    CLOCK: [2020-04-03 Fri 13:28]--[2020-04-03 Fri 14:00] =>  0:32
     CLOCK: [2020-04-02 Thu 21:51]--[2020-04-02 Thu 22:16] =>  0:25
     CLOCK: [2020-04-01 Wed 08:30]--[2020-04-01 Wed 08:40] =>  0:10
     CLOCK: [2020-03-31 Tue 21:31]--[2020-03-31 Tue 21:35] =>  0:10
@@ -741,8 +744,13 @@ Links:
 
 The latest clang has been released. Try compiling with it and see if it works.
 
-*** STARTED Make physical location entries simple names               :story:
+*** COMPLETED Make physical location entries simple names             :story:
+    CLOSED: [2020-04-03 Fri 20:04]
     :LOGBOOK:
+    CLOCK: [2020-04-03 Fri 19:52]--[2020-04-03 Fri 20:04] =>  0:12
+    CLOCK: [2020-04-03 Fri 15:45]--[2020-04-03 Fri 17:18] =>  1:33
+    CLOCK: [2020-04-03 Fri 14:01]--[2020-04-03 Fri 15:20] =>  1:19
+    CLOCK: [2020-04-03 Fri 11:31]--[2020-04-03 Fri 12:10] =>  0:39
     CLOCK: [2020-04-01 Wed 22:11]--[2020-04-01 Wed 22:40] =>  0:29
     CLOCK: [2020-04-01 Wed 21:02]--[2020-04-01 Wed 21:25] =>  0:23
     CLOCK: [2020-03-31 Tue 21:58]--[2020-03-31 Tue 22:30] =>  0:32
@@ -804,6 +812,22 @@ Notes:
 - when querying for features for a given backend, we need to assemble
   the qualified name.
 
+*** COMPLETED Implement the generation model in terms of "formattables" :story:
+    CLOSED: [2020-04-03 Fri 21:08]
+    :LOGBOOK:
+    CLOCK: [2020-04-03 Fri 20:26]--[2020-04-03 Fri 21:08] =>  0:42
+    :END:
+
+We need to find a way to expand the generation model into a pair of:
+
+- element
+- artefact
+
+In effect, a formattable. Then we need to update the backends to stop
+expanding across physical space and instead use the expansion created
+by the generation model. We then need to update formattables to have
+an artefact, and supply the artefact to all formatters.
+
 *** STARTED Implement archetype locations from physical meta-model    :story:
     :LOGBOOK:
     CLOCK: [2020-03-28 Sat 21:07]--[2020-03-28 Sat 21:20] =>  0:13
@@ -855,45 +879,6 @@ Notes:
 
 - formatters should add their data to a registrar that lives in the
   physical model rather than expose it via an interface.
-
-*** Consider moving compatibility mode to feature mode                :story:
-
-Given that compatibility mode only really applies to features, we
-should just have the flag in the feature model itself?
-
-*** Model SQL scripts as meta-model entities                          :story:
-
-At present we are adding SQL scripts to the relational model under the
-=sql= directory. These should be part of the model. We need meta-types
-to represent these files. For now they just need to generate an empty
-file - or perhaps just the SQL modeline and decoration. They should
-also be marked as handcrafted. We also need to add a part for SQL.
-
-*** Model lisp scripts as meta-model entities                         :story:
-
-We are using lisp scripts in the dia and templating projects. These
-need to be modeled and generated. Generation can have just decoration.
-
-*** Consider allowing users to create their own parts                 :story:
-
-It would be nice if one could create our own parts. However the main
-problem is how would you allocate modeling elements to a part. At
-present this is done via the formatter; perhaps we could override this
-in meta-data? This is a very complex task and we need clear use cases
-for it. Alternatively we could state that a user defined part's
-content is ignored entirely.
-
-*** Implement the generation model in terms of "formattables"         :story:
-
-We need to find a way to expand the generation model into a pair of:
-
-- element
-- artefact
-
-In effect, a formattable. Then we need to update the backends to stop
-expanding across physical space and instead use the expansion created
-by the generation model. We then need to update formattables to have
-an artefact, and supply the artefact to all formatters.
 
 *** Implement enablement in physical model                            :story:
 
@@ -1019,21 +1004,6 @@ Merged stories:
 
 We need to support the formatting styles at the meta-model level.
 
-*** Make physical model name a qualified name                         :story:
-
-At present we are setting up the extraction model name from the simple
-name of the model. It should really be the qualified name. Hopefully
-this will only affect tracing and diffing.
-
-*** Create a common formatter interface                               :story:
-
-Once all language specific properties have been moved into their
-rightful places, we should be able to define a formatter interface
-that is suitable for both c++ and c# in generation. We should then
-also be able to move all of the registration code into generation. We
-then need to look at all containers of formatters etc to see what
-should be done at generation level.
-
 *** Implement dependencies in terms of new physical types             :story:
 
 - add dependency types to physical model.
@@ -1133,6 +1103,48 @@ Random notes:
 - some types support both (headers)
 - some support imports only (cpp)
 - some support neither (cmakelists, etc).
+
+*** Make physical model name a qualified name                         :story:
+
+At present we are setting up the extraction model name from the simple
+name of the model. It should really be the qualified name. Hopefully
+this will only affect tracing and diffing.
+
+*** Create a common formatter interface                               :story:
+
+Once all language specific properties have been moved into their
+rightful places, we should be able to define a formatter interface
+that is suitable for both c++ and c# in generation. We should then
+also be able to move all of the registration code into generation. We
+then need to look at all containers of formatters etc to see what
+should be done at generation level.
+
+*** Consider moving compatibility mode to feature model               :story:
+
+Given that compatibility mode only really applies to features, we
+should just have the flag in the feature model itself?
+
+*** Model SQL scripts as meta-model entities                          :story:
+
+At present we are adding SQL scripts to the relational model under the
+=sql= directory. These should be part of the model. We need meta-types
+to represent these files. For now they just need to generate an empty
+file - or perhaps just the SQL modeline and decoration. They should
+also be marked as handcrafted. We also need to add a part for SQL.
+
+*** Model lisp scripts as meta-model entities                         :story:
+
+We are using lisp scripts in the dia and templating projects. These
+need to be modeled and generated. Generation can have just decoration.
+
+*** Consider allowing users to create their own parts                 :story:
+
+It would be nice if one could create our own parts. However the main
+problem is how would you allocate modeling elements to a part. At
+present this is done via the formatter; perhaps we could override this
+in meta-data? This is a very complex task and we need clear use cases
+for it. Alternatively we could state that a user defined part's
+content is ignored entirely.
 
 *** Order of headers is hard-coded                                    :story:
 
@@ -2439,3 +2451,17 @@ not able to cope with this use case. Changes required:
 Links:
 
 - [[https://www.sciencedirect.com/topics/computer-science/product-line-engineering][Product Line Engineering]]
+*** CANCELLED Test data extensions are not ideal                      :story:
+    CLOSED: [2020-04-03 Fri 13:56]
+
+*Rationale*: these files have now been removed.
+
+At present we use extensions for test data like so:
+
+- =.diaxml=
+- =.yarnxml=
+
+It would be nicer to have these files called =.dia.xml= etc but when
+we tried to do this, the first extension started contributing to the
+model name (as expected) so we had to revert the change. Still, these
+are not very nice extensions.

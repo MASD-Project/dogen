@@ -3303,6 +3303,32 @@ as per [[*Consider adding "deprecated feature names"][this story]].
 
 Stories that deal with cleaning up the code base.
 
+*** Do not throw when getting attribute value                         :story:
+
+At present in =processed_object_factory= we are getting the attribute
+value like so:
+
+: template<typename AttributeValue, typename Variant>
+: boost::optional<AttributeValue> try_get_attribute_value(const Variant& v) {
+:     AttributeValue r;
+:     // FIXME: we should probably replace this with a static visitor.
+:     try {
+:         r = boost::get<AttributeValue>(v);
+:     } catch (const boost::bad_get&) {
+:         return boost::optional<AttributeValue>();
+:     }
+:     return r;
+: }
+
+This is really not ideal and means we can't just do a
+
+: catch throw
+
+in gdb when looking for "unexpected exceptions". In general, a =catch
+throw= should only show real problems and not "expected"
+circumstances. We need to clean up this code and any other that shows
+up when using this command.
+
 *** Rewrite name resolution in terms of lists                         :story:
 
 Even since we did the external modules / model modules change we broke
@@ -6267,6 +6293,30 @@ Links:
 
 - [[https://codecov.io/gh/MASD-Project/cpp_ref_impl/tree/master/projects/cpp_ref_impl.northwind][cpp_ref_impl.northwind in codecov]]
 
+*** Investigate the emblems used by Bit7z                             :story:
+
+This project uses emblems for version, platform and compiler:
+
+https://github.com/rikyoz/Bit7z
+
+This may or may not be useful to dogen.
+*** Mine =common-universal-cmake= for ideas                            :epic:
+
+This project seems interesting:
+
+- [[https://github.com/polysquare/common-universal-cmake][common-universal-cmake]]
+
+They seem to have added support for conan, appveyor, etc in an
+extensible way. We need to figure out if anything can be nicked for
+our infrastructure. This is also a useful template for when we
+code-generate products.
+
+Notes:
+
+- nice idea to create text files with all of the dependencies for the
+  different OSs (packages and repositories).
+
+
 * Future Releases
 
 Stories that will not be handled on the current major release.
@@ -7172,6 +7222,14 @@ Links:
 Features for which there is no urgency but we'd like to see them
 implemented at some point. They may require some alterations to the
 core, but not fundamental rethinking.
+
+*** Consider adding attributes to meta-model                          :story:
+
+Programming languages such as C#, Java and C++ support annotating
+types with attributes. This should be really easy to do via
+meta-data. We just need to capture these as attributes in the
+meta-model and then code-generate the appropriately. We should also
+allow attributes in properties.
 
 *** Consider making conversions a generation concept                  :story:
 
@@ -9006,20 +9064,6 @@ Links:
 
 - [[https://www.boost.org/doc/libs/1_67_0/doc/html/poly_collection.html][Boost.PolyCollection]]
 
-*** Add support for design by contract                                 :epic:
-
-If dogen had a way to parse OCL, we could allow users to specify OCL
-constraints on operations. These could then be used to code-generate
-design by contract code. For C++ we could use [[https://www.boost.org/doc/libs/develop/libs/contract/doc/html/index.html][Boost.Contract]]. This
-appears to be a very difficult thing to do. There is also C++ 20
-support for contracts.
-
-Links:
-
-- [[https://www.reddit.com/r/cpp/comments/cmk7ek/what_happened_to_c20_contracts/][What Happened to C++20 Contracts?]] Contracts didn't make it to
-  C++ 20.
-- [[https://www.modernescpp.com/index.php/c-core-guidelines-a-detour-to-contracts][C++ Core Guidelines: A Short Detour to Contracts in C++20]]
-
 *** Add support for units                                             :story:
 
 It would be good to add support for the different units libraries:
@@ -9513,7 +9557,7 @@ existing libraries and integrated with nightlies. Ideally it should
 also output results to relational so that we can plot the evolution
 over time.
 
-*** Consider using hayai for benchmarks                               :story:
+*** Consider using a benchmarking framework                           :story:
 
 It seems there is a C++ benchmarks framework which could be used for
 dogen's benchmarks:
@@ -9608,24 +9652,28 @@ Travis.
 
 *** Add visibility to coding elements                                 :story:
 
-We need to be able to mark yarn types as:
+We need to be able to mark types as:
 
 - public
 - internal
 
-This can then be used by C++ as well for visibility etc.
+This can then be used by C++ (public headers) as well for visibility
+in c# (internal).
 
 *** Add partial element support to coding                             :story:
 
-We need to be able to mark yarn elements as "partial". It is then up
-to programming languages to map this to a language feature. At present
-only [[https://msdn.microsoft.com/en-us/library/wa80x488.aspx][C# would do so]].
+We need to be able to mark logical elements as "partial". It is then
+up to programming languages to map this to a language feature. At
+present only [[https://msdn.microsoft.com/en-us/library/wa80x488.aspx][C# would do so]].
 
-It would be nice to have a more meaningful name at yarn
+It would be nice to have a more meaningful name at the logical model
 level. However, seems like this is a fairly general programming
 concept now: [[https://en.wikipedia.org/wiki/Class_(computer_programming)#Partial][wikipedia]].
 
 *** Add final support in C#                                           :story:
+
+We now have final in the meta-model. We need to check the status of C#
+support.
 
 Links:
 
@@ -9801,6 +9849,8 @@ For C++:
   instead)
 - There is a cross-platform implementation of =std::decimal= available
   [[https://sourceforge.net/p/stddecimal/code/HEAD/tree/trunk/][here]].
+- we should probably consider just supporting [[https://www.boost.org/doc/libs/1_72_0/libs/math/doc/html/math_toolkit/high_precision/use_multiprecision.html][boost multiprecision]]
+  instead.
 
 For C#:
 
@@ -9837,11 +9887,12 @@ exiting after we've gone too deep. This is an effective way of
 handling cycles in the graph until we have better solutions. We need
 to adopt something similar for C++.
 
-*** Use clang format in extraction                                    :story:
+*** Use clang format in physical model                                :story:
 
-We need to indent the output coming out of extraction. At present our
-stitch templates are super-complex purely because we are trying to get
-the indentation right. In most cases we don't. We need to:
+We need to indent the output coming out of the physical model. At
+present our stitch templates are super-complex purely because we are
+trying to get the indentation right. In most cases we don't. We need
+to:
 
 - remove indent filter and any other indentation "helpers"
 - update all templates to output everything as simply as possible, in
@@ -12268,6 +12319,9 @@ that can be deduced via static analysis. clang-tidy is modular and
 provides a convenient interface for writing new checks.
 #+end_quote
 
+As with clang-format, we should create a meta-model element to
+generate this file.
+
 See also:
 
 - [[https://github.com/polysquare/clang-tidy-target-cmake][clang-tidy-target-cmake]]
@@ -12280,6 +12334,8 @@ See also:
 static analyzer over their codebase as part of performing a regular
 build.
 
+Links:
+
 - [[%20http://clang-analyzer.llvm.org/scan-build.html][scan-build]] project page
 
 *** Add support for iwyu                                              :story:
@@ -12288,9 +12344,11 @@ There is a clang based tool that checks if which includes are actually
 used by the translation unit. We should have a build for this that
 breaks whenever one includes something which is not required.
 
-- [[http://code.google.com/p/include-what-you-use/][iwyu project page]]
+- [[https://include-what-you-use.org/][include-what-you-use]]
+- [[https://github.com/include-what-you-use/include-what-you-use][iwyu project page]]
 - [[http://mpd.jinr.ru/svn/mpdroot/trunk/cmake/modules/FindIWYU.cmake][FindIWYU.cmake]]
 - [[https://github.com/christophgysin/addp/blob/master/cmake/iwyu.cmake][iwyu.cmake]]
+- [[https://github.com/clangd/clangd/issues/79][IWYU: Unused headers/missing includes #79]]
 
 build.linux:
 
@@ -12332,7 +12390,7 @@ This seems like another interest dynamic analysis tool:
 - [[https://code.google.com/p/address-sanitizer/wiki/AddressSanitizer#Introduction][Address Sanitizer]]
 - [[https://clang.llvm.org/docs/ThreadSanitizer.html][Thread Sanitizer]]
 
-*** Add support for CPPCheck                                         :story:
+*** Add support for CPPCheck                                          :story:
 
 Seems like CPPCheck has a different take on dynamic analysis when
 compared to Valgrind. We should look into how hard it is to integrate
@@ -12357,36 +12415,38 @@ script for the first video of the series is as follows:
 - generate the hello world model.
 - create a hello world main with make files and compile it.
 - give a quick overview of the available facilities.
-
-*** Test data extensions are not ideal                                :story:
-
-At present we use extensions for test data like so:
-
-- =.diaxml=
-- =.yarnxml=
-
-It would be nicer to have these files called =.dia.xml= etc but when
-we tried to do this, the first extension started contributing to the
-model name (as expected) so we had to revert the change. Still, these
-are not very nice extensions.
+- update hello world to latest diagram version, with right colour
+  theme.
 
 *** Mine MongoDB Smasher for test data ideas                          :story:
 
 There is a project to generate large data sets for MongoDB:
 
-https://github.com/duckie/mongo_smasher
+- [[https://github.com/duckie/mongo_smasher][mongo_smasher]]
 
 We should have a look at their feature set and see if any of the
-features make sense for dogen.
+features make sense for dogen. It would be great to have a generalised
+"service smasher" based on a service model.
 
-*** Unmaintained emblem                                               :story:
+*** Write blog post on reflexive programming                          :story:
 
-If we ever reach a point where Dogen is complete according to the
-vision, we should add this emblem:
+Basic idea is that domain expertise tightens the agile circle,
+allowing for much faster progress. Check Soros definition of
+reflexive.
 
-http://unmaintained.tech/
+*** Read A Concept Design for the STL                                 :story:
 
-*** Feature toggles and code generation                               :story:
+It seems this paper has a lot of useful information for meta-modeling:
+
+- [[http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3351.pdf][A Concept Design for the STL]]
+
+** Visionary
+
+These stories are far in the future or just plain crazy: visionary
+work and random ideas. They are require fundamental rethinking of the
+core, or are not obviously related to dogen's current vision.
+
+*** Feature toggles and code generation                     :reviewing:story:
 
 This article by Fowler has some interesting ideas:
 
@@ -12399,47 +12459,19 @@ Note that we would not use feature toggles directly in dogen, because
 we are already using feature models for this. But we could conceivably
 generate code for applications to use feature toggles.
 
-*** Write blog post on reflexive programming                          :story:
+*** Add support for design by contract                                 :epic:
 
-Basic idea is that domain expertise tightens the agile circle,
-allowing for much faster progress. Check Soros definition of
-reflexive.
+If dogen had a way to parse OCL, we could allow users to specify OCL
+constraints on operations. These could then be used to code-generate
+design by contract code. For C++ we could use [[https://www.boost.org/doc/libs/develop/libs/contract/doc/html/index.html][Boost.Contract]]. This
+appears to be a very difficult thing to do. There is also C++ 20
+support for contracts.
 
-*** Investigate the emblems used by Bit7z                             :story:
+Links:
 
-This project uses emblems for version, platform and compiler:
-
-https://github.com/rikyoz/Bit7z
-
-This may or may not be useful to dogen.
-
-*** Mine =common-universal-cmake= for ideas                            :epic:
-
-This project seems interesting:
-
-- [[https://github.com/polysquare/common-universal-cmake][common-universal-cmake]]
-
-They seem to have added support for conan, appveyor, etc in an
-extensible way. We need to figure out if anything can be nicked for
-our infrastructure. This is also a useful template for when we
-code-generate products.
-
-Notes:
-
-- nice idea to create text files with all of the dependencies for the
-  different OSs (packages and repositories).
-
-*** Read A Concept Design for the STL                                 :story:
-
-It seems this paper has a lot of useful information for meta-modeling:
-
-[[http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3351.pdf][A Concept Design for the STL]]
-
-** Visionary
-
-These stories are far in the future or just plain crazy: visionary
-work and random ideas. They are require fundamental rethinking of the
-core, or are not obviously related to dogen's current vision.
+- [[https://www.reddit.com/r/cpp/comments/cmk7ek/what_happened_to_c20_contracts/][What Happened to C++20 Contracts?]] Contracts didn't make it to
+  C++ 20.
+- [[https://www.modernescpp.com/index.php/c-core-guidelines-a-detour-to-contracts][C++ Core Guidelines: A Short Detour to Contracts in C++20]]
 
 *** Add the the EMF purchase order examples to manual                 :story:
 
@@ -16357,3 +16389,9 @@ Links:
 
 - [[https://github.com/nifty-site-manager/nsm][Nift]]: Nift is a cross-platform open source framework for managing
   and generating websites. See also [[https://www.nift.cc/index.html][homepage]].
+*** Unmaintained emblem                                               :story:
+
+If we ever reach a point where Dogen is complete according to the
+vision, we should add this emblem:
+
+http://unmaintained.tech/
