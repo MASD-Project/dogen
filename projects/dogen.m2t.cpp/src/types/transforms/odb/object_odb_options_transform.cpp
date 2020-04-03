@@ -69,7 +69,7 @@ boost::filesystem::path object_odb_options_transform::inclusion_path(
     const formattables::locator& /*l*/, const logical::entities::name& n) const {
     using namespace dogen::utility::log;
     static logger lg(logger_factory(
-            "m2t.cpp.formatters.odb.object_odb_options_transform"));
+            "m2t.cpp.transforms.odb.object_odb_options_transform"));
 
         const std::string not_supported("Inclusion path is not supported: ");
 

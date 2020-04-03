@@ -30,7 +30,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("m2t.cpp.formatters.wale_transform"));
+static logger lg(logger_factory("m2t.cpp.transforms.wale_transform"));
 
 const std::string missing_input("Missing formatting input");
 

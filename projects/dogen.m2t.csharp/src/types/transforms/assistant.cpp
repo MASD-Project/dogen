@@ -31,7 +31,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("m2t.csharp.formatters.assistant"));
+static logger lg(logger_factory("m2t.csharp.transforms.assistant"));
 
 const std::string empty;
 const bool start_on_first_line(true);
